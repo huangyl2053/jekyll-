@@ -32,7 +32,12 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClick_BtnToSearch": "onClick_btnToSearch"
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "onClick_BtnToSearch": "onClick_btnToSearch",
+     "displayNone_txtTsuchishoNo": true,
+     "displayNone_ddlFukaNendo": true,
+     "displayNone_SearchCriteriaDetail": false
     },
     {
      "fieldName": "SearchResult",
@@ -62,6 +67,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "onClickBtnToResearch": "onClick_btnToResearch"
     }
    ],
@@ -111,16 +118,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "TekiyoJogaiTaishoshaJoho",
@@ -150,16 +158,14 @@
      "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "backgroundColor": 0,
      "businessId": "URA",
      "controlName": "AtenaShokaiSimple",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "AtenaKanaMeisho_visible": true,
      "AtenaMeisho_visible": true,
      "SeinengappiYMD_visible": true,
@@ -194,7 +200,12 @@
      "AgeArrivalDay": "1",
      "SubGyomuUmu": "0",
      "SubGyomuSearchUmu": "0",
-     "DainoninHyojiUmu": "1"
+     "DainoninHyojiUmu": "1",
+     "AtenaShokaiSimple_eraseBorder": false,
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true
     },
     {
      "fieldName": "ShikakuJoho",
@@ -221,15 +232,17 @@
      "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
      "backGroundColor": 0,
      "btnHihoRireki_visible": false,
      "btnNinteiRireki_visible": true
@@ -255,7 +268,7 @@
    "onLoad": "",
    "title": "適用除外者情報",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "TekiyoJogaiTaishoshaJoho"
@@ -280,16 +293,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "TekiyoJogaiJoho",
@@ -314,6 +328,7 @@
      "selectControlID": "dgTekiyoJogaiRireki",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "height": "S",
      "dataSource": [],
      "gridSetting": {
@@ -677,7 +692,7 @@
          "fieldName": "ddlTekiyoJiyu",
          "items": [],
          "controlType": "DropDownList",
-         "width": "100",
+         "width": "110",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -693,6 +708,7 @@
          "selectControlID": "ddlTekiyoJiyu_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
          "onChange": "",
          "selectedItem": "jogaishaTekiyo",
          "dataSource": [
@@ -712,7 +728,7 @@
          "required": false,
          "labelLText": "適用事由",
          "labelRText": "",
-         "labelLWidth": "80",
+         "labelLWidth": "70",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
@@ -743,9 +759,9 @@
          "readOnly": false,
          "onChange": "",
          "required": false,
-         "labelLText": "施設入所日",
+         "labelLText": "入所日",
          "labelRText": "",
-         "labelLWidth": "80",
+         "labelLWidth": "50",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
@@ -874,9 +890,11 @@
          "dataPassingForDialog": [],
          "dialogOkEventNameForDialog": "",
          "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M",
          "btnJigyoshaInputGuide_displayNone": false,
-         "btnOtherTokureiShisetsuInputGuide_displayNone": false,
-         "btnJogaiShisetsuInputGuide_displayNone": false,
+         "btnOtherTokureiShisetsuInputGuide_displayNone": true,
+         "btnJogaiShisetsuInputGuide_displayNone": true,
          "radShisetsuShurui_displayNone": true,
          "ShisetsuJoho_width": "800"
         }
@@ -919,16 +937,17 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 1,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "eraseBorderTop": false,
+       "eraseBorderBottom": false,
+       "eraseBorderRight": false,
+       "eraseBorderLeft": false
       },
       {
        "fieldName": "JogaishaKaijoInput",
@@ -937,7 +956,7 @@
          "fieldName": "ddlKaijoJiyu",
          "items": [],
          "controlType": "DropDownList",
-         "width": "100",
+         "width": "110",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -953,6 +972,7 @@
          "selectControlID": "ddlKaijoJiyu_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
          "onChange": "",
          "selectedItem": "jogaishaKaijo",
          "dataSource": [
@@ -1011,9 +1031,9 @@
          "readOnly": false,
          "onChange": "",
          "required": false,
-         "labelLText": "施設退所日",
+         "labelLText": "退所日",
          "labelRText": "",
-         "labelLWidth": "80",
+         "labelLWidth": "50",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
@@ -1148,16 +1168,17 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 1,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "eraseBorderTop": false,
+       "eraseBorderBottom": false,
+       "eraseBorderRight": false,
+       "eraseBorderLeft": false
       },
       {
        "fieldName": "JogaiShisetsuHenkoInput",
@@ -1232,9 +1253,11 @@
          "dataPassingForDialog": [],
          "dialogOkEventNameForDialog": "",
          "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M",
          "btnJigyoshaInputGuide_displayNone": false,
-         "btnOtherTokureiShisetsuInputGuide_displayNone": false,
-         "btnJogaiShisetsuInputGuide_displayNone": false,
+         "btnOtherTokureiShisetsuInputGuide_displayNone": true,
+         "btnJogaiShisetsuInputGuide_displayNone": true,
          "radShisetsuShurui_displayNone": true,
          "ShisetsuJoho_width": "800"
         }
@@ -1272,16 +1295,17 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 1,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "eraseBorderTop": false,
+       "eraseBorderBottom": false,
+       "eraseBorderRight": false,
+       "eraseBorderLeft": false
       },
       {
        "fieldName": "btnInsertTekiyoJogaiJoho",
@@ -1309,7 +1333,8 @@
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
@@ -1332,7 +1357,7 @@
      "onLoad": "",
      "title": "適用除外情報入力",
      "isOpen": true,
-     "canOpenAndClose": true,
+     "canOpenAndClose": false,
      "postParameterPanelNames": [
       {
        "postParameterPanelNames": "TekiyoJogaiToroku"
@@ -1350,16 +1375,17 @@
      "session": {},
      "marginTop": "S",
      "marginBottom": "S",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     }
    ],
    "controlType": "Panel",
@@ -1382,7 +1408,7 @@
    "onLoad": "",
    "title": "適用除外情報",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "TekiyoJogaiJoho"
@@ -1424,16 +1450,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "TekiyoJogaiComplete",
@@ -1466,6 +1493,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "KanryoMessage_width": "G12"
     }
    ],
@@ -1514,16 +1543,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true
   }
  ],
  "controlType": null,
@@ -1595,6 +1625,11 @@
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -1636,7 +1671,7 @@
     {
      "fieldName": "SearchResult_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
      "event": "onClick",
-     "transition": "適用除外者者登録"
+     "transition": "適用除外者登録"
     },
     {
      "fieldName": "btnResearch",
@@ -1647,12 +1682,17 @@
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
   {
    "order": "3",
-   "stateName": "適用除外者者登録",
+   "stateName": "適用除外者登録",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -1716,7 +1756,12 @@
     {
      "fieldName": "btnSave",
      "event": "onClick",
-     "transition": "処理完了"
+     "transition": "登録完了"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -1781,7 +1826,12 @@
     {
      "fieldName": "btnSave",
      "event": "onClick",
-     "transition": "処理完了"
+     "transition": "登録完了"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -1851,13 +1901,18 @@
     {
      "fieldName": "btnSave",
      "event": "onClick",
-     "transition": "処理完了"
+     "transition": "登録完了"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
   {
    "order": "6",
-   "stateName": "処理完了",
+   "stateName": "登録完了",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -1899,6 +1954,11 @@
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": "終了"
     }
    ]
   }
@@ -1951,6 +2011,7 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "TekiyoJogaiKyotsu",
@@ -1961,7 +2022,7 @@
       "fieldName": "btnSave",
       "items": [],
       "controlType": "CommonButtonUpdate",
-      "width": "S",
+      "width": 2,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -1984,6 +2045,7 @@
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "heightTextBoxMatches": false,
       "additionalText": "適用除外情報を"
      }
     },
@@ -1993,7 +2055,7 @@
       "fieldName": "btnResearch",
       "items": [],
       "controlType": "CommonButtonNext",
-      "width": "S",
+      "width": 2,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -2016,19 +2078,64 @@
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "heightTextBoxMatches": false,
       "additionalText": "対象者検索へ"
      }
     }
    ],
    "states": [
     {
-     "state": "適用除外者者登録"
+     "state": "適用除外者登録"
     },
     {
      "state": "適用除外者解除"
     },
     {
      "state": "適用除外施設変更"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  },
+  {
+   "commonButtonAreaId": "Complete",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnComplete",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "除外者適用登録を"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "登録完了"
     }
    ],
    "isFinishButtonOnTheRight": false

@@ -31,7 +31,7 @@ public class ShisetsuNyutaishoComplete {
 
         AtenaShokaiSimpleDiv atena = taishoshaJohoDiv.getAtenaJoho();
 
-        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("施設入退所処理を完了しました。"),
+        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("施設入退所異動を完了しました。"),
                 atena.getTxtShikibetsuCode().getValue(), atena.getTxtAtenaMeisho().getValue());
 
         response.data = completeDiv;

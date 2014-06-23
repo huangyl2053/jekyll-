@@ -31,7 +31,7 @@ public class JutokuTekiyoComplete {
 
         AtenaShokaiSimpleDiv atena = taishoshaJohoDiv.getJutokuTekiyoCommonJoho().getAtenaInfo();
 
-        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("住所地特例適用処理を完了しました。"),
+        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("住所地特例適用を完了しました。"),
                 atena.getTxtShikibetsuCode().getValue(), atena.getTxtAtenaMeisho().getValue());
 
         response.data = completeDiv;
