@@ -59,7 +59,7 @@ public class ShujiiIryoKikanData {
     }
 
     public IryoKikan get医療機関From(RString code) {
-        List<IryoKikan> list = get医療機関一覧().asConvetedType();
+        List<IryoKikan> list = get医療機関一覧().asConvertedType();
         for (IryoKikan iryoKikan : list) {
             if (iryoKikan.code().equals(code)) {
                 return iryoKikan;

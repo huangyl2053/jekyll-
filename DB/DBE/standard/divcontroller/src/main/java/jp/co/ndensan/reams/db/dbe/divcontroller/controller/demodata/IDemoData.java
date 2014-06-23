@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IDemoData<T> {
 
-    List<T> asConvetedType();
+    List<T> asConvertedType();
 
     List<HashMap> asRaw();
 }

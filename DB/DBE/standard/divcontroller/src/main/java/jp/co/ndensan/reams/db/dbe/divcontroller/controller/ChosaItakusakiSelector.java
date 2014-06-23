@@ -46,7 +46,7 @@ public class ChosaItakusakiSelector {
     }
 
     private List<ChosaItakusaki> find調査委託先All() {
-        return new ChosaItakusakiData().get調査委託先一覧().asConvetedType();
+        return new ChosaItakusakiData().get調査委託先一覧().asConvertedType();
     }
 
     private List<dgChosaItakusakiList_Row> toDataSouceForDgChosaItakusakiList(List<ChosaItakusaki> chosaItakusakis) {
@@ -86,7 +86,7 @@ public class ChosaItakusakiSelector {
     }
 
     private List<Chosain> find所属調査員AllFrom(RString chosaItakusakiCode) {
-        return new ChosainData().get調査員ListOf(chosaItakusakiCode).asConvetedType();
+        return new ChosainData().get調査員ListOf(chosaItakusakiCode).asConvertedType();
     }
 
     private List<dgChosainList_Row> toDataSouceForDgChosainList(List<Chosain> chosains) {

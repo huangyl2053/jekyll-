@@ -57,7 +57,7 @@ public class ChosaItakusakiData {
     }
 
     public ChosaItakusaki get調査委託先From(RString code) {
-        List<ChosaItakusaki> list = get調査委託先一覧().asConvetedType();
+        List<ChosaItakusaki> list = get調査委託先一覧().asConvertedType();
         for (ChosaItakusaki itakusaki : list) {
             if (itakusaki.code().equals(code)) {
                 return itakusaki;

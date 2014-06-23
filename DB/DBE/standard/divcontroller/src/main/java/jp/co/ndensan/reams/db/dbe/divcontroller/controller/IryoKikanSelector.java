@@ -47,7 +47,7 @@ public class IryoKikanSelector {
     }
 
     private List<IryoKikan> find医療機関All() {
-        return new ShujiiIryoKikanData().get医療機関一覧().asConvetedType();
+        return new ShujiiIryoKikanData().get医療機関一覧().asConvertedType();
     }
 
     private List<dgIryoKikanList_Row> toDataSouceForDgIryoKikanList(List<IryoKikan> iryoKikans) {
@@ -87,7 +87,7 @@ public class IryoKikanSelector {
     }
 
     private List<Doctor> find所属医師AllFrom(RString iryoKikanCode) {
-        return new ShujiiData().get医師ListOf(iryoKikanCode).asConvetedType();
+        return new ShujiiData().get医師ListOf(iryoKikanCode).asConvertedType();
     }
 
     private List<dgIshiList_Row> toDataSouceForDgChosainList(List<Doctor> doctors) {

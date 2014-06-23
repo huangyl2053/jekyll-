@@ -76,7 +76,7 @@ public class NinteichosaResultEntryTarget {
     }
 
     private List<dgNinteichosaResultTaishosha_Row> _findTarget() {
-        return new NinteichosaResultEntryTargetsData().get認定調査依頼登録対象者一覧().asConvetedType();
+        return new NinteichosaResultEntryTargetsData().get認定調査依頼登録対象者一覧().asConvertedType();
     }
 
     /**

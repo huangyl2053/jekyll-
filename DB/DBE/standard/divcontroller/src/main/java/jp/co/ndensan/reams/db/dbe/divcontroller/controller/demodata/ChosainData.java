@@ -76,7 +76,7 @@ public class ChosainData {
     public List<Chosain> get調査員All() {
         List<Chosain> chosainList = new ArrayList<>();
         for (RString chosaItakusakiCode : _chosaItakusakiCodeList()) {
-            chosainList.addAll(get調査員ListOf(chosaItakusakiCode).asConvetedType());
+            chosainList.addAll(get調査員ListOf(chosaItakusakiCode).asConvertedType());
         }
         return chosainList;
     }
@@ -91,7 +91,7 @@ public class ChosainData {
 
     private List<ChosaItakusakiData.ChosaItakusaki>
             _chosaIrakuskaiAll() {
-        return new ChosaItakusakiData().get調査委託先一覧().asConvetedType();
+        return new ChosaItakusakiData().get調査委託先一覧().asConvertedType();
     }
 
     /**

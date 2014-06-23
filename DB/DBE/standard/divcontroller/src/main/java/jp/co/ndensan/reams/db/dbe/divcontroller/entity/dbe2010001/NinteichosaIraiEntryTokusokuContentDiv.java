@@ -30,6 +30,8 @@ public class NinteichosaIraiEntryTokusokuContentDiv extends Panel {
     private TextBoxFlexibleDate txtTokusokuDate;
     @JsonProperty("txtTokusokuKigenDate")
     private TextBoxFlexibleDate txtTokusokuKigenDate;
+    @JsonProperty("linTokusoku")
+    private HorizontalLine linTokusoku;
     @JsonProperty("NinteichosaIraiEntryTokusokuPublish")
     private NinteichosaIraiEntryTokusokuPublishDiv NinteichosaIraiEntryTokusokuPublish;
 
@@ -77,6 +79,16 @@ public class NinteichosaIraiEntryTokusokuContentDiv extends Panel {
     @JsonProperty("txtTokusokuKigenDate")
     public void setTxtTokusokuKigenDate(TextBoxFlexibleDate txtTokusokuKigenDate) {
         this.txtTokusokuKigenDate=txtTokusokuKigenDate;
+    }
+
+    @JsonProperty("linTokusoku")
+    public HorizontalLine getLinTokusoku() {
+        return linTokusoku;
+    }
+
+    @JsonProperty("linTokusoku")
+    public void setLinTokusoku(HorizontalLine linTokusoku) {
+        this.linTokusoku=linTokusoku;
     }
 
     @JsonProperty("NinteichosaIraiEntryTokusokuPublish")

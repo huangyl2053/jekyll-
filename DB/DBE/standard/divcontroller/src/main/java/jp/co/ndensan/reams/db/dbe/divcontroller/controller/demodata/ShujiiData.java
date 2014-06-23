@@ -66,7 +66,7 @@ public class ShujiiData {
     }
 
     public Doctor get主治医From(RString code) {
-        List<Doctor> list = get主治医一覧().asConvetedType();
+        List<Doctor> list = get主治医一覧().asConvertedType();
         for (Doctor doctor : list) {
             if (doctor.code().equals(code)) {
                 return doctor;

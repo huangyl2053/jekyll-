@@ -37,7 +37,7 @@ public class HihokenshaSearchForShinsei {
      */
     public ResponseData<HihokenshaSearchForShinseiDiv> onClick_btnToSearch(HihokenshaSearchForShinseiDiv panel) {
         SearchResultOfHihokensha.setSearchResult(panel.getSearchResultForShinsei(),
-                new YokaigoninteiShinseishaData().get要介護認定申請者List().asConvetedType());
+                new YokaigoninteiShinseishaData().get要介護認定申請者List().asConvertedType());
         return _createResponseData(panel);
     }
 
