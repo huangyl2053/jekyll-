@@ -22,8 +22,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
  */
 public class ShotokushokaihyoIkkatu {
 
-    private static final RString SAIHAKKO_H25 = new RString("Saihakko_H25.yml");
-    private static final RString SAIHAKKO_H26 = new RString("Saihakko_H26.yml");
+    private static final RString SAIHAKKO_H25 = new RString("DBB1140001/Saihakko_H25.yml");
+    private static final RString SAIHAKKO_H26 = new RString("DBB1140001/Saihakko_H26.yml");
 
     public ResponseData<ShotokushokaihyoIkkatuDiv> onLoad_HeijunkaAugustKeisan(ShotokushokaihyoIkkatuDiv panel) {
 
@@ -36,11 +36,11 @@ public class ShotokushokaihyoIkkatu {
     }
 
     private ResponseData<ShotokushokaihyoIkkatuDiv> loadSaihakkoData(ShotokushokaihyoIkkatuDiv panel) {
-        
+
         ResponseData<ShotokushokaihyoIkkatuDiv> response = new ResponseData<>();
         List<dgSaihakko_Row> arrayData = createRowSaihakkoData(panel.getDdlShoriNendo().getSelectedValue());
         DataGrid<dgSaihakko_Row> grid = panel.getDgSaihakko();
-        grid.setDataSource(arrayData);    
+        grid.setDataSource(arrayData);
         response.data = panel;
 
         return response;
@@ -53,7 +53,7 @@ public class ShotokushokaihyoIkkatu {
         List<dgSaihakko_Row> arrayData = new ArrayList<>();
 
         if (filename == null || filename.isEmpty()) {
-            
+
         } else {
             List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(filename);
             for (HashMap demoData : demoDataList) {
