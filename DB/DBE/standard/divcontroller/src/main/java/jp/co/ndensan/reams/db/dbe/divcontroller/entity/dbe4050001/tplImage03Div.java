@@ -5,9 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.ImageTokkiJiko1Div;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * tplImage03 のクラスファイル 
@@ -21,8 +20,8 @@ public class tplImage03Div extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("imgTokki01")
-    private StaticImage imgTokki01;
+    @JsonProperty("ImageTokkiJiko1")
+    private ImageTokkiJiko1Div ImageTokkiJiko1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,14 +29,14 @@ public class tplImage03Div extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("imgTokki01")
-    public StaticImage getImgTokki01() {
-        return imgTokki01;
+    @JsonProperty("ImageTokkiJiko1")
+    public ImageTokkiJiko1Div getImageTokkiJiko1() {
+        return ImageTokkiJiko1;
     }
 
-    @JsonProperty("imgTokki01")
-    public void setImgTokki01(StaticImage imgTokki01) {
-        this.imgTokki01=imgTokki01;
+    @JsonProperty("ImageTokkiJiko1")
+    public void setImageTokkiJiko1(ImageTokkiJiko1Div ImageTokkiJiko1) {
+        this.ImageTokkiJiko1=ImageTokkiJiko1;
     }
 
 }

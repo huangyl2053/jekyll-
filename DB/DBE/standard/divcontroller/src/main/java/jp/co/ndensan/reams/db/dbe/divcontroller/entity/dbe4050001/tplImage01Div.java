@@ -5,9 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.ImageFrontOfIkenshoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * tplImage01 のクラスファイル 
@@ -21,8 +20,8 @@ public class tplImage01Div extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("imgIkenshoTheRight")
-    private StaticImage imgIkenshoTheRight;
+    @JsonProperty("ImageFrontOfIkensho")
+    private ImageFrontOfIkenshoDiv ImageFrontOfIkensho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,14 +29,14 @@ public class tplImage01Div extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("imgIkenshoTheRight")
-    public StaticImage getImgIkenshoTheRight() {
-        return imgIkenshoTheRight;
+    @JsonProperty("ImageFrontOfIkensho")
+    public ImageFrontOfIkenshoDiv getImageFrontOfIkensho() {
+        return ImageFrontOfIkensho;
     }
 
-    @JsonProperty("imgIkenshoTheRight")
-    public void setImgIkenshoTheRight(StaticImage imgIkenshoTheRight) {
-        this.imgIkenshoTheRight=imgIkenshoTheRight;
+    @JsonProperty("ImageFrontOfIkensho")
+    public void setImageFrontOfIkensho(ImageFrontOfIkenshoDiv ImageFrontOfIkensho) {
+        this.ImageFrontOfIkensho=ImageFrontOfIkensho;
     }
 
 }
