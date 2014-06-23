@@ -5,26 +5,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgShoruiJokyoList_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgShoruiJokyoList_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigokanryomessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KyotakuJikoTodokedeShoruiList のクラスファイル 
+ * KyotakuJikoTodokedeKanryo のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KyotakuJikoTodokedeShoruiListDiv extends Panel {
+public class KyotakuJikoTodokedeKanryoDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgShoruiJokyoList")
-    private DataGrid<dgShoruiJokyoList_Row> dgShoruiJokyoList;
+    @JsonProperty("KyotakuJikoTodokedeKanryoMessage")
+    private KaigoKanryoMessageDiv KyotakuJikoTodokedeKanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,14 +29,14 @@ public class KyotakuJikoTodokedeShoruiListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("dgShoruiJokyoList")
-    public DataGrid<dgShoruiJokyoList_Row> getDgShoruiJokyoList() {
-        return dgShoruiJokyoList;
+    @JsonProperty("KyotakuJikoTodokedeKanryoMessage")
+    public KaigoKanryoMessageDiv getKyotakuJikoTodokedeKanryoMessage() {
+        return KyotakuJikoTodokedeKanryoMessage;
     }
 
-    @JsonProperty("dgShoruiJokyoList")
-    public void setDgShoruiJokyoList(DataGrid<dgShoruiJokyoList_Row> dgShoruiJokyoList) {
-        this.dgShoruiJokyoList=dgShoruiJokyoList;
+    @JsonProperty("KyotakuJikoTodokedeKanryoMessage")
+    public void setKyotakuJikoTodokedeKanryoMessage(KaigoKanryoMessageDiv KyotakuJikoTodokedeKanryoMessage) {
+        this.KyotakuJikoTodokedeKanryoMessage=KyotakuJikoTodokedeKanryoMessage;
     }
 
 }

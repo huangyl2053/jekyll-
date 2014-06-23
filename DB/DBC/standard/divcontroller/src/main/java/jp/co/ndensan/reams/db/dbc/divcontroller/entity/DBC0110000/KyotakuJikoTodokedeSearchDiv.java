@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.SearchResultOfHihokenshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -22,6 +23,8 @@ public class KyotakuJikoTodokedeSearchDiv extends Panel {
      */
     @JsonProperty("KyotakuJikoTodokedeHihokenshaFinder")
     private HihokenshaFinderDiv KyotakuJikoTodokedeHihokenshaFinder;
+    @JsonProperty("KyotakuJikoTodokedeHihokenshaList")
+    private SearchResultOfHihokenshaDiv KyotakuJikoTodokedeHihokenshaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,6 +40,16 @@ public class KyotakuJikoTodokedeSearchDiv extends Panel {
     @JsonProperty("KyotakuJikoTodokedeHihokenshaFinder")
     public void setKyotakuJikoTodokedeHihokenshaFinder(HihokenshaFinderDiv KyotakuJikoTodokedeHihokenshaFinder) {
         this.KyotakuJikoTodokedeHihokenshaFinder=KyotakuJikoTodokedeHihokenshaFinder;
+    }
+
+    @JsonProperty("KyotakuJikoTodokedeHihokenshaList")
+    public SearchResultOfHihokenshaDiv getKyotakuJikoTodokedeHihokenshaList() {
+        return KyotakuJikoTodokedeHihokenshaList;
+    }
+
+    @JsonProperty("KyotakuJikoTodokedeHihokenshaList")
+    public void setKyotakuJikoTodokedeHihokenshaList(SearchResultOfHihokenshaDiv KyotakuJikoTodokedeHihokenshaList) {
+        this.KyotakuJikoTodokedeHihokenshaList=KyotakuJikoTodokedeHihokenshaList;
     }
 
 }
