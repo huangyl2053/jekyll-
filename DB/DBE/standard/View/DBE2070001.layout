@@ -965,7 +965,7 @@
        "imageHeight": "15",
        "icon": 0,
        "heightTextBoxMatches": false,
-       "displayChildDivName": "DBE.IryoKikanDialog",
+       "displayChildDivName": "DBE.IryoKikanSelector",
        "dataPassing": [
         {
          "key": "iryokikanCode",
@@ -2395,7 +2395,7 @@
         "tplIkensho2"
        ],
        "isDraggable": false,
-       "selectedItemFieldName": "tplIkensho2",
+       "selectedItemFieldName": "tplIkensho1",
        "initialTab": 0,
        "isLazyLoading": false
       }
@@ -2774,7 +2774,7 @@
    ]
   }
  ],
- "currentState": "意見書詳細",
+ "currentState": "All",
  "id": "DBE2070001",
  "WFParameter": [],
  "UIContainerEventMapping": [],

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 調査委託先のデモデータです。
  *
  * @author N3327 三浦 凌
  */

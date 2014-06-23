@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiIryoKikanData.IryoKikan;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
@@ -19,8 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author N3327 三浦 凌
  */
 public class ShujiiData {
-
-    private static final RString FILE_NAME = new RString("Shujii/Doctor.yml");
 
     public static class Doctor {
 
@@ -52,27 +52,46 @@ public class ShujiiData {
         }
     }
 
-    public IDemoData<Doctor> get主治医一覧() {
-        List<HashMap> dataFromYaml = YamlLoader.DBE.loadAsList(FILE_NAME);
-        return new DemoData<>(dataFromYaml, new YamlUtil.Converter.IConverter<Doctor>() {
-
-            @Override
-            public Doctor exec(Map map) {
-                ControlGenerator cg = new ControlGenerator(map);
-                return new Doctor(cg.getAsRString("医師コード"), cg.getAsRString("医師名称"),
-                        new ShujiiIryoKikanData().get医療機関From(cg.getAsRString("医療機関コード")));
-            }
-        });
-    }
-
-    public Doctor get主治医From(RString code) {
-        List<Doctor> list = get主治医一覧().asConvertedType();
+    /**
+     * 主治医コードから、主治医を取得します。
+     *
+     * @param shujiiCode 主治医コード
+     * @return 主治医
+     */
+    public Doctor get主治医From(RString shujiiCode) {
+        List<Doctor> list = get主治医All();
         for (Doctor doctor : list) {
-            if (doctor.code().equals(code)) {
+            if (doctor.code().equals(shujiiCode)) {
                 return doctor;
             }
         }
         return Doctor.EMPTY;
+    }
+
+    /**
+     * 全主治医を取得します。
+     *
+     * @return 全主治医
+     */
+    public List<Doctor> get主治医All() {
+        List<Doctor> doctorList = new ArrayList<>();
+        for (RString iryoKikanCode : _iryoKikanCodeList()) {
+            doctorList.addAll(get医師ListOf(iryoKikanCode).asConvertedType());
+        }
+        return doctorList;
+    }
+
+    private List<RString> _iryoKikanCodeList() {
+        List<RString> list = new ArrayList<>();
+        for (IryoKikan iryoKikan : _iryoKikanAll()) {
+            list.add(iryoKikan.code());
+        }
+        return list;
+    }
+
+    private List<IryoKikan>
+            _iryoKikanAll() {
+        return new ShujiiIryoKikanData().get医療機関一覧().asConvertedType();
     }
 
     /**

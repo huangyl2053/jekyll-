@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 調査員のデモデータです。
  *
  * @author N3327 三浦 凌
  */
@@ -83,13 +83,13 @@ public class ChosainData {
 
     private List<RString> _chosaItakusakiCodeList() {
         List<RString> list = new ArrayList<>();
-        for (ChosaItakusakiData.ChosaItakusaki chosaItakusaki : _chosaIrakuskaiAll()) {
+        for (ChosaItakusaki chosaItakusaki : _chosaIrakuskaiAll()) {
             list.add(chosaItakusaki.code());
         }
         return list;
     }
 
-    private List<ChosaItakusakiData.ChosaItakusaki>
+    private List<ChosaItakusaki>
             _chosaIrakuskaiAll() {
         return new ChosaItakusakiData().get調査委託先一覧().asConvertedType();
     }
