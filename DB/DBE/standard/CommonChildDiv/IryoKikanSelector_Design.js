@@ -58,7 +58,8 @@ var DBE;
                                             "imageFileUrl": "",
                                             "imageWidth": "",
                                             "imageHeight": "",
-                                            "icon": 0
+                                            "icon": 0,
+                                            "heightTextBoxMatches": false
                                         },
                                         {
                                             "fieldName": "dgIryoKikanList",
@@ -80,6 +81,7 @@ var DBE;
                                             "selectControlID": "dgIryoKikanList",
                                             "helpMessageID": "",
                                             "jpControlName": "",
+                                            "readOnly": false,
                                             "height": "220",
                                             "gridSetting": {
                                                 "rowHeight": 25,
@@ -102,7 +104,7 @@ var DBE;
                                                 "columns": [
                                                     {
                                                         "columnName": "番号",
-                                                        "dataName": "IryoKikanNo",
+                                                        "dataName": "iryoKikanNo",
                                                         "toolTip": "",
                                                         "bgColor": 0,
                                                         "width": 82,
@@ -114,7 +116,7 @@ var DBE;
                                                         "align": 1,
                                                         "resize": true,
                                                         "isPrivateInfo": false,
-                                                        "sortKey": "IryoKikanNo"
+                                                        "sortKey": "iryoKikanNo"
                                                     },
                                                     {
                                                         "columnName": "名称",
@@ -183,10 +185,7 @@ var DBE;
                                     "onOpen": "",
                                     "onClose": "",
                                     "session": {},
-                                    "eraseBorderTop": true,
-                                    "eraseBorderBottom": true,
-                                    "eraseBorderRight": true,
-                                    "eraseBorderLeft": true,
+                                    "eraseBorder": false,
                                     "backgroundColor": 0,
                                     "widthAuto": true,
                                     "panelDisplay": 0,
@@ -240,6 +239,7 @@ var DBE;
                                                     "selectControlID": "dgIshiList",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
+                                                    "readOnly": false,
                                                     "height": "190",
                                                     "gridSetting": {
                                                         "rowHeight": 25,
@@ -262,7 +262,7 @@ var DBE;
                                                         "columns": [
                                                             {
                                                                 "columnName": "番号",
-                                                                "dataName": "IshiNo",
+                                                                "dataName": "ishiNo",
                                                                 "toolTip": "",
                                                                 "bgColor": 0,
                                                                 "width": 82,
@@ -274,7 +274,7 @@ var DBE;
                                                                 "align": 1,
                                                                 "resize": true,
                                                                 "isPrivateInfo": false,
-                                                                "sortKey": "IshiNo"
+                                                                "sortKey": "ishiNo"
                                                             },
                                                             {
                                                                 "columnName": "氏名",
@@ -355,10 +355,7 @@ var DBE;
                                             "onOpen": "",
                                             "onClose": "",
                                             "session": {},
-                                            "eraseBorderTop": false,
-                                            "eraseBorderBottom": false,
-                                            "eraseBorderRight": false,
-                                            "eraseBorderLeft": false,
+                                            "eraseBorder": false,
                                             "backgroundColor": 0,
                                             "widthAuto": true,
                                             "panelDisplay": 1,
@@ -400,10 +397,7 @@ var DBE;
                                     "onOpen": "",
                                     "onClose": "",
                                     "session": {},
-                                    "eraseBorderTop": true,
-                                    "eraseBorderBottom": true,
-                                    "eraseBorderRight": true,
-                                    "eraseBorderLeft": true,
+                                    "eraseBorder": false,
                                     "backgroundColor": 0,
                                     "widthAuto": true,
                                     "panelDisplay": 0,
@@ -445,10 +439,7 @@ var DBE;
                             "onOpen": "",
                             "onClose": "",
                             "session": {},
-                            "eraseBorderTop": false,
-                            "eraseBorderBottom": false,
-                            "eraseBorderRight": false,
-                            "eraseBorderLeft": false,
+                            "eraseBorder": false,
                             "backgroundColor": 0,
                             "widthAuto": false,
                             "panelDisplay": 1,
@@ -679,10 +670,7 @@ var DBE;
                             "onOpen": "",
                             "onClose": "",
                             "session": {},
-                            "eraseBorderTop": false,
-                            "eraseBorderBottom": false,
-                            "eraseBorderRight": false,
-                            "eraseBorderLeft": false,
+                            "eraseBorder": false,
                             "backgroundColor": 0,
                             "widthAuto": false,
                             "panelDisplay": 0,
@@ -716,7 +704,8 @@ var DBE;
                             "imageFileUrl": "",
                             "imageWidth": "",
                             "imageHeight": "",
-                            "icon": 0
+                            "icon": 0,
+                            "heightTextBoxMatches": false
                         },
                         {
                             "fieldName": "btnSelectAndClose",
@@ -744,7 +733,8 @@ var DBE;
                             "imageFileUrl": "",
                             "imageWidth": "",
                             "imageHeight": "",
-                            "icon": 0
+                            "icon": 0,
+                            "heightTextBoxMatches": false
                         }
                     ],
                     "controlType": "Panel",
@@ -826,10 +816,7 @@ var DBE;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
@@ -880,7 +867,9 @@ var DBE;
                 }
             ],
             "dialogOkEventNameForDialog": "onClick_btnSelectAndClose",
-            "dialogCancelEventNameForDialog": "onClick_btnNonSelectReturn"
+            "dialogCancelEventNameForDialog": "onClick_btnNonSelectReturn",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return IryoKikanSelector_Design;
     })(Uz.CommonChildDiv);

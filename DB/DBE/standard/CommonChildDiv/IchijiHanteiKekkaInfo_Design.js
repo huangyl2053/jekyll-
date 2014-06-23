@@ -2423,7 +2423,8 @@ var DBE;
                             "selectControlID": "dgIchijiHanteiKeikokuCode",
                             "helpMessageID": "",
                             "jpControlName": "",
-                            "height": "175",
+                            "readOnly": false,
+                            "height": "130",
                             "gridSetting": {
                                 "rowHeight": 25,
                                 "isMultiSelectable": false,
@@ -2539,10 +2540,7 @@ var DBE;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
@@ -2576,7 +2574,9 @@ var DBE;
             "originalProperty": [],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return IchijiHanteiKekkaInfo_Design;
     })(Uz.CommonChildDiv);

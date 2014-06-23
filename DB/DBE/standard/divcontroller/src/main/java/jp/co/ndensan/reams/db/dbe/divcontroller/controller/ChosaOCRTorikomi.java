@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,14 @@ public class ChosaOCRTorikomi {
     public ResponseData<ChosaOCRTorikomiDiv> fetchOCR(ChosaOCRTorikomiDiv panel) {
         panel.getTxtErrKensu().setValue(countErrKensu());
         panel.getDgChosahyoTorikomiKekka().setDataSource(createRowTorikomiKekkaData());
+        return createResponseData(panel);
+    }
+
+    public ResponseData<ChosaOCRTorikomiDiv> onClick_btnSave(ChosaOCRTorikomiDiv panel) {
+        panel.getTxtErrKensu().setValue(countErrKensu());
+
+        List<dgChosahyoTorikomiKekka_Row> arrayData = new ArrayList<>();
+        panel.getDgChosahyoTorikomiKekka().setDataSource(arrayData);
         return createResponseData(panel);
     }
 
