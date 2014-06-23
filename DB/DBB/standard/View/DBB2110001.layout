@@ -5,188 +5,6 @@
    "fieldName": "TokuchoIdoJohoSakusei",
    "items": [
     {
-     "fieldName": "dgTokuchoIdoJoho",
-     "items": [],
-     "controlType": "DataGrid",
-     "width": "680",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "dgTokuchoIdoJoho",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "height": "Auto",
-     "gridSetting": {
-      "rowHeight": 30,
-      "isMultiSelectable": false,
-      "isShowHeader": true,
-      "isShowFooter": false,
-      "isShowFilter": false,
-      "isShowFilterButton": false,
-      "isShowRowState": false,
-      "isShowSelectButtonColumn": false,
-      "isShowModifyButtonColumn": false,
-      "isShowDeleteButtonColumn": false,
-      "limitRowCount": 0,
-      "selectedRowCount": 0,
-      "header": {
-       "combineColumns": [
-        {
-         "combineColumnName": "通知内容",
-         "combineItem": [
-          "txtShikakuSoshutsu",
-          "txtJutoku",
-          "txtKarichoshuGakuShusei",
-          "txtTsuikaIrai"
-         ]
-        }
-       ],
-       "frozenColumn": "",
-       "headerHeight": 1
-      },
-      "columns": [
-       {
-        "columnName": "",
-        "dataName": "chkTaisho",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 60,
-        "visible": true,
-        "cellType": 2,
-        "cellDetails": {
-         "cellType": 2,
-         "disabled": false,
-         "onChange": "onClick_chkTaisho"
-        },
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": ""
-       },
-       {
-        "columnName": "月",
-        "dataName": "txtTsuki",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 60,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 8,
-         "text": "作成する",
-         "onClick": "",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
-        },
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": ""
-       },
-       {
-        "columnName": "処理日時",
-        "dataName": "txtShoriNichiji",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 200,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": ""
-       },
-       {
-        "columnName": "資格喪失等",
-        "dataName": "txtShikakuSoshutsu",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 90,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": ""
-       },
-       {
-        "columnName": "住所地特例<br>該当者",
-        "dataName": "txtJutoku",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 90,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": ""
-       },
-       {
-        "columnName": "仮徴収額<br>変更",
-        "dataName": "txtKarichoshuGakuShusei",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 90,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": ""
-       },
-       {
-        "columnName": "特徴追加<br>依頼",
-        "dataName": "txtTsuikaIrai",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 90,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": ""
-       }
-      ]
-     },
-     "onSort": "",
-     "onSelect": "",
-     "onSelectByDblClick": "",
-     "onSelectBySelectButton": "",
-     "onSelectByModifyButton": "",
-     "onSelectByDeleteButton": "",
-     "onOnlyRow": "",
-     "onNoRow": "",
-     "onMultiRows": "",
-     "dataSource": [],
-     "sortOrder": "",
-     "isAscending": true,
-     "filterList": [],
-     "activeRowId": -1
-    },
-    {
      "fieldName": "tbldgTokuchoIdoJoho",
      "items": [
       {
@@ -448,7 +266,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "平26.04.01 99:99:99",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -1052,7 +870,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "平26.04.01 99:99:99",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -1384,7 +1202,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "平26.04.01 99:99:99",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -1633,9 +1451,10 @@
            "value": ""
           }
          ],
+         "required": false,
          "onChange": "",
          "selectedItem": null,
-         "onClick": "",
+         "onClick": "onClick_chkSentaku07",
          "selectedItems": [],
          "newLineItemNumber": 2,
          "minCheckedItem": 0,
@@ -1743,7 +1562,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "平26.04.01 99:99:99",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -1938,10 +1757,20 @@
            "value": ""
           }
          ],
+         "required": false,
          "onChange": "",
          "selectedItem": null,
-         "onClick": "",
-         "selectedItems": [],
+         "onClick": "onClick_chkSentaku08",
+         "selectedItems": [
+          {
+           "key": "isAllSelect",
+           "value": "(すべて選択)"
+          },
+          {
+           "key": "key0",
+           "value": ""
+          }
+         ],
          "newLineItemNumber": 2,
          "minCheckedItem": 0,
          "maxCheckedItem": 2,
@@ -2048,7 +1877,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "平26.04.01 99:99:99",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -2270,6 +2099,7 @@
            "value": ""
           }
          ],
+         "required": false,
          "onChange": "",
          "selectedItem": null,
          "onClick": "",
@@ -2380,7 +2210,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "平26.04.01 99:99:99",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -2685,7 +2515,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "平26.04.01 99:99:99",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -3017,7 +2847,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "平26.04.01 99:99:99",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -3322,7 +3152,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "平26.04.01 99:99:99",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -3654,7 +3484,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "平26.04.01 99:99:99",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -3959,7 +3789,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "平26.04.01 99:99:99",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -4291,7 +4121,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "平26.04.01 99:99:99",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -4535,7 +4365,7 @@
      ],
      "controlType": "Panel",
      "width": "G9",
-     "visible": true,
+     "visible": false,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
@@ -4610,8 +4440,12 @@
      "requestUrl": "dbb/db/dbb/TokuchoIdoJohoSakusei/onLoad_TokuchoIdoJohoSakusei"
     },
     {
-     "eventName": "onClick_chkTaisho",
-     "requestUrl": "dbb/db/dbb/TokuchoIdoJohoSakusei/onClick_chkTaisho"
+     "eventName": "onClick_chkSentaku07",
+     "requestUrl": "dbb/db/dbb/TokuchoIdoJohoSakusei/onClick_chkSentaku07"
+    },
+    {
+     "eventName": "onClick_chkSentaku08",
+     "requestUrl": "dbb/db/dbb/TokuchoIdoJohoSakusei/onClick_chkSentaku08"
     }
    ],
    "hiddenInput": [],
