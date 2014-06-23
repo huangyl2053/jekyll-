@@ -8,48 +8,6 @@ module DBZ {
      */
     export class ShoKaishuJokyoList_Design extends Uz.CommonChildDiv {
     
-        public get onSelectBySelectButton() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectBySelectButton"];
-        }
-        
-        public set onSelectBySelectButton(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectBySelectButton"] = value;
-            } else {
-                this.layout.items[0].items[0]["onSelectBySelectButton"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get onSelectByDblClick() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByDblClick"];
-        }
-        
-        public set onSelectByDblClick(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByDblClick"] = value;
-            } else {
-                this.layout.items[0].items[0]["onSelectByDblClick"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get gridSetting() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"];
-        }
-        
-        public set gridSetting(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"] = value;
-            } else {
-                this.layout.items[0].items[0]["gridSetting"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, ShoKaishuJokyoList_Design.myLayout, fieldName);
         }
@@ -60,9 +18,6 @@ module DBZ {
          */
         public registProperty() {
             super.registProperty();
-            Uz.JSControlUtil.registProperty("onSelectBySelectButton");
-            Uz.JSControlUtil.registProperty("onSelectByDblClick");
-            Uz.JSControlUtil.registProperty("gridSetting");
         }
         
         /**
@@ -72,9 +27,6 @@ module DBZ {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
-            editablePropertyInfo["onSelectBySelectButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onSelectBySelectButton"];
-            editablePropertyInfo["onSelectByDblClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
-            editablePropertyInfo["gridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
             
             return editablePropertyInfo;
         }
@@ -102,6 +54,9 @@ module DBZ {
      "marginLeft": "0",
      "marginRight": "0",
      "selectControlID": "dgShoKaishuJokyo",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "height": "S",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -113,6 +68,8 @@ module DBZ {
       "isShowSelectButtonColumn": false,
       "isShowModifyButtonColumn": false,
       "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -168,24 +125,12 @@ module DBZ {
          "cellType": 7,
          "ymdKubun": 2,
          "displayFormat": 0,
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 1,
         "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": ""
-       },
-       {
-        "columnName": "交付事由Key",
-        "dataName": "kofuJiyuKey",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 0,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": false,
         "isPrivateInfo": false,
         "sortKey": ""
        },
@@ -229,24 +174,12 @@ module DBZ {
          "cellType": 7,
          "ymdKubun": 2,
          "displayFormat": 0,
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 1,
         "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": ""
-       },
-       {
-        "columnName": "回収事由Key",
-        "dataName": "kaishuJiyuKey",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 0,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": false,
         "isPrivateInfo": false,
         "sortKey": ""
        },
@@ -290,20 +223,21 @@ module DBZ {
          "cellType": 7,
          "ymdKubun": 2,
          "displayFormat": 0,
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 1,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": ""
        }
       ]
      },
-     "height": "S",
      "onSort": "",
      "onSelect": "",
-     "onSelectByDblClick": "onSelectByDblClick_dgShoKaishuJokyo",
-     "onSelectBySelectButton": "onSelectBySelectButton_dgShoKaishuJokyo",
+     "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
      "onOnlyRow": "",
@@ -331,6 +265,8 @@ module DBZ {
    "marginLeft": "0",
    "marginRight": "0",
    "selectControlID": "ShoKaishuJokyoList",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "marginTop": "Default",
@@ -342,7 +278,12 @@ module DBZ {
      "postParameterPanelNames": "ShoKaishuJokyoList"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -355,7 +296,8 @@ module DBZ {
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": "CommonChildDiv",
@@ -370,31 +312,17 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": 0,
- "marginRight": 0,
+ "marginLeft": "0",
+ "marginRight": "0",
  "selectControlID": "defaultLayout",
+ "helpMessageID": "",
+ "jpControlName": "",
  "relation": [],
  "businessId": "DBZ",
  "controlName": "ShoKaishuJokyoList",
  "marginTop": 0,
  "marginBottom": 0,
- "originalProperty": [
-  {
-   "publicChildFieldName": "dgShoKaishuJokyo",
-   "publicChildProperty": "onSelectBySelectButton",
-   "newPropertyName": "onSelectBySelectButton"
-  },
-  {
-   "publicChildFieldName": "dgShoKaishuJokyo",
-   "publicChildProperty": "onSelectByDblClick",
-   "newPropertyName": "onSelectByDblClick"
-  },
-  {
-   "publicChildFieldName": "dgShoKaishuJokyo",
-   "publicChildProperty": "gridSetting",
-   "newPropertyName": "gridSetting"
-  }
- ],
+ "originalProperty": [],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": ""

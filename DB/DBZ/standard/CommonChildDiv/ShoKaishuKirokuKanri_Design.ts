@@ -51,9 +51,11 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
      "selectControlID": "ShoKaishuJokyoList",
+     "helpMessageID": "",
+     "jpControlName": "",
      "relation": [],
      "businessId": "DBZ",
      "controlName": "ShoKaishuJokyoList",
@@ -278,9 +280,11 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
      "selectControlID": "ShoKaishuJokyoShosai",
+     "helpMessageID": "",
+     "jpControlName": "",
      "relation": [],
      "businessId": "DBZ",
      "controlName": "ShoKaishuJokyoShosai",
@@ -309,8 +313,10 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "btnUpdateShoKaishuJokyo",
-     "text": "交付情報を確定する",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onClick": "",
+     "text": "交付情報を確定する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -333,6 +339,8 @@ module DBZ {
    "marginLeft": "XS",
    "marginRight": "XS",
    "selectControlID": "ShoKaishuKirokuKanri",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "marginTop": "Default",
@@ -344,8 +352,18 @@ module DBZ {
      "postParameterPanelNames": "ShoKaishuKirokuKanri"
     }
    ],
-   "requestSettings": [],
-   "hiddenInput": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbz/db/dbz/ShoKaishuKirokuKanri/onLoad"
+    }
+   ],
+   "hiddenInput": [
+    {
+     "propertyName": "mode",
+     "value": ""
+    }
+   ],
    "onOpen": "",
    "onClose": "",
    "session": {},
@@ -357,7 +375,8 @@ module DBZ {
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": "CommonChildDiv",
@@ -372,9 +391,11 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": 0,
- "marginRight": 0,
+ "marginLeft": "0",
+ "marginRight": "0",
  "selectControlID": "defaultLayout",
+ "helpMessageID": "",
+ "jpControlName": "",
  "relation": [],
  "businessId": "DBZ",
  "controlName": "ShoKaishuKirokuKanri",

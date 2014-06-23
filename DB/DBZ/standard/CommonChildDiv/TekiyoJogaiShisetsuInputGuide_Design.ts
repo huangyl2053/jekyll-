@@ -53,40 +53,24 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "dgTekiyoJogaiShisetsu",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": true,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
        "headerHeight": 0
       },
       "columns": [
-       {
-        "columnName": "",
-        "dataName": "btnSelect",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 40,
-        "visible": true,
-        "cellType": 8,
-        "cellDetails": {
-         "cellType": 8,
-         "text": "■",
-         "onClick": "onClick_btnSelect",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "btnSelect"
-       },
        {
         "columnName": "事業者番号",
         "dataName": "jigyoshaNo",
@@ -156,7 +140,10 @@ module DBZ {
      "height": "S",
      "onSort": "",
      "onSelect": "",
-     "onSelectByDblClick": "onClick_btnSelect",
+     "onSelectByDblClick": "",
+     "onSelectBySelectButton": "onSelectBySelectButton_dgTekiyoJogaiShisetsu",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -170,7 +157,7 @@ module DBZ {
      "fieldName": "btnReturn",
      "items": [],
      "controlType": "Button",
-     "width": "80",
+     "width": "250",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -183,16 +170,18 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnReturn",
      "onClick": "onClick_btnReturn",
-     "text": "キャンセル",
+     "text": "適用除外施設入力ガイドを閉じる",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
-   "width": "M",
+   "width": "G2",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -205,8 +194,9 @@ module DBZ {
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "TekiyoJogaiShisetsuInputGuide",
    "onLoad": "",
-   "title": "適用除外施設情報入力補助ガイド",
+   "title": "適用除外施設入力ガイド",
    "marginTop": "Default",
    "marginBottom": "Default",
    "isOpen": true,
@@ -222,8 +212,8 @@ module DBZ {
      "requestUrl": "dbz/db/dbz/TekiyoJogaiShisetsuInputGuide/onLoad"
     },
     {
-     "eventName": "onClick_btnSelect",
-     "requestUrl": "dbz/db/dbz/TekiyoJogaiShisetsuInputGuide/onClick_btnSelect"
+     "eventName": "onSelectBySelectButton_dgTekiyoJogaiShisetsu",
+     "requestUrl": "dbz/db/dbz/TekiyoJogaiShisetsuInputGuide/onSelectBySelectButton_dgTekiyoJogaiShisetsu"
     }
    ],
    "hiddenInput": [
@@ -245,7 +235,9 @@ module DBZ {
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": true,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": "CommonChildDiv",
@@ -262,6 +254,7 @@ module DBZ {
  "authorityMode": 0,
  "marginLeft": 0,
  "marginRight": 0,
+ "selectControlID": "defaultLayout",
  "relation": [],
  "businessId": "DBZ",
  "controlName": "TekiyoJogaiShisetsuInputGuide",
@@ -278,7 +271,7 @@ module DBZ {
    "controlName": "TekiyoJogaiShisetsuInputGuide.shisetsuMeisho"
   }
  ],
- "dialogOkEventNameForDialog": "onClick_btnSelect",
+ "dialogOkEventNameForDialog": "onSelectBySelectButton_dgTekiyoJogaiShisetsu",
  "dialogCancelEventNameForDialog": "onClick_btnReturn"
 }        
     }

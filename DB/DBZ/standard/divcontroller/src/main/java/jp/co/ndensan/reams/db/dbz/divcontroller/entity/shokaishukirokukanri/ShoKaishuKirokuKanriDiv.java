@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuJokyoListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuJokyoShosaiDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -29,6 +30,8 @@ public class ShoKaishuKirokuKanriDiv extends Panel {
     private ShoKaishuJokyoShosaiDiv ShoKaishuJokyoShosai;
     @JsonProperty("btnUpdateShoKaishuJokyo")
     private Button btnUpdateShoKaishuJokyo;
+    @JsonProperty("mode")
+    private RString mode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -64,6 +67,16 @@ public class ShoKaishuKirokuKanriDiv extends Panel {
     @JsonProperty("btnUpdateShoKaishuJokyo")
     public void setBtnUpdateShoKaishuJokyo(Button btnUpdateShoKaishuJokyo) {
         this.btnUpdateShoKaishuJokyo=btnUpdateShoKaishuJokyo;
+    }
+
+    @JsonProperty("mode")
+    public RString getMode() {
+        return mode;
+    }
+
+    @JsonProperty("mode")
+    public void setMode(RString mode) {
+        this.mode=mode;
     }
 
 }
