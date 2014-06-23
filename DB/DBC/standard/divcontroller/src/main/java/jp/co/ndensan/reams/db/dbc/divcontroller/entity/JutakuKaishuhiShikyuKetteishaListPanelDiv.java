@@ -1,16 +1,16 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PrintContentsSettingDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.chohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 
 /**
- * JutakuKaishuhiShikyuKetteishaListPanel のクラスファイル 
- * 
+ * JutakuKaishuhiShikyuKetteishaListPanel のクラスファイル
+ *
  * @author 自動生成
  */
 public class JutakuKaishuhiShikyuKetteishaListPanelDiv extends PanelPublish {
@@ -20,10 +20,11 @@ public class JutakuKaishuhiShikyuKetteishaListPanelDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("JutakuKaishuhiShikyuKetteishaListHakkoDate")
     private PrintContentsSettingDiv JutakuKaishuhiShikyuKetteishaListHakkoDate;
     @JsonProperty("JutakuKaishuhiShikyuKetteishaListOutputOrder")
-    private OutputOrderAndNewpageDiv JutakuKaishuhiShikyuKetteishaListOutputOrder;
+    private KaigoChohyoShutsuryokujunDiv JutakuKaishuhiShikyuKetteishaListOutputOrder;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -38,17 +39,17 @@ public class JutakuKaishuhiShikyuKetteishaListPanelDiv extends PanelPublish {
 
     @JsonProperty("JutakuKaishuhiShikyuKetteishaListHakkoDate")
     public void setJutakuKaishuhiShikyuKetteishaListHakkoDate(PrintContentsSettingDiv JutakuKaishuhiShikyuKetteishaListHakkoDate) {
-        this.JutakuKaishuhiShikyuKetteishaListHakkoDate=JutakuKaishuhiShikyuKetteishaListHakkoDate;
+        this.JutakuKaishuhiShikyuKetteishaListHakkoDate = JutakuKaishuhiShikyuKetteishaListHakkoDate;
     }
 
     @JsonProperty("JutakuKaishuhiShikyuKetteishaListOutputOrder")
-    public OutputOrderAndNewpageDiv getJutakuKaishuhiShikyuKetteishaListOutputOrder() {
+    public KaigoChohyoShutsuryokujunDiv getJutakuKaishuhiShikyuKetteishaListOutputOrder() {
         return JutakuKaishuhiShikyuKetteishaListOutputOrder;
     }
 
     @JsonProperty("JutakuKaishuhiShikyuKetteishaListOutputOrder")
-    public void setJutakuKaishuhiShikyuKetteishaListOutputOrder(OutputOrderAndNewpageDiv JutakuKaishuhiShikyuKetteishaListOutputOrder) {
-        this.JutakuKaishuhiShikyuKetteishaListOutputOrder=JutakuKaishuhiShikyuKetteishaListOutputOrder;
+    public void setJutakuKaishuhiShikyuKetteishaListOutputOrder(KaigoChohyoShutsuryokujunDiv JutakuKaishuhiShikyuKetteishaListOutputOrder) {
+        this.JutakuKaishuhiShikyuKetteishaListOutputOrder = JutakuKaishuhiShikyuKetteishaListOutputOrder;
     }
 
 }

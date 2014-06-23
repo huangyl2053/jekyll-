@@ -416,7 +416,8 @@ module DBC {
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "icon": 0,
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "txtKaishuTaishoAddress",
@@ -625,7 +626,8 @@ module DBC {
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "icon": 0,
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "btnModifyDetail",
@@ -653,7 +655,8 @@ module DBC {
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "icon": 0,
+       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
@@ -689,10 +692,7 @@ module DBC {
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -734,10 +734,7 @@ module DBC {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
@@ -792,7 +789,9 @@ module DBC {
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri May 30 17:34:57 JST 2014 
+ * Mon Jun 23 18:18:05 JST 2014 
  */
 
 
@@ -38,6 +38,18 @@ public class dgShinsazumiShikyuShinsei_Row extends DataRow {
 
     public dgShinsazumiShikyuShinsei_Row() {
         super();
+        this.txtShikyuShinseiDate = new TextBoxDate();
+        this.txtTeikyoYM = new TextBoxDate();
+        this.txtHihoNo = RString.EMPTY;
+        this.txtHihokenshaName = RString.EMPTY;
+        this.txtHokenKyufuAmount = new TextBoxNum();
+        this.txtRiyoshaFutanAmount = new TextBoxNum();
+        this.txtHiyoTotalAmount = new TextBoxNum();
+        this.txtTenkyoReset = false;
+        this.txt3DankaiReset = false;
+        this.txtShinsaDate = new TextBoxDate();
+        this.txtShinsaResult = RString.EMPTY;
+        this.txtSeiriNo = new TextBoxCode();
     }
 
     public dgShinsazumiShikyuShinsei_Row(TextBoxDate txtShikyuShinseiDate, TextBoxDate txtTeikyoYM, RString txtHihoNo, RString txtHihokenshaName, TextBoxNum txtHokenKyufuAmount, TextBoxNum txtRiyoshaFutanAmount, TextBoxNum txtHiyoTotalAmount, Boolean txtTenkyoReset, Boolean txt3DankaiReset, TextBoxDate txtShinsaDate, RString txtShinsaResult, TextBoxCode txtSeiriNo) {

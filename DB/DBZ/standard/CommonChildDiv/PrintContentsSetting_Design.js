@@ -158,6 +158,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtIssueDate_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": false,
                             "required": false,
                             "placeHolder": "",
@@ -196,6 +198,8 @@ var DBZ;
                             "marginLeft": "XL",
                             "marginRight": "XS",
                             "selectControlID": "txtSendDate_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": false,
                             "required": false,
                             "placeHolder": "",
@@ -232,6 +236,8 @@ var DBZ;
                     "marginLeft": "XS",
                     "marginRight": "XS",
                     "selectControlID": "PrintContentsSetting",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onLoad": "",
                     "title": "印字内容設定",
                     "marginTop": "Default",
@@ -248,15 +254,13 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": true,
                     "backgroundColor": 0,
                     "widthAuto": true,
                     "panelDisplay": 0,
                     "isGroupBox": false,
-                    "readOnly": false
+                    "readOnly": false,
+                    "height": "Auto"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -271,9 +275,11 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
             "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "PrintContentsSetting",
@@ -318,7 +324,9 @@ var DBZ;
                 }
             ],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return PrintContentsSetting_Design;
     })(Uz.CommonChildDiv);

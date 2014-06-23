@@ -35,54 +35,36 @@ public class JutakuKaishuhiShikyuKetteiTsuchishoPanel {
 
     private void setPaymentDateOutputOrderForTsuchisho(JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv panel) {
 
-        String ymlDataName = "ShinsazumiShikyuShinseiJutakuKaishuhiShikyuKetteiTsuchisho.yml";
+        String ymlDataName = "ReportPublish.yml";
         List<HashMap> ymlData = ymlData(ymlDataName);
 
         //　発行日の初期値を設定する。
         panel.getJutakuKaishuhiShikyuKetteiTsuchishoHakkoDate().getTxtIssueDate().setValue(new RDate(
-                ymlData.get(0).get("issueDate").toString()
+                ymlData.get(0).get("発行日").toString()
         ));
 
         panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getTxtKozaPaymentDate().setValue(new RDate(
-                ymlData.get(0).get("kozaPaymentDate").toString()
+                ymlData.get(0).get("口座払い日").toString()
         ));
 
         panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getTxtMadoguchiPaymentDateRange().setFromPlaceHolder(new RString(
-                ymlData.get(0).get("fromPlaceHolder").toString()
+                ymlData.get(0).get("窓口払い開始日").toString()
         ));
 
         panel.getJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod().getTxtMadoguchiPaymentDateRange().setToPlaceHolder(new RString(
-                ymlData.get(0).get("toPlaceHolder").toString()
+                ymlData.get(0).get("窓口払い終了日").toString()
         ));
 
-        //　出力順序・改頁の情の初期値を設定する。
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder()
-                .getTxtNewPageItem().setValue(new RString(
-                                ymlData.get(0).get("newPageItem").toString()
-                        ));
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder()
-                .getTxt1().setValue(new RString(
-                                ymlData.get(0).get("txt1").toString()
-                        ));
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder()
-                .getTxt2().setValue(new RString(
-                                ymlData.get(0).get("txt2").toString()
-                        ));
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder()
-                .getTxt3().setValue(new RString(
-                                ymlData.get(0).get("txt3").toString()
-                        ));
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder()
-                .getTxt4().setValue(new RString(
-                                ymlData.get(0).get("txt4").toString()
-                        ));
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder()
-                .getTxt5().setValue(new RString(
-                                ymlData.get(0).get("txt5").toString()
-                        ));
+//        //　出力順序・改頁の情の初期値を設定する。
+//        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder().getCcdChohyoShutsuryokujun().getTxtSortName()
+//                .setValue(new RString(ymlData.get(0).get("出力順名").toString()));
+//        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder().getCcdChohyoShutsuryokujun().getTxtKaiPage()
+//                .setValue(new RString(ymlData.get(0).get("改頁").toString()));
+//        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder().getCcdChohyoShutsuryokujun().getTxtSort()
+//                .setValue(new RString(ymlData.get(0).get("出力順").toString()));
     }
 
     private List<HashMap> ymlData(String ymlDataName) {
-        return YamlLoader.FOR_DBC.loadAsList(new RString(ymlDataName));
+        return YamlLoader.DBZ.loadAsList(new RString(ymlDataName));
     }
 }

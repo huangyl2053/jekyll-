@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.HashMap;
@@ -17,16 +16,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  *
  * @author n8223
- */    
+ */
 public class JutakuKaishuhiShikyuKetteishaListPanel {
-    
-        /**
+
+    /**
      * 住宅改修費支給申請決定 償還払支給（不支給）決定者一覧表の初期値をセットします。
      *
      * @param panel HihokenshaSearchPanelDiv
      * @return PanelDivのResponseData
      */
-        public ResponseData<JutakuKaishuhiShikyuKetteishaListPanelDiv> onLoad(JutakuKaishuhiShikyuKetteishaListPanelDiv panel) {
+    public ResponseData<JutakuKaishuhiShikyuKetteishaListPanelDiv> onLoad(JutakuKaishuhiShikyuKetteishaListPanelDiv panel) {
         ResponseData<JutakuKaishuhiShikyuKetteishaListPanelDiv> response = new ResponseData<>();
 
         //出力順序・改頁の初期値を設定する。
@@ -38,44 +37,24 @@ public class JutakuKaishuhiShikyuKetteishaListPanel {
     }
 
     private void setHakkoDateOutputOrderForKetteishaList(JutakuKaishuhiShikyuKetteishaListPanelDiv panel) {
-        
-        String ymlDataName = "ShinsazumiShikyuShinseiJutakuKaishuhiShikyuKetteishaList.yml";
+
+        String ymlDataName = "ReportPublish.yml";
         List<HashMap> ymlData = ymlData(ymlDataName);
 
-           //　発行日の初期値を設定する。
+        //　発行日の初期値を設定する。
         panel.getJutakuKaishuhiShikyuKetteishaListHakkoDate().getTxtIssueDate().setValue(new RDate(
-                ymlData.get(0).get("issueDate").toString()
-        ));
+                ymlData.get(0).get("発行日").toString()));
 
         //　出力順序・改頁の情の初期値を設定する。
-        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder()
-                .getTxtNewPageItem().setValue(new RString(
-                                ymlData.get(0).get("newPageItem").toString()
-                        ));
-        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder()
-                .getTxt1().setValue(new RString(
-                                ymlData.get(0).get("txt1").toString()
-                        ));
-        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder()
-                .getTxt2().setValue(new RString(
-                                ymlData.get(0).get("txt2").toString()
-                        ));
-        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder()
-                .getTxt3().setValue(new RString(
-                                ymlData.get(0).get("txt3").toString()
-                        ));
-        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder()
-                .getTxt4().setValue(new RString(
-                                ymlData.get(0).get("txt4").toString()
-                        ));
-        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder()
-                .getTxt5().setValue(new RString(
-                                ymlData.get(0).get("txt5").toString()
-                        ));
-
+        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder().getCcdChohyoShutsuryokujun().getTxtSortName()
+                .setValue(new RString(ymlData.get(0).get("出力順名").toString()));
+        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder().getCcdChohyoShutsuryokujun().getTxtKaiPage()
+                .setValue(new RString(ymlData.get(0).get("改頁").toString()));
+        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder().getCcdChohyoShutsuryokujun().getTxtSort()
+                .setValue(new RString(ymlData.get(0).get("出力順").toString()));
     }
-    
+
     private List<HashMap> ymlData(String ymlDataName) {
-        return YamlLoader.FOR_DBC.loadAsList(new RString(ymlDataName));
+        return YamlLoader.DBZ.loadAsList(new RString(ymlDataName));
     }
 }

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SearchConditionToShinsazumiShikyuShinseiPanelDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -29,22 +28,21 @@ public class SearchConditionToShinsazumiShikyuShinseiPanel {
     public ResponseData<SearchConditionToShinsazumiShikyuShinseiPanelDiv> onLoad(SearchConditionToShinsazumiShikyuShinseiPanelDiv panel) {
         ResponseData<SearchConditionToShinsazumiShikyuShinseiPanelDiv> response = new ResponseData<>();
 
-        //TO DO 
+        //TO DO
         setSearchConditionToShinsazumiShikyuShinsei(panel);
 
         response.data = panel;
         return response;
-
     }
 
-    /* 
+    /*
      *  住宅改修費支給申請決定 審査済支給申請検索条件の情報を設定する。(YMLDATA)
      */
     private void setSearchConditionToShinsazumiShikyuShinsei(SearchConditionToShinsazumiShikyuShinseiPanelDiv panel) {
 
-        //TO DO 
+        //TO DO
         String ymlDataName = "ShinsazumiShikyuShinseiSearchCondition.yml";
-        //TO DO 
+        //TO DO
         List<HashMap> ymlData = ymlData(ymlDataName);
 
         String shinsaDateFrom = ymlData.get(0).get("shinsaDateFrom").toString();
@@ -52,11 +50,9 @@ public class SearchConditionToShinsazumiShikyuShinseiPanel {
 
         panel.getTxtShinsaDate().setFromValue(new RDate(shinsaDateFrom));
         panel.getTxtShinsaDate().setToValue(new RDate(shinsaDateTo));
-
     }
 
     private List<HashMap> ymlData(String ymlDataName) {
-        return YamlLoader.FOR_DBC.loadAsList(new RString(ymlDataName));
+        return YamlLoader.DBC.loadAsList(new RString("dbc0730011/" + ymlDataName));
     }
-
 }

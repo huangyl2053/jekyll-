@@ -418,7 +418,8 @@ var DBC;
                                     "imageFileUrl": "",
                                     "imageWidth": "",
                                     "imageHeight": "",
-                                    "icon": 0
+                                    "icon": 0,
+                                    "heightTextBoxMatches": false
                                 },
                                 {
                                     "fieldName": "txtKaishuTaishoAddress",
@@ -627,7 +628,8 @@ var DBC;
                                     "imageFileUrl": "",
                                     "imageWidth": "",
                                     "imageHeight": "",
-                                    "icon": 0
+                                    "icon": 0,
+                                    "heightTextBoxMatches": false
                                 },
                                 {
                                     "fieldName": "btnModifyDetail",
@@ -655,7 +657,8 @@ var DBC;
                                     "imageFileUrl": "",
                                     "imageWidth": "",
                                     "imageHeight": "",
-                                    "icon": 0
+                                    "icon": 0,
+                                    "heightTextBoxMatches": false
                                 }
                             ],
                             "controlType": "Panel",
@@ -691,10 +694,7 @@ var DBC;
                             "onOpen": "",
                             "onClose": "",
                             "session": {},
-                            "eraseBorderTop": false,
-                            "eraseBorderBottom": false,
-                            "eraseBorderRight": false,
-                            "eraseBorderLeft": false,
+                            "eraseBorder": false,
                             "backgroundColor": 0,
                             "widthAuto": false,
                             "panelDisplay": 0,
@@ -736,10 +736,7 @@ var DBC;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": true,
                     "backgroundColor": 0,
                     "widthAuto": true,
                     "panelDisplay": 0,
@@ -794,7 +791,9 @@ var DBC;
             ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return JutakuKaishuShinseiDetailInput_Design;
     })(Uz.CommonChildDiv);

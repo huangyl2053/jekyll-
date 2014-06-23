@@ -77,7 +77,8 @@
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -118,16 +119,14 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton"
   },
   {
    "fieldName": "ShinsazumiShikyuShinseiListPanel",
@@ -194,6 +193,7 @@
      "selectControlID": "dgShinsazumiShikyuShinsei",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": true,
      "height": "M",
      "gridSetting": {
       "rowHeight": 25,
@@ -449,7 +449,7 @@
      "onNoRow": "",
      "onMultiRows": "onSelect_OnClick",
      "dataSource": [],
-     "sortOrder": "txtShinsaResult",
+     "sortOrder": "txtHihokenshaName",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
@@ -501,16 +501,14 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton"
   },
   {
    "fieldName": "JutakuKaishuhiShikyuKetteishaListPanel",
@@ -548,6 +546,8 @@
      ],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "txtSendData_displayNone": true,
      "PrintContentsSetting_title": "",
      "PrintContentsSetting_eraseBorderTop": true,
@@ -570,22 +570,22 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "JutakuKaishuhiShikyuKetteishaListOutputOrder",
      "helpMessageID": "",
      "jpControlName": "",
-     "title": "出力順序・改頁",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
-     "isGroupBox": false,
-     "businessId": "DBC",
-     "controlName": "OutputOrderAndNewpage",
+     "businessId": "DBZ",
+     "controlName": "KaigoChohyoShutsuryokujun",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "txtNewPageItem_displayNone": false
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "ChohyoShutsuryokujun_width": "1100"
     }
    ],
    "controlType": "PanelPublish",
@@ -626,16 +626,14 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
    "isPublish": true,
    "isEmptyControl": false
   },
@@ -675,6 +673,8 @@
      ],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "txtSendData_displayNone": true,
      "PrintContentsSetting_title": "",
      "PrintContentsSetting_eraseBorderTop": true,
@@ -711,7 +711,9 @@
      "controlName": "PaymentDate",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": ""
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M"
     },
     {
      "fieldName": "JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder",
@@ -728,22 +730,22 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder",
      "helpMessageID": "",
      "jpControlName": "",
-     "title": "出力順序",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
-     "isGroupBox": false,
-     "businessId": "DBC",
-     "controlName": "OutputOrderAndNewpage",
+     "businessId": "DBZ",
+     "controlName": "KaigoChohyoShutsuryokujun",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "txtNewPageItem_displayNone": true
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "ChohyoShutsuryokujun_width": "1100"
     }
    ],
    "controlType": "PanelPublish",
@@ -784,17 +786,15 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "isPublish": false,
+   "focusPositionID": "restoreLayoutButton",
+   "isPublish": true,
    "isEmptyControl": false
   }
  ],
@@ -822,59 +822,93 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "決定",
-   "showWizard": false,
+   "stateName": "検索",
+   "showWizard": true,
    "visibleDivs": [
     {
-     "visibleDiv": "SearchMishinsaShikyuShinseiPanel",
-     "panelState": "visible"
-    },
-    {
      "visibleDiv": "SearchConditionToShinsazumiShikyuShinseiPanel",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "ShinsazumiShikyuShinseiListPanel",
-     "panelState": "visible"
+     "panelState": "close",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnSearchShinsazumi",
+     "event": "onClick",
+     "transition": "一括決定登録"
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "一括決定登録",
+   "showWizard": true,
+   "visibleDivs": [
+    {
+     "visibleDiv": "SearchConditionToShinsazumiShikyuShinseiPanel",
+     "panelState": "close",
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KyotsuPanel",
-     "panelState": "visible"
+     "visibleDiv": "ShinsazumiShikyuShinseiListPanel",
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "JutakuKaishuhiShikyuKetteishaListPanel",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "JutakuKaishuhiShikyuKetteiTsuchishoPanel",
-     "panelState": "visible"
+     "panelState": "close",
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "JutakuKaishuhiShikyuKetteishaListHakkoDate",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "JutakuKaishuhiShikyuKetteishaListOutputOrder",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "JutakuKaishuhiShikyuKetteiTsuchishoHakkoDate",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "btnSearchShinsazumi",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   }
  ],
- "currentState": "決定",
+ "currentState": "All",
  "id": "DBC0730011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -910,6 +944,7 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "ketteiSave",
@@ -950,7 +985,7 @@
    ],
    "states": [
     {
-     "state": "決定"
+     "state": "一括決定登録"
     }
    ],
    "isFinishButtonOnTheRight": false

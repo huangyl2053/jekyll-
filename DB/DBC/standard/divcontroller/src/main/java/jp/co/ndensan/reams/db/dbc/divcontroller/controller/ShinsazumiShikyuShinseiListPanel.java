@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 /**
  *
- * @author n8223
+ * @author n8223 朴
  */
 public class ShinsazumiShikyuShinseiListPanel {
 
@@ -38,8 +38,8 @@ public class ShinsazumiShikyuShinseiListPanel {
     public ResponseData<ShinsazumiShikyuShinseiListPanelDiv> onLoad(ShinsazumiShikyuShinseiListPanelDiv panel) {
         ResponseData<ShinsazumiShikyuShinseiListPanelDiv> response = new ResponseData<>();
 
-        //TO DO 
-        //TO DO 
+        //TO DO
+        //TO DO
         String ymlDataName = "ShinsazumiShikyuShinseiSearchCondition.yml";
         List<HashMap> ymlData = ymlData(ymlDataName);
 
@@ -60,7 +60,7 @@ public class ShinsazumiShikyuShinseiListPanel {
     public ResponseData<ShinsazumiShikyuShinseiListPanelDiv> onClick_btnSearchShinsazumi(ShinsazumiShikyuShinseiListPanelDiv panel) {
         ResponseData<ShinsazumiShikyuShinseiListPanelDiv> response = new ResponseData<>();
 
-        //TO DO 
+        //TO DO
         setShinsazumiShikyuShinseiList(panel);
 
         response.data = panel;
@@ -73,12 +73,12 @@ public class ShinsazumiShikyuShinseiListPanel {
      */
     private void setShinsazumiShikyuShinseiList(ShinsazumiShikyuShinseiListPanelDiv panel) {
 
-        //TO DO 
+        //TO DO
         String ymlDataName = "ShinsazumiShikyuShinseiList.yml";
 
         List<dgShinsazumiShikyuShinsei_Row> arraydata = createRowShinsazumiShikyuShinseiTestData(ymlDataName);
         DataGrid<dgShinsazumiShikyuShinsei_Row> grid = panel.getDgShinsazumiShikyuShinsei();
-       
+
         grid.setDataSource(arraydata);
 
     }
@@ -171,18 +171,18 @@ public class ShinsazumiShikyuShinseiListPanel {
         if (被保番号.equals("1111111114")) {
             rowShinsazumiShikyuShinseiListData.setTxt3DankaiReset(Boolean.TRUE);
         }
-        
+
         rowShinsazumiShikyuShinseiListData.setTxtShinsaResult(new RString(審査結果));
         rowShinsazumiShikyuShinseiListData.getTxtSeiriNo().setValue(new RString(整理番号));
 
         return rowShinsazumiShikyuShinseiListData;
 
     }
-            /*
+    /*
      * YML DATA 設定する
      */
-    private List<HashMap> ymlData(String ymlDataName) {
-        return YamlLoader.FOR_DBC.loadAsList(new RString(ymlDataName));
-    }
 
+    private List<HashMap> ymlData(String ymlDataName) {
+        return YamlLoader.DBC.loadAsList(new RString("dbc0730011/" + ymlDataName));
+    }
 }

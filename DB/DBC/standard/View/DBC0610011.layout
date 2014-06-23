@@ -75,6 +75,7 @@
        "selectControlID": "ddlHokensha_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -84,7 +85,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "key0",
+       "required": false,
        "dataSource": [
         {
          "key": "key0",
@@ -95,7 +96,7 @@
          "value": "白馬村"
         }
        ],
-       "required": false,
+       "selectedItem": "key0",
        "disabledItem": []
       },
       {
@@ -124,7 +125,8 @@
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "icon": 0,
+       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
@@ -160,16 +162,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "YoguKonyuhiShikyuShinseiMishinsaResultList",
@@ -210,8 +213,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "required": false,
        "text": "",
+       "required": false,
        "placeHolder": "",
        "value": "",
        "textKind": 0
@@ -236,8 +239,8 @@
        "selectControlID": "dgYoguKonyuhiShisaMishinsaShikyuShinseiList",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "M",
-       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": true,
@@ -458,6 +461,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "txtSeiriNo",
        "isAscending": true,
        "filterList": [],
@@ -489,7 +493,8 @@
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "icon": 0,
+       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
@@ -525,16 +530,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     }
    ],
    "controlType": "Panel",
@@ -583,16 +589,178 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true
+  },
+  {
+   "fieldName": "YoguShinsaHihokensha",
+   "items": [
+    {
+     "fieldName": "KaigoAtenaInfo",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KaigoAtenaInfo",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "KaigoAtenaInfo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "atenaInfo_title": "",
+     "atenaInfo_canOpenAndClose": true,
+     "atenaInfo_eraseBorderTop": true,
+     "atenaInfo_eraseBorderBottom": true,
+     "atenaInfo_eraseBorderRight": true,
+     "atenaInfo_eraseBorderLeft": true,
+     "AtenaKanaMeisho_visible": true,
+     "AtenaMisho_visible": true,
+     "SeinengappiYMD_visible": true,
+     "Nenrei_visible": true,
+     "Seibetsu_visible": true,
+     "JuminShubetsu_Visible": true,
+     "NihonjinGaikokujin_visible": true,
+     "JuminJotai_visible": true,
+     "YubinNo_visible": true,
+     "Jusho_visible": true,
+     "Gyoseiku_visible": true,
+     "ShikibetsuCode_visible": true,
+     "KojinHojinCode_visible": true,
+     "SetaiCode_visible": true,
+     "lblButtonMargin_displayNone": false,
+     "btnMemo_DisplayNone": false,
+     "btnDainosha_displayNone": false,
+     "btnSofusaki_displayNone": false,
+     "btnDainoSofusakiKakunin_displayNone": false,
+     "btnKoza_displayNone": false,
+     "btnRenrakusaki_displayNone": false,
+     "btnShosai_displayNone": false,
+     "btnAtenaRireki_displayNone": false,
+     "btnSetaiIchiran_displayNone": false,
+     "btnDoitsunin_displayNone": false,
+     "btnToriatsukaiChui_displayNone": false,
+     "btnEltax_displayNone": false,
+     "btnShiyoJokyo_displayNone": false,
+     "btnAtesakiKakunin_displayNone": false,
+     "SubGyomuCode": "",
+     "JukiYusennKubun": "1",
+     "AgeArrivalDay": "1",
+     "SubGyomuUmu": "0",
+     "SubGyomuSearchUmu": "0",
+     "DainoninHyojiUmu": "1"
+    },
+    {
+     "fieldName": "KaigoShikakuKihon",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KaigoShikakuKihon",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "title": "",
+     "relation": [],
+     "canOpenAndClose": true,
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "KaigoShikakuKihon",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
+     "backGroundColor": 0,
+     "btnHihoRireki_visible": true,
+     "btnNinteiRireki_visible": true
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "Default",
+   "selectControlID": "YoguShinsaHihokensha",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "YoguShinsaHihokensha"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "YoguKonyuhiShikyuShinseiShinsaModifyPanel",
@@ -633,8 +801,8 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "required": false,
      "text": "",
+     "required": false,
      "placeHolder": "",
      "value": "",
      "textKind": 0
@@ -673,8 +841,8 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "required": false,
      "text": "",
+     "required": false,
      "placeHolder": "",
      "value": "",
      "maxLength": 100000000,
@@ -720,8 +888,8 @@
      "labelRWidth": "15",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "required": false,
      "text": "",
+     "required": false,
      "placeHolder": "",
      "value": "",
      "maxLength": 100000000,
@@ -765,7 +933,10 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "btnAddSeikyuDetailOnclick": "onClick_btnAddSeikyuDetail"
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "btnModifyDetail_onClick": "onClick_btnModifyDetail",
+     "btnModifyDetail_text": "明細を追加する"
     },
     {
      "fieldName": "YoguKonyuhiShikyuShinseiShinsaShinseisha",
@@ -782,20 +953,30 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "YoguKonyuhiShikyuShinseiShinsaShinseisha",
      "helpMessageID": "",
      "jpControlName": "",
+     "title": "申請者情報",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
-     "businessId": "DBC",
+     "panelDisplay": 1,
+     "businessId": "DBZ",
      "controlName": "ShinseishaInfo",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "btnSearch_displayNone": false
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "btnSearch_displayNone": false,
+     "txtUkestukeDate_displayNone": true,
+     "txtJigyoshaNo_disabled": false,
+     "txtShinseishaName_labelLText": "氏名",
+     "txtYubinNo_displayNone": false,
+     "txtAddress_displayNone": false,
+     "btnCopy_displayNone": false
     },
     {
      "fieldName": "YoguKonyuhiShikyuShinseiShinsaPaymentMethod",
@@ -812,7 +993,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "YoguKonyuhiShikyuShinseiShinsaPaymentMethod",
      "helpMessageID": "",
@@ -821,131 +1002,23 @@
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
      "panelDisplay": 1,
-     "businessId": "DBC",
+     "businessId": "DBZ",
      "controlName": "PaymentMethod",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "KozaPayment_title": "口座払い",
-     "onClick_radPayMethod": "onClick_radPayMethod"
-    },
-    {
-     "fieldName": "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea",
-     "items": [
-      {
-       "fieldName": "btnModifyShinsei",
-       "items": [],
-       "controlType": "Button",
-       "width": "M",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": true,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnModifyShinsei",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "onClick": "onClick_btnModifyShinsei",
-       "text": "申請を修正する",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0
-      },
-      {
-       "fieldName": "btnCancelShinseiModify",
-       "items": [],
-       "controlType": "Button",
-       "width": "M",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnCancelShinseiModify",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "onClick": "onClick_btnCancelShinseiModify",
-       "text": "申請の修正をやめる",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0
-      }
-     ],
-     "controlType": "Panel",
-     "width": "G6",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "onLoad": "",
-     "title": "",
-     "isOpen": true,
-     "canOpenAndClose": true,
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea"
-      }
-     ],
-     "requestSettings": [
-      {
-       "eventName": "onLoad",
-       "requestUrl": ""
-      },
-      {
-       "eventName": "onClick_btnIkkatsuShinsa",
-       "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea/onClick_btnIkkatsuShinsa"
-      }
-     ],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "Default",
-     "marginBottom": "Default",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "eraseBorderTop": false,
      "eraseBorderBottom": false,
      "eraseBorderRight": false,
      "eraseBorderLeft": false,
-     "backgroundColor": 0,
-     "widthAuto": false,
-     "panelDisplay": 0,
-     "isGroupBox": false,
-     "readOnly": false,
-     "height": "Auto"
+     "KozaPayment_title": "",
+     "onClick_radPayMethod": "",
+     "Juryoinin_displayNone": true,
+     "Madoguchi_displayNone": true,
+     "Koza_displayNone": false
     }
    ],
    "controlType": "Panel",
@@ -994,16 +1067,215 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
+  },
+  {
+   "fieldName": "YoguShinsaKufugakuSummary",
+   "items": [
+    {
+     "fieldName": "KyufugakuSummary",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyufugakuSummary",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBC",
+     "controlName": "KyufugakuSummary",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "btnLimitOverCheck_displayNone": false,
+     "btnRireki_displayNone": true
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "Default",
+   "marginRight": "Default",
+   "selectControlID": "YoguShinsaKufugakuSummary",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "YoguShinsaKufugakuSummary"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
+  },
+  {
+   "fieldName": "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea",
+   "items": [
+    {
+     "fieldName": "btnModifyShinsei",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnModifyShinsei",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onClick": "onClick_btnModifyShinsei",
+     "text": "申請を修正する",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
+    },
+    {
+     "fieldName": "btnCancel",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnCancel",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onClick": "onClick_btnCancel",
+     "text": "申請の修正をやめる",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G6",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "selectControlID": "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnIkkatsuShinsa",
+     "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea/onClick_btnIkkatsuShinsa"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   }
  ],
  "controlType": null,
@@ -1031,23 +1303,22 @@
   {
    "order": "1",
    "stateName": "検索",
-   "showWizard": false,
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "YoguKonyuhiShikyuShinseiMishinsaSearchPanel",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "YoguKonyuhiShikyuShinseiMishinsaSearchCondition",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "YoguKonyuhiShikyuShinseiMishinsaResultList",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea",
-     "panelState": "visible"
+     "panelState": "close",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -1071,24 +1342,100 @@
   },
   {
    "order": "2",
+   "stateName": "審査",
+   "showWizard": true,
+   "visibleDivs": [
+    {
+     "visibleDiv": "YoguKonyuhiShikyuShinseiMishinsaSearchPanel",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuShinseiMishinsaSearchCondition",
+     "panelState": "close",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuShinseiMishinsaResultList",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnModifyShinsei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgYoguKonyuhiShisaMishinsaShikyuShinseiList[btnModifyShinsei]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCancelShinseiModify",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "3",
    "stateName": "修正",
-   "showWizard": false,
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "YoguKonyuhiShikyuShinseiShinsaModifyPanel",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "YoguKonyuhiShikyuShinseiShinsaSeikyuDetail",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "YoguKonyuhiShikyuShinseiShinsaShinseisha",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "YoguKonyuhiShikyuShinseiShinsaPaymentMethod",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "YoguShinsaHihokensha",
+     "panelState": "visible",
+     "fixedDiv": "Yes"
+    },
+    {
+     "visibleDiv": "YoguShinsaKufugakuSummary",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KaigoShikakuKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyufugakuSummary",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KaigoAtenaInfo",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -1126,6 +1473,15 @@
    "YoguKonyuhiShikyuShinseiMishinsaResultList"
   ],
   [
+   "YoguShinsaHihokensha"
+  ],
+  [
+   "KaigoAtenaInfo"
+  ],
+  [
+   "KaigoShikakuKihon"
+  ],
+  [
    "YoguKonyuhiShikyuShinseiShinsaModifyPanel"
   ],
   [
@@ -1138,12 +1494,19 @@
    "YoguKonyuhiShikyuShinseiShinsaPaymentMethod"
   ],
   [
+   "YoguShinsaKufugakuSummary"
+  ],
+  [
+   "KyufugakuSummary"
+  ],
+  [
    "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea"
   ]
  ],
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "save",
@@ -1183,7 +1546,7 @@
    ],
    "states": [
     {
-     "state": "修正"
+     "state": "審査"
     }
    ],
    "isFinishButtonOnTheRight": false
