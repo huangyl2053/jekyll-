@@ -150,14 +150,15 @@
          "selectControlID": "chkSentaku04_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
+         "onChange": "",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onChange": "",
-         "selectedItem": null,
          "onClick": "",
          "selectedItems": [],
          "newLineItemNumber": 2,
@@ -754,14 +755,15 @@
          "selectControlID": "chkSentaku05_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
+         "onChange": "",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onChange": "",
-         "selectedItem": null,
          "onClick": "",
          "selectedItems": [],
          "newLineItemNumber": 2,
@@ -1086,14 +1088,15 @@
          "selectControlID": "chkSentaku06_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
+         "onChange": "",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onChange": "",
-         "selectedItem": null,
          "onClick": "",
          "selectedItems": [],
          "newLineItemNumber": 2,
@@ -1445,15 +1448,16 @@
          "selectControlID": "chkSentaku07_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
+         "required": false,
+         "onChange": "",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "required": false,
-         "onChange": "",
-         "selectedItem": null,
          "onClick": "onClick_chkSentaku07",
          "selectedItems": [],
          "newLineItemNumber": 2,
@@ -1751,15 +1755,16 @@
          "selectControlID": "chkSentaku08_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
+         "required": false,
+         "onChange": "",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "required": false,
-         "onChange": "",
-         "selectedItem": null,
          "onClick": "onClick_chkSentaku08",
          "selectedItems": [
           {
@@ -2093,15 +2098,16 @@
          "selectControlID": "chkSentaku09_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
+         "required": false,
+         "onChange": "",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "required": false,
-         "onChange": "",
-         "selectedItem": null,
          "onClick": "",
          "selectedItems": [],
          "newLineItemNumber": 2,
@@ -2399,14 +2405,15 @@
          "selectControlID": "chkSentaku10_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
+         "onChange": "",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onChange": "",
-         "selectedItem": null,
          "onClick": "",
          "selectedItems": [],
          "newLineItemNumber": 2,
@@ -2731,14 +2738,15 @@
          "selectControlID": "chkSentaku11_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
+         "onChange": "",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onChange": "",
-         "selectedItem": null,
          "onClick": "",
          "selectedItems": [],
          "newLineItemNumber": 2,
@@ -3036,14 +3044,15 @@
          "selectControlID": "chkSentaku12_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
+         "onChange": "",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onChange": "",
-         "selectedItem": null,
          "onClick": "",
          "selectedItems": [],
          "newLineItemNumber": 2,
@@ -3368,14 +3377,15 @@
          "selectControlID": "chkSentaku01_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
+         "onChange": "",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onChange": "",
-         "selectedItem": null,
          "onClick": "",
          "selectedItems": [],
          "newLineItemNumber": 2,
@@ -3673,14 +3683,15 @@
          "selectControlID": "chkSentaku02_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
+         "onChange": "",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onChange": "",
-         "selectedItem": null,
          "onClick": "",
          "selectedItems": [],
          "newLineItemNumber": 2,
@@ -4005,14 +4016,15 @@
          "selectControlID": "chkSentaku03_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
+         "onChange": "",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onChange": "",
-         "selectedItem": null,
          "onClick": "",
          "selectedItems": [],
          "newLineItemNumber": 2,
@@ -4396,10 +4408,7 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 1,
      "widthAuto": false,
      "panelDisplay": 2,
@@ -4454,10 +4463,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -4525,6 +4531,7 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "TokuchoIdoJoho",
