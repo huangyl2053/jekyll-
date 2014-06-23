@@ -51,7 +51,7 @@ public class KyotakuJikoRiyohyo {
     /**
      * 画面ロード時の処理です。
      *
-     * @param panel 履歴一覧
+     * @param panel panel
      * @return ResponseData
      */
     public ResponseData onLoad(KyotakuJikoRiyohyoDiv panel) {

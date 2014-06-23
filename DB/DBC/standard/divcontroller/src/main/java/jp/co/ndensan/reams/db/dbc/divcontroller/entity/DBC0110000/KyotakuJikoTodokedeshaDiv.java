@@ -21,18 +21,18 @@ public class KyotakuJikoTodokedeshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtName")
-    private TextBox txtName;
+    @JsonProperty("txtTodokedeshaName")
+    private TextBox txtTodokedeshaName;
     @JsonProperty("ddlKankeiKubun")
     private DropDownList ddlKankeiKubun;
-    @JsonProperty("txtKana")
-    private TextBoxKana txtKana;
-    @JsonProperty("txtTelNo")
-    private TextBox txtTelNo;
-    @JsonProperty("txtYubinNo")
-    private TextBoxYubinNo txtYubinNo;
-    @JsonProperty("txtJusho")
-    private TextBox txtJusho;
+    @JsonProperty("txtTodokedeshaKana")
+    private TextBoxKana txtTodokedeshaKana;
+    @JsonProperty("txtTodokedeshaTelNo")
+    private TextBox txtTodokedeshaTelNo;
+    @JsonProperty("txtTodokedeshaYubinNo")
+    private TextBoxYubinNo txtTodokedeshaYubinNo;
+    @JsonProperty("txtTodokedeshaJusho")
+    private TextBox txtTodokedeshaJusho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,14 +40,14 @@ public class KyotakuJikoTodokedeshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtName")
-    public TextBox getTxtName() {
-        return txtName;
+    @JsonProperty("txtTodokedeshaName")
+    public TextBox getTxtTodokedeshaName() {
+        return txtTodokedeshaName;
     }
 
-    @JsonProperty("txtName")
-    public void setTxtName(TextBox txtName) {
-        this.txtName=txtName;
+    @JsonProperty("txtTodokedeshaName")
+    public void setTxtTodokedeshaName(TextBox txtTodokedeshaName) {
+        this.txtTodokedeshaName=txtTodokedeshaName;
     }
 
     @JsonProperty("ddlKankeiKubun")
@@ -60,44 +60,44 @@ public class KyotakuJikoTodokedeshaDiv extends Panel {
         this.ddlKankeiKubun=ddlKankeiKubun;
     }
 
-    @JsonProperty("txtKana")
-    public TextBoxKana getTxtKana() {
-        return txtKana;
+    @JsonProperty("txtTodokedeshaKana")
+    public TextBoxKana getTxtTodokedeshaKana() {
+        return txtTodokedeshaKana;
     }
 
-    @JsonProperty("txtKana")
-    public void setTxtKana(TextBoxKana txtKana) {
-        this.txtKana=txtKana;
+    @JsonProperty("txtTodokedeshaKana")
+    public void setTxtTodokedeshaKana(TextBoxKana txtTodokedeshaKana) {
+        this.txtTodokedeshaKana=txtTodokedeshaKana;
     }
 
-    @JsonProperty("txtTelNo")
-    public TextBox getTxtTelNo() {
-        return txtTelNo;
+    @JsonProperty("txtTodokedeshaTelNo")
+    public TextBox getTxtTodokedeshaTelNo() {
+        return txtTodokedeshaTelNo;
     }
 
-    @JsonProperty("txtTelNo")
-    public void setTxtTelNo(TextBox txtTelNo) {
-        this.txtTelNo=txtTelNo;
+    @JsonProperty("txtTodokedeshaTelNo")
+    public void setTxtTodokedeshaTelNo(TextBox txtTodokedeshaTelNo) {
+        this.txtTodokedeshaTelNo=txtTodokedeshaTelNo;
     }
 
-    @JsonProperty("txtYubinNo")
-    public TextBoxYubinNo getTxtYubinNo() {
-        return txtYubinNo;
+    @JsonProperty("txtTodokedeshaYubinNo")
+    public TextBoxYubinNo getTxtTodokedeshaYubinNo() {
+        return txtTodokedeshaYubinNo;
     }
 
-    @JsonProperty("txtYubinNo")
-    public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
-        this.txtYubinNo=txtYubinNo;
+    @JsonProperty("txtTodokedeshaYubinNo")
+    public void setTxtTodokedeshaYubinNo(TextBoxYubinNo txtTodokedeshaYubinNo) {
+        this.txtTodokedeshaYubinNo=txtTodokedeshaYubinNo;
     }
 
-    @JsonProperty("txtJusho")
-    public TextBox getTxtJusho() {
-        return txtJusho;
+    @JsonProperty("txtTodokedeshaJusho")
+    public TextBox getTxtTodokedeshaJusho() {
+        return txtTodokedeshaJusho;
     }
 
-    @JsonProperty("txtJusho")
-    public void setTxtJusho(TextBox txtJusho) {
-        this.txtJusho=txtJusho;
+    @JsonProperty("txtTodokedeshaJusho")
+    public void setTxtTodokedeshaJusho(TextBox txtTodokedeshaJusho) {
+        this.txtTodokedeshaJusho=txtTodokedeshaJusho;
     }
 
 }

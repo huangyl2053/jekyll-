@@ -34,7 +34,7 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "onClick_BtnToSearch": "",
+     "onClick_BtnToSearch": "onClickBtnToSearch",
      "displayNone_txtTsuchishoNo": false,
      "displayNone_ddlFukaNendo": false,
      "displayNone_SearchCriteriaDetail": false
@@ -69,7 +69,7 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "onClickBtnToResearch": ""
+     "onClickBtnToResearch": "onClickBtnToResearch"
     }
    ],
    "controlType": "Panel",
@@ -102,6 +102,14 @@
     {
      "eventName": "onLoad",
      "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeSearch/onLoad"
+    },
+    {
+     "eventName": "onClickBtnToSearch",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeSearch/onClickBtnToSearch"
+    },
+    {
+     "eventName": "onClickBtnToResearch",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeSearch/onClickBtnToResearch"
     }
    ],
    "hiddenInput": [],
@@ -506,7 +514,7 @@
            },
            "onSort": "",
            "onSelect": "",
-           "onSelectByDblClick": "",
+           "onSelectByDblClick": "onClickTodokedeSelect",
            "onSelectBySelectButton": "onClickTodokedeSelect",
            "onSelectByModifyButton": "",
            "onSelectByDeleteButton": "",
@@ -836,7 +844,7 @@
            "fieldName": "KyotakuJikoTodokedesha",
            "items": [
             {
-             "fieldName": "txtName",
+             "fieldName": "txtTodokedeshaName",
              "items": [],
              "controlType": "TextBox",
              "width": "600",
@@ -852,7 +860,7 @@
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
-             "selectControlID": "txtName_core",
+             "selectControlID": "txtTodokedeshaName_core",
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
@@ -938,7 +946,7 @@
              "disabledItem": []
             },
             {
-             "fieldName": "txtKana",
+             "fieldName": "txtTodokedeshaKana",
              "items": [],
              "controlType": "TextBoxKana",
              "width": "600",
@@ -954,7 +962,7 @@
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
-             "selectControlID": "txtKana_core",
+             "selectControlID": "txtTodokedeshaKana_core",
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
@@ -986,7 +994,7 @@
              "kanaType": 0
             },
             {
-             "fieldName": "txtTelNo",
+             "fieldName": "txtTodokedeshaTelNo",
              "items": [],
              "controlType": "TextBox",
              "width": "S",
@@ -1002,7 +1010,7 @@
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
-             "selectControlID": "txtTelNo_core",
+             "selectControlID": "txtTodokedeshaTelNo_core",
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
@@ -1032,7 +1040,7 @@
              "permitCharactor": ""
             },
             {
-             "fieldName": "txtYubinNo",
+             "fieldName": "txtTodokedeshaYubinNo",
              "items": [],
              "controlType": "TextBoxYubinNo",
              "width": "70",
@@ -1048,7 +1056,7 @@
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
-             "selectControlID": "txtYubinNo_core",
+             "selectControlID": "txtTodokedeshaYubinNo_core",
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
@@ -1078,7 +1086,7 @@
              "permitCharactor": ""
             },
             {
-             "fieldName": "txtJusho",
+             "fieldName": "txtTodokedeshaJusho",
              "items": [],
              "controlType": "TextBox",
              "width": "590",
@@ -1094,7 +1102,7 @@
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
-             "selectControlID": "txtJusho_core",
+             "selectControlID": "txtTodokedeshaJusho_core",
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
@@ -1624,7 +1632,7 @@
    "jpControlName": "",
    "onLoad": "",
    "title": "居宅サービス自己作成届出",
-   "isOpen": false,
+   "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -1634,7 +1642,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeDetail/getOnLoadData"
+     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeDetail/onLoad"
     },
     {
      "eventName": "onClickTodokedeNew",
@@ -1745,7 +1753,12 @@
      "postParameterPanelNames": "KyotakuJikoTodokedeKanryo"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeKanryo/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -1807,6 +1820,21 @@
    "validation": {},
    "events": [
     {
+     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "event": "onClick",
+     "transition": "届出一覧"
+    },
+    {
+     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
+     "transition": "届出一覧"
+    },
+    {
+     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectByDblClick",
+     "transition": "届出一覧"
+    },
+    {
      "fieldName": "btnTodokedeNew",
      "event": "onClick",
      "transition": ""
@@ -1822,8 +1850,8 @@
      "transition": ""
     },
     {
-     "fieldName": "dgRirekiList[btnSelect]",
-     "event": "onClick",
+     "fieldName": "dgKyotakuJikoTodokedeRirekiList",
+     "event": "onSelectByDblClick",
      "transition": ""
     },
     {
@@ -1843,6 +1871,11 @@
     },
     {
      "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "todokedeSaveBtn",
      "event": "onClick",
      "transition": ""
     }
@@ -1869,16 +1902,6 @@
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "KyotakuJikoTodokedeShoruiList",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "KyotakuJikoTodokedeShoruiMeisai",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
      "visibleDiv": "KyotakuJikoTodokedesha",
      "panelState": "visible",
      "fixedDiv": ""
@@ -1902,29 +1925,49 @@
      "visibleDiv": "KyotakuJikoTodokedeKaigoKihon",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyotakuJikoTodokedeShoruiJyokyo",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
    "events": [
     {
+     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
      "fieldName": "btnTodokedeNew",
      "event": "onClick",
-     "transition": "届出明細"
+     "transition": "明細登録"
     },
     {
      "fieldName": "btnTodokedeModify",
      "event": "onClick",
-     "transition": "届出明細"
+     "transition": "明細登録"
     },
     {
      "fieldName": "dgKyotakuJikoTodokedeRirekiList",
      "event": "onSelectBySelectButton",
-     "transition": "届出明細"
+     "transition": "明細登録"
     },
     {
-     "fieldName": "dgRirekiList[btnSelect]",
-     "event": "onClick",
-     "transition": "届出明細"
+     "fieldName": "dgKyotakuJikoTodokedeRirekiList",
+     "event": "onSelectByDblClick",
+     "transition": "明細登録"
     },
     {
      "fieldName": "btnTodokedeKakutei",
@@ -1945,6 +1988,11 @@
      "fieldName": "btnReturn",
      "event": "onClick",
      "transition": "該当者一覧"
+    },
+    {
+     "fieldName": "todokedeSaveBtn",
+     "event": "onClick",
+     "transition": "更新完了"
     }
    ]
   },
@@ -1969,16 +2017,6 @@
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "KyotakuJikoTodokedeShoruiList",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "KyotakuJikoTodokedeShoruiMeisai",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
      "visibleDiv": "KyotakuJikoTodokedesha",
      "panelState": "visible",
      "fixedDiv": ""
@@ -2002,29 +2040,49 @@
      "visibleDiv": "KyotakuJikoTodokedeKaigoKihon",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyotakuJikoTodokedeShoruiJyokyo",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
    "events": [
     {
+     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
      "fieldName": "btnTodokedeNew",
      "event": "onClick",
-     "transition": "明細登録"
+     "transition": ""
     },
     {
      "fieldName": "btnTodokedeModify",
      "event": "onClick",
-     "transition": "明細登録"
+     "transition": ""
     },
     {
      "fieldName": "dgKyotakuJikoTodokedeRirekiList",
      "event": "onSelectBySelectButton",
-     "transition": "明細登録"
+     "transition": ""
     },
     {
-     "fieldName": "dgRirekiList[btnSelect]",
-     "event": "onClick",
-     "transition": "明細登録"
+     "fieldName": "dgKyotakuJikoTodokedeRirekiList",
+     "event": "onSelectByDblClick",
+     "transition": ""
     },
     {
      "fieldName": "btnTodokedeKakutei",
@@ -2045,6 +2103,11 @@
      "fieldName": "btnReturn",
      "event": "onClick",
      "transition": "該当者一覧"
+    },
+    {
+     "fieldName": "todokedeSaveBtn",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -2052,11 +2115,37 @@
    "order": "4",
    "stateName": "更新完了",
    "showWizard": true,
-   "visibleDivs": [],
+   "visibleDivs": [
+    {
+     "visibleDiv": "KyotakuJikoTodokedeKanryo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyotakuJikoTodokedeKanryoMessage",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
    "supplementInfo": "",
    "supplementInfoPostParamData": [],
    "validation": {},
    "events": [
+    {
+     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
     {
      "fieldName": "btnTodokedeNew",
      "event": "onClick",
@@ -2073,8 +2162,8 @@
      "transition": ""
     },
     {
-     "fieldName": "dgRirekiList[btnSelect]",
-     "event": "onClick",
+     "fieldName": "dgKyotakuJikoTodokedeRirekiList",
+     "event": "onSelectByDblClick",
      "transition": ""
     },
     {
@@ -2094,6 +2183,11 @@
     },
     {
      "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "todokedeSaveBtn",
      "event": "onClick",
      "transition": ""
     }
