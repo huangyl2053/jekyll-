@@ -13,6 +13,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailInput.dgJutakuKaishuDetail_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiContentsPanelDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -31,20 +32,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class JutakuKaishuShinseiInfoPanel {
 
-    public ResponseData<JutakuKaishuShinseiInfoPanelDiv> onLoad(
-            JutakuKaishuShinseiInfoPanelDiv panel, JutakuKaishuShinseiListDiv panel1) {
-        ResponseData<JutakuKaishuShinseiInfoPanelDiv> response = new ResponseData<>();
-
-        if (is事前申請あり(panel1.getDgJutakuKaishuShinseiList().getClickedRowId())) {
-            panel.getJutakuKaishuShinseiContents().getBtnShowJizenShinsei().setDisplayNone(true);
-        } else {
-            panel.getJutakuKaishuShinseiContents().getBtnShowJizenShinsei().setDisplayNone(false);
-        }
-
-        response.data = panel;
-        return response;
-    }
-
     /**
      * 住宅改修費申請登録 支給一覧の行を選択してから事前申請内容の情報を表示する。（事前申請用ボタン押下）
      *
@@ -56,6 +43,11 @@ public class JutakuKaishuShinseiInfoPanel {
             JutakuKaishuShinseiInfoPanelDiv panel, JutakuKaishuShinseiListDiv panel1) {
         ResponseData<JutakuKaishuShinseiInfoPanelDiv> response = new ResponseData<>();
 
+        if (is事前申請あり(panel1.getDgJutakuKaishuShinseiList().getClickedRowId())) {
+            panel.getJutakuKaishuShinseiContents().getBtnShowJizenShinsei().setDisplayNone(true);
+        } else {
+            panel.getJutakuKaishuShinseiContents().getBtnShowJizenShinsei().setDisplayNone(false);
+        }
         //支給内容をクリア処理が行う
         setClearJutakuKaishuShinseiInfoPanelDiv(panel);
         //事前申請用のデータ
@@ -157,9 +149,25 @@ public class JutakuKaishuShinseiInfoPanel {
 
     }
 
+    /**
+     * 支払い方法ラジオボタンにより表示内容を変更する。
+     *
+     * @param panel
+     * @return response
+     */
+    public ResponseData<JutakuKaishuShinseiInfoPanelDiv> onClick_radPayMethod(
+            JutakuKaishuShinseiInfoPanelDiv panel, JutakuKaishuShinseiListDiv panel1) {
+        ResponseData<JutakuKaishuShinseiInfoPanelDiv> response = new ResponseData<>();
+
+        PaymentMethod.showSelectedPaymentMethod(panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo());
+
+        response.data = panel;
+        return response;
+    }
     /*
      * 住宅改修費事前申請登録   事前申請内容の情報を表示する。
      */
+
     private void setInfoData(JutakuKaishuShinseiInfoPanelDiv panel, String ymlDataName) {
 
         ////////////////////////////////////////
@@ -429,6 +437,8 @@ public class JutakuKaishuShinseiInfoPanel {
      */
     private void setShinseiKozaInfo(JutakuKaishuShinseiInfoPanelDiv panel, String ymlDataName) {
 
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
+
         //TO DO  JutakuData1.xml ①
         List<HashMap> ymlData = ymlData(ymlDataName);
 
@@ -522,7 +532,7 @@ public class JutakuKaishuShinseiInfoPanel {
 
     private boolean is事前申請あり(int rowId) {
 //デモでは事前申請ありデータはrowId=0で固定にする。
-        return (rowId == 0);
+        return (rowId == -1);
     }
     /*
      * 今回の支払状況の値を設定します。

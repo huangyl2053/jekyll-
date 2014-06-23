@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.dbc0700011;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.divcontroller.controller.PaymentMethod;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailInput.JutakuKaishuDetailInputDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailInput.dgJutakuKaishuDetail_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiContentsPanelDiv;
@@ -57,27 +58,18 @@ public class JutakuKaishuJizenShinseiContentsPanel {
     }
 
     /**
-     * 支払い方法ラジオボタンが受領委任払いを選択したとき、受領委任情報を表示する。
+     * 支払い方法ラジオボタンにより表示内容を変更する。
      *
      * @param panel
-     * @return
+     * @return response
      */
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_radPayMethod(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
         ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
 
-        if (isPayToJuryoinin(panel.getJutakuKaishuJizenShinseiKoza().getRadPayMethod().getSelectedValue())) {
-            panel.getJutakuKaishuJizenShinseiKoza().getJuryoininJoho().setDisplayNone(false);
-            panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().setTitle(new RString("口座情報"));
-        } else {
-            panel.getJutakuKaishuJizenShinseiKoza().getJuryoininJoho().setDisplayNone(true);
-        }
+        PaymentMethod.showSelectedPaymentMethod(panel.getJutakuKaishuJizenShinseiKoza());
+
         response.data = panel;
         return response;
-
-    }
-
-    private boolean isPayToJuryoinin(RString value) {
-        return value.equals(new RString("受領委任払い"));
     }
 
     /*
@@ -188,6 +180,8 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      口座振替申請情報（UR)の初期値をセットします。
      */
     private void setShinseiKozaInfo(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
+
+        panel.getJutakuKaishuJizenShinseiKoza().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
 
         /////////////////////////////////////////////////////////////////////////////////////////
         //JutakuData.xml Read　②

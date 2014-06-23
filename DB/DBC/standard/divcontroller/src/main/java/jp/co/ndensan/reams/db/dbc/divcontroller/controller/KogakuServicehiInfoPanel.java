@@ -44,17 +44,17 @@ public class KogakuServicehiInfoPanel {
     public ResponseData<KogakuServicehiInfoPanelDiv> onLoad(KogakuServicehiInfoPanelDiv panel) {
         ResponseData<KogakuServicehiInfoPanelDiv> response = new ResponseData<>();
 
-//        //高額介護サービス費情報
-//        setKogakuServicehiInfo(panel);
-//
-//        //申請者情報 TAB
-//        setKogakuServicehiInfoPanelShinseisha(panel);
-//        //口座情報 TAB
-//        setKogakuServicehiInfoPanelPaymentMethod(panel);
-//        //高額決定情報 TAB
-//        KogakuServiceDetaildgJudgementinfo(panel);
-//        //高額決定情報 TAB     dgJudgementResult
-//        KogakuServiceDetaildgJudgementResult(panel);
+        //高額介護サービス費情報
+        setKogakuServicehiInfo(panel);
+
+        //申請者情報 TAB
+        setKogakuServicehiInfoPanelShinseisha(panel);
+        //口座情報 TAB
+        setKogakuServicehiInfoPanelPaymentMethod(panel);
+        //高額決定情報 TAB
+        KogakuServiceDetaildgJudgementinfo(panel);
+        //高額決定情報 TAB     dgJudgementResult
+        KogakuServiceDetaildgJudgementResult(panel);
         response.data = panel;
         return response;
     }
@@ -185,28 +185,28 @@ public class KogakuServicehiInfoPanel {
                 getKozaPayment().getTxtKozaMeiginin().setValue(new RString(
                                 ymlData.get(0).get("kozaMeiginin").toString()));
 
-//        //窓口払い
-//        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
-//                getMadoguchiPayment().getTxtShiharaiBasho().setValue(new RString(
-//                                ymlData.get(0).get("shiharaiBasho").toString()));
-//        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
-//                getMadoguchiPayment().getTxtShiharaiKaishiDate().setValue(new RDate(
-//                                ymlData.get(0).get("shiharaiKaishiDate").toString()));
-//        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
-//                getMadoguchiPayment().getTxtShiharaiKaishiDay().setValue(new RString(
-//                                ymlData.get(0).get("shiharaiKaishiDay").toString()));
-////        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
-////                getMadoguchiPayment().getTxtShiharaiKaishiTime().setValue(
-////                        RTime.of(Integer.parseInt(ymlData.get(0).get("shiharaiKaishiTime").toString())));
-//        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
-//                getMadoguchiPayment().getTxtShiharaiShuryoDate().setValue(new RDate(
-//                                ymlData.get(0).get("shiharaiShuryoDate").toString()));
-//        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
-//                getMadoguchiPayment().getTxtShiharaiShuryoDay().setValue(new RString(
-//                                ymlData.get(0).get("shiharaiShuryoDay").toString()));
-////        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
-////                getMadoguchiPayment().getTxtShiharaiShuryoTime().setValue(
-////                        RTime.of(Long.parseLong(ymlData.get(0).get("shiharaiShuryoTime").toString())));
+        //窓口払い
+        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
+                getMadoguchiPayment().getTxtShiharaiBasho().setValue(new RString(
+                                ymlData.get(0).get("shiharaiBasho").toString()));
+        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
+                getMadoguchiPayment().getTxtShiharaiKaishiDate().setValue(new RDate(
+                                ymlData.get(0).get("shiharaiKaishiDate").toString()));
+        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
+                getMadoguchiPayment().getTxtShiharaiKaishiDay().setValue(new RString(
+                                ymlData.get(0).get("shiharaiKaishiDay").toString()));
+        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
+                getMadoguchiPayment().getTxtShiharaiKaishiTime().setValue(
+                        RTime.of(Integer.parseInt(ymlData.get(0).get("shiharaiKaishiTime").toString())));
+        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
+                getMadoguchiPayment().getTxtShiharaiShuryoDate().setValue(new RDate(
+                                ymlData.get(0).get("shiharaiShuryoDate").toString()));
+        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
+                getMadoguchiPayment().getTxtShiharaiShuryoDay().setValue(new RString(
+                                ymlData.get(0).get("shiharaiShuryoDay").toString()));
+        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
+                getMadoguchiPayment().getTxtShiharaiShuryoTime().setValue(
+                        RTime.of(Long.parseLong(ymlData.get(0).get("shiharaiShuryoTime").toString())));
     }
 
     //高額決定情報 TAB
@@ -414,11 +414,11 @@ public class KogakuServicehiInfoPanel {
                         getTplKoza().getPaymentMethod().getKozaPayment().setVisible(true);
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                         getTplKoza().getPaymentMethod().getKozaPayment().setDisplayNone(true);
-//                //窓口払い　 非表示に設定する
-//                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-//                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setVisible(true);
-//                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-//                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setDisplayNone(true);
+                //窓口払い　 非表示に設定する
+                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setVisible(true);
+                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setDisplayNone(true);
 
                 //口座払い　→　　受領委任払い・窓口払い　非表示に設定する
                 break;
@@ -433,11 +433,11 @@ public class KogakuServicehiInfoPanel {
                         getTplKoza().getPaymentMethod().getKozaPayment().setVisible(true);
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                         getTplKoza().getPaymentMethod().getKozaPayment().setDisplayNone(false);
-//                //窓口払い　 非表示に設定する
-//                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-//                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setVisible(true);
-//                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-//                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setDisplayNone(true);
+                //窓口払い　 非表示に設定する
+                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setVisible(true);
+                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setDisplayNone(true);
 
                 //窓口払い　→　口座払い・受領委任払い　非表示に設定する
                 break;
@@ -452,11 +452,11 @@ public class KogakuServicehiInfoPanel {
                         getTplKoza().getPaymentMethod().getKozaPayment().setVisible(true);
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                         getTplKoza().getPaymentMethod().getKozaPayment().setDisplayNone(true);
-//                //窓口払い　 表示に設定する
-//                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-//                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setVisible(true);
-//                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-//                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setDisplayNone(false);
+                //窓口払い　 表示に設定する
+                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setVisible(true);
+                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setDisplayNone(false);
                 break;
         }
     }
@@ -481,11 +481,11 @@ public class KogakuServicehiInfoPanel {
             panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                     getTplKoza().getPaymentMethod().getKozaPayment().setDisplayNone(false);
 
-//                //窓口払い　 非表示に設定する
-//                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-//                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setVisible(true);
-//                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-//                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setDisplayNone(true);
+            //窓口払い　 非表示に設定する
+            panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                    getTplKoza().getPaymentMethod().getMadoguchiPayment().setVisible(true);
+            panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                    getTplKoza().getPaymentMethod().getMadoguchiPayment().setDisplayNone(true);
         }
 
     }
@@ -493,5 +493,4 @@ public class KogakuServicehiInfoPanel {
     private List<HashMap> ymlData(String ymlDataName) {
         return YamlLoader.FOR_DBC.loadAsList(new RString(ymlDataName));
     }
-
 }

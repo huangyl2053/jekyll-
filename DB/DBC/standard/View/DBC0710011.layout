@@ -32,7 +32,10 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClick_BtnToSearch": ""
+     "onClick_BtnToSearch": "",
+     "displayNone_txtTsuchishoNo": false,
+     "displayNone_ddlFukaNendo": false,
+     "displayNone_SearchCriteriaDetail": false
     },
     {
      "fieldName": "HihokenshaSearchResult",
@@ -1538,7 +1541,9 @@
        "dialogCancelEventNameForDialog": "",
        "KozaPayment_title": "",
        "onClick_radPayMethod": "onClick_radPayMethod",
-       "Juryoinin_displayNone": true
+       "Juryoinin_displayNone": true,
+       "Madoguchi_displayNone": true,
+       "Koza_displayNone": false
       }
      ],
      "controlType": "Panel",
@@ -1750,7 +1755,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": ""
+     "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiInfoPanel/onLoad"
     },
     {
      "eventName": "onClick_btnShowDetail",
@@ -1767,6 +1772,10 @@
     {
      "eventName": "onClick_btnModifyDetail",
      "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiInfoPanel/onClick_btnModifyDetail"
+    },
+    {
+     "eventName": "onClick_radPayMethod",
+     "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiInfoPanel/onClick_radPayMethod"
     }
    ],
    "hiddenInput": [],
