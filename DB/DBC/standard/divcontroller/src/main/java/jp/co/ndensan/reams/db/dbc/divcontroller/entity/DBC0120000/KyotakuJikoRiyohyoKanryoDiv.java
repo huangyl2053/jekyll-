@@ -5,23 +5,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0120000;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.SearchResultOfHihokenshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigokanryomessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KyotakuJikoRiyohyoList のクラスファイル 
+ * KyotakuJikoRiyohyoKanryo のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KyotakuJikoRiyohyoListDiv extends Panel {
+public class KyotakuJikoRiyohyoKanryoDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("KyotakuJikoRiyohyoHihokenshaList")
-    private SearchResultOfHihokenshaDiv KyotakuJikoRiyohyoHihokenshaList;
+    @JsonProperty("KyotakuJikoRiyohyoKanryoMessage")
+    private KaigoKanryoMessageDiv KyotakuJikoRiyohyoKanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -29,14 +29,14 @@ public class KyotakuJikoRiyohyoListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("KyotakuJikoRiyohyoHihokenshaList")
-    public SearchResultOfHihokenshaDiv getKyotakuJikoRiyohyoHihokenshaList() {
-        return KyotakuJikoRiyohyoHihokenshaList;
+    @JsonProperty("KyotakuJikoRiyohyoKanryoMessage")
+    public KaigoKanryoMessageDiv getKyotakuJikoRiyohyoKanryoMessage() {
+        return KyotakuJikoRiyohyoKanryoMessage;
     }
 
-    @JsonProperty("KyotakuJikoRiyohyoHihokenshaList")
-    public void setKyotakuJikoRiyohyoHihokenshaList(SearchResultOfHihokenshaDiv KyotakuJikoRiyohyoHihokenshaList) {
-        this.KyotakuJikoRiyohyoHihokenshaList=KyotakuJikoRiyohyoHihokenshaList;
+    @JsonProperty("KyotakuJikoRiyohyoKanryoMessage")
+    public void setKyotakuJikoRiyohyoKanryoMessage(KaigoKanryoMessageDiv KyotakuJikoRiyohyoKanryoMessage) {
+        this.KyotakuJikoRiyohyoKanryoMessage=KyotakuJikoRiyohyoKanryoMessage;
     }
 
 }

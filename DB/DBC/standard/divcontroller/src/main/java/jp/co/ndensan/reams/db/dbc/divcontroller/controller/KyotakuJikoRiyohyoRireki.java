@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 public class KyotakuJikoRiyohyoRireki {
 
     private List<HashMap> getYaml() {
-        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc0120000/KyotakuJikoRiyohyoRireki.yml"));
+        return YamlLoader.DBC.loadAsList(new RString("dbc0120000/KyotakuJikoRiyohyoRireki.yml"));
     }
 
     /**
@@ -47,44 +47,19 @@ public class KyotakuJikoRiyohyoRireki {
      * 履歴一覧のデータ設定
      */
     private void setRirekiList(KyotakuJikoRiyohyoRirekiDiv panel) {
-//        Button btn = new Button();
         ServiceRiyohyoRirekiListDiv rirekiList = panel.getKyotakuJikoRiyohyoRirekiList();
-//        add履歴(rirekiList, create履歴(btn, "", "20140601", "平26.06.01", "変更", "平26.06.01", "", "1111111111:電算介護調査センター"));
-//        add履歴(rirekiList, create履歴(btn, "", "20130501", "平25.05.01", "新規", "平25.05.01", "平26.04.30", "1111111111:電算介護調査センター"));
         List<dgServiceRiyohyoRirekiList_Row> dgList = rirekiList.getDgServiceRiyohyoRirekiList().getDataSource();
         dgList.clear();
         for (int index = 0; index < 2; index++) {
             dgList.add(create履歴(index));
         }
-//
-//        dgList.add(addRow);
         Collections.sort(dgList, new DateComparator());
         rirekiList.getDgServiceRiyohyoRirekiList().setDataSource(dgList);
     }
 
-//    private void add履歴(ServiceRiyohyoRirekiListDiv rirekiList, dgServiceRiyohyoRirekiList_Row addRow) {
-//        List<dgServiceRiyohyoRirekiList_Row> dgList = rirekiList.getDgServiceRiyohyoRirekiList().getDataSource();
-//        dgList.add(addRow);
-//        Collections.sort(dgList, new DateComparator());
-//        rirekiList.getDgServiceRiyohyoRirekiList().setDataSource(dgList);
-////        SearchResultOfHihokenshaDiv hihokensha = panel.getKyotakuKeikakuTodokedeHihokenshaList();
-////        List<dgSearchResult_Row> dgList = hihokensha.getDgSearchResult().getDataSource();
-////        dgList.clear();
-////        for (int index = 1; index < 3; index++) {
-////            dgList.add(createHihokenshaData(index));
-////        }
-////        hihokensha.getDgSearchResult().setDataSource(dgList);
-//    }
     /**
      * 履歴一覧の届出日を降順でソートするためのクラス。
      */
-//    private static class DateComparator implements Comparator<dgServiceRiyohyoRirekiList_Row> {
-//
-//        @Override
-//        public int compare(dgServiceRiyohyoRirekiList_Row o1, dgServiceRiyohyoRirekiList_Row o2) {
-//            return o2.getTxtTodokedeYMDInvisible().getValue().compareTo(o1.getTxtTodokedeYMDInvisible().getValue());
-//        }
-//    }
     private static class DateComparator implements Comparator<dgServiceRiyohyoRirekiList_Row> {
 
         @Override
@@ -94,13 +69,8 @@ public class KyotakuJikoRiyohyoRireki {
         }
     }
 
-//    private dgServiceRiyohyoRirekiList_Row create履歴(Button btn, String txtJotai, String txtTodokedeYMDInvisible, String txtTodokedeYMD,
-//            String txtTodokedeKubun, String txtTekiyoKaishiYMD, String txtTekiyoShuryoYMD, String txtIraiJigyosha) {
     private dgServiceRiyohyoRirekiList_Row create履歴(int index) {
         ControlGenerator cg = new ControlGenerator(getYaml().get(index));
-//    public dgServiceRiyohyoRirekiList_Row(Button btnSelect, RString txtJotai,
-//        RString txtTodokedeYMD, RString txtTodokedeKubun,
-//        RString txtTekiyoKaishiYMD, RString txtTekiyoShuryoYMD, RString txtIraiJigyosha) {
         dgServiceRiyohyoRirekiList_Row row = new dgServiceRiyohyoRirekiList_Row(
                 new Button(),
                 RString.EMPTY,
@@ -114,24 +84,6 @@ public class KyotakuJikoRiyohyoRireki {
         row.setTxtTodokedeKubun(cg.getAsRString("届出区分"));
         row.setTxtTekiyoKaishiYMD(cg.getAsRString("計画適用期間開始日"));
         row.setTxtTekiyoShuryoYMD(cg.getAsRString("計画適用期間終了日"));
-//  状態: !!str ""
-//  届出日: "平26.06.01"
-//  届出区分: !!str "変更"
-//  計画適用期間開始日: !!str "平26.06.01"
-//  計画適用期間終了日: !!str ""
         return row;
-
-//        TextBoxDate txtBoxTodokedeYMDInvisible = new TextBoxDate();
-//        txtBoxTodokedeYMDInvisible.setValue(new RDate(txtTodokedeYMDInvisible));
-//        return new dgServiceRiyohyoRirekiList_Row(
-//                btn,
-//                new RString(txtJotai),
-//                //                txtBoxTodokedeYMDInvisible,
-//                new RString(txtTodokedeYMD),
-//                new RString(txtTodokedeKubun),
-//                new RString(txtTekiyoKaishiYMD),
-//                new RString(txtTekiyoShuryoYMD),
-//                new RString(txtIraiJigyosha)
-//        );
     }
 }

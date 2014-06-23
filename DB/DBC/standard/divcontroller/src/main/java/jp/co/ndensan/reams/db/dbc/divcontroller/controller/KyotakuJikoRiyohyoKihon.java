@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 居宅サービス計画作成依頼届出情報登録の基本情報のコントロールです。
  *
  * @author N8187 久保田 英男
  */

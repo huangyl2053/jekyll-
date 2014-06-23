@@ -32,7 +32,311 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClick_BtnToSearch": ""
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "onClick_BtnToSearch": "onClickBtnToSearch",
+     "displayNone_txtTsuchishoNo": false,
+     "displayNone_ddlFukaNendo": false,
+     "displayNone_SearchCriteriaDetail": false
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoHihokenshaList",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyotakuJikoRiyohyoHihokenshaList",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "SearchResultOfHihokensha",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "onClickBtnToResearch": "onClickBtnToResearch",
+     "gridSetting": {
+      "rowHeight": 50,
+      "isMultiSelectable": false,
+      "isShowHeader": true,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "isShowSelectButtonColumn": true,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "",
+       "headerHeight": 0
+      },
+      "columns": [
+       {
+        "columnName": "",
+        "dataName": "btnToDecide",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": false,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "確定",
+         "onClick": "",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "btnToDecide"
+       },
+       {
+        "columnName": "被保番号",
+        "dataName": "hihokenshaNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "hihokenshaNo"
+       },
+       {
+        "columnName": "識別コード",
+        "dataName": "shikibetsuCode",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "shikibetsuCode"
+       },
+       {
+        "columnName": "被保険者区分",
+        "dataName": "hihokenshaKubun",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "hihokenshaKubun"
+       },
+       {
+        "columnName": "氏名",
+        "dataName": "shimei",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "shimei"
+       },
+       {
+        "columnName": "カナ氏名",
+        "dataName": "kanaShimsei",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "kanaShimsei"
+       },
+       {
+        "columnName": "氏名",
+        "dataName": "shimeiAndKanaShimsei",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "kanaShimsei"
+       },
+       {
+        "columnName": "性別",
+        "dataName": "gender",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "gender"
+       },
+       {
+        "columnName": "生年月日",
+        "dataName": "birthDay",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 110,
+        "visible": true,
+        "cellType": 6,
+        "cellDetails": {
+         "cellType": 6,
+         "ymdKubun": 2,
+         "displayFormat": 3,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "birthDay"
+       },
+       {
+        "columnName": "郵便番号",
+        "dataName": "yubinNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "yubinNo"
+       },
+       {
+        "columnName": "住所",
+        "dataName": "jusho",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 300,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "jusho"
+       },
+       {
+        "columnName": "個人番号",
+        "dataName": "kojinNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 120,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "kojinNo"
+       },
+       {
+        "columnName": "住民種別",
+        "dataName": "juminShubetsu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "juminShubetsu"
+       },
+       {
+        "columnName": "世帯コード",
+        "dataName": "setaiCode",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "setaiCode"
+       }
+      ]
+     }
     }
    ],
    "controlType": "Panel",
@@ -65,6 +369,14 @@
     {
      "eventName": "onLoad",
      "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyoSearch/onLoad"
+    },
+    {
+     "eventName": "onClickBtnToSearch",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyoSearch/onClickBtnToSearch"
+    },
+    {
+     "eventName": "onClickBtnToResearch",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyoSearch/onClickBtnToResearch"
     }
    ],
    "hiddenInput": [],
@@ -73,99 +385,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
-  },
-  {
-   "fieldName": "KyotakuJikoRiyohyoList",
-   "items": [
-    {
-     "fieldName": "KyotakuJikoRiyohyoHihokenshaList",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "KyotakuJikoRiyohyoHihokenshaList",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "SearchResultOfHihokensha",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "onClickBtnToResearch": ""
-    }
-   ],
-   "controlType": "Panel",
-   "width": "G12",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "selectControlID": "KyotakuJikoRiyohyoList",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "onLoad": "",
-   "title": "(共通) DBZ0010002 該当者一覧",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KyotakuJikoRiyohyoList"
-    }
-   ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyoList/onLoad"
-    }
-   ],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
+   "height": "Auto",
    "eraseBorderTop": false,
    "eraseBorderBottom": false,
    "eraseBorderRight": false,
-   "eraseBorderLeft": false,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false,
-   "height": "Auto"
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "KyotakuJikoRiyohyoKihon",
@@ -198,6 +428,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
      "atenaInfo_eraseBorderTop": true,
@@ -265,15 +497,17 @@
      "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
      "backGroundColor": 0,
      "btnHihoRireki_visible": true,
      "btnNinteiRireki_visible": true
@@ -317,16 +551,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "KyotakuJikoRiyohyoRireki",
@@ -359,6 +594,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "RirekiListGridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -406,25 +643,6 @@
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "btnSelect"
-       },
-       {
-        "columnName": "",
-        "dataName": "txtTodokedeYMDInvisible",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 0,
-        "visible": false,
-        "cellType": 6,
-        "cellDetails": {
-         "cellType": 6,
-         "ymdKubun": 2,
-         "displayFormat": 5,
-         "onChange": ""
-        },
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "txtTodokedeYMDInvisible"
        },
        {
         "columnName": "届出日",
@@ -519,7 +737,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -560,16 +779,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "KyotakuJikoRiyohyo",
@@ -602,6 +822,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "BeppyoMeisaiVisible": true,
      "BeppyoMeisaiDisplayNone": false,
      "BeppyoGokeiVisible": true,
@@ -2063,7 +2285,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "txtBeppyoListSelectIndex",
@@ -2186,25 +2409,26 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
-   "fieldName": "KyotsuPanel",
+   "fieldName": "KyotakuJikoRiyohyoKanryo",
    "items": [
     {
-     "fieldName": "btnRiyohyoSave",
+     "fieldName": "KyotakuJikoRiyohyoKanryoMessage",
      "items": [],
-     "controlType": "Button",
-     "width": "180",
+     "controlType": "CommonChildDiv",
+     "width": "XS",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -2212,21 +2436,25 @@
      "nextFocusFieldName": "",
      "wrap": false,
      "dependencies": [],
-     "float": 2,
+     "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnRiyohyoSave",
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyotakuJikoRiyohyoKanryoMessage",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "サービス利用票を保存する",
-     "onClick": "",
-     "icon": 0,
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "KaigoKanryoMessage",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "KanryoMessage_width": "G12"
     }
    ],
    "controlType": "Panel",
@@ -2243,29 +2471,31 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
-   "selectControlID": "KyotsuPanel",
+   "selectControlID": "KyotakuJikoRiyohyoKanryo",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
    "title": "",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "KyotsuPanel"
+     "postParameterPanelNames": "KyotakuJikoRiyohyoKanryo"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyoKanryo/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
@@ -2304,72 +2534,12 @@
     {
      "visibleDiv": "KyotakuJikoRiyohyoSearch",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "KyotakuJikoRiyohyoHihokenshaFinder",
      "panelState": "visible",
      "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KyotakuJikoRiyohyoList",
-     "panelState": "close",
-     "fixedDiv": "No"
-    }
-   ],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "KyotakuJikoRiyohyoHihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": "該当者一覧"
-    },
-    {
-     "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnGaitoshaReturn",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "2",
-   "stateName": "該当者一覧",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "KyotakuJikoRiyohyoSearch",
-     "panelState": "close",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "KyotakuJikoRiyohyoList",
-     "panelState": "visible",
-     "fixedDiv": ""
     },
     {
      "visibleDiv": "KyotakuJikoRiyohyoHihokenshaList",
@@ -2380,27 +2550,22 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KyotakuJikoRiyohyoHihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": "該当者検索"
-    },
-    {
      "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
      "event": "onClick",
-     "transition": "履歴"
+     "transition": "履歴一覧"
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
+     "transition": "履歴一覧"
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectByDblClick",
+     "transition": "履歴一覧"
     },
     {
      "fieldName": "btnGaitoshaReturn",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
      "event": "onClick",
      "transition": ""
     },
@@ -2410,15 +2575,25 @@
      "transition": ""
     },
     {
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
      "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnRiyohyoSave",
      "event": "onClick",
      "transition": ""
     }
    ]
   },
   {
-   "order": "3",
-   "stateName": "履歴",
+   "order": "2",
+   "stateName": "履歴一覧",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -2450,18 +2625,18 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KyotakuJikoRiyohyoHihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
      "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectByDblClick",
      "transition": ""
     },
     {
@@ -2470,25 +2645,30 @@
      "transition": "該当者検索"
     },
     {
-     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
-     "event": "onClick",
-     "transition": "サービス利用票"
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
+     "event": "onSelectBySelectButton",
+     "transition": "利用票登録"
     },
     {
      "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
-     "event": "onSelectBySelectButton",
-     "transition": "サービス利用票"
+     "event": "onSelectByDblClick",
+     "transition": "利用票登録"
     },
     {
      "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnRiyohyoSave",
      "event": "onClick",
      "transition": ""
     }
    ]
   },
   {
-   "order": "4",
-   "stateName": "サービス利用票",
+   "order": "3",
+   "stateName": "利用票登録",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -2520,27 +2700,22 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KyotakuJikoRiyohyoHihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnGaitoshaReturn",
-     "event": "onClick",
+     "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
      "transition": ""
     },
     {
-     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
      "event": "onClick",
      "transition": ""
     },
@@ -2550,9 +2725,81 @@
      "transition": ""
     },
     {
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
      "fieldName": "btnReturn",
      "event": "onClick",
-     "transition": "履歴"
+     "transition": "履歴一覧"
+    },
+    {
+     "fieldName": "btnRiyohyoSave",
+     "event": "onClick",
+     "transition": "更新完了"
+    }
+   ]
+  },
+  {
+   "order": "4",
+   "stateName": "更新完了",
+   "showWizard": true,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoKanryo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoKanryoMessage",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
+     "event": "onSelectBySelectButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnRiyohyoSave",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   }
@@ -2567,9 +2814,6 @@
   ],
   [
    "KyotakuJikoRiyohyoHihokenshaFinder"
-  ],
-  [
-   "KyotakuJikoRiyohyoList"
   ],
   [
    "KyotakuJikoRiyohyoHihokenshaList"
@@ -2596,12 +2840,16 @@
    "KyotakuJikoRiyohyoInfo"
   ],
   [
-   "KyotsuPanel"
+   "KyotakuJikoRiyohyoKanryo"
+  ],
+  [
+   "KyotakuJikoRiyohyoKanryoMessage"
   ]
  ],
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "riyohyoSave",
@@ -2612,7 +2860,7 @@
       "fieldName": "btnRiyohyoSave",
       "items": [],
       "controlType": "CommonButtonFree",
-      "width": "S",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -2628,13 +2876,14 @@
       "selectControlID": "btnRiyohyoSave",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "サービス利用票を保存する",
+      "text": "利用票を保存する",
       "onClick": "",
       "icon": 0,
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "heightTextBoxMatches": false,
       "prefixText": "",
       "suffixText": ""
      }
@@ -2642,7 +2891,7 @@
    ],
    "states": [
     {
-     "state": "サービス利用票"
+     "state": "利用票登録"
     }
    ],
    "isFinishButtonOnTheRight": false
