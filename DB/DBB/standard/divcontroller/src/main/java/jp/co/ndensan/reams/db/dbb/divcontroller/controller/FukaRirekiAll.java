@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.FukaRirekiAllD
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.dgFukaRirekiAll_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -89,7 +91,17 @@ public class FukaRirekiAll {
      * @param fukaRirekiAllDiv 
      */
     private void lordData(FukaRirekiAllDiv div, RString tsuchishoNo) {
-        List formatList = new ArrayList();
+        
+        loadAtena();
+        
+        loadFukaKihon();
+                
+        loadFukarireki(div, tsuchishoNo);
+
+    }
+    
+    private void loadFukarireki(FukaRirekiAllDiv div, RString tsuchishoNo) {
+               List formatList = new ArrayList();
         
         List yamlList = getYamlList(tsuchishoNo);
         
@@ -97,7 +109,15 @@ public class FukaRirekiAll {
             formatList.add(getFormatData((List)yamlList.get(i)));
         }
         
-        setRirekiAll(div, formatList);
+        setRirekiAll(div, formatList); 
+    }
+    
+    private void loadAtena() {
+        
+    }
+
+    private void loadFukaKihon() {
+        
     }
 
     /**

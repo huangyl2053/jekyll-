@@ -41,7 +41,7 @@ public class FukaRireki {
         panelActivatedFukaRireki(rirekiDiv);
 
         lordData(rirekiDiv, rirekiAllDiv, "click");
-
+        
         return returnResponse(rirekiDiv);
     }
     
@@ -151,7 +151,7 @@ public class FukaRireki {
             
             if (key1.contains(cg.getAsRString("通知書番号")) 
                     & key2.contains(cg.getAsRString("賦課年度")) 
-                    & key3.contains(cg.getAsRString("調定年度"))
+//                    & key3.contains(cg.getAsRString("調定年度"))
                     & !cg.get("状態").toString().equals("発行")) {
                 
                 List getYamlDatalist = getYamaData(cg);

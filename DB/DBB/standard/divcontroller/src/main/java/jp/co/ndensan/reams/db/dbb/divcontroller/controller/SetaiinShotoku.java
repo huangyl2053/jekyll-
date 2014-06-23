@@ -34,7 +34,7 @@ public class SetaiinShotoku {
     private static final RString SETAISHOTOKU = new RString("SetaiShotoku.yml");
     private static final RString OTHER = new RString("other.yml");    
     
-    public ResponseData<SetaiinShotokuDiv> onClick_btnSetaiinnShotoku(SetaiinShotokuDiv div, FukaRirekiDiv rirekiDiv) {
+    public ResponseData<SetaiinShotokuDiv> onClick_btnSetaiinShotoku(SetaiinShotokuDiv div, FukaRirekiDiv rirekiDiv) {
 
         div.setDisplayNone(false);
         
@@ -252,6 +252,8 @@ public class SetaiinShotoku {
         
         buf.delete(0, buf.length());
         buf.append((RString)dataGrid.get(4));
+        //生年月日と性別の間にスペースを入れる
+        buf.append("　");
         buf.append((RString)dataGrid.get(5));
         buf.append("<br>");
         buf.append((RString)dataGrid.get(6));

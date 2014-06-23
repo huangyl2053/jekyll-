@@ -27,7 +27,7 @@ public class FukaShokaiGrandson {
         
         List key = getRirekiKey(rirekiDiv, "select");
         loadData(div, key);
-
+        
         return returnResponse(div);
     }
 
