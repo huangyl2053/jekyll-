@@ -24,12 +24,10 @@ public class N2HihokenshaDiv extends Panel {
      */
     @JsonProperty("Iryohokensha")
     private IryohokenshaDiv Iryohokensha;
-    @JsonProperty("lblTokuteiShippei")
-    private Label lblTokuteiShippei;
     @JsonProperty("txtTokuteiShippei")
     private TextBox txtTokuteiShippei;
-    @JsonProperty("imgToSearchTokuteiShippei")
-    private StaticImage imgToSearchTokuteiShippei;
+    @JsonProperty("btnSearchTokuteiShippei")
+    private ButtonDialog btnSearchTokuteiShippei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -47,16 +45,6 @@ public class N2HihokenshaDiv extends Panel {
         this.Iryohokensha=Iryohokensha;
     }
 
-    @JsonProperty("lblTokuteiShippei")
-    public Label getLblTokuteiShippei() {
-        return lblTokuteiShippei;
-    }
-
-    @JsonProperty("lblTokuteiShippei")
-    public void setLblTokuteiShippei(Label lblTokuteiShippei) {
-        this.lblTokuteiShippei=lblTokuteiShippei;
-    }
-
     @JsonProperty("txtTokuteiShippei")
     public TextBox getTxtTokuteiShippei() {
         return txtTokuteiShippei;
@@ -67,14 +55,14 @@ public class N2HihokenshaDiv extends Panel {
         this.txtTokuteiShippei=txtTokuteiShippei;
     }
 
-    @JsonProperty("imgToSearchTokuteiShippei")
-    public StaticImage getImgToSearchTokuteiShippei() {
-        return imgToSearchTokuteiShippei;
+    @JsonProperty("btnSearchTokuteiShippei")
+    public ButtonDialog getBtnSearchTokuteiShippei() {
+        return btnSearchTokuteiShippei;
     }
 
-    @JsonProperty("imgToSearchTokuteiShippei")
-    public void setImgToSearchTokuteiShippei(StaticImage imgToSearchTokuteiShippei) {
-        this.imgToSearchTokuteiShippei=imgToSearchTokuteiShippei;
+    @JsonProperty("btnSearchTokuteiShippei")
+    public void setBtnSearchTokuteiShippei(ButtonDialog btnSearchTokuteiShippei) {
+        this.btnSearchTokuteiShippei=btnSearchTokuteiShippei;
     }
 
 }

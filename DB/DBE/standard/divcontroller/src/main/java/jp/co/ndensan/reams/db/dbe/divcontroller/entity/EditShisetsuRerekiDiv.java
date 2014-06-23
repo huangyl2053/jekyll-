@@ -21,20 +21,14 @@ public class EditShisetsuRerekiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblShisetsuName")
-    private Label lblShisetsuName;
     @JsonProperty("txtShisetsuName")
     private TextBox txtShisetsuName;
-    @JsonProperty("imgToSearchShisetsu")
-    private StaticImage imgToSearchShisetsu;
-    @JsonProperty("lblStartDate")
-    private Label lblStartDate;
-    @JsonProperty("txtStartDate")
-    private TextBoxDate txtStartDate;
-    @JsonProperty("lblEndDate")
-    private Label lblEndDate;
-    @JsonProperty("txtEndDate")
-    private TextBoxDate txtEndDate;
+    @JsonProperty("btnSearchShisetsu")
+    private ButtonDialog btnSearchShisetsu;
+    @JsonProperty("txtShisetsuNyushoDate")
+    private TextBoxFlexibleDate txtShisetsuNyushoDate;
+    @JsonProperty("txtShisetsuTaishoDate")
+    private TextBoxFlexibleDate txtShisetsuTaishoDate;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -42,16 +36,6 @@ public class EditShisetsuRerekiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblShisetsuName")
-    public Label getLblShisetsuName() {
-        return lblShisetsuName;
-    }
-
-    @JsonProperty("lblShisetsuName")
-    public void setLblShisetsuName(Label lblShisetsuName) {
-        this.lblShisetsuName=lblShisetsuName;
-    }
-
     @JsonProperty("txtShisetsuName")
     public TextBox getTxtShisetsuName() {
         return txtShisetsuName;
@@ -62,54 +46,34 @@ public class EditShisetsuRerekiDiv extends Panel {
         this.txtShisetsuName=txtShisetsuName;
     }
 
-    @JsonProperty("imgToSearchShisetsu")
-    public StaticImage getImgToSearchShisetsu() {
-        return imgToSearchShisetsu;
+    @JsonProperty("btnSearchShisetsu")
+    public ButtonDialog getBtnSearchShisetsu() {
+        return btnSearchShisetsu;
     }
 
-    @JsonProperty("imgToSearchShisetsu")
-    public void setImgToSearchShisetsu(StaticImage imgToSearchShisetsu) {
-        this.imgToSearchShisetsu=imgToSearchShisetsu;
+    @JsonProperty("btnSearchShisetsu")
+    public void setBtnSearchShisetsu(ButtonDialog btnSearchShisetsu) {
+        this.btnSearchShisetsu=btnSearchShisetsu;
     }
 
-    @JsonProperty("lblStartDate")
-    public Label getLblStartDate() {
-        return lblStartDate;
+    @JsonProperty("txtShisetsuNyushoDate")
+    public TextBoxFlexibleDate getTxtShisetsuNyushoDate() {
+        return txtShisetsuNyushoDate;
     }
 
-    @JsonProperty("lblStartDate")
-    public void setLblStartDate(Label lblStartDate) {
-        this.lblStartDate=lblStartDate;
+    @JsonProperty("txtShisetsuNyushoDate")
+    public void setTxtShisetsuNyushoDate(TextBoxFlexibleDate txtShisetsuNyushoDate) {
+        this.txtShisetsuNyushoDate=txtShisetsuNyushoDate;
     }
 
-    @JsonProperty("txtStartDate")
-    public TextBoxDate getTxtStartDate() {
-        return txtStartDate;
+    @JsonProperty("txtShisetsuTaishoDate")
+    public TextBoxFlexibleDate getTxtShisetsuTaishoDate() {
+        return txtShisetsuTaishoDate;
     }
 
-    @JsonProperty("txtStartDate")
-    public void setTxtStartDate(TextBoxDate txtStartDate) {
-        this.txtStartDate=txtStartDate;
-    }
-
-    @JsonProperty("lblEndDate")
-    public Label getLblEndDate() {
-        return lblEndDate;
-    }
-
-    @JsonProperty("lblEndDate")
-    public void setLblEndDate(Label lblEndDate) {
-        this.lblEndDate=lblEndDate;
-    }
-
-    @JsonProperty("txtEndDate")
-    public TextBoxDate getTxtEndDate() {
-        return txtEndDate;
-    }
-
-    @JsonProperty("txtEndDate")
-    public void setTxtEndDate(TextBoxDate txtEndDate) {
-        this.txtEndDate=txtEndDate;
+    @JsonProperty("txtShisetsuTaishoDate")
+    public void setTxtShisetsuTaishoDate(TextBoxFlexibleDate txtShisetsuTaishoDate) {
+        this.txtShisetsuTaishoDate=txtShisetsuTaishoDate;
     }
 
 }

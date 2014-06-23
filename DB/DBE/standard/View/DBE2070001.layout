@@ -21,18 +21,20 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnIkenshoTorikomi",
      "onClick": "",
      "text": "意見書を取込む",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "radIkenshoShubetsu",
      "items": [],
      "controlType": "RadioButton",
-     "width": "130",
+     "width": "140",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -45,6 +47,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "radIkenshoShubetsu_core",
      "onClick": "",
      "onChange": "",
      "selectedItem": "kitei",
@@ -60,7 +63,7 @@
      ],
      "required": false,
      "newLineItemNumber": 2,
-     "spaceSize": 1,
+     "spaceSize": "M",
      "labelLText": "",
      "labelLWidth": "S",
      "labelLAlign": 2
@@ -82,6 +85,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "lblTorikomiKekka",
      "text": "取込み結果",
      "required": false,
      "align": 2,
@@ -104,6 +108,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtErrKensu_core",
      "text": "",
      "onChange": "",
      "required": false,
@@ -111,7 +116,7 @@
      "labelLWidth": "S",
      "labelLAlign": 2,
      "isPrivateInfo": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 2,
      "readOnly": true,
@@ -135,7 +140,7 @@
      "permitCharactor": "+-,.\\"
     },
     {
-     "fieldName": "dgTorikomiKekka",
+     "fieldName": "dgIkenshoTorikomiKekka",
      "items": [],
      "controlType": "DataGrid",
      "width": "985",
@@ -151,6 +156,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "dgIkenshoTorikomiKekka",
      "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
@@ -170,13 +176,13 @@
         "dataName": "select",
         "toolTip": "",
         "bgColor": 0,
-        "width": 45,
+        "width": 50,
         "visible": true,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
-         "text": "...",
-         "onClick": "",
+         "text": "選択",
+         "onClick": "dispIkenshoKekkaShosai",
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": ""
@@ -313,7 +319,7 @@
         "dataName": "netakirido",
         "toolTip": "",
         "bgColor": 0,
-        "width": 95,
+        "width": 105,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -327,7 +333,7 @@
         "dataName": "ninchi",
         "toolTip": "",
         "bgColor": 0,
-        "width": 95,
+        "width": 105,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -341,7 +347,7 @@
         "dataName": "tankiKioku",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 120,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -355,7 +361,7 @@
         "dataName": "ninchiNoryoku",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 120,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -369,7 +375,7 @@
         "dataName": "dentatsuNoryoku",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 120,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -383,7 +389,7 @@
         "dataName": "shokujiKoi",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 120,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -401,7 +407,7 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "sortOrder": "tankiKioku",
+     "sortOrder": "ninchi",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
@@ -423,12 +429,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnSave",
      "onClick": "",
      "text": "取込み結果を保存",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
@@ -445,6 +453,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "ShujiiIkenshoImageTorikomi",
    "onLoad": "",
    "title": "主治医意見書イメージ取込み",
    "isOpen": true,
@@ -454,7 +463,16 @@
      "postParameterPanelNames": "ShujiiIkenshoImageTorikomi"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnOcrTorikomi",
+     "requestUrl": "dbe/db/dbe/ShujiiIkenshoImageTorikomi/onClick_btnOcrTorikomi"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -467,6 +485,135 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "OcrSoftKido",
+   "items": [
+    {
+     "fieldName": "btnOcrDataNyuryoku",
+     "items": [],
+     "controlType": "Button",
+     "width": "90",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnOcrDataNyuryoku",
+     "onClick": "onClick_btnOcrTorikomi",
+     "text": "OCRを取込む",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0
+    },
+    {
+     "fieldName": "lblOcrSoft",
+     "items": [],
+     "controlType": "Label",
+     "width": "220",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "lblOcrSoft",
+     "text": "主治医意見書OCR取込みソフト",
+     "required": false,
+     "align": 2,
+     "isPrivateInfo": false
+    },
+    {
+     "fieldName": "btnCloseOcrSoft",
+     "items": [],
+     "controlType": "Button",
+     "width": "75",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnCloseOcrSoft",
+     "onClick": "",
+     "text": "一覧に戻る",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0
+    }
+   ],
+   "controlType": "Panel",
+   "width": "728",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "selectControlID": "OcrSoftKido",
+   "onLoad": "",
+   "title": "主治医意見書OCRソフト",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "OcrSoftKido"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnOcrTorikomi",
+     "requestUrl": "dbe/db/dbe/ChosaOcrTorikomi/onClick_btnOcrTorikomi"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   },
   {
@@ -479,7 +626,7 @@
        "fieldName": "txtHokenNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "S",
+       "width": "50",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -492,14 +639,15 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtHokenNo_core",
        "text": "",
        "onChange": "",
        "required": false,
        "labelLText": "保険者番号",
-       "labelLWidth": "80",
+       "labelLWidth": "90",
        "labelLAlign": 2,
        "isPrivateInfo": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "readOnly": false,
@@ -516,13 +664,13 @@
        "labelRWidth": "S",
        "labelRAlign": 0,
        "permitCharactor": "",
-       "formatLength": 1
+       "formatLength": "6"
       },
       {
        "fieldName": "txtHihokenNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "S",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -535,14 +683,15 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtHihokenNo_core",
        "text": "",
        "onChange": "",
        "required": false,
        "labelLText": "被保番号",
-       "labelLWidth": "60",
+       "labelLWidth": "65",
        "labelLAlign": 2,
        "isPrivateInfo": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "readOnly": false,
@@ -559,13 +708,13 @@
        "labelRWidth": "S",
        "labelRAlign": 0,
        "permitCharactor": "",
-       "formatLength": 1
+       "formatLength": "10"
       },
       {
        "fieldName": "txtShinseibi",
        "items": [],
        "controlType": "TextBoxDate",
-       "width": "S",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -578,11 +727,12 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtShinseibi_core",
        "text": "",
        "onChange": "",
        "required": false,
        "labelLText": "認定申請日",
-       "labelLWidth": "75",
+       "labelLWidth": "80",
        "labelLAlign": 2,
        "isPrivateInfo": false,
        "readOnly": false,
@@ -604,7 +754,7 @@
        "fieldName": "btnShinseiJohoSearch",
        "items": [],
        "controlType": "Button",
-       "width": "135",
+       "width": "140",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -617,18 +767,20 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "btnShinseiJohoSearch",
        "onClick": "",
        "text": "申請情報を検索する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "icon": 0
       },
       {
        "fieldName": "ddlShinseiKbn",
        "items": [],
        "controlType": "DropDownList",
-       "width": "115",
+       "width": "120",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -641,6 +793,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "ddlShinseiKbn_core",
        "onChange": "",
        "selectedItem": "",
        "dataSource": [
@@ -659,7 +812,7 @@
        ],
        "required": false,
        "labelLText": "認定申請区分",
-       "labelLWidth": "90",
+       "labelLWidth": "S",
        "labelLAlign": 2,
        "onFocus": "",
        "onBlur": "",
@@ -682,6 +835,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "KihonJoho",
      "onLoad": "",
      "title": "基本情報",
      "isOpen": true,
@@ -704,6 +858,7 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
+     "panelDisplay": 0,
      "isGroupBox": false
     },
     {
@@ -713,7 +868,7 @@
        "fieldName": "txtIryokikanNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "S",
+       "width": "85",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -726,14 +881,15 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtIryokikanNo_core",
        "text": "",
        "onChange": "",
        "required": false,
        "labelLText": "医療機関",
-       "labelLWidth": "80",
+       "labelLWidth": "90",
        "labelLAlign": 2,
        "isPrivateInfo": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "readOnly": false,
@@ -750,7 +906,7 @@
        "labelRWidth": "S",
        "labelRAlign": 0,
        "permitCharactor": "",
-       "formatLength": 1
+       "formatLength": "10"
       },
       {
        "fieldName": "txtIryokikanMei",
@@ -767,8 +923,9 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
+       "marginLeft": "0",
        "marginRight": "XS",
+       "selectControlID": "txtIryokikanMei_core",
        "text": "",
        "onChange": "",
        "required": false,
@@ -776,7 +933,7 @@
        "labelLWidth": "S",
        "labelLAlign": 2,
        "isPrivateInfo": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "readOnly": true,
@@ -810,6 +967,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "imgIryokikanSearch",
        "imageWidth": "18",
        "imageHeight": "20",
        "src": "/uz/uza/css/Link.jpg"
@@ -818,7 +976,7 @@
        "fieldName": "txtIkenshoKinyubi",
        "items": [],
        "controlType": "TextBoxDate",
-       "width": "S",
+       "width": "90",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -831,6 +989,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtIkenshoKinyubi_core",
        "text": "",
        "onChange": "",
        "required": false,
@@ -857,7 +1016,7 @@
        "fieldName": "txtShujiiNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "S",
+       "width": "85",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -870,14 +1029,15 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtShujiiNo_core",
        "text": "",
        "onChange": "",
        "required": false,
        "labelLText": "主治医",
-       "labelLWidth": "80",
+       "labelLWidth": "90",
        "labelLAlign": 2,
        "isPrivateInfo": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "readOnly": false,
@@ -894,7 +1054,7 @@
        "labelRWidth": "S",
        "labelRAlign": 0,
        "permitCharactor": "",
-       "formatLength": 1
+       "formatLength": "10"
       },
       {
        "fieldName": "txtShujiiMei",
@@ -911,8 +1071,9 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
+       "marginLeft": "0",
        "marginRight": "XS",
+       "selectControlID": "txtShujiiMei_core",
        "text": "",
        "onChange": "",
        "required": false,
@@ -920,7 +1081,7 @@
        "labelLWidth": "S",
        "labelLAlign": 2,
        "isPrivateInfo": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "readOnly": true,
@@ -954,6 +1115,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "imgShujiiSearch",
        "imageWidth": "18",
        "imageHeight": "20",
        "src": "/uz/uza/css/Link.jpg"
@@ -962,7 +1124,7 @@
        "fieldName": "txtIkenshoJuryobi",
        "items": [],
        "controlType": "TextBoxDate",
-       "width": "S",
+       "width": "90",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -975,6 +1137,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtIkenshoJuryobi_core",
        "text": "",
        "onChange": "",
        "required": false,
@@ -1012,6 +1175,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "IkenshoItakuJoho",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -1034,6 +1198,7 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
+     "panelDisplay": 0,
      "isGroupBox": false
     },
     {
@@ -1049,7 +1214,7 @@
            "fieldName": "lblNetakirido",
            "items": [],
            "controlType": "Label",
-           "width": "142",
+           "width": "145",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1062,6 +1227,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblNetakirido",
            "text": "自立度(寝たきり度)",
            "required": false,
            "align": 1,
@@ -1082,6 +1248,7 @@
          "authorityMode": 0,
          "marginLeft": 0,
          "marginRight": 0,
+         "selectControlID": "celNetakiridoHeader",
          "connectTd": "R1C1"
         },
         {
@@ -1104,6 +1271,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblNinchi",
            "text": "自立度(認知)",
            "required": false,
            "align": 1,
@@ -1124,6 +1292,7 @@
          "authorityMode": 0,
          "marginLeft": 0,
          "marginRight": 0,
+         "selectControlID": "celNinchiHeader",
          "connectTd": "R1C2"
         },
         {
@@ -1146,6 +1315,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblTankikioku",
            "text": "短期記憶",
            "required": false,
            "align": 1,
@@ -1166,6 +1336,7 @@
          "authorityMode": 0,
          "marginLeft": 0,
          "marginRight": 0,
+         "selectControlID": "celTankikiokuHeader",
          "connectTd": "R1C3"
         },
         {
@@ -1188,6 +1359,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblNinchiNoryoku",
            "text": "認知能力",
            "required": false,
            "align": 1,
@@ -1208,6 +1380,7 @@
          "authorityMode": 0,
          "marginLeft": 0,
          "marginRight": 0,
+         "selectControlID": "celNinchiNoryokuHeader",
          "connectTd": "R1C4"
         },
         {
@@ -1230,6 +1403,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblDentatsuNoryoku",
            "text": "伝達能力",
            "required": false,
            "align": 1,
@@ -1250,6 +1424,7 @@
          "authorityMode": 0,
          "marginLeft": 0,
          "marginRight": 0,
+         "selectControlID": "celDentatsuNoryokuHeader",
          "connectTd": "R1C5"
         },
         {
@@ -1272,16 +1447,45 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "ddlNetakirido_core",
            "onChange": "",
            "selectedItem": "",
            "dataSource": [
             {
-             "key": "key0",
-             "value": "value0"
+             "key": "1",
+             "value": "自立"
             },
             {
-             "key": "key1",
-             "value": "value1"
+             "key": "2",
+             "value": "J1"
+            },
+            {
+             "key": "3",
+             "value": "J2"
+            },
+            {
+             "key": "4",
+             "value": "A1"
+            },
+            {
+             "key": "5",
+             "value": "A2"
+            },
+            {
+             "key": "6",
+             "value": "B1"
+            },
+            {
+             "key": "7",
+             "value": "B2"
+            },
+            {
+             "key": "8",
+             "value": "C1"
+            },
+            {
+             "key": "9",
+             "value": "C2"
             }
            ],
            "required": false,
@@ -1309,6 +1513,7 @@
          "authorityMode": 0,
          "marginLeft": 0,
          "marginRight": 0,
+         "selectControlID": "celNetakirido",
          "connectTd": "R2C1"
         },
         {
@@ -1331,16 +1536,41 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "ddlNinchi_core",
            "onChange": "",
            "selectedItem": "",
            "dataSource": [
             {
-             "key": "key0",
-             "value": "value0"
+             "key": "1",
+             "value": "自立"
             },
             {
-             "key": "key1",
-             "value": "value1"
+             "key": "2",
+             "value": "I"
+            },
+            {
+             "key": "3",
+             "value": "Ⅱa"
+            },
+            {
+             "key": "4",
+             "value": "Ⅱb"
+            },
+            {
+             "key": "5",
+             "value": "Ⅲa"
+            },
+            {
+             "key": "6",
+             "value": "Ⅲb"
+            },
+            {
+             "key": "7",
+             "value": "Ⅳ"
+            },
+            {
+             "key": "8",
+             "value": "M"
             }
            ],
            "required": false,
@@ -1368,6 +1598,7 @@
          "authorityMode": 0,
          "marginLeft": 0,
          "marginRight": 0,
+         "selectControlID": "celNinchi",
          "connectTd": "R2C2"
         },
         {
@@ -1390,16 +1621,17 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "ddlTankikioku_core",
            "onChange": "",
            "selectedItem": "",
            "dataSource": [
             {
-             "key": "key0",
-             "value": "value0"
+             "key": "1",
+             "value": "問題なし"
             },
             {
-             "key": "key1",
-             "value": "value1"
+             "key": "2",
+             "value": "問題あり"
             }
            ],
            "required": false,
@@ -1427,6 +1659,7 @@
          "authorityMode": 0,
          "marginLeft": 0,
          "marginRight": 0,
+         "selectControlID": "celTankikioku",
          "connectTd": "R2C3"
         },
         {
@@ -1449,16 +1682,25 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "ddlNinchiNoryoku_core",
            "onChange": "",
            "selectedItem": "",
            "dataSource": [
             {
-             "key": "key0",
-             "value": "value0"
+             "key": "1",
+             "value": "自立"
             },
             {
-             "key": "key1",
-             "value": "value1"
+             "key": "2",
+             "value": "いくらか困難"
+            },
+            {
+             "key": "3",
+             "value": "見守りが必要"
+            },
+            {
+             "key": "4",
+             "value": "判断できない"
             }
            ],
            "required": false,
@@ -1486,6 +1728,7 @@
          "authorityMode": 0,
          "marginLeft": 0,
          "marginRight": 0,
+         "selectControlID": "celNinchiNoryoku",
          "connectTd": "R2C4"
         },
         {
@@ -1508,16 +1751,25 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "ddlDentatsuNoryoku_core",
            "onChange": "",
            "selectedItem": "",
            "dataSource": [
             {
-             "key": "key0",
-             "value": "value0"
+             "key": "1",
+             "value": "伝えられる"
             },
             {
-             "key": "key1",
-             "value": "value1"
+             "key": "2",
+             "value": "いくらか困難"
+            },
+            {
+             "key": "3",
+             "value": "具体的要求に限られる"
+            },
+            {
+             "key": "4",
+             "value": "伝えられない"
             }
            ],
            "required": false,
@@ -1545,6 +1797,7 @@
          "authorityMode": 0,
          "marginLeft": 0,
          "marginRight": 0,
+         "selectControlID": "celDentatsuNoryoku",
          "connectTd": "R2C5"
         },
         {
@@ -1567,6 +1820,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblShokujiKoi",
            "text": "食事行為",
            "required": false,
            "align": 1,
@@ -1587,6 +1841,7 @@
          "authorityMode": 0,
          "marginLeft": 0,
          "marginRight": 0,
+         "selectControlID": "celShokujiKoiHeader",
          "connectTd": "R1C6"
         },
         {
@@ -1609,16 +1864,17 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "ddlShokujiKoi_core",
            "onChange": "",
            "selectedItem": "",
            "dataSource": [
             {
-             "key": "key0",
-             "value": "value0"
+             "key": "1",
+             "value": "自立"
             },
             {
-             "key": "key1",
-             "value": "value1"
+             "key": "2",
+             "value": "全面介助"
             }
            ],
            "required": false,
@@ -1646,6 +1902,7 @@
          "authorityMode": 0,
          "marginLeft": 0,
          "marginRight": 0,
+         "selectControlID": "celShokujiKoi",
          "connectTd": "R2C6"
         }
        ],
@@ -1663,6 +1920,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "tblIkensho5Komoku",
        "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td><td id='R1C6'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n\n  </tbody>\n</table>\n"
       }
      ],
@@ -1680,6 +1938,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "Ikensho5Komoku",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -1702,16 +1961,17 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
+     "panelDisplay": 0,
      "isGroupBox": false
     },
     {
-     "fieldName": "IkenshoHyoji",
+     "fieldName": "IkenshoShosaiImageHyoji",
      "items": [
       {
        "fieldName": "txtHyojiBairitsu",
        "items": [],
        "controlType": "TextBoxNum",
-       "width": "XS",
+       "width": "30",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1724,14 +1984,15 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtHyojiBairitsu_core",
        "text": "",
        "onChange": "",
        "required": false,
        "labelLText": "表示倍率",
-       "labelLWidth": "60",
+       "labelLWidth": "70",
        "labelLAlign": 0,
        "isPrivateInfo": false,
-       "maxLength": 1000000000000,
+       "maxLength": "100",
        "minLength": 0,
        "textAlign": 2,
        "readOnly": false,
@@ -1755,7 +2016,7 @@
        "permitCharactor": "+-,.\\"
       },
       {
-       "fieldName": "tabIkensho",
+       "fieldName": "tabIkenshoImageHyoji",
        "items": [
         {
          "fieldName": "tplIkensho1",
@@ -1776,9 +2037,10 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "imageWidth": "950",
+           "selectControlID": "imgIkensho1",
+           "imageWidth": "900",
            "imageHeight": "350",
-           "src": ""
+           "src": "/uz/uza/css/E0001.png"
           }
          ],
          "controlType": "TabPanel",
@@ -1795,6 +2057,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "tplIkensho1",
          "title": "１枚目",
          "onActive": ""
         },
@@ -1817,13 +2080,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "imageWidth": "950",
+           "selectControlID": "imgIkensho2",
+           "imageWidth": "900",
            "imageHeight": "350",
-           "src": ""
+           "src": "/uz/uza/css/E0001.png"
           }
          ],
          "controlType": "TabPanel",
-         "width": "XS",
+         "width": "800",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1836,12 +2100,13 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "tplIkensho2",
          "title": "２枚目",
          "onActive": ""
         }
        ],
        "controlType": "TabContainer",
-       "width": "970",
+       "width": "960",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1854,6 +2119,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "tabIkenshoImageHyoji",
        "onChange": "",
        "selectedItem": null,
        "tabpanelPosition": [
@@ -1861,7 +2127,8 @@
         "tplIkensho2"
        ],
        "isDraggable": false,
-       "selectedItemFieldName": "tplIkensho2"
+       "selectedItemFieldName": "tplIkensho1",
+       "initialTab": 0
       }
      ],
      "controlType": "Panel",
@@ -1878,6 +2145,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "IkenshoShosaiImageHyoji",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -1900,6 +2168,7 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
+     "panelDisplay": 0,
      "isGroupBox": false
     },
     {
@@ -1919,12 +2188,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnToroku",
      "onClick": "",
      "text": "登録する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "btnReturn",
@@ -1943,12 +2214,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnReturn",
      "onClick": "",
      "text": "一覧に戻る",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
@@ -1965,6 +2238,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "IkenshoShosaiMain",
    "onLoad": "",
    "title": "意見書詳細",
    "isOpen": true,
@@ -1972,9 +2246,21 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "IkenshoShosaiMain"
+    },
+    {
+     "postParameterPanelNames": "ShujiiIkenshoImageTorikomi"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "dispIkenshoKekkaShosai",
+     "requestUrl": "dbe/db/dbe/IkenshoShosaiMain/dispIkenshoKekkaShosai"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -1987,6 +2273,7 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   }
  ],
@@ -2004,6 +2291,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "主治医意見書イメージ取込み",
  "jsPathCollection": [],
@@ -2020,7 +2308,43 @@
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "btnIkenshoTorikomi",
+     "event": "onClick",
+     "transition": "OcrSoftKido"
+    },
+    {
+     "fieldName": "btnCloseOcrSoft",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnOcrDataNyuryoku",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgTorikomiKekka[select]",
+     "event": "onClick",
+     "transition": "IkenshoShosai"
+    },
+    {
+     "fieldName": "dgIkenshoTorikomiKekka[select]",
+     "event": "onClick",
+     "transition": "IkenshoShosai"
+    },
+    {
+     "fieldName": "btnToroku",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   },
   {
    "order": "2",
@@ -2044,12 +2368,97 @@
      "panelState": "visible"
     },
     {
-     "visibleDiv": "IkenshoHyoji",
+     "visibleDiv": "IkenshoShosaiImageHyoji",
      "panelState": "visible"
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "btnIkenshoTorikomi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseOcrSoft",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnOcrDataNyuryoku",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgTorikomiKekka[select]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgIkenshoTorikomiKekka[select]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnToroku",
+     "event": "onClick",
+     "transition": "IkenshoImageTorikomi"
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "IkenshoImageTorikomi"
+    }
+   ]
+  },
+  {
+   "order": "3",
+   "stateName": "OcrSoftKido",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "OcrSoftKido",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnIkenshoTorikomi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseOcrSoft",
+     "event": "onClick",
+     "transition": "IkenshoImageTorikomi"
+    },
+    {
+     "fieldName": "btnOcrDataNyuryoku",
+     "event": "onClick",
+     "transition": "IkenshoImageTorikomi"
+    },
+    {
+     "fieldName": "dgTorikomiKekka[select]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgIkenshoTorikomiKekka[select]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnToroku",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   }
  ],
  "currentState": "All",
@@ -2058,14 +2467,15 @@
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
-   "Ikensho5Komoku",
-   "IkenshoHyoji"
-  ],
-  [
-   "ShujiiIkenshoImageTorikomi"
-  ],
-  [
+   "ShujiiIkenshoImageTorikomi",
    "IkenshoShosaiMain"
+  ],
+  [
+   "Ikensho5Komoku",
+   "IkenshoShosaiImageHyoji"
+  ],
+  [
+   "OcrSoftKido"
   ],
   [
    "KihonJoho"

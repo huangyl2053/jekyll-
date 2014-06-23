@@ -21,18 +21,14 @@ public class LatestNinteiResultDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblYokaigodo")
-    private Label lblYokaigodo;
     @JsonProperty("txtYokaigodo")
-    private TextBoxCode txtYokaigodo;
-    @JsonProperty("lblNinteiDate")
-    private Label lblNinteiDate;
+    private TextBox txtYokaigodo;
     @JsonProperty("txtNinteiDate")
-    private TextBoxDate txtNinteiDate;
-    @JsonProperty("lblYukoKikan")
-    private Label lblYukoKikan;
-    @JsonProperty("txtNinteiYukokikan")
-    private TextBoxDateRange txtNinteiYukokikan;
+    private TextBoxFlexibleDate txtNinteiDate;
+    @JsonProperty("txtNinteiYukokikanFrom")
+    private TextBoxFlexibleDate txtNinteiYukokikanFrom;
+    @JsonProperty("txtNinteiYukokikanTo")
+    private TextBoxFlexibleDate txtNinteiYukokikanTo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,64 +36,44 @@ public class LatestNinteiResultDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblYokaigodo")
-    public Label getLblYokaigodo() {
-        return lblYokaigodo;
-    }
-
-    @JsonProperty("lblYokaigodo")
-    public void setLblYokaigodo(Label lblYokaigodo) {
-        this.lblYokaigodo=lblYokaigodo;
-    }
-
     @JsonProperty("txtYokaigodo")
-    public TextBoxCode getTxtYokaigodo() {
+    public TextBox getTxtYokaigodo() {
         return txtYokaigodo;
     }
 
     @JsonProperty("txtYokaigodo")
-    public void setTxtYokaigodo(TextBoxCode txtYokaigodo) {
+    public void setTxtYokaigodo(TextBox txtYokaigodo) {
         this.txtYokaigodo=txtYokaigodo;
     }
 
-    @JsonProperty("lblNinteiDate")
-    public Label getLblNinteiDate() {
-        return lblNinteiDate;
-    }
-
-    @JsonProperty("lblNinteiDate")
-    public void setLblNinteiDate(Label lblNinteiDate) {
-        this.lblNinteiDate=lblNinteiDate;
-    }
-
     @JsonProperty("txtNinteiDate")
-    public TextBoxDate getTxtNinteiDate() {
+    public TextBoxFlexibleDate getTxtNinteiDate() {
         return txtNinteiDate;
     }
 
     @JsonProperty("txtNinteiDate")
-    public void setTxtNinteiDate(TextBoxDate txtNinteiDate) {
+    public void setTxtNinteiDate(TextBoxFlexibleDate txtNinteiDate) {
         this.txtNinteiDate=txtNinteiDate;
     }
 
-    @JsonProperty("lblYukoKikan")
-    public Label getLblYukoKikan() {
-        return lblYukoKikan;
+    @JsonProperty("txtNinteiYukokikanFrom")
+    public TextBoxFlexibleDate getTxtNinteiYukokikanFrom() {
+        return txtNinteiYukokikanFrom;
     }
 
-    @JsonProperty("lblYukoKikan")
-    public void setLblYukoKikan(Label lblYukoKikan) {
-        this.lblYukoKikan=lblYukoKikan;
+    @JsonProperty("txtNinteiYukokikanFrom")
+    public void setTxtNinteiYukokikanFrom(TextBoxFlexibleDate txtNinteiYukokikanFrom) {
+        this.txtNinteiYukokikanFrom=txtNinteiYukokikanFrom;
     }
 
-    @JsonProperty("txtNinteiYukokikan")
-    public TextBoxDateRange getTxtNinteiYukokikan() {
-        return txtNinteiYukokikan;
+    @JsonProperty("txtNinteiYukokikanTo")
+    public TextBoxFlexibleDate getTxtNinteiYukokikanTo() {
+        return txtNinteiYukokikanTo;
     }
 
-    @JsonProperty("txtNinteiYukokikan")
-    public void setTxtNinteiYukokikan(TextBoxDateRange txtNinteiYukokikan) {
-        this.txtNinteiYukokikan=txtNinteiYukokikan;
+    @JsonProperty("txtNinteiYukokikanTo")
+    public void setTxtNinteiYukokikanTo(TextBoxFlexibleDate txtNinteiYukokikanTo) {
+        this.txtNinteiYukokikanTo=txtNinteiYukokikanTo;
     }
 
 }

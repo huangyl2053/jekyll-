@@ -21,18 +21,14 @@ public class HihokenshaOutlineDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblHihokenshaNo")
-    private Label lblHihokenshaNo;
     @JsonProperty("txtHihokenshaNo")
     private TextBoxCode txtHihokenshaNo;
-    @JsonProperty("lblHihokenshaKubun")
-    private Label lblHihokenshaKubun;
     @JsonProperty("txtHihokenshaKubun")
     private TextBox txtHihokenshaKubun;
-    @JsonProperty("lblShimsei")
-    private Label lblShimsei;
     @JsonProperty("txtShimei")
     private TextBox txtShimei;
+    @JsonProperty("btnRenrakusaki")
+    private ButtonDialog btnRenrakusaki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,16 +36,6 @@ public class HihokenshaOutlineDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblHihokenshaNo")
-    public Label getLblHihokenshaNo() {
-        return lblHihokenshaNo;
-    }
-
-    @JsonProperty("lblHihokenshaNo")
-    public void setLblHihokenshaNo(Label lblHihokenshaNo) {
-        this.lblHihokenshaNo=lblHihokenshaNo;
-    }
-
     @JsonProperty("txtHihokenshaNo")
     public TextBoxCode getTxtHihokenshaNo() {
         return txtHihokenshaNo;
@@ -58,16 +44,6 @@ public class HihokenshaOutlineDiv extends Panel {
     @JsonProperty("txtHihokenshaNo")
     public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
         this.txtHihokenshaNo=txtHihokenshaNo;
-    }
-
-    @JsonProperty("lblHihokenshaKubun")
-    public Label getLblHihokenshaKubun() {
-        return lblHihokenshaKubun;
-    }
-
-    @JsonProperty("lblHihokenshaKubun")
-    public void setLblHihokenshaKubun(Label lblHihokenshaKubun) {
-        this.lblHihokenshaKubun=lblHihokenshaKubun;
     }
 
     @JsonProperty("txtHihokenshaKubun")
@@ -80,16 +56,6 @@ public class HihokenshaOutlineDiv extends Panel {
         this.txtHihokenshaKubun=txtHihokenshaKubun;
     }
 
-    @JsonProperty("lblShimsei")
-    public Label getLblShimsei() {
-        return lblShimsei;
-    }
-
-    @JsonProperty("lblShimsei")
-    public void setLblShimsei(Label lblShimsei) {
-        this.lblShimsei=lblShimsei;
-    }
-
     @JsonProperty("txtShimei")
     public TextBox getTxtShimei() {
         return txtShimei;
@@ -98,6 +64,16 @@ public class HihokenshaOutlineDiv extends Panel {
     @JsonProperty("txtShimei")
     public void setTxtShimei(TextBox txtShimei) {
         this.txtShimei=txtShimei;
+    }
+
+    @JsonProperty("btnRenrakusaki")
+    public ButtonDialog getBtnRenrakusaki() {
+        return btnRenrakusaki;
+    }
+
+    @JsonProperty("btnRenrakusaki")
+    public void setBtnRenrakusaki(ButtonDialog btnRenrakusaki) {
+        this.btnRenrakusaki=btnRenrakusaki;
     }
 
 }

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Apr 25 16:54:46 JST 2014 
+ * Thu Jun 19 11:30:04 JST 2014 
  */
 
 
@@ -11,7 +11,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
@@ -24,14 +24,18 @@ public class dgShisetsuRereki_Row extends DataRow {
 
     private Button editButton;
     private RString name;
-    private TextBoxDate startDate;
-    private TextBoxDate endDate;
+    private TextBoxFlexibleDate startDate;
+    private TextBoxFlexibleDate endDate;
 
     public dgShisetsuRereki_Row() {
         super();
+        this.editButton = new Button();
+        this.name = RString.EMPTY;
+        this.startDate = new TextBoxFlexibleDate();
+        this.endDate = new TextBoxFlexibleDate();
     }
 
-    public dgShisetsuRereki_Row(Button editButton, RString name, TextBoxDate startDate, TextBoxDate endDate) {
+    public dgShisetsuRereki_Row(Button editButton, RString name, TextBoxFlexibleDate startDate, TextBoxFlexibleDate endDate) {
         super();
         this.setOriginalData("editButton", editButton);
         this.setOriginalData("name", name);
@@ -51,11 +55,11 @@ public class dgShisetsuRereki_Row extends DataRow {
         return name;
     }
 
-    public TextBoxDate getStartDate() {
+    public TextBoxFlexibleDate getStartDate() {
         return startDate;
     }
 
-    public TextBoxDate getEndDate() {
+    public TextBoxFlexibleDate getEndDate() {
         return endDate;
     }
 
@@ -69,12 +73,12 @@ public class dgShisetsuRereki_Row extends DataRow {
         this.name = name;
     }
 
-    public void setStartDate(TextBoxDate startDate) {
+    public void setStartDate(TextBoxFlexibleDate startDate) {
         this.setOriginalData("startDate", startDate);
         this.startDate = startDate;
     }
 
-    public void setEndDate(TextBoxDate endDate) {
+    public void setEndDate(TextBoxFlexibleDate endDate) {
         this.setOriginalData("endDate", endDate);
         this.endDate = endDate;
     }

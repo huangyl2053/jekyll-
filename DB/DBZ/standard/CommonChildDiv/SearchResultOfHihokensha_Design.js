@@ -11,32 +11,15 @@ var DBZ;
         function SearchResultOfHihokensha_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, SearchResultOfHihokensha_Design.myLayout, fieldName);
         }
-        Object.defineProperty(SearchResultOfHihokensha_Design.prototype, "onClickBtnToResearch", {
+        Object.defineProperty(SearchResultOfHihokensha_Design.prototype, "onClick_btnToResearch", {
             get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onClick"];
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"])["onClick"];
             },
             set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onClick"] = value;
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"])["onClick"] = value;
                 } else {
-                    this.layout.items[0].items[1]["onClick"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(SearchResultOfHihokensha_Design.prototype, "gridSetting", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"] = value;
-                } else {
-                    this.layout.items[0].items[0]["gridSetting"] = value;
+                    this.layout.items[0].items[1].items[0]["onClick"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -47,14 +30,12 @@ var DBZ;
 
         SearchResultOfHihokensha_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
-            Uz.JSControlUtil.registProperty("onClickBtnToResearch");
-            Uz.JSControlUtil.registProperty("gridSetting");
+            Uz.JSControlUtil.registProperty("onClick_btnToResearch");
         };
 
         SearchResultOfHihokensha_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
-            editablePropertyInfo["onClickBtnToResearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onClick"];
-            editablePropertyInfo["gridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
+            editablePropertyInfo["onClick_btnToResearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
 
             return editablePropertyInfo;
         };
@@ -68,7 +49,7 @@ var DBZ;
                             "fieldName": "dgSearchResult",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "980",
+                            "width": "1075",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -76,32 +57,44 @@ var DBZ;
                             "nextFocusFieldName": "",
                             "wrap": true,
                             "dependencies": [],
-                            "float": 1,
+                            "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "dgSearchResult",
                             "gridSetting": {
-                                "rowHeight": 50,
+                                "rowHeight": 40,
                                 "isMultiSelectable": false,
+                                "isShowHeader": true,
                                 "isShowFooter": true,
                                 "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
                                 "header": {
                                     "combineColumns": [],
-                                    "frozenColumn": ""
+                                    "frozenColumn": "",
+                                    "headerHeight": 0
                                 },
                                 "columns": [
                                     {
                                         "columnName": "",
                                         "dataName": "btnToDecide",
+                                        "toolTip": "",
+                                        "bgColor": 0,
                                         "width": 50,
                                         "visible": true,
                                         "cellType": 8,
                                         "cellDetails": {
                                             "cellType": 8,
                                             "text": "確定",
-                                            "onClick": "",
-                                            "imageFileUrl": ""
+                                            "onClick": "onClick_btnToDecide",
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": ""
                                         },
                                         "align": 0,
                                         "resize": false,
@@ -111,6 +104,8 @@ var DBZ;
                                     {
                                         "columnName": "被保番号",
                                         "dataName": "hihokenshaNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
                                         "width": 110,
                                         "visible": true,
                                         "cellType": 0,
@@ -125,6 +120,8 @@ var DBZ;
                                     {
                                         "columnName": "識別コード",
                                         "dataName": "shikibetsuCode",
+                                        "toolTip": "",
+                                        "bgColor": 0,
                                         "width": 110,
                                         "visible": true,
                                         "cellType": 0,
@@ -139,6 +136,8 @@ var DBZ;
                                     {
                                         "columnName": "被保険者区分",
                                         "dataName": "hihokenshaKubun",
+                                        "toolTip": "",
+                                        "bgColor": 0,
                                         "width": 110,
                                         "visible": true,
                                         "cellType": 0,
@@ -151,6 +150,8 @@ var DBZ;
                                     {
                                         "columnName": "氏名",
                                         "dataName": "shimei",
+                                        "toolTip": "",
+                                        "bgColor": 0,
                                         "width": 150,
                                         "visible": false,
                                         "cellType": 0,
@@ -165,6 +166,8 @@ var DBZ;
                                     {
                                         "columnName": "カナ氏名",
                                         "dataName": "kanaShimsei",
+                                        "toolTip": "",
+                                        "bgColor": 0,
                                         "width": 150,
                                         "visible": false,
                                         "cellType": 0,
@@ -177,6 +180,8 @@ var DBZ;
                                     {
                                         "columnName": "氏名",
                                         "dataName": "shimeiAndKanaShimsei",
+                                        "toolTip": "",
+                                        "bgColor": 0,
                                         "width": 150,
                                         "visible": true,
                                         "cellType": 0,
@@ -189,6 +194,8 @@ var DBZ;
                                     {
                                         "columnName": "性別",
                                         "dataName": "gender",
+                                        "toolTip": "",
+                                        "bgColor": 0,
                                         "width": 50,
                                         "visible": true,
                                         "cellType": 0,
@@ -203,6 +210,8 @@ var DBZ;
                                     {
                                         "columnName": "生年月日",
                                         "dataName": "birthDay",
+                                        "toolTip": "",
+                                        "bgColor": 0,
                                         "width": 110,
                                         "visible": true,
                                         "cellType": 6,
@@ -219,6 +228,8 @@ var DBZ;
                                     {
                                         "columnName": "郵便番号",
                                         "dataName": "yubinNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
                                         "width": 110,
                                         "visible": true,
                                         "cellType": 0,
@@ -231,6 +242,8 @@ var DBZ;
                                     {
                                         "columnName": "住所",
                                         "dataName": "jusho",
+                                        "toolTip": "",
+                                        "bgColor": 0,
                                         "width": 300,
                                         "visible": true,
                                         "cellType": 0,
@@ -243,6 +256,8 @@ var DBZ;
                                     {
                                         "columnName": "個人番号",
                                         "dataName": "kojinNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
                                         "width": 120,
                                         "visible": false,
                                         "cellType": 0,
@@ -255,6 +270,8 @@ var DBZ;
                                     {
                                         "columnName": "住民種別",
                                         "dataName": "juminShubetsu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
                                         "width": 100,
                                         "visible": true,
                                         "cellType": 0,
@@ -267,6 +284,8 @@ var DBZ;
                                     {
                                         "columnName": "世帯コード",
                                         "dataName": "setaiCode",
+                                        "toolTip": "",
+                                        "bgColor": 0,
                                         "width": 110,
                                         "visible": true,
                                         "cellType": 0,
@@ -281,6 +300,10 @@ var DBZ;
                             "height": "S",
                             "onSort": "",
                             "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
@@ -288,13 +311,40 @@ var DBZ;
                             "sortOrder": "yubinNoAndJusho",
                             "isAscending": true,
                             "filterList": [],
-                            "clickedRowId": -1
+                            "activeRowId": -1
                         },
                         {
-                            "fieldName": "btnToResearch",
-                            "items": [],
-                            "controlType": "Button",
-                            "width": "M",
+                            "fieldName": "ButtonsForSearchResultOfHihokensha",
+                            "items": [
+                                {
+                                    "fieldName": "btnToResearch",
+                                    "items": [],
+                                    "controlType": "Button",
+                                    "width": "M",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "btnToResearch",
+                                    "onClick": "",
+                                    "text": "再検索する",
+                                    "appearance": 0,
+                                    "imageFileUrl": "",
+                                    "imageWidth": "",
+                                    "imageHeight": "",
+                                    "icon": 0
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "1075",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -307,13 +357,36 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "onClick": "",
-                            "text": "再検索する",
-                            "imageFileUrl": ""
+                            "selectControlID": "ButtonsForSearchResultOfHihokensha",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": true,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "ButtonsForSearchResultOfHihokensha"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorderTop": true,
+                            "eraseBorderBottom": true,
+                            "eraseBorderRight": true,
+                            "eraseBorderLeft": true,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
+                            "readOnly": false
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "M",
+                    "width": "1090",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -321,11 +394,12 @@ var DBZ;
                     "nextFocusFieldName": "",
                     "wrap": true,
                     "dependencies": [],
-                    "float": 1,
+                    "float": 0,
                     "toolTip": "",
                     "authorityMode": 0,
                     "marginLeft": "XS",
                     "marginRight": "XS",
+                    "selectControlID": "SearchResultOfHihokensha",
                     "onLoad": "",
                     "title": "検索結果",
                     "marginTop": "XS",
@@ -352,7 +426,10 @@ var DBZ;
                     "eraseBorderRight": false,
                     "eraseBorderLeft": false,
                     "backgroundColor": 0,
-                    "widthAuto": true
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -369,6 +446,7 @@ var DBZ;
             "authorityMode": 0,
             "marginLeft": 0,
             "marginRight": 0,
+            "selectControlID": "defaultLayout",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "SearchResultOfHihokensha",
@@ -378,12 +456,7 @@ var DBZ;
                 {
                     "publicChildFieldName": "btnToResearch",
                     "publicChildProperty": "onClick",
-                    "newPropertyName": "onClickBtnToResearch"
-                },
-                {
-                    "publicChildFieldName": "dgSearchResult",
-                    "publicChildProperty": "gridSetting",
-                    "newPropertyName": "gridSetting"
+                    "newPropertyName": "onClick_btnToResearch"
                 }
             ],
             "dataPassingForDialog": [],
