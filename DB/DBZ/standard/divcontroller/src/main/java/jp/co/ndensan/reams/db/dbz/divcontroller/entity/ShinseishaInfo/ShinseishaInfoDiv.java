@@ -35,10 +35,10 @@ public class ShinseishaInfoDiv extends Panel {
     private Button btnCopyToHonninInfo;
     @JsonProperty("ddlHokensha")
     private DropDownList ddlHokensha;
-    @JsonProperty("txtShinseishaName")
-    private TextBox txtShinseishaName;
     @JsonProperty("txtShinseishaNameKana")
     private TextBox txtShinseishaNameKana;
+    @JsonProperty("txtShinseishaName")
+    private TextBox txtShinseishaName;
     @JsonProperty("txtTelNo")
     private TextBox txtTelNo;
     @JsonProperty("txtYubinNo")
@@ -122,16 +122,6 @@ public class ShinseishaInfoDiv extends Panel {
         this.ddlHokensha=ddlHokensha;
     }
 
-    @JsonProperty("txtShinseishaName")
-    public TextBox getTxtShinseishaName() {
-        return txtShinseishaName;
-    }
-
-    @JsonProperty("txtShinseishaName")
-    public void setTxtShinseishaName(TextBox txtShinseishaName) {
-        this.txtShinseishaName=txtShinseishaName;
-    }
-
     @JsonProperty("txtShinseishaNameKana")
     public TextBox getTxtShinseishaNameKana() {
         return txtShinseishaNameKana;
@@ -140,6 +130,16 @@ public class ShinseishaInfoDiv extends Panel {
     @JsonProperty("txtShinseishaNameKana")
     public void setTxtShinseishaNameKana(TextBox txtShinseishaNameKana) {
         this.txtShinseishaNameKana=txtShinseishaNameKana;
+    }
+
+    @JsonProperty("txtShinseishaName")
+    public TextBox getTxtShinseishaName() {
+        return txtShinseishaName;
+    }
+
+    @JsonProperty("txtShinseishaName")
+    public void setTxtShinseishaName(TextBox txtShinseishaName) {
+        this.txtShinseishaName=txtShinseishaName;
     }
 
     @JsonProperty("txtTelNo")

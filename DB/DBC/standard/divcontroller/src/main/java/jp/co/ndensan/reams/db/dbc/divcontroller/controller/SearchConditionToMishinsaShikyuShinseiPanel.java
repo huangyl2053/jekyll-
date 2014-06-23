@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * @author n8223
+ * @author n8223 朴
  */
 public class SearchConditionToMishinsaShikyuShinseiPanel {
 
@@ -28,7 +28,7 @@ public class SearchConditionToMishinsaShikyuShinseiPanel {
     public ResponseData<SearchConditionToMishinsaShikyuShinseiPanelDiv> onLoad(SearchConditionToMishinsaShikyuShinseiPanelDiv panel) {
         ResponseData<SearchConditionToMishinsaShikyuShinseiPanelDiv> response = new ResponseData<>();
 
-        //TO DO 
+        //TO DO
         setMSearchConditionToMishinsaShikyuShinsei(panel);
 
         response.data = panel;
@@ -37,17 +37,16 @@ public class SearchConditionToMishinsaShikyuShinseiPanel {
     }
 
 
-    /* 
+    /*
      *  住宅改修費支給申請審査 審査支給申請検索条件の情報を設定する。(YMLDATA)
      */
     private void setMSearchConditionToMishinsaShikyuShinsei(SearchConditionToMishinsaShikyuShinseiPanelDiv panel) {
 
-        //TO DO 
+        //TO DO
         String ymlDataName = "MishinsaShikyuShinseSearchCondition.yml";
-        //TO DO 
+        //TO DO
         List<HashMap> ymlData = ymlData(ymlDataName);
 
-      
         String shikyuShinseiDateFrom = ymlData.get(0).get("shikyuShinseiDateFrom").toString();
         String shikyuShinseiDateTo = ymlData.get(0).get("shikyuShinseiDateTo").toString();
 
@@ -61,6 +60,6 @@ public class SearchConditionToMishinsaShikyuShinseiPanel {
      */
     private List<HashMap> ymlData(String ymlDataName) {
 
-        return YamlLoader.FOR_DBC.loadAsList(new RString(ymlDataName));
+        return YamlLoader.DBC.loadAsList(new RString("dbc0720011/" + ymlDataName));
     }
 }

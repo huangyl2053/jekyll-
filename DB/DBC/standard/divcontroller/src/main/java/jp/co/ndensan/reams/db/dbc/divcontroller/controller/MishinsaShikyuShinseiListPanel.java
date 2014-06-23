@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
@@ -45,14 +46,14 @@ public class MishinsaShikyuShinseiListPanel {
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onLoad(MishinsaShikyuShinseiListPanelDiv panel, JutakuKaishuShinseiResetInfoDiv panel1) {
         ResponseData<MishinsaShikyuShinseiListPanelDiv> response = new ResponseData<>();
 
-        //TO DO 
+        //TO DO
         String ymlDataName = "MishinsaShikyuShinseSearchCondition.yml";
         List<HashMap> ymlData = ymlData(ymlDataName);
 
         String shinsaDate = ymlData.get(1).get("shinsaDate").toString();
         panel.getTxtShinsaDate().setValue(new RDate(shinsaDate));
 
-        //TO DO  
+        //TO DO
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         dataSource.add(new KeyValueDataSource(new RString("tenkyo"), new RString("転居リセットの判定を行う")));
         dataSource.add(new KeyValueDataSource(new RString("threeStep"), new RString("３段階リセットの判定を行う")));
@@ -73,7 +74,7 @@ public class MishinsaShikyuShinseiListPanel {
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onClick_btnSearchMishinsa(MishinsaShikyuShinseiListPanelDiv panel, JutakuKaishuShinseiResetInfoDiv panel1) {
         ResponseData<MishinsaShikyuShinseiListPanelDiv> response = new ResponseData<>();
 
-        //TO DO 
+        //TO DO
         setMishinsaShikyuShinseiList(panel);
 
         response.data = panel;
@@ -86,7 +87,7 @@ public class MishinsaShikyuShinseiListPanel {
      */
     private void setMishinsaShikyuShinseiList(MishinsaShikyuShinseiListPanelDiv panel) {
 
-        //TO DO 
+        //TO DO
         String ymlDataName = "MishinsaShikyuShinseiList.yml";
 
         List<dgMishinsaShikyuShinsei_Row> arraydata = createRowMishinsaShikyuShinseiTestData(ymlDataName);
@@ -167,16 +168,13 @@ public class MishinsaShikyuShinseiListPanel {
 
         dgMishinsaShikyuShinsei_Row rowMishinsaShikyuShinseiListData;
         rowMishinsaShikyuShinseiListData = new dgMishinsaShikyuShinsei_Row(
-                new Button(),
                 new TextBoxDate(),
                 new TextBoxDate(),
                 RString.EMPTY,
                 RString.EMPTY,
                 new TextBoxNum(),
                 new TextBoxNum(),
-                new TextBoxNum(),
-                new Boolean(false),
-                new Boolean(false),
+                new TextBoxNum(), false, false,
                 RString.EMPTY,
                 new TextBoxCode()
         );
@@ -188,17 +186,16 @@ public class MishinsaShikyuShinseiListPanel {
         rowMishinsaShikyuShinseiListData.getTxtHokenKyufuAmount().setValue(new Decimal(保険給付額));
         rowMishinsaShikyuShinseiListData.getTxtRiyoshaFutanAmount().setValue(new Decimal(利用者負担額));
         rowMishinsaShikyuShinseiListData.getTxtHiyoTotalAmount().setValue(new Decimal(費用額合計));
-        rowMishinsaShikyuShinseiListData.setTxtTenkyoReset(new Boolean(転居));
-        rowMishinsaShikyuShinseiListData.setTxt3DankaiReset(new Boolean(段階3));
+        rowMishinsaShikyuShinseiListData.setTxtTenkyoReset(Boolean.valueOf(転居));
+        rowMishinsaShikyuShinseiListData.setTxt3DankaiReset(Boolean.valueOf(段階3));
         rowMishinsaShikyuShinseiListData.getTxtSeiriNo().setValue(new RString(整理番号));
 
         return rowMishinsaShikyuShinseiListData;
 
     }
 
-        
     /**
-     * 住宅改修費支給申請審査 　申請内容の画面で、3段階リセットをチェックしたから、戻るとき、相違有り：3段階リセットの行で、３段階チェックを設定する。
+     * 住宅改修費支給申請審査 申請内容の画面で、3段階リセットをチェックしたから、戻るとき、相違有り：3段階リセットの行で、３段階チェックを設定する。
      *
      * @param panel MishinsaShikyuShinseiListPanelDiv
      * @param panel1
@@ -207,12 +204,14 @@ public class MishinsaShikyuShinseiListPanel {
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onClick_btnModifyShinseiContents(MishinsaShikyuShinseiListPanelDiv panel, JutakuKaishuShinseiResetInfoDiv panel1) {
         ResponseData<MishinsaShikyuShinseiListPanelDiv> response = new ResponseData<>();
 
+        panel.getDgMishinsaShikyuShinsei().getClickedItem().setRowState(RowState.Modified);
+
         List<dgMishinsaShikyuShinsei_Row> selectedMishinsaShikyuShinsei
                 = panel.getDgMishinsaShikyuShinsei().getSelectedItems();
 
         //TO DO  介護状態区分３段階変更による　チェックされたことを確認する。JutakuKaishuShinseiResetInfoDiv
         String chkResetInfoSelValue = panel1.getChkResetInfo().getSelectedValues().toString();
-     
+
         for (int i = 0; i < selectedMishinsaShikyuShinsei.size(); i++) {
             dgMishinsaShikyuShinsei_Row mishinsaShikyuShinsei_Row = selectedMishinsaShikyuShinsei.get(i);
             if (i == 3) {
@@ -229,13 +228,11 @@ public class MishinsaShikyuShinseiListPanel {
             }
         }
 
-        
         response.data = panel;
         return response;
 
     }
-    
-    
+
     /**
      * 住宅改修費支給申請審査 選択された未審査支給申請一覧情報をもとに、 支給申請内容を一括審査するボタンを押下後、審査結果の内容をセットされる。
      *
@@ -270,7 +267,7 @@ public class MishinsaShikyuShinseiListPanel {
                 if (!chkResetInfoSelValue.isEmpty()) {
                     dgMishinsaShikyuShinsei_Row mishinsaShikyuShinsei_Row = selectedMishinsaShikyuShinsei.get(rowErr);
                     mishinsaShikyuShinsei_Row.setTxtShinsaResult(new RString("承認"));
-                   // mishinsaShikyuShinsei_Row.setTxt3DankaiReset(Boolean.TRUE);
+                    // mishinsaShikyuShinsei_Row.setTxt3DankaiReset(Boolean.TRUE);
                 }
             }
         }
@@ -284,7 +281,7 @@ public class MishinsaShikyuShinseiListPanel {
      * エラーMESSAGE
      */
 //    private void validate(ResponseData<MishinsaShikyuShinseiListPanelDiv> response) {
-//       String errMessage = "【未審査支給申請一覧】3行：相違有り3段階をリセットしてください";   
+//       String errMessage = "【未審査支給申請一覧】3行：相違有り3段階をリセットしてください";
 //       response.addMessage(new WarningMessage("エラー", errMessage), DivcontrollerMethod.method(SingleButtonType.Free,null));
 //    }
     /*
@@ -292,7 +289,6 @@ public class MishinsaShikyuShinseiListPanel {
      */
     private List<HashMap> ymlData(String ymlDataName) {
 
-        return YamlLoader.FOR_DBC.loadAsList(new RString(ymlDataName));
+        return YamlLoader.DBC.loadAsList(new RString("dbc0720011/" + ymlDataName));
     }
-
 }

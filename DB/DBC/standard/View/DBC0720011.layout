@@ -101,7 +101,7 @@
    "jpControlName": "",
    "onLoad": "",
    "title": "未審査支給申請検索条件",
-   "isOpen": false,
+   "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -430,9 +430,9 @@
      },
      "onSort": "",
      "onSelect": "",
-     "onSelectByDblClick": "onClick_btnMod",
+     "onSelectByDblClick": "",
      "onSelectBySelectButton": "",
-     "onSelectByModifyButton": "",
+     "onSelectByModifyButton": "onClick_btnMod",
      "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
@@ -830,7 +830,12 @@
      "postParameterPanelNames": "JutakuKaishuShinsaHihokenshaPanel"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -852,7 +857,7 @@
    "fieldName": "JutakuKaishuShinseiPanel",
    "items": [
     {
-     "fieldName": "JutakuKaishuShinseiContents",
+     "fieldName": "JutakuKaishuShinsaShinseiContents",
      "items": [
       {
        "fieldName": "txtTeikyoYM",
@@ -941,7 +946,7 @@
        "isComboBox": false,
        "suggest": [],
        "decorationClass": "",
-       "formatLength": 1
+       "formatLength": "10"
       },
       {
        "fieldName": "ddlHokensha",
@@ -1228,7 +1233,7 @@
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
        "btnSearch_displayNone": false,
-       "txtUkestukeDate_displayNone": true,
+       "txtUkestukeDate_displayNone": false,
        "txtJigyoshaNo_disabled": false,
        "txtShinseishaName_labelLText": "氏名",
        "txtYubinNo_displayNone": false,
@@ -1417,7 +1422,7 @@
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
-         "formatLength": 1
+         "formatLength": "10"
         },
         {
          "fieldName": "btnSearchCreationJigyoshaName",
@@ -1553,12 +1558,12 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
+       "marginLeft": "XS",
        "marginRight": "0",
        "selectControlID": "JutakuKaishuShinsaKoza",
        "helpMessageID": "",
        "jpControlName": "",
-       "title": "口座振替申請情報",
+       "title": "支払方法",
        "relation": [],
        "marginTop": 0,
        "marginBottom": 0,
@@ -1568,10 +1573,15 @@
        "eraseBorderLeft": false,
        "panelDisplay": 1,
        "businessId": "DBZ",
-       "controlName": "KozaPayment",
+       "controlName": "PaymentMethod",
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
-       "dialogCancelEventNameForDialog": ""
+       "dialogCancelEventNameForDialog": "",
+       "KozaPayment_title": "",
+       "onClick_radPayMethod": "onClick_radPayMethod",
+       "Juryoinin_displayNone": true,
+       "Madoguchi_displayNone": true,
+       "Koza_displayNone": false
       }
      ],
      "controlType": "Panel",
@@ -1588,7 +1598,7 @@
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "XS",
-     "selectControlID": "JutakuKaishuShinseiContents",
+     "selectControlID": "JutakuKaishuShinsaShinseiContents",
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
@@ -1597,7 +1607,7 @@
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "JutakuKaishuShinseiContents"
+       "postParameterPanelNames": "JutakuKaishuShinsaShinseiContents"
       },
       {
        "postParameterPanelNames": "MishinsaShikyuShinseiListPanel"
@@ -1607,6 +1617,10 @@
       {
        "eventName": "onLoad",
        "requestUrl": ""
+      },
+      {
+       "eventName": "onClick_radPayMethod",
+       "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiPanel/onClick_radPayMethod"
       }
      ],
      "hiddenInput": [],
@@ -1792,8 +1806,8 @@
      "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiPanel/onClick_btnMod"
     },
     {
-     "eventName": "onClick_btnAddDetail",
-     "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiPanel/onClick_btnAddDetail"
+     "eventName": "onClick_btnModifyDetail",
+     "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiPanel/onClick_btnModifyDetail"
     },
     {
      "eventName": "onClick_btnModify",
@@ -1988,7 +2002,7 @@
      "transition": ""
     },
     {
-     "fieldName": "btnSave",
+     "fieldName": "btnModifyShinseiContents",
      "event": "onClick",
      "transition": ""
     }
@@ -2040,7 +2054,7 @@
      "transition": ""
     },
     {
-     "fieldName": "btnSave",
+     "fieldName": "btnModifyShinseiContents",
      "event": "onClick",
      "transition": ""
     }
@@ -2062,7 +2076,7 @@
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "JutakuKaishuShinseiContents",
+     "visibleDiv": "JutakuKaishuShinsaShinseiContents",
      "panelState": "visible",
      "fixedDiv": ""
     },
@@ -2145,14 +2159,14 @@
      "transition": "申請審査"
     },
     {
-     "fieldName": "btnSave",
+     "fieldName": "btnModifyShinseiContents",
      "event": "onClick",
      "transition": "申請審査"
     }
    ]
   }
  ],
- "currentState": "申請修正",
+ "currentState": "All",
  "id": "DBC0720011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -2160,7 +2174,7 @@
   [
    "JutakuKaishuShinseiResetInfo",
    "MishinsaShikyuShinseiListPanel",
-   "JutakuKaishuShinseiContents",
+   "JutakuKaishuShinsaShinseiContents",
    "JutakuKaishuShinseiPanel"
   ],
   [
