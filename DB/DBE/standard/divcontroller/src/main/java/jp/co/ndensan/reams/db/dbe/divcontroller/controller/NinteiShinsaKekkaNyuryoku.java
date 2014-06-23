@@ -74,11 +74,6 @@ public class NinteiShinsaKekkaNyuryoku {
             div.getNinteiKekkaNyuryoku().getTxtShinsakaiIken().setValue(dataRow.getShinsakaiIken());
         }
 
-        div.getNinteiKekkaNyuryoku().setEraseBorderBottom(true);
-        div.getNinteiKekkaNyuryoku().setEraseBorderLeft(true);
-        div.getNinteiKekkaNyuryoku().setEraseBorderRight(true);
-        div.getNinteiKekkaNyuryoku().setEraseBorderTop(true);
-
         if (shinsaTaishoshaIchiranDiv.getDgShinsaTaishoshaIchiran().getSelectedItems().size() == 1) {
             div.getNyuryokuSeigyo().getBtnNext().setDisplayNone(true);
         } else {
