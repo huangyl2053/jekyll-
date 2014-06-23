@@ -2524,6 +2524,11 @@
      "fieldName": "btnReseach",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -2574,6 +2579,11 @@
     },
     {
      "fieldName": "btnReseach",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
      "event": "onClick",
      "transition": ""
     }
@@ -2664,6 +2674,11 @@
      "fieldName": "btnReseach",
      "event": "onClick",
      "transition": "対象者検索"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -2749,6 +2764,11 @@
      "fieldName": "btnReseach",
      "event": "onClick",
      "transition": "対象者検索"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -2829,6 +2849,11 @@
      "fieldName": "btnReseach",
      "event": "onClick",
      "transition": "対象者検索"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -2876,11 +2901,16 @@
      "fieldName": "btnReseach",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": "終了"
     }
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "登録完了",
  "id": "DBA2040011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -3026,6 +3056,50 @@
     },
     {
      "state": "解除登録"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  },
+  {
+   "commonButtonAreaId": "Complete",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnComplete",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "適用処理を"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "登録完了"
     }
    ],
    "isFinishButtonOnTheRight": false
