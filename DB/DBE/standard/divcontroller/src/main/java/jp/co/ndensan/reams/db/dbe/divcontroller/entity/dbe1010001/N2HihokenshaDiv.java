@@ -24,6 +24,8 @@ public class N2HihokenshaDiv extends Panel {
      */
     @JsonProperty("Iryohokensha")
     private IryohokenshaDiv Iryohokensha;
+    @JsonProperty("linN2Hihokensha")
+    private HorizontalLine linN2Hihokensha;
     @JsonProperty("ddltTokuteiShippei")
     private DropDownList ddltTokuteiShippei;
 
@@ -41,6 +43,16 @@ public class N2HihokenshaDiv extends Panel {
     @JsonProperty("Iryohokensha")
     public void setIryohokensha(IryohokenshaDiv Iryohokensha) {
         this.Iryohokensha=Iryohokensha;
+    }
+
+    @JsonProperty("linN2Hihokensha")
+    public HorizontalLine getLinN2Hihokensha() {
+        return linN2Hihokensha;
+    }
+
+    @JsonProperty("linN2Hihokensha")
+    public void setLinN2Hihokensha(HorizontalLine linN2Hihokensha) {
+        this.linN2Hihokensha=linN2Hihokensha;
     }
 
     @JsonProperty("ddltTokuteiShippei")

@@ -23,14 +23,14 @@ public class HihokenshaShujiiDiv extends Panel {
      */
     @JsonProperty("txtIryokikanCode")
     private TextBoxCode txtIryokikanCode;
+    @JsonProperty("btnSearchShujii")
+    private ButtonDialog btnSearchShujii;
     @JsonProperty("txtIryokikanName")
     private TextBox txtIryokikanName;
     @JsonProperty("txtShujiiCode")
     private TextBoxCode txtShujiiCode;
     @JsonProperty("txtShujiiName")
     private TextBox txtShujiiName;
-    @JsonProperty("btnSearchShujii")
-    private ButtonDialog btnSearchShujii;
     @JsonProperty("btnToCopyLatestShujii")
     private Button btnToCopyLatestShujii;
 
@@ -48,6 +48,16 @@ public class HihokenshaShujiiDiv extends Panel {
     @JsonProperty("txtIryokikanCode")
     public void setTxtIryokikanCode(TextBoxCode txtIryokikanCode) {
         this.txtIryokikanCode=txtIryokikanCode;
+    }
+
+    @JsonProperty("btnSearchShujii")
+    public ButtonDialog getBtnSearchShujii() {
+        return btnSearchShujii;
+    }
+
+    @JsonProperty("btnSearchShujii")
+    public void setBtnSearchShujii(ButtonDialog btnSearchShujii) {
+        this.btnSearchShujii=btnSearchShujii;
     }
 
     @JsonProperty("txtIryokikanName")
@@ -78,16 +88,6 @@ public class HihokenshaShujiiDiv extends Panel {
     @JsonProperty("txtShujiiName")
     public void setTxtShujiiName(TextBox txtShujiiName) {
         this.txtShujiiName=txtShujiiName;
-    }
-
-    @JsonProperty("btnSearchShujii")
-    public ButtonDialog getBtnSearchShujii() {
-        return btnSearchShujii;
-    }
-
-    @JsonProperty("btnSearchShujii")
-    public void setBtnSearchShujii(ButtonDialog btnSearchShujii) {
-        this.btnSearchShujii=btnSearchShujii;
     }
 
     @JsonProperty("btnToCopyLatestShujii")

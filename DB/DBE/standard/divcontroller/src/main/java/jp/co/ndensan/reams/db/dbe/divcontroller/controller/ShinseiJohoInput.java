@@ -391,7 +391,7 @@ public class ShinseiJohoInput {
             div.getTxtShinseishaJusho().setValue(jusho);
             div.getDdlShinseishaTsuzukigara().setDisabled(!isFamily);
             div.getBtnSetaiin().setVisible(isFamily);
-            div.getNinteiShinseiJigyosha().setVisible(isJighosya);
+            div.getNinteiShinseiJigyosha().setDisabled(!isJighosya);
         }
 
         //<editor-fold defaultstate="collapsed" desc="jigyosha">
