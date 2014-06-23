@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShin
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuhiKashitsukekinList.dgKyufuhiKashitsukekinList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -104,7 +103,7 @@ public class KashitsukeShinseiInfo {
         div.getTxtShinseishaName().setValue(cg.getAsRString("氏名"));
         div.getTxtShinseishaKana().setValue(cg.getAsRString("カナ"));
         div.getTxtShinseishaKankei().setValue(cg.getAsRString("被保険者との関係"));
-        div.getTxtShinseishaYubinNo().setValue(new YubinNo(cg.getAsRString("郵便番号")));
+        div.getTxtShinseishaYubinNo().setValue(cg.getAsYubinNo("郵便番号"));
         div.getTxtShinseishaJusho().setValue(cg.getAsRString("住所"));
         div.getTxtShinseishaTelNo().setValue(cg.getAsRString("電話番号"));
         response.data = info;
@@ -113,83 +112,82 @@ public class KashitsukeShinseiInfo {
 
     private void setSummaryData(KashitsukeShinseiInfoDiv info, KashitsukeShinseiListDiv list) {
         int index = Integer.parseInt(info.getTxtKashitsukeShinseiListSelectedIndex().getValue().toString());
-        if (index == -1) {
-            ControlGenerator cg = new ControlGenerator(getYaml().get(0));
-
-            info.getTxtShinseiYMD().setValue(new RDate(cg.getAsRString("申請日").toString()));
-            info.getTxtRiyoKikan().setFromValue(new RDate(cg.getAsRString("利用期間開始日").toString()));
-            info.getTxtRiyoKikan().setToValue(new RDate(cg.getAsRString("利用期間終了日").toString()));
-            info.getTxtSeikyugaku().setValue(new Decimal(cg.getAsRString("事業者の支払い請求額").toString()));
-            info.getTxtShinseiKingaku().setValue(new Decimal(cg.getAsRString("申請金額").toString()));
-        } else {
-            dgKyufuhiKashitsukekinList_Row row = list.getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList().getDataSource().get(index);
-
-            info.getTxtShinseiYMD().setValue(new RDate(makeDateString(row.getTxtShinseiYMD().toString())));
-            info.getTxtRiyoKikan().setFromValue(new RDate(makeDateString(row.getTxtKaishiYMD().toString())));
-            info.getTxtRiyoKikan().setToValue(new RDate(makeDateString(row.getTxtShuryoYMD().toString())));
-            info.getTxtSeikyugaku().setValue(new Decimal(row.getTxtSeikyugaku().toString()));
-            info.getTxtShinseiKingaku().setValue(new Decimal(row.getTxtShinseigaku().toString()));
+        dgKyufuhiKashitsukekinList_Row row = null;
+        if (index != -1) {
+            row = list.getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList().getDataSource().get(index);
         }
+        info.getTxtShinseiYMD().setValue(row == null ? null : new RDate(makeDateString(row.getTxtShinseiYMD().toString())));
+        info.getTxtRiyoKikan().setFromValue(row == null ? null : new RDate(makeDateString(row.getTxtKaishiYMD().toString())));
+        info.getTxtRiyoKikan().setToValue(row == null ? null : new RDate(makeDateString(row.getTxtShuryoYMD().toString())));
+        info.getTxtSeikyugaku().setValue(row == null ? null : new Decimal(row.getTxtSeikyugaku().toString()));
+        info.getTxtShinseiKingaku().setValue(row == null ? null : new Decimal(row.getTxtShinseigaku().toString()));
     }
 
     private void setServiceData(KashitsukeShinseiInfoDiv info) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(1));
-
+        boolean newFlg = isNew(info);
         KashitsukeShinseiServiceDiv div = info.getKashitsukeShinseiService();
+        ControlGenerator cg = new ControlGenerator(getYaml().get(1));
         KeyValueDataSource ds = new KeyValueDataSource(cg.getAsRString("key"), cg.getAsRString("value"));
         List<KeyValueDataSource> listDs = new ArrayList<>();
-        listDs.add(ds);
+        if (!newFlg) {
+            listDs.add(ds);
+        }
         div.getChkService().setSelectedItems(listDs);
     }
 
     private void setShinseishaData(KashitsukeShinseiInfoDiv info) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(2));
-
+        boolean newFlg = isNew(info);
         KashitsukeShinseishaDiv div = info.getKashitsukeShinseisha();
-        div.getTxtShinseishaName().setValue(cg.getAsRString("氏名"));
-        div.getTxtShinseishaKana().setValue(cg.getAsRString("カナ"));
-        div.getTxtShinseishaKankei().setValue(cg.getAsRString("被保険者との関係"));
-        div.getTxtShinseishaYubinNo().setValue(new YubinNo(cg.getAsRString("郵便番号")));
-        div.getTxtShinseishaJusho().setValue(cg.getAsRString("住所"));
-        div.getTxtShinseishaTelNo().setValue(cg.getAsRString("電話番号"));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(2));
+        div.getTxtShinseishaName().setValue(cg.getAsRString(newFlg ? "" : "氏名"));
+        div.getTxtShinseishaKana().setValue(cg.getAsRString(newFlg ? "" : "カナ"));
+        div.getTxtShinseishaKankei().setValue(cg.getAsRString(newFlg ? "" : "被保険者との関係"));
+        div.getTxtShinseishaYubinNo().setValue(cg.getAsYubinNo(newFlg ? "" : "郵便番号"));
+        div.getTxtShinseishaJusho().setValue(cg.getAsRString(newFlg ? "" : "住所"));
+        div.getTxtShinseishaTelNo().setValue(cg.getAsRString(newFlg ? "" : "電話番号"));
     }
 
     private void setHoshoninData(KashitsukeShinseiInfoDiv info) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(3));
-
+        boolean newFlg = isNew(info);
         KashitsukeShinseiHoshoninDiv div = info.getKashitsukeShinseiHoshonin();
-        div.getTxtHoshoninName().setValue(cg.getAsRString("氏名"));
-        div.getTxtHoshoninKana().setValue(cg.getAsRString("カナ"));
-        div.getTxtHoshoninSeiYMD().setValue(new RDate(cg.getAsRString("生年月日").toString()));
-        div.getRadHoshoninSeibetsu().setSelectedItem(cg.getAsRString("性別"));
-        div.getTxtHoshoninKankei().setValue(cg.getAsRString("申請者との関係"));
-        div.getTxtHoshoninYubinNo().setValue(new YubinNo(cg.getAsRString("郵便番号")));
-        div.getTxtHoshoninJusho().setValue(cg.getAsRString("住所"));
-        div.getTxtHoshoninTelNo().setValue(cg.getAsRString("電話番号"));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(3));
+        div.getTxtHoshoninName().setValue(cg.getAsRString(newFlg ? "" : "氏名"));
+        div.getTxtHoshoninKana().setValue(cg.getAsRString(newFlg ? "" : "カナ"));
+        div.getTxtHoshoninSeiYMD().setValue(cg.getAsRDate(newFlg ? "" : "生年月日"));
+        div.getRadHoshoninSeibetsu().setSelectedItem(newFlg ? new RString("key0") : cg.getAsRString("性別"));
+        div.getTxtHoshoninKankei().setValue(cg.getAsRString(newFlg ? "" : "申請者との関係"));
+        div.getTxtHoshoninYubinNo().setValue(cg.getAsYubinNo(newFlg ? "" : "郵便番号"));
+        div.getTxtHoshoninJusho().setValue(cg.getAsRString(newFlg ? "" : "住所"));
+        div.getTxtHoshoninTelNo().setValue(cg.getAsRString(newFlg ? "" : "電話番号"));
     }
 
     private void setHoshoninKinmusakiData(KashitsukeShinseiInfoDiv info) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(4));
-
+        boolean newFlg = isNew(info);
         KashitsukeShinseiHoshoninKinmuDiv div = info.getKashitsukeShinseiHoshonin().getKashitsukeShinseiHoshoninKinmu();
-        div.getTxtHoshoninKinmuName().setValue(cg.getAsRString("名称"));
-        div.getTxtHoshoninKinmuJusho().setValue(cg.getAsRString("所在地"));
-        div.getTxtHoshoninKinmuTelNo().setValue(cg.getAsRString("電話番号"));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(4));
+        div.getTxtHoshoninKinmuName().setValue(cg.getAsRString(newFlg ? "" : "名称"));
+        div.getTxtHoshoninKinmuJusho().setValue(cg.getAsRString(newFlg ? "" : "所在地"));
+        div.getTxtHoshoninKinmuTelNo().setValue(cg.getAsRString(newFlg ? "" : "電話番号"));
     }
 
     private void setTeishutsuData(KashitsukeShinseiInfoDiv info) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(5));
-
+        boolean newFlg = isNew(info);
         KashitsukeShinseiTeishutsuDiv div = info.getKashitsukeShinseiTeishutsu();
+        ControlGenerator cg = new ControlGenerator(getYaml().get(5));
         KeyValueDataSource ds = new KeyValueDataSource(cg.getAsRString("key"), cg.getAsRString("value"));
         List<KeyValueDataSource> listDs = new ArrayList<>();
-        listDs.add(ds);
-
+        if (!newFlg) {
+            listDs.add(ds);
+        }
         div.getChkSeikyuRyoshusho().setSelectedItems(listDs);
-        div.getTxtTeishutsuKanriNo().setValue(cg.getAsRString("提出物管理番号"));
+        div.getTxtTeishutsuKanriNo().setValue(cg.getAsRString(newFlg ? "" : "提出物管理番号"));
     }
 
     private String makeDateString(String date) {
         return new FlexibleDate(date.replace(".", "")).toString();
+    }
+
+    private boolean isNew(KashitsukeShinseiInfoDiv info) {
+        return Integer.parseInt(info.getTxtKashitsukeShinseiListSelectedIndex().getValue().toString()) == -1;
     }
 }

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1810000.KashitsukeHenk
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -105,7 +106,7 @@ public class KashitsukeHenkanInfo {
     private void setTeishutsuData(KashitsukeHenkanInfoDiv info) {
         ControlGenerator cg = new ControlGenerator(getYaml().get(5));
         KashitsukeHenkanTsuchishoDiv div = info.getKashitsukeHenkanTsuchisho();
-        div.getKashitsukeHenkanTsuchishoPrintSetting().getTxtIssueDate().setValue(cg.getAsRDate("発効日"));
+        div.getKashitsukeHenkanTsuchishoPrintSetting().getTxtIssueDate().setValue(RDate.getNowDate());
         div.getTxtNofuKigen().setValue(cg.getAsRDate("差引不足額納付期限"));
         div.getTxtShiharaiKigen().setValue(cg.getAsRDate("差引支給額支払期限"));
     }

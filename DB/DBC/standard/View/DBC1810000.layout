@@ -32,6 +32,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "AddButtonVisible": false,
      "AddButtonDisplayNone": true,
      "ListGridSetting": {
@@ -352,16 +354,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "KashitsukeHenkanKihon",
@@ -394,6 +397,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
      "atenaInfo_eraseBorderTop": true,
@@ -461,15 +466,17 @@
      "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
      "backGroundColor": 0,
      "btnHihoRireki_visible": true,
      "btnNinteiRireki_visible": true
@@ -513,16 +520,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true
   },
   {
    "fieldName": "KashitsukeHenkanInfo",
@@ -1203,6 +1211,7 @@
      "imageWidth": "",
      "imageHeight": "",
      "icon": 0,
+     "heightTextBoxMatches": false,
      "displayChildDivName": "DBC.KyufuhiKashitsukekinInfo",
      "dataPassing": [],
      "visibleCloseButton": false,
@@ -1348,16 +1357,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "KashitsukeHenkanRisoku",
@@ -1489,16 +1499,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "KashitsukeHenkanChoshu",
@@ -1523,6 +1534,7 @@
        "selectControlID": "radChoshuHoho_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "onClick": "",
        "icon": [],
        "dataSource": [
@@ -1607,6 +1619,7 @@
        "selectControlID": "radKafusokuKekka_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "onClick": "",
        "icon": [],
        "dataSource": [
@@ -1718,16 +1731,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "KashitsukeHenkanTsuchisho",
@@ -1765,6 +1779,8 @@
        ],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
        "txtSendData_displayNone": true,
        "PrintContentsSetting_title": "",
        "PrintContentsSetting_eraseBorderTop": true,
@@ -1890,16 +1906,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "isPublish": true,
      "isEmptyControl": false
     }
@@ -1946,19 +1963,20 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
-   "fieldName": "KashitsukeHenkanInfoComplete",
+   "fieldName": "KashitsukeHenkanComplete",
    "items": [
     {
      "fieldName": "KashitsukeHenkanInfoCompleteInfo",
@@ -1984,12 +2002,13 @@
      "marginTop": 0,
      "marginBottom": 0,
      "businessId": "DBZ",
-     "controlName": "CompleteProcess",
+     "controlName": "KaigoKanryoMessage",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "lblCompleteMessage_text": "給付費貸付金返還徴収登録処理が完了しました。",
-     "CompleteProcess_width": "1000"
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "KanryoMessage_width": "G12"
     }
    ],
    "controlType": "Panel",
@@ -2006,7 +2025,7 @@
    "authorityMode": 0,
    "marginLeft": "0",
    "marginRight": "0",
-   "selectControlID": "KashitsukeHenkanInfoComplete",
+   "selectControlID": "KashitsukeHenkanComplete",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -2015,26 +2034,32 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "KashitsukeHenkanInfoComplete"
+     "postParameterPanelNames": "KashitsukeHenkanComplete"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KashitsukeHenkanComplete/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true
   }
  ],
  "controlType": null,
@@ -2180,7 +2205,7 @@
    "showWizard": true,
    "visibleDivs": [
     {
-     "visibleDiv": "KashitsukeHenkanInfoComplete",
+     "visibleDiv": "KashitsukeHenkanComplete",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -2215,7 +2240,7 @@
    ]
   }
  ],
- "currentState": "返還徴収登録",
+ "currentState": "All",
  "id": "DBC1810000",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -2254,7 +2279,7 @@
    "KashitsukeHenkanTsuchishoPrintSetting"
   ],
   [
-   "KashitsukeHenkanInfoComplete"
+   "KashitsukeHenkanComplete"
   ],
   [
    "KashitsukeHenkanInfoCompleteInfo"
@@ -2263,6 +2288,7 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "HenkanSummaryInfo",
@@ -2322,13 +2348,14 @@
       "selectControlID": "btnSave",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "入力内容を登録する",
       "onClick": "",
-      "icon": 0,
+      "text": "入力内容を登録する",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
       "prefixText": "",
       "suffixText": ""
      }
