@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData.Chosain;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.dgNinteichosaResultTaishosha_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -42,6 +43,7 @@ public class NinteichosaResultEntryTargetsData {
                 ControlGenerator cg = new ControlGenerator(map);
                 RString shimei = cg.getAsRString("氏名");
                 RString kanaShimei = cg.getAsRString("カナ氏名");
+                Chosain chosain = find調査員From(cg.getAsRString("調査員コード"));
                 return new dgNinteichosaResultTaishosha_Row(
                         new Button(),
                         cg.getAsRString("保険者番号"),
@@ -56,10 +58,10 @@ public class NinteichosaResultEntryTargetsData {
                         cg.getAsTextBoxFlexibleDate("調査依頼日"),
                         cg.getAsTextBoxFlexibleDate("調査実施日"),
                         cg.getAsTextBoxFlexibleDate("調査完了日"),
-                        cg.getAsRString("調査委託先コード"),
-                        cg.getAsRString("調査委託先名"),
-                        cg.getAsRString("調査員コード"),
-                        cg.getAsRString("調査員氏名"),
+                        chosain.itakusaki().code(),
+                        chosain.itakusaki().name(),
+                        chosain.code(),
+                        chosain.name(),
                         cg.getAsRString("実施場所区分"),
                         cg.getAsRString("実施場所その他"),
                         cg.getAsTextBoxFlexibleDate("誕生日"),
@@ -69,6 +71,11 @@ public class NinteichosaResultEntryTargetsData {
                         cg.getAsTextBoxFlexibleDate("受付日"),
                         cg.getAsTextBoxFlexibleDate("データ入力日")
                 );
+
+            }
+
+            private Chosain find調査員From(RString chosainCode) {
+                return new ChosainData().get調査員From(chosainCode);
             }
         });
     }

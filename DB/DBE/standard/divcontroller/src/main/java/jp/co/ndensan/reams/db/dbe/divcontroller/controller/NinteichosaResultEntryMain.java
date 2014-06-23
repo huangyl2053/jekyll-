@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.Kihonchosa0971
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.Kihonchosa09Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.NinteichosaDetailDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.NinteichosaResultEntryMainDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.NinteichosaResultEntryTargetDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ServiceJokyoServicesCountsDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ServiceJokyoTabDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ShisakaiWaritsukeKiboDiv;
@@ -34,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ControlRepeater;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -43,6 +43,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.DivcontrollerMethod;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.SingleButtonType;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  * NinteichosaResultEntryMainDivを制御します。
@@ -113,20 +116,32 @@ public class NinteichosaResultEntryMain {
         dgNinteichosaResultTaishosha_Row target = targetInfo();
         new NinteichosaDetail(div).reflectPanelValueTo(target);
         NinteichosaResultEntryTarget.Holder.save(target);
+        return addMessage(_createResponseData(div), new InformationMessage("1", "処理は正常に終了しました。"));
+    }
+
+    /**
+     *
+     * @param div NinteichosaResultEntryMainDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnAddTokkijiko(NinteichosaResultEntryMainDiv div) {
+        ControlRepeater<TokkijikoCom> rep = repTokkijikoCom(div);
+        rep.setRepeateData(createIncreasedRepeateData(rep));
         return _createResponseData(div);
     }
 
-    //onClick_btnAddTokkijiko
-    public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnAddTokkijiko(NinteichosaResultEntryMainDiv div) {
-        ControlRepeater<TokkijikoCom> rep = div.getTabNinteichosaResult().getTokkijikoTab().getRepTokkijikoCom();
+    private ControlRepeater<TokkijikoCom> repTokkijikoCom(NinteichosaResultEntryMainDiv div) {
+        return div.getTabNinteichosaResult().getTokkijikoTab().getRepTokkijikoCom();
+    }
+
+    private List<TokkijikoCom> createIncreasedRepeateData(ControlRepeater<TokkijikoCom> rep) {
         List<TokkijikoCom> repeateData = rep.getRepeateData();
         TokkijikoCom newOne = new TokkijikoComFactroy(repeateData.get(0)).createTokkijikoCom();
         if (isEvenNumber(repeateData.size())) {
             newOne.setWrap(true);
         }
         repeateData.add(newOne);
-        rep.setRepeateData(repeateData);
-        return _createResponseData(div);
+        return repeateData;
     }
 
     private class TokkijikoComFactroy {
@@ -187,10 +202,6 @@ public class NinteichosaResultEntryMain {
 
     private boolean isEvenNumber(int targetNum) {
         return targetNum % 2 == 0;
-    }
-
-    private dgNinteichosaResultTaishosha_Row _extractSelectedTargetFrom(NinteichosaResultEntryTargetDiv div) {
-        return div.getDgNinteichosaResultTaishosha().getClickedItem();
     }
 
     //<editor-fold defaultstate="collapsed" desc="HihokenshaForNinteichosaResult">
@@ -894,6 +905,11 @@ public class NinteichosaResultEntryMain {
     private ResponseData<NinteichosaResultEntryMainDiv> _createResponseData(NinteichosaResultEntryMainDiv div) {
         ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
         response.data = div;
+        return response;
+    }
+
+    private <T> ResponseData<T> addMessage(ResponseData<T> response, InformationMessage message) {
+        response.addMessage(message);
         return response;
     }
 }

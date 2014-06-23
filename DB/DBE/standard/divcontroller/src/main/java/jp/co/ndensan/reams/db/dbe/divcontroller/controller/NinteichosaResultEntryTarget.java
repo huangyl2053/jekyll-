@@ -32,10 +32,20 @@ public class NinteichosaResultEntryTarget {
      */
     public ResponseData<NinteichosaResultEntryTargetDiv> onLoad(NinteichosaResultEntryTargetDiv div) {
         div.getDgNinteichosaResultTaishosha().setDataSource(_findTarget());
+        setDisabled_btnToFinish(div, true);
         return _createResponseData(div);
     }
 
-    //onClick_btnToDecide
+    private void setDisabled_btnToFinish(NinteichosaResultEntryTargetDiv div, boolean disabled) {
+        div.getButtonsForNinteichosaResultEntryTarget().getBtnToFinish().setDisabled(disabled);
+    }
+
+    /**
+     * データグリッドの選択ボタンを押したときの処理です。
+     *
+     * @param div NinteichosaResultEntryTargetDiv
+     * @return ResponseData
+     */
     public ResponseData<NinteichosaResultEntryTargetDiv> onClick_btnToDecide(NinteichosaResultEntryTargetDiv div) {
         Holder.save(dgTargetPersons(div).getClickedItem());
         return _createResponseData(div);
@@ -51,6 +61,7 @@ public class NinteichosaResultEntryTarget {
         dgNinteichosaResultTaishosha_Row target = Holder.get();
         if (target != null) {
             Holder.remove();
+            setDisabled_btnToFinish(div, false);
             List<dgNinteichosaResultTaishosha_Row> list = new ArrayList<>();
             for (dgNinteichosaResultTaishosha_Row row : _findTarget()) {
                 if (row.getHihokenshaNo().equals(target.getHihokenshaNo())) {
@@ -92,11 +103,19 @@ public class NinteichosaResultEntryTarget {
     }
 
     private boolean canBeSet_chosaKanryoDate(dgNinteichosaResultTaishosha_Row target) {
-        return !(isEmpty(target.getChosaIraiDate().getValue()) || isEmpty(target.getChosaJisshiDate().getValue()));
+        return !isEmpty_調査依頼日(target) && !isEmpty_調査実施日(target);
     }
 
-    private boolean isEmpty(FlexibleDate rstr) {
-        return (rstr == null) || (FlexibleDate.EMPTY.equals(rstr));
+    private boolean isEmpty_調査依頼日(dgNinteichosaResultTaishosha_Row target) {
+        return isEmpty(target.getChosaIraiDate().getValue());
+    }
+
+    private boolean isEmpty_調査実施日(dgNinteichosaResultTaishosha_Row target) {
+        return isEmpty(target.getChosaJisshiDate().getValue());
+    }
+
+    private boolean isEmpty(FlexibleDate date) {
+        return (date == null) || (FlexibleDate.EMPTY.equals(date));
     }
 
     /**
