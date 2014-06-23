@@ -24,13 +24,14 @@
      "selectControlID": "btnHonsanteiFukaKeisan",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "",
      "text": "本算定賦課計算",
-     "appearance": 0,
-     "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnHonsanteiTsuchisho",
@@ -52,19 +53,20 @@
      "selectControlID": "btnHonsanteiTsuchisho",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "",
      "text": "本算定帳票発行",
-     "appearance": 0,
-     "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
    "width": "G2",
    "visible": true,
-   "displayNone": false,
+   "displayNone": true,
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
@@ -94,16 +96,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "HonsanteiFukaPankuzu",
@@ -129,7 +132,6 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "text": "",
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
@@ -143,6 +145,7 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "",
@@ -151,13 +154,14 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     }
    ],
    "controlType": "Panel",
    "width": "G12",
    "visible": true,
-   "displayNone": false,
+   "displayNone": true,
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
@@ -187,16 +191,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "HonsanteiFukaKakunin",
@@ -225,7 +230,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -239,6 +243,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "調定年度",
@@ -247,7 +252,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       },
       {
        "fieldName": "txtFukaNendo",
@@ -270,7 +276,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -284,6 +289,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "賦課年度",
@@ -292,7 +298,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       },
       {
        "fieldName": "ddlChoteiKi",
@@ -314,6 +321,7 @@
        "selectControlID": "ddlChoteiKi_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -323,13 +331,13 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
          "value": "1期（6月）"
         }
        ],
+       "selectedItem": "key0",
        "disabledItem": []
       },
       {
@@ -353,7 +361,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
-       "text": "",
        "required": false,
        "placeHolder": "平26.05.20",
        "isPrivateInfo": false,
@@ -362,6 +369,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "所得異動基準日",
        "labelRText": "",
@@ -370,7 +378,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       }
      ],
      "controlType": "Panel",
@@ -406,16 +415,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "HonsanteiShoriKakunin",
@@ -440,8 +450,8 @@
        "selectControlID": "dgHonsanteiShoriKakunin",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "Auto",
-       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -518,6 +528,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "",
        "isAscending": true,
        "filterList": [],
@@ -543,9 +554,9 @@
        "selectControlID": "lblonsanteiShoriKakunin",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "※算定処理は上記処理がすべて完了してから行います。",
        "required": false,
        "isPrivateInfo": false,
+       "text": "※算定処理は上記処理がすべて完了してから行います。",
        "decorationClass": "",
        "align": 0
       }
@@ -583,16 +594,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "HonsanteiKanrijoho",
@@ -617,8 +629,8 @@
        "selectControlID": "dgKanrijoho1",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "Auto",
-       "dataSource": [],
        "gridSetting": {
         "rowHeight": 20,
         "isMultiSelectable": false,
@@ -679,6 +691,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "",
        "isAscending": true,
        "filterList": [],
@@ -704,8 +717,8 @@
        "selectControlID": "dgKanrijoho2",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "Auto",
-       "dataSource": [],
        "gridSetting": {
         "rowHeight": 20,
         "isMultiSelectable": false,
@@ -766,6 +779,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "",
        "isAscending": true,
        "filterList": [],
@@ -805,16 +819,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     }
    ],
    "controlType": "Panel",
@@ -855,16 +870,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "HonsanteiChohyoHakko",
@@ -893,7 +909,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "",
        "textKind": 0,
@@ -903,6 +918,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "抽出開始",
        "labelRText": "",
@@ -911,7 +927,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "txtChoteiboFromTime",
@@ -934,7 +951,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -948,6 +964,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -958,6 +975,7 @@
        "labelRAlign": 0,
        "decorationClass": "",
        "displayFormat": 1,
+       "permitCharactor": "",
        "timeKubun": 2
       },
       {
@@ -980,9 +998,9 @@
        "selectControlID": "lblChoteboTo",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "～　本算定賦課終了",
        "required": false,
        "isPrivateInfo": false,
+       "text": "～　本算定賦課終了",
        "decorationClass": "",
        "align": 2
       },
@@ -1014,6 +1032,8 @@
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
        "ChohyoShutsuryokujun_width": "G12"
       }
      ],
@@ -1050,16 +1070,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "isPublish": true,
      "isEmptyControl": false
     },
@@ -1087,7 +1108,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "平26.99.99",
        "textKind": 0,
@@ -1097,6 +1117,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "発行日",
        "labelRText": "",
@@ -1105,7 +1126,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblTokuKaishiTsuchiDaikou",
@@ -1127,9 +1149,9 @@
        "selectControlID": "lblTokuKaishiTsuchiDaikou",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "※代行プリント対象の通知書です",
        "required": false,
        "isPrivateInfo": false,
+       "text": "※代行プリント対象の通知書です",
        "decorationClass": "",
        "align": 2
       },
@@ -1153,14 +1175,14 @@
        "selectControlID": "radTokuKaishiTsuchiTaisho_core",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "",
-       "icon": [],
+       "readOnly": false,
        "required": false,
        "onChange": "",
        "labelLText": "出力対象",
        "labelLWidth": "80",
        "labelLAlign": 2,
-       "selectedItem": null,
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -1175,6 +1197,7 @@
          "value": "2月特徴開始者のみ"
         }
        ],
+       "selectedItem": null,
        "newLineItemNumber": 3,
        "spaceSize": "M",
        "disabledItem": []
@@ -1207,6 +1230,8 @@
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
        "ChohyoShutsuryokujun_width": "G12"
       }
      ],
@@ -1243,16 +1268,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "isPublish": true,
      "isEmptyControl": false
     },
@@ -1280,7 +1306,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "",
        "textKind": 0,
@@ -1290,6 +1315,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "発行日",
        "labelRText": "",
@@ -1298,12 +1324,13 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "btnKetteiTsuchiYousikiSettei",
        "items": [],
-       "controlType": "ButtonDialog",
+       "controlType": "Button",
        "width": "M",
        "visible": true,
        "displayNone": false,
@@ -1320,18 +1347,14 @@
        "selectControlID": "btnKetteiTsuchiYousikiSettei",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "",
        "text": "打分け方法を確認する",
-       "appearance": 0,
-       "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "onClick": "",
+       "appearance": 0,
+       "imageFileUrl": "",
        "icon": 0,
-       "displayChildDivName": "DBB.HonKakushuTsuchiUchiwakeKakunin",
-       "dataPassing": [],
-       "visibleCloseButton": true,
-       "onOkClose": "",
-       "onBeforeOpenDialog": ""
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "txtKetteTsuchiBunshoNo",
@@ -1354,7 +1377,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -1368,6 +1390,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "文書番号",
@@ -1376,7 +1399,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       },
       {
        "fieldName": "ShutsuryokuJunHonKetteTsuchi",
@@ -1406,6 +1430,8 @@
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
        "ChohyoShutsuryokujun_width": "G12"
       }
      ],
@@ -1442,16 +1468,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "isPublish": true,
      "isEmptyControl": false
     },
@@ -1479,7 +1506,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "",
        "textKind": 0,
@@ -1489,6 +1515,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "発行日",
        "labelRText": "",
@@ -1497,7 +1524,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblNotsuDaikou",
@@ -1519,9 +1547,9 @@
        "selectControlID": "lblNotsuDaikou",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "※代行プリント対象の通知書です",
        "required": false,
        "isPrivateInfo": false,
+       "text": "※代行プリント対象の通知書です",
        "decorationClass": "",
        "align": 2
       },
@@ -1545,6 +1573,7 @@
        "selectControlID": "ddlNotsuShuturyokuki_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "required": false,
        "onFocus": "",
        "onBlur": "",
@@ -1555,7 +1584,6 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -1598,6 +1626,7 @@
          "value": "10期（3月）"
         }
        ],
+       "selectedItem": "key0",
        "disabledItem": []
       },
       {
@@ -1620,14 +1649,14 @@
        "selectControlID": "chkNotsuTaishosha_core",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "",
-       "icon": [],
+       "readOnly": false,
        "required": false,
        "onChange": "",
        "labelLText": "対象者",
        "labelLWidth": "80",
        "labelLAlign": 2,
-       "selectedItem": null,
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -1638,6 +1667,7 @@
          "value": "口座振替者"
         }
        ],
+       "selectedItem": null,
        "newLineItemNumber": 3,
        "spaceSize": "M",
        "disabledItem": [],
@@ -1680,14 +1710,14 @@
        "selectControlID": "radNotsuSeikatsuHogo_core",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "",
-       "icon": [],
+       "readOnly": false,
        "required": false,
        "onChange": "",
        "labelLText": "生活保護対象者のみで出力",
        "labelLWidth": "200",
        "labelLAlign": 2,
-       "selectedItem": "key0",
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -1698,6 +1728,7 @@
          "value": "しない"
         }
        ],
+       "selectedItem": "key0",
        "newLineItemNumber": 2,
        "spaceSize": "M",
        "disabledItem": []
@@ -1722,14 +1753,14 @@
        "selectControlID": "radNotsuYamawake_core",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "",
-       "icon": [],
+       "readOnly": false,
        "required": false,
        "onChange": "",
        "labelLText": "ページごとに山分け",
        "labelLWidth": "200",
        "labelLAlign": 2,
-       "selectedItem": "key0",
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -1740,6 +1771,7 @@
          "value": "しない"
         }
        ],
+       "selectedItem": "key0",
        "newLineItemNumber": 2,
        "spaceSize": "M",
        "disabledItem": []
@@ -1772,6 +1804,8 @@
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
        "ChohyoShutsuryokujun_width": "G12"
       }
      ],
@@ -1808,16 +1842,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "isPublish": true,
      "isEmptyControl": false
     },
@@ -1852,6 +1887,8 @@
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
        "ChohyoShutsuryokujun_width": "G12"
       }
      ],
@@ -1888,16 +1925,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "isPublish": true,
      "isEmptyControl": false
     }
@@ -1940,16 +1978,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   }
  ],
  "controlType": null,
@@ -1976,31 +2015,6 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "メニュー選択",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "HonsanteiFukaMenuSentaku",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "btnHonsanteiFukaKeisan",
-     "event": "onClick",
-     "transition": "本算定賦課計算"
-    },
-    {
-     "fieldName": "btnHonsanteiTsuchisho",
-     "event": "onClick",
-     "transition": "本算定通知書"
-    }
-   ]
-  },
-  {
-   "order": "2",
    "stateName": "本算定賦課計算",
    "showWizard": false,
    "visibleDivs": [
@@ -2100,7 +2114,7 @@
    ]
   },
   {
-   "order": "3",
+   "order": "2",
    "stateName": "本算定通知書",
    "showWizard": false,
    "visibleDivs": [
@@ -2158,7 +2172,12 @@
  "currentState": "All",
  "id": "DBB0310001",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "showUchiwakeHohoKakunin",
+   "eventName": "btnKetteiTsuchiYousikiSettei.onClick"
+  }
+ ],
  "loadSequencePanelNames": [
   [
    "HonTokuKaishiTsuchi",
@@ -2209,6 +2228,7 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "HonsanteiKeisan",
