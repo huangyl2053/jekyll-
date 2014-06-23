@@ -23,10 +23,10 @@ public class NinteichosainAdvanceEntryDiv extends Panel {
      */
     @JsonProperty("txtChosaItakusakiCode")
     private TextBoxCode txtChosaItakusakiCode;
-    @JsonProperty("txtChosaItakusakiName")
-    private TextBox txtChosaItakusakiName;
     @JsonProperty("btnSearchNinteichosain")
     private ButtonDialog btnSearchNinteichosain;
+    @JsonProperty("txtChosaItakusakiName")
+    private TextBox txtChosaItakusakiName;
     @JsonProperty("btnToCopyLatestItakusaki")
     private Button btnToCopyLatestItakusaki;
     @JsonProperty("txtNinteichosainCode")
@@ -54,16 +54,6 @@ public class NinteichosainAdvanceEntryDiv extends Panel {
         this.txtChosaItakusakiCode=txtChosaItakusakiCode;
     }
 
-    @JsonProperty("txtChosaItakusakiName")
-    public TextBox getTxtChosaItakusakiName() {
-        return txtChosaItakusakiName;
-    }
-
-    @JsonProperty("txtChosaItakusakiName")
-    public void setTxtChosaItakusakiName(TextBox txtChosaItakusakiName) {
-        this.txtChosaItakusakiName=txtChosaItakusakiName;
-    }
-
     @JsonProperty("btnSearchNinteichosain")
     public ButtonDialog getBtnSearchNinteichosain() {
         return btnSearchNinteichosain;
@@ -72,6 +62,16 @@ public class NinteichosainAdvanceEntryDiv extends Panel {
     @JsonProperty("btnSearchNinteichosain")
     public void setBtnSearchNinteichosain(ButtonDialog btnSearchNinteichosain) {
         this.btnSearchNinteichosain=btnSearchNinteichosain;
+    }
+
+    @JsonProperty("txtChosaItakusakiName")
+    public TextBox getTxtChosaItakusakiName() {
+        return txtChosaItakusakiName;
+    }
+
+    @JsonProperty("txtChosaItakusakiName")
+    public void setTxtChosaItakusakiName(TextBox txtChosaItakusakiName) {
+        this.txtChosaItakusakiName=txtChosaItakusakiName;
     }
 
     @JsonProperty("btnToCopyLatestItakusaki")

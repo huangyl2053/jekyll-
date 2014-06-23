@@ -5,9 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.ImageOtherDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * tplImage05 のクラスファイル 
@@ -21,8 +20,8 @@ public class tplImage05Div extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("imgSonota")
-    private StaticImage imgSonota;
+    @JsonProperty("ImageOther")
+    private ImageOtherDiv ImageOther;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,14 +29,14 @@ public class tplImage05Div extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("imgSonota")
-    public StaticImage getImgSonota() {
-        return imgSonota;
+    @JsonProperty("ImageOther")
+    public ImageOtherDiv getImageOther() {
+        return ImageOther;
     }
 
-    @JsonProperty("imgSonota")
-    public void setImgSonota(StaticImage imgSonota) {
-        this.imgSonota=imgSonota;
+    @JsonProperty("ImageOther")
+    public void setImageOther(ImageOtherDiv ImageOther) {
+        this.ImageOther=ImageOther;
     }
 
 }

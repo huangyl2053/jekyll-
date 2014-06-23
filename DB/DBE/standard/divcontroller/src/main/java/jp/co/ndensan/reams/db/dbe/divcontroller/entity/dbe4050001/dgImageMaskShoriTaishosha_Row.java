@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 02 11:50:05 JST 2014 
+ * Mon Jun 23 18:45:17 JST 2014 
  */
 
 
@@ -42,6 +42,23 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
 
     public dgImageMaskShoriTaishosha_Row() {
         super();
+        this.処理 = new Button();
+        this.保険者 = RString.EMPTY;
+        this.被保番号 = RString.EMPTY;
+        this.氏名 = RString.EMPTY;
+        this.申請日 = new TextBoxFlexibleDate();
+        this.申請区分 = RString.EMPTY;
+        this.審査予定日 = new TextBoxFlexibleDate();
+        this.マスク区分 = RString.EMPTY;
+        this.意見書受領日 = new TextBoxFlexibleDate();
+        this.調査票受領日 = new TextBoxFlexibleDate();
+        this.保険者番号 = RString.EMPTY;
+        this.被保険者区分 = RString.EMPTY;
+        this.生年月日 = new TextBoxFlexibleDate();
+        this.年齢 = RString.EMPTY;
+        this.前回認定結果 = RString.EMPTY;
+        this.前回認定期間開始日 = new TextBoxFlexibleDate();
+        this.前回認定期間終了日 = new TextBoxFlexibleDate();
     }
 
     public dgImageMaskShoriTaishosha_Row(Button 処理, RString 保険者, RString 被保番号, RString 氏名, TextBoxFlexibleDate 申請日, RString 申請区分, TextBoxFlexibleDate 審査予定日, RString マスク区分, TextBoxFlexibleDate 意見書受領日, TextBoxFlexibleDate 調査票受領日, RString 保険者番号, RString 被保険者区分, TextBoxFlexibleDate 生年月日, RString 年齢, RString 前回認定結果, TextBoxFlexibleDate 前回認定期間開始日, TextBoxFlexibleDate 前回認定期間終了日) {

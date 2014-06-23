@@ -6,7 +6,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.ImageMaskTaishoShijiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoHihokenshaJoho.KaigoHihokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.KaigoImageMaskingDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.ShoriTaishoshaIchiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.ShoriTaishoshaKensakuShijiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoHihokenshaJoho.KaigoHihokenshaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 

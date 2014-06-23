@@ -15,7 +15,7 @@
    "layoutName": "DBE2060002",
    "eventName": "return",
    "toLayoutSubGyomuCode": "DBE",
-   "toLayoutName": "DBE2060001",
+   "toLayoutName": "DBE2060003",
    "toEventName": ""
   }
  ],

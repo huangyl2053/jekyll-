@@ -23,10 +23,10 @@ public class NinteiShinseiJigyoshaDiv extends Panel {
      */
     @JsonProperty("txtJigyoshaCode")
     private TextBoxCode txtJigyoshaCode;
-    @JsonProperty("txtJigyoshaName")
-    private TextBox txtJigyoshaName;
     @JsonProperty("btnSearchJigyosha")
     private ButtonDialog btnSearchJigyosha;
+    @JsonProperty("txtJigyoshaName")
+    private TextBox txtJigyoshaName;
     @JsonProperty("ddlJigyoshaKubun")
     private DropDownList ddlJigyoshaKubun;
 
@@ -46,16 +46,6 @@ public class NinteiShinseiJigyoshaDiv extends Panel {
         this.txtJigyoshaCode=txtJigyoshaCode;
     }
 
-    @JsonProperty("txtJigyoshaName")
-    public TextBox getTxtJigyoshaName() {
-        return txtJigyoshaName;
-    }
-
-    @JsonProperty("txtJigyoshaName")
-    public void setTxtJigyoshaName(TextBox txtJigyoshaName) {
-        this.txtJigyoshaName=txtJigyoshaName;
-    }
-
     @JsonProperty("btnSearchJigyosha")
     public ButtonDialog getBtnSearchJigyosha() {
         return btnSearchJigyosha;
@@ -64,6 +54,16 @@ public class NinteiShinseiJigyoshaDiv extends Panel {
     @JsonProperty("btnSearchJigyosha")
     public void setBtnSearchJigyosha(ButtonDialog btnSearchJigyosha) {
         this.btnSearchJigyosha=btnSearchJigyosha;
+    }
+
+    @JsonProperty("txtJigyoshaName")
+    public TextBox getTxtJigyoshaName() {
+        return txtJigyoshaName;
+    }
+
+    @JsonProperty("txtJigyoshaName")
+    public void setTxtJigyoshaName(TextBox txtJigyoshaName) {
+        this.txtJigyoshaName=txtJigyoshaName;
     }
 
     @JsonProperty("ddlJigyoshaKubun")

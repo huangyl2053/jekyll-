@@ -24,7 +24,7 @@ public class ButtonsForNinteichosaResultEntryDiv extends Panel {
     @JsonProperty("btnToReturn")
     private Button btnToReturn;
     @JsonProperty("btnToRegisterResult")
-    private ButtonDialog btnToRegisterResult;
+    private Button btnToRegisterResult;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,12 +43,12 @@ public class ButtonsForNinteichosaResultEntryDiv extends Panel {
     }
 
     @JsonProperty("btnToRegisterResult")
-    public ButtonDialog getBtnToRegisterResult() {
+    public Button getBtnToRegisterResult() {
         return btnToRegisterResult;
     }
 
     @JsonProperty("btnToRegisterResult")
-    public void setBtnToRegisterResult(ButtonDialog btnToRegisterResult) {
+    public void setBtnToRegisterResult(Button btnToRegisterResult) {
         this.btnToRegisterResult=btnToRegisterResult;
     }
 
