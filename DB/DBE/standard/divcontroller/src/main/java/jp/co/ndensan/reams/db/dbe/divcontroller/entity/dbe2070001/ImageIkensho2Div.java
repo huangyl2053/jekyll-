@@ -5,23 +5,24 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001.ImageIkensho1Div;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tplIkensho1 のクラスファイル 
+ * ImageIkensho2 のクラスファイル 
  * 
  * @author 自動生成
  */
-public class tplIkensho1Div extends TabPanel {
+public class ImageIkensho2Div extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ImageIkensho1")
-    private ImageIkensho1Div ImageIkensho1;
+    @JsonProperty("lblDummy2")
+    private Label lblDummy2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -29,14 +30,14 @@ public class tplIkensho1Div extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ImageIkensho1")
-    public ImageIkensho1Div getImageIkensho1() {
-        return ImageIkensho1;
+    @JsonProperty("lblDummy2")
+    public Label getLblDummy2() {
+        return lblDummy2;
     }
 
-    @JsonProperty("ImageIkensho1")
-    public void setImageIkensho1(ImageIkensho1Div ImageIkensho1) {
-        this.ImageIkensho1=ImageIkensho1;
+    @JsonProperty("lblDummy2")
+    public void setLblDummy2(Label lblDummy2) {
+        this.lblDummy2=lblDummy2;
     }
 
 }

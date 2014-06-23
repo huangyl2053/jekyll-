@@ -32,8 +32,6 @@ public class ShujiiIkenshoImageTorikomiDiv extends Panel {
     private TextBoxNum txtErrKensu;
     @JsonProperty("dgIkenshoTorikomiKekka")
     private DataGrid<dgIkenshoTorikomiKekka_Row> dgIkenshoTorikomiKekka;
-    @JsonProperty("btnSave")
-    private Button btnSave;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -89,16 +87,6 @@ public class ShujiiIkenshoImageTorikomiDiv extends Panel {
     @JsonProperty("dgIkenshoTorikomiKekka")
     public void setDgIkenshoTorikomiKekka(DataGrid<dgIkenshoTorikomiKekka_Row> dgIkenshoTorikomiKekka) {
         this.dgIkenshoTorikomiKekka=dgIkenshoTorikomiKekka;
-    }
-
-    @JsonProperty("btnSave")
-    public Button getBtnSave() {
-        return btnSave;
-    }
-
-    @JsonProperty("btnSave")
-    public void setBtnSave(Button btnSave) {
-        this.btnSave=btnSave;
     }
 
 }
