@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuJissekiSearchDiv;
+import java.util.HashMap;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiSearchDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.*;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -39,12 +42,20 @@ public class KyufuJissekiSearch {
     }
 
     private void initData(KyufuJissekiSearchDiv panel) {
-        panel.getTxtKyufuJissekiSearchHihokenshaNo().setValue(RString.EMPTY);
+//        panel.getTxtKyufuJissekiSearchHihokenshaNo().setValue(RString.EMPTY);
         panel.getRadKyufuJissekiSearchDateType().setSelectedItem(DATE_TYPE_NENDO);
         panel.getDdlKyufuJissekiSearchNendo().setDisplayNone(false);
         panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setDisplayNone(true);
 //        panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setFromValue(RString.EMPTY);
 //        panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setToValue(RString.EMPTY);
+
+        HashMap hashMap = YamlLoader.DBC.loadAsList(
+                new RString("dbc0010000/KyufuJissekiSearch.yml")).get(0);
+
+        //検索被保番号取得、設定
+        ControlGenerator ymlData = new ControlGenerator(hashMap);
+
+        panel.getTxtKyufuJissekiSearchHihokenshaNo().setValue(ymlData.getAsRString("HihokenshaNo"));
     }
 
     private void setDateType(KyufuJissekiSearchDiv panel) {
