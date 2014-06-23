@@ -31,7 +31,7 @@ public class ChosaOCRTorikomiDiv extends Panel {
     @JsonProperty("dgChosahyoTorikomiKekka")
     private DataGrid<dgChosahyoTorikomiKekka_Row> dgChosahyoTorikomiKekka;
     @JsonProperty("btnSave")
-    private ButtonSubmit btnSave;
+    private Button btnSave;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -80,12 +80,12 @@ public class ChosaOCRTorikomiDiv extends Panel {
     }
 
     @JsonProperty("btnSave")
-    public ButtonSubmit getBtnSave() {
+    public Button getBtnSave() {
         return btnSave;
     }
 
     @JsonProperty("btnSave")
-    public void setBtnSave(ButtonSubmit btnSave) {
+    public void setBtnSave(Button btnSave) {
         this.btnSave=btnSave;
     }
 

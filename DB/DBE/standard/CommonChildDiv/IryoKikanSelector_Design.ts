@@ -68,7 +68,8 @@ module DBE {
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": "",
-         "icon": 0
+         "icon": 0,
+         "heightTextBoxMatches": false
         },
         {
          "fieldName": "dgIryoKikanList",
@@ -90,6 +91,7 @@ module DBE {
          "selectControlID": "dgIryoKikanList",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
          "height": "220",
          "gridSetting": {
           "rowHeight": 25,
@@ -112,7 +114,7 @@ module DBE {
           "columns": [
            {
             "columnName": "番号",
-            "dataName": "IryoKikanNo",
+            "dataName": "iryoKikanNo",
             "toolTip": "",
             "bgColor": 0,
             "width": 82,
@@ -124,7 +126,7 @@ module DBE {
             "align": 1,
             "resize": true,
             "isPrivateInfo": false,
-            "sortKey": "IryoKikanNo"
+            "sortKey": "iryoKikanNo"
            },
            {
             "columnName": "名称",
@@ -193,10 +195,7 @@ module DBE {
        "onOpen": "",
        "onClose": "",
        "session": {},
-       "eraseBorderTop": true,
-       "eraseBorderBottom": true,
-       "eraseBorderRight": true,
-       "eraseBorderLeft": true,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": true,
        "panelDisplay": 0,
@@ -250,6 +249,7 @@ module DBE {
            "selectControlID": "dgIshiList",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "height": "190",
            "gridSetting": {
             "rowHeight": 25,
@@ -272,7 +272,7 @@ module DBE {
             "columns": [
              {
               "columnName": "番号",
-              "dataName": "IshiNo",
+              "dataName": "ishiNo",
               "toolTip": "",
               "bgColor": 0,
               "width": 82,
@@ -284,7 +284,7 @@ module DBE {
               "align": 1,
               "resize": true,
               "isPrivateInfo": false,
-              "sortKey": "IshiNo"
+              "sortKey": "ishiNo"
              },
              {
               "columnName": "氏名",
@@ -365,10 +365,7 @@ module DBE {
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": true,
          "panelDisplay": 1,
@@ -410,10 +407,7 @@ module DBE {
        "onOpen": "",
        "onClose": "",
        "session": {},
-       "eraseBorderTop": true,
-       "eraseBorderBottom": true,
-       "eraseBorderRight": true,
-       "eraseBorderLeft": true,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": true,
        "panelDisplay": 0,
@@ -455,10 +449,7 @@ module DBE {
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
@@ -689,10 +680,7 @@ module DBE {
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -726,7 +714,8 @@ module DBE {
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnSelectAndClose",
@@ -754,7 +743,8 @@ module DBE {
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -836,10 +826,7 @@ module DBE {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -890,7 +877,9 @@ module DBE {
   }
  ],
  "dialogOkEventNameForDialog": "onClick_btnSelectAndClose",
- "dialogCancelEventNameForDialog": "onClick_btnNonSelectReturn"
+ "dialogCancelEventNameForDialog": "onClick_btnNonSelectReturn",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }

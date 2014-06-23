@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.iryoKikanSelector;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Jun 21 11:13:03 JST 2014 
+ * Mon Jun 23 15:35:53 JST 2014 
  */
 
 
@@ -20,34 +20,34 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgIryoKikanList_Row extends DataRow {
 
-    private RString IryoKikanNo;
+    private RString iryoKikanNo;
     private RString iryoKikanName;
 
     public dgIryoKikanList_Row() {
         super();
-        this.IryoKikanNo = RString.EMPTY;
+        this.iryoKikanNo = RString.EMPTY;
         this.iryoKikanName = RString.EMPTY;
     }
 
-    public dgIryoKikanList_Row(RString IryoKikanNo, RString iryoKikanName) {
+    public dgIryoKikanList_Row(RString iryoKikanNo, RString iryoKikanName) {
         super();
-        this.setOriginalData("IryoKikanNo", IryoKikanNo);
+        this.setOriginalData("iryoKikanNo", iryoKikanNo);
         this.setOriginalData("iryoKikanName", iryoKikanName);
-        this.IryoKikanNo = IryoKikanNo;
+        this.iryoKikanNo = iryoKikanNo;
         this.iryoKikanName = iryoKikanName;
     }
 
     public RString getIryoKikanNo() {
-        return IryoKikanNo;
+        return iryoKikanNo;
     }
 
     public RString getIryoKikanName() {
         return iryoKikanName;
     }
 
-    public void setIryoKikanNo(RString IryoKikanNo) {
-        this.setOriginalData("IryoKikanNo", IryoKikanNo);
-        this.IryoKikanNo = IryoKikanNo;
+    public void setIryoKikanNo(RString iryoKikanNo) {
+        this.setOriginalData("iryoKikanNo", iryoKikanNo);
+        this.iryoKikanNo = iryoKikanNo;
     }
 
     public void setIryoKikanName(RString iryoKikanName) {

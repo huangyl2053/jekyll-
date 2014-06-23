@@ -23,18 +23,18 @@ public class ChosaItakuJohoDiv extends Panel {
      */
     @JsonProperty("txtChosakikanNo")
     private TextBoxCode txtChosakikanNo;
+    @JsonProperty("btnChosakikanSearch")
+    private ButtonDialog btnChosakikanSearch;
     @JsonProperty("txtChosakikanMei")
     private TextBox txtChosakikanMei;
-    @JsonProperty("imgChosakikanSearch")
-    private StaticImage imgChosakikanSearch;
     @JsonProperty("txtChosaJissibi")
     private TextBoxDate txtChosaJissibi;
     @JsonProperty("txtChosainNo")
     private TextBoxCode txtChosainNo;
+    @JsonProperty("btnChosainSearch")
+    private ButtonDialog btnChosainSearch;
     @JsonProperty("txtChosainMei")
     private TextBox txtChosainMei;
-    @JsonProperty("imgChosainSearch")
-    private StaticImage imgChosainSearch;
     @JsonProperty("txtChosahyoJuryobi")
     private TextBoxDate txtChosahyoJuryobi;
 
@@ -54,6 +54,16 @@ public class ChosaItakuJohoDiv extends Panel {
         this.txtChosakikanNo=txtChosakikanNo;
     }
 
+    @JsonProperty("btnChosakikanSearch")
+    public ButtonDialog getBtnChosakikanSearch() {
+        return btnChosakikanSearch;
+    }
+
+    @JsonProperty("btnChosakikanSearch")
+    public void setBtnChosakikanSearch(ButtonDialog btnChosakikanSearch) {
+        this.btnChosakikanSearch=btnChosakikanSearch;
+    }
+
     @JsonProperty("txtChosakikanMei")
     public TextBox getTxtChosakikanMei() {
         return txtChosakikanMei;
@@ -62,16 +72,6 @@ public class ChosaItakuJohoDiv extends Panel {
     @JsonProperty("txtChosakikanMei")
     public void setTxtChosakikanMei(TextBox txtChosakikanMei) {
         this.txtChosakikanMei=txtChosakikanMei;
-    }
-
-    @JsonProperty("imgChosakikanSearch")
-    public StaticImage getImgChosakikanSearch() {
-        return imgChosakikanSearch;
-    }
-
-    @JsonProperty("imgChosakikanSearch")
-    public void setImgChosakikanSearch(StaticImage imgChosakikanSearch) {
-        this.imgChosakikanSearch=imgChosakikanSearch;
     }
 
     @JsonProperty("txtChosaJissibi")
@@ -94,6 +94,16 @@ public class ChosaItakuJohoDiv extends Panel {
         this.txtChosainNo=txtChosainNo;
     }
 
+    @JsonProperty("btnChosainSearch")
+    public ButtonDialog getBtnChosainSearch() {
+        return btnChosainSearch;
+    }
+
+    @JsonProperty("btnChosainSearch")
+    public void setBtnChosainSearch(ButtonDialog btnChosainSearch) {
+        this.btnChosainSearch=btnChosainSearch;
+    }
+
     @JsonProperty("txtChosainMei")
     public TextBox getTxtChosainMei() {
         return txtChosainMei;
@@ -102,16 +112,6 @@ public class ChosaItakuJohoDiv extends Panel {
     @JsonProperty("txtChosainMei")
     public void setTxtChosainMei(TextBox txtChosainMei) {
         this.txtChosainMei=txtChosainMei;
-    }
-
-    @JsonProperty("imgChosainSearch")
-    public StaticImage getImgChosainSearch() {
-        return imgChosainSearch;
-    }
-
-    @JsonProperty("imgChosainSearch")
-    public void setImgChosainSearch(StaticImage imgChosainSearch) {
-        this.imgChosainSearch=imgChosainSearch;
     }
 
     @JsonProperty("txtChosahyoJuryobi")

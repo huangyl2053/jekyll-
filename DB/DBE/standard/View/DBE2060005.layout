@@ -30,7 +30,8 @@
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "lblTorikomiKekka",
@@ -129,6 +130,7 @@
      "selectControlID": "dgChosahyoTorikomiKekka",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "height": "317",
      "gridSetting": {
       "rowHeight": 25,
@@ -333,14 +335,14 @@
     {
      "fieldName": "btnSave",
      "items": [],
-     "controlType": "ButtonSubmit",
+     "controlType": "Button",
      "width": "180",
      "visible": true,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": true,
+     "wrap": false,
      "dependencies": [],
      "float": 2,
      "toolTip": "",
@@ -350,21 +352,14 @@
      "selectControlID": "btnSave",
      "helpMessageID": "",
      "jpControlName": "",
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "ChosaOCRTorikomi"
-      }
-     ],
-     "onClick": "",
+     "onClick": "onClick_btnSave",
      "text": "取込み結果を保存する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
      "icon": 0,
-     "validateUrl": "",
-     "submitUrl": "",
-     "onAfterRequest": ""
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -401,6 +396,10 @@
     {
      "eventName": "onClick_btnOcrDataNyuryoku",
      "requestUrl": "dbe/db/dbe/ChosaOCRTorikomi/fetchOCR"
+    },
+    {
+     "eventName": "onClick_btnSave",
+     "requestUrl": "dbe/db/dbe/ChosaOCRTorikomi/onClick_btnSave"
     }
    ],
    "hiddenInput": [],
@@ -409,10 +408,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -452,7 +448,8 @@
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "icon": 0,
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "txtHokenNo",
@@ -610,6 +607,7 @@
        "selectControlID": "ddlShinseiKbn_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "required": false,
        "onFocus": "",
        "onBlur": "",
@@ -671,10 +669,7 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -759,6 +754,7 @@
        "imageWidth": "",
        "imageHeight": "15",
        "icon": 0,
+       "heightTextBoxMatches": false,
        "displayChildDivName": "DBE.ChosaKikanDialog",
        "dataPassing": [],
        "visibleCloseButton": true,
@@ -927,6 +923,7 @@
        "imageWidth": "",
        "imageHeight": "15",
        "icon": 0,
+       "heightTextBoxMatches": false,
        "displayChildDivName": "",
        "dataPassing": [],
        "visibleCloseButton": true,
@@ -1055,10 +1052,7 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -1089,6 +1083,7 @@
        "selectControlID": "radChosaKekka_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "onClick": "",
        "icon": [],
        "required": false,
@@ -1153,7 +1148,8 @@
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "icon": 0,
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "btnCancel",
@@ -1181,7 +1177,8 @@
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "icon": 0,
+       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
@@ -1229,10 +1226,7 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -1263,6 +1257,7 @@
        "selectControlID": "dgChosakekka1",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "590",
        "gridSetting": {
         "rowHeight": 16,
@@ -1403,6 +1398,7 @@
        "selectControlID": "dgChosakekka2",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "590",
        "gridSetting": {
         "rowHeight": 16,
@@ -1543,6 +1539,7 @@
        "selectControlID": "dgChosakekka3",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "590",
        "gridSetting": {
         "rowHeight": 16,
@@ -1697,10 +1694,7 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -1734,7 +1728,8 @@
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnReturn",
@@ -1762,7 +1757,8 @@
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -1810,10 +1806,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -1850,7 +1843,8 @@
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "lblOcrSoft",
@@ -1904,7 +1898,8 @@
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -1949,10 +1944,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -2312,5 +2304,6 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": []
 }
