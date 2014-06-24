@@ -1,25 +1,21 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha;
+
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jun 11 16:32:52 JST 2014 
+ * Fri Jun 13 15:37:47 JST 2014
  */
-
-
-
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
-
 /**
- * dgSearchResult_Row のクラスファイル 
- * 
+ * dgSearchResult_Row のクラスファイル
+ *
  * @author 自動生成
  */
-
 public class dgSearchResult_Row extends DataRow {
 
     private Button btnToDecide;
@@ -39,6 +35,20 @@ public class dgSearchResult_Row extends DataRow {
 
     public dgSearchResult_Row() {
         super();
+        this.btnToDecide = new Button();
+        this.hihokenshaNo = RString.EMPTY;
+        this.shikibetsuCode = RString.EMPTY;
+        this.hihokenshaKubun = RString.EMPTY;
+        this.shimei = RString.EMPTY;
+        this.kanaShimsei = RString.EMPTY;
+        this.shimeiAndKanaShimsei = RString.EMPTY;
+        this.gender = RString.EMPTY;
+        this.birthDay = new TextBoxDate();
+        this.yubinNo = RString.EMPTY;
+        this.jusho = RString.EMPTY;
+        this.kojinNo = RString.EMPTY;
+        this.juminShubetsu = RString.EMPTY;
+        this.setaiCode = RString.EMPTY;
     }
 
     public dgSearchResult_Row(Button btnToDecide, RString hihokenshaNo, RString shikibetsuCode, RString hihokenshaKubun, RString shimei, RString kanaShimsei, RString shimeiAndKanaShimsei, RString gender, TextBoxDate birthDay, RString yubinNo, RString jusho, RString kojinNo, RString juminShubetsu, RString setaiCode) {
