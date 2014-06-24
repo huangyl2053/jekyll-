@@ -1,0 +1,7 @@
+## YAML Template.
+---
+- KetteiYM: 201406
+  TsuchiSotatsuYMD: 20140701
+  SortName: 氏名５０音カナ
+  KaiPage: 被保険者番号   
+  Sort: 行政区コード
