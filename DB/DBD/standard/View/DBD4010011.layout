@@ -136,7 +136,7 @@
    "marginBottom": "0",
    "eraseBorder": false,
    "backgroundColor": 0,
-   "widthAuto": false,
+   "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,

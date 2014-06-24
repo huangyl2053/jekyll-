@@ -36,7 +36,7 @@
      "heightForDialog": "M",
      "onClick_BtnToSearch": "onClick_btnSearch",
      "displayNone_txtTsuchishoNo": false,
-     "displayNone_ddlFukaNendo": false,
+     "displayNone_ddlFukaNendo": true,
      "displayNone_SearchCriteriaDetail": false
     },
     {
@@ -1281,12 +1281,12 @@
     {
      "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult",
      "event": "onSelectByDblClick",
-     "transition": "障害者控除情報"
+     "transition": "認定書発行"
     },
     {
      "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
      "event": "onClick",
-     "transition": "障害者控除情報"
+     "transition": "認定書発行"
     },
     {
      "fieldName": "btnReturnToSearch",
@@ -1297,7 +1297,7 @@
   },
   {
    "order": "3",
-   "stateName": "障害者控除情報",
+   "stateName": "認定書発行",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -1519,7 +1519,7 @@
    ],
    "states": [
     {
-     "state": "障害者控除情報"
+     "state": "認定書発行"
     }
    ],
    "isFinishButtonOnTheRight": false
