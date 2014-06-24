@@ -28,10 +28,10 @@ public class IryoKikanSelectorDiv extends Panel {
     private IryoKikanDiv IryoKikan;
     @JsonProperty("SelectedContents")
     private SelectedContentsDiv SelectedContents;
-    @JsonProperty("btnNonSelectReturn")
-    private Button btnNonSelectReturn;
     @JsonProperty("btnSelectAndClose")
     private Button btnSelectAndClose;
+    @JsonProperty("btnNonSelectReturn")
+    private Button btnNonSelectReturn;
     @JsonProperty("iryoKikanCode")
     private RString iryoKikanCode;
     @JsonProperty("iryoKikanName")
@@ -67,16 +67,6 @@ public class IryoKikanSelectorDiv extends Panel {
         this.SelectedContents=SelectedContents;
     }
 
-    @JsonProperty("btnNonSelectReturn")
-    public Button getBtnNonSelectReturn() {
-        return btnNonSelectReturn;
-    }
-
-    @JsonProperty("btnNonSelectReturn")
-    public void setBtnNonSelectReturn(Button btnNonSelectReturn) {
-        this.btnNonSelectReturn=btnNonSelectReturn;
-    }
-
     @JsonProperty("btnSelectAndClose")
     public Button getBtnSelectAndClose() {
         return btnSelectAndClose;
@@ -85,6 +75,16 @@ public class IryoKikanSelectorDiv extends Panel {
     @JsonProperty("btnSelectAndClose")
     public void setBtnSelectAndClose(Button btnSelectAndClose) {
         this.btnSelectAndClose=btnSelectAndClose;
+    }
+
+    @JsonProperty("btnNonSelectReturn")
+    public Button getBtnNonSelectReturn() {
+        return btnNonSelectReturn;
+    }
+
+    @JsonProperty("btnNonSelectReturn")
+    public void setBtnNonSelectReturn(Button btnNonSelectReturn) {
+        this.btnNonSelectReturn=btnNonSelectReturn;
     }
 
     @JsonProperty("iryoKikanCode")

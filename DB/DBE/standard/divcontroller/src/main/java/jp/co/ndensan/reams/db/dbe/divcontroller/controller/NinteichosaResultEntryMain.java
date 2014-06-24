@@ -113,9 +113,9 @@ public class NinteichosaResultEntryMain {
      * @return ResponseData
      */
     public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnToRegisterResult(NinteichosaResultEntryMainDiv div) {
-        dgNinteichosaResultTaishosha_Row target = targetInfo();
-        new NinteichosaDetail(div).reflectPanelValueTo(target);
-        NinteichosaResultEntryTarget.Holder.save(target);
+//        dgNinteichosaResultTaishosha_Row target = targetInfo();
+//        new NinteichosaDetail(div).reflectPanelValueTo(target);
+//        NinteichosaResultEntryTarget.Holder.save(target);
         return addMessage(_createResponseData(div), new InformationMessage("1", "処理は正常に終了しました。"));
     }
 

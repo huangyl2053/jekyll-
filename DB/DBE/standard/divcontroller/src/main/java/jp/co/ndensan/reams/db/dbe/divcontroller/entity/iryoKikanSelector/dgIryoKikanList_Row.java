@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.iryoKikanSelector;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 23 15:35:53 JST 2014 
+ * Tue Jun 24 11:12:58 JST 2014 
  */
 
 
