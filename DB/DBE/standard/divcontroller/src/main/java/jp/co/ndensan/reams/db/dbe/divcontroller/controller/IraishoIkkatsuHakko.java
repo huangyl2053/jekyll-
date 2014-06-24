@@ -74,6 +74,12 @@ public class IraishoIkkatsuHakko {
         ResponseData<IraishoIkkatsuHakkoDiv> response = new ResponseData<>();
 
         NinteichosaIraishoTargetPersons.onClick_btnToSearchOfChosa(_ninteichosaIraishoTargetPersons(div));
+        div.getTabIraishoIkkatsuHakko().getNinteichosaIraiIkkatuHakkoTab().
+                getNinteichosaIraishoRelatedDates().getTxtShoriDateOfChosa().setValue(RDate.getNowDate());
+        div.getTabIraishoIkkatsuHakko().getNinteichosaIraiIkkatuHakkoTab().
+                getNinteichosaIraishoRelatedDates().getTxtHakkoDateOfChosa().setValue(RDate.getNowDate());
+        div.getTabIraishoIkkatsuHakko().getNinteichosaIraiIkkatuHakkoTab().
+                getNinteichosaIraishoRelatedDates().getTxtKigenDateOfChosa().setValue(RDate.getNowDate().plusDay(7));
 
         response.data = div;
         return response;
@@ -89,6 +95,12 @@ public class IraishoIkkatsuHakko {
         ResponseData<IraishoIkkatsuHakkoDiv> response = new ResponseData<>();
 
         ShujiiIkenshoIraishoTargetPersons.onClick_btnToSearchOfIkensh(_shujiiIkenshoIraishoTargetPersons(div));
+        div.getTabIraishoIkkatsuHakko().getIkenshoIraiIkkatuHakkoTab().
+                getShujiiIkenshoIraishoRelatedDates().getTxtShoriDateOfIkensho().setValue(RDate.getNowDate());
+        div.getTabIraishoIkkatsuHakko().getIkenshoIraiIkkatuHakkoTab().
+                getShujiiIkenshoIraishoRelatedDates().getTxtHakkoDateOfIkensho().setValue(RDate.getNowDate());
+        div.getTabIraishoIkkatsuHakko().getIkenshoIraiIkkatuHakkoTab().
+                getShujiiIkenshoIraishoRelatedDates().getTxtKigenDateOfIkensho().setValue(RDate.getNowDate().plusDay(10));
 
         response.data = div;
         return response;
@@ -121,6 +133,42 @@ public class IraishoIkkatsuHakko {
 
         ShujiiIkenshoIraishoTargetPersons.SearchCriteriaForShujiiIkensho.clear(
                 ShujiiIkenshoIraishoTargetPersons._searchCriteria(_shujiiIkenshoIraishoTargetPersons(div)));
+
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 意見書関連の処理日を変更した際の処理を表します。
+     *
+     * @param div IraishoIkkatsuHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<IraishoIkkatsuHakkoDiv> onChange_txtShoriDateOfIkensho(IraishoIkkatsuHakkoDiv div) {
+        ResponseData<IraishoIkkatsuHakkoDiv> response = new ResponseData<>();
+
+        div.getTabIraishoIkkatsuHakko().getIkenshoIraiIkkatuHakkoTab().
+                getShujiiIkenshoIraishoRelatedDates().getTxtKigenDateOfIkensho().
+                setValue(div.getTabIraishoIkkatsuHakko().getIkenshoIraiIkkatuHakkoTab().
+                        getShujiiIkenshoIraishoRelatedDates().getTxtShoriDateOfIkensho().getValue().plusDay(10));
+
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 認定調査関連の処理日を変更した際の処理を表します。
+     *
+     * @param div IraishoIkkatsuHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<IraishoIkkatsuHakkoDiv> onChange_txtShoriDateOfChosa(IraishoIkkatsuHakkoDiv div) {
+        ResponseData<IraishoIkkatsuHakkoDiv> response = new ResponseData<>();
+
+        div.getTabIraishoIkkatsuHakko().getNinteichosaIraiIkkatuHakkoTab().
+                getNinteichosaIraishoRelatedDates().getTxtKigenDateOfChosa().
+                setValue(div.getTabIraishoIkkatsuHakko().getNinteichosaIraiIkkatuHakkoTab().
+                        getNinteichosaIraishoRelatedDates().getTxtShoriDateOfChosa().getValue().plusDay(7));
 
         response.data = div;
         return response;

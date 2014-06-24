@@ -26,28 +26,28 @@
      "jpControlName": "",
      "readOnly": true,
      "required": false,
-     "text": "",
-     "isPrivateInfo": false,
-     "decorationClass": "",
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
      "placeHolder": "202020",
+     "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "保険者",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 0,
-     "isComboBox": false,
-     "suggest": []
+     "decorationClass": ""
     },
     {
      "fieldName": "txtHokenshaMeisho",
@@ -71,28 +71,28 @@
      "jpControlName": "",
      "readOnly": true,
      "required": false,
-     "text": "",
-     "isPrivateInfo": false,
-     "decorationClass": "",
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
      "placeHolder": "電算町役場",
+     "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 0,
-     "isComboBox": false,
-     "suggest": []
+     "decorationClass": ""
     },
     {
      "fieldName": "lblNinteiSHinseiYmd",
@@ -115,10 +115,10 @@
      "helpMessageID": "",
      "jpControlName": "",
      "required": false,
-     "align": 2,
-     "text": "出力帳票要件日付",
      "isPrivateInfo": false,
-     "decorationClass": ""
+     "text": "出力帳票要件日付",
+     "decorationClass": "",
+     "align": 2
     },
     {
      "fieldName": "txtNinteiShinseiYmdSt",
@@ -142,14 +142,16 @@
      "jpControlName": "",
      "readOnly": false,
      "required": false,
-     "text": "",
-     "isPrivateInfo": false,
      "placeHolder": "平26.05.15",
+     "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
+     "value": "",
      "labelLText": "範囲",
      "labelRText": "",
      "labelLWidth": "S",
@@ -157,9 +159,7 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "textKind": 0
+     "displayFormat": 0
     },
     {
      "fieldName": "lblKara",
@@ -182,10 +182,10 @@
      "helpMessageID": "",
      "jpControlName": "",
      "required": false,
-     "align": 1,
-     "text": "～",
      "isPrivateInfo": false,
-     "decorationClass": ""
+     "text": "～",
+     "decorationClass": "",
+     "align": 1
     },
     {
      "fieldName": "txtNinteiShinseiYmdEd",
@@ -209,14 +209,16 @@
      "jpControlName": "",
      "readOnly": false,
      "required": false,
-     "text": "",
-     "isPrivateInfo": false,
      "placeHolder": "平26.05.15",
+     "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
+     "value": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
@@ -224,9 +226,7 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "textKind": 0
+     "displayFormat": 0
     },
     {
      "fieldName": "lblChohyoShiji",
@@ -249,10 +249,10 @@
      "helpMessageID": "",
      "jpControlName": "",
      "required": false,
-     "align": 2,
-     "text": "出力帳票指示",
      "isPrivateInfo": false,
-     "decorationClass": ""
+     "text": "出力帳票指示",
+     "decorationClass": "",
+     "align": 2
     },
     {
      "fieldName": "radNinteiShinseiMonitor",
@@ -274,13 +274,13 @@
      "selectControlID": "radNinteiShinseiMonitor_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "required": false,
      "onChange": "",
      "labelLText": "介護認定申請モニタリスト",
      "labelLWidth": "300",
      "labelLAlign": 2,
-     "onClick": "",
-     "icon": [],
+     "selectedItem": "0",
      "dataSource": [
       {
        "key": "0",
@@ -291,10 +291,11 @@
        "value": "出力しない"
       }
      ],
-     "selectedItem": "0",
+     "onClick": "",
      "newLineItemNumber": 2,
      "spaceSize": "M",
-     "disabledItem": []
+     "disabledItem": [],
+     "icon": []
     },
     {
      "fieldName": "radShinseishaIchiran",
@@ -316,13 +317,13 @@
      "selectControlID": "radShinseishaIchiran_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "required": false,
      "onChange": "",
      "labelLText": "要介護認定・要支援認定等申請者一覧",
      "labelLWidth": "300",
      "labelLAlign": 2,
-     "onClick": "",
-     "icon": [],
+     "selectedItem": "0",
      "dataSource": [
       {
        "key": "0",
@@ -333,10 +334,11 @@
        "value": "出力しない"
       }
      ],
-     "selectedItem": "0",
+     "onClick": "",
      "newLineItemNumber": 2,
      "spaceSize": "M",
-     "disabledItem": []
+     "disabledItem": [],
+     "icon": []
     },
     {
      "fieldName": "radShinseiKyakka",
@@ -358,13 +360,13 @@
      "selectControlID": "radShinseiKyakka_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "required": false,
      "onChange": "",
      "labelLText": "申請却下一覧",
      "labelLWidth": "300",
      "labelLAlign": 2,
-     "onClick": "",
-     "icon": [],
+     "selectedItem": "0",
      "dataSource": [
       {
        "key": "0",
@@ -375,10 +377,11 @@
        "value": "出力しない"
       }
      ],
-     "selectedItem": "0",
+     "onClick": "",
      "newLineItemNumber": 2,
      "spaceSize": "M",
-     "disabledItem": []
+     "disabledItem": [],
+     "icon": []
     },
     {
      "fieldName": "btnChohyoOutput",
@@ -402,11 +405,12 @@
      "jpControlName": "",
      "text": "指示帳票を出力する",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnCancel",
@@ -414,7 +418,7 @@
      "controlType": "Button",
      "width": "150",
      "visible": true,
-     "displayNone": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -430,11 +434,12 @@
      "jpControlName": "",
      "text": "帳票出力を行わない",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -475,10 +480,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -535,5 +537,6 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": []
 }

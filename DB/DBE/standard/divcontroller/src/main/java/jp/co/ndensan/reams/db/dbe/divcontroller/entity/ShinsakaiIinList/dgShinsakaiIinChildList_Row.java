@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsakaiIinList;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri May 30 10:06:58 JST 2014 
+ * Tue Jun 24 10:43:26 JST 2014 
  */
 
 
@@ -32,6 +32,14 @@ public class dgShinsakaiIinChildList_Row extends DataRow {
 
     public dgShinsakaiIinChildList_Row() {
         super();
+        this.btnToSelect = new Button();
+        this.shinsakaiIinNo = RString.EMPTY;
+        this.shimei = RString.EMPTY;
+        this.kanaShimei = RString.EMPTY;
+        this.shimeiAndKanaShimei = RString.EMPTY;
+        this.shozokuKikan = RString.EMPTY;
+        this.gender = RString.EMPTY;
+        this.shikaku = RString.EMPTY;
     }
 
     public dgShinsakaiIinChildList_Row(Button btnToSelect, RString shinsakaiIinNo, RString shimei, RString kanaShimei, RString shimeiAndKanaShimei, RString shozokuKikan, RString gender, RString shikaku) {

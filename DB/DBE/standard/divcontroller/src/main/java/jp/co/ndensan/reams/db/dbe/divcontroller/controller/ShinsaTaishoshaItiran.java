@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -37,7 +38,7 @@ public class ShinsaTaishoshaItiran {
         ResponseData<ShinsaTaishoshaIchiranDiv> response = new ResponseData<>();
 
         div.getDgShinsaTaishoshaIchiran().setDataSource(createRowSetaiTestData());
-        
+
         response.data = div;
         return response;
     }
@@ -85,6 +86,8 @@ public class ShinsaTaishoshaItiran {
                 list.setShinsakaiIken(iken);
             }
         }
+
+        response.addMessage(new InformationMessage("i", "更新しました。"));
 
         response.data = div;
         return response;

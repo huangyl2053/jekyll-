@@ -77,6 +77,19 @@ public class ShinsakaiKaisaiKekka {
     }
 
     /**
+     * 「表示内容で更新する」ボタン押下時の処理を表します。
+     *
+     * @param div 審査会開催結果入力Div
+     * @return ResponseData
+     */
+    public ResponseData onClick_btnUpdate(ShinsakaiKaisaiKekkaDiv div) {
+        ResponseData<ShinsakaiKaisaiKekkaDiv> response = new ResponseData<>();
+
+        response.data = div;
+        return response;
+    }
+
+    /**
      * 「構成審査員に追加する」ボタン押下時の処理を表します。
      *
      * @param div 審査会開催結果入力Div

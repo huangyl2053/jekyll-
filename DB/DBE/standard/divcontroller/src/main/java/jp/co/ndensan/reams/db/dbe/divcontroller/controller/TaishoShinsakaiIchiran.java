@@ -68,7 +68,15 @@ public class TaishoShinsakaiIchiran {
     public ResponseData reLoadData(TaishoShinsakaiIchiranDiv div) {
         ResponseData<TaishoShinsakaiIchiranDiv> response = new ResponseData<>();
 
-        div.getDgShinsakaiIchiran().getSelectedItems().get(SELECT_IDX).set審査会状況(new RString("開催済"));
+        List<dgShinsakaiIchiran_Row> arrayData = div.getDgShinsakaiIchiran().getDataSource();
+        RString shinsakaiNo = (RString) ViewStateHolder.get("審査会番号", RString.class);
+        for (dgShinsakaiIchiran_Row row : arrayData) {
+            if (row.get審査会名().equalsIgnoreCase(shinsakaiNo)) {
+                row.set審査会状況(new RString("開催済"));
+            }
+        }
+
+        div.getDgShinsakaiIchiran().setDataSource(arrayData);
 
         response.data = div;
         return response;

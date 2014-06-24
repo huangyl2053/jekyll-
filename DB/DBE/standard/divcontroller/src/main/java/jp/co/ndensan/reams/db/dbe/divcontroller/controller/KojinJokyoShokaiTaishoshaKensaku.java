@@ -43,6 +43,10 @@ public class KojinJokyoShokaiTaishoshaKensaku {
             div.getHihokenshaFinder().getSearchCriteriaOfHokensha().getDdlHokensha().setSelectedItem(new RString("1"));
         }
 
+        div.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getTxtTuchishoNo().setDisplayNone(true);
+        div.getHihokenshaFinder().getSearchCriteriaOfKojin().getLblJuminShubetsu().setDisplayNone(true);
+        div.getHihokenshaFinder().getSearchCriteriaOfKojin().getDdlJuminShubetsu().setDisabled(true);
+
         response.data = div;
         return response;
     }

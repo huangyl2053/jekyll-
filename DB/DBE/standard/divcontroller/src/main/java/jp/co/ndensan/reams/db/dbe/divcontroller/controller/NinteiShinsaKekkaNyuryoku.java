@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -242,4 +244,20 @@ public class NinteiShinsaKekkaNyuryoku {
         return response;
     }
 
+//    /**
+//     * 「入力内容で登録する」ボタン押下時の処理を表します。
+//     *
+//     * @param div 審査結果入力詳細Div
+//     * @param shinsaTaishoshaIchiranDiv 審査対象者一覧Div
+//     * @return ResponseData
+//     */
+//    public ResponseData onClick_btnToroku(NinteiShinsaKekkaNyuryokuDiv div,
+//            ShinsaTaishoshaIchiranDiv shinsaTaishoshaIchiranDiv) {
+//        ResponseData<NinteiShinsaKekkaNyuryokuDiv> response = new ResponseData<>();
+//
+//        response.addMessage(new InformationMessage("i", "更新しました。"));
+//
+//        return response;
+//    }
+//
 }
