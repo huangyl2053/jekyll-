@@ -32,7 +32,7 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     @JsonProperty("txtSearchEdYMD")
     private TextBoxFlexibleDate txtSearchEdYMD;
     @JsonProperty("txtHihokenshaNo")
-    private TextBox txtHihokenshaNo;
+    private TextBoxNum txtHihokenshaNo;
     @JsonProperty("btnTaishoKensaku")
     private Button btnTaishoKensaku;
     @JsonProperty("btnClear")
@@ -95,12 +95,12 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     }
 
     @JsonProperty("txtHihokenshaNo")
-    public TextBox getTxtHihokenshaNo() {
+    public TextBoxNum getTxtHihokenshaNo() {
         return txtHihokenshaNo;
     }
 
     @JsonProperty("txtHihokenshaNo")
-    public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+    public void setTxtHihokenshaNo(TextBoxNum txtHihokenshaNo) {
         this.txtHihokenshaNo=txtHihokenshaNo;
     }
 

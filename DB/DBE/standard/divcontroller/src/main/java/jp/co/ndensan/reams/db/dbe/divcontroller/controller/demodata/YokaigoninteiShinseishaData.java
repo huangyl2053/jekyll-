@@ -97,7 +97,7 @@ public class YokaigoninteiShinseishaData {
      */
     public enum YokaigoJotaiKubun {
 
-        未該当(false),
+        非該当(false),
         要支援1(false),
         要支援2(false),
         要介護1(true),
@@ -138,7 +138,7 @@ public class YokaigoninteiShinseishaData {
                     return item;
                 }
             }
-            return 未該当;
+            return 非該当;
         }
     }
 
@@ -150,7 +150,7 @@ public class YokaigoninteiShinseishaData {
         public static final LatestNinteiResult NOTHING;
 
         static {
-            NOTHING = new LatestNinteiResult(YokaigoJotaiKubun.未該当, FlexibleDate.EMPTY, new Range<>(FlexibleDate.EMPTY, FlexibleDate.EMPTY));
+            NOTHING = new LatestNinteiResult(YokaigoJotaiKubun.非該当, FlexibleDate.EMPTY, new Range<>(FlexibleDate.EMPTY, FlexibleDate.EMPTY));
         }
 
         private final YokaigoJotaiKubun theYokaigodo;
