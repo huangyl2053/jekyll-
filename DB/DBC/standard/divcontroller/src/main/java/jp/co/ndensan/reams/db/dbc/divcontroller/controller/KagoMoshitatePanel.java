@@ -8,17 +8,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KagoMoshitatePanelDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KyufuJissekiGaitoshaListPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1400011.KagoMoshitatePanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1400011.KyufuJissekiGaitoshaListPanelDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+
 
 /**
  *
- * @author n8223
+ * @author n8223　
+ * @author n8223 ymddata,　共有DIV適用　2014.06.20 
  */
 public class KagoMoshitatePanel {
     
@@ -26,126 +29,136 @@ public class KagoMoshitatePanel {
      * 介護給付費過誤申立書登録 給付実積該当者一覧で、選択した内容もとに、過誤申立書情報の内容を設定する。
      *
      * @param panel MishinsaShikyuShinseiListPanelDiv
-     * @param panel1 KyufuJissekiGaitoshaListPanelDiv
+     * @param gaitoshaListpanel
      * @return   
      */
-    public ResponseData<KagoMoshitatePanelDiv> onClick_btnSelect(KagoMoshitatePanelDiv panel, KyufuJissekiGaitoshaListPanelDiv panel1) {
+    public ResponseData<KagoMoshitatePanelDiv> onClick_btnSelect(KagoMoshitatePanelDiv panel, KyufuJissekiGaitoshaListPanelDiv gaitoshaListpanel) {
         ResponseData<KagoMoshitatePanelDiv> response = new ResponseData<>();
         
+        
+       //住民情報・世帯員情報の内容を設定する。
+        setKagoMoshitateHihokensha(panel);       
        // 過誤申立書情報の内容を設定する。
-        setKagoMoshitate(panel, panel1);
+        setKagoMoshitate(panel, gaitoshaListpanel);
         
         response.data = panel;
         return response;
 
     }
 
+    /*
+    * 住民情報(世帯主)
+    * 住民情報(世帯員)
+    */
+     private void setKagoMoshitateHihokensha(KagoMoshitatePanelDiv panel) {
+         
+        List<HashMap> ymlData = ymlData("dbc1400011/KagoMoshitateHihokensha.yml");
+        
+        HashMap hashMap = ymlData.get(0);
+        ControlGenerator ymlDt = new ControlGenerator(hashMap);
+                      
+        //氏名漢字～個人番号　世帯主
+        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtAtenaMeisho().setValue(
+        ymlDt.getAsRString("atenaMeisho"));
+        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtAtenaKanaMeisho().setValue(
+        ymlDt.getAsRString("atenaKanMeisho"));
+        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtSeinengappiYMD().setValue(
+        ymlDt.getAsRDate("seinengappiYmd"));
+        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtNenrei().setValue(
+        ymlDt.getAsRString("nenrei"));         
+        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtSeibetsu().setValue(
+        ymlDt.getAsRString("seibetsu"));         
+        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtNihonjinGaikokujin().setValue(
+        ymlDt.getAsRString("nihonjinGaikokujin"));           
+        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtYubinNo().setValue(
+        ymlDt.getAsYubinNo("yubinNo"));           
+        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtJusho().setValue(
+        ymlDt.getAsRString("jusho"));        
+        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtGyoseiku().setValue(
+        ymlDt.getAsRString("gyoseiku"));        
+        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtShikibetsuCode().setValue(
+        ymlDt.getAsRString("shikibetsuCode"));         
+        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtYubinNo().setValue(
+        ymlDt.getAsYubinNo("yubinNo"));
+        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtJuminJotai().setValue(
+        ymlDt.getAsRString("juminJotai"));
+        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtSetaiCode().setValue(
+        ymlDt.getAsRString("setaiCode"));        
+        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtKojinHojinCode().setValue(
+        ymlDt.getAsRString("kojinHojinCode"));                
+        
+        
+        //資格取得 ～　認定期間　世帯員(異動情報）
+        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtHihokenshaNo().setValue(
+        ymlDt.getAsRString("hihokenshaNo"));          
+        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtShutokuYmd().setValue(
+        ymlDt.getAsRDate("shotokuYmd"));               
+        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtShutokuJiyu().setValue(
+        ymlDt.getAsRString("shotokuJiyu"));    
+        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtJutokuTekiyo().setValue(
+        ymlDt.getAsRDate("jutokuTekiyo"));          
+        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtYokaigoJotaiKubun().setValue(
+        ymlDt.getAsRString("yokaigojotaiKubun"));
+        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtShikakuJotai().setValue(
+        ymlDt.getAsRString("shikakuJotai"));
+        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtJutokuKaijo().setValue(
+        ymlDt.getAsRDate("jutokuKaijo"));  
+  
+         
+     }
+    
 
       /**
      * 介護給付費過誤申立書登録  過誤申立書情報の内容を設定する。
      *
      * @param panel MishinsaShikyuShinseiListPanelDiv
-     * @param panel1　KyufuJissekiGaitoshaListPanelDiv
+     * @param gaitoshaListpanel　KyufuJissekiGaitoshaListPanelDiv
      * @return 
      */
-    private void setKagoMoshitate(KagoMoshitatePanelDiv panel, KyufuJissekiGaitoshaListPanelDiv panel1) {
+    private void setKagoMoshitate(KagoMoshitatePanelDiv panel, KyufuJissekiGaitoshaListPanelDiv gaitoshaListpanel) {
         
         
-        
-//        RString jigyoshaNo = (RString) ViewStateHolder.get("事業者NO", RString.class);
-//        System.out.println("22222 ++++++++++++" + jigyoshaNo);
-//        
-//        
-//                  //事業者NO
-//         panel.getKagoMoshitateInfo().getTxtJigyoshaNo().setValue(new RString(
-//                 jigyoshaNo.toString()));
-////         ));
-        
+          //入力した情報・選択された情報をもとに過誤申立書情報の内容を設定する。
           //事業者NO
-         panel.getKagoMoshitateInfo().getTxtJigyoshaNo().setValue(new RString(
-                 panel1.getDgHihokenshaSearchGaitosha().getClickedItem().
-                getTxtJigyoshaNo().getValue().toString()
-         ));
+         panel.getKagoMoshitateInfo().getTxtJigyoshaNo().
+                 setValue(gaitoshaListpanel.getDgHihokenshaSearchGaitosha().getClickedItem().getTxtJigyoshaNo());
         
          //事業者NANE
-        panel.getKagoMoshitateInfo().getTxtJigyoshaName().setValue(new RString(
-                 panel1.getDgHihokenshaSearchGaitosha().getClickedItem().getTxtJigyoshaName().toString()
-         ));
+        panel.getKagoMoshitateInfo().getTxtJigyoshaName().
+                setValue(gaitoshaListpanel.getDgHihokenshaSearchGaitosha().getClickedItem().getTxtJigyoshaName());
       
         //提供年月
-         panel.getKagoMoshitateInfo().getTxtTeikyoYM().setValue(new RDate(
-                panel1.getDgHihokenshaSearchGaitosha().getClickedItem().
-                getTxtTeikyoYM().getValue().toString()
-         ));
-        
+         panel.getKagoMoshitateInfo().getTxtTeikyoYM().
+                 setValue(new RDate(gaitoshaListpanel.getDgHihokenshaSearchGaitosha().getClickedItem().getTxtTeikyoYM().toString()));
         
          //申立者区分
-        panel.getKagoMoshitateInfo().getTxtMoshitateshaKubun().setValue(new RString(
-                panel1.getDgHihokenshaSearchGaitosha().getClickedItem().
-               getTxtKyufuJissekiSakuseiKubun().toString()
-        ));
+        panel.getKagoMoshitateInfo().getTxtMoshitateshaKubun().
+                setValue(gaitoshaListpanel.getDgHihokenshaSearchGaitosha().getClickedItem().getTxtKyufuJissekiSakuseiKubun());
         
          //様式
-        panel.getKagoMoshitateInfo().getTxtKagoForm().setValue(new RString(
-                panel1.getDgHihokenshaSearchGaitosha().getClickedItem().
-                getTxtKagoForm().toString()
-        ));
+        panel.getKagoMoshitateInfo().getTxtKagoForm().
+                setValue(gaitoshaListpanel.getDgHihokenshaSearchGaitosha().getClickedItem().getTxtKagoForm());
         
         
-         List<HashMap> ymlData = ymlData();
+        List<HashMap> ymlData = ymlData("dbc1400011/KagoMoshitatePanel.yml");
+        HashMap hashMap = ymlData.get(0);
+        ControlGenerator ymlDt = new ControlGenerator(hashMap);
         
         //送付年月
-       //  panel.getKagoMoshitateInfo().getTxtSendYM().setValue(new RDate(
-       //          ymlData.get(0).get("sendYM").toString()));
         //証記載保険者番号　南魚沼市 　152264 
-         panel.getKagoMoshitateInfo().getTxtShokisaiHokenshaNo().setValue(new RString(
-                 ymlData.get(0).get("shokisaiHokenshaNo").toString()));
+         panel.getKagoMoshitateInfo().getTxtShokisaiHokenshaNo().setValue(ymlDt.getAsRString("shokisaiHokenshaNo"));
          //証記載保険者名
-         panel.getKagoMoshitateInfo().getTxtShokisaiHokenshaName().setValue(new RString(
-                 ymlData.get(0).get("shokisaiHokenshaName").toString()));
-        
+         panel.getKagoMoshitateInfo().getTxtShokisaiHokenshaName().setValue(ymlDt.getAsRString("shokisaiHokenshaName"));
          //申立日
-         panel.getKagoMoshitateInfo().getTxtMoshitateDate().setValue(new RDate(
-                 ymlData.get(0).get("moshitateDate").toString()));
-
-        
-        //事業者NO
-//        panel1.getDgHihokenshaSearchGaitosha().ge0tClickedItem().
-//                getTxtJigyoshaNo().getValue().toString();
-//        //事業者NANE
-//        panel1.getDgHihokenshaSearchGaitosha().getClickedItem().
-//                getTxtJigyoshaName().toString();
-//
-//        //申立者区分
-//        panel1.getDgHihokenshaSearchGaitosha().getClickedItem().
-//               getTxtKyufuJissekiSakuseiKubun().toString();
-//        
-//        //提供年月
-//        panel1.getDgHihokenshaSearchGaitosha().getClickedItem().
-//                getTxtTeikyoYM().toString();
-//        //様式
-//        panel1.getDgHihokenshaSearchGaitosha().getClickedItem().
-//                getTxtKagoForm().toString();
-//        
-        
-//        panel1.getDgHihokenshaSearchGaitosha().getClickedItem().
-//                getTxtHihoNo().getValue();
-//        
-//        panel1.getDgHihokenshaSearchGaitosha().getClickedItem().
-//                getTxtHihoName().toString();        
-//        
-//        panel1.getDgHihokenshaSearchGaitosha().getClickedItem().
-//                getTxtKyufuKubun().toString();
-//        
-//        panel1.getDgHihokenshaSearchGaitosha().getClickedItem().
-//                getTxtShinsaYM().toString();
-        
+         panel.getKagoMoshitateInfo().getTxtMoshitateDate().setValue(ymlDt.getAsRDate("moshitateDate"));
         
     }
     
-     private List<HashMap> ymlData() {
-        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc1400011/KagoMoshitatePanel.yml"));
+     private List<HashMap> ymlData(String ymlName) {
+        return YamlLoader.DBC.loadAsList(new RString(ymlName));
     }
+
+
 
     
 }
