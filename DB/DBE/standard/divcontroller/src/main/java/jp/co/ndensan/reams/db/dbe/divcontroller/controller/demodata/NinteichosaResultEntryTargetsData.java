@@ -45,7 +45,7 @@ public class NinteichosaResultEntryTargetsData {
                 RString kanaShimei = cg.getAsRString("カナ氏名");
                 Chosain chosain = find調査員From(cg.getAsRString("調査員コード"));
                 return new dgNinteichosaResultTaishosha_Row(
-                        new Button(),
+                        createButton(),
                         cg.getAsRString("保険者番号"),
                         cg.getAsRString("保険者名"),
                         cg.getAsRString("被保番号"),
@@ -72,6 +72,12 @@ public class NinteichosaResultEntryTargetsData {
                         cg.getAsTextBoxFlexibleDate("データ入力日")
                 );
 
+            }
+
+            private Button createButton() {
+                Button btn = new Button();
+                btn.setDisabled(true);
+                return btn;
             }
 
             private Chosain find調査員From(RString chosainCode) {

@@ -31,8 +31,14 @@ public class NinteichosaResultEntryTarget {
      * @return ResponseData
      */
     public ResponseData<NinteichosaResultEntryTargetDiv> onLoad(NinteichosaResultEntryTargetDiv div) {
-        div.getDgNinteichosaResultTaishosha().setDataSource(_findTarget());
+        dgTargetPersons(div).setDataSource(_findTarget());
         setDisabled_btnToFinish(div, true);
+        for (dgNinteichosaResultTaishosha_Row row : dgTargetPersons(div).getDataSource()) {
+            if (canBeSet_chosaKanryoDate(row)) {
+                setDisabled_btnToFinish(div, false);
+                break;
+            }
+        }
         return _createResponseData(div);
     }
 
@@ -47,7 +53,22 @@ public class NinteichosaResultEntryTarget {
      * @return ResponseData
      */
     public ResponseData<NinteichosaResultEntryTargetDiv> onClick_btnToDecide(NinteichosaResultEntryTargetDiv div) {
-        Holder.save(dgTargetPersons(div).getClickedItem());
+        return _createResponseData(div);
+    }
+
+    public ResponseData<NinteichosaResultEntryTargetDiv>
+            onSelect_dgNinteichosaResultTaishosha(NinteichosaResultEntryTargetDiv div) {
+        List<dgNinteichosaResultTaishosha_Row> dataSource = new ArrayList<>();
+        for (dgNinteichosaResultTaishosha_Row row : dgTargetPersons(div).getDataSource()) {
+            if (row.getSelected()) {
+                Holder.save(dgTargetPersons(div).getClickedItem());
+                row.getBtnToDecide().setDisabled(false);
+            } else {
+                row.getBtnToDecide().setDisabled(true);
+            }
+            dataSource.add(row);
+        }
+        div.getDgNinteichosaResultTaishosha().setDataSource(dataSource);
         return _createResponseData(div);
     }
 
@@ -61,13 +82,19 @@ public class NinteichosaResultEntryTarget {
         dgNinteichosaResultTaishosha_Row target = Holder.get();
         if (target != null) {
             Holder.remove();
-            setDisabled_btnToFinish(div, false);
+            setDisabled_btnToFinish(div, true);
             List<dgNinteichosaResultTaishosha_Row> list = new ArrayList<>();
-            for (dgNinteichosaResultTaishosha_Row row : _findTarget()) {
+            for (dgNinteichosaResultTaishosha_Row row : dgTargetPersons(div).getDataSource()) {
                 if (row.getHihokenshaNo().equals(target.getHihokenshaNo())) {
                     list.add(target);
+                    if (canBeSet_chosaKanryoDate(target)) {
+                        setDisabled_btnToFinish(div, false);
+                    }
                 } else {
                     list.add(row);
+                    if (canBeSet_chosaKanryoDate(row)) {
+                        setDisabled_btnToFinish(div, false);
+                    }
                 }
             }
             dgTargetPersons(div).setDataSource(list);
@@ -128,7 +155,7 @@ public class NinteichosaResultEntryTarget {
         private static final RString KEY = new RString("NinteichosaResultEntryTarget");
 
         static void save(dgNinteichosaResultTaishosha_Row target) {
-            ViewStateHolder.put(KEY, target);
+            ViewStateHolder.put(KEY.toString(), target);
         }
 
         static dgNinteichosaResultTaishosha_Row get() {

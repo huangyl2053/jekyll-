@@ -7,7 +7,7 @@
    "eventName": "select",
    "toLayoutSubGyomuCode": "DBE",
    "toLayoutName": "DBE2060002",
-   "toEventName": ""
+   "toEventName": "start"
   },
   {
    "id": "2",
@@ -15,8 +15,8 @@
    "layoutName": "DBE2060002",
    "eventName": "return",
    "toLayoutSubGyomuCode": "DBE",
-   "toLayoutName": "DBE2060003",
-   "toEventName": ""
+   "toLayoutName": "DBE2060001",
+   "toEventName": "resume"
   }
  ],
  "subGyomuCode": "DBE",

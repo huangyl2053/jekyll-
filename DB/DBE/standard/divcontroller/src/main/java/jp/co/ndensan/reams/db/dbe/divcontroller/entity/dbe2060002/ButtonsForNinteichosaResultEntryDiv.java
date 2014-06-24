@@ -25,6 +25,8 @@ public class ButtonsForNinteichosaResultEntryDiv extends Panel {
     private Button btnToReturn;
     @JsonProperty("btnToRegisterResult")
     private Button btnToRegisterResult;
+    @JsonProperty("btnHiddenCallOnStart")
+    private Button btnHiddenCallOnStart;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,6 +52,16 @@ public class ButtonsForNinteichosaResultEntryDiv extends Panel {
     @JsonProperty("btnToRegisterResult")
     public void setBtnToRegisterResult(Button btnToRegisterResult) {
         this.btnToRegisterResult=btnToRegisterResult;
+    }
+
+    @JsonProperty("btnHiddenCallOnStart")
+    public Button getBtnHiddenCallOnStart() {
+        return btnHiddenCallOnStart;
+    }
+
+    @JsonProperty("btnHiddenCallOnStart")
+    public void setBtnHiddenCallOnStart(Button btnHiddenCallOnStart) {
+        this.btnHiddenCallOnStart=btnHiddenCallOnStart;
     }
 
 }

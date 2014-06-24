@@ -23,6 +23,8 @@ public class ButtonsForNinteichosaResultEntryTargetDiv extends Panel {
      */
     @JsonProperty("btnToFinish")
     private Button btnToFinish;
+    @JsonProperty("btnHiddenCallOnResume")
+    private Button btnHiddenCallOnResume;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -38,6 +40,16 @@ public class ButtonsForNinteichosaResultEntryTargetDiv extends Panel {
     @JsonProperty("btnToFinish")
     public void setBtnToFinish(Button btnToFinish) {
         this.btnToFinish=btnToFinish;
+    }
+
+    @JsonProperty("btnHiddenCallOnResume")
+    public Button getBtnHiddenCallOnResume() {
+        return btnHiddenCallOnResume;
+    }
+
+    @JsonProperty("btnHiddenCallOnResume")
+    public void setBtnHiddenCallOnResume(Button btnHiddenCallOnResume) {
+        this.btnHiddenCallOnResume=btnHiddenCallOnResume;
     }
 
 }

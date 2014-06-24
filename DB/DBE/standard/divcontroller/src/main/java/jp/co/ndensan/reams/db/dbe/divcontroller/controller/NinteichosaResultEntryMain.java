@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kihonchosaResultInputCom.KihonchosaResultInputCom;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.HihokenshaForNinteichosaResultDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.Kihonchosa0911Div;
@@ -25,15 +27,16 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ServiceJokyoSe
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ServiceJokyoTabDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ShisakaiWaritsukeKiboDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.dgNinteichosaResultTaishosha_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ButtonsForNinteichosaResultEntryDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.serviceWithCountCom.ServiceWithCountCom;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tokkijikoCom.TokkijikoCom;
 //import jp.co.ndensan.reams.ur.urz.business.DateOfBirthFactory;
 //import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ControlRepeater;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -43,9 +46,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.DivcontrollerMethod;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.SingleButtonType;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
  * NinteichosaResultEntryMainDivを制御します。
@@ -61,7 +61,7 @@ public class NinteichosaResultEntryMain {
      * @return ResponseData
      */
     public ResponseData<NinteichosaResultEntryMainDiv> onLoad(NinteichosaResultEntryMainDiv div) {
-        return onStart_NinteichosaResultEntryMain(div);
+        return createResponseData(div);
     }
 
     /**
@@ -72,12 +72,12 @@ public class NinteichosaResultEntryMain {
      */
     public ResponseData<NinteichosaResultEntryMainDiv> onStart_NinteichosaResultEntryMain(NinteichosaResultEntryMainDiv div) {
         dgNinteichosaResultTaishosha_Row targetInfo = targetInfo();
-        new HihokenshaForNinteichosaResult(div).init(targetInfo);
-        new NinteichosaDetail(div).init(targetInfo);
         new ShinsakaiWaritsukeKibo(div).init();
         new ServiceJokyoTab(div).init();
         new Kihonchosa09(div).init();
-        return _createResponseData(div);
+        new HihokenshaForNinteichosaResult(div).init(targetInfo);
+        new NinteichosaDetail(div).init(targetInfo);
+        return createResponseData(div);
     }
 
     private dgNinteichosaResultTaishosha_Row targetInfo() {
@@ -92,7 +92,7 @@ public class NinteichosaResultEntryMain {
      */
     public ResponseData<NinteichosaResultEntryMainDiv> onChange_radServiceKubun(NinteichosaResultEntryMainDiv div) {
         new ServiceJokyoTab(div).onChange_radサービス区分();
-        return _createResponseData(div);
+        return createResponseData(div);
     }
 
     /**
@@ -103,7 +103,7 @@ public class NinteichosaResultEntryMain {
      */
     public ResponseData<NinteichosaResultEntryMainDiv> onChange_radChosaJisshiBasho(NinteichosaResultEntryMainDiv div) {
         new NinteichosaDetail(div).onChange_radChosaJisshiBasho();
-        return _createResponseData(div);
+        return createResponseData(div);
     }
 
     /**
@@ -112,11 +112,12 @@ public class NinteichosaResultEntryMain {
      * @param div NinteichosaResultEntryMainDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnToRegisterResult(NinteichosaResultEntryMainDiv div) {
-//        dgNinteichosaResultTaishosha_Row target = targetInfo();
-//        new NinteichosaDetail(div).reflectPanelValueTo(target);
-//        NinteichosaResultEntryTarget.Holder.save(target);
-        return addMessage(_createResponseData(div), new InformationMessage("1", "処理は正常に終了しました。"));
+    public ResponseData<NinteichosaResultEntryMainDiv>
+            onClick_btnToRegisterResult(NinteichosaResultEntryMainDiv div) {
+        dgNinteichosaResultTaishosha_Row target = targetInfo();
+        new NinteichosaDetail(div).reflectPanelValueTo(target);
+        NinteichosaResultEntryTarget.Holder.save(target);
+        return withMessage(new ResponseData<NinteichosaResultEntryMainDiv>(), new InformationMessage("I", "登録しました。"));
     }
 
     /**
@@ -127,7 +128,7 @@ public class NinteichosaResultEntryMain {
     public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnAddTokkijiko(NinteichosaResultEntryMainDiv div) {
         ControlRepeater<TokkijikoCom> rep = repTokkijikoCom(div);
         rep.setRepeateData(createIncreasedRepeateData(rep));
-        return _createResponseData(div);
+        return createResponseData(div);
     }
 
     private ControlRepeater<TokkijikoCom> repTokkijikoCom(NinteichosaResultEntryMainDiv div) {
@@ -230,8 +231,8 @@ public class NinteichosaResultEntryMain {
             panel.getTxtHihokenshaYubinNo().setValue(targetInfo.getYubinNo());
             panel.getTxtHihokenshaJusho().setValue(targetInfo.getJusho());
             panel.getTxtHihokenshaBirthDay().setValue(targetInfo.getBirthDay().getValue());
-//            IDateOfBirth birthDay = DateOfBirthFactory.createInstance(targetInfo.getBirthDay().getValue());
-//            panel.getTxtHihokenshaAge().setValue(new RString(Integer.toString(birthDay.get年齢())));
+            //IDateOfBirth birthDay = DateOfBirthFactory.createInstance(targetInfo.getBirthDay().getValue());
+            //panel.getTxtHihokenshaAge().setValue(new RString(Integer.toString(birthDay.get年齢())));
         }
     }
     //</editor-fold>
@@ -246,10 +247,6 @@ public class NinteichosaResultEntryMain {
 
         public NinteichosaDetail(NinteichosaResultEntryMainDiv main) {
             this.panel = main.getNinteichosaDetail();
-        }
-
-        public void onLoad() {
-            //_onLoad_radChosaJisshiBasho();
         }
 
         public void init(dgNinteichosaResultTaishosha_Row targetInfo) {
@@ -322,7 +319,7 @@ public class NinteichosaResultEntryMain {
         }
 
         //<editor-fold defaultstate="collapsed" desc="ChosaJisshiBasho">
-        enum ChosaJisshiBasho {
+        private static enum ChosaJisshiBasho {
 
             自宅("1"),
             自宅外("2"),
@@ -377,9 +374,6 @@ public class NinteichosaResultEntryMain {
             _setDisable_txtChosaJisshiBashoFreeInput_when_調査実施場所(_is_not_その他());
         }
 
-//        private void _onLoad_radChosaJisshiBasho() {
-//            _radChosaJisshiBasho().setDataSource(ChosaJisshiBasho.toDataSource());
-//        }
         private void _setDisable_txtChosaJisshiBashoFreeInput_when_調査実施場所(boolean is_not_その他) {
             _txtChosaJisshiBashoFreeInput().setDisabled(is_not_その他);
         }
@@ -486,11 +480,6 @@ public class NinteichosaResultEntryMain {
             this.利用回数 = new ServiceJokyoServicesCounts(this.tab);
         }
 
-        public void onLoad() {
-            //_onLoad_radサービス区分();
-            //this.利用回数.onLoad();
-        }
-
         public void init() {
             _init_radサービス区分();
             this.利用回数.init();
@@ -506,7 +495,7 @@ public class NinteichosaResultEntryMain {
         }
 
         //<editor-fold defaultstate="collapsed" desc="ServiceKubun">
-        enum ServiceKubun {
+        private static enum ServiceKubun {
 
             なし("0"), 介護("1"), 予防("2");
             private final RString theKey;
@@ -545,20 +534,15 @@ public class NinteichosaResultEntryMain {
                 }
                 return なし;
             }
-
         }
         //</editor-fold>
 
-//        private void _onLoad_radサービス区分() {
-//            _radServiceKubun().setDataSource(ServiceKubun.toList_KeyValueDataSource());
-//        }
         private void _init_radサービス区分() {
             _radServiceKubun().setSelectedItem(ServiceKubun.なし.item());
         }
 
         public void onChange_radサービス区分() {
             ServiceKubun kubun = ServiceKubun.toValue(_radServiceKubun().getSelectedItem());
-            System.out.println(RTime.now() + ":" + kubun.name());
             this.利用回数.changeStateFromServiceKubun(kubun);
         }
 
@@ -595,10 +579,6 @@ public class NinteichosaResultEntryMain {
                 list.add(this.panel.getComCountTsushoRehabilitation());
                 list.add(this.panel.getComCountYakanHomonKaigo());
                 return list;
-            }
-
-            public void onLoad() {
-                //_onLoad_radJutakuKaishu();
             }
 
             public void init() {
@@ -669,7 +649,7 @@ public class NinteichosaResultEntryMain {
             }
 
             //<editor-fold defaultstate="collapsed" desc="JutakuKaishu">
-            enum JutakuKaishu {
+            private static enum JutakuKaishu {
 
                 あり("1"), なし("0"),;
                 private final RString theKey;
@@ -702,31 +682,8 @@ public class NinteichosaResultEntryMain {
             }
             //</editor-fold>
 
-            private void _onLoad_radJutakuKaishu() {
-                _radJutakuKaishu().setDataSource(JutakuKaishu.toList_KeyValueDataSource());
-            }
-
             private void _init_radJutakuKaishu() {
                 _radJutakuKaishu().setSelectedItem(JutakuKaishu.なし.item());
-                System.out.println(_radJutakuKaishu().getSelectedValue());
-            }
-
-            /**
-             * txtShichosonTokubetsuKyufu
-             *
-             * @return txtShichosonTokubetsuKyufu
-             */
-            private TextBox _txt市町村特別給付() {
-                return this.panel.getTxtShichosonTokubetsuKyufu();
-            }
-
-            /**
-             * txtZaitakuSeriviceOutsideKaigoKyufu
-             *
-             * @return txtZaitakuSeriviceOutsideKaigoKyufu
-             */
-            private TextBox _txt介護給付外在宅サービス() {
-                return this.panel.getTxtZaitakuSeriviceOutsideKaigoKyufu();
             }
 
         }
@@ -900,15 +857,15 @@ public class NinteichosaResultEntryMain {
             list.add(div.getComKihonchosaResult702());
         }
     }
-//</editor-fold>
+    //</editor-fold>
 
-    private ResponseData<NinteichosaResultEntryMainDiv> _createResponseData(NinteichosaResultEntryMainDiv div) {
-        ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
+    private <T> ResponseData<T> createResponseData(T div) {
+        ResponseData<T> response = new ResponseData<>();
         response.data = div;
         return response;
     }
 
-    private <T> ResponseData<T> addMessage(ResponseData<T> response, InformationMessage message) {
+    private <T> ResponseData<T> withMessage(ResponseData<T> response, InformationMessage message) {
         response.addMessage(message);
         return response;
     }

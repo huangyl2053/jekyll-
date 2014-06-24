@@ -575,7 +575,7 @@
        "onClick": "",
        "appearance": 2,
        "imageFileUrl": "/uz/uza/css/Link.jpg",
-       "imageWidth": "13.5",
+       "imageWidth": "",
        "imageHeight": "15",
        "icon": 0,
        "heightTextBoxMatches": false,
@@ -5745,8 +5745,8 @@
            "items": [],
            "controlType": "CompositeControl",
            "width": "XS",
-           "visible": true,
-           "displayNone": true,
+           "visible": false,
+           "displayNone": false,
            "disabled": false,
            "accessKey": "",
            "nextFocusFieldName": "",
@@ -6805,6 +6805,35 @@
        "imageHeight": "",
        "icon": 0,
        "heightTextBoxMatches": false
+      },
+      {
+       "fieldName": "btnHiddenCallOnStart",
+       "items": [],
+       "controlType": "Button",
+       "width": "S",
+       "visible": false,
+       "displayNone": true,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnHiddenCallOnStart",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "onStart",
+       "onClick": "onStart",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0,
+       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
@@ -6899,6 +6928,10 @@
     {
      "eventName": "onClick_btnAddTokkijiko",
      "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onClick_btnAddTokkijiko"
+    },
+    {
+     "eventName": "onStart",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onStart_NinteichosaResultEntryMain"
     }
    ],
    "hiddenInput": [],
@@ -7084,6 +7117,10 @@
   {
    "alias": "return",
    "eventName": "btnToReturn.onClick"
+  },
+  {
+   "alias": "start",
+   "eventName": "btnHiddenCallOnStart.onClick"
   }
  ],
  "loadSequencePanelNames": [
