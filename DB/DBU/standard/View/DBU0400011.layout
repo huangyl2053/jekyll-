@@ -24,7 +24,14 @@
      "selectControlID": "chkHakkoTaishoSearchCondition_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
+     "required": false,
      "onChange": "",
+     "labelLText": "",
+     "labelLWidth": "65",
+     "labelLAlign": 2,
+     "onClick": "",
+     "icon": [],
      "selectedItem": null,
      "dataSource": [
       {
@@ -40,20 +47,14 @@
        "value": "要介護認定者"
       }
      ],
-     "required": false,
-     "onClick": "",
-     "selectedItems": [],
      "newLineItemNumber": 4,
+     "spaceSize": "M",
+     "disabledItem": [],
+     "selectedItems": [],
      "minCheckedItem": "1",
      "maxCheckedItem": "3",
-     "spaceSize": "M",
-     "labelLText": "",
-     "labelLWidth": "65",
-     "labelLAlign": 2,
      "isAllSelectable": true,
-     "isAllSelectableBreakLine": false,
-     "disabledItem": [],
-     "icon": []
+     "isAllSelectableBreakLine": false
     },
     {
      "fieldName": "btnSearchHakkoTaisho",
@@ -75,13 +76,14 @@
      "selectControlID": "btnSearchHakkoTaisho",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "onClick_BtnSearchHakkoTaisho",
-     "icon": 0,
      "text": "一括作成対象を表示する",
+     "onClick": "onClick_BtnSearchHakkoTaisho",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -122,10 +124,7 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -156,7 +155,8 @@
      "selectControlID": "dgIkkatsuHakkoTaisho",
      "helpMessageID": "",
      "jpControlName": "",
-     "height": "S",
+     "readOnly": false,
+     "height": "174",
      "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
@@ -270,7 +270,7 @@
       ]
      },
      "onSort": "",
-     "onSelect": "setBtnBatchControl",
+     "onSelect": "onSelect_dgIkkatsuHakkoTaisho",
      "onSelectByDblClick": "",
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
@@ -307,25 +307,26 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
-       "labelLText": "交付日",
-       "labelLWidth": "55",
-       "labelLAlign": 2,
-       "text": "",
        "placeHolder": "",
+       "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
-       "onBlur": "",
+       "onBlur": "onBlur_txtKofuDate",
+       "onChange": "",
        "onKeyPress": "",
-       "labelRText": "",
-       "labelRWidth": "S",
-       "labelRAlign": 0,
-       "ymdKubun": 2,
-       "displayFormat": 0,
+       "text": "",
        "value": "",
-       "textKind": 0
+       "labelLText": "交付日",
+       "labelRText": "",
+       "labelLWidth": "55",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "permitCharactor": "./_-",
+       "ymdKubun": 2,
+       "displayFormat": 0
       },
       {
        "fieldName": "chkTest",
@@ -347,7 +348,14 @@
        "selectControlID": "chkTest_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
+       "required": false,
        "onChange": "",
+       "labelLText": "",
+       "labelLWidth": "XS",
+       "labelLAlign": 2,
+       "onClick": "",
+       "icon": [],
        "selectedItem": null,
        "dataSource": [
         {
@@ -355,20 +363,14 @@
          "value": "テスト出力"
         }
        ],
-       "required": false,
-       "onClick": "",
-       "selectedItems": [],
        "newLineItemNumber": 1,
+       "spaceSize": "M",
+       "disabledItem": [],
+       "selectedItems": [],
        "minCheckedItem": 0,
        "maxCheckedItem": "1",
-       "spaceSize": "M",
-       "labelLText": "",
-       "labelLWidth": "XS",
-       "labelLAlign": 2,
        "isAllSelectable": false,
-       "isAllSelectableBreakLine": false,
-       "disabledItem": [],
-       "icon": []
+       "isAllSelectableBreakLine": false
       },
       {
        "fieldName": "lblTestHosoku",
@@ -391,10 +393,10 @@
        "helpMessageID": "",
        "jpControlName": "",
        "required": false,
-       "text": "※テスト出力を行う場合、帳票発行履歴に登録されません。",
        "isPrivateInfo": false,
-       "align": 0,
-       "decorationClass": ""
+       "text": "※テスト出力を行う場合、帳票発行履歴に登録されません。",
+       "decorationClass": "",
+       "align": 0
       }
      ],
      "controlType": "Panel",
@@ -430,10 +432,7 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "S",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
@@ -465,18 +464,20 @@
        "helpMessageID": "",
        "jpControlName": "",
        "relation": [],
-       "marginTop": "-0.25",
+       "marginTop": "0",
        "marginBottom": 0,
        "businessId": "DBZ",
        "controlName": "KaigoChohyoShutsuryokujun",
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
-       "ChohyoShutsuryokujun_width": "1114"
+       "canTransferEvent": true,
+       "heightForDialog": "M",
+       "ChohyoShutsuryokujun_width": "1110"
       }
      ],
      "controlType": "Panel",
-     "width": "G2",
+     "width": "G12",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -487,7 +488,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "-0.07",
+     "marginLeft": "0",
      "marginRight": "0",
      "selectControlID": "HihokenshashoIkkatsuHakko",
      "helpMessageID": "",
@@ -508,10 +509,7 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "0",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": true,
      "panelDisplay": 0,
@@ -543,14 +541,16 @@
        "helpMessageID": "",
        "jpControlName": "",
        "relation": [],
-       "marginTop": "-0.25",
-       "marginBottom": 0,
+       "marginTop": "0",
+       "marginBottom": "0",
        "businessId": "DBZ",
        "controlName": "KaigoChohyoShutsuryokujun",
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
-       "ChohyoShutsuryokujun_width": "1114"
+       "canTransferEvent": true,
+       "heightForDialog": "M",
+       "ChohyoShutsuryokujun_width": "1110"
       }
      ],
      "controlType": "PanelPublish",
@@ -565,14 +565,14 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "-0.07",
+     "marginLeft": "0",
      "marginRight": "0",
      "selectControlID": "HihokenshashoIkkatsuHakkoList",
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
      "title": "被保険者証発行一覧表",
-     "isOpen": true,
+     "isOpen": false,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
@@ -584,12 +584,9 @@
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "marginTop": "-0.4",
+     "marginTop": "0",
      "marginBottom": "0",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": true,
      "panelDisplay": 0,
@@ -619,7 +616,7 @@
    "jpControlName": "",
    "onLoad": "",
    "title": "一括作成対象者一覧",
-   "isOpen": true,
+   "isOpen": false,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -634,6 +631,14 @@
     {
      "eventName": "onClick_BtnSearchHakkoTaisho",
      "requestUrl": "dbu/db/dbu/IkkatsuHakkoTaishoList/onClick_BtnSearchHakkoTaisho"
+    },
+    {
+     "eventName": "onBlur_txtKofuDate",
+     "requestUrl": "dbu/db/dbu/IkkatsuHakkoTaishoList/onBlur_txtKofuDate"
+    },
+    {
+     "eventName": "onSelect_dgIkkatsuHakkoTaisho",
+     "requestUrl": "dbu/db/dbu/IkkatsuHakkoTaishoList/onSelect_dgIkkatsuHakkoTaisho"
     }
    ],
    "hiddenInput": [],
@@ -642,16 +647,13 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "273"
+   "height": "252"
   }
  ],
  "controlType": null,
@@ -751,20 +753,21 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "commonBtn",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonSubmitForDemo",
      "buttonProperty": {
       "fieldName": "btnHakko",
       "items": [],
       "controlType": "CommonButtonFree",
-      "width": "S",
+      "width": 1,
       "visible": true,
       "displayNone": false,
-      "disabled": false,
+      "disabled": true,
       "accessKey": "",
       "nextFocusFieldName": "",
       "wrap": false,
@@ -777,13 +780,20 @@
       "selectControlID": "btnHakko",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "被保険者証を発行する",
+      "postParameterPanelNames": [
+       {}
+      ],
       "onClick": "",
+      "icon": 0,
+      "text": "被保険者証を発行する",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "icon": 0,
+      "heightTextBoxMatches": false,
+      "validateUrl": "",
+      "submitUrl": "",
+      "onAfterRequest": "",
       "prefixText": "",
       "suffixText": ""
      }

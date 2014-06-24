@@ -14,7 +14,7 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
@@ -1009,8 +1009,8 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "XS",
-   "marginBottom": "XS",
+   "marginTop": "0",
+   "marginBottom": "0",
    "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
@@ -7545,7 +7545,7 @@
       "CareManagementhi"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "KogakuKaigoServicehi",
+     "selectedItemFieldName": "KyufuJissekiKihon",
      "initialTab": 0,
      "isLazyLoading": false
     },
@@ -10874,7 +10874,7 @@
   {
    "order": "1",
    "stateName": "給付実績検索",
-   "showWizard": false,
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "KyufuJissekiSearch",
@@ -11007,7 +11007,7 @@
   {
    "order": "2",
    "stateName": "給付実績一覧",
-   "showWizard": false,
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "KyufuJissekiSearch",
@@ -11143,7 +11143,7 @@
   {
    "order": "3",
    "stateName": "給付実績照会",
-   "showWizard": false,
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "KyufuJisseki",
@@ -11337,171 +11337,6 @@
   },
   {
    "order": "4",
-   "stateName": "ダイアログ用",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "KinkyujiShisetsuRyoyohi",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "TokuteiShinryohi",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "ShokujiHiyo",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "TokuteiNyushoshaKaigoServicehi",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "ShakaiFukushiHojinKeigengaku",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "TokuteiShinryohi",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "ShokujiHiyoMeisaiFromH1504",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "ShokujiHiyoGokeiFromH1504",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyufuJissekiTekiyo",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyufuJissekiKihonGokei",
-     "panelState": "visible"
-    }
-   ],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "btnKyufuJissekiSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKyufuJissekiResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKyufuJissekiReturn",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgKyufuJissekiList[btnKyufuJissekiList]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKyufuJissekiKihonGokei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKyufuJissekiKihonGokeiClose",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKinkyujiShisetsuRyoyohi",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKinkyujiShisetsuRyoyohiClose",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTokuteiShinryohi",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTokuteiShinryohiClose",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnShokujiHiyo",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnShokujiHiyoClose",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTokuteiNyushoshaKaigoServicehi",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTokuteiNyushoshaKaigoServicehiClose",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnShakaiFukushiHojinKeigengaku",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnShakaiFukushiHojinKeigengakuClose",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKyufuJissekiTekiyoClose",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKyufuJissekiShukei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKyufuJissekiShukeiClose",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgKyufuJissekiMeisai[btnTekiyo]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgServiceKeikakuhiFromH2104[btnTekiyo]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgFukushiYoguKonyuhi[btnTekiyo]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKyufuJissekiIchiranReturn",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "5",
    "stateName": "基本情報合計",
    "showWizard": false,
    "visibleDivs": [
@@ -11630,7 +11465,7 @@
    ]
   },
   {
-   "order": "6",
+   "order": "5",
    "stateName": "緊急時施設療養費",
    "showWizard": false,
    "visibleDivs": [
@@ -11759,7 +11594,7 @@
    ]
   },
   {
-   "order": "7",
+   "order": "6",
    "stateName": "特定診療費",
    "showWizard": false,
    "visibleDivs": [
@@ -11888,7 +11723,7 @@
    ]
   },
   {
-   "order": "8",
+   "order": "7",
    "stateName": "食事費用",
    "showWizard": false,
    "visibleDivs": [
@@ -12025,7 +11860,7 @@
    ]
   },
   {
-   "order": "9",
+   "order": "8",
    "stateName": "特定入所者介護サービス費",
    "showWizard": false,
    "visibleDivs": [
@@ -12154,7 +11989,7 @@
    ]
   },
   {
-   "order": "10",
+   "order": "9",
    "stateName": "社会福祉法人軽減額",
    "showWizard": false,
    "visibleDivs": [
@@ -12283,7 +12118,7 @@
    ]
   },
   {
-   "order": "11",
+   "order": "10",
    "stateName": "摘要",
    "showWizard": false,
    "visibleDivs": [
@@ -12412,7 +12247,7 @@
    ]
   },
   {
-   "order": "12",
+   "order": "11",
    "stateName": "給付実績集計",
    "showWizard": false,
    "visibleDivs": [

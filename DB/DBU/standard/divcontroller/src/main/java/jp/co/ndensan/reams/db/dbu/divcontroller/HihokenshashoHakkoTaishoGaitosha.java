@@ -40,8 +40,8 @@ public class HihokenshashoHakkoTaishoGaitosha {
         //該当者一覧パネルをオープン
         panel.getCcdHihokenshashoHakkoTaishoGaitosha().setIsOpen(true);
 
-        panel.getCcdHihokenshashoHakkoTaishoGaitosha().getButtonsForSearchResultOfHihokensha().
-                getBtnToResearch().setDisplayNone(true);
+        //「再検索する」ボタンを非活性
+        panel.getCcdHihokenshashoHakkoTaishoGaitosha().getButtonsForSearchResultOfHihokensha().setDisplayNone(true);
 
         List<dgSearchResult_Row> arrayList = panel.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().getDataSource();
         for (int i = 0; i < arrayList.size(); i++) {

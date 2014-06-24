@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller;
 
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.KanryoMessagePnlDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.KanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.ShoKaishuKanriTaishoshaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 証回収管理完了メッセージパネルDivを制御します。
@@ -28,13 +28,14 @@ public class ShoKaishuKanriKanryoMessage {
             KanryoMessagePnlDiv panel, ShoKaishuKanriTaishoshaJohoDiv panel2) {
         ResponseData<KanryoMessagePnlDiv> response = new ResponseData<>();
 
-        KanryoMessageDiv kanryoMsgDiv = new KanryoMessageDiv();
-        kanryoMsgDiv.getLblTaishoMessage1().setText(
-                panel2.getCcdKaigoShikakuKihon().getTxtHihokenshaNo().getValue());
-        kanryoMsgDiv.getLblTaishoMessage2().setText(
-                panel2.getShoKaishuKanriTaishoshaCommonJoho().getTxtAtenaMeisho().getValue());
+        panel.getCcdKaigoKanryoMessage().getKanryoMessage().getLblMessageMain().setText(
+                new RString("登録しました。"));
 
-        panel.getCcdKaigoKanryoMessage().setKanryoMessage(kanryoMsgDiv);
+        panel.getCcdKaigoKanryoMessage().getKanryoMessage().getLblTaishoMessage1().setText(
+                panel2.getCcdKaigoShikakuKihon().getTxtHihokenshaNo().getValue());
+
+        panel.getCcdKaigoKanryoMessage().getKanryoMessage().getLblTaishoMessage2().setText(
+                panel2.getShoKaishuKanriTaishoshaCommonJoho().getTxtAtenaMeisho().getValue());
 
         response.data = panel;
         return response;

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011.HihokenshashoHakkoJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgShuruiShikyuGendoKijunGaku_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
@@ -204,6 +205,52 @@ public class HihokenshashoHakkoJoho {
         panel.getHihokenshashoHakkoShosaiJoho().getTabHihokenshaShikakuShosai().
                 getTplShisetsuNyutaisho().getTblShisetsuNyutaisho().getTxtShisetsuTaishoDate3().
                 setValue(ymlData.getAsTextBoxFlexibleDate("taishobi3").getValue());
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 被保険者証発行情報画面-「交付日」ロストフォーカス時の処理を表します。
+     *
+     * @param panel HihokenshashoHakkoJohoDiv
+     * @return ResponseData
+     */
+    public ResponseData<HihokenshashoHakkoJohoDiv> onBlur_txtKofuDate(HihokenshashoHakkoJohoDiv panel) {
+        ResponseData<HihokenshashoHakkoJohoDiv> response = new ResponseData<>();
+
+        if (!panel.getHihokenshashoHakkoShosaiJoho().getTxtKofuDate().getText().isEmpty()
+                && !panel.getHihokenshashoHakkoShosaiJoho().getDdlKofuJiyu().getSelectedValue().isEmpty()) {
+
+            //boolean isDisabled = CommonButtonHolder.isDisabled(new RString("btnPrint"));
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnPrint"), false);
+
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnPrint"), true);
+        }
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 被保険者証発行情報画面-「交付日」ロストフォーカス時の処理を表します。
+     *
+     * @param panel HihokenshashoHakkoJohoDiv
+     * @return ResponseData
+     */
+    public ResponseData<HihokenshashoHakkoJohoDiv> onChange_ddlKofuJiyu(HihokenshashoHakkoJohoDiv panel) {
+        ResponseData<HihokenshashoHakkoJohoDiv> response = new ResponseData<>();
+
+        if (!panel.getHihokenshashoHakkoShosaiJoho().getTxtKofuDate().getText().isEmpty()
+                && !panel.getHihokenshashoHakkoShosaiJoho().getDdlKofuJiyu().getSelectedValue().isEmpty()) {
+
+            //boolean isDisabled = CommonButtonHolder.isDisabled(new RString("btnPrint"));
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnPrint"), false);
+
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnPrint"), true);
+        }
 
         response.data = panel;
         return response;

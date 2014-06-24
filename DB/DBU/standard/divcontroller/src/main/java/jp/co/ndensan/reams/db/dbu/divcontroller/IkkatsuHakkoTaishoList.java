@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 被保険者証一括発行Divを制御します。
@@ -40,18 +41,63 @@ public class IkkatsuHakkoTaishoList {
         setSortData(panel);
 
         panel.setIsOpen(true);
+        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().getKaigoChohyoShutsuryokujun()
+                .setCanOpenAndClose(false);
+        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().getKaigoChohyoShutsuryokujun().
+                setCanOpenAndClose(false);
         panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().
-                getCcdChohyoShutsuryokujun().setCanOpenAndClose(false);
+                getKaigoChohyoShutsuryokujun().setTitle(RString.EMPTY);
         panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().
-                getCcdChohyoShutsuryokujun().setCanOpenAndClose(false);
-        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().
-                getCcdChohyoShutsuryokujun().setTitle(RString.EMPTY);
-        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().
-                getCcdChohyoShutsuryokujun().setTitle(RString.EMPTY);
+                getKaigoChohyoShutsuryokujun().setTitle(RString.EMPTY);
+
+        //「被保険者証を発行する」ボタンを活性化
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHakko"), false);
 
         response.data = panel;
         return response;
 
+    }
+
+    /**
+     * 被保険者証一括発行情報画面-「交付日」ロストフォーカス時の処理を表します。
+     *
+     * @param panel IkkatsuHakkoTaishoListDiv
+     * @return ResponseData
+     */
+    public ResponseData<IkkatsuHakkoTaishoListDiv> onBlur_txtKofuDate(IkkatsuHakkoTaishoListDiv panel) {
+        ResponseData<IkkatsuHakkoTaishoListDiv> response = new ResponseData<>();
+
+        if (panel.getDgIkkatsuHakkoTaisho().getSelectedItems().isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHakko"), true);
+        } else {
+            if (!panel.getShutsuryokuJoho().getTxtKofuDate().getText().isEmpty()) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHakko"), false);
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHakko"), true);
+            }
+        }
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 被保険者証一括発行情報画面-「一括発行対象者一覧」選択時の処理を表します。
+     *
+     * @param panel IkkatsuHakkoTaishoListDiv
+     * @return ResponseData
+     */
+    public ResponseData<IkkatsuHakkoTaishoListDiv> onSelect_dgIkkatsuHakkoTaisho(IkkatsuHakkoTaishoListDiv panel) {
+        ResponseData<IkkatsuHakkoTaishoListDiv> response = new ResponseData<>();
+
+        if (!panel.getShutsuryokuJoho().getTxtKofuDate().getText().isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHakko"), false);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHakko"), true);
+        }
+
+        response.data = panel;
+        return response;
     }
 
     /*
@@ -138,26 +184,26 @@ public class IkkatsuHakkoTaishoList {
         HashMap hashMap = sortList.get(0);
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
-        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().getCcdChohyoShutsuryokujun().getTxtSort().
-                setValue(ymlData.getAsRString("sort"));
+        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().getKaigoChohyoShutsuryokujun().
+                getTxtSort().setValue(ymlData.getAsRString("sort"));
 
-        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().getCcdChohyoShutsuryokujun().getTxtSortName().
-                setValue(ymlData.getAsRString("sortname"));
+        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().getKaigoChohyoShutsuryokujun()
+                .getTxtSortName().setValue(ymlData.getAsRString("sortname"));
 
-        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().getCcdChohyoShutsuryokujun().getTxtKaiPage().
-                setValue(ymlData.getAsRString("kaipage"));
+        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().getKaigoChohyoShutsuryokujun()
+                .getTxtKaiPage().setValue(ymlData.getAsRString("kaipage"));
 
         hashMap = sortList.get(1);
         ymlData = new ControlGenerator(hashMap);
 
-        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().getCcdChohyoShutsuryokujun().getTxtSort().
-                setValue(ymlData.getAsRString("sort"));
+        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().getKaigoChohyoShutsuryokujun()
+                .getTxtSort().setValue(ymlData.getAsRString("sort"));
 
-        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().getCcdChohyoShutsuryokujun().getTxtSortName().
-                setValue(ymlData.getAsRString("sortname"));
+        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().getKaigoChohyoShutsuryokujun()
+                .getTxtSortName().setValue(ymlData.getAsRString("sortname"));
 
-        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().getCcdChohyoShutsuryokujun().getTxtKaiPage().
-                setValue(ymlData.getAsRString("kaipage"));
+        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().getKaigoChohyoShutsuryokujun()
+                .getTxtKaiPage().setValue(ymlData.getAsRString("kaipage"));
     }
 
 }

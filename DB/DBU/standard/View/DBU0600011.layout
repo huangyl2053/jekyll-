@@ -32,7 +32,12 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClick_BtnToSearch": "onClick_btnSearch"
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "onClick_BtnToSearch": "onClick_btnSearch",
+     "displayNone_txtTsuchishoNo": false,
+     "displayNone_ddlFukaNendo": false,
+     "displayNone_SearchCriteriaDetail": false
     },
     {
      "fieldName": "SogoShokaiGaitoshaListInfo",
@@ -62,6 +67,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "onClickBtnToResearch": ""
     }
    ],
@@ -107,12 +114,9 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
-   "widthAuto": true,
+   "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
@@ -146,10 +150,6 @@
      "canOpenAndClose": false,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "backgroundColor": 0,
      "businessId": "URA",
      "controlName": "AtenaShokaiSimple",
@@ -161,6 +161,8 @@
      ],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "AtenaKanaMeisho_visible": true,
      "AtenaMeisho_visible": true,
      "SeinengappiYMD_visible": true,
@@ -195,7 +197,8 @@
      "AgeArrivalDay": "1",
      "SubGyomuUmu": "0",
      "SubGyomuSearchUmu": "0",
-     "DainoninHyojiUmu": "1"
+     "DainoninHyojiUmu": "1",
+     "AtenaShokaiSimple_eraseBorder": false
     }
    ],
    "controlType": "Panel",
@@ -243,86 +246,9 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false,
-   "height": "Auto"
-  },
-  {
-   "fieldName": "SogoShokaiSetai",
-   "items": [
-    {
-     "fieldName": "lblSetaiInfo",
-     "items": [],
-     "controlType": "Label",
-     "width": "1099",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "lblSetaiInfo",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "required": false,
-     "isPrivateInfo": false,
-     "text": "<世帯情報>",
-     "decorationClass": "",
-     "align": 0
-    }
-   ],
-   "controlType": "Panel",
-   "width": "G12",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
-   "selectControlID": "SogoShokaiSetai",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "onLoad": "",
-   "title": "",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "SogoShokaiSetai"
-    }
-   ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "-0.3",
-   "marginBottom": "0",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
-   "backgroundColor": 0,
-   "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
@@ -351,13 +277,14 @@
      "selectControlID": "btnShikakuInfo",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "資格情報を表示する",
      "onClick": "onClick_btnShikakuInfo",
      "icon": 0,
+     "text": "資格情報を表示する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnJukyuInfo",
@@ -379,13 +306,14 @@
      "selectControlID": "btnJukyuInfo",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "受給情報を表示する",
      "onClick": "onClick_btnJukyuInfo",
      "icon": 0,
+     "text": "受給情報を表示する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnKyufuInfo",
@@ -407,13 +335,14 @@
      "selectControlID": "btnKyufuInfo",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "給付情報を表示する",
      "onClick": "onClick_btnKyufuInfo",
      "icon": 0,
+     "text": "給付情報を表示する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnFukaInfo",
@@ -435,13 +364,14 @@
      "selectControlID": "btnFukaInfo",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "賦課情報を表示する",
      "onClick": "onClick_btnFukaInfo",
      "icon": 0,
+     "text": "賦課情報を表示する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnJuminInfo",
@@ -463,13 +393,14 @@
      "selectControlID": "btnJuminInfo",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "住民情報を表示する",
      "onClick": "onClick_btnJuminInfo",
      "icon": 0,
+     "text": "住民情報を表示する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "SogoShokaiShikaku",
@@ -500,13 +431,14 @@
            "selectControlID": "btnHokenKanyuInfo",
            "helpMessageID": "",
            "jpControlName": "",
-           "text": "医療保険加入情報を表示する",
            "onClick": "",
            "icon": 0,
+           "text": "医療保険加入情報を表示する",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
+           "heightTextBoxMatches": false,
            "displayChildDivName": "DBZ.SogoShokaiIryoHokenKanyuInfo",
            "dataPassing": [],
            "visibleCloseButton": true,
@@ -533,6 +465,7 @@
            "selectControlID": "dgSogoShokaiShikakuTokusoList",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "height": "175",
            "dataSource": [],
            "gridSetting": {
@@ -565,7 +498,7 @@
               "cellDetails": {
                "cellType": 0
               },
-              "align": 0,
+              "align": 1,
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "hihokenshaKubun"
@@ -855,7 +788,7 @@
               "visible": true,
               "cellType": 0,
               "cellDetails": null,
-              "align": 0,
+              "align": 1,
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "saikofuKubun"
@@ -923,7 +856,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "title": "資格得喪",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         },
         {
          "fieldName": "tplSogoShokaiShikakuTokurei",
@@ -948,6 +882,7 @@
            "selectControlID": "dgSogoShokaiShikakuTokureiList",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "height": "175",
            "dataSource": [],
            "gridSetting": {
@@ -1221,7 +1156,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "title": "他市町村住所地特例",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         },
         {
          "fieldName": "tplSogoShokaiShikakuJogai",
@@ -1246,6 +1182,7 @@
            "selectControlID": "dgSogoShokaiShikakuJogaiList",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "height": "175",
            "dataSource": [],
            "gridSetting": {
@@ -1467,7 +1404,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "title": "除外適用",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         }
        ],
        "controlType": "TabContainer",
@@ -1496,11 +1434,12 @@
        ],
        "isDraggable": false,
        "selectedItemFieldName": "tplSogoShokaiShikakuTokuso",
-       "initialTab": 0
+       "initialTab": 0,
+       "isLazyLoading": false
       }
      ],
      "controlType": "Panel",
-     "width": "995",
+     "width": "1100",
      "visible": false,
      "displayNone": true,
      "disabled": false,
@@ -1532,10 +1471,7 @@
      "session": {},
      "marginTop": "0",
      "marginBottom": "0",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -1572,6 +1508,7 @@
            "selectControlID": "dgSogoShokaiJukyuNinteiList",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "height": "175",
            "dataSource": [],
            "gridSetting": {
@@ -1603,10 +1540,10 @@
               "cellType": 11,
               "cellDetails": {
                "cellType": 11,
-               "text": "選",
-               "imageFileUrl": "",
-               "imageWidth": "",
-               "imageHeight": "",
+               "text": "",
+               "imageFileUrl": "/uz/uza/css/images/finger.png",
+               "imageWidth": "20",
+               "imageHeight": "20",
                "displayChildDivName": "DBZ.SogoShokaiNinteiInfo",
                "visibleCloseButton": false,
                "onBeforeOpenDialog": "",
@@ -1661,7 +1598,7 @@
               "cellDetails": {
                "cellType": 0
               },
-              "align": 0,
+              "align": 1,
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "txtShinseiYukoKubun"
@@ -1691,7 +1628,7 @@
               "visible": true,
               "cellType": 0,
               "cellDetails": null,
-              "align": 0,
+              "align": 1,
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "txtJotaiKubun"
@@ -1759,7 +1696,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "title": "認定",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         },
         {
          "fieldName": "tplSogoShokaiJukyuKyufuSeigen",
@@ -1784,6 +1722,7 @@
            "selectControlID": "dgSogoShokaiJukyuKyufuSeigenList",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "height": "175",
            "dataSource": [],
            "gridSetting": {
@@ -1831,10 +1770,10 @@
               "cellType": 11,
               "cellDetails": {
                "cellType": 11,
-               "text": "選",
-               "imageFileUrl": "",
-               "imageWidth": "",
-               "imageHeight": "",
+               "text": "",
+               "imageFileUrl": "/uz/uza/css/images/finger.png",
+               "imageWidth": "20",
+               "imageHeight": "20",
                "displayChildDivName": "DBZ.SogoShokaiKyufuSeigenInfo",
                "visibleCloseButton": false,
                "onBeforeOpenDialog": "",
@@ -1857,7 +1796,7 @@
               "cellDetails": {
                "cellType": 0
               },
-              "align": 0,
+              "align": 1,
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "txtTorokuJokyo"
@@ -1987,7 +1926,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "title": "給付制限",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         },
         {
          "fieldName": "tplSogoShokaiJukyuGenmenGengaku",
@@ -2012,6 +1952,7 @@
            "selectControlID": "dgSogoShokaiJukyuGenmenGengakuList",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "height": "175",
            "dataSource": [],
            "gridSetting": {
@@ -2053,10 +1994,10 @@
               "cellType": 11,
               "cellDetails": {
                "cellType": 11,
-               "text": "選",
-               "imageFileUrl": "",
-               "imageWidth": "",
-               "imageHeight": "",
+               "text": "",
+               "imageFileUrl": "/uz/uza/css/images/finger.png",
+               "imageWidth": "20",
+               "imageHeight": "20",
                "displayChildDivName": "DBZ.SogoShokaiGenmenGengakuInfo",
                "visibleCloseButton": false,
                "onBeforeOpenDialog": "",
@@ -2125,7 +2066,7 @@
               "cellDetails": {
                "cellType": 0
               },
-              "align": 0,
+              "align": 1,
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "txtKetteiKubun"
@@ -2155,7 +2096,7 @@
               "visible": true,
               "cellType": 0,
               "cellDetails": null,
-              "align": 0,
+              "align": 1,
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "txtGenmenGengakuShurui"
@@ -2195,7 +2136,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "title": "減免・減額",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         },
         {
          "fieldName": "tplSogoShokaiJukyuShisetsuNyusho",
@@ -2220,6 +2162,7 @@
            "selectControlID": "dgSogoShokaiJukyuShisetsuNyushoList",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "height": "175",
            "dataSource": [],
            "gridSetting": {
@@ -2251,10 +2194,10 @@
               "cellType": 11,
               "cellDetails": {
                "cellType": 11,
-               "text": "選",
-               "imageFileUrl": "",
-               "imageWidth": "",
-               "imageHeight": "",
+               "text": "",
+               "imageFileUrl": "/uz/uza/css/images/finger.png",
+               "imageWidth": "20",
+               "imageHeight": "20",
                "displayChildDivName": "DBZ.SogoShokaiShisetsuNyushoInfo",
                "visibleCloseButton": false,
                "onBeforeOpenDialog": "",
@@ -2393,7 +2336,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "title": "施設入所",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         }
        ],
        "controlType": "TabContainer",
@@ -2423,11 +2367,12 @@
        ],
        "isDraggable": false,
        "selectedItemFieldName": "tplSogoShokaiJukyuNintei",
-       "initialTab": 0
+       "initialTab": 0,
+       "isLazyLoading": false
       }
      ],
      "controlType": "Panel",
-     "width": "995",
+     "width": "1100",
      "visible": false,
      "displayNone": true,
      "disabled": false,
@@ -2459,10 +2404,7 @@
      "session": {},
      "marginTop": "0",
      "marginBottom": "0",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -2499,6 +2441,7 @@
            "selectControlID": "dgSogoShokaiKyufuKyotakuServiceKeikakuList",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "height": "175",
            "dataSource": [],
            "gridSetting": {
@@ -2530,10 +2473,10 @@
               "cellType": 11,
               "cellDetails": {
                "cellType": 11,
-               "text": "選",
-               "imageFileUrl": "",
-               "imageWidth": "",
-               "imageHeight": "",
+               "text": "",
+               "imageFileUrl": "/uz/uza/css/images/finger.png",
+               "imageWidth": "20",
+               "imageHeight": "20",
                "displayChildDivName": "DBZ.SogoShokaiKyotakuServiceKeikakuInfo",
                "visibleCloseButton": false,
                "onBeforeOpenDialog": "",
@@ -2644,7 +2587,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "title": "居宅サービス計画",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         },
         {
          "fieldName": "tplSogoShokaiKyufuKogakuKaigoService",
@@ -2669,6 +2613,7 @@
            "selectControlID": "dgSogoShokaiKyufuKogakuKaigoServiceList",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "height": "175",
            "dataSource": [],
            "gridSetting": {
@@ -2700,10 +2645,10 @@
               "cellType": 11,
               "cellDetails": {
                "cellType": 11,
-               "text": "選",
-               "imageFileUrl": "",
-               "imageWidth": "",
-               "imageHeight": "",
+               "text": "",
+               "imageFileUrl": "/uz/uza/css/images/finger.png",
+               "imageWidth": "20",
+               "imageHeight": "20",
                "displayChildDivName": "DBZ.SogoShokaiKogakuKaigoServicehiInfo",
                "visibleCloseButton": false,
                "onBeforeOpenDialog": "",
@@ -2798,7 +2743,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "title": "高額介護サービス",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         },
         {
          "fieldName": "tplSogoShokaiKyufuShokanBarai",
@@ -2823,6 +2769,7 @@
            "selectControlID": "dgSogoShokaiKyufuShokanBaraiList",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "height": "175",
            "dataSource": [],
            "gridSetting": {
@@ -2854,10 +2801,10 @@
               "cellType": 11,
               "cellDetails": {
                "cellType": 11,
-               "text": "選",
-               "imageFileUrl": "",
-               "imageWidth": "",
-               "imageHeight": "",
+               "text": "",
+               "imageFileUrl": "/uz/uza/css/images/finger.png",
+               "imageWidth": "20",
+               "imageHeight": "20",
                "displayChildDivName": "DBZ.SogoShokaiFukushiYoguKonyuhiInfo",
                "visibleCloseButton": false,
                "onBeforeOpenDialog": "",
@@ -3010,7 +2957,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "title": "償還払",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         },
         {
          "fieldName": "tplSogoShokaiKyufuKagoMoushitatesho",
@@ -3035,6 +2983,7 @@
            "selectControlID": "dgSogoShokaiKyufuKagoMoushitateshoList",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "height": "175",
            "dataSource": [],
            "gridSetting": {
@@ -3066,10 +3015,10 @@
               "cellType": 11,
               "cellDetails": {
                "cellType": 11,
-               "text": "選",
-               "imageFileUrl": "",
-               "imageWidth": "",
-               "imageHeight": "",
+               "text": "",
+               "imageFileUrl": "/uz/uza/css/images/finger.png",
+               "imageWidth": "20",
+               "imageHeight": "20",
                "displayChildDivName": "DBZ.SogoShokaiKagoMoushitateInfo",
                "visibleCloseButton": false,
                "onBeforeOpenDialog": "",
@@ -3178,7 +3127,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "title": "過誤申立書",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         },
         {
          "fieldName": "tplSogoShokaiKyufuSaishinsaMoushitatesho",
@@ -3203,6 +3153,7 @@
            "selectControlID": "dgSogoShokaiKyufuSaishinsaMoushitateshoList",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "height": "175",
            "dataSource": [],
            "gridSetting": {
@@ -3234,10 +3185,10 @@
               "cellType": 11,
               "cellDetails": {
                "cellType": 11,
-               "text": "選",
-               "imageFileUrl": "",
-               "imageWidth": "",
-               "imageHeight": "",
+               "text": "",
+               "imageFileUrl": "/uz/uza/css/images/finger.png",
+               "imageWidth": "20",
+               "imageHeight": "20",
                "displayChildDivName": "DBZ.SogoShokaiSaishinsaMoushitateInfo",
                "visibleCloseButton": false,
                "onBeforeOpenDialog": "",
@@ -3376,11 +3327,12 @@
          "helpMessageID": "",
          "jpControlName": "",
          "title": "再審査申立書",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         }
        ],
        "controlType": "TabContainer",
-       "width": "1080",
+       "width": "1085",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -3407,11 +3359,12 @@
        ],
        "isDraggable": false,
        "selectedItemFieldName": "tplSogoShokaiKyufuKyotakuServiceKeikaku",
-       "initialTab": 0
+       "initialTab": 0,
+       "isLazyLoading": false
       }
      ],
      "controlType": "Panel",
-     "width": "995",
+     "width": "1100",
      "visible": false,
      "displayNone": true,
      "disabled": false,
@@ -3443,10 +3396,7 @@
      "session": {},
      "marginTop": "0",
      "marginBottom": "0",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -3461,7 +3411,7 @@
        "fieldName": "dgSogoShokaiFukaList",
        "items": [],
        "controlType": "DataGrid",
-       "width": "1080",
+       "width": "1070",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -3477,6 +3427,7 @@
        "selectControlID": "dgSogoShokaiFukaList",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "175",
        "dataSource": [],
        "gridSetting": {
@@ -3508,10 +3459,10 @@
           "cellType": 11,
           "cellDetails": {
            "cellType": 11,
-           "text": "選",
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": "",
+           "text": "",
+           "imageFileUrl": "/uz/uza/css/images/finger.png",
+           "imageWidth": "20",
+           "imageHeight": "20",
            "displayChildDivName": "DBZ.SogoShokaiFukaInfo",
            "visibleCloseButton": false,
            "onBeforeOpenDialog": "",
@@ -3603,7 +3554,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "995",
+     "width": "1100",
      "visible": false,
      "displayNone": true,
      "disabled": false,
@@ -3635,12 +3586,9 @@
      "session": {},
      "marginTop": "0",
      "marginBottom": "0",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
-     "widthAuto": true,
+     "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
@@ -3669,13 +3617,14 @@
        "selectControlID": "btnJuminSeiho",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "生活保護情報<br>を表示する",
        "onClick": "",
        "icon": 0,
+       "text": "生活保護情報<br>を表示する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "btnJuminRofuku",
@@ -3697,13 +3646,14 @@
        "selectControlID": "btnJuminRofuku",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "老福年金受給者情報<br>を表示する",
        "onClick": "",
        "icon": 0,
+       "text": "老福年金受給者情報<br>を表示する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "btnJuminKorei",
@@ -3725,13 +3675,14 @@
        "selectControlID": "btnJuminKorei",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "後期高齢者資格情報<br>を表示する",
        "onClick": "",
        "icon": 0,
+       "text": "後期高齢者資格情報<br>を表示する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "btnJuminKokuho",
@@ -3753,13 +3704,14 @@
        "selectControlID": "btnJuminKokuho",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "国民健康保険資格情報<br>を表示する",
        "onClick": "",
        "icon": 0,
+       "text": "国民健康保険資格情報<br>を表示する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "SogoShokaiJuminKyokaiKanri",
@@ -3784,6 +3736,7 @@
          "selectControlID": "dgSogoShokaiJuminKyokaiKanriList",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
          "height": "175",
          "dataSource": [],
          "gridSetting": {
@@ -3991,10 +3944,7 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 1,
@@ -4028,19 +3978,19 @@
          "readOnly": true,
          "onChange": "",
          "labelLText": "二次予防有効期間",
-         "labelRText": "",
          "labelLWidth": "130",
-         "labelRWidth": "S",
          "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "isPrivateInfo": false,
          "isPassword": false,
+         "onFocus": "",
+         "onBlur": "",
          "onKeyPress": "",
-         "permitCharactor": "",
+         "labelRText": "",
+         "labelRWidth": "S",
+         "labelRAlign": 0,
          "ymdKubun": 2,
          "displayFormat": 0,
+         "permitCharactor": "",
          "fromPlaceHolder": "",
          "toPlaceHolder": "",
          "minDate": "",
@@ -4076,22 +4026,22 @@
          "onChange": "",
          "required": false,
          "labelLText": "二次予防判定日",
-         "labelRText": "",
          "labelLWidth": "115",
-         "labelRWidth": "S",
          "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
+         "text": "",
          "placeHolder": "",
          "isPrivateInfo": false,
          "isPassword": false,
+         "onFocus": "",
+         "onBlur": "",
          "onKeyPress": "",
-         "text": "",
-         "value": "",
-         "permitCharactor": "./_-",
+         "labelRText": "",
+         "labelRWidth": "S",
+         "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "value": "",
+         "permitCharactor": "./_-"
         }
        ],
        "controlType": "Panel",
@@ -4127,10 +4077,7 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 1,
@@ -4140,7 +4087,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "995",
+     "width": "1100",
      "visible": false,
      "displayNone": true,
      "disabled": false,
@@ -4172,10 +4119,7 @@
      "session": {},
      "marginTop": "0",
      "marginBottom": "0",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -4203,13 +4147,14 @@
      "selectControlID": "btnGaitoshaReturn",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "該当者検索に戻る",
      "onClick": "",
      "icon": 0,
+     "text": "該当者検索に戻る",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -4270,12 +4215,53 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
+  },
+  {
+   "fieldName": "SogoShokaiSetaiInfo",
+   "items": [],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "SogoShokaiSetaiInfo",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "SogoShokaiSetai"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "0",
+   "marginBottom": "0",
+   "eraseBorder": true,
+   "backgroundColor": 0,
+   "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
@@ -4511,6 +4497,10 @@
    "SogoShokaiJumin"
   ],
   [
+   "SogoShokaiSetai",
+   "SogoShokaiSetaiInfo"
+  ],
+  [
    "SogoShokaiSearchInfo"
   ],
   [
@@ -4518,9 +4508,6 @@
   ],
   [
    "SogoShokaiKihonInfo"
-  ],
-  [
-   "SogoShokaiSetai"
   ],
   [
    "SogoShokaiInfo"
@@ -4547,6 +4534,7 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "commonBtn",
@@ -4557,7 +4545,7 @@
       "fieldName": "btnReSearch",
       "items": [],
       "controlType": "CommonButtonFree",
-      "width": "S",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -4580,6 +4568,7 @@
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "heightTextBoxMatches": false,
       "prefixText": "",
       "suffixText": ""
      }
