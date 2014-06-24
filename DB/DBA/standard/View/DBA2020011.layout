@@ -69,7 +69,7 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "onClickBtnToResearch": "onClick_btnToResearch"
+     "onClick_btnToResearch": "onClick_btnToResearch"
     }
    ],
    "controlType": "Panel",
