@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.KyotakuJikoTod
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.KyotakuJikoTodokedeRirekiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.KyotakuJikoTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.dgKyotakuJikoTodokedeRirekiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.tplKyotakuJikoTodokedeDetailRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -236,6 +237,9 @@ public class KyotakuJikoTodokedeDetail {
                 getKyotakuJikoTodokedeMeisai().getTxtRirekiListSelectIndex().setValue(index);
         setMeisaiData(panel, 画面表示.届出内容修正);
         showMeisai(panel, 画面表示.届出内容修正);
+        tplKyotakuJikoTodokedeDetailRirekiDiv div = panel.getTabKyotakuServiceJikoSakuseiTodokede().getTplKyotakuJikoTodokedeDetailRireki();
+        div.getKyotakuJikoTodokedeRirekiList().setIsOpen(false);
+        div.getKyotakuJikoTodokedeMeisai().setIsOpen(true);
 
         response.data = panel;
         return response;
