@@ -149,7 +149,7 @@ module DBE {
    "fieldName": "dgNinteichosaIraiListForByHand",
    "items": [],
    "controlType": "DataGrid",
-   "width": "1000",
+   "width": "1070",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -166,7 +166,7 @@ module DBE {
    "helpMessageID": "",
    "jpControlName": "",
    "gridSetting": {
-    "rowHeight": 25,
+    "rowHeight": 24,
     "isMultiSelectable": false,
     "isShowHeader": true,
     "isShowFooter": false,
@@ -303,7 +303,7 @@ module DBE {
       "dataName": "btnToShowDetail",
       "toolTip": "",
       "bgColor": 0,
-      "width": 60,
+      "width": 50,
       "visible": true,
       "cellType": 8,
       "cellDetails": {
@@ -314,7 +314,7 @@ module DBE {
        "imageWidth": "",
        "imageHeight": ""
       },
-      "align": 0,
+      "align": 1,
       "resize": true,
       "isPrivateInfo": false,
       "sortKey": "btnToShowDetail"
@@ -392,7 +392,7 @@ module DBE {
       "dataName": "hihokenshaNo",
       "toolTip": "",
       "bgColor": 0,
-      "width": 100,
+      "width": 85,
       "visible": true,
       "cellType": 0,
       "cellDetails": {
@@ -477,7 +477,7 @@ module DBE {
       "dataName": "ninteiShinseiDate",
       "toolTip": "",
       "bgColor": 0,
-      "width": 95,
+      "width": 82,
       "visible": true,
       "cellType": 7,
       "cellDetails": {
@@ -515,7 +515,7 @@ module DBE {
       "dataName": "chosaIraiDate",
       "toolTip": "",
       "bgColor": 0,
-      "width": 95,
+      "width": 82,
       "visible": true,
       "cellType": 7,
       "cellDetails": {
@@ -536,7 +536,7 @@ module DBE {
       "dataName": "chosaKigenDate",
       "toolTip": "",
       "bgColor": 0,
-      "width": 95,
+      "width": 82,
       "visible": true,
       "cellType": 7,
       "cellDetails": {
@@ -557,7 +557,7 @@ module DBE {
       "dataName": "iraishoHakkoDate",
       "toolTip": "",
       "bgColor": 0,
-      "width": 95,
+      "width": 82,
       "visible": true,
       "cellType": 7,
       "cellDetails": {
@@ -782,7 +782,7 @@ module DBE {
       "dataName": "tokusokuDate",
       "toolTip": "",
       "bgColor": 0,
-      "width": 95,
+      "width": 82,
       "visible": true,
       "cellType": 7,
       "cellDetails": {
@@ -868,7 +868,7 @@ module DBE {
      }
     ]
    },
-   "height": "220",
+   "height": "162",
    "onSort": "",
    "onSelect": "",
    "onSelectByDblClick": "",
@@ -882,7 +882,8 @@ module DBE {
    "sortOrder": "chosaIraiKubun",
    "isAscending": true,
    "filterList": [],
-   "activeRowId": -1
+   "activeRowId": -1,
+   "readOnly": false
   }
  ],
  "controlType": "CompositeControl",

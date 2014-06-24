@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForBy
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jun 18 15:28:48 JST 2014 
+ * Mon Jun 23 21:01:16 JST 2014 
  */
 
 
