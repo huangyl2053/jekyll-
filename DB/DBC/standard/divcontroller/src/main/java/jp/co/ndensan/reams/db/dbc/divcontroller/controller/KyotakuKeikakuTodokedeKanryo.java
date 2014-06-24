@@ -28,7 +28,7 @@ public class KyotakuKeikakuTodokedeKanryo {
     /**
      * 画面ロード時の処理です。
      *
-     * @param panel 居宅サービス計画作成依頼届出
+     * @param panel panel
      * @return ResponseData
      */
     public ResponseData onLoad(KyotakuKeikakuTodokedeKanryoDiv panel) {

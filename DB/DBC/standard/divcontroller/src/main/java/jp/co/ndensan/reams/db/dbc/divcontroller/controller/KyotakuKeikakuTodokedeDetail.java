@@ -43,7 +43,7 @@ public class KyotakuKeikakuTodokedeDetail {
     /**
      * 画面ロード時の処理です。
      *
-     * @param panel 居宅サービス計画作成依頼届出
+     * @param panel panel
      * @return ResponseData
      */
     public ResponseData onLoad(KyotakuKeikakuTodokedeDetailDiv panel) {
@@ -138,9 +138,24 @@ public class KyotakuKeikakuTodokedeDetail {
                 getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai();
         dgKyotakuKeikakuTodokedeRirekiList_Row newRow;
 
-        RString 計画適用期間開始日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getFromValue().toDateString()).wareki().toDateString();
-        RString 計画適用期間終了日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getToValue().toDateString()).wareki().toDateString();
-        RString 届出日 = new FlexibleDate(meisai.getTxtTodokedeYMD().getValue().toDateString()).wareki().toDateString();
+        RString 計画適用期間開始日;
+        RString 計画適用期間終了日;
+        RString 届出日;
+        try {
+            計画適用期間開始日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getFromValue().toDateString()).wareki().toDateString();
+        } catch (Throwable e) {
+            計画適用期間開始日 = RString.EMPTY;
+        }
+        try {
+            計画適用期間終了日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getToValue().toDateString()).wareki().toDateString();
+        } catch (Throwable e) {
+            計画適用期間終了日 = RString.EMPTY;
+        }
+        try {
+            届出日 = new FlexibleDate(meisai.getTxtTodokedeYMD().getValue().toDateString()).wareki().toDateString();
+        } catch (Throwable e) {
+            届出日 = RString.EMPTY;
+        }
         RString 計画依頼事業者 = meisai.getKyotakuKeikakuTodokedeJigyosha().getTxtJigyoshaCode().getValue().
                 concat(":").concat(meisai.getKyotakuKeikakuTodokedeJigyosha().getTxtJigyoshaName().getValue());
         newRow = create履歴(
@@ -283,9 +298,24 @@ public class KyotakuKeikakuTodokedeDetail {
             cg = new ControlGenerator(getYaml().get(6));
         }
 
-        RString 計画適用期間開始日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getFromValue().toDateString()).wareki().toDateString();
-        RString 計画適用期間終了日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getToValue().toDateString()).wareki().toDateString();
-        RString 届出日 = new FlexibleDate(meisai.getTxtTodokedeYMD().getValue().toDateString()).wareki().toDateString();
+        RString 計画適用期間開始日;
+        RString 計画適用期間終了日;
+        RString 届出日;
+        try {
+            計画適用期間開始日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getFromValue().toDateString()).wareki().toDateString();
+        } catch (Throwable e) {
+            計画適用期間開始日 = RString.EMPTY;
+        }
+        try {
+            計画適用期間終了日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getToValue().toDateString()).wareki().toDateString();
+        } catch (Throwable e) {
+            計画適用期間終了日 = RString.EMPTY;
+        }
+        try {
+            届出日 = new FlexibleDate(meisai.getTxtTodokedeYMD().getValue().toDateString()).wareki().toDateString();
+        } catch (Throwable e) {
+            届出日 = RString.EMPTY;
+        }
         RString 計画依頼事業者 = meisai.getKyotakuKeikakuTodokedeJigyosha().getTxtJigyoshaCode().getValue().
                 concat(":").concat(meisai.getKyotakuKeikakuTodokedeJigyosha().getTxtJigyoshaName().getValue());
 
@@ -423,7 +453,6 @@ public class KyotakuKeikakuTodokedeDetail {
                 getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeRirekiList().getDgKyotakuKeikakuTodokedeRirekiList();
         dgKyotakuKeikakuTodokedeRirekiList_Row selectRow = rirekiList.getClickedItem();
 
-        KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = meisai.getKyotakuKeikakuTodokedeJigyosha();
         KyotakuKeikakuTodokedeHenkoNaiyoDiv henkoNaiyo = meisai.getKyotakuKeikakuTodokedeHenkoNaiyo();
 
         if (pattern.equals(画面表示.新規届出)) {
