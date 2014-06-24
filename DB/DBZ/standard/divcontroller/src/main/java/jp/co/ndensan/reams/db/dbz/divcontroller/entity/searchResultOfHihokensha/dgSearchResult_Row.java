@@ -1,21 +1,25 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha;
-
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 13 15:37:47 JST 2014
+ * Tue Jun 24 13:54:45 JST 2014 
  */
+
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
+
 /**
- * dgSearchResult_Row のクラスファイル
- *
+ * dgSearchResult_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
+
 public class dgSearchResult_Row extends DataRow {
 
     private Button btnToDecide;

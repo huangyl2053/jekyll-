@@ -65,6 +65,7 @@ var DBZ;
                             "selectControlID": "dgSearchResult",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "height": "S",
                             "gridSetting": {
                                 "rowHeight": 40,
@@ -353,7 +354,8 @@ var DBZ;
                                     "imageFileUrl": "",
                                     "imageWidth": "",
                                     "imageHeight": "",
-                                    "icon": 0
+                                    "icon": 0,
+                                    "heightTextBoxMatches": false
                                 }
                             ],
                             "controlType": "Panel",
@@ -389,10 +391,7 @@ var DBZ;
                             "onOpen": "",
                             "onClose": "",
                             "session": {},
-                            "eraseBorderTop": true,
-                            "eraseBorderBottom": true,
-                            "eraseBorderRight": true,
-                            "eraseBorderLeft": true,
+                            "eraseBorder": true,
                             "backgroundColor": 0,
                             "widthAuto": false,
                             "panelDisplay": 0,
@@ -439,10 +438,7 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
@@ -482,7 +478,9 @@ var DBZ;
             ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return SearchResultOfHihokensha_Design;
     })(Uz.CommonChildDiv);
