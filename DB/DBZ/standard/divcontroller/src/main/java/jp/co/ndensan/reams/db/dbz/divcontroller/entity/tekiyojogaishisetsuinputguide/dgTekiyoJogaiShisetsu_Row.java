@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.tekiyojogaishisetsuinput
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 06 20:17:16 JST 2014 
+ * Mon Jun 23 19:47:13 JST 2014 
  */
 
 
@@ -27,6 +27,10 @@ public class dgTekiyoJogaiShisetsu_Row extends DataRow {
 
     public dgTekiyoJogaiShisetsu_Row() {
         super();
+        this.jigyoshaNo = RString.EMPTY;
+        this.jigyoshaMeisho = RString.EMPTY;
+        this.jigyosha = RString.EMPTY;
+        this.jusho = RString.EMPTY;
     }
 
     public dgTekiyoJogaiShisetsu_Row(RString jigyoshaNo, RString jigyoshaMeisho, RString jigyosha, RString jusho) {

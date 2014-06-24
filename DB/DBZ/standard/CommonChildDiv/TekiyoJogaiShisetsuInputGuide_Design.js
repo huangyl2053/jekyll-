@@ -44,6 +44,11 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "dgTekiyoJogaiShisetsu",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "S",
+                            "dataSource": [],
                             "gridSetting": {
                                 "rowHeight": 25,
                                 "isMultiSelectable": false,
@@ -127,7 +132,6 @@ var DBZ;
                                     }
                                 ]
                             },
-                            "height": "S",
                             "onSort": "",
                             "onSelect": "",
                             "onSelectByDblClick": "",
@@ -137,7 +141,6 @@ var DBZ;
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
-                            "dataSource": [],
                             "sortOrder": "",
                             "isAscending": true,
                             "filterList": [],
@@ -161,13 +164,16 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "btnReturn",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onClick": "onClick_btnReturn",
+                            "icon": 0,
                             "text": "適用除外施設入力ガイドを閉じる",
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
                             "imageHeight": "",
-                            "icon": 0
+                            "heightTextBoxMatches": false
                         }
                     ],
                     "controlType": "Panel",
@@ -185,6 +191,8 @@ var DBZ;
                     "marginLeft": "XS",
                     "marginRight": "XS",
                     "selectControlID": "TekiyoJogaiShisetsuInputGuide",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onLoad": "",
                     "title": "適用除外施設入力ガイド",
                     "marginTop": "Default",
@@ -219,15 +227,13 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": true,
                     "panelDisplay": 0,
                     "isGroupBox": false,
-                    "readOnly": false
+                    "readOnly": false,
+                    "height": "Auto"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -242,9 +248,11 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
             "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "TekiyoJogaiShisetsuInputGuide",
@@ -262,7 +270,9 @@ var DBZ;
                 }
             ],
             "dialogOkEventNameForDialog": "onSelectBySelectButton_dgTekiyoJogaiShisetsu",
-            "dialogCancelEventNameForDialog": "onClick_btnReturn"
+            "dialogCancelEventNameForDialog": "onClick_btnReturn",
+            "canTransferEvent": true,
+            "heightForDialog": "Auto"
         };
         return TekiyoJogaiShisetsuInputGuide_Design;
     })(Uz.CommonChildDiv);

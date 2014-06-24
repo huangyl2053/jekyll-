@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgRoreiFukushi
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgSeikatsuHogoRireki_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgSetaiJoho_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgShinseishoTodokede_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.ShisetsuNyutaishoRirekiKanri;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShisetsuNyutaishoRirekiKanri;
 import jp.co.ndensan.reams.db.dbz.divcontroller.ShoKaishuKirokuKanri;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IryoHokenRireki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShikakuTokusoRireki;

@@ -133,10 +133,10 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "required": false,
-     "text": "keyKannai",
-     "align": 2,
      "isPrivateInfo": false,
-     "decorationClass": ""
+     "text": "keyKannai",
+     "decorationClass": "",
+     "align": 2
     },
     {
      "fieldName": "SearchResultOtherShisetsu",

@@ -62,7 +62,8 @@ module DBZ {
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "dgShisetsuNyutaishoRireki",
@@ -84,6 +85,7 @@ module DBZ {
      "selectControlID": "dgShisetsuNyutaishoRireki",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "height": "S",
      "gridSetting": {
       "rowHeight": 25,
@@ -288,6 +290,7 @@ module DBZ {
        "selectControlID": "ddlTaishoJoho_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "dataSource": [
         {
          "key": "kannai",
@@ -432,6 +435,8 @@ module DBZ {
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
        "btnJigyoshaInputGuide_displayNone": false,
        "btnOtherTokureiShisetsuInputGuide_displayNone": true,
        "btnJogaiShisetsuInputGuide_displayNone": true,
@@ -472,10 +477,7 @@ module DBZ {
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
@@ -509,7 +511,8 @@ module DBZ {
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -583,10 +586,7 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -620,7 +620,9 @@ module DBZ {
  "originalProperty": [],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }

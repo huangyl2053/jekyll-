@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekika
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
@@ -142,6 +143,7 @@ public class ShisetsuNyutaishoRirekiKanri {
             row.setRowState(RowState.Added);
             setRirekiRow(row, inputDiv);
             grid.getDataSource().add(0, row);
+            setBeforeDataTaishoDate(grid.getDataSource());
         }
 
         clearInputData(rirekiDiv.getShisetsuNyutaishoInput());
@@ -170,6 +172,18 @@ public class ShisetsuNyutaishoRirekiKanri {
         inputDiv.getTxtTaishoDate().setValue(null);
         inputDiv.getShisetsuJoho().getTxtShisetsuCode().setValue(null);
         inputDiv.getShisetsuJoho().getTxtShisetsuMeisho().setValue(null);
+    }
+
+    private void setBeforeDataTaishoDate(List<dgShisetsuNyutaishoRireki_Row> dataSource) {
+        if (dataSource.size() < 2) {
+            return;
+        }
+
+        dgShisetsuNyutaishoRireki_Row addRow = dataSource.get(0);
+        dgShisetsuNyutaishoRireki_Row beforeRow = dataSource.get(1);
+        if (beforeRow.getTaishoDate().getValue() == null) {
+            beforeRow.getTaishoDate().setValue(addRow.getNyushoDate().getValue());
+        }
     }
 
     /**

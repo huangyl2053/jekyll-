@@ -32,7 +32,12 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClick_BtnToSearch": "onClick_btnToSearch"
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "onClick_BtnToSearch": "onClick_btnToSearch",
+     "displayNone_txtTsuchishoNo": true,
+     "displayNone_ddlFukaNendo": true,
+     "displayNone_SearchCriteriaDetail": false
     },
     {
      "fieldName": "SearchResult",
@@ -62,6 +67,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "onClickBtnToResearch": "onClick_btnToResearch"
     }
    ],
@@ -83,7 +90,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "施設入退所管理対象者検索",
+   "title": "対象者検索",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -111,16 +118,17 @@
    "session": {},
    "marginTop": "XS",
    "marginBottom": "XS",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "ShisetsuNyutaishoKanriTaishoshaJoho",
@@ -150,16 +158,14 @@
      "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "backgroundColor": 0,
      "businessId": "URA",
      "controlName": "AtenaShokaiSimple",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "AtenaKanaMeisho_visible": true,
      "AtenaMeisho_visible": true,
      "SeinengappiYMD_visible": true,
@@ -194,7 +200,12 @@
      "AgeArrivalDay": "1",
      "SubGyomuUmu": "0",
      "SubGyomuSearchUmu": "0",
-     "DainoninHyojiUmu": "1"
+     "DainoninHyojiUmu": "1",
+     "AtenaShokaiSimple_eraseBorder": false,
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true
     },
     {
      "fieldName": "KaigoJoho",
@@ -221,15 +232,17 @@
      "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
      "backGroundColor": 0,
      "btnHihoRireki_visible": true,
      "btnNinteiRireki_visible": true
@@ -280,16 +293,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "ShisetsuNyutaishoIdo",
@@ -321,7 +335,9 @@
      "controlName": "ShisetsuNyutaishoRirekiKanri",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": ""
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M"
     }
    ],
    "controlType": "Panel",
@@ -342,7 +358,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "施設入退所異動",
+   "title": "異動管理",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -369,16 +385,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "ShisetsuNyutaishoComplete",
@@ -411,6 +428,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "KanryoMessage_width": "G12"
     }
    ],
@@ -459,16 +478,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true
   }
  ],
  "controlType": null,
@@ -489,7 +509,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "施設入退所管理",
+ "title": "施設入退所異動",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
@@ -532,12 +552,22 @@
      "transition": ""
     },
     {
-     "fieldName": "btnResearch",
+     "fieldName": "btnReturnSearchResult",
      "event": "onClick",
      "transition": ""
     },
     {
      "fieldName": "btnSave",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnResearch",
      "event": "onClick",
      "transition": ""
     }
@@ -581,10 +611,10 @@
     {
      "fieldName": "SearchResult_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
      "event": "onClick",
-     "transition": "施設入退所管理"
+     "transition": "異動登録"
     },
     {
-     "fieldName": "btnResearch",
+     "fieldName": "btnReturnSearchResult",
      "event": "onClick",
      "transition": ""
     },
@@ -592,12 +622,22 @@
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnResearch",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
   {
    "order": "3",
-   "stateName": "施設入退所管理",
+   "stateName": "異動登録",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -644,20 +684,30 @@
      "transition": ""
     },
     {
-     "fieldName": "btnResearch",
+     "fieldName": "btnReturnSearchResult",
      "event": "onClick",
-     "transition": "対象者検索"
+     "transition": "該当者一覧"
     },
     {
      "fieldName": "btnSave",
      "event": "onClick",
-     "transition": "処理完了"
+     "transition": "異動完了"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnResearch",
+     "event": "onClick",
+     "transition": "対象者検索"
     }
    ]
   },
   {
    "order": "4",
-   "stateName": "処理完了",
+   "stateName": "異動完了",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -689,12 +739,22 @@
      "transition": ""
     },
     {
-     "fieldName": "btnResearch",
+     "fieldName": "btnReturnSearchResult",
      "event": "onClick",
      "transition": ""
     },
     {
      "fieldName": "btnSave",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": "終了"
+    },
+    {
+     "fieldName": "btnResearch",
      "event": "onClick",
      "transition": ""
     }
@@ -734,6 +794,7 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "ShisetsuNyutaishoKyotsu",
@@ -744,7 +805,7 @@
       "fieldName": "btnSave",
       "items": [],
       "controlType": "CommonButtonUpdate",
-      "width": "S",
+      "width": 2,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -762,12 +823,13 @@
       "jpControlName": "",
       "text": "更新",
       "onClick": "onClick_btnSave",
+      "icon": 0,
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "icon": 0,
-      "additionalText": "施設入退所情報を"
+      "heightTextBoxMatches": false,
+      "additionalText": "施設入退所異動を"
      }
     },
     {
@@ -776,7 +838,7 @@
       "fieldName": "btnResearch",
       "items": [],
       "controlType": "CommonButtonNext",
-      "width": "S",
+      "width": 2,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -794,18 +856,96 @@
       "jpControlName": "",
       "text": "戻る",
       "onClick": "onClick_btnResearch",
+      "icon": 0,
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "icon": 0,
+      "heightTextBoxMatches": false,
       "additionalText": "対象者検索に"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnReturnSearchResult",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReturnSearchResult",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "該当者一覧に"
      }
     }
    ],
    "states": [
     {
-     "state": "施設入退所管理"
+     "state": "異動登録"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  },
+  {
+   "commonButtonAreaId": "Complete",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnComplete",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "施設入退所異動を"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "異動完了"
     }
    ],
    "isFinishButtonOnTheRight": false

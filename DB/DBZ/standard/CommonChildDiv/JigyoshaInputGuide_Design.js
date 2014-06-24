@@ -46,6 +46,7 @@ var DBZ;
                             "selectControlID": "radJigyoshaSearchType_core",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "onChange": "",
                             "selectedItem": null,
                             "dataSource": [
@@ -147,7 +148,8 @@ var DBZ;
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
-                            "imageHeight": ""
+                            "imageHeight": "",
+                            "heightTextBoxMatches": false
                         },
                         {
                             "fieldName": "SearchResultJigyosha",
@@ -172,6 +174,7 @@ var DBZ;
                                     "selectControlID": "dgSearchResultJigyosha",
                                     "helpMessageID": "",
                                     "jpControlName": "",
+                                    "readOnly": false,
                                     "height": "S",
                                     "dataSource": [],
                                     "gridSetting": {
@@ -373,10 +376,7 @@ var DBZ;
                             "onOpen": "",
                             "onClose": "",
                             "session": {},
-                            "eraseBorderTop": false,
-                            "eraseBorderBottom": false,
-                            "eraseBorderRight": false,
-                            "eraseBorderLeft": false,
+                            "eraseBorder": false,
                             "backgroundColor": 0,
                             "widthAuto": false,
                             "panelDisplay": 0,
@@ -410,7 +410,8 @@ var DBZ;
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
-                            "imageHeight": ""
+                            "imageHeight": "",
+                            "heightTextBoxMatches": false
                         }
                     ],
                     "controlType": "Panel",
@@ -468,10 +469,7 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
@@ -514,7 +512,9 @@ var DBZ;
                 }
             ],
             "dialogOkEventNameForDialog": "onSelectBySelectButton_dgSearchResultJigyosha",
-            "dialogCancelEventNameForDialog": "onClick_btnKaigoHokenShisetsuReturn"
+            "dialogCancelEventNameForDialog": "onClick_btnKaigoHokenShisetsuReturn",
+            "canTransferEvent": true,
+            "heightForDialog": "Auto"
         };
         return JigyoshaInputGuide_Design;
     })(Uz.CommonChildDiv);
