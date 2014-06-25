@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.NinteichosaOCRTorikomiTargetData;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.NinteichosaOCRTorikomiTargetData.YAMLKeys;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.ChosaKekkaShosaiMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.ChosaOCRTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.ChosaKekkaShuseiDiv;
@@ -16,9 +19,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.dgChosakekka1_
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.dgChosakekka2_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.dgChosakekka3_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
@@ -40,8 +41,8 @@ public class ChosaKekkaShosaiMain {
      */
     public ResponseData<ChosaKekkaShosaiMainDiv> dispChosaKekkaShosai(ChosaKekkaShosaiMainDiv panel, ChosaOCRTorikomiDiv panel2) {
         ResponseData<ChosaKekkaShosaiMainDiv> response = new ResponseData<>();
-        int iSelectId = panel2.getDgChosahyoTorikomiKekka().getClickedRowId();
-        setChosaKekkaShosaiData(panel, iSelectId);
+        RString hihokenshaNo = panel2.getDgChosahyoTorikomiKekka().getClickedItem().getHihokenshaNo();
+        setChosaKekkaShosaiData(panel, hihokenshaNo);
 
         panel.getChosaKekkaShosai().getDgChosakekka1().setDataSource(createRowChosaKekkaTest1Data());
         panel.getChosaKekkaShosai().getDgChosakekka2().setDataSource(createRowChosaKekkaTest2Data());
@@ -121,34 +122,31 @@ public class ChosaKekkaShosaiMain {
     /*
      *調査票結果詳細情報を取得します。
      */
-    private void setChosaKekkaShosaiData(ChosaKekkaShosaiMainDiv panel, int iSelectId) {
-
-        List<HashMap> chosaKekkaShosai = YamlLoader.DBE.loadAsList(new RString("dbe2060005/ChosaKekkaShosaiMain.yml"));
-
-//        HashMap hashMap = chosaKekkaShosai.get(iSelectId);
-        ControlGenerator cg = new ControlGenerator(chosaKekkaShosai.get(iSelectId));
-        RString strHokensha = cg.getAsRString("hokenshaNo");
-        RString strHihokenNo = cg.getAsRString("hihokenNo");
-        RDate strShinseibi = new RDate(cg.getAsRString("shinseibi").toString());
-        RString strShinseiKbn = cg.getAsRString("shinseiKbn");
-        RString strChosaKikanNo = cg.getAsRString("chosaKikanNo");
-        RString strChosainNo = cg.getAsRString("chosainNo");
-        RString strChosaKikanMei = cg.getAsRString("chosaKikanMei");
-        RString strChosainMei = cg.getAsRString("chosainMei");
-        RDate strChosaJissibi = new RDate(cg.getAsRString("chosaJissibi").toString());
-        RDate strChosahyoJuryobi = new RDate(cg.getAsRString("chosahyoJuryobi").toString());
-
-        panel.getKihonJoho().getTxtHokenNo().setValue(strHokensha);
-        panel.getKihonJoho().getTxtHihokenNo().setValue(strHihokenNo);
-        panel.getKihonJoho().getTxtShinseibi().setValue(strShinseibi);
-        panel.getKihonJoho().getDdlShinseiKbn().setSelectedItem(strShinseiKbn);
-        panel.getChosaItakuJoho().getTxtChosakikanNo().setValue(strChosaKikanNo);
-        panel.getChosaItakuJoho().getTxtChosainNo().setValue(strChosainNo);
-        panel.getChosaItakuJoho().getTxtChosakikanMei().setValue(strChosaKikanMei);
-        panel.getChosaItakuJoho().getTxtChosainMei().setValue(strChosainMei);
-        panel.getChosaItakuJoho().getTxtChosaJissibi().setValue(strChosaJissibi);
-        panel.getChosaItakuJoho().getTxtChosahyoJuryobi().setValue(strChosahyoJuryobi);
-
+    private void setChosaKekkaShosaiData(ChosaKekkaShosaiMainDiv panel, RString hihokenshaNo) {
+        ControlGenerator cg = new ControlGenerator(
+                new NinteichosaOCRTorikomiTargetData().get対象者From(hihokenshaNo));
+        ChosainData.Chosain chosain
+                = new ChosainData().get調査員From(cg.getAsRString(YAMLKeys.調査員コード.value()));
+        panel.getKihonJoho().getTxtHokenshaNo().
+                setValue(cg.getAsRString(YAMLKeys.保険者番号.value()));
+        panel.getKihonJoho().getTxtHihokenshaNo().
+                setValue(cg.getAsRString(YAMLKeys.被保番号.value()));
+        panel.getKihonJoho().getTxtShinseiDate().
+                setValue(cg.getAsFlexibleDate(YAMLKeys.申請日.value()));
+        panel.getKihonJoho().getDdlShinseiKubun().
+                setSelectedItem(cg.getAsRString(YAMLKeys.申請区分.value()));
+        panel.getChosaItakuJoho().getTxtChosaItakusakiCode().
+                setValue(chosain.itakusaki().code());
+        panel.getChosaItakuJoho().getTxtChosaItakusakiName().
+                setValue(chosain.itakusaki().name());
+        panel.getChosaItakuJoho().getTxtChosainCode().
+                setValue(chosain.code());
+        panel.getChosaItakuJoho().getTxtChosainName().
+                setValue(chosain.name());
+        panel.getChosaItakuJoho().getTxtChosaJissiDate().
+                setValue(cg.getAsFlexibleDate(YAMLKeys.調査実施日.value()));
+        panel.getChosaItakuJoho().getTxtChosahyoJuryoDate().
+                setValue(cg.getAsFlexibleDate(YAMLKeys.調査票受領日.value()));
     }
 
     /*

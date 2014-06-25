@@ -23,14 +23,14 @@ public class KihonJohoDiv extends Panel {
      */
     @JsonProperty("btnShinseiJohoSearch")
     private Button btnShinseiJohoSearch;
-    @JsonProperty("txtHokenNo")
-    private TextBoxCode txtHokenNo;
-    @JsonProperty("txtHihokenNo")
-    private TextBoxCode txtHihokenNo;
-    @JsonProperty("txtShinseibi")
-    private TextBoxDate txtShinseibi;
-    @JsonProperty("ddlShinseiKbn")
-    private DropDownList ddlShinseiKbn;
+    @JsonProperty("txtHokenshaNo")
+    private TextBoxCode txtHokenshaNo;
+    @JsonProperty("txtHihokenshaNo")
+    private TextBoxCode txtHihokenshaNo;
+    @JsonProperty("txtShinseiDate")
+    private TextBoxFlexibleDate txtShinseiDate;
+    @JsonProperty("ddlShinseiKubun")
+    private DropDownList ddlShinseiKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -48,44 +48,44 @@ public class KihonJohoDiv extends Panel {
         this.btnShinseiJohoSearch=btnShinseiJohoSearch;
     }
 
-    @JsonProperty("txtHokenNo")
-    public TextBoxCode getTxtHokenNo() {
-        return txtHokenNo;
+    @JsonProperty("txtHokenshaNo")
+    public TextBoxCode getTxtHokenshaNo() {
+        return txtHokenshaNo;
     }
 
-    @JsonProperty("txtHokenNo")
-    public void setTxtHokenNo(TextBoxCode txtHokenNo) {
-        this.txtHokenNo=txtHokenNo;
+    @JsonProperty("txtHokenshaNo")
+    public void setTxtHokenshaNo(TextBoxCode txtHokenshaNo) {
+        this.txtHokenshaNo=txtHokenshaNo;
     }
 
-    @JsonProperty("txtHihokenNo")
-    public TextBoxCode getTxtHihokenNo() {
-        return txtHihokenNo;
+    @JsonProperty("txtHihokenshaNo")
+    public TextBoxCode getTxtHihokenshaNo() {
+        return txtHihokenshaNo;
     }
 
-    @JsonProperty("txtHihokenNo")
-    public void setTxtHihokenNo(TextBoxCode txtHihokenNo) {
-        this.txtHihokenNo=txtHihokenNo;
+    @JsonProperty("txtHihokenshaNo")
+    public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
+        this.txtHihokenshaNo=txtHihokenshaNo;
     }
 
-    @JsonProperty("txtShinseibi")
-    public TextBoxDate getTxtShinseibi() {
-        return txtShinseibi;
+    @JsonProperty("txtShinseiDate")
+    public TextBoxFlexibleDate getTxtShinseiDate() {
+        return txtShinseiDate;
     }
 
-    @JsonProperty("txtShinseibi")
-    public void setTxtShinseibi(TextBoxDate txtShinseibi) {
-        this.txtShinseibi=txtShinseibi;
+    @JsonProperty("txtShinseiDate")
+    public void setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
+        this.txtShinseiDate=txtShinseiDate;
     }
 
-    @JsonProperty("ddlShinseiKbn")
-    public DropDownList getDdlShinseiKbn() {
-        return ddlShinseiKbn;
+    @JsonProperty("ddlShinseiKubun")
+    public DropDownList getDdlShinseiKubun() {
+        return ddlShinseiKubun;
     }
 
-    @JsonProperty("ddlShinseiKbn")
-    public void setDdlShinseiKbn(DropDownList ddlShinseiKbn) {
-        this.ddlShinseiKbn=ddlShinseiKbn;
+    @JsonProperty("ddlShinseiKubun")
+    public void setDdlShinseiKubun(DropDownList ddlShinseiKubun) {
+        this.ddlShinseiKubun=ddlShinseiKubun;
     }
 
 }

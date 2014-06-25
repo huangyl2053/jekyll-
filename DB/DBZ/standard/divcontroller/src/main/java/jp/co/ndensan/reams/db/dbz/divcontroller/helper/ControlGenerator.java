@@ -68,6 +68,16 @@ public class ControlGenerator {
     }
 
     /**
+     * Mapからkeyに対応するデータをRString型で返します。
+     *
+     * @param key key
+     * @return RString。keyに対応するデータがないときは RString.EMPTY。
+     */
+    public RString getAsRString(RString key) {
+        return this.getAsRString(key.toString());
+    }
+
+    /**
      * Mapからkeyに対応するデータをRDate型で返します。
      *
      * @param key key
@@ -79,6 +89,16 @@ public class ControlGenerator {
         } catch (NullPointerException | IllegalArgumentException e) {
             return null;
         }
+    }
+
+    /**
+     * Mapからkeyに対応するデータをRDate型で返します。
+     *
+     * @param key key
+     * @return RDate。keyに対応するデータがないときは null。
+     */
+    public RDate getAsRDate(RString key) {
+        return this.getAsRDate(key.toString());
     }
 
     /**
@@ -96,6 +116,16 @@ public class ControlGenerator {
     }
 
     /**
+     * Mapからkeyに対応するデータをFlexibleDate型で返します。
+     *
+     * @param key key
+     * @return FlexibleDate。keyに対応するデータがないときは FlexibleDate.EMPTY。
+     */
+    public FlexibleDate getAsFlexibleDate(RString key) {
+        return this.getAsFlexibleDate(key.toString());
+    }
+
+    /**
      * Mapからkeyに対応するデータをDecimal型で返します。
      *
      * @param key key
@@ -107,6 +137,16 @@ public class ControlGenerator {
         } catch (NullPointerException | IllegalArgumentException e) {
             return null;
         }
+    }
+
+    /**
+     * Mapからkeyに対応するデータをDecimal型で返します。
+     *
+     * @param key key
+     * @return Decimal。keyに対応するデータがないときは null。
+     */
+    public Decimal getAsDecimal(RString key) {
+        return this.getAsDecimal(key.toString());
     }
 
     /**
@@ -124,6 +164,16 @@ public class ControlGenerator {
     }
 
     /**
+     * Mapからkeyに対応するデータをYubinNo型で返します。
+     *
+     * @param key key
+     * @return YubinNo。keyに対応するデータがないときは null。
+     */
+    public YubinNo getAsYubinNo(RString key) {
+        return this.getAsYubinNo(key.toString());
+    }
+
+    /**
      * Mapからkeyに対応するデータをboolean型で取得します。
      *
      * @param key key
@@ -135,6 +185,16 @@ public class ControlGenerator {
         } catch (NullPointerException e) {
             return false;
         }
+    }
+
+    /**
+     * Mapからkeyに対応するデータをboolean型で取得します。
+     *
+     * @param key key
+     * @return boolean value。keyに対応するデータがないときは false。
+     */
+    public boolean getAsBooleanValue(RString key) {
+        return this.getAsBooleanValue(key.toString());
     }
 
     /**
@@ -151,9 +211,18 @@ public class ControlGenerator {
         } else {
             textBoxDate.setValue(date);
         }
-        //textBoxDate.setDisabled(true);
         textBoxDate.setReadOnly(true);
         return textBoxDate;
+    }
+
+    /**
+     * Mapからkeyに対応するデータを取得し、その値を持ったTextBoxDateを返します。
+     *
+     * @param key key
+     * @return TextBoxDate
+     */
+    public TextBoxDate getAsTextBoxDate(RString key) {
+        return this.getAsTextBoxDate(key.toString());
     }
 
     /**
@@ -170,9 +239,18 @@ public class ControlGenerator {
         } else {
             textBoxFlexibleDate.setValue(date);
         }
-        //textBoxFlexibleDate.setDisabled(true);
         textBoxFlexibleDate.setReadOnly(true);
         return textBoxFlexibleDate;
+    }
+
+    /**
+     * Mapからkeyに対応するデータを取得し、その値を持ったTextBoxFlexibleDateを返します。
+     *
+     * @param key key
+     * @return TextBoxFlexibleDate
+     */
+    public TextBoxFlexibleDate getAsTextBoxFlexibleDate(RString key) {
+        return this.getAsTextBoxFlexibleDate(key.toString());
     }
 
     /**
@@ -189,9 +267,18 @@ public class ControlGenerator {
         } else {
             textBoxNum.setValue(num);
         }
-        //textBoxNum.setDisabled(true);
         textBoxNum.setReadOnly(true);
         return textBoxNum;
+    }
+
+    /**
+     * Mapからkeyに対応するデータを取得し、その値を持ったTextBoxNumを返します。
+     *
+     * @param key key
+     * @return TextBoxNum
+     */
+    public TextBoxNum getAsTextBoxNum(RString key) {
+        return this.getAsTextBoxNum(key.toString());
     }
 
     /**
@@ -208,9 +295,18 @@ public class ControlGenerator {
         } else {
             textBoxYubinNo.setValue(yubinNo);
         }
-        //textBoxYubinNo.setDisabled(true);
         textBoxYubinNo.setReadOnly(true);
         return textBoxYubinNo;
+    }
+
+    /**
+     * Mapからkeyに対応するデータを取得し、その値を持ったTextBoxYubinNoを返します。
+     *
+     * @param key key
+     * @return TextBoxYubinNo
+     */
+    public TextBoxYubinNo getAsTextBoxYubinNo(RString key) {
+        return this.getAsTextBoxYubinNo(key.toString());
     }
 
     /**
@@ -222,9 +318,18 @@ public class ControlGenerator {
     public TextBox getAsTextBox(String key) {
         TextBox textBox = new TextBox();
         textBox.setValue(this.getAsRString(key));
-        //textBox.setDisabled(true);
         textBox.setReadOnly(true);
         return textBox;
+    }
+
+    /**
+     * Mapからkeyに対応するデータを取得し、その値を持ったTextBoxを返します。
+     *
+     * @param key key
+     * @return TextBox
+     */
+    public TextBox getAsTextBox(RString key) {
+        return this.getAsTextBox(key.toString());
     }
 
     /**
@@ -240,7 +345,41 @@ public class ControlGenerator {
         } catch (NullPointerException ex) {
             textBox.clearValue();
         }
-        //textBox.setDisabled(true);
+        textBox.setReadOnly(true);
+        return textBox;
+    }
+
+    /**
+     * Mapからkeyに対応するデータを取得し、その値を持ったTextBoxを返します。
+     *
+     * @param key key
+     * @return TextBoxCode
+     */
+    public TextBoxCode getAsTextBoxCode(RString key) {
+        return this.getAsTextBoxCode(key.toString());
+    }
+
+    /**
+     * Mapからkeyに対応するデータを取得し、その値を持ったTextBoxMultiLineを返します。
+     *
+     * @param key key
+     * @return TextBoxMultiLine
+     * @deprecated getAsTextBoxMultiLineを使いましょう。
+     */
+    @Deprecated
+    public TextBoxMultiLine getTextBoxMultiLine(String key) {
+        return this.getAsTextBoxMultiLine(key);
+    }
+
+    /**
+     * Mapからkeyに対応するデータを取得し、その値を持ったTextBoxMultiLineを返します。
+     *
+     * @param key key
+     * @return TextBoxMultiLine
+     */
+    public TextBoxMultiLine getAsTextBoxMultiLine(String key) {
+        TextBoxMultiLine textBox = new TextBoxMultiLine();
+        textBox.setValue(this.getAsRString(key));
         textBox.setReadOnly(true);
         return textBox;
     }
@@ -251,10 +390,7 @@ public class ControlGenerator {
      * @param key key
      * @return TextBoxMultiLine
      */
-    public TextBoxMultiLine getTextBoxMultiLine(String key) {
-        TextBoxMultiLine textBox = new TextBoxMultiLine();
-        textBox.setValue(this.getAsRString(key));
-        textBox.setReadOnly(true);
-        return textBox;
+    public TextBoxMultiLine getAsTextBoxMultiLine(RString key) {
+        return this.getAsTextBoxMultiLine(key.toString());
     }
 }
