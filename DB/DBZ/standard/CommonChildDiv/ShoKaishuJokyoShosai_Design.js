@@ -11,12 +11,69 @@ var DBZ;
         function ShoKaishuJokyoShosai_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, ShoKaishuJokyoShosai_Design.myLayout, fieldName);
         }
+        Object.defineProperty(ShoKaishuJokyoShosai_Design.prototype, "onBlur_txtKaishuDate", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["onBlur"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["onBlur"] = value;
+                } else {
+                    this.layout.items[0].items[5]["onBlur"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShoKaishuJokyoShosai_Design.prototype, "onChange_ddlKaishuJiyu", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["onChange"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["onChange"] = value;
+                } else {
+                    this.layout.items[0].items[6]["onChange"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShoKaishuJokyoShosai_Design.prototype, "onBlur_txtKaishuRiyu", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["onBlur"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["onBlur"] = value;
+                } else {
+                    this.layout.items[0].items[7]["onBlur"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         ShoKaishuJokyoShosai_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("onBlur_txtKaishuDate");
+            Uz.JSControlUtil.registProperty("onChange_ddlKaishuJiyu");
+            Uz.JSControlUtil.registProperty("onBlur_txtKaishuRiyu");
         };
 
         ShoKaishuJokyoShosai_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["onBlur_txtKaishuDate"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["onBlur"];
+            editablePropertyInfo["onChange_ddlKaishuJiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["onChange"];
+            editablePropertyInfo["onBlur_txtKaishuRiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["onBlur"];
 
             return editablePropertyInfo;
         };
@@ -44,11 +101,13 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txt_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
                             "required": false,
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
-                            "readOnly": true,
                             "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,
@@ -66,7 +125,9 @@ var DBZ;
                             "labelLWidth": "85",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
-                            "labelRAlign": 0
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtKofuDate",
@@ -86,8 +147,10 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtKofuDate_core",
-                            "required": false,
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
+                            "required": false,
                             "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,
@@ -105,7 +168,8 @@ var DBZ;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "ymdKubun": 2,
-                            "displayFormat": 0
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
                         },
                         {
                             "fieldName": "txtYukoKigen",
@@ -125,8 +189,10 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtYukoKigen_core",
-                            "required": false,
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
+                            "required": false,
                             "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,
@@ -144,7 +210,8 @@ var DBZ;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "ymdKubun": 2,
-                            "displayFormat": 0
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
                         },
                         {
                             "fieldName": "txtKofuJiyu",
@@ -164,11 +231,13 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtKofuJiyu_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
                             "required": false,
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
-                            "readOnly": true,
                             "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,
@@ -186,7 +255,9 @@ var DBZ;
                             "labelLWidth": "85",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
-                            "labelRAlign": 0
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtKofuRiyu",
@@ -206,10 +277,13 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtKofuRiyu_text_area",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "height": "40",
                             "required": false,
                             "maxLength": 100000000,
                             "minLength": 0,
-                            "readOnly": true,
                             "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,
@@ -225,7 +299,6 @@ var DBZ;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "height": "40",
                             "limitLength": "200",
                             "countDisp": false
                         },
@@ -247,8 +320,10 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtKaishuDate_core",
-                            "required": false,
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": false,
+                            "required": false,
                             "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,
@@ -266,7 +341,8 @@ var DBZ;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "ymdKubun": 2,
-                            "displayFormat": 0
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
                         },
                         {
                             "fieldName": "ddlKaishuJiyu",
@@ -286,6 +362,9 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "ddlKaishuJiyu_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
                             "required": false,
                             "onFocus": "",
                             "onBlur": "",
@@ -382,7 +461,8 @@ var DBZ;
                                     "key": "20",
                                     "value": "給付額減額終了"
                                 }
-                            ]
+                            ],
+                            "disabledItem": []
                         },
                         {
                             "fieldName": "txtKaishuRiyu",
@@ -402,10 +482,13 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtKaishuRiyu_text_area",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "40",
                             "required": false,
                             "maxLength": 100000000,
                             "minLength": 0,
-                            "readOnly": false,
                             "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,
@@ -421,7 +504,6 @@ var DBZ;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "height": "40",
                             "limitLength": "200",
                             "countDisp": true
                         }
@@ -441,6 +523,8 @@ var DBZ;
                     "marginLeft": "XS",
                     "marginRight": "XS",
                     "selectControlID": "ShoKaishuJokyoShosai",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onLoad": "",
                     "title": "証類交付情報",
                     "marginTop": "Default",
@@ -457,14 +541,13 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
-                    "isGroupBox": false
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -479,18 +562,38 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
             "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "ShoKaishuJokyoShosai",
             "marginTop": 0,
             "marginBottom": 0,
-            "originalProperty": [],
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "txtKaishuDate",
+                    "publicChildProperty": "onBlur",
+                    "newPropertyName": "onBlur_txtKaishuDate"
+                },
+                {
+                    "publicChildFieldName": "ddlKaishuJiyu",
+                    "publicChildProperty": "onChange",
+                    "newPropertyName": "onChange_ddlKaishuJiyu"
+                },
+                {
+                    "publicChildFieldName": "txtKaishuRiyu",
+                    "publicChildProperty": "onBlur",
+                    "newPropertyName": "onBlur_txtKaishuRiyu"
+                }
+            ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return ShoKaishuJokyoShosai_Design;
     })(Uz.CommonChildDiv);
