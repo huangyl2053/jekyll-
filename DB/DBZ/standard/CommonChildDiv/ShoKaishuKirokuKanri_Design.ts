@@ -315,8 +315,8 @@ module DBZ {
      "selectControlID": "btnUpdateShoKaishuJokyo",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "",
      "text": "交付情報を確定する",
+     "onClick": "onClick_btnUpdateShoKaishuJokyo",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -355,12 +355,24 @@ module DBZ {
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbz/db/dbz/ShoKaishuKirokuKanri/onLoad"
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnSelect",
+     "requestUrl": "dbz/db/dbz/ShoKaishuKirokuKanri/onClick_btnSelect"
+    },
+    {
+     "eventName": "onClick_btnUpdateShoKaishuJokyo",
+     "requestUrl": "dbz/db/dbz/ShoKaishuKirokuKanri/onClick_btnUpdateShoKaishuJokyo"
     }
    ],
    "hiddenInput": [
     {
      "propertyName": "mode",
+     "value": ""
+    },
+    {
+     "propertyName": "selectRow",
      "value": ""
     }
    ],
