@@ -23,8 +23,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import static jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder.isDisabled;
 
 /**
  *
@@ -59,6 +57,8 @@ public class ShikakuFuseigoShuseiMain {
     private List<dgShikakuFuseigoIchiranForDemo_Row> createRowShikakuFuseigoTestData() {
         dgShikakuFuseigoIchiranForDemo_Row kakushiItem;
 
+        kakushiRows.clear();
+
         List<HashMap> demoDataList = YamlLoader.DBZ.loadAsList(new RString("DBZA010001/ShikakuFuseigoData.yml"));
         for (HashMap demoData : demoDataList) {
             kakushiItem = createRowShikakuFuseigoDataForDemo(
@@ -88,6 +88,7 @@ public class ShikakuFuseigoShuseiMain {
                     demoData.get("デモ用主キー").toString());
             kakushiRows.add(kakushiItem);
         }
+
         return kakushiRows;
     }
 
@@ -231,9 +232,7 @@ public class ShikakuFuseigoShuseiMain {
         }
 
         onChange_chkMushi(panel);
-        
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToHonsantei"), false);
-                
+
         response.data = panel;
         return response;
     }
