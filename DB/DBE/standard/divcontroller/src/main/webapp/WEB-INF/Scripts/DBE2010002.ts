@@ -1,23 +1,24 @@
-﻿/// <reference path="jquery.d.ts" />
-/// <reference path="UzViewControls.d.ts" />
+/// <reference path="../../../../NetBeansProjects/DB/DB/DBE/standard/d.ts/jquery.d.ts" />
+/// <reference path="../../../../NetBeansProjects/DB/DB/DBE/standard/d.ts/UzViewControls.d.ts" />
 
 module DBE {
     export class DBE2010002 {
         // ChosairaiBindByHandMain
         private static comNinteichosaIraiListGod: Uz._DataGrid
-        = <Uz._DataGrid>Uz.GyomuJSHelper.getJSControl('comNinteichosaIraiListGod_dgNinteichosaIraiListForByHand');
+        = <Uz._DataGrid>Uz.GyomuJSHelper.getCompositeChildControl('comNinteichosaIraiListGod', 'NinteichosaIraiListForByHandCom', 'dgNinteichosaIraiListForByHand');
         private static comWaritukezumiList: Uz._DataGrid
-        = <Uz._DataGrid>Uz.GyomuJSHelper.getJSControl('comWaritukezumiList_dgNinteichosaIraiListForByHand');
+        = <Uz._DataGrid>Uz.GyomuJSHelper.getCompositeChildControl('comWaritukezumiList', 'NinteichosaIraiListForByHandCom', 'dgNinteichosaIraiListForByHand');
         private static comMiwaritsukeList: Uz._DataGrid
-        = <Uz._DataGrid>Uz.GyomuJSHelper.getJSControl('comMiwarituskeList_dgNinteichosaIraiListForByHand');
+        = <Uz._DataGrid>Uz.GyomuJSHelper.getCompositeChildControl('comMiwarituskeList', 'NinteichosaIraiListForByHandCom', 'dgNinteichosaIraiListForByHand');
         // RequestContents
         private static txtChosaIraiDate: Uz._TextBoxFlexibleDate = <Uz._TextBoxFlexibleDate>Uz.GyomuJSHelper.getJSControl('txtChosaIraiDate');
         private static txtChosaKigenDate: Uz._TextBoxFlexibleDate = <Uz._TextBoxFlexibleDate>Uz.GyomuJSHelper.getJSControl('txtChosaKigenDate');
         private static ddlIraiKubun: Uz._DropDownList = <Uz._DropDownList>Uz.GyomuJSHelper.getJSControl('ddlIraiKubun');
         // ChosaItakusakiAndChosainList
         private static dgChosaItakusakiList: Uz._DataGrid = <Uz._DataGrid>Uz.GyomuJSHelper.getJSControl('dgChosaItakusakiList');
-        private static comChosainList: Uz._DataGrid = <Uz._DataGrid>Uz.GyomuJSHelper.getJSControl('comChosainList_dgShozokuChosainList');
-        private static comChosainListAll: Uz._DataGrid = <Uz._DataGrid>Uz.GyomuJSHelper.getJSControl('comChosainListAll_dgShozokuChosainList');
+        private static comChosainList: Uz._DataGrid = <Uz._DataGrid>Uz.GyomuJSHelper.getCompositeChildControl('comChosainList', 'ShozokuChosainListCom', 'dgShozokuChosainList');
+        private static comChosainListAll: Uz._DataGrid = <Uz._DataGrid>Uz.GyomuJSHelper.getCompositeChildControl('comChosainListAll', 'ShozokuChosainListCom', 'dgShozokuChosainList');
+        private static eventName_for_btnToBindChosain: string = "bind_SelectedChosain";
 
         /**
          * onLoadよりも早くよばれます。
@@ -31,44 +32,72 @@ module DBE {
          * イベントを登録します。
          */
         private static deployEvents() {
+            // ロード時の処理
+            Uz.GyomuJSHelper.registOriginalEvent("onLoad_NinteichosaIraiByHand", (control: Uz._ViewControl) => {
+                DBE2010002._onLoad_NinteichosaIraiByHand();
+            });
+            // 「割付化」ボタン押下時処理
             Uz.GyomuJSHelper.registOriginalEvent("onClick_btnToBind", (control: Uz._ViewControl) => {
-                DBE2010002._onClick_btnToBind();
-                DBE2010002.displayChosain();
-                DBE2010002.divideWaritsukeOrMiwaritsuke();
+                DBE2010002.onClick_btnToBind();
+                DBE2010002.onAfterEvent();
             });
+            // 「未割付化」ボタン押下時処理
             Uz.GyomuJSHelper.registOriginalEvent("onClick_btnToFree", (control: Uz._ViewControl) => {
-                DBE2010002._onClick_btnToFree();
-                DBE2010002.displayChosain();
-                DBE2010002.divideWaritsukeOrMiwaritsuke();
+                DBE2010002.onClick_btnToFree();
+                DBE2010002.onAfterEvent();
             });
+            // 調査委託先一覧選択時処理
             Uz.GyomuJSHelper.registOriginalEvent("onSelect_dgChosaItakusakiList", (control: Uz._ViewControl) => {
                 DBE2010002.unselect_Chosain_all();
-                DBE2010002.displayChosain();
-                DBE2010002.divideWaritsukeOrMiwaritsuke();
+                DBE2010002.onAfterEvent();
             });
-            Uz.GyomuJSHelper.registOriginalEvent("onLoad_NinteichosaIraiByHand", (control: Uz._ViewControl) => {
-                DBE2010002.divideWaritsukeOrMiwaritsuke();
-                DBE2010002.countWaritukeNum();
+            // 調査員リスト内の割付ボタン押下時処理
+            Uz.GyomuJSHelper.registOriginalEvent(DBE2010002.eventName_for_btnToBindChosain, (control: Uz._ViewControl) => {
+                DBE2010002.bindSelectedChosainToTarget();
+                DBE2010002.onAfterEvent();
             });
+        }
+
+        /**
+         * onLoad後の処理です。
+         */
+        private static _onLoad_NinteichosaIraiByHand() {
+            DBE2010002.divideWaritsukeOrMiwaritsuke();
+            DBE2010002.setUpWaritukeNum();
+            //DBE2010002.deployOnClickEventToButtonOfChosain();
+        }
+
+        /**
+         * 調査員のbtnToBindChosainのonClickにイベントを追加します。
+         * 現状、この処理はうまくいきません。
+         */
+        private static deployOnClickEventToButtonOfChosain() {
+            var dataSource: IChosain[] = DBE2010002.comChosainListAll.dataSource;
+            for (var i = 0; i < dataSource.length; i++) {
+                dataSource[i].btnToBindChosain.onClick = DBE2010002.eventName_for_btnToBindChosain;
+            }
+            DBE2010002.comChosainListAll.dataSource = dataSource;
         }
 
         /**
          * 割付数をカウントします。
          */
-        private static countWaritukeNum(){
-            DBE2010002._countWaritukeNum_ChosaItakusaki();
-            DBE2010002._countWaritukeNum_Chosain();
+        private static setUpWaritukeNum() {
+            DBE2010002._setUpWaritukeNum_ChosaItakusaki();
+            DBE2010002._setUpWaritukeNum_Chosain();
         }
 
-        private static _countWaritukeNum_ChosaItakusaki() {
+        /** 調査委託先リストの割付数を、対象者からカウントし、設定します。 */
+        private static _setUpWaritukeNum_ChosaItakusaki() {
             var dataSource: IChosaItakusaki[] = DBE2010002.dgChosaItakusakiList.dataSource;
             for (var i = 0; i < dataSource.length; i++) {
-                dataSource[i].waritsukeNum = DBE2010002._countChosaItakusaki(dataSource[i].chosaItakusakiNo);
+                dataSource[i].waritsukeNum = DBE2010002.__countChosaItakusakiAtChosairaiTargets(dataSource[i].chosaItakusakiNo);
             }
             DBE2010002.dgChosaItakusakiList.dataSource = dataSource;
         }
 
-        private static _countChosaItakusaki(chosaItakusakiNo : string): number {
+        /** 調査委託先ごとの割付数をカウントします。 */
+        private static __countChosaItakusakiAtChosairaiTargets(chosaItakusakiNo: string): number {
             var count: number = 0;
             var targets: IChosaIraiTarget[] = DBE2010002.comNinteichosaIraiListGod.dataSource;
             for (var i = 0; i < targets.length; i++) {
@@ -79,15 +108,17 @@ module DBE {
             return count;
         }
 
-        private static _countWaritukeNum_Chosain() {
+        /** 調査員リストの割付数を、対象者からカウントし、設定します。 */
+        private static _setUpWaritukeNum_Chosain() {
             var dataSource: IChosain[] = DBE2010002.comChosainListAll.dataSource;
             for (var i = 0; i < dataSource.length; i++) {
-                dataSource[i].waritsukeNum = DBE2010002._countChosain(dataSource[i].chosainNo);
+                dataSource[i].waritsukeNum = DBE2010002.__countChosainAtChosaIraiTargets(dataSource[i].chosainNo);
             }
             DBE2010002.comChosainListAll.dataSource = dataSource;
         }
 
-        private static _countChosain(chosainNo: string): number {
+        /** 対象者中の調査員ごとの割付数をカウントします。 */
+        private static __countChosainAtChosaIraiTargets(chosainNo: string): number {
             var count: number = 0;
             var targets: IChosaIraiTarget[] = DBE2010002.comNinteichosaIraiListGod.dataSource;
             for (var i = 0; i < targets.length; i++) {
@@ -118,7 +149,7 @@ module DBE {
                 if (isMiwariate(chosaIraiTargets[i])) {
                     miwaritsuke.push(chosaIraiTargets[i]);
                 } else {
-                    var chosaItakusaki: IChosaItakusaki = DBE2010002.selected_ChosaItakuskai();
+                    var chosaItakusaki: IChosaItakusaki = DBE2010002.selectedChosaItakuskai();
                     if (chosaItakusaki === null) {
                         continue;
                     }
@@ -127,16 +158,23 @@ module DBE {
                     }
                 }
             }
-
             DBE2010002.comMiwaritsukeList.dataSource = miwaritsuke;
             DBE2010002.comWaritukezumiList.dataSource = waritsuke;
+        }
+
+        /**
+         * イベント後の共通処理です。
+         */
+        private static onAfterEvent() {
+            DBE2010002.displayChosain();
+            DBE2010002.divideWaritsukeOrMiwaritsuke();
         }
 
         /**
          * 調査委託先に所属する調査員の情報をビューへ反映します。
          */
         private static displayChosain() {
-            var selectedItem: IChosaItakusaki = DBE2010002.selected_ChosaItakuskai();
+            var selectedItem: IChosaItakusaki = DBE2010002.selectedChosaItakuskai();
             if (selectedItem != null) {
                 DBE2010002.comChosainList.dataSource = DBE2010002.getChosainList(selectedItem.chosaItakusakiNo);
             }
@@ -145,45 +183,45 @@ module DBE {
         /**
          * 割付完了化処理です。
          */
-        private static _onClick_btnToBind() {
-            var target: IChosaIraiTarget = DBE2010002.selected_Miwaritsukesha();
-            if (target != null) {
-                DBE2010002.setChosaIraiTo(target);
+        private static onClick_btnToBind() {
+            var targets: IChosaIraiTarget[] = DBE2010002.selectedMiwaritsukeshaList();
+            var chosaItakusaki: IChosaItakusaki = DBE2010002.selectedChosaItakuskai();
+            var chosain: IChosain = DBE2010002.selectedChosain_onDisp();
+            for (var i = 0; i < targets.length; i++) {
+                DBE2010002._setChosaIraiTo(targets[i], chosaItakusaki, chosain);
             }
         }
 
         /**
          * 調査依頼を設定します。 
          */
-        private static setChosaIraiTo(target: IChosaIraiTarget) {
+        private static _setChosaIraiTo(target: IChosaIraiTarget, chosaItakusaki:IChosaItakusaki,chosain:IChosain) {
             target.chosaIraiDate.value = DBE2010002.txtChosaIraiDate.value;
             target.chosaKigenDate.value = DBE2010002.txtChosaKigenDate.value;
-            target.chosaIraiKubun = DBE2010002.chosaIraiKubun();
+            target.chosaIraiKubun = DBE2010002.__chosaIraiKubun();
 
-            var chosaItakusaki: IChosaItakusaki = DBE2010002.selected_ChosaItakuskai();
             if (chosaItakusaki === null) {
                 return;
             }
             target.chosaItakusakiName = chosaItakusaki.chosaItakusakiName;
             target.chosaItakusakiNo = chosaItakusaki.chosaItakusakiNo;
             chosaItakusaki.waritsukeNum++;
-            DBE2010002.replaceChosaItakusaki(chosaItakusaki);
+            DBE2010002.replaceDataSourceFor_ChosaItakusaki(chosaItakusaki);
 
-            var chosain: IChosain = DBE2010002.selected_Chosain_onDisp()
             if (chosain != null) {
                 target.chosainName = chosain.chosainName;
                 target.chosainNo = chosain.chosainNo;
                 chosain.waritsukeNum++;
-                DBE2010002.replaceChosain_all(chosain);
+                DBE2010002.replaceDataSourceFor_Chosain(chosain);
             }
 
-            DBE2010002.replaceChosaIraiTarget(target);
+            DBE2010002.replaceDataSourceFor_Target(target);
         }
 
         /**
          * 調査依頼区分をddlIraiKubunから取得します。
          */
-        private static chosaIraiKubun(): string{
+        private static __chosaIraiKubun(): string {
             var key: string = DBE2010002.ddlIraiKubun.selectedItem;
             var dataSource = DBE2010002.ddlIraiKubun.dataSource;
             for (var i = 0; i < dataSource.length; i++) {
@@ -197,104 +235,171 @@ module DBE {
         /**
          * 未割付化処理です。
          */
-        private static _onClick_btnToFree() {
-            var target: IChosaIraiTarget = DBE2010002.selected_Waritukezumisha();
-                
-            if (target != null) {
-                if (target.chosaKanryoFlag) {
-                    return;
+        private static onClick_btnToFree() {
+
+            // 調査依頼をクリアします。
+            function clearChosaIrai(target: IChosaIraiTarget) {
+                target.chosaIraiDate.value = "";
+                target.chosaKigenDate.value = "";
+                target.chosaIraiKubun = "";
+
+                var allocated_Itakusaki: IChosaItakusaki = DBE2010002.getChosaItakusaki(target.chosaItakusakiNo);
+                if (allocated_Itakusaki != null) {
+                    DBE2010002.replaceDataSourceFor_ChosaItakusaki_AsDecreaseWaritsukeNum(allocated_Itakusaki);
                 }
-                DBE2010002.clearChosaIrai(target);
+                target.chosaItakusakiNo = "";
+                target.chosaItakusakiName = "";
+
+                var chosain: IChosain = DBE2010002.getChosain(target.chosainNo);
+                if (chosain != null) {
+                    DBE2010002.replaceDataSourceFor_Chosain_AsDecreaseWaritsukeNum(chosain);
+                }
+                target.chosainNo = "";
+                target.chosainName = "";
+                DBE2010002.replaceDataSourceFor_Target(target);
+            }
+
+            var targets: IChosaIraiTarget[] = DBE2010002.selectedWaritukezumishaList();
+            for (var i = 0; i < targets.length; i++) {
+                if (targets[i].chosaKanryoFlag) {
+                    continue;
+                }
+                clearChosaIrai(targets[i]);
             }
         }
 
         /**
-         * 調査依頼の設定内容をクリアします。
+         * 選択している調査員を、対象者の調査員として割付ます。
+         * 選択している調査員がすでに割付済みのときには、なにもしません。
+         * 調査員と対象者のどちらかが未選択のときも、なにもしません。
          */
-        private static clearChosaIrai(target : IChosaIraiTarget) {
-            target.chosaIraiDate.value = "";
-            target.chosaKigenDate.value = "";
-            target.chosaIraiKubun = "";
+        private static bindSelectedChosainToTarget() {
 
-            var chosaItakusaki: IChosaItakusaki = DBE2010002.getChosaItakusaki(target.chosaItakusakiNo);
-            if (chosaItakusaki != null) {
-                if (0 < chosaItakusaki.waritsukeNum) {
-                    chosaItakusaki.waritsukeNum--;
-                } else {
-                    chosaItakusaki.waritsukeNum = 0;
+            // 調査員を割り付けます。
+            function bind(newChosain: IChosain, target: IChosaIraiTarget) {
+                if (newChosain === null || target === null) {
+                    return;
                 }
-                DBE2010002.replaceChosaItakusaki(chosaItakusaki);
-            }
-            target.chosaItakusakiNo = "";
-            target.chosaItakusakiName = "";
-
-            var chosain: IChosain = DBE2010002.getChosain(target.chosainNo);
-            if (chosain != null) {
-                if (0 < chosain.waritsukeNum) {
-                    chosain.waritsukeNum--;
-                } else {
-                    chosain.waritsukeNum = 0;
+                if (newChosain.chosainNo === target.chosainNo) {
+                    return;
                 }
-                DBE2010002.replaceChosain_all(chosain);
+                if (target.chosainNo != null) {
+                    var oldChosain: IChosain = DBE2010002.getChosain(target.chosainNo);
+                    DBE2010002.replaceDataSourceFor_Chosain_AsDecreaseWaritsukeNum(oldChosain);
+                }
+                newChosain.waritsukeNum++;
+                DBE2010002.replaceDataSourceFor_Chosain(newChosain);
+                //調査員を設定
+                target.chosainNo = newChosain.chosainNo;
+                target.chosainName = newChosain.chosainName;
+                DBE2010002.replaceDataSourceFor_Target(target);
             }
-            target.chosainNo = "";
-            target.chosainName = "";
-            DBE2010002.replaceChosaIraiTarget(target);
-         }
 
+            var selected_chosain: IChosain = DBE2010002.selectedChosain_onDisp();
+            var targets: IChosaIraiTarget[] = DBE2010002.selectedWaritukezumishaList();
+            for (var i = 0; i < targets.length; i++) {
+                bind(selected_chosain, targets[i]);
+            }
+        }
+
+        /**
+         * 調査員の割付数を減らしつつ、置き換えます。
+         */
+        private static replaceDataSourceFor_Chosain_AsDecreaseWaritsukeNum(chosain: IChosain) {
+            if (chosain === null) {
+                return;
+            }
+            if (0 < chosain.waritsukeNum) {
+                chosain.waritsukeNum--;
+            } else {
+                chosain.waritsukeNum = 0;
+            }
+            DBE2010002.replaceDataSourceFor_Chosain(chosain);
+        }
+
+        /**
+         * 調査委託先の割付数を減らしつつ、置き換えます。
+         */
+        private static replaceDataSourceFor_ChosaItakusaki_AsDecreaseWaritsukeNum(chosaItakusaki: IChosaItakusaki) {
+            if (chosaItakusaki === null) {
+                return;
+            }
+            if (0 < chosaItakusaki.waritsukeNum) {
+                chosaItakusaki.waritsukeNum--;
+            } else {
+                chosaItakusaki.waritsukeNum = 0;
+            }
+            DBE2010002.replaceDataSourceFor_ChosaItakusaki(chosaItakusaki);
+        }
 
         /**
          * 選択中の調査依頼対象者を取得します。
          */
-        private static selected_ChosaItakuskai(): IChosaItakusaki {
-            return <IChosaItakusaki>DBE2010002._extractSelectedItem(DBE2010002.dgChosaItakusakiList.dataSource);
+        private static selectedChosaItakuskai(): IChosaItakusaki {
+            return <IChosaItakusaki>DBE2010002._selectedItemFrom(DBE2010002.dgChosaItakusakiList.dataSource);
         }
 
         /**
-         * 選択中の調査員を取得します。
+         * 表示中の調査員の中から、選択されているものを取得します。
          */
-        private static selected_Chosain_onDisp(): IChosain {
-            return <IChosain>DBE2010002._extractSelectedItem(DBE2010002.comChosainList.dataSource);
+        private static selectedChosain_onDisp(): IChosain {
+            return <IChosain>DBE2010002._selectedItemFrom(DBE2010002.comChosainList.dataSource);
         }
 
         /**
-         *
+         * すべての調査員中から、選択されているものを取得します。
          */
-        private static selected_Chosain_all(): IChosain {
-            return <IChosain>DBE2010002._extractSelectedItem(DBE2010002.comChosainListAll.dataSource);
+        private static selectedChosain_fromAll(): IChosain {
+            return <IChosain>DBE2010002._selectedItemFrom(DBE2010002.comChosainListAll.dataSource);
         }
 
         /**
          * 選択中の割付済み者を取得します。
          */
-        private static selected_Waritukezumisha(): IChosaIraiTarget {
-            return <IChosaIraiTarget> DBE2010002._extractSelectedItem(DBE2010002.comWaritukezumiList.dataSource);
+        private static selectedWaritukezumishaList(): IChosaIraiTarget[] {
+            return <IChosaIraiTarget[]> DBE2010002._selectedItemsFrom(DBE2010002.comWaritukezumiList.dataSource);
         }
 
         /**
-         * 選択中の未割付者を取得します。
+         * 選択中の未割付者のリストを取得します。
          */
-        private static selected_Miwaritsukesha(): IChosaIraiTarget {
-            return <IChosaIraiTarget>DBE2010002._extractSelectedItem(DBE2010002.comMiwaritsukeList.dataSource);
+        private static selectedMiwaritsukeshaList(): IChosaIraiTarget[] {
+            return <IChosaIraiTarget[]> DBE2010002._selectedItemsFrom(DBE2010002.comMiwaritsukeList.dataSource);
         }
 
         /**
-         * 選択されている対象者を取得します。
+         * dataSourceから、選択されているitem(複数あれば、一番先頭)を返します。
          * なければ、nullを返します。
-         */
-        private static _extractSelectedItem(items: ISelectable[]): ISelectable {
-            for (var i = 0; i < items.length; i++) {
-                if (items[i].selected) {
-                    return items[i];
+        */
+        private static _selectedItemFrom(dataSource: ISelectable[]): ISelectable {
+            for (var i = 0; i < dataSource.length; i++) {
+                if (dataSource[i].selected) {
+                    return dataSource[i];
                 }
             }
             return null;
         }
 
         /**
+         * dataSourceから、選択されているitemをすべて返します。
+         */
+        private static _selectedItemsFrom(dataSource: ISelectable[]): ISelectable[] {
+            var selectedItems: ISelectable[] = [];
+            for (var i = 0; i < dataSource.length; i++) {
+                if (dataSource[i].selected) {
+                    selectedItems.push(dataSource[i]);
+                }
+            }
+            return selectedItems;
+        }
+
+        /**
          * 渡した情報で、調査依頼対象者を置き換えます。
          */
-        private static replaceChosaIraiTarget(target: IChosaIraiTarget) {
+        private static replaceDataSourceFor_Target(target: IChosaIraiTarget) {
+            if (target === null) {
+                return;
+            }
             var dataSource: IChosaIraiTarget[] = DBE2010002.comNinteichosaIraiListGod.dataSource;
             for (var i = 0; i < dataSource.length; i++) {
                 if (dataSource[i].hihokenshaNo === target.hihokenshaNo) {
@@ -307,7 +412,10 @@ module DBE {
         /**
          * 渡した情報で、調査員を置き換えます。
          */
-        private static replaceChosain_all(chosain: IChosain) {
+        private static replaceDataSourceFor_Chosain(chosain: IChosain) {
+            if (chosain === null) {
+                return;
+            }
             var dataSource: IChosain[] = DBE2010002.comChosainListAll.dataSource;
             for (var i = 0; i < dataSource.length; i++) {
                 if (dataSource[i].chosainNo === chosain.chosainNo) {
@@ -320,7 +428,10 @@ module DBE {
         /**
          * 渡した情報で、調査委託先を置き換えます。
          */
-        private static replaceChosaItakusaki(chosaItakusaki: IChosaItakusaki) {
+        private static replaceDataSourceFor_ChosaItakusaki(chosaItakusaki: IChosaItakusaki) {
+            if (chosaItakusaki === null) {
+                return;
+            }
             var dataSource: IChosaItakusaki[] = DBE2010002.dgChosaItakusakiList.dataSource;
             for (var i = 0; i < dataSource.length; i++) {
                 if (dataSource[i].chosaItakusakiNo === chosaItakusaki.chosaItakusakiNo) {
@@ -333,7 +444,7 @@ module DBE {
         /**
          * 被保険者番号から、調査依頼対象者を取得します。
          */
-        private static getChosaIraiTarget(hihokenshaNo: string): IChosaIraiTarget{
+        private static getChosaIraiTarget(hihokenshaNo: string): IChosaIraiTarget {
             var dataSource: IChosaIraiTarget[] = DBE2010002.comNinteichosaIraiListGod.dataSource;
             for (var i = 0; i < dataSource.length; i++) {
                 if (dataSource[i].hihokenshaNo === hihokenshaNo) {
@@ -359,7 +470,7 @@ module DBE {
         /**
          * 調査委託先番号から、調査委託先を取得します。
          */
-        private static getChosaItakusaki(chosaItakusakiNo : string) : IChosaItakusaki {
+        private static getChosaItakusaki(chosaItakusakiNo: string): IChosaItakusaki {
             var dataSource: IChosaItakusaki[] = DBE2010002.dgChosaItakusakiList.dataSource;
             for (var i = 0; i < dataSource.length; i++) {
                 if (dataSource[i].chosaItakusakiNo === chosaItakusakiNo) {
@@ -389,12 +500,12 @@ module DBE {
          * 同じように、対象者側も選択を解除する必要性がありますが、そちらにも手をつけていません。
          */
         private static unselect_Chosain_all() {
-//            var chosain: IChosain = DBE2010002.selected_Chosain_all();
-//            if (chosain != null) {
-//                chosain.selected = false;
-//                DBE2010002.replaceChosain_all(chosain);
-//                alert(chosain.chosainName + "\n" + "selected : " + chosain.selected);
-//            }
+            //  var chosain: IChosain = DBE2010002.selected_Chosain_all();
+            // if (chosain != null) {
+            //     chosain.selected = false;
+            //     DBE2010002.replaceChosain_all(chosain);
+            //     alert(chosain.chosainName + "\n" + "selected : " + chosain.selected);
+            // }
         }
 
     }
@@ -418,7 +529,7 @@ module DBE {
      * (any.xxx はどんな場合でも許可されるが、interface.xxx はインタフェース内に xxx がないといけないため。)
      * また、インタフェースを作っておけば、コード補完の機能も利用できるため、タイポを減らすことができます。
      */
-    interface IChosaIraiTarget extends ISelectable{
+    interface IChosaIraiTarget extends ISelectable {
         chosaIraiKubun;
         chosaIraiDate;
         chosaKigenDate;
@@ -451,6 +562,7 @@ module DBE {
         waritsukeNum: number;
         chiku: string;
         chousaItakusakiNo: string;
+        btnToBindChosain: Uz._Button;
     }
 
     /**

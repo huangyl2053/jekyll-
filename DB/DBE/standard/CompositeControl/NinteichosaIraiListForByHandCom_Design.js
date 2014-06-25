@@ -178,7 +178,7 @@ var DBE;
                     "jpControlName": "",
                     "gridSetting": {
                         "rowHeight": 24,
-                        "isMultiSelectable": false,
+                        "isMultiSelectable": true,
                         "isShowHeader": true,
                         "isShowFooter": false,
                         "isShowFilter": false,
@@ -315,7 +315,7 @@ var DBE;
                                 "toolTip": "",
                                 "bgColor": 0,
                                 "width": 50,
-                                "visible": true,
+                                "visible": false,
                                 "cellType": 8,
                                 "cellDetails": {
                                     "cellType": 8,

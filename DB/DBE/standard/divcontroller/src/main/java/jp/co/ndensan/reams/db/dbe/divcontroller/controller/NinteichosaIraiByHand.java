@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosaItakusakiData;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ChosaItakusakiAndChosainListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ChosairaiBindByHandMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.NinteichosaIraiByHandDiv;
@@ -296,7 +298,7 @@ public class NinteichosaIraiByHand {
 
                         @Override
                         public dgNinteichosaIraiListForByHand_Row exec(Map map) {
-                            return _to_dgNinteichosaIraiListForByHand_Row(map);
+                            return _toDgNinteichosaIraiListForByHand_Row(map);
 
                         }
 
@@ -306,7 +308,7 @@ public class NinteichosaIraiByHand {
 
                         @Override
                         public dgShozokuChosainList_Row exec(Map map) {
-                            return _to_dgShozokuChosainList_Row(map);
+                            return _toDgShozokuChosainList_Row(map);
 
                         }
 
@@ -316,7 +318,7 @@ public class NinteichosaIraiByHand {
 
                         @Override
                         public dgChosaItakusakiList_Row exec(Map map) {
-                            return _to_dgChosaItakusakiList_Row(map);
+                            return _toDgChosaItakusakiList_Row(map);
 
                         }
 
@@ -327,32 +329,42 @@ public class NinteichosaIraiByHand {
 
         }
 
-        private dgChosaItakusakiList_Row _to_dgChosaItakusakiList_Row(Map map) {
+        private dgChosaItakusakiList_Row _toDgChosaItakusakiList_Row(Map map) {
             ControlGenerator cg = new ControlGenerator(map);
+            ChosaItakusakiData.ChosaItakusaki chosaItakusaki
+                    = new ChosaItakusakiData().get調査委託先From(cg.getAsRString("調査委託先番号"));
             return new dgChosaItakusakiList_Row(
-                    cg.getAsRString("調査委託先番号"),
-                    cg.getAsRString("調査委託先名称"),
+                    chosaItakusaki.code(),
+                    chosaItakusaki.name(),
                     cg.getAsRString("割付定員"),
                     cg.getAsRString("割付済み"),
                     cg.getAsRString("割付地区査員番号")
             );
         }
 
-        private dgShozokuChosainList_Row _to_dgShozokuChosainList_Row(Map map) {
+        private dgShozokuChosainList_Row _toDgShozokuChosainList_Row(Map map) {
             ControlGenerator cg = new ControlGenerator(map);
+            ChosainData.Chosain chosain
+                    = new ChosainData().get調査員From(cg.getAsRString("調査員番号"));
             return new dgShozokuChosainList_Row(new Button(),
-                    cg.getAsRString("調査員番号"),
-                    cg.getAsRString("調査員氏名"),
+                    chosain.code(),
+                    chosain.name(),
                     cg.getAsRString("割付済人数"),
                     cg.getAsRString("地区"),
-                    cg.getAsRString("調査委託先番号")
+                    chosain.itakusaki().code()
             );
         }
 
-        private dgNinteichosaIraiListForByHand_Row _to_dgNinteichosaIraiListForByHand_Row(Map map) {
+        private dgNinteichosaIraiListForByHand_Row _toDgNinteichosaIraiListForByHand_Row(Map map) {
             ControlGenerator cg = new ControlGenerator(map);
             RString shimei = cg.getAsRString("氏名");
             RString kanaShimei = cg.getAsRString("カナ氏名");
+            ChosainData.Chosain chosain
+                    = new ChosainData().get調査員From(cg.getAsRString("調査員番号"));
+            ChosainData.Chosain zen_chosain
+                    = new ChosainData().get調査員From(cg.getAsRString("前回調査員番号"));
+            ChosainData.Chosain zenzen_chosain
+                    = new ChosainData().get調査員From(cg.getAsRString("前々回調査員番号"));
             return new dgNinteichosaIraiListForByHand_Row(
                     cg.getAsBooleanValue("調査状況"),
                     _compose調査状況(cg.getAsRString("調査状況")),
@@ -371,18 +383,18 @@ public class NinteichosaIraiByHand {
                     cg.getAsTextBoxFlexibleDate("調査依頼日"),
                     cg.getAsTextBoxFlexibleDate("調査期限日"),
                     cg.getAsTextBoxFlexibleDate("依頼書発行日"),
-                    cg.getAsRString("調査委託先番号"),
-                    cg.getAsRString("調査委託先名"),
-                    cg.getAsRString("調査員番号"),
-                    cg.getAsRString("調査員名"),
-                    cg.getAsRString("前回調査委託先番号"),
-                    cg.getAsRString("前回調査委託先名"),
-                    cg.getAsRString("前回調査員番号"),
-                    cg.getAsRString("前回調査員名"),
-                    cg.getAsRString("前々回調査委託先番号"),
-                    cg.getAsRString("前々回調査委託先名"),
-                    cg.getAsRString("前々回調査員番号"),
-                    cg.getAsRString("前々回調査員名"),
+                    chosain.itakusaki().code(),
+                    chosain.itakusaki().name(),
+                    chosain.code(),
+                    chosain.name(),
+                    zen_chosain.itakusaki().code(),
+                    zen_chosain.itakusaki().name(),
+                    zen_chosain.code(),
+                    zen_chosain.name(),
+                    zenzen_chosain.itakusaki().code(),
+                    zenzen_chosain.itakusaki().name(),
+                    zenzen_chosain.code(),
+                    zenzen_chosain.name(),
                     cg.getAsTextBoxFlexibleDate("督促日"),
                     cg.getAsRString("督促回数"),
                     cg.getAsRString("郵便番号"),
