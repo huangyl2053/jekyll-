@@ -32,6 +32,8 @@ public class ShoKaishuKirokuKanriDiv extends Panel {
     private Button btnUpdateShoKaishuJokyo;
     @JsonProperty("mode")
     private RString mode;
+    @JsonProperty("selectRow")
+    private RString selectRow;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -77,6 +79,16 @@ public class ShoKaishuKirokuKanriDiv extends Panel {
     @JsonProperty("mode")
     public void setMode(RString mode) {
         this.mode=mode;
+    }
+
+    @JsonProperty("selectRow")
+    public RString getSelectRow() {
+        return selectRow;
+    }
+
+    @JsonProperty("selectRow")
+    public void setSelectRow(RString selectRow) {
+        this.selectRow=selectRow;
     }
 
 }
