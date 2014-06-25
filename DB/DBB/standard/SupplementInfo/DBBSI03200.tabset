@@ -1,0 +1,21 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "0",
+   "businessId": "DBB",
+   "controlName": "ShunoJoho"
+  },
+  {
+   "id": "1",
+   "businessId": "DBB",
+   "controlName": "RentaiNofuGimusha"
+  },
+  {
+   "id": "2",
+   "businessId": "DBZ",
+   "controlName": "TainoJoho"
+  }
+ ],
+ "subGyomuCode": "DBB",
+ "tabSetName": "DBBSI03200"
+}
