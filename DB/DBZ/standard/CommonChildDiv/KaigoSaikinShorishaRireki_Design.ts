@@ -65,6 +65,8 @@ module DBZ {
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "isOneCondition": "0",
      "SaikinShorishaRireki_width": "G8",
      "SaikinShorishaRireki_marginLeft": "XS",
@@ -106,10 +108,7 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
@@ -143,7 +142,9 @@ module DBZ {
  "originalProperty": [],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }
