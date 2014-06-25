@@ -114,123 +114,12 @@
    "eraseBorderLeft": false
   },
   {
-   "fieldName": "KaigoFukaKihon",
-   "items": [],
-   "controlType": "CommonChildDiv",
-   "width": "XS",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
-   "selectControlID": "KaigoFukaKihon",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "title": "",
-   "relation": [],
-   "canOpenAndClose": true,
-   "marginTop": 0,
-   "marginBottom": 0,
-   "businessId": "DBZ",
-   "controlName": "KaigoFukaKihon",
-   "dataPassingForDialog": [],
-   "dialogOkEventNameForDialog": "",
-   "dialogCancelEventNameForDialog": "",
-   "canTransferEvent": true,
-   "heightForDialog": "M",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
-   "backGroundColor": 0,
-   "btnHihoRireki_visible": true
-  },
-  {
-   "fieldName": "KaigoAtenaInfo",
-   "items": [],
-   "controlType": "CommonChildDiv",
-   "width": "XS",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
-   "selectControlID": "KaigoAtenaInfo",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "relation": [],
-   "marginTop": 0,
-   "marginBottom": 0,
-   "businessId": "DBZ",
-   "controlName": "KaigoAtenaInfo",
-   "dataPassingForDialog": [],
-   "dialogOkEventNameForDialog": "",
-   "dialogCancelEventNameForDialog": "",
-   "canTransferEvent": true,
-   "heightForDialog": "M",
-   "atenaInfo_title": "",
-   "atenaInfo_canOpenAndClose": true,
-   "atenaInfo_eraseBorderTop": true,
-   "atenaInfo_eraseBorderBottom": true,
-   "atenaInfo_eraseBorderRight": true,
-   "atenaInfo_eraseBorderLeft": true,
-   "AtenaKanaMeisho_visible": true,
-   "AtenaMisho_visible": true,
-   "SeinengappiYMD_visible": true,
-   "Nenrei_visible": true,
-   "Seibetsu_visible": true,
-   "JuminShubetsu_Visible": true,
-   "NihonjinGaikokujin_visible": true,
-   "JuminJotai_visible": true,
-   "YubinNo_visible": true,
-   "Jusho_visible": true,
-   "Gyoseiku_visible": true,
-   "ShikibetsuCode_visible": true,
-   "KojinHojinCode_visible": true,
-   "SetaiCode_visible": true,
-   "lblButtonMargin_displayNone": false,
-   "btnMemo_DisplayNone": false,
-   "btnDainosha_displayNone": false,
-   "btnSofusaki_displayNone": false,
-   "btnDainoSofusakiKakunin_displayNone": false,
-   "btnKoza_displayNone": false,
-   "btnRenrakusaki_displayNone": false,
-   "btnShosai_displayNone": false,
-   "btnAtenaRireki_displayNone": false,
-   "btnSetaiIchiran_displayNone": false,
-   "btnDoitsunin_displayNone": false,
-   "btnToriatsukaiChui_displayNone": false,
-   "btnEltax_displayNone": false,
-   "btnShiyoJokyo_displayNone": false,
-   "btnAtesakiKakunin_displayNone": false,
-   "SubGyomuCode": "DBB",
-   "JukiYusennKubun": "1",
-   "AgeArrivalDay": "1",
-   "SubGyomuUmu": "0",
-   "SubGyomuSearchUmu": "0",
-   "DainoninHyojiUmu": "1"
-  },
-  {
-   "fieldName": "JuminFukaShokai",
+   "fieldName": "AtenaJoho",
    "items": [
     {
-     "fieldName": "txtShikibetsuCodeJumin",
+     "fieldName": "KaigoAtenaInfo",
      "items": [],
-     "controlType": "TextBoxCode",
+     "controlType": "CommonChildDiv",
      "width": "XS",
      "visible": true,
      "displayNone": false,
@@ -242,222 +131,101 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "txtShikibetsuCodeJumin_core",
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KaigoAtenaInfo",
      "helpMessageID": "",
      "jpControlName": "",
-     "readOnly": false,
-     "text": "",
-     "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "placeHolder": "",
-     "textKind": 2,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "isComboBox": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "suggest": [],
-     "value": "",
-     "labelLText": "氏名",
-     "labelRText": "",
-     "labelLWidth": "XS",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": "",
-     "formatLength": 1
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "KaigoAtenaInfo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "atenaInfo_title": "",
+     "atenaInfo_canOpenAndClose": true,
+     "atenaInfo_eraseBorderTop": true,
+     "atenaInfo_eraseBorderBottom": true,
+     "atenaInfo_eraseBorderRight": true,
+     "atenaInfo_eraseBorderLeft": true,
+     "AtenaKanaMeisho_visible": true,
+     "AtenaMisho_visible": true,
+     "SeinengappiYMD_visible": true,
+     "Nenrei_visible": true,
+     "Seibetsu_visible": true,
+     "JuminShubetsu_Visible": true,
+     "NihonjinGaikokujin_visible": true,
+     "JuminJotai_visible": true,
+     "YubinNo_visible": true,
+     "Jusho_visible": true,
+     "Gyoseiku_visible": true,
+     "ShikibetsuCode_visible": true,
+     "KojinHojinCode_visible": true,
+     "SetaiCode_visible": true,
+     "lblButtonMargin_displayNone": false,
+     "btnMemo_DisplayNone": false,
+     "btnDainosha_displayNone": false,
+     "btnSofusaki_displayNone": false,
+     "btnDainoSofusakiKakunin_displayNone": false,
+     "btnKoza_displayNone": false,
+     "btnRenrakusaki_displayNone": false,
+     "btnShosai_displayNone": false,
+     "btnAtenaRireki_displayNone": false,
+     "btnSetaiIchiran_displayNone": false,
+     "btnDoitsunin_displayNone": false,
+     "btnToriatsukaiChui_displayNone": false,
+     "btnEltax_displayNone": false,
+     "btnShiyoJokyo_displayNone": false,
+     "btnAtesakiKakunin_displayNone": false,
+     "SubGyomuCode": "DBB",
+     "JukiYusennKubun": "1",
+     "AgeArrivalDay": "1",
+     "SubGyomuUmu": "0",
+     "SubGyomuSearchUmu": "0",
+     "DainoninHyojiUmu": "1"
     },
     {
-     "fieldName": "txtNameJumin",
+     "fieldName": "KaigoFukaKihon",
      "items": [],
-     "controlType": "TextBoxCode",
+     "controlType": "CommonChildDiv",
      "width": "XS",
      "visible": true,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": true,
+     "wrap": false,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "txtNameJumin_core",
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KaigoFukaKihon",
      "helpMessageID": "",
      "jpControlName": "",
-     "readOnly": false,
-     "text": "",
-     "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "placeHolder": "",
-     "textKind": 2,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "isComboBox": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "suggest": [],
-     "value": "",
-     "labelLText": "",
-     "labelRText": "",
-     "labelLWidth": "S",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": "",
-     "formatLength": 1
-    },
-    {
-     "fieldName": "txtSetaiCodeJumin",
-     "items": [],
-     "controlType": "TextBox",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "txtSetaiCodeJumin_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": false,
-     "text": "",
-     "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "isComboBox": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "suggest": [],
-     "value": "",
-     "labelLText": "世帯コード",
-     "labelRText": "",
-     "labelLWidth": "S",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
-    },
-    {
-     "fieldName": "txtHihokenshaNo",
-     "items": [],
-     "controlType": "TextBox",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "txtHihokenshaNo_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": false,
-     "text": "",
-     "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "isComboBox": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "suggest": [],
-     "value": "",
-     "labelLText": "被保険者番号",
-     "labelRText": "",
-     "labelLWidth": "S",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
-    },
-    {
-     "fieldName": "txtTsuchishoNo",
-     "items": [],
-     "controlType": "TextBox",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "txtTsuchishoNo_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": false,
-     "text": "",
-     "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "isComboBox": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "suggest": [],
-     "value": "",
-     "labelLText": "通知書番号",
-     "labelRText": "",
-     "labelLWidth": "S",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
+     "title": "",
+     "relation": [],
+     "canOpenAndClose": true,
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "KaigoFukaKihon",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
+     "backGroundColor": 0,
+     "btnHihoRireki_visible": true
     }
    ],
    "controlType": "Panel",
@@ -467,26 +235,31 @@
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
-   "wrap": false,
+   "wrap": true,
    "dependencies": [],
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
    "marginLeft": "0",
-   "marginRight": "XS",
-   "selectControlID": "JuminFukaShokai",
+   "marginRight": "0",
+   "selectControlID": "AtenaJoho",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "住民情報",
+   "title": "タイトル",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "JuminFukaShokai"
+     "postParameterPanelNames": "AtenaJoho"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbb/db/dbb/AtenaJoho/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -500,10 +273,7 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "focusPositionID": "BasicControlArea"
   },
   {
    "fieldName": "FukaRirekiAll",
@@ -3053,7 +2823,7 @@
    "selectControlID": "FukaShokaiGrandson",
    "helpMessageID": "",
    "jpControlName": "",
-   "onLoad": "",
+   "onLoad": "onLoad_FukaShokaiGrandson",
    "title": "賦課照会",
    "isOpen": true,
    "canOpenAndClose": true,
@@ -3073,10 +2843,6 @@
     {
      "eventName": "onSelect_FukaRireki",
      "requestUrl": "dbb/db/dbb/FukaShokaiGrandson/onSelect"
-    },
-    {
-     "eventName": "onSelect_FukaRireki",
-     "requestUrl": "dbb/db/dbb/FukakonkyoAndKiwari/onClick"
     }
    ],
    "hiddenInput": [],
@@ -4711,7 +4477,7 @@
          "selectControlID": "tblFukakonkyoMeisai",
          "helpMessageID": "",
          "jpControlName": "",
-         "html": "<table border=\"1\" span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td colspan=\"4\" id='R1C1'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R2C1'></td><td id='R2C2'></td><td bgcolor=\"lightgrey\" id='R2C3'></td><td id='R2C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R3C1'></td><td id='R3C2'></td><td bgcolor=\"lightgrey\" id='R3C3'></td><td id='R3C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R4C1'></td><td id='R4C2'></td><td bgcolor=\"lightgrey\" id='R4C3'></td><td id='R4C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R5C1'></td><td id='R5C2'></td><td bgcolor=\"lightgrey\" id='R5C3'></td><td id='R5C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R6C1'></td><td id='R6C2'></td><td bgcolor=\"lightgrey\" id='R6C3'></td><td id='R6C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R7C1'></td><td id='R7C2'></td><td bgcolor=\"lightgrey\" id='R7C3'></td><td id='R7C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R8C1'></td><td id='R8C2'></td><td bgcolor=\"lightgrey\" id='R8C3'></td><td id='R8C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R9C1'></td><td id='R9C2'></td><td bgcolor=\"lightgrey\" id='R9C3'></td><td id='R9C4'></td></tr>\n  </tbody>\n</table>\n"
+         "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td colspan=\"4\" id='R1C1'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R2C1'></td><td id='R2C2'></td><td bgcolor=\"lightgrey\" id='R2C3'></td><td id='R2C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R3C1'></td><td id='R3C2'></td><td bgcolor=\"lightgrey\" id='R3C3'></td><td id='R3C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R4C1'></td><td id='R4C2'></td><td bgcolor=\"lightgrey\" id='R4C3'></td><td id='R4C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R5C1'></td><td id='R5C2'></td><td bgcolor=\"lightgrey\" id='R5C3'></td><td id='R5C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R6C1'></td><td id='R6C2'></td><td bgcolor=\"lightgrey\" id='R6C3'></td><td id='R6C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R7C1'></td><td id='R7C2'></td><td bgcolor=\"lightgrey\" id='R7C3'></td><td id='R7C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R8C1'></td><td id='R8C2'></td><td bgcolor=\"lightgrey\" id='R8C3'></td><td id='R8C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R9C1'></td><td id='R9C2'></td><td bgcolor=\"lightgrey\" id='R9C3'></td><td id='R9C4'></td></tr>\n  </tbody>\n</table>\n"
         }
        ],
        "controlType": "TableCell",
@@ -5345,7 +5111,7 @@
          "selectControlID": "tblKikan",
          "helpMessageID": "",
          "jpControlName": "",
-         "html": "<table align=\"center\" border=\"1\" span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td><td id='R1C6'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n  </tbody>\n</table>\n"
+         "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td><td id='R1C6'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n  </tbody>\n</table>\n"
         },
         {
          "fieldName": "FukakonkyoNengaku",
@@ -5394,12 +5160,12 @@
            "labelLAlign": 2,
            "labelRAlign": 0,
            "decorationClass": "",
-           "permitCharactor": "+-,.\\",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
            "isComma": true,
-           "decimalPointLength": 0
+           "decimalPointLength": 0,
+           "permitCharactor": "+-,.\\"
           },
           {
            "fieldName": "txtGemmen",
@@ -5445,12 +5211,12 @@
            "labelLAlign": 2,
            "labelRAlign": 0,
            "decorationClass": "",
-           "permitCharactor": "+-,.\\",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
            "isComma": true,
-           "decimalPointLength": 0
+           "decimalPointLength": 0,
+           "permitCharactor": "+-,.\\"
           },
           {
            "fieldName": "txtNenkanHokenryo",
@@ -5496,12 +5262,12 @@
            "labelLAlign": 2,
            "labelRAlign": 0,
            "decorationClass": "",
-           "permitCharactor": "+-,.\\",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
            "isComma": true,
-           "decimalPointLength": 0
+           "decimalPointLength": 0,
+           "permitCharactor": "+-,.\\"
           }
          ],
          "controlType": "Panel",
@@ -6032,6 +5798,10 @@
     {
      "eventName": "onClick_loadFukakonkyo",
      "requestUrl": "dbb/db/dbb/FukakonkyoAndKiwari/onSelect"
+    },
+    {
+     "eventName": "onLoad_FukaShokaiGrandson",
+     "requestUrl": "dbb/db/dbb/FukakonkyoAndKiwari/onClick"
     }
    ],
    "hiddenInput": [
@@ -7883,12 +7653,12 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "decorationClass": "",
-       "permitCharactor": "+-,.\\",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
        "isComma": true,
-       "decimalPointLength": 0
+       "decimalPointLength": 0,
+       "permitCharactor": "+-,.\\"
       },
       {
        "fieldName": "txtGemmenShinseiRiyu",
@@ -10572,7 +10342,7 @@
            "selectControlID": "ChoshuYuyoKikan",
            "helpMessageID": "",
            "jpControlName": "",
-           "html": "<table border=\"1\" span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R2C1'></td><td bgcolor=\"lightgrey\" id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R3C1'></td><td bgcolor=\"lightgrey\" id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R4C1'></td><td bgcolor=\"lightgrey\" id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R5C1'></td><td bgcolor=\"lightgrey\" id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R6C1'></td><td bgcolor=\"lightgrey\" id='R6C2'></td><td id='R6C3'></td><td id='R6C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R7C1'></td><td bgcolor=\"lightgrey\" id='R7C2'></td><td id='R7C3'></td><td id='R7C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R8C1'></td><td bgcolor=\"lightgrey\" id='R8C2'></td><td id='R8C3'></td><td id='R8C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R9C1'></td><td bgcolor=\"lightgrey\" id='R9C2'></td><td id='R9C3'></td><td id='R9C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R10C1'></td><td bgcolor=\"lightgrey\" id='R10C2'></td><td id='R10C3'></td><td id='R10C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R11C1'></td><td bgcolor=\"lightgrey\" id='R11C2'></td><td id='R11C3'></td><td id='R11C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R12C1'></td><td bgcolor=\"lightgrey\" id='R12C2'></td><td id='R12C3'></td><td id='R12C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R13C1'></td><td bgcolor=\"lightgrey\" id='R13C2'></td><td id='R13C3'></td><td id='R13C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R14C1'></td><td bgcolor=\"lightgrey\" id='R14C2'></td><td id='R14C3'></td><td id='R14C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R15C1'></td><td bgcolor=\"lightgrey\" id='R15C2'></td><td id='R15C3'></td><td id='R15C4'></td></tr>\n  </tbody>\n</table>\n"
+           "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R2C1'></td><td bgcolor=\"lightgrey\" id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R3C1'></td><td bgcolor=\"lightgrey\" id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R4C1'></td><td bgcolor=\"lightgrey\" id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R5C1'></td><td bgcolor=\"lightgrey\" id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R6C1'></td><td bgcolor=\"lightgrey\" id='R6C2'></td><td id='R6C3'></td><td id='R6C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R7C1'></td><td bgcolor=\"lightgrey\" id='R7C2'></td><td id='R7C3'></td><td id='R7C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R8C1'></td><td bgcolor=\"lightgrey\" id='R8C2'></td><td id='R8C3'></td><td id='R8C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R9C1'></td><td bgcolor=\"lightgrey\" id='R9C2'></td><td id='R9C3'></td><td id='R9C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R10C1'></td><td bgcolor=\"lightgrey\" id='R10C2'></td><td id='R10C3'></td><td id='R10C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R11C1'></td><td bgcolor=\"lightgrey\" id='R11C2'></td><td id='R11C3'></td><td id='R11C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R12C1'></td><td bgcolor=\"lightgrey\" id='R12C2'></td><td id='R12C3'></td><td id='R12C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R13C1'></td><td bgcolor=\"lightgrey\" id='R13C2'></td><td id='R13C3'></td><td id='R13C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R14C1'></td><td bgcolor=\"lightgrey\" id='R14C2'></td><td id='R14C3'></td><td id='R14C4'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R15C1'></td><td bgcolor=\"lightgrey\" id='R15C2'></td><td id='R15C3'></td><td id='R15C4'></td></tr>\n  </tbody>\n</table>\n"
           }
          ],
          "controlType": "TableCell",
@@ -13267,7 +13037,7 @@
        "selectControlID": "tblKobetsuHakkoFukakonkyo",
        "helpMessageID": "",
        "jpControlName": "",
-       "html": "<table border=\"1\" span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R4C1'></td><td id='R4C2'></td><td id='R4C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R5C1'></td><td id='R5C2'></td><td id='R5C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R6C1'></td><td id='R6C2'></td><td id='R6C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R7C1'></td><td id='R7C2'></td><td id='R7C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R8C1'></td><td id='R8C2'></td><td id='R8C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R9C1'></td><td id='R9C2'></td><td id='R9C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R10C1'></td><td id='R10C2'></td><td id='R10C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R11C1'></td><td id='R11C2'></td><td id='R11C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R12C1'></td><td id='R12C2'></td><td id='R12C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R13C1'></td><td id='R13C2'></td><td id='R13C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R14C1'></td><td id='R14C2'></td><td id='R14C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R15C1'></td><td id='R15C2'></td><td id='R15C3'></td></tr>\n  </tbody>\n</table>\n"
+       "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R4C1'></td><td id='R4C2'></td><td id='R4C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R5C1'></td><td id='R5C2'></td><td id='R5C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R6C1'></td><td id='R6C2'></td><td id='R6C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R7C1'></td><td id='R7C2'></td><td id='R7C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R8C1'></td><td id='R8C2'></td><td id='R8C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R9C1'></td><td id='R9C2'></td><td id='R9C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R10C1'></td><td id='R10C2'></td><td id='R10C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R11C1'></td><td id='R11C2'></td><td id='R11C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R12C1'></td><td id='R12C2'></td><td id='R12C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R13C1'></td><td id='R13C2'></td><td id='R13C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R14C1'></td><td id='R14C2'></td><td id='R14C3'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R15C1'></td><td id='R15C2'></td><td id='R15C3'></td></tr>\n  </tbody>\n</table>\n"
       },
       {
        "fieldName": "tblKobetsuHakkoKiwariGaku",
@@ -18953,7 +18723,7 @@
        "selectControlID": "tblKobetsuHakkoKiwariGaku",
        "helpMessageID": "",
        "jpControlName": "",
-       "html": "<table border=\"1\" span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td><td colspan=\"3\" id='R1C2'></td><td colspan=\"4\"  id='R1C6'></td></tr>\n    <tr bgcolor=\"lightgrey\" ><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td><td id='R2C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td><td id='R3C7'></td><td id='R3C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R4C1'></td><td id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td><td id='R4C5'></td><td id='R4C6'></td><td id='R4C7'></td><td id='R4C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R5C1'></td><td id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td><td id='R5C5'></td><td id='R5C6'></td><td id='R5C7'></td><td id='R5C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R6C1'></td><td id='R6C2'></td><td id='R6C3'></td><td id='R6C4'></td><td id='R6C5'></td><td id='R6C6'></td><td id='R6C7'></td><td id='R6C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R7C1'></td><td id='R7C2'></td><td id='R7C3'></td><td id='R7C4'></td><td id='R7C5'></td><td id='R7C6'></td><td id='R7C7'></td><td id='R7C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R8C1'></td><td id='R8C2'></td><td id='R8C3'></td><td id='R8C4'></td><td id='R8C5'></td><td id='R8C6'></td><td id='R8C7'></td><td id='R8C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R9C1'></td><td id='R9C2'></td><td id='R9C3'></td><td id='R9C4'></td><td id='R9C5'></td><td id='R9C6'></td><td id='R9C7'></td><td id='R9C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R10C1'></td><td id='R10C2'></td><td id='R10C3'></td><td id='R10C4'></td><td id='R10C5'></td><td id='R10C6'></td><td id='R10C7'></td><td id='R10C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R11C1'></td><td id='R11C2'></td><td id='R11C3'></td><td id='R11C4'></td><td id='R11C5'></td><td id='R11C6'></td><td id='R11C7'></td><td id='R11C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R12C1'></td><td id='R12C2'></td><td id='R12C3'></td><td id='R12C4'></td><td id='R12C5'></td><td id='R12C6'></td><td id='R12C7'></td><td id='R12C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R13C1'></td><td id='R13C2'></td><td id='R13C3'></td><td id='R13C4'></td><td id='R13C5'></td><td id='R13C6'></td><td id='R13C7'></td><td id='R13C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R14C1'></td><td id='R14C2'></td><td id='R14C3'></td><td id='R14C4'></td><td id='R14C5'></td><td id='R14C6'></td><td id='R14C7'></td><td id='R14C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R15C1'></td><td id='R15C2'></td><td id='R15C3'></td><td id='R15C4'></td><td id='R15C5'></td><td id='R15C6'></td><td id='R15C7'></td><td id='R15C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R16C1'></td><td id='R16C2'></td><td id='R16C3'></td><td id='R16C4'></td><td id='R16C5'></td><td id='R16C6'></td><td id='R16C7'></td><td id='R16C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R17C1'></td><td id='R17C2'></td><td id='R17C3'></td><td id='R17C4'></td><td id='R17C5'></td><td id='R17C6'></td><td id='R17C7'></td><td id='R17C8'></td></tr>\n  </tbody>\n</table>\n"
+       "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td><td colspan=\"3\" id='R1C2'></td><td colspan=\"4\"  id='R1C6'></td></tr>\n    <tr bgcolor=\"lightgrey\" ><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td><td id='R2C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td><td id='R3C7'></td><td id='R3C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R4C1'></td><td id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td><td id='R4C5'></td><td id='R4C6'></td><td id='R4C7'></td><td id='R4C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R5C1'></td><td id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td><td id='R5C5'></td><td id='R5C6'></td><td id='R5C7'></td><td id='R5C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R6C1'></td><td id='R6C2'></td><td id='R6C3'></td><td id='R6C4'></td><td id='R6C5'></td><td id='R6C6'></td><td id='R6C7'></td><td id='R6C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R7C1'></td><td id='R7C2'></td><td id='R7C3'></td><td id='R7C4'></td><td id='R7C5'></td><td id='R7C6'></td><td id='R7C7'></td><td id='R7C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R8C1'></td><td id='R8C2'></td><td id='R8C3'></td><td id='R8C4'></td><td id='R8C5'></td><td id='R8C6'></td><td id='R8C7'></td><td id='R8C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R9C1'></td><td id='R9C2'></td><td id='R9C3'></td><td id='R9C4'></td><td id='R9C5'></td><td id='R9C6'></td><td id='R9C7'></td><td id='R9C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R10C1'></td><td id='R10C2'></td><td id='R10C3'></td><td id='R10C4'></td><td id='R10C5'></td><td id='R10C6'></td><td id='R10C7'></td><td id='R10C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R11C1'></td><td id='R11C2'></td><td id='R11C3'></td><td id='R11C4'></td><td id='R11C5'></td><td id='R11C6'></td><td id='R11C7'></td><td id='R11C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R12C1'></td><td id='R12C2'></td><td id='R12C3'></td><td id='R12C4'></td><td id='R12C5'></td><td id='R12C6'></td><td id='R12C7'></td><td id='R12C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R13C1'></td><td id='R13C2'></td><td id='R13C3'></td><td id='R13C4'></td><td id='R13C5'></td><td id='R13C6'></td><td id='R13C7'></td><td id='R13C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R14C1'></td><td id='R14C2'></td><td id='R14C3'></td><td id='R14C4'></td><td id='R14C5'></td><td id='R14C6'></td><td id='R14C7'></td><td id='R14C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R15C1'></td><td id='R15C2'></td><td id='R15C3'></td><td id='R15C4'></td><td id='R15C5'></td><td id='R15C6'></td><td id='R15C7'></td><td id='R15C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R16C1'></td><td id='R16C2'></td><td id='R16C3'></td><td id='R16C4'></td><td id='R16C5'></td><td id='R16C6'></td><td id='R16C7'></td><td id='R16C8'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R17C1'></td><td id='R17C2'></td><td id='R17C3'></td><td id='R17C4'></td><td id='R17C5'></td><td id='R17C6'></td><td id='R17C7'></td><td id='R17C8'></td></tr>\n  </tbody>\n</table>\n"
       }
      ],
      "controlType": "Panel",
@@ -19315,11 +19085,6 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "JuminFukaShokai",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "FukaRirekiAll",
      "panelState": "visible",
      "fixedDiv": "No"
@@ -19335,14 +19100,19 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KaigoFukaKihon",
+     "visibleDiv": "AtenaJoho",
      "panelState": "visible",
-     "fixedDiv": "No"
+     "fixedDiv": "Yes"
     },
     {
      "visibleDiv": "KaigoAtenaInfo",
      "panelState": "visible",
-     "fixedDiv": "Yes"
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KaigoFukaKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -19420,11 +19190,6 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "JuminFukaShokai",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "FukaRirekiAll",
      "panelState": "visible",
      "fixedDiv": "No"
@@ -19445,14 +19210,19 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KaigoFukaKihon",
+     "visibleDiv": "AtenaJoho",
      "panelState": "visible",
-     "fixedDiv": "No"
+     "fixedDiv": "Yes"
     },
     {
      "visibleDiv": "KaigoAtenaInfo",
      "panelState": "visible",
-     "fixedDiv": "Yes"
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KaigoFukaKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -19530,11 +19300,6 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "JuminFukaShokai",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "FukaShokaiGrandson",
      "panelState": "visible",
      "fixedDiv": "No"
@@ -19555,14 +19320,24 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KaigoFukaKihon",
+     "visibleDiv": "AtenaJoho",
      "panelState": "visible",
+     "fixedDiv": "Yes"
+    },
+    {
+     "visibleDiv": "FukakonkyoAndKiwari",
+     "panelState": "close",
      "fixedDiv": "No"
     },
     {
      "visibleDiv": "KaigoAtenaInfo",
      "panelState": "visible",
-     "fixedDiv": "Yes"
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KaigoFukaKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "supplementInfo": "",
@@ -19642,11 +19417,6 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "JuminFukaShokai",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "FukaShokaiGrandson",
      "panelState": "visible",
      "fixedDiv": "No"
@@ -19662,14 +19432,19 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KaigoFukaKihon",
+     "visibleDiv": "AtenaJoho",
      "panelState": "visible",
-     "fixedDiv": "No"
+     "fixedDiv": "Yes"
     },
     {
      "visibleDiv": "KaigoAtenaInfo",
      "panelState": "visible",
-     "fixedDiv": "Yes"
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KaigoFukaKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "supplementInfo": "",
@@ -19749,11 +19524,6 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "JuminFukaShokai",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "FukaShokaiGrandson",
      "panelState": "visible",
      "fixedDiv": "No"
@@ -19779,14 +19549,19 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KaigoFukaKihon",
+     "visibleDiv": "AtenaJoho",
      "panelState": "visible",
-     "fixedDiv": "No"
+     "fixedDiv": "Yes"
     },
     {
      "visibleDiv": "KaigoAtenaInfo",
      "panelState": "visible",
-     "fixedDiv": "Yes"
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KaigoFukaKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "supplementInfo": "",
@@ -19866,11 +19641,6 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "JuminFukaShokai",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "FukaShokaiGrandson",
      "panelState": "visible",
      "fixedDiv": "No"
@@ -19891,14 +19661,19 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KaigoFukaKihon",
+     "visibleDiv": "AtenaJoho",
      "panelState": "visible",
-     "fixedDiv": "No"
+     "fixedDiv": "Yes"
     },
     {
      "visibleDiv": "KaigoAtenaInfo",
      "panelState": "visible",
-     "fixedDiv": "Yes"
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KaigoFukaKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "supplementInfo": "",
@@ -20019,13 +19794,13 @@
    "demoMenu"
   ],
   [
-   "KaigoFukaKihon"
+   "AtenaJoho"
   ],
   [
    "KaigoAtenaInfo"
   ],
   [
-   "JuminFukaShokai"
+   "KaigoFukaKihon"
   ],
   [
    "TsuchishoSakuseiKobetsu"
@@ -20052,7 +19827,7 @@
  "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "btnResearch",
+   "commonButtonAreaId": "賦課照会",
    "buttonSetting": [
     {
      "buttonKind": "CommonButtonFree",
@@ -20083,6 +19858,41 @@
       "imageWidth": "",
       "imageHeight": "",
       "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnZenkairesultHyoji",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnZenkairesultHyoji",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "",
+      "text": "前回の検索結果を表示する",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
       "prefixText": "",
       "suffixText": ""
      }
@@ -20109,56 +19919,6 @@
     },
     {
      "state": "明細減免"
-    }
-   ],
-   "isFinishButtonOnTheRight": false
-  },
-  {
-   "commonButtonAreaId": "btnZenkaiResult",
-   "buttonSetting": [
-    {
-     "buttonKind": "CommonButtonFree",
-     "buttonProperty": {
-      "fieldName": "btnZenkaiResult",
-      "items": [],
-      "controlType": "CommonButtonFree",
-      "width": "S",
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnZenkaiResult",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "onClick": "",
-      "text": "前回検索結果",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "prefixText": "",
-      "suffixText": ""
-     }
-    }
-   ],
-   "states": [
-    {
-     "state": "demoMenu"
-    },
-    {
-     "state": "照会"
-    },
-    {
-     "state": "賦課履歴"
     }
    ],
    "isFinishButtonOnTheRight": false

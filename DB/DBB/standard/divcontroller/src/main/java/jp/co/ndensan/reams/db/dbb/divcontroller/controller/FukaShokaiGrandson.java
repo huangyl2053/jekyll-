@@ -91,6 +91,8 @@ public class FukaShokaiGrandson {
         div.getTxtChoteiNendo().setValue((RString)key.get(1));
         div.getTxtKoseiM().setValue((RString)key.get(2));
         div.getTxtKoseiYMD().setValue((RString)key.get(3));
+        
+        
     } 
 
 

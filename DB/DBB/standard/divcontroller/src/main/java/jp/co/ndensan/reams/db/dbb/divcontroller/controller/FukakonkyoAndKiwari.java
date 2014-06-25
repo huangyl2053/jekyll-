@@ -86,7 +86,7 @@ public class FukakonkyoAndKiwari {
 
         setFukaKonkyo(div, formatData);
 
-        setControl(div, formatData);
+        //setControl(div, formatData);
 
     }
 
@@ -110,6 +110,7 @@ public class FukakonkyoAndKiwari {
                     keyList.add(selectData.getTxtChoteiNendo());
                     keyList.add(fukaRirekiDiv.getTxtFukaNendoFukaRireki().getValue());
                     keyList.add(selectData.getTxtHokenryoDankai());
+                    keyList.add(selectData.getTxtRirekiNo());
                 }
 
                 break;
@@ -119,7 +120,7 @@ public class FukakonkyoAndKiwari {
                 keyList.add(clickedItem.getTxtChoteiNendo());
                 keyList.add(fukaRirekiDiv.getTxtFukaNendoFukaRireki().getValue());
                 keyList.add(clickedItem.getTxtHokenryoDankai());
-
+                keyList.add(clickedItem.getTxtRirekiNo());
                 break;
         }
 
@@ -149,18 +150,21 @@ public class FukakonkyoAndKiwari {
         RString key4 = (RString) keyList.get(3);
         // 状態
         RString key5;
-        if ((RString) keyList.get(3) == null) {
+        if (key4 == null) {
             key5 = new RString("仮");
         } else {
             key5 = new RString("本");
         }
+        // 賦課根拠No
+        RString key6 = (RString) keyList.get(4);
 
         for (int i = 0; i < (int) fukaKonkyo.size(); i++) {
             ControlGenerator cg = new ControlGenerator(fukaKonkyo.get(i));
             if (key1.contains(cg.getAsRString("通知書番号"))
                     & key2.contains(cg.getAsRString("調定年度"))
                     & key3.contains(cg.getAsRString("賦課年度"))
-                    & key5.contains(cg.getAsRString("状態"))) {
+                   // & key5.contains(cg.getAsRString("状態"))
+                    & key6.contains(cg.getAsRString("賦課根拠No"))) {
                 yamlDatalist.add(getYamlListFukaKonkyo(cg, key4));
                 yamlDatalist.add(getFuchoKibetsugaku(cg));
                 yamlDatalist.add(getFuchoNofugaku(cg));
@@ -169,6 +173,7 @@ public class FukakonkyoAndKiwari {
                 yamlDatalist.add(getYamlListKikan(cg));
                 yamlDatalist.add(getYamlListNengaku(cg));
                 yamlDatalist.add(getYamlListChoteiJiyu(cg));
+                break;
             }
         }
 
@@ -407,13 +412,16 @@ public class FukakonkyoAndKiwari {
         // 住所地特例
 
         RString key = (RString) formatData.get(8);
-        if (key != null) {
+        
+        if (!key.isEmpty()) {
             // 本人課税
             konkyoDiv.getLblHonninKazei().setDisplayNone(false);
             konkyoDiv.getLblZenHokenryoDankai().setDisplayNone(true);
             konkyoDiv.getLblHonninKazeiValue().setDisplayNone(false);
             konkyoDiv.getLblZenHokenryoDankaiValue().setDisplayNone(true);
             konkyoDiv.getLblHonninKazeiValue().setText((RString) formatData.get(9));
+            konkyoDiv.getLblNenkinShunyu().setDisplayNone(false);
+            konkyoDiv.getLblHokenryoDankai().setDisplayNone(false);
 
             // 世帯課税
             konkyoDiv.getLblSetaiKazei().setDisplayNone(false);
@@ -434,11 +442,13 @@ public class FukakonkyoAndKiwari {
             konkyoDiv.getLblHonninKazeiValue().setDisplayNone(true);
             konkyoDiv.getLblZenHokenryoDankaiValue().setDisplayNone(false);
             konkyoDiv.getLblZenHokenryoDankaiValue().setText((RString) formatData.get(9));
+            konkyoDiv.getLblNenkinShunyu().setDisplayNone(true);
+            konkyoDiv.getLblHokenryoDankai().setDisplayNone(true);
             // 世帯課税
             konkyoDiv.getLblSetaiKazei().setDisplayNone(true);
             konkyoDiv.getLblZenHokenryoritsu().setDisplayNone(false);
             konkyoDiv.getLblSetaiKazeiValue().setDisplayNone(true);
-            konkyoDiv.getLblZenHokenryoritsu().setDisplayNone(false);
+            konkyoDiv.getLblZenHokenryoritsuValue().setDisplayNone(false);
             konkyoDiv.getLblZenHokenryoritsuValue().setText((RString) formatData.get(10));
             // 合計所得
             konkyoDiv.getLblShotokuSum().setDisplayNone(true);
@@ -516,6 +526,16 @@ public class FukakonkyoAndKiwari {
         tblKikan.getLblHokenryoritsu1().setText((RString) formatData.get(3));
         tblKikan.getLblHokenryoSansyutsu1().setText((RString) formatData.get(4));
         tblKikan.getLblHokenryo1().setText((RString) formatData.get(5));
+        
+        if(formatData.get(1).toString().isEmpty() 
+           && formatData.get(2).toString().isEmpty()
+           && formatData.get(3).toString().isEmpty()
+           && formatData.get(4).toString().isEmpty()
+           && formatData.get(5).toString().isEmpty()){
+            tblKikan.setDisplayNone(true);
+        } else {
+            tblKikan.setDisplayNone(false);
+        }
     }
 
     private void setNengaku(FukakonkyoNengakuDiv fukakonkyoNengaku, List formatData) {
@@ -532,6 +552,14 @@ public class FukakonkyoAndKiwari {
         }
         if (確定年間保険料.length() > 0) {
             fukakonkyoNengaku.getTxtNenkanHokenryo().setValue(new Decimal(formatData.get(2).toString()));
+        }
+        
+        if(計算上年間保険料.length() > 0){
+            fukakonkyoNengaku.getTxtKeisanjoNenkanHokenryo().setDisplayNone(false);
+            fukakonkyoNengaku.getTxtNenkanHokenryo().setLabelLText(new RString(("確定年間保険料額")));
+        } else {
+            fukakonkyoNengaku.getTxtKeisanjoNenkanHokenryo().setDisplayNone(true);
+            fukakonkyoNengaku.getTxtNenkanHokenryo().setLabelLText(new RString(("暫定年間保険料額")));
         }
     }
 
@@ -550,8 +578,8 @@ public class FukakonkyoAndKiwari {
     private void setControlFukakonkyo(tblFukaKonkyoDiv tFukaKonkyo, List formatData) {
         RString 計算上年間保険料 = (RString) formatData.get(0);
         // RString 減免額 = (RString) formatData.get(1);
-        RString 確定年間保険料 = (RString) formatData.get(2);
-        if(計算上年間保険料.equals(確定年間保険料)){
+        // RString 確定年間保険料 = (RString) formatData.get(2);
+        if(計算上年間保険料.isEmpty()){
             tFukaKonkyo.getTblFukakonkyoMeisai().getLblHonninKazei().setVisible(false);
             tFukaKonkyo.getTblFukakonkyoMeisai().getLblSetaiKazei().setVisible(false);
             tFukaKonkyo.getTblFukakonkyoMeisai().getLblShotokuSum().setVisible(false);

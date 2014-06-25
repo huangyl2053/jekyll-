@@ -123,7 +123,8 @@ public class FukaRireki {
         row.setTxtHokenryoGaku((RString)dataGrid.get(7));
         row.setTxtTokubetsuChoshu((RString)dataGrid.get(8));
         row.setTxtFutsuChoshu((RString)dataGrid.get(9));
-//        row.setTxtShikibetsuCode((RString)dataGrid.get(11));
+        row.setTxtRirekiNo((RString)dataGrid.get(10));
+        row.setTxtShikibetsuCode((RString)dataGrid.get(11));
         
         return row;
     }
