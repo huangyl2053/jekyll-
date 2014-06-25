@@ -25,22 +25,22 @@ public class NinteiShinseiGyomuShokaiDiv extends Panel {
     private TextBox txtHokensha;
     @JsonProperty("txtHokenshaMeisho")
     private TextBox txtHokenshaMeisho;
-    @JsonProperty("lblNinteiSHinseiYmd")
-    private Label lblNinteiSHinseiYmd;
-    @JsonProperty("txtNinteiShinseiYmdSt")
-    private TextBoxDate txtNinteiShinseiYmdSt;
-    @JsonProperty("lblKara")
-    private Label lblKara;
-    @JsonProperty("txtNinteiShinseiYmdEd")
-    private TextBoxDate txtNinteiShinseiYmdEd;
     @JsonProperty("lblChohyoShiji")
     private Label lblChohyoShiji;
-    @JsonProperty("radNinteiShinseiMonitor")
-    private RadioButton radNinteiShinseiMonitor;
-    @JsonProperty("radShinseishaIchiran")
-    private RadioButton radShinseishaIchiran;
-    @JsonProperty("radShinseiKyakka")
-    private RadioButton radShinseiKyakka;
+    @JsonProperty("chkNinteiShinseiMonitor")
+    private CheckBoxList chkNinteiShinseiMonitor;
+    @JsonProperty("txtKoshinbiRange")
+    private TextBoxDateRange txtKoshinbiRange;
+    @JsonProperty("chkShinseishaIchiran")
+    private CheckBoxList chkShinseishaIchiran;
+    @JsonProperty("txtShinseibiRange")
+    private TextBoxDateRange txtShinseibiRange;
+    @JsonProperty("chkShinseiKyakka")
+    private CheckBoxList chkShinseiKyakka;
+    @JsonProperty("txtKyakkabiRange")
+    private TextBoxDateRange txtKyakkabiRange;
+    @JsonProperty("lblDummy")
+    private Label lblDummy;
     @JsonProperty("btnChohyoOutput")
     private Button btnChohyoOutput;
     @JsonProperty("btnCancel")
@@ -72,46 +72,6 @@ public class NinteiShinseiGyomuShokaiDiv extends Panel {
         this.txtHokenshaMeisho=txtHokenshaMeisho;
     }
 
-    @JsonProperty("lblNinteiSHinseiYmd")
-    public Label getLblNinteiSHinseiYmd() {
-        return lblNinteiSHinseiYmd;
-    }
-
-    @JsonProperty("lblNinteiSHinseiYmd")
-    public void setLblNinteiSHinseiYmd(Label lblNinteiSHinseiYmd) {
-        this.lblNinteiSHinseiYmd=lblNinteiSHinseiYmd;
-    }
-
-    @JsonProperty("txtNinteiShinseiYmdSt")
-    public TextBoxDate getTxtNinteiShinseiYmdSt() {
-        return txtNinteiShinseiYmdSt;
-    }
-
-    @JsonProperty("txtNinteiShinseiYmdSt")
-    public void setTxtNinteiShinseiYmdSt(TextBoxDate txtNinteiShinseiYmdSt) {
-        this.txtNinteiShinseiYmdSt=txtNinteiShinseiYmdSt;
-    }
-
-    @JsonProperty("lblKara")
-    public Label getLblKara() {
-        return lblKara;
-    }
-
-    @JsonProperty("lblKara")
-    public void setLblKara(Label lblKara) {
-        this.lblKara=lblKara;
-    }
-
-    @JsonProperty("txtNinteiShinseiYmdEd")
-    public TextBoxDate getTxtNinteiShinseiYmdEd() {
-        return txtNinteiShinseiYmdEd;
-    }
-
-    @JsonProperty("txtNinteiShinseiYmdEd")
-    public void setTxtNinteiShinseiYmdEd(TextBoxDate txtNinteiShinseiYmdEd) {
-        this.txtNinteiShinseiYmdEd=txtNinteiShinseiYmdEd;
-    }
-
     @JsonProperty("lblChohyoShiji")
     public Label getLblChohyoShiji() {
         return lblChohyoShiji;
@@ -122,34 +82,74 @@ public class NinteiShinseiGyomuShokaiDiv extends Panel {
         this.lblChohyoShiji=lblChohyoShiji;
     }
 
-    @JsonProperty("radNinteiShinseiMonitor")
-    public RadioButton getRadNinteiShinseiMonitor() {
-        return radNinteiShinseiMonitor;
+    @JsonProperty("chkNinteiShinseiMonitor")
+    public CheckBoxList getChkNinteiShinseiMonitor() {
+        return chkNinteiShinseiMonitor;
     }
 
-    @JsonProperty("radNinteiShinseiMonitor")
-    public void setRadNinteiShinseiMonitor(RadioButton radNinteiShinseiMonitor) {
-        this.radNinteiShinseiMonitor=radNinteiShinseiMonitor;
+    @JsonProperty("chkNinteiShinseiMonitor")
+    public void setChkNinteiShinseiMonitor(CheckBoxList chkNinteiShinseiMonitor) {
+        this.chkNinteiShinseiMonitor=chkNinteiShinseiMonitor;
     }
 
-    @JsonProperty("radShinseishaIchiran")
-    public RadioButton getRadShinseishaIchiran() {
-        return radShinseishaIchiran;
+    @JsonProperty("txtKoshinbiRange")
+    public TextBoxDateRange getTxtKoshinbiRange() {
+        return txtKoshinbiRange;
     }
 
-    @JsonProperty("radShinseishaIchiran")
-    public void setRadShinseishaIchiran(RadioButton radShinseishaIchiran) {
-        this.radShinseishaIchiran=radShinseishaIchiran;
+    @JsonProperty("txtKoshinbiRange")
+    public void setTxtKoshinbiRange(TextBoxDateRange txtKoshinbiRange) {
+        this.txtKoshinbiRange=txtKoshinbiRange;
     }
 
-    @JsonProperty("radShinseiKyakka")
-    public RadioButton getRadShinseiKyakka() {
-        return radShinseiKyakka;
+    @JsonProperty("chkShinseishaIchiran")
+    public CheckBoxList getChkShinseishaIchiran() {
+        return chkShinseishaIchiran;
     }
 
-    @JsonProperty("radShinseiKyakka")
-    public void setRadShinseiKyakka(RadioButton radShinseiKyakka) {
-        this.radShinseiKyakka=radShinseiKyakka;
+    @JsonProperty("chkShinseishaIchiran")
+    public void setChkShinseishaIchiran(CheckBoxList chkShinseishaIchiran) {
+        this.chkShinseishaIchiran=chkShinseishaIchiran;
+    }
+
+    @JsonProperty("txtShinseibiRange")
+    public TextBoxDateRange getTxtShinseibiRange() {
+        return txtShinseibiRange;
+    }
+
+    @JsonProperty("txtShinseibiRange")
+    public void setTxtShinseibiRange(TextBoxDateRange txtShinseibiRange) {
+        this.txtShinseibiRange=txtShinseibiRange;
+    }
+
+    @JsonProperty("chkShinseiKyakka")
+    public CheckBoxList getChkShinseiKyakka() {
+        return chkShinseiKyakka;
+    }
+
+    @JsonProperty("chkShinseiKyakka")
+    public void setChkShinseiKyakka(CheckBoxList chkShinseiKyakka) {
+        this.chkShinseiKyakka=chkShinseiKyakka;
+    }
+
+    @JsonProperty("txtKyakkabiRange")
+    public TextBoxDateRange getTxtKyakkabiRange() {
+        return txtKyakkabiRange;
+    }
+
+    @JsonProperty("txtKyakkabiRange")
+    public void setTxtKyakkabiRange(TextBoxDateRange txtKyakkabiRange) {
+        this.txtKyakkabiRange=txtKyakkabiRange;
+    }
+
+    @JsonProperty("lblDummy")
+    public Label getLblDummy() {
+        return lblDummy;
+    }
+
+    @JsonProperty("lblDummy")
+    public void setLblDummy(Label lblDummy) {
+        this.lblDummy=lblDummy;
     }
 
     @JsonProperty("btnChohyoOutput")

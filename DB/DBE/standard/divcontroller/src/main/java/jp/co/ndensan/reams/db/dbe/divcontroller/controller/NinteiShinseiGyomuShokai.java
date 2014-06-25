@@ -37,8 +37,54 @@ public class NinteiShinseiGyomuShokai {
         div.getTxtHokensha().setValue(ymlData.getAsRString("保険者番号"));
         div.getTxtHokenshaMeisho().setValue(ymlData.getAsRString("保険者名称"));
 
-        div.getTxtNinteiShinseiYmdSt().setValue(RDate.getNowDate());
-        div.getTxtNinteiShinseiYmdEd().setValue(RDate.getNowDate());
+        div.getTxtKyakkabiRange().setDisabled(true);
+        div.getTxtShinseibiRange().setDisabled(true);
+        div.getTxtKoshinbiRange().setDisabled(true);
+
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 認定申請モニタリストチェックボックスの処理を表します。
+     *
+     * @param div 認定申請情報照会Div
+     * @return ResponseData
+     */
+    public ResponseData onClick_chkNinteiShinseiMonitor(NinteiShinseiGyomuShokaiDiv div) {
+        ResponseData<NinteiShinseiGyomuShokaiDiv> response = new ResponseData<>();
+
+        if (div.getChkNinteiShinseiMonitor().getSelectedItems().get(0).getKey().equalsIgnoreCase("1")) {
+            div.getTxtKoshinbiRange().setDisabled(false);
+        } else {
+            div.getTxtKoshinbiRange().setDisabled(true);
+        }
+
+        response.data = div;
+        return response;
+    }
+
+    public ResponseData onClick_chkShinseishaIchiran(NinteiShinseiGyomuShokaiDiv div) {
+        ResponseData<NinteiShinseiGyomuShokaiDiv> response = new ResponseData<>();
+
+        if (div.getChkShinseishaIchiran().getSelectedItems().get(0).getKey().equalsIgnoreCase("1")) {
+            div.getTxtShinseibiRange().setDisabled(false);
+        } else {
+            div.getTxtShinseibiRange().setDisabled(true);
+        }
+
+        response.data = div;
+        return response;
+    }
+
+    public ResponseData onClick_chkShinseiKyakka(NinteiShinseiGyomuShokaiDiv div) {
+        ResponseData<NinteiShinseiGyomuShokaiDiv> response = new ResponseData<>();
+
+        if (div.getChkShinseiKyakka().getSelectedItems().get(0).getKey().equalsIgnoreCase("1")) {
+            div.getTxtKyakkabiRange().setDisabled(false);
+        } else {
+            div.getTxtKyakkabiRange().setDisabled(true);
+        }
 
         response.data = div;
         return response;
