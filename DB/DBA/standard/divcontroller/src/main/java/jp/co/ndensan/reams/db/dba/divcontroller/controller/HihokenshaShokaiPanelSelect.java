@@ -433,8 +433,9 @@ public class HihokenshaShokaiPanelSelect {
     }
 
     private dgShoKaishuJokyo_Row createShoKofuData(ControlGenerator generator) {
-        dgShoKaishuJokyo_Row row = new dgShoKaishuJokyo_Row(new Button(), RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate());
+        dgShoKaishuJokyo_Row row = new dgShoKaishuJokyo_Row(new Button(), RString.EMPTY, new TextBoxFlexibleDate(),
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                RString.EMPTY, new TextBoxFlexibleDate());
 
         row.setKofushoShurui(generator.getAsRString("証交付種類"));
         row.getKofuDate().setValue(generator.getAsFlexibleDate("交付日"));

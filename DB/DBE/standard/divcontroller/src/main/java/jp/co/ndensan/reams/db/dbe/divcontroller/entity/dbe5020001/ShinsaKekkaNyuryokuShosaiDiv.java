@@ -6,8 +6,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.NinteiChosaKekkaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.ShinsaTaishoshaShosaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.tabChosaKekkaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.tblSaiIchijiHanteiKekkaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.tblShinsaTaishoshaShosaiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -24,8 +25,10 @@ public class ShinsaKekkaNyuryokuShosaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ShinsaTaishoshaShosai")
-    private ShinsaTaishoshaShosaiDiv ShinsaTaishoshaShosai;
+    @JsonProperty("tblShinsaTaishoshaShosai")
+    private tblShinsaTaishoshaShosaiDiv tblShinsaTaishoshaShosai;
+    @JsonProperty("tblSaiIchijiHanteiKekka")
+    private tblSaiIchijiHanteiKekkaDiv tblSaiIchijiHanteiKekka;
     @JsonProperty("btnBackIchiran")
     private Button btnBackIchiran;
     @JsonProperty("NinteiChosaKekka")
@@ -39,14 +42,24 @@ public class ShinsaKekkaNyuryokuShosaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ShinsaTaishoshaShosai")
-    public ShinsaTaishoshaShosaiDiv getShinsaTaishoshaShosai() {
-        return ShinsaTaishoshaShosai;
+    @JsonProperty("tblShinsaTaishoshaShosai")
+    public tblShinsaTaishoshaShosaiDiv getTblShinsaTaishoshaShosai() {
+        return tblShinsaTaishoshaShosai;
     }
 
-    @JsonProperty("ShinsaTaishoshaShosai")
-    public void setShinsaTaishoshaShosai(ShinsaTaishoshaShosaiDiv ShinsaTaishoshaShosai) {
-        this.ShinsaTaishoshaShosai=ShinsaTaishoshaShosai;
+    @JsonProperty("tblShinsaTaishoshaShosai")
+    public void setTblShinsaTaishoshaShosai(tblShinsaTaishoshaShosaiDiv tblShinsaTaishoshaShosai) {
+        this.tblShinsaTaishoshaShosai=tblShinsaTaishoshaShosai;
+    }
+
+    @JsonProperty("tblSaiIchijiHanteiKekka")
+    public tblSaiIchijiHanteiKekkaDiv getTblSaiIchijiHanteiKekka() {
+        return tblSaiIchijiHanteiKekka;
+    }
+
+    @JsonProperty("tblSaiIchijiHanteiKekka")
+    public void setTblSaiIchijiHanteiKekka(tblSaiIchijiHanteiKekkaDiv tblSaiIchijiHanteiKekka) {
+        this.tblSaiIchijiHanteiKekka=tblSaiIchijiHanteiKekka;
     }
 
     @JsonProperty("btnBackIchiran")

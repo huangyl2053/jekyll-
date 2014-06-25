@@ -1,0 +1,24 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "0",
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0310001",
+   "eventName": "showUchiwakeHohoKakunin",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0310003",
+   "toEventName": "onLoadTest"
+  },
+  {
+   "id": 1,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0310003",
+   "eventName": "close",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0310001",
+   "toEventName": ""
+  }
+ ],
+ "subGyomuCode": "DBB",
+ "uiContainerName": "DBBUC03100"
+}

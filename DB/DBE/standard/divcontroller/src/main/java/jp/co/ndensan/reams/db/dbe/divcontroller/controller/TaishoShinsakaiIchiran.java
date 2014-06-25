@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030001.dgShinsakaiIch
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -60,6 +59,12 @@ public class TaishoShinsakaiIchiran {
         return response;
     }
 
+    /**
+     * 審査会審査結果入力対象の審査会一覧画面の再ロードした時の内容設定を行います。
+     *
+     * @param div 対象審査会一覧Div
+     * @return ResponseData
+     */
     public ResponseData reLoadData(TaishoShinsakaiIchiranDiv div) {
         ResponseData<TaishoShinsakaiIchiranDiv> response = new ResponseData<>();
 

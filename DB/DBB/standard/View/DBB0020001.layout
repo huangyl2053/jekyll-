@@ -1,0 +1,589 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "IdoTaishoshaIchiran",
+   "items": [
+    {
+     "fieldName": "txtLastKeisanYMD",
+     "items": [],
+     "controlType": "TextBox",
+     "width": "160",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "txtLastKeisanYMD_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "required": false,
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "placeHolder": "平26.06.05 18:05:20",
+     "textKind": 0,
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "text": "",
+     "suggest": [],
+     "value": "",
+     "labelLText": "最終計算処理日時",
+     "labelRText": "",
+     "labelLWidth": "130",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "decorationClass": ""
+    },
+    {
+     "fieldName": "ddlTsuchishoMeisho",
+     "items": [],
+     "controlType": "DropDownList",
+     "width": "300",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "ddlTsuchishoMeisho_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "onChange_TsuchishoChange",
+     "labelLText": "通知書名称",
+     "labelRText": "",
+     "labelLWidth": "130",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "selectedItem": "key0",
+     "dataSource": [
+      {
+       "key": "key0",
+       "value": "特別徴収開始通知書"
+      },
+      {
+       "key": "key1",
+       "value": "納入通知書"
+      },
+      {
+       "key": "key2",
+       "value": "決定・変更通知書"
+      }
+     ]
+    },
+    {
+     "fieldName": "ddlSakuseiYMD",
+     "items": [],
+     "controlType": "DropDownList",
+     "width": "180",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "ddlSakuseiYMD_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "labelLText": "作成日時",
+     "labelRText": "",
+     "labelLWidth": "95",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "selectedItem": "key0",
+     "dataSource": [
+      {
+       "key": "key0",
+       "value": "平26.06.25 11:35:16"
+      }
+     ]
+    },
+    {
+     "fieldName": "dgIdoTaishoshaIchiran",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "1050",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "dgIdoTaishoshaIchiran",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "height": "Auto",
+     "dataSource": [],
+     "gridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": false,
+      "isShowHeader": true,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "",
+       "headerHeight": 0
+      },
+      "columns": [
+       {
+        "columnName": "該当連番",
+        "dataName": "txtGaitoRenban",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 70,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "被保番号",
+        "dataName": "txtHihoNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "識別コード",
+        "dataName": "txtShikibetsuCode",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 130,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "通知書番号",
+        "dataName": "txtTsuchishoNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 130,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "氏名",
+        "dataName": "txtShimei",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 250,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "異動日",
+        "dataName": "txtIdoYMD",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "異動事由",
+        "dataName": "txtIdoZiyu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 140,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "次の作業",
+        "dataName": "ddlNextSagyo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": true,
+        "cellType": 3,
+        "cellDetails": {
+         "cellType": 3,
+         "selectedItem": "key0",
+         "dataSource": [
+          {
+           "key": "key0",
+           "value": "なし"
+          },
+          {
+           "key": "key1",
+           "value": "再発行"
+          },
+          {
+           "key": "key2",
+           "value": "再計算→再発行"
+          }
+         ]
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       }
+      ]
+     },
+     "onSort": "",
+     "onSelect": "onClick_SentakuTaishoLord",
+     "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "sortOrder": "",
+     "isAscending": true,
+     "filterList": [],
+     "activeRowId": -1
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "IdoTaishoshaIchiran",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "通知書発行後異動対象者一覧",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "IdoTaishoshaIchiran"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbb/db/dbb/IdoTaishoshaIchiran/getOnLoadData"
+    },
+    {
+     "eventName": "onChange_TsuchishoChange",
+     "requestUrl": "dbb/db/dbb/IdoTaishoshaIchiran/getOnLoadData"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "XS",
+   "marginBottom": "XS",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton"
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "通知書発行後異動把握",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "異動把握-初期表示-",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "IdoTaishoshaIchiran",
+     "panelState": "visible",
+     "fixedDiv": ""
+    }
+   ],
+   "supplementInfoPostParamData": "[]",
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "dgIdoTaishoshaIchiran",
+     "event": "onSelect",
+     "transition": "異動把握-異動者選択後-"
+    },
+    {
+     "fieldName": "btnTest",
+     "event": "onClick",
+     "transition": "異動把握-異動者選択後-"
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "異動把握-異動者選択後-",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "IdoTaishoshaIchiran",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "JuminPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "NushiJuminJoho",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KaigoJuminJoho",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "SaihakkoPanel_IdoHaaku",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "dgIdoTaishoshaIchiran",
+     "event": "onSelect",
+     "transition": "異動把握-異動者選択後-"
+    },
+    {
+     "fieldName": "btnTest",
+     "event": "onClick",
+     "transition": "異動把握-異動者選択後-"
+    }
+   ]
+  }
+ ],
+ "currentState": "All",
+ "id": "DBB0020001",
+ "WFParameter": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "",
+   "eventName": ""
+  }
+ ],
+ "loadSequencePanelNames": [
+  [
+   "IdoTaishoshaIchiran"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "pattern1",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonReportPublish",
+     "buttonProperty": {
+      "fieldName": "btnHakko",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnHakko",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "postParameterPanelNames": [],
+      "text": "完了",
+      "validateUrl": "",
+      "sourceCreateUrl": "",
+      "afterPrintUrl": "",
+      "isModal": true,
+      "isInstruction": true,
+      "isPreview": false,
+      "printable": false,
+      "copiesChangeable": false,
+      "progressVisible": false,
+      "additionalText": "一覧表"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonConfirm",
+     "buttonProperty": {
+      "fieldName": "btnKakutei",
+      "items": [],
+      "controlType": "CommonButtonConfirm",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnKakutei",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "確認",
+      "additionalText": "",
+      "onClick": "onClick_btnKakutei",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "異動把握-初期表示-"
+    },
+    {
+     "state": "異動把握-異動者選択後-"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
+}

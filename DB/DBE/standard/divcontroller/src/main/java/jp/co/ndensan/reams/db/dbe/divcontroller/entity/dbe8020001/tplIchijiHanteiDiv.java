@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ichijiHanteiKekkaInfo.IchijiHanteiKekkaInfoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ichijiHanteiKekkaInfo.IchijiHanteiKekkaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
