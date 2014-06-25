@@ -39,6 +39,14 @@ public class HeijunkaKakutei {
         panel.getHeijunkaKakuteiShoriNaiyo().getTxtFukaNendo().setValue(cg.getAsRString("賦課年度"));
         panel.getHeijunkaKakuteiShoriNaiyo().getTxtShoriNichiji().setValue(cg.getAsRString("処理日時"));
 
+        panel.getHeijunkaSagakuKakunin().getTxtSagaku().setValue(SAGAKU_1000);
+
+        TextBoxNum sagaku = panel.getHeijunkaSagakuKakunin().getTxtSagaku();
+
+        List<dgHeijunkaKakutei_Row> arrayData = createSagakuData(sagaku);
+        DataGrid<dgHeijunkaKakutei_Row> grid = panel.getHeijunkaSagakuKakunin().getDgHeijunkaKakutei();
+        grid.setDataSource(arrayData);
+
         ResponseData<HeijunkaKakuteiDiv> response = new ResponseData<>();
         response.data = panel;
         return response;
