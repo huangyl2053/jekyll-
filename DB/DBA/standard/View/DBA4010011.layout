@@ -32,7 +32,12 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClick_BtnToSearch": "onClick_BtnToSearch"
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "onClick_BtnToSearch": "onClick_BtnToSearch",
+     "displayNone_txtTsuchishoNo": false,
+     "displayNone_ddlFukaNendo": false,
+     "displayNone_SearchCriteriaDetail": false
     },
     {
      "fieldName": "SearchResult",
@@ -62,7 +67,9 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClickBtnToResearch": "onClickBtnToResearch"
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "onClick_btnToResearch": ""
     }
    ],
    "controlType": "Panel",
@@ -111,16 +118,17 @@
    "session": {},
    "marginTop": "S",
    "marginBottom": "XS",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "HihokenshaShikaiTaishoshaJoho",
@@ -153,6 +161,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
      "atenaInfo_eraseBorderTop": true,
@@ -210,7 +220,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "-0.1",
+     "marginLeft": "0",
      "marginRight": "0",
      "selectControlID": "HihokenshaShokaiDbJoho",
      "helpMessageID": "",
@@ -220,15 +230,17 @@
      "canOpenAndClose": false,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": false,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
      "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "backGroundColor": 0,
      "btnHihoRireki_visible": false,
      "btnNinteiRireki_visible": true
@@ -279,16 +291,17 @@
    "session": {},
    "marginTop": "S",
    "marginBottom": "S",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "HihokenshaShokaiPanelSelect",
@@ -319,7 +332,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnSetaiShokai",
@@ -347,7 +361,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnIryoHoken",
@@ -375,7 +390,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnSeikatsuHogo",
@@ -403,7 +419,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnRofukuNenkin",
@@ -431,7 +448,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnShisetsuNyutaisho",
@@ -459,7 +477,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnShoKofu",
@@ -487,7 +506,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnShinseiTodokede",
@@ -515,7 +535,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "HihokenshaShokaiShikakuTokuso",
@@ -548,15 +569,17 @@
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
        "onSelectByDblClick": "",
        "onSelectByModifyButton": "onSelectByModifyButton_dgShikakuShutokuRireki",
        "onSelectByDeleteButton": "onSelectByDeleteButton_dgShikakuShutokuRireki",
-       "panel_width": "1100",
-       "grid_width": "1090"
+       "panel_width": "1085",
+       "grid_width": "1080"
       }
      ],
      "controlType": "Panel",
-     "width": "G12",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -567,7 +590,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "HihokenshaShokaiShikakuTokuso",
      "helpMessageID": "",
@@ -596,16 +619,17 @@
      "session": {},
      "marginTop": "XS",
      "marginBottom": "S",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "HihokenshaShokaiSetaiShokai",
@@ -630,6 +654,7 @@
        "selectControlID": "dgSetaiJoho",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "S",
        "dataSource": [],
        "gridSetting": {
@@ -817,7 +842,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "G12",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -828,7 +853,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "Default",
+     "marginLeft": "XS",
      "marginRight": "Default",
      "selectControlID": "HihokenshaShokaiSetaiShokai",
      "helpMessageID": "",
@@ -857,16 +882,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "HihokenshaShokaiSeikatsuHogo",
@@ -891,6 +917,7 @@
        "selectControlID": "dgSeikatsuHogoRireki",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "S",
        "dataSource": [],
        "gridSetting": {
@@ -1002,7 +1029,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "G12",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1013,7 +1040,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "Default",
+     "marginLeft": "XS",
      "marginRight": "Default",
      "selectControlID": "HihokenshaShokaiSeikatsuHogo",
      "helpMessageID": "",
@@ -1042,16 +1069,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "HihokenshaShokaiRofukuNenkin",
@@ -1076,6 +1104,7 @@
        "selectControlID": "dgRoreiFukushiRireki",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "S",
        "dataSource": [],
        "gridSetting": {
@@ -1171,7 +1200,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "G12",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1182,7 +1211,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "Default",
+     "marginLeft": "XS",
      "marginRight": "Default",
      "selectControlID": "HihokenshaShokaiRofukuNenkin",
      "helpMessageID": "",
@@ -1211,16 +1240,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "HihokenshaShokaiIryoHoken",
@@ -1266,6 +1296,8 @@
        ],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
        "onSelectByModifyButton": "onSelectByModifyButton_dgIryoHokenRireki",
        "onSelectByDeleteButton": "onSelectByDeleteButton_dgIryoHokenRireki",
        "panel_width": "1030",
@@ -1273,7 +1305,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "G12",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1284,7 +1316,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "Default",
+     "marginLeft": "XS",
      "marginRight": "Default",
      "selectControlID": "HihokenshaShokaiIryoHoken",
      "helpMessageID": "",
@@ -1313,16 +1345,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "HihokenshaShokaiShisetsuNyutaisho",
@@ -1354,11 +1387,13 @@
        "controlName": "ShisetsuNyutaishoRirekiKanri",
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
-       "dialogCancelEventNameForDialog": ""
+       "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M"
       }
      ],
      "controlType": "Panel",
-     "width": "G12",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1369,7 +1404,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "Default",
+     "marginLeft": "XS",
      "marginRight": "Default",
      "selectControlID": "HihokenshaShokaiShisetsuNyutaisho",
      "helpMessageID": "",
@@ -1398,16 +1433,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "HihokenshaShokaiShoKofuKaishu",
@@ -1427,7 +1463,7 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
+       "marginLeft": "XS",
        "marginRight": "0",
        "selectControlID": "ShoKofuKaishuKiroku",
        "helpMessageID": "",
@@ -1439,11 +1475,16 @@
        "controlName": "ShoKaishuKirokuKanri",
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
-       "dialogCancelEventNameForDialog": ""
+       "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
+       "onBlur_txtKaishuDate": "",
+       "onChange_ddlKaishuJiyu": "",
+       "onBlur_txtKaishuRiyu": ""
       }
      ],
      "controlType": "Panel",
-     "width": "G12",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1454,7 +1495,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "Default",
+     "marginLeft": "XS",
      "marginRight": "Default",
      "selectControlID": "HihokenshaShokaiShoKofuKaishu",
      "helpMessageID": "",
@@ -1483,16 +1524,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "HihokenshaShokaiShinseiTodokede",
@@ -1501,7 +1543,7 @@
        "fieldName": "dgShinseishoTodokede",
        "items": [],
        "controlType": "DataGrid",
-       "width": "1090",
+       "width": "1080",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1517,6 +1559,7 @@
        "selectControlID": "dgShinseishoTodokede",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "S",
        "dataSource": [],
        "gridSetting": {
@@ -1767,7 +1810,7 @@
           "dataName": "telNo",
           "toolTip": "",
           "bgColor": 0,
-          "width": 120,
+          "width": 110,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -1794,7 +1837,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "G12",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1805,7 +1848,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "HihokenshaShokaiShinseiTodokede",
      "helpMessageID": "",
@@ -1834,16 +1877,17 @@
      "session": {},
      "marginTop": "XS",
      "marginBottom": "XS",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     }
    ],
    "controlType": "Panel",
@@ -1891,16 +1935,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true
   }
  ],
  "controlType": null,
@@ -1927,7 +1972,7 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "検索条件入力",
+   "stateName": "対象者検索",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -2020,7 +2065,7 @@
   {
    "order": "2",
    "stateName": "該当者一覧",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "HihokenshaShokaiTaishoSearch",
@@ -2055,7 +2100,7 @@
     {
      "fieldName": "SearchResult_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
      "event": "onClick",
-     "transition": "検索条件入力"
+     "transition": "対象者検索"
     },
     {
      "fieldName": "btnShikakuTokuso",
@@ -2157,7 +2202,7 @@
     {
      "fieldName": "SearchResult_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
      "event": "onClick",
-     "transition": "被保険者照会"
+     "transition": ""
     },
     {
      "fieldName": "SearchResult_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
@@ -2207,7 +2252,7 @@
     {
      "fieldName": "Research",
      "event": "onClick",
-     "transition": "検索条件入力"
+     "transition": "対象者検索"
     },
     {
      "fieldName": "GaitoshaList",
@@ -2314,7 +2359,7 @@
     {
      "fieldName": "Research",
      "event": "onClick",
-     "transition": "検索条件入力"
+     "transition": "対象者検索"
     },
     {
      "fieldName": "GaitoshaList",
@@ -2416,7 +2461,7 @@
     {
      "fieldName": "Research",
      "event": "onClick",
-     "transition": "検索条件入力"
+     "transition": "対象者検索"
     },
     {
      "fieldName": "GaitoshaList",
@@ -2518,7 +2563,7 @@
     {
      "fieldName": "Research",
      "event": "onClick",
-     "transition": "検索条件入力"
+     "transition": "対象者検索"
     },
     {
      "fieldName": "GaitoshaList",
@@ -2620,7 +2665,7 @@
     {
      "fieldName": "Research",
      "event": "onClick",
-     "transition": "検索条件入力"
+     "transition": "対象者検索"
     },
     {
      "fieldName": "GaitoshaList",
@@ -2727,7 +2772,7 @@
     {
      "fieldName": "Research",
      "event": "onClick",
-     "transition": "検索条件入力"
+     "transition": "対象者検索"
     },
     {
      "fieldName": "GaitoshaList",
@@ -2834,7 +2879,7 @@
     {
      "fieldName": "Research",
      "event": "onClick",
-     "transition": "検索条件入力"
+     "transition": "対象者検索"
     },
     {
      "fieldName": "GaitoshaList",
@@ -2936,7 +2981,7 @@
     {
      "fieldName": "Research",
      "event": "onClick",
-     "transition": "検索条件入力"
+     "transition": "対象者検索"
     },
     {
      "fieldName": "GaitoshaList",
@@ -2992,6 +3037,7 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "HihokenshaShokaiResearch",

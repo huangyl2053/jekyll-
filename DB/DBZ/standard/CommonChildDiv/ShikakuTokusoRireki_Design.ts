@@ -136,7 +136,7 @@ module DBZ {
      "fieldName": "dgShikakuShutokuRireki",
      "items": [],
      "controlType": "DataGrid",
-     "width": "1090",
+     "width": "1085",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -152,6 +152,7 @@ module DBZ {
      "selectControlID": "dgShikakuShutokuRireki",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "height": "S",
      "gridSetting": {
       "rowHeight": 25,
@@ -741,7 +742,7 @@ module DBZ {
     }
    ],
    "controlType": "Panel",
-   "width": "1100",
+   "width": "1090",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -791,10 +792,7 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -859,7 +857,9 @@ module DBZ {
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }

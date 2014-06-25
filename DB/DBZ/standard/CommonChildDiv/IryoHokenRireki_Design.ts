@@ -115,11 +115,12 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
+     "marginLeft": "0",
+     "marginRight": "0",
      "selectControlID": "dgIryoHokenRireki",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "height": "S",
      "gridSetting": {
       "rowHeight": 25,
@@ -287,7 +288,7 @@ module DBZ {
     }
    ],
    "controlType": "Panel",
-   "width": "1030",
+   "width": "1015",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -329,10 +330,7 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -400,7 +398,9 @@ module DBZ {
   }
  ],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }
