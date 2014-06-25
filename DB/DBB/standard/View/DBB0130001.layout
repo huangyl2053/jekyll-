@@ -468,7 +468,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "特別徴収平準化計算（8月分）",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -550,7 +550,7 @@
    "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "平準化計算",
  "id": "DBB0130001",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -582,12 +582,12 @@
    "commonButtonAreaId": "HeijunkaKeisan",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonExecute",
      "buttonProperty": {
       "fieldName": "btnKeisan",
       "items": [],
       "controlType": "CommonButtonComplete",
-      "width": "S",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -610,6 +610,8 @@
       "imageWidth": "",
       "imageHeight": "",
       "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "算定処理を",
       "prefixText": "",
       "suffixText": ""
      }
@@ -620,7 +622,7 @@
       "fieldName": "btnKeisanYoyaku",
       "items": [],
       "controlType": "CommonButtonConfirm",
-      "width": "S",
+      "width": 2,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -636,13 +638,14 @@
       "selectControlID": "btnKeisanYoyaku",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "算定処理を行う（予約）",
+      "text": "算定処理を予約する",
       "onClick": "",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "icon": 0,
+      "icon": 1,
+      "heightTextBoxMatches": false,
       "prefixText": "",
       "suffixText": ""
      }
@@ -653,7 +656,7 @@
      "state": "平準化計算"
     }
    ],
-   "isFinishButtonOnTheRight": true
+   "isFinishButtonOnTheRight": false
   }
  ]
 }

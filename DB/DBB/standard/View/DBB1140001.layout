@@ -25,8 +25,16 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "required": false,
+     "onFocus": "",
+     "onBlur": "",
      "onChange": "onChange_ddlShoriNendo",
-     "selectedItem": "key0",
+     "labelLText": "処理年度",
+     "labelRText": "",
+     "labelLWidth": "70",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
      "dataSource": [
       {
        "key": "key0",
@@ -41,15 +49,7 @@
        "value": "平24"
       }
      ],
-     "required": false,
-     "labelLText": "処理年度",
-     "labelRText": "",
-     "labelLWidth": "70",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
+     "selectedItem": "key0",
      "disabledItem": []
     },
     {
@@ -90,11 +90,16 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "chkShuturyokuTaisho_core",
-     "helpMessageID": "",
+     "helpMessageID": "DBB1140001",
      "jpControlName": "",
      "readOnly": false,
+     "required": true,
      "onChange": "",
-     "selectedItem": null,
+     "labelLText": "出力対象",
+     "labelLWidth": "70",
+     "labelLAlign": 2,
+     "onClick": "",
+     "icon": [],
      "dataSource": [
       {
        "key": "key0",
@@ -105,11 +110,10 @@
        "value": "受給者および世帯員（2号被保険者を含む）"
       }
      ],
-     "required": true,
-     "labelLText": "出力対象",
-     "labelLWidth": "70",
-     "labelLAlign": 2,
-     "onClick": "",
+     "selectedItem": null,
+     "newLineItemNumber": 1,
+     "spaceSize": "M",
+     "disabledItem": [],
      "selectedItems": [
       {
        "key": "isAllSelect",
@@ -124,14 +128,10 @@
        "value": "受給者および世帯員（2号被保険者を含む）"
       }
      ],
-     "newLineItemNumber": 1,
      "minCheckedItem": "0",
      "maxCheckedItem": 2,
-     "spaceSize": "M",
      "isAllSelectable": true,
-     "isAllSelectableBreakLine": false,
-     "disabledItem": [],
-     "icon": []
+     "isAllSelectableBreakLine": false
     },
     {
      "fieldName": "ShotokushokaihyoShutsuryokuJun",
@@ -187,26 +187,26 @@
      "jpControlName": "",
      "readOnly": false,
      "onChange": "",
-     "selectedItem": null,
+     "labelLText": "",
+     "labelLWidth": "S",
+     "labelLAlign": 2,
+     "onClick": "",
+     "icon": [],
      "dataSource": [
       {
        "key": "key0",
        "value": "再発行する"
       }
      ],
-     "labelLText": "",
-     "labelLWidth": "S",
-     "labelLAlign": 2,
-     "onClick": "",
-     "selectedItems": [],
+     "selectedItem": null,
      "newLineItemNumber": 2,
+     "spaceSize": "M",
+     "disabledItem": [],
+     "selectedItems": [],
      "minCheckedItem": 0,
      "maxCheckedItem": 2,
-     "spaceSize": "M",
      "isAllSelectable": false,
-     "isAllSelectableBreakLine": false,
-     "disabledItem": [],
-     "icon": []
+     "isAllSelectableBreakLine": false
     },
     {
      "fieldName": "dgSaihakko",
@@ -230,7 +230,6 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "M",
-     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -310,7 +309,7 @@
         "cellDetails": {
          "cellType": 0
         },
-        "align": 1,
+        "align": 2,
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": ""
@@ -342,6 +341,7 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
+     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -366,7 +366,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "所得照会票一括発行",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -468,7 +468,7 @@
       "fieldName": "btnHakko",
       "items": [],
       "controlType": "CommonButtonComplete",
-      "width": "S",
+      "width": 2,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -485,14 +485,14 @@
       "helpMessageID": "",
       "jpControlName": "",
       "postParameterPanelNames": [],
-      "text": "完了",
       "onClick": "",
       "icon": 0,
+      "text": "完了",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "additionalText": "",
+      "additionalText": "所得照会票を",
       "validateUrl": "",
       "sourceCreateUrl": "",
       "afterPrintUrl": "",
@@ -510,7 +510,7 @@
      "state": "所得照会票一括発行"
     }
    ],
-   "isFinishButtonOnTheRight": true
+   "isFinishButtonOnTheRight": false
   }
  ]
 }
