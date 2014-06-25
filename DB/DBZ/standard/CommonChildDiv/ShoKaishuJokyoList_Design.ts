@@ -51,20 +51,27 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
+     "marginLeft": "0",
+     "marginRight": "0",
      "selectControlID": "dgShoKaishuJokyo",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
      "height": "S",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": true,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -83,9 +90,9 @@ module DBZ {
          "cellType": 8,
          "text": "",
          "onClick": "onClick_btnSelect",
-         "imageFileUrl": "/uz/uza/css/Edit.png",
-         "imageWidth": "15",
-         "imageHeight": "15"
+         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageWidth": "20",
+         "imageHeight": "20"
         },
         "align": 1,
         "resize": false,
@@ -120,7 +127,9 @@ module DBZ {
          "cellType": 7,
          "ymdKubun": 2,
          "displayFormat": 0,
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 1,
         "resize": true,
@@ -153,7 +162,9 @@ module DBZ {
          "cellType": 7,
          "ymdKubun": 2,
          "displayFormat": 0,
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 1,
         "resize": true,
@@ -186,7 +197,9 @@ module DBZ {
          "cellType": 7,
          "ymdKubun": 2,
          "displayFormat": 0,
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 1,
         "resize": false,
@@ -204,7 +217,6 @@ module DBZ {
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "kaishuDate",
      "isAscending": true,
      "filterList": [],
@@ -212,7 +224,7 @@ module DBZ {
     }
    ],
    "controlType": "Panel",
-   "width": "950",
+   "width": "935",
    "visible": true,
    "displayNone": false,
    "disabled": false,
