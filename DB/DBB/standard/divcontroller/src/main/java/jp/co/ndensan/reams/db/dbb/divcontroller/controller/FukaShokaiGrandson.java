@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author n8211
  */
 public class FukaShokaiGrandson {
-    
+ 
     public ResponseData<FukaShokaiGrandsonDiv> onSelect(FukaShokaiGrandsonDiv div, FukaRirekiDiv rirekiDiv) {
         div.setCanOpenAndClose(true);
         div.setIsOpen(true);
