@@ -58,11 +58,11 @@ public class KogakuShikyuKetteiTsuchiSakusei {
         panel.getTxtKetteiYM().setValue(ymlDt.getAsRDate("KetteiYM"));
         panel.getTxtTsuchiSotatsuYMD().setValue(ymlDt.getAsRDate("TsuchiSotatsuYMD"));
         
-        panel.getCommonKariChildDiv1().getCcdChohyoShutsuryokujun().getTxtSortName()
+        panel.getCommonKariChildDiv1().getKaigoChohyoShutsuryokujun().getTxtSortName()
                 .setValue(ymlDt.getAsRString("SortName"));
-        panel.getCommonKariChildDiv1().getCcdChohyoShutsuryokujun().getTxtKaiPage().
+        panel.getCommonKariChildDiv1().getKaigoChohyoShutsuryokujun().getTxtKaiPage().
                 setValue(ymlDt.getAsRString("KaiPage"));
-        panel.getCommonKariChildDiv1().getCcdChohyoShutsuryokujun().getTxtSort().
+        panel.getCommonKariChildDiv1().getKaigoChohyoShutsuryokujun().getTxtSort().
                 setValue(ymlDt.getAsRString("Sort"));
        
         

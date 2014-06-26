@@ -932,17 +932,13 @@
      "canOpenAndClose": false,
      "marginTop": 0,
      "marginBottom": 0,
-     "businessId": "DBC",
+     "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
      "backGroundColor": 0,
      "btnHihoRireki_visible": true,
      "btnNinteiRireki_visible": true
@@ -1282,12 +1278,12 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "CommonKaigoshikakuKihonChildDiv2",
+     "visibleDiv": "KagoMoshitateInfo",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KagoMoshitateInfo",
+     "visibleDiv": "CommonKaigoshikakuKihonChildDiv2",
      "panelState": "visible",
      "fixedDiv": "No"
     }
