@@ -25,16 +25,8 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "required": false,
-     "onFocus": "",
-     "onBlur": "",
      "onChange": "onChange_ddlShoriNendo",
-     "labelLText": "処理年度",
-     "labelRText": "",
-     "labelLWidth": "70",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
+     "selectedItem": "key0",
      "dataSource": [
       {
        "key": "key0",
@@ -49,7 +41,15 @@
        "value": "平24"
       }
      ],
-     "selectedItem": "key0",
+     "required": false,
+     "labelLText": "処理年度",
+     "labelRText": "",
+     "labelLWidth": "70",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "onFocus": "",
+     "onBlur": "",
      "disabledItem": []
     },
     {
@@ -93,13 +93,8 @@
      "helpMessageID": "DBB1140001",
      "jpControlName": "",
      "readOnly": false,
-     "required": true,
      "onChange": "",
-     "labelLText": "出力対象",
-     "labelLWidth": "70",
-     "labelLAlign": 2,
-     "onClick": "",
-     "icon": [],
+     "selectedItem": null,
      "dataSource": [
       {
        "key": "key0",
@@ -110,10 +105,11 @@
        "value": "受給者および世帯員（2号被保険者を含む）"
       }
      ],
-     "selectedItem": null,
-     "newLineItemNumber": 1,
-     "spaceSize": "M",
-     "disabledItem": [],
+     "required": true,
+     "labelLText": "出力対象",
+     "labelLWidth": "70",
+     "labelLAlign": 2,
+     "onClick": "",
      "selectedItems": [
       {
        "key": "isAllSelect",
@@ -128,10 +124,14 @@
        "value": "受給者および世帯員（2号被保険者を含む）"
       }
      ],
+     "newLineItemNumber": 1,
      "minCheckedItem": "0",
      "maxCheckedItem": 2,
+     "spaceSize": "M",
      "isAllSelectable": true,
-     "isAllSelectableBreakLine": false
+     "isAllSelectableBreakLine": false,
+     "disabledItem": [],
+     "icon": []
     },
     {
      "fieldName": "ShotokushokaihyoShutsuryokuJun",
@@ -187,26 +187,26 @@
      "jpControlName": "",
      "readOnly": false,
      "onChange": "",
-     "labelLText": "",
-     "labelLWidth": "S",
-     "labelLAlign": 2,
-     "onClick": "",
-     "icon": [],
+     "selectedItem": null,
      "dataSource": [
       {
        "key": "key0",
        "value": "再発行する"
       }
      ],
-     "selectedItem": null,
-     "newLineItemNumber": 2,
-     "spaceSize": "M",
-     "disabledItem": [],
+     "labelLText": "",
+     "labelLWidth": "S",
+     "labelLAlign": 2,
+     "onClick": "",
      "selectedItems": [],
+     "newLineItemNumber": 2,
      "minCheckedItem": 0,
      "maxCheckedItem": 2,
+     "spaceSize": "M",
      "isAllSelectable": false,
-     "isAllSelectableBreakLine": false
+     "isAllSelectableBreakLine": false,
+     "disabledItem": [],
+     "icon": []
     },
     {
      "fieldName": "dgSaihakko",
@@ -226,10 +226,11 @@
      "marginLeft": "L",
      "marginRight": "XS",
      "selectControlID": "dgSaihakko",
-     "helpMessageID": "",
+     "helpMessageID": "DBB1140002",
      "jpControlName": "",
      "readOnly": false,
      "height": "M",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -341,7 +342,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
