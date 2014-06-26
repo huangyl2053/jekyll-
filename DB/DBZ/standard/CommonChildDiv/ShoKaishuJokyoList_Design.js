@@ -30,7 +30,7 @@ var DBZ;
                             "fieldName": "dgShoKaishuJokyo",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "930",
+                            "width": "940",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -48,7 +48,6 @@ var DBZ;
                             "jpControlName": "",
                             "readOnly": false,
                             "height": "S",
-                            "dataSource": [],
                             "gridSetting": {
                                 "rowHeight": 25,
                                 "isMultiSelectable": false,
@@ -69,11 +68,11 @@ var DBZ;
                                 },
                                 "columns": [
                                     {
-                                        "columnName": "",
+                                        "columnName": "選択",
                                         "dataName": "btnSelect",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 20,
+                                        "width": 40,
                                         "visible": true,
                                         "cellType": 8,
                                         "cellDetails": {
@@ -127,6 +126,20 @@ var DBZ;
                                         "sortKey": ""
                                     },
                                     {
+                                        "columnName": "交付事由Key",
+                                        "dataName": "kofuJiyuKey",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
                                         "columnName": "交付事由",
                                         "dataName": "kofuJiyu",
                                         "toolTip": "",
@@ -137,6 +150,20 @@ var DBZ;
                                         "cellDetails": null,
                                         "align": 0,
                                         "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "交付理由",
+                                        "dataName": "kofuRiyu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
                                         "isPrivateInfo": false,
                                         "sortKey": ""
                                     },
@@ -162,6 +189,20 @@ var DBZ;
                                         "sortKey": ""
                                     },
                                     {
+                                        "columnName": "回収事由Key",
+                                        "dataName": "kaishuJiyuKey",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
                                         "columnName": "回収事由",
                                         "dataName": "kaishuJiyu",
                                         "toolTip": "",
@@ -172,6 +213,20 @@ var DBZ;
                                         "cellDetails": null,
                                         "align": 0,
                                         "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "回収理由",
+                                        "dataName": "kaishuRiyu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
                                         "isPrivateInfo": false,
                                         "sortKey": ""
                                     },
@@ -192,7 +247,7 @@ var DBZ;
                                             "readOnly": true
                                         },
                                         "align": 1,
-                                        "resize": false,
+                                        "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": ""
                                     }
@@ -214,7 +269,7 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "935",
+                    "width": "945",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -225,8 +280,8 @@ var DBZ;
                     "float": 0,
                     "toolTip": "",
                     "authorityMode": 0,
-                    "marginLeft": "XS",
-                    "marginRight": "XS",
+                    "marginLeft": "0",
+                    "marginRight": "0",
                     "selectControlID": "ShoKaishuJokyoList",
                     "helpMessageID": "",
                     "jpControlName": "",
@@ -241,7 +296,12 @@ var DBZ;
                             "postParameterPanelNames": "ShoKaishuJokyoList"
                         }
                     ],
-                    "requestSettings": [],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": ""
+                        }
+                    ],
                     "hiddenInput": [],
                     "onOpen": "",
                     "onClose": "",

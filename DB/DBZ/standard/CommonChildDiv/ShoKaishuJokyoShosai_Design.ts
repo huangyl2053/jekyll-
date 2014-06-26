@@ -85,7 +85,7 @@ module DBZ {
    "fieldName": "ShoKaishuJokyoShosai",
    "items": [
     {
-     "fieldName": "txt",
+     "fieldName": "txtShoKofuShurui",
      "items": [],
      "controlType": "TextBox",
      "width": "160",
@@ -101,7 +101,7 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "txt_core",
+     "selectControlID": "txtShoKofuShurui_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
@@ -127,8 +127,7 @@ module DBZ {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
+     "decorationClass": ""
     },
     {
      "fieldName": "txtKofuDate",
@@ -257,8 +256,7 @@ module DBZ {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
+     "decorationClass": ""
     },
     {
      "fieldName": "txtKofuRiyu",
@@ -366,17 +364,6 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "required": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "labelLText": "回収事由",
-     "labelRText": "",
-     "labelLWidth": "85",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "selectedItem": "06",
      "dataSource": [
       {
        "key": "00",
@@ -463,7 +450,17 @@ module DBZ {
        "value": "給付額減額終了"
       }
      ],
-     "disabledItem": []
+     "required": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "labelLText": "回収事由",
+     "labelRText": "",
+     "labelLWidth": "85",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "selectedItem": "00"
     },
     {
      "fieldName": "txtKaishuRiyu",
@@ -510,7 +507,7 @@ module DBZ {
     }
    ],
    "controlType": "Panel",
-   "width": "950",
+   "width": "940",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -537,7 +534,12 @@ module DBZ {
      "postParameterPanelNames": "ShoKaishuJokyoShosai"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
