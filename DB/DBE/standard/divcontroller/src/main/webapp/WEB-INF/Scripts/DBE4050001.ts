@@ -9,10 +9,10 @@ module Dbe {
 
         public static setImageViewers() {
             DBE4050001.setImageViewer("ImageFrontOfIkensho", "/db/dbe/Scripts/E0001.png");
-            DBE4050001.setImageViewer("ImageBackOfIkensho", "/db/dbe/Scripts/E0001.png");
-            DBE4050001.setImageViewer("ImageTokkiJiko1", "/db/dbe/Scripts/E0001.png");
-            DBE4050001.setImageViewer("ImageTokkiJiko2", "/db/dbe/Scripts/E0001.png");
-            DBE4050001.setImageViewer("ImageOther", "/db/dbe/Scripts/E0001.png");
+            //DBE4050001.setImageViewer("ImageBackOfIkensho", "/db/dbe/Scripts/E0001.png");
+            //DBE4050001.setImageViewer("ImageTokkiJiko1", "/db/dbe/Scripts/E0001.png");
+            //DBE4050001.setImageViewer("ImageTokkiJiko2", "/db/dbe/Scripts/E0001.png");
+            //DBE4050001.setImageViewer("ImageOther", "/db/dbe/Scripts/E0001.png");
         }
 
         public static setImageViewer(controlId: string, imageUrl: string) {
@@ -33,15 +33,17 @@ module Dbe {
             }
 
             if (!Uz.GyomuJSHelper.isDesignMode()) {
-                var viewerPanel = Uz.GyomuJSHelper.getJSControl(controlId);
-                var panelId = DBE4050001.getPanelBodyAreaDiv(viewerPanel);
-                imageDisp.INIT = new imageDispCommon.init();
-                imageDisp.RESIZE = new imageDispCommon.draw();
-                imageDisp.MARKER = new imageDispCommon.marker();
-                imageDisp.STICKY = new imageDispCommon.sticky();
-                imageDisp.ONLY = new imageDispCommon.only();
-                imageDisp.JSON = new imageDispCommon.rectJson();
-                imageDisp.INIT.initImageDisp(panelId, imageUrl, imageDispJSON);
+                //Uz.GyomuJSHelper.registOriginalEvent("hoge", (control: Uz._ViewControl) => {
+                    var viewerPanel = Uz.GyomuJSHelper.getJSControl(controlId);
+                    var panelId = DBE4050001.getPanelBodyAreaDiv(viewerPanel);
+                    imageDisp.INIT = new imageDispCommon.init();
+                    imageDisp.RESIZE = new imageDispCommon.draw();
+                    imageDisp.MARKER = new imageDispCommon.marker();
+                    imageDisp.STICKY = new imageDispCommon.sticky();
+                    imageDisp.ONLY = new imageDispCommon.only();
+                    imageDisp.JSON = new imageDispCommon.rectJson();
+                    imageDisp.INIT.initImageDisp(panelId, imageUrl, imageDispJSON, 100, 920, 500, 0, 0);
+               //});
             }
         }
 
