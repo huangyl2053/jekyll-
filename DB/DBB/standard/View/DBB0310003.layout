@@ -29,7 +29,6 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "168",
-       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -105,12 +104,13 @@
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "onSelect_Uchiwake",
-       "onSelectBySelectButton": "",
+       "onSelectBySelectButton": "onClick_Sentaku",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "",
        "isAscending": true,
        "filterList": [],
@@ -180,7 +180,6 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "Auto",
-     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -325,6 +324,7 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
+     "dataSource": [],
      "sortOrder": "txtHakkojiGroup",
      "isAscending": true,
      "filterList": [],
@@ -373,7 +373,8 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "btnTsuchishoSetteiHozon",
