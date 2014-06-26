@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.ImageFrontOfIkenshoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.tabImageJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -24,12 +25,12 @@ public class ImageMaskTaishoShijiDiv extends Panel {
      */
     @JsonProperty("tabImageJoho")
     private tabImageJohoDiv tabImageJoho;
+    @JsonProperty("ImageFrontOfIkensho")
+    private ImageFrontOfIkenshoDiv ImageFrontOfIkensho;
     @JsonProperty("btnUpdate")
     private Button btnUpdate;
     @JsonProperty("btnCancel")
     private Button btnCancel;
-    @JsonProperty("btnMasking")
-    private Button btnMasking;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -45,6 +46,16 @@ public class ImageMaskTaishoShijiDiv extends Panel {
     @JsonProperty("tabImageJoho")
     public void setTabImageJoho(tabImageJohoDiv tabImageJoho) {
         this.tabImageJoho=tabImageJoho;
+    }
+
+    @JsonProperty("ImageFrontOfIkensho")
+    public ImageFrontOfIkenshoDiv getImageFrontOfIkensho() {
+        return ImageFrontOfIkensho;
+    }
+
+    @JsonProperty("ImageFrontOfIkensho")
+    public void setImageFrontOfIkensho(ImageFrontOfIkenshoDiv ImageFrontOfIkensho) {
+        this.ImageFrontOfIkensho=ImageFrontOfIkensho;
     }
 
     @JsonProperty("btnUpdate")
@@ -65,16 +76,6 @@ public class ImageMaskTaishoShijiDiv extends Panel {
     @JsonProperty("btnCancel")
     public void setBtnCancel(Button btnCancel) {
         this.btnCancel=btnCancel;
-    }
-
-    @JsonProperty("btnMasking")
-    public Button getBtnMasking() {
-        return btnMasking;
-    }
-
-    @JsonProperty("btnMasking")
-    public void setBtnMasking(Button btnMasking) {
-        this.btnMasking=btnMasking;
     }
 
 }

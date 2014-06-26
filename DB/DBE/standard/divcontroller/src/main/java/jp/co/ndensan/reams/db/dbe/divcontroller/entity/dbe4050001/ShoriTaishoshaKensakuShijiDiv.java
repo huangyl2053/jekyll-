@@ -27,8 +27,6 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     private DropDownList ddlKensakuTaisho;
     @JsonProperty("txtSearchStYMD")
     private TextBoxFlexibleDate txtSearchStYMD;
-    @JsonProperty("lblKara1")
-    private Label lblKara1;
     @JsonProperty("txtSearchEdYMD")
     private TextBoxFlexibleDate txtSearchEdYMD;
     @JsonProperty("txtHihokenshaNo")
@@ -72,16 +70,6 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     @JsonProperty("txtSearchStYMD")
     public void setTxtSearchStYMD(TextBoxFlexibleDate txtSearchStYMD) {
         this.txtSearchStYMD=txtSearchStYMD;
-    }
-
-    @JsonProperty("lblKara1")
-    public Label getLblKara1() {
-        return lblKara1;
-    }
-
-    @JsonProperty("lblKara1")
-    public void setLblKara1(Label lblKara1) {
-        this.lblKara1=lblKara1;
     }
 
     @JsonProperty("txtSearchEdYMD")

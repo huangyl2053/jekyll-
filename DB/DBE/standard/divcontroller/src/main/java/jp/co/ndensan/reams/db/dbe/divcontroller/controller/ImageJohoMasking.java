@@ -67,12 +67,10 @@ public class ImageJohoMasking {
 
         if (div.getShoriTaishoshaKensakuShiji().getDdlKensakuTaisho().getSelectedValue().
                 equalsIgnoreCase(new RString("被保険者番号"))) {
-            div.getShoriTaishoshaKensakuShiji().getLblKara1().setDisplayNone(true);
             div.getShoriTaishoshaKensakuShiji().getTxtSearchStYMD().setDisplayNone(true);
             div.getShoriTaishoshaKensakuShiji().getTxtSearchEdYMD().setDisplayNone(true);
             div.getShoriTaishoshaKensakuShiji().getTxtHihokenshaNo().setDisplayNone(false);
         } else {
-            div.getShoriTaishoshaKensakuShiji().getLblKara1().setDisplayNone(false);
             div.getShoriTaishoshaKensakuShiji().getTxtSearchStYMD().setDisplayNone(false);
             div.getShoriTaishoshaKensakuShiji().getTxtSearchEdYMD().setDisplayNone(false);
             div.getShoriTaishoshaKensakuShiji().getTxtHihokenshaNo().setDisplayNone(true);
