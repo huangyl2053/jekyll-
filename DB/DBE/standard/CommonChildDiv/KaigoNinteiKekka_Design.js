@@ -279,6 +279,7 @@ var DBE;
                             "selectControlID": "ddlNinteiKubun_core",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "required": true,
                             "onFocus": "",
                             "onBlur": "",
@@ -379,6 +380,7 @@ var DBE;
                             "selectControlID": "ddlTokuteiShippei_core",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "required": false,
                             "onFocus": "",
                             "onBlur": "",
@@ -390,10 +392,10 @@ var DBE;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "selectedItem": "",
+                            "selectedItem": null,
                             "dataSource": [
                                 {
-                                    "key": "",
+                                    "key": "00",
                                     "value": ""
                                 },
                                 {
@@ -471,6 +473,7 @@ var DBE;
                             "selectControlID": "ddlNijiHanteiKekka_core",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "required": true,
                             "onFocus": "",
                             "onBlur": "",
@@ -542,6 +545,7 @@ var DBE;
                             "selectControlID": "ddlJotaiZo_core",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "required": false,
                             "onFocus": "",
                             "onBlur": "",
@@ -553,10 +557,10 @@ var DBE;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "selectedItem": "",
+                            "selectedItem": null,
                             "dataSource": [
                                 {
-                                    "key": "",
+                                    "key": "00",
                                     "value": ""
                                 },
                                 {
@@ -705,6 +709,7 @@ var DBE;
                             "selectControlID": "ddlNinteiYukoTsukisu_core",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "required": true,
                             "onFocus": "",
                             "onBlur": "",
@@ -716,10 +721,10 @@ var DBE;
                             "labelRWidth": "40",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "selectedItem": "0",
+                            "selectedItem": null,
                             "dataSource": [
                                 {
-                                    "key": "0",
+                                    "key": "00",
                                     "value": ""
                                 },
                                 {
@@ -793,6 +798,7 @@ var DBE;
                             "imageWidth": "",
                             "imageHeight": "",
                             "icon": 0,
+                            "heightTextBoxMatches": false,
                             "displayChildDivName": "",
                             "dataPassing": [],
                             "visibleCloseButton": true,
@@ -950,10 +956,7 @@ var DBE;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
@@ -1003,7 +1006,9 @@ var DBE;
             ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return KaigoNinteiKekka_Design;
     })(Uz.CommonChildDiv);
