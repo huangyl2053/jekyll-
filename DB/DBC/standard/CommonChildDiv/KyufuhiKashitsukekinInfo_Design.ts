@@ -454,10 +454,7 @@ module DBC {
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -780,10 +777,7 @@ module DBC {
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -1335,10 +1329,7 @@ module DBC {
            "onOpen": "",
            "onClose": "",
            "session": {},
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false,
+           "eraseBorder": false,
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 1,
@@ -1380,10 +1371,7 @@ module DBC {
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -1520,10 +1508,7 @@ module DBC {
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -1550,7 +1535,8 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "title": "申請情報",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       },
       {
        "fieldName": "tplKashitsukekinKettei",
@@ -2293,10 +2279,7 @@ module DBC {
              "onOpen": "",
              "onClose": "",
              "session": {},
-             "eraseBorderTop": true,
-             "eraseBorderBottom": true,
-             "eraseBorderRight": true,
-             "eraseBorderLeft": true,
+             "eraseBorder": false,
              "backgroundColor": 0,
              "widthAuto": false,
              "panelDisplay": 0,
@@ -2716,10 +2699,7 @@ module DBC {
              "onOpen": "",
              "onClose": "",
              "session": {},
-             "eraseBorderTop": true,
-             "eraseBorderBottom": true,
-             "eraseBorderRight": true,
-             "eraseBorderLeft": true,
+             "eraseBorder": false,
              "backgroundColor": 0,
              "widthAuto": false,
              "panelDisplay": 0,
@@ -2761,10 +2741,7 @@ module DBC {
            "onOpen": "",
            "onClose": "",
            "session": {},
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false,
+           "eraseBorder": false,
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 1,
@@ -2806,10 +2783,7 @@ module DBC {
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -2882,7 +2856,8 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "title": "決定情報",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       },
       {
        "fieldName": "tplKashitsukekinKariuke",
@@ -3198,10 +3173,7 @@ module DBC {
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -3478,10 +3450,7 @@ module DBC {
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -3508,7 +3477,8 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "title": "借用書受理情報",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       },
       {
        "fieldName": "tplKashitsukekinHenko",
@@ -3968,10 +3938,7 @@ module DBC {
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -4192,10 +4159,7 @@ module DBC {
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -4222,7 +4186,8 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "title": "償還期限変更情報",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       },
       {
        "fieldName": "tplKashitsukekinKoza",
@@ -4621,7 +4586,8 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "title": "個人口座情報",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       }
      ],
      "controlType": "TabContainer",
@@ -4652,7 +4618,8 @@ module DBC {
      ],
      "isDraggable": false,
      "selectedItemFieldName": "tplKashitsukekinShinsei",
-     "initialTab": 0
+     "initialTab": 0,
+     "isLazyLoading": false
     },
     {
      "fieldName": "btnClose",
@@ -4680,7 +4647,8 @@ module DBC {
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -4721,10 +4689,7 @@ module DBC {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -4768,7 +4733,9 @@ module DBC {
   }
  ],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": "onClick_btnClose"
+ "dialogCancelEventNameForDialog": "onClick_btnClose",
+ "canTransferEvent": true,
+ "heightForDialog": "XL"
 }        
     }
 }

@@ -444,10 +444,7 @@ var DBC;
                                             "onOpen": "",
                                             "onClose": "",
                                             "session": {},
-                                            "eraseBorderTop": false,
-                                            "eraseBorderBottom": false,
-                                            "eraseBorderRight": false,
-                                            "eraseBorderLeft": false,
+                                            "eraseBorder": false,
                                             "backgroundColor": 0,
                                             "widthAuto": false,
                                             "panelDisplay": 1,
@@ -770,10 +767,7 @@ var DBC;
                                             "onOpen": "",
                                             "onClose": "",
                                             "session": {},
-                                            "eraseBorderTop": false,
-                                            "eraseBorderBottom": false,
-                                            "eraseBorderRight": false,
-                                            "eraseBorderLeft": false,
+                                            "eraseBorder": false,
                                             "backgroundColor": 0,
                                             "widthAuto": false,
                                             "panelDisplay": 1,
@@ -1325,10 +1319,7 @@ var DBC;
                                                     "onOpen": "",
                                                     "onClose": "",
                                                     "session": {},
-                                                    "eraseBorderTop": false,
-                                                    "eraseBorderBottom": false,
-                                                    "eraseBorderRight": false,
-                                                    "eraseBorderLeft": false,
+                                                    "eraseBorder": false,
                                                     "backgroundColor": 0,
                                                     "widthAuto": false,
                                                     "panelDisplay": 1,
@@ -1370,10 +1361,7 @@ var DBC;
                                             "onOpen": "",
                                             "onClose": "",
                                             "session": {},
-                                            "eraseBorderTop": false,
-                                            "eraseBorderBottom": false,
-                                            "eraseBorderRight": false,
-                                            "eraseBorderLeft": false,
+                                            "eraseBorder": false,
                                             "backgroundColor": 0,
                                             "widthAuto": false,
                                             "panelDisplay": 1,
@@ -1510,10 +1498,7 @@ var DBC;
                                             "onOpen": "",
                                             "onClose": "",
                                             "session": {},
-                                            "eraseBorderTop": false,
-                                            "eraseBorderBottom": false,
-                                            "eraseBorderRight": false,
-                                            "eraseBorderLeft": false,
+                                            "eraseBorder": false,
                                             "backgroundColor": 0,
                                             "widthAuto": false,
                                             "panelDisplay": 1,
@@ -1540,7 +1525,8 @@ var DBC;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "title": "申請情報",
-                                    "onActive": ""
+                                    "onActive": "",
+                                    "onFirstActive": ""
                                 },
                                 {
                                     "fieldName": "tplKashitsukekinKettei",
@@ -2283,10 +2269,7 @@ var DBC;
                                                             "onOpen": "",
                                                             "onClose": "",
                                                             "session": {},
-                                                            "eraseBorderTop": true,
-                                                            "eraseBorderBottom": true,
-                                                            "eraseBorderRight": true,
-                                                            "eraseBorderLeft": true,
+                                                            "eraseBorder": false,
                                                             "backgroundColor": 0,
                                                             "widthAuto": false,
                                                             "panelDisplay": 0,
@@ -2706,10 +2689,7 @@ var DBC;
                                                             "onOpen": "",
                                                             "onClose": "",
                                                             "session": {},
-                                                            "eraseBorderTop": true,
-                                                            "eraseBorderBottom": true,
-                                                            "eraseBorderRight": true,
-                                                            "eraseBorderLeft": true,
+                                                            "eraseBorder": false,
                                                             "backgroundColor": 0,
                                                             "widthAuto": false,
                                                             "panelDisplay": 0,
@@ -2751,10 +2731,7 @@ var DBC;
                                                     "onOpen": "",
                                                     "onClose": "",
                                                     "session": {},
-                                                    "eraseBorderTop": false,
-                                                    "eraseBorderBottom": false,
-                                                    "eraseBorderRight": false,
-                                                    "eraseBorderLeft": false,
+                                                    "eraseBorder": false,
                                                     "backgroundColor": 0,
                                                     "widthAuto": false,
                                                     "panelDisplay": 1,
@@ -2796,10 +2773,7 @@ var DBC;
                                             "onOpen": "",
                                             "onClose": "",
                                             "session": {},
-                                            "eraseBorderTop": false,
-                                            "eraseBorderBottom": false,
-                                            "eraseBorderRight": false,
-                                            "eraseBorderLeft": false,
+                                            "eraseBorder": false,
                                             "backgroundColor": 0,
                                             "widthAuto": false,
                                             "panelDisplay": 1,
@@ -2872,7 +2846,8 @@ var DBC;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "title": "決定情報",
-                                    "onActive": ""
+                                    "onActive": "",
+                                    "onFirstActive": ""
                                 },
                                 {
                                     "fieldName": "tplKashitsukekinKariuke",
@@ -3188,10 +3163,7 @@ var DBC;
                                             "onOpen": "",
                                             "onClose": "",
                                             "session": {},
-                                            "eraseBorderTop": false,
-                                            "eraseBorderBottom": false,
-                                            "eraseBorderRight": false,
-                                            "eraseBorderLeft": false,
+                                            "eraseBorder": false,
                                             "backgroundColor": 0,
                                             "widthAuto": false,
                                             "panelDisplay": 1,
@@ -3468,10 +3440,7 @@ var DBC;
                                             "onOpen": "",
                                             "onClose": "",
                                             "session": {},
-                                            "eraseBorderTop": false,
-                                            "eraseBorderBottom": false,
-                                            "eraseBorderRight": false,
-                                            "eraseBorderLeft": false,
+                                            "eraseBorder": false,
                                             "backgroundColor": 0,
                                             "widthAuto": false,
                                             "panelDisplay": 1,
@@ -3498,7 +3467,8 @@ var DBC;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "title": "借用書受理情報",
-                                    "onActive": ""
+                                    "onActive": "",
+                                    "onFirstActive": ""
                                 },
                                 {
                                     "fieldName": "tplKashitsukekinHenko",
@@ -3958,10 +3928,7 @@ var DBC;
                                             "onOpen": "",
                                             "onClose": "",
                                             "session": {},
-                                            "eraseBorderTop": false,
-                                            "eraseBorderBottom": false,
-                                            "eraseBorderRight": false,
-                                            "eraseBorderLeft": false,
+                                            "eraseBorder": false,
                                             "backgroundColor": 0,
                                             "widthAuto": false,
                                             "panelDisplay": 1,
@@ -4182,10 +4149,7 @@ var DBC;
                                             "onOpen": "",
                                             "onClose": "",
                                             "session": {},
-                                            "eraseBorderTop": false,
-                                            "eraseBorderBottom": false,
-                                            "eraseBorderRight": false,
-                                            "eraseBorderLeft": false,
+                                            "eraseBorder": false,
                                             "backgroundColor": 0,
                                             "widthAuto": false,
                                             "panelDisplay": 1,
@@ -4212,7 +4176,8 @@ var DBC;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "title": "償還期限変更情報",
-                                    "onActive": ""
+                                    "onActive": "",
+                                    "onFirstActive": ""
                                 },
                                 {
                                     "fieldName": "tplKashitsukekinKoza",
@@ -4611,7 +4576,8 @@ var DBC;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "title": "個人口座情報",
-                                    "onActive": ""
+                                    "onActive": "",
+                                    "onFirstActive": ""
                                 }
                             ],
                             "controlType": "TabContainer",
@@ -4642,7 +4608,8 @@ var DBC;
                             ],
                             "isDraggable": false,
                             "selectedItemFieldName": "tplKashitsukekinShinsei",
-                            "initialTab": 0
+                            "initialTab": 0,
+                            "isLazyLoading": false
                         },
                         {
                             "fieldName": "btnClose",
@@ -4670,7 +4637,8 @@ var DBC;
                             "imageFileUrl": "",
                             "imageWidth": "",
                             "imageHeight": "",
-                            "icon": 0
+                            "icon": 0,
+                            "heightTextBoxMatches": false
                         }
                     ],
                     "controlType": "Panel",
@@ -4711,10 +4679,7 @@ var DBC;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
@@ -4758,7 +4723,9 @@ var DBC;
                 }
             ],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": "onClick_btnClose"
+            "dialogCancelEventNameForDialog": "onClick_btnClose",
+            "canTransferEvent": true,
+            "heightForDialog": "XL"
         };
         return KyufuhiKashitsukekinInfo_Design;
     })(Uz.CommonChildDiv);
