@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.KyotakuJikoTod
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.dgKyotakuJikoTodokedeRirekiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.tplKyotakuJikoTodokedeDetailRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.dgShoKaishuJokyo_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
@@ -27,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * 居宅サービス自己作成届出をコントロールするクラスです。
@@ -51,6 +55,7 @@ public class KyotakuJikoTodokedeDetail {
         setKihonData(panel);
         setRirekiList(panel);
         setMeisaiDefaultData(panel);
+        setShoKaishuJokyoListData(panel);
         response.data = panel;
         return response;
     }
@@ -98,7 +103,6 @@ public class KyotakuJikoTodokedeDetail {
             ControlGenerator cg = new ControlGenerator(getYaml().get(i));
             add履歴(panel, create履歴(
                     btn,
-                    cg.getAsRString("状態"),
                     cg.getAsRString("計画適用期間開始日"),
                     cg.getAsRString("計画適用期間終了日"),
                     cg.getAsRString("届出日"),
@@ -134,7 +138,7 @@ public class KyotakuJikoTodokedeDetail {
         dgKyotakuJikoTodokedeRirekiList_Row currentRow = dgList.get(index);
         KyotakuJikoTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceJikoSakuseiTodokede().
                 getTplKyotakuJikoTodokedeDetailRireki().getKyotakuJikoTodokedeMeisai();
-        dgKyotakuJikoTodokedeRirekiList_Row newRow;
+        dgKyotakuJikoTodokedeRirekiList_Row row;
 
         RString 計画適用期間開始日;
         RString 計画適用期間終了日;
@@ -154,15 +158,20 @@ public class KyotakuJikoTodokedeDetail {
         } catch (Throwable e) {
             届出日 = RString.EMPTY;
         }
-        newRow = create履歴(
+        row = create履歴(
                 currentRow.getBtnSelect(),
-                new RString(kubun.toString()),
                 計画適用期間開始日,
                 計画適用期間終了日,
                 届出日,
                 currentRow.getTxtTodokedeKubun());
+        if (kubun.equals(修正削除.修正)) {
+            row.setRowState(RowState.Modified);
+        } else {
+            row.setRowState(RowState.Deleted);
+        }
+
         dgList.remove(index);
-        dgList.add(index, newRow);
+        dgList.add(index, row);
         Collections.sort(dgList, new DateComparator());
 
         rirekiList.getDgKyotakuJikoTodokedeRirekiList().setDataSource(dgList);
@@ -170,14 +179,12 @@ public class KyotakuJikoTodokedeDetail {
 
     private dgKyotakuJikoTodokedeRirekiList_Row create履歴(
             Button btn,
-            RString txtJotai,
             RString txtKeikakuTekiyoKaishiYMD,
             RString txtKeikakuTekiyoShuryoYMD,
             RString txtTodokedeYMD,
             RString txtTodokedeKubun) {
         return new dgKyotakuJikoTodokedeRirekiList_Row(
                 btn,
-                txtJotai,
                 txtKeikakuTekiyoKaishiYMD,
                 txtKeikakuTekiyoShuryoYMD,
                 txtTodokedeYMD,
@@ -190,6 +197,7 @@ public class KyotakuJikoTodokedeDetail {
      * @param panel panel
      */
     private void setMeisaiDefaultData(KyotakuJikoTodokedeDetailDiv panel) {
+        initMeisai(panel);
         setMeisaiData(panel, 画面表示.初期表示);
         showMeisai(panel, 画面表示.初期表示);
     }
@@ -202,6 +210,7 @@ public class KyotakuJikoTodokedeDetail {
      */
     public ResponseData onClickTodokedeNew(KyotakuJikoTodokedeDetailDiv panel) {
         ResponseData<KyotakuJikoTodokedeDetailDiv> response = new ResponseData<>();
+        initMeisai(panel);
         setMeisaiData(panel, 画面表示.新規届出);
         showMeisai(panel, 画面表示.新規届出);
         response.data = panel;
@@ -216,6 +225,7 @@ public class KyotakuJikoTodokedeDetail {
      */
     public ResponseData onClickTodokedeModify(KyotakuJikoTodokedeDetailDiv panel) {
         ResponseData<KyotakuJikoTodokedeDetailDiv> response = new ResponseData<>();
+        initMeisai(panel);
         setMeisaiData(panel, 画面表示.変更届出);
         showMeisai(panel, 画面表示.変更届出);
         response.data = panel;
@@ -313,13 +323,15 @@ public class KyotakuJikoTodokedeDetail {
             届出日 = RString.EMPTY;
         }
 
-        add履歴(panel, create履歴(
+        dgKyotakuJikoTodokedeRirekiList_Row row = create履歴(
                 btn,
-                cg.getAsRString("状態"),
                 計画適用期間開始日,
                 計画適用期間終了日,
                 届出日,
-                kubun));
+                kubun);
+        row.setRowState(RowState.Added);
+        add履歴(panel, row);
+
         initMeisai(panel);
         response.data = panel;
         return response;
@@ -441,11 +453,23 @@ public class KyotakuJikoTodokedeDetail {
                 || pattern.equals(画面表示.届出内容修正)) {
 
             if (pattern.equals(画面表示.届出内容修正)) {
-                meisai.getTxtTodokedeYMD().setValue(new RDate(selectRow.getTxtTodokedeYMD().toString()));
+                try {
+                    meisai.getTxtTodokedeYMD().setValue(new RDate(selectRow.getTxtTodokedeYMD().toString()));
+                } catch (Throwable e) {
+                    meisai.getTxtTodokedeYMD().clearValue();
+                }
+                try {
+                    meisai.getTxtTekiyoKikan().setFromValue(new RDate(selectRow.getTxtKeikakuTekiyoKaishiYMD().toString()));
+                } catch (Throwable e) {
+                    meisai.getTxtTekiyoKikan().clearFromValue();
+                }
+                try {
+                    meisai.getTxtTekiyoKikan().setToValue(new RDate(selectRow.getTxtKeikakuTekiyoShuryoYMD().toString()));
+                } catch (Throwable e) {
+                    meisai.getTxtTekiyoKikan().clearToValue();
+                }
                 meisai.getTxtTaishoYMD().setValue(cg.getAsRDate("対象年月"));
                 meisai.getTxtKeikakuSakuseiYMD().setValue(cg.getAsRDate("計画作成日"));
-                meisai.getTxtTekiyoKikan().setFromValue(new RDate(selectRow.getTxtKeikakuTekiyoKaishiYMD().toString()));
-                meisai.getTxtTekiyoKikan().setToValue(new RDate(selectRow.getTxtKeikakuTekiyoShuryoYMD().toString()));
             } else {
                 meisai.getTxtTodokedeYMD().setValue(cg.getAsRDate("届出日"));
                 meisai.getTxtTekiyoKikan().setFromValue(cg.getAsRDate("適用期間開始日"));
@@ -491,5 +515,35 @@ public class KyotakuJikoTodokedeDetail {
 
         henkoNaiyo.getTxtHenkoYMD().clearValue();
         henkoNaiyo.getTxtHenkoJiyu().clearValue();
+    }
+
+    /**
+     * 証類交付情報をセットする。
+     *
+     * @param panel panel
+     */
+    private void setShoKaishuJokyoListData(KyotakuJikoTodokedeDetailDiv panel) {
+        ShoKaishuKirokuKanriDiv kanri = panel.getTabKyotakuServiceJikoSakuseiTodokede().
+                getTplKyotakuJikoTodokedeDetailShorui().getKyotakuJikoTodokedeShoruiJyokyo();
+        List<HashMap> yamlData = YamlLoader.DBC.loadAsList(new RString("dbc0100000/KyotakuKeikakuTodokedeShoKofuKaishu.yml"));
+        List<dgShoKaishuJokyo_Row> dgRow = kanri.getShoKaishuJokyoList().getDgShoKaishuJokyo().getDataSource();
+        dgRow.clear();
+        for (int i = 0; i < 2; i++) {
+            ControlGenerator cg = new ControlGenerator(yamlData.get(i));
+            dgShoKaishuJokyo_Row row = new dgShoKaishuJokyo_Row(new Button(), RString.EMPTY, new TextBoxFlexibleDate(),
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, new TextBoxFlexibleDate());
+
+            row.setKofushoShurui(cg.getAsRString("証交付種類"));
+            row.getKofuDate().setValue(cg.getAsFlexibleDate("交付日"));
+            row.setKofuJiyu(cg.getAsRString("交付事由"));
+            row.setKofuJiyuKey(cg.getAsRString("交付事由Key"));
+            row.getKaishuDate().setValue(cg.getAsFlexibleDate("回収日"));
+            row.setKaishuJiyu(cg.getAsRString("回収事由"));
+            row.setKaishuJiyuKey(cg.getAsRString("回収事由Key"));
+            row.getYukoKigen().setValue(cg.getAsFlexibleDate("有効期限"));
+            dgRow.add(row);
+        }
+//        kanri.getShoKaishuJokyoShosai().setIsOpen(false);
     }
 }

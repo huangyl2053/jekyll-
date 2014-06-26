@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 23 15:57:46 JST 2014 
+ * Wed Jun 25 09:49:38 JST 2014 
  */
 
 
@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class dgKyotakuKeikakuTodokedeRirekiList_Row extends DataRow {
 
     private Button btnSelect;
-    private RString txtJotai;
     private RString txtKeikakuTekiyoKaishiYMD;
     private RString txtKeikakuTekiyoShuryoYMD;
     private RString txtTodokedeYMD;
@@ -32,7 +31,6 @@ public class dgKyotakuKeikakuTodokedeRirekiList_Row extends DataRow {
     public dgKyotakuKeikakuTodokedeRirekiList_Row() {
         super();
         this.btnSelect = new Button();
-        this.txtJotai = RString.EMPTY;
         this.txtKeikakuTekiyoKaishiYMD = RString.EMPTY;
         this.txtKeikakuTekiyoShuryoYMD = RString.EMPTY;
         this.txtTodokedeYMD = RString.EMPTY;
@@ -40,17 +38,15 @@ public class dgKyotakuKeikakuTodokedeRirekiList_Row extends DataRow {
         this.txtKeikakuIraiJigyosha = RString.EMPTY;
     }
 
-    public dgKyotakuKeikakuTodokedeRirekiList_Row(Button btnSelect, RString txtJotai, RString txtKeikakuTekiyoKaishiYMD, RString txtKeikakuTekiyoShuryoYMD, RString txtTodokedeYMD, RString txtTodokedeKubun, RString txtKeikakuIraiJigyosha) {
+    public dgKyotakuKeikakuTodokedeRirekiList_Row(Button btnSelect, RString txtKeikakuTekiyoKaishiYMD, RString txtKeikakuTekiyoShuryoYMD, RString txtTodokedeYMD, RString txtTodokedeKubun, RString txtKeikakuIraiJigyosha) {
         super();
         this.setOriginalData("btnSelect", btnSelect);
-        this.setOriginalData("txtJotai", txtJotai);
         this.setOriginalData("txtKeikakuTekiyoKaishiYMD", txtKeikakuTekiyoKaishiYMD);
         this.setOriginalData("txtKeikakuTekiyoShuryoYMD", txtKeikakuTekiyoShuryoYMD);
         this.setOriginalData("txtTodokedeYMD", txtTodokedeYMD);
         this.setOriginalData("txtTodokedeKubun", txtTodokedeKubun);
         this.setOriginalData("txtKeikakuIraiJigyosha", txtKeikakuIraiJigyosha);
         this.btnSelect = btnSelect;
-        this.txtJotai = txtJotai;
         this.txtKeikakuTekiyoKaishiYMD = txtKeikakuTekiyoKaishiYMD;
         this.txtKeikakuTekiyoShuryoYMD = txtKeikakuTekiyoShuryoYMD;
         this.txtTodokedeYMD = txtTodokedeYMD;
@@ -60,10 +56,6 @@ public class dgKyotakuKeikakuTodokedeRirekiList_Row extends DataRow {
 
     public Button getBtnSelect() {
         return btnSelect;
-    }
-
-    public RString getTxtJotai() {
-        return txtJotai;
     }
 
     public RString getTxtKeikakuTekiyoKaishiYMD() {
@@ -89,11 +81,6 @@ public class dgKyotakuKeikakuTodokedeRirekiList_Row extends DataRow {
     public void setBtnSelect(Button btnSelect) {
         this.setOriginalData("btnSelect", btnSelect);
         this.btnSelect = btnSelect;
-    }
-
-    public void setTxtJotai(RString txtJotai) {
-        this.setOriginalData("txtJotai", txtJotai);
-        this.txtJotai = txtJotai;
     }
 
     public void setTxtKeikakuTekiyoKaishiYMD(RString txtKeikakuTekiyoKaishiYMD) {
