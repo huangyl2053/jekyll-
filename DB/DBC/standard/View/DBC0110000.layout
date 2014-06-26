@@ -36,7 +36,7 @@
      "heightForDialog": "M",
      "onClick_BtnToSearch": "onClickBtnToSearch",
      "displayNone_txtTsuchishoNo": false,
-     "displayNone_ddlFukaNendo": false,
+     "displayNone_ddlFukaNendo": true,
      "displayNone_SearchCriteriaDetail": false
     },
     {
@@ -69,7 +69,7 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "onClickBtnToResearch": "onClickBtnToResearch"
+     "onClick_btnToResearch": "onClickBtnToResearch"
     }
    ],
    "controlType": "Panel",
@@ -90,9 +90,9 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "(共通) DBZ0010001 個人検索条件",
+   "title": "",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "KyotakuJikoTodokedeSearch"
@@ -282,7 +282,7 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorder": false,
+     "eraseBorder": true,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -365,7 +365,7 @@
            "fieldName": "dgKyotakuJikoTodokedeRirekiList",
            "items": [],
            "controlType": "DataGrid",
-           "width": "470",
+           "width": "440",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -391,7 +391,7 @@
             "isShowFooter": true,
             "isShowFilter": false,
             "isShowFilterButton": false,
-            "isShowRowState": false,
+            "isShowRowState": true,
             "isShowSelectButtonColumn": true,
             "isShowModifyButtonColumn": false,
             "isShowDeleteButtonColumn": false,
@@ -431,22 +431,6 @@
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "btnSelect"
-             },
-             {
-              "columnName": "状態",
-              "dataName": "txtJotai",
-              "toolTip": "",
-              "bgColor": 0,
-              "width": 60,
-              "visible": true,
-              "cellType": 0,
-              "cellDetails": {
-               "cellType": 0
-              },
-              "align": 1,
-              "resize": true,
-              "isPrivateInfo": false,
-              "sortKey": "txtJotai"
              },
              {
               "columnName": "開始日",
@@ -1429,6 +1413,35 @@
            "imageWidth": "",
            "imageHeight": "",
            "heightTextBoxMatches": false
+          },
+          {
+           "fieldName": "btnReturnToRirekiList",
+           "items": [],
+           "controlType": "Button",
+           "width": "170",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 2,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "btnReturnToRirekiList",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "text": "届出一覧に戻る",
+           "onClick": "",
+           "icon": 0,
+           "appearance": 0,
+           "imageFileUrl": "",
+           "imageWidth": "",
+           "imageHeight": "",
+           "heightTextBoxMatches": false
           }
          ],
          "controlType": "Panel",
@@ -1450,7 +1463,7 @@
          "jpControlName": "",
          "onLoad": "",
          "title": "計画届出明細",
-         "isOpen": false,
+         "isOpen": true,
          "canOpenAndClose": true,
          "postParameterPanelNames": [
           {
@@ -1530,7 +1543,10 @@
          "dialogOkEventNameForDialog": "",
          "dialogCancelEventNameForDialog": "",
          "canTransferEvent": true,
-         "heightForDialog": "M"
+         "heightForDialog": "M",
+         "onBlur_txtKaishuDate": "",
+         "onChange_ddlKaishuJiyu": "",
+         "onBlur_txtKaishuRiyu": ""
         }
        ],
        "controlType": "TabPanel",
@@ -1603,7 +1619,7 @@
      "selectControlID": "btnReturn",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "該当者一覧に戻る",
+     "text": "該当者検索に戻る",
      "onClick": "",
      "icon": 0,
      "appearance": 0,
@@ -1765,7 +1781,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
@@ -1870,7 +1886,7 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnReturnToRirekiList",
      "event": "onClick",
      "transition": ""
     },
@@ -1881,6 +1897,11 @@
     },
     {
      "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
      "event": "onClick",
      "transition": ""
     }
@@ -1990,9 +2011,9 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnReturnToRirekiList",
      "event": "onClick",
-     "transition": "該当者一覧"
+     "transition": ""
     },
     {
      "fieldName": "btnTodokedeSave",
@@ -2003,6 +2024,11 @@
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "該当者検索"
     }
    ]
   },
@@ -2110,9 +2136,9 @@
      "transition": "届出一覧"
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnReturnToRirekiList",
      "event": "onClick",
-     "transition": "該当者一覧"
+     "transition": "届出一覧"
     },
     {
      "fieldName": "btnTodokedeSave",
@@ -2123,6 +2149,11 @@
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "該当者検索"
     }
    ]
   },
@@ -2197,7 +2228,7 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnReturnToRirekiList",
      "event": "onClick",
      "transition": ""
     },
@@ -2210,6 +2241,11 @@
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   }

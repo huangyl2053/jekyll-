@@ -36,7 +36,7 @@
      "heightForDialog": "M",
      "onClick_BtnToSearch": "onClickBtnToSearch",
      "displayNone_txtTsuchishoNo": false,
-     "displayNone_ddlFukaNendo": false,
+     "displayNone_ddlFukaNendo": true,
      "displayNone_SearchCriteriaDetail": false
     },
     {
@@ -69,7 +69,7 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "onClick_btnToResearch": "",
+     "onClick_btnToResearch": "onClickBtnToResearch",
      "gridSetting": {
       "rowHeight": 50,
       "isMultiSelectable": false,
@@ -357,9 +357,9 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "(共通) DBZ0010001 個人検索条件",
+   "title": "",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "KyotakuKeikakuTodokedeSearch"
@@ -549,7 +549,7 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorder": false,
+     "eraseBorder": true,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -632,7 +632,7 @@
            "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
            "items": [],
            "controlType": "DataGrid",
-           "width": "1070",
+           "width": "1030",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -658,7 +658,7 @@
             "isShowFooter": true,
             "isShowFilter": false,
             "isShowFilterButton": false,
-            "isShowRowState": false,
+            "isShowRowState": true,
             "isShowSelectButtonColumn": true,
             "isShowModifyButtonColumn": false,
             "isShowDeleteButtonColumn": false,
@@ -698,22 +698,6 @@
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "btnSelect"
-             },
-             {
-              "columnName": "状態",
-              "dataName": "txtJotai",
-              "toolTip": "",
-              "bgColor": 0,
-              "width": 60,
-              "visible": true,
-              "cellType": 0,
-              "cellDetails": {
-               "cellType": 0
-              },
-              "align": 1,
-              "resize": true,
-              "isPrivateInfo": false,
-              "sortKey": "txtJotai"
              },
              {
               "columnName": "開始日",
@@ -1494,7 +1478,7 @@
              "imageFileUrl": "",
              "imageWidth": "",
              "imageHeight": "",
-             "heightTextBoxMatches": false
+             "heightTextBoxMatches": true
             },
             {
              "fieldName": "txtJigyoshaName",
@@ -1892,7 +1876,7 @@
              "imageFileUrl": "",
              "imageWidth": "",
              "imageHeight": "",
-             "heightTextBoxMatches": false
+             "heightTextBoxMatches": true
             },
             {
              "fieldName": "txtItakuJigyoshaName",
@@ -2238,6 +2222,35 @@
            "imageWidth": "",
            "imageHeight": "",
            "heightTextBoxMatches": false
+          },
+          {
+           "fieldName": "btnReturnToRirekiList",
+           "items": [],
+           "controlType": "Button",
+           "width": "170",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 2,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "btnReturnToRirekiList",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "text": "届出一覧に戻る",
+           "onClick": "",
+           "icon": 0,
+           "appearance": 0,
+           "imageFileUrl": "",
+           "imageWidth": "",
+           "imageHeight": "",
+           "heightTextBoxMatches": false
           }
          ],
          "controlType": "Panel",
@@ -2344,7 +2357,10 @@
          "dialogOkEventNameForDialog": "",
          "dialogCancelEventNameForDialog": "",
          "canTransferEvent": true,
-         "heightForDialog": "M"
+         "heightForDialog": "M",
+         "onBlur_txtKaishuDate": "",
+         "onChange_ddlKaishuJiyu": "",
+         "onBlur_txtKaishuRiyu": ""
         }
        ],
        "controlType": "TabPanel",
@@ -2417,7 +2433,7 @@
      "selectControlID": "btnReturn",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "該当者一覧に戻る",
+     "text": "該当者検索に戻る",
      "onClick": "",
      "icon": 0,
      "appearance": 0,
@@ -2591,7 +2607,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
@@ -2680,17 +2696,17 @@
      "transition": ""
     },
     {
-     "fieldName": "btnTodokedeDelete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnTodokedeKakutei",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnTodokedeDelete",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturnToRirekiList",
      "event": "onClick",
      "transition": ""
     },
@@ -2706,6 +2722,11 @@
     },
     {
      "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
      "event": "onClick",
      "transition": ""
     }
@@ -2800,19 +2821,19 @@
      "transition": ""
     },
     {
-     "fieldName": "btnTodokedeDelete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnTodokedeKakutei",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnTodokedeDelete",
      "event": "onClick",
-     "transition": "該当者検索"
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturnToRirekiList",
+     "event": "onClick",
+     "transition": ""
     },
     {
      "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
@@ -2828,6 +2849,11 @@
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "該当者検索"
     }
    ]
   },
@@ -2920,19 +2946,19 @@
      "transition": "届出一覧"
     },
     {
-     "fieldName": "btnTodokedeDelete",
-     "event": "onClick",
-     "transition": "届出一覧"
-    },
-    {
      "fieldName": "btnTodokedeKakutei",
      "event": "onClick",
      "transition": "届出一覧"
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnTodokedeDelete",
      "event": "onClick",
-     "transition": "該当者検索"
+     "transition": "届出一覧"
+    },
+    {
+     "fieldName": "btnReturnToRirekiList",
+     "event": "onClick",
+     "transition": "届出一覧"
     },
     {
      "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
@@ -2948,6 +2974,11 @@
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "該当者検索"
     }
    ]
   },
@@ -3002,17 +3033,17 @@
      "transition": ""
     },
     {
-     "fieldName": "btnTodokedeDelete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnTodokedeKakutei",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnTodokedeDelete",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturnToRirekiList",
      "event": "onClick",
      "transition": ""
     },
@@ -3030,6 +3061,11 @@
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   }
