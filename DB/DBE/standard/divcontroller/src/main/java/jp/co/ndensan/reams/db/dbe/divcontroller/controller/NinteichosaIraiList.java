@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.dgNinteichosaIraiList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
@@ -184,6 +185,8 @@ public class NinteichosaIraiList {
             boolean is依頼済 = !iraiDate.equals(RString.EMPTY);
             RString iraishoHakkoDate = cg.getAsRString("依頼書発行日");
             boolean is依頼書発行済 = !iraishoHakkoDate.equals(RString.EMPTY);
+            ChosainData.Chosain currentChosain = new ChosainData().get調査員From(cg.getAsRString("調査員番号"));
+            ChosainData.Chosain latestChosain = new ChosainData().get調査員From(cg.getAsRString("前回調査員番号"));
             return new dgNinteichosaIraiList_Row(
                     cg.getAsRString("保険者番号"),
                     cg.getAsRString("市町村"),
@@ -203,14 +206,14 @@ public class NinteichosaIraiList {
                     cg.getAsRString("調査依頼区分"),
                     cg.getAsRString("調査回数"),
                     cg.getAsRString("認定調査履歴番号"),
-                    cg.getAsRString("調査委託先番号"),
-                    cg.getAsRString("調査委託先名"),
-                    cg.getAsRString("調査員番号"),
-                    cg.getAsRString("調査員名"),
-                    cg.getAsRString("前回調査委託先番号"),
-                    cg.getAsRString("前回調査委託先名"),
-                    cg.getAsRString("前回調査員番号"),
-                    cg.getAsRString("前回調査員名"),
+                    currentChosain.itakusaki().code(),
+                    currentChosain.itakusaki().name(),
+                    currentChosain.code(),
+                    currentChosain.name(),
+                    latestChosain.itakusaki().code(),
+                    latestChosain.itakusaki().name(),
+                    latestChosain.code(),
+                    latestChosain.name(),
                     cg.getAsRString("審査会開催地区コード"),
                     cg.getAsRString("審査会開催地区"),
                     cg.getAsTextBoxFlexibleDate("督促日"),

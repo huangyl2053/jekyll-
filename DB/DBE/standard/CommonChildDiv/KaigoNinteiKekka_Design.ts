@@ -280,6 +280,7 @@ module DBE {
      "selectControlID": "ddlNinteiKubun_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "required": true,
      "onFocus": "",
      "onBlur": "",
@@ -380,6 +381,7 @@ module DBE {
      "selectControlID": "ddlTokuteiShippei_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "required": false,
      "onFocus": "",
      "onBlur": "",
@@ -391,10 +393,10 @@ module DBE {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "selectedItem": "",
+     "selectedItem": null,
      "dataSource": [
       {
-       "key": "",
+       "key": "00",
        "value": ""
       },
       {
@@ -472,6 +474,7 @@ module DBE {
      "selectControlID": "ddlNijiHanteiKekka_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "required": true,
      "onFocus": "",
      "onBlur": "",
@@ -543,6 +546,7 @@ module DBE {
      "selectControlID": "ddlJotaiZo_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "required": false,
      "onFocus": "",
      "onBlur": "",
@@ -554,10 +558,10 @@ module DBE {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "selectedItem": "",
+     "selectedItem": null,
      "dataSource": [
       {
-       "key": "",
+       "key": "00",
        "value": ""
       },
       {
@@ -706,6 +710,7 @@ module DBE {
      "selectControlID": "ddlNinteiYukoTsukisu_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "required": true,
      "onFocus": "",
      "onBlur": "",
@@ -717,10 +722,10 @@ module DBE {
      "labelRWidth": "40",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "selectedItem": "0",
+     "selectedItem": null,
      "dataSource": [
       {
-       "key": "0",
+       "key": "00",
        "value": ""
       },
       {
@@ -794,6 +799,7 @@ module DBE {
      "imageWidth": "",
      "imageHeight": "",
      "icon": 0,
+     "heightTextBoxMatches": false,
      "displayChildDivName": "",
      "dataPassing": [],
      "visibleCloseButton": true,
@@ -951,10 +957,7 @@ module DBE {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -1004,7 +1007,9 @@ module DBE {
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }
