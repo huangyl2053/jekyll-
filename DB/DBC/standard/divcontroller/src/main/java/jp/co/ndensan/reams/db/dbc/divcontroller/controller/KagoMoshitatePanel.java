@@ -13,15 +13,17 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1400011.KyufuJissekiGa
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.ValidationErrorException;
 
 
 /**
  *
  * @author n8223　
  * @author n8223 ymddata,　共有DIV適用　2014.06.20 
+ * @author n8223 
+ * 
  */
 public class KagoMoshitatePanel {
     
@@ -36,6 +38,9 @@ public class KagoMoshitatePanel {
         ResponseData<KagoMoshitatePanelDiv> response = new ResponseData<>();
         
         
+//       panel.getKagoMoshitateInfo().getTxtMoshitateDate().setRequired(true);
+//       panel.getKagoMoshitateInfo().getDdlKagoMoshitateRiyu().setRequired(true); 
+       
        //住民情報・世帯員情報の内容を設定する。
         setKagoMoshitateHihokensha(panel);       
        // 過誤申立書情報の内容を設定する。
@@ -103,7 +108,6 @@ public class KagoMoshitatePanel {
         ymlDt.getAsRString("shikakuJotai"));
         panel.getCommonKaigoshikakuKihonChildDiv2().getTxtJutokuKaijo().setValue(
         ymlDt.getAsRDate("jutokuKaijo"));  
-  
          
      }
     
@@ -118,15 +122,16 @@ public class KagoMoshitatePanel {
     private void setKagoMoshitate(KagoMoshitatePanelDiv panel, KyufuJissekiGaitoshaListPanelDiv gaitoshaListpanel) {
         
         
-          //入力した情報・選択された情報をもとに過誤申立書情報の内容を設定する。
-          //事業者NO
+        //入力した情報・選択された情報をもとに過誤申立書情報の内容を設定する。
+        //事業者NO
          panel.getKagoMoshitateInfo().getTxtJigyoshaNo().
                  setValue(gaitoshaListpanel.getDgHihokenshaSearchGaitosha().getClickedItem().getTxtJigyoshaNo());
         
-         //事業者NANE
-        panel.getKagoMoshitateInfo().getTxtJigyoshaName().
+        //事業者NANE 2014.06.25 情報はない場合がある　修正
+        if (!gaitoshaListpanel.getDgHihokenshaSearchGaitosha().getClickedItem().getTxtJigyoshaName().equals("")){
+         panel.getKagoMoshitateInfo().getTxtJigyoshaName().
                 setValue(gaitoshaListpanel.getDgHihokenshaSearchGaitosha().getClickedItem().getTxtJigyoshaName());
-      
+        }
         //提供年月
          panel.getKagoMoshitateInfo().getTxtTeikyoYM().
                  setValue(new RDate(gaitoshaListpanel.getDgHihokenshaSearchGaitosha().getClickedItem().getTxtTeikyoYM().toString()));
@@ -149,16 +154,34 @@ public class KagoMoshitatePanel {
          panel.getKagoMoshitateInfo().getTxtShokisaiHokenshaNo().setValue(ymlDt.getAsRString("shokisaiHokenshaNo"));
          //証記載保険者名
          panel.getKagoMoshitateInfo().getTxtShokisaiHokenshaName().setValue(ymlDt.getAsRString("shokisaiHokenshaName"));
-         //申立日
-         panel.getKagoMoshitateInfo().getTxtMoshitateDate().setValue(ymlDt.getAsRDate("moshitateDate"));
+         //申立日 2014.06.24 修正　空白
+         //panel.getKagoMoshitateInfo().getTxtMoshitateDate().setValue(ymlDt.getAsRDate("moshitateDate"));
+         panel.getKagoMoshitateInfo().getTxtMoshitateDate().clearValue();
+         //申立事由 2014.06.24 追加　空白 code00
+         panel.getKagoMoshitateInfo().getDdlKagoMoshitateRiyu().setSelectedItem(new RString("code00"));
+         
         
     }
+    
+    
+//    public ResponseData<KagoMoshitatePanelDiv> onClick_btnCancel(KagoMoshitatePanelDiv panel, KyufuJissekiGaitoshaListPanelDiv gaitoshaListpanel) {
+//        ResponseData<KagoMoshitatePanelDiv> response = new ResponseData<>();
+//         
+//         panel.getKagoMoshitateInfo().getTxtMoshitateDate().setRequired(false);
+//         panel.getKagoMoshitateInfo().getDdlKagoMoshitateRiyu().setRequired(false);
+//         
+//         response.data = panel;
+//         
+//         response.getValidateErrorMessage().clear();
+//         
+//      
+//         return response;
+//        
+//    }
+    
     
      private List<HashMap> ymlData(String ymlName) {
         return YamlLoader.DBC.loadAsList(new RString(ymlName));
     }
-
-
-
     
 }

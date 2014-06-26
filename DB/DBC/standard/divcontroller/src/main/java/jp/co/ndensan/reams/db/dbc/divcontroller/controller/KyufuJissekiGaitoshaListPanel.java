@@ -92,11 +92,11 @@ public class KyufuJissekiGaitoshaListPanel {
             ControlGenerator ymlDt = new ControlGenerator(hashMap);
             
            
-        arrayData.add(createRowKyufuJissekiGaitoshaListData(
-                    srchpanel.getTxtJigyoshaNo(),
-                    srchpanel.getTxtJigyoshaName(),
-                    srchpanel.getTxtHihoNo(),
-                    srchpanel.getTxtHihoName(),
+            arrayData.add(createRowKyufuJissekiGaitoshaListData(
+                    srchpanel.getTxtJigyoshaNo().getValue(),
+                    srchpanel.getTxtJigyoshaName().getValue(),
+                    srchpanel.getTxtHihoNo().getValue(),
+                    srchpanel.getTxtHihoName().getValue(),
                     ymlDt.getAsRString("kagoForm"),
                     srchpanel.getTxtTeikyoYMRange().getFromValue(),
                     ymlDt.getAsRString("kyufuJissekiSakuseiKubun"),
@@ -113,10 +113,10 @@ public class KyufuJissekiGaitoshaListPanel {
      *引数を元にデータグリッド内に挿入する個人データを作成します。
      */
     private dgHihokenshaSearchGaitosha_Row createRowKyufuJissekiGaitoshaListData(
-            TextBoxCode jigyoshaNo,
-            TextBox jigyoshaName,
-            TextBoxCode hihoNo,
-            TextBox hihoName,
+            RString jigyoshaNo,
+            RString jigyoshaName,
+            RString hihoNo,
+            RString hihoName,
             RString kagoForm,
             RDate teikyoYM,
             RString kyufuJissekiSakuseiKubun,
@@ -126,8 +126,8 @@ public class KyufuJissekiGaitoshaListPanel {
 
         dgHihokenshaSearchGaitosha_Row rowKyufuJissekiGaitoshaListData;
         rowKyufuJissekiGaitoshaListData = new dgHihokenshaSearchGaitosha_Row(
-                Boolean.FALSE,
                 new Button(),
+                Boolean.FALSE,
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -139,10 +139,10 @@ public class KyufuJissekiGaitoshaListPanel {
                 RString.EMPTY
         );
 
-        rowKyufuJissekiGaitoshaListData.setTxtJigyoshaNo(jigyoshaNo.getValue());
-        rowKyufuJissekiGaitoshaListData.setTxtJigyoshaName(jigyoshaName.getValue());
-        rowKyufuJissekiGaitoshaListData.setTxtHihoNo(hihoNo.getValue());
-        rowKyufuJissekiGaitoshaListData.setTxtHihoName(hihoName.getValue());
+        rowKyufuJissekiGaitoshaListData.setTxtJigyoshaNo(jigyoshaNo);
+        rowKyufuJissekiGaitoshaListData.setTxtJigyoshaName(jigyoshaName);
+        rowKyufuJissekiGaitoshaListData.setTxtHihoNo(hihoNo);
+        rowKyufuJissekiGaitoshaListData.setTxtHihoName(hihoName);
         rowKyufuJissekiGaitoshaListData.setTxtKagoForm(kagoForm);
         rowKyufuJissekiGaitoshaListData.setTxtTeikyoYM(setWareki(teikyoYM.toDateString()).substring(0, 6)); 
         rowKyufuJissekiGaitoshaListData.setTxtKyufuJissekiSakuseiKubun(kyufuJissekiSakuseiKubun);
@@ -160,16 +160,35 @@ public class KyufuJissekiGaitoshaListPanel {
      * @param panel KyufuJissekiGaitoshaListPanelDiv
      * @return PanelDivのResponseData
      */
-    public ResponseData<KyufuJissekiGaitoshaListPanelDiv> onClick_btnSettle(KyufuJissekiGaitoshaListPanelDiv panel) {
+    public ResponseData<KyufuJissekiGaitoshaListPanelDiv> onClick_btnSettle(KyufuJissekiGaitoshaListPanelDiv panel ,SearchToKyufujissekiPanelDiv srchpanel) {
         ResponseData<KyufuJissekiGaitoshaListPanelDiv> response = new ResponseData<>();
 
         //給付実積該当一覧の内容を設定する。
-        panel.getDgHihokenshaSearchGaitosha().getClickedItem().setChkCreateMoshitatesho(Boolean.TRUE);
-
+        dgHihokenshaSearchGaitosha_Row clickRow = panel.getDgHihokenshaSearchGaitosha().getClickedItem();
+        clickRow.setChkCreateMoshitatesho(Boolean.TRUE);
+        
         response.data = panel;
         return response;
     }
+    
+     /**
+     * 介護給付費過誤申立書登録 過誤申立書情報をやめるボタンを押下後、申立者作成の内容をチェックなし。
+     *
+     * @param panel KyufuJissekiGaitoshaListPanelDiv
+     * @return PanelDivのResponseData
+     */
+    public ResponseData<KyufuJissekiGaitoshaListPanelDiv> onClick_btnCancel(KyufuJissekiGaitoshaListPanelDiv panel ,SearchToKyufujissekiPanelDiv srchpanel) {
+        ResponseData<KyufuJissekiGaitoshaListPanelDiv> response = new ResponseData<>();
 
+        //給付実積該当一覧の内容を設定する。
+        dgHihokenshaSearchGaitosha_Row clickRow = panel.getDgHihokenshaSearchGaitosha().getClickedItem();
+        
+        clickRow.setChkCreateMoshitatesho(Boolean.FALSE);
+        
+        response.data = panel;
+        return response;
+    }
+    
     
     //給付実績条件が入力されたことをチェックするメソッド
      private Boolean setSearchToKyufujisseki(KyufuJissekiGaitoshaListPanelDiv panel ,SearchToKyufujissekiPanelDiv srchpanel) {
@@ -177,31 +196,51 @@ public class KyufuJissekiGaitoshaListPanel {
          ArrayList<RString> searchToKyufujissekiData = new ArrayList<>();
 
          //入力項目が空白でないかことを確認する。
-         //事業者コード
-         
-         
+         //事業者コード ひ
          searchToKyufujissekiData.add(srchpanel.getTxtJigyoshaNo().getValue());
-         //事業者名
-         searchToKyufujissekiData.add(srchpanel.getTxtJigyoshaName().getValue());
+         //事業者名 2014.6.24  削除
+         //searchToKyufujissekiData.add(srchpanel.getTxtJigyoshaName().getValue());
          //被保険番号
          searchToKyufujissekiData.add(srchpanel.getTxtHihoNo().getValue());
-         //被保険名
-         searchToKyufujissekiData.add(srchpanel.getTxtHihoName().getValue());
-        //提供年月（From~）
-         RDate TeikyoYMRange =  srchpanel.getTxtTeikyoYMRange().getFromValue();
-                
+         //被保険名　2014.6.24  削除
+         //searchToKyufujissekiData.add(srchpanel.getTxtHihoName().getValue());
+         //提供年月（From~）
+
+          RDate TeikyoYMRange =  srchpanel.getTxtTeikyoYMRange().getFromValue();
+         if(TeikyoYMRange == null){    
+                 status = false;
+                 return status;
+         }
+         
          for (int i = 0; i < searchToKyufujissekiData.size(); i++) {
              RString rString = searchToKyufujissekiData.get(i);
              
              if ((null == rString) || (rString.isEmpty())) {
                  status = false;
                  return status;
-             } 
+             }  
          }
          return status;
     }
     
          
+      /**
+     * 介護給付費過誤申立書登録 過誤申立情報の入力をやめるボタンを押下後、申立日・申立事由を空白しでもエラーを無視するように設定する
+     *
+     * @param panel KyufuJissekiGaitoshaListPanelDiv
+     * @return PanelDivのResponseData
+     */
+    public ResponseData<KyufuJissekiGaitoshaListPanelDiv> onClick_btnCancel(KyufuJissekiGaitoshaListPanelDiv panel) {
+        ResponseData<KyufuJissekiGaitoshaListPanelDiv> response = new ResponseData<>();
+
+        //給付実積該当一覧の内容を設定する。
+        
+        response.data = panel;
+        return response;
+    }        
+            
+            
+     
     private RString setWareki(RString wareki) {
          FlexibleDate warekiYmd = new FlexibleDate(wareki);
         return warekiYmd.wareki().toDateString();

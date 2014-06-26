@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1400011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 20 18:46:06 JST 2014 
+ * Wed Jun 25 13:41:58 JST 2014 
  */
 
 
@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgHihokenshaSearchGaitosha_Row extends DataRow {
 
-    private Boolean chkCreateMoshitatesho;
     private Button btnSelect;
+    private Boolean chkCreateMoshitatesho;
     private RString txtJigyoshaNo;
     private RString txtJigyoshaName;
     private RString txtHihoNo;
@@ -35,8 +35,8 @@ public class dgHihokenshaSearchGaitosha_Row extends DataRow {
 
     public dgHihokenshaSearchGaitosha_Row() {
         super();
-        this.chkCreateMoshitatesho = false;
         this.btnSelect = new Button();
+        this.chkCreateMoshitatesho = false;
         this.txtJigyoshaNo = RString.EMPTY;
         this.txtJigyoshaName = RString.EMPTY;
         this.txtHihoNo = RString.EMPTY;
@@ -48,10 +48,10 @@ public class dgHihokenshaSearchGaitosha_Row extends DataRow {
         this.txtShinsaYM = RString.EMPTY;
     }
 
-    public dgHihokenshaSearchGaitosha_Row(Boolean chkCreateMoshitatesho, Button btnSelect, RString txtJigyoshaNo, RString txtJigyoshaName, RString txtHihoNo, RString txtHihoName, RString txtKagoForm, RString txtTeikyoYM, RString txtKyufuJissekiSakuseiKubun, RString txtKyufuKubun, RString txtShinsaYM) {
+    public dgHihokenshaSearchGaitosha_Row(Button btnSelect, Boolean chkCreateMoshitatesho, RString txtJigyoshaNo, RString txtJigyoshaName, RString txtHihoNo, RString txtHihoName, RString txtKagoForm, RString txtTeikyoYM, RString txtKyufuJissekiSakuseiKubun, RString txtKyufuKubun, RString txtShinsaYM) {
         super();
-        this.setOriginalData("chkCreateMoshitatesho", chkCreateMoshitatesho);
         this.setOriginalData("btnSelect", btnSelect);
+        this.setOriginalData("chkCreateMoshitatesho", chkCreateMoshitatesho);
         this.setOriginalData("txtJigyoshaNo", txtJigyoshaNo);
         this.setOriginalData("txtJigyoshaName", txtJigyoshaName);
         this.setOriginalData("txtHihoNo", txtHihoNo);
@@ -61,8 +61,8 @@ public class dgHihokenshaSearchGaitosha_Row extends DataRow {
         this.setOriginalData("txtKyufuJissekiSakuseiKubun", txtKyufuJissekiSakuseiKubun);
         this.setOriginalData("txtKyufuKubun", txtKyufuKubun);
         this.setOriginalData("txtShinsaYM", txtShinsaYM);
-        this.chkCreateMoshitatesho = chkCreateMoshitatesho;
         this.btnSelect = btnSelect;
+        this.chkCreateMoshitatesho = chkCreateMoshitatesho;
         this.txtJigyoshaNo = txtJigyoshaNo;
         this.txtJigyoshaName = txtJigyoshaName;
         this.txtHihoNo = txtHihoNo;
@@ -74,12 +74,12 @@ public class dgHihokenshaSearchGaitosha_Row extends DataRow {
         this.txtShinsaYM = txtShinsaYM;
     }
 
-    public Boolean getChkCreateMoshitatesho() {
-        return chkCreateMoshitatesho;
-    }
-
     public Button getBtnSelect() {
         return btnSelect;
+    }
+
+    public Boolean getChkCreateMoshitatesho() {
+        return chkCreateMoshitatesho;
     }
 
     public RString getTxtJigyoshaNo() {
@@ -118,14 +118,14 @@ public class dgHihokenshaSearchGaitosha_Row extends DataRow {
         return txtShinsaYM;
     }
 
-    public void setChkCreateMoshitatesho(Boolean chkCreateMoshitatesho) {
-        this.setOriginalData("chkCreateMoshitatesho", chkCreateMoshitatesho);
-        this.chkCreateMoshitatesho = chkCreateMoshitatesho;
-    }
-
     public void setBtnSelect(Button btnSelect) {
         this.setOriginalData("btnSelect", btnSelect);
         this.btnSelect = btnSelect;
+    }
+
+    public void setChkCreateMoshitatesho(Boolean chkCreateMoshitatesho) {
+        this.setOriginalData("chkCreateMoshitatesho", chkCreateMoshitatesho);
+        this.chkCreateMoshitatesho = chkCreateMoshitatesho;
     }
 
     public void setTxtJigyoshaNo(RString txtJigyoshaNo) {
