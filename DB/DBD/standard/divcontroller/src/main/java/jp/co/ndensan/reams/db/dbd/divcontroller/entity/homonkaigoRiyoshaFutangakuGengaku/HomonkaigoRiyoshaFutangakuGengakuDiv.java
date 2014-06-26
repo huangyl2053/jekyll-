@@ -29,6 +29,8 @@ public class HomonkaigoRiyoshaFutangakuGengakuDiv extends Panel {
     private DataGrid<dgHomonkaigoRiyoshaFutangakuGengakuList_Row> dgHomonkaigoRiyoshaFutangakuGengakuList;
     @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuDetail")
     private HomonkaigoRiyoshaFutangakuGengakuDetailDiv HomonkaigoRiyoshaFutangakuGengakuDetail;
+    @JsonProperty("btnClose")
+    private Button btnClose;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -64,6 +66,16 @@ public class HomonkaigoRiyoshaFutangakuGengakuDiv extends Panel {
     @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuDetail")
     public void setHomonkaigoRiyoshaFutangakuGengakuDetail(HomonkaigoRiyoshaFutangakuGengakuDetailDiv HomonkaigoRiyoshaFutangakuGengakuDetail) {
         this.HomonkaigoRiyoshaFutangakuGengakuDetail=HomonkaigoRiyoshaFutangakuGengakuDetail;
+    }
+
+    @JsonProperty("btnClose")
+    public Button getBtnClose() {
+        return btnClose;
+    }
+
+    @JsonProperty("btnClose")
+    public void setBtnClose(Button btnClose) {
+        this.btnClose=btnClose;
     }
 
 }

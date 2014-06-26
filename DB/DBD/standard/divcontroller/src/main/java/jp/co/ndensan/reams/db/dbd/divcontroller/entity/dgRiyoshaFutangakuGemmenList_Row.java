@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbd.divcontroller.entity.hyojunFutangakuGemmen;
+package jp.co.ndensan.reams.db.dbd.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jun 26 13:39:20 JST 2014 
+ * Thu Jun 26 13:47:16 JST 2014 
  */
 
 
@@ -15,51 +15,47 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
- * dgHyojunFutangakuGengakuList_Row のクラスファイル 
+ * dgRiyoshaFutangakuGemmenList_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class dgHyojunFutangakuGengakuList_Row extends DataRow {
+public class dgRiyoshaFutangakuGemmenList_Row extends DataRow {
 
     private TextBoxFlexibleDate shinseiDate;
     private TextBoxFlexibleDate tekiyoDate;
     private TextBoxFlexibleDate yukoKigen;
     private RString ketteiKubun;
     private TextBoxFlexibleDate ketteiDate;
-    private TextBoxNum futangaku;
-    private RString gengakuKubun;
+    private TextBoxNum kyufuRitsu;
     private RString fushoninRiyu;
 
-    public dgHyojunFutangakuGengakuList_Row() {
+    public dgRiyoshaFutangakuGemmenList_Row() {
         super();
         this.shinseiDate = new TextBoxFlexibleDate();
         this.tekiyoDate = new TextBoxFlexibleDate();
         this.yukoKigen = new TextBoxFlexibleDate();
         this.ketteiKubun = RString.EMPTY;
         this.ketteiDate = new TextBoxFlexibleDate();
-        this.futangaku = new TextBoxNum();
-        this.gengakuKubun = RString.EMPTY;
+        this.kyufuRitsu = new TextBoxNum();
         this.fushoninRiyu = RString.EMPTY;
     }
 
-    public dgHyojunFutangakuGengakuList_Row(TextBoxFlexibleDate shinseiDate, TextBoxFlexibleDate tekiyoDate, TextBoxFlexibleDate yukoKigen, RString ketteiKubun, TextBoxFlexibleDate ketteiDate, TextBoxNum futangaku, RString gengakuKubun, RString fushoninRiyu) {
+    public dgRiyoshaFutangakuGemmenList_Row(TextBoxFlexibleDate shinseiDate, TextBoxFlexibleDate tekiyoDate, TextBoxFlexibleDate yukoKigen, RString ketteiKubun, TextBoxFlexibleDate ketteiDate, TextBoxNum kyufuRitsu, RString fushoninRiyu) {
         super();
         this.setOriginalData("shinseiDate", shinseiDate);
         this.setOriginalData("tekiyoDate", tekiyoDate);
         this.setOriginalData("yukoKigen", yukoKigen);
         this.setOriginalData("ketteiKubun", ketteiKubun);
         this.setOriginalData("ketteiDate", ketteiDate);
-        this.setOriginalData("futangaku", futangaku);
-        this.setOriginalData("gengakuKubun", gengakuKubun);
+        this.setOriginalData("kyufuRitsu", kyufuRitsu);
         this.setOriginalData("fushoninRiyu", fushoninRiyu);
         this.shinseiDate = shinseiDate;
         this.tekiyoDate = tekiyoDate;
         this.yukoKigen = yukoKigen;
         this.ketteiKubun = ketteiKubun;
         this.ketteiDate = ketteiDate;
-        this.futangaku = futangaku;
-        this.gengakuKubun = gengakuKubun;
+        this.kyufuRitsu = kyufuRitsu;
         this.fushoninRiyu = fushoninRiyu;
     }
 
@@ -83,12 +79,8 @@ public class dgHyojunFutangakuGengakuList_Row extends DataRow {
         return ketteiDate;
     }
 
-    public TextBoxNum getFutangaku() {
-        return futangaku;
-    }
-
-    public RString getGengakuKubun() {
-        return gengakuKubun;
+    public TextBoxNum getKyufuRitsu() {
+        return kyufuRitsu;
     }
 
     public RString getFushoninRiyu() {
@@ -120,14 +112,9 @@ public class dgHyojunFutangakuGengakuList_Row extends DataRow {
         this.ketteiDate = ketteiDate;
     }
 
-    public void setFutangaku(TextBoxNum futangaku) {
-        this.setOriginalData("futangaku", futangaku);
-        this.futangaku = futangaku;
-    }
-
-    public void setGengakuKubun(RString gengakuKubun) {
-        this.setOriginalData("gengakuKubun", gengakuKubun);
-        this.gengakuKubun = gengakuKubun;
+    public void setKyufuRitsu(TextBoxNum kyufuRitsu) {
+        this.setOriginalData("kyufuRitsu", kyufuRitsu);
+        this.kyufuRitsu = kyufuRitsu;
     }
 
     public void setFushoninRiyu(RString fushoninRiyu) {

@@ -29,6 +29,8 @@ public class HyojunFutangakuGengakuDiv extends Panel {
     private DataGrid<dgHyojunFutangakuGengakuList_Row> dgHyojunFutangakuGengakuList;
     @JsonProperty("HyojunFutangakuGemmenDetail")
     private HyojunFutangakuGemmenDetailDiv HyojunFutangakuGemmenDetail;
+    @JsonProperty("btnClose")
+    private Button btnClose;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -64,6 +66,16 @@ public class HyojunFutangakuGengakuDiv extends Panel {
     @JsonProperty("HyojunFutangakuGemmenDetail")
     public void setHyojunFutangakuGemmenDetail(HyojunFutangakuGemmenDetailDiv HyojunFutangakuGemmenDetail) {
         this.HyojunFutangakuGemmenDetail=HyojunFutangakuGemmenDetail;
+    }
+
+    @JsonProperty("btnClose")
+    public Button getBtnClose() {
+        return btnClose;
+    }
+
+    @JsonProperty("btnClose")
+    public void setBtnClose(Button btnClose) {
+        this.btnClose=btnClose;
     }
 
 }

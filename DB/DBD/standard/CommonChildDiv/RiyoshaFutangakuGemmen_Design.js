@@ -92,6 +92,7 @@ var DBD;
                             "selectControlID": "dgRiyoshaFutangakuGemmenList",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "height": "185",
                             "gridSetting": {
                                 "rowHeight": 25,
@@ -605,10 +606,7 @@ var DBD;
                                     "onOpen": "",
                                     "onClose": "",
                                     "session": {},
-                                    "eraseBorderTop": false,
-                                    "eraseBorderBottom": false,
-                                    "eraseBorderRight": false,
-                                    "eraseBorderLeft": false,
+                                    "eraseBorder": false,
                                     "backgroundColor": 0,
                                     "widthAuto": false,
                                     "panelDisplay": 1,
@@ -650,16 +648,42 @@ var DBD;
                             "onOpen": "",
                             "onClose": "",
                             "session": {},
-                            "eraseBorderTop": false,
-                            "eraseBorderBottom": false,
-                            "eraseBorderRight": false,
-                            "eraseBorderLeft": false,
+                            "eraseBorder": false,
                             "backgroundColor": 0,
                             "widthAuto": false,
                             "panelDisplay": 0,
                             "isGroupBox": false,
                             "readOnly": false,
                             "height": "Auto"
+                        },
+                        {
+                            "fieldName": "btnClose",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 1,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnClose",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "閉じる",
+                            "onClick": "CloseOK",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
                         }
                     ],
                     "controlType": "Panel",
@@ -704,16 +728,13 @@ var DBD;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "450"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -745,8 +766,10 @@ var DBD;
                     "controlName": "txtHiddenHihokenshaNo"
                 }
             ],
-            "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogOkEventNameForDialog": "CloseOK",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "490"
         };
         return RiyoshaFutangakuGemmen_Design;
     })(Uz.CommonChildDiv);
