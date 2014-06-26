@@ -32,6 +32,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
      "atenaInfo_eraseBorderTop": true,
@@ -67,7 +69,7 @@
      "btnEltax_displayNone": false,
      "btnShiyoJokyo_displayNone": false,
      "btnAtesakiKakunin_displayNone": false,
-     "SubGyomuCode": "",
+     "SubGyomuCode": "DBB",
      "JukiYusennKubun": "1",
      "AgeArrivalDay": "1",
      "SubGyomuUmu": "0",
@@ -99,15 +101,17 @@
      "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "businessId": "DBZ",
      "controlName": "KaigoFukaKihon",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
      "backGroundColor": 0,
      "btnHihoRireki_visible": true
     }
@@ -135,13 +139,13 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "SokujiFukaKouseiMain"
+     "postParameterPanelNames": "SokujiKouseiJumin"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": ""
+     "requestUrl": "dbb/db/dbb/SokujiKouseiJumin/onLoad_SokujiKouseiJumin"
     }
    ],
    "hiddenInput": [],
@@ -150,16 +154,18 @@
    "session": {},
    "marginTop": "XS",
    "marginBottom": "XS",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "SokujiFukaKouseiRireki",
@@ -184,6 +190,7 @@
      "selectControlID": "dgSokujiFukaKouseiRireki",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "height": "Auto",
      "gridSetting": {
       "rowHeight": 25,
@@ -339,7 +346,7 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "SokujiFukaKouseiKanryo"
+     "postParameterPanelNames": "SokujiFukaKouseiRireki"
     }
    ],
    "requestSettings": [],
@@ -349,16 +356,18 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
-   "widthAuto": false,
+   "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "SokujiFukaKouseiMain",
@@ -517,6 +526,7 @@
      "selectControlID": "ddlKoseiTsuki_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "required": false,
      "onFocus": "",
      "onBlur": "",
@@ -1100,6 +1110,7 @@
              "appearance": 0,
              "imageFileUrl": "",
              "icon": 0,
+             "heightTextBoxMatches": false,
              "displayChildDivName": "",
              "dataPassing": [],
              "visibleCloseButton": true,
@@ -1242,16 +1253,18 @@
            "session": {},
            "marginTop": "Default",
            "marginBottom": "Default",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false,
+           "eraseBorder": false,
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 0,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto"
+           "height": "Auto",
+           "focusPositionID": "restoreLayoutButton",
+           "eraseBorderTop": false,
+           "eraseBorderBottom": false,
+           "eraseBorderRight": false,
+           "eraseBorderLeft": false
           },
           {
            "fieldName": "FukakonkyoAto",
@@ -1805,6 +1818,7 @@
              "appearance": 0,
              "imageFileUrl": "",
              "icon": 0,
+             "heightTextBoxMatches": false,
              "displayChildDivName": "",
              "dataPassing": [],
              "visibleCloseButton": true,
@@ -1947,16 +1961,18 @@
            "session": {},
            "marginTop": "Default",
            "marginBottom": "Default",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false,
+           "eraseBorder": false,
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 0,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto"
+           "height": "Auto",
+           "focusPositionID": "restoreLayoutButton",
+           "eraseBorderTop": false,
+           "eraseBorderBottom": false,
+           "eraseBorderRight": false,
+           "eraseBorderLeft": false
           }
          ],
          "controlType": "Panel",
@@ -1992,16 +2008,18 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "focusPositionID": "restoreLayoutButton",
+         "eraseBorderTop": false,
+         "eraseBorderBottom": false,
+         "eraseBorderRight": false,
+         "eraseBorderLeft": false
         },
         {
          "fieldName": "SokujikouseiKiwarigaku",
@@ -2011,7 +2029,7 @@
            "items": [],
            "controlType": "DropDownList",
            "width": "60",
-           "visible": true,
+           "visible": false,
            "displayNone": false,
            "disabled": false,
            "accessKey": "",
@@ -2026,6 +2044,7 @@
            "selectControlID": "ddlChoteiNendo_core",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "required": false,
            "onFocus": "",
            "onBlur": "",
@@ -2325,7 +2344,7 @@
                "fieldName": "lblTsuki4",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -2343,7 +2362,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "4",
+               "text": "4月",
                "decorationClass": "",
                "align": 1
               }
@@ -2374,7 +2393,7 @@
                "fieldName": "lblTokuchoKi1",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -2392,7 +2411,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1",
+               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -3497,7 +3516,7 @@
                "fieldName": "lblTsuki5",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -3515,7 +3534,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "5",
+               "text": "5月",
                "decorationClass": "",
                "align": 1
               }
@@ -4042,7 +4061,7 @@
                "fieldName": "lblTsuki6",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -4060,7 +4079,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "6",
+               "text": "6月",
                "decorationClass": "",
                "align": 1
               }
@@ -4091,7 +4110,7 @@
                "fieldName": "lblTokuchoKi2",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -4109,7 +4128,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "2",
+               "text": "2期",
                "decorationClass": "",
                "align": 1
               }
@@ -4387,7 +4406,7 @@
                "fieldName": "lblFuchoKi3",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -4405,7 +4424,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1",
+               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -4773,7 +4792,7 @@
                "fieldName": "lblTsuki7",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -4791,7 +4810,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "7",
+               "text": "7月",
                "decorationClass": "",
                "align": 1
               }
@@ -4932,7 +4951,7 @@
                "fieldName": "lblFuchoKi4",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -4950,7 +4969,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "2",
+               "text": "2期",
                "decorationClass": "",
                "align": 1
               }
@@ -5318,7 +5337,7 @@
                "fieldName": "lblTsuki8",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -5336,7 +5355,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "8",
+               "text": "8月",
                "decorationClass": "",
                "align": 1
               }
@@ -5367,7 +5386,7 @@
                "fieldName": "lblTokuchoKi3",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -5385,7 +5404,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "3",
+               "text": "3期",
                "decorationClass": "",
                "align": 1
               }
@@ -5663,7 +5682,7 @@
                "fieldName": "lblFuchoKi5",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -5681,7 +5700,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "3",
+               "text": "3期",
                "decorationClass": "",
                "align": 1
               }
@@ -6049,7 +6068,7 @@
                "fieldName": "lblTsuki9",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -6067,7 +6086,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "9",
+               "text": "9月",
                "decorationClass": "",
                "align": 1
               }
@@ -6208,7 +6227,7 @@
                "fieldName": "lblFuchoKi6",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -6226,7 +6245,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "4",
+               "text": "4期",
                "decorationClass": "",
                "align": 1
               }
@@ -6594,7 +6613,7 @@
                "fieldName": "lblTsuki10",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -6612,7 +6631,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "10",
+               "text": "10月",
                "decorationClass": "",
                "align": 1
               }
@@ -6643,7 +6662,7 @@
                "fieldName": "lblTokuchoKi4",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -6661,7 +6680,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "4",
+               "text": "4期",
                "decorationClass": "",
                "align": 1
               }
@@ -6939,7 +6958,7 @@
                "fieldName": "lblFuchoKi7",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -6957,7 +6976,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "5",
+               "text": "5期",
                "decorationClass": "",
                "align": 1
               }
@@ -7325,7 +7344,7 @@
                "fieldName": "lblTsuki11",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -7343,7 +7362,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "11",
+               "text": "11月",
                "decorationClass": "",
                "align": 1
               }
@@ -7484,7 +7503,7 @@
                "fieldName": "lblFuchoKi8",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -7502,7 +7521,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "6",
+               "text": "6期",
                "decorationClass": "",
                "align": 1
               }
@@ -7870,7 +7889,7 @@
                "fieldName": "lblTsuki12",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -7888,7 +7907,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "12",
+               "text": "12月",
                "decorationClass": "",
                "align": 1
               }
@@ -7919,7 +7938,7 @@
                "fieldName": "lblTokuchoKi5",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -7937,7 +7956,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "5",
+               "text": "5期",
                "decorationClass": "",
                "align": 1
               }
@@ -8215,7 +8234,7 @@
                "fieldName": "lblFuchoKi9",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -8233,7 +8252,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "7",
+               "text": "7期",
                "decorationClass": "",
                "align": 1
               }
@@ -8601,7 +8620,7 @@
                "fieldName": "lblTsuki1",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -8619,7 +8638,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1",
+               "text": "1月",
                "decorationClass": "",
                "align": 1
               }
@@ -8760,7 +8779,7 @@
                "fieldName": "lblFuchoKi10",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -8778,7 +8797,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "8",
+               "text": "8期",
                "decorationClass": "",
                "align": 1
               }
@@ -9146,7 +9165,7 @@
                "fieldName": "lblTsuki2",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -9164,7 +9183,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "2",
+               "text": "2月",
                "decorationClass": "",
                "align": 1
               }
@@ -9195,7 +9214,7 @@
                "fieldName": "lblTokuchoKi6",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -9213,7 +9232,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "6",
+               "text": "6期",
                "decorationClass": "",
                "align": 1
               }
@@ -9491,7 +9510,7 @@
                "fieldName": "lblFuchoKi11",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -9509,7 +9528,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "9",
+               "text": "9期",
                "decorationClass": "",
                "align": 1
               }
@@ -9877,7 +9896,7 @@
                "fieldName": "lblTsuki3",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -9895,7 +9914,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "3",
+               "text": "3月",
                "decorationClass": "",
                "align": 1
               }
@@ -10036,7 +10055,7 @@
                "fieldName": "lblFuchoKi12",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -10054,7 +10073,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "10",
+               "text": "10期",
                "decorationClass": "",
                "align": 1
               }
@@ -10422,7 +10441,7 @@
                "fieldName": "lblTsukiYoku4",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -10440,7 +10459,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "4",
+               "text": "4月",
                "decorationClass": "",
                "align": 1
               }
@@ -10713,7 +10732,7 @@
                "fieldName": "lblTsukiYoku5",
                "items": [],
                "controlType": "Label",
-               "width": "20",
+               "width": "XS",
                "visible": true,
                "displayNone": false,
                "disabled": false,
@@ -10731,7 +10750,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "5",
+               "text": "5月",
                "decorationClass": "",
                "align": 1
               }
@@ -11522,7 +11541,7 @@
            "selectControlID": "tblKiwarigaku",
            "helpMessageID": "",
            "jpControlName": "",
-           "html": "<table border='1'>\n  <tbody>\n    <tr bgcolor='lightgray'><td id='R1C1'></td><td id='R1C2'colspan='5'></td><td id='R1C3'colspan='6'></td></tr>\n    <tr bgcolor='lightgray'><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td><td id='R2C8'></td><td id='R2C9'></td><td id='R2C10'></td><td id='R2C11'></td><td id='R2C12'></td></tr>\n    <tr><td id='R3C1' bgcolor='lightgray'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C11'></td><td id='R3C6'></td><td id='R3C7'></td><td id='R3C8'></td><td id='R3C9'></td><td id='R3C12'></td><td id='R3C10'></td></tr>\n    <tr><td id='R4C1' bgcolor='lightgray'></td><td id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td><td id='R4C5'></td><td id='R4C11'></td><td id='R4C6'></td><td id='R4C7'></td><td id='R4C8'></td><td id='R4C9'></td><td id='R4C12'></td><td id='R4C10'></td></tr>\n    <tr><td id='R5C1' bgcolor='lightgray'></td><td id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td><td id='R5C5'></td><td id='R5C11'></td><td id='R5C6'></td><td id='R5C7'></td><td id='R5C8'></td><td id='R5C9'></td><td id='R5C12'></td><td id='R5C10'></td></tr>\n    <tr><td id='R6C1' bgcolor='lightgray'></td><td id='R6C2'></td><td id='R6C3'></td><td id='R6C4'></td><td id='R6C5'></td><td id='R6C11'></td><td id='R6C6'></td><td id='R6C7'></td><td id='R6C8'></td><td id='R6C9'></td><td id='R6C12'></td><td id='R6C10'></td></tr>\n    <tr><td id='R7C1' bgcolor='lightgray'></td><td id='R7C2'></td><td id='R7C3'></td><td id='R7C4'></td><td id='R7C5'></td><td id='R7C11'></td><td id='R7C6'></td><td id='R7C7'></td><td id='R7C8'></td><td id='R7C9'></td><td id='R7C12'></td><td id='R7C10'></td></tr>\n    <tr><td id='R8C1' bgcolor='lightgray'></td><td id='R8C2'></td><td id='R8C3'></td><td id='R8C4'></td><td id='R8C5'></td><td id='R8C11'></td><td id='R8C6'></td><td id='R8C7'></td><td id='R8C8'></td><td id='R8C9'></td><td id='R8C12'></td><td id='R8C10'></td></tr>\n    <tr><td id='R9C1' bgcolor='lightgray'></td><td id='R9C2'></td><td id='R9C3'></td><td id='R9C4'></td><td id='R9C5'></td><td id='R9C11'></td><td id='R9C6'></td><td id='R9C7'></td><td id='R9C8'></td><td id='R9C9'></td><td id='R9C12'></td><td id='R9C10'></td></tr>\n    <tr><td id='R10C1' bgcolor='lightgray'></td><td id='R10C2'></td><td id='R10C3'></td><td id='R10C4'></td><td id='R10C5'></td><td id='R10C11'></td><td id='R10C6'></td><td id='R10C7'></td><td id='R10C8'></td><td id='R10C9'></td><td id='R10C12'></td><td id='R10C10'></td></tr>\n    <tr><td id='R11C1' bgcolor='lightgray'></td><td id='R11C2'></td><td id='R11C3'></td><td id='R11C4'></td><td id='R11C5'></td><td id='R11C11'></td><td id='R11C6'></td><td id='R11C7'></td><td id='R11C8'></td><td id='R11C9'></td><td id='R11C12'></td><td id='R11C10'></td></tr>\n    <tr><td id='R12C1' bgcolor='lightgray'></td><td id='R12C2'></td><td id='R12C3'></td><td id='R12C4'></td><td id='R12C5'></td><td id='R12C11'></td><td id='R12C6'></td><td id='R12C7'></td><td id='R12C8'></td><td id='R12C9'></td><td id='R12C12'></td><td id='R12C10'></td></tr>\n    <tr><td id='R13C1' bgcolor='lightgray'></td><td id='R13C2'></td><td id='R13C3'></td><td id='R13C4'></td><td id='R13C5'></td><td id='R13C11'></td><td id='R13C6'></td><td id='R13C7'></td><td id='R13C8'></td><td id='R13C9'></td><td id='R13C12'></td><td id='R13C10'></td></tr>\n    <tr><td id='R14C1' bgcolor='lightgray'></td><td id='R14C2'></td><td id='R14C3'></td><td id='R14C4'></td><td id='R14C5'></td><td id='R14C11'></td><td id='R14C6'></td><td id='R14C7'></td><td id='R14C8'></td><td id='R14C9'></td><td id='R14C12'></td><td id='R14C10'></td></tr>\n    <tr><td id='R15C1' bgcolor='lightgray'></td><td id='R15C2'></td><td id='R15C3'></td><td id='R15C4'></td><td id='R15C5'></td><td id='R15C11'></td><td id='R15C6'></td><td id='R15C7'></td><td id='R15C8'></td><td id='R15C9'></td><td id='R15C12'></td><td id='R15C10'></td></tr>\n    <tr><td id='R16C1' bgcolor='lightgray'></td><td id='R16C2'></td><td id='R16C3'></td><td id='R16C4'></td><td id='R16C5'></td><td id='R16C11'></td><td id='R16C6'></td><td id='R16C7'></td><td id='R16C8'></td><td id='R16C9'></td><td id='R16C12'></td><td id='R16C10'></td></tr>\n    <tr><td id='R17C1' bgcolor='lightgray'></td><td id='R17C2'></td><td id='R17C3'></td><td id='R17C4'></td><td id='R17C5'></td><td id='R17C11'></td><td id='R17C6'></td><td id='R17C7'></td><td id='R17C8'></td><td id='R17C9'></td><td id='R17C12'></td><td id='R17C10'></td></tr>\n  </tbody>\n</table>"
+           "html": "<table border='1' cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor='lightgray'><td id='R1C1'></td><td id='R1C2'colspan='5'></td><td id='R1C3'colspan='6'></td></tr>\n    <tr bgcolor='lightgray'><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td><td id='R2C8'></td><td id='R2C9'></td><td id='R2C10'></td><td id='R2C11'></td><td id='R2C12'></td></tr>\n    <tr><td id='R3C1' bgcolor='lightgray'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C11'></td><td id='R3C6'></td><td id='R3C7'></td><td id='R3C8'></td><td id='R3C9'></td><td id='R3C12'></td><td id='R3C10'></td></tr>\n    <tr><td id='R4C1' bgcolor='lightgray'></td><td id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td><td id='R4C5'></td><td id='R4C11'></td><td id='R4C6'></td><td id='R4C7'></td><td id='R4C8'></td><td id='R4C9'></td><td id='R4C12'></td><td id='R4C10'></td></tr>\n    <tr><td id='R5C1' bgcolor='lightgray'></td><td id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td><td id='R5C5'></td><td id='R5C11'></td><td id='R5C6'></td><td id='R5C7'></td><td id='R5C8'></td><td id='R5C9'></td><td id='R5C12'></td><td id='R5C10'></td></tr>\n    <tr><td id='R6C1' bgcolor='lightgray'></td><td id='R6C2'></td><td id='R6C3'></td><td id='R6C4'></td><td id='R6C5'></td><td id='R6C11'></td><td id='R6C6'></td><td id='R6C7'></td><td id='R6C8'></td><td id='R6C9'></td><td id='R6C12'></td><td id='R6C10'></td></tr>\n    <tr><td id='R7C1' bgcolor='lightgray'></td><td id='R7C2'></td><td id='R7C3'></td><td id='R7C4'></td><td id='R7C5'></td><td id='R7C11'></td><td id='R7C6'></td><td id='R7C7'></td><td id='R7C8'></td><td id='R7C9'></td><td id='R7C12'></td><td id='R7C10'></td></tr>\n    <tr><td id='R8C1' bgcolor='lightgray'></td><td id='R8C2'></td><td id='R8C3'></td><td id='R8C4'></td><td id='R8C5'></td><td id='R8C11'></td><td id='R8C6'></td><td id='R8C7'></td><td id='R8C8'></td><td id='R8C9'></td><td id='R8C12'></td><td id='R8C10'></td></tr>\n    <tr><td id='R9C1' bgcolor='lightgray'></td><td id='R9C2'></td><td id='R9C3'></td><td id='R9C4'></td><td id='R9C5'></td><td id='R9C11'></td><td id='R9C6'></td><td id='R9C7'></td><td id='R9C8'></td><td id='R9C9'></td><td id='R9C12'></td><td id='R9C10'></td></tr>\n    <tr><td id='R10C1' bgcolor='lightgray'></td><td id='R10C2'></td><td id='R10C3'></td><td id='R10C4'></td><td id='R10C5'></td><td id='R10C11'></td><td id='R10C6'></td><td id='R10C7'></td><td id='R10C8'></td><td id='R10C9'></td><td id='R10C12'></td><td id='R10C10'></td></tr>\n    <tr><td id='R11C1' bgcolor='lightgray'></td><td id='R11C2'></td><td id='R11C3'></td><td id='R11C4'></td><td id='R11C5'></td><td id='R11C11'></td><td id='R11C6'></td><td id='R11C7'></td><td id='R11C8'></td><td id='R11C9'></td><td id='R11C12'></td><td id='R11C10'></td></tr>\n    <tr><td id='R12C1' bgcolor='lightgray'></td><td id='R12C2'></td><td id='R12C3'></td><td id='R12C4'></td><td id='R12C5'></td><td id='R12C11'></td><td id='R12C6'></td><td id='R12C7'></td><td id='R12C8'></td><td id='R12C9'></td><td id='R12C12'></td><td id='R12C10'></td></tr>\n    <tr><td id='R13C1' bgcolor='lightgray'></td><td id='R13C2'></td><td id='R13C3'></td><td id='R13C4'></td><td id='R13C5'></td><td id='R13C11'></td><td id='R13C6'></td><td id='R13C7'></td><td id='R13C8'></td><td id='R13C9'></td><td id='R13C12'></td><td id='R13C10'></td></tr>\n    <tr><td id='R14C1' bgcolor='lightgray'></td><td id='R14C2'></td><td id='R14C3'></td><td id='R14C4'></td><td id='R14C5'></td><td id='R14C11'></td><td id='R14C6'></td><td id='R14C7'></td><td id='R14C8'></td><td id='R14C9'></td><td id='R14C12'></td><td id='R14C10'></td></tr>\n    <tr><td id='R15C1' bgcolor='lightgray'></td><td id='R15C2'></td><td id='R15C3'></td><td id='R15C4'></td><td id='R15C5'></td><td id='R15C11'></td><td id='R15C6'></td><td id='R15C7'></td><td id='R15C8'></td><td id='R15C9'></td><td id='R15C12'></td><td id='R15C10'></td></tr>\n    <tr><td id='R16C1' bgcolor='lightgray'></td><td id='R16C2'></td><td id='R16C3'></td><td id='R16C4'></td><td id='R16C5'></td><td id='R16C11'></td><td id='R16C6'></td><td id='R16C7'></td><td id='R16C8'></td><td id='R16C9'></td><td id='R16C12'></td><td id='R16C10'></td></tr>\n    <tr><td id='R17C1' bgcolor='lightgray'></td><td id='R17C2'></td><td id='R17C3'></td><td id='R17C4'></td><td id='R17C5'></td><td id='R17C11'></td><td id='R17C6'></td><td id='R17C7'></td><td id='R17C8'></td><td id='R17C9'></td><td id='R17C12'></td><td id='R17C10'></td></tr>\n  </tbody>\n</table>"
           }
          ],
          "controlType": "Panel",
@@ -11558,16 +11577,18 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "focusPositionID": "restoreLayoutButton",
+         "eraseBorderTop": false,
+         "eraseBorderBottom": false,
+         "eraseBorderRight": false,
+         "eraseBorderLeft": false
         }
        ],
        "controlType": "TabPanel",
@@ -11588,7 +11609,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "title": "賦課根拠・期割額",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       },
       {
        "fieldName": "SokujiKoseiTab2",
@@ -12254,7 +12276,7 @@
            "selectControlID": "tblSanteinokisoMae",
            "helpMessageID": "",
            "jpControlName": "",
-           "html": "<table border=\"1\">\n  <tbody>\n    <tr><td bgcolor=\"lightgrey\" colspan=\"6\" id='R1C1'></td></tr>\n    <tr bgcolor=\"lightgrey\" ><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td></tr>\n  </tbody>\n</table>\n"
+           "html": "<table border='1' cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr><td bgcolor=\"lightgrey\" colspan=\"6\" id='R1C1'></td></tr>\n    <tr bgcolor=\"lightgrey\" ><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td></tr>\n  </tbody>\n</table>\n"
           },
           {
            "fieldName": "tblSanteinokisoAto",
@@ -12914,7 +12936,7 @@
            "selectControlID": "tblSanteinokisoAto",
            "helpMessageID": "",
            "jpControlName": "",
-           "html": "<table border=\"1\">\n  <tbody>\n    <tr><td bgcolor=\"lightgrey\" colspan=\"6\" id='R1C1'></td></tr>\n    <tr bgcolor=\"lightgrey\" ><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td></tr>\n  </tbody>\n</table>\n"
+           "html": "<table border='1' cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr><td bgcolor=\"lightgrey\" colspan=\"6\" id='R1C1'></td></tr>\n    <tr bgcolor=\"lightgrey\" ><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td></tr>\n  </tbody>\n</table>\n"
           }
          ],
          "controlType": "Panel",
@@ -12950,16 +12972,18 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "focusPositionID": "restoreLayoutButton",
+         "eraseBorderTop": false,
+         "eraseBorderBottom": false,
+         "eraseBorderRight": false,
+         "eraseBorderLeft": false
         },
         {
          "fieldName": "SokujikouseiJiyu",
@@ -12989,7 +13013,7 @@
            "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
-           "placeHolder": "１２３４５６７８９０１２３４５６７８９０",
+           "placeHolder": "",
            "textKind": 0,
            "isPrivateInfo": false,
            "isPassword": false,
@@ -13182,16 +13206,18 @@
          "session": {},
          "marginTop": "M",
          "marginBottom": "Default",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "focusPositionID": "restoreLayoutButton",
+         "eraseBorderTop": false,
+         "eraseBorderBottom": false,
+         "eraseBorderRight": false,
+         "eraseBorderLeft": false
         }
        ],
        "controlType": "TabPanel",
@@ -13212,7 +13238,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "title": "保険料年額・事由",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       }
      ],
      "controlType": "TabContainer",
@@ -13240,35 +13267,8 @@
      ],
      "isDraggable": false,
      "selectedItemFieldName": "SokujiKoseiTab1",
-     "initialTab": 0
-    },
-    {
-     "fieldName": "btnHozon",
-     "items": [],
-     "controlType": "Button",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnHozon",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "text": "更正結果を保存する",
-     "imageWidth": "",
-     "imageHeight": "",
-     "onClick": "onClick_btnKakutei",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "icon": 0
+     "initialTab": 0,
+     "isLazyLoading": false
     }
    ],
    "controlType": "Panel",
@@ -13300,11 +13300,11 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbb/db/dbb/SokujiFukaKouseiMain/onLoad"
+     "requestUrl": "dbb/db/dbb/SokujiFukaKouseiMain/onLoad_SokujiFukaKouseiMainDiv"
     },
     {
      "eventName": "onChange_KoseiM",
-     "requestUrl": "dbb/db/dbb/SokujiFukaKouseiMain/onLoad"
+     "requestUrl": "dbb/db/dbb/SokujiFukaKouseiMain/onLoad_SokujiFukaKouseiMainDiv"
     }
    ],
    "hiddenInput": [],
@@ -13313,16 +13313,18 @@
    "session": {},
    "marginTop": "XS",
    "marginBottom": "XS",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "SokujiFukaKouseiKanryo",
@@ -13355,6 +13357,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "KanryoMessage_width": "G12"
     }
    ],
@@ -13382,25 +13386,35 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "SokujiFukaKouseiKanryo"
+    },
+    {
+     "postParameterPanelNames": "SokujiKouseiJumin"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbb/db/dbb/SokujiFukaKouseiKanryo/onLoad_SokujiFukaKouseiKanryo"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   }
  ],
  "controlType": null,
@@ -13487,7 +13501,13 @@
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "SokujiFukaKouseibtn",
+     "event": "onClick",
+     "transition": "完了"
+    }
+   ]
   },
   {
    "order": "2",
@@ -13508,7 +13528,13 @@
    "supplementInfo": "",
    "supplementInfoPostParamData": [],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "SokujiFukaKouseibtn",
+     "event": "onClick",
+     "transition": "完了"
+    }
+   ]
   }
  ],
  "currentState": "All",
@@ -13517,12 +13543,8 @@
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
-   "SokujiFukaKouseiMain",
-   "SokujiKouseiJumin"
-  ],
-  [
-   "SokujiFukaKouseiKanryo",
-   "SokujiFukaKouseiRireki"
+   "SokujiKouseiJumin",
+   "SokujiFukaKouseiKanryo"
   ],
   [
    "SokujiKouseiAtena"
@@ -13531,12 +13553,19 @@
    "SokujiKouseiKihon"
   ],
   [
+   "SokujiFukaKouseiRireki"
+  ],
+  [
+   "SokujiFukaKouseiMain"
+  ],
+  [
    "SokujiFukaKouseiKanryoMsg"
   ]
  ],
- "panelMargin": 1,
- "controlMargin": 1,
+ "panelMargin": 0,
+ "controlMargin": 0,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "SokujiFukaKousei",
@@ -13544,7 +13573,7 @@
     {
      "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
-      "fieldName": "btn",
+      "fieldName": "SokujiFukaKouseibtn",
       "items": [],
       "controlType": "CommonButtonUpdate",
       "width": "S",
@@ -13560,16 +13589,17 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btn",
+      "selectControlID": "SokujiFukaKouseibtn",
       "helpMessageID": "",
       "jpControlName": "",
       "text": "更新",
       "imageWidth": "",
       "imageHeight": "",
-      "onClick": "",
+      "onClick": "SokujiFukaKousei_onClick",
       "appearance": 0,
       "imageFileUrl": "",
       "icon": 0,
+      "heightTextBoxMatches": false,
       "additionalText": "更正結果を"
      }
     }
