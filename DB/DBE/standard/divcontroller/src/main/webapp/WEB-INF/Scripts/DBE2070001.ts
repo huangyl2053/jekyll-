@@ -9,24 +9,11 @@ module Dbe {
 
         public static setImageViewers() {
             DBE2070001.setImageViewer("ImageIkensho1", "/db/dbe/Scripts/E0001.png");
-            DBE2070001.setImageViewer("ImageIkensho2", "/db/dbe/Scripts/E0001.png");
         }
 
         public static setImageViewer(controlId: string, imageUrl: string) {
 
             var imageDispJSON = {
-                //"txtFocus1": {
-                //    "columnname": "à”å©èë(ï\)",
-                //    "start": {
-                //        "x": 230,
-                //        "y": 187
-                //    },
-                //    "end": {
-                //        "x": 930,
-                //        "y": 307
-                //    },
-                //    "stroke": "red"
-                //}
             }
 
             if (!Uz.GyomuJSHelper.isDesignMode()) {
@@ -38,7 +25,7 @@ module Dbe {
                 imageDisp.STICKY = new imageDispCommon.sticky();
                 imageDisp.ONLY = new imageDispCommon.only();
                 imageDisp.JSON = new imageDispCommon.rectJson();
-                imageDisp.INIT.initImageDisp(panelId, imageUrl, imageDispJSON);
+                imageDisp.INIT.initImageDisp(panelId, imageUrl, imageDispJSON, 100, 900, 500, 0, 0);
             }
         }
 
