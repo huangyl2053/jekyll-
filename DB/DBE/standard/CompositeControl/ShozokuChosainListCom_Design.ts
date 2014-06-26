@@ -163,13 +163,21 @@ module DBE {
    "marginLeft": "XS",
    "marginRight": "XS",
    "selectControlID": "dgShozokuChosainList",
+   "helpMessageID": "",
+   "jpControlName": "",
    "gridSetting": {
     "rowHeight": 25,
     "isMultiSelectable": false,
+    "isShowHeader": true,
     "isShowFooter": true,
     "isShowFilter": false,
     "isShowFilterButton": false,
     "isShowRowState": false,
+    "isShowSelectButtonColumn": false,
+    "isShowModifyButtonColumn": false,
+    "isShowDeleteButtonColumn": false,
+    "limitRowCount": 0,
+    "selectedRowCount": 0,
     "header": {
      "combineColumns": [],
      "frozenColumn": "",
@@ -206,7 +214,8 @@ module DBE {
       "visible": true,
       "cellType": 0,
       "cellDetails": {
-       "cellType": 0
+       "cellType": 0,
+       "isSetValueToToolTip": false
       },
       "align": 1,
       "resize": true,
@@ -222,7 +231,8 @@ module DBE {
       "visible": true,
       "cellType": 0,
       "cellDetails": {
-       "cellType": 0
+       "cellType": 0,
+       "isSetValueToToolTip": false
       },
       "align": 0,
       "resize": true,
@@ -238,7 +248,8 @@ module DBE {
       "visible": true,
       "cellType": 0,
       "cellDetails": {
-       "cellType": 0
+       "cellType": 0,
+       "isSetValueToToolTip": false
       },
       "align": 2,
       "resize": true,
@@ -254,7 +265,8 @@ module DBE {
       "visible": true,
       "cellType": 0,
       "cellDetails": {
-       "cellType": 0
+       "cellType": 0,
+       "isSetValueToToolTip": false
       },
       "align": 0,
       "resize": true,
@@ -269,7 +281,10 @@ module DBE {
       "width": 0,
       "visible": false,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": false,
       "isPrivateInfo": false,
@@ -281,6 +296,9 @@ module DBE {
    "onSort": "",
    "onSelect": "",
    "onSelectByDblClick": "",
+   "onSelectBySelectButton": "",
+   "onSelectByModifyButton": "",
+   "onSelectByDeleteButton": "",
    "onOnlyRow": "",
    "onNoRow": "",
    "onMultiRows": "",
@@ -288,7 +306,8 @@ module DBE {
    "sortOrder": "調査員コード",
    "isAscending": true,
    "filterList": [],
-   "activeRowId": -1
+   "activeRowId": -1,
+   "readOnly": false
   }
  ],
  "controlType": "CompositeControl",
@@ -306,6 +325,8 @@ module DBE {
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "defaultLayout",
+ "helpMessageID": "",
+ "jpControlName": "",
  "relation": [],
  "businessId": "DBE",
  "controlName": "ShozokuChosainListCom",

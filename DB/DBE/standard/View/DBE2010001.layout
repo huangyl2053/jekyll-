@@ -97,10 +97,7 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -128,6 +125,7 @@
      "selectControlID": "dgNinteichosaIraiList",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "height": "500",
      "gridSetting": {
       "rowHeight": 25,
@@ -232,7 +230,10 @@
         "width": 0,
         "visible": false,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"cellType\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":0}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
@@ -246,7 +247,10 @@
         "width": 100,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"cellType\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":0}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -260,7 +264,10 @@
         "width": 105,
         "visible": false,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"null\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": false,
         "isPrivateInfo": false,
@@ -274,7 +281,10 @@
         "width": 75,
         "visible": false,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"null\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": false,
         "isPrivateInfo": false,
@@ -288,7 +298,10 @@
         "width": 90,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
@@ -302,7 +315,10 @@
         "width": 0,
         "visible": false,
         "cellType": 0,
-        "cellDetails": null,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 1,
         "resize": false,
         "isPrivateInfo": false,
@@ -316,7 +332,10 @@
         "width": 200,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"cellType\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":0}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -330,7 +349,10 @@
         "width": 0,
         "visible": false,
         "cellType": 0,
-        "cellDetails": null,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": false,
         "isPrivateInfo": false,
@@ -344,7 +366,10 @@
         "width": 0,
         "visible": false,
         "cellType": 0,
-        "cellDetails": null,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": false,
         "isPrivateInfo": false,
@@ -379,7 +404,10 @@
         "width": 80,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"cellType\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":0}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -393,7 +421,10 @@
         "width": 0,
         "visible": false,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": false,
         "isPrivateInfo": false,
@@ -491,7 +522,10 @@
         "width": 90,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -505,7 +539,10 @@
         "width": 60,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "null",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -519,7 +556,10 @@
         "width": 105,
         "visible": false,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -533,7 +573,10 @@
         "width": 75,
         "visible": false,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -547,7 +590,10 @@
         "width": 180,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -561,7 +607,10 @@
         "width": 75,
         "visible": false,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -575,7 +624,10 @@
         "width": 105,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -589,7 +641,10 @@
         "width": 75,
         "visible": false,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"cellType\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":0}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -603,7 +658,10 @@
         "width": 180,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -617,7 +675,10 @@
         "width": 75,
         "visible": false,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -631,7 +692,10 @@
         "width": 105,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -645,7 +709,10 @@
         "width": 75,
         "visible": false,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -659,7 +726,10 @@
         "width": 105,
         "visible": false,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -694,7 +764,10 @@
         "width": 100,
         "visible": true,
         "cellType": 0,
-        "cellDetails": null,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -708,7 +781,10 @@
         "width": 60,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "null",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -764,7 +840,10 @@
         "width": 72,
         "visible": true,
         "cellType": 0,
-        "cellDetails": null,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -778,7 +857,10 @@
         "width": 250,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"cellType\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":0}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -792,7 +874,10 @@
         "width": 75,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "null",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -806,7 +891,10 @@
         "width": 60,
         "visible": false,
         "cellType": 0,
-        "cellDetails": null,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": false,
         "isPrivateInfo": false,
@@ -841,7 +929,10 @@
         "width": 60,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "null",
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -857,7 +948,8 @@
         "cellType": 2,
         "cellDetails": {
          "cellType": 2,
-         "disabled": false
+         "disabled": false,
+         "onChange": ""
         },
         "align": 1,
         "resize": false,
@@ -874,7 +966,8 @@
         "cellType": 2,
         "cellDetails": {
          "cellType": 2,
-         "disabled": false
+         "disabled": false,
+         "onChange": ""
         },
         "align": 1,
         "resize": false,
@@ -1047,10 +1140,7 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -1109,10 +1199,7 @@
    "session": {},
    "marginTop": "XS",
    "marginBottom": "XS",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -1808,10 +1895,7 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "S",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 1,
@@ -1853,10 +1937,7 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
@@ -2140,10 +2221,7 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 1,
@@ -2177,6 +2255,7 @@
            "selectControlID": "ddlChosaIraiKubun_core",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "text": "",
            "dataSource": [
             {
@@ -2323,10 +2402,7 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorderTop": true,
-         "eraseBorderBottom": true,
-         "eraseBorderRight": true,
-         "eraseBorderLeft": true,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -2357,6 +2433,7 @@
            "selectControlID": "chkPaperType_core",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "onClick": "",
            "icon": [],
            "dataSource": [
@@ -2499,10 +2576,7 @@
            "session": {},
            "marginTop": "Default",
            "marginBottom": "Default",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": true,
-           "eraseBorderRight": true,
-           "eraseBorderLeft": true,
+           "eraseBorder": false,
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 0,
@@ -2544,10 +2618,7 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -2589,10 +2660,7 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": true,
-       "eraseBorderBottom": true,
-       "eraseBorderRight": true,
-       "eraseBorderLeft": true,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": true,
        "panelDisplay": 0,
@@ -2675,6 +2743,7 @@
          "selectControlID": "radTokusoku_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
          "onClick": "",
          "icon": [],
          "dataSource": [
@@ -2719,6 +2788,7 @@
            "selectControlID": "ddlTokukuHoho_core",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "dataSource": [
             {
              "key": "0",
@@ -2987,10 +3057,7 @@
            "session": {},
            "marginTop": "Default",
            "marginBottom": "Default",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": true,
-           "eraseBorderRight": true,
-           "eraseBorderLeft": true,
+           "eraseBorder": false,
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 0,
@@ -3032,10 +3099,7 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -3103,10 +3167,7 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": true,
-       "eraseBorderBottom": true,
-       "eraseBorderRight": true,
-       "eraseBorderLeft": false,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": true,
        "panelDisplay": 0,
@@ -3207,10 +3268,7 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": true,
-       "eraseBorderRight": true,
-       "eraseBorderLeft": true,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 0,
@@ -3252,10 +3310,7 @@
      "session": {},
      "marginTop": "S",
      "marginBottom": "XS",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -3356,10 +3411,7 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -3445,10 +3497,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -3476,11 +3525,7 @@
  "jpControlName": "",
  "onLoad": "",
  "title": "認定調査依頼登録",
- "jsPathCollection": [
-  {
-   "jsPath": "/db/dbe/Scripts/DBE2010001.js"
-  }
- ],
+ "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
   {
@@ -3670,5 +3715,6 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": []
 }
