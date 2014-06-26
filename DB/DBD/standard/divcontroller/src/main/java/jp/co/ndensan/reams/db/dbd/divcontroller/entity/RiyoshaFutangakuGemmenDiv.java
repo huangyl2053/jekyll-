@@ -1,22 +1,22 @@
-package jp.co.ndensan.reams.db.dbd.divcontroller.entity.futanGendogakuNintei;
+package jp.co.ndensan.reams.db.dbd.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.futanGendogakuNintei.FutanGendogakuNinteiDetailDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.futanGendogakuNintei.dgFutanGendogakuNinteiList_Row;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.RiyoshaFutangakuGemmenDetailDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dgRiyoshaFutangakuGemmenList_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * FutanGendogakuNintei のクラスファイル 
+ * RiyoshaFutangakuGemmen のクラスファイル 
  * 
  * @author 自動生成
  */
-public class FutanGendogakuNinteiDiv extends Panel {
+public class RiyoshaFutangakuGemmenDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,10 +25,10 @@ public class FutanGendogakuNinteiDiv extends Panel {
      */
     @JsonProperty("txtHiddenHihokenshaNo")
     private TextBox txtHiddenHihokenshaNo;
-    @JsonProperty("dgFutanGendogakuNinteiList")
-    private DataGrid<dgFutanGendogakuNinteiList_Row> dgFutanGendogakuNinteiList;
-    @JsonProperty("FutanGendogakuNinteiDetail")
-    private FutanGendogakuNinteiDetailDiv FutanGendogakuNinteiDetail;
+    @JsonProperty("dgRiyoshaFutangakuGemmenList")
+    private DataGrid<dgRiyoshaFutangakuGemmenList_Row> dgRiyoshaFutangakuGemmenList;
+    @JsonProperty("RiyoshaFutangakuGemmenDetail")
+    private RiyoshaFutangakuGemmenDetailDiv RiyoshaFutangakuGemmenDetail;
     @JsonProperty("btnClose")
     private Button btnClose;
 
@@ -48,24 +48,24 @@ public class FutanGendogakuNinteiDiv extends Panel {
         this.txtHiddenHihokenshaNo=txtHiddenHihokenshaNo;
     }
 
-    @JsonProperty("dgFutanGendogakuNinteiList")
-    public DataGrid<dgFutanGendogakuNinteiList_Row> getDgFutanGendogakuNinteiList() {
-        return dgFutanGendogakuNinteiList;
+    @JsonProperty("dgRiyoshaFutangakuGemmenList")
+    public DataGrid<dgRiyoshaFutangakuGemmenList_Row> getDgRiyoshaFutangakuGemmenList() {
+        return dgRiyoshaFutangakuGemmenList;
     }
 
-    @JsonProperty("dgFutanGendogakuNinteiList")
-    public void setDgFutanGendogakuNinteiList(DataGrid<dgFutanGendogakuNinteiList_Row> dgFutanGendogakuNinteiList) {
-        this.dgFutanGendogakuNinteiList=dgFutanGendogakuNinteiList;
+    @JsonProperty("dgRiyoshaFutangakuGemmenList")
+    public void setDgRiyoshaFutangakuGemmenList(DataGrid<dgRiyoshaFutangakuGemmenList_Row> dgRiyoshaFutangakuGemmenList) {
+        this.dgRiyoshaFutangakuGemmenList=dgRiyoshaFutangakuGemmenList;
     }
 
-    @JsonProperty("FutanGendogakuNinteiDetail")
-    public FutanGendogakuNinteiDetailDiv getFutanGendogakuNinteiDetail() {
-        return FutanGendogakuNinteiDetail;
+    @JsonProperty("RiyoshaFutangakuGemmenDetail")
+    public RiyoshaFutangakuGemmenDetailDiv getRiyoshaFutangakuGemmenDetail() {
+        return RiyoshaFutangakuGemmenDetail;
     }
 
-    @JsonProperty("FutanGendogakuNinteiDetail")
-    public void setFutanGendogakuNinteiDetail(FutanGendogakuNinteiDetailDiv FutanGendogakuNinteiDetail) {
-        this.FutanGendogakuNinteiDetail=FutanGendogakuNinteiDetail;
+    @JsonProperty("RiyoshaFutangakuGemmenDetail")
+    public void setRiyoshaFutangakuGemmenDetail(RiyoshaFutangakuGemmenDetailDiv RiyoshaFutangakuGemmenDetail) {
+        this.RiyoshaFutangakuGemmenDetail=RiyoshaFutangakuGemmenDetail;
     }
 
     @JsonProperty("btnClose")

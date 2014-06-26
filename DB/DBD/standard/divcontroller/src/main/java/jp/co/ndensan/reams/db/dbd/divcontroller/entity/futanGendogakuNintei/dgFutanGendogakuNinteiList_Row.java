@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.futanGendogakuNintei;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 13 15:05:26 JST 2014 
+ * Thu Jun 26 11:58:12 JST 2014 
  */
 
 
