@@ -46,7 +46,7 @@ var DBZ;
                     "fieldName": "KaigoChohyoShutsuryokujun",
                     "items": [
                         {
-                            "fieldName": "ccdChohyoShutsuryokujun",
+                            "fieldName": "kaigoChohyoShutsuryokujun",
                             "items": [],
                             "controlType": "CommonChildDiv",
                             "width": "XS",
@@ -62,18 +62,20 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "0",
                             "marginRight": "0",
-                            "selectControlID": "ccdChohyoShutsuryokujun",
+                            "selectControlID": "kaigoChohyoShutsuryokujun",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "relation": [],
                             "businessId": "URZ",
                             "controlName": "ChohyoShutsuryokujun",
-                            "marginTop": "-0.4",
-                            "marginBottom": "-0.4",
+                            "marginTop": 0,
+                            "marginBottom": 0,
                             "originalProperty": [],
                             "dataPassingForDialog": [],
                             "dialogOkEventNameForDialog": "",
                             "dialogCancelEventNameForDialog": "",
+                            "canTransferEvent": true,
+                            "heightForDialog": "M",
                             "ChohyoShutsuryokujun_width": "G12"
                         }
                     ],
@@ -99,7 +101,7 @@ var DBZ;
                     "marginTop": "0",
                     "marginBottom": "0",
                     "isOpen": true,
-                    "canOpenAndClose": true,
+                    "canOpenAndClose": false,
                     "postParameterPanelNames": [
                         {
                             "postParameterPanelNames": "KaigoChohyoShutsuryokujun"
@@ -110,10 +112,7 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": true,
-                    "eraseBorderBottom": true,
-                    "eraseBorderRight": true,
-                    "eraseBorderLeft": true,
+                    "eraseBorder": true,
                     "backgroundColor": 0,
                     "widthAuto": true,
                     "panelDisplay": 0,
@@ -146,14 +145,16 @@ var DBZ;
             "marginBottom": 0,
             "originalProperty": [
                 {
-                    "publicChildFieldName": "ccdChohyoShutsuryokujun",
+                    "publicChildFieldName": "kaigoChohyoShutsuryokujun",
                     "publicChildProperty": "ChohyoShutsuryokujun_width",
                     "newPropertyName": "ChohyoShutsuryokujun_width"
                 }
             ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return KaigoChohyoShutsuryokujun_Design;
     })(Uz.CommonChildDiv);
