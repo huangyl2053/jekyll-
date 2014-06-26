@@ -29,6 +29,8 @@ public class RiyoshaFutangakuGemmenDiv extends Panel {
     private DataGrid<dgRiyoshaFutangakuGemmenList_Row> dgRiyoshaFutangakuGemmenList;
     @JsonProperty("RiyoshaFutangakuGemmenDetail")
     private RiyoshaFutangakuGemmenDetailDiv RiyoshaFutangakuGemmenDetail;
+    @JsonProperty("btnClose")
+    private Button btnClose;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -64,6 +66,16 @@ public class RiyoshaFutangakuGemmenDiv extends Panel {
     @JsonProperty("RiyoshaFutangakuGemmenDetail")
     public void setRiyoshaFutangakuGemmenDetail(RiyoshaFutangakuGemmenDetailDiv RiyoshaFutangakuGemmenDetail) {
         this.RiyoshaFutangakuGemmenDetail=RiyoshaFutangakuGemmenDetail;
+    }
+
+    @JsonProperty("btnClose")
+    public Button getBtnClose() {
+        return btnClose;
+    }
+
+    @JsonProperty("btnClose")
+    public void setBtnClose(Button btnClose) {
+        this.btnClose=btnClose;
     }
 
 }

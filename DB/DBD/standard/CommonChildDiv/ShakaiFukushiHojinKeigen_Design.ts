@@ -102,6 +102,7 @@ module DBD {
      "selectControlID": "dgShakaiFukushiHojinKeigenList",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "height": "210",
      "gridSetting": {
       "rowHeight": 25,
@@ -704,12 +705,12 @@ module DBD {
          "labelLAlign": 2,
          "labelRAlign": 0,
          "decorationClass": "",
-         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": false,
-         "decimalPointLength": 0
+         "decimalPointLength": 0,
+         "permitCharactor": "+-,.\\"
         },
         {
          "fieldName": "lblIKeigenRitsuVinculum",
@@ -781,12 +782,12 @@ module DBD {
          "labelLAlign": 2,
          "labelRAlign": 0,
          "decorationClass": "",
-         "permitCharactor": "+-,.\\",
          "maxValue": "100",
          "minValue": 0,
          "isCurrency": false,
          "isComma": false,
-         "decimalPointLength": 0
+         "decimalPointLength": 0,
+         "permitCharactor": "+-,.\\"
         },
         {
          "fieldName": "txtFushoninRiyu",
@@ -912,10 +913,7 @@ module DBD {
        "onOpen": "",
        "onClose": "",
        "session": {},
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 1,
@@ -1095,16 +1093,42 @@ module DBD {
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto"
+    },
+    {
+     "fieldName": "btnClose",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 1,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnClose",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "閉じる",
+     "onClick": "CloseOK",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -1149,16 +1173,13 @@ module DBD {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "530"
   }
  ],
  "controlType": "CommonChildDiv",
@@ -1190,8 +1211,10 @@ module DBD {
    "controlName": "txtHiddenHihokenshaNo"
   }
  ],
- "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogOkEventNameForDialog": "CloseOK",
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "570"
 }        
     }
 }

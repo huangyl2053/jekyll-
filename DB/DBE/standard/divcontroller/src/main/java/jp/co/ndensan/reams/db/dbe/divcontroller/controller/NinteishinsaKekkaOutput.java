@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
@@ -84,11 +85,11 @@ public class NinteishinsaKekkaOutput {
 
         if (div.getShinsaKekkaSyutsuryokuJokenNyuryoku().getRadShutsuryokuKubun().getSelectedItem().equalsIgnoreCase(new RString("0"))) {
             if (shoriFlag.equalsIgnoreCase(RString.EMPTY)) {
-                div.getShinsaKekkaJohoSakuseiTishosha().getDgTaishoshaIchiran().setDataSource(createRowTaishoshaIchiranTestData(CST_TSUJO));
+                div.getShinsaKekkaJohoSakuseiTaishosha().getDgTaishoshaIchiran().setDataSource(createRowTaishoshaIchiranTestData(CST_TSUJO));
             }
         } else {
             if (!div.getShinsaKekkaSyutsuryokuJokenNyuryoku().getTxtNinteiKekkaKakuninKikan().getFromValue().toString().isEmpty()) {
-                div.getShinsaKekkaJohoSakuseiTishosha().getDgTaishoshaIchiran().setDataSource(createRowTaishoshaIchiranTestData(CST_SAISHORI));
+                div.getShinsaKekkaJohoSakuseiTaishosha().getDgTaishoshaIchiran().setDataSource(createRowTaishoshaIchiranTestData(CST_SAISHORI));
             }
         }
 
@@ -106,8 +107,10 @@ public class NinteishinsaKekkaOutput {
         ResponseData<NinteishinsaKekkaOutputDiv> response = new ResponseData<>();
 
         List<dgTaishoshaIchiran_Row> arrayData = new ArrayList<>();
-        div.getShinsaKekkaJohoSakuseiTishosha().getDgTaishoshaIchiran().setDataSource(arrayData);
+        div.getShinsaKekkaJohoSakuseiTaishosha().getDgTaishoshaIchiran().setDataSource(arrayData);
         shoriFlag = new RString("処理済");
+
+        response.addMessage(new InformationMessage("i", "出力しました。"));
 
         response.data = div;
         return response;
