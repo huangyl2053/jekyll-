@@ -14,7 +14,6 @@ var Dbe;
             var imageDispJSON = {};
 
             if (!Uz.GyomuJSHelper.isDesignMode()) {
-                //Uz.GyomuJSHelper.registOriginalEvent("hoge", (control: Uz._ViewControl) => {
                 var viewerPanel = Uz.GyomuJSHelper.getJSControl(controlId);
                 var panelId = DBE4050001.getPanelBodyAreaDiv(viewerPanel);
                 imageDisp.INIT = new imageDispCommon.init();
@@ -23,7 +22,7 @@ var Dbe;
                 imageDisp.STICKY = new imageDispCommon.sticky();
                 imageDisp.ONLY = new imageDispCommon.only();
                 imageDisp.JSON = new imageDispCommon.rectJson();
-                imageDisp.INIT.initImageDisp(panelId, imageUrl, imageDispJSON, 100, 920, 500, 0, 0);
+                imageDisp.INIT.initImageDisp(panelId, imageUrl, imageDispJSON, 100, 1020, 500, 0, 0);
             }
         };
 

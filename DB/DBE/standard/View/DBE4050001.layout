@@ -239,13 +239,13 @@
        "onKeyPress": "",
        "text": "",
        "value": "",
-       "decorationClass": "",
        "maxLength": "10",
        "minLength": "0",
        "textAlign": 2,
        "textKind": 2,
        "isComboBox": false,
        "suggest": [],
+       "decorationClass": "",
        "maxValue": "9999999999",
        "minValue": 0,
        "isCurrency": true,
@@ -399,19 +399,19 @@
         },
         "columns": [
          {
-          "columnName": "",
+          "columnName": "選択<br>",
           "dataName": "処理",
           "toolTip": "",
           "bgColor": 0,
-          "width": 60,
+          "width": 43,
           "visible": true,
           "cellType": 8,
           "cellDetails": {
            "cellType": 8,
            "text": "処理",
            "onClick": "onClick_btnSentaku",
-           "imageFileUrl": "",
-           "imageWidth": "",
+           "imageFileUrl": "/uz/uza/css/images/finger.png",
+           "imageWidth": "15",
            "imageHeight": ""
           },
           "align": 1,
@@ -424,7 +424,7 @@
           "dataName": "保険者",
           "toolTip": "",
           "bgColor": 0,
-          "width": 70,
+          "width": 90,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -440,13 +440,13 @@
           "dataName": "被保番号",
           "toolTip": "",
           "bgColor": 0,
-          "width": 100,
+          "width": 95,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
            "cellType": 0
           },
-          "align": 0,
+          "align": 1,
           "resize": true,
           "isPrivateInfo": false,
           "sortKey": "被保番号"
@@ -456,7 +456,7 @@
           "dataName": "氏名",
           "toolTip": "",
           "bgColor": 0,
-          "width": 200,
+          "width": 300,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -472,7 +472,7 @@
           "dataName": "申請日",
           "toolTip": "",
           "bgColor": 0,
-          "width": 90,
+          "width": 95,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
@@ -493,7 +493,7 @@
           "dataName": "申請区分",
           "toolTip": "",
           "bgColor": 0,
-          "width": 70,
+          "width": 75,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -509,7 +509,7 @@
           "dataName": "審査予定日",
           "toolTip": "",
           "bgColor": 0,
-          "width": 90,
+          "width": 95,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
@@ -530,7 +530,7 @@
           "dataName": "マスク区分",
           "toolTip": "",
           "bgColor": 0,
-          "width": 70,
+          "width": 75,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -544,7 +544,7 @@
           "dataName": "意見書受領日",
           "toolTip": "",
           "bgColor": 0,
-          "width": 90,
+          "width": 95,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
@@ -565,7 +565,7 @@
           "dataName": "調査票受領日",
           "toolTip": "",
           "bgColor": 0,
-          "width": 90,
+          "width": 95,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
@@ -855,6 +855,78 @@
            "imageHeight": "",
            "icon": 0,
            "heightTextBoxMatches": false
+          },
+          {
+           "fieldName": "ImageFrontOfIkensho",
+           "items": [
+            {
+             "fieldName": "lblDummy1",
+             "items": [],
+             "controlType": "Label",
+             "width": "S",
+             "visible": true,
+             "displayNone": true,
+             "disabled": false,
+             "accessKey": "",
+             "nextFocusFieldName": "",
+             "wrap": true,
+             "dependencies": [],
+             "float": 0,
+             "toolTip": "",
+             "authorityMode": 0,
+             "marginLeft": "XS",
+             "marginRight": "XS",
+             "selectControlID": "lblDummy1",
+             "helpMessageID": "",
+             "jpControlName": "",
+             "required": false,
+             "isPrivateInfo": false,
+             "text": "意見書(表)",
+             "decorationClass": "",
+             "align": 2
+            }
+           ],
+           "controlType": "Panel",
+           "width": "965",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": true,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "ImageFrontOfIkensho",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "onLoad": "",
+           "title": "",
+           "isOpen": true,
+           "canOpenAndClose": true,
+           "postParameterPanelNames": [
+            {
+             "postParameterPanelNames": "ImageFrontOfIkensho"
+            }
+           ],
+           "requestSettings": [],
+           "hiddenInput": [],
+           "onOpen": "",
+           "onClose": "",
+           "session": {},
+           "marginTop": "Default",
+           "marginBottom": "Default",
+           "eraseBorder": true,
+           "backgroundColor": 0,
+           "widthAuto": true,
+           "panelDisplay": 0,
+           "isGroupBox": false,
+           "readOnly": false,
+           "height": "Auto",
+           "focusPositionID": "Page"
           }
          ],
          "controlType": "TabPanel",
@@ -907,8 +979,8 @@
              "required": false,
              "isPrivateInfo": false,
              "text": "意見書(裏)",
-             "align": 2,
-             "decorationClass": ""
+             "decorationClass": "",
+             "align": 2
             }
            ],
            "controlType": "Panel",
@@ -1004,8 +1076,8 @@
              "required": false,
              "isPrivateInfo": false,
              "text": "特記事項(1)",
-             "align": 2,
-             "decorationClass": ""
+             "decorationClass": "",
+             "align": 2
             }
            ],
            "controlType": "Panel",
@@ -1101,8 +1173,8 @@
              "required": false,
              "isPrivateInfo": false,
              "text": "特記事項(2)",
-             "align": 2,
-             "decorationClass": ""
+             "decorationClass": "",
+             "align": 2
             }
            ],
            "controlType": "Panel",
@@ -1198,8 +1270,8 @@
              "required": false,
              "isPrivateInfo": false,
              "text": "その他",
-             "align": 2,
-             "decorationClass": ""
+             "decorationClass": "",
+             "align": 2
             }
            ],
            "controlType": "Panel",
@@ -1268,7 +1340,7 @@
         }
        ],
        "controlType": "TabContainer",
-       "width": "975",
+       "width": "1072",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1297,78 +1369,6 @@
        "selectedItemFieldName": "tplImage01",
        "initialTab": 0,
        "isLazyLoading": false
-      },
-      {
-       "fieldName": "ImageFrontOfIkensho",
-       "items": [
-        {
-         "fieldName": "lblDummy1",
-         "items": [],
-         "controlType": "Label",
-         "width": "S",
-         "visible": true,
-         "displayNone": true,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "selectControlID": "lblDummy1",
-         "helpMessageID": "",
-         "jpControlName": "",
-         "required": false,
-         "isPrivateInfo": false,
-         "text": "意見書(表)",
-         "align": 2,
-         "decorationClass": ""
-        }
-       ],
-       "controlType": "Panel",
-       "width": "965",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": true,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "ImageFrontOfIkensho",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "onLoad": "",
-       "title": "",
-       "isOpen": true,
-       "canOpenAndClose": true,
-       "postParameterPanelNames": [
-        {
-         "postParameterPanelNames": "ImageFrontOfIkensho"
-        }
-       ],
-       "requestSettings": [],
-       "hiddenInput": [],
-       "onOpen": "",
-       "onClose": "",
-       "session": {},
-       "marginTop": "Default",
-       "marginBottom": "Default",
-       "eraseBorder": true,
-       "backgroundColor": 0,
-       "widthAuto": false,
-       "panelDisplay": 0,
-       "isGroupBox": false,
-       "readOnly": false,
-       "height": "Auto",
-       "focusPositionID": "Page"
       },
       {
        "fieldName": "btnUpdate",
@@ -1430,7 +1430,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1000",
+     "width": "1098",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1496,8 +1496,8 @@
        "required": false,
        "isPrivateInfo": false,
        "text": "表示倍率",
-       "align": 2,
-       "decorationClass": ""
+       "decorationClass": "",
+       "align": 2
       },
       {
        "fieldName": "ddlHyojiBairitsu",
@@ -1662,7 +1662,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1000",
+     "width": "1098",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1977,9 +1977,6 @@
   ],
   [
    "ImageMaskTaishoShiji"
-  ],
-  [
-   "ImageFrontOfIkensho"
   ],
   [
    "KaigoImageMasking"

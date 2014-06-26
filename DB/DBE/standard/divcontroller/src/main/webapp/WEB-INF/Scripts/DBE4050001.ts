@@ -9,31 +9,13 @@ module Dbe {
 
         public static setImageViewers() {
             DBE4050001.setImageViewer("ImageFrontOfIkensho", "/db/dbe/Scripts/E0001.png");
-            //DBE4050001.setImageViewer("ImageBackOfIkensho", "/db/dbe/Scripts/E0001.png");
-            //DBE4050001.setImageViewer("ImageTokkiJiko1", "/db/dbe/Scripts/E0001.png");
-            //DBE4050001.setImageViewer("ImageTokkiJiko2", "/db/dbe/Scripts/E0001.png");
-            //DBE4050001.setImageViewer("ImageOther", "/db/dbe/Scripts/E0001.png");
         }
 
         public static setImageViewer(controlId: string, imageUrl: string) {
 
-            var imageDispJSON = {
-                //"txtFocus1": {
-                //    "columnname": "意見書(表)",
-                //    "start": {
-                //        "x": 230,
-                //        "y": 187
-                //    },
-                //    "end": {
-                //        "x": 930,
-                //        "y": 307
-                //    },
-                //    "stroke": "red"
-                //}
-            }
+            var imageDispJSON = {}
 
             if (!Uz.GyomuJSHelper.isDesignMode()) {
-                //Uz.GyomuJSHelper.registOriginalEvent("hoge", (control: Uz._ViewControl) => {
                     var viewerPanel = Uz.GyomuJSHelper.getJSControl(controlId);
                     var panelId = DBE4050001.getPanelBodyAreaDiv(viewerPanel);
                     imageDisp.INIT = new imageDispCommon.init();
@@ -42,8 +24,7 @@ module Dbe {
                     imageDisp.STICKY = new imageDispCommon.sticky();
                     imageDisp.ONLY = new imageDispCommon.only();
                     imageDisp.JSON = new imageDispCommon.rectJson();
-                    imageDisp.INIT.initImageDisp(panelId, imageUrl, imageDispJSON, 100, 920, 500, 0, 0);
-               //});
+                    imageDisp.INIT.initImageDisp(panelId, imageUrl, imageDispJSON, 100, 1020, 500, 0, 0);
             }
         }
 
