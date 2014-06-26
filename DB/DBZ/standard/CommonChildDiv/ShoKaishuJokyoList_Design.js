@@ -46,6 +46,7 @@ var DBZ;
                             "selectControlID": "dgShoKaishuJokyo",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "height": "S",
                             "gridSetting": {
                                 "rowHeight": 25,
@@ -125,6 +126,20 @@ var DBZ;
                                         "sortKey": ""
                                     },
                                     {
+                                        "columnName": "交付事由Key",
+                                        "dataName": "kofuJiyuKey",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
                                         "columnName": "交付事由",
                                         "dataName": "kofuJiyu",
                                         "toolTip": "",
@@ -170,6 +185,20 @@ var DBZ;
                                         },
                                         "align": 1,
                                         "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "回収事由Key",
+                                        "dataName": "kaishuJiyuKey",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
                                         "isPrivateInfo": false,
                                         "sortKey": ""
                                     },
@@ -241,7 +270,7 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "950",
+                    "width": "945",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -278,10 +307,7 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": true,
-                    "eraseBorderBottom": true,
-                    "eraseBorderRight": true,
-                    "eraseBorderLeft": true,
+                    "eraseBorder": true,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
@@ -315,7 +341,9 @@ var DBZ;
             "originalProperty": [],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return ShoKaishuJokyoList_Design;
     })(Uz.CommonChildDiv);
