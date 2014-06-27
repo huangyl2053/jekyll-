@@ -159,7 +159,7 @@
      "required": false,
      "text": "",
      "isPrivateInfo": false,
-     "placeHolder": "平26.04.24",
+     "placeHolder": "",
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
@@ -186,7 +186,7 @@
      "fieldName": "txtStartTime",
      "items": [],
      "controlType": "TextBoxTime",
-     "width": "S",
+     "width": "42",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -281,7 +281,7 @@
      "fieldName": "txtEndTime",
      "items": [],
      "controlType": "TextBoxTime",
-     "width": "S",
+     "width": "42",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -3225,7 +3225,7 @@
       "tabShinsaKekka"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tabChosaKekkaShosai",
+     "selectedItemFieldName": "tabShinsaKekka",
      "initialTab": 0,
      "isLazyLoading": false
     }

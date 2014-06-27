@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
+//import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
+//import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -60,11 +60,15 @@ public class NinteiShinsaKekkaNyuryoku {
         div.getHihokenshaJoho().getTxtZenYukokikanStart().setValue(dataRow.getBeforeYukoStartDate().getValue());
         div.getHihokenshaJoho().getTxtZenYukokikanEnd().setValue(dataRow.getBeforeYukoEndDate().getValue());
 
+        KaigoNinteiKekka.setModeWithInit(div.getNinteiKekkaNyuryoku(), KaigoNinteiKekka.Mode.INPUT);
+        KaigoNinteiKekka.setValues(div.getNinteiKekkaNyuryoku(), new KaigoNinteiKekka.Values());
         div.getNinteiKekkaNyuryoku().getTxtShinsaJun().setValue(dataRow.getShinsaJun());
         div.getNinteiKekkaNyuryoku().getTxtShinseibi().setValue(dataRow.getShinseibi().getValue());
         div.getNinteiKekkaNyuryoku().getTxtShinseiKubunShinsei().setValue(dataRow.getShinseiKubun());
         div.getNinteiKekkaNyuryoku().getTxtIchijiHanteiKekka().setValue(dataRow.getIchijiHantei());
         div.getNinteiKekkaNyuryoku().getTxtNinteibi().setValue(FlexibleDate.getNowDate());
+        div.getNinteiKekkaNyuryoku().getDdlTokuteiShippei().setDisabled(true);
+        div.getNinteiKekkaNyuryoku().getDdlJotaiZo().setDisabled(true);
         if (dataRow.getYukoKikan().equalsIgnoreCase(RString.EMPTY)) {
             div.getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka().setSelectedItem(new RString("01"));
             div.getNinteiKekkaNyuryoku().getDdlNinteiYukoTsukisu().setSelectedItem(new RString("0"));
