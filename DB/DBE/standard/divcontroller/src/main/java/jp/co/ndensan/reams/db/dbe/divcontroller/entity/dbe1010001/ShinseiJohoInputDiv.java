@@ -63,10 +63,6 @@ public class ShinseiJohoInputDiv extends Panel {
     private ShichosonRenrakuJikoDiv ShichosonRenrakuJiko;
     @JsonProperty("KankeiIin")
     private KankeiIinDiv KankeiIin;
-    @JsonProperty("btnToSaveShinsei")
-    private Button btnToSaveShinsei;
-    @JsonProperty("btnToBack")
-    private Button btnToBack;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -232,26 +228,6 @@ public class ShinseiJohoInputDiv extends Panel {
     @JsonProperty("KankeiIin")
     public void setKankeiIin(KankeiIinDiv KankeiIin) {
         this.KankeiIin=KankeiIin;
-    }
-
-    @JsonProperty("btnToSaveShinsei")
-    public Button getBtnToSaveShinsei() {
-        return btnToSaveShinsei;
-    }
-
-    @JsonProperty("btnToSaveShinsei")
-    public void setBtnToSaveShinsei(Button btnToSaveShinsei) {
-        this.btnToSaveShinsei=btnToSaveShinsei;
-    }
-
-    @JsonProperty("btnToBack")
-    public Button getBtnToBack() {
-        return btnToBack;
-    }
-
-    @JsonProperty("btnToBack")
-    public void setBtnToBack(Button btnToBack) {
-        this.btnToBack=btnToBack;
     }
 
 }

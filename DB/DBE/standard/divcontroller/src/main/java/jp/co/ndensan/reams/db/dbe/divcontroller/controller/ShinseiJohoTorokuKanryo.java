@@ -25,10 +25,10 @@ public class ShinseiJohoTorokuKanryo {
      * @return ResponseData
      */
     public ResponseData<ShinseiJohoTorokuKanryoDiv> onLoad(ShinseiJohoTorokuKanryoDiv div, ShinseiJohoInputDiv shinsei) {
-        return onClick_btnToSaveShinsei(div, shinsei);
+        return onClick_btnCommonSaveShinsei(div, shinsei);
     }
 
-    public ResponseData<ShinseiJohoTorokuKanryoDiv> onClick_btnToSaveShinsei(ShinseiJohoTorokuKanryoDiv div, ShinseiJohoInputDiv shinsei) {
+    public ResponseData<ShinseiJohoTorokuKanryoDiv> onClick_btnCommonSaveShinsei(ShinseiJohoTorokuKanryoDiv div, ShinseiJohoInputDiv shinsei) {
         KaigoKanryoMessage.setMessage(div.getKanryoMessage(),
                 new RString("登録は正常に行われました。"),
                 new RString("被保番号: " + extractHihokenshaNo(shinsei)),
