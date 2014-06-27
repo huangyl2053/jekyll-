@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 施設入退所履歴管理の対象者共通情報を表示するDivのコントローラです。
@@ -38,10 +39,10 @@ public class ShisetsuNyutaishoKanriTaishoshaJoho {
             ShisetsuNyutaishoKanriTaishoshaSearchDiv searchDiv) {
         ResponseData<ShisetsuNyutaishoKanriTaishoshaJohoDiv> response = new ResponseData<>();
 
-        RString shikibetsuCode = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getShikibetsuCode();
-        AtenaShokaiSimple.setData(taishoshaJohoDiv.getAtenaJoho(), new ShikibetsuCode(shikibetsuCode));
+        RString shikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);
+        RString hihokenshaNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
 
-        RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
+        AtenaShokaiSimple.setData(taishoshaJohoDiv.getAtenaJoho(), new ShikibetsuCode(shikibetsuCode));
         setTaishoshaData(taishoshaJohoDiv, hihokenshaNo);
 
         response.data = taishoshaJohoDiv;

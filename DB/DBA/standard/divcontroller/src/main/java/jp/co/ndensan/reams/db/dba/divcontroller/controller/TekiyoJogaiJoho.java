@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 適用除外情報を表示するDivに対応したControllerです。
@@ -42,7 +43,8 @@ public class TekiyoJogaiJoho {
     public ResponseData onClick_btnToDecide(TekiyoJogaiJohoDiv tekiyoJogaiJohoDiv, TekiyoJogaiTaishoshaSearchDiv searchDiv) {
         ResponseData<TekiyoJogaiJohoDiv> response = new ResponseData<>();
 
-        RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
+        RString hihokenshaNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
+        //RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
         setTekiyoJogaiGrid(tekiyoJogaiJohoDiv.getDgTekiyoJogaiRireki(), hihokenshaNo);
         ShisetsuJoho.setTekiyoJogaiMode(tekiyoJogaiJohoDiv.getTekiyoJogaiToroku().getJogaishaTekiyoInput().getJogaishaTekiyoJogaiShisetsu());
 

@@ -5,77 +5,39 @@
    "fieldName": "ShisetsuNyutaishoKanriTaishoshaSearch",
    "items": [
     {
-     "fieldName": "HihokenshaFinder",
+     "fieldName": "btnToDecide",
      "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
+     "controlType": "Button",
+     "width": "S",
      "visible": true,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": true,
+     "wrap": false,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "HihokenshaFinder",
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnToDecide",
      "helpMessageID": "",
      "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "HihokenshaFinder",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "onClick_BtnToSearch": "onClick_btnToSearch",
-     "displayNone_txtTsuchishoNo": true,
-     "displayNone_ddlFukaNendo": true,
-     "displayNone_SearchCriteriaDetail": false
-    },
-    {
-     "fieldName": "SearchResult",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "SearchResult",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "SearchResultOfHihokensha",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "onClick_btnToResearch": "onClick_btnToResearch"
+     "onClick": "onClick_btnToDecide",
+     "text": "Decide",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
-   "width": "G12",
+   "width": "G3",
    "visible": true,
-   "displayNone": false,
+   "displayNone": true,
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
@@ -323,7 +285,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "ShisetsuNyutaishoKanri",
      "helpMessageID": "",
@@ -421,7 +383,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
-     "marginTop": 0,
+     "marginTop": "0",
      "marginBottom": 0,
      "businessId": "DBZ",
      "controlName": "KaigoKanryoMessage",
@@ -515,128 +477,6 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "対象者検索",
-   "showWizard": true,
-   "visibleDivs": [
-    {
-     "visibleDiv": "ShisetsuNyutaishoKanriTaishoshaSearch",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "HihokenshaFinder",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "SearchResult",
-     "panelState": "close",
-     "fixedDiv": "No"
-    }
-   ],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "HihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": "該当者一覧"
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturnSearchResult",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnResearch",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "2",
-   "stateName": "該当者一覧",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "ShisetsuNyutaishoKanriTaishoshaSearch",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "HihokenshaFinder",
-     "panelState": "close",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "SearchResult",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "HihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": "対象者検索"
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": "異動登録"
-    },
-    {
-     "fieldName": "btnReturnSearchResult",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnResearch",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "3",
    "stateName": "異動登録",
    "showWizard": true,
    "visibleDivs": [
@@ -669,26 +509,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "HihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturnSearchResult",
-     "event": "onClick",
-     "transition": "該当者一覧"
-    },
-    {
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": "異動完了"
@@ -699,14 +519,14 @@
      "transition": ""
     },
     {
-     "fieldName": "btnResearch",
+     "fieldName": "btnToDecide",
      "event": "onClick",
-     "transition": "対象者検索"
+     "transition": "異動登録"
     }
    ]
   },
   {
-   "order": "4",
+   "order": "2",
    "stateName": "異動完了",
    "showWizard": true,
    "visibleDivs": [
@@ -724,26 +544,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "HihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturnSearchResult",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": ""
@@ -754,7 +554,7 @@
      "transition": "終了"
     },
     {
-     "fieldName": "btnResearch",
+     "fieldName": "btnToDecide",
      "event": "onClick",
      "transition": ""
     }
@@ -764,19 +564,26 @@
  "currentState": "All",
  "id": "DBA2020011",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "decide",
+   "eventName": "btnToDecide.onClick"
+  },
+  {
+   "alias": "research",
+   "eventName": "btnResearch.onClick"
+  },
+  {
+   "alias": "searchResult",
+   "eventName": "btnReturnSearchResult.onClick"
+  }
+ ],
  "loadSequencePanelNames": [
   [
    "ShisetsuNyutaishoKanriTaishoshaSearch",
    "ShisetsuNyutaishoKanriTaishoshaJoho",
    "ShisetsuNyutaishoComplete",
    "ShisetsuNyutaishoIdo"
-  ],
-  [
-   "HihokenshaFinder"
-  ],
-  [
-   "SearchResult"
   ],
   [
    "AtenaJoho"

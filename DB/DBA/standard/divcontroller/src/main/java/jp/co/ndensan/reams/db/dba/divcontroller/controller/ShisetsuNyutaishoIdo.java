@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 施設入退所の異動履歴を表示しているDivのコントローラです。
@@ -43,10 +44,11 @@ public class ShisetsuNyutaishoIdo {
      */
     public ResponseData onClick_btnToDecide(ShisetsuNyutaishoIdoDiv idoRirekiDiv, ShisetsuNyutaishoKanriTaishoshaSearchDiv searchDiv) {
         ResponseData<ShisetsuNyutaishoIdoDiv> response = new ResponseData<>();
-
-        dgSearchResult_Row row = searchDiv.getSearchResult().getDgSearchResult().getClickedItem();
         ShisetsuNyutaishoRirekiKanriDiv rirekiKanriDiv = idoRirekiDiv.getShisetsuNyutaishoKanri();
-        List<HashMap> idoRirekiList = getIdoRireki(row.getHihokenshaNo());
+
+        RString hihokenshaNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
+        List<HashMap> idoRirekiList = getIdoRireki(hihokenshaNo);
+
         setIdoRirekiGrid(rirekiKanriDiv.getDgShisetsuNyutaishoRireki(), idoRirekiList);
 
         setDdlTaishoShisetsu(idoRirekiDiv);

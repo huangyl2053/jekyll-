@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 適用除外対象者パネルに対応するDivControllerです。
@@ -37,10 +38,13 @@ public class TekiyoJogaiTaishoshaJoho {
     public ResponseData onClick_btnToDecide(TekiyoJogaiTaishoshaJohoDiv taishoshaJohoDiv, TekiyoJogaiTaishoshaSearchDiv searchDiv) {
         ResponseData<TekiyoJogaiTaishoshaJohoDiv> response = new ResponseData<>();
 
-        RString shikibetsuCode = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getShikibetsuCode();
+        RString shikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);
+        RString hihokenshaNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
+
+        //RString shikibetsuCode = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getShikibetsuCode();
         AtenaShokaiSimple.setData(taishoshaJohoDiv.getAtenaJoho(), new ShikibetsuCode(shikibetsuCode));
 
-        RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
+        //RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
         setTaishoshaData(taishoshaJohoDiv, hihokenshaNo);
 
         response.data = taishoshaJohoDiv;

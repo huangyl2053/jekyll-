@@ -672,6 +672,8 @@ declare module Uz {
         private static DEFAULT_BTN_TEMP_ID;
         private static DEFAULT_ICON_HEADER;
         private static DEFAULT_ICON_TRALER;
+        private static HEIGTH_MATCHES_TEXTBOX;
+        private static WIDTH_MATCHES_TEXTBOX;
         private _text;
         private _appearance;
         private _imageFileUrl;
@@ -690,6 +692,8 @@ declare module Uz {
         public imageWidth : any;
         public icon : any;
         public heightTextBoxMatches : boolean;
+        private setheightTextBoxMatchesForButton();
+        private setheightTextBoxMatchesForImage(isChange);
         public setMargin(): void;
         public setWidth(): void;
         public changeWidth(): void;
@@ -703,7 +707,7 @@ declare module Uz {
         public reSizeHeightImage(isHeightValue: boolean): void;
         public reSizeWidthImage(isWidthValue: boolean): void;
         private setDisabledImageProperty(isDisabled);
-        private setDisabledheightTextBoxMatchesProperty(isDisabled);
+        private setDisabledImageHeightAndWidth(isDisabled);
         private setDisabledTextProperty(isDisabled);
     }
 }
@@ -2283,10 +2287,13 @@ declare module Uz {
         static getFieldNamesForDialog(searchControl: Uz._JSControl): string[];
         private static searchFieldNamesForDialog(control, fieldNames);
         static setInitializeDataForControls(control: Uz._JSControl, initlayout: any): void;
+        static deletePropertyFromItems(selected, childPropertyName, childFieldName);
         static execClientValidation(postParameterPanelNames: any): boolean;
         private static execValidation(items);
         static setViewPageParameter(element): void;
         private static addControlMargin(element, page);
+        static deletePanelMarginPadding(target): void;
+        static addPanelMarginPadding(target): void;
         static changeStateOfContainerChildren(childrenControl: Uz._JSControl[], parentState: Uz.ParentState): void;
         static escapePermitCharacter(permitCharacter: string): string;
         static showValidationToolTip(fieldName: string, isShow: boolean): void;
@@ -2377,9 +2384,9 @@ declare module Uz {
         private initSupplementButtonClickEvent();
         private redirectSupplementInfoPage();
         public getSupplementInfoUrl(supplementInfo: String): string;
-        public changeCommonButtonArea(): void;
+        public changeCommonButtonArea(isAll?: boolean): void;
         private applyCommonButtonData(button, buttonProperty);
-        private searchButtonSetting();
+        private searchButtonSetting(isAll?);
         private searchIsFinishButtonOnTheRight();
         private changeCurrentSupplementInfo();
         private initTempHelpData();
@@ -2399,7 +2406,7 @@ declare module Uz {
         public bindStateTransitionEvent(): void;
         public changeState(fieldName: string, eventName: string): void;
         private changePage(eventName);
-        private changeFinishState();
+        private changeFinishState(extention);
         public whenBatchRegisteredChangeFinishState(): void;
         public getEventName(eventAliasName: string): string;
         public fireUIContainerToEvent(eventNameAlias: string): void;
@@ -3252,6 +3259,7 @@ declare module Uz {
         constructor($parentElement: JQuery, isDesignMode: boolean);
         private initPropery();
         public createDomElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
+        public recreateDomElement(isImage: boolean): void;
         public registProperty(): void;
         public getEditablePropertyInfo(): any;
         public bindData(data: any): void;
