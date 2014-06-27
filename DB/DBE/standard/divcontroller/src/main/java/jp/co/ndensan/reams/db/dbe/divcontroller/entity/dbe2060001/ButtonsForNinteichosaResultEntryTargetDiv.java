@@ -21,8 +21,6 @@ public class ButtonsForNinteichosaResultEntryTargetDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnToFinish")
-    private Button btnToFinish;
     @JsonProperty("btnHiddenCallOnResume")
     private Button btnHiddenCallOnResume;
 
@@ -32,16 +30,6 @@ public class ButtonsForNinteichosaResultEntryTargetDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnToFinish")
-    public Button getBtnToFinish() {
-        return btnToFinish;
-    }
-
-    @JsonProperty("btnToFinish")
-    public void setBtnToFinish(Button btnToFinish) {
-        this.btnToFinish=btnToFinish;
-    }
-
     @JsonProperty("btnHiddenCallOnResume")
     public Button getBtnHiddenCallOnResume() {
         return btnHiddenCallOnResume;

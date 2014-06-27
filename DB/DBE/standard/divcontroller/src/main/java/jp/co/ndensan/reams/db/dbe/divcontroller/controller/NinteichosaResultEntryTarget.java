@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -32,18 +33,18 @@ public class NinteichosaResultEntryTarget {
      */
     public ResponseData<NinteichosaResultEntryTargetDiv> onLoad(NinteichosaResultEntryTargetDiv div) {
         dgTargetPersons(div).setDataSource(_findTarget());
-        setDisabled_btnToFinish(div, true);
+        setDisabled_btnCommonToCompleteChosa(true);
         for (dgNinteichosaResultTaishosha_Row row : dgTargetPersons(div).getDataSource()) {
             if (canBeSet_chosaKanryoDate(row)) {
-                setDisabled_btnToFinish(div, false);
+                setDisabled_btnCommonToCompleteChosa(false);
                 break;
             }
         }
         return _createResponseData(div);
     }
 
-    private void setDisabled_btnToFinish(NinteichosaResultEntryTargetDiv div, boolean disabled) {
-        div.getButtonsForNinteichosaResultEntryTarget().getBtnToFinish().setDisabled(disabled);
+    private void setDisabled_btnCommonToCompleteChosa(boolean disabled) {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnCommonToCompleteChosa"), disabled);
     }
 
     /**
@@ -82,18 +83,18 @@ public class NinteichosaResultEntryTarget {
         dgNinteichosaResultTaishosha_Row target = Holder.get();
         if (target != null) {
             Holder.remove();
-            setDisabled_btnToFinish(div, true);
+            setDisabled_btnCommonToCompleteChosa(true);
             List<dgNinteichosaResultTaishosha_Row> list = new ArrayList<>();
             for (dgNinteichosaResultTaishosha_Row row : dgTargetPersons(div).getDataSource()) {
                 if (row.getHihokenshaNo().equals(target.getHihokenshaNo())) {
                     list.add(target);
                     if (canBeSet_chosaKanryoDate(target)) {
-                        setDisabled_btnToFinish(div, false);
+                        setDisabled_btnCommonToCompleteChosa(false);
                     }
                 } else {
                     list.add(row);
                     if (canBeSet_chosaKanryoDate(row)) {
-                        setDisabled_btnToFinish(div, false);
+                        setDisabled_btnCommonToCompleteChosa(false);
                     }
                 }
             }
@@ -107,12 +108,12 @@ public class NinteichosaResultEntryTarget {
     }
 
     /**
-     * 復帰時の処理です。
+     * btnCommonToCompleteChosaを押下したときの処理です。
      *
      * @param div NinteichosaResultEntryTargetDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaResultEntryTargetDiv> onClick_btnToFinish(NinteichosaResultEntryTargetDiv div) {
+    public ResponseData<NinteichosaResultEntryTargetDiv> onClick_btnCommonToCompleteChosa(NinteichosaResultEntryTargetDiv div) {
         List<dgNinteichosaResultTaishosha_Row> dataSource = new ArrayList<>();
         for (dgNinteichosaResultTaishosha_Row selectedRow : dgTargetPersons(div).getSelectedItems()) {
             if (canBeSet_chosaKanryoDate(selectedRow)) {

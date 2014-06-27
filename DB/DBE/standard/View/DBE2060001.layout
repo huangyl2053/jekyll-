@@ -484,35 +484,6 @@
      "fieldName": "ButtonsForNinteichosaResultEntryTarget",
      "items": [
       {
-       "fieldName": "btnToFinish",
-       "items": [],
-       "controlType": "Button",
-       "width": "M",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnToFinish",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "onClick": "onClick_btnToFinish",
-       "text": "調査を完了とする",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0,
-       "heightTextBoxMatches": false
-      },
-      {
        "fieldName": "btnHiddenCallOnResume",
        "items": [],
        "controlType": "Button",
@@ -545,7 +516,7 @@
      "controlType": "Panel",
      "width": "1098",
      "visible": true,
-     "displayNone": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -620,8 +591,8 @@
      "requestUrl": "dbe/db/dbe/NinteichosaResultEntryTarget/onClick_btnToReturn"
     },
     {
-     "eventName": "onClick_btnToFinish",
-     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryTarget/onClick_btnToFinish"
+     "eventName": "onClick_btnCommonToCompleteChosa",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryTarget/onClick_btnCommonToCompleteChosa"
     },
     {
      "eventName": "onResume",
@@ -690,7 +661,7 @@
    "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "対象者一覧",
  "id": "DBE2060001",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -715,5 +686,53 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "targetList",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnCommonToCompleteChosa",
+      "items": [],
+      "controlType": "CommonButtonSelectableComplete",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCommonToCompleteChosa",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了とする",
+      "onClick": "onClick_btnCommonToCompleteChosa",
+      "icon": 1,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "textOfYes": "はい",
+      "textOfNo": "いいえ",
+      "prefixText": "調査を",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "対象者一覧"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }
