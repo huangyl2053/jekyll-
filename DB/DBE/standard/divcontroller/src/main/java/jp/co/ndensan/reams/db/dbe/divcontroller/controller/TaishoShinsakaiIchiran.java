@@ -54,6 +54,9 @@ public class TaishoShinsakaiIchiran {
         dgShinsakaiIchiran_Row dataRow = div.getDgShinsakaiIchiran().getSelectedItems().get(SELECT_IDX);
 
         ViewStateHolder.put("審査会番号", dataRow.get審査会名());
+        ViewStateHolder.put("合議体名", dataRow.get合議体());
+        ViewStateHolder.put("開催日", dataRow.get審査開催日().getValue());
+        ViewStateHolder.put("開催場所", dataRow.get審査会会場());
 
         response.data = div;
         return response;

@@ -29,6 +29,8 @@ public class ShakaiFukushiHojinKeigenDiv extends Panel {
     private DataGrid<dgShakaiFukushiHojinKeigenList_Row> dgShakaiFukushiHojinKeigenList;
     @JsonProperty("ShakaiFukushiHojinKeigenDetail")
     private ShakaiFukushiHojinKeigenDetailDiv ShakaiFukushiHojinKeigenDetail;
+    @JsonProperty("btnClose")
+    private Button btnClose;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -64,6 +66,16 @@ public class ShakaiFukushiHojinKeigenDiv extends Panel {
     @JsonProperty("ShakaiFukushiHojinKeigenDetail")
     public void setShakaiFukushiHojinKeigenDetail(ShakaiFukushiHojinKeigenDetailDiv ShakaiFukushiHojinKeigenDetail) {
         this.ShakaiFukushiHojinKeigenDetail=ShakaiFukushiHojinKeigenDetail;
+    }
+
+    @JsonProperty("btnClose")
+    public Button getBtnClose() {
+        return btnClose;
+    }
+
+    @JsonProperty("btnClose")
+    public void setBtnClose(Button btnClose) {
+        this.btnClose=btnClose;
     }
 
 }

@@ -566,7 +566,7 @@
          "controlName": "txtHihokenshaNo"
         }
        ],
-       "visibleCloseButton": true,
+       "visibleCloseButton": false,
        "onOkClose": "",
        "onBeforeOpenDialog": ""
       },
@@ -605,7 +605,7 @@
          "controlName": "txtHihokenshaNo"
         }
        ],
-       "visibleCloseButton": true,
+       "visibleCloseButton": false,
        "onOkClose": "",
        "onBeforeOpenDialog": ""
       },
@@ -644,7 +644,7 @@
          "controlName": "txtHihokenshaNo"
         }
        ],
-       "visibleCloseButton": true,
+       "visibleCloseButton": false,
        "onOkClose": "",
        "onBeforeOpenDialog": ""
       },
@@ -683,7 +683,7 @@
          "controlName": "txtHihokenshaNo"
         }
        ],
-       "visibleCloseButton": true,
+       "visibleCloseButton": false,
        "onOkClose": "",
        "onBeforeOpenDialog": ""
       },
@@ -722,7 +722,7 @@
          "controlName": "txtHihokenshaNo"
         }
        ],
-       "visibleCloseButton": true,
+       "visibleCloseButton": false,
        "onOkClose": "",
        "onBeforeOpenDialog": ""
       },
@@ -761,7 +761,7 @@
          "controlName": "txtHihokenshaNo"
         }
        ],
-       "visibleCloseButton": true,
+       "visibleCloseButton": false,
        "onOkClose": "",
        "onBeforeOpenDialog": ""
       },

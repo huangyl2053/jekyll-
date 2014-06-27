@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.riyoshaFutangakuGemmen;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 13 11:34:53 JST 2014 
+ * Thu Jun 26 13:47:16 JST 2014 
  */
 
 

@@ -195,7 +195,7 @@
       ]
      },
      "onSort": "",
-     "onSelect": "",
+     "onSelect": "onSelect_dgShinsakaiIchiran",
      "onSelectByDblClick": "",
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
@@ -305,6 +305,10 @@
     {
      "eventName": "onOpen_TaishoShinsakaiIchiran",
      "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/reLoadData"
+    },
+    {
+     "eventName": "onSelect_dgShinsakaiIchiran",
+     "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/onClick_btnToroku"
     }
    ],
    "hiddenInput": [],

@@ -1031,6 +1031,35 @@
      "heightTextBoxMatches": false
     },
     {
+     "fieldName": "btnLoadData",
+     "items": [],
+     "controlType": "Button",
+     "width": "2",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnLoadData",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "ロード",
+     "onClick": "onClick_btnLoadData",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": true
+    },
+    {
      "fieldName": "ShinsakaiIinIchiran",
      "items": [
       {
@@ -1344,7 +1373,7 @@
    "selectControlID": "ShinsakaiKaisaiKekka",
    "helpMessageID": "",
    "jpControlName": "",
-   "onLoad": "onLoad_ShinsakaiKaisaiKekka",
+   "onLoad": "",
    "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
@@ -1356,7 +1385,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/ShinsakaiKaisaiKekka/onLoadData"
+     "requestUrl": ""
     },
     {
      "eventName": "onClick_btnRemoveIin",
@@ -1365,6 +1394,10 @@
     {
      "eventName": "onClick_btnIinRegister",
      "requestUrl": "dbe/db/dbe/ShinsakaiKaisaiKekka/onClick_btnIinRegister"
+    },
+    {
+     "eventName": "onClick_btnLoadData",
+     "requestUrl": "dbe/db/dbe/ShinsakaiKaisaiKekka/onClick_btnLoadData"
     }
    ],
    "hiddenInput": [],
@@ -1471,7 +1504,7 @@
   },
   {
    "alias": "onLoaddata",
-   "eventName": "ShinsakaiKaisaiKekka.onLoad"
+   "eventName": "btnLoadData.onClick"
   }
  ],
  "loadSequencePanelNames": [

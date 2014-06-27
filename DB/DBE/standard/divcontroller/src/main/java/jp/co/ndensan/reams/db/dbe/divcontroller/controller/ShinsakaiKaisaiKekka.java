@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -40,22 +41,50 @@ public class ShinsakaiKaisaiKekka {
     public ResponseData onLoadData(ShinsakaiKaisaiKekkaDiv div) {
         ResponseData<ShinsakaiKaisaiKekkaDiv> response = new ResponseData<>();
 
+//        div.getDgShinsakaiShinsainIchiran().setDataSource(createRowShinsakaiIchiranTestData());
+//        div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().setDataSource(createRowShinsakaiIinIchiranTestData());
+//        RString shinsakaiMeisho = (RString) ViewStateHolder.get("審査会番号", RString.class);
+//        div.getTxtShinsakaiMeisho().setValue(shinsakaiMeisho);
+//
+//        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("dbe5010001/gogitai.yml"));
+//        Map map = targetSource.get(0);
+//        div.getTxtGogitai().setValue(_toRString(map.get("合議体")));
+//        div.getTxtKaisaiYoteibi().setValue(new FlexibleDate(map.get("開催予定日").toString()));
+//        div.getTxtKaisaiBi().setValue(new FlexibleDate(map.get("開催予定日").toString()));
+//        div.getTxtYoteiStartTime().setValue(RTime.parse(map.get("予定開始").toString()));
+//        div.getTxtKaisaiStartTime().setValue(RTime.parse(map.get("予定開始").toString()));
+//        div.getTxtYoteiEndTime().setValue(RTime.parse(map.get("予定終了").toString()));
+//        div.getTxtKaisaiEndTime().setValue(RTime.parse(map.get("予定終了").toString()));
+//        div.getTxtYoteiKaijo().setValue(_toRString(map.get("予定会場")));
+//        div.getTxtYoteiTeiin().setValue(new Decimal(map.get("予定定員").toString()));
+//        div.getTxtJissiSu().setValue(new Decimal(map.get("予定定員").toString()));
+        response.data = div;
+        return response;
+    }
+
+    public ResponseData onClick_btnLoadData(ShinsakaiKaisaiKekkaDiv div) {
+        ResponseData<ShinsakaiKaisaiKekkaDiv> response = new ResponseData<>();
+
         div.getDgShinsakaiShinsainIchiran().setDataSource(createRowShinsakaiIchiranTestData());
         div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().setDataSource(createRowShinsakaiIinIchiranTestData());
 
         RString shinsakaiMeisho = (RString) ViewStateHolder.get("審査会番号", RString.class);
         div.getTxtShinsakaiMeisho().setValue(shinsakaiMeisho);
 
+        RString gogitaiMeisho = (RString) ViewStateHolder.get("合議体名", RString.class);
+        div.getTxtGogitai().setValue(gogitaiMeisho);
+        FlexibleDate kaisaibi = (FlexibleDate) ViewStateHolder.get("開催日", FlexibleDate.class);
+        div.getTxtKaisaiYoteibi().setValue(kaisaibi);
+        div.getTxtKaisaiBi().setValue(kaisaibi);
+        RString kaisaiBasho = (RString) ViewStateHolder.get("開催場所", RString.class);
+        div.getTxtYoteiKaijo().setValue(kaisaiBasho);
+
         List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("dbe5010001/gogitai.yml"));
         Map map = targetSource.get(0);
-        div.getTxtGogitai().setValue(_toRString(map.get("合議体")));
-        div.getTxtKaisaiYoteibi().setValue(new FlexibleDate(map.get("開催予定日").toString()));
-        div.getTxtKaisaiBi().setValue(new FlexibleDate(map.get("開催予定日").toString()));
         div.getTxtYoteiStartTime().setValue(RTime.parse(map.get("予定開始").toString()));
         div.getTxtKaisaiStartTime().setValue(RTime.parse(map.get("予定開始").toString()));
         div.getTxtYoteiEndTime().setValue(RTime.parse(map.get("予定終了").toString()));
         div.getTxtKaisaiEndTime().setValue(RTime.parse(map.get("予定終了").toString()));
-        div.getTxtYoteiKaijo().setValue(_toRString(map.get("予定会場")));
         div.getTxtYoteiTeiin().setValue(new Decimal(map.get("予定定員").toString()));
         div.getTxtJissiSu().setValue(new Decimal(map.get("予定定員").toString()));
 

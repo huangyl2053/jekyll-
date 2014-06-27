@@ -29,6 +29,8 @@ public class TokubetsuChiikiKasanGemmenDiv extends Panel {
     private DataGrid<dgTokubetsuChiikiKasanGemmenList_Row> dgTokubetsuChiikiKasanGemmenList;
     @JsonProperty("TokubetsuChiikiKasanGemmenDetail")
     private TokubetsuChiikiKasanGemmenDetailDiv TokubetsuChiikiKasanGemmenDetail;
+    @JsonProperty("btnClose")
+    private Button btnClose;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -64,6 +66,16 @@ public class TokubetsuChiikiKasanGemmenDiv extends Panel {
     @JsonProperty("TokubetsuChiikiKasanGemmenDetail")
     public void setTokubetsuChiikiKasanGemmenDetail(TokubetsuChiikiKasanGemmenDetailDiv TokubetsuChiikiKasanGemmenDetail) {
         this.TokubetsuChiikiKasanGemmenDetail=TokubetsuChiikiKasanGemmenDetail;
+    }
+
+    @JsonProperty("btnClose")
+    public Button getBtnClose() {
+        return btnClose;
+    }
+
+    @JsonProperty("btnClose")
+    public void setBtnClose(Button btnClose) {
+        this.btnClose=btnClose;
     }
 
 }

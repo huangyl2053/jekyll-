@@ -832,7 +832,7 @@ module DBE {
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "410"
   }
  ],
  "controlType": "CommonChildDiv",
@@ -879,7 +879,7 @@ module DBE {
  "dialogOkEventNameForDialog": "onClick_btnSelectAndClose",
  "dialogCancelEventNameForDialog": "onClick_btnNonSelectReturn",
  "canTransferEvent": true,
- "heightForDialog": "M"
+ "heightForDialog": "450"
 }        
     }
 }
