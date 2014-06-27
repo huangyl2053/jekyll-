@@ -27,6 +27,7 @@
      "readOnly": false,
      "required": false,
      "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -34,16 +35,16 @@
      "onChange": "",
      "onKeyPress": "",
      "text": "",
+     "value": "",
      "labelLText": "決定年月",
      "labelRText": "",
      "labelLWidth": "100",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "permitCharactor": "./_-",
      "ymdKubun": 1,
-     "displayFormat": 0,
-     "value": "",
-     "textKind": 0
+     "displayFormat": 0
     },
     {
      "fieldName": "txtTsuchiSotatsuYMD",
@@ -68,6 +69,7 @@
      "readOnly": false,
      "required": false,
      "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -75,16 +77,16 @@
      "onChange": "",
      "onKeyPress": "",
      "text": "",
+     "value": "",
      "labelLText": "通知送達日",
      "labelRText": "",
      "labelLWidth": "100",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "textKind": 0
+     "displayFormat": 0
     },
     {
      "fieldName": "chkOutputTargetKubun",
@@ -112,6 +114,8 @@
      "labelLText": "出力対象区分",
      "labelLWidth": "100",
      "labelLAlign": 2,
+     "onClick": "",
+     "icon": [],
      "selectedItem": null,
      "dataSource": [
       {
@@ -123,7 +127,6 @@
        "value": "受領委任者向け決定通知書"
       }
      ],
-     "onClick": "",
      "selectedItems": [
       {
        "key": "isAllSelect",
@@ -144,8 +147,7 @@
      "spaceSize": 0,
      "isAllSelectable": false,
      "isAllSelectableBreakLine": false,
-     "disabledItem": [],
-     "icon": []
+     "disabledItem": []
     },
     {
      "fieldName": "lblReportCreateKubun",
@@ -170,8 +172,8 @@
      "required": false,
      "isPrivateInfo": false,
      "text": "帳票作成区分",
-     "align": 2,
-     "decorationClass": ""
+     "decorationClass": "",
+     "align": 2
     },
     {
      "fieldName": "radIsCreateIchiranhyo",
@@ -199,6 +201,8 @@
      "labelLText": "高額介護サービス費支給（不支給）決定者一覧表",
      "labelLWidth": "500",
      "labelLAlign": 0,
+     "onClick": "",
+     "icon": [],
      "selectedItem": "create",
      "dataSource": [
       {
@@ -210,11 +214,9 @@
        "value": "作成しない"
       }
      ],
-     "onClick": "",
      "newLineItemNumber": 2,
      "spaceSize": "S",
-     "disabledItem": [],
-     "icon": []
+     "disabledItem": []
     },
     {
      "fieldName": "CommonKariChildDiv1",
@@ -270,11 +272,11 @@
      "jpControlName": "",
      "text": "通知書を作成する",
      "onClick": "onClick_btnCreate",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],

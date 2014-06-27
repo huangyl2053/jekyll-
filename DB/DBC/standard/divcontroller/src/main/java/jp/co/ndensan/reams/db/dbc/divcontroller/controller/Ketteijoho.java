@@ -28,11 +28,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class Ketteijoho {
 
-    final static RDate OLDDATE = new RDate("201402");
-    final static RDate NEWDATE = new RDate("201404");
+    final static RDate OldDate = new RDate("201402");
+    final static RDate NewDate = new RDate("201404");
 
-    final static String NEWYMLNAME = "dbc0071011/KetteijohoNew4Info.yml";
-    final static String OLDYMLNAME = "dbc0071011/KetteijohoOld2Info.yml";
+    final static String NewYmlName = "dbc0071011/KetteijohoNew4Info.yml";
+    final static String OldYmlName = "dbc0071011/KetteijohoOld2Info.yml";
 
     /**
      * 読み込み時は最新の決定情報を表示します。
@@ -43,17 +43,13 @@ public class Ketteijoho {
     public ResponseData<KetteijohoDiv> onLoad(KetteijohoDiv panel) {
         ResponseData<KetteijohoDiv> response = new ResponseData<>();
 
-        //setDefault取扱年月
-        setDefault(panel, NEWYMLNAME);
-       
-        panel.getKetteiHokensha().getTxtKetteiHokenshaSakuseiYMD().clearValue();
-        panel.getKetteiKohi().getTxtKetteiKohiSakuseiYMD().clearValue();
-
-//        setHokenshaCellData(panel, NEWYMLNAME);
-//        setHokenshaListData(panel, NEWYMLNAME);
-//
-//        setKohiCellData(panel, NEWYMLNAME);
-//        setKohiListData(panel, NEWYMLNAME);
+        //setDefault取扱年月 4月分
+        
+        //初期のデータ（取扱年月）を表示しないように。2014.06.27 朴 start        
+        //setDefault(panel, NewYmlName);
+        //panel.getKetteiHokensha().getTxtKetteiHokenshaSakuseiYMD().clearValue();
+        //panel.getKetteiKohi().getTxtKetteiKohiSakuseiYMD().clearValue();
+        //初期のデータ（取扱年月）を表示しないように。2014.06.27 朴 end  
 
         response.data = panel;
 
@@ -67,8 +63,7 @@ public class Ketteijoho {
         HashMap hashMap = ymlData.get(0);
         ControlGenerator ymlDt = new ControlGenerator(hashMap);
 
-        panel.getTxtToriatsukaiYM().setValue(ymlDt.getAsRDate("toriatsukaiYM"));
-        
+        panel.getTxtToriatsukaiYM().setValue(ymlDt.getAsRDate("toriatsukaiYM"));        
         panel.getKetteiHokensha().getTxtKetteiHokenshaSakuseiYMD().setValue(ymlDt.getAsRDate("ketteiHokenshaSakuseiYMD"));
         panel.getKetteiKohi().getTxtKetteiKohiSakuseiYMD().setValue(ymlDt.getAsRDate("ketteiKohiSakuseiYMD"));
 
@@ -321,31 +316,31 @@ public class Ketteijoho {
         //取扱年月を指定した
         RDate txtToriatsukaiYM = panel.getTxtToriatsukaiYM().getValue();
 
-        if (txtToriatsukaiYM.equals(OLDDATE)) {
-
+        if (txtToriatsukaiYM.equals(OldDate)) {
+           
             //setDefault取扱年月
-            setDefault(panel, OLDYMLNAME);
+            setDefault(panel, OldYmlName);
 
             //create決定保険者集計
-            setHokenshaCellData(panel, OLDYMLNAME);
+            setHokenshaCellData(panel, OldYmlName);
             //create決定保険者明細 
-            setHokenshaListData(panel, OLDYMLNAME);
+            setHokenshaListData(panel, OldYmlName);
 
-            setKohiCellData(panel, OLDYMLNAME);
-            setKohiListData(panel, OLDYMLNAME);
+            setKohiCellData(panel, OldYmlName);
+            setKohiListData(panel, OldYmlName);
 
-        } else if (txtToriatsukaiYM.equals(NEWDATE)) {
+        } else if (txtToriatsukaiYM.equals(NewDate)) {
 
-            //setDefault取扱年月
-            setDefault(panel, NEWYMLNAME);
+            //setDefault取扱年月 
+            setDefault(panel, NewYmlName);
 
             //create決定保険者集計
-            setHokenshaCellData(panel, NEWYMLNAME);
+            setHokenshaCellData(panel, NewYmlName);
             //create決定保険者明細 
-            setHokenshaListData(panel, NEWYMLNAME);
+            setHokenshaListData(panel, NewYmlName);
 
-            setKohiCellData(panel, NEWYMLNAME);
-            setKohiListData(panel, NEWYMLNAME);
+            setKohiCellData(panel, NewYmlName);
+            setKohiListData(panel, NewYmlName);
 
         } else {
             setHokenshaKetteiClear(panel);

@@ -8,15 +8,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0030011.SearchKogakuServicehiPanelDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 高額介護サービス費照会
  *
  * @author n8223
+ * @author n8223 YMLデータ対応 2014.06.26
  */
 public class SearchKogakuServicehiPanel {
 
@@ -58,28 +59,37 @@ public class SearchKogakuServicehiPanel {
 
     private void setSearchKogakuServicehiInfo(SearchKogakuServicehiPanelDiv panel) {
         List<HashMap> ymlData = ymlData("dbc0030011/KogakuServicehiSearchKogakuServicehi.yml");
+        
+        HashMap hashMap = ymlData.get(0);
+        ControlGenerator ymlDt = new ControlGenerator(hashMap);
 
         //被保険者を指定して検索する（初期表示）
-        panel.getRadSearchKubun().setSelectedItem(new RString(
-                ymlData.get(0).get("hihoNo").toString()));
+        panel.getRadSearchKubun().setSelectedItem(ymlDt.getAsRString("hihoNo"));
 
-        //被保険者を指定して検索する。 
-        panel.getSearchKogakuHihokensha().getTxtHihoNo().setValue(new RString(
-                ymlData.get(0).get("hihoNo").toString()));
-        panel.getSearchKogakuHihokensha().getTxtHihoName().setValue(new RString(
-                ymlData.get(0).get("hihoName").toString()));
-        panel.getSearchKogakuHihokensha().getTxtTeikyoYMRange().setFromValue(new RDate(
-                ymlData.get(0).get("teikyoYMRangefrom").toString()));
-        panel.getSearchKogakuHihokensha().getTxtTeikyoYMRange().setToValue(new RDate(
-                ymlData.get(0).get("teikyoYMRangeto").toString()));
-        panel.getSearchKogakuHihokensha().getTxtShinseiYMRange().setFromValue(new RDate(
-                ymlData.get(0).get("shinseiYMRangefrom").toString()));
-        panel.getSearchKogakuHihokensha().getTxtShinseiYMRange().setToValue(new RDate(
-                ymlData.get(0).get("shinseiYMRangeto").toString()));
-        panel.getSearchKogakuHihokensha().getTxtKetteiYMRange().setFromValue(new RDate(
-                ymlData.get(0).get("ketteiYMRangefrom").toString()));
-        panel.getSearchKogakuHihokensha().getTxtKetteiYMRange().setToValue(new RDate(
-                ymlData.get(0).get("ketteiYMRangeto").toString()));
+        //被保険者を指定して検索する。
+        //被保険者番号
+        panel.getSearchKogakuHihokensha().getTxtHihoNo().setValue(
+                ymlDt.getAsRString("hihoNo"));
+        //被保険者名
+        panel.getSearchKogakuHihokensha().getTxtHihoName().setValue(
+                ymlDt.getAsRString("hihoName"));
+        //提供年月       
+        panel.getSearchKogakuHihokensha().getTxtTeikyoYMRange().setFromValue(
+                ymlDt.getAsRDate("teikyoYMRangefrom"));
+        
+        panel.getSearchKogakuHihokensha().getTxtTeikyoYMRange().setToValue(
+                ymlDt.getAsRDate("teikyoYMRangeto"));
+        //申請年月
+        panel.getSearchKogakuHihokensha().getTxtShinseiYMRange().setFromValue(
+                ymlDt.getAsRDate("shinseiYMRangefrom"));
+        panel.getSearchKogakuHihokensha().getTxtShinseiYMRange().setToValue(
+                ymlDt.getAsRDate("shinseiYMRangeto"));
+        
+        //決定年月
+        panel.getSearchKogakuHihokensha().getTxtKetteiYMRange().setFromValue(
+                ymlDt.getAsRDate("ketteiYMRangefrom"));
+        panel.getSearchKogakuHihokensha().getTxtKetteiYMRange().setToValue(
+               ymlDt.getAsRDate("ketteiYMRangeto"));
 
     }
 
@@ -94,40 +104,58 @@ public class SearchKogakuServicehiPanel {
         ResponseData<SearchKogakuServicehiPanelDiv> response = new ResponseData<>();
         
         List<HashMap> ymlData = ymlData("dbc0030011/KogakuServicehiSearchKogakuServicehi.yml");
-        
+
+        HashMap hashMap;
+        ControlGenerator ymlDt;         
+       
         switch (panel.getRadSearchKubun().getSelectedValue().toString()) {
             case HihokenshaShitei:
+                
+                 hashMap = ymlData.get(0);
+                 ymlDt = new ControlGenerator(hashMap);
+        
                 //被保険者を指定して検索する。
-                panel.getSearchKogakuHihokensha().getTxtHihoNo().setValue(new RString(
-                        ymlData.get(0).get("hihoNo").toString()));
-                panel.getSearchKogakuHihokensha().getTxtHihoName().setValue(new RString(
-                        ymlData.get(0).get("hihoName").toString()));
-                panel.getSearchKogakuHihokensha().getTxtTeikyoYMRange().setFromValue(new RDate(
-                        ymlData.get(0).get("teikyoYMRangefrom").toString()));
-                panel.getSearchKogakuHihokensha().getTxtTeikyoYMRange().setToValue(new RDate(
-                        ymlData.get(0).get("teikyoYMRangeto").toString()));
-                panel.getSearchKogakuHihokensha().getTxtShinseiYMRange().setFromValue(new RDate(
-                        ymlData.get(0).get("shinseiYMRangefrom").toString()));
-                panel.getSearchKogakuHihokensha().getTxtShinseiYMRange().setToValue(new RDate(
-                        ymlData.get(0).get("shinseiYMRangeto").toString()));
-                panel.getSearchKogakuHihokensha().getTxtKetteiYMRange().setFromValue(new RDate(
-                        ymlData.get(0).get("ketteiYMRangefrom").toString()));
-                panel.getSearchKogakuHihokensha().getTxtKetteiYMRange().setToValue(new RDate(
-                        ymlData.get(0).get("ketteiYMRangeto").toString()));
+                //被保番号 
+                panel.getSearchKogakuHihokensha().getTxtHihoNo().setValue(
+                        ymlDt.getAsRString("hihoNo"));
+                //被保険番号
+                panel.getSearchKogakuHihokensha().getTxtHihoName().setValue(
+                        ymlDt.getAsRString("hihoName"));
+                //提供年月
+                panel.getSearchKogakuHihokensha().getTxtTeikyoYMRange().setFromValue(
+                        ymlDt.getAsRDate("teikyoYMRangefrom"));
+                panel.getSearchKogakuHihokensha().getTxtTeikyoYMRange().setToValue(
+                        ymlDt.getAsRDate("teikyoYMRangeto"));
+                //申請年月
+                panel.getSearchKogakuHihokensha().getTxtShinseiYMRange().setFromValue(
+                        ymlDt.getAsRDate("shinseiYMRangefrom"));
+                panel.getSearchKogakuHihokensha().getTxtShinseiYMRange().setToValue(
+                        ymlDt.getAsRDate("shinseiYMRangeto"));
+                //決定年月
+                panel.getSearchKogakuHihokensha().getTxtKetteiYMRange().setFromValue(
+                        ymlDt.getAsRDate("ketteiYMRangefrom"));
+                panel.getSearchKogakuHihokensha().getTxtKetteiYMRange().setToValue(
+                        ymlDt.getAsRDate("ketteiYMRangeto"));
 
                 //clear 
                 setSearchYMClear(panel);
 
                 break;
+                
             case YMShitei:
 
+                  hashMap = ymlData.get(1);
+                  ymlDt = new ControlGenerator(hashMap);
                 //年月を指定して検索する。
-                panel.getSearchYM().getTxtTeikyoYM().setValue(new RDate(
-                        ymlData.get(1).get("teikyoYM").toString()));
-                panel.getSearchYM().getTxtShinseiYM().setValue(new RDate(
-                        ymlData.get(1).get("shinseiYM").toString()));
-                panel.getSearchYM().getTxtKetteiYM().setValue(new RDate(
-                        ymlData.get(1).get("ketteiYM").toString()));
+                //提供年月
+                panel.getSearchYM().getTxtTeikyoYM().setValue(
+                        ymlDt.getAsRDate("teikyoYM"));
+                //申請年月
+                panel.getSearchYM().getTxtShinseiYM().setValue(
+                        ymlDt.getAsRDate("shinseiYM"));
+                //決定年月
+                panel.getSearchYM().getTxtKetteiYM().setValue(
+                        ymlDt.getAsRDate("ketteiYM"));
 
                 //clear 
                 setSearchKogakuHihokenshaClear(panel);
@@ -161,7 +189,7 @@ public class SearchKogakuServicehiPanel {
     }
 
     private List<HashMap> ymlData(String ymlData) {
-        return YamlLoader.FOR_DBC.loadAsList(new RString(ymlData));
+        return YamlLoader.DBC.loadAsList(new RString(ymlData));
     }
 
 }

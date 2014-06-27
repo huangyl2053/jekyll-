@@ -24,6 +24,7 @@
      "selectControlID": "ddlHokensha_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "onChange": "",
      "selectedItem": "key0",
      "dataSource": [
@@ -67,8 +68,9 @@
      "selectControlID": "radSearchKubun_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "onChange": "",
-     "selectedItem": null,
+     "selectedItem": "hihokenshaShitei",
      "dataSource": [
       {
        "key": "hihokenshaShitei",
@@ -107,7 +109,7 @@
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "XS",
-       "marginRight": "XS",
+       "marginRight": "0",
        "selectControlID": "txtHihoNo_core",
        "helpMessageID": "",
        "jpControlName": "",
@@ -153,8 +155,8 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "-0.2",
-       "marginRight": "XS",
+       "marginLeft": "XS",
+       "marginRight": "0",
        "selectControlID": "btnSearchHihokensha",
        "helpMessageID": "",
        "jpControlName": "",
@@ -162,11 +164,21 @@
        "icon": 0,
        "text": "ButtonDialog1",
        "appearance": 2,
-       "imageFileUrl": "/uz/uza/css/Link.jpg",
+       "imageFileUrl": "/uz/uza/css/rireki_brue.png",
        "imageWidth": "20",
-       "imageHeight": "20",
-       "displayChildDivName": "",
-       "dataPassing": [],
+       "imageHeight": "15",
+       "heightTextBoxMatches": false,
+       "displayChildDivName": "DBZ.HihokenshaInputGuide",
+       "dataPassing": [
+        {
+         "key": "hihokenshaNo",
+         "controlName": "txtHihoNo"
+        },
+        {
+         "key": "hihokenshaMeisho",
+         "controlName": "txtHihoName"
+        }
+       ],
        "visibleCloseButton": true,
        "onOkClose": "",
        "onBeforeOpenDialog": ""
@@ -186,7 +198,7 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "-0.2",
+       "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHihoName_core",
        "helpMessageID": "",
@@ -392,16 +404,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true
     },
     {
      "fieldName": "SearchYM",
@@ -563,16 +576,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true
     },
     {
      "fieldName": "btnClear",
@@ -600,7 +614,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnSearch",
@@ -628,7 +643,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -677,16 +693,17 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "KogakuServicehiListPanel",
@@ -711,6 +728,7 @@
      "selectControlID": "dgKogakuServicehiRireki",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "height": "S",
      "dataSource": [],
      "gridSetting": {
@@ -744,9 +762,9 @@
          "cellType": 8,
          "text": "■",
          "onClick": "onClick_ShowDetail",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
+         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageWidth": "20",
+         "imageHeight": "15"
         },
         "align": 1,
         "resize": false,
@@ -991,16 +1009,17 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": true,
-   "height": "Auto"
+   "readOnly": false,
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "KogakuServicehiInfoPanel",
@@ -1039,6 +1058,8 @@
          "dataPassingForDialog": [],
          "dialogOkEventNameForDialog": "",
          "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M",
          "atenaInfo_title": "",
          "atenaInfo_canOpenAndClose": true,
          "atenaInfo_eraseBorderTop": true,
@@ -1106,15 +1127,17 @@
          "canOpenAndClose": true,
          "marginTop": 0,
          "marginBottom": 0,
-         "eraseBorderTop": true,
-         "eraseBorderBottom": true,
-         "eraseBorderRight": true,
-         "eraseBorderLeft": true,
          "businessId": "DBZ",
          "controlName": "KaigoShikakuKihon",
          "dataPassingForDialog": [],
          "dialogOkEventNameForDialog": "",
          "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M",
+         "eraseBorderTop": true,
+         "eraseBorderBottom": true,
+         "eraseBorderRight": true,
+         "eraseBorderLeft": true,
          "backGroundColor": 0,
          "btnHihoRireki_visible": true,
          "btnNinteiRireki_visible": true
@@ -1154,16 +1177,17 @@
        "session": {},
        "marginTop": "XS",
        "marginBottom": "XS",
-       "eraseBorderTop": true,
-       "eraseBorderBottom": true,
-       "eraseBorderRight": true,
-       "eraseBorderLeft": true,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": true,
        "panelDisplay": 0,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "eraseBorderTop": true,
+       "eraseBorderBottom": true,
+       "eraseBorderRight": true,
+       "eraseBorderLeft": true
       }
      ],
      "controlType": "Panel",
@@ -1204,16 +1228,17 @@
      "session": {},
      "marginTop": "XS",
      "marginBottom": "XS",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": true,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true
     },
     {
      "fieldName": "btnShowSeteiJoho",
@@ -1241,7 +1266,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnShowTwo",
@@ -1269,7 +1295,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "KogakuServiceDetail",
@@ -1295,16 +1322,18 @@
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "panelDisplay": 0,
      "businessId": "DBZ",
      "controlName": "KogakuServicehiDetail",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
      "tplJudgementResult_title": "高額決定情報",
      "tplKetteiJoho_visible": false,
      "onClick_radPayMethod": "onClick_radPayMethod"
@@ -1356,16 +1385,17 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "KanshoTsuchiHakkoPanel",
@@ -1437,7 +1467,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -1478,16 +1509,17 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "CommonButton",
@@ -1518,7 +1550,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -1554,16 +1587,17 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true
   },
   {
    "fieldName": "ShowResultTwo",
@@ -1885,6 +1919,7 @@
        "selectControlID": "dgJudgementResultL",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "Auto",
        "dataSource": [],
        "gridSetting": {
@@ -2178,6 +2213,7 @@
        "selectControlID": "radShinsaMethodL_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "onChange": "",
        "selectedItem": "key1",
        "dataSource": [
@@ -2270,6 +2306,7 @@
        "selectControlID": "radShikyuKubunL_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "onChange": "",
        "selectedItem": "key0",
        "dataSource": [
@@ -2405,6 +2442,7 @@
        "selectControlID": "radKogakuAutoShokanL_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "onChange": "",
        "selectedItem": "key1",
        "dataSource": [
@@ -2460,16 +2498,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true
     },
     {
      "fieldName": "JudgementResultR",
@@ -2494,6 +2533,7 @@
        "selectControlID": "dgJudgementResultR",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "Auto",
        "dataSource": [],
        "gridSetting": {
@@ -2787,6 +2827,7 @@
        "selectControlID": "radShinsaMethodR_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "onChange": "",
        "selectedItem": "key1",
        "dataSource": [
@@ -2879,6 +2920,7 @@
        "selectControlID": "radShikyuKubunR_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "onChange": "",
        "selectedItem": "key0",
        "dataSource": [
@@ -3014,6 +3056,7 @@
        "selectControlID": "radKogakuAutoShokanR_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "onChange": "",
        "selectedItem": "key1",
        "dataSource": [
@@ -3069,16 +3112,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true
     },
     {
      "fieldName": "btnReturnShowOne",
@@ -3106,7 +3150,8 @@
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -3151,16 +3196,17 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   }
  ],
  "controlType": null,
@@ -3197,7 +3243,7 @@
     },
     {
      "visibleDiv": "KogakuServicehiListPanel",
-     "panelState": "readOnly visible",
+     "panelState": "visible",
      "fixedDiv": "No"
     },
     {
@@ -3409,5 +3455,6 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": []
 }

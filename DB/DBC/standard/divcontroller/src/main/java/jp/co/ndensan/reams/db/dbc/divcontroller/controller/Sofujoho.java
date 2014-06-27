@@ -16,9 +16,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.*;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+
 
 /**
  * 過誤申立書送付情報照会画面です。
@@ -43,13 +41,29 @@ public class Sofujoho {
         return response;
     }
 
-    private void setfuYminfo(SofujohoDiv panel) {
+    //指定年月の送付済情報の条件が入力されたことをチェックするメソッド
+    private Boolean setfuYminfo(SofujohoDiv panel) {
+        boolean status = true;
+        
         List<HashMap> ymlData = ymlData("dbc0070011/SofujohoSofuzumi.yml");
         
         HashMap hashMap = ymlData.get(0);
         ControlGenerator ymlDt = new ControlGenerator(hashMap);
-       
-        panel.getTxtSofuYM().setValue(ymlDt.getAsRDate("sofuYM"));
+               
+        RDate ymlsofuYm = ymlDt.getAsRDate("sofuYM");
+        RDate txtsoftYm = panel.getTxtSofuYM().getValue();
+
+        System.out.println("++++ ymlsofuYm +++++ " + ymlsofuYm);
+        System.out.println("++++ panel.getTxtSofuYM().getValue() +++++ " + txtsoftYm);
+        
+        //ユーザが指定年月の送付済情報を入力された情報がYML（7月）と同じ場合、データを表示する。
+        if(!ymlsofuYm.equals(txtsoftYm)) {
+
+            status = false;
+            return status;  
+        }
+        return status;
+       // panel.getTxtSofuYM().setValue(ymlDt.getAsRDate("sofuYM"));
    
     }
 
@@ -85,10 +99,23 @@ public class Sofujoho {
     public ResponseData<SofujohoDiv> onClick_btnSofuzumi(SofujohoDiv panel) {
         ResponseData<SofujohoDiv> response = new ResponseData<>();
 
-        setfuYminfo(panel);
-        //送付済情報を表示
-        setSearchSofuzumiList(panel);
-
+        //送付年月を指定後、YMLデータ（送付年月）と比較する。2014.06.24 朴
+        Boolean status = setfuYminfo(panel);
+        //2014.06.27 朴　 
+         if (status.equals(true)) {
+             //送付済情報を表示
+            setSearchSofuzumiList(panel);
+         } else { 
+             
+            //送付済情報を表示 (DATAGRID clear) 2014.6.26 朴　
+            List<dgSofuIchiran_Row> arrayData = new ArrayList<>();  
+            DataGrid<dgSofuIchiran_Row> grid = panel.getSofuIchiran().getDgSofuIchiran();
+            
+            
+            grid.setDataSource(arrayData);
+            
+         } 
+         
         response.data = panel;
         return response;
     }
@@ -104,25 +131,12 @@ public class Sofujoho {
     private List<dgSofuIchiran_Row> createRowSearchSofuTestData(SofujohoDiv panel, String ymlName) {
         List<dgSofuIchiran_Row> arrayData = new ArrayList<>();
         List<HashMap> ymlData = ymlData(ymlName);
-
            
         //TO DO データを増える場合。
         for (int i = 1; i < ymlData.size(); i++) {
 
             HashMap hashMap = ymlData.get(i);
             ControlGenerator ymlDt = new ControlGenerator(hashMap);
-
-//            //2014.6.14 タイプ変更：日付以外は、RStringに変更 
-//            RString jigyoshaNo = ymlDt.getAsRString("jigyoshaNo");
-//            RString jigyoshaName = ymlDt.getAsRString("jigyoshaName");
-//            RString hihoNo = ymlDt.getAsRString("hihoNo");
-//            RString hihoName = ymlDt.getAsRString("hihoName");
-//            RString moshitateshaKubun = ymlDt.getAsRString("moshitateshaKubun");
-//            RString style = ymlDt.getAsRString("style");
-//            RString moshitateRiyu = ymlDt.getAsRString("moshitateRiyu");
-//            RString serviceTeikyoYM = ymlDt.getAsRString("serviceTeikyoYM");
-//            RString moshitateYMD = ymlDt.getAsRString("moshitateYMD");
-//            RString shokisaiHokenshaNo = ymlDt.getAsRString("shokisaiHokenshaNo");
 
             arrayData.add(createRowSearchSofuzumiList(
                     ymlDt.getAsRString("jigyoshaNo"),
