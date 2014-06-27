@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0200001.JukyuIdoJohoRirekiTeseiListDiv;
@@ -14,6 +13,10 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.workflow.flow.task.process.tray.TrayTaskManager;
+import jp.co.ndensan.reams.uz.uza.workflow.flow.task.process.tray.TrayToTaskSingle;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.IdentificationKeyValue;
 
 /**
  * 受給異動情報履歴訂正一覧のコントローラークラスです。
@@ -44,18 +47,42 @@ public class JukyuIdoJohoRirekiTeseiList {
     }
 
     private void setJukyuIdoJohoRirekiTeseiList(JukyuIdoJohoRirekiTeseiListDiv panel) {
+        if (panel.getDgJukyuIdoJohoRirekiTeseiList().getDataSource().isEmpty()) {
+            loadRirekiTeseiList(panel);
+        } else {
+            modifyRirekiTeseiList(panel);
+        }
+    }
+
+    private void loadRirekiTeseiList(JukyuIdoJohoRirekiTeseiListDiv panel) {
+        List<dgJukyuIdoJohoRirekiTeseiList_Row> list = panel.getDgJukyuIdoJohoRirekiTeseiList().getDataSource();
         List<HashMap> mapList = getYamlData(YML_RIREKI_TEISEI_LIST);
-        List<dgJukyuIdoJohoRirekiTeseiList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             ControlGenerator cg = new ControlGenerator(mapList.get(index));
             list.add(createJukyuIdoJohoRirekiTeseiListRow(
                     cg.getAsRString("被保番号"),
                     cg.getAsRString("被保険者氏名"),
                     cg.getAsRString("異動日"),
-                    cg.getAsRString("項目")
-            ));
+                    cg.getAsRString("項目")));
         }
-        panel.getDgJukyuIdoJohoRirekiTeseiList().setDataSource(list);
+    }
+
+    private void modifyRirekiTeseiList(JukyuIdoJohoRirekiTeseiListDiv panel) {
+        int clickedRowId = panel.getDgJukyuIdoJohoRirekiTeseiList().getClickedRowId();
+        if (clickedRowId > -1) {
+            panel.getDgJukyuIdoJohoRirekiTeseiList().getDataSource().get(clickedRowId).setRowState(RowState.Modified);
+//            completeTrayTask();
+        }
+    }
+
+    private void completeTrayTask() {
+        TrayTaskManager mgr = new TrayTaskManager();
+        for (TrayToTaskSingle data : mgr.getAllIdentificationValues()) {
+            IdentificationKeyValue keyValue = data.getIdKeyVal();
+            mgr.grabTask(keyValue);
+            mgr.completeTask(keyValue);
+            break;
+        }
     }
 
     private dgJukyuIdoJohoRirekiTeseiList_Row createJukyuIdoJohoRirekiTeseiListRow(
