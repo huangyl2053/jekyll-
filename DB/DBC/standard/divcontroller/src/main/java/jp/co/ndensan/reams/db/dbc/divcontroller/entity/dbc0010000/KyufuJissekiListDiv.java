@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiGokeiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiMeisaiList_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -35,8 +37,10 @@ public class KyufuJissekiListDiv extends Panel {
     private TextBox txtKyufuJissekiListSeibetsu;
     @JsonProperty("txtKyufuJissekiListSeinengappi")
     private TextBox txtKyufuJissekiListSeinengappi;
-    @JsonProperty("dgKyufuJissekiList")
-    private DataGrid<dgKyufuJissekiList_Row> dgKyufuJissekiList;
+    @JsonProperty("dgKyufuJissekiMeisaiList")
+    private DataGrid<dgKyufuJissekiMeisaiList_Row> dgKyufuJissekiMeisaiList;
+    @JsonProperty("dgKyufuJissekiGokeiList")
+    private DataGrid<dgKyufuJissekiGokeiList_Row> dgKyufuJissekiGokeiList;
     @JsonProperty("btnKyufuJissekiResearch")
     private Button btnKyufuJissekiResearch;
 
@@ -116,14 +120,24 @@ public class KyufuJissekiListDiv extends Panel {
         this.txtKyufuJissekiListSeinengappi=txtKyufuJissekiListSeinengappi;
     }
 
-    @JsonProperty("dgKyufuJissekiList")
-    public DataGrid<dgKyufuJissekiList_Row> getDgKyufuJissekiList() {
-        return dgKyufuJissekiList;
+    @JsonProperty("dgKyufuJissekiMeisaiList")
+    public DataGrid<dgKyufuJissekiMeisaiList_Row> getDgKyufuJissekiMeisaiList() {
+        return dgKyufuJissekiMeisaiList;
     }
 
-    @JsonProperty("dgKyufuJissekiList")
-    public void setDgKyufuJissekiList(DataGrid<dgKyufuJissekiList_Row> dgKyufuJissekiList) {
-        this.dgKyufuJissekiList=dgKyufuJissekiList;
+    @JsonProperty("dgKyufuJissekiMeisaiList")
+    public void setDgKyufuJissekiMeisaiList(DataGrid<dgKyufuJissekiMeisaiList_Row> dgKyufuJissekiMeisaiList) {
+        this.dgKyufuJissekiMeisaiList=dgKyufuJissekiMeisaiList;
+    }
+
+    @JsonProperty("dgKyufuJissekiGokeiList")
+    public DataGrid<dgKyufuJissekiGokeiList_Row> getDgKyufuJissekiGokeiList() {
+        return dgKyufuJissekiGokeiList;
+    }
+
+    @JsonProperty("dgKyufuJissekiGokeiList")
+    public void setDgKyufuJissekiGokeiList(DataGrid<dgKyufuJissekiGokeiList_Row> dgKyufuJissekiGokeiList) {
+        this.dgKyufuJissekiGokeiList=dgKyufuJissekiGokeiList;
     }
 
     @JsonProperty("btnKyufuJissekiResearch")

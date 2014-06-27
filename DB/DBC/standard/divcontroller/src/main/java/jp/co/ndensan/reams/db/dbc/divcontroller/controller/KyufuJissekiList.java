@@ -5,18 +5,22 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
+import java.awt.Color;
+import java.awt.PageAttributes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiSearchDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiMeisaiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiGokeiList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.*;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridColumn;
 
 /**
@@ -44,10 +48,15 @@ public class KyufuJissekiList {
         panel.getTxtKyufuJissekiListName().setValue(RString.EMPTY);
         panel.getTxtKyufuJissekiListSeibetsu().setValue(RString.EMPTY);
         panel.getTxtKyufuJissekiListSeinengappi().setValue(RString.EMPTY);
-        panel.getDgKyufuJissekiList().setDataSource(Collections.EMPTY_LIST);
-        List<DataGridColumn> colList = panel.getDgKyufuJissekiList().getGridSetting().getColumns();
-        for (int i = 0; i < colList.size(); i++) {
-            colList.get(i).setVisible(false);
+        panel.getDgKyufuJissekiMeisaiList().setDataSource(Collections.EMPTY_LIST);
+        panel.getDgKyufuJissekiGokeiList().setDataSource(Collections.EMPTY_LIST);
+        List<DataGridColumn> colMeisaiList = panel.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns();
+        for (int i = 0; i < colMeisaiList.size(); i++) {
+            colMeisaiList.get(i).setVisible(false);
+        }
+        List<DataGridColumn> colGokeiList = panel.getDgKyufuJissekiGokeiList().getGridSetting().getColumns();
+        for (int i = 0; i < colGokeiList.size(); i++) {
+            colGokeiList.get(i).setVisible(false);
         }
         response.data = panel;
         return response;
@@ -55,11 +64,11 @@ public class KyufuJissekiList {
 
     private void setData(KyufuJissekiListDiv panel, KyufuJissekiSearchDiv panel2) {
 
-        List<HashMap> kyufuJissekiList = YamlLoader.DBC.loadAsList(
-                new RString("dbc0010000/KyufuJissekiList.yml"));
+        List<HashMap> kyufuJissekiMeisaiList = YamlLoader.DBC.loadAsList(
+                new RString("dbc0010000/KyufuJissekiMeisaiList.yml"));
 
         //ヘッダー情報取得、設定
-        HashMap hashMap = kyufuJissekiList.get(0);
+        HashMap hashMap = kyufuJissekiMeisaiList.get(0);
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
         panel.getTxtKyufuJissekiListHihokenshaNo().setValue(
@@ -72,14 +81,98 @@ public class KyufuJissekiList {
         panel.getTxtKyufuJissekiListSeibetsu().setValue(ymlData.getAsRString("Seibetsu"));
         panel.getTxtKyufuJissekiListSeinengappi().setValue(ymlData.getAsRString("Seinengappi"));
 
-        //給付実績一覧データ取得、設定
-        List<dgKyufuJissekiList_Row> arraydata = createRowKyufuJissekiList(kyufuJissekiList);
+        //給付実績一覧明細データ取得、設定
+        List<dgKyufuJissekiMeisaiList_Row> arrayMeisaidata = createRowKyufuJissekiMeisaiList(kyufuJissekiMeisaiList);
 
-        List<DataGridColumn> colList = panel.getDgKyufuJissekiList().getGridSetting().getColumns();
-        for (int i = 0; i < colList.size(); i++) {
-            colList.get(i).setVisible(true);
+        //バックカラーの設定
+        RString serviceGroup1Value = RString.EMPTY;
+        RString serviceGroup2Value = RString.EMPTY;
+        DataGridCellBgColor group1Color = DataGridCellBgColor.bgColorBlue;
+        DataGridCellBgColor group2Color = DataGridCellBgColor.bgColorLightBlue;
+        for (int i = 0; i < arrayMeisaidata.size(); i++) {
+
+            if (i == 0) {
+                serviceGroup1Value = arrayMeisaidata.get(i).getTxtServiceGroup1();
+                serviceGroup2Value = arrayMeisaidata.get(i).getTxtServiceGroup2();
+            } else {
+                if (!serviceGroup1Value.equals(arrayMeisaidata.get(i).getTxtServiceGroup1())) {
+                    switch (group1Color) {
+                        case bgColorBlue:
+                            group1Color = DataGridCellBgColor.bgColorRed;
+                            break;
+                        case bgColorRed:
+                            group1Color = DataGridCellBgColor.bgColorYellow;
+                            break;
+                        case bgColorYellow:
+                            group1Color = DataGridCellBgColor.bgColorGreen;
+                            break;
+                        case bgColorGreen:
+                            group1Color = DataGridCellBgColor.bgColorGray;
+                            break;
+                        case bgColorGray:
+                            group1Color = DataGridCellBgColor.bgColorBlue;
+                            break;
+                    }
+                    serviceGroup1Value = arrayMeisaidata.get(i).getTxtServiceGroup1();
+                }
+
+                if (!serviceGroup2Value.equals(arrayMeisaidata.get(i).getTxtServiceGroup2())) {
+                    switch (group2Color) {
+                        case bgColorLightBlue:
+                            group2Color = DataGridCellBgColor.bgColorLightRed;
+                            break;
+                        case bgColorLightRed:
+                            group2Color = DataGridCellBgColor.bgColorLightYellow;
+                            break;
+                        case bgColorLightYellow:
+                            group2Color = DataGridCellBgColor.bgColorLightGreen;
+                            break;
+                        case bgColorLightGreen:
+                            group2Color = DataGridCellBgColor.bgColorLightGray;
+                            break;
+                        case bgColorLightGray:
+                            group2Color = DataGridCellBgColor.bgColorLightBlue;
+                            break;
+                    }
+                    serviceGroup2Value = arrayMeisaidata.get(i).getTxtServiceGroup2();
+                }
+
+            }
+            arrayMeisaidata.get(i).setCellBgColor("txtServiceGroup1", group1Color);
+            arrayMeisaidata.get(i).setCellBgColor("txtServiceGroup2", group2Color);
+            arrayMeisaidata.get(i).setCellBgColor("txtServiceShurui", group2Color);
+            arrayMeisaidata.get(i).setCellBgColor("btnYM1", group2Color);
+            arrayMeisaidata.get(i).setCellBgColor("txtYM1", group2Color);
+            arrayMeisaidata.get(i).setCellBgColor("btnYM2", group2Color);
+            arrayMeisaidata.get(i).setCellBgColor("txtYM2", group2Color);
+            arrayMeisaidata.get(i).setCellBgColor("btnYM3", group2Color);
+            arrayMeisaidata.get(i).setCellBgColor("txtYM3", group2Color);
         }
-        panel.getDgKyufuJissekiList().setDataSource(arraydata);
+
+        List<DataGridColumn> colMeisaiList = panel.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns();
+        for (int i = 0; i < colMeisaiList.size(); i++) {
+            colMeisaiList.get(i).setVisible(true);
+            if (colMeisaiList.get(i).getDataName().toString().equals("txtYM3")) {
+                break;
+            }
+        }
+
+        panel.getDgKyufuJissekiMeisaiList().setDataSource(arrayMeisaidata);
+
+        //給付実績一覧合計データ取得、設定
+        List<HashMap> kyufuJissekiGokeiList = YamlLoader.DBC.loadAsList(
+                new RString("dbc0010000/KyufuJissekiGokeiList.yml"));
+
+        List<dgKyufuJissekiGokeiList_Row> arrayGokeidata = createRowKyufuJissekiGokeiList(kyufuJissekiGokeiList);
+
+        List<DataGridColumn> colGokeiList = panel.getDgKyufuJissekiGokeiList().getGridSetting().getColumns();
+        for (int i = 0; i < colGokeiList.size(); i++) {
+            colGokeiList.get(i).setVisible(true);
+            if (colGokeiList.get(i).getDataName().toString().equals("txtYM3")) {
+                break;
+            }
+        }
+        panel.getDgKyufuJissekiGokeiList().setDataSource(arrayGokeidata);
 
 //        List<dgKyufuJissekiList_Row> list = new ArrayList<>();
 //        list.add(createKyufuJissekiListRow("指定居宅サービス", "訪問通所", "訪問介護", "1,206", "1,206", "1,206", "1,206", "1,206", "1,206", "1,206", "1,206", "1,206", "1,206", "1,206", "1,206"));
@@ -137,15 +230,15 @@ public class KyufuJissekiList {
 //    }
 
     /*
-     *給付実績一覧情報の初期値をセットします。
+     *給付実績一覧明細情報の初期値をセットします。
      */
-    private List createRowKyufuJissekiList(
-            List<HashMap> kyufuJissekiList) {
+    private List createRowKyufuJissekiMeisaiList(
+            List<HashMap> kyufuJissekiMeisaiList) {
 
-        List<dgKyufuJissekiList_Row> arrayDataList = new ArrayList();
+        List arrayDataList = new ArrayList();
 
-        for (int i = 1; i < kyufuJissekiList.size(); i++) {
-            HashMap hashMap = kyufuJissekiList.get(i);
+        for (int i = 1; i < kyufuJissekiMeisaiList.size(); i++) {
+            HashMap hashMap = kyufuJissekiMeisaiList.get(i);
             ControlGenerator ymlData = new ControlGenerator(hashMap);
 
             RString rsServiceGroup1 = ymlData.getAsRString("txtServiceGroup1");
@@ -164,7 +257,7 @@ public class KyufuJissekiList {
             RString rsYM11 = ymlData.getAsRString("txtYM11");
             RString rsYM12 = ymlData.getAsRString("txtYM12");
 
-            arrayDataList.add(createRowKyufuJissekiList(
+            arrayDataList.add(createRowKyufuJissekiMeisaiList(
                     rsServiceGroup1,
                     rsServiceGroup2,
                     rsServiceShurui,
@@ -187,9 +280,9 @@ public class KyufuJissekiList {
     }
 
     /*
-     *引数を元にデータグリッド内に挿入する被保険者証発行対象者情報データを作成します。
+     *引数を元にデータグリッド内に挿入する給付実績一覧明細データを作成します。
      */
-    private dgKyufuJissekiList_Row createRowKyufuJissekiList(
+    private dgKyufuJissekiMeisaiList_Row createRowKyufuJissekiMeisaiList(
             RString rsServiceGroup1,
             RString rsServiceGroup2,
             RString rsServiceShurui,
@@ -206,9 +299,111 @@ public class KyufuJissekiList {
             RString rsYM11,
             RString rsYM12
     ) {
-        dgKyufuJissekiList_Row rowKyufuJissekiList
-                = new dgKyufuJissekiList_Row(
+        dgKyufuJissekiMeisaiList_Row rowKyufuJissekiMeisaiList
+                = new dgKyufuJissekiMeisaiList_Row(
+                        rsServiceGroup1,
+                        rsServiceGroup2,
+                        rsServiceShurui,
                         new Button(),
+                        rsYM1,
+                        new Button(),
+                        rsYM2,
+                        new Button(),
+                        rsYM3,
+                        new Button(),
+                        rsYM4,
+                        new Button(),
+                        rsYM5,
+                        new Button(),
+                        rsYM6,
+                        new Button(),
+                        rsYM7,
+                        new Button(),
+                        rsYM8,
+                        new Button(),
+                        rsYM9,
+                        new Button(),
+                        rsYM10,
+                        new Button(),
+                        rsYM11,
+                        new Button(),
+                        rsYM12
+                );
+        return rowKyufuJissekiMeisaiList;
+    }
+
+    /*
+     *給付実績一覧合計情報の初期値をセットします。
+     */
+    private List createRowKyufuJissekiGokeiList(
+            List<HashMap> kyufuJissekiGokeiList) {
+
+        List arrayDataList = new ArrayList();
+
+        for (int i = 1; i < kyufuJissekiGokeiList.size(); i++) {
+            HashMap hashMap = kyufuJissekiGokeiList.get(i);
+            ControlGenerator ymlData = new ControlGenerator(hashMap);
+
+            RString rsServiceGroup1 = ymlData.getAsRString("txtServiceGroup1");
+            RString rsServiceGroup2 = ymlData.getAsRString("txtServiceGroup2");
+            RString rsServiceShurui = ymlData.getAsRString("txtServiceShurui");
+            RString rsYM1 = ymlData.getAsRString("txtYM1");
+            RString rsYM2 = ymlData.getAsRString("txtYM2");
+            RString rsYM3 = ymlData.getAsRString("txtYM3");
+            RString rsYM4 = ymlData.getAsRString("txtYM4");
+            RString rsYM5 = ymlData.getAsRString("txtYM5");
+            RString rsYM6 = ymlData.getAsRString("txtYM6");
+            RString rsYM7 = ymlData.getAsRString("txtYM7");
+            RString rsYM8 = ymlData.getAsRString("txtYM8");
+            RString rsYM9 = ymlData.getAsRString("txtYM9");
+            RString rsYM10 = ymlData.getAsRString("txtYM10");
+            RString rsYM11 = ymlData.getAsRString("txtYM11");
+            RString rsYM12 = ymlData.getAsRString("txtYM12");
+
+            arrayDataList.add(createRowKyufuJissekiGokeiList(
+                    rsServiceGroup1,
+                    rsServiceGroup2,
+                    rsServiceShurui,
+                    rsYM1,
+                    rsYM2,
+                    rsYM3,
+                    rsYM4,
+                    rsYM5,
+                    rsYM6,
+                    rsYM7,
+                    rsYM8,
+                    rsYM9,
+                    rsYM10,
+                    rsYM11,
+                    rsYM12
+            ));
+
+        }
+        return arrayDataList;
+    }
+
+    /*
+     *引数を元にデータグリッド内に挿入する給付実績一覧合計データを作成します。
+     */
+    private dgKyufuJissekiGokeiList_Row createRowKyufuJissekiGokeiList(
+            RString rsServiceGroup1,
+            RString rsServiceGroup2,
+            RString rsServiceShurui,
+            RString rsYM1,
+            RString rsYM2,
+            RString rsYM3,
+            RString rsYM4,
+            RString rsYM5,
+            RString rsYM6,
+            RString rsYM7,
+            RString rsYM8,
+            RString rsYM9,
+            RString rsYM10,
+            RString rsYM11,
+            RString rsYM12
+    ) {
+        dgKyufuJissekiGokeiList_Row rowKyufuJissekiGokeiList
+                = new dgKyufuJissekiGokeiList_Row(
                         rsServiceGroup1,
                         rsServiceGroup2,
                         rsServiceShurui,
@@ -225,6 +420,6 @@ public class KyufuJissekiList {
                         rsYM11,
                         rsYM12
                 );
-        return rowKyufuJissekiList;
+        return rowKyufuJissekiGokeiList;
     }
 }

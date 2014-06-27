@@ -1,8 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -10,8 +9,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KyufuJisseki のクラスファイル 
- * 
+ * KyufuJisseki のクラスファイル
+ *
  * @author 自動生成
  */
 public class KyufuJissekiDiv extends Panel {
@@ -21,6 +20,7 @@ public class KyufuJissekiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtKyufuJissekiHihokenshaNo")
     private TextBox txtKyufuJissekiHihokenshaNo;
     @JsonProperty("txtKyufuJissekiJuminShubetsu")
@@ -45,10 +45,8 @@ public class KyufuJissekiDiv extends Panel {
     private TextBox txtKyufuJissekiHokensha;
     @JsonProperty("txtKyufuJissekiShikibetsuCode")
     private TextBox txtKyufuJissekiShikibetsuCode;
-    @JsonProperty("txtKyufuJissekiShikibetsuName")
-    private TextBox txtKyufuJissekiShikibetsuName;
-    @JsonProperty("ddlKyufuJissekiJigyosha")
-    private DropDownList ddlKyufuJissekiJigyosha;
+    @JsonProperty("txtKyufuJissekiJigyosha")
+    private TextBox txtKyufuJissekiJigyosha;
     @JsonProperty("btnKinkyujiShisetsuRyoyohi")
     private Button btnKinkyujiShisetsuRyoyohi;
     @JsonProperty("btnTokuteiShinryohi")
@@ -81,7 +79,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("txtKyufuJissekiHihokenshaNo")
     public void setTxtKyufuJissekiHihokenshaNo(TextBox txtKyufuJissekiHihokenshaNo) {
-        this.txtKyufuJissekiHihokenshaNo=txtKyufuJissekiHihokenshaNo;
+        this.txtKyufuJissekiHihokenshaNo = txtKyufuJissekiHihokenshaNo;
     }
 
     @JsonProperty("txtKyufuJissekiJuminShubetsu")
@@ -91,7 +89,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("txtKyufuJissekiJuminShubetsu")
     public void setTxtKyufuJissekiJuminShubetsu(TextBox txtKyufuJissekiJuminShubetsu) {
-        this.txtKyufuJissekiJuminShubetsu=txtKyufuJissekiJuminShubetsu;
+        this.txtKyufuJissekiJuminShubetsu = txtKyufuJissekiJuminShubetsu;
     }
 
     @JsonProperty("txtKyufuJissekiYokaigodo")
@@ -101,7 +99,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("txtKyufuJissekiYokaigodo")
     public void setTxtKyufuJissekiYokaigodo(TextBox txtKyufuJissekiYokaigodo) {
-        this.txtKyufuJissekiYokaigodo=txtKyufuJissekiYokaigodo;
+        this.txtKyufuJissekiYokaigodo = txtKyufuJissekiYokaigodo;
     }
 
     @JsonProperty("txtKyufuJissekiNinteiYukoKikan")
@@ -111,7 +109,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("txtKyufuJissekiNinteiYukoKikan")
     public void setTxtKyufuJissekiNinteiYukoKikan(TextBoxDateRange txtKyufuJissekiNinteiYukoKikan) {
-        this.txtKyufuJissekiNinteiYukoKikan=txtKyufuJissekiNinteiYukoKikan;
+        this.txtKyufuJissekiNinteiYukoKikan = txtKyufuJissekiNinteiYukoKikan;
     }
 
     @JsonProperty("txtKyufuJissekiName")
@@ -121,7 +119,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("txtKyufuJissekiName")
     public void setTxtKyufuJissekiName(TextBox txtKyufuJissekiName) {
-        this.txtKyufuJissekiName=txtKyufuJissekiName;
+        this.txtKyufuJissekiName = txtKyufuJissekiName;
     }
 
     @JsonProperty("txtKyufuJissekiSeibetsu")
@@ -131,7 +129,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("txtKyufuJissekiSeibetsu")
     public void setTxtKyufuJissekiSeibetsu(TextBox txtKyufuJissekiSeibetsu) {
-        this.txtKyufuJissekiSeibetsu=txtKyufuJissekiSeibetsu;
+        this.txtKyufuJissekiSeibetsu = txtKyufuJissekiSeibetsu;
     }
 
     @JsonProperty("txtKyufuJissekiSeinengappi")
@@ -141,7 +139,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("txtKyufuJissekiSeinengappi")
     public void setTxtKyufuJissekiSeinengappi(TextBox txtKyufuJissekiSeinengappi) {
-        this.txtKyufuJissekiSeinengappi=txtKyufuJissekiSeinengappi;
+        this.txtKyufuJissekiSeinengappi = txtKyufuJissekiSeinengappi;
     }
 
     @JsonProperty("txtKyufuJissekiTeikyoYM")
@@ -151,7 +149,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("txtKyufuJissekiTeikyoYM")
     public void setTxtKyufuJissekiTeikyoYM(TextBox txtKyufuJissekiTeikyoYM) {
-        this.txtKyufuJissekiTeikyoYM=txtKyufuJissekiTeikyoYM;
+        this.txtKyufuJissekiTeikyoYM = txtKyufuJissekiTeikyoYM;
     }
 
     @JsonProperty("txtKyufuJissekiJissekiKubun")
@@ -161,7 +159,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("txtKyufuJissekiJissekiKubun")
     public void setTxtKyufuJissekiJissekiKubun(TextBox txtKyufuJissekiJissekiKubun) {
-        this.txtKyufuJissekiJissekiKubun=txtKyufuJissekiJissekiKubun;
+        this.txtKyufuJissekiJissekiKubun = txtKyufuJissekiJissekiKubun;
     }
 
     @JsonProperty("txtKyufuJissekiSeiriNo")
@@ -171,7 +169,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("txtKyufuJissekiSeiriNo")
     public void setTxtKyufuJissekiSeiriNo(TextBox txtKyufuJissekiSeiriNo) {
-        this.txtKyufuJissekiSeiriNo=txtKyufuJissekiSeiriNo;
+        this.txtKyufuJissekiSeiriNo = txtKyufuJissekiSeiriNo;
     }
 
     @JsonProperty("txtKyufuJissekiHokensha")
@@ -181,7 +179,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("txtKyufuJissekiHokensha")
     public void setTxtKyufuJissekiHokensha(TextBox txtKyufuJissekiHokensha) {
-        this.txtKyufuJissekiHokensha=txtKyufuJissekiHokensha;
+        this.txtKyufuJissekiHokensha = txtKyufuJissekiHokensha;
     }
 
     @JsonProperty("txtKyufuJissekiShikibetsuCode")
@@ -191,27 +189,17 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("txtKyufuJissekiShikibetsuCode")
     public void setTxtKyufuJissekiShikibetsuCode(TextBox txtKyufuJissekiShikibetsuCode) {
-        this.txtKyufuJissekiShikibetsuCode=txtKyufuJissekiShikibetsuCode;
+        this.txtKyufuJissekiShikibetsuCode = txtKyufuJissekiShikibetsuCode;
     }
 
-    @JsonProperty("txtKyufuJissekiShikibetsuName")
-    public TextBox getTxtKyufuJissekiShikibetsuName() {
-        return txtKyufuJissekiShikibetsuName;
+    @JsonProperty("txtKyufuJissekiJigyosha")
+    public TextBox getTxtKyufuJissekiJigyosha() {
+        return txtKyufuJissekiJigyosha;
     }
 
-    @JsonProperty("txtKyufuJissekiShikibetsuName")
-    public void setTxtKyufuJissekiShikibetsuName(TextBox txtKyufuJissekiShikibetsuName) {
-        this.txtKyufuJissekiShikibetsuName=txtKyufuJissekiShikibetsuName;
-    }
-
-    @JsonProperty("ddlKyufuJissekiJigyosha")
-    public DropDownList getDdlKyufuJissekiJigyosha() {
-        return ddlKyufuJissekiJigyosha;
-    }
-
-    @JsonProperty("ddlKyufuJissekiJigyosha")
-    public void setDdlKyufuJissekiJigyosha(DropDownList ddlKyufuJissekiJigyosha) {
-        this.ddlKyufuJissekiJigyosha=ddlKyufuJissekiJigyosha;
+    @JsonProperty("txtKyufuJissekiJigyosha")
+    public void setTxtKyufuJissekiJigyosha(TextBox txtKyufuJissekiJigyosha) {
+        this.txtKyufuJissekiJigyosha = txtKyufuJissekiJigyosha;
     }
 
     @JsonProperty("btnKinkyujiShisetsuRyoyohi")
@@ -221,7 +209,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("btnKinkyujiShisetsuRyoyohi")
     public void setBtnKinkyujiShisetsuRyoyohi(Button btnKinkyujiShisetsuRyoyohi) {
-        this.btnKinkyujiShisetsuRyoyohi=btnKinkyujiShisetsuRyoyohi;
+        this.btnKinkyujiShisetsuRyoyohi = btnKinkyujiShisetsuRyoyohi;
     }
 
     @JsonProperty("btnTokuteiShinryohi")
@@ -231,7 +219,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("btnTokuteiShinryohi")
     public void setBtnTokuteiShinryohi(Button btnTokuteiShinryohi) {
-        this.btnTokuteiShinryohi=btnTokuteiShinryohi;
+        this.btnTokuteiShinryohi = btnTokuteiShinryohi;
     }
 
     @JsonProperty("btnShokujiHiyo")
@@ -241,7 +229,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("btnShokujiHiyo")
     public void setBtnShokujiHiyo(Button btnShokujiHiyo) {
-        this.btnShokujiHiyo=btnShokujiHiyo;
+        this.btnShokujiHiyo = btnShokujiHiyo;
     }
 
     @JsonProperty("btnTokuteiNyushoshaKaigoServicehi")
@@ -251,7 +239,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("btnTokuteiNyushoshaKaigoServicehi")
     public void setBtnTokuteiNyushoshaKaigoServicehi(Button btnTokuteiNyushoshaKaigoServicehi) {
-        this.btnTokuteiNyushoshaKaigoServicehi=btnTokuteiNyushoshaKaigoServicehi;
+        this.btnTokuteiNyushoshaKaigoServicehi = btnTokuteiNyushoshaKaigoServicehi;
     }
 
     @JsonProperty("btnShakaiFukushiHojinKeigengaku")
@@ -261,7 +249,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("btnShakaiFukushiHojinKeigengaku")
     public void setBtnShakaiFukushiHojinKeigengaku(Button btnShakaiFukushiHojinKeigengaku) {
-        this.btnShakaiFukushiHojinKeigengaku=btnShakaiFukushiHojinKeigengaku;
+        this.btnShakaiFukushiHojinKeigengaku = btnShakaiFukushiHojinKeigengaku;
     }
 
     @JsonProperty("tabKyufuJisseki")
@@ -271,7 +259,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("tabKyufuJisseki")
     public void setTabKyufuJisseki(tabKyufuJissekiDiv tabKyufuJisseki) {
-        this.tabKyufuJisseki=tabKyufuJisseki;
+        this.tabKyufuJisseki = tabKyufuJisseki;
     }
 
     @JsonProperty("btnKyufuJissekiZengetsu")
@@ -281,7 +269,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("btnKyufuJissekiZengetsu")
     public void setBtnKyufuJissekiZengetsu(Button btnKyufuJissekiZengetsu) {
-        this.btnKyufuJissekiZengetsu=btnKyufuJissekiZengetsu;
+        this.btnKyufuJissekiZengetsu = btnKyufuJissekiZengetsu;
     }
 
     @JsonProperty("btnKyufuJissekiJigetsu")
@@ -291,7 +279,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("btnKyufuJissekiJigetsu")
     public void setBtnKyufuJissekiJigetsu(Button btnKyufuJissekiJigetsu) {
-        this.btnKyufuJissekiJigetsu=btnKyufuJissekiJigetsu;
+        this.btnKyufuJissekiJigetsu = btnKyufuJissekiJigetsu;
     }
 
     @JsonProperty("btnKyufuJissekiReturn")
@@ -301,7 +289,7 @@ public class KyufuJissekiDiv extends Panel {
 
     @JsonProperty("btnKyufuJissekiReturn")
     public void setBtnKyufuJissekiReturn(Button btnKyufuJissekiReturn) {
-        this.btnKyufuJissekiReturn=btnKyufuJissekiReturn;
+        this.btnKyufuJissekiReturn = btnKyufuJissekiReturn;
     }
 
 }

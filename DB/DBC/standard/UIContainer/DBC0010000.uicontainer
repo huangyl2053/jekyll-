@@ -1,0 +1,150 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "2",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010000",
+   "eventName": "onClick_btnYM",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010001",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "3",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010001",
+   "eventName": "onClick_btnReturn",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010000",
+   "toEventName": "onClick_btnSearch"
+  },
+  {
+   "id": "4",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010001",
+   "eventName": "onClick_btnGokei",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010002",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "5",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010002",
+   "eventName": "onClick_btnClose",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010001",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "6",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010001",
+   "eventName": "onClick_btnTekiyo",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010008",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "7",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010008",
+   "eventName": "onClick_btnClose",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010001",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "8",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010001",
+   "eventName": "onClick_btnKinkyujiShisetsuRyoyohi",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010003",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "9",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010003",
+   "eventName": "onClick_btnClose",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010001",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "10",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010001",
+   "eventName": "onClick_btnTokuteiShinryohi",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010004",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "11",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010004",
+   "eventName": "onClick_btnClose",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010001",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "12",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010001",
+   "eventName": "onClick_btnShokujiHiyo",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010005",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "13",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010005",
+   "eventName": "onClick_btnClose",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010001",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "14",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010001",
+   "eventName": "onClick_btnTokuteiNyushoshaKaigoServicehi",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010006",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "15",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010006",
+   "eventName": "onClick_btnClose",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010001",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "16",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010001",
+   "eventName": "onClick_btnShakaiFukushiHojinKeigengaku",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010007",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "17",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0010007",
+   "eventName": "onClick_btnClose",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0010001",
+   "toEventName": "onOpen"
+  }
+ ],
+ "subGyomuCode": "DBC",
+ "uiContainerName": "DBC0010000"
+}

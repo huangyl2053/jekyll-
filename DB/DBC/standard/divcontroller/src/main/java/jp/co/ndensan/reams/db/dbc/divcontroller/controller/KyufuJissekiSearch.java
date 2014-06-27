@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KyufuJissekiSearch {
 
-    private final RString DATE_TYPE_NENDO = new RString("nendo");
+    private final RString DATE_TYPE_YM = new RString("serviceTeikyoYM");
 
     public ResponseData<KyufuJissekiSearchDiv> onLoad(KyufuJissekiSearchDiv panel) {
         ResponseData<KyufuJissekiSearchDiv> response = new ResponseData<>();
@@ -43,9 +43,9 @@ public class KyufuJissekiSearch {
 
     private void initData(KyufuJissekiSearchDiv panel) {
 //        panel.getTxtKyufuJissekiSearchHihokenshaNo().setValue(RString.EMPTY);
-        panel.getRadKyufuJissekiSearchDateType().setSelectedItem(DATE_TYPE_NENDO);
-        panel.getDdlKyufuJissekiSearchNendo().setDisplayNone(false);
-        panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setDisplayNone(true);
+        panel.getRadKyufuJissekiSearchDateType().setSelectedItem(DATE_TYPE_YM);
+        panel.getDdlKyufuJissekiSearchNendo().setDisplayNone(true);
+        panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setDisplayNone(false);
 //        panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setFromValue(RString.EMPTY);
 //        panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setToValue(RString.EMPTY);
 
@@ -60,7 +60,7 @@ public class KyufuJissekiSearch {
 
     private void setDateType(KyufuJissekiSearchDiv panel) {
         RString item = panel.getRadKyufuJissekiSearchDateType().getSelectedItem();
-        panel.getDdlKyufuJissekiSearchNendo().setDisplayNone(!item.equals(DATE_TYPE_NENDO));
-        panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setDisplayNone(item.equals(DATE_TYPE_NENDO));
+        panel.getDdlKyufuJissekiSearchNendo().setDisplayNone(item.equals(DATE_TYPE_YM));
+        panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setDisplayNone(!item.equals(DATE_TYPE_YM));
     }
 }

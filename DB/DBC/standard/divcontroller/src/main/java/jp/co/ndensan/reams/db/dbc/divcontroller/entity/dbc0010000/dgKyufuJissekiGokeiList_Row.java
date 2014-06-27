@@ -3,25 +3,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 01 19:20:53 JST 2014 
+ * Thu Jun 26 13:06:38 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
 /**
- * dgKyufuJissekiList_Row のクラスファイル 
+ * dgKyufuJissekiGokeiList_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class dgKyufuJissekiList_Row extends DataRow {
+public class dgKyufuJissekiGokeiList_Row extends DataRow {
 
-    private Button btnKyufuJissekiList;
     private RString txtServiceGroup1;
     private RString txtServiceGroup2;
     private RString txtServiceShurui;
@@ -38,13 +36,27 @@ public class dgKyufuJissekiList_Row extends DataRow {
     private RString txtYM11;
     private RString txtYM12;
 
-    public dgKyufuJissekiList_Row() {
+    public dgKyufuJissekiGokeiList_Row() {
         super();
+        this.txtServiceGroup1 = RString.EMPTY;
+        this.txtServiceGroup2 = RString.EMPTY;
+        this.txtServiceShurui = RString.EMPTY;
+        this.txtYM1 = RString.EMPTY;
+        this.txtYM2 = RString.EMPTY;
+        this.txtYM3 = RString.EMPTY;
+        this.txtYM4 = RString.EMPTY;
+        this.txtYM5 = RString.EMPTY;
+        this.txtYM6 = RString.EMPTY;
+        this.txtYM7 = RString.EMPTY;
+        this.txtYM8 = RString.EMPTY;
+        this.txtYM9 = RString.EMPTY;
+        this.txtYM10 = RString.EMPTY;
+        this.txtYM11 = RString.EMPTY;
+        this.txtYM12 = RString.EMPTY;
     }
 
-    public dgKyufuJissekiList_Row(Button btnKyufuJissekiList, RString txtServiceGroup1, RString txtServiceGroup2, RString txtServiceShurui, RString txtYM1, RString txtYM2, RString txtYM3, RString txtYM4, RString txtYM5, RString txtYM6, RString txtYM7, RString txtYM8, RString txtYM9, RString txtYM10, RString txtYM11, RString txtYM12) {
+    public dgKyufuJissekiGokeiList_Row(RString txtServiceGroup1, RString txtServiceGroup2, RString txtServiceShurui, RString txtYM1, RString txtYM2, RString txtYM3, RString txtYM4, RString txtYM5, RString txtYM6, RString txtYM7, RString txtYM8, RString txtYM9, RString txtYM10, RString txtYM11, RString txtYM12) {
         super();
-        this.setOriginalData("btnKyufuJissekiList", btnKyufuJissekiList);
         this.setOriginalData("txtServiceGroup1", txtServiceGroup1);
         this.setOriginalData("txtServiceGroup2", txtServiceGroup2);
         this.setOriginalData("txtServiceShurui", txtServiceShurui);
@@ -60,7 +72,6 @@ public class dgKyufuJissekiList_Row extends DataRow {
         this.setOriginalData("txtYM10", txtYM10);
         this.setOriginalData("txtYM11", txtYM11);
         this.setOriginalData("txtYM12", txtYM12);
-        this.btnKyufuJissekiList = btnKyufuJissekiList;
         this.txtServiceGroup1 = txtServiceGroup1;
         this.txtServiceGroup2 = txtServiceGroup2;
         this.txtServiceShurui = txtServiceShurui;
@@ -76,10 +87,6 @@ public class dgKyufuJissekiList_Row extends DataRow {
         this.txtYM10 = txtYM10;
         this.txtYM11 = txtYM11;
         this.txtYM12 = txtYM12;
-    }
-
-    public Button getBtnKyufuJissekiList() {
-        return btnKyufuJissekiList;
     }
 
     public RString getTxtServiceGroup1() {
@@ -140,11 +147,6 @@ public class dgKyufuJissekiList_Row extends DataRow {
 
     public RString getTxtYM12() {
         return txtYM12;
-    }
-
-    public void setBtnKyufuJissekiList(Button btnKyufuJissekiList) {
-        this.setOriginalData("btnKyufuJissekiList", btnKyufuJissekiList);
-        this.btnKyufuJissekiList = btnKyufuJissekiList;
     }
 
     public void setTxtServiceGroup1(RString txtServiceGroup1) {

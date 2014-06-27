@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.ShoKaishuJokyo
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuJokyoShosaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.dgShoKaishuJokyo_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  *
@@ -40,6 +42,35 @@ public class ShoKaishuJokyo {
         shosai.getDdlKaishuJiyu().setSelectedItem(row.getKaishuJiyuKey());
         shosai.getTxtKaishuDate().setValue(row.getKaishuDate().getValue());
         shosai.getTxtKaishuRiyu().setValue(row.getKaishuRiyu());
+
+        response.data = shoKaishuJoho;
+        return response;
+    }
+
+    /**
+     * 証類回収情報入力画面-「証類状況を保存する」ボタン活性非活性制御を表します。
+     *
+     * @param shoKaishuJoho 証回収詳細情報Div
+     * @param searchResultDiv　証回収状況検索結果Div
+     * @return ResponseData
+     */
+    public ResponseData<ShoKaishuJokyoDiv> setEnableControl(ShoKaishuJokyoDiv shoKaishuJoho,
+            SearchResultShoKaishuKanriDiv searchResultDiv) {
+        ResponseData<ShoKaishuJokyoDiv> response = new ResponseData<>();
+
+        if (shoKaishuJoho.getShoKaishuJokyoShosai().getTxtKaishuDate().getText().isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
+        } else {
+            if (shoKaishuJoho.getShoKaishuJokyoShosai().getDdlKaishuJiyu().getSelectedValue().isEmpty()) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
+            } else {
+                if (shoKaishuJoho.getShoKaishuJokyoShosai().getTxtKaishuRiyu().getText().isEmpty()) {
+                    CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
+                } else {
+                    CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), false);
+                }
+            }
+        }
 
         response.data = shoKaishuJoho;
         return response;

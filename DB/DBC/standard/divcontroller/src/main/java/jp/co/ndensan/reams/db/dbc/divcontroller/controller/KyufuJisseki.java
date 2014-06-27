@@ -11,7 +11,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.CareManagementhiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.FukushiYoguKonyuhiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.JutakuKaishuhiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonHihokenshaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonKohiDiv;
@@ -33,7 +32,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.*;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  *
@@ -41,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class KyufuJisseki {
 
-    public ResponseData<KyufuJissekiDiv> onLoad(KyufuJissekiDiv panel, KyufuJissekiListDiv panel2) {
+    public ResponseData<KyufuJissekiDiv> dispKyufuJisseki(KyufuJissekiDiv panel) {
         ResponseData<KyufuJissekiDiv> response = new ResponseData<>();
 
         List<HashMap> kyufuJisseki = YamlLoader.DBC.loadAsList(
@@ -51,7 +49,7 @@ public class KyufuJisseki {
         HashMap hashMap = kyufuJisseki.get(0);
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
-        panel.getTxtKyufuJissekiHihokenshaNo().setValue(panel2.getTxtKyufuJissekiListHihokenshaNo().getValue());
+        panel.getTxtKyufuJissekiHihokenshaNo().setValue(ymlData.getAsRString("HihokenshaNo"));
         panel.getTxtKyufuJissekiJuminShubetsu().setValue(ymlData.getAsRString("JuminShubetsu"));
         panel.getTxtKyufuJissekiYokaigodo().setValue(ymlData.getAsRString("Yokaigodo"));
         panel.getTxtKyufuJissekiNinteiYukoKikan().setFromValue(ymlData.getAsRDate("NinteiYukoKikanFrom"));
@@ -64,16 +62,8 @@ public class KyufuJisseki {
         panel.getTxtKyufuJissekiSeiriNo().setValue(ymlData.getAsRString("SeiriNo"));
         panel.getTxtKyufuJissekiHokensha().setValue(ymlData.getAsRString("Hokensha"));
         panel.getTxtKyufuJissekiShikibetsuCode().setValue(ymlData.getAsRString("ShikibetsuCode"));
-        panel.getTxtKyufuJissekiShikibetsuName().setValue(ymlData.getAsRString("ShikibetsuName"));
-        List<KeyValueDataSource> list = new ArrayList<>();
-
-        for (int i = 1; i <= Integer.parseInt(ymlData.getAsRString("JigyoshaSu").toString()); i++) {
-
-            list.add(new KeyValueDataSource(new RString("key" + i), ymlData.getAsRString("Jigyosha" + i)));
-
-        }
-        panel.getDdlKyufuJissekiJigyosha().setDataSource(list);
-        panel.getDdlKyufuJissekiJigyosha().setSelectedItem(new RString("key1"));
+        //panel.getTxtKyufuJissekiShikibetsuName().setValue(ymlData.getAsRString("ShikibetsuName"));
+        panel.getTxtKyufuJissekiJigyosha().setValue(ymlData.getAsRString("Jigyosha"));
 
 //        panel.getTxtKyufuJissekiHihokenshaNo().setValue(new RString("0000314323"));
 //        panel.getTxtKyufuJissekiJuminShubetsu().setValue(new RString("転出者"));
@@ -93,6 +83,11 @@ public class KyufuJisseki {
 //        list.add(new KeyValueDataSource(new RString("key0"), new RString("1114301032:雛菊サービス機関")));
 //        list.add(new KeyValueDataSource(new RString("key1"), new RString("2070500448:アネモネ福祉ランド")));
 //        panel.getDdlKyufuJissekiJigyosha().setDataSource(list);
+        panel.getBtnTokuteiShinryohi().setWrap(true);
+        panel.getBtnShokujiHiyo().setWrap(true);
+        panel.getBtnTokuteiNyushoshaKaigoServicehi().setWrap(true);
+        panel.getBtnShakaiFukushiHojinKeigengaku().setWrap(true);
+
         setKyufuJissekiKihon(panel.getTabKyufuJisseki().getKyufuJissekiKihon());
         setKyufuJissekiMeisai(panel.getTabKyufuJisseki().getKyufuJissekiMeisaiShukei());
         setServiceKeikakuhi(panel.getTabKyufuJisseki().getServiceKeikakuhi());

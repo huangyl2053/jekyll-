@@ -862,14 +862,9 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "ShoKaishuJokyoShosai_title": "",
-     "ShoKaishuJokyoShosai_width": "1111",
-     "ShoKaishuJokyoShosai_canOpenAndClose": false,
-     "ShoKaishuJokyoShosai_eraseBorderTop": true,
-     "ShoKaishuJokyoShosai_eraseBorderBottom": true,
-     "ShoKaishuJokyoShosai_eraseBorderRight": true,
-     "ShoKaishuJokyoShosai_eraseBorderLeft": true,
-     "ShoKaishuJokyoShosai_panelDisplay": 2
+     "onBlur_txtKaishuDate": "onBlur_txtKaishuDate",
+     "onChange_ddlKaishuJiyu": "onChange_ddlKaishuJiyu",
+     "onBlur_txtKaishuRiyu": "onBlur_txtKaishuRiyu"
     }
    ],
    "controlType": "Panel",
@@ -909,6 +904,18 @@
     {
      "eventName": "onClick_btnSelect",
      "requestUrl": "dbu/db/dbu/ShoKaishuJokyo/onSelectBySelectButton_SearchResultShoKaishuJokyoList"
+    },
+    {
+     "eventName": "onBlur_txtKaishuDate",
+     "requestUrl": "dbu/db/dbu/ShoKaishuJokyo/setEnableControl"
+    },
+    {
+     "eventName": "onChange_ddlKaishuJiyu",
+     "requestUrl": "dbu/db/dbu/ShoKaishuJokyo/setEnableControl"
+    },
+    {
+     "eventName": "onBlur_txtKaishuRiyu",
+     "requestUrl": "dbu/db/dbu/ShoKaishuJokyo/setEnableControl"
     }
    ],
    "hiddenInput": [],
@@ -1246,7 +1253,7 @@
       "width": 1,
       "visible": true,
       "displayNone": false,
-      "disabled": false,
+      "disabled": true,
       "accessKey": "",
       "nextFocusFieldName": "",
       "wrap": false,
@@ -1270,12 +1277,11 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "証類状況を保存する",
-      "prefixText": "",
-      "suffixText": "",
       "validateUrl": "",
       "submitUrl": "",
-      "onAfterRequest": ""
+      "onAfterRequest": "",
+      "prefixText": "",
+      "suffixText": ""
      }
     },
     {
