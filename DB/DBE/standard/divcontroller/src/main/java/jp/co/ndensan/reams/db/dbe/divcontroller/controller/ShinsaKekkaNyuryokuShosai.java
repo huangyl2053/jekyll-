@@ -84,19 +84,23 @@ public class ShinsaKekkaNyuryokuShosai {
         _konkai(div).getDdlTokuteiShippei().setDisabled(is第1号(dataRow.get被保険者区分()));
         _konkai(div).getDdlJotaiZo().setDisabled(!is要介護１(_konkai(div)));
         _konkai(div).setTitle(new RString("今回認定結果"));
-
         // 前回
         KaigoNinteiKekka.setModeWithInit(_zenkai(div), KaigoNinteiKekka.Mode.READ);
-        KaigoNinteiKekka.setValues(_zenkai(div), valuesOf前回());
         _zenkai(div).setTitle(new RString("前回認定結果"));
-
         // 前々回
         KaigoNinteiKekka.setModeWithInit(_zenzenkai(div), KaigoNinteiKekka.Mode.READ);
-        KaigoNinteiKekka.setValues(_zenzenkai(div), valuesOf前々回());
         _zenzenkai(div).setTitle(new RString("前々回認定結果"));
 
+        if (!is申請区分_新規(div)) {
+            KaigoNinteiKekka.setValues(_zenkai(div), valuesOf前回());
+            KaigoNinteiKekka.setValues(_zenzenkai(div), valuesOf前々回());
+        }
         response.data = div;
         return response;
+    }
+
+    private boolean is申請区分_新規(ShinsaKekkaNyuryokuShosaiDiv div) {
+        return div.getTblShinsaTaishoshaShosai().getTxtShinseiKubun().getValue().toString().contains("新規");
     }
 
     private KaigoNinteiKekkaDiv _konkai(ShinsaKekkaNyuryokuShosaiDiv div) {
@@ -173,12 +177,9 @@ public class ShinsaKekkaNyuryokuShosai {
      */
     public ResponseData onClickBtnUpdate(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
         ResponseData<ShinsaShienTaishoshaIchiranDiv> response = new ResponseData<>();
-        RString nijiHantei;
-        RString yukoTsukisu;
 
-//        dgShinsaTaishoshaIchiran1_Row dataRow = ichiranDiv.getDgShinsaTaishoshaIchiran1().getClickedItem();
-        nijiHantei = _konkai(div).getDdlNijiHanteiKekka().getSelectedValue();
-        yukoTsukisu = _konkai(div).getDdlNinteiYukoTsukisu().getSelectedValue();
+        RString nijiHantei = _konkai(div).getDdlNijiHanteiKekka().getSelectedValue();
+        RString yukoTsukisu = _konkai(div).getDdlNinteiYukoTsukisu().getSelectedValue();
         ViewStateHolder.put("判定結果", nijiHantei);
         ViewStateHolder.put("有効月数", yukoTsukisu);
 
@@ -197,7 +198,6 @@ public class ShinsaKekkaNyuryokuShosai {
         ResponseData<ShinsaKekkaNyuryokuShosaiDiv> response = new ResponseData<>();
 
         dgShinsaTaishoshaIchiran1_Row dataRow = ichiranDiv.getDgShinsaTaishoshaIchiran1().getSelectedItems().get(SELECT_IDX);
-
         if (_konkai(div).getDdlNijiHanteiKekka().getSelectedValue().equalsIgnoreCase(new RString("非該当"))) {
             _konkai(div).getTxtNinteiYukoKikanStart().clearValue();
             _konkai(div).getTxtNinteiYukoKikanStart().setDisabled(true);
@@ -205,14 +205,22 @@ public class ShinsaKekkaNyuryokuShosai {
             _konkai(div).getDdlJotaiZo().setDisabled(true);
             _konkai(div).getDdlJotaiZo().setDisplayNone(true);
             _konkai(div).getTxtShinseiKubunHorei().clearValue();
+            response.data = div;
         } else {
-            _konkai(div).getTxtNinteiYukoKikanStart().setValue(new FlexibleDate(dataRow.get認定期間開始日()));
-            _konkai(div).getTxtNinteiYukoKikanStart().setDisabled(false);
-            _konkai(div).getTxtNinteiYukoKikanEnd().setValue(new FlexibleDate("20160630"));
-            _konkai(div).getTxtShinseiKubunHorei().setValue(new RString("更新"));
+            if (!is申請区分_新規(div)) {
+                _konkai(div).getTxtNinteiYukoKikanStart().setValue(_zenkai(div).getTxtNinteiYukoKikanEnd().getValue().plusDay(1));
+                _konkai(div).getTxtNinteiYukoKikanStart().setDisabled(false);
+                _konkai(div).getTxtShinseiKubunHorei().setValue(new RString("更新"));
+                _konkai(div).getDdlNinteiYukoTsukisu().setSelectedItem(KaigoNinteiKekka.YukoKikanTsukisu.TwoYears.getCode());
+            } else {
+                _konkai(div).getTxtNinteiYukoKikanStart().setValue(new FlexibleDate(dataRow.get認定期間開始日()));
+                _konkai(div).getTxtShinseiKubunHorei().setValue(new RString("新規"));
+                _konkai(div).getDdlNinteiYukoTsukisu().setSelectedItem(KaigoNinteiKekka.YukoKikanTsukisu.SixMonths.getCode());
+            }
             _konkai(div).getDdlJotaiZo().setDisabled(!is要介護１(_konkai(div)));
+            response = onSelect_ddlNinteiYukoTsukisu(div, ichiranDiv);
         }
-        response.data = div;
+
         return response;
     }
 
@@ -243,35 +251,28 @@ public class ShinsaKekkaNyuryokuShosai {
      * @param ichiranDiv 審査対象者一覧Div
      * @return ResponseData
      */
-    public ResponseData onSelect_ddlNinteiYukoTsukisu(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
+    public ResponseData<ShinsaKekkaNyuryokuShosaiDiv>
+            onSelect_ddlNinteiYukoTsukisu(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
         ResponseData<ShinsaKekkaNyuryokuShosaiDiv> response = new ResponseData<>();
 
-        FlexibleDate startYmd;
-        FlexibleDate endYmd;
+        FlexibleDate startYmd = _konkai(div).getTxtNinteiYukoKikanStart().getValue();
+        FlexibleDate endYmd = startYmd;
 
-        startYmd = _konkai(div).getTxtNinteiYukoKikanStart().getValue();
-        endYmd = startYmd;
-
-        if (_konkai(div).
-                getDdlNinteiYukoTsukisu().getSelectedValue().equalsIgnoreCase("６")) {
-            _konkai(div).getTxtShinsakaiIken().
-                    setValue(RString.EMPTY);
+        if (_konkai(div).getDdlNinteiYukoTsukisu().getSelectedValue().equalsIgnoreCase("６")) {
+            _konkai(div).getTxtShinsakaiIken().setValue(RString.EMPTY);
             if (startYmd.getDayValue() == 1) {
                 endYmd = startYmd.plusMonth(TSUKISU_5);
             } else {
                 endYmd = startYmd.plusMonth(TSUKISU_6);
             }
-        } else if (_konkai(div).
-                getDdlNinteiYukoTsukisu().getSelectedValue().equalsIgnoreCase("１２")) {
-            _konkai(div).getTxtShinsakaiIken().
-                    setValue(RString.EMPTY);
+        } else if (_konkai(div).getDdlNinteiYukoTsukisu().getSelectedValue().equalsIgnoreCase("１２")) {
+            _konkai(div).getTxtShinsakaiIken().setValue(RString.EMPTY);
             if (startYmd.getDayValue() == 1) {
                 endYmd = startYmd.plusMonth(TSUKISU_11);
             } else {
                 endYmd = startYmd.plusMonth(TSUKISU_12);
             }
-        } else if (_konkai(div).
-                getDdlNinteiYukoTsukisu().getSelectedValue().equalsIgnoreCase("２４")) {
+        } else if (_konkai(div).getDdlNinteiYukoTsukisu().getSelectedValue().equalsIgnoreCase("２４")) {
             _konkai(div).getTxtShinsakaiIken().
                     setValue(new RString("・認定有効期間を２年間とする"));
             if (startYmd.getDayValue() == 1) {
@@ -286,7 +287,6 @@ public class ShinsaKekkaNyuryokuShosai {
 
         response.data = div;
         return response;
-
     }
 
     /**
