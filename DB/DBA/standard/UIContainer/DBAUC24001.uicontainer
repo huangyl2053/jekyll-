@@ -1,12 +1,30 @@
 ﻿{
  "transitionList": [
   {
-   "id": "0",
-   "layoutSubGyomuCode": "DBA",
-   "layoutName": "DBA2040011",
-   "eventName": "",
+   "id": "2",
+   "layoutSubGyomuCode": "DBZ",
+   "layoutName": "DBZU020001",
+   "eventName": "decideToTaishosha",
    "toLayoutSubGyomuCode": "DBA",
    "toLayoutName": "DBA2040011",
+   "toEventName": "decide"
+  },
+  {
+   "id": "3",
+   "layoutSubGyomuCode": "DBA",
+   "layoutName": "DBA2040011",
+   "eventName": "research",
+   "toLayoutSubGyomuCode": "DBZ",
+   "toLayoutName": "DBZU020001",
+   "toEventName": "researchToTaishosha"
+  },
+  {
+   "id": "4",
+   "layoutSubGyomuCode": "DBA",
+   "layoutName": "DBA2040011",
+   "eventName": "searchResult",
+   "toLayoutSubGyomuCode": "DBZ",
+   "toLayoutName": "DBZU020001",
    "toEventName": ""
   }
  ],

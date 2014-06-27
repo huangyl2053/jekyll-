@@ -5,10 +5,10 @@
    "fieldName": "TajutokuTaishoshaSearch",
    "items": [
     {
-     "fieldName": "HihokenshaFinder",
+     "fieldName": "btnToDecide",
      "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
+     "controlType": "Button",
+     "width": "S",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -19,328 +19,23 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "HihokenshaFinder",
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnToDecide",
      "helpMessageID": "",
      "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "HihokenshaFinder",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "onClick_BtnToSearch": "onClick_btnToSearch",
-     "displayNone_txtTsuchishoNo": true,
-     "displayNone_ddlFukaNendo": true,
-     "displayNone_SearchCriteriaDetail": false
-    },
-    {
-     "fieldName": "SearchResult",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "SearchResult",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "SearchResultOfHihokensha",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "onClickBtnToResearch": "onClick_btnToResearch",
-     "gridSetting": {
-      "rowHeight": 50,
-      "isMultiSelectable": false,
-      "isShowHeader": true,
-      "isShowFooter": true,
-      "isShowFilter": false,
-      "isShowFilterButton": false,
-      "isShowRowState": false,
-      "isShowSelectButtonColumn": false,
-      "isShowModifyButtonColumn": false,
-      "isShowDeleteButtonColumn": false,
-      "limitRowCount": 0,
-      "selectedRowCount": 0,
-      "header": {
-       "combineColumns": [],
-       "frozenColumn": "",
-       "headerHeight": 0
-      },
-      "columns": [
-       {
-        "columnName": "",
-        "dataName": "btnToDecide",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 50,
-        "visible": true,
-        "cellType": 8,
-        "cellDetails": {
-         "cellType": 8,
-         "text": "確定",
-         "onClick": "onClick_btnToDecide",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
-        },
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "btnToDecide"
-       },
-       {
-        "columnName": "被保番号",
-        "dataName": "hihokenshaNo",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 110,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "hihokenshaNo"
-       },
-       {
-        "columnName": "識別コード",
-        "dataName": "shikibetsuCode",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 110,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "shikibetsuCode"
-       },
-       {
-        "columnName": "被保険者区分",
-        "dataName": "hihokenshaKubun",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 110,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "hihokenshaKubun"
-       },
-       {
-        "columnName": "氏名",
-        "dataName": "shimei",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 150,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "shimei"
-       },
-       {
-        "columnName": "カナ氏名",
-        "dataName": "kanaShimsei",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 150,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "kanaShimsei"
-       },
-       {
-        "columnName": "氏名",
-        "dataName": "shimeiAndKanaShimsei",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 150,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "kanaShimsei"
-       },
-       {
-        "columnName": "性別",
-        "dataName": "gender",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 50,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "gender"
-       },
-       {
-        "columnName": "生年月日",
-        "dataName": "birthDay",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 110,
-        "visible": true,
-        "cellType": 6,
-        "cellDetails": {
-         "cellType": 6,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": "",
-         "isSetValueToToolTip": false,
-         "readOnly": true
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "birthDay"
-       },
-       {
-        "columnName": "郵便番号",
-        "dataName": "yubinNo",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 110,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "yubinNo"
-       },
-       {
-        "columnName": "住所",
-        "dataName": "jusho",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 300,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "jusho"
-       },
-       {
-        "columnName": "個人番号",
-        "dataName": "kojinNo",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 120,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "kojinNo"
-       },
-       {
-        "columnName": "住民種別",
-        "dataName": "juminShubetsu",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 100,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "juminShubetsu"
-       },
-       {
-        "columnName": "世帯コード",
-        "dataName": "setaiCode",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 110,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "setaiCode"
-       }
-      ]
-     }
+     "onClick": "onClick_btnToDecide",
+     "text": "Decide",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
-   "width": "G12",
+   "width": "G3",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -434,11 +129,9 @@
      "canTransferEvent": true,
      "heightForDialog": "M",
      "AtenaKanaMeisho_visible": true,
-     "AtenaMeisho_visible": true,
      "SeinengappiYMD_visible": true,
      "Nenrei_visible": true,
      "Seibetsu_visible": true,
-     "JuminShubetsu_visible": true,
      "NihonjinGaikokujin_visible": true,
      "JuminJotai_visible": true,
      "YubinNo_visible": true,
@@ -448,8 +141,6 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnMemo_displayNone": false,
-     "btnDainosya_displayNone": false,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
      "btnKoza_displayNone": false,
@@ -468,6 +159,10 @@
      "SubGyomuUmu": "0",
      "SubGyomuSearchUmu": "0",
      "DainoninHyojiUmu": "1",
+     "AtenaMeisho_visible": true,
+     "JuminShubetsu_visible": true,
+     "btnMemo_displayNone": false,
+     "btnDainosya_displayNone": false,
      "AtenaShokaiSimple_eraseBorder": false,
      "eraseBorderTop": true,
      "eraseBorderBottom": false,
@@ -522,7 +217,7 @@
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
-   "wrap": false,
+   "wrap": true,
    "dependencies": [],
    "float": 0,
    "toolTip": "",
@@ -597,7 +292,9 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "S",
-     "dataSource": [],
+     "onSelectByDblClick": "",
+     "onSelectByModifyButton": "onSelectByModifyButton_dgJushochiTokureiRireki",
+     "onSelectByDeleteButton": "",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -973,13 +670,11 @@
      },
      "onSort": "",
      "onSelect": "",
-     "onSelectByDblClick": "",
      "onSelectBySelectButton": "",
-     "onSelectByModifyButton": "onSelectByModifyButton_dgJushochiTokureiRireki",
-     "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
+     "dataSource": [],
      "sortOrder": "nyushoShisetsu",
      "isAscending": true,
      "filterList": [],
@@ -1012,7 +707,16 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
+         "required": false,
+         "onFocus": "",
+         "onBlur": "",
          "onChange": "",
+         "labelLText": "適用事由",
+         "labelRText": "",
+         "labelLWidth": "70",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "selectedItem": "keyTaTokureiTekiyo",
          "dataSource": [
           {
@@ -1028,15 +732,6 @@
            "value": "その他"
           }
          ],
-         "required": false,
-         "labelLText": "適用事由",
-         "labelRText": "",
-         "labelLWidth": "70",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "disabledItem": []
         },
         {
@@ -1060,16 +755,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "入所日",
-         "labelRText": "",
-         "labelLWidth": "50",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "onBlur_txtShisetsuNyushoDate",
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1078,13 +765,21 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "onBlur_txtShisetsuNyushoDate",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
-         "permitCharactor": "./_-",
+         "labelLText": "入所日",
+         "labelRText": "",
+         "labelLWidth": "50",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "permitCharactor": "./_-"
         },
         {
          "fieldName": "txtTekiyoDate",
@@ -1107,16 +802,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "適用日",
-         "labelRText": "",
-         "labelLWidth": "50",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1125,13 +812,21 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
-         "permitCharactor": "./_-",
+         "labelLText": "適用日",
+         "labelRText": "",
+         "labelLWidth": "50",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "permitCharactor": "./_-"
         },
         {
          "fieldName": "txtTekiyoTodokedeDate",
@@ -1154,16 +849,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "適用届出日",
-         "labelRText": "",
-         "labelLWidth": "80",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1172,13 +859,21 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
-         "permitCharactor": "./_-",
+         "labelLText": "適用届出日",
+         "labelRText": "",
+         "labelLWidth": "80",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "permitCharactor": "./_-"
         }
        ],
        "controlType": "Panel",
@@ -1250,7 +945,16 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
+         "required": false,
+         "onFocus": "",
+         "onBlur": "",
          "onChange": "",
+         "labelLText": "解除事由",
+         "labelRText": "",
+         "labelLWidth": "70",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "selectedItem": "keyKaijo",
          "dataSource": [
           {
@@ -1278,15 +982,6 @@
            "value": "その他"
           }
          ],
-         "required": false,
-         "labelLText": "解除事由",
-         "labelRText": "",
-         "labelLWidth": "70",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "disabledItem": []
         },
         {
@@ -1310,16 +1005,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "退所日",
-         "labelRText": "",
-         "labelLWidth": "50",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1328,13 +1015,21 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
-         "permitCharactor": "./_-",
+         "labelLText": "退所日",
+         "labelRText": "",
+         "labelLWidth": "50",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "permitCharactor": "./_-"
         },
         {
          "fieldName": "txtKaijoDate",
@@ -1357,16 +1052,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "解除日",
-         "labelRText": "",
-         "labelLWidth": "50",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1375,13 +1062,21 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
-         "permitCharactor": "./_-",
+         "labelLText": "解除日",
+         "labelRText": "",
+         "labelLWidth": "50",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 1
+         "displayFormat": 1,
+         "permitCharactor": "./_-"
         },
         {
          "fieldName": "txtKaijoTodokedeDate",
@@ -1404,16 +1099,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "解除届出日",
-         "labelRText": "",
-         "labelLWidth": "80",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1422,13 +1109,21 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
-         "permitCharactor": "./_-",
+         "labelLText": "解除届出日",
+         "labelRText": "",
+         "labelLWidth": "80",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 1
+         "displayFormat": 1,
+         "permitCharactor": "./_-"
         }
        ],
        "controlType": "Panel",
@@ -1500,16 +1195,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "被保番号",
-         "labelRText": "",
-         "labelLWidth": "70",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "maxLength": 100000000,
          "minLength": "0000000000",
          "textAlign": 0,
@@ -1518,10 +1205,18 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
+         "labelLText": "被保番号",
+         "labelRText": "",
+         "labelLWidth": "70",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "decorationClass": "",
          "permitCharactor": "",
          "formatLength": "10"
@@ -1708,13 +1403,13 @@
        "selectControlID": "btnTekiyoJohoToroku",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "適用情報を確定する",
        "onClick": "onClick_btnTekiyoJohoToroku",
-       "icon": 0,
+       "text": "適用情報を確定する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "icon": 0,
        "heightTextBoxMatches": false
       }
      ],
@@ -1811,16 +1506,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "適用事由",
-         "labelRText": "",
-         "labelLWidth": "70",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1829,10 +1516,18 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
+         "labelLText": "適用事由",
+         "labelRText": "",
+         "labelLWidth": "70",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "decorationClass": "",
          "permitCharactor": ""
         },
@@ -1857,16 +1552,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "適用日",
-         "labelRText": "",
-         "labelLWidth": "50",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1875,13 +1562,21 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
-         "permitCharactor": "./_-",
+         "labelLText": "適用日",
+         "labelRText": "",
+         "labelLWidth": "50",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "permitCharactor": "./_-"
         },
         {
          "fieldName": "txtShisetsuHenkoTekiyoTodokedeDate",
@@ -1904,16 +1599,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "適用届出日",
-         "labelRText": "",
-         "labelLWidth": "80",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1922,13 +1609,21 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
-         "permitCharactor": "./_-",
+         "labelLText": "適用届出日",
+         "labelRText": "",
+         "labelLWidth": "80",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "permitCharactor": "./_-"
         }
        ],
        "controlType": "Panel",
@@ -2000,16 +1695,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "退所日",
-         "labelRText": "",
-         "labelLWidth": "70",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -2018,13 +1705,21 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
-         "permitCharactor": "./_-",
+         "labelLText": "退所日",
+         "labelRText": "",
+         "labelLWidth": "70",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "permitCharactor": "./_-"
         },
         {
          "fieldName": "BeforeShisetsuJoho",
@@ -2132,16 +1827,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "入所日",
-         "labelRText": "",
-         "labelLWidth": "70",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -2150,13 +1837,21 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
-         "permitCharactor": "./_-",
+         "labelLText": "入所日",
+         "labelRText": "",
+         "labelLWidth": "70",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "permitCharactor": "./_-"
         },
         {
          "fieldName": "AfterShisetsuJoho",
@@ -2385,7 +2080,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
-     "marginTop": 0,
+     "marginTop": "0",
      "marginBottom": 0,
      "businessId": "DBZ",
      "controlName": "KaigoKanryoMessage",
@@ -2479,118 +2174,6 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "対象者検索",
-   "showWizard": true,
-   "visibleDivs": [
-    {
-     "visibleDiv": "TajutokuTaishoshaSearch",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "HihokenshaFinder",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "SearchResult",
-     "panelState": "close",
-     "fixedDiv": "No"
-    }
-   ],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "HihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": "該当者一覧"
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReseach",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "2",
-   "stateName": "該当者一覧",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "TajutokuTaishoshaSearch",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "HihokenshaFinder",
-     "panelState": "close",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "SearchResult",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "HihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": "対象者検索"
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": "適用登録"
-    },
-    {
-     "fieldName": "btnSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReseach",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "3",
    "stateName": "適用登録",
    "showWizard": true,
    "visibleDivs": [
@@ -2651,39 +2234,24 @@
    },
    "events": [
     {
-     "fieldName": "HihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": "登録完了"
     },
     {
-     "fieldName": "btnReseach",
-     "event": "onClick",
-     "transition": "対象者検索"
-    },
-    {
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnToDecide",
+     "event": "onClick",
+     "transition": "適用登録"
     }
    ]
   },
   {
-   "order": "4",
+   "order": "2",
    "stateName": "施設変更登録",
    "showWizard": false,
    "visibleDivs": [
@@ -2741,39 +2309,24 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "HihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": "登録完了"
     },
     {
-     "fieldName": "btnReseach",
-     "event": "onClick",
-     "transition": "対象者検索"
-    },
-    {
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnToDecide",
+     "event": "onClick",
+     "transition": "適用登録"
     }
    ]
   },
   {
-   "order": "5",
+   "order": "3",
    "stateName": "解除登録",
    "showWizard": false,
    "visibleDivs": [
@@ -2826,39 +2379,24 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "HihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": "登録完了"
     },
     {
-     "fieldName": "btnReseach",
-     "event": "onClick",
-     "transition": "対象者検索"
-    },
-    {
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnToDecide",
+     "event": "onClick",
+     "transition": "適用登録"
     }
    ]
   },
   {
-   "order": "6",
+   "order": "4",
    "stateName": "登録完了",
    "showWizard": true,
    "visibleDivs": [
@@ -2878,27 +2416,7 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "HihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResult_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReseach",
      "event": "onClick",
      "transition": ""
     },
@@ -2906,14 +2424,32 @@
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
+    },
+    {
+     "fieldName": "btnToDecide",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   }
  ],
- "currentState": "登録完了",
+ "currentState": "All",
  "id": "DBA2040011",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "decide",
+   "eventName": "btnToDecide.onClick"
+  },
+  {
+   "alias": "research",
+   "eventName": "btnReseach.onClick"
+  },
+  {
+   "alias": "searchResult",
+   "eventName": "btnBackSearchResult.onClick"
+  }
+ ],
  "loadSequencePanelNames": [
   [
    "TajutokuTaishoshaSearch",
@@ -2937,12 +2473,6 @@
    "ShisetsuJohoInput",
    "BeforeShisetsuJohoInput",
    "AfterShisetsuJohoInput"
-  ],
-  [
-   "HihokenshaFinder"
-  ],
-  [
-   "SearchResult"
   ],
   [
    "AtenaJoho"
@@ -3002,13 +2532,13 @@
       "selectControlID": "btnSave",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "完了",
       "onClick": "onClick_btnSave",
-      "icon": 0,
+      "text": "完了",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": "適用情報を"
      }
@@ -3035,15 +2565,48 @@
       "selectControlID": "btnReseach",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "戻る",
       "onClick": "onClick_btnResearch",
-      "icon": 0,
+      "text": "戻る",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": "対象者検索に"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnBackSearchResult",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnBackSearchResult",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "",
+      "text": "更新",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "該当者一覧へ"
      }
     }
    ],
@@ -3085,13 +2648,13 @@
       "selectControlID": "btnComplete",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "完了",
       "onClick": "",
-      "icon": 0,
+      "text": "完了",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": "適用処理を"
      }

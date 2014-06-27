@@ -5,10 +5,10 @@
    "fieldName": "ShikakuShutokuSearch",
    "items": [
     {
-     "fieldName": "HihokenshaFinder",
+     "fieldName": "btnToDecide",
      "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
+     "controlType": "Button",
+     "width": "S",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -19,54 +19,23 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "HihokenshaFinder",
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnToDecide",
      "helpMessageID": "",
      "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "HihokenshaFinder",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "onClick_BtnToSearch": "onClick_btnToSearch"
-    },
-    {
-     "fieldName": "SearchResultOfHihokensha",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "SearchResultOfHihokensha",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "SearchResultOfHihokensha",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "onClickBtnToResearch": "onClick_btnToResearch"
+     "onClick": "onClick_btnToDecide",
+     "text": "Decide",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
-   "width": "G12",
+   "width": "G3",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -95,14 +64,6 @@
     {
      "eventName": "onLoad",
      "requestUrl": ""
-    },
-    {
-     "eventName": "onClick_btnToSearch",
-     "requestUrl": "dba/db/dba/ShikakuShutokuSearch/onClick_btnToSearch"
-    },
-    {
-     "eventName": "onClick_btnToResearch",
-     "requestUrl": "dba/db/dba/ShikakuShutokuSearch/onClick_btnToResearch"
     }
    ],
    "hiddenInput": [],
@@ -111,16 +72,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "ShikakuShutokuTaishoshaJoho",
@@ -153,6 +115,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
      "atenaInfo_eraseBorderTop": true,
@@ -220,15 +184,17 @@
      "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
      "backGroundColor": 0,
      "btnHihoRireki_visible": true,
      "btnNinteiRireki_visible": true
@@ -279,16 +245,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "ShikakuShutokuJoho",
@@ -327,6 +294,8 @@
          "dataPassingForDialog": [],
          "dialogOkEventNameForDialog": "",
          "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M",
          "onSelectByDblClick": "",
          "onSelectByModifyButton": "onSelectByModifyButton_dgShikakuShutokuRireki",
          "onSelectByDeleteButton": "onSelectByDeleteButton_dgShikakuShutokuRireki",
@@ -357,7 +326,16 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
+           "required": false,
+           "onFocus": "",
+           "onBlur": "",
            "onChange": "",
+           "labelLText": "取得事由",
+           "labelRText": "",
+           "labelLWidth": "80",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
            "selectedItem": "tennyu",
            "dataSource": [
             {
@@ -445,15 +423,6 @@
              "value": "その他"
             }
            ],
-           "required": false,
-           "labelLText": "取得事由",
-           "labelRText": "",
-           "labelLWidth": "80",
-           "labelRWidth": "S",
-           "labelLAlign": 2,
-           "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
            "disabledItem": []
           },
           {
@@ -477,26 +446,26 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
+           "text": "",
            "required": false,
+           "placeHolder": "",
+           "textKind": 0,
+           "isPrivateInfo": false,
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "value": "",
            "labelLText": "取得日",
            "labelRText": "",
            "labelLWidth": "120",
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
-           "placeHolder": "",
-           "textKind": 0,
-           "isPrivateInfo": false,
-           "isPassword": false,
-           "onKeyPress": "",
-           "text": "",
-           "value": "",
-           "permitCharactor": "./_-",
            "ymdKubun": 2,
-           "displayFormat": 0
+           "displayFormat": 0,
+           "permitCharactor": "./_-"
           },
           {
            "fieldName": "txtShutokuTodokedeDate",
@@ -519,26 +488,26 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
+           "text": "",
            "required": false,
+           "placeHolder": "",
+           "textKind": 0,
+           "isPrivateInfo": false,
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "value": "",
            "labelLText": "届出日",
            "labelRText": "",
            "labelLWidth": "50",
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
-           "placeHolder": "",
-           "textKind": 0,
-           "isPrivateInfo": false,
-           "isPassword": false,
-           "onKeyPress": "",
-           "text": "",
-           "value": "",
-           "permitCharactor": "./_-",
            "ymdKubun": 2,
-           "displayFormat": 0
+           "displayFormat": 0,
+           "permitCharactor": "./_-"
           }
          ],
          "controlType": "Panel",
@@ -574,16 +543,17 @@
          "session": {},
          "marginTop": "XS",
          "marginBottom": "XS",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "eraseBorderTop": false,
+         "eraseBorderBottom": false,
+         "eraseBorderRight": false,
+         "eraseBorderLeft": false
         },
         {
          "fieldName": "btnUpdateShikaku",
@@ -605,13 +575,14 @@
          "selectControlID": "btnUpdateShikaku",
          "helpMessageID": "",
          "jpControlName": "",
-         "text": "取得情報を確定する",
          "onClick": "onClick_btnUpdateShikaku",
-         "icon": 0,
+         "text": "取得情報を確定する",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "icon": 0,
+         "heightTextBoxMatches": false
         }
        ],
        "controlType": "TabPanel",
@@ -632,7 +603,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "title": "資格情報",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       },
       {
        "fieldName": "tplIryoHoken",
@@ -657,13 +629,14 @@
          "selectControlID": "btnAddIryoHoken",
          "helpMessageID": "",
          "jpControlName": "",
-         "text": "新規医療保険を追加する",
          "onClick": "onClick_btnAddIryoHoken",
-         "icon": 0,
+         "text": "新規医療保険を追加する",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "icon": 0,
+         "heightTextBoxMatches": false
         },
         {
          "fieldName": "IryoHokenRireki",
@@ -706,6 +679,8 @@
          ],
          "dialogOkEventNameForDialog": "",
          "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M",
          "onSelectByModifyButton": "onSelectByModifyButton_dgIryoHokenRireki",
          "onSelectByDeleteButton": "onSelectByDeleteButton_dgIryoHokenRireki",
          "panel_width": "1030",
@@ -735,26 +710,26 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
+           "text": "",
            "required": false,
+           "placeHolder": "",
+           "textKind": 0,
+           "isPrivateInfo": false,
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "value": "",
            "labelLText": "加入日",
            "labelRText": "",
            "labelLWidth": "50",
            "labelRWidth": "0",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
-           "placeHolder": "",
-           "textKind": 0,
-           "isPrivateInfo": false,
-           "isPassword": false,
-           "onKeyPress": "",
-           "text": "",
-           "value": "",
-           "permitCharactor": "./_-",
            "ymdKubun": 2,
-           "displayFormat": 0
+           "displayFormat": 0,
+           "permitCharactor": "./_-"
           },
           {
            "fieldName": "txtIryoHokenDattaiDate",
@@ -777,26 +752,26 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
+           "text": "",
            "required": false,
+           "placeHolder": "",
+           "textKind": 0,
+           "isPrivateInfo": false,
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "value": "",
            "labelLText": "脱退日",
            "labelRText": "",
            "labelLWidth": "70",
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
-           "placeHolder": "",
-           "textKind": 0,
-           "isPrivateInfo": false,
-           "isPassword": false,
-           "onKeyPress": "",
-           "text": "",
-           "value": "",
-           "permitCharactor": "./_-",
            "ymdKubun": 2,
-           "displayFormat": 0
+           "displayFormat": 0,
+           "permitCharactor": "./_-"
           },
           {
            "fieldName": "ddlIryoHokenShubetsu",
@@ -819,7 +794,16 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
+           "required": false,
+           "onFocus": "",
+           "onBlur": "",
            "onChange": "",
+           "labelLText": "種別",
+           "labelRText": "",
+           "labelLWidth": "165",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
            "selectedItem": "kyokai",
            "dataSource": [
             {
@@ -855,15 +839,6 @@
              "value": "組合国民健康保険"
             }
            ],
-           "required": false,
-           "labelLText": "種別",
-           "labelRText": "",
-           "labelLWidth": "165",
-           "labelRWidth": "S",
-           "labelLAlign": 2,
-           "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
            "disabledItem": []
           },
           {
@@ -887,16 +862,8 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
+           "text": "",
            "required": false,
-           "labelLText": "保険者",
-           "labelRText": "",
-           "labelLWidth": "50",
-           "labelRWidth": "S",
-           "labelLAlign": 2,
-           "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
            "maxLength": 100000000,
            "minLength": "0000000000",
            "textAlign": 0,
@@ -905,10 +872,18 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "isComboBox": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
-           "text": "",
            "suggest": [],
            "value": "",
+           "labelLText": "保険者",
+           "labelRText": "",
+           "labelLWidth": "50",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
            "decorationClass": "",
            "permitCharactor": "",
            "formatLength": "10"
@@ -934,16 +909,8 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
+           "text": "",
            "required": false,
-           "labelLText": "",
-           "labelRText": "",
-           "labelLWidth": "S",
-           "labelRWidth": "S",
-           "labelLAlign": 2,
-           "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
            "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
@@ -952,10 +919,18 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "isComboBox": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
-           "text": "",
            "suggest": [],
            "value": "",
+           "labelLText": "",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
            "decorationClass": "",
            "permitCharactor": ""
           },
@@ -980,16 +955,8 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
+           "text": "",
            "required": false,
-           "labelLText": "記号番号",
-           "labelRText": "",
-           "labelLWidth": "70",
-           "labelRWidth": "S",
-           "labelLAlign": 2,
-           "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
            "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
@@ -998,10 +965,18 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "isComboBox": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
-           "text": "",
            "suggest": [],
            "value": "",
+           "labelLText": "記号番号",
+           "labelRText": "",
+           "labelLWidth": "70",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
            "decorationClass": "",
            "permitCharactor": ""
           }
@@ -1039,16 +1014,17 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "eraseBorderTop": false,
+         "eraseBorderBottom": false,
+         "eraseBorderRight": false,
+         "eraseBorderLeft": false
         },
         {
          "fieldName": "btnUpdateIryoHoken",
@@ -1070,13 +1046,14 @@
          "selectControlID": "btnUpdateIryoHoken",
          "helpMessageID": "",
          "jpControlName": "",
-         "text": "追加情報を確定する",
          "onClick": "onClick_btnUpdateIryoHoken",
-         "icon": 0,
+         "text": "追加情報を確定する",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "icon": 0,
+         "heightTextBoxMatches": false
         }
        ],
        "controlType": "TabPanel",
@@ -1097,7 +1074,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "title": "医療保険",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       },
       {
        "fieldName": "tplRofukuNenkin",
@@ -1125,13 +1103,14 @@
            "selectControlID": "btnAddRofukuNenkin",
            "helpMessageID": "",
            "jpControlName": "",
-           "text": "老福年金情報を追加する",
            "onClick": "",
-           "icon": 0,
+           "text": "老福年金情報を追加する",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0,
+           "heightTextBoxMatches": false
           },
           {
            "fieldName": "dgRohukuNenkinRireki",
@@ -1155,7 +1134,9 @@
            "jpControlName": "",
            "readOnly": false,
            "height": "S",
-           "dataSource": [],
+           "onSelectByDblClick": "",
+           "onSelectByModifyButton": "",
+           "onSelectByDeleteButton": "",
            "gridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": false,
@@ -1237,13 +1218,11 @@
            },
            "onSort": "",
            "onSelect": "",
-           "onSelectByDblClick": "",
            "onSelectBySelectButton": "",
-           "onSelectByModifyButton": "",
-           "onSelectByDeleteButton": "",
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
+           "dataSource": [],
            "sortOrder": "jukyushaNo",
            "isAscending": true,
            "filterList": [],
@@ -1273,26 +1252,26 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
+             "text": "",
              "required": false,
+             "placeHolder": "",
+             "textKind": 0,
+             "isPrivateInfo": false,
+             "isPassword": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
+             "onKeyPress": "",
+             "value": "",
              "labelLText": "開始日",
              "labelRText": "",
              "labelLWidth": "80",
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
-             "placeHolder": "",
-             "textKind": 0,
-             "isPrivateInfo": false,
-             "isPassword": false,
-             "onKeyPress": "",
-             "text": "",
-             "value": "",
-             "permitCharactor": "./_-",
              "ymdKubun": 2,
-             "displayFormat": 0
+             "displayFormat": 0,
+             "permitCharactor": "./_-"
             },
             {
              "fieldName": "txtRofukuNenkinShuryoDate",
@@ -1315,26 +1294,26 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
+             "text": "",
              "required": false,
+             "placeHolder": "",
+             "textKind": 0,
+             "isPrivateInfo": false,
+             "isPassword": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
+             "onKeyPress": "",
+             "value": "",
              "labelLText": "終了日",
              "labelRText": "",
              "labelLWidth": "50",
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
-             "placeHolder": "",
-             "textKind": 0,
-             "isPrivateInfo": false,
-             "isPassword": false,
-             "onKeyPress": "",
-             "text": "",
-             "value": "",
-             "permitCharactor": "./_-",
              "ymdKubun": 2,
-             "displayFormat": 0
+             "displayFormat": 0,
+             "permitCharactor": "./_-"
             },
             {
              "fieldName": "txtRofukuNenkinJukyushaNo",
@@ -1357,16 +1336,8 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
+             "text": "",
              "required": false,
-             "labelLText": "受給者番号",
-             "labelRText": "",
-             "labelLWidth": "80",
-             "labelRWidth": "S",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
              "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
@@ -1375,10 +1346,18 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "isComboBox": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
-             "text": "",
              "suggest": [],
              "value": "",
+             "labelLText": "受給者番号",
+             "labelRText": "",
+             "labelLWidth": "80",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
              "decorationClass": "",
              "permitCharactor": "",
              "formatLength": 1
@@ -1417,16 +1396,17 @@
            "session": {},
            "marginTop": "Default",
            "marginBottom": "Default",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false,
+           "eraseBorder": false,
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 1,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto"
+           "height": "Auto",
+           "eraseBorderTop": false,
+           "eraseBorderBottom": false,
+           "eraseBorderRight": false,
+           "eraseBorderLeft": false
           },
           {
            "fieldName": "btnUpdateRofukuNenkin",
@@ -1448,13 +1428,14 @@
            "selectControlID": "btnUpdateRofukuNenkin",
            "helpMessageID": "",
            "jpControlName": "",
-           "text": "追加情報を確定する",
            "onClick": "",
-           "icon": 0,
+           "text": "追加情報を確定する",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0,
+           "heightTextBoxMatches": false
           }
          ],
          "controlType": "Panel",
@@ -1490,16 +1471,17 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorderTop": true,
-         "eraseBorderBottom": true,
-         "eraseBorderRight": true,
-         "eraseBorderLeft": true,
+         "eraseBorder": true,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "eraseBorderTop": true,
+         "eraseBorderBottom": true,
+         "eraseBorderRight": true,
+         "eraseBorderLeft": true
         }
        ],
        "controlType": "TabPanel",
@@ -1520,7 +1502,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "title": "老福年金 ",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       },
       {
        "fieldName": "tplShisetsuNyutaisho",
@@ -1552,7 +1535,9 @@
          "controlName": "ShisetsuNyutaishoRirekiKanri",
          "dataPassingForDialog": [],
          "dialogOkEventNameForDialog": "",
-         "dialogCancelEventNameForDialog": ""
+         "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M"
         }
        ],
        "controlType": "TabPanel",
@@ -1573,7 +1558,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "title": "施設入退所",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       },
       {
        "fieldName": "tplSeikatsuHogo",
@@ -1601,13 +1587,14 @@
            "selectControlID": "btnAddSeikatsuHogo",
            "helpMessageID": "",
            "jpControlName": "",
-           "text": "生活保護情報を追加する",
            "onClick": "",
-           "icon": 0,
+           "text": "生活保護情報を追加する",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0,
+           "heightTextBoxMatches": false
           },
           {
            "fieldName": "dgSeikatsuHogoRireki",
@@ -1631,7 +1618,9 @@
            "jpControlName": "",
            "readOnly": false,
            "height": "S",
-           "dataSource": [],
+           "onSelectByDblClick": "",
+           "onSelectByModifyButton": "",
+           "onSelectByDeleteButton": "",
            "gridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": false,
@@ -1741,13 +1730,11 @@
            },
            "onSort": "",
            "onSelect": "",
-           "onSelectByDblClick": "",
            "onSelectBySelectButton": "",
-           "onSelectByModifyButton": "",
-           "onSelectByDeleteButton": "",
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
+           "dataSource": [],
            "sortOrder": "kaishiDate",
            "isAscending": true,
            "filterList": [],
@@ -1777,26 +1764,26 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
+             "text": "",
              "required": false,
+             "placeHolder": "",
+             "textKind": 0,
+             "isPrivateInfo": false,
+             "isPassword": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
+             "onKeyPress": "",
+             "value": "",
              "labelLText": "開始日",
              "labelRText": "",
              "labelLWidth": "80",
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
-             "placeHolder": "",
-             "textKind": 0,
-             "isPrivateInfo": false,
-             "isPassword": false,
-             "onKeyPress": "",
-             "text": "",
-             "value": "",
-             "permitCharactor": "./_-",
              "ymdKubun": 2,
-             "displayFormat": 0
+             "displayFormat": 0,
+             "permitCharactor": "./_-"
             },
             {
              "fieldName": "txtSeikatsuHogoHaishiDate",
@@ -1819,26 +1806,26 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
+             "text": "",
              "required": false,
+             "placeHolder": "",
+             "textKind": 0,
+             "isPrivateInfo": false,
+             "isPassword": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
+             "onKeyPress": "",
+             "value": "",
              "labelLText": "廃止日",
              "labelRText": "",
              "labelLWidth": "100",
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
-             "placeHolder": "",
-             "textKind": 0,
-             "isPrivateInfo": false,
-             "isPassword": false,
-             "onKeyPress": "",
-             "text": "",
-             "value": "",
-             "permitCharactor": "./_-",
              "ymdKubun": 2,
-             "displayFormat": 0
+             "displayFormat": 0,
+             "permitCharactor": "./_-"
             },
             {
              "fieldName": "txtSeikatsuHogoJukyushaNo",
@@ -1861,16 +1848,8 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
+             "text": "",
              "required": false,
-             "labelLText": "受給者番号",
-             "labelRText": "",
-             "labelLWidth": "80",
-             "labelRWidth": "",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
              "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
@@ -1879,10 +1858,18 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "isComboBox": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
-             "text": "",
              "suggest": [],
              "value": "",
+             "labelLText": "受給者番号",
+             "labelRText": "",
+             "labelLWidth": "80",
+             "labelRWidth": "",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
              "decorationClass": "",
              "permitCharactor": "",
              "formatLength": "8"
@@ -1908,7 +1895,16 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
+             "required": false,
+             "onFocus": "",
+             "onBlur": "",
              "onChange": "",
+             "labelLText": "生活保護種別",
+             "labelRText": "",
+             "labelLWidth": "100",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
              "selectedItem": "seikatsuFujo",
              "dataSource": [
               {
@@ -1960,15 +1956,6 @@
                "value": "みなし扶助"
               }
              ],
-             "required": false,
-             "labelLText": "生活保護種別",
-             "labelRText": "",
-             "labelLWidth": "100",
-             "labelRWidth": "S",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
              "disabledItem": []
             }
            ],
@@ -2005,16 +1992,17 @@
            "session": {},
            "marginTop": "Default",
            "marginBottom": "Default",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false,
+           "eraseBorder": false,
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 1,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto"
+           "height": "Auto",
+           "eraseBorderTop": false,
+           "eraseBorderBottom": false,
+           "eraseBorderRight": false,
+           "eraseBorderLeft": false
           },
           {
            "fieldName": "btnUpdataSeikatsuHogo",
@@ -2036,13 +2024,14 @@
            "selectControlID": "btnUpdataSeikatsuHogo",
            "helpMessageID": "",
            "jpControlName": "",
-           "text": "追加情報を確定する",
            "onClick": "",
-           "icon": 0,
+           "text": "追加情報を確定する",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0,
+           "heightTextBoxMatches": false
           }
          ],
          "controlType": "Panel",
@@ -2078,16 +2067,17 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorderTop": true,
-         "eraseBorderBottom": true,
-         "eraseBorderRight": true,
-         "eraseBorderLeft": true,
+         "eraseBorder": true,
          "backgroundColor": 0,
          "widthAuto": true,
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "eraseBorderTop": true,
+         "eraseBorderBottom": true,
+         "eraseBorderRight": true,
+         "eraseBorderLeft": true
         }
        ],
        "controlType": "TabPanel",
@@ -2108,7 +2098,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "title": "生活保護",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       }
      ],
      "controlType": "TabContainer",
@@ -2139,7 +2130,8 @@
      ],
      "isDraggable": false,
      "selectedItemFieldName": "tplShikakuJoho",
-     "initialTab": "0"
+     "initialTab": "0",
+     "isLazyLoading": false
     }
    ],
    "controlType": "Panel",
@@ -2236,16 +2228,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "ShikakuShutokuComplete",
@@ -2271,13 +2264,15 @@
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
-     "marginTop": 0,
+     "marginTop": "0",
      "marginBottom": 0,
      "businessId": "DBZ",
      "controlName": "KaigoKanryoMessage",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "KanryoMessage_width": "G12"
     }
    ],
@@ -2326,16 +2321,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true
   }
  ],
  "controlType": null,
@@ -2362,110 +2358,6 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "対象者検索",
-   "showWizard": true,
-   "visibleDivs": [
-    {
-     "visibleDiv": "ShikakuShutokuSearch",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "HihokenshaFinder",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "SearchResultOfHihokensha",
-     "panelState": "close",
-     "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "HihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": "該当者一覧"
-    },
-    {
-     "fieldName": "SearchResultOfHihokensha_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResultOfHihokensha_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnResearch",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "2",
-   "stateName": "該当者一覧",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "ShikakuShutokuSearch",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "HihokenshaFinder",
-     "panelState": "close",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "SearchResultOfHihokensha",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "HihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResultOfHihokensha_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": "対象者検索"
-    },
-    {
-     "fieldName": "SearchResultOfHihokensha_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": "資格取得情報入力"
-    },
-    {
-     "fieldName": "btnSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnResearch",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "3",
    "stateName": "資格取得情報入力",
    "showWizard": true,
    "visibleDivs": [
@@ -2538,34 +2430,14 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "HihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResultOfHihokensha_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResultOfHihokensha_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": "処理完了"
-    },
-    {
-     "fieldName": "btnResearch",
-     "event": "onClick",
-     "transition": "対象者検索"
     }
    ]
   },
   {
-   "order": "4",
+   "order": "2",
    "stateName": "処理完了",
    "showWizard": true,
    "visibleDivs": [
@@ -2584,27 +2456,7 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "HihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResultOfHihokensha_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "SearchResultOfHihokensha_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnResearch",
      "event": "onClick",
      "transition": ""
     }
@@ -2616,16 +2468,16 @@
  "WFParameter": [],
  "UIContainerEventMapping": [
   {
-   "alias": "jutokuTekiyo",
-   "eventName": "btnJutokuTekiyo.onClick"
+   "alias": "decide",
+   "eventName": "btnToDecide.onClick"
   },
   {
    "alias": "research",
    "eventName": "btnResearch.onClick"
   },
   {
-   "alias": "shikakuShutoku",
-   "eventName": "btnShikakuShutoku.onClick"
+   "alias": "searchResult",
+   "eventName": "btnBackSearchResult.onClick"
   }
  ],
  "loadSequencePanelNames": [
@@ -2634,12 +2486,6 @@
    "ShikakuShutokuTaishoshaJoho",
    "ShikakuShutokuComplete",
    "ShikakuShutokuJoho"
-  ],
-  [
-   "HihokenshaFinder"
-  ],
-  [
-   "SearchResultOfHihokensha"
   ],
   [
    "ShikakuShutokuCommonJoho"
@@ -2654,6 +2500,7 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "ShikakuJohoKyotsu",
@@ -2664,7 +2511,7 @@
       "fieldName": "btnSave",
       "items": [],
       "controlType": "CommonButtonComplete",
-      "width": "S",
+      "width": 2,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -2687,6 +2534,7 @@
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "heightTextBoxMatches": false,
       "additionalText": "資格情報を"
      }
     },
@@ -2696,7 +2544,7 @@
       "fieldName": "btnResearch",
       "items": [],
       "controlType": "CommonButtonUpdate",
-      "width": "S",
+      "width": 2,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -2712,20 +2560,98 @@
       "selectControlID": "btnResearch",
       "helpMessageID": "",
       "jpControlName": "",
-      "onClick": "onClick_btnResearch",
       "text": "更新",
+      "onClick": "onClick_btnResearch",
+      "icon": 0,
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "icon": 0,
+      "heightTextBoxMatches": false,
       "additionalText": "対象者検索へ"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnBackSearchResult",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnBackSearchResult",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "onClick": "onClick_btnBackSearchResult",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "該当者一覧へ"
      }
     }
    ],
    "states": [
     {
      "state": "資格取得情報入力"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  },
+  {
+   "commonButtonAreaId": "Complete",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnComplete",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "資格取得登録を"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "処理完了"
     }
    ],
    "isFinishButtonOnTheRight": false

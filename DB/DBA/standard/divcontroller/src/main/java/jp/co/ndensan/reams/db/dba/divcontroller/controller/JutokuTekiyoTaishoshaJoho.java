@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格取得処理の対象者情報を表示するためのDivControllerです。
@@ -37,10 +38,9 @@ public class JutokuTekiyoTaishoshaJoho {
     public ResponseData onClick_btnToDecide(JutokuTekiyoTaishoshaJohoDiv taishoshaJohoDiv, JutokuTekiyoSearchDiv searchDiv) {
         ResponseData<JutokuTekiyoTaishoshaJohoDiv> response = new ResponseData<>();
 
-        RString shikibetsuCode = searchDiv.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem().getShikibetsuCode();
+        RString shikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);
+        RString hihokenshaNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
         AtenaShokaiSimple.setData(taishoshaJohoDiv.getJutokuTekiyoCommonJoho().getAtenaInfo(), new ShikibetsuCode(shikibetsuCode));
-
-        RString hihokenshaNo = searchDiv.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem().getHihokenshaNo();
         setTaishoshaData(taishoshaJohoDiv, hihokenshaNo);
 
         response.data = taishoshaJohoDiv;

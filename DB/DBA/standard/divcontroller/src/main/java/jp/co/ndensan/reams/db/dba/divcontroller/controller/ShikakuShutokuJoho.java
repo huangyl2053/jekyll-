@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplRofukuNenki
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplSeikatsuHogoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplShikakuJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplShisetsuNyutaishoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.dgIryoHokenRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
@@ -33,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格取得処理を行うDivControllerです。<br/>
@@ -65,16 +65,12 @@ public class ShikakuShutokuJoho {
      */
     public ResponseData onClick_btnToDecide(ShikakuShutokuJohoDiv shikakuJohoDiv, ShikakuShutokuSearchDiv searchDiv) {
         ResponseData<ShikakuShutokuJohoDiv> response = new ResponseData<>();
-
-        dgSearchResult_Row row = searchDiv.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem();
-        RString shikibetsuCode = row.getShikibetsuCode();
+        RString shikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);
         setShikakuJoho(shikakuJohoDiv, shikibetsuCode);
         setIryoHoken(shikakuJohoDiv, shikibetsuCode);
         setRofukuNenkin(shikakuJohoDiv, shikibetsuCode);
         setSeikatsuHogo(shikakuJohoDiv, shikibetsuCode);
         setShisetsuNyutaisho(shikakuJohoDiv, shikibetsuCode);
-
-        shikakuJohoDiv.setDateOfBirth(row.getBirthDay().getValue().toDateString());
 
         response.data = shikakuJohoDiv;
         return response;
@@ -94,6 +90,7 @@ public class ShikakuShutokuJoho {
         List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
         for (HashMap hihokenshaDaichoData : hihokenshaDaichoDataList) {
             if (hihokenshaDaichoData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
+                shikakuJohoDiv.setDateOfBirth(new RString(hihokenshaDaichoData.get("生年月日").toString()));
                 dataSource = createShikakuShutokuRirekiList((List<HashMap>) hihokenshaDaichoData.get("被保台帳"));
             }
         }

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 被保険者照会対象者の基本情報を表示するパネルのコントローラです。
@@ -37,10 +38,12 @@ public class HihokenshaShikaiTaishoshaJoho {
      */
     public ResponseData onClick_btnToDecide(HihokenshaShikaiTaishoshaJohoDiv johoDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
         ResponseData<HihokenshaShikaiTaishoshaJohoDiv> response = new ResponseData<>();
-        dgSearchResult_Row clickedRow = searchDiv.getSearchResult().getDgSearchResult().getClickedItem();
 
-        AtenaShokaiSimple.setData(johoDiv.getHihokenshaShokaiCommonJoho().getAtenaInfo(), new ShikibetsuCode(clickedRow.getShikibetsuCode()));
-        setDbData(johoDiv.getHihokenshaShokaiDbJoho(), clickedRow.getHihokenshaNo());
+        RString shikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);
+        RString hihokenshaNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
+
+        AtenaShokaiSimple.setData(johoDiv.getHihokenshaShokaiCommonJoho().getAtenaInfo(), new ShikibetsuCode(shikibetsuCode));
+        setDbData(johoDiv.getHihokenshaShokaiDbJoho(), hihokenshaNo);
         response.data = johoDiv;
         return response;
     }

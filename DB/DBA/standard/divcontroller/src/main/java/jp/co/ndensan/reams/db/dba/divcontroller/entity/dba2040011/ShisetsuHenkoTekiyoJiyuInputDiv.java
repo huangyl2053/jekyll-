@@ -23,10 +23,10 @@ public class ShisetsuHenkoTekiyoJiyuInputDiv extends Panel {
      */
     @JsonProperty("txtShisetsuHenkoTekiyoJiyu")
     private TextBox txtShisetsuHenkoTekiyoJiyu;
-    @JsonProperty("txtShisetsuHenkoTekiyoTodokedeDate")
-    private TextBoxFlexibleDate txtShisetsuHenkoTekiyoTodokedeDate;
     @JsonProperty("txtShisetsuHenkoTekiyoDate")
     private TextBoxFlexibleDate txtShisetsuHenkoTekiyoDate;
+    @JsonProperty("txtShisetsuHenkoTekiyoTodokedeDate")
+    private TextBoxFlexibleDate txtShisetsuHenkoTekiyoTodokedeDate;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -44,16 +44,6 @@ public class ShisetsuHenkoTekiyoJiyuInputDiv extends Panel {
         this.txtShisetsuHenkoTekiyoJiyu=txtShisetsuHenkoTekiyoJiyu;
     }
 
-    @JsonProperty("txtShisetsuHenkoTekiyoTodokedeDate")
-    public TextBoxFlexibleDate getTxtShisetsuHenkoTekiyoTodokedeDate() {
-        return txtShisetsuHenkoTekiyoTodokedeDate;
-    }
-
-    @JsonProperty("txtShisetsuHenkoTekiyoTodokedeDate")
-    public void setTxtShisetsuHenkoTekiyoTodokedeDate(TextBoxFlexibleDate txtShisetsuHenkoTekiyoTodokedeDate) {
-        this.txtShisetsuHenkoTekiyoTodokedeDate=txtShisetsuHenkoTekiyoTodokedeDate;
-    }
-
     @JsonProperty("txtShisetsuHenkoTekiyoDate")
     public TextBoxFlexibleDate getTxtShisetsuHenkoTekiyoDate() {
         return txtShisetsuHenkoTekiyoDate;
@@ -62,6 +52,16 @@ public class ShisetsuHenkoTekiyoJiyuInputDiv extends Panel {
     @JsonProperty("txtShisetsuHenkoTekiyoDate")
     public void setTxtShisetsuHenkoTekiyoDate(TextBoxFlexibleDate txtShisetsuHenkoTekiyoDate) {
         this.txtShisetsuHenkoTekiyoDate=txtShisetsuHenkoTekiyoDate;
+    }
+
+    @JsonProperty("txtShisetsuHenkoTekiyoTodokedeDate")
+    public TextBoxFlexibleDate getTxtShisetsuHenkoTekiyoTodokedeDate() {
+        return txtShisetsuHenkoTekiyoTodokedeDate;
+    }
+
+    @JsonProperty("txtShisetsuHenkoTekiyoTodokedeDate")
+    public void setTxtShisetsuHenkoTekiyoTodokedeDate(TextBoxFlexibleDate txtShisetsuHenkoTekiyoTodokedeDate) {
+        this.txtShisetsuHenkoTekiyoTodokedeDate=txtShisetsuHenkoTekiyoTodokedeDate;
     }
 
 }

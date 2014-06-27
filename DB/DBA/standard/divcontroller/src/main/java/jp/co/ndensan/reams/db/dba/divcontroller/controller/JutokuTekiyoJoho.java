@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格取得処理を行うDivControllerです。<br/>
@@ -64,8 +65,7 @@ public class JutokuTekiyoJoho {
      */
     public ResponseData onClick_btnToDecide(JutokuTekiyoJohoDiv jutokuTekiyoJohoDiv, JutokuTekiyoSearchDiv searchDiv) {
         ResponseData<JutokuTekiyoJohoDiv> response = new ResponseData<>();
-
-        RString shikibetsuCode = searchDiv.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem().getShikibetsuCode();
+        RString shikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);
         setShikakuJoho(jutokuTekiyoJohoDiv, shikibetsuCode);
         setIryoHoken(jutokuTekiyoJohoDiv, shikibetsuCode);
         setRofukuNenkin(jutokuTekiyoJohoDiv, shikibetsuCode);
