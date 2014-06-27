@@ -2852,7 +2852,7 @@
      "jpControlName": "",
      "onLoad": "",
      "title": "認定調査委託先/認定調査員",
-     "isOpen": true,
+     "isOpen": false,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
@@ -3921,7 +3921,7 @@
      "controlType": "Button",
      "width": "M",
      "visible": true,
-     "displayNone": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -4197,6 +4197,11 @@
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnCommonSaveShinsei",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -4302,6 +4307,11 @@
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnCommonSaveShinsei",
+     "event": "onClick",
+     "transition": "登録確認"
     }
    ]
   },
@@ -4344,11 +4354,16 @@
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
+    },
+    {
+     "fieldName": "btnCommonSaveShinsei",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "申請情報入力",
  "id": "DBE1010001",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -4453,6 +4468,52 @@
    "states": [
     {
      "state": "登録確認"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  },
+  {
+   "commonButtonAreaId": "editShiseiContent",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonUpdate",
+     "buttonProperty": {
+      "fieldName": "btnCommonSaveShinsei",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCommonSaveShinsei",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "申請を登録する",
+      "onClick": "onClick_btnToSaveShinsei",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "申請を",
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "申請情報入力"
     }
    ],
    "isFinishButtonOnTheRight": false
