@@ -158,6 +158,8 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv sokujikouseiKiwarigakuDiv = tabSokujiKouseiDiv.getSokujiKoseiTab1().getSokujikouseiKiwarigaku();
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoKoseiMaeSum().setText(new RString(kiwarigakuDataTokubetsu.get(0).get("特徴更正前合計").toString()));
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoKoseiGoSum().setText(new RString(kiwarigakuDataTokubetsu.get(0).get("特徴更正後合計").toString()));
+        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoZogenSum().setText(new RString(kiwarigakuDataTokubetsu.get(0).get("特徴増減合計").toString()));
+        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoNofugakuSum().setText(new RString(kiwarigakuDataTokubetsu.get(0).get("特徴納付額合計").toString()));
     }
 
     private void setKiwarigakuFucho(
@@ -500,6 +502,8 @@ public class SokujiFukaKouseiMain {
         SokujikouseiKiwarigakuDiv sokujikouseiKiwarigakuDiv = tabSokujiKouseiDiv.getSokujiKoseiTab1().getSokujikouseiKiwarigaku();
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoKoseiMaeSum().setText(new RString(kiwarigakuDataFuchoGokei.get(0).get("普徴更正前合計").toString()));
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoKoseiGoSum().setText(new RString(kiwarigakuDataFuchoGokei.get(0).get("普徴更正後合計").toString()));
+        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoZogenSum().setText(new RString(kiwarigakuDataFuchoGokei.get(0).get("普徴増減合計").toString()));
+        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoNofugakuSum().setText(new RString(kiwarigakuDataFuchoGokei.get(0).get("普徴納付額合計").toString()));
     }
 
     private void setSokujikouseiKey(SokujiFukaKouseiMainDiv sokujiFukaKouseiMainDiv, List<HashMap> fukaKoseiData) {
@@ -518,7 +522,7 @@ public class SokujiFukaKouseiMain {
                 FukakonkyoMaeDiv fukakonkyoMaeDiv = taSokujiKouseiDiv.getSokujiKoseiTab1().getSokujikouseiFukakonkyo().getFukakonkyoMae();
 
                 fukakonkyoMaeDiv.getTxtShikakushutokuYMD1().setValue(new FlexibleDate(cg.getAsRString("資格取得日")));
-                fukakonkyoMaeDiv.getTxtSeihoShuryoYMD1().setValue(new FlexibleDate(cg.getAsRString("資格喪失日")));
+                fukakonkyoMaeDiv.getTxtShikakusoshitsuYMD1().setValue(new FlexibleDate(cg.getAsRString("資格喪失日")));
                 fukakonkyoMaeDiv.getTxtSeihoKaishiYMD1().setValue(new FlexibleDate(cg.getAsRString("生保開始日")));
                 fukakonkyoMaeDiv.getTxtSeihoShuryoYMD1().setValue(new FlexibleDate(cg.getAsRString("生保終了日")));
                 fukakonkyoMaeDiv.getTxtHonninKazei1().setValue(cg.getAsRString("本人課税"));
@@ -532,7 +536,7 @@ public class SokujiFukaKouseiMain {
                 FukakonkyoAtoDiv fukakonkyoAtoDiv = taSokujiKouseiDiv.getSokujiKoseiTab1().getSokujikouseiFukakonkyo().getFukakonkyoAto();
 
                 fukakonkyoAtoDiv.getTxtShikakushutokuYMD2().setValue(new FlexibleDate(cg.getAsRString("資格取得日")));
-                fukakonkyoAtoDiv.getTxtSeihoShuryoYMD2().setValue(new FlexibleDate(cg.getAsRString("資格喪失日")));
+                fukakonkyoAtoDiv.getTxtShikakusoshitsuYMD2().setValue(new FlexibleDate(cg.getAsRString("資格喪失日")));
                 fukakonkyoAtoDiv.getTxtSeihoKaishiYMD2().setValue(new FlexibleDate(cg.getAsRString("生保開始日")));
                 fukakonkyoAtoDiv.getTxtSeihoShuryoYMD2().setValue(new FlexibleDate(cg.getAsRString("生保終了日")));
                 fukakonkyoAtoDiv.getTxtHonninKazei2().setValue(cg.getAsRString("本人課税"));
