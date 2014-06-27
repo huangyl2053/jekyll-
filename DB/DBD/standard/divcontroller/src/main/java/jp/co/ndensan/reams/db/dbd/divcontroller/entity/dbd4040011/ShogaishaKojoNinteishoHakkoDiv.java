@@ -1,14 +1,17 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4040011;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4040011.ShogaishaKojoNinteishoDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4040011.ShogaishaKojoTaishoshaDetailDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShogaishaKojoNinteishoHakko のクラスファイル
- *
+ * ShogaishaKojoNinteishoHakko のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ShogaishaKojoNinteishoHakkoDiv extends Panel {
@@ -18,7 +21,6 @@ public class ShogaishaKojoNinteishoHakkoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("ShogaishaKojoTaishoshaDetail")
     private ShogaishaKojoTaishoshaDetailDiv ShogaishaKojoTaishoshaDetail;
     @JsonProperty("ShogaishaKojoNinteisho")
@@ -37,7 +39,7 @@ public class ShogaishaKojoNinteishoHakkoDiv extends Panel {
 
     @JsonProperty("ShogaishaKojoTaishoshaDetail")
     public void setShogaishaKojoTaishoshaDetail(ShogaishaKojoTaishoshaDetailDiv ShogaishaKojoTaishoshaDetail) {
-        this.ShogaishaKojoTaishoshaDetail = ShogaishaKojoTaishoshaDetail;
+        this.ShogaishaKojoTaishoshaDetail=ShogaishaKojoTaishoshaDetail;
     }
 
     @JsonProperty("ShogaishaKojoNinteisho")
@@ -47,7 +49,7 @@ public class ShogaishaKojoNinteishoHakkoDiv extends Panel {
 
     @JsonProperty("ShogaishaKojoNinteisho")
     public void setShogaishaKojoNinteisho(ShogaishaKojoNinteishoDiv ShogaishaKojoNinteisho) {
-        this.ShogaishaKojoNinteisho = ShogaishaKojoNinteisho;
+        this.ShogaishaKojoNinteisho=ShogaishaKojoNinteisho;
     }
 
 }

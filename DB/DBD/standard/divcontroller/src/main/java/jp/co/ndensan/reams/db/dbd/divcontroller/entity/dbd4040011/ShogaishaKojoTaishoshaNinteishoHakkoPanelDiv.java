@@ -1,16 +1,18 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4040011;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4040011.ShogaishaKojoNinteishoHakkoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShogaishaKojoTaishoshaNinteishoHakkoPanel のクラスファイル
- *
+ * ShogaishaKojoTaishoshaNinteishoHakkoPanel のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv extends Panel {
@@ -20,9 +22,8 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("TaishoshaAtena")
-    private AtenaShokaiSimpleDiv TaishoshaAtena;
+    private KaigoAtenaInfoDiv TaishoshaAtena;
     @JsonProperty("TaishoshaKaigoShikaku")
     private KaigoShikakuKihonDiv TaishoshaKaigoShikaku;
     @JsonProperty("ShogaishaKojoNinteishoHakko")
@@ -35,13 +36,13 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("TaishoshaAtena")
-    public AtenaShokaiSimpleDiv getTaishoshaAtena() {
+    public KaigoAtenaInfoDiv getTaishoshaAtena() {
         return TaishoshaAtena;
     }
 
     @JsonProperty("TaishoshaAtena")
-    public void setTaishoshaAtena(AtenaShokaiSimpleDiv TaishoshaAtena) {
-        this.TaishoshaAtena = TaishoshaAtena;
+    public void setTaishoshaAtena(KaigoAtenaInfoDiv TaishoshaAtena) {
+        this.TaishoshaAtena=TaishoshaAtena;
     }
 
     @JsonProperty("TaishoshaKaigoShikaku")
@@ -51,7 +52,7 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv extends Panel {
 
     @JsonProperty("TaishoshaKaigoShikaku")
     public void setTaishoshaKaigoShikaku(KaigoShikakuKihonDiv TaishoshaKaigoShikaku) {
-        this.TaishoshaKaigoShikaku = TaishoshaKaigoShikaku;
+        this.TaishoshaKaigoShikaku=TaishoshaKaigoShikaku;
     }
 
     @JsonProperty("ShogaishaKojoNinteishoHakko")
@@ -61,7 +62,7 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv extends Panel {
 
     @JsonProperty("ShogaishaKojoNinteishoHakko")
     public void setShogaishaKojoNinteishoHakko(ShogaishaKojoNinteishoHakkoDiv ShogaishaKojoNinteishoHakko) {
-        this.ShogaishaKojoNinteishoHakko = ShogaishaKojoNinteishoHakko;
+        this.ShogaishaKojoNinteishoHakko=ShogaishaKojoNinteishoHakko;
     }
 
 }

@@ -7,19 +7,15 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4040011.ShogaishaKojoNinteishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4040011.ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4040011.ShogaishaKojoTaishoshaNinteishoHakkoSearchPanelDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 障害者控除対象者認定書を個別発行する場合の障害者控除対象者情報を制御します。
@@ -78,7 +74,7 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanel {
     private void set基本情報(dgSearchResult_Row row, ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv hakkoPanel) {
         //TODO 塚田（finder改修により？）識別コードが取れなくなったので現状決めうちで与える。yamlにしてしまってもいいかも
 //        AtenaShokaiSimple.setData(atenaDiv, new ShikibetsuCode(row.getShikibetsuCode()));
-        AtenaShokaiSimple.setData(hakkoPanel.getTaishoshaAtena(), new ShikibetsuCode(new RString("012345678901234")));
+        AtenaShokaiSimple.setData(hakkoPanel.getTaishoshaAtena().getAtenaInfo(), new ShikibetsuCode(new RString("012345678901234")));
     }
 
     private void set介護情報(int rowId, ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv hakkoPanel) {
@@ -115,10 +111,10 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanel {
 
         hakkoPanel.getShogaishaKojoNinteishoHakko().getShogaishaKojoNinteisho().
                 getShogaishaKojoShinseisha().getTxtShinseishaName().setValue(
-                        hakkoPanel.getTaishoshaAtena().getTxtAtenaMeisho().getValue());
+                        hakkoPanel.getTaishoshaAtena().getAtenaInfo().getTxtAtenaMeisho().getValue());
 
         hakkoPanel.getShogaishaKojoNinteishoHakko().getShogaishaKojoNinteisho().
                 getShogaishaKojoShinseisha().getTxtShinseishaJusho().setValue(
-                        hakkoPanel.getTaishoshaAtena().getTxtJusho().getValue());
+                        hakkoPanel.getTaishoshaAtena().getAtenaInfo().getTxtJusho().getValue());
     }
 }
