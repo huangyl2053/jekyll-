@@ -17,6 +17,24 @@
    "toLayoutSubGyomuCode": "DBB",
    "toLayoutName": "DBB0320001",
    "toEventName": ""
+  },
+  {
+   "id": "2",
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320001",
+   "eventName": "fukaShokai",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320002",
+   "toEventName": "atenaLoad"
+  },
+  {
+   "id": "3",
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320002",
+   "eventName": "fukaShokai",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toEventName": ""
   }
  ],
  "subGyomuCode": "DBB",

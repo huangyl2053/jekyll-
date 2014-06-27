@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -31,8 +32,10 @@ public class FukakonkyoAndKiwari {
 
     private static final RString FUKAKONKYO = new RString("FukaKonkyo.yml");
 
-    public ResponseData<FukakonkyoAndKiwariDiv> onSelect(FukakonkyoAndKiwariDiv div, FukaRirekiDiv rirekiDiv) {
+    public ResponseData<FukakonkyoAndKiwariDiv> onSelect(FukakonkyoAndKiwariDiv div) {
 
+        FukaRirekiDiv rirekiDiv = (FukaRirekiDiv) ViewStateHolder.get("賦課履歴", FukaRirekiDiv.class);
+        
         div.setDisplayNone(false);
 
         loadFukaKonkyoAndKiwarigaku(div, rirekiDiv, "select");
