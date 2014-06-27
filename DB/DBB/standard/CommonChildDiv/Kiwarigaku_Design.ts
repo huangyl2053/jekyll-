@@ -3076,7 +3076,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -3125,7 +3125,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -3338,7 +3338,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -3387,7 +3387,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -3583,7 +3583,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -3681,7 +3681,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -3730,7 +3730,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -3943,7 +3943,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -3992,7 +3992,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -4188,7 +4188,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -4286,7 +4286,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -4335,7 +4335,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -4548,7 +4548,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -4597,7 +4597,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -4793,7 +4793,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -4891,7 +4891,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -4940,7 +4940,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -5153,7 +5153,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -5202,7 +5202,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -5398,7 +5398,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -5496,7 +5496,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -5545,7 +5545,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -5758,7 +5758,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -5807,7 +5807,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -6003,7 +6003,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -6101,7 +6101,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -6150,7 +6150,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -6363,7 +6363,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -6412,7 +6412,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -6625,7 +6625,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -6674,7 +6674,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -6887,7 +6887,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -6936,7 +6936,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -7105,7 +7105,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -7176,7 +7176,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -7225,7 +7225,7 @@ module DBB {
          "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
+         "text": "",
          "isPrivateInfo": false,
          "decorationClass": ""
         }

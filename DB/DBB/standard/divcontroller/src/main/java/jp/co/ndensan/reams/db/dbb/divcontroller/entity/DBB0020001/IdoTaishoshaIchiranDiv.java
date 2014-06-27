@@ -30,10 +30,6 @@ public class IdoTaishoshaIchiranDiv extends Panel {
     private DropDownList ddlSakuseiYMD;
     @JsonProperty("dgIdoTaishoshaIchiran")
     private DataGrid<dgIdoTaishoshaIchiran_Row> dgIdoTaishoshaIchiran;
-    @JsonProperty("btnHozonIdoTaishoshaIchiran")
-    private Button btnHozonIdoTaishoshaIchiran;
-    @JsonProperty("btnHakkoIdoTaishoshaIchiran")
-    private Button btnHakkoIdoTaishoshaIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -79,26 +75,6 @@ public class IdoTaishoshaIchiranDiv extends Panel {
     @JsonProperty("dgIdoTaishoshaIchiran")
     public void setDgIdoTaishoshaIchiran(DataGrid<dgIdoTaishoshaIchiran_Row> dgIdoTaishoshaIchiran) {
         this.dgIdoTaishoshaIchiran=dgIdoTaishoshaIchiran;
-    }
-
-    @JsonProperty("btnHozonIdoTaishoshaIchiran")
-    public Button getBtnHozonIdoTaishoshaIchiran() {
-        return btnHozonIdoTaishoshaIchiran;
-    }
-
-    @JsonProperty("btnHozonIdoTaishoshaIchiran")
-    public void setBtnHozonIdoTaishoshaIchiran(Button btnHozonIdoTaishoshaIchiran) {
-        this.btnHozonIdoTaishoshaIchiran=btnHozonIdoTaishoshaIchiran;
-    }
-
-    @JsonProperty("btnHakkoIdoTaishoshaIchiran")
-    public Button getBtnHakkoIdoTaishoshaIchiran() {
-        return btnHakkoIdoTaishoshaIchiran;
-    }
-
-    @JsonProperty("btnHakkoIdoTaishoshaIchiran")
-    public void setBtnHakkoIdoTaishoshaIchiran(Button btnHakkoIdoTaishoshaIchiran) {
-        this.btnHakkoIdoTaishoshaIchiran=btnHakkoIdoTaishoshaIchiran;
     }
 
 }

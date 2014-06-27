@@ -30,7 +30,7 @@ var DBZ;
                             "fieldName": "btnAddShisetsuNyutaisho",
                             "items": [],
                             "controlType": "Button",
-                            "width": "180",
+                            "width": "200",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -43,18 +43,23 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "btnAddShisetsuNyutaisho",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onClick": "onClick_btnAddShisetsuNyutaisho",
                             "text": "新規施設入退所を追加する",
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
-                            "imageHeight": ""
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
                         },
                         {
                             "fieldName": "dgShisetsuNyutaishoRireki",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "990",
+                            "width": "1010",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -67,61 +72,30 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "0",
                             "marginRight": "0",
+                            "selectControlID": "dgShisetsuNyutaishoRireki",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "S",
                             "gridSetting": {
                                 "rowHeight": 25,
                                 "isMultiSelectable": false,
+                                "isShowHeader": true,
                                 "isShowFooter": true,
                                 "isShowFilter": false,
                                 "isShowFilterButton": false,
                                 "isShowRowState": true,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": true,
+                                "isShowDeleteButtonColumn": true,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
                                 "header": {
                                     "combineColumns": [],
                                     "frozenColumn": "",
                                     "headerHeight": 0
                                 },
                                 "columns": [
-                                    {
-                                        "columnName": "",
-                                        "dataName": "btnSelect",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 25,
-                                        "visible": true,
-                                        "cellType": 8,
-                                        "cellDetails": {
-                                            "cellType": 8,
-                                            "text": "",
-                                            "onClick": "onClick_btnSelectShisetsuNyutaisho",
-                                            "imageFileUrl": "/uz/uza/css/Edit.png",
-                                            "imageWidth": "20",
-                                            "imageHeight": "20"
-                                        },
-                                        "align": 1,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": "btnSelect"
-                                    },
-                                    {
-                                        "columnName": "",
-                                        "dataName": "btnDelete",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 25,
-                                        "visible": true,
-                                        "cellType": 8,
-                                        "cellDetails": {
-                                            "cellType": 8,
-                                            "text": "",
-                                            "onClick": "onClick_btnDeleteShisetsuNyutaisho",
-                                            "imageFileUrl": "/uz/uza/css/Delete.png",
-                                            "imageWidth": "15",
-                                            "imageHeight": "15"
-                                        },
-                                        "align": 1,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": "btnDelete"
-                                    },
                                     {
                                         "columnName": "入所日",
                                         "dataName": "nyushoDate",
@@ -134,9 +108,11 @@ var DBZ;
                                             "cellType": 7,
                                             "ymdKubun": 2,
                                             "displayFormat": 0,
-                                            "onChange": ""
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
                                         },
-                                        "align": 0,
+                                        "align": 1,
                                         "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": "nyushoDate"
@@ -153,12 +129,14 @@ var DBZ;
                                             "cellType": 7,
                                             "ymdKubun": 2,
                                             "displayFormat": 0,
-                                            "onChange": ""
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
                                         },
-                                        "align": 0,
+                                        "align": 1,
                                         "resize": true,
                                         "isPrivateInfo": false,
-                                        "sortKey": "taishoDate"
+                                        "sortKey": ""
                                     },
                                     {
                                         "columnName": "施設コード",
@@ -174,7 +152,7 @@ var DBZ;
                                         "align": 1,
                                         "resize": true,
                                         "isPrivateInfo": false,
-                                        "sortKey": "shisetsuCode"
+                                        "sortKey": ""
                                     },
                                     {
                                         "columnName": "施設名称",
@@ -190,7 +168,7 @@ var DBZ;
                                         "align": 0,
                                         "resize": true,
                                         "isPrivateInfo": false,
-                                        "sortKey": "shisetsuMeisho"
+                                        "sortKey": ""
                                     },
                                     {
                                         "columnName": "入所施設",
@@ -204,7 +182,21 @@ var DBZ;
                                         "align": 0,
                                         "resize": true,
                                         "isPrivateInfo": false,
-                                        "sortKey": "shisetsu"
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "対象情報key",
+                                        "dataName": "taishoJohoKey",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
                                     },
                                     {
                                         "columnName": "対象情報",
@@ -218,7 +210,21 @@ var DBZ;
                                         "align": 0,
                                         "resize": true,
                                         "isPrivateInfo": false,
-                                        "sortKey": "taishoJoho"
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "施設種類key",
+                                        "dataName": "shisetsuShuruiKey",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
                                     },
                                     {
                                         "columnName": "施設種類",
@@ -232,16 +238,18 @@ var DBZ;
                                         "align": 0,
                                         "resize": true,
                                         "isPrivateInfo": false,
-                                        "sortKey": "shisetsuShurui"
+                                        "sortKey": ""
                                     }
                                 ]
                             },
-                            "height": "S",
                             "onSort": "",
                             "onSelect": "",
                             "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "onSelectByModifyButton_dgShisetsuNyutaishoRireki",
+                            "onSelectByDeleteButton": "onSelectByDeleteButton_dgShisetsuNyutaishoRireki",
                             "onOnlyRow": "",
-                            "onNoRow": "",
+                            "onNoRow": "onNoRow_dgShisetsuNyutaishoRireki",
                             "onMultiRows": "",
                             "dataSource": [],
                             "sortOrder": "shisetsuShurui",
@@ -256,7 +264,7 @@ var DBZ;
                                     "fieldName": "ddlTaishoJoho",
                                     "items": [],
                                     "controlType": "DropDownList",
-                                    "width": "190",
+                                    "width": "200",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -269,17 +277,17 @@ var DBZ;
                                     "authorityMode": 0,
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
+                                    "selectControlID": "ddlTaishoJoho_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
                                     "dataSource": [
-                                        {
-                                            "key": "",
-                                            "value": ""
-                                        },
                                         {
                                             "key": "kannai",
                                             "value": "管内施設"
                                         },
                                         {
-                                            "key": "jushochiTokurei",
+                                            "key": "jutoku",
                                             "value": "住所地特例措置"
                                         },
                                         {
@@ -287,21 +295,22 @@ var DBZ;
                                             "value": "適用除外措置"
                                         },
                                         {
-                                            "key": "tashichosonJushochiTokurei",
+                                            "key": "tashichosonJutoku",
                                             "value": "他市町村住所地特例措置"
                                         }
                                     ],
-                                    "onChange": "",
-                                    "selectedItem": "",
+                                    "onChange": "onChange_ddlTaishoJoho",
+                                    "selectedItem": "kannai",
                                     "required": false,
                                     "labelLText": "対象情報",
                                     "labelRText": "",
-                                    "labelLWidth": "60",
+                                    "labelLWidth": "70",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
                                     "onFocus": "",
-                                    "onBlur": ""
+                                    "onBlur": "",
+                                    "disabledItem": []
                                 },
                                 {
                                     "fieldName": "txtNyushoDate",
@@ -320,26 +329,29 @@ var DBZ;
                                     "authorityMode": 0,
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
+                                    "selectControlID": "txtNyushoDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
                                     "text": "",
                                     "onChange": "",
                                     "required": false,
                                     "labelLText": "入所日",
                                     "labelRText": "",
-                                    "labelLWidth": "45]",
+                                    "labelLWidth": "50",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
                                     "onFocus": "",
                                     "onBlur": "",
-                                    "readOnly": false,
                                     "placeHolder": "",
-                                    "textKind": 0,
                                     "isPrivateInfo": false,
                                     "isPassword": false,
                                     "onKeyPress": "",
                                     "ymdKubun": 2,
                                     "displayFormat": 0,
                                     "value": "",
+                                    "textKind": 0,
                                     "permitCharactor": "./_-"
                                 },
                                 {
@@ -359,113 +371,36 @@ var DBZ;
                                     "authorityMode": 0,
                                     "marginLeft": "0",
                                     "marginRight": "XS",
+                                    "selectControlID": "txtTaishoDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
                                     "text": "",
                                     "onChange": "",
                                     "required": false,
                                     "labelLText": "退所日",
                                     "labelRText": "",
-                                    "labelLWidth": "45",
+                                    "labelLWidth": "50",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
                                     "onFocus": "",
                                     "onBlur": "",
-                                    "readOnly": false,
                                     "placeHolder": "",
-                                    "textKind": 0,
                                     "isPrivateInfo": false,
                                     "isPassword": false,
                                     "onKeyPress": "",
                                     "ymdKubun": 2,
                                     "displayFormat": 0,
                                     "value": "",
+                                    "textKind": 0,
                                     "permitCharactor": "./_-"
                                 },
                                 {
-                                    "fieldName": "radShisetsuShurui",
+                                    "fieldName": "ShisetsuJoho",
                                     "items": [],
-                                    "controlType": "RadioButton",
-                                    "width": "300",
-                                    "visible": true,
-                                    "displayNone": false,
-                                    "disabled": false,
-                                    "accessKey": "",
-                                    "nextFocusFieldName": "",
-                                    "wrap": true,
-                                    "dependencies": [],
-                                    "float": 0,
-                                    "toolTip": "",
-                                    "authorityMode": 0,
-                                    "marginLeft": "XS",
-                                    "marginRight": "XS",
-                                    "onClick": "",
-                                    "dataSource": [
-                                        {
-                                            "key": "kaigoHokenShisetsu",
-                                            "value": "介護保険施設"
-                                        },
-                                        {
-                                            "key": "other",
-                                            "value": "その他特例施設"
-                                        }
-                                    ],
-                                    "onChange": "",
-                                    "selectedItem": "kaigoHokenShisetsu",
-                                    "required": false,
-                                    "labelLText": "",
-                                    "labelLWidth": "S",
-                                    "labelLAlign": 2,
-                                    "newLineItemNumber": 2,
-                                    "spaceSize": 1
-                                },
-                                {
-                                    "fieldName": "txtShisetsuCode",
-                                    "items": [],
-                                    "controlType": "TextBoxCode",
-                                    "width": "90",
-                                    "visible": true,
-                                    "displayNone": false,
-                                    "disabled": false,
-                                    "accessKey": "",
-                                    "nextFocusFieldName": "",
-                                    "wrap": true,
-                                    "dependencies": [],
-                                    "float": 0,
-                                    "toolTip": "",
-                                    "authorityMode": 0,
-                                    "marginLeft": "XS",
-                                    "marginRight": "XS",
-                                    "text": "",
-                                    "onChange": "",
-                                    "required": false,
-                                    "labelLText": "入所施設",
-                                    "labelRText": "",
-                                    "labelLWidth": "60",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 2,
-                                    "labelRAlign": 0,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "readOnly": false,
-                                    "placeHolder": "",
-                                    "textKind": 2,
-                                    "isPrivateInfo": false,
-                                    "isPassword": false,
-                                    "onKeyPress": "",
-                                    "value": "",
-                                    "maxLength": 1000000000000,
-                                    "minLength": 0,
-                                    "textAlign": 0,
-                                    "isComboBox": false,
-                                    "suggest": [],
-                                    "permitCharactor": "",
-                                    "formatLength": "10"
-                                },
-                                {
-                                    "fieldName": "btnJigyoshaInputGuide",
-                                    "items": [],
-                                    "controlType": "ButtonDialog",
-                                    "width": "20",
+                                    "controlType": "CommonChildDiv",
+                                    "width": "XS",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -478,148 +413,29 @@ var DBZ;
                                     "authorityMode": 0,
                                     "marginLeft": "0",
                                     "marginRight": "0",
-                                    "onClick": "",
-                                    "text": "■",
-                                    "appearance": 1,
-                                    "imageFileUrl": "/uz/uza/css/rireki_brue.png",
-                                    "imageWidth": "20",
-                                    "imageHeight": "20",
-                                    "displayChildDivName": "DBZ.JigyoshaInputGuide",
-                                    "dataPassing": [
-                                        {
-                                            "key": "jigyoshaCode",
-                                            "controlName": "txtShisetsuCode"
-                                        },
-                                        {
-                                            "key": "jigyoshaMeisho",
-                                            "controlName": "txtShisetsuMeisho"
-                                        }
-                                    ],
-                                    "visibleCloseButton": true,
-                                    "onOkClose": "",
-                                    "onBeforeOpenDialog": ""
-                                },
-                                {
-                                    "fieldName": "btnOtherTokureiShisetsuInputGuide",
-                                    "items": [],
-                                    "controlType": "ButtonDialog",
-                                    "width": "20",
-                                    "visible": true,
-                                    "displayNone": true,
-                                    "disabled": false,
-                                    "accessKey": "",
-                                    "nextFocusFieldName": "",
-                                    "wrap": false,
-                                    "dependencies": [],
-                                    "float": 0,
-                                    "toolTip": "",
-                                    "authorityMode": 0,
-                                    "marginLeft": "0",
-                                    "marginRight": "0",
-                                    "onClick": "",
-                                    "text": "■",
-                                    "appearance": 1,
-                                    "imageFileUrl": "/uz/uza/css/rireki_brue.png",
-                                    "imageWidth": "20",
-                                    "imageHeight": "20",
-                                    "displayChildDivName": "DBZ.OtherTokureiShisetsuInputGuide",
-                                    "dataPassing": [
-                                        {
-                                            "key": "otherShisetsuCode",
-                                            "controlName": "txtShisetsuCode"
-                                        },
-                                        {
-                                            "key": "otherShisetsuMeisho",
-                                            "controlName": "txtShisetsuMeisho"
-                                        }
-                                    ],
-                                    "visibleCloseButton": true,
-                                    "onOkClose": "",
-                                    "onBeforeOpenDialog": ""
-                                },
-                                {
-                                    "fieldName": "btnJogaiShisetsuInputGuide",
-                                    "items": [],
-                                    "controlType": "ButtonDialog",
-                                    "width": "20",
-                                    "visible": true,
-                                    "displayNone": true,
-                                    "disabled": false,
-                                    "accessKey": "",
-                                    "nextFocusFieldName": "",
-                                    "wrap": false,
-                                    "dependencies": [],
-                                    "float": 0,
-                                    "toolTip": "",
-                                    "authorityMode": 0,
-                                    "marginLeft": "0",
-                                    "marginRight": "0",
-                                    "onClick": "",
-                                    "text": "■",
-                                    "appearance": 1,
-                                    "imageFileUrl": "/uz/uza/css/rireki_brue.png",
-                                    "imageWidth": "20",
-                                    "imageHeight": "20",
-                                    "displayChildDivName": "DBZ.TekiyoJogaiShisetsuInputGuide",
-                                    "dataPassing": [
-                                        {
-                                            "key": "otherShisetsuCode",
-                                            "controlName": "txtShisetsuCode"
-                                        },
-                                        {
-                                            "key": "otherShisetsuMeisho",
-                                            "controlName": "txtShisetsuMeisho"
-                                        }
-                                    ],
-                                    "visibleCloseButton": true,
-                                    "onOkClose": "",
-                                    "onBeforeOpenDialog": ""
-                                },
-                                {
-                                    "fieldName": "txtShisetsuMeisho",
-                                    "items": [],
-                                    "controlType": "TextBox",
-                                    "width": "450",
-                                    "visible": true,
-                                    "displayNone": false,
-                                    "disabled": false,
-                                    "accessKey": "",
-                                    "nextFocusFieldName": "",
-                                    "wrap": false,
-                                    "dependencies": [],
-                                    "float": 0,
-                                    "toolTip": "",
-                                    "authorityMode": 0,
-                                    "marginLeft": "XS",
-                                    "marginRight": "XS",
-                                    "text": "",
-                                    "onChange": "",
-                                    "required": false,
-                                    "labelLText": "",
-                                    "labelRText": "",
-                                    "labelLWidth": "S",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 2,
-                                    "labelRAlign": 0,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "readOnly": true,
-                                    "placeHolder": "",
-                                    "textKind": 0,
-                                    "isPrivateInfo": false,
-                                    "isPassword": false,
-                                    "onKeyPress": "",
-                                    "value": "",
-                                    "maxLength": 1000000000000,
-                                    "minLength": 0,
-                                    "textAlign": 0,
-                                    "isComboBox": false,
-                                    "suggest": [],
-                                    "permitCharactor": ""
+                                    "selectControlID": "ShisetsuJoho",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "relation": [],
+                                    "businessId": "DBZ",
+                                    "controlName": "ShisetsuJoho",
+                                    "marginTop": 0,
+                                    "marginBottom": 0,
+                                    "originalProperty": [],
+                                    "dataPassingForDialog": [],
+                                    "dialogOkEventNameForDialog": "",
+                                    "dialogCancelEventNameForDialog": "",
+                                    "canTransferEvent": true,
+                                    "heightForDialog": "M",
+                                    "btnJigyoshaInputGuide_displayNone": false,
+                                    "btnOtherTokureiShisetsuInputGuide_displayNone": true,
+                                    "btnJogaiShisetsuInputGuide_displayNone": true,
+                                    "radShisetsuShurui_displayNone": false,
+                                    "ShisetsuJoho_width": "900"
                                 }
                             ],
                             "controlType": "Panel",
-                            "width": "990",
+                            "width": "1010",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -632,6 +448,9 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "ShisetsuNyutaishoInput",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onLoad": "",
                             "title": "施設入退所情報入力",
                             "marginTop": "Default",
@@ -648,19 +467,19 @@ var DBZ;
                             "onOpen": "",
                             "onClose": "",
                             "session": {},
-                            "eraseBorderTop": true,
-                            "eraseBorderBottom": true,
-                            "eraseBorderRight": true,
-                            "eraseBorderLeft": true,
+                            "eraseBorder": false,
                             "backgroundColor": 0,
                             "widthAuto": false,
-                            "isGroupBox": true
+                            "panelDisplay": 1,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto"
                         },
                         {
                             "fieldName": "btnUpdateShisetsuNyutaisho",
                             "items": [],
                             "controlType": "Button",
-                            "width": "180",
+                            "width": "200",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -673,16 +492,21 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "0",
                             "marginRight": "0",
+                            "selectControlID": "btnUpdateShisetsuNyutaisho",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onClick": "onClick_btnUpdateShisetsuNyutaisho",
                             "text": "入退所情報を確定する",
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
-                            "imageHeight": ""
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "1000",
+                    "width": "1080",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -695,6 +519,9 @@ var DBZ;
                     "authorityMode": 0,
                     "marginLeft": "0",
                     "marginRight": "0",
+                    "selectControlID": "ShisetsuNyutaishoRirekiKanri",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onLoad": "",
                     "title": "",
                     "marginTop": "Default",
@@ -709,36 +536,53 @@ var DBZ;
                     "requestSettings": [
                         {
                             "eventName": "onLoad",
-                            "requestUrl": ""
+                            "requestUrl": "dbz/db/dbz/ShisetsuNyutaishoRirekiKanri/onLoad"
                         },
                         {
-                            "eventName": "onClick_btnSelectShisetsuNyutaisho",
-                            "requestUrl": ""
+                            "eventName": "onSelectByModifyButton_dgShisetsuNyutaishoRireki",
+                            "requestUrl": "dbz/db/dbz/ShisetsuNyutaishoRirekiKanri/onSelectByModifyButton_dgShisetsuNyutaishoRireki"
                         },
                         {
                             "eventName": "onClick_btnAddShisetsuNyutaisho",
-                            "requestUrl": ""
+                            "requestUrl": "dbz/db/dbz/ShisetsuNyutaishoRirekiKanri/onClick_btnAddShisetsuNyutaisho"
                         },
                         {
                             "eventName": "onClick_btnUpdateShisetsuNyutaisho",
+                            "requestUrl": "dbz/db/dbz/ShisetsuNyutaishoRirekiKanri/onClick_btnUpdateShisetsuNyutaisho"
+                        },
+                        {
+                            "eventName": "onSelectByDeleteButton_dgShisetsuNyutaishoRireki",
+                            "requestUrl": "dbz/db/dbz/ShisetsuNyutaishoRirekiKanri/onSelectByDeleteButton_dgShisetsuNyutaishoRireki"
+                        },
+                        {
+                            "eventName": "onNoRow_dgShisetsuNyutaishoRireki",
                             "requestUrl": ""
                         },
                         {
-                            "eventName": "onClick_btnDeleteShisetsuNyutaisho",
-                            "requestUrl": ""
+                            "eventName": "onChange_ddlTaishoJoho",
+                            "requestUrl": "dbz/db/dbz/ShisetsuNyutaishoRirekiKanri/onChange_ddlTaishoJoho"
                         }
                     ],
-                    "hiddenInput": [],
+                    "hiddenInput": [
+                        {
+                            "propertyName": "selectRow",
+                            "value": ""
+                        },
+                        {
+                            "propertyName": "inputMode",
+                            "value": ""
+                        }
+                    ],
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": true,
-                    "eraseBorderBottom": true,
-                    "eraseBorderRight": true,
-                    "eraseBorderLeft": true,
+                    "eraseBorder": true,
                     "backgroundColor": 0,
                     "widthAuto": false,
-                    "isGroupBox": false
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -753,8 +597,11 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "ShisetsuNyutaishoRirekiKanri",
@@ -763,7 +610,9 @@ var DBZ;
             "originalProperty": [],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return ShisetsuNyutaishoRirekiKanri_Design;
     })(Uz.CommonChildDiv);

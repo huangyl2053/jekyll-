@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  * @author n8211
  */
 public class IdoTaishoshaIchiran {
-    public ResponseData<IdoTaishoshaIchiranDiv> onLoad(IdoTaishoshaIchiranDiv idoTaishoshaIchiranPanelDiv) {
+    public ResponseData<IdoTaishoshaIchiranDiv> getOnLoadData(IdoTaishoshaIchiranDiv idoTaishoshaIchiranPanelDiv) {
         ResponseData<IdoTaishoshaIchiranDiv> response = new ResponseData<>();
 
         setParam(idoTaishoshaIchiranPanelDiv);

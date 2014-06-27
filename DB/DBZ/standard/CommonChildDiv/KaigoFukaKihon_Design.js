@@ -221,7 +221,8 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtHihokenshaNo",
@@ -266,7 +267,8 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtHokenryoDankai",
@@ -311,7 +313,8 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtShutokuYmd",
@@ -351,7 +354,8 @@ var DBZ;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "ymdKubun": 2,
-                            "displayFormat": 0
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
                         },
                         {
                             "fieldName": "txtShutokuJiyu",
@@ -396,7 +400,8 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtSoshitsuYmd",
@@ -436,7 +441,8 @@ var DBZ;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "ymdKubun": 2,
-                            "displayFormat": 0
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
                         },
                         {
                             "fieldName": "txtSoshitsuJiyu",
@@ -481,7 +487,8 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "btnHihoRireki",
@@ -510,6 +517,7 @@ var DBZ;
                             "imageWidth": "",
                             "imageHeight": "",
                             "icon": 0,
+                            "heightTextBoxMatches": false,
                             "displayChildDivName": "",
                             "dataPassing": [],
                             "visibleCloseButton": true,
@@ -550,10 +558,7 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": true,
-                    "eraseBorderBottom": true,
-                    "eraseBorderRight": true,
-                    "eraseBorderLeft": true,
+                    "eraseBorder": true,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
@@ -628,7 +633,9 @@ var DBZ;
             ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return KaigoFukaKihon_Design;
     })(Uz.CommonChildDiv);

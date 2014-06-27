@@ -490,6 +490,7 @@ var DBZ;
                             "imageWidth": "",
                             "imageHeight": "",
                             "icon": 0,
+                            "heightTextBoxMatches": false,
                             "displayChildDivName": "",
                             "dataPassing": [],
                             "visibleCloseButton": true,
@@ -745,6 +746,7 @@ var DBZ;
                             "imageWidth": "",
                             "imageHeight": "",
                             "icon": 0,
+                            "heightTextBoxMatches": false,
                             "displayChildDivName": "",
                             "dataPassing": [],
                             "visibleCloseButton": true,
@@ -785,10 +787,7 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": true,
-                    "eraseBorderBottom": true,
-                    "eraseBorderRight": true,
-                    "eraseBorderLeft": true,
+                    "eraseBorder": true,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
@@ -868,7 +867,9 @@ var DBZ;
             ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return KaigoShikakuKihon_Design;
     })(Uz.CommonChildDiv);

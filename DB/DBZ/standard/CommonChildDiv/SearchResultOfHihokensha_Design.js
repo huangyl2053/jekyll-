@@ -63,6 +63,10 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "dgSearchResult",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "S",
                             "gridSetting": {
                                 "rowHeight": 40,
                                 "isMultiSelectable": false,
@@ -74,6 +78,8 @@ var DBZ;
                                 "isShowSelectButtonColumn": false,
                                 "isShowModifyButtonColumn": false,
                                 "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
                                 "header": {
                                     "combineColumns": [],
                                     "frozenColumn": "",
@@ -81,22 +87,22 @@ var DBZ;
                                 },
                                 "columns": [
                                     {
-                                        "columnName": "",
+                                        "columnName": "選択",
                                         "dataName": "btnToDecide",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 50,
+                                        "width": 40,
                                         "visible": true,
                                         "cellType": 8,
                                         "cellDetails": {
                                             "cellType": 8,
                                             "text": "確定",
                                             "onClick": "onClick_btnToDecide",
-                                            "imageFileUrl": "",
-                                            "imageWidth": "",
-                                            "imageHeight": ""
+                                            "imageFileUrl": "/uz/uza/css/images/finger.png",
+                                            "imageWidth": "20",
+                                            "imageHeight": "20"
                                         },
-                                        "align": 0,
+                                        "align": 1,
                                         "resize": false,
                                         "isPrivateInfo": false,
                                         "sortKey": "btnToDecide"
@@ -106,13 +112,13 @@ var DBZ;
                                         "dataName": "hihokenshaNo",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 110,
+                                        "width": 80,
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": {
                                             "cellType": 0
                                         },
-                                        "align": 0,
+                                        "align": 1,
                                         "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": "hihokenshaNo"
@@ -122,27 +128,28 @@ var DBZ;
                                         "dataName": "shikibetsuCode",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 110,
+                                        "width": 130,
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": {
-                                            "cellType": 0
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
                                         },
-                                        "align": 0,
+                                        "align": 1,
                                         "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": "shikibetsuCode"
                                     },
                                     {
-                                        "columnName": "被保険者区分",
+                                        "columnName": "被保区分",
                                         "dataName": "hihokenshaKubun",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 110,
+                                        "width": 70,
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": null,
-                                        "align": 0,
+                                        "align": 1,
                                         "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": "hihokenshaKubun"
@@ -202,7 +209,7 @@ var DBZ;
                                         "cellDetails": {
                                             "cellType": 0
                                         },
-                                        "align": 0,
+                                        "align": 1,
                                         "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": "gender"
@@ -212,15 +219,18 @@ var DBZ;
                                         "dataName": "birthDay",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 110,
+                                        "width": 80,
                                         "visible": true,
                                         "cellType": 6,
                                         "cellDetails": {
                                             "cellType": 6,
                                             "ymdKubun": 2,
-                                            "displayFormat": 3
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
                                         },
-                                        "align": 0,
+                                        "align": 1,
                                         "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": "birthDay"
@@ -230,11 +240,11 @@ var DBZ;
                                         "dataName": "yubinNo",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 110,
+                                        "width": 80,
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": null,
-                                        "align": 0,
+                                        "align": 1,
                                         "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": "yubinNo"
@@ -247,7 +257,10 @@ var DBZ;
                                         "width": 300,
                                         "visible": true,
                                         "cellType": 0,
-                                        "cellDetails": null,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
                                         "align": 0,
                                         "resize": true,
                                         "isPrivateInfo": false,
@@ -290,14 +303,13 @@ var DBZ;
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": null,
-                                        "align": 0,
+                                        "align": 2,
                                         "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": "setaiCode"
                                     }
                                 ]
                             },
-                            "height": "S",
                             "onSort": "",
                             "onSelect": "",
                             "onSelectByDblClick": "",
@@ -334,13 +346,16 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "btnToResearch",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "onClick": "",
                                     "text": "再検索する",
                                     "appearance": 0,
                                     "imageFileUrl": "",
                                     "imageWidth": "",
                                     "imageHeight": "",
-                                    "icon": 0
+                                    "icon": 0,
+                                    "heightTextBoxMatches": false
                                 }
                             ],
                             "controlType": "Panel",
@@ -358,6 +373,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "ButtonsForSearchResultOfHihokensha",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onLoad": "",
                             "title": "",
                             "marginTop": "Default",
@@ -374,15 +391,13 @@ var DBZ;
                             "onOpen": "",
                             "onClose": "",
                             "session": {},
-                            "eraseBorderTop": true,
-                            "eraseBorderBottom": true,
-                            "eraseBorderRight": true,
-                            "eraseBorderLeft": true,
+                            "eraseBorder": true,
                             "backgroundColor": 0,
                             "widthAuto": false,
                             "panelDisplay": 0,
                             "isGroupBox": false,
-                            "readOnly": false
+                            "readOnly": false,
+                            "height": "Auto"
                         }
                     ],
                     "controlType": "Panel",
@@ -400,6 +415,8 @@ var DBZ;
                     "marginLeft": "XS",
                     "marginRight": "XS",
                     "selectControlID": "SearchResultOfHihokensha",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onLoad": "",
                     "title": "検索結果",
                     "marginTop": "XS",
@@ -421,15 +438,13 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
                     "isGroupBox": false,
-                    "readOnly": false
+                    "readOnly": false,
+                    "height": "Auto"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -444,9 +459,11 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
             "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "SearchResultOfHihokensha",
@@ -461,7 +478,9 @@ var DBZ;
             ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return SearchResultOfHihokensha_Design;
     })(Uz.CommonChildDiv);
