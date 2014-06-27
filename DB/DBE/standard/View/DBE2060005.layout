@@ -25,7 +25,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "onClick": "",
-     "text": "OCRを取込む",
+     "text": "調査票を取込む",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -331,35 +331,6 @@
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
-    },
-    {
-     "fieldName": "btnSave",
-     "items": [],
-     "controlType": "Button",
-     "width": "180",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnSave",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "onClick": "onClick_btnSave",
-     "text": "取込み結果を保存する",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0,
-     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -398,8 +369,8 @@
      "requestUrl": "dbe/db/dbe/ChosaOCRTorikomi/fetchOCR"
     },
     {
-     "eventName": "onClick_btnSave",
-     "requestUrl": "dbe/db/dbe/ChosaOCRTorikomi/onClick_btnSave"
+     "eventName": "onClick_btnCommonSaveOCRContent",
+     "requestUrl": "dbe/db/dbe/ChosaOCRTorikomi/onCLick_btnCommonSaveOCRContent"
     }
    ],
    "hiddenInput": [],
@@ -1140,7 +1111,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "onClick": "",
-       "text": "確定する",
+       "text": "設定する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -1169,7 +1140,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "onClick": "",
-       "text": "キャンセル",
+       "text": "取消す",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -1698,64 +1669,6 @@
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto"
-    },
-    {
-     "fieldName": "btnToroku",
-     "items": [],
-     "controlType": "Button",
-     "width": "100",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnToroku",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "onClick": "",
-     "text": "登録する",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0,
-     "heightTextBoxMatches": false
-    },
-    {
-     "fieldName": "btnReturn",
-     "items": [],
-     "controlType": "Button",
-     "width": "100",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnReturn",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "onClick": "",
-     "text": "一覧に戻る",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0,
-     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -1814,7 +1727,7 @@
      "fieldName": "btnOcrDataNyuryoku",
      "items": [],
      "controlType": "Button",
-     "width": "90",
+     "width": "S",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1831,7 +1744,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "onClick": "onClick_btnOcrDataNyuryoku",
-     "text": "OCRを取込む",
+     "text": "調査票を取込む",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -1869,7 +1782,7 @@
      "fieldName": "btnCloseOcrSoft",
      "items": [],
      "controlType": "Button",
-     "width": "90",
+     "width": "S",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1970,8 +1883,8 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "OcrTorikomi",
-   "showWizard": false,
+   "stateName": "OCR取込み",
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "ChosaOCRTorikomi",
@@ -1981,39 +1894,19 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnOCRTorikomi",
      "event": "onClick",
-     "transition": ""
+     "transition": "OCRソフト"
     },
     {
-     "fieldName": "btnToroku",
+     "fieldName": "dgChosahyoTorikomiKekka[btnSelect]",
      "event": "onClick",
-     "transition": ""
+     "transition": "取込み結果確認"
     },
     {
-     "fieldName": "btnCancel",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKakutei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgChosakekka1[編集]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgChosakekka2[編集]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgChosakekka3[編集]",
-     "event": "onClick",
-     "transition": ""
+     "fieldName": "dgChosahyoTorikomiKekka",
+     "event": "onSelectBySelectButton",
+     "transition": "取込み結果確認"
     },
     {
      "fieldName": "btnCloseOcrSoft",
@@ -2026,26 +1919,120 @@
      "transition": ""
     },
     {
-     "fieldName": "btnOCRTorikomi",
+     "fieldName": "btnKakutei",
      "event": "onClick",
-     "transition": "OcrSoftKido"
+     "transition": ""
     },
     {
-     "fieldName": "dgChosahyoTorikomiKekka[btnSelect]",
+     "fieldName": "btnCancel",
      "event": "onClick",
-     "transition": "KekkaShosai"
+     "transition": ""
     },
     {
-     "fieldName": "dgChosahyoTorikomiKekka",
-     "event": "onSelectBySelectButton",
-     "transition": "KekkaShosai"
+     "fieldName": "dgChosakekka3[編集]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosakekka2[編集]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosakekka1[編集]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCommonUpdateChosaResult",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCommonBackToIchiran",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
   {
    "order": "2",
-   "stateName": "KekkaShosai",
+   "stateName": "OCRソフト",
    "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "OcrSoftKido",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnOCRTorikomi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosahyoTorikomiKekka[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosahyoTorikomiKekka",
+     "event": "onSelectBySelectButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseOcrSoft",
+     "event": "onClick",
+     "transition": "OCR取込み"
+    },
+    {
+     "fieldName": "btnOcrDataNyuryoku",
+     "event": "onClick",
+     "transition": "OCR取込み"
+    },
+    {
+     "fieldName": "btnKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosakekka3[編集]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosakekka2[編集]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosakekka1[編集]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCommonUpdateChosaResult",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCommonBackToIchiran",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "3",
+   "stateName": "取込み結果確認",
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "ChosaKekkaShosaiMain",
@@ -2067,51 +2054,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": "OcrTorikomi"
-    },
-    {
-     "fieldName": "btnToroku",
-     "event": "onClick",
-     "transition": "OcrTorikomi"
-    },
-    {
-     "fieldName": "btnCancel",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKakutei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgChosakekka1[編集]",
-     "event": "onClick",
-     "transition": "ChosaKekkaShusei"
-    },
-    {
-     "fieldName": "dgChosakekka2[編集]",
-     "event": "onClick",
-     "transition": "ChosaKekkaShusei"
-    },
-    {
-     "fieldName": "dgChosakekka3[編集]",
-     "event": "onClick",
-     "transition": "ChosaKekkaShusei"
-    },
-    {
-     "fieldName": "btnCloseOcrSoft",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnOcrDataNyuryoku",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnOCRTorikomi",
      "event": "onClick",
      "transition": ""
@@ -2125,12 +2067,57 @@
      "fieldName": "dgChosahyoTorikomiKekka",
      "event": "onSelectBySelectButton",
      "transition": ""
+    },
+    {
+     "fieldName": "btnCloseOcrSoft",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnOcrDataNyuryoku",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosakekka3[編集]",
+     "event": "onClick",
+     "transition": "取込み結果修正"
+    },
+    {
+     "fieldName": "dgChosakekka2[編集]",
+     "event": "onClick",
+     "transition": "取込み結果修正"
+    },
+    {
+     "fieldName": "dgChosakekka1[編集]",
+     "event": "onClick",
+     "transition": "取込み結果修正"
+    },
+    {
+     "fieldName": "btnCommonUpdateChosaResult",
+     "event": "onClick",
+     "transition": "OCR取込み"
+    },
+    {
+     "fieldName": "btnCommonBackToIchiran",
+     "event": "onClick",
+     "transition": "OCR取込み"
     }
    ]
   },
   {
-   "order": "3",
-   "stateName": "ChosaKekkaShusei",
+   "order": "4",
+   "stateName": "取込み結果修正",
    "showWizard": false,
    "visibleDivs": [
     {
@@ -2157,51 +2144,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnToroku",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnCancel",
-     "event": "onClick",
-     "transition": "KekkaShosai"
-    },
-    {
-     "fieldName": "btnKakutei",
-     "event": "onClick",
-     "transition": "KekkaShosai"
-    },
-    {
-     "fieldName": "dgChosakekka1[編集]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgChosakekka2[編集]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgChosakekka3[編集]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnCloseOcrSoft",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnOcrDataNyuryoku",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnOCRTorikomi",
      "event": "onClick",
      "transition": ""
@@ -2215,43 +2157,29 @@
      "fieldName": "dgChosahyoTorikomiKekka",
      "event": "onSelectBySelectButton",
      "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "4",
-   "stateName": "OcrSoftKido",
-   "showWizard": false,
-   "visibleDivs": [
+    },
     {
-     "visibleDiv": "OcrSoftKido",
-     "panelState": "visible"
-    }
-   ],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "btnReturn",
+     "fieldName": "btnCloseOcrSoft",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnToroku",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnCancel",
+     "fieldName": "btnOcrDataNyuryoku",
      "event": "onClick",
      "transition": ""
     },
     {
      "fieldName": "btnKakutei",
      "event": "onClick",
-     "transition": ""
+     "transition": "取込み結果確認"
     },
     {
-     "fieldName": "dgChosakekka1[編集]",
+     "fieldName": "btnCancel",
+     "event": "onClick",
+     "transition": "取込み結果確認"
+    },
+    {
+     "fieldName": "dgChosakekka3[編集]",
      "event": "onClick",
      "transition": ""
     },
@@ -2261,34 +2189,19 @@
      "transition": ""
     },
     {
-     "fieldName": "dgChosakekka3[編集]",
+     "fieldName": "dgChosakekka1[編集]",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnCloseOcrSoft",
+     "fieldName": "btnCommonUpdateChosaResult",
      "event": "onClick",
-     "transition": "OcrTorikomi"
+     "transition": "OCR取込み"
     },
     {
-     "fieldName": "btnOcrDataNyuryoku",
+     "fieldName": "btnCommonBackToIchiran",
      "event": "onClick",
-     "transition": "OcrTorikomi"
-    },
-    {
-     "fieldName": "btnOCRTorikomi",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgChosahyoTorikomiKekka[btnSelect]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgChosahyoTorikomiKekka",
-     "event": "onSelectBySelectButton",
-     "transition": ""
+     "transition": "OCR取込み"
     }
    ]
   }
@@ -2318,5 +2231,130 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "ChosaResultDetail",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonUpdate",
+     "buttonProperty": {
+      "fieldName": "btnCommonUpdateChosaResult",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCommonUpdateChosaResult",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "調査結果を"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnCommonBackToIchiran",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCommonBackToIchiran",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "更新",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "一覧へ"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "取込み結果確認"
+    },
+    {
+     "state": "取込み結果修正"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  },
+  {
+   "commonButtonAreaId": "OCRTorikomi",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonUpdate",
+     "buttonProperty": {
+      "fieldName": "btnCommonSaveOCRContent",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCommonSaveOCRContent",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "更新",
+      "onClick": "onClick_btnCommonSaveOCRContent",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "取込み結果を"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "OCR取込み"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }

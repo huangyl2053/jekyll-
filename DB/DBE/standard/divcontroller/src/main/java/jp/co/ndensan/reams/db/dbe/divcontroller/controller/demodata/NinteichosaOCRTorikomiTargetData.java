@@ -131,6 +131,7 @@ public class NinteichosaOCRTorikomiTargetData {
 
             private dgChosahyoTorikomiKekka_Row toDgChosahyoTorikomiKekka_Row(Map map) {
                 ControlGenerator cg = new ControlGenerator(map);
+                ShinseiKubun shinseiKubun = ShinseiKubun.toValue(cg.getAsRString(YAMLKeys.申請区分.value()));
                 return new dgChosahyoTorikomiKekka_Row(
                         new Button(),
                         RString.EMPTY,
@@ -138,7 +139,7 @@ public class NinteichosaOCRTorikomiTargetData {
                         cg.getAsRString(YAMLKeys.保険者名.value()),
                         cg.getAsRString(YAMLKeys.被保番号.value()),
                         cg.getAsTextBoxFlexibleDate(YAMLKeys.申請日.value()),
-                        cg.getAsRString(YAMLKeys.申請区分.value()),
+                        shinseiKubun.getShortName(),
                         cg.getAsTextBoxFlexibleDate(YAMLKeys.調査実施日.value()),
                         cg.getAsTextBoxFlexibleDate(YAMLKeys.調査票受領日.value()));
             }

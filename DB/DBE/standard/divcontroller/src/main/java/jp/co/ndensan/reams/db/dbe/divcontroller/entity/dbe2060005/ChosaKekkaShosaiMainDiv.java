@@ -9,9 +9,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.ChosaItakuJoho
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.ChosaKekkaShosaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.ChosaKekkaShuseiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.KihonJohoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * ChosaKekkaShosaiMain のクラスファイル 
@@ -33,10 +31,6 @@ public class ChosaKekkaShosaiMainDiv extends Panel {
     private ChosaKekkaShuseiDiv ChosaKekkaShusei;
     @JsonProperty("ChosaKekkaShosai")
     private ChosaKekkaShosaiDiv ChosaKekkaShosai;
-    @JsonProperty("btnToroku")
-    private Button btnToroku;
-    @JsonProperty("btnReturn")
-    private Button btnReturn;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -82,26 +76,6 @@ public class ChosaKekkaShosaiMainDiv extends Panel {
     @JsonProperty("ChosaKekkaShosai")
     public void setChosaKekkaShosai(ChosaKekkaShosaiDiv ChosaKekkaShosai) {
         this.ChosaKekkaShosai=ChosaKekkaShosai;
-    }
-
-    @JsonProperty("btnToroku")
-    public Button getBtnToroku() {
-        return btnToroku;
-    }
-
-    @JsonProperty("btnToroku")
-    public void setBtnToroku(Button btnToroku) {
-        this.btnToroku=btnToroku;
-    }
-
-    @JsonProperty("btnReturn")
-    public Button getBtnReturn() {
-        return btnReturn;
-    }
-
-    @JsonProperty("btnReturn")
-    public void setBtnReturn(Button btnReturn) {
-        this.btnReturn=btnReturn;
     }
 
 }

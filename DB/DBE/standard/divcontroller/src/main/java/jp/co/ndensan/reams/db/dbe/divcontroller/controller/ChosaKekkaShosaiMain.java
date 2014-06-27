@@ -11,6 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.NinteichosaOCRTorikomiTargetData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.NinteichosaOCRTorikomiTargetData.YAMLKeys;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.NinteichosaOCRTorikomiTargetData.ShinseiKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.ChosaKekkaShosaiMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.ChosaOCRTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.ChosaKekkaShuseiDiv;
@@ -134,7 +135,7 @@ public class ChosaKekkaShosaiMain {
         panel.getKihonJoho().getTxtShinseiDate().
                 setValue(cg.getAsFlexibleDate(YAMLKeys.申請日.value()));
         panel.getKihonJoho().getDdlShinseiKubun().
-                setSelectedItem(cg.getAsRString(YAMLKeys.申請区分.value()));
+                setSelectedItem(ShinseiKubun.toValue(cg.getAsRString(YAMLKeys.申請区分.value())).getKey());
         panel.getChosaItakuJoho().getTxtChosaItakusakiCode().
                 setValue(chosain.itakusaki().code());
         panel.getChosaItakuJoho().getTxtChosaItakusakiName().

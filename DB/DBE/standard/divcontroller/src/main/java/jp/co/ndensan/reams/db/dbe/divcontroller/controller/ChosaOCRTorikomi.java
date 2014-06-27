@@ -5,15 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.NinteichosaOCRTorikomiTargetData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.NinteichosaOCRTorikomiTargetData.OCRSuccessKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.ChosaOCRTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.dgChosahyoTorikomiKekka_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 
 /**
  * 調査票OCR取込み対象者一覧Divを制御します。
@@ -21,11 +21,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @author N9606 漢那 憲作
  */
 public class ChosaOCRTorikomi {
-
-    /**
-     * demoデータのfileNameです。
-     */
-    private static final RString DEMO_DATA_FILE_NAME = new RString("dbe2060005/NinteichosaOcrTorikomiIchiran.yml");
 
     /**
      * OCR取込みボタン押下時の処理を表します。
@@ -39,16 +34,22 @@ public class ChosaOCRTorikomi {
         return createResponseData(panel);
     }
 
-    public ResponseData<ChosaOCRTorikomiDiv> onClick_btnSave(ChosaOCRTorikomiDiv panel) {
-        panel.getTxtErrKensu().setValue(countErrKensu());
-
-        List<dgChosahyoTorikomiKekka_Row> arrayData = new ArrayList<>();
-        panel.getDgChosahyoTorikomiKekka().setDataSource(arrayData);
-        return createResponseData(panel);
+    /**
+     * btnCommonSaveOCRCOntentを押下した時の処理です。
+     *
+     * @param panel ChosaOcrTorikomiDiv
+     * @return ResponseData
+     */
+    public ResponseData<ChosaOCRTorikomiDiv> onCLick_btnCommonSaveOCRContent(ChosaOCRTorikomiDiv panel) {
+        panel.getDgChosahyoTorikomiKekka().setDataSource(Collections.EMPTY_LIST);
+        panel.getTxtErrKensu().clearValue();
+        ResponseData<ChosaOCRTorikomiDiv> response = createResponseData(panel);
+        response.addMessage(new InformationMessage("I", "保存しました。"));
+        return response;
     }
 
     /**
-     * エラー件数を数えます。(デモデータをとってきます。)
+     * エラー件数を数えます。
      *
      * @return エラー件数
      */
