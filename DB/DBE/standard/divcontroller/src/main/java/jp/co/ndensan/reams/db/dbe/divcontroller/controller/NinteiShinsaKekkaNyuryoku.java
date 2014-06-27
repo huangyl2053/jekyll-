@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 //import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 //import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -83,17 +84,6 @@ public class NinteiShinsaKekkaNyuryoku {
             div.getNinteiKekkaNyuryoku().getTxtShinsakaiIken().setValue(dataRow.getShinsakaiIken());
         }
 
-        if (shinsaTaishoshaIchiranDiv.getDgShinsaTaishoshaIchiran().getSelectedItems().size() == 1) {
-            div.getNyuryokuSeigyo().getBtnNext().setDisplayNone(true);
-        } else {
-            div.getNyuryokuSeigyo().getBtnNext().setDisplayNone(false);
-            cntSelectSu = shinsaTaishoshaIchiranDiv.getDgShinsaTaishoshaIchiran().getSelectedItems().size();
-            cntSu = cntSelectSu - 1;
-            if (selectIdx.equals(cntSu)) {
-                div.getNyuryokuSeigyo().getBtnNext().setDisplayNone(true);
-            }
-        }
-
         response.data = div;
         return response;
     }
@@ -150,6 +140,18 @@ public class NinteiShinsaKekkaNyuryoku {
         ViewStateHolder.put("二次判定結果", div.getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka().getSelectedValue());
         ViewStateHolder.put("二次判定コード", div.getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka().getSelectedItem());
         ViewStateHolder.put("被保番号", div.getHihokenshaJoho().getTxtHihokenshaNo().getValue());
+
+        if (shinsaTaishoshaIchiranDiv.getDgShinsaTaishoshaIchiran().getSelectedItems().size() == 1) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnNext"), true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnNext"), false);
+            cntSelectSu = shinsaTaishoshaIchiranDiv.getDgShinsaTaishoshaIchiran().getSelectedItems().size();
+            cntSu = cntSelectSu - 1;
+            if (selectIdx.equals(cntSu)) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnNext"), true);
+            }
+        }
+
         return response;
     }
 
@@ -233,6 +235,7 @@ public class NinteiShinsaKekkaNyuryoku {
         ResponseData<NinteiShinsaKekkaNyuryokuDiv> response = new ResponseData<>();
         selectIdx = 0;
         return response;
+
     }
 
 //    /**

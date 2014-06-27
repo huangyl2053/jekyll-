@@ -8,9 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.KojinJokyoShokaiSubDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.ShinchokuKakuninDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoHihokenshaJoho.KaigoHihokenshaJohoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * KojinJokyoShokai のクラスファイル 
@@ -30,8 +28,6 @@ public class KojinJokyoShokaiDiv extends Panel {
     private ShinchokuKakuninDiv ShinchokuKakunin;
     @JsonProperty("KojinJokyoShokaiSub")
     private KojinJokyoShokaiSubDiv KojinJokyoShokaiSub;
-    @JsonProperty("btnReturn")
-    private Button btnReturn;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -67,16 +63,6 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonProperty("KojinJokyoShokaiSub")
     public void setKojinJokyoShokaiSub(KojinJokyoShokaiSubDiv KojinJokyoShokaiSub) {
         this.KojinJokyoShokaiSub=KojinJokyoShokaiSub;
-    }
-
-    @JsonProperty("btnReturn")
-    public Button getBtnReturn() {
-        return btnReturn;
-    }
-
-    @JsonProperty("btnReturn")
-    public void setBtnReturn(Button btnReturn) {
-        this.btnReturn=btnReturn;
     }
 
 }

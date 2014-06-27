@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 06 18:23:37 JST 2014 
+ * Fri Jun 27 19:07:06 JST 2014 
  */
 
 
@@ -34,6 +34,15 @@ public class dgShinsakaiIchiran_Row extends DataRow {
 
     public dgShinsakaiIchiran_Row() {
         super();
+        this.toroku = new Button();
+        this.審査会名 = RString.EMPTY;
+        this.合議体 = RString.EMPTY;
+        this.審査会会場 = RString.EMPTY;
+        this.審査開催日 = new TextBoxFlexibleDate();
+        this.審査開始 = RString.EMPTY;
+        this.審査終了 = RString.EMPTY;
+        this.対象人数 = RString.EMPTY;
+        this.審査会状況 = RString.EMPTY;
     }
 
     public dgShinsakaiIchiran_Row(Button toroku, RString 審査会名, RString 合議体, RString 審査会会場, TextBoxFlexibleDate 審査開催日, RString 審査開始, RString 審査終了, RString 対象人数, RString 審査会状況) {
