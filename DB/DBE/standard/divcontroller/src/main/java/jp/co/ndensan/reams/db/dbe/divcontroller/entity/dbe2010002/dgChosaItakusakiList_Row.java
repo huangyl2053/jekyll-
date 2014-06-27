@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jun 04 11:18:50 JST 2014 
+ * Fri Jun 27 13:38:37 JST 2014 
  */
 
 
@@ -28,6 +28,11 @@ public class dgChosaItakusakiList_Row extends DataRow {
 
     public dgChosaItakusakiList_Row() {
         super();
+        this.chosaItakusakiNo = RString.EMPTY;
+        this.chosaItakusakiName = RString.EMPTY;
+        this.waritsukeTeiin = RString.EMPTY;
+        this.waritsukeNum = RString.EMPTY;
+        this.waritsukeChiku = RString.EMPTY;
     }
 
     public dgChosaItakusakiList_Row(RString chosaItakusakiNo, RString chosaItakusakiName, RString waritsukeTeiin, RString waritsukeNum, RString waritsukeChiku) {

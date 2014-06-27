@@ -1369,64 +1369,6 @@
        "selectedItemFieldName": "tplImage01",
        "initialTab": 0,
        "isLazyLoading": false
-      },
-      {
-       "fieldName": "btnUpdate",
-       "items": [],
-       "controlType": "Button",
-       "width": "200",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": true,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnUpdate",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "text": "画像情報を登録する",
-       "onClick": "",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0,
-       "heightTextBoxMatches": false
-      },
-      {
-       "fieldName": "btnCancel",
-       "items": [],
-       "controlType": "Button",
-       "width": "200",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnCancel",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "text": "キャンセル",
-       "onClick": "",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0,
-       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
@@ -1601,64 +1543,6 @@
        "dialogCancelEventNameForDialog": "",
        "canTransferEvent": true,
        "heightForDialog": "M"
-      },
-      {
-       "fieldName": "btnImageToroku",
-       "items": [],
-       "controlType": "Button",
-       "width": "200",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": true,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnImageToroku",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "text": "マスク情報を確定する",
-       "onClick": "",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0,
-       "heightTextBoxMatches": false
-      },
-      {
-       "fieldName": "btnBackIchiran",
-       "items": [],
-       "controlType": "Button",
-       "width": "200",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnBackIchiran",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "text": "画像選択に戻る",
-       "onClick": "",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0,
-       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
@@ -1749,6 +1633,10 @@
     {
      "eventName": "onClick_btnSentaku",
      "requestUrl": "dbe/db/dbe/ImageJohoMasking/onClick_btnSentaku"
+    },
+    {
+     "eventName": "onClick_btnUpdate",
+     "requestUrl": "dbe/db/dbe/ImageJohoMasking/onClick_btnUpdate"
     }
    ],
    "hiddenInput": [],
@@ -1821,6 +1709,11 @@
      "transition": "イメージ照会"
     },
     {
+     "fieldName": "btnBackIchiran",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
      "fieldName": "btnCancel",
      "event": "onClick",
      "transition": ""
@@ -1831,7 +1724,7 @@
      "transition": ""
     },
     {
-     "fieldName": "btnBackIchiran",
+     "fieldName": "btnUpdate",
      "event": "onClick",
      "transition": ""
     }
@@ -1891,6 +1784,11 @@
      "transition": ""
     },
     {
+     "fieldName": "btnBackIchiran",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
      "fieldName": "btnCancel",
      "event": "onClick",
      "transition": "対象者検索"
@@ -1901,9 +1799,9 @@
      "transition": "マスキング"
     },
     {
-     "fieldName": "btnBackIchiran",
+     "fieldName": "btnUpdate",
      "event": "onClick",
-     "transition": ""
+     "transition": "対象者検索"
     }
    ]
   },
@@ -1941,6 +1839,11 @@
      "transition": ""
     },
     {
+     "fieldName": "btnBackIchiran",
+     "event": "onClick",
+     "transition": "イメージ照会"
+    },
+    {
      "fieldName": "btnCancel",
      "event": "onClick",
      "transition": ""
@@ -1951,9 +1854,9 @@
      "transition": ""
     },
     {
-     "fieldName": "btnBackIchiran",
+     "fieldName": "btnUpdate",
      "event": "onClick",
-     "transition": "イメージ照会"
+     "transition": ""
     }
    ]
   }
@@ -1989,5 +1892,161 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "imageShokai",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonUpdate",
+     "buttonProperty": {
+      "fieldName": "btnUpdate",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnUpdate",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "onClick_btnUpdate",
+      "text": "更新",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "画像情報を"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnCancel",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCancel",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "",
+      "text": "戻る",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "一覧へ"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "イメージ照会"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  },
+  {
+   "commonButtonAreaId": "imageMask",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnImageToroku",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnImageToroku",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "",
+      "text": "マスク情報を確定する",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnBackIchiran",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnBackIchiran",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "",
+      "text": "戻る",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "画像選択に"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "マスキング"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }

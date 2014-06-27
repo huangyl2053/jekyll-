@@ -2552,117 +2552,6 @@
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto"
-    },
-    {
-     "fieldName": "ButtonsForNinteichosaIraiByHand",
-     "items": [
-      {
-       "fieldName": "btToRegister",
-       "items": [],
-       "controlType": "ButtonSubmit",
-       "width": "M",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btToRegister",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "postParameterPanelNames": [
-        {
-         "postParameterPanelNames": "Panel17"
-        }
-       ],
-       "onClick": "",
-       "text": "この内容で保存する",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0,
-       "heightTextBoxMatches": false,
-       "validateUrl": "",
-       "submitUrl": "",
-       "onAfterRequest": ""
-      },
-      {
-       "fieldName": "btnToRrturn",
-       "items": [],
-       "controlType": "Button",
-       "width": "M",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnToRrturn",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "onClick": "onClick_btnToReturn",
-       "text": "戻る",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0,
-       "heightTextBoxMatches": false
-      }
-     ],
-     "controlType": "Panel",
-     "width": "1098",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "ButtonsForNinteichosaIraiByHand",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "onLoad": "",
-     "title": "",
-     "isOpen": true,
-     "canOpenAndClose": true,
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "ButtonsForNinteichosaIraiByHand"
-      }
-     ],
-     "requestSettings": [],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "Default",
-     "marginBottom": "Default",
-     "eraseBorder": false,
-     "backgroundColor": 0,
-     "widthAuto": false,
-     "panelDisplay": 0,
-     "isGroupBox": false,
-     "readOnly": false,
-     "height": "Auto"
     }
    ],
    "controlType": "Panel",
@@ -2828,14 +2717,89 @@
   ],
   [
    "ButtonsForBinding"
-  ],
-  [
-   "ButtonsForNinteichosaIraiByHand"
   ]
  ],
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "iraiWaritsuke",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonUpdate",
+     "buttonProperty": {
+      "fieldName": "btToRegister",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btToRegister",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "",
+      "text": "更新",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "この内容で"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnToRrturn",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnToRrturn",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "onClick_btnToReturn",
+      "text": "戻る",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "依頼先手動登録"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }

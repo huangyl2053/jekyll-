@@ -41,8 +41,6 @@ public class NinteiShinseiGyomuShokaiDiv extends Panel {
     private TextBoxDateRange txtKyakkabiRange;
     @JsonProperty("lblDummy")
     private Label lblDummy;
-    @JsonProperty("btnChohyoOutput")
-    private Button btnChohyoOutput;
     @JsonProperty("btnCancel")
     private Button btnCancel;
 
@@ -150,16 +148,6 @@ public class NinteiShinseiGyomuShokaiDiv extends Panel {
     @JsonProperty("lblDummy")
     public void setLblDummy(Label lblDummy) {
         this.lblDummy=lblDummy;
-    }
-
-    @JsonProperty("btnChohyoOutput")
-    public Button getBtnChohyoOutput() {
-        return btnChohyoOutput;
-    }
-
-    @JsonProperty("btnChohyoOutput")
-    public void setBtnChohyoOutput(Button btnChohyoOutput) {
-        this.btnChohyoOutput=btnChohyoOutput;
     }
 
     @JsonProperty("btnCancel")

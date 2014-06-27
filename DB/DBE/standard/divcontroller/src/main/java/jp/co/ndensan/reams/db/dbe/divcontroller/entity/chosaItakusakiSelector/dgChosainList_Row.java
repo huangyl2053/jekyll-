@@ -1,18 +1,23 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.chosaItakusakiSelector;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
- * コードが再生成されるときに損失したりします。 Thu Jun 26 16:17:37 JST 2014
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
+ * コードが再生成されるときに損失したりします。
+ * Fri Jun 27 11:56:40 JST 2014 
  */
+
+
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
+
 /**
- * dgChosainList_Row のクラスファイル
- *
+ * dgChosainList_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
+
 public class dgChosainList_Row extends DataRow {
 
     private RString chosainNo;

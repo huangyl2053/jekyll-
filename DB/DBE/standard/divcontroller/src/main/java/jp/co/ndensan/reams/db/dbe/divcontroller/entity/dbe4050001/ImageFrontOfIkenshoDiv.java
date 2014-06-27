@@ -21,8 +21,6 @@ public class ImageFrontOfIkenshoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnMasking")
-    private Button btnMasking;
     @JsonProperty("lblDummy1")
     private Label lblDummy1;
 
@@ -32,16 +30,6 @@ public class ImageFrontOfIkenshoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnMasking")
-    public Button getBtnMasking() {
-        return btnMasking;
-    }
-
-    @JsonProperty("btnMasking")
-    public void setBtnMasking(Button btnMasking) {
-        this.btnMasking=btnMasking;
-    }
-
     @JsonProperty("lblDummy1")
     public Label getLblDummy1() {
         return lblDummy1;

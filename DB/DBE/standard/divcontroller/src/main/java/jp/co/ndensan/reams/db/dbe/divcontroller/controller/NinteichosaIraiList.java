@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -75,7 +76,8 @@ public class NinteichosaIraiList {
     public ResponseData<NinteichosaIraiListDiv> onClick_btnToEntryChosaIrai(NinteichosaIraiListDiv div) {
         ResponseData<NinteichosaIraiListDiv> response = new ResponseData<>();
 
-        div.getButtonsForNinteichosaIraiListBottom().getBtnToComplete().setDisabled(false);
+//        div.getButtonsForNinteichosaIraiListBottom().getBtnToComplete().setDisabled(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToComplete"), false);
 
         response.data = div;
         return response;

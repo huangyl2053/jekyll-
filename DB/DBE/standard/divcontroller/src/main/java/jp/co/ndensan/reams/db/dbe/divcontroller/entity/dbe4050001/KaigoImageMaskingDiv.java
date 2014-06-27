@@ -30,10 +30,6 @@ public class KaigoImageMaskingDiv extends Panel {
     private Button btnShokiModoshi;
     @JsonProperty("ImageMaskingTool")
     private ImageMaskingDiv ImageMaskingTool;
-    @JsonProperty("btnImageToroku")
-    private Button btnImageToroku;
-    @JsonProperty("btnBackIchiran")
-    private Button btnBackIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -79,26 +75,6 @@ public class KaigoImageMaskingDiv extends Panel {
     @JsonProperty("ImageMaskingTool")
     public void setImageMaskingTool(ImageMaskingDiv ImageMaskingTool) {
         this.ImageMaskingTool=ImageMaskingTool;
-    }
-
-    @JsonProperty("btnImageToroku")
-    public Button getBtnImageToroku() {
-        return btnImageToroku;
-    }
-
-    @JsonProperty("btnImageToroku")
-    public void setBtnImageToroku(Button btnImageToroku) {
-        this.btnImageToroku=btnImageToroku;
-    }
-
-    @JsonProperty("btnBackIchiran")
-    public Button getBtnBackIchiran() {
-        return btnBackIchiran;
-    }
-
-    @JsonProperty("btnBackIchiran")
-    public void setBtnBackIchiran(Button btnBackIchiran) {
-        this.btnBackIchiran=btnBackIchiran;
     }
 
 }

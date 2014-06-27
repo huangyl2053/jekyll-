@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
@@ -51,6 +52,21 @@ public class ImageJohoMasking {
 
         div.getShoriTaishoshaKensakuShiji().getTxtSearchStYMD().setValue(FlexibleDate.getNowDate());
         div.getShoriTaishoshaKensakuShiji().getTxtHihokenshaNo().setDisplayNone(true);
+
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 画像保存ボタンを押下した時の処理を表します。
+     *
+     * @param div イメージ情報マスキング処理Div
+     * @return ResponseData
+     */
+    public ResponseData onClick_btnUpdate(ImageJohoMaskingDiv div) {
+        ResponseData<ImageJohoMaskingDiv> response = new ResponseData<>();
+
+        response.addMessage(new InformationMessage("i", "保存しました。"));
 
         response.data = div;
         return response;

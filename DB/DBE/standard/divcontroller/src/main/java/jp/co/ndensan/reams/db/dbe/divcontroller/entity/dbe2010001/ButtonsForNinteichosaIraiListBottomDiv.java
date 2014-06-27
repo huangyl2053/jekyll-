@@ -25,10 +25,6 @@ public class ButtonsForNinteichosaIraiListBottomDiv extends Panel {
     private Button btnToPublishIraisho;
     @JsonProperty("btnToOutputData")
     private Button btnToOutputData;
-    @JsonProperty("btnToComplete")
-    private Button btnToComplete;
-    @JsonProperty("btnToCallContinuousEntry")
-    private Button btnToCallContinuousEntry;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,26 +50,6 @@ public class ButtonsForNinteichosaIraiListBottomDiv extends Panel {
     @JsonProperty("btnToOutputData")
     public void setBtnToOutputData(Button btnToOutputData) {
         this.btnToOutputData=btnToOutputData;
-    }
-
-    @JsonProperty("btnToComplete")
-    public Button getBtnToComplete() {
-        return btnToComplete;
-    }
-
-    @JsonProperty("btnToComplete")
-    public void setBtnToComplete(Button btnToComplete) {
-        this.btnToComplete=btnToComplete;
-    }
-
-    @JsonProperty("btnToCallContinuousEntry")
-    public Button getBtnToCallContinuousEntry() {
-        return btnToCallContinuousEntry;
-    }
-
-    @JsonProperty("btnToCallContinuousEntry")
-    public void setBtnToCallContinuousEntry(Button btnToCallContinuousEntry) {
-        this.btnToCallContinuousEntry=btnToCallContinuousEntry;
     }
 
 }

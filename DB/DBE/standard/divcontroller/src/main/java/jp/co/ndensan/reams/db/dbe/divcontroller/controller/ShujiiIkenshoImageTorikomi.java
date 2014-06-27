@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
@@ -38,6 +39,23 @@ public class ShujiiIkenshoImageTorikomi {
 
         setTorikomiKekkaData(panel);
 
+        response.data = panel;
+        return response;
+
+    }
+
+    /**
+     * 結果を登録するボタン押下時の処理を表します。
+     *
+     * @param panel ShujiiIkenshoImageTorikomiDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShujiiIkenshoImageTorikomiDiv> onClick_btnToAddDb(ShujiiIkenshoImageTorikomiDiv panel) {
+        ResponseData<ShujiiIkenshoImageTorikomiDiv> response = new ResponseData<>();
+
+        List<dgIkenshoTorikomiKekka_Row> arrayData = new ArrayList<>();
+        panel.getDgIkenshoTorikomiKekka().setDataSource(arrayData);
+        response.addMessage(new InformationMessage("i", "保存しました"));
         response.data = panel;
         return response;
 

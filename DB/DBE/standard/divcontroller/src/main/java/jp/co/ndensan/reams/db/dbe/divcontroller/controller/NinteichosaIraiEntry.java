@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * NinteichosaIraiEntryDivを操作するためのクラスです。
@@ -82,7 +83,8 @@ public class NinteichosaIraiEntry {
     private void changeMode_DisplayNone(NinteichosaIraiEntryDiv div, boolean isDisplayNone) {
         div.getNinteichosaIraiEntryMain().setDisplayNone(isDisplayNone);
         div.getNinteichosaIraiEntryTarget().setDisplayNone(isDisplayNone);
-        div.getButtonsForNinteichosaIraiEntry().getBtnToCallNext().setVisible(!isDisplayNone);
+//        div.getButtonsForNinteichosaIraiEntry().getBtnToCallNext().setVisible(!isDisplayNone);
+//        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), true);
     }
 
     private void init(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> selectedTargets) {
@@ -99,7 +101,7 @@ public class NinteichosaIraiEntry {
         setNewTitle(panel, targets);
         setUpPanelFromTargetInfo(panel, currentTarget(panel, targets));
         setUpTokusoku(panel);
-        stateChange_btnToCallNext(panel, targets);
+//        stateChange_btnToCallNext(panel, targets);
     }
 
     private void setNewTitle(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> targets) {
@@ -120,12 +122,14 @@ public class NinteichosaIraiEntry {
     }
 
     private void stateChange_btnToCallNext(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> targets) {
-        Button btnToCallNext = panel.getButtonsForNinteichosaIraiEntry().getBtnToCallNext();
+//        Button btnToCallNext = panel.getButtonsForNinteichosaIraiEntry().getBtnToCallNext();
         if (isLastPerson(panel, targets)) {
-            btnToCallNext.setVisible(false);
+//            btnToCallNext.setVisible(false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), true);
         } else {
-            btnToCallNext.setVisible(true);
-            btnToCallNext.setDisabled(true);
+//            btnToCallNext.setVisible(true);
+//            btnToCallNext.setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), false);
         }
     }
 
@@ -185,9 +189,10 @@ public class NinteichosaIraiEntry {
     }
 
     private void stateChange_btnToCallNext(NinteichosaIraiEntryDiv panel, NinteichosaIraiListDiv allTargets) {
-        Button btnToCallNext = panel.getButtonsForNinteichosaIraiEntry().getBtnToCallNext();
+//        Button btnToCallNext = panel.getButtonsForNinteichosaIraiEntry().getBtnToCallNext();
         if (!isLastPerson(panel, selectedTargetsFrom(allTargets))) {
-            btnToCallNext.setDisabled(false);
+//            btnToCallNext.setDisabled(false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), false);
         }
     }
 

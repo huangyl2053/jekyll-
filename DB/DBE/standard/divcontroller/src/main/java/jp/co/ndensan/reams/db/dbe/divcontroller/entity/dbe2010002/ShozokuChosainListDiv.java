@@ -5,10 +5,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ButtonsForWaritsukeChosainListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.shozokuChosainList.ShozokuChosainListCom;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.shozokuChosainList.ShozokuChosainListCom;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * ShozokuChosainList のクラスファイル 
@@ -22,8 +22,8 @@ public class ShozokuChosainListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ButtonsForWaritsukeChosainList")
-    private ButtonsForWaritsukeChosainListDiv ButtonsForWaritsukeChosainList;
+    @JsonProperty("btnToBindSelectedChosain")
+    private Button btnToBindSelectedChosain;
     @JsonProperty("comChosainList")
     private ShozokuChosainListCom comChosainList;
     @JsonProperty("comChosainListAll")
@@ -35,14 +35,14 @@ public class ShozokuChosainListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ButtonsForWaritsukeChosainList")
-    public ButtonsForWaritsukeChosainListDiv getButtonsForWaritsukeChosainList() {
-        return ButtonsForWaritsukeChosainList;
+    @JsonProperty("btnToBindSelectedChosain")
+    public Button getBtnToBindSelectedChosain() {
+        return btnToBindSelectedChosain;
     }
 
-    @JsonProperty("ButtonsForWaritsukeChosainList")
-    public void setButtonsForWaritsukeChosainList(ButtonsForWaritsukeChosainListDiv ButtonsForWaritsukeChosainList) {
-        this.ButtonsForWaritsukeChosainList=ButtonsForWaritsukeChosainList;
+    @JsonProperty("btnToBindSelectedChosain")
+    public void setBtnToBindSelectedChosain(Button btnToBindSelectedChosain) {
+        this.btnToBindSelectedChosain=btnToBindSelectedChosain;
     }
 
     @JsonProperty("comChosainList")
