@@ -55,7 +55,12 @@ var DBZ;
                             "dataPassingForDialog": [],
                             "dialogOkEventNameForDialog": "",
                             "dialogCancelEventNameForDialog": "",
-                            "onClick_BtnToSearch": "onClickBtnToSearch_HihokenshaFinder"
+                            "canTransferEvent": true,
+                            "heightForDialog": "M",
+                            "onClick_BtnToSearch": "onClickBtnToSearch_HihokenshaFinder",
+                            "displayNone_txtTsuchishoNo": true,
+                            "displayNone_ddlFukaNendo": true,
+                            "displayNone_SearchCriteriaDetail": false
                         },
                         {
                             "fieldName": "lblSearchResultOfHihokensha",
@@ -103,6 +108,7 @@ var DBZ;
                             "selectControlID": "dgSearchResultOfHihokensha",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "height": "S",
                             "dataSource": [],
                             "gridSetting": {
@@ -384,7 +390,8 @@ var DBZ;
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
-                            "imageHeight": ""
+                            "imageHeight": "",
+                            "heightTextBoxMatches": false
                         }
                     ],
                     "controlType": "Panel",
@@ -442,10 +449,7 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
@@ -488,7 +492,9 @@ var DBZ;
                 }
             ],
             "dialogOkEventNameForDialog": "onClick_btnToDecide",
-            "dialogCancelEventNameForDialog": "onClick_btnReturn"
+            "dialogCancelEventNameForDialog": "onClick_btnReturn",
+            "canTransferEvent": true,
+            "heightForDialog": "590"
         };
         return HihokenshaInputGuide_Design;
     })(Uz.CommonChildDiv);
