@@ -25,29 +25,29 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
      "onChange": "",
-     "onKeyPress": "",
-     "permitCharactor": "",
-     "fromPlaceHolder": "",
-     "toPlaceHolder": "",
-     "ymdKubun": 2,
-     "displayFormat": 0,
-     "minDate": "",
-     "maxDate": "",
-     "fromText": "",
-     "toText": "",
-     "fromValue": "",
-     "toValue": "",
      "labelLText": "異動日",
      "labelRText": "",
      "labelLWidth": "55",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "onFocus": "",
+     "onBlur": "",
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onKeyPress": "",
+     "permitCharactor": "",
+     "ymdKubun": 2,
+     "displayFormat": 0,
+     "fromPlaceHolder": "",
+     "toPlaceHolder": "",
+     "minDate": "",
+     "maxDate": "",
+     "fromText": "",
+     "toText": "",
+     "fromValue": "",
+     "toValue": "",
      "fromSelectControlID": "txtIdoDateRangeFrom",
      "toSelectControlID": "txtIdoDateRangeTo"
     },
@@ -72,30 +72,30 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
      "onChange": "",
-     "onKeyPress": "",
-     "permitCharactor": "",
+     "required": false,
      "labelLText": "被保番号",
      "labelRText": "",
      "labelLWidth": "75",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "required": false,
+     "onFocus": "",
+     "onBlur": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
      "placeHolder": "",
      "textKind": 2,
+     "isPrivateInfo": false,
+     "isPassword": false,
      "isComboBox": false,
+     "onKeyPress": "",
      "text": "",
      "suggest": [],
      "value": "",
      "decorationClass": "",
+     "permitCharactor": "",
      "formatLength": "10"
     },
     {
@@ -120,11 +120,11 @@
      "jpControlName": "",
      "text": "　",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -148,17 +148,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onFocus": "",
-     "onBlur": "",
      "onChange": "",
-     "labelLText": "保険者",
-     "labelRText": "",
-     "labelLWidth": "55",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "required": false,
-     "text": "",
      "selectedItem": "key0",
      "dataSource": [
       {
@@ -182,6 +172,16 @@
        "value": ""
       }
      ],
+     "required": false,
+     "labelLText": "保険者",
+     "labelRText": "",
+     "labelLWidth": "55",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "onFocus": "",
+     "onBlur": "",
+     "text": "",
      "disabledItem": []
     },
     {
@@ -206,12 +206,6 @@
      "jpControlName": "",
      "readOnly": false,
      "onChange": "",
-     "labelLText": "",
-     "labelLWidth": "S",
-     "labelLAlign": 2,
-     "required": false,
-     "onClick": "",
-     "icon": [],
      "selectedItem": null,
      "dataSource": [
       {
@@ -219,6 +213,11 @@
        "value": "削除データ検索"
       }
      ],
+     "required": false,
+     "labelLText": "",
+     "labelLWidth": "S",
+     "labelLAlign": 2,
+     "onClick": "",
      "selectedItems": [
       {
        "key": "isAllSelect",
@@ -235,7 +234,8 @@
      "spaceSize": "M",
      "isAllSelectable": false,
      "isAllSelectableBreakLine": false,
-     "disabledItem": []
+     "disabledItem": [],
+     "icon": []
     },
     {
      "fieldName": "lblSearchCondition",
@@ -257,8 +257,8 @@
      "selectControlID": "lblSearchCondition",
      "helpMessageID": "",
      "jpControlName": "",
-     "isPrivateInfo": false,
      "required": false,
+     "isPrivateInfo": false,
      "text": "※「異動日」「被保番号」のどちらかを必ず指定して下さい。",
      "decorationClass": "",
      "align": 2
@@ -285,11 +285,11 @@
      "jpControlName": "",
      "text": "条件をクリアする",
      "onClick": "onClick_btnClearSearchCondition",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -314,11 +314,11 @@
      "jpControlName": "",
      "text": "検索する",
      "onClick": "onClick_btnSearch",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],
@@ -341,7 +341,7 @@
    "jpControlName": "",
    "onLoad": "",
    "title": "検索条件",
-   "isOpen": true,
+   "isOpen": false,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -559,11 +559,11 @@
      "jpControlName": "",
      "text": "再検索する",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],
@@ -858,6 +858,11 @@
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -905,6 +910,11 @@
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": "処理終了"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -942,6 +952,11 @@
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": "終了"
     }
    ]
   }
@@ -993,7 +1008,7 @@
       "fieldName": "btnSave",
       "items": [],
       "controlType": "CommonButtonFree",
-      "width": "S",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -1009,13 +1024,14 @@
       "selectControlID": "btnSave",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "異動連絡票を保存する",
+      "text": "連絡票情報を保存する",
       "onClick": "",
+      "icon": 0,
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "icon": 0,
+      "heightTextBoxMatches": false,
       "prefixText": "",
       "suffixText": ""
      }
@@ -1024,6 +1040,50 @@
    "states": [
     {
      "state": "対象者一覧"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  },
+  {
+   "commonButtonAreaId": "2",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnComplete",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "処理終了"
     }
    ],
    "isFinishButtonOnTheRight": false

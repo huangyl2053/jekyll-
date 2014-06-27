@@ -17,6 +17,15 @@
    "toLayoutSubGyomuCode": "DBC",
    "toLayoutName": "DBC0200001",
    "toEventName": ""
+  },
+  {
+   "id": "3",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0200002",
+   "eventName": "update",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0200001",
+   "toEventName": "onload"
   }
  ],
  "subGyomuCode": "DBC",

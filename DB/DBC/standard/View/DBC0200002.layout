@@ -203,13 +203,7 @@
     }
    ],
    "validation": {},
-   "events": [
-    {
-     "fieldName": "btnUpdate",
-     "event": "onClick",
-     "transition": "処理完了"
-    }
-   ]
+   "events": []
   },
   {
    "order": "2",
@@ -230,13 +224,7 @@
    "supplementInfo": "",
    "supplementInfoPostParamData": [],
    "validation": {},
-   "events": [
-    {
-     "fieldName": "btnUpdate",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
+   "events": []
   }
  ],
  "currentState": "All",
@@ -246,6 +234,10 @@
   {
    "alias": "cancel",
    "eventName": "btnCancel.onClick"
+  },
+  {
+   "alias": "update",
+   "eventName": "btnUpdate.onClick"
   }
  ],
  "loadSequencePanelNames": [
@@ -273,43 +265,10 @@
     {
      "buttonKind": "CommonButtonFree",
      "buttonProperty": {
-      "fieldName": "btnCancel",
-      "items": [],
-      "controlType": "CommonButtonFree",
-      "width": "S",
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnCancel",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "変更内容を破棄する",
-      "onClick": "onClick_btnCancel",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "prefixText": "",
-      "suffixText": ""
-     }
-    },
-    {
-     "buttonKind": "CommonButtonFree",
-     "buttonProperty": {
       "fieldName": "btnUpdate",
       "items": [],
-      "controlType": "CommonButtonFree",
-      "width": "S",
+      "controlType": "CommonButtonUpdate",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -325,21 +284,99 @@
       "selectControlID": "btnUpdate",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "変更内容を保存する",
-      "onClick": "onClick_btnUpdate",
+      "text": "連絡票情報を保存する",
+      "onClick": "",
       "icon": 0,
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "heightTextBoxMatches": false,
       "prefixText": "",
       "suffixText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnCancel",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCancel",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "履歴訂正一覧に"
      }
     }
    ],
    "states": [
     {
      "state": "連絡票変更"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  },
+  {
+   "commonButtonAreaId": "2",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnComplete",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "訂正履歴一覧へ"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "処理完了"
     }
    ],
    "isFinishButtonOnTheRight": false

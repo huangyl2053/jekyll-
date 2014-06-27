@@ -43,8 +43,7 @@
      "ymdKubun": 1,
      "displayFormat": 0,
      "value": "2009/01/31",
-     "textKind": 0,
-     "permitCharactor": "./_-"
+     "textKind": 0
     },
     {
      "fieldName": "lblHokenshaSofuList",
@@ -69,8 +68,8 @@
      "required": false,
      "isPrivateInfo": false,
      "text": "○…処理済み、×…未処理、－…処理なし",
-     "decorationClass": "",
-     "align": 2
+     "align": 2,
+     "decorationClass": ""
     },
     {
      "fieldName": "btnDisplay",
@@ -94,11 +93,12 @@
      "jpControlName": "",
      "text": "表示する",
      "onClick": "",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "dgHokenshaSofuList",
@@ -120,8 +120,8 @@
      "selectControlID": "dgHokenshaSofuList",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "height": "442",
-     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -230,6 +230,7 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
+     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -274,10 +275,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -327,8 +325,7 @@
      "ymdKubun": 1,
      "displayFormat": 0,
      "value": "",
-     "textKind": 0,
-     "permitCharactor": "./_-"
+     "textKind": 0
     },
     {
      "fieldName": "txtSaiShoriKubun",
@@ -367,14 +364,13 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "value": "",
+     "decorationClass": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": [],
-     "decorationClass": "",
-     "permitCharactor": ""
+     "suggest": []
     },
     {
      "fieldName": "txtFileName",
@@ -413,14 +409,13 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "value": "",
+     "decorationClass": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": [],
-     "decorationClass": "",
-     "permitCharactor": ""
+     "suggest": []
     }
    ],
    "controlType": "Panel",
@@ -465,10 +460,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -512,6 +504,8 @@
      ],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "txtSendData_displayNone": true,
      "PrintContentsSetting_title": "",
      "PrintContentsSetting_eraseBorderTop": true,
@@ -547,6 +541,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "ChohyoShutsuryokujun_width": "G12"
     }
    ],
@@ -592,10 +588,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -651,7 +644,12 @@
      "transition": "連絡票作成"
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnExec",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnRetuen",
      "event": "onClick",
      "transition": ""
     }
@@ -696,7 +694,12 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnExec",
+     "event": "onClick",
+     "transition": "終了"
+    },
+    {
+     "fieldName": "btnRetuen",
      "event": "onClick",
      "transition": "送付一覧"
     }
@@ -727,50 +730,18 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "1",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonFree",
-     "buttonProperty": {
-      "fieldName": "btnReturn",
-      "items": [],
-      "controlType": "CommonButtonFree",
-      "width": "S",
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnReturn",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "送付一覧へ",
-      "onClick": "",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "prefixText": "",
-      "suffixText": ""
-     }
-    },
-    {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonCreate",
      "buttonProperty": {
       "fieldName": "btnExec",
       "items": [],
-      "controlType": "CommonButtonFree",
-      "width": "S",
+      "controlType": "CommonButtonCreate",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -786,15 +757,48 @@
       "selectControlID": "btnExec",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "連絡票を作成する",
+      "text": "作成",
       "onClick": "",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
       "icon": 0,
-      "prefixText": "",
-      "suffixText": ""
+      "heightTextBoxMatches": false,
+      "additionalText": "連絡票を"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnRetuen",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnRetuen",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "送付一覧に"
      }
     }
    ],
