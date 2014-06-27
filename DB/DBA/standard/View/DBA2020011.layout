@@ -64,14 +64,6 @@
     {
      "eventName": "onLoad",
      "requestUrl": ""
-    },
-    {
-     "eventName": "onClick_btnToSearch",
-     "requestUrl": "dba/db/dba/ShisetsuNyutaishoKanriTaishoshaSearch/onClick_btnToSearch"
-    },
-    {
-     "eventName": "onClick_btnToResearch",
-     "requestUrl": "dba/db/dba/ShisetsuNyutaishoKanriTaishoshaSearch/onClick_btnToResearch"
     }
    ],
    "hiddenInput": [],

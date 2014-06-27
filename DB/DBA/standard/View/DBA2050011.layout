@@ -64,14 +64,6 @@
     {
      "eventName": "onLoad",
      "requestUrl": ""
-    },
-    {
-     "eventName": "onClick_btnToSearch",
-     "requestUrl": "dba/db/dba/TajutokuTaishoshaSearch/onClick_btnToSearch"
-    },
-    {
-     "eventName": "onClick_btnToResearch",
-     "requestUrl": "dba/db/dba/TajutokuTaishoshaSearch/onClick_btnToResearch"
     }
    ],
    "hiddenInput": [],
@@ -1448,7 +1440,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
-     "marginTop": 0,
+     "marginTop": "0",
      "marginBottom": 0,
      "businessId": "DBZ",
      "controlName": "KaigoKanryoMessage",
