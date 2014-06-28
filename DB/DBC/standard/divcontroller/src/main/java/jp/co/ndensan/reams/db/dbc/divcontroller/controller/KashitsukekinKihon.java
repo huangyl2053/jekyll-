@@ -51,16 +51,13 @@ public class KashitsukekinKihon {
         AtenaShokaiSimple.setData(panel.getKashitsukekinKihonInfo().getAtenaInfo(), new ShikibetsuCode(cg.getAsRString("識別コード")));
         KaigoShikakuKihonDiv kaigoKihonDiv = panel.getKashitsukekinKaigoKihonInfo();
         kaigoKihonDiv.getTxtHihokenshaNo().setValue(cg.getAsRString("被保番号"));
-        kaigoKihonDiv.getTxtShikakuJotai().setValue(cg.getAsRString("資格状態"));
         kaigoKihonDiv.getTxtShutokuYmd().setValue(cg.getAsRDate("取得日"));
         kaigoKihonDiv.getTxtSoshitsuYmd().setValue(cg.getAsRDate("喪失日"));
         kaigoKihonDiv.getTxtShutokuJiyu().setValue(cg.getAsRString("取得事由"));
         kaigoKihonDiv.getTxtSoshitsuJiyu().setValue(cg.getAsRString("喪失事由"));
-        kaigoKihonDiv.getTxtJutokuTekiyo().setValue(cg.getAsRDate("住特開始"));
-        kaigoKihonDiv.getTxtJutokuKaijo().setValue(cg.getAsRDate("住特終了"));
+        kaigoKihonDiv.getTxtJutokuKubun().setValue(cg.getAsRString("住特区分"));
         kaigoKihonDiv.getTxtYokaigoJotaiKubun().setValue(cg.getAsRString("要介護度"));
-        kaigoKihonDiv.getTxtKyuSochiNyusho().setValue(cg.getAsRString("旧措置入所"));
-        kaigoKihonDiv.getTxtNinteiKikan().setFromValue(cg.getAsRDate("認定開始日"));
-        kaigoKihonDiv.getTxtNinteiKikan().setToValue(cg.getAsRDate("認定終了日"));
+        kaigoKihonDiv.getTxtNinteiKaishiYmd().setValue(cg.getAsRDate("認定開始日"));
+        kaigoKihonDiv.getTxtNinteiShuryoYmd().setValue(cg.getAsRDate("認定終了日"));
     }
 }
