@@ -85,24 +85,11 @@
         CommonButtonNext,
         CommonButtonBack,
         CommonButtonComplete,
-        CommonButtonSelectableComplete,
         CommonButtonConfirm,
         CommonButtonSearch,
         CommonButtonUpdate,
         CommonButtonFree,
         CommonButtonReportPublish,
-        CommonButtonSubmitForDemo,
-        CommonButtonCreate,
-        CommonButtonExecute,
-        CommonButtonSearchResult,
-        CommonButtonReSearch,
-        CommonButtonApprovalRequest,
-        CommonButtonReject,
-        CommonButtonApprove,
-        CommonButtonAccept,
-        CommonButtonSend,
-        CommonButtonReceive,
-        CommonButtonImport,
     }
 }
 declare module Uz {
@@ -198,7 +185,6 @@ declare module Uz {
         public getEditablePropertyInfo(): any;
         public validateControl(): any;
         public afterPropertiesSet(): void;
-        public resizeControl(): void;
     }
 }
 declare module Uz {
@@ -367,34 +353,6 @@ declare module Uz {
         Question,
         Warning,
         Error,
-        Mark,
-        Material,
-        Finished,
-        Residents,
-        ResidentsOther,
-        Mansion,
-        Sharer,
-        Corporation,
-        Individual,
-        Pending,
-        BarcodeReader,
-    }
-    enum IconJapaneaseName {
-        "インフォメーション",
-        "クエスチョン",
-        "警告",
-        "エラー",
-        "レ点",
-        "資料",
-        "済み",
-        "住民",
-        "住民以外",
-        "マンション",
-        "共有者",
-        "法人",
-        "個人",
-        "未",
-        "バーコードリーダー",
     }
     enum IconButton {
         NONE,
@@ -402,35 +360,6 @@ declare module Uz {
         Question,
         Warning,
         Error,
-        Mark,
-        Material,
-        Finished,
-        Residents,
-        ResidentsOther,
-        Mansion,
-        Sharer,
-        Corporation,
-        Individual,
-        Pending,
-        BarcodeReader,
-    }
-    enum IconButtonJapaneaseName {
-        "NONE",
-        "インフォメーション",
-        "クエスチョン",
-        "警告",
-        "エラー",
-        "レ点",
-        "資料",
-        "済み",
-        "住民",
-        "住民以外",
-        "マンション",
-        "共有者",
-        "法人",
-        "個人",
-        "未",
-        "バーコードリーダー",
     }
     enum Appearance {
         Default,
@@ -487,7 +416,6 @@ declare module Uz {
         public bindWidth(value): void;
         public visible : boolean;
         public displayNone : boolean;
-        public changedDisplayNone(oldValue): void;
         private addDisplayRelatedClass();
         public disabled : boolean;
         public parentState : Uz.ParentState;
@@ -531,7 +459,6 @@ declare module Uz {
         public changedParentState(): void;
         public changeStateOfControl(): void;
         public hasDisabled(): boolean;
-        public changeTabIndex(): void;
     }
     class Dependency {
         public dependTo: string;
@@ -591,14 +518,16 @@ declare module Uz {
         private _backgroundColor;
         private _marginTop;
         private _marginBottom;
-        private _eraseBorder;
+        private _eraseBorderBottom;
+        private _eraseBorderRight;
+        private _eraseBorderLeft;
+        private _eraseBorderTop;
         private _widthAuto;
         private _readOnly;
         private _isFirstLoadFinished;
         private _panelDisplay;
         private _isGroupBox;
         private _height;
-        private _focusPositionID;
         private _closingNow;
         public isFirstLoadFinished : boolean;
         public title : string;
@@ -621,7 +550,10 @@ declare module Uz {
         public changeMarginTop(): void;
         public marginBottom : any;
         public changeMarginBottom(): void;
-        public eraseBorder : boolean;
+        public eraseBorderTop : boolean;
+        public eraseBorderBottom : boolean;
+        public eraseBorderRight : boolean;
+        public eraseBorderLeft : boolean;
         public widthAuto : boolean;
         public panelDisplay : any;
         public height : any;
@@ -629,7 +561,6 @@ declare module Uz {
         private addCssClass(value);
         public readOnly : boolean;
         public isGroupBox : boolean;
-        public focusPositionID : any;
         public fieldNameChanged(beforeFieldName, newFieldName): void;
         constructor($parentElement: JQuery, isDesignMode: boolean);
         public changeWidth(): void;
@@ -637,12 +568,10 @@ declare module Uz {
         public createDomElement($parentElement, isDesignMode): HTMLDivElement;
         public getEditablePropertyInfo(): any;
         public createCheckBoxTypeDisabledProperty(editablePropertyInfo: any, keyName: string, value: boolean, enabled?: boolean);
-        public afterPropertiesSet(): void;
         private childDivAutoMakeSelect();
         private childDivAutoMakeSelectElement(fieldName);
         public showLoading(): void;
         public hideLoading(): void;
-        public setFocusForPanel(focusId: string): void;
         public bindData(data: any): void;
         private getPanelBodyAreaID();
         private getPanelHeaderAreaID();
@@ -681,7 +610,6 @@ declare module Uz {
         private _icon;
         private _iconFileUrl;
         private _iconDirs;
-        private _heightTextBoxMatches;
         public onClick : string;
         public text : string;
         public appearance : Uz.Appearance;
@@ -689,7 +617,6 @@ declare module Uz {
         public imageHeight : any;
         public imageWidth : any;
         public icon : any;
-        public heightTextBoxMatches : boolean;
         public setMargin(): void;
         public setWidth(): void;
         public changeWidth(): void;
@@ -703,7 +630,6 @@ declare module Uz {
         public reSizeHeightImage(isHeightValue: boolean): void;
         public reSizeWidthImage(isWidthValue: boolean): void;
         private setDisabledImageProperty(isDisabled);
-        private setDisabledheightTextBoxMatchesProperty(isDisabled);
         private setDisabledTextProperty(isDisabled);
     }
 }
@@ -918,6 +844,7 @@ declare module Uz {
         private doAfterPrintCallBack(response);
         private doAfterPrintFailedCallBack(response);
         private showDialog(sourceDataInfoList);
+        public createDirectQueryStrings(gyomuCode: string, reportId: string, reportIndex: number): string;
         public getPrintType(): number;
     }
 }
@@ -954,19 +881,6 @@ declare module Uz {
         private doAfterPrintFailedCallBack(response);
         private showDialog(sourceDataInfoList, top, left, width, height);
         public getPrintType(): number;
-    }
-}
-declare module Uz {
-    class _CommonButtonSubmitForDemo extends Uz._ButtonSubmit {
-        private _prefixText;
-        private _suffixText;
-        public prefixText : string;
-        public suffixText : string;
-        public recreateDomElement(isImage: boolean): void;
-        public changeWidthParameter(oldWidth, newWidth): void;
-        public registProperty(): void;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public getEditablePropertyInfo(): any;
     }
 }
 declare module Uz {
@@ -1044,7 +958,6 @@ declare module Uz {
         static getDateInfoStruct(strDateValueTmp, flexibleStatus?: boolean, $element?: any): DateStruct;
         private static ymdCheckNot(ymd, flexibleStatus, $element);
         private static ymdCheckNotAll(a_strReturn, flexibleStatus, $element);
-        private static warekiInputDataCheck(genYear);
         private static convDateSeireki(targetDate, formatType, flexibleStatus?, $element?, gridFormatter?);
         private static displayFormatInputCheck(resultString);
         private static isYearRange(targetValue);
@@ -1064,7 +977,6 @@ declare module Uz {
         private static yearKeepWarekiGet($element, val?);
         private static getDaysInMonthWareki(strGYYMM, flexibleStatus?);
         private static convDateWareki(TargetDate, flexibleStatus?);
-        static ymdKubunChage($element: JQuery, ymdKubunAfter: any, ymdKubunBefore: any): void;
     }
     class DateStruct {
         private _eraNumber;
@@ -1238,8 +1150,6 @@ declare module Uz {
         public changedDisabled(): void;
         public changedParentState(): void;
         public changeStateOfControl(): void;
-        public changeTabIndex(): void;
-        public resizeControl(): void;
     }
 }
 declare module Uz {
@@ -1384,8 +1294,6 @@ declare module Uz {
         public changedDisabled(): void;
         public changedParentState(): void;
         public changeStateOfControl(): void;
-        public changeTabIndex(): void;
-        public resizeControl(): void;
     }
 }
 declare module Uz {
@@ -1477,18 +1385,16 @@ declare module Uz {
         private getJQueryLabelRElement();
         public bindData(data: any): void;
         public validateControl(): any;
-        static validateRequired(text: string, required: boolean, id: string, jpControlName: string): any;
-        static validateMaxLength(text: string, maxLength: number, id: string, jpControlName: string): any;
-        static validateMinLength(text: string, minLength: number, id: string, jpControlName: string): any;
-        static validateTextKind(text: string, imeMode: Uz.ImeMode, id: string, jpControlName: string): any;
-        static validateUniqueCharactor(text: string, id: string, jpControlName: string): any;
+        public validateRequired(): any;
+        public validateMaxLength(): any;
+        public validateMinLength(): any;
+        public validateTextKind(): any;
+        public validateUniqueCharactor(): any;
         public getOutputParameter(): any;
         public setOutputParameter(value: any): void;
         public changedDisabled(): void;
         public changedParentState(): void;
         public changeStateOfControl(): void;
-        public changeTabIndex(): void;
-        public resizeControl(): void;
     }
 }
 declare module Uz {
@@ -1505,13 +1411,12 @@ declare module Uz {
         static getFormatText(text: string, formatLength: any): string;
         static particularValidation(formatText: string): boolean;
         public validateControl(): any;
-        static validateTextKindForCode(text: string, permitCharactor: string, id: string, jpControlName: string): any;
+        public validateTextKind(): any;
         public updateValidationRule(propertyName: String): void;
     }
 }
 declare module Uz {
     class _TextBoxNum extends Uz._TextBox {
-        static PERMITCHARACTER_GRID: string;
         private _maxValue;
         private _minValue;
         private _isCurrency;
@@ -1537,11 +1442,11 @@ declare module Uz {
         static getFormatText(value: string, isCurrency: any, isComma: any): string;
         static particularValidation(text: string): boolean;
         public validateControl(): any;
-        static validateMaxLengthForNum(text: string, maxLength: number, decimalPointLength: number, id: string, jpControlName: string): any;
-        static validateMinLengthForNum(text: string, minLength: number, decimalPointLength: number, id: string, jpControlName: string): any;
-        static validateMaxValue(text: string, maxValue: number, decimalPointLength: number, id: string, jpControlName: string): any;
-        static validateMinValue(text: string, minValue: number, decimalPointLength: number, id: string, jpControlName: string): any;
-        static validateTextKindForNum(text: string, permitCharactor: string, decimalPointLength: number, id: string, jpControlName: string): any;
+        public validateMaxLength(): any;
+        public validateMinLength(): any;
+        public validateMaxValue(): any;
+        public validateMinValue(): any;
+        public validateTextKind(): any;
     }
 }
 declare module Uz {
@@ -1604,7 +1509,7 @@ declare module Uz {
         public defaultPermitCharactor : string;
         public value : string;
         public fieldNameChanged(beforeFieldName, newFieldName): void;
-        public getCoreID(): string;
+        private getCoreID();
         private getLabelLID();
         private getLabelRID();
         constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc: Function);
@@ -1626,15 +1531,14 @@ declare module Uz {
         public bindData(data: any): void;
         public changeFormatBindData(): void;
         public validateControl(): any;
-        static validateTextKindForDate(text, displayFormat, permitCharactor, id, jpControlName): any;
-        static validateInputDate(ymdKubun, displayFormat, $element, id, jpControlName): any;
+        public validateRequired(): any;
+        public validateTextKind(): any;
+        public validateInputDate(): any;
         public getOutputParameter(): any;
         public setOutputParameter(value: any): void;
         public changedDisabled(): void;
         public changedParentState(): void;
         public changeStateOfControl(): void;
-        public changeTabIndex(): void;
-        public resizeControl(): void;
     }
 }
 declare module Uz {
@@ -1642,44 +1546,7 @@ declare module Uz {
         constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc: Function);
         public createDomElement($parentElement, isDesignMode): HTMLDivElement;
         public validateControl(): any;
-        static validateInputDateForFlexibleDate($element: JQuery, id: string, jpControlName: string): any;
-    }
-}
-declare module Uz {
-    class _TextBoxTime extends Uz._TextBox {
-        static PERMITCHARACTER_GRID: string;
-        private _displayFormat;
-        private _timeKubun;
-        public displayFormat : Uz.DisplayFormat;
-        public timeKubun : Uz.TimeKubun;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-        public formatValidation(): boolean;
-        private createEasyFormat();
-        private changeDateTypeStringCommaSeparateMillis(easyFormat);
-        private changeDateTypeStringCommaSeparate(easyFormat);
-        private changeDateTypeString1or2DigitNumber(easyFormat);
-        private changeDateTypeString4DigitNumber(easyFormat);
-        private changeDateTypeString6DigitNumber(easyFormat);
-        private changeDateTypeStringJapanFormat(easyFormat);
-        private change24Format(text, hourSeparatPosition);
-        private changeSeparators(text);
-        private searchMinuteAndSecond(text, mySeparatPosition, frontSeparatPosition);
-        public changeFormat(): void;
-        private setSeparators();
-        private createHour(date, separators);
-        private change2Digit(value);
-        public validateControl(): any;
-        static validateTextKindForTime(text: string, permitCharactor: string, id: string, jpControlName: string): any[];
-        static validateUniqueCharactorForTime(text: string, id: string, jpControlName: string): any[];
-        static validateTime(text: string, id: string, timeKubun: Uz.TimeKubun, displayFormat: Uz.DisplayFormat, jpControlName: string): any;
-        private static getValidateValue(value, displayFormat);
-        private static checkTimeValue(timeArray, timeKubun);
-        public getOutputParameter(): any;
-        public setOutputParameter(value: any): void;
+        public validateInputDate(): any;
     }
 }
 declare module Uz {
@@ -1688,16 +1555,11 @@ declare module Uz {
         private _title;
         private _titleHref;
         private _onActive;
-        private _onFirstActive;
-        private _isFirstActivated;
-        private _lazyEvalProperties;
-        private _lazyBoundData;
         public title : string;
         private getTabATag();
         private getTabList();
         private titleHref;
         public onActive : string;
-        public onFirstActive : string;
         constructor($parentElement: JQuery, isDesignMode: boolean);
         public createDomElement($parentElement, isDesignMode: boolean): HTMLDivElement;
         public fieldNameChanged(beforeFieldName, newFieldName): void;
@@ -1709,7 +1571,6 @@ declare module Uz {
         public changedVisible(): void;
         public bindData(data: any): void;
         public changeStateOfControl(): void;
-        public lazyEvalProperties : any;
     }
 }
 declare module Uz {
@@ -1720,7 +1581,6 @@ declare module Uz {
         private _onChange;
         private _containerWidth;
         private _initialTab;
-        private _isLazyLoading;
         public containerWidth : any;
         public onChange : string;
         public selectedItem : Uz._TabPanel;
@@ -1731,7 +1591,6 @@ declare module Uz {
         public isDraggable : boolean;
         public initialTab : number;
         public selectedItemFieldName : string;
-        public isLazyLoading : boolean;
         constructor($parentElement: JQuery, isDesignMode: boolean);
         public createDomElement($parentElement, isDesignMode: boolean): HTMLElement;
         private createTabContainer();
@@ -1763,7 +1622,6 @@ declare module Uz {
         public resetSelectItem(): void;
         public bindData(data: any): void;
         public changeStateOfControl(): void;
-        public afterPropertiesSet(): void;
         private activeInitialTab();
     }
 }
@@ -1810,7 +1668,7 @@ declare module Uz {
         static _isDesignMode: boolean;
         static HeaderFormatter(row, cell, value, columnDef, dataContext): string;
         static LabelFormatter(row, cell, value, columnDef, dataContext): string;
-        static TextBoxFormatter(row, cell, value, columnDef, dataContext, gridId): string;
+        static TextBoxFormatter(row, cell, value, columnDef, dataContext): string;
         static CheckBoxFormatter(row, cell, value, columnDef, dataContext): string;
         static DropDownListFormatter(row, cell, value, columnDef, dataContext): string;
         static RowStateFormatter(row, cell, value, columnDef, dataContext): string;
@@ -1823,11 +1681,8 @@ declare module Uz {
         static IconFormatter(row, cell, value, columnDef, dataContext): string;
         static DynamicImageFormatter(row, cell, value, columnDef, dataContext): string;
         private static getCustomAttrString(columnDef, dataContext);
-        private static getCellContorlId(columnDef, dataContext, gridId);
         static ButtonDialogFormatter(row, cell, value, columnDef, dataContext): string;
-        static TextBoxMultiLineFormatter(row, cell, value, columnDef, dataContext, gridId): string;
-        private static IsHide(value);
-        private static getControlState(value, columnDef);
+        static TextBoxMultiLineFormatter(row, cell, value, columnDef, dataContext): string;
     }
     class _FormatDataForGrid {
         public value: any;
@@ -1835,11 +1690,6 @@ declare module Uz {
         public result: boolean;
         constructor(value: any, column: any);
         private format(value, column);
-    }
-    enum CellState {
-        Disable,
-        Enable,
-        ReadOnly,
     }
 }
 declare module Uz {
@@ -1852,12 +1702,9 @@ declare module Uz {
         private _originalProperty;
         private _marginTop;
         private _marginBottom;
-        private _canTransferEvent;
-        private _isAfterOriginalPropertiesSet;
         private _dataPassingForDialog;
         private _dialogOkEventNameForDialog;
         private _dialogCancelEventNameForDialog;
-        private _heightForDialog;
         private _parentButtonDialog;
         public layout : any;
         public businessId : string;
@@ -1870,11 +1717,8 @@ declare module Uz {
         public dataPassingForDialog : Object[];
         public dialogOkEventNameForDialog : string;
         public dialogCancelEventNameForDialog : string;
-        public canTransferEvent : boolean;
-        public heightForDialog : string;
         private static defaultLayout;
         constructor($parentElement: JQuery, isDesignMode: boolean, staticLayout: any, fieldName: string);
-        public afterPropertiesSet(): void;
         public fieldNameChanged(beforeFieldName, newFieldName): void;
         public renderCompleted(): void;
         private static getCommonChildDivFieldName($parentElement, fieldName);
@@ -1897,7 +1741,6 @@ declare module Uz {
         private waitLoadingForDialog(thisInstance);
         public changedDisabled(): void;
         public changedParentState(): void;
-        public changedDisplayNone(oldValue): void;
     }
 }
 declare module Uz {
@@ -1921,7 +1764,6 @@ declare module Uz {
         private hideDialog();
         private resetIsFirstLoadFinished(control);
         private getDialogDomId();
-        private getDialogBaseDomId();
         private getDialogBusinessId();
         private getDialogControlName();
         private bindParentToDialog();
@@ -1938,8 +1780,6 @@ declare module Uz {
         private getDialogDivPanelDomId();
         private fireOnLoadEvent();
         static canShowDialog(displayChildDivName: string): boolean;
-        private decideHeight(element, height);
-        private setPosition();
     }
 }
 declare module Uz {
@@ -1979,10 +1819,7 @@ declare module Uz {
         private _onOnlyRow;
         private _onNoRow;
         private _onMultiRows;
-        private _readOnly;
-        private _cellControlValidateError;
         public gridSetting : _GridSetting;
-        private getCellDetailsObject(cellDetails);
         public height : any;
         private static convertOldValue(value);
         public dataSource : any[];
@@ -1999,11 +1836,8 @@ declare module Uz {
         public onOnlyRow : string;
         public onNoRow : string;
         public onMultiRows : string;
-        public readOnly : boolean;
         public changeWidth(): void;
         public changeHeight(): void;
-        public changedDisabled(): void;
-        public changedReadOnly(): void;
         constructor($parentElement: JQuery, isDesignMode: boolean);
         private createDefaultGridSetting();
         private createGrid();
@@ -2022,14 +1856,6 @@ declare module Uz {
         private initGridCellClickEvent();
         private initGridCellFocusEvent();
         private initGridCellChangeEvent();
-        private validateGridCell($element, cellDetails, text, value, result);
-        private resetValidateError();
-        private validateTextBox(id, cellDetails, text);
-        private validateTextBoxCode(id, cellDetails, text);
-        private validateTextBoxNum(id, cellDetails, text);
-        private validateTextBoxTime(id, cellDetails, text);
-        private validateTextBoxDate(id, cellDetails, text, $element);
-        private validateTextBoxFlexibleDate(id, cellDetails, text, $element);
         private afterChangeAction(inputElement, column);
         private getColumnDefinition(columnId);
         private initFilterToolbar();
@@ -2064,9 +1890,7 @@ declare module Uz {
         public setOutputParameterForDialog(rowId: number, dataName: string, value: any): void;
         private waitLoadingForDialog(thisInstance, column);
         private showDialog(thisInstance, column);
-        public resizeControl(): void;
-        public changedParentState(): void;
-        public changeStateOfControl(): void;
+        public hasDisabled(): boolean;
     }
     enum _GridRowNum {
         rows_5,
@@ -2190,7 +2014,6 @@ declare module Uz {
         private _isCompositeEditMode;
         private _relation;
         private _originalProperty;
-        private _isAfterOriginalPropertiesSet;
         public url : string;
         public targetPostParamFieldNames : string[];
         public layout : any;
@@ -2201,7 +2024,6 @@ declare module Uz {
         public originalProperty : Object[];
         private static defaultLayout;
         constructor($parentElement: JQuery, isDesignMode: boolean, staticLayout: any, fieldName: string);
-        public afterPropertiesSet(): void;
         public fieldNameChanged(beforeFieldName, newFieldName): void;
         public renderCompleted(): void;
         private static getCompositeControlFieldName($parentElement, fieldName);
@@ -2219,12 +2041,11 @@ declare module Uz {
         private setElementId();
         public bindData(data: any): void;
         public changeStateOfControl(): void;
-        public changedDisplayNone(oldValue): void;
     }
 }
 declare module Uz {
     class _ViewControlUtil {
-        static applyLayoutInfo(control: Uz._JSControl, layoutInfo: any, $ancestorElement: JQuery, isDesignMode: boolean, forceBind?: Boolean): Uz._JSControl;
+        static applyLayoutInfo(control: Uz._JSControl, layoutInfo: any, $ancestorElement: JQuery, isDesignMode: boolean): Uz._JSControl;
         static applyLayoutInfoForDesign(control: Uz._JSControl, layoutInfo: any, $ancestorElement: JQuery, isDesignMode: boolean): Uz._JSControl;
         private static getTargetPanelNames(state);
         private static getTargetLayoutInfo(layoutInfo, targetPanelName);
@@ -2241,7 +2062,7 @@ declare module Uz {
         static getPanelFieldNames(parentControl: Uz._ViewControl, panelFieldNames: string[]): string[];
         static serializeArrayForGrid(array: string[]): string;
         static getFirstState(page: Uz._ViewPage): string;
-        static getNextState(page: Uz._ViewPage, fieldName: string, eventName: string): string;
+        static getNextState(page: Uz._ViewPage, fieldName: string, eventName: string, currentStateName: string): string;
         static getTransitionEvents(page: Uz._ViewPage): Object[];
         private static isExistEventInArray(eventArray, data);
         static getStateTransitionByState(page: Uz._ViewPage, targetState: string): any;
@@ -2263,8 +2084,6 @@ declare module Uz {
         static getLayoutParentByFieldName(rootControl: Uz._JSControl, fieldName: string): any;
         private static searchLayoutParentByFieldName(currnetControl, fieldName);
         static getSendJsonInfo(control: Uz._JSControl, currentLayout?: any): any;
-        private static pushJsonInfoFromItems(jsonInfo, controlItems, currentLayout);
-        private static getJsonInfoItem(ControlItem, itemName);
         private static createItemsToJsonObject(parentDiv, parentLayout?);
         private static isViewControl(control);
         static isCommonChildDivPanel(control: Uz._JSControl): boolean;
@@ -2294,13 +2113,9 @@ declare module Uz {
         static changeControlColor(controlId: string): void;
         static removeClientError(controlId: string): void;
         static isValidateError(validateFrom: string): boolean;
-        static isValidateWarningMessage(): boolean;
         static resizeOuterDiv(targetControl: any): void;
         private static getOuterDivWidthOfCenter(targetControl);
         static isControlOnDialog(control: Uz._JSControl): boolean;
-        static changeCommonButtonDisabled(page: Uz._ViewPage, currentCommonButtonDisabled: any): void;
-        static resizeOuterDivForComposite(targetControl: any): void;
-        private static setSizeComposite(rootControl, layout);
     }
     class Console {
         private static timeCounters;
@@ -2331,15 +2146,12 @@ declare module Uz {
         private _panelMargin;
         private _controlMargin;
         private _supplementInfoAllSet;
-        private _supplementInfoAllPostParam;
         private _currentSupplementInfoByState;
         private _currentSupplementInfoPostParam;
         private _commonButtonAreaData;
         private _isOpenSupplementWindow;
         private _supplementWindow;
         private _subGyomuCode;
-        private _currentCommonButtonDisabled;
-        private _isSupplementLocationChange;
         private static _helpTabWidth;
         private static _helpTabHeight;
         private static _helpDivWidth;
@@ -2366,12 +2178,10 @@ declare module Uz {
         public panelMargin : Uz.LumpSizeForPanel;
         public controlMargin : Uz.LumpSizeForContorol;
         public supplementInfoAllSet : string;
-        public supplementInfoAllPostParam : string[];
         public currentSupplementInfoByState : string;
         public commonButtonAreaData : string[];
         public isOpenSupplementWindow : boolean;
         public supplementWindow : any;
-        public currentCommonButtonDisabled : any;
         constructor($parentElement: JQuery, isDesignMode: boolean, isDialogPage: boolean);
         private initUnLoadEvent();
         private initSupplementButtonClickEvent();
@@ -2396,23 +2206,23 @@ declare module Uz {
         public getEditablePropertyInfo(): any;
         private static getFieldNames(control, fieldNames);
         private getStateNames();
+        private createHelpTab(text, className, startGradient, endGradient, fontSize);
+        private createHelpDiv(className);
+        private fillColorOfHelpTab(context, startGradient, endGradient);
+        private writeVerticalLine(context, text, x, y, fontSize);
         public bindStateTransitionEvent(): void;
         public changeState(fieldName: string, eventName: string): void;
         private changePage(eventName);
         private changeFinishState();
         public whenBatchRegisteredChangeFinishState(): void;
         public getEventName(eventAliasName: string): string;
-        public fireUIContainerToEvent(eventNameAlias: string): void;
         private changeVisibleDiv(isAll);
-        public rePositioningFixedDiv(): void;
-        private resizeChildControls($parentsPanel);
         private setParentsPanleMinWidth($parentsPanel);
         private returnOriginalLocation(element);
         private changeStateDiv(changeInstance);
         private loadDivs(instances, loadSequence);
         private changeControlMargin(value);
         private changePanelMargin(value);
-        private static hideDummyImageIfNoOnLoad(changeInstance);
     }
     class CommonButtonAreaData {
         public commonButtonAreaId: string;
@@ -2520,14 +2330,17 @@ declare module Uz {
         private getTextContID();
         private getTextContDivID();
         public validateControl(): any;
+        public validateRequired(): any;
+        public validateMaxLength(): any;
+        public validateMinLength(): any;
+        public validateTextKind(): any;
+        public validateUniqueCharactor(): any;
         public changedDisabled(): void;
         public changedParentState(): void;
         public changeStateOfControl(): void;
         public getOutputParameter(): any;
         public setOutputParameter(value: any): void;
         private heightConvert(value);
-        public changeTabIndex(): void;
-        public resizeControl(): void;
     }
 }
 declare module Uz {
@@ -2573,6 +2386,43 @@ declare module Uz {
         public datepickerOnClose(element, beforeValue): void;
         public createSliderDisplaySize(element);
         public sliderDisplaySize();
+        public bindData(data: any): void;
+    }
+}
+declare module Uz {
+    class _TextBoxTime extends Uz._TextBox {
+        private _displayFormat;
+        private _timeKubun;
+        public displayFormat : Uz.DisplayFormat;
+        public timeKubun : Uz.TimeKubun;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public registProperty(): void;
+        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
+        public getEditablePropertyInfo(): any;
+        public bindData(data: any): void;
+        public formatValidation(): boolean;
+        private createEasyFormat();
+        private changeDateTypeStringCommaSeparateMillis(easyFormat);
+        private changeDateTypeStringCommaSeparate(easyFormat);
+        private changeDateTypeString1or2DigitNumber(easyFormat);
+        private changeDateTypeString4DigitNumber(easyFormat);
+        private changeDateTypeString6DigitNumber(easyFormat);
+        private changeDateTypeStringJapanFormat(easyFormat);
+        private change24Format(text, hourSeparatPosition);
+        private changeSeparators(text);
+        private searchMinuteAndSecond(text, mySeparatPosition, frontSeparatPosition);
+        public changeFormat(): void;
+        private setSeparators();
+        private createHour(date, separators);
+        private change2Digit(value);
+        public validateControl(): any;
+        public validateTextKind(): any;
+        public validateUniqueCharactor(): any;
+        public validateTime(): any;
+        private getValidateValue(value);
+        private checkTimeValue(timeArray);
+        public getOutputParameter(): any;
+        public setOutputParameter(value: any): void;
     }
 }
 declare module Uz {
@@ -2954,9 +2804,6 @@ declare module Uz {
         static createIDForItemInDiv(divID: string, itemKey: string): string;
         static createTextIcon($list: JQuery, textIcon: TextIcon[]): void;
         static createIconColumnInfo(dataSource: Uz.ListControlDataPair[]): any[];
-        static textIconJapaneaseNameToEnglishName(textIcon: TextIcon[]): any;
-        private static iconJapaneaseNameToEnglishName(iconName);
-        private static getIconJapaneaseNameObject();
     }
     class TextIcon {
         public key: string;
@@ -2972,7 +2819,6 @@ declare module Uz {
         private _coreDom;
         private _labelLDom;
         private _labelRDom;
-        private _readOnly;
         private _required;
         private _labelLText;
         private _labelRText;
@@ -2982,8 +2828,6 @@ declare module Uz {
         private _labelRAlign;
         private _onFocus;
         private _onBlur;
-        public readOnly : boolean;
-        private changedReadOnly();
         public required : boolean;
         public onFocus : string;
         public onBlur : string;
@@ -3016,10 +2860,6 @@ declare module Uz {
         public bindData(data: any): void;
         public validateControl(): any;
         public validateRequired(): any;
-        public changedDisabled(): void;
-        public changedParentState(): void;
-        public changeStateOfControl(): void;
-        public resizeControl(): void;
     }
 }
 declare module Uz {
@@ -3029,7 +2869,6 @@ declare module Uz {
         private _coreDom;
         private _labelLDom;
         private _required;
-        private _readOnly;
         private _labelLText;
         private _labelLWidth;
         private _labelLAlign;
@@ -3045,8 +2884,6 @@ declare module Uz {
         private _isIndeterminateStatus;
         private _icon;
         public required : boolean;
-        public readOnly : boolean;
-        private changedReadOnly();
         public selectedItems : Uz.ListControlDataPair[];
         private addIsAllSelect(items);
         public onClick : string;
@@ -3099,9 +2936,6 @@ declare module Uz {
         private getCoreID();
         public getJQueryElement(isCoreElement?: boolean): JQuery;
         public changeStateOfControl(): void;
-        public changedDisabled(): void;
-        public resizeControl(): void;
-        private resizeOuterDiv();
     }
 }
 declare module Uz {
@@ -3110,7 +2944,6 @@ declare module Uz {
         private static DEFAULT_LABELL_ID;
         private _coreDom;
         private _labelLDom;
-        private _readOnly;
         private _required;
         private _labelLText;
         private _labelLWidth;
@@ -3121,8 +2954,6 @@ declare module Uz {
         private _spaceSize;
         private _icon;
         public required : boolean;
-        public readOnly : boolean;
-        private changedReadOnly();
         public fieldNameChanged(beforeFieldName, newFieldName): void;
         public groupName : string;
         private updateUIForGroupName();
@@ -3157,8 +2988,6 @@ declare module Uz {
         private getCoreID();
         public getJQueryElement(isCoreElement?: boolean): JQuery;
         public changeStateOfControl(): void;
-        public changedDisabled(): void;
-        public resizeControl(): void;
     }
 }
 declare module Uz {
@@ -3273,8 +3102,6 @@ declare module Uz {
     class _CommonButton extends Uz._Button {
         private _additionalText;
         public additionalText : string;
-        public recreateDomElement(isImage: boolean): void;
-        public changeWidthParameter(oldWidth, newWidth): void;
         public registProperty(): void;
         constructor($parentElement: JQuery, isDesignMode: boolean);
         public getEditablePropertyInfo(): any;
@@ -3296,24 +3123,6 @@ declare module Uz {
     }
 }
 declare module Uz {
-    class _CommonButtonSelectableComplete extends Uz._CommonButton {
-        private _message;
-        private _textOfYes;
-        private _textOfNo;
-        public message : string;
-        public textOfYes : string;
-        public textOfNo : string;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        private dialogDiv();
-        private createDialog();
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        private static call(extension);
-        private static requestFinishFlow(extension, subGyomuCD, flowInstanceId, currentTaskId, wfParameter, callBack);
-        private static displayGyomuScreen(url);
-    }
-}
-declare module Uz {
     class _CommonButtonConfirm extends Uz._CommonButton {
         constructor($parentElement: JQuery, isDesignMode: boolean);
     }
@@ -3330,15 +3139,11 @@ declare module Uz {
 }
 declare module Uz {
     class _CommonButtonFree extends Uz._CommonButton {
-        private DEFAULT_ICON_HEADER_COMMON;
-        private DEFAULT_ICON_TRALER_COMMON;
         private _prefixText;
         private _suffixText;
-        private _commonButtonIcon;
         public additionalText : string;
         public prefixText : string;
         public suffixText : string;
-        public recreateDomElement(isImage: boolean): void;
         constructor($parentElement: JQuery, isDesignMode: boolean);
         public registProperty(): void;
         public getEditablePropertyInfo(): any;
@@ -3348,68 +3153,9 @@ declare module Uz {
     class _CommonButtonReportPublish extends Uz._ButtonReportPublish {
         private _additionalText;
         public additionalText : string;
-        public changeWidthParameter(oldWidth, newWidth): void;
         public registProperty(): void;
         constructor($parentElement: JQuery, isDesignMode: boolean);
         public getEditablePropertyInfo(): any;
-    }
-}
-declare module Uz {
-    class _CommonButtonCreate extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonExecute extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonSearchResult extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public getEditablePropertyInfo(): any;
-    }
-}
-declare module Uz {
-    class _CommonButtonReSearch extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public getEditablePropertyInfo(): any;
-    }
-}
-declare module Uz {
-    class _CommonButtonApprovalRequest extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public getEditablePropertyInfo(): any;
-    }
-}
-declare module Uz {
-    class _CommonButtonReject extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonApprove extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonAccept extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonSend extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonReceive extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonImport extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
     }
 }
 declare module Uz {
