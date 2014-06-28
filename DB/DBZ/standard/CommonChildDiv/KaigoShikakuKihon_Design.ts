@@ -36,58 +36,16 @@ module DBZ {
             }
         }
         
-        public get eraseBorderTop() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"];
+        public get eraseBorder() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
         }
         
-        public set eraseBorderTop(value) {
+        public set eraseBorder(value) {
             if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
                  Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"] = value;
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
             } else {
-                this.layout.items[0]["eraseBorderTop"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderBottom() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"];
-        }
-        
-        public set eraseBorderBottom(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderBottom"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderRight() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"];
-        }
-        
-        public set eraseBorderRight(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderRight"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderLeft() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"];
-        }
-        
-        public set eraseBorderLeft(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderLeft"] = value;
+                this.layout.items[0]["eraseBorder"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -107,29 +65,29 @@ module DBZ {
         }
         
         public get btnHihoRireki_visible() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["visible"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"])["visible"];
         }
         
         public set btnHihoRireki_visible(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["visible"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"])["visible"] = value;
             } else {
-                this.layout.items[0].items[6]["visible"] = value;
+                this.layout.items[0].items[10]["visible"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
         
         public get btnNinteiRireki_visible() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["visible"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"])["visible"];
         }
         
         public set btnNinteiRireki_visible(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["visible"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"])["visible"] = value;
             } else {
-                this.layout.items[0].items[12]["visible"] = value;
+                this.layout.items[0].items[9]["visible"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -146,10 +104,7 @@ module DBZ {
             super.registProperty();
             Uz.JSControlUtil.registProperty("title");
             Uz.JSControlUtil.registProperty("canOpenAndClose");
-            Uz.JSControlUtil.registProperty("eraseBorderTop");
-            Uz.JSControlUtil.registProperty("eraseBorderBottom");
-            Uz.JSControlUtil.registProperty("eraseBorderRight");
-            Uz.JSControlUtil.registProperty("eraseBorderLeft");
+            Uz.JSControlUtil.registProperty("eraseBorder");
             Uz.JSControlUtil.registProperty("backGroundColor");
             Uz.JSControlUtil.registProperty("btnHihoRireki_visible");
             Uz.JSControlUtil.registProperty("btnNinteiRireki_visible");
@@ -164,13 +119,10 @@ module DBZ {
             var editablePropertyInfo = super.getEditablePropertyInfo();
             editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
             editablePropertyInfo["canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
-            editablePropertyInfo["eraseBorderTop"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderTop"];
-            editablePropertyInfo["eraseBorderBottom"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderBottom"];
-            editablePropertyInfo["eraseBorderRight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderRight"];
-            editablePropertyInfo["eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
+            editablePropertyInfo["eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
             editablePropertyInfo["backGroundColor"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["backgroundColor"];
-            editablePropertyInfo["btnHihoRireki_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["visible"];
-            editablePropertyInfo["btnNinteiRireki_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["btnHihoRireki_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["btnNinteiRireki_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"]).getEditablePropertyInfo()["visible"];
             
             return editablePropertyInfo;
         }
@@ -219,7 +171,7 @@ module DBZ {
      "value": "",
      "labelLText": "被保番号",
      "labelRText": "",
-     "labelLWidth": "74",
+     "labelLWidth": "70",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -259,7 +211,7 @@ module DBZ {
      "value": "",
      "labelLText": "資格取得",
      "labelRText": "",
-     "labelLWidth": "74",
+     "labelLWidth": "70",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -304,221 +256,9 @@ module DBZ {
      "text": "",
      "suggest": [],
      "value": "",
-     "labelLText": "取得事由",
+     "labelLText": "",
      "labelRText": "",
-     "labelLWidth": "74",
-     "labelRWidth": "0",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
-    },
-    {
-     "fieldName": "txtJutokuTekiyo",
-     "items": [],
-     "controlType": "TextBoxDate",
-     "width": "85",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "txtJutokuTekiyo_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": true,
-     "required": false,
-     "placeHolder": "",
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "text": "",
-     "value": "",
-     "labelLText": "住特開始",
-     "labelRText": "",
-     "labelLWidth": "74",
-     "labelRWidth": "0",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
-    },
-    {
-     "fieldName": "txtYokaigoJotaiKubun",
-     "items": [],
-     "controlType": "TextBox",
-     "width": "100",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "txtYokaigoJotaiKubun_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": true,
-     "required": false,
-     "maxLength": "6",
-     "minLength": 0,
-     "textAlign": 0,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "isComboBox": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "text": "",
-     "suggest": [],
-     "value": "",
-     "labelLText": "要介護状態",
-     "labelRText": "",
-     "labelLWidth": "90",
-     "labelRWidth": "0",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
-    },
-    {
-     "fieldName": "txtKyuSochiNyusho",
-     "items": [],
-     "controlType": "TextBox",
-     "width": "20",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "txtKyuSochiNyusho_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": true,
-     "required": false,
-     "maxLength": "1",
-     "minLength": 0,
-     "textAlign": 0,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "isComboBox": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "text": "",
-     "suggest": [],
-     "value": "",
-     "labelLText": "旧措置入所",
-     "labelRText": "",
-     "labelLWidth": "113",
-     "labelRWidth": "0",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
-    },
-    {
-     "fieldName": "btnHihoRireki",
-     "items": [],
-     "controlType": "ButtonDialog",
-     "width": "70",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0.7",
-     "marginRight": "0",
-     "selectControlID": "btnHihoRireki",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "text": "被保履歴",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0,
-     "displayChildDivName": "",
-     "dataPassing": [],
-     "visibleCloseButton": true,
-     "onOkClose": "",
-     "onBeforeOpenDialog": ""
-    },
-    {
-     "fieldName": "txtShikakuJotai",
-     "items": [],
-     "controlType": "TextBox",
-     "width": "85",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "txtShikakuJotai_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": true,
-     "required": false,
-     "maxLength": "5",
-     "minLength": 0,
-     "textAlign": 0,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "isComboBox": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "text": "",
-     "suggest": [],
-     "value": "",
-     "labelLText": "資格状態",
-     "labelRText": "",
-     "labelLWidth": "74",
+     "labelLWidth": "0",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -558,7 +298,7 @@ module DBZ {
      "value": "",
      "labelLText": "資格喪失",
      "labelRText": "",
-     "labelLWidth": "74",
+     "labelLWidth": "70",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -603,9 +343,9 @@ module DBZ {
      "text": "",
      "suggest": [],
      "value": "",
-     "labelLText": "喪失事由",
+     "labelLText": "",
      "labelRText": "",
-     "labelLWidth": "74",
+     "labelLWidth": "0",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -613,7 +353,99 @@ module DBZ {
      "permitCharactor": ""
     },
     {
-     "fieldName": "txtJutokuKaijo",
+     "fieldName": "txtJutokuKubun",
+     "items": [],
+     "controlType": "TextBox",
+     "width": "35",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "txtJutokuKubun_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
+     "required": false,
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "placeHolder": "",
+     "textKind": 0,
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "text": "",
+     "suggest": [],
+     "value": "",
+     "labelLText": "",
+     "labelRText": "",
+     "labelLWidth": "0",
+     "labelRWidth": "0",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "decorationClass": "",
+     "permitCharactor": ""
+    },
+    {
+     "fieldName": "txtYokaigoJotaiKubun",
+     "items": [],
+     "controlType": "TextBox",
+     "width": "100",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "txtYokaigoJotaiKubun_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
+     "required": false,
+     "maxLength": "6",
+     "minLength": 0,
+     "textAlign": 0,
+     "placeHolder": "",
+     "textKind": 0,
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "text": "",
+     "suggest": [],
+     "value": "",
+     "labelLText": "要介護認定",
+     "labelRText": "",
+     "labelLWidth": "85",
+     "labelRWidth": "0",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "decorationClass": "",
+     "permitCharactor": ""
+    },
+    {
+     "fieldName": "txtNinteiKaishiYmd",
      "items": [],
      "controlType": "TextBoxDate",
      "width": "85",
@@ -629,7 +461,7 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "0",
-     "selectControlID": "txtJutokuKaijo_core",
+     "selectControlID": "txtNinteiKaishiYmd_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
@@ -643,9 +475,9 @@ module DBZ {
      "onKeyPress": "",
      "text": "",
      "value": "",
-     "labelLText": "住特終了",
+     "labelLText": "",
      "labelRText": "",
-     "labelLWidth": "74",
+     "labelLWidth": "90",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -654,9 +486,9 @@ module DBZ {
      "permitCharactor": "./_-"
     },
     {
-     "fieldName": "txtNinteiKikan",
+     "fieldName": "txtNinteiShuryoYmd",
      "items": [],
-     "controlType": "TextBoxDateRange",
+     "controlType": "TextBoxDate",
      "width": "85",
      "visible": true,
      "displayNone": false,
@@ -670,36 +502,29 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "0",
-     "selectControlID": "txtNinteiKikan_core",
+     "selectControlID": "txtNinteiShuryoYmd_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "required": false,
+     "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "labelLText": "認定期間",
+     "text": "",
+     "value": "",
+     "labelLText": "～",
      "labelRText": "",
-     "labelLWidth": "90",
+     "labelLWidth": "20",
      "labelRWidth": "0",
-     "labelLAlign": 2,
+     "labelLAlign": 1,
      "labelRAlign": 0,
      "ymdKubun": 2,
      "displayFormat": 0,
-     "permitCharactor": "",
-     "fromPlaceHolder": "",
-     "toPlaceHolder": "",
-     "isHolizontal": false,
-     "minDate": "",
-     "maxDate": "",
-     "fromText": "",
-     "toText": "",
-     "fromValue": "",
-     "toValue": "",
-     "fromSelectControlID": "txtNinteiKikanFrom",
-     "toSelectControlID": "txtNinteiKikanTo"
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "btnNinteiRireki",
@@ -713,11 +538,11 @@ module DBZ {
      "nextFocusFieldName": "",
      "wrap": false,
      "dependencies": [],
-     "float": 0,
+     "float": 2,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0.7",
-     "marginRight": "0",
+     "marginLeft": "0",
+     "marginRight": "0.4",
      "selectControlID": "btnNinteiRireki",
      "helpMessageID": "",
      "jpControlName": "",
@@ -728,6 +553,41 @@ module DBZ {
      "imageWidth": "",
      "imageHeight": "",
      "icon": 0,
+     "heightTextBoxMatches": true,
+     "displayChildDivName": "",
+     "dataPassing": [],
+     "visibleCloseButton": true,
+     "onOkClose": "",
+     "onBeforeOpenDialog": ""
+    },
+    {
+     "fieldName": "btnHihoRireki",
+     "items": [],
+     "controlType": "ButtonDialog",
+     "width": "70",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0.4",
+     "selectControlID": "btnHihoRireki",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "被保履歴",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": true,
      "displayChildDivName": "",
      "dataPassing": [],
      "visibleCloseButton": true,
@@ -768,10 +628,7 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -815,23 +672,8 @@ module DBZ {
   },
   {
    "publicChildFieldName": "KaigoShikakuKihon",
-   "publicChildProperty": "eraseBorderTop",
-   "newPropertyName": "eraseBorderTop"
-  },
-  {
-   "publicChildFieldName": "KaigoShikakuKihon",
-   "publicChildProperty": "eraseBorderBottom",
-   "newPropertyName": "eraseBorderBottom"
-  },
-  {
-   "publicChildFieldName": "KaigoShikakuKihon",
-   "publicChildProperty": "eraseBorderRight",
-   "newPropertyName": "eraseBorderRight"
-  },
-  {
-   "publicChildFieldName": "KaigoShikakuKihon",
-   "publicChildProperty": "eraseBorderLeft",
-   "newPropertyName": "eraseBorderLeft"
+   "publicChildProperty": "eraseBorder",
+   "newPropertyName": "eraseBorder"
   },
   {
    "publicChildFieldName": "KaigoShikakuKihon",
@@ -851,7 +693,9 @@ module DBZ {
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }
