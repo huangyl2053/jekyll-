@@ -45,66 +45,15 @@ var DBZ;
         });
 
 
-        Object.defineProperty(KaigoAtenaInfo_Design.prototype, "atenaInfo_eraseBorderTop", {
+        Object.defineProperty(KaigoAtenaInfo_Design.prototype, "AtenaShokaiSimple_eraseBorder", {
             get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["eraseBorderTop"];
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["AtenaShokaiSimple_eraseBorder"];
             },
             set: function (value) {
                 if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["eraseBorderTop"] = value;
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["AtenaShokaiSimple_eraseBorder"] = value;
                 } else {
-                    this.layout.items[0].items[0]["eraseBorderTop"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(KaigoAtenaInfo_Design.prototype, "atenaInfo_eraseBorderBottom", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["eraseBorderBottom"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["eraseBorderBottom"] = value;
-                } else {
-                    this.layout.items[0].items[0]["eraseBorderBottom"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(KaigoAtenaInfo_Design.prototype, "atenaInfo_eraseBorderRight", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["eraseBorderRight"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["eraseBorderRight"] = value;
-                } else {
-                    this.layout.items[0].items[0]["eraseBorderRight"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(KaigoAtenaInfo_Design.prototype, "atenaInfo_eraseBorderLeft", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["eraseBorderLeft"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["eraseBorderLeft"] = value;
-                } else {
-                    this.layout.items[0].items[0]["eraseBorderLeft"] = value;
+                    this.layout.items[0].items[0]["AtenaShokaiSimple_eraseBorder"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -360,23 +309,6 @@ var DBZ;
                     Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["lblButtonMargin_displayNone"] = value;
                 } else {
                     this.layout.items[0].items[0]["lblButtonMargin_displayNone"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(KaigoAtenaInfo_Design.prototype, "btnMemo_DisplayNone", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["btnMemo_displayNone"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["btnMemo_displayNone"] = value;
-                } else {
-                    this.layout.items[0].items[0]["btnMemo_displayNone"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -712,10 +644,7 @@ var DBZ;
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("atenaInfo_title");
             Uz.JSControlUtil.registProperty("atenaInfo_canOpenAndClose");
-            Uz.JSControlUtil.registProperty("atenaInfo_eraseBorderTop");
-            Uz.JSControlUtil.registProperty("atenaInfo_eraseBorderBottom");
-            Uz.JSControlUtil.registProperty("atenaInfo_eraseBorderRight");
-            Uz.JSControlUtil.registProperty("atenaInfo_eraseBorderLeft");
+            Uz.JSControlUtil.registProperty("AtenaShokaiSimple_eraseBorder");
             Uz.JSControlUtil.registProperty("AtenaKanaMeisho_visible");
             Uz.JSControlUtil.registProperty("AtenaMisho_visible");
             Uz.JSControlUtil.registProperty("SeinengappiYMD_visible");
@@ -731,7 +660,6 @@ var DBZ;
             Uz.JSControlUtil.registProperty("KojinHojinCode_visible");
             Uz.JSControlUtil.registProperty("SetaiCode_visible");
             Uz.JSControlUtil.registProperty("lblButtonMargin_displayNone");
-            Uz.JSControlUtil.registProperty("btnMemo_DisplayNone");
             Uz.JSControlUtil.registProperty("btnDainosha_displayNone");
             Uz.JSControlUtil.registProperty("btnSofusaki_displayNone");
             Uz.JSControlUtil.registProperty("btnDainoSofusakiKakunin_displayNone");
@@ -757,10 +685,7 @@ var DBZ;
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
             editablePropertyInfo["atenaInfo_title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["title"];
             editablePropertyInfo["atenaInfo_canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
-            editablePropertyInfo["atenaInfo_eraseBorderTop"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderTop"];
-            editablePropertyInfo["atenaInfo_eraseBorderBottom"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderBottom"];
-            editablePropertyInfo["atenaInfo_eraseBorderRight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderRight"];
-            editablePropertyInfo["atenaInfo_eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
+            editablePropertyInfo["AtenaShokaiSimple_eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["AtenaShokaiSimple_eraseBorder"];
             editablePropertyInfo["AtenaKanaMeisho_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["AtenaKanaMeisho_visible"];
             editablePropertyInfo["AtenaMisho_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["AtenaMeisho_visible"];
             editablePropertyInfo["SeinengappiYMD_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["SeinengappiYMD_visible"];
@@ -776,7 +701,6 @@ var DBZ;
             editablePropertyInfo["KojinHojinCode_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["KojinHojinCode_visible"];
             editablePropertyInfo["SetaiCode_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["SetaiCode_visible"];
             editablePropertyInfo["lblButtonMargin_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["lblButtonMargin_displayNone"];
-            editablePropertyInfo["btnMemo_DisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["btnMemo_displayNone"];
             editablePropertyInfo["btnDainosha_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["btnDainosya_displayNone"];
             editablePropertyInfo["btnSofusaki_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["btnSofusaki_displayNone"];
             editablePropertyInfo["btnDainoSofusakiKakunin_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["btnDainoSofusakiKakunin_displayNone"];
@@ -958,23 +882,8 @@ var DBZ;
                 },
                 {
                     "publicChildFieldName": "atenaInfo",
-                    "publicChildProperty": "eraseBorderTop",
-                    "newPropertyName": "atenaInfo_eraseBorderTop"
-                },
-                {
-                    "publicChildFieldName": "atenaInfo",
-                    "publicChildProperty": "eraseBorderBottom",
-                    "newPropertyName": "atenaInfo_eraseBorderBottom"
-                },
-                {
-                    "publicChildFieldName": "atenaInfo",
-                    "publicChildProperty": "eraseBorderRight",
-                    "newPropertyName": "atenaInfo_eraseBorderRight"
-                },
-                {
-                    "publicChildFieldName": "atenaInfo",
-                    "publicChildProperty": "eraseBorderLeft",
-                    "newPropertyName": "atenaInfo_eraseBorderLeft"
+                    "publicChildProperty": "AtenaShokaiSimple_eraseBorder",
+                    "newPropertyName": "AtenaShokaiSimple_eraseBorder"
                 },
                 {
                     "publicChildFieldName": "atenaInfo",
@@ -1050,11 +959,6 @@ var DBZ;
                     "publicChildFieldName": "atenaInfo",
                     "publicChildProperty": "lblButtonMargin_displayNone",
                     "newPropertyName": "lblButtonMargin_displayNone"
-                },
-                {
-                    "publicChildFieldName": "atenaInfo",
-                    "publicChildProperty": "btnMemo_displayNone",
-                    "newPropertyName": "btnMemo_DisplayNone"
                 },
                 {
                     "publicChildFieldName": "atenaInfo",

@@ -27,26 +27,22 @@ public class KaigoShikakuKihonDiv extends Panel {
     private TextBoxDate txtShutokuYmd;
     @JsonProperty("txtShutokuJiyu")
     private TextBox txtShutokuJiyu;
-    @JsonProperty("txtJutokuTekiyo")
-    private TextBoxDate txtJutokuTekiyo;
-    @JsonProperty("txtYokaigoJotaiKubun")
-    private TextBox txtYokaigoJotaiKubun;
-    @JsonProperty("txtKyuSochiNyusho")
-    private TextBox txtKyuSochiNyusho;
-    @JsonProperty("btnHihoRireki")
-    private ButtonDialog btnHihoRireki;
-    @JsonProperty("txtShikakuJotai")
-    private TextBox txtShikakuJotai;
     @JsonProperty("txtSoshitsuYmd")
     private TextBoxDate txtSoshitsuYmd;
     @JsonProperty("txtSoshitsuJiyu")
     private TextBox txtSoshitsuJiyu;
-    @JsonProperty("txtJutokuKaijo")
-    private TextBoxDate txtJutokuKaijo;
-    @JsonProperty("txtNinteiKikan")
-    private TextBoxDateRange txtNinteiKikan;
+    @JsonProperty("txtJutokuKubun")
+    private TextBox txtJutokuKubun;
+    @JsonProperty("txtYokaigoJotaiKubun")
+    private TextBox txtYokaigoJotaiKubun;
+    @JsonProperty("txtNinteiKaishiYmd")
+    private TextBoxDate txtNinteiKaishiYmd;
+    @JsonProperty("txtNinteiShuryoYmd")
+    private TextBoxDate txtNinteiShuryoYmd;
     @JsonProperty("btnNinteiRireki")
     private ButtonDialog btnNinteiRireki;
+    @JsonProperty("btnHihoRireki")
+    private ButtonDialog btnHihoRireki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -84,56 +80,6 @@ public class KaigoShikakuKihonDiv extends Panel {
         this.txtShutokuJiyu=txtShutokuJiyu;
     }
 
-    @JsonProperty("txtJutokuTekiyo")
-    public TextBoxDate getTxtJutokuTekiyo() {
-        return txtJutokuTekiyo;
-    }
-
-    @JsonProperty("txtJutokuTekiyo")
-    public void setTxtJutokuTekiyo(TextBoxDate txtJutokuTekiyo) {
-        this.txtJutokuTekiyo=txtJutokuTekiyo;
-    }
-
-    @JsonProperty("txtYokaigoJotaiKubun")
-    public TextBox getTxtYokaigoJotaiKubun() {
-        return txtYokaigoJotaiKubun;
-    }
-
-    @JsonProperty("txtYokaigoJotaiKubun")
-    public void setTxtYokaigoJotaiKubun(TextBox txtYokaigoJotaiKubun) {
-        this.txtYokaigoJotaiKubun=txtYokaigoJotaiKubun;
-    }
-
-    @JsonProperty("txtKyuSochiNyusho")
-    public TextBox getTxtKyuSochiNyusho() {
-        return txtKyuSochiNyusho;
-    }
-
-    @JsonProperty("txtKyuSochiNyusho")
-    public void setTxtKyuSochiNyusho(TextBox txtKyuSochiNyusho) {
-        this.txtKyuSochiNyusho=txtKyuSochiNyusho;
-    }
-
-    @JsonProperty("btnHihoRireki")
-    public ButtonDialog getBtnHihoRireki() {
-        return btnHihoRireki;
-    }
-
-    @JsonProperty("btnHihoRireki")
-    public void setBtnHihoRireki(ButtonDialog btnHihoRireki) {
-        this.btnHihoRireki=btnHihoRireki;
-    }
-
-    @JsonProperty("txtShikakuJotai")
-    public TextBox getTxtShikakuJotai() {
-        return txtShikakuJotai;
-    }
-
-    @JsonProperty("txtShikakuJotai")
-    public void setTxtShikakuJotai(TextBox txtShikakuJotai) {
-        this.txtShikakuJotai=txtShikakuJotai;
-    }
-
     @JsonProperty("txtSoshitsuYmd")
     public TextBoxDate getTxtSoshitsuYmd() {
         return txtSoshitsuYmd;
@@ -154,24 +100,44 @@ public class KaigoShikakuKihonDiv extends Panel {
         this.txtSoshitsuJiyu=txtSoshitsuJiyu;
     }
 
-    @JsonProperty("txtJutokuKaijo")
-    public TextBoxDate getTxtJutokuKaijo() {
-        return txtJutokuKaijo;
+    @JsonProperty("txtJutokuKubun")
+    public TextBox getTxtJutokuKubun() {
+        return txtJutokuKubun;
     }
 
-    @JsonProperty("txtJutokuKaijo")
-    public void setTxtJutokuKaijo(TextBoxDate txtJutokuKaijo) {
-        this.txtJutokuKaijo=txtJutokuKaijo;
+    @JsonProperty("txtJutokuKubun")
+    public void setTxtJutokuKubun(TextBox txtJutokuKubun) {
+        this.txtJutokuKubun=txtJutokuKubun;
     }
 
-    @JsonProperty("txtNinteiKikan")
-    public TextBoxDateRange getTxtNinteiKikan() {
-        return txtNinteiKikan;
+    @JsonProperty("txtYokaigoJotaiKubun")
+    public TextBox getTxtYokaigoJotaiKubun() {
+        return txtYokaigoJotaiKubun;
     }
 
-    @JsonProperty("txtNinteiKikan")
-    public void setTxtNinteiKikan(TextBoxDateRange txtNinteiKikan) {
-        this.txtNinteiKikan=txtNinteiKikan;
+    @JsonProperty("txtYokaigoJotaiKubun")
+    public void setTxtYokaigoJotaiKubun(TextBox txtYokaigoJotaiKubun) {
+        this.txtYokaigoJotaiKubun=txtYokaigoJotaiKubun;
+    }
+
+    @JsonProperty("txtNinteiKaishiYmd")
+    public TextBoxDate getTxtNinteiKaishiYmd() {
+        return txtNinteiKaishiYmd;
+    }
+
+    @JsonProperty("txtNinteiKaishiYmd")
+    public void setTxtNinteiKaishiYmd(TextBoxDate txtNinteiKaishiYmd) {
+        this.txtNinteiKaishiYmd=txtNinteiKaishiYmd;
+    }
+
+    @JsonProperty("txtNinteiShuryoYmd")
+    public TextBoxDate getTxtNinteiShuryoYmd() {
+        return txtNinteiShuryoYmd;
+    }
+
+    @JsonProperty("txtNinteiShuryoYmd")
+    public void setTxtNinteiShuryoYmd(TextBoxDate txtNinteiShuryoYmd) {
+        this.txtNinteiShuryoYmd=txtNinteiShuryoYmd;
     }
 
     @JsonProperty("btnNinteiRireki")
@@ -182,6 +148,16 @@ public class KaigoShikakuKihonDiv extends Panel {
     @JsonProperty("btnNinteiRireki")
     public void setBtnNinteiRireki(ButtonDialog btnNinteiRireki) {
         this.btnNinteiRireki=btnNinteiRireki;
+    }
+
+    @JsonProperty("btnHihoRireki")
+    public ButtonDialog getBtnHihoRireki() {
+        return btnHihoRireki;
+    }
+
+    @JsonProperty("btnHihoRireki")
+    public void setBtnHihoRireki(ButtonDialog btnHihoRireki) {
+        this.btnHihoRireki=btnHihoRireki;
     }
 
 }
