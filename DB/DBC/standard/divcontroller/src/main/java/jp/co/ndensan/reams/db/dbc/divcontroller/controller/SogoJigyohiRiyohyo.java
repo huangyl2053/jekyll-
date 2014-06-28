@@ -322,7 +322,6 @@ public class SogoJigyohiRiyohyo {
                 getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
         meisai.getTxtJigyoshaCode().setValue(row.getTxtJigyosha().substring(0, 10));
         meisai.getTxtJigyoshaName().setValue(row.getTxtJigyosha().substring(11));
-        meisai.getTxtServiceShuruiCode().setValue(row.getTxtService().substring(0, 2));
         meisai.getTxtServiceCode().setValue(row.getTxtService().substring(2, 6));
         meisai.getTxtServiceName().setValue(row.getTxtService().substring(7));
         meisai.getTxtTani().setValue(new Decimal(row.getTxtTani().toString()));
@@ -375,7 +374,7 @@ public class SogoJigyohiRiyohyo {
         Button btnDelete = new Button();
         RString jigyosha = meisai.getTxtJigyoshaCode().getValue().concat(new RString(":")).
                 concat(meisai.getTxtJigyoshaName().getValue());
-        RString service = meisai.getTxtServiceShuruiCode().getValue().concat(meisai.getTxtServiceCode().getValue()).
+        RString service = meisai.getTxtServiceCode().getValue().
                 concat(new RString(":")).concat(meisai.getTxtServiceName().getValue());
 
         dgServiceRiyohyoBeppyoList_Row rowItem;
@@ -520,7 +519,6 @@ public class SogoJigyohiRiyohyo {
                 getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
         meisai.getTxtJigyoshaCode().clearValue();
         meisai.getTxtJigyoshaName().clearValue();
-        meisai.getTxtServiceShuruiCode().clearValue();
         meisai.getTxtServiceCode().clearValue();
         meisai.getTxtServiceName().clearValue();
         meisai.getTxtTani().clearValue();
@@ -562,7 +560,6 @@ public class SogoJigyohiRiyohyo {
                 getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
         meisai.getTxtJigyoshaCode().setValue(new RString(sourceList.get(yamlIndex).get("事業者コード").toString()));
         meisai.getTxtJigyoshaName().setValue(new RString(sourceList.get(yamlIndex).get("事業者名").toString()));
-        meisai.getTxtServiceShuruiCode().setValue(new RString(sourceList.get(yamlIndex).get("サービス種類コード").toString()));
         meisai.getTxtServiceCode().setValue(new RString(sourceList.get(yamlIndex).get("サービスコード").toString()));
         meisai.getTxtServiceName().setValue(new RString(sourceList.get(yamlIndex).get("サービス名").toString()));
         meisai.getTxtTani().setValue(new Decimal(sourceList.get(yamlIndex).get("単位").toString()));

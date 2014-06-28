@@ -24,17 +24,13 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     @JsonProperty("txtJigyoshaCode")
     private TextBoxCode txtJigyoshaCode;
     @JsonProperty("btnJigyosha")
-    private Button btnJigyosha;
+    private ButtonDialog btnJigyosha;
     @JsonProperty("txtJigyoshaName")
     private TextBox txtJigyoshaName;
-    @JsonProperty("txtServiceShuruiCode")
-    private TextBoxCode txtServiceShuruiCode;
-    @JsonProperty("btnServiceShurui")
-    private Button btnServiceShurui;
     @JsonProperty("txtServiceCode")
     private TextBoxCode txtServiceCode;
     @JsonProperty("btnService")
-    private Button btnService;
+    private ButtonDialog btnService;
     @JsonProperty("txtServiceName")
     private TextBox txtServiceName;
     @JsonProperty("txtTani")
@@ -51,6 +47,8 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     private TextBoxNum txtServiceTani;
     @JsonProperty("lblServiceTani")
     private Label lblServiceTani;
+    @JsonProperty("btnCalcMeisai")
+    private Button btnCalcMeisai;
     @JsonProperty("btnBeppyoMeisaiKakutei")
     private Button btnBeppyoMeisaiKakutei;
 
@@ -71,12 +69,12 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     }
 
     @JsonProperty("btnJigyosha")
-    public Button getBtnJigyosha() {
+    public ButtonDialog getBtnJigyosha() {
         return btnJigyosha;
     }
 
     @JsonProperty("btnJigyosha")
-    public void setBtnJigyosha(Button btnJigyosha) {
+    public void setBtnJigyosha(ButtonDialog btnJigyosha) {
         this.btnJigyosha=btnJigyosha;
     }
 
@@ -90,26 +88,6 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
         this.txtJigyoshaName=txtJigyoshaName;
     }
 
-    @JsonProperty("txtServiceShuruiCode")
-    public TextBoxCode getTxtServiceShuruiCode() {
-        return txtServiceShuruiCode;
-    }
-
-    @JsonProperty("txtServiceShuruiCode")
-    public void setTxtServiceShuruiCode(TextBoxCode txtServiceShuruiCode) {
-        this.txtServiceShuruiCode=txtServiceShuruiCode;
-    }
-
-    @JsonProperty("btnServiceShurui")
-    public Button getBtnServiceShurui() {
-        return btnServiceShurui;
-    }
-
-    @JsonProperty("btnServiceShurui")
-    public void setBtnServiceShurui(Button btnServiceShurui) {
-        this.btnServiceShurui=btnServiceShurui;
-    }
-
     @JsonProperty("txtServiceCode")
     public TextBoxCode getTxtServiceCode() {
         return txtServiceCode;
@@ -121,12 +99,12 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     }
 
     @JsonProperty("btnService")
-    public Button getBtnService() {
+    public ButtonDialog getBtnService() {
         return btnService;
     }
 
     @JsonProperty("btnService")
-    public void setBtnService(Button btnService) {
+    public void setBtnService(ButtonDialog btnService) {
         this.btnService=btnService;
     }
 
@@ -208,6 +186,16 @@ public class ServiceRiyohyoBeppyoMeisaiDiv extends Panel {
     @JsonProperty("lblServiceTani")
     public void setLblServiceTani(Label lblServiceTani) {
         this.lblServiceTani=lblServiceTani;
+    }
+
+    @JsonProperty("btnCalcMeisai")
+    public Button getBtnCalcMeisai() {
+        return btnCalcMeisai;
+    }
+
+    @JsonProperty("btnCalcMeisai")
+    public void setBtnCalcMeisai(Button btnCalcMeisai) {
+        this.btnCalcMeisai=btnCalcMeisai;
     }
 
     @JsonProperty("btnBeppyoMeisaiKakutei")

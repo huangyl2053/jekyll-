@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikaku
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.dgKyotakuKeikakuTodokedeRirekiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.tplKyotakuKeikakuTodokedeDetailRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuJokyoShosaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.dgShoKaishuJokyo_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
@@ -254,7 +253,8 @@ public class KyotakuKeikakuTodokedeDetail {
                 getKyotakuKeikakuTodokedeMeisai().getTxtRirekiListSelectIndex().setValue(index);
         setMeisaiData(panel, 画面表示.届出内容修正);
         showMeisai(panel, 画面表示.届出内容修正);
-        tplKyotakuKeikakuTodokedeDetailRirekiDiv div = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getTplKyotakuKeikakuTodokedeDetailRireki();
+        tplKyotakuKeikakuTodokedeDetailRirekiDiv div = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+                getTplKyotakuKeikakuTodokedeDetailRireki();
         div.getKyotakuKeikakuTodokedeRirekiList().setIsOpen(false);
         div.getKyotakuKeikakuTodokedeMeisai().setIsOpen(true);
 
@@ -663,33 +663,5 @@ public class KyotakuKeikakuTodokedeDetail {
             row.getYukoKigen().setValue(cg.getAsFlexibleDate("有効期限"));
             dgRow.add(row);
         }
-//        kanri.getShoKaishuJokyoShosai().setIsOpen(false);
     }
-
-//    /**
-//     * 証類交付情報を一覧で選択したときの処理。
-//     *
-//     * @param panel panel
-//     */
-//    private void selectShoKaishuJokyoList(KyotakuKeikakuTodokedeDetailDiv panel) {
-//        ShoKaishuKirokuKanriDiv kanri = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
-//                getTplKyotakuKeikakuTodokedeDetailShorui().getKyotakuKeikakuTodokedeShoruiJyokyo();
-//
-//        dgShoKaishuJokyo_Row selectRow = kanri.getShoKaishuJokyoList().getDgShoKaishuJokyo().getClickedItem();
-//        int index = kanri.getShoKaishuJokyoList().getDgShoKaishuJokyo().getClickedRowId();
-//        ShoKaishuJokyoShosaiDiv shosai = kanri.getShoKaishuJokyoShosai();
-//        List<HashMap> yamlData = YamlLoader.DBC.loadAsList(new RString("dbc0100000/KyotakuKeikakuTodokedeShoKofuKaishu.yml"));
-//        ControlGenerator cg = new ControlGenerator(yamlData.get(index));
-//
-//        ViewStateHolder.put("shoKaishuJokyoListIndex", new RString(String.valueOf(index)));
-//
-//        shosai.getTxtShoKofuShurui().setValue(selectRow.getKofushoShurui());
-//        shosai.getTxtKofuDate().setValue(selectRow.getKofuDate().getValue());
-//        shosai.getTxtYukoKigen().setValue(selectRow.getYukoKigen().getValue());
-//        shosai.getTxtKofuJiyu().setValue(selectRow.getKofuJiyu());
-//        shosai.getTxtKofuRiyu().setValue(cg.getAsRString("交付理由"));
-//        shosai.getTxtKaishuDate().setValue(selectRow.getKaishuDate().getValue());
-//        shosai.getDdlKaishuJiyu().setSelectedItem(cg.getAsRString("交付事由Key"));
-//        shosai.getTxtKaishuRiyu().setValue(cg.getAsRString("回収理由"));
-//    }
 }

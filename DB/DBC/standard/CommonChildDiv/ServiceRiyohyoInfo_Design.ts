@@ -219,29 +219,29 @@ module DBC {
         }
         
         public get onClickBeppyoMeisaiKakutei() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[15]["fieldName"])["onClick"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[14]["fieldName"])["onClick"];
         }
         
         public set onClickBeppyoMeisaiKakutei(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[15]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[15]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[15]["fieldName"])["onClick"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[14]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[14]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[14]["fieldName"])["onClick"] = value;
             } else {
-                this.layout.items[0].items[11].items[1].items[2].items[15]["onClick"] = value;
+                this.layout.items[0].items[11].items[1].items[2].items[14]["onClick"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
         
         public get onClickBeppyoGokeiKakutei() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"])["onClick"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[15]["fieldName"])["onClick"];
         }
         
         public set onClickBeppyoGokeiKakutei(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"])["onClick"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[15]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[15]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[15]["fieldName"])["onClick"] = value;
             } else {
-                this.layout.items[0].items[11].items[1].items[3].items[14]["onClick"] = value;
+                this.layout.items[0].items[11].items[1].items[3].items[15]["onClick"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -344,6 +344,62 @@ module DBC {
             }
         }
         
+        public get ServiceRiyohyoEraseBorder() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
+        }
+        
+        public set ServiceRiyohyoEraseBorder(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
+            } else {
+                this.layout.items[0]["eraseBorder"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get onClickBtnCalcMeisai() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[13]["fieldName"])["onClick"];
+        }
+        
+        public set onClickBtnCalcMeisai(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[13]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[13]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[13]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[2].items[13]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get onClickBtnCalcGokei() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"])["onClick"];
+        }
+        
+        public set onClickBtnCalcGokei(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[3].items[14]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get onBlurTxtSreviceCode() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[3]["fieldName"])["onBlur"];
+        }
+        
+        public set onBlurTxtSreviceCode(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[3]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[3]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[3]["fieldName"])["onBlur"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[2].items[3]["onBlur"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, ServiceRiyohyoInfo_Design.myLayout, fieldName);
         }
@@ -378,6 +434,10 @@ module DBC {
             Uz.JSControlUtil.registProperty("dgServiceRiyohyoBeppyoListSelectByDblClick");
             Uz.JSControlUtil.registProperty("dgServiceRiyohyoBeppyoListSelectBySelect");
             Uz.JSControlUtil.registProperty("dgServiceRiyohyoBeppyoListSelectByDelete");
+            Uz.JSControlUtil.registProperty("ServiceRiyohyoEraseBorder");
+            Uz.JSControlUtil.registProperty("onClickBtnCalcMeisai");
+            Uz.JSControlUtil.registProperty("onClickBtnCalcGokei");
+            Uz.JSControlUtil.registProperty("onBlurTxtSreviceCode");
         }
         
         /**
@@ -402,8 +462,8 @@ module DBC {
             editablePropertyInfo["onClickRiyohyoMeisaiAdd"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onClick"];
             editablePropertyInfo["onClickBeppyoMeisaiNew"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
             editablePropertyInfo["onClickBeppyoGokeiNew"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[1]["fieldName"]).getEditablePropertyInfo()["onClick"];
-            editablePropertyInfo["onClickBeppyoMeisaiKakutei"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[15]["fieldName"]).getEditablePropertyInfo()["onClick"];
-            editablePropertyInfo["onClickBeppyoGokeiKakutei"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onClickBeppyoMeisaiKakutei"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[14]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onClickBeppyoGokeiKakutei"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[15]["fieldName"]).getEditablePropertyInfo()["onClick"];
             editablePropertyInfo["dgServiceRiyohyoBeppyoListGridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
             editablePropertyInfo["dgServiceRiyohyoListSelectByDblClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
             editablePropertyInfo["dgServiceRiyohyoListSelectBySelect"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]).getEditablePropertyInfo()["onSelectBySelectButton"];
@@ -411,6 +471,10 @@ module DBC {
             editablePropertyInfo["dgServiceRiyohyoBeppyoListSelectByDblClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
             editablePropertyInfo["dgServiceRiyohyoBeppyoListSelectBySelect"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]).getEditablePropertyInfo()["onSelectBySelectButton"];
             editablePropertyInfo["dgServiceRiyohyoBeppyoListSelectByDelete"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]).getEditablePropertyInfo()["onSelectByDeleteButton"];
+            editablePropertyInfo["ServiceRiyohyoEraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
+            editablePropertyInfo["onClickBtnCalcMeisai"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[13]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onClickBtnCalcGokei"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onBlurTxtSreviceCode"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[3]["fieldName"]).getEditablePropertyInfo()["onBlur"];
             
             return editablePropertyInfo;
         }
@@ -768,7 +832,7 @@ module DBC {
      "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
-     "textAlign": 0,
+     "textAlign": 2,
      "textKind": 0,
      "isComboBox": false,
      "suggest": [],
@@ -893,7 +957,8 @@ module DBC {
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "tabServiceRiyohyo",
@@ -953,7 +1018,8 @@ module DBC {
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": "",
-         "icon": 0
+         "icon": 0,
+         "heightTextBoxMatches": false
         },
         {
          "fieldName": "dgServiceRiyohyoList",
@@ -975,14 +1041,21 @@ module DBC {
          "selectControlID": "dgServiceRiyohyoList",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
          "height": "294",
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
+          "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
           "header": {
            "combineColumns": [
             {
@@ -1979,7 +2052,10 @@ module DBC {
              "minValue": "0",
              "isCurrency": false,
              "isComma": false,
-             "decimalPointLength": "0"
+             "decimalPointLength": "0",
+             "onChange": "",
+             "isSetValueToToolTip": false,
+             "readOnly": false
             },
             "align": 1,
             "resize": true,
@@ -2025,7 +2101,10 @@ module DBC {
              "minValue": "0",
              "isCurrency": false,
              "isComma": false,
-             "decimalPointLength": "0"
+             "decimalPointLength": "0",
+             "onChange": "",
+             "isSetValueToToolTip": false,
+             "readOnly": false
             },
             "align": 1,
             "resize": true,
@@ -2048,7 +2127,10 @@ module DBC {
              "minValue": "0",
              "isCurrency": false,
              "isComma": false,
-             "decimalPointLength": "0"
+             "decimalPointLength": "0",
+             "onChange": "",
+             "isSetValueToToolTip": false,
+             "readOnly": false
             },
             "align": 1,
             "resize": true,
@@ -2105,7 +2187,8 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "title": "サービス利用票",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       },
       {
        "fieldName": "ServiceRiyohyoBeppyo",
@@ -2300,10 +2383,7 @@ module DBC {
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -2340,7 +2420,8 @@ module DBC {
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
-           "icon": 0
+           "icon": 0,
+           "heightTextBoxMatches": false
           },
           {
            "fieldName": "btnBeppyoGokeiNew",
@@ -2368,7 +2449,8 @@ module DBC {
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
-           "icon": 0
+           "icon": 0,
+           "heightTextBoxMatches": false
           },
           {
            "fieldName": "dgServiceRiyohyoBeppyoList",
@@ -2390,6 +2472,7 @@ module DBC {
            "selectControlID": "dgServiceRiyohyoBeppyoList",
            "helpMessageID": "",
            "jpControlName": "",
+           "readOnly": false,
            "height": "210",
            "gridSetting": {
             "rowHeight": 25,
@@ -2745,10 +2828,7 @@ module DBC {
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 0,
@@ -2809,8 +2889,8 @@ module DBC {
           {
            "fieldName": "btnJigyosha",
            "items": [],
-           "controlType": "Button",
-           "width": "15",
+           "controlType": "ButtonDialog",
+           "width": "S",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2821,18 +2901,33 @@ module DBC {
            "float": 0,
            "toolTip": "",
            "authorityMode": 0,
-           "marginLeft": "0",
+           "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "btnJigyosha",
            "helpMessageID": "",
            "jpControlName": "",
-           "text": "照",
+           "text": "",
            "onClick": "",
-           "appearance": 0,
-           "imageFileUrl": "",
+           "appearance": 2,
+           "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
            "imageWidth": "",
            "imageHeight": "",
-           "icon": 0
+           "icon": 0,
+           "heightTextBoxMatches": true,
+           "displayChildDivName": "DBZ.JigyoshaInputGuide",
+           "dataPassing": [
+            {
+             "key": "jigyoshaCode",
+             "controlName": "txtJigyoshaCode"
+            },
+            {
+             "key": "jigyoshaMeisho",
+             "controlName": "txtJigyoshaName"
+            }
+           ],
+           "visibleCloseButton": true,
+           "onOkClose": "",
+           "onBeforeOpenDialog": ""
           },
           {
            "fieldName": "txtJigyoshaName",
@@ -2881,10 +2976,10 @@ module DBC {
            "decorationClass": ""
           },
           {
-           "fieldName": "txtServiceShuruiCode",
+           "fieldName": "txtServiceCode",
            "items": [],
            "controlType": "TextBoxCode",
-           "width": "20",
+           "width": "50",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2897,7 +2992,7 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "selectControlID": "txtServiceShuruiCode_core",
+           "selectControlID": "txtServiceCode_core",
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
@@ -2906,7 +3001,7 @@ module DBC {
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
-           "onBlur": "",
+           "onBlur": "onBlurServiceCode",
            "onChange": "",
            "onKeyPress": "",
            "text": "",
@@ -2925,88 +3020,13 @@ module DBC {
            "isComboBox": false,
            "suggest": [],
            "decorationClass": "",
-           "formatLength": "2"
-          },
-          {
-           "fieldName": "btnServiceShurui",
-           "items": [],
-           "controlType": "Button",
-           "width": "15",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "0",
-           "marginRight": "XS",
-           "selectControlID": "btnServiceShurui",
-           "helpMessageID": "",
-           "jpControlName": "",
-           "text": "照",
-           "onClick": "",
-           "appearance": 0,
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": "",
-           "icon": 0
-          },
-          {
-           "fieldName": "txtServiceCode",
-           "items": [],
-           "controlType": "TextBoxCode",
-           "width": "40",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "0",
-           "marginRight": "XS",
-           "selectControlID": "txtServiceCode_core",
-           "helpMessageID": "",
-           "jpControlName": "",
-           "readOnly": false,
-           "required": false,
-           "placeHolder": "",
-           "isPrivateInfo": false,
-           "isPassword": false,
-           "onFocus": "",
-           "onBlur": "",
-           "onChange": "",
-           "onKeyPress": "",
-           "text": "",
-           "labelLText": "",
-           "labelRText": "",
-           "labelLWidth": "S",
-           "labelRWidth": "S",
-           "labelLAlign": 2,
-           "labelRAlign": 0,
-           "value": "",
-           "permitCharactor": "",
-           "maxLength": 100000000,
-           "minLength": 0,
-           "textAlign": 0,
-           "textKind": 2,
-           "isComboBox": false,
-           "suggest": [],
-           "decorationClass": "",
-           "formatLength": "4"
+           "formatLength": "6"
           },
           {
            "fieldName": "btnService",
            "items": [],
-           "controlType": "Button",
-           "width": "15",
+           "controlType": "ButtonDialog",
+           "width": "S",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -3017,18 +3037,37 @@ module DBC {
            "float": 0,
            "toolTip": "",
            "authorityMode": 0,
-           "marginLeft": "0",
+           "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "btnService",
            "helpMessageID": "",
            "jpControlName": "",
-           "text": "照",
+           "text": "",
            "onClick": "",
-           "appearance": 0,
-           "imageFileUrl": "",
+           "appearance": 2,
+           "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
            "imageWidth": "",
            "imageHeight": "",
-           "icon": 0
+           "icon": 0,
+           "heightTextBoxMatches": true,
+           "displayChildDivName": "DBZ.ServiceInputGuide",
+           "dataPassing": [
+            {
+             "key": "serviceCode",
+             "controlName": "txtServiceCode"
+            },
+            {
+             "key": "serviceMeisho",
+             "controlName": "txtServiceName"
+            },
+            {
+             "key": "serviceTaishoYM",
+             "controlName": "txtTaishoYM"
+            }
+           ],
+           "visibleCloseButton": true,
+           "onOkClose": "",
+           "onBeforeOpenDialog": ""
           },
           {
            "fieldName": "txtServiceName",
@@ -3158,7 +3197,7 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "【割引適用後率",
-           "labelRText": "％",
+           "labelRText": "",
            "labelLWidth": "115",
            "labelRWidth": "15",
            "labelLAlign": 0,
@@ -3245,7 +3284,7 @@ module DBC {
            "toolTip": "",
            "authorityMode": 0,
            "marginLeft": "XS",
-           "marginRight": "XS",
+           "marginRight": "XL",
            "selectControlID": "txtKaisu_core",
            "helpMessageID": "",
            "jpControlName": "",
@@ -3260,9 +3299,9 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "回数",
-           "labelRText": "回",
+           "labelRText": "",
            "labelLWidth": "100",
-           "labelRWidth": "60",
+           "labelRWidth": "XS",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
@@ -3295,7 +3334,7 @@ module DBC {
            "float": 0,
            "toolTip": "",
            "authorityMode": 0,
-           "marginLeft": "XS",
+           "marginLeft": "S",
            "marginRight": "XS",
            "selectControlID": "lblKaisu",
            "helpMessageID": "",
@@ -3337,9 +3376,9 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "サービス単位",
-           "labelRText": "単位",
+           "labelRText": "",
            "labelLWidth": "100",
-           "labelRWidth": "35",
+           "labelRWidth": "XS",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
@@ -3384,6 +3423,35 @@ module DBC {
            "align": 0
           },
           {
+           "fieldName": "btnCalcMeisai",
+           "items": [],
+           "controlType": "Button",
+           "width": "S",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "btnCalcMeisai",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "text": "明細の計算",
+           "onClick": "",
+           "appearance": 0,
+           "imageFileUrl": "",
+           "imageWidth": "",
+           "imageHeight": "",
+           "icon": 0,
+           "heightTextBoxMatches": false
+          },
+          {
            "fieldName": "btnBeppyoMeisaiKakutei",
            "items": [],
            "controlType": "Button",
@@ -3409,7 +3477,8 @@ module DBC {
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
-           "icon": 0
+           "icon": 0,
+           "heightTextBoxMatches": false
           }
          ],
          "controlType": "Panel",
@@ -3440,15 +3509,17 @@ module DBC {
            "postParameterPanelNames": "ServiceRiyohyoBeppyoMeisai"
           }
          ],
-         "requestSettings": [],
+         "requestSettings": [
+          {
+           "eventName": "onLoad",
+           "requestUrl": ""
+          }
+         ],
          "hiddenInput": [],
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 0,
@@ -3745,9 +3816,9 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "給付率",
-           "labelRText": "％",
+           "labelRText": "",
            "labelLWidth": "80",
-           "labelRWidth": "15",
+           "labelRWidth": "XS",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
@@ -3796,9 +3867,9 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "費用総額",
-           "labelRText": "円",
+           "labelRText": "",
            "labelLWidth": "160",
-           "labelRWidth": "15",
+           "labelRWidth": "XS",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
@@ -3873,9 +3944,9 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "保険給付額",
-           "labelRText": "円",
+           "labelRText": "",
            "labelLWidth": "160",
-           "labelRWidth": "15",
+           "labelRWidth": "XS",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
@@ -3950,9 +4021,9 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "保険対象利用者負担額",
-           "labelRText": "円",
+           "labelRText": "",
            "labelLWidth": "160",
-           "labelRWidth": "15",
+           "labelRWidth": "XS",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
@@ -4027,9 +4098,9 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "全額利用者負担額",
-           "labelRText": "円",
+           "labelRText": "",
            "labelLWidth": "160",
-           "labelRWidth": "15",
+           "labelRWidth": "XS",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
@@ -4074,6 +4145,35 @@ module DBC {
            "align": 0
           },
           {
+           "fieldName": "btnCalcGokei",
+           "items": [],
+           "controlType": "Button",
+           "width": "S",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "btnCalcGokei",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "text": "合計の計算",
+           "onClick": "",
+           "appearance": 0,
+           "imageFileUrl": "",
+           "imageWidth": "",
+           "imageHeight": "",
+           "icon": 0,
+           "heightTextBoxMatches": false
+          },
+          {
            "fieldName": "btnBeppyoGokeiKakutei",
            "items": [],
            "controlType": "Button",
@@ -4099,7 +4199,8 @@ module DBC {
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
-           "icon": 0
+           "icon": 0,
+           "heightTextBoxMatches": false
           }
          ],
          "controlType": "Panel",
@@ -4130,15 +4231,17 @@ module DBC {
            "postParameterPanelNames": "ServiceRiyohyoBeppyoMeisai"
           }
          ],
-         "requestSettings": [],
+         "requestSettings": [
+          {
+           "eventName": "onLoad",
+           "requestUrl": ""
+          }
+         ],
          "hiddenInput": [],
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 0,
@@ -4165,7 +4268,8 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "title": "別表",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       }
      ],
      "controlType": "TabContainer",
@@ -4192,8 +4296,9 @@ module DBC {
       "ServiceRiyohyoBeppyo"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ServiceRiyohyo",
-     "initialTab": 0
+     "selectedItemFieldName": "ServiceRiyohyoBeppyo",
+     "initialTab": 0,
+     "isLazyLoading": false
     }
    ],
    "controlType": "Panel",
@@ -4224,15 +4329,21 @@ module DBC {
      "postParameterPanelNames": "ServiceRiyohyoInfo"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onChangeServiceRiyohyoListDayValue",
+     "requestUrl": "dbc/db/dbc/ServiceRiyohyoInfo/onChangeServiceRiyohyoListDayValue"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
@@ -4383,11 +4494,33 @@ module DBC {
    "publicChildFieldName": "dgServiceRiyohyoBeppyoList",
    "publicChildProperty": "onSelectByDeleteButton",
    "newPropertyName": "dgServiceRiyohyoBeppyoListSelectByDelete"
+  },
+  {
+   "publicChildFieldName": "ServiceRiyohyoInfo",
+   "publicChildProperty": "eraseBorder",
+   "newPropertyName": "ServiceRiyohyoEraseBorder"
+  },
+  {
+   "publicChildFieldName": "btnCalcMeisai",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "onClickBtnCalcMeisai"
+  },
+  {
+   "publicChildFieldName": "btnCalcGokei",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "onClickBtnCalcGokei"
+  },
+  {
+   "publicChildFieldName": "txtServiceCode",
+   "publicChildProperty": "onBlur",
+   "newPropertyName": "onBlurTxtSreviceCode"
   }
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }

@@ -294,12 +294,12 @@ public class KyotakuJikoTodokedeDetail {
                 getTplKyotakuJikoTodokedeDetailRireki().getKyotakuJikoTodokedeMeisai();
         RString kubun = panel.getTabKyotakuServiceJikoSakuseiTodokede().
                 getTplKyotakuJikoTodokedeDetailRireki().getKyotakuJikoTodokedeMeisai().getTxtTodokedeKubun().getValue();
-        ControlGenerator cg;
-        if (new RString("新規").equals(kubun)) {
-            cg = new ControlGenerator(getYaml().get(5));
-        } else {
-            cg = new ControlGenerator(getYaml().get(6));
-        }
+//        ControlGenerator cg;
+//        if (new RString("新規").equals(kubun)) {
+//            cg = new ControlGenerator(getYaml().get(5));
+//        } else {
+//            cg = new ControlGenerator(getYaml().get(6));
+//        }
 
         RString 計画適用期間開始日;
         RString 計画適用期間終了日;
@@ -541,6 +541,5 @@ public class KyotakuJikoTodokedeDetail {
             row.getYukoKigen().setValue(cg.getAsFlexibleDate("有効期限"));
             dgRow.add(row);
         }
-//        kanri.getShoKaishuJokyoShosai().setIsOpen(false);
     }
 }

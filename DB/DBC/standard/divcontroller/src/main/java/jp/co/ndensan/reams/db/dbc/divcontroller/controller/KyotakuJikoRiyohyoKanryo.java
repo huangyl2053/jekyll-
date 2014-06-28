@@ -41,6 +41,7 @@ public class KyotakuJikoRiyohyoKanryo {
     private void setKanryoMessage(KyotakuJikoRiyohyoKanryoDiv panel) {
         ControlGenerator cg = new ControlGenerator(getYaml().get(0));
 
-        KaigoKanryoMessage.setMessage(panel.getKyotakuJikoRiyohyoKanryoMessage(), cg.getAsRString("完了メッセージ"));
+        KaigoKanryoMessage.setMessage(panel.getKyotakuJikoRiyohyoKanryoMessage(),
+                cg.getAsRString("完了メッセージ"), cg.getAsRString("識別コード"), cg.getAsRString("氏名"));
     }
 }

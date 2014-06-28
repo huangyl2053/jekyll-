@@ -49,6 +49,8 @@ public class ServiceRiyohyoBeppyoGokeiDiv extends Panel {
     private TextBoxNum txtRiyoshaFutangakuZengaku;
     @JsonProperty("lblRiyoshaFutangakuZengaku")
     private Label lblRiyoshaFutangakuZengaku;
+    @JsonProperty("btnCalcGokei")
+    private Button btnCalcGokei;
     @JsonProperty("btnBeppyoGokeiKakutei")
     private Button btnBeppyoGokeiKakutei;
 
@@ -196,6 +198,16 @@ public class ServiceRiyohyoBeppyoGokeiDiv extends Panel {
     @JsonProperty("lblRiyoshaFutangakuZengaku")
     public void setLblRiyoshaFutangakuZengaku(Label lblRiyoshaFutangakuZengaku) {
         this.lblRiyoshaFutangakuZengaku=lblRiyoshaFutangakuZengaku;
+    }
+
+    @JsonProperty("btnCalcGokei")
+    public Button getBtnCalcGokei() {
+        return btnCalcGokei;
+    }
+
+    @JsonProperty("btnCalcGokei")
+    public void setBtnCalcGokei(Button btnCalcGokei) {
+        this.btnCalcGokei=btnCalcGokei;
     }
 
     @JsonProperty("btnBeppyoGokeiKakutei")

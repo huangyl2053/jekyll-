@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridColumn;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 居宅サービス自己作成サービス利用票登録の居宅サービス自己作成サービス利用票をコントロールするクラスです。
@@ -141,6 +142,7 @@ public class KyotakuJikoRiyohyo {
                     cg.getAsRString("30日"),
                     cg.getAsRString("31日"),
                     cg.getAsRString("合計"));
+            rowItem.setRowState(RowState.Added);
             dgRiyohyoList.add(rowItem);
         }
         dgRiyohyo.setDataSource(dgRiyohyoList);
@@ -291,7 +293,6 @@ public class KyotakuJikoRiyohyo {
                 getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
         meisai.getTxtJigyoshaCode().setValue(row.getTxtJigyosha().substring(0, 10));
         meisai.getTxtJigyoshaName().setValue(row.getTxtJigyosha().substring(11));
-        meisai.getTxtServiceShuruiCode().setValue(row.getTxtService().substring(0, 2));
         meisai.getTxtServiceCode().setValue(row.getTxtService().substring(2, 6));
         meisai.getTxtServiceName().setValue(row.getTxtService().substring(7));
         meisai.getTxtTani().setValue(new Decimal(row.getTxtTani().toString()));
@@ -348,8 +349,11 @@ public class KyotakuJikoRiyohyo {
         Button btnDelete = new Button();
         RString jigyosha = meisai.getTxtJigyoshaCode().getValue().concat(new RString(":")).
                 concat(meisai.getTxtJigyoshaName().getValue());
-        RString service = meisai.getTxtServiceShuruiCode().getValue().concat(meisai.getTxtServiceCode().getValue()).
+        RString service = meisai.getTxtServiceCode().getValue().
                 concat(new RString(":")).concat(meisai.getTxtServiceName().getValue());
+
+        ViewStateHolder.put("jigyosha", jigyosha);
+        ViewStateHolder.put("service", service);
 
         dgServiceRiyohyoBeppyoList_Row rowItem;
         rowItem = create別票一覧リスト(
@@ -421,12 +425,15 @@ public class KyotakuJikoRiyohyo {
 
         Button btnSelect = new Button();
         Button btnDelete = new Button();
+        RString jigyosha = (RString) ViewStateHolder.get("jigyosha", RString.class);
+        RString service = (RString) ViewStateHolder.get("service", RString.class);
+        service = service.concat(new RString("合計"));
 
         dgServiceRiyohyoBeppyoList_Row rowItem;
         ControlGenerator cg = new ControlGenerator(getYaml().get(2));
         rowItem = create別票一覧リスト(btnSelect, btnDelete,
-                cg.getAsRString("サービス事業者"),
-                cg.getAsRString("サービス内容"),
+                jigyosha,
+                service,
                 cg.getAsRString("単位"),
                 cg.getAsRString("割引後率"),
                 cg.getAsRString("割引後単位"),
@@ -489,7 +496,6 @@ public class KyotakuJikoRiyohyo {
                 getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
         meisai.getTxtJigyoshaCode().clearValue();
         meisai.getTxtJigyoshaName().clearValue();
-        meisai.getTxtServiceShuruiCode().clearValue();
         meisai.getTxtServiceCode().clearValue();
         meisai.getTxtServiceName().clearValue();
         meisai.getTxtTani().clearValue();
@@ -530,7 +536,6 @@ public class KyotakuJikoRiyohyo {
         ControlGenerator cg = new ControlGenerator(getYaml().get(3));
         meisai.getTxtJigyoshaCode().setValue(cg.getAsRString("事業者コード"));
         meisai.getTxtJigyoshaName().setValue(cg.getAsRString("事業者名"));
-        meisai.getTxtServiceShuruiCode().setValue(cg.getAsRString("サービス種類コード"));
         meisai.getTxtServiceCode().setValue(cg.getAsRString("サービスコード"));
         meisai.getTxtServiceName().setValue(cg.getAsRString("サービス名称"));
         meisai.getTxtTani().setValue(cg.getAsDecimal("単位"));
@@ -847,68 +852,37 @@ public class KyotakuJikoRiyohyo {
         TextBox txtBoxShuryo = new TextBox();
         txtBoxKaishi.setValue(txtKaishi);
         txtBoxShuryo.setValue(txtShuryo);
-        TextBoxNum txtBoxDay1 = new TextBoxNum();
-        TextBoxNum txtBoxDay2 = new TextBoxNum();
-        TextBoxNum txtBoxDay3 = new TextBoxNum();
-        TextBoxNum txtBoxDay4 = new TextBoxNum();
-        TextBoxNum txtBoxDay5 = new TextBoxNum();
-        TextBoxNum txtBoxDay6 = new TextBoxNum();
-        TextBoxNum txtBoxDay7 = new TextBoxNum();
-        TextBoxNum txtBoxDay8 = new TextBoxNum();
-        TextBoxNum txtBoxDay9 = new TextBoxNum();
-        TextBoxNum txtBoxDay10 = new TextBoxNum();
-        TextBoxNum txtBoxDay11 = new TextBoxNum();
-        TextBoxNum txtBoxDay12 = new TextBoxNum();
-        TextBoxNum txtBoxDay13 = new TextBoxNum();
-        TextBoxNum txtBoxDay14 = new TextBoxNum();
-        TextBoxNum txtBoxDay15 = new TextBoxNum();
-        TextBoxNum txtBoxDay16 = new TextBoxNum();
-        TextBoxNum txtBoxDay17 = new TextBoxNum();
-        TextBoxNum txtBoxDay18 = new TextBoxNum();
-        TextBoxNum txtBoxDay19 = new TextBoxNum();
-        TextBoxNum txtBoxDay20 = new TextBoxNum();
-        TextBoxNum txtBoxDay21 = new TextBoxNum();
-        TextBoxNum txtBoxDay22 = new TextBoxNum();
-        TextBoxNum txtBoxDay23 = new TextBoxNum();
-        TextBoxNum txtBoxDay24 = new TextBoxNum();
-        TextBoxNum txtBoxDay25 = new TextBoxNum();
-        TextBoxNum txtBoxDay26 = new TextBoxNum();
-        TextBoxNum txtBoxDay27 = new TextBoxNum();
-        TextBoxNum txtBoxDay28 = new TextBoxNum();
-        TextBoxNum txtBoxDay29 = new TextBoxNum();
-        TextBoxNum txtBoxDay30 = new TextBoxNum();
-        TextBoxNum txtBoxDay31 = new TextBoxNum();
-        txtBoxDay1.setValue(new Decimal(txtDay1.toString()));
-        txtBoxDay2.setValue(new Decimal(txtDay2.toString()));
-        txtBoxDay3.setValue(new Decimal(txtDay3.toString()));
-        txtBoxDay4.setValue(new Decimal(txtDay4.toString()));
-        txtBoxDay5.setValue(new Decimal(txtDay5.toString()));
-        txtBoxDay6.setValue(new Decimal(txtDay6.toString()));
-        txtBoxDay7.setValue(new Decimal(txtDay7.toString()));
-        txtBoxDay8.setValue(new Decimal(txtDay8.toString()));
-        txtBoxDay9.setValue(new Decimal(txtDay9.toString()));
-        txtBoxDay10.setValue(new Decimal(txtDay10.toString()));
-        txtBoxDay11.setValue(new Decimal(txtDay11.toString()));
-        txtBoxDay12.setValue(new Decimal(txtDay12.toString()));
-        txtBoxDay13.setValue(new Decimal(txtDay13.toString()));
-        txtBoxDay14.setValue(new Decimal(txtDay14.toString()));
-        txtBoxDay15.setValue(new Decimal(txtDay15.toString()));
-        txtBoxDay16.setValue(new Decimal(txtDay16.toString()));
-        txtBoxDay17.setValue(new Decimal(txtDay17.toString()));
-        txtBoxDay18.setValue(new Decimal(txtDay18.toString()));
-        txtBoxDay19.setValue(new Decimal(txtDay19.toString()));
-        txtBoxDay20.setValue(new Decimal(txtDay20.toString()));
-        txtBoxDay21.setValue(new Decimal(txtDay21.toString()));
-        txtBoxDay22.setValue(new Decimal(txtDay22.toString()));
-        txtBoxDay23.setValue(new Decimal(txtDay23.toString()));
-        txtBoxDay24.setValue(new Decimal(txtDay24.toString()));
-        txtBoxDay25.setValue(new Decimal(txtDay25.toString()));
-        txtBoxDay26.setValue(new Decimal(txtDay26.toString()));
-        txtBoxDay27.setValue(new Decimal(txtDay27.toString()));
-        txtBoxDay28.setValue(new Decimal(txtDay28.toString()));
-        txtBoxDay29.setValue(new Decimal(txtDay29.toString()));
-        txtBoxDay30.setValue(new Decimal(txtDay30.toString()));
-        txtBoxDay31.setValue(new Decimal(txtDay31.toString()));
+        TextBoxNum txtBoxDay1 = makeTextBoxNum(txtDay1);
+        TextBoxNum txtBoxDay2 = makeTextBoxNum(txtDay2);
+        TextBoxNum txtBoxDay3 = makeTextBoxNum(txtDay3);
+        TextBoxNum txtBoxDay4 = makeTextBoxNum(txtDay4);
+        TextBoxNum txtBoxDay5 = makeTextBoxNum(txtDay5);
+        TextBoxNum txtBoxDay6 = makeTextBoxNum(txtDay6);
+        TextBoxNum txtBoxDay7 = makeTextBoxNum(txtDay7);
+        TextBoxNum txtBoxDay8 = makeTextBoxNum(txtDay8);
+        TextBoxNum txtBoxDay9 = makeTextBoxNum(txtDay9);
+        TextBoxNum txtBoxDay10 = makeTextBoxNum(txtDay10);
+        TextBoxNum txtBoxDay11 = makeTextBoxNum(txtDay11);
+        TextBoxNum txtBoxDay12 = makeTextBoxNum(txtDay12);
+        TextBoxNum txtBoxDay13 = makeTextBoxNum(txtDay13);
+        TextBoxNum txtBoxDay14 = makeTextBoxNum(txtDay14);
+        TextBoxNum txtBoxDay15 = makeTextBoxNum(txtDay15);
+        TextBoxNum txtBoxDay16 = makeTextBoxNum(txtDay16);
+        TextBoxNum txtBoxDay17 = makeTextBoxNum(txtDay17);
+        TextBoxNum txtBoxDay18 = makeTextBoxNum(txtDay18);
+        TextBoxNum txtBoxDay19 = makeTextBoxNum(txtDay19);
+        TextBoxNum txtBoxDay20 = makeTextBoxNum(txtDay20);
+        TextBoxNum txtBoxDay21 = makeTextBoxNum(txtDay21);
+        TextBoxNum txtBoxDay22 = makeTextBoxNum(txtDay22);
+        TextBoxNum txtBoxDay23 = makeTextBoxNum(txtDay23);
+        TextBoxNum txtBoxDay24 = makeTextBoxNum(txtDay24);
+        TextBoxNum txtBoxDay25 = makeTextBoxNum(txtDay25);
+        TextBoxNum txtBoxDay26 = makeTextBoxNum(txtDay26);
+        TextBoxNum txtBoxDay27 = makeTextBoxNum(txtDay27);
+        TextBoxNum txtBoxDay28 = makeTextBoxNum(txtDay28);
+        TextBoxNum txtBoxDay29 = makeTextBoxNum(txtDay29);
+        TextBoxNum txtBoxDay30 = makeTextBoxNum(txtDay30);
+        TextBoxNum txtBoxDay31 = makeTextBoxNum(txtDay31);
 
         return new dgServiceRiyohyoList_Row(
                 btnDelete,
@@ -926,6 +900,180 @@ public class KyotakuJikoRiyohyo {
                 txtBoxDay21, txtBoxDay22, txtBoxDay23, txtBoxDay24, txtBoxDay25,
                 txtBoxDay26, txtBoxDay27, txtBoxDay28, txtBoxDay29, txtBoxDay30, txtBoxDay31,
                 txtGokei);
+    }
+
+    private TextBoxNum makeTextBoxNum(RString str) {
+        TextBoxNum ret = new TextBoxNum();
+        try {
+            Decimal data = new Decimal(str.toString());
+            ret.setValue(data);
+        } catch (Throwable e) {
+            ret.clearValue();
+        }
+        return ret;
+    }
+
+    private List<HashMap> getRiyohyoYaml() {
+        return YamlLoader.DBC.loadAsList(new RString("ServiceRiyohyoInfo/ServiceRiyohyoInfo.yml"));
+    }
+
+    /**
+     * サービスコード入力欄のロストフォーカス時に、6桁入力されている場合はサービス名称をセットします。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData onBlurServiceCode(KyotakuJikoRiyohyoDiv panel) {
+        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
+        setServiceCode(panel);
+        response.data = panel;
+        return response;
+    }
+
+    private void setServiceCode(KyotakuJikoRiyohyoDiv panel) {
+        ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().
+                getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
+
+        RString ServiceCode = meisai.getTxtServiceCode().getValue();
+        if (ServiceCode.length() == 6) {
+            ControlGenerator cg = new ControlGenerator(getRiyohyoYaml().get(0));
+            meisai.getTxtServiceName().setValue(cg.getAsRString("サービス名称"));
+        }
+    }
+
+    /**
+     * 明細の計算。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData onClickBtnCalcMeisai(KyotakuJikoRiyohyoDiv panel) {
+        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
+        calcMeisai(panel);
+        response.data = panel;
+        return response;
+    }
+
+    private void calcMeisai(KyotakuJikoRiyohyoDiv panel) {
+        ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
+
+        Decimal tani = meisai.getTxtTani().getValue();
+        Decimal waribikigoRitsu = meisai.getTxtWaribikigoRitsu().getValue();
+        Decimal kaisu = meisai.getTxtKaisu().getValue();
+
+        Decimal waribikigoTani = tani.multiply(waribikigoRitsu);
+        Decimal serviceTani = waribikigoTani.multiply(kaisu);
+
+        meisai.getTxtWaribikigoTani().setValue(waribikigoTani);
+        meisai.getTxtServiceTani().setValue(serviceTani);
+
+    }
+
+    /**
+     * 合計の計算。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData onClickBtnCalcGokei(KyotakuJikoRiyohyoDiv panel) {
+        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
+        calcGokei(panel);
+        response.data = panel;
+        return response;
+    }
+
+    private void calcGokei(KyotakuJikoRiyohyoDiv panel) {
+        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
+
+        Decimal shuruiGendoChokaTani = gokei.getTxtShuruiGendoChokaTani().getValue();
+        Decimal shuruiGendonaiTani = gokei.getTxtShuruiGendonaiTani().getValue();
+        Decimal tanisuTanka = gokei.getTxtTanisuTanka().getValue();
+        Decimal kubunGendoChokaTani = gokei.getTxtKubunGendoChokaTani().getValue();
+        Decimal kubunGendonaiTani = gokei.getTxtKubunGendonaiTani().getValue();
+        Decimal kyufuritsu = gokei.getTxtKyufuritsu().getValue();
+
+        Decimal hiyoSogaku = kubunGendonaiTani.multiply(tanisuTanka);
+        Decimal hokenKyufugaku = hiyoSogaku.multiply(kyufuritsu);
+        Decimal futangakuHoken = hiyoSogaku.subtract(hokenKyufugaku);
+        Decimal futangakuZengaku = (shuruiGendoChokaTani.add(kubunGendoChokaTani)).multiply(tanisuTanka);
+
+        gokei.getTxtHiyoSogaku().setValue(hiyoSogaku);
+        gokei.getTxtHokenKyufugaku().setValue(hokenKyufugaku);
+        gokei.getTxtRiyoshaFutangakuHoken().setValue(futangakuHoken);
+        gokei.getTxtRiyoshaFutangakuZengaku().setValue(futangakuZengaku);
+    }
+
+    /**
+     * サービス利用票の合計の計算。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData onChangeServiceRiyohyoListDayValue(KyotakuJikoRiyohyoDiv panel) {
+        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
+        calcServiceGokei(panel);
+        response.data = panel;
+        return response;
+    }
+
+    private void calcServiceGokei(KyotakuJikoRiyohyoDiv panel) {
+        DataGrid<dgServiceRiyohyoList_Row> dg = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyo().getDgServiceRiyohyoList();
+        int index = dg.getClickedRowId();
+        List<dgServiceRiyohyoList_Row> dgList = dg.getDataSource();
+        dgServiceRiyohyoList_Row row = dgList.get(index);
+        Decimal gokei = Decimal.ZERO;
+
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay1()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay2()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay3()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay4()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay5()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay6()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay7()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay8()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay9()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay10()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay11()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay12()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay13()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay14()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay15()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay16()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay17()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay18()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay19()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay20()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay21()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay22()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay23()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay24()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay25()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay26()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay27()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay28()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay29()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay30()));
+        gokei = gokei.add(getTextBoxNumValue(row.getTxtDay31()));
+
+        row.setTxtGokei(new RString(gokei.toString()));
+        dgList.remove(index);
+        dgList.add(index, row);
+
+        dg.setDataSource(dgList);
+    }
+
+    private Decimal getTextBoxNumValue(TextBoxNum txt) {
+        Decimal ret = Decimal.ZERO;
+        try {
+            ret = txt.getValue();
+        } catch (Throwable e) {
+            ret = Decimal.ZERO;
+        }
+        if (ret == null) {
+            ret = Decimal.ZERO;
+        }
+
+        return ret;
     }
 
 }
