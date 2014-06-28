@@ -40,16 +40,14 @@ public final class KaigoShikakuKihon {
         ControlGenerator cg = new ControlGenerator(targetSource.get(rowId));
 
         kaigoDiv.getTxtHihokenshaNo().setValue(cg.getAsRString("被保番号"));
-        kaigoDiv.getTxtShikakuJotai().setValue(cg.getAsRString("資格状態"));
         kaigoDiv.getTxtShutokuYmd().setValue(cg.getAsRDate("取得日"));
         kaigoDiv.getTxtSoshitsuYmd().setValue(cg.getAsRDate("喪失日"));
         kaigoDiv.getTxtShutokuJiyu().setValue(cg.getAsRString("取得事由"));
         kaigoDiv.getTxtSoshitsuJiyu().setValue(cg.getAsRString("喪失事由"));
-        kaigoDiv.getTxtJutokuTekiyo().setValue(cg.getAsRDate("住特開始"));
-        kaigoDiv.getTxtJutokuKaijo().setValue(cg.getAsRDate("住特終了"));
+        kaigoDiv.getTxtJutokuKubun().setValue(cg.getAsRString("住特区分"));
         kaigoDiv.getTxtYokaigoJotaiKubun().setValue(cg.getAsRString("要介護度"));
-        kaigoDiv.getTxtNinteiKikan().setFromValue(cg.getAsRDate("認定開始日"));
-        kaigoDiv.getTxtNinteiKikan().setToValue(cg.getAsRDate("認定終了日"));
-        kaigoDiv.getTxtKyuSochiNyusho().setValue(cg.getAsRString("旧措置入所"));
+        kaigoDiv.getTxtNinteiKaishiYmd().setValue(cg.getAsRDate("認定開始日"));
+        kaigoDiv.getTxtNinteiShuryoYmd().setValue(cg.getAsRDate("認定終了日"));
+
     }
 }
