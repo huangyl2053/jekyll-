@@ -51,16 +51,13 @@ public class KyotakuJikoRiyohyoKihon {
         ControlGenerator cg = new ControlGenerator(getYaml().get(1));
         KaigoShikakuKihonDiv kihon = panel.getKyotakuJikoRiyohyoKaigoKihon();
         kihon.getTxtHihokenshaNo().setValue(cg.getAsRString("被保番号"));
-        kihon.getTxtShikakuJotai().setValue(cg.getAsRString("資格状態"));
         kihon.getTxtShutokuYmd().setValue(cg.getAsRDate("取得日"));
         kihon.getTxtSoshitsuYmd().setValue(cg.getAsRDate("喪失日"));
         kihon.getTxtShutokuJiyu().setValue(cg.getAsRString("取得事由"));
         kihon.getTxtSoshitsuJiyu().setValue(cg.getAsRString("喪失事由"));
-        kihon.getTxtJutokuTekiyo().setValue(cg.getAsRDate("住特開始"));
-        kihon.getTxtJutokuKaijo().setValue(cg.getAsRDate("住特終了"));
+        kihon.getTxtJutokuKubun().setValue(cg.getAsRString("住特区分"));
         kihon.getTxtYokaigoJotaiKubun().setValue(cg.getAsRString("要介護度"));
-        kihon.getTxtNinteiKikan().setFromValue(cg.getAsRDate("認定開始日"));
-        kihon.getTxtNinteiKikan().setToValue(cg.getAsRDate("認定終了日"));
-        kihon.getTxtKyuSochiNyusho().setValue(cg.getAsRString("旧措置入所"));
+        kihon.getTxtNinteiKaishiYmd().setValue(cg.getAsRDate("認定開始日"));
+        kihon.getTxtNinteiShuryoYmd().setValue(cg.getAsRDate("認定終了日"));
     }
 }

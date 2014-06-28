@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -79,20 +78,16 @@ public class KyotakuJuminPanel {
                 ymlDt.getAsRDate("shotokuYmd"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtShutokuJiyu().setValue(
                 ymlDt.getAsRString("shotokuJiyu"));
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtJutokuTekiyo().setValue(
-                ymlDt.getAsRDate("jutokuTekiyo"));
 
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtYokaigoJotaiKubun().setValue(
                 ymlDt.getAsRString("yokaigojotaiKubun"));
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtShikakuJotai().setValue(
-                ymlDt.getAsRString("shikakuJotai"));
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtJutokuKaijo().setValue(
-                ymlDt.getAsRDate("jutokuKaijo"));
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtJutokuKubun().setValue(
+                ymlDt.getAsRString("jutokuKubun"));
 
-       // panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtNinteiKaishiYmd().
-      //  ymlDt.getAsRDate("niteikikanfrom"));
-        // panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().gett
-        // ymlDt.getAsRDate("niteikikanto"));
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtNinteiKaishiYmd().setValue(
+                ymlDt.getAsRDate("niteikikanfrom"));
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtNinteiShuryoYmd().setValue(
+                ymlDt.getAsRDate("niteikikanto"));
         response.data = panel;
         return response;
     }
