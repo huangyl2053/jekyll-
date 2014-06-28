@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ValidationErrorException;
  *
  * @author n8223　
  * @author n8223 ymddata,　共有DIV適用　2014.06.20 
- * @author n8223 
+ * @author n8223 共有DIV適用　2014.06.28 
  * 
  */
 public class KagoMoshitatePanel {
@@ -100,14 +100,21 @@ public class KagoMoshitatePanel {
         ymlDt.getAsRDate("shotokuYmd"));               
         panel.getCommonKaigoshikakuKihonChildDiv2().getTxtShutokuJiyu().setValue(
         ymlDt.getAsRString("shotokuJiyu"));    
-        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtJutokuTekiyo().setValue(
-        ymlDt.getAsRDate("jutokuTekiyo"));          
+//        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtJutokuTekiyo().setValue(
+//        ymlDt.getAsRDate("jutokuTekiyo"));          
         panel.getCommonKaigoshikakuKihonChildDiv2().getTxtYokaigoJotaiKubun().setValue(
         ymlDt.getAsRString("yokaigojotaiKubun"));
-        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtShikakuJotai().setValue(
-        ymlDt.getAsRString("shikakuJotai"));
-        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtJutokuKaijo().setValue(
-        ymlDt.getAsRDate("jutokuKaijo"));  
+//        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtShikakuJotai().setValue(
+//        ymlDt.getAsRString("shikakuJotai"));
+//        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtJutokuKaijo().setValue(
+//        ymlDt.getAsRDate("jutokuKaijo"));  
+        //2014/0628 朴　KaigoShikakuKihonDIV対応
+        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtJutokuKubun().setValue(
+        ymlDt.getAsRString("jutokuKubun"));
+        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtNinteiKaishiYmd().setValue(
+        ymlDt.getAsRDate("niteikikanfrom"));
+        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtNinteiShuryoYmd().setValue(
+        ymlDt.getAsRDate("niteikikanto"));
          
      }
     

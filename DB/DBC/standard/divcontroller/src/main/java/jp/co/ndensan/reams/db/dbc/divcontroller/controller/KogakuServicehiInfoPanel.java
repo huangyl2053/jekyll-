@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 /**
  * 高額介護サービス費照会 #37963
  *
- * @author n8223
+ * @author n8223　2014.06.28 朴　共有DIV適用
  */
 public class KogakuServicehiInfoPanel {
 
@@ -104,19 +104,26 @@ public class KogakuServicehiInfoPanel {
                 ymlDt.getAsRDate("shotokuYmd"));
         panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtShutokuJiyu().setValue(
                 ymlDt.getAsRString("shotokuJiyu"));
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtJutokuTekiyo().setValue(
-                ymlDt.getAsRDate("jutokuTekiyo"));
+//        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtJutokuTekiyo().setValue(
+//                ymlDt.getAsRDate("jutokuTekiyo"));
         panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtYokaigoJotaiKubun().setValue(
                 ymlDt.getAsRString("yokaigojotaiKubun"));
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtShikakuJotai().setValue(
-                ymlDt.getAsRString("shikakuJotai"));
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtJutokuKaijo().setValue(
-                ymlDt.getAsRDate("jutokuKaijo"));
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtNinteiKikan().setFromValue(
-                ymlDt.getAsRDate("niteikikanfrom"));
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtNinteiKikan().setToValue(
-                ymlDt.getAsRDate("niteikikanto"));
-
+//        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtShikakuJotai().setValue(
+//                ymlDt.getAsRString("shikakuJotai"));
+//        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtJutokuKaijo().setValue(
+//                ymlDt.getAsRDate("jutokuKaijo"));
+//        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtNinteiKikan().setFromValue(
+//                ymlDt.getAsRDate("niteikikanfrom"));
+//        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtNinteiKikan().setToValue(
+//                ymlDt.getAsRDate("niteikikanto"));
+        //2014/0628 朴　KaigoShikakuKihonDIV対応
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtJutokuKubun().setValue(
+        ymlDt.getAsRString("jutokuKubun"));
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtNinteiKaishiYmd().setValue(
+        ymlDt.getAsRDate("niteikikanfrom"));
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtNinteiShuryoYmd().setValue(
+        ymlDt.getAsRDate("niteikikanto"));
+        
         panel.getKogakuServiceDetail().getTxtTeikyoYM().setValue(
                 ymlDt.getAsRDate("teikyoYM"));
     }
