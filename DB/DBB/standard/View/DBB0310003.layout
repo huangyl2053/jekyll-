@@ -11,7 +11,7 @@
        "fieldName": "dgKakushuTsuchiUchiwakeSentaku",
        "items": [],
        "controlType": "DataGrid",
-       "width": "640",
+       "width": "630",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -28,7 +28,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "height": "175",
+       "height": "168",
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -37,9 +37,11 @@
         "isShowFilter": false,
         "isShowFilterButton": false,
         "isShowRowState": false,
-        "isShowSelectButtonColumn": false,
+        "isShowSelectButtonColumn": true,
         "isShowModifyButtonColumn": false,
         "isShowDeleteButtonColumn": false,
+        "limitRowCount": 0,
+        "selectedRowCount": 0,
         "header": {
          "combineColumns": [],
          "frozenColumn": "",
@@ -52,7 +54,7 @@
           "toolTip": "",
           "bgColor": 0,
           "width": 50,
-          "visible": true,
+          "visible": false,
           "cellType": 8,
           "cellDetails": {
            "cellType": 8,
@@ -102,7 +104,7 @@
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "onSelect_Uchiwake",
-       "onSelectBySelectButton": "",
+       "onSelectBySelectButton": "onClick_Sentaku",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
        "onOnlyRow": "",
@@ -179,7 +181,7 @@
      "readOnly": false,
      "height": "Auto",
      "gridSetting": {
-      "rowHeight": 20,
+      "rowHeight": 25,
       "isMultiSelectable": false,
       "isShowHeader": true,
       "isShowFooter": false,
@@ -189,6 +191,8 @@
       "isShowSelectButtonColumn": false,
       "isShowModifyButtonColumn": false,
       "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -347,6 +351,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "text": "",
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
@@ -360,7 +365,6 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "保存名称",
@@ -369,7 +373,8 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "btnTsuchishoSetteiHozon",
@@ -391,37 +396,8 @@
      "selectControlID": "btnTsuchishoSetteiHozon",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "設定を保存する",
      "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0,
-     "heightTextBoxMatches": false
-    },
-    {
-     "fieldName": "btnTsuchishoSetteiKakutei",
-     "items": [],
-     "controlType": "Button",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnTsuchishoSetteiKakutei",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "text": "確定する",
-     "onClick": "closeOK",
+     "text": "設定を保存する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -449,37 +425,8 @@
      "selectControlID": "test001",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "ボタン",
      "onClick": "onLoad",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0,
-     "heightTextBoxMatches": false
-    },
-    {
-     "fieldName": "btnTsuchishoSetteiModoru",
-     "items": [],
-     "controlType": "Button",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnTsuchishoSetteiModoru",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "text": "確定せずに戻る",
-     "onClick": "closeCancel",
+     "text": "ボタン",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -506,7 +453,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "打分け方法確認",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -597,11 +544,11 @@
   },
   {
    "alias": "close",
-   "eventName": "btnTsuchishoSetteiKakutei.onClick"
+   "eventName": "btnSetteiKanryo.onClick"
   },
   {
    "alias": "close",
-   "eventName": "btnTsuchishoSetteiModoru.onClick"
+   "eventName": "btnSetteiCancell.onClick"
   }
  ],
  "loadSequencePanelNames": [
@@ -616,5 +563,83 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "TsuchiUchiwakeKakunin",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnSetteiKanryo",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnSetteiKanryo",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "設定を"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnSetteiCancell",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnSetteiCancell",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "設定せずに"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "初期"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }

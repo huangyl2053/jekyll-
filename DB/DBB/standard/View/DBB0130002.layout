@@ -25,10 +25,10 @@
      "helpMessageID": "",
      "jpControlName": "",
      "required": false,
-     "align": 0,
-     "text": "特別徴収平準化処理の結果を確定します。",
      "isPrivateInfo": false,
-     "decorationClass": ""
+     "text": "特別徴収平準化処理の結果を確定します。",
+     "decorationClass": "",
+     "align": 0
     },
     {
      "fieldName": "HeijunkaKakuteiShoriNaiyo",
@@ -55,20 +55,19 @@
        "jpControlName": "",
        "readOnly": true,
        "required": false,
-       "text": "",
-       "isPrivateInfo": false,
-       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "賦課年度",
@@ -77,6 +76,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "decorationClass": "",
        "permitCharactor": ""
       },
       {
@@ -101,20 +101,19 @@
        "jpControlName": "",
        "readOnly": true,
        "required": false,
-       "text": "",
-       "isPrivateInfo": false,
-       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "処理日時",
@@ -123,6 +122,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "decorationClass": "",
        "permitCharactor": ""
       }
      ],
@@ -138,7 +138,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "L",
+     "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "HeijunkaKakuteiShoriNaiyo",
      "helpMessageID": "",
@@ -191,10 +191,10 @@
        "helpMessageID": "",
        "jpControlName": "",
        "required": false,
-       "align": 0,
-       "text": "平準化前と平準化後の期別保険料額が指定した値（差額）以下の場合は、平準化の対象外となります。",
        "isPrivateInfo": true,
-       "decorationClass": ""
+       "text": "平準化前と平準化後の期別保険料額が指定した値（差額）以下の場合は、平準化の対象外となります。",
+       "decorationClass": "",
+       "align": 0
       },
       {
        "fieldName": "lblHeijunkaMsg3",
@@ -217,15 +217,15 @@
        "helpMessageID": "",
        "jpControlName": "",
        "required": false,
-       "align": 0,
-       "text": "差額設定による平準化対象件数を確認し、計算結果を確定してください。",
        "isPrivateInfo": false,
-       "decorationClass": ""
+       "text": "差額設定による平準化対象件数を確認し、計算結果を確定してください。",
+       "decorationClass": "",
+       "align": 0
       },
       {
-       "fieldName": "linHeijunka",
+       "fieldName": "spaHeijunka1",
        "items": [],
-       "controlType": "HorizontalLine",
+       "controlType": "Space",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -237,10 +237,10 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "selectControlID": "linHeijunka",
+       "selectControlID": "spaHeijunka1",
        "helpMessageID": "",
        "jpControlName": "",
-       "size": "Default"
+       "spaceCount": 1
       },
       {
        "fieldName": "txtSagaku",
@@ -264,20 +264,19 @@
        "jpControlName": "",
        "readOnly": false,
        "required": false,
-       "text": "",
-       "isPrivateInfo": false,
-       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 2,
        "placeHolder": "",
        "textKind": 2,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "すべての保険料段階に同じ差額を設定する",
@@ -286,10 +285,11 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "decorationClass": "",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
-       "isComma": false,
+       "isComma": true,
        "decimalPointLength": 0,
        "permitCharactor": "+-,.\\"
       },
@@ -314,11 +314,11 @@
        "helpMessageID": "",
        "jpControlName": "",
        "text": "設定する",
+       "imageWidth": "",
+       "imageHeight": "",
        "onClick": "onClick_btnSagakuSettei",
        "appearance": 0,
        "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
        "icon": 0,
        "heightTextBoxMatches": false
       },
@@ -355,6 +355,8 @@
         "isShowSelectButtonColumn": false,
         "isShowModifyButtonColumn": false,
         "isShowDeleteButtonColumn": false,
+        "limitRowCount": 0,
+        "selectedRowCount": 0,
         "header": {
          "combineColumns": [],
          "frozenColumn": "",
@@ -392,9 +394,11 @@
            "maxValue": "1.7976931348623157e+308",
            "minValue": "0",
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": "0",
-           "onChange": ""
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": false
           },
           "align": 2,
           "resize": true,
@@ -410,7 +414,7 @@
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
-          "align": 0,
+          "align": 2,
           "resize": false,
           "isPrivateInfo": false,
           "sortKey": ""
@@ -485,11 +489,11 @@
        "helpMessageID": "",
        "jpControlName": "",
        "text": "明細をExcel出力する",
+       "imageWidth": "",
+       "imageHeight": "",
        "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
        "icon": 0,
        "heightTextBoxMatches": false
       }
@@ -514,7 +518,7 @@
      "onLoad": "",
      "title": "差額による確認",
      "isOpen": true,
-     "canOpenAndClose": true,
+     "canOpenAndClose": false,
      "postParameterPanelNames": [
       {
        "postParameterPanelNames": "HeijunkaSagakuKakunin"
@@ -554,7 +558,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "特別徴収平準化計算確定",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -702,7 +706,7 @@
       "fieldName": "btnKakutei",
       "items": [],
       "controlType": "CommonButtonComplete",
-      "width": "S",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -724,7 +728,8 @@
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "icon": 0,
+      "icon": 1,
+      "heightTextBoxMatches": false,
       "prefixText": "",
       "suffixText": ""
      }
@@ -733,9 +738,12 @@
    "states": [
     {
      "state": "平準化確定"
+    },
+    {
+     "state": "平準化差額確認"
     }
    ],
-   "isFinishButtonOnTheRight": true
+   "isFinishButtonOnTheRight": false
   }
  ]
 }

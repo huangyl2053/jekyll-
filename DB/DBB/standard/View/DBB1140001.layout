@@ -90,7 +90,7 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "chkShuturyokuTaisho_core",
-     "helpMessageID": "",
+     "helpMessageID": "DBB1140001",
      "jpControlName": "",
      "readOnly": false,
      "onChange": "",
@@ -226,7 +226,7 @@
      "marginLeft": "L",
      "marginRight": "XS",
      "selectControlID": "dgSaihakko",
-     "helpMessageID": "",
+     "helpMessageID": "DBB1140002",
      "jpControlName": "",
      "readOnly": false,
      "height": "M",
@@ -310,7 +310,7 @@
         "cellDetails": {
          "cellType": 0
         },
-        "align": 1,
+        "align": 2,
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": ""
@@ -366,7 +366,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "所得照会票一括発行",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -468,7 +468,7 @@
       "fieldName": "btnHakko",
       "items": [],
       "controlType": "CommonButtonComplete",
-      "width": "S",
+      "width": 2,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -485,14 +485,14 @@
       "helpMessageID": "",
       "jpControlName": "",
       "postParameterPanelNames": [],
-      "text": "完了",
       "onClick": "",
       "icon": 0,
+      "text": "完了",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "additionalText": "",
+      "additionalText": "所得照会票を",
       "validateUrl": "",
       "sourceCreateUrl": "",
       "afterPrintUrl": "",
@@ -510,7 +510,7 @@
      "state": "所得照会票一括発行"
     }
    ],
-   "isFinishButtonOnTheRight": true
+   "isFinishButtonOnTheRight": false
   }
  ]
 }

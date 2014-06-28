@@ -347,7 +347,7 @@
          "fieldName": "lblShikakuSoshitsu",
          "items": [],
          "controlType": "Label",
-         "width": "80",
+         "width": "130",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -396,7 +396,7 @@
          "fieldName": "lblJutokuGaito",
          "items": [],
          "controlType": "Label",
-         "width": "80",
+         "width": "130",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -414,7 +414,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "住所地特例<br>該当者",
+         "text": "住所地特例該当者",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -445,7 +445,7 @@
          "fieldName": "lblKariHenko",
          "items": [],
          "controlType": "Label",
-         "width": "80",
+         "width": "130",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -463,7 +463,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "仮徴収額<br>変更",
+         "text": "仮徴収額変更",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -494,7 +494,7 @@
          "fieldName": "lblTokuchotsuikaIrai",
          "items": [],
          "controlType": "Label",
-         "width": "80",
+         "width": "130",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -512,7 +512,7 @@
          "jpControlName": "",
          "required": false,
          "align": 1,
-         "text": "特徴追加<br>依頼",
+         "text": "特徴追加依頼",
          "isPrivateInfo": false,
          "decorationClass": ""
         }
@@ -540,10 +540,10 @@
        "fieldName": "celIdoJoho12",
        "items": [
         {
-         "fieldName": "lblShikakuSoshitsu04",
+         "fieldName": "icoShikakuSoshitsu04",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -556,14 +556,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblShikakuSoshitsu04",
+         "selectControlID": "icoShikakuSoshitsu04",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -589,10 +586,10 @@
        "fieldName": "celIdoJoho13",
        "items": [
         {
-         "fieldName": "lblJutokuGaito04",
+         "fieldName": "icoJutokuGaito04",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -605,14 +602,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblJutokuGaito04",
+         "selectControlID": "icoJutokuGaito04",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -638,10 +632,10 @@
        "fieldName": "celIdoJoho14",
        "items": [
         {
-         "fieldName": "lblKariHenko04",
+         "fieldName": "icoKariHenko04",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -654,14 +648,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblKariHenko04",
+         "selectControlID": "icoKariHenko04",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -687,10 +678,10 @@
        "fieldName": "celIdoJoho15",
        "items": [
         {
-         "fieldName": "lblTokuchotsuikaIrai04",
+         "fieldName": "icoTokuchotsuikaIrai04",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -703,14 +694,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblTokuchotsuikaIrai04",
+         "selectControlID": "icoTokuchotsuikaIrai04",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -900,10 +888,10 @@
        "fieldName": "celIdoJoho19",
        "items": [
         {
-         "fieldName": "lblShikakuSoshitsu05",
+         "fieldName": "icoShikakuSoshitsu05",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -916,14 +904,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblShikakuSoshitsu05",
+         "selectControlID": "icoShikakuSoshitsu05",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -949,10 +934,10 @@
        "fieldName": "celIdoJoho20",
        "items": [
         {
-         "fieldName": "lblJutokuGaito05",
+         "fieldName": "icoJutokuGaito05",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -965,14 +950,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblJutokuGaito05",
+         "selectControlID": "icoJutokuGaito05",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -998,10 +980,10 @@
        "fieldName": "celIdoJoho21",
        "items": [
         {
-         "fieldName": "lblKariHenko05",
+         "fieldName": "icoKariHenko05",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1014,14 +996,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblKariHenko05",
+         "selectControlID": "icoKariHenko05",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -1233,10 +1212,10 @@
        "fieldName": "celIdoJoho26",
        "items": [
         {
-         "fieldName": "lblShikakuSoshitsu06",
+         "fieldName": "icoShikakuSoshitsu06",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1249,14 +1228,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblShikakuSoshitsu06",
+         "selectControlID": "icoShikakuSoshitsu06",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -1282,10 +1258,10 @@
        "fieldName": "celIdoJoho27",
        "items": [
         {
-         "fieldName": "lblJutokuGaito06",
+         "fieldName": "icoJutokuGaito06",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1298,14 +1274,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblJutokuGaito06",
+         "selectControlID": "icoJutokuGaito06",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -1331,10 +1304,10 @@
        "fieldName": "celIdoJoho28",
        "items": [
         {
-         "fieldName": "lblKariHenko06",
+         "fieldName": "icoKariHenko06",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1347,14 +1320,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblKariHenko06",
+         "selectControlID": "icoKariHenko06",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -1380,10 +1350,10 @@
        "fieldName": "celIdoJoho29",
        "items": [
         {
-         "fieldName": "lblTokuchotsuikaIrai06",
+         "fieldName": "icoTokuchotsuikaIrai06",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1396,14 +1366,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblTokuchotsuikaIrai06",
+         "selectControlID": "icoTokuchotsuikaIrai06",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -1594,10 +1561,10 @@
        "fieldName": "celIdoJoho33",
        "items": [
         {
-         "fieldName": "lblShikakuSoshitsu07",
+         "fieldName": "icoShikakuSoshitsu07",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1610,14 +1577,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblShikakuSoshitsu07",
+         "selectControlID": "icoShikakuSoshitsu07",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -1643,10 +1607,10 @@
        "fieldName": "celIdoJoho34",
        "items": [
         {
-         "fieldName": "lblJutokuGaito07",
+         "fieldName": "icoJutokuGaito07",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1659,14 +1623,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblJutokuGaito07",
+         "selectControlID": "icoJutokuGaito07",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -1910,10 +1871,10 @@
        "fieldName": "celIdoJoho40",
        "items": [
         {
-         "fieldName": "lblShikakuSoshitsu08",
+         "fieldName": "icoShikakuSoshitsu08",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1926,14 +1887,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblShikakuSoshitsu08",
+         "selectControlID": "icoShikakuSoshitsu08",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -1959,10 +1917,10 @@
        "fieldName": "celIdoJoho41",
        "items": [
         {
-         "fieldName": "lblJutokuGaito08",
+         "fieldName": "icoJutokuGaito08",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1975,14 +1933,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblJutokuGaito08",
+         "selectControlID": "icoJutokuGaito08",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -2030,10 +1985,10 @@
        "fieldName": "celIdoJoho43",
        "items": [
         {
-         "fieldName": "lblTokuchotsuikaIrai08",
+         "fieldName": "icoTokuchotsuikaIrai08",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2046,14 +2001,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblTokuchotsuikaIrai08",
+         "selectControlID": "icoTokuchotsuikaIrai08",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -2244,10 +2196,10 @@
        "fieldName": "celIdoJoho47",
        "items": [
         {
-         "fieldName": "lblShikakuSoshitsu09",
+         "fieldName": "icoShikakuSoshitsu09",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2260,14 +2212,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblShikakuSoshitsu09",
+         "selectControlID": "icoShikakuSoshitsu09",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -2293,10 +2242,10 @@
        "fieldName": "celIdoJoho48",
        "items": [
         {
-         "fieldName": "lblJutokuGaito09",
+         "fieldName": "icoJutokuGaito09",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2309,14 +2258,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblJutokuGaito09",
+         "selectControlID": "icoJutokuGaito09",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -2550,10 +2496,10 @@
        "fieldName": "celIdoJoho54",
        "items": [
         {
-         "fieldName": "lblShikakuSoshitsu10",
+         "fieldName": "icoShikakuSoshitsu10",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2566,14 +2512,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblShikakuSoshitsu10",
+         "selectControlID": "icoShikakuSoshitsu10",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -2599,10 +2542,10 @@
        "fieldName": "celIdoJoho55",
        "items": [
         {
-         "fieldName": "lblJutokuGaito10",
+         "fieldName": "icoJutokuGaito10",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2615,14 +2558,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblJutokuGaito10",
+         "selectControlID": "icoJutokuGaito10",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -2670,10 +2610,10 @@
        "fieldName": "celIdoJoho57",
        "items": [
         {
-         "fieldName": "lblTokuchotsuikaIrai10",
+         "fieldName": "icoTokuchotsuikaIrai10",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2686,14 +2626,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblTokuchotsuikaIrai10",
+         "selectControlID": "icoTokuchotsuikaIrai10",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -2883,10 +2820,10 @@
        "fieldName": "celIdoJoho61",
        "items": [
         {
-         "fieldName": "lblShikakuSoshitsu11",
+         "fieldName": "icoShikakuSoshitsu11",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2899,14 +2836,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblShikakuSoshitsu11",
+         "selectControlID": "icoShikakuSoshitsu11",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -2932,10 +2866,10 @@
        "fieldName": "celIdoJoho62",
        "items": [
         {
-         "fieldName": "lblJutokuGaito11",
+         "fieldName": "icoJutokuGaito11",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2948,14 +2882,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblJutokuGaito11",
+         "selectControlID": "icoJutokuGaito11",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -3189,10 +3120,10 @@
        "fieldName": "celIdoJoho68",
        "items": [
         {
-         "fieldName": "lblShikakuSoshitsu12",
+         "fieldName": "icoShikakuSoshitsu12",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -3205,14 +3136,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblShikakuSoshitsu12",
+         "selectControlID": "icoShikakuSoshitsu12",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -3238,10 +3166,10 @@
        "fieldName": "celIdoJoho69",
        "items": [
         {
-         "fieldName": "lblJutokuGaito12",
+         "fieldName": "icoJutokuGaito12",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -3254,14 +3182,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblJutokuGaito12",
+         "selectControlID": "icoJutokuGaito12",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -3309,10 +3234,10 @@
        "fieldName": "celIdoJoho71",
        "items": [
         {
-         "fieldName": "lblTokuchotsuikaIrai12",
+         "fieldName": "icoTokuchotsuikaIrai12",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -3325,14 +3250,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblTokuchotsuikaIrai12",
+         "selectControlID": "icoTokuchotsuikaIrai12",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -3522,10 +3444,10 @@
        "fieldName": "celIdoJoho75",
        "items": [
         {
-         "fieldName": "lblShikakuSoshitsu01",
+         "fieldName": "icoShikakuSoshitsu01",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -3538,14 +3460,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblShikakuSoshitsu01",
+         "selectControlID": "icoShikakuSoshitsu01",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -3571,10 +3490,10 @@
        "fieldName": "celIdoJoho76",
        "items": [
         {
-         "fieldName": "lblJutokuGaito01",
+         "fieldName": "icoJutokuGaito01",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -3587,14 +3506,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblJutokuGaito01",
+         "selectControlID": "icoJutokuGaito01",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -3828,10 +3744,10 @@
        "fieldName": "celIdoJoho82",
        "items": [
         {
-         "fieldName": "lblShikakuSoshitsu02",
+         "fieldName": "icoShikakuSoshitsu02",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -3844,14 +3760,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblShikakuSoshitsu02",
+         "selectControlID": "icoShikakuSoshitsu02",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -3877,10 +3790,10 @@
        "fieldName": "celIdoJoho83",
        "items": [
         {
-         "fieldName": "lblJutokuGaito02",
+         "fieldName": "icoJutokuGaito02",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -3893,14 +3806,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblJutokuGaito02",
+         "selectControlID": "icoJutokuGaito02",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -3948,10 +3858,10 @@
        "fieldName": "celIdoJoho85",
        "items": [
         {
-         "fieldName": "lblTokuchotsuikaIrai02",
+         "fieldName": "icoTokuchotsuikaIrai02",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -3964,14 +3874,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblTokuchotsuikaIrai02",
+         "selectControlID": "icoTokuchotsuikaIrai02",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -4161,10 +4068,10 @@
        "fieldName": "celIdoJoho89",
        "items": [
         {
-         "fieldName": "lblShikakuSoshitsu03",
+         "fieldName": "icoShikakuSoshitsu03",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -4177,14 +4084,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblShikakuSoshitsu03",
+         "selectControlID": "icoShikakuSoshitsu03",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -4210,10 +4114,10 @@
        "fieldName": "celIdoJoho90",
        "items": [
         {
-         "fieldName": "lblJutokuGaito03",
+         "fieldName": "icoJutokuGaito03",
          "items": [],
-         "controlType": "Label",
-         "width": "50",
+         "controlType": "Icon",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -4226,14 +4130,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "lblJutokuGaito03",
+         "selectControlID": "icoJutokuGaito03",
          "helpMessageID": "",
          "jpControlName": "",
-         "required": false,
-         "align": 1,
-         "text": "○",
-         "isPrivateInfo": false,
-         "decorationClass": ""
+         "icon": 4,
+         "iconSize": 0
         }
        ],
        "controlType": "TableCell",
@@ -4317,7 +4218,7 @@
      "selectControlID": "tbldgTokuchoIdoJoho",
      "helpMessageID": "",
      "jpControlName": "",
-     "html": "<table border=\"1\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td rowspan=\"2\" id='R1C1'></td><td rowspan=\"2\" id='R1C2'></td><td rowspan=\"2\" id='R1C3'></td><td  colspan=\"4\" id='R1C4'></td></tr>\n    <tr bgcolor=\"lightgrey\"><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td><td id='R3C7'></td></tr>\n    <tr><td id='R4C1'></td><td id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td><td id='R4C5'></td><td id='R4C6'></td><td id='R4C7'></td></tr>\n    <tr><td id='R5C1'></td><td id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td><td id='R5C5'></td><td id='R5C6'></td><td id='R5C7'></td></tr>\n    <tr><td id='R6C1'></td><td id='R6C2'></td><td id='R6C3'></td><td id='R6C4'></td><td id='R6C5'></td><td id='R6C6'></td><td id='R6C7'></td></tr>\n    <tr><td id='R7C1'></td><td id='R7C2'></td><td id='R7C3'></td><td id='R7C4'></td><td id='R7C5'></td><td id='R7C6'></td><td id='R7C7'></td></tr>\n    <tr><td id='R8C1'></td><td id='R8C2'></td><td id='R8C3'></td><td id='R8C4'></td><td id='R8C5'></td><td id='R8C6'></td><td id='R8C7'></td></tr>\n    <tr><td id='R9C1'></td><td id='R9C2'></td><td id='R9C3'></td><td id='R9C4'></td><td id='R9C5'></td><td id='R9C6'></td><td id='R9C7'></td></tr>\n    <tr><td id='R10C1'></td><td id='R10C2'></td><td id='R10C3'></td><td id='R10C4'></td><td id='R10C5'></td><td id='R10C6'></td><td id='R10C7'></td></tr>\n    <tr><td id='R11C1'></td><td id='R11C2'></td><td id='R11C3'></td><td id='R11C4'></td><td id='R11C5'></td><td id='R11C6'></td><td id='R11C7'></td></tr>\n    <tr><td id='R12C1'></td><td id='R12C2'></td><td id='R12C3'></td><td id='R12C4'></td><td id='R12C5'></td><td id='R12C6'></td><td id='R12C7'></td></tr>\n    <tr><td id='R13C1'></td><td id='R13C2'></td><td id='R13C3'></td><td id='R13C4'></td><td id='R13C5'></td><td id='R13C6'></td><td id='R13C7'></td></tr>\n    <tr><td id='R14C1'></td><td id='R14C2'></td><td id='R14C3'></td><td id='R14C4'></td><td id='R14C5'></td><td id='R14C6'></td><td id='R14C7'></td></tr>\n  </tbody>\n</table>\n"
+     "html": "<table border=\"1\" cellspacing=0 cellpadding=0>\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td rowspan=\"2\" id='R1C1'></td><td rowspan=\"2\" id='R1C2'></td><td rowspan=\"2\" id='R1C3'></td><td  colspan=\"4\" id='R1C4'></td></tr>\n    <tr bgcolor=\"lightgrey\"><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td><td id='R3C7'></td></tr>\n    <tr><td id='R4C1'></td><td id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td><td id='R4C5'></td><td id='R4C6'></td><td id='R4C7'></td></tr>\n    <tr><td id='R5C1'></td><td id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td><td id='R5C5'></td><td id='R5C6'></td><td id='R5C7'></td></tr>\n    <tr><td id='R6C1'></td><td id='R6C2'></td><td id='R6C3'></td><td id='R6C4'></td><td id='R6C5'></td><td id='R6C6'></td><td id='R6C7'></td></tr>\n    <tr><td id='R7C1'></td><td id='R7C2'></td><td id='R7C3'></td><td id='R7C4'></td><td id='R7C5'></td><td id='R7C6'></td><td id='R7C7'></td></tr>\n    <tr><td id='R8C1'></td><td id='R8C2'></td><td id='R8C3'></td><td id='R8C4'></td><td id='R8C5'></td><td id='R8C6'></td><td id='R8C7'></td></tr>\n    <tr><td id='R9C1'></td><td id='R9C2'></td><td id='R9C3'></td><td id='R9C4'></td><td id='R9C5'></td><td id='R9C6'></td><td id='R9C7'></td></tr>\n    <tr><td id='R10C1'></td><td id='R10C2'></td><td id='R10C3'></td><td id='R10C4'></td><td id='R10C5'></td><td id='R10C6'></td><td id='R10C7'></td></tr>\n    <tr><td id='R11C1'></td><td id='R11C2'></td><td id='R11C3'></td><td id='R11C4'></td><td id='R11C5'></td><td id='R11C6'></td><td id='R11C7'></td></tr>\n    <tr><td id='R12C1'></td><td id='R12C2'></td><td id='R12C3'></td><td id='R12C4'></td><td id='R12C5'></td><td id='R12C6'></td><td id='R12C7'></td></tr>\n    <tr><td id='R13C1'></td><td id='R13C2'></td><td id='R13C3'></td><td id='R13C4'></td><td id='R13C5'></td><td id='R13C6'></td><td id='R13C7'></td></tr>\n    <tr><td id='R14C1'></td><td id='R14C2'></td><td id='R14C3'></td><td id='R14C4'></td><td id='R14C5'></td><td id='R14C6'></td><td id='R14C7'></td></tr>\n  </tbody>\n</table>\n"
     },
     {
      "fieldName": "TokuchoIdoJohoSaiSakusei",
@@ -4529,7 +4430,7 @@
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1,
+ "controlMargin": 0,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
@@ -4537,12 +4438,12 @@
    "commonButtonAreaId": "TokuchoIdoJoho",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonCreate",
      "buttonProperty": {
       "fieldName": "btnSakusei",
       "items": [],
       "controlType": "CommonButtonUpdate",
-      "width": "S",
+      "width": 2,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -4566,6 +4467,8 @@
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "特徴異動情報を",
       "prefixText": "",
       "suffixText": "",
       "validateUrl": "",
