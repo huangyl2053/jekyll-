@@ -82,17 +82,14 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanel {
         ControlGenerator cg = new ControlGenerator(targetSource.get(rowId));
 
         hakkoPanel.getTaishoshaKaigoShikaku().getTxtHihokenshaNo().setValue(cg.getAsRString("被保番号"));
-        hakkoPanel.getTaishoshaKaigoShikaku().getTxtShikakuJotai().setValue(cg.getAsRString("資格状態"));
         hakkoPanel.getTaishoshaKaigoShikaku().getTxtShutokuYmd().setValue(cg.getAsRDate("取得日"));
         hakkoPanel.getTaishoshaKaigoShikaku().getTxtSoshitsuYmd().setValue(cg.getAsRDate("喪失日"));
         hakkoPanel.getTaishoshaKaigoShikaku().getTxtShutokuJiyu().setValue(cg.getAsRString("取得事由"));
         hakkoPanel.getTaishoshaKaigoShikaku().getTxtSoshitsuJiyu().setValue(cg.getAsRString("喪失事由"));
-        hakkoPanel.getTaishoshaKaigoShikaku().getTxtJutokuTekiyo().setValue(cg.getAsRDate("住特開始"));
-        hakkoPanel.getTaishoshaKaigoShikaku().getTxtJutokuKaijo().setValue(cg.getAsRDate("住特終了"));
+        hakkoPanel.getTaishoshaKaigoShikaku().getTxtJutokuKubun().setValue(cg.getAsRString("住特区分"));
         hakkoPanel.getTaishoshaKaigoShikaku().getTxtYokaigoJotaiKubun().setValue(cg.getAsRString("要介護度"));
-        hakkoPanel.getTaishoshaKaigoShikaku().getTxtNinteiKikan().setFromValue(cg.getAsRDate("認定開始日"));
-        hakkoPanel.getTaishoshaKaigoShikaku().getTxtNinteiKikan().setToValue(cg.getAsRDate("認定終了日"));
-        hakkoPanel.getTaishoshaKaigoShikaku().getTxtKyuSochiNyusho().setValue(cg.getAsRString("旧措置入所"));
+        hakkoPanel.getTaishoshaKaigoShikaku().getTxtNinteiKaishiYmd().setValue(cg.getAsRDate("認定開始日"));
+        hakkoPanel.getTaishoshaKaigoShikaku().getTxtNinteiShuryoYmd().setValue(cg.getAsRDate("認定終了日"));
     }
 
     private void set障害者控除明細(int rowId, ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv hakkoDiv) {
