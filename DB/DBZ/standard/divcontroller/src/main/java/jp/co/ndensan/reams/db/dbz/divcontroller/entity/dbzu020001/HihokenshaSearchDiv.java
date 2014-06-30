@@ -1,7 +1,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.dbzu020001;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
@@ -9,8 +10,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * HihokenshaSearch のクラスファイル
- *
+ * HihokenshaSearch のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class HihokenshaSearchDiv extends Panel {
@@ -20,7 +21,6 @@ public class HihokenshaSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("taishoshaSearch")
     private HihokenshaFinderDiv taishoshaSearch;
     @JsonProperty("taishoshaList")
@@ -39,7 +39,7 @@ public class HihokenshaSearchDiv extends Panel {
 
     @JsonProperty("taishoshaSearch")
     public void setTaishoshaSearch(HihokenshaFinderDiv taishoshaSearch) {
-        this.taishoshaSearch = taishoshaSearch;
+        this.taishoshaSearch=taishoshaSearch;
     }
 
     @JsonProperty("taishoshaList")
@@ -49,7 +49,7 @@ public class HihokenshaSearchDiv extends Panel {
 
     @JsonProperty("taishoshaList")
     public void setTaishoshaList(SearchResultOfHihokenshaDiv taishoshaList) {
-        this.taishoshaList = taishoshaList;
+        this.taishoshaList=taishoshaList;
     }
 
 }
