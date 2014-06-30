@@ -958,7 +958,7 @@ public class KyotakuJikoRiyohyo {
         ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
 
         Decimal tani = meisai.getTxtTani().getValue();
-        Decimal waribikigoRitsu = meisai.getTxtWaribikigoRitsu().getValue();
+        Decimal waribikigoRitsu = meisai.getTxtWaribikigoRitsu().getValue().divide(new Decimal("100"));
         Decimal kaisu = meisai.getTxtKaisu().getValue();
 
         Decimal waribikigoTani = tani.multiply(waribikigoRitsu);
@@ -990,7 +990,7 @@ public class KyotakuJikoRiyohyo {
         Decimal tanisuTanka = gokei.getTxtTanisuTanka().getValue();
         Decimal kubunGendoChokaTani = gokei.getTxtKubunGendoChokaTani().getValue();
         Decimal kubunGendonaiTani = gokei.getTxtKubunGendonaiTani().getValue();
-        Decimal kyufuritsu = gokei.getTxtKyufuritsu().getValue();
+        Decimal kyufuritsu = gokei.getTxtKyufuritsu().getValue().divide(new Decimal("100"));
 
         Decimal hiyoSogaku = kubunGendonaiTani.multiply(tanisuTanka);
         Decimal hokenKyufugaku = hiyoSogaku.multiply(kyufuritsu);
