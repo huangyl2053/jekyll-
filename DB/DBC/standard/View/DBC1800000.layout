@@ -2,131 +2,6 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "KashitsukeShinseiSearch",
-   "items": [
-    {
-     "fieldName": "KashitsukeShinseiSearchInfo",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "KashitsukeShinseiSearchInfo",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "HihokenshaFinder",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "onClick_BtnToSearch": "onClick_btnSearch",
-     "displayNone_txtTsuchishoNo": false,
-     "displayNone_ddlFukaNendo": false,
-     "displayNone_SearchCriteriaDetail": false
-    },
-    {
-     "fieldName": "KashitsukeShinseiSearchResultInfo",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "KashitsukeShinseiSearchResultInfo",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "SearchResultOfHihokensha",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "onClick_btnToResearch": ""
-    }
-   ],
-   "controlType": "Panel",
-   "width": "G12",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
-   "selectControlID": "KashitsukeShinseiSearch",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "onLoad": "",
-   "title": "該当者検索",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KashitsukeShinseiSearch"
-    }
-   ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/KashitsukeShinseiSearch/onLoad"
-    },
-    {
-     "eventName": "onClick_btnSearch",
-     "requestUrl": "dbc/db/dbc/KashitsukeShinseiSearch/onClick_btnSearch"
-    }
-   ],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorder": false,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
-  },
-  {
    "fieldName": "KashitsukekinKihon",
    "items": [
     {
@@ -161,10 +36,7 @@
      "heightForDialog": "M",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
-     "atenaInfo_eraseBorderTop": true,
-     "atenaInfo_eraseBorderBottom": true,
-     "atenaInfo_eraseBorderRight": true,
-     "atenaInfo_eraseBorderLeft": true,
+     "AtenaShokaiSimple_eraseBorder": true,
      "AtenaKanaMeisho_visible": true,
      "AtenaMisho_visible": true,
      "SeinengappiYMD_visible": true,
@@ -180,7 +52,6 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnMemo_DisplayNone": false,
      "btnDainosha_displayNone": false,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
@@ -226,6 +97,7 @@
      "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
+     "eraseBorder": true,
      "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
      "dataPassingForDialog": [],
@@ -233,10 +105,6 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "backGroundColor": 0,
      "btnHihoRireki_visible": true,
      "btnNinteiRireki_visible": true
@@ -286,11 +154,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true
+   "height": "Auto"
   },
   {
    "fieldName": "KashitsukeShinseiList",
@@ -623,18 +487,18 @@
        "selectControlID": "btnPrint",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "印刷する",
        "onClick": "",
-       "icon": 0,
+       "text": "印刷する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "icon": 0,
        "heightTextBoxMatches": false
       }
      ],
      "controlType": "PanelPublish",
-     "width": "G12",
+     "width": "1098",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -645,8 +509,8 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
+     "marginLeft": "XS",
+     "marginRight": "XS",
      "selectControlID": "KashitsukeShinseisho",
      "helpMessageID": "",
      "jpControlName": "",
@@ -673,10 +537,6 @@
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
      "isPublish": true,
      "isEmptyControl": false
     }
@@ -719,10 +579,6 @@
     {
      "eventName": "onClickDelete",
      "requestUrl": "dbc/db/dbc/KashitsukeShinseiList/onClickDelete"
-    },
-    {
-     "eventName": "onSelectedShinseiList",
-     "requestUrl": "dbc/db/dbc/KashitsukeShinseiInfo/onSelectedShinseiList"
     }
    ],
    "hiddenInput": [],
@@ -737,11 +593,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "height": "Auto"
   },
   {
    "fieldName": "KashitsukeShinseiInfo",
@@ -767,26 +619,26 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
+     "text": "",
      "required": false,
+     "placeHolder": "",
+     "textKind": 0,
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "value": "",
      "labelLText": "申請日",
      "labelRText": "",
      "labelLWidth": "65",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onKeyPress": "",
-     "text": "",
-     "value": "",
-     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtRiyoKikan",
@@ -809,21 +661,21 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
      "onChange": "",
+     "onKeyPress": "",
      "labelLText": "利用期間",
      "labelRText": "",
      "labelLWidth": "70",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onKeyPress": "",
-     "permitCharactor": "",
      "ymdKubun": 2,
      "displayFormat": 0,
+     "permitCharactor": "",
      "fromPlaceHolder": "",
      "toPlaceHolder": "",
      "minDate": "",
@@ -856,16 +708,8 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
+     "text": "",
      "required": false,
-     "labelLText": "事業者の支払請求額",
-     "labelRText": "",
-     "labelLWidth": "152",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 2,
@@ -874,10 +718,18 @@
      "isPrivateInfo": false,
      "isPassword": false,
      "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
      "onKeyPress": "",
-     "text": "",
      "suggest": [],
      "value": "",
+     "labelLText": "事業者の支払請求額",
+     "labelRText": "",
+     "labelLWidth": "152",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
      "decorationClass": "",
      "permitCharactor": "+-,.\\",
      "maxValue": 1.7976931348623157e+308,
@@ -907,16 +759,8 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
+     "text": "",
      "required": false,
-     "labelLText": "申請金額",
-     "labelRText": "",
-     "labelLWidth": "70",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 2,
@@ -925,10 +769,18 @@
      "isPrivateInfo": false,
      "isPassword": false,
      "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
      "onKeyPress": "",
-     "text": "",
      "suggest": [],
      "value": "",
+     "labelLText": "申請金額",
+     "labelRText": "",
+     "labelLWidth": "70",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
      "decorationClass": "",
      "permitCharactor": "+-,.\\",
      "maxValue": 1.7976931348623157e+308,
@@ -961,8 +813,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": null,
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -982,23 +834,23 @@
         }
        ],
        "required": false,
+       "onChange": "",
        "labelLText": "",
        "labelLWidth": "100",
        "labelLAlign": 2,
-       "onClick": "",
-       "selectedItems": [],
+       "selectedItem": null,
        "newLineItemNumber": 4,
+       "spaceSize": "L",
+       "disabledItem": [],
+       "selectedItems": [],
        "minCheckedItem": 0,
        "maxCheckedItem": 2,
-       "spaceSize": "L",
        "isAllSelectable": false,
-       "isAllSelectableBreakLine": false,
-       "disabledItem": [],
-       "icon": []
+       "isAllSelectableBreakLine": false
       }
      ],
      "controlType": "Panel",
-     "width": "1085",
+     "width": "1098",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1009,7 +861,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "S",
+     "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "KashitsukeShinseiService",
      "helpMessageID": "",
@@ -1036,11 +888,7 @@
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false
+     "height": "Auto"
     },
     {
      "fieldName": "KashitsukeShinseisha",
@@ -1066,16 +914,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "氏名",
-       "labelRText": "",
-       "labelLWidth": "40",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -1084,10 +924,18 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "氏名",
+       "labelRText": "",
+       "labelLWidth": "40",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
       },
@@ -1111,13 +959,13 @@
        "selectControlID": "btnShinseishaCopy",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "被保険者の情報をコピーする",
        "onClick": "onClickShinseishaCopy",
-       "icon": 0,
+       "text": "被保険者の情報をコピーする",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "icon": 0,
        "heightTextBoxMatches": false
       },
       {
@@ -1141,16 +989,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "カナ",
-       "labelRText": "",
-       "labelLWidth": "40",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -1159,10 +999,18 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "カナ",
+       "labelRText": "",
+       "labelLWidth": "40",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": "",
        "kanjiInField": "txtShinseishaName",
@@ -1189,16 +1037,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "被保険者との関係",
-       "labelRText": "",
-       "labelLWidth": "135",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -1207,10 +1047,18 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "被保険者との関係",
+       "labelRText": "",
+       "labelLWidth": "135",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
       },
@@ -1235,16 +1083,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "〒",
-       "labelRText": "",
-       "labelLWidth": "40",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -1253,10 +1093,18 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "〒",
+       "labelRText": "",
+       "labelLWidth": "40",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
       },
@@ -1281,16 +1129,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "電話番号",
-       "labelRText": "",
-       "labelLWidth": "70",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -1299,10 +1139,18 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "電話番号",
+       "labelRText": "",
+       "labelLWidth": "70",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
       },
@@ -1327,16 +1175,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "住所",
-       "labelRText": "",
-       "labelLWidth": "40",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -1345,16 +1185,24 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "住所",
+       "labelRText": "",
+       "labelLWidth": "40",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
       }
      ],
      "controlType": "Panel",
-     "width": "535",
+     "width": "545",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1365,7 +1213,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "S",
+     "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "KashitsukeShinseisha",
      "helpMessageID": "",
@@ -1392,11 +1240,7 @@
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false
+     "height": "Auto"
     },
     {
      "fieldName": "KashitsukeShinseiHoshonin",
@@ -1422,16 +1266,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "氏名",
-       "labelRText": "",
-       "labelLWidth": "40",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -1440,10 +1276,18 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "氏名",
+       "labelRText": "",
+       "labelLWidth": "40",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
       },
@@ -1468,26 +1312,26 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
+       "text": "",
        "required": false,
+       "placeHolder": "",
+       "textKind": 0,
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "value": "",
        "labelLText": "生年月日",
        "labelRText": "",
        "labelLWidth": "72",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
-       "placeHolder": "",
-       "textKind": 0,
-       "isPrivateInfo": false,
-       "isPassword": false,
-       "onKeyPress": "",
-       "text": "",
-       "value": "",
-       "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "radHoshoninSeibetsu",
@@ -1510,8 +1354,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": "key0",
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -1523,14 +1367,14 @@
         }
        ],
        "required": false,
+       "onChange": "",
        "labelLText": "",
        "labelLWidth": "40",
        "labelLAlign": 2,
-       "onClick": "",
+       "selectedItem": "key0",
        "newLineItemNumber": 2,
        "spaceSize": "S",
-       "disabledItem": [],
-       "icon": []
+       "disabledItem": []
       },
       {
        "fieldName": "txtHoshoninKana",
@@ -1553,16 +1397,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "カナ",
-       "labelRText": "",
-       "labelLWidth": "40",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -1571,10 +1407,18 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "カナ",
+       "labelRText": "",
+       "labelLWidth": "40",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": "",
        "kanjiInField": "txtHoshoninName",
@@ -1601,16 +1445,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "申請者との関係",
-       "labelRText": "",
-       "labelLWidth": "120",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -1619,10 +1455,18 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "申請者との関係",
+       "labelRText": "",
+       "labelLWidth": "120",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
       },
@@ -1647,16 +1491,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "〒",
-       "labelRText": "",
-       "labelLWidth": "40",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -1665,10 +1501,18 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "〒",
+       "labelRText": "",
+       "labelLWidth": "40",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
       },
@@ -1693,16 +1537,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "電話番号",
-       "labelRText": "",
-       "labelLWidth": "70",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -1711,10 +1547,18 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "電話番号",
+       "labelRText": "",
+       "labelLWidth": "70",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
       },
@@ -1739,16 +1583,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "住所",
-       "labelRText": "",
-       "labelLWidth": "40",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -1757,10 +1593,18 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "住所",
+       "labelRText": "",
+       "labelLWidth": "40",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
       },
@@ -1788,16 +1632,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "名称",
-         "labelRText": "",
-         "labelLWidth": "55",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1806,10 +1642,18 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
+         "labelLText": "名称",
+         "labelRText": "",
+         "labelLWidth": "55",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "decorationClass": "",
          "permitCharactor": ""
         },
@@ -1834,16 +1678,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "電話番号",
-         "labelRText": "",
-         "labelLWidth": "70",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1852,10 +1688,18 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
+         "labelLText": "電話番号",
+         "labelRText": "",
+         "labelLWidth": "70",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "decorationClass": "",
          "permitCharactor": ""
         },
@@ -1880,16 +1724,8 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
+         "text": "",
          "required": false,
-         "labelLText": "所在地",
-         "labelRText": "",
-         "labelLWidth": "55",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1898,16 +1734,24 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
+         "labelLText": "所在地",
+         "labelRText": "",
+         "labelLWidth": "55",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "decorationClass": "",
          "permitCharactor": ""
         }
        ],
        "controlType": "Panel",
-       "width": "505",
+       "width": "528",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1918,7 +1762,7 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "S",
+       "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "KashitsukeShinseiHoshoninKinmu",
        "helpMessageID": "",
@@ -1938,22 +1782,18 @@
        "onClose": "",
        "session": {},
        "marginTop": "Default",
-       "marginBottom": "S",
+       "marginBottom": "Default",
        "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 1,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false
+       "height": "Auto"
       }
      ],
      "controlType": "Panel",
-     "width": "535",
+     "width": "545",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1965,7 +1805,7 @@
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "0",
-     "marginRight": "S",
+     "marginRight": "XS",
      "selectControlID": "KashitsukeShinseiHoshonin",
      "helpMessageID": "",
      "jpControlName": "",
@@ -1991,11 +1831,7 @@
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false
+     "height": "Auto"
     },
     {
      "fieldName": "KashitsukeShinseiTeishutsu",
@@ -2021,8 +1857,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": null,
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -2030,19 +1866,19 @@
         }
        ],
        "required": false,
+       "onChange": "",
        "labelLText": "",
        "labelLWidth": "S",
        "labelLAlign": 2,
-       "onClick": "",
-       "selectedItems": [],
+       "selectedItem": null,
        "newLineItemNumber": 2,
+       "spaceSize": "M",
+       "disabledItem": [],
+       "selectedItems": [],
        "minCheckedItem": 0,
        "maxCheckedItem": 2,
-       "spaceSize": "M",
        "isAllSelectable": false,
-       "isAllSelectableBreakLine": false,
-       "disabledItem": [],
-       "icon": []
+       "isAllSelectableBreakLine": false
       },
       {
        "fieldName": "txtTeishutsuKanriNo",
@@ -2065,16 +1901,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "提出物管理番号",
-       "labelRText": "",
-       "labelLWidth": "120",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -2083,16 +1911,24 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "提出物管理番号",
+       "labelRText": "",
+       "labelLWidth": "120",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
       }
      ],
      "controlType": "Panel",
-     "width": "535",
+     "width": "545",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -2103,7 +1939,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "S",
+     "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "KashitsukeShinseiTeishutsu",
      "helpMessageID": "",
@@ -2130,11 +1966,7 @@
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "50",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false
+     "height": "45"
     },
     {
      "fieldName": "txtKashitsukeShinseiListSelectedIndex",
@@ -2157,16 +1989,8 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
+     "text": "",
      "required": false,
-     "labelLText": "",
-     "labelRText": "",
-     "labelLWidth": "S",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -2175,10 +1999,18 @@
      "isPrivateInfo": false,
      "isPassword": false,
      "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
      "onKeyPress": "",
-     "text": "",
      "suggest": [],
      "value": "",
+     "labelLText": "",
+     "labelRText": "",
+     "labelLWidth": "S",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
      "decorationClass": "",
      "permitCharactor": ""
     }
@@ -2242,11 +2074,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "height": "Auto"
   },
   {
    "fieldName": "KashitsukeShinseiComplete",
@@ -2328,11 +2156,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -2359,156 +2183,6 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "検索条件",
-   "showWizard": true,
-   "visibleDivs": [
-    {
-     "visibleDiv": "KashitsukeShinseiSearch",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KashitsukeShinseiSearchInfo",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KashitsukeShinseiSearchResultInfo",
-     "panelState": "close",
-     "fixedDiv": "No"
-    }
-   ],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "KashitsukeShinseiSearchInfo_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": "検索結果"
-    },
-    {
-     "fieldName": "KashitsukeShinseiSearchResultInfo_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": "検索条件"
-    },
-    {
-     "fieldName": "KashitsukeShinseiSearchResultInfo_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": "貸付金一覧"
-    },
-    {
-     "fieldName": "btnShinseiSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKashitsukekinReturn",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KashitsukeShinseiListInfo_KyufuhiKashitsukekinList_btnAdd",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KashitsukeShinseiListInfo_KyufuhiKashitsukekinList_dgKyufuhiKashitsukekinList",
-     "event": "onSelectByModifyButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnGaitoshaReturn",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKashitsukeKakutei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "2",
-   "stateName": "検索結果",
-   "showWizard": true,
-   "visibleDivs": [
-    {
-     "visibleDiv": "KashitsukeShinseiSearch",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KashitsukeShinseiSearchInfo",
-     "panelState": "close",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KashitsukeShinseiSearchResultInfo",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "KashitsukeShinseiSearchInfo_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": "検索結果"
-    },
-    {
-     "fieldName": "KashitsukeShinseiSearchResultInfo_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": "検索条件"
-    },
-    {
-     "fieldName": "KashitsukeShinseiSearchResultInfo_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": "貸付金一覧"
-    },
-    {
-     "fieldName": "btnShinseiSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKashitsukekinReturn",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KashitsukeShinseiListInfo_KyufuhiKashitsukekinList_btnAdd",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KashitsukeShinseiListInfo_KyufuhiKashitsukekinList_dgKyufuhiKashitsukekinList",
-     "event": "onSelectByModifyButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnGaitoshaReturn",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKashitsukeKakutei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "3",
    "stateName": "貸付金一覧",
    "showWizard": true,
    "visibleDivs": [
@@ -2551,21 +2225,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KashitsukeShinseiSearchInfo_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KashitsukeShinseiSearchResultInfo_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KashitsukeShinseiSearchResultInfo_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnShinseiSave",
      "event": "onClick",
      "transition": "処理完了"
@@ -2578,17 +2237,12 @@
     {
      "fieldName": "KashitsukeShinseiListInfo_KyufuhiKashitsukekinList_btnAdd",
      "event": "onClick",
-     "transition": "貸付金申請登録"
+     "transition": "申請登録"
     },
     {
      "fieldName": "KashitsukeShinseiListInfo_KyufuhiKashitsukekinList_dgKyufuhiKashitsukekinList",
      "event": "onSelectByModifyButton",
-     "transition": "貸付金申請登録"
-    },
-    {
-     "fieldName": "btnGaitoshaReturn",
-     "event": "onClick",
-     "transition": "検索結果"
+     "transition": "申請登録"
     },
     {
      "fieldName": "btnKashitsukeKakutei",
@@ -2603,8 +2257,8 @@
    ]
   },
   {
-   "order": "4",
-   "stateName": "貸付金申請登録",
+   "order": "2",
+   "stateName": "申請登録",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -2656,21 +2310,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KashitsukeShinseiSearchInfo_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KashitsukeShinseiSearchResultInfo_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KashitsukeShinseiSearchResultInfo_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnShinseiSave",
      "event": "onClick",
      "transition": ""
@@ -2691,11 +2330,6 @@
      "transition": ""
     },
     {
-     "fieldName": "btnGaitoshaReturn",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnKashitsukeKakutei",
      "event": "onClick",
      "transition": "貸付金一覧"
@@ -2708,7 +2342,7 @@
    ]
   },
   {
-   "order": "5",
+   "order": "3",
    "stateName": "処理完了",
    "showWizard": true,
    "visibleDivs": [
@@ -2726,21 +2360,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KashitsukeShinseiSearchInfo_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KashitsukeShinseiSearchResultInfo_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KashitsukeShinseiSearchResultInfo_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnShinseiSave",
      "event": "onClick",
      "transition": ""
@@ -2758,11 +2377,6 @@
     {
      "fieldName": "KashitsukeShinseiListInfo_KyufuhiKashitsukekinList_dgKyufuhiKashitsukekinList",
      "event": "onSelectByModifyButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnGaitoshaReturn",
-     "event": "onClick",
      "transition": ""
     },
     {
@@ -2781,20 +2395,16 @@
  "currentState": "All",
  "id": "DBC1800000",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "return",
+   "eventName": "btnGaitoshaReturn.onClick"
+  }
+ ],
  "loadSequencePanelNames": [
   [
    "KashitsukeShinseiList",
    "KashitsukeShinseiInfo"
-  ],
-  [
-   "KashitsukeShinseiSearch"
-  ],
-  [
-   "KashitsukeShinseiSearchInfo"
-  ],
-  [
-   "KashitsukeShinseiSearchResultInfo"
   ],
   [
    "KashitsukekinKihon"
@@ -2908,7 +2518,7 @@
       "imageWidth": "",
       "imageHeight": "",
       "heightTextBoxMatches": false,
-      "additionalText": "該当者検索に",
+      "additionalText": "対象者検索に",
       "prefixText": "",
       "suffixText": ""
      }
@@ -2919,7 +2529,9 @@
      "state": "貸付金一覧"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   },
   {
    "commonButtonAreaId": "2",
@@ -2996,10 +2608,12 @@
    ],
    "states": [
     {
-     "state": "貸付金申請登録"
+     "state": "申請登録"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   },
   {
    "commonButtonAreaId": "3",
@@ -3043,7 +2657,9 @@
      "state": "処理完了"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
