@@ -47,14 +47,14 @@
        "value": "要介護認定者"
       }
      ],
-     "newLineItemNumber": 4,
-     "spaceSize": "M",
-     "disabledItem": [],
      "selectedItems": [],
+     "newLineItemNumber": 4,
      "minCheckedItem": "1",
      "maxCheckedItem": "3",
+     "spaceSize": "M",
      "isAllSelectable": true,
-     "isAllSelectableBreakLine": false
+     "isAllSelectableBreakLine": false,
+     "disabledItem": []
     },
     {
      "fieldName": "btnSearchHakkoTaisho",
@@ -77,11 +77,11 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "一括作成対象を表示する",
+     "imageWidth": "",
+     "imageHeight": "",
      "onClick": "onClick_BtnSearchHakkoTaisho",
      "appearance": 0,
      "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false
     }
@@ -157,7 +157,6 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "174",
-     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -275,9 +274,15 @@
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
+     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -324,9 +329,9 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "chkTest",
@@ -363,14 +368,14 @@
          "value": "テスト出力"
         }
        ],
-       "newLineItemNumber": 1,
-       "spaceSize": "M",
-       "disabledItem": [],
        "selectedItems": [],
+       "newLineItemNumber": 1,
        "minCheckedItem": 0,
        "maxCheckedItem": "1",
+       "spaceSize": "M",
        "isAllSelectable": false,
-       "isAllSelectableBreakLine": false
+       "isAllSelectableBreakLine": false,
+       "disabledItem": []
       },
       {
        "fieldName": "lblTestHosoku",
@@ -588,7 +593,7 @@
      "marginBottom": "0",
      "eraseBorder": false,
      "backgroundColor": 0,
-     "widthAuto": true,
+     "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
@@ -616,7 +621,7 @@
    "jpControlName": "",
    "onLoad": "",
    "title": "一括作成対象者一覧",
-   "isOpen": false,
+   "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {

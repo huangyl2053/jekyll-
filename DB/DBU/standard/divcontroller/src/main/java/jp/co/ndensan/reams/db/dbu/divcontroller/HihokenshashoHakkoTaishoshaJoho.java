@@ -7,13 +7,12 @@ package jp.co.ndensan.reams.db.dbu.divcontroller;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011.SearchHihokenshashoHakkoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011.HihokenshashoHakkoTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 被保険者証発行対象者情報Divを制御します。
@@ -26,48 +25,51 @@ public class HihokenshashoHakkoTaishoshaJoho {
      * 被保険者証発行該当者一覧画面-「選択」ボタン押下時の処理を表します。
      *
      * @param panel HihokenshashoHakkoTaishoshaJohoDiv
-     * @param panel2 HihokenshashoHakkoTaishoGaitoshaDiv
      * @return ResponseData
      */
     public ResponseData<HihokenshashoHakkoTaishoshaJohoDiv> dispTaishoshaJoho(
-            HihokenshashoHakkoTaishoshaJohoDiv panel, SearchHihokenshashoHakkoDiv panel2) {
+            HihokenshashoHakkoTaishoshaJohoDiv panel) {
         ResponseData<HihokenshashoHakkoTaishoshaJohoDiv> response = new ResponseData<>();
+
+        RString rsHihoNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
 
         List<HashMap> hihokenshashoHakkoTaishoshaJohoList = YamlLoader.DBU.loadAsList(
                 new RString("dbu0410011/HihokenshashoHakkoTaishoshaJoho.yml"));
 
-        HashMap hashMap = hihokenshashoHakkoTaishoshaJohoList.get(
-                panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().getClickedRowId());
+        int iIdx;
+        if (rsHihoNo.toString().equals("1234500001")) {
+            iIdx = 0;
+        } else {
+            iIdx = 1;
+        }
 
+        HashMap hashMap = hihokenshashoHakkoTaishoshaJohoList.get(iIdx);
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
         //対象者情報の出力
         panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtAtenaMeisho().
-                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().getClickedItem().getShimei());
+                setValue(ymlData.getAsRString("shimei"));
 
         panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtAtenaKanaMeisho().
-                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().getClickedItem().getKanaShimsei());
+                setValue(ymlData.getAsRString("kanashimei"));
 
         panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtJusho().
-                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().getClickedItem().getJusho());
+                setValue(ymlData.getAsRString("jusho"));
 
         panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSeinengappiYMD().
-                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().
-                        getClickedItem().getBirthDay().getValue());
+                setValue(ymlData.getAsRDate("birthday"));
 
         panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtNenrei().
                 setValue(ymlData.getAsRString("nenrei"));
 
         panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSeibetsu().
-                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().
-                        getClickedItem().getGender());
+                setValue(ymlData.getAsRString("seibetsu"));
 
         panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtGyoseiku().
                 setValue(ymlData.getAsRString("gyoseiku"));
 
         panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtYubinNo().
-                setValue(new YubinNo(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().
-                                getClickedItem().getYubinNo()));
+                setValue(ymlData.getAsYubinNo("yubinNo"));
 
         panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtNihonjinGaikokujin().
                 setValue(ymlData.getAsRString("nihonjingaikokujin"));
@@ -76,21 +78,17 @@ public class HihokenshashoHakkoTaishoshaJoho {
                 setValue(ymlData.getAsRString("juminjotai"));
 
         panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtShikibetsuCode().
-                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().
-                        getClickedItem().getShikibetsuCode());
+                setValue(ymlData.getAsRString("shikibetsuCode"));
 
         panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtKojinHojinCode().
-                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().
-                        getClickedItem().getKojinNo());
+                setValue(ymlData.getAsRString("kojinNo"));
 
         panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSetaiCode().
-                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().
-                        getClickedItem().getSetaiCode());
+                setValue(ymlData.getAsRString("setaiCode"));
 
         //介護資格基本情報
         panel.getCcdKaigoShikakuKihon().getTxtHihokenshaNo().
-                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().
-                        getClickedItem().getHihokenshaNo());
+                setValue(ymlData.getAsRString("hihoNo"));
 
         if (ymlData.getAsRString("shutokuymd").toString().isEmpty()) {
             panel.getCcdKaigoShikakuKihon().getTxtShutokuYmd().clearValue();
