@@ -24,8 +24,6 @@ public class NinteiShinsakaiIchiranDiv extends Panel {
      */
     @JsonProperty("dgNinteiShinsakaiIchiran")
     private DataGrid<dgNinteiShinsakaiIchiran_Row> dgNinteiShinsakaiIchiran;
-    @JsonProperty("btnClose")
-    private Button btnClose;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -41,16 +39,6 @@ public class NinteiShinsakaiIchiranDiv extends Panel {
     @JsonProperty("dgNinteiShinsakaiIchiran")
     public void setDgNinteiShinsakaiIchiran(DataGrid<dgNinteiShinsakaiIchiran_Row> dgNinteiShinsakaiIchiran) {
         this.dgNinteiShinsakaiIchiran=dgNinteiShinsakaiIchiran;
-    }
-
-    @JsonProperty("btnClose")
-    public Button getBtnClose() {
-        return btnClose;
-    }
-
-    @JsonProperty("btnClose")
-    public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
     }
 
 }

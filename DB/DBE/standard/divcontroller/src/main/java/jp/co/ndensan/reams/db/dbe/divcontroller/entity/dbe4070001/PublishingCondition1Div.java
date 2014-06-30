@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4070001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4070001.ButtonsForPrint1Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4070001.PublishingConditionForJimukyoku1Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4070001.PublishingConditionForShinsakaiIin1Div;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -32,8 +31,6 @@ public class PublishingCondition1Div extends Panel {
     private PublishingConditionForJimukyoku1Div PublishingConditionForJimukyoku1;
     @JsonProperty("PublishingConditionForShinsakaiIin1")
     private PublishingConditionForShinsakaiIin1Div PublishingConditionForShinsakaiIin1;
-    @JsonProperty("ButtonsForPrint1")
-    private ButtonsForPrint1Div ButtonsForPrint1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -79,16 +76,6 @@ public class PublishingCondition1Div extends Panel {
     @JsonProperty("PublishingConditionForShinsakaiIin1")
     public void setPublishingConditionForShinsakaiIin1(PublishingConditionForShinsakaiIin1Div PublishingConditionForShinsakaiIin1) {
         this.PublishingConditionForShinsakaiIin1=PublishingConditionForShinsakaiIin1;
-    }
-
-    @JsonProperty("ButtonsForPrint1")
-    public ButtonsForPrint1Div getButtonsForPrint1() {
-        return ButtonsForPrint1;
-    }
-
-    @JsonProperty("ButtonsForPrint1")
-    public void setButtonsForPrint1(ButtonsForPrint1Div ButtonsForPrint1) {
-        this.ButtonsForPrint1=ButtonsForPrint1;
     }
 
 }
