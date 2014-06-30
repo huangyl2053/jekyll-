@@ -16,7 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 一次判定一括処理対象者一覧Divを制御します。
@@ -36,8 +38,10 @@ public class IchijiHanteiShoriTaishoshaIchiran {
 
         int intShoriFlg = 0;
         setIchijiHanteiShoriTaishoshaData(intShoriFlg, panel);
-        response.data = panel;
+        setDisabled_btnCommonConfirmResult(true);
+        setDisabled_btnCommonCompleteIchijiHantei(true);
 
+        response.data = panel;
         return response;
 
     }
@@ -53,10 +57,14 @@ public class IchijiHanteiShoriTaishoshaIchiran {
 
         int intShoriFlg = 1;
         setIchijiHanteiShoriTaishoshaData(intShoriFlg, panel);
+
+        if (!panel.getDgIchijiHanteiTaishoshaIchiran().getSelectedItems().isEmpty()) {
+            setDisabled_btnCommonConfirmResult(false);
+            setDisabled_btnCommonCompleteIchijiHantei(false);
+        }
+
         response.data = panel;
-
         return response;
-
     }
 
     /**
@@ -70,10 +78,9 @@ public class IchijiHanteiShoriTaishoshaIchiran {
 
         int intShoriFlg = 2;
         setIchijiHanteiShoriTaishoshaData(intShoriFlg, panel);
+
         response.data = panel;
-
         return response;
-
     }
 
     /*
@@ -176,6 +183,20 @@ public class IchijiHanteiShoriTaishoshaIchiran {
                 hokensha, hihokenNo, hihokenshaName, hihokenshaKana, shinseibi, shinseiKbnShin, ichijiHanteibi, ichijiHanteiKanryobi,
                 ichijiHanteiKekka, keikokuCode, chosaJissibi, ikenshoJuryobi, index);
         return rowIchijiHanteiTaishoshaData;
+    }
+
+    private void setDisabled_btnCommonConfirmResult(boolean disabled) {
+        try {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnCommonConfirmResult"), disabled);
+        } catch (Exception e) {
+        }
+    }
+
+    private void setDisabled_btnCommonCompleteIchijiHantei(boolean disabled) {
+        try {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnCommonCompleteIchijiHantei"), disabled);
+        } catch (Exception e) {
+        }
     }
 
 }
