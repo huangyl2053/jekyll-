@@ -63,7 +63,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": ""
+     "requestUrl": "dba/db/dba/HihokenshaShokaiTaishoSearch/onLoad"
     }
    ],
    "hiddenInput": [],
@@ -225,7 +225,7 @@
     },
     {
      "eventName": "onClick_btnToDecide",
-     "requestUrl": "dba/db/dba/HihokenshaShikaiTaishoshaJoho/onClick_btnToDecide"
+     "requestUrl": "dba/db/dba/HihokenshaShokaiTaishoshaJoho/onClick_btnToDecide"
     }
    ],
    "hiddenInput": [],
@@ -766,6 +766,11 @@
        "onSort": "",
        "onSelect": "",
        "onSelectBySelectButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -949,6 +954,11 @@
        "onSort": "",
        "onSelect": "",
        "onSelectBySelectButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -1116,6 +1126,11 @@
        "onSort": "",
        "onSelect": "",
        "onSelectBySelectButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -1737,6 +1752,11 @@
        "onSort": "",
        "onSelect": "",
        "onSelectBySelectButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -1907,6 +1927,11 @@
      "visibleDiv": "ShikakuTokusoRireki",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "HihokenshaShokaiTaishoSearch",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "supplementInfo": "",
@@ -1959,7 +1984,7 @@
      "transition": "被保険者照会"
     },
     {
-     "fieldName": "btnBackMenu",
+     "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
     }
@@ -2051,7 +2076,7 @@
      "transition": "被保険者照会"
     },
     {
-     "fieldName": "btnBackMenu",
+     "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
     }
@@ -2138,7 +2163,7 @@
      "transition": "被保険者照会"
     },
     {
-     "fieldName": "btnBackMenu",
+     "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
     }
@@ -2225,7 +2250,7 @@
      "transition": "被保険者照会"
     },
     {
-     "fieldName": "btnBackMenu",
+     "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
     }
@@ -2312,7 +2337,7 @@
      "transition": "被保険者照会"
     },
     {
-     "fieldName": "btnBackMenu",
+     "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
     }
@@ -2404,7 +2429,7 @@
      "transition": "被保険者照会"
     },
     {
-     "fieldName": "btnBackMenu",
+     "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
     }
@@ -2496,7 +2521,7 @@
      "transition": "被保険者照会"
     },
     {
-     "fieldName": "btnBackMenu",
+     "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
     }
@@ -2583,14 +2608,14 @@
      "transition": "被保険者照会"
     },
     {
-     "fieldName": "btnBackMenu",
+     "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
     }
    ]
   }
  ],
- "currentState": "被保険者照会",
+ "currentState": "All",
  "id": "DBA4010011",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -2651,7 +2676,7 @@
     {
      "buttonKind": "CommonButtonBack",
      "buttonProperty": {
-      "fieldName": "btnBackMenu",
+      "fieldName": "btnComplete",
       "items": [],
       "controlType": "CommonButtonNext",
       "width": 2,
@@ -2667,7 +2692,7 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btnBackMenu",
+      "selectControlID": "btnComplete",
       "helpMessageID": "",
       "jpControlName": "",
       "onClick": "",
@@ -2744,7 +2769,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "該当者一覧に"
+      "additionalText": "該当者一覧に戻る"
      }
     }
    ],
@@ -2774,7 +2799,9 @@
      "state": "被保照会_申請届出"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
