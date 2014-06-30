@@ -37,7 +37,7 @@
    "controlType": "Panel",
    "width": "G3",
    "visible": true,
-   "displayNone": false,
+   "displayNone": true,
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
@@ -86,11 +86,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "height": "Auto"
   },
   {
    "fieldName": "JutokuTekiyoTaishoshaJoho",
@@ -127,10 +123,7 @@
      "heightForDialog": "M",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
-     "atenaInfo_eraseBorderTop": true,
-     "atenaInfo_eraseBorderBottom": true,
-     "atenaInfo_eraseBorderRight": true,
-     "atenaInfo_eraseBorderLeft": true,
+     "AtenaShokaiSimple_eraseBorder": true,
      "AtenaKanaMeisho_visible": true,
      "AtenaMisho_visible": true,
      "SeinengappiYMD_visible": true,
@@ -146,7 +139,6 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnMemo_DisplayNone": false,
      "btnDainosha_displayNone": false,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
@@ -192,6 +184,7 @@
      "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
+     "eraseBorder": true,
      "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
      "dataPassingForDialog": [],
@@ -199,12 +192,8 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "backGroundColor": 0,
-     "btnHihoRireki_visible": true,
+     "btnHihoRireki_visible": false,
      "btnNinteiRireki_visible": true
     }
    ],
@@ -251,19 +240,15 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
+   "marginTop": "0",
+   "marginBottom": "0",
    "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "height": "Auto"
   },
   {
    "fieldName": "JutokuTekiyoJoho",
@@ -344,7 +329,6 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": "jutokuTekiyo",
            "dataSource": [
             {
              "key": "jutokuTekiyo",
@@ -355,6 +339,7 @@
              "value": "住所地特例適用:転入"
             }
            ],
+           "selectedItem": "jutokuTekiyo",
            "disabledItem": []
           },
           {
@@ -481,11 +466,7 @@
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false
+         "height": "Auto"
         },
         {
          "fieldName": "btnUpdateShikaku",
@@ -736,7 +717,6 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": "kyokai",
            "dataSource": [
             {
              "key": "kyokai",
@@ -771,6 +751,7 @@
              "value": "組合国民健康保険"
             }
            ],
+           "selectedItem": "kyokai",
            "disabledItem": []
           },
           {
@@ -952,11 +933,7 @@
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false
+         "height": "Auto"
         },
         {
          "fieldName": "btnUpdateIryoHoken",
@@ -1334,11 +1311,7 @@
            "panelDisplay": 1,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false
+           "height": "Auto"
           },
           {
            "fieldName": "btnUpdateRofukuNenkin",
@@ -1409,11 +1382,7 @@
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "eraseBorderTop": true,
-         "eraseBorderBottom": true,
-         "eraseBorderRight": true,
-         "eraseBorderLeft": true
+         "height": "Auto"
         }
        ],
        "controlType": "TabPanel",
@@ -1837,7 +1806,6 @@
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
-             "selectedItem": "seikatsuFujo",
              "dataSource": [
               {
                "key": "seikatsuFujo",
@@ -1888,6 +1856,7 @@
                "value": "みなし扶助"
               }
              ],
+             "selectedItem": "seikatsuFujo",
              "disabledItem": []
             }
            ],
@@ -1930,11 +1899,7 @@
            "panelDisplay": 1,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false
+           "height": "Auto"
           },
           {
            "fieldName": "btnUpdataSeikatsuHogo",
@@ -2005,11 +1970,7 @@
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "eraseBorderTop": true,
-         "eraseBorderBottom": true,
-         "eraseBorderRight": true,
-         "eraseBorderLeft": true
+         "height": "Auto"
         }
        ],
        "controlType": "TabPanel",
@@ -2154,19 +2115,15 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
+   "marginTop": "0",
+   "marginBottom": "0",
    "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "height": "Auto"
   },
   {
    "fieldName": "JutokuTekiyoComplete",
@@ -2255,11 +2212,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -2506,7 +2459,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "対象者検索へ"
+      "additionalText": "対象者検索に"
      }
     },
     {
@@ -2539,7 +2492,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "該当者一覧へ"
+      "additionalText": "該当者一覧に"
      }
     }
    ],

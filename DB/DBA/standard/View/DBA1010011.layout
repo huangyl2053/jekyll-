@@ -37,7 +37,7 @@
    "controlType": "Panel",
    "width": "G3",
    "visible": true,
-   "displayNone": false,
+   "displayNone": true,
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
@@ -70,19 +70,15 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
+   "marginTop": "0",
+   "marginBottom": "0",
    "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "height": "Auto"
   },
   {
    "fieldName": "ShikakuShutokuTaishoshaJoho",
@@ -119,10 +115,7 @@
      "heightForDialog": "M",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
-     "atenaInfo_eraseBorderTop": true,
-     "atenaInfo_eraseBorderBottom": true,
-     "atenaInfo_eraseBorderRight": true,
-     "atenaInfo_eraseBorderLeft": true,
+     "AtenaShokaiSimple_eraseBorder": true,
      "AtenaKanaMeisho_visible": true,
      "AtenaMisho_visible": true,
      "SeinengappiYMD_visible": true,
@@ -138,7 +131,6 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnMemo_DisplayNone": false,
      "btnDainosha_displayNone": false,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
@@ -184,6 +176,7 @@
      "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
+     "eraseBorder": true,
      "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
      "dataPassingForDialog": [],
@@ -191,12 +184,8 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "backGroundColor": 0,
-     "btnHihoRireki_visible": true,
+     "btnHihoRireki_visible": false,
      "btnNinteiRireki_visible": true
     }
    ],
@@ -243,19 +232,15 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
+   "marginTop": "0",
+   "marginBottom": "0",
    "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "height": "Auto"
   },
   {
    "fieldName": "ShikakuShutokuJoho",
@@ -336,7 +321,6 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": "tennyu",
            "dataSource": [
             {
              "key": "tennyu",
@@ -423,6 +407,7 @@
              "value": "その他"
             }
            ],
+           "selectedItem": "tennyu",
            "disabledItem": []
           },
           {
@@ -541,19 +526,15 @@
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "marginTop": "XS",
-         "marginBottom": "XS",
+         "marginTop": "0",
+         "marginBottom": "0",
          "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false
+         "height": "Auto"
         },
         {
          "fieldName": "btnUpdateShikaku",
@@ -804,7 +785,6 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": "kyokai",
            "dataSource": [
             {
              "key": "kyokai",
@@ -839,6 +819,7 @@
              "value": "組合国民健康保険"
             }
            ],
+           "selectedItem": "kyokai",
            "disabledItem": []
           },
           {
@@ -1020,11 +1001,7 @@
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false
+         "height": "Auto"
         },
         {
          "fieldName": "btnUpdateIryoHoken",
@@ -1402,11 +1379,7 @@
            "panelDisplay": 1,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false
+           "height": "Auto"
           },
           {
            "fieldName": "btnUpdateRofukuNenkin",
@@ -1477,11 +1450,7 @@
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "eraseBorderTop": true,
-         "eraseBorderBottom": true,
-         "eraseBorderRight": true,
-         "eraseBorderLeft": true
+         "height": "Auto"
         }
        ],
        "controlType": "TabPanel",
@@ -1905,7 +1874,6 @@
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
-             "selectedItem": "seikatsuFujo",
              "dataSource": [
               {
                "key": "seikatsuFujo",
@@ -1956,6 +1924,7 @@
                "value": "みなし扶助"
               }
              ],
+             "selectedItem": "seikatsuFujo",
              "disabledItem": []
             }
            ],
@@ -1998,11 +1967,7 @@
            "panelDisplay": 1,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false
+           "height": "Auto"
           },
           {
            "fieldName": "btnUpdataSeikatsuHogo",
@@ -2073,11 +2038,7 @@
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "eraseBorderTop": true,
-         "eraseBorderBottom": true,
-         "eraseBorderRight": true,
-         "eraseBorderLeft": true
+         "height": "Auto"
         }
        ],
        "controlType": "TabPanel",
@@ -2234,11 +2195,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "height": "Auto"
   },
   {
    "fieldName": "ShikakuShutokuComplete",
@@ -2327,11 +2284,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -2433,6 +2386,11 @@
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": "処理完了"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -2459,6 +2417,11 @@
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": "終了"
     }
    ]
   }
@@ -2527,13 +2490,13 @@
       "selectControlID": "btnSave",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "完了",
       "onClick": "onClick_btnSave",
-      "icon": 0,
+      "text": "完了",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": "資格情報を"
      }
@@ -2560,15 +2523,15 @@
       "selectControlID": "btnResearch",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "更新",
       "onClick": "onClick_btnResearch",
-      "icon": 0,
+      "text": "更新",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "対象者検索へ"
+      "additionalText": "対象者検索に"
      }
     },
     {
@@ -2593,15 +2556,15 @@
       "selectControlID": "btnBackSearchResult",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "戻る",
       "onClick": "onClick_btnBackSearchResult",
-      "icon": 0,
+      "text": "戻る",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "該当者一覧へ"
+      "additionalText": "該当者一覧に"
      }
     }
    ],
@@ -2637,13 +2600,13 @@
       "selectControlID": "btnComplete",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "完了",
       "onClick": "",
-      "icon": 0,
+      "text": "完了",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": "資格取得登録を"
      }
