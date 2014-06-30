@@ -16,7 +16,7 @@
    "eventName": "onClick_btnReturn",
    "toLayoutSubGyomuCode": "DBU",
    "toLayoutName": "DBU0600011",
-   "toEventName": "onClick_btnSearch"
+   "toEventName": ""
   }
  ],
  "subGyomuCode": "DBU",

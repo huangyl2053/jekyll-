@@ -16,7 +16,7 @@
    "eventName": "onClick_btnReturn",
    "toLayoutSubGyomuCode": "DBC",
    "toLayoutName": "DBC0010000",
-   "toEventName": "onClick_btnSearch"
+   "toEventName": ""
   },
   {
    "id": "4",
@@ -34,7 +34,7 @@
    "eventName": "onClick_btnClose",
    "toLayoutSubGyomuCode": "DBC",
    "toLayoutName": "DBC0010001",
-   "toEventName": "onOpen"
+   "toEventName": ""
   },
   {
    "id": "6",
@@ -52,7 +52,7 @@
    "eventName": "onClick_btnClose",
    "toLayoutSubGyomuCode": "DBC",
    "toLayoutName": "DBC0010001",
-   "toEventName": "onOpen"
+   "toEventName": ""
   },
   {
    "id": "8",
@@ -70,7 +70,7 @@
    "eventName": "onClick_btnClose",
    "toLayoutSubGyomuCode": "DBC",
    "toLayoutName": "DBC0010001",
-   "toEventName": "onOpen"
+   "toEventName": ""
   },
   {
    "id": "10",
@@ -88,7 +88,7 @@
    "eventName": "onClick_btnClose",
    "toLayoutSubGyomuCode": "DBC",
    "toLayoutName": "DBC0010001",
-   "toEventName": "onOpen"
+   "toEventName": ""
   },
   {
    "id": "12",
@@ -106,7 +106,7 @@
    "eventName": "onClick_btnClose",
    "toLayoutSubGyomuCode": "DBC",
    "toLayoutName": "DBC0010001",
-   "toEventName": "onOpen"
+   "toEventName": ""
   },
   {
    "id": "14",
@@ -124,7 +124,7 @@
    "eventName": "onClick_btnClose",
    "toLayoutSubGyomuCode": "DBC",
    "toLayoutName": "DBC0010001",
-   "toEventName": "onOpen"
+   "toEventName": ""
   },
   {
    "id": "16",
@@ -142,9 +142,9 @@
    "eventName": "onClick_btnClose",
    "toLayoutSubGyomuCode": "DBC",
    "toLayoutName": "DBC0010001",
-   "toEventName": "onOpen"
+   "toEventName": ""
   }
  ],
  "subGyomuCode": "DBC",
- "uiContainerName": "DBC0010000"
+ "uiContainerName": "DBCUC00100"
 }
