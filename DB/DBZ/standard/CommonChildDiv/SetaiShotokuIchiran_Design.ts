@@ -288,6 +288,34 @@ module DBZ {
             }
         }
         
+        public get lblKijunYMDMsgVisible() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["visible"];
+        }
+        
+        public set lblKijunYMDMsgVisible(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["visible"] = value;
+            } else {
+                this.layout.items[0].items[6]["visible"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get lblKijunYMDMsgDisplayNone() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["displayNone"];
+        }
+        
+        public set lblKijunYMDMsgDisplayNone(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["displayNone"] = value;
+            } else {
+                this.layout.items[0].items[6]["displayNone"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, SetaiShotokuIchiran_Design.myLayout, fieldName);
         }
@@ -318,6 +346,8 @@ module DBZ {
             Uz.JSControlUtil.registProperty("btnNarabeteHyoJiDisplayNone");
             Uz.JSControlUtil.registProperty("txtSetaiCodeDisyplayNone");
             Uz.JSControlUtil.registProperty("btnSaihyojiDisplayNone");
+            Uz.JSControlUtil.registProperty("lblKijunYMDMsgVisible");
+            Uz.JSControlUtil.registProperty("lblKijunYMDMsgDisplayNone");
         }
         
         /**
@@ -347,6 +377,8 @@ module DBZ {
             editablePropertyInfo["btnNarabeteHyoJiDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["txtSetaiCodeDisyplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["btnSaihyojiDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["lblKijunYMDMsgVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["lblKijunYMDMsgDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             
             return editablePropertyInfo;
         }
@@ -463,6 +495,7 @@ module DBZ {
      "selectControlID": "ddlSetaiIchiranKazeiNendo_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -507,7 +540,8 @@ module DBZ {
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "txtSetaiIchiranSetaiCode",
@@ -576,6 +610,7 @@ module DBZ {
      "selectControlID": "chkSetaiIchiranAll_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "onChange": "",
      "labelLText": "",
      "labelLWidth": "S",
@@ -650,7 +685,8 @@ module DBZ {
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "dgSetaiShotoku",
@@ -672,6 +708,7 @@ module DBZ {
      "selectControlID": "dgSetaiShotoku",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "height": "Auto",
      "dataSource": [],
      "selectedItems": [],
@@ -1107,6 +1144,11 @@ module DBZ {
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -1149,10 +1191,7 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
@@ -1283,11 +1322,23 @@ module DBZ {
    "publicChildFieldName": "btnSaiHyoji",
    "publicChildProperty": "displayNone",
    "newPropertyName": "btnSaihyojiDisplayNone"
+  },
+  {
+   "publicChildFieldName": "lblSetaiIchiranMsg",
+   "publicChildProperty": "visible",
+   "newPropertyName": "lblKijunYMDMsgVisible"
+  },
+  {
+   "publicChildFieldName": "lblSetaiIchiranMsg",
+   "publicChildProperty": "displayNone",
+   "newPropertyName": "lblKijunYMDMsgDisplayNone"
   }
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }
