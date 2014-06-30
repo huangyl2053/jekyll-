@@ -92,6 +92,7 @@
      "selectControlID": "ddlShichosonName_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "required": false,
      "onFocus": "",
      "onBlur": "",
@@ -141,7 +142,8 @@
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "KetteiHokensha",
@@ -1537,6 +1539,7 @@
        "selectControlID": "dgKetteiHokenshaDetail",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "S",
        "dataSource": [],
        "gridSetting": {
@@ -1813,10 +1816,7 @@
      "session": {},
      "marginTop": "XS",
      "marginBottom": "XS",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": true,
      "panelDisplay": 0,
@@ -2947,6 +2947,7 @@
        "selectControlID": "dgKetteiKohiDetail",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "S",
        "dataSource": [],
        "gridSetting": {
@@ -3257,10 +3258,7 @@
      "session": {},
      "marginTop": "XS",
      "marginBottom": "XS",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": true,
      "panelDisplay": 0,
@@ -3311,10 +3309,7 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -3367,7 +3362,13 @@
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "cbtCompleteElement1",
+     "event": "onClick",
+     "transition": "終了"
+    }
+   ]
   }
  ],
  "currentState": "All",
@@ -3388,5 +3389,51 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
- "commonButtonAreaData": []
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "cbtComplete",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "cbtCompleteElement1",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "cbtCompleteElement1",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "照会を"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "過誤決定取込情報照会"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }
