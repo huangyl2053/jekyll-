@@ -493,7 +493,7 @@ public class NinteichosaResultEntryMain {
         //<editor-fold defaultstate="collapsed" desc="ServiceKubun">
         private static enum ServiceKubun {
 
-            なし("0"), 介護("1"), 予防("2");
+            なし("0"), 予防("1"), 介護("2");
             private final RString theKey;
             private final RString theValue;
 
