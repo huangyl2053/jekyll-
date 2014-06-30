@@ -471,6 +471,11 @@
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -642,8 +647,8 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "対象者一覧",
-   "showWizard": false,
+   "stateName": "対象者選択",
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "NinteichosaResultEntryTarget",
@@ -657,11 +662,12 @@
     }
    ],
    "supplementInfo": "",
+   "supplementInfoPostParamData": "[]",
    "validation": {},
    "events": []
   }
  ],
- "currentState": "対象者一覧",
+ "currentState": "All",
  "id": "DBE2060001",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -712,16 +718,14 @@
       "selectControlID": "btnCommonToCompleteChosa",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "完了とする",
       "onClick": "onClick_btnCommonToCompleteChosa",
-      "icon": 1,
+      "text": "完了とする",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "icon": 1,
       "heightTextBoxMatches": false,
-      "textOfYes": "はい",
-      "textOfNo": "いいえ",
       "prefixText": "調査を",
       "suffixText": ""
      }
@@ -729,10 +733,12 @@
    ],
    "states": [
     {
-     "state": "対象者一覧"
+     "state": "対象者選択"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

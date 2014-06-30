@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.NinteichosaResultEntryTargetsData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.NinteichosaResultEntryTargetDiv;
@@ -115,13 +117,17 @@ public class NinteichosaResultEntryTarget {
      */
     public ResponseData<NinteichosaResultEntryTargetDiv> onClick_btnCommonToCompleteChosa(NinteichosaResultEntryTargetDiv div) {
         List<dgNinteichosaResultTaishosha_Row> dataSource = new ArrayList<>();
-        for (dgNinteichosaResultTaishosha_Row selectedRow : dgTargetPersons(div).getSelectedItems()) {
-            if (canBeSet_chosaKanryoDate(selectedRow)) {
-                selectedRow.getChosaKanryoDate().setValue(FlexibleDate.getNowDate());
+        setDisabled_btnCommonToCompleteChosa(true);
+        for (dgNinteichosaResultTaishosha_Row row : dgTargetPersons(div).getDataSource()) {
+            if (canBeSet_chosaKanryoDate(row)) {
+                if (row.getSelected()) {
+                    row.getChosaKanryoDate().setValue(FlexibleDate.getNowDate());
+                } else {
+                    setDisabled_btnCommonToCompleteChosa(false);
+                }
             }
-            dataSource.add(selectedRow);
+            dataSource.add(row);
         }
-        dataSource.addAll(DataGridUtil.unselectedItems(dgTargetPersons(div)));
         dgTargetPersons(div).setDataSource(dataSource);
         return _createResponseData(div);
     }
@@ -131,7 +137,7 @@ public class NinteichosaResultEntryTarget {
     }
 
     private boolean canBeSet_chosaKanryoDate(dgNinteichosaResultTaishosha_Row target) {
-        return !isEmpty_調査依頼日(target) && !isEmpty_調査実施日(target);
+        return !isEmpty_調査依頼日(target) && !isEmpty_調査実施日(target) && isEmpty_調査完了日(target);
     }
 
     private boolean isEmpty_調査依頼日(dgNinteichosaResultTaishosha_Row target) {
@@ -140,6 +146,10 @@ public class NinteichosaResultEntryTarget {
 
     private boolean isEmpty_調査実施日(dgNinteichosaResultTaishosha_Row target) {
         return isEmpty(target.getChosaJisshiDate().getValue());
+    }
+
+    private boolean isEmpty_調査完了日(dgNinteichosaResultTaishosha_Row target) {
+        return isEmpty(target.getChosaKanryoDate().getValue());
     }
 
     private boolean isEmpty(FlexibleDate date) {
