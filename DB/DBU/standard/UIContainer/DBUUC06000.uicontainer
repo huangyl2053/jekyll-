@@ -1,0 +1,24 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "0",
+   "layoutSubGyomuCode": "DBU",
+   "layoutName": "DBU0600011",
+   "eventName": "onClick_btnDecide",
+   "toLayoutSubGyomuCode": "DBU",
+   "toLayoutName": "DBU0600012",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "1",
+   "layoutSubGyomuCode": "DBU",
+   "layoutName": "DBU0600012",
+   "eventName": "onClick_btnReturn",
+   "toLayoutSubGyomuCode": "DBU",
+   "toLayoutName": "DBU0600011",
+   "toEventName": "onClick_btnSearch"
+  }
+ ],
+ "subGyomuCode": "DBU",
+ "uiContainerName": "DBUUC06000"
+}
