@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
@@ -60,31 +59,26 @@ public class NinteichosaIraiEntry {
     /**
      * btnToCallContinuousEntry押下時の処理です。
      *
-     * @param panel NinteichosaIraiEntryDiv
+     * @param div NinteichosaIraiEntryDiv
      * @param allTargets NinteichosaIraiListDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToCallContinuousEntry(NinteichosaIraiEntryDiv panel,
+    public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToCallContinuousEntry(NinteichosaIraiEntryDiv div,
             NinteichosaIraiListDiv allTargets) {
-        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
 
         List<dgNinteichosaIraiList_Row> selectedTargets = selectedTargetsFrom(allTargets);
         if (selectedTargets.isEmpty()) {
-            changeMode_DisplayNone(panel, true);
+            changeMode_DisplayNone(div, true);
         } else {
-            changeMode_DisplayNone(panel, false);
-            init(panel, selectedTargets);
+            changeMode_DisplayNone(div, false);
+            init(div, selectedTargets);
         }
-
-        response.data = panel;
-        return response;
+        return createResponseData(div);
     }
 
     private void changeMode_DisplayNone(NinteichosaIraiEntryDiv div, boolean isDisplayNone) {
         div.getNinteichosaIraiEntryMain().setDisplayNone(isDisplayNone);
         div.getNinteichosaIraiEntryTarget().setDisplayNone(isDisplayNone);
-//        div.getButtonsForNinteichosaIraiEntry().getBtnToCallNext().setVisible(!isDisplayNone);
-//        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), true);
     }
 
     private void init(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> selectedTargets) {
@@ -101,7 +95,7 @@ public class NinteichosaIraiEntry {
         setNewTitle(panel, targets);
         setUpPanelFromTargetInfo(panel, currentTarget(panel, targets));
         setUpTokusoku(panel);
-//        stateChange_btnToCallNext(panel, targets);
+        stateChange_btnToCallNext(panel, targets);
     }
 
     private void setNewTitle(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> targets) {
@@ -122,31 +116,29 @@ public class NinteichosaIraiEntry {
     }
 
     private void stateChange_btnToCallNext(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> targets) {
-//        Button btnToCallNext = panel.getButtonsForNinteichosaIraiEntry().getBtnToCallNext();
-        if (isLastPerson(panel, targets)) {
-//            btnToCallNext.setVisible(false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), true);
-        } else {
-//            btnToCallNext.setVisible(true);
-//            btnToCallNext.setDisabled(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), false);
+        try {
+            if (isLastPerson(panel, targets)) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), true);
+                System.out.println("btnToCallNext: true");
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), false);
+                System.out.println("btnToCallNext: false");
+            }
+        } catch (Exception e) {
+            System.out.println("btnToCallNext: err");
         }
     }
 
     /**
      * btnToPublish押下時の処理です。
      *
-     * @param panel NinteichosaIraiEntryDiv
+     * @param div NinteichosaIraiEntryDiv
      * @param xxx NinteichosaIraiListDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToPublishChohyo(NinteichosaIraiEntryDiv panel, NinteichosaIraiListDiv xxx) {
-        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
-
-        _onClick_btnToPublishChohyo(panel);
-
-        response.data = panel;
-        return response;
+    public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToPublishChohyo(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv xxx) {
+        _onClick_btnToPublishChohyo(div);
+        return createResponseData(div);
     }
 
     private void _onClick_btnToPublishChohyo(NinteichosaIraiEntryDiv panel) {
@@ -161,19 +153,15 @@ public class NinteichosaIraiEntry {
     /**
      * btnToEntryChosaIrai押下時の処理です。
      *
-     * @param panel NinteichosaIraiEntryDiv
+     * @param div NinteichosaIraiEntryDiv
      * @param allTargets NinteichosaIraiListDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToEntryChosaIrai(NinteichosaIraiEntryDiv panel, NinteichosaIraiListDiv allTargets) {
-        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
-
-        increase_TokusokuCount(panel, allTargets);
-        saveToViewState(panel, allTargets);
-        stateChange_btnToCallNext(panel, allTargets);
-
-        response.data = panel;
-        return response;
+    public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToEntryChosaIrai(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv allTargets) {
+        increase_TokusokuCount(div, allTargets);
+        saveToViewState(div, allTargets);
+        setDisabled_btnToCallNext(isLastPerson(div, selectedTargetsFrom(allTargets)));
+        return createResponseData(div);
     }
 
     private void saveToViewState(NinteichosaIraiEntryDiv panel, NinteichosaIraiListDiv allTargets) {
@@ -188,12 +176,8 @@ public class NinteichosaIraiEntry {
         return new NinteichosaIraiEntryMain(panel.getNinteichosaIraiEntryMain()).reflect(target);
     }
 
-    private void stateChange_btnToCallNext(NinteichosaIraiEntryDiv panel, NinteichosaIraiListDiv allTargets) {
-//        Button btnToCallNext = panel.getButtonsForNinteichosaIraiEntry().getBtnToCallNext();
-        if (!isLastPerson(panel, selectedTargetsFrom(allTargets))) {
-//            btnToCallNext.setDisabled(false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), false);
-        }
+    private void setDisabled_btnToCallNext(boolean disabled) {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), disabled);
     }
 
     /**
@@ -204,13 +188,9 @@ public class NinteichosaIraiEntry {
      * @return ResponseData
      */
     public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToCallNext(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
-        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
-
         setCurrentTargetIndex(div, getCurrentTargetIndex(div) + 1);
         setUpPanelFromTargets(div, selectedTargetsFrom(div2));
-
-        response.data = div;
-        return response;
+        return createResponseData(div);
     }
 
     /**
@@ -221,12 +201,8 @@ public class NinteichosaIraiEntry {
      * @return ResponseData
      */
     public ResponseData<NinteichosaIraiEntryDiv> onChange_radTokusoku(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
-        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
-
         new NinteichosaTokusoku(div.getNinteichosaIraiEntryMain().getNinteichosaIraiEntryTokusoku()).onChange_radTokusoku();
-
-        response.data = div;
-        return response;
+        return createResponseData(div);
     }
 
     /**
@@ -237,12 +213,8 @@ public class NinteichosaIraiEntry {
      * @return ResponseData
      */
     public ResponseData<NinteichosaIraiEntryDiv> onChange_ddlTokukuHoho(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
-        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
-
         new NinteichosaTokusoku(div.getNinteichosaIraiEntryMain().getNinteichosaIraiEntryTokusoku()).onChange_ddlTokukuHoho();
-
-        response.data = div;
-        return response;
+        return createResponseData(div);
     }
 
     /**
@@ -253,12 +225,8 @@ public class NinteichosaIraiEntry {
      * @return ResponseData
      */
     public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToPublishTokusokujo(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
-        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
-
         new NinteichosaTokusoku(div.getNinteichosaIraiEntryMain().getNinteichosaIraiEntryTokusoku()).onClick_btnToPublishTokusokujo();
-
-        response.data = div;
-        return response;
+        return createResponseData(div);
     }
 
     private int getCurrentTargetIndex(NinteichosaIraiEntryDiv panel) {
@@ -295,12 +263,8 @@ public class NinteichosaIraiEntry {
      * @return ResponseData
      */
     public ResponseData<NinteichosaIraiEntryDiv> onChange_txtChosaItakusakiCode(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
-        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
-
         new NinteichosaChosain(div.getNinteichosaIraiEntryMain().getNinteichosaIraiEntryTargetChosain()).onChange_txtChosaItakusakiCode();
-
-        response.data = div;
-        return response;
+        return createResponseData(div);
     }
 
     /**
@@ -311,17 +275,20 @@ public class NinteichosaIraiEntry {
      * @return ResponseData
      */
     public ResponseData<NinteichosaIraiEntryDiv> onChange_txtChosainCode(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
-        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
-
         new NinteichosaChosain(div.getNinteichosaIraiEntryMain().getNinteichosaIraiEntryTargetChosain()).onChange_txtChosainCode();
+        return createResponseData(div);
+    }
 
-        response.data = div;
+    private ResponseData<NinteichosaIraiEntryDiv> createResponseData(NinteichosaIraiEntryDiv panel) {
+        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
+        response.data = panel;
         return response;
     }
 
     /**
      * 調査依頼対象者です。
      */
+    //<editor-fold defaultstate="collapsed" desc="NinteichosaIraiEntryTarget">
     private static final class NinteichosaIraiEntryTarget {
 
         private final NinteichosaIraiEntryTargetDiv panel;
@@ -369,10 +336,12 @@ public class NinteichosaIraiEntry {
             }
         }
     }
+//</editor-fold>
 
     /**
      * 調査員・調査委託先です。
      */
+    //<editor-fold defaultstate="collapsed" desc="NinteichosaChosain">
     private static final class NinteichosaChosain {
 
         private final NinteichosaIraiEntryTargetChosainDiv panel;
@@ -453,10 +422,12 @@ public class NinteichosaIraiEntry {
             return this.panel.getTxtChosainName();
         }
     }
+//</editor-fold>
 
     /**
      * 調査依頼書です。
      */
+    //<editor-fold defaultstate="collapsed" desc="NinteichosaPaper">
     private static final class NinteichosaPaper {
 
         private final NinteichosaIraiEntryPaperDiv panel;
@@ -511,10 +482,12 @@ public class NinteichosaIraiEntry {
             return false;
         }
     }
+//</editor-fold>
 
     /**
      * 認定調査依頼の主な項目です。
      */
+    //<editor-fold defaultstate="collapsed" desc="NinteichosaRequestContent">
     private static final class NinteichosaRequestContent {
 
         private final NinteichosaIraiEntryRequestContentDiv panel;
@@ -572,10 +545,12 @@ public class NinteichosaIraiEntry {
         }
 
     }
+//</editor-fold>
 
     /**
      * 認定調査の依頼です。
      */
+    //<editor-fold defaultstate="collapsed" desc="NinteichosaRequest">
     private static final class NinteichosaRequest {
 
         private final NinteichosaRequestContent content;
@@ -612,10 +587,12 @@ public class NinteichosaIraiEntry {
         }
 
     }
+//</editor-fold>
 
     /**
      * 認定調査の督促です。
      */
+    //<editor-fold defaultstate="collapsed" desc="NinteichosaTokusoku">
     private static final class NinteichosaTokusoku {
 
         private enum DataSource_radTokusoku {
@@ -889,10 +866,12 @@ public class NinteichosaIraiEntry {
         }
 
     }
+//</editor-fold>
 
     /**
      * 認定調査の依頼・督促をまとめて扱います。
      */
+    //<editor-fold defaultstate="collapsed" desc="NinteichosaIraiEntryMain">
     private static final class NinteichosaIraiEntryMain {
 
         private final NinteichosaRequest request;
@@ -920,5 +899,5 @@ public class NinteichosaIraiEntry {
             return request.is登録済み() && chosain.is登録済み();
         }
     }
-
+//</editor-fold>
 }

@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData;
@@ -41,7 +43,9 @@ public class NinteichosaIraiList {
         ResponseData<NinteichosaIraiListDiv> response = new ResponseData<>();
 
         DataGrid<dgNinteichosaIraiList_Row> dataGrid = div.getDgNinteichosaIraiList();
-        dataGrid.setDataSource(new DemoData().get調査依頼対象者());
+        List<dgNinteichosaIraiList_Row> dataSource = new DemoData().get調査依頼対象者();
+        sortByHihokenshaNo(dataSource);
+        dataGrid.setDataSource(dataSource);
         NinteichosaIraiListHolder.saveNinteichosaIraiList(Collections.EMPTY_LIST);
 
         response.data = div;
@@ -60,11 +64,47 @@ public class NinteichosaIraiList {
         DataGrid<dgNinteichosaIraiList_Row> dataGrid = div.getDgNinteichosaIraiList();
         List<dgNinteichosaIraiList_Row> list = new ArrayList<>(DataGridUtil.unselectedItems(dataGrid));
         list.addAll(NinteichosaIraiListHolder.getNinteichosaIraiList());
-        dataGrid.setDataSource(list);
         NinteichosaIraiListHolder.saveNinteichosaIraiList(Collections.EMPTY_LIST);
+        sortByHihokenshaNo(list);
+        dataGrid.setDataSource(list);
 
         response.data = div;
         return response;
+    }
+
+    private void sortByHihokenshaNo(List<dgNinteichosaIraiList_Row> list) {
+        Collections.sort(list, createHihokenshaNoComparator());
+    }
+
+    private Comparator<Object> createHihokenshaNoComparator() {
+        return new Comparator<Object>() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                return toRString(o1).compareTo(toRString(o2));
+            }
+
+            private RString toRString(Object obj) {
+                if (obj.getClass() == dgNinteichosaIraiList_Row.class) {
+                    return extractHihokenshaNo((dgNinteichosaIraiList_Row) obj);
+                } else if (obj.getClass() == LinkedHashMap.class) {
+                    /* dgNinteichosaIraiList_Row のつもりが、
+                     * なぜかViewStateからとってくるとLinkedHashMapになるため....
+                     */
+                    return extractHihokenshaNo((LinkedHashMap) obj);
+                } else {
+                    return RString.EMPTY;
+                }
+            }
+
+            private RString extractHihokenshaNo(dgNinteichosaIraiList_Row row) {
+                return row.get被保険者番号();
+            }
+
+            private RString extractHihokenshaNo(LinkedHashMap map) {
+                return new RString((String) map.get("被保険者番号"));
+            }
+
+        };
     }
 
     /**
@@ -75,10 +115,7 @@ public class NinteichosaIraiList {
      */
     public ResponseData<NinteichosaIraiListDiv> onClick_btnToEntryChosaIrai(NinteichosaIraiListDiv div) {
         ResponseData<NinteichosaIraiListDiv> response = new ResponseData<>();
-
-//        div.getButtonsForNinteichosaIraiListBottom().getBtnToComplete().setDisabled(false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToComplete"), false);
-
         response.data = div;
         return response;
     }
@@ -102,10 +139,12 @@ public class NinteichosaIraiList {
             list.add(selectedItem);
         }
         list.addAll(DataGridUtil.unselectedItems(grid));
+        sortByHihokenshaNo(list);
         grid.setDataSource(list);
 
         response.data = div;
         return response;
+
     }
 
     /**
@@ -113,7 +152,7 @@ public class NinteichosaIraiList {
      */
     static final class NinteichosaIraiListHolder {
 
-        private static final RString SELECTED = new RString("selected");
+        private static final RString SELECTED = new RString("認定調査依頼対象者");
 
         /**
          * 認定調査依頼対象者を保存します。
@@ -121,7 +160,7 @@ public class NinteichosaIraiList {
          * @param list 認定調査依頼対象者
          */
         static void saveNinteichosaIraiList(List<dgNinteichosaIraiList_Row> list) {
-            ViewStateHolder.put(SELECTED, list);
+            ViewStateHolder.put(SELECTED.toString(), list);
         }
 
         /**
@@ -144,6 +183,7 @@ public class NinteichosaIraiList {
     /**
      * 調査依頼対象のデモ用データを持ちます。
      */
+//<editor-fold defaultstate="collapsed" desc="Demodata">
     private static final class DemoData {
 
         private final List<dgNinteichosaIraiList_Row> chosaIraiTargets;
@@ -232,4 +272,5 @@ public class NinteichosaIraiList {
                     is依頼済, is依頼書発行済);
         }
     }
+//</editor-fold>
 }
