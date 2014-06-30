@@ -27,8 +27,6 @@ public class ShinsakaiListDiv extends Panel {
     private OperationForShinsakaiListDiv OperationForShinsakaiList;
     @JsonProperty("dgShinsakaiList")
     private DataGrid<dgShinsakaiList_Row> dgShinsakaiList;
-    @JsonProperty("btnShinsakaiYoteiToroku")
-    private Button btnShinsakaiYoteiToroku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,16 +52,6 @@ public class ShinsakaiListDiv extends Panel {
     @JsonProperty("dgShinsakaiList")
     public void setDgShinsakaiList(DataGrid<dgShinsakaiList_Row> dgShinsakaiList) {
         this.dgShinsakaiList=dgShinsakaiList;
-    }
-
-    @JsonProperty("btnShinsakaiYoteiToroku")
-    public Button getBtnShinsakaiYoteiToroku() {
-        return btnShinsakaiYoteiToroku;
-    }
-
-    @JsonProperty("btnShinsakaiYoteiToroku")
-    public void setBtnShinsakaiYoteiToroku(Button btnShinsakaiYoteiToroku) {
-        this.btnShinsakaiYoteiToroku=btnShinsakaiYoteiToroku;
     }
 
 }

@@ -26,14 +26,6 @@ public class IchijiHanteiShoriTaishoshaIchiranDiv extends Panel {
     private Button btnTaishoshaSearch;
     @JsonProperty("dgIchijiHanteiTaishoshaIchiran")
     private DataGrid<dgIchijiHanteiTaishoshaIchiran_Row> dgIchijiHanteiTaishoshaIchiran;
-    @JsonProperty("btnIchijiHanteiKanryo")
-    private Button btnIchijiHanteiKanryo;
-    @JsonProperty("btnIchijiHantei")
-    private Button btnIchijiHantei;
-    @JsonProperty("btnKekkaKakunin")
-    private Button btnKekkaKakunin;
-    @JsonProperty("btnClose")
-    private Button btnClose;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -59,46 +51,6 @@ public class IchijiHanteiShoriTaishoshaIchiranDiv extends Panel {
     @JsonProperty("dgIchijiHanteiTaishoshaIchiran")
     public void setDgIchijiHanteiTaishoshaIchiran(DataGrid<dgIchijiHanteiTaishoshaIchiran_Row> dgIchijiHanteiTaishoshaIchiran) {
         this.dgIchijiHanteiTaishoshaIchiran=dgIchijiHanteiTaishoshaIchiran;
-    }
-
-    @JsonProperty("btnIchijiHanteiKanryo")
-    public Button getBtnIchijiHanteiKanryo() {
-        return btnIchijiHanteiKanryo;
-    }
-
-    @JsonProperty("btnIchijiHanteiKanryo")
-    public void setBtnIchijiHanteiKanryo(Button btnIchijiHanteiKanryo) {
-        this.btnIchijiHanteiKanryo=btnIchijiHanteiKanryo;
-    }
-
-    @JsonProperty("btnIchijiHantei")
-    public Button getBtnIchijiHantei() {
-        return btnIchijiHantei;
-    }
-
-    @JsonProperty("btnIchijiHantei")
-    public void setBtnIchijiHantei(Button btnIchijiHantei) {
-        this.btnIchijiHantei=btnIchijiHantei;
-    }
-
-    @JsonProperty("btnKekkaKakunin")
-    public Button getBtnKekkaKakunin() {
-        return btnKekkaKakunin;
-    }
-
-    @JsonProperty("btnKekkaKakunin")
-    public void setBtnKekkaKakunin(Button btnKekkaKakunin) {
-        this.btnKekkaKakunin=btnKekkaKakunin;
-    }
-
-    @JsonProperty("btnClose")
-    public Button getBtnClose() {
-        return btnClose;
-    }
-
-    @JsonProperty("btnClose")
-    public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
     }
 
 }

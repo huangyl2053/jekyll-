@@ -23,44 +23,24 @@ public class ScheduleDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblGogitaiNo")
-    private Label lblGogitaiNo;
     @JsonProperty("ddlGogitai")
     private DropDownList ddlGogitai;
-    @JsonProperty("lblKaisaiBasho")
-    private Label lblKaisaiBasho;
     @JsonProperty("ddlKaisaiBasho")
     private DropDownList ddlKaisaiBasho;
-    @JsonProperty("lblYoteiTime")
-    private Label lblYoteiTime;
     @JsonProperty("txtYoteiTimeFrom")
     private TextBoxTime txtYoteiTimeFrom;
     @JsonProperty("lblYoteiTimeWave")
     private Label lblYoteiTimeWave;
     @JsonProperty("txtYoteiTimeTo")
     private TextBoxTime txtYoteiTimeTo;
-    @JsonProperty("lblKaisaiDate")
-    private Label lblKaisaiDate;
     @JsonProperty("txtKaisaiDate")
     private TextBoxDate txtKaisaiDate;
-    @JsonProperty("lblYoteiTeiin")
-    private Label lblYoteiTeiin;
     @JsonProperty("txtYoteiTeiin")
     private TextBoxNum txtYoteiTeiin;
-    @JsonProperty("lblYoteiTeiinUnit")
-    private Label lblYoteiTeiinUnit;
-    @JsonProperty("lblMaxTeiin")
-    private Label lblMaxTeiin;
     @JsonProperty("txtMaxTeiin")
     private TextBoxNum txtMaxTeiin;
-    @JsonProperty("lblMaxTeiinUnit")
-    private Label lblMaxTeiinUnit;
-    @JsonProperty("lblAutoBindTeiin")
-    private Label lblAutoBindTeiin;
     @JsonProperty("txtAutoBindTeiin")
     private TextBoxNum txtAutoBindTeiin;
-    @JsonProperty("lblAutoBindTeiinUnit")
-    private Label lblAutoBindTeiinUnit;
     @JsonProperty("Gogitai")
     private GogitaiDiv Gogitai;
     @JsonProperty("RegisterButton")
@@ -72,16 +52,6 @@ public class ScheduleDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblGogitaiNo")
-    public Label getLblGogitaiNo() {
-        return lblGogitaiNo;
-    }
-
-    @JsonProperty("lblGogitaiNo")
-    public void setLblGogitaiNo(Label lblGogitaiNo) {
-        this.lblGogitaiNo=lblGogitaiNo;
-    }
-
     @JsonProperty("ddlGogitai")
     public DropDownList getDdlGogitai() {
         return ddlGogitai;
@@ -92,16 +62,6 @@ public class ScheduleDiv extends Panel {
         this.ddlGogitai=ddlGogitai;
     }
 
-    @JsonProperty("lblKaisaiBasho")
-    public Label getLblKaisaiBasho() {
-        return lblKaisaiBasho;
-    }
-
-    @JsonProperty("lblKaisaiBasho")
-    public void setLblKaisaiBasho(Label lblKaisaiBasho) {
-        this.lblKaisaiBasho=lblKaisaiBasho;
-    }
-
     @JsonProperty("ddlKaisaiBasho")
     public DropDownList getDdlKaisaiBasho() {
         return ddlKaisaiBasho;
@@ -110,16 +70,6 @@ public class ScheduleDiv extends Panel {
     @JsonProperty("ddlKaisaiBasho")
     public void setDdlKaisaiBasho(DropDownList ddlKaisaiBasho) {
         this.ddlKaisaiBasho=ddlKaisaiBasho;
-    }
-
-    @JsonProperty("lblYoteiTime")
-    public Label getLblYoteiTime() {
-        return lblYoteiTime;
-    }
-
-    @JsonProperty("lblYoteiTime")
-    public void setLblYoteiTime(Label lblYoteiTime) {
-        this.lblYoteiTime=lblYoteiTime;
     }
 
     @JsonProperty("txtYoteiTimeFrom")
@@ -152,16 +102,6 @@ public class ScheduleDiv extends Panel {
         this.txtYoteiTimeTo=txtYoteiTimeTo;
     }
 
-    @JsonProperty("lblKaisaiDate")
-    public Label getLblKaisaiDate() {
-        return lblKaisaiDate;
-    }
-
-    @JsonProperty("lblKaisaiDate")
-    public void setLblKaisaiDate(Label lblKaisaiDate) {
-        this.lblKaisaiDate=lblKaisaiDate;
-    }
-
     @JsonProperty("txtKaisaiDate")
     public TextBoxDate getTxtKaisaiDate() {
         return txtKaisaiDate;
@@ -170,16 +110,6 @@ public class ScheduleDiv extends Panel {
     @JsonProperty("txtKaisaiDate")
     public void setTxtKaisaiDate(TextBoxDate txtKaisaiDate) {
         this.txtKaisaiDate=txtKaisaiDate;
-    }
-
-    @JsonProperty("lblYoteiTeiin")
-    public Label getLblYoteiTeiin() {
-        return lblYoteiTeiin;
-    }
-
-    @JsonProperty("lblYoteiTeiin")
-    public void setLblYoteiTeiin(Label lblYoteiTeiin) {
-        this.lblYoteiTeiin=lblYoteiTeiin;
     }
 
     @JsonProperty("txtYoteiTeiin")
@@ -192,26 +122,6 @@ public class ScheduleDiv extends Panel {
         this.txtYoteiTeiin=txtYoteiTeiin;
     }
 
-    @JsonProperty("lblYoteiTeiinUnit")
-    public Label getLblYoteiTeiinUnit() {
-        return lblYoteiTeiinUnit;
-    }
-
-    @JsonProperty("lblYoteiTeiinUnit")
-    public void setLblYoteiTeiinUnit(Label lblYoteiTeiinUnit) {
-        this.lblYoteiTeiinUnit=lblYoteiTeiinUnit;
-    }
-
-    @JsonProperty("lblMaxTeiin")
-    public Label getLblMaxTeiin() {
-        return lblMaxTeiin;
-    }
-
-    @JsonProperty("lblMaxTeiin")
-    public void setLblMaxTeiin(Label lblMaxTeiin) {
-        this.lblMaxTeiin=lblMaxTeiin;
-    }
-
     @JsonProperty("txtMaxTeiin")
     public TextBoxNum getTxtMaxTeiin() {
         return txtMaxTeiin;
@@ -222,26 +132,6 @@ public class ScheduleDiv extends Panel {
         this.txtMaxTeiin=txtMaxTeiin;
     }
 
-    @JsonProperty("lblMaxTeiinUnit")
-    public Label getLblMaxTeiinUnit() {
-        return lblMaxTeiinUnit;
-    }
-
-    @JsonProperty("lblMaxTeiinUnit")
-    public void setLblMaxTeiinUnit(Label lblMaxTeiinUnit) {
-        this.lblMaxTeiinUnit=lblMaxTeiinUnit;
-    }
-
-    @JsonProperty("lblAutoBindTeiin")
-    public Label getLblAutoBindTeiin() {
-        return lblAutoBindTeiin;
-    }
-
-    @JsonProperty("lblAutoBindTeiin")
-    public void setLblAutoBindTeiin(Label lblAutoBindTeiin) {
-        this.lblAutoBindTeiin=lblAutoBindTeiin;
-    }
-
     @JsonProperty("txtAutoBindTeiin")
     public TextBoxNum getTxtAutoBindTeiin() {
         return txtAutoBindTeiin;
@@ -250,16 +140,6 @@ public class ScheduleDiv extends Panel {
     @JsonProperty("txtAutoBindTeiin")
     public void setTxtAutoBindTeiin(TextBoxNum txtAutoBindTeiin) {
         this.txtAutoBindTeiin=txtAutoBindTeiin;
-    }
-
-    @JsonProperty("lblAutoBindTeiinUnit")
-    public Label getLblAutoBindTeiinUnit() {
-        return lblAutoBindTeiinUnit;
-    }
-
-    @JsonProperty("lblAutoBindTeiinUnit")
-    public void setLblAutoBindTeiinUnit(Label lblAutoBindTeiinUnit) {
-        this.lblAutoBindTeiinUnit=lblAutoBindTeiinUnit;
     }
 
     @JsonProperty("Gogitai")

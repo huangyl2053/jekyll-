@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsakaiIinList;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 24 10:43:26 JST 2014 
+ * Mon Jun 30 17:09:48 JST 2014 
  */
 
 

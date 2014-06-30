@@ -96,7 +96,7 @@ public class NinteichosaIraiEntry {
         setNewTitle(panel, targets);
         setUpPanelFromTargetInfo(panel, currentTarget(panel, targets));
         setUpTokusoku(panel);
-        stateChange_btnToCallNext(panel, targets);
+        setDisabled_btnToCallNext(true);
     }
 
     private void setNewTitle(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> targets) {
@@ -114,20 +114,6 @@ public class NinteichosaIraiEntry {
     private void setUpPanelFromTargetInfo(NinteichosaIraiEntryDiv panel, dgNinteichosaIraiList_Row targetInfo) {
         new NinteichosaIraiEntryTarget(panel.getNinteichosaIraiEntryTarget()).setTargetInfo(targetInfo);
         new NinteichosaIraiEntryMain(panel.getNinteichosaIraiEntryMain()).setTargetInfo(targetInfo);
-    }
-
-    private void stateChange_btnToCallNext(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> targets) {
-        try {
-            if (isLastPerson(panel, targets)) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), true);
-                System.out.println("btnToCallNext: true");
-            } else {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), false);
-                System.out.println("btnToCallNext: false");
-            }
-        } catch (Exception e) {
-            System.out.println("btnToCallNext: err");
-        }
     }
 
     /**
@@ -161,7 +147,7 @@ public class NinteichosaIraiEntry {
     public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToEntryChosaIrai(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv allTargets) {
         increase_TokusokuCount(div, allTargets);
         saveToViewState(div, allTargets);
-        setDisabled_btnToCallNext(!isLastPerson(div, selectedTargetsFrom(allTargets)));
+        setDisabled_btnToCallNext(isLastPerson(div, selectedTargetsFrom(allTargets)));
         return withMessage(createResponseData(div), new InformationMessage("I2010001", "保存しました。"));
     }
 
@@ -178,7 +164,10 @@ public class NinteichosaIraiEntry {
     }
 
     private void setDisabled_btnToCallNext(boolean disabled) {
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), disabled);
+        try {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToCallNext"), disabled);
+        } catch (Exception e) {
+        }
     }
 
     /**
