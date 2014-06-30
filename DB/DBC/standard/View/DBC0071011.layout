@@ -168,7 +168,7 @@
        "selectControlID": "txtKetteiHokenshaSakuseiYMD_core",
        "helpMessageID": "",
        "jpControlName": "",
-       "readOnly": false,
+       "readOnly": true,
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
@@ -1847,7 +1847,7 @@
        "selectControlID": "txtKetteiKohiSakuseiYMD_core",
        "helpMessageID": "",
        "jpControlName": "",
-       "readOnly": false,
+       "readOnly": true,
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
@@ -3285,9 +3285,9 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "過誤決定情報",
+   "title": "",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "Ketteijoho"
@@ -3309,7 +3309,7 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,

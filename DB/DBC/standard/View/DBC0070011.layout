@@ -42,7 +42,8 @@
      "labelRAlign": 0,
      "ymdKubun": 1,
      "displayFormat": 0,
-     "value": ""
+     "value": "",
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "ddlShichosonName",
@@ -86,7 +87,8 @@
        "key": "key1",
        "value": "佐久市"
       }
-     ]
+     ],
+     "disabledItem": []
     },
     {
      "fieldName": "btnSearchSofuzumi",
@@ -110,11 +112,11 @@
      "jpControlName": "",
      "text": "送付年月を指定して表示する",
      "onClick": "onClick_btnSofuzumi",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -139,11 +141,11 @@
      "jpControlName": "",
      "text": "未送付情報を表示する",
      "onClick": "onClick_btnMisofu",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -442,7 +444,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "過誤申立書送付情報",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": false,
    "postParameterPanelNames": [
@@ -470,7 +472,7 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
