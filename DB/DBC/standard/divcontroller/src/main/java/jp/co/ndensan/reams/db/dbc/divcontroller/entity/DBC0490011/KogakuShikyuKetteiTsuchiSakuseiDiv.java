@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0490011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -28,12 +27,10 @@ public class KogakuShikyuKetteiTsuchiSakuseiDiv extends Panel {
     private TextBoxDate txtTsuchiSotatsuYMD;
     @JsonProperty("chkOutputTargetKubun")
     private CheckBoxList chkOutputTargetKubun;
-    @JsonProperty("lblReportCreateKubun")
-    private Label lblReportCreateKubun;
-    @JsonProperty("radIsCreateIchiranhyo")
-    private RadioButton radIsCreateIchiranhyo;
-    @JsonProperty("CommonKariChildDiv1")
-    private KaigoChohyoShutsuryokujunDiv CommonKariChildDiv1;
+    @JsonProperty("KogakuShikyuKetteiTsuchiSakuseiListPanel")
+    private KogakuShikyuKetteiTsuchiSakuseiListPanelDiv KogakuShikyuKetteiTsuchiSakuseiListPanel;
+    @JsonProperty("KogakuShikyuKetteiTsuchiSakuseishoPanel")
+    private KogakuShikyuKetteiTsuchiSakuseishoPanelDiv KogakuShikyuKetteiTsuchiSakuseishoPanel;
     @JsonProperty("btnCreate")
     private Button btnCreate;
 
@@ -73,34 +70,24 @@ public class KogakuShikyuKetteiTsuchiSakuseiDiv extends Panel {
         this.chkOutputTargetKubun=chkOutputTargetKubun;
     }
 
-    @JsonProperty("lblReportCreateKubun")
-    public Label getLblReportCreateKubun() {
-        return lblReportCreateKubun;
+    @JsonProperty("KogakuShikyuKetteiTsuchiSakuseiListPanel")
+    public KogakuShikyuKetteiTsuchiSakuseiListPanelDiv getKogakuShikyuKetteiTsuchiSakuseiListPanel() {
+        return KogakuShikyuKetteiTsuchiSakuseiListPanel;
     }
 
-    @JsonProperty("lblReportCreateKubun")
-    public void setLblReportCreateKubun(Label lblReportCreateKubun) {
-        this.lblReportCreateKubun=lblReportCreateKubun;
+    @JsonProperty("KogakuShikyuKetteiTsuchiSakuseiListPanel")
+    public void setKogakuShikyuKetteiTsuchiSakuseiListPanel(KogakuShikyuKetteiTsuchiSakuseiListPanelDiv KogakuShikyuKetteiTsuchiSakuseiListPanel) {
+        this.KogakuShikyuKetteiTsuchiSakuseiListPanel=KogakuShikyuKetteiTsuchiSakuseiListPanel;
     }
 
-    @JsonProperty("radIsCreateIchiranhyo")
-    public RadioButton getRadIsCreateIchiranhyo() {
-        return radIsCreateIchiranhyo;
+    @JsonProperty("KogakuShikyuKetteiTsuchiSakuseishoPanel")
+    public KogakuShikyuKetteiTsuchiSakuseishoPanelDiv getKogakuShikyuKetteiTsuchiSakuseishoPanel() {
+        return KogakuShikyuKetteiTsuchiSakuseishoPanel;
     }
 
-    @JsonProperty("radIsCreateIchiranhyo")
-    public void setRadIsCreateIchiranhyo(RadioButton radIsCreateIchiranhyo) {
-        this.radIsCreateIchiranhyo=radIsCreateIchiranhyo;
-    }
-
-    @JsonProperty("CommonKariChildDiv1")
-    public KaigoChohyoShutsuryokujunDiv getCommonKariChildDiv1() {
-        return CommonKariChildDiv1;
-    }
-
-    @JsonProperty("CommonKariChildDiv1")
-    public void setCommonKariChildDiv1(KaigoChohyoShutsuryokujunDiv CommonKariChildDiv1) {
-        this.CommonKariChildDiv1=CommonKariChildDiv1;
+    @JsonProperty("KogakuShikyuKetteiTsuchiSakuseishoPanel")
+    public void setKogakuShikyuKetteiTsuchiSakuseishoPanel(KogakuShikyuKetteiTsuchiSakuseishoPanelDiv KogakuShikyuKetteiTsuchiSakuseishoPanel) {
+        this.KogakuShikyuKetteiTsuchiSakuseishoPanel=KogakuShikyuKetteiTsuchiSakuseishoPanel;
     }
 
     @JsonProperty("btnCreate")

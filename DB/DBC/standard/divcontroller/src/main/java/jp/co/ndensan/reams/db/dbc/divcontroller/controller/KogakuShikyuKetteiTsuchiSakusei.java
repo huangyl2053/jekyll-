@@ -14,13 +14,13 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0490011.KogakuShikyuKe
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 高額サービス費支給決定通知書作成パネルです。
  * @author n8223
+ * @author n8223 
  */
 public class KogakuShikyuKetteiTsuchiSakusei {
     
@@ -58,14 +58,50 @@ public class KogakuShikyuKetteiTsuchiSakusei {
         panel.getTxtKetteiYM().setValue(ymlDt.getAsRDate("KetteiYM"));
         panel.getTxtTsuchiSotatsuYMD().setValue(ymlDt.getAsRDate("TsuchiSotatsuYMD"));
         
-        panel.getCommonKariChildDiv1().getKaigoChohyoShutsuryokujun().getTxtSortName()
-                .setValue(ymlDt.getAsRString("SortName"));
-        panel.getCommonKariChildDiv1().getKaigoChohyoShutsuryokujun().getTxtKaiPage().
-                setValue(ymlDt.getAsRString("KaiPage"));
-        panel.getCommonKariChildDiv1().getKaigoChohyoShutsuryokujun().getTxtSort().
-                setValue(ymlDt.getAsRString("Sort"));
-       
+        //発行日 20140630 park 追加
+        panel.getKogakuShikyuKetteiTsuchiSakuseiListPanel().
+                getKogakuShikyuKetteiTsuchiSakuseiListtHakkoDate().getTxtIssueDate()
+                .setValue(ymlDt.getAsRDate("IssueDate1"));
         
+        //出力順序・改頁の情の初期値を設定する。
+        panel.getKogakuShikyuKetteiTsuchiSakuseiListPanel().
+                getCommonKariChildDiv1().getKaigoChohyoShutsuryokujun().getTxtSortName()
+                .setValue(ymlDt.getAsRString("SortName1"));
+        panel.getKogakuShikyuKetteiTsuchiSakuseiListPanel().
+                getCommonKariChildDiv1().getKaigoChohyoShutsuryokujun().getTxtKaiPage().
+                setValue(ymlDt.getAsRString("KaiPage1"));
+        panel.getKogakuShikyuKetteiTsuchiSakuseiListPanel().
+                getCommonKariChildDiv1().getKaigoChohyoShutsuryokujun().getTxtSort().
+                setValue(ymlDt.getAsRString("Sort1"));
+       
+        //発行日 20140630 park 追加 
+        //　発行日の初期値を設定する。
+        panel.getKogakuShikyuKetteiTsuchiSakuseishoPanel().
+                getKogakuShikyuKetteiTsuchiSakuseishoHakkoDate().getTxtIssueDate().
+                setValue(ymlDt.getAsRDate("IssueDate2"));
+        
+        //口座払い日 
+        panel.getKogakuShikyuKetteiTsuchiSakuseishoPanel().getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().
+                getPayToKoza().getTxtKozaPaymentDate()
+                .setValue(ymlDt.getAsRDate("KozaPaymentDate"));
+       // 窓口払い開始日
+        panel.getKogakuShikyuKetteiTsuchiSakuseishoPanel().getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().
+                getPayToMadoguchi().getTxtShiharaiDateRange().setFromValue(ymlDt.getAsRDate("ShiharaiDateRangeFrom"));
+       //窓口払い終了日 
+        panel.getKogakuShikyuKetteiTsuchiSakuseishoPanel().getKogakuShikyuKetteiTsuchiSakuseishoPaymentMethod().
+                getPayToMadoguchi().getTxtShiharaiDateRange().setToValue(ymlDt.getAsRDate("ShiharaiDateRangeTo"));
+        
+
+        //出力順序・改頁の情の初期値を設定する。
+        panel.getKogakuShikyuKetteiTsuchiSakuseishoPanel().
+                getCommonKariChildDiv2().getKaigoChohyoShutsuryokujun().getTxtSortName()
+                .setValue(ymlDt.getAsRString("SortName2"));
+        panel.getKogakuShikyuKetteiTsuchiSakuseishoPanel().
+                getCommonKariChildDiv2().getKaigoChohyoShutsuryokujun().getTxtKaiPage().
+                setValue(ymlDt.getAsRString("KaiPage2"));
+        panel.getKogakuShikyuKetteiTsuchiSakuseishoPanel().
+                getCommonKariChildDiv2().getKaigoChohyoShutsuryokujun().getTxtSort().
+                setValue(ymlDt.getAsRString("Sort2"));
         
     }
 
