@@ -203,7 +203,7 @@ var DBZ;
                             "maxLength": "16",
                             "minLength": 0,
                             "textAlign": 0,
-                            "placeHolder": "1234567890123456",
+                            "placeHolder": "",
                             "textKind": 2,
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -221,8 +221,7 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": "",
-                            "permitCharactor": ""
+                            "decorationClass": ""
                         },
                         {
                             "fieldName": "txtHihokenshaNo",
@@ -249,7 +248,7 @@ var DBZ;
                             "maxLength": "10",
                             "minLength": 0,
                             "textAlign": 0,
-                            "placeHolder": "1234567890",
+                            "placeHolder": "",
                             "textKind": 2,
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -267,8 +266,7 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": "",
-                            "permitCharactor": ""
+                            "decorationClass": ""
                         },
                         {
                             "fieldName": "txtHokenryoDankai",
@@ -295,7 +293,7 @@ var DBZ;
                             "maxLength": "5",
                             "minLength": 0,
                             "textAlign": 0,
-                            "placeHolder": "05特例",
+                            "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -313,8 +311,7 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": "",
-                            "permitCharactor": ""
+                            "decorationClass": ""
                         },
                         {
                             "fieldName": "txtShutokuYmd",
@@ -338,7 +335,7 @@ var DBZ;
                             "jpControlName": "",
                             "readOnly": true,
                             "required": false,
-                            "placeHolder": "平20.04.01",
+                            "placeHolder": "",
                             "isPrivateInfo": false,
                             "isPassword": false,
                             "onFocus": "",
@@ -354,8 +351,7 @@ var DBZ;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "ymdKubun": 2,
-                            "displayFormat": 0,
-                            "permitCharactor": "./_-"
+                            "displayFormat": 0
                         },
                         {
                             "fieldName": "txtShutokuJiyu",
@@ -382,7 +378,7 @@ var DBZ;
                             "maxLength": "5",
                             "minLength": 0,
                             "textAlign": 0,
-                            "placeHolder": "年齢到達",
+                            "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -400,8 +396,7 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": "",
-                            "permitCharactor": ""
+                            "decorationClass": ""
                         },
                         {
                             "fieldName": "txtSoshitsuYmd",
@@ -425,7 +420,7 @@ var DBZ;
                             "jpControlName": "",
                             "readOnly": true,
                             "required": false,
-                            "placeHolder": "平26.04.01",
+                            "placeHolder": "",
                             "isPrivateInfo": false,
                             "isPassword": false,
                             "onFocus": "",
@@ -441,8 +436,7 @@ var DBZ;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "ymdKubun": 2,
-                            "displayFormat": 0,
-                            "permitCharactor": "./_-"
+                            "displayFormat": 0
                         },
                         {
                             "fieldName": "txtSoshitsuJiyu",
@@ -469,7 +463,7 @@ var DBZ;
                             "maxLength": "5",
                             "minLength": 0,
                             "textAlign": 0,
-                            "placeHolder": "転出",
+                            "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -487,8 +481,7 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": "",
-                            "permitCharactor": ""
+                            "decorationClass": ""
                         },
                         {
                             "fieldName": "btnHihoRireki",
@@ -517,7 +510,7 @@ var DBZ;
                             "imageWidth": "",
                             "imageHeight": "",
                             "icon": 0,
-                            "heightTextBoxMatches": false,
+                            "heightTextBoxMatches": true,
                             "displayChildDivName": "",
                             "dataPassing": [],
                             "visibleCloseButton": true,

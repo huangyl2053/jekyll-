@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.FukaShokaiGran
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.dgFukaRirekiFukaRireki_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 
 /**
@@ -21,13 +22,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class FukaShokaiGrandson {
     
+    public ResponseData<FukaShokaiGrandsonDiv> onLoad_FukaShokaiGrandson(FukaShokaiGrandsonDiv div) {
+        
+        FukaRirekiDiv rirekiDiv = (FukaRirekiDiv) ViewStateHolder.get("賦課履歴", FukaRirekiDiv.class);
+        
+        div.setCanOpenAndClose(true);
+        div.setIsOpen(true);
+        
+        List key = getRirekiKey(rirekiDiv, "select");
+        loadData(div, key);
+        
+        return returnResponse(div);
+    }
+    
     public ResponseData<FukaShokaiGrandsonDiv> onSelect(FukaShokaiGrandsonDiv div, FukaRirekiDiv rirekiDiv) {
         div.setCanOpenAndClose(true);
         div.setIsOpen(true);
         
         List key = getRirekiKey(rirekiDiv, "select");
         loadData(div, key);
-
+        
         return returnResponse(div);
     }
 
@@ -91,6 +105,8 @@ public class FukaShokaiGrandson {
         div.getTxtChoteiNendo().setValue((RString)key.get(1));
         div.getTxtKoseiM().setValue((RString)key.get(2));
         div.getTxtKoseiYMD().setValue((RString)key.get(3));
+        
+        
     } 
 
 

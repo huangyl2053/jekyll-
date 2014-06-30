@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0010003.TaishoshaSentakuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0010003.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.GaitoshaKensakuMainDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.dgdGaitoushaIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
@@ -18,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -30,7 +33,7 @@ public class GaitoshaKensakuMain {
     public ResponseData<GaitoshaKensakuMainDiv> getOnLoadData(GaitoshaKensakuMainDiv panel) {
         ResponseData<GaitoshaKensakuMainDiv> response = new ResponseData<>();
         panel.getKensakuShiji().getJokenNyuryoku().getRadFix().setSelectedItem(new RString("key0"));
-                panel.getKensakuShiji().getJokenNyuryoku().getAtenaShosaiJoken().getRadNaiGai().setSelectedItem(new RString("key0"));
+        panel.getKensakuShiji().getJokenNyuryoku().getAtenaShosaiJoken().getRadNaiGai().setSelectedItem(new RString("key0"));
         panel.getKensakuShiji().getJokenNyuryoku().getTxtMaxGetKensu().setValue(new Decimal(100));
         response.data = panel;
         return response;
@@ -46,10 +49,23 @@ public class GaitoshaKensakuMain {
         return response;
     }
 
+    public ResponseData<TaishoshaSentakuDiv> onSelect_dgTaishoshaIchiran(TaishoshaSentakuDiv panel) {
+
+        ResponseData<TaishoshaSentakuDiv> response = new ResponseData<>();
+        //ViewStateに格納
+        dgTaishoshaIchiran_Row selectedItem =panel.getDgTaishoshaIchiran().getClickedItem();
+        
+        ViewStateHolder.put("対象者識別コード", selectedItem.getTxtShikbetsuCode());
+        //ViewStateHolder.put("mode", new RString("comparedWithPrevious"));
+
+        response.data = panel;
+        return response;
+    }
+
     private List<dgdGaitoushaIchiran_Row> createRowGaitoshaIchiranData() {
         List<dgdGaitoushaIchiran_Row> arrayData = new ArrayList<>();
 
-        List<HashMap> demoDataList = YamlLoader.FOR_DBB.loadAsList(FUKA_SHOKAI_GAITOSHA);
+        List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(FUKA_SHOKAI_GAITOSHA);
         for (HashMap demoData : demoDataList) {
             // コンストラクタにMapを渡して生成。
             ControlGenerator cg = new ControlGenerator(demoData);
