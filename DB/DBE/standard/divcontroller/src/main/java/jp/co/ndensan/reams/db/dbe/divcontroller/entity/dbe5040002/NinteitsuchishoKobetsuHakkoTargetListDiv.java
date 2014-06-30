@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5040002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5040002.PublishButtonDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5040002.dgSearchResult_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -27,8 +26,6 @@ public class NinteitsuchishoKobetsuHakkoTargetListDiv extends Panel {
     private CheckBoxList chkHakkoShoruiType;
     @JsonProperty("dgSearchResult")
     private DataGrid<dgSearchResult_Row> dgSearchResult;
-    @JsonProperty("PublishButton")
-    private PublishButtonDiv PublishButton;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,16 +51,6 @@ public class NinteitsuchishoKobetsuHakkoTargetListDiv extends Panel {
     @JsonProperty("dgSearchResult")
     public void setDgSearchResult(DataGrid<dgSearchResult_Row> dgSearchResult) {
         this.dgSearchResult=dgSearchResult;
-    }
-
-    @JsonProperty("PublishButton")
-    public PublishButtonDiv getPublishButton() {
-        return PublishButton;
-    }
-
-    @JsonProperty("PublishButton")
-    public void setPublishButton(PublishButtonDiv PublishButton) {
-        this.PublishButton=PublishButton;
     }
 
 }
