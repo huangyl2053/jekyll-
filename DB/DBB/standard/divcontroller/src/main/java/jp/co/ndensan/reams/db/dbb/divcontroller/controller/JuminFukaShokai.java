@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.JuminFukaShokaiDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8110001.JuminFukaShokaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;

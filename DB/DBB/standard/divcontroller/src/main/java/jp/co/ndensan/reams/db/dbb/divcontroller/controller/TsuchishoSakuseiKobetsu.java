@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.TsuchishoSakuseiKobetsuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8110001.TsuchishoSakuseiKobetsuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.dgChohyoSentaku_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

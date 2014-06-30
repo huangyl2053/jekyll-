@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbb.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8110001;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -6,13 +6,22 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.ChoshuYuyoTsuchiKobetsuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.ChoshuYuyoTsuchiKobetsuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.FukadaichoKobetsuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.FukadaichoKobetsuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.GemmenTsuchiKobetsuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.GemmenTsuchiKobetsuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.HenkoTsuchiKobetsuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.HenkoTsuchiKobetsuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.KetteiTsuchiKobetsuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.KetteiTsuchiKobetsuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.NotsuKobetsuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.NotsuKobetsuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.TokuKaishiTsuchiKobetsuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.TokuKaishiTsuchiKobetsuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.YufuriKobetsuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.YufuriKobetsuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.dgChohyoSentaku_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.dgChohyoSentaku_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
