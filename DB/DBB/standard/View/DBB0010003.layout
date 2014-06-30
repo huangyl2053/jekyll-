@@ -274,6 +274,11 @@
        "onSelectBySelectButton": "onSelect_SelectButton",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -335,7 +340,7 @@
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "TaishoshaSentaku"
+       "postParameterPanelNames": "TaishoshaSearch"
       }
      ],
      "requestSettings": [
@@ -524,13 +529,11 @@
  ],
  "loadSequencePanelNames": [
   [
-   "FukaTaishoSearch"
-  ],
-  [
-   "TaishoshaSearch"
-  ],
-  [
+   "TaishoshaSearch",
    "TaishoshaSentaku"
+  ],
+  [
+   "FukaTaishoSearch"
   ]
  ],
  "panelMargin": 1,

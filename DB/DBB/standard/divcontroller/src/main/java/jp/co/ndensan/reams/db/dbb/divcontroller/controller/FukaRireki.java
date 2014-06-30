@@ -72,6 +72,8 @@ public class FukaRireki {
      */
     public ResponseData<FukaRirekiDiv> onSelect_dgFukaRirekiFukaRireki(FukaRirekiDiv div, FukaRirekiAllDiv rirekiAllDiv, AtenaJohoDiv atenajoho) {
         //ViewStateに格納
+        ViewStateHolder.remove("賦課履歴");
+        ViewStateHolder.remove("宛名情報");
         ViewStateHolder.put("賦課履歴", div);
         ViewStateHolder.put("宛名情報", atenajoho);
 

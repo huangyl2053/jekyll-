@@ -36,10 +36,7 @@
      "heightForDialog": "M",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
-     "atenaInfo_eraseBorderTop": true,
-     "atenaInfo_eraseBorderBottom": true,
-     "atenaInfo_eraseBorderRight": true,
-     "atenaInfo_eraseBorderLeft": true,
+     "AtenaShokaiSimple_eraseBorder": true,
      "AtenaKanaMeisho_visible": true,
      "AtenaMisho_visible": true,
      "SeinengappiYMD_visible": true,
@@ -55,7 +52,6 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnMemo_DisplayNone": false,
      "btnDainosha_displayNone": false,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
@@ -307,7 +303,7 @@
     {
      "fieldName": "btnRirekiHyoji",
      "items": [],
-     "controlType": "ButtonDialog",
+     "controlType": "Button",
      "width": "M",
      "visible": true,
      "displayNone": false,
@@ -331,12 +327,7 @@
      "appearance": 0,
      "imageFileUrl": "",
      "icon": 0,
-     "heightTextBoxMatches": false,
-     "displayChildDivName": "",
-     "dataPassing": [],
-     "visibleCloseButton": true,
-     "onOkClose": "",
-     "onBeforeOpenDialog": ""
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "linFukashokai1",
@@ -531,7 +522,7 @@
    "selectControlID": "FukaShokaiGrandson",
    "helpMessageID": "",
    "jpControlName": "",
-   "onLoad": "",
+   "onLoad": "onLoad_FukaShokaiGrandson",
    "title": "賦課照会",
    "isOpen": true,
    "canOpenAndClose": true,
@@ -4935,6 +4926,11 @@
        "onSelectBySelectButton": "",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -5140,6 +5136,11 @@
        "onSelectBySelectButton": "",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -16608,11 +16609,6 @@
      "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
      "event": "onSelectBySelectButton",
      "transition": ""
-    },
-    {
-     "fieldName": "btnRirekiHyoji",
-     "event": "onClick",
-     "transition": ""
     }
    ]
   },
@@ -16695,11 +16691,6 @@
      "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
      "event": "onSelectBySelectButton",
      "transition": ""
-    },
-    {
-     "fieldName": "btnRirekiHyoji",
-     "event": "onClick",
-     "transition": "賦課履歴"
     }
    ]
   },
@@ -16772,11 +16763,6 @@
      "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
      "event": "onSelectBySelectButton",
      "transition": "照会"
-    },
-    {
-     "fieldName": "btnRirekiHyoji",
-     "event": "onClick",
-     "transition": "賦課履歴"
     }
    ]
   },
@@ -16859,11 +16845,6 @@
      "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
      "event": "onSelectBySelectButton",
      "transition": ""
-    },
-    {
-     "fieldName": "btnRirekiHyoji",
-     "event": "onClick",
-     "transition": "賦課履歴"
     }
    ]
   },
@@ -16941,11 +16922,6 @@
      "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
      "event": "onSelectBySelectButton",
      "transition": ""
-    },
-    {
-     "fieldName": "btnRirekiHyoji",
-     "event": "onClick",
-     "transition": "賦課履歴"
     }
    ]
   }
@@ -16953,7 +16929,16 @@
  "currentState": "All",
  "id": "DBB0320002",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "FukaRirekiShokai",
+   "eventName": "btnRirekiHyoji.onClick"
+  },
+  {
+   "alias": "atenaLoad",
+   "eventName": "btnFukakonkyoKiwari.onClick"
+  }
+ ],
  "loadSequencePanelNames": [
   [
    "FukaShokai",
