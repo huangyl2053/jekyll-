@@ -6,8 +6,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030002;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoHihokenshaJoho.KaigoHihokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoHihokenshaJoho.KaigoHihokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoNinteiKekka.KaigoNinteiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoNinteiKekka.KaigoNinteiKekkaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -27,8 +25,6 @@ public class NinteiShinsaKekkaNyuryokuDiv extends Panel {
     private KaigoHihokenshaJohoDiv HihokenshaJoho;
     @JsonProperty("NinteiKekkaNyuryoku")
     private KaigoNinteiKekkaDiv NinteiKekkaNyuryoku;
-    @JsonProperty("NyuryokuSeigyo")
-    private NyuryokuSeigyoDiv NyuryokuSeigyo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,16 +50,6 @@ public class NinteiShinsaKekkaNyuryokuDiv extends Panel {
     @JsonProperty("NinteiKekkaNyuryoku")
     public void setNinteiKekkaNyuryoku(KaigoNinteiKekkaDiv NinteiKekkaNyuryoku) {
         this.NinteiKekkaNyuryoku=NinteiKekkaNyuryoku;
-    }
-
-    @JsonProperty("NyuryokuSeigyo")
-    public NyuryokuSeigyoDiv getNyuryokuSeigyo() {
-        return NyuryokuSeigyo;
-    }
-
-    @JsonProperty("NyuryokuSeigyo")
-    public void setNyuryokuSeigyo(NyuryokuSeigyoDiv NyuryokuSeigyo) {
-        this.NyuryokuSeigyo=NyuryokuSeigyo;
     }
 
 }

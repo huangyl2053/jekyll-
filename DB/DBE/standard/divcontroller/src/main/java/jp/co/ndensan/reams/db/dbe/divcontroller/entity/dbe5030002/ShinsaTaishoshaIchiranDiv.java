@@ -24,8 +24,6 @@ public class ShinsaTaishoshaIchiranDiv extends Panel {
      */
     @JsonProperty("dgShinsaTaishoshaIchiran")
     private DataGrid<dgShinsaTaishoshaIchiran_Row> dgShinsaTaishoshaIchiran;
-    @JsonProperty("btnModoru")
-    private Button btnModoru;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -41,16 +39,6 @@ public class ShinsaTaishoshaIchiranDiv extends Panel {
     @JsonProperty("dgShinsaTaishoshaIchiran")
     public void setDgShinsaTaishoshaIchiran(DataGrid<dgShinsaTaishoshaIchiran_Row> dgShinsaTaishoshaIchiran) {
         this.dgShinsaTaishoshaIchiran=dgShinsaTaishoshaIchiran;
-    }
-
-    @JsonProperty("btnModoru")
-    public Button getBtnModoru() {
-        return btnModoru;
-    }
-
-    @JsonProperty("btnModoru")
-    public void setBtnModoru(Button btnModoru) {
-        this.btnModoru=btnModoru;
     }
 
 }

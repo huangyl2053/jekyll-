@@ -3,11 +3,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 06 17:55:26 JST 2014 
+ * Fri Jun 27 16:59:18 JST 2014 
  */
 
 
 
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,6 +35,15 @@ public class dgShinsakaiShinsainIchiran_Row extends DataRow {
 
     public dgShinsakaiShinsainIchiran_Row() {
         super();
+        this.number = new TextBoxNum();
+        this.shinsainNo = RString.EMPTY;
+        this.shimei = RString.EMPTY;
+        this.sex = RString.EMPTY;
+        this.shikaku = RString.EMPTY;
+        this.shinsainKubun = RString.EMPTY;
+        this.gichoKubun = new DropDownList();
+        this.shukketsuKubun = new DropDownList();
+        this.shozokuKikan = RString.EMPTY;
     }
 
     public dgShinsakaiShinsainIchiran_Row(TextBoxNum number, RString shinsainNo, RString shimei, RString sex, RString shikaku, RString shinsainKubun, DropDownList gichoKubun, DropDownList shukketsuKubun, RString shozokuKikan) {
@@ -56,6 +66,21 @@ public class dgShinsakaiShinsainIchiran_Row extends DataRow {
         this.gichoKubun = gichoKubun;
         this.shukketsuKubun = shukketsuKubun;
         this.shozokuKikan = shozokuKikan;
+    }
+
+    public dgShinsakaiShinsainIchiran_Row(DataGridSetting gridSetting) {
+        super();
+        this.number = new TextBoxNum();
+        this.shinsainNo = RString.EMPTY;
+        this.shimei = RString.EMPTY;
+        this.sex = RString.EMPTY;
+        this.shikaku = RString.EMPTY;
+        this.shinsainKubun = RString.EMPTY;
+        this.gichoKubun = DropDownList.createInstance(gridSetting.getColumn("gichoKubun").getCellDetails());
+        this.setOriginalData("gichoKubun", gichoKubun);
+        this.shukketsuKubun = DropDownList.createInstance(gridSetting.getColumn("shukketsuKubun").getCellDetails());
+        this.setOriginalData("shukketsuKubun", shukketsuKubun);
+        this.shozokuKikan = RString.EMPTY;
     }
 
     public TextBoxNum getNumber() {

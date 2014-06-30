@@ -24,10 +24,6 @@ public class ShinsakaiIinIchiranDiv extends Panel {
      */
     @JsonProperty("dgShinsakaiIinIchiran")
     private DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran;
-    @JsonProperty("btnIinCancel")
-    private Button btnIinCancel;
-    @JsonProperty("btnIinRegister")
-    private Button btnIinRegister;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,26 +39,6 @@ public class ShinsakaiIinIchiranDiv extends Panel {
     @JsonProperty("dgShinsakaiIinIchiran")
     public void setDgShinsakaiIinIchiran(DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran) {
         this.dgShinsakaiIinIchiran=dgShinsakaiIinIchiran;
-    }
-
-    @JsonProperty("btnIinCancel")
-    public Button getBtnIinCancel() {
-        return btnIinCancel;
-    }
-
-    @JsonProperty("btnIinCancel")
-    public void setBtnIinCancel(Button btnIinCancel) {
-        this.btnIinCancel=btnIinCancel;
-    }
-
-    @JsonProperty("btnIinRegister")
-    public Button getBtnIinRegister() {
-        return btnIinRegister;
-    }
-
-    @JsonProperty("btnIinRegister")
-    public void setBtnIinRegister(Button btnIinRegister) {
-        this.btnIinRegister=btnIinRegister;
     }
 
 }
