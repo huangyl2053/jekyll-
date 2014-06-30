@@ -3,13 +3,13 @@
   {
    "id": "0",
    "layoutSubGyomuCode": "DBU",
-   "layoutName": "DBU0410011",
+   "layoutName": "DBU0500011",
    "eventName": "",
    "toLayoutSubGyomuCode": "DBU",
-   "toLayoutName": "DBU0410011",
+   "toLayoutName": "DBU0500011",
    "toEventName": ""
   }
  ],
  "subGyomuCode": "DBU",
- "uiContainerName": "DBU0410011"
+ "uiContainerName": "DBUUC05000"
 }
