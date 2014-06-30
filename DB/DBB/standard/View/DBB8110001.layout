@@ -229,7 +229,7 @@
       ]
      },
      "onSort": "",
-     "onSelect": "",
+     "onSelect": "onSelect_dgChohyoSentaku_Row",
      "onSelectByDblClick": "",
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
@@ -429,7 +429,7 @@
      "controlType": "PanelPublish",
      "width": "200",
      "visible": false,
-     "displayNone": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -1272,7 +1272,7 @@
      "controlType": "PanelPublish",
      "width": "200",
      "visible": false,
-     "displayNone": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -1435,7 +1435,7 @@
      "controlType": "PanelPublish",
      "width": "200",
      "visible": false,
-     "displayNone": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -1758,6 +1758,10 @@
     {
      "eventName": "onLoad",
      "requestUrl": "dbb/db/dbb/TsuchishoSakuseiKobetsu/onLoad_TsuchishoSakuseiKobetsu"
+    },
+    {
+     "eventName": "onSelect_dgChohyoSentaku_Row",
+     "requestUrl": "dbb/db/dbb/TsuchishoSakuseiKobetsu/onSelect_dgChohyoSentaku_Row"
     }
    ],
    "hiddenInput": [],
