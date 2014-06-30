@@ -27,11 +27,11 @@
        "selectControlID": "lblKaisaiDate",
        "helpMessageID": "",
        "jpControlName": "",
-       "required": false,
-       "align": 2,
        "text": "開催日",
+       "required": false,
        "isPrivateInfo": false,
-       "decorationClass": ""
+       "decorationClass": "",
+       "align": 2
       },
       {
        "fieldName": "txtKaisaiDate",
@@ -54,24 +54,25 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "required": false,
        "text": "",
-       "isPrivateInfo": false,
+       "required": false,
        "placeHolder": "",
+       "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "value": "",
        "labelLText": "",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 0,
-       "value": ""
+       "displayFormat": 0
       },
       {
        "fieldName": "lblAfterThis",
@@ -93,11 +94,11 @@
        "selectControlID": "lblAfterThis",
        "helpMessageID": "",
        "jpControlName": "",
-       "required": false,
-       "align": 2,
        "text": "以降",
+       "required": false,
        "isPrivateInfo": false,
-       "decorationClass": ""
+       "decorationClass": "",
+       "align": 2
       }
      ],
      "controlType": "Panel",
@@ -164,8 +165,8 @@
        "selectControlID": "btnToClearConditon",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "条件をクリアする",
        "onClick": "",
+       "text": "条件をクリアする",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -193,8 +194,8 @@
        "selectControlID": "btnToExtract",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "抽出する",
        "onClick": "onClick_btnToExtract",
+       "text": "抽出する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -295,13 +296,13 @@
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
-         "text": "□",
+         "text": "...",
          "onClick": "onClick_btnToDecide",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
+         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageWidth": "16",
+         "imageHeight": "18"
         },
-        "align": 0,
+        "align": 1,
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": "btnToDecide"

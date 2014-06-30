@@ -46,7 +46,7 @@
       },
       "columns": [
        {
-        "columnName": "登録",
+        "columnName": "選択",
         "dataName": "toroku",
         "toolTip": "",
         "bgColor": 0,
@@ -55,13 +55,13 @@
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
-         "text": "□",
+         "text": "...",
          "onClick": "onClick_btnToroku",
-         "imageFileUrl": "/uz/uza/css/Link.jpg",
-         "imageWidth": "",
-         "imageHeight": ""
+         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageWidth": "16",
+         "imageHeight": "18"
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "toroku"
