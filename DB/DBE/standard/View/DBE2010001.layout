@@ -1134,10 +1134,6 @@
      "requestUrl": "dbe/db/dbe/NinteichosaIraiList/onLoad"
     },
     {
-     "eventName": "onClick_btnToEntryChosaIrai",
-     "requestUrl": "dbe/db/dbe/NinteichosaIraiList/onClick_btnToEntryChosaIrai"
-    },
-    {
      "eventName": "onClick_btnToComplete",
      "requestUrl": "dbe/db/dbe/NinteichosaIraiList/onClick_btnToComplete"
     },
@@ -3528,7 +3524,7 @@
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "依頼入力",
  "id": "DBE2010001",
  "WFParameter": [],
  "UIContainerEventMapping": [

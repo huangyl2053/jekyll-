@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
@@ -160,8 +161,8 @@ public class NinteichosaIraiEntry {
     public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToEntryChosaIrai(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv allTargets) {
         increase_TokusokuCount(div, allTargets);
         saveToViewState(div, allTargets);
-        setDisabled_btnToCallNext(isLastPerson(div, selectedTargetsFrom(allTargets)));
-        return createResponseData(div);
+        setDisabled_btnToCallNext(!isLastPerson(div, selectedTargetsFrom(allTargets)));
+        return withMessage(createResponseData(div), new InformationMessage("I2010001", "保存しました。"));
     }
 
     private void saveToViewState(NinteichosaIraiEntryDiv panel, NinteichosaIraiListDiv allTargets) {
@@ -282,6 +283,13 @@ public class NinteichosaIraiEntry {
     private ResponseData<NinteichosaIraiEntryDiv> createResponseData(NinteichosaIraiEntryDiv panel) {
         ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
         response.data = panel;
+        return response;
+    }
+
+    private ResponseData<NinteichosaIraiEntryDiv> withMessage(ResponseData<NinteichosaIraiEntryDiv> response,
+            InformationMessage message) {
+        response.clearMessage();
+        response.addMessage(message);
         return response;
     }
 
