@@ -2,20 +2,20 @@
  "transitionList": [
   {
    "id": "0",
-   "layoutSubGyomuCode": "DBU",
-   "layoutName": "DBU0600011",
-   "eventName": "onClick_btnDecide",
+   "layoutSubGyomuCode": "DBZ",
+   "layoutName": "DBZU020001",
+   "eventName": "decideToTaishosha",
    "toLayoutSubGyomuCode": "DBU",
-   "toLayoutName": "DBU0600012",
+   "toLayoutName": "DBU0600011",
    "toEventName": "onOpen"
   },
   {
    "id": "1",
    "layoutSubGyomuCode": "DBU",
-   "layoutName": "DBU0600012",
+   "layoutName": "DBU0600011",
    "eventName": "onClick_btnReturn",
-   "toLayoutSubGyomuCode": "DBU",
-   "toLayoutName": "DBU0600011",
+   "toLayoutSubGyomuCode": "DBZ",
+   "toLayoutName": "DBZU020001",
    "toEventName": ""
   }
  ],

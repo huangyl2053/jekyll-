@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 総合照会基本情報Divを制御します。
@@ -30,12 +31,18 @@ public class SogoShokaiKihon {
             SogoShokaiKihonDiv panel) {
         ResponseData<SogoShokaiKihonDiv> response = new ResponseData<>();
 
+        RString rsHihoNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
+
         List<HashMap> hihokenshashoHakkoTaishoshaJohoList = YamlLoader.DBU.loadAsList(
                 new RString("dbu0600011/AtenaKihonData.yml"));
 
-//        HashMap hashMap = hihokenshashoHakkoTaishoshaJohoList.get(
-//                panel2.getSogoShokaiGaitoshaListInfo().getDgSearchResult().getClickedRowId());
-        HashMap hashMap = hihokenshashoHakkoTaishoshaJohoList.get(0);
+        int iIdx;
+        if (rsHihoNo.toString().equals("1234500001")) {
+            iIdx = 0;
+        } else {
+            iIdx = 1;
+        }
+        HashMap hashMap = hihokenshashoHakkoTaishoshaJohoList.get(iIdx);
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
         //宛名基本情報の出力
