@@ -4233,6 +4233,8 @@
      "fixedDiv": "No"
     }
    ],
+   "supplementInfo": "DBESI00000",
+   "supplementInfoPostParamData": "[{\"supplementInfoPostParamData\":\"ShinseiJohoInput\"}]",
    "validation": {},
    "events": [
     {
