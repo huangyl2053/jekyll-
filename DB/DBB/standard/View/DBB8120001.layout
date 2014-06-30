@@ -36,10 +36,7 @@
      "heightForDialog": "M",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
-     "atenaInfo_eraseBorderTop": true,
-     "atenaInfo_eraseBorderBottom": true,
-     "atenaInfo_eraseBorderRight": true,
-     "atenaInfo_eraseBorderLeft": true,
+     "AtenaShokaiSimple_eraseBorder": true,
      "AtenaKanaMeisho_visible": true,
      "AtenaMisho_visible": true,
      "SeinengappiYMD_visible": true,
@@ -55,7 +52,6 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnMemo_DisplayNone": false,
      "btnDainosha_displayNone": false,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
@@ -342,7 +338,7 @@
    "jpControlName": "",
    "onLoad": "",
    "title": "即時賦課更正履歴",
-   "isOpen": false,
+   "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -13540,7 +13536,12 @@
  "currentState": "All",
  "id": "DBB8120001",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "next",
+   "eventName": "Kobetsutsuchi.onClick"
+  }
+ ],
  "loadSequencePanelNames": [
   [
    "SokujiKouseiJumin",
@@ -13607,6 +13608,60 @@
    "states": [
     {
      "state": "即時賦課更正"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  },
+  {
+   "commonButtonAreaId": "Kobetsutsuchi",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonCreate",
+     "buttonProperty": {
+      "fieldName": "Kobetsutsuchi",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "Kobetsutsuchi",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "postParameterPanelNames": [],
+      "text": "個別通知書作成",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onClick": "Kobetsutsuchi_onClick",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "validateUrl": "",
+      "sourceCreateUrl": "DBB8110001.Layout",
+      "afterPrintUrl": "",
+      "isModal": true,
+      "isInstruction": true,
+      "isPreview": false,
+      "printable": false,
+      "copiesChangeable": false,
+      "progressVisible": false,
+      "additionalText": "通知書を"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "完了"
     }
    ],
    "isFinishButtonOnTheRight": false
