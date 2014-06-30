@@ -36,7 +36,7 @@ public class JuminFukaShokai {
         panel.getKaigoKihon().getTxtHokenryoDankai().setValue(new RString(SokujiKouseiKihonData.get(0).get("保険料段階").toString()));
         panel.getKaigoKihon().getTxtShutokuYmd().setValue(new RDate(SokujiKouseiKihonData.get(0).get("資格取得日").toString()));
         panel.getKaigoKihon().getTxtShutokuJiyu().setValue(new RString(SokujiKouseiKihonData.get(0).get("資格取得事由").toString()));
-        panel.getKaigoKihon().getTxtSoshitsuYmd().clearValue();
+        panel.getKaigoKihon().getTxtSoshitsuYmd().setValue(new RDate(SokujiKouseiKihonData.get(0).get("資格喪失日").toString()));   
         panel.getKaigoKihon().getTxtSoshitsuJiyu().setValue(new RString(SokujiKouseiKihonData.get(0).get("資格喪失事由").toString()));   
             
         response.data = panel;
