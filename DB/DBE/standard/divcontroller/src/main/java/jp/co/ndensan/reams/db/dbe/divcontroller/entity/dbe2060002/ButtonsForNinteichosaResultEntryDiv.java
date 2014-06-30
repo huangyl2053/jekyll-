@@ -21,10 +21,6 @@ public class ButtonsForNinteichosaResultEntryDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnToReturn")
-    private Button btnToReturn;
-    @JsonProperty("btnToRegisterResult")
-    private Button btnToRegisterResult;
     @JsonProperty("btnHiddenCallOnStart")
     private Button btnHiddenCallOnStart;
 
@@ -34,26 +30,6 @@ public class ButtonsForNinteichosaResultEntryDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnToReturn")
-    public Button getBtnToReturn() {
-        return btnToReturn;
-    }
-
-    @JsonProperty("btnToReturn")
-    public void setBtnToReturn(Button btnToReturn) {
-        this.btnToReturn=btnToReturn;
-    }
-
-    @JsonProperty("btnToRegisterResult")
-    public Button getBtnToRegisterResult() {
-        return btnToRegisterResult;
-    }
-
-    @JsonProperty("btnToRegisterResult")
-    public void setBtnToRegisterResult(Button btnToRegisterResult) {
-        this.btnToRegisterResult=btnToRegisterResult;
-    }
-
     @JsonProperty("btnHiddenCallOnStart")
     public Button getBtnHiddenCallOnStart() {
         return btnHiddenCallOnStart;

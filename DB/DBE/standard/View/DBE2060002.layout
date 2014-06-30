@@ -574,13 +574,30 @@
        "text": "ButtonDialog1",
        "onClick": "",
        "appearance": 2,
-       "imageFileUrl": "/uz/uza/css/Link.jpg",
-       "imageWidth": "17.5",
+       "imageFileUrl": "/uz/uza/image/UZ_Search.png",
+       "imageWidth": "15",
        "imageHeight": "15",
        "icon": 0,
        "heightTextBoxMatches": false,
        "displayChildDivName": "DBE.ChosaItakusakiSelector",
-       "dataPassing": [],
+       "dataPassing": [
+        {
+         "key": "chosaItakusakiCode",
+         "controlName": "txtChosaItakusakiCode"
+        },
+        {
+         "key": "chosaItakusakiName",
+         "controlName": "txtChosaItakusakiName"
+        },
+        {
+         "key": "chosainCode",
+         "controlName": "txtChosainCode"
+        },
+        {
+         "key": "chosainName",
+         "controlName": "txtChosainName"
+        }
+       ],
        "visibleCloseButton": true,
        "onOkClose": "",
        "onBeforeOpenDialog": ""
@@ -6749,64 +6766,6 @@
      "fieldName": "ButtonsForNinteichosaResultEntry",
      "items": [
       {
-       "fieldName": "btnToReturn",
-       "items": [],
-       "controlType": "Button",
-       "width": "M",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnToReturn",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "text": "一覧へ戻る",
-       "onClick": "onResume",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0,
-       "heightTextBoxMatches": false
-      },
-      {
-       "fieldName": "btnToRegisterResult",
-       "items": [],
-       "controlType": "Button",
-       "width": "M",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnToRegisterResult",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "text": "調査結果を登録する",
-       "onClick": "onClick_btnToRegisterResult",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0,
-       "heightTextBoxMatches": false
-      },
-      {
        "fieldName": "btnHiddenCallOnStart",
        "items": [],
        "controlType": "Button",
@@ -6839,7 +6798,7 @@
      "controlType": "Panel",
      "width": "1098",
      "visible": true,
-     "displayNone": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -6922,8 +6881,8 @@
      "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onChange_radChosaJisshiBasho"
     },
     {
-     "eventName": "onClick_btnToRegisterResult",
-     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onClick_btnToRegisterResult"
+     "eventName": "onClick_btnCommonUpdateChosaResult",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onClick_btnCommonUpdateChosaResult"
     },
     {
      "eventName": "onClick_btnAddTokkijiko",
@@ -6978,7 +6937,7 @@
   {
    "order": "1",
    "stateName": "調査結果入力",
-   "showWizard": false,
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "NinteichosaResultEntryMain",
@@ -7116,7 +7075,7 @@
  "UIContainerEventMapping": [
   {
    "alias": "return",
-   "eventName": "btnToReturn.onClick"
+   "eventName": "btnCommonBackToIchiran.onClick"
   },
   {
    "alias": "start",
@@ -7144,5 +7103,83 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "chosaResultInput",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonUpdate",
+     "buttonProperty": {
+      "fieldName": "btnCommonUpdateChosaResult",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCommonUpdateChosaResult",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "更新",
+      "onClick": "onClick_btnCommonUpdateChosaResult",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "調査結果を"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnCommonBackToIchiran",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCommonBackToIchiran",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "一覧へ"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "調査結果入力"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }

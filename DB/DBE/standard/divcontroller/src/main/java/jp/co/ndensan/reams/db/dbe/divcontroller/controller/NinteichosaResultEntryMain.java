@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kihonchosaResultInputCom.KihonchosaResultInputCom;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.HihokenshaForNinteichosaResultDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.Kihonchosa0911Div;
@@ -27,7 +25,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ServiceJokyoSe
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ServiceJokyoTabDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ShisakaiWaritsukeKiboDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.dgNinteichosaResultTaishosha_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ButtonsForNinteichosaResultEntryDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.serviceWithCountCom.ServiceWithCountCom;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tokkijikoCom.TokkijikoCom;
 //import jp.co.ndensan.reams.ur.urz.business.DateOfBirthFactory;
@@ -36,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ControlRepeater;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -107,13 +103,13 @@ public class NinteichosaResultEntryMain {
     }
 
     /**
-     * btnToRegisterResultをClickした時の処理です。
+     * btnCommonUpdateChosaResultをClickした時の処理です。
      *
      * @param div NinteichosaResultEntryMainDiv
      * @return ResponseData
      */
     public ResponseData<NinteichosaResultEntryMainDiv>
-            onClick_btnToRegisterResult(NinteichosaResultEntryMainDiv div) {
+            onClick_btnCommonUpdateChosaResult(NinteichosaResultEntryMainDiv div) {
         dgNinteichosaResultTaishosha_Row target = targetInfo();
         new NinteichosaDetail(div).reflectPanelValueTo(target);
         NinteichosaResultEntryTarget.Holder.save(target);
