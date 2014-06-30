@@ -28,6 +28,9 @@ public class HihokenshaShokaiTaishoshaJoho {
 
     private static final RString GAITOSHA_DATA = new RString("DBA4010011/hihokenshaShokaiDbJoho.yml");
 
+    private static final RString SHIKIBETSU_CODE = new RString("012345678901234");
+    private static final RString HIHOKENSHA_NO = new RString("1234500001");
+
     /**
      * 該当者一覧から、被保険者照会の対象となる被保険者を選択した際に実行されます。<br/>
      * 選択した対象者の識別コードと被保番号を元に、基本情報を表示します。
@@ -39,11 +42,10 @@ public class HihokenshaShokaiTaishoshaJoho {
     public ResponseData onClick_btnToDecide(HihokenshaShikaiTaishoshaJohoDiv johoDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
         ResponseData<HihokenshaShikaiTaishoshaJohoDiv> response = new ResponseData<>();
 
-        RString shikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);
-        RString hihokenshaNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
-
-        AtenaShokaiSimple.setData(johoDiv.getHihokenshaShokaiCommonJoho().getAtenaInfo(), new ShikibetsuCode(shikibetsuCode));
-        setDbData(johoDiv.getHihokenshaShokaiDbJoho(), hihokenshaNo);
+//        RString shikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);
+//        RString hihokenshaNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
+        AtenaShokaiSimple.setData(johoDiv.getHihokenshaShokaiCommonJoho().getAtenaInfo(), new ShikibetsuCode(SHIKIBETSU_CODE));
+        setDbData(johoDiv.getHihokenshaShokaiDbJoho(), HIHOKENSHA_NO);
         response.data = johoDiv;
         return response;
     }

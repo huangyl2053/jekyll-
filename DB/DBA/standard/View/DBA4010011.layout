@@ -113,15 +113,10 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "atenaInfo_title": "",
-     "atenaInfo_canOpenAndClose": true,
-     "AtenaShokaiSimple_eraseBorder": true,
      "AtenaKanaMeisho_visible": true,
-     "AtenaMisho_visible": true,
      "SeinengappiYMD_visible": true,
      "Nenrei_visible": true,
      "Seibetsu_visible": true,
-     "JuminShubetsu_Visible": true,
      "NihonjinGaikokujin_visible": true,
      "JuminJotai_visible": true,
      "YubinNo_visible": true,
@@ -131,10 +126,9 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnDainosha_displayNone": false,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
-     "btnKoza_displayNone": false,
+     "btnKoza_displayNone": true,
      "btnRenrakusaki_displayNone": false,
      "btnShosai_displayNone": false,
      "btnAtenaRireki_displayNone": false,
@@ -149,7 +143,13 @@
      "AgeArrivalDay": "1",
      "SubGyomuUmu": "0",
      "SubGyomuSearchUmu": "0",
-     "DainoninHyojiUmu": "1"
+     "DainoninHyojiUmu": "1",
+     "AtenaShokaiSimple_eraseBorder": true,
+     "atenaInfo_title": "",
+     "atenaInfo_canOpenAndClose": true,
+     "AtenaMisho_visible": true,
+     "JuminShubetsu_Visible": true,
+     "btnDainosha_displayNone": true
     },
     {
      "fieldName": "HihokenshaShokaiDbJoho",
@@ -207,7 +207,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "被保険者情報",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": false,
    "postParameterPanelNames": [
@@ -310,7 +310,7 @@
      "width": "100",
      "visible": true,
      "displayNone": false,
-     "disabled": false,
+     "disabled": true,
      "accessKey": "",
      "nextFocusFieldName": "",
      "wrap": false,
@@ -339,7 +339,7 @@
      "width": "100",
      "visible": true,
      "displayNone": false,
-     "disabled": false,
+     "disabled": true,
      "accessKey": "",
      "nextFocusFieldName": "",
      "wrap": false,
@@ -368,7 +368,7 @@
      "width": "100",
      "visible": true,
      "displayNone": false,
-     "disabled": false,
+     "disabled": true,
      "accessKey": "",
      "nextFocusFieldName": "",
      "wrap": false,
@@ -535,7 +535,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
-     "title": "資格得喪履歴",
+     "title": "資格得喪",
      "isOpen": true,
      "canOpenAndClose": false,
      "postParameterPanelNames": [
@@ -561,7 +561,7 @@
      "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "panelDisplay": 0,
+     "panelDisplay": 2,
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto"
@@ -591,9 +591,6 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "S",
-       "onSelectByDblClick": "",
-       "onSelectByModifyButton": "",
-       "onSelectByDeleteButton": "",
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -765,7 +762,10 @@
        },
        "onSort": "",
        "onSelect": "",
+       "onSelectByDblClick": "",
        "onSelectBySelectButton": "",
+       "onSelectByModifyButton": "",
+       "onSelectByDeleteButton": "",
        "onAfterRequest": "",
        "onAfterRequestByDblClick": "",
        "onAfterRequestBySelectButton": "",
@@ -825,468 +825,7 @@
      "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "panelDisplay": 0,
-     "isGroupBox": false,
-     "readOnly": false,
-     "height": "Auto"
-    },
-    {
-     "fieldName": "HihokenshaShokaiSeikatsuHogo",
-     "items": [
-      {
-       "fieldName": "dgSeikatsuHogoRireki",
-       "items": [],
-       "controlType": "DataGrid",
-       "width": "400",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "dgSeikatsuHogoRireki",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "readOnly": false,
-       "height": "S",
-       "onSelectByDblClick": "",
-       "onSelectByModifyButton": "",
-       "onSelectByDeleteButton": "",
-       "gridSetting": {
-        "rowHeight": 25,
-        "isMultiSelectable": false,
-        "isShowHeader": true,
-        "isShowFooter": true,
-        "isShowFilter": false,
-        "isShowFilterButton": false,
-        "isShowRowState": false,
-        "isShowSelectButtonColumn": false,
-        "isShowModifyButtonColumn": false,
-        "isShowDeleteButtonColumn": false,
-        "limitRowCount": 0,
-        "selectedRowCount": 0,
-        "header": {
-         "combineColumns": [],
-         "frozenColumn": "",
-         "headerHeight": 0
-        },
-        "columns": [
-         {
-          "columnName": "受給者番号",
-          "dataName": "jukyushaNo",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 100,
-          "visible": true,
-          "cellType": 0,
-          "cellDetails": null,
-          "align": 2,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "jukyushaNo"
-         },
-         {
-          "columnName": "開始日",
-          "dataName": "kaishiYMD",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 80,
-          "visible": true,
-          "cellType": 7,
-          "cellDetails": {
-           "cellType": 7,
-           "ymdKubun": 2,
-           "displayFormat": 0,
-           "onChange": "",
-           "isSetValueToToolTip": false,
-           "readOnly": true
-          },
-          "align": 1,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "kaishiYMD"
-         },
-         {
-          "columnName": "廃止日",
-          "dataName": "haishiYMD",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 80,
-          "visible": true,
-          "cellType": 7,
-          "cellDetails": {
-           "cellType": 7,
-           "ymdKubun": 2,
-           "displayFormat": 0,
-           "onChange": "",
-           "isSetValueToToolTip": false,
-           "readOnly": true
-          },
-          "align": 1,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "haishiYMD"
-         },
-         {
-          "columnName": "生活保護種別",
-          "dataName": "seikatsuHogoShubetsu",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 120,
-          "visible": true,
-          "cellType": 0,
-          "cellDetails": {
-           "cellType": 0
-          },
-          "align": 0,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "seikatsuHogoShubetsu"
-         }
-        ]
-       },
-       "onSort": "",
-       "onSelect": "",
-       "onSelectBySelectButton": "",
-       "onAfterRequest": "",
-       "onAfterRequestByDblClick": "",
-       "onAfterRequestBySelectButton": "",
-       "onAfterRequestByModifyButton": "",
-       "onAfterRequestByDeleteButton": "",
-       "onOnlyRow": "",
-       "onNoRow": "",
-       "onMultiRows": "",
-       "dataSource": [],
-       "sortOrder": "",
-       "isAscending": true,
-       "filterList": [],
-       "activeRowId": -1
-      }
-     ],
-     "controlType": "Panel",
-     "width": "1100",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "Default",
-     "selectControlID": "HihokenshaShokaiSeikatsuHogo",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "onLoad": "",
-     "title": "生活保護履歴",
-     "isOpen": true,
-     "canOpenAndClose": false,
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "HihokenshaShokaiSeikatsuHogo"
-      },
-      {
-       "postParameterPanelNames": "HihokenshaShokaiTaishoSearch"
-      }
-     ],
-     "requestSettings": [
-      {
-       "eventName": "onLoad",
-       "requestUrl": ""
-      }
-     ],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "0",
-     "marginBottom": "0",
-     "eraseBorder": false,
-     "backgroundColor": 0,
-     "widthAuto": false,
-     "panelDisplay": 0,
-     "isGroupBox": false,
-     "readOnly": false,
-     "height": "Auto"
-    },
-    {
-     "fieldName": "HihokenshaShokaiRofukuNenkin",
-     "items": [
-      {
-       "fieldName": "dgRoreiFukushiRireki",
-       "items": [],
-       "controlType": "DataGrid",
-       "width": "280",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "dgRoreiFukushiRireki",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "readOnly": false,
-       "height": "S",
-       "onSelectByDblClick": "",
-       "onSelectByModifyButton": "",
-       "onSelectByDeleteButton": "",
-       "gridSetting": {
-        "rowHeight": 25,
-        "isMultiSelectable": false,
-        "isShowHeader": true,
-        "isShowFooter": true,
-        "isShowFilter": false,
-        "isShowFilterButton": false,
-        "isShowRowState": false,
-        "isShowSelectButtonColumn": false,
-        "isShowModifyButtonColumn": false,
-        "isShowDeleteButtonColumn": false,
-        "limitRowCount": 0,
-        "selectedRowCount": 0,
-        "header": {
-         "combineColumns": [],
-         "frozenColumn": "",
-         "headerHeight": 0
-        },
-        "columns": [
-         {
-          "columnName": "受給者番号",
-          "dataName": "jukyushaNo",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 100,
-          "visible": true,
-          "cellType": 0,
-          "cellDetails": null,
-          "align": 2,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "jukyushaNo"
-         },
-         {
-          "columnName": "開始日",
-          "dataName": "kaishiYMD",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 80,
-          "visible": true,
-          "cellType": 7,
-          "cellDetails": {
-           "cellType": 7,
-           "ymdKubun": 2,
-           "displayFormat": 0,
-           "onChange": "",
-           "isSetValueToToolTip": false,
-           "readOnly": true
-          },
-          "align": 1,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "kaishiYMD"
-         },
-         {
-          "columnName": "廃止日",
-          "dataName": "haishiYMD",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 80,
-          "visible": true,
-          "cellType": 7,
-          "cellDetails": {
-           "cellType": 7,
-           "ymdKubun": 2,
-           "displayFormat": 0,
-           "onChange": "",
-           "isSetValueToToolTip": false,
-           "readOnly": true
-          },
-          "align": 1,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "haishiYMD"
-         }
-        ]
-       },
-       "onSort": "",
-       "onSelect": "",
-       "onSelectBySelectButton": "",
-       "onAfterRequest": "",
-       "onAfterRequestByDblClick": "",
-       "onAfterRequestBySelectButton": "",
-       "onAfterRequestByModifyButton": "",
-       "onAfterRequestByDeleteButton": "",
-       "onOnlyRow": "",
-       "onNoRow": "",
-       "onMultiRows": "",
-       "dataSource": [],
-       "sortOrder": "",
-       "isAscending": true,
-       "filterList": [],
-       "activeRowId": -1
-      }
-     ],
-     "controlType": "Panel",
-     "width": "1100",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "Default",
-     "selectControlID": "HihokenshaShokaiRofukuNenkin",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "onLoad": "",
-     "title": "老福年金履歴",
-     "isOpen": true,
-     "canOpenAndClose": false,
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "HihokenshaShokaiRofukuNenkin"
-      },
-      {
-       "postParameterPanelNames": "HihokenshaShokaiTaishoSearch"
-      }
-     ],
-     "requestSettings": [
-      {
-       "eventName": "onLoad",
-       "requestUrl": ""
-      }
-     ],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "0",
-     "marginBottom": "0",
-     "eraseBorder": false,
-     "backgroundColor": 0,
-     "widthAuto": false,
-     "panelDisplay": 0,
-     "isGroupBox": false,
-     "readOnly": false,
-     "height": "Auto"
-    },
-    {
-     "fieldName": "HihokenshaShokaiIryoHoken",
-     "items": [
-      {
-       "fieldName": "IryoHokenRireki",
-       "items": [],
-       "controlType": "CommonChildDiv",
-       "width": "XS",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
-       "selectControlID": "IryoHokenRireki",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "relation": [],
-       "marginTop": 0,
-       "marginBottom": 0,
-       "businessId": "DBZ",
-       "controlName": "IryoHokenRireki",
-       "dataPassingForDialog": [
-        {
-         "key": "",
-         "controlName": ""
-        },
-        {
-         "key": "",
-         "controlName": ""
-        },
-        {
-         "key": "",
-         "controlName": ""
-        }
-       ],
-       "dialogOkEventNameForDialog": "",
-       "dialogCancelEventNameForDialog": "",
-       "canTransferEvent": true,
-       "heightForDialog": "M",
-       "onSelectByModifyButton": "onSelectByModifyButton_dgIryoHokenRireki",
-       "onSelectByDeleteButton": "onSelectByDeleteButton_dgIryoHokenRireki",
-       "panel_width": "1030",
-       "grid_width": "1010"
-      }
-     ],
-     "controlType": "Panel",
-     "width": "1100",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "Default",
-     "selectControlID": "HihokenshaShokaiIryoHoken",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "onLoad": "",
-     "title": "医療保険履歴",
-     "isOpen": true,
-     "canOpenAndClose": false,
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "HihokenshaShokaiIryoHoken"
-      },
-      {
-       "postParameterPanelNames": "HihokenshaShokaiTaishoSearch"
-      }
-     ],
-     "requestSettings": [
-      {
-       "eventName": "onLoad",
-       "requestUrl": ""
-      }
-     ],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "0",
-     "marginBottom": "0",
-     "eraseBorder": false,
-     "backgroundColor": 0,
-     "widthAuto": false,
-     "panelDisplay": 0,
+     "panelDisplay": 2,
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto"
@@ -1344,7 +883,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
-     "title": "施設入退所履歴",
+     "title": "施設入退所",
      "isOpen": true,
      "canOpenAndClose": false,
      "postParameterPanelNames": [
@@ -1370,7 +909,7 @@
      "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "panelDisplay": 0,
+     "panelDisplay": 2,
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto"
@@ -1431,7 +970,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
-     "title": "証交付回収履歴",
+     "title": "証交付回収",
      "isOpen": true,
      "canOpenAndClose": false,
      "postParameterPanelNames": [
@@ -1457,7 +996,7 @@
      "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "panelDisplay": 0,
+     "panelDisplay": 2,
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto"
@@ -1487,9 +1026,6 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "S",
-       "onSelectByDblClick": "",
-       "onSelectByModifyButton": "",
-       "onSelectByDeleteButton": "",
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -1751,7 +1287,10 @@
        },
        "onSort": "",
        "onSelect": "",
+       "onSelectByDblClick": "",
        "onSelectBySelectButton": "",
+       "onSelectByModifyButton": "",
+       "onSelectByDeleteButton": "",
        "onAfterRequest": "",
        "onAfterRequestByDblClick": "",
        "onAfterRequestBySelectButton": "",
@@ -1785,7 +1324,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
-     "title": "申請届出情報",
+     "title": "申請届出",
      "isOpen": true,
      "canOpenAndClose": false,
      "postParameterPanelNames": [
@@ -1811,7 +1350,7 @@
      "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "panelDisplay": 0,
+     "panelDisplay": 2,
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto"
@@ -1944,24 +1483,9 @@
      "transition": ""
     },
     {
-     "fieldName": "btnIryoHoken",
-     "event": "onClick",
-     "transition": "被保照会_医療保険"
-    },
-    {
      "fieldName": "btnSetaiShokai",
      "event": "onClick",
      "transition": "被保照会_世帯照会"
-    },
-    {
-     "fieldName": "btnSeikatsuHogo",
-     "event": "onClick",
-     "transition": "被保照会_生活保護"
-    },
-    {
-     "fieldName": "btnRofukuNenkin",
-     "event": "onClick",
-     "transition": "被保照会_老福年金"
     },
     {
      "fieldName": "btnShisetsuNyutaisho",
@@ -1992,98 +1516,6 @@
   },
   {
    "order": "2",
-   "stateName": "被保照会_医療保険",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "HihokenshaShikaiTaishoshaJoho",
-     "panelState": "visible",
-     "fixedDiv": "Yes"
-    },
-    {
-     "visibleDiv": "HihokenshaShokaiCommonJoho",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "HihokenshaShokaiDbJoho",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "HihokenshaShokaiPanelSelect",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "HihokenshaShokaiIryoHoken",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "IryoHokenRireki",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "btnShikakuTokuso",
-     "event": "onClick",
-     "transition": "被保険者照会"
-    },
-    {
-     "fieldName": "btnIryoHoken",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnSetaiShokai",
-     "event": "onClick",
-     "transition": "被保照会_世帯照会"
-    },
-    {
-     "fieldName": "btnSeikatsuHogo",
-     "event": "onClick",
-     "transition": "被保照会_生活保護"
-    },
-    {
-     "fieldName": "btnRofukuNenkin",
-     "event": "onClick",
-     "transition": "被保照会_老福年金"
-    },
-    {
-     "fieldName": "btnShisetsuNyutaisho",
-     "event": "onClick",
-     "transition": "被保照会_施設入退所"
-    },
-    {
-     "fieldName": "btnShoKofu",
-     "event": "onClick",
-     "transition": "被保照会_証交付回収履歴"
-    },
-    {
-     "fieldName": "btnShinseiTodokede",
-     "event": "onClick",
-     "transition": "被保照会_申請届出"
-    },
-    {
-     "fieldName": "btnToDecide",
-     "event": "onClick",
-     "transition": "被保険者照会"
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": "終了"
-    }
-   ]
-  },
-  {
-   "order": "3",
    "stateName": "被保照会_世帯照会",
    "showWizard": false,
    "visibleDivs": [
@@ -2123,196 +1555,7 @@
      "transition": "被保険者照会"
     },
     {
-     "fieldName": "btnIryoHoken",
-     "event": "onClick",
-     "transition": "被保照会_医療保険"
-    },
-    {
      "fieldName": "btnSetaiShokai",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnSeikatsuHogo",
-     "event": "onClick",
-     "transition": "被保照会_生活保護"
-    },
-    {
-     "fieldName": "btnRofukuNenkin",
-     "event": "onClick",
-     "transition": "被保照会_老福年金"
-    },
-    {
-     "fieldName": "btnShisetsuNyutaisho",
-     "event": "onClick",
-     "transition": "被保照会_施設入退所"
-    },
-    {
-     "fieldName": "btnShoKofu",
-     "event": "onClick",
-     "transition": "被保照会_証交付回収履歴"
-    },
-    {
-     "fieldName": "btnShinseiTodokede",
-     "event": "onClick",
-     "transition": "被保照会_申請届出"
-    },
-    {
-     "fieldName": "btnToDecide",
-     "event": "onClick",
-     "transition": "被保険者照会"
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": "終了"
-    }
-   ]
-  },
-  {
-   "order": "4",
-   "stateName": "被保照会_生活保護",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "HihokenshaShikaiTaishoshaJoho",
-     "panelState": "visible",
-     "fixedDiv": "Yes"
-    },
-    {
-     "visibleDiv": "HihokenshaShokaiCommonJoho",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "HihokenshaShokaiDbJoho",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "HihokenshaShokaiPanelSelect",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "HihokenshaShokaiSeikatsuHogo",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "btnShikakuTokuso",
-     "event": "onClick",
-     "transition": "被保険者照会"
-    },
-    {
-     "fieldName": "btnIryoHoken",
-     "event": "onClick",
-     "transition": "被保照会_医療保険"
-    },
-    {
-     "fieldName": "btnSetaiShokai",
-     "event": "onClick",
-     "transition": "被保照会_世帯照会"
-    },
-    {
-     "fieldName": "btnSeikatsuHogo",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnRofukuNenkin",
-     "event": "onClick",
-     "transition": "被保照会_老福年金"
-    },
-    {
-     "fieldName": "btnShisetsuNyutaisho",
-     "event": "onClick",
-     "transition": "被保照会_施設入退所"
-    },
-    {
-     "fieldName": "btnShoKofu",
-     "event": "onClick",
-     "transition": "被保照会_証交付回収履歴"
-    },
-    {
-     "fieldName": "btnShinseiTodokede",
-     "event": "onClick",
-     "transition": "被保照会_申請届出"
-    },
-    {
-     "fieldName": "btnToDecide",
-     "event": "onClick",
-     "transition": "被保険者照会"
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": "終了"
-    }
-   ]
-  },
-  {
-   "order": "5",
-   "stateName": "被保照会_老福年金",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "HihokenshaShikaiTaishoshaJoho",
-     "panelState": "visible",
-     "fixedDiv": "Yes"
-    },
-    {
-     "visibleDiv": "HihokenshaShokaiCommonJoho",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "HihokenshaShokaiDbJoho",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "HihokenshaShokaiPanelSelect",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "HihokenshaShokaiRofukuNenkin",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "btnShikakuTokuso",
-     "event": "onClick",
-     "transition": "被保険者照会"
-    },
-    {
-     "fieldName": "btnIryoHoken",
-     "event": "onClick",
-     "transition": "被保照会_医療保険"
-    },
-    {
-     "fieldName": "btnSetaiShokai",
-     "event": "onClick",
-     "transition": "被保照会_世帯照会"
-    },
-    {
-     "fieldName": "btnSeikatsuHogo",
-     "event": "onClick",
-     "transition": "被保照会_生活保護"
-    },
-    {
-     "fieldName": "btnRofukuNenkin",
      "event": "onClick",
      "transition": ""
     },
@@ -2344,7 +1587,7 @@
    ]
   },
   {
-   "order": "6",
+   "order": "3",
    "stateName": "被保照会_施設入退所",
    "showWizard": false,
    "visibleDivs": [
@@ -2389,24 +1632,9 @@
      "transition": "被保険者照会"
     },
     {
-     "fieldName": "btnIryoHoken",
-     "event": "onClick",
-     "transition": "被保照会_医療保険"
-    },
-    {
      "fieldName": "btnSetaiShokai",
      "event": "onClick",
      "transition": "被保照会_世帯照会"
-    },
-    {
-     "fieldName": "btnSeikatsuHogo",
-     "event": "onClick",
-     "transition": "被保照会_生活保護"
-    },
-    {
-     "fieldName": "btnRofukuNenkin",
-     "event": "onClick",
-     "transition": "被保照会_老福年金"
     },
     {
      "fieldName": "btnShisetsuNyutaisho",
@@ -2436,7 +1664,7 @@
    ]
   },
   {
-   "order": "7",
+   "order": "4",
    "stateName": "被保照会_証交付回収履歴",
    "showWizard": false,
    "visibleDivs": [
@@ -2481,24 +1709,9 @@
      "transition": "被保険者照会"
     },
     {
-     "fieldName": "btnIryoHoken",
-     "event": "onClick",
-     "transition": "被保照会_医療保険"
-    },
-    {
      "fieldName": "btnSetaiShokai",
      "event": "onClick",
      "transition": "被保照会_世帯照会"
-    },
-    {
-     "fieldName": "btnSeikatsuHogo",
-     "event": "onClick",
-     "transition": "被保照会_生活保護"
-    },
-    {
-     "fieldName": "btnRofukuNenkin",
-     "event": "onClick",
-     "transition": "被保照会_老福年金"
     },
     {
      "fieldName": "btnShisetsuNyutaisho",
@@ -2528,7 +1741,7 @@
    ]
   },
   {
-   "order": "8",
+   "order": "5",
    "stateName": "被保照会_申請届出",
    "showWizard": false,
    "visibleDivs": [
@@ -2568,24 +1781,9 @@
      "transition": "被保険者照会"
     },
     {
-     "fieldName": "btnIryoHoken",
-     "event": "onClick",
-     "transition": "被保照会_医療保険"
-    },
-    {
      "fieldName": "btnSetaiShokai",
      "event": "onClick",
      "transition": "被保照会_世帯照会"
-    },
-    {
-     "fieldName": "btnSeikatsuHogo",
-     "event": "onClick",
-     "transition": "被保照会_生活保護"
-    },
-    {
-     "fieldName": "btnRofukuNenkin",
-     "event": "onClick",
-     "transition": "被保照会_老福年金"
     },
     {
      "fieldName": "btnShisetsuNyutaisho",
@@ -2639,9 +1837,6 @@
    "HihokenshaShokaiPanelSelect",
    "HihokenshaShokaiShikakuTokuso",
    "HihokenshaShokaiSetaiShokai",
-   "HihokenshaShokaiSeikatsuHogo",
-   "HihokenshaShokaiRofukuNenkin",
-   "HihokenshaShokaiIryoHoken",
    "HihokenshaShokaiShisetsuNyutaisho",
    "HihokenshaShokaiShoKofuKaishu",
    "HihokenshaShokaiShinseiTodokede"
@@ -2654,9 +1849,6 @@
   ],
   [
    "ShikakuTokusoRireki"
-  ],
-  [
-   "IryoHokenRireki"
   ],
   [
    "ShisetsuNyutaishoRireki"
@@ -2674,7 +1866,7 @@
    "commonButtonAreaId": "HihokenshaShokaiResearch",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonBack",
+     "buttonKind": "CommonButtonComplete",
      "buttonProperty": {
       "fieldName": "btnComplete",
       "items": [],
@@ -2703,7 +1895,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "メニューに"
+      "additionalText": "被保険者照会を"
      }
     },
     {
@@ -2769,7 +1961,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "該当者一覧に戻る"
+      "additionalText": "該当者一覧に"
      }
     }
    ],

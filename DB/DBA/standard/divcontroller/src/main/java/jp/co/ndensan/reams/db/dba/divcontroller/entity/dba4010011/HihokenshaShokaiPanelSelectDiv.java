@@ -5,9 +5,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiIryoHokenDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiRofukuNenkinDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiSeikatsuHogoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiSetaiShokaiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiShikakuTokusoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiShinseiTodokedeDiv;
@@ -49,12 +46,6 @@ public class HihokenshaShokaiPanelSelectDiv extends Panel {
     private HihokenshaShokaiShikakuTokusoDiv HihokenshaShokaiShikakuTokuso;
     @JsonProperty("HihokenshaShokaiSetaiShokai")
     private HihokenshaShokaiSetaiShokaiDiv HihokenshaShokaiSetaiShokai;
-    @JsonProperty("HihokenshaShokaiSeikatsuHogo")
-    private HihokenshaShokaiSeikatsuHogoDiv HihokenshaShokaiSeikatsuHogo;
-    @JsonProperty("HihokenshaShokaiRofukuNenkin")
-    private HihokenshaShokaiRofukuNenkinDiv HihokenshaShokaiRofukuNenkin;
-    @JsonProperty("HihokenshaShokaiIryoHoken")
-    private HihokenshaShokaiIryoHokenDiv HihokenshaShokaiIryoHoken;
     @JsonProperty("HihokenshaShokaiShisetsuNyutaisho")
     private HihokenshaShokaiShisetsuNyutaishoDiv HihokenshaShokaiShisetsuNyutaisho;
     @JsonProperty("HihokenshaShokaiShoKofuKaishu")
@@ -166,36 +157,6 @@ public class HihokenshaShokaiPanelSelectDiv extends Panel {
     @JsonProperty("HihokenshaShokaiSetaiShokai")
     public void setHihokenshaShokaiSetaiShokai(HihokenshaShokaiSetaiShokaiDiv HihokenshaShokaiSetaiShokai) {
         this.HihokenshaShokaiSetaiShokai=HihokenshaShokaiSetaiShokai;
-    }
-
-    @JsonProperty("HihokenshaShokaiSeikatsuHogo")
-    public HihokenshaShokaiSeikatsuHogoDiv getHihokenshaShokaiSeikatsuHogo() {
-        return HihokenshaShokaiSeikatsuHogo;
-    }
-
-    @JsonProperty("HihokenshaShokaiSeikatsuHogo")
-    public void setHihokenshaShokaiSeikatsuHogo(HihokenshaShokaiSeikatsuHogoDiv HihokenshaShokaiSeikatsuHogo) {
-        this.HihokenshaShokaiSeikatsuHogo=HihokenshaShokaiSeikatsuHogo;
-    }
-
-    @JsonProperty("HihokenshaShokaiRofukuNenkin")
-    public HihokenshaShokaiRofukuNenkinDiv getHihokenshaShokaiRofukuNenkin() {
-        return HihokenshaShokaiRofukuNenkin;
-    }
-
-    @JsonProperty("HihokenshaShokaiRofukuNenkin")
-    public void setHihokenshaShokaiRofukuNenkin(HihokenshaShokaiRofukuNenkinDiv HihokenshaShokaiRofukuNenkin) {
-        this.HihokenshaShokaiRofukuNenkin=HihokenshaShokaiRofukuNenkin;
-    }
-
-    @JsonProperty("HihokenshaShokaiIryoHoken")
-    public HihokenshaShokaiIryoHokenDiv getHihokenshaShokaiIryoHoken() {
-        return HihokenshaShokaiIryoHoken;
-    }
-
-    @JsonProperty("HihokenshaShokaiIryoHoken")
-    public void setHihokenshaShokaiIryoHoken(HihokenshaShokaiIryoHokenDiv HihokenshaShokaiIryoHoken) {
-        this.HihokenshaShokaiIryoHoken=HihokenshaShokaiIryoHoken;
     }
 
     @JsonProperty("HihokenshaShokaiShisetsuNyutaisho")
