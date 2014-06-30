@@ -106,13 +106,6 @@ public class HihokenshashoHakkoTaishoshaJoho {
                     setValue(ymlData.getAsRString("shutokujiyu"));
         }
 
-        if (ymlData.getAsRString("shikakuJotai").toString().isEmpty()) {
-            panel.getCcdKaigoShikakuKihon().getTxtShikakuJotai().clearValue();
-        } else {
-            panel.getCcdKaigoShikakuKihon().getTxtShikakuJotai().
-                    setValue(ymlData.getAsRString("shikakuJotai"));
-        }
-
         if (ymlData.getAsRString("soshitsuymd").toString().isEmpty()) {
             panel.getCcdKaigoShikakuKihon().getTxtSoshitsuYmd().clearValue();
         } else {
@@ -127,18 +120,11 @@ public class HihokenshashoHakkoTaishoshaJoho {
                     setValue(ymlData.getAsRString("soshitsujiyu"));
         }
 
-        if (ymlData.getAsRString("jutokukaijo").toString().isEmpty()) {
-            panel.getCcdKaigoShikakuKihon().getTxtJutokuKaijo().clearValue();
+        if (ymlData.getAsRString("jutokukubun").toString().isEmpty()) {
+            panel.getCcdKaigoShikakuKihon().getTxtJutokuKubun().clearValue();
         } else {
-            panel.getCcdKaigoShikakuKihon().getTxtJutokuKaijo().
-                    setValue(ymlData.getAsRDate("jutokukaijo"));
-        }
-
-        if (ymlData.getAsRString("jutokutekiyo").toString().isEmpty()) {
-            panel.getCcdKaigoShikakuKihon().getTxtJutokuTekiyo().clearValue();
-        } else {
-            panel.getCcdKaigoShikakuKihon().getTxtJutokuTekiyo().
-                    setValue(ymlData.getAsRDate("jutokutekiyo"));
+            panel.getCcdKaigoShikakuKihon().getTxtJutokuKubun().
+                    setValue(ymlData.getAsRString("jutokukubun"));
         }
 
         if (ymlData.getAsRString("kaigodo").toString().isEmpty()) {
@@ -148,26 +134,19 @@ public class HihokenshashoHakkoTaishoshaJoho {
                     setValue(ymlData.getAsRString("kaigodo"));
         }
 
-        if (ymlData.getAsRString("kyusochinyusho").toString().isEmpty()) {
-            panel.getCcdKaigoShikakuKihon().getTxtKyuSochiNyusho().clearValue();
-        } else {
-            panel.getCcdKaigoShikakuKihon().getTxtKyuSochiNyusho().
-                    setValue(ymlData.getAsRString("kyusochinyusho"));
-        }
-
         if (ymlData.getAsRString("ninteikikanfrom").toString().isEmpty()) {
 
-            panel.getCcdKaigoShikakuKihon().getTxtNinteiKikan().clearFromValue();
+            panel.getCcdKaigoShikakuKihon().getTxtNinteiKaishiYmd().clearValue();
         } else {
-            panel.getCcdKaigoShikakuKihon().getTxtNinteiKikan().
-                    setFromValue(ymlData.getAsRDate("ninteikikanfrom"));
+            panel.getCcdKaigoShikakuKihon().getTxtNinteiKaishiYmd().
+                    setValue(ymlData.getAsRDate("ninteikikanfrom"));
         }
 
         if (ymlData.getAsRString("ninteikikanto").toString().isEmpty()) {
-            panel.getCcdKaigoShikakuKihon().getTxtNinteiKikan().clearToValue();
+            panel.getCcdKaigoShikakuKihon().getTxtNinteiShuryoYmd().clearValue();
         } else {
-            panel.getCcdKaigoShikakuKihon().getTxtNinteiKikan().
-                    setToValue(ymlData.getAsRDate("ninteikikanto"));
+            panel.getCcdKaigoShikakuKihon().getTxtNinteiShuryoYmd().
+                    setValue(ymlData.getAsRDate("ninteikikanto"));
         }
 
         response.data = panel;

@@ -72,15 +72,12 @@ public class ShoKaishuKanriTaishoshaJoho {
         shikakuKihonJoho.getTxtHihokenshaNo().setValue(generator.getAsRString("被保番号"));
         shikakuKihonJoho.getTxtShutokuYmd().setValue(generator.getAsRDate("資格取得日"));
         shikakuKihonJoho.getTxtShutokuJiyu().setValue(generator.getAsRString("取得事由"));
-        shikakuKihonJoho.getTxtShikakuJotai().setValue(generator.getAsRString("取得状態"));
         shikakuKihonJoho.getTxtSoshitsuYmd().setValue(generator.getAsRDate("資格喪失日"));
         shikakuKihonJoho.getTxtSoshitsuJiyu().setValue(generator.getAsRString("喪失事由"));
-        shikakuKihonJoho.getTxtJutokuTekiyo().setValue(generator.getAsRDate("住特開始"));
-        shikakuKihonJoho.getTxtJutokuKaijo().setValue(generator.getAsRDate("住特終了"));
+        shikakuKihonJoho.getTxtJutokuKubun().setValue(generator.getAsRString("住特区分"));
         shikakuKihonJoho.getTxtYokaigoJotaiKubun().setValue(generator.getAsRString("要介護度"));
-        shikakuKihonJoho.getTxtNinteiKikan().setFromValue(generator.getAsRDate("認定期間開始"));
-        shikakuKihonJoho.getTxtNinteiKikan().setToValue(generator.getAsRDate("認定期間終了"));
-        shikakuKihonJoho.getTxtKyuSochiNyusho().setValue(generator.getAsRString("旧措置入所"));
+        shikakuKihonJoho.getTxtNinteiKaishiYmd().setValue(generator.getAsRDate("認定期間開始"));
+        shikakuKihonJoho.getTxtNinteiShuryoYmd().setValue(generator.getAsRDate("認定期間終了"));
 
     }
 }
