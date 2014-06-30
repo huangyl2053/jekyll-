@@ -27,10 +27,6 @@ public class ShogaishaKojoTaishoshaDetailDiv extends Panel {
     private TextBox txtNinteiNaiyo;
     @JsonProperty("txtJiritsudo")
     private TextBox txtJiritsudo;
-    @JsonProperty("txtSoshitsuYMD")
-    private TextBoxDate txtSoshitsuYMD;
-    @JsonProperty("txtSoshitsuJiyu")
-    private TextBox txtSoshitsuJiyu;
     @JsonProperty("chkTechoAri")
     private CheckBoxList chkTechoAri;
 
@@ -68,26 +64,6 @@ public class ShogaishaKojoTaishoshaDetailDiv extends Panel {
     @JsonProperty("txtJiritsudo")
     public void setTxtJiritsudo(TextBox txtJiritsudo) {
         this.txtJiritsudo=txtJiritsudo;
-    }
-
-    @JsonProperty("txtSoshitsuYMD")
-    public TextBoxDate getTxtSoshitsuYMD() {
-        return txtSoshitsuYMD;
-    }
-
-    @JsonProperty("txtSoshitsuYMD")
-    public void setTxtSoshitsuYMD(TextBoxDate txtSoshitsuYMD) {
-        this.txtSoshitsuYMD=txtSoshitsuYMD;
-    }
-
-    @JsonProperty("txtSoshitsuJiyu")
-    public TextBox getTxtSoshitsuJiyu() {
-        return txtSoshitsuJiyu;
-    }
-
-    @JsonProperty("txtSoshitsuJiyu")
-    public void setTxtSoshitsuJiyu(TextBox txtSoshitsuJiyu) {
-        this.txtSoshitsuJiyu=txtSoshitsuJiyu;
     }
 
     @JsonProperty("chkTechoAri")

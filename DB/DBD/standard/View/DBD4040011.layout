@@ -36,6 +36,7 @@
      "heightForDialog": "M",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
+     "AtenaShokaiSimple_eraseBorder": true,
      "AtenaKanaMeisho_visible": true,
      "AtenaMisho_visible": true,
      "SeinengappiYMD_visible": true,
@@ -51,7 +52,6 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnMemo_DisplayNone": false,
      "btnDainosha_displayNone": false,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
@@ -97,6 +97,7 @@
      "canOpenAndClose": false,
      "marginTop": 0,
      "marginBottom": 0,
+     "eraseBorder": true,
      "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
      "dataPassingForDialog": [],
@@ -104,10 +105,6 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
      "backGroundColor": 0,
      "btnHihoRireki_visible": true,
      "btnNinteiRireki_visible": true
@@ -161,8 +158,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "txtNinteiNaiyo",
@@ -207,8 +203,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "txtJiritsudo",
@@ -253,95 +248,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
-        },
-        {
-         "fieldName": "txtSoshitsuYMD",
-         "items": [],
-         "controlType": "TextBoxDate",
-         "width": "80",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": true,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "selectControlID": "txtSoshitsuYMD_core",
-         "helpMessageID": "",
-         "jpControlName": "",
-         "readOnly": true,
-         "required": false,
-         "placeHolder": "",
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "onFocus": "",
-         "onBlur": "",
-         "onChange": "",
-         "onKeyPress": "",
-         "text": "",
-         "value": "",
-         "labelLText": "資格喪失日",
-         "labelRText": "",
-         "labelLWidth": "85",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "permitCharactor": "./_-"
-        },
-        {
-         "fieldName": "txtSoshitsuJiyu",
-         "items": [],
-         "controlType": "TextBox",
-         "width": "250",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "selectControlID": "txtSoshitsuJiyu_core",
-         "helpMessageID": "",
-         "jpControlName": "",
-         "readOnly": true,
-         "required": false,
-         "maxLength": 100000000,
-         "minLength": 0,
-         "textAlign": 0,
-         "placeHolder": "",
-         "textKind": 0,
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "isComboBox": false,
-         "onFocus": "",
-         "onBlur": "",
-         "onChange": "",
-         "onKeyPress": "",
-         "text": "",
-         "suggest": [],
-         "value": "",
-         "labelLText": "資格喪失事由",
-         "labelRText": "",
-         "labelLWidth": "100",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "chkTechoAri",
@@ -426,11 +333,7 @@
        "panelDisplay": 0,
        "isGroupBox": false,
        "readOnly": true,
-       "height": "Auto",
-       "eraseBorderTop": true,
-       "eraseBorderBottom": true,
-       "eraseBorderRight": true,
-       "eraseBorderLeft": true
+       "height": "Auto"
       },
       {
        "fieldName": "ShogaishaKojoNinteisho",
@@ -523,8 +426,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           },
           {
            "fieldName": "txtShinseishaJusho",
@@ -569,8 +471,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           },
           {
            "fieldName": "btnShinseishaCopy",
@@ -641,11 +542,36 @@
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false
+         "height": "Auto"
+        },
+        {
+         "fieldName": "btnHakko",
+         "items": [],
+         "controlType": "Button",
+         "width": "S",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 2,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "btnHakko",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "text": "発行する",
+         "imageWidth": "",
+         "imageHeight": "",
+         "onClick": "",
+         "appearance": 0,
+         "imageFileUrl": "",
+         "icon": 0,
+         "heightTextBoxMatches": false
         }
        ],
        "controlType": "Panel",
@@ -687,11 +613,7 @@
        "panelDisplay": 0,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false
+       "height": "Auto"
       }
      ],
      "controlType": "Panel",
@@ -738,11 +660,7 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false
+     "height": "Auto"
     }
    ],
    "controlType": "Panel",
@@ -793,11 +711,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -941,7 +855,7 @@
    "commonButtonAreaId": "ShogaishaKojoTaishoshaNinteishoHakko",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonComplete",
      "buttonProperty": {
       "fieldName": "btnNinteishoHakko",
       "items": [],
@@ -971,17 +885,7 @@
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "validateUrl": "",
-      "sourceCreateUrl": "",
-      "afterPrintUrl": "",
-      "isModal": true,
-      "isInstruction": true,
-      "isPreview": false,
-      "printable": false,
-      "copiesChangeable": false,
-      "progressVisible": false,
-      "prefixText": "",
-      "suffixText": ""
+      "additionalText": "認定書発行を"
      }
     },
     {
@@ -1033,7 +937,9 @@
      "state": "認定書発行"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

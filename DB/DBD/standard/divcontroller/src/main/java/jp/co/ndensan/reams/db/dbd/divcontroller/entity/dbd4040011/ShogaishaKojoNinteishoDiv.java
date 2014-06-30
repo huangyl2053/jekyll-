@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4040011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4040011.ShogaishaKojoShinseishaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PrintContentsSettingDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * ShogaishaKojoNinteisho のクラスファイル 
@@ -25,6 +27,8 @@ public class ShogaishaKojoNinteishoDiv extends Panel {
     private PrintContentsSettingDiv NinteishoPrintSetting;
     @JsonProperty("ShogaishaKojoShinseisha")
     private ShogaishaKojoShinseishaDiv ShogaishaKojoShinseisha;
+    @JsonProperty("btnHakko")
+    private Button btnHakko;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,6 +54,16 @@ public class ShogaishaKojoNinteishoDiv extends Panel {
     @JsonProperty("ShogaishaKojoShinseisha")
     public void setShogaishaKojoShinseisha(ShogaishaKojoShinseishaDiv ShogaishaKojoShinseisha) {
         this.ShogaishaKojoShinseisha=ShogaishaKojoShinseisha;
+    }
+
+    @JsonProperty("btnHakko")
+    public Button getBtnHakko() {
+        return btnHakko;
+    }
+
+    @JsonProperty("btnHakko")
+    public void setBtnHakko(Button btnHakko) {
+        this.btnHakko=btnHakko;
     }
 
 }

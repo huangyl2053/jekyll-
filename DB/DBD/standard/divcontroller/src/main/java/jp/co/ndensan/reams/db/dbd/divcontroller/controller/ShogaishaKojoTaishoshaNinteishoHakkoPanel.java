@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4040011.ShogaishaKojoShinseishaDiv;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 障害者控除対象者認定書を個別発行する場合の障害者控除対象者情報を制御します。
@@ -91,6 +93,12 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanel {
         detailDiv.getTxtNinteiKubun().setValue(cg.getAsRString("認定区分"));
         detailDiv.getTxtNinteiNaiyo().setValue(cg.getAsRString("認定内容"));
         detailDiv.getTxtJiritsudo().setValue(cg.getAsRString("自立度"));
+
+        List<KeyValueDataSource> dsList = new ArrayList<>();
+        if (cg.getAsBooleanValue("has障害者手帳")) {
+            dsList.add(new KeyValueDataSource(new RString("key0"), new RString("障害者手帳あり")));
+        }
+        detailDiv.getChkTechoAri().setSelectedItems(dsList);
 
         panel.getShogaishaKojoNinteishoHakko().getShogaishaKojoNinteisho().getNinteishoPrintSetting().
                 getTxtIssueDate().setValue(cg.getAsRDate("発行日"));
