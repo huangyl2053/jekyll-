@@ -242,7 +242,8 @@ var DBC;
                             "imageFileUrl": "",
                             "imageWidth": "",
                             "imageHeight": "",
-                            "icon": 0
+                            "icon": 0,
+                            "heightTextBoxMatches": false
                         },
                         {
                             "fieldName": "dgKyufuhiKashitsukekinList",
@@ -264,6 +265,7 @@ var DBC;
                             "selectControlID": "dgKyufuhiKashitsukekinList",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "height": "209",
                             "gridSetting": {
                                 "rowHeight": 25,
@@ -494,6 +496,11 @@ var DBC;
                             "onSelectBySelectButton": "",
                             "onSelectByModifyButton": "",
                             "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
@@ -537,10 +544,7 @@ var DBC;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": true,
-                    "eraseBorderBottom": true,
-                    "eraseBorderRight": true,
-                    "eraseBorderLeft": true,
+                    "eraseBorder": true,
                     "backgroundColor": 0,
                     "widthAuto": true,
                     "panelDisplay": 0,
@@ -625,7 +629,9 @@ var DBC;
             ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return KyufuhiKashitsukekinList_Design;
     })(Uz.CommonChildDiv);
