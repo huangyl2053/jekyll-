@@ -183,6 +183,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
@@ -196,7 +197,6 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "調定年度",
@@ -229,6 +229,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
@@ -242,7 +243,6 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "更正月",
@@ -275,6 +275,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
@@ -288,7 +289,6 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "更正日時",
@@ -320,12 +320,12 @@
      "selectControlID": "btnRirekiHyoji",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "履歴一覧を表示する",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "",
+     "text": "履歴一覧を表示する",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false
     },
@@ -369,12 +369,12 @@
      "selectControlID": "btnFukakonkyoKiwari",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "賦課根拠・期割",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "onClick_loadFukakonkyo",
+     "text": "賦課根拠・期割",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false
     },
@@ -398,12 +398,12 @@
      "selectControlID": "btnSetaiinShotoku",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "世帯員所得",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "onClick_btnSetaiinShotoku",
+     "text": "世帯員所得",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false
     },
@@ -427,12 +427,12 @@
      "selectControlID": "btnTokucho",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "特別徴収",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "onClick_btnTokucho",
+     "text": "特別徴収",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false
     },
@@ -456,12 +456,12 @@
      "selectControlID": "btnGemmen",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "減免・徴収猶予",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "",
+     "text": "減免・徴収猶予",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false,
      "displayChildDivName": "",
@@ -490,12 +490,12 @@
      "selectControlID": "btnInjiNaiyoSettei",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "印字内容設定",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "",
+     "text": "印字内容設定",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false,
      "displayChildDivName": "",
@@ -594,9 +594,9 @@
              "selectControlID": "lblFukakonkyo11",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "賦課基準日",
              "required": false,
              "isPrivateInfo": false,
-             "text": "賦課基準日",
              "decorationClass": "",
              "align": 2
             }
@@ -643,9 +643,9 @@
              "selectControlID": "lblFukakijunYMD",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "平99.99.99",
              "required": false,
              "isPrivateInfo": false,
-             "text": "平99.99.99",
              "decorationClass": "",
              "align": 1
             }
@@ -692,9 +692,9 @@
              "selectControlID": "lblHonninKazei",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "本人課税",
              "required": false,
              "isPrivateInfo": false,
-             "text": "本人課税",
              "decorationClass": "",
              "align": 2
             },
@@ -718,9 +718,9 @@
              "selectControlID": "lblZenHokenryoDankai",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "前年度保険料段階",
              "required": false,
              "isPrivateInfo": false,
-             "text": "前年度保険料段階",
              "decorationClass": "",
              "align": 2
             }
@@ -767,9 +767,9 @@
              "selectControlID": "lblFukakonkyo12",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "資格取得日",
              "required": false,
              "isPrivateInfo": false,
-             "text": "資格取得日",
              "decorationClass": "",
              "align": 2
             }
@@ -816,9 +816,9 @@
              "selectControlID": "lblShikakuShutokuYMD",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 1
             }
@@ -865,9 +865,9 @@
              "selectControlID": "lblSetaiKazei",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "世帯課税",
              "required": false,
              "isPrivateInfo": false,
-             "text": "世帯課税",
              "decorationClass": "",
              "align": 2
             },
@@ -891,9 +891,9 @@
              "selectControlID": "lblZenHokenryoritsu",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "前年度保険料率",
              "required": false,
              "isPrivateInfo": false,
-             "text": "前年度保険料率",
              "decorationClass": "",
              "align": 2
             }
@@ -940,9 +940,9 @@
              "selectControlID": "lblFukakonkyo13",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "喪失日",
              "required": false,
              "isPrivateInfo": false,
-             "text": "喪失日",
              "decorationClass": "",
              "align": 2
             }
@@ -989,9 +989,9 @@
              "selectControlID": "lblShikakuSoshitsuYMD",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 1
             }
@@ -1038,9 +1038,9 @@
              "selectControlID": "lblShotokuSum",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "合計所得金額",
              "required": false,
              "isPrivateInfo": false,
-             "text": "合計所得金額",
              "decorationClass": "",
              "align": 2
             },
@@ -1064,9 +1064,9 @@
              "selectControlID": "lblZenNengakuHokenryo",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "前年度年額保険料",
              "required": false,
              "isPrivateInfo": false,
-             "text": "前年度年額保険料",
              "decorationClass": "",
              "align": 2
             }
@@ -1113,9 +1113,9 @@
              "selectControlID": "lblFukakonkyo14",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "生保開始日",
              "required": false,
              "isPrivateInfo": false,
-             "text": "生保開始日",
              "decorationClass": "",
              "align": 2
             }
@@ -1162,9 +1162,9 @@
              "selectControlID": "lblSeihoKaishiYMD",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 1
             }
@@ -1211,9 +1211,9 @@
              "selectControlID": "lblNenkinShunyu",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "年金収入額",
              "required": false,
              "isPrivateInfo": false,
-             "text": "年金収入額",
              "decorationClass": "",
              "align": 2
             }
@@ -1260,9 +1260,9 @@
              "selectControlID": "lblFukakonkyo15",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "終了日",
              "required": false,
              "isPrivateInfo": false,
-             "text": "終了日",
              "decorationClass": "",
              "align": 2
             }
@@ -1309,9 +1309,9 @@
              "selectControlID": "lblSeihoShuryoYMD",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 1
             }
@@ -1358,9 +1358,9 @@
              "selectControlID": "lblHokenryoDankai",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "保険料段階",
              "required": false,
              "isPrivateInfo": false,
-             "text": "保険料段階",
              "decorationClass": "",
              "align": 2
             }
@@ -1407,9 +1407,9 @@
              "selectControlID": "lblFukakonkyo16",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "老年開始日",
              "required": false,
              "isPrivateInfo": false,
-             "text": "老年開始日",
              "decorationClass": "",
              "align": 2
             }
@@ -1456,9 +1456,9 @@
              "selectControlID": "lblRonenKaishiYMD",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 1
             }
@@ -1527,9 +1527,9 @@
              "selectControlID": "lblFukakonkyo17",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "終了日",
              "required": false,
              "isPrivateInfo": false,
-             "text": "終了日",
              "decorationClass": "",
              "align": 2
             }
@@ -1576,9 +1576,9 @@
              "selectControlID": "lblRonenShuryoYMD",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 1
             }
@@ -1647,9 +1647,9 @@
              "selectControlID": "lblFukakonkyo18",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "住所地特例",
              "required": false,
              "isPrivateInfo": false,
-             "text": "住所地特例",
              "decorationClass": "",
              "align": 2
             }
@@ -1740,9 +1740,9 @@
              "selectControlID": "lblHonninKazeiValue",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 0
             },
@@ -1766,9 +1766,9 @@
              "selectControlID": "lblZenHokenryoDankaiValue",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 0
             }
@@ -1815,9 +1815,9 @@
              "selectControlID": "lblSetaiKazeiValue",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 0
             },
@@ -1841,9 +1841,9 @@
              "selectControlID": "lblZenHokenryoritsuValue",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 2
             }
@@ -1890,9 +1890,9 @@
              "selectControlID": "lblShotokuSumValue",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 2
             },
@@ -1916,9 +1916,9 @@
              "selectControlID": "lblZenNengakuHokenryoValue",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 2
             }
@@ -1965,9 +1965,9 @@
              "selectControlID": "lblNenkinShunyuValue",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 2
             }
@@ -2014,9 +2014,9 @@
              "selectControlID": "lblHokenryoDankaiValue",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 0
             }
@@ -2129,9 +2129,9 @@
              "selectControlID": "lblFukakonkyoMidashi",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "賦課根拠",
              "required": false,
              "isPrivateInfo": false,
-             "text": "賦課根拠",
              "decorationClass": "",
              "align": 1
             }
@@ -2224,9 +2224,9 @@
              "selectControlID": "lblKikan",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "期間",
              "required": false,
              "isPrivateInfo": false,
-             "text": "期間",
              "decorationClass": "",
              "align": 1
             }
@@ -2273,9 +2273,9 @@
              "selectControlID": "lblTsukiSu",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "月数",
              "required": false,
              "isPrivateInfo": false,
-             "text": "月数",
              "decorationClass": "",
              "align": 1
             }
@@ -2322,9 +2322,9 @@
              "selectControlID": "lblShotokuDankai",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "保険料段階区分",
              "required": false,
              "isPrivateInfo": false,
-             "text": "保険料段階区分",
              "decorationClass": "",
              "align": 1
             }
@@ -2371,9 +2371,9 @@
              "selectControlID": "lblKikan1",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 1
             }
@@ -2420,9 +2420,9 @@
              "selectControlID": "lblTsukiSu1",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 1
             }
@@ -2469,9 +2469,9 @@
              "selectControlID": "lblHokenryoDankai1",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 1
             }
@@ -2518,9 +2518,9 @@
              "selectControlID": "lblHokenryoritsu",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "保険料率",
              "required": false,
              "isPrivateInfo": false,
-             "text": "保険料率",
              "decorationClass": "",
              "align": 1
             }
@@ -2567,9 +2567,9 @@
              "selectControlID": "lblHokenryoSansyutsu",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "保険料算出額",
              "required": false,
              "isPrivateInfo": false,
-             "text": "保険料算出額",
              "decorationClass": "",
              "align": 1
             }
@@ -2616,9 +2616,9 @@
              "selectControlID": "lblHokenryo",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "保険料額",
              "required": false,
              "isPrivateInfo": false,
-             "text": "保険料額",
              "decorationClass": "",
              "align": 1
             }
@@ -2665,9 +2665,9 @@
              "selectControlID": "lblHokenryoritsu1",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 2
             }
@@ -2714,9 +2714,9 @@
              "selectControlID": "lblHokenryoSansyutsu1",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 2
             }
@@ -2763,9 +2763,9 @@
              "selectControlID": "lblHokenryo1",
              "helpMessageID": "",
              "jpControlName": "",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
-             "text": "",
              "decorationClass": "",
              "align": 2
             }
@@ -2833,6 +2833,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": true,
+           "text": "",
            "required": false,
            "maxLength": 100000000,
            "minLength": 0,
@@ -2846,7 +2847,6 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
-           "text": "",
            "suggest": [],
            "value": "",
            "labelLText": "計算上年間保険料額",
@@ -2884,6 +2884,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": true,
+           "text": "",
            "required": false,
            "maxLength": 100000000,
            "minLength": 0,
@@ -2897,7 +2898,6 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
-           "text": "",
            "suggest": [],
            "value": "",
            "labelLText": "減免額",
@@ -2935,6 +2935,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": true,
+           "text": "",
            "required": false,
            "maxLength": 100000000,
            "minLength": 0,
@@ -2948,7 +2949,6 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
-           "text": "",
            "suggest": [],
            "value": "",
            "labelLText": "確定年間保険料額",
@@ -3055,6 +3055,7 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": true,
+         "text": "",
          "required": false,
          "maxLength": 100000000,
          "minLength": 0,
@@ -3068,7 +3069,6 @@
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
          "labelLText": "調定事由",
@@ -3101,6 +3101,7 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": true,
+         "text": "",
          "required": false,
          "maxLength": 100000000,
          "minLength": 0,
@@ -3114,7 +3115,6 @@
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
          "labelLText": "",
@@ -3147,6 +3147,7 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": true,
+         "text": "",
          "required": false,
          "maxLength": 100000000,
          "minLength": 0,
@@ -3160,7 +3161,6 @@
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
          "labelLText": "",
@@ -3193,6 +3193,7 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": true,
+         "text": "",
          "required": false,
          "maxLength": 100000000,
          "minLength": 0,
@@ -3206,7 +3207,6 @@
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
-         "text": "",
          "suggest": [],
          "value": "",
          "labelLText": "",
@@ -4012,7 +4012,9 @@
      "ddlKazeiNendoDisplayNone": true,
      "btnNarabeteHyoJiDisplayNone": false,
      "txtSetaiCodeDisyplayNone": true,
-     "btnSaihyojiDisplayNone": true
+     "btnSaihyojiDisplayNone": true,
+     "lblKijunYMDMsgVisible": true,
+     "lblKijunYMDMsgDisplayNone": false
     }
    ],
    "controlType": "Panel",
@@ -4106,6 +4108,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
@@ -4119,7 +4122,6 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "賦課年度",
@@ -4152,14 +4154,13 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "onClick": "",
+     "icon": [],
      "required": false,
      "onChange": "onChenge_radChoshu",
      "labelLText": "",
      "labelLWidth": "S",
      "labelLAlign": 2,
-     "onClick": "",
-     "icon": [],
-     "selectedItem": "key1",
      "dataSource": [
       {
        "key": "key0",
@@ -4174,6 +4175,7 @@
        "value": "翌年度"
       }
      ],
+     "selectedItem": "key1",
      "newLineItemNumber": 3,
      "spaceSize": "M",
      "disabledItem": []
@@ -4199,6 +4201,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
@@ -4212,7 +4215,6 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "基礎年金番号",
@@ -4245,6 +4247,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
@@ -4258,7 +4261,6 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "特別徴収対象年金",
@@ -4291,6 +4293,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
@@ -4304,7 +4307,6 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "年金コード",
@@ -4337,6 +4339,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
@@ -4350,7 +4353,6 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "特別徴収義務者",
@@ -4383,6 +4385,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
@@ -4396,7 +4399,6 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "捕捉年月",
@@ -4429,6 +4431,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
@@ -4442,7 +4445,6 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "開始年月",
@@ -4478,6 +4480,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -4491,7 +4494,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "氏名カナ",
@@ -4524,6 +4526,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -4537,7 +4540,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "性別",
@@ -4570,6 +4572,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -4583,7 +4586,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "生年月日",
@@ -4616,6 +4618,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -4629,7 +4632,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "氏名漢字",
@@ -4662,6 +4664,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -4675,7 +4678,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "住所カナ",
@@ -4708,6 +4710,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -4721,7 +4724,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "住所漢字",
@@ -4804,7 +4806,6 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "Auto",
-       "dataSource": [],
        "gridSetting": {
         "rowHeight": 20,
         "isMultiSelectable": false,
@@ -4934,6 +4935,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "txtTsuchiNaiyo",
        "isAscending": true,
        "filterList": [],
@@ -5010,7 +5012,6 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "Auto",
-       "dataSource": [],
        "gridSetting": {
         "rowHeight": 20,
         "isMultiSelectable": false,
@@ -5144,6 +5145,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "",
        "isAscending": true,
        "filterList": [],
@@ -5286,6 +5288,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "placeHolder": "平26.04.01",
        "isPrivateInfo": false,
@@ -5294,7 +5297,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "value": "",
        "labelLText": "申請日",
        "labelRText": "",
@@ -5327,6 +5329,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -5340,7 +5343,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "申請減免額",
@@ -5378,6 +5380,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -5391,7 +5394,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "申請理由",
@@ -5424,6 +5426,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "placeHolder": "平26.04.01",
        "isPrivateInfo": false,
@@ -5432,7 +5435,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "value": "",
        "labelLText": "決定日",
        "labelRText": "",
@@ -5465,6 +5467,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -5478,7 +5481,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "減免種類",
@@ -5511,6 +5513,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -5524,7 +5527,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "承認理由",
@@ -5612,6 +5614,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": true,
+           "text": "",
            "required": false,
            "placeHolder": "平26.04.01",
            "isPrivateInfo": false,
@@ -5620,7 +5623,6 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
-           "text": "",
            "value": "",
            "labelLText": "申請日",
            "labelRText": "",
@@ -5653,6 +5655,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": true,
+           "text": "",
            "required": false,
            "maxLength": 100000000,
            "minLength": 0,
@@ -5666,7 +5669,6 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
-           "text": "",
            "suggest": [],
            "value": "",
            "labelLText": "申請理由",
@@ -5699,6 +5701,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": true,
+           "text": "",
            "required": false,
            "placeHolder": "平26.04.01",
            "isPrivateInfo": false,
@@ -5707,7 +5710,6 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
-           "text": "",
            "value": "",
            "labelLText": "決定日",
            "labelRText": "",
@@ -5740,6 +5742,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": true,
+           "text": "",
            "required": false,
            "maxLength": 100000000,
            "minLength": 0,
@@ -5753,7 +5756,6 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
-           "text": "",
            "suggest": [],
            "value": "",
            "labelLText": "減免種類",
@@ -5786,6 +5788,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": true,
+           "text": "",
            "required": false,
            "maxLength": 100000000,
            "minLength": 0,
@@ -5799,7 +5802,6 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
-           "text": "",
            "suggest": [],
            "value": "",
            "labelLText": "承認理由",
@@ -5860,9 +5862,9 @@
                "selectControlID": "lblChoshuYuyoTsuki",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "月",
                "decorationClass": "",
                "align": 1
               }
@@ -5909,9 +5911,9 @@
                "selectControlID": "lblChoshuYuyoKi",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "期",
                "decorationClass": "",
                "align": 1
               }
@@ -5958,9 +5960,9 @@
                "selectControlID": "lblYuyoKaishiFrom",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "猶予期間開始",
                "required": false,
                "isPrivateInfo": false,
-               "text": "猶予期間開始",
                "decorationClass": "",
                "align": 1
               }
@@ -6007,9 +6009,9 @@
                "selectControlID": "lblChoshuYuyoTsuki1",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "4月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "4月",
                "decorationClass": "",
                "align": 1
               }
@@ -6056,9 +6058,9 @@
                "selectControlID": "lblChoshuYuyoKi1",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "1期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -6127,9 +6129,9 @@
                "selectControlID": "lblChoshuYuyoTsuki2",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "5月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "5月",
                "decorationClass": "",
                "align": 1
               }
@@ -6176,9 +6178,9 @@
                "selectControlID": "lblChoshuYuyoKi2",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "1期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -6247,9 +6249,9 @@
                "selectControlID": "lblChoshuYuyoTsuki3",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "6月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "6月",
                "decorationClass": "",
                "align": 1
               }
@@ -6296,9 +6298,9 @@
                "selectControlID": "lblChoshuYuyoKi3",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "1期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -6367,9 +6369,9 @@
                "selectControlID": "lblChoshuYuyoTsuki4",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "7月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "7月",
                "decorationClass": "",
                "align": 1
               }
@@ -6416,9 +6418,9 @@
                "selectControlID": "lblChoshuYuyoKi4",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "1期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -6487,9 +6489,9 @@
                "selectControlID": "lblChoshuYuyoTsuki5",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "8月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "8月",
                "decorationClass": "",
                "align": 1
               }
@@ -6536,9 +6538,9 @@
                "selectControlID": "lblChoshuYuyoKi5",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "1期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -6607,9 +6609,9 @@
                "selectControlID": "lblChoshuYuyoTsuki6",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "9月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "9月",
                "decorationClass": "",
                "align": 1
               }
@@ -6656,9 +6658,9 @@
                "selectControlID": "lblChoshuYuyoKi6",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "1期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -6727,9 +6729,9 @@
                "selectControlID": "lblChoshuYuyoTsuki7",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "10月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "10月",
                "decorationClass": "",
                "align": 1
               }
@@ -6776,9 +6778,9 @@
                "selectControlID": "lblChoshuYuyoKi7",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "1期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -6847,9 +6849,9 @@
                "selectControlID": "lblChoshuYuyoTsuki8",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "11月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "11月",
                "decorationClass": "",
                "align": 1
               }
@@ -6896,9 +6898,9 @@
                "selectControlID": "lblChoshuYuyoKi8",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "1期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -6967,9 +6969,9 @@
                "selectControlID": "lblChoshuYuyoTsuki9",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "12月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "12月",
                "decorationClass": "",
                "align": 1
               }
@@ -7016,9 +7018,9 @@
                "selectControlID": "lblChoshuYuyoKi9",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "1期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -7087,9 +7089,9 @@
                "selectControlID": "lblChoshuYuyoTsuki10",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "1月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1月",
                "decorationClass": "",
                "align": 1
               }
@@ -7136,9 +7138,9 @@
                "selectControlID": "lblChoshuYuyoKi10",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "1期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -7207,9 +7209,9 @@
                "selectControlID": "lblChoshuYuyoTsuki11",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "2月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "2月",
                "decorationClass": "",
                "align": 1
               }
@@ -7256,9 +7258,9 @@
                "selectControlID": "lblChoshuYuyoKi11",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "1期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -7327,9 +7329,9 @@
                "selectControlID": "lblChoshuYuyoTsuki12",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "3月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "3月",
                "decorationClass": "",
                "align": 1
               }
@@ -7376,9 +7378,9 @@
                "selectControlID": "lblChoshuYuyoKi12",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "1期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -7447,9 +7449,9 @@
                "selectControlID": "lblChoshuYuyoTsuki13",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "4月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "4月",
                "decorationClass": "",
                "align": 1
               }
@@ -7496,9 +7498,9 @@
                "selectControlID": "lblChoshuYuyoKi13",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "1期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "1期",
                "decorationClass": "",
                "align": 1
               }
@@ -7567,9 +7569,9 @@
                "selectControlID": "lblChoshuYuyoTsuki14",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "5月",
                "required": false,
                "isPrivateInfo": false,
-               "text": "5月",
                "decorationClass": "",
                "align": 1
               }
@@ -7616,9 +7618,9 @@
                "selectControlID": "lblChoshuYuyoKi14",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "14期",
                "required": false,
                "isPrivateInfo": false,
-               "text": "14期",
                "decorationClass": "",
                "align": 1
               }
@@ -7687,9 +7689,9 @@
                "selectControlID": "lblYuyoKaishiTo",
                "helpMessageID": "",
                "jpControlName": "",
+               "text": "猶予期間終了",
                "required": false,
                "isPrivateInfo": false,
-               "text": "猶予期間終了",
                "decorationClass": "",
                "align": 1
               }
@@ -8200,14 +8202,13 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onClick": "",
+       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "",
        "labelLWidth": "S",
        "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
-       "selectedItem": null,
        "dataSource": [
         {
          "key": "key0",
@@ -8218,6 +8219,7 @@
          "value": "手入力"
         }
        ],
+       "selectedItem": null,
        "newLineItemNumber": 2,
        "spaceSize": "M",
        "disabledItem": []
@@ -8243,6 +8245,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -8256,7 +8259,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -8289,6 +8291,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -8302,7 +8305,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -8335,6 +8337,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -8348,7 +8351,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -8381,6 +8383,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -8394,7 +8397,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -8486,13 +8488,13 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
          "value": "平26.04.01　00:00:00"
         }
        ],
+       "selectedItem": "key0",
        "disabledItem": []
       },
       {
@@ -8526,13 +8528,13 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
          "value": "平26.04.01　00:00:00"
         }
        ],
+       "selectedItem": "key0",
        "disabledItem": []
       },
       {
@@ -8583,9 +8585,9 @@
            "selectControlID": "lblFukankonkyoMae",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "更正前",
            "required": false,
            "isPrivateInfo": false,
-           "text": "更正前",
            "decorationClass": "",
            "align": 1
           }
@@ -8632,9 +8634,9 @@
            "selectControlID": "lblFukankonkyoAto",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "更正後",
            "required": false,
            "isPrivateInfo": false,
-           "text": "更正後",
            "decorationClass": "",
            "align": 1
           }
@@ -8681,9 +8683,9 @@
            "selectControlID": "lblFukankonkyoZengo1",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "賦課基準日",
            "required": false,
            "isPrivateInfo": false,
-           "text": "賦課基準日",
            "decorationClass": "",
            "align": 2
           }
@@ -8730,9 +8732,9 @@
            "selectControlID": "lblFukankonkyoMae1",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "平99.99.99",
            "required": false,
            "isPrivateInfo": false,
-           "text": "平99.99.99",
            "decorationClass": "",
            "align": 1
           }
@@ -8779,9 +8781,9 @@
            "selectControlID": "lblFukankonkyoAto1",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "平99.99.99",
            "required": false,
            "isPrivateInfo": false,
-           "text": "平99.99.99",
            "decorationClass": "",
            "align": 1
           }
@@ -8828,9 +8830,9 @@
            "selectControlID": "lblFukankonkyoZengo2",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "資格取得日",
            "required": false,
            "isPrivateInfo": false,
-           "text": "資格取得日",
            "decorationClass": "",
            "align": 2
           }
@@ -8877,9 +8879,9 @@
            "selectControlID": "lblFukankonkyoMae2",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -8926,9 +8928,9 @@
            "selectControlID": "lblFukankonkyoAto2",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -8975,9 +8977,9 @@
            "selectControlID": "lblFukankonkyoZengo3",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "喪失日",
            "required": false,
            "isPrivateInfo": false,
-           "text": "喪失日",
            "decorationClass": "",
            "align": 2
           }
@@ -9024,9 +9026,9 @@
            "selectControlID": "lblFukankonkyoMae3",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -9073,9 +9075,9 @@
            "selectControlID": "lblFukankonkyoAto3",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -9122,9 +9124,9 @@
            "selectControlID": "lblFukankonkyoZengo4",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "生保開始日",
            "required": false,
            "isPrivateInfo": false,
-           "text": "生保開始日",
            "decorationClass": "",
            "align": 2
           }
@@ -9171,9 +9173,9 @@
            "selectControlID": "lblFukankonkyoMae4",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -9220,9 +9222,9 @@
            "selectControlID": "lblFukankonkyoAto4",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -9269,9 +9271,9 @@
            "selectControlID": "lblFukankonkyoZengo5",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "終了日",
            "required": false,
            "isPrivateInfo": false,
-           "text": "終了日",
            "decorationClass": "",
            "align": 2
           }
@@ -9318,9 +9320,9 @@
            "selectControlID": "lblFukankonkyoMae5",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -9367,9 +9369,9 @@
            "selectControlID": "lblFukankonkyoAto5",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -9416,9 +9418,9 @@
            "selectControlID": "lblFukankonkyoZengo6",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "老年開始日",
            "required": false,
            "isPrivateInfo": false,
-           "text": "老年開始日",
            "decorationClass": "",
            "align": 2
           }
@@ -9465,9 +9467,9 @@
            "selectControlID": "lblFukankonkyoMae6",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -9514,9 +9516,9 @@
            "selectControlID": "lblFukankonkyoAto6",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -9563,9 +9565,9 @@
            "selectControlID": "lblFukankonkyoZengo7",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "終了日",
            "required": false,
            "isPrivateInfo": false,
-           "text": "終了日",
            "decorationClass": "",
            "align": 2
           }
@@ -9612,9 +9614,9 @@
            "selectControlID": "lblFukankonkyoMae7",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -9661,9 +9663,9 @@
            "selectControlID": "lblFukankonkyoAto7",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -9710,9 +9712,9 @@
            "selectControlID": "lblFukankonkyoZengo8",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "本人課税",
            "required": false,
            "isPrivateInfo": false,
-           "text": "本人課税",
            "decorationClass": "",
            "align": 2
           }
@@ -9759,9 +9761,9 @@
            "selectControlID": "lblFukankonkyoMae8",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -9808,9 +9810,9 @@
            "selectControlID": "lblFukankonkyoAto8",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -9857,9 +9859,9 @@
            "selectControlID": "lblFukankonkyoZengo9",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "世帯課税",
            "required": false,
            "isPrivateInfo": false,
-           "text": "世帯課税",
            "decorationClass": "",
            "align": 2
           }
@@ -9906,9 +9908,9 @@
            "selectControlID": "lblFukankonkyoMae9",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -9955,9 +9957,9 @@
            "selectControlID": "lblFukankonkyoAto9",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -10004,9 +10006,9 @@
            "selectControlID": "lblFukankonkyoZengo10",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "合計所得金額",
            "required": false,
            "isPrivateInfo": false,
-           "text": "合計所得金額",
            "decorationClass": "",
            "align": 2
           }
@@ -10053,9 +10055,9 @@
            "selectControlID": "lblFukankonkyoMae10",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "12,345,678",
            "required": false,
            "isPrivateInfo": false,
-           "text": "12,345,678",
            "decorationClass": "",
            "align": 2
           }
@@ -10102,9 +10104,9 @@
            "selectControlID": "lblFukankonkyoAto10",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "12,345,678",
            "required": false,
            "isPrivateInfo": false,
-           "text": "12,345,678",
            "decorationClass": "",
            "align": 2
           }
@@ -10151,9 +10153,9 @@
            "selectControlID": "lblFukankonkyoZengo11",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "年金収入額",
            "required": false,
            "isPrivateInfo": false,
-           "text": "年金収入額",
            "decorationClass": "",
            "align": 2
           }
@@ -10200,9 +10202,9 @@
            "selectControlID": "lblFukankonkyoMae11",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "12,345,678",
            "required": false,
            "isPrivateInfo": false,
-           "text": "12,345,678",
            "decorationClass": "",
            "align": 2
           }
@@ -10249,9 +10251,9 @@
            "selectControlID": "lblFukankonkyoAto11",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "12,345,678",
            "required": false,
            "isPrivateInfo": false,
-           "text": "12,345,678",
            "decorationClass": "",
            "align": 2
           }
@@ -10298,9 +10300,9 @@
            "selectControlID": "lblFukankonkyoZengo12",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "保険料段階",
            "required": false,
            "isPrivateInfo": false,
-           "text": "保険料段階",
            "decorationClass": "",
            "align": 2
           }
@@ -10347,9 +10349,9 @@
            "selectControlID": "lblFukankonkyoMae12",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "第5段階特例",
            "required": false,
            "isPrivateInfo": false,
-           "text": "第5段階特例",
            "decorationClass": "",
            "align": 1
           }
@@ -10396,9 +10398,9 @@
            "selectControlID": "lblFukankonkyoAto12",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "第5段階特例",
            "required": false,
            "isPrivateInfo": false,
-           "text": "第5段階特例",
            "decorationClass": "",
            "align": 1
           }
@@ -10445,9 +10447,9 @@
            "selectControlID": "lblFukankonkyoZengo13",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "減免額",
            "required": false,
            "isPrivateInfo": false,
-           "text": "減免額",
            "decorationClass": "",
            "align": 2
           }
@@ -10494,9 +10496,9 @@
            "selectControlID": "lblFukankonkyoMae13",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "0",
            "required": false,
            "isPrivateInfo": false,
-           "text": "0",
            "decorationClass": "",
            "align": 2
           }
@@ -10543,9 +10545,9 @@
            "selectControlID": "lblFukankonkyoAto13",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "0",
            "required": false,
            "isPrivateInfo": false,
-           "text": "0",
            "decorationClass": "",
            "align": 2
           }
@@ -10592,9 +10594,9 @@
            "selectControlID": "lblFukankonkyoZengo14",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "保険料額",
            "required": false,
            "isPrivateInfo": false,
-           "text": "保険料額",
            "decorationClass": "",
            "align": 2
           }
@@ -10641,9 +10643,9 @@
            "selectControlID": "lblFukankonkyoMae14",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "12,345,678",
            "required": false,
            "isPrivateInfo": false,
-           "text": "12,345,678",
            "decorationClass": "",
            "align": 2
           }
@@ -10690,9 +10692,9 @@
            "selectControlID": "lblFukankonkyoAto14",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "12,345,678",
            "required": false,
            "isPrivateInfo": false,
-           "text": "12,345,678",
            "decorationClass": "",
            "align": 2
           }
@@ -10784,9 +10786,9 @@
            "selectControlID": "lblKobetsuHakkoZengoTokucho",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "特別徴収",
            "required": false,
            "isPrivateInfo": false,
-           "text": "特別徴収",
            "decorationClass": "",
            "align": 1
           }
@@ -10833,9 +10835,9 @@
            "selectControlID": "lblTsuki",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "月",
            "decorationClass": "",
            "align": 1
           }
@@ -10882,9 +10884,9 @@
            "selectControlID": "lblZengoTokuchoKi",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "期",
            "decorationClass": "",
            "align": 1
           }
@@ -10931,9 +10933,9 @@
            "selectControlID": "lblZengoTokuchoMae",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "更正前",
            "required": false,
            "isPrivateInfo": false,
-           "text": "更正前",
            "decorationClass": "",
            "align": 1
           }
@@ -10980,9 +10982,9 @@
            "selectControlID": "lblTsuki1",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "4月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "4月",
            "decorationClass": "",
            "align": 1
           }
@@ -11029,9 +11031,9 @@
            "selectControlID": "lblZengoTokuchoKi1",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "1期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "1期",
            "decorationClass": "",
            "align": 1
           }
@@ -11078,9 +11080,9 @@
            "selectControlID": "lblZengoTokuchoMae1",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "123,456",
            "required": false,
            "isPrivateInfo": false,
-           "text": "123,456",
            "decorationClass": "",
            "align": 2
           }
@@ -11127,9 +11129,9 @@
            "selectControlID": "lblKobetsuHakkoZengoFucho",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "普通徴収",
            "required": false,
            "isPrivateInfo": false,
-           "text": "普通徴収",
            "decorationClass": "",
            "align": 1
           }
@@ -11176,9 +11178,9 @@
            "selectControlID": "lblZengoTokuchoAto",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "更正後",
            "required": false,
            "isPrivateInfo": false,
-           "text": "更正後",
            "decorationClass": "",
            "align": 1
           }
@@ -11225,9 +11227,9 @@
            "selectControlID": "lblZengoFuchoKi",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "期",
            "decorationClass": "",
            "align": 1
           }
@@ -11274,9 +11276,9 @@
            "selectControlID": "lblZengoFuchoMae",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "更正前",
            "required": false,
            "isPrivateInfo": false,
-           "text": "更正前",
            "decorationClass": "",
            "align": 1
           }
@@ -11323,9 +11325,9 @@
            "selectControlID": "lblZengoFuchoAto",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "更正後",
            "required": false,
            "isPrivateInfo": false,
-           "text": "更正後",
            "decorationClass": "",
            "align": 1
           }
@@ -11372,9 +11374,9 @@
            "selectControlID": "lblZengoNokigen",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "納期限",
            "required": false,
            "isPrivateInfo": false,
-           "text": "納期限",
            "decorationClass": "",
            "align": 1
           }
@@ -11421,9 +11423,9 @@
            "selectControlID": "lblZengoTokuchoAto1",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "123,456",
            "required": false,
            "isPrivateInfo": false,
-           "text": "123,456",
            "decorationClass": "",
            "align": 2
           }
@@ -11470,9 +11472,9 @@
            "selectControlID": "lblZengoFuchoKi1",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -11519,9 +11521,9 @@
            "selectControlID": "lblZengoFuchoMae1",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -11568,9 +11570,9 @@
            "selectControlID": "lblZengoFuchoAto1",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -11617,9 +11619,9 @@
            "selectControlID": "lblZengoNokigen1",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -11666,9 +11668,9 @@
            "selectControlID": "lblTsuki2",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "5月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "5月",
            "decorationClass": "",
            "align": 1
           }
@@ -11781,9 +11783,9 @@
            "selectControlID": "lblZengoFuchoKi2",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -11830,9 +11832,9 @@
            "selectControlID": "lblZengoFuchoMae2",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -11879,9 +11881,9 @@
            "selectControlID": "lblZengoFuchoAto2",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -11928,9 +11930,9 @@
            "selectControlID": "lblZengoNokigen2",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -11977,9 +11979,9 @@
            "selectControlID": "lblTsuki3",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "6月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "6月",
            "decorationClass": "",
            "align": 1
           }
@@ -12026,9 +12028,9 @@
            "selectControlID": "lblZengoTokuchoKi2",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "2期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "2期",
            "decorationClass": "",
            "align": 1
           }
@@ -12075,9 +12077,9 @@
            "selectControlID": "lblZengoTokuchoMae2",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -12124,9 +12126,9 @@
            "selectControlID": "lblZengoTokuchoAto2",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -12173,9 +12175,9 @@
            "selectControlID": "lblZengoFuchoKi3",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "1期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "1期",
            "decorationClass": "",
            "align": 1
           }
@@ -12222,9 +12224,9 @@
            "selectControlID": "lblZengoFuchoMae3",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "123,456",
            "required": false,
            "isPrivateInfo": false,
-           "text": "123,456",
            "decorationClass": "",
            "align": 2
           }
@@ -12271,9 +12273,9 @@
            "selectControlID": "lblZengoFuchoAto3",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "123,456",
            "required": false,
            "isPrivateInfo": false,
-           "text": "123,456",
            "decorationClass": "",
            "align": 2
           }
@@ -12320,9 +12322,9 @@
            "selectControlID": "lblZengoNokigen3",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "平99.99.99",
            "required": false,
            "isPrivateInfo": false,
-           "text": "平99.99.99",
            "decorationClass": "",
            "align": 1
           }
@@ -12369,9 +12371,9 @@
            "selectControlID": "lblTsuki4",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "7月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "7月",
            "decorationClass": "",
            "align": 1
           }
@@ -12484,9 +12486,9 @@
            "selectControlID": "lblZengoFuchoKi4",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "2期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "2期",
            "decorationClass": "",
            "align": 1
           }
@@ -12533,9 +12535,9 @@
            "selectControlID": "lblZengoFuchoMae4",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -12582,9 +12584,9 @@
            "selectControlID": "lblZengoFuchoAto4",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -12631,9 +12633,9 @@
            "selectControlID": "lblZengoNokigen4",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -12680,9 +12682,9 @@
            "selectControlID": "lblTsuki5",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "8月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "8月",
            "decorationClass": "",
            "align": 1
           }
@@ -12729,9 +12731,9 @@
            "selectControlID": "lblZengoTokuchoKi3",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "3期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "3期",
            "decorationClass": "",
            "align": 1
           }
@@ -12778,9 +12780,9 @@
            "selectControlID": "lblZengoTokuchoMae3",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -12827,9 +12829,9 @@
            "selectControlID": "lblZengoTokuchoAto3",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -12876,9 +12878,9 @@
            "selectControlID": "lblZengoFuchoKi5",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "3期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "3期",
            "decorationClass": "",
            "align": 1
           }
@@ -12925,9 +12927,9 @@
            "selectControlID": "lblZengoFuchoMae5",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -12974,9 +12976,9 @@
            "selectControlID": "lblZengoFuchoAto5",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -13023,9 +13025,9 @@
            "selectControlID": "lblZengoNokigen5",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -13072,9 +13074,9 @@
            "selectControlID": "lblTsuki6",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "9月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "9月",
            "decorationClass": "",
            "align": 1
           }
@@ -13187,9 +13189,9 @@
            "selectControlID": "lblZengoFuchoKi6",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "4期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "4期",
            "decorationClass": "",
            "align": 1
           }
@@ -13236,9 +13238,9 @@
            "selectControlID": "lblZengoFuchoMae6",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -13285,9 +13287,9 @@
            "selectControlID": "lblZengoFuchoAto6",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -13334,9 +13336,9 @@
            "selectControlID": "lblZengoNokigen6",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -13383,9 +13385,9 @@
            "selectControlID": "lblTsuki7",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "10月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "10月",
            "decorationClass": "",
            "align": 1
           }
@@ -13432,9 +13434,9 @@
            "selectControlID": "lblZengoTokuchoKi4",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "4期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "4期",
            "decorationClass": "",
            "align": 1
           }
@@ -13481,9 +13483,9 @@
            "selectControlID": "lblZengoTokuchoMae4",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -13530,9 +13532,9 @@
            "selectControlID": "lblZengoTokuchoAto4",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -13579,9 +13581,9 @@
            "selectControlID": "lblZengoFuchoKi7",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "5期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "5期",
            "decorationClass": "",
            "align": 1
           }
@@ -13628,9 +13630,9 @@
            "selectControlID": "lblZengoFuchoMae7",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -13677,9 +13679,9 @@
            "selectControlID": "lblZengoFuchoAto7",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -13726,9 +13728,9 @@
            "selectControlID": "lblZengoNokigen7",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -13775,9 +13777,9 @@
            "selectControlID": "lblTsuki8",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "11月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "11月",
            "decorationClass": "",
            "align": 1
           }
@@ -13890,9 +13892,9 @@
            "selectControlID": "lblZengoFuchoKi8",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "6期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "6期",
            "decorationClass": "",
            "align": 1
           }
@@ -13939,9 +13941,9 @@
            "selectControlID": "lblZengoFuchoMae8",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -13988,9 +13990,9 @@
            "selectControlID": "lblZengoFuchoAto8",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -14037,9 +14039,9 @@
            "selectControlID": "lblZengoNokigen8",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -14086,9 +14088,9 @@
            "selectControlID": "lblTsuki9",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "12月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "12月",
            "decorationClass": "",
            "align": 1
           }
@@ -14135,9 +14137,9 @@
            "selectControlID": "lblZengoTokuchoKi5",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "5期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "5期",
            "decorationClass": "",
            "align": 1
           }
@@ -14184,9 +14186,9 @@
            "selectControlID": "lblZengoTokuchoMae5",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -14233,9 +14235,9 @@
            "selectControlID": "lblZengoTokuchoAto5",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -14282,9 +14284,9 @@
            "selectControlID": "lblZengoFuchoKi9",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "7期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "7期",
            "decorationClass": "",
            "align": 1
           }
@@ -14331,9 +14333,9 @@
            "selectControlID": "lblZengoFuchoMae9",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -14380,9 +14382,9 @@
            "selectControlID": "lblZengoFuchoAto9",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -14429,9 +14431,9 @@
            "selectControlID": "lblZengoNokigen9",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -14478,9 +14480,9 @@
            "selectControlID": "lblTsuki10",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "1月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "1月",
            "decorationClass": "",
            "align": 1
           }
@@ -14593,9 +14595,9 @@
            "selectControlID": "lblZengoFuchoKi10",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "8期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "8期",
            "decorationClass": "",
            "align": 1
           }
@@ -14642,9 +14644,9 @@
            "selectControlID": "lblZengoFuchoMae10",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -14691,9 +14693,9 @@
            "selectControlID": "lblZengoFuchoAto10",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -14740,9 +14742,9 @@
            "selectControlID": "lblZengoNokigen10",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -14789,9 +14791,9 @@
            "selectControlID": "lblTsuki11",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "2月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "2月",
            "decorationClass": "",
            "align": 1
           }
@@ -14838,9 +14840,9 @@
            "selectControlID": "lblZengoTokuchoKi6",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "6期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "6期",
            "decorationClass": "",
            "align": 1
           }
@@ -14887,9 +14889,9 @@
            "selectControlID": "lblZengoTokuchoMae6",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -14936,9 +14938,9 @@
            "selectControlID": "lblZengoTokuchoAto6",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -14985,9 +14987,9 @@
            "selectControlID": "lblZengoFuchoKi11",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "9期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "9期",
            "decorationClass": "",
            "align": 1
           }
@@ -15034,9 +15036,9 @@
            "selectControlID": "lblZengoFuchoMae11",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -15083,9 +15085,9 @@
            "selectControlID": "lblZengoFuchoAto11",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -15132,9 +15134,9 @@
            "selectControlID": "lblZengoNokigen11",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -15181,9 +15183,9 @@
            "selectControlID": "lblTsuki12",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "3月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "3月",
            "decorationClass": "",
            "align": 1
           }
@@ -15296,9 +15298,9 @@
            "selectControlID": "lblZengoFuchoKi12",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "10期",
            "required": false,
            "isPrivateInfo": false,
-           "text": "10期",
            "decorationClass": "",
            "align": 1
           }
@@ -15345,9 +15347,9 @@
            "selectControlID": "lblZengoFuchoMae12",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -15394,9 +15396,9 @@
            "selectControlID": "lblZengoFuchoAto12",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -15443,9 +15445,9 @@
            "selectControlID": "lblZengoNokigen12",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -15492,9 +15494,9 @@
            "selectControlID": "lblTsuki13",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "4月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "4月",
            "decorationClass": "",
            "align": 1
           }
@@ -15607,9 +15609,9 @@
            "selectControlID": "lblZengoFuchoKi13",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -15656,9 +15658,9 @@
            "selectControlID": "lblZengoFuchoMae13",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -15705,9 +15707,9 @@
            "selectControlID": "lblZengoFuchoAto13",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -15754,9 +15756,9 @@
            "selectControlID": "lblZengoNokigen13",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -15803,9 +15805,9 @@
            "selectControlID": "lblTsuki14",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "5月",
            "required": false,
            "isPrivateInfo": false,
-           "text": "5月",
            "decorationClass": "",
            "align": 1
           }
@@ -15918,9 +15920,9 @@
            "selectControlID": "lblZengoFuchoKi14",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -15967,9 +15969,9 @@
            "selectControlID": "lblZengoFuchoMae14",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -16016,9 +16018,9 @@
            "selectControlID": "lblZengoFuchoAto14",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -16065,9 +16067,9 @@
            "selectControlID": "lblZengoNokigen14",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 1
           }
@@ -16114,9 +16116,9 @@
            "selectControlID": "lblGoukei",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "合計",
            "required": false,
            "isPrivateInfo": false,
-           "text": "合計",
            "decorationClass": "",
            "align": 1
           }
@@ -16185,9 +16187,9 @@
            "selectControlID": "lblZengoTokuchoMaeKei",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -16234,9 +16236,9 @@
            "selectControlID": "lblZengoTokuchoAtoKei",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -16305,9 +16307,9 @@
            "selectControlID": "lblZengoFuchoMaeKei",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -16354,9 +16356,9 @@
            "selectControlID": "lblZengoFuchoAtoKei",
            "helpMessageID": "",
            "jpControlName": "",
+           "text": "",
            "required": false,
            "isPrivateInfo": false,
-           "text": "",
            "decorationClass": "",
            "align": 2
           }
@@ -16578,6 +16580,8 @@
      "fixedDiv": "No"
     }
    ],
+   "supplementInfo": "DBBSI03200",
+   "supplementInfoPostParamData": "[{\"supplementInfoPostParamData\":\"AtenaJoho\"}]",
    "validation": {},
    "events": [
     {
@@ -16658,8 +16662,8 @@
      "fixedDiv": "No"
     }
    ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
+   "supplementInfo": "DBBSI03200",
+   "supplementInfoPostParamData": "[{\"supplementInfoPostParamData\":\"AtenaJoho\"}]",
    "validation": {},
    "events": [
     {
@@ -16730,8 +16734,8 @@
      "fixedDiv": "No"
     }
    ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
+   "supplementInfo": "DBBSI03200",
+   "supplementInfoPostParamData": "[{\"supplementInfoPostParamData\":\"AtenaJoho\"}]",
    "validation": {},
    "events": [
     {
@@ -16812,8 +16816,8 @@
      "fixedDiv": "No"
     }
    ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
+   "supplementInfo": "DBBSI03200",
+   "supplementInfoPostParamData": "[{\"supplementInfoPostParamData\":\"AtenaJoho\"}]",
    "validation": {},
    "events": [
     {
@@ -16889,8 +16893,8 @@
      "fixedDiv": "No"
     }
    ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
+   "supplementInfo": "DBBSI03200",
+   "supplementInfoPostParamData": "[{\"supplementInfoPostParamData\":\"AtenaJoho\"}]",
    "validation": {},
    "events": [
     {
