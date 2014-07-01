@@ -72,11 +72,11 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "",
-     "imageWidth": "20",
-     "imageHeight": "16",
      "onClick": "",
      "appearance": 2,
      "imageFileUrl": "/uz/uza/image/UZ_Search.png",
+     "imageWidth": "20",
+     "imageHeight": "16",
      "icon": 0,
      "heightTextBoxMatches": true,
      "displayChildDivName": "DBZ.HihokenshaInputGuide",
@@ -216,11 +216,11 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "ymdKubun": 2,
-     "displayFormat": 0,
      "permitCharactor": "",
      "fromPlaceHolder": "",
      "toPlaceHolder": "",
+     "ymdKubun": 2,
+     "displayFormat": 0,
      "minDate": "",
      "maxDate": "",
      "fromText": "",
@@ -295,11 +295,11 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "以上の条件で検索する",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "onClick_btnSearchShoKaishuKanri",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false
     }
@@ -1061,6 +1061,11 @@
      "fieldName": "btnReSearch",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnKanryo",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -1116,6 +1121,11 @@
      "fieldName": "btnReSearch",
      "event": "onClick",
      "transition": "対象者検索"
+    },
+    {
+     "fieldName": "btnKanryo",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -1157,6 +1167,11 @@
      "fieldName": "btnReSearch",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnKanryo",
+     "event": "onClick",
+     "transition": "終了"
     }
    ]
   }
@@ -1278,6 +1293,52 @@
    "states": [
     {
      "state": "回収記録登録"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "commonBtnKanryo",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnKanryo",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnKanryo",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "証回収記録登録を"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "登録完了"
     }
    ],
    "isFinishButtonOnTheRight": false,
