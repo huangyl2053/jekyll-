@@ -13,9 +13,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -42,12 +40,14 @@ public class ShoKaishuKanriTaishoshaJoho {
 
         RString hihokenshaNo = searchResultDiv.getHihokenshaNo();
 
-        //AtenaShokaiSimple.setData(taishoshaJohoDiv.getShoKaishuKanriTaishoshaCommonJoho(), new ShikibetsuCode("012345678901234"));
+        //宛名照会 識別コード設定
+        AtenaShokaiSimple.setData(taishoshaJohoDiv.getShoKaishuKanriTaishoshaCommonJoho(), new ShikibetsuCode("012345678901234"));
+
         List<HashMap> yamlDataList = YamlLoader.DBU.loadAsList(HIHOKENSHA_DATA);
         for (HashMap yamlData : yamlDataList) {
             ControlGenerator generator = new ControlGenerator(yamlData);
             if (hihokenshaNo != null && hihokenshaNo.equals(generator.getAsRString("被保番号"))) {
-                setTaishoshaCommonData(taishoshaJohoDiv.getShoKaishuKanriTaishoshaCommonJoho(), generator);
+                //setTaishoshaCommonData(taishoshaJohoDiv.getShoKaishuKanriTaishoshaCommonJoho(), generator);
                 setTaishoshaDbData(taishoshaJohoDiv.getCcdKaigoShikakuKihon(), generator);
             }
         }
@@ -56,22 +56,20 @@ public class ShoKaishuKanriTaishoshaJoho {
         return response;
     }
 
-    private void setTaishoshaCommonData(AtenaShokaiSimpleDiv taishoshaCommonJoho, ControlGenerator generator) {
-        taishoshaCommonJoho.getTxtAtenaKanaMeisho().setValue(generator.getAsRString("カナ氏名"));
-        taishoshaCommonJoho.getTxtAtenaMeisho().setValue(generator.getAsRString("氏名"));
-        taishoshaCommonJoho.getTxtGyoseiku().setValue(generator.getAsRString("行政区"));
-        taishoshaCommonJoho.getTxtJuminJotai().setValue(generator.getAsRString("住民状態"));
-        //taishoshaCommonJoho.getTxtNihonjinGaikokujin().setValue(generator.getAsRString("住民種別"));
-        taishoshaCommonJoho.getTxtJusho().setValue(generator.getAsRString("住所"));
-        taishoshaCommonJoho.getTxtKojinHojinCode().setValue(generator.getAsRString("個人法人コード"));
-        taishoshaCommonJoho.getTxtNenrei().setValue(generator.getAsRString("年齢"));
-        taishoshaCommonJoho.getTxtSeibetsu().setValue(generator.getAsRString("性別"));
-        taishoshaCommonJoho.getTxtSeinengappiYMD().setValue(generator.getAsRDate("生年月日"));
-        taishoshaCommonJoho.getTxtSetaiCode().setValue(generator.getAsRString("世帯コード"));
-        taishoshaCommonJoho.getTxtShikibetsuCode().setValue(generator.getAsRString("識別コード"));
-        taishoshaCommonJoho.getTxtYubinNo().setValue(new YubinNo(generator.getAsRString("郵便番号")));
-    }
-
+//    private void setTaishoshaCommonData(AtenaShokaiSimpleDiv taishoshaCommonJoho, ControlGenerator generator) {
+//        taishoshaCommonJoho.getTxtAtenaKanaMeisho().setValue(generator.getAsRString("カナ氏名"));
+//        taishoshaCommonJoho.getTxtAtenaMeisho().setValue(generator.getAsRString("氏名"));
+//        taishoshaCommonJoho.getTxtGyoseiku().setValue(generator.getAsRString("行政区"));
+//        taishoshaCommonJoho.getTxtJuminJotai().setValue(generator.getAsRString("住民状態"));
+//        taishoshaCommonJoho.getTxtJusho().setValue(generator.getAsRString("住所"));
+//        taishoshaCommonJoho.getTxtKojinHojinCode().setValue(generator.getAsRString("個人法人コード"));
+//        taishoshaCommonJoho.getTxtNenrei().setValue(generator.getAsRString("年齢"));
+//        taishoshaCommonJoho.getTxtSeibetsu().setValue(generator.getAsRString("性別"));
+//        taishoshaCommonJoho.getTxtSeinengappiYMD().setValue(generator.getAsRDate("生年月日"));
+//        taishoshaCommonJoho.getTxtSetaiCode().setValue(generator.getAsRString("世帯コード"));
+//        taishoshaCommonJoho.getTxtShikibetsuCode().setValue(generator.getAsRString("識別コード"));
+//        taishoshaCommonJoho.getTxtYubinNo().setValue(new YubinNo(generator.getAsRString("郵便番号")));
+//    }
     private void setTaishoshaDbData(KaigoShikakuKihonDiv shikakuKihonJoho, ControlGenerator generator) {
         shikakuKihonJoho.getTxtHihokenshaNo().setValue(generator.getAsRString("被保番号"));
         shikakuKihonJoho.getTxtShutokuYmd().setValue(generator.getAsRDate("資格取得日"));

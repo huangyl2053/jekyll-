@@ -10,6 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011.HihokenshashoHakkoTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -31,6 +33,7 @@ public class HihokenshashoHakkoTaishoshaJoho {
             HihokenshashoHakkoTaishoshaJohoDiv panel) {
         ResponseData<HihokenshashoHakkoTaishoshaJohoDiv> response = new ResponseData<>();
 
+        RString rsShikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);
         RString rsHihoNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
 
         List<HashMap> hihokenshashoHakkoTaishoshaJohoList = YamlLoader.DBU.loadAsList(
@@ -43,48 +46,48 @@ public class HihokenshashoHakkoTaishoshaJoho {
             iIdx = 1;
         }
 
+        //宛名照会 識別コード設定
+        AtenaShokaiSimple.setData(panel.getHihokenshashoHakkoTaishoshaCommonJoho(), new ShikibetsuCode(rsShikibetsuCode));
+
         HashMap hashMap = hihokenshashoHakkoTaishoshaJohoList.get(iIdx);
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
-        //対象者情報の出力
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtAtenaMeisho().
-                setValue(ymlData.getAsRString("shimei"));
-
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtAtenaKanaMeisho().
-                setValue(ymlData.getAsRString("kanashimei"));
-
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtJusho().
-                setValue(ymlData.getAsRString("jusho"));
-
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSeinengappiYMD().
-                setValue(ymlData.getAsRDate("birthday"));
-
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtNenrei().
-                setValue(ymlData.getAsRString("nenrei"));
-
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSeibetsu().
-                setValue(ymlData.getAsRString("seibetsu"));
-
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtGyoseiku().
-                setValue(ymlData.getAsRString("gyoseiku"));
-
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtYubinNo().
-                setValue(ymlData.getAsYubinNo("yubinNo"));
-
-//        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtNihonjinGaikokujin().
-//                setValue(ymlData.getAsRString("nihonjingaikokujin"));
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtJuminJotai().
-                setValue(ymlData.getAsRString("juminjotai"));
-
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtShikibetsuCode().
-                setValue(ymlData.getAsRString("shikibetsuCode"));
-
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtKojinHojinCode().
-                setValue(ymlData.getAsRString("kojinNo"));
-
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSetaiCode().
-                setValue(ymlData.getAsRString("setaiCode"));
-
+//        //対象者情報の出力
+//        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtAtenaMeisho().
+//                setValue(ymlData.getAsRString("shimei"));
+//
+//        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtAtenaKanaMeisho().
+//                setValue(ymlData.getAsRString("kanashimei"));
+//
+//        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtJusho().
+//                setValue(ymlData.getAsRString("jusho"));
+//
+//        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSeinengappiYMD().
+//                setValue(ymlData.getAsRDate("birthday"));
+//
+//        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtNenrei().
+//                setValue(ymlData.getAsRString("nenrei"));
+//
+//        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSeibetsu().
+//                setValue(ymlData.getAsRString("seibetsu"));
+//
+//        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtGyoseiku().
+//                setValue(ymlData.getAsRString("gyoseiku"));
+//
+//        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtYubinNo().
+//                setValue(ymlData.getAsYubinNo("yubinNo"));
+//
+//        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtJuminJotai().
+//                setValue(ymlData.getAsRString("juminjotai"));
+//
+//        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtShikibetsuCode().
+//                setValue(ymlData.getAsRString("shikibetsuCode"));
+//
+//        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtKojinHojinCode().
+//                setValue(ymlData.getAsRString("kojinNo"));
+//
+//        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSetaiCode().
+//                setValue(ymlData.getAsRString("setaiCode"));
         //介護資格基本情報
         panel.getCcdKaigoShikakuKihon().getTxtHihokenshaNo().
                 setValue(ymlData.getAsRString("hihoNo"));

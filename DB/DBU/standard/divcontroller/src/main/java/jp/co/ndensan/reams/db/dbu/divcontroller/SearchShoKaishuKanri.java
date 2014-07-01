@@ -32,8 +32,8 @@ public class SearchShoKaishuKanri {
         ResponseData<SearchShoKaishuKanriDiv> response = new ResponseData<>();
 
         searchDiv.getTxtSearchHihokenshaMeisho().setValue(RString.EMPTY);
-        HashMap yamlData = YamlLoader.DBU.loadAsList(HIHOKENSHA_DATA).get(0);
-        ControlGenerator generator = new ControlGenerator(yamlData);
+//        HashMap yamlData = YamlLoader.DBU.loadAsList(HIHOKENSHA_DATA).get(0);
+//        ControlGenerator generator = new ControlGenerator(yamlData);
 //        searchDiv.getTxtSearchHihokenshaNo().setValue(generator.getAsRString("被保番号"));
 //        searchDiv.getTxtSearchHihokenshaMeisho().setValue(generator.getAsRString("氏名"));
         searchDiv.getRadSearchKohushoShurui().setSelectedItem(new RString("hihokenshasho"));
