@@ -31,6 +31,8 @@ public class HonTsuchiKobetsuJohoDiv extends Panel {
     private TextBox txtKetteTsuchiBunshoNo2;
     @JsonProperty("btnKetteiTsuchiYousikiSettei2")
     private Button btnKetteiTsuchiYousikiSettei2;
+    @JsonProperty("txtKetteiTsuchiYousikiSettei")
+    private TextBox txtKetteiTsuchiYousikiSettei;
     @JsonProperty("lblNotsu")
     private Label lblNotsu;
     @JsonProperty("ddlNotsuShuturyokuki2")
@@ -41,6 +43,8 @@ public class HonTsuchiKobetsuJohoDiv extends Panel {
     private RadioButton radNotsuSeikatsuHogo2;
     @JsonProperty("radNotsuYamawake2")
     private RadioButton radNotsuYamawake2;
+    @JsonProperty("demoTest")
+    private Button demoTest;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -98,6 +102,16 @@ public class HonTsuchiKobetsuJohoDiv extends Panel {
         this.btnKetteiTsuchiYousikiSettei2=btnKetteiTsuchiYousikiSettei2;
     }
 
+    @JsonProperty("txtKetteiTsuchiYousikiSettei")
+    public TextBox getTxtKetteiTsuchiYousikiSettei() {
+        return txtKetteiTsuchiYousikiSettei;
+    }
+
+    @JsonProperty("txtKetteiTsuchiYousikiSettei")
+    public void setTxtKetteiTsuchiYousikiSettei(TextBox txtKetteiTsuchiYousikiSettei) {
+        this.txtKetteiTsuchiYousikiSettei=txtKetteiTsuchiYousikiSettei;
+    }
+
     @JsonProperty("lblNotsu")
     public Label getLblNotsu() {
         return lblNotsu;
@@ -146,6 +160,16 @@ public class HonTsuchiKobetsuJohoDiv extends Panel {
     @JsonProperty("radNotsuYamawake2")
     public void setRadNotsuYamawake2(RadioButton radNotsuYamawake2) {
         this.radNotsuYamawake2=radNotsuYamawake2;
+    }
+
+    @JsonProperty("demoTest")
+    public Button getDemoTest() {
+        return demoTest;
+    }
+
+    @JsonProperty("demoTest")
+    public void setDemoTest(Button demoTest) {
+        this.demoTest=demoTest;
     }
 
 }

@@ -10,13 +10,13 @@
    "toEventName": "onLoadTest"
   },
   {
-   "id": 1,
+   "id": "1",
    "layoutSubGyomuCode": "DBB",
    "layoutName": "DBB0310003",
    "eventName": "close",
    "toLayoutSubGyomuCode": "DBB",
    "toLayoutName": "DBB0310001",
-   "toEventName": ""
+   "toEventName": "changeTxt"
   }
  ],
  "subGyomuCode": "DBB",
