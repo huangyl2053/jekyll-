@@ -46,11 +46,11 @@ public class JutakuKaishuhiShikyuKetteishaListPanel {
                 ymlData.get(0).get("発行日").toString()));
 
         //　出力順序・改頁の情の初期値を設定する。
-        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder().getCcdChohyoShutsuryokujun().getTxtSortName()
+        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder().getKaigoChohyoShutsuryokujun().getTxtSortName()
                 .setValue(new RString(ymlData.get(0).get("出力順名").toString()));
-        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder().getCcdChohyoShutsuryokujun().getTxtKaiPage()
+        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder().getKaigoChohyoShutsuryokujun().getTxtKaiPage()
                 .setValue(new RString(ymlData.get(0).get("改頁").toString()));
-        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder().getCcdChohyoShutsuryokujun().getTxtSort()
+        panel.getJutakuKaishuhiShikyuKetteishaListOutputOrder().getKaigoChohyoShutsuryokujun().getTxtSort()
                 .setValue(new RString(ymlData.get(0).get("出力順").toString()));
     }
 
