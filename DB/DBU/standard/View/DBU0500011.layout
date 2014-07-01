@@ -781,7 +781,7 @@
      "postParameterPanelNames": "ShoKaishuKanriTaishoshaJoho"
     },
     {
-     "postParameterPanelNames": "SearchResultShoKaishuKanri"
+     "postParameterPanelNames": "SearchShoKaishuKanri"
     }
    ],
    "requestSettings": [
@@ -1168,11 +1168,11 @@
  "loadSequencePanelNames": [
   [
    "SearchShoKaishuKanri",
-   "SearchResultShoKaishuKanri",
    "ShoKaishuKanriTaishoshaJoho",
    "KanryoMessagePnl"
   ],
   [
+   "SearchShoKaishuKanri",
    "SearchResultShoKaishuKanri",
    "ShoKaishuJokyo"
   ],

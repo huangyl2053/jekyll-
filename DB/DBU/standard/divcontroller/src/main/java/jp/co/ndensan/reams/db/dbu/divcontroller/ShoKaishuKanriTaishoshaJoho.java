@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller;
 
 import java.util.HashMap;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.SearchResultShoKaishuKanriDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.SearchShoKaishuKanriDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.ShoKaishuKanriTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
@@ -30,11 +30,11 @@ public class ShoKaishuKanriTaishoshaJoho {
      * 処理対象者の詳細情報を表示します。
      *
      * @param taishoshaJohoDiv 対象者情報Div
-     * @param searchResultDiv　証回収状況検索結果Div
+     * @param searchDiv　証回収状況検索Div
      * @return レスポンス
      */
     public ResponseData onSelectBySelectButton_SearchResultShoKaishuJokyoList(ShoKaishuKanriTaishoshaJohoDiv taishoshaJohoDiv,
-            SearchResultShoKaishuKanriDiv searchResultDiv) {
+            SearchShoKaishuKanriDiv searchDiv) {
         ResponseData<ShoKaishuKanriTaishoshaJohoDiv> response = new ResponseData<>();
 
 //        RString hihokenshaNo = searchResultDiv.getHihokenshaNo();
@@ -45,7 +45,7 @@ public class ShoKaishuKanriTaishoshaJoho {
         AtenaShokaiSimple.setData(taishoshaJohoDiv.getShoKaishuKanriTaishoshaCommonJoho().getAtenaInfo(),
                 new ShikibetsuCode(generator.getAsRString("識別番号")));
 
-        setTaishoshaDbData(taishoshaJohoDiv.getCcdKaigoShikakuKihon(), generator);
+        setTaishoshaDbData(taishoshaJohoDiv.getCcdKaigoShikakuKihon(), generator, searchDiv);
 
 //        List<HashMap> yamlDataList = YamlLoader.DBU.loadAsList(HIHOKENSHA_DATA);
 //
@@ -74,8 +74,10 @@ public class ShoKaishuKanriTaishoshaJoho {
 //        taishoshaCommonJoho.getTxtShikibetsuCode().setValue(generator.getAsRString("識別番号"));
 //        taishoshaCommonJoho.getTxtYubinNo().setValue(new YubinNo(generator.getAsRString("郵便番号")));
 //    }
-    private void setTaishoshaDbData(KaigoShikakuKihonDiv shikakuKihonJoho, ControlGenerator generator) {
-        shikakuKihonJoho.getTxtHihokenshaNo().setValue(generator.getAsRString("被保番号"));
+    private void setTaishoshaDbData(KaigoShikakuKihonDiv shikakuKihonJoho, ControlGenerator generator,
+            SearchShoKaishuKanriDiv searchDiv) {
+
+        shikakuKihonJoho.getTxtHihokenshaNo().setValue(searchDiv.getTxtSearchHihokenshaNo().getValue());
         shikakuKihonJoho.getTxtShutokuYmd().setValue(generator.getAsRDate("資格取得日"));
         shikakuKihonJoho.getTxtShutokuJiyu().setValue(generator.getAsRString("取得事由"));
         shikakuKihonJoho.getTxtSoshitsuYmd().setValue(generator.getAsRDate("資格喪失日"));
