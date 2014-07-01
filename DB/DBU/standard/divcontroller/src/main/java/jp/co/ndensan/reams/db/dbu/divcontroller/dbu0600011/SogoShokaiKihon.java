@@ -70,9 +70,8 @@ public class SogoShokaiKihon {
         panel.getSogoShokaiKihonInfo().getTxtYubinNo().
                 setValue(ymlData.getAsYubinNo("郵便番号"));
 
-        panel.getSogoShokaiKihonInfo().getTxtNihonjinGaikokujin().
-                setValue(ymlData.getAsRString("住民種別"));
-
+//        panel.getSogoShokaiKihonInfo().getTxtNihonjinGaikokujin().
+//                setValue(ymlData.getAsRString("住民種別"));
         panel.getSogoShokaiKihonInfo().getTxtJuminJotai().
                 setValue(ymlData.getAsRString("住民状態"));
 

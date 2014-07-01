@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.ShoKaishuKanri
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,6 +41,8 @@ public class ShoKaishuKanriTaishoshaJoho {
         ResponseData<ShoKaishuKanriTaishoshaJohoDiv> response = new ResponseData<>();
 
         RString hihokenshaNo = searchResultDiv.getHihokenshaNo();
+
+        //AtenaShokaiSimple.setData(taishoshaJohoDiv.getShoKaishuKanriTaishoshaCommonJoho(), new ShikibetsuCode("012345678901234"));
         List<HashMap> yamlDataList = YamlLoader.DBU.loadAsList(HIHOKENSHA_DATA);
         for (HashMap yamlData : yamlDataList) {
             ControlGenerator generator = new ControlGenerator(yamlData);
@@ -57,7 +61,7 @@ public class ShoKaishuKanriTaishoshaJoho {
         taishoshaCommonJoho.getTxtAtenaMeisho().setValue(generator.getAsRString("氏名"));
         taishoshaCommonJoho.getTxtGyoseiku().setValue(generator.getAsRString("行政区"));
         taishoshaCommonJoho.getTxtJuminJotai().setValue(generator.getAsRString("住民状態"));
-        taishoshaCommonJoho.getTxtNihonjinGaikokujin().setValue(generator.getAsRString("住民種別"));
+        //taishoshaCommonJoho.getTxtNihonjinGaikokujin().setValue(generator.getAsRString("住民種別"));
         taishoshaCommonJoho.getTxtJusho().setValue(generator.getAsRString("住所"));
         taishoshaCommonJoho.getTxtKojinHojinCode().setValue(generator.getAsRString("個人法人コード"));
         taishoshaCommonJoho.getTxtNenrei().setValue(generator.getAsRString("年齢"));

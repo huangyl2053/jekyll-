@@ -1,15 +1,16 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuJokyoShosaiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShoKaishuJokyo のクラスファイル
- *
+ * ShoKaishuJokyo のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ShoKaishuJokyoDiv extends Panel {
@@ -19,7 +20,6 @@ public class ShoKaishuJokyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("ShoKaishuJokyoShosai")
     private ShoKaishuJokyoShosaiDiv ShoKaishuJokyoShosai;
 
@@ -36,7 +36,7 @@ public class ShoKaishuJokyoDiv extends Panel {
 
     @JsonProperty("ShoKaishuJokyoShosai")
     public void setShoKaishuJokyoShosai(ShoKaishuJokyoShosaiDiv ShoKaishuJokyoShosai) {
-        this.ShoKaishuJokyoShosai = ShoKaishuJokyoShosai;
+        this.ShoKaishuJokyoShosai=ShoKaishuJokyoShosai;
     }
 
 }

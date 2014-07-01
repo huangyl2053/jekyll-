@@ -71,9 +71,8 @@ public class HihokenshashoHakkoTaishoshaJoho {
         panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtYubinNo().
                 setValue(ymlData.getAsYubinNo("yubinNo"));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtNihonjinGaikokujin().
-                setValue(ymlData.getAsRString("nihonjingaikokujin"));
-
+//        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtNihonjinGaikokujin().
+//                setValue(ymlData.getAsRString("nihonjingaikokujin"));
         panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtJuminJotai().
                 setValue(ymlData.getAsRString("juminjotai"));
 

@@ -37,7 +37,7 @@ public class ShoKaishuJokyo {
         shosai.getTxtKofuDate().setValue(row.getKofuDate().getValue());
         shosai.getTxtKofuJiyu().setValue(row.getKofuJiyu());
         shosai.getTxtKofuRiyu().setValue(row.getKofuRiyu());
-        shosai.getTxtKofuShoShurui().setValue(row.getKofushoShurui());
+        shosai.getTxtShoKofuShurui().setValue(row.getKofushoShurui());
         shosai.getTxtYukoKigen().setValue(row.getYukoKigen().getValue());
         shosai.getDdlKaishuJiyu().setSelectedItem(row.getKaishuJiyuKey());
         shosai.getTxtKaishuDate().setValue(row.getKaishuDate().getValue());
