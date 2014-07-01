@@ -28,6 +28,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "",
+       "selectedItem": "1",
        "dataSource": [
         {
          "key": "1",
@@ -72,6 +74,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "onChange_radShutsuryokuKubun",
+       "selectedItem": "0",
        "dataSource": [
         {
          "key": "0",
@@ -92,7 +96,8 @@
        "selectedItem": "0",
        "newLineItemNumber": 2,
        "spaceSize": "M",
-       "disabledItem": []
+       "disabledItem": [],
+       "icon": []
       },
       {
        "fieldName": "txtNinteiKekkaKakuninKikan",
@@ -167,7 +172,6 @@
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0,
        "heightTextBoxMatches": false
       }
      ],
@@ -213,7 +217,7 @@
      "height": "Auto"
     },
     {
-     "fieldName": "ShinsaKekkaJohoSakuseiTishosha",
+     "fieldName": "ShinsaKekkaJohoSakuseiTaishosha",
      "items": [
       {
        "fieldName": "dgTaishoshaIchiran",
@@ -237,6 +241,7 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "M",
+       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -451,7 +456,6 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "dataSource": [],
        "sortOrder": "dataOutputDate",
        "isAscending": true,
        "filterList": [],
@@ -472,7 +476,7 @@
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "XS",
-     "selectControlID": "ShinsaKekkaJohoSakuseiTishosha",
+     "selectControlID": "ShinsaKekkaJohoSakuseiTaishosha",
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
@@ -481,7 +485,7 @@
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "ShinsaKekkaJohoSakuseiTishosha"
+       "postParameterPanelNames": "ShinsaKekkaJohoSakuseiTaishosha"
       }
      ],
      "requestSettings": [],
@@ -592,7 +596,7 @@
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "ShinsaKekkaJohoSakuseiTishosha",
+     "visibleDiv": "ShinsaKekkaJohoSakuseiTaishosha",
      "panelState": "visible",
      "fixedDiv": ""
     },
@@ -618,7 +622,7 @@
    "ShinsaKekkaSyutsuryokuJokenNyuryoku"
   ],
   [
-   "ShinsaKekkaJohoSakuseiTishosha"
+   "ShinsaKekkaJohoSakuseiTaishosha"
   ]
  ],
  "panelMargin": 1,
