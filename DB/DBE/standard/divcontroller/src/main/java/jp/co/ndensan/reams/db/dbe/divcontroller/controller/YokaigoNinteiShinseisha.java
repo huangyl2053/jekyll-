@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.
  */
 class YokaigoNinteiShinseisha {
 
-    private static dgSearchResult_Row shinseishaInfo;
+    private dgSearchResult_Row shinseishaInfo;
 
     private YokaigoNinteiShinseisha() {
     }
@@ -28,11 +28,11 @@ class YokaigoNinteiShinseisha {
     }
 
     void save(dgSearchResult_Row shinseishaInfo) {
-        YokaigoNinteiShinseisha.shinseishaInfo = shinseishaInfo;
+        this.shinseishaInfo = shinseishaInfo;
     }
 
     dgSearchResult_Row get() {
-        return YokaigoNinteiShinseisha.shinseishaInfo;
+        return this.shinseishaInfo;
     }
 
 }

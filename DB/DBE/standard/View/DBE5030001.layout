@@ -26,7 +26,6 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "M",
-     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -208,6 +207,7 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
+     "dataSource": [],
      "sortOrder": "審査会状況",
      "isAscending": true,
      "filterList": [],

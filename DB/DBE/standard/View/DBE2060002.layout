@@ -6866,7 +6866,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onLoad"
+     "requestUrl": ""
     },
     {
      "eventName": "onStart_NinteichosaResultEntryMain",
