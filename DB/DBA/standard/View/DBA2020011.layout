@@ -63,7 +63,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": ""
+     "requestUrl": "dba/db/dba/ShisetsuNyutaishoKanriTaishoshaSearch/onLoad"
     }
    ],
    "hiddenInput": [],
@@ -130,9 +130,9 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnSofusaki_displayNone": false,
+     "btnSofusaki_displayNone": true,
      "btnDainoSofusakiKakunin_displayNone": false,
-     "btnKoza_displayNone": false,
+     "btnKoza_displayNone": true,
      "btnRenrakusaki_displayNone": false,
      "btnShosai_displayNone": false,
      "btnAtenaRireki_displayNone": false,
@@ -209,7 +209,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "対象者情報",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -236,7 +236,7 @@
    "session": {},
    "marginTop": "０",
    "marginBottom": "０",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -299,7 +299,7 @@
    "onLoad": "",
    "title": "異動管理",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "ShisetsuNyutaishoIdo"
@@ -471,6 +471,11 @@
     },
     {
      "visibleDiv": "KaigoJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShisetsuNyutaishoKanriTaishoshaSearch",
      "panelState": "visible",
      "fixedDiv": "No"
     }

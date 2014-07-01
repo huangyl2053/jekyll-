@@ -58,15 +58,19 @@ module DBZ {
      "jpControlName": "",
      "readOnly": false,
      "onChange": "",
-     "selectedItem": "20",
+     "selectedItem": "15",
      "dataSource": [
       {
+       "key": "15",
+       "value": "15 新潟県"
+      },
+      {
        "key": "20",
-       "value": "20 長野"
+       "value": "20 長野県"
       },
       {
        "key": "47",
-       "value": "47 沖縄"
+       "value": "47 沖縄県"
       }
      ],
      "required": false,
@@ -84,7 +88,7 @@ module DBZ {
      "fieldName": "btnSearchGaitoHokensha",
      "items": [],
      "controlType": "Button",
-     "width": "200",
+     "width": "140",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -101,7 +105,7 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "onClick": "onClick_btnSearchGaitoHokensha",
-     "text": "該当する保険者を表示する",
+     "text": "保険者を表示する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -204,6 +208,11 @@ module DBZ {
        "onSelectBySelectButton": "onSelectBySelectButton_dgSearchResultHokensha",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -235,7 +244,7 @@ module DBZ {
      "marginTop": "XS",
      "marginBottom": "XS",
      "isOpen": true,
-     "canOpenAndClose": true,
+     "canOpenAndClose": false,
      "postParameterPanelNames": [
       {
        "postParameterPanelNames": "SearchResultHokensha"
@@ -258,7 +267,7 @@ module DBZ {
      "fieldName": "btnHokenshaReturn",
      "items": [],
      "controlType": "Button",
-     "width": "200",
+     "width": "140",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -275,7 +284,7 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "onClick": "onClick_btnHokenshaReturn",
-     "text": "保険者入力ガイドを閉じる",
+     "text": "閉じる",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -306,7 +315,7 @@ module DBZ {
    "marginTop": "Default",
    "marginBottom": "Default",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "HokenshaInputGuide"

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.TajutokuTaishosaJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.TajutokuTaishoshaSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
@@ -37,8 +38,9 @@ public class TajutokuTaishosaJoho {
     public ResponseData onClick_btnToDecide(TajutokuTaishosaJohoDiv taishoshaJohoDiv, TajutokuTaishoshaSearchDiv searchDiv) {
         ResponseData<TajutokuTaishosaJohoDiv> response = new ResponseData<>();
 
-        RString shikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);
-        RString hihokenshaNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
+        DemoKojin demoKojin = new DemoKojin();
+        RString shikibetsuCode = demoKojin.getShikibetsuCode();
+        RString hihokenshaNo = demoKojin.getHihokenshaNo();
         AtenaShokaiSimple.setData(taishoshaJohoDiv.getAtenaJoho(), new ShikibetsuCode(shikibetsuCode));
         setTaishoshaData(taishoshaJohoDiv, hihokenshaNo);
 

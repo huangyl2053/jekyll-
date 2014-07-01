@@ -148,6 +148,11 @@ module DBZ {
      "onSelectBySelectButton": "onSelectBySelectButton_dgTekiyoJogaiShisetsu",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -160,7 +165,7 @@ module DBZ {
      "fieldName": "btnReturn",
      "items": [],
      "controlType": "Button",
-     "width": "250",
+     "width": "100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -177,12 +182,12 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "onClick": "onClick_btnReturn",
-     "icon": 0,
-     "text": "適用除外施設入力ガイドを閉じる",
+     "text": "閉じる",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],
@@ -208,7 +213,7 @@ module DBZ {
    "marginTop": "Default",
    "marginBottom": "Default",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "TekiyoJogaiShisetsuInputGuide"
