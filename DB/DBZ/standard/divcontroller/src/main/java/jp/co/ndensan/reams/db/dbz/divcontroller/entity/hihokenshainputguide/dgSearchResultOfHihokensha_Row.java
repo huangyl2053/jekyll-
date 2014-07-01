@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshainputguide;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 13 20:36:55 JST 2014 
+ * Tue Jul 01 21:44:04 JST 2014 
  */
 
 

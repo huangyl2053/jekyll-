@@ -70,7 +70,9 @@ module DBZ {
      "onClick_BtnToSearch": "onClickBtnToSearch_HihokenshaFinder",
      "displayNone_txtTsuchishoNo": true,
      "displayNone_ddlFukaNendo": true,
-     "displayNone_SearchCriteriaDetail": false
+     "displayNone_SearchCriteriaDetail": false,
+     "canOpenAndClose_HihokenshaFinder": false,
+     "displayNone_saikinShorisha": true
     },
     {
      "fieldName": "lblSearchResultOfHihokensha",
@@ -119,7 +121,7 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "S",
+     "height": "165",
      "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
@@ -152,7 +154,7 @@ module DBZ {
          "cellType": 8,
          "text": "",
          "onClick": "onClick_btnToDecide",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -366,6 +368,11 @@ module DBZ {
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -378,7 +385,7 @@ module DBZ {
      "fieldName": "btnReturn",
      "items": [],
      "controlType": "Button",
-     "width": "210",
+     "width": "100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -394,7 +401,7 @@ module DBZ {
      "selectControlID": "btnReturn",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "被保険者入力ガイドを閉じる",
+     "text": "閉じる",
      "onClick": "onClick_btnReturn",
      "icon": 0,
      "appearance": 0,
@@ -426,7 +433,7 @@ module DBZ {
    "marginTop": "Default",
    "marginBottom": "Default",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "HihokenshaInputGuide"
@@ -504,7 +511,7 @@ module DBZ {
  "dialogOkEventNameForDialog": "onClick_btnToDecide",
  "dialogCancelEventNameForDialog": "onClick_btnReturn",
  "canTransferEvent": true,
- "heightForDialog": "590"
+ "heightForDialog": "620"
 }        
     }
 }
