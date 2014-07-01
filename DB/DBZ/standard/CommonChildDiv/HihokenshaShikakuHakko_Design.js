@@ -120,6 +120,9 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "radInjiIchi_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
                             "onChange": "",
                             "selectedItem": null,
                             "dataSource": [
@@ -139,6 +142,7 @@ var DBZ;
                             "labelLText": "印字位置:",
                             "labelLWidth": "80",
                             "labelLAlign": 2,
+                            "disabledItem": [],
                             "icon": []
                         },
                         {
@@ -159,6 +163,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtKofuDate_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": false,
                             "onChange": "",
                             "required": false,
@@ -199,6 +205,9 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "ddlKofuJiyu_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
                             "onChange": "",
                             "selectedItem": "notSelected",
                             "dataSource": [
@@ -255,6 +264,7 @@ var DBZ;
                             "labelLText": "交付事由",
                             "labelLWidth": "70",
                             "labelLAlign": 2,
+                            "disabledItem": [],
                             "onFocus": "",
                             "onBlur": "",
                             "labelRText": "",
@@ -279,6 +289,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtYukoKigen_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": false,
                             "onChange": "",
                             "required": false,
@@ -319,6 +331,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtHokensha_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "onChange": "",
                             "required": false,
@@ -342,6 +356,7 @@ var DBZ;
                             "textKind": 0,
                             "isComboBox": false,
                             "suggest": [],
+                            "decorationClass": "",
                             "permitCharactor": ""
                         },
                         {
@@ -362,6 +377,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtYokaigodo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "onChange": "",
                             "required": false,
@@ -385,6 +402,7 @@ var DBZ;
                             "textKind": 0,
                             "isComboBox": false,
                             "suggest": [],
+                            "decorationClass": "",
                             "permitCharactor": ""
                         },
                         {
@@ -405,6 +423,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtNinteiYukoKikan_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "onChange": "",
                             "labelLText": "認定有効期間",
@@ -450,6 +470,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtShinseiDate_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "onChange": "",
                             "required": false,
@@ -496,9 +518,12 @@ var DBZ;
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
                                             "selectControlID": "lblKubunShikyuGendoGaku",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "区分支給限度額",
+                                            "decorationClass": "",
                                             "align": 2
                                         },
                                         {
@@ -519,6 +544,8 @@ var DBZ;
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
                                             "selectControlID": "txtKubunShikyuGendoKijunGaku_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
                                             "readOnly": true,
                                             "onChange": "",
                                             "required": false,
@@ -542,6 +569,7 @@ var DBZ;
                                             "textKind": 2,
                                             "isComboBox": false,
                                             "suggest": [],
+                                            "decorationClass": "",
                                             "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
@@ -567,6 +595,8 @@ var DBZ;
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
                                             "selectControlID": "txtKyuhuYukoKikan_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
                                             "readOnly": true,
                                             "onChange": "",
                                             "labelLText": "有効期間",
@@ -615,6 +645,10 @@ var DBZ;
                                                     "marginLeft": "0",
                                                     "marginRight": "XS",
                                                     "selectControlID": "dgShuruiShikyuGendoKijunGaku",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
+                                                    "readOnly": false,
+                                                    "height": "125",
                                                     "dataSource": [],
                                                     "gridSetting": {
                                                         "rowHeight": 25,
@@ -663,13 +697,17 @@ var DBZ;
                                                             }
                                                         ]
                                                     },
-                                                    "height": "125",
                                                     "onSort": "",
                                                     "onSelect": "",
                                                     "onSelectByDblClick": "",
                                                     "onSelectBySelectButton": "",
                                                     "onSelectByModifyButton": "",
                                                     "onSelectByDeleteButton": "",
+                                                    "onAfterRequest": "",
+                                                    "onAfterRequestByDblClick": "",
+                                                    "onAfterRequestBySelectButton": "",
+                                                    "onAfterRequestByModifyButton": "",
+                                                    "onAfterRequestByDeleteButton": "",
                                                     "onOnlyRow": "",
                                                     "onNoRow": "",
                                                     "onMultiRows": "",
@@ -694,6 +732,8 @@ var DBZ;
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
                                             "selectControlID": "ShuruiShikyuGendoKijungaku",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
                                             "onLoad": "",
                                             "title": "うち種類支給限度基準額",
                                             "marginTop": "Default",
@@ -710,15 +750,13 @@ var DBZ;
                                             "onOpen": "",
                                             "onClose": "",
                                             "session": {},
-                                            "eraseBorderTop": false,
-                                            "eraseBorderBottom": false,
-                                            "eraseBorderRight": false,
-                                            "eraseBorderLeft": false,
+                                            "eraseBorder": false,
                                             "backgroundColor": 0,
                                             "widthAuto": true,
                                             "panelDisplay": 1,
                                             "isGroupBox": false,
-                                            "readOnly": false
+                                            "readOnly": false,
+                                            "height": "Auto"
                                         }
                                     ],
                                     "controlType": "TabPanel",
@@ -736,8 +774,11 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "tplGendoGaku",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "title": "限度額",
-                                    "onActive": ""
+                                    "onActive": "",
+                                    "onFirstActive": ""
                                 },
                                 {
                                     "fieldName": "tplShinsakaiIken",
@@ -760,9 +801,12 @@ var DBZ;
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
                                             "selectControlID": "lblShinsakaiIken",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "認定審査会意見及びサービス種類の指定",
+                                            "decorationClass": "",
                                             "align": 2
                                         },
                                         {
@@ -783,7 +827,10 @@ var DBZ;
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
                                             "selectControlID": "txtShinsakaiIken_text_area",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
                                             "readOnly": true,
+                                            "height": "100",
                                             "onChange": "",
                                             "required": false,
                                             "labelLText": "",
@@ -802,7 +849,6 @@ var DBZ;
                                             "maxLength": 100000000,
                                             "minLength": 0,
                                             "textKind": 0,
-                                            "height": "100",
                                             "limitLength": "198",
                                             "countDisp": true
                                         }
@@ -822,8 +868,11 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "tplShinsakaiIken",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "title": "審査会意見",
-                                    "onActive": ""
+                                    "onActive": "",
+                                    "onFirstActive": ""
                                 },
                                 {
                                     "fieldName": "tplKyufuSeigen",
@@ -846,9 +895,12 @@ var DBZ;
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
                                             "selectControlID": "lblKyufuSeigen",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "給付制限",
+                                            "decorationClass": "",
                                             "align": 2
                                         },
                                         {
@@ -875,9 +927,12 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "lblKyufuSeigenNaiyo",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "required": false,
                                                             "isPrivateInfo": false,
                                                             "text": "制限内容",
+                                                            "decorationClass": "",
                                                             "align": 2
                                                         }
                                                     ],
@@ -893,9 +948,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celKyufuSeigenNaiyoTitle",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R1C1"
                                                 },
                                                 {
@@ -905,7 +962,7 @@ var DBZ;
                                                             "fieldName": "lblKyufuSeigenKikan",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "70",
+                                                            "width": "235",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -913,16 +970,19 @@ var DBZ;
                                                             "nextFocusFieldName": "",
                                                             "wrap": true,
                                                             "dependencies": [],
-                                                            "float": 1,
+                                                            "float": 0,
                                                             "toolTip": "",
                                                             "authorityMode": 0,
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "lblKyufuSeigenKikan",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "required": false,
                                                             "isPrivateInfo": false,
                                                             "text": "制限期間",
-                                                            "align": 2
+                                                            "decorationClass": "",
+                                                            "align": 1
                                                         }
                                                     ],
                                                     "controlType": "TableCell",
@@ -937,9 +997,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celKyufuSeigenKikanTitle",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R1C2"
                                                 },
                                                 {
@@ -963,6 +1025,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtKyufuSeigenNaiyo1_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -986,6 +1050,7 @@ var DBZ;
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
+                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -1001,9 +1066,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celKyufuSeigenNaiyo1",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R2C1"
                                                 },
                                                 {
@@ -1021,12 +1088,14 @@ var DBZ;
                                                             "nextFocusFieldName": "",
                                                             "wrap": true,
                                                             "dependencies": [],
-                                                            "float": 1,
+                                                            "float": 0,
                                                             "toolTip": "",
                                                             "authorityMode": 0,
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtKyufuSeigenKikan1_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "labelLText": "",
@@ -1067,9 +1136,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celKyufuSeigenKikan1",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R2C2"
                                                 },
                                                 {
@@ -1093,6 +1164,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtKyufuSeigenNaiyo2_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -1116,6 +1189,7 @@ var DBZ;
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
+                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -1131,9 +1205,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celKyufuSeigenNaiyo2",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R3C1"
                                                 },
                                                 {
@@ -1151,12 +1227,14 @@ var DBZ;
                                                             "nextFocusFieldName": "",
                                                             "wrap": true,
                                                             "dependencies": [],
-                                                            "float": 1,
+                                                            "float": 0,
                                                             "toolTip": "",
                                                             "authorityMode": 0,
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtKyufuSeigenKikan2_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "labelLText": "",
@@ -1197,9 +1275,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celKyufuSeigenKikan2",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R3C2"
                                                 },
                                                 {
@@ -1223,6 +1303,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtKyufuSeigenNaiyo3_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -1246,6 +1328,7 @@ var DBZ;
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
+                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -1261,9 +1344,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celKyufuSeigenNaiyo3",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R4C1"
                                                 },
                                                 {
@@ -1281,12 +1366,14 @@ var DBZ;
                                                             "nextFocusFieldName": "",
                                                             "wrap": true,
                                                             "dependencies": [],
-                                                            "float": 1,
+                                                            "float": 0,
                                                             "toolTip": "",
                                                             "authorityMode": 0,
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtKyufuSeigenKikan3_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "labelLText": "",
@@ -1327,9 +1414,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celKyufuSeigenKikan3",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R4C2"
                                                 }
                                             ],
@@ -1348,6 +1437,8 @@ var DBZ;
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
                                             "selectControlID": "tblKyuhuSeigen",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
                                             "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td></tr>\n    <tr><td id='R4C1'></td><td id='R4C2'></td></tr>\n  </tbody>\n</table>\n"
                                         }
                                     ],
@@ -1366,8 +1457,11 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "tplKyufuSeigen",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "title": "給付制限",
-                                    "onActive": ""
+                                    "onActive": "",
+                                    "onFirstActive": ""
                                 },
                                 {
                                     "fieldName": "tplShienJigyosha",
@@ -1390,9 +1484,12 @@ var DBZ;
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
                                             "selectControlID": "lblShienJigyosha",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "居住介護支援事業者及び事業者の名称",
+                                            "decorationClass": "",
                                             "align": 2
                                         },
                                         {
@@ -1419,9 +1516,12 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "lblJigyosha",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "required": false,
                                                             "isPrivateInfo": false,
                                                             "text": "事業者",
+                                                            "decorationClass": "",
                                                             "align": 2
                                                         }
                                                     ],
@@ -1437,9 +1537,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celJigyoshaTitle",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R1C1"
                                                 },
                                                 {
@@ -1449,7 +1551,7 @@ var DBZ;
                                                             "fieldName": "lblTodokedeDate",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "55",
+                                                            "width": "96",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1463,10 +1565,13 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "lblTodokedeDate",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "required": false,
                                                             "isPrivateInfo": false,
                                                             "text": "届出日",
-                                                            "align": 2
+                                                            "decorationClass": "",
+                                                            "align": 1
                                                         }
                                                     ],
                                                     "controlType": "TableCell",
@@ -1481,9 +1586,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celTodokedeDateTitle",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R1C2"
                                                 },
                                                 {
@@ -1507,6 +1614,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtJigyosha1_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -1530,6 +1639,7 @@ var DBZ;
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
+                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -1545,9 +1655,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celJigyosha1",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R2C1"
                                                 },
                                                 {
@@ -1571,6 +1683,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtTodokedeDate1_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -1606,9 +1720,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celTodokedeDate1",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R2C2"
                                                 },
                                                 {
@@ -1632,6 +1748,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtJigyosha2_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -1655,6 +1773,7 @@ var DBZ;
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
+                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -1670,9 +1789,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celJigyosha2",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R3C1"
                                                 },
                                                 {
@@ -1696,6 +1817,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtTodokedeDate2_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -1731,9 +1854,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celTodokedeDate2",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R3C2"
                                                 },
                                                 {
@@ -1757,6 +1882,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtJigyosha3_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -1780,6 +1907,7 @@ var DBZ;
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
+                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -1795,9 +1923,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celJigyosha3",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R4C1"
                                                 },
                                                 {
@@ -1821,6 +1951,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtTodokedeDate3_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -1856,9 +1988,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celTodokedeDate3",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R4C2"
                                                 }
                                             ],
@@ -1877,6 +2011,8 @@ var DBZ;
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
                                             "selectControlID": "tblJigyosha",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
                                             "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td></tr>\n    <tr><td id='R4C1'></td><td id='R4C2'></td></tr>\n  </tbody>\n</table>\n"
                                         }
                                     ],
@@ -1895,8 +2031,11 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "tplShienJigyosha",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "title": "支援事業者",
-                                    "onActive": ""
+                                    "onActive": "",
+                                    "onFirstActive": ""
                                 },
                                 {
                                     "fieldName": "tplShisetsuNyutaisho",
@@ -1919,9 +2058,12 @@ var DBZ;
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
                                             "selectControlID": "lblKaigoHokensha",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "介護保険施設等",
+                                            "decorationClass": "",
                                             "align": 2
                                         },
                                         {
@@ -1934,7 +2076,7 @@ var DBZ;
                                                             "fieldName": "lblShisetsuNyushoDate",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "55",
+                                                            "width": "96",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1948,10 +2090,13 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "lblShisetsuNyushoDate",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "required": false,
                                                             "isPrivateInfo": false,
                                                             "text": "入所日",
-                                                            "align": 2
+                                                            "decorationClass": "",
+                                                            "align": 1
                                                         }
                                                     ],
                                                     "controlType": "TableCell",
@@ -1966,9 +2111,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celShisetsuNyushoDateTitle",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R1C1"
                                                 },
                                                 {
@@ -1978,7 +2125,7 @@ var DBZ;
                                                             "fieldName": "lblShisetsuTaishoDate",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "55",
+                                                            "width": "96",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1992,10 +2139,13 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "lblShisetsuTaishoDate",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "required": false,
                                                             "isPrivateInfo": false,
                                                             "text": "退所日",
-                                                            "align": 2
+                                                            "decorationClass": "",
+                                                            "align": 1
                                                         }
                                                     ],
                                                     "controlType": "TableCell",
@@ -2010,9 +2160,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celShisetsuTaishoDateTitle",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R1C2"
                                                 },
                                                 {
@@ -2036,9 +2188,12 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "lblNyushoShisetsu",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "required": false,
                                                             "isPrivateInfo": false,
                                                             "text": "入所施設",
+                                                            "decorationClass": "",
                                                             "align": 2
                                                         }
                                                     ],
@@ -2054,9 +2209,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celNyushoShisetsuTitle",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R1C3"
                                                 },
                                                 {
@@ -2080,6 +2237,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtShisetsuNyushoDate1_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -2115,9 +2274,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celShisetsuNyushoDate1",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R2C1"
                                                 },
                                                 {
@@ -2141,6 +2302,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtShisetsuTaishoDate1_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -2176,9 +2339,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celShisetsuTaishoDate1",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R2C2"
                                                 },
                                                 {
@@ -2202,6 +2367,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtNyushoShisetsu1_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -2225,6 +2392,7 @@ var DBZ;
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
+                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -2240,9 +2408,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celNyushoShisetsu1",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R2C3"
                                                 },
                                                 {
@@ -2266,6 +2436,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtShisetsuNyushoDate2_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -2301,9 +2473,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celShisetsuNyushoDate2",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R3C1"
                                                 },
                                                 {
@@ -2327,6 +2501,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtShisetsuTaishoDate2_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -2362,9 +2538,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celShisetsuTaishoDate2",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R3C2"
                                                 },
                                                 {
@@ -2388,6 +2566,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtNyushoShisetsu2_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -2411,6 +2591,7 @@ var DBZ;
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
+                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -2426,9 +2607,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celNyushoShisetsu2",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R3C3"
                                                 },
                                                 {
@@ -2452,9 +2635,12 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "lblShisetsuShurui",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "required": false,
                                                             "isPrivateInfo": false,
                                                             "text": "施設種類",
+                                                            "decorationClass": "",
                                                             "align": 2
                                                         }
                                                     ],
@@ -2470,9 +2656,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celShisetsuShuruiTitle",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R1C5"
                                                 },
                                                 {
@@ -2496,6 +2684,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtShisetsuShurui1_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -2519,6 +2709,7 @@ var DBZ;
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
+                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -2534,9 +2725,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celShisetsuShurui1",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R2C5"
                                                 },
                                                 {
@@ -2560,6 +2753,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtShisetsuShurui2_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -2583,6 +2778,7 @@ var DBZ;
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
+                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -2598,9 +2794,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celShisetsuShurui2",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R3C5"
                                                 },
                                                 {
@@ -2624,6 +2822,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtShisetsuNyushoDate3_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -2659,9 +2859,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celShisetsuNyushoDate3",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R4C1"
                                                 },
                                                 {
@@ -2685,6 +2887,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtShisetsuTaishoDate3_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -2720,9 +2924,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celShisetsuTaishoDate3",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R4C2"
                                                 },
                                                 {
@@ -2746,6 +2952,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtNyushoShisetsu3_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -2769,6 +2977,7 @@ var DBZ;
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
+                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -2784,9 +2993,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celNyushoShisetsu3",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R4C3"
                                                 },
                                                 {
@@ -2810,6 +3021,8 @@ var DBZ;
                                                             "marginLeft": "XS",
                                                             "marginRight": "XS",
                                                             "selectControlID": "txtShisetsuShurui3_core",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
                                                             "readOnly": true,
                                                             "onChange": "",
                                                             "required": false,
@@ -2833,6 +3046,7 @@ var DBZ;
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
+                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -2848,9 +3062,11 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
                                                     "selectControlID": "celShisetsuShurui3",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
                                                     "connectTd": "R4C5"
                                                 }
                                             ],
@@ -2869,6 +3085,8 @@ var DBZ;
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
                                             "selectControlID": "tblShisetsuNyutaisho",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
                                             "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C5'></td><td id='R1C3'></td><td id='R1C1'></td><td id='R1C2'></td></tr>\n    <tr><td id='R2C5'></td><td id='R2C3'></td><td id='R2C1'></td><td id='R2C2'></td></tr>\n    <tr><td id='R3C5'></td><td id='R3C3'></td><td id='R3C1'></td><td id='R3C2'></td></tr>\n    <tr><td id='R4C5'></td><td id='R4C3'></td><td id='R4C1'></td><td id='R4C2'></td></tr>\n  </tbody>\n</table>\n"
                                         }
                                     ],
@@ -2887,8 +3105,11 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "tplShisetsuNyutaisho",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "title": "施設入退所",
-                                    "onActive": ""
+                                    "onActive": "",
+                                    "onFirstActive": ""
                                 }
                             ],
                             "controlType": "TabContainer",
@@ -2906,6 +3127,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "tabHihokenshaShikakuShosai",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onChange": "",
                             "selectedItem": null,
                             "tabpanelPosition": [
@@ -2916,8 +3139,9 @@ var DBZ;
                                 "tplShisetsuNyutaisho"
                             ],
                             "isDraggable": false,
-                            "selectedItemFieldName": "tplGendoGaku",
-                            "initialTab": 0
+                            "selectedItemFieldName": "tplKyufuSeigen",
+                            "initialTab": 0,
+                            "isLazyLoading": false
                         }
                     ],
                     "controlType": "Panel",
@@ -2935,6 +3159,8 @@ var DBZ;
                     "marginLeft": "XS",
                     "marginRight": "XS",
                     "selectControlID": "HihokenshaShikakuHakko",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onLoad": "",
                     "title": "",
                     "marginTop": "Default",
@@ -2951,15 +3177,13 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": true,
-                    "eraseBorderBottom": true,
-                    "eraseBorderRight": true,
-                    "eraseBorderLeft": true,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
                     "isGroupBox": false,
-                    "readOnly": false
+                    "readOnly": false,
+                    "height": "Auto"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -2974,9 +3198,11 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
             "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "HihokenshaShikakuHakko",
@@ -3006,7 +3232,9 @@ var DBZ;
             ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return HihokenshaShikakuHakko_Design;
     })(Uz.CommonChildDiv);
