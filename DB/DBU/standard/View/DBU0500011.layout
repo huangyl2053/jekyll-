@@ -324,7 +324,7 @@
    "onLoad": "",
    "title": "証類交付情報検索",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "SearchShoKaishuKanri"
@@ -802,7 +802,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -845,7 +845,9 @@
      "heightForDialog": "M",
      "onBlur_txtKaishuDate": "onBlur_txtKaishuDate",
      "onChange_ddlKaishuJiyu": "onChange_ddlKaishuJiyu",
-     "onBlur_txtKaishuRiyu": "onBlur_txtKaishuRiyu"
+     "onBlur_txtKaishuRiyu": "",
+     "ShoKaishuJokyoShosai_panelDisplay": 2,
+     "ShoKaishuJokyoShosai_canOpenAndClose": false
     }
    ],
    "controlType": "Panel",
@@ -868,7 +870,7 @@
    "onLoad": "",
    "title": "証類回収情報入力",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "ShoKaishuJokyo"
@@ -892,10 +894,6 @@
     },
     {
      "eventName": "onChange_ddlKaishuJiyu",
-     "requestUrl": "dbu/db/dbu/ShoKaishuJokyo/setEnableControl"
-    },
-    {
-     "eventName": "onBlur_txtKaishuRiyu",
      "requestUrl": "dbu/db/dbu/ShoKaishuJokyo/setEnableControl"
     }
    ],

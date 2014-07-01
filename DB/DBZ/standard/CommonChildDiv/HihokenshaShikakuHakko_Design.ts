@@ -3137,7 +3137,7 @@ module DBZ {
       "tplShisetsuNyutaisho"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tplKyufuSeigen",
+     "selectedItemFieldName": "",
      "initialTab": 0,
      "isLazyLoading": false
     }
@@ -3175,7 +3175,7 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,

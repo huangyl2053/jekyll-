@@ -64,11 +64,7 @@ public class ShoKaishuJokyo {
             if (shoKaishuJoho.getShoKaishuJokyoShosai().getDdlKaishuJiyu().getSelectedValue().isEmpty()) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
             } else {
-                if (shoKaishuJoho.getShoKaishuJokyoShosai().getTxtKaishuRiyu().getText().isEmpty()) {
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
-                } else {
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), false);
-                }
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), false);
             }
         }
 

@@ -152,7 +152,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -219,7 +219,7 @@
    "onLoad": "",
    "title": "被保険者証発行情報",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "HihokenshashoHakkoJoho"
@@ -316,7 +316,13 @@
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": "終了"
+    }
+   ]
   }
  ],
  "currentState": "All",
@@ -411,11 +417,44 @@
      }
     },
     {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnComplete",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "該当者一覧に戻る",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "被保険者証発行を"
+     }
+    },
+    {
      "buttonKind": "CommonButtonSearchResult",
      "buttonProperty": {
       "fieldName": "btnReturn",
       "items": [],
-      "controlType": "CommonButtonFree",
+      "controlType": "CommonButtonSearchResult",
       "width": 1,
       "visible": true,
       "displayNone": false,
@@ -432,7 +471,7 @@
       "selectControlID": "btnReturn",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "該当者一覧に戻る",
+      "text": "検索結果一覧へ",
       "imageWidth": "",
       "imageHeight": "",
       "onClick": "",
@@ -440,9 +479,7 @@
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "",
-      "prefixText": "",
-      "suffixText": ""
+      "additionalText": ""
      }
     }
    ],

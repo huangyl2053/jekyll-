@@ -29,7 +29,7 @@ public class ShoKaishuKanriKanryoMessage {
         ResponseData<KanryoMessagePnlDiv> response = new ResponseData<>();
 
         panel.getCcdKaigoKanryoMessage().getKanryoMessage().getLblMessageMain().setText(
-                new RString("登録しました。"));
+                new RString("回収記録を更新しました。"));
 
         panel.getCcdKaigoKanryoMessage().getKanryoMessage().getLblTaishoMessage1().setText(
                 panel2.getCcdKaigoShikakuKihon().getTxtHihokenshaNo().getValue());

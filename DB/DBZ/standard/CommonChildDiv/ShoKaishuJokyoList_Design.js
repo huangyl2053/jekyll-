@@ -358,7 +358,7 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorder": false,
+                    "eraseBorder": true,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
