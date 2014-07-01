@@ -62,11 +62,47 @@ var DBZ;
         });
 
 
+        Object.defineProperty(ShoKaishuKirokuKanri_Design.prototype, "ShoKaishuJokyoShosai_panalDisplay", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["ShoKaishuJokyoShosai_panelDisplay"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["ShoKaishuJokyoShosai_panelDisplay"] = value;
+                } else {
+                    this.layout.items[0].items[1]["ShoKaishuJokyoShosai_panelDisplay"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShoKaishuKirokuKanri_Design.prototype, "ShoKaishuJokyoShosai_canOpenAndClose", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["ShoKaishuJokyoShosai_canOpenAndClose"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["ShoKaishuJokyoShosai_canOpenAndClose"] = value;
+                } else {
+                    this.layout.items[0].items[1]["ShoKaishuJokyoShosai_canOpenAndClose"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         ShoKaishuKirokuKanri_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("onBlur_txtKaishuDate");
             Uz.JSControlUtil.registProperty("onChange_ddlKaishuJiyu");
             Uz.JSControlUtil.registProperty("onBlur_txtKaishuRiyu");
+            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_panalDisplay");
+            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_canOpenAndClose");
         };
 
         ShoKaishuKirokuKanri_Design.prototype.getEditablePropertyInfo = function () {
@@ -74,6 +110,8 @@ var DBZ;
             editablePropertyInfo["onBlur_txtKaishuDate"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onBlur_txtKaishuDate"];
             editablePropertyInfo["onChange_ddlKaishuJiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onChange_ddlKaishuJiyu"];
             editablePropertyInfo["onBlur_txtKaishuRiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onBlur_txtKaishuRiyu"];
+            editablePropertyInfo["ShoKaishuJokyoShosai_panalDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["ShoKaishuJokyoShosai_panelDisplay"];
+            editablePropertyInfo["ShoKaishuJokyoShosai_canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["ShoKaishuJokyoShosai_canOpenAndClose"];
 
             return editablePropertyInfo;
         };
@@ -113,7 +151,208 @@ var DBZ;
                             "dialogOkEventNameForDialog": "",
                             "dialogCancelEventNameForDialog": "",
                             "canTransferEvent": true,
-                            "heightForDialog": "M"
+                            "heightForDialog": "M",
+                            "onSelectBySelectButton": "onSelectBySelectButton_dgShoKaishuJokyo",
+                            "onSelectByDblClick": "onSelectByDblClick_dgShoKaishuJokyo",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": true,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": true,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 0
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "選択",
+                                        "dataName": "btnSelect",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 40,
+                                        "visible": true,
+                                        "cellType": 8,
+                                        "cellDetails": {
+                                            "cellType": 8,
+                                            "text": "",
+                                            "onClick": "onClick_btnSelect",
+                                            "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
+                                            "imageWidth": "20",
+                                            "imageHeight": "20"
+                                        },
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "交付証種類",
+                                        "dataName": "kofushoShurui",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 180,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "交付日",
+                                        "dataName": "kofuDate",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "交付事由Key",
+                                        "dataName": "kofuJiyuKey",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "交付事由",
+                                        "dataName": "kofuJiyu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 200,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "交付理由",
+                                        "dataName": "kofuRiyu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "回収日",
+                                        "dataName": "kaishuDate",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "回収事由Key",
+                                        "dataName": "kaishuJiyuKey",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "回収事由",
+                                        "dataName": "kaishuJiyu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 200,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "回収理由",
+                                        "dataName": "kaishuRiyu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "有効期限",
+                                        "dataName": "yukoKigen",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": ""
+                                        },
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    }
+                                ]
+                            }
                         },
                         {
                             "fieldName": "ShoKaishuJokyoShosai",
@@ -148,7 +387,9 @@ var DBZ;
                             "heightForDialog": "M",
                             "onBlur_txtKaishuDate": "",
                             "onChange_ddlKaishuJiyu": "",
-                            "onBlur_txtKaishuRiyu": ""
+                            "onBlur_txtKaishuRiyu": "",
+                            "ShoKaishuJokyoShosai_panelDisplay": 0,
+                            "ShoKaishuJokyoShosai_canOpenAndClose": true
                         },
                         {
                             "fieldName": "btnUpdateShoKaishuJokyo",
@@ -281,6 +522,16 @@ var DBZ;
                     "publicChildFieldName": "ShoKaishuJokyoShosai",
                     "publicChildProperty": "onBlur_txtKaishuRiyu",
                     "newPropertyName": "onBlur_txtKaishuRiyu"
+                },
+                {
+                    "publicChildFieldName": "ShoKaishuJokyoShosai",
+                    "publicChildProperty": "ShoKaishuJokyoShosai_panelDisplay",
+                    "newPropertyName": "ShoKaishuJokyoShosai_panalDisplay"
+                },
+                {
+                    "publicChildFieldName": "ShoKaishuJokyoShosai",
+                    "publicChildProperty": "ShoKaishuJokyoShosai_canOpenAndClose",
+                    "newPropertyName": "ShoKaishuJokyoShosai_canOpenAndClose"
                 }
             ],
             "dataPassingForDialog": [],

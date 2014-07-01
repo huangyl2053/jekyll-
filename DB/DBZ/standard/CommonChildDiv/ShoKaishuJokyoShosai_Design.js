@@ -62,11 +62,47 @@ var DBZ;
         });
 
 
+        Object.defineProperty(ShoKaishuJokyoShosai_Design.prototype, "ShoKaishuJokyoShosai_panelDisplay", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
+                } else {
+                    this.layout.items[0]["panelDisplay"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShoKaishuJokyoShosai_Design.prototype, "ShoKaishuJokyoShosai_canOpenAndClose", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"] = value;
+                } else {
+                    this.layout.items[0]["canOpenAndClose"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         ShoKaishuJokyoShosai_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("onBlur_txtKaishuDate");
             Uz.JSControlUtil.registProperty("onChange_ddlKaishuJiyu");
             Uz.JSControlUtil.registProperty("onBlur_txtKaishuRiyu");
+            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_panelDisplay");
+            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_canOpenAndClose");
         };
 
         ShoKaishuJokyoShosai_Design.prototype.getEditablePropertyInfo = function () {
@@ -74,6 +110,8 @@ var DBZ;
             editablePropertyInfo["onBlur_txtKaishuDate"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["onBlur"];
             editablePropertyInfo["onChange_ddlKaishuJiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["onChange"];
             editablePropertyInfo["onBlur_txtKaishuRiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["onBlur"];
+            editablePropertyInfo["ShoKaishuJokyoShosai_panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
+            editablePropertyInfo["ShoKaishuJokyoShosai_canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
 
             return editablePropertyInfo;
         };
@@ -104,16 +142,7 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": true,
-                            "onChange": "",
                             "required": false,
-                            "labelLText": "交付証種類",
-                            "labelRText": "",
-                            "labelLWidth": "85",
-                            "labelRWidth": "S",
-                            "labelLAlign": 2,
-                            "labelRAlign": 0,
-                            "onFocus": "",
-                            "onBlur": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
@@ -122,12 +151,20 @@ var DBZ;
                             "isPrivateInfo": false,
                             "isPassword": false,
                             "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
                             "onKeyPress": "",
                             "text": "",
                             "suggest": [],
                             "value": "",
-                            "decorationClass": "",
-                            "permitCharactor": ""
+                            "labelLText": "交付証種類",
+                            "labelRText": "",
+                            "labelLWidth": "85",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": ""
                         },
                         {
                             "fieldName": "txtKofuDate",
@@ -150,24 +187,23 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": true,
-                            "onChange": "",
                             "required": false,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "value": "",
                             "labelLText": "交付日",
                             "labelRText": "",
                             "labelLWidth": "85",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "placeHolder": "",
-                            "textKind": 0,
-                            "isPrivateInfo": false,
-                            "isPassword": false,
-                            "onKeyPress": "",
-                            "text": "",
-                            "value": "",
-                            "permitCharactor": "./_-",
                             "ymdKubun": 2,
                             "displayFormat": 0
                         },
@@ -192,24 +228,23 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": true,
-                            "onChange": "",
                             "required": false,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "value": "",
                             "labelLText": "有効期限",
                             "labelRText": "",
                             "labelLWidth": "70",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "placeHolder": "",
-                            "textKind": 0,
-                            "isPrivateInfo": false,
-                            "isPassword": false,
-                            "onKeyPress": "",
-                            "text": "",
-                            "value": "",
-                            "permitCharactor": "./_-",
                             "ymdKubun": 2,
                             "displayFormat": 0
                         },
@@ -234,16 +269,7 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": true,
-                            "onChange": "",
                             "required": false,
-                            "labelLText": "交付事由",
-                            "labelRText": "",
-                            "labelLWidth": "85",
-                            "labelRWidth": "S",
-                            "labelLAlign": 2,
-                            "labelRAlign": 0,
-                            "onFocus": "",
-                            "onBlur": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
@@ -252,12 +278,20 @@ var DBZ;
                             "isPrivateInfo": false,
                             "isPassword": false,
                             "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
                             "onKeyPress": "",
                             "text": "",
                             "suggest": [],
                             "value": "",
-                            "decorationClass": "",
-                            "permitCharactor": ""
+                            "labelLText": "交付事由",
+                            "labelRText": "",
+                            "labelLWidth": "85",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": ""
                         },
                         {
                             "fieldName": "txtKofuRiyu",
@@ -281,24 +315,24 @@ var DBZ;
                             "jpControlName": "",
                             "readOnly": true,
                             "height": "40",
-                            "onChange": "",
                             "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "value": "",
                             "labelLText": "交付理由",
                             "labelRText": "",
                             "labelLWidth": "85",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "maxLength": 100000000,
-                            "minLength": 0,
-                            "placeHolder": "",
-                            "textKind": 0,
-                            "isPrivateInfo": false,
-                            "onKeyPress": "",
-                            "text": "",
-                            "value": "",
                             "limitLength": "200",
                             "countDisp": false
                         },
@@ -323,24 +357,23 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
-                            "onChange": "",
                             "required": false,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "value": "",
                             "labelLText": "回収日",
                             "labelRText": "",
                             "labelLWidth": "85",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "placeHolder": "",
-                            "textKind": 0,
-                            "isPrivateInfo": false,
-                            "isPassword": false,
-                            "onKeyPress": "",
-                            "text": "",
-                            "value": "",
-                            "permitCharactor": "./_-",
                             "ymdKubun": 2,
                             "displayFormat": 0
                         },
@@ -365,7 +398,16 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
+                            "required": false,
+                            "onFocus": "",
+                            "onBlur": "",
                             "onChange": "",
+                            "labelLText": "回収事由",
+                            "labelRText": "",
+                            "labelLWidth": "85",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
                             "selectedItem": "",
                             "dataSource": [
                                 {
@@ -456,17 +498,7 @@ var DBZ;
                                     "key": "20",
                                     "value": "給付額減額終了"
                                 }
-                            ],
-                            "required": false,
-                            "labelLText": "回収事由",
-                            "labelRText": "",
-                            "labelLWidth": "85",
-                            "labelRWidth": "S",
-                            "labelLAlign": 2,
-                            "labelRAlign": 0,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "disabledItem": []
+                            ]
                         },
                         {
                             "fieldName": "txtKaishuRiyu",
@@ -490,24 +522,24 @@ var DBZ;
                             "jpControlName": "",
                             "readOnly": false,
                             "height": "40",
-                            "onChange": "",
                             "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "value": "",
                             "labelLText": "回収理由",
                             "labelRText": "",
                             "labelLWidth": "85",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "maxLength": 100000000,
-                            "minLength": 0,
-                            "placeHolder": "",
-                            "textKind": 0,
-                            "isPrivateInfo": false,
-                            "onKeyPress": "",
-                            "text": "",
-                            "value": "",
                             "limitLength": "200",
                             "countDisp": true
                         }
@@ -596,6 +628,16 @@ var DBZ;
                     "publicChildFieldName": "txtKaishuRiyu",
                     "publicChildProperty": "onBlur",
                     "newPropertyName": "onBlur_txtKaishuRiyu"
+                },
+                {
+                    "publicChildFieldName": "ShoKaishuJokyoShosai",
+                    "publicChildProperty": "panelDisplay",
+                    "newPropertyName": "ShoKaishuJokyoShosai_panelDisplay"
+                },
+                {
+                    "publicChildFieldName": "ShoKaishuJokyoShosai",
+                    "publicChildProperty": "canOpenAndClose",
+                    "newPropertyName": "ShoKaishuJokyoShosai_canOpenAndClose"
                 }
             ],
             "dataPassingForDialog": [],
