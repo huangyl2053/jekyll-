@@ -164,23 +164,6 @@ var DBZ;
         });
 
 
-        Object.defineProperty(KaigoAtenaInfo_Design.prototype, "NihonjinGaikokujin_visible", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["NihonjinGaikokujin_visible"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["NihonjinGaikokujin_visible"] = value;
-                } else {
-                    this.layout.items[0].items[0]["NihonjinGaikokujin_visible"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
         Object.defineProperty(KaigoAtenaInfo_Design.prototype, "JuminJotai_visible", {
             get: function () {
                 return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["JuminJotai_visible"];
@@ -651,7 +634,6 @@ var DBZ;
             Uz.JSControlUtil.registProperty("Nenrei_visible");
             Uz.JSControlUtil.registProperty("Seibetsu_visible");
             Uz.JSControlUtil.registProperty("JuminShubetsu_Visible");
-            Uz.JSControlUtil.registProperty("NihonjinGaikokujin_visible");
             Uz.JSControlUtil.registProperty("JuminJotai_visible");
             Uz.JSControlUtil.registProperty("YubinNo_visible");
             Uz.JSControlUtil.registProperty("Jusho_visible");
@@ -692,7 +674,6 @@ var DBZ;
             editablePropertyInfo["Nenrei_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["Nenrei_visible"];
             editablePropertyInfo["Seibetsu_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["Seibetsu_visible"];
             editablePropertyInfo["JuminShubetsu_Visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["JuminShubetsu_visible"];
-            editablePropertyInfo["NihonjinGaikokujin_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["NihonjinGaikokujin_visible"];
             editablePropertyInfo["JuminJotai_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["JuminJotai_visible"];
             editablePropertyInfo["YubinNo_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["YubinNo_visible"];
             editablePropertyInfo["Jusho_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["Jusho_visible"];
@@ -914,11 +895,6 @@ var DBZ;
                     "publicChildFieldName": "atenaInfo",
                     "publicChildProperty": "JuminShubetsu_visible",
                     "newPropertyName": "JuminShubetsu_Visible"
-                },
-                {
-                    "publicChildFieldName": "atenaInfo",
-                    "publicChildProperty": "NihonjinGaikokujin_visible",
-                    "newPropertyName": "NihonjinGaikokujin_visible"
                 },
                 {
                     "publicChildFieldName": "atenaInfo",
