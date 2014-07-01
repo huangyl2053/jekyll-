@@ -2,402 +2,6 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "KyotakuKeikakuTodokedeSearch",
-   "items": [
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaFinder",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "KyotakuKeikakuTodokedeHihokenshaFinder",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "HihokenshaFinder",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "onClick_BtnToSearch": "onClickBtnToSearch",
-     "displayNone_txtTsuchishoNo": false,
-     "displayNone_ddlFukaNendo": true,
-     "displayNone_SearchCriteriaDetail": false
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "KyotakuKeikakuTodokedeHihokenshaList",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "SearchResultOfHihokensha",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "onClick_btnToResearch": "onClickBtnToResearch",
-     "gridSetting": {
-      "rowHeight": 50,
-      "isMultiSelectable": false,
-      "isShowHeader": true,
-      "isShowFooter": true,
-      "isShowFilter": false,
-      "isShowFilterButton": false,
-      "isShowRowState": false,
-      "isShowSelectButtonColumn": true,
-      "isShowModifyButtonColumn": false,
-      "isShowDeleteButtonColumn": false,
-      "limitRowCount": 0,
-      "selectedRowCount": 0,
-      "header": {
-       "combineColumns": [],
-       "frozenColumn": "",
-       "headerHeight": 0
-      },
-      "columns": [
-       {
-        "columnName": "",
-        "dataName": "btnToDecide",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 50,
-        "visible": false,
-        "cellType": 8,
-        "cellDetails": {
-         "cellType": 8,
-         "text": "確定",
-         "onClick": "",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
-        },
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "btnToDecide"
-       },
-       {
-        "columnName": "被保番号",
-        "dataName": "hihokenshaNo",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 110,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "hihokenshaNo"
-       },
-       {
-        "columnName": "識別コード",
-        "dataName": "shikibetsuCode",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 110,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "shikibetsuCode"
-       },
-       {
-        "columnName": "被保険者区分",
-        "dataName": "hihokenshaKubun",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 110,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "hihokenshaKubun"
-       },
-       {
-        "columnName": "氏名",
-        "dataName": "shimei",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 150,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "shimei"
-       },
-       {
-        "columnName": "カナ氏名",
-        "dataName": "kanaShimsei",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 150,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "kanaShimsei"
-       },
-       {
-        "columnName": "氏名",
-        "dataName": "shimeiAndKanaShimsei",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 150,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "kanaShimsei"
-       },
-       {
-        "columnName": "性別",
-        "dataName": "gender",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 50,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "gender"
-       },
-       {
-        "columnName": "生年月日",
-        "dataName": "birthDay",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 110,
-        "visible": true,
-        "cellType": 6,
-        "cellDetails": {
-         "cellType": 6,
-         "ymdKubun": 2,
-         "displayFormat": 3,
-         "onChange": "",
-         "isSetValueToToolTip": false,
-         "readOnly": true
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "birthDay"
-       },
-       {
-        "columnName": "郵便番号",
-        "dataName": "yubinNo",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 110,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "yubinNo"
-       },
-       {
-        "columnName": "住所",
-        "dataName": "jusho",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 300,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "jusho"
-       },
-       {
-        "columnName": "個人番号",
-        "dataName": "kojinNo",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 120,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "kojinNo"
-       },
-       {
-        "columnName": "住民種別",
-        "dataName": "juminShubetsu",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 100,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "juminShubetsu"
-       },
-       {
-        "columnName": "世帯コード",
-        "dataName": "setaiCode",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 110,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "setaiCode"
-       }
-      ]
-     }
-    }
-   ],
-   "controlType": "Panel",
-   "width": "G12",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "selectControlID": "KyotakuKeikakuTodokedeSearch",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "onLoad": "",
-   "title": "",
-   "isOpen": true,
-   "canOpenAndClose": false,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KyotakuKeikakuTodokedeSearch"
-    }
-   ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/KyotakuKeikakuTodokedeSearch/onLoad"
-    },
-    {
-     "eventName": "onClickBtnToSearch",
-     "requestUrl": "dbc/db/dbc/KyotakuKeikakuTodokedeSearch/onClickBtnToSearch"
-    },
-    {
-     "eventName": "onClickBtnToResearch",
-     "requestUrl": "dbc/db/dbc/KyotakuKeikakuTodokedeSearch/onClickBtnToResearch"
-    }
-   ],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorder": false,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
-  },
-  {
    "fieldName": "KyotakuKeikakuTodokedeDetail",
    "items": [
     {
@@ -435,10 +39,7 @@
        "heightForDialog": "M",
        "atenaInfo_title": "",
        "atenaInfo_canOpenAndClose": true,
-       "atenaInfo_eraseBorderTop": true,
-       "atenaInfo_eraseBorderBottom": true,
-       "atenaInfo_eraseBorderRight": true,
-       "atenaInfo_eraseBorderLeft": true,
+       "AtenaShokaiSimple_eraseBorder": true,
        "AtenaKanaMeisho_visible": true,
        "AtenaMisho_visible": true,
        "SeinengappiYMD_visible": true,
@@ -454,7 +55,6 @@
        "KojinHojinCode_visible": true,
        "SetaiCode_visible": true,
        "lblButtonMargin_displayNone": false,
-       "btnMemo_DisplayNone": false,
        "btnDainosha_displayNone": false,
        "btnSofusaki_displayNone": false,
        "btnDainoSofusakiKakunin_displayNone": false,
@@ -500,6 +100,7 @@
        "canOpenAndClose": true,
        "marginTop": 0,
        "marginBottom": 0,
+       "eraseBorder": true,
        "businessId": "DBZ",
        "controlName": "KaigoShikakuKihon",
        "dataPassingForDialog": [],
@@ -507,10 +108,6 @@
        "dialogCancelEventNameForDialog": "",
        "canTransferEvent": true,
        "heightForDialog": "M",
-       "eraseBorderTop": true,
-       "eraseBorderBottom": true,
-       "eraseBorderRight": true,
-       "eraseBorderLeft": true,
        "backGroundColor": 0,
        "btnHihoRireki_visible": true,
        "btnNinteiRireki_visible": true
@@ -555,11 +152,7 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false
+     "height": "Auto"
     },
     {
      "fieldName": "tabKyotakuServiceKeikakuSakuseiIraiTodokede",
@@ -783,6 +376,11 @@
            "onSelectBySelectButton": "onClickTodokedeSelect",
            "onSelectByModifyButton": "",
            "onSelectByDeleteButton": "",
+           "onAfterRequest": "",
+           "onAfterRequestByDblClick": "",
+           "onAfterRequestBySelectButton": "",
+           "onAfterRequestByModifyButton": "",
+           "onAfterRequestByDeleteButton": "",
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
@@ -831,11 +429,7 @@
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false
+         "height": "Auto"
         },
         {
          "fieldName": "KyotakuKeikakuTodokedeMeisai",
@@ -1352,11 +946,7 @@
            "panelDisplay": 1,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false
+           "height": "Auto"
           },
           {
            "fieldName": "KyotakuKeikakuTodokedeJigyosha",
@@ -1454,8 +1044,8 @@
             {
              "fieldName": "btnJigyosha",
              "items": [],
-             "controlType": "Button",
-             "width": "30",
+             "controlType": "ButtonDialog",
+             "width": "S",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -1471,14 +1061,19 @@
              "selectControlID": "btnJigyosha",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "照",
+             "text": "",
              "onClick": "",
              "icon": 0,
-             "appearance": 0,
-             "imageFileUrl": "",
+             "appearance": 2,
+             "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
              "imageWidth": "",
              "imageHeight": "",
-             "heightTextBoxMatches": true
+             "heightTextBoxMatches": true,
+             "displayChildDivName": "DBZ.JigyoshaInputGuide",
+             "dataPassing": [],
+             "visibleCloseButton": true,
+             "onOkClose": "",
+             "onBeforeOpenDialog": ""
             },
             {
              "fieldName": "txtJigyoshaName",
@@ -1633,8 +1228,8 @@
              "float": 0,
              "toolTip": "",
              "authorityMode": 0,
-             "marginLeft": "XS",
-             "marginRight": "XS",
+             "marginLeft": "0",
+             "marginRight": "0",
              "selectControlID": "txtKanrishaName_core",
              "helpMessageID": "",
              "jpControlName": "",
@@ -1679,7 +1274,7 @@
              "float": 0,
              "toolTip": "",
              "authorityMode": 0,
-             "marginLeft": "XS",
+             "marginLeft": "0",
              "marginRight": "XS",
              "selectControlID": "txtJigyoshaTelNo_core",
              "helpMessageID": "",
@@ -1852,8 +1447,8 @@
             {
              "fieldName": "btnItakuJigyosha",
              "items": [],
-             "controlType": "Button",
-             "width": "30",
+             "controlType": "ButtonDialog",
+             "width": "S",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -1869,14 +1464,19 @@
              "selectControlID": "btnItakuJigyosha",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "照",
+             "text": "",
              "onClick": "",
              "icon": 0,
-             "appearance": 0,
-             "imageFileUrl": "",
+             "appearance": 2,
+             "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
              "imageWidth": "",
              "imageHeight": "",
-             "heightTextBoxMatches": true
+             "heightTextBoxMatches": true,
+             "displayChildDivName": "DBZ.JigyoshaInputGuide",
+             "dataPassing": [],
+             "visibleCloseButton": true,
+             "onOkClose": "",
+             "onBeforeOpenDialog": ""
             },
             {
              "fieldName": "txtItakuJigyoshaName",
@@ -1964,11 +1564,7 @@
            "panelDisplay": 1,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false
+           "height": "Auto"
           },
           {
            "fieldName": "KyotakuKeikakuTodokedeHenkoNaiyo",
@@ -2101,11 +1697,7 @@
            "panelDisplay": 1,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false
+           "height": "Auto"
           },
           {
            "fieldName": "btnTodokedeDelete",
@@ -2222,35 +1814,6 @@
            "imageWidth": "",
            "imageHeight": "",
            "heightTextBoxMatches": false
-          },
-          {
-           "fieldName": "btnReturnToRirekiList",
-           "items": [],
-           "controlType": "Button",
-           "width": "170",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 2,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "selectControlID": "btnReturnToRirekiList",
-           "helpMessageID": "",
-           "jpControlName": "",
-           "text": "届出一覧に戻る",
-           "onClick": "",
-           "icon": 0,
-           "appearance": 0,
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": "",
-           "heightTextBoxMatches": false
           }
          ],
          "controlType": "Panel",
@@ -2297,11 +1860,7 @@
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false
+         "height": "Auto"
         }
        ],
        "controlType": "TabPanel",
@@ -2412,35 +1971,6 @@
      "selectedItemFieldName": "tplKyotakuKeikakuTodokedeDetailRireki",
      "initialTab": 0,
      "isLazyLoading": false
-    },
-    {
-     "fieldName": "btnReturn",
-     "items": [],
-     "controlType": "Button",
-     "width": "170",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnReturn",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "text": "該当者検索に戻る",
-     "onClick": "",
-     "icon": 0,
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -2461,9 +1991,9 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "居宅サービス計画作成依頼届出",
+   "title": "",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "KyotakuKeikakuTodokedeDetail"
@@ -2527,11 +2057,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "height": "Auto"
   },
   {
    "fieldName": "KyotakuKeikakuTodokedeKanryo",
@@ -2613,11 +2139,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -2644,96 +2166,6 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "該当者検索",
-   "showWizard": true,
-   "visibleDivs": [
-    {
-     "visibleDiv": "KyotakuKeikakuTodokedeSearch",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KyotakuKeikakuTodokedeHihokenshaFinder",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KyotakuKeikakuTodokedeHihokenshaList",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": "届出一覧"
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
-     "transition": "届出一覧"
-    },
-    {
-     "fieldName": "btnTodokedeNew",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeModify",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectByDblClick",
-     "transition": "届出一覧"
-    },
-    {
-     "fieldName": "btnTodokedeTeisei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeKakutei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeDelete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturnToRirekiList",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "2",
    "stateName": "届出一覧",
    "showWizard": true,
    "visibleDivs": [
@@ -2791,16 +2223,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
      "fieldName": "btnTodokedeNew",
      "event": "onClick",
      "transition": "明細登録"
@@ -2809,31 +2231,6 @@
      "fieldName": "btnTodokedeModify",
      "event": "onClick",
      "transition": "明細登録"
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeTeisei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeKakutei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeDelete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturnToRirekiList",
-     "event": "onClick",
-     "transition": ""
     },
     {
      "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
@@ -2846,19 +2243,34 @@
      "transition": "更新完了"
     },
     {
-     "fieldName": "btnComplete",
+     "fieldName": "btnTodokedeDelete",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnTodokedeKakutei",
      "event": "onClick",
-     "transition": "該当者検索"
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeTeisei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturnToRireki",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
   {
-   "order": "3",
+   "order": "2",
    "stateName": "明細登録",
    "showWizard": true,
    "visibleDivs": [
@@ -2916,16 +2328,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
      "fieldName": "btnTodokedeNew",
      "event": "onClick",
      "transition": ""
@@ -2934,31 +2336,6 @@
      "fieldName": "btnTodokedeModify",
      "event": "onClick",
      "transition": ""
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeTeisei",
-     "event": "onClick",
-     "transition": "届出一覧"
-    },
-    {
-     "fieldName": "btnTodokedeKakutei",
-     "event": "onClick",
-     "transition": "届出一覧"
-    },
-    {
-     "fieldName": "btnTodokedeDelete",
-     "event": "onClick",
-     "transition": "届出一覧"
-    },
-    {
-     "fieldName": "btnReturnToRirekiList",
-     "event": "onClick",
-     "transition": "届出一覧"
     },
     {
      "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
@@ -2971,19 +2348,34 @@
      "transition": ""
     },
     {
+     "fieldName": "btnTodokedeDelete",
+     "event": "onClick",
+     "transition": "届出一覧"
+    },
+    {
+     "fieldName": "btnTodokedeKakutei",
+     "event": "onClick",
+     "transition": "届出一覧"
+    },
+    {
+     "fieldName": "btnTodokedeTeisei",
+     "event": "onClick",
+     "transition": "届出一覧"
+    },
+    {
+     "fieldName": "btnReturnToRireki",
+     "event": "onClick",
+     "transition": "届出一覧"
+    },
+    {
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": ""
-    },
-    {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": "該当者検索"
     }
    ]
   },
   {
-   "order": "4",
+   "order": "3",
    "stateName": "更新完了",
    "showWizard": true,
    "visibleDivs": [
@@ -3003,47 +2395,12 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
      "fieldName": "btnTodokedeNew",
      "event": "onClick",
      "transition": ""
     },
     {
      "fieldName": "btnTodokedeModify",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeTeisei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeKakutei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeDelete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturnToRirekiList",
      "event": "onClick",
      "transition": ""
     },
@@ -3058,14 +2415,29 @@
      "transition": ""
     },
     {
+     "fieldName": "btnTodokedeDelete",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeTeisei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturnToRireki",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
-    },
-    {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": ""
     }
    ]
   }
@@ -3073,17 +2445,13 @@
  "currentState": "All",
  "id": "DBC0100000",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "research",
+   "eventName": "btnReturn.onClick"
+  }
+ ],
  "loadSequencePanelNames": [
-  [
-   "KyotakuKeikakuTodokedeSearch"
-  ],
-  [
-   "KyotakuKeikakuTodokedeHihokenshaFinder"
-  ],
-  [
-   "KyotakuKeikakuTodokedeHihokenshaList"
-  ],
   [
    "KyotakuKeikakuTodokedeDetail"
   ],
@@ -3109,7 +2477,7 @@
  "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "btnTodokedeSave",
+   "commonButtonAreaId": "btnIchiran",
    "buttonSetting": [
     {
      "buttonKind": "CommonButtonFree",
@@ -3117,7 +2485,7 @@
       "fieldName": "btnTodokedeSave",
       "items": [],
       "controlType": "CommonButtonNext",
-      "width": "S",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -3144,6 +2512,40 @@
       "prefixText": "",
       "suffixText": ""
      }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnReturn",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReturn",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "該当者検索に戻る",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
     }
    ],
    "states": [
@@ -3151,7 +2553,9 @@
      "state": "届出一覧"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   },
   {
    "commonButtonAreaId": "btnComplete",
@@ -3195,7 +2599,56 @@
      "state": "更新完了"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "btnMeisai",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnReturnToRireki",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReturnToRireki",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "届出一覧に戻る",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "明細登録"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
