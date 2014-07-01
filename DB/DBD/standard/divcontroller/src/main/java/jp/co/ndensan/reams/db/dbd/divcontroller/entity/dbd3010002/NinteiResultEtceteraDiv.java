@@ -1,12 +1,12 @@
-package jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001;
+package jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteiResultIdoDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteiTorikeshiDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.NinteiResultIdoDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.NinteiTorikeshiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -29,6 +29,8 @@ public class NinteiResultEtceteraDiv extends Panel {
     private NinteiResultIdoDiv NinteiResultIdo;
     @JsonProperty("NinteiTorikeshi")
     private NinteiTorikeshiDiv NinteiTorikeshi;
+    @JsonProperty("linTokuteiShippei")
+    private HorizontalLine linTokuteiShippei;
     @JsonProperty("txtTokuteiShippei")
     private TextBox txtTokuteiShippei;
 
@@ -66,6 +68,16 @@ public class NinteiResultEtceteraDiv extends Panel {
     @JsonProperty("NinteiTorikeshi")
     public void setNinteiTorikeshi(NinteiTorikeshiDiv NinteiTorikeshi) {
         this.NinteiTorikeshi=NinteiTorikeshi;
+    }
+
+    @JsonProperty("linTokuteiShippei")
+    public HorizontalLine getLinTokuteiShippei() {
+        return linTokuteiShippei;
+    }
+
+    @JsonProperty("linTokuteiShippei")
+    public void setLinTokuteiShippei(HorizontalLine linTokuteiShippei) {
+        this.linTokuteiShippei=linTokuteiShippei;
     }
 
     @JsonProperty("txtTokuteiShippei")

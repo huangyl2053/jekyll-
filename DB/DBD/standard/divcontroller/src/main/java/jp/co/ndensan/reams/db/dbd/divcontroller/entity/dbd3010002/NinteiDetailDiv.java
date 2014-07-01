@@ -1,15 +1,14 @@
-package jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001;
+package jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.ButtonsBottomOfDetailDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.IryoHokenDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteiResultDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteichosaDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.ShujiiIkenshoDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.IryoHokenDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.NinteiResultDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.NinteichosaDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.ShujiiIkenshoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -48,8 +47,6 @@ public class NinteiDetailDiv extends Panel {
     private ShujiiIkenshoDiv ShujiiIkensho;
     @JsonProperty("IryoHoken")
     private IryoHokenDiv IryoHoken;
-    @JsonProperty("ButtonsBottomOfDetail")
-    private ButtonsBottomOfDetailDiv ButtonsBottomOfDetail;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -165,16 +162,6 @@ public class NinteiDetailDiv extends Panel {
     @JsonProperty("IryoHoken")
     public void setIryoHoken(IryoHokenDiv IryoHoken) {
         this.IryoHoken=IryoHoken;
-    }
-
-    @JsonProperty("ButtonsBottomOfDetail")
-    public ButtonsBottomOfDetailDiv getButtonsBottomOfDetail() {
-        return ButtonsBottomOfDetail;
-    }
-
-    @JsonProperty("ButtonsBottomOfDetail")
-    public void setButtonsBottomOfDetail(ButtonsBottomOfDetailDiv ButtonsBottomOfDetail) {
-        this.ButtonsBottomOfDetail=ButtonsBottomOfDetail;
     }
 
 }
