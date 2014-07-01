@@ -52,8 +52,6 @@ public class KyotakuJuminPanel {
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtSeibetsu().setValue(
                 ymlDt.getAsRString("seibetsu"));
 
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtNihonjinGaikokujin().setValue(
-                ymlDt.getAsRString("nihonjinGaikokujin"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtJusho().setValue(
                 ymlDt.getAsRString("jusho"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtGyoseiku().setValue(

@@ -63,10 +63,9 @@ public class KogakuServicehiInfoPanel {
     // 高額介護サービス費情報を設定する。
     private void setKogakuServicehiInfo(KogakuServicehiInfoPanelDiv panel) {
         List<HashMap> ymlData = ymlData("dbc0030011/KogakuServicehiInfo.yml");
-        
+
         HashMap hashMap = ymlData.get(0);
         ControlGenerator ymlDt = new ControlGenerator(hashMap);
-        
 
         //高額介護サービス費情報  (被保険者番号～所得段階）
         //氏名漢字～個人番号
@@ -80,8 +79,6 @@ public class KogakuServicehiInfoPanel {
                 ymlDt.getAsRString("nenrei"));
         panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtSeibetsu().setValue(
                 ymlDt.getAsRString("seibetsu"));
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtNihonjinGaikokujin().setValue(
-                ymlDt.getAsRString("nihonjinGaikokujin"));
         panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtJusho().setValue(
                 ymlDt.getAsRString("jusho"));
         panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtGyoseiku().setValue(
@@ -118,12 +115,12 @@ public class KogakuServicehiInfoPanel {
 //                ymlDt.getAsRDate("niteikikanto"));
         //2014/0628 朴　KaigoShikakuKihonDIV対応
         panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtJutokuKubun().setValue(
-        ymlDt.getAsRString("jutokuKubun"));
+                ymlDt.getAsRString("jutokuKubun"));
         panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtNinteiKaishiYmd().setValue(
-        ymlDt.getAsRDate("niteikikanfrom"));
+                ymlDt.getAsRDate("niteikikanfrom"));
         panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtNinteiShuryoYmd().setValue(
-        ymlDt.getAsRDate("niteikikanto"));
-        
+                ymlDt.getAsRDate("niteikikanto"));
+
         panel.getKogakuServiceDetail().getTxtTeikyoYM().setValue(
                 ymlDt.getAsRDate("teikyoYM"));
     }
@@ -131,10 +128,9 @@ public class KogakuServicehiInfoPanel {
     //申請者情報 TAB
     private void setKogakuServicehiInfoPanelShinseisha(KogakuServicehiInfoPanelDiv panel) {
         List<HashMap> ymlData = ymlData("dbc0030011/KogakuServicehiInfoPanelShinseisha.yml");
-        
+
         HashMap hashMap = ymlData.get(0);
         ControlGenerator ymlDt = new ControlGenerator(hashMap);
-        
 
         //申請日～申請理由
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
@@ -154,7 +150,7 @@ public class KogakuServicehiInfoPanel {
                         ymlDt.getAsYubinNo("yubinNo"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                 getTplShinseisha().getTxtShiharaiTotalAmount().setValue(
-                       ymlDt.getAsDecimal("shiharaiTotalAmount"));
+                        ymlDt.getAsDecimal("shiharaiTotalAmount"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                 getTplShinseisha().getTxtShinseiRiyu().setValue(
                         ymlDt.getAsRString("shinseiRiyu"));
@@ -164,45 +160,45 @@ public class KogakuServicehiInfoPanel {
     //口座情報 TAB
     private void setKogakuServicehiInfoPanelPaymentMethod(KogakuServicehiInfoPanelDiv panel) {
         List<HashMap> ymlData = ymlData("dbc0030011/KogakuServicehiInfoPanelPaymentMethod.yml");
-        
+
         HashMap hashMap = ymlData.get(0);
         ControlGenerator ymlDt = new ControlGenerator(hashMap);
 
         //受領委任情報
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getJuryoininJoho().getTxtJuryoininKeiyakuNo().setValue(
-                                ymlDt.getAsRString("juryoininKeiyakuNo"));
+                        ymlDt.getAsRString("juryoininKeiyakuNo"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getJuryoininJoho().getTxtJigyoshaNo().setValue(
-                               ymlDt.getAsRString("jigyoshaNo"));
+                        ymlDt.getAsRString("jigyoshaNo"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getJuryoininJoho().getTxtJigyoshaName().setValue(
-                               ymlDt.getAsRString("jigyoshaName"));
+                        ymlDt.getAsRString("jigyoshaName"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getJuryoininJoho().getTxtJigyoshaNameKana().setValue(
-                                ymlDt.getAsRString("jigyoshaNameKana"));
+                        ymlDt.getAsRString("jigyoshaNameKana"));
         //口座払い
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getKozaPayment().getTxtKinyuKikanCode().setValue(
-                                ymlDt.getAsRString("kinyuKikanCode"));
+                        ymlDt.getAsRString("kinyuKikanCode"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getKozaPayment().getTxtKinyuKikanName().setValue(
-                                ymlDt.getAsRString("kinyuKikanName"));
+                        ymlDt.getAsRString("kinyuKikanName"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getKozaPayment().getTxtKinyuKikanBrunchCode().setValue(
-                                ymlDt.getAsRString("kinyuKikanBrunchCode"));
+                        ymlDt.getAsRString("kinyuKikanBrunchCode"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getKozaPayment().getTxtKinyuKikanBrunchName().setValue(
-                                ymlDt.getAsRString("kinyuKikanBrunchName"));
+                        ymlDt.getAsRString("kinyuKikanBrunchName"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getKozaPayment().getTxtKozaNo().setValue(
-                                ymlDt.getAsRString("kozaNo"));
+                        ymlDt.getAsRString("kozaNo"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getKozaPayment().getTxtKozaMeigininKana().setValue(
-                                ymlDt.getAsRString("kozaMeigininKana"));
+                        ymlDt.getAsRString("kozaMeigininKana"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getKozaPayment().getTxtKozaMeiginin().setValue(
-                                ymlDt.getAsRString("kozaMeiginin"));
+                        ymlDt.getAsRString("kozaMeiginin"));
 
         //窓口払い
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
@@ -219,22 +215,21 @@ public class KogakuServicehiInfoPanel {
                         RTime.of(Long.parseLong(ymlDt.getAsRString("shiharaiKaishiTime").toString())));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getMadoguchiPayment().getTxtShiharaiShuryoDate().setValue(
-                                ymlDt.getAsRDate("shiharaiShuryoDate"));
+                        ymlDt.getAsRDate("shiharaiShuryoDate"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getMadoguchiPayment().getTxtShiharaiShuryoDay().setValue(
-                                ymlDt.getAsRString("shiharaiShuryoDay"));
+                        ymlDt.getAsRString("shiharaiShuryoDay"));
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getMadoguchiPayment().getTxtShiharaiShuryoTime().setValue(
                         RTime.of(Long.parseLong(ymlDt.getAsRString("shiharaiShuryoTime").toString())));
-                                               
-                                          
+
     }
 
     //高額決定情報 TAB
     private void KogakuServiceDetaildgJudgementinfo(KogakuServicehiInfoPanelDiv panel) {
         List<HashMap> ymlData = ymlData("dbc0030011/KogakuServiceDetaildgJudgementinfo.yml");
-        
-         HashMap hashMap = ymlData.get(0);
+
+        HashMap hashMap = ymlData.get(0);
         ControlGenerator ymlDt = new ControlGenerator(hashMap);
 
         //受付日
@@ -286,7 +281,7 @@ public class KogakuServicehiInfoPanel {
 
     private List<dgJudgementResult_Row> createRowKogakuServiceDetaildgJudgementResultTestData(List<HashMap> ymlData) {
         List<dgJudgementResult_Row> arrayData = new ArrayList<>();
-        
+
         //TO DO データを増える場合。
         for (int i = 0; i < ymlData.size(); i++) {
             HashMap hashMap = ymlData.get(i);
