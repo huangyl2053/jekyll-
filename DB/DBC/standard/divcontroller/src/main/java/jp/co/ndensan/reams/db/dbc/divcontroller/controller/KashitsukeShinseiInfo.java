@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShin
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShinseiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShinseiServiceDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShinseiTeishutsuDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShinseishaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuhiKashitsukekinList.dgKyufuhiKashitsukekinList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
@@ -40,73 +41,70 @@ public class KashitsukeShinseiInfo {
     /**
      * 申請書一覧で「申請書情報を追加する」ボタンを押下したときの給付費貸付金申請情報パネルの処理です。
      *
-     * @param info info
-     * @param list list
+     * @param panel panel
      * @return ResponseData
      */
-    public ResponseData<KashitsukeShinseiInfoDiv> onClickAddButton(KashitsukeShinseiInfoDiv info, KashitsukeShinseiListDiv list) {
-        ResponseData<KashitsukeShinseiInfoDiv> response = new ResponseData<>();
+    public ResponseData<KashitsukeShinseiTorokuDiv> onClickAddButton(KashitsukeShinseiTorokuDiv panel) {
+        ResponseData<KashitsukeShinseiTorokuDiv> response = new ResponseData<>();
 
         int index = -1;
-        info.getTxtKashitsukeShinseiListSelectedIndex().setValue(new RString(String.valueOf(index)));
+        panel.getKashitsukeShinseiInfo().getTxtKashitsukeShinseiListSelectedIndex().setValue(new RString(String.valueOf(index)));
 
         ViewStateHolder.put("selectedIndex", new RString(String.valueOf(index)));
 
-        setSummaryData(info, list);
-        setServiceData(info);
-        setShinseishaData(info);
-        setHoshoninData(info);
-        setHoshoninKinmusakiData(info);
-        setTeishutsuData(info);
-        response.data = info;
+        setSummaryData(panel.getKashitsukeShinseiInfo(), panel.getKashitsukeShinseiList());
+        setServiceData(panel.getKashitsukeShinseiInfo());
+        setShinseishaData(panel.getKashitsukeShinseiInfo());
+        setHoshoninData(panel.getKashitsukeShinseiInfo());
+        setHoshoninKinmusakiData(panel.getKashitsukeShinseiInfo());
+        setTeishutsuData(panel.getKashitsukeShinseiInfo());
+        response.data = panel;
         return response;
     }
 
     /**
      * 申請書一覧で行の「選択」を押下したときの給付費貸付金申請情報パネルの処理です。
      *
-     * @param info info
-     * @param list list
+     * @param panel panel
      * @return ResponseData
      */
-    public ResponseData<KashitsukeShinseiInfoDiv> onSelectedShinseiList(KashitsukeShinseiInfoDiv info, KashitsukeShinseiListDiv list) {
-        ResponseData<KashitsukeShinseiInfoDiv> response = new ResponseData<>();
+    public ResponseData<KashitsukeShinseiTorokuDiv> onSelectedShinseiList(KashitsukeShinseiTorokuDiv panel) {
+        ResponseData<KashitsukeShinseiTorokuDiv> response = new ResponseData<>();
 
-        int index = list.getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList().getClickedRowId();
-        info.getTxtKashitsukeShinseiListSelectedIndex().setValue(new RString(String.valueOf(index)));
+        int index = panel.getKashitsukeShinseiList().getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList().getClickedRowId();
+        panel.getKashitsukeShinseiInfo().getTxtKashitsukeShinseiListSelectedIndex().setValue(new RString(String.valueOf(index)));
 
         ViewStateHolder.put("selectedIndex", new RString(String.valueOf(index)));
 
-        setSummaryData(info, list);
-        setServiceData(info);
-        setShinseishaData(info);
-        setHoshoninData(info);
-        setHoshoninKinmusakiData(info);
-        setTeishutsuData(info);
-        response.data = info;
+        setSummaryData(panel.getKashitsukeShinseiInfo(), panel.getKashitsukeShinseiList());
+        setServiceData(panel.getKashitsukeShinseiInfo());
+        setShinseishaData(panel.getKashitsukeShinseiInfo());
+        setHoshoninData(panel.getKashitsukeShinseiInfo());
+        setHoshoninKinmusakiData(panel.getKashitsukeShinseiInfo());
+        setTeishutsuData(panel.getKashitsukeShinseiInfo());
+        response.data = panel;
         return response;
     }
 
     /**
      * 「被保険者情報をコピーする」を押下したときの給付費貸付金申請情報パネルの処理です。
      *
-     * @param info info
-     * @param list list
+     * @param panel panel
      * @return ResponseData
      */
-    public ResponseData<KashitsukeShinseiInfoDiv> onClickShinseishaCopy(KashitsukeShinseiInfoDiv info, KashitsukeShinseiListDiv list) {
-        ResponseData<KashitsukeShinseiInfoDiv> response = new ResponseData<>();
+    public ResponseData<KashitsukeShinseiTorokuDiv> onClickShinseishaCopy(KashitsukeShinseiTorokuDiv panel) {
+        ResponseData<KashitsukeShinseiTorokuDiv> response = new ResponseData<>();
 
         ControlGenerator cg = new ControlGenerator(getYaml().get(6));
 
-        KashitsukeShinseishaDiv div = info.getKashitsukeShinseisha();
+        KashitsukeShinseishaDiv div = panel.getKashitsukeShinseiInfo().getKashitsukeShinseisha();
         div.getTxtShinseishaName().setValue(cg.getAsRString("氏名"));
         div.getTxtShinseishaKana().setValue(cg.getAsRString("カナ"));
         div.getTxtShinseishaKankei().setValue(cg.getAsRString("被保険者との関係"));
         div.getTxtShinseishaYubinNo().setValue(cg.getAsYubinNo("郵便番号"));
         div.getTxtShinseishaJusho().setValue(cg.getAsRString("住所"));
         div.getTxtShinseishaTelNo().setValue(cg.getAsRString("電話番号"));
-        response.data = info;
+        response.data = panel;
         return response;
     }
 
@@ -116,6 +114,7 @@ public class KashitsukeShinseiInfo {
         if (index != -1) {
             row = list.getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList().getDataSource().get(index);
         }
+        info.getTxtUketsukeYMD().setValue(row == null ? null : new RDate(makeDateString(row.getTxtUketsukeYMD().toString())));
         info.getTxtShinseiYMD().setValue(row == null ? null : new RDate(makeDateString(row.getTxtShinseiYMD().toString())));
         info.getTxtRiyoKikan().setFromValue(row == null ? null : new RDate(makeDateString(row.getTxtKaishiYMD().toString())));
         info.getTxtRiyoKikan().setToValue(row == null ? null : new RDate(makeDateString(row.getTxtShuryoYMD().toString())));

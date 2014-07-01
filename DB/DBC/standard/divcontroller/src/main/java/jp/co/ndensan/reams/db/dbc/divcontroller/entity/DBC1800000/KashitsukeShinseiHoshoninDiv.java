@@ -34,10 +34,10 @@ public class KashitsukeShinseiHoshoninDiv extends Panel {
     private TextBox txtHoshoninKankei;
     @JsonProperty("txtHoshoninYubinNo")
     private TextBoxYubinNo txtHoshoninYubinNo;
-    @JsonProperty("txtHoshoninJusho")
-    private TextBox txtHoshoninJusho;
     @JsonProperty("txtHoshoninTelNo")
     private TextBox txtHoshoninTelNo;
+    @JsonProperty("txtHoshoninJusho")
+    private TextBox txtHoshoninJusho;
     @JsonProperty("KashitsukeShinseiHoshoninKinmu")
     private KashitsukeShinseiHoshoninKinmuDiv KashitsukeShinseiHoshoninKinmu;
 
@@ -107,16 +107,6 @@ public class KashitsukeShinseiHoshoninDiv extends Panel {
         this.txtHoshoninYubinNo=txtHoshoninYubinNo;
     }
 
-    @JsonProperty("txtHoshoninJusho")
-    public TextBox getTxtHoshoninJusho() {
-        return txtHoshoninJusho;
-    }
-
-    @JsonProperty("txtHoshoninJusho")
-    public void setTxtHoshoninJusho(TextBox txtHoshoninJusho) {
-        this.txtHoshoninJusho=txtHoshoninJusho;
-    }
-
     @JsonProperty("txtHoshoninTelNo")
     public TextBox getTxtHoshoninTelNo() {
         return txtHoshoninTelNo;
@@ -125,6 +115,16 @@ public class KashitsukeShinseiHoshoninDiv extends Panel {
     @JsonProperty("txtHoshoninTelNo")
     public void setTxtHoshoninTelNo(TextBox txtHoshoninTelNo) {
         this.txtHoshoninTelNo=txtHoshoninTelNo;
+    }
+
+    @JsonProperty("txtHoshoninJusho")
+    public TextBox getTxtHoshoninJusho() {
+        return txtHoshoninJusho;
+    }
+
+    @JsonProperty("txtHoshoninJusho")
+    public void setTxtHoshoninJusho(TextBox txtHoshoninJusho) {
+        this.txtHoshoninJusho=txtHoshoninJusho;
     }
 
     @JsonProperty("KashitsukeShinseiHoshoninKinmu")
