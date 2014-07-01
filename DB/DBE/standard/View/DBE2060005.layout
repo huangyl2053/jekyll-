@@ -157,16 +157,16 @@
         "dataName": "btnSelect",
         "toolTip": "",
         "bgColor": 0,
-        "width": 42,
+        "width": 40,
         "visible": true,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
          "text": "選択",
          "onClick": "dispChosaKekkaShosai",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
-         "imageWidth": "17",
-         "imageHeight": ""
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
+         "imageWidth": "20",
+         "imageHeight": "20"
         },
         "align": 1,
         "resize": true,

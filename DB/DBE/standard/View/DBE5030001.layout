@@ -26,8 +26,9 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "M",
+     "dataSource": [],
      "gridSetting": {
-      "rowHeight": 30,
+      "rowHeight": 25,
       "isMultiSelectable": false,
       "isShowHeader": true,
       "isShowFooter": true,
@@ -46,20 +47,20 @@
       },
       "columns": [
        {
-        "columnName": "選択",
+        "columnName": "選択<br>",
         "dataName": "toroku",
         "toolTip": "",
         "bgColor": 0,
-        "width": 50,
+        "width": 40,
         "visible": true,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
          "text": "...",
          "onClick": "onClick_btnToroku",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
-         "imageWidth": "16",
-         "imageHeight": "18"
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
+         "imageWidth": "20",
+         "imageHeight": "20"
         },
         "align": 1,
         "resize": true,
@@ -207,7 +208,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "審査会状況",
      "isAscending": true,
      "filterList": [],
