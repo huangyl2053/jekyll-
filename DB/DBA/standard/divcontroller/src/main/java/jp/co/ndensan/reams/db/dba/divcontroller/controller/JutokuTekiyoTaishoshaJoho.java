@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2030011.JutokuTekiyoSearchDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2030011.JutokuTekiyoTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
@@ -16,7 +18,6 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格取得処理の対象者情報を表示するためのDivControllerです。
@@ -38,8 +39,9 @@ public class JutokuTekiyoTaishoshaJoho {
     public ResponseData onClick_btnToDecide(JutokuTekiyoTaishoshaJohoDiv taishoshaJohoDiv, JutokuTekiyoSearchDiv searchDiv) {
         ResponseData<JutokuTekiyoTaishoshaJohoDiv> response = new ResponseData<>();
 
-        RString shikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);
-        RString hihokenshaNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
+        DemoKojin demoKojin = new DemoKojin();
+        RString shikibetsuCode = demoKojin.getShikibetsuCode();
+        RString hihokenshaNo = demoKojin.getHihokenshaNo();
         AtenaShokaiSimple.setData(taishoshaJohoDiv.getJutokuTekiyoCommonJoho().getAtenaInfo(), new ShikibetsuCode(shikibetsuCode));
         setTaishoshaData(taishoshaJohoDiv, hihokenshaNo);
 

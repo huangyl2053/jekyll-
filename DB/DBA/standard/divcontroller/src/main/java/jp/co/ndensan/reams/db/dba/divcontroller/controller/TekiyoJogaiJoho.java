@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011.JogaishaTekiyoInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011.TekiyoJogaiJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011.TekiyoJogaiTorokuDiv;
@@ -43,7 +44,8 @@ public class TekiyoJogaiJoho {
     public ResponseData onClick_btnToDecide(TekiyoJogaiJohoDiv tekiyoJogaiJohoDiv, TekiyoJogaiTaishoshaSearchDiv searchDiv) {
         ResponseData<TekiyoJogaiJohoDiv> response = new ResponseData<>();
 
-        RString hihokenshaNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
+        DemoKojin demoKojin = new DemoKojin();
+        RString hihokenshaNo = demoKojin.getHihokenshaNo();
         //RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
         setTekiyoJogaiGrid(tekiyoJogaiJohoDiv.getDgTekiyoJogaiRireki(), hihokenshaNo);
         ShisetsuJoho.setTekiyoJogaiMode(tekiyoJogaiJohoDiv.getTekiyoJogaiToroku().getJogaishaTekiyoInput().getJogaishaTekiyoJogaiShisetsu());

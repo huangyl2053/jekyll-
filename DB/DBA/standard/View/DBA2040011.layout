@@ -63,15 +63,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": ""
-    },
-    {
-     "eventName": "onClick_btnToSearch",
-     "requestUrl": "dba/db/dba/TajutokuTaishoshaSearch/onClick_btnToSearch"
-    },
-    {
-     "eventName": "onClick_btnToResearch",
-     "requestUrl": "dba/db/dba/TajutokuTaishoshaSearch/onClick_btnToResearch"
+     "requestUrl": "dba/db/dba/TajutokuTaishoshaSearch/onLoad"
     }
    ],
    "hiddenInput": [],
@@ -140,7 +132,7 @@
      "lblButtonMargin_displayNone": false,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
-     "btnKoza_displayNone": false,
+     "btnKoza_displayNone": true,
      "btnRenrakusaki_displayNone": false,
      "btnShosai_displayNone": false,
      "btnAtenaRireki_displayNone": false,
@@ -159,7 +151,7 @@
      "AtenaMeisho_visible": true,
      "JuminShubetsu_visible": true,
      "btnMemo_displayNone": false,
-     "btnDainosya_displayNone": false
+     "btnDainosya_displayNone": true
     },
     {
      "fieldName": "KaigoShikakuJoho",
@@ -217,7 +209,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "対象者情報",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": false,
    "postParameterPanelNames": [
@@ -244,7 +236,7 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -656,6 +648,11 @@
      "onSort": "",
      "onSelect": "",
      "onSelectBySelectButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -675,7 +672,7 @@
          "fieldName": "ddlTekiyoJiyu",
          "items": [],
          "controlType": "DropDownList",
-         "width": "100",
+         "width": "110",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -702,6 +699,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "selectedItem": "keyTaTokureiTekiyo",
          "dataSource": [
           {
            "key": "keyTaTokureiTekiyo",
@@ -716,7 +714,6 @@
            "value": "その他"
           }
          ],
-         "selectedItem": "keyTaTokureiTekiyo",
          "disabledItem": []
         },
         {
@@ -909,7 +906,7 @@
          "fieldName": "ddlKaijoJiyu",
          "items": [],
          "controlType": "DropDownList",
-         "width": "100",
+         "width": "110",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -936,6 +933,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "selectedItem": "keyKaijo",
          "dataSource": [
           {
            "key": "keyKaijo",
@@ -962,7 +960,6 @@
            "value": "その他"
           }
          ],
-         "selectedItem": "keyKaijo",
          "disabledItem": []
         },
         {
@@ -2167,6 +2164,11 @@
      "visibleDiv": "ShisetsuJoho",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "TajutokuTaishoshaSearch",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {
@@ -2562,7 +2564,9 @@
      "state": "解除登録"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   },
   {
    "commonButtonAreaId": "Complete",
@@ -2597,7 +2601,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "適用処理を"
+      "additionalText": "適用登録を"
      }
     }
    ],
@@ -2606,7 +2610,9 @@
      "state": "登録完了"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

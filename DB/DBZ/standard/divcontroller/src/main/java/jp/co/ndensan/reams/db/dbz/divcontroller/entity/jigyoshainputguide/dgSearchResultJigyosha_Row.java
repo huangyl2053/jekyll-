@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jigyoshainputguide;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 23 19:45:51 JST 2014 
+ * Tue Jul 01 11:27:49 JST 2014 
  */
 
 

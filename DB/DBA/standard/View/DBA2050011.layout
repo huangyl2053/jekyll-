@@ -63,7 +63,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": ""
+     "requestUrl": "dba/db/dba/TekiyoJogaiTaishoshaSearch/onLoad"
     }
    ],
    "hiddenInput": [],
@@ -132,7 +132,7 @@
      "lblButtonMargin_displayNone": false,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
-     "btnKoza_displayNone": false,
+     "btnKoza_displayNone": true,
      "btnRenrakusaki_displayNone": false,
      "btnShosai_displayNone": false,
      "btnAtenaRireki_displayNone": false,
@@ -151,7 +151,7 @@
      "AtenaMeisho_visible": true,
      "JuminShubetsu_visible": true,
      "btnMemo_displayNone": false,
-     "btnDainosya_displayNone": false
+     "btnDainosya_displayNone": true
     },
     {
      "fieldName": "ShikakuJoho",
@@ -209,7 +209,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "適用除外者情報",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": false,
    "postParameterPanelNames": [
@@ -236,7 +236,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -612,6 +612,11 @@
      "onSort": "",
      "onSelect": "",
      "onSelectBySelectButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -658,6 +663,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "selectedItem": "jogaishaTekiyo",
          "dataSource": [
           {
            "key": "jogaishaTekiyo",
@@ -672,7 +678,6 @@
            "value": "その他"
           }
          ],
-         "selectedItem": "jogaishaTekiyo",
          "disabledItem": []
         },
         {
@@ -918,6 +923,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "selectedItem": "jogaishaKaijo",
          "dataSource": [
           {
            "key": "jogaishaKaijo",
@@ -940,7 +946,6 @@
            "value": "その他"
           }
          ],
-         "selectedItem": "jogaishaKaijo",
          "disabledItem": []
         },
         {
@@ -1530,6 +1535,11 @@
     },
     {
      "visibleDiv": "ShikakuJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "TekiyoJogaiTaishoshaSearch",
      "panelState": "visible",
      "fixedDiv": "No"
     }

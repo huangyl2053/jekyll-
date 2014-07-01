@@ -63,7 +63,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": ""
+     "requestUrl": "dba/db/dba/ShikakuShutokuSearch/onLoad"
     }
    ],
    "hiddenInput": [],
@@ -131,10 +131,10 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnDainosha_displayNone": false,
+     "btnDainosha_displayNone": true,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
-     "btnKoza_displayNone": false,
+     "btnKoza_displayNone": true,
      "btnRenrakusaki_displayNone": false,
      "btnShosai_displayNone": false,
      "btnAtenaRireki_displayNone": false,
@@ -207,7 +207,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "onLoad_ShikakuShutokuTaishoshaJoho",
-   "title": "対象者情報",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -234,7 +234,7 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -321,6 +321,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
+           "selectedItem": "tennyu",
            "dataSource": [
             {
              "key": "tennyu",
@@ -407,7 +408,6 @@
              "value": "その他"
             }
            ],
-           "selectedItem": "tennyu",
            "disabledItem": []
           },
           {
@@ -785,6 +785,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
+           "selectedItem": "kyokai",
            "dataSource": [
             {
              "key": "kyokai",
@@ -819,7 +820,6 @@
              "value": "組合国民健康保険"
             }
            ],
-           "selectedItem": "kyokai",
            "disabledItem": []
           },
           {
@@ -1196,6 +1196,11 @@
            "onSort": "",
            "onSelect": "",
            "onSelectBySelectButton": "",
+           "onAfterRequest": "",
+           "onAfterRequestByDblClick": "",
+           "onAfterRequestBySelectButton": "",
+           "onAfterRequestByModifyButton": "",
+           "onAfterRequestByDeleteButton": "",
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
@@ -1700,6 +1705,11 @@
            "onSort": "",
            "onSelect": "",
            "onSelectBySelectButton": "",
+           "onAfterRequest": "",
+           "onAfterRequestByDblClick": "",
+           "onAfterRequestBySelectButton": "",
+           "onAfterRequestByModifyButton": "",
+           "onAfterRequestByDeleteButton": "",
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
@@ -1874,6 +1884,7 @@
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
+             "selectedItem": "seikatsuFujo",
              "dataSource": [
               {
                "key": "seikatsuFujo",
@@ -1924,7 +1935,6 @@
                "value": "みなし扶助"
               }
              ],
-             "selectedItem": "seikatsuFujo",
              "disabledItem": []
             }
            ],
@@ -2115,7 +2125,7 @@
    "onLoad": "",
    "title": "資格関連情報",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "ShikakuShutokuJoho"
@@ -2378,6 +2388,11 @@
      "visibleDiv": "ShisetsuNyutaishoRirekiKanri",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShikakuShutokuSearch",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -2573,7 +2588,9 @@
      "state": "資格取得情報入力"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   },
   {
    "commonButtonAreaId": "Complete",
@@ -2617,7 +2634,9 @@
      "state": "処理完了"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

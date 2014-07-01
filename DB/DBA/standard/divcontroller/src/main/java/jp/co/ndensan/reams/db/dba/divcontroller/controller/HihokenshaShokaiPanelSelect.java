@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 //import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiIryoHokenDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiPanelSelectDiv;
 //import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiRofukuNenkinDiv;
@@ -47,9 +48,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @author n8178 城間篤人
  */
 public class HihokenshaShokaiPanelSelect {
-
-    private static final RString SHIKIBETSU_CODE = new RString("012345678901234");
-    private static final RString HIHOKENSHA_NO = new RString("1234500001");
 
     /**
      * 該当者一覧から、被保険者照会の対象となる個人が選択された際に実行します。<br/>
@@ -94,7 +92,8 @@ public class HihokenshaShokaiPanelSelect {
      */
     private HihokenshaShokaiShikakuTokusoDiv setShikakuDiv(HihokenshaShokaiShikakuTokusoDiv shikakuDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        RString hihokenshaNo = HIHOKENSHA_NO;
+        DemoKojin demoKojin = new DemoKojin();
+        RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setShikakuTokusoJoho(shikakuDiv.getShikakuTokusoRireki().getDgShikakuShutokuRireki(), hihokenshaNo);
         return shikakuDiv;
     }
@@ -167,7 +166,8 @@ public class HihokenshaShokaiPanelSelect {
      */
     private HihokenshaShokaiSetaiShokaiDiv setSetaiDiv(HihokenshaShokaiSetaiShokaiDiv setaiDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        RString shikibetsuCode = SHIKIBETSU_CODE;
+        DemoKojin demoKojin = new DemoKojin();
+        RString shikibetsuCode = demoKojin.getShikibetsuCode();
         setSetaiJoho(setaiDiv.getDgSetaiJoho(), shikibetsuCode);
         return setaiDiv;
     }
@@ -346,7 +346,8 @@ public class HihokenshaShokaiPanelSelect {
     private HihokenshaShokaiShisetsuNyutaishoDiv setNyutaishoDiv(HihokenshaShokaiShisetsuNyutaishoDiv nyutaishoDiv,
             HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        RString hihokenshaNo = HIHOKENSHA_NO;
+        DemoKojin demoKojin = new DemoKojin();
+        RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setNyutaishoJoho(nyutaishoDiv.getShisetsuNyutaishoRireki().getDgShisetsuNyutaishoRireki(), hihokenshaNo);
         return nyutaishoDiv;
     }
@@ -398,7 +399,8 @@ public class HihokenshaShokaiPanelSelect {
     private HihokenshaShokaiShoKofuKaishuDiv setShoKofuKaishuDiv(HihokenshaShokaiShoKofuKaishuDiv nyutaishoDiv,
             HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        RString hihokenshaNo = HIHOKENSHA_NO;
+        DemoKojin demoKojin = new DemoKojin();
+        RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setShoKofuKaishuJoho(nyutaishoDiv.getShoKofuKaishuKiroku().getShoKaishuJokyoList().getDgShoKaishuJokyo(), hihokenshaNo);
         return nyutaishoDiv;
     }
@@ -448,7 +450,8 @@ public class HihokenshaShokaiPanelSelect {
     private HihokenshaShokaiShinseiTodokedeDiv setShinseiTodokedeDiv(HihokenshaShokaiShinseiTodokedeDiv todokedeDiv,
             HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        RString shikibetsuCode = SHIKIBETSU_CODE;
+        DemoKojin demoKojin = new DemoKojin();
+        RString shikibetsuCode = demoKojin.getShikibetsuCode();
         setTodokedeJoho(todokedeDiv.getDgShinseishoTodokede(), shikibetsuCode);
         return todokedeDiv;
     }

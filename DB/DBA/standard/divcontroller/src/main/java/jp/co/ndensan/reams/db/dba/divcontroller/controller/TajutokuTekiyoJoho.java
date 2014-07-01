@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.JutokuJohoInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.ShisetsuJohoInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.SochimotoJohoInputDiv;
@@ -45,7 +46,8 @@ public class TajutokuTekiyoJoho {
     public ResponseData onClick_btnToDecide(TajutokuTekiyoJohoDiv tajutokuDiv, TajutokuTaishoshaSearchDiv searchDiv) {
         ResponseData<TajutokuTekiyoJohoDiv> response = new ResponseData<>();
 
-        RString hihokenshaNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
+        DemoKojin demoKojin = new DemoKojin();
+        RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setTajutokuJoho(tajutokuDiv.getDgJushochiTokureiRireki(), hihokenshaNo);
         ShisetsuJoho.setJutokuMode(tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho());
         tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho().getLblOtherShisetsuShurui().setText(new RString("keyKannai"));
