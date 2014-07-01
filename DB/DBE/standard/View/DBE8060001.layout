@@ -143,18 +143,19 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
-     "labelLText": "要介護認定申請モニタリスト",
-     "labelLWidth": "300",
-     "labelLAlign": 2,
-     "selectedItem": null,
      "dataSource": [
       {
        "key": "1",
        "value": "出力する"
       }
      ],
+     "onChange": "",
+     "labelLText": "要介護認定申請モニタリスト",
+     "labelLWidth": "300",
+     "labelLAlign": 2,
+     "selectedItem": null,
      "onClick": "onClick_chkNinteiShinseiMonitor",
+     "icon": [],
      "selectedItems": [],
      "newLineItemNumber": 1,
      "minCheckedItem": 0,
@@ -162,8 +163,7 @@
      "spaceSize": "M",
      "isAllSelectable": false,
      "isAllSelectableBreakLine": false,
-     "disabledItem": [],
-     "icon": []
+     "disabledItem": []
     },
     {
      "fieldName": "txtKoshinbiRange",
@@ -199,10 +199,10 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "permitCharactor": "",
-     "fromPlaceHolder": "",
-     "toPlaceHolder": "",
      "ymdKubun": 2,
      "displayFormat": 0,
+     "fromPlaceHolder": "",
+     "toPlaceHolder": "",
      "minDate": "",
      "maxDate": "",
      "fromText": "",
@@ -233,18 +233,19 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
-     "labelLText": "要介護認定・要支援認定等申請者一覧",
-     "labelLWidth": "300",
-     "labelLAlign": 2,
-     "selectedItem": null,
      "dataSource": [
       {
        "key": "1",
        "value": "出力する"
       }
      ],
+     "onChange": "",
+     "labelLText": "要介護認定・要支援認定等申請者一覧",
+     "labelLWidth": "300",
+     "labelLAlign": 2,
+     "selectedItem": null,
      "onClick": "onClick_chkShinseishaIchiran",
+     "icon": [],
      "selectedItems": [],
      "newLineItemNumber": 1,
      "minCheckedItem": 0,
@@ -252,8 +253,7 @@
      "spaceSize": "M",
      "isAllSelectable": false,
      "isAllSelectableBreakLine": false,
-     "disabledItem": [],
-     "icon": []
+     "disabledItem": []
     },
     {
      "fieldName": "txtShinseibiRange",
@@ -289,10 +289,10 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "permitCharactor": "",
-     "fromPlaceHolder": "",
-     "toPlaceHolder": "",
      "ymdKubun": 2,
      "displayFormat": 0,
+     "fromPlaceHolder": "",
+     "toPlaceHolder": "",
      "minDate": "",
      "maxDate": "",
      "fromText": "",
@@ -323,18 +323,19 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
-     "labelLText": "申請却下一覧",
-     "labelLWidth": "300",
-     "labelLAlign": 2,
-     "selectedItem": null,
      "dataSource": [
       {
        "key": "1",
        "value": "出力する"
       }
      ],
+     "onChange": "",
+     "labelLText": "申請却下一覧",
+     "labelLWidth": "300",
+     "labelLAlign": 2,
+     "selectedItem": null,
      "onClick": "onClick_chkShinseiKyakka",
+     "icon": [],
      "selectedItems": [],
      "newLineItemNumber": 1,
      "minCheckedItem": 0,
@@ -342,8 +343,7 @@
      "spaceSize": "M",
      "isAllSelectable": false,
      "isAllSelectableBreakLine": false,
-     "disabledItem": [],
-     "icon": []
+     "disabledItem": []
     },
     {
      "fieldName": "txtKyakkabiRange",
@@ -379,10 +379,10 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "permitCharactor": "",
-     "fromPlaceHolder": "",
-     "toPlaceHolder": "",
      "ymdKubun": 2,
      "displayFormat": 0,
+     "fromPlaceHolder": "",
+     "toPlaceHolder": "",
      "minDate": "",
      "maxDate": "",
      "fromText": "",
@@ -440,11 +440,11 @@
      "jpControlName": "",
      "text": "帳票出力を行わない",
      "onClick": "",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],

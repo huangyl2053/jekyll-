@@ -28,10 +28,10 @@
        "helpMessageID": "",
        "jpControlName": "",
        "required": false,
-       "align": 2,
-       "text": "開催日",
        "isPrivateInfo": false,
-       "decorationClass": ""
+       "text": "開催日",
+       "decorationClass": "",
+       "align": 2
       },
       {
        "fieldName": "txtKaisaiDate",
@@ -55,24 +55,24 @@
        "jpControlName": "",
        "readOnly": false,
        "required": false,
-       "text": "",
-       "isPrivateInfo": false,
        "placeHolder": "",
+       "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
+       "value": "",
        "labelLText": "",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 0,
-       "value": "",
-       "permitCharactor": "./_-"
+       "displayFormat": 0
       },
       {
        "fieldName": "lblAfterThis",
@@ -95,10 +95,10 @@
        "helpMessageID": "",
        "jpControlName": "",
        "required": false,
-       "align": 2,
-       "text": "以降",
        "isPrivateInfo": false,
-       "decorationClass": ""
+       "text": "以降",
+       "decorationClass": "",
+       "align": 2
       }
      ],
      "controlType": "Panel",

@@ -28,8 +28,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": "1",
        "dataSource": [
         {
          "key": "1",
@@ -74,8 +72,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "onChange_radShutsuryokuKubun",
-       "selectedItem": "0",
        "dataSource": [
         {
          "key": "0",
@@ -91,13 +87,12 @@
        "labelLText": "出力区分",
        "labelLWidth": "S",
        "labelLAlign": 2,
+       "selectedItem": "0",
        "onClick": "",
        "icon": [],
-       "selectedItem": "0",
        "newLineItemNumber": 2,
        "spaceSize": "M",
-       "disabledItem": [],
-       "icon": []
+       "disabledItem": []
       },
       {
        "fieldName": "txtNinteiKekkaKakuninKikan",
@@ -132,9 +127,9 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "permitCharactor": "",
        "ymdKubun": 2,
        "displayFormat": 0,
-       "permitCharactor": "",
        "fromPlaceHolder": "",
        "toPlaceHolder": "",
        "minDate": "",
@@ -172,6 +167,7 @@
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "icon": 0,
        "heightTextBoxMatches": false
       }
      ],
@@ -241,7 +237,6 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "M",
-       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -456,6 +451,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "dataOutputDate",
        "isAscending": true,
        "filterList": [],

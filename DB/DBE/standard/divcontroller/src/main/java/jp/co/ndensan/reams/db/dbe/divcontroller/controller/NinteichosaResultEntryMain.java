@@ -77,7 +77,7 @@ public class NinteichosaResultEntryMain {
     }
 
     private dgNinteichosaResultTaishosha_Row targetInfo() {
-        return NinteichosaResultEntryTarget.Holder.get();
+        return NinteichosaResultEntryTarget.NinteichosaResultTaishosha.get();
     }
 
     /**
@@ -112,7 +112,7 @@ public class NinteichosaResultEntryMain {
             onClick_btnCommonUpdateChosaResult(NinteichosaResultEntryMainDiv div) {
         dgNinteichosaResultTaishosha_Row target = targetInfo();
         new NinteichosaDetail(div).reflectPanelValueTo(target);
-        NinteichosaResultEntryTarget.Holder.save(target);
+        NinteichosaResultEntryTarget.NinteichosaResultTaishosha.save(target);
         return withMessage(new ResponseData<NinteichosaResultEntryMainDiv>(), new InformationMessage("I", "登録しました。"));
     }
 

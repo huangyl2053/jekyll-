@@ -6,19 +6,15 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.NinteichosaResultEntryTargetsData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.NinteichosaResultEntryTargetDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.dgNinteichosaResultTaishosha_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.DataGridUtil;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * NinteichosaResultEntryTargetDivを制御します。
@@ -64,7 +60,7 @@ public class NinteichosaResultEntryTarget {
         List<dgNinteichosaResultTaishosha_Row> dataSource = new ArrayList<>();
         for (dgNinteichosaResultTaishosha_Row row : dgTargetPersons(div).getDataSource()) {
             if (row.getSelected()) {
-                Holder.save(dgTargetPersons(div).getClickedItem());
+                NinteichosaResultTaishosha.save(dgTargetPersons(div).getClickedItem());
                 row.getBtnToDecide().setDisabled(false);
             } else {
                 row.getBtnToDecide().setDisabled(true);
@@ -82,9 +78,8 @@ public class NinteichosaResultEntryTarget {
      * @return ResponseData
      */
     public ResponseData<NinteichosaResultEntryTargetDiv> onResume(NinteichosaResultEntryTargetDiv div) {
-        dgNinteichosaResultTaishosha_Row target = Holder.get();
+        dgNinteichosaResultTaishosha_Row target = NinteichosaResultTaishosha.get();
         if (target != null) {
-            Holder.remove();
             setDisabled_btnCommonToCompleteChosa(true);
             List<dgNinteichosaResultTaishosha_Row> list = new ArrayList<>();
             for (dgNinteichosaResultTaishosha_Row row : dgTargetPersons(div).getDataSource()) {
@@ -159,23 +154,33 @@ public class NinteichosaResultEntryTarget {
     /**
      * dgNinteichosaResultTaishosha_Row を一時的に保持できます。
      */
-    static final class Holder {
+    static final class NinteichosaResultTaishosha {
 
-        private Holder() {
+        private dgNinteichosaResultTaishosha_Row savedRow;
+
+        private NinteichosaResultTaishosha() {
         }
-        private static final RString KEY = new RString("NinteichosaResultEntryTarget");
+
+        private static class NinteichosaResultTaishoshaHolder {
+
+            private static final NinteichosaResultTaishosha instance
+                    = new NinteichosaResultTaishosha();
+        }
+
+        private void setSavedRow(dgNinteichosaResultTaishosha_Row row) {
+            this.savedRow = row;
+        }
+
+        private dgNinteichosaResultTaishosha_Row getSavedRow() {
+            return this.savedRow;
+        }
 
         static void save(dgNinteichosaResultTaishosha_Row target) {
-            ViewStateHolder.put(KEY.toString(), target);
+            NinteichosaResultTaishoshaHolder.instance.setSavedRow(target);
         }
 
         static dgNinteichosaResultTaishosha_Row get() {
-            return (dgNinteichosaResultTaishosha_Row) ViewStateHolder.get(
-                    KEY.toString(), dgNinteichosaResultTaishosha_Row.class);
-        }
-
-        static void remove() {
-            ViewStateHolder.remove(KEY);
+            return NinteichosaResultTaishoshaHolder.instance.getSavedRow();
         }
     }
 

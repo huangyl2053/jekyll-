@@ -14,25 +14,25 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.
  */
 final class SearchResultForJukyushaShokai {
 
-    private static SearchResultOfHihokenshaDiv searchResult;
+    private SearchResultOfHihokenshaDiv searchResult;
 
     private SearchResultForJukyushaShokai() {
     }
 
     private static class SearchResultHolder {
 
-        private static final SearchResultForJukyushaShokai me = new SearchResultForJukyushaShokai();
+        private static final SearchResultForJukyushaShokai instance = new SearchResultForJukyushaShokai();
     }
 
     static SearchResultForJukyushaShokai getInstance() {
-        return SearchResultHolder.me;
+        return SearchResultHolder.instance;
     }
 
     void save(SearchResultOfHihokenshaDiv searchResultDiv) {
-        SearchResultForJukyushaShokai.searchResult = searchResultDiv;
+        this.searchResult = searchResultDiv;
     }
 
     SearchResultOfHihokenshaDiv get() {
-        return SearchResultForJukyushaShokai.searchResult;
+        return this.searchResult;
     }
 }

@@ -37,8 +37,8 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
-             "selectedItem": null,
+             "onClick": "",
+             "icon": [],
              "dataSource": [
               {
                "key": "0",
@@ -53,10 +53,11 @@
                "value": "要介護認定調査一覧表"
               }
              ],
+             "onChange": "",
+             "selectedItem": null,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "onClick": "",
              "selectedItems": [],
              "newLineItemNumber": 2,
              "minCheckedItem": 0,
@@ -64,8 +65,7 @@
              "spaceSize": "M",
              "isAllSelectable": false,
              "isAllSelectableBreakLine": false,
-             "disabledItem": [],
-             "icon": []
+             "disabledItem": []
             }
            ],
            "controlType": "Panel",
@@ -133,8 +133,8 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
-             "selectedItem": null,
+             "onClick": "",
+             "icon": [],
              "dataSource": [
               {
                "key": "1",
@@ -161,11 +161,12 @@
                "value": "要介護認定調査資料"
               }
              ],
+             "onChange": "",
+             "selectedItem": null,
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "onClick": "",
              "selectedItems": [],
              "newLineItemNumber": 4,
              "minCheckedItem": 0,
@@ -173,8 +174,7 @@
              "spaceSize": "M",
              "isAllSelectable": false,
              "isAllSelectableBreakLine": false,
-             "disabledItem": [],
-             "icon": []
+             "disabledItem": []
             }
            ],
            "controlType": "Panel",
@@ -299,9 +299,9 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "onKeyPress": "",
-             "permitCharactor": "",
              "ymdKubun": 2,
              "displayFormat": 0,
+             "permitCharactor": "",
              "fromPlaceHolder": "",
              "toPlaceHolder": "",
              "minDate": "",
@@ -346,9 +346,9 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "onKeyPress": "",
-             "permitCharactor": "",
              "ymdKubun": 2,
              "displayFormat": 0,
+             "permitCharactor": "",
              "fromPlaceHolder": "",
              "toPlaceHolder": "",
              "minDate": "",
@@ -381,8 +381,8 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
-             "selectedItem": null,
+             "onClick": "",
+             "icon": [],
              "dataSource": [
               {
                "key": "1",
@@ -393,11 +393,12 @@
                "value": "未済"
               }
              ],
+             "onChange": "",
+             "selectedItem": null,
              "required": false,
              "labelLText": "依頼書発行",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "onClick": "",
              "selectedItems": [],
              "newLineItemNumber": 2,
              "minCheckedItem": 0,
@@ -405,8 +406,7 @@
              "spaceSize": "M",
              "isAllSelectable": false,
              "isAllSelectableBreakLine": false,
-             "disabledItem": [],
-             "icon": []
+             "disabledItem": []
             }
            ],
            "controlType": "Panel",
@@ -473,13 +473,13 @@
              "selectControlID": "btnToClearCriteriaOfChosa",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "条件をクリアする",
              "onClick": "btnToClearCriteriaOfChosa",
-             "icon": 0,
+             "text": "条件をクリアする",
              "appearance": 0,
              "imageFileUrl": "",
              "imageWidth": "",
              "imageHeight": "",
+             "icon": 0,
              "heightTextBoxMatches": false
             },
             {
@@ -502,13 +502,13 @@
              "selectControlID": "btnToSearchOfChosa",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "検索する",
              "onClick": "onClick_btnToSearchOfChosa",
-             "icon": 0,
+             "text": "検索する",
              "appearance": 0,
              "imageFileUrl": "",
              "imageWidth": "",
              "imageHeight": "",
+             "icon": 0,
              "heightTextBoxMatches": false
             }
            ],
@@ -575,7 +575,12 @@
            "jpControlName": "",
            "readOnly": false,
            "height": "210",
-           "dataSource": [],
+           "onSort": "",
+           "onSelect": "",
+           "onSelectByDblClick": "",
+           "onOnlyRow": "",
+           "onNoRow": "",
+           "onMultiRows": "",
            "gridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": true,
@@ -840,9 +845,6 @@
              }
             ]
            },
-           "onSort": "",
-           "onSelect": "",
-           "onSelectByDblClick": "",
            "onSelectBySelectButton": "",
            "onSelectByModifyButton": "",
            "onSelectByDeleteButton": "",
@@ -851,9 +853,7 @@
            "onAfterRequestBySelectButton": "",
            "onAfterRequestByModifyButton": "",
            "onAfterRequestByDeleteButton": "",
-           "onOnlyRow": "",
-           "onNoRow": "",
-           "onMultiRows": "",
+           "dataSource": [],
            "sortOrder": "shinseiDate",
            "isAscending": true,
            "filterList": [],
@@ -930,6 +930,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
+           "text": "",
            "onChange": "onChange_txtShoriDateOfChosa",
            "required": false,
            "labelLText": "発行処理日",
@@ -944,11 +945,10 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "",
-           "value": "",
-           "permitCharactor": "./_-",
            "ymdKubun": 2,
-           "displayFormat": 0
+           "displayFormat": 0,
+           "value": "",
+           "permitCharactor": "./_-"
           },
           {
            "fieldName": "txtHakkoDateOfChosa",
@@ -971,6 +971,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
+           "text": "",
            "onChange": "",
            "required": false,
            "labelLText": "発行日",
@@ -985,11 +986,10 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "",
-           "value": "",
-           "permitCharactor": "./_-",
            "ymdKubun": 2,
-           "displayFormat": 0
+           "displayFormat": 0,
+           "value": "",
+           "permitCharactor": "./_-"
           },
           {
            "fieldName": "txtKigenDateOfChosa",
@@ -1012,6 +1012,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
+           "text": "",
            "onChange": "",
            "required": false,
            "labelLText": "期限日",
@@ -1026,11 +1027,10 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "",
-           "value": "",
-           "permitCharactor": "./_-",
            "ymdKubun": 2,
-           "displayFormat": 0
+           "displayFormat": 0,
+           "value": "",
+           "permitCharactor": "./_-"
           }
          ],
          "controlType": "Panel",
@@ -1126,8 +1126,8 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
-             "selectedItem": null,
+             "onClick": "",
+             "icon": [],
              "dataSource": [
               {
                "key": "0",
@@ -1158,10 +1158,11 @@
                "value": "診断命令書"
               }
              ],
+             "onChange": "",
+             "selectedItem": null,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "onClick": "",
              "selectedItems": [],
              "newLineItemNumber": 4,
              "minCheckedItem": 0,
@@ -1169,8 +1170,7 @@
              "spaceSize": "M",
              "isAllSelectable": false,
              "isAllSelectableBreakLine": false,
-             "disabledItem": [],
-             "icon": []
+             "disabledItem": []
             }
            ],
            "controlType": "Panel",
@@ -1238,8 +1238,8 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
-             "selectedItem": null,
+             "onClick": "",
+             "icon": [],
              "dataSource": [
               {
                "key": "1",
@@ -1250,11 +1250,12 @@
                "value": "作成料請求書　　　　"
               }
              ],
+             "onChange": "",
+             "selectedItem": null,
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "onClick": "",
              "selectedItems": [],
              "newLineItemNumber": 2,
              "minCheckedItem": 0,
@@ -1262,8 +1263,7 @@
              "spaceSize": "M",
              "isAllSelectable": false,
              "isAllSelectableBreakLine": false,
-             "disabledItem": [],
-             "icon": []
+             "disabledItem": []
             }
            ],
            "controlType": "Panel",
@@ -1388,9 +1388,9 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "onKeyPress": "",
-             "permitCharactor": "",
              "ymdKubun": 2,
              "displayFormat": 0,
+             "permitCharactor": "",
              "fromPlaceHolder": "",
              "toPlaceHolder": "",
              "minDate": "",
@@ -1435,9 +1435,9 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "onKeyPress": "",
-             "permitCharactor": "",
              "ymdKubun": 2,
              "displayFormat": 0,
+             "permitCharactor": "",
              "fromPlaceHolder": "",
              "toPlaceHolder": "",
              "minDate": "",
@@ -1470,8 +1470,8 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
-             "selectedItem": null,
+             "onClick": "",
+             "icon": [],
              "dataSource": [
               {
                "key": "1",
@@ -1482,11 +1482,12 @@
                "value": "未済"
               }
              ],
+             "onChange": "",
+             "selectedItem": null,
              "required": false,
              "labelLText": "依頼書発行",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "onClick": "",
              "selectedItems": [],
              "newLineItemNumber": 2,
              "minCheckedItem": 0,
@@ -1494,8 +1495,7 @@
              "spaceSize": "M",
              "isAllSelectable": false,
              "isAllSelectableBreakLine": false,
-             "disabledItem": [],
-             "icon": []
+             "disabledItem": []
             }
            ],
            "controlType": "Panel",
@@ -1562,13 +1562,13 @@
              "selectControlID": "btnToClearCriteriaOfIkensho",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "条件をクリアする",
              "onClick": "btnToClearCriteriaOfIkensho",
-             "icon": 0,
+             "text": "条件をクリアする",
              "appearance": 0,
              "imageFileUrl": "",
              "imageWidth": "",
              "imageHeight": "",
+             "icon": 0,
              "heightTextBoxMatches": false
             },
             {
@@ -1591,13 +1591,13 @@
              "selectControlID": "btnToSearchOfIkensho",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "検索する",
              "onClick": "onClick_btnToSearchOfIkensho",
-             "icon": 0,
+             "text": "検索する",
              "appearance": 0,
              "imageFileUrl": "",
              "imageWidth": "",
              "imageHeight": "",
+             "icon": 0,
              "heightTextBoxMatches": false
             }
            ],
@@ -1664,7 +1664,12 @@
            "jpControlName": "",
            "readOnly": false,
            "height": "210",
-           "dataSource": [],
+           "onSort": "",
+           "onSelect": "",
+           "onSelectByDblClick": "",
+           "onOnlyRow": "",
+           "onNoRow": "",
+           "onMultiRows": "",
            "gridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": true,
@@ -1926,9 +1931,6 @@
              }
             ]
            },
-           "onSort": "",
-           "onSelect": "",
-           "onSelectByDblClick": "",
            "onSelectBySelectButton": "",
            "onSelectByModifyButton": "",
            "onSelectByDeleteButton": "",
@@ -1937,9 +1939,7 @@
            "onAfterRequestBySelectButton": "",
            "onAfterRequestByModifyButton": "",
            "onAfterRequestByDeleteButton": "",
-           "onOnlyRow": "",
-           "onNoRow": "",
-           "onMultiRows": "",
+           "dataSource": [],
            "sortOrder": "hihokenshaNo",
            "isAscending": true,
            "filterList": [],
@@ -2011,6 +2011,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
+           "text": "",
            "onChange": "onChange_txtShoriDateOfIkensho",
            "required": false,
            "labelLText": "発行処理日",
@@ -2025,11 +2026,10 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "",
-           "value": "",
-           "permitCharactor": "./_-",
            "ymdKubun": 2,
-           "displayFormat": 0
+           "displayFormat": 0,
+           "value": "",
+           "permitCharactor": "./_-"
           },
           {
            "fieldName": "txtHakkoDateOfIkensho",
@@ -2052,6 +2052,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
+           "text": "",
            "onChange": "",
            "required": false,
            "labelLText": "発行日",
@@ -2066,11 +2067,10 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "",
-           "value": "",
-           "permitCharactor": "./_-",
            "ymdKubun": 2,
-           "displayFormat": 0
+           "displayFormat": 0,
+           "value": "",
+           "permitCharactor": "./_-"
           },
           {
            "fieldName": "txtKigenDateOfIkensho",
@@ -2093,6 +2093,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
+           "text": "",
            "onChange": "",
            "required": false,
            "labelLText": "期限日",
@@ -2107,11 +2108,10 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "",
-           "value": "",
-           "permitCharactor": "./_-",
            "ymdKubun": 2,
-           "displayFormat": 0
+           "displayFormat": 0,
+           "value": "",
+           "permitCharactor": "./_-"
           }
          ],
          "controlType": "Panel",
@@ -2202,7 +2202,7 @@
       "IkenshoIraiIkkatuHakkoTab"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "IkenshoIraiIkkatuHakkoTab",
+     "selectedItemFieldName": "NinteichosaIraiIkkatuHakkoTab",
      "initialTab": 0,
      "isLazyLoading": false
     }
