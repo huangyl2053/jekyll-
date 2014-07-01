@@ -59,7 +59,7 @@ public class SearchResultShoKaishuKanri {
         for (HashMap yamlData : yamlDataList) {
             RString hihokenshaNo = searchResultDiv.getHihokenshaNo();
             ControlGenerator generator = new ControlGenerator(yamlData);
-            if (hihokenshaNo != null && hihokenshaNo.equals(generator.getAsRString("被保番号"))) {
+            if (hihokenshaNo != null) {
                 shoKofuDataList = (List<HashMap>) generator.get("証交付記録");
             }
         }
