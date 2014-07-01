@@ -21,6 +21,8 @@ public class PageRangeForJimukyokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("linShiryoNoForJimukyoku")
+    private HorizontalLine linShiryoNoForJimukyoku;
     @JsonProperty("lblPageRangeForJimukyoku")
     private Label lblPageRangeForJimukyoku;
     @JsonProperty("txtPageRangeForJimukyokuFrom")
@@ -38,6 +40,16 @@ public class PageRangeForJimukyokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("linShiryoNoForJimukyoku")
+    public HorizontalLine getLinShiryoNoForJimukyoku() {
+        return linShiryoNoForJimukyoku;
+    }
+
+    @JsonProperty("linShiryoNoForJimukyoku")
+    public void setLinShiryoNoForJimukyoku(HorizontalLine linShiryoNoForJimukyoku) {
+        this.linShiryoNoForJimukyoku=linShiryoNoForJimukyoku;
+    }
+
     @JsonProperty("lblPageRangeForJimukyoku")
     public Label getLblPageRangeForJimukyoku() {
         return lblPageRangeForJimukyoku;

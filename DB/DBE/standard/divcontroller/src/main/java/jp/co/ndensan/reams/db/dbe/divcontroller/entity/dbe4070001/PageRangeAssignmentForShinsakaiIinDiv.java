@@ -21,6 +21,8 @@ public class PageRangeAssignmentForShinsakaiIinDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("linShiryoNoForIin")
+    private HorizontalLine linShiryoNoForIin;
     @JsonProperty("lblPageRangeForShinsakaiIin")
     private Label lblPageRangeForShinsakaiIin;
     @JsonProperty("txtPageRangeAssignmentForShinsakaiIinFrom")
@@ -38,6 +40,16 @@ public class PageRangeAssignmentForShinsakaiIinDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("linShiryoNoForIin")
+    public HorizontalLine getLinShiryoNoForIin() {
+        return linShiryoNoForIin;
+    }
+
+    @JsonProperty("linShiryoNoForIin")
+    public void setLinShiryoNoForIin(HorizontalLine linShiryoNoForIin) {
+        this.linShiryoNoForIin=linShiryoNoForIin;
+    }
+
     @JsonProperty("lblPageRangeForShinsakaiIin")
     public Label getLblPageRangeForShinsakaiIin() {
         return lblPageRangeForShinsakaiIin;

@@ -26,6 +26,7 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "510",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -46,20 +47,20 @@
       },
       "columns": [
        {
-        "columnName": "選択",
+        "columnName": "選択<br>",
         "dataName": "btnToDecide",
         "toolTip": "",
         "bgColor": 0,
-        "width": 50,
+        "width": 40,
         "visible": true,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
          "text": "...",
          "onClick": "",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
-         "imageWidth": "16",
-         "imageHeight": "18"
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
+         "imageWidth": "20",
+         "imageHeight": "20"
         },
         "align": 1,
         "resize": true,
@@ -479,7 +480,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "shimei",
      "isAscending": true,
      "filterList": [],
@@ -508,13 +508,13 @@
        "selectControlID": "btnHiddenCallOnResume",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "onResume",
        "text": "call onResume",
+       "onClick": "onResume",
+       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0,
        "heightTextBoxMatches": false
       }
      ],

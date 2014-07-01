@@ -27,11 +27,11 @@
        "selectControlID": "lblKaisaiDate",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "開催日",
        "required": false,
+       "align": 2,
+       "text": "開催日",
        "isPrivateInfo": false,
-       "decorationClass": "",
-       "align": 2
+       "decorationClass": ""
       },
       {
        "fieldName": "txtKaisaiDate",
@@ -54,25 +54,25 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
-       "placeHolder": "",
+       "text": "",
        "isPrivateInfo": false,
+       "placeHolder": "",
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "value": "",
        "labelLText": "",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "value": "",
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblAfterThis",
@@ -94,11 +94,11 @@
        "selectControlID": "lblAfterThis",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "以降",
        "required": false,
+       "align": 2,
+       "text": "以降",
        "isPrivateInfo": false,
-       "decorationClass": "",
-       "align": 2
+       "decorationClass": ""
       }
      ],
      "controlType": "Panel",
@@ -165,8 +165,8 @@
        "selectControlID": "btnToClearConditon",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "",
        "text": "条件をクリアする",
+       "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -194,8 +194,8 @@
        "selectControlID": "btnToExtract",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "onClick_btnToExtract",
        "text": "抽出する",
+       "onClick": "onClick_btnToExtract",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -287,7 +287,7 @@
       },
       "columns": [
        {
-        "columnName": "選<br>択",
+        "columnName": "選択<br>",
         "dataName": "btnToDecide",
         "toolTip": "",
         "bgColor": 0,
@@ -298,9 +298,9 @@
          "cellType": 8,
          "text": "...",
          "onClick": "onClick_btnToDecide",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
-         "imageWidth": "16",
-         "imageHeight": "18"
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
+         "imageWidth": "20",
+         "imageHeight": "20"
         },
         "align": 1,
         "resize": false,
