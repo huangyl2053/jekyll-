@@ -66,7 +66,7 @@
      "btnEltax_displayNone": false,
      "btnShiyoJokyo_displayNone": false,
      "btnAtesakiKakunin_displayNone": false,
-     "SubGyomuCode": "",
+     "SubGyomuCode": "DBU",
      "JukiYusennKubun": "1",
      "AgeArrivalDay": "1",
      "SubGyomuUmu": "0",
@@ -374,7 +374,7 @@
    "commonButtonAreaId": "commonBtn",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonSubmitForDemo",
+     "buttonKind": "CommonButtonReportPublish",
      "buttonProperty": {
       "fieldName": "btnPrint",
       "items": [],
@@ -399,22 +399,31 @@
        {}
       ],
       "text": "被保険者証を発行する",
+      "imageWidth": "",
+      "imageHeight": "",
       "onClick": "",
       "appearance": 0,
       "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
+      "onAfterRequest": "",
+      "additionalText": "被保険者証を",
       "prefixText": "",
       "suffixText": "",
       "validateUrl": "",
-      "submitUrl": "",
-      "onAfterRequest": ""
+      "sourceCreateUrl": "",
+      "afterPrintUrl": "",
+      "isModal": true,
+      "isInstruction": true,
+      "isPreview": false,
+      "printable": false,
+      "copiesChangeable": false,
+      "progressVisible": false,
+      "submitUrl": ""
      }
     },
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonSearchResult",
      "buttonProperty": {
       "fieldName": "btnReturn",
       "items": [],
@@ -443,6 +452,7 @@
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
+      "additionalText": "",
       "prefixText": "",
       "suffixText": ""
      }

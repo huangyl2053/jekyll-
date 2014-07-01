@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller;
 
 import java.util.HashMap;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011.HihokenshashoHakkoTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -14,7 +13,7 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+//import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 被保険者証発行対象者情報Divを制御します。
@@ -33,25 +32,24 @@ public class HihokenshashoHakkoTaishoshaJoho {
             HihokenshashoHakkoTaishoshaJohoDiv panel) {
         ResponseData<HihokenshashoHakkoTaishoshaJohoDiv> response = new ResponseData<>();
 
-        RString rsShikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);
-        RString rsHihoNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
-
-        List<HashMap> hihokenshashoHakkoTaishoshaJohoList = YamlLoader.DBU.loadAsList(
-                new RString("dbu0410011/HihokenshashoHakkoTaishoshaJoho.yml"));
-
-        int iIdx;
-        if (rsHihoNo.toString().equals("1234500001")) {
-            iIdx = 0;
-        } else {
-            iIdx = 1;
-        }
-
-        //宛名照会 識別コード設定
-        AtenaShokaiSimple.setData(panel.getHihokenshashoHakkoTaishoshaCommonJoho(), new ShikibetsuCode(rsShikibetsuCode));
-
-        HashMap hashMap = hihokenshashoHakkoTaishoshaJohoList.get(iIdx);
+//        RString rsShikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);
+//        RString rsHihoNo = (RString) ViewStateHolder.get("hihokenshaNo", RString.class);
+        HashMap hashMap
+                = YamlLoader.DBU.loadAsList(new RString("dbu0410011/HihokenshashoHakkoTaishoshaJoho.yml")).get(0);
+//        int iIdx;
+//        if (rsHihoNo.toString().equals("1234500001")) {
+//            iIdx = 0;
+//        } else {
+//            iIdx = 1;
+//        }
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
+        //宛名照会 識別コード設定
+        AtenaShokaiSimple.setData(panel.getHihokenshashoHakkoTaishoshaCommonJoho(),
+                new ShikibetsuCode(ymlData.getAsRString("shikibetsuCode")));
+//
+//        //HashMap hashMap = hihokenshashoHakkoTaishoshaJohoList.get(iIdx);
+//        ControlGenerator ymlData = new ControlGenerator(hashMap);
 //        //対象者情報の出力
 //        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtAtenaMeisho().
 //                setValue(ymlData.getAsRString("shimei"));

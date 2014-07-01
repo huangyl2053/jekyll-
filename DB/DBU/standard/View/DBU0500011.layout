@@ -74,11 +74,11 @@
      "text": "",
      "onClick": "",
      "appearance": 2,
-     "imageFileUrl": "/uz/uza/css/rireki_brue.png",
+     "imageFileUrl": "/uz/uza/image/UZ_Search.png",
      "imageWidth": "20",
      "imageHeight": "16",
      "icon": 0,
-     "heightTextBoxMatches": false,
+     "heightTextBoxMatches": true,
      "displayChildDivName": "DBZ.HihokenshaInputGuide",
      "dataPassing": [
       {
@@ -245,7 +245,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "11",
+     "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "chkKaishuKirokuZumi_core",
      "helpMessageID": "",
@@ -1055,12 +1055,12 @@
      "transition": "回収記録登録"
     },
     {
-     "fieldName": "btnReSearch",
+     "fieldName": "btnSave",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnSave",
+     "fieldName": "btnReSearch",
      "event": "onClick",
      "transition": ""
     }
@@ -1110,14 +1110,14 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReSearch",
-     "event": "onClick",
-     "transition": "対象者検索"
-    },
-    {
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": "登録完了"
+    },
+    {
+     "fieldName": "btnReSearch",
+     "event": "onClick",
+     "transition": "対象者検索"
     }
    ]
   },
@@ -1151,12 +1151,12 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReSearch",
+     "fieldName": "btnSave",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnSave",
+     "fieldName": "btnReSearch",
      "event": "onClick",
      "transition": ""
     }
@@ -1203,11 +1203,11 @@
    "commonButtonAreaId": "commonBtn",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
       "fieldName": "btnSave",
       "items": [],
-      "controlType": "CommonButtonFree",
+      "controlType": "CommonButtonSubmitForDemo",
       "width": 1,
       "visible": true,
       "displayNone": false,
@@ -1224,7 +1224,9 @@
       "selectControlID": "btnSave",
       "helpMessageID": "",
       "jpControlName": "",
-      "postParameterPanelNames": [],
+      "postParameterPanelNames": [
+       {}
+      ],
       "text": "証類状況を保存する",
       "onClick": "",
       "appearance": 0,
@@ -1234,17 +1236,20 @@
       "icon": 0,
       "heightTextBoxMatches": false,
       "onAfterRequest": "",
+      "additionalText": "証類状況を",
       "prefixText": "",
-      "suffixText": ""
+      "suffixText": "",
+      "validateUrl": "",
+      "submitUrl": ""
      }
     },
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonReSearch",
      "buttonProperty": {
       "fieldName": "btnReSearch",
       "items": [],
-      "controlType": "CommonButtonFree",
-      "width": "S",
+      "controlType": "CommonButtonReSearch",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -1260,15 +1265,15 @@
       "selectControlID": "btnReSearch",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "再検索を行う",
+      "text": "再検索",
       "onClick": "",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
       "icon": 0,
-      "prefixText": "",
-      "suffixText": ""
+      "heightTextBoxMatches": false,
+      "additionalText": ""
      }
     }
    ],

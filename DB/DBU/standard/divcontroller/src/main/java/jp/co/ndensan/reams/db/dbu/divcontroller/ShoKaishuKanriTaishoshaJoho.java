@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller;
 
 import java.util.HashMap;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.SearchResultShoKaishuKanriDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.ShoKaishuKanriTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
@@ -38,20 +37,25 @@ public class ShoKaishuKanriTaishoshaJoho {
             SearchResultShoKaishuKanriDiv searchResultDiv) {
         ResponseData<ShoKaishuKanriTaishoshaJohoDiv> response = new ResponseData<>();
 
-        RString hihokenshaNo = searchResultDiv.getHihokenshaNo();
+//        RString hihokenshaNo = searchResultDiv.getHihokenshaNo();
+        HashMap yamlData = YamlLoader.DBU.loadAsList(HIHOKENSHA_DATA).get(0);
+        ControlGenerator generator = new ControlGenerator(yamlData);
 
         //宛名照会 識別コード設定
-        AtenaShokaiSimple.setData(taishoshaJohoDiv.getShoKaishuKanriTaishoshaCommonJoho(), new ShikibetsuCode("012345678901234"));
+        AtenaShokaiSimple.setData(taishoshaJohoDiv.getShoKaishuKanriTaishoshaCommonJoho(),
+                new ShikibetsuCode(generator.getAsRString("識別番号")));
 
-        List<HashMap> yamlDataList = YamlLoader.DBU.loadAsList(HIHOKENSHA_DATA);
-        for (HashMap yamlData : yamlDataList) {
-            ControlGenerator generator = new ControlGenerator(yamlData);
-            if (hihokenshaNo != null && hihokenshaNo.equals(generator.getAsRString("被保番号"))) {
-                //setTaishoshaCommonData(taishoshaJohoDiv.getShoKaishuKanriTaishoshaCommonJoho(), generator);
-                setTaishoshaDbData(taishoshaJohoDiv.getCcdKaigoShikakuKihon(), generator);
-            }
-        }
+        setTaishoshaDbData(taishoshaJohoDiv.getCcdKaigoShikakuKihon(), generator);
 
+//        List<HashMap> yamlDataList = YamlLoader.DBU.loadAsList(HIHOKENSHA_DATA);
+//
+//        for (HashMap yamlData : yamlDataList) {
+//            ControlGenerator generator = new ControlGenerator(yamlData);
+//            if (hihokenshaNo != null && hihokenshaNo.equals(generator.getAsRString("被保番号"))) {
+//                //setTaishoshaCommonData(taishoshaJohoDiv.getShoKaishuKanriTaishoshaCommonJoho(), generator);
+//                setTaishoshaDbData(taishoshaJohoDiv.getCcdKaigoShikakuKihon(), generator);
+//            }
+//        }
         response.data = taishoshaJohoDiv;
         return response;
     }
@@ -67,7 +71,7 @@ public class ShoKaishuKanriTaishoshaJoho {
 //        taishoshaCommonJoho.getTxtSeibetsu().setValue(generator.getAsRString("性別"));
 //        taishoshaCommonJoho.getTxtSeinengappiYMD().setValue(generator.getAsRDate("生年月日"));
 //        taishoshaCommonJoho.getTxtSetaiCode().setValue(generator.getAsRString("世帯コード"));
-//        taishoshaCommonJoho.getTxtShikibetsuCode().setValue(generator.getAsRString("識別コード"));
+//        taishoshaCommonJoho.getTxtShikibetsuCode().setValue(generator.getAsRString("識別番号"));
 //        taishoshaCommonJoho.getTxtYubinNo().setValue(new YubinNo(generator.getAsRString("郵便番号")));
 //    }
     private void setTaishoshaDbData(KaigoShikakuKihonDiv shikakuKihonJoho, ControlGenerator generator) {
