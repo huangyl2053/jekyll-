@@ -40,9 +40,12 @@ public class SearchResultShoKaishuKanri {
      */
     public ResponseData onClick_btnSearchShoKaishuKanri(SearchResultShoKaishuKanriDiv searchResultDiv, SearchShoKaishuKanriDiv searchDiv) {
         ResponseData<SearchResultShoKaishuKanriDiv> response = new ResponseData<>();
-        searchResultDiv.setHihokenshaNo(searchDiv.getTxtSearchHihokenshaNo().getValue());
-        setShoKofuGrid(searchResultDiv, searchDiv);
-        openAndClosePanel(searchResultDiv);
+        if (!searchDiv.getTxtSearchHihokenshaNo().getText().isEmpty()) {
+            searchResultDiv.setHihokenshaNo(searchDiv.getTxtSearchHihokenshaNo().getValue());
+            setShoKofuGrid(searchResultDiv, searchDiv);
+            openAndClosePanel(searchResultDiv);
+        }
+
         response.data = searchResultDiv;
         return response;
     }

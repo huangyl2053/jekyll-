@@ -57,8 +57,8 @@ public class SearchShoKaishuKanri {
         List<HashMap> yamlDataList = YamlLoader.DBU.loadAsList(HIHOKENSHA_DATA);
         for (HashMap yamlData : yamlDataList) {
             ControlGenerator generator = new ControlGenerator(yamlData);
-            RString hihokenshaNo = searchDiv.getTxtSearchHihokenshaNo().getValue();
-            if (hihokenshaNo != null) {
+            RString hihokenshaNo = searchDiv.getTxtSearchHihokenshaNo().getText();
+            if (!hihokenshaNo.isEmpty()) {
                 searchDiv.getTxtSearchHihokenshaMeisho().setValue(generator.getAsRString("氏名"));
             }
         }
