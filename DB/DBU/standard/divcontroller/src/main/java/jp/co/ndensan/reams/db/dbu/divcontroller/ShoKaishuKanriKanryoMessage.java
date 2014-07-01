@@ -35,7 +35,7 @@ public class ShoKaishuKanriKanryoMessage {
                 panel2.getCcdKaigoShikakuKihon().getTxtHihokenshaNo().getValue());
 
         panel.getCcdKaigoKanryoMessage().getKanryoMessage().getLblTaishoMessage2().setText(
-                panel2.getShoKaishuKanriTaishoshaCommonJoho().getTxtAtenaMeisho().getValue());
+                panel2.getShoKaishuKanriTaishoshaCommonJoho().getAtenaInfo().getTxtAtenaMeisho().getValue());
 
         response.data = panel;
         return response;

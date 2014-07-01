@@ -1,16 +1,15 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0600011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * SogoShokaiKihon のクラスファイル 
- * 
+ * SogoShokaiKihon のクラスファイル
+ *
  * @author 自動生成
  */
 public class SogoShokaiKihonDiv extends Panel {
@@ -20,8 +19,9 @@ public class SogoShokaiKihonDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("SogoShokaiKihonInfo")
-    private AtenaShokaiSimpleDiv SogoShokaiKihonInfo;
+    private KaigoAtenaInfoDiv SogoShokaiKihonInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,13 +30,13 @@ public class SogoShokaiKihonDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("SogoShokaiKihonInfo")
-    public AtenaShokaiSimpleDiv getSogoShokaiKihonInfo() {
+    public KaigoAtenaInfoDiv getSogoShokaiKihonInfo() {
         return SogoShokaiKihonInfo;
     }
 
     @JsonProperty("SogoShokaiKihonInfo")
-    public void setSogoShokaiKihonInfo(AtenaShokaiSimpleDiv SogoShokaiKihonInfo) {
-        this.SogoShokaiKihonInfo=SogoShokaiKihonInfo;
+    public void setSogoShokaiKihonInfo(KaigoAtenaInfoDiv SogoShokaiKihonInfo) {
+        this.SogoShokaiKihonInfo = SogoShokaiKihonInfo;
     }
 
 }

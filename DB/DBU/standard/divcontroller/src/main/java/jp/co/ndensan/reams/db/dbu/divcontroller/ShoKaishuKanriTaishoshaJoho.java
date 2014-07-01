@@ -42,7 +42,7 @@ public class ShoKaishuKanriTaishoshaJoho {
         ControlGenerator generator = new ControlGenerator(yamlData);
 
         //宛名照会 識別コード設定
-        AtenaShokaiSimple.setData(taishoshaJohoDiv.getShoKaishuKanriTaishoshaCommonJoho(),
+        AtenaShokaiSimple.setData(taishoshaJohoDiv.getShoKaishuKanriTaishoshaCommonJoho().getAtenaInfo(),
                 new ShikibetsuCode(generator.getAsRString("識別番号")));
 
         setTaishoshaDbData(taishoshaJohoDiv.getCcdKaigoShikakuKihon(), generator);

@@ -77,11 +77,11 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "一括作成対象を表示する",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "onClick_BtnSearchHakkoTaisho",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false
     }
@@ -157,6 +157,7 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "174",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -282,7 +283,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -329,9 +329,9 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 0,
-       "permitCharactor": "./_-"
+       "displayFormat": 0
       },
       {
        "fieldName": "chkTest",

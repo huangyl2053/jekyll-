@@ -38,7 +38,7 @@ public class SogoShokaiKihon {
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
         //宛名照会 識別コード設定
-        AtenaShokaiSimple.setData(panel.getSogoShokaiKihonInfo(),
+        AtenaShokaiSimple.setData(panel.getSogoShokaiKihonInfo().getAtenaInfo(),
                 new ShikibetsuCode(ymlData.getAsRString("識別コード")));
 
         //RString rsShikibetsuCode = (RString) ViewStateHolder.get("shikibetsuCode", RString.class);

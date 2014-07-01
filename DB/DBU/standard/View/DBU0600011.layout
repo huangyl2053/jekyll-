@@ -14,7 +14,7 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": true,
+     "wrap": false,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
@@ -24,30 +24,25 @@
      "selectControlID": "SogoShokaiKihonInfo",
      "helpMessageID": "",
      "jpControlName": "",
-     "title": "",
      "relation": [],
-     "canOpenAndClose": false,
      "marginTop": 0,
      "marginBottom": 0,
-     "backgroundColor": 0,
-     "businessId": "URA",
-     "controlName": "AtenaShokaiSimple",
-     "dataPassingForDialog": [
-      {
-       "key": "",
-       "controlName": ""
-      }
-     ],
+     "businessId": "DBZ",
+     "controlName": "KaigoAtenaInfo",
+     "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "atenaInfo_title": "",
+     "atenaInfo_canOpenAndClose": true,
+     "AtenaShokaiSimple_eraseBorder": true,
      "AtenaKanaMeisho_visible": true,
-     "AtenaMeisho_visible": true,
+     "AtenaMisho_visible": true,
      "SeinengappiYMD_visible": true,
      "Nenrei_visible": true,
      "Seibetsu_visible": true,
-     "JuminShubetsu_visible": true,
+     "JuminShubetsu_Visible": true,
      "NihonjinGaikokujin_visible": true,
      "JuminJotai_visible": true,
      "YubinNo_visible": true,
@@ -57,8 +52,7 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnMemo_displayNone": false,
-     "btnDainosya_displayNone": false,
+     "btnDainosha_displayNone": false,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
      "btnKoza_displayNone": false,
@@ -76,8 +70,7 @@
      "AgeArrivalDay": "1",
      "SubGyomuUmu": "0",
      "SubGyomuSearchUmu": "0",
-     "DainoninHyojiUmu": "1",
-     "AtenaShokaiSimple_eraseBorder": false
+     "DainoninHyojiUmu": "1"
     }
    ],
    "controlType": "Panel",
@@ -4251,16 +4244,6 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "SogoShokaiKihonInfo",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "SogoShokaiSetai",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "SogoShokaiInfo",
      "panelState": "visible",
      "fixedDiv": "No"
@@ -4297,6 +4280,11 @@
     },
     {
      "visibleDiv": "SogoShokaiJuminSogoJigyo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "SogoShokaiKihonInfo",
      "panelState": "visible",
      "fixedDiv": "No"
     }

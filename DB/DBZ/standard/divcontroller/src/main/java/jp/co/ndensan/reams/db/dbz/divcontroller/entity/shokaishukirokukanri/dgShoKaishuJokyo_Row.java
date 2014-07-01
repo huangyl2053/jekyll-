@@ -1,25 +1,20 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
- * コードが再生成されるときに損失したりします。
- * Tue Jun 10 13:59:29 JST 2014 
+ * このコードはツールによって生成されました。 このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
+ * コードが再生成されるときに損失したりします。 Wed Jun 25 20:20:46 JST 2014
  */
-
-
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
-
 /**
- * dgShoKaishuJokyo_Row のクラスファイル 
- * 
+ * dgShoKaishuJokyo_Row のクラスファイル
+ *
  * @author 自動生成
  */
-
 public class dgShoKaishuJokyo_Row extends DataRow {
 
     private Button btnSelect;
@@ -36,6 +31,17 @@ public class dgShoKaishuJokyo_Row extends DataRow {
 
     public dgShoKaishuJokyo_Row() {
         super();
+        this.btnSelect = new Button();
+        this.kofushoShurui = RString.EMPTY;
+        this.kofuDate = new TextBoxFlexibleDate();
+        this.kofuJiyuKey = RString.EMPTY;
+        this.kofuJiyu = RString.EMPTY;
+        this.kofuRiyu = RString.EMPTY;
+        this.kaishuDate = new TextBoxFlexibleDate();
+        this.kaishuJiyuKey = RString.EMPTY;
+        this.kaishuJiyu = RString.EMPTY;
+        this.kaishuRiyu = RString.EMPTY;
+        this.yukoKigen = new TextBoxFlexibleDate();
     }
 
     public dgShoKaishuJokyo_Row(Button btnSelect, RString kofushoShurui, TextBoxFlexibleDate kofuDate, RString kofuJiyuKey, RString kofuJiyu, RString kofuRiyu, TextBoxFlexibleDate kaishuDate, RString kaishuJiyuKey, RString kaishuJiyu, RString kaishuRiyu, TextBoxFlexibleDate yukoKigen) {

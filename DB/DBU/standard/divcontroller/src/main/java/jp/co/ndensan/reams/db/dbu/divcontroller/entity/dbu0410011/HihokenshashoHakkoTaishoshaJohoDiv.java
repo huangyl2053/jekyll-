@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -22,7 +22,7 @@ public class HihokenshashoHakkoTaishoshaJohoDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("HihokenshashoHakkoTaishoshaCommonJoho")
-    private AtenaShokaiSimpleDiv HihokenshashoHakkoTaishoshaCommonJoho;
+    private KaigoAtenaInfoDiv HihokenshashoHakkoTaishoshaCommonJoho;
     @JsonProperty("ccdKaigoShikakuKihon")
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
 
@@ -33,12 +33,12 @@ public class HihokenshashoHakkoTaishoshaJohoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("HihokenshashoHakkoTaishoshaCommonJoho")
-    public AtenaShokaiSimpleDiv getHihokenshashoHakkoTaishoshaCommonJoho() {
+    public KaigoAtenaInfoDiv getHihokenshashoHakkoTaishoshaCommonJoho() {
         return HihokenshashoHakkoTaishoshaCommonJoho;
     }
 
     @JsonProperty("HihokenshashoHakkoTaishoshaCommonJoho")
-    public void setHihokenshashoHakkoTaishoshaCommonJoho(AtenaShokaiSimpleDiv HihokenshashoHakkoTaishoshaCommonJoho) {
+    public void setHihokenshashoHakkoTaishoshaCommonJoho(KaigoAtenaInfoDiv HihokenshashoHakkoTaishoshaCommonJoho) {
         this.HihokenshashoHakkoTaishoshaCommonJoho=HihokenshashoHakkoTaishoshaCommonJoho;
     }
 

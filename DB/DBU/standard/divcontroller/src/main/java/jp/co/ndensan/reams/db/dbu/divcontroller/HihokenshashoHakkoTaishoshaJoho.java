@@ -45,7 +45,7 @@ public class HihokenshashoHakkoTaishoshaJoho {
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
         //宛名照会 識別コード設定
-        AtenaShokaiSimple.setData(panel.getHihokenshashoHakkoTaishoshaCommonJoho(),
+        AtenaShokaiSimple.setData(panel.getHihokenshashoHakkoTaishoshaCommonJoho().getAtenaInfo(),
                 new ShikibetsuCode(ymlData.getAsRString("shikibetsuCode")));
 //
 //        //HashMap hashMap = hihokenshashoHakkoTaishoshaJohoList.get(iIdx);
