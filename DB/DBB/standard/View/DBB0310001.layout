@@ -24,12 +24,12 @@
      "selectControlID": "btnHonsanteiFukaKeisan",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "",
      "text": "本算定賦課計算",
-     "appearance": 0,
-     "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
      "icon": 0,
      "heightTextBoxMatches": false
     },
@@ -53,12 +53,12 @@
      "selectControlID": "btnHonsanteiTsuchisho",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "",
      "text": "本算定帳票発行",
-     "appearance": 0,
-     "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
      "icon": 0,
      "heightTextBoxMatches": false
     }
@@ -128,7 +128,6 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "text": "",
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
@@ -142,6 +141,7 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "",
@@ -150,7 +150,8 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     }
    ],
    "controlType": "Panel",
@@ -221,7 +222,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -235,6 +235,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "調定年度",
@@ -243,7 +244,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       },
       {
        "fieldName": "txtFukaNendo",
@@ -266,7 +268,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -280,6 +281,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "賦課年度",
@@ -288,7 +290,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       },
       {
        "fieldName": "ddlChoteiKi",
@@ -320,13 +323,13 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
          "value": "1期（6月）"
         }
        ],
+       "selectedItem": "key0",
        "disabledItem": []
       },
       {
@@ -350,15 +353,15 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
-       "text": "",
        "required": false,
-       "placeHolder": "平26.05.20",
+       "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "所得異動基準日",
        "labelRText": "",
@@ -367,7 +370,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       }
      ],
      "controlType": "Panel",
@@ -436,7 +440,6 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "100",
-       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -520,6 +523,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "",
        "isAscending": true,
        "filterList": [],
@@ -545,9 +549,9 @@
        "selectControlID": "lblonsanteiShoriKakunin",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "※算定処理は上記処理がすべて完了してから行います。",
        "required": false,
        "isPrivateInfo": false,
+       "text": "※算定処理は上記処理がすべて完了してから行います。",
        "decorationClass": "",
        "align": 0
       }
@@ -618,7 +622,6 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "Auto",
-       "dataSource": [],
        "gridSetting": {
         "rowHeight": 20,
         "isMultiSelectable": false,
@@ -686,6 +689,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "",
        "isAscending": true,
        "filterList": [],
@@ -713,7 +717,6 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "Auto",
-       "dataSource": [],
        "gridSetting": {
         "rowHeight": 20,
         "isMultiSelectable": false,
@@ -779,6 +782,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "",
        "isAscending": true,
        "filterList": [],
@@ -900,7 +904,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "",
        "textKind": 0,
@@ -910,6 +913,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "抽出開始",
        "labelRText": "",
@@ -918,7 +922,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "txtChoteiboFromTime",
@@ -941,7 +946,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -955,6 +959,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -965,6 +970,7 @@
        "labelRAlign": 0,
        "decorationClass": "",
        "displayFormat": 1,
+       "permitCharactor": "",
        "timeKubun": 2
       },
       {
@@ -987,9 +993,9 @@
        "selectControlID": "lblChoteboTo",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "～　本算定賦課終了",
        "required": false,
        "isPrivateInfo": false,
+       "text": "～　本算定賦課終了",
        "decorationClass": "",
        "align": 2
       },
@@ -1094,7 +1100,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "平26.99.99",
        "textKind": 0,
@@ -1104,6 +1109,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "発行日",
        "labelRText": "",
@@ -1112,7 +1118,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblTokuKaishiTsuchiDaikou",
@@ -1134,9 +1141,9 @@
        "selectControlID": "lblTokuKaishiTsuchiDaikou",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "※代行プリント対象の通知書です",
        "required": false,
        "isPrivateInfo": false,
+       "text": "※代行プリント対象の通知書です",
        "decorationClass": "",
        "align": 2
       },
@@ -1161,14 +1168,13 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onClick": "",
-       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "出力対象",
        "labelLWidth": "80",
        "labelLAlign": 2,
-       "selectedItem": null,
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -1183,6 +1189,7 @@
          "value": "2月特徴開始者のみ"
         }
        ],
+       "selectedItem": null,
        "newLineItemNumber": 3,
        "spaceSize": "M",
        "disabledItem": []
@@ -1288,7 +1295,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "",
        "textKind": 0,
@@ -1298,6 +1304,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "発行日",
        "labelRText": "",
@@ -1306,7 +1313,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "btnKetteiTsuchiYousikiSettei",
@@ -1328,12 +1336,12 @@
        "selectControlID": "btnKetteiTsuchiYousikiSettei",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "",
        "text": "打分け方法を確認する",
-       "appearance": 0,
-       "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "onClick": "",
+       "appearance": 0,
+       "imageFileUrl": "",
        "icon": 0,
        "heightTextBoxMatches": false
       },
@@ -1358,7 +1366,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -1372,6 +1379,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "文書番号",
@@ -1380,7 +1388,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       },
       {
        "fieldName": "ShutsuryokuJunHonKetteTsuchi",
@@ -1483,7 +1492,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "",
        "textKind": 0,
@@ -1493,6 +1501,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "発行日",
        "labelRText": "",
@@ -1501,7 +1510,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblNotsuDaikou",
@@ -1523,9 +1533,9 @@
        "selectControlID": "lblNotsuDaikou",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "※代行プリント対象の通知書です",
        "required": false,
        "isPrivateInfo": false,
+       "text": "※代行プリント対象の通知書です",
        "decorationClass": "",
        "align": 2
       },
@@ -1560,7 +1570,6 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -1603,6 +1612,7 @@
          "value": "10期（3月）"
         }
        ],
+       "selectedItem": "key0",
        "disabledItem": []
       },
       {
@@ -1626,14 +1636,13 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onClick": "",
-       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "対象者",
        "labelLWidth": "80",
        "labelLAlign": 2,
-       "selectedItem": null,
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -1644,6 +1653,7 @@
          "value": "口座振替者"
         }
        ],
+       "selectedItem": null,
        "newLineItemNumber": 3,
        "spaceSize": "M",
        "disabledItem": [],
@@ -1687,14 +1697,13 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onClick": "",
-       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "生活保護対象者のみで出力",
        "labelLWidth": "200",
        "labelLAlign": 2,
-       "selectedItem": "key0",
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -1705,6 +1714,7 @@
          "value": "しない"
         }
        ],
+       "selectedItem": "key0",
        "newLineItemNumber": 2,
        "spaceSize": "M",
        "disabledItem": []
@@ -1730,14 +1740,13 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onClick": "",
-       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "ページごとに山分け",
        "labelLWidth": "200",
        "labelLAlign": 2,
-       "selectedItem": "key0",
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -1748,6 +1757,7 @@
          "value": "しない"
         }
        ],
+       "selectedItem": "key0",
        "newLineItemNumber": 2,
        "spaceSize": "M",
        "disabledItem": []
@@ -1980,7 +1990,6 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "text": "",
      "required": false,
      "placeHolder": "",
      "textKind": 0,
@@ -1990,6 +1999,7 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "value": "",
      "labelLText": "発行日",
      "labelRText": "",
@@ -1998,7 +2008,8 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "dgHonsanteiTsuchisho",
@@ -2022,7 +2033,6 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "150",
-     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -2152,6 +2162,7 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
+     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -2180,9 +2191,9 @@
        "selectControlID": "lblTokuKaishiTsuchi",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "［特徴開始通知書］　《出力内容》",
        "required": false,
        "isPrivateInfo": false,
+       "text": "［特徴開始通知書］　《出力内容》",
        "decorationClass": "",
        "align": 2
       },
@@ -2207,14 +2218,13 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
-       "onClick": "",
-       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "出力対象",
        "labelLWidth": "80",
        "labelLAlign": 2,
-       "selectedItem": "key0",
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -2229,6 +2239,7 @@
          "value": "2月特徴開始者のみ"
         }
        ],
+       "selectedItem": "key0",
        "newLineItemNumber": 3,
        "spaceSize": "M",
        "disabledItem": []
@@ -2253,9 +2264,9 @@
        "selectControlID": "lblKetteTsuchi",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "［決定／変更通知書］　《出力内容》",
        "required": false,
        "isPrivateInfo": false,
+       "text": "［決定／変更通知書］　《出力内容》",
        "decorationClass": "",
        "align": 2
       },
@@ -2280,7 +2291,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -2294,6 +2304,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "文書番号",
@@ -2302,7 +2313,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       },
       {
        "fieldName": "btnKetteiTsuchiYousikiSettei2",
@@ -2324,12 +2336,12 @@
        "selectControlID": "btnKetteiTsuchiYousikiSettei2",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "",
        "text": "打分け方法を確認する",
-       "appearance": 0,
-       "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "onClick": "",
+       "appearance": 0,
+       "imageFileUrl": "",
        "icon": 0,
        "heightTextBoxMatches": false
       },
@@ -2354,12 +2366,11 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "placeHolder": "特徴開始通知が出力されない被保険者のみ出力",
+       "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
@@ -2368,6 +2379,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -2376,7 +2388,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       },
       {
        "fieldName": "lblNotsu",
@@ -2398,9 +2411,9 @@
        "selectControlID": "lblNotsu",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "［納入通知書］　《出力内容》",
        "required": false,
        "isPrivateInfo": false,
+       "text": "［納入通知書］　《出力内容》",
        "decorationClass": "",
        "align": 2
       },
@@ -2435,7 +2448,6 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -2478,6 +2490,7 @@
          "value": "10期（3月）"
         }
        ],
+       "selectedItem": "key0",
        "disabledItem": []
       },
       {
@@ -2501,14 +2514,13 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onClick": "",
-       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "対象者",
        "labelLWidth": "360",
        "labelLAlign": 2,
-       "selectedItem": null,
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -2519,6 +2531,7 @@
          "value": "口座振替者"
         }
        ],
+       "selectedItem": null,
        "newLineItemNumber": 3,
        "spaceSize": "M",
        "disabledItem": [],
@@ -2562,14 +2575,13 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onClick": "",
-       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "生活保護対象者のみで出力",
        "labelLWidth": "505",
        "labelLAlign": 2,
-       "selectedItem": "key0",
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -2580,6 +2592,7 @@
          "value": "しない"
         }
        ],
+       "selectedItem": "key0",
        "newLineItemNumber": 2,
        "spaceSize": "M",
        "disabledItem": []
@@ -2605,14 +2618,13 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onClick": "",
-       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "ページごとに山分け",
        "labelLWidth": "505",
        "labelLAlign": 2,
-       "selectedItem": "key0",
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -2623,6 +2635,7 @@
          "value": "しない"
         }
        ],
+       "selectedItem": "key0",
        "newLineItemNumber": 2,
        "spaceSize": "M",
        "disabledItem": []
@@ -2647,12 +2660,12 @@
        "selectControlID": "demoTest",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "change_txtKetteiTsuchiYousikiSettei",
        "text": "Button1",
-       "appearance": 0,
-       "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "onClick": "change_txtKetteiTsuchiYousikiSettei",
+       "appearance": 0,
+       "imageFileUrl": "",
        "icon": 0,
        "heightTextBoxMatches": false
       }

@@ -54,7 +54,7 @@ public class HonsanteiChohyoHakko2 {
         ControlGenerator cg2 = new ControlGenerator(demoDataList2.get(0));
 
         div.getTxtHakkoYMD().setValue(cg2.getAsRDate("発行日"));
-
+        div.getHonTsuchiKobetsuJoho().getTxtKetteiTsuchiYousikiSettei().setValue(new RString("特徴開始通知が出力されない被保険者のみ出力"));
         List dataGrid = new ArrayList();
         for (HashMap demoData : demoDataList) {
 
