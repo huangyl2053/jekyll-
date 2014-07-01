@@ -26,7 +26,7 @@ class DemoData<T> implements IDemoData<T> {
     }
 
     @Override
-    public List<T> asConvetedType() {
+    public List<T> asConvertedType() {
         return YamlUtil.convertList(this.rawData, this.conveter);
     }
 

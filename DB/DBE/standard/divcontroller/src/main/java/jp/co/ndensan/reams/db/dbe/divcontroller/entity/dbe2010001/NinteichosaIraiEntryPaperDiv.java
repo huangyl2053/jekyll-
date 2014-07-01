@@ -24,6 +24,8 @@ public class NinteichosaIraiEntryPaperDiv extends Panel {
      */
     @JsonProperty("chkPaperType")
     private CheckBoxList chkPaperType;
+    @JsonProperty("linChohyo")
+    private HorizontalLine linChohyo;
     @JsonProperty("NinteichosaIraiEntryPaperPublish")
     private NinteichosaIraiEntryPaperPublishDiv NinteichosaIraiEntryPaperPublish;
 
@@ -41,6 +43,16 @@ public class NinteichosaIraiEntryPaperDiv extends Panel {
     @JsonProperty("chkPaperType")
     public void setChkPaperType(CheckBoxList chkPaperType) {
         this.chkPaperType=chkPaperType;
+    }
+
+    @JsonProperty("linChohyo")
+    public HorizontalLine getLinChohyo() {
+        return linChohyo;
+    }
+
+    @JsonProperty("linChohyo")
+    public void setLinChohyo(HorizontalLine linChohyo) {
+        this.linChohyo=linChohyo;
     }
 
     @JsonProperty("NinteichosaIraiEntryPaperPublish")

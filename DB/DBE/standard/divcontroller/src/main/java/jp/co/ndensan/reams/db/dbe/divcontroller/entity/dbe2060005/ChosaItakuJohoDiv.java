@@ -21,22 +21,22 @@ public class ChosaItakuJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtChosakikanNo")
-    private TextBoxCode txtChosakikanNo;
-    @JsonProperty("txtChosakikanMei")
-    private TextBox txtChosakikanMei;
-    @JsonProperty("imgChosakikanSearch")
-    private StaticImage imgChosakikanSearch;
-    @JsonProperty("txtChosaJissibi")
-    private TextBoxDate txtChosaJissibi;
-    @JsonProperty("txtChosainNo")
-    private TextBoxCode txtChosainNo;
-    @JsonProperty("txtChosainMei")
-    private TextBox txtChosainMei;
-    @JsonProperty("imgChosainSearch")
-    private StaticImage imgChosainSearch;
-    @JsonProperty("txtChosahyoJuryobi")
-    private TextBoxDate txtChosahyoJuryobi;
+    @JsonProperty("txtChosaItakusakiCode")
+    private TextBoxCode txtChosaItakusakiCode;
+    @JsonProperty("btnChosakikanSearch")
+    private ButtonDialog btnChosakikanSearch;
+    @JsonProperty("txtChosaItakusakiName")
+    private TextBox txtChosaItakusakiName;
+    @JsonProperty("txtChosaJissiDate")
+    private TextBoxFlexibleDate txtChosaJissiDate;
+    @JsonProperty("txtChosainCode")
+    private TextBoxCode txtChosainCode;
+    @JsonProperty("btnChosainSearch")
+    private ButtonDialog btnChosainSearch;
+    @JsonProperty("txtChosainName")
+    private TextBox txtChosainName;
+    @JsonProperty("txtChosahyoJuryoDate")
+    private TextBoxFlexibleDate txtChosahyoJuryoDate;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -44,84 +44,84 @@ public class ChosaItakuJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtChosakikanNo")
-    public TextBoxCode getTxtChosakikanNo() {
-        return txtChosakikanNo;
+    @JsonProperty("txtChosaItakusakiCode")
+    public TextBoxCode getTxtChosaItakusakiCode() {
+        return txtChosaItakusakiCode;
     }
 
-    @JsonProperty("txtChosakikanNo")
-    public void setTxtChosakikanNo(TextBoxCode txtChosakikanNo) {
-        this.txtChosakikanNo=txtChosakikanNo;
+    @JsonProperty("txtChosaItakusakiCode")
+    public void setTxtChosaItakusakiCode(TextBoxCode txtChosaItakusakiCode) {
+        this.txtChosaItakusakiCode=txtChosaItakusakiCode;
     }
 
-    @JsonProperty("txtChosakikanMei")
-    public TextBox getTxtChosakikanMei() {
-        return txtChosakikanMei;
+    @JsonProperty("btnChosakikanSearch")
+    public ButtonDialog getBtnChosakikanSearch() {
+        return btnChosakikanSearch;
     }
 
-    @JsonProperty("txtChosakikanMei")
-    public void setTxtChosakikanMei(TextBox txtChosakikanMei) {
-        this.txtChosakikanMei=txtChosakikanMei;
+    @JsonProperty("btnChosakikanSearch")
+    public void setBtnChosakikanSearch(ButtonDialog btnChosakikanSearch) {
+        this.btnChosakikanSearch=btnChosakikanSearch;
     }
 
-    @JsonProperty("imgChosakikanSearch")
-    public StaticImage getImgChosakikanSearch() {
-        return imgChosakikanSearch;
+    @JsonProperty("txtChosaItakusakiName")
+    public TextBox getTxtChosaItakusakiName() {
+        return txtChosaItakusakiName;
     }
 
-    @JsonProperty("imgChosakikanSearch")
-    public void setImgChosakikanSearch(StaticImage imgChosakikanSearch) {
-        this.imgChosakikanSearch=imgChosakikanSearch;
+    @JsonProperty("txtChosaItakusakiName")
+    public void setTxtChosaItakusakiName(TextBox txtChosaItakusakiName) {
+        this.txtChosaItakusakiName=txtChosaItakusakiName;
     }
 
-    @JsonProperty("txtChosaJissibi")
-    public TextBoxDate getTxtChosaJissibi() {
-        return txtChosaJissibi;
+    @JsonProperty("txtChosaJissiDate")
+    public TextBoxFlexibleDate getTxtChosaJissiDate() {
+        return txtChosaJissiDate;
     }
 
-    @JsonProperty("txtChosaJissibi")
-    public void setTxtChosaJissibi(TextBoxDate txtChosaJissibi) {
-        this.txtChosaJissibi=txtChosaJissibi;
+    @JsonProperty("txtChosaJissiDate")
+    public void setTxtChosaJissiDate(TextBoxFlexibleDate txtChosaJissiDate) {
+        this.txtChosaJissiDate=txtChosaJissiDate;
     }
 
-    @JsonProperty("txtChosainNo")
-    public TextBoxCode getTxtChosainNo() {
-        return txtChosainNo;
+    @JsonProperty("txtChosainCode")
+    public TextBoxCode getTxtChosainCode() {
+        return txtChosainCode;
     }
 
-    @JsonProperty("txtChosainNo")
-    public void setTxtChosainNo(TextBoxCode txtChosainNo) {
-        this.txtChosainNo=txtChosainNo;
+    @JsonProperty("txtChosainCode")
+    public void setTxtChosainCode(TextBoxCode txtChosainCode) {
+        this.txtChosainCode=txtChosainCode;
     }
 
-    @JsonProperty("txtChosainMei")
-    public TextBox getTxtChosainMei() {
-        return txtChosainMei;
+    @JsonProperty("btnChosainSearch")
+    public ButtonDialog getBtnChosainSearch() {
+        return btnChosainSearch;
     }
 
-    @JsonProperty("txtChosainMei")
-    public void setTxtChosainMei(TextBox txtChosainMei) {
-        this.txtChosainMei=txtChosainMei;
+    @JsonProperty("btnChosainSearch")
+    public void setBtnChosainSearch(ButtonDialog btnChosainSearch) {
+        this.btnChosainSearch=btnChosainSearch;
     }
 
-    @JsonProperty("imgChosainSearch")
-    public StaticImage getImgChosainSearch() {
-        return imgChosainSearch;
+    @JsonProperty("txtChosainName")
+    public TextBox getTxtChosainName() {
+        return txtChosainName;
     }
 
-    @JsonProperty("imgChosainSearch")
-    public void setImgChosainSearch(StaticImage imgChosainSearch) {
-        this.imgChosainSearch=imgChosainSearch;
+    @JsonProperty("txtChosainName")
+    public void setTxtChosainName(TextBox txtChosainName) {
+        this.txtChosainName=txtChosainName;
     }
 
-    @JsonProperty("txtChosahyoJuryobi")
-    public TextBoxDate getTxtChosahyoJuryobi() {
-        return txtChosahyoJuryobi;
+    @JsonProperty("txtChosahyoJuryoDate")
+    public TextBoxFlexibleDate getTxtChosahyoJuryoDate() {
+        return txtChosahyoJuryoDate;
     }
 
-    @JsonProperty("txtChosahyoJuryobi")
-    public void setTxtChosahyoJuryobi(TextBoxDate txtChosahyoJuryobi) {
-        this.txtChosahyoJuryobi=txtChosahyoJuryobi;
+    @JsonProperty("txtChosahyoJuryoDate")
+    public void setTxtChosahyoJuryoDate(TextBoxFlexibleDate txtChosahyoJuryoDate) {
+        this.txtChosahyoJuryoDate=txtChosahyoJuryoDate;
     }
 
 }

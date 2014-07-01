@@ -25,10 +25,13 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "lblKaisaiDate",
+       "helpMessageID": "",
+       "jpControlName": "",
        "required": false,
        "align": 2,
        "text": "開催日",
-       "isPrivateInfo": false
+       "isPrivateInfo": false,
+       "decorationClass": ""
       },
       {
        "fieldName": "txtKaisaiDate",
@@ -48,10 +51,12 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtKaisaiDate_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "required": false,
        "text": "",
        "isPrivateInfo": false,
-       "readOnly": false,
        "placeHolder": "",
        "isPassword": false,
        "onFocus": "",
@@ -66,7 +71,8 @@
        "labelRAlign": 0,
        "ymdKubun": 2,
        "displayFormat": 0,
-       "value": ""
+       "value": "",
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblAfterThis",
@@ -86,10 +92,13 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "lblAfterThis",
+       "helpMessageID": "",
+       "jpControlName": "",
        "required": false,
        "align": 2,
        "text": "以降",
-       "isPrivateInfo": false
+       "isPrivateInfo": false,
+       "decorationClass": ""
       }
      ],
      "controlType": "Panel",
@@ -107,6 +116,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "ShinsakaiExtractionCondition",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "抽出条件",
      "isOpen": true,
@@ -123,14 +134,13 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "SearchButtonsForShinsakaiExtraction",
@@ -139,7 +149,7 @@
        "fieldName": "btnToClearConditon",
        "items": [],
        "controlType": "Button",
-       "width": "",
+       "width": "M",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -153,19 +163,22 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "btnToClearConditon",
+       "helpMessageID": "",
+       "jpControlName": "",
        "text": "条件をクリアする",
        "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "icon": 0,
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "btnToExtract",
        "items": [],
        "controlType": "Button",
-       "width": "",
+       "width": "M",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -179,17 +192,20 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "btnToExtract",
+       "helpMessageID": "",
+       "jpControlName": "",
        "text": "抽出する",
        "onClick": "onClick_btnToExtract",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "icon": 0,
+       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
-     "width": "930",
+     "width": "980",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -203,6 +219,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "SearchButtonsForShinsakaiExtraction",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -219,14 +237,13 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": true,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "dgShinsakaiList",
@@ -246,13 +263,23 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "dgShinsakaiList",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "height": "475",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -260,7 +287,7 @@
       },
       "columns": [
        {
-        "columnName": "選<br>択",
+        "columnName": "選択<br>",
         "dataName": "btnToDecide",
         "toolTip": "",
         "bgColor": 0,
@@ -269,13 +296,13 @@
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
-         "text": "□",
+         "text": "...",
          "onClick": "onClick_btnToDecide",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
+         "imageWidth": "20",
+         "imageHeight": "20"
         },
-        "align": 0,
+        "align": 1,
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": "btnToDecide"
@@ -308,7 +335,9 @@
          "cellType": 7,
          "ymdKubun": 2,
          "displayFormat": 0,
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 1,
         "resize": true,
@@ -405,10 +434,17 @@
        }
       ]
      },
-     "height": "475",
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -420,7 +456,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "G11",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -431,11 +467,13 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
+   "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "HanteiResultsOutputTargetShinsakaiList",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
-   "title": "認定審査会一覧",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -459,14 +497,13 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   },
   {
    "fieldName": "HanteiResultsOutputTargetPersons",
@@ -475,7 +512,7 @@
      "fieldName": "dgShinsakaiTargetPersons",
      "items": [],
      "controlType": "DataGrid",
-     "width": "980",
+     "width": "1000",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -489,32 +526,37 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "dgShinsakaiTargetPersons",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "height": "525",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
-      "isShowFilter": true,
-      "isShowFilterButton": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [
         {
-         "combineColumnName": "性",
+         "combineColumnName": "申請区分",
          "combineItem": [
-          "gender"
-         ]
-        },
-        {
-         "combineColumnName": "認定申請",
-         "combineItem": [
-          "shinseiDate",
-          "shinseiKubun"
+          "shinseiKubun",
+          "shinseiKubunHorei"
          ]
         },
         {
          "combineColumnName": "今回",
          "combineItem": [
           "ichijiHanteiResult",
+          "ninteiKubun",
           "yokaigodo",
           "yukokikan",
           "startDate",
@@ -598,7 +640,7 @@
         "sortKey": "hihokenshaNo"
        },
        {
-        "columnName": "区分",
+        "columnName": "被保<br>区分",
         "dataName": "hihokenshaKubun",
         "toolTip": "",
         "bgColor": 0,
@@ -658,7 +700,7 @@
         "sortKey": "kanaShimei"
        },
        {
-        "columnName": "別",
+        "columnName": "性<br>別",
         "dataName": "gender",
         "toolTip": "",
         "bgColor": 0,
@@ -672,7 +714,7 @@
         "sortKey": "gender"
        },
        {
-        "columnName": "日付",
+        "columnName": "申請日付",
         "dataName": "shinseiDate",
         "toolTip": "",
         "bgColor": 0,
@@ -683,7 +725,9 @@
          "cellType": 7,
          "ymdKubun": 2,
          "displayFormat": 0,
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 0,
         "resize": true,
@@ -691,7 +735,7 @@
         "sortKey": "shinseiDate"
        },
        {
-        "columnName": "区分",
+        "columnName": "申請時",
         "dataName": "shinseiKubun",
         "toolTip": "",
         "bgColor": 0,
@@ -703,6 +747,20 @@
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": "shinseiKubun"
+       },
+       {
+        "columnName": "法令",
+        "dataName": "shinseiKubunHorei",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "shinseiKubunHorei"
        },
        {
         "columnName": "一次判定",
@@ -717,6 +775,20 @@
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": "ichijiHanteiResult"
+       },
+       {
+        "columnName": "認定<br>区分",
+        "dataName": "ninteiKubun",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "ninteiKubun"
        },
        {
         "columnName": "要介護度",
@@ -758,7 +830,9 @@
          "cellType": 7,
          "ymdKubun": 2,
          "displayFormat": 0,
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 1,
         "resize": false,
@@ -777,7 +851,9 @@
          "cellType": 7,
          "ymdKubun": 2,
          "displayFormat": 0,
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 1,
         "resize": false,
@@ -824,7 +900,9 @@
          "cellType": 7,
          "ymdKubun": 2,
          "displayFormat": 0,
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 1,
         "resize": false,
@@ -843,7 +921,9 @@
          "cellType": 7,
          "ymdKubun": 2,
          "displayFormat": 0,
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 1,
         "resize": false,
@@ -852,10 +932,17 @@
        }
       ]
      },
-     "height": "525",
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -864,106 +951,10 @@
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
-    },
-    {
-     "fieldName": "PublishingShinsakaiResults",
-     "items": [
-      {
-       "fieldName": "btnToPublish",
-       "items": [],
-       "controlType": "Button",
-       "width": "M",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnToPublish",
-       "text": "出力",
-       "onClick": "",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0
-      },
-      {
-       "fieldName": "btnToReturnShinsakaiList",
-       "items": [],
-       "controlType": "Button",
-       "width": "M",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnToReturnShinsakaiList",
-       "text": "審査会一覧に戻る",
-       "onClick": "",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0
-      }
-     ],
-     "controlType": "Panel",
-     "width": "980",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "PublishingShinsakaiResults",
-     "onLoad": "",
-     "title": "",
-     "isOpen": true,
-     "canOpenAndClose": true,
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "PublishingShinsakaiResults"
-      }
-     ],
-     "requestSettings": [],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "Default",
-     "marginBottom": "Default",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
-     "backgroundColor": 0,
-     "widthAuto": false,
-     "panelDisplay": 0,
-     "isGroupBox": false
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "G11",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -974,11 +965,13 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
+   "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "HanteiResultsOutputTargetPersons",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
-   "title": "介護認定審査会対象者一覧",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -998,14 +991,13 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -1023,6 +1015,8 @@
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "判定結果一覧出力",
  "jsPathCollection": [],
@@ -1125,11 +1119,126 @@
   ],
   [
    "HanteiResultsOutputTargetPersons"
-  ],
-  [
-   "PublishingShinsakaiResults"
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "taishosha",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnToPublish",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnToPublish",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "通常出力する",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnToPublishOfSonota",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnToPublishOfSonota",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "その他のみ出力",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnToReturnShinsakaiList",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnToReturnShinsakaiList",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "審査会一覧に"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "対象者"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ]
 }

@@ -35,8 +35,10 @@ public class ShinsakaiSearch {
     public ResponseData onLoadData(ShinsakaiSearchDiv div) {
         ResponseData<ShinsakaiSearchDiv> response = new ResponseData<>();
 
-        div.getSearchCriteriaForShinsakai().getTxtKaisaiDateRange().setFromValue(RDate.getNowDate());
+//        div.getSearchCriteriaForShinsakai().getTxtKaisaiDateRange().setFromValue(RDate.getNowDate());
 //        div.getSearchCriteriaForShinsakai().getTxtKaisaiDateRange().setToValue(RDate.getNowDate().plusDay(7));
+        RString ymlData = new RString("dbe4070001/ShinsakaiList.yml");
+        div.getShinsakaiList().getDgShinsakaiList().setDataSource(createRowSearchResultTestData(ymlData));
 
         response.data = div;
         return response;
@@ -77,11 +79,12 @@ public class ShinsakaiSearch {
         RString wariateNinzu = _toRString(map.get("割当人数"));
         RString shinsakaiKaijo = _toRString(map.get("審査会会場"));
         RString startTime = _toRString(map.get("開始予定時刻"));
+        RString endTime = _toRString(map.get("終了予定時刻"));
         RString sakuseiKubun = _toRString(map.get("資料作成"));
 
         Button btn = new Button();
         dgShinsakaiList_Row row = new dgShinsakaiList_Row(btn, kaisaiDate, kaisaiNo, gogitaiNo,
-                gogitaiMeisho, yoteiTeiin, wariateNinzu, shinsakaiKaijo, startTime, sakuseiKubun);
+                gogitaiMeisho, yoteiTeiin, wariateNinzu, shinsakaiKaijo, startTime, endTime, sakuseiKubun);
         return row;
     }
 

@@ -27,6 +27,7 @@
        "selectControlID": "ddlHokensha_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "onChange": "",
        "selectedItem": "1",
        "dataSource": [
@@ -40,14 +41,16 @@
         }
        ],
        "required": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
        "labelLText": "保険者",
        "labelRText": "",
        "labelLWidth": "150",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
+       "selectedItem": "1",
        "disabledItem": []
       },
       {
@@ -70,6 +73,7 @@
        "selectControlID": "radShutsuryokuKubun_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "onChange": "onChange_radShutsuryokuKubun",
        "selectedItem": "0",
        "dataSource": [
@@ -83,10 +87,13 @@
         }
        ],
        "required": false,
+       "onChange": "onChange_radShutsuryokuKubun",
        "labelLText": "出力区分",
        "labelLWidth": "S",
        "labelLAlign": 2,
        "onClick": "",
+       "icon": [],
+       "selectedItem": "0",
        "newLineItemNumber": 2,
        "spaceSize": "M",
        "disabledItem": [],
@@ -113,23 +120,23 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
        "onChange": "",
+       "onKeyPress": "",
        "labelLText": "認定結果確定期間",
        "labelRText": "",
-       "labelLWidth": "460",
+       "labelLWidth": "420",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
-       "isPrivateInfo": false,
-       "isPassword": false,
-       "onKeyPress": "",
+       "ymdKubun": 2,
+       "displayFormat": 0,
        "permitCharactor": "",
        "fromPlaceHolder": "",
        "toPlaceHolder": "",
-       "ymdKubun": 2,
-       "displayFormat": 0,
        "minDate": "",
        "maxDate": "",
        "fromText": "",
@@ -159,13 +166,13 @@
        "selectControlID": "btnHyoji",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "onClick_btnHyoji",
-       "icon": 0,
        "text": "対象被保険者を表示する",
+       "onClick": "onClick_btnHyoji",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
@@ -199,12 +206,9 @@
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "marginTop": "Default",
+     "marginTop": "0",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -213,7 +217,7 @@
      "height": "Auto"
     },
     {
-     "fieldName": "ShinsaKekkaJohoSakuseiTishosha",
+     "fieldName": "ShinsaKekkaJohoSakuseiTaishosha",
      "items": [
       {
        "fieldName": "dgTaishoshaIchiran",
@@ -225,9 +229,9 @@
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": false,
+       "wrap": true,
        "dependencies": [],
-       "float": 0,
+       "float": 1,
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "XS",
@@ -235,6 +239,7 @@
        "selectControlID": "dgTaishoshaIchiran",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "M",
        "dataSource": [],
        "gridSetting": {
@@ -273,7 +278,9 @@
            "isCurrency": false,
            "isComma": false,
            "decimalPointLength": "0",
-           "onChange": ""
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
           },
           "align": 1,
           "resize": true,
@@ -441,6 +448,11 @@
        "onSelectBySelectButton": "",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -448,39 +460,6 @@
        "isAscending": true,
        "filterList": [],
        "activeRowId": -1
-      },
-      {
-       "fieldName": "btnDataSakusei",
-       "items": [],
-       "controlType": "ButtonDialog",
-       "width": "160",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnDataSakusei",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "onClick": "",
-       "icon": 0,
-       "text": "結果情報を出力する",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "displayChildDivName": "DBE.DataOutputInfomation",
-       "dataPassing": [],
-       "visibleCloseButton": true,
-       "onOkClose": "",
-       "onBeforeOpenDialog": "onClick_btnDataSakusei"
       }
      ],
      "controlType": "Panel",
@@ -497,7 +476,7 @@
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "XS",
-     "selectControlID": "ShinsaKekkaJohoSakuseiTishosha",
+     "selectControlID": "ShinsaKekkaJohoSakuseiTaishosha",
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
@@ -506,7 +485,7 @@
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "ShinsaKekkaJohoSakuseiTishosha"
+       "postParameterPanelNames": "ShinsaKekkaJohoSakuseiTaishosha"
       }
      ],
      "requestSettings": [],
@@ -516,10 +495,7 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -578,10 +554,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -623,7 +596,7 @@
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "ShinsaKekkaJohoSakuseiTishosha",
+     "visibleDiv": "ShinsaKekkaJohoSakuseiTaishosha",
      "panelState": "visible",
      "fixedDiv": ""
     },
@@ -649,11 +622,58 @@
    "ShinsaKekkaSyutsuryokuJokenNyuryoku"
   ],
   [
-   "ShinsaKekkaJohoSakuseiTishosha"
+   "ShinsaKekkaJohoSakuseiTaishosha"
   ]
  ],
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
- "commonButtonAreaData": []
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "btnDataSakusei",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnDataSakusei",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnDataSakusei",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "onClick_btnDataSakusei",
+      "text": "データ出力する",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "作成指示"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }

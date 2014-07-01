@@ -149,7 +149,7 @@ module DBE {
    "fieldName": "dgNinteichosaIraiListForByHand",
    "items": [],
    "controlType": "DataGrid",
-   "width": "1000",
+   "width": "1070",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -166,12 +166,12 @@ module DBE {
    "helpMessageID": "",
    "jpControlName": "",
    "gridSetting": {
-    "rowHeight": 25,
-    "isMultiSelectable": false,
+    "rowHeight": 24,
+    "isMultiSelectable": true,
     "isShowHeader": true,
-    "isShowFooter": true,
+    "isShowFooter": false,
     "isShowFilter": false,
-    "isShowFilterButton": true,
+    "isShowFilterButton": false,
     "isShowRowState": false,
     "isShowSelectButtonColumn": false,
     "isShowModifyButtonColumn": false,
@@ -180,6 +180,12 @@ module DBE {
     "selectedRowCount": 0,
     "header": {
      "combineColumns": [
+      {
+       "combineColumnName": "調査",
+       "combineItem": [
+        "chosaJokyo"
+       ]
+      },
       {
        "combineColumnName": "被保険者",
        "combineItem": [
@@ -201,7 +207,12 @@ module DBE {
        "combineItem": [
         "chosaIraiKubun",
         "chosaIraiDate",
-        "chosaKigenDate",
+        "chosaKigenDate"
+       ]
+      },
+      {
+       "combineColumnName": "依頼書",
+       "combineItem": [
         "iraishoHakkoDate"
        ]
       },
@@ -249,7 +260,7 @@ module DBE {
       }
      ],
      "frozenColumn": "",
-     "headerHeight": 1
+     "headerHeight": 0
     },
     "columns": [
      {
@@ -271,7 +282,7 @@ module DBE {
       "sortKey": "chosaKanryoFlag"
      },
      {
-      "columnName": "調査<br>状況",
+      "columnName": "状況",
       "dataName": "chosaJokyo",
       "toolTip": "",
       "bgColor": 0,
@@ -292,8 +303,8 @@ module DBE {
       "dataName": "btnToShowDetail",
       "toolTip": "",
       "bgColor": 0,
-      "width": 60,
-      "visible": true,
+      "width": 50,
+      "visible": false,
       "cellType": 8,
       "cellDetails": {
        "cellType": 8,
@@ -303,7 +314,7 @@ module DBE {
        "imageWidth": "",
        "imageHeight": ""
       },
-      "align": 0,
+      "align": 1,
       "resize": true,
       "isPrivateInfo": false,
       "sortKey": "btnToShowDetail"
@@ -381,7 +392,7 @@ module DBE {
       "dataName": "hihokenshaNo",
       "toolTip": "",
       "bgColor": 0,
-      "width": 100,
+      "width": 85,
       "visible": true,
       "cellType": 0,
       "cellDetails": {
@@ -466,7 +477,7 @@ module DBE {
       "dataName": "ninteiShinseiDate",
       "toolTip": "",
       "bgColor": 0,
-      "width": 95,
+      "width": 82,
       "visible": true,
       "cellType": 7,
       "cellDetails": {
@@ -504,7 +515,7 @@ module DBE {
       "dataName": "chosaIraiDate",
       "toolTip": "",
       "bgColor": 0,
-      "width": 95,
+      "width": 82,
       "visible": true,
       "cellType": 7,
       "cellDetails": {
@@ -525,7 +536,7 @@ module DBE {
       "dataName": "chosaKigenDate",
       "toolTip": "",
       "bgColor": 0,
-      "width": 95,
+      "width": 82,
       "visible": true,
       "cellType": 7,
       "cellDetails": {
@@ -542,11 +553,11 @@ module DBE {
       "sortKey": "chosaKigenDate"
      },
      {
-      "columnName": "依頼書<br>発行日",
+      "columnName": "発行日",
       "dataName": "iraishoHakkoDate",
       "toolTip": "",
       "bgColor": 0,
-      "width": 95,
+      "width": 82,
       "visible": true,
       "cellType": 7,
       "cellDetails": {
@@ -771,7 +782,7 @@ module DBE {
       "dataName": "tokusokuDate",
       "toolTip": "",
       "bgColor": 0,
-      "width": 95,
+      "width": 82,
       "visible": true,
       "cellType": 7,
       "cellDetails": {
@@ -788,7 +799,7 @@ module DBE {
       "sortKey": "tokusokuDate"
      },
      {
-      "columnName": "督促<br>回数",
+      "columnName": "回数",
       "dataName": "tokusokuCount",
       "toolTip": "",
       "bgColor": 0,
@@ -805,7 +816,7 @@ module DBE {
       "sortKey": "tokusokuCount"
      },
      {
-      "columnName": "郵便<br>番号",
+      "columnName": "番号",
       "dataName": "yubinNo",
       "toolTip": "",
       "bgColor": 0,
@@ -857,7 +868,7 @@ module DBE {
      }
     ]
    },
-   "height": "230",
+   "height": "162",
    "onSort": "",
    "onSelect": "",
    "onSelectByDblClick": "",

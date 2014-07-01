@@ -29,6 +29,8 @@ public class FutanGendogakuNinteiDiv extends Panel {
     private DataGrid<dgFutanGendogakuNinteiList_Row> dgFutanGendogakuNinteiList;
     @JsonProperty("FutanGendogakuNinteiDetail")
     private FutanGendogakuNinteiDetailDiv FutanGendogakuNinteiDetail;
+    @JsonProperty("btnClose")
+    private Button btnClose;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -64,6 +66,16 @@ public class FutanGendogakuNinteiDiv extends Panel {
     @JsonProperty("FutanGendogakuNinteiDetail")
     public void setFutanGendogakuNinteiDetail(FutanGendogakuNinteiDetailDiv FutanGendogakuNinteiDetail) {
         this.FutanGendogakuNinteiDetail=FutanGendogakuNinteiDetail;
+    }
+
+    @JsonProperty("btnClose")
+    public Button getBtnClose() {
+        return btnClose;
+    }
+
+    @JsonProperty("btnClose")
+    public void setBtnClose(Button btnClose) {
+        this.btnClose=btnClose;
     }
 
 }

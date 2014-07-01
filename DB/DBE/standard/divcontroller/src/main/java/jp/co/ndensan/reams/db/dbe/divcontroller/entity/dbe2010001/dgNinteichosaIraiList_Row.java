@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 03 09:51:04 JST 2014 
+ * Fri Jun 27 10:41:00 JST 2014 
  */
 
 
@@ -66,6 +66,48 @@ public class dgNinteichosaIraiList_Row extends DataRow {
 
     public dgNinteichosaIraiList_Row() {
         super();
+        this.保険者番号 = RString.EMPTY;
+        this.保険者 = RString.EMPTY;
+        this.支所コード = RString.EMPTY;
+        this.支所 = RString.EMPTY;
+        this.被保険者番号 = RString.EMPTY;
+        this.識別コード = RString.EMPTY;
+        this.氏名 = RString.EMPTY;
+        this.カナ氏名 = RString.EMPTY;
+        this.氏名Withカナ = RString.EMPTY;
+        this.認定申請日 = new TextBoxFlexibleDate();
+        this.認定申請区分申請時 = RString.EMPTY;
+        this.申請書管理番号 = RString.EMPTY;
+        this.調査依頼日 = new TextBoxFlexibleDate();
+        this.調査依頼書発行日 = new TextBoxFlexibleDate();
+        this.調査依頼完了日 = new TextBoxFlexibleDate();
+        this.調査期限日 = new TextBoxFlexibleDate();
+        this.調査依頼区分 = RString.EMPTY;
+        this.調査回数 = RString.EMPTY;
+        this.認定調査履歴番号 = RString.EMPTY;
+        this.調査委託先コード = RString.EMPTY;
+        this.調査委託先 = RString.EMPTY;
+        this.調査員コード = RString.EMPTY;
+        this.調査員 = RString.EMPTY;
+        this.前回調査委託先コード = RString.EMPTY;
+        this.前回調査委託先 = RString.EMPTY;
+        this.前回調査員コード = RString.EMPTY;
+        this.前回調査員 = RString.EMPTY;
+        this.審査会開催地区コード = RString.EMPTY;
+        this.審査会開催地区 = RString.EMPTY;
+        this.督促年月日 = new TextBoxFlexibleDate();
+        this.督促方法 = RString.EMPTY;
+        this.督促回数 = RString.EMPTY;
+        this.督促期限日 = new TextBoxFlexibleDate();
+        this.督促発行日 = new TextBoxFlexibleDate();
+        this.郵便番号 = RString.EMPTY;
+        this.住所 = RString.EMPTY;
+        this.入所施設 = RString.EMPTY;
+        this.性別 = RString.EMPTY;
+        this.生年月日 = new TextBoxFlexibleDate();
+        this.データ出力 = RString.EMPTY;
+        this.依頼登録済 = false;
+        this.依頼書発行済 = false;
     }
 
     public dgNinteichosaIraiList_Row(RString 保険者番号, RString 保険者, RString 支所コード, RString 支所, RString 被保険者番号, RString 識別コード, RString 氏名, RString カナ氏名, RString 氏名Withカナ, TextBoxFlexibleDate 認定申請日, RString 認定申請区分申請時, RString 申請書管理番号, TextBoxFlexibleDate 調査依頼日, TextBoxFlexibleDate 調査依頼書発行日, TextBoxFlexibleDate 調査依頼完了日, TextBoxFlexibleDate 調査期限日, RString 調査依頼区分, RString 調査回数, RString 認定調査履歴番号, RString 調査委託先コード, RString 調査委託先, RString 調査員コード, RString 調査員, RString 前回調査委託先コード, RString 前回調査委託先, RString 前回調査員コード, RString 前回調査員, RString 審査会開催地区コード, RString 審査会開催地区, TextBoxFlexibleDate 督促年月日, RString 督促方法, RString 督促回数, TextBoxFlexibleDate 督促期限日, TextBoxFlexibleDate 督促発行日, RString 郵便番号, RString 住所, RString 入所施設, RString 性別, TextBoxFlexibleDate 生年月日, RString データ出力, Boolean 依頼登録済, Boolean 依頼書発行済) {

@@ -1,0 +1,24 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "0",
+   "layoutSubGyomuCode": "DBD",
+   "layoutName": "DBD3010001",
+   "eventName": "select",
+   "toLayoutSubGyomuCode": "DBD",
+   "toLayoutName": "DBD3010002",
+   "toEventName": "start"
+  },
+  {
+   "id": "1",
+   "layoutSubGyomuCode": "DBD",
+   "layoutName": "DBD3010002",
+   "eventName": "return",
+   "toLayoutSubGyomuCode": "DBD",
+   "toLayoutName": "DBD3010001",
+   "toEventName": ""
+  }
+ ],
+ "subGyomuCode": "DBD",
+ "uiContainerName": "DBDUC31000"
+}

@@ -1,19 +1,24 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030003;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
- * コードが再生成されるときに損失したりします。 Mon May 19 19:41:33 JST 2014
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
+ * コードが再生成されるときに損失したりします。
+ * Fri Jun 27 20:13:53 JST 2014 
  */
+
+
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
+
 /**
- * dgShinsakaiTargetPersons_Row のクラスファイル
- *
+ * dgShinsakaiTargetPersons_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
+
 public class dgShinsakaiTargetPersons_Row extends DataRow {
 
     private RString shinsaOrder;
@@ -27,7 +32,9 @@ public class dgShinsakaiTargetPersons_Row extends DataRow {
     private RString gender;
     private TextBoxFlexibleDate shinseiDate;
     private RString shinseiKubun;
+    private RString shinseiKubunHorei;
     private RString ichijiHanteiResult;
+    private RString ninteiKubun;
     private RString yokaigodo;
     private RString yukokikan;
     private TextBoxFlexibleDate startDate;
@@ -39,9 +46,31 @@ public class dgShinsakaiTargetPersons_Row extends DataRow {
 
     public dgShinsakaiTargetPersons_Row() {
         super();
+        this.shinsaOrder = RString.EMPTY;
+        this.hokenshaNo = RString.EMPTY;
+        this.hokenshaMeisho = RString.EMPTY;
+        this.hihokenshaNo = RString.EMPTY;
+        this.hihokenshaKubun = RString.EMPTY;
+        this.shimei = RString.EMPTY;
+        this.kanaShimei = RString.EMPTY;
+        this.shimeiAndKanaShimsei = RString.EMPTY;
+        this.gender = RString.EMPTY;
+        this.shinseiDate = new TextBoxFlexibleDate();
+        this.shinseiKubun = RString.EMPTY;
+        this.shinseiKubunHorei = RString.EMPTY;
+        this.ichijiHanteiResult = RString.EMPTY;
+        this.ninteiKubun = RString.EMPTY;
+        this.yokaigodo = RString.EMPTY;
+        this.yukokikan = RString.EMPTY;
+        this.startDate = new TextBoxFlexibleDate();
+        this.endDate = new TextBoxFlexibleDate();
+        this.latestYokaigodo = RString.EMPTY;
+        this.latestYukokikan = RString.EMPTY;
+        this.latestStartDate = new TextBoxFlexibleDate();
+        this.latestEndDate = new TextBoxFlexibleDate();
     }
 
-    public dgShinsakaiTargetPersons_Row(RString shinsaOrder, RString hokenshaNo, RString hokenshaMeisho, RString hihokenshaNo, RString hihokenshaKubun, RString shimei, RString kanaShimei, RString shimeiAndKanaShimsei, RString gender, TextBoxFlexibleDate shinseiDate, RString shinseiKubun, RString ichijiHanteiResult, RString yokaigodo, RString yukokikan, TextBoxFlexibleDate startDate, TextBoxFlexibleDate endDate, RString latestYokaigodo, RString latestYukokikan, TextBoxFlexibleDate latestStartDate, TextBoxFlexibleDate latestEndDate) {
+    public dgShinsakaiTargetPersons_Row(RString shinsaOrder, RString hokenshaNo, RString hokenshaMeisho, RString hihokenshaNo, RString hihokenshaKubun, RString shimei, RString kanaShimei, RString shimeiAndKanaShimsei, RString gender, TextBoxFlexibleDate shinseiDate, RString shinseiKubun, RString shinseiKubunHorei, RString ichijiHanteiResult, RString ninteiKubun, RString yokaigodo, RString yukokikan, TextBoxFlexibleDate startDate, TextBoxFlexibleDate endDate, RString latestYokaigodo, RString latestYukokikan, TextBoxFlexibleDate latestStartDate, TextBoxFlexibleDate latestEndDate) {
         super();
         this.setOriginalData("shinsaOrder", shinsaOrder);
         this.setOriginalData("hokenshaNo", hokenshaNo);
@@ -54,7 +83,9 @@ public class dgShinsakaiTargetPersons_Row extends DataRow {
         this.setOriginalData("gender", gender);
         this.setOriginalData("shinseiDate", shinseiDate);
         this.setOriginalData("shinseiKubun", shinseiKubun);
+        this.setOriginalData("shinseiKubunHorei", shinseiKubunHorei);
         this.setOriginalData("ichijiHanteiResult", ichijiHanteiResult);
+        this.setOriginalData("ninteiKubun", ninteiKubun);
         this.setOriginalData("yokaigodo", yokaigodo);
         this.setOriginalData("yukokikan", yukokikan);
         this.setOriginalData("startDate", startDate);
@@ -74,7 +105,9 @@ public class dgShinsakaiTargetPersons_Row extends DataRow {
         this.gender = gender;
         this.shinseiDate = shinseiDate;
         this.shinseiKubun = shinseiKubun;
+        this.shinseiKubunHorei = shinseiKubunHorei;
         this.ichijiHanteiResult = ichijiHanteiResult;
+        this.ninteiKubun = ninteiKubun;
         this.yokaigodo = yokaigodo;
         this.yukokikan = yukokikan;
         this.startDate = startDate;
@@ -129,8 +162,16 @@ public class dgShinsakaiTargetPersons_Row extends DataRow {
         return shinseiKubun;
     }
 
+    public RString getShinseiKubunHorei() {
+        return shinseiKubunHorei;
+    }
+
     public RString getIchijiHanteiResult() {
         return ichijiHanteiResult;
+    }
+
+    public RString getNinteiKubun() {
+        return ninteiKubun;
     }
 
     public RString getYokaigodo() {
@@ -220,9 +261,19 @@ public class dgShinsakaiTargetPersons_Row extends DataRow {
         this.shinseiKubun = shinseiKubun;
     }
 
+    public void setShinseiKubunHorei(RString shinseiKubunHorei) {
+        this.setOriginalData("shinseiKubunHorei", shinseiKubunHorei);
+        this.shinseiKubunHorei = shinseiKubunHorei;
+    }
+
     public void setIchijiHanteiResult(RString ichijiHanteiResult) {
         this.setOriginalData("ichijiHanteiResult", ichijiHanteiResult);
         this.ichijiHanteiResult = ichijiHanteiResult;
+    }
+
+    public void setNinteiKubun(RString ninteiKubun) {
+        this.setOriginalData("ninteiKubun", ninteiKubun);
+        this.ninteiKubun = ninteiKubun;
     }
 
     public void setYokaigodo(RString yokaigodo) {

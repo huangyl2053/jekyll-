@@ -27,6 +27,10 @@ public class tplTaishoshaWariateDiv extends TabPanel {
      */
     @JsonProperty("lblWariatezumiTaishoshaIchiran")
     private Label lblWariatezumiTaishoshaIchiran;
+    @JsonProperty("btnNarabikae")
+    private Button btnNarabikae;
+    @JsonProperty("TaishoshaNarabikae")
+    private TaishoshaNarabikaeDiv TaishoshaNarabikae;
     @JsonProperty("dgWariatezumiTaishoshaIchiran")
     private DataGrid<dgWariatezumiTaishoshaIchiran_Row> dgWariatezumiTaishoshaIchiran;
     @JsonProperty("taishoshaWariateBtn")
@@ -35,10 +39,6 @@ public class tplTaishoshaWariateDiv extends TabPanel {
     private Label lblMiwariateTaishoshaIchiran;
     @JsonProperty("dgMiwariateTaishoshaIchiran")
     private DataGrid<dgMiwariateTaishoshaIchiran_Row> dgMiwariateTaishoshaIchiran;
-    @JsonProperty("btnNarabikae")
-    private Button btnNarabikae;
-    @JsonProperty("TaishoshaNarabikae")
-    private TaishoshaNarabikaeDiv TaishoshaNarabikae;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,6 +54,26 @@ public class tplTaishoshaWariateDiv extends TabPanel {
     @JsonProperty("lblWariatezumiTaishoshaIchiran")
     public void setLblWariatezumiTaishoshaIchiran(Label lblWariatezumiTaishoshaIchiran) {
         this.lblWariatezumiTaishoshaIchiran=lblWariatezumiTaishoshaIchiran;
+    }
+
+    @JsonProperty("btnNarabikae")
+    public Button getBtnNarabikae() {
+        return btnNarabikae;
+    }
+
+    @JsonProperty("btnNarabikae")
+    public void setBtnNarabikae(Button btnNarabikae) {
+        this.btnNarabikae=btnNarabikae;
+    }
+
+    @JsonProperty("TaishoshaNarabikae")
+    public TaishoshaNarabikaeDiv getTaishoshaNarabikae() {
+        return TaishoshaNarabikae;
+    }
+
+    @JsonProperty("TaishoshaNarabikae")
+    public void setTaishoshaNarabikae(TaishoshaNarabikaeDiv TaishoshaNarabikae) {
+        this.TaishoshaNarabikae=TaishoshaNarabikae;
     }
 
     @JsonProperty("dgWariatezumiTaishoshaIchiran")
@@ -94,26 +114,6 @@ public class tplTaishoshaWariateDiv extends TabPanel {
     @JsonProperty("dgMiwariateTaishoshaIchiran")
     public void setDgMiwariateTaishoshaIchiran(DataGrid<dgMiwariateTaishoshaIchiran_Row> dgMiwariateTaishoshaIchiran) {
         this.dgMiwariateTaishoshaIchiran=dgMiwariateTaishoshaIchiran;
-    }
-
-    @JsonProperty("btnNarabikae")
-    public Button getBtnNarabikae() {
-        return btnNarabikae;
-    }
-
-    @JsonProperty("btnNarabikae")
-    public void setBtnNarabikae(Button btnNarabikae) {
-        this.btnNarabikae=btnNarabikae;
-    }
-
-    @JsonProperty("TaishoshaNarabikae")
-    public TaishoshaNarabikaeDiv getTaishoshaNarabikae() {
-        return TaishoshaNarabikae;
-    }
-
-    @JsonProperty("TaishoshaNarabikae")
-    public void setTaishoshaNarabikae(TaishoshaNarabikaeDiv TaishoshaNarabikae) {
-        this.TaishoshaNarabikae=TaishoshaNarabikae;
     }
 
 }

@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.dgNinteiShinsakaiIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -23,8 +24,6 @@ public class NinteiShinsakaiIchiranDiv extends Panel {
      */
     @JsonProperty("dgNinteiShinsakaiIchiran")
     private DataGrid<dgNinteiShinsakaiIchiran_Row> dgNinteiShinsakaiIchiran;
-    @JsonProperty("btnClose")
-    private Button btnClose;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,16 +39,6 @@ public class NinteiShinsakaiIchiranDiv extends Panel {
     @JsonProperty("dgNinteiShinsakaiIchiran")
     public void setDgNinteiShinsakaiIchiran(DataGrid<dgNinteiShinsakaiIchiran_Row> dgNinteiShinsakaiIchiran) {
         this.dgNinteiShinsakaiIchiran=dgNinteiShinsakaiIchiran;
-    }
-
-    @JsonProperty("btnClose")
-    public Button getBtnClose() {
-        return btnClose;
-    }
-
-    @JsonProperty("btnClose")
-    public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
     }
 
 }

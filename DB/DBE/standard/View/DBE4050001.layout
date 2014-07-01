@@ -11,7 +11,7 @@
        "fieldName": "ddlHokensha",
        "items": [],
        "controlType": "DropDownList",
-       "width": "80",
+       "width": "100",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -25,6 +25,9 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "ddlHokensha_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "onChange": "",
        "selectedItem": "2",
        "dataSource": [
@@ -45,7 +48,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
-       "onBlur": ""
+       "onBlur": "",
+       "disabledItem": []
       },
       {
        "fieldName": "ddlKensakuTaisho",
@@ -65,6 +69,9 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "ddlKensakuTaisho_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "onChange": "onChange_ddlKensakuTaisho",
        "selectedItem": "1",
        "dataSource": [
@@ -100,7 +107,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
-       "onBlur": ""
+       "onBlur": "",
+       "disabledItem": []
       },
       {
        "fieldName": "txtSearchStYMD",
@@ -112,62 +120,42 @@
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": true,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "txtSearchStYMD_core",
-       "onChange": "onChange_txtSearchStYMD",
-       "required": false,
-       "labelLText": "日付範囲",
-       "labelRText": "",
-       "labelLWidth": "290",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
-       "readOnly": false,
-       "placeHolder": "",
-       "isPrivateInfo": false,
-       "isPassword": false,
-       "onKeyPress": "",
-       "text": "",
-       "ymdKubun": 2,
-       "displayFormat": 0,
-       "value": "",
-       "maxLength": 1000000000000,
-       "minLength": 0,
-       "textAlign": 0,
-       "textKind": 0,
-       "isComboBox": false,
-       "suggest": []
-      },
-      {
-       "fieldName": "lblKara1",
-       "items": [],
-       "controlType": "Label",
-       "width": "XS",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
        "wrap": false,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "lblKara1",
+       "marginRight": "0",
+       "selectControlID": "txtSearchStYMD_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "onChange": "onChange_txtSearchStYMD",
        "required": false,
+       "labelLText": "日付範囲",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "onFocus": "",
+       "onBlur": "",
+       "maxLength": 1000000000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "placeHolder": "",
+       "textKind": 0,
        "isPrivateInfo": false,
-       "text": "～",
-       "align": 1
+       "isPassword": false,
+       "isComboBox": false,
+       "onKeyPress": "",
+       "text": "",
+       "suggest": [],
+       "value": "",
+       "permitCharactor": "./_-",
+       "ymdKubun": 2,
+       "displayFormat": 0
       },
       {
        "fieldName": "txtSearchEdYMD",
@@ -184,46 +172,49 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
+       "marginLeft": "0",
        "marginRight": "XS",
        "selectControlID": "txtSearchEdYMD_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "onChange": "",
        "required": false,
-       "labelLText": "",
+       "labelLText": "～",
        "labelRText": "",
-       "labelLWidth": "S",
+       "labelLWidth": "30",
        "labelRWidth": "S",
-       "labelLAlign": 2,
+       "labelLAlign": 1,
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "readOnly": false,
-       "placeHolder": "",
-       "isPrivateInfo": false,
-       "isPassword": false,
-       "onKeyPress": "",
-       "text": "",
-       "ymdKubun": 2,
-       "displayFormat": 0,
-       "value": "",
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
+       "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
+       "isPassword": false,
        "isComboBox": false,
-       "suggest": []
+       "onKeyPress": "",
+       "text": "",
+       "suggest": [],
+       "value": "",
+       "permitCharactor": "./_-",
+       "ymdKubun": 2,
+       "displayFormat": 0
       },
       {
        "fieldName": "txtHihokenshaNo",
        "items": [],
-       "controlType": "TextBox",
+       "controlType": "TextBoxNum",
        "width": "80",
        "visible": true,
-       "displayNone": false,
+       "displayNone": true,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": true,
+       "wrap": false,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
@@ -231,35 +222,44 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHihokenshaNo_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "被保番号",
        "labelRText": "",
-       "labelLWidth": "290",
+       "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "readOnly": false,
+       "maxLength": "10",
+       "minLength": "0",
+       "textAlign": 2,
        "placeHolder": "",
+       "textKind": 2,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onKeyPress": "",
        "text": "",
+       "suggest": [],
        "value": "",
-       "maxLength": "10",
-       "minLength": "10",
-       "textAlign": 0,
-       "textKind": 0,
-       "isComboBox": false,
-       "suggest": []
+       "decorationClass": "",
+       "permitCharactor": "+-,.\\",
+       "maxValue": "9999999999",
+       "minValue": 0,
+       "isCurrency": true,
+       "isComma": false,
+       "decimalPointLength": 0
       },
       {
        "fieldName": "btnTaishoKensaku",
        "items": [],
        "controlType": "Button",
-       "width": "140",
+       "width": "200",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -273,13 +273,16 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "btnTaishoKensaku",
+       "helpMessageID": "",
+       "jpControlName": "",
        "text": "検索する",
        "onClick": "onClick_btnTaishoKensaku",
+       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "btnClear",
@@ -299,17 +302,20 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "btnClear",
+       "helpMessageID": "",
+       "jpControlName": "",
        "text": "条件をクリアする",
        "onClick": "",
+       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
-     "width": "1000",
+     "width": "1098",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -323,10 +329,12 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "ShoriTaishoshaKensakuShiji",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "",
      "isOpen": true,
-     "canOpenAndClose": true,
+     "canOpenAndClose": false,
      "postParameterPanelNames": [
       {
        "postParameterPanelNames": "ShoriTaishoshaKensakuShiji"
@@ -339,14 +347,13 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "ShoriTaishoshaIchiran",
@@ -355,7 +362,7 @@
        "fieldName": "dgImageMaskShoriTaishosha",
        "items": [],
        "controlType": "DataGrid",
-       "width": "980",
+       "width": "1081",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -369,14 +376,24 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "dgImageMaskShoriTaishosha",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "height": "M",
        "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
+        "isShowHeader": true,
         "isShowFooter": true,
         "isShowFilter": false,
         "isShowFilterButton": false,
         "isShowRowState": false,
+        "isShowSelectButtonColumn": false,
+        "isShowModifyButtonColumn": false,
+        "isShowDeleteButtonColumn": false,
+        "limitRowCount": 0,
+        "selectedRowCount": 0,
         "header": {
          "combineColumns": [],
          "frozenColumn": "",
@@ -384,20 +401,20 @@
         },
         "columns": [
          {
-          "columnName": "",
+          "columnName": "選択<br>",
           "dataName": "処理",
           "toolTip": "",
           "bgColor": 0,
-          "width": 60,
+          "width": 40,
           "visible": true,
           "cellType": 8,
           "cellDetails": {
            "cellType": 8,
            "text": "処理",
            "onClick": "onClick_btnSentaku",
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": ""
+           "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
+           "imageWidth": "20",
+           "imageHeight": "20"
           },
           "align": 1,
           "resize": true,
@@ -409,7 +426,7 @@
           "dataName": "保険者",
           "toolTip": "",
           "bgColor": 0,
-          "width": 70,
+          "width": 90,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -425,13 +442,13 @@
           "dataName": "被保番号",
           "toolTip": "",
           "bgColor": 0,
-          "width": 100,
+          "width": 95,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
            "cellType": 0
           },
-          "align": 0,
+          "align": 1,
           "resize": true,
           "isPrivateInfo": false,
           "sortKey": "被保番号"
@@ -441,7 +458,7 @@
           "dataName": "氏名",
           "toolTip": "",
           "bgColor": 0,
-          "width": 200,
+          "width": 300,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -457,14 +474,16 @@
           "dataName": "申請日",
           "toolTip": "",
           "bgColor": 0,
-          "width": 90,
+          "width": 95,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
            "cellType": 7,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "onChange": ""
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
           },
           "align": 1,
           "resize": true,
@@ -476,7 +495,7 @@
           "dataName": "申請区分",
           "toolTip": "",
           "bgColor": 0,
-          "width": 70,
+          "width": 75,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -492,14 +511,16 @@
           "dataName": "審査予定日",
           "toolTip": "",
           "bgColor": 0,
-          "width": 90,
+          "width": 95,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
            "cellType": 7,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "onChange": ""
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
           },
           "align": 1,
           "resize": true,
@@ -511,7 +532,7 @@
           "dataName": "マスク区分",
           "toolTip": "",
           "bgColor": 0,
-          "width": 70,
+          "width": 75,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -525,14 +546,16 @@
           "dataName": "意見書受領日",
           "toolTip": "",
           "bgColor": 0,
-          "width": 90,
+          "width": 95,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
            "cellType": 7,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "onChange": ""
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
           },
           "align": 1,
           "resize": true,
@@ -544,14 +567,16 @@
           "dataName": "調査票受領日",
           "toolTip": "",
           "bgColor": 0,
-          "width": 90,
+          "width": 95,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
            "cellType": 7,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "onChange": ""
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
           },
           "align": 1,
           "resize": true,
@@ -598,7 +623,9 @@
            "cellType": 7,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "onChange": ""
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
           },
           "align": 0,
           "resize": false,
@@ -645,7 +672,9 @@
            "cellType": 7,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "onChange": ""
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
           },
           "align": 0,
           "resize": false,
@@ -664,7 +693,9 @@
            "cellType": 7,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "onChange": ""
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
           },
           "align": 0,
           "resize": false,
@@ -673,10 +704,17 @@
          }
         ]
        },
-       "height": "M",
        "onSort": "",
        "onSelect": "onClick_btnSentaku",
        "onSelectByDblClick": "",
+       "onSelectBySelectButton": "",
+       "onSelectByModifyButton": "",
+       "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -689,7 +727,7 @@
        "fieldName": "btnSaiKensaku",
        "items": [],
        "controlType": "Button",
-       "width": "140",
+       "width": "200",
        "visible": true,
        "displayNone": true,
        "disabled": true,
@@ -703,17 +741,20 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "btnSaiKensaku",
+       "helpMessageID": "",
+       "jpControlName": "",
        "text": "再検索する",
        "onClick": "",
+       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
-     "width": "1000",
+     "width": "1098",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -727,6 +768,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "ShoriTaishoshaIchiran",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -743,14 +786,13 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "HihokenshaJoho",
@@ -767,9 +809,11 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
      "selectControlID": "HihokenshaJoho",
+     "helpMessageID": "",
+     "jpControlName": "",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -777,7 +821,9 @@
      "controlName": "KaigoHihokenshaJoho",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": ""
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M"
     },
     {
      "fieldName": "ImageMaskTaishoShiji",
@@ -789,25 +835,105 @@
          "fieldName": "tplImage01",
          "items": [
           {
-           "fieldName": "imgIkenshoTheRight",
+           "fieldName": "btnMasking",
            "items": [],
-           "controlType": "StaticImage",
+           "controlType": "Button",
+           "width": "200",
            "visible": true,
            "displayNone": false,
            "disabled": false,
            "accessKey": "",
            "nextFocusFieldName": "",
-           "wrap": false,
+           "wrap": true,
            "dependencies": [],
            "float": 0,
            "toolTip": "",
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "selectControlID": "imgIkenshoTheRight",
-           "imageWidth": "200",
-           "imageHeight": "200",
-           "src": "/uz/uza/css/Edit.png"
+           "selectControlID": "btnMasking",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "text": "マスキングする",
+           "onClick": "",
+           "icon": 0,
+           "appearance": 0,
+           "imageFileUrl": "",
+           "imageWidth": "",
+           "imageHeight": "",
+           "heightTextBoxMatches": false
+          },
+          {
+           "fieldName": "ImageFrontOfIkensho",
+           "items": [
+            {
+             "fieldName": "lblDummy1",
+             "items": [],
+             "controlType": "Label",
+             "width": "S",
+             "visible": true,
+             "displayNone": true,
+             "disabled": false,
+             "accessKey": "",
+             "nextFocusFieldName": "",
+             "wrap": true,
+             "dependencies": [],
+             "float": 0,
+             "toolTip": "",
+             "authorityMode": 0,
+             "marginLeft": "XS",
+             "marginRight": "XS",
+             "selectControlID": "lblDummy1",
+             "helpMessageID": "",
+             "jpControlName": "",
+             "required": false,
+             "isPrivateInfo": false,
+             "text": "意見書(表)",
+             "decorationClass": "",
+             "align": 2
+            }
+           ],
+           "controlType": "Panel",
+           "width": "965",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": true,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "ImageFrontOfIkensho",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "onLoad": "",
+           "title": "",
+           "isOpen": true,
+           "canOpenAndClose": true,
+           "postParameterPanelNames": [
+            {
+             "postParameterPanelNames": "ImageFrontOfIkensho"
+            }
+           ],
+           "requestSettings": [],
+           "hiddenInput": [],
+           "onOpen": "",
+           "onClose": "",
+           "session": {},
+           "marginTop": "Default",
+           "marginBottom": "Default",
+           "eraseBorder": true,
+           "backgroundColor": 0,
+           "widthAuto": true,
+           "panelDisplay": 0,
+           "isGroupBox": false,
+           "readOnly": false,
+           "height": "Auto",
+           "focusPositionID": "Page"
           }
          ],
          "controlType": "TabPanel",
@@ -825,16 +951,47 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "tplImage01",
+         "helpMessageID": "",
+         "jpControlName": "",
          "title": "意見書（表）",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         },
         {
          "fieldName": "tplImage02",
          "items": [
           {
-           "fieldName": "imgIkenshoTheBack",
-           "items": [],
-           "controlType": "StaticImage",
+           "fieldName": "ImageBackOfIkensho",
+           "items": [
+            {
+             "fieldName": "lblDummy2",
+             "items": [],
+             "controlType": "Label",
+             "width": "S",
+             "visible": true,
+             "displayNone": true,
+             "disabled": false,
+             "accessKey": "",
+             "nextFocusFieldName": "",
+             "wrap": false,
+             "dependencies": [],
+             "float": 0,
+             "toolTip": "",
+             "authorityMode": 0,
+             "marginLeft": "XS",
+             "marginRight": "XS",
+             "selectControlID": "lblDummy2",
+             "helpMessageID": "",
+             "jpControlName": "",
+             "required": false,
+             "isPrivateInfo": false,
+             "text": "意見書(裏)",
+             "decorationClass": "",
+             "align": 2
+            }
+           ],
+           "controlType": "Panel",
+           "width": "1060",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -847,10 +1004,33 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "selectControlID": "imgIkenshoTheBack",
-           "imageWidth": "200",
-           "imageHeight": "200",
-           "src": "/uz/uza/css/Edit.png"
+           "selectControlID": "ImageBackOfIkensho",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "onLoad": "",
+           "title": "",
+           "isOpen": true,
+           "canOpenAndClose": true,
+           "postParameterPanelNames": [
+            {
+             "postParameterPanelNames": "ImageFrontOfIkensho"
+            }
+           ],
+           "requestSettings": [],
+           "hiddenInput": [],
+           "onOpen": "",
+           "onClose": "",
+           "session": {},
+           "marginTop": "Default",
+           "marginBottom": "Default",
+           "eraseBorder": false,
+           "backgroundColor": 0,
+           "widthAuto": true,
+           "panelDisplay": 0,
+           "isGroupBox": false,
+           "readOnly": false,
+           "height": "Auto",
+           "focusPositionID": "Page"
           }
          ],
          "controlType": "TabPanel",
@@ -868,16 +1048,47 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "tplImage02",
+         "helpMessageID": "",
+         "jpControlName": "",
          "title": "意見書（裏）",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         },
         {
          "fieldName": "tplImage03",
          "items": [
           {
-           "fieldName": "imgTokki01",
-           "items": [],
-           "controlType": "StaticImage",
+           "fieldName": "ImageTokkiJiko1",
+           "items": [
+            {
+             "fieldName": "lblDummy3",
+             "items": [],
+             "controlType": "Label",
+             "width": "S",
+             "visible": true,
+             "displayNone": true,
+             "disabled": false,
+             "accessKey": "",
+             "nextFocusFieldName": "",
+             "wrap": false,
+             "dependencies": [],
+             "float": 0,
+             "toolTip": "",
+             "authorityMode": 0,
+             "marginLeft": "XS",
+             "marginRight": "XS",
+             "selectControlID": "lblDummy3",
+             "helpMessageID": "",
+             "jpControlName": "",
+             "required": false,
+             "isPrivateInfo": false,
+             "text": "特記事項(1)",
+             "decorationClass": "",
+             "align": 2
+            }
+           ],
+           "controlType": "Panel",
+           "width": "1060",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -890,10 +1101,33 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "selectControlID": "imgTokki01",
-           "imageWidth": "800",
-           "imageHeight": "400",
-           "src": ""
+           "selectControlID": "ImageTokkiJiko1",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "onLoad": "",
+           "title": "",
+           "isOpen": true,
+           "canOpenAndClose": true,
+           "postParameterPanelNames": [
+            {
+             "postParameterPanelNames": "ImageFrontOfIkensho"
+            }
+           ],
+           "requestSettings": [],
+           "hiddenInput": [],
+           "onOpen": "",
+           "onClose": "",
+           "session": {},
+           "marginTop": "Default",
+           "marginBottom": "Default",
+           "eraseBorder": false,
+           "backgroundColor": 0,
+           "widthAuto": true,
+           "panelDisplay": 0,
+           "isGroupBox": false,
+           "readOnly": false,
+           "height": "Auto",
+           "focusPositionID": "Page"
           }
          ],
          "controlType": "TabPanel",
@@ -911,16 +1145,47 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "tplImage03",
+         "helpMessageID": "",
+         "jpControlName": "",
          "title": "特記事項（１）",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         },
         {
          "fieldName": "tplImage04",
          "items": [
           {
-           "fieldName": "imgTokki02",
-           "items": [],
-           "controlType": "StaticImage",
+           "fieldName": "ImageTokkiJiko2",
+           "items": [
+            {
+             "fieldName": "lblDummy4",
+             "items": [],
+             "controlType": "Label",
+             "width": "S",
+             "visible": true,
+             "displayNone": true,
+             "disabled": false,
+             "accessKey": "",
+             "nextFocusFieldName": "",
+             "wrap": false,
+             "dependencies": [],
+             "float": 0,
+             "toolTip": "",
+             "authorityMode": 0,
+             "marginLeft": "XS",
+             "marginRight": "XS",
+             "selectControlID": "lblDummy4",
+             "helpMessageID": "",
+             "jpControlName": "",
+             "required": false,
+             "isPrivateInfo": false,
+             "text": "特記事項(2)",
+             "decorationClass": "",
+             "align": 2
+            }
+           ],
+           "controlType": "Panel",
+           "width": "1060",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -933,10 +1198,33 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "selectControlID": "imgTokki02",
-           "imageWidth": "800",
-           "imageHeight": "400",
-           "src": ""
+           "selectControlID": "ImageTokkiJiko2",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "onLoad": "",
+           "title": "",
+           "isOpen": true,
+           "canOpenAndClose": true,
+           "postParameterPanelNames": [
+            {
+             "postParameterPanelNames": "ImageFrontOfIkensho"
+            }
+           ],
+           "requestSettings": [],
+           "hiddenInput": [],
+           "onOpen": "",
+           "onClose": "",
+           "session": {},
+           "marginTop": "Default",
+           "marginBottom": "Default",
+           "eraseBorder": false,
+           "backgroundColor": 0,
+           "widthAuto": true,
+           "panelDisplay": 0,
+           "isGroupBox": false,
+           "readOnly": false,
+           "height": "Auto",
+           "focusPositionID": "Page"
           }
          ],
          "controlType": "TabPanel",
@@ -954,16 +1242,47 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "tplImage04",
+         "helpMessageID": "",
+         "jpControlName": "",
          "title": "特記事項（２）",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         },
         {
          "fieldName": "tplImage05",
          "items": [
           {
-           "fieldName": "imgSonota",
-           "items": [],
-           "controlType": "StaticImage",
+           "fieldName": "ImageOther",
+           "items": [
+            {
+             "fieldName": "lblDummy5",
+             "items": [],
+             "controlType": "Label",
+             "width": "S",
+             "visible": true,
+             "displayNone": true,
+             "disabled": false,
+             "accessKey": "",
+             "nextFocusFieldName": "",
+             "wrap": false,
+             "dependencies": [],
+             "float": 0,
+             "toolTip": "",
+             "authorityMode": 0,
+             "marginLeft": "XS",
+             "marginRight": "XS",
+             "selectControlID": "lblDummy5",
+             "helpMessageID": "",
+             "jpControlName": "",
+             "required": false,
+             "isPrivateInfo": false,
+             "text": "その他",
+             "decorationClass": "",
+             "align": 2
+            }
+           ],
+           "controlType": "Panel",
+           "width": "1060",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -976,10 +1295,33 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "selectControlID": "imgSonota",
-           "imageWidth": "800",
-           "imageHeight": "400",
-           "src": ""
+           "selectControlID": "ImageOther",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "onLoad": "",
+           "title": "",
+           "isOpen": true,
+           "canOpenAndClose": true,
+           "postParameterPanelNames": [
+            {
+             "postParameterPanelNames": "ImageFrontOfIkensho"
+            }
+           ],
+           "requestSettings": [],
+           "hiddenInput": [],
+           "onOpen": "",
+           "onClose": "",
+           "session": {},
+           "marginTop": "Default",
+           "marginBottom": "Default",
+           "eraseBorder": false,
+           "backgroundColor": 0,
+           "widthAuto": true,
+           "panelDisplay": 0,
+           "isGroupBox": false,
+           "readOnly": false,
+           "height": "Auto",
+           "focusPositionID": "Page"
           }
          ],
          "controlType": "TabPanel",
@@ -997,12 +1339,15 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "tplImage05",
+         "helpMessageID": "",
+         "jpControlName": "",
          "title": "その他",
-         "onActive": ""
+         "onActive": "",
+         "onFirstActive": ""
         }
        ],
        "controlType": "TabContainer",
-       "width": "800",
+       "width": "1072",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1016,6 +1361,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "tabImageJoho",
+       "helpMessageID": "",
+       "jpControlName": "",
        "onChange": "",
        "selectedItem": null,
        "tabpanelPosition": [
@@ -1027,63 +1374,12 @@
        ],
        "isDraggable": false,
        "selectedItemFieldName": "tplImage01",
-       "initialTab": 0
-      },
-      {
-       "fieldName": "btnUpdate",
-       "items": [],
-       "controlType": "Button",
-       "width": "140",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": true,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnUpdate",
-       "text": "画像情報を登録する",
-       "onClick": "",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0
-      },
-      {
-       "fieldName": "btnCancel",
-       "items": [],
-       "controlType": "Button",
-       "width": "140",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnCancel",
-       "text": "キャンセル",
-       "onClick": "",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0
+       "initialTab": 0,
+       "isLazyLoading": false
       }
      ],
      "controlType": "Panel",
-     "width": "1000",
+     "width": "1098",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1097,6 +1393,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "ImageMaskTaishoShiji",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "イメージ情報",
      "isOpen": true,
@@ -1113,14 +1411,13 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "KaigoImageMasking",
@@ -1131,7 +1428,7 @@
        "controlType": "Label",
        "width": "S",
        "visible": true,
-       "displayNone": false,
+       "displayNone": true,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
@@ -1143,9 +1440,12 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "lblBairitsu",
+       "helpMessageID": "",
+       "jpControlName": "",
        "required": false,
        "isPrivateInfo": false,
        "text": "表示倍率",
+       "decorationClass": "",
        "align": 2
       },
       {
@@ -1154,7 +1454,7 @@
        "controlType": "DropDownList",
        "width": "80",
        "visible": true,
-       "displayNone": false,
+       "displayNone": true,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
@@ -1166,8 +1466,11 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "ddlHyojiBairitsu_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "onChange": "",
-       "selectedItem": "",
+       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -1186,34 +1489,14 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
-       "onBlur": ""
-      },
-      {
-       "fieldName": "imgMaskTaisho",
-       "items": [],
-       "controlType": "StaticImage",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": true,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "imgMaskTaisho",
-       "imageWidth": "600",
-       "imageHeight": "400",
-       "src": ""
+       "onBlur": "",
+       "disabledItem": []
       },
       {
        "fieldName": "btnShokiModoshi",
        "items": [],
        "controlType": "Button",
-       "width": "110",
+       "width": "200",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1227,19 +1510,22 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "btnShokiModoshi",
+       "helpMessageID": "",
+       "jpControlName": "",
        "text": "初期状態に戻す",
        "onClick": "",
+       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "heightTextBoxMatches": false
       },
       {
-       "fieldName": "btnImageToroku",
+       "fieldName": "ImageMaskingTool",
        "items": [],
-       "controlType": "Button",
-       "width": "150",
+       "controlType": "CommonChildDiv",
+       "width": "XS",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1247,49 +1533,28 @@
        "nextFocusFieldName": "",
        "wrap": true,
        "dependencies": [],
-       "float": 2,
+       "float": 0,
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnImageToroku",
-       "text": "マスク情報を確定する",
-       "onClick": "",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0
-      },
-      {
-       "fieldName": "btnBackIchiran",
-       "items": [],
-       "controlType": "Button",
-       "width": "150",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnBackIchiran",
-       "text": "画像選択に戻る",
-       "onClick": "",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0
+       "marginRight": "0",
+       "selectControlID": "ImageMaskingTool",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "relation": [],
+       "marginTop": 0,
+       "marginBottom": 0,
+       "businessId": "DBE",
+       "controlName": "ImageMasking",
+       "dataPassingForDialog": [],
+       "dialogOkEventNameForDialog": "",
+       "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M"
       }
      ],
      "controlType": "Panel",
-     "width": "1000",
+     "width": "1098",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1303,6 +1568,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "KaigoImageMasking",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "マスキング処理",
      "isOpen": true,
@@ -1319,18 +1586,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     }
    ],
    "controlType": "Panel",
-   "width": "1010",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1341,9 +1607,11 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
+   "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "ImageJohoMasking",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "イメージ情報マスキング",
    "isOpen": true,
@@ -1373,6 +1641,10 @@
     {
      "eventName": "onClick_btnSentaku",
      "requestUrl": "dbe/db/dbe/ImageJohoMasking/onClick_btnSentaku"
+    },
+    {
+     "eventName": "onClick_btnUpdate",
+     "requestUrl": "dbe/db/dbe/ImageJohoMasking/onClick_btnUpdate"
     }
    ],
    "hiddenInput": [],
@@ -1381,14 +1653,13 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -1406,14 +1677,20 @@
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "イメージ情報マスキング",
- "jsPathCollection": [],
+ "jsPathCollection": [
+  {
+   "jsPath": "/db/dbe/Scripts/DBE4050001.js"
+  }
+ ],
  "relation": [],
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "検索",
+   "stateName": "対象者検索",
    "showWizard": false,
    "visibleDivs": [
     {
@@ -1437,10 +1714,25 @@
     {
      "fieldName": "dgImageMaskShoriTaishosha[処理]",
      "event": "onClick",
-     "transition": "照会"
+     "transition": "イメージ照会"
+    },
+    {
+     "fieldName": "btnBackIchiran",
+     "event": "onClick",
+     "transition": ""
     },
     {
      "fieldName": "btnCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnMasking",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnUpdate",
      "event": "onClick",
      "transition": ""
     }
@@ -1448,7 +1740,7 @@
   },
   {
    "order": "2",
-   "stateName": "照会",
+   "stateName": "イメージ照会",
    "showWizard": false,
    "visibleDivs": [
     {
@@ -1465,6 +1757,31 @@
      "visibleDiv": "ImageMaskTaishoShiji",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ImageFrontOfIkensho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ImageBackOfIkensho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ImageTokkiJiko1",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ImageTokkiJiko2",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ImageOther",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -1475,15 +1792,30 @@
      "transition": ""
     },
     {
+     "fieldName": "btnBackIchiran",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
      "fieldName": "btnCancel",
      "event": "onClick",
-     "transition": "検索"
+     "transition": "対象者検索"
+    },
+    {
+     "fieldName": "btnMasking",
+     "event": "onClick",
+     "transition": "マスキング"
+    },
+    {
+     "fieldName": "btnUpdate",
+     "event": "onClick",
+     "transition": "対象者検索"
     }
    ]
   },
   {
    "order": "3",
-   "stateName": "マスク",
+   "stateName": "マスキング",
    "showWizard": false,
    "visibleDivs": [
     {
@@ -1500,6 +1832,11 @@
      "visibleDiv": "ImageJohoMasking",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ImageMaskingTool",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -1510,7 +1847,22 @@
      "transition": ""
     },
     {
+     "fieldName": "btnBackIchiran",
+     "event": "onClick",
+     "transition": "イメージ照会"
+    },
+    {
      "fieldName": "btnCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnMasking",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnUpdate",
      "event": "onClick",
      "transition": ""
     }
@@ -1539,8 +1891,170 @@
   ],
   [
    "KaigoImageMasking"
+  ],
+  [
+   "ImageMaskingTool"
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "imageShokai",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonUpdate",
+     "buttonProperty": {
+      "fieldName": "btnUpdate",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnUpdate",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "onClick_btnUpdate",
+      "text": "更新",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "画像情報を"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnCancel",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCancel",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "",
+      "text": "戻る",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "一覧へ"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "イメージ照会"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  },
+  {
+   "commonButtonAreaId": "imageMask",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnImageToroku",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnImageToroku",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "",
+      "text": "マスク情報を確定する",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnBackIchiran",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnBackIchiran",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "",
+      "text": "戻る",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "画像選択に"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "マスキング"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }

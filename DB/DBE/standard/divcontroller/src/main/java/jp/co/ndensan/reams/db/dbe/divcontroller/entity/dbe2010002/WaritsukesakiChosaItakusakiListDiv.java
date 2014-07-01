@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ButtonsForWaritsukeChosaItakusakiListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.dgChosaItakusakiList_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -23,8 +22,8 @@ public class WaritsukesakiChosaItakusakiListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ButtonsForWaritsukeChosaItakusakiList")
-    private ButtonsForWaritsukeChosaItakusakiListDiv ButtonsForWaritsukeChosaItakusakiList;
+    @JsonProperty("btnToAddChosaItakusaki")
+    private Button btnToAddChosaItakusaki;
     @JsonProperty("dgChosaItakusakiList")
     private DataGrid<dgChosaItakusakiList_Row> dgChosaItakusakiList;
 
@@ -34,14 +33,14 @@ public class WaritsukesakiChosaItakusakiListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ButtonsForWaritsukeChosaItakusakiList")
-    public ButtonsForWaritsukeChosaItakusakiListDiv getButtonsForWaritsukeChosaItakusakiList() {
-        return ButtonsForWaritsukeChosaItakusakiList;
+    @JsonProperty("btnToAddChosaItakusaki")
+    public Button getBtnToAddChosaItakusaki() {
+        return btnToAddChosaItakusaki;
     }
 
-    @JsonProperty("ButtonsForWaritsukeChosaItakusakiList")
-    public void setButtonsForWaritsukeChosaItakusakiList(ButtonsForWaritsukeChosaItakusakiListDiv ButtonsForWaritsukeChosaItakusakiList) {
-        this.ButtonsForWaritsukeChosaItakusakiList=ButtonsForWaritsukeChosaItakusakiList;
+    @JsonProperty("btnToAddChosaItakusaki")
+    public void setBtnToAddChosaItakusaki(Button btnToAddChosaItakusaki) {
+        this.btnToAddChosaItakusaki=btnToAddChosaItakusaki;
     }
 
     @JsonProperty("dgChosaItakusakiList")

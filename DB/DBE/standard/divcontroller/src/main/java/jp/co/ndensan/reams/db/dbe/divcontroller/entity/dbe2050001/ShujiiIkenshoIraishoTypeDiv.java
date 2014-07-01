@@ -21,8 +21,8 @@ public class ShujiiIkenshoIraishoTypeDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("radShujiiIkenshoIraishoType")
-    private RadioButton radShujiiIkenshoIraishoType;
+    @JsonProperty("chkShujiiIkenshoIraiReportType")
+    private CheckBoxList chkShujiiIkenshoIraiReportType;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,14 +30,14 @@ public class ShujiiIkenshoIraishoTypeDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("radShujiiIkenshoIraishoType")
-    public RadioButton getRadShujiiIkenshoIraishoType() {
-        return radShujiiIkenshoIraishoType;
+    @JsonProperty("chkShujiiIkenshoIraiReportType")
+    public CheckBoxList getChkShujiiIkenshoIraiReportType() {
+        return chkShujiiIkenshoIraiReportType;
     }
 
-    @JsonProperty("radShujiiIkenshoIraishoType")
-    public void setRadShujiiIkenshoIraishoType(RadioButton radShujiiIkenshoIraishoType) {
-        this.radShujiiIkenshoIraishoType=radShujiiIkenshoIraishoType;
+    @JsonProperty("chkShujiiIkenshoIraiReportType")
+    public void setChkShujiiIkenshoIraiReportType(CheckBoxList chkShujiiIkenshoIraiReportType) {
+        this.chkShujiiIkenshoIraiReportType=chkShujiiIkenshoIraiReportType;
     }
 
 }

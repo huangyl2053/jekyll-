@@ -17,21 +17,23 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.JukyushaData;
 import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.RiyoshaFutangakuGemmenData;
 import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.ShakaiFukushiHojinKeigenData;
 import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.TokubetsuChiikiKasanGemmenData;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.ButtonsShosaiShijiDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.IryoHokenDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.JukyushaShokaiDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.ButtonsShosaiShijiDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.IryoHokenDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.JukyushaShokaiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.JukyushaShokaiTargetSearchDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteiDetailDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteiResultDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteiResultIdoDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteiResultEtceteraDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteiTorikeshiDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteichosaDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.ShiteiServiceIchiranDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.ShujiiIkenshoDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.dgNinteiRireki_Row;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.dgShiteiServiceShurui_Row;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.NinteiDetailDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.NinteiResultDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.NinteiResultIdoDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.NinteiResultEtceteraDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.NinteiTorikeshiDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.NinteichosaDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.ShiteiServiceIchiranDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.ShujiiIkenshoDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.dgNinteiRireki_Row;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.dgShiteiServiceShurui_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.AtenaShokaiSimpleAdapter;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.SearchResultOfHihokensha;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.SearchResultOfHihokenshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.YoKaigoJotaiKubun;
@@ -53,26 +55,28 @@ public class JukyushaShokai {
      * ロード時の処理です。
      *
      * @param div JukyushaShokaiDiv
-     * @param targets JukyushaShokaiTargetSearchDiv
      * @return ResponseData
      */
-    public ResponseData<JukyushaShokaiDiv> onLoad(JukyushaShokaiDiv div, JukyushaShokaiTargetSearchDiv targets) {
+    public ResponseData<JukyushaShokaiDiv> onLoad(JukyushaShokaiDiv div) {
         return _createResponseData(div);
     }
 
     /**
      *
      * @param div JukyushaShokaiDiv
-     * @param targets JukyushaShokaiTargetSearchDiv
      * @return ResponseData
      */
-    public ResponseData<JukyushaShokaiDiv> onStart(JukyushaShokaiDiv div, JukyushaShokaiTargetSearchDiv targets) {
-        div.getNinteiRireki().getDgNinteiRireki().setDataSource(searchHistroyOfClickedHihokensha(targets));
-        RString hihokenshaNo = clickedItem(targets).getHihokenshaNo();
-        RString shikibetsuCode = clickedItem(targets).getShikibetsuCode();
+    public ResponseData<JukyushaShokaiDiv> onStart(JukyushaShokaiDiv div) {
+        SearchResultOfHihokenshaDiv results = SearchResultForJukyushaShokai.getInstance().get();
+        div.getNinteiRireki().getDgNinteiRireki().setDataSource(searchHistroyOfClickedHihokensha(results));
+
+        RString hihokenshaNo = clickedItem(results).getHihokenshaNo();
+        RString shikibetsuCode = clickedItem(results).getShikibetsuCode();
+
         AtenaShokaiSimpleAdapter.setDemoData(div.getKaigoAtena(), new ShikibetsuCode(shikibetsuCode));
         div.getTxtHihokenshaNo().setValue(hihokenshaNo);
         _init_ButtonsShosaiShiji(div.getButtonsShosaiShiji(), hihokenshaNo);
+
         return _createResponseData(div);
     }
 
@@ -95,22 +99,23 @@ public class JukyushaShokai {
         btn.setDisabled(disable);
     }
 
-    private List<dgNinteiRireki_Row> searchHistroyOfClickedHihokensha(JukyushaShokaiTargetSearchDiv targets) {
-        return new JukyushaData().get履歴Of(clickedItem(targets).getHihokenshaNo()).asConvertedType();
+    private List<dgNinteiRireki_Row> searchHistroyOfClickedHihokensha(SearchResultOfHihokenshaDiv results) {
+        return new JukyushaData().get履歴Of(clickedItem(results).getHihokenshaNo()).asConvertedType();
     }
 
-    private dgSearchResult_Row clickedItem(JukyushaShokaiTargetSearchDiv targets) {
-        return targets.getSearchResult().getDgSearchResult().getClickedItem();
+    private dgSearchResult_Row clickedItem(SearchResultOfHihokenshaDiv results) {
+        return results.getDgSearchResult().getClickedItem();
     }
 
     /**
      *
      * @param div JukyushaShokaiDiv
-     * @param targets JukyushaShokaiTargetSearchDiv
      * @return ResponseData
      */
-    public ResponseData<JukyushaShokaiDiv> onStart_Detail(JukyushaShokaiDiv div, JukyushaShokaiTargetSearchDiv targets) {
-        List<HashMap> history = new JukyushaData().get履歴Of(clickedItem(targets).getHihokenshaNo()).asRow();
+    public ResponseData<JukyushaShokaiDiv> onStart_Detail(JukyushaShokaiDiv div) {
+        SearchResultOfHihokenshaDiv results = SearchResultForJukyushaShokai.getInstance().get();
+
+        List<HashMap> history = new JukyushaData().get履歴Of(clickedItem(results).getHihokenshaNo()).asRow();
         dgNinteiRireki_Row clicked = div.getNinteiRireki().getDgNinteiRireki().getClickedItem();
         for (Map map : history) {
             if (clicked.getNinteiShinseiDate().getValue().toString().equals(map.get("認定申請日").toString())) {
@@ -370,13 +375,7 @@ public class JukyushaShokai {
 
         public void setDemoData(ControlGenerator cg) {
             div.getTxtShinsakaiIken().setValue(cg.getAsRString("審査会意見"));
-            RString tokuteiShippei = cg.getAsRString("特定疾病");
-            if (RString.EMPTY.equals(tokuteiShippei)) {
-                div.getTxtTokuteiShippei().setDisplayNone(true);
-            } else {
-                div.getTxtTokuteiShippei().setDisplayNone(false);
-                div.getTxtTokuteiShippei().setValue(tokuteiShippei);
-            }
+            setTokuteiShippei(cg.getAsRString("特定疾病"));
             NinteiResultIdoDiv ido = div.getNinteiResultIdo();
             ido.getTxtNinteiResultIdoJiyu().setValue(cg.getAsRString("異動事由"));
             ido.getTxtNinteiResultIdoYMD().setValue(cg.getAsFlexibleDate("異動日"));
@@ -384,6 +383,13 @@ public class JukyushaShokai {
             NinteiTorikeshiDiv torikeshi = div.getNinteiTorikeshi();
             torikeshi.getTxtNinteiTorikeshiRiyu().setValue(cg.getAsRString("取消理由"));
             torikeshi.getTxtTorikeshiYMD().setValue(cg.getAsFlexibleDate("取消日"));
+        }
+
+        private void setTokuteiShippei(RString tokuteiShippei) {
+            boolean displayNone = RString.EMPTY.equals(tokuteiShippei);
+            div.getTxtTokuteiShippei().setDisplayNone(displayNone);
+            div.getLinTokuteiShippei().setDisplayNone(displayNone);
+            div.getTxtTokuteiShippei().setValue(tokuteiShippei);
         }
 
         public void clear() {

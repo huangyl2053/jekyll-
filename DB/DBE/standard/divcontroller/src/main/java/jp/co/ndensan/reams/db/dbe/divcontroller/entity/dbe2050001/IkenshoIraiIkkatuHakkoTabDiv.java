@@ -8,9 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001.ShujiiIkenshoIraishoPublishingOptionsDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001.ShujiiIkenshoIraishoRelatedDatesDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001.ShujiiIkenshoIraishoTargetPersonsDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * IkenshoIraiIkkatuHakkoTab のクラスファイル 
@@ -30,8 +28,6 @@ public class IkenshoIraiIkkatuHakkoTabDiv extends TabPanel {
     private ShujiiIkenshoIraishoTargetPersonsDiv ShujiiIkenshoIraishoTargetPersons;
     @JsonProperty("ShujiiIkenshoIraishoRelatedDates")
     private ShujiiIkenshoIraishoRelatedDatesDiv ShujiiIkenshoIraishoRelatedDates;
-    @JsonProperty("btnToPublishOfIkensho")
-    private Button btnToPublishOfIkensho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -67,16 +63,6 @@ public class IkenshoIraiIkkatuHakkoTabDiv extends TabPanel {
     @JsonProperty("ShujiiIkenshoIraishoRelatedDates")
     public void setShujiiIkenshoIraishoRelatedDates(ShujiiIkenshoIraishoRelatedDatesDiv ShujiiIkenshoIraishoRelatedDates) {
         this.ShujiiIkenshoIraishoRelatedDates=ShujiiIkenshoIraishoRelatedDates;
-    }
-
-    @JsonProperty("btnToPublishOfIkensho")
-    public Button getBtnToPublishOfIkensho() {
-        return btnToPublishOfIkensho;
-    }
-
-    @JsonProperty("btnToPublishOfIkensho")
-    public void setBtnToPublishOfIkensho(Button btnToPublishOfIkensho) {
-        this.btnToPublishOfIkensho=btnToPublishOfIkensho;
     }
 
 }

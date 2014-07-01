@@ -54,6 +54,9 @@ public class TaishoShinsakaiIchiran {
         dgShinsakaiIchiran_Row dataRow = div.getDgShinsakaiIchiran().getSelectedItems().get(SELECT_IDX);
 
         ViewStateHolder.put("審査会番号", dataRow.get審査会名());
+        ViewStateHolder.put("合議体名", dataRow.get合議体());
+        ViewStateHolder.put("開催日", dataRow.get審査開催日().getValue());
+        ViewStateHolder.put("開催場所", dataRow.get審査会会場());
 
         response.data = div;
         return response;
@@ -68,7 +71,15 @@ public class TaishoShinsakaiIchiran {
     public ResponseData reLoadData(TaishoShinsakaiIchiranDiv div) {
         ResponseData<TaishoShinsakaiIchiranDiv> response = new ResponseData<>();
 
-        div.getDgShinsakaiIchiran().getSelectedItems().get(SELECT_IDX).set審査会状況(new RString("開催済"));
+        List<dgShinsakaiIchiran_Row> arrayData = div.getDgShinsakaiIchiran().getDataSource();
+        RString shinsakaiNo = (RString) ViewStateHolder.get("審査会番号", RString.class);
+        for (dgShinsakaiIchiran_Row row : arrayData) {
+            if (row.get審査会名().equalsIgnoreCase(shinsakaiNo)) {
+                row.set審査会状況(new RString("開催済"));
+            }
+        }
+
+        div.getDgShinsakaiIchiran().setDataSource(arrayData);
 
         response.data = div;
         return response;

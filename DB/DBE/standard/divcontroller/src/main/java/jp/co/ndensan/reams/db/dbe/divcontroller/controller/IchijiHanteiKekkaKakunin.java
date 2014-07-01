@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 一次判定結果詳細表示Divを制御します。
@@ -83,7 +84,6 @@ public class IchijiHanteiKekkaKakunin {
      */
     private void setIchijiHanteiKekkaShosaiData(IchijiHanteiKekkaKakuninDiv panel, IchijiHanteiShoriTaishoshaIchiranDiv panel2) {
 
-        StringBuilder stbKensu;
         int intIdx;
 
         List<HashMap> ichijiHanteiKekkaShosai = YamlLoader.DBE.
@@ -131,7 +131,7 @@ public class IchijiHanteiKekkaKakunin {
             HashMap hashmapIchijiHanteiKekka = ichijiHanteiKekkaShosai.
                     get(Integer.parseInt(ichijiHanteiKekkaKakuninData.get(intIdx).getIndex().toString()));
             ControlGenerator cg = new ControlGenerator(hashmapIchijiHanteiKekka);
-            stbKensu = new StringBuilder();
+            StringBuilder stbKensu = new StringBuilder();
             stbKensu.append(intIdx + 1);
             stbKensu.append(" / ");
             stbKensu.append(ichijiHanteiKekkaKakuninData.size());
@@ -212,15 +212,15 @@ public class IchijiHanteiKekkaKakunin {
 
             //ボタン活性化制御
             if ((intIdx + 1) == ichijiHanteiKekkaKakuninData.size()) {
-                panel.getBtnNextHyoji().setDisabled(true);
+                setDisabled_btnCommonNextResult(true);
             } else {
-                panel.getBtnNextHyoji().setDisabled(false);
+                setDisabled_btnCommonNextResult(false);
             }
 
             if (intIdx == 0) {
-                panel.getBtnPreHyoji().setDisabled(true);
+                setDisabled_btnCommonBackResult(true);
             } else {
-                panel.getBtnPreHyoji().setDisabled(false);
+                setDisabled_btnCommonBackResult(false);
             }
 
         }
@@ -250,15 +250,25 @@ public class IchijiHanteiKekkaKakunin {
         return arrayDataList;
     }
 
-    private dgIchijiHanteiKeikokuCode_Row createRowIchijiHanteiKeikokuCode(
-            RString keikokuNo,
-            RString keikokuCode,
-            RString keikokuNaiyo
-    ) {
+    private dgIchijiHanteiKeikokuCode_Row
+            createRowIchijiHanteiKeikokuCode(RString keikokuNo, RString keikokuCode, RString keikokuNaiyo) {
 
-        dgIchijiHanteiKeikokuCode_Row rowIchijiHanteiKeikokuCode = new dgIchijiHanteiKeikokuCode_Row(
-                keikokuNo, keikokuCode, keikokuNaiyo);
+        dgIchijiHanteiKeikokuCode_Row rowIchijiHanteiKeikokuCode
+                = new dgIchijiHanteiKeikokuCode_Row(keikokuNo, keikokuCode, keikokuNaiyo);
         return rowIchijiHanteiKeikokuCode;
     }
 
+    private void setDisabled_btnCommonNextResult(boolean disabled) {
+        try {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnCommonNextResult"), disabled);
+        } catch (Exception e) {
+        }
+    }
+
+    private void setDisabled_btnCommonBackResult(boolean disabled) {
+        try {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnCommonBackResult"), disabled);
+        } catch (Exception e) {
+        }
+    }
 }

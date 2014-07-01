@@ -21,10 +21,10 @@ public class OcrSoftKidoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnOcrDataNyuryoku")
-    private Button btnOcrDataNyuryoku;
     @JsonProperty("lblOcrSoft")
     private Label lblOcrSoft;
+    @JsonProperty("btnOcrDataNyuryoku")
+    private Button btnOcrDataNyuryoku;
     @JsonProperty("btnCloseOcrSoft")
     private Button btnCloseOcrSoft;
 
@@ -34,16 +34,6 @@ public class OcrSoftKidoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnOcrDataNyuryoku")
-    public Button getBtnOcrDataNyuryoku() {
-        return btnOcrDataNyuryoku;
-    }
-
-    @JsonProperty("btnOcrDataNyuryoku")
-    public void setBtnOcrDataNyuryoku(Button btnOcrDataNyuryoku) {
-        this.btnOcrDataNyuryoku=btnOcrDataNyuryoku;
-    }
-
     @JsonProperty("lblOcrSoft")
     public Label getLblOcrSoft() {
         return lblOcrSoft;
@@ -52,6 +42,16 @@ public class OcrSoftKidoDiv extends Panel {
     @JsonProperty("lblOcrSoft")
     public void setLblOcrSoft(Label lblOcrSoft) {
         this.lblOcrSoft=lblOcrSoft;
+    }
+
+    @JsonProperty("btnOcrDataNyuryoku")
+    public Button getBtnOcrDataNyuryoku() {
+        return btnOcrDataNyuryoku;
+    }
+
+    @JsonProperty("btnOcrDataNyuryoku")
+    public void setBtnOcrDataNyuryoku(Button btnOcrDataNyuryoku) {
+        this.btnOcrDataNyuryoku=btnOcrDataNyuryoku;
     }
 
     @JsonProperty("btnCloseOcrSoft")

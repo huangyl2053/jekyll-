@@ -63,7 +63,7 @@ public class HanteiResultsOutputTargetShinsakaiList {
         RString endTime = cg.getAsRString("終了時間");
 
         Button btn = new Button();
-        dgShinsakaiList_Row row = new dgShinsakaiList_Row(btn, kaisaiNo, kaisaiDate, gogitaiNo, gogitaiMeisho, kaisaiBasho, yoteiTeiin, wariateNinzu,
+        dgShinsakaiList_Row row = new dgShinsakaiList_Row(btn, kaisaiNo, kaisaiDate, gogitaiMeisho, kaisaiBasho, yoteiTeiin, wariateNinzu,
                 startTime, endTime);
         return row;
     }

@@ -38,18 +38,14 @@ public class NinteitsuchishoKobetsuHakko {
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
         if (cg.getAsRString("保険者番号").equalsIgnoreCase(new RString("152264"))) {
             div.getNinteitsuchishoKobetsuHakkoTargetSearch().getDdlHokensha().setSelectedItem(new RString("2"));
-            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokenshaNo().setValue(cg.getAsRString("保険者番号"));
-            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokensaName().setValue(cg.getAsRString("保険者名称"));
         } else {
             div.getNinteitsuchishoKobetsuHakkoTargetSearch().getDdlHokensha().setSelectedItem(new RString("1"));
-            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokenshaNo().setValue(cg.getAsRString("保険者番号"));
-            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokensaName().setValue(cg.getAsRString("保険者名称"));
         }
 
         List<KeyValueDataSource> keyList = new ArrayList<>();
-        keyList.add(new KeyValueDataSource(new RString("1"), new RString("男")));
-        keyList.add(new KeyValueDataSource(new RString("2"), new RString("女")));
-        div.getNinteitsuchishoKobetsuHakkoTargetSearch().getHihokensha().getChkGender().setSelectedItems(keyList);
+//        keyList.add(new KeyValueDataSource(new RString("1"), new RString("男")));
+//        keyList.add(new KeyValueDataSource(new RString("2"), new RString("女")));
+//        div.getNinteitsuchishoKobetsuHakkoTargetSearch().getHihokensha().getChkGender().setSelectedItems(keyList);
         div.getNinteitsuchishoKobetsuHakkoTargetSearch().getHihokensha().getTxtHihokenshaNo().setValue(RString.EMPTY);
 
         response.data = div;

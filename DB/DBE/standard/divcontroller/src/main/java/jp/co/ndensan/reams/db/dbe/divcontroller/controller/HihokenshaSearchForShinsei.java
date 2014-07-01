@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.YokaigoninteiShinseishaData;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaSearchForShinseiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.HihokenshaSearchForShinseiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaFinder;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.SearchResultOfHihokensha;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -35,9 +35,19 @@ public class HihokenshaSearchForShinsei {
      * @param panel HihokenshaSearchForShinseiDiv
      * @return ResponseData
      */
-    public ResponseData<HihokenshaSearchForShinseiDiv> onClickBtnToSearch(HihokenshaSearchForShinseiDiv panel) {
+    public ResponseData<HihokenshaSearchForShinseiDiv> onClick_btnToSearch(HihokenshaSearchForShinseiDiv panel) {
         SearchResultOfHihokensha.setSearchResult(panel.getSearchResultForShinsei(),
-                new YokaigoninteiShinseishaData().get要介護認定申請者List().asConvetedType());
+                new YokaigoninteiShinseishaData().get要介護認定申請者List().asConvertedType());
+        return _createResponseData(panel);
+    }
+
+    /**
+     *
+     * @param panel HihokenshaSearchForShinseiDiv
+     * @return ResponseData
+     */
+    public ResponseData<HihokenshaSearchForShinseiDiv> onClick_btnToDecide(HihokenshaSearchForShinseiDiv panel) {
+        YokaigoNinteiShinseisha.getInstance().save(panel.getSearchResultForShinsei().getDgSearchResult().getClickedItem());
         return _createResponseData(panel);
     }
 

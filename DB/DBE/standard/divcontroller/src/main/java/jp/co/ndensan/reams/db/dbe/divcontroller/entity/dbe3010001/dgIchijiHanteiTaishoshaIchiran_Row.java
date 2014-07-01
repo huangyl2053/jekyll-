@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe3010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 10 20:31:04 JST 2014 
+ * Mon Jun 30 17:27:58 JST 2014 
  */
 
 
@@ -37,6 +37,19 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
 
     public dgIchijiHanteiTaishoshaIchiran_Row() {
         super();
+        this.hokensha = RString.EMPTY;
+        this.hihokenNo = RString.EMPTY;
+        this.hihokenshaName = RString.EMPTY;
+        this.hihokenshaKana = RString.EMPTY;
+        this.shinseibi = new TextBoxFlexibleDate();
+        this.shinseiKbnShin = RString.EMPTY;
+        this.ichijiHanteiKanryobi = new TextBoxFlexibleDate();
+        this.ichijiHanteibi = new TextBoxFlexibleDate();
+        this.ichijiHanteiKekka = RString.EMPTY;
+        this.keikokuCode = RString.EMPTY;
+        this.chosaJissibi = new TextBoxFlexibleDate();
+        this.ikenshoJuryobi = new TextBoxFlexibleDate();
+        this.index = RString.EMPTY;
     }
 
     public dgIchijiHanteiTaishoshaIchiran_Row(RString hokensha, RString hihokenNo, RString hihokenshaName, RString hihokenshaKana, TextBoxFlexibleDate shinseibi, RString shinseiKbnShin, TextBoxFlexibleDate ichijiHanteiKanryobi, TextBoxFlexibleDate ichijiHanteibi, RString ichijiHanteiKekka, RString keikokuCode, TextBoxFlexibleDate chosaJissibi, TextBoxFlexibleDate ikenshoJuryobi, RString index) {

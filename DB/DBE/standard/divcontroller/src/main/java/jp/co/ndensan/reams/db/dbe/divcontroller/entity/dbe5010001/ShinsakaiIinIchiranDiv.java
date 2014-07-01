@@ -22,12 +22,12 @@ public class ShinsakaiIinIchiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgShinsakaiIinIchiran")
-    private DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran;
     @JsonProperty("btnIinCancel")
     private Button btnIinCancel;
     @JsonProperty("btnIinRegister")
     private Button btnIinRegister;
+    @JsonProperty("dgShinsakaiIinIchiran")
+    private DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -35,16 +35,6 @@ public class ShinsakaiIinIchiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("dgShinsakaiIinIchiran")
-    public DataGrid<dgShinsakaiIinIchiran_Row> getDgShinsakaiIinIchiran() {
-        return dgShinsakaiIinIchiran;
-    }
-
-    @JsonProperty("dgShinsakaiIinIchiran")
-    public void setDgShinsakaiIinIchiran(DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran) {
-        this.dgShinsakaiIinIchiran=dgShinsakaiIinIchiran;
-    }
-
     @JsonProperty("btnIinCancel")
     public Button getBtnIinCancel() {
         return btnIinCancel;
@@ -63,6 +53,16 @@ public class ShinsakaiIinIchiranDiv extends Panel {
     @JsonProperty("btnIinRegister")
     public void setBtnIinRegister(Button btnIinRegister) {
         this.btnIinRegister=btnIinRegister;
+    }
+
+    @JsonProperty("dgShinsakaiIinIchiran")
+    public DataGrid<dgShinsakaiIinIchiran_Row> getDgShinsakaiIinIchiran() {
+        return dgShinsakaiIinIchiran;
+    }
+
+    @JsonProperty("dgShinsakaiIinIchiran")
+    public void setDgShinsakaiIinIchiran(DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran) {
+        this.dgShinsakaiIinIchiran=dgShinsakaiIinIchiran;
     }
 
 }

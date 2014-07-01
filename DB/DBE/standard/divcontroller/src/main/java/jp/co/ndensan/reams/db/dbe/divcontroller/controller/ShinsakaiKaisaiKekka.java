@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -40,22 +41,33 @@ public class ShinsakaiKaisaiKekka {
     public ResponseData onLoadData(ShinsakaiKaisaiKekkaDiv div) {
         ResponseData<ShinsakaiKaisaiKekkaDiv> response = new ResponseData<>();
 
+        response.data = div;
+        return response;
+    }
+
+    public ResponseData onClick_btnLoadData(ShinsakaiKaisaiKekkaDiv div) {
+        ResponseData<ShinsakaiKaisaiKekkaDiv> response = new ResponseData<>();
+
         div.getDgShinsakaiShinsainIchiran().setDataSource(createRowShinsakaiIchiranTestData());
         div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().setDataSource(createRowShinsakaiIinIchiranTestData());
 
         RString shinsakaiMeisho = (RString) ViewStateHolder.get("審査会番号", RString.class);
         div.getTxtShinsakaiMeisho().setValue(shinsakaiMeisho);
 
+        RString gogitaiMeisho = (RString) ViewStateHolder.get("合議体名", RString.class);
+        div.getTxtGogitai().setValue(gogitaiMeisho);
+        FlexibleDate kaisaibi = (FlexibleDate) ViewStateHolder.get("開催日", FlexibleDate.class);
+        div.getTxtKaisaiYoteibi().setValue(kaisaibi);
+        div.getTxtKaisaiBi().setValue(kaisaibi);
+        RString kaisaiBasho = (RString) ViewStateHolder.get("開催場所", RString.class);
+        div.getTxtYoteiKaijo().setValue(kaisaiBasho);
+
         List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("dbe5010001/gogitai.yml"));
         Map map = targetSource.get(0);
-        div.getTxtGogitai().setValue(_toRString(map.get("合議体")));
-        div.getTxtKaisaiYoteibi().setValue(new FlexibleDate(map.get("開催予定日").toString()));
-        div.getTxtKaisaiBi().setValue(new FlexibleDate(map.get("開催予定日").toString()));
         div.getTxtYoteiStartTime().setValue(RTime.parse(map.get("予定開始").toString()));
         div.getTxtKaisaiStartTime().setValue(RTime.parse(map.get("予定開始").toString()));
         div.getTxtYoteiEndTime().setValue(RTime.parse(map.get("予定終了").toString()));
         div.getTxtKaisaiEndTime().setValue(RTime.parse(map.get("予定終了").toString()));
-        div.getTxtYoteiKaijo().setValue(_toRString(map.get("予定会場")));
         div.getTxtYoteiTeiin().setValue(new Decimal(map.get("予定定員").toString()));
         div.getTxtJissiSu().setValue(new Decimal(map.get("予定定員").toString()));
 
@@ -70,6 +82,19 @@ public class ShinsakaiKaisaiKekka {
      * @return ResponseData
      */
     public ResponseData onClick_btnAddIin(ShinsakaiKaisaiKekkaDiv div) {
+        ResponseData<ShinsakaiKaisaiKekkaDiv> response = new ResponseData<>();
+
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 「表示内容で更新する」ボタン押下時の処理を表します。
+     *
+     * @param div 審査会開催結果入力Div
+     * @return ResponseData
+     */
+    public ResponseData onClick_btnUpdate(ShinsakaiKaisaiKekkaDiv div) {
         ResponseData<ShinsakaiKaisaiKekkaDiv> response = new ResponseData<>();
 
         response.data = div;
@@ -94,23 +119,44 @@ public class ShinsakaiKaisaiKekka {
             }
         }
 
-        TextBoxNum iinSu = new TextBoxNum();
-        iinSu.setValue(new Decimal(arrayData.size() + 1));
-        DropDownList ddlGichoKubun = new DropDownList();
-        DropDownList ddlSyukketsuKubun = new DropDownList();
+        for (dgShinsakaiIinIchiran_Row selectRow : arraySelectData) {
+            TextBoxNum iinSu = new TextBoxNum();
+            iinSu.setValue(new Decimal(arrayData.size() + 1));
+            DropDownList ddlGichoKubun = new DropDownList();
+            DropDownList ddlSyukketsuKubun = new DropDownList();
 
-        dgShinsakaiShinsainIchiran_Row row = new dgShinsakaiShinsainIchiran_Row(iinSu, arraySelectData.get(CST_ZERO).getShinsainNo(),
-                arraySelectData.get(CST_ZERO).getShinsainShimei(), arraySelectData.get(CST_ZERO).getSex(),
-                arraySelectData.get(CST_ZERO).getShikaku(), arraySelectData.get(CST_ZERO).getShinsainKubun(),
-                ddlGichoKubun, ddlSyukketsuKubun, arraySelectData.get(CST_ZERO).getShozokuKikan());
-        arrayData.add(row);
+            dgShinsakaiShinsainIchiran_Row row = new dgShinsakaiShinsainIchiran_Row(iinSu, selectRow.getShinsainNo(),
+                    selectRow.getShinsainShimei(), selectRow.getSex(),
+                    selectRow.getShikaku(), selectRow.getShinsainKubun(),
+                    ddlGichoKubun, ddlSyukketsuKubun, selectRow.getShozokuKikan());
+            arrayData.add(row);
+        }
+
         div.getDgShinsakaiShinsainIchiran().setDataSource(arrayData);
 
+//        TextBoxNum iinSu = new TextBoxNum();
+//        iinSu.setValue(new Decimal(arrayData.size() + 1));
+//        DropDownList ddlGichoKubun = new DropDownList();
+//        DropDownList ddlSyukketsuKubun = new DropDownList();
+//
+//        dgShinsakaiShinsainIchiran_Row row = new dgShinsakaiShinsainIchiran_Row(iinSu, arraySelectData.get(CST_ZERO).getShinsainNo(),
+//                arraySelectData.get(CST_ZERO).getShinsainShimei(), arraySelectData.get(CST_ZERO).getSex(),
+//                arraySelectData.get(CST_ZERO).getShikaku(), arraySelectData.get(CST_ZERO).getShinsainKubun(),
+//                ddlGichoKubun, ddlSyukketsuKubun, arraySelectData.get(CST_ZERO).getShozokuKikan());
+//        arrayData.add(row);
+//        div.getDgShinsakaiShinsainIchiran().setDataSource(arrayData);
         List<dgShinsakaiIinIchiran_Row> arrayIinData = div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().getDataSource();
         List<dgShinsakaiIinIchiran_Row> arrayNewIinData = new ArrayList<>();
         int cntIinsu = 0;
         for (dgShinsakaiIinIchiran_Row iinRow : arrayIinData) {
-            if (iinRow.getShinsainNo().equalsIgnoreCase(arraySelectData.get(CST_ZERO).getShinsainNo())) {
+            int cntSearch = 0;
+            for (dgShinsakaiIinIchiran_Row selectRow : arraySelectData) {
+
+                if (iinRow.getShinsainNo().equalsIgnoreCase(selectRow.getShinsainNo())) {
+                    cntSearch = ++cntSearch;
+                }
+            }
+            if (cntSearch != 0) {
                 continue;
             }
             TextBoxNum iinNewSu = new TextBoxNum();
@@ -138,23 +184,41 @@ public class ShinsakaiKaisaiKekka {
         List<dgShinsakaiIinIchiran_Row> arrayData = div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().getDataSource();
         List<dgShinsakaiShinsainIchiran_Row> arraySelectData = div.getDgShinsakaiShinsainIchiran().getSelectedItems();
 
-        TextBoxNum iinSu = new TextBoxNum();
-        iinSu.setValue(new Decimal(arrayData.size() + 1));
+        for (dgShinsakaiShinsainIchiran_Row selectRow : arraySelectData) {
+            TextBoxNum iinSu = new TextBoxNum();
+            iinSu.setValue(new Decimal(arrayData.size() + 1));
+            dgShinsakaiIinIchiran_Row row = new dgShinsakaiIinIchiran_Row(iinSu, false, selectRow.getShinsainNo(),
+                    selectRow.getShimei(), selectRow.getSex(),
+                    selectRow.getShikaku(), selectRow.getShozokuKikan(),
+                    selectRow.getShinsainKubun());
+            arrayData.add(row);
+        }
 
-        dgShinsakaiIinIchiran_Row row = new dgShinsakaiIinIchiran_Row(iinSu, false, arraySelectData.get(CST_ZERO).getShinsainNo(),
-                arraySelectData.get(CST_ZERO).getShimei(), arraySelectData.get(CST_ZERO).getSex(),
-                arraySelectData.get(CST_ZERO).getShikaku(), arraySelectData.get(CST_ZERO).getShozokuKikan(),
-                arraySelectData.get(CST_ZERO).getShinsainKubun());
-        arrayData.add(row);
         div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().setDataSource(arrayData);
 
+//        TextBoxNum iinSu = new TextBoxNum();
+//        iinSu.setValue(new Decimal(arrayData.size() + 1));
+//
+//        dgShinsakaiIinIchiran_Row row = new dgShinsakaiIinIchiran_Row(iinSu, false, arraySelectData.get(CST_ZERO).getShinsainNo(),
+//                arraySelectData.get(CST_ZERO).getShimei(), arraySelectData.get(CST_ZERO).getSex(),
+//                arraySelectData.get(CST_ZERO).getShikaku(), arraySelectData.get(CST_ZERO).getShozokuKikan(),
+//                arraySelectData.get(CST_ZERO).getShinsainKubun());
+//        arrayData.add(row);
+//        div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().setDataSource(arrayData);
         List<dgShinsakaiShinsainIchiran_Row> arrayIinData = div.getDgShinsakaiShinsainIchiran().getDataSource();
         List<dgShinsakaiShinsainIchiran_Row> arrayNewIinData = new ArrayList<>();
-        DropDownList ddlGichoKubun = new DropDownList();
-        DropDownList ddlSyukketsuKubun = new DropDownList();
+//        DropDownList ddlGichoKubun = new DropDownList();
+//        DropDownList ddlSyukketsuKubun = new DropDownList();
         int cntIinsu = 0;
         for (dgShinsakaiShinsainIchiran_Row iinRow : arrayIinData) {
-            if (iinRow.getShinsainNo().equalsIgnoreCase(arraySelectData.get(CST_ZERO).getShinsainNo())) {
+            int cntSearch = 0;
+            for (dgShinsakaiShinsainIchiran_Row selectRow : arraySelectData) {
+
+                if (iinRow.getShinsainNo().equalsIgnoreCase(selectRow.getShinsainNo())) {
+                    cntSearch = ++cntSearch;
+                }
+            }
+            if (cntSearch != 0) {
                 continue;
             }
             TextBoxNum iinNewSu = new TextBoxNum();

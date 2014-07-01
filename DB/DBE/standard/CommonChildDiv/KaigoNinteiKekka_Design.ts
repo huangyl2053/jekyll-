@@ -9,43 +9,43 @@ module DBE {
     export class KaigoNinteiKekka_Design extends Uz.CommonChildDiv {
     
         public get selectDdlNijiHantei() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["onChange"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["onChange"];
         }
         
         public set selectDdlNijiHantei(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["onChange"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["onChange"] = value;
             } else {
-                this.layout.items[0].items[7]["onChange"] = value;
+                this.layout.items[0].items[8]["onChange"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
         
         public get selectDdlNinteiYukoTsukisu() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["onChange"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[13]["fieldName"])["onChange"];
         }
         
         public set selectDdlNinteiYukoTsukisu(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["onChange"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[13]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[13]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[13]["fieldName"])["onChange"] = value;
             } else {
-                this.layout.items[0].items[12]["onChange"] = value;
+                this.layout.items[0].items[13]["onChange"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
         
         public get selectDdlNinteiKubun() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["onChange"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["onChange"];
         }
         
         public set selectDdlNinteiKubun(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["onChange"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["onChange"] = value;
             } else {
-                this.layout.items[0].items[3]["onChange"] = value;
+                this.layout.items[0].items[4]["onChange"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -72,9 +72,9 @@ module DBE {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
-            editablePropertyInfo["selectDdlNijiHantei"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["onChange"];
-            editablePropertyInfo["selectDdlNinteiYukoTsukisu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).getEditablePropertyInfo()["onChange"];
-            editablePropertyInfo["selectDdlNinteiKubun"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["onChange"];
+            editablePropertyInfo["selectDdlNijiHantei"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).getEditablePropertyInfo()["onChange"];
+            editablePropertyInfo["selectDdlNinteiYukoTsukisu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[13]["fieldName"]).getEditablePropertyInfo()["onChange"];
+            editablePropertyInfo["selectDdlNinteiKubun"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["onChange"];
             
             return editablePropertyInfo;
         }
@@ -105,31 +105,32 @@ module DBE {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
      "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
+     "value": "",
      "labelLText": "申請日",
      "labelRText": "",
      "labelLWidth": "100",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "textKind": 0
+     "displayFormat": 0
     },
     {
      "fieldName": "txtShinseiKubunShinsei",
      "items": [],
      "controlType": "TextBox",
-     "width": "60",
+     "width": "65",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -146,35 +147,36 @@ module DBE {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
-     "placeHolder": "区分変更",
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "申請区分（申請時）",
      "labelRText": "",
      "labelLWidth": "178",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 0,
-     "isComboBox": false,
-     "suggest": [],
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtShinseiKubunHorei",
      "items": [],
      "controlType": "TextBox",
-     "width": "60",
+     "width": "65",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -191,29 +193,76 @@ module DBE {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
      "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "申請区分（法令）",
      "labelRText": "",
      "labelLWidth": "138",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
+     "decorationClass": "",
+     "permitCharactor": ""
+    },
+    {
+     "fieldName": "txtShinsaJun",
+     "items": [],
+     "controlType": "TextBox",
+     "width": "60",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "txtShinsaJun_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
+     "text": "",
+     "required": false,
      "maxLength": 100000000,
      "minLength": 0,
-     "textAlign": 0,
+     "textAlign": 1,
+     "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
+     "isPassword": false,
      "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
      "suggest": [],
-     "decorationClass": ""
+     "value": "",
+     "labelLText": "審査順",
+     "labelRText": "",
+     "labelLWidth": "100",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "ddlNinteiKubun",
@@ -235,18 +284,8 @@ module DBE {
      "selectControlID": "ddlNinteiKubun_core",
      "helpMessageID": "",
      "jpControlName": "",
-     "required": true,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
+     "readOnly": false,
      "text": "",
-     "labelLText": "認定区分",
-     "labelRText": "",
-     "labelLWidth": "100",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "selectedItem": "01",
      "dataSource": [
       {
        "key": "01",
@@ -268,13 +307,24 @@ module DBE {
        "key": "11",
        "value": "区却"
       }
-     ]
+     ],
+     "required": true,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "labelLText": "認定区分",
+     "labelRText": "",
+     "labelLWidth": "100",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "selectedItem": "01"
     },
     {
      "fieldName": "txtIchijiHanteiKekka",
      "items": [],
      "controlType": "TextBox",
-     "width": "60",
+     "width": "65",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -291,29 +341,30 @@ module DBE {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
-     "placeHolder": "要介護５",
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "一次判定結果",
      "labelRText": "",
      "labelLWidth": "185",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 0,
-     "isComboBox": false,
-     "suggest": [],
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "ddlTokuteiShippei",
@@ -335,21 +386,11 @@ module DBE {
      "selectControlID": "ddlTokuteiShippei_core",
      "helpMessageID": "",
      "jpControlName": "",
-     "required": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
+     "readOnly": false,
      "text": "",
-     "labelLText": "特定疾病",
-     "labelRText": "",
-     "labelLWidth": "138",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "selectedItem": "",
      "dataSource": [
       {
-       "key": "",
+       "key": "00",
        "value": ""
       },
       {
@@ -360,7 +401,18 @@ module DBE {
        "key": "02",
        "value": "後縦靭帯骨化症"
       }
-     ]
+     ],
+     "required": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "labelLText": "特定疾病",
+     "labelRText": "",
+     "labelLWidth": "138",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "selectedItem": null
     },
     {
      "fieldName": "txtNinteibi",
@@ -383,29 +435,30 @@ module DBE {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "text": "",
      "required": true,
+     "maxLength": 1000000000000,
+     "minLength": 0,
+     "textAlign": 0,
      "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "認定日",
      "labelRText": "",
      "labelLWidth": "100",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "maxLength": 1000000000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 0,
-     "suggest": []
+     "displayFormat": 0
     },
     {
      "fieldName": "ddlNijiHanteiKekka",
@@ -427,18 +480,8 @@ module DBE {
      "selectControlID": "ddlNijiHanteiKekka_core",
      "helpMessageID": "",
      "jpControlName": "",
-     "required": true,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
+     "readOnly": false,
      "text": "",
-     "labelLText": "二次判定結果",
-     "labelRText": "",
-     "labelLWidth": "178",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "selectedItem": "01",
      "dataSource": [
       {
        "key": "01",
@@ -476,7 +519,18 @@ module DBE {
        "key": "31",
        "value": "非該当"
       }
-     ]
+     ],
+     "required": true,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "labelLText": "二次判定結果",
+     "labelRText": "",
+     "labelLWidth": "178",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "selectedItem": "01"
     },
     {
      "fieldName": "ddlJotaiZo",
@@ -498,21 +552,11 @@ module DBE {
      "selectControlID": "ddlJotaiZo_core",
      "helpMessageID": "",
      "jpControlName": "",
-     "required": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
+     "readOnly": false,
      "text": "",
-     "labelLText": "状態像例",
-     "labelRText": "",
-     "labelLWidth": "115",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "selectedItem": "",
      "dataSource": [
       {
-       "key": "",
+       "key": "00",
        "value": ""
       },
       {
@@ -523,7 +567,18 @@ module DBE {
        "key": "02",
        "value": "02:不安定な状態"
       }
-     ]
+     ],
+     "required": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "labelLText": "状態像例",
+     "labelRText": "",
+     "labelLWidth": "120",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "selectedItem": null
     },
     {
      "fieldName": "txtNinteiYukoKikanStart",
@@ -546,29 +601,30 @@ module DBE {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "text": "",
      "required": false,
+     "maxLength": 1000000000000,
+     "minLength": 0,
+     "textAlign": 0,
      "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "認定期間",
      "labelRText": "",
      "labelLWidth": "100",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "maxLength": 1000000000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 0,
-     "suggest": []
+     "displayFormat": 0
     },
     {
      "fieldName": "lblKara3",
@@ -590,9 +646,9 @@ module DBE {
      "selectControlID": "lblKara3",
      "helpMessageID": "",
      "jpControlName": "",
+     "text": "～",
      "required": false,
      "isPrivateInfo": false,
-     "text": "～",
      "decorationClass": "",
      "align": 1
     },
@@ -617,29 +673,30 @@ module DBE {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
+     "text": "",
      "required": false,
+     "maxLength": 1000000000000,
+     "minLength": 0,
+     "textAlign": 0,
      "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "maxLength": 1000000000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 0,
-     "suggest": []
+     "displayFormat": 0
     },
     {
      "fieldName": "ddlNinteiYukoTsukisu",
@@ -661,21 +718,11 @@ module DBE {
      "selectControlID": "ddlNinteiYukoTsukisu_core",
      "helpMessageID": "",
      "jpControlName": "",
-     "required": true,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
+     "readOnly": false,
      "text": "",
-     "labelLText": "",
-     "labelRText": "ヶ月",
-     "labelLWidth": "2",
-     "labelRWidth": "40",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "selectedItem": "0",
      "dataSource": [
       {
-       "key": "0",
+       "key": "00",
        "value": ""
       },
       {
@@ -694,7 +741,18 @@ module DBE {
        "key": "01",
        "value": "１"
       }
-     ]
+     ],
+     "required": true,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "labelLText": "",
+     "labelRText": "ヶ月",
+     "labelLWidth": "2",
+     "labelRWidth": "40",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "selectedItem": null
     },
     {
      "fieldName": "lblShinsakaiIken",
@@ -711,14 +769,14 @@ module DBE {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "S",
      "marginRight": "14",
      "selectControlID": "lblShinsakaiIken",
      "helpMessageID": "",
      "jpControlName": "",
+     "text": "■審査会意見",
      "required": false,
      "isPrivateInfo": false,
-     "text": "■審査会意見",
      "decorationClass": "",
      "align": 2
     },
@@ -742,13 +800,14 @@ module DBE {
      "selectControlID": "btnShinsaIkenTeikei",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "定型文",
      "onClick": "",
+     "text": "定型文",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
      "icon": 0,
+     "heightTextBoxMatches": false,
      "displayChildDivName": "",
      "dataPassing": [],
      "visibleCloseButton": true,
@@ -770,14 +829,14 @@ module DBE {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "2",
-     "marginRight": "15",
+     "marginLeft": "4",
+     "marginRight": "14",
      "selectControlID": "lblShinsakaiMemo",
      "helpMessageID": "",
      "jpControlName": "",
+     "text": "■審査会メモ",
      "required": false,
      "isPrivateInfo": false,
-     "text": "■審査会メモ",
      "decorationClass": "",
      "align": 2
     },
@@ -785,7 +844,7 @@ module DBE {
      "fieldName": "txtShinsakaiIken",
      "items": [],
      "controlType": "TextBoxMultiLine",
-     "width": "410",
+     "width": "415",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -796,31 +855,31 @@ module DBE {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0.5",
+     "marginLeft": "1.8",
      "marginRight": "XS",
      "selectControlID": "txtShinsakaiIken_text_area",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
      "height": "40",
+     "text": "",
      "required": false,
+     "maxLength": "200",
+     "minLength": 0,
      "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
+     "value": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
-     "maxLength": "200",
-     "minLength": 0,
-     "textKind": 0,
      "limitLength": "200",
      "countDisp": false
     },
@@ -839,37 +898,37 @@ module DBE {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "1.6",
      "marginRight": "XS",
      "selectControlID": "txtShinsakaiMemo_text_area",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
      "height": "40",
+     "text": "",
      "required": false,
+     "maxLength": 100000000,
+     "minLength": 0,
      "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
+     "value": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textKind": 0,
      "limitLength": "200",
      "countDisp": false
     }
    ],
    "controlType": "Panel",
-   "width": "G10",
+   "width": "1004",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -880,7 +939,7 @@ module DBE {
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
+   "marginLeft": "XS",
    "marginRight": "XS",
    "selectControlID": "KaigoNinteiKekka",
    "helpMessageID": "",
@@ -906,10 +965,7 @@ module DBE {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -959,7 +1015,9 @@ module DBE {
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }

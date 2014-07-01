@@ -27,12 +27,10 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     private DropDownList ddlKensakuTaisho;
     @JsonProperty("txtSearchStYMD")
     private TextBoxFlexibleDate txtSearchStYMD;
-    @JsonProperty("lblKara1")
-    private Label lblKara1;
     @JsonProperty("txtSearchEdYMD")
     private TextBoxFlexibleDate txtSearchEdYMD;
     @JsonProperty("txtHihokenshaNo")
-    private TextBox txtHihokenshaNo;
+    private TextBoxNum txtHihokenshaNo;
     @JsonProperty("btnTaishoKensaku")
     private Button btnTaishoKensaku;
     @JsonProperty("btnClear")
@@ -74,16 +72,6 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
         this.txtSearchStYMD=txtSearchStYMD;
     }
 
-    @JsonProperty("lblKara1")
-    public Label getLblKara1() {
-        return lblKara1;
-    }
-
-    @JsonProperty("lblKara1")
-    public void setLblKara1(Label lblKara1) {
-        this.lblKara1=lblKara1;
-    }
-
     @JsonProperty("txtSearchEdYMD")
     public TextBoxFlexibleDate getTxtSearchEdYMD() {
         return txtSearchEdYMD;
@@ -95,12 +83,12 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     }
 
     @JsonProperty("txtHihokenshaNo")
-    public TextBox getTxtHihokenshaNo() {
+    public TextBoxNum getTxtHihokenshaNo() {
         return txtHihokenshaNo;
     }
 
     @JsonProperty("txtHihokenshaNo")
-    public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+    public void setTxtHihokenshaNo(TextBoxNum txtHihokenshaNo) {
         this.txtHihokenshaNo=txtHihokenshaNo;
     }
 

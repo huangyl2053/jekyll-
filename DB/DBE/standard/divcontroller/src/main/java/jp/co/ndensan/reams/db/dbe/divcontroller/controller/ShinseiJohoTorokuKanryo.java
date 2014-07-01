@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinseiJohoInputDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinseiJohoTorokuKanryoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShinseiJohoInputDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShinseiJohoTorokuKanryoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoKanryoMessage;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,14 +25,14 @@ public class ShinseiJohoTorokuKanryo {
      * @return ResponseData
      */
     public ResponseData<ShinseiJohoTorokuKanryoDiv> onLoad(ShinseiJohoTorokuKanryoDiv div, ShinseiJohoInputDiv shinsei) {
-        return onClick_btnToSaveShinsei(div, shinsei);
+        return onClick_btnCommonSaveShinsei(div, shinsei);
     }
 
-    public ResponseData<ShinseiJohoTorokuKanryoDiv> onClick_btnToSaveShinsei(ShinseiJohoTorokuKanryoDiv div, ShinseiJohoInputDiv shinsei) {
+    public ResponseData<ShinseiJohoTorokuKanryoDiv> onClick_btnCommonSaveShinsei(ShinseiJohoTorokuKanryoDiv div, ShinseiJohoInputDiv shinsei) {
         KaigoKanryoMessage.setMessage(div.getKanryoMessage(),
                 new RString("登録は正常に行われました。"),
-                extractHihokenshaNo(shinsei),
-                extractHihokenshaShimei(shinsei));
+                new RString("被保番号: " + extractHihokenshaNo(shinsei)),
+                new RString("　　氏名: " + extractHihokenshaShimei(shinsei)));
         div.setDisplayNone(false);
         return _createResponseData(div);
     }

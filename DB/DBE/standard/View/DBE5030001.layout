@@ -24,10 +24,11 @@
      "selectControlID": "dgShinsakaiIchiran",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "height": "M",
      "dataSource": [],
      "gridSetting": {
-      "rowHeight": 30,
+      "rowHeight": 25,
       "isMultiSelectable": false,
       "isShowHeader": true,
       "isShowFooter": true,
@@ -46,22 +47,22 @@
       },
       "columns": [
        {
-        "columnName": "登録",
+        "columnName": "選択<br>",
         "dataName": "toroku",
         "toolTip": "",
         "bgColor": 0,
-        "width": 50,
+        "width": 40,
         "visible": true,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
-         "text": "□",
+         "text": "...",
          "onClick": "onClick_btnToroku",
-         "imageFileUrl": "/uz/uza/css/Link.jpg",
-         "imageWidth": "",
-         "imageHeight": ""
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
+         "imageWidth": "20",
+         "imageHeight": "20"
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "toroku"
@@ -194,11 +195,16 @@
       ]
      },
      "onSort": "",
-     "onSelect": "",
+     "onSelect": "onSelect_dgShinsakaiIchiran",
      "onSelectByDblClick": "",
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -206,62 +212,6 @@
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
-    },
-    {
-     "fieldName": "btnSelect",
-     "items": [],
-     "controlType": "Button",
-     "width": "220",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnSelect",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "text": "選択した審査会の入力を行う",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
-    },
-    {
-     "fieldName": "btnClose",
-     "items": [],
-     "controlType": "Button",
-     "width": "220",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnClose",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "text": "メニューに戻る",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
     }
    ],
    "controlType": "Panel",
@@ -300,8 +250,12 @@
      "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/onClick_btnToroku"
     },
     {
-     "eventName": "reLoadData",
+     "eventName": "onOpen_TaishoShinsakaiIchiran",
      "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/reLoadData"
+    },
+    {
+     "eventName": "onSelect_dgShinsakaiIchiran",
+     "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/onClick_btnToroku"
     }
    ],
    "hiddenInput": [],
@@ -310,10 +264,7 @@
    "session": {},
    "marginTop": "XS",
    "marginBottom": "XS",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -369,6 +320,10 @@
   {
    "alias": "selectShinsakai",
    "eventName": "btnSelect.onClick"
+  },
+  {
+   "alias": "reLoadData",
+   "eventName": "TaishoShinsakaiIchiran.onOpen"
   }
  ],
  "loadSequencePanelNames": [
@@ -379,5 +334,50 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
- "commonButtonAreaData": []
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "select",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnSelect",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnSelect",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "",
+      "text": "審査会の入力を行う",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ]
 }

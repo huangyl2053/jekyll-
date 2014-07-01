@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.shozokuChosainList;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jun 04 11:25:18 JST 2014 
+ * Wed Jun 18 15:23:18 JST 2014 
  */
 
 
@@ -30,6 +30,12 @@ public class dgShozokuChosainList_Row extends DataRow {
 
     public dgShozokuChosainList_Row() {
         super();
+        this.btnToBindChosain = new Button();
+        this.chosainNo = RString.EMPTY;
+        this.chosainName = RString.EMPTY;
+        this.waritsukeNum = RString.EMPTY;
+        this.chiku = RString.EMPTY;
+        this.chousaItakusakiNo = RString.EMPTY;
     }
 
     public dgShozokuChosainList_Row(Button btnToBindChosain, RString chosainNo, RString chosainName, RString waritsukeNum, RString chiku, RString chousaItakusakiNo) {

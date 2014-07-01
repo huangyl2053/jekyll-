@@ -38,9 +38,15 @@ public class JukyushaShokaiTargetSearch {
         return _createResponseData(div);
     }
 
+    public ResponseData<JukyushaShokaiTargetSearchDiv> onClick_btnToDecide(JukyushaShokaiTargetSearchDiv div) {
+        SearchResultForJukyushaShokai.getInstance().save(div.getSearchResult());
+        return _createResponseData(div);
+    }
+
     private ResponseData<JukyushaShokaiTargetSearchDiv> _createResponseData(JukyushaShokaiTargetSearchDiv div) {
         ResponseData<JukyushaShokaiTargetSearchDiv> response = new ResponseData<>();
         response.data = div;
         return response;
     }
+
 }

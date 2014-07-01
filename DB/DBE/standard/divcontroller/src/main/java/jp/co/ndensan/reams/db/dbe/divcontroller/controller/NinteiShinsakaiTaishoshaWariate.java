@@ -160,9 +160,6 @@ public class NinteiShinsakaiTaishoshaWariate {
         panel.getNinteiShinsakaiJoho().getTxtShinsakaiYoteibi().setValue(new RDate(
                 panel2.getDgNinteiShinsakaiIchiran().getActiveRow().getYoteibi().toString()));
 
-        panel.getNinteiShinsakaiJoho().getTxtGogitaiNo().setValue(
-                panel2.getDgNinteiShinsakaiIchiran().getActiveRow().getGogitaiNo());
-
         panel.getNinteiShinsakaiJoho().getTxtGogitaiMeisho().setValue(
                 panel2.getDgNinteiShinsakaiIchiran().getActiveRow().getGogitaiMeisho());
 

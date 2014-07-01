@@ -59,12 +59,10 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     private Button btnRemoveIin;
     @JsonProperty("dgShinsakaiShinsainIchiran")
     private DataGrid<dgShinsakaiShinsainIchiran_Row> dgShinsakaiShinsainIchiran;
-    @JsonProperty("btnUpdate")
-    private Button btnUpdate;
-    @JsonProperty("btnReturn")
-    private Button btnReturn;
     @JsonProperty("btnToCancel")
     private Button btnToCancel;
+    @JsonProperty("btnLoadData")
+    private Button btnLoadData;
     @JsonProperty("ShinsakaiIinIchiran")
     private ShinsakaiIinIchiranDiv ShinsakaiIinIchiran;
 
@@ -254,26 +252,6 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
         this.dgShinsakaiShinsainIchiran=dgShinsakaiShinsainIchiran;
     }
 
-    @JsonProperty("btnUpdate")
-    public Button getBtnUpdate() {
-        return btnUpdate;
-    }
-
-    @JsonProperty("btnUpdate")
-    public void setBtnUpdate(Button btnUpdate) {
-        this.btnUpdate=btnUpdate;
-    }
-
-    @JsonProperty("btnReturn")
-    public Button getBtnReturn() {
-        return btnReturn;
-    }
-
-    @JsonProperty("btnReturn")
-    public void setBtnReturn(Button btnReturn) {
-        this.btnReturn=btnReturn;
-    }
-
     @JsonProperty("btnToCancel")
     public Button getBtnToCancel() {
         return btnToCancel;
@@ -282,6 +260,16 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     @JsonProperty("btnToCancel")
     public void setBtnToCancel(Button btnToCancel) {
         this.btnToCancel=btnToCancel;
+    }
+
+    @JsonProperty("btnLoadData")
+    public Button getBtnLoadData() {
+        return btnLoadData;
+    }
+
+    @JsonProperty("btnLoadData")
+    public void setBtnLoadData(Button btnLoadData) {
+        this.btnLoadData=btnLoadData;
     }
 
     @JsonProperty("ShinsakaiIinIchiran")

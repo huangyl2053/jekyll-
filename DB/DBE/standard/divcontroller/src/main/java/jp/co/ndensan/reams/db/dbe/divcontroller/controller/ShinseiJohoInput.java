@@ -13,20 +13,20 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoninteiShinsei
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData.Chosain;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiData.Doctor;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.YokaigoninteiShinseishaData;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaOutlineDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaSearchForShinseiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaShujiiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KankeiIinDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.LatestNinteiResultDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.N2HihokenshaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiShinseiJigyoshaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiShinseishaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteichosainAdvanceEntryDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NyuinNyushoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShichosonRenrakuJikoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinseiJohoInputDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgKankeiIin_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShisetsuRereki_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaOutlineDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.HihokenshaSearchForShinseiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaShujiiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.KankeiIinDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.LatestNinteiResultDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.N2HihokenshaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.NinteiShinseiJigyoshaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.NinteiShinseishaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.NinteichosainAdvanceEntryDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.NyuinNyushoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShichosonRenrakuJikoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShinseiJohoInputDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.dgKankeiIin_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.dgShisetsuRereki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -49,24 +49,22 @@ public class ShinseiJohoInput {
      * Divが表示されたときの、初期値を設定します。
      *
      * @param div ShinseiJohoInputDiv
-     * @param searchResult HihokenshaSearchForShinseiDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onLoad(ShinseiJohoInputDiv div, HihokenshaSearchForShinseiDiv searchResult) {
+    public ResponseData<ShinseiJohoInputDiv> onLoad(ShinseiJohoInputDiv div) {
         //三浦 onLoadが遅いのでいったんやめます。
         //new ShinseiJohoInputPanels(div).onLoad();
-        return onStart(div, searchResult);
+        return createResponseData(div);
     }
 
     /**
      * onStart
      *
      * @param div ShinseiJohoInputDiv
-     * @param searchResult HihokenshaSearchForShinseiDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onStart(ShinseiJohoInputDiv div, HihokenshaSearchForShinseiDiv searchResult) {
-        dgSearchResult_Row hihokensha = clickedItemOf(searchResult);
+    public ResponseData<ShinseiJohoInputDiv> onStart(ShinseiJohoInputDiv div) {
+        dgSearchResult_Row hihokensha = clickedItemOf();
         new ShinseiJohoInputPanels(div).init(hihokensha);
         return createResponseData(div);
     }
@@ -75,27 +73,25 @@ public class ShinseiJohoInput {
      * 申請者区分の変更によって、divの画面項目を編集します。
      *
      * @param div ShinseiJohoInputDiv
-     * @param searchResult HihokenshaSearchForShinseiDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onChange_radShinseishaKubun(ShinseiJohoInputDiv div, HihokenshaSearchForShinseiDiv searchResult) {
-        new NinteiShinseisha(div).onChange_radShinseishaKubun(clickedItemOf(searchResult));
+    public ResponseData<ShinseiJohoInputDiv> onChange_radShinseishaKubun(ShinseiJohoInputDiv div) {
+        new NinteiShinseisha(div).onChange_radShinseishaKubun(clickedItemOf());
         return createResponseData(div);
     }
 
-    private dgSearchResult_Row clickedItemOf(HihokenshaSearchForShinseiDiv searchResult) {
-        return searchResult.getSearchResultForShinsei().getDgSearchResult().getClickedItem();
+    private dgSearchResult_Row clickedItemOf() {
+        return YokaigoNinteiShinseisha.getInstance().get();
     }
 
     /**
      * 前回の主治医を転写します。
      *
      * @param div ShinseiJohoInputDiv
-     * @param searchResult HihokenshaSearchForShinseiDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestShujii(ShinseiJohoInputDiv div, HihokenshaSearchForShinseiDiv searchResult) {
-        new HihokenshaShujii(div).onClick_btnToCopyLatestShujii(clickedItemOf(searchResult));
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestShujii(ShinseiJohoInputDiv div) {
+        new HihokenshaShujii(div).onClick_btnToCopyLatestShujii(clickedItemOf());
         return createResponseData(div);
     }
 
@@ -103,11 +99,10 @@ public class ShinseiJohoInput {
      * 前回の認定調査委託先を転写します。
      *
      * @param div ShinseiJohoInputDiv
-     * @param searchResult HihokenshaSearchForShinseiDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestItakusaki(ShinseiJohoInputDiv div, HihokenshaSearchForShinseiDiv searchResult) {
-        new NinteichosainAdvanceEntry(div).onClick_btnToCopyLatestItakusaki(clickedItemOf(searchResult));
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestItakusaki(ShinseiJohoInputDiv div) {
+        new NinteichosainAdvanceEntry(div).onClick_btnToCopyLatestItakusaki(clickedItemOf());
         return createResponseData(div);
     }
 
@@ -115,12 +110,10 @@ public class ShinseiJohoInput {
      * 前回の認定調査員を転写します。
      *
      * @param div ShinseiJohoInputDiv
-     * @param searchResult HihokenshaSearchForShinseiDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestNinteichosain(
-            ShinseiJohoInputDiv div, HihokenshaSearchForShinseiDiv searchResult) {
-        new NinteichosainAdvanceEntry(div).onClick_btnToCopyLatestNinteichosain(clickedItemOf(searchResult));
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestNinteichosain(ShinseiJohoInputDiv div) {
+        new NinteichosainAdvanceEntry(div).onClick_btnToCopyLatestNinteichosain(clickedItemOf());
         return createResponseData(div);
     }
 
@@ -391,7 +384,7 @@ public class ShinseiJohoInput {
             div.getTxtShinseishaJusho().setValue(jusho);
             div.getDdlShinseishaTsuzukigara().setDisabled(!isFamily);
             div.getBtnSetaiin().setVisible(isFamily);
-            div.getNinteiShinseiJigyosha().setVisible(isJighosya);
+            div.getNinteiShinseiJigyosha().setDisabled(!isJighosya);
         }
 
         //<editor-fold defaultstate="collapsed" desc="jigyosha">
@@ -639,7 +632,7 @@ public class ShinseiJohoInput {
             div.getIryohokensha().getTxtIryohokenKigo().clearValue();
             div.getIryohokensha().getTxtIryohokenshaName().clearValue();
             div.getIryohokensha().getTxtIryohokenshaNo().clearValue();
-            div.getTxtTokuteiShippei().clearValue();
+            div.getDdltTokuteiShippei().setSelectedItem(new RString("00"));
         }
     }
 

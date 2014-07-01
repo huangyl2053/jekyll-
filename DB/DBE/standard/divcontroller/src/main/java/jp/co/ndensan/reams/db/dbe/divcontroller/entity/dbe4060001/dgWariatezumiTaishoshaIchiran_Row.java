@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 03 10:23:56 JST 2014 
+ * Mon Jun 30 17:20:52 JST 2014 
  */
 
 
@@ -38,6 +38,21 @@ public class dgWariatezumiTaishoshaIchiran_Row extends DataRow {
 
     public dgWariatezumiTaishoshaIchiran_Row() {
         super();
+        this.shinsaSeq = RString.EMPTY;
+        this.hokensha = RString.EMPTY;
+        this.hihokenNo = RString.EMPTY;
+        this.shimei = RString.EMPTY;
+        this.shimeiKana = RString.EMPTY;
+        this.shinseibi = RString.EMPTY;
+        this.shinseiKbn = RString.EMPTY;
+        this.seibetsu = RString.EMPTY;
+        this.ichijiHantei = RString.EMPTY;
+        this.kijunJikan = RString.EMPTY;
+        this.furiwakeKbn = RString.EMPTY;
+        this.iryokikan = RString.EMPTY;
+        this.shujii = RString.EMPTY;
+        this.chosakikan = RString.EMPTY;
+        this.chosain = RString.EMPTY;
     }
 
     public dgWariatezumiTaishoshaIchiran_Row(RString shinsaSeq, RString hokensha, RString hihokenNo, RString shimei, RString shimeiKana, RString shinseibi, RString shinseiKbn, RString seibetsu, RString ichijiHantei, RString kijunJikan, RString furiwakeKbn, RString iryokikan, RString shujii, RString chosakikan, RString chosain) {

@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030003;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030003.PublishingShinsakaiResultsDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030003.dgShinsakaiTargetPersons_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -25,8 +24,6 @@ public class HanteiResultsOutputTargetPersonsDiv extends Panel {
      */
     @JsonProperty("dgShinsakaiTargetPersons")
     private DataGrid<dgShinsakaiTargetPersons_Row> dgShinsakaiTargetPersons;
-    @JsonProperty("PublishingShinsakaiResults")
-    private PublishingShinsakaiResultsDiv PublishingShinsakaiResults;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -42,16 +39,6 @@ public class HanteiResultsOutputTargetPersonsDiv extends Panel {
     @JsonProperty("dgShinsakaiTargetPersons")
     public void setDgShinsakaiTargetPersons(DataGrid<dgShinsakaiTargetPersons_Row> dgShinsakaiTargetPersons) {
         this.dgShinsakaiTargetPersons=dgShinsakaiTargetPersons;
-    }
-
-    @JsonProperty("PublishingShinsakaiResults")
-    public PublishingShinsakaiResultsDiv getPublishingShinsakaiResults() {
-        return PublishingShinsakaiResults;
-    }
-
-    @JsonProperty("PublishingShinsakaiResults")
-    public void setPublishingShinsakaiResults(PublishingShinsakaiResultsDiv PublishingShinsakaiResults) {
-        this.PublishingShinsakaiResults=PublishingShinsakaiResults;
     }
 
 }

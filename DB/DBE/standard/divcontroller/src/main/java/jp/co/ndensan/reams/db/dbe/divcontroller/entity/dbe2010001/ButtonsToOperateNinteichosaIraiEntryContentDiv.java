@@ -23,8 +23,6 @@ public class ButtonsToOperateNinteichosaIraiEntryContentDiv extends Panel {
      */
     @JsonProperty("btnToRepair")
     private Button btnToRepair;
-    @JsonProperty("btnToEntryChosaIrai")
-    private Button btnToEntryChosaIrai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,16 +38,6 @@ public class ButtonsToOperateNinteichosaIraiEntryContentDiv extends Panel {
     @JsonProperty("btnToRepair")
     public void setBtnToRepair(Button btnToRepair) {
         this.btnToRepair=btnToRepair;
-    }
-
-    @JsonProperty("btnToEntryChosaIrai")
-    public Button getBtnToEntryChosaIrai() {
-        return btnToEntryChosaIrai;
-    }
-
-    @JsonProperty("btnToEntryChosaIrai")
-    public void setBtnToEntryChosaIrai(Button btnToEntryChosaIrai) {
-        this.btnToEntryChosaIrai=btnToEntryChosaIrai;
     }
 
 }

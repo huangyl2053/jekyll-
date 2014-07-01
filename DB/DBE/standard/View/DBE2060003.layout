@@ -1,0 +1,687 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "NinteichosaResultEntryTarget",
+   "items": [
+    {
+     "fieldName": "dgNinteichosaResultTaishosha",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "1098",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "dgNinteichosaResultTaishosha",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "height": "510",
+     "dataSource": [],
+     "gridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": true,
+      "isShowHeader": true,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "",
+       "headerHeight": 1
+      },
+      "columns": [
+       {
+        "columnName": "選択<br>",
+        "dataName": "btnToDecide",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 40,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "...",
+         "onClick": "onClick_btnToDecide",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
+         "imageWidth": "20",
+         "imageHeight": "20"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "btnToDecide"
+       },
+       {
+        "columnName": "保険者番号",
+        "dataName": "hokenshaNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "hokenshaNo"
+       },
+       {
+        "columnName": "市町村",
+        "dataName": "hokenshaName",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 105,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "hokenshaName"
+       },
+       {
+        "columnName": "被保番号",
+        "dataName": "hihokenshaNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "hihokenshaNo"
+       },
+       {
+        "columnName": "識別コード",
+        "dataName": "shikibetsuCode",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "shikibetsuCode"
+       },
+       {
+        "columnName": "氏名",
+        "dataName": "shimei",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "shimei"
+       },
+       {
+        "columnName": "カナ氏名",
+        "dataName": "kanaShimei",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "kanaShimei"
+       },
+       {
+        "columnName": "氏名",
+        "dataName": "shimeiAndKanaShimei",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "shimeiAndKanaShimei"
+       },
+       {
+        "columnName": "申請日",
+        "dataName": "shinseiDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 95,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "shinseiDate"
+       },
+       {
+        "columnName": "申請区分",
+        "dataName": "shinseiKubun",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "shinseiKubun"
+       },
+       {
+        "columnName": "調査<br>依頼日",
+        "dataName": "chosaIraiDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 95,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosaIraiDate"
+       },
+       {
+        "columnName": "調査<br>実施日",
+        "dataName": "chosaJisshiDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 95,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosaJisshiDate"
+       },
+       {
+        "columnName": "調査<br>完了日",
+        "dataName": "chosaKanryoDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 95,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosaKanryoDate"
+       },
+       {
+        "columnName": "調査委託先",
+        "dataName": "chosaItakusakiCode",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "chosaItakusakiCode"
+       },
+       {
+        "columnName": "調査委託先",
+        "dataName": "chosaItakusakiName",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosaItakusakiName"
+       },
+       {
+        "columnName": "調査員",
+        "dataName": "chosainCode",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "chosainCode"
+       },
+       {
+        "columnName": "調査員",
+        "dataName": "chosainName",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosainName"
+       },
+       {
+        "columnName": "調査実施場所",
+        "dataName": "chosaJisshiBashoType",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosaJisshiBashoType"
+       },
+       {
+        "columnName": "その他",
+        "dataName": "chosaJisshiBashoOther",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosaJisshiBashoOther"
+       },
+       {
+        "columnName": "生年月日",
+        "dataName": "birthDay",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 95,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "birthDay"
+       },
+       {
+        "columnName": "性別",
+        "dataName": "gender",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "gender"
+       },
+       {
+        "columnName": "郵便番号",
+        "dataName": "yubinNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "yubinNo"
+       },
+       {
+        "columnName": "住所",
+        "dataName": "jusho",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 200,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "jusho"
+       },
+       {
+        "columnName": "受付日",
+        "dataName": "receptionDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 95,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "receptionDate"
+       },
+       {
+        "columnName": "データ<br>入力日",
+        "dataName": "dataInputDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 95,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "dataInputDate"
+       }
+      ]
+     },
+     "onSort": "",
+     "onSelect": "",
+     "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "sortOrder": "shimei",
+     "isAscending": true,
+     "filterList": [],
+     "activeRowId": -1
+    },
+    {
+     "fieldName": "ButtonsForNinteichosaResultEntryTarget",
+     "items": [
+      {
+       "fieldName": "btnToFinish",
+       "items": [],
+       "controlType": "Button",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnToFinish",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "調査を完了とする",
+       "onClick": "onClick_btnToFinish",
+       "icon": 0,
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "heightTextBoxMatches": false
+      }
+     ],
+     "controlType": "Panel",
+     "width": "1098",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "ButtonsForNinteichosaResultEntryTarget",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "ButtonsForNinteichosaResultEntryTarget"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorder": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "XS",
+   "selectControlID": "NinteichosaResultEntryTarget",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "対象者一覧",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "NinteichosaResultEntryTarget"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryTarget/onResume"
+    },
+    {
+     "eventName": "onClick_btnToReturn",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryTarget/onClick_btnToReturn"
+    },
+    {
+     "eventName": "onClick_btnToFinish",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryTarget/onClick_btnToFinish"
+    },
+    {
+     "eventName": "onClick_btnToDecide",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryTarget/onClick_btnToDecide"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "認定調査結果登録",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "対象者一覧",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "NinteichosaResultEntryTarget",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ButtonsForNinteichosaResultEntryTarget",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "validation": {},
+   "events": []
+  }
+ ],
+ "currentState": "All",
+ "id": "DBE2060003",
+ "WFParameter": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "select",
+   "eventName": "dgNinteichosaResultTaishosha[btnToDecide].onClick"
+  }
+ ],
+ "loadSequencePanelNames": [
+  [
+   "NinteichosaResultEntryTarget"
+  ],
+  [
+   "ButtonsForNinteichosaResultEntryTarget"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": []
+}

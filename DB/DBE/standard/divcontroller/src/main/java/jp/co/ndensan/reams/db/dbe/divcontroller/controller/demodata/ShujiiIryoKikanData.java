@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShujiiIryoKikanData {
 
-    private static final RString FILE_NAME = new RString("Shujii/IryoKikan.yml");
+    private static final RString FILE_NAME = new RString("IryoKikanDialog/IryoKikanList.yml");
 
     public static class IryoKikan {
 
@@ -49,17 +49,16 @@ public class ShujiiIryoKikanData {
     public IDemoData<IryoKikan> get医療機関一覧() {
         List<HashMap> dataFromYaml = YamlLoader.DBE.loadAsList(FILE_NAME);
         return new DemoData<>(dataFromYaml, new YamlUtil.Converter.IConverter<IryoKikan>() {
-
             @Override
             public IryoKikan exec(Map map) {
                 ControlGenerator cg = new ControlGenerator(map);
-                return new IryoKikan(cg.getAsRString("医療機関コード"), cg.getAsRString("医療機関名称"));
+                return new IryoKikan(cg.getAsRString("機関番号"), cg.getAsRString("機関名称"));
             }
         });
     }
 
     public IryoKikan get医療機関From(RString code) {
-        List<IryoKikan> list = get医療機関一覧().asConvetedType();
+        List<IryoKikan> list = get医療機関一覧().asConvertedType();
         for (IryoKikan iryoKikan : list) {
             if (iryoKikan.code().equals(code)) {
                 return iryoKikan;

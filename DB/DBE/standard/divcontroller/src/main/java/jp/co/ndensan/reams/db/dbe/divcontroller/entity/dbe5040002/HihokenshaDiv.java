@@ -25,20 +25,14 @@ public class HihokenshaDiv extends Panel {
     private TextBoxCode txtHihokenshaNo;
     @JsonProperty("txtShikibetsuCode")
     private TextBoxCode txtShikibetsuCode;
-    @JsonProperty("lblGender")
-    private Label lblGender;
     @JsonProperty("chkGender")
     private CheckBoxList chkGender;
-    @JsonProperty("txtHihokensaName")
-    private TextBox txtHihokensaName;
     @JsonProperty("txtBirthDay")
     private TextBoxDate txtBirthDay;
-    @JsonProperty("lblPaddingHihokenshaName")
-    private Label lblPaddingHihokenshaName;
-    @JsonProperty("radNameSearchType")
-    private RadioButton radNameSearchType;
-    @JsonProperty("lblNameSearch")
-    private Label lblNameSearch;
+    @JsonProperty("txtHihokensaName")
+    private TextBox txtHihokensaName;
+    @JsonProperty("ddlNameSearchType")
+    private DropDownList ddlNameSearchType;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -66,16 +60,6 @@ public class HihokenshaDiv extends Panel {
         this.txtShikibetsuCode=txtShikibetsuCode;
     }
 
-    @JsonProperty("lblGender")
-    public Label getLblGender() {
-        return lblGender;
-    }
-
-    @JsonProperty("lblGender")
-    public void setLblGender(Label lblGender) {
-        this.lblGender=lblGender;
-    }
-
     @JsonProperty("chkGender")
     public CheckBoxList getChkGender() {
         return chkGender;
@@ -84,16 +68,6 @@ public class HihokenshaDiv extends Panel {
     @JsonProperty("chkGender")
     public void setChkGender(CheckBoxList chkGender) {
         this.chkGender=chkGender;
-    }
-
-    @JsonProperty("txtHihokensaName")
-    public TextBox getTxtHihokensaName() {
-        return txtHihokensaName;
-    }
-
-    @JsonProperty("txtHihokensaName")
-    public void setTxtHihokensaName(TextBox txtHihokensaName) {
-        this.txtHihokensaName=txtHihokensaName;
     }
 
     @JsonProperty("txtBirthDay")
@@ -106,34 +80,24 @@ public class HihokenshaDiv extends Panel {
         this.txtBirthDay=txtBirthDay;
     }
 
-    @JsonProperty("lblPaddingHihokenshaName")
-    public Label getLblPaddingHihokenshaName() {
-        return lblPaddingHihokenshaName;
+    @JsonProperty("txtHihokensaName")
+    public TextBox getTxtHihokensaName() {
+        return txtHihokensaName;
     }
 
-    @JsonProperty("lblPaddingHihokenshaName")
-    public void setLblPaddingHihokenshaName(Label lblPaddingHihokenshaName) {
-        this.lblPaddingHihokenshaName=lblPaddingHihokenshaName;
+    @JsonProperty("txtHihokensaName")
+    public void setTxtHihokensaName(TextBox txtHihokensaName) {
+        this.txtHihokensaName=txtHihokensaName;
     }
 
-    @JsonProperty("radNameSearchType")
-    public RadioButton getRadNameSearchType() {
-        return radNameSearchType;
+    @JsonProperty("ddlNameSearchType")
+    public DropDownList getDdlNameSearchType() {
+        return ddlNameSearchType;
     }
 
-    @JsonProperty("radNameSearchType")
-    public void setRadNameSearchType(RadioButton radNameSearchType) {
-        this.radNameSearchType=radNameSearchType;
-    }
-
-    @JsonProperty("lblNameSearch")
-    public Label getLblNameSearch() {
-        return lblNameSearch;
-    }
-
-    @JsonProperty("lblNameSearch")
-    public void setLblNameSearch(Label lblNameSearch) {
-        this.lblNameSearch=lblNameSearch;
+    @JsonProperty("ddlNameSearchType")
+    public void setDdlNameSearchType(DropDownList ddlNameSearchType) {
+        this.ddlNameSearchType=ddlNameSearchType;
     }
 
 }

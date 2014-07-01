@@ -1,15 +1,16 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-//import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001.tblIkensho5KomokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001.tblIkensho5KomokuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * Ikensho5Komoku のクラスファイル
- *
+ * Ikensho5Komoku のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class Ikensho5KomokuDiv extends Panel {
@@ -19,7 +20,6 @@ public class Ikensho5KomokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("tblIkensho5Komoku")
     private tblIkensho5KomokuDiv tblIkensho5Komoku;
 
@@ -36,7 +36,7 @@ public class Ikensho5KomokuDiv extends Panel {
 
     @JsonProperty("tblIkensho5Komoku")
     public void setTblIkensho5Komoku(tblIkensho5KomokuDiv tblIkensho5Komoku) {
-        this.tblIkensho5Komoku = tblIkensho5Komoku;
+        this.tblIkensho5Komoku=tblIkensho5Komoku;
     }
 
 }

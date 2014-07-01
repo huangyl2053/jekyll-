@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.ImageFrontOfIkenshoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -21,8 +22,10 @@ public class tplImage01Div extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("imgIkenshoTheRight")
-    private StaticImage imgIkenshoTheRight;
+    @JsonProperty("btnMasking")
+    private Button btnMasking;
+    @JsonProperty("ImageFrontOfIkensho")
+    private ImageFrontOfIkenshoDiv ImageFrontOfIkensho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,14 +33,24 @@ public class tplImage01Div extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("imgIkenshoTheRight")
-    public StaticImage getImgIkenshoTheRight() {
-        return imgIkenshoTheRight;
+    @JsonProperty("btnMasking")
+    public Button getBtnMasking() {
+        return btnMasking;
     }
 
-    @JsonProperty("imgIkenshoTheRight")
-    public void setImgIkenshoTheRight(StaticImage imgIkenshoTheRight) {
-        this.imgIkenshoTheRight=imgIkenshoTheRight;
+    @JsonProperty("btnMasking")
+    public void setBtnMasking(Button btnMasking) {
+        this.btnMasking=btnMasking;
+    }
+
+    @JsonProperty("ImageFrontOfIkensho")
+    public ImageFrontOfIkenshoDiv getImageFrontOfIkensho() {
+        return ImageFrontOfIkensho;
+    }
+
+    @JsonProperty("ImageFrontOfIkensho")
+    public void setImageFrontOfIkensho(ImageFrontOfIkenshoDiv ImageFrontOfIkensho) {
+        this.ImageFrontOfIkensho=ImageFrontOfIkensho;
     }
 
 }

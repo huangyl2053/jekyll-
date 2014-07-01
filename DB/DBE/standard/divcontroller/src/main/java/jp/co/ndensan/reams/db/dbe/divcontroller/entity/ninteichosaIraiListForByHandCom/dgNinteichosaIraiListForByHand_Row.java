@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForBy
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jun 04 11:02:37 JST 2014 
+ * Tue Jun 24 20:42:33 JST 2014 
  */
 
 
@@ -59,6 +59,40 @@ public class dgNinteichosaIraiListForByHand_Row extends DataRow {
 
     public dgNinteichosaIraiListForByHand_Row() {
         super();
+        this.chosaKanryoFlag = false;
+        this.chosaJokyo = RString.EMPTY;
+        this.btnToShowDetail = new Button();
+        this.hokenshaNo = RString.EMPTY;
+        this.shichoson = RString.EMPTY;
+        this.shishoCode = RString.EMPTY;
+        this.shoshoName = RString.EMPTY;
+        this.hihokenshaNo = RString.EMPTY;
+        this.shimei = RString.EMPTY;
+        this.kanaShimei = RString.EMPTY;
+        this.shimeiWithKana = RString.EMPTY;
+        this.ninteiShinseiKubun = RString.EMPTY;
+        this.ninteiShinseiDate = new TextBoxFlexibleDate();
+        this.chosaIraiKubun = RString.EMPTY;
+        this.chosaIraiDate = new TextBoxFlexibleDate();
+        this.chosaKigenDate = new TextBoxFlexibleDate();
+        this.iraishoHakkoDate = new TextBoxFlexibleDate();
+        this.chosaItakusakiNo = RString.EMPTY;
+        this.chosaItakusakiName = RString.EMPTY;
+        this.chosainNo = RString.EMPTY;
+        this.chosainName = RString.EMPTY;
+        this.chosaItakusakiNo1TA = RString.EMPTY;
+        this.chosaItakusakiName1TA = RString.EMPTY;
+        this.chosainNo1TA = RString.EMPTY;
+        this.chosainName1TA = RString.EMPTY;
+        this.chosaItakusakiNo2TA = RString.EMPTY;
+        this.chosaItakusakiName2TA = RString.EMPTY;
+        this.chosainNo2TA = RString.EMPTY;
+        this.chosainName2TA = RString.EMPTY;
+        this.tokusokuDate = new TextBoxFlexibleDate();
+        this.tokusokuCount = RString.EMPTY;
+        this.yubinNo = RString.EMPTY;
+        this.jusho = RString.EMPTY;
+        this.nyushoShisetsu = RString.EMPTY;
     }
 
     public dgNinteichosaIraiListForByHand_Row(Boolean chosaKanryoFlag, RString chosaJokyo, Button btnToShowDetail, RString hokenshaNo, RString shichoson, RString shishoCode, RString shoshoName, RString hihokenshaNo, RString shimei, RString kanaShimei, RString shimeiWithKana, RString ninteiShinseiKubun, TextBoxFlexibleDate ninteiShinseiDate, RString chosaIraiKubun, TextBoxFlexibleDate chosaIraiDate, TextBoxFlexibleDate chosaKigenDate, TextBoxFlexibleDate iraishoHakkoDate, RString chosaItakusakiNo, RString chosaItakusakiName, RString chosainNo, RString chosainName, RString chosaItakusakiNo1TA, RString chosaItakusakiName1TA, RString chosainNo1TA, RString chosainName1TA, RString chosaItakusakiNo2TA, RString chosaItakusakiName2TA, RString chosainNo2TA, RString chosainName2TA, TextBoxFlexibleDate tokusokuDate, RString tokusokuCount, RString yubinNo, RString jusho, RString nyushoShisetsu) {

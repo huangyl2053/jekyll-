@@ -7,9 +7,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.dgNinteichosaIraiList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
@@ -20,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -39,7 +43,9 @@ public class NinteichosaIraiList {
         ResponseData<NinteichosaIraiListDiv> response = new ResponseData<>();
 
         DataGrid<dgNinteichosaIraiList_Row> dataGrid = div.getDgNinteichosaIraiList();
-        dataGrid.setDataSource(new DemoData().get調査依頼対象者());
+        List<dgNinteichosaIraiList_Row> dataSource = new DemoData().get調査依頼対象者();
+        sortByHihokenshaNo(dataSource);
+        dataGrid.setDataSource(dataSource);
         NinteichosaIraiListHolder.saveNinteichosaIraiList(Collections.EMPTY_LIST);
 
         response.data = div;
@@ -58,11 +64,85 @@ public class NinteichosaIraiList {
         DataGrid<dgNinteichosaIraiList_Row> dataGrid = div.getDgNinteichosaIraiList();
         List<dgNinteichosaIraiList_Row> list = new ArrayList<>(DataGridUtil.unselectedItems(dataGrid));
         list.addAll(NinteichosaIraiListHolder.getNinteichosaIraiList());
-        dataGrid.setDataSource(list);
         NinteichosaIraiListHolder.saveNinteichosaIraiList(Collections.EMPTY_LIST);
+        sortByHihokenshaNo(list);
+        dataGrid.setDataSource(list);
+        setDisableOrNot_btnComplete(list);
 
         response.data = div;
         return response;
+    }
+
+    private void setDisableOrNot_btnComplete(List list) {
+        setDisabled_btnToComplete(true);
+        for (Object obj : list) {
+            if (has調査依頼日(obj)) {
+                setDisabled_btnToComplete(false);
+                return;
+            }
+        }
+    }
+
+    private boolean has調査依頼日(Object obj) {
+        if (obj.getClass() == dgNinteichosaIraiList_Row.class) {
+            return !isEmpty(((dgNinteichosaIraiList_Row) obj).get調査依頼日().getValue());
+        } else if (obj.getClass() == LinkedHashMap.class) {
+            try {
+                RString dateString
+                        = new RString(this.<LinkedHashMap<String, String>>toLinkedHashMap(obj).get("調査依頼日").get("value"));
+                return dateString.length() != 0;
+            } catch (ClassCastException e) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    private boolean isEmpty(FlexibleDate date) {
+        return date == null || date.isEmpty();
+    }
+
+    private <T> LinkedHashMap<String, T> toLinkedHashMap(Object obj) {
+        return (LinkedHashMap<String, T>) obj;
+    }
+
+    private void setDisabled_btnToComplete(boolean disabled) {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToComplete"), disabled);
+    }
+
+    private void sortByHihokenshaNo(List<dgNinteichosaIraiList_Row> list) {
+        Collections.sort(list, createHihokenshaNoComparator());
+    }
+
+    private Comparator<Object> createHihokenshaNoComparator() {
+        return new Comparator<Object>() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                return toRString(o1).compareTo(toRString(o2));
+            }
+
+            private RString toRString(Object obj) {
+                if (obj.getClass() == dgNinteichosaIraiList_Row.class) {
+                    return extractHihokenshaNo((dgNinteichosaIraiList_Row) obj);
+                } else if (obj.getClass() == LinkedHashMap.class) {
+                    /* dgNinteichosaIraiList_Row のつもりが、
+                     * なぜかViewStateからとってくるとLinkedHashMapになるため....
+                     */
+                    return extractHihokenshaNo((LinkedHashMap) obj);
+                } else {
+                    return RString.EMPTY;
+                }
+            }
+
+            private RString extractHihokenshaNo(dgNinteichosaIraiList_Row row) {
+                return row.get被保険者番号();
+            }
+
+            private RString extractHihokenshaNo(LinkedHashMap map) {
+                return new RString((String) map.get("被保険者番号"));
+            }
+
+        };
     }
 
     /**
@@ -73,7 +153,7 @@ public class NinteichosaIraiList {
      */
     public ResponseData<NinteichosaIraiListDiv> onClick_btnToEntryChosaIrai(NinteichosaIraiListDiv div) {
         ResponseData<NinteichosaIraiListDiv> response = new ResponseData<>();
-
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToComplete"), false);
         response.data = div;
         return response;
     }
@@ -91,16 +171,18 @@ public class NinteichosaIraiList {
 
         List<dgNinteichosaIraiList_Row> list = new ArrayList<>();
         for (dgNinteichosaIraiList_Row selectedItem : grid.getSelectedItems()) {
-            if (selectedItem.get依頼書発行済()) {
+            if (has調査依頼日(selectedItem)) {
                 selectedItem.get調査依頼完了日().setValue(FlexibleDate.getNowDate());
             }
             list.add(selectedItem);
         }
         list.addAll(DataGridUtil.unselectedItems(grid));
+        sortByHihokenshaNo(list);
         grid.setDataSource(list);
 
         response.data = div;
         return response;
+
     }
 
     /**
@@ -108,7 +190,7 @@ public class NinteichosaIraiList {
      */
     static final class NinteichosaIraiListHolder {
 
-        private static final RString SELECTED = new RString("selected");
+        private static final RString SELECTED = new RString("認定調査依頼対象者");
 
         /**
          * 認定調査依頼対象者を保存します。
@@ -116,7 +198,7 @@ public class NinteichosaIraiList {
          * @param list 認定調査依頼対象者
          */
         static void saveNinteichosaIraiList(List<dgNinteichosaIraiList_Row> list) {
-            ViewStateHolder.put(SELECTED, list);
+            ViewStateHolder.put(SELECTED.toString(), list);
         }
 
         /**
@@ -139,6 +221,7 @@ public class NinteichosaIraiList {
     /**
      * 調査依頼対象のデモ用データを持ちます。
      */
+    //<editor-fold defaultstate="collapsed" desc="Demodata">
     private static final class DemoData {
 
         private final List<dgNinteichosaIraiList_Row> chosaIraiTargets;
@@ -182,6 +265,8 @@ public class NinteichosaIraiList {
             boolean is依頼済 = !iraiDate.equals(RString.EMPTY);
             RString iraishoHakkoDate = cg.getAsRString("依頼書発行日");
             boolean is依頼書発行済 = !iraishoHakkoDate.equals(RString.EMPTY);
+            ChosainData.Chosain currentChosain = new ChosainData().get調査員From(cg.getAsRString("調査員番号"));
+            ChosainData.Chosain latestChosain = new ChosainData().get調査員From(cg.getAsRString("前回調査員番号"));
             return new dgNinteichosaIraiList_Row(
                     cg.getAsRString("保険者番号"),
                     cg.getAsRString("市町村"),
@@ -201,14 +286,14 @@ public class NinteichosaIraiList {
                     cg.getAsRString("調査依頼区分"),
                     cg.getAsRString("調査回数"),
                     cg.getAsRString("認定調査履歴番号"),
-                    cg.getAsRString("調査委託先番号"),
-                    cg.getAsRString("調査委託先名"),
-                    cg.getAsRString("調査員番号"),
-                    cg.getAsRString("調査員名"),
-                    cg.getAsRString("前回調査委託先番号"),
-                    cg.getAsRString("前回調査委託先名"),
-                    cg.getAsRString("前回調査員番号"),
-                    cg.getAsRString("前回調査員名"),
+                    currentChosain.itakusaki().code(),
+                    currentChosain.itakusaki().name(),
+                    currentChosain.code(),
+                    currentChosain.name(),
+                    latestChosain.itakusaki().code(),
+                    latestChosain.itakusaki().name(),
+                    latestChosain.code(),
+                    latestChosain.name(),
                     cg.getAsRString("審査会開催地区コード"),
                     cg.getAsRString("審査会開催地区"),
                     cg.getAsTextBoxFlexibleDate("督促日"),
@@ -225,4 +310,5 @@ public class NinteichosaIraiList {
                     is依頼済, is依頼書発行済);
         }
     }
+//</editor-fold>
 }

@@ -27,10 +27,10 @@ public class KihonJohoDiv extends Panel {
     private TextBoxCode txtHihokenNo;
     @JsonProperty("txtShinseibi")
     private TextBoxDate txtShinseibi;
-    @JsonProperty("btnShinseiJohoSearch")
-    private Button btnShinseiJohoSearch;
     @JsonProperty("ddlShinseiKbn")
     private DropDownList ddlShinseiKbn;
+    @JsonProperty("btnShinseiJohoSearch")
+    private ButtonDialog btnShinseiJohoSearch;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -68,16 +68,6 @@ public class KihonJohoDiv extends Panel {
         this.txtShinseibi=txtShinseibi;
     }
 
-    @JsonProperty("btnShinseiJohoSearch")
-    public Button getBtnShinseiJohoSearch() {
-        return btnShinseiJohoSearch;
-    }
-
-    @JsonProperty("btnShinseiJohoSearch")
-    public void setBtnShinseiJohoSearch(Button btnShinseiJohoSearch) {
-        this.btnShinseiJohoSearch=btnShinseiJohoSearch;
-    }
-
     @JsonProperty("ddlShinseiKbn")
     public DropDownList getDdlShinseiKbn() {
         return ddlShinseiKbn;
@@ -86,6 +76,16 @@ public class KihonJohoDiv extends Panel {
     @JsonProperty("ddlShinseiKbn")
     public void setDdlShinseiKbn(DropDownList ddlShinseiKbn) {
         this.ddlShinseiKbn=ddlShinseiKbn;
+    }
+
+    @JsonProperty("btnShinseiJohoSearch")
+    public ButtonDialog getBtnShinseiJohoSearch() {
+        return btnShinseiJohoSearch;
+    }
+
+    @JsonProperty("btnShinseiJohoSearch")
+    public void setBtnShinseiJohoSearch(ButtonDialog btnShinseiJohoSearch) {
+        this.btnShinseiJohoSearch=btnShinseiJohoSearch;
     }
 
 }

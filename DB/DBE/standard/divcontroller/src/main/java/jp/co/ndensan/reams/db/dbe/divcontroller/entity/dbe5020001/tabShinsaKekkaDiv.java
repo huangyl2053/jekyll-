@@ -1,7 +1,8 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoNinteiKekka.KaigoNinteiKekkaDiv;
@@ -10,8 +11,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tabShinsaKekka のクラスファイル
- *
+ * tabShinsaKekka のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class tabShinsaKekkaDiv extends TabPanel {
@@ -21,7 +22,6 @@ public class tabShinsaKekkaDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("NinteiKekkaNyuryoku")
     private KaigoNinteiKekkaDiv NinteiKekkaNyuryoku;
     @JsonProperty("btnUpdate")
@@ -44,7 +44,7 @@ public class tabShinsaKekkaDiv extends TabPanel {
 
     @JsonProperty("NinteiKekkaNyuryoku")
     public void setNinteiKekkaNyuryoku(KaigoNinteiKekkaDiv NinteiKekkaNyuryoku) {
-        this.NinteiKekkaNyuryoku = NinteiKekkaNyuryoku;
+        this.NinteiKekkaNyuryoku=NinteiKekkaNyuryoku;
     }
 
     @JsonProperty("btnUpdate")
@@ -54,7 +54,7 @@ public class tabShinsaKekkaDiv extends TabPanel {
 
     @JsonProperty("btnUpdate")
     public void setBtnUpdate(Button btnUpdate) {
-        this.btnUpdate = btnUpdate;
+        this.btnUpdate=btnUpdate;
     }
 
     @JsonProperty("ZenkaiNinteiKekka")
@@ -64,7 +64,7 @@ public class tabShinsaKekkaDiv extends TabPanel {
 
     @JsonProperty("ZenkaiNinteiKekka")
     public void setZenkaiNinteiKekka(KaigoNinteiKekkaDiv ZenkaiNinteiKekka) {
-        this.ZenkaiNinteiKekka = ZenkaiNinteiKekka;
+        this.ZenkaiNinteiKekka=ZenkaiNinteiKekka;
     }
 
     @JsonProperty("ZenZenkaiNinteiKekka")
@@ -74,7 +74,7 @@ public class tabShinsaKekkaDiv extends TabPanel {
 
     @JsonProperty("ZenZenkaiNinteiKekka")
     public void setZenZenkaiNinteiKekka(KaigoNinteiKekkaDiv ZenZenkaiNinteiKekka) {
-        this.ZenZenkaiNinteiKekka = ZenZenkaiNinteiKekka;
+        this.ZenZenkaiNinteiKekka=ZenZenkaiNinteiKekka;
     }
 
 }

@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+//import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
+//import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -50,16 +53,23 @@ public class NinteiShinsaKekkaNyuryoku {
         div.getHihokenshaJoho().getTxtHokenshaNo().setValue(dataRow.getHokenshaNo());
         div.getHihokenshaJoho().getTxtHokenshaMeisho().setValue(dataRow.getShichoson());
         div.getHihokenshaJoho().getTxtNenrei().setValue(dataRow.getNenrei());
-        div.getHihokenshaJoho().getTxtShinseiKubun().setValue(dataRow.getShinseiKubun());
-        div.getHihokenshaJoho().getTxtNinteiShinseiYMD().setValue(dataRow.getShinseibi().getValue());
+//        div.getHihokenshaJoho().getTxtShinseiKubun().setValue(dataRow.getShinseiKubun());
+//        div.getHihokenshaJoho().getTxtNinteiShinseiYMD().setValue(dataRow.getShinseibi().getValue());
+        div.getHihokenshaJoho().getTxtShinseiKubun().setDisplayNone(true);
+        div.getHihokenshaJoho().getTxtNinteiShinseiYMD().setDisplayNone(true);
         div.getHihokenshaJoho().getTxtZenkaiYokaigodo().setValue(dataRow.getBeforeYokaigodo());
         div.getHihokenshaJoho().getTxtZenYukokikanStart().setValue(dataRow.getBeforeYukoStartDate().getValue());
         div.getHihokenshaJoho().getTxtZenYukokikanEnd().setValue(dataRow.getBeforeYukoEndDate().getValue());
 
+        KaigoNinteiKekka.setModeWithInit(div.getNinteiKekkaNyuryoku(), KaigoNinteiKekka.Mode.INPUT);
+        KaigoNinteiKekka.setValues(div.getNinteiKekkaNyuryoku(), new KaigoNinteiKekka.Values());
+        div.getNinteiKekkaNyuryoku().getTxtShinsaJun().setValue(dataRow.getShinsaJun());
         div.getNinteiKekkaNyuryoku().getTxtShinseibi().setValue(dataRow.getShinseibi().getValue());
         div.getNinteiKekkaNyuryoku().getTxtShinseiKubunShinsei().setValue(dataRow.getShinseiKubun());
         div.getNinteiKekkaNyuryoku().getTxtIchijiHanteiKekka().setValue(dataRow.getIchijiHantei());
         div.getNinteiKekkaNyuryoku().getTxtNinteibi().setValue(FlexibleDate.getNowDate());
+        div.getNinteiKekkaNyuryoku().getDdlTokuteiShippei().setDisabled(true);
+        div.getNinteiKekkaNyuryoku().getDdlJotaiZo().setDisabled(true);
         if (dataRow.getYukoKikan().equalsIgnoreCase(RString.EMPTY)) {
             div.getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka().setSelectedItem(new RString("01"));
             div.getNinteiKekkaNyuryoku().getDdlNinteiYukoTsukisu().setSelectedItem(new RString("0"));
@@ -72,17 +82,6 @@ public class NinteiShinsaKekkaNyuryoku {
             div.getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanStart().setValue(dataRow.getYukoStartDate().getValue());
             div.getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanEnd().setValue(dataRow.getYukoEndDate().getValue());
             div.getNinteiKekkaNyuryoku().getTxtShinsakaiIken().setValue(dataRow.getShinsakaiIken());
-        }
-
-        if (shinsaTaishoshaIchiranDiv.getDgShinsaTaishoshaIchiran().getSelectedItems().size() == 1) {
-            div.getNyuryokuSeigyo().getBtnNext().setDisplayNone(true);
-        } else {
-            div.getNyuryokuSeigyo().getBtnNext().setDisplayNone(false);
-            cntSelectSu = shinsaTaishoshaIchiranDiv.getDgShinsaTaishoshaIchiran().getSelectedItems().size();
-            cntSu = cntSelectSu - 1;
-            if (selectIdx.equals(cntSu)) {
-                div.getNyuryokuSeigyo().getBtnNext().setDisplayNone(true);
-            }
         }
 
         response.data = div;
@@ -99,16 +98,13 @@ public class NinteiShinsaKekkaNyuryoku {
     public ResponseData onSelect_ddlNinteiKubun(NinteiShinsaKekkaNyuryokuDiv div,
             ShinsaTaishoshaIchiranDiv shinsaTaishoshaIchiranDiv) {
         ResponseData<NinteiShinsaKekkaNyuryokuDiv> response = new ResponseData<>();
-
-        if (div.getNinteiKekkaNyuryoku().getDdlNinteiKubun().getSelectedValue().equalsIgnoreCase("再調査")) {
-            div.getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka().setDisabled(true);
-        } else {
-            div.getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka().setDisabled(false);
-        }
-
+        div.getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka().setDisabled(is再調査(div));
         response.data = div;
         return response;
+    }
 
+    private boolean is再調査(NinteiShinsaKekkaNyuryokuDiv div) {
+        return div.getNinteiKekkaNyuryoku().getDdlNinteiKubun().getSelectedValue().equalsIgnoreCase("再調査");
     }
 
     /**
@@ -138,20 +134,29 @@ public class NinteiShinsaKekkaNyuryoku {
             div.getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanEnd().setValue(new FlexibleDate("20160630"));
             div.getNinteiKekkaNyuryoku().getTxtShinseiKubunHorei().setValue(new RString("更新"));
             div.getNinteiKekkaNyuryoku().getDdlNinteiYukoTsukisu().setSelectedItem(new RString("24"));
-            if (div.getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka().getSelectedValue().equalsIgnoreCase(new RString("要介護１"))) {
-                div.getNinteiKekkaNyuryoku().getDdlJotaiZo().setDisabled(false);
-                div.getNinteiKekkaNyuryoku().getDdlJotaiZo().setDisplayNone(false);
-            } else {
-                div.getNinteiKekkaNyuryoku().getDdlJotaiZo().setDisabled(true);
-                div.getNinteiKekkaNyuryoku().getDdlJotaiZo().setDisplayNone(true);
-            }
+            div.getNinteiKekkaNyuryoku().getDdlJotaiZo().setDisabled(!is要介護１(div));
             response = onSelect_ddlNinteiYukoTsukisu(div, shinsaTaishoshaIchiranDiv);
         }
         ViewStateHolder.put("二次判定結果", div.getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka().getSelectedValue());
         ViewStateHolder.put("二次判定コード", div.getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka().getSelectedItem());
         ViewStateHolder.put("被保番号", div.getHihokenshaJoho().getTxtHihokenshaNo().getValue());
-        return response;
 
+        if (shinsaTaishoshaIchiranDiv.getDgShinsaTaishoshaIchiran().getSelectedItems().size() == 1) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnNext"), true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnNext"), false);
+            cntSelectSu = shinsaTaishoshaIchiranDiv.getDgShinsaTaishoshaIchiran().getSelectedItems().size();
+            cntSu = cntSelectSu - 1;
+            if (selectIdx.equals(cntSu)) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnNext"), true);
+            }
+        }
+
+        return response;
+    }
+
+    private boolean is要介護１(NinteiShinsaKekkaNyuryokuDiv div) {
+        return div.getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka().getSelectedValue().equalsIgnoreCase(new RString("要介護１"));
     }
 
     /**
@@ -212,15 +217,10 @@ public class NinteiShinsaKekkaNyuryoku {
      * @param shinsaTaishoshaIchiranDiv 審査対象者一覧Div
      * @return ResponseData
      */
-    public ResponseData onClick_btnNext(NinteiShinsaKekkaNyuryokuDiv div,
+    public ResponseData<NinteiShinsaKekkaNyuryokuDiv> onClick_btnNext(NinteiShinsaKekkaNyuryokuDiv div,
             ShinsaTaishoshaIchiranDiv shinsaTaishoshaIchiranDiv) {
-        ResponseData<NinteiShinsaKekkaNyuryokuDiv> response = new ResponseData<>();
-
         selectIdx = ++selectIdx;
-
-        response = onLoadData(div, shinsaTaishoshaIchiranDiv);
-
-        return response;
+        return onLoadData(div, shinsaTaishoshaIchiranDiv);
     }
 
     /**
@@ -233,10 +233,25 @@ public class NinteiShinsaKekkaNyuryoku {
     public ResponseData onClick_btnBackIchiran(NinteiShinsaKekkaNyuryokuDiv div,
             ShinsaTaishoshaIchiranDiv shinsaTaishoshaIchiranDiv) {
         ResponseData<NinteiShinsaKekkaNyuryokuDiv> response = new ResponseData<>();
-
         selectIdx = 0;
-
         return response;
+
     }
 
+//    /**
+//     * 「入力内容で登録する」ボタン押下時の処理を表します。
+//     *
+//     * @param div 審査結果入力詳細Div
+//     * @param shinsaTaishoshaIchiranDiv 審査対象者一覧Div
+//     * @return ResponseData
+//     */
+//    public ResponseData onClick_btnToroku(NinteiShinsaKekkaNyuryokuDiv div,
+//            ShinsaTaishoshaIchiranDiv shinsaTaishoshaIchiranDiv) {
+//        ResponseData<NinteiShinsaKekkaNyuryokuDiv> response = new ResponseData<>();
+//
+//        response.addMessage(new InformationMessage("i", "更新しました。"));
+//
+//        return response;
+//    }
+//
 }

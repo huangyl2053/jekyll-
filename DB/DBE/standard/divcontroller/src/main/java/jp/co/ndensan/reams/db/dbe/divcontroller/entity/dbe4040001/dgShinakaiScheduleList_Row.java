@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4040001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 03 19:42:20 JST 2014 
+ * Mon Jun 30 17:25:28 JST 2014 
  */
 
 
@@ -34,6 +34,16 @@ public class dgShinakaiScheduleList_Row extends DataRow {
 
     public dgShinakaiScheduleList_Row() {
         super();
+        this.shinsakaiNo = RString.EMPTY;
+        this.kaisaiDate = new TextBoxFlexibleDate();
+        this.startTime = RString.EMPTY;
+        this.endTime = RString.EMPTY;
+        this.kaisaiBasho = RString.EMPTY;
+        this.gogitai = RString.EMPTY;
+        this.yoteiTeiin = RString.EMPTY;
+        this.wariateNinzu = RString.EMPTY;
+        this.maxTeiin = RString.EMPTY;
+        this.autoBindTeiin = RString.EMPTY;
     }
 
     public dgShinakaiScheduleList_Row(RString shinsakaiNo, TextBoxFlexibleDate kaisaiDate, RString startTime, RString endTime, RString kaisaiBasho, RString gogitai, RString yoteiTeiin, RString wariateNinzu, RString maxTeiin, RString autoBindTeiin) {

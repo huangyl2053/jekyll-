@@ -11,39 +11,10 @@
        "fieldName": "ShozokuChosainList",
        "items": [
         {
-         "fieldName": "ButtonsForWaritsukeChosainList",
-         "items": [
-          {
-           "fieldName": "btnToBindSelectedChosain",
-           "items": [],
-           "controlType": "Button",
-           "width": "120",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "selectControlID": "btnToBindSelectedChosain",
-           "helpMessageID": "",
-           "jpControlName": "",
-           "onClick": "bind_SelectedChosain",
-           "text": "調査員を割付ける",
-           "appearance": 0,
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": "",
-           "icon": 0
-          }
-         ],
-         "controlType": "Panel",
-         "width": "G2",
+         "fieldName": "btnToBindSelectedChosain",
+         "items": [],
+         "controlType": "Button",
+         "width": "140",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -54,34 +25,19 @@
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": "XS",
+         "marginLeft": "S",
          "marginRight": "XS",
-         "selectControlID": "ButtonsForWaritsukeChosainList",
+         "selectControlID": "btnToBindSelectedChosain",
          "helpMessageID": "",
          "jpControlName": "",
-         "onLoad": "",
-         "title": "",
-         "isOpen": true,
-         "canOpenAndClose": true,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "ButtonsForWaritsukeChosainList"
-          }
-         ],
-         "requestSettings": [],
-         "hiddenInput": [],
-         "onOpen": "",
-         "onClose": "",
-         "session": {},
-         "marginTop": "Default",
-         "marginBottom": "Default",
-         "eraseBorder": false,
-         "backgroundColor": 0,
-         "widthAuto": true,
-         "panelDisplay": 0,
-         "isGroupBox": false,
-         "readOnly": false,
-         "height": "Auto"
+         "onClick": "bind_SelectedChosain",
+         "text": "調査員を割付ける",
+         "appearance": 0,
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": "",
+         "icon": 0,
+         "heightTextBoxMatches": false
         },
         {
          "fieldName": "comChosainList",
@@ -104,15 +60,15 @@
          "helpMessageID": "",
          "jpControlName": "",
          "relation": [],
-         "height": "120",
+         "height": "110",
+         "businessId": "DBE",
+         "controlName": "ShozokuChosainListCom",
          "onSort": "",
          "onSelect": "",
          "onSelectByDblClick": "bind_SelectedChosain",
          "onOnlyRow": "",
          "onNoRow": "",
-         "onMultiRows": "",
-         "businessId": "DBE",
-         "controlName": "ShozokuChosainListCom"
+         "onMultiRows": ""
         },
         {
          "fieldName": "comChosainListAll",
@@ -136,14 +92,14 @@
          "jpControlName": "",
          "relation": [],
          "height": "10",
+         "businessId": "DBE",
+         "controlName": "ShozokuChosainListCom",
          "onSort": "",
          "onSelect": "",
          "onSelectByDblClick": "",
          "onOnlyRow": "",
          "onNoRow": "",
-         "onMultiRows": "",
-         "businessId": "DBE",
-         "controlName": "ShozokuChosainListCom"
+         "onMultiRows": ""
         }
        ],
        "controlType": "Panel",
@@ -177,7 +133,7 @@
        "onOpen": "",
        "onClose": "",
        "session": {},
-       "marginTop": "Default",
+       "marginTop": "0",
        "marginBottom": "Default",
        "eraseBorder": false,
        "backgroundColor": 0,
@@ -191,39 +147,10 @@
        "fieldName": "WaritsukesakiChosaItakusakiList",
        "items": [
         {
-         "fieldName": "ButtonsForWaritsukeChosaItakusakiList",
-         "items": [
-          {
-           "fieldName": "btnToAddChosaItakusaki",
-           "items": [],
-           "controlType": "Button",
-           "width": "",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "selectControlID": "btnToAddChosaItakusaki",
-           "helpMessageID": "",
-           "jpControlName": "",
-           "onClick": "",
-           "text": "調査委託先/調査員を追加する",
-           "appearance": 0,
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": "",
-           "icon": 0
-          }
-         ],
-         "controlType": "Panel",
-         "width": "540",
+         "fieldName": "btnToAddChosaItakusaki",
+         "items": [],
+         "controlType": "Button",
+         "width": "",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -236,38 +163,23 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "ButtonsForWaritsukeChosaItakusakiList",
+         "selectControlID": "btnToAddChosaItakusaki",
          "helpMessageID": "",
          "jpControlName": "",
-         "onLoad": "",
-         "title": "",
-         "isOpen": true,
-         "canOpenAndClose": true,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "ButtonsForWaritsukeChosaItakusakiList"
-          }
-         ],
-         "requestSettings": [],
-         "hiddenInput": [],
-         "onOpen": "",
-         "onClose": "",
-         "session": {},
-         "marginTop": "Default",
-         "marginBottom": "Default",
-         "eraseBorder": false,
-         "backgroundColor": 0,
-         "widthAuto": true,
-         "panelDisplay": 0,
-         "isGroupBox": false,
-         "readOnly": false,
-         "height": "Auto"
+         "onClick": "",
+         "text": "調査委託先/調査員を追加する",
+         "appearance": 0,
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": "",
+         "icon": 0,
+         "heightTextBoxMatches": false
         },
         {
          "fieldName": "dgChosaItakusakiList",
          "items": [],
          "controlType": "DataGrid",
-         "width": "500",
+         "width": "565",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -284,12 +196,18 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "height": "165",
+         "height": "152",
+         "onSort": "",
+         "onSelect": "onSelect_dgChosaItakusakiList",
+         "onSelectByDblClick": "",
+         "onOnlyRow": "",
+         "onNoRow": "",
+         "onMultiRows": "",
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
           "isShowHeader": true,
-          "isShowFooter": true,
+          "isShowFooter": false,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
@@ -391,15 +309,9 @@
            }
           ]
          },
-         "onSort": "",
-         "onSelect": "onSelect_dgChosaItakusakiList",
-         "onSelectByDblClick": "",
          "onSelectBySelectButton": "",
          "onSelectByModifyButton": "",
          "onSelectByDeleteButton": "",
-         "onOnlyRow": "",
-         "onNoRow": "",
-         "onMultiRows": "",
          "dataSource": [],
          "sortOrder": "waritsukeChiku",
          "isAscending": true,
@@ -408,7 +320,7 @@
         }
        ],
        "controlType": "Panel",
-       "width": "510",
+       "width": "575",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -438,9 +350,9 @@
        "onOpen": "",
        "onClose": "",
        "session": {},
-       "marginTop": "Default",
-       "marginBottom": "Default",
-       "eraseBorder": false,
+       "marginTop": "0",
+       "marginBottom": "0",
+       "eraseBorder": true,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 0,
@@ -450,7 +362,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1030",
+     "width": "1098",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -480,7 +392,7 @@
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "marginTop": "Default",
+     "marginTop": "0",
      "marginBottom": "Default",
      "eraseBorder": false,
      "backgroundColor": 0,
@@ -532,18 +444,17 @@
            "value": "3：再調査"
           }
          ],
-         "required": false,
-         "onFocus": "",
-         "onBlur": "",
          "onChange": "",
+         "selectedItem": "1",
+         "required": false,
          "labelLText": "依頼区分",
          "labelRText": "",
          "labelLWidth": "S",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "selectedItem": "1",
-         "disabledItem": []
+         "onFocus": "",
+         "onBlur": ""
         },
         {
          "fieldName": "txtChosaIraiDate",
@@ -567,24 +478,23 @@
          "jpControlName": "",
          "readOnly": false,
          "text": "",
-         "required": false,
-         "placeHolder": "",
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "onFocus": "",
-         "onBlur": "",
          "onChange": "",
-         "onKeyPress": "",
-         "value": "",
+         "required": false,
          "labelLText": "調査依頼日",
          "labelRText": "",
          "labelLWidth": "S",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "permitCharactor": "./_-",
+         "onFocus": "",
+         "onBlur": "",
+         "placeHolder": "",
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "onKeyPress": "",
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "value": ""
         },
         {
          "fieldName": "txtChosaKigenDate",
@@ -608,24 +518,23 @@
          "jpControlName": "",
          "readOnly": false,
          "text": "",
-         "required": false,
-         "placeHolder": "",
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "onFocus": "",
-         "onBlur": "",
          "onChange": "",
-         "onKeyPress": "",
-         "value": "",
+         "required": false,
          "labelLText": "調査期限日",
          "labelRText": "",
          "labelLWidth": "S",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "permitCharactor": "./_-",
+         "onFocus": "",
+         "onBlur": "",
+         "placeHolder": "",
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "onKeyPress": "",
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "value": ""
         }
        ],
        "controlType": "Panel",
@@ -660,8 +569,8 @@
        "onClose": "",
        "session": {},
        "marginTop": "Default",
-       "marginBottom": "Default",
-       "eraseBorder": false,
+       "marginBottom": "0",
+       "eraseBorder": true,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 0,
@@ -679,7 +588,7 @@
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": false,
+       "wrap": true,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
@@ -690,7 +599,15 @@
        "helpMessageID": "",
        "jpControlName": "",
        "relation": [],
-       "height": "190",
+       "height": "150",
+       "businessId": "DBE",
+       "controlName": "NinteichosaIraiListForByHandCom",
+       "onSort": "",
+       "onSelect": "",
+       "onSelectByDblClick": "",
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
        "gridSetting": {
         "rowHeight": 40,
         "isMultiSelectable": false,
@@ -1269,15 +1186,7 @@
           "sortKey": "nyushoShisetsu"
          }
         ]
-       },
-       "onSort": "",
-       "onSelect": "",
-       "onSelectByDblClick": "",
-       "onOnlyRow": "",
-       "onNoRow": "",
-       "onMultiRows": "",
-       "businessId": "DBE",
-       "controlName": "NinteichosaIraiListForByHandCom"
+       }
       },
       {
        "fieldName": "ButtonsForBinding",
@@ -1308,7 +1217,8 @@
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": "",
-         "icon": 0
+         "icon": 0,
+         "heightTextBoxMatches": false
         },
         {
          "fieldName": "btnToBind",
@@ -1336,11 +1246,12 @@
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": "",
-         "icon": 0
+         "icon": 0,
+         "heightTextBoxMatches": false
         }
        ],
        "controlType": "Panel",
-       "width": "450",
+       "width": "600",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1371,8 +1282,8 @@
        "onClose": "",
        "session": {},
        "marginTop": "Default",
-       "marginBottom": "Default",
-       "eraseBorder": false,
+       "marginBottom": "0",
+       "eraseBorder": true,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 0,
@@ -1401,7 +1312,15 @@
        "helpMessageID": "",
        "jpControlName": "",
        "relation": [],
-       "height": "190",
+       "height": "180",
+       "businessId": "DBE",
+       "controlName": "NinteichosaIraiListForByHandCom",
+       "onSort": "",
+       "onSelect": "",
+       "onSelectByDblClick": "",
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
        "gridSetting": {
         "rowHeight": 40,
         "isMultiSelectable": false,
@@ -1980,15 +1899,7 @@
           "sortKey": "nyushoShisetsu"
          }
         ]
-       },
-       "onSort": "",
-       "onSelect": "",
-       "onSelectByDblClick": "",
-       "onOnlyRow": "",
-       "onNoRow": "",
-       "onMultiRows": "",
-       "businessId": "DBE",
-       "controlName": "NinteichosaIraiListForByHandCom"
+       }
       },
       {
        "fieldName": "comNinteichosaIraiListGod",
@@ -2012,6 +1923,14 @@
        "jpControlName": "",
        "relation": [],
        "height": "10",
+       "businessId": "DBE",
+       "controlName": "NinteichosaIraiListForByHandCom",
+       "onSort": "",
+       "onSelect": "",
+       "onSelectByDblClick": "",
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
        "gridSetting": {
         "rowHeight": 40,
         "isMultiSelectable": false,
@@ -2590,19 +2509,11 @@
           "sortKey": "nyushoShisetsu"
          }
         ]
-       },
-       "onSort": "",
-       "onSelect": "",
-       "onSelectByDblClick": "",
-       "onOnlyRow": "",
-       "onNoRow": "",
-       "onMultiRows": "",
-       "businessId": "DBE",
-       "controlName": "NinteichosaIraiListForByHandCom"
+       }
       }
      ],
      "controlType": "Panel",
-     "width": "1030",
+     "width": "1098",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -2621,7 +2532,7 @@
      "onLoad": "",
      "title": "",
      "isOpen": true,
-     "canOpenAndClose": true,
+     "canOpenAndClose": false,
      "postParameterPanelNames": [
       {
        "postParameterPanelNames": "ChosairaiBindByHandMain"
@@ -2632,90 +2543,9 @@
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "marginTop": "Default",
+     "marginTop": "0",
      "marginBottom": "Default",
-     "eraseBorder": false,
-     "backgroundColor": 0,
-     "widthAuto": false,
-     "panelDisplay": 0,
-     "isGroupBox": false,
-     "readOnly": false,
-     "height": "Auto"
-    },
-    {
-     "fieldName": "ButtonsForNinteichosaIraiByHand",
-     "items": [
-      {
-       "fieldName": "btToRegister",
-       "items": [],
-       "controlType": "ButtonSubmit",
-       "width": "L",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": true,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btToRegister",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "postParameterPanelNames": [
-        {
-         "postParameterPanelNames": "Panel17"
-        }
-       ],
-       "onClick": "",
-       "text": "この内容で保存する",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0,
-       "validateUrl": "",
-       "submitUrl": "",
-       "onAfterRequest": ""
-      }
-     ],
-     "controlType": "Panel",
-     "width": "1030",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "ButtonsForNinteichosaIraiByHand",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "onLoad": "",
-     "title": "",
-     "isOpen": true,
-     "canOpenAndClose": true,
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "ButtonsForNinteichosaIraiByHand"
-      }
-     ],
-     "requestSettings": [],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "Default",
-     "marginBottom": "Default",
-     "eraseBorder": false,
+     "eraseBorder": true,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -2725,7 +2555,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "G2",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -2736,7 +2566,7 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
+   "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "NinteichosaIraiByHand",
    "helpMessageID": "",
@@ -2764,7 +2594,7 @@
    "marginBottom": "XS",
    "eraseBorder": false,
    "backgroundColor": 0,
-   "widthAuto": true,
+   "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
@@ -2800,7 +2630,7 @@
   {
    "order": "1",
    "stateName": "依頼先手動登録",
-   "showWizard": false,
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "NinteichosaIraiByHand",
@@ -2860,7 +2690,12 @@
  "currentState": "All",
  "id": "DBE2010002",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "toReturn",
+   "eventName": "btnToRrturn.onClick"
+  }
+ ],
  "loadSequencePanelNames": [
   [
    "NinteichosaIraiByHand"
@@ -2872,13 +2707,7 @@
    "ShozokuChosainList"
   ],
   [
-   "ButtonsForWaritsukeChosainList"
-  ],
-  [
    "WaritsukesakiChosaItakusakiList"
-  ],
-  [
-   "ButtonsForWaritsukeChosaItakusakiList"
   ],
   [
    "ChosairaiBindByHandMain"
@@ -2888,14 +2717,89 @@
   ],
   [
    "ButtonsForBinding"
-  ],
-  [
-   "ButtonsForNinteichosaIraiByHand"
   ]
  ],
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "iraiWaritsuke",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonUpdate",
+     "buttonProperty": {
+      "fieldName": "btToRegister",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btToRegister",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "",
+      "text": "更新",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "この内容で"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnToRrturn",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnToRrturn",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "onClick_btnToReturn",
+      "text": "戻る",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "依頼先手動登録"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }

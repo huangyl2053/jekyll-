@@ -8,6 +8,15 @@
    "toLayoutSubGyomuCode": "DBE",
    "toLayoutName": "DBE2010002",
    "toEventName": "onLoad"
+  },
+  {
+   "id": 2,
+   "layoutSubGyomuCode": "DBE",
+   "layoutName": "DBE2010002",
+   "eventName": "toReturn",
+   "toLayoutSubGyomuCode": "DBE",
+   "toLayoutName": "DBE2010001",
+   "toEventName": ""
   }
  ],
  "subGyomuCode": "DBE",

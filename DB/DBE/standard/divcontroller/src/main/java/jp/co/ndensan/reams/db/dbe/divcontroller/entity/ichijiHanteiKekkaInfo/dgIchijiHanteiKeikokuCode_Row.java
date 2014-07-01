@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.ichijiHanteiKekkaInfo;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 13 09:47:54 JST 2014 
+ * Mon Jun 23 18:38:09 JST 2014 
  */
 
 

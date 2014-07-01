@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ButtonsForNinteichosaIraiByHandDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ChosaItakusakiAndChosainListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ChosairaiBindByHandMainDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -26,8 +25,6 @@ public class NinteichosaIraiByHandDiv extends Panel {
     private ChosaItakusakiAndChosainListDiv ChosaItakusakiAndChosainList;
     @JsonProperty("ChosairaiBindByHandMain")
     private ChosairaiBindByHandMainDiv ChosairaiBindByHandMain;
-    @JsonProperty("ButtonsForNinteichosaIraiByHand")
-    private ButtonsForNinteichosaIraiByHandDiv ButtonsForNinteichosaIraiByHand;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -53,16 +50,6 @@ public class NinteichosaIraiByHandDiv extends Panel {
     @JsonProperty("ChosairaiBindByHandMain")
     public void setChosairaiBindByHandMain(ChosairaiBindByHandMainDiv ChosairaiBindByHandMain) {
         this.ChosairaiBindByHandMain=ChosairaiBindByHandMain;
-    }
-
-    @JsonProperty("ButtonsForNinteichosaIraiByHand")
-    public ButtonsForNinteichosaIraiByHandDiv getButtonsForNinteichosaIraiByHand() {
-        return ButtonsForNinteichosaIraiByHand;
-    }
-
-    @JsonProperty("ButtonsForNinteichosaIraiByHand")
-    public void setButtonsForNinteichosaIraiByHand(ButtonsForNinteichosaIraiByHandDiv ButtonsForNinteichosaIraiByHand) {
-        this.ButtonsForNinteichosaIraiByHand=ButtonsForNinteichosaIraiByHand;
     }
 
 }
