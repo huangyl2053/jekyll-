@@ -24,8 +24,6 @@ public class ShinsaKekkaJohoSakuseiTaishoshaDiv extends Panel {
      */
     @JsonProperty("dgTaishoshaIchiran")
     private DataGrid<dgTaishoshaIchiran_Row> dgTaishoshaIchiran;
-    @JsonProperty("btnDataSakusei")
-    private ButtonDialog btnDataSakusei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -41,16 +39,6 @@ public class ShinsaKekkaJohoSakuseiTaishoshaDiv extends Panel {
     @JsonProperty("dgTaishoshaIchiran")
     public void setDgTaishoshaIchiran(DataGrid<dgTaishoshaIchiran_Row> dgTaishoshaIchiran) {
         this.dgTaishoshaIchiran=dgTaishoshaIchiran;
-    }
-
-    @JsonProperty("btnDataSakusei")
-    public ButtonDialog getBtnDataSakusei() {
-        return btnDataSakusei;
-    }
-
-    @JsonProperty("btnDataSakusei")
-    public void setBtnDataSakusei(ButtonDialog btnDataSakusei) {
-        this.btnDataSakusei=btnDataSakusei;
     }
 
 }

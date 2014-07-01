@@ -28,6 +28,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "",
+       "selectedItem": "1",
        "dataSource": [
         {
          "key": "1",
@@ -38,8 +40,6 @@
          "value": "南魚沼市"
         }
        ],
-       "onChange": "",
-       "selectedItem": "1",
        "required": false,
        "labelLText": "保険者",
        "labelRText": "",
@@ -72,6 +72,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "onChange_radShutsuryokuKubun",
+       "selectedItem": "0",
        "dataSource": [
         {
          "key": "0",
@@ -82,17 +84,15 @@
          "value": "認定結果（再送）"
         }
        ],
-       "onClick": "",
-       "icon": [],
-       "onChange": "onChange_radShutsuryokuKubun",
-       "selectedItem": "0",
        "required": false,
        "labelLText": "出力区分",
        "labelLWidth": "S",
        "labelLAlign": 2,
+       "onClick": "",
        "newLineItemNumber": 2,
        "spaceSize": "M",
-       "disabledItem": []
+       "disabledItem": [],
+       "icon": []
       },
       {
        "fieldName": "txtNinteiKekkaKakuninKikan",
@@ -162,12 +162,12 @@
        "helpMessageID": "",
        "jpControlName": "",
        "onClick": "onClick_btnHyoji",
+       "icon": 0,
        "text": "対象被保険者を表示する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0,
        "heightTextBoxMatches": false
       }
      ],
@@ -213,7 +213,7 @@
      "height": "Auto"
     },
     {
-     "fieldName": "ShinsaKekkaJohoSakuseiTishosha",
+     "fieldName": "ShinsaKekkaJohoSakuseiTaishosha",
      "items": [
       {
        "fieldName": "dgTaishoshaIchiran",
@@ -237,6 +237,7 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "M",
+       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -441,10 +442,14 @@
        "onSelectBySelectButton": "",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "dataSource": [],
        "sortOrder": "dataOutputDate",
        "isAscending": true,
        "filterList": [],
@@ -465,7 +470,7 @@
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "XS",
-     "selectControlID": "ShinsaKekkaJohoSakuseiTishosha",
+     "selectControlID": "ShinsaKekkaJohoSakuseiTaishosha",
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
@@ -474,7 +479,7 @@
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "ShinsaKekkaJohoSakuseiTishosha"
+       "postParameterPanelNames": "ShinsaKekkaJohoSakuseiTaishosha"
       }
      ],
      "requestSettings": [],
@@ -585,7 +590,7 @@
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "ShinsaKekkaJohoSakuseiTishosha",
+     "visibleDiv": "ShinsaKekkaJohoSakuseiTaishosha",
      "panelState": "visible",
      "fixedDiv": ""
     },
@@ -599,7 +604,7 @@
    "events": []
   }
  ],
- "currentState": "作成指示",
+ "currentState": "All",
  "id": "DBE5050001",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -611,7 +616,7 @@
    "ShinsaKekkaSyutsuryokuJokenNyuryoku"
   ],
   [
-   "ShinsaKekkaJohoSakuseiTishosha"
+   "ShinsaKekkaJohoSakuseiTaishosha"
   ]
  ],
  "panelMargin": 1,
