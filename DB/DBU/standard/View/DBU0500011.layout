@@ -387,6 +387,8 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "onSelectBySelectButton": "onSelectBySelectButton_dgShoKaishuJokyo",
+     "onSelectByDblClick": "onSelectByDblClick_dgShoKaishuJokyo",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -398,6 +400,8 @@
       "isShowSelectButtonColumn": false,
       "isShowModifyButtonColumn": false,
       "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -416,7 +420,7 @@
          "cellType": 8,
          "text": "",
          "onClick": "onClick_btnSelect",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -583,9 +587,7 @@
         "sortKey": ""
        }
       ]
-     },
-     "onSelectByDblClick": "onSelectByDblClick_dgShoKaishuJokyo",
-     "onSelectBySelectButton": "onSelectBySelectButton_SearchResultShoKaishuJokyoList"
+     }
     }
    ],
    "controlType": "Panel",

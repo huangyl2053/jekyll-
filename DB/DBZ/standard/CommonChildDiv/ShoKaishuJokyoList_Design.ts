@@ -102,6 +102,10 @@ module DBZ {
      "marginLeft": "0",
      "marginRight": "0",
      "selectControlID": "dgShoKaishuJokyo",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "height": "S",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -113,6 +117,8 @@ module DBZ {
       "isShowSelectButtonColumn": false,
       "isShowModifyButtonColumn": false,
       "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -131,7 +137,7 @@ module DBZ {
          "cellType": 8,
          "text": "",
          "onClick": "onClick_btnSelect",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -299,13 +305,17 @@ module DBZ {
        }
       ]
      },
-     "height": "S",
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "onSelectByDblClick_dgShoKaishuJokyo",
      "onSelectBySelectButton": "onSelectBySelectButton_dgShoKaishuJokyo",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -331,6 +341,8 @@ module DBZ {
    "marginLeft": "0",
    "marginRight": "0",
    "selectControlID": "ShoKaishuJokyoList",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "marginTop": "Default",
@@ -347,15 +359,13 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": "CommonChildDiv",
@@ -370,9 +380,11 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": 0,
- "marginRight": 0,
+ "marginLeft": "0",
+ "marginRight": "0",
  "selectControlID": "defaultLayout",
+ "helpMessageID": "",
+ "jpControlName": "",
  "relation": [],
  "businessId": "DBZ",
  "controlName": "ShoKaishuJokyoList",
@@ -397,7 +409,9 @@ module DBZ {
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }
