@@ -46,7 +46,7 @@ public class TajutokuTekiyoJoho {
     public ResponseData onClick_btnToDecide(TajutokuTekiyoJohoDiv tajutokuDiv, TajutokuTaishoshaSearchDiv searchDiv) {
         ResponseData<TajutokuTekiyoJohoDiv> response = new ResponseData<>();
 
-        DemoKojin demoKojin = new DemoKojin();
+        DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setTajutokuJoho(tajutokuDiv.getDgJushochiTokureiRireki(), hihokenshaNo);
         ShisetsuJoho.setJutokuMode(tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho());

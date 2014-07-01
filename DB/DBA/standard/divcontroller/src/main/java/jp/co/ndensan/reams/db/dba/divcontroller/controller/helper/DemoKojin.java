@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.helper;
 
+import java.util.HashMap;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -16,10 +18,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DemoKojin {
 
     private static final RString demoKojin = new RString("demoKojin.yml");
-    private final ControlGenerator generator;
+    private ControlGenerator generator;
 
-    public DemoKojin() {
-        generator = new ControlGenerator(YamlLoader.DBA.loadAsMap(demoKojin));
+    public DemoKojin(String hihokenshaKubun) {
+        List<HashMap> yamlDataList = YamlLoader.DBA.loadAsList(demoKojin);
+        generator = null;
+        for (HashMap yamlData : yamlDataList) {
+            ControlGenerator nestGenerator = new ControlGenerator(yamlData);
+            if (nestGenerator.getAsRString("被保区分").equals(new RString(hihokenshaKubun))) {
+                generator = nestGenerator;
+            }
+        }
+
+        if (generator == null) {
+            generator = new ControlGenerator(YamlLoader.DBA.loadAsList(demoKojin).get(0));
+        }
     }
 
     public RString getShikibetsuCode() {

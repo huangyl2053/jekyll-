@@ -78,7 +78,7 @@ public class ShikakuShutokuJoho {
     public ResponseData onClick_btnToDecide(ShikakuShutokuJohoDiv shikakuJohoDiv, ShikakuShutokuSearchDiv searchDiv) {
         ResponseData<ShikakuShutokuJohoDiv> response = new ResponseData<>();
 
-        DemoKojin demoKojin = new DemoKojin();
+        DemoKojin demoKojin = new DemoKojin("第2号");
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
 
         setShikakuJoho(shikakuJohoDiv, shikibetsuCode);
@@ -199,8 +199,10 @@ public class ShikakuShutokuJoho {
         if (dataSource.isEmpty()) {
             shikakuJohoDiv.setIryoHokenInputMode(IRYO_HOKEN_ADD);
             setIryoHokenDisabled(tplIryoHoken, false);
+            tplIryoHoken.getBtnAddIryoHoken().setDisabled(true);
         } else {
             setIryoHokenDisabled(tplIryoHoken, true);
+            tplIryoHoken.getBtnAddIryoHoken().setDisabled(false);
         }
     }
 
@@ -531,7 +533,7 @@ public class ShikakuShutokuJoho {
         row.setShutokuJiyu(shutoku.getDdlShikakuShutokuJiyu().getSelectedValue());
         row.setShutokuJiyuKey(shutoku.getDdlShikakuShutokuJiyu().getSelectedItem());
 
-        FlexibleDate nenreiTotatsuDate = dateOfBirth.plusYear(65);
+        FlexibleDate nenreiTotatsuDate = dateOfBirth.plusYear(65).minusDay(1);
         if (nenreiTotatsuDate.isBefore(row.getShutokuDate().getValue())) {
             row.setHihokenshaKubun(new RString("第1号"));
             row.getNenreiTotatsuDate().setValue(nenreiTotatsuDate);
@@ -660,6 +662,7 @@ public class ShikakuShutokuJoho {
         }
 
         setIryoHokenDisabled(tplIryoHoken, true);
+        tplIryoHoken.getBtnAddIryoHoken().setDisabled(false);
         clearIryoHokenInput(tplIryoHoken);
         response.data = shikakuJohoDiv;
         return response;

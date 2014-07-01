@@ -39,7 +39,7 @@ public class ShikakuShutokuTaishoshaJoho {
     public ResponseData onClick_btnToDecide(ShikakuShutokuTaishoshaJohoDiv taishoshaJohoDiv, ShikakuShutokuSearchDiv searchDiv) {
         ResponseData<ShikakuShutokuTaishoshaJohoDiv> response = new ResponseData<>();
 
-        DemoKojin demoKojin = new DemoKojin();
+        DemoKojin demoKojin = new DemoKojin("第2号");
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         AtenaShokaiSimple.setData(taishoshaJohoDiv.getShikakuShutokuCommonJoho().getAtenaInfo(), new ShikibetsuCode(shikibetsuCode));

@@ -92,7 +92,7 @@ public class HihokenshaShokaiPanelSelect {
      */
     private HihokenshaShokaiShikakuTokusoDiv setShikakuDiv(HihokenshaShokaiShikakuTokusoDiv shikakuDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        DemoKojin demoKojin = new DemoKojin();
+        DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setShikakuTokusoJoho(shikakuDiv.getShikakuTokusoRireki().getDgShikakuShutokuRireki(), hihokenshaNo);
         return shikakuDiv;
@@ -166,7 +166,7 @@ public class HihokenshaShokaiPanelSelect {
      */
     private HihokenshaShokaiSetaiShokaiDiv setSetaiDiv(HihokenshaShokaiSetaiShokaiDiv setaiDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        DemoKojin demoKojin = new DemoKojin();
+        DemoKojin demoKojin = new DemoKojin("第1号");
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         setSetaiJoho(setaiDiv.getDgSetaiJoho(), shikibetsuCode);
         return setaiDiv;
@@ -346,7 +346,7 @@ public class HihokenshaShokaiPanelSelect {
     private HihokenshaShokaiShisetsuNyutaishoDiv setNyutaishoDiv(HihokenshaShokaiShisetsuNyutaishoDiv nyutaishoDiv,
             HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        DemoKojin demoKojin = new DemoKojin();
+        DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setNyutaishoJoho(nyutaishoDiv.getShisetsuNyutaishoRireki().getDgShisetsuNyutaishoRireki(), hihokenshaNo);
         return nyutaishoDiv;
@@ -399,7 +399,7 @@ public class HihokenshaShokaiPanelSelect {
     private HihokenshaShokaiShoKofuKaishuDiv setShoKofuKaishuDiv(HihokenshaShokaiShoKofuKaishuDiv nyutaishoDiv,
             HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        DemoKojin demoKojin = new DemoKojin();
+        DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setShoKofuKaishuJoho(nyutaishoDiv.getShoKofuKaishuKiroku().getShoKaishuJokyoList().getDgShoKaishuJokyo(), hihokenshaNo);
         return nyutaishoDiv;
@@ -450,7 +450,7 @@ public class HihokenshaShokaiPanelSelect {
     private HihokenshaShokaiShinseiTodokedeDiv setShinseiTodokedeDiv(HihokenshaShokaiShinseiTodokedeDiv todokedeDiv,
             HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
-        DemoKojin demoKojin = new DemoKojin();
+        DemoKojin demoKojin = new DemoKojin("第1号");
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         setTodokedeJoho(todokedeDiv.getDgShinseishoTodokede(), shikibetsuCode);
         return todokedeDiv;

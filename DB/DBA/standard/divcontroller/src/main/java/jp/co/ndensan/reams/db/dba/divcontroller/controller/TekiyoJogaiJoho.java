@@ -44,7 +44,7 @@ public class TekiyoJogaiJoho {
     public ResponseData onClick_btnToDecide(TekiyoJogaiJohoDiv tekiyoJogaiJohoDiv, TekiyoJogaiTaishoshaSearchDiv searchDiv) {
         ResponseData<TekiyoJogaiJohoDiv> response = new ResponseData<>();
 
-        DemoKojin demoKojin = new DemoKojin();
+        DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         //RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
         setTekiyoJogaiGrid(tekiyoJogaiJohoDiv.getDgTekiyoJogaiRireki(), hihokenshaNo);

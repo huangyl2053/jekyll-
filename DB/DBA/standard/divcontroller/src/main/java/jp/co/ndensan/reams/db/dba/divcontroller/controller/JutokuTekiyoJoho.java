@@ -67,7 +67,7 @@ public class JutokuTekiyoJoho {
     public ResponseData onClick_btnToDecide(JutokuTekiyoJohoDiv jutokuTekiyoJohoDiv, JutokuTekiyoSearchDiv searchDiv) {
         ResponseData<JutokuTekiyoJohoDiv> response = new ResponseData<>();
 
-        DemoKojin demoKojin = new DemoKojin();
+        DemoKojin demoKojin = new DemoKojin("第1号");
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
 
         setShikakuJoho(jutokuTekiyoJohoDiv, shikibetsuCode);

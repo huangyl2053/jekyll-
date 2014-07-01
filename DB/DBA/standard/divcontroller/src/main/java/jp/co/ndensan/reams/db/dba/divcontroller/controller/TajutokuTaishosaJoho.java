@@ -38,7 +38,7 @@ public class TajutokuTaishosaJoho {
     public ResponseData onClick_btnToDecide(TajutokuTaishosaJohoDiv taishoshaJohoDiv, TajutokuTaishoshaSearchDiv searchDiv) {
         ResponseData<TajutokuTaishosaJohoDiv> response = new ResponseData<>();
 
-        DemoKojin demoKojin = new DemoKojin();
+        DemoKojin demoKojin = new DemoKojin("第1号");
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         AtenaShokaiSimple.setData(taishoshaJohoDiv.getAtenaJoho(), new ShikibetsuCode(shikibetsuCode));

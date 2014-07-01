@@ -47,7 +47,7 @@ public class ShisetsuNyutaishoIdo {
         ResponseData<ShisetsuNyutaishoIdoDiv> response = new ResponseData<>();
         ShisetsuNyutaishoRirekiKanriDiv rirekiKanriDiv = idoRirekiDiv.getShisetsuNyutaishoKanri();
 
-        DemoKojin demoKojin = new DemoKojin();
+        DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         List<HashMap> idoRirekiList = getIdoRireki(hihokenshaNo);
 
