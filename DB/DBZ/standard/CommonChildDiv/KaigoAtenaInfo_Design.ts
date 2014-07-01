@@ -134,20 +134,6 @@ module DBZ {
             }
         }
         
-        public get NihonjinGaikokujin_visible() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["NihonjinGaikokujin_visible"];
-        }
-        
-        public set NihonjinGaikokujin_visible(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["NihonjinGaikokujin_visible"] = value;
-            } else {
-                this.layout.items[0].items[0]["NihonjinGaikokujin_visible"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
         public get JuminJotai_visible() {
             return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["JuminJotai_visible"];
         }
@@ -545,7 +531,6 @@ module DBZ {
             Uz.JSControlUtil.registProperty("Nenrei_visible");
             Uz.JSControlUtil.registProperty("Seibetsu_visible");
             Uz.JSControlUtil.registProperty("JuminShubetsu_Visible");
-            Uz.JSControlUtil.registProperty("NihonjinGaikokujin_visible");
             Uz.JSControlUtil.registProperty("JuminJotai_visible");
             Uz.JSControlUtil.registProperty("YubinNo_visible");
             Uz.JSControlUtil.registProperty("Jusho_visible");
@@ -591,7 +576,6 @@ module DBZ {
             editablePropertyInfo["Nenrei_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["Nenrei_visible"];
             editablePropertyInfo["Seibetsu_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["Seibetsu_visible"];
             editablePropertyInfo["JuminShubetsu_Visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["JuminShubetsu_visible"];
-            editablePropertyInfo["NihonjinGaikokujin_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["NihonjinGaikokujin_visible"];
             editablePropertyInfo["JuminJotai_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["JuminJotai_visible"];
             editablePropertyInfo["YubinNo_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["YubinNo_visible"];
             editablePropertyInfo["Jusho_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["Jusho_visible"];
@@ -813,11 +797,6 @@ module DBZ {
    "publicChildFieldName": "atenaInfo",
    "publicChildProperty": "JuminShubetsu_visible",
    "newPropertyName": "JuminShubetsu_Visible"
-  },
-  {
-   "publicChildFieldName": "atenaInfo",
-   "publicChildProperty": "NihonjinGaikokujin_visible",
-   "newPropertyName": "NihonjinGaikokujin_visible"
   },
   {
    "publicChildFieldName": "atenaInfo",
