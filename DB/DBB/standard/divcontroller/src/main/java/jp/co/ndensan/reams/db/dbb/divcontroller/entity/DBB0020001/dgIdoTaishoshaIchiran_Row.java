@@ -3,11 +3,12 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jun 04 10:44:57 JST 2014 
+ * Sat Jun 21 15:39:13 JST 2014 
  */
 
 
 
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
@@ -32,6 +33,14 @@ public class dgIdoTaishoshaIchiran_Row extends DataRow {
 
     public dgIdoTaishoshaIchiran_Row() {
         super();
+        this.txtGaitoRenban = RString.EMPTY;
+        this.txtHihoNo = RString.EMPTY;
+        this.txtShikibetsuCode = RString.EMPTY;
+        this.txtTsuchishoNo = RString.EMPTY;
+        this.txtShimei = RString.EMPTY;
+        this.txtIdoYMD = RString.EMPTY;
+        this.txtIdoZiyu = RString.EMPTY;
+        this.ddlNextSagyo = new DropDownList();
     }
 
     public dgIdoTaishoshaIchiran_Row(RString txtGaitoRenban, RString txtHihoNo, RString txtShikibetsuCode, RString txtTsuchishoNo, RString txtShimei, RString txtIdoYMD, RString txtIdoZiyu, DropDownList ddlNextSagyo) {
@@ -53,6 +62,19 @@ public class dgIdoTaishoshaIchiran_Row extends DataRow {
         this.txtIdoZiyu = txtIdoZiyu;
         this.ddlNextSagyo = ddlNextSagyo;
     }
+
+//    public dgIdoTaishoshaIchiran_Row(DataGridSetting gridSetting) {
+//        super();
+//        this.txtGaitoRenban = RString.EMPTY;
+//        this.txtHihoNo = RString.EMPTY;
+//        this.txtShikibetsuCode = RString.EMPTY;
+//        this.txtTsuchishoNo = RString.EMPTY;
+//        this.txtShimei = RString.EMPTY;
+//        this.txtIdoYMD = RString.EMPTY;
+//        this.txtIdoZiyu = RString.EMPTY;
+//        this.ddlNextSagyo = DropDownList.createInstance(gridSetting.getColumn("ddlNextSagyo").getCellDetails());
+//        this.setOriginalData("ddlNextSagyo", ddlNextSagyo);
+//    }
 
     public RString getTxtGaitoRenban() {
         return txtGaitoRenban;

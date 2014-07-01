@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -31,7 +32,9 @@ public class Tokucho {
     public static final RString IDOANDIRAI = new RString("IdoAndIrai.yml");
     public static final RString TOKUCHORESULT = new RString("TokuchoResult.yml");
         
-    public ResponseData<TokuchoDiv> onClick_btnTokucho(TokuchoDiv div, FukaRirekiDiv rirekiDiv) {
+    public ResponseData<TokuchoDiv> onClick_btnTokucho(TokuchoDiv div) {
+        
+        FukaRirekiDiv rirekiDiv = (FukaRirekiDiv) ViewStateHolder.get("賦課履歴", FukaRirekiDiv.class);
         
         div.setDisplayNone(false);
         

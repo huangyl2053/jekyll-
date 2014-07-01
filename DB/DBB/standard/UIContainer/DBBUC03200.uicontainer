@@ -1,0 +1,42 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "0",
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0010003",
+   "eventName": "SelectFukaTaishosha",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toEventName": ""
+  },
+  {
+   "id": "1",
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320001",
+   "eventName": "fukaShokai",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320002",
+   "toEventName": "atenaLoad"
+  },
+  {
+   "id": "2",
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320002",
+   "eventName": "FukaRirekiShokai",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toEventName": ""
+  },
+  {
+   "id": "3",
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320003",
+   "eventName": "fukaShokai",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toEventName": ""
+  }
+ ],
+ "subGyomuCode": "DBB",
+ "uiContainerName": "DBBUC03200"
+}

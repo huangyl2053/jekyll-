@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
@@ -26,6 +27,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  * @author n8211
  */
 public class HonsanteiFukaKakunin {
+
+    private static final RString ShoriNaiyo = new RString("DBB0310001/ShoriNaiyo.yml");
 
     /**
      * 初期ロード時に実行
@@ -42,7 +45,12 @@ public class HonsanteiFukaKakunin {
     }
 
     private void setParam(HonsanteiFukaKakuninDiv honsanteiFukaKakuninDiv) {
-        honsanteiFukaKakuninDiv.getHonsanteiShoriNaiyo().getTxtFukaNendo().setValue(new RString("平26"));
+        List<HashMap> demoData = YamlLoader.DBB.loadAsList(ShoriNaiyo);
+        ControlGenerator cg = new ControlGenerator(demoData.get(0));
+
+        honsanteiFukaKakuninDiv.getHonsanteiShoriNaiyo().getTxtChoteiNendo().setValue(cg.getAsRString("調定年度"));
+        honsanteiFukaKakuninDiv.getHonsanteiShoriNaiyo().getTxtFukaNendo().setValue(cg.getAsRString("賦課年度"));
+        honsanteiFukaKakuninDiv.getHonsanteiShoriNaiyo().getTxtShotokuKijunYMD().setValue(cg.getAsRDate("所得異動基準日"));
         setShoriJokyo(honsanteiFukaKakuninDiv);
         setKanriJoho1(honsanteiFukaKakuninDiv);
         setKanriJoho2(honsanteiFukaKakuninDiv);

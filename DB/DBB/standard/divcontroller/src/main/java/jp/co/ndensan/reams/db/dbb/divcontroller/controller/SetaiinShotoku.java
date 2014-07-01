@@ -34,8 +34,10 @@ public class SetaiinShotoku {
     private static final RString SETAISHOTOKU = new RString("SetaiShotoku.yml");
     private static final RString OTHER = new RString("other.yml");    
     
-    public ResponseData<SetaiinShotokuDiv> onClick_btnSetaiinnShotoku(SetaiinShotokuDiv div, FukaRirekiDiv rirekiDiv) {
+    public ResponseData<SetaiinShotokuDiv> onClick_btnSetaiinShotoku(SetaiinShotokuDiv div) {
 
+        FukaRirekiDiv rirekiDiv = (FukaRirekiDiv) ViewStateHolder.get("賦課履歴", FukaRirekiDiv.class);
+        
         div.setDisplayNone(false);
         
         loadSetaiinShotoku(div, rirekiDiv, new RString("onClick"));
@@ -44,7 +46,9 @@ public class SetaiinShotoku {
     }
     
     
-    public ResponseData<SetaiinShotokuDiv> onChange_chkSetaiIchiranAll(SetaiinShotokuDiv div, FukaRirekiDiv rirekiDiv) {
+    public ResponseData<SetaiinShotokuDiv> onChange_chkSetaiIchiranAll(SetaiinShotokuDiv div) {
+        
+        FukaRirekiDiv rirekiDiv = (FukaRirekiDiv) ViewStateHolder.get("賦課履歴", FukaRirekiDiv.class);
         
         div.setDisplayNone(false);
         
@@ -61,7 +65,7 @@ public class SetaiinShotoku {
      * @param fukaRirekiDiv
      * @return 
      */
-    public ResponseData<SetaiinShotokuDiv>  onClick_DisplayedAligned(SetaiinShotokuDiv div, FukaRirekiDiv fukaRirekiDiv) {
+    public ResponseData<SetaiinShotokuDiv>  onClick_DisplayedAligned(SetaiinShotokuDiv div) {
         //ViewStateに格納
         ViewStateHolder.put("世帯所得", div);
         ViewStateHolder.put("mode", new RString("displayedAligned"));
@@ -252,6 +256,8 @@ public class SetaiinShotoku {
         
         buf.delete(0, buf.length());
         buf.append((RString)dataGrid.get(4));
+        //生年月日と性別の間にスペースを入れる
+        buf.append("　");
         buf.append((RString)dataGrid.get(5));
         buf.append("<br>");
         buf.append((RString)dataGrid.get(6));
