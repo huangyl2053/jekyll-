@@ -67,9 +67,47 @@ public class NinteichosaIraiList {
         NinteichosaIraiListHolder.saveNinteichosaIraiList(Collections.EMPTY_LIST);
         sortByHihokenshaNo(list);
         dataGrid.setDataSource(list);
+        setDisableOrNot_btnComplete(list);
 
         response.data = div;
         return response;
+    }
+
+    private void setDisableOrNot_btnComplete(List list) {
+        setDisabled_btnToComplete(true);
+        for (Object obj : list) {
+            if (has調査依頼日(obj)) {
+                setDisabled_btnToComplete(false);
+                return;
+            }
+        }
+    }
+
+    private boolean has調査依頼日(Object obj) {
+        if (obj.getClass() == dgNinteichosaIraiList_Row.class) {
+            return !isEmpty(((dgNinteichosaIraiList_Row) obj).get調査依頼日().getValue());
+        } else if (obj.getClass() == LinkedHashMap.class) {
+            try {
+                RString dateString
+                        = new RString(this.<LinkedHashMap<String, String>>toLinkedHashMap(obj).get("調査依頼日").get("value"));
+                return dateString.length() != 0;
+            } catch (ClassCastException e) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    private boolean isEmpty(FlexibleDate date) {
+        return date == null || date.isEmpty();
+    }
+
+    private <T> LinkedHashMap<String, T> toLinkedHashMap(Object obj) {
+        return (LinkedHashMap<String, T>) obj;
+    }
+
+    private void setDisabled_btnToComplete(boolean disabled) {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToComplete"), disabled);
     }
 
     private void sortByHihokenshaNo(List<dgNinteichosaIraiList_Row> list) {
@@ -133,7 +171,7 @@ public class NinteichosaIraiList {
 
         List<dgNinteichosaIraiList_Row> list = new ArrayList<>();
         for (dgNinteichosaIraiList_Row selectedItem : grid.getSelectedItems()) {
-            if (selectedItem.get依頼書発行済()) {
+            if (has調査依頼日(selectedItem)) {
                 selectedItem.get調査依頼完了日().setValue(FlexibleDate.getNowDate());
             }
             list.add(selectedItem);
@@ -183,7 +221,7 @@ public class NinteichosaIraiList {
     /**
      * 調査依頼対象のデモ用データを持ちます。
      */
-//<editor-fold defaultstate="collapsed" desc="Demodata">
+    //<editor-fold defaultstate="collapsed" desc="Demodata">
     private static final class DemoData {
 
         private final List<dgNinteichosaIraiList_Row> chosaIraiTargets;
