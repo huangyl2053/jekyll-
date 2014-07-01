@@ -286,7 +286,8 @@
        "labelLAlign": 0,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblTokuKaishiInjiType",
@@ -516,7 +517,8 @@
        "labelLAlign": 0,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblKetteiTsuchiBunshoNo",
@@ -587,7 +589,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       }
      ],
      "controlType": "PanelPublish",
@@ -679,7 +682,8 @@
        "labelLAlign": 0,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblHenkoTsuchiBunshoNo",
@@ -750,7 +754,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       }
      ],
      "controlType": "PanelPublish",
@@ -842,7 +847,8 @@
        "labelLAlign": 0,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "ddlNotsuShuturyokuKi",
@@ -1196,7 +1202,8 @@
        "labelLAlign": 0,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblGemmenTsuchiBunshoNo",
@@ -1267,7 +1274,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       }
      ],
      "controlType": "PanelPublish",
@@ -1359,7 +1367,8 @@
        "labelLAlign": 0,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblChoshuYuyoTsuchiBunshoNo",
@@ -1430,7 +1439,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       }
      ],
      "controlType": "PanelPublish",
@@ -1829,7 +1839,8 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtFukaNendo",
@@ -1874,7 +1885,8 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtKoseiM",
@@ -1919,7 +1931,8 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtKoseiYMD",
@@ -1964,7 +1977,8 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "InjiNaiyoSettei",
@@ -2058,7 +2072,8 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": ""
+         "decorationClass": "",
+         "permitCharactor": ""
         },
         {
          "fieldName": "txtChoteiJiyu2",
@@ -2103,7 +2118,8 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": ""
+         "decorationClass": "",
+         "permitCharactor": ""
         },
         {
          "fieldName": "txtChoteiJiyu3",
@@ -2148,7 +2164,8 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": ""
+         "decorationClass": "",
+         "permitCharactor": ""
         },
         {
          "fieldName": "txtChoteiJiyu4",
@@ -2193,7 +2210,8 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": ""
+         "decorationClass": "",
+         "permitCharactor": ""
         }
        ],
        "controlType": "Panel",

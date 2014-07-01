@@ -43,7 +43,6 @@
      "Nenrei_visible": true,
      "Seibetsu_visible": true,
      "JuminShubetsu_Visible": true,
-     "NihonjinGaikokujin_visible": true,
      "JuminJotai_visible": true,
      "YubinNo_visible": true,
      "Jusho_visible": true,
@@ -70,7 +69,8 @@
      "AgeArrivalDay": "1",
      "SubGyomuUmu": "0",
      "SubGyomuSearchUmu": "0",
-     "DainoninHyojiUmu": "1"
+     "DainoninHyojiUmu": "1",
+     "NihonjinGaikokujin_visible": true
     },
     {
      "fieldName": "SokujiKouseiKihon",
@@ -309,6 +309,11 @@
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -543,7 +548,8 @@
        "value": "3期（8月）"
       }
      ],
-     "selectedItem": "7"
+     "selectedItem": "7",
+     "disabledItem": []
     },
     {
      "fieldName": "tabSokujiKousei",
@@ -2061,7 +2067,8 @@
              "value": "平27"
             }
            ],
-           "selectedItem": "key0"
+           "selectedItem": "key0",
+           "disabledItem": []
           },
           {
            "fieldName": "tblKiwarigaku",
@@ -13533,7 +13540,7 @@
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "完了",
  "id": "DBB8120001",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -13610,7 +13617,9 @@
      "state": "即時賦課更正"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   },
   {
    "commonButtonAreaId": "Kobetsutsuchi",
@@ -13657,6 +13666,40 @@
       "progressVisible": false,
       "additionalText": "通知書を"
      }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnKouseiNext",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnKouseiNext",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "続けて更新",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 1,
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": "する"
+     }
     }
    ],
    "states": [
@@ -13664,7 +13707,9 @@
      "state": "完了"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
