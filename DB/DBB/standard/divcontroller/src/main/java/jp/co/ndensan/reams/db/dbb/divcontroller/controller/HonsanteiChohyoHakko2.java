@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonsanteiChohyoHakko2Div;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.dgHonsanteiTsuchisho_Row;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonTsuchiKobetsuJohoDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonsanteiChohyoHakko2Div;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -44,7 +45,7 @@ public class HonsanteiChohyoHakko2 {
         response.data = div;
         return response;
     }
-
+    
     private void loadDataGrid(HonsanteiChohyoHakko2Div div) {
 
         List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(ChohyoHakkoShiji);
@@ -73,4 +74,9 @@ public class HonsanteiChohyoHakko2 {
         DataGrid<dgHonsanteiTsuchisho_Row> grid = div.getDgHonsanteiTsuchisho();
         grid.setDataSource(dataGrid);
     }
+  
+    public ResponseData<HonsanteiChohyoHakko2Div> change_txtKetteiTsuchiYousikiSettei(HonsanteiChohyoHakko2Div div) {
+        div.getHonTsuchiKobetsuJoho().getTxtKetteiTsuchiYousikiSettei().setValue(new RString("還付対象者、特徴が中止となった被保険者は変更通知書を出力"));
+        return _createResponseData(div);
+    }    
 }
