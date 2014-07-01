@@ -79,12 +79,30 @@ var DBC;
         });
 
 
+        Object.defineProperty(JutakuKaishuShinseiDetailInput_Design.prototype, "dg_gridSetting", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"] = value;
+                } else {
+                    this.layout.items[0].items[0]["gridSetting"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         JutakuKaishuShinseiDetailInput_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("txtChakkoDate_lableLText");
             Uz.JSControlUtil.registProperty("txtKanseiDate_lableLText");
             Uz.JSControlUtil.registProperty("onClick_btnModifyDetail");
             Uz.JSControlUtil.registProperty("btnModify_text");
+            Uz.JSControlUtil.registProperty("dg_gridSetting");
         };
 
         JutakuKaishuShinseiDetailInput_Design.prototype.getEditablePropertyInfo = function () {
@@ -93,6 +111,7 @@ var DBC;
             editablePropertyInfo["txtKanseiDate_lableLText"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[6]["fieldName"]).getEditablePropertyInfo()["labelLText"];
             editablePropertyInfo["onClick_btnModifyDetail"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).getEditablePropertyInfo()["onClick"];
             editablePropertyInfo["btnModify_text"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).getEditablePropertyInfo()["text"];
+            editablePropertyInfo["dg_gridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
 
             return editablePropertyInfo;
         };
@@ -123,7 +142,7 @@ var DBC;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
-                            "height": "227",
+                            "height": "221",
                             "gridSetting": {
                                 "rowHeight": 25,
                                 "isMultiSelectable": false,
@@ -299,18 +318,17 @@ var DBC;
                                     "jpControlName": "",
                                     "readOnly": false,
                                     "height": "XS",
+                                    "onChange": "",
                                     "required": false,
                                     "maxLength": 100000000,
                                     "minLength": 0,
                                     "placeHolder": "",
                                     "textKind": 0,
                                     "isPrivateInfo": false,
-                                    "limitLength": "",
-                                    "countDisp": false,
                                     "onFocus": "",
                                     "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
+                                    "text": "",
                                     "value": "",
                                     "labelLText": "改修の内容・<br>箇所及び規模",
                                     "labelRText": "",
@@ -318,7 +336,8 @@ var DBC;
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
-                                    "text": ""
+                                    "limitLength": "",
+                                    "countDisp": false
                                 },
                                 {
                                     "fieldName": "txtKaishuJigyoshaName",
@@ -341,16 +360,21 @@ var DBC;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
+                                    "onChange": "",
                                     "required": false,
                                     "maxLength": 100000000,
                                     "minLength": 0,
+                                    "textAlign": 0,
                                     "placeHolder": "",
                                     "textKind": 0,
                                     "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
                                     "onFocus": "",
                                     "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
                                     "value": "",
                                     "labelLText": "事業者",
                                     "labelRText": "",
@@ -358,11 +382,6 @@ var DBC;
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
-                                    "textAlign": 0,
-                                    "isPassword": false,
-                                    "isComboBox": false,
-                                    "text": "",
-                                    "suggest": [],
                                     "decorationClass": "",
                                     "permitCharactor": ""
                                 },
@@ -442,16 +461,21 @@ var DBC;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
+                                    "onChange": "",
                                     "required": false,
                                     "maxLength": 100000000,
                                     "minLength": 0,
+                                    "textAlign": 0,
                                     "placeHolder": "",
                                     "textKind": 0,
                                     "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
                                     "onFocus": "",
                                     "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
                                     "value": "",
                                     "labelLText": "",
                                     "labelRText": "",
@@ -459,11 +483,6 @@ var DBC;
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
-                                    "textAlign": 0,
-                                    "isPassword": false,
-                                    "isComboBox": false,
-                                    "text": "",
-                                    "suggest": [],
                                     "decorationClass": "",
                                     "permitCharactor": ""
                                 },
@@ -488,14 +507,16 @@ var DBC;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
+                                    "onChange": "",
                                     "required": false,
                                     "placeHolder": "",
                                     "textKind": 0,
                                     "isPrivateInfo": false,
+                                    "isPassword": false,
                                     "onFocus": "",
                                     "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
+                                    "text": "",
                                     "value": "",
                                     "labelLText": "着工予定日",
                                     "labelRText": "",
@@ -503,8 +524,6 @@ var DBC;
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
-                                    "isPassword": false,
-                                    "text": "",
                                     "ymdKubun": 2,
                                     "displayFormat": 0,
                                     "permitCharactor": "./_-"
@@ -530,14 +549,16 @@ var DBC;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
+                                    "onChange": "",
                                     "required": false,
                                     "placeHolder": "",
                                     "textKind": 0,
                                     "isPrivateInfo": false,
+                                    "isPassword": false,
                                     "onFocus": "",
                                     "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
+                                    "text": "",
                                     "value": "",
                                     "labelLText": "完成予定日",
                                     "labelRText": "",
@@ -545,8 +566,6 @@ var DBC;
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
-                                    "isPassword": false,
-                                    "text": "",
                                     "ymdKubun": 2,
                                     "displayFormat": 0,
                                     "permitCharactor": "./_-"
@@ -572,16 +591,21 @@ var DBC;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
+                                    "onChange": "",
                                     "required": false,
                                     "maxLength": 100000000,
                                     "minLength": 0,
+                                    "textAlign": 2,
                                     "placeHolder": "",
                                     "textKind": 2,
                                     "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
                                     "onFocus": "",
                                     "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
                                     "value": "",
                                     "labelLText": "見積額",
                                     "labelRText": "",
@@ -589,18 +613,13 @@ var DBC;
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
-                                    "textAlign": 2,
-                                    "isPassword": false,
-                                    "isComboBox": false,
-                                    "text": "",
-                                    "suggest": [],
                                     "decorationClass": "",
+                                    "permitCharactor": "+-,.\\",
                                     "maxValue": 1.7976931348623157e+308,
                                     "minValue": 0,
                                     "isCurrency": false,
                                     "isComma": true,
-                                    "decimalPointLength": 0,
-                                    "permitCharactor": "+-,.\\"
+                                    "decimalPointLength": 0
                                 },
                                 {
                                     "fieldName": "btnClearDetail",
@@ -787,6 +806,11 @@ var DBC;
                     "publicChildFieldName": "btnModifyDetail",
                     "publicChildProperty": "text",
                     "newPropertyName": "btnModify_text"
+                },
+                {
+                    "publicChildFieldName": "dgJutakuKaishuDetail",
+                    "publicChildProperty": "gridSetting",
+                    "newPropertyName": "dg_gridSetting"
                 }
             ],
             "dataPassingForDialog": [],

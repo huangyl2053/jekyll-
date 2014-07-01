@@ -12,13 +12,13 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.controller.PaymentMethod;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailInput.JutakuKaishuDetailInputDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailInput.dgJutakuKaishuDetail_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiContentsPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiShinsaResultPanelDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShinseishaInfo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
@@ -35,7 +35,6 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      * 住宅改修費事前申請登録 事前申請内容の情報を表示する。
      *
      * @param contentsPanel 住宅改修事前申請panel
-     * @param resultPanel 住宅改修事前申請結果panel
      * @return ResponseData
      */
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onLoad(JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
@@ -54,7 +53,6 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 
         response.data = contentsPanel;
         return response;
-
     }
 
     /**
@@ -128,28 +126,7 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      申請者情報の初期値をセットします。
      */
     private void setShinseishaInfo(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
-
-        panel.getJutakuKaishuJizenShinseisha().getTxtJigyoshaNo().setDisabled(true);
-        /////////////////////////////////////////////////////////////////////////////////////////
-        //JutakuData.xml Read　②
-        String shinseiYMD = targetSource.get(5).get("shinseiYMD").toString();
-        String uketsukeYMD = targetSource.get(5).get("uketsukeYMD").toString();
-        String shinseishaName = targetSource.get(5).get("shinseishaName").toString();
-        String yubinNo = targetSource.get(5).get("yubinNo").toString();
-        String address = targetSource.get(5).get("address").toString();
-        String telNo = targetSource.get(5).get("telNo").toString();
-        String jigyoshaNo = targetSource.get(5).get("jigyoshaNo").toString();
-       /////////////////////////////////////////////////////////////////////////////////////////
-
-        //TO DO  JutakuData.xml Write　③
-        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
-        panel.getJutakuKaishuJizenShinseisha().getTxtShinseiDate().setValue(new RDate(shinseiYMD));
-        panel.getJutakuKaishuJizenShinseisha().getTxtUketsukeDate().setValue(new RDate(uketsukeYMD));
-        panel.getJutakuKaishuJizenShinseisha().getTxtShinseishaName().setValue(new RString(shinseishaName));
-        panel.getJutakuKaishuJizenShinseisha().getTxtYubinNo().setValue(new YubinNo(yubinNo));
-        panel.getJutakuKaishuJizenShinseisha().getTxtAddress().setValue(new RString(address));
-        panel.getJutakuKaishuJizenShinseisha().getTxtTelNo().setValue(new RString(telNo));
-        panel.getJutakuKaishuJizenShinseisha().getTxtJigyoshaNo().setValue(new RString(jigyoshaNo));
+        ShinseishaInfo.setData(panel.getJutakuKaishuJizenShinseisha(), 0);
     }
 
     /*
@@ -218,6 +195,9 @@ public class JutakuKaishuJizenShinseiContentsPanel {
                 getDgJutakuKaishuDetail().setDataSource(
                         getShikyuShinseiInputData(contentsPanel.getJutakuKaishuJizenShinseiDetail()
                                 .getJutakuJizenShinseiDetailInput().getJutakuKaishuDetailInput()));
+
+        contentsPanel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().getDgJutakuKaishuDetail()
+                .getDataSource().get(0).setRowState(RowState.Added);
 
         //クリア設定
         setJutakuKaishuJizenShinseiDetailInput(contentsPanel);

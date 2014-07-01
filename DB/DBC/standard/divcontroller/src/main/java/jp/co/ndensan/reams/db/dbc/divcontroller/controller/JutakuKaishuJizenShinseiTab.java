@@ -44,7 +44,8 @@ public class JutakuKaishuJizenShinseiTab {
     private void set住宅改修申請内容(JutakuKaishuJizenShinseiTabDiv panel) {
         int rowId = 0;
         ShinseishaInfo.setData(panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseisha(), rowId);
-        KozaPayment.setData(panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseiKoza(), rowId);
+        panel.getTabJizenShinsei().getTplJizenShinseiPayMethod().getPaymentMethod().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
+        KozaPayment.setData(panel.getTabJizenShinsei().getTplJizenShinseiPayMethod().getPaymentMethod().getKozaPayment(), rowId);
         set住宅改修明細List(panel);
 
         List<HashMap> targetSource = YamlLoader.DBC.loadAsList(new RString("JutakuKaishuShinsei.yml"));

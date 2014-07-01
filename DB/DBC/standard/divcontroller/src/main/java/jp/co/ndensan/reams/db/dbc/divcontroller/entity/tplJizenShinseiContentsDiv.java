@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiDetailForTabDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiReasonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KozaPayment.KozaPaymentDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfo.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
@@ -35,8 +34,6 @@ public class tplJizenShinseiContentsDiv extends TabPanel {
     private ShinseishaInfoDiv JutakuKaishuJizenShinseisha;
     @JsonProperty("JutakuKaishuJizenShinseiReason")
     private JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason;
-    @JsonProperty("JutakuKaishuJizenShinseiKoza")
-    private KozaPaymentDiv JutakuKaishuJizenShinseiKoza;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -92,16 +89,6 @@ public class tplJizenShinseiContentsDiv extends TabPanel {
     @JsonProperty("JutakuKaishuJizenShinseiReason")
     public void setJutakuKaishuJizenShinseiReason(JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason) {
         this.JutakuKaishuJizenShinseiReason=JutakuKaishuJizenShinseiReason;
-    }
-
-    @JsonProperty("JutakuKaishuJizenShinseiKoza")
-    public KozaPaymentDiv getJutakuKaishuJizenShinseiKoza() {
-        return JutakuKaishuJizenShinseiKoza;
-    }
-
-    @JsonProperty("JutakuKaishuJizenShinseiKoza")
-    public void setJutakuKaishuJizenShinseiKoza(KozaPaymentDiv JutakuKaishuJizenShinseiKoza) {
-        this.JutakuKaishuJizenShinseiKoza=JutakuKaishuJizenShinseiKoza;
     }
 
 }

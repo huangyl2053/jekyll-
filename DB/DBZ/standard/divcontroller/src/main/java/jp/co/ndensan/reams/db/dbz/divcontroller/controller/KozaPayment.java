@@ -36,6 +36,7 @@ public final class KozaPayment {
         kozaDiv.getTxtKinyuKikanName().setValue(cg.getAsRString("kinyuKikanName"));
         kozaDiv.getTxtKinyuKikanBrunchCode().setValue(cg.getAsRString("kinyuBranchCode"));
         kozaDiv.getTxtKinyuKikanBrunchName().setValue(cg.getAsRString("kinyuBranchName"));
+        kozaDiv.getRadKozaShubetsu().setSelectedItem(cg.getAsRString("kozaShubetsu"));
         kozaDiv.getTxtKozaNo().setValue(cg.getAsRString("kozaNo"));
         kozaDiv.getTxtKozaMeigininKana().setValue(cg.getAsRString("kozaMeigininKanaName"));
         kozaDiv.getTxtKozaMeiginin().setValue(cg.getAsRString("kozaMeigininName"));

@@ -134,6 +134,34 @@ module DBZ {
             }
         }
         
+        public get btnSearchJigyosha_disabled() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["disabled"];
+        }
+        
+        public set btnSearchJigyosha_disabled(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["disabled"] = value;
+            } else {
+                this.layout.items[0].items[4]["disabled"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get btnCopyToHonninInfo_disabled() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["disabled"];
+        }
+        
+        public set btnCopyToHonninInfo_disabled(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["disabled"] = value;
+            } else {
+                this.layout.items[0].items[5]["disabled"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, ShinseishaInfo_Design.myLayout, fieldName);
         }
@@ -153,6 +181,8 @@ module DBZ {
             Uz.JSControlUtil.registProperty("txtYubinNo_displayNone");
             Uz.JSControlUtil.registProperty("txtAddress_displayNone");
             Uz.JSControlUtil.registProperty("btnCopy_displayNone");
+            Uz.JSControlUtil.registProperty("btnSearchJigyosha_disabled");
+            Uz.JSControlUtil.registProperty("btnCopyToHonninInfo_disabled");
         }
         
         /**
@@ -171,6 +201,8 @@ module DBZ {
             editablePropertyInfo["txtYubinNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["txtAddress_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["btnCopy_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnSearchJigyosha_disabled"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["disabled"];
+            editablePropertyInfo["btnCopyToHonninInfo_disabled"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["disabled"];
             
             return editablePropertyInfo;
         }
@@ -387,8 +419,9 @@ module DBZ {
      "appearance": 2,
      "imageFileUrl": "/uz/uza/css/Link.jpg",
      "imageWidth": "18",
-     "imageHeight": "20",
-     "icon": 0
+     "imageHeight": "12.5",
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnCopyToHonninInfo",
@@ -416,7 +449,8 @@ module DBZ {
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": true
     },
     {
      "fieldName": "ddlHokensha",
@@ -724,10 +758,7 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 1,
@@ -803,11 +834,23 @@ module DBZ {
    "publicChildFieldName": "btnCopyToHonninInfo",
    "publicChildProperty": "displayNone",
    "newPropertyName": "btnCopy_displayNone"
+  },
+  {
+   "publicChildFieldName": "btnSearchJigyosha",
+   "publicChildProperty": "disabled",
+   "newPropertyName": "btnSearchJigyosha_disabled"
+  },
+  {
+   "publicChildFieldName": "btnCopyToHonninInfo",
+   "publicChildProperty": "disabled",
+   "newPropertyName": "btnCopyToHonninInfo_disabled"
   }
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }

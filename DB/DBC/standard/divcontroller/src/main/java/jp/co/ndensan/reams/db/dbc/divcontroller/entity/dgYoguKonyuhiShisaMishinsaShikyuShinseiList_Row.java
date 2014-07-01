@@ -3,13 +3,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue May 27 17:23:16 JST 2014 
+ * Tue Jun 24 14:14:28 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
@@ -24,47 +23,49 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 public class dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row extends DataRow {
 
-    private Button btnModifyShinsei;
     private TextBoxDate txtShikyuShinseiDate;
     private TextBoxDate txtTenkyoYM;
     private TextBoxCode txtHihoNo;
     private TextBox txtHihoName;
-    private TextBoxNum txtHokenSeikyuAmount;
+    private TextBoxNum txtHokenKyufuAmount;
     private TextBoxNum txtRiyoshaFutanAmount;
-    private TextBoxNum txtLimitOverAmount;
+    private TextBoxNum txtHiyoTotal;
     private TextBox txtShinsaResult;
     private TextBox txtSeiriNo;
 
     public dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row() {
         super();
+        this.txtShikyuShinseiDate = new TextBoxDate();
+        this.txtTenkyoYM = new TextBoxDate();
+        this.txtHihoNo = new TextBoxCode();
+        this.txtHihoName = new TextBox();
+        this.txtHokenKyufuAmount = new TextBoxNum();
+        this.txtRiyoshaFutanAmount = new TextBoxNum();
+        this.txtHiyoTotal = new TextBoxNum();
+        this.txtShinsaResult = new TextBox();
+        this.txtSeiriNo = new TextBox();
     }
 
-    public dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row(Button btnModifyShinsei, TextBoxDate txtShikyuShinseiDate, TextBoxDate txtTenkyoYM, TextBoxCode txtHihoNo, TextBox txtHihoName, TextBoxNum txtHokenSeikyuAmount, TextBoxNum txtRiyoshaFutanAmount, TextBoxNum txtLimitOverAmount, TextBox txtShinsaResult, TextBox txtSeiriNo) {
+    public dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row(TextBoxDate txtShikyuShinseiDate, TextBoxDate txtTenkyoYM, TextBoxCode txtHihoNo, TextBox txtHihoName, TextBoxNum txtHokenKyufuAmount, TextBoxNum txtRiyoshaFutanAmount, TextBoxNum txtHiyoTotal, TextBox txtShinsaResult, TextBox txtSeiriNo) {
         super();
-        this.setOriginalData("btnModifyShinsei", btnModifyShinsei);
         this.setOriginalData("txtShikyuShinseiDate", txtShikyuShinseiDate);
         this.setOriginalData("txtTenkyoYM", txtTenkyoYM);
         this.setOriginalData("txtHihoNo", txtHihoNo);
         this.setOriginalData("txtHihoName", txtHihoName);
-        this.setOriginalData("txtHokenSeikyuAmount", txtHokenSeikyuAmount);
+        this.setOriginalData("txtHokenKyufuAmount", txtHokenKyufuAmount);
         this.setOriginalData("txtRiyoshaFutanAmount", txtRiyoshaFutanAmount);
-        this.setOriginalData("txtLimitOverAmount", txtLimitOverAmount);
+        this.setOriginalData("txtHiyoTotal", txtHiyoTotal);
         this.setOriginalData("txtShinsaResult", txtShinsaResult);
         this.setOriginalData("txtSeiriNo", txtSeiriNo);
-        this.btnModifyShinsei = btnModifyShinsei;
         this.txtShikyuShinseiDate = txtShikyuShinseiDate;
         this.txtTenkyoYM = txtTenkyoYM;
         this.txtHihoNo = txtHihoNo;
         this.txtHihoName = txtHihoName;
-        this.txtHokenSeikyuAmount = txtHokenSeikyuAmount;
+        this.txtHokenKyufuAmount = txtHokenKyufuAmount;
         this.txtRiyoshaFutanAmount = txtRiyoshaFutanAmount;
-        this.txtLimitOverAmount = txtLimitOverAmount;
+        this.txtHiyoTotal = txtHiyoTotal;
         this.txtShinsaResult = txtShinsaResult;
         this.txtSeiriNo = txtSeiriNo;
-    }
-
-    public Button getBtnModifyShinsei() {
-        return btnModifyShinsei;
     }
 
     public TextBoxDate getTxtShikyuShinseiDate() {
@@ -83,16 +84,16 @@ public class dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row extends DataRow {
         return txtHihoName;
     }
 
-    public TextBoxNum getTxtHokenSeikyuAmount() {
-        return txtHokenSeikyuAmount;
+    public TextBoxNum getTxtHokenKyufuAmount() {
+        return txtHokenKyufuAmount;
     }
 
     public TextBoxNum getTxtRiyoshaFutanAmount() {
         return txtRiyoshaFutanAmount;
     }
 
-    public TextBoxNum getTxtLimitOverAmount() {
-        return txtLimitOverAmount;
+    public TextBoxNum getTxtHiyoTotal() {
+        return txtHiyoTotal;
     }
 
     public TextBox getTxtShinsaResult() {
@@ -101,11 +102,6 @@ public class dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row extends DataRow {
 
     public TextBox getTxtSeiriNo() {
         return txtSeiriNo;
-    }
-
-    public void setBtnModifyShinsei(Button btnModifyShinsei) {
-        this.setOriginalData("btnModifyShinsei", btnModifyShinsei);
-        this.btnModifyShinsei = btnModifyShinsei;
     }
 
     public void setTxtShikyuShinseiDate(TextBoxDate txtShikyuShinseiDate) {
@@ -128,9 +124,9 @@ public class dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row extends DataRow {
         this.txtHihoName = txtHihoName;
     }
 
-    public void setTxtHokenSeikyuAmount(TextBoxNum txtHokenSeikyuAmount) {
-        this.setOriginalData("txtHokenSeikyuAmount", txtHokenSeikyuAmount);
-        this.txtHokenSeikyuAmount = txtHokenSeikyuAmount;
+    public void setTxtHokenKyufuAmount(TextBoxNum txtHokenKyufuAmount) {
+        this.setOriginalData("txtHokenKyufuAmount", txtHokenKyufuAmount);
+        this.txtHokenKyufuAmount = txtHokenKyufuAmount;
     }
 
     public void setTxtRiyoshaFutanAmount(TextBoxNum txtRiyoshaFutanAmount) {
@@ -138,9 +134,9 @@ public class dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row extends DataRow {
         this.txtRiyoshaFutanAmount = txtRiyoshaFutanAmount;
     }
 
-    public void setTxtLimitOverAmount(TextBoxNum txtLimitOverAmount) {
-        this.setOriginalData("txtLimitOverAmount", txtLimitOverAmount);
-        this.txtLimitOverAmount = txtLimitOverAmount;
+    public void setTxtHiyoTotal(TextBoxNum txtHiyoTotal) {
+        this.setOriginalData("txtHiyoTotal", txtHiyoTotal);
+        this.txtHiyoTotal = txtHiyoTotal;
     }
 
     public void setTxtShinsaResult(TextBox txtShinsaResult) {

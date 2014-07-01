@@ -36,11 +36,5 @@ public class ShokanShikyuKetteiTsuchisho {
         HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("dbc0810000/ShokanShikyuKetteiTsuchisho.yml")).get(0);
         panel.getShokanShikyuKetteiTsuchishoPrintContentsSetting().getTxtIssueDate().
                 setValue(new RDate(source.get("発効日").toString()));
-        panel.getShokanShikyuKetteiTsuchishoPaymentDate().getTxtKozaPaymentDate().
-                setValue(new RDate(source.get("口座振込予定日").toString()));
-        panel.getShokanShikyuKetteiTsuchishoPaymentDate().getTxtMadoguchiPaymentDateRange().
-                setFromValue(new RDate(source.get("窓口支払期間開始").toString()));
-        panel.getShokanShikyuKetteiTsuchishoPaymentDate().getTxtMadoguchiPaymentDateRange().
-                setToValue(new RDate(source.get("窓口支払期間終了").toString()));
     }
 }

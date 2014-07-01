@@ -22,62 +22,6 @@ module DBZ {
             }
         }
         
-        public get eraseBorderTop() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"];
-        }
-        
-        public set eraseBorderTop(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderTop"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderBottom() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"];
-        }
-        
-        public set eraseBorderBottom(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderBottom"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderRight() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"];
-        }
-        
-        public set eraseBorderRight(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderRight"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderLeft() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"];
-        }
-        
-        public set eraseBorderLeft(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderLeft"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
         public get panelDisplay() {
             return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
         }
@@ -162,6 +106,20 @@ module DBZ {
             }
         }
         
+        public get eraseBorder() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
+        }
+        
+        public set eraseBorder(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
+            } else {
+                this.layout.items[0]["eraseBorder"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, PaymentMethod_Design.myLayout, fieldName);
         }
@@ -173,16 +131,13 @@ module DBZ {
         public registProperty() {
             super.registProperty();
             Uz.JSControlUtil.registProperty("title");
-            Uz.JSControlUtil.registProperty("eraseBorderTop");
-            Uz.JSControlUtil.registProperty("eraseBorderBottom");
-            Uz.JSControlUtil.registProperty("eraseBorderRight");
-            Uz.JSControlUtil.registProperty("eraseBorderLeft");
             Uz.JSControlUtil.registProperty("panelDisplay");
             Uz.JSControlUtil.registProperty("KozaPayment_title");
             Uz.JSControlUtil.registProperty("onClick_radPayMethod");
             Uz.JSControlUtil.registProperty("Juryoinin_displayNone");
             Uz.JSControlUtil.registProperty("Madoguchi_displayNone");
             Uz.JSControlUtil.registProperty("Koza_displayNone");
+            Uz.JSControlUtil.registProperty("eraseBorder");
         }
         
         /**
@@ -193,16 +148,13 @@ module DBZ {
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
             editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
-            editablePropertyInfo["eraseBorderTop"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderTop"];
-            editablePropertyInfo["eraseBorderBottom"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderBottom"];
-            editablePropertyInfo["eraseBorderRight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderRight"];
-            editablePropertyInfo["eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
             editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
             editablePropertyInfo["KozaPayment_title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["title"];
             editablePropertyInfo["onClick_radPayMethod"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
             editablePropertyInfo["Juryoinin_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["Madoguchi_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["Koza_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
             
             return editablePropertyInfo;
         }
@@ -232,8 +184,12 @@ module DBZ {
      "selectControlID": "radPayMethod_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "onChange": "",
      "selectedItem": null,
+     "labelLText": "",
+     "labelLWidth": "S",
+     "labelLAlign": 2,
      "dataSource": [
       {
        "key": "payToJuryoinin",
@@ -249,13 +205,10 @@ module DBZ {
       }
      ],
      "onClick": "",
+     "icon": [],
      "newLineItemNumber": 3,
      "spaceSize": "M",
-     "labelLText": "",
-     "labelLWidth": "S",
-     "labelLAlign": 2,
-     "disabledItem": [],
-     "icon": []
+     "disabledItem": []
     },
     {
      "fieldName": "JuryoininJoho",
@@ -283,9 +236,6 @@ module DBZ {
        "readOnly": false,
        "onChange": "",
        "required": false,
-       "labelLText": "契約番号",
-       "labelLWidth": "70",
-       "labelLAlign": 2,
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -300,8 +250,11 @@ module DBZ {
        "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "契約番号",
        "labelRText": "",
+       "labelLWidth": "70",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": "",
@@ -330,9 +283,6 @@ module DBZ {
        "readOnly": false,
        "onChange": "",
        "required": false,
-       "labelLText": "事業者",
-       "labelLWidth": "55",
-       "labelLAlign": 2,
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -347,8 +297,11 @@ module DBZ {
        "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "事業者",
        "labelRText": "",
+       "labelLWidth": "55",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": "",
@@ -377,9 +330,6 @@ module DBZ {
        "readOnly": false,
        "onChange": "",
        "required": false,
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -394,8 +344,11 @@ module DBZ {
        "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "",
        "labelRText": "",
+       "labelLWidth": "S",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
@@ -423,9 +376,6 @@ module DBZ {
        "readOnly": false,
        "onChange": "",
        "required": false,
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -440,8 +390,11 @@ module DBZ {
        "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "",
        "labelRText": "",
+       "labelLWidth": "S",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
@@ -480,16 +433,17 @@ module DBZ {
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 2,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "KozaPayment",
@@ -521,11 +475,13 @@ module DBZ {
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "panelDisplay": 2,
      "eraseBorderTop": false,
      "eraseBorderBottom": false,
      "eraseBorderRight": false,
-     "eraseBorderLeft": false,
-     "panelDisplay": 2
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "MadoguchiPayment",
@@ -553,9 +509,6 @@ module DBZ {
        "readOnly": false,
        "onChange": "",
        "required": false,
-       "labelLText": "支払場所",
-       "labelLWidth": "70",
-       "labelLAlign": 2,
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -570,8 +523,11 @@ module DBZ {
        "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "支払場所",
        "labelRText": "",
+       "labelLWidth": "70",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
@@ -599,9 +555,6 @@ module DBZ {
        "readOnly": false,
        "onChange": "",
        "required": false,
-       "labelLText": "開始日",
-       "labelLWidth": "70",
-       "labelLAlign": 2,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -610,12 +563,15 @@ module DBZ {
        "onKeyPress": "",
        "text": "",
        "value": "",
+       "labelLText": "開始日",
        "labelRText": "",
+       "labelLWidth": "70",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
-       "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "txtShiharaiKaishiDay",
@@ -640,9 +596,6 @@ module DBZ {
        "readOnly": false,
        "onChange": "",
        "required": false,
-       "labelLText": "（",
-       "labelLWidth": "13",
-       "labelLAlign": 2,
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 1,
@@ -657,8 +610,11 @@ module DBZ {
        "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "（",
        "labelRText": "）",
+       "labelLWidth": "13",
        "labelRWidth": "13",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
@@ -686,9 +642,6 @@ module DBZ {
        "readOnly": false,
        "onChange": "",
        "required": false,
-       "labelLText": "開始時間",
-       "labelLWidth": "70",
-       "labelLAlign": 2,
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -703,12 +656,15 @@ module DBZ {
        "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "開始時間",
        "labelRText": "",
+       "labelLWidth": "70",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "decorationClass": "",
-       "permitCharactor": "",
        "displayFormat": 1,
+       "permitCharactor": "",
        "timeKubun": 1
       },
       {
@@ -734,9 +690,6 @@ module DBZ {
        "readOnly": false,
        "onChange": "",
        "required": false,
-       "labelLText": "終了日",
-       "labelLWidth": "70",
-       "labelLAlign": 2,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -745,12 +698,15 @@ module DBZ {
        "onKeyPress": "",
        "text": "",
        "value": "",
+       "labelLText": "終了日",
        "labelRText": "",
+       "labelLWidth": "70",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
-       "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "txtShiharaiShuryoDay",
@@ -775,9 +731,6 @@ module DBZ {
        "readOnly": false,
        "onChange": "",
        "required": false,
-       "labelLText": "（",
-       "labelLWidth": "13",
-       "labelLAlign": 2,
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 1,
@@ -792,8 +745,11 @@ module DBZ {
        "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "（",
        "labelRText": "）",
+       "labelLWidth": "13",
        "labelRWidth": "13",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": ""
@@ -821,9 +777,6 @@ module DBZ {
        "readOnly": false,
        "onChange": "",
        "required": false,
-       "labelLText": "終了時間",
-       "labelLWidth": "70",
-       "labelLAlign": 2,
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -838,12 +791,15 @@ module DBZ {
        "text": "",
        "suggest": [],
        "value": "",
+       "labelLText": "終了時間",
        "labelRText": "",
+       "labelLWidth": "70",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "decorationClass": "",
-       "permitCharactor": "",
        "displayFormat": 1,
+       "permitCharactor": "",
        "timeKubun": 1
       }
      ],
@@ -880,16 +836,17 @@ module DBZ {
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": true,
      "panelDisplay": 2,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     }
    ],
    "controlType": "Panel",
@@ -925,16 +882,17 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 1,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   }
  ],
  "controlType": "CommonChildDiv",
@@ -967,26 +925,6 @@ module DBZ {
   },
   {
    "publicChildFieldName": "PaymentMethod",
-   "publicChildProperty": "eraseBorderTop",
-   "newPropertyName": "eraseBorderTop"
-  },
-  {
-   "publicChildFieldName": "PaymentMethod",
-   "publicChildProperty": "eraseBorderBottom",
-   "newPropertyName": "eraseBorderBottom"
-  },
-  {
-   "publicChildFieldName": "PaymentMethod",
-   "publicChildProperty": "eraseBorderRight",
-   "newPropertyName": "eraseBorderRight"
-  },
-  {
-   "publicChildFieldName": "PaymentMethod",
-   "publicChildProperty": "eraseBorderLeft",
-   "newPropertyName": "eraseBorderLeft"
-  },
-  {
-   "publicChildFieldName": "PaymentMethod",
    "publicChildProperty": "panelDisplay",
    "newPropertyName": "panelDisplay"
   },
@@ -1014,11 +952,18 @@ module DBZ {
    "publicChildFieldName": "KozaPayment",
    "publicChildProperty": "displayNone",
    "newPropertyName": "Koza_displayNone"
+  },
+  {
+   "publicChildFieldName": "PaymentMethod",
+   "publicChildProperty": "eraseBorder",
+   "newPropertyName": "eraseBorder"
   }
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }

@@ -8,7 +8,7 @@
      "fieldName": "txtShinsaDate",
      "items": [],
      "controlType": "TextBoxDateRange",
-     "width": "80",
+     "width": "85",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -110,7 +110,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/SearchConditionToShinsazumiShikyuShinseiPanel/onLoad"
+     "requestUrl": ""
     }
    ],
    "hiddenInput": [],
@@ -135,7 +135,7 @@
      "fieldName": "txtKetteiDate",
      "items": [],
      "controlType": "TextBoxDate",
-     "width": "80",
+     "width": "85",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -440,14 +440,14 @@
       ]
      },
      "onSort": "",
-     "onSelect": "onSelect_OnClick",
+     "onSelect": "onSelectRow",
      "onSelectByDblClick": "",
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
-     "onMultiRows": "onSelect_OnClick",
+     "onMultiRows": "",
      "dataSource": [],
      "sortOrder": "txtHihokenshaName",
      "isAscending": true,
@@ -488,11 +488,7 @@
     },
     {
      "eventName": "onClick_btnSearchShinsazumi",
-     "requestUrl": "dbc/db/dbc/ShinsazumiShikyuShinseiListPanel/onClick_btnSearchShinsazumi"
-    },
-    {
-     "eventName": "onSelect_OnClick",
-     "requestUrl": "dbc/db/dbc/ShinsazumiShikyuShinseiListPanel/onSelect_OnClick"
+     "requestUrl": ""
     }
    ],
    "hiddenInput": [],
@@ -617,7 +613,11 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/JutakuKaishuhiShikyuKetteishaListPanel/onLoad"
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnSearchShinsazumi",
+     "requestUrl": "dbc/db/dbc/JutakuKaishuhiShikyuKetteishaListPanel/onClick_btnSearchShinsazumi"
     }
    ],
    "hiddenInput": [],
@@ -683,6 +683,32 @@
      "PrintContentsSetting_eraseBorderLeft": true
     },
     {
+     "fieldName": "txtComment",
+     "items": [],
+     "controlType": "Label",
+     "width": "L",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "txtComment",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "isPrivateInfo": false,
+     "text": "※発行一覧表が同時に出力されます。",
+     "required": false,
+     "decorationClass": "",
+     "align": 2
+    },
+    {
      "fieldName": "JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod",
      "items": [],
      "controlType": "CommonChildDiv",
@@ -697,7 +723,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod",
      "helpMessageID": "",
@@ -777,7 +803,11 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/JutakuKaishuhiShikyuKetteiTsuchishoPanel/onLoad"
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnSearchShinsazumi",
+     "requestUrl": "dbc/db/dbc/JutakuKaishuhiShikyuKetteiTsuchishoPanel/onClick_btnSearchShinsazumi"
     }
    ],
    "hiddenInput": [],
@@ -843,13 +873,13 @@
     {
      "fieldName": "btnSearchShinsazumi",
      "event": "onClick",
-     "transition": "一括決定登録"
+     "transition": "一括決定"
     }
    ]
   },
   {
    "order": "2",
-   "stateName": "一括決定登録",
+   "stateName": "一括決定",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -950,12 +980,12 @@
    "commonButtonAreaId": "ketteiSave",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
       "fieldName": "btnKetteiSave",
       "items": [],
       "controlType": "CommonButtonFree",
-      "width": "S",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -978,14 +1008,14 @@
       "imageWidth": "",
       "imageHeight": "",
       "icon": 0,
-      "prefixText": "申請内容を",
-      "suffixText": "する"
+      "heightTextBoxMatches": false,
+      "additionalText": "決定結果を"
      }
     }
    ],
    "states": [
     {
-     "state": "一括決定登録"
+     "state": "一括決定"
     }
    ],
    "isFinishButtonOnTheRight": false

@@ -49,10 +49,6 @@ public class ShokanShikyuKetteishaListSetting {
 
     private void setPaymentDate(ShokanShikyuKetteishaListSettingDiv panel) {
         HashMap source = getShokanShikyuTorokuShomeishoYaml().get(4);
-
-        panel.getShokanShikyuKetteishaListPayDate().getTxtKozaPaymentDate().setValue(new RDate(source.get("口座振替予定日").toString()));
-        panel.getShokanShikyuKetteishaListPayDate().getTxtMadoguchiPaymentDateRange().setFromValue(new RDate(source.get("窓口支払い期間開始日").toString()));
-        panel.getShokanShikyuKetteishaListPayDate().getTxtMadoguchiPaymentDateRange().setToValue(new RDate(source.get("窓口支払い期間終了日").toString()));
     }
 
     private void setOutputOrder(ShokanShikyuKetteishaListSettingDiv panel) {

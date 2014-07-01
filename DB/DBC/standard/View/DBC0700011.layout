@@ -271,16 +271,18 @@
      "session": {},
      "marginTop": "S",
      "marginBottom": "XS",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true
     },
     {
      "fieldName": "DBCommonSearchInfoPanel",
@@ -365,16 +367,18 @@
      "session": {},
      "marginTop": "S",
      "marginBottom": "XS",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true
     },
     {
      "fieldName": "MaeShorishaRirekiPanel",
@@ -458,16 +462,18 @@
      "session": {},
      "marginTop": "S",
      "marginBottom": "XS",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true
     },
     {
      "fieldName": "btnHihokenshaSearch",
@@ -495,7 +501,8 @@
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -536,16 +543,18 @@
    "session": {},
    "marginTop": "S",
    "marginBottom": "XS",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "JutakuHihokenshaSearchGaitoshaPanel",
@@ -576,7 +585,8 @@
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "dgHihokenshaSearchGaitosha",
@@ -935,16 +945,18 @@
    "session": {},
    "marginTop": "S",
    "marginBottom": "XS",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "JutakuKaishuJizenShinseiHihokenshaPanel",
@@ -977,6 +989,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": false,
      "atenaInfo_eraseBorderTop": true,
@@ -1044,15 +1058,17 @@
      "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
      "backGroundColor": 0,
      "btnHihoRireki_visible": true,
      "btnNinteiRireki_visible": true
@@ -1096,16 +1112,18 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "JutakuKaishuJizenShinseiContentsPanel",
@@ -1233,6 +1251,8 @@
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
        "txtChakkoDate_lableLText": "着工予定日",
        "txtKanseiDate_lableLText": "完成予定日",
        "onClick_btnModifyDetail": "onClick_btnModifyDetail",
@@ -1272,16 +1292,18 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "JutakuKaishuJizenShinseisha",
@@ -1307,19 +1329,21 @@
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
      "panelDisplay": 1,
      "businessId": "DBZ",
      "controlName": "ShinseishaInfo",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "btnSearch_displayNone": true,
      "txtUkestukeDate_displayNone": true,
-     "txtJigyoshaNo_disabled": false,
+     "txtJigyoshaNo_disabled": true,
      "txtShinseishaName_labelLText": "氏名",
      "txtYubinNo_displayNone": false,
      "txtAddress_displayNone": false,
@@ -1507,7 +1531,7 @@
        "labelRAlign": 0,
        "decorationClass": "",
        "permitCharactor": "",
-       "formatLength": 1
+       "formatLength": "10"
       },
       {
        "fieldName": "btnSearchCreationJigyoshaName",
@@ -1535,7 +1559,8 @@
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "icon": 0,
+       "heightTextBoxMatches": true
       },
       {
        "fieldName": "txtCreationJigyoshaName",
@@ -1617,16 +1642,18 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "JutakuKaishuJizenShinseiKoza",
@@ -1652,20 +1679,23 @@
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
      "panelDisplay": 1,
      "businessId": "DBZ",
      "controlName": "PaymentMethod",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "KozaPayment_title": "",
      "onClick_radPayMethod": "onClick_radPayMethod",
      "Juryoinin_displayNone": true,
-     "Madoguchi_displayNone": true
+     "Madoguchi_displayNone": true,
+     "Koza_displayNone": false
     }
    ],
    "controlType": "Panel",
@@ -1714,16 +1744,18 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "JutakuKaishuJizenShinseiShinsaResultPanel",
@@ -1756,6 +1788,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "btnLimitOverCheck_displayNone": false,
      "btnRireki_displayNone": false
     },
@@ -2045,16 +2079,18 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "JutakuKaishuJizenShoninKetteiTsuchishoPanel",
@@ -2140,24 +2176,26 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
    "isPublish": true,
    "isEmptyControl": false
   },
   {
-   "fieldName": "CompleteProcessPanel",
+   "fieldName": "JutakuJizenKanryoPanel",
    "items": [
     {
-     "fieldName": "CompleteProcess",
+     "fieldName": "KanryoMessage",
      "items": [],
      "controlType": "CommonChildDiv",
      "width": "XS",
@@ -2173,19 +2211,20 @@
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "0",
-     "selectControlID": "CompleteProcess",
+     "selectControlID": "KanryoMessage",
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
      "businessId": "DBZ",
-     "controlName": "CompleteProcess",
+     "controlName": "KaigoKanryoMessage",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "lblCompleteMessage_text": "申請内容の更新が完了しました。",
-     "CompleteProcess_width": "G12"
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "KanryoMessage_width": "G12"
     }
    ],
    "controlType": "Panel",
@@ -2202,7 +2241,7 @@
    "authorityMode": 0,
    "marginLeft": "0",
    "marginRight": "XS",
-   "selectControlID": "CompleteProcessPanel",
+   "selectControlID": "JutakuJizenKanryoPanel",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -2211,26 +2250,33 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "CompleteProcessPanel"
+     "postParameterPanelNames": "JutakuJizenKanryoPanel"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/JutakuJizenKanryoPanel/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
-   "widthAuto": true,
+   "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true
   }
  ],
  "controlType": null,
@@ -2401,12 +2447,12 @@
    "showWizard": true,
    "visibleDivs": [
     {
-     "visibleDiv": "CompleteProcessPanel",
+     "visibleDiv": "JutakuJizenKanryoPanel",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "CompleteProcess",
+     "visibleDiv": "KanryoMessage",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -2488,15 +2534,16 @@
    "JutakuKaishuJizenShoninKetteiTsuchishoPanel"
   ],
   [
-   "CompleteProcessPanel"
+   "JutakuJizenKanryoPanel"
   ],
   [
-   "CompleteProcess"
+   "KanryoMessage"
   ]
  ],
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "saveToShinsei",
