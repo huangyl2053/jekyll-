@@ -430,6 +430,10 @@ module DBZ {
     {
      "propertyName": "serviceTaishoYM",
      "value": ""
+    },
+    {
+     "propertyName": "serviceCodeMeisho",
+     "value": ""
     }
    ],
    "onOpen": "",
@@ -441,7 +445,7 @@ module DBZ {
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "350"
+   "height": "Auto"
   }
  ],
  "controlType": "CommonChildDiv",
@@ -479,12 +483,16 @@ module DBZ {
   {
    "key": "serviceTaishoYM",
    "controlName": "txtKijyunYM"
+  },
+  {
+   "key": "serviceCodeMeisho",
+   "controlName": "ServiceInputGuide.serviceCodeMeisho"
   }
  ],
  "dialogOkEventNameForDialog": "onSelectBySelectButton_SearchResultService",
  "dialogCancelEventNameForDialog": "onClick_btnServiceInputGuideReturn",
  "canTransferEvent": true,
- "heightForDialog": "M"
+ "heightForDialog": "Auto"
 }        
     }
 }

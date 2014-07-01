@@ -41,6 +41,8 @@ public class ServiceInputGuideDiv extends Panel {
     private RString serviceMeisho;
     @JsonProperty("serviceTaishoYM")
     private RString serviceTaishoYM;
+    @JsonProperty("serviceCodeMeisho")
+    private RString serviceCodeMeisho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -136,6 +138,16 @@ public class ServiceInputGuideDiv extends Panel {
     @JsonProperty("serviceTaishoYM")
     public void setServiceTaishoYM(RString serviceTaishoYM) {
         this.serviceTaishoYM=serviceTaishoYM;
+    }
+
+    @JsonProperty("serviceCodeMeisho")
+    public RString getServiceCodeMeisho() {
+        return serviceCodeMeisho;
+    }
+
+    @JsonProperty("serviceCodeMeisho")
+    public void setServiceCodeMeisho(RString serviceCodeMeisho) {
+        this.serviceCodeMeisho=serviceCodeMeisho;
     }
 
 }

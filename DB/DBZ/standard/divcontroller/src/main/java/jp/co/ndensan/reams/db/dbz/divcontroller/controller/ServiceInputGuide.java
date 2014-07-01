@@ -87,6 +87,9 @@ public class ServiceInputGuide {
         dgSearchResultService_Row row = div.getSearchResultService().getDgSearchResultService().getClickedItem();
         div.setServiceCode(row.getServiceCode().getValue());
         div.setServiceMeisho(row.getServiceMeisho());
+        RString serviceCodeMeisho = row.getServiceCode().getValue().concat(new RString(":")).
+                concat(row.getServiceMeisho());
+        div.setServiceCodeMeisho(serviceCodeMeisho);
 
         response.data = div;
         return response;

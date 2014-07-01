@@ -702,16 +702,8 @@
          "onOkClose": "onChangeServiceRiyohyoListDayValue",
          "dataPassing": [
           {
-           "key": "serviceCode",
+           "key": "serviceCodeMeisho",
            "controlName": "column[txtService]"
-          },
-          {
-           "key": "serviceMeisho",
-           "controlName": "column[txtService]"
-          },
-          {
-           "key": "serviceTaishoYM",
-           "controlName": "KyotakuJikoRiyohyoInfo_ServiceRiyohyoInfo_txtTaishoYM"
           }
          ]
         },
@@ -756,11 +748,7 @@
          "onOkClose": "onChangeServiceRiyohyoListDayValue",
          "dataPassing": [
           {
-           "key": "jigyoshaCode",
-           "controlName": "column[txtJigyosha]"
-          },
-          {
-           "key": "jigyoshaMeisho",
+           "key": "jigyoshaCodeMeisho",
            "controlName": "column[txtJigyosha]"
           }
          ]

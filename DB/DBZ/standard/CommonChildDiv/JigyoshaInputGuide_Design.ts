@@ -56,6 +56,7 @@ module DBZ {
      "selectControlID": "radJigyoshaSearchType_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "onChange": "",
      "selectedItem": null,
      "dataSource": [
@@ -157,7 +158,8 @@ module DBZ {
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "SearchResultJigyosha",
@@ -182,6 +184,7 @@ module DBZ {
        "selectControlID": "dgSearchResultJigyosha",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "S",
        "dataSource": [],
        "gridSetting": {
@@ -341,6 +344,11 @@ module DBZ {
        "onSelectBySelectButton": "onSelectBySelectButton_dgSearchResultJigyosha",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -383,10 +391,7 @@ module DBZ {
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -420,7 +425,8 @@ module DBZ {
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -473,15 +479,16 @@ module DBZ {
     {
      "propertyName": "jigyoshaMeisho",
      "value": ""
+    },
+    {
+     "propertyName": "jigyoshaCodeMeisho",
+     "value": ""
     }
    ],
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -521,10 +528,16 @@ module DBZ {
   {
    "key": "jigyoshaMeisho",
    "controlName": "JigyoshaInputGuide.jigyoshaMeisho"
+  },
+  {
+   "key": "jigyoshaCodeMeisho",
+   "controlName": "JigyoshaInputGuide.jigyoshaCodeMeisho"
   }
  ],
  "dialogOkEventNameForDialog": "onSelectBySelectButton_dgSearchResultJigyosha",
- "dialogCancelEventNameForDialog": "onClick_btnKaigoHokenShisetsuReturn"
+ "dialogCancelEventNameForDialog": "onClick_btnKaigoHokenShisetsuReturn",
+ "canTransferEvent": true,
+ "heightForDialog": "Auto"
 }        
     }
 }
