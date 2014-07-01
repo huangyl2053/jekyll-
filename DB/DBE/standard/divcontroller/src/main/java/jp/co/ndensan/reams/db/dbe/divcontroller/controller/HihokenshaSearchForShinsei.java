@@ -41,6 +41,16 @@ public class HihokenshaSearchForShinsei {
         return _createResponseData(panel);
     }
 
+    /**
+     *
+     * @param panel HihokenshaSearchForShinseiDiv
+     * @return ResponseData
+     */
+    public ResponseData<HihokenshaSearchForShinseiDiv> onClick_btnToDecide(HihokenshaSearchForShinseiDiv panel) {
+        YokaigoNinteiShinseisha.getInstance().save(panel.getSearchResultForShinsei().getDgSearchResult().getClickedItem());
+        return _createResponseData(panel);
+    }
+
     private ResponseData<HihokenshaSearchForShinseiDiv> _createResponseData(HihokenshaSearchForShinseiDiv panel) {
         ResponseData<HihokenshaSearchForShinseiDiv> response = new ResponseData<>();
         response.data = panel;

@@ -1,20 +1,20 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.HihokenshaOutlineDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.HihokenshaShujiiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.KankeiIinDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.LatestNinteiResultDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.N2HihokenshaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.NinteiShinseishaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.NinteichosainAdvanceEntryDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.NyuinNyushoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.ShichosonRenrakuJikoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.SinseiRiyuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaOutlineDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaShujiiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.KankeiIinDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.LatestNinteiResultDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.N2HihokenshaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.NinteiShinseishaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.NinteichosainAdvanceEntryDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.NyuinNyushoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShichosonRenrakuJikoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.SinseiRiyuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -63,6 +63,8 @@ public class ShinseiJohoInputDiv extends Panel {
     private ShichosonRenrakuJikoDiv ShichosonRenrakuJiko;
     @JsonProperty("KankeiIin")
     private KankeiIinDiv KankeiIin;
+    @JsonProperty("btnHiddenStart")
+    private Button btnHiddenStart;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -228,6 +230,16 @@ public class ShinseiJohoInputDiv extends Panel {
     @JsonProperty("KankeiIin")
     public void setKankeiIin(KankeiIinDiv KankeiIin) {
         this.KankeiIin=KankeiIin;
+    }
+
+    @JsonProperty("btnHiddenStart")
+    public Button getBtnHiddenStart() {
+        return btnHiddenStart;
+    }
+
+    @JsonProperty("btnHiddenStart")
+    public void setBtnHiddenStart(Button btnHiddenStart) {
+        this.btnHiddenStart=btnHiddenStart;
     }
 
 }
