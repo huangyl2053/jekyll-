@@ -290,6 +290,11 @@ module DBZ {
        "onSelectBySelectButton": "onSelectBySelectButton_SearchResultService",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -436,7 +441,7 @@ module DBZ {
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "350"
   }
  ],
  "controlType": "CommonChildDiv",

@@ -280,6 +280,11 @@ var DBZ;
                                     "onSelectBySelectButton": "onSelectBySelectButton_SearchResultService",
                                     "onSelectByModifyButton": "",
                                     "onSelectByDeleteButton": "",
+                                    "onAfterRequest": "",
+                                    "onAfterRequestByDblClick": "",
+                                    "onAfterRequestBySelectButton": "",
+                                    "onAfterRequestByModifyButton": "",
+                                    "onAfterRequestByDeleteButton": "",
                                     "onOnlyRow": "",
                                     "onNoRow": "",
                                     "onMultiRows": "",
@@ -426,7 +431,7 @@ var DBZ;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "350"
                 }
             ],
             "controlType": "CommonChildDiv",

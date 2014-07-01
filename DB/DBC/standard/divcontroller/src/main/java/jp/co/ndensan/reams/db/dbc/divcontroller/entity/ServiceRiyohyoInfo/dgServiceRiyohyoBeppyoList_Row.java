@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 20 16:33:38 JST 2014 
+ * Mon Jun 30 19:30:08 JST 2014 
  */
 
 
@@ -11,6 +11,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -25,21 +26,21 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
     private Button btnDelete;
     private RString txtJigyosha;
     private RString txtService;
-    private RString txtTani;
-    private RString txtWaribikigoRitsu;
-    private RString txtWaribikigoTani;
-    private RString txtKaisu;
-    private RString txtServiceTani;
-    private RString txtShuruiGendoChokaTani;
-    private RString txtShuruiGendonaiTani;
-    private RString txtKubunGendoChokaTani;
-    private RString txtKubunGendonaiTani;
-    private RString txtTanisuTanka;
-    private RString txtHiyoSogaku;
-    private RString txtKyufuritsu;
-    private RString txtHokenFutangaku;
-    private RString txtRiyoshaFutangakuHoken;
-    private RString txtRiyoshaFutangakuZengaku;
+    private TextBoxNum txtTani;
+    private TextBoxNum txtWaribikigoRitsu;
+    private TextBoxNum txtWaribikigoTani;
+    private TextBoxNum txtKaisu;
+    private TextBoxNum txtServiceTani;
+    private TextBoxNum txtShuruiGendoChokaTani;
+    private TextBoxNum txtShuruiGendonaiTani;
+    private TextBoxNum txtKubunGendoChokaTani;
+    private TextBoxNum txtKubunGendonaiTani;
+    private TextBoxNum txtTanisuTanka;
+    private TextBoxNum txtHiyoSogaku;
+    private TextBoxNum txtKyufuritsu;
+    private TextBoxNum txtHokenFutangaku;
+    private TextBoxNum txtRiyoshaFutangakuHoken;
+    private TextBoxNum txtRiyoshaFutangakuZengaku;
 
     public dgServiceRiyohyoBeppyoList_Row() {
         super();
@@ -47,24 +48,24 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         this.btnDelete = new Button();
         this.txtJigyosha = RString.EMPTY;
         this.txtService = RString.EMPTY;
-        this.txtTani = RString.EMPTY;
-        this.txtWaribikigoRitsu = RString.EMPTY;
-        this.txtWaribikigoTani = RString.EMPTY;
-        this.txtKaisu = RString.EMPTY;
-        this.txtServiceTani = RString.EMPTY;
-        this.txtShuruiGendoChokaTani = RString.EMPTY;
-        this.txtShuruiGendonaiTani = RString.EMPTY;
-        this.txtKubunGendoChokaTani = RString.EMPTY;
-        this.txtKubunGendonaiTani = RString.EMPTY;
-        this.txtTanisuTanka = RString.EMPTY;
-        this.txtHiyoSogaku = RString.EMPTY;
-        this.txtKyufuritsu = RString.EMPTY;
-        this.txtHokenFutangaku = RString.EMPTY;
-        this.txtRiyoshaFutangakuHoken = RString.EMPTY;
-        this.txtRiyoshaFutangakuZengaku = RString.EMPTY;
+        this.txtTani = new TextBoxNum();
+        this.txtWaribikigoRitsu = new TextBoxNum();
+        this.txtWaribikigoTani = new TextBoxNum();
+        this.txtKaisu = new TextBoxNum();
+        this.txtServiceTani = new TextBoxNum();
+        this.txtShuruiGendoChokaTani = new TextBoxNum();
+        this.txtShuruiGendonaiTani = new TextBoxNum();
+        this.txtKubunGendoChokaTani = new TextBoxNum();
+        this.txtKubunGendonaiTani = new TextBoxNum();
+        this.txtTanisuTanka = new TextBoxNum();
+        this.txtHiyoSogaku = new TextBoxNum();
+        this.txtKyufuritsu = new TextBoxNum();
+        this.txtHokenFutangaku = new TextBoxNum();
+        this.txtRiyoshaFutangakuHoken = new TextBoxNum();
+        this.txtRiyoshaFutangakuZengaku = new TextBoxNum();
     }
 
-    public dgServiceRiyohyoBeppyoList_Row(Button btnSelect, Button btnDelete, RString txtJigyosha, RString txtService, RString txtTani, RString txtWaribikigoRitsu, RString txtWaribikigoTani, RString txtKaisu, RString txtServiceTani, RString txtShuruiGendoChokaTani, RString txtShuruiGendonaiTani, RString txtKubunGendoChokaTani, RString txtKubunGendonaiTani, RString txtTanisuTanka, RString txtHiyoSogaku, RString txtKyufuritsu, RString txtHokenFutangaku, RString txtRiyoshaFutangakuHoken, RString txtRiyoshaFutangakuZengaku) {
+    public dgServiceRiyohyoBeppyoList_Row(Button btnSelect, Button btnDelete, RString txtJigyosha, RString txtService, TextBoxNum txtTani, TextBoxNum txtWaribikigoRitsu, TextBoxNum txtWaribikigoTani, TextBoxNum txtKaisu, TextBoxNum txtServiceTani, TextBoxNum txtShuruiGendoChokaTani, TextBoxNum txtShuruiGendonaiTani, TextBoxNum txtKubunGendoChokaTani, TextBoxNum txtKubunGendonaiTani, TextBoxNum txtTanisuTanka, TextBoxNum txtHiyoSogaku, TextBoxNum txtKyufuritsu, TextBoxNum txtHokenFutangaku, TextBoxNum txtRiyoshaFutangakuHoken, TextBoxNum txtRiyoshaFutangakuZengaku) {
         super();
         this.setOriginalData("btnSelect", btnSelect);
         this.setOriginalData("btnDelete", btnDelete);
@@ -122,63 +123,63 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         return txtService;
     }
 
-    public RString getTxtTani() {
+    public TextBoxNum getTxtTani() {
         return txtTani;
     }
 
-    public RString getTxtWaribikigoRitsu() {
+    public TextBoxNum getTxtWaribikigoRitsu() {
         return txtWaribikigoRitsu;
     }
 
-    public RString getTxtWaribikigoTani() {
+    public TextBoxNum getTxtWaribikigoTani() {
         return txtWaribikigoTani;
     }
 
-    public RString getTxtKaisu() {
+    public TextBoxNum getTxtKaisu() {
         return txtKaisu;
     }
 
-    public RString getTxtServiceTani() {
+    public TextBoxNum getTxtServiceTani() {
         return txtServiceTani;
     }
 
-    public RString getTxtShuruiGendoChokaTani() {
+    public TextBoxNum getTxtShuruiGendoChokaTani() {
         return txtShuruiGendoChokaTani;
     }
 
-    public RString getTxtShuruiGendonaiTani() {
+    public TextBoxNum getTxtShuruiGendonaiTani() {
         return txtShuruiGendonaiTani;
     }
 
-    public RString getTxtKubunGendoChokaTani() {
+    public TextBoxNum getTxtKubunGendoChokaTani() {
         return txtKubunGendoChokaTani;
     }
 
-    public RString getTxtKubunGendonaiTani() {
+    public TextBoxNum getTxtKubunGendonaiTani() {
         return txtKubunGendonaiTani;
     }
 
-    public RString getTxtTanisuTanka() {
+    public TextBoxNum getTxtTanisuTanka() {
         return txtTanisuTanka;
     }
 
-    public RString getTxtHiyoSogaku() {
+    public TextBoxNum getTxtHiyoSogaku() {
         return txtHiyoSogaku;
     }
 
-    public RString getTxtKyufuritsu() {
+    public TextBoxNum getTxtKyufuritsu() {
         return txtKyufuritsu;
     }
 
-    public RString getTxtHokenFutangaku() {
+    public TextBoxNum getTxtHokenFutangaku() {
         return txtHokenFutangaku;
     }
 
-    public RString getTxtRiyoshaFutangakuHoken() {
+    public TextBoxNum getTxtRiyoshaFutangakuHoken() {
         return txtRiyoshaFutangakuHoken;
     }
 
-    public RString getTxtRiyoshaFutangakuZengaku() {
+    public TextBoxNum getTxtRiyoshaFutangakuZengaku() {
         return txtRiyoshaFutangakuZengaku;
     }
 
@@ -202,77 +203,77 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
         this.txtService = txtService;
     }
 
-    public void setTxtTani(RString txtTani) {
+    public void setTxtTani(TextBoxNum txtTani) {
         this.setOriginalData("txtTani", txtTani);
         this.txtTani = txtTani;
     }
 
-    public void setTxtWaribikigoRitsu(RString txtWaribikigoRitsu) {
+    public void setTxtWaribikigoRitsu(TextBoxNum txtWaribikigoRitsu) {
         this.setOriginalData("txtWaribikigoRitsu", txtWaribikigoRitsu);
         this.txtWaribikigoRitsu = txtWaribikigoRitsu;
     }
 
-    public void setTxtWaribikigoTani(RString txtWaribikigoTani) {
+    public void setTxtWaribikigoTani(TextBoxNum txtWaribikigoTani) {
         this.setOriginalData("txtWaribikigoTani", txtWaribikigoTani);
         this.txtWaribikigoTani = txtWaribikigoTani;
     }
 
-    public void setTxtKaisu(RString txtKaisu) {
+    public void setTxtKaisu(TextBoxNum txtKaisu) {
         this.setOriginalData("txtKaisu", txtKaisu);
         this.txtKaisu = txtKaisu;
     }
 
-    public void setTxtServiceTani(RString txtServiceTani) {
+    public void setTxtServiceTani(TextBoxNum txtServiceTani) {
         this.setOriginalData("txtServiceTani", txtServiceTani);
         this.txtServiceTani = txtServiceTani;
     }
 
-    public void setTxtShuruiGendoChokaTani(RString txtShuruiGendoChokaTani) {
+    public void setTxtShuruiGendoChokaTani(TextBoxNum txtShuruiGendoChokaTani) {
         this.setOriginalData("txtShuruiGendoChokaTani", txtShuruiGendoChokaTani);
         this.txtShuruiGendoChokaTani = txtShuruiGendoChokaTani;
     }
 
-    public void setTxtShuruiGendonaiTani(RString txtShuruiGendonaiTani) {
+    public void setTxtShuruiGendonaiTani(TextBoxNum txtShuruiGendonaiTani) {
         this.setOriginalData("txtShuruiGendonaiTani", txtShuruiGendonaiTani);
         this.txtShuruiGendonaiTani = txtShuruiGendonaiTani;
     }
 
-    public void setTxtKubunGendoChokaTani(RString txtKubunGendoChokaTani) {
+    public void setTxtKubunGendoChokaTani(TextBoxNum txtKubunGendoChokaTani) {
         this.setOriginalData("txtKubunGendoChokaTani", txtKubunGendoChokaTani);
         this.txtKubunGendoChokaTani = txtKubunGendoChokaTani;
     }
 
-    public void setTxtKubunGendonaiTani(RString txtKubunGendonaiTani) {
+    public void setTxtKubunGendonaiTani(TextBoxNum txtKubunGendonaiTani) {
         this.setOriginalData("txtKubunGendonaiTani", txtKubunGendonaiTani);
         this.txtKubunGendonaiTani = txtKubunGendonaiTani;
     }
 
-    public void setTxtTanisuTanka(RString txtTanisuTanka) {
+    public void setTxtTanisuTanka(TextBoxNum txtTanisuTanka) {
         this.setOriginalData("txtTanisuTanka", txtTanisuTanka);
         this.txtTanisuTanka = txtTanisuTanka;
     }
 
-    public void setTxtHiyoSogaku(RString txtHiyoSogaku) {
+    public void setTxtHiyoSogaku(TextBoxNum txtHiyoSogaku) {
         this.setOriginalData("txtHiyoSogaku", txtHiyoSogaku);
         this.txtHiyoSogaku = txtHiyoSogaku;
     }
 
-    public void setTxtKyufuritsu(RString txtKyufuritsu) {
+    public void setTxtKyufuritsu(TextBoxNum txtKyufuritsu) {
         this.setOriginalData("txtKyufuritsu", txtKyufuritsu);
         this.txtKyufuritsu = txtKyufuritsu;
     }
 
-    public void setTxtHokenFutangaku(RString txtHokenFutangaku) {
+    public void setTxtHokenFutangaku(TextBoxNum txtHokenFutangaku) {
         this.setOriginalData("txtHokenFutangaku", txtHokenFutangaku);
         this.txtHokenFutangaku = txtHokenFutangaku;
     }
 
-    public void setTxtRiyoshaFutangakuHoken(RString txtRiyoshaFutangakuHoken) {
+    public void setTxtRiyoshaFutangakuHoken(TextBoxNum txtRiyoshaFutangakuHoken) {
         this.setOriginalData("txtRiyoshaFutangakuHoken", txtRiyoshaFutangakuHoken);
         this.txtRiyoshaFutangakuHoken = txtRiyoshaFutangakuHoken;
     }
 
-    public void setTxtRiyoshaFutangakuZengaku(RString txtRiyoshaFutangakuZengaku) {
+    public void setTxtRiyoshaFutangakuZengaku(TextBoxNum txtRiyoshaFutangakuZengaku) {
         this.setOriginalData("txtRiyoshaFutangakuZengaku", txtRiyoshaFutangakuZengaku);
         this.txtRiyoshaFutangakuZengaku = txtRiyoshaFutangakuZengaku;
     }

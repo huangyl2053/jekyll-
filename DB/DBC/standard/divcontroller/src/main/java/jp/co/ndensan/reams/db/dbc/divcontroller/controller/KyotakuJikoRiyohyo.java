@@ -49,6 +49,12 @@ public class KyotakuJikoRiyohyo {
         合計
     }
 
+    private enum 別票行区分 {
+
+        明細,
+        合計
+    }
+
     /**
      * 画面ロード時の処理です。
      *
@@ -351,12 +357,15 @@ public class KyotakuJikoRiyohyo {
                 concat(meisai.getTxtJigyoshaName().getValue());
         RString service = meisai.getTxtServiceCode().getValue().
                 concat(new RString(":")).concat(meisai.getTxtServiceName().getValue());
+        RString serviceTani = new RString(meisai.getTxtServiceTani().getValue().toString());
 
         ViewStateHolder.put("jigyosha", jigyosha);
         ViewStateHolder.put("service", service);
+        ViewStateHolder.put("serviceTani", serviceTani);
 
         dgServiceRiyohyoBeppyoList_Row rowItem;
         rowItem = create別票一覧リスト(
+                別票行区分.明細,
                 btnSelect,
                 btnDelete,
                 jigyosha,
@@ -365,7 +374,7 @@ public class KyotakuJikoRiyohyo {
                 new RString(meisai.getTxtWaribikigoRitsu().getValue().toString()),
                 new RString(meisai.getTxtWaribikigoTani().getValue().toString()),
                 new RString(meisai.getTxtKaisu().getValue().toString()),
-                new RString(meisai.getTxtServiceTani().getValue().toString()),
+                serviceTani,
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -422,33 +431,39 @@ public class KyotakuJikoRiyohyo {
                 getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
         List<dgServiceRiyohyoBeppyoList_Row> listRow = beppyoList.getDgServiceRiyohyoBeppyoList().getDataSource();
         int index = Integer.parseInt(panel.getTxtBeppyoListSelectIndex().getValue().toString());
+        ControlGenerator cg = new ControlGenerator(getYaml().get(2));
 
         Button btnSelect = new Button();
         Button btnDelete = new Button();
         RString jigyosha = (RString) ViewStateHolder.get("jigyosha", RString.class);
-        RString service = (RString) ViewStateHolder.get("service", RString.class);
-        service = service.concat(new RString("合計"));
+        RString service = cg.getAsRString("サービス内容");
+        RString serviceTani = (RString) ViewStateHolder.get("serviceTani", RString.class);
 
         dgServiceRiyohyoBeppyoList_Row rowItem;
-        ControlGenerator cg = new ControlGenerator(getYaml().get(2));
-        rowItem = create別票一覧リスト(btnSelect, btnDelete,
+        rowItem = create別票一覧リスト(
+                別票行区分.合計,
+                btnSelect,
+                btnDelete,
                 jigyosha,
                 service,
                 cg.getAsRString("単位"),
                 cg.getAsRString("割引後率"),
                 cg.getAsRString("割引後単位"),
                 cg.getAsRString("回数"),
-                cg.getAsRString("サービス単位"),
-                new RString(gokei.getTxtShuruiGendoChokaTani().getValue().toString()),
+                serviceTani,
+                //                new RString(gokei.getTxtShuruiGendoChokaTani().getValue().toString()),
+                RString.EMPTY,
                 new RString(gokei.getTxtShuruiGendonaiTani().getValue().toString()),
-                new RString(gokei.getTxtKubunGendoChokaTani().getValue().toString()),
+                //                new RString(gokei.getTxtKubunGendoChokaTani().getValue().toString()),
+                RString.EMPTY,
                 new RString(gokei.getTxtKubunGendonaiTani().getValue().toString()),
                 new RString(gokei.getTxtTanisuTanka().getValue().toString()),
                 new RString(gokei.getTxtHiyoSogaku().getValue().toString()),
                 new RString(gokei.getTxtKyufuritsu().getValue().toString()),
                 new RString(gokei.getTxtHokenKyufugaku().getValue().toString()),
                 new RString(gokei.getTxtRiyoshaFutangakuHoken().getValue().toString()),
-                new RString(gokei.getTxtRiyoshaFutangakuZengaku().getValue().toString()));
+                RString.EMPTY);
+//                new RString(gokei.getTxtRiyoshaFutangakuZengaku().getValue().toString()));
         if (Integer.valueOf(index).equals(Integer.valueOf("-1"))) {
             rowItem.setRowState(RowState.Added);
             listRow.add(rowItem);
@@ -761,7 +776,15 @@ public class KyotakuJikoRiyohyo {
         dgServiceRiyohyoBeppyoList_Row rowItem;
         for (int index = 11; index < 14; index++) {
             ControlGenerator cg = new ControlGenerator(getYaml().get(index));
+            別票行区分 kubun;
+            if (cg.getAsRString("別票行区分").equals(new RString("明細"))) {
+                kubun = 別票行区分.明細;
+            } else {
+                kubun = 別票行区分.合計;
+            }
+
             rowItem = create別票一覧リスト(
+                    kubun,
                     btnSelect,
                     btnDelete,
                     cg.getAsRString("事業者"),
@@ -787,6 +810,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     private dgServiceRiyohyoBeppyoList_Row create別票一覧リスト(
+            別票行区分 kubun,
             Button btnSelect,
             Button btnDelete,
             RString txtJigyosha,
@@ -808,27 +832,53 @@ public class KyotakuJikoRiyohyo {
             RString txtRiyoshaFutangakuZengaku
     ) {
 
-        return new dgServiceRiyohyoBeppyoList_Row(
+        dgServiceRiyohyoBeppyoList_Row row = new dgServiceRiyohyoBeppyoList_Row(
                 btnSelect,
                 btnDelete,
-                txtJigyosha,
-                txtService,
-                txtTani,
-                txtWaribikigoRitsu,
-                txtWaribikigoTani,
-                txtKaisu,
-                txtServiceTani,
-                txtShuruiGendoChokaTani,
-                txtShuruiGendonaiTani,
-                txtKubunGendoChokaTani,
-                txtKubunGendonaiTani,
-                txtTanisuTanka,
-                txtHiyoSogaku,
-                txtKyufuritsu,
-                txtHokenFutangaku,
-                txtRiyoshaFutangakuHoken,
-                txtRiyoshaFutangakuZengaku);
+                RString.EMPTY,
+                RString.EMPTY,
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum());
 
+        row.setTxtJigyosha(txtJigyosha);
+        row.setTxtService(txtService);
+
+        if (kubun.equals(別票行区分.明細)) {
+            row.getTxtTani().setValue(new Decimal(txtTani.toString()));
+            row.getTxtWaribikigoRitsu().setValue(new Decimal(txtWaribikigoRitsu.toString()));
+            row.getTxtWaribikigoTani().setValue(new Decimal(txtWaribikigoTani.toString()));
+            row.getTxtKaisu().setValue(new Decimal(txtKaisu.toString()));
+            row.getTxtServiceTani().setValue(new Decimal(txtServiceTani.toString()));
+
+        } else {
+            row.getTxtServiceTani().setValue(new Decimal(txtServiceTani.toString()));
+//            row.getTxtShuruiGendoChokaTani().setValue(new Decimal(txtShuruiGendoChokaTani.toString()));
+            row.getTxtShuruiGendonaiTani().setValue(new Decimal(txtShuruiGendonaiTani.toString()));
+//            row.getTxtKubunGendoChokaTani().setValue(new Decimal(txtKubunGendoChokaTani.toString()));
+            row.getTxtKubunGendonaiTani().setValue(new Decimal(txtKubunGendonaiTani.toString()));
+            row.getTxtTanisuTanka().setValue(new Decimal(txtTanisuTanka.toString()));
+            row.getTxtHiyoSogaku().setValue(new Decimal(txtHiyoSogaku.toString()));
+            row.getTxtKyufuritsu().setValue(new Decimal(txtKyufuritsu.toString()));
+            row.getTxtHokenFutangaku().setValue(new Decimal(txtHokenFutangaku.toString()));
+            row.getTxtRiyoshaFutangakuHoken().setValue(new Decimal(txtRiyoshaFutangakuHoken.toString()));
+//            row.getTxtRiyoshaFutangakuZengaku().setValue(new Decimal(txtRiyoshaFutangakuZengaku.toString()));
+
+        }
+
+        return row;
     }
 
     private dgServiceRiyohyoList_Row createサービス利用票(
@@ -986,7 +1036,7 @@ public class KyotakuJikoRiyohyo {
         ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
 
         Decimal shuruiGendoChokaTani = gokei.getTxtShuruiGendoChokaTani().getValue();
-        Decimal shuruiGendonaiTani = gokei.getTxtShuruiGendonaiTani().getValue();
+//        Decimal shuruiGendonaiTani = gokei.getTxtShuruiGendonaiTani().getValue();
         Decimal tanisuTanka = gokei.getTxtTanisuTanka().getValue();
         Decimal kubunGendoChokaTani = gokei.getTxtKubunGendoChokaTani().getValue();
         Decimal kubunGendonaiTani = gokei.getTxtKubunGendonaiTani().getValue();
@@ -995,12 +1045,16 @@ public class KyotakuJikoRiyohyo {
         Decimal hiyoSogaku = kubunGendonaiTani.multiply(tanisuTanka);
         Decimal hokenKyufugaku = hiyoSogaku.multiply(kyufuritsu);
         Decimal futangakuHoken = hiyoSogaku.subtract(hokenKyufugaku);
-        Decimal futangakuZengaku = (shuruiGendoChokaTani.add(kubunGendoChokaTani)).multiply(tanisuTanka);
+
+        if (shuruiGendoChokaTani != null
+                && kubunGendoChokaTani != null) {
+            Decimal futangakuZengaku = (shuruiGendoChokaTani.add(kubunGendoChokaTani)).multiply(tanisuTanka);
+            gokei.getTxtRiyoshaFutangakuZengaku().setValue(futangakuZengaku);
+        }
 
         gokei.getTxtHiyoSogaku().setValue(hiyoSogaku);
         gokei.getTxtHokenKyufugaku().setValue(hokenKyufugaku);
         gokei.getTxtRiyoshaFutangakuHoken().setValue(futangakuHoken);
-        gokei.getTxtRiyoshaFutangakuZengaku().setValue(futangakuZengaku);
     }
 
     /**
@@ -1063,7 +1117,7 @@ public class KyotakuJikoRiyohyo {
     }
 
     private Decimal getTextBoxNumValue(TextBoxNum txt) {
-        Decimal ret = Decimal.ZERO;
+        Decimal ret;
         try {
             ret = txt.getValue();
         } catch (Throwable e) {
