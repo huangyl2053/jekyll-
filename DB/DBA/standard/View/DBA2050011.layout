@@ -116,11 +116,12 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "AtenaShokaiSimple_eraseBorder": true,
      "AtenaKanaMeisho_visible": true,
+     "AtenaMeisho_visible": true,
      "SeinengappiYMD_visible": true,
      "Nenrei_visible": true,
      "Seibetsu_visible": true,
+     "JuminShubetsu_visible": true,
      "NihonjinGaikokujin_visible": true,
      "JuminJotai_visible": true,
      "YubinNo_visible": true,
@@ -130,6 +131,8 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
+     "btnMemo_displayNone": false,
+     "btnDainosya_displayNone": true,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
      "btnKoza_displayNone": true,
@@ -148,10 +151,7 @@
      "SubGyomuUmu": "0",
      "SubGyomuSearchUmu": "0",
      "DainoninHyojiUmu": "1",
-     "AtenaMeisho_visible": true,
-     "JuminShubetsu_visible": true,
-     "btnMemo_displayNone": false,
-     "btnDainosya_displayNone": true
+     "AtenaShokaiSimple_eraseBorder": true
     },
     {
      "fieldName": "ShikakuJoho",
@@ -159,7 +159,7 @@
      "controlType": "CommonChildDiv",
      "width": "XS",
      "visible": true,
-     "displayNone": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -269,9 +269,6 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "S",
-     "onSelectByDblClick": "",
-     "onSelectByModifyButton": "onSelectByModifyButton_dgTekiyoJogaiRireki",
-     "onSelectByDeleteButton": "",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -611,7 +608,10 @@
      },
      "onSort": "",
      "onSelect": "",
+     "onSelectByDblClick": "",
      "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "onSelectByModifyButton_dgTekiyoJogaiRireki",
+     "onSelectByDeleteButton": "",
      "onAfterRequest": "",
      "onAfterRequestByDblClick": "",
      "onAfterRequestBySelectButton": "",
@@ -663,7 +663,6 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "selectedItem": "jogaishaTekiyo",
          "dataSource": [
           {
            "key": "jogaishaTekiyo",
@@ -678,6 +677,7 @@
            "value": "その他"
           }
          ],
+         "selectedItem": "jogaishaTekiyo",
          "disabledItem": []
         },
         {
@@ -923,7 +923,6 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "selectedItem": "jogaishaKaijo",
          "dataSource": [
           {
            "key": "jogaishaKaijo",
@@ -946,6 +945,7 @@
            "value": "その他"
           }
          ],
+         "selectedItem": "jogaishaKaijo",
          "disabledItem": []
         },
         {
