@@ -351,6 +351,40 @@ var DBZ;
         });
 
 
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "lblKijunYMDMsgVisible", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["visible"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["visible"] = value;
+                } else {
+                    this.layout.items[0].items[6]["visible"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "lblKijunYMDMsgDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[6]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         SetaiShotokuIchiran_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("txtKijunYmdVisible");
@@ -373,6 +407,8 @@ var DBZ;
             Uz.JSControlUtil.registProperty("btnNarabeteHyoJiDisplayNone");
             Uz.JSControlUtil.registProperty("txtSetaiCodeDisyplayNone");
             Uz.JSControlUtil.registProperty("btnSaihyojiDisplayNone");
+            Uz.JSControlUtil.registProperty("lblKijunYMDMsgVisible");
+            Uz.JSControlUtil.registProperty("lblKijunYMDMsgDisplayNone");
         };
 
         SetaiShotokuIchiran_Design.prototype.getEditablePropertyInfo = function () {
@@ -397,6 +433,8 @@ var DBZ;
             editablePropertyInfo["btnNarabeteHyoJiDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["txtSetaiCodeDisyplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["btnSaihyojiDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["lblKijunYMDMsgVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["lblKijunYMDMsgDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["displayNone"];
 
             return editablePropertyInfo;
         };
@@ -513,6 +551,7 @@ var DBZ;
                             "selectControlID": "ddlSetaiIchiranKazeiNendo_core",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "onFocus": "",
                             "onBlur": "",
                             "onChange": "",
@@ -557,7 +596,8 @@ var DBZ;
                             "imageFileUrl": "",
                             "imageWidth": "",
                             "imageHeight": "",
-                            "icon": 0
+                            "icon": 0,
+                            "heightTextBoxMatches": false
                         },
                         {
                             "fieldName": "txtSetaiIchiranSetaiCode",
@@ -626,6 +666,7 @@ var DBZ;
                             "selectControlID": "chkSetaiIchiranAll_core",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "onChange": "",
                             "labelLText": "",
                             "labelLWidth": "S",
@@ -700,7 +741,8 @@ var DBZ;
                             "imageFileUrl": "",
                             "imageWidth": "",
                             "imageHeight": "",
-                            "icon": 0
+                            "icon": 0,
+                            "heightTextBoxMatches": false
                         },
                         {
                             "fieldName": "dgSetaiShotoku",
@@ -722,6 +764,7 @@ var DBZ;
                             "selectControlID": "dgSetaiShotoku",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "height": "Auto",
                             "dataSource": [],
                             "selectedItems": [],
@@ -1157,6 +1200,11 @@ var DBZ;
                             "onSelectBySelectButton": "",
                             "onSelectByModifyButton": "",
                             "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
@@ -1199,10 +1247,7 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": true,
-                    "eraseBorderBottom": true,
-                    "eraseBorderRight": true,
-                    "eraseBorderLeft": true,
+                    "eraseBorder": true,
                     "backgroundColor": 0,
                     "widthAuto": true,
                     "panelDisplay": 0,
@@ -1333,11 +1378,23 @@ var DBZ;
                     "publicChildFieldName": "btnSaiHyoji",
                     "publicChildProperty": "displayNone",
                     "newPropertyName": "btnSaihyojiDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "lblSetaiIchiranMsg",
+                    "publicChildProperty": "visible",
+                    "newPropertyName": "lblKijunYMDMsgVisible"
+                },
+                {
+                    "publicChildFieldName": "lblSetaiIchiranMsg",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "lblKijunYMDMsgDisplayNone"
                 }
             ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return SetaiShotokuIchiran_Design;
     })(Uz.CommonChildDiv);
