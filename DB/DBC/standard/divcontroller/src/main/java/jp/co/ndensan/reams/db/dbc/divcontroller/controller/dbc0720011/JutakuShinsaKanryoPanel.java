@@ -26,7 +26,7 @@ public class JutakuShinsaKanryoPanel {
     public ResponseData<JutakuShinsaKanryoPanelDiv> onClick_btnSave(JutakuShinsaKanryoPanelDiv panel) {
         ResponseData<JutakuShinsaKanryoPanelDiv> response = new ResponseData<>();
 
-        KaigoKanryoMessage.setMessage(panel.getKanryoMessage(), new RString("住宅改修費支給申請審査結果登録が完了しました。"));
+        KaigoKanryoMessage.setMessage(panel.getKanryoMessage(), new RString("住宅改修費支給申請審査結果を更新しました。"));
         response.data = panel;
         return response;
     }

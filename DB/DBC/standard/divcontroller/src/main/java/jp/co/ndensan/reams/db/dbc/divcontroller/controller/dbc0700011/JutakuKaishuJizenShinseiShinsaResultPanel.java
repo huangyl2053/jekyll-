@@ -56,7 +56,8 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
         ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> response = new ResponseData<>();
 
         //今回設定
-        setSummaryNowData(resultPanel);
+        setSummaryNowData(resultPanel, contentsPanel.getJutakuKaishuJizenShinseiDetail()
+                .getJutakuJizenShinseiDetailInput().getDgJutakuKaishuDetail().getDataSource().get(0).getTxtMitsumoriAmount().getValue());
         response.data = resultPanel;
         return response;
 
@@ -99,25 +100,24 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
     /*
      今回の支払状況の値を設定します。
      */
-    private void setSummaryNowData(JutakuKaishuJizenShinseiShinsaResultPanelDiv resultPanel) {
+    private void setSummaryNowData(JutakuKaishuJizenShinseiShinsaResultPanelDiv resultPanel, Decimal mitsumoriAmount) {
 
-        /////////////////////////////////////////////////////////////////////////////////////////
-        //JutakuData.xml Read　②
-        //今回
-        String payTotalNow = ymlData.get(9).get("payTotalNow").toString();
-        String hokenSeikyuAmountNow = ymlData.get(9).get("hokenSeikyuAmountNow").toString();
-        String riyoshaFutanAmountNow = ymlData.get(9).get("riyoshaFutanAmountNow").toString();
-        String limitOverAmountNow = ymlData.get(9).get("limitOverAmountNow").toString();
-        /////////////////////////////////////////////////////////////////////////////////////////
-
+//        /////////////////////////////////////////////////////////////////////////////////////////
+//        //JutakuData.xml Read　②
+//        //今回
+//        String payTotalNow = ymlData.get(9).get("payTotalNow").toString();
+//        String hokenSeikyuAmountNow = ymlData.get(9).get("hokenSeikyuAmountNow").toString();
+//        String riyoshaFutanAmountNow = ymlData.get(9).get("riyoshaFutanAmountNow").toString();
+//        String limitOverAmountNow = ymlData.get(9).get("limitOverAmountNow").toString();
+//        /////////////////////////////////////////////////////////////////////////////////////////
         resultPanel.getJutakuJizenShinseiKyufugakuSummary().
-                getTblSeikyuSummary().getTxtHiyoTotalNow().setValue(new Decimal(payTotalNow));
+                getTblSeikyuSummary().getTxtHiyoTotalNow().setValue(mitsumoriAmount);
         resultPanel.getJutakuJizenShinseiKyufugakuSummary().
-                getTblSeikyuSummary().getTxtHokenTaishoHiyoNow().setValue(new Decimal(hokenSeikyuAmountNow));
+                getTblSeikyuSummary().getTxtHokenTaishoHiyoNow().setValue(mitsumoriAmount);
         resultPanel.getJutakuJizenShinseiKyufugakuSummary().
-                getTblSeikyuSummary().getTxtHokenKyufuAmountNow().setValue(new Decimal(riyoshaFutanAmountNow));
+                getTblSeikyuSummary().getTxtHokenKyufuAmountNow().setValue(mitsumoriAmount.multiply(0.9));
         resultPanel.getJutakuJizenShinseiKyufugakuSummary().
-                getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow().setValue(new Decimal(limitOverAmountNow));
+                getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow().setValue(mitsumoriAmount.multiply(0.1));
     }
 
     /*
@@ -125,17 +125,17 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      */
     private void setShinseiShinsaResult(JutakuKaishuJizenShinseiShinsaResultPanelDiv panel) {
 
-        /////////////////////////////////////////////////////////////////////////////////////////
-        //JutakuData.xml Read　②
-        String judgeDate = ymlData.get(10).get("judgeDate").toString();
-        String judgeKubun = ymlData.get(10).get("judgeKubun").toString();
-        String shoninCondition = ymlData.get(10).get("shoninCondition").toString();
-
-        /////////////////////////////////////////////////////////////////////////////////////////
-        //TO DO  JutakuData.xml Write　③
-        panel.getTxtJudgeDate().setValue(new RDate(judgeDate));
-        panel.getRadJudgeKubun().setSelectedItem(new RString(judgeKubun));
-        panel.getTxtShoninCondition().setValue(new RString(shoninCondition));
+//        /////////////////////////////////////////////////////////////////////////////////////////
+//        //JutakuData.xml Read　②
+//        String judgeDate = ymlData.get(10).get("judgeDate").toString();
+//        String judgeKubun = ymlData.get(10).get("judgeKubun").toString();
+//        String shoninCondition = ymlData.get(10).get("shoninCondition").toString();
+//
+//        /////////////////////////////////////////////////////////////////////////////////////////
+//        //TO DO  JutakuData.xml Write　③
+//        panel.getTxtJudgeDate().setValue(new RDate(judgeDate));
+        panel.getRadJudgeKubun().setSelectedItem(new RString("shonin"));
+//        panel.getTxtShoninCondition().setValue(new RString(shoninCondition));
 
     }
 

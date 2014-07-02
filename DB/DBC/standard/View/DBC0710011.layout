@@ -1197,10 +1197,10 @@
          "formatLength": "10"
         },
         {
-         "fieldName": "btnSearchCreationJigyoshaName",
+         "fieldName": "btnJigyoshaInputGuide",
          "items": [],
-         "controlType": "Button",
-         "width": "XS",
+         "controlType": "ButtonDialog",
+         "width": "S",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1213,17 +1213,22 @@
          "authorityMode": 0,
          "marginLeft": "0",
          "marginRight": "XS",
-         "selectControlID": "btnSearchCreationJigyoshaName",
+         "selectControlID": "btnJigyoshaInputGuide",
          "helpMessageID": "",
          "jpControlName": "",
-         "text": "探",
+         "text": "ButtonDialog1",
          "imageWidth": "",
          "imageHeight": "",
          "onClick": "",
-         "appearance": 0,
-         "imageFileUrl": "",
+         "appearance": 2,
+         "imageFileUrl": "/uz/uza/image/UZ_Search.png",
          "icon": 0,
-         "heightTextBoxMatches": true
+         "heightTextBoxMatches": true,
+         "displayChildDivName": "DBZ.JigyoshaInputGuide",
+         "dataPassing": [],
+         "visibleCloseButton": true,
+         "onOkClose": "",
+         "onBeforeOpenDialog": ""
         },
         {
          "fieldName": "txtCreationJigyoshaName",
@@ -1245,7 +1250,7 @@
          "selectControlID": "txtCreationJigyoshaName_core",
          "helpMessageID": "",
          "jpControlName": "",
-         "readOnly": false,
+         "readOnly": true,
          "required": false,
          "maxLength": 100000000,
          "minLength": 0,
@@ -1771,11 +1776,6 @@
      "transition": "申請登録内容"
     },
     {
-     "fieldName": "btnCancel",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "dgJutakuKaishuShinseiList",
      "event": "onSelectBySelectButton",
      "transition": "申請登録内容"
@@ -1787,6 +1787,11 @@
     },
     {
      "fieldName": "btnAddShikyuShinsei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCancelShinsei",
      "event": "onClick",
      "transition": ""
     }
@@ -1876,11 +1881,6 @@
      "transition": ""
     },
     {
-     "fieldName": "btnCancel",
-     "event": "onClick",
-     "transition": "申請登録"
-    },
-    {
      "fieldName": "dgJutakuKaishuShinseiList",
      "event": "onSelectBySelectButton",
      "transition": ""
@@ -1892,6 +1892,11 @@
     },
     {
      "fieldName": "btnAddShikyuShinsei",
+     "event": "onClick",
+     "transition": "申請登録"
+    },
+    {
+     "fieldName": "btnCancelShinsei",
      "event": "onClick",
      "transition": "申請登録"
     }
@@ -1928,11 +1933,6 @@
      "transition": ""
     },
     {
-     "fieldName": "btnCancel",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "dgJutakuKaishuShinseiList",
      "event": "onSelectBySelectButton",
      "transition": ""
@@ -1944,6 +1944,11 @@
     },
     {
      "fieldName": "btnAddShikyuShinsei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCancelShinsei",
      "event": "onClick",
      "transition": ""
     }

@@ -30,7 +30,7 @@ public class JutakuShikyuShinseiKanryoPanel {
         ResponseData<JutakuShikyuShinseiKanryoPanelDiv> response = new ResponseData<>();
 
         KaigoKanryoMessage.setMessage(kanryoPanel.getKanryoMessage(),
-                new RString("住宅改修費支給申請登録が完了しました。"),
+                new RString("住宅改修費支給申請を更新しました。"),
                 atenaDiv.getKaigoShikakuKihon().getTxtHihokenshaNo().getValue(),
                 atenaDiv.getKaigoAtenaInfo().getAtenaInfo().getTxtAtenaMeisho().getValue());
         response.data = kanryoPanel;

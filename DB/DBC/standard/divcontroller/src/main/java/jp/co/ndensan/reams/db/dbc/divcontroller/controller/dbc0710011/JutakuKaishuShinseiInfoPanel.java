@@ -104,13 +104,11 @@ public class JutakuKaishuShinseiInfoPanel {
 
         //支給内容をクリア処理が行う
         setClearJutakuKaishuShinseiInfoPanelDiv(panel);
-        //TODO 新規追加はデフォルト表示以外表示させない。
-        ShinseishaInfo.setData(panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseisha(), 0);
+
 //        //追加するデータ
 //        String ymlDataName = "JutakuData_2_1.yml";
 //        //事前申請内容の情報を表示する。
 //        setInfoData(panel, ymlDataName);
-
         response.data = panel;
         return response;
 
@@ -647,8 +645,9 @@ public class JutakuKaishuShinseiInfoPanel {
                 getTxtRiyoshaFutanAmountNow().clearValue();
 
         //申請者情報初期化設定 clear
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseisha().getTxtShinseiDate().clearValue();
+//        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseisha().getTxtShinseiDate().clearValue();
         panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseisha().getTxtUketsukeDate().clearValue();
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseisha().getTxtShinseishaNameKana().clearValue();
         panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseisha().getTxtShinseishaName().clearValue();
         panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseisha().getTxtYubinNo().clearValue();
         panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseisha().getTxtAddress().clearValue();
@@ -667,6 +666,7 @@ public class JutakuKaishuShinseiInfoPanel {
         panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKinyuKikanName().clearValue();
         panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKinyuKikanBrunchCode().clearValue();
         panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKinyuKikanBrunchName().clearValue();
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKozaNo().clearValue();
         panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKozaMeigininKana().clearValue();
         panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKozaMeiginin().clearValue();
     }

@@ -1025,7 +1025,7 @@
              "isPassword": false,
              "isComboBox": false,
              "onFocus": "",
-             "onBlur": "onBlurJigyoshaCode",
+             "onBlur": "",
              "onChange": "",
              "onKeyPress": "",
              "text": "",
@@ -1066,13 +1066,22 @@
              "imageHeight": "",
              "onClick": "",
              "appearance": 2,
-             "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
+             "imageFileUrl": "/uz/uza/image/UZ_Search.png",
              "icon": 0,
              "heightTextBoxMatches": true,
              "displayChildDivName": "DBZ.JigyoshaInputGuide",
-             "dataPassing": [],
+             "dataPassing": [
+              {
+               "key": "jigyoshaCode",
+               "controlName": "txtJigyoshaCode"
+              },
+              {
+               "key": "jigyoshaMeisho",
+               "controlName": "txtJigyoshaName"
+              }
+             ],
              "visibleCloseButton": true,
-             "onOkClose": "",
+             "onOkClose": "onOkCloseJigyoshaDialog",
              "onBeforeOpenDialog": ""
             },
             {
@@ -1125,7 +1134,7 @@
              "fieldName": "txtServiceShurui1",
              "items": [],
              "controlType": "TextBox",
-             "width": "80",
+             "width": "85",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -1171,7 +1180,7 @@
              "fieldName": "txtServiceShurui2",
              "items": [],
              "controlType": "TextBox",
-             "width": "80",
+             "width": "85",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -1183,7 +1192,7 @@
              "toolTip": "",
              "authorityMode": 0,
              "marginLeft": "XS",
-             "marginRight": "XS",
+             "marginRight": "0",
              "selectControlID": "txtServiceShurui2_core",
              "helpMessageID": "",
              "jpControlName": "",
@@ -1217,7 +1226,7 @@
              "fieldName": "txtKanrishaName",
              "items": [],
              "controlType": "TextBox",
-             "width": "354",
+             "width": "352",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -1469,11 +1478,20 @@
              "imageHeight": "",
              "onClick": "",
              "appearance": 2,
-             "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
+             "imageFileUrl": "/uz/uza/image/UZ_Search.png",
              "icon": 0,
              "heightTextBoxMatches": true,
              "displayChildDivName": "DBZ.JigyoshaInputGuide",
-             "dataPassing": [],
+             "dataPassing": [
+              {
+               "key": "jigyoshaCode",
+               "controlName": "txtItakuJigyoshaCode"
+              },
+              {
+               "key": "jigyoshaMeisho",
+               "controlName": "txtItakuJigyoshaName"
+              }
+             ],
              "visibleCloseButton": true,
              "onOkClose": "",
              "onBeforeOpenDialog": ""
@@ -2039,12 +2057,8 @@
      "requestUrl": "dbc/db/dbc/KyotakuKeikakuTodokedeDetail/onChangeRadKeikakuSakuseiKubun"
     },
     {
-     "eventName": "onBlurJigyoshaCode",
-     "requestUrl": "dbc/db/dbc/KyotakuKeikakuTodokedeDetail/onBlurJigyoshaCode"
-    },
-    {
-     "eventName": "onBlurItakuJigyoshaCode",
-     "requestUrl": "dbc/db/dbc/KyotakuKeikakuTodokedeDetail/onBlurItakuJigyoshaCode"
+     "eventName": "onOkCloseJigyoshaDialog",
+     "requestUrl": "dbc/db/dbc/KyotakuKeikakuTodokedeDetail/onOkCloseJigyoshaDialog"
     }
    ],
    "hiddenInput": [],

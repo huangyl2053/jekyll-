@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJi
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,9 +29,9 @@ public class JutakuKaishuJizenShoninKetteiTsuchishoPanel {
     public ResponseData<JutakuKaishuJizenShoninKetteiTsuchishoPanelDiv> onLoad(JutakuKaishuJizenShoninKetteiTsuchishoPanelDiv panel) {
         ResponseData<JutakuKaishuJizenShoninKetteiTsuchishoPanelDiv> response = new ResponseData<>();
 
-        List<HashMap> targetSource = YamlLoader.DBZ.loadAsList(new RString("ReportPublish.yml"));
-        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
-        panel.getTxtHakkoDate().setValue(cg.getAsRDate("発行日"));
+//        List<HashMap> targetSource = YamlLoader.DBZ.loadAsList(new RString("ReportPublish.yml"));
+//        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
+        panel.getTxtHakkoDate().setValue(new RDate("20140711"));
         response.data = panel;
         return response;
     }

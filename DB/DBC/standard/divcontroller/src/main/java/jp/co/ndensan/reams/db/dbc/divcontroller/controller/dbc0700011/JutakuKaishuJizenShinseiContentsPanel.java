@@ -42,16 +42,17 @@ public class JutakuKaishuJizenShinseiContentsPanel {
             JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
         ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
 
-        //住宅所有者・被保険者との関係　
-        setJutakuOwnerData(contentsPanel);
-        //住宅改修明細 　　　　　　　　　
-        setZizenShinseiDetailInput(contentsPanel);
-        //申請者情報　初期化設定　　　　　　
-        setShinseishaInfo(contentsPanel);
-        //住宅改修理由書
-        setShinseiReason(contentsPanel);
-        //口座振替申請情報（UR)
-        setShinseiKozaInfo(contentsPanel);
+//        //住宅所有者・被保険者との関係　
+//        setJutakuOwnerData(contentsPanel);
+//        //住宅改修明細 　　　　　　　　　
+//        setZizenShinseiDetailInput(contentsPanel);
+//        //申請者情報　初期化設定　　　　　　
+//        setShinseishaInfo(contentsPanel);
+//        //住宅改修理由書
+//        setShinseiReason(contentsPanel);
+//        //口座振替申請情報（UR)
+//        setShinseiKozaInfo(contentsPanel);
+        setDefaultData(contentsPanel);
 
         response.data = contentsPanel;
         return response;
@@ -84,27 +85,14 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 
     }
 
-    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_clear(
-            JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
-        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
-
-        response.data = panel;
-        return response;
-    }
-
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_copyToAddress(
-            JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
-        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
-        response.data = panel;
-        return response;
-    }
-
-    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_btnCopyAddress(
             JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
         ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
 
         panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().getJutakuKaishuDetailInput()
-                .getTxtKaishuTaishoAddress().setValue(hihoPanel.getKaigoAtena().getAtenaInfo().getTxtJusho().getValue());
+                .getTxtKaishuTaishoAddress().setValue(
+                        hihoPanel.getKaigoAtena().getAtenaInfo().getTxtJusho().getValue());
+
         response.data = panel;
         return response;
     }
@@ -112,6 +100,18 @@ public class JutakuKaishuJizenShinseiContentsPanel {
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_copyToInfo(
             JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
         ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
+
+        panel.getJutakuKaishuJizenShinseisha().getTxtShinseishaNameKana().setValue(
+                hihoPanel.getKaigoAtena().getAtenaInfo().getTxtAtenaKanaMeisho().getValue());
+        panel.getJutakuKaishuJizenShinseisha().getTxtShinseishaName().setValue(
+                hihoPanel.getKaigoAtena().getAtenaInfo().getTxtAtenaMeisho().getValue());
+        panel.getJutakuKaishuJizenShinseisha().getTxtYubinNo().setValue(
+                hihoPanel.getKaigoAtena().getAtenaInfo().getTxtYubinNo().getValue());
+        panel.getJutakuKaishuJizenShinseisha().getTxtAddress().setValue(
+                hihoPanel.getKaigoAtena().getAtenaInfo().getTxtJusho().getValue());
+        panel.getJutakuKaishuJizenShinseisha().getTxtTelNo().setValue(
+                new RString("0123456789"));
+
         response.data = panel;
         return response;
     }
@@ -122,6 +122,7 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 
         //クリア設定
         setJutakuKaishuJizenShinseiDetailInput(panel);
+
         response.data = panel;
         return response;
     }
@@ -142,9 +143,16 @@ public class JutakuKaishuJizenShinseiContentsPanel {
         return response;
     }
 
+    private void setDefaultData(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
+        panel.getJutakuKaishuJizenShinseisha().getTxtShinseiDate().setValue(new RDate("20140711"));
+
+        panel.getJutakuKaishuJizenShinseiKoza().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
+        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getRadKozaShubetsu().setSelectedItem(new RString("futsu"));
+    }
     /*
      住宅所有者・被保険者との関係　の初期値をセットします。
      */
+
     private void setJutakuOwnerData(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
 
         /////////////////////////////////////////////////////////////////////////////////////////

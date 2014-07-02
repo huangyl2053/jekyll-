@@ -26,7 +26,7 @@ public class YoguShinsaKanryoPanel {
     public ResponseData<YoguShinsaKanryoPanelDiv> onLoad(YoguShinsaKanryoPanelDiv panel) {
         ResponseData<YoguShinsaKanryoPanelDiv> response = new ResponseData<>();
 
-        KaigoKanryoMessage.setMessage(panel.getKanryoMessage(), new RString(" 福祉用具購入費支給申請審査結果登録が完了しました。"));
+        KaigoKanryoMessage.setMessage(panel.getKanryoMessage(), new RString(" 福祉用具購入費支給申請審査結果を更新しました。"));
         response.data = panel;
         return response;
     }
