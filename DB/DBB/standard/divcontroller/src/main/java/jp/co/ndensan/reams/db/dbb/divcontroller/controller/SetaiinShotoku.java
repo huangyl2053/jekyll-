@@ -50,6 +50,12 @@ public class SetaiinShotoku {
         
         FukaRirekiDiv rirekiDiv = (FukaRirekiDiv) ViewStateHolder.get("賦課履歴", FukaRirekiDiv.class);
         
+        if(div.getSetaiShotokuIchiran().getChkSetaiIchiranAll().getSelectedItems().size() > 0){
+            div.getSetaiShotokuIchiran().getLblSetaiIchiranMsg().setDisplayNone(true);
+        } else {
+            div.getSetaiShotokuIchiran().getLblSetaiIchiranMsg().setDisplayNone(false);
+        }
+        
         div.setDisplayNone(false);
         
         RString mode = setProperty_SetaiinShotku(div);

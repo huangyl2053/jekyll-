@@ -17,7 +17,10 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
@@ -27,7 +30,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 public class FukaTaishoSearch {
 
     private static final RString FUKA_SHOKAI_GAITOSHA = new RString("DBZU030001/FukaShokaiGaitoshaData.yml");
+    private static final Decimal DEFAULT_MAX_NUMBER = new Decimal(30);
 
+    public ResponseData<FukaTaishoSearchDiv> onLoad_FukaTaishoSearch(FukaTaishoSearchDiv div){
+        
+        div.getTaishoshaSearch().getSearchCriteriaOfOther().getTxtMaxNumber().setValue(DEFAULT_MAX_NUMBER);
+        
+        DropDownList ddl = new DropDownList();
+        ddl.setDataSource(createFukanendoDDL());
+        div.getTaishoshaSearch().getSearchCriteriaOfOther().setDdlFukaNendo(ddl);
+        div.getTaishoshaSearch().getSearchCriteriaOfOther().getDdlFukaNendo().setSelectedItem(new RString(("平成26年度")));
+        return createResponseData(div);
+    }
+    
     public ResponseData<FukaTaishoSearchDiv> onClick_Search(FukaTaishoSearchDiv div) {
 
         search(div);
@@ -47,7 +62,11 @@ public class FukaTaishoSearch {
         List yamlSearchResult = getYamlSearchResult(div, searchValue);
 
         RString selectedValue = div.getTaishoshaSearch().getSearchCriteriaOfOther().getDdlFukaNendo().getSelectedValue();
-        div.getTaishoshaSentaku().getTxtFukanendo().setValue(new RDate(selectedValue.toString()));
+        if(selectedValue == null || selectedValue.isEmpty()){
+        } else {
+            div.getTaishoshaSentaku().getTxtFukanendo().setValue(new RDate(selectedValue.toString()));
+        }
+        
         setDataGrid(div, yamlSearchResult);
     }
 
@@ -253,5 +272,28 @@ public class FukaTaishoSearch {
 
         DataGrid<dgTaishoshaIchiran_Row> grid = div.getTaishoshaSentaku().getDgTaishoshaIchiran();
         grid.setDataSource(arrayRowList);
+    }
+    private List<KeyValueDataSource> createFukanendoDDL(){
+        
+        List<KeyValueDataSource> arrayDDLList = new ArrayList<>();
+        
+        arrayDDLList.add(new KeyValueDataSource(new RString("全年度"), new RString("全年度")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成26年度"), new RString("平26")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成25年度"), new RString("平25")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成24年度"), new RString("平24")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成23年度"), new RString("平23")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成22年度"), new RString("平22")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成21年度"), new RString("平21")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成20年度"), new RString("平20")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成19年度"), new RString("平19")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成18年度"), new RString("平18")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成17年度"), new RString("平17")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成16年度"), new RString("平16")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成15年度"), new RString("平15")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成14年度"), new RString("平14")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成13年度"), new RString("平13")));
+        arrayDDLList.add(new KeyValueDataSource(new RString("平成12年度"), new RString("平12")));
+        
+        return arrayDDLList;
     }
 }
