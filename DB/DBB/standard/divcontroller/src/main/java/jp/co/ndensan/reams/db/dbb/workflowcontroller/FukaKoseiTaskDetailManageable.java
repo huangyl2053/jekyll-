@@ -18,8 +18,8 @@ public class FukaKoseiTaskDetailManageable implements ITaskDetailManageable {
     @Override
     public RString getDetailString() {
 
-        RString 被保番号 = new RString("0000000000009401");
-        RString 氏名 = new RString("電算　次郎");
+        RString 被保番号 = new RString("被保番号：0000000094");
+        RString 氏名 = new RString("氏名：電算　次郎");
 
         RStringBuilder rsb = new RStringBuilder();
         rsb.append(被保番号);
