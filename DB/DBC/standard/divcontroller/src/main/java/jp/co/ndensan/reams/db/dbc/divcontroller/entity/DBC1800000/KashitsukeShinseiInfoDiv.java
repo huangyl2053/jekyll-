@@ -6,6 +6,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShinseiHoshoninDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShinseiServiceDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShinseiTeishutsuDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShinseishaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -22,6 +25,8 @@ public class KashitsukeShinseiInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtUketsukeYMD")
+    private TextBoxDate txtUketsukeYMD;
     @JsonProperty("txtShinseiYMD")
     private TextBoxDate txtShinseiYMD;
     @JsonProperty("txtRiyoKikan")
@@ -38,10 +43,6 @@ public class KashitsukeShinseiInfoDiv extends Panel {
     private KashitsukeShinseiHoshoninDiv KashitsukeShinseiHoshonin;
     @JsonProperty("KashitsukeShinseiTeishutsu")
     private KashitsukeShinseiTeishutsuDiv KashitsukeShinseiTeishutsu;
-    @JsonProperty("btnKashitsukeKakutei")
-    private Button btnKashitsukeKakutei;
-    @JsonProperty("btnKashitsukekinReturn")
-    private Button btnKashitsukekinReturn;
     @JsonProperty("txtKashitsukeShinseiListSelectedIndex")
     private TextBox txtKashitsukeShinseiListSelectedIndex;
 
@@ -51,6 +52,16 @@ public class KashitsukeShinseiInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("txtUketsukeYMD")
+    public TextBoxDate getTxtUketsukeYMD() {
+        return txtUketsukeYMD;
+    }
+
+    @JsonProperty("txtUketsukeYMD")
+    public void setTxtUketsukeYMD(TextBoxDate txtUketsukeYMD) {
+        this.txtUketsukeYMD=txtUketsukeYMD;
+    }
+
     @JsonProperty("txtShinseiYMD")
     public TextBoxDate getTxtShinseiYMD() {
         return txtShinseiYMD;
@@ -129,26 +140,6 @@ public class KashitsukeShinseiInfoDiv extends Panel {
     @JsonProperty("KashitsukeShinseiTeishutsu")
     public void setKashitsukeShinseiTeishutsu(KashitsukeShinseiTeishutsuDiv KashitsukeShinseiTeishutsu) {
         this.KashitsukeShinseiTeishutsu=KashitsukeShinseiTeishutsu;
-    }
-
-    @JsonProperty("btnKashitsukeKakutei")
-    public Button getBtnKashitsukeKakutei() {
-        return btnKashitsukeKakutei;
-    }
-
-    @JsonProperty("btnKashitsukeKakutei")
-    public void setBtnKashitsukeKakutei(Button btnKashitsukeKakutei) {
-        this.btnKashitsukeKakutei=btnKashitsukeKakutei;
-    }
-
-    @JsonProperty("btnKashitsukekinReturn")
-    public Button getBtnKashitsukekinReturn() {
-        return btnKashitsukekinReturn;
-    }
-
-    @JsonProperty("btnKashitsukekinReturn")
-    public void setBtnKashitsukekinReturn(Button btnKashitsukekinReturn) {
-        this.btnKashitsukekinReturn=btnKashitsukekinReturn;
     }
 
     @JsonProperty("txtKashitsukeShinseiListSelectedIndex")

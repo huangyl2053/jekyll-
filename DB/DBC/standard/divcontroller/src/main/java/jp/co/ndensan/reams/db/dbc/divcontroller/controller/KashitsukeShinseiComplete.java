@@ -33,7 +33,11 @@ public class KashitsukeShinseiComplete {
         ResponseData<KashitsukeShinseiCompleteDiv> response = new ResponseData<>();
 
         ControlGenerator cg = new ControlGenerator(getYamlData(YML_COMPLETE).get(0));
-        KaigoKanryoMessage.setMessage(panel.getKashitsukeShinseiCompleteInfo(), cg.getAsRString("メッセージ"));
+        KaigoKanryoMessage.setMessage(
+                panel.getKashitsukeShinseiCompleteInfo(),
+                cg.getAsRString("メッセージ"),
+                cg.getAsRString("上部"),
+                cg.getAsRString("下部"));
 
         response.data = panel;
         return response;

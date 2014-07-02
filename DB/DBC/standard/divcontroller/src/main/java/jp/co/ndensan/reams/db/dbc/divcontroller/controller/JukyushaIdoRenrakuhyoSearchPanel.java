@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0070011.dgSofuIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0040011.JukyushaIdoRenrakuhyoSearchConditionDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0040011.JukyushaIdoRenrakuhyoSearchPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0040011.dgJukyushaIdoRenrakuhyoSearchResult_Row;
@@ -16,13 +15,10 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+
 
 /**
  * 受給者異動連絡票情報照会の検索パネルです。
@@ -59,12 +55,11 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
     private void setJukyushaIdoRenrakuhyoSearchCondition(JukyushaIdoRenrakuhyoSearchPanelDiv searchPanel) {
         List<HashMap> ymlData = ymlData("dbc0040011/JukyushaIdoRenrakuhyoSearchCondition.yml");
 
-        HashMap hashMap = ymlData.get(0);
-        ControlGenerator ymlDt = new ControlGenerator(hashMap);
+//        HashMap hashMap = ymlData.get(0);
+//        ControlGenerator ymlDt = new ControlGenerator(hashMap);
 
-        //searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtSearchHihoNo().setValue(ymlDt.getAsRString("searchHihoNo"));
-        searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtIdoDateRange().setFromValue(ymlDt.getAsRDate("idoDateRangefrom"));
-        searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtIdoDateRange().setToValue(ymlDt.getAsRDate("idoDateRangeto"));
+//        searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtIdoDateRange().setFromValue(ymlDt.getAsRDate("idoDateRangefrom"));
+//        searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtIdoDateRange().setToValue(ymlDt.getAsRDate("idoDateRangeto"));
 
     }
 
@@ -145,16 +140,10 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
                     .getSelectedValues().isEmpty()
                     ) {
                 
-               
-                
                 hashMap = ymlData.get(i);
                 ControlGenerator ymlDt = new ControlGenerator(hashMap);
                 
                 if (!ymlDt.getAsRString("deleteFlg").toString().equals(DeleteFlg)) {
-
-                    System.out.println("ymlDt.getAsRString(\"deleteFlg\").toString() not include" +ymlDt.getAsRString("deleteFlg").toString());
-
-
                     list.add(
                             createRow(
                                     ymlDt.getAsRString("resultIdoDate"),
@@ -193,7 +182,6 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
                                 ymlDt.getAsRString("deleteFlg")
                         ));
             }
-
         }
         return list;
 
@@ -220,9 +208,6 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
                 RString.EMPTY
         );
 
-        System.out.println("+++++"+ ddlIdoJiyu);
-        System.out.println("+++++" + deleteFlg);
-        
         
         rowJukyushaIdoRenrakuhyoSearchResultList.setTxtResultIdoDate(setWareki(resultIdoDate));
         rowJukyushaIdoRenrakuhyoSearchResultList.setTxtRenrakuhyoIdoKubun(renrakuhyoIdoKubun);

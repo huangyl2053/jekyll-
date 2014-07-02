@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShinseiListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuhiKashitsukekinList.dgKyufuhiKashitsukekinList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -38,13 +39,13 @@ public class KashitsukeShinseiList {
      * @param panel panel
      * @return ResponseData
      */
-    public ResponseData<KashitsukeShinseiListDiv> onLoad(KashitsukeShinseiListDiv panel) {
-        setKashitsukeShinseiListData(panel);
+    public ResponseData<KashitsukeShinseiTorokuDiv> onLoad(KashitsukeShinseiTorokuDiv panel) {
+        setKashitsukeShinseiListData(panel.getKashitsukeShinseiList());
         ControlGenerator cg = new ControlGenerator(getYaml().get(4));
-        panel.getKashitsukeShinseisho().getKyufuhiKariireShinseishoPrintSetting().getTxtIssueDate().
+        panel.getKashitsukeShinseiList().getKashitsukeShinseisho().getKyufuhiKariireShinseishoPrintSetting().getTxtIssueDate().
                 setValue(new RDate(cg.getAsRString("発効日").toString()));
 
-        ResponseData<KashitsukeShinseiListDiv> response = new ResponseData<>();
+        ResponseData<KashitsukeShinseiTorokuDiv> response = new ResponseData<>();
         response.data = panel;
         return response;
     }
@@ -55,16 +56,16 @@ public class KashitsukeShinseiList {
      * @param panel panel
      * @return ResponseData
      */
-    public ResponseData<KashitsukeShinseiListDiv> onClickDelete(KashitsukeShinseiListDiv panel) {
-        List<dgKyufuhiKashitsukekinList_Row> dgList = panel.getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList().getDataSource();
-        int index = panel.getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList().getClickedRowId();
+    public ResponseData<KashitsukeShinseiTorokuDiv> onClickDelete(KashitsukeShinseiTorokuDiv panel) {
+        List<dgKyufuhiKashitsukekinList_Row> dgList = panel.getKashitsukeShinseiList().getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList().getDataSource();
+        int index = panel.getKashitsukeShinseiList().getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList().getClickedRowId();
 
         dgKyufuhiKashitsukekinList_Row row = dgList.get(index);
         row.setRowState(RowState.Deleted);
         dgList.remove(index);
         dgList.add(index, row);
 
-        ResponseData<KashitsukeShinseiListDiv> response = new ResponseData<>();
+        ResponseData<KashitsukeShinseiTorokuDiv> response = new ResponseData<>();
         response.data = panel;
         return response;
     }
@@ -75,26 +76,26 @@ public class KashitsukeShinseiList {
      * @param panel panel
      * @return ResponseData
      */
-    public ResponseData<KashitsukeShinseiListDiv> onClickKashitsukeKakutei(KashitsukeShinseiListDiv panel) {
+    public ResponseData<KashitsukeShinseiTorokuDiv> onClickKashitsukeKakutei(KashitsukeShinseiTorokuDiv panel) {
         RString selectedIndex = (RString) ViewStateHolder.get("selectedIndex", RString.class);
-        List<dgKyufuhiKashitsukekinList_Row> dgRowList = panel.getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList().getDataSource();
+        List<dgKyufuhiKashitsukekinList_Row> dgRowList = panel.getKashitsukeShinseiList().getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList().getDataSource();
         if (selectedIndex.equals(new RString("-1"))) {
             ControlGenerator cg = new ControlGenerator(getYaml().get(3));
             dgKyufuhiKashitsukekinList_Row row = create給付費貸付金一覧アイテム(
                     cg.getAsRString("被保番号"),
                     cg.getAsRString("被保険者氏名"),
                     cg.getAsRString("被保険者カナ"),
-                    cg.getAsRString("借入受付日"),
-                    cg.getAsRString("借入申請日"),
-                    cg.getAsRString("借入利用開始日"),
-                    cg.getAsRString("借入利用終了日"),
+                    panel.getKashitsukeShinseiInfo().getTxtUketsukeYMD().getText(),
+                    panel.getKashitsukeShinseiInfo().getTxtShinseiYMD().getText(),
+                    panel.getKashitsukeShinseiInfo().getTxtRiyoKikan().getFromText(),
+                    panel.getKashitsukeShinseiInfo().getTxtRiyoKikan().getToText(),
                     cg.getAsRString("貸付対象サービス種類"),
                     cg.getAsRString("事業者の支払請求額"),
                     cg.getAsRString("申請金額"),
-                    cg.getAsRString("貸付審査決定日"),
-                    cg.getAsRString("貸付承認不承認"),
-                    cg.getAsRString("借受日"),
-                    cg.getAsRString("償還期限延長申請日"));
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY);
             row.setRowState(RowState.Added);
             dgRowList.add(row);
         } else {
@@ -106,7 +107,7 @@ public class KashitsukeShinseiList {
         }
         Collections.sort(dgRowList, new DateComparator());
 
-        ResponseData<KashitsukeShinseiListDiv> response = new ResponseData<>();
+        ResponseData<KashitsukeShinseiTorokuDiv> response = new ResponseData<>();
         response.data = panel;
         return response;
     }

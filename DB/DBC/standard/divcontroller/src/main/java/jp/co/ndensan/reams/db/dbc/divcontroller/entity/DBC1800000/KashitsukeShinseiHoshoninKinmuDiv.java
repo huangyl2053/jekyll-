@@ -23,10 +23,10 @@ public class KashitsukeShinseiHoshoninKinmuDiv extends Panel {
      */
     @JsonProperty("txtHoshoninKinmuName")
     private TextBox txtHoshoninKinmuName;
-    @JsonProperty("txtHoshoninKinmuJusho")
-    private TextBox txtHoshoninKinmuJusho;
     @JsonProperty("txtHoshoninKinmuTelNo")
     private TextBox txtHoshoninKinmuTelNo;
+    @JsonProperty("txtHoshoninKinmuJusho")
+    private TextBox txtHoshoninKinmuJusho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -44,16 +44,6 @@ public class KashitsukeShinseiHoshoninKinmuDiv extends Panel {
         this.txtHoshoninKinmuName=txtHoshoninKinmuName;
     }
 
-    @JsonProperty("txtHoshoninKinmuJusho")
-    public TextBox getTxtHoshoninKinmuJusho() {
-        return txtHoshoninKinmuJusho;
-    }
-
-    @JsonProperty("txtHoshoninKinmuJusho")
-    public void setTxtHoshoninKinmuJusho(TextBox txtHoshoninKinmuJusho) {
-        this.txtHoshoninKinmuJusho=txtHoshoninKinmuJusho;
-    }
-
     @JsonProperty("txtHoshoninKinmuTelNo")
     public TextBox getTxtHoshoninKinmuTelNo() {
         return txtHoshoninKinmuTelNo;
@@ -62,6 +52,16 @@ public class KashitsukeShinseiHoshoninKinmuDiv extends Panel {
     @JsonProperty("txtHoshoninKinmuTelNo")
     public void setTxtHoshoninKinmuTelNo(TextBox txtHoshoninKinmuTelNo) {
         this.txtHoshoninKinmuTelNo=txtHoshoninKinmuTelNo;
+    }
+
+    @JsonProperty("txtHoshoninKinmuJusho")
+    public TextBox getTxtHoshoninKinmuJusho() {
+        return txtHoshoninKinmuJusho;
+    }
+
+    @JsonProperty("txtHoshoninKinmuJusho")
+    public void setTxtHoshoninKinmuJusho(TextBox txtHoshoninKinmuJusho) {
+        this.txtHoshoninKinmuJusho=txtHoshoninKinmuJusho;
     }
 
 }
