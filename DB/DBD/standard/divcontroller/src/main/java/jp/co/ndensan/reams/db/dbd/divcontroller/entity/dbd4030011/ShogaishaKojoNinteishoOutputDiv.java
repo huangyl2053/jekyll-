@@ -7,14 +7,14 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4030011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PrintContentsSettingDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * ShogaishaKojoNinteishoOutput のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ShogaishaKojoNinteishoOutputDiv extends PanelPublish {
+public class ShogaishaKojoNinteishoOutputDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

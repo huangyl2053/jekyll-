@@ -540,7 +540,7 @@
    "onLoad": "",
    "title": "対象者一覧",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "ShogaishaKojoTaishoshaListPanel"
@@ -641,17 +641,17 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "ChohyoShutsuryokujun_width": "1098"
+     "ChohyoShutsuryokujun_width": "1099"
     }
    ],
-   "controlType": "PanelPublish",
+   "controlType": "Panel",
    "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
-   "wrap": true,
+   "wrap": false,
    "dependencies": [],
    "float": 0,
    "toolTip": "",
@@ -664,7 +664,7 @@
    "onLoad": "",
    "title": "障害者控除対象者認定書・出力一覧表",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "ShogaishaKojoNinteishoOutput"
@@ -689,90 +689,7 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "isPublish": true,
-   "isEmptyControl": false
-  },
-  {
-   "fieldName": "ShogaishaKojoNinteiComplete",
-   "items": [
-    {
-     "fieldName": "ShogaishaKojoNinteiCompleteInfo",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "ShogaishaKojoNinteiCompleteInfo",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "KaigoKanryoMessage",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "KanryoMessage_width": "G12"
-    }
-   ],
-   "controlType": "Panel",
-   "width": "G12",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
-   "selectControlID": "ShogaishaKojoNinteiComplete",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "onLoad": "",
-   "title": "",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "ShogaishaKojoNinteiComplete"
-    }
-   ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": "dbd/db/dbd/ShogaishaKojoNinteiComplete/onLoad"
-    }
-   ],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorder": true,
-   "backgroundColor": 0,
-   "widthAuto": true,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false,
-   "height": "Auto"
+   "focusPositionID": "ui-accordion-WestAccordion-header-0"
   }
  ],
  "controlType": null,
@@ -793,14 +710,14 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "障害者控除対象者一括認定",
+ "title": "障害者控除対象者認定書一括作成",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
   {
    "order": "1",
    "stateName": "一括認定",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "ShogaishaKojoTaishoshaListPanel",
@@ -821,47 +738,16 @@
      "visibleDiv": "OutputOrder",
      "panelState": "visible",
      "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "btnNintei",
-     "event": "onClick",
-     "transition": "処理完了"
     },
     {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "2",
-   "stateName": "処理完了",
-   "showWizard": true,
-   "visibleDivs": [
-    {
-     "visibleDiv": "ShogaishaKojoNinteiComplete",
-     "panelState": "readOnly visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ShogaishaKojoNinteiCompleteInfo",
+     "visibleDiv": "ShogaishaKojoNinteishoOutput",
      "panelState": "visible",
-     "fixedDiv": "No"
+     "fixedDiv": "false"
     }
    ],
    "supplementInfo": "",
    "validation": {},
    "events": [
-    {
-     "fieldName": "btnNintei",
-     "event": "onClick",
-     "transition": ""
-    },
     {
      "fieldName": "btnComplete",
      "event": "onClick",
@@ -886,12 +772,6 @@
   ],
   [
    "OutputOrder"
-  ],
-  [
-   "ShogaishaKojoNinteiComplete"
-  ],
-  [
-   "ShogaishaKojoNinteiCompleteInfo"
   ]
  ],
  "panelMargin": 1,
@@ -932,31 +812,16 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "一括認定を",
-      "prefixText": "",
-      "suffixText": ""
+      "additionalText": "一括作成を"
      }
-    }
-   ],
-   "states": [
-    {
-     "state": "一括認定"
-    }
-   ],
-   "isFinishButtonOnTheRight": false,
-   "FinishButtonVisible": false,
-   "SuspendButtonVisible": false
-  },
-  {
-   "commonButtonAreaId": "2",
-   "buttonSetting": [
+    },
     {
      "buttonKind": "CommonButtonComplete",
      "buttonProperty": {
       "fieldName": "btnComplete",
       "items": [],
       "controlType": "CommonButtonComplete",
-      "width": "S",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -980,13 +845,13 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": ""
+      "additionalText": "一括作成を"
      }
     }
    ],
    "states": [
     {
-     "state": "処理完了"
+     "state": "一括認定"
     }
    ],
    "isFinishButtonOnTheRight": false,

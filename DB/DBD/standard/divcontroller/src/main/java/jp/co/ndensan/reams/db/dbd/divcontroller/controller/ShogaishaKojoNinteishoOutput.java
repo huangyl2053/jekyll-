@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4030011.ShogaishaKojoNinteishoOutputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
