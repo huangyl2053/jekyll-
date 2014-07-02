@@ -105,13 +105,13 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "backGroundColor": 0,
+     "btnHihoRireki_visible": true,
+     "btnNinteiRireki_visible": true,
      "eraseBorderTop": true,
      "eraseBorderBottom": true,
      "eraseBorderRight": true,
-     "eraseBorderLeft": true,
-     "backGroundColor": 0,
-     "btnHihoRireki_visible": true,
-     "btnNinteiRireki_visible": true
+     "eraseBorderLeft": true
     }
    ],
    "controlType": "Panel",
@@ -517,10 +517,6 @@
      "canTransferEvent": true,
      "heightForDialog": "M",
      "btnSearch_displayNone": true,
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
      "txtUkestukeDate_displayNone": true,
      "txtJigyoshaNo_disabled": true,
      "txtShinseishaName_labelLText": "氏名",
@@ -528,7 +524,11 @@
      "txtAddress_displayNone": false,
      "btnCopy_displayNone": false,
      "btnSearchJigyosha_disabled": false,
-     "btnCopyToHonninInfo_disabled": false
+     "btnCopyToHonninInfo_disabled": false,
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     },
     {
      "fieldName": "JutakuKaishuJizenShinseiReason",
@@ -715,10 +715,10 @@
        "formatLength": "10"
       },
       {
-       "fieldName": "btnSearchCreationJigyoshaName",
+       "fieldName": "btnJigyoshaInputGuide",
        "items": [],
-       "controlType": "Button",
-       "width": "XS",
+       "controlType": "ButtonDialog",
+       "width": "S",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -729,19 +729,33 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "-0.3",
+       "marginLeft": "0",
        "marginRight": "XS",
-       "selectControlID": "btnSearchCreationJigyoshaName",
+       "selectControlID": "btnJigyoshaInputGuide",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "探",
-       "onClick": "",
-       "appearance": 0,
-       "imageFileUrl": "",
+       "text": "ButtonDialog1",
        "imageWidth": "",
        "imageHeight": "",
+       "onClick": "",
+       "appearance": 2,
+       "imageFileUrl": "/uz/uza/image/UZ_Search.png",
        "icon": 0,
-       "heightTextBoxMatches": true
+       "heightTextBoxMatches": true,
+       "displayChildDivName": "DBZ.JigyoshaInputGuide",
+       "dataPassing": [
+        {
+         "key": "jigyoshaCode",
+         "controlName": "txtCreationJigyoshaNo"
+        },
+        {
+         "key": "jigyoshaMeisho",
+         "controlName": "txtCreationJigyoshaName"
+        }
+       ],
+       "visibleCloseButton": true,
+       "onOkClose": "",
+       "onBeforeOpenDialog": ""
       },
       {
        "fieldName": "txtCreationJigyoshaName",
@@ -763,7 +777,7 @@
        "selectControlID": "txtCreationJigyoshaName_core",
        "helpMessageID": "",
        "jpControlName": "",
-       "readOnly": false,
+       "readOnly": true,
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -925,6 +939,18 @@
     {
      "eventName": "onClick_btnDummy",
      "requestUrl": "dbc/db/dbc/JutakuKaishuJizenShinseiContentsPanel/onLoad"
+    },
+    {
+     "eventName": "onClick_btnCopyAddress",
+     "requestUrl": "dbc/db/dbc/JutakuKaishuJizenShinseiContentsPanel/onClick_copyToAddress"
+    },
+    {
+     "eventName": "onClick_btnClearDetail",
+     "requestUrl": "dbc/db/dbc/JutakuKaishuJizenShinseiContentsPanel/onClick_btnClear"
+    },
+    {
+     "eventName": "onClick_btnCopyToHonninInfo",
+     "requestUrl": "dbc/db/dbc/JutakuKaishuJizenShinseiContentsPanel/onClick_copyToInfo"
     }
    ],
    "hiddenInput": [],
@@ -970,7 +996,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
-     "marginTop": "-0.2",
+     "marginTop": "XS",
      "marginBottom": 0,
      "businessId": "DBC",
      "controlName": "KyufugakuSummary",
@@ -1070,7 +1096,8 @@
      "labelLText": "判定区分",
      "labelLWidth": "75",
      "labelLAlign": 2,
-     "selectedItem": null,
+     "onClick": "onClick_radJudgeKubun",
+     "icon": [],
      "dataSource": [
       {
        "key": "shonin",
@@ -1081,8 +1108,7 @@
        "value": "不承認"
       }
      ],
-     "onClick": "onClick_radJudgeKubun",
-     "icon": [],
+     "selectedItem": null,
      "newLineItemNumber": 2,
      "spaceSize": "M",
      "disabledItem": []
@@ -1199,7 +1225,8 @@
      "labelLText": "限度額リセット",
      "labelLWidth": "S",
      "labelLAlign": 2,
-     "selectedItem": null,
+     "onClick": "",
+     "icon": [],
      "dataSource": [
       {
        "key": "threeUp",
@@ -1210,8 +1237,7 @@
        "value": "住宅住所変更による"
       }
      ],
-     "onClick": "",
-     "icon": [],
+     "selectedItem": null,
      "newLineItemNumber": 1,
      "spaceSize": 1,
      "disabledItem": [],
@@ -1509,11 +1535,11 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "Button1",
+     "imageWidth": "",
+     "imageHeight": "",
      "onClick": "onClick_btnDummy",
      "appearance": 0,
      "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false
     }

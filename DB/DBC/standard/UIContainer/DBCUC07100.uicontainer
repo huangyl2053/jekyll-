@@ -14,16 +14,16 @@
    "layoutSubGyomuCode": "DBC",
    "layoutName": "DBC0710011",
    "eventName": "research",
-   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutSubGyomuCode": "DBZ",
    "toLayoutName": "DBZU020001",
    "toEventName": "researchToTaishosha"
   },
   {
    "id": "3",
-   "layoutSubGyomuCode": "DBZ",
+   "layoutSubGyomuCode": "DBC",
    "layoutName": "DBC0710011",
    "eventName": "searchResult",
-   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutSubGyomuCode": "DBZ",
    "toLayoutName": "DBZU020001",
    "toEventName": ""
   }

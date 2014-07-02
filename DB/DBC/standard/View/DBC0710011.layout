@@ -1220,8 +1220,8 @@
          "imageWidth": "",
          "imageHeight": "",
          "onClick": "",
-         "appearance": 0,
-         "imageFileUrl": "",
+         "appearance": 2,
+         "imageFileUrl": "/uz/uza/image/UZ_Search.png",
          "icon": 0,
          "heightTextBoxMatches": true
         },
