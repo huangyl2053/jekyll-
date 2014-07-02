@@ -1,0 +1,24 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "0",
+   "layoutSubGyomuCode": "DBZ",
+   "layoutName": "DBZU020001",
+   "eventName": "decideToTaishosha",
+   "toLayoutSubGyomuCode": "DBD",
+   "toLayoutName": "DBD4040011",
+   "toEventName": "onload"
+  },
+  {
+   "id": "1",
+   "layoutSubGyomuCode": "DBD",
+   "layoutName": "DBD4040011",
+   "eventName": "return",
+   "toLayoutSubGyomuCode": "DBZ",
+   "toLayoutName": "DBZU020001",
+   "toEventName": ""
+  }
+ ],
+ "subGyomuCode": "DBD",
+ "uiContainerName": "DBDUC40400"
+}
