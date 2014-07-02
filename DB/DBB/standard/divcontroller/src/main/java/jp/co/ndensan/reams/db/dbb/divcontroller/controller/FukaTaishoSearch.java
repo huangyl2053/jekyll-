@@ -32,17 +32,18 @@ public class FukaTaishoSearch {
     private static final RString FUKA_SHOKAI_GAITOSHA = new RString("DBZU030001/FukaShokaiGaitoshaData.yml");
     private static final Decimal DEFAULT_MAX_NUMBER = new Decimal(30);
 
-    public ResponseData<FukaTaishoSearchDiv> onLoad_FukaTaishoSearch(FukaTaishoSearchDiv div){
-        
+    public ResponseData<FukaTaishoSearchDiv> onLoad_FukaTaishoSearch(FukaTaishoSearchDiv div) {
+
         div.getTaishoshaSearch().getSearchCriteriaOfOther().getTxtMaxNumber().setValue(DEFAULT_MAX_NUMBER);
-        
+
         DropDownList ddl = new DropDownList();
         ddl.setDataSource(createFukanendoDDL());
         div.getTaishoshaSearch().getSearchCriteriaOfOther().setDdlFukaNendo(ddl);
         div.getTaishoshaSearch().getSearchCriteriaOfOther().getDdlFukaNendo().setSelectedItem(new RString(("平成26年度")));
+        div.getTaishoshaSearch().getSearchCriteriaOfOther().getDdlFukaNendo().setLabelLText(new RString("賦課年度"));
         return createResponseData(div);
     }
-    
+
     public ResponseData<FukaTaishoSearchDiv> onClick_Search(FukaTaishoSearchDiv div) {
 
         search(div);
@@ -62,11 +63,11 @@ public class FukaTaishoSearch {
         List yamlSearchResult = getYamlSearchResult(div, searchValue);
 
         RString selectedValue = div.getTaishoshaSearch().getSearchCriteriaOfOther().getDdlFukaNendo().getSelectedValue();
-        if(selectedValue == null || selectedValue.isEmpty()){
+        if (selectedValue == null || selectedValue.isEmpty()) {
         } else {
             div.getTaishoshaSentaku().getTxtFukanendo().setValue(new RDate(selectedValue.toString()));
         }
-        
+
         setDataGrid(div, yamlSearchResult);
     }
 
@@ -273,10 +274,11 @@ public class FukaTaishoSearch {
         DataGrid<dgTaishoshaIchiran_Row> grid = div.getTaishoshaSentaku().getDgTaishoshaIchiran();
         grid.setDataSource(arrayRowList);
     }
-    private List<KeyValueDataSource> createFukanendoDDL(){
-        
+
+    private List<KeyValueDataSource> createFukanendoDDL() {
+
         List<KeyValueDataSource> arrayDDLList = new ArrayList<>();
-        
+
         arrayDDLList.add(new KeyValueDataSource(new RString("全年度"), new RString("全年度")));
         arrayDDLList.add(new KeyValueDataSource(new RString("平成26年度"), new RString("平26")));
         arrayDDLList.add(new KeyValueDataSource(new RString("平成25年度"), new RString("平25")));
@@ -293,7 +295,7 @@ public class FukaTaishoSearch {
         arrayDDLList.add(new KeyValueDataSource(new RString("平成14年度"), new RString("平14")));
         arrayDDLList.add(new KeyValueDataSource(new RString("平成13年度"), new RString("平13")));
         arrayDDLList.add(new KeyValueDataSource(new RString("平成12年度"), new RString("平12")));
-        
+
         return arrayDDLList;
     }
 }
