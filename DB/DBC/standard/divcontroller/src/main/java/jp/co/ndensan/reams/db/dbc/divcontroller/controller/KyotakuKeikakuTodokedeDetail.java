@@ -19,12 +19,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikaku
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.dgKyotakuKeikakuTodokedeRirekiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.tplKyotakuKeikakuTodokedeDetailRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.dgShoKaishuJokyo_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -35,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 居宅サービス計画作成依頼届出情報登録の居宅サービス計画作成依頼届出のコントロールです。
@@ -367,17 +364,16 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     /**
-     * 事業者コードからフォーカスを外したときに名称等をセットする。
+     * 事業者コードの入力補助ダイアログから事業者が選択された後の処理。
      *
      * @param panel panel
      * @return ResponseData
      */
-    public ResponseData onBlurJigyoshaCode(KyotakuKeikakuTodokedeDetailDiv panel) {
+    public ResponseData onOkCloseJigyoshaDialog(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
         KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
                 getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getKyotakuKeikakuTodokedeJigyosha();
         ControlGenerator cg = new ControlGenerator(getYaml().get(11));
-        jigyosha.getTxtJigyoshaName().setValue(cg.getAsRString("事業者名"));
         jigyosha.getTxtServiceShurui1().setValue(cg.getAsRString("事業者サービス種類１"));
         jigyosha.getTxtServiceShurui2().setValue(cg.getAsRString("事業者サービス種類２"));
         jigyosha.getTxtKanrishaName().setValue(cg.getAsRString("事業者管理者名"));

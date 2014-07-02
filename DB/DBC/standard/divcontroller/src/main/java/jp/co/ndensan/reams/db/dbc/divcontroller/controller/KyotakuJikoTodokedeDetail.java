@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 public class KyotakuJikoTodokedeDetail {
 
     private List<HashMap> getYaml() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0100000/KyotakuKeikakuTodokedeDetail.yml"));
+        return YamlLoader.DBC.loadAsList(new RString("dbc0110000/KyotakuJikoTodokedeDetail.yml"));
     }
 
     /**
