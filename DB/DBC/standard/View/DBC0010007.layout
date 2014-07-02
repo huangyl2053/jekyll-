@@ -1,0 +1,353 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "ShakaiFukushiHojinKeigengaku",
+   "items": [
+    {
+     "fieldName": "dgShakaiFukushiHojinKeigengaku",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "1098",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "dgShakaiFukushiHojinKeigengaku",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "height": "223",
+     "gridSetting": {
+      "rowHeight": 28,
+      "isMultiSelectable": false,
+      "isShowHeader": true,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "",
+       "headerHeight": 1
+      },
+      "columns": [
+       {
+        "columnName": "軽減率",
+        "dataName": "txtKeigenritsu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtKeigenritsu"
+       },
+       {
+        "columnName": "種類",
+        "dataName": "txtShurui",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 200,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtShurui"
+       },
+       {
+        "columnName": "前後",
+        "dataName": "txtZengo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtZengo"
+       },
+       {
+        "columnName": "受領すべき<br>利用者負担総額",
+        "dataName": "txtJuryoSubekiRiyoshaFutanSogaku",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 140,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtJuryoSubekiRiyoshaFutanSogaku"
+       },
+       {
+        "columnName": "軽減額",
+        "dataName": "txtKeigengaku",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtKeigengaku"
+       },
+       {
+        "columnName": "軽減後<br>利用者負担額",
+        "dataName": "txtKeigengoRiyoshaFutangaku",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 120,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtKeigengoRiyoshaFutangaku"
+       },
+       {
+        "columnName": "備考",
+        "dataName": "txtBiko",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 200,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtBiko"
+       },
+       {
+        "columnName": "再審査<br>回数",
+        "dataName": "txtSaishinsaKaisu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtSaishinsaKaisu"
+       },
+       {
+        "columnName": "過誤<br>回数",
+        "dataName": "txtKagoKaisu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtKagoKaisu"
+       },
+       {
+        "columnName": "審査<br>年月",
+        "dataName": "txtShinsaYM",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtShinsaYM"
+       }
+      ]
+     },
+     "onSort": "",
+     "onSelect": "",
+     "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "dataSource": [],
+     "sortOrder": "",
+     "isAscending": true,
+     "filterList": [],
+     "activeRowId": -1
+    },
+    {
+     "fieldName": "btnShakaiFukushiHojinKeigengakuClose",
+     "items": [],
+     "controlType": "Button",
+     "width": "150",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnShakaiFukushiHojinKeigengakuClose",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onClick": "",
+     "text": "給付実績照会に戻る",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "ShakaiFukushiHojinKeigengaku",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "社福軽減費",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "ShakaiFukushiHojinKeigengaku"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onOpen",
+     "requestUrl": "dbc/db/dbc/ShakaiFukushiHojinKeigengaku/onLoad"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "onOpen",
+   "onClose": "",
+   "session": {},
+   "marginTop": "XS",
+   "marginBottom": "XS",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "親Divタイトル",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "社会福祉法人軽減額",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "ShakaiFukushiHojinKeigengaku",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": []
+  }
+ ],
+ "currentState": "All",
+ "id": "DBC0010007",
+ "WFParameter": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "onOpen",
+   "eventName": "ShakaiFukushiHojinKeigengaku.onOpen"
+  },
+  {
+   "alias": "onClick_btnClose",
+   "eventName": "btnShakaiFukushiHojinKeigengakuClose.onClick"
+  }
+ ],
+ "loadSequencePanelNames": [
+  [
+   "ShakaiFukushiHojinKeigengaku"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": []
+}
