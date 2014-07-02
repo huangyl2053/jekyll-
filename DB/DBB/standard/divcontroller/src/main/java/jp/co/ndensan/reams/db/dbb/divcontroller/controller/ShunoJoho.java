@@ -123,6 +123,8 @@ public class ShunoJoho {
     }
 
     private void setShunoInfo(ShunoJohoDiv div) {
+        div.getTxtTsuchiNo().setFormatLength(16);
+        
         List<HashMap> demoData = YamlLoader.DBB.loadAsList(ShunoInfo);
         ControlGenerator cg = new ControlGenerator(demoData.get(0));
 
