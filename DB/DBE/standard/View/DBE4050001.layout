@@ -28,6 +28,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "",
+       "selectedItem": "2",
        "dataSource": [
         {
          "key": "1",
@@ -38,8 +40,6 @@
          "value": "南魚沼市"
         }
        ],
-       "onChange": "",
-       "selectedItem": "2",
        "required": false,
        "labelLText": "保険者",
        "labelRText": "",
@@ -48,8 +48,7 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
-       "onBlur": "",
-       "disabledItem": []
+       "onBlur": ""
       },
       {
        "fieldName": "ddlKensakuTaisho",
@@ -72,6 +71,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "onChange_ddlKensakuTaisho",
+       "selectedItem": "1",
        "dataSource": [
         {
          "key": "0",
@@ -98,8 +99,6 @@
          "value": "申請日"
         }
        ],
-       "onChange": "onChange_ddlKensakuTaisho",
-       "selectedItem": "1",
        "labelLText": "検索対象",
        "labelRText": "",
        "labelLWidth": "S",
@@ -107,8 +106,7 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
-       "onBlur": "",
-       "disabledItem": []
+       "onBlur": ""
       },
       {
        "fieldName": "txtSearchStYMD",
@@ -131,7 +129,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "onChange": "onChange_txtSearchStYMD",
        "required": false,
        "labelLText": "日付範囲",
@@ -146,16 +143,17 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "onKeyPress": "",
+       "text": "",
        "ymdKubun": 2,
        "displayFormat": 0,
        "value": "",
-       "permitCharactor": "./_-",
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
        "textKind": 0,
        "isComboBox": false,
-       "suggest": []
+       "suggest": [],
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "txtSearchEdYMD",
@@ -178,7 +176,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "onChange": "",
        "required": false,
        "labelLText": "～",
@@ -193,16 +190,17 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "onKeyPress": "",
+       "text": "",
        "ymdKubun": 2,
        "displayFormat": 0,
        "value": "",
-       "permitCharactor": "./_-",
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
        "textKind": 0,
        "isComboBox": false,
-       "suggest": []
+       "suggest": [],
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "txtHihokenshaNo",
@@ -225,7 +223,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "onChange": "",
        "required": false,
        "labelLText": "被保番号",
@@ -240,8 +237,8 @@
        "isPrivateInfo": false,
        "isPassword": false,
        "onKeyPress": "",
+       "text": "",
        "value": "",
-       "permitCharactor": "+-,.\\",
        "maxLength": "10",
        "minLength": "0",
        "textAlign": 2,
@@ -251,9 +248,10 @@
        "decorationClass": "",
        "maxValue": "9999999999",
        "minValue": 0,
-       "isCurrency": true,
+       "isCurrency": false,
        "isComma": false,
-       "decimalPointLength": 0
+       "decimalPointLength": 0,
+       "permitCharactor": "+-,.\\"
       },
       {
        "fieldName": "btnTaishoKensaku",
@@ -275,8 +273,8 @@
        "selectControlID": "btnTaishoKensaku",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "onClick_btnTaishoKensaku",
        "text": "検索する",
+       "onClick": "onClick_btnTaishoKensaku",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -304,8 +302,8 @@
        "selectControlID": "btnClear",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "",
        "text": "条件をクリアする",
+       "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -380,12 +378,7 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "M",
-       "onSort": "",
-       "onSelect": "onClick_btnSentaku",
-       "onSelectByDblClick": "",
-       "onOnlyRow": "",
-       "onNoRow": "",
-       "onMultiRows": "",
+       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -709,6 +702,9 @@
          }
         ]
        },
+       "onSort": "",
+       "onSelect": "onClick_btnSentaku",
+       "onSelectByDblClick": "",
        "onSelectBySelectButton": "",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
@@ -717,7 +713,9 @@
        "onAfterRequestBySelectButton": "",
        "onAfterRequestByModifyButton": "",
        "onAfterRequestByDeleteButton": "",
-       "dataSource": [],
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
        "sortOrder": "氏名",
        "isAscending": true,
        "filterList": [],
@@ -743,8 +741,8 @@
        "selectControlID": "btnSaiKensaku",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "",
        "text": "再検索する",
+       "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -854,8 +852,8 @@
            "selectControlID": "btnMasking",
            "helpMessageID": "",
            "jpControlName": "",
-           "onClick": "",
            "text": "マスキングする",
+           "onClick": "",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
@@ -886,9 +884,9 @@
              "selectControlID": "lblDummy1",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "意見書(表)",
              "required": false,
              "isPrivateInfo": false,
+             "text": "意見書(表)",
              "decorationClass": "",
              "align": 2
             }
@@ -983,9 +981,9 @@
              "selectControlID": "lblDummy2",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "意見書(裏)",
              "required": false,
              "isPrivateInfo": false,
+             "text": "意見書(裏)",
              "decorationClass": "",
              "align": 2
             }
@@ -1080,9 +1078,9 @@
              "selectControlID": "lblDummy3",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "特記事項(1)",
              "required": false,
              "isPrivateInfo": false,
+             "text": "特記事項(1)",
              "decorationClass": "",
              "align": 2
             }
@@ -1177,9 +1175,9 @@
              "selectControlID": "lblDummy4",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "特記事項(2)",
              "required": false,
              "isPrivateInfo": false,
+             "text": "特記事項(2)",
              "decorationClass": "",
              "align": 2
             }
@@ -1274,9 +1272,9 @@
              "selectControlID": "lblDummy5",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "その他",
              "required": false,
              "isPrivateInfo": false,
+             "text": "その他",
              "decorationClass": "",
              "align": 2
             }
@@ -1442,9 +1440,9 @@
        "selectControlID": "lblBairitsu",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "表示倍率",
        "required": false,
        "isPrivateInfo": false,
+       "text": "表示倍率",
        "decorationClass": "",
        "align": 2
       },
@@ -1469,6 +1467,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "",
+       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -1479,8 +1479,6 @@
          "value": "150%"
         }
        ],
-       "onChange": "",
-       "selectedItem": "key0",
        "required": false,
        "labelLText": "",
        "labelRText": "",
@@ -1489,8 +1487,7 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
-       "onBlur": "",
-       "disabledItem": []
+       "onBlur": ""
       },
       {
        "fieldName": "btnShokiModoshi",
@@ -1512,8 +1509,8 @@
        "selectControlID": "btnShokiModoshi",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "",
        "text": "初期状態に戻す",
+       "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
