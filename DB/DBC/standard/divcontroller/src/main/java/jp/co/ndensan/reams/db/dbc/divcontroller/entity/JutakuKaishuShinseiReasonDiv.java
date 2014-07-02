@@ -29,8 +29,8 @@ public class JutakuKaishuShinseiReasonDiv extends Panel {
     private TextBox txtCreatorName;
     @JsonProperty("txtCreationJigyoshaNo")
     private TextBoxCode txtCreationJigyoshaNo;
-    @JsonProperty("btnSearchCreationJigyoshaName")
-    private Button btnSearchCreationJigyoshaName;
+    @JsonProperty("btnJigyoshaInputGuide")
+    private ButtonDialog btnJigyoshaInputGuide;
     @JsonProperty("txtCreationJigyoshaName")
     private TextBox txtCreationJigyoshaName;
 
@@ -80,14 +80,14 @@ public class JutakuKaishuShinseiReasonDiv extends Panel {
         this.txtCreationJigyoshaNo=txtCreationJigyoshaNo;
     }
 
-    @JsonProperty("btnSearchCreationJigyoshaName")
-    public Button getBtnSearchCreationJigyoshaName() {
-        return btnSearchCreationJigyoshaName;
+    @JsonProperty("btnJigyoshaInputGuide")
+    public ButtonDialog getBtnJigyoshaInputGuide() {
+        return btnJigyoshaInputGuide;
     }
 
-    @JsonProperty("btnSearchCreationJigyoshaName")
-    public void setBtnSearchCreationJigyoshaName(Button btnSearchCreationJigyoshaName) {
-        this.btnSearchCreationJigyoshaName=btnSearchCreationJigyoshaName;
+    @JsonProperty("btnJigyoshaInputGuide")
+    public void setBtnJigyoshaInputGuide(ButtonDialog btnJigyoshaInputGuide) {
+        this.btnJigyoshaInputGuide=btnJigyoshaInputGuide;
     }
 
     @JsonProperty("txtCreationJigyoshaName")
