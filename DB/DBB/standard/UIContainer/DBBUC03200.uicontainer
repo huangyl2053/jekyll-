@@ -25,7 +25,7 @@
    "eventName": "fukaRirekiShokai",
    "toLayoutSubGyomuCode": "DBB",
    "toLayoutName": "DBB0320003",
-   "toEventName": ""
+   "toEventName": "test"
   },
   {
    "id": "3",
@@ -43,7 +43,7 @@
    "eventName": "hikakuShokai",
    "toLayoutSubGyomuCode": "DBB",
    "toLayoutName": "DBB0320003",
-   "toEventName": ""
+   "toEventName": "test"
   }
  ],
  "subGyomuCode": "DBB",

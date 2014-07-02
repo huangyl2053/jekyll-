@@ -50,8 +50,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtFukaNendo1",
@@ -96,8 +95,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtTsuchiNo1",
@@ -142,8 +140,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtKoseiYMD1",
@@ -188,8 +185,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtKoseiYM1",
@@ -234,8 +230,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtShimei1",
@@ -280,8 +275,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "tblChoteiJiyu1",
@@ -381,8 +375,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -450,8 +443,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -519,8 +511,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -588,8 +579,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -673,8 +663,7 @@
          "labelLAlign": 2,
          "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 1,
-         "permitCharactor": "./_-"
+         "displayFormat": 1
         },
         {
          "fieldName": "txtShikakuSoshitsuYMD1",
@@ -715,8 +704,7 @@
          "labelLAlign": 2,
          "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 1,
-         "permitCharactor": "./_-"
+         "displayFormat": 1
         }
        ],
        "controlType": "Panel",
@@ -806,8 +794,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "txtHokenryoRitsu1",
@@ -852,8 +839,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "txtNengakuHokensryo1",
@@ -898,8 +884,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         }
        ],
        "controlType": "Panel",
@@ -989,8 +974,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "txtZanteiGoukeiGaku1",
@@ -1035,8 +1019,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "zanteihokenryoHeight1",
@@ -1433,8 +1416,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtFukaNendo2",
@@ -1479,8 +1461,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtTsuchiNo2",
@@ -1525,8 +1506,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtKoseiYMD2",
@@ -1571,8 +1551,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtKoseiYM2",
@@ -1617,8 +1596,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtShimei2",
@@ -1663,8 +1641,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "tblChoteiJiyu2",
@@ -1764,8 +1741,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -1833,8 +1809,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -1902,8 +1877,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -1971,8 +1945,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -2056,8 +2029,7 @@
          "labelLAlign": 2,
          "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 1,
-         "permitCharactor": "./_-"
+         "displayFormat": 1
         },
         {
          "fieldName": "txtShikakuSoshitsuYMD2",
@@ -2098,8 +2070,7 @@
          "labelLAlign": 2,
          "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 1,
-         "permitCharactor": "./_-"
+         "displayFormat": 1
         }
        ],
        "controlType": "Panel",
@@ -2189,8 +2160,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "txtHokenryoRitsu2",
@@ -2235,8 +2205,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "txtNengakuHokensryo2",
@@ -2281,8 +2250,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         }
        ],
        "controlType": "Panel",
@@ -2372,8 +2340,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "txtZanteiGoukeiGaku2",
@@ -2418,8 +2385,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "zanteihokenryoHeight2",
@@ -2815,8 +2781,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtFukaNendo3",
@@ -2861,8 +2826,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtTsuchiNo3",
@@ -2907,8 +2871,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtKoseiYMD3",
@@ -2953,8 +2916,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtKoseiYM3",
@@ -2999,8 +2961,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtShimei3",
@@ -3045,8 +3006,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "tblChoteiJiyu3",
@@ -3146,8 +3106,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -3215,8 +3174,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -3284,8 +3242,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -3353,8 +3310,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -3464,8 +3420,7 @@
          "labelLAlign": 2,
          "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 1,
-         "permitCharactor": "./_-"
+         "displayFormat": 1
         },
         {
          "fieldName": "lblShikakusoshitsuYMD3",
@@ -3532,8 +3487,7 @@
          "labelLAlign": 2,
          "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 1,
-         "permitCharactor": "./_-"
+         "displayFormat": 1
         },
         {
          "fieldName": "lblGoukeiShotoku3",
@@ -3604,8 +3558,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblNenkinShunyu3",
@@ -3676,8 +3629,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblHonninKazei3",
@@ -3748,8 +3700,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblSetaiKazei3",
@@ -3820,8 +3771,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblSetaiinSu3",
@@ -3892,8 +3842,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         }
        ],
        "controlType": "Panel",
@@ -4009,8 +3958,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblKyokaiso3",
@@ -4081,8 +4029,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblKeisanHokenryogaku3",
@@ -4153,8 +4100,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblGemmenGaku3",
@@ -4225,8 +4171,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblKakuteiHokenryo3",
@@ -4297,8 +4242,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblTokuchoSaishutukanpu3",
@@ -4369,8 +4313,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblFuchoSaishutukanpu3",
@@ -4441,8 +4384,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         }
        ],
        "controlType": "Panel",
@@ -4794,8 +4736,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtFukaNendo4",
@@ -4840,8 +4781,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtTsuchiNo4",
@@ -4886,8 +4826,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtKoseiYMD4",
@@ -4932,8 +4871,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtKoseiYM4",
@@ -4978,8 +4916,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtShimei4",
@@ -5024,8 +4961,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "tblChoteiJiyu4",
@@ -5125,8 +5061,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -5194,8 +5129,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -5263,8 +5197,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -5332,8 +5265,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -5443,8 +5375,7 @@
          "labelLAlign": 2,
          "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 1,
-         "permitCharactor": "./_-"
+         "displayFormat": 1
         },
         {
          "fieldName": "lblShikakusoshitsuYMD4",
@@ -5511,8 +5442,7 @@
          "labelLAlign": 2,
          "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 1,
-         "permitCharactor": "./_-"
+         "displayFormat": 1
         },
         {
          "fieldName": "lblGoukeiShotoku4",
@@ -5583,8 +5513,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblNenkinShunyu4",
@@ -5655,8 +5584,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblHonninKazei4",
@@ -5727,8 +5655,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblSetaiKazei4",
@@ -5799,8 +5726,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblSetaiinSu4",
@@ -5871,8 +5797,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         }
        ],
        "controlType": "Panel",
@@ -5988,8 +5913,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblKyokaiso4",
@@ -6060,8 +5984,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblKeisanHokenryogaku4",
@@ -6132,8 +6055,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblGemmenGaku4",
@@ -6204,8 +6126,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblKakuteiHokenryo4",
@@ -6276,8 +6197,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblTokuchoSaishutukanpu4",
@@ -6348,8 +6268,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         },
         {
          "fieldName": "lblFuchoSaishutukanpu4",
@@ -6420,8 +6339,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "decorationClass": ""
         }
        ],
        "controlType": "Panel",
@@ -6761,8 +6679,8 @@
      "items": [],
      "controlType": "Button",
      "width": "S",
-     "visible": true,
-     "displayNone": true,
+     "visible": false,
+     "displayNone": false,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
