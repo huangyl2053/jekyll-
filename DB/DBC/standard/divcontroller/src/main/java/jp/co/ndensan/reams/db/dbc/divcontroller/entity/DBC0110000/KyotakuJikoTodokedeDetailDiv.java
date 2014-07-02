@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.KyotakuJikoTodokedeKihonDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.tabKyotakuServiceJikoSakuseiTodokedeDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;

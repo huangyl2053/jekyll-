@@ -439,6 +439,7 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
    "eraseBorderTop": false,
    "eraseBorderBottom": false,
    "eraseBorderRight": false,
@@ -728,9 +729,9 @@
      ],
      "controlType": "Panel",
      "width": "1112",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
+     "visible": false,
+     "displayNone": true,
+     "disabled": true,
      "accessKey": "",
      "nextFocusFieldName": "",
      "wrap": true,
@@ -766,6 +767,7 @@
      "isGroupBox": false,
      "readOnly": false,
      "height": "XS",
+     "focusPositionID": "restoreLayoutButton",
      "eraseBorderTop": true,
      "eraseBorderBottom": true,
      "eraseBorderRight": true,
@@ -832,6 +834,7 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
    "eraseBorderTop": false,
    "eraseBorderBottom": false,
    "eraseBorderRight": false,
@@ -1093,6 +1096,7 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
    "eraseBorderTop": false,
    "eraseBorderBottom": false,
    "eraseBorderRight": false,
@@ -1141,7 +1145,7 @@
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
-   "wrap": true,
+   "wrap": false,
    "dependencies": [],
    "float": 0,
    "toolTip": "",
@@ -1243,11 +1247,6 @@
      "transition": ""
     },
     {
-     "fieldName": "btnSave",
-     "event": "onClick",
-     "transition": "申請結果"
-    },
-    {
      "fieldName": "btnSettle",
      "event": "onClick",
      "transition": ""
@@ -1263,9 +1262,9 @@
      "transition": ""
     },
     {
-     "fieldName": "cbnEndElement1",
+     "fieldName": "cbtSaveElement1",
      "event": "onClick",
-     "transition": ""
+     "transition": "申請結果"
     }
    ]
   },
@@ -1303,11 +1302,6 @@
      "transition": "検索・一覧"
     },
     {
-     "fieldName": "btnSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnSettle",
      "event": "onClick",
      "transition": "検索・一覧"
@@ -1323,9 +1317,9 @@
      "transition": ""
     },
     {
-     "fieldName": "cbnEndElement1",
+     "fieldName": "cbtSaveElement1",
      "event": "onClick",
-     "transition": "終了"
+     "transition": ""
     }
    ]
   },
@@ -1355,11 +1349,6 @@
      "transition": ""
     },
     {
-     "fieldName": "btnSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnSettle",
      "event": "onClick",
      "transition": ""
@@ -1372,10 +1361,10 @@
     {
      "fieldName": "GaitoshaListElement1",
      "event": "onClick",
-     "transition": "検索・一覧"
+     "transition": "終了"
     },
     {
-     "fieldName": "cbnEndElement1",
+     "fieldName": "cbtSaveElement1",
      "event": "onClick",
      "transition": ""
     }
@@ -1418,7 +1407,7 @@
    "commonButtonAreaId": "GaitoshaListId",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonBack",
+     "buttonKind": "CommonButtonComplete",
      "buttonProperty": {
       "fieldName": "GaitoshaListElement1",
       "items": [],
@@ -1447,7 +1436,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "給付実績該当者一覧へ"
+      "additionalText": "照会を"
      }
     }
    ],
@@ -1461,18 +1450,18 @@
    "SuspendButtonVisible": false
   },
   {
-   "commonButtonAreaId": "cmbComplete",
+   "commonButtonAreaId": "btnSave",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonComplete",
+     "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
-      "fieldName": "cbnEndElement1",
+      "fieldName": "cbtSaveElement1",
       "items": [],
       "controlType": "CommonButtonComplete",
-      "width": "S",
+      "width": 2,
       "visible": true,
       "displayNone": false,
-      "disabled": false,
+      "disabled": true,
       "accessKey": "",
       "nextFocusFieldName": "",
       "wrap": false,
@@ -1482,18 +1471,18 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "cbnEndElement1",
+      "selectControlID": "cbtSaveElement1",
       "helpMessageID": "",
       "jpControlName": "",
       "text": "完了",
-      "onClick": "",
+      "onClick": "onClick_btnSave",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "照会を"
+      "additionalText": "過誤申立情報を"
      }
     }
    ],

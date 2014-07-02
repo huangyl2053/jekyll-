@@ -654,7 +654,8 @@ module DBC {
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton"
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoYokaigonintei",
@@ -735,6 +736,10 @@ module DBC {
        "selectedItem": null,
        "dataSource": [
         {
+         "key": "nashi",
+         "value": "未選択"
+        },
+        {
          "key": "new",
          "value": "新規"
         },
@@ -749,10 +754,6 @@ module DBC {
         {
          "key": "shokken",
          "value": "職権"
-        },
-        {
-         "key": "nashi",
-         "value": "選択無"
         }
        ],
        "onClick": "",
@@ -867,6 +868,10 @@ module DBC {
        "selectedItem": null,
        "dataSource": [
         {
+         "key": "nashi",
+         "value": "未選択"
+        },
+        {
          "key": "shinseiNashi",
          "value": "申請無"
         },
@@ -877,10 +882,6 @@ module DBC {
         {
          "key": "ketteiZumi",
          "value": "決定済"
-        },
-        {
-         "key": "nashi",
-         "value": "選択無"
         }
        ],
        "onClick": "",
@@ -960,10 +961,14 @@ module DBC {
        "required": false,
        "onChange": "",
        "labelLText": "みなし区分",
-       "labelLWidth": "300",
+       "labelLWidth": "142",
        "labelLAlign": 2,
        "selectedItem": null,
        "dataSource": [
+        {
+         "key": "nashi",
+         "value": "未選択"
+        },
         {
          "key": "normal",
          "value": "通常認定"
@@ -975,10 +980,6 @@ module DBC {
         {
          "key": "yamuwoenai",
          "value": "やむを得ない事由"
-        },
-        {
-         "key": "nashi",
-         "value": "選択無"
         }
        ],
        "onClick": "",
@@ -1027,7 +1028,8 @@ module DBC {
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton"
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoShikyugendoKijungaku",
@@ -1320,7 +1322,8 @@ module DBC {
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton"
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoKyotakuServicePlan",
@@ -1354,6 +1357,10 @@ module DBC {
        "selectedItem": null,
        "dataSource": [
         {
+         "key": "selectNot",
+         "value": "未選択"
+        },
+        {
          "key": "kyotakuShienJigyosha",
          "value": "居宅介護支援事業所作成"
         },
@@ -1364,10 +1371,6 @@ module DBC {
         {
          "key": "kaigoyoboJigyosha",
          "value": "介護予防支援事業所作成"
-        },
-        {
-         "key": "selectNot",
-         "value": "選択無"
         }
        ],
        "onClick": "",
@@ -1547,16 +1550,16 @@ module DBC {
        "selectedItem": null,
        "dataSource": [
         {
+         "key": "selectNot",
+         "value": "未選択"
+        },
+        {
          "key": "nashi",
          "value": "なし"
         },
         {
          "key": "ari",
          "value": "あり"
-        },
-        {
-         "key": "selectNot",
-         "value": "選択無"
         }
        ],
        "onClick": "",
@@ -1605,7 +1608,8 @@ module DBC {
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton"
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoGemmenGengaku",
@@ -1639,6 +1643,10 @@ module DBC {
        "selectedItem": null,
        "dataSource": [
         {
+         "key": "nashi",
+         "value": "未選択"
+        },
+        {
          "key": "shinseiNashi",
          "value": "申請無"
         },
@@ -1649,10 +1657,6 @@ module DBC {
         {
          "key": "ketteiZumi",
          "value": "決定済"
-        },
-        {
-         "key": "nashi",
-         "value": "選択無"
         }
        ],
        "onClick": "",
@@ -1696,16 +1700,16 @@ module DBC {
            "selectedItem": null,
            "dataSource": [
             {
+             "key": "nashi",
+             "value": "未選択"
+            },
+            {
              "key": "standard",
              "value": "標準負担"
             },
             {
              "key": "tokuteiStandard",
              "value": "特定標準負担"
-            },
-            {
-             "key": "nashi",
-             "value": "選択無"
             }
            ],
            "onClick": "",
@@ -1852,7 +1856,8 @@ module DBC {
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "focusPositionID": "restoreLayoutButton"
         },
         {
          "fieldName": "JukyushaIdoRenrakuhyoFukushiHojinKeigen",
@@ -1995,7 +2000,8 @@ module DBC {
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "focusPositionID": "restoreLayoutButton"
         },
         {
          "fieldName": "JukyushaIdoRenrakuhyoHyojunFutan",
@@ -2029,16 +2035,16 @@ module DBC {
            "selectedItem": null,
            "dataSource": [
             {
+             "key": "nashi",
+             "value": "未選択"
+            },
+            {
              "key": "riyosha",
              "value": "利用者負担"
             },
             {
              "key": "kyushochiNyushosha",
              "value": "旧措置入所者利用者負担"
-            },
-            {
-             "key": "nashi",
-             "value": "選択無"
             }
            ],
            "onClick": "",
@@ -2185,7 +2191,8 @@ module DBC {
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "focusPositionID": "restoreLayoutButton"
         }
        ],
        "controlType": "Panel",
@@ -2227,7 +2234,8 @@ module DBC {
        "panelDisplay": 0,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "focusPositionID": "restoreLayoutButton"
       },
       {
        "fieldName": "JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi",
@@ -2261,20 +2269,20 @@ module DBC {
          "selectedItem": null,
          "dataSource": [
           {
+           "key": "nashi",
+           "value": "未選択"
+          },
+          {
            "key": "shinseiNashi",
            "value": "申請無"
           },
           {
            "key": "shinseiTyu",
-           "value": "申請中 "
+           "value": "申請中"
           },
           {
            "key": "ketteiZumi",
            "value": "決定済"
-          },
-          {
-           "key": "nashi",
-           "value": "選択無"
           }
          ],
          "onClick": "",
@@ -2312,16 +2320,16 @@ module DBC {
          "selectedItem": null,
          "dataSource": [
           {
-           "key": "standard",
-           "value": "通常受給者"
+           "key": "nashi",
+           "value": "未選択"
           },
           {
            "key": "kyusochiNyushosha",
-           "value": "旧措置入所者"
+           "value": "通常受給者"
           },
           {
-           "key": "nashi",
-           "value": "選択無"
+           "key": "standard",
+           "value": "旧措置入所者"
           }
          ],
          "onClick": "",
@@ -2359,16 +2367,16 @@ module DBC {
          "selectedItem": null,
          "dataSource": [
           {
+           "key": "selectnashi",
+           "value": "未選択"
+          },
+          {
            "key": "nashi",
            "value": "該当無"
           },
           {
            "key": "ari",
            "value": "該当有"
-          },
-          {
-           "key": "selectnashi",
-           "value": "選択無"
           }
          ],
          "onClick": "",
@@ -2796,7 +2804,8 @@ module DBC {
        "panelDisplay": 1,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "focusPositionID": "restoreLayoutButton"
       }
      ],
      "controlType": "Panel",
@@ -2838,7 +2847,8 @@ module DBC {
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton"
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoKokiKoreiKokuho",
@@ -2980,7 +2990,8 @@ module DBC {
        "panelDisplay": 1,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "focusPositionID": "restoreLayoutButton"
       },
       {
        "fieldName": "JukyushaIdoRenrakuhyoKokuho",
@@ -3166,7 +3177,8 @@ module DBC {
        "panelDisplay": 1,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "focusPositionID": "restoreLayoutButton"
       }
      ],
      "controlType": "Panel",
@@ -3208,7 +3220,8 @@ module DBC {
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton"
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoKyufuSeigen",
@@ -3242,16 +3255,16 @@ module DBC {
        "selectedItem": null,
        "dataSource": [
         {
+         "key": "selnashi",
+         "value": "未選択"
+        },
+        {
          "key": "nashi",
          "value": "なし"
         },
         {
          "key": "ari",
          "value": "あり"
-        },
-        {
-         "key": "selnashi",
-         "value": "選択無"
         }
        ],
        "onClick": "",
@@ -3394,7 +3407,8 @@ module DBC {
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton"
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoNijiyoboJigyo",
@@ -3428,16 +3442,16 @@ module DBC {
        "selectedItem": null,
        "dataSource": [
         {
+         "key": "selnashi",
+         "value": "未選択"
+        },
+        {
          "key": "higaito",
          "value": "非該当"
         },
         {
          "key": "gaito",
          "value": "該当"
-        },
-        {
-         "key": "selnashi",
-         "value": "選択無"
         }
        ],
        "onClick": "",
@@ -3533,7 +3547,8 @@ module DBC {
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton"
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoRojinHoken",
@@ -3719,7 +3734,8 @@ module DBC {
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton"
     }
    ],
    "controlType": "Panel",
@@ -3761,7 +3777,8 @@ module DBC {
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton"
   }
  ],
  "controlType": "CommonChildDiv",

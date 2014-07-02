@@ -12,11 +12,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeHenkoNaiyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeJigyoshaDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeKihonDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeRirekiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.dgKyotakuKeikakuTodokedeRirekiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.tplKyotakuKeikakuTodokedeDetailRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.dgShoKaishuJokyo_Row;
@@ -54,7 +56,6 @@ public class KyotakuKeikakuTodokedeDetail {
      */
     public ResponseData onLoad(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
-        setAtenaData(panel);
         setKihonData(panel);
         setRirekiList(panel);
         setMeisaiDefaultData(panel);
@@ -77,24 +78,12 @@ public class KyotakuKeikakuTodokedeDetail {
         削除
     }
 
-    private void setAtenaData(KyotakuKeikakuTodokedeDetailDiv panel) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
-        AtenaShokaiSimple.setData(panel.getKyotakuKeikakuTodokedeKihon().getKyotakuKeikakuTodokedeKihonAtena().getAtenaInfo(),
-                new ShikibetsuCode(cg.getAsRString("識別コード")));
-    }
-
     private void setKihonData(KyotakuKeikakuTodokedeDetailDiv panel) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(1));
-        KaigoShikakuKihonDiv kihon = panel.getKyotakuKeikakuTodokedeKihon().getKyotakuKeikakuTodokedeKaigoKihon();
-        kihon.getTxtHihokenshaNo().setValue(cg.getAsRString("被保番号"));
-        kihon.getTxtShutokuYmd().setValue(cg.getAsRDate("取得日"));
-        kihon.getTxtSoshitsuYmd().setValue(cg.getAsRDate("喪失日"));
-        kihon.getTxtShutokuJiyu().setValue(cg.getAsRString("取得事由"));
-        kihon.getTxtSoshitsuJiyu().setValue(cg.getAsRString("喪失事由"));
-        kihon.getTxtJutokuKubun().setValue(cg.getAsRString("住特区分"));
-        kihon.getTxtYokaigoJotaiKubun().setValue(cg.getAsRString("要介護度"));
-        kihon.getTxtNinteiKaishiYmd().setValue(cg.getAsRDate("認定開始日"));
-        kihon.getTxtNinteiShuryoYmd().setValue(cg.getAsRDate("認定終了日"));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
+        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
+        int rowId = 0;
+        KyotakuKeikakuTodokedeKihonDiv div = panel.getKyotakuKeikakuTodokedeKihon();
+        KaigoShikakuKihon.setData(div.getKyotakuKeikakuTodokedeKihonAtena(), div.getKyotakuKeikakuTodokedeKaigoKihon(), 識別コード, rowId);
     }
 
     private void setRirekiList(KyotakuKeikakuTodokedeDetailDiv panel) {

@@ -7,28 +7,15 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoGemmenGengakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoInquiryPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoKihonJohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoKokiKoreiKokuhoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoKyotakuServicePlanDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoKyufuSeigenDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoNijiyoboJigyoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoRojinHokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0040011.JukyushaIdoRenrakuhyoSearchPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoShikyugendoKijungakuDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoYokaigoninteiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0040011.dgJukyushaIdoRenrakuhyoSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.DateRoundingType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+
 
 /**
  * 受給者異動連絡票情報照会の照会パネルです。
@@ -149,20 +136,20 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
                                 setSeireki(searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
                                         getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtResultSendYM())));
         //テスト用
-        switch (searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
-                getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtResultHihoNo().toString()) {
-            case "0000000001":
-                hashMap = ymlData.get(0);
-                break;
-            case "0000000002":
-                hashMap = ymlData.get(1);
-                break;
-            case "0000000003":
-                hashMap = ymlData.get(2);
-                break;
-        }
-
-       // HashMap hashMap = ymlData.get(0);
+//        switch (searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
+//                getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtResultHihoNo().toString()) {
+//            case "0000000001":
+//                hashMap = ymlData.get(0);
+//                break;
+//            case "0000000002":
+//                hashMap = ymlData.get(1);
+//                break;
+//            case "0000000003":
+//                hashMap = ymlData.get(2);
+//                break;
+//       }
+        
+        hashMap = ymlData.get(0);
         ControlGenerator ymlDt = new ControlGenerator(hashMap);
 
         inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().

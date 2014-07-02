@@ -1,8 +1,8 @@
 ## YAML Template.
 --- 
 #CommonChildDiv1
-- atenaMeisho: 介護 南魚
-  atenaKanMeisho: カイゴ　ミナミ
+- atenaMeisho: 電算　太郎
+  atenaKanMeisho: デンサン　タロウ
   seinengappiYmd: "19400101"
   nenrei: 74
   seibetsu: 男
@@ -15,7 +15,7 @@
   setaiCode: 1234567890
   kojinHojinCode: "0123456789"
  ## CommonChildDiv2
-  hihokenshaNo: "0000029068"
+  hihokenshaNo: "1234500001"
   shotokuYmd: "平26.06.01"
   shotokuJiyu: 介護認定
   jutokuTekiyo: "平25.01.01"
