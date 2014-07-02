@@ -41,12 +41,6 @@
             <classifier>classes</classifier>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur.ura</groupId>
-            <artifactId>UraDivController</artifactId>
-            <version>${project.version}</version>
-            <classifier>classes</classifier>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuRealService</artifactId>
             <version>${project.version}</version>
