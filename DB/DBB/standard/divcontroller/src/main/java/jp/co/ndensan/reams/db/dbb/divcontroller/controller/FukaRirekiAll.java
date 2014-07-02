@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 全賦課履歴Divクラス
@@ -37,7 +38,11 @@ public class FukaRirekiAll {
         
         RString loadShikibetsuCode;
         if (div.getLoadShikibetsuCode().length() < 1) {
-            loadShikibetsuCode = new RString("0000000000001901");
+            
+            loadShikibetsuCode = (RString) ViewStateHolder.get("対象者識別コード", RString.class);
+            if(loadShikibetsuCode == null || loadShikibetsuCode.isEmpty()){
+               loadShikibetsuCode = new RString("0000000000001901"); 
+            }
         } else {
             loadShikibetsuCode = div.getLoadShikibetsuCode();
         }

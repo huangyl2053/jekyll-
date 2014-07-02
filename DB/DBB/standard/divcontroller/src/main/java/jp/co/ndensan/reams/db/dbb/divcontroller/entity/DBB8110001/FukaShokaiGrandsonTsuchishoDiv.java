@@ -5,8 +5,10 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8110001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.InjiNaiyoSetteiDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.InjiNaiyoSetteiDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.KobetsuHakkoChoteiJiyuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.KobetsuHakkoChoteiJiyuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.KobetsuHakkoZengoSentakuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.KobetsuHakkoZengoSentakuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -31,8 +33,10 @@ public class FukaShokaiGrandsonTsuchishoDiv extends Panel {
     private TextBox txtKoseiM;
     @JsonProperty("txtKoseiYMD")
     private TextBox txtKoseiYMD;
-    @JsonProperty("InjiNaiyoSettei")
-    private InjiNaiyoSetteiDiv InjiNaiyoSettei;
+    @JsonProperty("KobetsuHakkoChoteiJiyu")
+    private KobetsuHakkoChoteiJiyuDiv KobetsuHakkoChoteiJiyu;
+    @JsonProperty("KobetsuHakkoZengoSentaku")
+    private KobetsuHakkoZengoSentakuDiv KobetsuHakkoZengoSentaku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -80,14 +84,24 @@ public class FukaShokaiGrandsonTsuchishoDiv extends Panel {
         this.txtKoseiYMD=txtKoseiYMD;
     }
 
-    @JsonProperty("InjiNaiyoSettei")
-    public InjiNaiyoSetteiDiv getInjiNaiyoSettei() {
-        return InjiNaiyoSettei;
+    @JsonProperty("KobetsuHakkoChoteiJiyu")
+    public KobetsuHakkoChoteiJiyuDiv getKobetsuHakkoChoteiJiyu() {
+        return KobetsuHakkoChoteiJiyu;
     }
 
-    @JsonProperty("InjiNaiyoSettei")
-    public void setInjiNaiyoSettei(InjiNaiyoSetteiDiv InjiNaiyoSettei) {
-        this.InjiNaiyoSettei=InjiNaiyoSettei;
+    @JsonProperty("KobetsuHakkoChoteiJiyu")
+    public void setKobetsuHakkoChoteiJiyu(KobetsuHakkoChoteiJiyuDiv KobetsuHakkoChoteiJiyu) {
+        this.KobetsuHakkoChoteiJiyu=KobetsuHakkoChoteiJiyu;
+    }
+
+    @JsonProperty("KobetsuHakkoZengoSentaku")
+    public KobetsuHakkoZengoSentakuDiv getKobetsuHakkoZengoSentaku() {
+        return KobetsuHakkoZengoSentaku;
+    }
+
+    @JsonProperty("KobetsuHakkoZengoSentaku")
+    public void setKobetsuHakkoZengoSentaku(KobetsuHakkoZengoSentakuDiv KobetsuHakkoZengoSentaku) {
+        this.KobetsuHakkoZengoSentaku=KobetsuHakkoZengoSentaku;
     }
 
 }

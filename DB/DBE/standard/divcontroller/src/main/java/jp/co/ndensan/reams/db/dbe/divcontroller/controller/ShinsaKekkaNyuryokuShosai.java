@@ -79,7 +79,7 @@ public class ShinsaKekkaNyuryokuShosai {
         _konkai(div).getTxtShinseiKubunShinsei().setValue(dataRow.get申請());
         _konkai(div).getTxtNinteiYukoKikanStart().clearValue();
         _konkai(div).getTxtNinteiYukoKikanEnd().clearValue();
-        _konkai(div).getDdlNijiHanteiKekka().setSelectedItem(KaigoNinteiKekka.Yokaigodo.要介護１.getCode());
+        _konkai(div).getDdlNijiHanteiKekka().setSelectedItem(KaigoNinteiKekka.Yokaigodo.EMPTY.getCode());
         _konkai(div).getTxtShinsakaiIken().clearValue();
         _konkai(div).getDdlTokuteiShippei().setDisabled(is第1号(dataRow.get被保険者区分()));
         _konkai(div).getDdlJotaiZo().setDisabled(!is要介護１(_konkai(div)));

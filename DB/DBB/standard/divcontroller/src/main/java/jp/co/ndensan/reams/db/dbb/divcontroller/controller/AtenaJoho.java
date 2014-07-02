@@ -38,7 +38,9 @@ public class AtenaJoho {
 
         if (atenajoho == null) {
             AtenaShokaiSimpleDiv atenashokaiDiv = div.getKaigoAtenaInfo().getAtenaInfo();
-            AtenaShokaiSimple.setData(atenashokaiDiv, new ShikibetsuCode("000000000000019"));
+            //ShikibetsuCode shikibetsuCode = new ShikibetsuCode((RString) ViewStateHolder.get("対象者識別コード", RString.class));
+            ShikibetsuCode shikibetsuCode = new ShikibetsuCode(new RString("0000000000001901"));
+            AtenaShokaiSimple.setData(atenashokaiDiv, shikibetsuCode);
             KaigoFukaKihonDiv kaigofukakihonDiv = div.getKaigoFukaKihon();
 
             loadKaigoFukaKihon(kaigofukakihonDiv);
@@ -51,7 +53,10 @@ public class AtenaJoho {
     }
 
     private void loadKaigoFukaKihon(KaigoFukaKihonDiv kaigofukakihonDiv) {
-        RString shikibetsuCd = new RString("000000000000019");
+        RString shikibetsuCd = (RString) ViewStateHolder.get("対象者識別コード", RString.class);
+        if (shikibetsuCd == null || shikibetsuCd.isEmpty()) {
+            shikibetsuCd = new RString("0000000000001901");
+        }
 
         //Yaml データ読み込み
         List<HashMap> yamlArray = YamlLoader.DBB.loadAsList(FukaKihon);
@@ -66,12 +71,12 @@ public class AtenaJoho {
                 kaigofukakihonDiv.getTxtHokenryoDankai().setValue(cg.getAsRString("保険料段階"));
                 kaigofukakihonDiv.getTxtShutokuYmd().setValue(new RDate(cg.getAsRString("資格取得日").toString()));
                 kaigofukakihonDiv.getTxtShutokuJiyu().setValue(cg.getAsRString("取得事由"));
-                if(cg.getAsRString("資格喪失日").toString() == null || cg.getAsRString("資格喪失日").toString().isEmpty()){
+                if (cg.getAsRString("資格喪失日").toString() == null || cg.getAsRString("資格喪失日").toString().isEmpty()) {
                     kaigofukakihonDiv.getTxtSoshitsuYmd().clearValue();
                 } else {
                     kaigofukakihonDiv.getTxtSoshitsuYmd().setValue(new RDate(cg.getAsRString("資格喪失日").toString()));
                 }
-                
+
                 kaigofukakihonDiv.getTxtSoshitsuJiyu().setValue(cg.getAsRString("喪失事由"));
             }
         }
