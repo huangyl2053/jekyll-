@@ -26,7 +26,7 @@ public class KyotakuKeikakuTodokedeJigyoshaDiv extends Panel {
     @JsonProperty("txtJigyoshaCode")
     private TextBoxCode txtJigyoshaCode;
     @JsonProperty("btnJigyosha")
-    private Button btnJigyosha;
+    private ButtonDialog btnJigyosha;
     @JsonProperty("txtJigyoshaName")
     private TextBox txtJigyoshaName;
     @JsonProperty("txtServiceShurui1")
@@ -44,7 +44,7 @@ public class KyotakuKeikakuTodokedeJigyoshaDiv extends Panel {
     @JsonProperty("txtItakuJigyoshaCode")
     private TextBoxCode txtItakuJigyoshaCode;
     @JsonProperty("btnItakuJigyosha")
-    private Button btnItakuJigyosha;
+    private ButtonDialog btnItakuJigyosha;
     @JsonProperty("txtItakuJigyoshaName")
     private TextBox txtItakuJigyoshaName;
 
@@ -75,12 +75,12 @@ public class KyotakuKeikakuTodokedeJigyoshaDiv extends Panel {
     }
 
     @JsonProperty("btnJigyosha")
-    public Button getBtnJigyosha() {
+    public ButtonDialog getBtnJigyosha() {
         return btnJigyosha;
     }
 
     @JsonProperty("btnJigyosha")
-    public void setBtnJigyosha(Button btnJigyosha) {
+    public void setBtnJigyosha(ButtonDialog btnJigyosha) {
         this.btnJigyosha=btnJigyosha;
     }
 
@@ -165,12 +165,12 @@ public class KyotakuKeikakuTodokedeJigyoshaDiv extends Panel {
     }
 
     @JsonProperty("btnItakuJigyosha")
-    public Button getBtnItakuJigyosha() {
+    public ButtonDialog getBtnItakuJigyosha() {
         return btnItakuJigyosha;
     }
 
     @JsonProperty("btnItakuJigyosha")
-    public void setBtnItakuJigyosha(Button btnItakuJigyosha) {
+    public void setBtnItakuJigyosha(ButtonDialog btnItakuJigyosha) {
         this.btnItakuJigyosha=btnItakuJigyosha;
     }
 

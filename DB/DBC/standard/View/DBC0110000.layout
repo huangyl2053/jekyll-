@@ -2,135 +2,6 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "KyotakuJikoTodokedeSearch",
-   "items": [
-    {
-     "fieldName": "KyotakuJikoTodokedeHihokenshaFinder",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "KyotakuJikoTodokedeHihokenshaFinder",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "HihokenshaFinder",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "onClick_BtnToSearch": "onClickBtnToSearch",
-     "displayNone_txtTsuchishoNo": false,
-     "displayNone_ddlFukaNendo": true,
-     "displayNone_SearchCriteriaDetail": false
-    },
-    {
-     "fieldName": "KyotakuJikoTodokedeHihokenshaList",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "KyotakuJikoTodokedeHihokenshaList",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "SearchResultOfHihokensha",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "onClick_btnToResearch": "onClickBtnToResearch"
-    }
-   ],
-   "controlType": "Panel",
-   "width": "G12",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "selectControlID": "KyotakuJikoTodokedeSearch",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "onLoad": "",
-   "title": "",
-   "isOpen": true,
-   "canOpenAndClose": false,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KyotakuJikoTodokedeSearch"
-    }
-   ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeSearch/onLoad"
-    },
-    {
-     "eventName": "onClickBtnToSearch",
-     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeSearch/onClickBtnToSearch"
-    },
-    {
-     "eventName": "onClickBtnToResearch",
-     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeSearch/onClickBtnToResearch"
-    }
-   ],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorder": false,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
-  },
-  {
    "fieldName": "KyotakuJikoTodokedeDetail",
    "items": [
     {
@@ -168,10 +39,7 @@
        "heightForDialog": "M",
        "atenaInfo_title": "",
        "atenaInfo_canOpenAndClose": true,
-       "atenaInfo_eraseBorderTop": true,
-       "atenaInfo_eraseBorderBottom": true,
-       "atenaInfo_eraseBorderRight": true,
-       "atenaInfo_eraseBorderLeft": true,
+       "AtenaShokaiSimple_eraseBorder": true,
        "AtenaKanaMeisho_visible": true,
        "AtenaMisho_visible": true,
        "SeinengappiYMD_visible": true,
@@ -187,7 +55,6 @@
        "KojinHojinCode_visible": true,
        "SetaiCode_visible": true,
        "lblButtonMargin_displayNone": false,
-       "btnMemo_DisplayNone": false,
        "btnDainosha_displayNone": false,
        "btnSofusaki_displayNone": false,
        "btnDainoSofusakiKakunin_displayNone": false,
@@ -233,6 +100,7 @@
        "canOpenAndClose": true,
        "marginTop": 0,
        "marginBottom": 0,
+       "eraseBorder": true,
        "businessId": "DBZ",
        "controlName": "KaigoShikakuKihon",
        "dataPassingForDialog": [],
@@ -240,10 +108,6 @@
        "dialogCancelEventNameForDialog": "",
        "canTransferEvent": true,
        "heightForDialog": "M",
-       "eraseBorderTop": true,
-       "eraseBorderBottom": true,
-       "eraseBorderRight": true,
-       "eraseBorderLeft": true,
        "backGroundColor": 0,
        "btnHihoRireki_visible": true,
        "btnNinteiRireki_visible": true
@@ -288,11 +152,7 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false
+     "height": "Auto"
     },
     {
      "fieldName": "tabKyotakuServiceJikoSakuseiTodokede",
@@ -324,12 +184,12 @@
            "helpMessageID": "",
            "jpControlName": "",
            "text": "新規届出を追加する",
-           "onClick": "onClickTodokedeNew",
-           "icon": 0,
-           "appearance": 0,
-           "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
+           "onClick": "onClickTodokedeNew",
+           "appearance": 0,
+           "imageFileUrl": "",
+           "icon": 0,
            "heightTextBoxMatches": false
           },
           {
@@ -353,12 +213,12 @@
            "helpMessageID": "",
            "jpControlName": "",
            "text": "変更届出を追加する",
-           "onClick": "onClickTodokedeModify",
-           "icon": 0,
-           "appearance": 0,
-           "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
+           "onClick": "onClickTodokedeModify",
+           "appearance": 0,
+           "imageFileUrl": "",
+           "icon": 0,
            "heightTextBoxMatches": false
           },
           {
@@ -383,7 +243,6 @@
            "jpControlName": "",
            "readOnly": false,
            "height": "175",
-           "dataSource": [],
            "gridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": false,
@@ -502,9 +361,15 @@
            "onSelectBySelectButton": "onClickTodokedeSelect",
            "onSelectByModifyButton": "",
            "onSelectByDeleteButton": "",
+           "onAfterRequest": "",
+           "onAfterRequestByDblClick": "",
+           "onAfterRequestBySelectButton": "",
+           "onAfterRequestByModifyButton": "",
+           "onAfterRequestByDeleteButton": "",
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
+           "dataSource": [],
            "sortOrder": "defaultDataName4",
            "isAscending": true,
            "filterList": [],
@@ -550,11 +415,7 @@
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false
+         "height": "Auto"
         },
         {
          "fieldName": "KyotakuJikoTodokedeMeisai",
@@ -580,26 +441,26 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
            "required": false,
+           "placeHolder": "",
+           "textKind": 0,
+           "isPrivateInfo": false,
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "text": "",
+           "value": "20141231",
            "labelLText": "届出日",
            "labelRText": "",
            "labelLWidth": "50",
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
-           "placeHolder": "",
-           "textKind": 0,
-           "isPrivateInfo": false,
-           "isPassword": false,
-           "onKeyPress": "",
-           "text": "",
-           "value": "20141231",
-           "permitCharactor": "./_-",
            "ymdKubun": 2,
-           "displayFormat": 0
+           "displayFormat": 0,
+           "permitCharactor": "./_-"
           },
           {
            "fieldName": "txtTodokedeKubun",
@@ -622,16 +483,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": true,
-           "onChange": "",
            "required": false,
-           "labelLText": "届出区分",
-           "labelRText": "",
-           "labelLWidth": "70",
-           "labelRWidth": "S",
-           "labelLAlign": 2,
-           "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
            "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
@@ -640,10 +492,19 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "isComboBox": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
            "text": "",
            "suggest": [],
            "value": "",
+           "labelLText": "届出区分",
+           "labelRText": "",
+           "labelLWidth": "70",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
            "decorationClass": "",
            "permitCharactor": ""
           },
@@ -668,26 +529,26 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
            "required": false,
+           "placeHolder": "",
+           "textKind": 0,
+           "isPrivateInfo": false,
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "text": "",
+           "value": "",
            "labelLText": "対象年月",
            "labelRText": "",
            "labelLWidth": "70",
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
-           "placeHolder": "",
-           "textKind": 0,
-           "isPrivateInfo": false,
-           "isPassword": false,
-           "onKeyPress": "",
-           "text": "",
-           "value": "",
-           "permitCharactor": "./_-",
            "ymdKubun": 1,
-           "displayFormat": 0
+           "displayFormat": 0,
+           "permitCharactor": "./_-"
           },
           {
            "fieldName": "txtKeikakuSakuseiYMD",
@@ -710,26 +571,26 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
            "required": false,
+           "placeHolder": "",
+           "textKind": 0,
+           "isPrivateInfo": false,
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "text": "",
+           "value": "",
            "labelLText": "計画作成日",
            "labelRText": "",
            "labelLWidth": "80",
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
-           "placeHolder": "",
-           "textKind": 0,
-           "isPrivateInfo": false,
-           "isPassword": false,
-           "onKeyPress": "",
-           "text": "",
-           "value": "",
-           "permitCharactor": "./_-",
            "ymdKubun": 2,
-           "displayFormat": 0
+           "displayFormat": 0,
+           "permitCharactor": "./_-"
           },
           {
            "fieldName": "txtTekiyoKikan",
@@ -752,21 +613,21 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
+           "isPrivateInfo": false,
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
            "onChange": "",
+           "onKeyPress": "",
            "labelLText": "適用期間",
            "labelRText": "",
            "labelLWidth": "70",
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
-           "isPrivateInfo": false,
-           "isPassword": false,
-           "onKeyPress": "",
-           "permitCharactor": "",
            "ymdKubun": 2,
            "displayFormat": 0,
+           "permitCharactor": "",
            "fromPlaceHolder": "",
            "toPlaceHolder": "",
            "minDate": "",
@@ -799,16 +660,7 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
            "required": false,
-           "labelLText": "",
-           "labelRText": "",
-           "labelLWidth": "S",
-           "labelRWidth": "S",
-           "labelLAlign": 2,
-           "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
            "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
@@ -817,10 +669,19 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "isComboBox": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
            "text": "",
            "suggest": [],
            "value": "",
+           "labelLText": "",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
            "decorationClass": "",
            "permitCharactor": ""
           },
@@ -848,16 +709,7 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
              "required": false,
-             "labelLText": "氏名(漢字)",
-             "labelRText": "",
-             "labelLWidth": "80",
-             "labelRWidth": "S",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
              "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
@@ -866,10 +718,19 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "isComboBox": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
              "text": "",
              "suggest": [],
              "value": "",
+             "labelLText": "氏名(漢字)",
+             "labelRText": "",
+             "labelLWidth": "80",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
              "decorationClass": "",
              "permitCharactor": ""
             },
@@ -894,7 +755,16 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
+             "required": false,
+             "onFocus": "",
+             "onBlur": "",
              "onChange": "",
+             "labelLText": "関係区分",
+             "labelRText": "",
+             "labelLWidth": "70",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
              "selectedItem": "key0",
              "dataSource": [
               {
@@ -917,17 +787,7 @@
                "key": "key4",
                "value": "ケアマネージャ"
               }
-             ],
-             "required": false,
-             "labelLText": "関係区分",
-             "labelRText": "",
-             "labelLWidth": "70",
-             "labelRWidth": "S",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
-             "disabledItem": []
+             ]
             },
             {
              "fieldName": "txtTodokedeshaKana",
@@ -950,16 +810,7 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
              "required": false,
-             "labelLText": "(カナ)",
-             "labelRText": "",
-             "labelLWidth": "80",
-             "labelRWidth": "S",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
              "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
@@ -968,10 +819,19 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "isComboBox": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
              "text": "",
              "suggest": [],
              "value": "",
+             "labelLText": "(カナ)",
+             "labelRText": "",
+             "labelLWidth": "80",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
              "decorationClass": "",
              "permitCharactor": "",
              "kanjiInField": "txtName",
@@ -998,16 +858,7 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
              "required": false,
-             "labelLText": "電話番号",
-             "labelRText": "",
-             "labelLWidth": "70",
-             "labelRWidth": "S",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
              "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
@@ -1016,10 +867,19 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "isComboBox": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
              "text": "",
              "suggest": [],
              "value": "",
+             "labelLText": "電話番号",
+             "labelRText": "",
+             "labelLWidth": "70",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
              "decorationClass": "",
              "permitCharactor": ""
             },
@@ -1044,16 +904,7 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
              "required": false,
-             "labelLText": "住所",
-             "labelRText": "",
-             "labelLWidth": "80",
-             "labelRWidth": "S",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
              "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
@@ -1062,10 +913,19 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "isComboBox": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
              "text": "",
              "suggest": [],
              "value": "",
+             "labelLText": "住所",
+             "labelRText": "",
+             "labelLWidth": "80",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
              "decorationClass": "",
              "permitCharactor": ""
             },
@@ -1090,16 +950,7 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
              "required": false,
-             "labelLText": "",
-             "labelRText": "",
-             "labelLWidth": "30",
-             "labelRWidth": "S",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
              "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
@@ -1108,10 +959,19 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "isComboBox": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
              "text": "",
              "suggest": [],
              "value": "",
+             "labelLText": "",
+             "labelRText": "",
+             "labelLWidth": "30",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
              "decorationClass": "",
              "permitCharactor": ""
             }
@@ -1155,11 +1015,7 @@
            "panelDisplay": 1,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false
+           "height": "Auto"
           },
           {
            "fieldName": "KyotakuJikoTodokedeHenkoNaiyo",
@@ -1185,26 +1041,26 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
              "required": false,
+             "placeHolder": "",
+             "textKind": 0,
+             "isPrivateInfo": false,
+             "isPassword": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
+             "onKeyPress": "",
+             "text": "",
+             "value": "",
              "labelLText": "変更日",
              "labelRText": "",
              "labelLWidth": "50",
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
-             "placeHolder": "",
-             "textKind": 0,
-             "isPrivateInfo": false,
-             "isPassword": false,
-             "onKeyPress": "",
-             "text": "",
-             "value": "",
-             "permitCharactor": "./_-",
              "ymdKubun": 2,
-             "displayFormat": 0
+             "displayFormat": 0,
+             "permitCharactor": "./_-"
             },
             {
              "fieldName": "txtHenkoJiyu",
@@ -1227,16 +1083,7 @@
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": false,
-             "onChange": "",
              "required": false,
-             "labelLText": "変更事由",
-             "labelRText": "",
-             "labelLWidth": "70",
-             "labelRWidth": "S",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "onFocus": "",
-             "onBlur": "",
              "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
@@ -1245,10 +1092,19 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "isComboBox": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
              "text": "",
              "suggest": [],
              "value": "",
+             "labelLText": "変更事由",
+             "labelRText": "",
+             "labelLWidth": "70",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
              "decorationClass": "",
              "permitCharactor": ""
             }
@@ -1292,11 +1148,7 @@
            "panelDisplay": 1,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto",
-           "eraseBorderTop": false,
-           "eraseBorderBottom": false,
-           "eraseBorderRight": false,
-           "eraseBorderLeft": false
+           "height": "Auto"
           },
           {
            "fieldName": "btnTodokedeDelete",
@@ -1319,12 +1171,12 @@
            "helpMessageID": "",
            "jpControlName": "",
            "text": "届出明細を削除する",
-           "onClick": "onClickTodokedeDelete",
-           "icon": 0,
-           "appearance": 0,
-           "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
+           "onClick": "onClickTodokedeDelete",
+           "appearance": 0,
+           "imageFileUrl": "",
+           "icon": 0,
            "heightTextBoxMatches": false
           },
           {
@@ -1348,12 +1200,12 @@
            "helpMessageID": "",
            "jpControlName": "",
            "text": "届出明細を訂正する",
-           "onClick": "onClickTodokedeTeisei",
-           "icon": 0,
-           "appearance": 0,
-           "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
+           "onClick": "onClickTodokedeTeisei",
+           "appearance": 0,
+           "imageFileUrl": "",
+           "icon": 0,
            "heightTextBoxMatches": false
           },
           {
@@ -1377,12 +1229,12 @@
            "helpMessageID": "",
            "jpControlName": "",
            "text": "届出明細を確定する",
-           "onClick": "onClickTodokedeKakutei",
-           "icon": 0,
-           "appearance": 0,
-           "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
+           "onClick": "onClickTodokedeKakutei",
+           "appearance": 0,
+           "imageFileUrl": "",
+           "icon": 0,
            "heightTextBoxMatches": false
           },
           {
@@ -1406,41 +1258,12 @@
            "helpMessageID": "",
            "jpControlName": "",
            "text": "届出明細をクリアする",
+           "imageWidth": "",
+           "imageHeight": "",
            "onClick": "onClickTodokedeClear",
-           "icon": 0,
            "appearance": 0,
            "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": "",
-           "heightTextBoxMatches": false
-          },
-          {
-           "fieldName": "btnReturnToRirekiList",
-           "items": [],
-           "controlType": "Button",
-           "width": "170",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 2,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "selectControlID": "btnReturnToRirekiList",
-           "helpMessageID": "",
-           "jpControlName": "",
-           "text": "届出一覧に戻る",
-           "onClick": "",
            "icon": 0,
-           "appearance": 0,
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": "",
            "heightTextBoxMatches": false
           }
          ],
@@ -1463,7 +1286,7 @@
          "jpControlName": "",
          "onLoad": "",
          "title": "計画届出明細",
-         "isOpen": true,
+         "isOpen": false,
          "canOpenAndClose": true,
          "postParameterPanelNames": [
           {
@@ -1483,11 +1306,7 @@
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false
+         "height": "Auto"
         }
        ],
        "controlType": "TabPanel",
@@ -1546,7 +1365,9 @@
          "heightForDialog": "M",
          "onBlur_txtKaishuDate": "",
          "onChange_ddlKaishuJiyu": "",
-         "onBlur_txtKaishuRiyu": ""
+         "onBlur_txtKaishuRiyu": "",
+         "ShoKaishuJokyoShosai_panalDisplay": 0,
+         "ShoKaishuJokyoShosai_canOpenAndClose": true
         }
        ],
        "controlType": "TabPanel",
@@ -1598,35 +1419,6 @@
      "selectedItemFieldName": "tplKyotakuJikoTodokedeDetailRireki",
      "initialTab": 0,
      "isLazyLoading": false
-    },
-    {
-     "fieldName": "btnReturn",
-     "items": [],
-     "controlType": "Button",
-     "width": "170",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnReturn",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "text": "該当者検索に戻る",
-     "onClick": "",
-     "icon": 0,
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -1647,9 +1439,9 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "居宅サービス自己作成届出",
+   "title": "",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "KyotakuJikoTodokedeDetail"
@@ -1701,11 +1493,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "height": "Auto"
   },
   {
    "fieldName": "KyotakuJikoTodokedeKanryo",
@@ -1814,101 +1602,6 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "該当者検索",
-   "showWizard": true,
-   "visibleDivs": [
-    {
-     "visibleDiv": "KyotakuJikoTodokedeSearch",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "KyotakuJikoTodokedeHihokenshaFinder",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KyotakuJikoTodokedeHihokenshaList",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": "届出一覧"
-    },
-    {
-     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
-     "transition": "届出一覧"
-    },
-    {
-     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectByDblClick",
-     "transition": "届出一覧"
-    },
-    {
-     "fieldName": "btnTodokedeNew",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeModify",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgKyotakuJikoTodokedeRirekiList",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgKyotakuJikoTodokedeRirekiList",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeKakutei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeTeisei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeDelete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturnToRirekiList",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "2",
    "stateName": "届出一覧",
    "showWizard": true,
    "visibleDivs": [
@@ -1961,21 +1654,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnTodokedeNew",
      "event": "onClick",
      "transition": "明細登録"
@@ -2011,7 +1689,12 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReturnToRirekiList",
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturnToRireki",
      "event": "onClick",
      "transition": ""
     },
@@ -2019,21 +1702,11 @@
      "fieldName": "btnTodokedeSave",
      "event": "onClick",
      "transition": "更新完了"
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": "該当者検索"
     }
    ]
   },
   {
-   "order": "3",
+   "order": "2",
    "stateName": "明細登録",
    "showWizard": true,
    "visibleDivs": [
@@ -2086,21 +1759,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnTodokedeNew",
      "event": "onClick",
      "transition": ""
@@ -2136,7 +1794,12 @@
      "transition": "届出一覧"
     },
     {
-     "fieldName": "btnReturnToRirekiList",
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturnToRireki",
      "event": "onClick",
      "transition": "届出一覧"
     },
@@ -2144,21 +1807,11 @@
      "fieldName": "btnTodokedeSave",
      "event": "onClick",
      "transition": ""
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": "該当者検索"
     }
    ]
   },
   {
-   "order": "4",
+   "order": "3",
    "stateName": "更新完了",
    "showWizard": true,
    "visibleDivs": [
@@ -2178,21 +1831,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuJikoTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnTodokedeNew",
      "event": "onClick",
      "transition": ""
@@ -2228,22 +1866,17 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReturnToRirekiList",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnReturnToRireki",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeSave",
      "event": "onClick",
      "transition": ""
     }
@@ -2253,17 +1886,13 @@
  "currentState": "All",
  "id": "DBC0110000",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "research",
+   "eventName": "btnReturn.onClick"
+  }
+ ],
  "loadSequencePanelNames": [
-  [
-   "KyotakuJikoTodokedeSearch"
-  ],
-  [
-   "KyotakuJikoTodokedeHihokenshaFinder"
-  ],
-  [
-   "KyotakuJikoTodokedeHihokenshaList"
-  ],
   [
    "KyotakuJikoTodokedeDetail"
   ],
@@ -2289,7 +1918,7 @@
  "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "btnTodokedeSave",
+   "commonButtonAreaId": "btnIchiran",
    "buttonSetting": [
     {
      "buttonKind": "CommonButtonFree",
@@ -2297,7 +1926,7 @@
       "fieldName": "btnTodokedeSave",
       "items": [],
       "controlType": "CommonButtonFree",
-      "width": "S",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -2324,6 +1953,40 @@
       "prefixText": "",
       "suffixText": ""
      }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnReturn",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReturn",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "該当者検索に戻る",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
     }
    ],
    "states": [
@@ -2331,7 +1994,9 @@
      "state": "届出一覧"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   },
   {
    "commonButtonAreaId": "btnComplete",
@@ -2375,7 +2040,56 @@
      "state": "更新完了"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "btnMeisai",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnReturnToRireki",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReturnToRireki",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "届出一覧に戻る",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "明細登録"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
