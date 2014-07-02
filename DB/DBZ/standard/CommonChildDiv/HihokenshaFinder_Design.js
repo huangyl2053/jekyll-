@@ -79,12 +79,48 @@ var DBZ;
         });
 
 
+        Object.defineProperty(HihokenshaFinder_Design.prototype, "canOpenAndClose_HihokenshaFinder", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"] = value;
+                } else {
+                    this.layout.items[0]["canOpenAndClose"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_saikinShorisha", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[6]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         HihokenshaFinder_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("onClick_BtnToSearch");
             Uz.JSControlUtil.registProperty("displayNone_txtTsuchishoNo");
             Uz.JSControlUtil.registProperty("displayNone_ddlFukaNendo");
             Uz.JSControlUtil.registProperty("displayNone_SearchCriteriaDetail");
+            Uz.JSControlUtil.registProperty("canOpenAndClose_HihokenshaFinder");
+            Uz.JSControlUtil.registProperty("displayNone_saikinShorisha");
         };
 
         HihokenshaFinder_Design.prototype.getEditablePropertyInfo = function () {
@@ -93,6 +129,8 @@ var DBZ;
             editablePropertyInfo["displayNone_txtTsuchishoNo"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["displayNone_ddlFukaNendo"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"] + "_" + this.layout.items[0].items[3].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["displayNone_SearchCriteriaDetail"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["canOpenAndClose_HihokenshaFinder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
+            editablePropertyInfo["displayNone_saikinShorisha"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["displayNone"];
 
             return editablePropertyInfo;
         };
@@ -126,18 +164,6 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
-                                    "required": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
-                                    "text": "",
-                                    "labelLText": "保険者",
-                                    "labelRText": "",
-                                    "labelLWidth": "S",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 2,
-                                    "labelRAlign": 0,
-                                    "selectedItem": "1",
                                     "dataSource": [
                                         {
                                             "key": "1",
@@ -148,6 +174,18 @@ var DBZ;
                                             "value": "南魚沼市"
                                         }
                                     ],
+                                    "text": "",
+                                    "onChange": "",
+                                    "selectedItem": "1",
+                                    "required": false,
+                                    "labelLText": "保険者",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
                                     "disabledItem": []
                                 }
                             ],
@@ -216,7 +254,17 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
+                                    "text": "",
+                                    "onChange": "",
                                     "required": false,
+                                    "labelLText": "被保番号",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
                                     "maxLength": "10",
                                     "minLength": "10",
                                     "textAlign": 0,
@@ -225,19 +273,9 @@ var DBZ;
                                     "isPrivateInfo": false,
                                     "isPassword": false,
                                     "isComboBox": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
-                                    "text": "",
                                     "suggest": [],
                                     "value": "",
-                                    "labelLText": "被保番号",
-                                    "labelRText": "",
-                                    "labelLWidth": "S",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 2,
-                                    "labelRAlign": 0,
                                     "decorationClass": "",
                                     "permitCharactor": "",
                                     "formatLength": "10"
@@ -263,7 +301,17 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
+                                    "text": "",
+                                    "onChange": "",
                                     "required": false,
+                                    "labelLText": "通知書番号",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
                                     "maxLength": "16",
                                     "minLength": "1",
                                     "textAlign": 0,
@@ -272,19 +320,9 @@ var DBZ;
                                     "isPrivateInfo": false,
                                     "isPassword": false,
                                     "isComboBox": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
-                                    "text": "",
                                     "suggest": [],
                                     "value": "",
-                                    "labelLText": "通知書番号",
-                                    "labelRText": "",
-                                    "labelLWidth": "S",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 2,
-                                    "labelRAlign": 0,
                                     "decorationClass": "",
                                     "permitCharactor": "",
                                     "formatLength": "16"
@@ -360,7 +398,17 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
+                                    "text": "",
+                                    "onChange": "",
                                     "required": false,
+                                    "labelLText": "識別コード",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
                                     "maxLength": "15",
                                     "minLength": 0,
                                     "textAlign": 0,
@@ -369,19 +417,9 @@ var DBZ;
                                     "isPrivateInfo": false,
                                     "isPassword": false,
                                     "isComboBox": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
-                                    "text": "",
                                     "suggest": [],
                                     "value": "",
-                                    "labelLText": "識別コード",
-                                    "labelRText": "",
-                                    "labelLWidth": "S",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 2,
-                                    "labelRAlign": 0,
                                     "decorationClass": "",
                                     "permitCharactor": "",
                                     "formatLength": ""
@@ -407,7 +445,17 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
+                                    "text": "",
+                                    "onChange": "",
                                     "required": false,
+                                    "labelLText": "世帯コード",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
                                     "maxLength": "15",
                                     "minLength": 0,
                                     "textAlign": 0,
@@ -416,19 +464,9 @@ var DBZ;
                                     "isPrivateInfo": false,
                                     "isPassword": false,
                                     "isComboBox": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
-                                    "text": "",
                                     "suggest": [],
                                     "value": "",
-                                    "labelLText": "世帯コード",
-                                    "labelRText": "",
-                                    "labelLWidth": "S",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 2,
-                                    "labelRAlign": 0,
                                     "decorationClass": "",
                                     "permitCharactor": "",
                                     "formatLength": 1
@@ -454,7 +492,17 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
+                                    "text": "",
+                                    "onChange": "",
                                     "required": false,
+                                    "labelLText": "個人番号",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
                                     "maxLength": "12",
                                     "minLength": "12",
                                     "textAlign": 0,
@@ -463,19 +511,9 @@ var DBZ;
                                     "isPrivateInfo": false,
                                     "isPassword": false,
                                     "isComboBox": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
-                                    "text": "",
                                     "suggest": [],
                                     "value": "",
-                                    "labelLText": "個人番号",
-                                    "labelRText": "",
-                                    "labelLWidth": "S",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 2,
-                                    "labelRAlign": 0,
                                     "decorationClass": "",
                                     "permitCharactor": "",
                                     "formatLength": "12"
@@ -500,9 +538,9 @@ var DBZ;
                                     "selectControlID": "lblJuminShubetsu",
                                     "helpMessageID": "",
                                     "jpControlName": "",
+                                    "text": "住民種別",
                                     "required": false,
                                     "isPrivateInfo": false,
-                                    "text": "住民種別",
                                     "decorationClass": "",
                                     "align": 2
                                 },
@@ -527,18 +565,6 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
-                                    "required": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
-                                    "text": "",
-                                    "labelLText": "",
-                                    "labelRText": "",
-                                    "labelLWidth": "S",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 2,
-                                    "labelRAlign": 0,
-                                    "selectedItem": "key0",
                                     "dataSource": [
                                         {
                                             "key": "key0",
@@ -553,6 +579,18 @@ var DBZ;
                                             "value": "外国人"
                                         }
                                     ],
+                                    "text": "",
+                                    "onChange": "",
+                                    "selectedItem": "key0",
+                                    "required": false,
+                                    "labelLText": "",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
                                     "disabledItem": []
                                 },
                                 {
@@ -576,7 +614,17 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
+                                    "text": "",
+                                    "onChange": "",
                                     "required": false,
+                                    "labelLText": "氏名",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
                                     "maxLength": 100000000,
                                     "minLength": 0,
                                     "textAlign": 0,
@@ -585,19 +633,9 @@ var DBZ;
                                     "isPrivateInfo": false,
                                     "isPassword": false,
                                     "isComboBox": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
-                                    "text": "",
                                     "suggest": [],
                                     "value": "",
-                                    "labelLText": "氏名",
-                                    "labelRText": "",
-                                    "labelLWidth": "S",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 2,
-                                    "labelRAlign": 0,
                                     "decorationClass": "",
                                     "permitCharactor": ""
                                 },
@@ -622,16 +660,6 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
-                                    "labelLText": "",
-                                    "labelRText": "で検索する。",
-                                    "labelLWidth": "S",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 2,
-                                    "labelRAlign": 0,
-                                    "selectedItem": "1",
                                     "dataSource": [
                                         {
                                             "key": "1",
@@ -650,6 +678,16 @@ var DBZ;
                                             "value": "部分一致"
                                         }
                                     ],
+                                    "onChange": "",
+                                    "selectedItem": "1",
+                                    "labelLText": "",
+                                    "labelRText": "で検索する。",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
                                     "disabledItem": []
                                 },
                                 {
@@ -673,7 +711,17 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
+                                    "text": "",
+                                    "onChange": "",
                                     "required": false,
+                                    "labelLText": "〒",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
                                     "maxLength": 100000000,
                                     "minLength": 0,
                                     "textAlign": 0,
@@ -682,19 +730,9 @@ var DBZ;
                                     "isPrivateInfo": false,
                                     "isPassword": false,
                                     "isComboBox": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
-                                    "text": "",
                                     "suggest": [],
                                     "value": "",
-                                    "labelLText": "〒",
-                                    "labelRText": "",
-                                    "labelLWidth": "S",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 2,
-                                    "labelRAlign": 0,
                                     "decorationClass": "",
                                     "permitCharactor": ""
                                 },
@@ -719,25 +757,25 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
-                                    "required": false,
-                                    "placeHolder": "",
-                                    "isPrivateInfo": false,
-                                    "isPassword": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
-                                    "onKeyPress": "",
                                     "text": "",
-                                    "value": "",
+                                    "onChange": "",
+                                    "required": false,
                                     "labelLText": "生年月日",
                                     "labelRText": "",
                                     "labelLWidth": "170",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onKeyPress": "",
+                                    "value": "",
+                                    "permitCharactor": "./_-",
                                     "ymdKubun": 2,
-                                    "displayFormat": 0,
-                                    "permitCharactor": "./_-"
+                                    "displayFormat": 0
                                 },
                                 {
                                     "fieldName": "chkGender",
@@ -760,14 +798,6 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
-                                    "required": false,
-                                    "onChange": "",
-                                    "labelLText": "性別",
-                                    "labelLWidth": "110",
-                                    "labelLAlign": 2,
-                                    "onClick": "",
-                                    "icon": [],
-                                    "selectedItem": null,
                                     "dataSource": [
                                         {
                                             "key": "man",
@@ -778,6 +808,14 @@ var DBZ;
                                             "value": "女"
                                         }
                                     ],
+                                    "onClick": "",
+                                    "icon": [],
+                                    "onChange": "",
+                                    "selectedItem": null,
+                                    "required": false,
+                                    "labelLText": "性別",
+                                    "labelLWidth": "110",
+                                    "labelLAlign": 2,
                                     "selectedItems": [],
                                     "newLineItemNumber": 2,
                                     "minCheckedItem": 0,
@@ -808,7 +846,17 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
+                                    "text": "",
+                                    "onChange": "",
                                     "required": false,
+                                    "labelLText": "住所",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
                                     "maxLength": 100000000,
                                     "minLength": 0,
                                     "textAlign": 0,
@@ -817,19 +865,9 @@ var DBZ;
                                     "isPrivateInfo": false,
                                     "isPassword": false,
                                     "isComboBox": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
-                                    "text": "",
                                     "suggest": [],
                                     "value": "",
-                                    "labelLText": "住所",
-                                    "labelRText": "",
-                                    "labelLWidth": "S",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 2,
-                                    "labelRAlign": 0,
                                     "decorationClass": "",
                                     "permitCharactor": ""
                                 }
@@ -904,16 +942,6 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
-                                    "labelLText": "賦課年度　",
-                                    "labelRText": "",
-                                    "labelLWidth": "80",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 1,
-                                    "labelRAlign": 0,
-                                    "selectedItem": "key0",
                                     "dataSource": [
                                         {
                                             "key": "key0",
@@ -924,6 +952,16 @@ var DBZ;
                                             "value": "平26"
                                         }
                                     ],
+                                    "onChange": "",
+                                    "selectedItem": "key0",
+                                    "labelLText": "賦課年度　",
+                                    "labelRText": "",
+                                    "labelLWidth": "80",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 1,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
                                     "disabledItem": []
                                 },
                                 {
@@ -947,7 +985,17 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
+                                    "text": "",
+                                    "onChange": "",
                                     "required": false,
+                                    "labelLText": "最大表示件数",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 1,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
                                     "maxLength": 100000000,
                                     "minLength": 0,
                                     "textAlign": 2,
@@ -956,19 +1004,9 @@ var DBZ;
                                     "isPrivateInfo": false,
                                     "isPassword": false,
                                     "isComboBox": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
                                     "onKeyPress": "",
-                                    "text": "",
                                     "suggest": [],
                                     "value": "",
-                                    "labelLText": "最大表示件数",
-                                    "labelRText": "",
-                                    "labelLWidth": "S",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 1,
-                                    "labelRAlign": 0,
                                     "decorationClass": "",
                                     "permitCharactor": "+-,.\\",
                                     "maxValue": 1.7976931348623157e+308,
@@ -1043,19 +1081,19 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": false,
-                                    "onChange": "",
-                                    "labelLText": "みなし2号",
-                                    "labelLWidth": "S",
-                                    "labelLAlign": 2,
-                                    "onClick": "",
-                                    "icon": [],
-                                    "selectedItem": null,
                                     "dataSource": [
                                         {
                                             "key": "1",
                                             "value": "含む"
                                         }
                                     ],
+                                    "onClick": "",
+                                    "icon": [],
+                                    "onChange": "",
+                                    "selectedItem": null,
+                                    "labelLText": "みなし2号",
+                                    "labelLWidth": "S",
+                                    "labelLAlign": 2,
                                     "selectedItems": [],
                                     "newLineItemNumber": 2,
                                     "minCheckedItem": 0,
@@ -1130,8 +1168,8 @@ var DBZ;
                                     "selectControlID": "btnToClear",
                                     "helpMessageID": "",
                                     "jpControlName": "",
-                                    "text": "条件をクリアする",
                                     "onClick": "onClick_btnToClear",
+                                    "text": "条件をクリアする",
                                     "appearance": 0,
                                     "imageFileUrl": "",
                                     "imageWidth": "",
@@ -1159,8 +1197,8 @@ var DBZ;
                                     "selectControlID": "btnToSearch",
                                     "helpMessageID": "",
                                     "jpControlName": "",
-                                    "text": "検索する",
                                     "onClick": "",
+                                    "text": "検索する",
                                     "appearance": 0,
                                     "imageFileUrl": "",
                                     "imageWidth": "",
@@ -1336,6 +1374,16 @@ var DBZ;
                     "publicChildFieldName": "SearchCriteriaDetail",
                     "publicChildProperty": "displayNone",
                     "newPropertyName": "displayNone_SearchCriteriaDetail"
+                },
+                {
+                    "publicChildFieldName": "HihokenshaFinder",
+                    "publicChildProperty": "canOpenAndClose",
+                    "newPropertyName": "canOpenAndClose_HihokenshaFinder"
+                },
+                {
+                    "publicChildFieldName": "saikinShorisha",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "displayNone_saikinShorisha"
                 }
             ],
             "dataPassingForDialog": [],
