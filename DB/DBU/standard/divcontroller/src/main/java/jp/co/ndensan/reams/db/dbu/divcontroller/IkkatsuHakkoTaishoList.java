@@ -49,6 +49,10 @@ public class IkkatsuHakkoTaishoList {
                 getKaigoChohyoShutsuryokujun().setTitle(RString.EMPTY);
         panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().
                 getKaigoChohyoShutsuryokujun().setTitle(RString.EMPTY);
+        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().
+                getKaigoChohyoShutsuryokujun().setEraseBorder(true);
+        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().
+                getKaigoChohyoShutsuryokujun().setEraseBorder(true);
 
         //「被保険者証を発行する」ボタンを活性化
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHakko"), false);
