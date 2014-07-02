@@ -7065,8 +7065,8 @@
      "fixedDiv": "No"
     }
    ],
-   "supplementInfo": "DBESI00000",
-   "supplementInfoPostParamData": "[{\"supplementInfoPostParamData\":\"NinteichosaDetail\"}]",
+   "supplementInfo": "",
+   "supplementInfoPostParamData": "[]",
    "validation": {},
    "events": []
   }
