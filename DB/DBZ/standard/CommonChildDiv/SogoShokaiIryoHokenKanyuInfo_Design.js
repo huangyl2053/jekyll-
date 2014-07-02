@@ -46,6 +46,7 @@ var DBZ;
                             "selectControlID": "dgSogoShokaiHokenKanyuList",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "height": "175",
                             "gridSetting": {
                                 "rowHeight": 25,
@@ -138,6 +139,11 @@ var DBZ;
                             "onSelectBySelectButton": "",
                             "onSelectByModifyButton": "",
                             "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
@@ -167,13 +173,14 @@ var DBZ;
                             "selectControlID": "btnClose",
                             "helpMessageID": "",
                             "jpControlName": "",
-                            "onClick": "onClick_btnClose",
                             "text": "閉じる",
+                            "onClick": "onClick_btnClose",
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
                             "imageHeight": "",
-                            "icon": 0
+                            "icon": 0,
+                            "heightTextBoxMatches": false
                         }
                     ],
                     "controlType": "Panel",
@@ -214,10 +221,7 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": true,
                     "panelDisplay": 0,
@@ -251,7 +255,9 @@ var DBZ;
             "originalProperty": [],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": "onClick_btnClose"
+            "dialogCancelEventNameForDialog": "onClick_btnClose",
+            "canTransferEvent": true,
+            "heightForDialog": "Auto"
         };
         return SogoShokaiIryoHokenKanyuInfo_Design;
     })(Uz.CommonChildDiv);

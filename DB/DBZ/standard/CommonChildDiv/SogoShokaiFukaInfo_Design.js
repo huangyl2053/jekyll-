@@ -47,7 +47,6 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": true,
-                            "text": "",
                             "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
@@ -56,6 +55,7 @@ var DBZ;
                             "onBlur": "",
                             "onChange": "",
                             "onKeyPress": "",
+                            "text": "",
                             "labelLText": "調定年度",
                             "labelRText": "",
                             "labelLWidth": "75",
@@ -88,7 +88,6 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": true,
-                            "text": "",
                             "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
@@ -97,6 +96,7 @@ var DBZ;
                             "onBlur": "",
                             "onChange": "",
                             "onKeyPress": "",
+                            "text": "",
                             "labelLText": "調定事由",
                             "labelRText": "",
                             "labelLWidth": "73",
@@ -134,7 +134,6 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": true,
-                            "text": "",
                             "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
@@ -143,6 +142,7 @@ var DBZ;
                             "onBlur": "",
                             "onChange": "",
                             "onKeyPress": "",
+                            "text": "",
                             "labelLText": "更正月",
                             "labelRText": "",
                             "labelLWidth": "50",
@@ -157,12 +157,12 @@ var DBZ;
                             "isComboBox": false,
                             "suggest": [],
                             "decorationClass": "",
-                            "permitCharactor": "+-,.\\",
                             "maxValue": 1.7976931348623157e+308,
                             "minValue": 0,
                             "isCurrency": false,
                             "isComma": false,
-                            "decimalPointLength": 0
+                            "decimalPointLength": 0,
+                            "permitCharactor": "+-,.\\"
                         },
                         {
                             "fieldName": "txtFukaFukaNendo",
@@ -185,7 +185,6 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": true,
-                            "text": "",
                             "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
@@ -194,6 +193,7 @@ var DBZ;
                             "onBlur": "",
                             "onChange": "",
                             "onKeyPress": "",
+                            "text": "",
                             "labelLText": "賦課年度",
                             "labelRText": "",
                             "labelLWidth": "75",
@@ -226,7 +226,6 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": true,
-                            "text": "",
                             "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
@@ -235,6 +234,7 @@ var DBZ;
                             "onBlur": "",
                             "onChange": "",
                             "onKeyPress": "",
+                            "text": "",
                             "labelLText": "市町村民税課税区分(本人)",
                             "labelRText": "",
                             "labelLWidth": "200",
@@ -272,7 +272,6 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": true,
-                            "text": "",
                             "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
@@ -281,6 +280,7 @@ var DBZ;
                             "onBlur": "",
                             "onChange": "",
                             "onKeyPress": "",
+                            "text": "",
                             "labelLText": "市町村民税課税区分(世帯)",
                             "labelRText": "",
                             "labelLWidth": "200",
@@ -345,9 +345,9 @@ var DBZ;
                                             "selectControlID": "lblFukaKijun",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "賦課基準",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "賦課基準",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -394,9 +394,9 @@ var DBZ;
                                             "selectControlID": "lblFukaKijunYMD",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "賦課基準日",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "賦課基準日",
                                             "decorationClass": "",
                                             "align": 0
                                         }
@@ -444,7 +444,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -453,6 +452,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -529,9 +529,9 @@ var DBZ;
                                             "selectControlID": "lblZennendo",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "前年度情報",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "前年度情報",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -578,9 +578,9 @@ var DBZ;
                                             "selectControlID": "lblShotokuDankai",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "所得段階",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "所得段階",
                                             "decorationClass": "",
                                             "align": 0
                                         }
@@ -628,7 +628,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -637,6 +636,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -696,9 +696,9 @@ var DBZ;
                                             "selectControlID": "lblHokenryoRitsu",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "保険料率",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "保険料率",
                                             "decorationClass": "",
                                             "align": 0
                                         }
@@ -746,7 +746,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -755,6 +754,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -769,12 +769,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -819,9 +819,9 @@ var DBZ;
                                             "selectControlID": "lblNenHokenryo",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "年額保険料",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "年額保険料",
                                             "decorationClass": "",
                                             "align": 0
                                         }
@@ -869,7 +869,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -878,6 +877,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -892,12 +892,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -942,9 +942,9 @@ var DBZ;
                                             "selectControlID": "lblTokubetsuSaishugaku",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "最終期保険料額(特)",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "最終期保険料額(特)",
                                             "decorationClass": "",
                                             "align": 0
                                         }
@@ -992,7 +992,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -1001,6 +1000,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -1015,12 +1015,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1065,9 +1065,9 @@ var DBZ;
                                             "selectControlID": "lblFutsuSaishugaku",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "最終期保険料額(普)",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "最終期保険料額(普)",
                                             "decorationClass": "",
                                             "align": 0
                                         }
@@ -1115,7 +1115,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -1124,6 +1123,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -1138,12 +1138,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1210,9 +1210,9 @@ var DBZ;
                                             "selectControlID": "lblGenmen",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "減免",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "減免",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -1259,9 +1259,9 @@ var DBZ;
                                             "selectControlID": "lblGenmengaku",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "減免額",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "減免額",
                                             "decorationClass": "",
                                             "align": 0
                                         }
@@ -1309,7 +1309,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -1318,6 +1317,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -1332,12 +1332,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1404,9 +1404,9 @@ var DBZ;
                                             "selectControlID": "lblEtc",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "その他",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "その他",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -1453,9 +1453,9 @@ var DBZ;
                                             "selectControlID": "lblZanteiGokei",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "暫定保険料額合計",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "暫定保険料額合計",
                                             "decorationClass": "",
                                             "align": 0
                                         }
@@ -1503,7 +1503,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -1512,6 +1511,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -1526,12 +1526,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1576,9 +1576,9 @@ var DBZ;
                                             "selectControlID": "lblSudeniNofugaku",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "既に納付すべき額",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "既に納付すべき額",
                                             "decorationClass": "",
                                             "align": 0
                                         }
@@ -1626,7 +1626,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -1635,6 +1634,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -1649,12 +1649,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1699,9 +1699,9 @@ var DBZ;
                                             "selectControlID": "lblKongoNofugaku",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "今後納付すべき額",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "今後納付すべき額",
                                             "decorationClass": "",
                                             "align": 0
                                         }
@@ -1749,7 +1749,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -1758,6 +1757,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -1772,12 +1772,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1822,9 +1822,9 @@ var DBZ;
                                             "selectControlID": "lblNofuzumigaku",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "未到来期の納付済額",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "未到来期の納付済額",
                                             "decorationClass": "",
                                             "align": 0
                                         }
@@ -1872,7 +1872,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -1881,6 +1880,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -1895,12 +1895,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1990,9 +1990,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "普徴",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "普徴",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -2039,9 +2039,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu1",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "１期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "１期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -2089,7 +2089,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -2098,6 +2097,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -2112,12 +2112,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -2162,9 +2162,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu2",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "２期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "２期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -2212,7 +2212,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -2221,6 +2220,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -2235,12 +2235,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -2285,9 +2285,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu3",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "３期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "３期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -2335,7 +2335,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -2344,6 +2343,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -2358,12 +2358,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -2408,9 +2408,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu4",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "４期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "４期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -2458,7 +2458,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -2467,6 +2466,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -2481,12 +2481,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -2531,9 +2531,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu5",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "５期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "５期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -2581,7 +2581,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -2590,6 +2589,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -2604,12 +2604,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -2654,9 +2654,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu6",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "６期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "６期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -2704,7 +2704,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -2713,6 +2712,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -2727,12 +2727,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -2777,9 +2777,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu7",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "７期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "７期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -2827,7 +2827,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -2836,6 +2835,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -2850,12 +2850,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -2900,9 +2900,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu8",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "８期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "８期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -2950,7 +2950,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -2959,6 +2958,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -2973,12 +2973,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -3023,9 +3023,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu9",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "９期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "９期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -3073,7 +3073,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -3082,6 +3081,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "0",
@@ -3096,12 +3096,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -3146,9 +3146,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu10",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "１０期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "１０期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -3196,7 +3196,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -3205,6 +3204,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "0",
@@ -3219,12 +3219,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -3269,9 +3269,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu11",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "１１期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "１１期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -3319,7 +3319,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -3328,6 +3327,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -3342,12 +3342,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -3392,9 +3392,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu12",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "１２期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "１２期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -3442,7 +3442,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -3451,6 +3450,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -3465,12 +3465,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -3515,9 +3515,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu13",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "１３期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "１３期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -3565,7 +3565,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -3574,6 +3573,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -3588,12 +3588,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -3638,9 +3638,9 @@ var DBZ;
                                             "selectControlID": "lblFutsu14",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "１４期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "１４期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -3688,7 +3688,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -3697,6 +3696,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -3711,12 +3711,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -3806,9 +3806,9 @@ var DBZ;
                                             "selectControlID": "lblTokubetsu",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "特徴",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "特徴",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -3855,9 +3855,9 @@ var DBZ;
                                             "selectControlID": "lblTokubetsu1",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "１期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "１期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -3905,7 +3905,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -3914,6 +3913,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -3928,12 +3928,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -3978,9 +3978,9 @@ var DBZ;
                                             "selectControlID": "lblTokubetsu2",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "２期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "２期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -4028,7 +4028,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -4037,6 +4036,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -4051,12 +4051,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -4101,9 +4101,9 @@ var DBZ;
                                             "selectControlID": "lblTokubetsu3",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "３期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "３期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -4151,7 +4151,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -4160,6 +4159,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -4174,12 +4174,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -4224,9 +4224,9 @@ var DBZ;
                                             "selectControlID": "lblTokubetsu4",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "４期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "４期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -4274,7 +4274,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -4283,6 +4282,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -4297,12 +4297,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -4347,9 +4347,9 @@ var DBZ;
                                             "selectControlID": "lblTokubetsu5",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "５期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "５期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -4397,7 +4397,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -4406,6 +4405,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -4420,12 +4420,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -4470,9 +4470,9 @@ var DBZ;
                                             "selectControlID": "lblTokubetsu6",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "text": "６期",
                                             "required": false,
                                             "isPrivateInfo": false,
+                                            "text": "６期",
                                             "decorationClass": "",
                                             "align": 1
                                         }
@@ -4520,7 +4520,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": true,
-                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -4529,6 +4528,7 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "labelLText": "",
                                             "labelRText": "",
                                             "labelLWidth": "S",
@@ -4543,12 +4543,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0
+                                            "decimalPointLength": 0,
+                                            "permitCharactor": "+-,.\\"
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -4614,7 +4614,6 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": true,
-                                    "text": "",
                                     "required": false,
                                     "placeHolder": "",
                                     "isPrivateInfo": false,
@@ -4623,6 +4622,7 @@ var DBZ;
                                     "onBlur": "",
                                     "onChange": "",
                                     "onKeyPress": "",
+                                    "text": "",
                                     "labelLText": "対象年金",
                                     "labelRText": "",
                                     "labelLWidth": "65",
@@ -4660,7 +4660,6 @@ var DBZ;
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": true,
-                                    "text": "",
                                     "required": false,
                                     "placeHolder": "",
                                     "isPrivateInfo": false,
@@ -4669,6 +4668,7 @@ var DBZ;
                                     "onBlur": "",
                                     "onChange": "",
                                     "onKeyPress": "",
+                                    "text": "",
                                     "labelLText": "義務者",
                                     "labelRText": "",
                                     "labelLWidth": "50",
@@ -4719,10 +4719,7 @@ var DBZ;
                             "onOpen": "",
                             "onClose": "",
                             "session": {},
-                            "eraseBorderTop": false,
-                            "eraseBorderBottom": false,
-                            "eraseBorderRight": false,
-                            "eraseBorderLeft": false,
+                            "eraseBorder": false,
                             "backgroundColor": 0,
                             "widthAuto": true,
                             "panelDisplay": 1,
@@ -4750,13 +4747,14 @@ var DBZ;
                             "selectControlID": "btnClose",
                             "helpMessageID": "",
                             "jpControlName": "",
-                            "onClick": "onClick_btnClose",
                             "text": "閉じる",
+                            "onClick": "onClick_btnClose",
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
                             "imageHeight": "",
-                            "icon": 0
+                            "icon": 0,
+                            "heightTextBoxMatches": false
                         }
                     ],
                     "controlType": "Panel",
@@ -4797,10 +4795,7 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": true,
                     "panelDisplay": 0,
@@ -4834,7 +4829,9 @@ var DBZ;
             "originalProperty": [],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": "onClick_btnClose"
+            "dialogCancelEventNameForDialog": "onClick_btnClose",
+            "canTransferEvent": true,
+            "heightForDialog": "Auto"
         };
         return SogoShokaiFukaInfo_Design;
     })(Uz.CommonChildDiv);

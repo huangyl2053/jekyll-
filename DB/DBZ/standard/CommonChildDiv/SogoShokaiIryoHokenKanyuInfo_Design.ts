@@ -56,6 +56,7 @@ module DBZ {
      "selectControlID": "dgSogoShokaiHokenKanyuList",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "height": "175",
      "gridSetting": {
       "rowHeight": 25,
@@ -148,6 +149,11 @@ module DBZ {
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -177,13 +183,14 @@ module DBZ {
      "selectControlID": "btnClose",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "onClick_btnClose",
      "text": "閉じる",
+     "onClick": "onClick_btnClose",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -224,10 +231,7 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
@@ -261,7 +265,9 @@ module DBZ {
  "originalProperty": [],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": "onClick_btnClose"
+ "dialogCancelEventNameForDialog": "onClick_btnClose",
+ "canTransferEvent": true,
+ "heightForDialog": "Auto"
 }        
     }
 }
