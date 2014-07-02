@@ -32,7 +32,7 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
 
     final static String IsDeletedDataSearch = "isDeletedDataSearch";
     final static String DeleteFlg ="削除";
-    /**
+    /**　
      * 検索パネルが読み込まれた時は、検索項目をEMPTYで初期化し、検索結果一覧を閉じた状態にします。</br>
      * 異動日の初期値をあらかじめセットしておきます
      *

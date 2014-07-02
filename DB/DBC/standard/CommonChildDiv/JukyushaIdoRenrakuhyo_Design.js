@@ -644,7 +644,8 @@ var DBC;
                             "panelDisplay": 0,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "focusPositionID": "restoreLayoutButton"
                         },
                         {
                             "fieldName": "JukyushaIdoRenrakuhyoYokaigonintei",
@@ -725,6 +726,10 @@ var DBC;
                                     "selectedItem": null,
                                     "dataSource": [
                                         {
+                                            "key": "nashi",
+                                            "value": "未選択"
+                                        },
+                                        {
                                             "key": "new",
                                             "value": "新規"
                                         },
@@ -739,10 +744,6 @@ var DBC;
                                         {
                                             "key": "shokken",
                                             "value": "職権"
-                                        },
-                                        {
-                                            "key": "nashi",
-                                            "value": "選択無"
                                         }
                                     ],
                                     "onClick": "",
@@ -857,6 +858,10 @@ var DBC;
                                     "selectedItem": null,
                                     "dataSource": [
                                         {
+                                            "key": "nashi",
+                                            "value": "未選択"
+                                        },
+                                        {
                                             "key": "shinseiNashi",
                                             "value": "申請無"
                                         },
@@ -867,10 +872,6 @@ var DBC;
                                         {
                                             "key": "ketteiZumi",
                                             "value": "決定済"
-                                        },
-                                        {
-                                            "key": "nashi",
-                                            "value": "選択無"
                                         }
                                     ],
                                     "onClick": "",
@@ -950,10 +951,14 @@ var DBC;
                                     "required": false,
                                     "onChange": "",
                                     "labelLText": "みなし区分",
-                                    "labelLWidth": "300",
+                                    "labelLWidth": "142",
                                     "labelLAlign": 2,
                                     "selectedItem": null,
                                     "dataSource": [
+                                        {
+                                            "key": "nashi",
+                                            "value": "未選択"
+                                        },
                                         {
                                             "key": "normal",
                                             "value": "通常認定"
@@ -965,10 +970,6 @@ var DBC;
                                         {
                                             "key": "yamuwoenai",
                                             "value": "やむを得ない事由"
-                                        },
-                                        {
-                                            "key": "nashi",
-                                            "value": "選択無"
                                         }
                                     ],
                                     "onClick": "",
@@ -1017,7 +1018,8 @@ var DBC;
                             "panelDisplay": 0,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "focusPositionID": "restoreLayoutButton"
                         },
                         {
                             "fieldName": "JukyushaIdoRenrakuhyoShikyugendoKijungaku",
@@ -1310,7 +1312,8 @@ var DBC;
                             "panelDisplay": 0,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "focusPositionID": "restoreLayoutButton"
                         },
                         {
                             "fieldName": "JukyushaIdoRenrakuhyoKyotakuServicePlan",
@@ -1344,6 +1347,10 @@ var DBC;
                                     "selectedItem": null,
                                     "dataSource": [
                                         {
+                                            "key": "selectNot",
+                                            "value": "未選択"
+                                        },
+                                        {
                                             "key": "kyotakuShienJigyosha",
                                             "value": "居宅介護支援事業所作成"
                                         },
@@ -1354,10 +1361,6 @@ var DBC;
                                         {
                                             "key": "kaigoyoboJigyosha",
                                             "value": "介護予防支援事業所作成"
-                                        },
-                                        {
-                                            "key": "selectNot",
-                                            "value": "選択無"
                                         }
                                     ],
                                     "onClick": "",
@@ -1537,16 +1540,16 @@ var DBC;
                                     "selectedItem": null,
                                     "dataSource": [
                                         {
+                                            "key": "selectNot",
+                                            "value": "未選択"
+                                        },
+                                        {
                                             "key": "nashi",
                                             "value": "なし"
                                         },
                                         {
                                             "key": "ari",
                                             "value": "あり"
-                                        },
-                                        {
-                                            "key": "selectNot",
-                                            "value": "選択無"
                                         }
                                     ],
                                     "onClick": "",
@@ -1595,7 +1598,8 @@ var DBC;
                             "panelDisplay": 0,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "focusPositionID": "restoreLayoutButton"
                         },
                         {
                             "fieldName": "JukyushaIdoRenrakuhyoGemmenGengaku",
@@ -1629,6 +1633,10 @@ var DBC;
                                     "selectedItem": null,
                                     "dataSource": [
                                         {
+                                            "key": "nashi",
+                                            "value": "未選択"
+                                        },
+                                        {
                                             "key": "shinseiNashi",
                                             "value": "申請無"
                                         },
@@ -1639,10 +1647,6 @@ var DBC;
                                         {
                                             "key": "ketteiZumi",
                                             "value": "決定済"
-                                        },
-                                        {
-                                            "key": "nashi",
-                                            "value": "選択無"
                                         }
                                     ],
                                     "onClick": "",
@@ -1686,16 +1690,16 @@ var DBC;
                                                     "selectedItem": null,
                                                     "dataSource": [
                                                         {
+                                                            "key": "nashi",
+                                                            "value": "未選択"
+                                                        },
+                                                        {
                                                             "key": "standard",
                                                             "value": "標準負担"
                                                         },
                                                         {
                                                             "key": "tokuteiStandard",
                                                             "value": "特定標準負担"
-                                                        },
-                                                        {
-                                                            "key": "nashi",
-                                                            "value": "選択無"
                                                         }
                                                     ],
                                                     "onClick": "",
@@ -1842,7 +1846,8 @@ var DBC;
                                             "panelDisplay": 1,
                                             "isGroupBox": false,
                                             "readOnly": false,
-                                            "height": "Auto"
+                                            "height": "Auto",
+                                            "focusPositionID": "restoreLayoutButton"
                                         },
                                         {
                                             "fieldName": "JukyushaIdoRenrakuhyoFukushiHojinKeigen",
@@ -1985,7 +1990,8 @@ var DBC;
                                             "panelDisplay": 1,
                                             "isGroupBox": false,
                                             "readOnly": false,
-                                            "height": "Auto"
+                                            "height": "Auto",
+                                            "focusPositionID": "restoreLayoutButton"
                                         },
                                         {
                                             "fieldName": "JukyushaIdoRenrakuhyoHyojunFutan",
@@ -2019,16 +2025,16 @@ var DBC;
                                                     "selectedItem": null,
                                                     "dataSource": [
                                                         {
+                                                            "key": "nashi",
+                                                            "value": "未選択"
+                                                        },
+                                                        {
                                                             "key": "riyosha",
                                                             "value": "利用者負担"
                                                         },
                                                         {
                                                             "key": "kyushochiNyushosha",
                                                             "value": "旧措置入所者利用者負担"
-                                                        },
-                                                        {
-                                                            "key": "nashi",
-                                                            "value": "選択無"
                                                         }
                                                     ],
                                                     "onClick": "",
@@ -2175,7 +2181,8 @@ var DBC;
                                             "panelDisplay": 1,
                                             "isGroupBox": false,
                                             "readOnly": false,
-                                            "height": "Auto"
+                                            "height": "Auto",
+                                            "focusPositionID": "restoreLayoutButton"
                                         }
                                     ],
                                     "controlType": "Panel",
@@ -2217,7 +2224,8 @@ var DBC;
                                     "panelDisplay": 0,
                                     "isGroupBox": false,
                                     "readOnly": false,
-                                    "height": "Auto"
+                                    "height": "Auto",
+                                    "focusPositionID": "restoreLayoutButton"
                                 },
                                 {
                                     "fieldName": "JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi",
@@ -2251,20 +2259,20 @@ var DBC;
                                             "selectedItem": null,
                                             "dataSource": [
                                                 {
+                                                    "key": "nashi",
+                                                    "value": "未選択"
+                                                },
+                                                {
                                                     "key": "shinseiNashi",
                                                     "value": "申請無"
                                                 },
                                                 {
                                                     "key": "shinseiTyu",
-                                                    "value": "申請中 "
+                                                    "value": "申請中"
                                                 },
                                                 {
                                                     "key": "ketteiZumi",
                                                     "value": "決定済"
-                                                },
-                                                {
-                                                    "key": "nashi",
-                                                    "value": "選択無"
                                                 }
                                             ],
                                             "onClick": "",
@@ -2302,16 +2310,16 @@ var DBC;
                                             "selectedItem": null,
                                             "dataSource": [
                                                 {
-                                                    "key": "standard",
-                                                    "value": "通常受給者"
+                                                    "key": "nashi",
+                                                    "value": "未選択"
                                                 },
                                                 {
                                                     "key": "kyusochiNyushosha",
-                                                    "value": "旧措置入所者"
+                                                    "value": "通常受給者"
                                                 },
                                                 {
-                                                    "key": "nashi",
-                                                    "value": "選択無"
+                                                    "key": "standard",
+                                                    "value": "旧措置入所者"
                                                 }
                                             ],
                                             "onClick": "",
@@ -2349,16 +2357,16 @@ var DBC;
                                             "selectedItem": null,
                                             "dataSource": [
                                                 {
+                                                    "key": "selectnashi",
+                                                    "value": "未選択"
+                                                },
+                                                {
                                                     "key": "nashi",
                                                     "value": "該当無"
                                                 },
                                                 {
                                                     "key": "ari",
                                                     "value": "該当有"
-                                                },
-                                                {
-                                                    "key": "selectnashi",
-                                                    "value": "選択無"
                                                 }
                                             ],
                                             "onClick": "",
@@ -2786,7 +2794,8 @@ var DBC;
                                     "panelDisplay": 1,
                                     "isGroupBox": false,
                                     "readOnly": false,
-                                    "height": "Auto"
+                                    "height": "Auto",
+                                    "focusPositionID": "restoreLayoutButton"
                                 }
                             ],
                             "controlType": "Panel",
@@ -2828,7 +2837,8 @@ var DBC;
                             "panelDisplay": 0,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "focusPositionID": "restoreLayoutButton"
                         },
                         {
                             "fieldName": "JukyushaIdoRenrakuhyoKokiKoreiKokuho",
@@ -2970,7 +2980,8 @@ var DBC;
                                     "panelDisplay": 1,
                                     "isGroupBox": false,
                                     "readOnly": false,
-                                    "height": "Auto"
+                                    "height": "Auto",
+                                    "focusPositionID": "restoreLayoutButton"
                                 },
                                 {
                                     "fieldName": "JukyushaIdoRenrakuhyoKokuho",
@@ -3156,7 +3167,8 @@ var DBC;
                                     "panelDisplay": 1,
                                     "isGroupBox": false,
                                     "readOnly": false,
-                                    "height": "Auto"
+                                    "height": "Auto",
+                                    "focusPositionID": "restoreLayoutButton"
                                 }
                             ],
                             "controlType": "Panel",
@@ -3198,7 +3210,8 @@ var DBC;
                             "panelDisplay": 0,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "focusPositionID": "restoreLayoutButton"
                         },
                         {
                             "fieldName": "JukyushaIdoRenrakuhyoKyufuSeigen",
@@ -3232,16 +3245,16 @@ var DBC;
                                     "selectedItem": null,
                                     "dataSource": [
                                         {
+                                            "key": "selnashi",
+                                            "value": "未選択"
+                                        },
+                                        {
                                             "key": "nashi",
                                             "value": "なし"
                                         },
                                         {
                                             "key": "ari",
                                             "value": "あり"
-                                        },
-                                        {
-                                            "key": "selnashi",
-                                            "value": "選択無"
                                         }
                                     ],
                                     "onClick": "",
@@ -3384,7 +3397,8 @@ var DBC;
                             "panelDisplay": 0,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "focusPositionID": "restoreLayoutButton"
                         },
                         {
                             "fieldName": "JukyushaIdoRenrakuhyoNijiyoboJigyo",
@@ -3418,16 +3432,16 @@ var DBC;
                                     "selectedItem": null,
                                     "dataSource": [
                                         {
+                                            "key": "selnashi",
+                                            "value": "未選択"
+                                        },
+                                        {
                                             "key": "higaito",
                                             "value": "非該当"
                                         },
                                         {
                                             "key": "gaito",
                                             "value": "該当"
-                                        },
-                                        {
-                                            "key": "selnashi",
-                                            "value": "選択無"
                                         }
                                     ],
                                     "onClick": "",
@@ -3523,7 +3537,8 @@ var DBC;
                             "panelDisplay": 0,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "focusPositionID": "restoreLayoutButton"
                         },
                         {
                             "fieldName": "JukyushaIdoRenrakuhyoRojinHoken",
@@ -3709,7 +3724,8 @@ var DBC;
                             "panelDisplay": 0,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "focusPositionID": "restoreLayoutButton"
                         }
                     ],
                     "controlType": "Panel",
@@ -3751,7 +3767,8 @@ var DBC;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "Auto",
+                    "focusPositionID": "restoreLayoutButton"
                 }
             ],
             "controlType": "CommonChildDiv",
