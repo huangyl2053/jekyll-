@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.workflow.flow.messaging.DeliveredMessages;
 import jp.co.ndensan.reams.uz.uza.workflow.flow.messaging.IMessageController;
 import jp.co.ndensan.reams.uz.uza.workflow.flow.messaging.WakeUpMessage;
-import jp.co.ndensan.reams.uz.uza.workflow.flow.task.process.tray.TrayTaskManager;
 import jp.co.ndensan.reams.uz.uza.workflow.flow.valueobject.FlowId;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
@@ -21,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
  *
  * @author N8211 田辺 紘一
  */
-public class idoHaakuMessageController implements IMessageController {
+public class FukaKoseiMessageController implements IMessageController {
 
     private final static RString WFPRMKEY1 = new RString("Key1");
     private final static RString WFPRMKEY2 = new RString("Key2");
