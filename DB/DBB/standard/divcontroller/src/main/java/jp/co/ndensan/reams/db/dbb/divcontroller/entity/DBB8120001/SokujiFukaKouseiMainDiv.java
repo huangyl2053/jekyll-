@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8120001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8120001.tabSokujiKouseiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -32,8 +31,6 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     private DropDownList ddlKoseiTsuki;
     @JsonProperty("tabSokujiKousei")
     private tabSokujiKouseiDiv tabSokujiKousei;
-    @JsonProperty("btnHozon")
-    private Button btnHozon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -89,16 +86,6 @@ public class SokujiFukaKouseiMainDiv extends Panel {
     @JsonProperty("tabSokujiKousei")
     public void setTabSokujiKousei(tabSokujiKouseiDiv tabSokujiKousei) {
         this.tabSokujiKousei=tabSokujiKousei;
-    }
-
-    @JsonProperty("btnHozon")
-    public Button getBtnHozon() {
-        return btnHozon;
-    }
-
-    @JsonProperty("btnHozon")
-    public void setBtnHozon(Button btnHozon) {
-        this.btnHozon=btnHozon;
     }
 
 }

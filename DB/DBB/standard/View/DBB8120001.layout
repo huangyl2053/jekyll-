@@ -43,6 +43,7 @@
      "Nenrei_visible": true,
      "Seibetsu_visible": true,
      "JuminShubetsu_Visible": true,
+     "NihonjinGaikokujin_visible": true,
      "JuminJotai_visible": true,
      "YubinNo_visible": true,
      "Jusho_visible": true,
@@ -69,8 +70,7 @@
      "AgeArrivalDay": "1",
      "SubGyomuUmu": "0",
      "SubGyomuSearchUmu": "0",
-     "DainoninHyojiUmu": "1",
-     "NihonjinGaikokujin_visible": true
+     "DainoninHyojiUmu": "1"
     },
     {
      "fieldName": "SokujiKouseiKihon",
@@ -548,8 +548,7 @@
        "value": "3期（8月）"
       }
      ],
-     "selectedItem": "7",
-     "disabledItem": []
+     "selectedItem": "7"
     },
     {
      "fieldName": "tabSokujiKousei",
@@ -613,7 +612,7 @@
             {
              "fieldName": "txtShikakusoshitsuYMD1",
              "items": [],
-             "controlType": "TextBoxFlexibleDate",
+             "controlType": "TextBox",
              "width": "85",
              "visible": true,
              "displayNone": false,
@@ -628,6 +627,52 @@
              "marginLeft": "0",
              "marginRight": "XS",
              "selectControlID": "txtShikakusoshitsuYMD1_core",
+             "helpMessageID": "",
+             "jpControlName": "",
+             "readOnly": false,
+             "required": false,
+             "maxLength": 100000000,
+             "minLength": 0,
+             "textAlign": 0,
+             "placeHolder": "",
+             "textKind": 0,
+             "isPrivateInfo": false,
+             "isPassword": false,
+             "isComboBox": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
+             "onKeyPress": "",
+             "text": "",
+             "suggest": [],
+             "value": "",
+             "labelLText": "喪失日",
+             "labelRText": "",
+             "labelLWidth": "155",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
+             "decorationClass": "ColorOrangeTextBox",
+             "permitCharactor": ""
+            },
+            {
+             "fieldName": "txtShikakusoshitsuYMD1BK",
+             "items": [],
+             "controlType": "TextBoxFlexibleDate",
+             "width": "85",
+             "visible": true,
+             "displayNone": true,
+             "disabled": false,
+             "accessKey": "",
+             "nextFocusFieldName": "",
+             "wrap": false,
+             "dependencies": [],
+             "float": 0,
+             "toolTip": "",
+             "authorityMode": 0,
+             "marginLeft": "0",
+             "marginRight": "XS",
+             "selectControlID": "txtShikakusoshitsuYMD1BK_core",
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": true,
@@ -1213,7 +1258,7 @@
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
-             "decorationClass": "",
+             "decorationClass": "ColorOrangeTextBox",
              "maxValue": 1.7976931348623157e+308,
              "minValue": 0,
              "isCurrency": false,
@@ -1321,7 +1366,7 @@
             {
              "fieldName": "txtShikakusoshitsuYMD2",
              "items": [],
-             "controlType": "TextBoxFlexibleDate",
+             "controlType": "TextBox",
              "width": "85",
              "visible": true,
              "displayNone": false,
@@ -1336,6 +1381,52 @@
              "marginLeft": "0",
              "marginRight": "XS",
              "selectControlID": "txtShikakusoshitsuYMD2_core",
+             "helpMessageID": "",
+             "jpControlName": "",
+             "readOnly": false,
+             "required": false,
+             "maxLength": 100000000,
+             "minLength": 0,
+             "textAlign": 0,
+             "placeHolder": "",
+             "textKind": 0,
+             "isPrivateInfo": false,
+             "isPassword": false,
+             "isComboBox": false,
+             "onFocus": "",
+             "onBlur": "",
+             "onChange": "",
+             "onKeyPress": "",
+             "text": "",
+             "suggest": [],
+             "value": "",
+             "labelLText": "喪失日",
+             "labelRText": "",
+             "labelLWidth": "155",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
+             "decorationClass": "ColorOrangeTextBox",
+             "permitCharactor": ""
+            },
+            {
+             "fieldName": "txtShikakusoshitsuYMD2BK",
+             "items": [],
+             "controlType": "TextBoxFlexibleDate",
+             "width": "85",
+             "visible": true,
+             "displayNone": true,
+             "disabled": false,
+             "accessKey": "",
+             "nextFocusFieldName": "",
+             "wrap": false,
+             "dependencies": [],
+             "float": 0,
+             "toolTip": "",
+             "authorityMode": 0,
+             "marginLeft": "0",
+             "marginRight": "XS",
+             "selectControlID": "txtShikakusoshitsuYMD2BK_core",
              "helpMessageID": "",
              "jpControlName": "",
              "readOnly": true,
@@ -1921,7 +2012,7 @@
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
-             "decorationClass": "",
+             "decorationClass": "ColorOrangeTextBox",
              "maxValue": 1.7976931348623157e+308,
              "minValue": 0,
              "isCurrency": false,
@@ -2067,8 +2158,7 @@
              "value": "平27"
             }
            ],
-           "selectedItem": "key0",
-           "disabledItem": []
+           "selectedItem": "key0"
           },
           {
            "fieldName": "tblKiwarigaku",
@@ -11796,7 +11886,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "平26.04～平27.03",
+               "text": "",
                "decorationClass": "",
                "align": 1
               }
@@ -11894,7 +11984,7 @@
                "jpControlName": "",
                "required": false,
                "isPrivateInfo": false,
-               "text": "第5段階特例",
+               "text": "",
                "decorationClass": "",
                "align": 1
               }
@@ -12279,7 +12369,7 @@
            "selectControlID": "tblSanteinokisoMae",
            "helpMessageID": "",
            "jpControlName": "",
-           "html": "<table border='1' cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr><td bgcolor=\"lightgrey\" colspan=\"6\" id='R1C1'></td></tr>\n    <tr bgcolor=\"lightgrey\" ><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td></tr>\n  </tbody>\n</table>\n"
+           "html": "<table border='1' cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr><td bgcolor=\"lightgrey\" colspan=\"6\" id='R1C1'></td></tr>\n    <tr bgcolor=\"lightgrey\" ><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n    <tr><td id='R3C1' bgcolor='Orange'></td><td id='R3C2' bgcolor='Orange'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5' bgcolor='Orange'></td><td id='R3C6' bgcolor='Orange'></td></tr>\n  </tbody>\n</table>\n"
           },
           {
            "fieldName": "tblSanteinokisoAto",
@@ -12939,7 +13029,7 @@
            "selectControlID": "tblSanteinokisoAto",
            "helpMessageID": "",
            "jpControlName": "",
-           "html": "<table border='1' cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr><td bgcolor=\"lightgrey\" colspan=\"6\" id='R1C1'></td></tr>\n    <tr bgcolor=\"lightgrey\" ><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td></tr>\n  </tbody>\n</table>\n"
+           "html": "<table border='1' cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr><td bgcolor=\"lightgrey\" colspan=\"6\" id='R1C1'></td></tr>\n    <tr bgcolor=\"lightgrey\" ><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n    <tr><td id='R3C1' bgcolor='Orange'></td><td id='R3C2' bgcolor='Orange'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5' bgcolor='Orange'></td><td id='R3C6' bgcolor='Orange'></td></tr>\n  </tbody>\n</table>\n"
           }
          ],
          "controlType": "Panel",
@@ -13269,7 +13359,7 @@
       "SokujiKoseiTab2"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "SokujiKoseiTab1",
+     "selectedItemFieldName": "",
      "initialTab": 0,
      "isLazyLoading": false
     }
@@ -13540,7 +13630,7 @@
    ]
   }
  ],
- "currentState": "完了",
+ "currentState": "All",
  "id": "DBB8120001",
  "WFParameter": [],
  "UIContainerEventMapping": [

@@ -5,8 +5,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8120001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8120001.tblSanteinokisoAtoDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8120001.tblSanteinokisoMaeDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**

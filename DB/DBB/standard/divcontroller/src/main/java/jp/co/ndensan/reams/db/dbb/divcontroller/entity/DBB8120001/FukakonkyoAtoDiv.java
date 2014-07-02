@@ -24,7 +24,9 @@ public class FukakonkyoAtoDiv extends Panel {
     @JsonProperty("txtShikakushutokuYMD2")
     private TextBoxFlexibleDate txtShikakushutokuYMD2;
     @JsonProperty("txtShikakusoshitsuYMD2")
-    private TextBoxFlexibleDate txtShikakusoshitsuYMD2;
+    private TextBox txtShikakusoshitsuYMD2;
+    @JsonProperty("txtShikakusoshitsuYMD2BK")
+    private TextBoxFlexibleDate txtShikakusoshitsuYMD2BK;
     @JsonProperty("txtSeihoKaishiYMD2")
     private TextBoxFlexibleDate txtSeihoKaishiYMD2;
     @JsonProperty("txtSeihoShuryoYMD2")
@@ -67,13 +69,23 @@ public class FukakonkyoAtoDiv extends Panel {
     }
 
     @JsonProperty("txtShikakusoshitsuYMD2")
-    public TextBoxFlexibleDate getTxtShikakusoshitsuYMD2() {
+    public TextBox getTxtShikakusoshitsuYMD2() {
         return txtShikakusoshitsuYMD2;
     }
 
     @JsonProperty("txtShikakusoshitsuYMD2")
-    public void setTxtShikakusoshitsuYMD2(TextBoxFlexibleDate txtShikakusoshitsuYMD2) {
+    public void setTxtShikakusoshitsuYMD2(TextBox txtShikakusoshitsuYMD2) {
         this.txtShikakusoshitsuYMD2=txtShikakusoshitsuYMD2;
+    }
+
+    @JsonProperty("txtShikakusoshitsuYMD2BK")
+    public TextBoxFlexibleDate getTxtShikakusoshitsuYMD2BK() {
+        return txtShikakusoshitsuYMD2BK;
+    }
+
+    @JsonProperty("txtShikakusoshitsuYMD2BK")
+    public void setTxtShikakusoshitsuYMD2BK(TextBoxFlexibleDate txtShikakusoshitsuYMD2BK) {
+        this.txtShikakusoshitsuYMD2BK=txtShikakusoshitsuYMD2BK;
     }
 
     @JsonProperty("txtSeihoKaishiYMD2")

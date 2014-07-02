@@ -83,7 +83,7 @@ public class SokujiFukaKouseiMain {
         }
 
         setSokujikouseiKey(sokujiFukaKouseiMainDiv, fukaKoseiData);
-        setSokujiFukaKouseiMainChotei(sokujiFukaKouseiMainDiv, choteiNendoData);        
+        setSokujiFukaKouseiMainChotei(sokujiFukaKouseiMainDiv, choteiNendoData);
         setSokujikouseiFukakonkyo(tabSokujiKouseiDiv, fukaKonkyoData);
         setKiwarigakuTokucho(tabSokujiKouseiDiv, kiwarigakuDataTokucho, sokujiFukaKouseiMainDiv);
         setKiwarigakuFucho(tabSokujiKouseiDiv, kiwarigakuDataFucho);
@@ -91,7 +91,7 @@ public class SokujiFukaKouseiMain {
         setKiwarigakuFuchoGokei(tabSokujiKouseiDiv, kiwarigakuDataFuchoGokei);
         setSanteiKiso(tabSokujiKouseiDiv, santeiKisoData);
         setChoteiJiyu(tabSokujiKouseiDiv, choteiJiyuData);
-  
+
     }
 
     private void setKiwarigakuTokucho(
@@ -120,22 +120,22 @@ public class SokujiFukaKouseiMain {
                     sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoKoseiMaeValue3().setText(cg.getAsRString("特徴更正前"));
                     sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoKoseiGoValue3().setText(cg.getAsRString("特徴更正後"));
                     sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoZogenValue3().setText(cg.getAsRString("特徴増減"));
-                     sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoNofugakuValue3().setText(cg.getAsRString("特徴納付額"));
-                   sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtTokuchoKoseiGo3().setDisplayNone(true);
+                    sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoNofugakuValue3().setText(cg.getAsRString("特徴納付額"));
+                    sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtTokuchoKoseiGo3().setDisplayNone(true);
                     break;
                 case _4期:
                     sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoKoseiMaeValue4().setText(cg.getAsRString("特徴更正前"));
                     sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoKoseiGoValue4().setText(cg.getAsRString("特徴更正後"));
                     sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoZogenValue4().setText(cg.getAsRString("特徴増減"));
-                     sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoNofugakuValue4().setText(cg.getAsRString("特徴納付額"));
-                   sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtTokuchoKoseiGo4().setDisplayNone(true);
+                    sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoNofugakuValue4().setText(cg.getAsRString("特徴納付額"));
+                    sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtTokuchoKoseiGo4().setDisplayNone(true);
                     break;
                 case _5期:
                     sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoKoseiMaeValue5().setText(cg.getAsRString("特徴更正前"));
                     sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoKoseiGoValue5().setText(cg.getAsRString("特徴更正後"));
                     sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoZogenValue5().setText(cg.getAsRString("特徴増減"));
-                     sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoNofugakuValue5().setText(cg.getAsRString("特徴納付額"));
-                   sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtTokuchoKoseiGo5().setDisplayNone(true);
+                    sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoNofugakuValue5().setText(cg.getAsRString("特徴納付額"));
+                    sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtTokuchoKoseiGo5().setDisplayNone(true);
                     break;
                 case _6期:
                     sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblTokuchoKoseiMaeValue6().setText(cg.getAsRString("特徴更正前"));
@@ -439,61 +439,61 @@ public class SokujiFukaKouseiMain {
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoKoseiGo1().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoNokigenValue1().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen1().setDisplayNone(false);
-        
+
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoKoseiGoValue2().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoKoseiGo2().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoNokigenValue2().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen2().setDisplayNone(false);
-        
+
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoKoseiGoValue3().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoKoseiGo3().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoNokigenValue3().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen3().setDisplayNone(false);
-        
+
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoKoseiGoValue4().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoKoseiGo4().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoNokigenValue4().setDisplayNone(false);
-        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen4().setDisplayNone(false);        
+        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen4().setDisplayNone(false);
 
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoKoseiGoValue5().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoKoseiGo5().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoNokigenValue5().setDisplayNone(false);
-        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen5().setDisplayNone(false);        
- 
+        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen5().setDisplayNone(false);
+
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoKoseiGoValue6().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoKoseiGo6().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoNokigenValue6().setDisplayNone(false);
-        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen6().setDisplayNone(false);  
-        
+        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen6().setDisplayNone(false);
+
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoKoseiGoValue7().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoKoseiGo7().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoNokigenValue7().setDisplayNone(false);
-        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen7().setDisplayNone(false);           
-   
+        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen7().setDisplayNone(false);
+
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoKoseiGoValue8().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoKoseiGo8().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoNokigenValue8().setDisplayNone(false);
-        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen8().setDisplayNone(false);       
-  
+        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen8().setDisplayNone(false);
+
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoKoseiGoValue9().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoKoseiGo9().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoNokigenValue9().setDisplayNone(false);
-        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen9().setDisplayNone(false);    
-        
+        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen9().setDisplayNone(false);
+
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoKoseiGoValue10().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoKoseiGo10().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoNokigenValue10().setDisplayNone(false);
-        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen10().setDisplayNone(false); 
-        
+        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen10().setDisplayNone(false);
+
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoKoseiGoValue11().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoKoseiGo11().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoNokigenValue11().setDisplayNone(false);
-        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen11().setDisplayNone(false);     
-        
+        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen11().setDisplayNone(false);
+
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoKoseiGoValue12().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoKoseiGo12().setDisplayNone(false);
         sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getLblFuchoNokigenValue12().setDisplayNone(false);
-        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen12().setDisplayNone(false);           
+        sokujikouseiKiwarigakuDiv.getTblKiwarigaku().getTxtFuchoNokigen12().setDisplayNone(false);
     }
 
     private void setKiwarigakuFuchoGokei(
@@ -522,7 +522,8 @@ public class SokujiFukaKouseiMain {
                 FukakonkyoMaeDiv fukakonkyoMaeDiv = taSokujiKouseiDiv.getSokujiKoseiTab1().getSokujikouseiFukakonkyo().getFukakonkyoMae();
 
                 fukakonkyoMaeDiv.getTxtShikakushutokuYMD1().setValue(new FlexibleDate(cg.getAsRString("資格取得日")));
-                fukakonkyoMaeDiv.getTxtShikakusoshitsuYMD1().setValue(new FlexibleDate(cg.getAsRString("資格喪失日")));
+//                fukakonkyoMaeDiv.getTxtShikakusoshitsuYMD1().setValue(new FlexibleDate(cg.getAsRString("資格喪失日")));
+                fukakonkyoMaeDiv.getTxtShikakusoshitsuYMD1().setValue(cg.getAsRString("資格喪失日"));
                 fukakonkyoMaeDiv.getTxtSeihoKaishiYMD1().setValue(new FlexibleDate(cg.getAsRString("生保開始日")));
                 fukakonkyoMaeDiv.getTxtSeihoShuryoYMD1().setValue(new FlexibleDate(cg.getAsRString("生保終了日")));
                 fukakonkyoMaeDiv.getTxtHonninKazei1().setValue(cg.getAsRString("本人課税"));
@@ -536,7 +537,8 @@ public class SokujiFukaKouseiMain {
                 FukakonkyoAtoDiv fukakonkyoAtoDiv = taSokujiKouseiDiv.getSokujiKoseiTab1().getSokujikouseiFukakonkyo().getFukakonkyoAto();
 
                 fukakonkyoAtoDiv.getTxtShikakushutokuYMD2().setValue(new FlexibleDate(cg.getAsRString("資格取得日")));
-                fukakonkyoAtoDiv.getTxtShikakusoshitsuYMD2().setValue(new FlexibleDate(cg.getAsRString("資格喪失日")));
+//                fukakonkyoAtoDiv.getTxtShikakusoshitsuYMD2().setValue(new FlexibleDate(cg.getAsRString("資格喪失日")));
+                fukakonkyoAtoDiv.getTxtShikakusoshitsuYMD2().setValue(cg.getAsRString("資格喪失日"));
                 fukakonkyoAtoDiv.getTxtSeihoKaishiYMD2().setValue(new FlexibleDate(cg.getAsRString("生保開始日")));
                 fukakonkyoAtoDiv.getTxtSeihoShuryoYMD2().setValue(new FlexibleDate(cg.getAsRString("生保終了日")));
                 fukakonkyoAtoDiv.getTxtHonninKazei2().setValue(cg.getAsRString("本人課税"));
