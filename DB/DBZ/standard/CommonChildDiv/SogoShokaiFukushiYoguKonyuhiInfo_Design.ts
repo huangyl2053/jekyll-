@@ -226,9 +226,9 @@ module DBZ {
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
-         "text": "選",
+         "text": "",
          "onClick": "onClick_btnSelectYoguKonyuhi",
-         "imageFileUrl": "",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "",
          "imageHeight": ""
         },
