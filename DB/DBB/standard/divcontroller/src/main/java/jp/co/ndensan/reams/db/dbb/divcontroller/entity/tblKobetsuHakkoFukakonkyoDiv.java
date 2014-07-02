@@ -119,6 +119,11 @@ public class tblKobetsuHakkoFukakonkyoDiv extends TablePanel {
      * TablePanelコントロールに特化したヘルパーメソッドを作成
      */
     @JsonIgnore
+    public Label getLblFukankonkyoZengo() {
+        return this.celFukakonkyo1.getLblFukankonkyoZengo();
+    }
+
+    @JsonIgnore
     public Label getLblFukankonkyoMae() {
         return this.celFukakonkyo2.getLblFukankonkyoMae();
     }
@@ -801,6 +806,18 @@ public class tblKobetsuHakkoFukakonkyoDiv extends TablePanel {
  * @author 自動生成
  */
 class celFukakonkyo1AttblKobetsuHakkoFukakonkyo extends TableCell {
+    @JsonProperty("lblFukankonkyoZengo")
+    private Label lblFukankonkyoZengo;
+
+    @JsonProperty("lblFukankonkyoZengo")
+    public Label getLblFukankonkyoZengo() {
+        return lblFukankonkyoZengo;
+    }
+
+    @JsonProperty("lblFukankonkyoZengo")
+    public void setLblFukankonkyoZengo(Label lblFukankonkyoZengo) {
+        this.lblFukankonkyoZengo=lblFukankonkyoZengo;
+    }
 
 }
 /**
