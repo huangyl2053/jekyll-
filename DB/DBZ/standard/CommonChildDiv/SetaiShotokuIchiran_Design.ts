@@ -883,7 +883,7 @@ module DBZ {
          "cellType": 8,
          "text": "",
          "onClick": "",
-         "imageFileUrl": "/uz/uza/image/UR_Memo_Nashi.png",
+         "imageFileUrl": "/ur/urz/image/UR_Memo_Nashi.png",
          "imageWidth": "",
          "imageHeight": ""
         },
