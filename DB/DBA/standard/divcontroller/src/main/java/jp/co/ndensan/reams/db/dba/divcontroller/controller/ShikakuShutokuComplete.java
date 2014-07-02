@@ -31,7 +31,7 @@ public class ShikakuShutokuComplete {
 
         AtenaShokaiSimpleDiv atena = taishoshaJohoDiv.getShikakuShutokuCommonJoho().getAtenaInfo();
 
-        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("資格取得を完了しました。"),
+        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("資格取得登録を更新しました。"),
                 atena.getTxtShikibetsuCode().getValue(), atena.getTxtAtenaMeisho().getValue());
 
         response.data = completeDiv;

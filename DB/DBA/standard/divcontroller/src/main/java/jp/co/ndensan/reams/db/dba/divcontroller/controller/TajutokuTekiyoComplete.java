@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2030011.JutokuTekiyoCompleteDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2030011.JutokuTekiyoTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.TajutokuTaishosaJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.TajutokuTekiyoCompleteDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoKanryoMessage;
@@ -32,7 +30,7 @@ public class TajutokuTekiyoComplete {
 
         AtenaShokaiSimpleDiv atena = taishoshaJohoDiv.getAtenaJoho();
 
-        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("他市町村住所地特例適用を完了しました。"),
+        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("他市町村住所地特例適用を更新しました。"),
                 atena.getTxtShikibetsuCode().getValue(), atena.getTxtAtenaMeisho().getValue());
 
         response.data = completeDiv;

@@ -398,17 +398,6 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
-                            "required": false,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "onChange": "",
-                            "labelLText": "回収事由",
-                            "labelRText": "",
-                            "labelLWidth": "85",
-                            "labelRWidth": "S",
-                            "labelLAlign": 2,
-                            "labelRAlign": 0,
-                            "selectedItem": "",
                             "dataSource": [
                                 {
                                     "key": "",
@@ -498,7 +487,18 @@ var DBZ;
                                     "key": "20",
                                     "value": "給付額減額終了"
                                 }
-                            ]
+                            ],
+                            "required": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "labelLText": "回収事由",
+                            "labelRText": "",
+                            "labelLWidth": "85",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "selectedItem": ""
                         },
                         {
                             "fieldName": "txtKaishuRiyu",
@@ -545,7 +545,7 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "940",
+                    "width": "942",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -556,8 +556,8 @@ var DBZ;
                     "float": 0,
                     "toolTip": "",
                     "authorityMode": 0,
-                    "marginLeft": "XS",
-                    "marginRight": "XS",
+                    "marginLeft": "0",
+                    "marginRight": "0",
                     "selectControlID": "ShoKaishuJokyoShosai",
                     "helpMessageID": "",
                     "jpControlName": "",
