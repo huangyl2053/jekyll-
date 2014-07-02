@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011.TekiyoJogaiTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011.TekiyoJogaiTaishoshaSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 適用除外対象者パネルに対応するDivControllerです。
@@ -37,10 +39,11 @@ public class TekiyoJogaiTaishoshaJoho {
     public ResponseData onClick_btnToDecide(TekiyoJogaiTaishoshaJohoDiv taishoshaJohoDiv, TekiyoJogaiTaishoshaSearchDiv searchDiv) {
         ResponseData<TekiyoJogaiTaishoshaJohoDiv> response = new ResponseData<>();
 
-        RString shikibetsuCode = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getShikibetsuCode();
-        AtenaShokaiSimple.setData(taishoshaJohoDiv.getAtenaJoho(), new ShikibetsuCode(shikibetsuCode));
+        DemoKojin demoKojin = new DemoKojin("第1号");
+        RString shikibetsuCode = demoKojin.getShikibetsuCode();
+        RString hihokenshaNo = demoKojin.getHihokenshaNo();
 
-        RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
+        AtenaShokaiSimple.setData(taishoshaJohoDiv.getAtenaJoho(), new ShikibetsuCode(shikibetsuCode));
         setTaishoshaData(taishoshaJohoDiv, hihokenshaNo);
 
         response.data = taishoshaJohoDiv;

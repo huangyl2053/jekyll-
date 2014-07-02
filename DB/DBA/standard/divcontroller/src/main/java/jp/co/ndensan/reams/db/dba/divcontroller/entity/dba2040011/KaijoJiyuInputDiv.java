@@ -23,12 +23,12 @@ public class KaijoJiyuInputDiv extends Panel {
      */
     @JsonProperty("ddlKaijoJiyu")
     private DropDownList ddlKaijoJiyu;
-    @JsonProperty("txtKaijoTodokedeDate")
-    private TextBoxFlexibleDate txtKaijoTodokedeDate;
-    @JsonProperty("txtKaijoDate")
-    private TextBoxFlexibleDate txtKaijoDate;
     @JsonProperty("txtShisetsuTaishoDate")
     private TextBoxFlexibleDate txtShisetsuTaishoDate;
+    @JsonProperty("txtKaijoDate")
+    private TextBoxFlexibleDate txtKaijoDate;
+    @JsonProperty("txtKaijoTodokedeDate")
+    private TextBoxFlexibleDate txtKaijoTodokedeDate;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,14 +46,14 @@ public class KaijoJiyuInputDiv extends Panel {
         this.ddlKaijoJiyu=ddlKaijoJiyu;
     }
 
-    @JsonProperty("txtKaijoTodokedeDate")
-    public TextBoxFlexibleDate getTxtKaijoTodokedeDate() {
-        return txtKaijoTodokedeDate;
+    @JsonProperty("txtShisetsuTaishoDate")
+    public TextBoxFlexibleDate getTxtShisetsuTaishoDate() {
+        return txtShisetsuTaishoDate;
     }
 
-    @JsonProperty("txtKaijoTodokedeDate")
-    public void setTxtKaijoTodokedeDate(TextBoxFlexibleDate txtKaijoTodokedeDate) {
-        this.txtKaijoTodokedeDate=txtKaijoTodokedeDate;
+    @JsonProperty("txtShisetsuTaishoDate")
+    public void setTxtShisetsuTaishoDate(TextBoxFlexibleDate txtShisetsuTaishoDate) {
+        this.txtShisetsuTaishoDate=txtShisetsuTaishoDate;
     }
 
     @JsonProperty("txtKaijoDate")
@@ -66,14 +66,14 @@ public class KaijoJiyuInputDiv extends Panel {
         this.txtKaijoDate=txtKaijoDate;
     }
 
-    @JsonProperty("txtShisetsuTaishoDate")
-    public TextBoxFlexibleDate getTxtShisetsuTaishoDate() {
-        return txtShisetsuTaishoDate;
+    @JsonProperty("txtKaijoTodokedeDate")
+    public TextBoxFlexibleDate getTxtKaijoTodokedeDate() {
+        return txtKaijoTodokedeDate;
     }
 
-    @JsonProperty("txtShisetsuTaishoDate")
-    public void setTxtShisetsuTaishoDate(TextBoxFlexibleDate txtShisetsuTaishoDate) {
-        this.txtShisetsuTaishoDate=txtShisetsuTaishoDate;
+    @JsonProperty("txtKaijoTodokedeDate")
+    public void setTxtKaijoTodokedeDate(TextBoxFlexibleDate txtKaijoTodokedeDate) {
+        this.txtKaijoTodokedeDate=txtKaijoTodokedeDate;
     }
 
 }

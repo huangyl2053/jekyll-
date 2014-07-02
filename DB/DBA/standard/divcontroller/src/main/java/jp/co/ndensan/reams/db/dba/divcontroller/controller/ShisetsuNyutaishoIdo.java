@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2020011.ShisetsuNyutaishoIdoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2020011.ShisetsuNyutaishoKanriTaishoshaSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 施設入退所の異動履歴を表示しているDivのコントローラです。
@@ -43,10 +45,12 @@ public class ShisetsuNyutaishoIdo {
      */
     public ResponseData onClick_btnToDecide(ShisetsuNyutaishoIdoDiv idoRirekiDiv, ShisetsuNyutaishoKanriTaishoshaSearchDiv searchDiv) {
         ResponseData<ShisetsuNyutaishoIdoDiv> response = new ResponseData<>();
-
-        dgSearchResult_Row row = searchDiv.getSearchResult().getDgSearchResult().getClickedItem();
         ShisetsuNyutaishoRirekiKanriDiv rirekiKanriDiv = idoRirekiDiv.getShisetsuNyutaishoKanri();
-        List<HashMap> idoRirekiList = getIdoRireki(row.getHihokenshaNo());
+
+        DemoKojin demoKojin = new DemoKojin("第1号");
+        RString hihokenshaNo = demoKojin.getHihokenshaNo();
+        List<HashMap> idoRirekiList = getIdoRireki(hihokenshaNo);
+
         setIdoRirekiGrid(rirekiKanriDiv.getDgShisetsuNyutaishoRireki(), idoRirekiList);
 
         setDdlTaishoShisetsu(idoRirekiDiv);

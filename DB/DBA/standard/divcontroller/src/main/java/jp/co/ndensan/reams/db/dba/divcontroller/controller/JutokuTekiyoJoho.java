@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2030011.IryoHokenInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2030011.JutokuTekiyoInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2030011.dgRohukuNenkinRireki_Row;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格取得処理を行うDivControllerです。<br/>
@@ -65,7 +67,9 @@ public class JutokuTekiyoJoho {
     public ResponseData onClick_btnToDecide(JutokuTekiyoJohoDiv jutokuTekiyoJohoDiv, JutokuTekiyoSearchDiv searchDiv) {
         ResponseData<JutokuTekiyoJohoDiv> response = new ResponseData<>();
 
-        RString shikibetsuCode = searchDiv.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem().getShikibetsuCode();
+        DemoKojin demoKojin = new DemoKojin("第1号");
+        RString shikibetsuCode = demoKojin.getShikibetsuCode();
+
         setShikakuJoho(jutokuTekiyoJohoDiv, shikibetsuCode);
         setIryoHoken(jutokuTekiyoJohoDiv, shikibetsuCode);
         setRofukuNenkin(jutokuTekiyoJohoDiv, shikibetsuCode);

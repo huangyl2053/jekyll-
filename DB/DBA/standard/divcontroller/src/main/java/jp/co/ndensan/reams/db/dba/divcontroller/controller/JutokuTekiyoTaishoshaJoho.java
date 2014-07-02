@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2030011.JutokuTekiyoSearchDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2030011.JutokuTekiyoTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
@@ -37,10 +39,10 @@ public class JutokuTekiyoTaishoshaJoho {
     public ResponseData onClick_btnToDecide(JutokuTekiyoTaishoshaJohoDiv taishoshaJohoDiv, JutokuTekiyoSearchDiv searchDiv) {
         ResponseData<JutokuTekiyoTaishoshaJohoDiv> response = new ResponseData<>();
 
-        RString shikibetsuCode = searchDiv.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem().getShikibetsuCode();
+        DemoKojin demoKojin = new DemoKojin("第1号");
+        RString shikibetsuCode = demoKojin.getShikibetsuCode();
+        RString hihokenshaNo = demoKojin.getHihokenshaNo();
         AtenaShokaiSimple.setData(taishoshaJohoDiv.getJutokuTekiyoCommonJoho().getAtenaInfo(), new ShikibetsuCode(shikibetsuCode));
-
-        RString hihokenshaNo = searchDiv.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem().getHihokenshaNo();
         setTaishoshaData(taishoshaJohoDiv, hihokenshaNo);
 
         response.data = taishoshaJohoDiv;

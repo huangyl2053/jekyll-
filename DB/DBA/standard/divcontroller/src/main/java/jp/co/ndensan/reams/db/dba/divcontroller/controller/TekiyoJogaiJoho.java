@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011.JogaishaTekiyoInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011.TekiyoJogaiJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011.TekiyoJogaiTorokuDiv;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 適用除外情報を表示するDivに対応したControllerです。
@@ -42,7 +44,9 @@ public class TekiyoJogaiJoho {
     public ResponseData onClick_btnToDecide(TekiyoJogaiJohoDiv tekiyoJogaiJohoDiv, TekiyoJogaiTaishoshaSearchDiv searchDiv) {
         ResponseData<TekiyoJogaiJohoDiv> response = new ResponseData<>();
 
-        RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
+        DemoKojin demoKojin = new DemoKojin("第1号");
+        RString hihokenshaNo = demoKojin.getHihokenshaNo();
+        //RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
         setTekiyoJogaiGrid(tekiyoJogaiJohoDiv.getDgTekiyoJogaiRireki(), hihokenshaNo);
         ShisetsuJoho.setTekiyoJogaiMode(tekiyoJogaiJohoDiv.getTekiyoJogaiToroku().getJogaishaTekiyoInput().getJogaishaTekiyoJogaiShisetsu());
 

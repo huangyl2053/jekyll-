@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.IryoHokenInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuJohoDiv;
@@ -19,12 +20,15 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplRofukuNenki
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplSeikatsuHogoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplShikakuJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplShisetsuNyutaishoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.dgIryoHokenRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.KaigoMenuType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.uz.uza.core._ControlDataHolder;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.core.mybatis._DbSession;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,6 +37,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.workflow.context._WorkFlowSession;
+import jp.co.ndensan.reams.uz.uza.workflow.flow.dac._FlowDefinitionDac;
+import jp.co.ndensan.reams.uz.uza.workflow.flow.valueobject.FlowKey;
 
 /**
  * 資格取得処理を行うDivControllerです。<br/>
@@ -55,6 +62,11 @@ public class ShikakuShutokuJoho {
     private final static RString IRYO_HOKEN_MODIFY = new RString("modify");
     private final static RString IRYO_HOKEN_DELETE = new RString("delete");
 
+    private void setDdlShutokuJiyu(DropDownList ddl, String str) {
+        ddl.setSelectedItem(new RString(str));
+        ddl.setDisabled(true);
+    }
+
     /**
      * 対象者選択で、資格取得を行う個人が決定された際に実行されます。<br/>
      * 対象となる個人の、資格得喪、医療保険、生活保護、老齢福祉年金、施設入退所の情報を全て表示します。
@@ -66,15 +78,16 @@ public class ShikakuShutokuJoho {
     public ResponseData onClick_btnToDecide(ShikakuShutokuJohoDiv shikakuJohoDiv, ShikakuShutokuSearchDiv searchDiv) {
         ResponseData<ShikakuShutokuJohoDiv> response = new ResponseData<>();
 
-        dgSearchResult_Row row = searchDiv.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem();
-        RString shikibetsuCode = row.getShikibetsuCode();
+        DemoKojin demoKojin = new DemoKojin("第2号");
+        RString shikibetsuCode = demoKojin.getShikibetsuCode();
+
         setShikakuJoho(shikakuJohoDiv, shikibetsuCode);
         setIryoHoken(shikakuJohoDiv, shikibetsuCode);
         setRofukuNenkin(shikakuJohoDiv, shikibetsuCode);
         setSeikatsuHogo(shikakuJohoDiv, shikibetsuCode);
         setShisetsuNyutaisho(shikakuJohoDiv, shikibetsuCode);
 
-        shikakuJohoDiv.setDateOfBirth(row.getBirthDay().getValue().toDateString());
+        setShutokuJiyu(shikakuJohoDiv.getTabInputs().getTplShikakuJoho());
 
         response.data = shikakuJohoDiv;
         return response;
@@ -94,6 +107,7 @@ public class ShikakuShutokuJoho {
         List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
         for (HashMap hihokenshaDaichoData : hihokenshaDaichoDataList) {
             if (hihokenshaDaichoData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
+                shikakuJohoDiv.setDateOfBirth(new RString(hihokenshaDaichoData.get("生年月日").toString()));
                 dataSource = createShikakuShutokuRirekiList((List<HashMap>) hihokenshaDaichoData.get("被保台帳"));
             }
         }
@@ -185,8 +199,10 @@ public class ShikakuShutokuJoho {
         if (dataSource.isEmpty()) {
             shikakuJohoDiv.setIryoHokenInputMode(IRYO_HOKEN_ADD);
             setIryoHokenDisabled(tplIryoHoken, false);
+            tplIryoHoken.getBtnAddIryoHoken().setDisabled(true);
         } else {
             setIryoHokenDisabled(tplIryoHoken, true);
+            tplIryoHoken.getBtnAddIryoHoken().setDisabled(false);
         }
     }
 
@@ -382,6 +398,31 @@ public class ShikakuShutokuJoho {
         tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getBtnUpdateShisetsuNyutaisho().setDisabled(disableValue);
     }
 
+    private void setShutokuJiyu(tplShikakuJohoDiv shikakuJohoDiv) {
+        DropDownList ddl = shikakuJohoDiv.getShikakuShutokuInput().getDdlShikakuShutokuJiyu();
+        SqlSession session = _DbSession.get(_WorkFlowSession.KEY);
+        _FlowDefinitionDac dac = new _FlowDefinitionDac(session);
+        FlowKey flowKey = dac.getFlowKey(_ControlDataHolder.getControlData().getFlowContext().getFlowInstanceId());
+
+        RString flowId = new RString(flowKey.getFlowId().getId());
+
+        if (KaigoMenuType.転入により取得.getFlowId().equals(flowId)) {
+            setDdlShutokuJiyu(ddl, "tennyu");
+        } else if (KaigoMenuType.第2号被保険者取得申請により取得.getFlowId().equals(flowId)) {
+            setDdlShutokuJiyu(ddl, "nigoShinsei");
+        } else if (KaigoMenuType.外国人申請により取得.getFlowId().equals(flowId)) {
+            setDdlShutokuJiyu(ddl, "gaikokuJin");
+        } else if (KaigoMenuType.年齢到達により取得.getFlowId().equals(flowId)) {
+            setDdlShutokuJiyu(ddl, "nenreiTotatsu");
+        } else if (KaigoMenuType.転居により取得_施設退所等.getFlowId().equals(flowId)) {
+            setDdlShutokuJiyu(ddl, "gappeinaiTenkyo");
+        } else if (KaigoMenuType.帰化により取得.getFlowId().equals(flowId)) {
+            setDdlShutokuJiyu(ddl, "kika");
+        } else if (KaigoMenuType.職権により取得.getFlowId().equals(flowId)) {
+            setDdlShutokuJiyu(ddl, "shokkenShutoku");
+        }
+    }
+
     /**
      * 資格情報タブ内の処理です。グリッド内の視覚情報修正ボタンがクリックされた際に実行します。<br/>
      * 入力モードを修正モードに変更し、選択したグリッドのデータを表示します。また、確定ボタンのラベルが修正用に変更されます。
@@ -492,7 +533,7 @@ public class ShikakuShutokuJoho {
         row.setShutokuJiyu(shutoku.getDdlShikakuShutokuJiyu().getSelectedValue());
         row.setShutokuJiyuKey(shutoku.getDdlShikakuShutokuJiyu().getSelectedItem());
 
-        FlexibleDate nenreiTotatsuDate = dateOfBirth.plusYear(65);
+        FlexibleDate nenreiTotatsuDate = dateOfBirth.plusYear(65).minusDay(1);
         if (nenreiTotatsuDate.isBefore(row.getShutokuDate().getValue())) {
             row.setHihokenshaKubun(new RString("第1号"));
             row.getNenreiTotatsuDate().setValue(nenreiTotatsuDate);
@@ -621,6 +662,7 @@ public class ShikakuShutokuJoho {
         }
 
         setIryoHokenDisabled(tplIryoHoken, true);
+        tplIryoHoken.getBtnAddIryoHoken().setDisabled(false);
         clearIryoHokenInput(tplIryoHoken);
         response.data = shikakuJohoDiv;
         return response;

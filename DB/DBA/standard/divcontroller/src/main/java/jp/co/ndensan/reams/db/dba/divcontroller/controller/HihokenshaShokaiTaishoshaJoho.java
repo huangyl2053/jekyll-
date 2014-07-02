@@ -7,23 +7,25 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShikaiTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiTaishoSearchDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.RootTitleSetter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 被保険者照会対象者の基本情報を表示するパネルのコントローラです。
  *
  * @author n8178 城間篤人
  */
-public class HihokenshaShikaiTaishoshaJoho {
+public class HihokenshaShokaiTaishoshaJoho {
 
     private static final RString GAITOSHA_DATA = new RString("DBA4010011/hihokenshaShokaiDbJoho.yml");
 
@@ -37,10 +39,13 @@ public class HihokenshaShikaiTaishoshaJoho {
      */
     public ResponseData onClick_btnToDecide(HihokenshaShikaiTaishoshaJohoDiv johoDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
         ResponseData<HihokenshaShikaiTaishoshaJohoDiv> response = new ResponseData<>();
-        dgSearchResult_Row clickedRow = searchDiv.getSearchResult().getDgSearchResult().getClickedItem();
 
-        AtenaShokaiSimple.setData(johoDiv.getHihokenshaShokaiCommonJoho().getAtenaInfo(), new ShikibetsuCode(clickedRow.getShikibetsuCode()));
-        setDbData(johoDiv.getHihokenshaShokaiDbJoho(), clickedRow.getHihokenshaNo());
+        DemoKojin demoKojin = new DemoKojin("第1号");
+        RString shikibetsuCode = demoKojin.getShikibetsuCode();
+        RString hihokenshaNo = demoKojin.getHihokenshaNo();
+
+        AtenaShokaiSimple.setData(johoDiv.getHihokenshaShokaiCommonJoho().getAtenaInfo(), new ShikibetsuCode(shikibetsuCode));
+        setDbData(johoDiv.getHihokenshaShokaiDbJoho(), hihokenshaNo);
         response.data = johoDiv;
         return response;
     }

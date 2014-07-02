@@ -50,6 +50,34 @@ module DBZ {
             }
         }
         
+        public get ShoKaishuJokyoShosai_panelDisplay() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
+        }
+        
+        public set ShoKaishuJokyoShosai_panelDisplay(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
+            } else {
+                this.layout.items[0]["panelDisplay"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get ShoKaishuJokyoShosai_canOpenAndClose() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"];
+        }
+        
+        public set ShoKaishuJokyoShosai_canOpenAndClose(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"] = value;
+            } else {
+                this.layout.items[0]["canOpenAndClose"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, ShoKaishuJokyoShosai_Design.myLayout, fieldName);
         }
@@ -63,6 +91,8 @@ module DBZ {
             Uz.JSControlUtil.registProperty("onBlur_txtKaishuDate");
             Uz.JSControlUtil.registProperty("onChange_ddlKaishuJiyu");
             Uz.JSControlUtil.registProperty("onBlur_txtKaishuRiyu");
+            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_panelDisplay");
+            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_canOpenAndClose");
         }
         
         /**
@@ -75,6 +105,8 @@ module DBZ {
             editablePropertyInfo["onBlur_txtKaishuDate"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["onBlur"];
             editablePropertyInfo["onChange_ddlKaishuJiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["onChange"];
             editablePropertyInfo["onBlur_txtKaishuRiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["onBlur"];
+            editablePropertyInfo["ShoKaishuJokyoShosai_panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
+            editablePropertyInfo["ShoKaishuJokyoShosai_canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
             
             return editablePropertyInfo;
         }
@@ -168,8 +200,7 @@ module DBZ {
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "txtYukoKigen",
@@ -210,8 +241,7 @@ module DBZ {
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "txtKofuJiyu",
@@ -340,8 +370,7 @@ module DBZ {
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "ddlKaishuJiyu",
@@ -364,7 +393,22 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "required": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "labelLText": "回収事由",
+     "labelRText": "",
+     "labelLWidth": "85",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "selectedItem": "",
      "dataSource": [
+      {
+       "key": "",
+       "value": ""
+      },
       {
        "key": "00",
        "value": "転出"
@@ -449,18 +493,7 @@ module DBZ {
        "key": "20",
        "value": "給付額減額終了"
       }
-     ],
-     "required": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "labelLText": "回収事由",
-     "labelRText": "",
-     "labelLWidth": "85",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "selectedItem": "00"
+     ]
     },
     {
      "fieldName": "txtKaishuRiyu",
@@ -590,6 +623,16 @@ module DBZ {
    "publicChildFieldName": "txtKaishuRiyu",
    "publicChildProperty": "onBlur",
    "newPropertyName": "onBlur_txtKaishuRiyu"
+  },
+  {
+   "publicChildFieldName": "ShoKaishuJokyoShosai",
+   "publicChildProperty": "panelDisplay",
+   "newPropertyName": "ShoKaishuJokyoShosai_panelDisplay"
+  },
+  {
+   "publicChildFieldName": "ShoKaishuJokyoShosai",
+   "publicChildProperty": "canOpenAndClose",
+   "newPropertyName": "ShoKaishuJokyoShosai_canOpenAndClose"
   }
  ],
  "dataPassingForDialog": [],

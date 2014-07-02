@@ -32,7 +32,12 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClick_BtnToSearch": "onClick_btnToSearch"
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "onClick_BtnToSearch": "onClick_btnToSearch",
+     "displayNone_txtTsuchishoNo": true,
+     "displayNone_ddlFukaNendo": true,
+     "displayNone_SearchCriteriaDetail": false
     },
     {
      "fieldName": "taishoshaList",
@@ -62,7 +67,9 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClick_btnToResearch": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "onClick_btnToResearch": "onClick_btnToResearch",
      "gridSetting": {
       "rowHeight": 50,
       "isMultiSelectable": false,
@@ -328,7 +335,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": ""
+     "requestUrl": "dbz/db/dbz/HihokenshaSearch/onLoad"
     },
     {
      "eventName": "onClick_btnToSearch",
@@ -337,6 +344,10 @@
     {
      "eventName": "onClick_btnToDecide",
      "requestUrl": "dbz/db/dbz/HihokenshaSearch/onClick_btnToDecide"
+    },
+    {
+     "eventName": "onClick_btnToResearch",
+     "requestUrl": "dbz/db/dbz/HihokenshaSearch/onClick_btnToResearch"
     }
    ],
    "hiddenInput": [],
@@ -345,12 +356,9 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
-   "widthAuto": true,
+   "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
@@ -393,32 +401,6 @@
      "visibleDiv": "HihokenshaSearch",
      "panelState": "visible",
      "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "taishoshaSearch_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": "該当者一覧"
-    },
-    {
-     "fieldName": "taishoshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "2",
-   "stateName": "該当者一覧",
-   "showWizard": true,
-   "visibleDivs": [
-    {
-     "visibleDiv": "HihokenshaSearch",
-     "panelState": "visible",
-     "fixedDiv": "No"
     },
     {
      "visibleDiv": "taishoshaList",
@@ -432,10 +414,46 @@
     {
      "fieldName": "taishoshaSearch_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
      "event": "onClick",
+     "transition": "該当者一覧"
+    },
+    {
+     "fieldName": "taishoshaList_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "該当者一覧",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "HihokenshaSearch",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "taishoshaList",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "taishoshaSearch",
+     "panelState": "close",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "taishoshaSearch_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
+     "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "taishoshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "fieldName": "taishoshaList_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
      "event": "onClick",
      "transition": "対象者検索"
     }
@@ -449,6 +467,10 @@
   {
    "alias": "decideToTaishosha",
    "eventName": "taishoshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide].onClick"
+  },
+  {
+   "alias": "researchToTaishosha",
+   "eventName": "taishoshaList_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch.onClick"
   }
  ],
  "loadSequencePanelNames": [
@@ -465,5 +487,6 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": []
 }

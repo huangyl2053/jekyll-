@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.JutokuJohoInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.ShisetsuJohoInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.SochimotoJohoInputDiv;
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 他市町村住所地特例の適用情報を入力するDivのControllerです。
@@ -44,7 +46,8 @@ public class TajutokuTekiyoJoho {
     public ResponseData onClick_btnToDecide(TajutokuTekiyoJohoDiv tajutokuDiv, TajutokuTaishoshaSearchDiv searchDiv) {
         ResponseData<TajutokuTekiyoJohoDiv> response = new ResponseData<>();
 
-        RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
+        DemoKojin demoKojin = new DemoKojin("第1号");
+        RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setTajutokuJoho(tajutokuDiv.getDgJushochiTokureiRireki(), hihokenshaNo);
         ShisetsuJoho.setJutokuMode(tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho());
         tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho().getLblOtherShisetsuShurui().setText(new RString("keyKannai"));

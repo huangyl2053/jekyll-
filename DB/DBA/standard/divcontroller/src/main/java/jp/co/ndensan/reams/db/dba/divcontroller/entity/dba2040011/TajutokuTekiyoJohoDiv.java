@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.JutokuJohoInputDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.ShisetsuHenkoInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.dgJushochiTokureiRireki_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
