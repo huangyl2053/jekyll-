@@ -62,8 +62,12 @@ module DBZ {
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+<<<<<<< HEAD
      "icon": 0,
      "heightTextBoxMatches": false
+=======
+     "icon": 0
+>>>>>>> feature/UI-KyufuKanri-37343
     },
     {
      "fieldName": "dgShisetsuNyutaishoRireki",
@@ -85,7 +89,10 @@ module DBZ {
      "selectControlID": "dgShisetsuNyutaishoRireki",
      "helpMessageID": "",
      "jpControlName": "",
+<<<<<<< HEAD
      "readOnly": false,
+=======
+>>>>>>> feature/UI-KyufuKanri-37343
      "height": "S",
      "gridSetting": {
       "rowHeight": 25,
@@ -258,11 +265,14 @@ module DBZ {
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "onSelectByModifyButton_dgShisetsuNyutaishoRireki",
      "onSelectByDeleteButton": "onSelectByDeleteButton_dgShisetsuNyutaishoRireki",
+<<<<<<< HEAD
      "onAfterRequest": "",
      "onAfterRequestByDblClick": "",
      "onAfterRequestBySelectButton": "",
      "onAfterRequestByModifyButton": "",
      "onAfterRequestByDeleteButton": "",
+=======
+>>>>>>> feature/UI-KyufuKanri-37343
      "onOnlyRow": "",
      "onNoRow": "onNoRow_dgShisetsuNyutaishoRireki",
      "onMultiRows": "",
@@ -295,7 +305,10 @@ module DBZ {
        "selectControlID": "ddlTaishoJoho_core",
        "helpMessageID": "",
        "jpControlName": "",
+<<<<<<< HEAD
        "readOnly": false,
+=======
+>>>>>>> feature/UI-KyufuKanri-37343
        "dataSource": [
         {
          "key": "kannai",
@@ -426,7 +439,11 @@ module DBZ {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
+<<<<<<< HEAD
        "marginLeft": "XS",
+=======
+       "marginLeft": "0",
+>>>>>>> feature/UI-KyufuKanri-37343
        "marginRight": "0",
        "selectControlID": "ShisetsuJoho",
        "helpMessageID": "",
@@ -440,8 +457,11 @@ module DBZ {
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
+<<<<<<< HEAD
        "canTransferEvent": true,
        "heightForDialog": "M",
+=======
+>>>>>>> feature/UI-KyufuKanri-37343
        "btnJigyoshaInputGuide_displayNone": false,
        "btnOtherTokureiShisetsuInputGuide_displayNone": true,
        "btnJogaiShisetsuInputGuide_displayNone": true,
@@ -516,8 +536,12 @@ module DBZ {
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+<<<<<<< HEAD
      "icon": 0,
      "heightTextBoxMatches": false
+=======
+     "icon": 0
+>>>>>>> feature/UI-KyufuKanri-37343
     }
    ],
    "controlType": "Panel",

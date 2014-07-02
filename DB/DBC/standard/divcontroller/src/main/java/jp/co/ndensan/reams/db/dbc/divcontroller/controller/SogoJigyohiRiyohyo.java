@@ -7,15 +7,15 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoBeppyoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoBeppyoGokeiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoBeppyoListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoBeppyoMeisaiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.ServiceRiyohyoBeppyoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.ServiceRiyohyoBeppyoGokeiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.ServiceRiyohyoBeppyoListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.ServiceRiyohyoBeppyoMeisaiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.ServiceRiyohyoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.ServiceRiyohyoInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SogoJigyohiRiyohyoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceRiyohyoBeppyoList_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceRiyohyoList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.dgServiceRiyohyoBeppyoList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.dgServiceRiyohyoList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -322,7 +322,6 @@ public class SogoJigyohiRiyohyo {
                 getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
         meisai.getTxtJigyoshaCode().setValue(row.getTxtJigyosha().substring(0, 10));
         meisai.getTxtJigyoshaName().setValue(row.getTxtJigyosha().substring(11));
-        meisai.getTxtServiceShuruiCode().setValue(row.getTxtService().substring(0, 2));
         meisai.getTxtServiceCode().setValue(row.getTxtService().substring(2, 6));
         meisai.getTxtServiceName().setValue(row.getTxtService().substring(7));
         meisai.getTxtTani().setValue(new Decimal(row.getTxtTani().toString()));
@@ -375,7 +374,7 @@ public class SogoJigyohiRiyohyo {
         Button btnDelete = new Button();
         RString jigyosha = meisai.getTxtJigyoshaCode().getValue().concat(new RString(":")).
                 concat(meisai.getTxtJigyoshaName().getValue());
-        RString service = meisai.getTxtServiceShuruiCode().getValue().concat(meisai.getTxtServiceCode().getValue()).
+        RString service = meisai.getTxtServiceCode().getValue().
                 concat(new RString(":")).concat(meisai.getTxtServiceName().getValue());
 
         dgServiceRiyohyoBeppyoList_Row rowItem;
@@ -520,7 +519,6 @@ public class SogoJigyohiRiyohyo {
                 getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
         meisai.getTxtJigyoshaCode().clearValue();
         meisai.getTxtJigyoshaName().clearValue();
-        meisai.getTxtServiceShuruiCode().clearValue();
         meisai.getTxtServiceCode().clearValue();
         meisai.getTxtServiceName().clearValue();
         meisai.getTxtTani().clearValue();
@@ -562,7 +560,6 @@ public class SogoJigyohiRiyohyo {
                 getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
         meisai.getTxtJigyoshaCode().setValue(new RString(sourceList.get(yamlIndex).get("事業者コード").toString()));
         meisai.getTxtJigyoshaName().setValue(new RString(sourceList.get(yamlIndex).get("事業者名").toString()));
-        meisai.getTxtServiceShuruiCode().setValue(new RString(sourceList.get(yamlIndex).get("サービス種類コード").toString()));
         meisai.getTxtServiceCode().setValue(new RString(sourceList.get(yamlIndex).get("サービスコード").toString()));
         meisai.getTxtServiceName().setValue(new RString(sourceList.get(yamlIndex).get("サービス名").toString()));
         meisai.getTxtTani().setValue(new Decimal(sourceList.get(yamlIndex).get("単位").toString()));
@@ -719,24 +716,44 @@ public class SogoJigyohiRiyohyo {
         return new dgServiceRiyohyoBeppyoList_Row(
                 btnSelect,
                 btnDelete,
-                new RString(txtJigyosha),
-                new RString(txtService),
-                new RString(txtTani),
-                new RString(txtWaribikigoRitsu),
-                new RString(txtWaribikigoTani),
-                new RString(txtKaisu),
-                new RString(txtServiceTani),
-                new RString(txtShuruiGendoChokaTani),
-                new RString(txtShuruiGendonaiTani),
-                new RString(txtKubunGendoChokaTani),
-                new RString(txtKubunGendonaiTani),
-                new RString(txtTanisuTanka),
-                new RString(txtHiyoSogaku),
-                new RString(txtKyufuritsu),
-                new RString(txtHokenFutangaku),
-                new RString(txtRiyoshaFutangakuHoken),
-                new RString(txtRiyoshaFutangakuZengaku)
-        );
+                RString.EMPTY,
+                RString.EMPTY,
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum(),
+                new TextBoxNum());
+//        return new dgServiceRiyohyoBeppyoList_Row(
+//                btnSelect,
+//                btnDelete,
+//                new RString(txtJigyosha),
+//                new RString(txtService),
+//                new RString(txtTani),
+//                new RString(txtWaribikigoRitsu),
+//                new RString(txtWaribikigoTani),
+//                new RString(txtKaisu),
+//                new RString(txtServiceTani),
+//                new RString(txtShuruiGendoChokaTani),
+//                new RString(txtShuruiGendonaiTani),
+//                new RString(txtKubunGendoChokaTani),
+//                new RString(txtKubunGendonaiTani),
+//                new RString(txtTanisuTanka),
+//                new RString(txtHiyoSogaku),
+//                new RString(txtKyufuritsu),
+//                new RString(txtHokenFutangaku),
+//                new RString(txtRiyoshaFutangakuHoken),
+//                new RString(txtRiyoshaFutangakuZengaku)
+//        );
 
     }
 

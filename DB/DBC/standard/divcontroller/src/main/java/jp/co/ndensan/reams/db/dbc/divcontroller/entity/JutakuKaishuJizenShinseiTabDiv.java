@@ -6,7 +6,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tabJizenShinseiDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * JutakuKaishuJizenShinseiTab のクラスファイル 
@@ -22,6 +24,8 @@ public class JutakuKaishuJizenShinseiTabDiv extends Panel {
      */
     @JsonProperty("tabJizenShinsei")
     private tabJizenShinseiDiv tabJizenShinsei;
+    @JsonProperty("btnClose")
+    private Button btnClose;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,6 +41,16 @@ public class JutakuKaishuJizenShinseiTabDiv extends Panel {
     @JsonProperty("tabJizenShinsei")
     public void setTabJizenShinsei(tabJizenShinseiDiv tabJizenShinsei) {
         this.tabJizenShinsei=tabJizenShinsei;
+    }
+
+    @JsonProperty("btnClose")
+    public Button getBtnClose() {
+        return btnClose;
+    }
+
+    @JsonProperty("btnClose")
+    public void setBtnClose(Button btnClose) {
+        this.btnClose=btnClose;
     }
 
 }

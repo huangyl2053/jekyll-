@@ -5,10 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
-import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.YoguKonyuhiShikyuKetteiTsuchishoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -24,27 +22,11 @@ public class YoguKonyuhiShikyuKetteiTsuchisho {
         //TO DO ヘッダーに配置された出力チェックボックスが選択されているかどうかの確認や設定が行えます。
         panel.setIsOpen(false);
         panel.setIsPublish(false);
-        //支払方法の初期値を設定する。
-        setPaymentDate(panel);
         //出力順序・改頁の情報を設定する。
         setOutputOrderForTsuchisho(panel);
-        
+
         response.data = panel;
         return response;
-
-    }
-
-    /**
-     * 福祉用具購入費支給申請決定 支払方法の初期値を設定する。
-     *
-     * @param panel YoguKonyuhiShikyuKetteiTsuchishoDiv
-     * @return PanelDivのResponseData
-     */
-    private void setPaymentDate(YoguKonyuhiShikyuKetteiTsuchishoDiv panel) {
-
-        panel.getPaymentDate().getTxtKozaPaymentDate().setValue(new RDate("20140701"));
-        panel.getPaymentDate().getTxtMadoguchiPaymentDateRange().setFromPlaceHolder(new RString("20140701"));
-        panel.getPaymentDate().getTxtMadoguchiPaymentDateRange().setToPlaceHolder(new RString("20140830"));
 
     }
 
@@ -63,6 +45,5 @@ public class YoguKonyuhiShikyuKetteiTsuchisho {
         panel.getOutputOrderForTsuchisho().getTxt5().setValue(new RString("決定通知番号"));
 
     }
-
 
 }

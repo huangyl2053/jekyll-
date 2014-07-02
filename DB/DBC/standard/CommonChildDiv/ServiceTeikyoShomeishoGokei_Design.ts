@@ -53,8 +53,9 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtServiceTani_core",
      "required": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 2,
      "readOnly": true,
@@ -100,8 +101,9 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtHokengaku_core",
      "required": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 2,
      "readOnly": true,
@@ -147,8 +149,9 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtFutangaku_core",
      "required": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 2,
      "readOnly": true,
@@ -194,8 +197,9 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtRyoyohi_core",
      "required": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 2,
      "readOnly": true,
@@ -241,8 +245,9 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtShinryohi_core",
      "required": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 2,
      "readOnly": true,
@@ -288,8 +293,9 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtShokujihi_core",
      "required": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 2,
      "readOnly": true,
@@ -333,6 +339,7 @@ module DBC {
    "authorityMode": 0,
    "marginLeft": "0",
    "marginRight": "0",
+   "selectControlID": "ServiceTeikyoShomeishoGokei",
    "onLoad": "",
    "title": "合計",
    "marginTop": "0",
@@ -341,10 +348,15 @@ module DBC {
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "ShokanShikyuShinseishoList"
+     "postParameterPanelNames": "ServiceTeikyoShomeishoGokei"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/ServiceTeikyoShomeishoGokei/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -355,6 +367,7 @@ module DBC {
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": true,
+   "panelDisplay": 0,
    "isGroupBox": false
   }
  ],
@@ -372,6 +385,7 @@ module DBC {
  "authorityMode": 0,
  "marginLeft": 0,
  "marginRight": 0,
+ "selectControlID": "defaultLayout",
  "relation": [],
  "businessId": "DBC",
  "controlName": "ServiceTeikyoShomeishoGokei",

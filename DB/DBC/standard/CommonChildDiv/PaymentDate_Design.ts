@@ -8,44 +8,16 @@ module DBC {
      */
     export class PaymentDate_Design extends Uz.CommonChildDiv {
     
-        public get PaymentDate_title() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
+        public get panelDisplay() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
         }
         
-        public set PaymentDate_title(value) {
+        public set panelDisplay(value) {
             if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
                  Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"] = value;
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
             } else {
-                this.layout.items[0]["title"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get PaymentDate_isGroupBox() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["isGroupBox"];
-        }
-        
-        public set PaymentDate_isGroupBox(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["isGroupBox"] = value;
-            } else {
-                this.layout.items[0]["isGroupBox"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get PaymentDate_canOpenAndClose() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"];
-        }
-        
-        public set PaymentDate_canOpenAndClose(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"] = value;
-            } else {
-                this.layout.items[0]["canOpenAndClose"] = value;
+                this.layout.items[0]["panelDisplay"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -60,9 +32,7 @@ module DBC {
          */
         public registProperty() {
             super.registProperty();
-            Uz.JSControlUtil.registProperty("PaymentDate_title");
-            Uz.JSControlUtil.registProperty("PaymentDate_isGroupBox");
-            Uz.JSControlUtil.registProperty("PaymentDate_canOpenAndClose");
+            Uz.JSControlUtil.registProperty("panelDisplay");
         }
         
         /**
@@ -72,9 +42,7 @@ module DBC {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
-            editablePropertyInfo["PaymentDate_title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
-            editablePropertyInfo["PaymentDate_isGroupBox"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["isGroupBox"];
-            editablePropertyInfo["PaymentDate_canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
+            editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
             
             return editablePropertyInfo;
         }
@@ -85,10 +53,52 @@ module DBC {
    "fieldName": "PaymentDate",
    "items": [
     {
-     "fieldName": "txtKozaPaymentDate",
-     "items": [],
-     "controlType": "TextBoxDate",
-     "width": "80",
+     "fieldName": "PayToKoza",
+     "items": [
+      {
+       "fieldName": "txtKozaPaymentDate",
+       "items": [],
+       "controlType": "TextBoxDate",
+       "width": "85",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "txtKozaPaymentDate_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "onChange": "",
+       "required": false,
+       "labelLText": "振込予定日",
+       "labelLWidth": "90",
+       "labelLAlign": 2,
+       "placeHolder": "",
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onKeyPress": "",
+       "text": "",
+       "value": "",
+       "labelRText": "",
+       "labelRWidth": "S",
+       "labelRAlign": 0,
+       "permitCharactor": "./_-",
+       "ymdKubun": 2,
+       "displayFormat": 0
+      }
+     ],
+     "controlType": "Panel",
+     "width": "G2",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -101,33 +111,229 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "required": false,
+     "selectControlID": "PayToKoza",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "口座払い",
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "isOpen": true,
+     "canOpenAndClose": false,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "PayToKoza"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "eraseBorder": false,
+     "backgroundColor": 0,
+     "widthAuto": true,
+     "panelDisplay": 2,
+     "isGroupBox": false,
      "readOnly": false,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "text": "",
-     "labelLText": "口座振込予定日",
-     "labelRText": "",
-     "labelLWidth": "105",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "permitCharactor": "./_-"
+     "height": "Auto",
+     "focusPositionID": "PaymentDate_panel_body_area"
     },
     {
-     "fieldName": "txtMadoguchiPaymentDateRange",
-     "items": [],
-     "controlType": "TextBoxDateRange",
-     "width": "80",
+     "fieldName": "PayToMadoguchi",
+     "items": [
+      {
+       "fieldName": "txtShiharaiBasho",
+       "items": [],
+       "controlType": "TextBox",
+       "width": "507",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "txtShiharaiBasho_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "onChange": "",
+       "required": false,
+       "labelLText": "支払場所",
+       "labelLWidth": "70",
+       "labelLAlign": 2,
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "placeHolder": "",
+       "textKind": 0,
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onKeyPress": "",
+       "text": "",
+       "suggest": [],
+       "value": "",
+       "labelRText": "",
+       "labelRWidth": "S",
+       "labelRAlign": 0,
+       "decorationClass": "",
+       "permitCharactor": ""
+      },
+      {
+       "fieldName": "txtShiharaiDateRange",
+       "items": [],
+       "controlType": "TextBoxDateRange",
+       "width": "85",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "txtShiharaiDateRange_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "onChange": "",
+       "labelLText": "支払期間",
+       "labelLWidth": "70",
+       "labelLAlign": 2,
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onKeyPress": "",
+       "labelRText": "",
+       "labelRWidth": "S",
+       "labelRAlign": 0,
+       "permitCharactor": "",
+       "ymdKubun": 2,
+       "displayFormat": 0,
+       "fromPlaceHolder": "",
+       "toPlaceHolder": "",
+       "minDate": "",
+       "maxDate": "",
+       "fromText": "",
+       "toText": "",
+       "fromValue": "",
+       "toValue": "",
+       "fromSelectControlID": "txtShiharaiDateRangeFrom",
+       "toSelectControlID": "txtShiharaiDateRangeTo"
+      },
+      {
+       "fieldName": "txtShiharaiKaishiTime",
+       "items": [],
+       "controlType": "TextBoxTime",
+       "width": "50",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "0",
+       "marginRight": "XS",
+       "selectControlID": "txtShiharaiKaishiTime_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "onChange": "",
+       "required": false,
+       "labelLText": "開始時間",
+       "labelLWidth": "70",
+       "labelLAlign": 2,
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "placeHolder": "",
+       "textKind": 0,
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onKeyPress": "",
+       "text": "",
+       "suggest": [],
+       "value": "",
+       "labelRText": "",
+       "labelRWidth": "S",
+       "labelRAlign": 0,
+       "decorationClass": "",
+       "permitCharactor": "",
+       "displayFormat": 1,
+       "timeKubun": 1
+      },
+      {
+       "fieldName": "txtShiharaiShuryoTime",
+       "items": [],
+       "controlType": "TextBoxTime",
+       "width": "50",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "0",
+       "marginRight": "XS",
+       "selectControlID": "txtShiharaiShuryoTime_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "onChange": "",
+       "required": false,
+       "labelLText": "終了時間",
+       "labelLWidth": "70",
+       "labelLAlign": 2,
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "placeHolder": "",
+       "textKind": 0,
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "isComboBox": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onKeyPress": "",
+       "text": "",
+       "suggest": [],
+       "value": "",
+       "labelRText": "",
+       "labelRWidth": "S",
+       "labelRAlign": 0,
+       "decorationClass": "",
+       "permitCharactor": "",
+       "displayFormat": 1,
+       "timeKubun": 1
+      }
+     ],
+     "controlType": "Panel",
+     "width": "G2",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -140,34 +346,37 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "PayToMadoguchi",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "窓口払い",
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "isOpen": true,
+     "canOpenAndClose": false,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "PayToMadoguchi"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "eraseBorder": false,
+     "backgroundColor": 0,
+     "widthAuto": true,
+     "panelDisplay": 2,
+     "isGroupBox": false,
      "readOnly": false,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "labelLText": "窓口支払期間",
-     "labelRText": "",
-     "labelLWidth": "105",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "",
-     "fromPlaceHolder": "",
-     "toPlaceHolder": "",
-     "minDate": "",
-     "maxDate": "",
-     "fromText": "",
-     "toText": "",
-     "fromValue": "",
-     "toValue": ""
+     "height": "Auto",
+     "focusPositionID": "defaultLayout"
     }
    ],
    "controlType": "Panel",
-   "width": "600",
+   "width": "825",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -178,8 +387,11 @@ module DBC {
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
+   "marginLeft": "0",
    "marginRight": "XS",
+   "selectControlID": "PaymentDate",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "支払方法",
    "marginTop": "Default",
@@ -196,13 +408,17 @@ module DBC {
    "onOpen": "",
    "onClose": "",
    "session": {},
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
    "eraseBorderTop": false,
    "eraseBorderBottom": false,
    "eraseBorderRight": false,
-   "eraseBorderLeft": false,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "isGroupBox": false
+   "eraseBorderLeft": false
   }
  ],
  "controlType": "CommonChildDiv",
@@ -217,8 +433,11 @@ module DBC {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": 0,
- "marginRight": 0,
+ "marginLeft": "0",
+ "marginRight": "0",
+ "selectControlID": "defaultLayout",
+ "helpMessageID": "",
+ "jpControlName": "",
  "relation": [],
  "businessId": "DBC",
  "controlName": "PaymentDate",
@@ -227,23 +446,15 @@ module DBC {
  "originalProperty": [
   {
    "publicChildFieldName": "PaymentDate",
-   "publicChildProperty": "title",
-   "newPropertyName": "PaymentDate_title"
-  },
-  {
-   "publicChildFieldName": "PaymentDate",
-   "publicChildProperty": "isGroupBox",
-   "newPropertyName": "PaymentDate_isGroupBox"
-  },
-  {
-   "publicChildFieldName": "PaymentDate",
-   "publicChildProperty": "canOpenAndClose",
-   "newPropertyName": "PaymentDate_canOpenAndClose"
+   "publicChildProperty": "panelDisplay",
+   "newPropertyName": "panelDisplay"
   }
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }

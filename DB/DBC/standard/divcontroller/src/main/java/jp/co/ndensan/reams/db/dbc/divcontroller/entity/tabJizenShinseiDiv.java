@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tplJizenShinseiContentsDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tplJizenShinseiPayMethodDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tplJizenShinseiResultDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
@@ -25,6 +26,8 @@ public class tabJizenShinseiDiv extends TabContainer {
     private tplJizenShinseiContentsDiv tplJizenShinseiContents;
     @JsonProperty("tplJizenShinseiResult")
     private tplJizenShinseiResultDiv tplJizenShinseiResult;
+    @JsonProperty("tplJizenShinseiPayMethod")
+    private tplJizenShinseiPayMethodDiv tplJizenShinseiPayMethod;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,6 +53,16 @@ public class tabJizenShinseiDiv extends TabContainer {
     @JsonProperty("tplJizenShinseiResult")
     public void setTplJizenShinseiResult(tplJizenShinseiResultDiv tplJizenShinseiResult) {
         this.tplJizenShinseiResult=tplJizenShinseiResult;
+    }
+
+    @JsonProperty("tplJizenShinseiPayMethod")
+    public tplJizenShinseiPayMethodDiv getTplJizenShinseiPayMethod() {
+        return tplJizenShinseiPayMethod;
+    }
+
+    @JsonProperty("tplJizenShinseiPayMethod")
+    public void setTplJizenShinseiPayMethod(tplJizenShinseiPayMethodDiv tplJizenShinseiPayMethod) {
+        this.tplJizenShinseiPayMethod=tplJizenShinseiPayMethod;
     }
 
 }

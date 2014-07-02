@@ -84,6 +84,7 @@ public class JigyoshaInputGuide {
         dgSearchResultJigyosha_Row row = div.getSearchResultJigyosha().getDgSearchResultJigyosha().getClickedItem();
         div.setJigyoshaCode(row.getJigyoshaCode());
         div.setJigyoshaMeisho(row.getJigyoshaMeisho());
+        div.setJigyoshaCodeMeisho(row.getJigyoshaCode().concat(new RString(":")).concat(row.getJigyoshaMeisho()));
 
         response.data = div;
         return response;

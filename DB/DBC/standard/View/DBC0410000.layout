@@ -21,10 +21,10 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtShoriYM_core",
      "required": false,
      "readOnly": false,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -34,19 +34,20 @@
      "text": "",
      "labelLText": "処理年月",
      "labelRText": "",
-     "labelLWidth": "60",
+     "labelLWidth": "65",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 1,
      "displayFormat": 0,
-     "value": "2009/01/31"
+     "value": "2009/01/31",
+     "textKind": 0
     },
     {
      "fieldName": "lblKokuhorenTorikomiList",
      "items": [],
      "controlType": "Label",
-     "width": "280",
+     "width": "310",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -59,6 +60,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "lblKokuhorenTorikomiList",
      "required": false,
      "isPrivateInfo": false,
      "text": "○…処理済み、×…未処理、－…処理なし",
@@ -81,18 +83,20 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnDisplay",
      "text": "表示する",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "dgKokuhorenTorikomiList",
      "items": [],
      "controlType": "DataGrid",
-     "width": "980",
+     "width": "1030",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -105,6 +109,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "dgKokuhorenTorikomiList",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -129,7 +134,7 @@
         "cellDetails": {
          "cellType": 8,
          "text": "選",
-         "onClick": "",
+         "onClick": "onSelectKokuhorenTorikomiList",
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": ""
@@ -158,7 +163,7 @@
         "dataName": "txtSofuJoho",
         "toolTip": "",
         "bgColor": 0,
-        "width": 400,
+        "width": 440,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -233,7 +238,7 @@
        }
       ]
      },
-     "height": "325",
+     "height": "628",
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
@@ -241,7 +246,7 @@
      "onNoRow": "",
      "onMultiRows": "",
      "dataSource": [],
-     "sortOrder": "",
+     "sortOrder": "txtSofuJoho",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
@@ -263,6 +268,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "lblUketoriTorikomi",
      "required": false,
      "isPrivateInfo": false,
      "text": "＊…はじめに受取情報取り込み処理を行ってください。",
@@ -270,7 +276,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "1050",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -283,6 +289,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "KokuhorenTorikomiList",
    "onLoad": "",
    "title": "国保連情報取込一覧",
    "isOpen": true,
@@ -292,7 +299,12 @@
      "postParameterPanelNames": "KokuhorenTorikomiList"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KokuhorenTorikomiList/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -305,6 +317,7 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   },
   {
@@ -327,10 +340,10 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtShoriTaishoYM_core",
      "required": false,
      "readOnly": true,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -340,13 +353,14 @@
      "text": "",
      "labelLText": "処理対象年月",
      "labelRText": "",
-     "labelLWidth": "90",
+     "labelLWidth": "100",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 1,
      "displayFormat": 0,
-     "value": ""
+     "value": "",
+     "textKind": 0
     },
     {
      "fieldName": "txtSaiShoriKubun",
@@ -365,10 +379,10 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtSaiShoriKubun_core",
      "required": false,
      "readOnly": true,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -383,14 +397,15 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "value": "",
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
+     "textKind": 0,
      "isComboBox": false,
      "suggest": []
     },
     {
-     "fieldName": "KyufuJissekiTorikomiKekkaListKakunin",
+     "fieldName": "KyufuJissekiTorikomiKakunin",
      "items": [
       {
        "fieldName": "lblKakunin",
@@ -409,6 +424,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblKakunin",
        "required": false,
        "isPrivateInfo": false,
        "text": "受取媒体の中に、同月過誤（取下）分の給付実績情報（01110000.CSV）がある場合は、合わせて取り込みます。",
@@ -416,7 +432,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "980",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -429,13 +445,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "KyufuJissekiTorikomiKakunin",
      "onLoad": "",
      "title": "処理実行前の確認事項",
      "isOpen": true,
      "canOpenAndClose": false,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "KyufuJissekiTorikomiKekkaListKakunin"
+       "postParameterPanelNames": "KyufuJissekiTorikomiKakunin"
       }
      ],
      "requestSettings": [],
@@ -451,11 +468,12 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": true
+     "panelDisplay": 1,
+     "isGroupBox": false
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "1120",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -468,6 +486,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "KyufuJissekiTorikomi",
    "onLoad": "",
    "title": "給付実績情報取込",
    "isOpen": true,
@@ -477,7 +496,16 @@
      "postParameterPanelNames": "KyufuJissekiTorikomi"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onSelectKokuhorenTorikomiList",
+     "requestUrl": "dbc/db/dbc/KyufuJissekiTorikomi/onSelectKokuhorenTorikomiList"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -490,6 +518,7 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   },
   {
@@ -512,6 +541,7 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "KyufuJissekiTorikomiKekkaListPrintSetting",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -549,21 +579,19 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
-     "title": "出力順序・改頁",
+     "selectControlID": "KyufuJissekiTorikomiKekkaListOutputOrder",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
-     "isGroupBox": true,
-     "businessId": "DBC",
-     "controlName": "OutputOrderAndNewpage",
+     "businessId": "URZ",
+     "controlName": "ChohyoShutsuryokujun",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "txtNewPageItem_displayNone": false
+     "dialogCancelEventNameForDialog": ""
     }
    ],
    "controlType": "PanelPublish",
-   "width": "1000",
+   "width": "1120",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -576,6 +604,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "KyufuJissekiTorikomiKekkaList",
    "onLoad": "",
    "title": "給付実績情報取込結果一覧表",
    "isOpen": true,
@@ -585,7 +614,16 @@
      "postParameterPanelNames": "KyufuJissekiTorikomiKekkaList"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onSelectKokuhorenTorikomiList",
+     "requestUrl": "dbc/db/dbc/KyufuJissekiTorikomiKekkaList/onSelectKokuhorenTorikomiList"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -598,11 +636,13 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false,
-   "isPublish": true
+   "isPublish": true,
+   "isEmptyControl": false
   },
   {
-   "fieldName": "KyufuJissekiTorikomiKyotsu",
+   "fieldName": "KyotsuPanel",
    "items": [
     {
      "fieldName": "btnExec",
@@ -616,17 +656,19 @@
      "nextFocusFieldName": "",
      "wrap": true,
      "dependencies": [],
-     "float": 2,
+     "float": 0,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnExec",
      "text": "実績情報を取り込む",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "btnReturn",
@@ -640,17 +682,19 @@
      "nextFocusFieldName": "",
      "wrap": false,
      "dependencies": [],
-     "float": 2,
+     "float": 0,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnReturn",
      "text": "取込一覧に戻る",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
@@ -667,13 +711,14 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "KyotsuPanel",
    "onLoad": "",
    "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "KyufuJissekiTorikomiKyotsu"
+     "postParameterPanelNames": "KyotsuPanel"
     }
    ],
    "requestSettings": [],
@@ -689,6 +734,7 @@
    "eraseBorderLeft": true,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   }
  ],
@@ -706,6 +752,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "国保連情報取込",
  "jsPathCollection": [],
@@ -722,7 +769,18 @@
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "dgKokuhorenTorikomiList[btnSelect]",
+     "event": "onClick",
+     "transition": "給付実績情報取込"
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   },
   {
    "order": "2",
@@ -731,34 +789,51 @@
    "visibleDivs": [
     {
      "visibleDiv": "KyufuJissekiTorikomiKekkaList",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "KyufuJissekiTorikomiKekkaListOutputOrder",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "KyufuJissekiTorikomi",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
-     "visibleDiv": "KyufuJissekiTorikomiKyotsu",
-     "panelState": "visible"
+     "visibleDiv": "KyotsuPanel",
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "KyufuJissekiTorikomiKekkaListPrintSetting",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
-     "visibleDiv": "KyufuJissekiTorikomiKekkaListKakunin",
-     "panelState": "visible"
+     "visibleDiv": "KyufuJissekiTorikomiKakunin",
+     "panelState": "visible",
+     "fixedDiv": ""
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "dgKokuhorenTorikomiList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "国保連情報取込一覧"
+    }
+   ]
   }
  ],
- "currentState": "All",
+ "currentState": "国保連情報取込一覧",
  "id": "DBC0410000",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -770,7 +845,7 @@
    "KyufuJissekiTorikomi"
   ],
   [
-   "KyufuJissekiTorikomiKekkaListKakunin"
+   "KyufuJissekiTorikomiKakunin"
   ],
   [
    "KyufuJissekiTorikomiKekkaList"
@@ -782,7 +857,7 @@
    "KyufuJissekiTorikomiKekkaListOutputOrder"
   ],
   [
-   "KyufuJissekiTorikomiKyotsu"
+   "KyotsuPanel"
   ]
  ],
  "panelMargin": 1,

@@ -1,0 +1,21 @@
+## YAML Template.
+---
+- teikyoYMShowTwo: 201407
+  setaiShuyakuNo: 1234567890
+  ## 氏名 LEFT 
+  hihoNoL: 123456789012345	
+  hhoNameR: 介護 南魚
+  hihoNoR: 123456789012345	
+  hihoNameL: 介護 南魚
+- bkoL: 備考
+  uketsukeDateL: 20140601
+  ketteiDateL: 20140701
+  shiharaiAmountL: 37200
+  fushikyuRiyuL: 支給対象者となる。 
+  shikyuAmountL: 37200
+- bkoR: 備考
+  uketsukeDateR: 20140601
+  ketteiDateR: 20140701
+  shiharaiAmountR: 37200
+  fushikyuRiyuR: 支給対象者となる。
+  shikyuAmountR: 37200 

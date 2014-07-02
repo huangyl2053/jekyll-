@@ -45,16 +45,35 @@ var DBC;
         });
 
 
+        Object.defineProperty(ServiceRiyohyoRirekiList_Design.prototype, "RirekiListWidth", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"] = value;
+                } else {
+                    this.layout.items[0].items[0]["width"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         ServiceRiyohyoRirekiList_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("RirekiListGridSetting");
             Uz.JSControlUtil.registProperty("RirekiListHeight");
+            Uz.JSControlUtil.registProperty("RirekiListWidth");
         };
 
         ServiceRiyohyoRirekiList_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
             editablePropertyInfo["RirekiListGridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
             editablePropertyInfo["RirekiListHeight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["height"];
+            editablePropertyInfo["RirekiListWidth"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["width"];
 
             return editablePropertyInfo;
         };
@@ -68,7 +87,7 @@ var DBC;
                             "fieldName": "dgServiceRiyohyoRirekiList",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "1200",
+                            "width": "1090",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -81,13 +100,23 @@ var DBC;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "dgServiceRiyohyoRirekiList",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "height": "175",
                             "gridSetting": {
                                 "rowHeight": 25,
                                 "isMultiSelectable": false,
+                                "isShowHeader": true,
                                 "isShowFooter": true,
                                 "isShowFilter": false,
                                 "isShowFilterButton": false,
                                 "isShowRowState": false,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
                                 "header": {
                                     "combineColumns": [],
                                     "frozenColumn": "",
@@ -198,7 +227,7 @@ var DBC;
                                         "dataName": "txtIraiJigyosha",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 660,
+                                        "width": 550,
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": null,
@@ -209,22 +238,24 @@ var DBC;
                                     }
                                 ]
                             },
-                            "height": "175",
                             "onSort": "",
                             "onSelect": "",
                             "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
                             "dataSource": [],
-                            "sortOrder": "",
+                            "sortOrder": "txtIraiJigyosha",
                             "isAscending": true,
                             "filterList": [],
                             "activeRowId": -1
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "M",
+                    "width": "G2",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -237,6 +268,9 @@ var DBC;
                     "authorityMode": 0,
                     "marginLeft": "0",
                     "marginRight": "0",
+                    "selectControlID": "ServiceRiyohyoRirekiList",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onLoad": "",
                     "title": "",
                     "marginTop": "0",
@@ -259,7 +293,10 @@ var DBC;
                     "eraseBorderLeft": true,
                     "backgroundColor": 0,
                     "widthAuto": true,
-                    "isGroupBox": false
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -274,8 +311,11 @@ var DBC;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBC",
             "controlName": "ServiceRiyohyoRirekiList",
@@ -291,6 +331,11 @@ var DBC;
                     "publicChildFieldName": "dgServiceRiyohyoRirekiList",
                     "publicChildProperty": "height",
                     "newPropertyName": "RirekiListHeight"
+                },
+                {
+                    "publicChildFieldName": "dgServiceRiyohyoRirekiList",
+                    "publicChildProperty": "width",
+                    "newPropertyName": "RirekiListWidth"
                 }
             ],
             "dataPassingForDialog": [],

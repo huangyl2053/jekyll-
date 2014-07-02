@@ -1,16 +1,17 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.PaymentDateDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PrintContentsSettingDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 
 /**
- * JutakuKaishuhiShikyuKetteiTsuchishoPanel のクラスファイル 
- * 
+ * JutakuKaishuhiShikyuKetteiTsuchishoPanel のクラスファイル
+ *
  * @author 自動生成
  */
 public class JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv extends PanelPublish {
@@ -20,12 +21,13 @@ public class JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("JutakuKaishuhiShikyuKetteiTsuchishoHakkoDate")
     private PrintContentsSettingDiv JutakuKaishuhiShikyuKetteiTsuchishoHakkoDate;
     @JsonProperty("JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod")
     private PaymentDateDiv JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod;
     @JsonProperty("JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder")
-    private OutputOrderAndNewpageDiv JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder;
+    private KaigoChohyoShutsuryokujunDiv JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,7 +42,7 @@ public class JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv extends PanelPublish {
 
     @JsonProperty("JutakuKaishuhiShikyuKetteiTsuchishoHakkoDate")
     public void setJutakuKaishuhiShikyuKetteiTsuchishoHakkoDate(PrintContentsSettingDiv JutakuKaishuhiShikyuKetteiTsuchishoHakkoDate) {
-        this.JutakuKaishuhiShikyuKetteiTsuchishoHakkoDate=JutakuKaishuhiShikyuKetteiTsuchishoHakkoDate;
+        this.JutakuKaishuhiShikyuKetteiTsuchishoHakkoDate = JutakuKaishuhiShikyuKetteiTsuchishoHakkoDate;
     }
 
     @JsonProperty("JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod")
@@ -50,17 +52,17 @@ public class JutakuKaishuhiShikyuKetteiTsuchishoPanelDiv extends PanelPublish {
 
     @JsonProperty("JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod")
     public void setJutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod(PaymentDateDiv JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod) {
-        this.JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod=JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod;
+        this.JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod = JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod;
     }
 
     @JsonProperty("JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder")
-    public OutputOrderAndNewpageDiv getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder() {
+    public KaigoChohyoShutsuryokujunDiv getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder() {
         return JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder;
     }
 
     @JsonProperty("JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder")
-    public void setJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder(OutputOrderAndNewpageDiv JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder) {
-        this.JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder=JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder;
+    public void setJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder(KaigoChohyoShutsuryokujunDiv JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder) {
+        this.JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder = JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder;
     }
 
 }

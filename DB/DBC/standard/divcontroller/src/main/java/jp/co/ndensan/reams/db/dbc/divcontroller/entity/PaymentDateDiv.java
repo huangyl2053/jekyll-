@@ -5,9 +5,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.PayToKozaDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.PayToMadoguchiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * PaymentDate のクラスファイル 
@@ -21,10 +21,10 @@ public class PaymentDateDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtKozaPaymentDate")
-    private TextBoxDate txtKozaPaymentDate;
-    @JsonProperty("txtMadoguchiPaymentDateRange")
-    private TextBoxDateRange txtMadoguchiPaymentDateRange;
+    @JsonProperty("PayToKoza")
+    private PayToKozaDiv PayToKoza;
+    @JsonProperty("PayToMadoguchi")
+    private PayToMadoguchiDiv PayToMadoguchi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +32,24 @@ public class PaymentDateDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtKozaPaymentDate")
-    public TextBoxDate getTxtKozaPaymentDate() {
-        return txtKozaPaymentDate;
+    @JsonProperty("PayToKoza")
+    public PayToKozaDiv getPayToKoza() {
+        return PayToKoza;
     }
 
-    @JsonProperty("txtKozaPaymentDate")
-    public void setTxtKozaPaymentDate(TextBoxDate txtKozaPaymentDate) {
-        this.txtKozaPaymentDate=txtKozaPaymentDate;
+    @JsonProperty("PayToKoza")
+    public void setPayToKoza(PayToKozaDiv PayToKoza) {
+        this.PayToKoza=PayToKoza;
     }
 
-    @JsonProperty("txtMadoguchiPaymentDateRange")
-    public TextBoxDateRange getTxtMadoguchiPaymentDateRange() {
-        return txtMadoguchiPaymentDateRange;
+    @JsonProperty("PayToMadoguchi")
+    public PayToMadoguchiDiv getPayToMadoguchi() {
+        return PayToMadoguchi;
     }
 
-    @JsonProperty("txtMadoguchiPaymentDateRange")
-    public void setTxtMadoguchiPaymentDateRange(TextBoxDateRange txtMadoguchiPaymentDateRange) {
-        this.txtMadoguchiPaymentDateRange=txtMadoguchiPaymentDateRange;
+    @JsonProperty("PayToMadoguchi")
+    public void setPayToMadoguchi(PayToMadoguchiDiv PayToMadoguchi) {
+        this.PayToMadoguchi=PayToMadoguchi;
     }
 
 }

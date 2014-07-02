@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplRofukuNenki
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplSeikatsuHogoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplShikakuJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplShisetsuNyutaishoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.dgIryoHokenRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core._ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.core.mybatis._DbSession;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -107,6 +109,7 @@ public class ShikakuShutokuJoho {
         List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
         for (HashMap hihokenshaDaichoData : hihokenshaDaichoDataList) {
             if (hihokenshaDaichoData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
+
                 shikakuJohoDiv.setDateOfBirth(new RString(hihokenshaDaichoData.get("生年月日").toString()));
                 dataSource = createShikakuShutokuRirekiList((List<HashMap>) hihokenshaDaichoData.get("被保台帳"));
             }
@@ -199,6 +202,7 @@ public class ShikakuShutokuJoho {
         if (dataSource.isEmpty()) {
             shikakuJohoDiv.setIryoHokenInputMode(IRYO_HOKEN_ADD);
             setIryoHokenDisabled(tplIryoHoken, false);
+
             tplIryoHoken.getBtnAddIryoHoken().setDisabled(true);
         } else {
             setIryoHokenDisabled(tplIryoHoken, true);
@@ -662,6 +666,7 @@ public class ShikakuShutokuJoho {
         }
 
         setIryoHokenDisabled(tplIryoHoken, true);
+
         tplIryoHoken.getBtnAddIryoHoken().setDisabled(false);
         clearIryoHokenInput(tplIryoHoken);
         response.data = shikakuJohoDiv;

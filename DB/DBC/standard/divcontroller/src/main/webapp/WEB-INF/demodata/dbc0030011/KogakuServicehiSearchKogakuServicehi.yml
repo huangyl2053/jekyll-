@@ -1,0 +1,16 @@
+## YAML Template. 高額介護サービス費検索条件
+## hihokenshaShitei 被保険者を指定して検索する           radSearchKubun
+## YMShitei         年月を指定して検索する               radSearchKubun
+---
+-  radSearchKubun: hihokenshaShitei
+   hihoNo: "0000029068"
+   hihoName: 介護 南魚
+   teikyoYMRangefrom: 20140601
+   teikyoYMRangeto: 20140701
+   shinseiYMRangefrom: 20140701
+   shinseiYMRangeto: 20140801
+   ketteiYMRangefrom: 20140801
+   ketteiYMRangeto: 20140901
+-  teikyoYM: 201407
+   shinseiYM: 201406
+   ketteiYM: 201408

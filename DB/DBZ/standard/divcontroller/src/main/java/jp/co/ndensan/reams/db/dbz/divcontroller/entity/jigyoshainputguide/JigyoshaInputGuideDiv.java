@@ -37,6 +37,8 @@ public class JigyoshaInputGuideDiv extends Panel {
     private RString jigyoshaCode;
     @JsonProperty("jigyoshaMeisho")
     private RString jigyoshaMeisho;
+    @JsonProperty("jigyoshaCodeMeisho")
+    private RString jigyoshaCodeMeisho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -112,6 +114,16 @@ public class JigyoshaInputGuideDiv extends Panel {
     @JsonProperty("jigyoshaMeisho")
     public void setJigyoshaMeisho(RString jigyoshaMeisho) {
         this.jigyoshaMeisho=jigyoshaMeisho;
+    }
+
+    @JsonProperty("jigyoshaCodeMeisho")
+    public RString getJigyoshaCodeMeisho() {
+        return jigyoshaCodeMeisho;
+    }
+
+    @JsonProperty("jigyoshaCodeMeisho")
+    public void setJigyoshaCodeMeisho(RString jigyoshaCodeMeisho) {
+        this.jigyoshaCodeMeisho=jigyoshaCodeMeisho;
     }
 
 }

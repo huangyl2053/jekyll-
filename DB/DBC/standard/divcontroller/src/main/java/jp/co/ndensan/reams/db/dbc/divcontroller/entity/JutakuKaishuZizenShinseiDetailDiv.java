@@ -5,8 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailInputDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufugakuSummaryDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailInput.JutakuKaishuShinseiDetailInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -21,10 +20,8 @@ public class JutakuKaishuZizenShinseiDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("JutakuKaishuJizenShinseiDetailInput")
-    private JutakuKaishuShinseiDetailInputDiv JutakuKaishuJizenShinseiDetailInput;
-    @JsonProperty("JutakuKaishuJizenShinseiKyufugakuSummary")
-    private KyufugakuSummaryDiv JutakuKaishuJizenShinseiKyufugakuSummary;
+    @JsonProperty("JutakuJizenShinseiDetailInput")
+    private JutakuKaishuShinseiDetailInputDiv JutakuJizenShinseiDetailInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +29,14 @@ public class JutakuKaishuZizenShinseiDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("JutakuKaishuJizenShinseiDetailInput")
-    public JutakuKaishuShinseiDetailInputDiv getJutakuKaishuJizenShinseiDetailInput() {
-        return JutakuKaishuJizenShinseiDetailInput;
+    @JsonProperty("JutakuJizenShinseiDetailInput")
+    public JutakuKaishuShinseiDetailInputDiv getJutakuJizenShinseiDetailInput() {
+        return JutakuJizenShinseiDetailInput;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiDetailInput")
-    public void setJutakuKaishuJizenShinseiDetailInput(JutakuKaishuShinseiDetailInputDiv JutakuKaishuJizenShinseiDetailInput) {
-        this.JutakuKaishuJizenShinseiDetailInput=JutakuKaishuJizenShinseiDetailInput;
-    }
-
-    @JsonProperty("JutakuKaishuJizenShinseiKyufugakuSummary")
-    public KyufugakuSummaryDiv getJutakuKaishuJizenShinseiKyufugakuSummary() {
-        return JutakuKaishuJizenShinseiKyufugakuSummary;
-    }
-
-    @JsonProperty("JutakuKaishuJizenShinseiKyufugakuSummary")
-    public void setJutakuKaishuJizenShinseiKyufugakuSummary(KyufugakuSummaryDiv JutakuKaishuJizenShinseiKyufugakuSummary) {
-        this.JutakuKaishuJizenShinseiKyufugakuSummary=JutakuKaishuJizenShinseiKyufugakuSummary;
+    @JsonProperty("JutakuJizenShinseiDetailInput")
+    public void setJutakuJizenShinseiDetailInput(JutakuKaishuShinseiDetailInputDiv JutakuJizenShinseiDetailInput) {
+        this.JutakuJizenShinseiDetailInput=JutakuJizenShinseiDetailInput;
     }
 
 }

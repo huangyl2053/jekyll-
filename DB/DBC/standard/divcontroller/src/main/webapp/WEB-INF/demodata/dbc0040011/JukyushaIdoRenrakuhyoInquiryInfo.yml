@@ -1,0 +1,45 @@
+## YAML Template. 
+---
+## set基本情報 1
+- hihoBirthday: 19300401
+  shikakuShutokuDate: 20140701
+  shokisaiHokenshaNo: 123456
+  koikiHokenshaNo: 123456
+## set要介護認定
+  shinseiDate: 20140701
+  ninteiDateRangefrom: 20140801
+  ninteiDateRangeto: 20141030
+## set支給限度基準額
+  kyuHomonTsushoShikyuGendoKijungaku: 1000
+  kyuHomonTsushoKanriTekiyoDateRangefrom: 20140801
+  kyuHomonTsushoKanriTekiyoDateRangeto: 20141030
+  kyuTankiNyushoShikyuGendoKijungaku: 1000
+  kyuTankiNyushoKanriTekiyoDateRangefrom: 20140801
+  kyuTankiNyushoKanriTekiyoDateRangeto: 20141030
+## set居宅サービス計画
+  shienJigyoshaNo: 1234567892
+  shienJigyoshaName: みなみ園
+  kyotakuServicePlanTekiyoDateRangefrom: 20140801
+  kyotakuServicePlanTekiyoDateRangeto: 20141030
+## set後期高齢国保
+  kokiKoreiHokenshaNo: 1234567890
+  kokiKoreiHihokenshaNo: 1234567890
+  kokuhoHokenshaNo: 1234567890
+  kokuhoHihokenshashoNo: 1234567890
+  kokuhoKojinNo: 1234567890
+## setRadio
+  radRenrakuhyoIdoKubun: new
+  radHihoSex: man
+  radShinseiType: new
+  radHenkoShinseichuKubun: shinseiNashi
+  radMinashiYokaigoKubun: normal
+  radGemmenShinseichuKubun: shinseiNashi
+  radPlanSakuseiKubun: kyotakuShienJigyosha
+  radShokiboKyotakuServiceRiyoUmu: nashi
+  radRiyoshaFutanKubun: standard 
+  radHyojunFutanKubun: riyosha
+  radNinteiShinseichuKubun: shinseiNashi
+  radServiceKubun: standard
+  radTokureiKeigenSochiTaisho: nashi
+  radKohiFutanJogengakuGengakuUmu: nashi
+  radNijiyoboJigyoKubun: higaito

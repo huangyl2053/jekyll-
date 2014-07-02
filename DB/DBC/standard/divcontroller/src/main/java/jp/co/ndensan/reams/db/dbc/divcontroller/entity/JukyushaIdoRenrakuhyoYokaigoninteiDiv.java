@@ -21,18 +21,18 @@ public class JukyushaIdoRenrakuhyoYokaigoninteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("radShinseiType")
-    private RadioButton radShinseiType;
     @JsonProperty("txtShinseiDate")
     private TextBoxFlexibleDate txtShinseiDate;
-    @JsonProperty("radHenkoShinseichuKubun")
-    private RadioButton radHenkoShinseichuKubun;
-    @JsonProperty("radMinashiYokaigoKubun")
-    private RadioButton radMinashiYokaigoKubun;
+    @JsonProperty("radShinseiType")
+    private RadioButton radShinseiType;
     @JsonProperty("ddlYokaigoJotaiKubun")
     private DropDownList ddlYokaigoJotaiKubun;
+    @JsonProperty("radHenkoShinseichuKubun")
+    private RadioButton radHenkoShinseichuKubun;
     @JsonProperty("txtNinteiDateRange")
     private TextBoxDateRange txtNinteiDateRange;
+    @JsonProperty("radMinashiYokaigoKubun")
+    private RadioButton radMinashiYokaigoKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,16 +40,6 @@ public class JukyushaIdoRenrakuhyoYokaigoninteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("radShinseiType")
-    public RadioButton getRadShinseiType() {
-        return radShinseiType;
-    }
-
-    @JsonProperty("radShinseiType")
-    public void setRadShinseiType(RadioButton radShinseiType) {
-        this.radShinseiType=radShinseiType;
-    }
-
     @JsonProperty("txtShinseiDate")
     public TextBoxFlexibleDate getTxtShinseiDate() {
         return txtShinseiDate;
@@ -60,24 +50,14 @@ public class JukyushaIdoRenrakuhyoYokaigoninteiDiv extends Panel {
         this.txtShinseiDate=txtShinseiDate;
     }
 
-    @JsonProperty("radHenkoShinseichuKubun")
-    public RadioButton getRadHenkoShinseichuKubun() {
-        return radHenkoShinseichuKubun;
+    @JsonProperty("radShinseiType")
+    public RadioButton getRadShinseiType() {
+        return radShinseiType;
     }
 
-    @JsonProperty("radHenkoShinseichuKubun")
-    public void setRadHenkoShinseichuKubun(RadioButton radHenkoShinseichuKubun) {
-        this.radHenkoShinseichuKubun=radHenkoShinseichuKubun;
-    }
-
-    @JsonProperty("radMinashiYokaigoKubun")
-    public RadioButton getRadMinashiYokaigoKubun() {
-        return radMinashiYokaigoKubun;
-    }
-
-    @JsonProperty("radMinashiYokaigoKubun")
-    public void setRadMinashiYokaigoKubun(RadioButton radMinashiYokaigoKubun) {
-        this.radMinashiYokaigoKubun=radMinashiYokaigoKubun;
+    @JsonProperty("radShinseiType")
+    public void setRadShinseiType(RadioButton radShinseiType) {
+        this.radShinseiType=radShinseiType;
     }
 
     @JsonProperty("ddlYokaigoJotaiKubun")
@@ -90,6 +70,16 @@ public class JukyushaIdoRenrakuhyoYokaigoninteiDiv extends Panel {
         this.ddlYokaigoJotaiKubun=ddlYokaigoJotaiKubun;
     }
 
+    @JsonProperty("radHenkoShinseichuKubun")
+    public RadioButton getRadHenkoShinseichuKubun() {
+        return radHenkoShinseichuKubun;
+    }
+
+    @JsonProperty("radHenkoShinseichuKubun")
+    public void setRadHenkoShinseichuKubun(RadioButton radHenkoShinseichuKubun) {
+        this.radHenkoShinseichuKubun=radHenkoShinseichuKubun;
+    }
+
     @JsonProperty("txtNinteiDateRange")
     public TextBoxDateRange getTxtNinteiDateRange() {
         return txtNinteiDateRange;
@@ -98,6 +88,16 @@ public class JukyushaIdoRenrakuhyoYokaigoninteiDiv extends Panel {
     @JsonProperty("txtNinteiDateRange")
     public void setTxtNinteiDateRange(TextBoxDateRange txtNinteiDateRange) {
         this.txtNinteiDateRange=txtNinteiDateRange;
+    }
+
+    @JsonProperty("radMinashiYokaigoKubun")
+    public RadioButton getRadMinashiYokaigoKubun() {
+        return radMinashiYokaigoKubun;
+    }
+
+    @JsonProperty("radMinashiYokaigoKubun")
+    public void setRadMinashiYokaigoKubun(RadioButton radMinashiYokaigoKubun) {
+        this.radMinashiYokaigoKubun=radMinashiYokaigoKubun;
     }
 
 }

@@ -7,16 +7,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoInfoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgKyufuKanrihyoList_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgMeisaiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0060000.KyufuKanrihyoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0060000.KyufuKanrihyoListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0060000.dgKyufuKanrihyoList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoInfo.KyufuKanrihyoInfoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoInfo.dgMeisaiList_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付管理票情報照会の給付管理票情報Panelのコントロールクラスです。
@@ -24,6 +25,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @author N8187 久保田 英男
  */
 public class KyufuKanrihyo {
+
+    private List<HashMap> getYaml() {
+        return YamlLoader.DBC.loadAsList(new RString("dbc0060000/KyufuKanrihyo.yml"));
+    }
 
     /**
      * データグリッドの選択時の処理。
@@ -51,9 +56,11 @@ public class KyufuKanrihyo {
     }
 
     private 対象期間区切 kugiriHantei(dgKyufuKanrihyoList_Row row) {
-        if (row.getTxtTaishoYMInvisible().getValue().getYearMonth().isBefore(new RDate("20020101").getYearMonth())) {
+        if (new FlexibleDate(row.getTxtTaishoYM().replace(".", "").concat("01")).getYearMonth().
+                isBefore(new FlexibleDate("20020101").getYearMonth())) {
             return 対象期間区切.H1204_H1312;
-        } else if (row.getTxtTaishoYMInvisible().getValue().getYearMonth().isBefore(new RDate("20060401").getYearMonth())) {
+        } else if (new FlexibleDate(row.getTxtTaishoYM().replace(".", "").concat("01")).getYearMonth().
+                isBefore(new FlexibleDate("20060401").getYearMonth())) {
             return 対象期間区切.H1401_H1803;
         } else {
             return 対象期間区切.H1804_;
@@ -61,60 +68,60 @@ public class KyufuKanrihyo {
     }
 
     private void setData(KyufuKanrihyoDiv panel, dgKyufuKanrihyoList_Row row, 対象期間区切 kugiri) {
-        panel.getTxtTaishoYM().setValue(row.getTxtTaishoYMInvisible().getValue());
-        panel.getTxtKaigoJotai().setValue(new RString("要介護１"));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
+        panel.getTxtTaishoYM().setValue(new RDate(new FlexibleDate(row.getTxtTaishoYM().replace(".", "").concat("01")).toString()));
+        panel.getTxtKaigoJotai().setValue(cg.getAsRString("要介護状態"));
         panel.getTxtHokenshaNo().setValue(row.getTxtHihoNo());
-        panel.getTxtShinsaYM().setValue(row.getTxtTaishoYMInvisible().getValue());
+        panel.getTxtShinsaYM().setValue(new RDate(new FlexibleDate(row.getTxtTaishoYM().replace(".", "").concat("01")).toString()));
         if (kugiri.equals(対象期間区切.H1204_H1312)) {
             KyufuKanrihyoInfoDiv homon = panel.getTabKyufuKanrihyo().getKyufuKanrihyoHomonTsusho().getKyufuKanrihyoInfoHomonTsusho();
             KyufuKanrihyoInfoDiv tanki = panel.getTabKyufuKanrihyo().getKyufuKanrihyoTankiNyusho().getKyufuKanrihyoInfoTankiNyusho();
-            bindInfoDiv(homon, row, 0);
+            bindInfoDiv(homon, row, 1);
             bindInfoGrid(homon);
-            bindInfoDiv(tanki, row, 1);
+            bindInfoDiv(tanki, row, 2);
             bindInfoGrid(tanki);
         } else if (kugiri.equals(対象期間区切.H1401_H1803)) {
             KyufuKanrihyoInfoDiv info = panel.getKyufuKanrihyoInfoKyotaku();
-            bindInfoDiv(info, row, 2);
+            bindInfoDiv(info, row, 3);
             bindInfoGrid(info);
         } else {
             KyufuKanrihyoInfoDiv info = panel.getKyufuKanrihyoInfoKyotaku();
-            bindInfoDiv(info, row, 3);
+            bindInfoDiv(info, row, 4);
             bindInfoGrid(info);
         }
     }
 
     private void bindInfoDiv(KyufuKanrihyoInfoDiv div, dgKyufuKanrihyoList_Row row, int index) {
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("KyufuKanrihyoSummary.yml"));
-        HashMap source = sourceList.get(index);
+        ControlGenerator cg = new ControlGenerator(getYaml().get(index));
         div.getTxtSakuseiKubun().setValue(row.getTxtSakuseiKubun());
-        div.getTxtSakuseiYMD().setValue(row.getTxtTaishoYMInvisible().getValue());
-        div.getTxtZengetsuNissu().setValue(new Decimal(source.get("前月までの給付計画日数").toString()));
-        div.getTxtKeikakuSakuseiKubun().setValue(new RString(source.get("計画作成区分").toString()));
-        div.getTxtShienJigyoshaNo().setValue(new RString(source.get("支援事業者番号").toString()));
-        div.getTxtShienJigyoshaName().setValue(new RString(source.get("支援事業者名").toString()));
-        div.getTxtShikyuGendogaku().setValue(new Decimal(source.get("支給限度額").toString()));
-        div.getTxtGendogakuTekiyoKikan().setFromValue(new RDate(source.get("限度額適用期間開始").toString()));
-        div.getTxtGendogakuTekiyoKikan().setToValue(new RDate(source.get("限度額適用期間終了").toString()));
-        div.getTxtShiteiServiceShokei().setValue(new Decimal(source.get("指定サービス分小計").toString()));
-        div.getTxtKijunServiceShokei().setValue(new Decimal(source.get("基準該当等サービス分小計").toString()));
-        div.getTxtGokeiTanisu().setValue(new Decimal(source.get("給付計画合計").toString()));
-        div.getTxtTantoSenmonNo().setValue(new RString(source.get("担当介護支援専門員番号").toString()));
-        div.getTxtItakuJigyoshaNo().setValue(new RString(source.get("委託先事業所番号").toString()));
-        div.getTxtItakuJigyoshaName().setValue(new RString(source.get("委託先事業所名").toString()));
-        div.getTxtItakuSenmonNo().setValue(new RString(source.get("委託先担当介護支援専門員番号").toString()));
+        div.getTxtSakuseiYMD().setValue(new RDate(new FlexibleDate(row.getTxtTaishoYM().replace(".", "").concat("01")).toString()));
+        div.getTxtZengetsuNissu().setValue(cg.getAsDecimal("前月までの給付計画日数"));
+        div.getTxtKeikakuSakuseiKubun().setValue(cg.getAsRString("計画作成区分"));
+        div.getTxtShienJigyoshaNo().setValue(cg.getAsRString("支援事業者番号"));
+        div.getTxtShienJigyoshaName().setValue(cg.getAsRString("支援事業者名"));
+        div.getTxtShikyuGendogaku().setValue(cg.getAsDecimal("支給限度額"));
+        div.getTxtGendogakuTekiyoKikan().setFromValue(cg.getAsRDate("限度額適用期間開始"));
+        div.getTxtGendogakuTekiyoKikan().setToValue(cg.getAsRDate("限度額適用期間終了"));
+        div.getTxtShiteiServiceShokei().setValue(cg.getAsDecimal("指定サービス分小計"));
+        div.getTxtKijunServiceShokei().setValue(cg.getAsDecimal("基準該当等サービス分小計"));
+        div.getTxtGokeiTanisu().setValue(cg.getAsDecimal("給付計画合計"));
+        div.getTxtTantoSenmonNo().setValue(cg.getAsRString("担当介護支援専門員番号"));
+        div.getTxtItakuJigyoshaNo().setValue(cg.getAsRString("委託先事業所番号"));
+        div.getTxtItakuJigyoshaName().setValue(cg.getAsRString("委託先事業所名"));
+        div.getTxtItakuSenmonNo().setValue(cg.getAsRString("委託先担当介護支援専門員番号"));
     }
 
     private void bindInfoGrid(KyufuKanrihyoInfoDiv div) {
         List<dgMeisaiList_Row> dgRowList = div.getDgMeisaiList().getDataSource();
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("KyufuKanrihyoDataGrid.yml"));
         dgRowList.clear();
-        for (HashMap source : sourceList) {
+        for (int i = 5; i < 8; i++) {
+            ControlGenerator cg = new ControlGenerator(getYaml().get(i));
             dgRowList.add(new dgMeisaiList_Row(
-                    new RString(String.format("%1$02d", source.get("明細"))),
-                    new RString(source.get("サービス種類").toString()),
-                    new RString(source.get("計画単位数").toString()),
-                    new RString(source.get("サービス事業者").toString()),
-                    new RString(source.get("事業者区分").toString())));
+                    cg.getAsRString("明細"),
+                    cg.getAsRString("サービス種類"),
+                    cg.getAsRString("計画単位数"),
+                    cg.getAsRString("サービス事業者"),
+                    cg.getAsRString("事業者区分")));
         }
         div.getDgMeisaiList().setDataSource(dgRowList);
     }

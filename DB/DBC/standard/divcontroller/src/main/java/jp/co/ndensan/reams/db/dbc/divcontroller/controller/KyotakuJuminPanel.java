@@ -5,7 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
+import java.util.HashMap;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuJuminDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuNushiJuminJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -28,22 +33,65 @@ public class KyotakuJuminPanel {
         ResponseData<KyotakuJuminDiv> response = new ResponseData<>();
 
         //初期値を設定したいものに値を入れる。値をセットしなければ空欄
-        panel.getKyotakuNushiJuminJoho().getTxtNushiShikibetsuCode().setValue(new RString("000000000000001"));
-        panel.getKyotakuNushiJuminJoho().getTxtNushiName().setValue(new RString("電算 太郎"));
-        panel.getKyotakuNushiJuminJoho().getTxtNushiSetaiCode().setValue(new RString("000000000000001"));
-        panel.getKyotakuNushiJuminJoho().getTxtNushiGyoseiku().setValue(new RString("中町"));
-        panel.getKyotakuNushiJuminJoho().getTxtNushiYubinNo().setValue(new YubinNo(new RString("123-4567")));
-        panel.getKyotakuNushiJuminJoho().getTxtNushiJusho().setValue(new RString("長野県長野市鶴賀七瀬中町276-6"));
-        panel.getKyotakuKaigoJuminJoho().getTxtHihokenshaNo().setValue(new RString("1234567890"));
-        panel.getKyotakuKaigoJuminJoho().getTxtTsuchishoNo().setValue(new RString("1234567890123456"));
-        panel.getKyotakuKaigoJuminJoho().getTxtChoshuHoho().setValue(new RString("特徴"));
-        panel.getKyotakuKaigoJuminJoho().getTxtShikakuShutokuYMD().setValue(new FlexibleDate("20100101"));
-        panel.getKyotakuKaigoJuminJoho().getTxtKyuHihokenshaNo().setValue(new RString("1111111111"));
-        panel.getKyotakuKaigoJuminJoho().getTxtKyuShichosonCode().setValue(new RString("203416"));
-        panel.getKyotakuKaigoJuminJoho().getTxtKyuShichosonName().setValue(new RString("鎌倉町"));
+        List<HashMap> ymlData = ymlData("dbc0020000/KyotakuServicePlanIchiranCommonChild.yml");
 
+        HashMap hashMap = ymlData.get(0);
+        ControlGenerator ymlDt = new ControlGenerator(hashMap);
+
+        //高額介護サービス費情報  (被保険者番号～所得段階）
+        //氏名漢字～個人番号
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtAtenaMeisho().setValue(
+                ymlDt.getAsRString("atenaMeisho"));
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtAtenaKanaMeisho().setValue(
+                ymlDt.getAsRString("atenaKanMeisho"));
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtSeinengappiYMD().setValue(
+                ymlDt.getAsRDate("seinengappiYmd"));
+
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtNenrei().setValue(
+                ymlDt.getAsRString("nenrei"));
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtSeibetsu().setValue(
+                ymlDt.getAsRString("seibetsu"));
+
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtJusho().setValue(
+                ymlDt.getAsRString("jusho"));
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtGyoseiku().setValue(
+                ymlDt.getAsRString("gyoseiku"));
+
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtShikibetsuCode().setValue(
+                ymlDt.getAsRString("shikibetsuCode"));
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtYubinNo().setValue(
+                ymlDt.getAsYubinNo("yubinNoe"));
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtJuminJotai().setValue(
+                ymlDt.getAsRString("juminJotai"));
+
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtSetaiCode().setValue(
+                ymlDt.getAsRString("setaiCode"));
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtKojinHojinCode().setValue(
+                ymlDt.getAsRString("kojinHojinCode"));
+
+        //資格取得 ～　認定期間
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtHihokenshaNo().setValue(
+                ymlDt.getAsRString("hihokenshaNo"));
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtShutokuYmd().setValue(
+                ymlDt.getAsRDate("shotokuYmd"));
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtShutokuJiyu().setValue(
+                ymlDt.getAsRString("shotokuJiyu"));
+
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtYokaigoJotaiKubun().setValue(
+                ymlDt.getAsRString("yokaigojotaiKubun"));
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtJutokuKubun().setValue(
+                ymlDt.getAsRString("jutokuKubun"));
+
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtNinteiKaishiYmd().setValue(
+                ymlDt.getAsRDate("niteikikanfrom"));
+        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtNinteiShuryoYmd().setValue(
+                ymlDt.getAsRDate("niteikikanto"));
         response.data = panel;
         return response;
+    }
+
+    private List<HashMap> ymlData(String ymlName) {
+        return YamlLoader.DBC.loadAsList(new RString(ymlName));
     }
 
 }

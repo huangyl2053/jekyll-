@@ -3,15 +3,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri May 16 15:51:08 JST 2014 
+ * Tue Jul 01 18:08:05 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
@@ -23,9 +22,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 public class dgSeikyuDetail_Row extends DataRow {
 
-    private Button btnModify;
-    private Button btnDelete;
-    private TextBox txtRowState;
     private TextBoxDate txtBuyYMD;
     private TextBox txtShumoku;
     private TextBox txtShohinName;
@@ -34,38 +30,25 @@ public class dgSeikyuDetail_Row extends DataRow {
 
     public dgSeikyuDetail_Row() {
         super();
+        this.txtBuyYMD = new TextBoxDate();
+        this.txtShumoku = new TextBox();
+        this.txtShohinName = new TextBox();
+        this.txtBuyAmount = new TextBoxNum();
+        this.txtShinsaMethod = new TextBox();
     }
 
-    public dgSeikyuDetail_Row(Button btnModify, Button btnDelete, TextBox txtRowState, TextBoxDate txtBuyYMD, TextBox txtShumoku, TextBox txtShohinName, TextBoxNum txtBuyAmount, TextBox txtShinsaMethod) {
+    public dgSeikyuDetail_Row(TextBoxDate txtBuyYMD, TextBox txtShumoku, TextBox txtShohinName, TextBoxNum txtBuyAmount, TextBox txtShinsaMethod) {
         super();
-        this.setOriginalData("btnModify", btnModify);
-        this.setOriginalData("btnDelete", btnDelete);
-        this.setOriginalData("txtRowState", txtRowState);
         this.setOriginalData("txtBuyYMD", txtBuyYMD);
         this.setOriginalData("txtShumoku", txtShumoku);
         this.setOriginalData("txtShohinName", txtShohinName);
         this.setOriginalData("txtBuyAmount", txtBuyAmount);
         this.setOriginalData("txtShinsaMethod", txtShinsaMethod);
-        this.btnModify = btnModify;
-        this.btnDelete = btnDelete;
-        this.txtRowState = txtRowState;
         this.txtBuyYMD = txtBuyYMD;
         this.txtShumoku = txtShumoku;
         this.txtShohinName = txtShohinName;
         this.txtBuyAmount = txtBuyAmount;
         this.txtShinsaMethod = txtShinsaMethod;
-    }
-
-    public Button getBtnModify() {
-        return btnModify;
-    }
-
-    public Button getBtnDelete() {
-        return btnDelete;
-    }
-
-    public TextBox getTxtRowState() {
-        return txtRowState;
     }
 
     public TextBoxDate getTxtBuyYMD() {
@@ -86,21 +69,6 @@ public class dgSeikyuDetail_Row extends DataRow {
 
     public TextBox getTxtShinsaMethod() {
         return txtShinsaMethod;
-    }
-
-    public void setBtnModify(Button btnModify) {
-        this.setOriginalData("btnModify", btnModify);
-        this.btnModify = btnModify;
-    }
-
-    public void setBtnDelete(Button btnDelete) {
-        this.setOriginalData("btnDelete", btnDelete);
-        this.btnDelete = btnDelete;
-    }
-
-    public void setTxtRowState(TextBox txtRowState) {
-        this.setOriginalData("txtRowState", txtRowState);
-        this.txtRowState = txtRowState;
     }
 
     public void setTxtBuyYMD(TextBoxDate txtBuyYMD) {

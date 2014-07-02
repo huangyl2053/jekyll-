@@ -2,209 +2,13 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "KyotakuJikoRiyohyoSearch",
-   "items": [
-    {
-     "fieldName": "lblSearch",
-     "items": [],
-     "controlType": "Label",
-     "width": "S",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
-     "align": 0,
-     "text": "<<検索条件>>",
-     "isPrivateInfo": false
-    },
-    {
-     "fieldName": "btnSearch",
-     "items": [],
-     "controlType": "Button",
-     "width": "100",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "text": "検索する",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
-    }
-   ],
-   "controlType": "Panel",
-   "width": "1260",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "onLoad": "",
-   "title": "(共通) DBZ0010001 個人検索条件",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KyotakuJikoRiyohyoSearch"
-    }
-   ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "isGroupBox": false
-  },
-  {
-   "fieldName": "KyotakuJikoRiyohyoList",
-   "items": [
-    {
-     "fieldName": "dgTaishoshaList",
-     "items": [],
-     "controlType": "DataGrid",
-     "width": "1240",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "gridSetting": {
-      "rowHeight": 25,
-      "isMultiSelectable": false,
-      "isShowFooter": true,
-      "isShowFilter": false,
-      "isShowFilterButton": false,
-      "isShowRowState": false,
-      "header": {
-       "combineColumns": [],
-       "frozenColumn": "",
-       "headerHeight": 0
-      },
-      "columns": [
-       {
-        "columnName": "",
-        "dataName": "btnSelect",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 50,
-        "visible": true,
-        "cellType": 8,
-        "cellDetails": {
-         "cellType": 8,
-         "text": "選択",
-         "onClick": "",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "btnSelect"
-       }
-      ]
-     },
-     "height": "XS",
-     "onSort": "",
-     "onSelect": "",
-     "onSelectByDblClick": "",
-     "onOnlyRow": "",
-     "onNoRow": "",
-     "onMultiRows": "",
-     "dataSource": [],
-     "sortOrder": "defaultDataName4",
-     "isAscending": true,
-     "filterList": [],
-     "activeRowId": -1
-    }
-   ],
-   "controlType": "Panel",
-   "width": "1260",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "onLoad": "",
-   "title": "(共通) DBZ0010002 該当者一覧",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KyotakuJikoRiyohyoList"
-    }
-   ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "isGroupBox": false
-  },
-  {
    "fieldName": "KyotakuJikoRiyohyoKihon",
    "items": [
     {
-     "fieldName": "lblKihon1",
+     "fieldName": "KyotakuJikoRiyohyoKihonAtena",
      "items": [],
-     "controlType": "Label",
-     "width": "M",
+     "controlType": "CommonChildDiv",
+     "width": "XS",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -215,60 +19,99 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
-     "align": 0,
-     "text": "<<基本情報１>>",
-     "isPrivateInfo": false
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyotakuJikoRiyohyoKihonAtena",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "KaigoAtenaInfo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "atenaInfo_title": "",
+     "atenaInfo_canOpenAndClose": true,
+     "AtenaShokaiSimple_eraseBorder": true,
+     "AtenaKanaMeisho_visible": true,
+     "AtenaMisho_visible": true,
+     "SeinengappiYMD_visible": true,
+     "Nenrei_visible": true,
+     "Seibetsu_visible": true,
+     "JuminShubetsu_Visible": true,
+     "NihonjinGaikokujin_visible": true,
+     "JuminJotai_visible": true,
+     "YubinNo_visible": true,
+     "Jusho_visible": true,
+     "Gyoseiku_visible": true,
+     "ShikibetsuCode_visible": true,
+     "KojinHojinCode_visible": true,
+     "SetaiCode_visible": true,
+     "lblButtonMargin_displayNone": false,
+     "btnDainosha_displayNone": false,
+     "btnSofusaki_displayNone": false,
+     "btnDainoSofusakiKakunin_displayNone": false,
+     "btnKoza_displayNone": false,
+     "btnRenrakusaki_displayNone": false,
+     "btnShosai_displayNone": false,
+     "btnAtenaRireki_displayNone": false,
+     "btnSetaiIchiran_displayNone": false,
+     "btnDoitsunin_displayNone": false,
+     "btnToriatsukaiChui_displayNone": false,
+     "btnEltax_displayNone": false,
+     "btnShiyoJokyo_displayNone": false,
+     "btnAtesakiKakunin_displayNone": false,
+     "SubGyomuCode": "DBC",
+     "JukiYusennKubun": "1",
+     "AgeArrivalDay": "1",
+     "SubGyomuUmu": "0",
+     "SubGyomuSearchUmu": "0",
+     "DainoninHyojiUmu": "1"
     },
     {
-     "fieldName": "lblKihon2",
+     "fieldName": "KyotakuJikoRiyohyoKaigoKihon",
      "items": [],
-     "controlType": "Label",
-     "width": "M",
+     "controlType": "CommonChildDiv",
+     "width": "XS",
      "visible": true,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": true,
+     "wrap": false,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
-     "align": 0,
-     "text": "<<基本情報２>>",
-     "isPrivateInfo": false
-    },
-    {
-     "fieldName": "lblKihon3",
-     "items": [],
-     "controlType": "Label",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
-     "align": 0,
-     "text": "<<基本情報３>>",
-     "isPrivateInfo": false
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyotakuJikoRiyohyoKaigoKihon",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "title": "",
+     "relation": [],
+     "canOpenAndClose": true,
+     "marginTop": 0,
+     "marginBottom": 0,
+     "eraseBorder": true,
+     "businessId": "DBZ",
+     "controlName": "KaigoShikakuKihon",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "backGroundColor": 0,
+     "btnHihoRireki_visible": true,
+     "btnNinteiRireki_visible": true
     }
    ],
    "controlType": "Panel",
-   "width": "1260",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -281,6 +124,9 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "KyotakuJikoRiyohyoKihon",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "isOpen": true,
@@ -290,106 +136,25 @@
      "postParameterPanelNames": "KyotakuJikoRiyohyoKihon"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyoKihon/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
-  },
-  {
-   "fieldName": "KyotakuJikoRiyohyoKaigoKihon",
-   "items": [
-    {
-     "fieldName": "lblKaigoKihon1",
-     "items": [],
-     "controlType": "Label",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
-     "align": 0,
-     "text": "<<介護基本情報１>>",
-     "isPrivateInfo": false
-    },
-    {
-     "fieldName": "lblKaigoKihon2",
-     "items": [],
-     "controlType": "Label",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
-     "align": 0,
-     "text": "<<介護基本情報２>>",
-     "isPrivateInfo": false
-    }
-   ],
-   "controlType": "Panel",
-   "width": "1260",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "onLoad": "",
-   "title": "",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KyotakuJikoRiyohyoKaigoKihon"
-    }
-   ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   },
   {
    "fieldName": "KyotakuJikoRiyohyoRireki",
@@ -409,8 +174,11 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyotakuJikoRiyohyoRirekiList",
+     "helpMessageID": "",
+     "jpControlName": "",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -419,13 +187,21 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "RirekiListGridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": true,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [
         {
@@ -446,7 +222,7 @@
         "toolTip": "",
         "bgColor": 0,
         "width": 35,
-        "visible": true,
+        "visible": false,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
@@ -460,25 +236,6 @@
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "btnSelect"
-       },
-       {
-        "columnName": "",
-        "dataName": "txtTodokedeYMDInvisible",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 0,
-        "visible": false,
-        "cellType": 6,
-        "cellDetails": {
-         "cellType": 6,
-         "ymdKubun": 2,
-         "displayFormat": 5,
-         "onChange": ""
-        },
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "txtTodokedeYMDInvisible"
        },
        {
         "columnName": "届出日",
@@ -544,35 +301,12 @@
        }
       ]
      },
-     "RirekiListHeight": "400"
-    },
-    {
-     "fieldName": "btnGaitoshaReturn",
-     "items": [],
-     "controlType": "Button",
-     "width": "180",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "text": "該当者一覧に戻る",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
+     "RirekiListHeight": "Auto",
+     "RirekiListWidth": "400"
     }
    ],
    "controlType": "Panel",
-   "width": "1260",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -585,6 +319,9 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "KyotakuJikoRiyohyoRireki",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "履歴一覧",
    "isOpen": true,
@@ -597,7 +334,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyoRireki/getOnLoadData"
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyoRireki/onLoad"
     }
    ],
    "hiddenInput": [],
@@ -606,13 +343,13 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   },
   {
    "fieldName": "KyotakuJikoRiyohyo",
@@ -632,8 +369,11 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyotakuJikoRiyohyoInfo",
+     "helpMessageID": "",
+     "jpControlName": "",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -642,6 +382,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "BeppyoMeisaiVisible": true,
      "BeppyoMeisaiDisplayNone": false,
      "BeppyoGokeiVisible": true,
@@ -652,19 +394,19 @@
      "KeikakuJigyoshaCodeDisplayNone": true,
      "KeikakuJigyoshaNameVisible": false,
      "KeikakuJigyoshaNameDisplayNone": true,
-     "ZengetsuCopyOnClick": "onClickZengetsuCopy",
-     "RiyohyoMeisaiAddOnClick": "onClickRiyohyoMeisaiAdd",
-     "BeppyoMeisaiNewOnClick": "onClickBeppyoMeisaiNew",
-     "BeppyoGokeiNewOnClick": "onClickBeppyoGokeiNew",
-     "BeppyoMeisaiKakuteiOnClick": "onClickBeppyoMeisaiKakutei",
-     "BeppyoGokeiKakuteiOnClick": "onClickBeppyoGokeiKakutei",
-     "ServiceRiyohyoListGridSetting": {
+     "dgServiceRiyohyoListGridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": true,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": true,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [
         {
@@ -883,7 +625,7 @@
         "toolTip": "",
         "bgColor": 0,
         "width": 35,
-        "visible": true,
+        "visible": false,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
@@ -905,12 +647,14 @@
         "bgColor": 0,
         "width": 60,
         "visible": true,
-        "cellType": 1,
+        "cellType": 13,
         "cellDetails": {
-         "cellType": 1,
-         "maxLength": "1000000000000",
-         "minLength": "0",
-         "textAlign": 1
+         "cellType": 13,
+         "timeKubun": 1,
+         "displayFormat": 1,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": false
         },
         "align": 1,
         "resize": true,
@@ -924,12 +668,14 @@
         "bgColor": 0,
         "width": 60,
         "visible": true,
-        "cellType": 1,
+        "cellType": 13,
         "cellDetails": {
-         "cellType": 1,
-         "maxLength": "1000000000000",
-         "minLength": "0",
-         "textAlign": 1
+         "cellType": 13,
+         "timeKubun": 1,
+         "displayFormat": 1,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": false
         },
         "align": 1,
         "resize": true,
@@ -943,26 +689,35 @@
         "bgColor": 0,
         "width": 35,
         "visible": true,
-        "cellType": 8,
+        "cellType": 11,
         "cellDetails": {
-         "cellType": 8,
-         "text": "照",
-         "onClick": "",
-         "imageFileUrl": "",
+         "cellType": 11,
+         "text": "",
+         "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "displayChildDivName": "DBZ.ServiceInputGuide",
+         "visibleCloseButton": true,
+         "onBeforeOpenDialog": "",
+         "onOkClose": "onChangeServiceRiyohyoListDayValue",
+         "dataPassing": [
+          {
+           "key": "serviceCodeMeisho",
+           "controlName": "column[txtService]"
+          }
+         ]
         },
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "btnService"
+        "sortKey": ""
        },
        {
         "columnName": "サービス内容",
         "dataName": "txtService",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
+        "width": 220,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -980,26 +735,35 @@
         "bgColor": 0,
         "width": 35,
         "visible": true,
-        "cellType": 8,
+        "cellType": 11,
         "cellDetails": {
-         "cellType": 8,
-         "text": "照",
-         "onClick": "",
-         "imageFileUrl": "",
+         "cellType": 11,
+         "text": "",
+         "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "displayChildDivName": "DBZ.JigyoshaInputGuide",
+         "visibleCloseButton": true,
+         "onBeforeOpenDialog": "",
+         "onOkClose": "onChangeServiceRiyohyoListDayValue",
+         "dataPassing": [
+          {
+           "key": "jigyoshaCodeMeisho",
+           "controlName": "column[txtJigyosha]"
+          }
+         ]
         },
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "btnJigyosha"
+        "sortKey": ""
        },
        {
         "columnName": "サービス事業者",
         "dataName": "txtJigyosha",
         "toolTip": "",
         "bgColor": 0,
-        "width": 280,
+        "width": 220,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1022,7 +786,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtYoJitsu"
+        "sortKey": ""
        },
        {
         "columnName": "日",
@@ -1045,7 +809,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay1"
+        "sortKey": ""
        },
        {
         "columnName": "月",
@@ -1068,7 +832,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay2"
+        "sortKey": ""
        },
        {
         "columnName": "火",
@@ -1091,7 +855,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay3"
+        "sortKey": ""
        },
        {
         "columnName": "水",
@@ -1114,7 +878,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay4"
+        "sortKey": ""
        },
        {
         "columnName": "木",
@@ -1137,7 +901,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay5"
+        "sortKey": ""
        },
        {
         "columnName": "金",
@@ -1160,7 +924,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay6"
+        "sortKey": ""
        },
        {
         "columnName": "土",
@@ -1183,7 +947,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay7"
+        "sortKey": ""
        },
        {
         "columnName": "日",
@@ -1206,7 +970,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay8"
+        "sortKey": ""
        },
        {
         "columnName": "月",
@@ -1229,7 +993,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay9"
+        "sortKey": ""
        },
        {
         "columnName": "火",
@@ -1252,7 +1016,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay10"
+        "sortKey": ""
        },
        {
         "columnName": "水",
@@ -1275,7 +1039,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay11"
+        "sortKey": ""
        },
        {
         "columnName": "木",
@@ -1298,7 +1062,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay12"
+        "sortKey": ""
        },
        {
         "columnName": "金",
@@ -1321,7 +1085,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay13"
+        "sortKey": ""
        },
        {
         "columnName": "土",
@@ -1344,7 +1108,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay14"
+        "sortKey": ""
        },
        {
         "columnName": "日",
@@ -1367,7 +1131,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay15"
+        "sortKey": ""
        },
        {
         "columnName": "月",
@@ -1390,7 +1154,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay16"
+        "sortKey": ""
        },
        {
         "columnName": "火",
@@ -1413,7 +1177,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay17"
+        "sortKey": ""
        },
        {
         "columnName": "水",
@@ -1436,7 +1200,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay18"
+        "sortKey": ""
        },
        {
         "columnName": "木",
@@ -1459,7 +1223,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay19"
+        "sortKey": ""
        },
        {
         "columnName": "金",
@@ -1482,7 +1246,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay20"
+        "sortKey": ""
        },
        {
         "columnName": "土",
@@ -1505,7 +1269,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay21"
+        "sortKey": ""
        },
        {
         "columnName": "日",
@@ -1528,7 +1292,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay22"
+        "sortKey": ""
        },
        {
         "columnName": "月",
@@ -1551,7 +1315,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay23"
+        "sortKey": ""
        },
        {
         "columnName": "火",
@@ -1574,7 +1338,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay24"
+        "sortKey": ""
        },
        {
         "columnName": "水",
@@ -1597,7 +1361,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay25"
+        "sortKey": ""
        },
        {
         "columnName": "木",
@@ -1620,7 +1384,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay26"
+        "sortKey": ""
        },
        {
         "columnName": "金",
@@ -1643,7 +1407,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay27"
+        "sortKey": ""
        },
        {
         "columnName": "土",
@@ -1661,12 +1425,15 @@
          "minValue": "0",
          "isCurrency": false,
          "isComma": false,
-         "decimalPointLength": "0"
+         "decimalPointLength": "0",
+         "onChange": "onChangeServiceRiyohyoListDayValue",
+         "isSetValueToToolTip": false,
+         "readOnly": false
         },
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay28"
+        "sortKey": ""
        },
        {
         "columnName": "日",
@@ -1689,7 +1456,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay29"
+        "sortKey": ""
        },
        {
         "columnName": "月",
@@ -1707,12 +1474,15 @@
          "minValue": "0",
          "isCurrency": false,
          "isComma": false,
-         "decimalPointLength": "0"
+         "decimalPointLength": "0",
+         "onChange": "onChangeServiceRiyohyoListDayValue",
+         "isSetValueToToolTip": false,
+         "readOnly": false
         },
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay30"
+        "sortKey": ""
        },
        {
         "columnName": "火",
@@ -1730,12 +1500,15 @@
          "minValue": "0",
          "isCurrency": false,
          "isComma": false,
-         "decimalPointLength": "0"
+         "decimalPointLength": "0",
+         "onChange": "onChangeServiceRiyohyoListDayValue",
+         "isSetValueToToolTip": false,
+         "readOnly": false
         },
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay31"
+        "sortKey": ""
        },
        {
         "columnName": "",
@@ -1749,17 +1522,29 @@
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtGokei"
+        "sortKey": ""
        }
       ]
      },
-     "ServiceRiyohyoBeppyoListGridSetting": {
+     "onClickZengetsuCopy": "onClickZengetsuCopy",
+     "onClickRiyohyoMeisaiAdd": "onClickRiyohyoMeisaiAdd",
+     "onClickBeppyoMeisaiNew": "onClickBeppyoMeisaiNew",
+     "onClickBeppyoGokeiNew": "onClickBeppyoGokeiNew",
+     "onClickBeppyoMeisaiKakutei": "onClickBeppyoMeisaiKakutei",
+     "onClickBeppyoGokeiKakutei": "onClickBeppyoGokeiKakutei",
+     "dgServiceRiyohyoBeppyoListGridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": true,
+      "isShowSelectButtonColumn": true,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": true,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "txtService",
@@ -1772,12 +1557,12 @@
         "toolTip": "",
         "bgColor": 0,
         "width": 35,
-        "visible": true,
+        "visible": false,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
          "text": "選",
-         "onClick": "onClickServiceRiyohyoBeppyoListSelect",
+         "onClick": "",
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": ""
@@ -1793,12 +1578,12 @@
         "toolTip": "",
         "bgColor": 0,
         "width": 35,
-        "visible": true,
+        "visible": false,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
          "text": "削",
-         "onClick": "onClickServiceRiyohyoBeppyoListDelete",
+         "onClick": "",
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": ""
@@ -1813,7 +1598,7 @@
         "dataName": "txtJigyosha",
         "toolTip": "",
         "bgColor": 0,
-        "width": 280,
+        "width": 220,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1829,7 +1614,7 @@
         "dataName": "txtService",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
+        "width": 220,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1847,9 +1632,19 @@
         "bgColor": 0,
         "width": 80,
         "visible": true,
-        "cellType": 0,
+        "cellType": 5,
         "cellDetails": {
-         "cellType": 0
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "0",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 2,
         "resize": true,
@@ -1863,9 +1658,19 @@
         "bgColor": 0,
         "width": 80,
         "visible": true,
-        "cellType": 0,
+        "cellType": 5,
         "cellDetails": {
-         "cellType": 0
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "0",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 2,
         "resize": true,
@@ -1879,9 +1684,19 @@
         "bgColor": 0,
         "width": 80,
         "visible": true,
-        "cellType": 0,
+        "cellType": 5,
         "cellDetails": {
-         "cellType": 0
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "0",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 2,
         "resize": true,
@@ -1895,8 +1710,20 @@
         "bgColor": 0,
         "width": 60,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "0",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -1909,8 +1736,20 @@
         "bgColor": 0,
         "width": 80,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "0",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -1923,8 +1762,20 @@
         "bgColor": 0,
         "width": 90,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "0",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -1937,8 +1788,20 @@
         "bgColor": 0,
         "width": 90,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "0",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -1951,8 +1814,20 @@
         "bgColor": 0,
         "width": 90,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "0",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -1965,8 +1840,20 @@
         "bgColor": 0,
         "width": 90,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "0",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -1979,8 +1866,20 @@
         "bgColor": 0,
         "width": 80,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "2",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -1993,8 +1892,20 @@
         "bgColor": 0,
         "width": 80,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "0",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -2007,8 +1918,20 @@
         "bgColor": 0,
         "width": 60,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "0",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -2021,8 +1944,20 @@
         "bgColor": 0,
         "width": 80,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "0",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -2033,10 +1968,22 @@
         "dataName": "txtRiyoshaFutangakuHoken",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 110,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "0",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -2047,41 +1994,39 @@
         "dataName": "txtRiyoshaFutangakuZengaku",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 110,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": true,
+         "decimalPointLength": "0",
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "txtRiyoshaFutangakuZengaku"
        }
       ]
-     }
-    },
-    {
-     "fieldName": "btnReturn",
-     "items": [],
-     "controlType": "Button",
-     "width": "180",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "text": "履歴一覧に戻る",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
+     },
+     "dgServiceRiyohyoListSelectByDblClick": "",
+     "dgServiceRiyohyoListSelectBySelect": "",
+     "dgServiceRiyohyoListSelectByDelete": "onClickServiceRiyohyoListDelete",
+     "dgServiceRiyohyoBeppyoListSelectByDblClick": "onClickServiceRiyohyoBeppyoListSelect",
+     "dgServiceRiyohyoBeppyoListSelectBySelect": "onClickServiceRiyohyoBeppyoListSelect",
+     "dgServiceRiyohyoBeppyoListSelectByDelete": "onClickServiceRiyohyoBeppyoListDelete",
+     "ServiceRiyohyoEraseBorder": true,
+     "onClickBtnCalcMeisai": "onClickBtnCalcMeisai",
+     "onClickBtnCalcGokei": "onClickBtnCalcGokei",
+     "onBlurTxtSreviceCode": "onBlurServiceCode"
     },
     {
      "fieldName": "txtBeppyoListSelectIndex",
@@ -2100,34 +2045,38 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "required": false,
-     "text": "",
-     "isPrivateInfo": false,
+     "selectControlID": "txtBeppyoListSelectIndex_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
+     "required": false,
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
-     "permitCharactor": "",
-     "maxLength": 1000000000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "isComboBox": false,
-     "suggest": []
+     "decorationClass": "",
+     "permitCharactor": ""
     }
    ],
    "controlType": "Panel",
-   "width": "1260",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -2140,6 +2089,9 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "KyotakuJikoRiyohyo",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "居宅サービス自己作成サービス利用票",
    "isOpen": true,
@@ -2152,7 +2104,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/getOnLoadData"
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onLoad"
     },
     {
      "eventName": "onClickZengetsuCopy",
@@ -2189,6 +2141,22 @@
     {
      "eventName": "onClickServiceRiyohyoBeppyoListDelete",
      "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onClickServiceRiyohyoBeppyoListDelete"
+    },
+    {
+     "eventName": "onChangeServiceRiyohyoListDayValue",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onChangeServiceRiyohyoListDayValue"
+    },
+    {
+     "eventName": "onBlurServiceCode",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onBlurServiceCode"
+    },
+    {
+     "eventName": "onClickBtnCalcMeisai",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onClickBtnCalcMeisai"
+    },
+    {
+     "eventName": "onClickBtnCalcGokei",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onClickBtnCalcGokei"
     }
    ],
    "hiddenInput": [],
@@ -2197,22 +2165,22 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   },
   {
-   "fieldName": "KyotsuPanel",
+   "fieldName": "KyotakuJikoRiyohyoKanryo",
    "items": [
     {
-     "fieldName": "btnRiyohyoSave",
+     "fieldName": "KyotakuJikoRiyohyoKanryoMessage",
      "items": [],
-     "controlType": "Button",
-     "width": "180",
+     "controlType": "CommonChildDiv",
+     "width": "XS",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -2220,21 +2188,29 @@
      "nextFocusFieldName": "",
      "wrap": false,
      "dependencies": [],
-     "float": 2,
+     "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "text": "サービス利用票を保存する",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyotakuJikoRiyohyoKanryoMessage",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "KaigoKanryoMessage",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "KanryoMessage_width": "G12"
     }
    ],
    "controlType": "Panel",
-   "width": "M",
+   "width": "G2",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -2247,29 +2223,37 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "KyotakuJikoRiyohyoKanryo",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "KyotsuPanel"
+     "postParameterPanelNames": "KyotakuJikoRiyohyoKanryo"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyoKanryo/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": true,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -2286,6 +2270,9 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "居宅サービス自己作成サービス利用票登録",
  "jsPathCollection": [],
@@ -2293,37 +2280,59 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "個人検索条件",
-   "showWizard": false,
+   "stateName": "履歴一覧",
+   "showWizard": true,
    "visibleDivs": [
     {
-     "visibleDiv": "KyotakuJikoRiyohyoSearch",
-     "panelState": "visible"
+     "visibleDiv": "KyotakuJikoRiyohyoKihon",
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
-     "visibleDiv": "KyotakuJikoRiyohyoList",
-     "panelState": "close"
+     "visibleDiv": "KyotakuJikoRiyohyoKaigoKihon",
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoRireki",
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoRirekiList",
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoKihonAtena",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
    "events": [
     {
-     "fieldName": "btnSearch",
-     "event": "onClick",
-     "transition": "履歴"
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
+     "event": "onSelectByDblClick",
+     "transition": "利用票登録"
     },
     {
-     "fieldName": "btnGaitoshaReturn",
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
+     "event": "onSelectBySelectButton",
+     "transition": "利用票登録"
+    },
+    {
+     "fieldName": "btnReturnToRireki",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "fieldName": "btnRiyohyoSave",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnComplete",
      "event": "onClick",
      "transition": ""
     }
@@ -2331,37 +2340,59 @@
   },
   {
    "order": "2",
-   "stateName": "該当者一覧",
-   "showWizard": false,
+   "stateName": "利用票登録",
+   "showWizard": true,
    "visibleDivs": [
     {
-     "visibleDiv": "KyotakuJikoRiyohyoSearch",
-     "panelState": "close"
+     "visibleDiv": "KyotakuJikoRiyohyoKihon",
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
-     "visibleDiv": "KyotakuJikoRiyohyoList",
-     "panelState": "visible"
+     "visibleDiv": "KyotakuJikoRiyohyoKaigoKihon",
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyo",
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoInfo",
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoKihonAtena",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
    "events": [
     {
-     "fieldName": "btnSearch",
-     "event": "onClick",
-     "transition": "履歴"
-    },
-    {
-     "fieldName": "btnGaitoshaReturn",
-     "event": "onClick",
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
+     "event": "onSelectByDblClick",
      "transition": ""
     },
     {
-     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
-     "event": "onClick",
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
+     "event": "onSelectBySelectButton",
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnReturnToRireki",
+     "event": "onClick",
+     "transition": "履歴一覧"
+    },
+    {
+     "fieldName": "btnRiyohyoSave",
+     "event": "onClick",
+     "transition": "更新完了"
+    },
+    {
+     "fieldName": "btnComplete",
      "event": "onClick",
      "transition": ""
     }
@@ -2369,97 +2400,48 @@
   },
   {
    "order": "3",
-   "stateName": "履歴",
-   "showWizard": false,
+   "stateName": "更新完了",
+   "showWizard": true,
    "visibleDivs": [
     {
-     "visibleDiv": "KyotakuJikoRiyohyoKihon",
-     "panelState": "visible"
+     "visibleDiv": "KyotakuJikoRiyohyoKanryo",
+     "panelState": "visible",
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KyotakuJikoRiyohyoKaigoKihon",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyotakuJikoRiyohyoRireki",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyotakuJikoRiyohyoRirekiList",
-     "panelState": "visible"
+     "visibleDiv": "KyotakuJikoRiyohyoKanryoMessage",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
    "validation": {},
    "events": [
     {
-     "fieldName": "btnSearch",
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
+     "event": "onSelectBySelectButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturnToRireki",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnGaitoshaReturn",
-     "event": "onClick",
-     "transition": "個人検索条件"
-    },
-    {
-     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
-     "event": "onClick",
-     "transition": "サービス利用票"
-    },
-    {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "4",
-   "stateName": "サービス利用票",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "KyotakuJikoRiyohyoKihon",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyotakuJikoRiyohyoKaigoKihon",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyotakuJikoRiyohyo",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyotakuJikoRiyohyoInfo",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyotsuPanel",
-     "panelState": "visible"
-    }
-   ],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "btnSearch",
+     "fieldName": "btnRiyohyoSave",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnGaitoshaReturn",
+     "fieldName": "btnComplete",
      "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": "履歴"
+     "transition": "終了"
     }
    ]
   }
@@ -2467,16 +2449,18 @@
  "currentState": "All",
  "id": "DBC0120000",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "research",
+   "eventName": "btnReturn.onClick"
+  }
+ ],
  "loadSequencePanelNames": [
   [
-   "KyotakuJikoRiyohyoSearch"
-  ],
-  [
-   "KyotakuJikoRiyohyoList"
-  ],
-  [
    "KyotakuJikoRiyohyoKihon"
+  ],
+  [
+   "KyotakuJikoRiyohyoKihonAtena"
   ],
   [
    "KyotakuJikoRiyohyoKaigoKihon"
@@ -2494,9 +2478,192 @@
    "KyotakuJikoRiyohyoInfo"
   ],
   [
-   "KyotsuPanel"
+   "KyotakuJikoRiyohyoKanryo"
+  ],
+  [
+   "KyotakuJikoRiyohyoKanryoMessage"
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "btnRireki",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnReturn",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReturn",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "該当者検索に戻る",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "履歴一覧"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "btnRiyohyo",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnRiyohyoSave",
+      "items": [],
+      "controlType": "CommonButtonReSearch",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnRiyohyoSave",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "利用票を保存する",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnReturnToRireki",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReturnToRireki",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "履歴一覧に戻る",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "利用票登録"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "btnKanryo",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnComplete",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "履歴一覧に戻る",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "",
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "更新完了"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ]
 }

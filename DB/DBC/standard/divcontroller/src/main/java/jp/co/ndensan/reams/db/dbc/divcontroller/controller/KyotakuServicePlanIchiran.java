@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServicePlanIchiranDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServiceTodokedeCommonDiv;
@@ -17,6 +18,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServiceTodokedeJik
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgKyotakuServicePlanIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblKyotakuServiceJigyoshaSakuseiInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblKyotakuServiceJikoSakuseiInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -67,6 +70,12 @@ public class KyotakuServicePlanIchiran {
      * @return ResponseData
      */
     public ResponseData<KyotakuServicePlanIchiranDiv> onClick_ShowDetail(KyotakuServicePlanIchiranDiv panel) {
+        List<HashMap> ymlData = ymlData("dbc0020000/KyotakuServicePlanIchiranKojinSakuseiData.yml");
+        
+        HashMap hashMap = ymlData.get(1);
+        ControlGenerator ymlDt = new ControlGenerator(hashMap);
+        
+        
         ResponseData<KyotakuServicePlanIchiranDiv> response = new ResponseData<>();
         dgKyotakuServicePlanIchiran_Row selectRow = panel.getDgKyotakuServicePlanIchiran().getClickedItem();
 
@@ -79,9 +88,9 @@ public class KyotakuServicePlanIchiran {
 
         common.setVisible(true);
         common.setDisplayNone(false);
-        common.getTxtTodokedeStatus().setValue(new RString("新規申請"));
+        common.getTxtTodokedeStatus().setValue(ymlDt.getAsRString("TodokedeStatus"));
 
-        if (selectRow.getTxtPlanSakuseiKubun().compareTo(new RString("居宅支援")) == 0) {
+        if (selectRow.getTxtPlanSakuseiKubun().compareTo(ymlDt.getAsRString("PlanSakuseiKubun")) == 0) {
             jigyosha.setVisible(true);
             jigyosha.setDisplayNone(false);
             jiko.setVisible(false);
@@ -92,7 +101,7 @@ public class KyotakuServicePlanIchiran {
             jigyosha.setDisplayNone(true);
             jiko.setVisible(true);
             jiko.setDisplayNone(false);
-            if (new FlexibleDate(selectRow.getTxtTaishoYMInvisible().concat(new RString("01"))).isBefore(new FlexibleDate(new RString("20020101")))) {
+            if (new FlexibleDate(selectRow.getTxtTaishoYMInvisible().concat(ymlDt.getAsRString("TaishoYMInvisibleConcat"))).isBefore(new FlexibleDate(ymlDt.getAsRString("TaishoYMInvisibleIsBefore")))) {
                 jiko.getBtnDlgKyotakuService().setVisible(false);
                 jiko.getBtnDlgHomonTsusho().setVisible(true);
                 jiko.getBtnDlgTankiNyusho().setVisible(true);
@@ -111,27 +120,33 @@ public class KyotakuServicePlanIchiran {
      居宅支援の詳細表示へ計画一覧データグリッドで選択した行のデータを設定します。
      */
     private void setKyotakuSienData(KyotakuServicePlanIchiranDiv panel) {
+         List<HashMap> ymlData = ymlData("dbc0020000/KyotakuServicePlanIchiranKyotakuSienData.yml");
+        
+        HashMap hashMap = ymlData.get(0);
+        ControlGenerator ymlDt = new ControlGenerator(hashMap);
+        
+        
         tblKyotakuServiceJigyoshaSakuseiInfoDiv jigyoshaInfoDiv = panel.getKyotakuServiceTodokedeInfo().getKyotakuServiceTodokedeJigyosha().getTblKyotakuServiceJigyoshaSakuseiInfo();
         dgKyotakuServicePlanIchiran_Row selectRow = panel.getDgKyotakuServicePlanIchiran().getClickedItem();
 
-        jigyoshaInfoDiv.getTxtJigyoshaSakuseiTodokedeKubun().setValue(new RString("新規"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiTodokedeKubun().setValue(ymlDt.getAsRString("JigyoshaSakuseiTodokedeKubun"));
         jigyoshaInfoDiv.getTxtJigyoshaSakuseiTodokedeYMD().setValue(new FlexibleDate(selectRow.getTxtStartYMDInvisible()));
         jigyoshaInfoDiv.getTxtJigyoshaSakuseiStartYMD().setValue(new FlexibleDate(selectRow.getTxtStartYMDInvisible()));
         jigyoshaInfoDiv.getTxtJigyoshaSakuseiEndYMD().setValue(new FlexibleDate(selectRow.getTxtEndYMDInvisible()));
-        jigyoshaInfoDiv.getTxtJigyoshaSakuseiKubun().setValue(new RString("居宅介護支援事業所作成"));
-        jigyoshaInfoDiv.getTxtJigyoshaSakuseiJigyoshaNo().setValue(new RString("1234567890"));
-        jigyoshaInfoDiv.getTxtJigyoshaSakuseiJigyoshaName().setValue(new RString("電算サービスセンター"));
-        jigyoshaInfoDiv.getTxtJigyoshaSakuseiCategory1().setValue(new RString("居宅介護"));
-        jigyoshaInfoDiv.getTxtJigyoshaSakuseiCategory2().setValue(new RString("小規模介護"));
-        jigyoshaInfoDiv.getTxtJigyoshaSakuseiYubinNo().setValue(new YubinNo("381-0010"));
-        RString jusho = new RString("長野県長野市鶴賀七瀬中町276-6");
-        jigyoshaInfoDiv.getTxtJigyoshaSakuseiJusho().setValue(jusho);
-        jigyoshaInfoDiv.getTxtJigyoshaSakuseiKanrisha().setValue(new RString("電算　十郎"));
-        jigyoshaInfoDiv.getTxtJigyoshaSakuseiTelNo().setValue(new RString("123-456-7890"));
-        jigyoshaInfoDiv.getTxtJigyoshaSakuseiItakusakiNo().setValue(new RString("1234567890"));
-        jigyoshaInfoDiv.getTxtJigyoshaSakuseiItakusakiName().setValue(new RString("介護施設"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiKubun().setValue(ymlDt.getAsRString("JigyoshaSakuseiKubun"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiJigyoshaNo().setValue(ymlDt.getAsRString("JigyoshaSakuseiJigyoshaNo"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiJigyoshaName().setValue(ymlDt.getAsRString("JigyoshaSakuseiJigyoshaName"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiCategory1().setValue(ymlDt.getAsRString("JigyoshaSakuseiCategory1"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiCategory2().setValue(ymlDt.getAsRString("JigyoshaSakuseiCategory2"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiYubinNo().setValue(ymlDt.getAsYubinNo("JigyoshaSakuseiYubinNo"));
+       // RString jusho = new RString("長野県長野市鶴賀七瀬中町276-6");
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiJusho().setValue(ymlDt.getAsRString("JigyoshaSakuseiJusho"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiKanrisha().setValue(ymlDt.getAsRString("JigyoshaSakuseiKanrisha"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiTelNo().setValue(ymlDt.getAsRString("JigyoshaSakuseiTelNo"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiItakusakiNo().setValue(ymlDt.getAsRString("JigyoshaSakuseiItakusakiNo"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiItakusakiName().setValue(ymlDt.getAsRString("JigyoshaSakuseiItakusakiName"));
         jigyoshaInfoDiv.getTxtJigyoshaSakuseiModifyYMD().setValue(new FlexibleDate(selectRow.getTxtStartYMDInvisible()));
-        jigyoshaInfoDiv.getTxtJigyoshaSakuseiModifyRiyu().setValue(new RString("ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiModifyRiyu().setValue(ymlDt.getAsRString("JigyoshaSakuseiModifyRiyu"));
 
     }
 
@@ -139,15 +154,25 @@ public class KyotakuServicePlanIchiran {
      個人作成の詳細表示へ計画一覧データグリッドで選択した行のデータを設定します。
      */
     private void setKojinSakuseiData(KyotakuServicePlanIchiranDiv panel) {
+        
+        List<HashMap> ymlData = ymlData("dbc0020000/KyotakuServicePlanIchiranKojinSakuseiData.yml");
+        
+        HashMap hashMap = ymlData.get(0);
+        ControlGenerator ymlDt = new ControlGenerator(hashMap);
+        
         tblKyotakuServiceJikoSakuseiInfoDiv jikoInfoDiv = panel.getKyotakuServiceTodokedeInfo().getKyotakuServiceTodokedeJiko().getTblKyotakuServiceJikoSakuseiInfo();
         KyotakuServiceTodokedeJikoNinteiJohoDiv ninteiJohoDiv = panel.getKyotakuServiceTodokedeInfo().getKyotakuServiceTodokedeJiko().getKyotakuServiceTodokedeJikoNinteiJoho();
         dgKyotakuServicePlanIchiran_Row selectRow = panel.getDgKyotakuServicePlanIchiran().getClickedItem();
-        jikoInfoDiv.getTxtJikoSakuseiTishoYM().setValue(new FlexibleDate(selectRow.getTxtTaishoYMInvisible().concat(new RString("01"))));
-        jikoInfoDiv.getTxtJikoSakuseiCreateYMD().setValue(new FlexibleDate(selectRow.getTxtTaishoYMInvisible().concat(new RString("01"))));
-        jikoInfoDiv.getTxtJikoSakuseiTodokedeYMD().setValue(new FlexibleDate(selectRow.getTxtTaishoYMInvisible().concat(new RString("01"))));
+        
+        jikoInfoDiv.getTxtJikoSakuseiTishoYM().setValue(new FlexibleDate(selectRow.getTxtTaishoYMInvisible().concat(ymlDt.getAsRString("JikoSakuseiTishoYM"))));
+        jikoInfoDiv.getTxtJikoSakuseiCreateYMD().setValue(new FlexibleDate(selectRow.getTxtTaishoYMInvisible().concat(ymlDt.getAsRString("JikoSakuseiCreateYMD"))));
+        jikoInfoDiv.getTxtJikoSakuseiTodokedeYMD().setValue(new FlexibleDate(selectRow.getTxtTaishoYMInvisible().concat(ymlDt.getAsRString("JikoSakuseiTodokedeYMD"))));
+        
         jikoInfoDiv.getTxtJikoSakuseiStartYMD().setValue(new FlexibleDate(selectRow.getTxtStartYMDInvisible().toString()));
         jikoInfoDiv.getTxtJikoSakuseiEndYMD().setValue(new FlexibleDate(selectRow.getTxtEndYMDInvisible().toString()));
-        ninteiJohoDiv.getTxtJikoSakuseiYoukaigodo().setValue(new RString("要介護度３"));
+        
+        ninteiJohoDiv.getTxtJikoSakuseiYoukaigodo().setValue(ymlDt.getAsRString("JikoSakuseiYoukaigodo"));
+        
         ninteiJohoDiv.getTxtJikoSakuseiYukoKikan().setFromValue(new RDate(selectRow.getTxtStartYMDInvisible().toString()));
         ninteiJohoDiv.getTxtJikoSakuseiYukoKikan().setToValue(new RDate(selectRow.getTxtEndYMDInvisible().toString()));
 
@@ -165,19 +190,45 @@ public class KyotakuServicePlanIchiran {
 
     private List<dgKyotakuServicePlanIchiran_Row> createサービス計画一覧() {
         List<dgKyotakuServicePlanIchiran_Row> arrayData = new ArrayList<>();
+        
+        List<HashMap> ymlData = ymlData("dbc0020000/KyotakuServicePlanIchiran.yml");
+        
         dgKyotakuServicePlanIchiran_Row item;
         Button btn = new Button();
+        
+        for (int i = 1; i < ymlData.size(); i++) {
 
-        item = create計画(btn, "200111", "平13.11", "居宅支援", "", "1234567890:電算サービスセンター", "20011101", "平13.11.01", "", "", "有効");
+            HashMap hashMap = ymlData.get(i);
+            ControlGenerator ymlDt = new ControlGenerator(hashMap);     
+            
+        item = create計画(
+                btn, 
+                ymlDt.getAsRString("TaishoYMInvisible"),
+                ymlDt.getAsRString("TaishoYM"),
+                ymlDt.getAsRString("PlanSakuseiKubun"),
+                ymlDt.getAsRString("Zantei"),
+                ymlDt.getAsRString("JigyoshaNo"),
+                ymlDt.getAsRString("StartYMDInvisible"),
+                ymlDt.getAsRString("StartYMD"),
+                ymlDt.getAsRString("EndYMDInvisible"),
+                ymlDt.getAsRString("EndYMD"),
+                ymlDt.getAsRString("Enable")
+        );
         arrayData.add(item);
-        item = create計画(btn, "200112", "平13.12", "自己作成", "", "", "20011201", "平13.12.01", "20011231", "平13.12.31", "有効");
-        arrayData.add(item);
-        item = create計画(btn, "200201", "平14.01", "自己作成", "", "", "20020101", "平14.01.01", "20020131", "平14.01.31", "有効");
-        arrayData.add(item);
-        item = create計画(btn, "201403", "平26.03", "自己作成", "暫定", "", "20140301", "平26.03.01", "20140331", "平26.03.31", "有効");
-        arrayData.add(item);
-        item = create計画(btn, "201404", "平26.04", "居宅支援", "", "1234567891:福祉サービスセンター", "20140401", "平26.04.01", "", "", "有効");
-        arrayData.add(item);
+            
+        
+        }
+
+//        item = create計画(btn, "200111", "平13.11", "居宅支援", "", "1234567890:電算サービスセンター", "20011101", "平13.11.01", "", "", "有効");
+//        arrayData.add(item);
+//        item = create計画(btn, "200112", "平13.12", "自己作成", "", "", "20011201", "平13.12.01", "20011231", "平13.12.31", "有効");
+//        arrayData.add(item);
+//        item = create計画(btn, "200201", "平14.01", "自己作成", "", "", "20020101", "平14.01.01", "20020131", "平14.01.31", "有効");
+//        arrayData.add(item);
+//        item = create計画(btn, "201403", "平26.03", "自己作成", "暫定", "", "20140301", "平26.03.01", "20140331", "平26.03.31", "有効");
+//        arrayData.add(item);
+//        item = create計画(btn, "201404", "平26.04", "居宅支援", "", "1234567891:福祉サービスセンター", "20140401", "平26.04.01", "", "", "有効");
+//        arrayData.add(item);
 
         Collections.sort(arrayData, new DateComparator());
 
@@ -194,34 +245,49 @@ public class KyotakuServicePlanIchiran {
 
     private dgKyotakuServicePlanIchiran_Row create計画(
             Button btn,
-            String txtTaishoYMInvisible,
-            String txtTaishoYM,
-            String txtPlanSakuseiKubun,
-            String txtZantei,
-            String txtJigyoshaNo,
-            String txtStartYMDInvisible,
-            String txtStartYMD,
-            String txtEndYMDInvisible,
-            String txtEndYMD,
-            String txtEnable) {
+            RString txtTaishoYMInvisible,
+            RString txtTaishoYM,
+            RString txtPlanSakuseiKubun,
+            RString txtZantei,
+            RString txtJigyoshaNo,
+            RString txtStartYMDInvisible,
+            RString txtStartYMD,
+            RString txtEndYMDInvisible,
+            RString txtEndYMD,
+            RString txtEnable
+    ) {
         dgKyotakuServicePlanIchiran_Row rowData = new dgKyotakuServicePlanIchiran_Row(
-                btn, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+                btn, 
+                RString.EMPTY, 
+                RString.EMPTY, 
+                RString.EMPTY, 
+                RString.EMPTY, 
+                RString.EMPTY, 
+                RString.EMPTY, 
+                RString.EMPTY, 
+                RString.EMPTY, 
+                RString.EMPTY,
+                RString.EMPTY);
 
-        rowData.setTxtTaishoYMInvisible(new RString(txtTaishoYMInvisible));
-        rowData.setTxtTaishoYM(new RString(txtTaishoYM));
-        rowData.setTxtPlanSakuseiKubun(new RString(txtPlanSakuseiKubun));
-        rowData.setTxtZantei(new RString(txtZantei));
-        rowData.setTxtJigyoshaNo(new RString(txtJigyoshaNo));
+        rowData.setTxtTaishoYMInvisible(txtTaishoYMInvisible);
+        rowData.setTxtTaishoYM(txtTaishoYM);
+        rowData.setTxtPlanSakuseiKubun(txtPlanSakuseiKubun);
+        rowData.setTxtZantei(txtZantei);
+        rowData.setTxtJigyoshaNo(txtJigyoshaNo);
         if (!txtStartYMDInvisible.isEmpty()) {
-            rowData.setTxtStartYMDInvisible(new RString(txtStartYMDInvisible));
-            rowData.setTxtStartYMD(new RString(txtStartYMD));
+            rowData.setTxtStartYMDInvisible(txtStartYMDInvisible);
+            rowData.setTxtStartYMD(txtStartYMD);
         }
         if (!txtEndYMDInvisible.isEmpty()) {
-            rowData.setTxtEndYMDInvisible(new RString(txtEndYMDInvisible));
-            rowData.setTxtEndYMD(new RString(txtEndYMD));
+            rowData.setTxtEndYMDInvisible(txtEndYMDInvisible);
+            rowData.setTxtEndYMD(txtEndYMD);
         }
-        rowData.setTxtEnable(new RString(txtEnable));
+        rowData.setTxtEnable(txtEnable);
         return rowData;
+    }
+
+        private List<HashMap> ymlData(String ymlName) {
+        return YamlLoader.DBC.loadAsList(new RString(ymlName));
     }
 
 }

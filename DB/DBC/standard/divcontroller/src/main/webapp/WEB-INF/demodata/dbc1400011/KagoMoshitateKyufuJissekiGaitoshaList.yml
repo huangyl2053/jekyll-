@@ -1,0 +1,12 @@
+## YAML Template.
+---
+## KyufuJissekiGaitoshaListPanel
+-  jigyoshaNo: 2010117162               
+   jigyoshaName: 生活介護部朝顔ケア機関         
+   hihoNo: "0123400001"
+   hihoName: 電算　太郎      
+   kagoForm: 10:居宅サービス介護給付費明細書（訪問介護・居宅療養）           
+   teikyoYM: 平26.06
+   kyufuJissekiSakuseiKubun: 2:保険者申立
+   kyufuKubun: 訪問通所区分
+   shinsaYM: 平26.07

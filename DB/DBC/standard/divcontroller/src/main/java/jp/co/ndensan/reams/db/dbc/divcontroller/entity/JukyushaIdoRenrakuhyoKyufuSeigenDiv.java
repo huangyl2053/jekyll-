@@ -21,8 +21,6 @@ public class JukyushaIdoRenrakuhyoKyufuSeigenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblKohiFutanJogengakuGengakuUmu")
-    private Label lblKohiFutanJogengakuGengakuUmu;
     @JsonProperty("radKohiFutanJogengakuGengakuUmu")
     private RadioButton radKohiFutanJogengakuGengakuUmu;
     @JsonProperty("txtKyufuritsuHikisageDateRange")
@@ -36,16 +34,6 @@ public class JukyushaIdoRenrakuhyoKyufuSeigenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblKohiFutanJogengakuGengakuUmu")
-    public Label getLblKohiFutanJogengakuGengakuUmu() {
-        return lblKohiFutanJogengakuGengakuUmu;
-    }
-
-    @JsonProperty("lblKohiFutanJogengakuGengakuUmu")
-    public void setLblKohiFutanJogengakuGengakuUmu(Label lblKohiFutanJogengakuGengakuUmu) {
-        this.lblKohiFutanJogengakuGengakuUmu=lblKohiFutanJogengakuGengakuUmu;
-    }
-
     @JsonProperty("radKohiFutanJogengakuGengakuUmu")
     public RadioButton getRadKohiFutanJogengakuGengakuUmu() {
         return radKohiFutanJogengakuGengakuUmu;

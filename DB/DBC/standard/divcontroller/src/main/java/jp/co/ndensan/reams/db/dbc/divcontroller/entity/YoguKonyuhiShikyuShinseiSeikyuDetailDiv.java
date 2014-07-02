@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SeikyuSummaryDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.YoguKonyuhiShikyuShinseiSeikyuDetailInputDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgSeikyuDetail_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -28,8 +27,6 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetailDiv extends Panel {
     private DataGrid<dgSeikyuDetail_Row> dgSeikyuDetail;
     @JsonProperty("YoguKonyuhiShikyuShinseiSeikyuDetailInput")
     private YoguKonyuhiShikyuShinseiSeikyuDetailInputDiv YoguKonyuhiShikyuShinseiSeikyuDetailInput;
-    @JsonProperty("SeikyuSummary")
-    private SeikyuSummaryDiv SeikyuSummary;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -55,16 +52,6 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetailDiv extends Panel {
     @JsonProperty("YoguKonyuhiShikyuShinseiSeikyuDetailInput")
     public void setYoguKonyuhiShikyuShinseiSeikyuDetailInput(YoguKonyuhiShikyuShinseiSeikyuDetailInputDiv YoguKonyuhiShikyuShinseiSeikyuDetailInput) {
         this.YoguKonyuhiShikyuShinseiSeikyuDetailInput=YoguKonyuhiShikyuShinseiSeikyuDetailInput;
-    }
-
-    @JsonProperty("SeikyuSummary")
-    public SeikyuSummaryDiv getSeikyuSummary() {
-        return SeikyuSummary;
-    }
-
-    @JsonProperty("SeikyuSummary")
-    public void setSeikyuSummary(SeikyuSummaryDiv SeikyuSummary) {
-        this.SeikyuSummary=SeikyuSummary;
     }
 
 }

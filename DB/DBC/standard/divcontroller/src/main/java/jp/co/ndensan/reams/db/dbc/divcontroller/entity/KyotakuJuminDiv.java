@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuKaigoJuminJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuNushiJuminJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -25,8 +24,6 @@ public class KyotakuJuminDiv extends Panel {
      */
     @JsonProperty("KyotakuNushiJuminJoho")
     private KyotakuNushiJuminJohoDiv KyotakuNushiJuminJoho;
-    @JsonProperty("KyotakuKaigoJuminJoho")
-    private KyotakuKaigoJuminJohoDiv KyotakuKaigoJuminJoho;
     @JsonProperty("btnDlgSeteiJoho")
     private ButtonDialog btnDlgSeteiJoho;
 
@@ -44,16 +41,6 @@ public class KyotakuJuminDiv extends Panel {
     @JsonProperty("KyotakuNushiJuminJoho")
     public void setKyotakuNushiJuminJoho(KyotakuNushiJuminJohoDiv KyotakuNushiJuminJoho) {
         this.KyotakuNushiJuminJoho=KyotakuNushiJuminJoho;
-    }
-
-    @JsonProperty("KyotakuKaigoJuminJoho")
-    public KyotakuKaigoJuminJohoDiv getKyotakuKaigoJuminJoho() {
-        return KyotakuKaigoJuminJoho;
-    }
-
-    @JsonProperty("KyotakuKaigoJuminJoho")
-    public void setKyotakuKaigoJuminJoho(KyotakuKaigoJuminJohoDiv KyotakuKaigoJuminJoho) {
-        this.KyotakuKaigoJuminJoho=KyotakuKaigoJuminJoho;
     }
 
     @JsonProperty("btnDlgSeteiJoho")

@@ -21,8 +21,6 @@ public class JukyushaIdoRenrakuhyoHyojunFutanDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblHyojunFutanKubun")
-    private Label lblHyojunFutanKubun;
     @JsonProperty("radHyojunFutanKubun")
     private RadioButton radHyojunFutanKubun;
     @JsonProperty("txtHyojunFutangaku")
@@ -36,16 +34,6 @@ public class JukyushaIdoRenrakuhyoHyojunFutanDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblHyojunFutanKubun")
-    public Label getLblHyojunFutanKubun() {
-        return lblHyojunFutanKubun;
-    }
-
-    @JsonProperty("lblHyojunFutanKubun")
-    public void setLblHyojunFutanKubun(Label lblHyojunFutanKubun) {
-        this.lblHyojunFutanKubun=lblHyojunFutanKubun;
-    }
-
     @JsonProperty("radHyojunFutanKubun")
     public RadioButton getRadHyojunFutanKubun() {
         return radHyojunFutanKubun;

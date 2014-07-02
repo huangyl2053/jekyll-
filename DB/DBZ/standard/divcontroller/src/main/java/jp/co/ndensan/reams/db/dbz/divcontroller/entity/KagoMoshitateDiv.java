@@ -25,10 +25,10 @@ public class KagoMoshitateDiv extends Panel {
     private TextBoxCode txtJigyoshaNo;
     @JsonProperty("txtJigyoshaName")
     private TextBox txtJigyoshaName;
-    @JsonProperty("txtMoshitateshaKubun")
-    private TextBox txtMoshitateshaKubun;
     @JsonProperty("txtSendYM")
     private TextBoxDate txtSendYM;
+    @JsonProperty("txtMoshitateshaKubun")
+    private TextBox txtMoshitateshaKubun;
     @JsonProperty("txtShokisaiHokenshaNo")
     private TextBoxCode txtShokisaiHokenshaNo;
     @JsonProperty("txtShokisaiHokenshaName")
@@ -70,16 +70,6 @@ public class KagoMoshitateDiv extends Panel {
         this.txtJigyoshaName=txtJigyoshaName;
     }
 
-    @JsonProperty("txtMoshitateshaKubun")
-    public TextBox getTxtMoshitateshaKubun() {
-        return txtMoshitateshaKubun;
-    }
-
-    @JsonProperty("txtMoshitateshaKubun")
-    public void setTxtMoshitateshaKubun(TextBox txtMoshitateshaKubun) {
-        this.txtMoshitateshaKubun=txtMoshitateshaKubun;
-    }
-
     @JsonProperty("txtSendYM")
     public TextBoxDate getTxtSendYM() {
         return txtSendYM;
@@ -88,6 +78,16 @@ public class KagoMoshitateDiv extends Panel {
     @JsonProperty("txtSendYM")
     public void setTxtSendYM(TextBoxDate txtSendYM) {
         this.txtSendYM=txtSendYM;
+    }
+
+    @JsonProperty("txtMoshitateshaKubun")
+    public TextBox getTxtMoshitateshaKubun() {
+        return txtMoshitateshaKubun;
+    }
+
+    @JsonProperty("txtMoshitateshaKubun")
+    public void setTxtMoshitateshaKubun(TextBox txtMoshitateshaKubun) {
+        this.txtMoshitateshaKubun=txtMoshitateshaKubun;
     }
 
     @JsonProperty("txtShokisaiHokenshaNo")

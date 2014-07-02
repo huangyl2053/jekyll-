@@ -1,0 +1,23 @@
+## YAML Template.
+---
+- resultIdoDate: 20140701
+  renrakuhyoIdoKubun: 新規
+  ddlIdoJiyu: 受給資格取得
+  resultHihoNo: "1234500001"
+  resultHihoName: 電算二十一太郎
+  resultSendYM:  201407  
+  deleteFlg: 削除
+- resultIdoDate: 20140801
+  renrakuhyoIdoKubun: 新規
+  ddlIdoJiyu: 合併による新規
+  resultHihoNo: "1234500001"
+  resultHihoName: 電算二十一太郎
+  resultSendYM:  201408
+  deleteFlg: 削除
+- resultIdoDate: 20140901
+  renrakuhyoIdoKubun: 変更
+  ddlIdoJiyu: その他異動
+  resultHihoNo: "1234500001"
+  resultHihoName: 電算二十一太郎
+  resultSendYM:  201409
+  deleteFlg: "" 

@@ -5,9 +5,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.PaymentMethodDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.YoguKonyuhiShikyuShinseiSeikyuDetailDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PaymentMethod.PaymentMethodDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfo.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -36,10 +36,6 @@ public class YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv extends Panel {
     private ShinseishaInfoDiv YoguKonyuhiShikyuShinseiShinsaShinseisha;
     @JsonProperty("YoguKonyuhiShikyuShinseiShinsaPaymentMethod")
     private PaymentMethodDiv YoguKonyuhiShikyuShinseiShinsaPaymentMethod;
-    @JsonProperty("btnModifyShinsei")
-    private Button btnModifyShinsei;
-    @JsonProperty("btnCancelShinseiModify")
-    private Button btnCancelShinseiModify;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -105,26 +101,6 @@ public class YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv extends Panel {
     @JsonProperty("YoguKonyuhiShikyuShinseiShinsaPaymentMethod")
     public void setYoguKonyuhiShikyuShinseiShinsaPaymentMethod(PaymentMethodDiv YoguKonyuhiShikyuShinseiShinsaPaymentMethod) {
         this.YoguKonyuhiShikyuShinseiShinsaPaymentMethod=YoguKonyuhiShikyuShinseiShinsaPaymentMethod;
-    }
-
-    @JsonProperty("btnModifyShinsei")
-    public Button getBtnModifyShinsei() {
-        return btnModifyShinsei;
-    }
-
-    @JsonProperty("btnModifyShinsei")
-    public void setBtnModifyShinsei(Button btnModifyShinsei) {
-        this.btnModifyShinsei=btnModifyShinsei;
-    }
-
-    @JsonProperty("btnCancelShinseiModify")
-    public Button getBtnCancelShinseiModify() {
-        return btnCancelShinseiModify;
-    }
-
-    @JsonProperty("btnCancelShinseiModify")
-    public void setBtnCancelShinseiModify(Button btnCancelShinseiModify) {
-        this.btnCancelShinseiModify=btnCancelShinseiModify;
     }
 
 }

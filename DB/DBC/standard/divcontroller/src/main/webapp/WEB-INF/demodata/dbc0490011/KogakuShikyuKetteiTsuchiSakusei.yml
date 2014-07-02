@@ -1,0 +1,15 @@
+## YAML Template.
+---
+- KetteiYM: 201406
+  TsuchiSotatsuYMD: 20140701
+  SortName1: 氏名５０音カナ
+  KaiPage1: 被保険者番号   
+  Sort1: 行政区コード
+  IssueDate1: 20140711
+  IssueDate2: 20140711
+  KozaPaymentDate: 20140711
+  ShiharaiDateRangeFrom: 20140801
+  ShiharaiDateRangeTo: 20140930
+  SortName2: 氏名５０音カナ
+  KaiPage2: 被保険者番号   
+  Sort2: 行政区コード

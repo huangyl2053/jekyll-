@@ -1,0 +1,25 @@
+## YAML Template. 口座情報
+---
+## 口座情報  tabKogakuServicehiDetail  tplKoza 
+## PaymentMethod DB\DBZ\standard\CommonChildDiv 
+## 受領委任情報
+- juryoininKeiyakuNo: 1234567890
+  jigyoshaNo: 1234567890
+  jigyoshaName: 介護事業名
+  jigyoshaNameKana: カイゴジギョウメイ
+## 受領委任情報  
+  kinyuKikanCode: 1206
+  kinyuKikanName: アイオー信用金庫
+  kinyuKikanBrunchCode: 011
+  kinyuKikanBrunchName: 赤堀支店
+  kozaNo: 1206005
+  kozaMeigininKana: カイゴ
+  kozaMeiginin: 介護
+## 窓口払い  
+  shiharaiBasho: 赤堀支店
+  shiharaiKaishiDate: 平26.07.01
+  shiharaiKaishiDay: 月
+  shiharaiKaishiTime: 360
+  shiharaiShuryoDate: 平26.07.30
+  shiharaiShuryoDay: 金
+  shiharaiShuryoTime: 100000

@@ -131,8 +131,13 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
+<<<<<<< HEAD
      "marginLeft": "0.15",
      "marginRight": "0",
+=======
+     "marginLeft": "XS",
+     "marginRight": "XS",
+>>>>>>> feature/UI-KyufuKanri-37343
      "selectControlID": "radShisetsuShurui_core",
      "helpMessageID": "",
      "jpControlName": "",
@@ -152,7 +157,11 @@ module DBZ {
      "required": false,
      "onClick": "",
      "newLineItemNumber": 3,
+<<<<<<< HEAD
      "spaceSize": "S",
+=======
+     "spaceSize": "M",
+>>>>>>> feature/UI-KyufuKanri-37343
      "labelLText": "",
      "labelLWidth": "S",
      "labelLAlign": 2,
@@ -200,7 +209,11 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
+<<<<<<< HEAD
      "marginLeft": "0",
+=======
+     "marginLeft": "XS",
+>>>>>>> feature/UI-KyufuKanri-37343
      "marginRight": "XS",
      "selectControlID": "txtShisetsuCode_core",
      "helpMessageID": "",
@@ -254,12 +267,21 @@ module DBZ {
      "jpControlName": "",
      "onClick": "",
      "icon": 0,
+<<<<<<< HEAD
      "text": "",
      "appearance": 2,
      "imageFileUrl": "/uz/uza/image/UZ_Search.png",
      "imageWidth": "",
      "imageHeight": "",
      "heightTextBoxMatches": true,
+=======
+     "text": "■",
+     "appearance": 2,
+     "imageFileUrl": "/uz/uza/css/Link.jpg",
+     "imageWidth": "20",
+     "imageHeight": "15",
+     "heightTextBoxMatches": false,
+>>>>>>> feature/UI-KyufuKanri-37343
      "displayChildDivName": "DBZ.JigyoshaInputGuide",
      "dataPassing": [
       {
@@ -299,10 +321,17 @@ module DBZ {
      "icon": 0,
      "text": "■",
      "appearance": 2,
+<<<<<<< HEAD
      "imageFileUrl": "/uz/uza/image/UZ_Search.png",
      "imageWidth": "20",
      "imageHeight": "15",
      "heightTextBoxMatches": true,
+=======
+     "imageFileUrl": "/uz/uza/css/Link.jpg",
+     "imageWidth": "20",
+     "imageHeight": "15",
+     "heightTextBoxMatches": false,
+>>>>>>> feature/UI-KyufuKanri-37343
      "displayChildDivName": "DBZ.OtherTokureiShisetsuInputGuide",
      "dataPassing": [
       {
@@ -346,10 +375,17 @@ module DBZ {
      "icon": 0,
      "text": "■",
      "appearance": 2,
+<<<<<<< HEAD
      "imageFileUrl": "/uz/uza/image/UZ_Search.png",
      "imageWidth": "20",
      "imageHeight": "15",
      "heightTextBoxMatches": true,
+=======
+     "imageFileUrl": "/uz/uza/css/Link.jpg",
+     "imageWidth": "20",
+     "imageHeight": "15",
+     "heightTextBoxMatches": false,
+>>>>>>> feature/UI-KyufuKanri-37343
      "displayChildDivName": "DBZ.TekiyoJogaiShisetsuInputGuide",
      "dataPassing": [
       {

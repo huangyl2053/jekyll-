@@ -136,7 +136,11 @@ module DBZ {
      "fieldName": "dgShikakuShutokuRireki",
      "items": [],
      "controlType": "DataGrid",
+<<<<<<< HEAD
      "width": "1085",
+=======
+     "width": "1090",
+>>>>>>> feature/UI-KyufuKanri-37343
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -152,7 +156,10 @@ module DBZ {
      "selectControlID": "dgShikakuShutokuRireki",
      "helpMessageID": "",
      "jpControlName": "",
+<<<<<<< HEAD
      "readOnly": false,
+=======
+>>>>>>> feature/UI-KyufuKanri-37343
      "height": "S",
      "gridSetting": {
       "rowHeight": 25,
@@ -742,7 +749,11 @@ module DBZ {
     }
    ],
    "controlType": "Panel",
+<<<<<<< HEAD
    "width": "1090",
+=======
+   "width": "1100",
+>>>>>>> feature/UI-KyufuKanri-37343
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -792,7 +803,14 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
+<<<<<<< HEAD
    "eraseBorder": true,
+=======
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true,
+>>>>>>> feature/UI-KyufuKanri-37343
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -857,9 +875,13 @@ module DBZ {
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
+<<<<<<< HEAD
  "dialogCancelEventNameForDialog": "",
  "canTransferEvent": true,
  "heightForDialog": "M"
+=======
+ "dialogCancelEventNameForDialog": ""
+>>>>>>> feature/UI-KyufuKanri-37343
 }        
     }
 }

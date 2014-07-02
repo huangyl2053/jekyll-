@@ -26,8 +26,8 @@ public class JutakuKaishuShinseiListDiv extends Panel {
     private Button btnAddShinsei;
     @JsonProperty("dgJutakuKaishuShinseiList")
     private DataGrid<dgJutakuKaishuShinseiList_Row> dgJutakuKaishuShinseiList;
-    @JsonProperty("btnReturnHihokensha")
-    private Button btnReturnHihokensha;
+    @JsonProperty("btnDummy")
+    private Button btnDummy;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -55,14 +55,14 @@ public class JutakuKaishuShinseiListDiv extends Panel {
         this.dgJutakuKaishuShinseiList=dgJutakuKaishuShinseiList;
     }
 
-    @JsonProperty("btnReturnHihokensha")
-    public Button getBtnReturnHihokensha() {
-        return btnReturnHihokensha;
+    @JsonProperty("btnDummy")
+    public Button getBtnDummy() {
+        return btnDummy;
     }
 
-    @JsonProperty("btnReturnHihokensha")
-    public void setBtnReturnHihokensha(Button btnReturnHihokensha) {
-        this.btnReturnHihokensha=btnReturnHihokensha;
+    @JsonProperty("btnDummy")
+    public void setBtnDummy(Button btnDummy) {
+        this.btnDummy=btnDummy;
     }
 
 }

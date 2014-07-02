@@ -78,7 +78,11 @@ var DBZ;
                             "fieldName": "btnSearchGaitoHokensha",
                             "items": [],
                             "controlType": "Button",
+<<<<<<< HEAD
                             "width": "140",
+=======
+                            "width": "200",
+>>>>>>> feature/UI-KyufuKanri-37343
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -198,11 +202,14 @@ var DBZ;
                                     "onSelectBySelectButton": "onSelectBySelectButton_dgSearchResultHokensha",
                                     "onSelectByModifyButton": "",
                                     "onSelectByDeleteButton": "",
+<<<<<<< HEAD
                                     "onAfterRequest": "",
                                     "onAfterRequestByDblClick": "",
                                     "onAfterRequestBySelectButton": "",
                                     "onAfterRequestByModifyButton": "",
                                     "onAfterRequestByDeleteButton": "",
+=======
+>>>>>>> feature/UI-KyufuKanri-37343
                                     "onOnlyRow": "",
                                     "onNoRow": "",
                                     "onMultiRows": "",
@@ -257,7 +264,11 @@ var DBZ;
                             "fieldName": "btnHokenshaReturn",
                             "items": [],
                             "controlType": "Button",
+<<<<<<< HEAD
                             "width": "140",
+=======
+                            "width": "200",
+>>>>>>> feature/UI-KyufuKanri-37343
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -274,7 +285,11 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "onClick": "onClick_btnHokenshaReturn",
+<<<<<<< HEAD
                             "text": "閉じる",
+=======
+                            "text": "保険者入力ガイドを閉じる",
+>>>>>>> feature/UI-KyufuKanri-37343
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",

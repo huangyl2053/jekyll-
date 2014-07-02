@@ -1,0 +1,42 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "0",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0610011",
+   "eventName": "modifyShinsei",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0610012",
+   "toEventName": "modify"
+  },
+  {
+   "id": "1",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0610012",
+   "eventName": "cancel",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0610011",
+   "toEventName": ""
+  },
+  {
+   "id": "2",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0610012",
+   "eventName": "settled",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0610011",
+   "toEventName": "modified"
+  },
+  {
+   "id": "3",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0610011",
+   "eventName": "complete",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0610013",
+   "toEventName": ""
+  }
+ ],
+ "subGyomuCode": "DBC",
+ "uiContainerName": "DBCUC06100"
+}

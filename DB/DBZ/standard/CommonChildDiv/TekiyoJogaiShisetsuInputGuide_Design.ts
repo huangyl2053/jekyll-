@@ -54,11 +54,14 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "dgTekiyoJogaiShisetsu",
+<<<<<<< HEAD
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
      "height": "S",
      "dataSource": [],
+=======
+>>>>>>> feature/UI-KyufuKanri-37343
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -148,11 +151,14 @@ module DBZ {
      "onSelectBySelectButton": "onSelectBySelectButton_dgTekiyoJogaiShisetsu",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+<<<<<<< HEAD
      "onAfterRequest": "",
      "onAfterRequestByDblClick": "",
      "onAfterRequestBySelectButton": "",
      "onAfterRequestByModifyButton": "",
      "onAfterRequestByDeleteButton": "",
+=======
+>>>>>>> feature/UI-KyufuKanri-37343
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -165,7 +171,11 @@ module DBZ {
      "fieldName": "btnReturn",
      "items": [],
      "controlType": "Button",
+<<<<<<< HEAD
      "width": "100",
+=======
+     "width": "250",
+>>>>>>> feature/UI-KyufuKanri-37343
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -179,16 +189,25 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "btnReturn",
+<<<<<<< HEAD
      "helpMessageID": "",
      "jpControlName": "",
      "onClick": "onClick_btnReturn",
      "text": "閉じる",
+=======
+     "onClick": "onClick_btnReturn",
+     "text": "適用除外施設入力ガイドを閉じる",
+>>>>>>> feature/UI-KyufuKanri-37343
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+<<<<<<< HEAD
      "icon": 0,
      "heightTextBoxMatches": false
+=======
+     "icon": 0
+>>>>>>> feature/UI-KyufuKanri-37343
     }
    ],
    "controlType": "Panel",
@@ -206,8 +225,11 @@ module DBZ {
    "marginLeft": "XS",
    "marginRight": "XS",
    "selectControlID": "TekiyoJogaiShisetsuInputGuide",
+<<<<<<< HEAD
    "helpMessageID": "",
    "jpControlName": "",
+=======
+>>>>>>> feature/UI-KyufuKanri-37343
    "onLoad": "",
    "title": "適用除外施設入力ガイド",
    "marginTop": "Default",
@@ -247,8 +269,12 @@ module DBZ {
    "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
+<<<<<<< HEAD
    "readOnly": false,
    "height": "Auto"
+=======
+   "readOnly": false
+>>>>>>> feature/UI-KyufuKanri-37343
   }
  ],
  "controlType": "CommonChildDiv",
@@ -263,11 +289,17 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
+<<<<<<< HEAD
  "marginLeft": "0",
  "marginRight": "0",
  "selectControlID": "defaultLayout",
  "helpMessageID": "",
  "jpControlName": "",
+=======
+ "marginLeft": 0,
+ "marginRight": 0,
+ "selectControlID": "defaultLayout",
+>>>>>>> feature/UI-KyufuKanri-37343
  "relation": [],
  "businessId": "DBZ",
  "controlName": "TekiyoJogaiShisetsuInputGuide",
@@ -285,9 +317,13 @@ module DBZ {
   }
  ],
  "dialogOkEventNameForDialog": "onSelectBySelectButton_dgTekiyoJogaiShisetsu",
+<<<<<<< HEAD
  "dialogCancelEventNameForDialog": "onClick_btnReturn",
  "canTransferEvent": true,
  "heightForDialog": "Auto"
+=======
+ "dialogCancelEventNameForDialog": "onClick_btnReturn"
+>>>>>>> feature/UI-KyufuKanri-37343
 }        
     }
 }

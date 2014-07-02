@@ -5,28 +5,23 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoGemmenGengakuDiv;
+import java.util.HashMap;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoInquiryPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoKihonJohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoKokiKoreiKokuhoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoKyotakuServicePlanDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoKyufuSeigenDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoNijiyoboJigyoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoRojinHokenDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoSearchPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoShikyugendoKijungakuDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoYokaigoninteiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgJukyushaIdoRenrakuhyoSearchResult_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0040011.JukyushaIdoRenrakuhyoSearchPanelDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+
 
 /**
  * 受給者異動連絡票情報照会の照会パネルです。
  *
  * @author N3317 塚田 萌
+ * @author n8823 ymlData 適用
  */
 public class JukyushaIdoRenrakuhyoInquiryPanel {
 
@@ -37,11 +32,13 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
      * @param searchPanel 検索パネル
      * @return ResponseData
      */
-    public ResponseData<JukyushaIdoRenrakuhyoInquiryPanelDiv> onLoad(
+    public ResponseData<JukyushaIdoRenrakuhyoInquiryPanelDiv> onClick_btnShowDetail(
             JukyushaIdoRenrakuhyoInquiryPanelDiv inquiryPanel, JukyushaIdoRenrakuhyoSearchPanelDiv searchPanel) {
 
-        set連絡票(inquiryPanel,
-                searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem());
+//        set連絡票(inquiryPanel,
+//                searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem());
+        //連絡票
+        setJukyushaIdoRenrakuhyoInquiry(inquiryPanel, searchPanel);
 
         ResponseData<JukyushaIdoRenrakuhyoInquiryPanelDiv> response = new ResponseData<>();
         response.data = inquiryPanel;
@@ -64,81 +61,219 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
         return response;
     }
 
-    private void set連絡票(JukyushaIdoRenrakuhyoInquiryPanelDiv inquiryPanel, dgJukyushaIdoRenrakuhyoSearchResult_Row selectedRow) {
-        set基本情報(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho(), selectedRow);
-        set要介護認定(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoYokaigonintei());
-        set支給限度基準額(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoShikyugendoKijungaku());
-        set居宅サービス計画(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKyotakuServicePlan());
-        set給付制限(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKyufuSeigen());
-        set後期高齢国保(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKokiKoreiKokuho());
-        set老人保健(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoRojinHoken());
-        set減免減額(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoGemmenGengaku());
-        set二次予防事業(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoNijiyoboJigyo());
+    //連絡票
+    private void setJukyushaIdoRenrakuhyoInquiry(JukyushaIdoRenrakuhyoInquiryPanelDiv inquiryPanel, JukyushaIdoRenrakuhyoSearchPanelDiv searchPanel) {
+
+        //基本情報 要介護認定 支給限度基準額 居宅サービス計画 後期高齢国保
+        setJukyushaIdoRenrakuhyoKihonJoho(inquiryPanel, searchPanel);
 
     }
 
-    private void set基本情報(JukyushaIdoRenrakuhyoKihonJohoDiv kihonJohoDiv, dgJukyushaIdoRenrakuhyoSearchResult_Row selectedRow) {
+    //set情報
+    private void setJukyushaIdoRenrakuhyoKihonJoho(JukyushaIdoRenrakuhyoInquiryPanelDiv inquiryPanel, JukyushaIdoRenrakuhyoSearchPanelDiv searchPanel) {
+        List<HashMap> ymlData = ymlData("dbc0040011/JukyushaIdoRenrakuhyoInquiryInfo.yml");
 
-        kihonJohoDiv.getTxtRenrakuhyoHihoNo().setValue(selectedRow.getTxtResultHihoNo().getValue());
-        kihonJohoDiv.getTxtRenrakuhyoHihoName().setValue(selectedRow.getTxtResultHihoName().getValue());
-        kihonJohoDiv.getTxtRenrakuhyoSendYM().setValue(selectedRow.getTxtResultSendYM().getValue());
-        kihonJohoDiv.getTxtRenrakuhyoIdoDate().setValue(selectedRow.getTxtResultIdoDate().getValue());
+        HashMap hashMap = null;
+        //## set基本情報 
+        //①対象者一覧から選択した内容をもとに基本情報に設定する
+        
+        //異動日
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
+                getTxtRenrakuhyoIdoDate().setValue(new FlexibleDate(
+                                setSeireki(searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
+                                        getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtResultIdoDate())));
+      
+        //異動区分
+        for (int i = 0; i < inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getRadRenrakuhyoIdoKubun().getDataSource().size(); i++) {
+            
+            System.out.print("asdfasdfasdfasdfsda" +
+                    inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getRadRenrakuhyoIdoKubun().getDataSource().get(i).getValue().toString());
 
-        kihonJohoDiv.getTxtShikakuShutokuDate().setValue(new FlexibleDate("20111111"));
-        kihonJohoDiv.getTxtHihoBirthday().setValue(new FlexibleDate("20111111"));
-        kihonJohoDiv.getTxtShokisaiHokenshaNo().setValue(new RString("123456"));
+            if (inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getRadRenrakuhyoIdoKubun().getDataSource().get(i).getValue().toString().
+                    equals(searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
+                            getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtRenrakuhyoIdoKubun().toString())) {
+
+                inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
+                        getRadRenrakuhyoIdoKubun().setSelectedItem(
+                                inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getRadRenrakuhyoIdoKubun().getDataSource().get(i).getKey());
+                break;
+            }
+        }
+
+        //異動事由        
+        for (int i = 0; i < inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu().getDataSource().size(); i++) {
+
+                        System.out.print("asdfasdfasdfasdfsda" +
+                    inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu().getDataSource().get(i).getValue().toString());
+            
+            if (inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu().getDataSource().get(i).getValue().toString().
+                    equals(searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
+                            getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtDdlIdoJiyu().toString())) {
+
+                inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
+                        getDdlIdoJiyu().setSelectedItem(
+                                inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu().getDataSource().get(i).getKey());
+                 break;
+            }
+        }
+        
+        
+        //被保険番号
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
+                getTxtRenrakuhyoHihoNo().setValue(new RString(
+                                searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
+                                getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtResultHihoNo().toString()));
+
+        //カナ氏名
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
+                getTxtRenrakuhyoHihoName().setValue(new RString(
+                                searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
+                                getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtResultHihoName().toString()));
+
+        //送付年月
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
+                getTxtRenrakuhyoSendYM().setValue(new FlexibleDate(
+                                setSeireki(searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
+                                        getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtResultSendYM())));
+        //テスト用
+//        switch (searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
+//                getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtResultHihoNo().toString()) {
+//            case "0000000001":
+//                hashMap = ymlData.get(0);
+//                break;
+//            case "0000000002":
+//                hashMap = ymlData.get(1);
+//                break;
+//            case "0000000003":
+//                hashMap = ymlData.get(2);
+//                break;
+//       }
+        
+        hashMap = ymlData.get(0);
+        ControlGenerator ymlDt = new ControlGenerator(hashMap);
+
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
+                getTxtHihoBirthday().setValue(ymlDt.getAsFlexibleDate("hihoBirthday"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
+                getTxtShikakuShutokuDate().setValue(ymlDt.getAsFlexibleDate("shikakuShutokuDate"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getTxtShokisaiHokenshaNo().
+                setValue(ymlDt.getAsRString("shokisaiHokenshaNo"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getTxtKoikiHokenshaNo().
+                setValue(ymlDt.getAsRString("koikiHokenshaNo"));
+
+        //##set要介護認定
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoYokaigonintei().
+                getTxtShinseiDate().setValue(ymlDt.getAsFlexibleDate("shinseiDate"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoYokaigonintei().
+                getTxtNinteiDateRange().setFromValue(ymlDt.getAsRDate("ninteiDateRangefrom"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoYokaigonintei().
+                getTxtNinteiDateRange().setToValue(ymlDt.getAsRDate("ninteiDateRangeto"));
+
+        //##set支給限度基準額    
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoShikyugendoKijungaku().
+                getTxtKyuHomonTsushoShikyuGendoKijungaku().setValue(ymlDt.getAsDecimal("kyuHomonTsushoShikyuGendoKijungaku"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoShikyugendoKijungaku().
+                getTxtKyuHomonTsushoKanriTekiyoDateRange().setFromValue(ymlDt.getAsRDate("kyuHomonTsushoKanriTekiyoDateRangefrom"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoShikyugendoKijungaku().
+                getTxtKyuHomonTsushoKanriTekiyoDateRange().setToValue(ymlDt.getAsRDate("kyuHomonTsushoKanriTekiyoDateRangeto"));
+
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoShikyugendoKijungaku().
+                getTxtKyuTankiNyushoShikyuGendoKijungaku().setValue(ymlDt.getAsDecimal("kyuTankiNyushoShikyuGendoKijungaku"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoShikyugendoKijungaku().
+                getTxtKyuTankiNyushoKanriTekiyoDateRange().setFromValue(ymlDt.getAsRDate("kyuTankiNyushoKanriTekiyoDateRangefrom"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoShikyugendoKijungaku().
+                getTxtKyuTankiNyushoKanriTekiyoDateRange().setToValue(ymlDt.getAsRDate("kyuTankiNyushoKanriTekiyoDateRangeto"));
+
+        //##set居宅サービス計画
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKyotakuServicePlan().
+                getTxtShienJigyoshaNo().setValue(ymlDt.getAsRString("shienJigyoshaNo"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKyotakuServicePlan().
+                getTxtShienJigyoshaName().setValue(ymlDt.getAsRString("shienJigyoshaName"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKyotakuServicePlan().
+                getTxtKyotakuServicePlanTekiyoDateRange().setFromValue(ymlDt.getAsRDate("kyuTankiNyushoKanriTekiyoDateRangefrom"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKyotakuServicePlan().
+                getTxtKyotakuServicePlanTekiyoDateRange().setToValue(ymlDt.getAsRDate("kyuTankiNyushoKanriTekiyoDateRangeto"));
+
+        //##set後期高齢国保
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKokiKoreiKokuho().getJukyushaIdoRenrakuhyoKokiKorei()
+                .getTxtKokiKoreiHokenshaNo().setValue(ymlDt.getAsRString("shienJigyoshaNo"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKokiKoreiKokuho().getJukyushaIdoRenrakuhyoKokiKorei()
+                .getTxtKokiKoreiHihokenshaNo().setValue(ymlDt.getAsRString("shienJigyoshaNo"));
+
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKokiKoreiKokuho().getJukyushaIdoRenrakuhyoKokuho().
+                getTxtKokuhoHokenshaNo().setValue(ymlDt.getAsRString("kokuhoHokenshaNo"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKokiKoreiKokuho().getJukyushaIdoRenrakuhyoKokuho().
+                getTxtKokuhoHihokenshashoNo().setValue(ymlDt.getAsRString("kokuhoHihokenshashoNo"));
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKokiKoreiKokuho().getJukyushaIdoRenrakuhyoKokuho().
+                getTxtKokuhoKojinNo().setValue(ymlDt.getAsRString("kokuhoKojinNo"));
+        
+        //##setRadio
+        //異動区分
+        //inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
+        //        getRadRenrakuhyoIdoKubun().setSelectedItem(ymlDt.getAsRString("radRenrakuhyoIdoKubun"));
+
+        //異動事由区分
+        //inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu()
+        //       .setSelectedItem(ymlDt.getAsRString("radRenrakuhyoIdoKubun"));
+
+        //性別
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
+                getRadHihoSex().setSelectedItem(ymlDt.getAsRString("radHihoSex"));
+        //申請種別
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoYokaigonintei().
+                getRadShinseiType().setSelectedItem(ymlDt.getAsRString("radShinseiType"));
+        //変更申請中区分
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoYokaigonintei().
+                getRadHenkoShinseichuKubun().setSelectedItem(ymlDt.getAsRString("radHenkoShinseichuKubun"));
+        //みなし区分
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoYokaigonintei().
+                getRadMinashiYokaigoKubun().setSelectedItem(ymlDt.getAsRString("radMinashiYokaigoKubun"));
+        //計画作成区分
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKyotakuServicePlan().
+                getRadPlanSakuseiKubun().setSelectedItem(ymlDt.getAsRString("radPlanSakuseiKubun"));
+        //小規模居宅サービス利用区分
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKyotakuServicePlan().
+                getRadShokiboKyotakuServiceRiyoUmu().setSelectedItem(ymlDt.getAsRString("radShokiboKyotakuServiceRiyoUmu"));
+        //減免申請中区分
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoGemmenGengaku().
+                getRadGemmenShinseichuKubun().setSelectedItem(ymlDt.getAsRString("radGemmenShinseichuKubun"));
+        //区分
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoGemmenGengaku().
+                getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoRiyoshaFutan().
+                getRadRiyoshaFutanKubun().setSelectedItem(ymlDt.getAsRString("radRiyoshaFutanKubun"));
+        //区分
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoGemmenGengaku().
+                getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoHyojunFutan().
+                getRadHyojunFutanKubun().setSelectedItem(ymlDt.getAsRString("radHyojunFutanKubun"));
+        //認定申請中区分
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoGemmenGengaku().
+                getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getRadNinteiShinseichuKubun().
+                setSelectedItem(ymlDt.getAsRString("radNinteiShinseichuKubun"));
+        //サービス区分
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoGemmenGengaku().
+                getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getRadServiceKubun().
+                setSelectedItem(ymlDt.getAsRString("radServiceKubun"));
+        //特例減額措置対象
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoGemmenGengaku().
+                getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi().getRadTokureiKeigenSochiTaisho().
+                setSelectedItem(ymlDt.getAsRString("radTokureiKeigenSochiTaisho"));
+        //公費負担上限額減額(生活保護等)
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKyufuSeigen().getRadKohiFutanJogengakuGengakuUmu().
+                setSelectedItem(ymlDt.getAsRString("radKohiFutanJogengakuGengakuUmu"));
+        //事業区分
+        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoNijiyoboJigyo().getRadNijiyoboJigyoKubun().
+                setSelectedItem(ymlDt.getAsRString("radNijiyoboJigyoKubun"));
+        
+
     }
 
-    private void set要介護認定(JukyushaIdoRenrakuhyoYokaigoninteiDiv 要介護認定Div) {
-        要介護認定Div.getTxtShinseiDate().setValue(new FlexibleDate("20111111"));
-        要介護認定Div.getTxtNinteiDateRange().setFromValue(new RDate("20111111"));
-        要介護認定Div.getTxtNinteiDateRange().setToValue(new RDate("20111111"));
-
+    private String setSeireki(RString seireki) {
+        RDate seirekiYmd = new RDate(seireki.toString());
+        return seirekiYmd.toString();
     }
 
-    private void set支給限度基準額(JukyushaIdoRenrakuhyoShikyugendoKijungakuDiv 支給限度基準額Div) {
-        支給限度基準額Div.getTxtKyuHomonTsushoShikyuGendoKijungaku().setValue(new Decimal("1000"));
-        支給限度基準額Div.getTxtKyuHomonTsushoKanriTekiyoDateRange().setFromValue(new RDate("20111111"));
-        支給限度基準額Div.getTxtKyuHomonTsushoKanriTekiyoDateRange().setToValue(new RDate("20111111"));
-
-        支給限度基準額Div.getTxtKyuTankiNyushoShikyuGendoKijungaku().setValue(new Decimal("1000"));
-        支給限度基準額Div.getTxtKyuTankiNyushoKanriTekiyoDateRange().setFromValue(new RDate("20111111"));
-        支給限度基準額Div.getTxtKyuTankiNyushoKanriTekiyoDateRange().setToValue(new RDate("20111111"));
-
+    private List<HashMap> ymlData(String ymlName) {
+        return YamlLoader.DBC.loadAsList(new RString(ymlName));
     }
 
-    private void set居宅サービス計画(JukyushaIdoRenrakuhyoKyotakuServicePlanDiv 居宅サービス計画Div) {
-        居宅サービス計画Div.getTxtShienJigyoshaNo().setValue(new RString("1234567890"));
-        居宅サービス計画Div.getTxtShienJigyoshaName().setValue(new RString("たちばな"));
-        居宅サービス計画Div.getTxtKyotakuServicePlanTekiyoDateRange().setFromValue(new RDate("20111111"));
-        居宅サービス計画Div.getTxtKyotakuServicePlanTekiyoDateRange().setToValue(new RDate("20111111"));
-
-    }
-
-    private void set給付制限(JukyushaIdoRenrakuhyoKyufuSeigenDiv 給付制限Div) {
-        //給付制限なし
-    }
-
-    private void set後期高齢国保(JukyushaIdoRenrakuhyoKokiKoreiKokuhoDiv 後期高齢国保Div) {
-        後期高齢国保Div.getJukyushaIdoRenrakuhyoKokiKorei().getTxtKokiKoreiHokenshaNo().setValue(new RString("12345678"));
-        後期高齢国保Div.getJukyushaIdoRenrakuhyoKokiKorei().getTxtKokiKoreiHihokenshaNo().setValue(new RString("12345678"));
-
-        後期高齢国保Div.getJukyushaIdoRenrakuhyoKokuho().getTxtKokuhoHokenshaNo().setValue(new RString("12345678"));
-        後期高齢国保Div.getJukyushaIdoRenrakuhyoKokuho().getTxtKokuhoHihokenshashoNo().setValue(new RString("12345678901234567890"));
-        後期高齢国保Div.getJukyushaIdoRenrakuhyoKokuho().getTxtKokuhoKojinNo().setValue(new RString("1234567890"));
-
-    }
-
-    private void set老人保健(JukyushaIdoRenrakuhyoRojinHokenDiv 老人保健Div) {
-        //老健なし
-    }
-
-    private void set減免減額(JukyushaIdoRenrakuhyoGemmenGengakuDiv 減免減額Div) {
-        //申請なし
-
-    }
-
-    private void set二次予防事業(JukyushaIdoRenrakuhyoNijiyoboJigyoDiv 二次予防事業) {
-        //なし
-    }
 }

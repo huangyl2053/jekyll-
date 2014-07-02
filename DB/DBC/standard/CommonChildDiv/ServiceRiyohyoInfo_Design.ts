@@ -148,6 +148,258 @@ module DBC {
             }
         }
         
+        public get dgServiceRiyohyoListGridSetting() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"])["gridSetting"];
+        }
+        
+        public set dgServiceRiyohyoListGridSetting(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"])["gridSetting"] = value;
+            } else {
+                this.layout.items[0].items[11].items[0].items[2]["gridSetting"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get onClickZengetsuCopy() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"])["onClick"];
+        }
+        
+        public set onClickZengetsuCopy(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[10]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get onClickRiyohyoMeisaiAdd() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[1]["fieldName"])["onClick"];
+        }
+        
+        public set onClickRiyohyoMeisaiAdd(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[1]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[1]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[1]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[0].items[1]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get onClickBeppyoMeisaiNew() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[0]["fieldName"])["onClick"];
+        }
+        
+        public set onClickBeppyoMeisaiNew(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[0]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[1].items[0]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get onClickBeppyoGokeiNew() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[1]["fieldName"])["onClick"];
+        }
+        
+        public set onClickBeppyoGokeiNew(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[1]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[1]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[1]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[1].items[1]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get onClickBeppyoMeisaiKakutei() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[14]["fieldName"])["onClick"];
+        }
+        
+        public set onClickBeppyoMeisaiKakutei(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[14]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[14]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[14]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[2].items[14]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get onClickBeppyoGokeiKakutei() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[15]["fieldName"])["onClick"];
+        }
+        
+        public set onClickBeppyoGokeiKakutei(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[15]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[15]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[15]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[3].items[15]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get dgServiceRiyohyoBeppyoListGridSetting() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"])["gridSetting"];
+        }
+        
+        public set dgServiceRiyohyoBeppyoListGridSetting(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"])["gridSetting"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[1].items[2]["gridSetting"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get dgServiceRiyohyoListSelectByDblClick() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"])["onSelectByDblClick"];
+        }
+        
+        public set dgServiceRiyohyoListSelectByDblClick(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"])["onSelectByDblClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[0].items[2]["onSelectByDblClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get dgServiceRiyohyoListSelectBySelect() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"])["onSelectBySelectButton"];
+        }
+        
+        public set dgServiceRiyohyoListSelectBySelect(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"])["onSelectBySelectButton"] = value;
+            } else {
+                this.layout.items[0].items[11].items[0].items[2]["onSelectBySelectButton"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get dgServiceRiyohyoListSelectByDelete() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"])["onSelectByDeleteButton"];
+        }
+        
+        public set dgServiceRiyohyoListSelectByDelete(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"])["onSelectByDeleteButton"] = value;
+            } else {
+                this.layout.items[0].items[11].items[0].items[2]["onSelectByDeleteButton"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get dgServiceRiyohyoBeppyoListSelectByDblClick() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"])["onSelectByDblClick"];
+        }
+        
+        public set dgServiceRiyohyoBeppyoListSelectByDblClick(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"])["onSelectByDblClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[1].items[2]["onSelectByDblClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get dgServiceRiyohyoBeppyoListSelectBySelect() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"])["onSelectBySelectButton"];
+        }
+        
+        public set dgServiceRiyohyoBeppyoListSelectBySelect(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"])["onSelectBySelectButton"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[1].items[2]["onSelectBySelectButton"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get dgServiceRiyohyoBeppyoListSelectByDelete() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"])["onSelectByDeleteButton"];
+        }
+        
+        public set dgServiceRiyohyoBeppyoListSelectByDelete(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"])["onSelectByDeleteButton"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[1].items[2]["onSelectByDeleteButton"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get ServiceRiyohyoEraseBorder() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
+        }
+        
+        public set ServiceRiyohyoEraseBorder(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
+            } else {
+                this.layout.items[0]["eraseBorder"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get onClickBtnCalcMeisai() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[13]["fieldName"])["onClick"];
+        }
+        
+        public set onClickBtnCalcMeisai(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[13]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[13]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[13]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[2].items[13]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get onClickBtnCalcGokei() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"])["onClick"];
+        }
+        
+        public set onClickBtnCalcGokei(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[3].items[14]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get onBlurTxtSreviceCode() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[3]["fieldName"])["onBlur"];
+        }
+        
+        public set onBlurTxtSreviceCode(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[3]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[3]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[3]["fieldName"])["onBlur"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[2].items[3]["onBlur"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, ServiceRiyohyoInfo_Design.myLayout, fieldName);
         }
@@ -168,6 +420,24 @@ module DBC {
             Uz.JSControlUtil.registProperty("KeikakuJigyoshaCodeDisplayNone");
             Uz.JSControlUtil.registProperty("KeikakuJigyoshaNameVisible");
             Uz.JSControlUtil.registProperty("KeikakuJigyoshaNameDisplayNone");
+            Uz.JSControlUtil.registProperty("dgServiceRiyohyoListGridSetting");
+            Uz.JSControlUtil.registProperty("onClickZengetsuCopy");
+            Uz.JSControlUtil.registProperty("onClickRiyohyoMeisaiAdd");
+            Uz.JSControlUtil.registProperty("onClickBeppyoMeisaiNew");
+            Uz.JSControlUtil.registProperty("onClickBeppyoGokeiNew");
+            Uz.JSControlUtil.registProperty("onClickBeppyoMeisaiKakutei");
+            Uz.JSControlUtil.registProperty("onClickBeppyoGokeiKakutei");
+            Uz.JSControlUtil.registProperty("dgServiceRiyohyoBeppyoListGridSetting");
+            Uz.JSControlUtil.registProperty("dgServiceRiyohyoListSelectByDblClick");
+            Uz.JSControlUtil.registProperty("dgServiceRiyohyoListSelectBySelect");
+            Uz.JSControlUtil.registProperty("dgServiceRiyohyoListSelectByDelete");
+            Uz.JSControlUtil.registProperty("dgServiceRiyohyoBeppyoListSelectByDblClick");
+            Uz.JSControlUtil.registProperty("dgServiceRiyohyoBeppyoListSelectBySelect");
+            Uz.JSControlUtil.registProperty("dgServiceRiyohyoBeppyoListSelectByDelete");
+            Uz.JSControlUtil.registProperty("ServiceRiyohyoEraseBorder");
+            Uz.JSControlUtil.registProperty("onClickBtnCalcMeisai");
+            Uz.JSControlUtil.registProperty("onClickBtnCalcGokei");
+            Uz.JSControlUtil.registProperty("onBlurTxtSreviceCode");
         }
         
         /**
@@ -187,6 +457,24 @@ module DBC {
             editablePropertyInfo["KeikakuJigyoshaCodeDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["KeikakuJigyoshaNameVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["visible"];
             editablePropertyInfo["KeikakuJigyoshaNameDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["dgServiceRiyohyoListGridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
+            editablePropertyInfo["onClickZengetsuCopy"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onClickRiyohyoMeisaiAdd"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onClickBeppyoMeisaiNew"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onClickBeppyoGokeiNew"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[1]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onClickBeppyoMeisaiKakutei"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[14]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onClickBeppyoGokeiKakutei"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[15]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["dgServiceRiyohyoBeppyoListGridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
+            editablePropertyInfo["dgServiceRiyohyoListSelectByDblClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
+            editablePropertyInfo["dgServiceRiyohyoListSelectBySelect"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]).getEditablePropertyInfo()["onSelectBySelectButton"];
+            editablePropertyInfo["dgServiceRiyohyoListSelectByDelete"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]).getEditablePropertyInfo()["onSelectByDeleteButton"];
+            editablePropertyInfo["dgServiceRiyohyoBeppyoListSelectByDblClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
+            editablePropertyInfo["dgServiceRiyohyoBeppyoListSelectBySelect"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]).getEditablePropertyInfo()["onSelectBySelectButton"];
+            editablePropertyInfo["dgServiceRiyohyoBeppyoListSelectByDelete"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]).getEditablePropertyInfo()["onSelectByDeleteButton"];
+            editablePropertyInfo["ServiceRiyohyoEraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
+            editablePropertyInfo["onClickBtnCalcMeisai"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[13]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onClickBtnCalcGokei"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onBlurTxtSreviceCode"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[3]["fieldName"]).getEditablePropertyInfo()["onBlur"];
             
             return editablePropertyInfo;
         }
@@ -213,10 +501,12 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "required": false,
+     "selectControlID": "txtTodokedeYMD_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
+     "required": false,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -233,7 +523,8 @@ module DBC {
      "ymdKubun": 2,
      "displayFormat": 0,
      "value": "20140504",
-     "permitCharactor": "./_-"
+     "permitCharactor": "./_-",
+     "textKind": 0
     },
     {
      "fieldName": "txtTekiyoKikan",
@@ -251,7 +542,10 @@ module DBC {
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
-     "marginRight": "XS",
+     "marginRight": "0",
+     "selectControlID": "txtTekiyoKikan_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
      "isPrivateInfo": false,
      "isPassword": false,
@@ -275,7 +569,9 @@ module DBC {
      "fromText": "",
      "toText": "",
      "fromValue": "",
-     "toValue": ""
+     "toValue": "",
+     "fromSelectControlID": "txtTekiyoKikanFrom",
+     "toSelectControlID": "txtTekiyoKikanTo"
     },
     {
      "fieldName": "txtKeikakuJigyoshaCode",
@@ -293,11 +589,13 @@ module DBC {
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
+     "marginRight": "0",
+     "selectControlID": "txtKeikakuJigyoshaCode_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
+     "required": false,
      "placeHolder": "",
-     "textKind": 2,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -313,18 +611,20 @@ module DBC {
      "labelRAlign": 0,
      "value": "",
      "permitCharactor": "",
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
+     "textKind": 2,
      "isComboBox": false,
      "suggest": [],
+     "decorationClass": "",
      "formatLength": "10"
     },
     {
      "fieldName": "txtKeikakuJigyoshaName",
      "items": [],
      "controlType": "TextBox",
-     "width": "430",
+     "width": "330",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -335,12 +635,14 @@ module DBC {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "0",
      "marginRight": "XS",
-     "required": false,
+     "selectControlID": "txtKeikakuJigyoshaName_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
+     "required": false,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -356,11 +658,13 @@ module DBC {
      "labelRAlign": 0,
      "value": "",
      "permitCharactor": "",
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
+     "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "decorationClass": ""
     },
     {
      "fieldName": "txtTaishoYM",
@@ -379,10 +683,12 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "required": false,
+     "selectControlID": "txtTaishoYM_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
+     "required": false,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -399,7 +705,8 @@ module DBC {
      "ymdKubun": 1,
      "displayFormat": 0,
      "value": "",
-     "permitCharactor": "./_-"
+     "permitCharactor": "./_-",
+     "textKind": 0
     },
     {
      "fieldName": "txtRiyohyoSakuseiYMD",
@@ -418,10 +725,12 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "XS",
-     "required": false,
+     "selectControlID": "txtRiyohyoSakuseiYMD_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
+     "required": false,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -438,7 +747,8 @@ module DBC {
      "ymdKubun": 2,
      "displayFormat": 0,
      "value": "",
-     "permitCharactor": "./_-"
+     "permitCharactor": "./_-",
+     "textKind": 0
     },
     {
      "fieldName": "txtRiyohyoTodokedeYMD",
@@ -457,10 +767,12 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "required": false,
+     "selectControlID": "txtRiyohyoTodokedeYMD_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
+     "required": false,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -477,13 +789,14 @@ module DBC {
      "ymdKubun": 2,
      "displayFormat": 0,
      "value": "",
-     "permitCharactor": "./_-"
+     "permitCharactor": "./_-",
+     "textKind": 0
     },
     {
      "fieldName": "txtKubunShikyuGendogaku",
      "items": [],
      "controlType": "TextBox",
-     "width": "120",
+     "width": "100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -494,12 +807,14 @@ module DBC {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "XS",
      "marginRight": "XS",
-     "required": false,
+     "selectControlID": "txtKubunShikyuGendogaku_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
+     "required": false,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -515,17 +830,19 @@ module DBC {
      "labelRAlign": 0,
      "value": "",
      "permitCharactor": "",
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
-     "textAlign": 0,
+     "textAlign": 2,
+     "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "decorationClass": ""
     },
     {
      "fieldName": "txtRiyohyoSakuseisha",
      "items": [],
      "controlType": "TextBox",
-     "width": "430",
+     "width": "350",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -538,10 +855,12 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "required": false,
+     "selectControlID": "txtRiyohyoSakuseisha_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
+     "required": false,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -557,11 +876,13 @@ module DBC {
      "labelRAlign": 0,
      "value": "",
      "permitCharactor": "",
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
+     "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "decorationClass": ""
     },
     {
      "fieldName": "txtGendoKanriKikan",
@@ -578,8 +899,11 @@ module DBC {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "0",
      "marginRight": "XS",
+     "selectControlID": "txtGendoKanriKikan_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
      "isPrivateInfo": false,
      "isPassword": false,
@@ -589,7 +913,7 @@ module DBC {
      "onKeyPress": "",
      "labelLText": "限度管理期間",
      "labelRText": "",
-     "labelLWidth": "110",
+     "labelLWidth": "100",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -603,7 +927,9 @@ module DBC {
      "fromText": "",
      "toText": "",
      "fromValue": "",
-     "toValue": ""
+     "toValue": "",
+     "fromSelectControlID": "txtGendoKanriKikanFrom",
+     "toSelectControlID": "txtGendoKanriKikanTo"
     },
     {
      "fieldName": "btnZengetsuCopy",
@@ -617,17 +943,22 @@ module DBC {
      "nextFocusFieldName": "",
      "wrap": false,
      "dependencies": [],
-     "float": 0,
+     "float": 2,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "7",
+     "marginLeft": "6",
      "marginRight": "XS",
+     "selectControlID": "btnZengetsuCopy",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "前月の情報をコピーする",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "tabServiceRiyohyo",
@@ -652,9 +983,13 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "lblServiceRiyohyoList",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "月間サービス計画及び実績の記録",
+         "decorationClass": "",
          "align": 2
         },
         {
@@ -674,18 +1009,23 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "btnRiyohyoMeisaiAdd",
+         "helpMessageID": "",
+         "jpControlName": "",
          "text": "明細行を追加する",
          "onClick": "",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "icon": 0,
+         "heightTextBoxMatches": false
         },
         {
          "fieldName": "dgServiceRiyohyoList",
          "items": [],
          "controlType": "DataGrid",
-         "width": "1220",
+         "width": "1080",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -698,13 +1038,24 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "dgServiceRiyohyoList",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "height": "294",
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
+          "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
           "header": {
            "combineColumns": [
             {
@@ -1701,7 +2052,10 @@ module DBC {
              "minValue": "0",
              "isCurrency": false,
              "isComma": false,
-             "decimalPointLength": "0"
+             "decimalPointLength": "0",
+             "onChange": "",
+             "isSetValueToToolTip": false,
+             "readOnly": false
             },
             "align": 1,
             "resize": true,
@@ -1747,7 +2101,10 @@ module DBC {
              "minValue": "0",
              "isCurrency": false,
              "isComma": false,
-             "decimalPointLength": "0"
+             "decimalPointLength": "0",
+             "onChange": "",
+             "isSetValueToToolTip": false,
+             "readOnly": false
             },
             "align": 1,
             "resize": true,
@@ -1770,7 +2127,10 @@ module DBC {
              "minValue": "0",
              "isCurrency": false,
              "isComma": false,
-             "decimalPointLength": "0"
+             "decimalPointLength": "0",
+             "onChange": "",
+             "isSetValueToToolTip": false,
+             "readOnly": false
             },
             "align": 1,
             "resize": true,
@@ -1793,10 +2153,17 @@ module DBC {
            }
           ]
          },
-         "height": "294",
          "onSort": "",
          "onSelect": "",
          "onSelectByDblClick": "",
+         "onSelectBySelectButton": "",
+         "onSelectByModifyButton": "",
+         "onSelectByDeleteButton": "",
+         "onAfterRequest": "",
+         "onAfterRequestByDblClick": "",
+         "onAfterRequestBySelectButton": "",
+         "onAfterRequestByModifyButton": "",
+         "onAfterRequestByDeleteButton": "",
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
@@ -1821,8 +2188,12 @@ module DBC {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "ServiceRiyohyo",
+       "helpMessageID": "",
+       "jpControlName": "",
        "title": "サービス利用票",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       },
       {
        "fieldName": "ServiceRiyohyoBeppyo",
@@ -1847,10 +2218,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtZengetsuRiyoNissu_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -1866,11 +2239,13 @@ module DBC {
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -1894,10 +2269,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtTogetsuRiyoNissu_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -1913,11 +2290,13 @@ module DBC {
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -1941,10 +2320,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtRuikeiRiyoNissu_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": true,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -1960,11 +2341,13 @@ module DBC {
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -1973,7 +2356,7 @@ module DBC {
           }
          ],
          "controlType": "Panel",
-         "width": "1225",
+         "width": "1090",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1986,6 +2369,9 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "ServiceRiyohyoBeppyoRiyoNissu",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onLoad": "",
          "title": "要介護認定期間中の短期入所利用日数",
          "marginTop": "Default",
@@ -2002,13 +2388,13 @@ module DBC {
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
-         "isGroupBox": true
+         "panelDisplay": 1,
+         "isGroupBox": false,
+         "readOnly": false,
+         "height": "Auto"
         },
         {
          "fieldName": "ServiceRiyohyoBeppyoList",
@@ -2030,12 +2416,17 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "btnBeppyoMeisaiNew",
+           "helpMessageID": "",
+           "jpControlName": "",
            "text": "明細情報を追加する",
            "onClick": "",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0,
+           "heightTextBoxMatches": false
           },
           {
            "fieldName": "btnBeppyoGokeiNew",
@@ -2054,18 +2445,23 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "btnBeppyoGokeiNew",
+           "helpMessageID": "",
+           "jpControlName": "",
            "text": "合計情報を追加する",
            "onClick": "",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0,
+           "heightTextBoxMatches": false
           },
           {
            "fieldName": "dgServiceRiyohyoBeppyoList",
            "items": [],
            "controlType": "DataGrid",
-           "width": "1210",
+           "width": "1075",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2078,13 +2474,24 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "dgServiceRiyohyoBeppyoList",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "readOnly": false,
+           "height": "210",
            "gridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": false,
+            "isShowHeader": true,
             "isShowFooter": true,
             "isShowFilter": false,
             "isShowFilterButton": false,
             "isShowRowState": true,
+            "isShowSelectButtonColumn": false,
+            "isShowModifyButtonColumn": false,
+            "isShowDeleteButtonColumn": false,
+            "limitRowCount": 0,
+            "selectedRowCount": 0,
             "header": {
              "combineColumns": [],
              "frozenColumn": "txtService",
@@ -2172,9 +2579,19 @@ module DBC {
               "bgColor": 0,
               "width": 80,
               "visible": true,
-              "cellType": 0,
+              "cellType": 5,
               "cellDetails": {
-               "cellType": 0
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": true,
+               "decimalPointLength": "0",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
               },
               "align": 2,
               "resize": true,
@@ -2188,9 +2605,19 @@ module DBC {
               "bgColor": 0,
               "width": 80,
               "visible": true,
-              "cellType": 0,
+              "cellType": 5,
               "cellDetails": {
-               "cellType": 0
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": true,
+               "decimalPointLength": "0",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
               },
               "align": 2,
               "resize": true,
@@ -2204,9 +2631,19 @@ module DBC {
               "bgColor": 0,
               "width": 80,
               "visible": true,
-              "cellType": 0,
+              "cellType": 5,
               "cellDetails": {
-               "cellType": 0
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": true,
+               "decimalPointLength": "0",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
               },
               "align": 2,
               "resize": true,
@@ -2220,8 +2657,20 @@ module DBC {
               "bgColor": 0,
               "width": 60,
               "visible": true,
-              "cellType": 0,
-              "cellDetails": null,
+              "cellType": 5,
+              "cellDetails": {
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": true,
+               "decimalPointLength": "0",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
+              },
               "align": 2,
               "resize": true,
               "isPrivateInfo": false,
@@ -2234,8 +2683,20 @@ module DBC {
               "bgColor": 0,
               "width": 80,
               "visible": true,
-              "cellType": 0,
-              "cellDetails": null,
+              "cellType": 5,
+              "cellDetails": {
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": true,
+               "decimalPointLength": "0",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
+              },
               "align": 2,
               "resize": true,
               "isPrivateInfo": false,
@@ -2248,8 +2709,20 @@ module DBC {
               "bgColor": 0,
               "width": 90,
               "visible": true,
-              "cellType": 0,
-              "cellDetails": null,
+              "cellType": 5,
+              "cellDetails": {
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": true,
+               "decimalPointLength": "0",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
+              },
               "align": 2,
               "resize": true,
               "isPrivateInfo": false,
@@ -2262,8 +2735,20 @@ module DBC {
               "bgColor": 0,
               "width": 90,
               "visible": true,
-              "cellType": 0,
-              "cellDetails": null,
+              "cellType": 5,
+              "cellDetails": {
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": true,
+               "decimalPointLength": "0",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
+              },
               "align": 2,
               "resize": true,
               "isPrivateInfo": false,
@@ -2276,8 +2761,20 @@ module DBC {
               "bgColor": 0,
               "width": 90,
               "visible": true,
-              "cellType": 0,
-              "cellDetails": null,
+              "cellType": 5,
+              "cellDetails": {
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": true,
+               "decimalPointLength": "0",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
+              },
               "align": 2,
               "resize": true,
               "isPrivateInfo": false,
@@ -2290,8 +2787,20 @@ module DBC {
               "bgColor": 0,
               "width": 90,
               "visible": true,
-              "cellType": 0,
-              "cellDetails": null,
+              "cellType": 5,
+              "cellDetails": {
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": true,
+               "decimalPointLength": "0",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
+              },
               "align": 2,
               "resize": true,
               "isPrivateInfo": false,
@@ -2304,8 +2813,20 @@ module DBC {
               "bgColor": 0,
               "width": 80,
               "visible": true,
-              "cellType": 0,
-              "cellDetails": null,
+              "cellType": 5,
+              "cellDetails": {
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": false,
+               "decimalPointLength": "2",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
+              },
               "align": 2,
               "resize": true,
               "isPrivateInfo": false,
@@ -2318,8 +2839,20 @@ module DBC {
               "bgColor": 0,
               "width": 80,
               "visible": true,
-              "cellType": 0,
-              "cellDetails": null,
+              "cellType": 5,
+              "cellDetails": {
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": true,
+               "decimalPointLength": "0",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
+              },
               "align": 2,
               "resize": true,
               "isPrivateInfo": false,
@@ -2332,8 +2865,20 @@ module DBC {
               "bgColor": 0,
               "width": 60,
               "visible": true,
-              "cellType": 0,
-              "cellDetails": null,
+              "cellType": 5,
+              "cellDetails": {
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": true,
+               "decimalPointLength": "0",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
+              },
               "align": 2,
               "resize": true,
               "isPrivateInfo": false,
@@ -2346,8 +2891,20 @@ module DBC {
               "bgColor": 0,
               "width": 80,
               "visible": true,
-              "cellType": 0,
-              "cellDetails": null,
+              "cellType": 5,
+              "cellDetails": {
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": true,
+               "decimalPointLength": "0",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
+              },
               "align": 2,
               "resize": true,
               "isPrivateInfo": false,
@@ -2360,8 +2917,20 @@ module DBC {
               "bgColor": 0,
               "width": 110,
               "visible": true,
-              "cellType": 0,
-              "cellDetails": null,
+              "cellType": 5,
+              "cellDetails": {
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": true,
+               "decimalPointLength": "0",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
+              },
               "align": 2,
               "resize": true,
               "isPrivateInfo": false,
@@ -2374,8 +2943,20 @@ module DBC {
               "bgColor": 0,
               "width": 110,
               "visible": true,
-              "cellType": 0,
-              "cellDetails": null,
+              "cellType": 5,
+              "cellDetails": {
+               "cellType": 5,
+               "maxLength": "1000000000000",
+               "minLength": "0",
+               "maxValue": "1.7976931348623157e+308",
+               "minValue": "0",
+               "isCurrency": false,
+               "isComma": true,
+               "decimalPointLength": "0",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
+              },
               "align": 2,
               "resize": true,
               "isPrivateInfo": false,
@@ -2383,10 +2964,17 @@ module DBC {
              }
             ]
            },
-           "height": "210",
            "onSort": "",
            "onSelect": "",
            "onSelectByDblClick": "",
+           "onSelectBySelectButton": "",
+           "onSelectByModifyButton": "",
+           "onSelectByDeleteButton": "",
+           "onAfterRequest": "",
+           "onAfterRequestByDblClick": "",
+           "onAfterRequestBySelectButton": "",
+           "onAfterRequestByModifyButton": "",
+           "onAfterRequestByDeleteButton": "",
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
@@ -2398,7 +2986,7 @@ module DBC {
           }
          ],
          "controlType": "Panel",
-         "width": "1225",
+         "width": "1090",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2411,6 +2999,9 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "ServiceRiyohyoBeppyoList",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onLoad": "",
          "title": "区分支給限度管理・利用者負担計算",
          "marginTop": "Default",
@@ -2427,13 +3018,13 @@ module DBC {
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
-         "isGroupBox": false
+         "panelDisplay": 0,
+         "isGroupBox": false,
+         "readOnly": false,
+         "height": "Auto"
         },
         {
          "fieldName": "ServiceRiyohyoBeppyoMeisai",
@@ -2455,10 +3046,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtJigyoshaCode_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -2474,18 +3067,20 @@ module DBC {
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
-           "formatLength": 1
+           "decorationClass": "",
+           "formatLength": "10"
           },
           {
            "fieldName": "btnJigyosha",
            "items": [],
-           "controlType": "Button",
-           "width": "15",
+           "controlType": "ButtonDialog",
+           "width": "S",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2496,17 +3091,36 @@ module DBC {
            "float": 0,
            "toolTip": "",
            "authorityMode": 0,
-           "marginLeft": "0",
+           "marginLeft": "XS",
            "marginRight": "XS",
-           "text": "照",
+           "selectControlID": "btnJigyosha",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "text": "",
            "onClick": "",
-           "appearance": 0,
-           "imageFileUrl": "",
+           "appearance": 2,
+           "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0,
+           "heightTextBoxMatches": true,
+           "displayChildDivName": "DBZ.JigyoshaInputGuide",
+           "dataPassing": [
+            {
+             "key": "jigyoshaCode",
+             "controlName": "txtJigyoshaCode"
+            },
+            {
+             "key": "jigyoshaMeisho",
+             "controlName": "txtJigyoshaName"
+            }
+           ],
+           "visibleCloseButton": true,
+           "onOkClose": "",
+           "onBeforeOpenDialog": ""
           },
           {
-           "fieldName": "btnJigyoshaName",
+           "fieldName": "txtJigyoshaName",
            "items": [],
            "controlType": "TextBox",
            "width": "600",
@@ -2522,10 +3136,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtJigyoshaName_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": true,
+           "required": false,
            "placeHolder": "",
-           "textKind": 0,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -2541,17 +3157,19 @@ module DBC {
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
+           "textKind": 0,
            "isComboBox": false,
-           "suggest": []
+           "suggest": [],
+           "decorationClass": ""
           },
           {
-           "fieldName": "txtServiceShuruiCode",
+           "fieldName": "txtServiceCode",
            "items": [],
            "controlType": "TextBoxCode",
-           "width": "20",
+           "width": "50",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2564,14 +3182,16 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtServiceCode_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
-           "onBlur": "",
+           "onBlur": "onBlurServiceCode",
            "onChange": "",
            "onKeyPress": "",
            "text": "",
@@ -2583,85 +3203,20 @@ module DBC {
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
-           "isComboBox": false,
-           "suggest": [],
-           "formatLength": 1
-          },
-          {
-           "fieldName": "btnServiceShurui",
-           "items": [],
-           "controlType": "Button",
-           "width": "15",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "0",
-           "marginRight": "XS",
-           "text": "照",
-           "onClick": "",
-           "appearance": 0,
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": ""
-          },
-          {
-           "fieldName": "txtServiceCode",
-           "items": [],
-           "controlType": "TextBoxCode",
-           "width": "40",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "0",
-           "marginRight": "XS",
-           "required": false,
-           "readOnly": false,
-           "placeHolder": "",
            "textKind": 2,
-           "isPrivateInfo": false,
-           "isPassword": false,
-           "onFocus": "",
-           "onBlur": "",
-           "onChange": "",
-           "onKeyPress": "",
-           "text": "",
-           "labelLText": "",
-           "labelRText": "",
-           "labelLWidth": "S",
-           "labelRWidth": "S",
-           "labelLAlign": 2,
-           "labelRAlign": 0,
-           "value": "",
-           "permitCharactor": "",
-           "maxLength": 1000000000000,
-           "minLength": 0,
-           "textAlign": 0,
            "isComboBox": false,
            "suggest": [],
-           "formatLength": 1
+           "decorationClass": "",
+           "formatLength": "6"
           },
           {
            "fieldName": "btnService",
            "items": [],
-           "controlType": "Button",
-           "width": "15",
+           "controlType": "ButtonDialog",
+           "width": "S",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2672,17 +3227,40 @@ module DBC {
            "float": 0,
            "toolTip": "",
            "authorityMode": 0,
-           "marginLeft": "0",
+           "marginLeft": "XS",
            "marginRight": "XS",
-           "text": "照",
+           "selectControlID": "btnService",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "text": "",
            "onClick": "",
-           "appearance": 0,
-           "imageFileUrl": "",
+           "appearance": 2,
+           "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0,
+           "heightTextBoxMatches": true,
+           "displayChildDivName": "DBZ.ServiceInputGuide",
+           "dataPassing": [
+            {
+             "key": "serviceCode",
+             "controlName": "txtServiceCode"
+            },
+            {
+             "key": "serviceMeisho",
+             "controlName": "txtServiceName"
+            },
+            {
+             "key": "serviceTaishoYM",
+             "controlName": "txtTaishoYM"
+            }
+           ],
+           "visibleCloseButton": true,
+           "onOkClose": "",
+           "onBeforeOpenDialog": ""
           },
           {
-           "fieldName": "btnServiceName",
+           "fieldName": "txtServiceName",
            "items": [],
            "controlType": "TextBox",
            "width": "600",
@@ -2698,10 +3276,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtServiceName_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": true,
+           "required": false,
            "placeHolder": "",
-           "textKind": 0,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -2717,11 +3297,13 @@ module DBC {
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
+           "textKind": 0,
            "isComboBox": false,
-           "suggest": []
+           "suggest": [],
+           "decorationClass": ""
           },
           {
            "fieldName": "txtTani",
@@ -2740,10 +3322,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtTani_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -2759,11 +3343,13 @@ module DBC {
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -2787,10 +3373,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtWaribikigoRitsu_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -2799,18 +3387,20 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "【割引適用後率",
-           "labelRText": "％",
+           "labelRText": "",
            "labelLWidth": "115",
            "labelRWidth": "15",
            "labelLAlign": 0,
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -2818,7 +3408,7 @@ module DBC {
            "decimalPointLength": 0
           },
           {
-           "fieldName": "txtWaribikigoTain",
+           "fieldName": "txtWaribikigoTani",
            "items": [],
            "controlType": "TextBoxNum",
            "width": "80",
@@ -2834,10 +3424,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtWaribikigoTani_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": true,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -2853,11 +3445,13 @@ module DBC {
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -2880,11 +3474,13 @@ module DBC {
            "toolTip": "",
            "authorityMode": 0,
            "marginLeft": "XS",
-           "marginRight": "XS",
-           "required": false,
+           "marginRight": "XL",
+           "selectControlID": "txtKaisu_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -2893,18 +3489,20 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "回数",
-           "labelRText": "回",
+           "labelRText": "",
            "labelLWidth": "100",
-           "labelRWidth": "60",
+           "labelRWidth": "XS",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -2926,11 +3524,15 @@ module DBC {
            "float": 0,
            "toolTip": "",
            "authorityMode": 0,
-           "marginLeft": "XS",
+           "marginLeft": "S",
            "marginRight": "XS",
+           "selectControlID": "lblKaisu",
+           "helpMessageID": "",
+           "jpControlName": "",
            "required": false,
            "isPrivateInfo": false,
            "text": "【月あたり】",
+           "decorationClass": "",
            "align": 0
           },
           {
@@ -2950,10 +3552,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "0",
-           "required": false,
+           "selectControlID": "txtServiceTani_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": true,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -2962,18 +3566,20 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "サービス単位",
-           "labelRText": "単位",
+           "labelRText": "",
            "labelLWidth": "100",
-           "labelRWidth": "35",
+           "labelRWidth": "XS",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -2997,10 +3603,43 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblServiceTani",
+           "helpMessageID": "",
+           "jpControlName": "",
            "required": false,
            "isPrivateInfo": false,
            "text": "【割引適用後単位×回数】",
+           "decorationClass": "",
            "align": 0
+          },
+          {
+           "fieldName": "btnCalcMeisai",
+           "items": [],
+           "controlType": "Button",
+           "width": "S",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "btnCalcMeisai",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "text": "明細の計算",
+           "onClick": "",
+           "appearance": 0,
+           "imageFileUrl": "",
+           "imageWidth": "",
+           "imageHeight": "",
+           "icon": 0,
+           "heightTextBoxMatches": false
           },
           {
            "fieldName": "btnBeppyoMeisaiKakutei",
@@ -3019,16 +3658,21 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "btnBeppyoMeisaiKakutei",
+           "helpMessageID": "",
+           "jpControlName": "",
            "text": "明細情報を確定する",
            "onClick": "",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0,
+           "heightTextBoxMatches": false
           }
          ],
          "controlType": "Panel",
-         "width": "1225",
+         "width": "1090",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -3041,6 +3685,9 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "ServiceRiyohyoBeppyoMeisai",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onLoad": "",
          "title": "明細",
          "marginTop": "Default",
@@ -3052,18 +3699,23 @@ module DBC {
            "postParameterPanelNames": "ServiceRiyohyoBeppyoMeisai"
           }
          ],
-         "requestSettings": [],
+         "requestSettings": [
+          {
+           "eventName": "onLoad",
+           "requestUrl": ""
+          }
+         ],
          "hiddenInput": [],
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
-         "isGroupBox": false
+         "panelDisplay": 0,
+         "isGroupBox": false,
+         "readOnly": false,
+         "height": "Auto"
         },
         {
          "fieldName": "ServiceRiyohyoBeppyoGokei",
@@ -3085,10 +3737,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtShuruiGendoChokaTani_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -3104,11 +3758,13 @@ module DBC {
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -3132,10 +3788,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtShuruiGendonaiTani_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -3151,11 +3809,13 @@ module DBC {
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -3179,10 +3839,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtTanisuTanka_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -3198,11 +3860,13 @@ module DBC {
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -3226,10 +3890,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtKubunGendoChokaTani_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -3245,11 +3911,13 @@ module DBC {
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -3273,10 +3941,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtKubunGendonaiTani_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -3292,11 +3962,13 @@ module DBC {
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -3320,10 +3992,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtKyufuritsu_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -3332,18 +4006,20 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "給付率",
-           "labelRText": "％",
+           "labelRText": "",
            "labelLWidth": "80",
-           "labelRWidth": "15",
+           "labelRWidth": "XS",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -3367,10 +4043,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtHiyoSogaku_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": true,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -3379,18 +4057,20 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "費用総額",
-           "labelRText": "円",
+           "labelRText": "",
            "labelLWidth": "160",
-           "labelRWidth": "15",
+           "labelRWidth": "XS",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -3414,9 +4094,13 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblHiyoSogaku",
+           "helpMessageID": "",
+           "jpControlName": "",
            "required": false,
            "isPrivateInfo": false,
            "text": "【区分限度内単位×単位数単価】",
+           "decorationClass": "",
            "align": 0
           },
           {
@@ -3436,10 +4120,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtHokenKyufugaku_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": true,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -3448,18 +4134,20 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "保険給付額",
-           "labelRText": "円",
+           "labelRText": "",
            "labelLWidth": "160",
-           "labelRWidth": "15",
+           "labelRWidth": "XS",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -3483,9 +4171,13 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblHokenKyufugaku",
+           "helpMessageID": "",
+           "jpControlName": "",
            "required": false,
            "isPrivateInfo": false,
            "text": "【費用総額×給付率】",
+           "decorationClass": "",
            "align": 0
           },
           {
@@ -3505,10 +4197,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtRiyoshaFutangakuHoken_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": true,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -3517,18 +4211,20 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "保険対象利用者負担額",
-           "labelRText": "円",
+           "labelRText": "",
            "labelLWidth": "160",
-           "labelRWidth": "15",
+           "labelRWidth": "XS",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -3552,9 +4248,13 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblRiyoshaFutangakuHoken",
+           "helpMessageID": "",
+           "jpControlName": "",
            "required": false,
            "isPrivateInfo": false,
            "text": "【費用総額－保険給付額】",
+           "decorationClass": "",
            "align": 0
           },
           {
@@ -3574,10 +4274,12 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtRiyoshaFutangakuZengaku_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": true,
+           "required": false,
            "placeHolder": "",
-           "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
@@ -3586,18 +4288,20 @@ module DBC {
            "onKeyPress": "",
            "text": "",
            "labelLText": "全額利用者負担額",
-           "labelRText": "円",
+           "labelRText": "",
            "labelLWidth": "160",
-           "labelRWidth": "15",
+           "labelRWidth": "XS",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
            "permitCharactor": "+-,.\\",
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
+           "textKind": 2,
            "isComboBox": false,
            "suggest": [],
+           "decorationClass": "",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -3621,10 +4325,43 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblRiyoshaFutangakuZengaku",
+           "helpMessageID": "",
+           "jpControlName": "",
            "required": false,
            "isPrivateInfo": false,
            "text": "【(種類限度超過単位＋区分限度超過単位)×単位数単価】",
+           "decorationClass": "",
            "align": 0
+          },
+          {
+           "fieldName": "btnCalcGokei",
+           "items": [],
+           "controlType": "Button",
+           "width": "S",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "btnCalcGokei",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "text": "合計の計算",
+           "onClick": "",
+           "appearance": 0,
+           "imageFileUrl": "",
+           "imageWidth": "",
+           "imageHeight": "",
+           "icon": 0,
+           "heightTextBoxMatches": false
           },
           {
            "fieldName": "btnBeppyoGokeiKakutei",
@@ -3643,16 +4380,21 @@ module DBC {
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "btnBeppyoGokeiKakutei",
+           "helpMessageID": "",
+           "jpControlName": "",
            "text": "合計情報を確定する",
            "onClick": "",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0,
+           "heightTextBoxMatches": false
           }
          ],
          "controlType": "Panel",
-         "width": "1225",
+         "width": "1090",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -3665,6 +4407,9 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "ServiceRiyohyoBeppyoGokei",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onLoad": "",
          "title": "合計",
          "marginTop": "Default",
@@ -3676,18 +4421,23 @@ module DBC {
            "postParameterPanelNames": "ServiceRiyohyoBeppyoMeisai"
           }
          ],
-         "requestSettings": [],
+         "requestSettings": [
+          {
+           "eventName": "onLoad",
+           "requestUrl": ""
+          }
+         ],
          "hiddenInput": [],
          "onOpen": "",
          "onClose": "",
          "session": {},
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": false,
-         "isGroupBox": false
+         "panelDisplay": 0,
+         "isGroupBox": false,
+         "readOnly": false,
+         "height": "Auto"
         }
        ],
        "controlType": "TabPanel",
@@ -3704,24 +4454,31 @@ module DBC {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "ServiceRiyohyoBeppyo",
+       "helpMessageID": "",
+       "jpControlName": "",
        "title": "別表",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       }
      ],
      "controlType": "TabContainer",
-     "width": "1240",
+     "width": "1090",
      "visible": true,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "tabServiceRiyohyo",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onChange": "",
      "selectedItem": null,
      "tabpanelPosition": [
@@ -3729,11 +4486,13 @@ module DBC {
       "ServiceRiyohyoBeppyo"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ServiceRiyohyo"
+     "selectedItemFieldName": "ServiceRiyohyoBeppyo",
+     "initialTab": 0,
+     "isLazyLoading": false
     }
    ],
    "controlType": "Panel",
-   "width": "M",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -3746,6 +4505,9 @@ module DBC {
    "authorityMode": 0,
    "marginLeft": "0",
    "marginRight": "0",
+   "selectControlID": "ServiceRiyohyoInfo",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "marginTop": "0",
@@ -3757,18 +4519,27 @@ module DBC {
      "postParameterPanelNames": "ServiceRiyohyoInfo"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onChangeServiceRiyohyoListDayValue",
+     "requestUrl": "dbc/db/dbc/ServiceRiyohyoInfo/onChangeServiceRiyohyoListDayValue"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": true,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": "CommonChildDiv",
@@ -3783,8 +4554,11 @@ module DBC {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": 0,
- "marginRight": 0,
+ "marginLeft": "0",
+ "marginRight": "0",
+ "selectControlID": "defaultLayout",
+ "helpMessageID": "",
+ "jpControlName": "",
  "relation": [],
  "businessId": "DBC",
  "controlName": "ServiceRiyohyoInfo",
@@ -3840,11 +4614,103 @@ module DBC {
    "publicChildFieldName": "txtKeikakuJigyoshaName",
    "publicChildProperty": "displayNone",
    "newPropertyName": "KeikakuJigyoshaNameDisplayNone"
+  },
+  {
+   "publicChildFieldName": "dgServiceRiyohyoList",
+   "publicChildProperty": "gridSetting",
+   "newPropertyName": "dgServiceRiyohyoListGridSetting"
+  },
+  {
+   "publicChildFieldName": "btnZengetsuCopy",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "onClickZengetsuCopy"
+  },
+  {
+   "publicChildFieldName": "btnRiyohyoMeisaiAdd",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "onClickRiyohyoMeisaiAdd"
+  },
+  {
+   "publicChildFieldName": "btnBeppyoMeisaiNew",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "onClickBeppyoMeisaiNew"
+  },
+  {
+   "publicChildFieldName": "btnBeppyoGokeiNew",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "onClickBeppyoGokeiNew"
+  },
+  {
+   "publicChildFieldName": "btnBeppyoMeisaiKakutei",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "onClickBeppyoMeisaiKakutei"
+  },
+  {
+   "publicChildFieldName": "btnBeppyoGokeiKakutei",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "onClickBeppyoGokeiKakutei"
+  },
+  {
+   "publicChildFieldName": "dgServiceRiyohyoBeppyoList",
+   "publicChildProperty": "gridSetting",
+   "newPropertyName": "dgServiceRiyohyoBeppyoListGridSetting"
+  },
+  {
+   "publicChildFieldName": "dgServiceRiyohyoList",
+   "publicChildProperty": "onSelectByDblClick",
+   "newPropertyName": "dgServiceRiyohyoListSelectByDblClick"
+  },
+  {
+   "publicChildFieldName": "dgServiceRiyohyoList",
+   "publicChildProperty": "onSelectBySelectButton",
+   "newPropertyName": "dgServiceRiyohyoListSelectBySelect"
+  },
+  {
+   "publicChildFieldName": "dgServiceRiyohyoList",
+   "publicChildProperty": "onSelectByDeleteButton",
+   "newPropertyName": "dgServiceRiyohyoListSelectByDelete"
+  },
+  {
+   "publicChildFieldName": "dgServiceRiyohyoBeppyoList",
+   "publicChildProperty": "onSelectByDblClick",
+   "newPropertyName": "dgServiceRiyohyoBeppyoListSelectByDblClick"
+  },
+  {
+   "publicChildFieldName": "dgServiceRiyohyoBeppyoList",
+   "publicChildProperty": "onSelectBySelectButton",
+   "newPropertyName": "dgServiceRiyohyoBeppyoListSelectBySelect"
+  },
+  {
+   "publicChildFieldName": "dgServiceRiyohyoBeppyoList",
+   "publicChildProperty": "onSelectByDeleteButton",
+   "newPropertyName": "dgServiceRiyohyoBeppyoListSelectByDelete"
+  },
+  {
+   "publicChildFieldName": "ServiceRiyohyoInfo",
+   "publicChildProperty": "eraseBorder",
+   "newPropertyName": "ServiceRiyohyoEraseBorder"
+  },
+  {
+   "publicChildFieldName": "btnCalcMeisai",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "onClickBtnCalcMeisai"
+  },
+  {
+   "publicChildFieldName": "btnCalcGokei",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "onClickBtnCalcGokei"
+  },
+  {
+   "publicChildFieldName": "txtServiceCode",
+   "publicChildProperty": "onBlur",
+   "newPropertyName": "onBlurTxtSreviceCode"
   }
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }

@@ -93,7 +93,7 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": true,
+     "wrap": false,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
@@ -749,23 +749,14 @@
          "textKind": 0,
          "isPrivateInfo": false,
          "isPassword": false,
-         "onFocus": "",
-         "onBlur": "",
-         "onChange": "",
          "onKeyPress": "",
          "value": "",
-         "labelLText": "適用日",
-         "labelRText": "",
-         "labelLWidth": "50",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
+         "permitCharactor": "./_-",
          "ymdKubun": 2,
-         "displayFormat": 0,
-         "permitCharactor": "./_-"
+         "displayFormat": 0
         },
         {
-         "fieldName": "txtTekiyoTodokedeDate",
+         "fieldName": "txtTekiyoDate",
          "items": [],
          "controlType": "TextBoxFlexibleDate",
          "width": "80",
@@ -791,20 +782,11 @@
          "textKind": 0,
          "isPrivateInfo": false,
          "isPassword": false,
-         "onFocus": "",
-         "onBlur": "",
-         "onChange": "",
          "onKeyPress": "",
          "value": "",
-         "labelLText": "適用届出日",
-         "labelRText": "",
-         "labelLWidth": "80",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
+         "permitCharactor": "./_-",
          "ymdKubun": 2,
-         "displayFormat": 0,
-         "permitCharactor": "./_-"
+         "displayFormat": 0
         },
         {
          "fieldName": "JogaishaTekiyoJogaiShisetsu",
@@ -975,9 +957,6 @@
          "textKind": 0,
          "isPrivateInfo": false,
          "isPassword": false,
-         "onFocus": "",
-         "onBlur": "",
-         "onChange": "",
          "onKeyPress": "",
          "value": "",
          "labelLText": "退所日",
@@ -987,8 +966,7 @@
          "labelLAlign": 2,
          "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 0,
-         "permitCharactor": "./_-"
+         "displayFormat": 0
         },
         {
          "fieldName": "txtKaijoDate",
@@ -1028,9 +1006,18 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "onFocus": "",
+         "onBlur": "",
+         "placeHolder": "",
+         "textKind": 0,
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "onKeyPress": "",
+         "text": "",
+         "value": "",
+         "permitCharactor": "./_-",
          "ymdKubun": 2,
-         "displayFormat": 0,
-         "permitCharactor": "./_-"
+         "displayFormat": 0
         },
         {
          "fieldName": "txtKaijoTodokedeDate",
@@ -1070,9 +1057,18 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "onFocus": "",
+         "onBlur": "",
+         "placeHolder": "",
+         "textKind": 0,
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "onKeyPress": "",
+         "text": "",
+         "value": "",
+         "permitCharactor": "./_-",
          "ymdKubun": 2,
-         "displayFormat": 0,
-         "permitCharactor": "./_-"
+         "displayFormat": 0
         }
        ],
        "controlType": "Panel",
@@ -1544,6 +1540,8 @@
      "fixedDiv": "No"
     }
    ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
    "validation": {},
    "events": [
     {

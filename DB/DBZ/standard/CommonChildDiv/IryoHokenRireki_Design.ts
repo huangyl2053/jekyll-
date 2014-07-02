@@ -115,12 +115,20 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
+<<<<<<< HEAD
      "marginLeft": "0",
      "marginRight": "0",
      "selectControlID": "dgIryoHokenRireki",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+=======
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "dgIryoHokenRireki",
+     "helpMessageID": "",
+     "jpControlName": "",
+>>>>>>> feature/UI-KyufuKanri-37343
      "height": "S",
      "gridSetting": {
       "rowHeight": 25,
@@ -288,7 +296,11 @@ module DBZ {
     }
    ],
    "controlType": "Panel",
+<<<<<<< HEAD
    "width": "1015",
+=======
+   "width": "1030",
+>>>>>>> feature/UI-KyufuKanri-37343
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -330,7 +342,14 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
+<<<<<<< HEAD
    "eraseBorder": true,
+=======
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true,
+>>>>>>> feature/UI-KyufuKanri-37343
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -398,9 +417,13 @@ module DBZ {
   }
  ],
  "dialogOkEventNameForDialog": "",
+<<<<<<< HEAD
  "dialogCancelEventNameForDialog": "",
  "canTransferEvent": true,
  "heightForDialog": "M"
+=======
+ "dialogCancelEventNameForDialog": ""
+>>>>>>> feature/UI-KyufuKanri-37343
 }        
     }
 }

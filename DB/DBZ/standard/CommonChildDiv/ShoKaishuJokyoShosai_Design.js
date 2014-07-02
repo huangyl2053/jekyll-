@@ -54,6 +54,7 @@ var DBZ;
                     Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["onBlur"] = value;
                 } else {
                     this.layout.items[0].items[7]["onBlur"] = value;
+<<<<<<< HEAD
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -88,6 +89,8 @@ var DBZ;
                     Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"] = value;
                 } else {
                     this.layout.items[0]["canOpenAndClose"] = value;
+=======
+>>>>>>> feature/UI-KyufuKanri-37343
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -101,8 +104,11 @@ var DBZ;
             Uz.JSControlUtil.registProperty("onBlur_txtKaishuDate");
             Uz.JSControlUtil.registProperty("onChange_ddlKaishuJiyu");
             Uz.JSControlUtil.registProperty("onBlur_txtKaishuRiyu");
+<<<<<<< HEAD
             Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_panelDisplay");
             Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_canOpenAndClose");
+=======
+>>>>>>> feature/UI-KyufuKanri-37343
         };
 
         ShoKaishuJokyoShosai_Design.prototype.getEditablePropertyInfo = function () {
@@ -110,8 +116,11 @@ var DBZ;
             editablePropertyInfo["onBlur_txtKaishuDate"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["onBlur"];
             editablePropertyInfo["onChange_ddlKaishuJiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["onChange"];
             editablePropertyInfo["onBlur_txtKaishuRiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["onBlur"];
+<<<<<<< HEAD
             editablePropertyInfo["ShoKaishuJokyoShosai_panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
             editablePropertyInfo["ShoKaishuJokyoShosai_canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
+=======
+>>>>>>> feature/UI-KyufuKanri-37343
 
             return editablePropertyInfo;
         };
@@ -400,10 +409,13 @@ var DBZ;
                             "readOnly": false,
                             "dataSource": [
                                 {
+<<<<<<< HEAD
                                     "key": "",
                                     "value": ""
                                 },
                                 {
+=======
+>>>>>>> feature/UI-KyufuKanri-37343
                                     "key": "00",
                                     "value": "転出"
                                 },
@@ -498,7 +510,11 @@ var DBZ;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+<<<<<<< HEAD
                             "selectedItem": ""
+=======
+                            "selectedItem": "00"
+>>>>>>> feature/UI-KyufuKanri-37343
                         },
                         {
                             "fieldName": "txtKaishuRiyu",
@@ -545,7 +561,11 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
+<<<<<<< HEAD
                     "width": "942",
+=======
+                    "width": "940",
+>>>>>>> feature/UI-KyufuKanri-37343
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -556,8 +576,8 @@ var DBZ;
                     "float": 0,
                     "toolTip": "",
                     "authorityMode": 0,
-                    "marginLeft": "0",
-                    "marginRight": "0",
+                    "marginLeft": "XS",
+                    "marginRight": "XS",
                     "selectControlID": "ShoKaishuJokyoShosai",
                     "helpMessageID": "",
                     "jpControlName": "",
@@ -623,6 +643,7 @@ var DBZ;
                     "publicChildFieldName": "ddlKaishuJiyu",
                     "publicChildProperty": "onChange",
                     "newPropertyName": "onChange_ddlKaishuJiyu"
+<<<<<<< HEAD
                 },
                 {
                     "publicChildFieldName": "txtKaishuRiyu",
@@ -638,6 +659,13 @@ var DBZ;
                     "publicChildFieldName": "ShoKaishuJokyoShosai",
                     "publicChildProperty": "canOpenAndClose",
                     "newPropertyName": "ShoKaishuJokyoShosai_canOpenAndClose"
+=======
+                },
+                {
+                    "publicChildFieldName": "txtKaishuRiyu",
+                    "publicChildProperty": "onBlur",
+                    "newPropertyName": "onBlur_txtKaishuRiyu"
+>>>>>>> feature/UI-KyufuKanri-37343
                 }
             ],
             "dataPassingForDialog": [],

@@ -8,20 +8,6 @@ module DBC {
      */
     export class JutakuKaishuShinseiDetailInput_Design extends Uz.CommonChildDiv {
     
-        public get dg_gridSetting() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"];
-        }
-        
-        public set dg_gridSetting(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"] = value;
-            } else {
-                this.layout.items[0].items[0]["gridSetting"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
         public get txtChakkoDate_lableLText() {
             return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[5]["fieldName"])["labelLText"];
         }
@@ -50,58 +36,44 @@ module DBC {
             }
         }
         
-        public get dg_width() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"];
-        }
-        
-        public set dg_width(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"] = value;
-            } else {
-                this.layout.items[0].items[0]["width"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get detaiInput_displayNone() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"];
-        }
-        
-        public set detaiInput_displayNone(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"] = value;
-            } else {
-                this.layout.items[0].items[1]["displayNone"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get dg_height() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["height"];
-        }
-        
-        public set dg_height(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["height"] = value;
-            } else {
-                this.layout.items[0].items[0]["height"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get onClick_btnAddDetail() {
+        public get onClick_btnModifyDetail() {
             return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"])["onClick"];
         }
         
-        public set onClick_btnAddDetail(value) {
+        public set onClick_btnModifyDetail(value) {
             if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).length > 0 && 
                  Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]) != undefined ) {
                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"])["onClick"] = value;
             } else {
                 this.layout.items[0].items[1].items[9]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get btnModify_text() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"])["text"];
+        }
+        
+        public set btnModify_text(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"])["text"] = value;
+            } else {
+                this.layout.items[0].items[1].items[9]["text"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get dg_gridSetting() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"];
+        }
+        
+        public set dg_gridSetting(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"] = value;
+            } else {
+                this.layout.items[0].items[0]["gridSetting"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -116,13 +88,11 @@ module DBC {
          */
         public registProperty() {
             super.registProperty();
-            Uz.JSControlUtil.registProperty("dg_gridSetting");
             Uz.JSControlUtil.registProperty("txtChakkoDate_lableLText");
             Uz.JSControlUtil.registProperty("txtKanseiDate_lableLText");
-            Uz.JSControlUtil.registProperty("dg_width");
-            Uz.JSControlUtil.registProperty("detaiInput_displayNone");
-            Uz.JSControlUtil.registProperty("dg_height");
-            Uz.JSControlUtil.registProperty("onClick_btnAddDetail");
+            Uz.JSControlUtil.registProperty("onClick_btnModifyDetail");
+            Uz.JSControlUtil.registProperty("btnModify_text");
+            Uz.JSControlUtil.registProperty("dg_gridSetting");
         }
         
         /**
@@ -132,13 +102,11 @@ module DBC {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
-            editablePropertyInfo["dg_gridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
             editablePropertyInfo["txtChakkoDate_lableLText"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[5]["fieldName"]).getEditablePropertyInfo()["labelLText"];
             editablePropertyInfo["txtKanseiDate_lableLText"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[6]["fieldName"]).getEditablePropertyInfo()["labelLText"];
-            editablePropertyInfo["dg_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["width"];
-            editablePropertyInfo["detaiInput_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["dg_height"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["height"];
-            editablePropertyInfo["onClick_btnAddDetail"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onClick_btnModifyDetail"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["btnModify_text"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).getEditablePropertyInfo()["text"];
+            editablePropertyInfo["dg_gridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
             
             return editablePropertyInfo;
         }
@@ -152,7 +120,7 @@ module DBC {
      "fieldName": "dgJutakuKaishuDetail",
      "items": [],
      "controlType": "DataGrid",
-     "width": "480",
+     "width": "540",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -163,63 +131,32 @@ module DBC {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "-0.1",
+     "marginLeft": "0",
      "marginRight": "0",
+     "selectControlID": "dgJutakuKaishuDetail",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "height": "221",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
-      "isShowRowState": false,
+      "isShowRowState": true,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": true,
+      "isShowDeleteButtonColumn": true,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
        "headerHeight": 1
       },
       "columns": [
-       {
-        "columnName": "修<br>正",
-        "dataName": "btnModify",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 25,
-        "visible": true,
-        "cellType": 8,
-        "cellDetails": {
-         "cellType": 8,
-         "text": "修正",
-         "onClick": "onClick_btnModify",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "btnModify"
-       },
-       {
-        "columnName": "削<br>除",
-        "dataName": "btnDelete",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 25,
-        "visible": true,
-        "cellType": 8,
-        "cellDetails": {
-         "cellType": 8,
-         "text": "削除",
-         "onClick": "",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "btnDelete"
-       },
        {
         "columnName": "着工<br>予定日",
         "dataName": "txtChakkoDueDate",
@@ -232,7 +169,9 @@ module DBC {
          "cellType": 6,
          "ymdKubun": 2,
          "displayFormat": 0,
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 1,
         "resize": true,
@@ -251,7 +190,9 @@ module DBC {
          "cellType": 6,
          "ymdKubun": 2,
          "displayFormat": 0,
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 1,
         "resize": true,
@@ -275,7 +216,9 @@ module DBC {
          "isCurrency": false,
          "isComma": true,
          "decimalPointLength": "0",
-         "onChange": ""
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
         "align": 2,
         "resize": true,
@@ -330,10 +273,17 @@ module DBC {
        }
       ]
      },
-     "height": "240",
      "onSort": "",
      "onSelect": "",
-     "onSelectByDblClick": "onClick_btnModify",
+     "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "onSelectByModifyButton",
+     "onSelectByDeleteButton": "onSelectByDeleteButton",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -350,7 +300,7 @@ module DBC {
        "fieldName": "txtKaishuContents",
        "items": [],
        "controlType": "TextBoxMultiLine",
-       "width": "360",
+       "width": "415",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -363,11 +313,14 @@ module DBC {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "height": "S",
+       "selectControlID": "txtKaishuContents_text_area",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "height": "XS",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -380,7 +333,7 @@ module DBC {
        "value": "",
        "labelLText": "改修の内容・<br>箇所及び規模",
        "labelRText": "",
-       "labelLWidth": "90",
+       "labelLWidth": "105",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -403,10 +356,13 @@ module DBC {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
-       "maxLength": 1000000000000,
-       "minLength": 0,
+       "selectControlID": "txtKaishuJigyoshaName_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "readOnly": false,
+       "required": false,
+       "maxLength": 100000000,
+       "minLength": 0,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -417,7 +373,7 @@ module DBC {
        "value": "",
        "labelLText": "事業者",
        "labelRText": "",
-       "labelLWidth": "90",
+       "labelLWidth": "105",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -426,13 +382,14 @@ module DBC {
        "isComboBox": false,
        "text": "",
        "suggest": [],
+       "decorationClass": "",
        "permitCharactor": ""
       },
       {
        "fieldName": "lblKaishuTaishoAddress",
        "items": [],
        "controlType": "Label",
-       "width": "90",
+       "width": "105",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -445,9 +402,13 @@ module DBC {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblKaishuTaishoAddress",
+       "helpMessageID": "",
+       "jpControlName": "",
        "required": false,
        "isPrivateInfo": false,
        "text": "対象住宅住所",
+       "decorationClass": "",
        "align": 2
       },
       {
@@ -465,20 +426,25 @@ module DBC {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0.2",
+       "marginLeft": "-0.1",
        "marginRight": "XS",
+       "selectControlID": "btnCopyAddress",
+       "helpMessageID": "",
+       "jpControlName": "",
        "text": "本人住所をコピーする",
-       "onClick": "",
+       "onClick": "onClick_btnCopyAddress",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "icon": 0,
+       "heightTextBoxMatches": false
       },
       {
-       "fieldName": "txtKaishuTaishoAddress1",
+       "fieldName": "txtKaishuTaishoAddress",
        "items": [],
-       "controlType": "TextBoxMultiLine",
-       "width": "360",
+       "controlType": "TextBox",
+       "width": "415",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -489,18 +455,18 @@ module DBC {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "7.4",
+       "marginLeft": "7",
        "marginRight": "XS",
-       "height": "XS",
+       "selectControlID": "txtKaishuTaishoAddress_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
-       "limitLength": "",
-       "countDisp": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -508,11 +474,17 @@ module DBC {
        "value": "",
        "labelLText": "",
        "labelRText": "",
-       "labelLWidth": "90",
+       "labelLWidth": "XS",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "text": ""
+       "textAlign": 0,
+       "isPassword": false,
+       "isComboBox": false,
+       "text": "",
+       "suggest": [],
+       "decorationClass": "",
+       "permitCharactor": ""
       },
       {
        "fieldName": "txtChakkoDueDate",
@@ -531,8 +503,11 @@ module DBC {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
+       "selectControlID": "txtChakkoDueDate_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "readOnly": false,
+       "required": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -543,7 +518,7 @@ module DBC {
        "value": "",
        "labelLText": "着工予定日",
        "labelRText": "",
-       "labelLWidth": "90",
+       "labelLWidth": "105",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -570,8 +545,11 @@ module DBC {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
+       "selectControlID": "txtKanseiDueDate_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "readOnly": false,
+       "required": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -582,7 +560,7 @@ module DBC {
        "value": "",
        "labelLText": "完成予定日",
        "labelRText": "",
-       "labelLWidth": "75",
+       "labelLWidth": "100",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -609,10 +587,13 @@ module DBC {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
-       "maxLength": 1000000000000,
-       "minLength": 0,
+       "selectControlID": "txtEstimatedAmount_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "readOnly": false,
+       "required": false,
+       "maxLength": 100000000,
+       "minLength": 0,
        "placeHolder": "",
        "textKind": 2,
        "isPrivateInfo": false,
@@ -623,7 +604,7 @@ module DBC {
        "value": "",
        "labelLText": "見積額",
        "labelRText": "",
-       "labelLWidth": "90",
+       "labelLWidth": "105",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -632,6 +613,7 @@ module DBC {
        "isComboBox": false,
        "text": "",
        "suggest": [],
+       "decorationClass": "",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
@@ -656,15 +638,20 @@ module DBC {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "btnClearDetail",
+       "helpMessageID": "",
+       "jpControlName": "",
        "text": "入力内容をクリアする",
        "onClick": "onClick_btnClearDetail",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "icon": 0,
+       "heightTextBoxMatches": false
       },
       {
-       "fieldName": "btnAddDetail",
+       "fieldName": "btnModifyDetail",
        "items": [],
        "controlType": "Button",
        "width": "M",
@@ -680,16 +667,21 @@ module DBC {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "btnModifyDetail",
+       "helpMessageID": "",
+       "jpControlName": "",
        "text": "明細を追加する",
-       "onClick": "onClick_btnAddDetail",
+       "onClick": "onClick_btnModifyDetail",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "icon": 0,
+       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
-     "width": "480",
+     "width": "540",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -701,7 +693,10 @@ module DBC {
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
-     "marginRight": "-0.3",
+     "marginRight": "0",
+     "selectControlID": "JutakuKaishuDetailInput",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "",
      "marginTop": "Default",
@@ -718,17 +713,17 @@ module DBC {
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": false
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     }
    ],
    "controlType": "Panel",
-   "width": "M",
+   "width": "G2",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -739,8 +734,11 @@ module DBC {
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
+   "marginLeft": "0",
    "marginRight": "XS",
+   "selectControlID": "JutakuKaishuShinseiDetailInput",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "marginTop": "Default",
@@ -757,13 +755,13 @@ module DBC {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": true,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": "CommonChildDiv",
@@ -779,18 +777,16 @@ module DBC {
  "toolTip": "",
  "authorityMode": 0,
  "marginLeft": "0",
- "marginRight": 0,
+ "marginRight": "0",
+ "selectControlID": "defaultLayout",
+ "helpMessageID": "",
+ "jpControlName": "",
  "relation": [],
  "businessId": "DBC",
  "controlName": "JutakuKaishuShinseiDetailInput",
  "marginTop": 0,
  "marginBottom": 0,
  "originalProperty": [
-  {
-   "publicChildFieldName": "dgJutakuKaishuDetail",
-   "publicChildProperty": "gridSetting",
-   "newPropertyName": "dg_gridSetting"
-  },
   {
    "publicChildFieldName": "txtChakkoDueDate",
    "publicChildProperty": "labelLText",
@@ -802,29 +798,26 @@ module DBC {
    "newPropertyName": "txtKanseiDate_lableLText"
   },
   {
-   "publicChildFieldName": "dgJutakuKaishuDetail",
-   "publicChildProperty": "width",
-   "newPropertyName": "dg_width"
-  },
-  {
-   "publicChildFieldName": "JutakuKaishuDetailInput",
-   "publicChildProperty": "displayNone",
-   "newPropertyName": "detaiInput_displayNone"
-  },
-  {
-   "publicChildFieldName": "dgJutakuKaishuDetail",
-   "publicChildProperty": "height",
-   "newPropertyName": "dg_height"
-  },
-  {
-   "publicChildFieldName": "btnAddDetail",
+   "publicChildFieldName": "btnModifyDetail",
    "publicChildProperty": "onClick",
-   "newPropertyName": "onClick_btnAddDetail"
+   "newPropertyName": "onClick_btnModifyDetail"
+  },
+  {
+   "publicChildFieldName": "btnModifyDetail",
+   "publicChildProperty": "text",
+   "newPropertyName": "btnModify_text"
+  },
+  {
+   "publicChildFieldName": "dgJutakuKaishuDetail",
+   "publicChildProperty": "gridSetting",
+   "newPropertyName": "dg_gridSetting"
   }
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }

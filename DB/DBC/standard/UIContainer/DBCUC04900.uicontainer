@@ -1,0 +1,15 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "0",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0490011",
+   "eventName": "",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0490011",
+   "toEventName": ""
+  }
+ ],
+ "subGyomuCode": "DBC",
+ "uiContainerName": "DBCUC04900"
+}

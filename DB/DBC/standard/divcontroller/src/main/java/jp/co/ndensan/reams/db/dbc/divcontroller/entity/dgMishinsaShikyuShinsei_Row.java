@@ -1,25 +1,28 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
- * コードが再生成されるときに損失したりします。 Wed May 28 17:25:41 JST 2014
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
+ * コードが再生成されるときに損失したりします。
+ * Mon Jun 30 11:24:20 JST 2014 
  */
 
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 
+
 /**
- * dgMishinsaShikyuShinsei_Row のクラスファイル
- *
+ * dgMishinsaShikyuShinsei_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
+
 public class dgMishinsaShikyuShinsei_Row extends DataRow {
 
-    private Button btnModify;
     private TextBoxDate txtShikyuShinseiDate;
     private TextBoxDate txtTeikyoYM;
     private RString txtHihoNo;
@@ -34,11 +37,21 @@ public class dgMishinsaShikyuShinsei_Row extends DataRow {
 
     public dgMishinsaShikyuShinsei_Row() {
         super();
+        this.txtShikyuShinseiDate = new TextBoxDate();
+        this.txtTeikyoYM = new TextBoxDate();
+        this.txtHihoNo = RString.EMPTY;
+        this.txtHihokenshaName = RString.EMPTY;
+        this.txtHokenKyufuAmount = new TextBoxNum();
+        this.txtRiyoshaFutanAmount = new TextBoxNum();
+        this.txtHiyoTotalAmount = new TextBoxNum();
+        this.txtTenkyoReset = false;
+        this.txt3DankaiReset = false;
+        this.txtShinsaResult = RString.EMPTY;
+        this.txtSeiriNo = new TextBoxCode();
     }
 
-    public dgMishinsaShikyuShinsei_Row(Button btnModify, TextBoxDate txtShikyuShinseiDate, TextBoxDate txtTeikyoYM, RString txtHihoNo, RString txtHihokenshaName, TextBoxNum txtHokenKyufuAmount, TextBoxNum txtRiyoshaFutanAmount, TextBoxNum txtHiyoTotalAmount, Boolean txtTenkyoReset, Boolean txt3DankaiReset, RString txtShinsaResult, TextBoxCode txtSeiriNo) {
+    public dgMishinsaShikyuShinsei_Row(TextBoxDate txtShikyuShinseiDate, TextBoxDate txtTeikyoYM, RString txtHihoNo, RString txtHihokenshaName, TextBoxNum txtHokenKyufuAmount, TextBoxNum txtRiyoshaFutanAmount, TextBoxNum txtHiyoTotalAmount, Boolean txtTenkyoReset, Boolean txt3DankaiReset, RString txtShinsaResult, TextBoxCode txtSeiriNo) {
         super();
-        this.setOriginalData("btnModify", btnModify);
         this.setOriginalData("txtShikyuShinseiDate", txtShikyuShinseiDate);
         this.setOriginalData("txtTeikyoYM", txtTeikyoYM);
         this.setOriginalData("txtHihoNo", txtHihoNo);
@@ -50,7 +63,6 @@ public class dgMishinsaShikyuShinsei_Row extends DataRow {
         this.setOriginalData("txt3DankaiReset", txt3DankaiReset);
         this.setOriginalData("txtShinsaResult", txtShinsaResult);
         this.setOriginalData("txtSeiriNo", txtSeiriNo);
-        this.btnModify = btnModify;
         this.txtShikyuShinseiDate = txtShikyuShinseiDate;
         this.txtTeikyoYM = txtTeikyoYM;
         this.txtHihoNo = txtHihoNo;
@@ -62,10 +74,6 @@ public class dgMishinsaShikyuShinsei_Row extends DataRow {
         this.txt3DankaiReset = txt3DankaiReset;
         this.txtShinsaResult = txtShinsaResult;
         this.txtSeiriNo = txtSeiriNo;
-    }
-
-    public Button getBtnModify() {
-        return btnModify;
     }
 
     public TextBoxDate getTxtShikyuShinseiDate() {
@@ -110,11 +118,6 @@ public class dgMishinsaShikyuShinsei_Row extends DataRow {
 
     public TextBoxCode getTxtSeiriNo() {
         return txtSeiriNo;
-    }
-
-    public void setBtnModify(Button btnModify) {
-        this.setOriginalData("btnModify", btnModify);
-        this.btnModify = btnModify;
     }
 
     public void setTxtShikyuShinseiDate(TextBoxDate txtShikyuShinseiDate) {

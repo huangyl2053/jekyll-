@@ -1,8 +1,6 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011;
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.AfterShisetsuJohoInputDiv;
@@ -11,8 +9,8 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.ShisetsuHenkoT
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShisetsuHenkoInput のクラスファイル 
- * 
+ * ShisetsuHenkoInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShisetsuHenkoInputDiv extends Panel {
@@ -22,6 +20,7 @@ public class ShisetsuHenkoInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ShisetsuHenkoTekiyoJiyuInput")
     private ShisetsuHenkoTekiyoJiyuInputDiv ShisetsuHenkoTekiyoJiyuInput;
     @JsonProperty("BeforeShisetsuJohoInput")
@@ -42,7 +41,7 @@ public class ShisetsuHenkoInputDiv extends Panel {
 
     @JsonProperty("ShisetsuHenkoTekiyoJiyuInput")
     public void setShisetsuHenkoTekiyoJiyuInput(ShisetsuHenkoTekiyoJiyuInputDiv ShisetsuHenkoTekiyoJiyuInput) {
-        this.ShisetsuHenkoTekiyoJiyuInput=ShisetsuHenkoTekiyoJiyuInput;
+        this.ShisetsuHenkoTekiyoJiyuInput = ShisetsuHenkoTekiyoJiyuInput;
     }
 
     @JsonProperty("BeforeShisetsuJohoInput")
@@ -52,7 +51,7 @@ public class ShisetsuHenkoInputDiv extends Panel {
 
     @JsonProperty("BeforeShisetsuJohoInput")
     public void setBeforeShisetsuJohoInput(BeforeShisetsuJohoInputDiv BeforeShisetsuJohoInput) {
-        this.BeforeShisetsuJohoInput=BeforeShisetsuJohoInput;
+        this.BeforeShisetsuJohoInput = BeforeShisetsuJohoInput;
     }
 
     @JsonProperty("AfterShisetsuJohoInput")
@@ -62,7 +61,7 @@ public class ShisetsuHenkoInputDiv extends Panel {
 
     @JsonProperty("AfterShisetsuJohoInput")
     public void setAfterShisetsuJohoInput(AfterShisetsuJohoInputDiv AfterShisetsuJohoInput) {
-        this.AfterShisetsuJohoInput=AfterShisetsuJohoInput;
+        this.AfterShisetsuJohoInput = AfterShisetsuJohoInput;
     }
 
 }
