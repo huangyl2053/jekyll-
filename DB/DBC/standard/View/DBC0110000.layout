@@ -834,7 +834,7 @@
              "labelRAlign": 0,
              "decorationClass": "",
              "permitCharactor": "",
-             "kanjiInField": "txtName",
+             "kanjiInField": "txtTodokedeshaName",
              "kanaType": 0
             },
             {
