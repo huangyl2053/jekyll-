@@ -25,6 +25,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
  */
 public class ShogaishaKojoTaishoshaListPanel {
 
+    private static final RString YML_HAAKU_JOHO = new RString("dbd4030011/HaakuJoho.yml");
+    private static final RString YML_TAISHOSHA_LIST = new RString("dbd4030011/ShogaishaKojoTaishoshaList.yml");
+
     /**
      * ロード時の処理です。
      *
@@ -41,8 +44,12 @@ public class ShogaishaKojoTaishoshaListPanel {
         return response;
     }
 
+    private List<HashMap> getYamlData(RString yamlName) {
+        return YamlLoader.DBD.loadAsList(yamlName);
+    }
+
     private void set把握情報(ShogaishaKojoTaishoshaListPanelDiv panel) {
-        List<HashMap> targetSource = YamlLoader.DBD.loadAsList(new RString("dbd4030011/HaakuJoho.yml"));
+        List<HashMap> targetSource = getYamlData(YML_HAAKU_JOHO);
 
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
         panel.getTxtKijunDate().setValue(new RDate(cg.getAsRString("基準日").toString()));
@@ -56,7 +63,7 @@ public class ShogaishaKojoTaishoshaListPanel {
 
     private List<dgShogaishaKojoTahishosha_Row> get障害者控除対象者List() {
         List<dgShogaishaKojoTahishosha_Row> list = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.DBD.loadAsList(new RString("dbd4030011/ShogaishaKojoTaishoshaList.yml"));
+        List<HashMap> targetSource = getYamlData(YML_TAISHOSHA_LIST);
         for (Map info : targetSource) {
             list.add(toDgShogaishaKojoTahishosha_Row(info));
         }

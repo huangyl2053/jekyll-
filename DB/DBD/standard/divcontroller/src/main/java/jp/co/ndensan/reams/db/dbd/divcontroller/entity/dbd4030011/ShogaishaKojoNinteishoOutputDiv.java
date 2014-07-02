@@ -6,15 +6,15 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4030011;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PrintContentsSettingDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.ChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 
 /**
- * OutputShogaishaKojoTaishoshaNinteishoPanel のクラスファイル 
+ * ShogaishaKojoNinteishoOutput のクラスファイル 
  * 
  * @author 自動生成
  */
-public class OutputShogaishaKojoTaishoshaNinteishoPanelDiv extends PanelPublish {
+public class ShogaishaKojoNinteishoOutputDiv extends PanelPublish {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,7 +24,7 @@ public class OutputShogaishaKojoTaishoshaNinteishoPanelDiv extends PanelPublish 
     @JsonProperty("PrintContentsSetting")
     private PrintContentsSettingDiv PrintContentsSetting;
     @JsonProperty("OutputOrder")
-    private ChohyoShutsuryokujunDiv OutputOrder;
+    private KaigoChohyoShutsuryokujunDiv OutputOrder;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,12 +43,12 @@ public class OutputShogaishaKojoTaishoshaNinteishoPanelDiv extends PanelPublish 
     }
 
     @JsonProperty("OutputOrder")
-    public ChohyoShutsuryokujunDiv getOutputOrder() {
+    public KaigoChohyoShutsuryokujunDiv getOutputOrder() {
         return OutputOrder;
     }
 
     @JsonProperty("OutputOrder")
-    public void setOutputOrder(ChohyoShutsuryokujunDiv OutputOrder) {
+    public void setOutputOrder(KaigoChohyoShutsuryokujunDiv OutputOrder) {
         this.OutputOrder=OutputOrder;
     }
 

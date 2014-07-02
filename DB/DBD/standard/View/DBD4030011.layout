@@ -22,7 +22,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtKijunDate_core",
-     "readOnly": false,
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "required": false,
      "placeHolder": "",
      "isPrivateInfo": false,
@@ -62,7 +64,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtHaakuCondition_core",
-     "readOnly": false,
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "required": false,
      "placeHolder": "",
      "isPrivateInfo": false,
@@ -85,6 +89,7 @@
      "textKind": 0,
      "isComboBox": false,
      "suggest": [],
+     "decorationClass": "",
      "permitCharactor": ""
     },
     {
@@ -105,7 +110,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtHaakuDate_core",
-     "readOnly": false,
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "required": false,
      "placeHolder": "",
      "isPrivateInfo": false,
@@ -131,7 +138,7 @@
      "fieldName": "dgShogaishaKojoTahishosha",
      "items": [],
      "controlType": "DataGrid",
-     "width": "1090",
+     "width": "1098",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -145,6 +152,10 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "dgShogaishaKojoTahishosha",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "height": "338",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -156,6 +167,8 @@
       "isShowSelectButtonColumn": false,
       "isShowModifyButtonColumn": false,
       "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -199,7 +212,7 @@
         "dataName": "txtNinteiKubun",
         "toolTip": "",
         "bgColor": 0,
-        "width": 85,
+        "width": 90,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -231,7 +244,7 @@
         "dataName": "txtRank",
         "toolTip": "",
         "bgColor": 0,
-        "width": 80,
+        "width": 85,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -252,7 +265,8 @@
         "cellType": 2,
         "cellDetails": {
          "cellType": 2,
-         "disabled": false
+         "disabled": true,
+         "onChange": ""
         },
         "align": 1,
         "resize": false,
@@ -269,7 +283,8 @@
         "cellType": 2,
         "cellDetails": {
          "cellType": 2,
-         "disabled": false
+         "disabled": true,
+         "onChange": ""
         },
         "align": 1,
         "resize": false,
@@ -320,7 +335,7 @@
          "cellType": 8,
          "text": "送付先",
          "onClick": "",
-         "imageFileUrl": "",
+         "imageFileUrl": "/ur/urz/image/UR_Book_On.png",
          "imageWidth": "",
          "imageHeight": ""
         },
@@ -331,13 +346,17 @@
        }
       ]
      },
-     "height": "450",
      "onSort": "",
      "onSelect": "onSelect_OnClick",
      "onSelectByDblClick": "",
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -365,6 +384,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtTaishosha_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "placeHolder": "",
@@ -388,6 +409,7 @@
      "textKind": 2,
      "isComboBox": false,
      "suggest": [],
+     "decorationClass": "",
      "maxValue": 1.7976931348623157e+308,
      "minValue": 0,
      "isCurrency": false,
@@ -413,6 +435,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtNinteisha_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "placeHolder": "",
@@ -436,6 +460,7 @@
      "textKind": 2,
      "isComboBox": false,
      "suggest": [],
+     "decorationClass": "",
      "maxValue": 1.7976931348623157e+308,
      "minValue": 0,
      "isCurrency": false,
@@ -461,6 +486,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtHigaitosha_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "placeHolder": "",
@@ -484,6 +511,7 @@
      "textKind": 2,
      "isComboBox": false,
      "suggest": [],
+     "decorationClass": "",
      "maxValue": 1.7976931348623157e+308,
      "minValue": 0,
      "isCurrency": false,
@@ -493,7 +521,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "G10",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -505,10 +533,12 @@
    "toolTip": "",
    "authorityMode": 0,
    "marginLeft": "0",
-   "marginRight": "XS",
+   "marginRight": "0",
    "selectControlID": "ShogaishaKojoTaishoshaListPanel",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
-   "title": "障害者控除対象者一覧",
+   "title": "対象者一覧",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -528,18 +558,16 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   },
   {
-   "fieldName": "OutputShogaishaKojoTaishoshaNinteishoPanel",
+   "fieldName": "ShogaishaKojoNinteishoOutput",
    "items": [
     {
      "fieldName": "PrintContentsSetting",
@@ -556,9 +584,11 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
      "selectControlID": "PrintContentsSetting",
+     "helpMessageID": "",
+     "jpControlName": "",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -572,6 +602,8 @@
      ],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "txtSendData_displayNone": true,
      "PrintContentsSetting_title": "",
      "PrintContentsSetting_eraseBorderTop": true,
@@ -594,21 +626,26 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
+     "marginLeft": "XS",
+     "marginRight": "0",
      "selectControlID": "OutputOrder",
+     "helpMessageID": "",
+     "jpControlName": "",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
-     "businessId": "URZ",
-     "controlName": "ChohyoShutsuryokujun",
+     "businessId": "DBZ",
+     "controlName": "KaigoChohyoShutsuryokujun",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": ""
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "ChohyoShutsuryokujun_width": "1098"
     }
    ],
    "controlType": "PanelPublish",
-   "width": "G10",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -620,21 +657,23 @@
    "toolTip": "",
    "authorityMode": 0,
    "marginLeft": "0",
-   "marginRight": "XS",
-   "selectControlID": "OutputShogaishaKojoTaishoshaNinteishoPanel",
+   "marginRight": "0",
+   "selectControlID": "ShogaishaKojoNinteishoOutput",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "障害者控除対象者認定書・出力一覧表",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "OutputShogaishaKojoTaishoshaNinteishoPanel"
+     "postParameterPanelNames": "ShogaishaKojoNinteishoOutput"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbd/db/dbd/OutputShogaishaKojoTaishoshaNinteishoPanel/onLoad"
+     "requestUrl": "dbd/db/dbd/ShogaishaKojoNinteishoOutput/onLoad"
     }
    ],
    "hiddenInput": [],
@@ -643,26 +682,24 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
+   "height": "Auto",
    "isPublish": true,
    "isEmptyControl": false
   },
   {
-   "fieldName": "CommonButtonArea",
+   "fieldName": "ShogaishaKojoNinteiComplete",
    "items": [
     {
-     "fieldName": "btnSave",
+     "fieldName": "ShogaishaKojoNinteiCompleteInfo",
      "items": [],
-     "controlType": "Button",
-     "width": "M",
+     "controlType": "CommonChildDiv",
+     "width": "XS",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -670,134 +707,72 @@
      "nextFocusFieldName": "",
      "wrap": false,
      "dependencies": [],
-     "float": 2,
+     "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnSave",
-     "text": "対象者を一括認定する",
-     "onClick": "onClick_btnSave",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "ShogaishaKojoNinteiCompleteInfo",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "KaigoKanryoMessage",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "KanryoMessage_width": "G12"
     }
    ],
    "controlType": "Panel",
-   "width": "G10",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
-   "wrap": true,
+   "wrap": false,
    "dependencies": [],
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
    "marginLeft": "0",
-   "marginRight": "XS",
-   "selectControlID": "CommonButtonArea",
+   "marginRight": "0",
+   "selectControlID": "ShogaishaKojoNinteiComplete",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "CommonButtonArea"
+     "postParameterPanelNames": "ShogaishaKojoNinteiComplete"
     }
    ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false
-  },
-  {
-   "fieldName": "CompleteProcess",
-   "items": [],
-   "controlType": "CommonChildDiv",
-   "width": "XS",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": 0,
-   "marginRight": 0,
-   "selectControlID": "CompleteProcess",
-   "relation": [],
-   "marginTop": 0,
-   "marginBottom": 0,
-   "businessId": "DBZ",
-   "controlName": "CompleteProcess",
-   "dataPassingForDialog": [],
-   "dialogOkEventNameForDialog": "",
-   "dialogCancelEventNameForDialog": "",
-   "lblCompleteMessage_text": "対象者の一括認定が完了しました。",
-   "CompleteProcess_width": "1100"
-  },
-  {
-   "fieldName": "CompleteProcessPanel",
-   "items": [],
-   "controlType": "Panel",
-   "width": "G10",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "selectControlID": "CompleteProcessPanel",
-   "onLoad": "",
-   "title": "",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
+   "requestSettings": [
     {
-     "postParameterPanelNames": "CompleteProcessPanel"
+     "eventName": "onLoad",
+     "requestUrl": "dbd/db/dbd/ShogaishaKojoNinteiComplete/onLoad"
     }
    ],
-   "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -815,6 +790,8 @@
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "障害者控除対象者一括認定",
  "jsPathCollection": [],
@@ -827,11 +804,11 @@
    "visibleDivs": [
     {
      "visibleDiv": "ShogaishaKojoTaishoshaListPanel",
-     "panelState": "readOnly visible",
+     "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "OutputShogaishaKojoTaishoshaNinteishoPanel",
+     "visibleDiv": "ShogaishaKojoNinteishoOutput",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -844,35 +821,35 @@
      "visibleDiv": "OutputOrder",
      "panelState": "visible",
      "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "CommonButtonArea",
-     "panelState": "visible",
-     "fixedDiv": "No"
     }
    ],
    "supplementInfo": "",
    "validation": {},
    "events": [
     {
-     "fieldName": "btnSave",
+     "fieldName": "btnNintei",
      "event": "onClick",
-     "transition": "保存完了"
+     "transition": "処理完了"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
   {
    "order": "2",
-   "stateName": "保存完了",
+   "stateName": "処理完了",
    "showWizard": true,
    "visibleDivs": [
     {
-     "visibleDiv": "CompleteProcessPanel",
-     "panelState": "visible",
+     "visibleDiv": "ShogaishaKojoNinteiComplete",
+     "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "CompleteProcess",
+     "visibleDiv": "ShogaishaKojoNinteiCompleteInfo",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -881,9 +858,14 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "btnSave",
+     "fieldName": "btnNintei",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": "終了"
     }
    ]
   }
@@ -897,7 +879,7 @@
    "ShogaishaKojoTaishoshaListPanel"
   ],
   [
-   "OutputShogaishaKojoTaishoshaNinteishoPanel"
+   "ShogaishaKojoNinteishoOutput"
   ],
   [
    "PrintContentsSetting"
@@ -906,28 +888,110 @@
    "OutputOrder"
   ],
   [
-   "CommonButtonArea"
+   "ShogaishaKojoNinteiComplete"
   ],
   [
-   "CompleteProcess"
-  ],
-  [
-   "CompleteProcessPanel"
+   "ShogaishaKojoNinteiCompleteInfo"
   ]
  ],
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "",
-   "buttonSetting": [],
-   "states": [
+   "commonButtonAreaId": "1",
+   "buttonSetting": [
     {
-     "state": "undefined"
+     "buttonKind": "CommonButtonExecute",
+     "buttonProperty": {
+      "fieldName": "btnNintei",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnNintei",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "一括認定する",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "一括認定を",
+      "prefixText": "",
+      "suffixText": ""
+     }
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "states": [
+    {
+     "state": "一括認定"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "2",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnComplete",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "処理完了"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
