@@ -2492,6 +2492,11 @@ var DBE;
                             "onSelectBySelectButton": "",
                             "onSelectByModifyButton": "",
                             "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
@@ -2546,7 +2551,7 @@ var DBE;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "410"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -2576,7 +2581,7 @@ var DBE;
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "M"
+            "heightForDialog": "450"
         };
         return IchijiHanteiKekkaInfo_Design;
     })(Uz.CommonChildDiv);
