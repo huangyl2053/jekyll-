@@ -36,10 +36,7 @@
      "heightForDialog": "M",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
-     "atenaInfo_eraseBorderTop": true,
-     "atenaInfo_eraseBorderBottom": true,
-     "atenaInfo_eraseBorderRight": true,
-     "atenaInfo_eraseBorderLeft": true,
+     "AtenaShokaiSimple_eraseBorder": true,
      "AtenaKanaMeisho_visible": true,
      "AtenaMisho_visible": true,
      "SeinengappiYMD_visible": true,
@@ -55,7 +52,6 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnMemo_DisplayNone": false,
      "btnDainosha_displayNone": false,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
@@ -134,7 +130,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "onLoad_AtenaJoho",
-   "title": "テスト時用",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": false,
    "postParameterPanelNames": [
@@ -307,7 +303,7 @@
     {
      "fieldName": "btnRirekiHyoji",
      "items": [],
-     "controlType": "ButtonDialog",
+     "controlType": "Button",
      "width": "M",
      "visible": true,
      "displayNone": false,
@@ -325,18 +321,13 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "履歴一覧を表示する",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
-     "heightTextBoxMatches": false,
-     "displayChildDivName": "",
-     "dataPassing": [],
-     "visibleCloseButton": true,
-     "onOkClose": "",
-     "onBeforeOpenDialog": ""
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "linFukashokai1",
@@ -379,11 +370,11 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "賦課根拠・期割",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "onClick_loadFukakonkyo",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false
     },
@@ -408,11 +399,11 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "世帯員所得",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "onClick_btnSetaiinShotoku",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false
     },
@@ -437,11 +428,11 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "特別徴収",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "onClick_btnTokucho",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false
     },
@@ -452,7 +443,7 @@
      "width": "120",
      "visible": true,
      "displayNone": false,
-     "disabled": false,
+     "disabled": true,
      "accessKey": "",
      "nextFocusFieldName": "",
      "wrap": false,
@@ -466,11 +457,11 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "減免・徴収猶予",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false,
      "displayChildDivName": "",
@@ -500,11 +491,11 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "印字内容設定",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": false,
      "displayChildDivName": "",
@@ -531,7 +522,7 @@
    "selectControlID": "FukaShokaiGrandson",
    "helpMessageID": "",
    "jpControlName": "",
-   "onLoad": "",
+   "onLoad": "onLoad_FukaShokaiGrandson",
    "title": "賦課照会",
    "isOpen": true,
    "canOpenAndClose": true,
@@ -4021,7 +4012,9 @@
      "ddlKazeiNendoDisplayNone": true,
      "btnNarabeteHyoJiDisplayNone": false,
      "txtSetaiCodeDisyplayNone": true,
-     "btnSaihyojiDisplayNone": true
+     "btnSaihyojiDisplayNone": true,
+     "lblKijunYMDMsgVisible": true,
+     "lblKijunYMDMsgDisplayNone": false
     }
    ],
    "controlType": "Panel",
@@ -4935,6 +4928,11 @@
        "onSelectBySelectButton": "",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -5140,6 +5138,11 @@
        "onSelectBySelectButton": "",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -16577,6 +16580,8 @@
      "fixedDiv": "No"
     }
    ],
+   "supplementInfo": "DBBSI03200",
+   "supplementInfoPostParamData": "[{\"supplementInfoPostParamData\":\"AtenaJoho\"}]",
    "validation": {},
    "events": [
     {
@@ -16607,11 +16612,6 @@
     {
      "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
      "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnRirekiHyoji",
-     "event": "onClick",
      "transition": ""
     }
    ]
@@ -16662,8 +16662,8 @@
      "fixedDiv": "No"
     }
    ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
+   "supplementInfo": "DBBSI03200",
+   "supplementInfoPostParamData": "[{\"supplementInfoPostParamData\":\"AtenaJoho\"}]",
    "validation": {},
    "events": [
     {
@@ -16695,11 +16695,6 @@
      "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
      "event": "onSelectBySelectButton",
      "transition": ""
-    },
-    {
-     "fieldName": "btnRirekiHyoji",
-     "event": "onClick",
-     "transition": "賦課履歴"
     }
    ]
   },
@@ -16739,8 +16734,8 @@
      "fixedDiv": "No"
     }
    ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
+   "supplementInfo": "DBBSI03200",
+   "supplementInfoPostParamData": "[{\"supplementInfoPostParamData\":\"AtenaJoho\"}]",
    "validation": {},
    "events": [
     {
@@ -16772,11 +16767,6 @@
      "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
      "event": "onSelectBySelectButton",
      "transition": "照会"
-    },
-    {
-     "fieldName": "btnRirekiHyoji",
-     "event": "onClick",
-     "transition": "賦課履歴"
     }
    ]
   },
@@ -16826,8 +16816,8 @@
      "fixedDiv": "No"
     }
    ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
+   "supplementInfo": "DBBSI03200",
+   "supplementInfoPostParamData": "[{\"supplementInfoPostParamData\":\"AtenaJoho\"}]",
    "validation": {},
    "events": [
     {
@@ -16859,11 +16849,6 @@
      "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
      "event": "onSelectBySelectButton",
      "transition": ""
-    },
-    {
-     "fieldName": "btnRirekiHyoji",
-     "event": "onClick",
-     "transition": "賦課履歴"
     }
    ]
   },
@@ -16908,8 +16893,8 @@
      "fixedDiv": "No"
     }
    ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
+   "supplementInfo": "DBBSI03200",
+   "supplementInfoPostParamData": "[{\"supplementInfoPostParamData\":\"AtenaJoho\"}]",
    "validation": {},
    "events": [
     {
@@ -16941,11 +16926,6 @@
      "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
      "event": "onSelectBySelectButton",
      "transition": ""
-    },
-    {
-     "fieldName": "btnRirekiHyoji",
-     "event": "onClick",
-     "transition": "賦課履歴"
     }
    ]
   }
@@ -16953,7 +16933,20 @@
  "currentState": "All",
  "id": "DBB0320002",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "fukaRirekiShokai",
+   "eventName": "btnRirekiHyoji.onClick"
+  },
+  {
+   "alias": "atenaLoad",
+   "eventName": "btnFukakonkyoKiwari.onClick"
+  },
+  {
+   "alias": "narabetehyoji",
+   "eventName": "SetaiShotokuIchiran_SetaiShotokuIchiran_btnNarabeteHyoji.onClick"
+  }
+ ],
  "loadSequencePanelNames": [
   [
    "FukaShokai",

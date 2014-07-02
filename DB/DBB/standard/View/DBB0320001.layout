@@ -2,120 +2,120 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "demoMenu",
-   "items": [
-    {
-     "fieldName": "btnDemoShokai",
-     "items": [],
-     "controlType": "Button",
-     "width": "S",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnDemoShokai",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "onClick": "onClick_btnDemoShokai",
-     "text": "照会",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0,
-     "heightTextBoxMatches": false
-    },
-    {
-     "fieldName": "btnDemoChohyo",
-     "items": [],
-     "controlType": "Button",
-     "width": "S",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnDemoChohyo",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "onClick": "onClick_btnDemoChohyo",
-     "text": "帳票",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0,
-     "heightTextBoxMatches": false
-    }
-   ],
-   "controlType": "Panel",
-   "width": "G2",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "Default",
-   "marginRight": "Default",
-   "selectControlID": "demoMenu",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "onLoad": "",
-   "title": "デモメニュー",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "demoMenu"
-    }
-   ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": ""
-    }
-   ],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorder": false,
-   "backgroundColor": 0,
-   "widthAuto": true,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
-  },
-  {
    "fieldName": "AtenaJoho",
    "items": [
+    {
+     "fieldName": "demoMenu",
+     "items": [
+      {
+       "fieldName": "btnDemoShokai",
+       "items": [],
+       "controlType": "Button",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnDemoShokai",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "照会",
+       "imageWidth": "",
+       "imageHeight": "",
+       "onClick": "onClick_btnDemoShokai",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "icon": 0,
+       "heightTextBoxMatches": false
+      },
+      {
+       "fieldName": "btnDemoChohyo",
+       "items": [],
+       "controlType": "Button",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnDemoChohyo",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "帳票",
+       "imageWidth": "",
+       "imageHeight": "",
+       "onClick": "onClick_btnDemoChohyo",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "icon": 0,
+       "heightTextBoxMatches": false
+      }
+     ],
+     "controlType": "Panel",
+     "width": "G2",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "Default",
+     "marginRight": "Default",
+     "selectControlID": "demoMenu",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "デモメニュー",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "demoMenu"
+      }
+     ],
+     "requestSettings": [
+      {
+       "eventName": "onLoad",
+       "requestUrl": ""
+      }
+     ],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorder": false,
+     "backgroundColor": 0,
+     "widthAuto": true,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
+    },
     {
      "fieldName": "KaigoAtenaInfo",
      "items": [],
@@ -148,10 +148,7 @@
      "heightForDialog": "M",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
-     "atenaInfo_eraseBorderTop": true,
-     "atenaInfo_eraseBorderBottom": true,
-     "atenaInfo_eraseBorderRight": true,
-     "atenaInfo_eraseBorderLeft": true,
+     "AtenaShokaiSimple_eraseBorder": true,
      "AtenaKanaMeisho_visible": true,
      "AtenaMisho_visible": true,
      "SeinengappiYMD_visible": true,
@@ -167,7 +164,6 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnMemo_DisplayNone": false,
      "btnDainosha_displayNone": false,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
@@ -245,7 +241,7 @@
    "selectControlID": "AtenaJoho",
    "helpMessageID": "",
    "jpControlName": "",
-   "onLoad": "",
+   "onLoad": "onLoad_AtenaJoho",
    "title": "",
    "isOpen": true,
    "canOpenAndClose": false,
@@ -300,6 +296,7 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "190",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -405,10 +402,14 @@
      "onSelectBySelectButton": "onClick_RirekiAll",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -447,7 +448,7 @@
      "requestUrl": ""
     },
     {
-     "eventName": "onClick_btnDemoShokai",
+     "eventName": "onLoad_AtenaJoho",
      "requestUrl": "dbb/db/dbb/FukaRirekiAll/onLoad_shokai"
     },
     {
@@ -506,7 +507,6 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
-     "text": "",
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
@@ -520,6 +520,7 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "賦課年度",
@@ -528,7 +529,8 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "dgFukaRirekiFukaRireki",
@@ -552,6 +554,7 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "Auto",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 28,
       "isMultiSelectable": false,
@@ -758,10 +761,14 @@
      "onSelectBySelectButton": "onSelect_FukaRireki",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "defaultDataName0",
      "isAscending": true,
      "filterList": [],
@@ -870,6 +877,7 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "Auto",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 30,
       "isMultiSelectable": false,
@@ -911,10 +919,14 @@
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -944,7 +956,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "平99.99.99",
        "textKind": 0,
@@ -954,6 +965,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "発行日",
        "labelRText": "",
@@ -962,7 +974,8 @@
        "labelLAlign": 0,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblTokuKaishiInjiType",
@@ -984,9 +997,9 @@
        "selectControlID": "lblTokuKaishiInjiType",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "印字タイプ",
        "required": false,
        "isPrivateInfo": false,
+       "text": "印字タイプ",
        "decorationClass": "",
        "align": 0
       },
@@ -1011,13 +1024,14 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onClick": "",
-       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "",
        "labelLWidth": "S",
        "labelLAlign": 2,
+       "onClick": "",
+       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "key0",
@@ -1028,7 +1042,6 @@
          "value": "白紙（枠付き）"
         }
        ],
-       "selectedItem": null,
        "newLineItemNumber": 1,
        "spaceSize": "M",
        "disabledItem": []
@@ -1053,9 +1066,9 @@
        "selectControlID": "lblTokuKaishiTsuchiType",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "通知書タイプ",
        "required": false,
        "isPrivateInfo": false,
+       "text": "通知書タイプ",
        "decorationClass": "",
        "align": 0
       },
@@ -1080,13 +1093,14 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onClick": "",
-       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "",
        "labelLWidth": "S",
        "labelLAlign": 2,
+       "onClick": "",
+       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "key0",
@@ -1097,7 +1111,6 @@
          "value": "シーラータイプ"
         }
        ],
-       "selectedItem": null,
        "newLineItemNumber": 1,
        "spaceSize": "M",
        "disabledItem": []
@@ -1174,7 +1187,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "平99.99.99",
        "textKind": 0,
@@ -1184,6 +1196,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "発行日",
        "labelRText": "",
@@ -1192,7 +1205,8 @@
        "labelLAlign": 0,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblKetteiTsuchiBunshoNo",
@@ -1214,9 +1228,9 @@
        "selectControlID": "lblKetteiTsuchiBunshoNo",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "文書番号",
        "required": false,
        "isPrivateInfo": false,
+       "text": "文書番号",
        "decorationClass": "",
        "align": 0
       },
@@ -1241,7 +1255,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -1255,6 +1268,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -1263,7 +1277,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       }
      ],
      "controlType": "PanelPublish",
@@ -1337,7 +1352,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "平99.99.99",
        "textKind": 0,
@@ -1347,6 +1361,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "発行日",
        "labelRText": "",
@@ -1355,7 +1370,8 @@
        "labelLAlign": 0,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblHenkoTsuchiBunshoNo",
@@ -1377,9 +1393,9 @@
        "selectControlID": "lblHenkoTsuchiBunshoNo",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "文書番号",
        "required": false,
        "isPrivateInfo": false,
+       "text": "文書番号",
        "decorationClass": "",
        "align": 0
       },
@@ -1404,7 +1420,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -1418,6 +1433,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -1426,7 +1442,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       }
      ],
      "controlType": "PanelPublish",
@@ -1500,7 +1517,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "平99.99.99",
        "textKind": 0,
@@ -1510,6 +1526,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "発行日",
        "labelRText": "",
@@ -1518,7 +1535,8 @@
        "labelLAlign": 0,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "ddlNotsuShuturyokuKi",
@@ -1551,6 +1569,7 @@
        "labelRWidth": "S",
        "labelLAlign": 0,
        "labelRAlign": 0,
+       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -1593,7 +1612,6 @@
          "value": "10期（3月）"
         }
        ],
-       "selectedItem": "key0",
        "disabledItem": []
       },
       {
@@ -1617,28 +1635,28 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onClick": "",
-       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "",
        "labelLWidth": "S",
        "labelLAlign": 2,
+       "onClick": "",
+       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "key0",
          "value": "出力期の頁のみ印刷"
         }
        ],
-       "selectedItem": null,
-       "newLineItemNumber": 1,
-       "spaceSize": "M",
-       "disabledItem": [],
        "selectedItems": [],
+       "newLineItemNumber": 1,
        "minCheckedItem": 0,
        "maxCheckedItem": 2,
+       "spaceSize": "M",
        "isAllSelectable": false,
-       "isAllSelectableBreakLine": false
+       "isAllSelectableBreakLine": false,
+       "disabledItem": []
       },
       {
        "fieldName": "lblNotsuShuturyokuKeishiki",
@@ -1660,9 +1678,9 @@
        "selectControlID": "lblNotsuShuturyokuKeishiki",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "出力形式",
        "required": false,
        "isPrivateInfo": false,
+       "text": "出力形式",
        "decorationClass": "",
        "align": 0
       },
@@ -1687,13 +1705,14 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onClick": "",
-       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "",
        "labelLWidth": "S",
        "labelLAlign": 2,
+       "onClick": "",
+       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "key0",
@@ -1704,7 +1723,6 @@
          "value": "口座用"
         }
        ],
-       "selectedItem": null,
        "newLineItemNumber": 2,
        "spaceSize": "M",
        "disabledItem": []
@@ -1729,9 +1747,9 @@
        "selectControlID": "lblNotsuTaishoChohyo",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "対象帳票",
        "required": false,
        "isPrivateInfo": false,
+       "text": "対象帳票",
        "decorationClass": "",
        "align": 0
       },
@@ -1756,13 +1774,14 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onClick": "",
-       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "",
        "labelLWidth": "S",
        "labelLAlign": 2,
+       "onClick": "",
+       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "key0",
@@ -1777,7 +1796,6 @@
          "value": "納付書のみ"
         }
        ],
-       "selectedItem": null,
        "newLineItemNumber": 1,
        "spaceSize": "M",
        "disabledItem": []
@@ -1854,7 +1872,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "平99.99.99",
        "textKind": 0,
@@ -1864,6 +1881,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "発行日",
        "labelRText": "",
@@ -1872,7 +1890,8 @@
        "labelLAlign": 0,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblGemmenTsuchiBunshoNo",
@@ -1894,9 +1913,9 @@
        "selectControlID": "lblGemmenTsuchiBunshoNo",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "文書番号",
        "required": false,
        "isPrivateInfo": false,
+       "text": "文書番号",
        "decorationClass": "",
        "align": 0
       },
@@ -1921,7 +1940,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -1935,6 +1953,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -1943,7 +1962,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       }
      ],
      "controlType": "PanelPublish",
@@ -2017,7 +2037,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "平99.99.99",
        "textKind": 0,
@@ -2027,6 +2046,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "発行日",
        "labelRText": "",
@@ -2035,7 +2055,8 @@
        "labelLAlign": 0,
        "labelRAlign": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblChoshuYuyoTsuchiBunshoNo",
@@ -2057,9 +2078,9 @@
        "selectControlID": "lblChoshuYuyoTsuchiBunshoNo",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "文書番号",
        "required": false,
        "isPrivateInfo": false,
+       "text": "文書番号",
        "decorationClass": "",
        "align": 0
       },
@@ -2084,7 +2105,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -2098,6 +2118,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -2106,7 +2127,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       }
      ],
      "controlType": "PanelPublish",
@@ -2190,6 +2212,7 @@
        "labelRWidth": "S",
        "labelLAlign": 0,
        "labelRAlign": 0,
+       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -2232,7 +2255,6 @@
          "value": "10期（3月）"
         }
        ],
-       "selectedItem": "key0",
        "disabledItem": []
       },
       {
@@ -2256,28 +2278,28 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onClick": "",
-       "icon": [],
        "required": false,
        "onChange": "",
        "labelLText": "",
        "labelLWidth": "S",
        "labelLAlign": 2,
+       "onClick": "",
+       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "key0",
          "value": "出力期の頁のみ印刷"
         }
        ],
-       "selectedItem": null,
-       "newLineItemNumber": 1,
-       "spaceSize": "M",
-       "disabledItem": [],
        "selectedItems": [],
+       "newLineItemNumber": 1,
        "minCheckedItem": 0,
        "maxCheckedItem": 2,
+       "spaceSize": "M",
        "isAllSelectable": false,
-       "isAllSelectableBreakLine": false
+       "isAllSelectableBreakLine": false,
+       "disabledItem": []
       }
      ],
      "controlType": "PanelPublish",
@@ -2350,9 +2372,9 @@
        "selectControlID": "dummyLabelDaicho",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "",
        "required": false,
        "isPrivateInfo": false,
+       "text": "",
        "decorationClass": "",
        "align": 2
       }
@@ -2480,185 +2502,6 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "demoMenu",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "demoMenu",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "btnDemoShokai",
-     "event": "onClick",
-     "transition": "照会"
-    },
-    {
-     "fieldName": "btnDemoChohyo",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgFukaRirekiAll",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgFukaRirekiAll",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgFukaRirekiFukaRireki",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgFukaRirekiFukaRireki",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnRirekiHyoji",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "2",
-   "stateName": "test",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "JuminFukaShokai",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "FukaRirekiAll",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "FukaRireki",
-     "panelState": "close",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "FukaShokaiGrandson",
-     "panelState": "close",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "FukakonkyoAndKiwari",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "FukakonkyoNengaku",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "SetaiinShotoku",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "Tokucho",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "NenkinHokenshaTotsugoJoho",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "TokuChoIdoAndIrai",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "TokuChoKekka",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "GemmenChoshuYuyo",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "Gemmen",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ChoshuYuyo",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "InjiNaiyoSettei",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "11",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "btnDemoShokai",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnDemoChohyo",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgFukaRirekiAll",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgFukaRirekiAll",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgFukaRirekiFukaRireki",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgFukaRirekiFukaRireki",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnRirekiHyoji",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "3",
    "stateName": "照会",
    "showWizard": false,
    "visibleDivs": [
@@ -2733,7 +2576,7 @@
    ]
   },
   {
-   "order": "4",
+   "order": "2",
    "stateName": "賦課履歴",
    "showWizard": false,
    "visibleDivs": [
