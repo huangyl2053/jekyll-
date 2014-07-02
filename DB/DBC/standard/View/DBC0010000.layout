@@ -84,7 +84,7 @@
      "labelLText": "",
      "labelLWidth": "S",
      "labelLAlign": 2,
-     "selectedItem": null,
+     "selectedItem": "serviceTeikyoYM",
      "dataSource": [
       {
        "key": "nendo",
@@ -816,7 +816,7 @@
          "cellType": 8,
          "text": "",
          "onClick": "",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -853,7 +853,7 @@
          "cellType": 8,
          "text": "",
          "onClick": "",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -890,7 +890,7 @@
          "cellType": 8,
          "text": "",
          "onClick": "",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -927,7 +927,7 @@
          "cellType": 8,
          "text": "",
          "onClick": "",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -964,7 +964,7 @@
          "cellType": 8,
          "text": "",
          "onClick": "",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -999,7 +999,7 @@
          "cellType": 8,
          "text": "",
          "onClick": "",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -1034,7 +1034,7 @@
          "cellType": 8,
          "text": "",
          "onClick": "",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -1069,7 +1069,7 @@
          "cellType": 8,
          "text": "",
          "onClick": "",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -1104,7 +1104,7 @@
          "cellType": 8,
          "text": "",
          "onClick": "",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -1139,7 +1139,7 @@
          "cellType": 8,
          "text": "",
          "onClick": "",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -1174,7 +1174,7 @@
          "cellType": 8,
          "text": "",
          "onClick": "",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -1209,7 +1209,7 @@
          "cellType": 8,
          "text": "",
          "onClick": "",
-         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
         },
@@ -1240,6 +1240,11 @@
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -1518,6 +1523,11 @@
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -1667,7 +1677,7 @@
   {
    "order": "2",
    "stateName": "給付実績一覧",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KyufuJissekiSearch",

@@ -4292,13 +4292,7 @@
    "supplementInfo": "",
    "supplementInfoPostParamData": [],
    "validation": {},
-   "events": [
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": "終了"
-    }
-   ]
+   "events": []
   }
  ],
  "currentState": "All",
@@ -4363,39 +4357,6 @@
   {
    "commonButtonAreaId": "commonBtn",
    "buttonSetting": [
-    {
-     "buttonKind": "CommonButtonComplete",
-     "buttonProperty": {
-      "fieldName": "btnComplete",
-      "items": [],
-      "controlType": "CommonButtonFree",
-      "width": 1,
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnComplete",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "onClick": "",
-      "icon": 0,
-      "text": "該当者検索に戻る",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "heightTextBoxMatches": false,
-      "additionalText": "総合照会を"
-     }
-    },
     {
      "buttonKind": "CommonButtonSearchResult",
      "buttonProperty": {

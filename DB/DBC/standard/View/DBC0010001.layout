@@ -625,11 +625,11 @@
      "jpControlName": "",
      "text": "緊急時施設療養費を表示する",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -654,11 +654,11 @@
      "jpControlName": "",
      "text": "特定診療費を表示する",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -683,11 +683,11 @@
      "jpControlName": "",
      "text": "食事費用を表示する",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -712,11 +712,11 @@
      "jpControlName": "",
      "text": "特定入所者費用を表示する",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -741,11 +741,11 @@
      "jpControlName": "",
      "text": "社福軽減費を表示する",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -776,11 +776,11 @@
          "jpControlName": "",
          "text": "合計情報を表示する",
          "onClick": "",
+         "icon": 0,
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": "",
-         "icon": 0,
          "heightTextBoxMatches": false
         },
         {
@@ -4808,11 +4808,12 @@
            "jpControlName": "",
            "readOnly": false,
            "height": "222",
+           "dataSource": [],
            "gridSetting": {
             "rowHeight": 28,
             "isMultiSelectable": false,
             "isShowHeader": true,
-            "isShowFooter": true,
+            "isShowFooter": false,
             "isShowFilter": false,
             "isShowFilterButton": false,
             "isShowRowState": false,
@@ -5111,10 +5112,14 @@
            "onSelectBySelectButton": "",
            "onSelectByModifyButton": "",
            "onSelectByDeleteButton": "",
+           "onAfterRequest": "",
+           "onAfterRequestByDblClick": "",
+           "onAfterRequestBySelectButton": "",
+           "onAfterRequestByModifyButton": "",
+           "onAfterRequestByDeleteButton": "",
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
-           "dataSource": [],
            "sortOrder": "txtSeikyugaku",
            "isAscending": true,
            "filterList": [],
@@ -5141,7 +5146,7 @@
          "onLoad": "",
          "title": "集計",
          "isOpen": true,
-         "canOpenAndClose": true,
+         "canOpenAndClose": false,
          "postParameterPanelNames": [
           {
            "postParameterPanelNames": "KyufuJissekiShukei"
@@ -5186,12 +5191,13 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "height": "223",
+           "height": "198",
+           "dataSource": [],
            "gridSetting": {
             "rowHeight": 28,
             "isMultiSelectable": false,
             "isShowHeader": true,
-            "isShowFooter": true,
+            "isShowFooter": false,
             "isShowFilter": false,
             "isShowFilterButton": false,
             "isShowRowState": false,
@@ -5439,10 +5445,14 @@
            "onSelectBySelectButton": "",
            "onSelectByModifyButton": "",
            "onSelectByDeleteButton": "",
+           "onAfterRequest": "",
+           "onAfterRequestByDblClick": "",
+           "onAfterRequestBySelectButton": "",
+           "onAfterRequestByModifyButton": "",
+           "onAfterRequestByDeleteButton": "",
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
-           "dataSource": [],
            "sortOrder": "txtKohi1Tani",
            "isAscending": true,
            "filterList": [],
@@ -5469,7 +5479,7 @@
          "onLoad": "",
          "title": "明細",
          "isOpen": true,
-         "canOpenAndClose": true,
+         "canOpenAndClose": false,
          "postParameterPanelNames": [
           {
            "postParameterPanelNames": "KyufuJissekiMeisai"
@@ -5537,6 +5547,7 @@
          "jpControlName": "",
          "readOnly": false,
          "height": "335",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 28,
           "isMultiSelectable": false,
@@ -5791,10 +5802,14 @@
          "onSelectBySelectButton": "",
          "onSelectByModifyButton": "",
          "onSelectByDeleteButton": "",
+         "onAfterRequest": "",
+         "onAfterRequestByDblClick": "",
+         "onAfterRequestBySelectButton": "",
+         "onAfterRequestByModifyButton": "",
+         "onAfterRequestByDeleteButton": "",
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
@@ -5822,6 +5837,7 @@
          "jpControlName": "",
          "readOnly": false,
          "height": "320",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 22,
           "isMultiSelectable": false,
@@ -6025,10 +6041,14 @@
          "onSelectBySelectButton": "",
          "onSelectByModifyButton": "",
          "onSelectByDeleteButton": "",
+         "onAfterRequest": "",
+         "onAfterRequestByDblClick": "",
+         "onAfterRequestBySelectButton": "",
+         "onAfterRequestByModifyButton": "",
+         "onAfterRequestByDeleteButton": "",
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
@@ -6081,6 +6101,7 @@
          "jpControlName": "",
          "readOnly": false,
          "height": "335",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 28,
           "isMultiSelectable": false,
@@ -6249,10 +6270,14 @@
          "onSelectBySelectButton": "",
          "onSelectByModifyButton": "",
          "onSelectByDeleteButton": "",
+         "onAfterRequest": "",
+         "onAfterRequestByDblClick": "",
+         "onAfterRequestBySelectButton": "",
+         "onAfterRequestByModifyButton": "",
+         "onAfterRequestByDeleteButton": "",
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
@@ -6305,6 +6330,7 @@
          "jpControlName": "",
          "readOnly": false,
          "height": "335",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 28,
           "isMultiSelectable": false,
@@ -6426,10 +6452,14 @@
          "onSelectBySelectButton": "",
          "onSelectByModifyButton": "",
          "onSelectByDeleteButton": "",
+         "onAfterRequest": "",
+         "onAfterRequestByDblClick": "",
+         "onAfterRequestBySelectButton": "",
+         "onAfterRequestByModifyButton": "",
+         "onAfterRequestByDeleteButton": "",
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
@@ -6487,7 +6517,7 @@
       "CareManagementhi"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "CareManagementhi",
+     "selectedItemFieldName": "KyufuJissekiMeisaiShukei",
      "initialTab": 0,
      "isLazyLoading": false
     },
@@ -6513,11 +6543,11 @@
      "jpControlName": "",
      "text": "前月の情報を表示する",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -6542,11 +6572,11 @@
      "jpControlName": "",
      "text": "次月の情報を表示する",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -6571,11 +6601,11 @@
      "jpControlName": "",
      "text": "給付実績一覧に戻る",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],
@@ -6795,11 +6825,11 @@
    "commonButtonAreaId": "commonBtn",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonSearchResult",
      "buttonProperty": {
       "fieldName": "btnKyufuJissekiIchiranReturn",
       "items": [],
-      "controlType": "CommonButtonFree",
+      "controlType": "CommonButtonSearchResult",
       "width": 1,
       "visible": true,
       "displayNone": false,
@@ -6816,16 +6846,15 @@
       "selectControlID": "btnKyufuJissekiIchiranReturn",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "給付実績一覧に戻る",
+      "text": "検索結果一覧へ",
       "onClick": "",
+      "icon": 0,
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "icon": 0,
       "heightTextBoxMatches": false,
-      "prefixText": "",
-      "suffixText": ""
+      "additionalText": ""
      }
     }
    ],
@@ -6834,7 +6863,9 @@
      "state": "給付実績照会"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
