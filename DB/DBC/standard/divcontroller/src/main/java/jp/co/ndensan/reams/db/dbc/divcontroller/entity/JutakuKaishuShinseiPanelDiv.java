@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinsaResetInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinsaShinseiContentsDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiResetInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -25,8 +25,8 @@ public class JutakuKaishuShinseiPanelDiv extends Panel {
      */
     @JsonProperty("JutakuKaishuShinsaShinseiContents")
     private JutakuKaishuShinsaShinseiContentsDiv JutakuKaishuShinsaShinseiContents;
-    @JsonProperty("JutakuKaishuShinseiResetInfo")
-    private JutakuKaishuShinseiResetInfoDiv JutakuKaishuShinseiResetInfo;
+    @JsonProperty("JutakuKaishuShinsaResetInfo")
+    private JutakuKaishuShinsaResetInfoDiv JutakuKaishuShinsaResetInfo;
     @JsonProperty("btnDummy")
     private Button btnDummy;
 
@@ -46,14 +46,14 @@ public class JutakuKaishuShinseiPanelDiv extends Panel {
         this.JutakuKaishuShinsaShinseiContents=JutakuKaishuShinsaShinseiContents;
     }
 
-    @JsonProperty("JutakuKaishuShinseiResetInfo")
-    public JutakuKaishuShinseiResetInfoDiv getJutakuKaishuShinseiResetInfo() {
-        return JutakuKaishuShinseiResetInfo;
+    @JsonProperty("JutakuKaishuShinsaResetInfo")
+    public JutakuKaishuShinsaResetInfoDiv getJutakuKaishuShinsaResetInfo() {
+        return JutakuKaishuShinsaResetInfo;
     }
 
-    @JsonProperty("JutakuKaishuShinseiResetInfo")
-    public void setJutakuKaishuShinseiResetInfo(JutakuKaishuShinseiResetInfoDiv JutakuKaishuShinseiResetInfo) {
-        this.JutakuKaishuShinseiResetInfo=JutakuKaishuShinseiResetInfo;
+    @JsonProperty("JutakuKaishuShinsaResetInfo")
+    public void setJutakuKaishuShinsaResetInfo(JutakuKaishuShinsaResetInfoDiv JutakuKaishuShinsaResetInfo) {
+        this.JutakuKaishuShinsaResetInfo=JutakuKaishuShinsaResetInfo;
     }
 
     @JsonProperty("btnDummy")

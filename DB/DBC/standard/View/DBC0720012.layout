@@ -698,7 +698,7 @@
        "txtYubinNo_displayNone": false,
        "txtAddress_displayNone": false,
        "btnCopy_displayNone": false,
-       "btnSearchJigyosha_disabled": false,
+       "btnSearchJigyosha_disabled": true,
        "btnCopyToHonninInfo_disabled": false
       },
       {
@@ -886,10 +886,10 @@
          "formatLength": "10"
         },
         {
-         "fieldName": "btnSearchCreationJigyoshaName",
+         "fieldName": "btnJigyoshaInputGuide",
          "items": [],
-         "controlType": "Button",
-         "width": "XS",
+         "controlType": "ButtonDialog",
+         "width": "S",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -902,17 +902,22 @@
          "authorityMode": 0,
          "marginLeft": "0",
          "marginRight": "XS",
-         "selectControlID": "btnSearchCreationJigyoshaName",
+         "selectControlID": "btnJigyoshaInputGuide",
          "helpMessageID": "",
          "jpControlName": "",
-         "text": "探",
+         "text": "ButtonDialog1",
          "imageWidth": "",
          "imageHeight": "",
          "onClick": "",
-         "appearance": 0,
-         "imageFileUrl": "",
+         "appearance": 2,
+         "imageFileUrl": "/uz/uza/image/UZ_Search.png",
          "icon": 0,
-         "heightTextBoxMatches": true
+         "heightTextBoxMatches": true,
+         "displayChildDivName": "DBZ.JigyoshaInputGuide",
+         "dataPassing": [],
+         "visibleCloseButton": true,
+         "onOkClose": "",
+         "onBeforeOpenDialog": ""
         },
         {
          "fieldName": "txtCreationJigyoshaName",
@@ -934,7 +939,7 @@
          "selectControlID": "txtCreationJigyoshaName_core",
          "helpMessageID": "",
          "jpControlName": "",
-         "readOnly": false,
+         "readOnly": true,
          "required": false,
          "maxLength": 100000000,
          "minLength": 0,
@@ -1103,10 +1108,10 @@
      "eraseBorderLeft": false
     },
     {
-     "fieldName": "JutakuKaishuShinseiResetInfo",
+     "fieldName": "JutakuKaishuShinsaResetInfo",
      "items": [
       {
-       "fieldName": "JutakuKaishuShinsaReset",
+       "fieldName": "JutakuKaishuShinsaResetInfoSummary",
        "items": [
         {
          "fieldName": "JutakuKaishuShinseiKyufugakuSummary",
@@ -1204,7 +1209,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "selectControlID": "JutakuKaishuShinsaReset",
+       "selectControlID": "JutakuKaishuShinsaResetInfoSummary",
        "helpMessageID": "",
        "jpControlName": "",
        "onLoad": "",
@@ -1213,7 +1218,7 @@
        "canOpenAndClose": true,
        "postParameterPanelNames": [
         {
-         "postParameterPanelNames": "JutakuKaishuShinsaReset"
+         "postParameterPanelNames": "JutakuKaishuShinsaResetInfoSummary"
         }
        ],
        "requestSettings": [],
@@ -1232,7 +1237,7 @@
        "height": "Auto"
       },
       {
-       "fieldName": "JutakuKaishuShinsaResult",
+       "fieldName": "JutakuKaishuShinsaResetInfoResult",
        "items": [
         {
          "fieldName": "chkShonin",
@@ -1261,7 +1266,7 @@
          "labelLAlign": 2,
          "onClick": "",
          "icon": [],
-         "selectedItem": "",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "key0",
@@ -1292,7 +1297,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "selectControlID": "JutakuKaishuShinsaResult",
+       "selectControlID": "JutakuKaishuShinsaResetInfoResult",
        "helpMessageID": "",
        "jpControlName": "",
        "onLoad": "",
@@ -1301,7 +1306,7 @@
        "canOpenAndClose": false,
        "postParameterPanelNames": [
         {
-         "postParameterPanelNames": "JutakuKaishuShinsaResult"
+         "postParameterPanelNames": "JutakuKaishuShinsaResetInfoResult"
         }
        ],
        "requestSettings": [],
@@ -1309,7 +1314,7 @@
        "onOpen": "",
        "onClose": "",
        "session": {},
-       "marginTop": "6",
+       "marginTop": "5",
        "marginBottom": "Default",
        "eraseBorder": false,
        "backgroundColor": 0,
@@ -1335,7 +1340,7 @@
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "XS",
-     "selectControlID": "JutakuKaishuShinseiResetInfo",
+     "selectControlID": "JutakuKaishuShinsaResetInfo",
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
@@ -1344,7 +1349,7 @@
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "JutakuKaishuShinseiResetInfo"
+       "postParameterPanelNames": "JutakuKaishuShinsaResetInfo"
       }
      ],
      "requestSettings": [
@@ -1501,47 +1506,37 @@
     {
      "visibleDiv": "JutakuKaishuShinseiPanel",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "JutakuKaishuShinsaShinseiContents",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "JutakuKaishuShinseiDetail",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "JutakuKaishuShinseiReason",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "JutakuKaishuShinseiResetInfo",
+     "visibleDiv": "JutakuKaishuShinsaResetInfo",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "JutakuKaishuShinseiDetailInput",
+     "visibleDiv": "JutakuKaishuShinsaResetInfoSummary",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "JutakuKaishuShinseiKyufugakuSummary",
+     "visibleDiv": "JutakuKaishuShinsaResetInfoResult",
      "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "JutakuKaishuShinseisha",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "JutakuKaishuShinseiPanel",
-     "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "KaigoAtena",
@@ -1554,12 +1549,32 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ButtonPanel",
+     "visibleDiv": "KaigoAtena",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KaigoShikakuKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "JutakuKaishuShinseiDetailInput",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "JutakuKaishuShinseisha",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
      "visibleDiv": "JutakuKaishuShinsaKoza",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "JutakuKaishuShinseiKyufugakuSummary",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -1568,7 +1583,7 @@
    "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "申請修正",
  "id": "DBC0720012",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -1617,16 +1632,16 @@
    "JutakuKaishuShinsaKoza"
   ],
   [
-   "JutakuKaishuShinseiResetInfo"
+   "JutakuKaishuShinsaResetInfo"
   ],
   [
-   "JutakuKaishuShinsaReset"
+   "JutakuKaishuShinsaResetInfoSummary"
   ],
   [
    "JutakuKaishuShinseiKyufugakuSummary"
   ],
   [
-   "JutakuKaishuShinsaResult"
+   "JutakuKaishuShinsaResetInfoResult"
   ]
  ],
  "panelMargin": 1,

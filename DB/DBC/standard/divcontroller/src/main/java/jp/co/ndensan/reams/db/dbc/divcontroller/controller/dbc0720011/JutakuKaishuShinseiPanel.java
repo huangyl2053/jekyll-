@@ -65,19 +65,19 @@ public class JutakuKaishuShinseiPanel {
         //今回の支払状況
         //見積額
         //txtPayTotalNow
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+        panel.getJutakuKaishuShinsaResetInfo().getJutakuKaishuShinsaResetInfoSummary().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
                 getTxtHiyoTotalNow().setValue(new Decimal(selectedRow.getTxtHiyoTotalAmount().getValue().toString()));
 
         //txtHokenSeikyuAmountNow
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+        panel.getJutakuKaishuShinsaResetInfo().getJutakuKaishuShinsaResetInfoSummary().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
                 getTxtHokenTaishoHiyoNow().setValue(new Decimal(selectedRow.getTxtHiyoTotalAmount().getValue().toString()));
 
         //txtRiyoshaFutanAmountNow
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+        panel.getJutakuKaishuShinsaResetInfo().getJutakuKaishuShinsaResetInfoSummary().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
                 getTxtHokenKyufuAmountNow().setValue(new Decimal(selectedRow.getTxtHokenKyufuAmount().getValue().toString()));
 
         //txtHiyoTotalAmount
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+        panel.getJutakuKaishuShinsaResetInfo().getJutakuKaishuShinsaResetInfoSummary().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
                 getTxtRiyoshaFutanAmountNow().setValue(new Decimal(selectedRow.getTxtRiyoshaFutanAmount().getValue().toString()));
 
         //事前申請内容の情報を表示する。
@@ -210,16 +210,16 @@ public class JutakuKaishuShinseiPanel {
         String riyoshaFutanAmountMae = ymlData.get(2).get("riyoshaFutanAmountMae").toString();
         String limitOverAmountMae = ymlData.get(2).get("limitOverAmountMae").toString();
 
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+        panel.getJutakuKaishuShinsaResetInfo().getJutakuKaishuShinsaResetInfoSummary().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
                 getTxtHiyoTotalMae().setValue(new Decimal(payTotalMae));
 
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+        panel.getJutakuKaishuShinsaResetInfo().getJutakuKaishuShinsaResetInfoSummary().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
                 getTxtHokenTaishoHiyoMae().setValue(new Decimal(hokenSeikyuAmountMae));
 
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+        panel.getJutakuKaishuShinsaResetInfo().getJutakuKaishuShinsaResetInfoSummary().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
                 getTxtHokenKyufuAmountMae().setValue(new Decimal(riyoshaFutanAmountMae));
 
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+        panel.getJutakuKaishuShinsaResetInfo().getJutakuKaishuShinsaResetInfoSummary().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
                 getTxtRiyoshaFutanAmountMae().setValue(new Decimal(limitOverAmountMae));
     }
 

@@ -498,37 +498,170 @@
    "fieldName": "YoguShinsaKufugakuSummary",
    "items": [
     {
-     "fieldName": "KyufugakuSummary",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
+     "fieldName": "YoguShinsaKufugakuSummarySub",
+     "items": [
+      {
+       "fieldName": "KyufugakuSummary",
+       "items": [],
+       "controlType": "CommonChildDiv",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
+       "selectControlID": "KyufugakuSummary",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "relation": [],
+       "marginTop": 0,
+       "marginBottom": 0,
+       "businessId": "DBC",
+       "controlName": "KyufugakuSummary",
+       "dataPassingForDialog": [],
+       "dialogOkEventNameForDialog": "",
+       "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
+       "btnLimitOverCheck_displayNone": false,
+       "btnRireki_displayNone": true
+      }
+     ],
+     "controlType": "Panel",
+     "width": "G2",
      "visible": true,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": true,
+     "wrap": false,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "KyufugakuSummary",
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "YoguShinsaKufugakuSummarySub",
      "helpMessageID": "",
      "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBC",
-     "controlName": "KyufugakuSummary",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "btnLimitOverCheck_displayNone": false,
-     "btnRireki_displayNone": true
+     "onLoad": "",
+     "title": "",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "YoguShinsaKufugakuSummarySub"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorder": true,
+     "backgroundColor": 0,
+     "widthAuto": true,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
+    },
+    {
+     "fieldName": "YoguShinsaShonin",
+     "items": [
+      {
+       "fieldName": "chkShonin",
+       "items": [],
+       "controlType": "CheckBoxList",
+       "width": "150",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "chkShonin_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "onChange": "",
+       "labelLText": "",
+       "labelLWidth": "S",
+       "labelLAlign": 2,
+       "onClick": "",
+       "icon": [],
+       "dataSource": [
+        {
+         "key": "shonin",
+         "value": "内容を承認する"
+        }
+       ],
+       "selectedItem": null,
+       "newLineItemNumber": 2,
+       "spaceSize": "M",
+       "disabledItem": [],
+       "selectedItems": [],
+       "minCheckedItem": 0,
+       "maxCheckedItem": 2,
+       "isAllSelectable": false,
+       "isAllSelectableBreakLine": false
+      }
+     ],
+     "controlType": "Panel",
+     "width": "G2",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "YoguShinsaShonin",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "審査結果",
+     "isOpen": true,
+     "canOpenAndClose": false,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "YoguShinsaShonin"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "XL",
+     "marginBottom": "Default",
+     "eraseBorder": false,
+     "backgroundColor": 0,
+     "widthAuto": true,
+     "panelDisplay": 1,
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     }
    ],
    "controlType": "Panel",
@@ -587,7 +720,7 @@
    "eraseBorderLeft": false
   },
   {
-   "fieldName": "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea",
+   "fieldName": "YoguShinsaDummyButtonPanel",
    "items": [
     {
      "fieldName": "btnDummy",
@@ -633,7 +766,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
-   "selectControlID": "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea",
+   "selectControlID": "YoguShinsaDummyButtonPanel",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -642,7 +775,7 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea"
+     "postParameterPanelNames": "YoguShinsaDummyButtonPanel"
     }
    ],
    "requestSettings": [
@@ -714,11 +847,6 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "YoguKonyuhiShikyuShinseiShinsaSeikyuDetail",
      "panelState": "visible",
      "fixedDiv": "No"
@@ -747,13 +875,23 @@
      "visibleDiv": "KyufugakuSummary",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "YoguShinsaKufugakuSummarySub",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "YoguShinsaShonin",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
    "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "修正",
  "id": "DBC0610012",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -796,10 +934,16 @@
    "YoguShinsaKufugakuSummary"
   ],
   [
+   "YoguShinsaKufugakuSummarySub"
+  ],
+  [
    "KyufugakuSummary"
   ],
   [
-   "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea"
+   "YoguShinsaShonin"
+  ],
+  [
+   "YoguShinsaDummyButtonPanel"
   ]
  ],
  "panelMargin": 1,
