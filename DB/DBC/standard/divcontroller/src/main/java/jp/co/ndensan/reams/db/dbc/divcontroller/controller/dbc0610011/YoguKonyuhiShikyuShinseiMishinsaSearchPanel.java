@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgYoguKonyuhiShisaMishins
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
@@ -34,7 +35,10 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onLoad(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
         ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> response = new ResponseData<>();
 
-        setSearchCondition(panel);
+        //初期表示はしない
+//        setSearchCondition(panel);
+        set審査日(panel);
+        setMishinsaShikyuShinseiData(panel);
 
         response.data = panel;
         return response;
@@ -44,13 +48,13 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
     /*
      * 福祉用具購入費支給申請審査 未審査支給申請一覧情報を表示する。
      */
-    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnSearchMishinsa(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
+    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnSearchMishinsa(
+            YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
         ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> response = new ResponseData<>();
 
-        //TO DO 2014.5.20 追加① 審査日（検索ボタン押下、表示される）
+        //panelは閉じているのでオンロード時にデータをセットしておくrequestSettingにセットしない
         set審査日(panel);
         setMishinsaShikyuShinseiData(panel);
-
         response.data = panel;
         return response;
     }
@@ -59,14 +63,14 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
      * 福祉用具購入費支給申請審査 選択された未審査支給申請一覧情報をもとに、
      * 支給申請内容を一括審査するボタンを押下後、審査結果の内容をセットされる。
      */
-    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnIkkatsuShinsa(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
+    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnIkkatsuShinsa(
+            YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
         ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> response = new ResponseData<>();
         List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> selectedMishinsaShikyuShinsei = panel.getYoguKonyuhiShikyuShinseiMishinsaResultList()
                 .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getSelectedItems();
 
         //TO DO 2014.5.19 承認却下区分
         for (int i = 0; i < selectedMishinsaShikyuShinsei.size(); i++) {
-
             dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row mishinsaShikyuShinseiList_Row = selectedMishinsaShikyuShinsei.get(i);
             if (i == 却下) {
                 mishinsaShikyuShinseiList_Row.getTxtShinsaResult().setValue(new RString("却下：種目重複"));
@@ -81,11 +85,14 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         return response;
     }
 
-    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnModifyShinsei(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
+    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnModifyShinsei(
+            YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
         ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> response = new ResponseData<>();
 
         panel.getYoguKonyuhiShikyuShinseiMishinsaResultList().getDgYoguKonyuhiShisaMishinsaShikyuShinseiList()
                 .getDataSource().get(却下).setRowState(RowState.Modified);
+        panel.getYoguKonyuhiShikyuShinseiMishinsaResultList().getDgYoguKonyuhiShisaMishinsaShikyuShinseiList()
+                .getDataSource().get(却下).getTxtShinsaResult().setValue(new RString("承認"));
         response.data = panel;
         return response;
     }
@@ -99,9 +106,9 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
     }
 
     private void set審査日(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
-        List<HashMap> targetSource = YamlLoader.DBC.loadAsList(new RString("dbc0610011/YoguShinseiShinsa.yml"));
-        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
-        panel.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtShinsaDate().setValue(cg.getAsRDate("審査日"));
+//        List<HashMap> targetSource = YamlLoader.DBC.loadAsList(new RString("dbc0610011/YoguShinseiShinsa.yml"));
+//        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
+        panel.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtShinsaDate().setValue(RDate.getNowDate());
     }
 
     /**

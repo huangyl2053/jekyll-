@@ -7,7 +7,7 @@
    "eventName": "modifyShinsei",
    "toLayoutSubGyomuCode": "DBC",
    "toLayoutName": "DBC0610012",
-   "toEventName": ""
+   "toEventName": "modify"
   },
   {
    "id": "1",
@@ -25,6 +25,15 @@
    "eventName": "settled",
    "toLayoutSubGyomuCode": "DBC",
    "toLayoutName": "DBC0610011",
+   "toEventName": "modified"
+  },
+  {
+   "id": "3",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0610011",
+   "eventName": "complete",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0610013",
    "toEventName": ""
   }
  ],

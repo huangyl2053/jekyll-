@@ -66,9 +66,8 @@ public class MishinsaShikyuShinseiListPanel {
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onClick_btnSearchMishinsa(MishinsaShikyuShinseiListPanelDiv panel) {
         ResponseData<MishinsaShikyuShinseiListPanelDiv> response = new ResponseData<>();
 
-        //TO DO
+        //requestSettingでセットしない
         setMishinsaShikyuShinseiList(panel);
-
         response.data = panel;
         return response;
     }
@@ -83,17 +82,17 @@ public class MishinsaShikyuShinseiListPanel {
         ResponseData<MishinsaShikyuShinseiListPanelDiv> response = new ResponseData<>();
 
         int 不承認 = 3;
-        if (is３段階チェックあり(panel.getDgMishinsaShikyuShinsei().getDataSource().get(不承認))) {
-            panel.getDgMishinsaShikyuShinsei().getDataSource().get(不承認).setTxtShinsaResult(new RString("承認"));
-        } else {
-            for (dgMishinsaShikyuShinsei_Row row : panel.getDgMishinsaShikyuShinsei().getSelectedItems()) {
-                if (row.getId() == 不承認) {
-                    row.setTxtShinsaResult(new RString("相違有り：3段階リセット"));
-                } else {
-                    row.setTxtShinsaResult(new RString("承認"));
-                }
+//        if (is３段階チェックあり(panel.getDgMishinsaShikyuShinsei().getDataSource().get(不承認))) {
+//            panel.getDgMishinsaShikyuShinsei().getDataSource().get(不承認).setTxtShinsaResult(new RString("承認"));
+//        } else {
+        for (dgMishinsaShikyuShinsei_Row row : panel.getDgMishinsaShikyuShinsei().getSelectedItems()) {
+            if (row.getId() == 不承認) {
+                row.setTxtShinsaResult(new RString("相違有り：3段階リセット"));
+            } else {
+                row.setTxtShinsaResult(new RString("承認"));
             }
         }
+//        }
         setAbleCommonButton();
         response.data = panel;
         return response;
@@ -122,6 +121,7 @@ public class MishinsaShikyuShinseiListPanel {
         int 不承認 = 3;
         panel.getDgMishinsaShikyuShinsei().getDataSource().get(不承認).setRowState(RowState.Modified);
         panel.getDgMishinsaShikyuShinsei().getDataSource().get(不承認).setTxt3DankaiReset(Boolean.TRUE);
+        panel.getDgMishinsaShikyuShinsei().getDataSource().get(不承認).setTxtShinsaResult(new RString("承認"));
 
 //        if (is３段階チェックあり(panel1)) {
 //            panel.getDgMishinsaShikyuShinsei().getDataSource().get(3).setTxt3DankaiReset(Boolean.TRUE);

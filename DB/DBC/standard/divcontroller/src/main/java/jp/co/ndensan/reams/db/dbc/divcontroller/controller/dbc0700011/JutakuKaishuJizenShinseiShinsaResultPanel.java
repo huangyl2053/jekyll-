@@ -30,7 +30,8 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      * @param panel HihokenshaSearchGaitoshaPanelDiv
      * @return PanelDivのResponseData
      */
-    public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onLoad(JutakuKaishuJizenShinseiShinsaResultPanelDiv panel) {
+    public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onLoad(
+            JutakuKaishuJizenShinseiShinsaResultPanelDiv panel, JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
         ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> response = new ResponseData<>();
 
         //前回・今回　初期化設定　　　　　　
@@ -51,7 +52,7 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      * @return ResponseData
      */
     public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onClick_btnModifyDetail(
-            JutakuKaishuJizenShinseiShinsaResultPanelDiv resultPanel) {
+            JutakuKaishuJizenShinseiShinsaResultPanelDiv resultPanel, JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
         ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> response = new ResponseData<>();
 
         //今回設定
@@ -152,7 +153,8 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      * @param panel HihokenshaSearchGaitoshaPanelDiv
      * @return PanelDivのResponseData
      */
-    public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onClick_radJudgeKubun(JutakuKaishuJizenShinseiShinsaResultPanelDiv panel) {
+    public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onClick_radJudgeKubun(
+            JutakuKaishuJizenShinseiShinsaResultPanelDiv panel, JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
         ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> response = new ResponseData<>();
 
 //        System.out.println("++++" + panel.getRadJudgeKubun().getSelectedItem().toString());

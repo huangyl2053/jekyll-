@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.controller.PaymentMethod;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailInput.JutakuKaishuDetailInputDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailInput.dgJutakuKaishuDetail_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiContentsPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiHihokenshaPanelDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShinseishaInfo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -37,7 +38,8 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      * @param contentsPanel 住宅改修事前申請panel
      * @return ResponseData
      */
-    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onLoad(JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
+    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onLoad(
+            JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
         ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
 
         //住宅所有者・被保険者との関係　
@@ -56,12 +58,82 @@ public class JutakuKaishuJizenShinseiContentsPanel {
     }
 
     /**
+     * 住宅改修費事前申請登録 明細を追加するボタンを押下後、住宅改修明細を表示する。
+     *
+     * @param contentsPanel 申請panel
+     * @return ResponseData
+     */
+    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_btnModifyDetail(
+            JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
+        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
+
+        //住宅改修明細
+        contentsPanel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
+                getDgJutakuKaishuDetail().setDataSource(
+                        getShikyuShinseiInputData(contentsPanel.getJutakuKaishuJizenShinseiDetail()
+                                .getJutakuJizenShinseiDetailInput().getJutakuKaishuDetailInput()));
+
+        contentsPanel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().getDgJutakuKaishuDetail()
+                .getDataSource().get(0).setRowState(RowState.Added);
+
+        //クリア設定
+        setJutakuKaishuJizenShinseiDetailInput(contentsPanel);
+
+        response.data = contentsPanel;
+        return response;
+
+    }
+
+    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_clear(
+            JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
+        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
+
+        response.data = panel;
+        return response;
+    }
+
+    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_copyToAddress(
+            JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
+        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
+        response.data = panel;
+        return response;
+    }
+
+    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_btnCopyAddress(
+            JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
+        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
+
+        panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().getJutakuKaishuDetailInput()
+                .getTxtKaishuTaishoAddress().setValue(hihoPanel.getKaigoAtena().getAtenaInfo().getTxtJusho().getValue());
+        response.data = panel;
+        return response;
+    }
+
+    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_copyToInfo(
+            JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
+        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
+        response.data = panel;
+        return response;
+    }
+
+    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_btnClear(
+            JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
+        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
+
+        //クリア設定
+        setJutakuKaishuJizenShinseiDetailInput(panel);
+        response.data = panel;
+        return response;
+    }
+
+    /**
      * 支払い方法ラジオボタンにより表示内容を変更する。
      *
      * @param panel
      * @return response
      */
-    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_radPayMethod(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
+    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_radPayMethod(
+            JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
         ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
 
         PaymentMethod.showSelectedPaymentMethod(panel.getJutakuKaishuJizenShinseiKoza());
@@ -178,33 +250,6 @@ public class JutakuKaishuJizenShinseiContentsPanel {
         panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKinyuKikanBrunchName().setValue(new RString(kinyuBranchName));
         panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKozaMeigininKana().setValue(new RString(kozaMeigininKanaName));
         panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKozaMeiginin().setValue(new RString(kozaMeigininName));
-    }
-
-    /**
-     * 住宅改修費事前申請登録 明細を追加するボタンを押下後、住宅改修明細を表示する。
-     *
-     * @param contentsPanel 申請panel
-     * @return ResponseData
-     */
-    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_btnModifyDetail(
-            JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
-        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
-
-        //住宅改修明細
-        contentsPanel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
-                getDgJutakuKaishuDetail().setDataSource(
-                        getShikyuShinseiInputData(contentsPanel.getJutakuKaishuJizenShinseiDetail()
-                                .getJutakuJizenShinseiDetailInput().getJutakuKaishuDetailInput()));
-
-        contentsPanel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().getDgJutakuKaishuDetail()
-                .getDataSource().get(0).setRowState(RowState.Added);
-
-        //クリア設定
-        setJutakuKaishuJizenShinseiDetailInput(contentsPanel);
-
-        response.data = contentsPanel;
-        return response;
-
     }
 
     private List<dgJutakuKaishuDetail_Row> getShikyuShinseiInputData(JutakuKaishuDetailInputDiv div) {

@@ -33,13 +33,13 @@ public class YoguKonyuhiShikyuShinseiShinsaModifyPanel {
      *　福祉用具購入費支給審査　未審査支給申請一覧の修正ボタン押下後、請求明細の情報に展開する。
      */
     public ResponseData<YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv> onClick_btnModifyShinsei(
-            YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv panel, YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv searchPanel) {
+            YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv panel) {
         ResponseData<YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv> response = new ResponseData<>();
 
         //TODO 請求明細の情報を設定する。
         setSeikyuDetailData(panel);
         //TODO 支給申請内容の情報を設定する。
-        setShikyuShinseiSeikyuDetailInput(panel, searchPanel);
+        setShikyuShinseiSeikyuDetailInput(panel);
 
         response.data = panel;
         return response;
@@ -49,7 +49,7 @@ public class YoguKonyuhiShikyuShinseiShinsaModifyPanel {
      * 福祉用具購入費支給審査 請求明細の修正ボタンを押下後、 詳細内容が表示する。
      */
     public ResponseData<YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv> onClick_dgMeisai_modify(
-            YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv panel, YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv searchPanel) {
+            YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv panel) {
         ResponseData<YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv> response = new ResponseData<>();
 
         List<HashMap> targetSource = YamlLoader.DBC.loadAsList(new RString("dbc0610011/YoguShinseiDetailList.yml"));
@@ -85,7 +85,7 @@ public class YoguKonyuhiShikyuShinseiShinsaModifyPanel {
      * @return
      */
     public ResponseData<YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv> onClick_ModifyDetail(
-            YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv panel, YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv searchPanel) {
+            YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv panel) {
         ResponseData<YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv> response = new ResponseData<>();
 
         setModifiedDataToList(panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail(), panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getDgSeikyuDetail().getClickedRowId());
@@ -151,15 +151,12 @@ public class YoguKonyuhiShikyuShinseiShinsaModifyPanel {
      * 支給申請内容の値を設定します。
      */
     private void setShikyuShinseiSeikyuDetailInput(
-            YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv panel, YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv searchPanel) {
-
-        panel.getTxtTeikyoYM().setValue(searchPanel.getYoguKonyuhiShikyuShinseiMishinsaResultList().getDgYoguKonyuhiShisaMishinsaShikyuShinseiList()
-                .getClickedItem().getTxtTenkyoYM().getValue());
-        panel.getTxtSeiriNo().setValue(searchPanel.getYoguKonyuhiShikyuShinseiMishinsaResultList().getDgYoguKonyuhiShisaMishinsaShikyuShinseiList()
-                .getClickedItem().getTxtSeiriNo().getValue());
+            YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv panel) {
 
         List<HashMap> targetSource = YamlLoader.DBC.loadAsList(new RString("dbc0610011/YoguShinseiShinsa.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
+        panel.getTxtTeikyoYM().setValue(cg.getAsRDate("提供年月"));
+        panel.getTxtSeiriNo().setValue(cg.getAsRString("整理番号"));
         panel.getTxtKyufuritsu().setValue(cg.getAsDecimal("給付率"));
 
         setKozaInfo(panel);

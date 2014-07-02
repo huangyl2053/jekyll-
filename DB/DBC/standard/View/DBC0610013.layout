@@ -2,7 +2,7 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "JutakuShinsaKanryoPanel",
+   "fieldName": "YoguShinsaKanryoPanel",
    "items": [
     {
      "fieldName": "KanryoMessage",
@@ -44,29 +44,29 @@
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
-   "wrap": true,
+   "wrap": false,
    "dependencies": [],
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
    "marginLeft": "Default",
    "marginRight": "Default",
-   "selectControlID": "JutakuShinsaKanryoPanel",
+   "selectControlID": "YoguShinsaKanryoPanel",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
    "title": "",
    "isOpen": true,
-   "canOpenAndClose": false,
+   "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "JutakuShinsaKanryoPanel"
+     "postParameterPanelNames": "YoguShinsaKanryoPanel"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/JutakuShinsaKanryoPanel/onClick_btnSave"
+     "requestUrl": "dbc/db/dbc/YoguShinsaKanryoPanel/onLoad"
     }
    ],
    "hiddenInput": [],
@@ -82,7 +82,7 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "focusPositionID": "restoreLayoutButton"
+   "focusPositionID": "Page"
   }
  ],
  "controlType": null,
@@ -103,13 +103,13 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "住宅改修費支給申請審査",
+ "title": "福祉用具購入費支給申請審査",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "審査結果登録完了",
+   "stateName": "審査登録完了",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -118,7 +118,7 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "JutakuShinsaKanryoPanel",
+     "visibleDiv": "YoguShinsaKanryoPanel",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -130,17 +130,17 @@
   }
  ],
  "currentState": "All",
- "id": "DBC0720013",
+ "id": "DBC0610013",
  "WFParameter": [],
  "UIContainerEventMapping": [
   {
    "alias": "complete",
-   "eventName": "JutakuShinsaKanryoPanel.onLoad"
+   "eventName": "YoguShinsaKanryoPanel.onLoad"
   }
  ],
  "loadSequencePanelNames": [
   [
-   "JutakuShinsaKanryoPanel"
+   "YoguShinsaKanryoPanel"
   ],
   [
    "KanryoMessage"
@@ -190,12 +190,10 @@
    ],
    "states": [
     {
-     "state": "申請審査"
+     "state": "審査"
     }
    ],
-   "isFinishButtonOnTheRight": false,
-   "FinishButtonVisible": false,
-   "SuspendButtonVisible": false
+   "isFinishButtonOnTheRight": false
   }
  ]
 }

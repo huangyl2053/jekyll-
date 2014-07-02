@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.dbc0700011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuJizenKanryoPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiHihokenshaPanelDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoKanryoMessage;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,14 +22,19 @@ public class JutakuJizenKanryoPanel {
     /**
      * 完了画面ロード時の処理です。
      *
-     * @param panel JutakuJizenKanryoPanelDiv
+     * @param kanryoPanel
+     * @param hihoPanel
      * @return response
      */
-    public ResponseData<JutakuJizenKanryoPanelDiv> onLoad(JutakuJizenKanryoPanelDiv panel) {
+    public ResponseData<JutakuJizenKanryoPanelDiv> onLoad(
+            JutakuJizenKanryoPanelDiv kanryoPanel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
         ResponseData<JutakuJizenKanryoPanelDiv> response = new ResponseData<>();
 
-        KaigoKanryoMessage.setMessage(panel.getKanryoMessage(), new RString("住宅改修費事前申請登録が完了しました。"));
-        response.data = panel;
+        KaigoKanryoMessage.setMessage(kanryoPanel.getKanryoMessage(),
+                new RString("住宅改修費事前申請登録が完了しました。"),
+                hihoPanel.getKaigoShikakuKihon().getTxtHihokenshaNo().getValue(),
+                hihoPanel.getKaigoAtena().getAtenaInfo().getTxtAtenaMeisho().getValue());
+        response.data = kanryoPanel;
         return response;
     }
 }

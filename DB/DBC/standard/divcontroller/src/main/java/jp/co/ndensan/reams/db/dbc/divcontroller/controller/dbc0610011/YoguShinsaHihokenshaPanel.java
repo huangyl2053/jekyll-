@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 public class YoguShinsaHihokenshaPanel {
 
     /**
-     * 画面ロード時の処理です。
+     * 申請一覧から修正ボタンを押したときの処理です。
      *
      * @param panel 被保険者panel
      * @return response

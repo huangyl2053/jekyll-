@@ -143,6 +143,10 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnDummy",
      "requestUrl": "dbc/db/dbc/YoguShinsaHihokenshaPanel/onLoad"
     }
    ],
@@ -451,15 +455,12 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "YoguKonyuhiShikyuShinseiShinsaModifyPanel"
-    },
-    {
-     "postParameterPanelNames": "YoguKonyuhiShikyuShinseiMishinsaSearchPanel"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsaModifyPanel/onClick_btnModifyShinsei"
+     "requestUrl": ""
     },
     {
      "eventName": "onSelectByModifyButton",
@@ -468,6 +469,10 @@
     {
      "eventName": "onClick_ModifyDetail",
      "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsaModifyPanel/onClick_ModifyDetail"
+    },
+    {
+     "eventName": "onClick_btnDummy",
+     "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsaModifyPanel/onClick_btnModifyShinsei"
     }
    ],
    "hiddenInput": [],
@@ -550,14 +555,15 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "YoguShinsaKufugakuSummary"
-    },
-    {
-     "postParameterPanelNames": "YoguKonyuhiShikyuShinseiMishinsaSearchPanel"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnDummy",
      "requestUrl": "dbc/db/dbc/YoguShinsaKufugakuSummaryPanel/onClick_btnModifyShinsei"
     }
    ],
@@ -583,64 +589,6 @@
   {
    "fieldName": "YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea",
    "items": [
-    {
-     "fieldName": "btnModifyShinsei",
-     "items": [],
-     "controlType": "Button",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnModifyShinsei",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "text": "申請を修正する",
-     "imageWidth": "",
-     "imageHeight": "",
-     "onClick": "onClick_btnModifyShinsei",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "icon": 0,
-     "heightTextBoxMatches": false
-    },
-    {
-     "fieldName": "btnCancel",
-     "items": [],
-     "controlType": "Button",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnCancel",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "text": "申請の修正をやめる",
-     "imageWidth": "",
-     "imageHeight": "",
-     "onClick": "onClick_btnCancel",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "icon": 0,
-     "heightTextBoxMatches": false
-    },
     {
      "fieldName": "btnDummy",
      "items": [],
@@ -673,7 +621,7 @@
    ],
    "controlType": "Panel",
    "width": "G6",
-   "visible": true,
+   "visible": false,
    "displayNone": false,
    "disabled": false,
    "accessKey": "",
@@ -711,7 +659,7 @@
    "marginBottom": "Default",
    "eraseBorder": false,
    "backgroundColor": 0,
-   "widthAuto": false,
+   "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
@@ -805,7 +753,7 @@
    "events": []
   }
  ],
- "currentState": "修正",
+ "currentState": "All",
  "id": "DBC0610012",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -824,11 +772,6 @@
  ],
  "loadSequencePanelNames": [
   [
-   "YoguKonyuhiShikyuShinseiMishinsaSearchPanel",
-   "YoguKonyuhiShikyuShinseiShinsaModifyPanel",
-   "YoguShinsaKufugakuSummary"
-  ],
-  [
    "YoguShinsaHihokensha"
   ],
   [
@@ -838,6 +781,9 @@
    "KaigoShikakuKihon"
   ],
   [
+   "YoguKonyuhiShikyuShinseiShinsaModifyPanel"
+  ],
+  [
    "YoguKonyuhiShikyuShinseiShinsaSeikyuDetail"
   ],
   [
@@ -845,6 +791,9 @@
   ],
   [
    "YoguKonyuhiShikyuShinseiShinsaPaymentMethod"
+  ],
+  [
+   "YoguShinsaKufugakuSummary"
   ],
   [
    "KyufugakuSummary"
@@ -859,18 +808,18 @@
  "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "save",
+   "commonButtonAreaId": "modifyYoguShinsei",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonUpdate",
+     "buttonKind": "CommonButtonFree",
      "buttonProperty": {
-      "fieldName": "btnSave",
+      "fieldName": "btnModifyShinsei",
       "items": [],
-      "controlType": "CommonButtonUpdate",
+      "controlType": "CommonButtonFree",
       "width": 1,
       "visible": true,
       "displayNone": false,
-      "disabled": true,
+      "disabled": false,
       "accessKey": "",
       "nextFocusFieldName": "",
       "wrap": false,
@@ -880,27 +829,64 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btnSave",
+      "selectControlID": "btnModifyShinsei",
       "helpMessageID": "",
       "jpControlName": "",
-      "onClick": "onClick_btnSave",
-      "text": "更新",
-      "appearance": 0,
-      "imageFileUrl": "",
+      "text": "申請を修正する",
       "imageWidth": "",
       "imageHeight": "",
+      "onClick": "onClick_btnModifyShinsei",
+      "appearance": 0,
+      "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "審査内容を"
+      "prefixText": "",
+      "suffixText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnCancel",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCancel",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "申請の修正をやめる",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onClick": "onClick_btnCancel",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
      }
     }
    ],
    "states": [
     {
-     "state": "審査"
+     "state": "修正"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
