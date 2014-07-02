@@ -477,7 +477,7 @@
        "dialogCancelEventNameForDialog": "",
        "canTransferEvent": true,
        "heightForDialog": "M",
-       "ChohyoShutsuryokujun_width": "1110"
+       "ChohyoShutsuryokujun_width": "1098"
       }
      ],
      "controlType": "Panel",
@@ -492,7 +492,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "HihokenshashoIkkatsuHakko",
      "helpMessageID": "",
@@ -554,11 +554,11 @@
        "dialogCancelEventNameForDialog": "",
        "canTransferEvent": true,
        "heightForDialog": "M",
-       "ChohyoShutsuryokujun_width": "1110"
+       "ChohyoShutsuryokujun_width": "1097"
       }
      ],
      "controlType": "PanelPublish",
-     "width": "G12",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -569,14 +569,14 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "HihokenshashoIkkatsuHakkoList",
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
      "title": "被保険者証発行一覧表",
-     "isOpen": false,
+     "isOpen": true,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
@@ -657,7 +657,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "252"
+   "height": "Auto"
   }
  ],
  "controlType": null,
