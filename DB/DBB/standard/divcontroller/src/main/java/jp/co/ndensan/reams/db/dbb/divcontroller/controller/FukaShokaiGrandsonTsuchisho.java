@@ -49,11 +49,11 @@ public class FukaShokaiGrandsonTsuchisho {
         panel.getTxtKoseiM().setValue(konkyo.get(0).get(12));
 
         
-        set_radKobetsuHakkoChoteiJiyu(panel.getInjiNaiyoSettei().getKobetsuHakkoChoteiJiyu());
-        setAto_TblKobetsuHakkoFukakonkyo(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 0);
-        setMae_TblKobetsuHakkoFukakonkyo(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
-        setAto_TblKobetsuHakkoKiwariGaku(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 0);
-        setMae_TblKobetsuHakkoKiwariGaku(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
+        set_radKobetsuHakkoChoteiJiyu(panel.getKobetsuHakkoChoteiJiyu());
+        setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 0);
+        setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
+        setAto_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 0);
+        setMae_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
         
         
         response.data = panel;
@@ -63,24 +63,25 @@ public class FukaShokaiGrandsonTsuchisho {
     public void set_radKobetsuHakkoChoteiJiyu(KobetsuHakkoChoteiJiyuDiv div) {       
         div.getTxtChoteiJiyu1().setValue(jiyu.get(0).get(0));
         div.getTxtChoteiJiyu2().setValue(jiyu.get(0).get(1));
-        
+        div.getTxtChoteiJiyu3().setValue(RString.EMPTY);
+        div.getTxtChoteiJiyu4().setValue(RString.EMPTY);        
     }      
     
     public ResponseData<FukaShokaiGrandsonTsuchishoDiv> onChange_radKobetsuHakkoChoteiJiyu(FukaShokaiGrandsonTsuchishoDiv panel, JuminFukaShokaiDiv div) {
         ResponseData<FukaShokaiGrandsonTsuchishoDiv> response = new ResponseData<>();
         
-        if( panel.getInjiNaiyoSettei().getKobetsuHakkoChoteiJiyu().getRadKobetsuHakkoChoteiJiyu().getSelectedItem().contains("0") ){
-            panel.getInjiNaiyoSettei().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setDisabled(true);
-            panel.getInjiNaiyoSettei().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu2().setDisabled(true);
-            panel.getInjiNaiyoSettei().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu3().setDisabled(true);
-            panel.getInjiNaiyoSettei().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu4().setDisabled(true);
+        if( panel.getKobetsuHakkoChoteiJiyu().getRadKobetsuHakkoChoteiJiyu().getSelectedItem().contains("0") ){
+            panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setDisabled(true);
+            panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu2().setDisabled(true);
+            panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu3().setDisabled(true);
+            panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu4().setDisabled(true);
             //内容を初期状態に戻す
-            set_radKobetsuHakkoChoteiJiyu(panel.getInjiNaiyoSettei().getKobetsuHakkoChoteiJiyu());
+            set_radKobetsuHakkoChoteiJiyu(panel.getKobetsuHakkoChoteiJiyu());
         }else{
-            panel.getInjiNaiyoSettei().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setDisabled(false);
-            panel.getInjiNaiyoSettei().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu2().setDisabled(false);
-            panel.getInjiNaiyoSettei().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu3().setDisabled(false);
-            panel.getInjiNaiyoSettei().getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu4().setDisabled(false);            
+            panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setDisabled(false);
+            panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu2().setDisabled(false);
+            panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu3().setDisabled(false);
+            panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu4().setDisabled(false);            
         }
         
         response.data = panel;
@@ -90,25 +91,25 @@ public class FukaShokaiGrandsonTsuchisho {
     public ResponseData<FukaShokaiGrandsonTsuchishoDiv> onChange_ddlInjiKouseiAto(FukaShokaiGrandsonTsuchishoDiv panel, JuminFukaShokaiDiv div) {
         ResponseData<FukaShokaiGrandsonTsuchishoDiv> response = new ResponseData<>();
         
-        RString key = panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto().getSelectedItem();
+        RString key = panel.getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto().getSelectedItem();
         if( key.contains("0") ){
-            setAto_TblKobetsuHakkoFukakonkyo(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 0);
-            setMae_TblKobetsuHakkoFukakonkyo(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
-            setAto_TblKobetsuHakkoKiwariGaku (panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 0);
-            setMae_TblKobetsuHakkoKiwariGaku (panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
-            panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setSelectedItem(new RString("key0"));
+            setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 0);
+            setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
+            setAto_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 0);
+            setMae_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
+            panel.getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setSelectedItem(new RString("key0"));
         }else if( key.contains("1") ){
-            setAto_TblKobetsuHakkoFukakonkyo(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
-            setMae_TblKobetsuHakkoFukakonkyo(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 2);
-            setAto_TblKobetsuHakkoKiwariGaku (panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
-            setMae_TblKobetsuHakkoKiwariGaku (panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 2);
-            panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setSelectedItem(new RString("key1"));
+            setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
+            setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 2);
+            setAto_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
+            setMae_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 2);
+            panel.getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setSelectedItem(new RString("key1"));
         }else{
-            setAto_TblKobetsuHakkoFukakonkyo(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 2);
-            setMae_TblKobetsuHakkoFukakonkyo(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo());
-            setAto_TblKobetsuHakkoKiwariGaku (panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 2);
-            setMae_TblKobetsuHakkoKiwariGaku (panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku());
-            panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setSelectedItem(new RString("key2"));
+            setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 2);
+            setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo());
+            setAto_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 2);
+            setMae_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku());
+            panel.getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setSelectedItem(new RString("key2"));
         }
                
         response.data = panel;
@@ -118,22 +119,22 @@ public class FukaShokaiGrandsonTsuchisho {
     public ResponseData<FukaShokaiGrandsonTsuchishoDiv> onChange_ddlInjiKouseiMae(FukaShokaiGrandsonTsuchishoDiv panel, JuminFukaShokaiDiv div) {
         ResponseData<FukaShokaiGrandsonTsuchishoDiv> response = new ResponseData<>();
         
-        RString key = panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().getSelectedItem();
+        RString key = panel.getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().getSelectedItem();
         if( key.contains("0") ){
-            setAto_TblKobetsuHakkoFukakonkyo(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 0);
-            setMae_TblKobetsuHakkoFukakonkyo(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
-            setAto_TblKobetsuHakkoKiwariGaku (panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 0);
-            setMae_TblKobetsuHakkoKiwariGaku (panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
-            panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto().setSelectedItem(new RString("key0"));
+            setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 0);
+            setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
+            setAto_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 0);
+            setMae_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
+            panel.getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto().setSelectedItem(new RString("key0"));
         }else if( key.contains("1") ){
-            setAto_TblKobetsuHakkoFukakonkyo(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
-            setMae_TblKobetsuHakkoFukakonkyo(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 2);
-            setAto_TblKobetsuHakkoKiwariGaku (panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
-            setMae_TblKobetsuHakkoKiwariGaku (panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 2);
-            panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto().setSelectedItem(new RString("key1"));
+            setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
+            setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 2);
+            setAto_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
+            setMae_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 2);
+            panel.getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto().setSelectedItem(new RString("key1"));
         }else{
-            setMae_TblKobetsuHakkoFukakonkyo(panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo());
-            setMae_TblKobetsuHakkoKiwariGaku (panel.getInjiNaiyoSettei().getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku());
+            setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo());
+            setMae_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku());
         }       
         
         response.data = panel;
