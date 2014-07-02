@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuJissekiSearchDiv;
+import java.util.HashMap;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiSearchDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.*;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -15,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KyufuJissekiSearch {
 
-    private final RString DATE_TYPE_NENDO = new RString("nendo");
+    private final RString DATE_TYPE_YM = new RString("serviceTeikyoYM");
 
     public ResponseData<KyufuJissekiSearchDiv> onLoad(KyufuJissekiSearchDiv panel) {
         ResponseData<KyufuJissekiSearchDiv> response = new ResponseData<>();
@@ -39,17 +42,25 @@ public class KyufuJissekiSearch {
     }
 
     private void initData(KyufuJissekiSearchDiv panel) {
-        panel.getTxtKyufuJissekiSearchHihokenshaNo().setValue(RString.EMPTY);
-        panel.getRadKyufuJissekiSearchDateType().setSelectedItem(DATE_TYPE_NENDO);
-        panel.getDdlKyufuJissekiSearchNendo().setDisplayNone(false);
-        panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setDisplayNone(true);
+//        panel.getTxtKyufuJissekiSearchHihokenshaNo().setValue(RString.EMPTY);
+        panel.getRadKyufuJissekiSearchDateType().setSelectedItem(DATE_TYPE_YM);
+        panel.getDdlKyufuJissekiSearchNendo().setDisplayNone(true);
+        panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setDisplayNone(false);
 //        panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setFromValue(RString.EMPTY);
 //        panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setToValue(RString.EMPTY);
+
+        HashMap hashMap = YamlLoader.DBC.loadAsList(
+                new RString("dbc0010000/KyufuJissekiSearch.yml")).get(0);
+
+        //検索被保番号取得、設定
+        ControlGenerator ymlData = new ControlGenerator(hashMap);
+
+        panel.getTxtKyufuJissekiSearchHihokenshaNo().setValue(ymlData.getAsRString("HihokenshaNo"));
     }
 
     private void setDateType(KyufuJissekiSearchDiv panel) {
         RString item = panel.getRadKyufuJissekiSearchDateType().getSelectedItem();
-        panel.getDdlKyufuJissekiSearchNendo().setDisplayNone(!item.equals(DATE_TYPE_NENDO));
-        panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setDisplayNone(item.equals(DATE_TYPE_NENDO));
+        panel.getDdlKyufuJissekiSearchNendo().setDisplayNone(item.equals(DATE_TYPE_YM));
+        panel.getTxtKyufuJissekiSearchServiceTeikyoYM().setDisplayNone(!item.equals(DATE_TYPE_YM));
     }
 }

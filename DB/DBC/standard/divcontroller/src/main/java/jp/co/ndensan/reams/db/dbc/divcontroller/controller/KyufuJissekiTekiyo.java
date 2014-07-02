@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuJissekiTekiyoDiv;
+import java.util.HashMap;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiTekiyoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -17,7 +20,14 @@ public class KyufuJissekiTekiyo {
 
     public ResponseData<KyufuJissekiTekiyoDiv> onLoad(KyufuJissekiTekiyoDiv panel) {
         ResponseData<KyufuJissekiTekiyoDiv> response = new ResponseData<>();
-        panel.getTxtTekiyo().setValue(new RString("摘要１"));
+
+        //摘要情報取得、設定
+        HashMap hashMap = YamlLoader.DBC.loadAsList(
+                new RString("dbc0010000/KyufuJissekiTekiyo.yml")).get(0);
+
+        ControlGenerator ymlData = new ControlGenerator(hashMap);
+
+        panel.getTxtTekiyo().setValue(ymlData.getAsRString("Tekiyo"));
         response.data = panel;
         return response;
     }
