@@ -28,6 +28,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "",
+       "selectedItem": "1",
        "dataSource": [
         {
          "key": "1",
@@ -59,16 +61,14 @@
         }
        ],
        "required": false,
-       "onFocus": "",
-       "onBlur": "",
-       "onChange": "",
        "labelLText": "市町村",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "1",
+       "onFocus": "",
+       "onBlur": "",
        "disabledItem": []
       },
       {
@@ -92,6 +92,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "",
+       "selectedItem": "1",
        "dataSource": [
         {
          "key": "1",
@@ -123,16 +125,14 @@
         }
        ],
        "required": false,
-       "onFocus": "",
-       "onBlur": "",
-       "onChange": "",
        "labelLText": "日付",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "1",
+       "onFocus": "",
+       "onBlur": "",
        "disabledItem": []
       }
      ],
@@ -201,6 +201,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "",
+       "selectedItem": "1",
        "dataSource": [
         {
          "key": "1",
@@ -220,16 +222,14 @@
         }
        ],
        "required": false,
-       "onChange": "",
        "labelLText": "",
        "labelLWidth": "XL",
        "labelLAlign": 2,
-       "selectedItem": "1",
        "onClick": "",
-       "icon": [],
        "newLineItemNumber": 10,
        "spaceSize": "M",
-       "disabledItem": []
+       "disabledItem": [],
+       "icon": []
       },
       {
        "fieldName": "TermYear",
@@ -255,26 +255,25 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "required": false,
-         "placeHolder": "",
-         "textKind": 0,
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "onFocus": "",
-         "onBlur": "",
          "onChange": "",
-         "onKeyPress": "",
-         "text": "",
-         "value": "",
+         "required": false,
          "labelLText": "",
          "labelRText": "年",
          "labelLWidth": "XS",
          "labelRWidth": "42",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "permitCharactor": "./_-",
+         "onFocus": "",
+         "onBlur": "",
+         "placeHolder": "",
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "onKeyPress": "",
+         "text": "",
          "ymdKubun": 0,
-         "displayFormat": 4
+         "displayFormat": 4,
+         "value": "",
+         "permitCharactor": "./_-"
         }
        ],
        "controlType": "Panel",
@@ -342,26 +341,25 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "required": false,
-         "placeHolder": "",
-         "textKind": 0,
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "onFocus": "",
-         "onBlur": "",
          "onChange": "",
-         "onKeyPress": "",
-         "text": "",
-         "value": "",
+         "required": false,
          "labelLText": "",
          "labelRText": "年度",
          "labelLWidth": "0",
          "labelRWidth": "42",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "permitCharactor": "./_-",
+         "onFocus": "",
+         "onBlur": "",
+         "placeHolder": "",
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "onKeyPress": "",
+         "text": "",
          "ymdKubun": 0,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "value": "",
+         "permitCharactor": "./_-"
         }
        ],
        "controlType": "Panel",
@@ -429,26 +427,25 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "required": false,
-         "placeHolder": "",
-         "textKind": 0,
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "onFocus": "",
-         "onBlur": "",
          "onChange": "",
-         "onKeyPress": "",
-         "text": "",
-         "value": "",
+         "required": false,
          "labelLText": "",
          "labelRText": "",
          "labelLWidth": "32",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "permitCharactor": "./_-",
+         "onFocus": "",
+         "onBlur": "",
+         "placeHolder": "",
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "onKeyPress": "",
+         "text": "",
          "ymdKubun": 1,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "value": "",
+         "permitCharactor": "./_-"
         }
        ],
        "controlType": "Panel",
@@ -516,21 +513,21 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "onFocus": "",
-         "onBlur": "",
          "onChange": "",
-         "onKeyPress": "",
          "labelLText": "",
          "labelRText": "",
          "labelLWidth": "60",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "permitCharactor": "",
+         "onFocus": "",
+         "onBlur": "",
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "onKeyPress": "",
          "ymdKubun": 2,
          "displayFormat": 0,
+         "permitCharactor": "",
          "fromPlaceHolder": "",
          "toPlaceHolder": "",
          "minDate": "",
@@ -649,13 +646,13 @@
        "selectControlID": "btnToPublish",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "発行する",
        "onClick": "",
+       "icon": 0,
+       "text": "発行する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0,
        "heightTextBoxMatches": false
       }
      ],
@@ -764,7 +761,59 @@
  "title": "要介護認定統計資料作成",
  "jsPathCollection": [],
  "relation": [],
- "stateTransition": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "資料作成",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "ShinsakaiTokeiShiryo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShinsakaiTokeiPublishedTarget",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ExtractedTerm",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "TermYear",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "TermBusinessYear",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "TermYearMonth",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "TermDateRange",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "PublishButton",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": []
+  }
+ ],
  "currentState": "All",
  "id": "DBE7010002",
  "WFParameter": [],
