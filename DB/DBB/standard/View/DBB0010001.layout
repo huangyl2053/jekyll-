@@ -28,6 +28,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtShikibetsuCode_core",
+         "helpMessageID": "",
+         "jpControlName": "",
          "readOnly": false,
          "required": false,
          "maxLength": "15",
@@ -51,6 +53,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "decorationClass": "",
          "permitCharactor": "",
          "formatLength": "15"
         },
@@ -72,6 +75,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtSetaiCode_core",
+         "helpMessageID": "",
+         "jpControlName": "",
          "readOnly": false,
          "required": false,
          "maxLength": "15",
@@ -95,6 +100,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "decorationClass": "",
          "permitCharactor": "",
          "formatLength": "15"
         },
@@ -116,6 +122,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtName_core",
+         "helpMessageID": "",
+         "jpControlName": "",
          "readOnly": false,
          "required": false,
          "maxLength": 100000000,
@@ -139,6 +147,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "decorationClass": "",
          "permitCharactor": ""
         },
         {
@@ -159,13 +168,16 @@
          "marginLeft": "0",
          "marginRight": "XS",
          "selectControlID": "btnName",
+         "helpMessageID": "",
+         "jpControlName": "",
          "text": "★",
          "onClick": "",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": "",
-         "icon": 0
+         "icon": 0,
+         "heightTextBoxMatches": false
         },
         {
          "fieldName": "radFix",
@@ -185,6 +197,9 @@
          "marginLeft": "10",
          "marginRight": "XS",
          "selectControlID": "radFix_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
          "onChange": "",
          "labelLText": "",
          "labelLWidth": "S",
@@ -211,7 +226,8 @@
           }
          ],
          "newLineItemNumber": 4,
-         "spaceSize": "S"
+         "spaceSize": "S",
+         "disabledItem": []
         },
         {
          "fieldName": "lblTuzuki",
@@ -231,9 +247,12 @@
          "marginLeft": "0",
          "marginRight": "XS",
          "selectControlID": "lblTuzuki",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "で検索する",
+         "decorationClass": "",
          "align": 0
         },
         {
@@ -254,6 +273,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtUmareYmd_core",
+         "helpMessageID": "",
+         "jpControlName": "",
          "readOnly": false,
          "required": false,
          "placeHolder": "",
@@ -271,9 +292,9 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "permitCharactor": "./_-",
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "permitCharactor": "./_-"
         },
         {
          "fieldName": "ddlSeibetsu",
@@ -293,6 +314,9 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "ddlSeibetsu_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
@@ -316,7 +340,8 @@
            "key": "key2",
            "value": "女"
           }
-         ]
+         ],
+         "disabledItem": []
         },
         {
          "fieldName": "AtenaShosaiJoken",
@@ -339,6 +364,9 @@
            "marginLeft": "1.5",
            "marginRight": "XS",
            "selectControlID": "radNaiGai_core",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "readOnly": false,
            "onChange": "",
            "labelLText": "",
            "labelLWidth": "S",
@@ -357,7 +385,8 @@
             }
            ],
            "newLineItemNumber": 2,
-           "spaceSize": "M"
+           "spaceSize": "M",
+           "disabledItem": []
           },
           {
            "fieldName": "txtYubinNo",
@@ -377,6 +406,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "txtYubinNo_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
            "required": false,
            "maxLength": 100000000,
@@ -400,6 +431,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
+           "decorationClass": "",
            "permitCharactor": ""
           },
           {
@@ -420,12 +452,14 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "txtJushoCode_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
            "required": false,
            "maxLength": "11",
            "minLength": 0,
            "textAlign": 0,
-           "placeHolder": "12345678901",
+           "placeHolder": "",
            "textKind": 2,
            "isPrivateInfo": false,
            "isPassword": false,
@@ -443,6 +477,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
+           "decorationClass": "",
            "permitCharactor": "",
            "formatLength": "11"
           },
@@ -464,13 +499,16 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "btnJusho",
+           "helpMessageID": "",
+           "jpControlName": "",
            "text": "★",
            "onClick": "",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
-           "icon": 0
+           "icon": 0,
+           "heightTextBoxMatches": false
           },
           {
            "fieldName": "txtJusho",
@@ -490,6 +528,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "txtJusho_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": true,
            "required": false,
            "maxLength": "40",
@@ -513,6 +553,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
+           "decorationClass": "",
            "permitCharactor": ""
           },
           {
@@ -533,6 +574,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "txtBanchi1_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
            "required": false,
            "maxLength": 100000000,
@@ -556,6 +599,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
+           "decorationClass": "",
            "permitCharactor": ""
           },
           {
@@ -576,6 +620,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "txtBanchi2_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
            "required": false,
            "maxLength": 100000000,
@@ -599,6 +645,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
+           "decorationClass": "",
            "permitCharactor": ""
           },
           {
@@ -619,6 +666,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "txtBanchi3_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
            "required": false,
            "maxLength": 100000000,
@@ -642,6 +691,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
+           "decorationClass": "",
            "permitCharactor": ""
           },
           {
@@ -662,6 +712,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "txtBanchi4_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
            "required": false,
            "maxLength": 100000000,
@@ -685,6 +737,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
+           "decorationClass": "",
            "permitCharactor": ""
           },
           {
@@ -705,13 +758,16 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "btnBunchi",
+           "helpMessageID": "",
+           "jpControlName": "",
            "text": "★",
            "onClick": "",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
-           "icon": 0
+           "icon": 0,
+           "heightTextBoxMatches": false
           },
           {
            "fieldName": "txtKatagaki",
@@ -731,6 +787,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "txtKatagaki_core",
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
            "required": false,
            "maxLength": 100000000,
@@ -754,6 +812,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
+           "decorationClass": "",
            "permitCharactor": ""
           },
           {
@@ -774,13 +833,16 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "btnKatagaki",
+           "helpMessageID": "",
+           "jpControlName": "",
            "text": "★",
            "onClick": "",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
-           "icon": 0
+           "icon": 0,
+           "heightTextBoxMatches": false
           }
          ],
          "controlType": "Panel",
@@ -798,6 +860,8 @@
          "marginLeft": "0",
          "marginRight": "XS",
          "selectControlID": "AtenaShosaiJoken",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onLoad": "",
          "title": "宛名詳細条件",
          "isOpen": true,
@@ -814,15 +878,13 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorderTop": true,
-         "eraseBorderBottom": true,
-         "eraseBorderRight": true,
-         "eraseBorderLeft": true,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": true,
          "panelDisplay": 2,
          "isGroupBox": false,
-         "readOnly": false
+         "readOnly": false,
+         "height": "Auto"
         },
         {
          "fieldName": "lin1",
@@ -840,6 +902,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lin1",
+         "helpMessageID": "",
+         "jpControlName": "",
          "size": "Default"
         },
         {
@@ -860,6 +924,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtHihoban_core",
+         "helpMessageID": "",
+         "jpControlName": "",
          "readOnly": false,
          "required": false,
          "maxLength": "15",
@@ -883,6 +949,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "decorationClass": "",
          "permitCharactor": "",
          "formatLength": "15"
         },
@@ -904,6 +971,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtTsuchiNo_core",
+         "helpMessageID": "",
+         "jpControlName": "",
          "readOnly": false,
          "required": false,
          "maxLength": "15",
@@ -927,6 +996,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "decorationClass": "",
          "permitCharactor": "",
          "formatLength": "15"
         },
@@ -946,6 +1016,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lin3",
+         "helpMessageID": "",
+         "jpControlName": "",
          "size": "Default"
         },
         {
@@ -966,6 +1038,9 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "ddlFukaNendo_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
@@ -993,7 +1068,8 @@
            "key": "key3",
            "value": "平24"
           }
-         ]
+         ],
+         "disabledItem": []
         },
         {
          "fieldName": "txtMaxGetKensu",
@@ -1013,6 +1089,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtMaxGetKensu_core",
+         "helpMessageID": "",
+         "jpControlName": "",
          "readOnly": false,
          "required": false,
          "maxLength": "4",
@@ -1036,6 +1114,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "decorationClass": "",
          "permitCharactor": "+-,.\\",
          "maxValue": "9999",
          "minValue": 0,
@@ -1059,6 +1138,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lin2",
+         "helpMessageID": "",
+         "jpControlName": "",
          "size": "Default"
         },
         {
@@ -1079,13 +1160,16 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "btnClear",
+         "helpMessageID": "",
+         "jpControlName": "",
          "text": "条件をクリアする",
          "onClick": "",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": "",
-         "icon": 0
+         "icon": 0,
+         "heightTextBoxMatches": false
         },
         {
          "fieldName": "btnSearch",
@@ -1105,13 +1189,16 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "btnSearch",
+         "helpMessageID": "",
+         "jpControlName": "",
          "text": "検索する",
          "onClick": "onClick_BtnSearch",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": "",
-         "icon": 0
+         "icon": 0,
+         "heightTextBoxMatches": false
         }
        ],
        "controlType": "Panel",
@@ -1129,6 +1216,8 @@
        "marginLeft": "0",
        "marginRight": "XS",
        "selectControlID": "JokenNyuryoku",
+       "helpMessageID": "",
+       "jpControlName": "",
        "onLoad": "",
        "title": "",
        "isOpen": true,
@@ -1145,15 +1234,13 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": true,
-       "eraseBorderBottom": true,
-       "eraseBorderRight": true,
-       "eraseBorderLeft": true,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 0,
        "isGroupBox": false,
-       "readOnly": false
+       "readOnly": false,
+       "height": "Auto"
       }
      ],
      "controlType": "Panel",
@@ -1171,6 +1258,8 @@
      "marginLeft": "0",
      "marginRight": "XS",
      "selectControlID": "KensakuShiji",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "検索条件入力",
      "isOpen": true,
@@ -1192,15 +1281,13 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": true,
      "panelDisplay": 0,
      "isGroupBox": false,
-     "readOnly": false
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "GaitoshaSentaku",
@@ -1223,6 +1310,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtFukanendo_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "readOnly": false,
        "required": false,
        "placeHolder": "",
@@ -1240,9 +1329,9 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "permitCharactor": "./_-",
        "ymdKubun": 0,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "dgdGaitoushaIchiran",
@@ -1262,6 +1351,10 @@
        "marginLeft": "0",
        "marginRight": "XS",
        "selectControlID": "dgdGaitoushaIchiran",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "height": "M",
        "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
@@ -1421,13 +1514,17 @@
          }
         ]
        },
-       "height": "M",
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "",
        "onSelectBySelectButton": "",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -1454,13 +1551,16 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "btnReSearch",
+       "helpMessageID": "",
+       "jpControlName": "",
        "text": "再検索する",
        "onClick": "onClick_btnReSearch",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "icon": 0,
+       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
@@ -1478,6 +1578,8 @@
      "marginLeft": "0",
      "marginRight": "XS",
      "selectControlID": "GaitoshaSentaku",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "該当者選択",
      "isOpen": true,
@@ -1499,15 +1601,13 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": true,
      "panelDisplay": 0,
      "isGroupBox": false,
-     "readOnly": false
+     "readOnly": false,
+     "height": "Auto"
     }
    ],
    "controlType": "Panel",
@@ -1525,6 +1625,8 @@
    "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "GaitoshaKensakuMain",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "isOpen": true,
@@ -1550,15 +1652,13 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -1576,6 +1676,8 @@
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "介護保険・賦課　該当者検索",
  "jsPathCollection": [],
@@ -1698,5 +1800,6 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": []
 }
