@@ -3173,7 +3173,7 @@ var DBC;
                                                     "text": "",
                                                     "onClick": "",
                                                     "appearance": 2,
-                                                    "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
+                                                    "imageFileUrl": "/uz/uza/image/UZ_Search.png",
                                                     "imageWidth": "",
                                                     "imageHeight": "",
                                                     "icon": 0,
@@ -3309,7 +3309,7 @@ var DBC;
                                                     "text": "",
                                                     "onClick": "",
                                                     "appearance": 2,
-                                                    "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
+                                                    "imageFileUrl": "/uz/uza/image/UZ_Search.png",
                                                     "imageWidth": "",
                                                     "imageHeight": "",
                                                     "icon": 0,
@@ -4560,7 +4560,7 @@ var DBC;
                                 "ServiceRiyohyoBeppyo"
                             ],
                             "isDraggable": false,
-                            "selectedItemFieldName": "ServiceRiyohyoBeppyo",
+                            "selectedItemFieldName": "",
                             "initialTab": 0,
                             "isLazyLoading": false
                         }
