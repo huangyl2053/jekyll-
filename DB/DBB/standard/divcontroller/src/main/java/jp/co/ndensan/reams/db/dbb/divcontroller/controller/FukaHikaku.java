@@ -61,24 +61,37 @@ public class FukaHikaku {
      * @param div
      * @return
      */
-    public ResponseData<FukaJohoHikakuDiv> getOnLoadData(FukaJohoHikakuDiv div) {
+    public ResponseData<FukaJohoHikakuDiv> getOnLoadDataMae(FukaJohoHikakuDiv div) {
         ResponseData<FukaJohoHikakuDiv> response = new ResponseData<>();
 
-        List keyAll = new ArrayList();
-        RString mode = (RString) ViewStateHolder.get("mode", RString.class);
+        List<RString> selectedShikibetsuCodeList = new ArrayList();
 
-        keyAll.add(mode);
+        div.getKariSantei1().getTxtChoteiNendo1().setValue(new RString(""));
+        RString selectedShikibetsuCode = new RString("00000000000019");
 
-        SetaiinShotokuDiv shotokuDiv = null;
-        FukaRirekiDiv rirekiDiv = null;
+        setLoadData(div, selectedShikibetsuCodeList, selectedShikibetsuCode);
 
-        if (mode.contains("displayedAligned")) {
-            shotokuDiv = (SetaiinShotokuDiv) ViewStateHolder.get("世帯所得", SetaiinShotokuDiv.class);
-        } else {
-            rirekiDiv = (FukaRirekiDiv) ViewStateHolder.get("賦課履歴", FukaRirekiDiv.class);
-        }
+        response.data = div;
+        return response;
+    }
 
-        setLoadData(div, shotokuDiv, rirekiDiv);
+    /**
+     * 賦課照会比較ロード
+     *
+     * @param div
+     * @return
+     */
+    public ResponseData<FukaJohoHikakuDiv> getOnLoadDataNarabete(FukaJohoHikakuDiv div) {
+        ResponseData<FukaJohoHikakuDiv> response = new ResponseData<>();
+
+        List<RString> selectedShikibetsuCodeList = new ArrayList();
+        RString selectedShikibetsuCode = null;
+
+        div.getHonSantei1().getTxtChoteiNendo3().setValue(new RString(""));
+        selectedShikibetsuCodeList.add(new RString("00000000000019"));
+        selectedShikibetsuCodeList.add(new RString("00000000000027"));
+
+        setLoadData(div, selectedShikibetsuCodeList, selectedShikibetsuCode);
 
         response.data = div;
         return response;
@@ -91,7 +104,7 @@ public class FukaHikaku {
      * @param shotokuDiv
      * @param rirekiDiv
      */
-    private void setLoadData(FukaJohoHikakuDiv div, SetaiinShotokuDiv shotokuDiv, FukaRirekiDiv rirekiDiv) {
+    private void setLoadData(FukaJohoHikakuDiv div, List<RString> selectedShikibetsuCodeList, RString selectedShikibetsuCode) {
 
         KariSantei1Div kariSantei1 = div.getKariSantei1();
         KariSantei2Div kariSantei2 = div.getKariSantei2();
@@ -105,10 +118,10 @@ public class FukaHikaku {
         honSantei2.setDisplayNone(true);
 
         List loadData = null;
-        if (shotokuDiv != null) {
-            loadData = getNarabeteHyojiMode(shotokuDiv);
-        } else if (rirekiDiv != null) {
-            loadData = getMaeHikakuMode(rirekiDiv);
+        if (selectedShikibetsuCodeList.size() > 0) {
+            loadData = getNarabeteHyojiMode(selectedShikibetsuCodeList);
+        } else if (selectedShikibetsuCode != null) {
+            loadData = getMaeHikakuMode(selectedShikibetsuCode);
         }
 
         for (int i = 0; i < loadData.size(); i++) {
@@ -129,41 +142,31 @@ public class FukaHikaku {
      * @param shotokuDiv
      * @return
      */
-    private List getNarabeteHyojiMode(SetaiinShotokuDiv shotokuDiv) {
+    private List getNarabeteHyojiMode(List<RString> selectedShikibetsuCode) {
 
         List 比較情報 = new ArrayList();
 
-        //取得したデータグリッド
-        DataGrid<dgSetaiShotoku_Row> dataGridSetaiShotoku = shotokuDiv.getSetaiShotokuIchiran().getDgSetaiShotoku();
-
-        // 世帯所得一覧の選択行（2行固定)
-        List<dgSetaiShotoku_Row> selected = dataGridSetaiShotoku.getSelectedItems();
-        for (dgSetaiShotoku_Row item : selected) {
-            比較情報.add(getYamlDataHonsantei(item.getTxtShikibetsuCode(), new RString("本")));
+        for (RString shikibetsuCode : selectedShikibetsuCode) {
+            比較情報.add(getYamlDataHonsantei(shikibetsuCode, new RString("本")));
         }
 
         return 比較情報;
     }
 
-    private List getMaeHikakuMode(FukaRirekiDiv rirekiDiv) {
+    private List getMaeHikakuMode(RString selectedShikibetsuCode) {
 
         List 比較情報 = new ArrayList();
 
-        //取得したデータグリッド
-        DataGrid<dgFukaRirekiFukaRireki_Row> dataGridFukarireki = rirekiDiv.getDgFukaRirekiFukaRireki();
-
         for (int i = 0; i < 2; i++) {
-            dgFukaRirekiFukaRireki_Row clicked = dataGridFukarireki.getClickedItem();
-            int clickedRowId = dataGridFukarireki.getClickedRowId();
 
             RString jotai;
-            if (dataGridFukarireki.getDataSource().get(clickedRowId + i).getTxtHokenryoDankai().length() > 0) {
+            if (i > 0) {
                 jotai = new RString("本");
             } else {
                 jotai = new RString("仮");
             }
 
-            比較情報.add(getYamlDataHonsantei(clicked.getTxtShikibetsuCode(), jotai));
+            比較情報.add(getYamlDataHonsantei(selectedShikibetsuCode, jotai));
         }
 
         return 比較情報;

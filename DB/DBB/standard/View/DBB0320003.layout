@@ -6646,7 +6646,7 @@
      "height": "Auto"
     },
     {
-     "fieldName": "kariButton",
+     "fieldName": "btnNarabete",
      "items": [],
      "controlType": "Button",
      "width": "S",
@@ -6662,11 +6662,11 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "kariButton",
+     "selectControlID": "btnNarabete",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "テスト用<br>閉じる",
-     "onClick": "",
+     "text": "デモ用<br>並べて",
+     "onClick": "onClick_narabete",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -6675,7 +6675,7 @@
      "heightTextBoxMatches": false
     },
     {
-     "fieldName": "kariLoad",
+     "fieldName": "btnMaeHikaku",
      "items": [],
      "controlType": "Button",
      "width": "S",
@@ -6691,11 +6691,11 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "kariLoad",
+     "selectControlID": "btnMaeHikaku",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "テスト用<br>ロード",
-     "onClick": "onClick_test",
+     "text": "デモ用<br>前比較",
+     "onClick": "onClick_maeHikaku",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -6733,11 +6733,15 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbb/db/dbb/FukaHikaku/getOnLoadData"
+     "requestUrl": ""
     },
     {
-     "eventName": "onClick_test",
-     "requestUrl": "dbb/db/dbb/FukaHikaku/getOnLoadData"
+     "eventName": "onClick_maeHikaku",
+     "requestUrl": "dbb/db/dbb/FukaHikaku/getOnLoadDataMae"
+    },
+    {
+     "eventName": "onClick_narabete",
+     "requestUrl": "dbb/db/dbb/FukaHikaku/getOnLoadDataNarabete"
     }
    ],
    "hiddenInput": [],
@@ -6918,12 +6922,16 @@
  "WFParameter": [],
  "UIContainerEventMapping": [
   {
-   "alias": "test",
-   "eventName": "kariLoad.onClick"
+   "alias": "narabete",
+   "eventName": "btnNarabete.onClick"
   },
   {
    "alias": "fukaShokai",
    "eventName": "btnClose.onClick"
+  },
+  {
+   "alias": "maeHikaku",
+   "eventName": "btnMaeHikaku.onClick"
   }
  ],
  "loadSequencePanelNames": [
