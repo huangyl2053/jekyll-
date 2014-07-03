@@ -419,7 +419,7 @@ module DBZ {
      "onKeyPress": "",
      "labelLText": "期間",
      "labelRText": "",
-     "labelLWidth": "35",
+     "labelLWidth": "41",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.dbu0600011;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -1129,6 +1130,7 @@ public class SogoShokaiInfo {
         summaryDiv.getTxtYoguRiyoshaFutanAmountNow().setValue(new Decimal(map.get("今回利用者負担額").toString()));
         summaryDiv.getTxtYoguLimitOverAmountNow().setValue(new Decimal(map.get("今回限度超過額").toString()));
 
+        NumberFormat nfNum = NumberFormat.getNumberInstance();
         List<HashMap> mapList = getYamlData(YML_YOGU_KONYUHI_MEISAI);
         List<dgYoguSeikyuDetail_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
@@ -1137,7 +1139,7 @@ public class SogoShokaiInfo {
                     meisaiMap.get("購入日").toString(),
                     meisaiMap.get("種目").toString(),
                     meisaiMap.get("商品名").toString(),
-                    meisaiMap.get("購入金額").toString(),
+                    nfNum.format(Integer.parseInt(meisaiMap.get("購入金額").toString())),
                     meisaiMap.get("審査方法").toString()
             ));
         }

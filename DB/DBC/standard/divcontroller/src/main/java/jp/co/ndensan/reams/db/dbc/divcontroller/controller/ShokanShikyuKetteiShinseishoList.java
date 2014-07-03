@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 public class ShokanShikyuKetteiShinseishoList {
 
     private List<HashMap> getShokanShikyuTorokuShinseishoListYaml() {
-        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc0800000/ShokanShikyuTorokuShinseishoList.yml"));
+        return YamlLoader.DBC.loadAsList(new RString("dbc0800000/ShokanShikyuTorokuShinseishoList.yml"));
     }
 
     /**

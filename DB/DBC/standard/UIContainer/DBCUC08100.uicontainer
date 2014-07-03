@@ -1,0 +1,51 @@
+﻿{
+ "transitionList": [
+  {
+   "id": 1,
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0810000",
+   "eventName": "select",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0810010",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "2",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0810010",
+   "eventName": "return",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0810000",
+   "toEventName": ""
+  },
+  {
+   "id": 3,
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0810010",
+   "eventName": "select",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0810020",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "4",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0810020",
+   "eventName": "return",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0810010",
+   "toEventName": ""
+  },
+  {
+   "id": "5",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0810010",
+   "eventName": "save",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0810030",
+   "toEventName": "onOpen"
+  }
+ ],
+ "subGyomuCode": "DBC",
+ "uiContainerName": "DBCUC08100"
+}

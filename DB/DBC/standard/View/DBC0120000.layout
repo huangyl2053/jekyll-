@@ -693,7 +693,7 @@
         "cellDetails": {
          "cellType": 11,
          "text": "",
-         "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
+         "imageFileUrl": "/uz/uza/image/UZ_Search.png",
          "imageWidth": "",
          "imageHeight": "",
          "displayChildDivName": "DBZ.ServiceInputGuide",
@@ -739,7 +739,7 @@
         "cellDetails": {
          "cellType": 11,
          "text": "",
-         "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
+         "imageFileUrl": "/uz/uza/image/UZ_Search.png",
          "imageWidth": "",
          "imageHeight": "",
          "displayChildDivName": "DBZ.JigyoshaInputGuide",

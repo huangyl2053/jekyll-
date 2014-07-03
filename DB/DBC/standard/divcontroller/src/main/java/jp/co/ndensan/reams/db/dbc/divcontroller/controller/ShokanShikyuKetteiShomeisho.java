@@ -49,12 +49,8 @@ public class ShokanShikyuKetteiShomeisho {
         選択
     }
 
-    private List<HashMap> getShokanShikyuTorokuShomeishoYaml() {
-        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc0800000/ShokanShikyuTorokuShomeisho.yml"));
-    }
-
-    private HashMap getShokanShikyuTorokuShomeishoYamlId(int index) {
-        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc0800000/ShokanShikyuTorokuShomeisho.yml")).get(index);
+    private List<HashMap> getYaml() {
+        return YamlLoader.DBC.loadAsList(new RString("dbc0800000/ShokanShikyuTorokuShomeisho.yml"));
     }
 
     /**
@@ -116,7 +112,7 @@ public class ShokanShikyuKetteiShomeisho {
     }
 
     private void setTopData(ShokanShikyuKetteiShomeishoDiv panel) {
-        HashMap source = getShokanShikyuTorokuShomeishoYamlId(0);
+        HashMap source = getYaml().get(0);
         panel.getTxtShomeishoTeikyoYM().setValue(new RDate(source.get("提供年月").toString()));
         panel.getTxtShomeishoJigyoshaCode().setValue(new RString(source.get("事業者コード").toString()));
         panel.getTxtShomeishoJigyoshaName().setValue(new RString(source.get("事業者名").toString()));
@@ -164,20 +160,19 @@ public class ShokanShikyuKetteiShomeisho {
         ShokanShikyuKetteiShomeishoKihonKikanDiv kikan = kihon.getShokanShikyuKetteiShomeishoKihonKikan();
         ShokanShikyuKetteiShomeishoKihonNyutaishoDiv nyutaisho = kihon.getShokanShikyuKetteiShomeishoKihonNyutaisho();
 
-        HashMap source;
+        HashMap source = getYaml().get(1);
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
-        source = getShokanShikyuTorokuShomeishoYamlId(1);
         keikaku.getTxtShomeishoKihonSakuseiKubun().setValue(new RString(source.get("計画作成区分").toString()));
         keikaku.getTxtShomeishoKihonTokurei().setValue(new RString(source.get("旧措置入所者特例").toString()));
         keikaku.getTxtShomeishoKihonJigyoshaCode().setValue(new RString(source.get("事業者コード").toString()));
         keikaku.getTxtShomeishoKihonJigyoshaName().setValue(new RString(source.get("事業者名").toString()));
         keikaku.getTxtShomeishoKihonKyufuritsu().setValue(new Decimal(source.get("保険給付率").toString()));
         if (date.isBefore(基本情報切替.H2104.getDate())) {
-            source = getShokanShikyuTorokuShomeishoYamlId(2);
+            source = getYaml().get(2);
             kikan.getTxtShomeishoKihonKaishiYMD().setValue(new RDate(source.get("開始日").toString()));
             kikan.getTxtShomeishoKihonChushiYMD().setValue(new RDate(source.get("中止日").toString()));
         } else {
-            source = getShokanShikyuTorokuShomeishoYamlId(3);
+            source = getYaml().get(3);
             nyutaisho.getTxtShomeishoKihonNyushoYMD().setValue(new RDate(source.get("入所日").toString()));
             nyutaisho.getTxtShomeishoKihonTaishoYMD().setValue(new RDate(source.get("退所日").toString()));
             nyutaisho.getTxtShomeishoKihonNyushoNissu().setValue(new Decimal(source.get("入所実日数").toString()));
@@ -196,7 +191,7 @@ public class ShokanShikyuKetteiShomeisho {
         DataGrid<dgServiceTeikyoShomeishoMeisaiList_Row> dgRow = meisaiList.getDgServiceTeikyoShomeishoMeisaiList();
         List<dgServiceTeikyoShomeishoMeisaiList_Row> dgRowList = dgRow.getDataSource();
 
-        List<HashMap> sourceList = getShokanShikyuTorokuShomeishoYaml();
+        List<HashMap> sourceList = getYaml();
         dgRowList.clear();
         for (int i = 4; i < 7; i++) {
             dgRowList.add(create給付費明細一覧アイテム(
@@ -256,7 +251,7 @@ public class ShokanShikyuKetteiShomeisho {
         DataGrid<dgServiceTeikyoShomeishoShukeiList_Row> dgRow = list.getDgServiceTeikyoShomeishoShukeiList();
         List<dgServiceTeikyoShomeishoShukeiList_Row> dgRowList = dgRow.getDataSource();
 
-        List<HashMap> sourceList = getShokanShikyuTorokuShomeishoYaml();
+        List<HashMap> sourceList = getYaml();
         dgRowList.clear();
         for (int i = 37; i < 38; i++) {
             dgRowList.add(create請求額一覧アイテム(
@@ -308,7 +303,7 @@ public class ShokanShikyuKetteiShomeisho {
         DataGrid<dgServiceTeikyoShomeishoShafukuList_Row> dgRow = list.getDgServiceTeikyoShomeishoShafukuList();
         List<dgServiceTeikyoShomeishoShafukuList_Row> dgRowList = dgRow.getDataSource();
 
-        List<HashMap> sourceList = getShokanShikyuTorokuShomeishoYaml();
+        List<HashMap> sourceList = getYaml();
         dgRowList.clear();
         for (int i = 45; i < 46; i++) {
             dgRowList.add(create社福軽減額一覧アイテム(

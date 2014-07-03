@@ -16,7 +16,7 @@
    "eventName": "update",
    "toLayoutSubGyomuCode": "DBC",
    "toLayoutName": "DBC0220011",
-   "toEventName": ""
+   "toEventName": "onload"
   },
   {
    "id": "2",

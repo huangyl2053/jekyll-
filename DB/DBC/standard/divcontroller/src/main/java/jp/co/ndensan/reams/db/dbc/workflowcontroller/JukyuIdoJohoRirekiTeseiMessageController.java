@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.workflowcontroller;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.workflow.flow.messaging.DeliveredMessages;
@@ -34,7 +35,7 @@ public class JukyuIdoJohoRirekiTeseiMessageController implements IMessageControl
         for (int index = 0; index < FLOW_NUM; index++) {
 
             RStringBuilder value = new RStringBuilder();
-            value.append("value");
+            value.append(RDate.getNowDateTime().toString());
             value.append(String.valueOf(index));
 
             messages.add(new WakeUpMessage(SubGyomuCode.DBC介護給付, FLOW_ID, FlowParameters.of(WFPRMKEY1, value.toRString())));
