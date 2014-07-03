@@ -2228,6 +2228,11 @@
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": "処理完了"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -2254,6 +2259,11 @@
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": "終了"
     }
    ]
   }
@@ -2346,13 +2356,47 @@
   },
   {
    "commonButtonAreaId": "Complete",
-   "buttonSetting": [],
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnComplete",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "住所地特例適用を"
+     }
+    }
+   ],
    "states": [
     {
      "state": "処理完了"
     }
    ],
-   "isFinishButtonOnTheRight": true,
+   "isFinishButtonOnTheRight": false,
    "FinishButtonVisible": true,
    "SuspendButtonVisible": false
   }

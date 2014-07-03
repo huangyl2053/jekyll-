@@ -37,12 +37,11 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "AtenaShokaiSimple_eraseBorder": true,
      "AtenaKanaMeisho_visible": true,
-     "AtenaMeisho_visible": true,
      "SeinengappiYMD_visible": true,
      "Nenrei_visible": true,
      "Seibetsu_visible": true,
-     "JuminShubetsu_visible": true,
      "NihonjinGaikokujin_visible": true,
      "JuminJotai_visible": true,
      "YubinNo_visible": true,
@@ -52,8 +51,6 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnMemo_displayNone": false,
-     "btnDainosya_displayNone": true,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
      "btnKoza_displayNone": true,
@@ -72,7 +69,10 @@
      "SubGyomuUmu": "0",
      "SubGyomuSearchUmu": "0",
      "DainoninHyojiUmu": "1",
-     "AtenaShokaiSimple_eraseBorder": true
+     "AtenaMeisho_visible": true,
+     "JuminShubetsu_visible": true,
+     "btnMemo_displayNone": false,
+     "btnDainosya_displayNone": true
     },
     {
      "fieldName": "KaigoShikakuJoho",
@@ -183,6 +183,9 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "S",
+     "onSelectByDblClick": "",
+     "onSelectByModifyButton": "onSelectByModifyButton_dgJushochiTokureiRireki",
+     "onSelectByDeleteButton": "",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -558,10 +561,7 @@
      },
      "onSort": "",
      "onSelect": "",
-     "onSelectByDblClick": "",
      "onSelectBySelectButton": "",
-     "onSelectByModifyButton": "onSelectByModifyButton_dgJushochiTokureiRireki",
-     "onSelectByDeleteButton": "",
      "onAfterRequest": "",
      "onAfterRequestByDblClick": "",
      "onAfterRequestBySelectButton": "",
@@ -613,6 +613,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "selectedItem": "keyTaTokureiTekiyo",
          "dataSource": [
           {
            "key": "keyTaTokureiTekiyo",
@@ -627,7 +628,6 @@
            "value": "その他"
           }
          ],
-         "selectedItem": "keyTaTokureiTekiyo",
          "disabledItem": []
         },
         {
@@ -847,6 +847,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "selectedItem": "keyKaijo",
          "dataSource": [
           {
            "key": "keyKaijo",
@@ -873,7 +874,6 @@
            "value": "その他"
           }
          ],
-         "selectedItem": "keyKaijo",
          "disabledItem": []
         },
         {
@@ -2089,14 +2089,14 @@
      "transition": "登録完了"
     },
     {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnToDecide",
      "event": "onClick",
      "transition": "適用登録"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -2164,14 +2164,14 @@
      "transition": "登録完了"
     },
     {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnToDecide",
      "event": "onClick",
      "transition": "適用登録"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -2234,14 +2234,14 @@
      "transition": "登録完了"
     },
     {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnToDecide",
      "event": "onClick",
      "transition": "適用登録"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -2271,14 +2271,14 @@
      "transition": ""
     },
     {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": "終了"
-    },
-    {
      "fieldName": "btnToDecide",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": "終了"
     }
    ]
   }
@@ -2409,13 +2409,47 @@
   },
   {
    "commonButtonAreaId": "Complete",
-   "buttonSetting": [],
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnComplete",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "他特例適用を"
+     }
+    }
+   ],
    "states": [
     {
      "state": "登録完了"
     }
    ],
-   "isFinishButtonOnTheRight": true,
+   "isFinishButtonOnTheRight": false,
    "FinishButtonVisible": true,
    "SuspendButtonVisible": false
   }
