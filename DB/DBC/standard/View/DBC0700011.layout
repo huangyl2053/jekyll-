@@ -156,7 +156,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -516,15 +516,13 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "btnSearch_displayNone": false,
+     "btnJigyoshaInputGuide_displayNone": false,
      "txtUkestukeDate_displayNone": true,
      "txtJigyoshaNo_disabled": true,
      "txtShinseishaName_labelLText": "氏名",
      "txtYubinNo_displayNone": false,
      "txtAddress_displayNone": false,
-     "btnCopy_displayNone": false,
-     "btnSearchJigyosha_disabled": true,
-     "btnCopyToHonninInfo_disabled": false,
+     "btnJigyoshaInputGuide_disabled": true,
      "eraseBorderTop": false,
      "eraseBorderBottom": false,
      "eraseBorderRight": false,
@@ -951,6 +949,10 @@
     {
      "eventName": "onClick_btnCopyToHonninInfo",
      "requestUrl": "dbc/db/dbc/JutakuKaishuJizenShinseiContentsPanel/onClick_copyToInfo"
+    },
+    {
+     "eventName": "onChange_ddlShinseishaKubun",
+     "requestUrl": "dbc/db/dbc/JutakuKaishuJizenShinseiContentsPanel/onChange_ddlShinseishaKubun"
     }
    ],
    "hiddenInput": [],
@@ -1293,6 +1295,10 @@
     {
      "eventName": "onClick_btnDummy",
      "requestUrl": "dbc/db/dbc/JutakuKaishuJizenShinseiShinsaResultPanel/onLoad"
+    },
+    {
+     "eventName": "onClick_btnCheckGendogaku",
+     "requestUrl": "dbc/db/dbc/JutakuKaishuJizenShinseiShinsaResultPanel/onClick_btnCheckGendogaku"
     }
    ],
    "hiddenInput": [],

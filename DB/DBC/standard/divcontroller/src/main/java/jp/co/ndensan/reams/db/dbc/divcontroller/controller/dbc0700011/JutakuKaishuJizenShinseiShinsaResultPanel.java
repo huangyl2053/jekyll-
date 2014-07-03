@@ -5,15 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.dbc0700011;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiContentsPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiShinsaResultPanelDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 住宅改修費事前申請登録 審査結果のパネルです。
@@ -61,6 +62,54 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
         response.data = resultPanel;
         return response;
 
+    }
+
+    /**
+     * 限度額チェックボタン押下時に「要介護状態区分３段階変更による」にチェックを入れます。
+     *
+     * @param resultPanel
+     * @param contentsPanel
+     * @return
+     */
+    public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onClick_btnCheckGendogaku(
+            JutakuKaishuJizenShinseiShinsaResultPanelDiv resultPanel, JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
+        ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> response = new ResponseData<>();
+
+        resultPanel.getChkResetInfo().setSelectedItems(createSetItems());
+        response.data = resultPanel;
+        return response;
+    }
+
+    private List<KeyValueDataSource> createSetItems() {
+        List<KeyValueDataSource> items = new ArrayList<>();
+        items.add(new KeyValueDataSource(new RString("threeUp"), new RString("要介護状態区分３段階変更による")));
+        return items;
+    }
+
+    /**
+     * 住宅改修費事前申請登録 判定区分を選択するとき、承認条件の内容を入力欄を不入力・入力可能。
+     *
+     * @param panel HihokenshaSearchGaitoshaPanelDiv
+     * @return PanelDivのResponseData
+     */
+    public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onClick_radJudgeKubun(
+            JutakuKaishuJizenShinseiShinsaResultPanelDiv panel, JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
+        ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> response = new ResponseData<>();
+
+//        System.out.println("++++" + panel.getRadJudgeKubun().getSelectedItem().toString());
+        String selRadJudgeKubun = panel.getRadJudgeKubun().getSelectedItem().toString();
+
+        //判定区分を選択するとき shonin 承認
+        if (selRadJudgeKubun.equals("shonin")) {
+            panel.getTxtShoninCondition().setDisabled(false);
+            panel.getTxtFushoninReason().setDisabled(true);
+            //判定区分を選択するとき fushonin 不承認
+        } else if (selRadJudgeKubun.equals("fushonin")) {
+            panel.getTxtFushoninReason().setDisabled(false);
+            panel.getTxtShoninCondition().setDisabled(true);
+        }
+        response.data = panel;
+        return response;
     }
 
     /*
@@ -145,31 +194,5 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
     private void setRadJudgeKubun(JutakuKaishuJizenShinseiShinsaResultPanelDiv panel) {
 
         panel.getTxtFushoninReason().setDisabled(true);
-    }
-
-    /**
-     * 住宅改修費事前申請登録 判定区分を選択するとき、承認条件の内容を入力欄を不入力・入力可能。
-     *
-     * @param panel HihokenshaSearchGaitoshaPanelDiv
-     * @return PanelDivのResponseData
-     */
-    public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onClick_radJudgeKubun(
-            JutakuKaishuJizenShinseiShinsaResultPanelDiv panel, JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
-        ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> response = new ResponseData<>();
-
-//        System.out.println("++++" + panel.getRadJudgeKubun().getSelectedItem().toString());
-        String selRadJudgeKubun = panel.getRadJudgeKubun().getSelectedItem().toString();
-
-        //判定区分を選択するとき shonin 承認
-        if (selRadJudgeKubun.equals("shonin")) {
-            panel.getTxtShoninCondition().setDisabled(false);
-            panel.getTxtFushoninReason().setDisabled(true);
-            //判定区分を選択するとき fushonin 不承認
-        } else if (selRadJudgeKubun.equals("fushonin")) {
-            panel.getTxtFushoninReason().setDisabled(false);
-            panel.getTxtShoninCondition().setDisabled(true);
-        }
-        response.data = panel;
-        return response;
     }
 }

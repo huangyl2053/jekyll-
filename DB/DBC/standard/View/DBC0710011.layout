@@ -156,7 +156,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -1002,15 +1002,13 @@
        "dialogCancelEventNameForDialog": "",
        "canTransferEvent": true,
        "heightForDialog": "M",
-       "btnSearch_displayNone": false,
+       "btnJigyoshaInputGuide_displayNone": false,
        "txtUkestukeDate_displayNone": true,
        "txtJigyoshaNo_disabled": true,
        "txtShinseishaName_labelLText": "氏名",
        "txtYubinNo_displayNone": false,
        "txtAddress_displayNone": false,
-       "btnCopy_displayNone": false,
-       "btnSearchJigyosha_disabled": true,
-       "btnCopyToHonninInfo_disabled": false
+       "btnJigyoshaInputGuide_disabled": true
       },
       {
        "fieldName": "JutakuKaishuShinseiReason",
@@ -1603,6 +1601,10 @@
     {
      "eventName": "onClick_radPayMethod",
      "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiInfoPanel/onClick_radPayMethod"
+    },
+    {
+     "eventName": "onClick_btnCheckGendogaku",
+     "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiInfoPanel/onClick_btnCheckGendogaku"
     }
    ],
    "hiddenInput": [],

@@ -109,7 +109,7 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "審査登録完了",
+   "stateName": "更新完了",
    "showWizard": true,
    "visibleDivs": [
     {

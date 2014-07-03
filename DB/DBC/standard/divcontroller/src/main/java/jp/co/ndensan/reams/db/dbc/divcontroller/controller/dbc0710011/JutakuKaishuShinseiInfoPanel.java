@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetail
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiContentsPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiShinsaResultPanelDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KozaPayment;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShinseishaInfo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
@@ -151,6 +153,28 @@ public class JutakuKaishuShinseiInfoPanel {
         response.data = panel;
         return response;
 
+    }
+
+    /**
+     * 限度額チェックボタン押下時に「要介護状態区分３段階変更による」にチェックを入れます。
+     *
+     * @param panel
+     * @param panel1
+     * @return
+     */
+    public ResponseData<JutakuKaishuShinseiInfoPanelDiv> onClick_btnCheckGendogaku(
+            JutakuKaishuShinseiInfoPanelDiv panel, JutakuKaishuShinseiListDiv panel1) {
+        ResponseData<JutakuKaishuShinseiInfoPanelDiv> response = new ResponseData<>();
+
+        panel.getJutakuKaishuShinseiResetInfo().getChkResetInfo().setSelectedItems(createSetItems());
+        response.data = panel;
+        return response;
+    }
+
+    private List<KeyValueDataSource> createSetItems() {
+        List<KeyValueDataSource> items = new ArrayList<>();
+        items.add(new KeyValueDataSource(new RString("threeUp"), new RString("要介護状態区分３段階変更による")));
+        return items;
     }
 
     /**

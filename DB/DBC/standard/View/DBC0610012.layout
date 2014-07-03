@@ -156,7 +156,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -377,15 +377,13 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "btnSearch_displayNone": false,
+     "btnJigyoshaInputGuide_displayNone": false,
      "txtUkestukeDate_displayNone": true,
      "txtJigyoshaNo_disabled": true,
      "txtShinseishaName_labelLText": "氏名",
      "txtYubinNo_displayNone": false,
      "txtAddress_displayNone": false,
-     "btnCopy_displayNone": false,
-     "btnSearchJigyosha_disabled": true,
-     "btnCopyToHonninInfo_disabled": false
+     "btnJigyoshaInputGuide_disabled": false
     },
     {
      "fieldName": "YoguKonyuhiShikyuShinseiShinsaPaymentMethod",
@@ -495,7 +493,7 @@
    "eraseBorderLeft": false
   },
   {
-   "fieldName": "YoguShinsaKufugakuSummary",
+   "fieldName": "YoguShinsaKufugakuSummaryPanel",
    "items": [
     {
      "fieldName": "YoguShinsaKufugakuSummarySub",
@@ -546,7 +544,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "0",
      "marginRight": "XS",
      "selectControlID": "YoguShinsaKufugakuSummarySub",
      "helpMessageID": "",
@@ -579,10 +577,10 @@
      "fieldName": "YoguShinsaShonin",
      "items": [
       {
-       "fieldName": "chkShonin",
+       "fieldName": "radShonin",
        "items": [],
-       "controlType": "CheckBoxList",
-       "width": "150",
+       "controlType": "RadioButton",
+       "width": "140",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -595,31 +593,30 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "selectControlID": "chkShonin_core",
+       "selectControlID": "radShonin_core",
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
        "onChange": "",
-       "labelLText": "",
-       "labelLWidth": "S",
+       "labelLText": "申請内容",
+       "labelLWidth": "70",
        "labelLAlign": 2,
        "onClick": "",
        "icon": [],
        "dataSource": [
         {
          "key": "shonin",
-         "value": "内容を承認する"
+         "value": "承認"
+        },
+        {
+         "key": "kyakka",
+         "value": "却下"
         }
        ],
        "selectedItem": null,
        "newLineItemNumber": 2,
        "spaceSize": "M",
-       "disabledItem": [],
-       "selectedItems": [],
-       "minCheckedItem": 0,
-       "maxCheckedItem": 2,
-       "isAllSelectable": false,
-       "isAllSelectableBreakLine": false
+       "disabledItem": []
       }
      ],
      "controlType": "Panel",
@@ -653,12 +650,12 @@
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "marginTop": "XL",
+     "marginTop": "1.5",
      "marginBottom": "Default",
      "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": true,
-     "panelDisplay": 1,
+     "panelDisplay": 2,
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto"
@@ -678,7 +675,7 @@
    "authorityMode": 0,
    "marginLeft": "Default",
    "marginRight": "Default",
-   "selectControlID": "YoguShinsaKufugakuSummary",
+   "selectControlID": "YoguShinsaKufugakuSummaryPanel",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -687,7 +684,7 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "YoguShinsaKufugakuSummary"
+     "postParameterPanelNames": "YoguShinsaKufugakuSummaryPanel"
     }
    ],
    "requestSettings": [
@@ -842,7 +839,7 @@
      "fixedDiv": "Yes"
     },
     {
-     "visibleDiv": "YoguShinsaKufugakuSummary",
+     "visibleDiv": "YoguShinsaKufugakuSummaryPanel",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -891,7 +888,7 @@
    "events": []
   }
  ],
- "currentState": "修正",
+ "currentState": "All",
  "id": "DBC0610012",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -931,7 +928,7 @@
    "YoguKonyuhiShikyuShinseiShinsaPaymentMethod"
   ],
   [
-   "YoguShinsaKufugakuSummary"
+   "YoguShinsaKufugakuSummaryPanel"
   ],
   [
    "YoguShinsaKufugakuSummarySub"
