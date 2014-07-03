@@ -1227,7 +1227,7 @@ var DBZ;
                                     "maxValue": 1.7976931348623157e+308,
                                     "minValue": 0,
                                     "isCurrency": false,
-                                    "isComma": false,
+                                    "isComma": true,
                                     "decimalPointLength": 0,
                                     "permitCharactor": "+-,.\\"
                                 },
@@ -1278,7 +1278,7 @@ var DBZ;
                                     "maxValue": 1.7976931348623157e+308,
                                     "minValue": 0,
                                     "isCurrency": false,
-                                    "isComma": false,
+                                    "isComma": true,
                                     "decimalPointLength": 0,
                                     "permitCharactor": "+-,.\\"
                                 },
