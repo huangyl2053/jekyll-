@@ -366,7 +366,7 @@ module DBZ {
      "selectControlID": "btnServiceInputGuideReturn",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "サービス入力ガイドを閉じる",
+     "text": "閉じる",
      "onClick": "onClick_btnServiceInputGuideReturn",
      "appearance": 0,
      "imageFileUrl": "",
