@@ -160,7 +160,7 @@ var DBE;
                     "fieldName": "dgShozokuChosainList",
                     "items": [],
                     "controlType": "DataGrid",
-                    "width": "460",
+                    "width": "300",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -217,11 +217,11 @@ var DBE;
                                 "sortKey": "btnToBindChosain"
                             },
                             {
-                                "columnName": "番号",
+                                "columnName": "番号<br>",
                                 "dataName": "chosainNo",
                                 "toolTip": "",
                                 "bgColor": 0,
-                                "width": 100,
+                                "width": 75,
                                 "visible": true,
                                 "cellType": 0,
                                 "cellDetails": {
@@ -234,7 +234,7 @@ var DBE;
                                 "sortKey": "chosainNo"
                             },
                             {
-                                "columnName": "氏名",
+                                "columnName": "氏名<br>",
                                 "dataName": "chosainName",
                                 "toolTip": "",
                                 "bgColor": 0,
@@ -251,11 +251,11 @@ var DBE;
                                 "sortKey": "chosainName"
                             },
                             {
-                                "columnName": "割付数",
+                                "columnName": "割付数<br>",
                                 "dataName": "waritsukeNum",
                                 "toolTip": "",
                                 "bgColor": 0,
-                                "width": 60,
+                                "width": 55,
                                 "visible": true,
                                 "cellType": 0,
                                 "cellDetails": {
@@ -273,7 +273,7 @@ var DBE;
                                 "toolTip": "",
                                 "bgColor": 0,
                                 "width": 125,
-                                "visible": true,
+                                "visible": false,
                                 "cellType": 0,
                                 "cellDetails": {
                                     "cellType": 0,
@@ -310,6 +310,11 @@ var DBE;
                     "onSelectBySelectButton": "",
                     "onSelectByModifyButton": "",
                     "onSelectByDeleteButton": "",
+                    "onAfterRequest": "",
+                    "onAfterRequestByDblClick": "",
+                    "onAfterRequestBySelectButton": "",
+                    "onAfterRequestByModifyButton": "",
+                    "onAfterRequestByDeleteButton": "",
                     "onOnlyRow": "",
                     "onNoRow": "",
                     "onMultiRows": "",
@@ -317,7 +322,8 @@ var DBE;
                     "sortOrder": "chosainName",
                     "isAscending": true,
                     "filterList": [],
-                    "activeRowId": -1
+                    "activeRowId": -1,
+                    "readOnly": false
                 }
             ],
             "controlType": "CompositeControl",
