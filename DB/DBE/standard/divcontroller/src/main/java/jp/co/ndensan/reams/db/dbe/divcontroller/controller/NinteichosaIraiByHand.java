@@ -11,7 +11,6 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosaItakusakiData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ChosaItakusakiAndChosainListDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ChosairaiBindByHandMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.NinteichosaIraiByHandDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.RequestContentsDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.dgChosaItakusakiList_Row;
@@ -25,6 +24,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.util.DataGridUtil;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 
@@ -42,21 +43,39 @@ public class NinteichosaIraiByHand {
      * @return ResponseData
      */
     public ResponseData<NinteichosaIraiByHandDiv> onLoad(NinteichosaIraiByHandDiv div) {
-        ResponseData<NinteichosaIraiByHandDiv> response = new ResponseData<>();
+        new ChosairaiBindByHandMain(div).onLoad();
+        new ChosaItakusakiAndChosainList(div).onLoad();
+        return createResponseData(div);
+    }
 
-        new ChosairaiBindByHandMain(div.getChosairaiBindByHandMain()).onLoad();
-        new ChosaItakusakiAndChosainList(div.getChosaItakusakiAndChosainList()).onLoad();
+    /**
+     * 共通ボタン btnCommonSaveChosaIrai を押した時の処理です。
+     *
+     * @param div NinteichosaIraiByHandDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteichosaIraiByHandDiv> onClick_btnCommonSaveChosaIrai(NinteichosaIraiByHandDiv div) {
+        return addMessage(createResponseData(div), new InformationMessage("I", "保存しました。"));
+    }
 
+    private <T> ResponseData<T> addMessage(ResponseData<T> response, Message message) {
+        response.addMessage(message);
+        return response;
+    }
+
+    private <T> ResponseData<T> createResponseData(T div) {
+        ResponseData<T> response = new ResponseData<>();
         response.data = div;
         return response;
     }
 
+    //<editor-fold defaultstate="collapsed" desc="ChosaItakusakiAndChosainList">
     private static final class ChosaItakusakiAndChosainList {
 
         private final ChosaItakusakiAndChosainListDiv div;
 
-        ChosaItakusakiAndChosainList(ChosaItakusakiAndChosainListDiv div) {
-            this.div = div;
+        ChosaItakusakiAndChosainList(NinteichosaIraiByHandDiv div) {
+            this.div = div.getTblChosaIraiWaritsuke().getChosaItakusakiAndChosainList();
         }
 
         private void onLoad() {
@@ -75,6 +94,7 @@ public class NinteichosaIraiByHand {
         }
 
     }
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="ChosairaiBindByHandMain">
     /**
@@ -85,9 +105,9 @@ public class NinteichosaIraiByHand {
         private final RequestContents contents;
         private final DataGrids dataGrids;
 
-        ChosairaiBindByHandMain(ChosairaiBindByHandMainDiv panel) {
-            this.dataGrids = new DataGrids(panel);
-            this.contents = new RequestContents(panel.getRequestContents());
+        ChosairaiBindByHandMain(NinteichosaIraiByHandDiv div) {
+            this.dataGrids = new DataGrids(div);
+            this.contents = new RequestContents(div);
         }
 
         void onLoad() {
@@ -102,8 +122,8 @@ public class NinteichosaIraiByHand {
 
             private final RequestContentsDiv panel;
 
-            RequestContents(RequestContentsDiv panel) {
-                this.panel = panel;
+            RequestContents(NinteichosaIraiByHandDiv div) {
+                this.panel = div.getTblChosaIraiWaritsuke().getRequestContents();
             }
             private static final int NUM_OF_A_WEEK = 7;
 
@@ -120,10 +140,10 @@ public class NinteichosaIraiByHand {
          */
         private static final class DataGrids {
 
-            private final ChosairaiBindByHandMainDiv panel;
+            private final NinteichosaIraiByHandDiv panel;
 
-            DataGrids(ChosairaiBindByHandMainDiv panel) {
-                this.panel = panel;
+            DataGrids(NinteichosaIraiByHandDiv div) {
+                this.panel = div;
             }
 
             private void onLoad() {
@@ -190,7 +210,8 @@ public class NinteichosaIraiByHand {
 
             void _setGridSetting_WariatezumiList() {
                 DataGridSetting setting
-                        = panel.getComWaritukezumiList().getDgNinteichosaIraiListForByHand().getGridSetting();
+                        = panel.getTblChosaIraiWaritsuke().getComWaritukezumiList()
+                        .getDgNinteichosaIraiListForByHand().getGridSetting();
                 _hideColumn(setting, Column.chosaItakusakiNo2TA);
                 _hideColumn(setting, Column.chosaItakusakiName2TA);
                 _hideColumn(setting, Column.chosainNo2TA);
@@ -199,7 +220,8 @@ public class NinteichosaIraiByHand {
 
             void _setGridSetting_MiwarituskeList() {
                 DataGridSetting setting
-                        = panel.getComMiwarituskeList().getDgNinteichosaIraiListForByHand().getGridSetting();
+                        = panel.getTblChosaIraiWaritsuke().
+                        getComMiwarituskeList().getDgNinteichosaIraiListForByHand().getGridSetting();
                 _hideColumn(setting, Column.chosaJokyo);
                 _hideColumn(setting, Column.btnToShowDetail);
                 _hideColumn(setting, Column.chosaIraiKubun);

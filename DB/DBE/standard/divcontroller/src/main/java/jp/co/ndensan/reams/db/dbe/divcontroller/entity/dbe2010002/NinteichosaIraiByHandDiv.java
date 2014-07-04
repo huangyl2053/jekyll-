@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ChosaItakusakiAndChosainListDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ChosairaiBindByHandMainDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForByHandCom.NinteichosaIraiListForByHandCom;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.tblChosaIraiWaritsukeDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -21,10 +21,10 @@ public class NinteichosaIraiByHandDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ChosaItakusakiAndChosainList")
-    private ChosaItakusakiAndChosainListDiv ChosaItakusakiAndChosainList;
-    @JsonProperty("ChosairaiBindByHandMain")
-    private ChosairaiBindByHandMainDiv ChosairaiBindByHandMain;
+    @JsonProperty("tblChosaIraiWaritsuke")
+    private tblChosaIraiWaritsukeDiv tblChosaIraiWaritsuke;
+    @JsonProperty("comNinteichosaIraiListGod")
+    private NinteichosaIraiListForByHandCom comNinteichosaIraiListGod;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +32,24 @@ public class NinteichosaIraiByHandDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ChosaItakusakiAndChosainList")
-    public ChosaItakusakiAndChosainListDiv getChosaItakusakiAndChosainList() {
-        return ChosaItakusakiAndChosainList;
+    @JsonProperty("tblChosaIraiWaritsuke")
+    public tblChosaIraiWaritsukeDiv getTblChosaIraiWaritsuke() {
+        return tblChosaIraiWaritsuke;
     }
 
-    @JsonProperty("ChosaItakusakiAndChosainList")
-    public void setChosaItakusakiAndChosainList(ChosaItakusakiAndChosainListDiv ChosaItakusakiAndChosainList) {
-        this.ChosaItakusakiAndChosainList=ChosaItakusakiAndChosainList;
+    @JsonProperty("tblChosaIraiWaritsuke")
+    public void setTblChosaIraiWaritsuke(tblChosaIraiWaritsukeDiv tblChosaIraiWaritsuke) {
+        this.tblChosaIraiWaritsuke=tblChosaIraiWaritsuke;
     }
 
-    @JsonProperty("ChosairaiBindByHandMain")
-    public ChosairaiBindByHandMainDiv getChosairaiBindByHandMain() {
-        return ChosairaiBindByHandMain;
+    @JsonProperty("comNinteichosaIraiListGod")
+    public NinteichosaIraiListForByHandCom getComNinteichosaIraiListGod() {
+        return comNinteichosaIraiListGod;
     }
 
-    @JsonProperty("ChosairaiBindByHandMain")
-    public void setChosairaiBindByHandMain(ChosairaiBindByHandMainDiv ChosairaiBindByHandMain) {
-        this.ChosairaiBindByHandMain=ChosairaiBindByHandMain;
+    @JsonProperty("comNinteichosaIraiListGod")
+    public void setComNinteichosaIraiListGod(NinteichosaIraiListForByHandCom comNinteichosaIraiListGod) {
+        this.comNinteichosaIraiListGod=comNinteichosaIraiListGod;
     }
 
 }
