@@ -26,6 +26,7 @@
         <module>persistence</module>
         <module>realservice</module>
         <module>divcontroller</module>
+        <module>workflowcontroller</module>
     </modules>
     <dependencyManagement>
         <dependencies>
