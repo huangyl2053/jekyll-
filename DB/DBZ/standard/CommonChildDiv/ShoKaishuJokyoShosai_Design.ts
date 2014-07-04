@@ -46,7 +46,6 @@ module DBZ {
                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["onBlur"] = value;
             } else {
                 this.layout.items[0].items[7]["onBlur"] = value;
-<<<<<<< HEAD
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -75,8 +74,6 @@ module DBZ {
                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"] = value;
             } else {
                 this.layout.items[0]["canOpenAndClose"] = value;
-=======
->>>>>>> feature/UI-KyufuKanri-37343
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -94,11 +91,8 @@ module DBZ {
             Uz.JSControlUtil.registProperty("onBlur_txtKaishuDate");
             Uz.JSControlUtil.registProperty("onChange_ddlKaishuJiyu");
             Uz.JSControlUtil.registProperty("onBlur_txtKaishuRiyu");
-<<<<<<< HEAD
             Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_panelDisplay");
             Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_canOpenAndClose");
-=======
->>>>>>> feature/UI-KyufuKanri-37343
         }
         
         /**
@@ -111,11 +105,8 @@ module DBZ {
             editablePropertyInfo["onBlur_txtKaishuDate"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["onBlur"];
             editablePropertyInfo["onChange_ddlKaishuJiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["onChange"];
             editablePropertyInfo["onBlur_txtKaishuRiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["onBlur"];
-<<<<<<< HEAD
             editablePropertyInfo["ShoKaishuJokyoShosai_panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
             editablePropertyInfo["ShoKaishuJokyoShosai_canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
-=======
->>>>>>> feature/UI-KyufuKanri-37343
             
             return editablePropertyInfo;
         }
@@ -146,29 +137,30 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
-     "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "isComboBox": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
      "text": "",
-     "suggest": [],
-     "value": "",
+     "onChange": "",
+     "required": false,
      "labelLText": "交付証種類",
      "labelRText": "",
      "labelLWidth": "85",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "onFocus": "",
+     "onBlur": "",
+     "placeHolder": "",
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onKeyPress": "",
+     "value": "",
+     "decorationClass": "",
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "textKind": 0,
+     "isComboBox": false,
+     "suggest": [],
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtKofuDate",
@@ -191,25 +183,26 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
-     "required": false,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
      "text": "",
-     "value": "",
+     "onChange": "",
+     "required": false,
      "labelLText": "交付日",
      "labelRText": "",
      "labelLWidth": "85",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "onFocus": "",
+     "onBlur": "",
+     "placeHolder": "",
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onKeyPress": "",
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "value": "",
+     "textKind": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtYukoKigen",
@@ -232,25 +225,26 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
-     "required": false,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
      "text": "",
-     "value": "",
+     "onChange": "",
+     "required": false,
      "labelLText": "有効期限",
      "labelRText": "",
      "labelLWidth": "70",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "onFocus": "",
+     "onBlur": "",
+     "placeHolder": "",
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onKeyPress": "",
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "value": "",
+     "textKind": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtKofuJiyu",
@@ -273,29 +267,30 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
-     "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "isComboBox": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
      "text": "",
-     "suggest": [],
-     "value": "",
+     "onChange": "",
+     "required": false,
      "labelLText": "交付事由",
      "labelRText": "",
      "labelLWidth": "85",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "onFocus": "",
+     "onBlur": "",
+     "placeHolder": "",
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onKeyPress": "",
+     "value": "",
+     "decorationClass": "",
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "textKind": 0,
+     "isComboBox": false,
+     "suggest": [],
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtKofuRiyu",
@@ -319,24 +314,24 @@ module DBZ {
      "jpControlName": "",
      "readOnly": true,
      "height": "40",
-     "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
      "text": "",
-     "value": "",
+     "onChange": "",
+     "required": false,
      "labelLText": "交付理由",
      "labelRText": "",
      "labelLWidth": "85",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "onFocus": "",
+     "onBlur": "",
+     "placeHolder": "",
+     "isPrivateInfo": false,
+     "onKeyPress": "",
+     "value": "",
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textKind": 0,
      "limitLength": "200",
      "countDisp": false
     },
@@ -361,25 +356,26 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "required": false,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
      "text": "",
-     "value": "",
+     "onChange": "",
+     "required": false,
      "labelLText": "回収日",
      "labelRText": "",
      "labelLWidth": "85",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "onFocus": "",
+     "onBlur": "",
+     "placeHolder": "",
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onKeyPress": "",
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "value": "",
+     "textKind": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "ddlKaishuJiyu",
@@ -404,13 +400,10 @@ module DBZ {
      "readOnly": false,
      "dataSource": [
       {
-<<<<<<< HEAD
        "key": "",
        "value": ""
       },
       {
-=======
->>>>>>> feature/UI-KyufuKanri-37343
        "key": "00",
        "value": "転出"
       },
@@ -495,21 +488,18 @@ module DBZ {
        "value": "給付額減額終了"
       }
      ],
-     "required": false,
-     "onFocus": "",
-     "onBlur": "",
      "onChange": "",
+     "selectedItem": "",
+     "required": false,
      "labelLText": "回収事由",
      "labelRText": "",
      "labelLWidth": "85",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-<<<<<<< HEAD
-     "selectedItem": ""
-=======
-     "selectedItem": "00"
->>>>>>> feature/UI-KyufuKanri-37343
+     "onFocus": "",
+     "onBlur": "",
+     "disabledItem": []
     },
     {
      "fieldName": "txtKaishuRiyu",
@@ -533,34 +523,30 @@ module DBZ {
      "jpControlName": "",
      "readOnly": false,
      "height": "40",
-     "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
      "text": "",
-     "value": "",
+     "onChange": "",
+     "required": false,
      "labelLText": "回収理由",
      "labelRText": "",
      "labelLWidth": "85",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "onFocus": "",
+     "onBlur": "",
+     "placeHolder": "",
+     "isPrivateInfo": false,
+     "onKeyPress": "",
+     "value": "",
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textKind": 0,
      "limitLength": "200",
      "countDisp": true
     }
    ],
    "controlType": "Panel",
-<<<<<<< HEAD
    "width": "942",
-=======
-   "width": "940",
->>>>>>> feature/UI-KyufuKanri-37343
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -638,7 +624,6 @@ module DBZ {
    "publicChildFieldName": "ddlKaishuJiyu",
    "publicChildProperty": "onChange",
    "newPropertyName": "onChange_ddlKaishuJiyu"
-<<<<<<< HEAD
   },
   {
    "publicChildFieldName": "txtKaishuRiyu",
@@ -654,13 +639,6 @@ module DBZ {
    "publicChildFieldName": "ShoKaishuJokyoShosai",
    "publicChildProperty": "canOpenAndClose",
    "newPropertyName": "ShoKaishuJokyoShosai_canOpenAndClose"
-=======
-  },
-  {
-   "publicChildFieldName": "txtKaishuRiyu",
-   "publicChildProperty": "onBlur",
-   "newPropertyName": "onBlur_txtKaishuRiyu"
->>>>>>> feature/UI-KyufuKanri-37343
   }
  ],
  "dataPassingForDialog": [],

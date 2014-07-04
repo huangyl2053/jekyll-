@@ -136,19 +136,14 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-<<<<<<< HEAD
                             "marginLeft": "0.15",
                             "marginRight": "0",
-=======
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
->>>>>>> feature/UI-KyufuKanri-37343
                             "selectControlID": "radShisetsuShurui_core",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
-                            "onChange": "onChange_radShisetsuShurui",
-                            "selectedItem": null,
+                            "onClick": "",
+                            "icon": [],
                             "dataSource": [
                                 {
                                     "key": "kaigoHokenShisetsu",
@@ -159,19 +154,15 @@ var DBZ;
                                     "value": "その他特例施設"
                                 }
                             ],
+                            "onChange": "onChange_radShisetsuShurui",
+                            "selectedItem": null,
                             "required": false,
-                            "onClick": "",
-                            "newLineItemNumber": 3,
-<<<<<<< HEAD
-                            "spaceSize": "S",
-=======
-                            "spaceSize": "M",
->>>>>>> feature/UI-KyufuKanri-37343
                             "labelLText": "",
                             "labelLWidth": "S",
                             "labelLAlign": 2,
-                            "disabledItem": [],
-                            "icon": []
+                            "newLineItemNumber": 3,
+                            "spaceSize": "S",
+                            "disabledItem": []
                         },
                         {
                             "fieldName": "lblOtherShisetsuShurui",
@@ -193,10 +184,10 @@ var DBZ;
                             "selectControlID": "lblOtherShisetsuShurui",
                             "helpMessageID": "",
                             "jpControlName": "",
-                            "required": false,
-                            "align": 1,
                             "text": "kannai",
+                            "required": false,
                             "isPrivateInfo": false,
+                            "align": 1,
                             "decorationClass": ""
                         },
                         {
@@ -214,39 +205,35 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-<<<<<<< HEAD
                             "marginLeft": "0",
-=======
-                            "marginLeft": "XS",
->>>>>>> feature/UI-KyufuKanri-37343
                             "marginRight": "XS",
                             "selectControlID": "txtShisetsuCode_core",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
+                            "text": "",
                             "onChange": "",
                             "required": false,
                             "labelLText": "入所施設",
+                            "labelRText": "",
                             "labelLWidth": "70",
+                            "labelRWidth": "S",
                             "labelLAlign": 2,
-                            "text": "",
+                            "labelRAlign": 0,
+                            "onFocus": "",
+                            "onBlur": "onBlur_txtShisetsuCode",
+                            "placeHolder": "",
                             "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onKeyPress": "",
+                            "value": "",
                             "decorationClass": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
-                            "placeHolder": "",
                             "textKind": 2,
-                            "isPassword": false,
                             "isComboBox": false,
-                            "onFocus": "",
-                            "onBlur": "onBlur_txtShisetsuCode",
-                            "onKeyPress": "",
                             "suggest": [],
-                            "value": "",
-                            "labelRText": "",
-                            "labelRWidth": "S",
-                            "labelRAlign": 0,
                             "permitCharactor": "",
                             "formatLength": "10"
                         },
@@ -271,22 +258,13 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "onClick": "",
-                            "icon": 0,
-<<<<<<< HEAD
                             "text": "",
                             "appearance": 2,
                             "imageFileUrl": "/uz/uza/image/UZ_Search.png",
                             "imageWidth": "",
                             "imageHeight": "",
+                            "icon": 0,
                             "heightTextBoxMatches": true,
-=======
-                            "text": "■",
-                            "appearance": 2,
-                            "imageFileUrl": "/uz/uza/css/Link.jpg",
-                            "imageWidth": "20",
-                            "imageHeight": "15",
-                            "heightTextBoxMatches": false,
->>>>>>> feature/UI-KyufuKanri-37343
                             "displayChildDivName": "DBZ.JigyoshaInputGuide",
                             "dataPassing": [
                                 {
@@ -323,20 +301,13 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "onClick": "",
-                            "icon": 0,
                             "text": "■",
                             "appearance": 2,
-<<<<<<< HEAD
                             "imageFileUrl": "/uz/uza/image/UZ_Search.png",
                             "imageWidth": "20",
                             "imageHeight": "15",
+                            "icon": 0,
                             "heightTextBoxMatches": true,
-=======
-                            "imageFileUrl": "/uz/uza/css/Link.jpg",
-                            "imageWidth": "20",
-                            "imageHeight": "15",
-                            "heightTextBoxMatches": false,
->>>>>>> feature/UI-KyufuKanri-37343
                             "displayChildDivName": "DBZ.OtherTokureiShisetsuInputGuide",
                             "dataPassing": [
                                 {
@@ -377,20 +348,13 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "onClick": "",
-                            "icon": 0,
                             "text": "■",
                             "appearance": 2,
-<<<<<<< HEAD
                             "imageFileUrl": "/uz/uza/image/UZ_Search.png",
                             "imageWidth": "20",
                             "imageHeight": "15",
+                            "icon": 0,
                             "heightTextBoxMatches": true,
-=======
-                            "imageFileUrl": "/uz/uza/css/Link.jpg",
-                            "imageWidth": "20",
-                            "imageHeight": "15",
-                            "heightTextBoxMatches": false,
->>>>>>> feature/UI-KyufuKanri-37343
                             "displayChildDivName": "DBZ.TekiyoJogaiShisetsuInputGuide",
                             "dataPassing": [
                                 {
@@ -427,29 +391,29 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": true,
+                            "text": "",
                             "onChange": "",
                             "required": false,
                             "labelLText": "",
+                            "labelRText": "",
                             "labelLWidth": "S",
+                            "labelRWidth": "S",
                             "labelLAlign": 2,
-                            "text": "",
+                            "labelRAlign": 0,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "placeHolder": "",
                             "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onKeyPress": "",
+                            "value": "",
                             "decorationClass": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
-                            "placeHolder": "",
                             "textKind": 0,
-                            "isPassword": false,
                             "isComboBox": false,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "onKeyPress": "",
                             "suggest": [],
-                            "value": "",
-                            "labelRText": "",
-                            "labelRWidth": "S",
-                            "labelRAlign": 0,
                             "permitCharactor": ""
                         }
                     ],
