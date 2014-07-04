@@ -108,7 +108,8 @@ public class ShokanShikyuKetteiShomeisho {
         tab.getShokanShikyuKetteiShomeishoShukei().setVisible(true);
         tab.getShokanShikyuKetteiShomeishoNyusho().setVisible(false);
         tab.getShokanShikyuKetteiShomeishoShafuku().setVisible(true);
-
+        tab.setVisible(true);
+        
     }
 
     private void setTopData(ShokanShikyuKetteiShomeishoDiv panel) {
