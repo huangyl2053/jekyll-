@@ -48,16 +48,16 @@ public class HonsanteiFukaKakunin {
         List<HashMap> demoData = YamlLoader.DBB.loadAsList(ShoriNaiyo);
         ControlGenerator cg = new ControlGenerator(demoData.get(0));
 
-        honsanteiFukaKakuninDiv.getHonsanteiShoriNaiyo().getTxtChoteiNendo().setValue(cg.getAsRString("調定年度"));
-        honsanteiFukaKakuninDiv.getHonsanteiShoriNaiyo().getTxtFukaNendo().setValue(cg.getAsRString("賦課年度"));
-        honsanteiFukaKakuninDiv.getHonsanteiShoriNaiyo().getTxtShotokuKijunYMD().setValue(cg.getAsRDate("所得異動基準日"));
+        honsanteiFukaKakuninDiv.getShoriJokyo().getHonsanteiShoriNaiyo().getTxtChoteiNendo().setValue(cg.getAsRString("調定年度"));
+        honsanteiFukaKakuninDiv.getShoriJokyo().getHonsanteiShoriNaiyo().getTxtFukaNendo().setValue(cg.getAsRString("賦課年度"));
+        honsanteiFukaKakuninDiv.getShoriJokyo().getHonsanteiShoriNaiyo().getTxtShotokuKijunYMD().setValue(cg.getAsRDate("所得異動基準日"));
         setShoriJokyo(honsanteiFukaKakuninDiv);
         setKanriJoho1(honsanteiFukaKakuninDiv);
         setKanriJoho2(honsanteiFukaKakuninDiv);
     }
 
     private void setShoriJokyo(HonsanteiFukaKakuninDiv honsanteiFukaKakuninDiv) {
-        HonsanteiShoriKakuninDiv honsanteiShoriKakuninDiv = honsanteiFukaKakuninDiv.getHonsanteiShoriKakunin();
+        HonsanteiShoriKakuninDiv honsanteiShoriKakuninDiv = honsanteiFukaKakuninDiv.getShoriJokyo().getHonsanteiShoriKakunin();
         List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(new RString("DBB0310001/ShoriJokyo.yml"));
         List<dgHonsanteiShoriKakunin_Row> arrayData = new ArrayList<>();
         for (HashMap demoData : demoDataList) {
