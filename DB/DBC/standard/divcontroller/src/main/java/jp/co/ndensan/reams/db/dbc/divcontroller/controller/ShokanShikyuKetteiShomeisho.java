@@ -64,7 +64,7 @@ public class ShokanShikyuKetteiShomeisho {
 
         tabVisible(panel);
 
-// 南魚沼市のデモ向けに、基本情報」「給付費明細」「請求額集計」「社福系減額」以外のタブの機能をコメントアウト。
+// 南魚沼市のデモ向けに、「基本情報」「給付費明細」「請求額集計」「社福系減額」以外のタブの機能をコメントアウト。
         setTopData(panel);
         setKihonData(panel);
         setKyufuhiListData(panel);
@@ -76,7 +76,7 @@ public class ShokanShikyuKetteiShomeisho {
 //        setNyushoListData(panel);
         setShafukuListData(panel);
 
-// 南魚沼市のデモ向けに、基本情報」「給付費明細」「請求額集計」「社福系減額」以外のタブの機能をコメントアウト。
+// 南魚沼市のデモ向けに、「基本情報」「給付費明細」「請求額集計」「社福系減額」以外のタブの機能をコメントアウト。
         showKihon(panel);
 //        showKyufuhi(panel, 一覧明細表示.一覧表示);
 //        showRyoyo(panel, 一覧明細表示.一覧表示);

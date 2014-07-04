@@ -118,7 +118,7 @@
    "width": "G12",
    "visible": true,
    "displayNone": false,
-   "disabled": true,
+   "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
    "wrap": true,
@@ -156,12 +156,12 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": true,
+   "readOnly": false,
    "height": "Auto",
    "focusPositionID": "restoreLayoutButton",
    "eraseBorderTop": false,
@@ -1002,15 +1002,13 @@
        "dialogCancelEventNameForDialog": "",
        "canTransferEvent": true,
        "heightForDialog": "M",
-       "btnSearch_displayNone": false,
+       "btnJigyoshaInputGuide_displayNone": false,
        "txtUkestukeDate_displayNone": true,
        "txtJigyoshaNo_disabled": true,
        "txtShinseishaName_labelLText": "氏名",
        "txtYubinNo_displayNone": false,
        "txtAddress_displayNone": false,
-       "btnCopy_displayNone": false,
-       "btnSearchJigyosha_disabled": true,
-       "btnCopyToHonninInfo_disabled": false
+       "btnJigyoshaInputGuide_disabled": true
       },
       {
        "fieldName": "JutakuKaishuShinseiReason",
@@ -1603,6 +1601,10 @@
     {
      "eventName": "onClick_radPayMethod",
      "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiInfoPanel/onClick_radPayMethod"
+    },
+    {
+     "eventName": "onClick_btnCheckGendogaku",
+     "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiInfoPanel/onClick_btnCheckGendogaku"
     }
    ],
    "hiddenInput": [],
@@ -1744,13 +1746,13 @@
    "visibleDivs": [
     {
      "visibleDiv": "JutakuKaishuShinseiHihokenshaPanel",
-     "panelState": "readOnly visible",
+     "panelState": "visible",
      "fixedDiv": "Yes"
     },
     {
      "visibleDiv": "JutakuKaishuShinseiList",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "KaigoAtenaInfo",
@@ -1794,6 +1796,11 @@
      "fieldName": "btnCancelShinsei",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -1804,7 +1811,7 @@
    "visibleDivs": [
     {
      "visibleDiv": "JutakuKaishuShinseiHihokenshaPanel",
-     "panelState": "readOnly visible",
+     "panelState": "visible",
      "fixedDiv": "Yes"
     },
     {
@@ -1815,7 +1822,7 @@
     {
      "visibleDiv": "JutakuKaishuShinseiDetail",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "JutakuKaishuShinseiResetInfo",
@@ -1839,11 +1846,6 @@
     },
     {
      "visibleDiv": "JutakuKaishuShinseiDetailInput",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "btnPanel",
      "panelState": "visible",
      "fixedDiv": ""
     },
@@ -1899,6 +1901,11 @@
      "fieldName": "btnCancelShinsei",
      "event": "onClick",
      "transition": "申請登録"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -1951,11 +1958,16 @@
      "fieldName": "btnCancelShinsei",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": "終了"
     }
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "申請登録内容",
  "id": "DBC0710011",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -2206,6 +2218,52 @@
    "states": [
     {
      "state": "申請登録内容"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "complete",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnComplete",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "申請登録完了"
     }
    ],
    "isFinishButtonOnTheRight": false,

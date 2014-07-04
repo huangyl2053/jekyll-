@@ -118,7 +118,7 @@
    "width": "G12",
    "visible": true,
    "displayNone": false,
-   "disabled": true,
+   "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
    "wrap": true,
@@ -156,12 +156,12 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": true,
+   "readOnly": false,
    "height": "Auto",
    "focusPositionID": "restoreLayoutButton",
    "eraseBorderTop": false,
@@ -295,7 +295,6 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -306,6 +305,7 @@
          "value": "白馬村"
         }
        ],
+       "selectedItem": "key0",
        "disabledItem": []
       },
       {
@@ -691,15 +691,13 @@
        "dialogCancelEventNameForDialog": "",
        "canTransferEvent": true,
        "heightForDialog": "M",
-       "btnSearch_displayNone": false,
+       "btnJigyoshaInputGuide_displayNone": false,
        "txtUkestukeDate_displayNone": false,
        "txtJigyoshaNo_disabled": true,
        "txtShinseishaName_labelLText": "氏名",
        "txtYubinNo_displayNone": false,
        "txtAddress_displayNone": false,
-       "btnCopy_displayNone": false,
-       "btnSearchJigyosha_disabled": true,
-       "btnCopyToHonninInfo_disabled": false
+       "btnJigyoshaInputGuide_disabled": true
       },
       {
        "fieldName": "JutakuKaishuShinseiReason",
@@ -1174,7 +1172,6 @@
          "labelLAlign": 2,
          "onClick": "",
          "icon": [],
-         "selectedItem": null,
          "dataSource": [
           {
            "key": "threeUp",
@@ -1185,6 +1182,7 @@
            "value": "住宅住所変更による"
           }
          ],
+         "selectedItem": null,
          "newLineItemNumber": 1,
          "spaceSize": "M",
          "disabledItem": [],
@@ -1196,7 +1194,7 @@
         }
        ],
        "controlType": "Panel",
-       "width": "900",
+       "width": "825",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1207,7 +1205,7 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
+       "marginLeft": "0",
        "marginRight": "XS",
        "selectControlID": "JutakuKaishuShinsaResetInfoSummary",
        "helpMessageID": "",
@@ -1235,99 +1233,10 @@
        "isGroupBox": false,
        "readOnly": false,
        "height": "Auto"
-      },
-      {
-       "fieldName": "JutakuKaishuShinsaResetInfoResult",
-       "items": [
-        {
-         "fieldName": "chkShonin",
-         "items": [],
-         "controlType": "CheckBoxList",
-         "width": "150",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "selectControlID": "chkShonin_core",
-         "helpMessageID": "",
-         "jpControlName": "",
-         "readOnly": false,
-         "onChange": "",
-         "labelLText": "",
-         "labelLWidth": "S",
-         "labelLAlign": 2,
-         "onClick": "",
-         "icon": [],
-         "selectedItem": null,
-         "dataSource": [
-          {
-           "key": "key0",
-           "value": "内容を承認する"
-          }
-         ],
-         "newLineItemNumber": 2,
-         "spaceSize": "M",
-         "disabledItem": [],
-         "selectedItems": [],
-         "minCheckedItem": 0,
-         "maxCheckedItem": 2,
-         "isAllSelectable": false,
-         "isAllSelectableBreakLine": false
-        }
-       ],
-       "controlType": "Panel",
-       "width": "G3",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "JutakuKaishuShinsaResetInfoResult",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "onLoad": "",
-       "title": "審査結果",
-       "isOpen": true,
-       "canOpenAndClose": false,
-       "postParameterPanelNames": [
-        {
-         "postParameterPanelNames": "JutakuKaishuShinsaResetInfoResult"
-        }
-       ],
-       "requestSettings": [],
-       "hiddenInput": [],
-       "onOpen": "",
-       "onClose": "",
-       "session": {},
-       "marginTop": "5",
-       "marginBottom": "Default",
-       "eraseBorder": false,
-       "backgroundColor": 0,
-       "widthAuto": true,
-       "panelDisplay": 1,
-       "isGroupBox": false,
-       "readOnly": false,
-       "height": "Auto",
-       "focusPositionID": "Page"
       }
      ],
      "controlType": "Panel",
-     "width": "G12",
+     "width": "G9",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1378,6 +1287,161 @@
      "eraseBorderLeft": false
     },
     {
+     "fieldName": "JutakuKaishuShinsaResultPanel",
+     "items": [
+      {
+       "fieldName": "spcShinsaResultTop",
+       "items": [],
+       "controlType": "Space",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "spcShinsaResultTop",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "spaceCount": "1"
+      },
+      {
+       "fieldName": "lblShinseiContents",
+       "items": [],
+       "controlType": "Label",
+       "width": "70",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "lblShinseiContents",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "required": false,
+       "isPrivateInfo": false,
+       "text": "申請内容",
+       "decorationClass": "",
+       "align": 2
+      },
+      {
+       "fieldName": "radShonin",
+       "items": [],
+       "controlType": "RadioButton",
+       "width": "195",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "2.8",
+       "marginRight": "XS",
+       "selectControlID": "radShonin_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "required": false,
+       "onChange": "",
+       "labelLText": "",
+       "labelLWidth": "70",
+       "labelLAlign": 2,
+       "onClick": "",
+       "icon": [],
+       "dataSource": [
+        {
+         "key": "shonin",
+         "value": "承認する"
+        },
+        {
+         "key": "kyakka",
+         "value": "却下する"
+        }
+       ],
+       "selectedItem": null,
+       "newLineItemNumber": 2,
+       "spaceSize": "L",
+       "disabledItem": []
+      },
+      {
+       "fieldName": "spcShinsaResultBottom",
+       "items": [],
+       "controlType": "Space",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "spcShinsaResultBottom",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "spaceCount": "3"
+      }
+     ],
+     "controlType": "Panel",
+     "width": "G3",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "0",
+     "selectControlID": "JutakuKaishuShinsaResultPanel",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "審査結果",
+     "isOpen": true,
+     "canOpenAndClose": false,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "JutakuKaishuShinsaResultPanel"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorder": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto",
+     "focusPositionID": "Page"
+    },
+    {
      "fieldName": "btnDummy",
      "items": [],
      "controlType": "Button",
@@ -1387,7 +1451,7 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
@@ -1500,7 +1564,7 @@
    "visibleDivs": [
     {
      "visibleDiv": "JutakuKaishuShinsaHihokenshaPanel",
-     "panelState": "readOnly visible",
+     "panelState": "visible",
      "fixedDiv": "Yes"
     },
     {
@@ -1534,7 +1598,7 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "JutakuKaishuShinsaResetInfoResult",
+     "visibleDiv": "JutakuKaishuShinsaResultPanel",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -1641,7 +1705,7 @@
    "JutakuKaishuShinseiKyufugakuSummary"
   ],
   [
-   "JutakuKaishuShinsaResetInfoResult"
+   "JutakuKaishuShinsaResultPanel"
   ]
  ],
  "panelMargin": 1,

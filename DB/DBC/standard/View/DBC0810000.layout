@@ -148,7 +148,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -207,7 +207,7 @@
       "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
-       "frozenColumn": "",
+       "frozenColumn": "btnSelect",
        "headerHeight": 0
       },
       "columns": [
@@ -279,7 +279,7 @@
         "dataName": "txtServiceYM",
         "toolTip": "",
         "bgColor": 0,
-        "width": 120,
+        "width": 150,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -295,7 +295,7 @@
         "dataName": "txtShinseiYMD",
         "toolTip": "",
         "bgColor": 0,
-        "width": 120,
+        "width": 150,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -311,7 +311,7 @@
         "dataName": "txtSeiriNo",
         "toolTip": "",
         "bgColor": 0,
-        "width": 120,
+        "width": 140,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -327,7 +327,7 @@
         "dataName": "txtShiharaiGokei",
         "toolTip": "",
         "bgColor": 0,
-        "width": 140,
+        "width": 160,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -343,7 +343,7 @@
         "dataName": "txtHokenGokei",
         "toolTip": "",
         "bgColor": 0,
-        "width": 140,
+        "width": 160,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -359,7 +359,7 @@
         "dataName": "txtJikoGokei",
         "toolTip": "",
         "bgColor": 0,
-        "width": 140,
+        "width": 160,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -370,7 +370,7 @@
        }
       ]
      },
-     "ShinseishoListHeight": "Auto",
+     "ShinseishoListHeight": "385",
      "ShinseishoListOnSelect": "",
      "ShinseishoListOnSelectByDblClick": "onSelectedShinseishoList",
      "ShinseishoListOnSelectBySelectButton": "onSelectedShinseishoList",
@@ -518,6 +518,10 @@
   {
    "alias": "select",
    "eventName": "ShokanShikyuKetteiShinseishoListInfo_ShokanShikyuShinseishoList_dgShokanShikyuShinseishoList.onSelectByDblClick"
+  },
+  {
+   "alias": "research",
+   "eventName": "btnReturn.onClick"
   }
  ],
  "loadSequencePanelNames": [
@@ -541,5 +545,53 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "btnIchiran",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnReturn",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReturn",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "該当者検索に戻る",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "申請書一覧"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ]
 }

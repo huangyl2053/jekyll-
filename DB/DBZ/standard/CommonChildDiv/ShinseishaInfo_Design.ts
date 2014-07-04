@@ -8,11 +8,11 @@ module DBZ {
      */
     export class ShinseishaInfo_Design extends Uz.CommonChildDiv {
     
-        public get btnSearch_displayNone() {
+        public get btnJigyoshaInputGuide_displayNone() {
             return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"];
         }
         
-        public set btnSearch_displayNone(value) {
+        public set btnJigyoshaInputGuide_displayNone(value) {
             if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).length > 0 && 
                  Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]) != undefined ) {
                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"] = value;
@@ -79,24 +79,38 @@ module DBZ {
         }
         
         public get txtShinseishaName_labelLText() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["labelLText"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["labelLText"];
         }
         
         public set txtShinseishaName_labelLText(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["labelLText"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["labelLText"] = value;
             } else {
-                this.layout.items[0].items[7]["labelLText"] = value;
+                this.layout.items[0].items[6]["labelLText"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
         
         public get txtYubinNo_displayNone() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"])["displayNone"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"])["displayNone"];
         }
         
         public set txtYubinNo_displayNone(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"])["displayNone"] = value;
+            } else {
+                this.layout.items[0].items[9]["displayNone"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get txtAddress_displayNone() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"])["displayNone"];
+        }
+        
+        public set txtAddress_displayNone(value) {
             if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).length > 0 && 
                  Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]) != undefined ) {
                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"])["displayNone"] = value;
@@ -106,58 +120,16 @@ module DBZ {
             }
         }
         
-        public get txtAddress_displayNone() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"])["displayNone"];
-        }
-        
-        public set txtAddress_displayNone(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"])["displayNone"] = value;
-            } else {
-                this.layout.items[0].items[11]["displayNone"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get btnCopy_displayNone() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"];
-        }
-        
-        public set btnCopy_displayNone(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"] = value;
-            } else {
-                this.layout.items[0].items[5]["displayNone"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get btnSearchJigyosha_disabled() {
+        public get btnJigyoshaInputGuide_disabled() {
             return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["disabled"];
         }
         
-        public set btnSearchJigyosha_disabled(value) {
+        public set btnJigyoshaInputGuide_disabled(value) {
             if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).length > 0 && 
                  Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]) != undefined ) {
                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["disabled"] = value;
             } else {
                 this.layout.items[0].items[4]["disabled"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get btnCopyToHonninInfo_disabled() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["disabled"];
-        }
-        
-        public set btnCopyToHonninInfo_disabled(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["disabled"] = value;
-            } else {
-                this.layout.items[0].items[5]["disabled"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -172,7 +144,7 @@ module DBZ {
          */
         public registProperty() {
             super.registProperty();
-            Uz.JSControlUtil.registProperty("btnSearch_displayNone");
+            Uz.JSControlUtil.registProperty("btnJigyoshaInputGuide_displayNone");
             Uz.JSControlUtil.registProperty("txtUkestukeDate_displayNone");
             Uz.JSControlUtil.registProperty("title");
             Uz.JSControlUtil.registProperty("panelDisplay");
@@ -180,9 +152,7 @@ module DBZ {
             Uz.JSControlUtil.registProperty("txtShinseishaName_labelLText");
             Uz.JSControlUtil.registProperty("txtYubinNo_displayNone");
             Uz.JSControlUtil.registProperty("txtAddress_displayNone");
-            Uz.JSControlUtil.registProperty("btnCopy_displayNone");
-            Uz.JSControlUtil.registProperty("btnSearchJigyosha_disabled");
-            Uz.JSControlUtil.registProperty("btnCopyToHonninInfo_disabled");
+            Uz.JSControlUtil.registProperty("btnJigyoshaInputGuide_disabled");
         }
         
         /**
@@ -192,17 +162,15 @@ module DBZ {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
-            editablePropertyInfo["btnSearch_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnJigyoshaInputGuide_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["txtUkestukeDate_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
             editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
             editablePropertyInfo["txtJigyoshaNo_disabled"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["disabled"];
-            editablePropertyInfo["txtShinseishaName_labelLText"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["labelLText"];
-            editablePropertyInfo["txtYubinNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["txtAddress_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["btnCopy_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["btnSearchJigyosha_disabled"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["disabled"];
-            editablePropertyInfo["btnCopyToHonninInfo_disabled"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["disabled"];
+            editablePropertyInfo["txtShinseishaName_labelLText"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["labelLText"];
+            editablePropertyInfo["txtYubinNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["txtAddress_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnJigyoshaInputGuide_disabled"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["disabled"];
             
             return editablePropertyInfo;
         }
@@ -235,23 +203,23 @@ module DBZ {
      "readOnly": false,
      "required": false,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
+     "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "value": "",
+     "text": "",
      "labelLText": "申請日",
      "labelRText": "",
      "labelLWidth": "55",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "isPassword": false,
-     "text": "",
      "ymdKubun": 2,
      "displayFormat": 0,
+     "value": "",
+     "textKind": 0,
      "permitCharactor": "./_-"
     },
     {
@@ -275,6 +243,17 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "required": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "onChange_ddlShinseishaKubun",
+     "labelLText": "申請者区分",
+     "labelRText": "",
+     "labelLWidth": "90",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "selectedItem": "myself",
      "dataSource": [
       {
        "key": "myself",
@@ -291,19 +270,12 @@ module DBZ {
       {
        "key": "other",
        "value": "その他"
+      },
+      {
+       "key": "blank",
+       "value": ""
       }
-     ],
-     "required": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "labelLText": "申請者区分",
-     "labelRText": "",
-     "labelLWidth": "90",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "selectedItem": "myself"
+     ]
     },
     {
      "fieldName": "txtUketsukeDate",
@@ -320,7 +292,7 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "2.3",
+     "marginLeft": "2.5",
      "marginRight": "XS",
      "selectControlID": "txtUketsukeDate_core",
      "helpMessageID": "",
@@ -328,23 +300,23 @@ module DBZ {
      "readOnly": false,
      "required": false,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
+     "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "value": "",
+     "text": "",
      "labelLText": "受付日",
      "labelRText": "",
      "labelLWidth": "55",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "isPassword": false,
-     "text": "",
      "ymdKubun": 2,
      "displayFormat": 0,
+     "value": "",
+     "textKind": 0,
      "permitCharactor": "./_-"
     },
     {
@@ -369,36 +341,36 @@ module DBZ {
      "jpControlName": "",
      "readOnly": false,
      "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
      "placeHolder": "",
-     "textKind": 2,
      "isPrivateInfo": false,
+     "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "value": "",
+     "text": "",
      "labelLText": "事業者",
      "labelRText": "",
      "labelLWidth": "55",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "value": "",
+     "maxLength": 100000000,
+     "minLength": 0,
      "textAlign": 0,
-     "isPassword": false,
+     "textKind": 2,
      "isComboBox": false,
-     "text": "",
      "suggest": [],
      "decorationClass": "",
      "permitCharactor": "",
      "formatLength": "10"
     },
     {
-     "fieldName": "btnSearchJigyosha",
+     "fieldName": "btnJigyoshaInputGuide",
      "items": [],
-     "controlType": "Button",
-     "width": "XS",
+     "controlType": "ButtonDialog",
+     "width": "S",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -411,46 +383,31 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "0",
-     "selectControlID": "btnSearchJigyosha",
+     "selectControlID": "btnJigyoshaInputGuide",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "Button1",
+     "text": "ButtonDialog1",
      "onClick": "",
      "appearance": 2,
      "imageFileUrl": "/uz/uza/image/UZ_Search.png",
      "imageWidth": "",
      "imageHeight": "",
      "icon": 0,
-     "heightTextBoxMatches": true
-    },
-    {
-     "fieldName": "btnCopyToHonninInfo",
-     "items": [],
-     "controlType": "Button",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "0",
-     "selectControlID": "btnCopyToHonninInfo",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "text": "本人情報をコピーする",
-     "onClick": "onClick_btnCopyToHonninInfo",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0,
-     "heightTextBoxMatches": true
+     "heightTextBoxMatches": true,
+     "displayChildDivName": "DBZ.JigyoshaInputGuide",
+     "dataPassing": [
+      {
+       "key": "jigyoshaCode",
+       "controlName": "txtJigyoshaNo"
+      },
+      {
+       "key": "jigyoshaMeisho",
+       "controlName": "txtShinseishaName"
+      }
+     ],
+     "visibleCloseButton": true,
+     "onOkClose": "",
+     "onBeforeOpenDialog": ""
     },
     {
      "fieldName": "ddlHokensha",
@@ -473,16 +430,6 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "dataSource": [
-      {
-       "key": "key0",
-       "value": "value0"
-      },
-      {
-       "key": "key1",
-       "value": "value1"
-      }
-     ],
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -492,7 +439,17 @@ module DBZ {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "selectedItem": "key0"
+     "selectedItem": "key0",
+     "dataSource": [
+      {
+       "key": "key0",
+       "value": "value0"
+      },
+      {
+       "key": "key1",
+       "value": "value1"
+      }
+     ]
     },
     {
      "fieldName": "txtShinseishaNameKana",
@@ -516,26 +473,26 @@ module DBZ {
      "jpControlName": "",
      "readOnly": false,
      "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
+     "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "value": "",
+     "text": "",
      "labelLText": "氏名",
      "labelRText": "",
      "labelLWidth": "55",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "value": "",
+     "maxLength": 100000000,
+     "minLength": 0,
      "textAlign": 0,
-     "isPassword": false,
+     "textKind": 0,
      "isComboBox": false,
-     "text": "",
      "suggest": [],
      "decorationClass": "",
      "permitCharactor": ""
@@ -562,26 +519,26 @@ module DBZ {
      "jpControlName": "",
      "readOnly": false,
      "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
+     "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "value": "",
+     "text": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "80",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "value": "",
+     "maxLength": 100000000,
+     "minLength": 0,
      "textAlign": 0,
-     "isPassword": false,
+     "textKind": 0,
      "isComboBox": false,
-     "text": "",
      "suggest": [],
      "decorationClass": "",
      "permitCharactor": ""
@@ -608,26 +565,26 @@ module DBZ {
      "jpControlName": "",
      "readOnly": false,
      "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
+     "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "value": "",
+     "text": "",
      "labelLText": "電話番号",
      "labelRText": "",
      "labelLWidth": "70",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "value": "",
+     "maxLength": 100000000,
+     "minLength": 0,
      "textAlign": 0,
-     "isPassword": false,
+     "textKind": 0,
      "isComboBox": false,
-     "text": "",
      "suggest": [],
      "decorationClass": "",
      "permitCharactor": ""
@@ -654,26 +611,26 @@ module DBZ {
      "jpControlName": "",
      "readOnly": false,
      "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
      "placeHolder": "",
-     "textKind": 2,
      "isPrivateInfo": false,
+     "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "value": "",
+     "text": "",
      "labelLText": "住所",
      "labelRText": "",
      "labelLWidth": "55",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "value": "",
+     "maxLength": 100000000,
+     "minLength": 0,
      "textAlign": 0,
-     "isPassword": false,
+     "textKind": 2,
      "isComboBox": false,
-     "text": "",
      "suggest": [],
      "decorationClass": "",
      "permitCharactor": ""
@@ -700,26 +657,26 @@ module DBZ {
      "jpControlName": "",
      "readOnly": false,
      "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
+     "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "value": "",
+     "text": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "value": "",
+     "maxLength": 100000000,
+     "minLength": 0,
      "textAlign": 0,
-     "isPassword": false,
+     "textKind": 0,
      "isComboBox": false,
-     "text": "",
      "suggest": [],
      "decorationClass": "",
      "permitCharactor": ""
@@ -791,9 +748,9 @@ module DBZ {
  "marginBottom": 0,
  "originalProperty": [
   {
-   "publicChildFieldName": "btnSearchJigyosha",
+   "publicChildFieldName": "btnJigyoshaInputGuide",
    "publicChildProperty": "displayNone",
-   "newPropertyName": "btnSearch_displayNone"
+   "newPropertyName": "btnJigyoshaInputGuide_displayNone"
   },
   {
    "publicChildFieldName": "txtUketsukeDate",
@@ -831,19 +788,9 @@ module DBZ {
    "newPropertyName": "txtAddress_displayNone"
   },
   {
-   "publicChildFieldName": "btnCopyToHonninInfo",
-   "publicChildProperty": "displayNone",
-   "newPropertyName": "btnCopy_displayNone"
-  },
-  {
-   "publicChildFieldName": "btnSearchJigyosha",
+   "publicChildFieldName": "btnJigyoshaInputGuide",
    "publicChildProperty": "disabled",
-   "newPropertyName": "btnSearchJigyosha_disabled"
-  },
-  {
-   "publicChildFieldName": "btnCopyToHonninInfo",
-   "publicChildProperty": "disabled",
-   "newPropertyName": "btnCopyToHonninInfo_disabled"
+   "newPropertyName": "btnJigyoshaInputGuide_disabled"
   }
  ],
  "dataPassingForDialog": [],

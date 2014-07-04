@@ -33,6 +33,8 @@ public class ServiceTeikyoShomeishoGokeiDiv extends Panel {
     private TextBoxNum txtShinryohi;
     @JsonProperty("txtShokujihi")
     private TextBoxNum txtShokujihi;
+    @JsonProperty("btnServiceTeikyoShomeishoGokeiReturn")
+    private Button btnServiceTeikyoShomeishoGokeiReturn;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -98,6 +100,16 @@ public class ServiceTeikyoShomeishoGokeiDiv extends Panel {
     @JsonProperty("txtShokujihi")
     public void setTxtShokujihi(TextBoxNum txtShokujihi) {
         this.txtShokujihi=txtShokujihi;
+    }
+
+    @JsonProperty("btnServiceTeikyoShomeishoGokeiReturn")
+    public Button getBtnServiceTeikyoShomeishoGokeiReturn() {
+        return btnServiceTeikyoShomeishoGokeiReturn;
+    }
+
+    @JsonProperty("btnServiceTeikyoShomeishoGokeiReturn")
+    public void setBtnServiceTeikyoShomeishoGokeiReturn(Button btnServiceTeikyoShomeishoGokeiReturn) {
+        this.btnServiceTeikyoShomeishoGokeiReturn=btnServiceTeikyoShomeishoGokeiReturn;
     }
 
 }

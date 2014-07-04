@@ -14,7 +14,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetail
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiContentsPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiHihokenshaPanelDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShinseishaInfo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfo.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -52,7 +54,7 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //        setShinseiReason(contentsPanel);
 //        //口座振替申請情報（UR)
 //        setShinseiKozaInfo(contentsPanel);
-        setDefaultData(contentsPanel);
+        setDefaultData(contentsPanel, hihoPanel);
 
         response.data = contentsPanel;
         return response;
@@ -97,25 +99,6 @@ public class JutakuKaishuJizenShinseiContentsPanel {
         return response;
     }
 
-    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_copyToInfo(
-            JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
-        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
-
-        panel.getJutakuKaishuJizenShinseisha().getTxtShinseishaNameKana().setValue(
-                hihoPanel.getKaigoAtena().getAtenaInfo().getTxtAtenaKanaMeisho().getValue());
-        panel.getJutakuKaishuJizenShinseisha().getTxtShinseishaName().setValue(
-                hihoPanel.getKaigoAtena().getAtenaInfo().getTxtAtenaMeisho().getValue());
-        panel.getJutakuKaishuJizenShinseisha().getTxtYubinNo().setValue(
-                hihoPanel.getKaigoAtena().getAtenaInfo().getTxtYubinNo().getValue());
-        panel.getJutakuKaishuJizenShinseisha().getTxtAddress().setValue(
-                hihoPanel.getKaigoAtena().getAtenaInfo().getTxtJusho().getValue());
-        panel.getJutakuKaishuJizenShinseisha().getTxtTelNo().setValue(
-                new RString("0123456789"));
-
-        response.data = panel;
-        return response;
-    }
-
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_btnClear(
             JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
         ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
@@ -123,6 +106,32 @@ public class JutakuKaishuJizenShinseiContentsPanel {
         //クリア設定
         setJutakuKaishuJizenShinseiDetailInput(panel);
 
+        response.data = panel;
+        return response;
+    }
+
+    public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onChange_ddlShinseishaKubun(
+            JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
+        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
+
+        String 申請者区分key = panel.getJutakuKaishuJizenShinseisha().getDdlShinseishaKubun().getSelectedItem().toString();
+
+        switch (申請者区分key) {
+            case "myself":
+                disableJigyosha(panel.getJutakuKaishuJizenShinseisha());
+                setHonninInfo(panel.getJutakuKaishuJizenShinseisha(), hihoPanel.getKaigoAtena().getAtenaInfo());
+                break;
+            case "family":
+            case "other":
+            case "blank":
+                clearToShinseishaInfo(panel.getJutakuKaishuJizenShinseisha());
+                disableJigyosha(panel.getJutakuKaishuJizenShinseisha());
+                break;
+            case "serviceJigyosha":
+                clearToShinseishaInfo(panel.getJutakuKaishuJizenShinseisha());
+                ableJigyosha(panel.getJutakuKaishuJizenShinseisha());
+                break;
+        }
         response.data = panel;
         return response;
     }
@@ -143,11 +152,46 @@ public class JutakuKaishuJizenShinseiContentsPanel {
         return response;
     }
 
-    private void setDefaultData(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
+    private void clearToShinseishaInfo(ShinseishaInfoDiv div) {
+        div.getTxtAddress().clearValue();
+        div.getTxtJigyoshaNo().clearValue();
+        div.getTxtShinseishaName().clearValue();
+        div.getTxtShinseishaNameKana().clearValue();
+        div.getTxtTelNo().clearValue();
+        div.getTxtYubinNo().clearValue();
+    }
+
+    private void disableJigyosha(ShinseishaInfoDiv div) {
+        div.getTxtJigyoshaNo().setDisabled(true);
+        div.getBtnJigyoshaInputGuide().setDisabled(true);
+        div.getTxtShinseishaNameKana().setLabelLText(new RString("氏名"));
+        div.getTxtShinseishaName().setReadOnly(false);
+        div.getTxtShinseishaNameKana().setReadOnly(false);
+    }
+
+    private void ableJigyosha(ShinseishaInfoDiv div) {
+        div.getTxtJigyoshaNo().setDisabled(false);
+        div.getBtnJigyoshaInputGuide().setDisabled(false);
+        div.getTxtShinseishaNameKana().setLabelLText(new RString("　　"));
+        div.getTxtShinseishaName().setReadOnly(true);
+        div.getTxtShinseishaNameKana().setReadOnly(true);
+    }
+
+    private void setHonninInfo(ShinseishaInfoDiv shinseishaDiv, AtenaShokaiSimpleDiv atenaDiv) {
+        shinseishaDiv.getTxtShinseishaNameKana().setValue(atenaDiv.getTxtAtenaKanaMeisho().getValue());
+        shinseishaDiv.getTxtShinseishaName().setValue(atenaDiv.getTxtAtenaMeisho().getValue());
+        shinseishaDiv.getTxtYubinNo().setValue(atenaDiv.getTxtYubinNo().getValue());
+        shinseishaDiv.getTxtAddress().setValue(atenaDiv.getTxtJusho().getValue());
+        shinseishaDiv.getTxtTelNo().setValue(new RString("0123456789"));
+    }
+
+    private void setDefaultData(JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
         panel.getJutakuKaishuJizenShinseisha().getTxtShinseiDate().setValue(new RDate("20140711"));
 
         panel.getJutakuKaishuJizenShinseiKoza().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
         panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getRadKozaShubetsu().setSelectedItem(new RString("futsu"));
+
+        setHonninInfo(panel.getJutakuKaishuJizenShinseisha(), hihoPanel.getKaigoAtena().getAtenaInfo());
     }
     /*
      住宅所有者・被保険者との関係　の初期値をセットします。
