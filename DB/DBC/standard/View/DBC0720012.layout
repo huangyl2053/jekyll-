@@ -118,7 +118,7 @@
    "width": "G12",
    "visible": true,
    "displayNone": false,
-   "disabled": true,
+   "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
    "wrap": true,
@@ -161,7 +161,7 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": true,
+   "readOnly": false,
    "height": "Auto",
    "focusPositionID": "restoreLayoutButton",
    "eraseBorderTop": false,
@@ -295,7 +295,6 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -306,6 +305,7 @@
          "value": "白馬村"
         }
        ],
+       "selectedItem": "key0",
        "disabledItem": []
       },
       {
@@ -1172,7 +1172,6 @@
          "labelLAlign": 2,
          "onClick": "",
          "icon": [],
-         "selectedItem": null,
          "dataSource": [
           {
            "key": "threeUp",
@@ -1183,6 +1182,7 @@
            "value": "住宅住所変更による"
           }
          ],
+         "selectedItem": null,
          "newLineItemNumber": 1,
          "spaceSize": "M",
          "disabledItem": [],
@@ -1363,7 +1363,6 @@
        "labelLAlign": 2,
        "onClick": "",
        "icon": [],
-       "selectedItem": null,
        "dataSource": [
         {
          "key": "shonin",
@@ -1374,6 +1373,7 @@
          "value": "却下する"
         }
        ],
+       "selectedItem": null,
        "newLineItemNumber": 2,
        "spaceSize": "L",
        "disabledItem": []
@@ -1564,7 +1564,7 @@
    "visibleDivs": [
     {
      "visibleDiv": "JutakuKaishuShinsaHihokenshaPanel",
-     "panelState": "readOnly visible",
+     "panelState": "visible",
      "fixedDiv": "Yes"
     },
     {
