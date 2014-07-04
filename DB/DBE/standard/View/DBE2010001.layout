@@ -1622,6 +1622,64 @@
        "permitCharactor": ""
       },
       {
+       "fieldName": "btnRenrakusaki",
+       "items": [],
+       "controlType": "Button",
+       "width": "140",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnRenrakusaki",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "連絡先を照会する",
+       "onClick": "",
+       "icon": 0,
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "heightTextBoxMatches": false
+      },
+      {
+       "fieldName": "btnShichosonRenraku",
+       "items": [],
+       "controlType": "Button",
+       "width": "120",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnShichosonRenraku",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "市町村連絡事項",
+       "onClick": "",
+       "icon": 0,
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "heightTextBoxMatches": false
+      },
+      {
        "fieldName": "NinteichosaIraiEntryTargetLatestChosain",
        "items": [
         {
@@ -3404,7 +3462,7 @@
   {
    "order": "1",
    "stateName": "対象者一覧",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "NinteichosaIraiList",
@@ -3436,7 +3494,7 @@
   {
    "order": "2",
    "stateName": "依頼入力",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "NinteichosaIraiEntry",

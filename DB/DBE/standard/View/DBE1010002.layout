@@ -3822,7 +3822,7 @@
   {
    "order": "1",
    "stateName": "申請情報入力",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "ShinseiJohoInput",

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 30 17:20:52 JST 2014 
+ * Fri Jul 04 12:25:00 JST 2014 
  */
 
 
@@ -24,12 +24,12 @@ public class dgMiwariateTaishoshaIchiran_Row extends DataRow {
     private RString hihokenNo;
     private RString shimei;
     private RString shimeiKana;
+    private RString furiwakeKbn;
     private RString shinseibi;
     private RString shinseiKbn;
     private RString seibetsu;
     private RString ichijiHantei;
     private RString kijunJikan;
-    private RString furiwakeKbn;
     private RString iryokikan;
     private RString shujii;
     private RString chosakikan;
@@ -41,30 +41,30 @@ public class dgMiwariateTaishoshaIchiran_Row extends DataRow {
         this.hihokenNo = RString.EMPTY;
         this.shimei = RString.EMPTY;
         this.shimeiKana = RString.EMPTY;
+        this.furiwakeKbn = RString.EMPTY;
         this.shinseibi = RString.EMPTY;
         this.shinseiKbn = RString.EMPTY;
         this.seibetsu = RString.EMPTY;
         this.ichijiHantei = RString.EMPTY;
         this.kijunJikan = RString.EMPTY;
-        this.furiwakeKbn = RString.EMPTY;
         this.iryokikan = RString.EMPTY;
         this.shujii = RString.EMPTY;
         this.chosakikan = RString.EMPTY;
         this.chosain = RString.EMPTY;
     }
 
-    public dgMiwariateTaishoshaIchiran_Row(RString hokensha, RString hihokenNo, RString shimei, RString shimeiKana, RString shinseibi, RString shinseiKbn, RString seibetsu, RString ichijiHantei, RString kijunJikan, RString furiwakeKbn, RString iryokikan, RString shujii, RString chosakikan, RString chosain) {
+    public dgMiwariateTaishoshaIchiran_Row(RString hokensha, RString hihokenNo, RString shimei, RString shimeiKana, RString furiwakeKbn, RString shinseibi, RString shinseiKbn, RString seibetsu, RString ichijiHantei, RString kijunJikan, RString iryokikan, RString shujii, RString chosakikan, RString chosain) {
         super();
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihokenNo", hihokenNo);
         this.setOriginalData("shimei", shimei);
         this.setOriginalData("shimeiKana", shimeiKana);
+        this.setOriginalData("furiwakeKbn", furiwakeKbn);
         this.setOriginalData("shinseibi", shinseibi);
         this.setOriginalData("shinseiKbn", shinseiKbn);
         this.setOriginalData("seibetsu", seibetsu);
         this.setOriginalData("ichijiHantei", ichijiHantei);
         this.setOriginalData("kijunJikan", kijunJikan);
-        this.setOriginalData("furiwakeKbn", furiwakeKbn);
         this.setOriginalData("iryokikan", iryokikan);
         this.setOriginalData("shujii", shujii);
         this.setOriginalData("chosakikan", chosakikan);
@@ -73,12 +73,12 @@ public class dgMiwariateTaishoshaIchiran_Row extends DataRow {
         this.hihokenNo = hihokenNo;
         this.shimei = shimei;
         this.shimeiKana = shimeiKana;
+        this.furiwakeKbn = furiwakeKbn;
         this.shinseibi = shinseibi;
         this.shinseiKbn = shinseiKbn;
         this.seibetsu = seibetsu;
         this.ichijiHantei = ichijiHantei;
         this.kijunJikan = kijunJikan;
-        this.furiwakeKbn = furiwakeKbn;
         this.iryokikan = iryokikan;
         this.shujii = shujii;
         this.chosakikan = chosakikan;
@@ -101,6 +101,10 @@ public class dgMiwariateTaishoshaIchiran_Row extends DataRow {
         return shimeiKana;
     }
 
+    public RString getFuriwakeKbn() {
+        return furiwakeKbn;
+    }
+
     public RString getShinseibi() {
         return shinseibi;
     }
@@ -119,10 +123,6 @@ public class dgMiwariateTaishoshaIchiran_Row extends DataRow {
 
     public RString getKijunJikan() {
         return kijunJikan;
-    }
-
-    public RString getFuriwakeKbn() {
-        return furiwakeKbn;
     }
 
     public RString getIryokikan() {
@@ -161,6 +161,11 @@ public class dgMiwariateTaishoshaIchiran_Row extends DataRow {
         this.shimeiKana = shimeiKana;
     }
 
+    public void setFuriwakeKbn(RString furiwakeKbn) {
+        this.setOriginalData("furiwakeKbn", furiwakeKbn);
+        this.furiwakeKbn = furiwakeKbn;
+    }
+
     public void setShinseibi(RString shinseibi) {
         this.setOriginalData("shinseibi", shinseibi);
         this.shinseibi = shinseibi;
@@ -184,11 +189,6 @@ public class dgMiwariateTaishoshaIchiran_Row extends DataRow {
     public void setKijunJikan(RString kijunJikan) {
         this.setOriginalData("kijunJikan", kijunJikan);
         this.kijunJikan = kijunJikan;
-    }
-
-    public void setFuriwakeKbn(RString furiwakeKbn) {
-        this.setOriginalData("furiwakeKbn", furiwakeKbn);
-        this.furiwakeKbn = furiwakeKbn;
     }
 
     public void setIryokikan(RString iryokikan) {

@@ -48,7 +48,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
-       "onBlur": ""
+       "onBlur": "",
+       "disabledItem": []
       },
       {
        "fieldName": "ddlKensakuTaisho",
@@ -106,7 +107,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
-       "onBlur": ""
+       "onBlur": "",
+       "disabledItem": []
       },
       {
        "fieldName": "txtSearchStYMD",
@@ -139,21 +141,21 @@
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "placeHolder": "",
-       "isPrivateInfo": false,
-       "isPassword": false,
-       "onKeyPress": "",
-       "text": "",
-       "ymdKubun": 2,
-       "displayFormat": 0,
-       "value": "",
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
+       "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
+       "isPassword": false,
        "isComboBox": false,
+       "onKeyPress": "",
+       "text": "",
        "suggest": [],
-       "permitCharactor": "./_-"
+       "value": "",
+       "permitCharactor": "./_-",
+       "ymdKubun": 2,
+       "displayFormat": 0
       },
       {
        "fieldName": "txtSearchEdYMD",
@@ -186,21 +188,21 @@
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "placeHolder": "",
-       "isPrivateInfo": false,
-       "isPassword": false,
-       "onKeyPress": "",
-       "text": "",
-       "ymdKubun": 2,
-       "displayFormat": 0,
-       "value": "",
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
+       "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
+       "isPassword": false,
        "isComboBox": false,
+       "onKeyPress": "",
+       "text": "",
        "suggest": [],
-       "permitCharactor": "./_-"
+       "value": "",
+       "permitCharactor": "./_-",
+       "ymdKubun": 2,
+       "displayFormat": 0
       },
       {
        "fieldName": "txtHihokenshaNo",
@@ -233,25 +235,25 @@
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "placeHolder": "",
-       "isPrivateInfo": false,
-       "isPassword": false,
-       "onKeyPress": "",
-       "text": "",
-       "value": "",
        "maxLength": "10",
        "minLength": "0",
        "textAlign": 2,
+       "placeHolder": "",
        "textKind": 2,
+       "isPrivateInfo": false,
+       "isPassword": false,
        "isComboBox": false,
+       "onKeyPress": "",
+       "text": "",
        "suggest": [],
+       "value": "",
        "decorationClass": "",
+       "permitCharactor": "+-,.\\",
        "maxValue": "9999999999",
        "minValue": 0,
        "isCurrency": false,
        "isComma": false,
-       "decimalPointLength": 0,
-       "permitCharactor": "+-,.\\"
+       "decimalPointLength": 0
       },
       {
        "fieldName": "btnTaishoKensaku",
@@ -275,11 +277,11 @@
        "jpControlName": "",
        "text": "検索する",
        "onClick": "onClick_btnTaishoKensaku",
+       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0,
        "heightTextBoxMatches": false
       },
       {
@@ -304,11 +306,11 @@
        "jpControlName": "",
        "text": "条件をクリアする",
        "onClick": "",
+       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0,
        "heightTextBoxMatches": false
       }
      ],
@@ -743,11 +745,11 @@
        "jpControlName": "",
        "text": "再検索する",
        "onClick": "",
+       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0,
        "heightTextBoxMatches": false
       }
      ],
@@ -854,11 +856,11 @@
            "jpControlName": "",
            "text": "マスキングする",
            "onClick": "",
+           "icon": 0,
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
-           "icon": 0,
            "heightTextBoxMatches": false
           },
           {
@@ -1487,7 +1489,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
-       "onBlur": ""
+       "onBlur": "",
+       "disabledItem": []
       },
       {
        "fieldName": "btnShokiModoshi",
@@ -1511,11 +1514,11 @@
        "jpControlName": "",
        "text": "初期状態に戻す",
        "onClick": "",
+       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0,
        "heightTextBoxMatches": false
       },
       {

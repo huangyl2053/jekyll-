@@ -10,19 +10,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * taishoshaWariateBtn のクラスファイル 
+ * KaijoButtonArea のクラスファイル 
  * 
  * @author 自動生成
  */
-public class taishoshaWariateBtnDiv extends Panel {
+public class KaijoButtonAreaDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnWaritsukeTaishosha")
-    private Button btnWaritsukeTaishosha;
     @JsonProperty("btnKaijoTaishosha")
     private Button btnKaijoTaishosha;
 
@@ -32,16 +30,6 @@ public class taishoshaWariateBtnDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnWaritsukeTaishosha")
-    public Button getBtnWaritsukeTaishosha() {
-        return btnWaritsukeTaishosha;
-    }
-
-    @JsonProperty("btnWaritsukeTaishosha")
-    public void setBtnWaritsukeTaishosha(Button btnWaritsukeTaishosha) {
-        this.btnWaritsukeTaishosha=btnWaritsukeTaishosha;
-    }
-
     @JsonProperty("btnKaijoTaishosha")
     public Button getBtnKaijoTaishosha() {
         return btnKaijoTaishosha;

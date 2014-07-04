@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -6,23 +6,23 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CompositeControl;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * defaultLayout のクラスファイル 
+ * WariateButtonArea のクラスファイル 
  * 
  * @author 自動生成
  */
-public class DefaultCompositeControl extends CompositeControl {
+public class WariateButtonAreaDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ButtonBatchReserve1")
-    private ButtonBatchReserve ButtonBatchReserve1;
+    @JsonProperty("btnWaritsukeTaishosha")
+    private Button btnWaritsukeTaishosha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,14 +30,14 @@ public class DefaultCompositeControl extends CompositeControl {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ButtonBatchReserve1")
-    public ButtonBatchReserve getButtonBatchReserve1() {
-        return ButtonBatchReserve1;
+    @JsonProperty("btnWaritsukeTaishosha")
+    public Button getBtnWaritsukeTaishosha() {
+        return btnWaritsukeTaishosha;
     }
 
-    @JsonProperty("ButtonBatchReserve1")
-    public void setButtonBatchReserve1(ButtonBatchReserve ButtonBatchReserve1) {
-        this.ButtonBatchReserve1=ButtonBatchReserve1;
+    @JsonProperty("btnWaritsukeTaishosha")
+    public void setBtnWaritsukeTaishosha(Button btnWaritsukeTaishosha) {
+        this.btnWaritsukeTaishosha=btnWaritsukeTaishosha;
     }
 
 }

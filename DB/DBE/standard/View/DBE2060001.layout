@@ -26,12 +26,7 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "510",
-     "onSort": "",
-     "onSelect": "onSelect_dgNinteichosaResultTaishosha",
-     "onSelectByDblClick": "",
-     "onOnlyRow": "",
-     "onNoRow": "",
-     "onMultiRows": "",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -471,6 +466,9 @@
        }
       ]
      },
+     "onSort": "",
+     "onSelect": "onSelect_dgNinteichosaResultTaishosha",
+     "onSelectByDblClick": "",
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
@@ -479,7 +477,9 @@
      "onAfterRequestBySelectButton": "",
      "onAfterRequestByModifyButton": "",
      "onAfterRequestByDeleteButton": "",
-     "dataSource": [],
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
      "sortOrder": "shimei",
      "isAscending": true,
      "filterList": [],
@@ -508,13 +508,13 @@
        "selectControlID": "btnHiddenCallOnResume",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "onResume",
        "text": "call onResume",
+       "onClick": "onResume",
+       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0,
        "heightTextBoxMatches": false
       }
      ],
@@ -648,7 +648,7 @@
   {
    "order": "1",
    "stateName": "対象者選択",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "NinteichosaResultEntryTarget",
