@@ -3,8 +3,8 @@
 ## YMShitei         年月を指定して検索する               radSearchKubun
 ---
 -  radSearchKubun: hihokenshaShitei
-   hihoNo: "0000029068"
-   hihoName: 介護 南魚
+   hihoNo: "0123400001"
+   hihoName: 電算　太郎
    teikyoYMRangefrom: 20140601
    teikyoYMRangeto: 20140701
    shinseiYMRangefrom: 20140701
@@ -13,4 +13,4 @@
    ketteiYMRangeto: 20140901
 -  teikyoYM: 201407
    shinseiYM: 201406
-   ketteiYM: 201408
+   ketteiYM: 201405

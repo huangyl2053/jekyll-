@@ -1,0 +1,610 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "KogakuServicehiInfoPanel",
+   "items": [
+    {
+     "fieldName": "CommonKogakuNushiJuminJohoChildDiv1",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "CommonKogakuNushiJuminJohoChildDiv1",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "KaigoAtenaInfo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "atenaInfo_title": "",
+     "atenaInfo_canOpenAndClose": true,
+     "AtenaShokaiSimple_eraseBorder": true,
+     "AtenaKanaMeisho_visible": true,
+     "AtenaMisho_visible": true,
+     "SeinengappiYMD_visible": true,
+     "Nenrei_visible": true,
+     "Seibetsu_visible": true,
+     "JuminShubetsu_Visible": true,
+     "NihonjinGaikokujin_visible": true,
+     "JuminJotai_visible": true,
+     "YubinNo_visible": true,
+     "Jusho_visible": true,
+     "Gyoseiku_visible": true,
+     "ShikibetsuCode_visible": true,
+     "KojinHojinCode_visible": true,
+     "SetaiCode_visible": true,
+     "lblButtonMargin_displayNone": false,
+     "btnDainosha_displayNone": false,
+     "btnSofusaki_displayNone": false,
+     "btnDainoSofusakiKakunin_displayNone": false,
+     "btnKoza_displayNone": false,
+     "btnRenrakusaki_displayNone": false,
+     "btnShosai_displayNone": false,
+     "btnAtenaRireki_displayNone": false,
+     "btnSetaiIchiran_displayNone": false,
+     "btnDoitsunin_displayNone": false,
+     "btnToriatsukaiChui_displayNone": false,
+     "btnEltax_displayNone": false,
+     "btnShiyoJokyo_displayNone": false,
+     "btnAtesakiKakunin_displayNone": false,
+     "SubGyomuCode": "DBC",
+     "JukiYusennKubun": "1",
+     "AgeArrivalDay": "1",
+     "SubGyomuUmu": "0",
+     "SubGyomuSearchUmu": "0",
+     "DainoninHyojiUmu": "1"
+    },
+    {
+     "fieldName": "CommonKogakuKaigoJuminJohoChildDiv2",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "CommonKogakuKaigoJuminJohoChildDiv2",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "title": "",
+     "relation": [],
+     "canOpenAndClose": true,
+     "marginTop": 0,
+     "marginBottom": 0,
+     "eraseBorder": true,
+     "businessId": "DBZ",
+     "controlName": "KaigoShikakuKihon",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "backGroundColor": 0,
+     "btnHihoRireki_visible": true,
+     "btnNinteiRireki_visible": true,
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true
+    },
+    {
+     "fieldName": "HorizontalJuminLine1",
+     "items": [],
+     "controlType": "HorizontalLine",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "HorizontalJuminLine1",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "size": "Default"
+    },
+    {
+     "fieldName": "btnShowSeteiJoho",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnShowSeteiJoho",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "世帯情報を表示する",
+     "imageWidth": "",
+     "imageHeight": "",
+     "onClick": "btnShowSeteiJoho",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
+    },
+    {
+     "fieldName": "KogakuServiceDetail",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KogakuServiceDetail",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "title": "",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "panelDisplay": 0,
+     "businessId": "DBZ",
+     "controlName": "KogakuServicehiDetail",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
+     "tplJudgementResult_title": "高額決定情報",
+     "tplKetteiJoho_visible": false,
+     "onClick_radPayMethod": "onClick_radPayMethod"
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "KogakuServicehiInfoPanel",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KogakuServicehiInfoPanel"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnReturnShowOne",
+     "requestUrl": "dbc/db/dbc/KogakuServicehiInfoPanel/onClick_btnReturnShowOne"
+    },
+    {
+     "eventName": "onClick_ShowDetail",
+     "requestUrl": "dbc/db/dbc/KogakuServicehiInfoPanel/onClick_ShowDetail"
+    },
+    {
+     "eventName": "onClick_radPayMethod",
+     "requestUrl": "dbc/db/dbc/KogakuServicehiInfoPanel/onClick_radPayMethod"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "onClick_ShowDetail",
+   "onClose": "",
+   "session": {},
+   "marginTop": "0",
+   "marginBottom": "0",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
+  },
+  {
+   "fieldName": "KanshoTsuchiHakkoPanel",
+   "items": [
+    {
+     "fieldName": "txtHakkoDate",
+     "items": [],
+     "controlType": "TextBoxDate",
+     "width": "90",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "txtHakkoDate_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
+     "required": false,
+     "placeHolder": "",
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "text": "",
+     "value": "",
+     "labelLText": "発行日",
+     "labelRText": "",
+     "labelLWidth": "48",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "ymdKubun": 2,
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
+    },
+    {
+     "fieldName": "btnHakko",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnHakko",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "勧奨通知を発行する",
+     "imageWidth": "",
+     "imageHeight": "",
+     "onClick": "onClick_btnPublish",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "KanshoTsuchiHakkoPanel",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "勧奨通知発行",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KanshoTsuchiHakkoPanel"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KanshoTsuchiHakkoPanel/onLoad"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "0",
+   "marginBottom": "0",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "高額介護サービス費照会",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "高額サービス費",
+   "showWizard": true,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KogakuServicehiInfoPanel",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KogakuJumin",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KogakuNushiJuminJoho",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "CommonButton",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KogakuServiceDetail",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "SearchKogakuHihokensha",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "SearchYM",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KanshoTsuchiHakkoPanel",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "CommonKogakuNushiJuminJohoChildDiv1",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "CommonKogakuKaigoJuminJohoChildDiv2",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnEndElement1",
+     "event": "onClick",
+     "transition": "終了"
+    }
+   ]
+  }
+ ],
+ "currentState": "All",
+ "id": "DBC0030012",
+ "WFParameter": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "showDetail",
+   "eventName": "KogakuServicehiInfoPanel.onOpen"
+  },
+  {
+   "alias": "btnShowSeteiJoho",
+   "eventName": "btnShowSeteiJoho.onClick"
+  },
+  {
+   "alias": "searchKogakuElement1",
+   "eventName": "searchKogakuElement1.onClick"
+  },
+  {
+   "alias": "btnReturnShowOneEle",
+   "eventName": "KogakuServicehiInfoPanel.onOpen"
+  },
+  {
+   "alias": "",
+   "eventName": ""
+  }
+ ],
+ "loadSequencePanelNames": [
+  [
+   "KogakuServicehiInfoPanel"
+  ],
+  [
+   "CommonKogakuNushiJuminJohoChildDiv1"
+  ],
+  [
+   "CommonKogakuKaigoJuminJohoChildDiv2"
+  ],
+  [
+   "KogakuServiceDetail"
+  ],
+  [
+   "KanshoTsuchiHakkoPanel"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "searchKogakuCba",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "searchKogakuElement1",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "searchKogakuElement1",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "一覧に"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnComplete",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "照会を"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "高額サービス費"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ]
+}

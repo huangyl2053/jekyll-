@@ -1,11 +1,11 @@
 ## YAML Template. dgKogakuServicehiRireki 高額介護サービス費一覧
 ---
--  hihoNo: "0000029068"           
-   hihoName:  介護 南魚       
-   teikyoYM:  平26.06.01        
+-  hihoNo: "0000000019"           
+   hihoName:  電算　太郎     
+   teikyoYM:  20140501        
    kogakuShikyuAmount: 37200
-   shinseiDate: 平26.07.01        
-   ketteiDate: 平26.08.01        
+   shinseiDate: 2140601        
+   ketteiDate: 20140701     
    shikyuKubun: 口座支給    
    shikyuKingaku: 37200
    kogakuAutoShokan: 介護高額自動償還

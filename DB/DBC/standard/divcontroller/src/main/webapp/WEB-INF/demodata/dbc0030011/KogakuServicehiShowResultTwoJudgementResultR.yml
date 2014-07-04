@@ -1,10 +1,38 @@
 ## YAML Template. KogakuServicehiShowResultTwoJudgementResultR dgJudgementResultL
 ---
 ##dgJudgementResultR	 判定結果
-- jigyosha: 介護事業者
+- jigyosha: 介護事業者1
   serviceShurui: サービス種類
-  serviceHiyoTotalAmount: 37,200  
-  riyoshaFutanTotalAmount: 37,200
-  santeiKijunAmount:  37,200
-  shiharaizumiAmount: 37,200 
-  kogakuShikyuAmount: 37,200
+  serviceHiyoTotalAmount: 57,200  
+  riyoshaFutanTotalAmount: 57,200
+  santeiKijunAmount:  57,200
+  shiharaizumiAmount: 57,200 
+  kogakuShikyuAmount: 57,200
+- jigyosha: 介護事業者2
+  serviceShurui: サービス種類
+  serviceHiyoTotalAmount: 57,200  
+  riyoshaFutanTotalAmount: 57,200
+  santeiKijunAmount:  57,200
+  shiharaizumiAmount: 57,200 
+  kogakuShikyuAmount: 57,200
+- jigyosha: 介護事業者3
+  serviceShurui: サービス種類
+  serviceHiyoTotalAmount: 57,200  
+  riyoshaFutanTotalAmount: 57,200
+  santeiKijunAmount:  57,200
+  shiharaizumiAmount: 57,200 
+  kogakuShikyuAmount: 57,200
+- jigyosha: 介護事業者4
+  serviceShurui: サービス種類
+  serviceHiyoTotalAmount: 57,200  
+  riyoshaFutanTotalAmount: 57,200
+  santeiKijunAmount:  57,200
+  shiharaizumiAmount: 57,200 
+  kogakuShikyuAmount: 57,200
+- jigyosha: 介護事業者5
+  serviceShurui: サービス種類
+  serviceHiyoTotalAmount: 57,200  
+  riyoshaFutanTotalAmount: 57,200
+  santeiKijunAmount:  57,200
+  shiharaizumiAmount: 57,200 
+  kogakuShikyuAmount: 57,200
