@@ -99,7 +99,7 @@ public class KogakuServicehiListPanel {
 
                 //提供年月
                 if (IsNullDate(searchpanel.getSearchKogakuHihokensha().getTxtTeikyoYMRange().getFromValue())) {
-                    teikyoYM = ymlDt.getAsRString("hihoName");
+                    teikyoYM = ymlDt.getAsRString("teikyoYM");
                 } else {
                     teikyoYM = searchpanel.getSearchKogakuHihokensha().getTxtTeikyoYMRange().getFromValue().toDateString();
                 }

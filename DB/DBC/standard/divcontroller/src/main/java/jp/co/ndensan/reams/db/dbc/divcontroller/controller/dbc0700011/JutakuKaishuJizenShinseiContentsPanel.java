@@ -116,22 +116,22 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 
         String 申請者区分key = panel.getJutakuKaishuJizenShinseisha().getDdlShinseishaKubun().getSelectedItem().toString();
 
-        switch (申請者区分key) {
-            case "myself":
-                disableJigyosha(panel.getJutakuKaishuJizenShinseisha());
-                setHonninInfo(panel.getJutakuKaishuJizenShinseisha(), hihoPanel.getKaigoAtena().getAtenaInfo());
-                break;
-            case "family":
-            case "other":
-            case "blank":
-                clearToShinseishaInfo(panel.getJutakuKaishuJizenShinseisha());
-                disableJigyosha(panel.getJutakuKaishuJizenShinseisha());
-                break;
-            case "serviceJigyosha":
-                clearToShinseishaInfo(panel.getJutakuKaishuJizenShinseisha());
-                ableJigyosha(panel.getJutakuKaishuJizenShinseisha());
-                break;
-        }
+//        switch (申請者区分key) {
+//            case "myself":
+//                disableJigyosha(panel.getJutakuKaishuJizenShinseisha());
+//                setHonninInfo(panel.getJutakuKaishuJizenShinseisha(), hihoPanel.getKaigoAtena().getAtenaInfo());
+//                break;
+//            case "family":
+//            case "other":
+//            case "blank":
+//                clearToShinseishaInfo(panel.getJutakuKaishuJizenShinseisha());
+//                disableJigyosha(panel.getJutakuKaishuJizenShinseisha());
+//                break;
+//            case "serviceJigyosha":
+//                clearToShinseishaInfo(panel.getJutakuKaishuJizenShinseisha());
+//                ableJigyosha(panel.getJutakuKaishuJizenShinseisha());
+//                break;
+//        }
         response.data = panel;
         return response;
     }
@@ -161,21 +161,21 @@ public class JutakuKaishuJizenShinseiContentsPanel {
         div.getTxtYubinNo().clearValue();
     }
 
-    private void disableJigyosha(ShinseishaInfoDiv div) {
-        div.getTxtJigyoshaNo().setDisabled(true);
-        div.getBtnJigyoshaInputGuide().setDisabled(true);
-        div.getTxtShinseishaNameKana().setLabelLText(new RString("氏名"));
-        div.getTxtShinseishaName().setReadOnly(false);
-        div.getTxtShinseishaNameKana().setReadOnly(false);
-    }
+//    private void disableJigyosha(ShinseishaInfoDiv div) {
+//        div.getTxtJigyoshaNo().setDisabled(true);
+//        div.getBtnJigyoshaInputGuide().setDisabled(true);
+//        div.getTxtShinseishaNameKana().setLabelLText(new RString("氏名"));
+//        div.getTxtShinseishaName().setReadOnly(false);
+//        div.getTxtShinseishaNameKana().setReadOnly(false);
+//    }
 
-    private void ableJigyosha(ShinseishaInfoDiv div) {
-        div.getTxtJigyoshaNo().setDisabled(false);
-        div.getBtnJigyoshaInputGuide().setDisabled(false);
-        div.getTxtShinseishaNameKana().setLabelLText(new RString("　　"));
-        div.getTxtShinseishaName().setReadOnly(true);
-        div.getTxtShinseishaNameKana().setReadOnly(true);
-    }
+//    private void ableJigyosha(ShinseishaInfoDiv div) {
+//        div.getTxtJigyoshaNo().setDisabled(false);
+//        div.getBtnJigyoshaInputGuide().setDisabled(false);
+//        div.getTxtShinseishaNameKana().setLabelLText(new RString("　　"));
+//        div.getTxtShinseishaName().setReadOnly(true);
+//        div.getTxtShinseishaNameKana().setReadOnly(true);
+//    }
 
     private void setHonninInfo(ShinseishaInfoDiv shinseishaDiv, AtenaShokaiSimpleDiv atenaDiv) {
         shinseishaDiv.getTxtShinseishaNameKana().setValue(atenaDiv.getTxtAtenaKanaMeisho().getValue());
