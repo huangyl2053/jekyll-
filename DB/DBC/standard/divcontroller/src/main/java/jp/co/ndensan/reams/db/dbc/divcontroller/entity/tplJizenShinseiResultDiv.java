@@ -36,8 +36,6 @@ public class tplJizenShinseiResultDiv extends TabPanel {
     private TextBoxMultiLine txtFushoninReason;
     @JsonProperty("chkResetInfo")
     private CheckBoxList chkResetInfo;
-    @JsonProperty("spTab2")
-    private Space spTab2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -113,16 +111,6 @@ public class tplJizenShinseiResultDiv extends TabPanel {
     @JsonProperty("chkResetInfo")
     public void setChkResetInfo(CheckBoxList chkResetInfo) {
         this.chkResetInfo=chkResetInfo;
-    }
-
-    @JsonProperty("spTab2")
-    public Space getSpTab2() {
-        return spTab2;
-    }
-
-    @JsonProperty("spTab2")
-    public void setSpTab2(Space spTab2) {
-        this.spTab2=spTab2;
     }
 
 }

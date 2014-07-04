@@ -100,11 +100,9 @@ public class JutakuKaishuShinseiPanel {
         ResponseData<JutakuKaishuShinseiPanelDiv> response = new ResponseData<>();
 
         //改修内容を反映する。
-        setZizenShinseiDetailInput(panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiDetail()
-                .getJutakuKaishuShinseiDetailInput());
+        setZizenShinseiDetailInput(panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiDetailInput());
         //TO DO
-        panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiDetail().
-                getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().
+        panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().
                 getBtnModifyDetail().setText(new RString("明細を修正する"));
 
         response.data = panel;
@@ -121,10 +119,8 @@ public class JutakuKaishuShinseiPanel {
     public ResponseData<JutakuKaishuShinseiPanelDiv> onClick_btnModifyDetail(JutakuKaishuShinseiPanelDiv panel) {
         ResponseData<JutakuKaishuShinseiPanelDiv> response = new ResponseData<>();
 
-        setModifiedDataToList(panel.getJutakuKaishuShinsaShinseiContents().
-                getJutakuKaishuShinseiDetail().getJutakuKaishuShinseiDetailInput(),
-                panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiDetail()
-                .getJutakuKaishuShinseiDetailInput().getDgJutakuKaishuDetail().getClickedRowId());
+        setModifiedDataToList(panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiDetailInput(),
+                panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiDetailInput().getDgJutakuKaishuDetail().getClickedRowId());
         //クリア設定
         setJutakuKaishuJizenShinseiAddDetailInput(panel);
 
@@ -175,7 +171,7 @@ public class JutakuKaishuShinseiPanel {
     private void setRowShikyuShinseiData(JutakuKaishuShinseiPanelDiv panel, dgMishinsaShikyuShinsei_Row selectedRow) {
 
         List<dgJutakuKaishuDetail_Row> arraydata = createRowShikyuShinseiTestData(panel, selectedRow);
-        DataGrid<dgJutakuKaishuDetail_Row> grid = panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiDetail().
+        DataGrid<dgJutakuKaishuDetail_Row> grid = panel.getJutakuKaishuShinsaShinseiContents().
                 getJutakuKaishuShinseiDetailInput().getDgJutakuKaishuDetail();
         grid.setDataSource(arraydata);
     }
@@ -340,22 +336,22 @@ public class JutakuKaishuShinseiPanel {
     private void setJutakuKaishuJizenShinseiAddDetailInput(JutakuKaishuShinseiPanelDiv panel) {
 
         //改修の内容をクリア
-        panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiDetail().
+        panel.getJutakuKaishuShinsaShinseiContents().
                 getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().getTxtKaishuContents()
                 .clearValue();
-        panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiDetail().
+        panel.getJutakuKaishuShinsaShinseiContents().
                 getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().getTxtKaishuJigyoshaName()
                 .clearValue();
-        panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiDetail().
+        panel.getJutakuKaishuShinsaShinseiContents().
                 getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().getTxtKaishuTaishoAddress()
                 .clearValue();
-        panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiDetail().
+        panel.getJutakuKaishuShinsaShinseiContents().
                 getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().getTxtChakkoDueDate()
                 .clearValue();
-        panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiDetail().
+        panel.getJutakuKaishuShinsaShinseiContents().
                 getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().getTxtKanseiDueDate()
                 .clearValue();
-        panel.getJutakuKaishuShinsaShinseiContents().getJutakuKaishuShinseiDetail().
+        panel.getJutakuKaishuShinsaShinseiContents().
                 getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().getTxtEstimatedAmount()
                 .clearValue();
 
