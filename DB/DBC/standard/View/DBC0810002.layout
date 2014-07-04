@@ -3038,7 +3038,7 @@
      ],
      "controlType": "TabContainer",
      "width": "1090",
-     "visible": true,
+     "visible": false,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
@@ -3067,7 +3067,7 @@
       "ShokanShikyuKetteiShomeishoShafuku"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuKetteiShomeishoKihon",
+     "selectedItemFieldName": "ShokanShikyuKetteiShomeishoShafuku",
      "initialTab": 0,
      "isLazyLoading": false
     }

@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.serviceInputGuide.dgSearc
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
@@ -25,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 public class ServiceInputGuide {
 
     private static final RString SERVICE_DATA_SOURCE = new RString("serviceInputGuide/serviceData.yml");
+    private static final RString SERVICE_MONTH_SOURCE = new RString("serviceInputGuide/serviceMonth.yml");
 
     /**
      *
@@ -34,7 +34,8 @@ public class ServiceInputGuide {
     public ResponseData onLoad(ServiceInputGuideDiv div) {
         ResponseData<ServiceInputGuideDiv> response = new ResponseData<>();
 
-        div.getTxtKijyunYM().setValue(new RDate(div.getServiceTaishoYM().toString()));
+        ControlGenerator cg = new ControlGenerator(YamlLoader.DBZ.loadAsList(SERVICE_MONTH_SOURCE).get(0));
+        div.getTxtKijyunYM().setValue(cg.getAsRDate("基準年月"));
         response.data = div;
         return response;
     }
@@ -87,9 +88,7 @@ public class ServiceInputGuide {
         dgSearchResultService_Row row = div.getSearchResultService().getDgSearchResultService().getClickedItem();
         div.setServiceCode(row.getServiceCode().getValue());
         div.setServiceMeisho(row.getServiceMeisho());
-        RString serviceCodeMeisho = row.getServiceCode().getValue().concat(new RString(":")).
-                concat(row.getServiceMeisho());
-        div.setServiceCodeMeisho(serviceCodeMeisho);
+        div.setServiceCodeMeisho(row.getServiceCode().getValue().concat(new RString(":")).concat(row.getServiceMeisho()));
 
         response.data = div;
         return response;

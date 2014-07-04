@@ -57,8 +57,8 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
         ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> response = new ResponseData<>();
 
         //今回設定
-        setSummaryNowData(resultPanel, contentsPanel.getJutakuKaishuJizenShinseiDetail()
-                .getJutakuJizenShinseiDetailInput().getDgJutakuKaishuDetail().getDataSource().get(0).getTxtMitsumoriAmount().getValue());
+        setSummaryNowData(resultPanel, contentsPanel.getJutakuJizenShinseiDetailInput()
+                .getDgJutakuKaishuDetail().getDataSource().get(0).getTxtMitsumoriAmount().getValue());
         response.data = resultPanel;
         return response;
 

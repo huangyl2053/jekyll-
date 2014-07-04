@@ -70,12 +70,12 @@ var DBC;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "decorationClass": "",
+                            "permitCharactor": "+-,.\\",
                             "maxValue": 1.7976931348623157e+308,
                             "minValue": 0,
                             "isCurrency": false,
                             "isComma": true,
-                            "decimalPointLength": 0,
-                            "permitCharactor": "+-,.\\"
+                            "decimalPointLength": 0
                         },
                         {
                             "fieldName": "txtHokengaku",
@@ -121,12 +121,12 @@ var DBC;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "decorationClass": "",
+                            "permitCharactor": "+-,.\\",
                             "maxValue": 1.7976931348623157e+308,
                             "minValue": 0,
                             "isCurrency": false,
                             "isComma": true,
-                            "decimalPointLength": 0,
-                            "permitCharactor": "+-,.\\"
+                            "decimalPointLength": 0
                         },
                         {
                             "fieldName": "txtFutangaku",
@@ -172,12 +172,12 @@ var DBC;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "decorationClass": "",
+                            "permitCharactor": "+-,.\\",
                             "maxValue": 1.7976931348623157e+308,
                             "minValue": 0,
                             "isCurrency": false,
                             "isComma": true,
-                            "decimalPointLength": 0,
-                            "permitCharactor": "+-,.\\"
+                            "decimalPointLength": 0
                         },
                         {
                             "fieldName": "txtRyoyohi",
@@ -223,12 +223,12 @@ var DBC;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "decorationClass": "",
+                            "permitCharactor": "+-,.\\",
                             "maxValue": 1.7976931348623157e+308,
                             "minValue": 0,
                             "isCurrency": false,
                             "isComma": true,
-                            "decimalPointLength": 0,
-                            "permitCharactor": "+-,.\\"
+                            "decimalPointLength": 0
                         },
                         {
                             "fieldName": "txtShinryohi",
@@ -274,12 +274,12 @@ var DBC;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "decorationClass": "",
+                            "permitCharactor": "+-,.\\",
                             "maxValue": 1.7976931348623157e+308,
                             "minValue": 0,
                             "isCurrency": false,
                             "isComma": true,
-                            "decimalPointLength": 0,
-                            "permitCharactor": "+-,.\\"
+                            "decimalPointLength": 0
                         },
                         {
                             "fieldName": "txtShokujihi",
@@ -325,12 +325,12 @@ var DBC;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "decorationClass": "",
+                            "permitCharactor": "+-,.\\",
                             "maxValue": 1.7976931348623157e+308,
                             "minValue": 0,
                             "isCurrency": false,
                             "isComma": true,
-                            "decimalPointLength": 0,
-                            "permitCharactor": "+-,.\\"
+                            "decimalPointLength": 0
                         },
                         {
                             "fieldName": "btnServiceTeikyoShomeishoGokeiReturn",
@@ -433,7 +433,7 @@ var DBC;
             "marginBottom": 0,
             "originalProperty": [],
             "dataPassingForDialog": [],
-            "dialogOkEventNameForDialog": "onClick_btnServiceTeikyoShomeishoGokeiReturn",
+            "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "onClick_btnServiceTeikyoShomeishoGokeiReturn",
             "canTransferEvent": true,
             "heightForDialog": "Auto"

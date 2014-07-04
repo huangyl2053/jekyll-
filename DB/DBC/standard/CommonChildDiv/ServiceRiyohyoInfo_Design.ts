@@ -438,6 +438,7 @@ module DBC {
             Uz.JSControlUtil.registProperty("onClickBtnCalcMeisai");
             Uz.JSControlUtil.registProperty("onClickBtnCalcGokei");
             Uz.JSControlUtil.registProperty("onBlurTxtSreviceCode");
+            Uz.JSControlUtil.registProperty("");
         }
         
         /**
@@ -686,7 +687,7 @@ module DBC {
      "selectControlID": "txtTaishoYM_core",
      "helpMessageID": "",
      "jpControlName": "",
-     "readOnly": true,
+     "readOnly": false,
      "required": false,
      "placeHolder": "",
      "isPrivateInfo": false,
@@ -3115,7 +3116,7 @@ module DBC {
              "controlName": "txtJigyoshaName"
             }
            ],
-           "visibleCloseButton": true,
+           "visibleCloseButton": false,
            "onOkClose": "",
            "onBeforeOpenDialog": ""
           },
@@ -3249,13 +3250,9 @@ module DBC {
             {
              "key": "serviceMeisho",
              "controlName": "txtServiceName"
-            },
-            {
-             "key": "serviceTaishoYM",
-             "controlName": "txtTaishoYM"
             }
            ],
-           "visibleCloseButton": true,
+           "visibleCloseButton": false,
            "onOkClose": "",
            "onBeforeOpenDialog": ""
           },
@@ -4704,6 +4701,11 @@ module DBC {
    "publicChildFieldName": "txtServiceCode",
    "publicChildProperty": "onBlur",
    "newPropertyName": "onBlurTxtSreviceCode"
+  },
+  {
+   "publicChildFieldName": "",
+   "publicChildProperty": "",
+   "newPropertyName": ""
   }
  ],
  "dataPassingForDialog": [],

@@ -82,88 +82,6 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto"
-  },
-  {
-   "fieldName": "JukyushaIdoRenrakuhyoComplete",
-   "items": [
-    {
-     "fieldName": "JukyushaIdoRenrakuhyoCompleteInfo",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "JukyushaIdoRenrakuhyoCompleteInfo",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "KaigoKanryoMessage",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "KanryoMessage_width": "G12"
-    }
-   ],
-   "controlType": "Panel",
-   "width": "G12",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
-   "selectControlID": "JukyushaIdoRenrakuhyoComplete",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "onLoad": "",
-   "title": "",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "JukyushaIdoRenrakuhyoComplete"
-    }
-   ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/JukyushaIdoRenrakuhyoComplete/onLoad"
-    }
-   ],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorder": true,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false,
-   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -204,27 +122,6 @@
    ],
    "validation": {},
    "events": []
-  },
-  {
-   "order": "2",
-   "stateName": "処理完了",
-   "showWizard": true,
-   "visibleDivs": [
-    {
-     "visibleDiv": "JukyushaIdoRenrakuhyoComplete",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "JukyushaIdoRenrakuhyoCompleteInfo",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": []
   }
  ],
  "currentState": "All",
@@ -246,12 +143,6 @@
   ],
   [
    "JukyushaIdoRenrakuhyo"
-  ],
-  [
-   "JukyushaIdoRenrakuhyoComplete"
-  ],
-  [
-   "JukyushaIdoRenrakuhyoCompleteInfo"
   ]
  ],
  "panelMargin": 1,

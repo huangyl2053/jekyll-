@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiDetailForTabDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiReasonDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiReasonForTabDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgJutakuKaishuJizenShinseiDetail_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfo.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
@@ -28,12 +28,12 @@ public class tplJizenShinseiContentsDiv extends TabPanel {
     private TextBox txtJutakuOwner;
     @JsonProperty("txtRelationWithHihokensha")
     private TextBox txtRelationWithHihokensha;
-    @JsonProperty("JutakuKaishuJizenShinseiDetailForTab")
-    private JutakuKaishuJizenShinseiDetailForTabDiv JutakuKaishuJizenShinseiDetailForTab;
+    @JsonProperty("dgJutakuKaishuJizenShinseiDetail")
+    private DataGrid<dgJutakuKaishuJizenShinseiDetail_Row> dgJutakuKaishuJizenShinseiDetail;
     @JsonProperty("JutakuKaishuJizenShinseisha")
     private ShinseishaInfoDiv JutakuKaishuJizenShinseisha;
-    @JsonProperty("JutakuKaishuJizenShinseiReason")
-    private JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason;
+    @JsonProperty("JutakuKaishuJizenShinseiReasonForTab")
+    private JutakuKaishuJizenShinseiReasonForTabDiv JutakuKaishuJizenShinseiReasonForTab;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -61,14 +61,14 @@ public class tplJizenShinseiContentsDiv extends TabPanel {
         this.txtRelationWithHihokensha=txtRelationWithHihokensha;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiDetailForTab")
-    public JutakuKaishuJizenShinseiDetailForTabDiv getJutakuKaishuJizenShinseiDetailForTab() {
-        return JutakuKaishuJizenShinseiDetailForTab;
+    @JsonProperty("dgJutakuKaishuJizenShinseiDetail")
+    public DataGrid<dgJutakuKaishuJizenShinseiDetail_Row> getDgJutakuKaishuJizenShinseiDetail() {
+        return dgJutakuKaishuJizenShinseiDetail;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiDetailForTab")
-    public void setJutakuKaishuJizenShinseiDetailForTab(JutakuKaishuJizenShinseiDetailForTabDiv JutakuKaishuJizenShinseiDetailForTab) {
-        this.JutakuKaishuJizenShinseiDetailForTab=JutakuKaishuJizenShinseiDetailForTab;
+    @JsonProperty("dgJutakuKaishuJizenShinseiDetail")
+    public void setDgJutakuKaishuJizenShinseiDetail(DataGrid<dgJutakuKaishuJizenShinseiDetail_Row> dgJutakuKaishuJizenShinseiDetail) {
+        this.dgJutakuKaishuJizenShinseiDetail=dgJutakuKaishuJizenShinseiDetail;
     }
 
     @JsonProperty("JutakuKaishuJizenShinseisha")
@@ -81,14 +81,14 @@ public class tplJizenShinseiContentsDiv extends TabPanel {
         this.JutakuKaishuJizenShinseisha=JutakuKaishuJizenShinseisha;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiReason")
-    public JutakuKaishuJizenShinseiReasonDiv getJutakuKaishuJizenShinseiReason() {
-        return JutakuKaishuJizenShinseiReason;
+    @JsonProperty("JutakuKaishuJizenShinseiReasonForTab")
+    public JutakuKaishuJizenShinseiReasonForTabDiv getJutakuKaishuJizenShinseiReasonForTab() {
+        return JutakuKaishuJizenShinseiReasonForTab;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiReason")
-    public void setJutakuKaishuJizenShinseiReason(JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason) {
-        this.JutakuKaishuJizenShinseiReason=JutakuKaishuJizenShinseiReason;
+    @JsonProperty("JutakuKaishuJizenShinseiReasonForTab")
+    public void setJutakuKaishuJizenShinseiReasonForTab(JutakuKaishuJizenShinseiReasonForTabDiv JutakuKaishuJizenShinseiReasonForTab) {
+        this.JutakuKaishuJizenShinseiReasonForTab=JutakuKaishuJizenShinseiReasonForTab;
     }
 
 }

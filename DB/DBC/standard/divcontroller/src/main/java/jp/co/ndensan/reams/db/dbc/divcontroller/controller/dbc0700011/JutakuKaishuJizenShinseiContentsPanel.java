@@ -71,12 +71,12 @@ public class JutakuKaishuJizenShinseiContentsPanel {
         ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
 
         //住宅改修明細
-        contentsPanel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
+        contentsPanel.getJutakuJizenShinseiDetailInput().
                 getDgJutakuKaishuDetail().setDataSource(
-                        getShikyuShinseiInputData(contentsPanel.getJutakuKaishuJizenShinseiDetail()
+                        getShikyuShinseiInputData(contentsPanel
                                 .getJutakuJizenShinseiDetailInput().getJutakuKaishuDetailInput()));
 
-        contentsPanel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().getDgJutakuKaishuDetail()
+        contentsPanel.getJutakuJizenShinseiDetailInput().getDgJutakuKaishuDetail()
                 .getDataSource().get(0).setRowState(RowState.Added);
 
         //クリア設定
@@ -91,7 +91,7 @@ public class JutakuKaishuJizenShinseiContentsPanel {
             JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
         ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
 
-        panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().getJutakuKaishuDetailInput()
+        panel.getJutakuJizenShinseiDetailInput().getJutakuKaishuDetailInput()
                 .getTxtKaishuTaishoAddress().setValue(
                         hihoPanel.getKaigoAtena().getAtenaInfo().getTxtJusho().getValue());
 
@@ -228,21 +228,21 @@ public class JutakuKaishuJizenShinseiContentsPanel {
         /////////////////////////////////////////////////////////////////////////////////////////
 
         //TO DO  JutakuData.xml Write　③
-        panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
+        panel.getJutakuJizenShinseiDetailInput().
                 getJutakuKaishuDetailInput().getTxtKaishuContents().setValue(new RString(kaishuContents));
 
-        panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
+        panel.getJutakuJizenShinseiDetailInput().
                 getJutakuKaishuDetailInput().getTxtKaishuJigyoshaName().setValue(new RString(kaishuJigyoshaName));
 
-        panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
+        panel.getJutakuJizenShinseiDetailInput().
                 getJutakuKaishuDetailInput().getTxtKaishuTaishoAddress().setValue(new RString(kaishuTaishoAddress1));
-        panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
+        panel.getJutakuJizenShinseiDetailInput().
                 getJutakuKaishuDetailInput().getTxtChakkoDueDate().setValue(new RDate(chakkoDueDate));
 
-        panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
+        panel.getJutakuJizenShinseiDetailInput().
                 getJutakuKaishuDetailInput().getTxtKanseiDueDate().setValue(new RDate(kanseiDueDate));
 
-        panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
+        panel.getJutakuJizenShinseiDetailInput().
                 getJutakuKaishuDetailInput().getTxtEstimatedAmount().setValue(new Decimal(estimatedAmount));
     }
 
@@ -335,23 +335,23 @@ public class JutakuKaishuJizenShinseiContentsPanel {
     private void setJutakuKaishuJizenShinseiDetailInput(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
 
         //改修の内容をクリア
-        panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
+        panel.getJutakuJizenShinseiDetailInput().
                 getJutakuKaishuDetailInput().getTxtKaishuContents().clearValue();
 
         //事業者の内容をクリア
-        panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
+        panel.getJutakuJizenShinseiDetailInput().
                 getJutakuKaishuDetailInput().getTxtKaishuJigyoshaName().clearValue();
         //着・完成日内容をクリア
-        panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
+        panel.getJutakuJizenShinseiDetailInput().
                 getJutakuKaishuDetailInput().getTxtKaishuTaishoAddress().clearValue();
         //着・完成日内容をクリア
-        panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
+        panel.getJutakuJizenShinseiDetailInput().
                 getJutakuKaishuDetailInput().getTxtChakkoDueDate().clearValue();
         //見積額をクリア
-        panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
+        panel.getJutakuJizenShinseiDetailInput().
                 getJutakuKaishuDetailInput().getTxtKanseiDueDate().clearValue();
 
-        panel.getJutakuKaishuJizenShinseiDetail().getJutakuJizenShinseiDetailInput().
+        panel.getJutakuJizenShinseiDetailInput().
                 getJutakuKaishuDetailInput().getTxtEstimatedAmount().clearValue();
     }
 }
