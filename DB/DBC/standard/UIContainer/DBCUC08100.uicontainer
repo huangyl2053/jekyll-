@@ -1,48 +1,66 @@
 ﻿{
  "transitionList": [
   {
-   "id": 1,
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0810000",
-   "eventName": "select",
+   "id": "1",
+   "layoutSubGyomuCode": "DBZ",
+   "layoutName": "DBZU020001",
+   "eventName": "decideToTaishosha",
    "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0810010",
-   "toEventName": "onOpen"
+   "toLayoutName": "DBC0810000",
+   "toEventName": ""
   },
   {
    "id": "2",
    "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0810010",
+   "layoutName": "DBC0810000",
+   "eventName": "research",
+   "toLayoutSubGyomuCode": "DBZ",
+   "toLayoutName": "DBZU020001",
+   "toEventName": "researchToTaishosha"
+  },
+  {
+   "id": 4,
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0810000",
+   "eventName": "select",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0810001",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "5",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0810001",
    "eventName": "return",
    "toLayoutSubGyomuCode": "DBC",
    "toLayoutName": "DBC0810000",
    "toEventName": ""
   },
   {
-   "id": 3,
+   "id": 6,
    "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0810010",
+   "layoutName": "DBC0810001",
    "eventName": "select",
    "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0810020",
+   "toLayoutName": "DBC0810002",
    "toEventName": "onOpen"
   },
   {
-   "id": "4",
+   "id": 7,
    "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0810020",
+   "layoutName": "DBC0810002",
    "eventName": "return",
    "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0810010",
+   "toLayoutName": "DBC0810001",
    "toEventName": ""
   },
   {
-   "id": "5",
+   "id": 8,
    "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0810010",
+   "layoutName": "DBC0810001",
    "eventName": "save",
    "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0810030",
+   "toLayoutName": "DBC0810003",
    "toEventName": "onOpen"
   }
  ],

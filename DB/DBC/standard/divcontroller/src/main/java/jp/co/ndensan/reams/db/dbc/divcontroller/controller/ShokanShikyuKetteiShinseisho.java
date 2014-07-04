@@ -148,11 +148,9 @@ public class ShokanShikyuKetteiShinseisho {
         ShokanShikyuKetteiKozaInfoMadoDiv mado = infoDiv.getShokanShikyuKetteiKozaInfoMado();
         ShokanShikyuKetteiKozaInfoKozaDiv koza = infoDiv.getShokanShikyuKetteiKozaInfoKoza();
 
-        ControlGenerator cg = new ControlGenerator(getYaml().get(12));
-        infoDiv.getTxtShinseiShiharaiKubun().setValue(cg.getAsRString("口座情報"));
-
         if (kozaJoho.equals(口座情報.窓口払)) {
-            cg = new ControlGenerator(getYaml().get(2));
+            ControlGenerator cg = new ControlGenerator(getYaml().get(2));
+            infoDiv.getTxtShinseiShiharaiKubun().setValue(cg.getAsRString("支払区分"));
             mado.getTxtShinseiShiharaiBasho().setValue(cg.getAsRString("支払場所"));
             mado.getTxtShinseiKaishiYMD().setValue(cg.getAsRDate("開始日"));
             mado.getTxtShinseiKaishiH().setValue(cg.getAsDecimal("開始時"));
@@ -161,7 +159,8 @@ public class ShokanShikyuKetteiShinseisho {
             mado.getTxtShinseiShuryoH().setValue(cg.getAsDecimal("終了時"));
             mado.getTxtShinseiShuryoM().setValue(cg.getAsDecimal("終了分"));
         } else {
-            cg = new ControlGenerator(getYaml().get(3));
+            ControlGenerator cg = new ControlGenerator(getYaml().get(3));
+            infoDiv.getTxtShinseiShiharaiKubun().setValue(cg.getAsRString("支払区分"));
             koza.getTxtShinseiKinyuKikanCode().setValue(cg.getAsRString("金融機関コード"));
             koza.getTxtShinseiShitenCode().setValue(cg.getAsRString("支店コード"));
             koza.getTxtShinseiKozaShubetsu().setValue(cg.getAsRString("口座種別"));
@@ -228,7 +227,7 @@ public class ShokanShikyuKetteiShinseisho {
 
         if (shikyuKubun.equals(支給区分.支給)) {
             ControlGenerator cg = new ControlGenerator(getYaml().get(9));
-            infoDiv.getTxtKetteiYMD().setValue(cg.getAsRDate("決定日"));
+//            infoDiv.getTxtKetteiYMD().setValue(cg.getAsRDate("決定日"));
             infoDiv.getTxtKetteiZogenTanisu().setValue(cg.getAsDecimal("増減単位数"));
             infoDiv.getTxtKetteiZogenRiyu().setValue(cg.getAsRString("増減理由"));
             infoDiv.getTxtKetteiFushikyuRiyu().clearValue();
@@ -238,10 +237,10 @@ public class ShokanShikyuKetteiShinseisho {
             infoDiv.getTxtKetteiSagakuGokei().setValue(cg.getAsDecimal("差額支払金額合計"));
         } else {
             ControlGenerator cg = new ControlGenerator(getYaml().get(10));
-            infoDiv.getTxtKetteiYMD().setValue(cg.getAsRDate("決定日"));
+//            infoDiv.getTxtKetteiYMD().setValue(cg.getAsRDate("決定日"));
             infoDiv.getTxtKetteiZogenTanisu().clearValue();
             infoDiv.getTxtKetteiZogenRiyu().clearValue();
-            infoDiv.getTxtKetteiFushikyuRiyu().setValue(cg.getAsRString("不支給理由"));
+//            infoDiv.getTxtKetteiFushikyuRiyu().setValue(cg.getAsRString("不支給理由"));
             infoDiv.getTxtKetteiShiharaiGokei().setValue(cg.getAsDecimal("支払金額合計"));
             infoDiv.getTxtKetteiHokenGokei().setValue(cg.getAsDecimal("保険請求額合計"));
             infoDiv.getTxtKetteiJikoGokei().setValue(cg.getAsDecimal("自己負担額合計"));
