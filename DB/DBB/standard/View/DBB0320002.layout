@@ -4016,12 +4016,13 @@
      "dgSetaishotokuOnSelect": "onClick_SetaiKakunin",
      "dgSetaishotokuDbClick": "onClick_SetaiKakunin",
      "dgSetaishotokuBySelectButton": "",
-     "ddlKazeiNendoDisplayNone": false,
+     "ddlKazeiNendoDisplayNone": true,
      "btnNarabeteHyoJiDisplayNone": false,
-     "txtSetaiCodeDisyplayNone": false,
-     "btnSaihyojiDisplayNone": false,
+     "txtSetaiCodeDisyplayNone": true,
+     "btnSaihyojiDisplayNone": true,
      "lblKijunYMDMsgVisible": true,
-     "lblKijunYMDMsgDisplayNone": false
+     "lblKijunYMDMsgDisplayNone": false,
+     "txtSetaiIchiranKazeiNendoDisplayNone": false
     }
    ],
    "controlType": "Panel",

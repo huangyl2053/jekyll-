@@ -628,9 +628,9 @@ public class FukaHikaku {
             kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku9().setText((RString) fuchoKibetsu.get(8));
             kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku10().setText((RString) fuchoKibetsu.get(9));
             kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku11().setText((RString) fuchoKibetsu.get(10));
-            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku11().setText((RString) fuchoKibetsu.get(11));
-            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku12().setText((RString) fuchoKibetsu.get(12));
-            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku13().setText((RString) fuchoKibetsu.get(13));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku12().setText((RString) fuchoKibetsu.get(11));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku13().setText((RString) fuchoKibetsu.get(12));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku14().setText((RString) fuchoKibetsu.get(13));
             kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGakuKei().setText((RString) fuchoKibetsu.get(14));
 
             List fuchoNofugaku = (List) kibetsugaku.get(3);
