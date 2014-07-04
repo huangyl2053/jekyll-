@@ -517,6 +517,7 @@ var DBC;
             Uz.JSControlUtil.registProperty("onClickBtnCalcMeisai");
             Uz.JSControlUtil.registProperty("onClickBtnCalcGokei");
             Uz.JSControlUtil.registProperty("onBlurTxtSreviceCode");
+            Uz.JSControlUtil.registProperty("");
         };
 
         ServiceRiyohyoInfo_Design.prototype.getEditablePropertyInfo = function () {
@@ -3189,7 +3190,7 @@ var DBC;
                                                             "controlName": "txtJigyoshaName"
                                                         }
                                                     ],
-                                                    "visibleCloseButton": true,
+                                                    "visibleCloseButton": false,
                                                     "onOkClose": "",
                                                     "onBeforeOpenDialog": ""
                                                 },
@@ -3323,13 +3324,9 @@ var DBC;
                                                         {
                                                             "key": "serviceMeisho",
                                                             "controlName": "txtServiceName"
-                                                        },
-                                                        {
-                                                            "key": "serviceTaishoYM",
-                                                            "controlName": "txtTaishoYM"
                                                         }
                                                     ],
-                                                    "visibleCloseButton": true,
+                                                    "visibleCloseButton": false,
                                                     "onOkClose": "",
                                                     "onBeforeOpenDialog": ""
                                                 },
@@ -4560,7 +4557,7 @@ var DBC;
                                 "ServiceRiyohyoBeppyo"
                             ],
                             "isDraggable": false,
-                            "selectedItemFieldName": "",
+                            "selectedItemFieldName": "ServiceRiyohyo",
                             "initialTab": 0,
                             "isLazyLoading": false
                         }
@@ -4778,6 +4775,11 @@ var DBC;
                     "publicChildFieldName": "txtServiceCode",
                     "publicChildProperty": "onBlur",
                     "newPropertyName": "onBlurTxtSreviceCode"
+                },
+                {
+                    "publicChildFieldName": "",
+                    "publicChildProperty": "",
+                    "newPropertyName": ""
                 }
             ],
             "dataPassingForDialog": [],
