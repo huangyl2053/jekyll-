@@ -1287,7 +1287,7 @@
      "eraseBorderLeft": false
     },
     {
-     "fieldName": "JutakuKaishuShinsaResultPanel",
+     "fieldName": "JutakuKaishuShinsaResult",
      "items": [
       {
        "fieldName": "spcShinsaResultTop",
@@ -1373,7 +1373,7 @@
          "value": "却下する"
         }
        ],
-       "selectedItem": null,
+       "selectedItem": "kyakka",
        "newLineItemNumber": 2,
        "spaceSize": "L",
        "disabledItem": []
@@ -1396,7 +1396,7 @@
        "selectControlID": "spcShinsaResultBottom",
        "helpMessageID": "",
        "jpControlName": "",
-       "spaceCount": "3"
+       "spaceCount": "2"
       }
      ],
      "controlType": "Panel",
@@ -1413,7 +1413,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "0",
-     "selectControlID": "JutakuKaishuShinsaResultPanel",
+     "selectControlID": "JutakuKaishuShinsaResult",
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
@@ -1422,7 +1422,7 @@
      "canOpenAndClose": false,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "JutakuKaishuShinsaResultPanel"
+       "postParameterPanelNames": "JutakuKaishuShinsaResult"
       }
      ],
      "requestSettings": [],
@@ -1598,7 +1598,7 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "JutakuKaishuShinsaResultPanel",
+     "visibleDiv": "JutakuKaishuShinsaResult",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -1647,7 +1647,7 @@
    "events": []
   }
  ],
- "currentState": "申請修正",
+ "currentState": "All",
  "id": "DBC0720012",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -1705,7 +1705,7 @@
    "JutakuKaishuShinseiKyufugakuSummary"
   ],
   [
-   "JutakuKaishuShinsaResultPanel"
+   "JutakuKaishuShinsaResult"
   ]
  ],
  "panelMargin": 1,
