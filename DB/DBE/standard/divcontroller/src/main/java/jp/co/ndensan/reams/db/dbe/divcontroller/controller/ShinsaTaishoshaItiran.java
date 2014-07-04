@@ -124,6 +124,7 @@ public class ShinsaTaishoshaItiran {
         RString shinseiKubun = cg.getAsRString("申請区分");
         RString seinenGappi = cg.getAsRString("生年月日");
         RString nenrei = cg.getAsRString("年齢");
+        RString zenIchiji = cg.getAsRString("前回一次");
 
         TextBoxFlexibleDate startDate = toTextBoxFlexibleDate(new FlexibleDate(RString.EMPTY));
         TextBoxFlexibleDate endDate = toTextBoxFlexibleDate(new FlexibleDate(RString.EMPTY));
@@ -131,7 +132,7 @@ public class ShinsaTaishoshaItiran {
         dgShinsaTaishoshaIchiran_Row row = new dgShinsaTaishoshaIchiran_Row(btn, no, hokenshaNo, shichoson,
                 hihoban, shimei, kanaShimei, sex, shinseiDate, zenYokaigodo, zenYukokikan, zenStartDate, zenEndDate, ichijiHantei,
                 RString.EMPTY, RString.EMPTY, startDate, endDate, shinseiKubun, seinenGappi, nenrei, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY);
+                RString.EMPTY, RString.EMPTY, zenIchiji);
         return row;
     }
 

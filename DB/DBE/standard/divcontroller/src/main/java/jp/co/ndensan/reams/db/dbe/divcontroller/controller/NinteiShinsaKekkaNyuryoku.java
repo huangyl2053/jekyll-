@@ -55,7 +55,9 @@ public class NinteiShinsaKekkaNyuryoku {
         div.getHihokenshaJoho().getTxtNenrei().setValue(dataRow.getNenrei());
 //        div.getHihokenshaJoho().getTxtShinseiKubun().setValue(dataRow.getShinseiKubun());
 //        div.getHihokenshaJoho().getTxtNinteiShinseiYMD().setValue(dataRow.getShinseibi().getValue());
-        div.getHihokenshaJoho().getTxtShinseiKubun().setDisplayNone(true);
+//        div.getHihokenshaJoho().getTxtShinseiKubun().setDisplayNone(true);
+        div.getHihokenshaJoho().getTxtShinseiKubun().setLabelLText(new RString("前回一次"));
+        div.getHihokenshaJoho().getTxtShinseiKubun().setValue(dataRow.getBeforeIchiji());
         div.getHihokenshaJoho().getTxtNinteiShinseiYMD().setDisplayNone(true);
         div.getHihokenshaJoho().getTxtZenkaiYokaigodo().setValue(dataRow.getBeforeYokaigodo());
         div.getHihokenshaJoho().getTxtZenYukokikanStart().setValue(dataRow.getBeforeYukoStartDate().getValue());
