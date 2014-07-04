@@ -31,7 +31,7 @@
    "id": "3",
    "layoutSubGyomuCode": "DBB",
    "layoutName": "DBB0320003",
-   "eventName": "fukaShokai",
+   "eventName": "fukaRireki",
    "toLayoutSubGyomuCode": "DBB",
    "toLayoutName": "DBB0320001",
    "toEventName": ""
@@ -52,6 +52,15 @@
    "eventName": "fukaShokai",
    "toLayoutSubGyomuCode": "DBB",
    "toLayoutName": "DBB0320001",
+   "toEventName": ""
+  },
+  {
+   "id": "6",
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320003",
+   "eventName": "fukaShokai",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320002",
    "toEventName": ""
   }
  ],
