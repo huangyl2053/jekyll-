@@ -10,25 +10,23 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * JutakuKaishuShinsaResult のクラスファイル 
+ * YoguShinsaShoninPanel のクラスファイル 
  * 
  * @author 自動生成
  */
-public class JutakuKaishuShinsaResultDiv extends Panel {
+public class YoguShinsaShoninPanelDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("spcShinsaResultTop")
-    private Space spcShinsaResultTop;
     @JsonProperty("lblShinseiContents")
     private Label lblShinseiContents;
     @JsonProperty("radShonin")
     private RadioButton radShonin;
-    @JsonProperty("spcShinsaResultBottom")
-    private Space spcShinsaResultBottom;
+    @JsonProperty("spcShinsaResult")
+    private Space spcShinsaResult;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,16 +34,6 @@ public class JutakuKaishuShinsaResultDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("spcShinsaResultTop")
-    public Space getSpcShinsaResultTop() {
-        return spcShinsaResultTop;
-    }
-
-    @JsonProperty("spcShinsaResultTop")
-    public void setSpcShinsaResultTop(Space spcShinsaResultTop) {
-        this.spcShinsaResultTop=spcShinsaResultTop;
-    }
-
     @JsonProperty("lblShinseiContents")
     public Label getLblShinseiContents() {
         return lblShinseiContents;
@@ -66,14 +54,14 @@ public class JutakuKaishuShinsaResultDiv extends Panel {
         this.radShonin=radShonin;
     }
 
-    @JsonProperty("spcShinsaResultBottom")
-    public Space getSpcShinsaResultBottom() {
-        return spcShinsaResultBottom;
+    @JsonProperty("spcShinsaResult")
+    public Space getSpcShinsaResult() {
+        return spcShinsaResult;
     }
 
-    @JsonProperty("spcShinsaResultBottom")
-    public void setSpcShinsaResultBottom(Space spcShinsaResultBottom) {
-        this.spcShinsaResultBottom=spcShinsaResultBottom;
+    @JsonProperty("spcShinsaResult")
+    public void setSpcShinsaResult(Space spcShinsaResult) {
+        this.spcShinsaResult=spcShinsaResult;
     }
 
 }

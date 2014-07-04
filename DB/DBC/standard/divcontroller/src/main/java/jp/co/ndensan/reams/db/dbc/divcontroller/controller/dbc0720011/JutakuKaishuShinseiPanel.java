@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.controller.PaymentMethod;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinsaResultDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailInput.JutakuKaishuShinseiDetailInputDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.MishinsaShikyuShinseiListPanelDiv;
@@ -82,6 +83,8 @@ public class JutakuKaishuShinseiPanel {
 
         //事前申請内容の情報を表示する。
         setInfoData(panel, selectedRow, ymlDataName);
+
+        set承認区分(panel.getJutakuKaishuShinsaResult());
 
         response.data = panel;
         return response;
@@ -358,9 +361,13 @@ public class JutakuKaishuShinseiPanel {
 
     }
 
+    private void set承認区分(JutakuKaishuShinsaResultDiv div) {
+        div.getRadShonin().setSelectedItem(new RString("kyakka"));
+    }
     /*
      * YML DATA
      */
+
     private List<HashMap> ymlData(String ymlDataName) {
         return YamlLoader.DBC.loadAsList(new RString("dbc0720011/" + ymlDataName));
     }

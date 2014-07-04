@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.YoguShinsaKufugakuSummarySubDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.YoguShinsaShoninDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -23,8 +22,6 @@ public class YoguShinsaKufugakuSummaryPanelDiv extends Panel {
      */
     @JsonProperty("YoguShinsaKufugakuSummarySub")
     private YoguShinsaKufugakuSummarySubDiv YoguShinsaKufugakuSummarySub;
-    @JsonProperty("YoguShinsaShonin")
-    private YoguShinsaShoninDiv YoguShinsaShonin;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,16 +37,6 @@ public class YoguShinsaKufugakuSummaryPanelDiv extends Panel {
     @JsonProperty("YoguShinsaKufugakuSummarySub")
     public void setYoguShinsaKufugakuSummarySub(YoguShinsaKufugakuSummarySubDiv YoguShinsaKufugakuSummarySub) {
         this.YoguShinsaKufugakuSummarySub=YoguShinsaKufugakuSummarySub;
-    }
-
-    @JsonProperty("YoguShinsaShonin")
-    public YoguShinsaShoninDiv getYoguShinsaShonin() {
-        return YoguShinsaShonin;
-    }
-
-    @JsonProperty("YoguShinsaShonin")
-    public void setYoguShinsaShonin(YoguShinsaShoninDiv YoguShinsaShonin) {
-        this.YoguShinsaShonin=YoguShinsaShonin;
     }
 
 }

@@ -131,35 +131,15 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "ShokanShikyuKetteiShinseishoListInfo_ShokanShikyuShinseishoList_dgShokanShikyuShinseishoList",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "ShokanShikyuKetteiShinseishoListInfo_ShokanShikyuShinseishoList_dgShokanShikyuShinseishoList",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnShomeishoReturn",
+     "fieldName": "btnComplete",
      "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "ShokanShikyuKetteiShomeishoListInfo_ServiceTeikyoShomeishoList_dgServiceTeikyoShomeishoList[btnSelect]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKetteiReturn",
-     "event": "onClick",
-     "transition": ""
+     "transition": "終了"
     }
    ]
   }
  ],
  "currentState": "All",
- "id": "DBC0810030",
+ "id": "DBC0810003",
  "WFParameter": [],
  "UIContainerEventMapping": [
   {

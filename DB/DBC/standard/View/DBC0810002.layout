@@ -148,7 +148,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -246,7 +246,7 @@
      "labelRAlign": 0,
      "decorationClass": "",
      "permitCharactor": "",
-     "formatLength": 8
+     "formatLength": "10"
     },
     {
      "fieldName": "txtShomeishoJigyoshaName",
@@ -528,7 +528,7 @@
            "labelRAlign": 0,
            "decorationClass": "",
            "permitCharactor": "",
-           "formatLength": 8
+           "formatLength": "10"
           },
           {
            "fieldName": "txtShomeishoKihonJigyoshaName",
@@ -1228,10 +1228,16 @@
          "MeisaiListGridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
+          "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
           "header": {
            "combineColumns": [],
            "frozenColumn": "",
@@ -1306,7 +1312,7 @@
             "dataName": "txtService",
             "toolTip": "",
             "bgColor": 0,
-            "width": 260,
+            "width": 390,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1379,7 +1385,7 @@
            }
           ]
          },
-         "MeisaiListHeight": "192",
+         "MeisaiListHeight": "277",
          "MeisaiListOnSelect": "",
          "MeisaiListOnSelectByDblClick": ""
         }
@@ -1444,10 +1450,16 @@
          "MeisaiListGridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
+          "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
           "header": {
            "combineColumns": [],
            "frozenColumn": "",
@@ -1522,7 +1534,7 @@
             "dataName": "txtShoteiShikkanName",
             "toolTip": "",
             "bgColor": 0,
-            "width": 200,
+            "width": 190,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1570,7 +1582,7 @@
             "dataName": "txtKinkyujiName",
             "toolTip": "",
             "bgColor": 0,
-            "width": 200,
+            "width": 190,
             "visible": true,
             "cellType": 0,
             "cellDetails": null,
@@ -1623,7 +1635,7 @@
            }
           ]
          },
-         "MeisaiListHeight": "159",
+         "MeisaiListHeight": "277",
          "MeisaiListOnSelect": "",
          "MeisaiListOnSelectByDblClick": ""
         }
@@ -1688,10 +1700,16 @@
          "MeisaiListGridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
+          "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
           "header": {
            "combineColumns": [],
            "frozenColumn": "",
@@ -1766,7 +1784,7 @@
             "dataName": "txtShobyoName",
             "toolTip": "",
             "bgColor": 0,
-            "width": 310,
+            "width": 440,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1839,7 +1857,7 @@
            }
           ]
          },
-         "MeisaiListHeight": "125",
+         "MeisaiListHeight": "277",
          "MeisaiListOnSelect": "",
          "MeisaiListOnSelectByDblClick": ""
         }
@@ -1904,10 +1922,16 @@
          "MeisaiListGridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
+          "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
           "header": {
            "combineColumns": [],
            "frozenColumn": "",
@@ -1982,7 +2006,7 @@
             "dataName": "txtService",
             "toolTip": "",
             "bgColor": 0,
-            "width": 350,
+            "width": 620,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -2041,7 +2065,7 @@
            }
           ]
          },
-         "MeisaiListHeight": "125",
+         "MeisaiListHeight": "277",
          "MeisaiListOnSelect": "",
          "MeisaiListOnSelectByDblClick": ""
         }
@@ -2106,10 +2130,16 @@
          "MeisaiListGridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
+          "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
           "header": {
            "combineColumns": [],
            "frozenColumn": "",
@@ -2184,7 +2214,7 @@
             "dataName": "txtService",
             "toolTip": "",
             "bgColor": 0,
-            "width": 260,
+            "width": 390,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -2257,7 +2287,7 @@
            }
           ]
          },
-         "MeisaiListHeight": "125",
+         "MeisaiListHeight": "277",
          "MeisaiListOnSelect": "",
          "MeisaiListOnSelectByDblClick": ""
         }
@@ -2322,10 +2352,16 @@
          "MeisaiListGridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
+          "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
           "header": {
            "combineColumns": [],
            "frozenColumn": "",
@@ -2400,7 +2436,7 @@
             "dataName": "txtServiceShurui",
             "toolTip": "",
             "bgColor": 0,
-            "width": 200,
+            "width": 330,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -2487,7 +2523,7 @@
            }
           ]
          },
-         "MeisaiListHeight": "175",
+         "MeisaiListHeight": "277",
          "MeisaiListOnSelect": "",
          "MeisaiListOnSelectByDblClick": ""
         }
@@ -2552,10 +2588,16 @@
          "MeisaiListGridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
+          "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
           "header": {
            "combineColumns": [],
            "frozenColumn": "",
@@ -2630,7 +2672,7 @@
             "dataName": "txtService",
             "toolTip": "",
             "bgColor": 0,
-            "width": 210,
+            "width": 340,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -2731,7 +2773,7 @@
            }
           ]
          },
-         "MeisaiListHeight": "142",
+         "MeisaiListHeight": "277",
          "MeisaiListOnSelect": "",
          "MeisaiListOnSelectByDblClick": ""
         }
@@ -2796,10 +2838,16 @@
          "MeisaiListGridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
+          "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
           "header": {
            "combineColumns": [],
            "frozenColumn": "",
@@ -2874,7 +2922,7 @@
             "dataName": "txtShurui",
             "toolTip": "",
             "bgColor": 0,
-            "width": 150,
+            "width": 280,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -2961,7 +3009,7 @@
            }
           ]
          },
-         "MeisaiListHeight": "142",
+         "MeisaiListHeight": "277",
          "MeisaiListOnSelect": "",
          "MeisaiListOnSelectByDblClick": ""
         }
@@ -2990,7 +3038,7 @@
      ],
      "controlType": "TabContainer",
      "width": "1090",
-     "visible": true,
+     "visible": false,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
@@ -3019,7 +3067,7 @@
       "ShokanShikyuKetteiShomeishoShafuku"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuKetteiShomeishoKihon",
+     "selectedItemFieldName": "ShokanShikyuKetteiShomeishoShafuku",
      "initialTab": 0,
      "isLazyLoading": false
     }
@@ -3218,7 +3266,7 @@
   }
  ],
  "currentState": "All",
- "id": "DBC0810020",
+ "id": "DBC0810002",
  "WFParameter": [],
  "UIContainerEventMapping": [
   {

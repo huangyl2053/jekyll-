@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinsaResetInfoResultDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinsaResetInfoSummaryDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -23,8 +22,6 @@ public class JutakuKaishuShinsaResetInfoDiv extends Panel {
      */
     @JsonProperty("JutakuKaishuShinsaResetInfoSummary")
     private JutakuKaishuShinsaResetInfoSummaryDiv JutakuKaishuShinsaResetInfoSummary;
-    @JsonProperty("JutakuKaishuShinsaResetInfoResult")
-    private JutakuKaishuShinsaResetInfoResultDiv JutakuKaishuShinsaResetInfoResult;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,16 +37,6 @@ public class JutakuKaishuShinsaResetInfoDiv extends Panel {
     @JsonProperty("JutakuKaishuShinsaResetInfoSummary")
     public void setJutakuKaishuShinsaResetInfoSummary(JutakuKaishuShinsaResetInfoSummaryDiv JutakuKaishuShinsaResetInfoSummary) {
         this.JutakuKaishuShinsaResetInfoSummary=JutakuKaishuShinsaResetInfoSummary;
-    }
-
-    @JsonProperty("JutakuKaishuShinsaResetInfoResult")
-    public JutakuKaishuShinsaResetInfoResultDiv getJutakuKaishuShinsaResetInfoResult() {
-        return JutakuKaishuShinsaResetInfoResult;
-    }
-
-    @JsonProperty("JutakuKaishuShinsaResetInfoResult")
-    public void setJutakuKaishuShinsaResetInfoResult(JutakuKaishuShinsaResetInfoResultDiv JutakuKaishuShinsaResetInfoResult) {
-        this.JutakuKaishuShinsaResetInfoResult=JutakuKaishuShinsaResetInfoResult;
     }
 
 }
