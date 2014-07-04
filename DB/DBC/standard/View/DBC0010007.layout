@@ -201,6 +201,11 @@
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -230,8 +235,8 @@
      "selectControlID": "btnShakaiFukushiHojinKeigengakuClose",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "",
      "text": "給付実績照会に戻る",
+     "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -316,7 +321,7 @@
   {
    "order": "1",
    "stateName": "社会福祉法人軽減額",
-   "showWizard": false,
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "ShakaiFukushiHojinKeigengaku",
