@@ -54,15 +54,15 @@ public class JutakuKaishuJizenShinseiTab {
         panel.getTabJizenShinsei().getTplJizenShinseiContents().getTxtJutakuOwner().setValue(cg.getAsRString("jutakuOwner"));
         panel.getTabJizenShinsei().getTplJizenShinseiContents().getTxtRelationWithHihokensha().setValue(cg.getAsRString("relationWithHihokensha"));
 
-        panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseiReason()
+        panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseiReasonForTab()
                 .getTxtCreateDate().setValue(cg.getAsRDate("createDate"));
-        panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseiReason()
+        panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseiReasonForTab()
                 .getTxtCreatorKanaName().setValue(cg.getAsRString("creatorKanaName"));
-        panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseiReason()
+        panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseiReasonForTab()
                 .getTxtCreatorName().setValue(cg.getAsRString("creatorName"));
-        panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseiReason()
+        panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseiReasonForTab()
                 .getTxtCreationJigyoshaNo().setValue(cg.getAsRString("creationJigyoshaNo"));
-        panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseiReason()
+        panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseiReasonForTab()
                 .getTxtCreationJigyoshaName().setValue(cg.getAsRString("creationJigyoshaName"));
     }
 
@@ -94,7 +94,7 @@ public class JutakuKaishuJizenShinseiTab {
     }
 
     private void set住宅改修明細List(JutakuKaishuJizenShinseiTabDiv panel) {
-        panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseiDetailForTab()
+        panel.getTabJizenShinsei().getTplJizenShinseiContents()
                 .getDgJutakuKaishuJizenShinseiDetail().setDataSource(get住宅改修明細List());
     }
 

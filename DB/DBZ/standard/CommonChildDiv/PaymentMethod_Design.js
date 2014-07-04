@@ -474,7 +474,7 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
+                            "marginLeft": "XS",
                             "marginRight": "0",
                             "selectControlID": "KozaPayment",
                             "helpMessageID": "",

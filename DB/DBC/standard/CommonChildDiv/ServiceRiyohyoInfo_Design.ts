@@ -687,7 +687,7 @@ module DBC {
      "selectControlID": "txtTaishoYM_core",
      "helpMessageID": "",
      "jpControlName": "",
-     "readOnly": true,
+     "readOnly": false,
      "required": false,
      "placeHolder": "",
      "isPrivateInfo": false,
@@ -4483,7 +4483,7 @@ module DBC {
       "ServiceRiyohyoBeppyo"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ServiceRiyohyo",
+     "selectedItemFieldName": "",
      "initialTab": 0,
      "isLazyLoading": false
     }
