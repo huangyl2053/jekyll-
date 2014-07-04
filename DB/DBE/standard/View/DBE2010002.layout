@@ -179,7 +179,7 @@
          "fieldName": "dgChosaItakusakiList",
          "items": [],
          "controlType": "DataGrid",
-         "width": "565",
+         "width": "315",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -223,11 +223,11 @@
           },
           "columns": [
            {
-            "columnName": "番号",
+            "columnName": "番号<br>",
             "dataName": "chosaItakusakiNo",
             "toolTip": "",
             "bgColor": 0,
-            "width": 100,
+            "width": 80,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -240,11 +240,11 @@
             "sortKey": "chosaItakusakiNo"
            },
            {
-            "columnName": "名称",
+            "columnName": "名称<br>",
             "dataName": "chosaItakusakiName",
             "toolTip": "",
             "bgColor": 0,
-            "width": 150,
+            "width": 160,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -262,7 +262,7 @@
             "toolTip": "",
             "bgColor": 0,
             "width": 70,
-            "visible": true,
+            "visible": false,
             "cellType": 0,
             "cellDetails": {
              "cellType": 0,
@@ -274,11 +274,11 @@
             "sortKey": "waritsukeTeiin"
            },
            {
-            "columnName": "割付数",
+            "columnName": "割付数<br>",
             "dataName": "waritsukeNum",
             "toolTip": "",
             "bgColor": 0,
-            "width": 70,
+            "width": 55,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -296,7 +296,7 @@
             "toolTip": "",
             "bgColor": 0,
             "width": 150,
-            "visible": true,
+            "visible": false,
             "cellType": 0,
             "cellDetails": {
              "cellType": 0,
@@ -325,7 +325,7 @@
         }
        ],
        "controlType": "Panel",
-       "width": "575",
+       "width": "330",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -2635,7 +2635,7 @@
   {
    "order": "1",
    "stateName": "依頼先手動登録",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "NinteichosaIraiByHand",
@@ -2695,12 +2695,7 @@
  "currentState": "All",
  "id": "DBE2010002",
  "WFParameter": [],
- "UIContainerEventMapping": [
-  {
-   "alias": "toReturn",
-   "eventName": "btnToRrturn.onClick"
-  }
- ],
+ "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
    "NinteichosaIraiByHand"
@@ -2735,7 +2730,7 @@
     {
      "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
-      "fieldName": "btToRegister",
+      "fieldName": "btnCommonSaveChosaIrai",
       "items": [],
       "controlType": "CommonButtonUpdate",
       "width": 1,
@@ -2751,10 +2746,10 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btToRegister",
+      "selectControlID": "btnCommonSaveChosaIrai",
       "helpMessageID": "",
       "jpControlName": "",
-      "onClick": "",
+      "onClick": "onClick_btnCommonSaveChosaIrai",
       "text": "更新",
       "appearance": 0,
       "imageFileUrl": "",
@@ -2764,39 +2759,6 @@
       "heightTextBoxMatches": false,
       "additionalText": "この内容で"
      }
-    },
-    {
-     "buttonKind": "CommonButtonBack",
-     "buttonProperty": {
-      "fieldName": "btnToRrturn",
-      "items": [],
-      "controlType": "CommonButtonNext",
-      "width": 1,
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnToRrturn",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "onClick": "onClick_btnToReturn",
-      "text": "戻る",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": ""
-     }
     }
    ],
    "states": [
@@ -2804,7 +2766,9 @@
      "state": "依頼先手動登録"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

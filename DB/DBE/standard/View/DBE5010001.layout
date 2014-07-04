@@ -41,14 +41,14 @@
      "isPassword": false,
      "onKeyPress": "",
      "value": "",
-     "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
      "suggest": [],
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtGogitai",
@@ -87,14 +87,14 @@
      "isPassword": false,
      "onKeyPress": "",
      "value": "",
-     "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
      "suggest": [],
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtYoteiTeiin",
@@ -133,7 +133,6 @@
      "isPassword": false,
      "onKeyPress": "",
      "value": "",
-     "permitCharactor": "+-,.\\",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 2,
@@ -141,6 +140,7 @@
      "isComboBox": false,
      "suggest": [],
      "decorationClass": "",
+     "permitCharactor": "+-,.\\",
      "maxValue": 1.7976931348623157e+308,
      "minValue": 0,
      "isCurrency": false,
@@ -184,7 +184,6 @@
      "isPassword": false,
      "onKeyPress": "",
      "value": "",
-     "permitCharactor": "+-,.\\",
      "maxLength": "3",
      "minLength": "1",
      "textAlign": 2,
@@ -192,6 +191,7 @@
      "isComboBox": false,
      "suggest": [],
      "decorationClass": "",
+     "permitCharactor": "+-,.\\",
      "maxValue": 1.7976931348623157e+308,
      "minValue": 0,
      "isCurrency": false,
@@ -237,13 +237,13 @@
      "ymdKubun": 2,
      "displayFormat": 0,
      "value": "",
-     "permitCharactor": "./_-",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtYoteiStartTime",
@@ -283,7 +283,6 @@
      "onKeyPress": "",
      "displayFormat": 1,
      "value": "",
-     "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -291,6 +290,7 @@
      "isComboBox": false,
      "suggest": [],
      "decorationClass": "",
+     "permitCharactor": "",
      "timeKubun": 1
     },
     {
@@ -357,7 +357,6 @@
      "onKeyPress": "",
      "displayFormat": 1,
      "value": "",
-     "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -365,6 +364,7 @@
      "isComboBox": false,
      "suggest": [],
      "decorationClass": "",
+     "permitCharactor": "",
      "timeKubun": 1
     },
     {
@@ -404,14 +404,14 @@
      "isPassword": false,
      "onKeyPress": "",
      "value": "",
-     "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
      "suggest": [],
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtKaisaiBi",
@@ -452,13 +452,13 @@
      "ymdKubun": 2,
      "displayFormat": 0,
      "value": "",
-     "permitCharactor": "./_-",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtKaisaiStartTime",
@@ -498,7 +498,6 @@
      "onKeyPress": "",
      "displayFormat": 1,
      "value": "",
-     "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -506,6 +505,7 @@
      "isComboBox": false,
      "suggest": [],
      "decorationClass": "",
+     "permitCharactor": "",
      "timeKubun": 1
     },
     {
@@ -572,7 +572,6 @@
      "onKeyPress": "",
      "displayFormat": 1,
      "value": "",
-     "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -580,6 +579,7 @@
      "isComboBox": false,
      "suggest": [],
      "decorationClass": "",
+     "permitCharactor": "",
      "timeKubun": 1
     },
     {
@@ -1014,7 +1014,7 @@
        "fieldName": "btnIinRegister",
        "items": [],
        "controlType": "Button",
-       "width": "160",
+       "width": "170",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1043,7 +1043,7 @@
        "fieldName": "btnIinCancel",
        "items": [],
        "controlType": "Button",
-       "width": "160",
+       "width": "170",
        "visible": true,
        "displayNone": false,
        "disabled": false,
