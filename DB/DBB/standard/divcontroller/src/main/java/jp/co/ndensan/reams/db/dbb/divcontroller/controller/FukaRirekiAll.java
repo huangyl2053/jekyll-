@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class FukaRirekiAll {
 
-    private static final RString FUKARIREKIALL = new RString("FukaRirekiAll.yml");
+    private static final RString FUKARIREKIALL = new RString("DBB0320001/FukaRirekiAll.yml");
 
     /**
      * 介護保険料賦課照会の初回ロード時に実行

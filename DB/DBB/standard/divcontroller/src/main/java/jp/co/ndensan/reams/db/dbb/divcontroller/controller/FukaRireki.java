@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class FukaRireki {
 
-    private static final RString FUKARIREKI = new RString("FukaRireki.yml");
+    private static final RString FUKARIREKI = new RString("DBB0320001/FukaRireki.yml");
 
     public ResponseData<FukaRirekiDiv> onSelect(FukaRirekiDiv rirekiDiv, FukaRirekiAllDiv rirekiAllDiv, AtenaJohoDiv atenajoho) {
 

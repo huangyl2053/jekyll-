@@ -50,10 +50,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class FukaHikaku {
 
-    private static final RString FUKARIREKIALL = new RString("FukaRirekiAll.yml");
-    private static final RString FUKARIREKI = new RString("FukaRireki.yml");
-    private static final RString FUKAKONKYO = new RString("FukaKonkyo.yml");
-    private static final RString SETAISHOTOKU = new RString("SetaiShotoku.yml");
+    private static final RString FUKARIREKIALL = new RString("DBB0320001/FukaRirekiAll.yml");
+    private static final RString FUKARIREKI = new RString("DBB0320001/FukaRireki.yml");
+    private static final RString FUKAKONKYO = new RString("DBB0320002/FukaKonkyo.yml");
+    private static final RString SETAISHOTOKU = new RString("DBB0320002/SetaiShotoku.yml");
 
     /**
      * 賦課照会比較ロード
