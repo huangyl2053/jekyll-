@@ -323,7 +323,7 @@
      "text": "履歴一覧を表示する",
      "imageWidth": "",
      "imageHeight": "",
-     "onClick": "",
+     "onClick": "onClick_rireki",
      "appearance": 0,
      "imageFileUrl": "",
      "icon": 0,
@@ -16952,6 +16952,10 @@
   {
    "alias": "narabetehyoji",
    "eventName": "SetaiShotokuIchiran_SetaiShotokuIchiran_btnNarabeteHyoji.onClick"
+  },
+  {
+   "alias": "fukaShokai",
+   "eventName": "btnRirekiHyoji.onClick"
   }
  ],
  "loadSequencePanelNames": [
