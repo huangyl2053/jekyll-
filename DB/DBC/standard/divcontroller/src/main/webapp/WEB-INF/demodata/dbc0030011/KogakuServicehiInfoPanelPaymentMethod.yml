@@ -19,7 +19,10 @@
   shiharaiBasho: 赤堀支店
   shiharaiKaishiDate: 平26.07.01
   shiharaiKaishiDay: 月
-  shiharaiKaishiTime: 360
+  shiharaiKaishiTimeS: "09"
+  shiharaiKaishiTimeE: "00"
   shiharaiShuryoDate: 平26.07.30
   shiharaiShuryoDay: 金
-  shiharaiShuryoTime: 100000
+  shiharaiShuryoTimeS: "16"
+  shiharaiShuryoTimeE: "00"
+  

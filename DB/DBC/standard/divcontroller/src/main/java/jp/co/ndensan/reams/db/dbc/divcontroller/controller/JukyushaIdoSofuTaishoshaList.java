@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0200000.JukyushaIdoSof
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -40,7 +41,7 @@ public class JukyushaIdoSofuTaishoshaList {
 
     private void setJukyushaIdoRenrakuhyoSakusei(JukyushaIdoSofuTaishoshaListDiv panel) {
         ControlGenerator cg = new ControlGenerator(getYaml().get(0));
-        panel.getJukyushaIdoSofuTaishoshaListPrintSetting().getTxtIssueDate().setValue(cg.getAsRDate("発効日"));
+        panel.getJukyushaIdoSofuTaishoshaListPrintSetting().getTxtIssueDate().setValue(RDate.getNowDate());
         panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtSortName().setValue(cg.getAsRString("出力順名称"));
         panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtKaiPage().setValue(cg.getAsRString("改頁"));
         panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtSort().setValue(cg.getAsRString("出力順"));

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.tekiyojogaishisetsuinput
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jul 01 11:33:59 JST 2014 
+ * Fri Jul 04 11:17:34 JST 2014 
  */
 
 

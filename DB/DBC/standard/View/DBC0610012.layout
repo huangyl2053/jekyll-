@@ -156,7 +156,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -377,15 +377,13 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "btnSearch_displayNone": false,
+     "btnJigyoshaInputGuide_displayNone": false,
      "txtUkestukeDate_displayNone": true,
      "txtJigyoshaNo_disabled": true,
      "txtShinseishaName_labelLText": "氏名",
      "txtYubinNo_displayNone": false,
      "txtAddress_displayNone": false,
-     "btnCopy_displayNone": false,
-     "btnSearchJigyosha_disabled": true,
-     "btnCopyToHonninInfo_disabled": false
+     "btnJigyoshaInputGuide_disabled": false
     },
     {
      "fieldName": "YoguKonyuhiShikyuShinseiShinsaPaymentMethod",
@@ -495,7 +493,7 @@
    "eraseBorderLeft": false
   },
   {
-   "fieldName": "YoguShinsaKufugakuSummary",
+   "fieldName": "YoguShinsaKufugakuSummaryPanel",
    "items": [
     {
      "fieldName": "YoguShinsaKufugakuSummarySub",
@@ -546,7 +544,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "0",
      "marginRight": "XS",
      "selectControlID": "YoguShinsaKufugakuSummarySub",
      "helpMessageID": "",
@@ -574,98 +572,10 @@
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto"
-    },
-    {
-     "fieldName": "YoguShinsaShonin",
-     "items": [
-      {
-       "fieldName": "chkShonin",
-       "items": [],
-       "controlType": "CheckBoxList",
-       "width": "150",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "chkShonin_core",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "readOnly": false,
-       "onChange": "",
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
-       "dataSource": [
-        {
-         "key": "shonin",
-         "value": "内容を承認する"
-        }
-       ],
-       "selectedItem": null,
-       "newLineItemNumber": 2,
-       "spaceSize": "M",
-       "disabledItem": [],
-       "selectedItems": [],
-       "minCheckedItem": 0,
-       "maxCheckedItem": 2,
-       "isAllSelectable": false,
-       "isAllSelectableBreakLine": false
-      }
-     ],
-     "controlType": "Panel",
-     "width": "G2",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "YoguShinsaShonin",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "onLoad": "",
-     "title": "審査結果",
-     "isOpen": true,
-     "canOpenAndClose": false,
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "YoguShinsaShonin"
-      }
-     ],
-     "requestSettings": [],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "XL",
-     "marginBottom": "Default",
-     "eraseBorder": false,
-     "backgroundColor": 0,
-     "widthAuto": true,
-     "panelDisplay": 1,
-     "isGroupBox": false,
-     "readOnly": false,
-     "height": "Auto"
     }
    ],
    "controlType": "Panel",
-   "width": "G12",
+   "width": "G9",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -678,16 +588,16 @@
    "authorityMode": 0,
    "marginLeft": "Default",
    "marginRight": "Default",
-   "selectControlID": "YoguShinsaKufugakuSummary",
+   "selectControlID": "YoguShinsaKufugakuSummaryPanel",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
    "title": "",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "YoguShinsaKufugakuSummary"
+     "postParameterPanelNames": "YoguShinsaKufugakuSummaryPanel"
     }
    ],
    "requestSettings": [
@@ -718,6 +628,148 @@
    "eraseBorderBottom": false,
    "eraseBorderRight": false,
    "eraseBorderLeft": false
+  },
+  {
+   "fieldName": "YoguShinsaShoninPanel",
+   "items": [
+    {
+     "fieldName": "lblShinseiContents",
+     "items": [],
+     "controlType": "Label",
+     "width": "70",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "lblShinseiContents",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "required": false,
+     "isPrivateInfo": false,
+     "text": "申請内容",
+     "decorationClass": "",
+     "align": 2
+    },
+    {
+     "fieldName": "radShonin",
+     "items": [],
+     "controlType": "RadioButton",
+     "width": "195",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "2.8",
+     "marginRight": "XS",
+     "selectControlID": "radShonin_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "onChange": "",
+     "labelLText": "",
+     "labelLWidth": "70",
+     "labelLAlign": 2,
+     "onClick": "",
+     "icon": [],
+     "dataSource": [
+      {
+       "key": "shonin",
+       "value": "承認する"
+      },
+      {
+       "key": "kyakka",
+       "value": "却下する"
+      }
+     ],
+     "selectedItem": null,
+     "newLineItemNumber": 2,
+     "spaceSize": "M",
+     "disabledItem": []
+    },
+    {
+     "fieldName": "spcShinsaResult",
+     "items": [],
+     "controlType": "Space",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "spcShinsaResult",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "spaceCount": "1"
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G3",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "YoguShinsaShoninPanel",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "審査結果",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "YoguShinsaShoninPanel"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnDummy",
+     "requestUrl": "dbc/db/dbc/YoguShinsaShoninPanel/onClick_btnModifyShinsei"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   },
   {
    "fieldName": "YoguShinsaDummyButtonPanel",
@@ -842,7 +894,7 @@
      "fixedDiv": "Yes"
     },
     {
-     "visibleDiv": "YoguShinsaKufugakuSummary",
+     "visibleDiv": "YoguShinsaKufugakuSummaryPanel",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -882,7 +934,7 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "YoguShinsaShonin",
+     "visibleDiv": "YoguShinsaShoninPanel",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -891,7 +943,7 @@
    "events": []
   }
  ],
- "currentState": "修正",
+ "currentState": "All",
  "id": "DBC0610012",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -931,7 +983,7 @@
    "YoguKonyuhiShikyuShinseiShinsaPaymentMethod"
   ],
   [
-   "YoguShinsaKufugakuSummary"
+   "YoguShinsaKufugakuSummaryPanel"
   ],
   [
    "YoguShinsaKufugakuSummarySub"
@@ -940,7 +992,7 @@
    "KyufugakuSummary"
   ],
   [
-   "YoguShinsaShonin"
+   "YoguShinsaShoninPanel"
   ],
   [
    "YoguShinsaDummyButtonPanel"

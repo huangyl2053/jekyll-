@@ -212,7 +212,7 @@
          ]
         }
        ],
-       "frozenColumn": "",
+       "frozenColumn": "btnSelect",
        "headerHeight": 0
       },
       "columns": [
@@ -693,11 +693,11 @@
         "cellDetails": {
          "cellType": 11,
          "text": "",
-         "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
+         "imageFileUrl": "/uz/uza/image/UZ_Search.png",
          "imageWidth": "",
          "imageHeight": "",
          "displayChildDivName": "DBZ.ServiceInputGuide",
-         "visibleCloseButton": true,
+         "visibleCloseButton": false,
          "onBeforeOpenDialog": "",
          "onOkClose": "onChangeServiceRiyohyoListDayValue",
          "dataPassing": [
@@ -739,11 +739,11 @@
         "cellDetails": {
          "cellType": 11,
          "text": "",
-         "imageFileUrl": "/ur/urz/image/UR_InputGuide.png",
+         "imageFileUrl": "/uz/uza/image/UZ_Search.png",
          "imageWidth": "",
          "imageHeight": "",
          "displayChildDivName": "DBZ.JigyoshaInputGuide",
-         "visibleCloseButton": true,
+         "visibleCloseButton": false,
          "onBeforeOpenDialog": "",
          "onOkClose": "onChangeServiceRiyohyoListDayValue",
          "dataPassing": [

@@ -1,13 +1,58 @@
 ﻿{
  "transitionList": [
   {
-   "id": "0",
+   "id": 1,
    "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBCUC30011",
-   "eventName": "",
+   "layoutName": "DBC0030011",
+   "eventName": "onClick_ShowDetail",
    "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBCUC30011",
-   "toEventName": ""
+   "toLayoutName": "DBC0030012",
+   "toEventName": "showDetail"
+  },
+  {
+   "id": "2",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0030012",
+   "eventName": "btnShowSeteiJoho",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0030013",
+   "toEventName": "showSeteiJoho"
+  },
+  {
+   "id": 3,
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0030012",
+   "eventName": "onClick_ToSearchPanel",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0030011",
+   "toEventName": "toSearchPanel"
+  },
+  {
+   "id": "4",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0030012",
+   "eventName": "searchKogakuElement1",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0030011",
+   "toEventName": "searchKogakuEle"
+  },
+  {
+   "id": 5,
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0030013",
+   "eventName": "onClick_btnReturnShowOne",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0030012",
+   "toEventName": "btnReurnShowOne"
+  },
+  {
+   "id": "6",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0030013",
+   "eventName": "btnReturnShowOneElement1",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0030012",
+   "toEventName": "btnReturnShowOneEle"
   }
  ],
  "subGyomuCode": "DBC",

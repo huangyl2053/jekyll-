@@ -1,7 +1,8 @@
 ## YAML Template. 申請者情報
 ---
 - shinseiDate: 2014.07.01
-  shinseishaName: 介護 南魚
+  jigyoshaNo: 電算事業者
+  shinseishaName: 電算　太郎
   shinseishaNameKana: カイゴ　ミナミウ
   telNo: 025-999-9999
   yubinNo: 999-9999

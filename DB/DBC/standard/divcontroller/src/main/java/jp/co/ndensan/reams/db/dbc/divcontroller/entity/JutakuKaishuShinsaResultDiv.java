@@ -21,14 +21,14 @@ public class JutakuKaishuShinsaResultDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtJudgeDate")
-    private TextBoxDate txtJudgeDate;
-    @JsonProperty("radJudgeKubun")
-    private RadioButton radJudgeKubun;
-    @JsonProperty("txtShoninCondition")
-    private TextBoxMultiLine txtShoninCondition;
-    @JsonProperty("txtFushoninReason")
-    private TextBoxMultiLine txtFushoninReason;
+    @JsonProperty("spcShinsaResultTop")
+    private Space spcShinsaResultTop;
+    @JsonProperty("lblShinseiContents")
+    private Label lblShinseiContents;
+    @JsonProperty("radShonin")
+    private RadioButton radShonin;
+    @JsonProperty("spcShinsaResultBottom")
+    private Space spcShinsaResultBottom;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,44 +36,44 @@ public class JutakuKaishuShinsaResultDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtJudgeDate")
-    public TextBoxDate getTxtJudgeDate() {
-        return txtJudgeDate;
+    @JsonProperty("spcShinsaResultTop")
+    public Space getSpcShinsaResultTop() {
+        return spcShinsaResultTop;
     }
 
-    @JsonProperty("txtJudgeDate")
-    public void setTxtJudgeDate(TextBoxDate txtJudgeDate) {
-        this.txtJudgeDate=txtJudgeDate;
+    @JsonProperty("spcShinsaResultTop")
+    public void setSpcShinsaResultTop(Space spcShinsaResultTop) {
+        this.spcShinsaResultTop=spcShinsaResultTop;
     }
 
-    @JsonProperty("radJudgeKubun")
-    public RadioButton getRadJudgeKubun() {
-        return radJudgeKubun;
+    @JsonProperty("lblShinseiContents")
+    public Label getLblShinseiContents() {
+        return lblShinseiContents;
     }
 
-    @JsonProperty("radJudgeKubun")
-    public void setRadJudgeKubun(RadioButton radJudgeKubun) {
-        this.radJudgeKubun=radJudgeKubun;
+    @JsonProperty("lblShinseiContents")
+    public void setLblShinseiContents(Label lblShinseiContents) {
+        this.lblShinseiContents=lblShinseiContents;
     }
 
-    @JsonProperty("txtShoninCondition")
-    public TextBoxMultiLine getTxtShoninCondition() {
-        return txtShoninCondition;
+    @JsonProperty("radShonin")
+    public RadioButton getRadShonin() {
+        return radShonin;
     }
 
-    @JsonProperty("txtShoninCondition")
-    public void setTxtShoninCondition(TextBoxMultiLine txtShoninCondition) {
-        this.txtShoninCondition=txtShoninCondition;
+    @JsonProperty("radShonin")
+    public void setRadShonin(RadioButton radShonin) {
+        this.radShonin=radShonin;
     }
 
-    @JsonProperty("txtFushoninReason")
-    public TextBoxMultiLine getTxtFushoninReason() {
-        return txtFushoninReason;
+    @JsonProperty("spcShinsaResultBottom")
+    public Space getSpcShinsaResultBottom() {
+        return spcShinsaResultBottom;
     }
 
-    @JsonProperty("txtFushoninReason")
-    public void setTxtFushoninReason(TextBoxMultiLine txtFushoninReason) {
-        this.txtFushoninReason=txtFushoninReason;
+    @JsonProperty("spcShinsaResultBottom")
+    public void setSpcShinsaResultBottom(Space spcShinsaResultBottom) {
+        this.spcShinsaResultBottom=spcShinsaResultBottom;
     }
 
 }

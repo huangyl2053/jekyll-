@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailInput.JutakuKaishuShinseiDetailInputDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiReasonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PaymentMethod.PaymentMethodDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfo.ShinseishaInfoDiv;
@@ -37,8 +37,8 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
     private TextBox txtJutakuOwner;
     @JsonProperty("txtRelationWithHihokensha")
     private TextBox txtRelationWithHihokensha;
-    @JsonProperty("JutakuKaishuShinseiDetail")
-    private JutakuKaishuShinseiDetailDiv JutakuKaishuShinseiDetail;
+    @JsonProperty("JutakuKaishuShinseiDetailInput")
+    private JutakuKaishuShinseiDetailInputDiv JutakuKaishuShinseiDetailInput;
     @JsonProperty("JutakuKaishuShinseisha")
     private ShinseishaInfoDiv JutakuKaishuShinseisha;
     @JsonProperty("JutakuKaishuShinseiReason")
@@ -112,14 +112,14 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
         this.txtRelationWithHihokensha=txtRelationWithHihokensha;
     }
 
-    @JsonProperty("JutakuKaishuShinseiDetail")
-    public JutakuKaishuShinseiDetailDiv getJutakuKaishuShinseiDetail() {
-        return JutakuKaishuShinseiDetail;
+    @JsonProperty("JutakuKaishuShinseiDetailInput")
+    public JutakuKaishuShinseiDetailInputDiv getJutakuKaishuShinseiDetailInput() {
+        return JutakuKaishuShinseiDetailInput;
     }
 
-    @JsonProperty("JutakuKaishuShinseiDetail")
-    public void setJutakuKaishuShinseiDetail(JutakuKaishuShinseiDetailDiv JutakuKaishuShinseiDetail) {
-        this.JutakuKaishuShinseiDetail=JutakuKaishuShinseiDetail;
+    @JsonProperty("JutakuKaishuShinseiDetailInput")
+    public void setJutakuKaishuShinseiDetailInput(JutakuKaishuShinseiDetailInputDiv JutakuKaishuShinseiDetailInput) {
+        this.JutakuKaishuShinseiDetailInput=JutakuKaishuShinseiDetailInput;
     }
 
     @JsonProperty("JutakuKaishuShinseisha")

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.IryoHokenInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuInputDiv;
@@ -20,13 +21,11 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplRofukuNenki
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplSeikatsuHogoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplShikakuJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplShisetsuNyutaishoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.dgIryoHokenRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.KaigoMenuType;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core._ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.core.mybatis._DbSession;
@@ -36,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -56,6 +56,7 @@ public class ShikakuShutokuJoho {
     private final static RString ROFUKU_NENKIN_DATA = new RString("DBA1010011/rofukuNenkin.yml");
     private final static RString SEIKATSU_HOGO_DATA = new RString("DBA1010011/seikatsuHogo.yml");
     private final static RString SHISETSU_NYUTAISHO_DATA = new RString("DBA1010011/shisetsuNyutaisho.yml");
+    private final static RString DDL_SHUTOKU_JIYU = new RString("DBA1010011/ddlShutokuJiyu.yml");
 
     private final static RString SHIKAKU_ADD = new RString("add");
     private final static RString SHIKAKU_MODIFY = new RString("modify");
@@ -63,11 +64,6 @@ public class ShikakuShutokuJoho {
     private final static RString IRYO_HOKEN_ADD = new RString("add");
     private final static RString IRYO_HOKEN_MODIFY = new RString("modify");
     private final static RString IRYO_HOKEN_DELETE = new RString("delete");
-
-    private void setDdlShutokuJiyu(DropDownList ddl, String str) {
-        ddl.setSelectedItem(new RString(str));
-        ddl.setDisabled(true);
-    }
 
     /**
      * 対象者選択で、資格取得を行う個人が決定された際に実行されます。<br/>
@@ -403,7 +399,9 @@ public class ShikakuShutokuJoho {
     }
 
     private void setShutokuJiyu(tplShikakuJohoDiv shikakuJohoDiv) {
+
         DropDownList ddl = shikakuJohoDiv.getShikakuShutokuInput().getDdlShikakuShutokuJiyu();
+        ddl.setDataSource(createDdlShutokuJiyu());
         SqlSession session = _DbSession.get(_WorkFlowSession.KEY);
         _FlowDefinitionDac dac = new _FlowDefinitionDac(session);
         FlowKey flowKey = dac.getFlowKey(_ControlDataHolder.getControlData().getFlowContext().getFlowInstanceId());
@@ -411,20 +409,44 @@ public class ShikakuShutokuJoho {
         RString flowId = new RString(flowKey.getFlowId().getId());
 
         if (KaigoMenuType.転入により取得.getFlowId().equals(flowId)) {
-            setDdlShutokuJiyu(ddl, "tennyu");
+            createPartOfDdlShutokuJiyu(ddl, "tennyu");
         } else if (KaigoMenuType.第2号被保険者取得申請により取得.getFlowId().equals(flowId)) {
-            setDdlShutokuJiyu(ddl, "nigoShinsei");
+            createPartOfDdlShutokuJiyu(ddl, "nigoShinsei");
         } else if (KaigoMenuType.外国人申請により取得.getFlowId().equals(flowId)) {
-            setDdlShutokuJiyu(ddl, "gaikokuJin");
+            createPartOfDdlShutokuJiyu(ddl, "gaikokuJin");
         } else if (KaigoMenuType.年齢到達により取得.getFlowId().equals(flowId)) {
-            setDdlShutokuJiyu(ddl, "nenreiTotatsu");
+            createPartOfDdlShutokuJiyu(ddl, "nenreiTotatsu");
         } else if (KaigoMenuType.転居により取得_施設退所等.getFlowId().equals(flowId)) {
-            setDdlShutokuJiyu(ddl, "gappeinaiTenkyo");
+            createPartOfDdlShutokuJiyu(ddl, "gappeinaiTenkyo");
         } else if (KaigoMenuType.帰化により取得.getFlowId().equals(flowId)) {
-            setDdlShutokuJiyu(ddl, "kika");
+            createPartOfDdlShutokuJiyu(ddl, "kika");
         } else if (KaigoMenuType.職権により取得.getFlowId().equals(flowId)) {
-            setDdlShutokuJiyu(ddl, "shokkenShutoku");
+            createPartOfDdlShutokuJiyu(ddl, "shokkenShutoku");
         }
+    }
+
+    private List<KeyValueDataSource> createDdlShutokuJiyu() {
+
+        HashMap<String, String> ddlSource = (HashMap) YamlLoader.DBA.loadAsMap(DDL_SHUTOKU_JIYU);
+        List<KeyValueDataSource> ddlSourceList = new ArrayList<>();
+        for (Map.Entry<String, String> ddlSourceItem : ddlSource.entrySet()) {
+            KeyValueDataSource ddlSourceListItem = new KeyValueDataSource(new RString(ddlSourceItem.getKey()),
+                    new RString(ddlSourceItem.getValue()));
+            ddlSourceList.add(ddlSourceListItem);
+        }
+        return ddlSourceList;
+    }
+
+    private void createPartOfDdlShutokuJiyu(DropDownList ddl, String key) {
+
+        List<KeyValueDataSource> ddlSourceList = new ArrayList<>();
+        for (KeyValueDataSource ddlSourceItem : ddl.getDataSource()) {
+            if (ddlSourceItem.getKey().toString().equals(key)) {
+                ddlSourceList.add(ddlSourceItem);
+            }
+        }
+        ddl.setDataSource(ddlSourceList);
+        ddl.setSelectedItem(new RString(key));
     }
 
     /**
@@ -444,7 +466,6 @@ public class ShikakuShutokuJoho {
                 new RString(Integer.toString(tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedRowId())));
         setShikakuJohoInput(tplShikakuJoho, tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedItem());
         setShikakuJohoDisabled(tplShikakuJoho, false);
-        tplShikakuJoho.getBtnUpdateShikaku().setText(new RString("修正内容を確定する"));
         response.data = shikakuJohoDiv;
         return response;
     }
@@ -466,7 +487,6 @@ public class ShikakuShutokuJoho {
         setShikakuJohoInput(tplShikakuJoho, tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedItem());
         setShikakuJohoDisabled(tplShikakuJoho, true);
         tplShikakuJoho.getBtnUpdateShikaku().setDisabled(false);
-        tplShikakuJoho.getBtnUpdateShikaku().setText(new RString("削除内容を確定する"));
         response.data = shikakuJohoDiv;
         return response;
     }
@@ -579,7 +599,6 @@ public class ShikakuShutokuJoho {
 
         shikakuJohoDiv.setIryoHokenInputMode(IRYO_HOKEN_ADD);
         setIryoHokenDisabled(tplIryoHoken, false);
-        tplIryoHoken.getBtnUpdateIryoHoken().setText(new RString("追加内容を確定する"));
         clearIryoHokenInput(tplIryoHoken);
         response.data = shikakuJohoDiv;
         return response;
@@ -601,7 +620,6 @@ public class ShikakuShutokuJoho {
         shikakuJohoDiv.setIryoHokenSelectRow(new RString(Integer.toString(tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getClickedRowId())));
         setIryoHokenInput(tplIryoHoken, tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getClickedItem());
         setIryoHokenDisabled(tplIryoHoken, false);
-        tplIryoHoken.getBtnUpdateIryoHoken().setText(new RString("修正内容を確定する"));
         response.data = shikakuJohoDiv;
         return response;
     }
@@ -623,7 +641,6 @@ public class ShikakuShutokuJoho {
         setIryoHokenInput(tplIryoHoken, tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getClickedItem());
         setIryoHokenDisabled(tplIryoHoken, true);
         tplIryoHoken.getBtnUpdateIryoHoken().setDisabled(false);
-        tplIryoHoken.getBtnUpdateIryoHoken().setText(new RString("削除内容を確定する"));
         response.data = shikakuJohoDiv;
         return response;
     }

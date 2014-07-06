@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -45,7 +46,32 @@ public class JukyushaIdoRenrakuhyoHenkoSearchResultListPanel {
 
     }
 
+    /**
+     * 削除時の処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv> onClick_btnDelete(
+            JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv panel) {
+        ResponseData<JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv> response = new ResponseData<>();
+
+        modifyJukyushaIdoRenrakuhyoHenkoSearchResult(panel, RowState.Deleted);
+
+        response.data = panel;
+        return response;
+
+    }
+
     private void setJukyushaIdoRenrakuhyoHenkoSearchResult(JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv panel) {
+        if (panel.getDgJukyushaIdoRenrakuhyoHenkoSearchResult().getDataSource().isEmpty()) {
+            loadJukyushaIdoRenrakuhyoHenkoSearchResult(panel);
+        } else {
+            modifyJukyushaIdoRenrakuhyoHenkoSearchResult(panel, RowState.Modified);
+        }
+    }
+
+    private void loadJukyushaIdoRenrakuhyoHenkoSearchResult(JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv panel) {
         List<HashMap> mapList = getYmlData();
         List<dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
@@ -57,6 +83,13 @@ public class JukyushaIdoRenrakuhyoHenkoSearchResultListPanel {
                     cg.getAsTextBoxDate("送付年月")));
         }
         panel.getDgJukyushaIdoRenrakuhyoHenkoSearchResult().setDataSource(list);
+    }
+
+    private void modifyJukyushaIdoRenrakuhyoHenkoSearchResult(JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv panel, RowState rowState) {
+        int clickedRowId = panel.getDgJukyushaIdoRenrakuhyoHenkoSearchResult().getClickedRowId();
+        if (clickedRowId > -1) {
+            panel.getDgJukyushaIdoRenrakuhyoHenkoSearchResult().getDataSource().get(clickedRowId).setRowState(rowState);
+        }
     }
 
     private dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row createJukyushaIdoRenrakuhyoHenkoSearchResultRow(

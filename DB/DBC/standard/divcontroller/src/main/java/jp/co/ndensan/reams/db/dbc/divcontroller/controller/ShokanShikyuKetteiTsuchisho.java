@@ -33,7 +33,7 @@ public class ShokanShikyuKetteiTsuchisho {
     }
 
     private void setTsuchishoData(ShokanShikyuKetteiTsuchishoDiv panel) {
-        HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("dbc0810000/ShokanShikyuKetteiTsuchisho.yml")).get(0);
+        HashMap source = YamlLoader.DBC.loadAsList(new RString("dbc0810000/ShokanShikyuKetteiTsuchisho.yml")).get(0);
         panel.getShokanShikyuKetteiTsuchishoPrintContentsSetting().getTxtIssueDate().
                 setValue(new RDate(source.get("発効日").toString()));
     }

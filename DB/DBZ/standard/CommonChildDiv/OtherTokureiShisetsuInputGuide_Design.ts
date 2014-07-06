@@ -57,8 +57,8 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
-     "selectedItem": "keyAll",
+     "onClick": "",
+     "icon": [],
      "dataSource": [
       {
        "key": "keyAll",
@@ -73,25 +73,21 @@ module DBZ {
        "value": "管外"
       }
      ],
+     "onChange": "",
+     "selectedItem": "keyAll",
      "required": false,
-     "onClick": "",
-     "newLineItemNumber": 3,
-     "spaceSize": "M",
      "labelLText": "施設種類",
      "labelLWidth": "70",
      "labelLAlign": 2,
-     "disabledItem": [],
-     "icon": []
+     "newLineItemNumber": 3,
+     "spaceSize": "M",
+     "disabledItem": []
     },
     {
      "fieldName": "btnSearchOtherShisetsu",
      "items": [],
      "controlType": "Button",
-<<<<<<< HEAD
      "width": "150",
-=======
-     "width": "260",
->>>>>>> feature/UI-KyufuKanri-37343
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -108,16 +104,12 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "onClick": "onClick_btnSearchOtherShisetsu",
-     "icon": 0,
-<<<<<<< HEAD
      "text": "施設情報を表示する",
-=======
-     "text": "該当する施設を表示する",
->>>>>>> feature/UI-KyufuKanri-37343
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -140,10 +132,10 @@ module DBZ {
      "selectControlID": "lblOtherShisetsuShurui",
      "helpMessageID": "",
      "jpControlName": "",
-     "required": false,
      "text": "keyKannai",
-     "align": 2,
+     "required": false,
      "isPrivateInfo": false,
+     "align": 2,
      "decorationClass": ""
     },
     {
@@ -164,19 +156,13 @@ module DBZ {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-<<<<<<< HEAD
-       "marginLeft": "0",
+       "marginLeft": "0.2",
        "marginRight": "0",
-=======
-       "marginLeft": "S",
-       "marginRight": "XS",
->>>>>>> feature/UI-KyufuKanri-37343
        "selectControlID": "dgSearchResultOtherTokureiShisetsu",
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
        "height": "S",
-       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -262,17 +248,15 @@ module DBZ {
        "onSelectBySelectButton": "onSelectBySelectButton_dgSearchResultOtherTokureiShisetsu",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
-<<<<<<< HEAD
        "onAfterRequest": "",
        "onAfterRequestByDblClick": "",
        "onAfterRequestBySelectButton": "",
        "onAfterRequestByModifyButton": "",
        "onAfterRequestByDeleteButton": "",
-=======
->>>>>>> feature/UI-KyufuKanri-37343
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "jusho",
        "isAscending": true,
        "filterList": [],
@@ -280,11 +264,7 @@ module DBZ {
       }
      ],
      "controlType": "Panel",
-<<<<<<< HEAD
      "width": "720",
-=======
-     "width": "G2",
->>>>>>> feature/UI-KyufuKanri-37343
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -295,7 +275,7 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "0.15",
      "marginRight": "XS",
      "selectControlID": "SearchResultOtherShisetsu",
      "helpMessageID": "",
@@ -318,11 +298,7 @@ module DBZ {
      "session": {},
      "eraseBorder": false,
      "backgroundColor": 0,
-<<<<<<< HEAD
      "widthAuto": false,
-=======
-     "widthAuto": true,
->>>>>>> feature/UI-KyufuKanri-37343
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
@@ -332,11 +308,7 @@ module DBZ {
      "fieldName": "btnOtherShisetsuReturn",
      "items": [],
      "controlType": "Button",
-<<<<<<< HEAD
      "width": "150",
-=======
-     "width": "260",
->>>>>>> feature/UI-KyufuKanri-37343
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -353,25 +325,17 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "onClick": "onClick_btnOtherShisetsuReturn",
-     "icon": 0,
-<<<<<<< HEAD
      "text": "閉じる",
-=======
-     "text": "その他特例施設入力ガイドを閉じる",
->>>>>>> feature/UI-KyufuKanri-37343
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
-<<<<<<< HEAD
-   "width": "７３０",
-=======
-   "width": "G2",
->>>>>>> feature/UI-KyufuKanri-37343
+   "width": "730",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -427,11 +391,7 @@ module DBZ {
    "session": {},
    "eraseBorder": false,
    "backgroundColor": 0,
-<<<<<<< HEAD
    "widthAuto": false,
-=======
-   "widthAuto": true,
->>>>>>> feature/UI-KyufuKanri-37343
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
@@ -478,11 +438,7 @@ module DBZ {
  "dialogOkEventNameForDialog": "onSelectBySelectButton_dgSearchResultOtherTokureiShisetsu",
  "dialogCancelEventNameForDialog": "onClick_btnOtherShisetsuReturn",
  "canTransferEvent": true,
-<<<<<<< HEAD
  "heightForDialog": "Auto"
-=======
- "heightForDialog": "M"
->>>>>>> feature/UI-KyufuKanri-37343
 }        
     }
 }

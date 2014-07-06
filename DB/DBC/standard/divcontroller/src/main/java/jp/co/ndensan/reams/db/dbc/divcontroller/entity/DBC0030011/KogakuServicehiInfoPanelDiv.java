@@ -5,7 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0030011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0030011.KogakuNushiJuminJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail.KogakuServicehiDetailDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -23,12 +24,14 @@ public class KogakuServicehiInfoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("KogakuNushiJuminJoho")
-    private KogakuNushiJuminJohoDiv KogakuNushiJuminJoho;
+    @JsonProperty("CommonKogakuNushiJuminJohoChildDiv1")
+    private KaigoAtenaInfoDiv CommonKogakuNushiJuminJohoChildDiv1;
+    @JsonProperty("CommonKogakuKaigoJuminJohoChildDiv2")
+    private KaigoShikakuKihonDiv CommonKogakuKaigoJuminJohoChildDiv2;
+    @JsonProperty("HorizontalJuminLine1")
+    private HorizontalLine HorizontalJuminLine1;
     @JsonProperty("btnShowSeteiJoho")
     private Button btnShowSeteiJoho;
-    @JsonProperty("btnShowTwo")
-    private Button btnShowTwo;
     @JsonProperty("KogakuServiceDetail")
     private KogakuServicehiDetailDiv KogakuServiceDetail;
 
@@ -38,14 +41,34 @@ public class KogakuServicehiInfoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("KogakuNushiJuminJoho")
-    public KogakuNushiJuminJohoDiv getKogakuNushiJuminJoho() {
-        return KogakuNushiJuminJoho;
+    @JsonProperty("CommonKogakuNushiJuminJohoChildDiv1")
+    public KaigoAtenaInfoDiv getCommonKogakuNushiJuminJohoChildDiv1() {
+        return CommonKogakuNushiJuminJohoChildDiv1;
     }
 
-    @JsonProperty("KogakuNushiJuminJoho")
-    public void setKogakuNushiJuminJoho(KogakuNushiJuminJohoDiv KogakuNushiJuminJoho) {
-        this.KogakuNushiJuminJoho=KogakuNushiJuminJoho;
+    @JsonProperty("CommonKogakuNushiJuminJohoChildDiv1")
+    public void setCommonKogakuNushiJuminJohoChildDiv1(KaigoAtenaInfoDiv CommonKogakuNushiJuminJohoChildDiv1) {
+        this.CommonKogakuNushiJuminJohoChildDiv1=CommonKogakuNushiJuminJohoChildDiv1;
+    }
+
+    @JsonProperty("CommonKogakuKaigoJuminJohoChildDiv2")
+    public KaigoShikakuKihonDiv getCommonKogakuKaigoJuminJohoChildDiv2() {
+        return CommonKogakuKaigoJuminJohoChildDiv2;
+    }
+
+    @JsonProperty("CommonKogakuKaigoJuminJohoChildDiv2")
+    public void setCommonKogakuKaigoJuminJohoChildDiv2(KaigoShikakuKihonDiv CommonKogakuKaigoJuminJohoChildDiv2) {
+        this.CommonKogakuKaigoJuminJohoChildDiv2=CommonKogakuKaigoJuminJohoChildDiv2;
+    }
+
+    @JsonProperty("HorizontalJuminLine1")
+    public HorizontalLine getHorizontalJuminLine1() {
+        return HorizontalJuminLine1;
+    }
+
+    @JsonProperty("HorizontalJuminLine1")
+    public void setHorizontalJuminLine1(HorizontalLine HorizontalJuminLine1) {
+        this.HorizontalJuminLine1=HorizontalJuminLine1;
     }
 
     @JsonProperty("btnShowSeteiJoho")
@@ -56,16 +79,6 @@ public class KogakuServicehiInfoPanelDiv extends Panel {
     @JsonProperty("btnShowSeteiJoho")
     public void setBtnShowSeteiJoho(Button btnShowSeteiJoho) {
         this.btnShowSeteiJoho=btnShowSeteiJoho;
-    }
-
-    @JsonProperty("btnShowTwo")
-    public Button getBtnShowTwo() {
-        return btnShowTwo;
-    }
-
-    @JsonProperty("btnShowTwo")
-    public void setBtnShowTwo(Button btnShowTwo) {
-        this.btnShowTwo=btnShowTwo;
     }
 
     @JsonProperty("KogakuServiceDetail")

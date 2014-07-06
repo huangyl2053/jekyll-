@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class ServiceTeikyoShomeishoGokei {
 
     private List<HashMap> getServiceTeikyoShomeishoGokeiYaml() {
-        return YamlLoader.FOR_DBC.loadAsList(new RString("ServiceTeikyoShomeishoGokei.yml"));
+        return YamlLoader.DBC.loadAsList(new RString("ServiceTeikyoShomeishoGokei.yml"));
     }
 
     /**

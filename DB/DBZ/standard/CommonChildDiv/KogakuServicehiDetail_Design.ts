@@ -120,20 +120,6 @@ module DBZ {
             }
         }
         
-        public get onClick_radPayMethod() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"])["onClick_radPayMethod"];
-        }
-        
-        public set onClick_radPayMethod(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"])["onClick_radPayMethod"] = value;
-            } else {
-                this.layout.items[0].items[1].items[1].items[0]["onClick_radPayMethod"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, KogakuServicehiDetail_Design.myLayout, fieldName);
         }
@@ -152,7 +138,6 @@ module DBZ {
             Uz.JSControlUtil.registProperty("panelDisplay");
             Uz.JSControlUtil.registProperty("tplJudgementResult_title");
             Uz.JSControlUtil.registProperty("tplKetteiJoho_visible");
-            Uz.JSControlUtil.registProperty("onClick_radPayMethod");
         }
         
         /**
@@ -170,7 +155,6 @@ module DBZ {
             editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
             editablePropertyInfo["tplJudgementResult_title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[2]["fieldName"]).getEditablePropertyInfo()["title"];
             editablePropertyInfo["tplKetteiJoho_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[3]["fieldName"]).getEditablePropertyInfo()["visible"];
-            editablePropertyInfo["onClick_radPayMethod"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"]).getEditablePropertyInfo()["onClick_radPayMethod"];
             
             return editablePropertyInfo;
         }
@@ -198,6 +182,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtTeikyoYM_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
      "required": false,
      "placeHolder": "",
@@ -241,8 +227,10 @@ module DBZ {
          "toolTip": "",
          "authorityMode": 0,
          "marginLeft": "2.4",
-         "marginRight": 0,
+         "marginRight": "0",
          "selectControlID": "Shinseisha",
+         "helpMessageID": "",
+         "jpControlName": "",
          "title": "",
          "relation": [],
          "businessId": "DBZ",
@@ -253,17 +241,20 @@ module DBZ {
          "dataPassingForDialog": [],
          "dialogOkEventNameForDialog": "",
          "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M",
+         "panelDisplay": 0,
+         "btnJigyoshaInputGuide_displayNone": false,
+         "txtUkestukeDate_displayNone": true,
+         "txtJigyoshaNo_disabled": false,
+         "txtShinseishaName_labelLText": "氏名",
+         "txtYubinNo_displayNone": false,
+         "txtAddress_displayNone": false,
+         "btnJigyoshaInputGuide_disabled": false,
          "eraseBorderTop": true,
          "eraseBorderBottom": true,
          "eraseBorderRight": true,
-         "eraseBorderLeft": true,
-         "panelDisplay": 0,
-         "btnSearch_displayNone": true,
-         "txtUkestukeDate_displayNone": true,
-         "txtJigyoshaNo_displayNone": true,
-         "txtShinseishaName_labelLText": "氏名",
-         "txtYubinNo_displayNone": false,
-         "txtAddress_displayNone": false
+         "eraseBorderLeft": true
         },
         {
          "fieldName": "txtShiharaiTotalAmount",
@@ -283,6 +274,8 @@ module DBZ {
          "marginLeft": "0",
          "marginRight": "XS",
          "selectControlID": "txtShiharaiTotalAmount_core",
+         "helpMessageID": "",
+         "jpControlName": "",
          "readOnly": false,
          "required": false,
          "placeHolder": "",
@@ -306,18 +299,19 @@ module DBZ {
          "textKind": 2,
          "isComboBox": false,
          "suggest": [],
+         "decorationClass": "",
          "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
-         "isComma": true,
+         "isComma": false,
          "decimalPointLength": 0
         },
         {
          "fieldName": "txtShinseiRiyu",
          "items": [],
          "controlType": "TextBoxMultiLine",
-         "width": "600",
+         "width": "565",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -331,7 +325,10 @@ module DBZ {
          "marginLeft": "0.3",
          "marginRight": "XS",
          "selectControlID": "txtShinseiRiyu_text_area",
+         "helpMessageID": "",
+         "jpControlName": "",
          "readOnly": false,
+         "height": "XS",
          "required": false,
          "placeHolder": "",
          "isPrivateInfo": false,
@@ -350,7 +347,6 @@ module DBZ {
          "maxLength": 100000000,
          "minLength": 0,
          "textKind": 0,
-         "height": "XS",
          "limitLength": 20,
          "countDisp": false
         }
@@ -370,8 +366,11 @@ module DBZ {
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "tplShinseisha",
+       "helpMessageID": "",
+       "jpControlName": "",
        "title": "申請者情報",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       },
       {
        "fieldName": "tplKoza",
@@ -386,31 +385,39 @@ module DBZ {
          "disabled": false,
          "accessKey": "",
          "nextFocusFieldName": "",
-         "wrap": false,
+         "wrap": true,
          "dependencies": [],
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": 0,
-         "marginRight": 0,
+         "marginLeft": "0",
+         "marginRight": "0",
          "selectControlID": "PaymentMethod",
+         "helpMessageID": "",
+         "jpControlName": "",
          "title": "",
          "relation": [],
          "businessId": "DBZ",
          "controlName": "PaymentMethod",
-         "marginTop": 0,
-         "marginBottom": 0,
+         "marginTop": "0",
+         "marginBottom": "0",
          "originalProperty": [],
          "dataPassingForDialog": [],
          "dialogOkEventNameForDialog": "",
          "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M",
+         "eraseBorder": false,
+         "panelDisplay": 0,
+         "KozaPayment_title": "口座払い",
+         "onClick_radPayMethod": "",
+         "Juryoinin_displayNone": false,
+         "Madoguchi_displayNone": false,
+         "Koza_displayNone": false,
          "eraseBorderTop": true,
          "eraseBorderBottom": true,
          "eraseBorderRight": true,
-         "eraseBorderLeft": true,
-         "panelDisplay": 0,
-         "KozaPayment_title": "口座払い",
-         "onClick_radPayMethod": "onClick_radPayMethod"
+         "eraseBorderLeft": true
         }
        ],
        "controlType": "TabPanel",
@@ -428,8 +435,11 @@ module DBZ {
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "tplKoza",
+       "helpMessageID": "",
+       "jpControlName": "",
        "title": "口座情報",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       },
       {
        "fieldName": "tplJudgementResult",
@@ -449,9 +459,11 @@ module DBZ {
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": 0,
-         "marginRight": 0,
+         "marginLeft": "0",
+         "marginRight": "0",
          "selectControlID": "JudgementResult",
+         "helpMessageID": "",
+         "jpControlName": "",
          "title": "",
          "relation": [],
          "businessId": "DBZ",
@@ -462,11 +474,13 @@ module DBZ {
          "dataPassingForDialog": [],
          "dialogOkEventNameForDialog": "",
          "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M",
+         "panelDisplay": 0,
          "eraseBorderTop": true,
          "eraseBorderBottom": true,
          "eraseBorderRight": true,
-         "eraseBorderLeft": true,
-         "panelDisplay": 0
+         "eraseBorderLeft": true
         }
        ],
        "controlType": "TabPanel",
@@ -484,8 +498,11 @@ module DBZ {
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "tplJudgementResult",
+       "helpMessageID": "",
+       "jpControlName": "",
        "title": "判定結果",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       },
       {
        "fieldName": "tplKetteiJoho",
@@ -505,8 +522,11 @@ module DBZ {
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "tplKetteiJoho",
+       "helpMessageID": "",
+       "jpControlName": "",
        "title": "高額決定情報",
-       "onActive": ""
+       "onActive": "",
+       "onFirstActive": ""
       }
      ],
      "controlType": "TabContainer",
@@ -524,6 +544,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "tabKogakuServicehiDetail",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onChange": "",
      "selectedItem": null,
      "tabpanelPosition": [
@@ -533,12 +555,13 @@ module DBZ {
       "tplKetteiJoho"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tplShinseisha",
-     "initialTab": "0"
+     "selectedItemFieldName": "tplKoza",
+     "initialTab": "0",
+     "isLazyLoading": false
     }
    ],
    "controlType": "Panel",
-   "width": "1065",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -552,6 +575,8 @@ module DBZ {
    "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "KogakuServicehiDetail",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "高額介護サービス費明細",
    "marginTop": "Default",
@@ -568,15 +593,17 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   }
  ],
  "controlType": "CommonChildDiv",
@@ -591,9 +618,11 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": 0,
- "marginRight": 0,
+ "marginLeft": "0",
+ "marginRight": "0",
  "selectControlID": "defaultLayout",
+ "helpMessageID": "",
+ "jpControlName": "",
  "relation": [],
  "businessId": "DBZ",
  "controlName": "KogakuServicehiDetail",
@@ -639,16 +668,13 @@ module DBZ {
    "publicChildFieldName": "tplKetteiJoho",
    "publicChildProperty": "visible",
    "newPropertyName": "tplKetteiJoho_visible"
-  },
-  {
-   "publicChildFieldName": "PaymentMethod",
-   "publicChildProperty": "onClick_radPayMethod",
-   "newPropertyName": "onClick_radPayMethod"
   }
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }

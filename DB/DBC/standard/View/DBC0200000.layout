@@ -43,7 +43,8 @@
      "ymdKubun": 1,
      "displayFormat": 0,
      "value": "2009/01/31",
-     "textKind": 0
+     "textKind": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "lblHokenshaSofuList",
@@ -68,8 +69,8 @@
      "required": false,
      "isPrivateInfo": false,
      "text": "○…処理済み、×…未処理、－…処理なし",
-     "align": 2,
-     "decorationClass": ""
+     "decorationClass": "",
+     "align": 2
     },
     {
      "fieldName": "btnDisplay",
@@ -93,11 +94,11 @@
      "jpControlName": "",
      "text": "表示する",
      "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
+     "icon": 0,
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
+     "appearance": 0,
+     "imageFileUrl": "",
      "heightTextBoxMatches": false
     },
     {
@@ -227,6 +228,11 @@
      "onSelectBySelectButton": "onSelectHokenshaSofuList",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -325,7 +331,8 @@
      "ymdKubun": 1,
      "displayFormat": 0,
      "value": "",
-     "textKind": 0
+     "textKind": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtSaiShoriKubun",
@@ -364,13 +371,14 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "value": "",
-     "decorationClass": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtFileName",
@@ -409,13 +417,14 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "value": "",
-     "decorationClass": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "decorationClass": "",
+     "permitCharactor": ""
     }
    ],
    "controlType": "Panel",
@@ -523,12 +532,12 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "JukyushaIdoSofuTaishoshaListOutputOrder",
      "helpMessageID": "",
@@ -543,7 +552,8 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "ChohyoShutsuryokujun_width": "G12"
+     "ChohyoShutsuryokujun_width": "1099",
+     "txtSort_width": "885"
     }
    ],
    "controlType": "PanelPublish",

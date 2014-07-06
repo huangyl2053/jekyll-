@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0030011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * ShowResultTwo のクラスファイル 
@@ -39,8 +38,8 @@ public class ShowResultTwoDiv extends Panel {
     private JudgementResultLDiv JudgementResultL;
     @JsonProperty("JudgementResultR")
     private JudgementResultRDiv JudgementResultR;
-    @JsonProperty("btnReturnShowOne")
-    private Button btnReturnShowOne;
+    @JsonProperty("btnSetaiback")
+    private Button btnSetaiback;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -138,14 +137,14 @@ public class ShowResultTwoDiv extends Panel {
         this.JudgementResultR=JudgementResultR;
     }
 
-    @JsonProperty("btnReturnShowOne")
-    public Button getBtnReturnShowOne() {
-        return btnReturnShowOne;
+    @JsonProperty("btnSetaiback")
+    public Button getBtnSetaiback() {
+        return btnSetaiback;
     }
 
-    @JsonProperty("btnReturnShowOne")
-    public void setBtnReturnShowOne(Button btnReturnShowOne) {
-        this.btnReturnShowOne=btnReturnShowOne;
+    @JsonProperty("btnSetaiback")
+    public void setBtnSetaiback(Button btnSetaiback) {
+        this.btnSetaiback=btnSetaiback;
     }
 
 }

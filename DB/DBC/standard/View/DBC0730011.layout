@@ -445,6 +445,11 @@
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -793,7 +798,7 @@
    "jpControlName": "",
    "onLoad": "",
    "title": "償還払支給（不支給）決定通知書",
-   "isOpen": true,
+   "isOpen": false,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -977,15 +982,15 @@
  "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "ketteiSave",
+   "commonButtonAreaId": "ketteiExecute",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonUpdate",
+     "buttonKind": "CommonButtonExecute",
      "buttonProperty": {
       "fieldName": "btnKetteiSave",
       "items": [],
       "controlType": "CommonButtonFree",
-      "width": 1,
+      "width": 2,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -1009,7 +1014,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "決定結果を"
+      "additionalText": "支給申請決定を"
      }
     }
    ],
@@ -1018,7 +1023,9 @@
      "state": "一括決定"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

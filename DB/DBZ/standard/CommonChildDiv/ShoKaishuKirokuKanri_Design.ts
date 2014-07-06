@@ -50,7 +50,6 @@ module DBZ {
             }
         }
         
-<<<<<<< HEAD
         public get ShoKaishuJokyoShosai_panalDisplay() {
             return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["ShoKaishuJokyoShosai_panelDisplay"];
         }
@@ -79,8 +78,6 @@ module DBZ {
             }
         }
         
-=======
->>>>>>> feature/UI-KyufuKanri-37343
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, ShoKaishuKirokuKanri_Design.myLayout, fieldName);
         }
@@ -94,11 +91,8 @@ module DBZ {
             Uz.JSControlUtil.registProperty("onBlur_txtKaishuDate");
             Uz.JSControlUtil.registProperty("onChange_ddlKaishuJiyu");
             Uz.JSControlUtil.registProperty("onBlur_txtKaishuRiyu");
-<<<<<<< HEAD
             Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_panalDisplay");
             Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_canOpenAndClose");
-=======
->>>>>>> feature/UI-KyufuKanri-37343
         }
         
         /**
@@ -111,11 +105,8 @@ module DBZ {
             editablePropertyInfo["onBlur_txtKaishuDate"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onBlur_txtKaishuDate"];
             editablePropertyInfo["onChange_ddlKaishuJiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onChange_ddlKaishuJiyu"];
             editablePropertyInfo["onBlur_txtKaishuRiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onBlur_txtKaishuRiyu"];
-<<<<<<< HEAD
             editablePropertyInfo["ShoKaishuJokyoShosai_panalDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["ShoKaishuJokyoShosai_panelDisplay"];
             editablePropertyInfo["ShoKaishuJokyoShosai_canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["ShoKaishuJokyoShosai_canOpenAndClose"];
-=======
->>>>>>> feature/UI-KyufuKanri-37343
             
             return editablePropertyInfo;
         }
@@ -155,10 +146,7 @@ module DBZ {
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
-<<<<<<< HEAD
      "heightForDialog": "M",
-     "onSelectBySelectButton": "onSelectBySelectButton_dgShoKaishuJokyo",
-     "onSelectByDblClick": "onSelectByDblClick_dgShoKaishuJokyo",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -357,10 +345,9 @@ module DBZ {
         "sortKey": ""
        }
       ]
-     }
-=======
-     "heightForDialog": "M"
->>>>>>> feature/UI-KyufuKanri-37343
+     },
+     "onSelectByDblClick": "onSelectByDblClick_dgShoKaishuJokyo",
+     "onSelectBySelectButton": "onSelectBySelectButton_dgShoKaishuJokyo"
     },
     {
      "fieldName": "ShoKaishuJokyoShosai",
@@ -395,13 +382,9 @@ module DBZ {
      "heightForDialog": "M",
      "onBlur_txtKaishuDate": "",
      "onChange_ddlKaishuJiyu": "",
-<<<<<<< HEAD
      "onBlur_txtKaishuRiyu": "",
      "ShoKaishuJokyoShosai_panelDisplay": 0,
      "ShoKaishuJokyoShosai_canOpenAndClose": true
-=======
-     "onBlur_txtKaishuRiyu": ""
->>>>>>> feature/UI-KyufuKanri-37343
     },
     {
      "fieldName": "btnUpdateShoKaishuJokyo",
@@ -423,8 +406,8 @@ module DBZ {
      "selectControlID": "btnUpdateShoKaishuJokyo",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "交付情報を確定する",
      "onClick": "onClick_btnUpdateShoKaishuJokyo",
+     "text": "交付情報を確定する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -534,7 +517,6 @@ module DBZ {
    "publicChildFieldName": "ShoKaishuJokyoShosai",
    "publicChildProperty": "onBlur_txtKaishuRiyu",
    "newPropertyName": "onBlur_txtKaishuRiyu"
-<<<<<<< HEAD
   },
   {
    "publicChildFieldName": "ShoKaishuJokyoShosai",
@@ -545,8 +527,6 @@ module DBZ {
    "publicChildFieldName": "ShoKaishuJokyoShosai",
    "publicChildProperty": "ShoKaishuJokyoShosai_canOpenAndClose",
    "newPropertyName": "ShoKaishuJokyoShosai_canOpenAndClose"
-=======
->>>>>>> feature/UI-KyufuKanri-37343
   }
  ],
  "dataPassingForDialog": [],
