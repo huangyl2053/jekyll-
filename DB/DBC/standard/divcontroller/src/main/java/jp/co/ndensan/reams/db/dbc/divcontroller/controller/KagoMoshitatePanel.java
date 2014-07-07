@@ -84,15 +84,13 @@ public class KagoMoshitatePanel {
         panel.getKagoMoshitateInfo().getTxtMoshitateshaKubun().
                 setValue(gaitoshaListpanel.getDgHihokenshaSearchGaitosha().getClickedItem().getTxtKyufuJissekiSakuseiKubun());
 
-        //様式
-        panel.getKagoMoshitateInfo().getTxtKagoForm().
-                setValue(gaitoshaListpanel.getDgHihokenshaSearchGaitosha().getClickedItem().getTxtKagoForm());
-
         List<HashMap> ymlData = ymlData("dbc1400011/KagoMoshitatePanel.yml");
         HashMap hashMap = ymlData.get(0);
         ControlGenerator ymlDt = new ControlGenerator(hashMap);
 
-        //送付年月
+        //様式
+        panel.getKagoMoshitateInfo().getTxtKagoForm().setValue((ymlDt.getAsRString("様式")));
+
         //証記載保険者番号　南魚沼市 　152264
         panel.getKagoMoshitateInfo().getTxtShokisaiHokenshaNo().setValue(ymlDt.getAsRString("shokisaiHokenshaNo"));
         //証記載保険者名
