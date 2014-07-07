@@ -23,13 +23,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
- * @author n8211
+ * @author N8211 田辺 紘一
  */
 public class Tokucho {
 
-    public static final RString TOKUCHO = new RString("DBB0320002/Tokucho.yml");
-    public static final RString IDOANDIRAI = new RString("DBB0320002/IdoAndIrai.yml");
-    public static final RString TOKUCHORESULT = new RString("DBB0320002/TokuchoResult.yml");
+    private static final RString TOKUCHO = new RString("DBB0320002/Tokucho.yml");
+    private static final RString IDOANDIRAI = new RString("DBB0320002/IdoAndIrai.yml");
+    private static final RString TOKUCHORESULT = new RString("DBB0320002/TokuchoResult.yml");
+    private static final RString NENKIN_HOKENSHA_TOTSUGO = new RString("DBB0320002/NenkinHokenshaTotsugo.yml");
 
     public ResponseData<TokuchoDiv> onClick_btnTokucho(TokuchoDiv div) {
 
@@ -88,6 +89,7 @@ public class Tokucho {
         }
 
         setTokucho(div, (List) formatData.get(0));
+        setNenkinHokenshaTotsugo(div);
         loadIdoAndIrai(div, key);
         loadTokuchoResult(div, key);
     }
@@ -450,5 +452,17 @@ public class Tokucho {
         yamlList.add(cg.getAsRString("処理結果"));
 
         return yamlList;
+    }
+
+    private void setNenkinHokenshaTotsugo(TokuchoDiv div) {
+        List<HashMap> demoData = YamlLoader.DBB.loadAsList(NENKIN_HOKENSHA_TOTSUGO);
+        ControlGenerator cg = new ControlGenerator(demoData.get(0));
+
+        div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKana().setValue(cg.getAsRString("氏名カナ"));
+        div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKanji().setValue(cg.getAsRString("氏名漢字"));
+        div.getNenkinHokenshaTotsugoJoho().getTxtJushoKana().setValue(cg.getAsRString("住所カナ"));
+        div.getNenkinHokenshaTotsugoJoho().getTxtJushoKanji().setValue(cg.getAsRString("住所漢字"));
+        div.getNenkinHokenshaTotsugoJoho().getTxtSex().setValue(cg.getAsRString("性別"));
+        div.getNenkinHokenshaTotsugoJoho().getTxtBirthYMD().setValue(cg.getAsRString("生年月日"));
     }
 }
