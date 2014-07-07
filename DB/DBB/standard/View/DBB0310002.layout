@@ -24,9 +24,9 @@
      "selectControlID": "lblHonsanteiKakuteiMsg",
      "helpMessageID": "",
      "jpControlName": "",
+     "text": "本算定賦課処理の結果を確定します。",
      "required": false,
      "isPrivateInfo": false,
-     "text": "本算定賦課処理の結果を確定します。",
      "decorationClass": "",
      "align": 0
     },
@@ -54,6 +54,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -67,7 +68,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "賦課年度",
@@ -100,6 +100,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -113,7 +114,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "処理日時",
@@ -165,11 +165,7 @@
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false
+     "height": "Auto"
     }
    ],
    "controlType": "Panel",
@@ -216,11 +212,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -307,16 +299,16 @@
       "selectControlID": "btnHonsanteiKakutei",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "確定する",
-      "imageWidth": "",
-      "imageHeight": "",
       "onClick": "",
+      "text": "確定",
       "appearance": 0,
       "imageFileUrl": "",
-      "icon": 1,
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
       "heightTextBoxMatches": false,
       "prefixText": "",
-      "suffixText": ""
+      "suffixText": "する"
      }
     }
    ],

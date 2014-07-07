@@ -3035,7 +3035,7 @@
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "本算定賦課計算2",
  "id": "DBB0310001",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -3167,16 +3167,16 @@
       "selectControlID": "btnSanteiYoyaku",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "予約する",
-      "imageWidth": "",
-      "imageHeight": "",
       "onClick": "",
+      "text": "予約",
       "appearance": 0,
       "imageFileUrl": "",
-      "icon": 1,
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
       "heightTextBoxMatches": false,
       "prefixText": "",
-      "suffixText": ""
+      "suffixText": "する"
      }
     }
    ],

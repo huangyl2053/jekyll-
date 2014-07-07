@@ -28,6 +28,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -41,7 +42,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "調定年度",
@@ -50,8 +50,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtFukaNendo",
@@ -74,6 +73,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -87,7 +87,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "賦課年度",
@@ -96,8 +95,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       }
      ],
      "controlType": "Panel",
@@ -273,9 +271,9 @@
        "selectControlID": "lblShoriKakunin1",
        "helpMessageID": "",
        "jpControlName": "",
+       "text": "※算定処理は上記処理がすべて完了してから行います。",
        "required": false,
        "isPrivateInfo": false,
-       "text": "※算定処理は上記処理がすべて完了してから行います。",
        "decorationClass": "",
        "align": 0
       }
@@ -345,6 +343,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -358,7 +357,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "増額",
@@ -367,8 +365,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       },
       {
        "fieldName": "txtKeisanHohoGengaku",
@@ -391,6 +388,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -404,7 +402,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "減額",
@@ -413,8 +410,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": ""
+       "decorationClass": ""
       }
      ],
      "controlType": "Panel",
@@ -647,16 +643,16 @@
       "selectControlID": "btnKeisanYoyaku",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "予約する",
-      "imageWidth": "",
-      "imageHeight": "",
       "onClick": "",
+      "text": "予約",
       "appearance": 0,
       "imageFileUrl": "",
-      "icon": 1,
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
       "heightTextBoxMatches": false,
       "prefixText": "",
-      "suffixText": ""
+      "suffixText": "する"
      }
     }
    ],
