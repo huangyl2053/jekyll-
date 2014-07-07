@@ -321,13 +321,13 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
+           "selectedItem": "jutokuTekiyo",
            "dataSource": [
             {
              "key": "jutokuTekiyo",
              "value": "住所地特例適用"
             }
            ],
-           "selectedItem": "jutokuTekiyo",
            "disabledItem": []
           },
           {
@@ -705,6 +705,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
+           "selectedItem": "kyokai",
            "dataSource": [
             {
              "key": "kyokai",
@@ -739,7 +740,6 @@
              "value": "組合国民健康保険"
             }
            ],
-           "selectedItem": "kyokai",
            "disabledItem": []
           },
           {
@@ -1804,6 +1804,7 @@
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
+             "selectedItem": "seikatsuFujo",
              "dataSource": [
               {
                "key": "seikatsuFujo",
@@ -1854,7 +1855,6 @@
                "value": "みなし扶助"
               }
              ],
-             "selectedItem": "seikatsuFujo",
              "disabledItem": []
             }
            ],
@@ -2466,7 +2466,7 @@
      }
     },
     {
-     "buttonKind": "CommonButtonUpdate",
+     "buttonKind": "CommonButtonBack",
      "buttonProperty": {
       "fieldName": "btnBackSearchResult",
       "items": [],
@@ -2504,7 +2504,9 @@
      "state": "住所地特例適用"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   },
   {
    "commonButtonAreaId": "Complete",
@@ -2548,7 +2550,9 @@
      "state": "処理完了"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
