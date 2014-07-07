@@ -713,7 +713,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "S",
+     "height": "350",
      "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
@@ -748,7 +748,7 @@
          "onClick": "onClick_ShowDetail",
          "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
          "imageWidth": "20",
-         "imageHeight": "15"
+         "imageHeight": "20"
         },
         "align": 1,
         "resize": false,
@@ -1007,7 +1007,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "362"
   },
   {
    "fieldName": "CommonButton",

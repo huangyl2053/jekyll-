@@ -1816,7 +1816,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "sortOrder": "txtShiharaizumiAmount",
+       "sortOrder": "txtKogakuShikyuAmount",
        "isAscending": true,
        "filterList": [],
        "activeRowId": -1
@@ -2407,11 +2407,6 @@
      "fieldName": "btnSetaiback",
      "event": "onClick",
      "transition": ""
-    },
-    {
-     "fieldName": "completeElement1",
-     "event": "onClick",
-     "transition": "終了"
     }
    ]
   },
@@ -2447,16 +2442,11 @@
      "fieldName": "btnSetaiback",
      "event": "onClick",
      "transition": "世帯情報"
-    },
-    {
-     "fieldName": "completeElement1",
-     "event": "onClick",
-     "transition": ""
     }
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "並べて照会",
  "id": "DBC0030013",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -2531,39 +2521,6 @@
       "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": "高額サービス費に"
-     }
-    },
-    {
-     "buttonKind": "CommonButtonComplete",
-     "buttonProperty": {
-      "fieldName": "completeElement1",
-      "items": [],
-      "controlType": "CommonButtonComplete",
-      "width": 1,
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "completeElement1",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "完了",
-      "imageWidth": "",
-      "imageHeight": "",
-      "onClick": "",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": "照会を"
      }
     }
    ],

@@ -154,12 +154,12 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "世帯情報を表示する",
+     "onClick": "btnShowSeteiJoho",
+     "icon": 0,
      "imageWidth": "",
      "imageHeight": "",
-     "onClick": "btnShowSeteiJoho",
      "appearance": 0,
      "imageFileUrl": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -194,13 +194,13 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "onClick_radPayMethod": "onClick_radPayMethod",
      "eraseBorderTop": true,
      "eraseBorderBottom": true,
      "eraseBorderRight": true,
      "eraseBorderLeft": true,
      "tplJudgementResult_title": "高額決定情報",
-     "tplKetteiJoho_visible": false
+     "tplKetteiJoho_visible": false,
+     "onClick_radPayMethod": "onClick_radPayMethod"
     }
    ],
    "controlType": "Panel",
@@ -346,16 +346,10 @@
     }
    ],
    "validation": {},
-   "events": [
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": "終了"
-    }
-   ]
+   "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "高額サービス費",
  "id": "DBC0030012",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -433,39 +427,6 @@
       "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": "一覧に"
-     }
-    },
-    {
-     "buttonKind": "CommonButtonComplete",
-     "buttonProperty": {
-      "fieldName": "btnComplete",
-      "items": [],
-      "controlType": "CommonButtonComplete",
-      "width": 1,
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnComplete",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "完了",
-      "imageWidth": "",
-      "imageHeight": "",
-      "onClick": "",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": "照会を"
      }
     }
    ],
