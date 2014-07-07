@@ -156,7 +156,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "174",
+     "height": "275",
      "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
@@ -511,7 +511,7 @@
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "marginTop": "Default",
+     "marginTop": "0",
      "marginBottom": "0",
      "eraseBorder": false,
      "backgroundColor": 0,
@@ -576,7 +576,7 @@
      "jpControlName": "",
      "onLoad": "",
      "title": "被保険者証発行一覧表",
-     "isOpen": true,
+     "isOpen": false,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
@@ -793,18 +793,15 @@
       "postParameterPanelNames": [
        {}
       ],
-      "text": "被保険者証を発行する",
-      "imageWidth": "",
-      "imageHeight": "",
       "onClick": "",
+      "icon": 0,
+      "text": "被保険者証を発行する",
       "appearance": 0,
       "imageFileUrl": "",
-      "icon": 0,
+      "imageWidth": "",
+      "imageHeight": "",
       "heightTextBoxMatches": false,
       "onAfterRequest": "",
-      "additionalText": "被保険者証を",
-      "prefixText": "",
-      "suffixText": "",
       "validateUrl": "",
       "sourceCreateUrl": "",
       "afterPrintUrl": "",
@@ -813,7 +810,8 @@
       "isPreview": false,
       "printable": false,
       "copiesChangeable": false,
-      "progressVisible": false
+      "progressVisible": false,
+      "additionalText": ""
      }
     }
    ],
