@@ -53,10 +53,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "月",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "月",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -102,10 +102,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "処理日時",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "処理日時",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -152,26 +152,26 @@
          "jpControlName": "",
          "readOnly": false,
          "onChange": "",
-         "selectedItem": null,
+         "labelLText": "",
+         "labelLWidth": "S",
+         "labelLAlign": 2,
+         "onClick": "",
+         "icon": [],
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onClick": "",
-         "selectedItems": [],
+         "selectedItem": null,
          "newLineItemNumber": 2,
+         "spaceSize": "M",
+         "disabledItem": [],
+         "selectedItems": [],
          "minCheckedItem": 0,
          "maxCheckedItem": 2,
-         "spaceSize": "M",
-         "labelLText": "",
-         "labelLWidth": "S",
-         "labelLAlign": 2,
          "isAllSelectable": false,
-         "isAllSelectableBreakLine": false,
-         "disabledItem": [],
-         "icon": []
+         "isAllSelectableBreakLine": false
         }
        ],
        "controlType": "TableCell",
@@ -217,10 +217,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "4月",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "4月",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -266,10 +266,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -315,10 +315,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "通知内容",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "通知内容",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -364,10 +364,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "資格喪失等",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "資格喪失等",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -413,10 +413,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "住所地特例該当者",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "住所地特例該当者",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -462,10 +462,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "仮徴収額変更",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "仮徴収額変更",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -511,10 +511,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "特徴追加依頼",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "特徴追加依頼",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -745,26 +745,26 @@
          "jpControlName": "",
          "readOnly": false,
          "onChange": "",
-         "selectedItem": null,
+         "labelLText": "",
+         "labelLWidth": "S",
+         "labelLAlign": 2,
+         "onClick": "",
+         "icon": [],
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onClick": "",
-         "selectedItems": [],
+         "selectedItem": null,
          "newLineItemNumber": 2,
+         "spaceSize": "M",
+         "disabledItem": [],
+         "selectedItems": [],
          "minCheckedItem": 0,
          "maxCheckedItem": 2,
-         "spaceSize": "M",
-         "labelLText": "",
-         "labelLWidth": "S",
-         "labelLAlign": 2,
          "isAllSelectable": false,
-         "isAllSelectableBreakLine": false,
-         "disabledItem": [],
-         "icon": []
+         "isAllSelectableBreakLine": false
         }
        ],
        "controlType": "TableCell",
@@ -810,10 +810,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "5月",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "5月",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -859,10 +859,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -1069,26 +1069,26 @@
          "jpControlName": "",
          "readOnly": false,
          "onChange": "",
-         "selectedItem": null,
+         "labelLText": "",
+         "labelLWidth": "S",
+         "labelLAlign": 2,
+         "onClick": "",
+         "icon": [],
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onClick": "",
-         "selectedItems": [],
+         "selectedItem": null,
          "newLineItemNumber": 2,
+         "spaceSize": "M",
+         "disabledItem": [],
+         "selectedItems": [],
          "minCheckedItem": 0,
          "maxCheckedItem": 2,
-         "spaceSize": "M",
-         "labelLText": "",
-         "labelLWidth": "S",
-         "labelLAlign": 2,
          "isAllSelectable": false,
-         "isAllSelectableBreakLine": false,
-         "disabledItem": [],
-         "icon": []
+         "isAllSelectableBreakLine": false
         }
        ],
        "controlType": "TableCell",
@@ -1134,10 +1134,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "6月",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "6月",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -1183,10 +1183,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -1418,26 +1418,26 @@
          "readOnly": false,
          "required": false,
          "onChange": "",
-         "selectedItem": null,
+         "labelLText": "",
+         "labelLWidth": "S",
+         "labelLAlign": 2,
+         "onClick": "onClick_chkSentaku07",
+         "icon": [],
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onClick": "onClick_chkSentaku07",
-         "selectedItems": [],
+         "selectedItem": null,
          "newLineItemNumber": 2,
+         "spaceSize": "M",
+         "disabledItem": [],
+         "selectedItems": [],
          "minCheckedItem": 0,
          "maxCheckedItem": 2,
-         "spaceSize": "M",
-         "labelLText": "",
-         "labelLWidth": "S",
-         "labelLAlign": 2,
          "isAllSelectable": false,
-         "isAllSelectableBreakLine": false,
-         "disabledItem": [],
-         "icon": []
+         "isAllSelectableBreakLine": false
         }
        ],
        "controlType": "TableCell",
@@ -1483,10 +1483,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "7月",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "7月",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -1532,10 +1532,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -1719,14 +1719,21 @@
          "readOnly": false,
          "required": false,
          "onChange": "",
-         "selectedItem": null,
+         "labelLText": "",
+         "labelLWidth": "S",
+         "labelLAlign": 2,
+         "onClick": "onClick_chkSentaku08",
+         "icon": [],
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onClick": "onClick_chkSentaku08",
+         "selectedItem": null,
+         "newLineItemNumber": 2,
+         "spaceSize": "M",
+         "disabledItem": [],
          "selectedItems": [
           {
            "key": "isAllSelect",
@@ -1737,17 +1744,10 @@
            "value": ""
           }
          ],
-         "newLineItemNumber": 2,
          "minCheckedItem": 0,
          "maxCheckedItem": 2,
-         "spaceSize": "M",
-         "labelLText": "",
-         "labelLWidth": "S",
-         "labelLAlign": 2,
          "isAllSelectable": false,
-         "isAllSelectableBreakLine": false,
-         "disabledItem": [],
-         "icon": []
+         "isAllSelectableBreakLine": false
         }
        ],
        "controlType": "TableCell",
@@ -1793,10 +1793,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "8月",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "8月",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -1842,10 +1842,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -2053,26 +2053,26 @@
          "readOnly": false,
          "required": false,
          "onChange": "",
-         "selectedItem": null,
+         "labelLText": "",
+         "labelLWidth": "S",
+         "labelLAlign": 2,
+         "onClick": "",
+         "icon": [],
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onClick": "",
-         "selectedItems": [],
+         "selectedItem": null,
          "newLineItemNumber": 2,
+         "spaceSize": "M",
+         "disabledItem": [],
+         "selectedItems": [],
          "minCheckedItem": 0,
          "maxCheckedItem": 2,
-         "spaceSize": "M",
-         "labelLText": "",
-         "labelLWidth": "S",
-         "labelLAlign": 2,
          "isAllSelectable": false,
-         "isAllSelectableBreakLine": false,
-         "disabledItem": [],
-         "icon": []
+         "isAllSelectableBreakLine": false
         }
        ],
        "controlType": "TableCell",
@@ -2118,10 +2118,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "9月",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "9月",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -2167,10 +2167,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -2353,26 +2353,26 @@
          "jpControlName": "",
          "readOnly": false,
          "onChange": "",
-         "selectedItem": null,
+         "labelLText": "",
+         "labelLWidth": "S",
+         "labelLAlign": 2,
+         "onClick": "",
+         "icon": [],
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onClick": "",
-         "selectedItems": [],
+         "selectedItem": null,
          "newLineItemNumber": 2,
+         "spaceSize": "M",
+         "disabledItem": [],
+         "selectedItems": [],
          "minCheckedItem": 0,
          "maxCheckedItem": 2,
-         "spaceSize": "M",
-         "labelLText": "",
-         "labelLWidth": "S",
-         "labelLAlign": 2,
          "isAllSelectable": false,
-         "isAllSelectableBreakLine": false,
-         "disabledItem": [],
-         "icon": []
+         "isAllSelectableBreakLine": false
         }
        ],
        "controlType": "TableCell",
@@ -2418,10 +2418,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "10月",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "10月",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -2467,10 +2467,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -2677,26 +2677,26 @@
          "jpControlName": "",
          "readOnly": false,
          "onChange": "",
-         "selectedItem": null,
+         "labelLText": "",
+         "labelLWidth": "S",
+         "labelLAlign": 2,
+         "onClick": "",
+         "icon": [],
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onClick": "",
-         "selectedItems": [],
+         "selectedItem": null,
          "newLineItemNumber": 2,
+         "spaceSize": "M",
+         "disabledItem": [],
+         "selectedItems": [],
          "minCheckedItem": 0,
          "maxCheckedItem": 2,
-         "spaceSize": "M",
-         "labelLText": "",
-         "labelLWidth": "S",
-         "labelLAlign": 2,
          "isAllSelectable": false,
-         "isAllSelectableBreakLine": false,
-         "disabledItem": [],
-         "icon": []
+         "isAllSelectableBreakLine": false
         }
        ],
        "controlType": "TableCell",
@@ -2742,10 +2742,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "11月",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "11月",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -2791,10 +2791,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -2977,26 +2977,26 @@
          "jpControlName": "",
          "readOnly": false,
          "onChange": "",
-         "selectedItem": null,
+         "labelLText": "",
+         "labelLWidth": "S",
+         "labelLAlign": 2,
+         "onClick": "",
+         "icon": [],
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onClick": "",
-         "selectedItems": [],
+         "selectedItem": null,
          "newLineItemNumber": 2,
+         "spaceSize": "M",
+         "disabledItem": [],
+         "selectedItems": [],
          "minCheckedItem": 0,
          "maxCheckedItem": 2,
-         "spaceSize": "M",
-         "labelLText": "",
-         "labelLWidth": "S",
-         "labelLAlign": 2,
          "isAllSelectable": false,
-         "isAllSelectableBreakLine": false,
-         "disabledItem": [],
-         "icon": []
+         "isAllSelectableBreakLine": false
         }
        ],
        "controlType": "TableCell",
@@ -3042,10 +3042,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "12月",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "12月",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -3091,10 +3091,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -3301,26 +3301,26 @@
          "jpControlName": "",
          "readOnly": false,
          "onChange": "",
-         "selectedItem": null,
+         "labelLText": "",
+         "labelLWidth": "S",
+         "labelLAlign": 2,
+         "onClick": "",
+         "icon": [],
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onClick": "",
-         "selectedItems": [],
+         "selectedItem": null,
          "newLineItemNumber": 2,
+         "spaceSize": "M",
+         "disabledItem": [],
+         "selectedItems": [],
          "minCheckedItem": 0,
          "maxCheckedItem": 2,
-         "spaceSize": "M",
-         "labelLText": "",
-         "labelLWidth": "S",
-         "labelLAlign": 2,
          "isAllSelectable": false,
-         "isAllSelectableBreakLine": false,
-         "disabledItem": [],
-         "icon": []
+         "isAllSelectableBreakLine": false
         }
        ],
        "controlType": "TableCell",
@@ -3366,10 +3366,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "1月",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "1月",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -3415,10 +3415,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -3601,26 +3601,26 @@
          "jpControlName": "",
          "readOnly": false,
          "onChange": "",
-         "selectedItem": null,
+         "labelLText": "",
+         "labelLWidth": "S",
+         "labelLAlign": 2,
+         "onClick": "",
+         "icon": [],
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onClick": "",
-         "selectedItems": [],
+         "selectedItem": null,
          "newLineItemNumber": 2,
+         "spaceSize": "M",
+         "disabledItem": [],
+         "selectedItems": [],
          "minCheckedItem": 0,
          "maxCheckedItem": 2,
-         "spaceSize": "M",
-         "labelLText": "",
-         "labelLWidth": "S",
-         "labelLAlign": 2,
          "isAllSelectable": false,
-         "isAllSelectableBreakLine": false,
-         "disabledItem": [],
-         "icon": []
+         "isAllSelectableBreakLine": false
         }
        ],
        "controlType": "TableCell",
@@ -3666,10 +3666,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "2月",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "2月",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -3715,10 +3715,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -3925,26 +3925,26 @@
          "jpControlName": "",
          "readOnly": false,
          "onChange": "",
-         "selectedItem": null,
+         "labelLText": "",
+         "labelLWidth": "S",
+         "labelLAlign": 2,
+         "onClick": "",
+         "icon": [],
          "dataSource": [
           {
            "key": "key0",
            "value": ""
           }
          ],
-         "onClick": "",
-         "selectedItems": [],
+         "selectedItem": null,
          "newLineItemNumber": 2,
+         "spaceSize": "M",
+         "disabledItem": [],
+         "selectedItems": [],
          "minCheckedItem": 0,
          "maxCheckedItem": 2,
-         "spaceSize": "M",
-         "labelLText": "",
-         "labelLWidth": "S",
-         "labelLAlign": 2,
          "isAllSelectable": false,
-         "isAllSelectableBreakLine": false,
-         "disabledItem": [],
-         "icon": []
+         "isAllSelectableBreakLine": false
         }
        ],
        "controlType": "TableCell",
@@ -3990,10 +3990,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "3月",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "3月",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -4039,10 +4039,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "required": false,
-         "align": 1,
-         "text": "",
          "isPrivateInfo": false,
-         "decorationClass": ""
+         "text": "",
+         "decorationClass": "",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -4218,7 +4218,7 @@
      "selectControlID": "tbldgTokuchoIdoJoho",
      "helpMessageID": "",
      "jpControlName": "",
-     "html": "<table border=\"1\" cellspacing=0 cellpadding=0>\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td rowspan=\"2\" id='R1C1'></td><td rowspan=\"2\" id='R1C2'></td><td rowspan=\"2\" id='R1C3'></td><td  colspan=\"4\" id='R1C4'></td></tr>\n    <tr bgcolor=\"lightgrey\"><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td><td id='R3C7'></td></tr>\n    <tr><td id='R4C1'></td><td id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td><td id='R4C5'></td><td id='R4C6'></td><td id='R4C7'></td></tr>\n    <tr><td id='R5C1'></td><td id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td><td id='R5C5'></td><td id='R5C6'></td><td id='R5C7'></td></tr>\n    <tr><td id='R6C1'></td><td id='R6C2'></td><td id='R6C3'></td><td id='R6C4'></td><td id='R6C5'></td><td id='R6C6'></td><td id='R6C7'></td></tr>\n    <tr><td id='R7C1'></td><td id='R7C2'></td><td id='R7C3'></td><td id='R7C4'></td><td id='R7C5'></td><td id='R7C6'></td><td id='R7C7'></td></tr>\n    <tr><td id='R8C1'></td><td id='R8C2'></td><td id='R8C3'></td><td id='R8C4'></td><td id='R8C5'></td><td id='R8C6'></td><td id='R8C7'></td></tr>\n    <tr><td id='R9C1'></td><td id='R9C2'></td><td id='R9C3'></td><td id='R9C4'></td><td id='R9C5'></td><td id='R9C6'></td><td id='R9C7'></td></tr>\n    <tr><td id='R10C1'></td><td id='R10C2'></td><td id='R10C3'></td><td id='R10C4'></td><td id='R10C5'></td><td id='R10C6'></td><td id='R10C7'></td></tr>\n    <tr><td id='R11C1'></td><td id='R11C2'></td><td id='R11C3'></td><td id='R11C4'></td><td id='R11C5'></td><td id='R11C6'></td><td id='R11C7'></td></tr>\n    <tr><td id='R12C1'></td><td id='R12C2'></td><td id='R12C3'></td><td id='R12C4'></td><td id='R12C5'></td><td id='R12C6'></td><td id='R12C7'></td></tr>\n    <tr><td id='R13C1'></td><td id='R13C2'></td><td id='R13C3'></td><td id='R13C4'></td><td id='R13C5'></td><td id='R13C6'></td><td id='R13C7'></td></tr>\n    <tr><td id='R14C1'></td><td id='R14C2'></td><td id='R14C3'></td><td id='R14C4'></td><td id='R14C5'></td><td id='R14C6'></td><td id='R14C7'></td></tr>\n  </tbody>\n</table>\n"
+     "html": "<table border=\"1\" cellspacing=0 cellpadding=0>\n  <tbody>\n    <tr bgcolor=#d7ebf6><td rowspan=\"2\" id='R1C1'></td><td rowspan=\"2\" id='R1C2'></td><td rowspan=\"2\" id='R1C3'></td><td  colspan=\"4\" id='R1C4'></td></tr>\n    <tr bgcolor=#d7ebf6><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td><td id='R3C7'></td></tr>\n    <tr><td id='R4C1'></td><td id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td><td id='R4C5'></td><td id='R4C6'></td><td id='R4C7'></td></tr>\n    <tr><td id='R5C1'></td><td id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td><td id='R5C5'></td><td id='R5C6'></td><td id='R5C7'></td></tr>\n    <tr><td id='R6C1'></td><td id='R6C2'></td><td id='R6C3'></td><td id='R6C4'></td><td id='R6C5'></td><td id='R6C6'></td><td id='R6C7'></td></tr>\n    <tr><td id='R7C1'></td><td id='R7C2'></td><td id='R7C3'></td><td id='R7C4'></td><td id='R7C5'></td><td id='R7C6'></td><td id='R7C7'></td></tr>\n    <tr><td id='R8C1'></td><td id='R8C2'></td><td id='R8C3'></td><td id='R8C4'></td><td id='R8C5'></td><td id='R8C6'></td><td id='R8C7'></td></tr>\n    <tr><td id='R9C1'></td><td id='R9C2'></td><td id='R9C3'></td><td id='R9C4'></td><td id='R9C5'></td><td id='R9C6'></td><td id='R9C7'></td></tr>\n    <tr><td id='R10C1'></td><td id='R10C2'></td><td id='R10C3'></td><td id='R10C4'></td><td id='R10C5'></td><td id='R10C6'></td><td id='R10C7'></td></tr>\n    <tr><td id='R11C1'></td><td id='R11C2'></td><td id='R11C3'></td><td id='R11C4'></td><td id='R11C5'></td><td id='R11C6'></td><td id='R11C7'></td></tr>\n    <tr><td id='R12C1'></td><td id='R12C2'></td><td id='R12C3'></td><td id='R12C4'></td><td id='R12C5'></td><td id='R12C6'></td><td id='R12C7'></td></tr>\n    <tr><td id='R13C1'></td><td id='R13C2'></td><td id='R13C3'></td><td id='R13C4'></td><td id='R13C5'></td><td id='R13C6'></td><td id='R13C7'></td></tr>\n    <tr><td id='R14C1'></td><td id='R14C2'></td><td id='R14C3'></td><td id='R14C4'></td><td id='R14C5'></td><td id='R14C6'></td><td id='R14C7'></td></tr>\n  </tbody>\n</table>\n"
     },
     {
      "fieldName": "TokuchoIdoJohoSaiSakusei",
@@ -4244,10 +4244,10 @@
        "helpMessageID": "",
        "jpControlName": "",
        "required": false,
-       "align": 0,
-       "text": "再作成を行います。",
        "isPrivateInfo": false,
-       "decorationClass": ""
+       "text": "再作成を行います。",
+       "decorationClass": "",
+       "align": 0
       },
       {
        "fieldName": "lblSaiSakuseiMsg2",
@@ -4270,10 +4270,10 @@
        "helpMessageID": "",
        "jpControlName": "",
        "required": false,
-       "align": 0,
-       "text": "再作成の原因への対応を行ってから処理を実行してください。",
        "isPrivateInfo": false,
-       "decorationClass": ""
+       "text": "再作成の原因への対応を行ってから処理を実行してください。",
+       "decorationClass": "",
+       "align": 0
       }
      ],
      "controlType": "Panel",
