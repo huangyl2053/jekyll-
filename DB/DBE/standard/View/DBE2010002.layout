@@ -2737,7 +2737,7 @@
    "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "依頼先手動登録",
  "id": "DBE2010002",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -2784,7 +2784,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "この内容で"
+      "additionalText": ""
      }
     }
    ],
