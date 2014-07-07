@@ -338,11 +338,7 @@ public class NinteiShinsakaiTaishoshaWariate {
                 RString strKijunJikan = cg.getAsRString("kijunJikan");
                 RString strFuriwakeKbn = cg.getAsRString("furiwakeKbn");
                 ShujiiData.Doctor doctor = new ShujiiData().get主治医From(cg.getAsRString("shujiiCode"));
-                RString strIryoKikanMei = cg.getAsRString("iryoKikanMei");
-                RString strShujiiMei = cg.getAsRString("shujiiMei");
                 ChosainData.Chosain chosain = new ChosainData().get調査員From(cg.getAsRString("chosainCode"));
-                RString strChosaKikanMei = cg.getAsRString("chosaKikanMei");
-                RString strChosainMei = cg.getAsRString("chosainMei");
 
                 arrayDataList.add(createRowWariatezumiTaishoshaIchiran(
                         strShinsaNo,
@@ -375,11 +371,7 @@ public class NinteiShinsakaiTaishoshaWariate {
                 RString strIchijiHantei = cg.getAsRString("ichijiHantei");
                 RString strKijunJikan = cg.getAsRString("kijunJikan");
                 ShujiiData.Doctor doctor = new ShujiiData().get主治医From(cg.getAsRString("shujiiCode"));
-                RString strIryoKikanMei = cg.getAsRString("iryoKikanMei");
-                RString strShujiiMei = cg.getAsRString("shujiiMei");
                 ChosainData.Chosain chosain = new ChosainData().get調査員From(cg.getAsRString("chosainCode"));
-                RString strChosaKikanMei = cg.getAsRString("chosaKikanMei");
-                RString strChosainMei = cg.getAsRString("chosainMei");
 
                 arrayDataList.add(createRowMiwariateTaishoshaIchiran(
                         strHokensha,
