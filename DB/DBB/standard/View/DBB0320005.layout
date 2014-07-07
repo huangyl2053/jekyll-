@@ -619,7 +619,7 @@
        "selectControlID": "tblChoteiJiyu3",
        "helpMessageID": "",
        "jpControlName": "",
-       "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td></tr>\n    <tr><td id='R2C1'></td></tr>\n    <tr><td id='R3C1'></td></tr>\n    <tr><td id='R4C1'></td></tr>\n    <tr><td id='R5C1'></td></tr>\n  </tbody>\n</table>\n"
+       "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightblue\"><td id='R1C1'></td></tr>\n    <tr><td id='R2C1'></td></tr>\n    <tr><td id='R3C1'></td></tr>\n    <tr><td id='R4C1'></td></tr>\n    <tr><td id='R5C1'></td></tr>\n  </tbody>\n</table>\n"
       },
       {
        "fieldName": "FukaHikakuFukakijun3",
@@ -2574,7 +2574,7 @@
        "selectControlID": "tblChoteiJiyu4",
        "helpMessageID": "",
        "jpControlName": "",
-       "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td></tr>\n    <tr><td id='R2C1'></td></tr>\n    <tr><td id='R3C1'></td></tr>\n    <tr><td id='R4C1'></td></tr>\n    <tr><td id='R5C1'></td></tr>\n  </tbody>\n</table>\n"
+       "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightblue\"><td id='R1C1'></td></tr>\n    <tr><td id='R2C1'></td></tr>\n    <tr><td id='R3C1'></td></tr>\n    <tr><td id='R4C1'></td></tr>\n    <tr><td id='R5C1'></td></tr>\n  </tbody>\n</table>\n"
       },
       {
        "fieldName": "FukaHikakuFukakijun4",
@@ -4092,6 +4092,10 @@
   {
    "alias": "narabete",
    "eventName": "btnDemoNarabete.onClick"
+  },
+  {
+   "alias": "fukaShokai",
+   "eventName": "btnCloseNarebetehyoji.onClick"
   }
  ],
  "loadSequencePanelNames": [
@@ -4129,5 +4133,52 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "BackFukaShokai",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnCloseNarebetehyoji",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCloseNarebetehyoji",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "並べて表示"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ]
 }

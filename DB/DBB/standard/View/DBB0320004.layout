@@ -619,7 +619,7 @@
        "selectControlID": "tblChoteiJiyu1",
        "helpMessageID": "",
        "jpControlName": "",
-       "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td></tr>\n    <tr><td id='R2C1'></td></tr>\n    <tr><td id='R3C1'></td></tr>\n    <tr><td id='R4C1'></td></tr>\n    <tr><td id='R5C1'></td></tr>\n  </tbody>\n</table>\n"
+       "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightblue\"><td id='R1C1'></td></tr>\n    <tr><td id='R2C1'></td></tr>\n    <tr><td id='R3C1'></td></tr>\n    <tr><td id='R4C1'></td></tr>\n    <tr><td id='R5C1'></td></tr>\n  </tbody>\n</table>\n"
       },
       {
        "fieldName": "FukaHikakuFukakijun1",
@@ -1121,11 +1121,11 @@
          "TokuKibetsuGakuVisible5": true,
          "TokuKibetsuGakuVisible6": true,
          "TokuNofuGakuText1": "",
-         "TokuNofuGakuText2": "",
-         "TokuNofuGakuText3": "",
-         "TokuNofuGakuText4": "",
-         "TokuNofuGakuText5": "",
-         "TokuNofuGakuText6": "",
+         "TokuNofuGakuText2": "12,345",
+         "TokuNofuGakuText3": "12,345",
+         "TokuNofuGakuText4": "12,345",
+         "TokuNofuGakuText5": "12,345",
+         "TokuNofuGakuText6": "12,345",
          "TokuNofuGakuText7": true,
          "TokuNofuGakuText8": true,
          "TokuNofuGakuText9": true,
@@ -1148,20 +1148,20 @@
          "TokuNofuGakuVisible12": true,
          "TokuNofuGakuVisible13": true,
          "TokuNofuGakuVisible14": true,
-         "FuchoKiText1": "",
-         "FuchoKiText2": "",
+         "FuchoKiText1": "1期",
+         "FuchoKiText2": "1期",
          "FuchoKiText3": "1期",
-         "FuchoKiText4": "2期",
-         "FuchoKiText5": "3期",
-         "FuchoKiText6": "4期",
-         "FuchoKiText7": "5期",
-         "FuchoKiText8": "6期",
-         "FuchoKiText9": "7期",
-         "FuchoKiText10": "8期",
-         "FuchoKiText11": "9期",
-         "FuchoKiText12": "10期",
-         "FuchoKiText13": "",
-         "FuchoKiText14": "",
+         "FuchoKiText4": "1期",
+         "FuchoKiText5": "1期",
+         "FuchoKiText6": "1期",
+         "FuchoKiText7": "1期",
+         "FuchoKiText8": "1期",
+         "FuchoKiText9": "1期",
+         "FuchoKiText10": "1期",
+         "FuchoKiText11": "1期",
+         "FuchoKiText12": "1期",
+         "FuchoKiText13": "1期",
+         "FuchoKiText14": "14期",
          "FuchoKiVisible1": true,
          "FuchoKiVisible2": true,
          "FuchoKiVisible3": true,
@@ -1176,20 +1176,20 @@
          "FuchoKiVisible12": true,
          "FuchoKiVisible13": true,
          "FuchoKiVisible14": true,
-         "FuchoKibetsuGakuText1": "",
-         "FuchoKibetsuGakuText2": "",
-         "FuchoKibetsuGakuText3": "",
-         "FuchoKibetsuGakuText4": "",
-         "FuchoKibetsuGakuText5": "",
-         "FuchoKibetsuGakuText6": "",
-         "FuchoKibetsuGakuText7": "",
-         "FuchoKibetsuGakuText8": "",
-         "FuchoKibetsuGakuText9": "",
-         "FuchoKibetsuGakuText10": "",
-         "FuchoKibetsuGakuText11": "",
-         "FuchoKibetsuGakuText12": "",
-         "FuchoKibetsuGakuText13": "",
-         "FuchoKibetsuGakuText14": "",
+         "FuchoKibetsuGakuText1": "12,345",
+         "FuchoKibetsuGakuText2": "12,345",
+         "FuchoKibetsuGakuText3": "12,345",
+         "FuchoKibetsuGakuText4": "12,345",
+         "FuchoKibetsuGakuText5": "12,345",
+         "FuchoKibetsuGakuText6": "12,345",
+         "FuchoKibetsuGakuText7": "12,345",
+         "FuchoKibetsuGakuText8": "12,345",
+         "FuchoKibetsuGakuText9": "12,345",
+         "FuchoKibetsuGakuText10": "12,345",
+         "FuchoKibetsuGakuText11": "12,345",
+         "FuchoKibetsuGakuText12": "12,345",
+         "FuchoKibetsuGakuText13": "12,345",
+         "FuchoKibetsuGakuText14": "12,345",
          "FuchoKibetsuGakuVisible1": true,
          "FuchoKibetsuGakuVisible2": true,
          "FuchoKibetsuGakuVisible3": true,
@@ -1204,20 +1204,20 @@
          "FuchoKibetsuGakuVisible12": true,
          "FuchoKibetsuGakuVisible13": true,
          "FuchoKibetsuGakuVisible14": true,
-         "FuchoNofuGakuText1": "",
-         "FuchoNofuGakuText2": "",
-         "FuchoNofuGakuText3": "",
-         "FuchoNofuGakuText4": "",
-         "FuchoNofuGakuText5": "",
-         "FuchoNofuGakuText6": "",
-         "FuchoNofuGakuText7": "",
-         "FuchoNofuGakuText8": "",
-         "FuchoNofuGakuText9": "",
-         "FuchoNofuGakuText10": "",
-         "FuchoNofuGakuText11": "",
-         "FuchoNofuGakuText12": "",
-         "FuchoNofuGakuText13": "",
-         "FuchoNofuGakuText14": "",
+         "FuchoNofuGakuText1": "12,345",
+         "FuchoNofuGakuText2": "12,345",
+         "FuchoNofuGakuText3": "12,345",
+         "FuchoNofuGakuText4": "12,345",
+         "FuchoNofuGakuText5": "12,345",
+         "FuchoNofuGakuText6": "12,345",
+         "FuchoNofuGakuText7": "12,345",
+         "FuchoNofuGakuText8": "12,345",
+         "FuchoNofuGakuText9": "12,345",
+         "FuchoNofuGakuText10": "12,345",
+         "FuchoNofuGakuText11": "12,345",
+         "FuchoNofuGakuText12": "12,345",
+         "FuchoNofuGakuText13": "12,345",
+         "FuchoNofuGakuText14": "12,345",
          "FuchoNofuGakuVisible1": true,
          "FuchoNofuGakuVisible2": true,
          "FuchoNofuGakuVisible3": true,
@@ -1234,11 +1234,11 @@
          "FuchoNofuGakuVisible14": true,
          "TokuKibetsugakuKeiText": "",
          "TokuKibetsugakuKeiVisible": true,
-         "TokuNofugakuKeiText": "",
+         "TokuNofugakuKeiText": "12,345",
          "TokuNofugakuKeiVisible": true,
-         "FuchoKibetsugakuKeiText": "",
+         "FuchoKibetsugakuKeiText": "12,345",
          "FuchoKibetsugakuKeiVisible": true,
-         "FuchoNoufugakuKeiText": "",
+         "FuchoNoufugakuKeiText": "12,345",
          "FuchoNofugakuKeiVisible": true
         }
        ],
@@ -1940,7 +1940,7 @@
        "selectControlID": "tblChoteiJiyu3",
        "helpMessageID": "",
        "jpControlName": "",
-       "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td></tr>\n    <tr><td id='R2C1'></td></tr>\n    <tr><td id='R3C1'></td></tr>\n    <tr><td id='R4C1'></td></tr>\n    <tr><td id='R5C1'></td></tr>\n  </tbody>\n</table>\n"
+       "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr bgcolor=\"lightblue\"><td id='R1C1'></td></tr>\n    <tr><td id='R2C1'></td></tr>\n    <tr><td id='R3C1'></td></tr>\n    <tr><td id='R4C1'></td></tr>\n    <tr><td id='R5C1'></td></tr>\n  </tbody>\n</table>\n"
       },
       {
        "fieldName": "FukaHikakuFukakijun3",
@@ -3385,7 +3385,7 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "初期",
+   "stateName": "前比較",
    "showWizard": false,
    "visibleDivs": [
     {
@@ -3455,13 +3455,17 @@
    "events": []
   }
  ],
- "currentState": "初期",
+ "currentState": "All",
  "id": "DBB0320004",
  "WFParameter": [],
  "UIContainerEventMapping": [
   {
    "alias": "maeHikaku",
    "eventName": "btnDemoDummy.onClick"
+  },
+  {
+   "alias": "fukaRireki",
+   "eventName": "btnCloseMaeHikaku.onClick"
   }
  ],
  "loadSequencePanelNames": [
@@ -3502,5 +3506,52 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "BackFukaRireki",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnCloseMaeHikaku",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCloseMaeHikaku",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "前比較"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ]
 }
