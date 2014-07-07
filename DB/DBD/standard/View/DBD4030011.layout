@@ -155,7 +155,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "338",
+     "height": "381",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -782,7 +782,7 @@
       "fieldName": "btnNintei",
       "items": [],
       "controlType": "CommonButtonFree",
-      "width": 1,
+      "width": 0,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -806,7 +806,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "一括作成を"
+      "additionalText": ""
      }
     }
    ],

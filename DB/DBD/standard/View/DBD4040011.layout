@@ -855,46 +855,12 @@
    "commonButtonAreaId": "ShogaishaKojoTaishoshaNinteishoHakko",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonComplete",
-     "buttonProperty": {
-      "fieldName": "btnNinteishoHakko",
-      "items": [],
-      "controlType": "CommonButtonNext",
-      "width": 1,
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnNinteishoHakko",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "postParameterPanelNames": [],
-      "text": "認定書を発行する",
-      "imageWidth": "",
-      "imageHeight": "",
-      "onClick": "",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": "認定書発行を"
-     }
-    },
-    {
      "buttonKind": "CommonButtonBack",
      "buttonProperty": {
       "fieldName": "btnReturnToSearch",
       "items": [],
       "controlType": "ButtonReportPublish",
-      "width": 1,
+      "width": 0,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -919,16 +885,7 @@
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "validateUrl": "",
-      "sourceCreateUrl": "",
-      "afterPrintUrl": "",
-      "isModal": true,
-      "isInstruction": true,
-      "isPreview": false,
-      "printable": false,
-      "copiesChangeable": false,
-      "progressVisible": false,
-      "additionalText": "対象者検索に"
+      "additionalText": ""
      }
     }
    ],
