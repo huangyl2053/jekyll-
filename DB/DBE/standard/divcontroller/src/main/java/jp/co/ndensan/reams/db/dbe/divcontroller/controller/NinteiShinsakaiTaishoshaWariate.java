@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.NinteiShinsakaiTaishoshaWariateDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.NinteiShinsakaiIchiranDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.dgWariatezumiTaishoshaIchiran_Row;
@@ -205,13 +207,13 @@ public class NinteiShinsakaiTaishoshaWariate {
                     new RString("dbe4060001/TaishoshaIchiran.yml"));
 
             //割当済み対象者一覧の初期設定
-            List wariatezumiData = createRowTaishoshaIchiran(taishoshaIchiranData, WARIATEZUMI);
+            List<dgWariatezumiTaishoshaIchiran_Row> wariatezumiData = createRowTaishoshaIchiran(taishoshaIchiranData, WARIATEZUMI);
             DataGrid dgWariatezumiList = panel.getTabWariate().getTplTaishoshaWariate().getWariateZumisha().
                     getDgWariatezumiTaishoshaIchiran();
             dgWariatezumiList.setDataSource(wariatezumiData);
 
             //未割当対象者一覧の初期設定
-            List miwariateData = createRowTaishoshaIchiran(taishoshaIchiranData, MIWARIATE);
+            List<dgMiwariateTaishoshaIchiran_Row> miwariateData = createRowTaishoshaIchiran(taishoshaIchiranData, MIWARIATE);
             DataGrid dgMiwariateList = panel.getTabWariate().getTplTaishoshaWariate().getMiwariatesha().
                     getDgMiwariateTaishoshaIchiran();
             dgMiwariateList.setDataSource(miwariateData);
@@ -316,7 +318,7 @@ public class NinteiShinsakaiTaishoshaWariate {
     private List createRowTaishoshaIchiran(List<HashMap> taishoshaIchiranData, int iList) {
 
         int iShinsaNo = 1;
-        List arrayDataList = new ArrayList();
+        List arrayDataList = new ArrayList<>();
 
         for (int i = 0; i < taishoshaIchiranData.size(); i++) {
 
@@ -335,8 +337,10 @@ public class NinteiShinsakaiTaishoshaWariate {
                 RString strIchijiHantei = cg.getAsRString("ichijiHantei");
                 RString strKijunJikan = cg.getAsRString("kijunJikan");
                 RString strFuriwakeKbn = cg.getAsRString("furiwakeKbn");
+                ShujiiData.Doctor doctor = new ShujiiData().get主治医From(cg.getAsRString("shujiiCode"));
                 RString strIryoKikanMei = cg.getAsRString("iryoKikanMei");
                 RString strShujiiMei = cg.getAsRString("shujiiMei");
+                ChosainData.Chosain chosain = new ChosainData().get調査員From(cg.getAsRString("chosainCode"));
                 RString strChosaKikanMei = cg.getAsRString("chosaKikanMei");
                 RString strChosainMei = cg.getAsRString("chosainMei");
 
@@ -352,10 +356,10 @@ public class NinteiShinsakaiTaishoshaWariate {
                         strIchijiHantei,
                         strKijunJikan,
                         strFuriwakeKbn,
-                        strIryoKikanMei,
-                        strShujiiMei,
-                        strChosaKikanMei,
-                        strChosainMei
+                        doctor.iryoKikan().name(),
+                        doctor.name(),
+                        chosain.itakusaki().name(),
+                        chosain.name()
                 ));
                 iShinsaNo = iShinsaNo + 1;
 
@@ -370,8 +374,10 @@ public class NinteiShinsakaiTaishoshaWariate {
                 RString strSeibetsu = cg.getAsRString("seibetsu");
                 RString strIchijiHantei = cg.getAsRString("ichijiHantei");
                 RString strKijunJikan = cg.getAsRString("kijunJikan");
+                ShujiiData.Doctor doctor = new ShujiiData().get主治医From(cg.getAsRString("shujiiCode"));
                 RString strIryoKikanMei = cg.getAsRString("iryoKikanMei");
                 RString strShujiiMei = cg.getAsRString("shujiiMei");
+                ChosainData.Chosain chosain = new ChosainData().get調査員From(cg.getAsRString("chosainCode"));
                 RString strChosaKikanMei = cg.getAsRString("chosaKikanMei");
                 RString strChosainMei = cg.getAsRString("chosainMei");
 
@@ -386,10 +392,10 @@ public class NinteiShinsakaiTaishoshaWariate {
                         strSeibetsu,
                         strIchijiHantei,
                         strKijunJikan,
-                        strIryoKikanMei,
-                        strShujiiMei,
-                        strChosaKikanMei,
-                        strChosainMei
+                        doctor.iryoKikan().name(),
+                        doctor.name(),
+                        chosain.itakusaki().name(),
+                        chosain.name()
                 ));
             }
 
