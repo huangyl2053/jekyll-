@@ -739,7 +739,7 @@
   {
    "order": "1",
    "stateName": "認定書発行",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "ShogaishaKojoTaishoshaNinteishoHakkoKihon",
