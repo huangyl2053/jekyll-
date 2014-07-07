@@ -25,10 +25,10 @@
      "helpMessageID": "",
      "jpControlName": "",
      "required": false,
-     "align": 0,
-     "text": "本算定賦課処理の結果を確定します。",
      "isPrivateInfo": false,
-     "decorationClass": ""
+     "text": "本算定賦課処理の結果を確定します。",
+     "decorationClass": "",
+     "align": 0
     },
     {
      "fieldName": "HonsanteiShoriNichiji",
@@ -55,20 +55,19 @@
        "jpControlName": "",
        "readOnly": true,
        "required": false,
-       "text": "",
-       "isPrivateInfo": false,
-       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "placeHolder": "平26",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "賦課年度",
@@ -77,6 +76,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "decorationClass": "",
        "permitCharactor": ""
       },
       {
@@ -101,20 +101,19 @@
        "jpControlName": "",
        "readOnly": true,
        "required": false,
-       "text": "",
-       "isPrivateInfo": false,
-       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "placeHolder": "平26.06.01 00：00：00",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "処理日時",
@@ -123,6 +122,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "decorationClass": "",
        "permitCharactor": ""
       }
      ],
@@ -307,12 +307,12 @@
       "selectControlID": "btnHonsanteiKakutei",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "算定結果を確定する",
+      "text": "確定する",
+      "imageWidth": "",
+      "imageHeight": "",
       "onClick": "",
       "appearance": 0,
       "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
       "icon": 1,
       "heightTextBoxMatches": false,
       "prefixText": "",
@@ -325,7 +325,9 @@
      "state": "初期"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

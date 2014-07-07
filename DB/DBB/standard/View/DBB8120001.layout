@@ -188,6 +188,7 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "Auto",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -317,7 +318,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -538,6 +538,7 @@
      "labelRWidth": "S",
      "labelLAlign": 1,
      "labelRAlign": 0,
+     "selectedItem": "7",
      "dataSource": [
       {
        "key": "7",
@@ -548,7 +549,7 @@
        "value": "3期（8月）"
       }
      ],
-     "selectedItem": "7"
+     "disabledItem": []
     },
     {
      "fieldName": "tabSokujiKousei",
@@ -2148,6 +2149,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
+           "selectedItem": "key0",
            "dataSource": [
             {
              "key": "key0",
@@ -2158,7 +2160,7 @@
              "value": "平27"
             }
            ],
-           "selectedItem": "key0"
+           "disabledItem": []
           },
           {
            "fieldName": "tblKiwarigaku",
@@ -13359,7 +13361,7 @@
       "SokujiKoseiTab2"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "SokujiKoseiTab2",
+     "selectedItemFieldName": "SokujiKoseiTab1",
      "initialTab": 0,
      "isLazyLoading": false
     }
@@ -13630,7 +13632,7 @@
    ]
   }
  ],
- "currentState": "即時賦課更正",
+ "currentState": "All",
  "id": "DBB8120001",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -13698,7 +13700,7 @@
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "更正結果を"
+      "additionalText": ""
      }
     }
    ],

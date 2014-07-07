@@ -50,7 +50,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       },
       {
        "fieldName": "txtFukaNendo",
@@ -95,7 +96,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       }
      ],
      "controlType": "Panel",
@@ -164,6 +166,7 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "Auto",
+       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -237,10 +240,14 @@
        "onSelectBySelectButton": "",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "dataSource": [],
        "sortOrder": "",
        "isAscending": true,
        "filterList": [],
@@ -360,7 +367,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       },
       {
        "fieldName": "txtKeisanHohoGengaku",
@@ -405,7 +413,8 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": ""
+       "decorationClass": "",
+       "permitCharactor": ""
       }
      ],
      "controlType": "Panel",
@@ -604,14 +613,14 @@
       "helpMessageID": "",
       "jpControlName": "",
       "text": "算定処理を行う",
+      "imageWidth": "",
+      "imageHeight": "",
       "onClick": "",
       "appearance": 0,
       "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "算定処理を",
+      "additionalText": "",
       "prefixText": "",
       "suffixText": ""
      }
@@ -622,7 +631,7 @@
       "fieldName": "btnKeisanYoyaku",
       "items": [],
       "controlType": "CommonButtonConfirm",
-      "width": 2,
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -638,12 +647,12 @@
       "selectControlID": "btnKeisanYoyaku",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "算定処理を予約する",
+      "text": "予約する",
+      "imageWidth": "",
+      "imageHeight": "",
       "onClick": "",
       "appearance": 0,
       "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
       "icon": 1,
       "heightTextBoxMatches": false,
       "prefixText": "",
@@ -656,7 +665,9 @@
      "state": "平準化計算"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
