@@ -51,7 +51,7 @@ public class KagoMoshitatePanel {
      */
     private void setKagoMoshitateHihokensha(KagoMoshitatePanelDiv panel) {
 
-        ShikibetsuCode 識別コード = new ShikibetsuCode("012345678901234");
+        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000019");
         int rowId = 0;
         KaigoShikakuKihon.setData(panel.getCommonKaigpAtenainfoChildDiv1(),
                 panel.getCommonKaigoshikakuKihonChildDiv2(), 識別コード, rowId);
