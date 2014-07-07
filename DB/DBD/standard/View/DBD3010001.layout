@@ -37,7 +37,9 @@
      "onClick_BtnToSearch": "onClick_btnToSearch",
      "displayNone_txtTsuchishoNo": true,
      "displayNone_ddlFukaNendo": true,
-     "displayNone_SearchCriteriaDetail": true
+     "displayNone_SearchCriteriaDetail": true,
+     "canOpenAndClose_HihokenshaFinder": true,
+     "displayNone_saikinShorisha": false
     },
     {
      "fieldName": "searchResult",
@@ -70,6 +72,7 @@
      "canTransferEvent": true,
      "heightForDialog": "M",
      "onClick_btnToResearch": "",
+     "height_dgSearchResult": "S",
      "gridSetting": {
       "rowHeight": 50,
       "isMultiSelectable": false,
@@ -393,7 +396,7 @@
   {
    "order": "1",
    "stateName": "対象者検索",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "JukyushaShokaiTargetSearch",
