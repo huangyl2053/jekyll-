@@ -76,7 +76,7 @@ public class FukaTaishoSearch {
         Map<String, Object> searchValue = new HashMap<>();
 
         if (div.getSearchCriteriaOfHihokensha().getTxtHihokenshaNo().getValue().length() > 0) {
-            searchValue.put("被保険者番号", div.getSearchCriteriaOfHihokensha().getTxtHihokenshaNo().getValue());
+            searchValue.put("被保番号", div.getSearchCriteriaOfHihokensha().getTxtHihokenshaNo().getValue());
         }
 
         if (div.getSearchCriteriaOfHihokensha().getTxtTuchishoNo().getValue().length() > 0) {
@@ -141,7 +141,11 @@ public class FukaTaishoSearch {
                     break;
                 default:
                     if (searchValue.containsKey(key)) {
-                        searchResult = getSearchResult(searchValue, searchResult, new RString(key));
+                        if (searchResult.isEmpty()) {
+                            searchResult = getSearchResult(searchValue, new RString(key));
+                        } else {
+                            searchResult = getSearchResultFilter(searchValue, new RString(key), searchResult);
+                        }
                     }
             }
         }
@@ -193,12 +197,28 @@ public class FukaTaishoSearch {
         return cgValue.endsWith(key);
     }
 
-    private List getSearchResult(Map searchValue, List searchResult, RString target) {
+    private List getSearchResult(Map searchValue, RString target) {
+
+        List searchResult = new ArrayList();
 
         List<HashMap> yamlDataList = YamlLoader.DBZ.loadAsList(FUKA_SHOKAI_GAITOSHA);
 
         for (HashMap yamlData : yamlDataList) {
             ControlGenerator cg = new ControlGenerator(yamlData);
+
+            if (yamlDataPresenceCheck((RString) cg.getAsRString(target.toString()), (RString) searchValue.get(target.toString()))) {
+                searchResult.add(cg);
+            }
+        }
+        return searchResult;
+    }
+
+    private List getSearchResultFilter(Map searchValue, RString target, List searchResultFilter) {
+
+        List searchResult = new ArrayList();
+
+        for (int i = 0; i < searchResultFilter.size(); i++) {
+            ControlGenerator cg = (ControlGenerator) searchResultFilter.get(i);
 
             if (yamlDataPresenceCheck((RString) cg.getAsRString(target.toString()), (RString) searchValue.get(target.toString()))) {
                 searchResult.add(cg);
@@ -273,6 +293,7 @@ public class FukaTaishoSearch {
 
         DataGrid<dgTaishoshaIchiran_Row> grid = div.getTaishoshaSentaku().getDgTaishoshaIchiran();
         grid.setDataSource(arrayRowList);
+        grid.setIsTriggerEventOnOnlyRow(true);
     }
 
     private List<KeyValueDataSource> createFukanendoDDL() {
