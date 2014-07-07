@@ -1438,7 +1438,7 @@
   {
    "order": "1",
    "stateName": "被保険者照会",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "HihokenshaShikaiTaishoshaJoho",

@@ -447,7 +447,7 @@
   {
    "order": "1",
    "stateName": "異動登録",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "ShisetsuNyutaishoKanriTaishoshaJoho",
@@ -502,7 +502,7 @@
   {
    "order": "2",
    "stateName": "異動完了",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "ShisetsuNyutaishoComplete",

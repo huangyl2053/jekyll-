@@ -294,7 +294,7 @@
            "fieldName": "ddlJutokuTekiyoJiyu",
            "items": [],
            "controlType": "DropDownList",
-           "width": "１５０",
+           "width": "140",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -321,13 +321,13 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": "jutokuTekiyo",
            "dataSource": [
             {
              "key": "jutokuTekiyo",
              "value": "住所地特例適用"
             }
            ],
+           "selectedItem": "jutokuTekiyo",
            "disabledItem": []
           },
           {
@@ -705,7 +705,6 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": "kyokai",
            "dataSource": [
             {
              "key": "kyokai",
@@ -740,6 +739,7 @@
              "value": "組合国民健康保険"
             }
            ],
+           "selectedItem": "kyokai",
            "disabledItem": []
           },
           {
@@ -1804,7 +1804,6 @@
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
-             "selectedItem": "seikatsuFujo",
              "dataSource": [
               {
                "key": "seikatsuFujo",
@@ -1855,6 +1854,7 @@
                "value": "みなし扶助"
               }
              ],
+             "selectedItem": "seikatsuFujo",
              "disabledItem": []
             }
            ],
@@ -2020,7 +2020,7 @@
       "tplShisetsuNyutaisho"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tplIryoHoken",
+     "selectedItemFieldName": "tplShikakuJoho",
      "initialTab": "0",
      "isLazyLoading": false
     }
@@ -2238,7 +2238,7 @@
   {
    "order": "1",
    "stateName": "住所地特例適用",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "JutokuTekiyoTaishoshaJoho",
@@ -2328,7 +2328,7 @@
   {
    "order": "2",
    "stateName": "処理完了",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "Complete",

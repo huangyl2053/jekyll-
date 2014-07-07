@@ -93,7 +93,7 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
@@ -749,14 +749,23 @@
          "textKind": 0,
          "isPrivateInfo": false,
          "isPassword": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "value": "",
-         "permitCharactor": "./_-",
+         "labelLText": "適用日",
+         "labelRText": "",
+         "labelLWidth": "50",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "permitCharactor": "./_-"
         },
         {
-         "fieldName": "txtTekiyoDate",
+         "fieldName": "txtTekiyoTodokedeDate",
          "items": [],
          "controlType": "TextBoxFlexibleDate",
          "width": "80",
@@ -782,11 +791,20 @@
          "textKind": 0,
          "isPrivateInfo": false,
          "isPassword": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "value": "",
-         "permitCharactor": "./_-",
+         "labelLText": "適用届出日",
+         "labelRText": "",
+         "labelLWidth": "80",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "permitCharactor": "./_-"
         },
         {
          "fieldName": "JogaishaTekiyoJogaiShisetsu",
@@ -803,7 +821,7 @@
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": "0",
+         "marginLeft": "XS",
          "marginRight": "0",
          "selectControlID": "JogaishaTekiyoJogaiShisetsu",
          "helpMessageID": "",
@@ -957,6 +975,9 @@
          "textKind": 0,
          "isPrivateInfo": false,
          "isPassword": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "value": "",
          "labelLText": "退所日",
@@ -966,7 +987,8 @@
          "labelLAlign": 2,
          "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "permitCharactor": "./_-"
         },
         {
          "fieldName": "txtKaijoDate",
@@ -1006,18 +1028,9 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
-         "placeHolder": "",
-         "textKind": 0,
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "onKeyPress": "",
-         "text": "",
-         "value": "",
-         "permitCharactor": "./_-",
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "permitCharactor": "./_-"
         },
         {
          "fieldName": "txtKaijoTodokedeDate",
@@ -1057,18 +1070,9 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
-         "placeHolder": "",
-         "textKind": 0,
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "onKeyPress": "",
-         "text": "",
-         "value": "",
-         "permitCharactor": "./_-",
          "ymdKubun": 2,
-         "displayFormat": 0
+         "displayFormat": 0,
+         "permitCharactor": "./_-"
         }
        ],
        "controlType": "Panel",
@@ -1497,7 +1501,7 @@
   {
    "order": "1",
    "stateName": "適用除外者登録",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "TekiyoJogaiTaishoshaJoho",
@@ -1540,8 +1544,6 @@
      "fixedDiv": "No"
     }
    ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
    "validation": {},
    "events": [
     {
@@ -1664,7 +1666,7 @@
   {
    "order": "4",
    "stateName": "登録完了",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "TekiyoJogaiComplete",
@@ -1865,7 +1867,9 @@
      "state": "適用除外施設変更"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   },
   {
    "commonButtonAreaId": "Complete",
@@ -1909,7 +1913,9 @@
      "state": "登録完了"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
