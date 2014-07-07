@@ -142,6 +142,7 @@ public class SetaiInfo {
         row.setTxtJukiIdoJiyu((RString) dataGrid.get(15));
         row.setTxtJuteiYMD((RString) dataGrid.get(16));
         row.setTxtJukiIdoJiyu((RString) dataGrid.get(17));
+        row.setTxtDougetsuService((RString) dataGrid.get(18));
 
         return row;
     }
@@ -202,6 +203,8 @@ public class SetaiInfo {
         yamlDatalist.add(cg.getAsRString("異動日"));
         yamlDatalist.add(cg.getAsRString("住定日"));
         yamlDatalist.add(cg.getAsRString("異動事由"));
+        yamlDatalist.add(cg.getAsRString("同月ｻｰﾋﾞｽ"));
+
 
         return yamlDatalist;
     }

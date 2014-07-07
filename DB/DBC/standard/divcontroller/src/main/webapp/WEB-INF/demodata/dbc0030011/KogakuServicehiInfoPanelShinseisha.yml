@@ -1,11 +1,11 @@
 ## YAML Template. 申請者情報
 ---
-- shinseiDate: 2014.07.01
+- shinseiDate: 2014.06.01
   jigyoshaNo: 電算事業者
   shinseishaName: 電算　太郎
-  shinseishaNameKana: カイゴ　ミナミウ
+  shinseishaNameKana:  ﾃﾞﾝｻﾝ ﾀﾛｳ
   telNo: 025-999-9999
   yubinNo: 999-9999
   addres: 南魚沼市99町999-9
-  shiharaiTotalAmount: 37200
+  shiharaiTotalAmount: 26750
   shinseiRiyu: 高額理由
