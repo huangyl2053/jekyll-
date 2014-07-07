@@ -72,6 +72,7 @@
      "canTransferEvent": true,
      "heightForDialog": "M",
      "onClick_btnToResearch": "onClick_btnToResearch",
+     "height_dgSearchResult": "470",
      "gridSetting": {
       "rowHeight": 50,
       "isMultiSelectable": false,
