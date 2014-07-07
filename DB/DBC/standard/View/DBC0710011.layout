@@ -1692,7 +1692,7 @@
   {
    "order": "1",
    "stateName": "申請登録",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "JutakuKaishuShinseiHihokenshaPanel",
@@ -1862,7 +1862,7 @@
   {
    "order": "3",
    "stateName": "申請登録完了",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KanryoMessage",
