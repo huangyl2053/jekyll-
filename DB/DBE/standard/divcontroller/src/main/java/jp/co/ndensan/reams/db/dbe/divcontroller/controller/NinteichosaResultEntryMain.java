@@ -743,7 +743,6 @@ public class NinteichosaResultEntryMain {
             list.add(div.getComKihonchosaResult404());
             list.add(div.getComKihonchosaResult405());
             list.add(div.getComKihonchosaResult406());
-            list.add(div.getComKihonchosaResult407());
         }
 
         private void _extract_ItemsForResultInput_Kihonchosa09CenterLeft(List<KihonchosaResultInputCom> list) {
@@ -782,6 +781,7 @@ public class NinteichosaResultEntryMain {
 
         private void _extract_ItemsForResultInput_Kihonchosa0942(List<KihonchosaResultInputCom> list) {
             Kihonchosa0942Div div = panel.getKihonchosa09CenterRight().getKihonchosa0942();
+            list.add(div.getComKihonchosaResult407());
             list.add(div.getComKihonchosaResult408());
             list.add(div.getComKihonchosaResult409());
             list.add(div.getComKihonchosaResult410());

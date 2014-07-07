@@ -37,10 +37,14 @@ public class HihokenshaForNinteichosaResultDiv extends Panel {
     private TextBox txtHihokenshaAge;
     @JsonProperty("txtHihokenshaGender")
     private TextBox txtHihokenshaGender;
+    @JsonProperty("btnShichosonRenraku")
+    private Button btnShichosonRenraku;
     @JsonProperty("txtHihokenshaYubinNo")
     private TextBox txtHihokenshaYubinNo;
     @JsonProperty("txtHihokenshaJusho")
     private TextBox txtHihokenshaJusho;
+    @JsonProperty("btnRenrakuSaki")
+    private Button btnRenrakuSaki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -128,6 +132,16 @@ public class HihokenshaForNinteichosaResultDiv extends Panel {
         this.txtHihokenshaGender=txtHihokenshaGender;
     }
 
+    @JsonProperty("btnShichosonRenraku")
+    public Button getBtnShichosonRenraku() {
+        return btnShichosonRenraku;
+    }
+
+    @JsonProperty("btnShichosonRenraku")
+    public void setBtnShichosonRenraku(Button btnShichosonRenraku) {
+        this.btnShichosonRenraku=btnShichosonRenraku;
+    }
+
     @JsonProperty("txtHihokenshaYubinNo")
     public TextBox getTxtHihokenshaYubinNo() {
         return txtHihokenshaYubinNo;
@@ -146,6 +160,16 @@ public class HihokenshaForNinteichosaResultDiv extends Panel {
     @JsonProperty("txtHihokenshaJusho")
     public void setTxtHihokenshaJusho(TextBox txtHihokenshaJusho) {
         this.txtHihokenshaJusho=txtHihokenshaJusho;
+    }
+
+    @JsonProperty("btnRenrakuSaki")
+    public Button getBtnRenrakuSaki() {
+        return btnRenrakuSaki;
+    }
+
+    @JsonProperty("btnRenrakuSaki")
+    public void setBtnRenrakuSaki(Button btnRenrakuSaki) {
+        this.btnRenrakuSaki=btnRenrakuSaki;
     }
 
 }
