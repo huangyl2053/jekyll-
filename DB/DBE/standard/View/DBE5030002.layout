@@ -261,16 +261,6 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "dataSource": [
-      {
-       "key": "01",
-       "value": "市役所第１会議室"
-      },
-      {
-       "key": "02",
-       "value": "市役所第２会議室"
-      }
-     ],
      "required": false,
      "onFocus": "",
      "onBlur": "",
@@ -282,7 +272,17 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "selectedItem": "01"
+     "selectedItem": "01",
+     "dataSource": [
+      {
+       "key": "01",
+       "value": "市役所第１会議室"
+      },
+      {
+       "key": "02",
+       "value": "市役所第２会議室"
+      }
+     ]
     },
     {
      "fieldName": "txtShinsakaiKaisaibi",
@@ -520,6 +520,7 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "M",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -690,7 +691,7 @@
         "sortKey": "shinseibi"
        },
        {
-        "columnName": "要介護度",
+        "columnName": "前回<br>要介護度",
         "dataName": "beforeYokaigodo",
         "toolTip": "",
         "bgColor": 0,
@@ -926,6 +927,20 @@
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": "shinsakaiIken"
+       },
+       {
+        "columnName": "前回一次判定",
+        "dataName": "beforeIchiji",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "beforeIchiji"
        }
       ]
      },
@@ -943,7 +958,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "カナ氏名",
      "isAscending": true,
      "filterList": [],

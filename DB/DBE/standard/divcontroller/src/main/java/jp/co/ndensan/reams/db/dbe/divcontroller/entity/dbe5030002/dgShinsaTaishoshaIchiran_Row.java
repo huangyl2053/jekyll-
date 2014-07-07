@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 27 19:30:44 JST 2014 
+ * Fri Jul 04 18:03:39 JST 2014 
  */
 
 
@@ -46,6 +46,7 @@ public class dgShinsaTaishoshaIchiran_Row extends DataRow {
     private RString ninteiResultItem;
     private RString yukoKikanItem;
     private RString shinsakaiIken;
+    private RString beforeIchiji;
 
     public dgShinsaTaishoshaIchiran_Row() {
         super();
@@ -73,9 +74,10 @@ public class dgShinsaTaishoshaIchiran_Row extends DataRow {
         this.ninteiResultItem = RString.EMPTY;
         this.yukoKikanItem = RString.EMPTY;
         this.shinsakaiIken = RString.EMPTY;
+        this.beforeIchiji = RString.EMPTY;
     }
 
-    public dgShinsaTaishoshaIchiran_Row(Button select, RString shinsaJun, RString hokenshaNo, RString shichoson, RString hihokenshaNo, RString shimei, RString kanaShimei, RString sex, TextBoxFlexibleDate shinseibi, RString beforeYokaigodo, RString beforeYukoKikan, TextBoxFlexibleDate beforeYukoStartDate, TextBoxFlexibleDate beforeYukoEndDate, RString ichijiHantei, RString ninteiResult, RString yukoKikan, TextBoxFlexibleDate yukoStartDate, TextBoxFlexibleDate yukoEndDate, RString shinseiKubun, RString seinengappi, RString nenrei, RString ninteiResultItem, RString yukoKikanItem, RString shinsakaiIken) {
+    public dgShinsaTaishoshaIchiran_Row(Button select, RString shinsaJun, RString hokenshaNo, RString shichoson, RString hihokenshaNo, RString shimei, RString kanaShimei, RString sex, TextBoxFlexibleDate shinseibi, RString beforeYokaigodo, RString beforeYukoKikan, TextBoxFlexibleDate beforeYukoStartDate, TextBoxFlexibleDate beforeYukoEndDate, RString ichijiHantei, RString ninteiResult, RString yukoKikan, TextBoxFlexibleDate yukoStartDate, TextBoxFlexibleDate yukoEndDate, RString shinseiKubun, RString seinengappi, RString nenrei, RString ninteiResultItem, RString yukoKikanItem, RString shinsakaiIken, RString beforeIchiji) {
         super();
         this.setOriginalData("select", select);
         this.setOriginalData("shinsaJun", shinsaJun);
@@ -101,6 +103,7 @@ public class dgShinsaTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("ninteiResultItem", ninteiResultItem);
         this.setOriginalData("yukoKikanItem", yukoKikanItem);
         this.setOriginalData("shinsakaiIken", shinsakaiIken);
+        this.setOriginalData("beforeIchiji", beforeIchiji);
         this.select = select;
         this.shinsaJun = shinsaJun;
         this.hokenshaNo = hokenshaNo;
@@ -125,6 +128,7 @@ public class dgShinsaTaishoshaIchiran_Row extends DataRow {
         this.ninteiResultItem = ninteiResultItem;
         this.yukoKikanItem = yukoKikanItem;
         this.shinsakaiIken = shinsakaiIken;
+        this.beforeIchiji = beforeIchiji;
     }
 
     public Button getSelect() {
@@ -221,6 +225,10 @@ public class dgShinsaTaishoshaIchiran_Row extends DataRow {
 
     public RString getShinsakaiIken() {
         return shinsakaiIken;
+    }
+
+    public RString getBeforeIchiji() {
+        return beforeIchiji;
     }
 
     public void setSelect(Button select) {
@@ -341,6 +349,11 @@ public class dgShinsaTaishoshaIchiran_Row extends DataRow {
     public void setShinsakaiIken(RString shinsakaiIken) {
         this.setOriginalData("shinsakaiIken", shinsakaiIken);
         this.shinsakaiIken = shinsakaiIken;
+    }
+
+    public void setBeforeIchiji(RString beforeIchiji) {
+        this.setOriginalData("beforeIchiji", beforeIchiji);
+        this.beforeIchiji = beforeIchiji;
     }
 
 }
