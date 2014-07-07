@@ -2660,7 +2660,7 @@
       "ShokanShikyuKetteiInfo"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuKetteiInfo",
+     "selectedItemFieldName": "ShokanShikyuKetteiShinseiInfo",
      "initialTab": "3",
      "isLazyLoading": false
     }
@@ -2879,7 +2879,7 @@
   {
    "order": "1",
    "stateName": "申請書情報",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "ShokanShikyuKetteiShinseisho",
