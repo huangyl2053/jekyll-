@@ -8,7 +8,7 @@
      "fieldName": "dgShinsakaiIchiran",
      "items": [],
      "controlType": "DataGrid",
-     "width": "800",
+     "width": "816",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -26,6 +26,7 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "M",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -71,7 +72,7 @@
         "dataName": "審査会名",
         "toolTip": "",
         "bgColor": 0,
-        "width": 90,
+        "width": 110,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -103,7 +104,7 @@
         "dataName": "審査会会場",
         "toolTip": "",
         "bgColor": 0,
-        "width": 120,
+        "width": 150,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -119,7 +120,7 @@
         "dataName": "審査開催日",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 88,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -207,7 +208,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "審査会状況",
      "isAscending": true,
      "filterList": [],

@@ -48,8 +48,7 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
-       "onBlur": "",
-       "disabledItem": []
+       "onBlur": ""
       },
       {
        "fieldName": "ddlKensakuTaisho",
@@ -107,8 +106,7 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
-       "onBlur": "",
-       "disabledItem": []
+       "onBlur": ""
       },
       {
        "fieldName": "txtSearchStYMD",
@@ -153,9 +151,9 @@
        "text": "",
        "suggest": [],
        "value": "",
-       "permitCharactor": "./_-",
+       "displayFormat": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "txtSearchEdYMD",
@@ -200,9 +198,9 @@
        "text": "",
        "suggest": [],
        "value": "",
-       "permitCharactor": "./_-",
+       "displayFormat": 0,
        "ymdKubun": 2,
-       "displayFormat": 0
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "txtHihokenshaNo",
@@ -248,12 +246,12 @@
        "suggest": [],
        "value": "",
        "decorationClass": "",
-       "permitCharactor": "+-,.\\",
        "maxValue": "9999999999",
        "minValue": 0,
        "isCurrency": false,
        "isComma": false,
-       "decimalPointLength": 0
+       "decimalPointLength": 0,
+       "permitCharactor": "+-,.\\"
       },
       {
        "fieldName": "btnTaishoKensaku",
@@ -277,11 +275,11 @@
        "jpControlName": "",
        "text": "検索する",
        "onClick": "onClick_btnTaishoKensaku",
-       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "icon": 0,
        "heightTextBoxMatches": false
       },
       {
@@ -306,11 +304,11 @@
        "jpControlName": "",
        "text": "条件をクリアする",
        "onClick": "",
-       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "icon": 0,
        "heightTextBoxMatches": false
       }
      ],
@@ -474,7 +472,7 @@
           "dataName": "申請日",
           "toolTip": "",
           "bgColor": 0,
-          "width": 95,
+          "width": 82,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
@@ -511,7 +509,7 @@
           "dataName": "審査予定日",
           "toolTip": "",
           "bgColor": 0,
-          "width": 95,
+          "width": 82,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
@@ -546,7 +544,7 @@
           "dataName": "意見書受領日",
           "toolTip": "",
           "bgColor": 0,
-          "width": 95,
+          "width": 82,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
@@ -567,7 +565,7 @@
           "dataName": "調査票受領日",
           "toolTip": "",
           "bgColor": 0,
-          "width": 95,
+          "width": 82,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
@@ -745,11 +743,11 @@
        "jpControlName": "",
        "text": "再検索する",
        "onClick": "",
-       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "icon": 0,
        "heightTextBoxMatches": false
       }
      ],
@@ -856,11 +854,11 @@
            "jpControlName": "",
            "text": "マスキングする",
            "onClick": "",
-           "icon": 0,
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
+           "icon": 0,
            "heightTextBoxMatches": false
           },
           {
@@ -1373,7 +1371,7 @@
         "tplImage05"
        ],
        "isDraggable": false,
-       "selectedItemFieldName": "tplImage01",
+       "selectedItemFieldName": "tplImage05",
        "initialTab": 0,
        "isLazyLoading": false
       }
@@ -1489,8 +1487,7 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
-       "onBlur": "",
-       "disabledItem": []
+       "onBlur": ""
       },
       {
        "fieldName": "btnShokiModoshi",
@@ -1514,11 +1511,11 @@
        "jpControlName": "",
        "text": "初期状態に戻す",
        "onClick": "",
-       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "icon": 0,
        "heightTextBoxMatches": false
       },
       {
@@ -1976,7 +1973,9 @@
      "state": "イメージ照会"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   },
   {
    "commonButtonAreaId": "imageMask",
@@ -2003,15 +2002,15 @@
       "selectControlID": "btnImageToroku",
       "helpMessageID": "",
       "jpControlName": "",
+      "text": "確定する",
       "onClick": "",
-      "text": "マスク情報を確定する",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "prefixText": "",
+      "prefixText": "マスク情報を",
       "suffixText": ""
      }
     },
@@ -2054,7 +2053,9 @@
      "state": "マスキング"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
