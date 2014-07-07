@@ -65,7 +65,6 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
@@ -74,6 +73,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "賦課年度",
        "labelRText": "",
@@ -284,7 +284,7 @@
        "onNoRow": "",
        "onMultiRows": "",
        "dataSource": [],
-       "sortOrder": "txtChoteiNendo",
+       "sortOrder": "txtJusho",
        "isAscending": true,
        "filterList": [],
        "activeRowId": -1
@@ -309,12 +309,12 @@
        "selectControlID": "btnReSearch",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "onClick_btnReSearch",
        "text": "再検索する",
-       "appearance": 0,
-       "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "onClick": "onClick_btnReSearch",
+       "appearance": 0,
+       "imageFileUrl": "",
        "icon": 0,
        "heightTextBoxMatches": false
       }
@@ -368,6 +368,35 @@
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto"
+    },
+    {
+     "fieldName": "btnReSearchMode",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": false,
+     "displayNone": true,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnReSearchMode",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "Button1",
+     "imageWidth": "",
+     "imageHeight": "",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -476,6 +505,11 @@
      "fieldName": "TaishoshaSearch_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
      "event": "onClick",
      "transition": "該当者選択"
+    },
+    {
+     "fieldName": "btnReSearchMode",
+     "event": "onClick",
+     "transition": "検索条件入力"
     }
    ]
   },
@@ -512,6 +546,11 @@
      "fieldName": "TaishoshaSearch_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
      "event": "onClick",
      "transition": "該当者選択"
+    },
+    {
+     "fieldName": "btnReSearchMode",
+     "event": "onClick",
+     "transition": "検索条件入力"
     }
    ]
   }
@@ -527,6 +566,14 @@
   {
    "alias": "SelectFukaTaishosha",
    "eventName": "dgTaishoshaIchiran.onSelectBySelectButton"
+  },
+  {
+   "alias": "reSearch",
+   "eventName": "btnReSearchMode.onClick"
+  },
+  {
+   "alias": "onOnlyRow",
+   "eventName": "dgTaishoshaIchiran.onOnlyRow"
   }
  ],
  "loadSequencePanelNames": [

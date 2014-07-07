@@ -2441,7 +2441,7 @@
    "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "照会",
  "id": "DBB0320001",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -2460,6 +2460,14 @@
   {
    "alias": "selected",
    "eventName": "dgFukaRirekiAll.onSelectByDblClick"
+  },
+  {
+   "alias": "reSearch",
+   "eventName": "btnResearch.onClick"
+  },
+  {
+   "alias": "returnResult",
+   "eventName": "btnZenkairesultHyoji.onClick"
   }
  ],
  "loadSequencePanelNames": [
@@ -2497,7 +2505,7 @@
    "commonButtonAreaId": "賦課照会",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonReSearch",
      "buttonProperty": {
       "fieldName": "btnResearch",
       "items": [],
@@ -2552,16 +2560,22 @@
       "selectControlID": "btnZenkairesultHyoji",
       "helpMessageID": "",
       "jpControlName": "",
-      "onClick": "",
+      "postParameterPanelNames": [
+       {}
+      ],
       "text": "前回の検索結果を表示する",
-      "appearance": 0,
-      "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
+      "onAfterRequest": "",
       "prefixText": "",
-      "suffixText": ""
+      "suffixText": "",
+      "validateUrl": "",
+      "submitUrl": ""
      }
     }
    ],
@@ -2588,7 +2602,9 @@
      "state": "明細減免"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

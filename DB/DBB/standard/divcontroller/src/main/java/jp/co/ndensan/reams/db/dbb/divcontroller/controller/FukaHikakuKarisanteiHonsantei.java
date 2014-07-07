@@ -516,7 +516,7 @@ public class FukaHikakuKarisanteiHonsantei {
 
         List zanteiHokenryogaku = (List) hikakuData.get(3);
         zanteiGaku1.getTxtGemmenGaku1().setValue((RString) zanteiHokenryogaku.get(0));
-        zanteiGaku1.getTxtGemmenGaku1().setValue((RString) zanteiHokenryogaku.get(1));
+        zanteiGaku1.getTxtZanteiGoukeiGaku1().setValue((RString) zanteiHokenryogaku.get(1));
 
         List kibetsugaku = (List) hikakuData.get(4);
         List tokuchoKibetsu = (List) kibetsugaku.get(0);
