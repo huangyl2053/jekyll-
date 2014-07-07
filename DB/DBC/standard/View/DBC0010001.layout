@@ -625,11 +625,11 @@
      "jpControlName": "",
      "text": "緊急時施設療養費を表示する",
      "onClick": "",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -654,11 +654,11 @@
      "jpControlName": "",
      "text": "特定診療費を表示する",
      "onClick": "",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -683,11 +683,11 @@
      "jpControlName": "",
      "text": "食事費用を表示する",
      "onClick": "",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -712,11 +712,11 @@
      "jpControlName": "",
      "text": "特定入所者費用を表示する",
      "onClick": "",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -741,11 +741,11 @@
      "jpControlName": "",
      "text": "社福軽減費を表示する",
      "onClick": "",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -776,11 +776,11 @@
          "jpControlName": "",
          "text": "合計情報を表示する",
          "onClick": "",
-         "icon": 0,
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": "",
+         "icon": 0,
          "heightTextBoxMatches": false
         },
         {
@@ -4808,7 +4808,6 @@
            "jpControlName": "",
            "readOnly": false,
            "height": "222",
-           "dataSource": [],
            "gridSetting": {
             "rowHeight": 28,
             "isMultiSelectable": false,
@@ -5120,6 +5119,7 @@
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
+           "dataSource": [],
            "sortOrder": "txtSeikyugaku",
            "isAscending": true,
            "filterList": [],
@@ -5192,7 +5192,6 @@
            "jpControlName": "",
            "readOnly": false,
            "height": "198",
-           "dataSource": [],
            "gridSetting": {
             "rowHeight": 28,
             "isMultiSelectable": false,
@@ -5453,6 +5452,7 @@
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
+           "dataSource": [],
            "sortOrder": "txtKohi1Tani",
            "isAscending": true,
            "filterList": [],
@@ -5547,7 +5547,6 @@
          "jpControlName": "",
          "readOnly": false,
          "height": "335",
-         "dataSource": [],
          "gridSetting": {
           "rowHeight": 28,
           "isMultiSelectable": false,
@@ -5810,6 +5809,7 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
+         "dataSource": [],
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
@@ -5837,7 +5837,6 @@
          "jpControlName": "",
          "readOnly": false,
          "height": "320",
-         "dataSource": [],
          "gridSetting": {
           "rowHeight": 22,
           "isMultiSelectable": false,
@@ -6049,6 +6048,7 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
+         "dataSource": [],
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
@@ -6101,7 +6101,6 @@
          "jpControlName": "",
          "readOnly": false,
          "height": "335",
-         "dataSource": [],
          "gridSetting": {
           "rowHeight": 28,
           "isMultiSelectable": false,
@@ -6278,6 +6277,7 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
+         "dataSource": [],
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
@@ -6330,7 +6330,6 @@
          "jpControlName": "",
          "readOnly": false,
          "height": "335",
-         "dataSource": [],
          "gridSetting": {
           "rowHeight": 28,
           "isMultiSelectable": false,
@@ -6460,6 +6459,7 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
+         "dataSource": [],
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
@@ -6543,11 +6543,11 @@
      "jpControlName": "",
      "text": "前月の情報を表示する",
      "onClick": "",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -6572,11 +6572,11 @@
      "jpControlName": "",
      "text": "次月の情報を表示する",
      "onClick": "",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -6601,11 +6601,11 @@
      "jpControlName": "",
      "text": "給付実績一覧に戻る",
      "onClick": "",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],
@@ -6678,7 +6678,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "親Divタイトル",
+ "title": "給付実績照会",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
