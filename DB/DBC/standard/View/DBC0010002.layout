@@ -26,6 +26,7 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "205",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 28,
       "isMultiSelectable": false,
@@ -175,10 +176,14 @@
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "txtRiyoshaFutangaku",
      "isAscending": true,
      "filterList": [],
@@ -204,13 +209,13 @@
      "selectControlID": "btnKyufuJissekiKihonGokeiClose",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "",
      "text": "給付実績照会に戻る",
+     "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],
@@ -283,14 +288,14 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "親Divタイトル",
+ "title": "給付実績照会",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
   {
    "order": "1",
    "stateName": "基本情報合計",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KyufuJissekiKihonGokei",

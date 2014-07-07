@@ -167,12 +167,12 @@ module DBZ {
      "isComboBox": false,
      "suggest": [],
      "decorationClass": "",
+     "permitCharactor": "+-,.\\",
      "maxValue": 1.7976931348623157e+308,
      "minValue": 0,
      "isCurrency": false,
      "isComma": false,
-     "decimalPointLength": 0,
-     "permitCharactor": "+-,.\\"
+     "decimalPointLength": 0
     },
     {
      "fieldName": "txtFukaFukaNendo",
@@ -779,12 +779,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -902,12 +902,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -1025,12 +1025,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -1148,12 +1148,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -1342,12 +1342,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -1536,12 +1536,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -1659,12 +1659,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -1782,12 +1782,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -1905,12 +1905,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -1950,7 +1950,7 @@ module DBZ {
      "selectControlID": "tblFuka",
      "helpMessageID": "",
      "jpControlName": "",
-     "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C1' bgcolor=\"#ccffff\"></td><td id='R1C2' bgcolor=\"#ccffff\"></td></tr>\n    <tr><td id='R2C1' bgcolor=\"#ccffff\"></td><td id='R2C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R3C1' bgcolor=\"#ccffff\"></td><td id='R3C2' bgcolor=\"#ccffff\"></td></tr>\n    <tr><td id='R4C1' bgcolor=\"#ccffff\"></td><td id='R4C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R5C1' bgcolor=\"#ccffff\"></td><td id='R5C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R6C1' bgcolor=\"#ccffff\"></td><td id='R6C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R7C1' bgcolor=\"#ccffff\"></td><td id='R7C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R8C1' bgcolor=\"#ccffff\"></td><td id='R8C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R9C1' bgcolor=\"#ccffff\"></td><td id='R9C2' bgcolor=\"#ccffff\"></td></tr>\n    <tr><td id='R10C1' bgcolor=\"#ccffff\"></td><td id='R10C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R11C1' bgcolor=\"#ccffff\"></td><td id='R11C2' bgcolor=\"#ccffff\"></td></tr>\n    <tr><td id='R12C1' bgcolor=\"#ccffff\"></td><td id='R12C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R13C1' bgcolor=\"#ccffff\"></td><td id='R13C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R14C1' bgcolor=\"#ccffff\"></td><td id='R14C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R15C1' bgcolor=\"#ccffff\"></td><td id='R15C2' bgcolor=\"#ffffff\"></td></tr>\n  </tbody>\n</table>"
+     "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C1' bgcolor=\"#d7ebf6\"></td><td id='R1C2' bgcolor=\"#d7ebf6\"></td></tr>\n    <tr><td id='R2C1' bgcolor=\"#d7ebf6\"></td><td id='R2C2'></td></tr>\n    <tr><td id='R3C1' bgcolor=\"#d7ebf6\"></td><td id='R3C2'></td></tr>\n    <tr><td id='R4C1' bgcolor=\"#d7ebf6\"></td><td id='R4C2'></td></tr>\n    <tr><td id='R5C1' bgcolor=\"#d7ebf6\"></td><td id='R5C2'></td></tr>\n    <tr><td id='R6C1' bgcolor=\"#d7ebf6\"></td><td id='R6C2'></td></tr>\n    <tr><td id='R7C1' bgcolor=\"#d7ebf6\"></td><td id='R7C2'></td></tr>\n    <tr><td id='R8C1' bgcolor=\"#d7ebf6\"></td><td id='R8C2'></td></tr>\n    <tr><td id='R9C1' bgcolor=\"#d7ebf6\"></td><td id='R9C2'></td></tr>\n    <tr><td id='R10C1' bgcolor=\"#d7ebf6\"></td><td id='R10C2'></td></tr>\n    <tr><td id='R11C1' bgcolor=\"#d7ebf6\"></td><td id='R11C2'></td></tr>\n    <tr><td id='R12C1' bgcolor=\"#d7ebf6\"></td><td id='R12C2'></td></tr>\n    <tr><td id='R13C1' bgcolor=\"#d7ebf6\"></td><td id='R13C2'></td></tr>\n    <tr><td id='R14C1' bgcolor=\"#d7ebf6\"></td><td id='R14C2'></td></tr>\n    <tr><td id='R15C1' bgcolor=\"#d7ebf6\"></td><td id='R15C2'></td></tr>\n  </tbody>\n</table>"
     },
     {
      "fieldName": "tblFutsuChoshu",
@@ -2122,12 +2122,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -2245,12 +2245,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -2368,12 +2368,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -2491,12 +2491,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -2614,12 +2614,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -2737,12 +2737,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -2860,12 +2860,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -2983,12 +2983,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -3106,12 +3106,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -3229,12 +3229,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -3352,12 +3352,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -3475,12 +3475,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -3598,12 +3598,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -3721,12 +3721,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -3766,7 +3766,7 @@ module DBZ {
      "selectControlID": "tblFutsuChoshu",
      "helpMessageID": "",
      "jpControlName": "",
-     "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C1' bgcolor=\"#ccffff\"></td><td id='R1C2' bgcolor=\"#ccffff\"></td></tr>\n    <tr><td id='R2C1' bgcolor=\"#ccffff\"></td><td id='R2C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R3C1' bgcolor=\"#ccffff\"></td><td id='R3C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R4C1' bgcolor=\"#ccffff\"></td><td id='R4C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R5C1' bgcolor=\"#ccffff\"></td><td id='R5C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R6C1' bgcolor=\"#ccffff\"></td><td id='R6C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R7C1' bgcolor=\"#ccffff\"></td><td id='R7C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R8C1' bgcolor=\"#ccffff\"></td><td id='R8C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R9C1' bgcolor=\"#ccffff\"></td><td id='R9C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R10C1' bgcolor=\"#ccffff\"></td><td id='R10C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R11C1' bgcolor=\"#ccffff\"></td><td id='R11C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R12C1' bgcolor=\"#ccffff\"></td><td id='R12C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R13C1' bgcolor=\"#ccffff\"></td><td id='R13C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R14C1' bgcolor=\"#ccffff\"></td><td id='R14C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R15C1' bgcolor=\"#ccffff\"></td><td id='R15C2' bgcolor=\"#ffffff\"></td></tr>\n  </tbody>\n</table>"
+     "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C1' bgcolor=\"#d7ebf6\"></td><td id='R1C2' bgcolor=\"#d7ebf6\"></td></tr>\n    <tr><td id='R2C1' bgcolor=\"#d7ebf6\"></td><td id='R2C2'></td></tr>\n    <tr><td id='R3C1' bgcolor=\"#d7ebf6\"></td><td id='R3C2'></td></tr>\n    <tr><td id='R4C1' bgcolor=\"#d7ebf6\"></td><td id='R4C2'></td></tr>\n    <tr><td id='R5C1' bgcolor=\"#d7ebf6\"></td><td id='R5C2'></td></tr>\n    <tr><td id='R6C1' bgcolor=\"#d7ebf6\"></td><td id='R6C2'></td></tr>\n    <tr><td id='R7C1' bgcolor=\"#d7ebf6\"></td><td id='R7C2'></td></tr>\n    <tr><td id='R8C1' bgcolor=\"#d7ebf6\"></td><td id='R8C2'></td></tr>\n    <tr><td id='R9C1' bgcolor=\"#d7ebf6\"></td><td id='R9C2'></td></tr>\n    <tr><td id='R10C1' bgcolor=\"#d7ebf6\"></td><td id='R10C2'></td></tr>\n    <tr><td id='R11C1' bgcolor=\"#d7ebf6\"></td><td id='R11C2'></td></tr>\n    <tr><td id='R12C1' bgcolor=\"#d7ebf6\"></td><td id='R12C2'></td></tr>\n    <tr><td id='R13C1' bgcolor=\"#d7ebf6\"></td><td id='R13C2'></td></tr>\n    <tr><td id='R14C1' bgcolor=\"#d7ebf6\"></td><td id='R14C2'></td></tr>\n    <tr><td id='R15C1' bgcolor=\"#d7ebf6\"></td><td id='R15C2'></td></tr>\n  </tbody>\n</table>"
     },
     {
      "fieldName": "tblTokubetsuChoshu",
@@ -3938,12 +3938,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -4061,12 +4061,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -4184,12 +4184,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -4307,12 +4307,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -4430,12 +4430,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -4553,12 +4553,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "TableCell",
@@ -4598,7 +4598,7 @@ module DBZ {
      "selectControlID": "tblTokubetsuChoshu",
      "helpMessageID": "",
      "jpControlName": "",
-     "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C1' bgcolor=\"#ccffff\"></td><td id='R1C2' bgcolor=\"#ccffff\"></td></tr>\n    <tr><td id='R2C1' bgcolor=\"#ccffff\"></td><td id='R2C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R3C1' bgcolor=\"#ccffff\"></td><td id='R3C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R4C1' bgcolor=\"#ccffff\"></td><td id='R4C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R5C1' bgcolor=\"#ccffff\"></td><td id='R5C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R6C1' bgcolor=\"#ccffff\"></td><td id='R6C2' bgcolor=\"#ffffff\"></td></tr>\n    <tr><td id='R7C1' bgcolor=\"#ccffff\"></td><td id='R7C2' bgcolor=\"#ffffff\"></td></tr>\n  </tbody>\n</table>"
+     "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C1' bgcolor=\"#d7ebf6\"></td><td id='R1C2' bgcolor=\"#d7ebf6\"></td></tr>\n    <tr><td id='R2C1' bgcolor=\"#d7ebf6\"></td><td id='R2C2'></td></tr>\n    <tr><td id='R3C1' bgcolor=\"#d7ebf6\"></td><td id='R3C2'></td></tr>\n    <tr><td id='R4C1' bgcolor=\"#d7ebf6\"></td><td id='R4C2'></td></tr>\n    <tr><td id='R5C1' bgcolor=\"#d7ebf6\"></td><td id='R5C2'></td></tr>\n    <tr><td id='R6C1' bgcolor=\"#d7ebf6\"></td><td id='R6C2'></td></tr>\n    <tr><td id='R7C1' bgcolor=\"#d7ebf6\"></td><td id='R7C2'></td></tr>\n  </tbody>\n</table>"
     },
     {
      "fieldName": "SogoShokaiFukaTokubetsuChoshu",

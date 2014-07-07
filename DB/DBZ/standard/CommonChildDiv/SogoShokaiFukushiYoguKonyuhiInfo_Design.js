@@ -158,12 +158,12 @@ var DBZ;
                             "isComboBox": false,
                             "suggest": [],
                             "decorationClass": "",
+                            "permitCharactor": "+-,.\\",
                             "maxValue": 1.7976931348623157e+308,
                             "minValue": 0,
                             "isCurrency": false,
                             "isComma": false,
-                            "decimalPointLength": 0,
-                            "permitCharactor": "+-,.\\"
+                            "decimalPointLength": 0
                         },
                         {
                             "fieldName": "dgYoguSeikyuDetail",
@@ -602,12 +602,12 @@ var DBZ;
                                     "isComboBox": false,
                                     "suggest": [],
                                     "decorationClass": "",
+                                    "permitCharactor": "+-,.\\",
                                     "maxValue": 1.7976931348623157e+308,
                                     "minValue": 0,
                                     "isCurrency": false,
                                     "isComma": true,
-                                    "decimalPointLength": 0,
-                                    "permitCharactor": "+-,.\\"
+                                    "decimalPointLength": 0
                                 },
                                 {
                                     "fieldName": "txtHinmokuCode",
@@ -828,7 +828,7 @@ var DBZ;
                                             "isPrivateInfo": false,
                                             "text": "支払金額合計",
                                             "decorationClass": "",
-                                            "align": 2
+                                            "align": 1
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -877,7 +877,7 @@ var DBZ;
                                             "isPrivateInfo": false,
                                             "text": "保険請求額",
                                             "decorationClass": "",
-                                            "align": 2
+                                            "align": 1
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -961,9 +961,9 @@ var DBZ;
                                             "disabled": false,
                                             "accessKey": "",
                                             "nextFocusFieldName": "",
-                                            "wrap": false,
+                                            "wrap": true,
                                             "dependencies": [],
-                                            "float": 2,
+                                            "float": 1,
                                             "toolTip": "",
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
@@ -995,12 +995,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0,
-                                            "permitCharactor": "+-,.\\"
+                                            "decimalPointLength": 0
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1035,9 +1035,9 @@ var DBZ;
                                             "disabled": false,
                                             "accessKey": "",
                                             "nextFocusFieldName": "",
-                                            "wrap": false,
+                                            "wrap": true,
                                             "dependencies": [],
-                                            "float": 2,
+                                            "float": 1,
                                             "toolTip": "",
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
@@ -1069,12 +1069,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0,
-                                            "permitCharactor": "+-,.\\"
+                                            "decimalPointLength": 0
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1158,9 +1158,9 @@ var DBZ;
                                             "disabled": false,
                                             "accessKey": "",
                                             "nextFocusFieldName": "",
-                                            "wrap": false,
+                                            "wrap": true,
                                             "dependencies": [],
-                                            "float": 2,
+                                            "float": 1,
                                             "toolTip": "",
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
@@ -1192,12 +1192,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0,
-                                            "permitCharactor": "+-,.\\"
+                                            "decimalPointLength": 0
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1232,9 +1232,9 @@ var DBZ;
                                             "disabled": false,
                                             "accessKey": "",
                                             "nextFocusFieldName": "",
-                                            "wrap": false,
+                                            "wrap": true,
                                             "dependencies": [],
-                                            "float": 2,
+                                            "float": 1,
                                             "toolTip": "",
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
@@ -1266,12 +1266,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0,
-                                            "permitCharactor": "+-,.\\"
+                                            "decimalPointLength": 0
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1320,7 +1320,7 @@ var DBZ;
                                             "isPrivateInfo": false,
                                             "text": "利用者負担額",
                                             "decorationClass": "",
-                                            "align": 2
+                                            "align": 1
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1369,7 +1369,7 @@ var DBZ;
                                             "isPrivateInfo": false,
                                             "text": "限度超過額",
                                             "decorationClass": "",
-                                            "align": 2
+                                            "align": 1
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1404,9 +1404,9 @@ var DBZ;
                                             "disabled": false,
                                             "accessKey": "",
                                             "nextFocusFieldName": "",
-                                            "wrap": false,
+                                            "wrap": true,
                                             "dependencies": [],
-                                            "float": 2,
+                                            "float": 1,
                                             "toolTip": "",
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
@@ -1438,12 +1438,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0,
-                                            "permitCharactor": "+-,.\\"
+                                            "decimalPointLength": 0
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1478,9 +1478,9 @@ var DBZ;
                                             "disabled": false,
                                             "accessKey": "",
                                             "nextFocusFieldName": "",
-                                            "wrap": false,
+                                            "wrap": true,
                                             "dependencies": [],
-                                            "float": 2,
+                                            "float": 1,
                                             "toolTip": "",
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
@@ -1512,12 +1512,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0,
-                                            "permitCharactor": "+-,.\\"
+                                            "decimalPointLength": 0
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1552,9 +1552,9 @@ var DBZ;
                                             "disabled": false,
                                             "accessKey": "",
                                             "nextFocusFieldName": "",
-                                            "wrap": false,
+                                            "wrap": true,
                                             "dependencies": [],
-                                            "float": 2,
+                                            "float": 1,
                                             "toolTip": "",
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
@@ -1586,12 +1586,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0,
-                                            "permitCharactor": "+-,.\\"
+                                            "decimalPointLength": 0
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1626,9 +1626,9 @@ var DBZ;
                                             "disabled": false,
                                             "accessKey": "",
                                             "nextFocusFieldName": "",
-                                            "wrap": false,
+                                            "wrap": true,
                                             "dependencies": [],
-                                            "float": 2,
+                                            "float": 1,
                                             "toolTip": "",
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
@@ -1660,12 +1660,12 @@ var DBZ;
                                             "isComboBox": false,
                                             "suggest": [],
                                             "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
                                             "isComma": true,
-                                            "decimalPointLength": 0,
-                                            "permitCharactor": "+-,.\\"
+                                            "decimalPointLength": 0
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -1705,7 +1705,7 @@ var DBZ;
                             "selectControlID": "tblYoguSeikyuSummary",
                             "helpMessageID": "",
                             "jpControlName": "",
-                            "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td></tr>\n  </tbody>\n</table>\n"
+                            "html": "<table>\n  <tbody>\n    <tr><td id='R1C1' bgcolor=\"#d7ebf6\"></td><td id='R1C2' bgcolor=\"#d7ebf6\"></td><td id='R1C3' bgcolor=\"#d7ebf6\"></td><td id='R1C4' bgcolor=\"#d7ebf6\"></td><td id='R1C5' bgcolor=\"#d7ebf6\"></td></tr>\n    <tr><td id='R2C1' bgcolor=\"#d7ebf6\"></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td></tr>\n    <tr><td id='R3C1' bgcolor=\"#d7ebf6\"></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td></tr>\n  </tbody>\n</table>\n"
                         },
                         {
                             "fieldName": "btnClose",
