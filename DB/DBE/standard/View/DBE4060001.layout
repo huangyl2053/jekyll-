@@ -846,7 +846,7 @@
            "readOnly": false,
            "height": "400",
            "gridSetting": {
-            "rowHeight": 25,
+            "rowHeight": 20,
             "isMultiSelectable": true,
             "isShowHeader": true,
             "isShowFooter": true,
@@ -1363,7 +1363,7 @@
            "readOnly": false,
            "height": "400",
            "gridSetting": {
-            "rowHeight": 25,
+            "rowHeight": 20,
             "isMultiSelectable": true,
             "isShowHeader": true,
             "isShowFooter": true,
@@ -2863,7 +2863,7 @@
    ]
   }
  ],
- "currentState": "審査会対象者割当",
+ "currentState": "All",
  "id": "DBE4060001",
  "WFParameter": [],
  "UIContainerEventMapping": [
