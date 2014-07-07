@@ -385,7 +385,7 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
+       "marginLeft": "XS",
        "marginRight": "0",
        "selectControlID": "HonsanteiShoriNaiyo",
        "helpMessageID": "",
@@ -2721,7 +2721,7 @@
      "jpControlName": "",
      "onLoad": "",
      "title": "帳票作成個別情報",
-     "isOpen": true,
+     "isOpen": false,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
@@ -3035,7 +3035,7 @@
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "本算定賦課計算2",
  "id": "DBB0310001",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -3134,15 +3134,15 @@
       "selectControlID": "btnSantei",
       "helpMessageID": "",
       "jpControlName": "",
-      "onClick": "",
       "text": "算定処理を行う",
-      "appearance": 0,
-      "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "処理を"
+      "additionalText": ""
      }
     },
     {
@@ -3168,15 +3168,15 @@
       "helpMessageID": "",
       "jpControlName": "",
       "onClick": "",
-      "text": "処理を予約する",
+      "text": "予約",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "icon": 1,
+      "icon": 0,
       "heightTextBoxMatches": false,
       "prefixText": "",
-      "suffixText": ""
+      "suffixText": "する"
      }
     }
    ],
@@ -3201,7 +3201,7 @@
       "fieldName": "btnTsuchishoSakusei",
       "items": [],
       "controlType": "ButtonReportPublish",
-      "width": "XS",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -3218,6 +3218,7 @@
       "helpMessageID": "",
       "jpControlName": "",
       "postParameterPanelNames": [],
+      "additionalText": "",
       "validateUrl": "",
       "sourceCreateUrl": "",
       "afterPrintUrl": "",
@@ -3226,8 +3227,7 @@
       "isPreview": false,
       "printable": false,
       "copiesChangeable": false,
-      "progressVisible": false,
-      "additionalText": "通知書を"
+      "progressVisible": false
      }
     }
    ],

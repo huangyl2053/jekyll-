@@ -28,6 +28,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -41,7 +42,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "調定年度",
@@ -73,6 +73,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -86,7 +87,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "賦課年度",
@@ -164,6 +164,7 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "Auto",
+       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -237,10 +238,14 @@
        "onSelectBySelectButton": "",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "dataSource": [],
        "sortOrder": "",
        "isAscending": true,
        "filterList": [],
@@ -266,9 +271,9 @@
        "selectControlID": "lblShoriKakunin1",
        "helpMessageID": "",
        "jpControlName": "",
+       "text": "※算定処理は上記処理がすべて完了してから行います。",
        "required": false,
        "isPrivateInfo": false,
-       "text": "※算定処理は上記処理がすべて完了してから行います。",
        "decorationClass": "",
        "align": 0
       }
@@ -338,6 +343,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -351,7 +357,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "増額",
@@ -383,6 +388,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
+       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -396,7 +402,6 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "減額",
@@ -604,14 +609,14 @@
       "helpMessageID": "",
       "jpControlName": "",
       "text": "算定処理を行う",
+      "imageWidth": "",
+      "imageHeight": "",
       "onClick": "",
       "appearance": 0,
       "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "算定処理を",
+      "additionalText": "",
       "prefixText": "",
       "suffixText": ""
      }
@@ -622,7 +627,7 @@
       "fieldName": "btnKeisanYoyaku",
       "items": [],
       "controlType": "CommonButtonConfirm",
-      "width": 2,
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -638,16 +643,16 @@
       "selectControlID": "btnKeisanYoyaku",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "算定処理を予約する",
       "onClick": "",
+      "text": "予約",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "icon": 1,
+      "icon": 0,
       "heightTextBoxMatches": false,
       "prefixText": "",
-      "suffixText": ""
+      "suffixText": "する"
      }
     }
    ],
@@ -656,7 +661,9 @@
      "state": "平準化計算"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
