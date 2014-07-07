@@ -153,13 +153,13 @@
      "selectControlID": "btnShowSeteiJoho",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "btnShowSeteiJoho",
-     "icon": 0,
      "text": "世帯情報を表示する",
-     "appearance": 0,
-     "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "onClick": "btnShowSeteiJoho",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -194,13 +194,13 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "onClick_radPayMethod": "onClick_radPayMethod",
      "eraseBorderTop": true,
      "eraseBorderBottom": true,
      "eraseBorderRight": true,
      "eraseBorderLeft": true,
      "tplJudgementResult_title": "高額決定情報",
-     "tplKetteiJoho_visible": false,
-     "onClick_radPayMethod": "onClick_radPayMethod"
+     "tplKetteiJoho_visible": false
     }
    ],
    "controlType": "Panel",
@@ -292,7 +292,7 @@
   {
    "order": "1",
    "stateName": "高額サービス費",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KogakuServicehiInfoPanel",
@@ -348,7 +348,7 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "btnEndElement1",
+     "fieldName": "btnComplete",
      "event": "onClick",
      "transition": "終了"
     }

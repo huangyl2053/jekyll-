@@ -1079,7 +1079,7 @@
   {
    "order": "1",
    "stateName": "該当者検索",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "SearchKogakuServicehiPanel",
