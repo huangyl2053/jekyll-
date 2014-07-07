@@ -204,7 +204,7 @@
   {
    "order": "1",
    "stateName": "履歴訂正一覧",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "JukyuIdoJohoRirekiTeseiList",

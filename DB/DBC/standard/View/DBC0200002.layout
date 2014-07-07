@@ -109,7 +109,7 @@
   {
    "order": "1",
    "stateName": "連絡票変更",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "JukyushaIdoRenrakuhyoHenkoTorokuPanel",

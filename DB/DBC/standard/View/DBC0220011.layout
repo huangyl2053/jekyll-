@@ -219,6 +219,9 @@
       }
      ],
      "selectedItem": null,
+     "newLineItemNumber": 1,
+     "spaceSize": "M",
+     "disabledItem": [],
      "selectedItems": [
       {
        "key": "isAllSelect",
@@ -229,13 +232,10 @@
        "value": "削除データ検索"
       }
      ],
-     "newLineItemNumber": 1,
      "minCheckedItem": 0,
      "maxCheckedItem": "1",
-     "spaceSize": "M",
      "isAllSelectable": false,
-     "isAllSelectableBreakLine": false,
-     "disabledItem": []
+     "isAllSelectableBreakLine": false
     },
     {
      "fieldName": "lblSearchCondition",
@@ -828,7 +828,7 @@
   {
    "order": "1",
    "stateName": "対象者検索",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "JukyushaIdoRenrakuhyoHenkoSearchConditionPanel",
@@ -930,7 +930,7 @@
   {
    "order": "3",
    "stateName": "処理終了",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "JukyushaIdoRenrakuhyoHenkoComplete",
