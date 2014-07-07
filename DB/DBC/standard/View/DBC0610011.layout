@@ -75,8 +75,8 @@
        "selectControlID": "btnSearchMishinsa",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "未審査分を検索する",
        "onClick": "onClick_btnSearchMishinsa",
+       "text": "未審査分を検索する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -114,7 +114,6 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "required": false,
        "selectedItem": "key0",
        "dataSource": [
         {
@@ -126,6 +125,7 @@
          "value": "白馬村"
         }
        ],
+       "required": false,
        "disabledItem": []
       }
      ],
@@ -148,7 +148,7 @@
      "jpControlName": "",
      "onLoad": "",
      "title": "未審査支給申請検索条件",
-     "isOpen": false,
+     "isOpen": true,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
@@ -160,7 +160,7 @@
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "marginTop": "Default",
+     "marginTop": "0",
      "marginBottom": "Default",
      "eraseBorder": false,
      "backgroundColor": 0,
@@ -210,16 +210,16 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "text": "",
        "required": false,
        "placeHolder": "",
-       "text": "",
        "value": ""
       },
       {
        "fieldName": "dgYoguKonyuhiShisaMishinsaShikyuShinseiList",
        "items": [],
        "controlType": "DataGrid",
-       "width": "1030",
+       "width": "1010",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -236,7 +236,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "height": "M",
+       "height": "425",
        "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
@@ -471,7 +471,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "sortOrder": "txtShinsaResult",
+       "sortOrder": "txtSeiriNo",
        "isAscending": true,
        "filterList": [],
        "activeRowId": -1
@@ -496,8 +496,8 @@
        "selectControlID": "btnIkkatsuShinsa",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "支給申請内容を一括審査する",
        "onClick": "onClick_btnIkkatsuShinsa",
+       "text": "支給申請内容を一括審査する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -538,7 +538,7 @@
      "onClose": "",
      "session": {},
      "marginTop": "Default",
-     "marginBottom": "Default",
+     "marginBottom": "0",
      "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
@@ -597,8 +597,8 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
+   "marginTop": "0",
+   "marginBottom": "0",
    "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
@@ -631,8 +631,8 @@
      "selectControlID": "btnDummy",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "Button1",
      "onClick": "onClick_btnDummy",
+     "text": "Button1",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -754,11 +754,6 @@
      "visibleDiv": "YoguKonyuhiShikyuShinseiMishinsaResultList",
      "panelState": "visible",
      "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "DummyModifiedPanel",
-     "panelState": "visible",
-     "fixedDiv": "false"
     }
    ],
    "supplementInfo": "",
@@ -818,7 +813,7 @@
       "fieldName": "btnSave",
       "items": [],
       "controlType": "CommonButtonUpdate",
-      "width": 1,
+      "width": 0,
       "visible": true,
       "displayNone": false,
       "disabled": true,
@@ -842,7 +837,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "審査内容を"
+      "additionalText": ""
      }
     }
    ],
@@ -851,7 +846,9 @@
      "state": "審査"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

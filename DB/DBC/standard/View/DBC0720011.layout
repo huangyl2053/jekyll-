@@ -73,8 +73,8 @@
      "selectControlID": "btnSearchMishinsa",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "未審査分を検索する",
      "onClick": "onClick_btnSearchMishinsa",
+     "text": "未審査分を検索する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -169,9 +169,9 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "text": "",
      "required": false,
      "placeHolder": "",
-     "text": "",
      "value": ""
     },
     {
@@ -195,8 +195,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "M",
-     "dataSource": [],
+     "height": "400",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -456,7 +455,8 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "sortOrder": "txtSeiriNo",
+     "dataSource": [],
+     "sortOrder": "txtTeikyoYM",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
@@ -484,8 +484,8 @@
        "selectControlID": "btnShinsa",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "支給申請内容を一括審査する",
        "onClick": "onClick_btnShinsa",
+       "text": "支給申請内容を一括審査する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -564,10 +564,9 @@
        "labelLText": "",
        "labelLWidth": "S",
        "labelLAlign": 2,
-       "required": false,
        "onClick": "",
        "icon": [],
-       "selectedItem": null,
+       "required": false,
        "dataSource": [
         {
          "key": "tenkyo",
@@ -578,6 +577,7 @@
          "value": "３段階リセットの判定を行う"
         }
        ],
+       "selectedItem": null,
        "selectedItems": [
         {
          "key": "isAllSelect",
@@ -726,8 +726,8 @@
      "selectControlID": "btnDummyModifyShinsei",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "Button1",
      "onClick": "onClick_btnModifyShinseiContents",
+     "text": "Button1",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -921,7 +921,7 @@
       "fieldName": "btnSave",
       "items": [],
       "controlType": "CommonButtonUpdate",
-      "width": 1,
+      "width": 0,
       "visible": true,
       "displayNone": false,
       "disabled": true,
@@ -945,7 +945,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "審査内容を"
+      "additionalText": ""
      }
     }
    ],

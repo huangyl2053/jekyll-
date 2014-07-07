@@ -211,11 +211,11 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "text": "",
        "required": false,
        "placeHolder": "",
-       "textKind": 0,
-       "text": "",
-       "value": ""
+       "value": "",
+       "textKind": 0
       },
       {
        "fieldName": "txtSeiriNo",
@@ -251,16 +251,16 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "text": "",
        "required": false,
+       "placeHolder": "",
+       "value": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "placeHolder": "",
        "textKind": 2,
        "isComboBox": false,
-       "text": "",
        "suggest": [],
-       "value": "",
        "decorationClass": "",
        "formatLength": "10"
       },
@@ -294,7 +294,6 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "required": false,
        "selectedItem": "key0",
        "dataSource": [
         {
@@ -306,6 +305,7 @@
          "value": "白馬村"
         }
        ],
+       "required": false,
        "disabledItem": []
       },
       {
@@ -328,8 +328,8 @@
        "selectControlID": "btnShowJizenShinsei",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "事前申請を確認する",
        "onClick": "",
+       "text": "事前申請を確認する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -376,16 +376,16 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "text": "",
        "required": false,
+       "placeHolder": "",
+       "value": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "placeHolder": "",
        "textKind": 0,
        "isComboBox": false,
-       "text": "",
        "suggest": [],
-       "value": "",
        "decorationClass": ""
       },
       {
@@ -422,16 +422,16 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "text": "",
        "required": false,
+       "placeHolder": "",
+       "value": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "placeHolder": "",
        "textKind": 0,
        "isComboBox": false,
-       "text": "",
        "suggest": [],
-       "value": "",
        "decorationClass": ""
       },
       {
@@ -683,11 +683,11 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "text": "",
          "required": false,
          "placeHolder": "",
-         "textKind": 0,
-         "text": "",
-         "value": ""
+         "value": "",
+         "textKind": 0
         },
         {
          "fieldName": "txtCreatorKanaName",
@@ -723,16 +723,16 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "text": "",
          "required": false,
+         "placeHolder": "",
+         "value": "",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "placeHolder": "",
          "textKind": 0,
          "isComboBox": false,
-         "text": "",
          "suggest": [],
-         "value": "",
          "decorationClass": ""
         },
         {
@@ -769,16 +769,16 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "text": "",
          "required": false,
+         "placeHolder": "",
+         "value": "",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "placeHolder": "",
          "textKind": 0,
          "isComboBox": false,
-         "text": "",
          "suggest": [],
-         "value": "",
          "decorationClass": ""
         },
         {
@@ -815,16 +815,16 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "text": "",
          "required": false,
+         "placeHolder": "",
+         "value": "",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "placeHolder": "",
          "textKind": 2,
          "isComboBox": false,
-         "text": "",
          "suggest": [],
-         "value": "",
          "decorationClass": "",
          "formatLength": "10"
         },
@@ -848,8 +848,8 @@
          "selectControlID": "btnJigyoshaInputGuide",
          "helpMessageID": "",
          "jpControlName": "",
-         "text": "ButtonDialog1",
          "onClick": "",
+         "text": "ButtonDialog1",
          "appearance": 2,
          "imageFileUrl": "/uz/uza/image/UZ_Search.png",
          "imageWidth": "",
@@ -896,16 +896,16 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "text": "",
          "required": false,
+         "placeHolder": "",
+         "value": "",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "placeHolder": "",
          "textKind": 0,
          "isComboBox": false,
-         "text": "",
          "suggest": [],
-         "value": "",
          "decorationClass": ""
         }
        ],
@@ -1114,7 +1114,6 @@
          "labelLText": "限度額リセット",
          "labelLWidth": "S",
          "labelLAlign": 2,
-         "required": false,
          "onClick": "",
          "icon": [],
          "selectedItem": null,
@@ -1128,14 +1127,15 @@
            "value": "住宅住所変更による"
           }
          ],
-         "selectedItems": [],
+         "required": false,
          "newLineItemNumber": 1,
+         "spaceSize": "M",
+         "disabledItem": [],
+         "selectedItems": [],
          "minCheckedItem": 0,
          "maxCheckedItem": 2,
-         "spaceSize": "M",
          "isAllSelectable": false,
-         "isAllSelectableBreakLine": false,
-         "disabledItem": []
+         "isAllSelectableBreakLine": false
         }
        ],
        "controlType": "Panel",
@@ -1275,8 +1275,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "isPrivateInfo": false,
-       "required": false,
        "text": "申請内容",
+       "required": false,
        "decorationClass": "",
        "align": 2
       },
@@ -1305,7 +1305,6 @@
        "labelLText": "",
        "labelLWidth": "70",
        "labelLAlign": 2,
-       "required": false,
        "onClick": "",
        "icon": [],
        "selectedItem": "kyakka",
@@ -1319,6 +1318,7 @@
          "value": "却下する"
         }
        ],
+       "required": false,
        "newLineItemNumber": 2,
        "spaceSize": "L",
        "disabledItem": []
@@ -1385,35 +1385,6 @@
      "readOnly": false,
      "height": "Auto",
      "focusPositionID": "Page"
-    },
-    {
-     "fieldName": "btnDummy",
-     "items": [],
-     "controlType": "Button",
-     "width": "S",
-     "visible": false,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnDummy",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "text": "Modify",
-     "onClick": "onClick_btnDummy",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0,
-     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -1478,6 +1449,81 @@
    "eraseBorderBottom": true,
    "eraseBorderRight": true,
    "eraseBorderLeft": true
+  },
+  {
+   "fieldName": "DummyButtonPanel",
+   "items": [
+    {
+     "fieldName": "btnDummy",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnDummy",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onClick": "onClick_btnDummy",
+     "text": "Modify",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G2",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "Default",
+   "marginRight": "Default",
+   "selectControlID": "DummyButtonPanel",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "タイトル",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "DummyButtonPanel"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": true,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "focusPositionID": "fieldNameProperty"
   }
  ],
  "controlType": null,
@@ -1519,11 +1565,6 @@
     },
     {
      "visibleDiv": "JutakuKaishuShinsaShinseiContents",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "JutakuKaishuShinseiDetail",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -1592,7 +1633,7 @@
    "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "申請修正",
  "id": "DBC0720012",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -1648,6 +1689,9 @@
   ],
   [
    "JutakuKaishuShinsaResult"
+  ],
+  [
+   "DummyButtonPanel"
   ]
  ],
  "panelMargin": 1,
@@ -1664,7 +1708,7 @@
       "fieldName": "btnModifyShinseiContents",
       "items": [],
       "controlType": "CommonButtonFree",
-      "width": 1,
+      "width": 0,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -1680,12 +1724,12 @@
       "selectControlID": "btnModifyShinseiContents",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "申請を修正する",
-      "imageWidth": "",
-      "imageHeight": "",
       "onClick": "onClick_btnModifyShinseiContents",
+      "text": "修正する",
       "appearance": 0,
       "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
       "prefixText": "",
@@ -1698,7 +1742,7 @@
       "fieldName": "btnCancel",
       "items": [],
       "controlType": "CommonButtonFree",
-      "width": 1,
+      "width": 0,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -1714,12 +1758,12 @@
       "selectControlID": "btnCancel",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "申請の修正をやめる",
-      "imageWidth": "",
-      "imageHeight": "",
       "onClick": "onClick_btnCancel",
+      "text": "修正をやめる",
       "appearance": 0,
       "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
       "prefixText": "",
@@ -1732,7 +1776,9 @@
      "state": "申請修正"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
