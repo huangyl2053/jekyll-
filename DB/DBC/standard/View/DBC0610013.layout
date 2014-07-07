@@ -110,7 +110,7 @@
   {
    "order": "1",
    "stateName": "更新完了",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KanryoMessage",
@@ -135,7 +135,7 @@
    ]
   }
  ],
- "currentState": "更新完了",
+ "currentState": "All",
  "id": "DBC0610013",
  "WFParameter": [],
  "UIContainerEventMapping": [

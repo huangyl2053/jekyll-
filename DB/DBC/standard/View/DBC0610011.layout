@@ -75,8 +75,8 @@
        "selectControlID": "btnSearchMishinsa",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "onClick_btnSearchMishinsa",
        "text": "未審査分を検索する",
+       "onClick": "onClick_btnSearchMishinsa",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -114,6 +114,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "required": false,
        "selectedItem": "key0",
        "dataSource": [
         {
@@ -125,7 +126,7 @@
          "value": "白馬村"
         }
        ],
-       "required": false
+       "disabledItem": []
       }
      ],
      "controlType": "Panel",
@@ -209,9 +210,9 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "text": "",
        "required": false,
        "placeHolder": "",
+       "text": "",
        "value": ""
       },
       {
@@ -495,8 +496,8 @@
        "selectControlID": "btnIkkatsuShinsa",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "onClick_btnIkkatsuShinsa",
        "text": "支給申請内容を一括審査する",
+       "onClick": "onClick_btnIkkatsuShinsa",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -630,8 +631,8 @@
      "selectControlID": "btnDummy",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "onClick_btnDummy",
      "text": "Button1",
+     "onClick": "onClick_btnDummy",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -707,7 +708,7 @@
   {
    "order": "1",
    "stateName": "検索",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "YoguKonyuhiShikyuShinseiMishinsaSearchPanel",
@@ -737,7 +738,7 @@
   {
    "order": "2",
    "stateName": "審査",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "YoguKonyuhiShikyuShinseiMishinsaSearchPanel",

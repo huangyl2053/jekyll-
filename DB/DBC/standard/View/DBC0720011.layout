@@ -73,8 +73,8 @@
      "selectControlID": "btnSearchMishinsa",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "onClick_btnSearchMishinsa",
      "text": "未審査分を検索する",
+     "onClick": "onClick_btnSearchMishinsa",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -169,9 +169,9 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "text": "",
      "required": false,
      "placeHolder": "",
+     "text": "",
      "value": ""
     },
     {
@@ -196,6 +196,7 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "M",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -455,7 +456,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "txtSeiriNo",
      "isAscending": true,
      "filterList": [],
@@ -484,8 +484,8 @@
        "selectControlID": "btnShinsa",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "onClick_btnShinsa",
        "text": "支給申請内容を一括審査する",
+       "onClick": "onClick_btnShinsa",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -564,9 +564,10 @@
        "labelLText": "",
        "labelLWidth": "S",
        "labelLAlign": 2,
+       "required": false,
        "onClick": "",
        "icon": [],
-       "required": false,
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "tenkyo",
@@ -577,7 +578,6 @@
          "value": "３段階リセットの判定を行う"
         }
        ],
-       "selectedItem": null,
        "selectedItems": [
         {
          "key": "isAllSelect",
@@ -726,8 +726,8 @@
      "selectControlID": "btnDummyModifyShinsei",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "onClick_btnModifyShinseiContents",
      "text": "Button1",
+     "onClick": "onClick_btnModifyShinseiContents",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -803,7 +803,7 @@
   {
    "order": "1",
    "stateName": "申請検索",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "SearchConditionToMishinsaShikyuShinseiPanel",
@@ -838,7 +838,7 @@
   {
    "order": "2",
    "stateName": "申請審査",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "MishinsaShikyuShinseiListPanel",
