@@ -75,13 +75,13 @@ public class ShowResultTwo {
             for (int i = 0; i < setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().size(); i++) {
                 //dgJudgementResultLR	 判定結果
                 if (i == 0) {
-                    
-                    System.out.println("++++++++++++++++++++! I " + i);
-                    panel.getTxtHihoNoL().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtKetsugo01().replace("<br>", ""));
+                  //  panel.getTxtHihoNoL().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtKetsugo01().replace("<br>", ""));
+                    panel.getTxtHihoNoL().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtHihokenshaNo());
                     panel.getTxtHihoNameR().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtShimei());
                 } else if (i == 1) {
                     System.out.println("++++++++++++++++++++! I " + i);
-                    panel.getTxtHihoNoR().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtKetsugo01().replace("<br>", ""));
+                 //   panel.getTxtHihoNoR().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtKetsugo01().replace("<br>", ""));
+                    panel.getTxtHihoNoR().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtHihokenshaNo());
                     panel.getTxtHihoNameL().setValue(setaiInfopanel.getSetaiinShotoku().getDgSetaiShotoku().getSelectedItems().get(i).getTxtShimei());
 
                 }

@@ -1,9 +1,9 @@
 ## YAML Template. 高額決定情報 LIST dgJudgementResult
 ---
-- jigyosha: 介護保険のサービス事業者
-  serviceShurui: 介護保険高額介護（予防）サービス
-  serviceHiyoTotal: 37200
-  riyoshaFutanTotalAmount: 37200
+- jigyosha: 第二田算病院
+  serviceShurui: 11:訪問介護
+  serviceHiyoTotal: 5000
+  riyoshaFutanTotalAmount: 50000
   santeiKijunAmount: 37200
-  shiharaizumiAmount: 37200
-  kogakuShikyuAmount: 37200
+  shiharaizumiAmount: 0
+  kogakuShikyuAmount: 12800

@@ -1,36 +1,36 @@
 ## YAML Template. KogakuServicehiShowResultTwoJudgementResultR dgJudgementResultL
 ---
 ##dgJudgementResultR	 判定結果
-- jigyosha: 介護事業者1
-  serviceShurui: サービス種類
+- jigyosha: りんご薬局
+  serviceShurui: 11:予防支援
   serviceHiyoTotalAmount: 57,200  
   riyoshaFutanTotalAmount: 57,200
   santeiKijunAmount:  57,200
   shiharaizumiAmount: 57,200 
   kogakuShikyuAmount: 57,200
-- jigyosha: 介護事業者2
-  serviceShurui: サービス種類
+- jigyosha: りんご薬局
+  serviceShurui: 12:予防支援
   serviceHiyoTotalAmount: 57,200  
   riyoshaFutanTotalAmount: 57,200
   santeiKijunAmount:  57,200
   shiharaizumiAmount: 57,200 
   kogakuShikyuAmount: 57,200
-- jigyosha: 介護事業者3
-  serviceShurui: サービス種類
+- jigyosha: りんご薬局
+  serviceShurui: 13:予防支援
   serviceHiyoTotalAmount: 57,200  
   riyoshaFutanTotalAmount: 57,200
   santeiKijunAmount:  57,200
   shiharaizumiAmount: 57,200 
   kogakuShikyuAmount: 57,200
-- jigyosha: 介護事業者4
-  serviceShurui: サービス種類
+- jigyosha: りんご薬局
+  serviceShurui: 14:予防支援
   serviceHiyoTotalAmount: 57,200  
   riyoshaFutanTotalAmount: 57,200
   santeiKijunAmount:  57,200
   shiharaizumiAmount: 57,200 
   kogakuShikyuAmount: 57,200
-- jigyosha: 介護事業者5
-  serviceShurui: サービス種類
+- jigyosha: りんご薬局
+  serviceShurui: 15:予防支援
   serviceHiyoTotalAmount: 57,200  
   riyoshaFutanTotalAmount: 57,200
   santeiKijunAmount:  57,200

@@ -89,7 +89,8 @@ public class KogakuServicehiListPanel {
             case "hihokenshaShitei":
                 //2014.07.01 画面入力
                 //被保番号
-                hihonNo = searchpanel.getSearchKogakuHihokensha().getTxtHihoNo().getValue();
+              //  hihonNo = searchpanel.getSearchKogakuHihokensha().getTxtHihoNo().getValue();
+                hihonNo = ymlDt.getAsRString("hihoNo");
 
                 if (IsBlankString(searchpanel.getSearchKogakuHihokensha().getTxtHihoName().getValue())) {
                     hihoName = ymlDt.getAsRString("hihoName");
@@ -202,10 +203,6 @@ public class KogakuServicehiListPanel {
         //氏名
         rowKogakuServicehiData.setTxtHihoName(hihoName);
         //提供年月        
-        
-        System.out.println("提供年月    ++++ (setWareki(teikyoYM)" + (setWareki(teikyoYM).substring(0, 6)));
-        
-        
         rowKogakuServicehiData.setTxtTeikyoYM(setWareki(teikyoYM).substring(0, 6));
         //高額支給額
         rowKogakuServicehiData.getTxtKogakuShikyuAmount().setValue(kogakuShikyuAmount);

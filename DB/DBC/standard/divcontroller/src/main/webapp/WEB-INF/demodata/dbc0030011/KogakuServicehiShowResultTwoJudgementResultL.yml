@@ -1,22 +1,22 @@
 ## YAML Template. KogakuServicehiShowResultTwoJudgementResultL dgJudgementResultL
 ---
 ##dgJudgementResultL	 判定結果
-- jigyosha: 介護事業者1
-  serviceShurui: サービス種類
+- jigyosha: 第二田算病院
+  serviceShurui: 11:地福祉生
   serviceHiyoTotalAmount: 39,200  
   riyoshaFutanTotalAmount: 39,200
   santeiKijunAmount:  39,200
   shiharaizumiAmount: 39,200 
   kogakuShikyuAmount: 39,200
-- jigyosha: 介護事業者2
-  serviceShurui: サービス種類
+- jigyosha: 第二田算病院
+  serviceShurui: 12:地福祉生
   serviceHiyoTotalAmount: 39,200  
   riyoshaFutanTotalAmount: 39,200
   santeiKijunAmount:  39,200
   shiharaizumiAmount: 39,200 
   kogakuShikyuAmount: 39,200
-- jigyosha: 介護事業者3
-  serviceShurui: サービス種類
+- jigyosha: 第二田算病院
+  serviceShurui: 13:地福祉生
   serviceHiyoTotalAmount: 39,200  
   riyoshaFutanTotalAmount: 39,200
   santeiKijunAmount:  39,200
