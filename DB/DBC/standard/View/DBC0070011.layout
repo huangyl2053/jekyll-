@@ -170,7 +170,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "height": "530",
+       "height": "550",
        "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
@@ -521,13 +521,7 @@
     }
    ],
    "validation": {},
-   "events": [
-    {
-     "fieldName": "cmbtnEndElement1",
-     "event": "onClick",
-     "transition": "終了"
-    }
-   ]
+   "events": []
   }
  ],
  "currentState": "All",
@@ -546,50 +540,5 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": [
-  {
-   "commonButtonAreaId": "cmbtnEnd",
-   "buttonSetting": [
-    {
-     "buttonKind": "CommonButtonComplete",
-     "buttonProperty": {
-      "fieldName": "cmbtnEndElement1",
-      "items": [],
-      "controlType": "CommonButtonComplete",
-      "width": "S",
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "cmbtnEndElement1",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "完了",
-      "onClick": "",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": "照会を"
-     }
-    }
-   ],
-   "states": [
-    {
-     "state": "過誤申立書照会"
-    }
-   ],
-   "isFinishButtonOnTheRight": false
-  }
- ]
+ "commonButtonAreaData": []
 }

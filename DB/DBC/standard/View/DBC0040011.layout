@@ -399,7 +399,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "height": "M",
+       "height": "410",
        "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
@@ -434,7 +434,7 @@
            "onClick": "onClick_btnShowDetail",
            "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
            "imageWidth": "20",
-           "imageHeight": "15"
+           "imageHeight": "20"
           },
           "align": 1,
           "resize": true,
@@ -617,7 +617,7 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "420"
     }
    ],
    "controlType": "Panel",
@@ -819,16 +819,6 @@
      "fieldName": "btnNextElement1",
      "event": "onClick",
      "transition": ""
-    },
-    {
-     "fieldName": "btnCmptleElement1",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnpreElement1",
-     "event": "onClick",
-     "transition": "終了"
     }
    ]
   },
@@ -866,21 +856,11 @@
      "fieldName": "btnNextElement1",
      "event": "onClick",
      "transition": "連絡票検索"
-    },
-    {
-     "fieldName": "btnCmptleElement1",
-     "event": "onClick",
-     "transition": "終了"
-    },
-    {
-     "fieldName": "btnpreElement1",
-     "event": "onClick",
-     "transition": ""
     }
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "連絡票検索",
  "id": "DBC0040011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -907,39 +887,6 @@
   {
    "commonButtonAreaId": "cbtComplete",
    "buttonSetting": [
-    {
-     "buttonKind": "CommonButtonComplete",
-     "buttonProperty": {
-      "fieldName": "btnCmptleElement1",
-      "items": [],
-      "controlType": "CommonButtonNext",
-      "width": "S",
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnCmptleElement1",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "次へ",
-      "onClick": "",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": "照会を"
-     }
-    },
     {
      "buttonKind": "CommonButtonSearchResult",
      "buttonProperty": {
@@ -977,52 +924,6 @@
    "states": [
     {
      "state": "連絡票照会"
-    }
-   ],
-   "isFinishButtonOnTheRight": false,
-   "FinishButtonVisible": false,
-   "SuspendButtonVisible": false
-  },
-  {
-   "commonButtonAreaId": "cbtCompleteTwo",
-   "buttonSetting": [
-    {
-     "buttonKind": "CommonButtonComplete",
-     "buttonProperty": {
-      "fieldName": "btnpreElement1",
-      "items": [],
-      "controlType": "CommonButtonComplete",
-      "width": "S",
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnpreElement1",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "完了",
-      "onClick": "",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": "照会を"
-     }
-    }
-   ],
-   "states": [
-    {
-     "state": "連絡票検索"
     }
    ],
    "isFinishButtonOnTheRight": false,
