@@ -29,18 +29,16 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class FukaRireki {
 
-    private static final RString FUKARIREKI = new RString("FukaRireki.yml");
+    private static final RString FUKARIREKI = new RString("DBB0320001/FukaRireki.yml");
 
-    public ResponseData<FukaRirekiDiv> onSelect(FukaRirekiDiv rirekiDiv, FukaRirekiAllDiv rirekiAllDiv , AtenaJohoDiv atenajoho) {
-        panelActivatedFukaRireki(rirekiDiv);
+    public ResponseData<FukaRirekiDiv> onSelect(FukaRirekiDiv rirekiDiv, FukaRirekiAllDiv rirekiAllDiv, AtenaJohoDiv atenajoho) {
 
         lordData(rirekiDiv, rirekiAllDiv, "select");
 
         return returnResponse(rirekiDiv);
     }
 
-    public ResponseData<FukaRirekiDiv> onClick(FukaRirekiDiv rirekiDiv, FukaRirekiAllDiv rirekiAllDiv , AtenaJohoDiv atenajoho) {
-        panelActivatedFukaRireki(rirekiDiv);
+    public ResponseData<FukaRirekiDiv> onClick(FukaRirekiDiv rirekiDiv, FukaRirekiAllDiv rirekiAllDiv, AtenaJohoDiv atenajoho) {
 
         lordData(rirekiDiv, rirekiAllDiv, "click");
 
@@ -279,10 +277,16 @@ public class FukaRireki {
             case "select":
                 // 選択行の情報を取得
                 List<dgFukaRirekiAll_Row> selectedItem = fukaRirekiAllDiv.getDgFukaRirekiAll().getSelectedItems();
-                for (dgFukaRirekiAll_Row selectData : selectedItem) {
-                    selectedKeyList.add(selectData.getTxtTsuchishoNo());
-                    selectedKeyList.add(selectData.getTxtFukaNendo());
-                    selectedKeyList.add(selectData.getTxtChoteiNendo());
+                if (selectedItem.size() > 0) {
+                    for (dgFukaRirekiAll_Row selectData : selectedItem) {
+                        selectedKeyList.add(selectData.getTxtTsuchishoNo());
+                        selectedKeyList.add(selectData.getTxtFukaNendo());
+                        selectedKeyList.add(selectData.getTxtChoteiNendo());
+                    }
+                } else {
+                    selectedKeyList.add(new RString("0000000000001901"));
+                    selectedKeyList.add(new RString("平26"));
+                    selectedKeyList.add(new RString("平26"));
                 }
                 break;
             case "click":

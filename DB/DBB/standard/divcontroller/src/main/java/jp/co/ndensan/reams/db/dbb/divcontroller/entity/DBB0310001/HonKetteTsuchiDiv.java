@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-//import jp.co.ndensan.reams.ur.urz.divcontroller.entity.ChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -25,11 +25,11 @@ public class HonKetteTsuchiDiv extends PanelPublish {
     @JsonProperty("txtKetteTsuchiHakkoYMD")
     private TextBoxDate txtKetteTsuchiHakkoYMD;
     @JsonProperty("btnKetteiTsuchiYousikiSettei")
-    private ButtonDialog btnKetteiTsuchiYousikiSettei;
+    private Button btnKetteiTsuchiYousikiSettei;
     @JsonProperty("txtKetteTsuchiBunshoNo")
     private TextBox txtKetteTsuchiBunshoNo;
-//    @JsonProperty("ShutsuryokuJunHonKetteTsuchi")
-//    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonKetteTsuchi;
+    @JsonProperty("ShutsuryokuJunHonKetteTsuchi")
+    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonKetteTsuchi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -48,12 +48,12 @@ public class HonKetteTsuchiDiv extends PanelPublish {
     }
 
     @JsonProperty("btnKetteiTsuchiYousikiSettei")
-    public ButtonDialog getBtnKetteiTsuchiYousikiSettei() {
+    public Button getBtnKetteiTsuchiYousikiSettei() {
         return btnKetteiTsuchiYousikiSettei;
     }
 
     @JsonProperty("btnKetteiTsuchiYousikiSettei")
-    public void setBtnKetteiTsuchiYousikiSettei(ButtonDialog btnKetteiTsuchiYousikiSettei) {
+    public void setBtnKetteiTsuchiYousikiSettei(Button btnKetteiTsuchiYousikiSettei) {
         this.btnKetteiTsuchiYousikiSettei=btnKetteiTsuchiYousikiSettei;
     }
 
@@ -66,15 +66,15 @@ public class HonKetteTsuchiDiv extends PanelPublish {
     public void setTxtKetteTsuchiBunshoNo(TextBox txtKetteTsuchiBunshoNo) {
         this.txtKetteTsuchiBunshoNo=txtKetteTsuchiBunshoNo;
     }
-//
-//    @JsonProperty("ShutsuryokuJunHonKetteTsuchi")
-//    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonKetteTsuchi() {
-//        return ShutsuryokuJunHonKetteTsuchi;
-//    }
-//
-//    @JsonProperty("ShutsuryokuJunHonKetteTsuchi")
-//    public void setShutsuryokuJunHonKetteTsuchi(ChohyoShutsuryokujunDiv ShutsuryokuJunHonKetteTsuchi) {
-//        this.ShutsuryokuJunHonKetteTsuchi=ShutsuryokuJunHonKetteTsuchi;
-//    }
+
+    @JsonProperty("ShutsuryokuJunHonKetteTsuchi")
+    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonKetteTsuchi() {
+        return ShutsuryokuJunHonKetteTsuchi;
+    }
+
+    @JsonProperty("ShutsuryokuJunHonKetteTsuchi")
+    public void setShutsuryokuJunHonKetteTsuchi(ChohyoShutsuryokujunDiv ShutsuryokuJunHonKetteTsuchi) {
+        this.ShutsuryokuJunHonKetteTsuchi=ShutsuryokuJunHonKetteTsuchi;
+    }
 
 }

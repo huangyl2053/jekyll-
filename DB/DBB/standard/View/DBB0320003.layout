@@ -6646,7 +6646,7 @@
      "height": "Auto"
     },
     {
-     "fieldName": "kariButton",
+     "fieldName": "btnNarabete",
      "items": [],
      "controlType": "Button",
      "width": "S",
@@ -6662,20 +6662,20 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "kariButton",
+     "selectControlID": "btnNarabete",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "テスト用<br>閉じる",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
+     "text": "デモ用<br>並べて",
      "imageWidth": "",
      "imageHeight": "",
+     "onClick": "onClick_narabete",
+     "appearance": 0,
+     "imageFileUrl": "",
      "icon": 0,
      "heightTextBoxMatches": false
     },
     {
-     "fieldName": "kariLoad",
+     "fieldName": "btnMaeHikaku",
      "items": [],
      "controlType": "Button",
      "width": "S",
@@ -6691,15 +6691,15 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "kariLoad",
+     "selectControlID": "btnMaeHikaku",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "テスト用<br>ロード",
-     "onClick": "onClick_test",
-     "appearance": 0,
-     "imageFileUrl": "",
+     "text": "デモ用<br>前比較",
      "imageWidth": "",
      "imageHeight": "",
+     "onClick": "onClick_maeHikaku",
+     "appearance": 0,
+     "imageFileUrl": "",
      "icon": 0,
      "heightTextBoxMatches": false
     }
@@ -6733,11 +6733,15 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbb/db/dbb/FukaHikaku/getOnLoadData"
+     "requestUrl": ""
     },
     {
-     "eventName": "onClick_test",
-     "requestUrl": "dbb/db/dbb/FukaHikaku/getOnLoadData"
+     "eventName": "onClick_maeHikaku",
+     "requestUrl": "dbb/db/dbb/FukaHikaku/getOnLoadDataMae"
+    },
+    {
+     "eventName": "onClick_narabete",
+     "requestUrl": "dbb/db/dbb/FukaHikaku/getOnLoadDataNarabete"
     }
    ],
    "hiddenInput": [],
@@ -6779,7 +6783,7 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "比較",
+   "stateName": "比較_仮本",
    "showWizard": false,
    "visibleDivs": [
     {
@@ -6910,7 +6914,165 @@
    ],
    "supplementInfo": "",
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "btnNarabete",
+     "event": "onClick",
+     "transition": "比較_本本"
+    },
+    {
+     "fieldName": "btnMaeHikaku",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "比較_本本",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "FukaJohoHikaku",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KariSantei1",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaHikakuFukakijun1",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaHikakuZennendo1",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaHikakuZanteiGaku1",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "zanteihokenryoHeight1",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaHikakuKibetsuGaku1",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KariSantei2",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaHikakuFukakijun2",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaHikakuZennendo2",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaHikakuZanteiGaku2",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "zanteihokenryoHeight2",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaHikakuKibetsuGaku2",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "HonSantei1",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaHikakuFukakijun3",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaHikakuHokenryo3",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaHikakuKibetsuGaku3",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "HonSantei2",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaHikakuFukakijun4",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaHikakuHokenryo4",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaHikakuKibetsuGaku4",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "tblFukaHikakuKibetsuGaku1",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "tblFukaHikakuKibetsuGaku2",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "tblFukaHikakuKibetsuGaku3",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "tblFukaHikakuKibetsuGaku4",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnNarabete",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnMaeHikaku",
+     "event": "onClick",
+     "transition": "比較_仮本"
+    }
+   ]
   }
  ],
  "currentState": "All",
@@ -6918,12 +7080,20 @@
  "WFParameter": [],
  "UIContainerEventMapping": [
   {
-   "alias": "test",
-   "eventName": "kariLoad.onClick"
+   "alias": "narabete",
+   "eventName": "btnNarabete.onClick"
+  },
+  {
+   "alias": "fukaRireki",
+   "eventName": "btnCloseMaeHikaku.onClick"
+  },
+  {
+   "alias": "maeHikaku",
+   "eventName": "btnMaeHikaku.onClick"
   },
   {
    "alias": "fukaShokai",
-   "eventName": "btnClose.onClick"
+   "eventName": "btnCloseNarabete.onClick"
   }
  ],
  "loadSequencePanelNames": [
@@ -6991,12 +7161,12 @@
  "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "賦課比較",
+   "commonButtonAreaId": "賦課比較_仮本",
    "buttonSetting": [
     {
      "buttonKind": "CommonButtonBack",
      "buttonProperty": {
-      "fieldName": "btnClose",
+      "fieldName": "btnCloseMaeHikaku",
       "items": [],
       "controlType": "CommonButtonNext",
       "width": "S",
@@ -7012,15 +7182,15 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btnClose",
+      "selectControlID": "btnCloseMaeHikaku",
       "helpMessageID": "",
       "jpControlName": "",
       "text": "戻る",
-      "onClick": "onClick_btnClose",
-      "appearance": 0,
-      "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": ""
@@ -7029,7 +7199,53 @@
    ],
    "states": [
     {
-     "state": "比較"
+     "state": "比較_仮本"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "賦課比較_本本",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnCloseNarabete",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCloseNarabete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "比較_本本"
     }
    ],
    "isFinishButtonOnTheRight": false,

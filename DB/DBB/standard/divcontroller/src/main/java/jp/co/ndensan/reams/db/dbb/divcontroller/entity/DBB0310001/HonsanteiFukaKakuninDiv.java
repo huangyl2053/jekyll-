@@ -6,8 +6,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonsanteiKanrijohoDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonsanteiShoriKakuninDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonsanteiShoriNaiyoDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.ShoriJokyoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -22,10 +21,8 @@ public class HonsanteiFukaKakuninDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("HonsanteiShoriNaiyo")
-    private HonsanteiShoriNaiyoDiv HonsanteiShoriNaiyo;
-    @JsonProperty("HonsanteiShoriKakunin")
-    private HonsanteiShoriKakuninDiv HonsanteiShoriKakunin;
+    @JsonProperty("ShoriJokyo")
+    private ShoriJokyoDiv ShoriJokyo;
     @JsonProperty("HonsanteiKanrijoho")
     private HonsanteiKanrijohoDiv HonsanteiKanrijoho;
 
@@ -35,24 +32,14 @@ public class HonsanteiFukaKakuninDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("HonsanteiShoriNaiyo")
-    public HonsanteiShoriNaiyoDiv getHonsanteiShoriNaiyo() {
-        return HonsanteiShoriNaiyo;
+    @JsonProperty("ShoriJokyo")
+    public ShoriJokyoDiv getShoriJokyo() {
+        return ShoriJokyo;
     }
 
-    @JsonProperty("HonsanteiShoriNaiyo")
-    public void setHonsanteiShoriNaiyo(HonsanteiShoriNaiyoDiv HonsanteiShoriNaiyo) {
-        this.HonsanteiShoriNaiyo=HonsanteiShoriNaiyo;
-    }
-
-    @JsonProperty("HonsanteiShoriKakunin")
-    public HonsanteiShoriKakuninDiv getHonsanteiShoriKakunin() {
-        return HonsanteiShoriKakunin;
-    }
-
-    @JsonProperty("HonsanteiShoriKakunin")
-    public void setHonsanteiShoriKakunin(HonsanteiShoriKakuninDiv HonsanteiShoriKakunin) {
-        this.HonsanteiShoriKakunin=HonsanteiShoriKakunin;
+    @JsonProperty("ShoriJokyo")
+    public void setShoriJokyo(ShoriJokyoDiv ShoriJokyo) {
+        this.ShoriJokyo=ShoriJokyo;
     }
 
     @JsonProperty("HonsanteiKanrijoho")
