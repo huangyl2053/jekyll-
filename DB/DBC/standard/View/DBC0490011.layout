@@ -126,6 +126,7 @@
       }
      ],
      "onClick": "",
+     "icon": [],
      "selectedItems": [
       {
        "key": "isAllSelect",
@@ -146,8 +147,7 @@
      "spaceSize": 0,
      "isAllSelectable": false,
      "isAllSelectableBreakLine": false,
-     "disabledItem": [],
-     "icon": []
+     "disabledItem": []
     },
     {
      "fieldName": "KogakuShikyuKetteiTsuchiSakuseiListPanel",
@@ -464,11 +464,11 @@
      "jpControlName": "",
      "text": "通知書を作成する",
      "onClick": "onClick_btnCreate",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],

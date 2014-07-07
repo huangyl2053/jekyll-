@@ -42,8 +42,7 @@
      "labelRAlign": 0,
      "ymdKubun": 1,
      "displayFormat": 0,
-     "value": "",
-     "permitCharactor": "./_-"
+     "value": ""
     },
     {
      "fieldName": "ddlShichosonName",
@@ -87,8 +86,7 @@
        "key": "key1",
        "value": "佐久市"
       }
-     ],
-     "disabledItem": []
+     ]
     },
     {
      "fieldName": "btnSearchSofuzumi",
@@ -112,11 +110,11 @@
      "jpControlName": "",
      "text": "送付年月を指定して表示する",
      "onClick": "onClick_btnSofuzumi",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -141,11 +139,11 @@
      "jpControlName": "",
      "text": "未送付情報を表示する",
      "onClick": "onClick_btnMisofu",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -375,6 +373,11 @@
        "onSelectBySelectButton": "",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
