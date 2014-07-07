@@ -2451,6 +2451,7 @@ declare module Uz {
         private loadDivs(instances, loadSequence);
         private changeControlMargin(value);
         private changePanelMargin(value);
+        private static hideDummyImageIfNoOnLoad(changeInstance);
     }
     class CommonButtonAreaData {
         public commonButtonAreaId: string;

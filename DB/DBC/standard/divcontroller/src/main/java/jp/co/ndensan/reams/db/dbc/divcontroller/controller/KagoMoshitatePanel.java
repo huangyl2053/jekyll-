@@ -9,16 +9,16 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1400011.KagoMoshitatePanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1400011.KyufuJissekiGaitoshaListPanelDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
-
 /**
  *
- * @author n8223
  * @author n8223 ymddata,　共有DIV適用　2014.06.20
  * @author n8223 共有DIV適用　2014.06.28
  *
@@ -32,11 +32,10 @@ public class KagoMoshitatePanel {
      * @param gaitoshaListpanel
      * @return
      */
-    public ResponseData<KagoMoshitatePanelDiv> onClick_btnSelect(KagoMoshitatePanelDiv panel, KyufuJissekiGaitoshaListPanelDiv gaitoshaListpanel) {
+    public ResponseData<KagoMoshitatePanelDiv> onClick_btnSelect(
+            KagoMoshitatePanelDiv panel, KyufuJissekiGaitoshaListPanelDiv gaitoshaListpanel) {
         ResponseData<KagoMoshitatePanelDiv> response = new ResponseData<>();
 
-//       panel.getKagoMoshitateInfo().getTxtMoshitateDate().setRequired(true);
-//       panel.getKagoMoshitateInfo().getDdlKagoMoshitateRiyu().setRequired(true);
         //住民情報・世帯員情報の内容を設定する。
         setKagoMoshitateHihokensha(panel);
         // 過誤申立書情報の内容を設定する。
@@ -44,7 +43,6 @@ public class KagoMoshitatePanel {
 
         response.data = panel;
         return response;
-
     }
 
     /*
@@ -53,62 +51,10 @@ public class KagoMoshitatePanel {
      */
     private void setKagoMoshitateHihokensha(KagoMoshitatePanelDiv panel) {
 
-        List<HashMap> ymlData = ymlData("dbc1400011/KagoMoshitateHihokensha.yml");
-
-        HashMap hashMap = ymlData.get(0);
-        ControlGenerator ymlDt = new ControlGenerator(hashMap);
-
-        //氏名漢字～個人番号　世帯主
-        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtAtenaMeisho().setValue(
-                ymlDt.getAsRString("atenaMeisho"));
-        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtAtenaKanaMeisho().setValue(
-                ymlDt.getAsRString("atenaKanMeisho"));
-        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtSeinengappiYMD().setValue(
-                ymlDt.getAsRDate("seinengappiYmd"));
-        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtNenrei().setValue(
-                ymlDt.getAsRString("nenrei"));
-        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtSeibetsu().setValue(
-                ymlDt.getAsRString("seibetsu"));
-        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtYubinNo().setValue(
-                ymlDt.getAsYubinNo("yubinNo"));
-        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtJusho().setValue(
-                ymlDt.getAsRString("jusho"));
-        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtGyoseiku().setValue(
-                ymlDt.getAsRString("gyoseiku"));
-        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtShikibetsuCode().setValue(
-                ymlDt.getAsRString("shikibetsuCode"));
-        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtYubinNo().setValue(
-                ymlDt.getAsYubinNo("yubinNo"));
-        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtJuminJotai().setValue(
-                ymlDt.getAsRString("juminJotai"));
-        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtSetaiCode().setValue(
-                ymlDt.getAsRString("setaiCode"));
-        panel.getCommonKaigpAtenainfoChildDiv1().getAtenaInfo().getTxtKojinHojinCode().setValue(
-                ymlDt.getAsRString("kojinHojinCode"));
-
-        //資格取得 ～　認定期間　世帯員(異動情報）
-        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtHihokenshaNo().setValue(
-                ymlDt.getAsRString("hihokenshaNo"));
-        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtShutokuYmd().setValue(
-                ymlDt.getAsRDate("shotokuYmd"));
-        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtShutokuJiyu().setValue(
-                ymlDt.getAsRString("shotokuJiyu"));
-//        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtJutokuTekiyo().setValue(
-//        ymlDt.getAsRDate("jutokuTekiyo"));
-        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtYokaigoJotaiKubun().setValue(
-                ymlDt.getAsRString("yokaigojotaiKubun"));
-//        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtShikakuJotai().setValue(
-//        ymlDt.getAsRString("shikakuJotai"));
-//        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtJutokuKaijo().setValue(
-//        ymlDt.getAsRDate("jutokuKaijo"));
-        //2014/0628 朴　KaigoShikakuKihonDIV対応
-        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtJutokuKubun().setValue(
-                ymlDt.getAsRString("jutokuKubun"));
-        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtNinteiKaishiYmd().setValue(
-                ymlDt.getAsRDate("niteikikanfrom"));
-        panel.getCommonKaigoshikakuKihonChildDiv2().getTxtNinteiShuryoYmd().setValue(
-                ymlDt.getAsRDate("niteikikanto"));
-
+        ShikibetsuCode 識別コード = new ShikibetsuCode("012345678901234");
+        int rowId = 0;
+        KaigoShikakuKihon.setData(panel.getCommonKaigpAtenainfoChildDiv1(),
+                panel.getCommonKaigoshikakuKihonChildDiv2(), 識別コード, rowId);
     }
 
     /**
@@ -159,22 +105,7 @@ public class KagoMoshitatePanel {
 
     }
 
-//    public ResponseData<KagoMoshitatePanelDiv> onClick_btnCancel(KagoMoshitatePanelDiv panel, KyufuJissekiGaitoshaListPanelDiv gaitoshaListpanel) {
-//        ResponseData<KagoMoshitatePanelDiv> response = new ResponseData<>();
-//
-//         panel.getKagoMoshitateInfo().getTxtMoshitateDate().setRequired(false);
-//         panel.getKagoMoshitateInfo().getDdlKagoMoshitateRiyu().setRequired(false);
-//
-//         response.data = panel;
-//
-//         response.getValidateErrorMessage().clear();
-//
-//
-//         return response;
-//
-//    }
     private List<HashMap> ymlData(String ymlName) {
         return YamlLoader.DBC.loadAsList(new RString(ymlName));
     }
-
 }
