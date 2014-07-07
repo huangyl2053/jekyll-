@@ -3067,7 +3067,7 @@
       "ShokanShikyuKetteiShomeishoShafuku"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuKetteiShomeishoShafuku",
+     "selectedItemFieldName": "ShokanShikyuKetteiShomeishoKihon",
      "initialTab": 0,
      "isLazyLoading": false
     }
@@ -3152,7 +3152,7 @@
   {
    "order": "1",
    "stateName": "証明書情報",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "ShokanShikyuKetteiShomeisho",

@@ -28,14 +28,33 @@ var DBZ;
         });
 
 
+        Object.defineProperty(SearchResultOfHihokensha_Design.prototype, "height_dgSearchResult", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["height"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["height"] = value;
+                } else {
+                    this.layout.items[0].items[0]["height"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         SearchResultOfHihokensha_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("onClick_btnToResearch");
+            Uz.JSControlUtil.registProperty("height_dgSearchResult");
         };
 
         SearchResultOfHihokensha_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
             editablePropertyInfo["onClick_btnToResearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["height_dgSearchResult"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["height"];
 
             return editablePropertyInfo;
         };
@@ -128,7 +147,7 @@ var DBZ;
                                         "dataName": "shikibetsuCode",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 130,
+                                        "width": 120,
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": {
@@ -299,7 +318,7 @@ var DBZ;
                                         "dataName": "setaiCode",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 110,
+                                        "width": 120,
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": null,
@@ -479,6 +498,11 @@ var DBZ;
                     "publicChildFieldName": "btnToResearch",
                     "publicChildProperty": "onClick",
                     "newPropertyName": "onClick_btnToResearch"
+                },
+                {
+                    "publicChildFieldName": "dgSearchResult",
+                    "publicChildProperty": "height",
+                    "newPropertyName": "height_dgSearchResult"
                 }
             ],
             "dataPassingForDialog": [],

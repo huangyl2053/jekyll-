@@ -8,76 +8,6 @@ module DBZ {
      */
     export class KagoMoshitate_Design extends Uz.CommonChildDiv {
     
-        public get isGroupBox() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["isGroupBox"];
-        }
-        
-        public set isGroupBox(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["isGroupBox"] = value;
-            } else {
-                this.layout.items[0]["isGroupBox"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderTop() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"];
-        }
-        
-        public set eraseBorderTop(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderTop"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderBottom() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"];
-        }
-        
-        public set eraseBorderBottom(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderBottom"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderRight() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"];
-        }
-        
-        public set eraseBorderRight(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderRight"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderLeft() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"];
-        }
-        
-        public set eraseBorderLeft(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderLeft"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
         public get title() {
             return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
         }
@@ -92,6 +22,34 @@ module DBZ {
             }
         }
         
+        public get eraseBorder() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
+        }
+        
+        public set eraseBorder(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
+            } else {
+                this.layout.items[0]["eraseBorder"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get panelDisplay() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
+        }
+        
+        public set panelDisplay(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
+            } else {
+                this.layout.items[0]["panelDisplay"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, KagoMoshitate_Design.myLayout, fieldName);
         }
@@ -102,12 +60,9 @@ module DBZ {
          */
         public registProperty() {
             super.registProperty();
-            Uz.JSControlUtil.registProperty("isGroupBox");
-            Uz.JSControlUtil.registProperty("eraseBorderTop");
-            Uz.JSControlUtil.registProperty("eraseBorderBottom");
-            Uz.JSControlUtil.registProperty("eraseBorderRight");
-            Uz.JSControlUtil.registProperty("eraseBorderLeft");
             Uz.JSControlUtil.registProperty("title");
+            Uz.JSControlUtil.registProperty("eraseBorder");
+            Uz.JSControlUtil.registProperty("panelDisplay");
         }
         
         /**
@@ -117,12 +72,9 @@ module DBZ {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
-            editablePropertyInfo["isGroupBox"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["isGroupBox"];
-            editablePropertyInfo["eraseBorderTop"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderTop"];
-            editablePropertyInfo["eraseBorderBottom"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderBottom"];
-            editablePropertyInfo["eraseBorderRight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderRight"];
-            editablePropertyInfo["eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
             editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
+            editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
             
             return editablePropertyInfo;
         }
@@ -150,6 +102,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtJigyoshaNo_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "maxLength": 100000000,
@@ -173,6 +127,7 @@ module DBZ {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": "",
      "formatLength": "10"
     },
@@ -194,6 +149,8 @@ module DBZ {
      "marginLeft": "-0.2",
      "marginRight": "XS",
      "selectControlID": "txtJigyoshaName_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "maxLength": 100000000,
@@ -217,13 +174,14 @@ module DBZ {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": ""
     },
     {
      "fieldName": "txtSendYM",
      "items": [],
      "controlType": "TextBoxDate",
-     "width": "55",
+     "width": "60",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -237,6 +195,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtSendYM_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "placeHolder": "",
@@ -251,7 +211,7 @@ module DBZ {
      "value": "",
      "labelLText": "送付年月",
      "labelRText": "",
-     "labelLWidth": "80",
+     "labelLWidth": "105",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -277,6 +237,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtMoshitateshaKubun_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "maxLength": 100000000,
@@ -300,6 +262,7 @@ module DBZ {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": ""
     },
     {
@@ -317,9 +280,11 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "S",
      "marginRight": "XS",
      "selectControlID": "txtShokisaiHokenshaNo_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "maxLength": 100000000,
@@ -343,6 +308,7 @@ module DBZ {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": "",
      "formatLength": "6"
     },
@@ -364,6 +330,8 @@ module DBZ {
      "marginLeft": "-0.2",
      "marginRight": "XS",
      "selectControlID": "txtShokisaiHokenshaName_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "maxLength": 100000000,
@@ -387,6 +355,7 @@ module DBZ {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": ""
     },
     {
@@ -407,6 +376,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtTeikyoYM_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "placeHolder": "",
@@ -433,7 +404,7 @@ module DBZ {
      "fieldName": "txtKagoForm",
      "items": [],
      "controlType": "TextBox",
-     "width": "505",
+     "width": "510",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -447,6 +418,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtKagoForm_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "maxLength": 100000000,
@@ -470,6 +443,7 @@ module DBZ {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": ""
     },
     {
@@ -490,8 +464,10 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtMoshitateDate_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
-     "required": true,
+     "required": false,
      "placeHolder": "",
      "textKind": 0,
      "isPrivateInfo": false,
@@ -530,7 +506,10 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "ddlKagoMoshitateRiyu_core",
-     "required": true,
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "required": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -610,7 +589,8 @@ module DBZ {
        "key": "code99",
        "value": "99:その他の事由による実績の取下げ"
       }
-     ]
+     ],
+     "disabledItem": []
     },
     {
      "fieldName": "chkForDogetsuShinsa",
@@ -627,9 +607,12 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "S",
+     "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "chkForDogetsuShinsa_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
      "required": false,
      "onChange": "",
      "labelLText": "",
@@ -649,11 +632,13 @@ module DBZ {
      "maxCheckedItem": 2,
      "spaceSize": "M",
      "isAllSelectable": false,
+     "isAllSelectableBreakLine": false,
+     "disabledItem": [],
      "icon": []
     }
    ],
    "controlType": "Panel",
-   "width": "815",
+   "width": "800",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -667,6 +652,8 @@ module DBZ {
    "marginLeft": "XS",
    "marginRight": "XS",
    "selectControlID": "KagoMoshitate",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "過誤申立書情報",
    "marginTop": "Default",
@@ -683,15 +670,13 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": "CommonChildDiv",
@@ -706,9 +691,11 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": 0,
- "marginRight": 0,
+ "marginLeft": "0",
+ "marginRight": "0",
  "selectControlID": "defaultLayout",
+ "helpMessageID": "",
+ "jpControlName": "",
  "relation": [],
  "businessId": "DBZ",
  "controlName": "KagoMoshitate",
@@ -717,38 +704,25 @@ module DBZ {
  "originalProperty": [
   {
    "publicChildFieldName": "KagoMoshitate",
-   "publicChildProperty": "isGroupBox",
-   "newPropertyName": "isGroupBox"
-  },
-  {
-   "publicChildFieldName": "KagoMoshitate",
-   "publicChildProperty": "eraseBorderTop",
-   "newPropertyName": "eraseBorderTop"
-  },
-  {
-   "publicChildFieldName": "KagoMoshitate",
-   "publicChildProperty": "eraseBorderBottom",
-   "newPropertyName": "eraseBorderBottom"
-  },
-  {
-   "publicChildFieldName": "KagoMoshitate",
-   "publicChildProperty": "eraseBorderRight",
-   "newPropertyName": "eraseBorderRight"
-  },
-  {
-   "publicChildFieldName": "KagoMoshitate",
-   "publicChildProperty": "eraseBorderLeft",
-   "newPropertyName": "eraseBorderLeft"
-  },
-  {
-   "publicChildFieldName": "KagoMoshitate",
    "publicChildProperty": "title",
    "newPropertyName": "title"
+  },
+  {
+   "publicChildFieldName": "KagoMoshitate",
+   "publicChildProperty": "eraseBorder",
+   "newPropertyName": "eraseBorder"
+  },
+  {
+   "publicChildFieldName": "KagoMoshitate",
+   "publicChildProperty": "panelDisplay",
+   "newPropertyName": "panelDisplay"
   }
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M"
 }        
     }
 }

@@ -6678,14 +6678,14 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "親Divタイトル",
+ "title": "給付実績照会",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
   {
    "order": "1",
    "stateName": "給付実績照会",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KyufuJisseki",

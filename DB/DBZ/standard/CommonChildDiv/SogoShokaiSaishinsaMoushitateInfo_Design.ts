@@ -436,12 +436,12 @@ module DBZ {
      "isComboBox": false,
      "suggest": [],
      "decorationClass": "",
+     "permitCharactor": "+-,.\\",
      "maxValue": 1.7976931348623157e+308,
      "minValue": 0,
      "isCurrency": false,
      "isComma": true,
-     "decimalPointLength": 0,
-     "permitCharactor": "+-,.\\"
+     "decimalPointLength": 0
     },
     {
      "fieldName": "SogoShokaiSaishinsaJiyu",
@@ -450,7 +450,7 @@ module DBZ {
        "fieldName": "txtSaishinsaMoshitateKomoku",
        "items": [],
        "controlType": "TextBox",
-       "width": "200",
+       "width": "520",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -476,9 +476,9 @@ module DBZ {
        "onChange": "",
        "onKeyPress": "",
        "text": "",
-       "labelLText": "項目",
+       "labelLText": "対象項目",
        "labelRText": "",
-       "labelLWidth": "35",
+       "labelLWidth": "70",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -496,13 +496,13 @@ module DBZ {
        "fieldName": "txtSaishinsaMoshitateRiyu",
        "items": [],
        "controlType": "TextBox",
-       "width": "300",
+       "width": "520",
        "visible": true,
        "displayNone": false,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": false,
+       "wrap": true,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
@@ -522,9 +522,9 @@ module DBZ {
        "onChange": "",
        "onKeyPress": "",
        "text": "",
-       "labelLText": "理由",
+       "labelLText": "申立理由",
        "labelRText": "",
-       "labelLWidth": "35",
+       "labelLWidth": "70",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -676,12 +676,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         },
         {
          "fieldName": "txtSaishinsaHokenshaGenshinTanisu",
@@ -727,12 +727,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         },
         {
          "fieldName": "txtSaishinsaHokenshaMoshitateTanisu",
@@ -778,12 +778,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         },
         {
          "fieldName": "txtSaishinsaHokenshaKetteiTanisu",
@@ -829,12 +829,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         },
         {
          "fieldName": "txtSaishinsaHokenshaChoseiTanisu",
@@ -880,12 +880,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         },
         {
          "fieldName": "txtSaishinsaHokenshaFutangaku",
@@ -931,12 +931,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "Panel",
@@ -1213,12 +1213,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         },
         {
          "fieldName": "txtSaishinsaKohiGenshinTanisu",
@@ -1264,12 +1264,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         },
         {
          "fieldName": "txtSaishinsaKohiMoshitateTanisu",
@@ -1315,12 +1315,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         },
         {
          "fieldName": "txtSaishinsaKohiKetteiTanisu",
@@ -1366,12 +1366,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         },
         {
          "fieldName": "txtSaishinsaKohiChoseiTanisu",
@@ -1417,12 +1417,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         },
         {
          "fieldName": "txtSaishinsaKohiFutangaku",
@@ -1468,12 +1468,12 @@ module DBZ {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
          "isComma": true,
-         "decimalPointLength": 0,
-         "permitCharactor": "+-,.\\"
+         "decimalPointLength": 0
         }
        ],
        "controlType": "Panel",

@@ -449,7 +449,7 @@
   {
    "order": "1",
    "stateName": "申請書一覧",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "ShokanShikyuKetteiKihon",

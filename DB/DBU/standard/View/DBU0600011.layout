@@ -625,7 +625,7 @@
               "toolTip": "",
               "bgColor": 0,
               "width": 180,
-              "visible": true,
+              "visible": false,
               "cellType": 0,
               "cellDetails": null,
               "align": 0,
@@ -985,7 +985,7 @@
               "dataName": "nyushoShisetsu",
               "toolTip": "",
               "bgColor": 0,
-              "width": 250,
+              "width": 300,
               "visible": true,
               "cellType": 0,
               "cellDetails": null,
@@ -1317,7 +1317,7 @@
         "tplSogoShokaiShikakuJogai"
        ],
        "isDraggable": false,
-       "selectedItemFieldName": "tplSogoShokaiShikakuJogai",
+       "selectedItemFieldName": "tplSogoShokaiShikakuTokurei",
        "initialTab": 0,
        "isLazyLoading": false
       }
@@ -1804,7 +1804,7 @@
          ],
          "controlType": "TabPanel",
          "width": "XS",
-         "visible": true,
+         "visible": false,
          "displayNone": false,
          "disabled": false,
          "accessKey": "",
@@ -1959,7 +1959,7 @@
               "cellDetails": {
                "cellType": 0
               },
-              "align": 1,
+              "align": 0,
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "txtKetteiKubun"
@@ -1989,7 +1989,7 @@
               "visible": true,
               "cellType": 0,
               "cellDetails": null,
-              "align": 1,
+              "align": 0,
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "txtGenmenGengakuShurui"
@@ -2088,7 +2088,7 @@
               "toolTip": "",
               "bgColor": 0,
               "width": 35,
-              "visible": true,
+              "visible": false,
               "cellType": 11,
               "cellDetails": {
                "cellType": 11,
@@ -2177,7 +2177,7 @@
               "toolTip": "",
               "bgColor": 0,
               "width": 250,
-              "visible": true,
+              "visible": false,
               "cellType": 0,
               "cellDetails": null,
               "align": 0,
@@ -2191,7 +2191,7 @@
               "toolTip": "",
               "bgColor": 0,
               "width": 250,
-              "visible": true,
+              "visible": false,
               "cellType": 0,
               "cellDetails": null,
               "align": 0,
@@ -2270,7 +2270,7 @@
         "tplSogoShokaiJukyuKyufuSeigen"
        ],
        "isDraggable": false,
-       "selectedItemFieldName": "tplSogoShokaiJukyuKyufuSeigen",
+       "selectedItemFieldName": "tplSogoShokaiJukyuGenmenGengaku",
        "initialTab": 0,
        "isLazyLoading": false
       }
@@ -3206,7 +3206,7 @@
               "dataName": "txtRiyu",
               "toolTip": "",
               "bgColor": 0,
-              "width": 200,
+              "width": 250,
               "visible": true,
               "cellType": 0,
               "cellDetails": null,
@@ -3287,7 +3287,7 @@
         "tplSogoShokaiKyufuSaishinsaMoushitatesho"
        ],
        "isDraggable": false,
-       "selectedItemFieldName": "tplSogoShokaiKyufuSaishinsaMoushitatesho",
+       "selectedItemFieldName": "tplSogoShokaiKyufuShokanBarai",
        "initialTab": 0,
        "isLazyLoading": false
       }
@@ -4236,7 +4236,7 @@
   {
    "order": "1",
    "stateName": "総合照会",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "SogoShokaiKihon",

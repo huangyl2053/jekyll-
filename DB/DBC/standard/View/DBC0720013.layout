@@ -110,7 +110,7 @@
   {
    "order": "1",
    "stateName": "審査結果更新完了",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KanryoMessage",
@@ -156,52 +156,5 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": [
-  {
-   "commonButtonAreaId": "complete",
-   "buttonSetting": [
-    {
-     "buttonKind": "CommonButtonComplete",
-     "buttonProperty": {
-      "fieldName": "btnComplete",
-      "items": [],
-      "controlType": "CommonButtonComplete",
-      "width": "S",
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnComplete",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "完了",
-      "onClick": "",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": ""
-     }
-    }
-   ],
-   "states": [
-    {
-     "state": "審査結果更新完了"
-    }
-   ],
-   "isFinishButtonOnTheRight": false,
-   "FinishButtonVisible": false,
-   "SuspendButtonVisible": false
-  }
- ]
+ "commonButtonAreaData": []
 }

@@ -2183,7 +2183,7 @@
   {
    "order": "1",
    "stateName": "届出一覧",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KyotakuKeikakuTodokedeDetail",
@@ -2293,7 +2293,7 @@
   {
    "order": "2",
    "stateName": "明細登録",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KyotakuKeikakuTodokedeDetail",
@@ -2403,7 +2403,7 @@
   {
    "order": "3",
    "stateName": "更新完了",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KyotakuKeikakuTodokedeKanryo",

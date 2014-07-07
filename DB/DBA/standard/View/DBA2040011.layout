@@ -699,7 +699,6 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "selectedItem": "keyTaTokureiTekiyo",
          "dataSource": [
           {
            "key": "keyTaTokureiTekiyo",
@@ -714,6 +713,7 @@
            "value": "その他"
           }
          ],
+         "selectedItem": "keyTaTokureiTekiyo",
          "disabledItem": []
         },
         {
@@ -933,7 +933,6 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "selectedItem": "keyKaijo",
          "dataSource": [
           {
            "key": "keyKaijo",
@@ -960,6 +959,7 @@
            "value": "その他"
           }
          ],
+         "selectedItem": "keyKaijo",
          "disabledItem": []
         },
         {
@@ -2113,7 +2113,7 @@
   {
    "order": "1",
    "stateName": "適用登録",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "TajutokuTekiyoJoho",
@@ -2341,7 +2341,7 @@
   {
    "order": "4",
    "stateName": "登録完了",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "TajutokuTekiyoComplete",
@@ -2372,11 +2372,6 @@
      "fieldName": "btnToDecide",
      "event": "onClick",
      "transition": ""
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": "終了"
     }
    ]
   }

@@ -25,13 +25,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "required": false,
      "onChange": "",
-     "labelLText": "",
-     "labelLWidth": "65",
-     "labelLAlign": 2,
-     "onClick": "",
-     "icon": [],
      "selectedItem": null,
      "dataSource": [
       {
@@ -47,14 +41,20 @@
        "value": "要介護認定者"
       }
      ],
+     "required": false,
+     "onClick": "",
      "selectedItems": [],
      "newLineItemNumber": 4,
      "minCheckedItem": "1",
      "maxCheckedItem": "3",
      "spaceSize": "M",
+     "labelLText": "",
+     "labelLWidth": "65",
+     "labelLAlign": 2,
      "isAllSelectable": true,
      "isAllSelectableBreakLine": false,
-     "disabledItem": []
+     "disabledItem": [],
+     "icon": []
     },
     {
      "fieldName": "btnSearchHakkoTaisho",
@@ -76,13 +76,13 @@
      "selectControlID": "btnSearchHakkoTaisho",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "一括作成対象を表示する",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "onClick_BtnSearchHakkoTaisho",
+     "icon": 0,
+     "text": "一括作成対象を表示する",
      "appearance": 0,
      "imageFileUrl": "",
-     "icon": 0,
+     "imageWidth": "",
+     "imageHeight": "",
      "heightTextBoxMatches": false
     }
    ],
@@ -156,7 +156,8 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "174",
+     "height": "275",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -282,7 +283,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -312,26 +312,25 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "",
        "required": false,
+       "labelLText": "交付日",
+       "labelLWidth": "55",
+       "labelLAlign": 2,
+       "text": "",
        "placeHolder": "",
-       "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "onBlur_txtKofuDate",
-       "onChange": "",
        "onKeyPress": "",
-       "text": "",
-       "value": "",
-       "labelLText": "交付日",
        "labelRText": "",
-       "labelLWidth": "55",
        "labelRWidth": "S",
-       "labelLAlign": 2,
        "labelRAlign": 0,
        "ymdKubun": 2,
        "displayFormat": 0,
-       "permitCharactor": "./_-"
+       "value": "",
+       "textKind": 0
       },
       {
        "fieldName": "chkTest",
@@ -354,13 +353,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "required": false,
        "onChange": "",
-       "labelLText": "",
-       "labelLWidth": "XS",
-       "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
        "selectedItem": null,
        "dataSource": [
         {
@@ -368,14 +361,20 @@
          "value": "テスト出力"
         }
        ],
+       "required": false,
+       "onClick": "",
        "selectedItems": [],
        "newLineItemNumber": 1,
        "minCheckedItem": 0,
        "maxCheckedItem": "1",
        "spaceSize": "M",
+       "labelLText": "",
+       "labelLWidth": "XS",
+       "labelLAlign": 2,
        "isAllSelectable": false,
        "isAllSelectableBreakLine": false,
-       "disabledItem": []
+       "disabledItem": [],
+       "icon": []
       },
       {
        "fieldName": "lblTestHosoku",
@@ -398,10 +397,10 @@
        "helpMessageID": "",
        "jpControlName": "",
        "required": false,
-       "isPrivateInfo": false,
        "text": "※テスト出力を行う場合、帳票発行履歴に登録されません。",
-       "decorationClass": "",
-       "align": 0
+       "isPrivateInfo": false,
+       "align": 0,
+       "decorationClass": ""
       }
      ],
      "controlType": "Panel",
@@ -512,7 +511,7 @@
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "marginTop": "Default",
+     "marginTop": "0",
      "marginBottom": "0",
      "eraseBorder": false,
      "backgroundColor": 0,
@@ -577,7 +576,7 @@
      "jpControlName": "",
      "onLoad": "",
      "title": "被保険者証発行一覧表",
-     "isOpen": true,
+     "isOpen": false,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
@@ -794,18 +793,15 @@
       "postParameterPanelNames": [
        {}
       ],
-      "text": "被保険者証を発行する",
-      "imageWidth": "",
-      "imageHeight": "",
       "onClick": "",
+      "icon": 0,
+      "text": "被保険者証を発行する",
       "appearance": 0,
       "imageFileUrl": "",
-      "icon": 0,
+      "imageWidth": "",
+      "imageHeight": "",
       "heightTextBoxMatches": false,
       "onAfterRequest": "",
-      "additionalText": "被保険者証を",
-      "prefixText": "",
-      "suffixText": "",
       "validateUrl": "",
       "sourceCreateUrl": "",
       "afterPrintUrl": "",
@@ -814,7 +810,8 @@
       "isPreview": false,
       "printable": false,
       "copiesChangeable": false,
-      "progressVisible": false
+      "progressVisible": false,
+      "additionalText": ""
      }
     }
    ],

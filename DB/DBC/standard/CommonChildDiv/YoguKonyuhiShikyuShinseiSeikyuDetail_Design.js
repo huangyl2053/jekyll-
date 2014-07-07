@@ -226,7 +226,7 @@ var DBC;
                             "onNoRow": "",
                             "onMultiRows": "",
                             "dataSource": [],
-                            "sortOrder": "txtBuyAmount",
+                            "sortOrder": "txtShinsaMethod",
                             "isAscending": true,
                             "filterList": [],
                             "activeRowId": -1
@@ -726,7 +726,7 @@ var DBC;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "1095",
+                    "width": "1105",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -769,7 +769,7 @@ var DBC;
                     "session": {},
                     "eraseBorder": true,
                     "backgroundColor": 0,
-                    "widthAuto": true,
+                    "widthAuto": false,
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,

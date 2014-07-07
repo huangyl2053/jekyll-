@@ -2281,7 +2281,7 @@
   {
    "order": "1",
    "stateName": "履歴一覧",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KyotakuJikoRiyohyoKihon",
@@ -2341,7 +2341,7 @@
   {
    "order": "2",
    "stateName": "利用票登録",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KyotakuJikoRiyohyoKihon",
@@ -2401,7 +2401,7 @@
   {
    "order": "3",
    "stateName": "更新完了",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KyotakuJikoRiyohyoKanryo",

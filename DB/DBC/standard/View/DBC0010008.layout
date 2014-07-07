@@ -146,7 +146,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "親Divタイトル",
+ "title": "給付実績照会",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [

@@ -28,6 +28,8 @@ public class KagoMoshitatePanelDiv extends Panel {
     private KaigoAtenaInfoDiv CommonKaigpAtenainfoChildDiv1;
     @JsonProperty("CommonKaigoshikakuKihonChildDiv2")
     private KaigoShikakuKihonDiv CommonKaigoshikakuKihonChildDiv2;
+    @JsonProperty("hl")
+    private HorizontalLine hl;
     @JsonProperty("KagoMoshitateInfo")
     private KagoMoshitateDiv KagoMoshitateInfo;
     @JsonProperty("btnSettle")
@@ -59,6 +61,16 @@ public class KagoMoshitatePanelDiv extends Panel {
     @JsonProperty("CommonKaigoshikakuKihonChildDiv2")
     public void setCommonKaigoshikakuKihonChildDiv2(KaigoShikakuKihonDiv CommonKaigoshikakuKihonChildDiv2) {
         this.CommonKaigoshikakuKihonChildDiv2=CommonKaigoshikakuKihonChildDiv2;
+    }
+
+    @JsonProperty("hl")
+    public HorizontalLine getHl() {
+        return hl;
+    }
+
+    @JsonProperty("hl")
+    public void setHl(HorizontalLine hl) {
+        this.hl=hl;
     }
 
     @JsonProperty("KagoMoshitateInfo")

@@ -36,7 +36,7 @@ public class SetaiInfo {
         ResponseData<SetaiInfoDiv> response = new ResponseData<>();
                 
         //2014.07.04 朴　宛名・介護基本 対応
-        ShikibetsuCode 識別コード = new ShikibetsuCode("012345678901234");
+        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000019");
 
         int rowId = 0;
         KaigoShikakuKihon.setData(panel.getCommonKaigAtenChildDiv1(),
@@ -51,9 +51,9 @@ public class SetaiInfo {
         
         panel.getSetaiinShotoku().getTxtSetaiIchiranKijunYMD().setValue(cg.getAsRDate("基準日"));
        // panel.getSetaiinShotoku().getTxtSetaiIchiranKazeiNendo().setValue(new RString((String)other.get(0).get("賦課年度")));
-        System.out.println("+++++ 世帯コード" + cg.getAsRString("世帯コード"));
-       // panel.getSetaiinShotoku().getTxtSetaiIchiranSetaiCode().setValue(cg.getAsRString("世帯コード"));
-        panel.getSetaiinShotoku().getTxtSetaiIchiranSetaiCode().setValue(new RString("1234567890"));
+       //2014/.07.07 世帯コード15桁に
+        panel.getSetaiinShotoku().getTxtSetaiIchiranSetaiCode().setValue(cg.getAsRString("世帯コード"));
+       // panel.getSetaiinShotoku().getTxtSetaiIchiranSetaiCode().setValue(new RString("1234567890"));
         response.data = panel;
         return response;
 
@@ -112,6 +112,9 @@ public class SetaiInfo {
         buf.append(dataGrid.get(1).toString());
         row.setTxtKetsugo01(new RString(buf.toString()));
         row.setTxtShimei((RString) dataGrid.get(3));
+        
+        //2014.07.07 個人番号
+        row.setTxtHihokenshaNo((RString) dataGrid.get(1));
 
         row.setTxtSonzaiUmuKijunbi((RString) dataGrid.get(7));
         row.setTxtSonzaiUmuChokkin((RString) dataGrid.get(8));
@@ -139,6 +142,7 @@ public class SetaiInfo {
         row.setTxtJukiIdoJiyu((RString) dataGrid.get(15));
         row.setTxtJuteiYMD((RString) dataGrid.get(16));
         row.setTxtJukiIdoJiyu((RString) dataGrid.get(17));
+        row.setTxtDougetsuService((RString) dataGrid.get(18));
 
         return row;
     }
@@ -199,6 +203,8 @@ public class SetaiInfo {
         yamlDatalist.add(cg.getAsRString("異動日"));
         yamlDatalist.add(cg.getAsRString("住定日"));
         yamlDatalist.add(cg.getAsRString("異動事由"));
+        yamlDatalist.add(cg.getAsRString("同月ｻｰﾋﾞｽ"));
+
 
         return yamlDatalist;
     }

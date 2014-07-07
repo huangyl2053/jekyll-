@@ -132,12 +132,20 @@ public class KogakuServicehiInfoPanel {
         panel.getKogakuServiceDetail().getTxtTeikyoYM().setValue(ymlDt.getAsRDate("teikyoYM"));
         
         //2014.07.01 朴　宛名・介護基本 対応
-        ShikibetsuCode 識別コード = new ShikibetsuCode("012345678901234");
+        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000019");
 
         //2014.07.04 朴　KogakuJumin　panel 削除
         int rowId = 0;
         KaigoShikakuKihon.setData(panel.getCommonKogakuNushiJuminJohoChildDiv1(),
                 panel.getCommonKogakuKaigoJuminJohoChildDiv2(), 識別コード, rowId);
+//        
+//        
+//         List<HashMap> targetSource = YamlLoader.DBZ.loadAsList(new RString("KaigoShikakuKihon.yml"));
+//        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
+//        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
+//        int rowId = 0;
+//        KaigoShikakuKihon.setData(panel.getTaishoshaAtena(), panel.getTaishoshaKaigoShikaku(), 識別コード, rowId);
+        
 
     }
 
@@ -227,6 +235,12 @@ public class KogakuServicehiInfoPanel {
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getKozaPayment().getTxtKinyuKikanCode().setValue(
                         ymlDt.getAsRString("kinyuKikanCode"));
+        
+        //2014.07.07 口座種別　普通
+        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
+                getKozaPayment().getRadKozaShubetsu().setSelectedItem(
+                        ymlDt.getAsRString("radKozaShubetsu"));
+
         panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod().
                 getKozaPayment().getTxtKinyuKikanName().setValue(
                         ymlDt.getAsRString("kinyuKikanName"));

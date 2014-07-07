@@ -195,7 +195,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "M",
+     "height": "400",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -456,7 +456,7 @@
      "onNoRow": "",
      "onMultiRows": "",
      "dataSource": [],
-     "sortOrder": "txtSeiriNo",
+     "sortOrder": "txtTeikyoYM",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
@@ -803,7 +803,7 @@
   {
    "order": "1",
    "stateName": "申請検索",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "SearchConditionToMishinsaShikyuShinseiPanel",
@@ -838,7 +838,7 @@
   {
    "order": "2",
    "stateName": "申請審査",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "MishinsaShikyuShinseiListPanel",
@@ -921,7 +921,7 @@
       "fieldName": "btnSave",
       "items": [],
       "controlType": "CommonButtonUpdate",
-      "width": 1,
+      "width": 0,
       "visible": true,
       "displayNone": false,
       "disabled": true,
@@ -945,7 +945,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "審査内容を"
+      "additionalText": ""
      }
     }
    ],

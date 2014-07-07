@@ -1649,7 +1649,7 @@
   {
    "order": "1",
    "stateName": "給付実績検索",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KyufuJissekiSearch",

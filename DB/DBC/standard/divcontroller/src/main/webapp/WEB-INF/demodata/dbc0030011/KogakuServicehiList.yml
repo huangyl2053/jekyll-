@@ -3,10 +3,30 @@
 -  hihoNo: "0000000019"           
    hihoName:  電算　太郎     
    teikyoYM:  20140501        
-   kogakuShikyuAmount: 37200
-   shinseiDate: 2140601        
+   kogakuShikyuAmount: 26750
+   shinseiDate: 20140601        
    ketteiDate: 20140701     
    shikyuKubun: 口座支給    
-   shikyuKingaku: 37200
+   shikyuKingaku: 26750
    kogakuAutoShokan: 介護高額自動償還
    hokensha: 介護保険者
+-  hihoNo: "0000000027"           
+   hihoName:  電算　花子     
+   teikyoYM:  20140501        
+   kogakuShikyuAmount: 16050
+   shinseiDate: 20140601        
+   ketteiDate: 20140701     
+   shikyuKubun: 口座支給    
+   shikyuKingaku: 16050
+   kogakuAutoShokan: 介護高額自動償還
+   hokensha: 介護保険者
+-  hihoNo: "0000000035"           
+   hihoName:  電算　一郎太    
+   teikyoYM:  20140401        
+   kogakuShikyuAmount: 12800
+   shinseiDate: 20140501        
+   ketteiDate: 20140601     
+   shikyuKubun: 口座支給    
+   shikyuKingaku: 12800
+   kogakuAutoShokan: 介護高額自動償還
+   hokensha: 介護保険者      

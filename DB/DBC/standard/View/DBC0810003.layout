@@ -113,7 +113,7 @@
   {
    "order": "1",
    "stateName": "更新完了",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "ShokanShikyuKetteiKanryo",

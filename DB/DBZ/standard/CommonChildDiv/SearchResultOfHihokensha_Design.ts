@@ -22,6 +22,20 @@ module DBZ {
             }
         }
         
+        public get height_dgSearchResult() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["height"];
+        }
+        
+        public set height_dgSearchResult(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["height"] = value;
+            } else {
+                this.layout.items[0].items[0]["height"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, SearchResultOfHihokensha_Design.myLayout, fieldName);
         }
@@ -33,6 +47,7 @@ module DBZ {
         public registProperty() {
             super.registProperty();
             Uz.JSControlUtil.registProperty("onClick_btnToResearch");
+            Uz.JSControlUtil.registProperty("height_dgSearchResult");
         }
         
         /**
@@ -43,6 +58,7 @@ module DBZ {
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
             editablePropertyInfo["onClick_btnToResearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["height_dgSearchResult"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["height"];
             
             return editablePropertyInfo;
         }
@@ -135,7 +151,7 @@ module DBZ {
         "dataName": "shikibetsuCode",
         "toolTip": "",
         "bgColor": 0,
-        "width": 130,
+        "width": 120,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -306,7 +322,7 @@ module DBZ {
         "dataName": "setaiCode",
         "toolTip": "",
         "bgColor": 0,
-        "width": 110,
+        "width": 120,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -486,6 +502,11 @@ module DBZ {
    "publicChildFieldName": "btnToResearch",
    "publicChildProperty": "onClick",
    "newPropertyName": "onClick_btnToResearch"
+  },
+  {
+   "publicChildFieldName": "dgSearchResult",
+   "publicChildProperty": "height",
+   "newPropertyName": "height_dgSearchResult"
   }
  ],
  "dataPassingForDialog": [],

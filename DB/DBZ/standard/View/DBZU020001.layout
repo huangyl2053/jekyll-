@@ -37,7 +37,9 @@
      "onClick_BtnToSearch": "onClick_btnToSearch",
      "displayNone_txtTsuchishoNo": true,
      "displayNone_ddlFukaNendo": true,
-     "displayNone_SearchCriteriaDetail": false
+     "displayNone_SearchCriteriaDetail": false,
+     "canOpenAndClose_HihokenshaFinder": true,
+     "displayNone_saikinShorisha": false
     },
     {
      "fieldName": "taishoshaList",
@@ -70,6 +72,7 @@
      "canTransferEvent": true,
      "heightForDialog": "M",
      "onClick_btnToResearch": "onClick_btnToResearch",
+     "height_dgSearchResult": "470",
      "gridSetting": {
       "rowHeight": 50,
       "isMultiSelectable": false,
@@ -390,7 +393,7 @@
   {
    "order": "1",
    "stateName": "対象者検索",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "taishoshaSearch",
