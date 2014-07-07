@@ -43,7 +43,8 @@
      "ymdKubun": 1,
      "displayFormat": 0,
      "value": "2009/01/31",
-     "textKind": 0
+     "textKind": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "lblHokenshaSofuList",
@@ -121,7 +122,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "442",
+     "height": "517",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -330,7 +331,8 @@
      "ymdKubun": 1,
      "displayFormat": 0,
      "value": "",
-     "textKind": 0
+     "textKind": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtSaiShoriKubun",
@@ -375,7 +377,8 @@
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtFileName",
@@ -420,7 +423,8 @@
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "permitCharactor": ""
     }
    ],
    "controlType": "Panel",
@@ -747,7 +751,7 @@
       "fieldName": "btnExec",
       "items": [],
       "controlType": "CommonButtonCreate",
-      "width": 1,
+      "width": 0,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -771,7 +775,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "連絡票を"
+      "additionalText": ""
      }
     },
     {
@@ -780,7 +784,7 @@
       "fieldName": "btnRetuen",
       "items": [],
       "controlType": "CommonButtonNext",
-      "width": 1,
+      "width": 0,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -804,7 +808,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "送付一覧に"
+      "additionalText": ""
      }
     }
    ],
@@ -813,7 +817,9 @@
      "state": "連絡票作成"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }
