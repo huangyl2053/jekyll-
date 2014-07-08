@@ -113,7 +113,7 @@ public class NinteichosaResultEntryMain {
         dgNinteichosaResultTaishosha_Row target = targetInfo();
         new NinteichosaDetail(div).reflectPanelValueTo(target);
         NinteichosaResultEntryTarget.NinteichosaResultTaishosha.save(target);
-        return withMessage(new ResponseData<NinteichosaResultEntryMainDiv>(), new InformationMessage("I", "登録しました。"));
+        return withMessage(new ResponseData<NinteichosaResultEntryMainDiv>(), new InformationMessage("I", "保存しました。"));
     }
 
     /**

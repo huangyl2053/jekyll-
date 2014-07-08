@@ -148,7 +148,7 @@ public class NinteichosaIraiEntry {
         increase_TokusokuCount(div, allTargets);
         saveToViewState(div, allTargets);
         setDisabled_btnToCallNext(isLastPerson(div, selectedTargetsFrom(allTargets)));
-        return withMessage(createResponseData(div), new InformationMessage("I2010001", "保存しました。"));
+        return withMessage(createResponseData(div), new InformationMessage("I", "保存しました。"));
     }
 
     private void saveToViewState(NinteichosaIraiEntryDiv panel, NinteichosaIraiListDiv allTargets) {
@@ -269,15 +269,13 @@ public class NinteichosaIraiEntry {
         return createResponseData(div);
     }
 
-    private ResponseData<NinteichosaIraiEntryDiv> createResponseData(NinteichosaIraiEntryDiv panel) {
-        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
+    private <T> ResponseData<T> createResponseData(T panel) {
+        ResponseData<T> response = new ResponseData<>();
         response.data = panel;
         return response;
     }
 
-    private ResponseData<NinteichosaIraiEntryDiv> withMessage(ResponseData<NinteichosaIraiEntryDiv> response,
-            InformationMessage message) {
-        response.clearMessage();
+    private <T> ResponseData<T> withMessage(ResponseData<T> response, InformationMessage message) {
         response.addMessage(message);
         return response;
     }
@@ -315,6 +313,7 @@ public class NinteichosaIraiEntry {
             panel.getTxtYubinNo().setValue(new YubinNo(targetInfo.get郵便番号()));
             panel.getTxtShinseiDate().setValue(targetInfo.get認定申請日().getValue());
             panel.getTxtShinseiKubun().setValue(targetInfo.get認定申請区分申請時());
+            panel.getTxtChiku().setValue(targetInfo.get地区());
         }
 
         private static final class _LatestChosain {
@@ -419,7 +418,7 @@ public class NinteichosaIraiEntry {
             return this.panel.getTxtChosainName();
         }
     }
-//</editor-fold>
+    //</editor-fold>
 
     /**
      * 調査依頼書です。
@@ -479,7 +478,7 @@ public class NinteichosaIraiEntry {
             return false;
         }
     }
-//</editor-fold>
+    //</editor-fold>
 
     /**
      * 認定調査依頼の主な項目です。

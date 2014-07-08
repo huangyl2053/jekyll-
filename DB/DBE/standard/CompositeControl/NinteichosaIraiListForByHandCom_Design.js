@@ -524,6 +524,20 @@ var DBE;
                                 "sortKey": "ninteiShinseiDate"
                             },
                             {
+                                "columnName": "地区",
+                                "dataName": "chiku",
+                                "toolTip": "",
+                                "bgColor": 0,
+                                "width": 60,
+                                "visible": true,
+                                "cellType": 0,
+                                "cellDetails": null,
+                                "align": 0,
+                                "resize": true,
+                                "isPrivateInfo": false,
+                                "sortKey": "chiku"
+                            },
+                            {
                                 "columnName": "依頼区分",
                                 "dataName": "chosaIraiKubun",
                                 "toolTip": "",

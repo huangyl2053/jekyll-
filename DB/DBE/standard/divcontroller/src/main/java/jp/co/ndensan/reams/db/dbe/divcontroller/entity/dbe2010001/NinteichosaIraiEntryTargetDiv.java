@@ -30,6 +30,8 @@ public class NinteichosaIraiEntryTargetDiv extends Panel {
     private TextBoxFlexibleDate txtShinseiDate;
     @JsonProperty("txtShinseiKubun")
     private TextBox txtShinseiKubun;
+    @JsonProperty("txtChiku")
+    private TextBox txtChiku;
     @JsonProperty("txtShimei")
     private TextBox txtShimei;
     @JsonProperty("txtBirthDay")
@@ -40,6 +42,10 @@ public class NinteichosaIraiEntryTargetDiv extends Panel {
     private TextBoxYubinNo txtYubinNo;
     @JsonProperty("txtJusho")
     private TextBox txtJusho;
+    @JsonProperty("btnRenrakusaki")
+    private Button btnRenrakusaki;
+    @JsonProperty("btnShichosonRenraku")
+    private Button btnShichosonRenraku;
     @JsonProperty("NinteichosaIraiEntryTargetLatestChosain")
     private NinteichosaIraiEntryTargetLatestChosainDiv NinteichosaIraiEntryTargetLatestChosain;
 
@@ -87,6 +93,16 @@ public class NinteichosaIraiEntryTargetDiv extends Panel {
     @JsonProperty("txtShinseiKubun")
     public void setTxtShinseiKubun(TextBox txtShinseiKubun) {
         this.txtShinseiKubun=txtShinseiKubun;
+    }
+
+    @JsonProperty("txtChiku")
+    public TextBox getTxtChiku() {
+        return txtChiku;
+    }
+
+    @JsonProperty("txtChiku")
+    public void setTxtChiku(TextBox txtChiku) {
+        this.txtChiku=txtChiku;
     }
 
     @JsonProperty("txtShimei")
@@ -137,6 +153,26 @@ public class NinteichosaIraiEntryTargetDiv extends Panel {
     @JsonProperty("txtJusho")
     public void setTxtJusho(TextBox txtJusho) {
         this.txtJusho=txtJusho;
+    }
+
+    @JsonProperty("btnRenrakusaki")
+    public Button getBtnRenrakusaki() {
+        return btnRenrakusaki;
+    }
+
+    @JsonProperty("btnRenrakusaki")
+    public void setBtnRenrakusaki(Button btnRenrakusaki) {
+        this.btnRenrakusaki=btnRenrakusaki;
+    }
+
+    @JsonProperty("btnShichosonRenraku")
+    public Button getBtnShichosonRenraku() {
+        return btnShichosonRenraku;
+    }
+
+    @JsonProperty("btnShichosonRenraku")
+    public void setBtnShichosonRenraku(Button btnShichosonRenraku) {
+        this.btnShichosonRenraku=btnShichosonRenraku;
     }
 
     @JsonProperty("NinteichosaIraiEntryTargetLatestChosain")

@@ -401,6 +401,7 @@ public class NinteichosaIraiByHand {
                     DataGridUtil.lineFeedBetween(kanaShimei, shimei),
                     cg.getAsRString("認定申請区分"),
                     cg.getAsTextBoxFlexibleDate("認定申請日"),
+                    cg.getAsRString("地区"),
                     cg.getAsRString("調査依頼区分"),
                     cg.getAsTextBoxFlexibleDate("調査依頼日"),
                     cg.getAsTextBoxFlexibleDate("調査期限日"),

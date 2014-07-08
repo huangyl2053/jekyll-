@@ -30,7 +30,7 @@ public class ShinseiJohoTorokuKanryo {
 
     public ResponseData<ShinseiJohoTorokuKanryoDiv> onClick_btnCommonSaveShinsei(ShinseiJohoTorokuKanryoDiv div, ShinseiJohoInputDiv shinsei) {
         KaigoKanryoMessage.setMessage(div.getKanryoMessage(),
-                new RString("登録は正常に行われました。"),
+                new RString("申請を登録しました。"),
                 new RString("被保番号: " + extractHihokenshaNo(shinsei)),
                 new RString("　　氏名: " + extractHihokenshaShimei(shinsei)));
         div.setDisplayNone(false);
