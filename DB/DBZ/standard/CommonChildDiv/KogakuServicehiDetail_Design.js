@@ -265,6 +265,7 @@ var DBZ;
                                             "txtYubinNo_displayNone": false,
                                             "txtAddress_displayNone": false,
                                             "btnJigyoshaInputGuide_disabled": false,
+                                            "shinseishaInfo_eraseBorder": true,
                                             "eraseBorderTop": true,
                                             "eraseBorderBottom": true,
                                             "eraseBorderRight": true,
@@ -318,7 +319,7 @@ var DBZ;
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
-                                            "isComma": false,
+                                            "isComma": true,
                                             "decimalPointLength": 0
                                         },
                                         {
@@ -421,9 +422,9 @@ var DBZ;
                                             "dialogCancelEventNameForDialog": "",
                                             "canTransferEvent": true,
                                             "heightForDialog": "M",
-                                            "eraseBorder": false,
+                                            "eraseBorder": true,
                                             "panelDisplay": 0,
-                                            "KozaPayment_title": "口座払い",
+                                            "KozaPayment_title": "",
                                             "onClick_radPayMethod": "",
                                             "Juryoinin_displayNone": false,
                                             "Madoguchi_displayNone": false,
