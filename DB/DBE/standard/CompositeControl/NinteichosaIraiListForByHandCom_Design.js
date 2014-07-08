@@ -130,6 +130,23 @@ var DBE;
         });
 
 
+        Object.defineProperty(NinteichosaIraiListForByHandCom_Design.prototype, "withOfGrid", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["width"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["width"] = value;
+                } else {
+                    this.layout.items[0]["width"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         NinteichosaIraiListForByHandCom_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("onSort");
@@ -139,6 +156,7 @@ var DBE;
             Uz.JSControlUtil.registProperty("onNoRow");
             Uz.JSControlUtil.registProperty("onMultiRows");
             Uz.JSControlUtil.registProperty("height");
+            Uz.JSControlUtil.registProperty("withOfGrid");
         };
 
         NinteichosaIraiListForByHandCom_Design.prototype.getEditablePropertyInfo = function () {
@@ -150,6 +168,7 @@ var DBE;
             editablePropertyInfo["onNoRow"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["onNoRow"];
             editablePropertyInfo["onMultiRows"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["onMultiRows"];
             editablePropertyInfo["height"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["height"];
+            editablePropertyInfo["withOfGrid"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["width"];
 
             return editablePropertyInfo;
         };
@@ -297,7 +316,7 @@ var DBE;
                                 "dataName": "chosaJokyo",
                                 "toolTip": "",
                                 "bgColor": 0,
-                                "width": 75,
+                                "width": 55,
                                 "visible": true,
                                 "cellType": 0,
                                 "cellDetails": {
@@ -503,6 +522,20 @@ var DBE;
                                 "resize": true,
                                 "isPrivateInfo": false,
                                 "sortKey": "ninteiShinseiDate"
+                            },
+                            {
+                                "columnName": "地区",
+                                "dataName": "chiku",
+                                "toolTip": "",
+                                "bgColor": 0,
+                                "width": 60,
+                                "visible": true,
+                                "cellType": 0,
+                                "cellDetails": null,
+                                "align": 0,
+                                "resize": true,
+                                "isPrivateInfo": false,
+                                "sortKey": "chiku"
                             },
                             {
                                 "columnName": "依頼区分",
@@ -886,6 +919,11 @@ var DBE;
                     "onSelectBySelectButton": "",
                     "onSelectByModifyButton": "",
                     "onSelectByDeleteButton": "",
+                    "onAfterRequest": "",
+                    "onAfterRequestByDblClick": "",
+                    "onAfterRequestBySelectButton": "",
+                    "onAfterRequestByModifyButton": "",
+                    "onAfterRequestByDeleteButton": "",
                     "onOnlyRow": "",
                     "onNoRow": "",
                     "onMultiRows": "",
@@ -952,6 +990,11 @@ var DBE;
                     "publicChildFieldName": "dgNinteichosaIraiListForByHand",
                     "publicChildProperty": "height",
                     "newPropertyName": "height"
+                },
+                {
+                    "publicChildFieldName": "dgNinteichosaIraiListForByHand",
+                    "publicChildProperty": "width",
+                    "newPropertyName": "withOfGrid"
                 }
             ]
         };

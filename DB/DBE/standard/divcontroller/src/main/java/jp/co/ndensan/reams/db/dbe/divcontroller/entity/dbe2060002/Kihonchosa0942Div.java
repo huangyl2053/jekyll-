@@ -20,6 +20,8 @@ public class Kihonchosa0942Div extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("comKihonchosaResult407")
+    private KihonchosaResultInputCom comKihonchosaResult407;
     @JsonProperty("comKihonchosaResult408")
     private KihonchosaResultInputCom comKihonchosaResult408;
     @JsonProperty("comKihonchosaResult409")
@@ -43,6 +45,16 @@ public class Kihonchosa0942Div extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("comKihonchosaResult407")
+    public KihonchosaResultInputCom getComKihonchosaResult407() {
+        return comKihonchosaResult407;
+    }
+
+    @JsonProperty("comKihonchosaResult407")
+    public void setComKihonchosaResult407(KihonchosaResultInputCom comKihonchosaResult407) {
+        this.comKihonchosaResult407=comKihonchosaResult407;
+    }
+
     @JsonProperty("comKihonchosaResult408")
     public KihonchosaResultInputCom getComKihonchosaResult408() {
         return comKihonchosaResult408;

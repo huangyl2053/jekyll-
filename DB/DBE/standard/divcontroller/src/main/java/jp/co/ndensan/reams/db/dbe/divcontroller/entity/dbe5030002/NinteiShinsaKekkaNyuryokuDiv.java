@@ -1,8 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030002;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoHihokenshaJoho.KaigoHihokenshaJohoDiv;
@@ -10,8 +9,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoNinteiKekka.KaigoNin
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * NinteiShinsaKekkaNyuryoku のクラスファイル 
- * 
+ * NinteiShinsaKekkaNyuryoku のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteiShinsaKekkaNyuryokuDiv extends Panel {
@@ -21,6 +20,7 @@ public class NinteiShinsaKekkaNyuryokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("HihokenshaJoho")
     private KaigoHihokenshaJohoDiv HihokenshaJoho;
     @JsonProperty("NinteiKekkaNyuryoku")
@@ -39,7 +39,7 @@ public class NinteiShinsaKekkaNyuryokuDiv extends Panel {
 
     @JsonProperty("HihokenshaJoho")
     public void setHihokenshaJoho(KaigoHihokenshaJohoDiv HihokenshaJoho) {
-        this.HihokenshaJoho=HihokenshaJoho;
+        this.HihokenshaJoho = HihokenshaJoho;
     }
 
     @JsonProperty("NinteiKekkaNyuryoku")
@@ -49,7 +49,7 @@ public class NinteiShinsaKekkaNyuryokuDiv extends Panel {
 
     @JsonProperty("NinteiKekkaNyuryoku")
     public void setNinteiKekkaNyuryoku(KaigoNinteiKekkaDiv NinteiKekkaNyuryoku) {
-        this.NinteiKekkaNyuryoku=NinteiKekkaNyuryoku;
+        this.NinteiKekkaNyuryoku = NinteiKekkaNyuryoku;
     }
 
 }

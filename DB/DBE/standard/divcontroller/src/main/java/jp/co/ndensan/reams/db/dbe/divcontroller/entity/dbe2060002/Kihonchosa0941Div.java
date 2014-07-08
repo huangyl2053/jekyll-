@@ -32,8 +32,6 @@ public class Kihonchosa0941Div extends Panel {
     private KihonchosaResultInputCom comKihonchosaResult405;
     @JsonProperty("comKihonchosaResult406")
     private KihonchosaResultInputCom comKihonchosaResult406;
-    @JsonProperty("comKihonchosaResult407")
-    private KihonchosaResultInputCom comKihonchosaResult407;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -99,16 +97,6 @@ public class Kihonchosa0941Div extends Panel {
     @JsonProperty("comKihonchosaResult406")
     public void setComKihonchosaResult406(KihonchosaResultInputCom comKihonchosaResult406) {
         this.comKihonchosaResult406=comKihonchosaResult406;
-    }
-
-    @JsonProperty("comKihonchosaResult407")
-    public KihonchosaResultInputCom getComKihonchosaResult407() {
-        return comKihonchosaResult407;
-    }
-
-    @JsonProperty("comKihonchosaResult407")
-    public void setComKihonchosaResult407(KihonchosaResultInputCom comKihonchosaResult407) {
-        this.comKihonchosaResult407=comKihonchosaResult407;
     }
 
 }

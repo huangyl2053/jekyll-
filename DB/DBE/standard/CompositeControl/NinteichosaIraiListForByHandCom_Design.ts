@@ -106,6 +106,20 @@ module DBE {
             }
         }
         
+        public get withOfGrid() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["width"];
+        }
+        
+        public set withOfGrid(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["width"] = value;
+            } else {
+                this.layout.items[0]["width"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, NinteichosaIraiListForByHandCom_Design.myLayout, fieldName);
         }
@@ -123,6 +137,7 @@ module DBE {
             Uz.JSControlUtil.registProperty("onNoRow");
             Uz.JSControlUtil.registProperty("onMultiRows");
             Uz.JSControlUtil.registProperty("height");
+            Uz.JSControlUtil.registProperty("withOfGrid");
         }
         
         /**
@@ -139,6 +154,7 @@ module DBE {
             editablePropertyInfo["onNoRow"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["onNoRow"];
             editablePropertyInfo["onMultiRows"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["onMultiRows"];
             editablePropertyInfo["height"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["height"];
+            editablePropertyInfo["withOfGrid"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["width"];
             
             return editablePropertyInfo;
         }
@@ -286,7 +302,7 @@ module DBE {
       "dataName": "chosaJokyo",
       "toolTip": "",
       "bgColor": 0,
-      "width": 75,
+      "width": 55,
       "visible": true,
       "cellType": 0,
       "cellDetails": {
@@ -492,6 +508,20 @@ module DBE {
       "resize": true,
       "isPrivateInfo": false,
       "sortKey": "ninteiShinseiDate"
+     },
+     {
+      "columnName": "地区",
+      "dataName": "chiku",
+      "toolTip": "",
+      "bgColor": 0,
+      "width": 60,
+      "visible": true,
+      "cellType": 0,
+      "cellDetails": null,
+      "align": 0,
+      "resize": true,
+      "isPrivateInfo": false,
+      "sortKey": "chiku"
      },
      {
       "columnName": "依頼区分",
@@ -875,6 +905,11 @@ module DBE {
    "onSelectBySelectButton": "",
    "onSelectByModifyButton": "",
    "onSelectByDeleteButton": "",
+   "onAfterRequest": "",
+   "onAfterRequestByDblClick": "",
+   "onAfterRequestBySelectButton": "",
+   "onAfterRequestByModifyButton": "",
+   "onAfterRequestByDeleteButton": "",
    "onOnlyRow": "",
    "onNoRow": "",
    "onMultiRows": "",
@@ -941,6 +976,11 @@ module DBE {
    "publicChildFieldName": "dgNinteichosaIraiListForByHand",
    "publicChildProperty": "height",
    "newPropertyName": "height"
+  },
+  {
+   "publicChildFieldName": "dgNinteichosaIraiListForByHand",
+   "publicChildProperty": "width",
+   "newPropertyName": "withOfGrid"
   }
  ]
 }        

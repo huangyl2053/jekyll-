@@ -35,6 +35,8 @@ public class KaigoHihokenshaJohoDiv extends Panel {
     private TextBoxDate txtBirthDay;
     @JsonProperty("txtNenrei")
     private TextBox txtNenrei;
+    @JsonProperty("btnShichosonRenraku")
+    private Button btnShichosonRenraku;
     @JsonProperty("txtNinteiShinseiYMD")
     private TextBoxFlexibleDate txtNinteiShinseiYMD;
     @JsonProperty("txtShinseiKubun")
@@ -47,6 +49,8 @@ public class KaigoHihokenshaJohoDiv extends Panel {
     private Label lblKara2;
     @JsonProperty("txtZenYukokikanEnd")
     private TextBoxFlexibleDate txtZenYukokikanEnd;
+    @JsonProperty("btnRenrakusaki")
+    private Button btnRenrakusaki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -124,6 +128,16 @@ public class KaigoHihokenshaJohoDiv extends Panel {
         this.txtNenrei=txtNenrei;
     }
 
+    @JsonProperty("btnShichosonRenraku")
+    public Button getBtnShichosonRenraku() {
+        return btnShichosonRenraku;
+    }
+
+    @JsonProperty("btnShichosonRenraku")
+    public void setBtnShichosonRenraku(Button btnShichosonRenraku) {
+        this.btnShichosonRenraku=btnShichosonRenraku;
+    }
+
     @JsonProperty("txtNinteiShinseiYMD")
     public TextBoxFlexibleDate getTxtNinteiShinseiYMD() {
         return txtNinteiShinseiYMD;
@@ -182,6 +196,16 @@ public class KaigoHihokenshaJohoDiv extends Panel {
     @JsonProperty("txtZenYukokikanEnd")
     public void setTxtZenYukokikanEnd(TextBoxFlexibleDate txtZenYukokikanEnd) {
         this.txtZenYukokikanEnd=txtZenYukokikanEnd;
+    }
+
+    @JsonProperty("btnRenrakusaki")
+    public Button getBtnRenrakusaki() {
+        return btnRenrakusaki;
+    }
+
+    @JsonProperty("btnRenrakusaki")
+    public void setBtnRenrakusaki(Button btnRenrakusaki) {
+        this.btnRenrakusaki=btnRenrakusaki;
     }
 
 }

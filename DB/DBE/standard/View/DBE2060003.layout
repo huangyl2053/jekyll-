@@ -26,12 +26,6 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "510",
-     "onSort": "",
-     "onSelect": "",
-     "onSelectByDblClick": "",
-     "onOnlyRow": "",
-     "onNoRow": "",
-     "onMultiRows": "",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -471,6 +465,9 @@
        }
       ]
      },
+     "onSort": "",
+     "onSelect": "",
+     "onSelectByDblClick": "",
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
@@ -479,6 +476,9 @@
      "onAfterRequestBySelectButton": "",
      "onAfterRequestByModifyButton": "",
      "onAfterRequestByDeleteButton": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
      "dataSource": [],
      "sortOrder": "shimei",
      "isAscending": true,

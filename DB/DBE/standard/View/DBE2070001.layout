@@ -54,8 +54,6 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onClick": "",
-     "icon": [],
      "dataSource": [
       {
        "key": "kitei",
@@ -66,6 +64,8 @@
        "value": "規定外"
       }
      ],
+     "onClick": "",
+     "icon": [],
      "onChange": "",
      "selectedItem": null,
      "required": false,
@@ -99,8 +99,8 @@
      "text": "取込み結果",
      "required": false,
      "isPrivateInfo": false,
-     "decorationClass": "",
-     "align": 2
+     "align": 2,
+     "decorationClass": ""
     },
     {
      "fieldName": "txtErrKensu",
@@ -139,19 +139,19 @@
      "isPassword": false,
      "onKeyPress": "",
      "value": "",
-     "permitCharactor": "+-,.\\",
+     "decorationClass": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 2,
      "textKind": 2,
      "isComboBox": false,
      "suggest": [],
-     "decorationClass": "",
      "maxValue": 1.7976931348623157e+308,
      "minValue": 0,
      "isCurrency": false,
      "isComma": false,
-     "decimalPointLength": 0
+     "decimalPointLength": 0,
+     "permitCharactor": "+-,.\\"
     },
     {
      "fieldName": "dgIkenshoTorikomiKekka",
@@ -524,8 +524,8 @@
      "text": "主治医意見書取込みソフトを起動し取り込みを行います",
      "required": false,
      "isPrivateInfo": false,
-     "decorationClass": "",
-     "align": 0
+     "align": 0,
+     "decorationClass": ""
     },
     {
      "fieldName": "btnOcrDataNyuryoku",
@@ -679,14 +679,14 @@
        "isPassword": false,
        "onKeyPress": "",
        "value": "",
-       "permitCharactor": "",
+       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "textKind": 2,
        "isComboBox": false,
        "suggest": [],
-       "decorationClass": "",
+       "permitCharactor": "",
        "formatLength": "6"
       },
       {
@@ -726,14 +726,14 @@
        "isPassword": false,
        "onKeyPress": "",
        "value": "",
-       "permitCharactor": "",
+       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "textKind": 2,
        "isComboBox": false,
        "suggest": [],
-       "decorationClass": "",
+       "permitCharactor": "",
        "formatLength": "10"
       },
       {
@@ -775,8 +775,8 @@
        "ymdKubun": 2,
        "displayFormat": 0,
        "value": "",
-       "permitCharactor": "./_-",
-       "textKind": 0
+       "textKind": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "ddlShinseiKbn",
@@ -942,14 +942,14 @@
        "isPassword": false,
        "onKeyPress": "",
        "value": "",
-       "permitCharactor": "",
+       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "textKind": 2,
        "isComboBox": false,
        "suggest": [],
-       "decorationClass": "",
+       "permitCharactor": "",
        "formatLength": "10"
       },
       {
@@ -1040,14 +1040,14 @@
        "isPassword": false,
        "onKeyPress": "",
        "value": "",
-       "permitCharactor": "",
+       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "textKind": 0,
        "isComboBox": false,
        "suggest": [],
-       "decorationClass": ""
+       "permitCharactor": ""
       },
       {
        "fieldName": "txtIkenshoKinyubi",
@@ -1088,8 +1088,8 @@
        "ymdKubun": 2,
        "displayFormat": 0,
        "value": "",
-       "permitCharactor": "./_-",
-       "textKind": 0
+       "textKind": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "txtShujiiNo",
@@ -1128,14 +1128,14 @@
        "isPassword": false,
        "onKeyPress": "",
        "value": "",
-       "permitCharactor": "",
+       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "textKind": 2,
        "isComboBox": false,
        "suggest": [],
-       "decorationClass": "",
+       "permitCharactor": "",
        "formatLength": "10"
       },
       {
@@ -1209,14 +1209,14 @@
        "isPassword": false,
        "onKeyPress": "",
        "value": "",
-       "permitCharactor": "",
+       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "textKind": 0,
        "isComboBox": false,
        "suggest": [],
-       "decorationClass": ""
+       "permitCharactor": ""
       },
       {
        "fieldName": "txtIkenshoJuryobi",
@@ -1257,8 +1257,8 @@
        "ymdKubun": 2,
        "displayFormat": 0,
        "value": "",
-       "permitCharactor": "./_-",
-       "textKind": 0
+       "textKind": 0,
+       "permitCharactor": "./_-"
       }
      ],
      "controlType": "Panel",
@@ -1334,8 +1334,8 @@
            "text": "自立度(寝たきり度)",
            "required": false,
            "isPrivateInfo": false,
-           "decorationClass": "",
-           "align": 1
+           "align": 1,
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -1383,8 +1383,8 @@
            "text": "自立度(認知)",
            "required": false,
            "isPrivateInfo": false,
-           "decorationClass": "",
-           "align": 1
+           "align": 1,
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -1432,8 +1432,8 @@
            "text": "短期記憶",
            "required": false,
            "isPrivateInfo": false,
-           "decorationClass": "",
-           "align": 1
+           "align": 1,
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -1481,8 +1481,8 @@
            "text": "認知能力",
            "required": false,
            "isPrivateInfo": false,
-           "decorationClass": "",
-           "align": 1
+           "align": 1,
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -1530,8 +1530,8 @@
            "text": "伝達能力",
            "required": false,
            "isPrivateInfo": false,
-           "decorationClass": "",
-           "align": 1
+           "align": 1,
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -1982,8 +1982,8 @@
            "text": "食事行為",
            "required": false,
            "isPrivateInfo": false,
-           "decorationClass": "",
-           "align": 1
+           "align": 1,
+           "decorationClass": ""
           }
          ],
          "controlType": "TableCell",
@@ -2090,7 +2090,7 @@
        "selectControlID": "tblIkensho5Komoku",
        "helpMessageID": "",
        "jpControlName": "",
-       "html": "<table border='1'>\n  <tbody>\n    <tr bgcolor='#dcdcdc'><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td><td id='R1C6'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n  </tbody>\n</table>\n"
+       "html": "<table border='1'>\n  <tbody>\n    <tr bgcolor='#d7ebf6'><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td><td id='R1C6'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td></tr>\n  </tbody>\n</table>\n"
       }
      ],
      "controlType": "Panel",
@@ -2143,7 +2143,7 @@
        "controlType": "TextBoxNum",
        "width": "30",
        "visible": true,
-       "displayNone": false,
+       "displayNone": true,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
@@ -2174,19 +2174,19 @@
        "isPassword": false,
        "onKeyPress": "",
        "value": "",
-       "permitCharactor": "+-,.\\",
+       "decorationClass": "",
        "maxLength": "100",
        "minLength": 0,
        "textAlign": 2,
        "textKind": 2,
        "isComboBox": false,
        "suggest": [],
-       "decorationClass": "",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
        "isComma": false,
-       "decimalPointLength": 0
+       "decimalPointLength": 0,
+       "permitCharactor": "+-,.\\"
       },
       {
        "fieldName": "tabIkenshoImageHyoji",
@@ -2220,8 +2220,8 @@
              "text": "意見書１",
              "required": false,
              "isPrivateInfo": false,
-             "decorationClass": "",
-             "align": 2
+             "align": 2,
+             "decorationClass": ""
             }
            ],
            "controlType": "Panel",
@@ -2317,8 +2317,8 @@
              "text": "意見書２",
              "required": false,
              "isPrivateInfo": false,
-             "decorationClass": "",
-             "align": 2
+             "align": 2,
+             "decorationClass": ""
             }
            ],
            "controlType": "Panel",
@@ -2540,7 +2540,7 @@
   {
    "order": "1",
    "stateName": "意見書取り込み",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "ShujiiIkenshoImageTorikomi",
@@ -2589,7 +2589,7 @@
   {
    "order": "2",
    "stateName": "意見書詳細",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "IkenshoShosaiMain",
@@ -2748,7 +2748,7 @@
    "commonButtonAreaId": "ichiran",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
       "fieldName": "btnToAddDb",
       "items": [],
@@ -2770,15 +2770,14 @@
       "helpMessageID": "",
       "jpControlName": "",
       "onClick": "onClick_btnToAddDb",
-      "icon": 0,
-      "text": "結果を登録する",
+      "text": "保存",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "icon": 0,
       "heightTextBoxMatches": false,
-      "prefixText": "",
-      "suffixText": ""
+      "additionalText": ""
      }
     }
    ],
@@ -2787,7 +2786,9 @@
      "state": "意見書取り込み"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   },
   {
    "commonButtonAreaId": "shosai",
@@ -2864,7 +2865,9 @@
      "state": "意見書詳細"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

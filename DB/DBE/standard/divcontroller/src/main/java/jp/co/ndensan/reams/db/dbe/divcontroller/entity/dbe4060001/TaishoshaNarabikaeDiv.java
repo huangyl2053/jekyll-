@@ -21,16 +21,16 @@ public class TaishoshaNarabikaeDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlSortKomoku1")
-    private DropDownList ddlSortKomoku1;
-    @JsonProperty("ddlSortKomoku2")
-    private DropDownList ddlSortKomoku2;
-    @JsonProperty("ddlSortKomoku3")
-    private DropDownList ddlSortKomoku3;
-    @JsonProperty("btnJikko")
-    private Button btnJikko;
+    @JsonProperty("ddlSortKey1")
+    private DropDownList ddlSortKey1;
+    @JsonProperty("ddlSortKey2")
+    private DropDownList ddlSortKey2;
+    @JsonProperty("ddlSortKey3")
+    private DropDownList ddlSortKey3;
     @JsonProperty("btnCancel")
     private Button btnCancel;
+    @JsonProperty("btnJikko")
+    private Button btnJikko;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -38,44 +38,34 @@ public class TaishoshaNarabikaeDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ddlSortKomoku1")
-    public DropDownList getDdlSortKomoku1() {
-        return ddlSortKomoku1;
+    @JsonProperty("ddlSortKey1")
+    public DropDownList getDdlSortKey1() {
+        return ddlSortKey1;
     }
 
-    @JsonProperty("ddlSortKomoku1")
-    public void setDdlSortKomoku1(DropDownList ddlSortKomoku1) {
-        this.ddlSortKomoku1=ddlSortKomoku1;
+    @JsonProperty("ddlSortKey1")
+    public void setDdlSortKey1(DropDownList ddlSortKey1) {
+        this.ddlSortKey1=ddlSortKey1;
     }
 
-    @JsonProperty("ddlSortKomoku2")
-    public DropDownList getDdlSortKomoku2() {
-        return ddlSortKomoku2;
+    @JsonProperty("ddlSortKey2")
+    public DropDownList getDdlSortKey2() {
+        return ddlSortKey2;
     }
 
-    @JsonProperty("ddlSortKomoku2")
-    public void setDdlSortKomoku2(DropDownList ddlSortKomoku2) {
-        this.ddlSortKomoku2=ddlSortKomoku2;
+    @JsonProperty("ddlSortKey2")
+    public void setDdlSortKey2(DropDownList ddlSortKey2) {
+        this.ddlSortKey2=ddlSortKey2;
     }
 
-    @JsonProperty("ddlSortKomoku3")
-    public DropDownList getDdlSortKomoku3() {
-        return ddlSortKomoku3;
+    @JsonProperty("ddlSortKey3")
+    public DropDownList getDdlSortKey3() {
+        return ddlSortKey3;
     }
 
-    @JsonProperty("ddlSortKomoku3")
-    public void setDdlSortKomoku3(DropDownList ddlSortKomoku3) {
-        this.ddlSortKomoku3=ddlSortKomoku3;
-    }
-
-    @JsonProperty("btnJikko")
-    public Button getBtnJikko() {
-        return btnJikko;
-    }
-
-    @JsonProperty("btnJikko")
-    public void setBtnJikko(Button btnJikko) {
-        this.btnJikko=btnJikko;
+    @JsonProperty("ddlSortKey3")
+    public void setDdlSortKey3(DropDownList ddlSortKey3) {
+        this.ddlSortKey3=ddlSortKey3;
     }
 
     @JsonProperty("btnCancel")
@@ -86,6 +76,16 @@ public class TaishoshaNarabikaeDiv extends Panel {
     @JsonProperty("btnCancel")
     public void setBtnCancel(Button btnCancel) {
         this.btnCancel=btnCancel;
+    }
+
+    @JsonProperty("btnJikko")
+    public Button getBtnJikko() {
+        return btnJikko;
+    }
+
+    @JsonProperty("btnJikko")
+    public void setBtnJikko(Button btnJikko) {
+        this.btnJikko=btnJikko;
     }
 
 }

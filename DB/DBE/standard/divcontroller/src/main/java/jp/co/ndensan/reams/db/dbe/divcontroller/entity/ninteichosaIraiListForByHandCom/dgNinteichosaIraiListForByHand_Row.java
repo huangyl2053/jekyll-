@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForBy
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 24 20:42:33 JST 2014 
+ * Tue Jul 08 11:32:43 JST 2014 
  */
 
 
@@ -35,6 +35,7 @@ public class dgNinteichosaIraiListForByHand_Row extends DataRow {
     private RString shimeiWithKana;
     private RString ninteiShinseiKubun;
     private TextBoxFlexibleDate ninteiShinseiDate;
+    private RString chiku;
     private RString chosaIraiKubun;
     private TextBoxFlexibleDate chosaIraiDate;
     private TextBoxFlexibleDate chosaKigenDate;
@@ -72,6 +73,7 @@ public class dgNinteichosaIraiListForByHand_Row extends DataRow {
         this.shimeiWithKana = RString.EMPTY;
         this.ninteiShinseiKubun = RString.EMPTY;
         this.ninteiShinseiDate = new TextBoxFlexibleDate();
+        this.chiku = RString.EMPTY;
         this.chosaIraiKubun = RString.EMPTY;
         this.chosaIraiDate = new TextBoxFlexibleDate();
         this.chosaKigenDate = new TextBoxFlexibleDate();
@@ -95,7 +97,7 @@ public class dgNinteichosaIraiListForByHand_Row extends DataRow {
         this.nyushoShisetsu = RString.EMPTY;
     }
 
-    public dgNinteichosaIraiListForByHand_Row(Boolean chosaKanryoFlag, RString chosaJokyo, Button btnToShowDetail, RString hokenshaNo, RString shichoson, RString shishoCode, RString shoshoName, RString hihokenshaNo, RString shimei, RString kanaShimei, RString shimeiWithKana, RString ninteiShinseiKubun, TextBoxFlexibleDate ninteiShinseiDate, RString chosaIraiKubun, TextBoxFlexibleDate chosaIraiDate, TextBoxFlexibleDate chosaKigenDate, TextBoxFlexibleDate iraishoHakkoDate, RString chosaItakusakiNo, RString chosaItakusakiName, RString chosainNo, RString chosainName, RString chosaItakusakiNo1TA, RString chosaItakusakiName1TA, RString chosainNo1TA, RString chosainName1TA, RString chosaItakusakiNo2TA, RString chosaItakusakiName2TA, RString chosainNo2TA, RString chosainName2TA, TextBoxFlexibleDate tokusokuDate, RString tokusokuCount, RString yubinNo, RString jusho, RString nyushoShisetsu) {
+    public dgNinteichosaIraiListForByHand_Row(Boolean chosaKanryoFlag, RString chosaJokyo, Button btnToShowDetail, RString hokenshaNo, RString shichoson, RString shishoCode, RString shoshoName, RString hihokenshaNo, RString shimei, RString kanaShimei, RString shimeiWithKana, RString ninteiShinseiKubun, TextBoxFlexibleDate ninteiShinseiDate, RString chiku, RString chosaIraiKubun, TextBoxFlexibleDate chosaIraiDate, TextBoxFlexibleDate chosaKigenDate, TextBoxFlexibleDate iraishoHakkoDate, RString chosaItakusakiNo, RString chosaItakusakiName, RString chosainNo, RString chosainName, RString chosaItakusakiNo1TA, RString chosaItakusakiName1TA, RString chosainNo1TA, RString chosainName1TA, RString chosaItakusakiNo2TA, RString chosaItakusakiName2TA, RString chosainNo2TA, RString chosainName2TA, TextBoxFlexibleDate tokusokuDate, RString tokusokuCount, RString yubinNo, RString jusho, RString nyushoShisetsu) {
         super();
         this.setOriginalData("chosaKanryoFlag", chosaKanryoFlag);
         this.setOriginalData("chosaJokyo", chosaJokyo);
@@ -110,6 +112,7 @@ public class dgNinteichosaIraiListForByHand_Row extends DataRow {
         this.setOriginalData("shimeiWithKana", shimeiWithKana);
         this.setOriginalData("ninteiShinseiKubun", ninteiShinseiKubun);
         this.setOriginalData("ninteiShinseiDate", ninteiShinseiDate);
+        this.setOriginalData("chiku", chiku);
         this.setOriginalData("chosaIraiKubun", chosaIraiKubun);
         this.setOriginalData("chosaIraiDate", chosaIraiDate);
         this.setOriginalData("chosaKigenDate", chosaKigenDate);
@@ -144,6 +147,7 @@ public class dgNinteichosaIraiListForByHand_Row extends DataRow {
         this.shimeiWithKana = shimeiWithKana;
         this.ninteiShinseiKubun = ninteiShinseiKubun;
         this.ninteiShinseiDate = ninteiShinseiDate;
+        this.chiku = chiku;
         this.chosaIraiKubun = chosaIraiKubun;
         this.chosaIraiDate = chosaIraiDate;
         this.chosaKigenDate = chosaKigenDate;
@@ -217,6 +221,10 @@ public class dgNinteichosaIraiListForByHand_Row extends DataRow {
 
     public TextBoxFlexibleDate getNinteiShinseiDate() {
         return ninteiShinseiDate;
+    }
+
+    public RString getChiku() {
+        return chiku;
     }
 
     public RString getChosaIraiKubun() {
@@ -366,6 +374,11 @@ public class dgNinteichosaIraiListForByHand_Row extends DataRow {
     public void setNinteiShinseiDate(TextBoxFlexibleDate ninteiShinseiDate) {
         this.setOriginalData("ninteiShinseiDate", ninteiShinseiDate);
         this.ninteiShinseiDate = ninteiShinseiDate;
+    }
+
+    public void setChiku(RString chiku) {
+        this.setOriginalData("chiku", chiku);
+        this.chiku = chiku;
     }
 
     public void setChosaIraiKubun(RString chosaIraiKubun) {

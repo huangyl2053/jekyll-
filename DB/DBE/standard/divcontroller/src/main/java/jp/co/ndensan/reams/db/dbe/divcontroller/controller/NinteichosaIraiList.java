@@ -279,6 +279,7 @@ public class NinteichosaIraiList {
                     cg.getAsTextBoxFlexibleDate("認定申請日"),
                     cg.getAsRString("認定申請区分"),
                     cg.getAsRString("申請書管理番号"),
+                    cg.getAsRString("地区"),
                     cg.getAsTextBoxFlexibleDate("調査依頼日"),
                     cg.getAsTextBoxFlexibleDate("依頼書発行日"),
                     cg.getAsTextBoxFlexibleDate("依頼完了日"),

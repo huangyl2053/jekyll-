@@ -41,14 +41,14 @@
      "isPassword": false,
      "onKeyPress": "",
      "value": "",
-     "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
      "suggest": [],
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtGogitai",
@@ -87,14 +87,14 @@
      "isPassword": false,
      "onKeyPress": "",
      "value": "",
-     "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
      "suggest": [],
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtYoteiTeiin",
@@ -133,7 +133,6 @@
      "isPassword": false,
      "onKeyPress": "",
      "value": "",
-     "permitCharactor": "+-,.\\",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 2,
@@ -141,6 +140,7 @@
      "isComboBox": false,
      "suggest": [],
      "decorationClass": "",
+     "permitCharactor": "+-,.\\",
      "maxValue": 1.7976931348623157e+308,
      "minValue": 0,
      "isCurrency": false,
@@ -184,7 +184,6 @@
      "isPassword": false,
      "onKeyPress": "",
      "value": "",
-     "permitCharactor": "+-,.\\",
      "maxLength": "3",
      "minLength": "1",
      "textAlign": 2,
@@ -192,6 +191,7 @@
      "isComboBox": false,
      "suggest": [],
      "decorationClass": "",
+     "permitCharactor": "+-,.\\",
      "maxValue": 1.7976931348623157e+308,
      "minValue": 0,
      "isCurrency": false,
@@ -237,13 +237,13 @@
      "ymdKubun": 2,
      "displayFormat": 0,
      "value": "",
-     "permitCharactor": "./_-",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtYoteiStartTime",
@@ -283,7 +283,6 @@
      "onKeyPress": "",
      "displayFormat": 1,
      "value": "",
-     "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -291,6 +290,7 @@
      "isComboBox": false,
      "suggest": [],
      "decorationClass": "",
+     "permitCharactor": "",
      "timeKubun": 1
     },
     {
@@ -357,7 +357,6 @@
      "onKeyPress": "",
      "displayFormat": 1,
      "value": "",
-     "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -365,6 +364,7 @@
      "isComboBox": false,
      "suggest": [],
      "decorationClass": "",
+     "permitCharactor": "",
      "timeKubun": 1
     },
     {
@@ -404,14 +404,14 @@
      "isPassword": false,
      "onKeyPress": "",
      "value": "",
-     "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
      "suggest": [],
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtKaisaiBi",
@@ -452,13 +452,13 @@
      "ymdKubun": 2,
      "displayFormat": 0,
      "value": "",
-     "permitCharactor": "./_-",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtKaisaiStartTime",
@@ -498,7 +498,6 @@
      "onKeyPress": "",
      "displayFormat": 1,
      "value": "",
-     "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -506,6 +505,7 @@
      "isComboBox": false,
      "suggest": [],
      "decorationClass": "",
+     "permitCharactor": "",
      "timeKubun": 1
     },
     {
@@ -572,7 +572,6 @@
      "onKeyPress": "",
      "displayFormat": 1,
      "value": "",
-     "permitCharactor": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -580,6 +579,7 @@
      "isComboBox": false,
      "suggest": [],
      "decorationClass": "",
+     "permitCharactor": "",
      "timeKubun": 1
     },
     {
@@ -714,7 +714,7 @@
      "fieldName": "dgShinsakaiShinsainIchiran",
      "items": [],
      "controlType": "DataGrid",
-     "width": "790",
+     "width": "820",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -788,7 +788,7 @@
         "dataName": "shinsainNo",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 95,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -852,7 +852,7 @@
         "dataName": "shinsainKubun",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 110,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -866,7 +866,7 @@
         "dataName": "gichoKubun",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 110,
         "visible": true,
         "cellType": 3,
         "cellDetails": {
@@ -887,7 +887,7 @@
           }
          ]
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "gichoKubun"
@@ -1014,7 +1014,7 @@
        "fieldName": "btnIinRegister",
        "items": [],
        "controlType": "Button",
-       "width": "160",
+       "width": "170",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1043,7 +1043,7 @@
        "fieldName": "btnIinCancel",
        "items": [],
        "controlType": "Button",
-       "width": "160",
+       "width": "170",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1268,7 +1268,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "880",
+     "width": "884",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1393,7 +1393,7 @@
   {
    "order": "1",
    "stateName": "開催結果登録",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "ShinsakaiKaisaiKekka",
@@ -1498,15 +1498,15 @@
       "selectControlID": "btnUpdate",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "更新",
       "onClick": "onClick_btnUpdate",
+      "text": "更新",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "表示内容で"
+      "additionalText": ""
      }
     },
     {
@@ -1531,15 +1531,15 @@
       "selectControlID": "btnReturn",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "戻る",
       "onClick": "onClick_btnRetuen",
+      "text": "戻る",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "審査会一覧に"
+      "additionalText": "一覧に"
      }
     }
    ],

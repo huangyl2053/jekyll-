@@ -363,7 +363,7 @@
      "fieldName": "ddlChiku",
      "items": [],
      "controlType": "DropDownList",
-     "width": "M",
+     "width": "140",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -3822,7 +3822,7 @@
   {
    "order": "1",
    "stateName": "申請情報入力",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "ShinseiJohoInput",
@@ -4068,7 +4068,9 @@
      "state": "登録確認"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   },
   {
    "commonButtonAreaId": "editShiseiContent",
@@ -4095,15 +4097,15 @@
       "selectControlID": "btnCommonSaveShinsei",
       "helpMessageID": "",
       "jpControlName": "",
-      "onClick": "onClick_btnCommonSaveShinsei",
       "text": "申請を登録する",
+      "onClick": "onClick_btnCommonSaveShinsei",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "申請を"
+      "additionalText": ""
      }
     },
     {
@@ -4145,7 +4147,9 @@
      "state": "申請情報入力"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

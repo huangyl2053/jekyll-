@@ -58,6 +58,13 @@
         <url-pattern>*.css</url-pattern>
         <url-pattern>*.js</url-pattern>
         <url-pattern>*.yml</url-pattern>
+        <url-pattern>*.xbap</url-pattern>
+        <url-pattern>*.manifest</url-pattern>
+        <url-pattern>*.config</url-pattern>
+        <url-pattern>*.exe</url-pattern>
+        <url-pattern>*.dll</url-pattern>
+        <url-pattern>*.pdb</url-pattern>
+        <url-pattern>*.deploy</url-pattern>		
     </servlet-mapping>
 
     <jsp-config>

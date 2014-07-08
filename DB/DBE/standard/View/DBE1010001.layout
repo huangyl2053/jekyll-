@@ -37,7 +37,9 @@
      "onClick_BtnToSearch": "onClick_btnToSearch",
      "displayNone_txtTsuchishoNo": true,
      "displayNone_ddlFukaNendo": true,
-     "displayNone_SearchCriteriaDetail": false
+     "displayNone_SearchCriteriaDetail": false,
+     "canOpenAndClose_HihokenshaFinder": true,
+     "displayNone_saikinShorisha": false
     },
     {
      "fieldName": "SearchResultForShinsei",
@@ -349,7 +351,7 @@
   {
    "order": "1",
    "stateName": "対象者検索",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "HihokenshaSearchForShinsei",
