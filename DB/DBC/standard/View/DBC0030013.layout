@@ -1590,7 +1590,7 @@
        "labelLAlign": 2,
        "onClick": "",
        "icon": [],
-       "selectedItem": "key1",
+       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -2205,7 +2205,7 @@
        "labelLAlign": 2,
        "onClick": "",
        "icon": [],
-       "selectedItem": "key1",
+       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
