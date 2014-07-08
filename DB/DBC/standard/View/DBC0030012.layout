@@ -153,13 +153,13 @@
      "selectControlID": "btnShowSeteiJoho",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "世帯情報を表示する",
      "onClick": "btnShowSeteiJoho",
      "icon": 0,
-     "imageWidth": "",
-     "imageHeight": "",
+     "text": "世帯情報を表示する",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "heightTextBoxMatches": false
     },
     {
@@ -300,48 +300,18 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KogakuJumin",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KogakuNushiJuminJoho",
-     "panelState": "readOnly visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "CommonButton",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "KogakuServiceDetail",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "SearchKogakuHihokensha",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "SearchYM",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KanshoTsuchiHakkoPanel",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "CommonKogakuNushiJuminJohoChildDiv1",
-     "panelState": "readOnly visible",
+     "panelState": "visible",
      "fixedDiv": "No"
     },
     {
      "visibleDiv": "CommonKogakuKaigoJuminJohoChildDiv2",
-     "panelState": "readOnly visible",
+     "panelState": "visible",
      "fixedDiv": "No"
     }
    ],
@@ -349,7 +319,7 @@
    "events": []
   }
  ],
- "currentState": "高額サービス費",
+ "currentState": "All",
  "id": "DBC0030012",
  "WFParameter": [],
  "UIContainerEventMapping": [
