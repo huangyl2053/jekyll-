@@ -375,7 +375,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": ""
+           "decorationClass": "test"
           }
          ],
          "controlType": "TableCell",
@@ -689,7 +689,7 @@
          "labelLAlign": 2,
          "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 1
+         "displayFormat": 0
         },
         {
          "fieldName": "lblShikakusoshitsuYMD3",
@@ -2644,7 +2644,7 @@
          "labelLAlign": 2,
          "labelRAlign": 0,
          "ymdKubun": 2,
-         "displayFormat": 1
+         "displayFormat": 0
         },
         {
          "fieldName": "lblShikakusoshitsuYMD4",
