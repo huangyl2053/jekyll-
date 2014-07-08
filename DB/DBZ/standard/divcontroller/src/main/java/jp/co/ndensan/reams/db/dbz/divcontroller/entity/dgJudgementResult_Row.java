@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jun 12 18:48:03 JST 2014 
+ * Tue Jul 08 15:14:22 JST 2014 
  */
 
 
@@ -31,6 +31,13 @@ public class dgJudgementResult_Row extends DataRow {
 
     public dgJudgementResult_Row() {
         super();
+        this.txtJigyosha = RString.EMPTY;
+        this.txtServiceShurui = RString.EMPTY;
+        this.txtServiceHiyoTotal = new TextBoxNum();
+        this.txtRiyoshaFutanTotalAmount = new TextBoxNum();
+        this.txtSanteiKijunAmount = new TextBoxNum();
+        this.txtShiharaizumiAmount = new TextBoxNum();
+        this.txtKogakuShikyuAmount = new TextBoxNum();
     }
 
     public dgJudgementResult_Row(RString txtJigyosha, RString txtServiceShurui, TextBoxNum txtServiceHiyoTotal, TextBoxNum txtRiyoshaFutanTotalAmount, TextBoxNum txtSanteiKijunAmount, TextBoxNum txtShiharaizumiAmount, TextBoxNum txtKogakuShikyuAmount) {

@@ -134,6 +134,20 @@ module DBZ {
             }
         }
         
+        public get shinseishaInfo_eraseBorder() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
+        }
+        
+        public set shinseishaInfo_eraseBorder(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
+            } else {
+                this.layout.items[0]["eraseBorder"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, ShinseishaInfo_Design.myLayout, fieldName);
         }
@@ -153,6 +167,7 @@ module DBZ {
             Uz.JSControlUtil.registProperty("txtYubinNo_displayNone");
             Uz.JSControlUtil.registProperty("txtAddress_displayNone");
             Uz.JSControlUtil.registProperty("btnJigyoshaInputGuide_disabled");
+            Uz.JSControlUtil.registProperty("shinseishaInfo_eraseBorder");
         }
         
         /**
@@ -171,6 +186,7 @@ module DBZ {
             editablePropertyInfo["txtYubinNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["txtAddress_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["btnJigyoshaInputGuide_disabled"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["disabled"];
+            editablePropertyInfo["shinseishaInfo_eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
             
             return editablePropertyInfo;
         }
@@ -791,6 +807,11 @@ module DBZ {
    "publicChildFieldName": "btnJigyoshaInputGuide",
    "publicChildProperty": "disabled",
    "newPropertyName": "btnJigyoshaInputGuide_disabled"
+  },
+  {
+   "publicChildFieldName": "ShinseishaInfo",
+   "publicChildProperty": "eraseBorder",
+   "newPropertyName": "shinseishaInfo_eraseBorder"
   }
  ],
  "dataPassingForDialog": [],

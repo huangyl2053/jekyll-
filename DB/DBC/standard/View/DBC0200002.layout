@@ -154,7 +154,7 @@
    "commonButtonAreaId": "1",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
       "fieldName": "btnUpdate",
       "items": [],
@@ -176,13 +176,14 @@
       "helpMessageID": "",
       "jpControlName": "",
       "text": "保存する",
+      "imageWidth": "",
+      "imageHeight": "",
       "onClick": "",
       "appearance": 0,
       "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
+      "additionalText": "",
       "prefixText": "",
       "suffixText": ""
      }

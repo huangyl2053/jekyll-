@@ -1,15 +1,15 @@
 ## YAML Template. KogakuServicehiShowResultTwoJudgementResultL dgJudgementResultL
 ---
 ##dgJudgementResultL	 判定結果
-- jigyosha: 2010100001:第二田算病院
-  serviceShurui: 11:訪問介護
+- jigyosha: 第二田算病院
+  serviceShurui: 訪問介護
   serviceHiyoTotalAmount: 350,000  
   riyoshaFutanTotalAmount: 35,000
   santeiKijunAmount: 0
   shiharaizumiAmount: 0 
   kogakuShikyuAmount: 0
-- jigyosha: 2010100001:第二田算病院
-  serviceShurui: 12:訪問入浴介護
+- jigyosha: 第二田算病院
+  serviceShurui: 訪問入浴介護
   serviceHiyoTotalAmount: 150,000  
   riyoshaFutanTotalAmount: 15,000
   santeiKijunAmount: 0
