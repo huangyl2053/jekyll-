@@ -25,16 +25,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "required": false,
-     "onFocus": "",
-     "onBlur": "",
      "onChange": "onChange_ddlShoriNendo",
-     "labelLText": "処理年度",
-     "labelRText": "",
-     "labelLWidth": "70",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
      "selectedItem": "key0",
      "dataSource": [
       {
@@ -50,6 +41,15 @@
        "value": "平24"
       }
      ],
+     "required": false,
+     "labelLText": "処理年度",
+     "labelRText": "",
+     "labelLWidth": "70",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "onFocus": "",
+     "onBlur": "",
      "disabledItem": []
     },
     {
@@ -76,7 +76,7 @@
      "fieldName": "chkShuturyokuTaisho",
      "items": [],
      "controlType": "CheckBoxList",
-     "width": "360",
+     "width": "520",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -93,13 +93,7 @@
      "helpMessageID": "DBB1140001",
      "jpControlName": "",
      "readOnly": false,
-     "required": true,
      "onChange": "",
-     "labelLText": "出力対象",
-     "labelLWidth": "70",
-     "labelLAlign": 2,
-     "onClick": "",
-     "icon": [],
      "selectedItem": null,
      "dataSource": [
       {
@@ -108,9 +102,14 @@
       },
       {
        "key": "key1",
-       "value": "受給者および世帯員（2号被保険者を含む）"
+       "value": "賦課基準日翌日以降に転入した世帯員（2号被保険者を含む受給者）"
       }
      ],
+     "required": true,
+     "labelLText": "出力対象",
+     "labelLWidth": "70",
+     "labelLAlign": 2,
+     "onClick": "",
      "selectedItems": [
       {
        "key": "isAllSelect",
@@ -122,7 +121,7 @@
       },
       {
        "key": "key1",
-       "value": "受給者および世帯員（2号被保険者を含む）"
+       "value": "賦課基準日翌日以降に転入した世帯員（2号被保険者を含む受給者）"
       }
      ],
      "newLineItemNumber": 1,
@@ -131,7 +130,8 @@
      "spaceSize": "M",
      "isAllSelectable": true,
      "isAllSelectableBreakLine": false,
-     "disabledItem": []
+     "disabledItem": [],
+     "icon": []
     },
     {
      "fieldName": "ShotokushokaihyoShutsuryokuJun",
@@ -187,11 +187,6 @@
      "jpControlName": "",
      "readOnly": false,
      "onChange": "",
-     "labelLText": "",
-     "labelLWidth": "S",
-     "labelLAlign": 2,
-     "onClick": "",
-     "icon": [],
      "selectedItem": null,
      "dataSource": [
       {
@@ -199,6 +194,10 @@
        "value": "再発行する"
       }
      ],
+     "labelLText": "",
+     "labelLWidth": "S",
+     "labelLAlign": 2,
+     "onClick": "",
      "selectedItems": [],
      "newLineItemNumber": 2,
      "minCheckedItem": 0,
@@ -206,7 +205,8 @@
      "spaceSize": "M",
      "isAllSelectable": false,
      "isAllSelectableBreakLine": false,
-     "disabledItem": []
+     "disabledItem": [],
+     "icon": []
     },
     {
      "fieldName": "dgSaihakko",
@@ -447,7 +447,7 @@
    "events": []
   }
  ],
- "currentState": "所得照会票一括発行",
+ "currentState": "All",
  "id": "DBB1140001",
  "WFParameter": [],
  "UIContainerEventMapping": [],
