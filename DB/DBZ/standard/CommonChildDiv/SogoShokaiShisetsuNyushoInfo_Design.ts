@@ -261,7 +261,7 @@ module DBZ {
      "fieldName": "txtShisetsuJigyoshaName",
      "items": [],
      "controlType": "TextBox",
-     "width": "300",
+     "width": "310",
      "visible": true,
      "displayNone": false,
      "disabled": false,

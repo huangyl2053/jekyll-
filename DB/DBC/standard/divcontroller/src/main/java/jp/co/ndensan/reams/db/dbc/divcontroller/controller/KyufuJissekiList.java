@@ -64,6 +64,9 @@ public class KyufuJissekiList {
 
     private void setData(KyufuJissekiListDiv panel, KyufuJissekiSearchDiv panel2) {
 
+        Boolean blnChangeColorFlg1 = false;
+        Boolean blnChangeColorFlg2 = false;
+
         List<HashMap> kyufuJissekiMeisaiList = YamlLoader.DBC.loadAsList(
                 new RString("dbc0010000/KyufuJissekiMeisaiList.yml"));
 
@@ -89,11 +92,12 @@ public class KyufuJissekiList {
         RString serviceGroup2Value = RString.EMPTY;
         DataGridCellBgColor group1Color = DataGridCellBgColor.bgColorBlue;
         DataGridCellBgColor group2Color = DataGridCellBgColor.bgColorLightBlue;
+
         for (int i = 0; i < arrayMeisaidata.size(); i++) {
 
             if (i == 0) {
-                serviceGroup1Value = arrayMeisaidata.get(i).getTxtServiceGroup1();
-                serviceGroup2Value = arrayMeisaidata.get(i).getTxtServiceGroup2();
+                blnChangeColorFlg1 = Boolean.TRUE;
+                blnChangeColorFlg2 = Boolean.TRUE;
             } else {
                 if (!serviceGroup1Value.equals(arrayMeisaidata.get(i).getTxtServiceGroup1())) {
                     switch (group1Color) {
@@ -113,10 +117,11 @@ public class KyufuJissekiList {
                             group1Color = DataGridCellBgColor.bgColorBlue;
                             break;
                     }
-                    serviceGroup1Value = arrayMeisaidata.get(i).getTxtServiceGroup1();
+                    blnChangeColorFlg1 = Boolean.TRUE;
                 }
 
-                if (!serviceGroup2Value.equals(arrayMeisaidata.get(i).getTxtServiceGroup2())) {
+                if (!serviceGroup1Value.equals(arrayMeisaidata.get(i).getTxtServiceGroup1())
+                        || !serviceGroup2Value.equals(arrayMeisaidata.get(i).getTxtServiceGroup2())) {
                     switch (group2Color) {
                         case bgColorLightBlue:
                             group2Color = DataGridCellBgColor.bgColorLightRed;
@@ -134,9 +139,8 @@ public class KyufuJissekiList {
                             group2Color = DataGridCellBgColor.bgColorLightBlue;
                             break;
                     }
-                    serviceGroup2Value = arrayMeisaidata.get(i).getTxtServiceGroup2();
+                    blnChangeColorFlg2 = Boolean.TRUE;
                 }
-
             }
             arrayMeisaidata.get(i).setCellBgColor("txtServiceGroup1", group1Color);
             arrayMeisaidata.get(i).setCellBgColor("txtServiceGroup2", group2Color);
@@ -147,6 +151,14 @@ public class KyufuJissekiList {
             arrayMeisaidata.get(i).setCellBgColor("txtYM2", group2Color);
             arrayMeisaidata.get(i).setCellBgColor("btnYM3", group2Color);
             arrayMeisaidata.get(i).setCellBgColor("txtYM3", group2Color);
+            if (blnChangeColorFlg1.equals(Boolean.TRUE)) {
+                serviceGroup1Value = arrayMeisaidata.get(i).getTxtServiceGroup1();
+                blnChangeColorFlg1 = Boolean.FALSE;
+            }
+            if (blnChangeColorFlg2.equals(Boolean.TRUE)) {
+                serviceGroup2Value = arrayMeisaidata.get(i).getTxtServiceGroup2();
+                blnChangeColorFlg2 = Boolean.FALSE;
+            }
         }
 
         List<DataGridColumn> colMeisaiList = panel.getDgKyufuJissekiMeisaiList().getGridSetting().getColumns();

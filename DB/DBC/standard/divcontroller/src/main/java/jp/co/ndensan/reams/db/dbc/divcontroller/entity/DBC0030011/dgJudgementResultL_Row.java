@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0030011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 10 15:28:44 JST 2014 
+ * Fri Jul 04 11:07:18 JST 2014 
  */
 
 
@@ -30,6 +30,13 @@ public class dgJudgementResultL_Row extends DataRow {
 
     public dgJudgementResultL_Row() {
         super();
+        this.txtJigyosha = RString.EMPTY;
+        this.txtServiceShurui = RString.EMPTY;
+        this.txtServiceHiyoTotalAmount = RString.EMPTY;
+        this.txtRiyoshaFutanTotalAmount = RString.EMPTY;
+        this.txtSanteiKijunAmount = RString.EMPTY;
+        this.txtShiharaizumiAmount = RString.EMPTY;
+        this.txtKogakuShikyuAmount = RString.EMPTY;
     }
 
     public dgJudgementResultL_Row(RString txtJigyosha, RString txtServiceShurui, RString txtServiceHiyoTotalAmount, RString txtRiyoshaFutanTotalAmount, RString txtSanteiKijunAmount, RString txtShiharaizumiAmount, RString txtKogakuShikyuAmount) {

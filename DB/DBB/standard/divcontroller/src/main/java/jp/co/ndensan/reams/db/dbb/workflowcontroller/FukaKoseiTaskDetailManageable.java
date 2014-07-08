@@ -5,9 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbb.workflowcontroller;
 
+import java.util.HashMap;
+import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.workflow.flow.task.ITaskDetailManageable;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  *
@@ -18,13 +22,30 @@ public class FukaKoseiTaskDetailManageable implements ITaskDetailManageable {
     @Override
     public RString getDetailString() {
 
-        RString 被保番号 = new RString("被保番号：0000000094");
-        RString 氏名 = new RString("氏名：電算　次郎");
+        Map<RString, RString> check = new HashMap<RString, RString>();
+
+        FlowParameters param = FlowParameterAccessor.get();
 
         RStringBuilder rsb = new RStringBuilder();
-        rsb.append(被保番号);
-        rsb.append("<br>");
-        rsb.append(氏名);
+
+        if (param.size() < 2) {
+            RString 被保番号 = new RString("被保番号：0000000094");
+            RString 氏名 = new RString("氏名：電算　次郎");
+
+            rsb.append(被保番号);
+            rsb.append("<br>");
+            rsb.append(氏名);
+
+            check.put(new RString("key"), new RString("1"));
+            FlowParameterAccessor.merge(check);
+        } else {
+            RString 被保番号 = new RString("被保番号：0000000108");
+            RString 氏名 = new RString("氏名：遠江　よし子");
+
+            rsb.append(被保番号);
+            rsb.append("<br>");
+            rsb.append(氏名);
+        }
 
         return rsb.toRString();
     }

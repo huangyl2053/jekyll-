@@ -8,7 +8,7 @@
      "fieldName": "dgJukyuIdoJohoRirekiTeseiList",
      "items": [],
      "controlType": "DataGrid",
-     "width": "910",
+     "width": "1098",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -25,8 +25,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "442",
-     "dataSource": [],
+     "height": "542",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -47,38 +46,6 @@
       },
       "columns": [
        {
-        "columnName": "被保番号",
-        "dataName": "txtHihoNo",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 90,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "txtHihoNo"
-       },
-       {
-        "columnName": "被保険者氏名",
-        "dataName": "txtHihokenshaName",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 200,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "txtHihokenshaName"
-       },
-       {
         "columnName": "異動日",
         "dataName": "txtIdoYMD",
         "toolTip": "",
@@ -95,11 +62,43 @@
         "sortKey": "txtIdoYMD"
        },
        {
+        "columnName": "被保番号",
+        "dataName": "txtHihoNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtHihoNo"
+       },
+       {
+        "columnName": "カナ氏名",
+        "dataName": "txtHihokenshaName",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 270,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtHihokenshaName"
+       },
+       {
         "columnName": "項目",
         "dataName": "txtKomoku",
         "toolTip": "",
         "bgColor": 0,
-        "width": 450,
+        "width": 550,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -118,9 +117,15 @@
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "onClick_btnModify",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
+     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -128,7 +133,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "G10",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -171,11 +176,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -203,7 +204,7 @@
   {
    "order": "1",
    "stateName": "履歴訂正一覧",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "JukyuIdoJohoRirekiTeseiList",

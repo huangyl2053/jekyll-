@@ -31,23 +31,23 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "permitCharactor": "",
-     "fromPlaceHolder": "",
-     "toPlaceHolder": "",
-     "ymdKubun": 2,
-     "displayFormat": 0,
-     "minDate": "",
-     "maxDate": "",
-     "fromText": "",
-     "toText": "",
-     "fromValue": "",
-     "toValue": "",
      "labelLText": "審査日",
      "labelRText": "",
      "labelLWidth": "55",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "ymdKubun": 2,
+     "displayFormat": 0,
+     "permitCharactor": "",
+     "fromPlaceHolder": "",
+     "toPlaceHolder": "",
+     "minDate": "",
+     "maxDate": "",
+     "fromText": "",
+     "toText": "",
+     "fromValue": "",
+     "toValue": "",
      "fromSelectControlID": "txtShinsaDateFrom",
      "toSelectControlID": "txtShinsaDateTo"
     },
@@ -71,12 +71,12 @@
      "selectControlID": "btnSearchShinsazumi",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "onClick_btnSearchShinsazumi",
      "text": "審査済分を検索する",
-     "appearance": 0,
-     "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "onClick": "onClick_btnSearchShinsazumi",
+     "appearance": 0,
+     "imageFileUrl": "",
      "icon": 0,
      "heightTextBoxMatches": false
     }
@@ -152,26 +152,26 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "required": false,
+     "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "permitCharactor": "./_-",
-     "ymdKubun": 2,
-     "displayFormat": 0,
+     "text": "",
+     "value": "",
      "labelLText": "決定日",
      "labelRText": "",
      "labelLWidth": "55",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "text": "",
-     "required": false,
-     "placeHolder": "",
-     "value": "",
-     "textKind": 0
+     "ymdKubun": 2,
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "dgShinsazumiShikyuShinsei",
@@ -445,6 +445,11 @@
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -702,9 +707,9 @@
      "selectControlID": "txtComment",
      "helpMessageID": "",
      "jpControlName": "",
+     "required": false,
      "isPrivateInfo": false,
      "text": "※発行一覧表が同時に出力されます。",
-     "required": false,
      "decorationClass": "",
      "align": 2
     },
@@ -793,7 +798,7 @@
    "jpControlName": "",
    "onLoad": "",
    "title": "償還払支給（不支給）決定通知書",
-   "isOpen": true,
+   "isOpen": false,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -853,7 +858,7 @@
   {
    "order": "1",
    "stateName": "検索",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "SearchConditionToShinsazumiShikyuShinseiPanel",
@@ -880,7 +885,7 @@
   {
    "order": "2",
    "stateName": "一括決定",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "SearchConditionToShinsazumiShikyuShinseiPanel",
@@ -977,15 +982,15 @@
  "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "ketteiSave",
+   "commonButtonAreaId": "ketteiExecute",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonUpdate",
+     "buttonKind": "CommonButtonExecute",
      "buttonProperty": {
       "fieldName": "btnKetteiSave",
       "items": [],
       "controlType": "CommonButtonFree",
-      "width": 1,
+      "width": 2,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -1009,7 +1014,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "決定結果を"
+      "additionalText": "支給申請決定を"
      }
     }
    ],
@@ -1018,7 +1023,9 @@
      "state": "一括決定"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
 
 import java.util.ArrayList;
@@ -15,33 +14,32 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
-
 /**
  *
- * @author n8211
+ * @author N8211 田辺 紘一
  */
 public class FukaShokaiGrandson {
-    
+
     public ResponseData<FukaShokaiGrandsonDiv> onLoad_FukaShokaiGrandson(FukaShokaiGrandsonDiv div) {
-        
+
         FukaRirekiDiv rirekiDiv = (FukaRirekiDiv) ViewStateHolder.get("賦課履歴", FukaRirekiDiv.class);
-        
+
         div.setCanOpenAndClose(true);
         div.setIsOpen(true);
-        
+
         List key = getRirekiKey(rirekiDiv, "select");
         loadData(div, key);
-        
+
         return returnResponse(div);
     }
-    
+
     public ResponseData<FukaShokaiGrandsonDiv> onSelect(FukaShokaiGrandsonDiv div, FukaRirekiDiv rirekiDiv) {
         div.setCanOpenAndClose(true);
         div.setIsOpen(true);
-        
+
         List key = getRirekiKey(rirekiDiv, "select");
         loadData(div, key);
-        
+
         return returnResponse(div);
     }
 
@@ -51,29 +49,31 @@ public class FukaShokaiGrandson {
 
         List key = getRirekiKey(rirekiDiv, "click");
         loadData(div, key);
-        
+
         return returnResponse(div);
     }
 
     /**
      * イベント処理後のレスポンスデータをリターン
+     *
      * @param div
-     * @return 
+     * @return
      */
     private ResponseData<FukaShokaiGrandsonDiv> returnResponse(FukaShokaiGrandsonDiv div) {
         ResponseData<FukaShokaiGrandsonDiv> response = new ResponseData<>();
         response.data = div;
         return response;
     }
-    
+
     /**
      * 履歴一覧から選択行の情報取得
+     *
      * @param fukaRirekiDiv
      * @param mode
-     * @return 
+     * @return
      */
     private List getRirekiKey(FukaRirekiDiv fukaRirekiDiv, String mode) {
-        
+
         List keyList = new ArrayList();
 
         switch (mode) {
@@ -86,7 +86,7 @@ public class FukaShokaiGrandson {
                     keyList.add(selectData.getTxtKoseiM());
                     keyList.add(selectData.getTxtKoseiYMD());
                 }
-                
+
                 break;
             case "click":
                 dgFukaRirekiFukaRireki_Row clickedItem = fukaRirekiDiv.getDgFukaRirekiFukaRireki().getClickedItem();
@@ -97,20 +97,18 @@ public class FukaShokaiGrandson {
 
                 break;
         }
-        
+
         return keyList;
-    }    
-    
-      private void loadData(FukaShokaiGrandsonDiv div, List key) {
-        div.getTxtChoteiNendo().setValue((RString)key.get(1));
-        div.getTxtKoseiM().setValue((RString)key.get(2));
-        div.getTxtKoseiYMD().setValue((RString)key.get(3));
-        
-        
-    } 
+    }
 
+    private void loadData(FukaShokaiGrandsonDiv div, List key) {
+        div.getTxtChoteiNendo().setValue((RString) key.get(1));
+        div.getTxtKoseiM().setValue((RString) key.get(2));
+        div.getTxtKoseiYMD().setValue((RString) key.get(3));
 
-//    
+    }
+
+//
 //    public ResponseData<FukaShokaiGrandsonDiv> onClick_btnInjiNaiyoSettei(FukaShokaiGrandsonDiv fukaShokaiGrandsonDiv, FukaRirekiDiv fukaRirekiDiv) {
 //
 //        fukaShokaiGrandsonDiv.getFukakonkyoAndKiwari().setDisplayNone(true);
@@ -120,7 +118,4 @@ public class FukaShokaiGrandson {
 //
 //        return returnResponse(fukaShokaiGrandsonDiv);
 //    }
-
-
-
 }

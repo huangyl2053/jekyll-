@@ -302,6 +302,35 @@
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
+    },
+    {
+     "fieldName": "btnRirekiBack",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": true,
+     "displayNone": true,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnRirekiBack",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "Button1",
+     "imageWidth": "",
+     "imageHeight": "",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -2389,12 +2418,7 @@
     },
     {
      "visibleDiv": "FukaRireki",
-     "panelState": "close",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "FukaShokaiGrandson",
-     "panelState": "close",
+     "panelState": "visible",
      "fixedDiv": "No"
     },
     {
@@ -2414,126 +2438,10 @@
     }
    ],
    "validation": {},
-   "events": [
-    {
-     "fieldName": "btnDemoShokai",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnDemoChohyo",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgFukaRirekiAll",
-     "event": "onSelectByDblClick",
-     "transition": "賦課履歴"
-    },
-    {
-     "fieldName": "dgFukaRirekiAll",
-     "event": "onSelectBySelectButton",
-     "transition": "賦課履歴"
-    },
-    {
-     "fieldName": "dgFukaRirekiFukaRireki",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgFukaRirekiFukaRireki",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnRirekiHyoji",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "2",
-   "stateName": "賦課履歴",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "FukaRirekiAll",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "FukaRireki",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "FukaShokaiGrandson",
-     "panelState": "close",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "FukaShokaiKiwarigaku",
-     "panelState": "close",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "AtenaJoho",
-     "panelState": "visible",
-     "fixedDiv": "Yes"
-    },
-    {
-     "visibleDiv": "KaigoAtenaInfo",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KaigoFukaKihon",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "btnDemoShokai",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnDemoChohyo",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgFukaRirekiAll",
-     "event": "onSelectByDblClick",
-     "transition": "賦課履歴"
-    },
-    {
-     "fieldName": "dgFukaRirekiAll",
-     "event": "onSelectBySelectButton",
-     "transition": "賦課履歴"
-    },
-    {
-     "fieldName": "dgFukaRirekiFukaRireki",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgFukaRirekiFukaRireki",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnRirekiHyoji",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
+   "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "照会",
  "id": "DBB0320001",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -2548,6 +2456,18 @@
   {
    "alias": "fukaShokai",
    "eventName": "dgFukaRirekiFukaRireki.onSelectBySelectButton"
+  },
+  {
+   "alias": "selected",
+   "eventName": "dgFukaRirekiAll.onSelectByDblClick"
+  },
+  {
+   "alias": "reSearch",
+   "eventName": "btnResearch.onClick"
+  },
+  {
+   "alias": "returnResult",
+   "eventName": "btnZenkairesultHyoji.onClick"
   }
  ],
  "loadSequencePanelNames": [
@@ -2585,7 +2505,7 @@
    "commonButtonAreaId": "賦課照会",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonReSearch",
      "buttonProperty": {
       "fieldName": "btnResearch",
       "items": [],
@@ -2640,16 +2560,22 @@
       "selectControlID": "btnZenkairesultHyoji",
       "helpMessageID": "",
       "jpControlName": "",
-      "onClick": "",
+      "postParameterPanelNames": [
+       {}
+      ],
       "text": "前回の検索結果を表示する",
-      "appearance": 0,
-      "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
+      "onAfterRequest": "",
       "prefixText": "",
-      "suffixText": ""
+      "suffixText": "",
+      "validateUrl": "",
+      "submitUrl": ""
      }
     }
    ],
@@ -2676,7 +2602,9 @@
      "state": "明細減免"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

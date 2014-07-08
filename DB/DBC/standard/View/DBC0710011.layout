@@ -118,7 +118,7 @@
    "width": "G12",
    "visible": true,
    "displayNone": false,
-   "disabled": true,
+   "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
    "wrap": true,
@@ -156,12 +156,12 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": true,
+   "readOnly": false,
    "height": "Auto",
    "focusPositionID": "restoreLayoutButton",
    "eraseBorderTop": false,
@@ -751,224 +751,174 @@
        "permitCharactor": ""
       },
       {
-       "fieldName": "JutakuKaishuShinseiDetail",
-       "items": [
-        {
-         "fieldName": "JutakuKaishuShinseiDetailInput",
-         "items": [],
-         "controlType": "CommonChildDiv",
-         "width": "XS",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "0.2",
-         "marginRight": "-0.2",
-         "selectControlID": "JutakuKaishuShinseiDetailInput",
-         "helpMessageID": "",
-         "jpControlName": "",
-         "relation": [],
-         "marginTop": 0,
-         "marginBottom": 0,
-         "businessId": "DBC",
-         "controlName": "JutakuKaishuShinseiDetailInput",
-         "dataPassingForDialog": [],
-         "dialogOkEventNameForDialog": "",
-         "dialogCancelEventNameForDialog": "",
-         "canTransferEvent": true,
-         "heightForDialog": "M",
-         "txtChakkoDate_lableLText": "着工日",
-         "txtKanseiDate_lableLText": "完成日",
-         "onClick_btnModifyDetail": "onClick_btnModifyDetail",
-         "btnModify_text": "明細を追加する",
-         "dg_gridSetting": {
-          "rowHeight": 25,
-          "isMultiSelectable": false,
-          "isShowHeader": true,
-          "isShowFooter": true,
-          "isShowFilter": false,
-          "isShowFilterButton": false,
-          "isShowRowState": true,
-          "isShowSelectButtonColumn": false,
-          "isShowModifyButtonColumn": true,
-          "isShowDeleteButtonColumn": true,
-          "limitRowCount": 0,
-          "selectedRowCount": 0,
-          "header": {
-           "combineColumns": [],
-           "frozenColumn": "",
-           "headerHeight": 0
-          },
-          "columns": [
-           {
-            "columnName": "着工日",
-            "dataName": "txtChakkoDueDate",
-            "toolTip": "",
-            "bgColor": 0,
-            "width": 80,
-            "visible": true,
-            "cellType": 6,
-            "cellDetails": {
-             "cellType": 6,
-             "ymdKubun": 2,
-             "displayFormat": 0,
-             "onChange": "",
-             "isSetValueToToolTip": false,
-             "readOnly": true
-            },
-            "align": 1,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtChakkoDueDate"
-           },
-           {
-            "columnName": "完成日",
-            "dataName": "txtKanseiDueDate",
-            "toolTip": "",
-            "bgColor": 0,
-            "width": 80,
-            "visible": true,
-            "cellType": 6,
-            "cellDetails": {
-             "cellType": 6,
-             "ymdKubun": 2,
-             "displayFormat": 0,
-             "onChange": "",
-             "isSetValueToToolTip": false,
-             "readOnly": true
-            },
-            "align": 1,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKanseiDueDate"
-           },
-           {
-            "columnName": "見積金額",
-            "dataName": "txtMitsumoriAmount",
-            "toolTip": "",
-            "bgColor": 0,
-            "width": 100,
-            "visible": true,
-            "cellType": 5,
-            "cellDetails": {
-             "cellType": 5,
-             "maxLength": "1000000000000",
-             "minLength": "0",
-             "maxValue": "1.7976931348623157e+308",
-             "minValue": "0",
-             "isCurrency": false,
-             "isComma": true,
-             "decimalPointLength": "0",
-             "onChange": "",
-             "isSetValueToToolTip": false,
-             "readOnly": true
-            },
-            "align": 2,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtMitsumoriAmount"
-           },
-           {
-            "columnName": "事業者",
-            "dataName": "txtKaishuJigyosha",
-            "toolTip": "",
-            "bgColor": 0,
-            "width": 200,
-            "visible": true,
-            "cellType": 0,
-            "cellDetails": {
-             "cellType": 0
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKaishuJigyosha"
-           },
-           {
-            "columnName": "改修対象住所",
-            "dataName": "txtKaishuTaishoAddress",
-            "toolTip": "",
-            "bgColor": 0,
-            "width": 200,
-            "visible": true,
-            "cellType": 0,
-            "cellDetails": null,
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKaishuTaishoAddress"
-           },
-           {
-            "columnName": "改修内容",
-            "dataName": "txtKaishuContents",
-            "toolTip": "",
-            "bgColor": 0,
-            "width": 300,
-            "visible": true,
-            "cellType": 0,
-            "cellDetails": {
-             "cellType": 0
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKaishuContents"
-           }
-          ]
-         }
-        }
-       ],
-       "controlType": "Panel",
-       "width": "1099",
+       "fieldName": "JutakuKaishuShinseiDetailInput",
+       "items": [],
+       "controlType": "CommonChildDiv",
+       "width": "XS",
        "visible": true,
        "displayNone": false,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": true,
+       "wrap": false,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "JutakuKaishuShinseiDetail",
+       "marginLeft": "0",
+       "marginRight": "-0.2",
+       "selectControlID": "JutakuKaishuShinseiDetailInput",
        "helpMessageID": "",
        "jpControlName": "",
-       "onLoad": "",
-       "title": "住宅改修明細",
-       "isOpen": true,
-       "canOpenAndClose": false,
-       "postParameterPanelNames": [
-        {
-         "postParameterPanelNames": "JutakuKaishuShinseiDetail"
-        }
-       ],
-       "requestSettings": [],
-       "hiddenInput": [],
-       "onOpen": "",
-       "onClose": "",
-       "session": {},
-       "marginTop": "Default",
-       "marginBottom": "Default",
-       "eraseBorder": false,
-       "backgroundColor": 0,
-       "widthAuto": false,
-       "panelDisplay": 1,
-       "isGroupBox": false,
-       "readOnly": false,
-       "height": "Auto",
-       "focusPositionID": "restoreLayoutButton",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false
+       "relation": [],
+       "marginTop": 0,
+       "marginBottom": 0,
+       "businessId": "DBC",
+       "controlName": "JutakuKaishuShinseiDetailInput",
+       "dataPassingForDialog": [],
+       "dialogOkEventNameForDialog": "",
+       "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
+       "txtChakkoDate_lableLText": "着工日",
+       "txtKanseiDate_lableLText": "完成日",
+       "onClick_btnModifyDetail": "onClick_btnModifyDetail",
+       "btnModify_text": "明細を追加する",
+       "dg_gridSetting": {
+        "rowHeight": 25,
+        "isMultiSelectable": false,
+        "isShowHeader": true,
+        "isShowFooter": true,
+        "isShowFilter": false,
+        "isShowFilterButton": false,
+        "isShowRowState": true,
+        "isShowSelectButtonColumn": false,
+        "isShowModifyButtonColumn": true,
+        "isShowDeleteButtonColumn": true,
+        "limitRowCount": 0,
+        "selectedRowCount": 0,
+        "header": {
+         "combineColumns": [],
+         "frozenColumn": "",
+         "headerHeight": 0
+        },
+        "columns": [
+         {
+          "columnName": "着工日",
+          "dataName": "txtChakkoDueDate",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 80,
+          "visible": true,
+          "cellType": 6,
+          "cellDetails": {
+           "cellType": 6,
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtChakkoDueDate"
+         },
+         {
+          "columnName": "完成日",
+          "dataName": "txtKanseiDueDate",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 80,
+          "visible": true,
+          "cellType": 6,
+          "cellDetails": {
+           "cellType": 6,
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKanseiDueDate"
+         },
+         {
+          "columnName": "見積金額",
+          "dataName": "txtMitsumoriAmount",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 5,
+          "cellDetails": {
+           "cellType": 5,
+           "maxLength": "1000000000000",
+           "minLength": "0",
+           "maxValue": "1.7976931348623157e+308",
+           "minValue": "0",
+           "isCurrency": false,
+           "isComma": true,
+           "decimalPointLength": "0",
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
+          },
+          "align": 2,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtMitsumoriAmount"
+         },
+         {
+          "columnName": "事業者",
+          "dataName": "txtKaishuJigyosha",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 200,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKaishuJigyosha"
+         },
+         {
+          "columnName": "改修対象住所",
+          "dataName": "txtKaishuTaishoAddress",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 200,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKaishuTaishoAddress"
+         },
+         {
+          "columnName": "改修内容",
+          "dataName": "txtKaishuContents",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 300,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKaishuContents"
+         }
+        ]
+       }
       },
       {
        "fieldName": "JutakuKaishuShinseisha",
@@ -1002,15 +952,13 @@
        "dialogCancelEventNameForDialog": "",
        "canTransferEvent": true,
        "heightForDialog": "M",
-       "btnSearch_displayNone": false,
+       "btnJigyoshaInputGuide_displayNone": false,
        "txtUkestukeDate_displayNone": true,
        "txtJigyoshaNo_disabled": true,
        "txtShinseishaName_labelLText": "氏名",
        "txtYubinNo_displayNone": false,
        "txtAddress_displayNone": false,
-       "btnCopy_displayNone": false,
-       "btnSearchJigyosha_disabled": true,
-       "btnCopyToHonninInfo_disabled": false
+       "btnJigyoshaInputGuide_disabled": true
       },
       {
        "fieldName": "JutakuKaishuShinseiReason",
@@ -1603,6 +1551,10 @@
     {
      "eventName": "onClick_radPayMethod",
      "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiInfoPanel/onClick_radPayMethod"
+    },
+    {
+     "eventName": "onClick_btnCheckGendogaku",
+     "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiInfoPanel/onClick_btnCheckGendogaku"
     }
    ],
    "hiddenInput": [],
@@ -1740,17 +1692,17 @@
   {
    "order": "1",
    "stateName": "申請登録",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "JutakuKaishuShinseiHihokenshaPanel",
-     "panelState": "readOnly visible",
+     "panelState": "visible",
      "fixedDiv": "Yes"
     },
     {
      "visibleDiv": "JutakuKaishuShinseiList",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "KaigoAtenaInfo",
@@ -1794,6 +1746,11 @@
      "fieldName": "btnCancelShinsei",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -1804,7 +1761,7 @@
    "visibleDivs": [
     {
      "visibleDiv": "JutakuKaishuShinseiHihokenshaPanel",
-     "panelState": "readOnly visible",
+     "panelState": "visible",
      "fixedDiv": "Yes"
     },
     {
@@ -1815,7 +1772,7 @@
     {
      "visibleDiv": "JutakuKaishuShinseiDetail",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "JutakuKaishuShinseiResetInfo",
@@ -1839,11 +1796,6 @@
     },
     {
      "visibleDiv": "JutakuKaishuShinseiDetailInput",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "btnPanel",
      "panelState": "visible",
      "fixedDiv": ""
     },
@@ -1899,13 +1851,18 @@
      "fieldName": "btnCancelShinsei",
      "event": "onClick",
      "transition": "申請登録"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
   {
    "order": "3",
    "stateName": "申請登録完了",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KanryoMessage",
@@ -1951,6 +1908,11 @@
      "fieldName": "btnCancelShinsei",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": "終了"
     }
    ]
   }
@@ -1989,9 +1951,6 @@
   ],
   [
    "JutakuKaishuShinseiContents"
-  ],
-  [
-   "JutakuKaishuShinseiDetail"
   ],
   [
    "JutakuKaishuShinseiDetailInput"
@@ -2206,6 +2165,52 @@
    "states": [
     {
      "state": "申請登録内容"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "complete",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "btnComplete",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "完了",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "申請登録完了"
     }
    ],
    "isFinishButtonOnTheRight": false,

@@ -9,17 +9,21 @@
   jigyoshaNameKana: カイゴジギョウメイ
 ## 受領委任情報  
   kinyuKikanCode: 1206
+  radKozaShubetsu: futsu
   kinyuKikanName: アイオー信用金庫
   kinyuKikanBrunchCode: 011
   kinyuKikanBrunchName: 赤堀支店
   kozaNo: 1206005
-  kozaMeigininKana: カイゴ
-  kozaMeiginin: 介護
+  kozaMeigininKana: 電算　太郎
+  kozaMeiginin: ﾃﾞﾝｻﾝ ﾀﾛｳ
 ## 窓口払い  
   shiharaiBasho: 赤堀支店
   shiharaiKaishiDate: 平26.07.01
   shiharaiKaishiDay: 月
-  shiharaiKaishiTime: 360
+  shiharaiKaishiTimeS: "09"
+  shiharaiKaishiTimeE: "00"
   shiharaiShuryoDate: 平26.07.30
   shiharaiShuryoDay: 金
-  shiharaiShuryoTime: 100000
+  shiharaiShuryoTimeS: "16"
+  shiharaiShuryoTimeE: "00"
+  

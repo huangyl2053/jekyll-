@@ -125,7 +125,8 @@
          "value": "白馬村"
         }
        ],
-       "required": false
+       "required": false,
+       "disabledItem": []
       }
      ],
      "controlType": "Panel",
@@ -147,7 +148,7 @@
      "jpControlName": "",
      "onLoad": "",
      "title": "未審査支給申請検索条件",
-     "isOpen": false,
+     "isOpen": true,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
@@ -159,7 +160,7 @@
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "marginTop": "Default",
+     "marginTop": "0",
      "marginBottom": "Default",
      "eraseBorder": false,
      "backgroundColor": 0,
@@ -218,7 +219,7 @@
        "fieldName": "dgYoguKonyuhiShisaMishinsaShikyuShinseiList",
        "items": [],
        "controlType": "DataGrid",
-       "width": "1030",
+       "width": "1010",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -235,7 +236,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "height": "M",
+       "height": "425",
        "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
@@ -470,7 +471,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "sortOrder": "txtShinsaResult",
+       "sortOrder": "txtSeiriNo",
        "isAscending": true,
        "filterList": [],
        "activeRowId": -1
@@ -537,7 +538,7 @@
      "onClose": "",
      "session": {},
      "marginTop": "Default",
-     "marginBottom": "Default",
+     "marginBottom": "0",
      "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
@@ -596,8 +597,8 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
+   "marginTop": "0",
+   "marginBottom": "0",
    "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
@@ -707,7 +708,7 @@
   {
    "order": "1",
    "stateName": "検索",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "YoguKonyuhiShikyuShinseiMishinsaSearchPanel",
@@ -737,7 +738,7 @@
   {
    "order": "2",
    "stateName": "審査",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "YoguKonyuhiShikyuShinseiMishinsaSearchPanel",
@@ -753,11 +754,6 @@
      "visibleDiv": "YoguKonyuhiShikyuShinseiMishinsaResultList",
      "panelState": "visible",
      "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "DummyModifiedPanel",
-     "panelState": "visible",
-     "fixedDiv": "false"
     }
    ],
    "supplementInfo": "",
@@ -817,7 +813,7 @@
       "fieldName": "btnSave",
       "items": [],
       "controlType": "CommonButtonUpdate",
-      "width": 1,
+      "width": 0,
       "visible": true,
       "displayNone": false,
       "disabled": true,
@@ -841,7 +837,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "審査内容を"
+      "additionalText": ""
      }
     }
    ],
@@ -850,7 +846,9 @@
      "state": "審査"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

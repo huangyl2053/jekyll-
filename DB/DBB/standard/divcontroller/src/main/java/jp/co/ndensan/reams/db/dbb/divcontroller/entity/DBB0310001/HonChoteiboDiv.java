@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-//import jp.co.ndensan.reams.ur.urz.divcontroller.entity.ChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -28,8 +28,8 @@ public class HonChoteiboDiv extends PanelPublish {
     private TextBoxTime txtChoteiboFromTime;
     @JsonProperty("lblChoteboTo")
     private Label lblChoteboTo;
-//    @JsonProperty("ShutsuryokuJunHonChoteibo")
-//    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonChoteibo;
+    @JsonProperty("ShutsuryokuJunHonChoteibo")
+    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonChoteibo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -67,14 +67,14 @@ public class HonChoteiboDiv extends PanelPublish {
         this.lblChoteboTo=lblChoteboTo;
     }
 
-//    @JsonProperty("ShutsuryokuJunHonChoteibo")
-//    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonChoteibo() {
-//        return ShutsuryokuJunHonChoteibo;
-//    }
-//
-//    @JsonProperty("ShutsuryokuJunHonChoteibo")
-//    public void setShutsuryokuJunHonChoteibo(ChohyoShutsuryokujunDiv ShutsuryokuJunHonChoteibo) {
-//        this.ShutsuryokuJunHonChoteibo=ShutsuryokuJunHonChoteibo;
-//    }
+    @JsonProperty("ShutsuryokuJunHonChoteibo")
+    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonChoteibo() {
+        return ShutsuryokuJunHonChoteibo;
+    }
+
+    @JsonProperty("ShutsuryokuJunHonChoteibo")
+    public void setShutsuryokuJunHonChoteibo(ChohyoShutsuryokujunDiv ShutsuryokuJunHonChoteibo) {
+        this.ShutsuryokuJunHonChoteibo=ShutsuryokuJunHonChoteibo;
+    }
 
 }

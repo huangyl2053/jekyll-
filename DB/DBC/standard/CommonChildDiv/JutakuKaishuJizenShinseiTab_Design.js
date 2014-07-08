@@ -126,188 +126,10 @@ var DBC;
                                             "permitCharactor": ""
                                         },
                                         {
-                                            "fieldName": "JutakuKaishuJizenShinseiDetailForTab",
-                                            "items": [
-                                                {
-                                                    "fieldName": "dgJutakuKaishuJizenShinseiDetail",
-                                                    "items": [],
-                                                    "controlType": "DataGrid",
-                                                    "width": "965",
-                                                    "visible": true,
-                                                    "displayNone": false,
-                                                    "disabled": false,
-                                                    "accessKey": "",
-                                                    "nextFocusFieldName": "",
-                                                    "wrap": true,
-                                                    "dependencies": [],
-                                                    "float": 0,
-                                                    "toolTip": "",
-                                                    "authorityMode": 0,
-                                                    "marginLeft": "XS",
-                                                    "marginRight": "XS",
-                                                    "selectControlID": "dgJutakuKaishuJizenShinseiDetail",
-                                                    "helpMessageID": "",
-                                                    "jpControlName": "",
-                                                    "readOnly": true,
-                                                    "height": "155",
-                                                    "gridSetting": {
-                                                        "rowHeight": 25,
-                                                        "isMultiSelectable": false,
-                                                        "isShowHeader": true,
-                                                        "isShowFooter": true,
-                                                        "isShowFilter": false,
-                                                        "isShowFilterButton": false,
-                                                        "isShowRowState": false,
-                                                        "isShowSelectButtonColumn": false,
-                                                        "isShowModifyButtonColumn": false,
-                                                        "isShowDeleteButtonColumn": false,
-                                                        "limitRowCount": 0,
-                                                        "selectedRowCount": 0,
-                                                        "header": {
-                                                            "combineColumns": [],
-                                                            "frozenColumn": "",
-                                                            "headerHeight": 1
-                                                        },
-                                                        "columns": [
-                                                            {
-                                                                "columnName": "着工日",
-                                                                "dataName": "txtChakkoDate",
-                                                                "toolTip": "",
-                                                                "bgColor": 0,
-                                                                "width": 80,
-                                                                "visible": true,
-                                                                "cellType": 6,
-                                                                "cellDetails": {
-                                                                    "cellType": 6,
-                                                                    "ymdKubun": 2,
-                                                                    "displayFormat": 0,
-                                                                    "onChange": "",
-                                                                    "isSetValueToToolTip": false,
-                                                                    "readOnly": true
-                                                                },
-                                                                "align": 0,
-                                                                "resize": true,
-                                                                "isPrivateInfo": false,
-                                                                "sortKey": "txtChakkoDate"
-                                                            },
-                                                            {
-                                                                "columnName": "完成日",
-                                                                "dataName": "txtKanseiDate",
-                                                                "toolTip": "",
-                                                                "bgColor": 0,
-                                                                "width": 80,
-                                                                "visible": true,
-                                                                "cellType": 6,
-                                                                "cellDetails": {
-                                                                    "cellType": 6,
-                                                                    "ymdKubun": 2,
-                                                                    "displayFormat": 0,
-                                                                    "onChange": "",
-                                                                    "isSetValueToToolTip": false,
-                                                                    "readOnly": true
-                                                                },
-                                                                "align": 0,
-                                                                "resize": true,
-                                                                "isPrivateInfo": false,
-                                                                "sortKey": "txtKanseiDate"
-                                                            },
-                                                            {
-                                                                "columnName": "見積金額",
-                                                                "dataName": "txtMitsumoriAmount",
-                                                                "toolTip": "",
-                                                                "bgColor": 0,
-                                                                "width": 100,
-                                                                "visible": true,
-                                                                "cellType": 5,
-                                                                "cellDetails": {
-                                                                    "cellType": 5,
-                                                                    "maxLength": "1000000000000",
-                                                                    "minLength": "0",
-                                                                    "maxValue": "1.7976931348623157e+308",
-                                                                    "minValue": "0",
-                                                                    "isCurrency": false,
-                                                                    "isComma": true,
-                                                                    "decimalPointLength": "0",
-                                                                    "onChange": "",
-                                                                    "isSetValueToToolTip": false,
-                                                                    "readOnly": true
-                                                                },
-                                                                "align": 0,
-                                                                "resize": true,
-                                                                "isPrivateInfo": false,
-                                                                "sortKey": "txtMitsumoriAmount"
-                                                            },
-                                                            {
-                                                                "columnName": "事業者",
-                                                                "dataName": "txtKaishuJigyosha",
-                                                                "toolTip": "",
-                                                                "bgColor": 0,
-                                                                "width": 150,
-                                                                "visible": true,
-                                                                "cellType": 0,
-                                                                "cellDetails": {
-                                                                    "cellType": 0
-                                                                },
-                                                                "align": 0,
-                                                                "resize": true,
-                                                                "isPrivateInfo": false,
-                                                                "sortKey": "txtKaishuJigyosha"
-                                                            },
-                                                            {
-                                                                "columnName": "対象住宅住所",
-                                                                "dataName": "txtTaishoJutakuAddress",
-                                                                "toolTip": "",
-                                                                "bgColor": 0,
-                                                                "width": 240,
-                                                                "visible": true,
-                                                                "cellType": 0,
-                                                                "cellDetails": {
-                                                                    "cellType": 0
-                                                                },
-                                                                "align": 0,
-                                                                "resize": true,
-                                                                "isPrivateInfo": false,
-                                                                "sortKey": "txtTaishoJutakuAddress"
-                                                            },
-                                                            {
-                                                                "columnName": "改修内容",
-                                                                "dataName": "txtKaishuContents",
-                                                                "toolTip": "",
-                                                                "bgColor": 0,
-                                                                "width": 290,
-                                                                "visible": true,
-                                                                "cellType": 0,
-                                                                "cellDetails": null,
-                                                                "align": 0,
-                                                                "resize": true,
-                                                                "isPrivateInfo": false,
-                                                                "sortKey": "txtKaishuContents"
-                                                            }
-                                                        ]
-                                                    },
-                                                    "onSort": "",
-                                                    "onSelect": "",
-                                                    "onSelectByDblClick": "",
-                                                    "onSelectBySelectButton": "",
-                                                    "onSelectByModifyButton": "",
-                                                    "onSelectByDeleteButton": "",
-                                                    "onAfterRequest": "",
-                                                    "onAfterRequestByDblClick": "",
-                                                    "onAfterRequestBySelectButton": "",
-                                                    "onAfterRequestByModifyButton": "",
-                                                    "onAfterRequestByDeleteButton": "",
-                                                    "onOnlyRow": "",
-                                                    "onNoRow": "",
-                                                    "onMultiRows": "",
-                                                    "dataSource": [],
-                                                    "sortOrder": "txtKaishuContents",
-                                                    "isAscending": true,
-                                                    "filterList": [],
-                                                    "activeRowId": -1
-                                                }
-                                            ],
-                                            "controlType": "Panel",
-                                            "width": "985",
+                                            "fieldName": "dgJutakuKaishuJizenShinseiDetail",
+                                            "items": [],
+                                            "controlType": "DataGrid",
+                                            "width": "965",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -318,39 +140,167 @@ var DBC;
                                             "float": 0,
                                             "toolTip": "",
                                             "authorityMode": 0,
-                                            "marginLeft": "0",
+                                            "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "selectControlID": "JutakuKaishuJizenShinseiDetailForTab",
+                                            "selectControlID": "dgJutakuKaishuJizenShinseiDetail",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "onLoad": "",
-                                            "title": "住宅改修明細",
-                                            "marginTop": "Default",
-                                            "marginBottom": "Default",
-                                            "isOpen": true,
-                                            "canOpenAndClose": false,
-                                            "postParameterPanelNames": [
-                                                {
-                                                    "postParameterPanelNames": "JutakuKaishuJizenShinseiDetailForTab"
-                                                }
-                                            ],
-                                            "requestSettings": [],
-                                            "hiddenInput": [],
-                                            "onOpen": "",
-                                            "onClose": "",
-                                            "session": {},
-                                            "eraseBorder": false,
-                                            "backgroundColor": 0,
-                                            "widthAuto": true,
-                                            "panelDisplay": 1,
-                                            "isGroupBox": false,
                                             "readOnly": true,
-                                            "height": "Auto",
-                                            "focusPositionID": "restoreLayoutButton",
-                                            "eraseBorderTop": false,
-                                            "eraseBorderBottom": false,
-                                            "eraseBorderRight": false,
-                                            "eraseBorderLeft": false
+                                            "height": "155",
+                                            "gridSetting": {
+                                                "rowHeight": 25,
+                                                "isMultiSelectable": false,
+                                                "isShowHeader": true,
+                                                "isShowFooter": true,
+                                                "isShowFilter": false,
+                                                "isShowFilterButton": false,
+                                                "isShowRowState": false,
+                                                "isShowSelectButtonColumn": false,
+                                                "isShowModifyButtonColumn": false,
+                                                "isShowDeleteButtonColumn": false,
+                                                "limitRowCount": 0,
+                                                "selectedRowCount": 0,
+                                                "header": {
+                                                    "combineColumns": [],
+                                                    "frozenColumn": "",
+                                                    "headerHeight": 1
+                                                },
+                                                "columns": [
+                                                    {
+                                                        "columnName": "着工日",
+                                                        "dataName": "txtChakkoDate",
+                                                        "toolTip": "",
+                                                        "bgColor": 0,
+                                                        "width": 80,
+                                                        "visible": true,
+                                                        "cellType": 6,
+                                                        "cellDetails": {
+                                                            "cellType": 6,
+                                                            "ymdKubun": 2,
+                                                            "displayFormat": 0,
+                                                            "onChange": "",
+                                                            "isSetValueToToolTip": false,
+                                                            "readOnly": true
+                                                        },
+                                                        "align": 0,
+                                                        "resize": true,
+                                                        "isPrivateInfo": false,
+                                                        "sortKey": "txtChakkoDate"
+                                                    },
+                                                    {
+                                                        "columnName": "完成日",
+                                                        "dataName": "txtKanseiDate",
+                                                        "toolTip": "",
+                                                        "bgColor": 0,
+                                                        "width": 80,
+                                                        "visible": true,
+                                                        "cellType": 6,
+                                                        "cellDetails": {
+                                                            "cellType": 6,
+                                                            "ymdKubun": 2,
+                                                            "displayFormat": 0,
+                                                            "onChange": "",
+                                                            "isSetValueToToolTip": false,
+                                                            "readOnly": true
+                                                        },
+                                                        "align": 0,
+                                                        "resize": true,
+                                                        "isPrivateInfo": false,
+                                                        "sortKey": "txtKanseiDate"
+                                                    },
+                                                    {
+                                                        "columnName": "見積金額",
+                                                        "dataName": "txtMitsumoriAmount",
+                                                        "toolTip": "",
+                                                        "bgColor": 0,
+                                                        "width": 100,
+                                                        "visible": true,
+                                                        "cellType": 5,
+                                                        "cellDetails": {
+                                                            "cellType": 5,
+                                                            "maxLength": "1000000000000",
+                                                            "minLength": "0",
+                                                            "maxValue": "1.7976931348623157e+308",
+                                                            "minValue": "0",
+                                                            "isCurrency": false,
+                                                            "isComma": true,
+                                                            "decimalPointLength": "0",
+                                                            "onChange": "",
+                                                            "isSetValueToToolTip": false,
+                                                            "readOnly": true
+                                                        },
+                                                        "align": 0,
+                                                        "resize": true,
+                                                        "isPrivateInfo": false,
+                                                        "sortKey": "txtMitsumoriAmount"
+                                                    },
+                                                    {
+                                                        "columnName": "事業者",
+                                                        "dataName": "txtKaishuJigyosha",
+                                                        "toolTip": "",
+                                                        "bgColor": 0,
+                                                        "width": 150,
+                                                        "visible": true,
+                                                        "cellType": 0,
+                                                        "cellDetails": {
+                                                            "cellType": 0
+                                                        },
+                                                        "align": 0,
+                                                        "resize": true,
+                                                        "isPrivateInfo": false,
+                                                        "sortKey": "txtKaishuJigyosha"
+                                                    },
+                                                    {
+                                                        "columnName": "対象住宅住所",
+                                                        "dataName": "txtTaishoJutakuAddress",
+                                                        "toolTip": "",
+                                                        "bgColor": 0,
+                                                        "width": 240,
+                                                        "visible": true,
+                                                        "cellType": 0,
+                                                        "cellDetails": {
+                                                            "cellType": 0
+                                                        },
+                                                        "align": 0,
+                                                        "resize": true,
+                                                        "isPrivateInfo": false,
+                                                        "sortKey": "txtTaishoJutakuAddress"
+                                                    },
+                                                    {
+                                                        "columnName": "改修内容",
+                                                        "dataName": "txtKaishuContents",
+                                                        "toolTip": "",
+                                                        "bgColor": 0,
+                                                        "width": 290,
+                                                        "visible": true,
+                                                        "cellType": 0,
+                                                        "cellDetails": null,
+                                                        "align": 0,
+                                                        "resize": true,
+                                                        "isPrivateInfo": false,
+                                                        "sortKey": "txtKaishuContents"
+                                                    }
+                                                ]
+                                            },
+                                            "onSort": "",
+                                            "onSelect": "",
+                                            "onSelectByDblClick": "",
+                                            "onSelectBySelectButton": "",
+                                            "onSelectByModifyButton": "",
+                                            "onSelectByDeleteButton": "",
+                                            "onAfterRequest": "",
+                                            "onAfterRequestByDblClick": "",
+                                            "onAfterRequestBySelectButton": "",
+                                            "onAfterRequestByModifyButton": "",
+                                            "onAfterRequestByDeleteButton": "",
+                                            "onOnlyRow": "",
+                                            "onNoRow": "",
+                                            "onMultiRows": "",
+                                            "dataSource": [],
+                                            "sortOrder": "txtChakkoDate",
+                                            "isAscending": true,
+                                            "filterList": [],
+                                            "activeRowId": -1
                                         },
                                         {
                                             "fieldName": "JutakuKaishuJizenShinseisha",
@@ -385,18 +335,16 @@ var DBC;
                                             "canTransferEvent": true,
                                             "heightForDialog": "M",
                                             "panelDisplay": 1,
-                                            "btnSearch_displayNone": true,
+                                            "btnJigyoshaInputGuide_displayNone": false,
                                             "txtUkestukeDate_displayNone": true,
                                             "txtJigyoshaNo_disabled": true,
                                             "txtShinseishaName_labelLText": "氏名",
                                             "txtYubinNo_displayNone": false,
                                             "txtAddress_displayNone": false,
-                                            "btnCopy_displayNone": true,
-                                            "btnSearchJigyosha_disabled": false,
-                                            "btnCopyToHonninInfo_disabled": false
+                                            "btnJigyoshaInputGuide_disabled": false
                                         },
                                         {
-                                            "fieldName": "JutakuKaishuJizenShinseiReason",
+                                            "fieldName": "JutakuKaishuJizenShinseiReasonForTab",
                                             "items": [
                                                 {
                                                     "fieldName": "txtCreateDate",
@@ -580,35 +528,6 @@ var DBC;
                                                     "formatLength": "10"
                                                 },
                                                 {
-                                                    "fieldName": "btnSearchCreationJigyoshaName",
-                                                    "items": [],
-                                                    "controlType": "Button",
-                                                    "width": "XS",
-                                                    "visible": true,
-                                                    "displayNone": true,
-                                                    "disabled": false,
-                                                    "accessKey": "",
-                                                    "nextFocusFieldName": "",
-                                                    "wrap": false,
-                                                    "dependencies": [],
-                                                    "float": 0,
-                                                    "toolTip": "",
-                                                    "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "XS",
-                                                    "selectControlID": "btnSearchCreationJigyoshaName",
-                                                    "helpMessageID": "",
-                                                    "jpControlName": "",
-                                                    "text": "探",
-                                                    "onClick": "",
-                                                    "appearance": 0,
-                                                    "imageFileUrl": "",
-                                                    "imageWidth": "",
-                                                    "imageHeight": "",
-                                                    "icon": 0,
-                                                    "heightTextBoxMatches": true
-                                                },
-                                                {
                                                     "fieldName": "txtCreationJigyoshaName",
                                                     "items": [],
                                                     "controlType": "TextBox",
@@ -669,7 +588,7 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "0",
-                                            "selectControlID": "JutakuKaishuJizenShinseiReason",
+                                            "selectControlID": "JutakuKaishuJizenShinseiReasonForTab",
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "onLoad": "",
@@ -680,7 +599,7 @@ var DBC;
                                             "canOpenAndClose": false,
                                             "postParameterPanelNames": [
                                                 {
-                                                    "postParameterPanelNames": "JutakuKaishuJizenShinseiReason"
+                                                    "postParameterPanelNames": "JutakuKaishuJizenShinseiReasonForTab"
                                                 }
                                             ],
                                             "requestSettings": [],
@@ -998,26 +917,6 @@ var DBC;
                                             "maxCheckedItem": 2,
                                             "isAllSelectable": false,
                                             "isAllSelectableBreakLine": false
-                                        },
-                                        {
-                                            "fieldName": "spTab2",
-                                            "items": [],
-                                            "controlType": "Space",
-                                            "visible": true,
-                                            "displayNone": false,
-                                            "disabled": false,
-                                            "accessKey": "",
-                                            "nextFocusFieldName": "",
-                                            "wrap": true,
-                                            "dependencies": [],
-                                            "toolTip": "",
-                                            "authorityMode": 0,
-                                            "marginLeft": "XS",
-                                            "marginRight": "XS",
-                                            "selectControlID": "spTab2",
-                                            "helpMessageID": "",
-                                            "jpControlName": "",
-                                            "spaceCount": "8.05"
                                         }
                                     ],
                                     "controlType": "TabPanel",
@@ -1087,26 +986,6 @@ var DBC;
                                             "eraseBorderBottom": false,
                                             "eraseBorderRight": false,
                                             "eraseBorderLeft": false
-                                        },
-                                        {
-                                            "fieldName": "spTab3",
-                                            "items": [],
-                                            "controlType": "Space",
-                                            "visible": true,
-                                            "displayNone": false,
-                                            "disabled": false,
-                                            "accessKey": "",
-                                            "nextFocusFieldName": "",
-                                            "wrap": true,
-                                            "dependencies": [],
-                                            "toolTip": "",
-                                            "authorityMode": 0,
-                                            "marginLeft": "XS",
-                                            "marginRight": "XS",
-                                            "selectControlID": "spTab3",
-                                            "helpMessageID": "",
-                                            "jpControlName": "",
-                                            "spaceCount": "17.2"
                                         }
                                     ],
                                     "controlType": "TabPanel",
@@ -1156,7 +1035,7 @@ var DBC;
                                 "tplJizenShinseiPayMethod"
                             ],
                             "isDraggable": false,
-                            "selectedItemFieldName": "tplJizenShinseiPayMethod",
+                            "selectedItemFieldName": "tplJizenShinseiContents",
                             "initialTab": 0,
                             "isLazyLoading": false
                         },
@@ -1234,7 +1113,7 @@ var DBC;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "480",
+                    "height": "435",
                     "focusPositionID": "restoreLayoutButton",
                     "eraseBorderTop": false,
                     "eraseBorderBottom": false,
@@ -1275,7 +1154,7 @@ var DBC;
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "onClick_btnClose",
             "canTransferEvent": true,
-            "heightForDialog": "530"
+            "heightForDialog": "485"
         };
         return JutakuKaishuJizenShinseiTab_Design;
     })(Uz.CommonChildDiv);

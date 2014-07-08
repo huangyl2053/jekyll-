@@ -57,8 +57,7 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
-     "selectedItem": "15",
+     "text": "",
      "dataSource": [
       {
        "key": "15",
@@ -73,6 +72,8 @@ module DBZ {
        "value": "47 沖縄県"
       }
      ],
+     "onChange": "",
+     "selectedItem": "15",
      "required": false,
      "labelLText": "県コード",
      "labelRText": "",
@@ -82,17 +83,13 @@ module DBZ {
      "labelRAlign": 0,
      "onFocus": "",
      "onBlur": "",
-     "text": ""
+     "disabledItem": []
     },
     {
      "fieldName": "btnSearchGaitoHokensha",
      "items": [],
      "controlType": "Button",
-<<<<<<< HEAD
      "width": "140",
-=======
-     "width": "200",
->>>>>>> feature/UI-KyufuKanri-37343
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -142,7 +139,6 @@ module DBZ {
        "jpControlName": "",
        "readOnly": false,
        "height": "S",
-       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -212,17 +208,15 @@ module DBZ {
        "onSelectBySelectButton": "onSelectBySelectButton_dgSearchResultHokensha",
        "onSelectByModifyButton": "",
        "onSelectByDeleteButton": "",
-<<<<<<< HEAD
        "onAfterRequest": "",
        "onAfterRequestByDblClick": "",
        "onAfterRequestBySelectButton": "",
        "onAfterRequestByModifyButton": "",
        "onAfterRequestByDeleteButton": "",
-=======
->>>>>>> feature/UI-KyufuKanri-37343
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "hokensha",
        "isAscending": true,
        "filterList": [],
@@ -274,11 +268,7 @@ module DBZ {
      "fieldName": "btnHokenshaReturn",
      "items": [],
      "controlType": "Button",
-<<<<<<< HEAD
      "width": "140",
-=======
-     "width": "200",
->>>>>>> feature/UI-KyufuKanri-37343
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -295,11 +285,7 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "onClick": "onClick_btnHokenshaReturn",
-<<<<<<< HEAD
      "text": "閉じる",
-=======
-     "text": "保険者入力ガイドを閉じる",
->>>>>>> feature/UI-KyufuKanri-37343
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",

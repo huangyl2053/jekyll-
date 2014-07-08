@@ -25,21 +25,21 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
      "onChange": "",
+     "onKeyPress": "",
      "labelLText": "異動日",
      "labelRText": "",
      "labelLWidth": "55",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onKeyPress": "",
-     "permitCharactor": "",
      "ymdKubun": 2,
      "displayFormat": 0,
+     "permitCharactor": "",
      "fromPlaceHolder": "",
      "toPlaceHolder": "",
      "minDate": "",
@@ -72,29 +72,29 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
      "required": false,
+     "placeHolder": "",
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "text": "",
      "labelLText": "被保番号",
      "labelRText": "",
      "labelLWidth": "75",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
+     "value": "",
+     "decorationClass": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "placeHolder": "",
      "textKind": 2,
-     "isPrivateInfo": false,
-     "isPassword": false,
      "isComboBox": false,
-     "onKeyPress": "",
-     "text": "",
      "suggest": [],
-     "value": "",
-     "decorationClass": "",
      "permitCharactor": "",
      "formatLength": "10"
     },
@@ -118,14 +118,14 @@
      "selectControlID": "btnSearchHihokensha",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "　",
+     "text": "",
      "onClick": "",
-     "icon": 0,
-     "appearance": 0,
-     "imageFileUrl": "",
+     "appearance": 2,
+     "imageFileUrl": "/uz/uza/image/UZ_Search.png",
      "imageWidth": "",
      "imageHeight": "",
-     "heightTextBoxMatches": false
+     "icon": 0,
+     "heightTextBoxMatches": true
     },
     {
      "fieldName": "ddlShichosonCode",
@@ -148,8 +148,17 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "required": false,
+     "onFocus": "",
+     "onBlur": "",
      "onChange": "",
-     "selectedItem": "key0",
+     "text": "",
+     "labelLText": "保険者",
+     "labelRText": "",
+     "labelLWidth": "55",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
      "dataSource": [
       {
        "key": "key0",
@@ -172,16 +181,7 @@
        "value": ""
       }
      ],
-     "required": false,
-     "labelLText": "保険者",
-     "labelRText": "",
-     "labelLWidth": "55",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
-     "text": "",
+     "selectedItem": "key0",
      "disabledItem": []
     },
     {
@@ -205,19 +205,23 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "required": false,
      "onChange": "",
-     "selectedItem": null,
+     "labelLText": "",
+     "labelLWidth": "S",
+     "labelLAlign": 2,
+     "onClick": "",
+     "icon": [],
      "dataSource": [
       {
        "key": "isDeletedDataSearch",
        "value": "削除データ検索"
       }
      ],
-     "required": false,
-     "labelLText": "",
-     "labelLWidth": "S",
-     "labelLAlign": 2,
-     "onClick": "",
+     "selectedItem": null,
+     "newLineItemNumber": 1,
+     "spaceSize": "M",
+     "disabledItem": [],
      "selectedItems": [
       {
        "key": "isAllSelect",
@@ -228,14 +232,10 @@
        "value": "削除データ検索"
       }
      ],
-     "newLineItemNumber": 1,
      "minCheckedItem": 0,
      "maxCheckedItem": "1",
-     "spaceSize": "M",
      "isAllSelectable": false,
-     "isAllSelectableBreakLine": false,
-     "disabledItem": [],
-     "icon": []
+     "isAllSelectableBreakLine": false
     },
     {
      "fieldName": "lblSearchCondition",
@@ -260,8 +260,8 @@
      "required": false,
      "isPrivateInfo": false,
      "text": "※「異動日」「被保番号」のどちらかを必ず指定して下さい。",
-     "decorationClass": "",
-     "align": 2
+     "align": 2,
+     "decorationClass": ""
     },
     {
      "fieldName": "btnClearSearchCondition",
@@ -285,11 +285,11 @@
      "jpControlName": "",
      "text": "条件をクリアする",
      "onClick": "onClick_btnClearSearchCondition",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -314,11 +314,11 @@
      "jpControlName": "",
      "text": "検索する",
      "onClick": "onClick_btnSearch",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],
@@ -341,7 +341,7 @@
    "jpControlName": "",
    "onLoad": "",
    "title": "検索条件",
-   "isOpen": false,
+   "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -379,7 +379,7 @@
      "fieldName": "dgJukyushaIdoRenrakuhyoHenkoSearchResult",
      "items": [],
      "controlType": "DataGrid",
-     "width": "760",
+     "width": "780",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -397,7 +397,6 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "392",
-     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -509,7 +508,7 @@
         "dataName": "txtDeletedDate",
         "toolTip": "",
         "bgColor": 0,
-        "width": 95,
+        "width": 105,
         "visible": true,
         "cellType": 2,
         "cellDetails": {
@@ -529,9 +528,15 @@
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "onClick_btnModify",
      "onSelectByDeleteButton": "onClick_btnDelete",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
+     "dataSource": [],
      "sortOrder": "txtResultHihoName",
      "isAscending": true,
      "filterList": [],
@@ -559,11 +564,11 @@
      "jpControlName": "",
      "text": "再検索する",
      "onClick": "",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],
@@ -601,6 +606,10 @@
     {
      "eventName": "onClick_btnSearch",
      "requestUrl": "dbc/db/dbc/JukyushaIdoRenrakuhyoHenkoSearchResultListPanel/onClick_btnSearch"
+    },
+    {
+     "eventName": "onClick_btnDelete",
+     "requestUrl": "dbc/db/dbc/JukyushaIdoRenrakuhyoHenkoSearchResultListPanel/onClick_btnDelete"
     }
    ],
    "hiddenInput": [],
@@ -819,7 +828,7 @@
   {
    "order": "1",
    "stateName": "対象者検索",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "JukyushaIdoRenrakuhyoHenkoSearchConditionPanel",
@@ -858,18 +867,13 @@
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": ""
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
     }
    ]
   },
   {
    "order": "2",
    "stateName": "対象者一覧",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "JukyushaIdoRenrakuhyoHenkoSearchConditionPanel",
@@ -910,18 +914,13 @@
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": "処理終了"
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
     }
    ]
   },
   {
    "order": "3",
    "stateName": "処理終了",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "JukyushaIdoRenrakuhyoHenkoComplete",
@@ -952,11 +951,6 @@
      "fieldName": "btnSave",
      "event": "onClick",
      "transition": ""
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": "終了"
     }
    ]
   }
@@ -972,6 +966,10 @@
   {
    "alias": "modify",
    "eventName": "dgJukyushaIdoRenrakuhyoHenkoSearchResult.onSelectByDblClick"
+  },
+  {
+   "alias": "onload",
+   "eventName": "btnSearch.onClick"
   }
  ],
  "loadSequencePanelNames": [
@@ -1008,7 +1006,7 @@
       "fieldName": "btnSave",
       "items": [],
       "controlType": "CommonButtonFree",
-      "width": 1,
+      "width": 0,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -1024,13 +1022,13 @@
       "selectControlID": "btnSave",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "連絡票情報を保存する",
+      "text": "保存する",
       "onClick": "",
-      "icon": 0,
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "icon": 0,
       "heightTextBoxMatches": false,
       "prefixText": "",
       "suffixText": ""
@@ -1042,51 +1040,9 @@
      "state": "対象者一覧"
     }
    ],
-   "isFinishButtonOnTheRight": false
-  },
-  {
-   "commonButtonAreaId": "2",
-   "buttonSetting": [
-    {
-     "buttonKind": "CommonButtonComplete",
-     "buttonProperty": {
-      "fieldName": "btnComplete",
-      "items": [],
-      "controlType": "CommonButtonComplete",
-      "width": "S",
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnComplete",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "完了",
-      "onClick": "",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": ""
-     }
-    }
-   ],
-   "states": [
-    {
-     "state": "処理終了"
-    }
-   ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

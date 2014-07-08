@@ -1,10 +1,10 @@
 ## YAML Template . 高額決定情報
 ---
 -  uketsukeDate: 平26.06.01
-   honninPaymentAmount: 37200
+   honninPaymentAmount: 50000
    biko: 高額決定情報
    bhiko: 高額決定情報
-   ktteiDate: 平26.07.01
-   setaiShuyakuNo: 1234567890
-   shikyuAmount: 37200
+   ktteiDate: 平26.05.01
+   setaiShuyakuNo: "0000000035"
+   shikyuAmount: 12800
    fushikyuRiyu: ""

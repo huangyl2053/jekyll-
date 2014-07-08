@@ -6,9 +6,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PaymentMethod.PaymentMethodDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * tplJizenShinseiPayMethod のクラスファイル 
@@ -24,8 +22,6 @@ public class tplJizenShinseiPayMethodDiv extends TabPanel {
      */
     @JsonProperty("PaymentMethod")
     private PaymentMethodDiv PaymentMethod;
-    @JsonProperty("spTab3")
-    private Space spTab3;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -41,16 +37,6 @@ public class tplJizenShinseiPayMethodDiv extends TabPanel {
     @JsonProperty("PaymentMethod")
     public void setPaymentMethod(PaymentMethodDiv PaymentMethod) {
         this.PaymentMethod=PaymentMethod;
-    }
-
-    @JsonProperty("spTab3")
-    public Space getSpTab3() {
-        return spTab3;
-    }
-
-    @JsonProperty("spTab3")
-    public void setSpTab3(Space spTab3) {
-        this.spTab3=spTab3;
     }
 
 }

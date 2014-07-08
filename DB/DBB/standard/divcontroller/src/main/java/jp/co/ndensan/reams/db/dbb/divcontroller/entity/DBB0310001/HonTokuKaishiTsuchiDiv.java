@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-//import jp.co.ndensan.reams.ur.urz.divcontroller.entity.ChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -28,8 +28,8 @@ public class HonTokuKaishiTsuchiDiv extends PanelPublish {
     private Label lblTokuKaishiTsuchiDaikou;
     @JsonProperty("radTokuKaishiTsuchiTaisho")
     private RadioButton radTokuKaishiTsuchiTaisho;
-//    @JsonProperty("ShutsuryokuJunHonTokuKaishiTsuchi")
-//    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonTokuKaishiTsuchi;
+    @JsonProperty("ShutsuryokuJunHonTokuKaishiTsuchi")
+    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonTokuKaishiTsuchi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -67,14 +67,14 @@ public class HonTokuKaishiTsuchiDiv extends PanelPublish {
         this.radTokuKaishiTsuchiTaisho=radTokuKaishiTsuchiTaisho;
     }
 
-//    @JsonProperty("ShutsuryokuJunHonTokuKaishiTsuchi")
-//    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonTokuKaishiTsuchi() {
-//        return ShutsuryokuJunHonTokuKaishiTsuchi;
-//    }
+    @JsonProperty("ShutsuryokuJunHonTokuKaishiTsuchi")
+    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonTokuKaishiTsuchi() {
+        return ShutsuryokuJunHonTokuKaishiTsuchi;
+    }
 
-//    @JsonProperty("ShutsuryokuJunHonTokuKaishiTsuchi")
-//    public void setShutsuryokuJunHonTokuKaishiTsuchi(ChohyoShutsuryokujunDiv ShutsuryokuJunHonTokuKaishiTsuchi) {
-//        this.ShutsuryokuJunHonTokuKaishiTsuchi=ShutsuryokuJunHonTokuKaishiTsuchi;
-//    }
+    @JsonProperty("ShutsuryokuJunHonTokuKaishiTsuchi")
+    public void setShutsuryokuJunHonTokuKaishiTsuchi(ChohyoShutsuryokujunDiv ShutsuryokuJunHonTokuKaishiTsuchi) {
+        this.ShutsuryokuJunHonTokuKaishiTsuchi=ShutsuryokuJunHonTokuKaishiTsuchi;
+    }
 
 }

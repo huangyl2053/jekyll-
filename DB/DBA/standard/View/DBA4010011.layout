@@ -266,7 +266,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "onClick": "",
-     "text": "資格得喪",
+     "text": "被保履歴",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -284,7 +284,7 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": true,
+     "wrap": false,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
@@ -310,7 +310,7 @@
      "width": "100",
      "visible": true,
      "displayNone": false,
-     "disabled": false,
+     "disabled": true,
      "accessKey": "",
      "nextFocusFieldName": "",
      "wrap": false,
@@ -535,7 +535,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
-     "title": "資格得喪",
+     "title": "被保履歴",
      "isOpen": true,
      "canOpenAndClose": false,
      "postParameterPanelNames": [
@@ -949,7 +949,9 @@
        "heightForDialog": "M",
        "onBlur_txtKaishuDate": "",
        "onChange_ddlKaishuJiyu": "",
-       "onBlur_txtKaishuRiyu": ""
+       "onBlur_txtKaishuRiyu": "",
+       "ShoKaishuJokyoShosai_panalDisplay": 0,
+       "ShoKaishuJokyoShosai_canOpenAndClose": true
       }
      ],
      "controlType": "Panel",
@@ -1436,7 +1438,7 @@
   {
    "order": "1",
    "stateName": "被保険者照会",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "HihokenshaShikaiTaishoshaJoho",
@@ -1814,7 +1816,7 @@
    ]
   }
  ],
- "currentState": "被保険者照会",
+ "currentState": "All",
  "id": "DBA4010011",
  "WFParameter": [],
  "UIContainerEventMapping": [

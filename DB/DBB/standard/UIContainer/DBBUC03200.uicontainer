@@ -1,16 +1,25 @@
 ﻿{
  "transitionList": [
   {
-   "id": "0",
+   "id": "1",
    "layoutSubGyomuCode": "DBB",
    "layoutName": "DBB0010003",
    "eventName": "SelectFukaTaishosha",
    "toLayoutSubGyomuCode": "DBB",
    "toLayoutName": "DBB0320001",
-   "toEventName": ""
+   "toEventName": "selected"
   },
   {
-   "id": "1",
+   "id": "2",
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0010003",
+   "eventName": "onOnlyRow",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toEventName": "selected"
+  },
+  {
+   "id": 3,
    "layoutSubGyomuCode": "DBB",
    "layoutName": "DBB0320001",
    "eventName": "fukaShokai",
@@ -19,31 +28,85 @@
    "toEventName": "atenaLoad"
   },
   {
-   "id": "2",
+   "id": 4,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320001",
+   "eventName": "hikakuShokai",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320004",
+   "toEventName": "maeHikaku"
+  },
+  {
+   "id": 5,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320001",
+   "eventName": "reSearch",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0010003",
+   "toEventName": "reSearch"
+  },
+  {
+   "id": 6,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320001",
+   "eventName": "returnResult",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0010003",
+   "toEventName": ""
+  },
+  {
+   "id": 7,
    "layoutSubGyomuCode": "DBB",
    "layoutName": "DBB0320002",
    "eventName": "fukaRirekiShokai",
    "toLayoutSubGyomuCode": "DBB",
-   "toLayoutName": "DBB0320003",
-   "toEventName": "test"
+   "toLayoutName": "DBB0320005",
+   "toEventName": "narabete"
   },
   {
-   "id": "3",
+   "id": 8,
    "layoutSubGyomuCode": "DBB",
-   "layoutName": "DBB0320003",
+   "layoutName": "DBB0320002",
    "eventName": "fukaShokai",
    "toLayoutSubGyomuCode": "DBB",
    "toLayoutName": "DBB0320001",
    "toEventName": ""
   },
   {
-   "id": "4",
+   "id": 9,
    "layoutSubGyomuCode": "DBB",
-   "layoutName": "DBB0320001",
-   "eventName": "hikakuShokai",
+   "layoutName": "DBB0320002",
+   "eventName": "reSearch",
    "toLayoutSubGyomuCode": "DBB",
-   "toLayoutName": "DBB0320003",
-   "toEventName": "test"
+   "toLayoutName": "DBB0010003",
+   "toEventName": "reSearch"
+  },
+  {
+   "id": 10,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320002",
+   "eventName": "returnResult",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0010003",
+   "toEventName": ""
+  },
+  {
+   "id": 11,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320004",
+   "eventName": "fukaRireki",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toEventName": ""
+  },
+  {
+   "id": 12,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320005",
+   "eventName": "fukaShokai",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320002",
+   "toEventName": ""
   }
  ],
  "subGyomuCode": "DBB",

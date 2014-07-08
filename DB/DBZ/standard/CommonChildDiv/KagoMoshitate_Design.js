@@ -11,91 +11,6 @@ var DBZ;
         function KagoMoshitate_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, KagoMoshitate_Design.myLayout, fieldName);
         }
-        Object.defineProperty(KagoMoshitate_Design.prototype, "isGroupBox", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["isGroupBox"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["isGroupBox"] = value;
-                } else {
-                    this.layout.items[0]["isGroupBox"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(KagoMoshitate_Design.prototype, "eraseBorderTop", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"] = value;
-                } else {
-                    this.layout.items[0]["eraseBorderTop"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(KagoMoshitate_Design.prototype, "eraseBorderBottom", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"] = value;
-                } else {
-                    this.layout.items[0]["eraseBorderBottom"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(KagoMoshitate_Design.prototype, "eraseBorderRight", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"] = value;
-                } else {
-                    this.layout.items[0]["eraseBorderRight"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(KagoMoshitate_Design.prototype, "eraseBorderLeft", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"] = value;
-                } else {
-                    this.layout.items[0]["eraseBorderLeft"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
         Object.defineProperty(KagoMoshitate_Design.prototype, "title", {
             get: function () {
                 return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
@@ -113,24 +28,52 @@ var DBZ;
         });
 
 
+        Object.defineProperty(KagoMoshitate_Design.prototype, "eraseBorder", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
+                } else {
+                    this.layout.items[0]["eraseBorder"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KagoMoshitate_Design.prototype, "panelDisplay", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
+                } else {
+                    this.layout.items[0]["panelDisplay"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         KagoMoshitate_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
-            Uz.JSControlUtil.registProperty("isGroupBox");
-            Uz.JSControlUtil.registProperty("eraseBorderTop");
-            Uz.JSControlUtil.registProperty("eraseBorderBottom");
-            Uz.JSControlUtil.registProperty("eraseBorderRight");
-            Uz.JSControlUtil.registProperty("eraseBorderLeft");
             Uz.JSControlUtil.registProperty("title");
+            Uz.JSControlUtil.registProperty("eraseBorder");
+            Uz.JSControlUtil.registProperty("panelDisplay");
         };
 
         KagoMoshitate_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
-            editablePropertyInfo["isGroupBox"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["isGroupBox"];
-            editablePropertyInfo["eraseBorderTop"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderTop"];
-            editablePropertyInfo["eraseBorderBottom"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderBottom"];
-            editablePropertyInfo["eraseBorderRight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderRight"];
-            editablePropertyInfo["eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
             editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
+            editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
 
             return editablePropertyInfo;
         };
@@ -158,6 +101,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtJigyoshaNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "required": false,
                             "maxLength": 100000000,
@@ -181,6 +126,7 @@ var DBZ;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "decorationClass": "",
                             "permitCharactor": "",
                             "formatLength": "10"
                         },
@@ -202,6 +148,8 @@ var DBZ;
                             "marginLeft": "-0.2",
                             "marginRight": "XS",
                             "selectControlID": "txtJigyoshaName_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "required": false,
                             "maxLength": 100000000,
@@ -225,13 +173,14 @@ var DBZ;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "decorationClass": "",
                             "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtSendYM",
                             "items": [],
                             "controlType": "TextBoxDate",
-                            "width": "55",
+                            "width": "60",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -245,6 +194,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtSendYM_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "required": false,
                             "placeHolder": "",
@@ -259,7 +210,7 @@ var DBZ;
                             "value": "",
                             "labelLText": "送付年月",
                             "labelRText": "",
-                            "labelLWidth": "80",
+                            "labelLWidth": "105",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -285,6 +236,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtMoshitateshaKubun_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "required": false,
                             "maxLength": 100000000,
@@ -308,6 +261,7 @@ var DBZ;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "decorationClass": "",
                             "permitCharactor": ""
                         },
                         {
@@ -325,9 +279,11 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "XS",
+                            "marginLeft": "S",
                             "marginRight": "XS",
                             "selectControlID": "txtShokisaiHokenshaNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "required": false,
                             "maxLength": 100000000,
@@ -351,6 +307,7 @@ var DBZ;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "decorationClass": "",
                             "permitCharactor": "",
                             "formatLength": "6"
                         },
@@ -372,6 +329,8 @@ var DBZ;
                             "marginLeft": "-0.2",
                             "marginRight": "XS",
                             "selectControlID": "txtShokisaiHokenshaName_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "required": false,
                             "maxLength": 100000000,
@@ -395,6 +354,7 @@ var DBZ;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "decorationClass": "",
                             "permitCharactor": ""
                         },
                         {
@@ -415,6 +375,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtTeikyoYM_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "required": false,
                             "placeHolder": "",
@@ -441,7 +403,7 @@ var DBZ;
                             "fieldName": "txtKagoForm",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "505",
+                            "width": "510",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -455,6 +417,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtKagoForm_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "required": false,
                             "maxLength": 100000000,
@@ -478,6 +442,7 @@ var DBZ;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "decorationClass": "",
                             "permitCharactor": ""
                         },
                         {
@@ -498,8 +463,10 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtMoshitateDate_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": false,
-                            "required": true,
+                            "required": false,
                             "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,
@@ -538,7 +505,10 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "ddlKagoMoshitateRiyu_core",
-                            "required": true,
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
                             "onFocus": "",
                             "onBlur": "",
                             "onChange": "",
@@ -618,7 +588,8 @@ var DBZ;
                                     "key": "code99",
                                     "value": "99:その他の事由による実績の取下げ"
                                 }
-                            ]
+                            ],
+                            "disabledItem": []
                         },
                         {
                             "fieldName": "chkForDogetsuShinsa",
@@ -635,9 +606,12 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "S",
+                            "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "chkForDogetsuShinsa_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
                             "required": false,
                             "onChange": "",
                             "labelLText": "",
@@ -657,11 +631,13 @@ var DBZ;
                             "maxCheckedItem": 2,
                             "spaceSize": "M",
                             "isAllSelectable": false,
+                            "isAllSelectableBreakLine": false,
+                            "disabledItem": [],
                             "icon": []
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "815",
+                    "width": "800",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -675,6 +651,8 @@ var DBZ;
                     "marginLeft": "XS",
                     "marginRight": "XS",
                     "selectControlID": "KagoMoshitate",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onLoad": "",
                     "title": "過誤申立書情報",
                     "marginTop": "Default",
@@ -691,15 +669,13 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
                     "isGroupBox": false,
-                    "readOnly": false
+                    "readOnly": false,
+                    "height": "Auto"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -714,9 +690,11 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
             "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "KagoMoshitate",
@@ -725,38 +703,25 @@ var DBZ;
             "originalProperty": [
                 {
                     "publicChildFieldName": "KagoMoshitate",
-                    "publicChildProperty": "isGroupBox",
-                    "newPropertyName": "isGroupBox"
-                },
-                {
-                    "publicChildFieldName": "KagoMoshitate",
-                    "publicChildProperty": "eraseBorderTop",
-                    "newPropertyName": "eraseBorderTop"
-                },
-                {
-                    "publicChildFieldName": "KagoMoshitate",
-                    "publicChildProperty": "eraseBorderBottom",
-                    "newPropertyName": "eraseBorderBottom"
-                },
-                {
-                    "publicChildFieldName": "KagoMoshitate",
-                    "publicChildProperty": "eraseBorderRight",
-                    "newPropertyName": "eraseBorderRight"
-                },
-                {
-                    "publicChildFieldName": "KagoMoshitate",
-                    "publicChildProperty": "eraseBorderLeft",
-                    "newPropertyName": "eraseBorderLeft"
-                },
-                {
-                    "publicChildFieldName": "KagoMoshitate",
                     "publicChildProperty": "title",
                     "newPropertyName": "title"
+                },
+                {
+                    "publicChildFieldName": "KagoMoshitate",
+                    "publicChildProperty": "eraseBorder",
+                    "newPropertyName": "eraseBorder"
+                },
+                {
+                    "publicChildFieldName": "KagoMoshitate",
+                    "publicChildProperty": "panelDisplay",
+                    "newPropertyName": "panelDisplay"
                 }
             ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return KagoMoshitate_Design;
     })(Uz.CommonChildDiv);

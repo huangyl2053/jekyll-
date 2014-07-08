@@ -126,6 +126,7 @@
       }
      ],
      "onClick": "",
+     "icon": [],
      "selectedItems": [
       {
        "key": "isAllSelect",
@@ -146,8 +147,7 @@
      "spaceSize": 0,
      "isAllSelectable": false,
      "isAllSelectableBreakLine": false,
-     "disabledItem": [],
-     "icon": []
+     "disabledItem": []
     },
     {
      "fieldName": "KogakuShikyuKetteiTsuchiSakuseiListPanel",
@@ -464,11 +464,11 @@
      "jpControlName": "",
      "text": "通知書を作成する",
      "onClick": "onClick_btnCreate",
-     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],
@@ -589,13 +589,7 @@
     }
    ],
    "validation": {},
-   "events": [
-    {
-     "fieldName": "cbtCompleteElement1",
-     "event": "onClick",
-     "transition": "終了"
-    }
-   ]
+   "events": []
   }
  ],
  "currentState": "All",
@@ -632,50 +626,5 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": [
-  {
-   "commonButtonAreaId": "btnCompletEnd",
-   "buttonSetting": [
-    {
-     "buttonKind": "CommonButtonComplete",
-     "buttonProperty": {
-      "fieldName": "cbtCompleteElement1",
-      "items": [],
-      "controlType": "CommonButtonComplete",
-      "width": "S",
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "cbtCompleteElement1",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "完了",
-      "onClick": "",
-      "icon": 0,
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "heightTextBoxMatches": false,
-      "additionalText": "照会を"
-     }
-    }
-   ],
-   "states": [
-    {
-     "state": "作成"
-    }
-   ],
-   "isFinishButtonOnTheRight": false
-  }
- ]
+ "commonButtonAreaData": []
 }

@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格取得処理を行うDivControllerです。<br/>
@@ -401,7 +400,6 @@ public class JutokuTekiyoJoho {
                 new RString(Integer.toString(tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedRowId())));
         setJutokuTekiyoInput(tplShikakuJoho, tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedItem());
         setShikakuJohoDisabled(tplShikakuJoho, false);
-        tplShikakuJoho.getBtnUpdateShikaku().setText(new RString("修正内容を確定する"));
         response.data = jutokuTekiyoJohoDiv;
         return response;
     }
@@ -423,7 +421,6 @@ public class JutokuTekiyoJoho {
         setJutokuTekiyoInput(tplShikakuJoho, tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedItem());
         setShikakuJohoDisabled(tplShikakuJoho, true);
         tplShikakuJoho.getBtnUpdateShikaku().setDisabled(false);
-        tplShikakuJoho.getBtnUpdateShikaku().setText(new RString("削除内容を確定する"));
         response.data = jutokuTekiyoJohoDiv;
         return response;
     }
@@ -523,7 +520,6 @@ public class JutokuTekiyoJoho {
 
         jutokuTekiyoJohoDiv.setIryoHokenInputMode(IRYO_HOKEN_ADD);
         setIryoHokenDisabled(tplIryoHoken, false);
-        tplIryoHoken.getBtnUpdateIryoHoken().setText(new RString("追加内容を確定する"));
         clearIryoHokenInput(tplIryoHoken);
         response.data = jutokuTekiyoJohoDiv;
         return response;
@@ -545,7 +541,6 @@ public class JutokuTekiyoJoho {
         jutokuTekiyoJohoDiv.setIryoHokenSelectRow(new RString(Integer.toString(tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getClickedRowId())));
         setIryoHokenInput(tplIryoHoken, tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getClickedItem());
         setIryoHokenDisabled(tplIryoHoken, false);
-        tplIryoHoken.getBtnUpdateIryoHoken().setText(new RString("修正内容を確定する"));
         response.data = jutokuTekiyoJohoDiv;
         return response;
     }
@@ -567,7 +562,6 @@ public class JutokuTekiyoJoho {
         setIryoHokenInput(tplIryoHoken, tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getClickedItem());
         setIryoHokenDisabled(tplIryoHoken, true);
         tplIryoHoken.getBtnUpdateIryoHoken().setDisabled(false);
-        tplIryoHoken.getBtnUpdateIryoHoken().setText(new RString("削除内容を確定する"));
         response.data = jutokuTekiyoJohoDiv;
         return response;
     }

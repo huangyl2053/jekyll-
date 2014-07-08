@@ -6,10 +6,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinsaResetInfoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinsaResultDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinsaShinseiContentsDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * JutakuKaishuShinseiPanel のクラスファイル 
@@ -27,8 +26,8 @@ public class JutakuKaishuShinseiPanelDiv extends Panel {
     private JutakuKaishuShinsaShinseiContentsDiv JutakuKaishuShinsaShinseiContents;
     @JsonProperty("JutakuKaishuShinsaResetInfo")
     private JutakuKaishuShinsaResetInfoDiv JutakuKaishuShinsaResetInfo;
-    @JsonProperty("btnDummy")
-    private Button btnDummy;
+    @JsonProperty("JutakuKaishuShinsaResult")
+    private JutakuKaishuShinsaResultDiv JutakuKaishuShinsaResult;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -56,14 +55,14 @@ public class JutakuKaishuShinseiPanelDiv extends Panel {
         this.JutakuKaishuShinsaResetInfo=JutakuKaishuShinsaResetInfo;
     }
 
-    @JsonProperty("btnDummy")
-    public Button getBtnDummy() {
-        return btnDummy;
+    @JsonProperty("JutakuKaishuShinsaResult")
+    public JutakuKaishuShinsaResultDiv getJutakuKaishuShinsaResult() {
+        return JutakuKaishuShinsaResult;
     }
 
-    @JsonProperty("btnDummy")
-    public void setBtnDummy(Button btnDummy) {
-        this.btnDummy=btnDummy;
+    @JsonProperty("JutakuKaishuShinsaResult")
+    public void setJutakuKaishuShinsaResult(JutakuKaishuShinsaResultDiv JutakuKaishuShinsaResult) {
+        this.JutakuKaishuShinsaResult=JutakuKaishuShinsaResult;
     }
 
 }

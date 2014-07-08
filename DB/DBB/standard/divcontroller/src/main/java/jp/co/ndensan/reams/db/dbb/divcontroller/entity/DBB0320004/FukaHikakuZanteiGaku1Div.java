@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0030011;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320004;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -10,21 +10,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KanshoTsuchiHakkoPanel のクラスファイル 
+ * FukaHikakuZanteiGaku1 のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KanshoTsuchiHakkoPanelDiv extends Panel {
+public class FukaHikakuZanteiGaku1Div extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtHakkoDate")
-    private TextBoxDate txtHakkoDate;
-    @JsonProperty("btnHakko")
-    private Button btnHakko;
+    @JsonProperty("txtGemmenGaku1")
+    private TextBox txtGemmenGaku1;
+    @JsonProperty("txtZanteiGoukeiGaku1")
+    private TextBox txtZanteiGoukeiGaku1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +32,24 @@ public class KanshoTsuchiHakkoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtHakkoDate")
-    public TextBoxDate getTxtHakkoDate() {
-        return txtHakkoDate;
+    @JsonProperty("txtGemmenGaku1")
+    public TextBox getTxtGemmenGaku1() {
+        return txtGemmenGaku1;
     }
 
-    @JsonProperty("txtHakkoDate")
-    public void setTxtHakkoDate(TextBoxDate txtHakkoDate) {
-        this.txtHakkoDate=txtHakkoDate;
+    @JsonProperty("txtGemmenGaku1")
+    public void setTxtGemmenGaku1(TextBox txtGemmenGaku1) {
+        this.txtGemmenGaku1=txtGemmenGaku1;
     }
 
-    @JsonProperty("btnHakko")
-    public Button getBtnHakko() {
-        return btnHakko;
+    @JsonProperty("txtZanteiGoukeiGaku1")
+    public TextBox getTxtZanteiGoukeiGaku1() {
+        return txtZanteiGoukeiGaku1;
     }
 
-    @JsonProperty("btnHakko")
-    public void setBtnHakko(Button btnHakko) {
-        this.btnHakko=btnHakko;
+    @JsonProperty("txtZanteiGoukeiGaku1")
+    public void setTxtZanteiGoukeiGaku1(TextBox txtZanteiGoukeiGaku1) {
+        this.txtZanteiGoukeiGaku1=txtZanteiGoukeiGaku1;
     }
 
 }

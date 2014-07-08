@@ -316,6 +316,20 @@ module DBZ {
             }
         }
         
+        public get txtSetaiIchiranKazeiNendoDisplayNone() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"];
+        }
+        
+        public set txtSetaiIchiranKazeiNendoDisplayNone(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"] = value;
+            } else {
+                this.layout.items[0].items[1]["displayNone"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, SetaiShotokuIchiran_Design.myLayout, fieldName);
         }
@@ -348,6 +362,7 @@ module DBZ {
             Uz.JSControlUtil.registProperty("btnSaihyojiDisplayNone");
             Uz.JSControlUtil.registProperty("lblKijunYMDMsgVisible");
             Uz.JSControlUtil.registProperty("lblKijunYMDMsgDisplayNone");
+            Uz.JSControlUtil.registProperty("txtSetaiIchiranKazeiNendoDisplayNone");
         }
         
         /**
@@ -379,6 +394,7 @@ module DBZ {
             editablePropertyInfo["btnSaihyojiDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["lblKijunYMDMsgVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["visible"];
             editablePropertyInfo["lblKijunYMDMsgDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["txtSetaiIchiranKazeiNendoDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             
             return editablePropertyInfo;
         }
@@ -418,16 +434,16 @@ module DBZ {
      "onChange": "",
      "onKeyPress": "",
      "text": "",
+     "value": "",
      "labelLText": "基準日",
      "labelRText": "",
      "labelLWidth": "50",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "txtSetaiIchiranKazeiNendo",
@@ -451,27 +467,27 @@ module DBZ {
      "jpControlName": "",
      "readOnly": true,
      "required": false,
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
      "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
      "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "住民税課税年度",
      "labelRText": "",
      "labelLWidth": "115",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 0,
-     "isComboBox": false,
-     "suggest": [],
      "decorationClass": "",
      "permitCharactor": ""
     },
@@ -505,13 +521,13 @@ module DBZ {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "selectedItem": "key0",
      "dataSource": [
       {
        "key": "key0",
        "value": "平26"
       }
      ],
+     "selectedItem": "key0",
      "disabledItem": []
     },
     {
@@ -565,30 +581,30 @@ module DBZ {
      "jpControlName": "",
      "readOnly": true,
      "required": false,
+     "maxLength": "15",
+     "minLength": 0,
+     "textAlign": 0,
      "placeHolder": "",
+     "textKind": 2,
      "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
      "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "世帯コード",
      "labelRText": "",
      "labelLWidth": "85",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 2,
-     "isComboBox": false,
-     "suggest": [],
      "decorationClass": "",
      "permitCharactor": "",
-     "formatLength": 1
+     "formatLength": "15"
     },
     {
      "fieldName": "chkSetaiIchiranAll",
@@ -615,15 +631,15 @@ module DBZ {
      "labelLText": "",
      "labelLWidth": "S",
      "labelLAlign": 2,
-     "selectedItem": null,
+     "onClick": "",
+     "icon": [],
      "dataSource": [
       {
        "key": "key0",
        "value": "最新の世帯員を表示する"
       }
      ],
-     "onClick": "",
-     "icon": [],
+     "selectedItem": null,
      "selectedItems": [],
      "newLineItemNumber": 1,
      "minCheckedItem": 0,
@@ -710,8 +726,6 @@ module DBZ {
      "jpControlName": "",
      "readOnly": false,
      "height": "Auto",
-     "dataSource": [],
-     "selectedItems": [],
      "gridSetting": {
       "rowHeight": 40,
       "isMultiSelectable": true,
@@ -1162,10 +1176,12 @@ module DBZ {
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
+     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
-     "activeRowId": -1
+     "activeRowId": -1,
+     "selectedItems": []
     }
    ],
    "controlType": "Panel",
@@ -1342,6 +1358,11 @@ module DBZ {
    "publicChildFieldName": "lblSetaiIchiranMsg",
    "publicChildProperty": "displayNone",
    "newPropertyName": "lblKijunYMDMsgDisplayNone"
+  },
+  {
+   "publicChildFieldName": "txtSetaiIchiranKazeiNendo",
+   "publicChildProperty": "displayNone",
+   "newPropertyName": "txtSetaiIchiranKazeiNendoDisplayNone"
   }
  ],
  "dataPassingForDialog": [],

@@ -109,8 +109,8 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "審査結果登録完了",
-   "showWizard": true,
+   "stateName": "審査結果更新完了",
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KanryoMessage",
@@ -126,10 +126,16 @@
    "supplementInfo": "",
    "supplementInfoPostParamData": [],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": "終了"
+    }
+   ]
   }
  ],
- "currentState": "All",
+ "currentState": "審査結果更新完了",
  "id": "DBC0720013",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -150,52 +156,5 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": [
-  {
-   "commonButtonAreaId": "save",
-   "buttonSetting": [
-    {
-     "buttonKind": "CommonButtonUpdate",
-     "buttonProperty": {
-      "fieldName": "btnSave",
-      "items": [],
-      "controlType": "CommonButtonUpdate",
-      "width": 1,
-      "visible": true,
-      "displayNone": false,
-      "disabled": true,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnSave",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "onClick": "onClick_btnSave",
-      "text": "更新",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": "審査内容を"
-     }
-    }
-   ],
-   "states": [
-    {
-     "state": "申請審査"
-    }
-   ],
-   "isFinishButtonOnTheRight": false,
-   "FinishButtonVisible": false,
-   "SuspendButtonVisible": false
-  }
- ]
+ "commonButtonAreaData": []
 }

@@ -24,11 +24,11 @@
      "selectControlID": "lblHonsanteiKakuteiMsg",
      "helpMessageID": "",
      "jpControlName": "",
-     "required": false,
-     "align": 0,
      "text": "本算定賦課処理の結果を確定します。",
+     "required": false,
      "isPrivateInfo": false,
-     "decorationClass": ""
+     "decorationClass": "",
+     "align": 0
     },
     {
      "fieldName": "HonsanteiShoriNichiji",
@@ -54,15 +54,14 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
-       "required": false,
        "text": "",
-       "isPrivateInfo": false,
-       "decorationClass": "",
+       "required": false,
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "placeHolder": "平26",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -77,6 +76,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "decorationClass": "",
        "permitCharactor": ""
       },
       {
@@ -100,15 +100,14 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
-       "required": false,
        "text": "",
-       "isPrivateInfo": false,
-       "decorationClass": "",
+       "required": false,
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "placeHolder": "平26.06.01 00：00：00",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -123,6 +122,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "decorationClass": "",
        "permitCharactor": ""
       }
      ],
@@ -165,11 +165,7 @@
      "panelDisplay": 1,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false
+     "height": "Auto"
     }
    ],
    "controlType": "Panel",
@@ -216,11 +212,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -307,16 +299,16 @@
       "selectControlID": "btnHonsanteiKakutei",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "算定結果を確定する",
       "onClick": "",
+      "text": "確定",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "icon": 1,
+      "icon": 0,
       "heightTextBoxMatches": false,
       "prefixText": "",
-      "suffixText": ""
+      "suffixText": "する"
      }
     }
    ],
@@ -325,7 +317,9 @@
      "state": "初期"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

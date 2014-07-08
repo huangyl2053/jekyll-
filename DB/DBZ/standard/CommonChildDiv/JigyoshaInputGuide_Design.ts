@@ -57,8 +57,8 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
-     "selectedItem": null,
+     "onClick": "",
+     "icon": [],
      "dataSource": [
       {
        "key": "keyJigyosha",
@@ -77,26 +77,15 @@ module DBZ {
        "value": "事業者コード内訳検索"
       }
      ],
+     "onChange": "",
+     "selectedItem": null,
      "required": false,
-<<<<<<< HEAD
      "labelLText": "",
      "labelLWidth": "S",
      "labelLAlign": 2,
-     "onClick": "",
-     "icon": [],
      "newLineItemNumber": 4,
      "spaceSize": "M",
      "disabledItem": []
-=======
-     "onClick": "",
-     "newLineItemNumber": 4,
-     "spaceSize": "M",
-     "labelLText": "",
-     "labelLWidth": "S",
-     "labelLAlign": 2,
-     "disabledItem": [],
-     "icon": []
->>>>>>> feature/UI-KyufuKanri-37343
     },
     {
      "fieldName": "txtJigyoshaCode",
@@ -119,6 +108,7 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "text": "",
      "onChange": "",
      "required": false,
      "labelLText": "事業者コード",
@@ -126,43 +116,28 @@ module DBZ {
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
-<<<<<<< HEAD
      "labelRAlign": 0,
      "onFocus": "",
      "onBlur": "",
-     "text": "",
-=======
->>>>>>> feature/UI-KyufuKanri-37343
+     "placeHolder": "",
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onKeyPress": "",
+     "value": "",
+     "decorationClass": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "placeHolder": "",
      "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
      "isComboBox": false,
-     "onKeyPress": "",
      "suggest": [],
-     "value": "",
-<<<<<<< HEAD
-     "decorationClass": "",
      "permitCharactor": ""
-=======
-     "labelRText": "※前方一致",
-     "labelRWidth": "S",
-     "labelRAlign": 0,
-     "decorationClass": ""
->>>>>>> feature/UI-KyufuKanri-37343
     },
     {
      "fieldName": "btnSearchJigyosha",
      "items": [],
      "controlType": "Button",
-<<<<<<< HEAD
      "width": "145",
-=======
-     "width": "200",
->>>>>>> feature/UI-KyufuKanri-37343
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -179,20 +154,12 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "onClick": "onClick_btnSearchJigyosha",
-<<<<<<< HEAD
      "text": "事業者を表示する",
-=======
-     "icon": 0,
-     "text": "該当する事業者を表示する",
->>>>>>> feature/UI-KyufuKanri-37343
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-<<<<<<< HEAD
      "icon": 0,
-=======
->>>>>>> feature/UI-KyufuKanri-37343
      "heightTextBoxMatches": false
     },
     {
@@ -220,7 +187,6 @@ module DBZ {
        "jpControlName": "",
        "readOnly": false,
        "height": "S",
-       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -386,6 +352,7 @@ module DBZ {
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "service",
        "isAscending": true,
        "filterList": [],
@@ -393,11 +360,7 @@ module DBZ {
       }
      ],
      "controlType": "Panel",
-<<<<<<< HEAD
      "width": "1075",
-=======
-     "width": "1135",
->>>>>>> feature/UI-KyufuKanri-37343
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -408,13 +371,8 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-<<<<<<< HEAD
      "marginLeft": "0",
      "marginRight": "0",
-=======
-     "marginLeft": "XS",
-     "marginRight": "XS",
->>>>>>> feature/UI-KyufuKanri-37343
      "selectControlID": "SearchResultJigyosha",
      "helpMessageID": "",
      "jpControlName": "",
@@ -446,11 +404,7 @@ module DBZ {
      "fieldName": "btnKaigoHokenShisetsuReturn",
      "items": [],
      "controlType": "Button",
-<<<<<<< HEAD
      "width": "145",
-=======
-     "width": "200",
->>>>>>> feature/UI-KyufuKanri-37343
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -467,29 +421,17 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "onClick": "onClick_btnKaigoHokenShisetsuReturn",
-<<<<<<< HEAD
      "text": "閉じる",
-=======
-     "icon": 0,
-     "text": "事業者入力ガイドを閉じる",
->>>>>>> feature/UI-KyufuKanri-37343
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-<<<<<<< HEAD
      "icon": 0,
-=======
->>>>>>> feature/UI-KyufuKanri-37343
      "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
-<<<<<<< HEAD
    "width": "1080",
-=======
-   "width": "1145",
->>>>>>> feature/UI-KyufuKanri-37343
    "visible": true,
    "displayNone": false,
    "disabled": false,

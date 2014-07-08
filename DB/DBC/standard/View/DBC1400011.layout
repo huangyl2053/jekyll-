@@ -25,30 +25,30 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "required": false,
+     "maxLength": "10",
+     "minLength": 0,
+     "textAlign": 0,
+     "placeHolder": "",
+     "textKind": 2,
      "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "permitCharactor": "",
+     "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "事業者",
      "labelRText": "",
      "labelLWidth": "70",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "required": true,
-     "maxLength": "10",
-     "minLength": 0,
-     "textAlign": 0,
-     "placeHolder": "",
-     "textKind": 2,
-     "isComboBox": false,
-     "text": "",
-     "suggest": [],
-     "value": "",
      "decorationClass": "",
+     "permitCharactor": "",
      "formatLength": "10"
     },
     {
@@ -74,11 +74,11 @@
      "text": "ButtonDialog1",
      "onClick": "",
      "appearance": 2,
-     "imageFileUrl": "/uz/uza/css/rireki_brue.png",
+     "imageFileUrl": "/uz/uza/image/UZ_Search.png",
      "imageWidth": "20",
      "imageHeight": "15",
      "icon": 0,
-     "heightTextBoxMatches": false,
+     "heightTextBoxMatches": true,
      "displayChildDivName": "DBZ.JigyoshaInputGuide",
      "dataPassing": [
       {
@@ -115,30 +115,30 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "permitCharactor": "",
-     "labelLText": "",
-     "labelRText": "",
-     "labelLWidth": "S",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
+     "isPassword": false,
      "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
      "text": "",
      "suggest": [],
      "value": "",
-     "decorationClass": ""
+     "labelLText": "",
+     "labelRText": "",
+     "labelLWidth": "S",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtHihoNo",
@@ -161,30 +161,30 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "permitCharactor": "",
-     "labelLText": "被保番号",
-     "labelRText": "",
-     "labelLWidth": "70",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
      "required": false,
      "maxLength": "10",
      "minLength": 0,
      "textAlign": 0,
      "placeHolder": "",
      "textKind": 2,
+     "isPrivateInfo": false,
+     "isPassword": false,
      "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
      "text": "",
      "suggest": [],
      "value": "",
+     "labelLText": "被保番号",
+     "labelRText": "",
+     "labelLWidth": "70",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
      "decorationClass": "",
+     "permitCharactor": "",
      "formatLength": "10"
     },
     {
@@ -210,11 +210,11 @@
      "text": "ButtonDialog2",
      "onClick": "",
      "appearance": 2,
-     "imageFileUrl": "/uz/uza/css/rireki_brue.png",
+     "imageFileUrl": "/uz/uza/image/UZ_Search.png",
      "imageWidth": "20",
      "imageHeight": "15",
      "icon": 0,
-     "heightTextBoxMatches": false,
+     "heightTextBoxMatches": true,
      "displayChildDivName": "DBZ.HihokenshaInputGuide",
      "dataPassing": [
       {
@@ -251,30 +251,30 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "permitCharactor": "",
-     "labelLText": "",
-     "labelRText": "",
-     "labelLWidth": "S",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
+     "isPassword": false,
      "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
      "text": "",
      "suggest": [],
      "value": "",
-     "decorationClass": ""
+     "labelLText": "",
+     "labelRText": "",
+     "labelLWidth": "S",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtTeikyoYMRange",
@@ -303,10 +303,16 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "labelLText": "提供年月",
+     "labelRText": "",
+     "labelLWidth": "70",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
      "permitCharactor": "",
-     "fromRequired": true,
+     "fromRequired": false,
      "fromPlaceHolder": "",
-     "toRequired": true,
+     "toRequired": false,
      "toPlaceHolder": "",
      "ymdKubun": 1,
      "displayFormat": 0,
@@ -316,12 +322,6 @@
      "toText": "",
      "fromValue": "",
      "toValue": "",
-     "labelLText": "提供年月",
-     "labelRText": "",
-     "labelLWidth": "70",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
      "fromSelectControlID": "txtTeikyoYMRangeFrom",
      "toSelectControlID": "txtTeikyoYMRangeTo"
     },
@@ -346,6 +346,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "required": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -355,7 +356,6 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "required": false,
      "selectedItem": "key0",
      "dataSource": [
       {
@@ -430,8 +430,8 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "0",
-   "marginBottom": "0",
+   "marginTop": "Default",
+   "marginBottom": "Default",
    "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
@@ -439,11 +439,7 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "focusPositionID": "restoreLayoutButton",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "focusPositionID": "restoreLayoutButton"
   },
   {
    "fieldName": "KyufuJissekiGaitoshaListPanel",
@@ -469,7 +465,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "M",
+     "height": "410",
      "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
@@ -689,89 +685,10 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "sortOrder": "txtKyufuJissekiSakuseiKubun",
+     "sortOrder": "txtKagoForm",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
-    },
-    {
-     "fieldName": "KyotsuSearchToKyufujissekiPanel",
-     "items": [
-      {
-       "fieldName": "btnSave",
-       "items": [],
-       "controlType": "Button",
-       "width": "M",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnSave",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "text": "過誤申立情報を保存する",
-       "onClick": "onClick_btnSave",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0,
-       "heightTextBoxMatches": false
-      }
-     ],
-     "controlType": "Panel",
-     "width": "1112",
-     "visible": false,
-     "displayNone": true,
-     "disabled": true,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "KyotsuSearchToKyufujissekiPanel",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "onLoad": "",
-     "title": "",
-     "isOpen": true,
-     "canOpenAndClose": true,
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "KyotsuSearchToKyufujissekiPanel"
-      }
-     ],
-     "requestSettings": [],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "0",
-     "marginBottom": "0",
-     "eraseBorder": true,
-     "backgroundColor": 0,
-     "widthAuto": false,
-     "panelDisplay": 0,
-     "isGroupBox": false,
-     "readOnly": false,
-     "height": "XS",
-     "focusPositionID": "restoreLayoutButton",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true
     }
    ],
    "controlType": "Panel",
@@ -825,8 +742,8 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "0",
-   "marginBottom": "0",
+   "marginTop": "Default",
+   "marginBottom": "Default",
    "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
@@ -834,11 +751,7 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "focusPositionID": "restoreLayoutButton",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "focusPositionID": "restoreLayoutButton"
   },
   {
    "fieldName": "KagoMoshitatePanel",
@@ -904,7 +817,7 @@
      "btnEltax_displayNone": false,
      "btnShiyoJokyo_displayNone": false,
      "btnAtesakiKakunin_displayNone": false,
-     "SubGyomuCode": "",
+     "SubGyomuCode": "DBC",
      "JukiYusennKubun": "1",
      "AgeArrivalDay": "1",
      "SubGyomuUmu": "0",
@@ -949,6 +862,26 @@
      "btnNinteiRireki_visible": true
     },
     {
+     "fieldName": "hl",
+     "items": [],
+     "controlType": "HorizontalLine",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "hl",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "size": "Default"
+    },
+    {
      "fieldName": "KagoMoshitateInfo",
      "items": [],
      "controlType": "CommonChildDiv",
@@ -972,6 +905,8 @@
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
+     "eraseBorder": true,
+     "panelDisplay": 0,
      "isGroupBox": false,
      "businessId": "DBZ",
      "controlName": "KagoMoshitate",
@@ -979,11 +914,7 @@
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
-     "heightForDialog": "M",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true
+     "heightForDialog": "M"
     },
     {
      "fieldName": "btnSettle",
@@ -1064,7 +995,7 @@
    "onLoad": "",
    "title": "過誤申立書情報",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "KagoMoshitatePanel"
@@ -1096,11 +1027,7 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "focusPositionID": "restoreLayoutButton",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false
+   "focusPositionID": "restoreLayoutButton"
   },
   {
    "fieldName": "KagoMoshitatecCommonKiagoKanryoMegPanel",
@@ -1217,8 +1144,8 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "検索・一覧",
-   "showWizard": true,
+   "stateName": "検索",
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "SearchToKyufujissekiPanel",
@@ -1227,13 +1154,8 @@
     },
     {
      "visibleDiv": "KyufuJissekiGaitoshaListPanel",
-     "panelState": "visible",
+     "panelState": "close",
      "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KyotsuSearchToKyufujissekiPanel",
-     "panelState": "visible",
-     "fixedDiv": ""
     }
    ],
    "validation": {
@@ -1254,24 +1176,71 @@
     {
      "fieldName": "dgHihokenshaSearchGaitosha",
      "event": "onSelectBySelectButton",
-     "transition": "申請登録"
-    },
-    {
-     "fieldName": "GaitoshaListElement1",
-     "event": "onClick",
      "transition": ""
     },
     {
      "fieldName": "cbtSaveElement1",
      "event": "onClick",
-     "transition": "申請結果"
+     "transition": ""
+    },
+    {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": "一覧"
     }
    ]
   },
   {
    "order": "2",
+   "stateName": "一覧",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "SearchToKyufujissekiPanel",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyufuJissekiGaitoshaListPanel",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnSettle",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgHihokenshaSearchGaitosha",
+     "event": "onSelectBySelectButton",
+     "transition": "申請登録"
+    },
+    {
+     "fieldName": "cbtSaveElement1",
+     "event": "onClick",
+     "transition": "申請結果"
+    },
+    {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "3",
    "stateName": "申請登録",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KagoMoshitatePanel",
@@ -1299,12 +1268,12 @@
     {
      "fieldName": "btnCancel",
      "event": "onClick",
-     "transition": "検索・一覧"
+     "transition": "一覧"
     },
     {
      "fieldName": "btnSettle",
      "event": "onClick",
-     "transition": "検索・一覧"
+     "transition": "一覧"
     },
     {
      "fieldName": "dgHihokenshaSearchGaitosha",
@@ -1312,21 +1281,21 @@
      "transition": ""
     },
     {
-     "fieldName": "GaitoshaListElement1",
+     "fieldName": "cbtSaveElement1",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "cbtSaveElement1",
+     "fieldName": "btnSearch",
      "event": "onClick",
      "transition": ""
     }
    ]
   },
   {
-   "order": "3",
+   "order": "4",
    "stateName": "申請結果",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "KagoMoshitatecCommonKiagoKanryoMegPanel",
@@ -1359,12 +1328,12 @@
      "transition": ""
     },
     {
-     "fieldName": "GaitoshaListElement1",
+     "fieldName": "cbtSaveElement1",
      "event": "onClick",
-     "transition": "終了"
+     "transition": ""
     },
     {
-     "fieldName": "cbtSaveElement1",
+     "fieldName": "btnSearch",
      "event": "onClick",
      "transition": ""
     }
@@ -1381,9 +1350,6 @@
    "KyufuJissekiGaitoshaListPanel",
    "KagoMoshitatecCommonKiagoKanryoMegPanel",
    "KagoMoshitatePanel"
-  ],
-  [
-   "KyotsuSearchToKyufujissekiPanel"
   ],
   [
    "CommonKaigpAtenainfoChildDiv1"
@@ -1404,52 +1370,6 @@
  "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "GaitoshaListId",
-   "buttonSetting": [
-    {
-     "buttonKind": "CommonButtonComplete",
-     "buttonProperty": {
-      "fieldName": "GaitoshaListElement1",
-      "items": [],
-      "controlType": "CommonButtonNext",
-      "width": 2,
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "GaitoshaListElement1",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "戻る",
-      "onClick": "",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": "照会を"
-     }
-    }
-   ],
-   "states": [
-    {
-     "state": "申請結果"
-    }
-   ],
-   "isFinishButtonOnTheRight": false,
-   "FinishButtonVisible": false,
-   "SuspendButtonVisible": false
-  },
-  {
    "commonButtonAreaId": "btnSave",
    "buttonSetting": [
     {
@@ -1458,7 +1378,7 @@
       "fieldName": "cbtSaveElement1",
       "items": [],
       "controlType": "CommonButtonComplete",
-      "width": 2,
+      "width": 0,
       "visible": true,
       "displayNone": false,
       "disabled": true,
@@ -1482,13 +1402,13 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "過誤申立情報を"
+      "additionalText": ""
      }
     }
    ],
    "states": [
     {
-     "state": "検索・一覧"
+     "state": "一覧"
     }
    ],
    "isFinishButtonOnTheRight": false,

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
 
 import java.util.ArrayList;
@@ -25,123 +24,107 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author n3412
  */
 public class FukaShokaiGrandsonTsuchisho {
-    private static final RString KOBETSU_HAKKO_FUKAKONKYO = new RString("tblKobetsuHakkoFukakonkyo.yml");
-    private static final RString KOBETSU_HAKKO_KIWARIGAKU = new RString("tblKobetsuHakkoKiwariGaku.yml");
-    private static final RString CHOTEI_JIYU = new RString("ChoteiJiyu.yml");
-    private static final List< List<RString> > konkyo = new ArrayList<>();
-    private static final List< List<RString> > kiwarigaku = new ArrayList<>();
-    private static final List< List<RString> > jiyu = new ArrayList<>();
-    
+
+    private static final RString KOBETSU_HAKKO_FUKAKONKYO = new RString("DBB8110001/tblKobetsuHakkoFukakonkyo.yml");
+    private static final RString KOBETSU_HAKKO_KIWARIGAKU = new RString("DBB8110001/tblKobetsuHakkoKiwariGaku.yml");
+    private static final RString CHOTEI_JIYU = new RString("DBB8110001/ChoteiJiyu.yml");
+    private static final List< List<RString>> konkyo = new ArrayList<>();
+    private static final List< List<RString>> kiwarigaku = new ArrayList<>();
+    private static final List< List<RString>> jiyu = new ArrayList<>();
+
     public ResponseData<FukaShokaiGrandsonTsuchishoDiv> onLoad_FukaShokaiGrandsonTsuchisho(FukaShokaiGrandsonTsuchishoDiv panel, JuminFukaShokaiDiv div) {
         ResponseData<FukaShokaiGrandsonTsuchishoDiv> response = new ResponseData<>();
         jiyu.clear();
         konkyo.clear();
         kiwarigaku.clear();
-        
+
         //staticメンバにYamlデータ登録
         set_jiyu();
         set_konkyo();
         set_kiwarigaku();
-        
+
         panel.getTxtChoteiNendo().setValue(new RString("平26"));
         panel.getTxtFukaNendo().setValue(new RString("平26"));
         panel.getTxtKoseiYMD().setValue(konkyo.get(0).get(11));
         panel.getTxtKoseiM().setValue(konkyo.get(0).get(12));
 
-        
         set_radKobetsuHakkoChoteiJiyu(panel.getKobetsuHakkoChoteiJiyu());
         setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 0);
         setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
         setAto_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 0);
         setMae_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
-        
-        
+
         response.data = panel;
         return response;
     }
- 
-    public void set_radKobetsuHakkoChoteiJiyu(KobetsuHakkoChoteiJiyuDiv div) {       
+
+    public void set_radKobetsuHakkoChoteiJiyu(KobetsuHakkoChoteiJiyuDiv div) {
         div.getTxtChoteiJiyu1().setValue(jiyu.get(0).get(0));
         div.getTxtChoteiJiyu2().setValue(jiyu.get(0).get(1));
         div.getTxtChoteiJiyu3().setValue(RString.EMPTY);
-        div.getTxtChoteiJiyu4().setValue(RString.EMPTY);        
-    }      
-    
+        div.getTxtChoteiJiyu4().setValue(RString.EMPTY);
+    }
+
     public ResponseData<FukaShokaiGrandsonTsuchishoDiv> onChange_radKobetsuHakkoChoteiJiyu(FukaShokaiGrandsonTsuchishoDiv panel, JuminFukaShokaiDiv div) {
         ResponseData<FukaShokaiGrandsonTsuchishoDiv> response = new ResponseData<>();
-        
-        if( panel.getKobetsuHakkoChoteiJiyu().getRadKobetsuHakkoChoteiJiyu().getSelectedItem().contains("0") ){
+
+        if (panel.getKobetsuHakkoChoteiJiyu().getRadKobetsuHakkoChoteiJiyu().getSelectedItem().contains("0")) {
             panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setDisabled(true);
             panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu2().setDisabled(true);
             panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu3().setDisabled(true);
             panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu4().setDisabled(true);
             //内容を初期状態に戻す
             set_radKobetsuHakkoChoteiJiyu(panel.getKobetsuHakkoChoteiJiyu());
-        }else{
+        } else {
             panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu1().setDisabled(false);
             panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu2().setDisabled(false);
             panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu3().setDisabled(false);
-            panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu4().setDisabled(false);            
+            panel.getKobetsuHakkoChoteiJiyu().getTxtChoteiJiyu4().setDisabled(false);
         }
-        
+
         response.data = panel;
         return response;
-    }  
-    
+    }
+
     public ResponseData<FukaShokaiGrandsonTsuchishoDiv> onChange_ddlInjiKouseiAto(FukaShokaiGrandsonTsuchishoDiv panel, JuminFukaShokaiDiv div) {
         ResponseData<FukaShokaiGrandsonTsuchishoDiv> response = new ResponseData<>();
-        
+
         RString key = panel.getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto().getSelectedItem();
-        if( key.contains("0") ){
+        if (key.contains("0")) {
             setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 0);
-            setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
-            setAto_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 0);
-            setMae_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
-            panel.getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setSelectedItem(new RString("key0"));
-        }else if( key.contains("1") ){
+            setAto_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 0);
+        } else if (key.contains("1")) {
             setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
-            setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 2);
-            setAto_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
-            setMae_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 2);
-            panel.getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setSelectedItem(new RString("key1"));
-        }else{
+            setAto_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
+        } else {
             setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 2);
-            setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo());
-            setAto_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 2);
-            setMae_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku());
-            panel.getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().setSelectedItem(new RString("key2"));
+            setAto_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 2);
         }
-               
+
         response.data = panel;
         return response;
     }
 
     public ResponseData<FukaShokaiGrandsonTsuchishoDiv> onChange_ddlInjiKouseiMae(FukaShokaiGrandsonTsuchishoDiv panel, JuminFukaShokaiDiv div) {
         ResponseData<FukaShokaiGrandsonTsuchishoDiv> response = new ResponseData<>();
-        
+
         RString key = panel.getKobetsuHakkoZengoSentaku().getDdlInjiKouseiMae().getSelectedItem();
-        if( key.contains("0") ){
-            setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 0);
+        if (key.contains("0")) {
             setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
-            setAto_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 0);
-            setMae_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
-            panel.getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto().setSelectedItem(new RString("key0"));
-        }else if( key.contains("1") ){
-            setAto_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 1);
+            setMae_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
+        } else if (key.contains("1")) {
             setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo(), 2);
-            setAto_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 1);
-            setMae_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 2);
-            panel.getKobetsuHakkoZengoSentaku().getDdlInjiKouseiAto().setSelectedItem(new RString("key1"));
-        }else{
+            setMae_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku(), 2);
+        } else {
             setMae_TblKobetsuHakkoFukakonkyo(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoFukakonkyo());
-            setMae_TblKobetsuHakkoKiwariGaku (panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku());
-        }       
-        
+            setMae_TblKobetsuHakkoKiwariGaku(panel.getKobetsuHakkoZengoSentaku().getTblKobetsuHakkoKiwariGaku());
+        }
+
         response.data = panel;
         return response;
-    }    
-    
-    private void set_jiyu(){
+    }
+
+    private void set_jiyu() {
         List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(CHOTEI_JIYU);
         for (Iterator<HashMap> it = demoDataList.iterator(); it.hasNext();) {
             HashMap demoData = it.next();
@@ -149,13 +132,13 @@ public class FukaShokaiGrandsonTsuchisho {
             List<RString> k = new ArrayList<>();
             k.clear();
             k.add(cg.getAsRString("事由1"));
-            k.add(cg.getAsRString("事由2"));     
-            
+            k.add(cg.getAsRString("事由2"));
+
             jiyu.add(k);
-        }          
+        }
     }
-    
-    private void set_konkyo(){
+
+    private void set_konkyo() {
         List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(KOBETSU_HAKKO_FUKAKONKYO);
         //List<RString> k = new ArrayList<>();
         for (Iterator<HashMap> it = demoDataList.iterator(); it.hasNext();) {
@@ -177,13 +160,13 @@ public class FukaShokaiGrandsonTsuchisho {
             k.add(cg.getAsRString("更正日時"));
             k.add(cg.getAsRString("更正月"));
             konkyo.add(k);
-        } 
+        }
     }
-    
-    private void set_kiwarigaku(){
+
+    private void set_kiwarigaku() {
         List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(KOBETSU_HAKKO_KIWARIGAKU);
         for (Iterator<HashMap> it = demoDataList.iterator(); it.hasNext();) {
-           // コンストラクタにMapを渡して生成。
+            // コンストラクタにMapを渡して生成。
             HashMap demoData = it.next();
             ControlGenerator cg = new ControlGenerator(demoData);
             List<RString> k = new ArrayList<>();
@@ -205,10 +188,10 @@ public class FukaShokaiGrandsonTsuchisho {
             k.add(cg.getAsRString("普9"));
             k.add(cg.getAsRString("普10"));
             kiwarigaku.add(k);
-        }          
+        }
     }
-    
-    private void setAto_TblKobetsuHakkoFukakonkyo (tblKobetsuHakkoFukakonkyoDiv tbl, int n) {     
+
+    private void setAto_TblKobetsuHakkoFukakonkyo(tblKobetsuHakkoFukakonkyoDiv tbl, int n) {
         tbl.getLblFukankonkyoAto1().setText(konkyo.get(n).get(0));
         tbl.getLblFukankonkyoAto2().setText(konkyo.get(n).get(1));
         tbl.getLblFukankonkyoAto3().setText(konkyo.get(n).get(2));
@@ -218,10 +201,10 @@ public class FukaShokaiGrandsonTsuchisho {
         tbl.getLblFukankonkyoAto11().setText(konkyo.get(n).get(6));
         tbl.getLblFukankonkyoAto12().setText(konkyo.get(n).get(7));
         tbl.getLblFukankonkyoAto13().setText(konkyo.get(n).get(8));
-        tbl.getLblFukankonkyoAto14().setText(konkyo.get(n).get(9));             
+        tbl.getLblFukankonkyoAto14().setText(konkyo.get(n).get(9));
     }
-    
-    private void setMae_TblKobetsuHakkoFukakonkyo (tblKobetsuHakkoFukakonkyoDiv tbl, int n) {            
+
+    private void setMae_TblKobetsuHakkoFukakonkyo(tblKobetsuHakkoFukakonkyoDiv tbl, int n) {
         tbl.getLblFukankonkyoMae1().setText(konkyo.get(n).get(0));
         tbl.getLblFukankonkyoMae2().setText(konkyo.get(n).get(1));
         tbl.getLblFukankonkyoMae3().setText(konkyo.get(n).get(2));
@@ -231,10 +214,10 @@ public class FukaShokaiGrandsonTsuchisho {
         tbl.getLblFukankonkyoMae11().setText(konkyo.get(n).get(6));
         tbl.getLblFukankonkyoMae12().setText(konkyo.get(n).get(7));
         tbl.getLblFukankonkyoMae13().setText(konkyo.get(n).get(8));
-        tbl.getLblFukankonkyoMae14().setText(konkyo.get(n).get(9));             
+        tbl.getLblFukankonkyoMae14().setText(konkyo.get(n).get(9));
     }
- 
-    private void setMae_TblKobetsuHakkoFukakonkyo (tblKobetsuHakkoFukakonkyoDiv tbl) {            
+
+    private void setMae_TblKobetsuHakkoFukakonkyo(tblKobetsuHakkoFukakonkyoDiv tbl) {
         tbl.getLblFukankonkyoMae1().setText(RString.EMPTY);
         tbl.getLblFukankonkyoMae2().setText(RString.EMPTY);
         tbl.getLblFukankonkyoMae3().setText(RString.EMPTY);
@@ -244,17 +227,17 @@ public class FukaShokaiGrandsonTsuchisho {
         tbl.getLblFukankonkyoMae11().setText(RString.EMPTY);
         tbl.getLblFukankonkyoMae12().setText(RString.EMPTY);
         tbl.getLblFukankonkyoMae13().setText(RString.EMPTY);
-        tbl.getLblFukankonkyoMae14().setText(RString.EMPTY);             
-    }    
-    
-    private void setAto_TblKobetsuHakkoKiwariGaku (tblKobetsuHakkoKiwariGakuDiv tbl, int n) {
+        tbl.getLblFukankonkyoMae14().setText(RString.EMPTY);
+    }
+
+    private void setAto_TblKobetsuHakkoKiwariGaku(tblKobetsuHakkoKiwariGakuDiv tbl, int n) {
         tbl.getLblZengoTokuchoAto1().setText(kiwarigaku.get(n).get(0));
         tbl.getLblZengoTokuchoAto2().setText(kiwarigaku.get(n).get(1));
         tbl.getLblZengoTokuchoAto3().setText(kiwarigaku.get(n).get(2));
         tbl.getLblZengoTokuchoAto4().setText(kiwarigaku.get(n).get(3));
         tbl.getLblZengoTokuchoAto5().setText(kiwarigaku.get(n).get(4));
         tbl.getLblZengoTokuchoAto6().setText(kiwarigaku.get(n).get(5));
-        
+
         tbl.getLblZengoFuchoAto3().setText(kiwarigaku.get(n).get(6));
         tbl.getLblZengoFuchoAto4().setText(kiwarigaku.get(n).get(7));
         tbl.getLblZengoFuchoAto5().setText(kiwarigaku.get(n).get(8));
@@ -265,18 +248,17 @@ public class FukaShokaiGrandsonTsuchisho {
         tbl.getLblZengoFuchoAto10().setText(kiwarigaku.get(n).get(13));
         tbl.getLblZengoFuchoAto11().setText(kiwarigaku.get(n).get(14));
         tbl.getLblZengoFuchoAto12().setText(kiwarigaku.get(n).get(15));
-        
- 
+
     }
-    
-    private void setMae_TblKobetsuHakkoKiwariGaku (tblKobetsuHakkoKiwariGakuDiv tbl, int n) {
+
+    private void setMae_TblKobetsuHakkoKiwariGaku(tblKobetsuHakkoKiwariGakuDiv tbl, int n) {
         tbl.getLblZengoTokuchoMae1().setText(kiwarigaku.get(n).get(0));
         tbl.getLblZengoTokuchoMae2().setText(kiwarigaku.get(n).get(1));
         tbl.getLblZengoTokuchoMae3().setText(kiwarigaku.get(n).get(2));
         tbl.getLblZengoTokuchoMae4().setText(kiwarigaku.get(n).get(3));
         tbl.getLblZengoTokuchoMae5().setText(kiwarigaku.get(n).get(4));
         tbl.getLblZengoTokuchoMae6().setText(kiwarigaku.get(n).get(5));
-        
+
         tbl.getLblZengoFuchoMae3().setText(kiwarigaku.get(n).get(6));
         tbl.getLblZengoFuchoMae4().setText(kiwarigaku.get(n).get(7));
         tbl.getLblZengoFuchoMae5().setText(kiwarigaku.get(n).get(8));
@@ -287,16 +269,16 @@ public class FukaShokaiGrandsonTsuchisho {
         tbl.getLblZengoFuchoMae10().setText(kiwarigaku.get(n).get(13));
         tbl.getLblZengoFuchoMae11().setText(kiwarigaku.get(n).get(14));
         tbl.getLblZengoFuchoMae12().setText(kiwarigaku.get(n).get(15));
-    } 
-    
-    private void setMae_TblKobetsuHakkoKiwariGaku (tblKobetsuHakkoKiwariGakuDiv tbl) {
+    }
+
+    private void setMae_TblKobetsuHakkoKiwariGaku(tblKobetsuHakkoKiwariGakuDiv tbl) {
         tbl.getLblZengoTokuchoMae1().setText(RString.EMPTY);
         tbl.getLblZengoTokuchoMae2().setText(RString.EMPTY);
         tbl.getLblZengoTokuchoMae3().setText(RString.EMPTY);
         tbl.getLblZengoTokuchoMae4().setText(RString.EMPTY);
         tbl.getLblZengoTokuchoMae5().setText(RString.EMPTY);
         tbl.getLblZengoTokuchoMae6().setText(RString.EMPTY);
-        
+
         tbl.getLblZengoFuchoMae3().setText(RString.EMPTY);
         tbl.getLblZengoFuchoMae4().setText(RString.EMPTY);
         tbl.getLblZengoFuchoMae5().setText(RString.EMPTY);
@@ -307,6 +289,6 @@ public class FukaShokaiGrandsonTsuchisho {
         tbl.getLblZengoFuchoMae10().setText(RString.EMPTY);
         tbl.getLblZengoFuchoMae11().setText(RString.EMPTY);
         tbl.getLblZengoFuchoMae12().setText(RString.EMPTY);
-    }      
-    
+    }
+
 }

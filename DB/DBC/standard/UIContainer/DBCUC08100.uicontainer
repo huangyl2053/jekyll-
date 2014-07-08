@@ -1,0 +1,69 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "1",
+   "layoutSubGyomuCode": "DBZ",
+   "layoutName": "DBZU020001",
+   "eventName": "decideToTaishosha",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0810000",
+   "toEventName": ""
+  },
+  {
+   "id": "2",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0810000",
+   "eventName": "research",
+   "toLayoutSubGyomuCode": "DBZ",
+   "toLayoutName": "DBZU020001",
+   "toEventName": "researchToTaishosha"
+  },
+  {
+   "id": 4,
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0810000",
+   "eventName": "select",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0810001",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": "5",
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0810001",
+   "eventName": "return",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0810000",
+   "toEventName": ""
+  },
+  {
+   "id": 6,
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0810001",
+   "eventName": "select",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0810002",
+   "toEventName": "onOpen"
+  },
+  {
+   "id": 7,
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0810002",
+   "eventName": "return",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0810001",
+   "toEventName": ""
+  },
+  {
+   "id": 8,
+   "layoutSubGyomuCode": "DBC",
+   "layoutName": "DBC0810001",
+   "eventName": "save",
+   "toLayoutSubGyomuCode": "DBC",
+   "toLayoutName": "DBC0810003",
+   "toEventName": "onOpen"
+  }
+ ],
+ "subGyomuCode": "DBC",
+ "uiContainerName": "DBCUC08100"
+}

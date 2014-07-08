@@ -43,7 +43,8 @@
      "ymdKubun": 1,
      "displayFormat": 0,
      "value": "2009/01/31",
-     "textKind": 0
+     "textKind": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "lblHokenshaSofuList",
@@ -121,7 +122,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "442",
+     "height": "517",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -227,6 +228,11 @@
      "onSelectBySelectButton": "onSelectHokenshaSofuList",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -325,7 +331,8 @@
      "ymdKubun": 1,
      "displayFormat": 0,
      "value": "",
-     "textKind": 0
+     "textKind": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtSaiShoriKubun",
@@ -370,7 +377,8 @@
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtFileName",
@@ -415,7 +423,8 @@
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "permitCharactor": ""
     }
    ],
    "controlType": "Panel",
@@ -523,12 +532,12 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "JukyushaIdoSofuTaishoshaListOutputOrder",
      "helpMessageID": "",
@@ -543,7 +552,8 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "ChohyoShutsuryokujun_width": "G12"
+     "ChohyoShutsuryokujun_width": "1099",
+     "txtSort_width": "885"
     }
    ],
    "controlType": "PanelPublish",
@@ -624,7 +634,7 @@
   {
    "order": "1",
    "stateName": "送付一覧",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "HokenshaSofuList",
@@ -658,7 +668,7 @@
   {
    "order": "2",
    "stateName": "連絡票作成",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "JukyushaIdoSofuTaishoshaList",
@@ -741,7 +751,7 @@
       "fieldName": "btnExec",
       "items": [],
       "controlType": "CommonButtonCreate",
-      "width": 1,
+      "width": 0,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -765,7 +775,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "連絡票を"
+      "additionalText": ""
      }
     },
     {
@@ -774,7 +784,7 @@
       "fieldName": "btnRetuen",
       "items": [],
       "controlType": "CommonButtonNext",
-      "width": 1,
+      "width": 0,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -798,7 +808,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "送付一覧に"
+      "additionalText": ""
      }
     }
    ],
@@ -807,7 +817,9 @@
      "state": "連絡票作成"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ]
 }

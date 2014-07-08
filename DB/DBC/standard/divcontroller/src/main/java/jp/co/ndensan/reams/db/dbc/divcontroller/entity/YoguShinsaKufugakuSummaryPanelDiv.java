@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufugakuSummary.KyufugakuSummaryDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.YoguShinsaKufugakuSummarySubDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -20,8 +20,8 @@ public class YoguShinsaKufugakuSummaryPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("KyufugakuSummary")
-    private KyufugakuSummaryDiv KyufugakuSummary;
+    @JsonProperty("YoguShinsaKufugakuSummarySub")
+    private YoguShinsaKufugakuSummarySubDiv YoguShinsaKufugakuSummarySub;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -29,14 +29,14 @@ public class YoguShinsaKufugakuSummaryPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("KyufugakuSummary")
-    public KyufugakuSummaryDiv getKyufugakuSummary() {
-        return KyufugakuSummary;
+    @JsonProperty("YoguShinsaKufugakuSummarySub")
+    public YoguShinsaKufugakuSummarySubDiv getYoguShinsaKufugakuSummarySub() {
+        return YoguShinsaKufugakuSummarySub;
     }
 
-    @JsonProperty("KyufugakuSummary")
-    public void setKyufugakuSummary(KyufugakuSummaryDiv KyufugakuSummary) {
-        this.KyufugakuSummary=KyufugakuSummary;
+    @JsonProperty("YoguShinsaKufugakuSummarySub")
+    public void setYoguShinsaKufugakuSummarySub(YoguShinsaKufugakuSummarySubDiv YoguShinsaKufugakuSummarySub) {
+        this.YoguShinsaKufugakuSummarySub=YoguShinsaKufugakuSummarySub;
     }
 
 }

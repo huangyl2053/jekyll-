@@ -358,6 +358,13 @@ public class KyotakuJikoRiyohyo {
         RString service = meisai.getTxtServiceCode().getValue().
                 concat(new RString(":")).concat(meisai.getTxtServiceName().getValue());
         RString serviceTani = new RString(meisai.getTxtServiceTani().getValue().toString());
+        RString waribikigoRitsu;
+        if (meisai.getTxtWaribikigoRitsu().getValue() == null) {
+            waribikigoRitsu = RString.EMPTY;
+        } else {
+            waribikigoRitsu = new RString(meisai.getTxtWaribikigoRitsu().getValue().toString());
+
+        }
 
         ViewStateHolder.put("jigyosha", jigyosha);
         ViewStateHolder.put("service", service);
@@ -371,7 +378,7 @@ public class KyotakuJikoRiyohyo {
                 jigyosha,
                 service,
                 new RString(meisai.getTxtTani().getValue().toString()),
-                new RString(meisai.getTxtWaribikigoRitsu().getValue().toString()),
+                waribikigoRitsu,
                 new RString(meisai.getTxtWaribikigoTani().getValue().toString()),
                 new RString(meisai.getTxtKaisu().getValue().toString()),
                 serviceTani,
@@ -858,7 +865,9 @@ public class KyotakuJikoRiyohyo {
 
         if (kubun.equals(別票行区分.明細)) {
             row.getTxtTani().setValue(new Decimal(txtTani.toString()));
-            row.getTxtWaribikigoRitsu().setValue(new Decimal(txtWaribikigoRitsu.toString()));
+            if (!txtWaribikigoRitsu.equals(RString.EMPTY)) {
+                row.getTxtWaribikigoRitsu().setValue(new Decimal(txtWaribikigoRitsu.toString()));
+            }
             row.getTxtWaribikigoTani().setValue(new Decimal(txtWaribikigoTani.toString()));
             row.getTxtKaisu().setValue(new Decimal(txtKaisu.toString()));
             row.getTxtServiceTani().setValue(new Decimal(txtServiceTani.toString()));
@@ -1008,7 +1017,13 @@ public class KyotakuJikoRiyohyo {
         ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
 
         Decimal tani = meisai.getTxtTani().getValue();
-        Decimal waribikigoRitsu = meisai.getTxtWaribikigoRitsu().getValue().divide(new Decimal("100"));
+        Decimal waribikigoRitsu = meisai.getTxtWaribikigoRitsu().getValue();
+        if (waribikigoRitsu == null) {
+            waribikigoRitsu = Decimal.ONE;
+        } else {
+            waribikigoRitsu = waribikigoRitsu.divide(new Decimal("100"));
+        }
+
         Decimal kaisu = meisai.getTxtKaisu().getValue();
 
         Decimal waribikigoTani = tani.multiply(waribikigoRitsu);
