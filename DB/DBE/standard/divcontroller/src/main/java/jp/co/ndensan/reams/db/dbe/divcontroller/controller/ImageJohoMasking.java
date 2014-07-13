@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
@@ -39,15 +42,25 @@ public class ImageJohoMasking {
      */
     public ResponseData onLoadData(ImageJohoMaskingDiv div) {
         ResponseData<ImageJohoMaskingDiv> response = new ResponseData<>();
+        ddlHoknesha(div).setDataSource(Collections.<KeyValueDataSource>emptyList());
+
+        RString key1 = new RString("1");
+        RString densanCity = new RString("電算市");
+        ddlHoknesha(div).getDataSource().add(new KeyValueDataSource(key1, densanCity));
 
         List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
-        if (cg.getAsRString("保険者番号").equalsIgnoreCase(new RString("152264"))) {
-            div.getShoriTaishoshaKensakuShiji().getDdlHokensha().setSelectedItem(new RString("2"));
-            hokenshaMeisho = new RString("南魚沼市");
+        if (!cg.getAsRString("保険者番号").equals(RString.EMPTY)) {
+
+            RString key2 = new RString("2");
+            RString hokenshaName = cg.getAsRString("保険者名称");
+            ddlHoknesha(div).getDataSource().add(new KeyValueDataSource(key2, hokenshaName));
+
+            ddlHoknesha(div).setSelectedItem(key2);
+            hokenshaMeisho = hokenshaName;
         } else {
-            div.getShoriTaishoshaKensakuShiji().getDdlHokensha().setSelectedItem(new RString("1"));
-            hokenshaMeisho = new RString("電算市");
+            ddlHoknesha(div).setSelectedItem(key1);
+            hokenshaMeisho = densanCity;
         }
 
         div.getShoriTaishoshaKensakuShiji().getTxtSearchStYMD().setValue(FlexibleDate.getNowDate());
@@ -55,6 +68,10 @@ public class ImageJohoMasking {
 
         response.data = div;
         return response;
+    }
+
+    private DropDownList ddlHoknesha(ImageJohoMaskingDiv div) {
+        return div.getShoriTaishoshaKensakuShiji().getDdlHokensha();
     }
 
     /**

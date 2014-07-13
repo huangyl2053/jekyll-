@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001.IkenshoShosaiMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001.ShujiiIkenshoImageTorikomiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
@@ -53,10 +54,11 @@ public class IkenshoShosaiMain {
 
         RString strHokenshaNo = cg.getAsRString("hokenshaNo");
         RString strShinseiKbn = cg.getAsRString("shinseiKbn");
-        RString strIryoKikanNo = cg.getAsRString("iryoKikanNo");
-        RString strShujiiNo = cg.getAsRString("shujiiNo");
-        RString strIryoKikanMei = cg.getAsRString("iryoKikanMei");
-        RString strShujiiMei = cg.getAsRString("shujiiMei");
+        ShujiiData.Doctor shujii = new ShujiiData().get主治医From(cg.getAsRString("shujiiNo"));
+        RString strIryoKikanNo = shujii.iryoKikan().code();
+        RString strIryoKikanMei = shujii.iryoKikan().name();
+        RString strShujiiNo = shujii.code();
+        RString strShujiiMei = shujii.name();
         RString strNetakirido = cg.getAsRString("netakirido");
         RString strNinchi = cg.getAsRString("ninchi");
         RString strTankiKioku = cg.getAsRString("tankikioku");
