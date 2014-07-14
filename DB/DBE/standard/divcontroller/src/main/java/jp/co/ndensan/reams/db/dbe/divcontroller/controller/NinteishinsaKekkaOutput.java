@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
@@ -38,19 +40,34 @@ public class NinteishinsaKekkaOutput {
      */
     public ResponseData onLoad(NinteishinsaKekkaOutputDiv div) {
         ResponseData<NinteishinsaKekkaOutputDiv> response = new ResponseData<>();
+        ddlHokensha(div).setDataSource(new ArrayList<KeyValueDataSource>());
+
+        RString key1 = new RString("1");
+        RString densanTown = new RString("電算町");
 
         List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
-        if (cg.getAsRString("保険者番号").equalsIgnoreCase(new RString("152264"))) {
-            div.getShinsaKekkaSyutsuryokuJokenNyuryoku().getDdlHokensha().setSelectedItem(new RString("2"));
+        if (!cg.getAsRString("保険者番号").equals(RString.EMPTY)) {
+
+            RString key2 = new RString("2");
+            RString hokenshaName = cg.getAsRString("保険者名称");
+            ddlHokensha(div).getDataSource().add(new KeyValueDataSource(key2, hokenshaName));
+            ddlHokensha(div).getDataSource().add(new KeyValueDataSource(key1, densanTown));
+
+            ddlHokensha(div).setSelectedItem(key2);
         } else {
-            div.getShinsaKekkaSyutsuryokuJokenNyuryoku().getDdlHokensha().setSelectedItem(new RString("1"));
+            ddlHokensha(div).getDataSource().add(new KeyValueDataSource(key1, densanTown));
+            ddlHokensha(div).setSelectedItem(key1);
         }
 
         div.getShinsaKekkaSyutsuryokuJokenNyuryoku().getTxtNinteiKekkaKakuninKikan().setDisplayNone(true);
 
         response.data = div;
         return response;
+    }
+
+    private DropDownList ddlHokensha(NinteishinsaKekkaOutputDiv div) {
+        return div.getShinsaKekkaSyutsuryokuJokenNyuryoku().getDdlHokensha();
     }
 
     /**

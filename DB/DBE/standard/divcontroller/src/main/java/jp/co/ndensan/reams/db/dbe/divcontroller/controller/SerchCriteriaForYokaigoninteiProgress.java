@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 要介護認定進捗状況照会での検索指示画面の処理を表します。
@@ -30,12 +32,23 @@ public class SerchCriteriaForYokaigoninteiProgress {
     public ResponseData onLoad(SerchCriteriaForYokaigoninteiProgressDiv div) {
         ResponseData<SerchCriteriaForYokaigoninteiProgressDiv> response = new ResponseData<>();
 
+        div.getDdlShichoson().setDataSource(new ArrayList<KeyValueDataSource>());
+        RString key1 = new RString("1");
+        RString densanTown = new RString("電算町");
+
         List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
-        if (cg.getAsRString("保険者番号").equalsIgnoreCase(new RString("152264"))) {
-            div.getDdlShichoson().setSelectedItem(new RString("2"));
+        if (!cg.getAsRString("保険者番号").equals(RString.EMPTY)) {
+
+            RString key2 = new RString("2");
+            RString hokenshaName = cg.getAsRString("保険者名称");
+            div.getDdlShichoson().getDataSource().add(new KeyValueDataSource(key2, hokenshaName));
+            div.getDdlShichoson().getDataSource().add(new KeyValueDataSource(key1, densanTown));
+
+            div.getDdlShichoson().setSelectedItem(key2);
         } else {
-            div.getDdlShichoson().setSelectedItem(new RString("1"));
+            div.getDdlShichoson().getDataSource().add(new KeyValueDataSource(key1, densanTown));
+            div.getDdlShichoson().setSelectedItem(key1);
         }
 
         if (div.getRadSearchType().getSelectedItem().equalsIgnoreCase("2")) {
