@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
@@ -33,23 +34,36 @@ public class NinteitsuchishoKobetsuHakko {
      */
     public ResponseData onLoad(NinteitsuchishoKobetsuHakkoDiv div) {
         ResponseData<NinteitsuchishoKobetsuHakkoDiv> response = new ResponseData<>();
+        ddlHokensha(div).setDataSource(new ArrayList<KeyValueDataSource>());
+
+        RString key1 = new RString("1");
+        RString densanTown = new RString("電算町");
 
         List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
-        if (cg.getAsRString("保険者番号").equalsIgnoreCase(new RString("152264"))) {
-            div.getNinteitsuchishoKobetsuHakkoTargetSearch().getDdlHokensha().setSelectedItem(new RString("2"));
-        } else {
-            div.getNinteitsuchishoKobetsuHakkoTargetSearch().getDdlHokensha().setSelectedItem(new RString("1"));
-        }
+        if (!cg.getAsRString("保険者番号").equals(RString.EMPTY)) {
 
-        List<KeyValueDataSource> keyList = new ArrayList<>();
+            RString key2 = new RString("2");
+            RString hokenshaName = cg.getAsRString("保険者名称");
+            ddlHokensha(div).getDataSource().add(new KeyValueDataSource(key2, hokenshaName));
+            ddlHokensha(div).getDataSource().add(new KeyValueDataSource(key1, densanTown));
+
+            ddlHokensha(div).setSelectedItem(key2);
+        } else {
+            ddlHokensha(div).getDataSource().add(new KeyValueDataSource(key1, densanTown));
+            ddlHokensha(div).setSelectedItem(key1);
+        }
 //        keyList.add(new KeyValueDataSource(new RString("1"), new RString("男")));
 //        keyList.add(new KeyValueDataSource(new RString("2"), new RString("女")));
 //        div.getNinteitsuchishoKobetsuHakkoTargetSearch().getHihokensha().getChkGender().setSelectedItems(keyList);
-        div.getNinteitsuchishoKobetsuHakkoTargetSearch().getHihokensha().getTxtHihokenshaNo().setValue(RString.EMPTY);
+        div.getNinteitsuchishoKobetsuHakkoTargetSearch().getHihokensha().getTxtHihokenshaNo().clearValue();
 
         response.data = div;
         return response;
+    }
+
+    private DropDownList ddlHokensha(NinteitsuchishoKobetsuHakkoDiv div) {
+        return div.getNinteitsuchishoKobetsuHakkoTargetSearch().getDdlHokensha();
     }
 
     /**

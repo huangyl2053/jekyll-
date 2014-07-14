@@ -42,10 +42,10 @@ public class ImageJohoMasking {
      */
     public ResponseData onLoadData(ImageJohoMaskingDiv div) {
         ResponseData<ImageJohoMaskingDiv> response = new ResponseData<>();
-        ddlHoknesha(div).setDataSource(new ArrayList<KeyValueDataSource>());
+        ddlHokensha(div).setDataSource(new ArrayList<KeyValueDataSource>());
 
         RString key1 = new RString("1");
-        RString densanCity = new RString("電算町");
+        RString densanTown = new RString("電算町");
 
         List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
@@ -53,15 +53,15 @@ public class ImageJohoMasking {
 
             RString key2 = new RString("2");
             RString hokenshaName = cg.getAsRString("保険者名称");
-            ddlHoknesha(div).getDataSource().add(new KeyValueDataSource(key2, hokenshaName));
-            ddlHoknesha(div).getDataSource().add(new KeyValueDataSource(key1, densanCity));
+            ddlHokensha(div).getDataSource().add(new KeyValueDataSource(key2, hokenshaName));
+            ddlHokensha(div).getDataSource().add(new KeyValueDataSource(key1, densanTown));
 
-            ddlHoknesha(div).setSelectedItem(key2);
+            ddlHokensha(div).setSelectedItem(key2);
             hokenshaMeisho = hokenshaName;
         } else {
-            ddlHoknesha(div).getDataSource().add(new KeyValueDataSource(key1, densanCity));
-            ddlHoknesha(div).setSelectedItem(key1);
-            hokenshaMeisho = densanCity;
+            ddlHokensha(div).getDataSource().add(new KeyValueDataSource(key1, densanTown));
+            ddlHokensha(div).setSelectedItem(key1);
+            hokenshaMeisho = densanTown;
         }
 
         div.getShoriTaishoshaKensakuShiji().getTxtSearchStYMD().setValue(FlexibleDate.getNowDate());
@@ -71,7 +71,7 @@ public class ImageJohoMasking {
         return response;
     }
 
-    private DropDownList ddlHoknesha(ImageJohoMaskingDiv div) {
+    private DropDownList ddlHokensha(ImageJohoMaskingDiv div) {
         return div.getShoriTaishoshaKensakuShiji().getDdlHokensha();
     }
 
