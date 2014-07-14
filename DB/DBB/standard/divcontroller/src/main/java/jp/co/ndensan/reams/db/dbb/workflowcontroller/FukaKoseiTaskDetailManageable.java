@@ -30,7 +30,7 @@ public class FukaKoseiTaskDetailManageable implements ITaskDetailManageable {
 
         if (param.size() < 2) {
             RString 被保番号 = new RString("被保番号：0000000094");
-            RString 氏名 = new RString("氏名：電算　次郎");
+            RString 氏名 = new RString("氏名：介護　次郎");
 
             rsb.append(被保番号);
             rsb.append("<br>");
@@ -40,7 +40,7 @@ public class FukaKoseiTaskDetailManageable implements ITaskDetailManageable {
             FlowParameterAccessor.merge(check);
         } else {
             RString 被保番号 = new RString("被保番号：0000000108");
-            RString 氏名 = new RString("氏名：遠江　よし子");
+            RString 氏名 = new RString("氏名：秋田　よし子");
 
             rsb.append(被保番号);
             rsb.append("<br>");

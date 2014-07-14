@@ -10,6 +10,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosaItakusakiData;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001.IkenshoIraiIkkatuHakkoTabDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001.IraishoIkkatsuHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001.NinteichosaIraiIkkatuHakkoTabDiv;
@@ -753,11 +756,12 @@ public class IraishoIkkatsuHakko {
             ControlGenerator cg = new ControlGenerator(map);
             RString shimei = cg.getAsRString("氏名");
             RString kanaShimei = cg.getAsRString("カナ氏名");
+            ChosainData.Chosain chosain = new ChosainData().get調査員From(cg.getAsRString("調査員番号"));
             return new dgNinteichosaIraishoTargetPersons_Row(
-                    cg.getAsRString("調査委託先番号"),
-                    cg.getAsRString("調査委託先名称"),
-                    cg.getAsRString("調査員番号"),
-                    cg.getAsRString("調査員名称"),
+                    chosain.itakusaki().code(),
+                    chosain.itakusaki().name(),
+                    chosain.code(),
+                    chosain.name(),
                     cg.getAsRString("被保番号"),
                     shimei,
                     kanaShimei,
@@ -773,11 +777,12 @@ public class IraishoIkkatsuHakko {
             ControlGenerator cg = new ControlGenerator(map);
             RString shimei = cg.getAsRString("氏名");
             RString kanaShimei = cg.getAsRString("カナ氏名");
+            ShujiiData.Doctor shujii = new ShujiiData().get主治医From(cg.getAsRString("主治医番号"));
             return new dgShujiiIkenshoIraishoTargetPersons_Row(
-                    cg.getAsRString("医療機関番号"),
-                    cg.getAsRString("医療機関名称"),
-                    cg.getAsRString("主治医番号"),
-                    cg.getAsRString("主治医名称"),
+                    shujii.iryoKikan().code(),
+                    shujii.iryoKikan().name(),
+                    shujii.code(),
+                    shujii.name(),
                     cg.getAsRString("被保番号"),
                     shimei,
                     kanaShimei,

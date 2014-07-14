@@ -9,9 +9,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.KojinJokyoShokaiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.KonkaiHomonChosaIraiJohoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.dgServiceJokyo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.dgShinsakaiIinJoho_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.tplHomonChosaIraiJohoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ichijiHanteiKekkaInfo.dgIchijiHanteiKeikokuCode_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -587,150 +591,88 @@ public class KojinJokyoShokai {
      *今回調査依頼情報を設定します。
      */
     private void setKonkaiChosaIraiJoho(KojinJokyoShokaiDiv panel, HashMap mapKonkaiChosaIraiJoho) {
+        ControlGenerator cg = new ControlGenerator(mapKonkaiChosaIraiJoho);
 
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiShinkiChosaBashoKbn().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiShinkiChosaBashoKbn").toString()));
+        konkaiHomonChosa(panel).getTxtKonkaiShinkiChosaBashoKbn().setValue(
+                cg.getAsRString("konkaiShinkiChosaBashoKbn"));
 
-        if (mapKonkaiChosaIraiJoho.get("konkaiShinkiChosaJissibi").toString().isEmpty()) {
-            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                    getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                    getKonkaiHomonChosaIraiJoho().getTxtKonkaiShinkiChosaJissibi().clearValue();
+        if (cg.getAsRString("konkaiShinkiChosaJissibi").isEmpty()) {
+            konkaiHomonChosa(panel).getTxtKonkaiShinkiChosaJissibi().clearValue();
         } else {
-            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                    getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                    getKonkaiHomonChosaIraiJoho().getTxtKonkaiShinkiChosaJissibi().setValue(
-                            new RDate(mapKonkaiChosaIraiJoho.get("konkaiShinkiChosaJissibi").toString()));
+            konkaiHomonChosa(panel).getTxtKonkaiShinkiChosaJissibi().setValue(
+                    cg.getAsRDate("konkaiShinkiChosaJissibi"));
         }
 
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiShinkiChosaJissiChikuCode().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiShinkiChosaJissiChikuCode").toString()));
+        konkaiHomonChosa(panel).getTxtKonkaiShinkiChosaJissiChikuCode().setValue(
+                cg.getAsRString("konkaiShinkiChosaJissiChikuCode"));
+        konkaiHomonChosa(panel).getTxtKonkaiShinkiChosaJissiChikuMei().setValue(
+                cg.getAsRString("konkaiShinkiChosaJissiChikuMei"));
 
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiShinkiChosaJissiChikuMei().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiShinkiChosaJissiChikuMei").toString()));
+        ChosainData.Chosain chosain = new ChosainData().get調査員From(cg.getAsRString("konkaiShinkiChosainCode"));
+        konkaiHomonChosa(panel).getTxtKonkaiShinkiChosakikanCode().setValue(
+                chosain.itakusaki().code());
+        konkaiHomonChosa(panel).getTxtKonkaiShinkiChosakikanMei().setValue(
+                chosain.itakusaki().name());
+        konkaiHomonChosa(panel).getTxtKonkaiShinkiChosainCode().setValue(
+                chosain.code());
+        konkaiHomonChosa(panel).getTxtKonkaiShinkiChosainMei().setValue(
+                chosain.name());
 
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiShinkiChosakikanCode().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiShinkiChosakikanCode").toString()));
+        konkaiHomonChosa(panel).getTxtKonkaiShinkiChosaItakuKbn().setValue(
+                new RString(mapKonkaiChosaIraiJoho.get("konkaiShinkiChosaItakuKbn").toString()));
+        konkaiHomonChosa(panel).getTxtKonkaiShinkiChosainShikaku().setValue(
+                cg.getAsRString("konkaiShinkiChosainShikaku"));
+        konkaiHomonChosa(panel).getTxtKonkaiShinkiChosakikanTel().setValue(
+                cg.getAsRString("konkaiShinkiChosakikanTel"));
+        konkaiHomonChosa(panel).getTxtKonkaiShinkiChosakikanFax().setValue(
+                cg.getAsRString("konkaiShinkiChosakikanFax"));
+        konkaiHomonChosa(panel).getTxtKonkaiSaiChosaBashoKbn().setValue(
+                cg.getAsRString("konkaiSaiChosaBashoKbn"));
 
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiShinkiChosakikanMei().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiShinkiChosakikanMei").toString()));
-
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiShinkiChosaItakuKbn().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiShinkiChosaItakuKbn").toString()));
-
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiShinkiChosainCode().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiShinkiChosainCode").toString()));
-
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiShinkiChosainMei().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiShinkiChosainMei").toString()));
-
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiShinkiChosainShikaku().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiShinkiChosainShikaku").toString()));
-
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiShinkiChosakikanTel().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiShinkiChosakikanTel").toString()));
-
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiShinkiChosakikanFax().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiShinkiChosakikanFax").toString()));
-
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosaBashoKbn().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiSaiChosaBashoKbn").toString()));
-
-        if (mapKonkaiChosaIraiJoho.get("konkaiSaiChosaJissibi").toString().isEmpty()) {
-            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                    getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                    getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosaJissibi().clearValue();
+        if (cg.getAsRString("konkaiSaiChosaJissibi").isEmpty()) {
+            konkaiHomonChosa(panel).getTxtKonkaiSaiChosaJissibi().clearValue();
         } else {
-            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                    getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                    getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosaJissibi().setValue(
-                            new RDate(mapKonkaiChosaIraiJoho.get("konkaiSaiChosaJissibi").toString()));
+            konkaiHomonChosa(panel).getTxtKonkaiSaiChosaJissibi().setValue(
+                    cg.getAsRDate("konkaiSaiChosaJissibi"));
         }
 
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosaJissiChikuCode().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiSaiChosaJissiChikuCode").toString()));
+        konkaiHomonChosa(panel).getTxtKonkaiSaiChosaJissiChikuCode().setValue(
+                new RString(mapKonkaiChosaIraiJoho.get("konkaiSaiChosaJissiChikuCode").toString()));
+        konkaiHomonChosa(panel).getTxtKonkaiSaiChosaJissiChikuMei().setValue(
+                new RString(mapKonkaiChosaIraiJoho.get("konkaiSaiChosaJissiChikuMei").toString()));
 
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosaJissiChikuMei().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiSaiChosaJissiChikuMei").toString()));
+        ChosainData.Chosain saiChosain = new ChosainData().get調査員From(cg.getAsRString("konkaiSaiChosainCode"));
+        konkaiHomonChosa(panel).getTxtKonkaiSaiChosakikanCode().setValue(
+                saiChosain.itakusaki().code());
+        konkaiHomonChosa(panel).getTxtKonkaiSaiChosakikanMei().setValue(
+                saiChosain.itakusaki().name());
+        konkaiHomonChosa(panel).getTxtKonkaiSaiChosainCode().setValue(
+                saiChosain.code());
+        konkaiHomonChosa(panel).getTxtKonkaiSaiChosainMei().setValue(
+                saiChosain.name());
 
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosakikanCode().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiSaiChosakikanCode").toString()));
+        konkaiHomonChosa(panel).getTxtKonkaiSaiChosaItakuKbn().setValue(
+                cg.getAsRString("konkaiSaiChosaItakuKbn"));
+        konkaiHomonChosa(panel).getTxtKonkaiSaiChosainShikaku().setValue(
+                cg.getAsRString("konkaiSaiChosainShikaku"));
+        konkaiHomonChosa(panel).getTxtKonkaiSaiChosakikanTel().setValue(
+                cg.getAsRString("konkaiSaiChosakikanTel"));
+        konkaiHomonChosa(panel).getTxtKonkaiSaiChosakikanFax().setValue(
+                cg.getAsRString("konkaiSaiChosakikanFax"));
+        konkaiHomonChosa(panel).getTxtKonkaiKateiHomonUmu().setValue(
+                cg.getAsRString("konkaiKateiHomonUmu"));
+    }
 
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosakikanMei().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiSaiChosakikanMei").toString()));
-
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosaItakuKbn().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiSaiChosaItakuKbn").toString()));
-
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosainCode().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiSaiChosainCode").toString()));
-
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosainMei().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiSaiChosainMei").toString()));
-
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosainShikaku().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiSaiChosainShikaku").toString()));
-
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosakikanTel().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiSaiChosakikanTel").toString()));
-
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosakikanFax().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiSaiChosakikanFax").toString()));
-
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
-                getKonkaiHomonChosaIraiJoho().getTxtKonkaiKateiHomonUmu().setValue(
-                        new RString(mapKonkaiChosaIraiJoho.get("konkaiKateiHomonUmu").toString()));
-
+    private KonkaiHomonChosaIraiJohoDiv konkaiHomonChosa(KojinJokyoShokaiDiv panel) {
+        return panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
+                getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().getKonkaiHomonChosaIraiJoho();
     }
 
     /*
      *前回調査依頼情報を設定します。
      */
     private void setZenkaiChosaIraiJoho(KojinJokyoShokaiDiv panel, HashMap mapZenkaiChosaIraiJoho) {
+        ControlGenerator cg = new ControlGenerator(mapZenkaiChosaIraiJoho);
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
                 getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
                 getZenkaiHomonChosaIraiJoho().getTxtZenkaiShinkiChosaBashoKbn().setValue(
@@ -757,15 +699,17 @@ public class KojinJokyoShokai {
                 getZenkaiHomonChosaIraiJoho().getTxtZenkaiShinkiChosaJissiChikuMei().setValue(
                         new RString(mapZenkaiChosaIraiJoho.get("zenkaiShinkiChosaJissiChikuMei").toString()));
 
+        ChosainData.Chosain zenChosain = new ChosainData().get調査員From(cg.getAsRString("zenkaiShinkiChosainCode"));
+
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
                 getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
                 getZenkaiHomonChosaIraiJoho().getTxtZenkaiShinkiChosakikanCode().setValue(
-                        new RString(mapZenkaiChosaIraiJoho.get("zenkaiShinkiChosakikanCode").toString()));
+                        zenChosain.itakusaki().code());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
                 getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
                 getZenkaiHomonChosaIraiJoho().getTxtZenkaiShinkiChosakikanMei().setValue(
-                        new RString(mapZenkaiChosaIraiJoho.get("zenkaiShinkiChosakikanMei").toString()));
+                        zenChosain.itakusaki().name());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
                 getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
@@ -775,12 +719,12 @@ public class KojinJokyoShokai {
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
                 getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
                 getZenkaiHomonChosaIraiJoho().getTxtZenkaiShinkiChosainCode().setValue(
-                        new RString(mapZenkaiChosaIraiJoho.get("zenkaiShinkiChosainCode").toString()));
+                        zenChosain.code());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
                 getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
                 getZenkaiHomonChosaIraiJoho().getTxtZenkaiShinkiChosainMei().setValue(
-                        new RString(mapZenkaiChosaIraiJoho.get("zenkaiShinkiChosainMei").toString()));
+                        zenChosain.name());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
                 getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
@@ -823,15 +767,17 @@ public class KojinJokyoShokai {
                 getZenkaiHomonChosaIraiJoho().getTxtZenkaiSaiChosaJissiChikuMei().setValue(
                         new RString(mapZenkaiChosaIraiJoho.get("zenkaiSaiChosaJissiChikuMei").toString()));
 
+        ChosainData.Chosain zenSaiChosain = new ChosainData().get調査員From(cg.getAsRString("zenkaiSaiChosainCode"));
+
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
                 getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
                 getZenkaiHomonChosaIraiJoho().getTxtZenkaiSaiChosakikanCode().setValue(
-                        new RString(mapZenkaiChosaIraiJoho.get("zenkaiSaiChosakikanCode").toString()));
+                        zenSaiChosain.itakusaki().code());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
                 getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
                 getZenkaiHomonChosaIraiJoho().getTxtZenkaiSaiChosakikanMei().setValue(
-                        new RString(mapZenkaiChosaIraiJoho.get("zenkaiSaiChosakikanMei").toString()));
+                        zenSaiChosain.itakusaki().name());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
                 getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
@@ -841,12 +787,12 @@ public class KojinJokyoShokai {
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
                 getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
                 getZenkaiHomonChosaIraiJoho().getTxtZenkaiSaiChosainCode().setValue(
-                        new RString(mapZenkaiChosaIraiJoho.get("zenkaiSaiChosainCode").toString()));
+                        zenSaiChosain.code());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
                 getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
                 getZenkaiHomonChosaIraiJoho().getTxtZenkaiSaiChosainMei().setValue(
-                        new RString(mapZenkaiChosaIraiJoho.get("zenkaiSaiChosainMei").toString()));
+                        zenSaiChosain.name());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
                 getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
@@ -915,7 +861,6 @@ public class KojinJokyoShokai {
      *今回主治医依頼情報を設定します。
      */
     private void setKonkaiShujiiIraiJoho(KojinJokyoShokaiDiv panel, HashMap mapKonkaiShujiiIraiJoho) {
-
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
                 getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
                 getKonkaiShujiiIraiJoho().getTxtKonkaiIkenshoSakuseiIraiRirekiNo().setValue(
@@ -958,25 +903,28 @@ public class KojinJokyoShokai {
                             new RDate(mapKonkaiShujiiIraiJoho.get("konkaiIkenshoKinyubi").toString()));
         }
 
+        ShujiiData.Doctor shujii = new ShujiiData().get主治医From(
+                new ControlGenerator(mapKonkaiShujiiIraiJoho).getAsRString("konkaiShujiiCode"));
+
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
                 getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
                 getKonkaiShujiiIraiJoho().getTxtKonkaiShujiiCode().setValue(
-                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiShujiiCode").toString()));
+                        shujii.code());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
                 getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
                 getKonkaiShujiiIraiJoho().getTxtKonkaiShujiiMei().setValue(
-                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiShujiiMei").toString()));
+                        shujii.name());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
                 getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
                 getKonkaiShujiiIraiJoho().getTxtKonkaiIryokikanCode().setValue(
-                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiIryokikanCode").toString()));
+                        shujii.iryoKikan().code());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
                 getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
                 getKonkaiShujiiIraiJoho().getTxtKonkaiIryokikanMei().setValue(
-                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiIryokikanMei").toString()));
+                        shujii.iryoKikan().name());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
                 getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
@@ -1052,25 +1000,28 @@ public class KojinJokyoShokai {
                             new RDate(mapZenkaiShujiiIraiJoho.get("zenkaiIkenshoKinyubi").toString()));
         }
 
+        ShujiiData.Doctor zenShujii = new ShujiiData().get主治医From(
+                new ControlGenerator(mapZenkaiShujiiIraiJoho).getAsRString("zenkaiShujiiCode"));
+
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
                 getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
                 getZenkaiShujiiIraiJoho().getTxtZenkaiShujiiCode().setValue(
-                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiShujiiCode").toString()));
+                        zenShujii.code());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
                 getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
                 getZenkaiShujiiIraiJoho().getTxtZenkaiShujiiMei().setValue(
-                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiShujiiMei").toString()));
+                        zenShujii.name());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
                 getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
                 getZenkaiShujiiIraiJoho().getTxtZenkaiIryokikanCode().setValue(
-                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiIryokikanCode").toString()));
+                        zenShujii.iryoKikan().code());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
                 getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
                 getZenkaiShujiiIraiJoho().getTxtZenkaiIryokikanMei().setValue(
-                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiIryokikanMei").toString()));
+                        zenShujii.iryoKikan().name());
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
                 getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
