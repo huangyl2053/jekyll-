@@ -1,0 +1,10 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+shoriTimestamp,timestamp,RDateTime,,,,,A
+daichoShubetsu,varchar,RString,,,,,A
+nyushoShisetsuShurui,varchar,RString,,,,,A
+nyushoShisetsuCode,varchar,RString,,,,,A
+nyushoYMD,UDD015YMD,FlexibleDate,,,,,A
+taishoYMD,UDD015YMD,FlexibleDate,,,,,A
+nyushoShoriYMD,UDD015YMD,FlexibleDate,,,,,A
+taishoShoriYMD,UDD015YMD,FlexibleDate,,,,,A
