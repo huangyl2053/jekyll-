@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
@@ -12,19 +11,18 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 給付率
- * 
- * @author n8223
+ * 給付率を表すクラスです。
+ *
+ * @author n8223 朴 義一
  */
 public class HokenKyufuRitsu implements IValueObject, IDbColumnMappable, Comparable<HokenKyufuRitsu> {
 
-    private final  Decimal hokenKyufuRitsu;
-         
+    private final Decimal hokenKyufuRitsu;
 
     /**
-     * コンストラクタです
+     * インスタンスを生成します。
      *
-     * @param 給付率 給付率
+     * @param hokenKyufuRitsu 給付率
      */
     public HokenKyufuRitsu(Decimal hokenKyufuRitsu) {
         this.hokenKyufuRitsu = hokenKyufuRitsu;
@@ -53,11 +51,6 @@ public class HokenKyufuRitsu implements IValueObject, IDbColumnMappable, Compara
         return hash;
     }
 
-    /**
-     * 給付率を取得します
-     *
-     * @return 給付率
-     */
     @Override
     public Decimal getColumnValue() {
         return hokenKyufuRitsu;

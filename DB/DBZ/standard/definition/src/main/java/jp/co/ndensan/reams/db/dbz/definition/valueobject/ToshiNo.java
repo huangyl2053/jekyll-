@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
@@ -12,29 +11,29 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 通番
- * 
- * @author n8223
+ * 通番を表すクラスです。
+ *
+ * @author n8223 朴 義一
  */
-public class ToshiNo implements   IDbColumnMappable , IValueObject ,Comparable<ToshiNo>{
+public class ToshiNo implements IDbColumnMappable, IValueObject, Comparable<ToshiNo> {
 
     private final RString toshiNo;
-    
+
     /**
-     * コンストラクタです
+     * インスタンスを生成します。
      *
-     * @param 通番 通番
+     * @param toshiNo 通番
      */
-    public ToshiNo(RString toshiNo)throws NullPointerException {
+    public ToshiNo(RString toshiNo) throws NullPointerException {
         this.toshiNo = toshiNo;
     }
-    
+
     @Override
     public RString value() {
         return toshiNo;
     }
-    
-     @Override
+
+    @Override
     public boolean equals(Object 比較対象) {
         if (比較対象 == null) {
             return false;
@@ -42,29 +41,23 @@ public class ToshiNo implements   IDbColumnMappable , IValueObject ,Comparable<T
         if (!(比較対象 instanceof ToshiNo)) {
             return false;
         }
-        return ((ServiceTeikyoYM) 比較対象).value().equals(toshiNo);
+        return ((ToshiNo) 比較対象).value().equals(toshiNo);
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 37 * hash + Objects.hashCode(this.toshiNo);
         return hash;
     }
-    
-     /**
-     * 通番を取得します
-     *
-     * @return 通番
-     */
+
     @Override
     public RString getColumnValue() {
         return toshiNo;
     }
-        
+
     @Override
     public int compareTo(ToshiNo 比較対象) {
         return value().compareTo(比較対象.value());
     }
-
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.business;
 
 import jp.co.ndensan.reams.db.dbz.business.KaigoCodeAssignedItem;
@@ -12,9 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 入力識別番号
- * 
- * @author n8223
+ * 入力識別番号を表すクラスです。
+ *
+ * @author n8223 朴 義一
  */
 public class InputShikibetsuNo extends KaigoCodeAssignedItem<InputShikibetsuNoCode> {
 
@@ -30,9 +29,9 @@ public class InputShikibetsuNo extends KaigoCodeAssignedItem<InputShikibetsuNoCo
     }
 
     /**
-     * 合議体長区分を表すコードを返します。
+     * 入力識別番号を表すコードを返します。
      *
-     * @return 合議体長区分コード
+     * @return 入力識別番号コード
      */
     public InputShikibetsuNoCode getInputShikibetsuNoCode() {
         return getExtendedCode();

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
@@ -12,29 +11,29 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 交換情報識別番号
- * 
- * @author n8223
+ * 交換情報識別番号を表すクラスです。
+ *
+ * @author n8223 朴 義一
  */
-public class KokanShikibetsuNo implements   IDbColumnMappable , IValueObject ,Comparable<KokanShikibetsuNo>{
+public class KokanShikibetsuNo implements IDbColumnMappable, IValueObject, Comparable<KokanShikibetsuNo> {
 
     private final RString kokanShikibetsuNo;
-    
+
     /**
-     * コンストラクタです
+     * インスタンスを生成します。
      *
-     * @param 交換情報識別番号 交換情報識別番号
+     * @param kokanShikibetsuNo 交換情報識別番号
      */
-    public KokanShikibetsuNo(RString kokanShikibetsuNo)throws NullPointerException {
+    public KokanShikibetsuNo(RString kokanShikibetsuNo) throws NullPointerException {
         this.kokanShikibetsuNo = kokanShikibetsuNo;
     }
-    
+
     @Override
     public RString value() {
         return kokanShikibetsuNo;
     }
-    
-     @Override
+
+    @Override
     public boolean equals(Object 比較対象) {
         if (比較対象 == null) {
             return false;
@@ -44,27 +43,21 @@ public class KokanShikibetsuNo implements   IDbColumnMappable , IValueObject ,Co
         }
         return ((KokanShikibetsuNo) 比較対象).value().equals(kokanShikibetsuNo);
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 37 * hash + Objects.hashCode(this.kokanShikibetsuNo);
         return hash;
     }
-    
-     /**
-     * 交換情報識別番号を取得します
-     *
-     * @return 交換情報識別番号
-     */
+
     @Override
     public RString getColumnValue() {
         return kokanShikibetsuNo;
     }
-        
+
     @Override
     public int compareTo(KokanShikibetsuNo 比較対象) {
         return value().compareTo(比較対象.value());
     }
-
 }

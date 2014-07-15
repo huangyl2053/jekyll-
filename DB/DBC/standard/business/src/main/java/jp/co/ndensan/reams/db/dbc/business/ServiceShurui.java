@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.business;
 
 import jp.co.ndensan.reams.db.dbz.business.KaigoCodeAssignedItem;
@@ -12,11 +11,11 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * サービス種類コード
- * 
- * @author n8223
+ * サービス種類を表すクラスです。
+ *
+ * @author n8223 朴 義一
  */
-public class ServiceShurui  extends KaigoCodeAssignedItem<ServiceShuruiCode> {
+public class ServiceShurui extends KaigoCodeAssignedItem<ServiceShuruiCode> {
 
     /**
      * 引数からメンバを受け取り、インスタンスを生成します。
@@ -30,9 +29,9 @@ public class ServiceShurui  extends KaigoCodeAssignedItem<ServiceShuruiCode> {
     }
 
     /**
-     * 合議体長区分を表すコードを返します。
+     * サービス種類を表すコードを返します。
      *
-     * @return 合議体長区分コード
+     * @return サービス種類コード
      */
     public ServiceShuruiCode getServiceShuruiCode() {
         return getExtendedCode();

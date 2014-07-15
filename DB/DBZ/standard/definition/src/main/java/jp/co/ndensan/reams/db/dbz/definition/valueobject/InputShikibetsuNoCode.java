@@ -6,30 +6,28 @@
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
+import static java.util.Objects.requireNonNull;
 
 /**
- * 入力識別番号
+ * 入力識別番号コードを表すクラスです。
  *
- * @author n8223
+ * @author n8223 朴 義一
  */
-public class InputShikibetsuNoCode implements ICodeWrapValueObject, Comparable<ServiceShuruiCode> {
+public class InputShikibetsuNoCode implements ICodeWrapValueObject, Comparable<InputShikibetsuNoCode> {
 
     private final Code code;
 
     /**
-     * 引数から合議体長コードを受け取り、インスタンスを生成します。
+     * 引数から入力識別番号コードを受け取り、インスタンスを生成します。
      *
-     * @param code 合議体長区分コード
+     * @param code 入力識別番号コード
      * @throws NullPointerException 引数にnullが渡されたとき
      */
     public InputShikibetsuNoCode(Code code) throws NullPointerException {
-        this.code = requireNonNull(code, Messages.E00003.replace("入力識別番号", getClass().getName()).getMessage());
+        this.code = requireNonNull(code, Messages.E00003.replace("入力識別番号コード", getClass().getName()).getMessage());
     }
 
     @Override
@@ -43,7 +41,7 @@ public class InputShikibetsuNoCode implements ICodeWrapValueObject, Comparable<S
     }
 
     @Override
-    public int compareTo(ServiceShuruiCode 比較対象) {
+    public int compareTo(InputShikibetsuNoCode 比較対象) {
         return this.value().compareTo(比較対象.value());
     }
 
@@ -59,6 +57,6 @@ public class InputShikibetsuNoCode implements ICodeWrapValueObject, Comparable<S
         if (比較対象 == null || getClass() != 比較対象.getClass()) {
             return false;
         }
-        return ((ServiceShuruiCode) 比較対象).value().equals(this.value());
+        return ((InputShikibetsuNoCode) 比較対象).value().equals(this.value());
     }
 }

@@ -11,18 +11,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * レコード種別コード
+ * レコード種別コードを表すクラスです。
  *
- * @author n8223
+ * @author n8223 朴 義一
  */
-public class RecodeShubetsuCode implements   IDbColumnMappable , IValueObject ,Comparable<RecodeShubetsuCode> {
-  
+public class RecodeShubetsuCode implements IDbColumnMappable, IValueObject, Comparable<RecodeShubetsuCode> {
+
     private final RString recodeShubetsuCode;
 
     /**
-     * コンストラクタです
+     * インスタンスを生成します。
      *
-     * @param レコード種別コード レコード種別コード
+     * @param recodeShubetsuCode レコード種別コード
      */
     public RecodeShubetsuCode(RString recodeShubetsuCode) throws NullPointerException {
         this.recodeShubetsuCode = recodeShubetsuCode;
@@ -51,11 +51,6 @@ public class RecodeShubetsuCode implements   IDbColumnMappable , IValueObject ,C
         return hash;
     }
 
-    /**
-     * レコード種別コードを取得します
-     *
-     * @return レコード種別コード
-     */
     @Override
     public RString getColumnValue() {
         return recodeShubetsuCode;
@@ -65,5 +60,4 @@ public class RecodeShubetsuCode implements   IDbColumnMappable , IValueObject ,C
     public int compareTo(RecodeShubetsuCode 比較対象) {
         return value().compareTo(比較対象.value());
     }
-
 }

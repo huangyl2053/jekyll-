@@ -3,28 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static java.util.Objects.requireNonNull;
 
 /**
- * サービス種類コードを表すクラス
- * 
- * @author n8223
+ * サービス種類コードを表すクラスです。
+ *
+ * @author n8223 朴 義一
  */
 public class ServiceShuruiCode implements ICodeWrapValueObject, Comparable<ServiceShuruiCode> {
 
     private final Code code;
 
     /**
-     * 引数から合議体長コードを受け取り、インスタンスを生成します。
+     * 引数からサービス種類コードを受け取り、インスタンスを生成します。
      *
-     * @param code 合議体長区分コード
+     * @param code サービス種類コード
      * @throws NullPointerException 引数にnullが渡されたとき
      */
     public ServiceShuruiCode(Code code) throws NullPointerException {
