@@ -38,7 +38,7 @@ public class HokenKyufuRitsu implements IValueObject, IDbColumnMappable, Compara
         if (比較対象 == null) {
             return false;
         }
-        if (!(比較対象 instanceof JigyoshaNo)) {
+        if (!(比較対象 instanceof HokenKyufuRitsu)) {
             return false;
         }
         return ((HokenKyufuRitsu) 比較対象).value().equals(hokenKyufuRitsu);
