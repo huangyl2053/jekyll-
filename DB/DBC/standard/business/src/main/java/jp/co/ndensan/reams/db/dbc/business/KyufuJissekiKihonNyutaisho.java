@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 給付実績の基本情報（施設入退所）を保持するクラス
+ * 給付実績の基本情報（施設入退所）を保持するクラスです。
  *
- * @author N8223　朴義一
+ * @author N8223 朴 義一
  */
 public class KyufuJissekiKihonNyutaisho {
 
@@ -23,7 +23,7 @@ public class KyufuJissekiKihonNyutaisho {
     private final RString 退所後の状況;
 
     /**
-     * 引数からメンバを受け取るコンストラクタです。
+     * インスタンスを生成します。
      *
      * @param 入所日 旧措置入所者特例
      * @param 退所日 老人保健市町村番号
@@ -32,16 +32,19 @@ public class KyufuJissekiKihonNyutaisho {
      * @param 入所前の状況 後期高齢被保番号
      * @param 退所後の状況 国保保険者番号
      */
-    public KyufuJissekiKihonNyutaisho(FlexibleDate 入所日, FlexibleDate 退所日, int 入所実日数, int 外泊日数, RString 入所前の状況, RString 退所後の状況)
-            throws NullPointerException {
-
+    public KyufuJissekiKihonNyutaisho(
+            FlexibleDate 入所日,
+            FlexibleDate 退所日,
+            int 入所実日数,
+            int 外泊日数,
+            RString 入所前の状況,
+            RString 退所後の状況) throws NullPointerException {
         this.入所日 = 入所日;
         this.退所日 = 退所日;
         this.入所実日数 = 入所実日数;
         this.外泊日数 = 外泊日数;
         this.入所前の状況 = 入所前の状況;
         this.退所後の状況 = 退所後の状況;
-
     }
 
     /**
@@ -97,5 +100,4 @@ public class KyufuJissekiKihonNyutaisho {
     public RString get退所後の状況() {
         return 退所後の状況;
     }
-
 }

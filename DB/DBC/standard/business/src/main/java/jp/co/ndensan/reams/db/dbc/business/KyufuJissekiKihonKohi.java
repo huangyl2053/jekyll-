@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbc.business;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 給付実績の基本情報（公費）を保持するクラス
+ * 給付実績の基本情報（公費）を保持するクラスです。
  *
- * @author N8223　朴義一
+ * @author N8223 朴 義一
  */
 public class KyufuJissekiKihonKohi {
 
@@ -22,7 +22,7 @@ public class KyufuJissekiKihonKohi {
     private final RString 公費３受給者番号;
 
     /**
-     * 引数からメンバを受け取るコンストラクタです。
+     * インスタンスを生成します。
      *
      * @param 公費１負担者番号 公費１負担者番号
      * @param 公費１受給者番号 公費１受給者番号
@@ -31,16 +31,19 @@ public class KyufuJissekiKihonKohi {
      * @param 公費３負担者番号 公費３負担者番号
      * @param 公費３受給者番号 公費３受給者番号
      */
-    public KyufuJissekiKihonKohi(RString 公費１負担者番号, RString 公費１受給者番号, RString 公費２負担者番号, RString 公費２受給者番号,
-            RString 公費３負担者番号, RString 公費３受給者番号) throws NullPointerException {
-
+    public KyufuJissekiKihonKohi(
+            RString 公費１負担者番号,
+            RString 公費１受給者番号,
+            RString 公費２負担者番号,
+            RString 公費２受給者番号,
+            RString 公費３負担者番号,
+            RString 公費３受給者番号) throws NullPointerException {
         this.公費１負担者番号 = 公費１負担者番号;
         this.公費１受給者番号 = 公費１受給者番号;
         this.公費２負担者番号 = 公費２負担者番号;
         this.公費２受給者番号 = 公費２受給者番号;
         this.公費３負担者番号 = 公費３負担者番号;
         this.公費３受給者番号 = 公費３受給者番号;
-
     }
 
     /**
@@ -96,5 +99,4 @@ public class KyufuJissekiKihonKohi {
     public RString get公費３受給者番号() {
         return 公費３受給者番号;
     }
-
 }

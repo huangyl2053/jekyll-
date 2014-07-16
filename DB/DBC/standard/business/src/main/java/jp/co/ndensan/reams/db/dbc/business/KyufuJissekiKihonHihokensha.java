@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbc.business;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 給付実績の基本情報（被保険者）を保持するクラス
+ * 給付実績の基本情報（被保険者）を保持するクラスです。
  *
- * @author N8223　朴義一
+ * @author N8223 朴 義一
  */
 public class KyufuJissekiKihonHihokensha {
 
@@ -24,7 +24,7 @@ public class KyufuJissekiKihonHihokensha {
     private final RString 個人番号;
 
     /**
-     * 引数からメンバを受け取るコンストラクタです。
+     * インスタンスを生成します。
      *
      * @param 旧措置入所者特例 旧措置入所者特例
      * @param 老人保健市町村番号 老人保健市町村番号
@@ -35,10 +35,15 @@ public class KyufuJissekiKihonHihokensha {
      * @param 被保険者証番号 被保険者証番号
      * @param 個人番号 個人番号
      */
-    public KyufuJissekiKihonHihokensha(RString 旧措置入所者特例, RString 老人保健市町村番号, RString 老人保健受給者番号, RString 後期高齢保険者番号,
-            RString 後期高齢被保番号, RString 国保保険者番号, RString 被保険者証番号, RString 個人番号
-    ) throws NullPointerException {
-
+    public KyufuJissekiKihonHihokensha(
+            RString 旧措置入所者特例,
+            RString 老人保健市町村番号,
+            RString 老人保健受給者番号,
+            RString 後期高齢保険者番号,
+            RString 後期高齢被保番号,
+            RString 国保保険者番号,
+            RString 被保険者証番号,
+            RString 個人番号) throws NullPointerException {
         this.旧措置入所者特例 = 旧措置入所者特例;
         this.老人保健市町村番号 = 老人保健市町村番号;
         this.老人保健受給者番号 = 老人保健受給者番号;
@@ -120,5 +125,4 @@ public class KyufuJissekiKihonHihokensha {
     public RString get個人番号() {
         return 個人番号;
     }
-
 }

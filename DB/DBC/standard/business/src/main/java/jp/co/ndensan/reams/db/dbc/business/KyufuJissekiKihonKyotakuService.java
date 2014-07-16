@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 給付実績の基本情報（居宅サービス計画）を保持するクラス
+ * 給付実績の基本情報（居宅サービス計画）を保持するクラスです。
  *
- * @author N8223　朴義一
+ * @author N8223 朴 義一
  */
 public class KyufuJissekiKihonKyotakuService {
 
@@ -20,18 +20,19 @@ public class KyufuJissekiKihonKyotakuService {
     private final RString 事業所名;
 
     /**
-     * 引数からメンバを受け取るコンストラクタです。
+     * インスタンスを生成します。
      *
      * @param 居宅サービス計画作成区分 居宅サービス計画作成区分
      * @param 事業所番号 事業所番号
      * @param 事業所名 事業所名
      */
-    public KyufuJissekiKihonKyotakuService(RString 居宅サービス計画作成区分, JigyoshaNo 事業所番号, RString 事業所名) throws NullPointerException {
-
+    public KyufuJissekiKihonKyotakuService(
+            RString 居宅サービス計画作成区分,
+            JigyoshaNo 事業所番号,
+            RString 事業所名) throws NullPointerException {
         this.居宅サービス計画作成区分 = 居宅サービス計画作成区分;
         this.事業所番号 = 事業所番号;
         this.事業所名 = 事業所名;
-
     }
 
     /**
@@ -60,5 +61,4 @@ public class KyufuJissekiKihonKyotakuService {
     public RString get事業所名() {
         return 事業所名;
     }
-
 }

@@ -5,24 +5,25 @@
  */
 package jp.co.ndensan.reams.db.dbc.business;
 
-//import jp.co.ndensan.reams.db.dbz.definition.valueobject.KyufuSakuseiKubunCode;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KeikokuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
- * 給付実績の基本情報を保持するクラス
+ * 給付実績の基本情報を保持するクラスです。
  *
- * @author n8223　朴義一
+ * @author n8223 朴 義一
  */
 public class KyufuJissekiKihon {
 
-    private final RString 作成区分;
+    private final KyufuSakuseiKubun 作成区分;
     private final RString 要介護度;
-    private final FlexibleDate 認定有効期間開始年月日;
-    private final FlexibleDate 認定有効期間終了年月日;
+    private final Range<FlexibleDate> 認定有効期間;
     private final FlexibleYearMonth 審査年月;
-    private final RString 警告区分;
+    private final KeikokuKubun 警告区分;
     private final KyufuJissekiKihonHihokensha 被保険者情報;
     private final KyufuJissekiKihonKyotakuService 居宅サービス計画情報;
     private final KyufuJissekiKihonServiceKikan サービス期間情報;
@@ -31,12 +32,11 @@ public class KyufuJissekiKihon {
     private final KyufuJissekiKihonKohi 公費情報;
 
     /**
-     * 引数からメンバを受け取るコンストラクタです。
+     * インスタンスを生成します。
      *
      * @param 作成区分 作成区分
      * @param 要介護度 要介護度
-     * @param 認定有効期間開始年月日 認定有効期間開始年月日
-     * @param 認定有効期間終了年月日 認定有効期間終了年月日
+     * @param 認定有効期間 認定有効期間
      * @param 審査年月 審査年月
      * @param 警告区分 警告区分
      * @param 被保険者情報 被保険者情報
@@ -46,15 +46,21 @@ public class KyufuJissekiKihon {
      * @param 給付率情報 給付率情報
      * @param 公費情報 公費情報
      */
-    public KyufuJissekiKihon(RString 作成区分, RString 要介護度, FlexibleDate 認定有効期間開始年月日, FlexibleDate 認定有効期間終了年月日,
-            FlexibleYearMonth 審査年月, RString 警告区分, KyufuJissekiKihonHihokensha 被保険者情報,
-            KyufuJissekiKihonKyotakuService 居宅サービス計画情報, KyufuJissekiKihonServiceKikan サービス期間情報, KyufuJissekiKihonNyutaisho 施設入退所情報, KyufuJissekiKihonKyufuritsu 給付率情報, KyufuJissekiKihonKohi 公費情報
-    ) throws NullPointerException {
-
+    public KyufuJissekiKihon(
+            KyufuSakuseiKubun 作成区分,
+            RString 要介護度,
+            Range<FlexibleDate> 認定有効期間,
+            FlexibleYearMonth 審査年月,
+            KeikokuKubun 警告区分,
+            KyufuJissekiKihonHihokensha 被保険者情報,
+            KyufuJissekiKihonKyotakuService 居宅サービス計画情報,
+            KyufuJissekiKihonServiceKikan サービス期間情報,
+            KyufuJissekiKihonNyutaisho 施設入退所情報,
+            KyufuJissekiKihonKyufuritsu 給付率情報,
+            KyufuJissekiKihonKohi 公費情報) throws NullPointerException {
         this.作成区分 = 作成区分;
         this.要介護度 = 要介護度;
-        this.認定有効期間開始年月日 = 認定有効期間開始年月日;
-        this.認定有効期間終了年月日 = 認定有効期間終了年月日;
+        this.認定有効期間 = 認定有効期間;
         this.審査年月 = 審査年月;
         this.警告区分 = 警告区分;
         this.被保険者情報 = 被保険者情報;
@@ -70,7 +76,7 @@ public class KyufuJissekiKihon {
      *
      * @return 作成区分
      */
-    public RString get作成区分() {
+    public KyufuSakuseiKubun get作成区分() {
         return 作成区分;
     }
 
@@ -84,21 +90,12 @@ public class KyufuJissekiKihon {
     }
 
     /**
-     * 認定有効期間開始年月日を返します。
+     * 認定有効期間を返します。
      *
-     * @return 認定有効期間開始年月日
+     * @return 認定有効期間
      */
-    public FlexibleDate get認定有効期間開始年月日() {
-        return 認定有効期間開始年月日;
-    }
-
-    /**
-     * 認定有効期間終了年月日を返します。
-     *
-     * @return 認定有効期間終了年月日
-     */
-    public FlexibleDate get認定有効期間終了年月日() {
-        return 認定有効期間終了年月日;
+    public Range<FlexibleDate> get認定有効期間() {
+        return 認定有効期間;
     }
 
     /**
@@ -115,7 +112,7 @@ public class KyufuJissekiKihon {
      *
      * @return 警告区分
      */
-    public RString get警告区分() {
+    public KeikokuKubun get警告区分() {
         return 警告区分;
     }
 
@@ -172,5 +169,4 @@ public class KyufuJissekiKihon {
     public KyufuJissekiKihonKohi get公費情報() {
         return 公費情報;
     }
-
 }

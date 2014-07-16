@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 給付実績の基本情報（サービス期間）を保持するクラス
+ * 給付実績の基本情報（サービス期間）を保持するクラスです。
  *
- * @author N8223　朴義一
+ * @author N8223 朴 義一
  */
 public class KyufuJissekiKihonServiceKikan {
 
@@ -20,18 +20,19 @@ public class KyufuJissekiKihonServiceKikan {
     private final RString 中止理由;
 
     /**
-     * 引数からメンバを受け取るコンストラクタです。
+     * インスタンスを生成します。
      *
      * @param 開始日 開始日
      * @param 中止日 中止日
      * @param 中止理由 中止理由
      */
-    public KyufuJissekiKihonServiceKikan(FlexibleDate 開始日, FlexibleDate 中止日, RString 中止理由) throws NullPointerException {
-
+    public KyufuJissekiKihonServiceKikan(
+            FlexibleDate 開始日,
+            FlexibleDate 中止日,
+            RString 中止理由) throws NullPointerException {
         this.開始日 = 開始日;
         this.中止日 = 中止日;
         this.中止理由 = 中止理由;
-
     }
 
     /**
@@ -60,5 +61,4 @@ public class KyufuJissekiKihonServiceKikan {
     public RString get中止理由() {
         return 中止理由;
     }
-
 }
