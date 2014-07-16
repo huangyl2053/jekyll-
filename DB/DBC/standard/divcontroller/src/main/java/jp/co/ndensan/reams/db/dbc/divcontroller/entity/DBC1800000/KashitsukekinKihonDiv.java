@@ -1,17 +1,16 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KashitsukekinKihon のクラスファイル 
- * 
+ * KashitsukekinKihon のクラスファイル
+ *
  * @author 自動生成
  */
 public class KashitsukekinKihonDiv extends Panel {
@@ -21,6 +20,7 @@ public class KashitsukekinKihonDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("KashitsukekinKihonInfo")
     private KaigoAtenaInfoDiv KashitsukekinKihonInfo;
     @JsonProperty("KashitsukekinKaigoKihonInfo")
@@ -39,7 +39,7 @@ public class KashitsukekinKihonDiv extends Panel {
 
     @JsonProperty("KashitsukekinKihonInfo")
     public void setKashitsukekinKihonInfo(KaigoAtenaInfoDiv KashitsukekinKihonInfo) {
-        this.KashitsukekinKihonInfo=KashitsukekinKihonInfo;
+        this.KashitsukekinKihonInfo = KashitsukekinKihonInfo;
     }
 
     @JsonProperty("KashitsukekinKaigoKihonInfo")
@@ -49,7 +49,7 @@ public class KashitsukekinKihonDiv extends Panel {
 
     @JsonProperty("KashitsukekinKaigoKihonInfo")
     public void setKashitsukekinKaigoKihonInfo(KaigoShikakuKihonDiv KashitsukekinKaigoKihonInfo) {
-        this.KashitsukekinKaigoKihonInfo=KashitsukekinKaigoKihonInfo;
+        this.KashitsukekinKaigoKihonInfo = KashitsukekinKaigoKihonInfo;
     }
 
 }
