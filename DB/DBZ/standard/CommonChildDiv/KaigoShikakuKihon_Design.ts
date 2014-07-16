@@ -92,6 +92,20 @@ module DBZ {
             }
         }
         
+        public get btnRenrakusaki_displayNone() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"])["displayNone"];
+        }
+        
+        public set btnRenrakusaki_displayNone(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"])["displayNone"] = value;
+            } else {
+                this.layout.items[0].items[11]["displayNone"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, KaigoShikakuKihon_Design.myLayout, fieldName);
         }
@@ -108,6 +122,7 @@ module DBZ {
             Uz.JSControlUtil.registProperty("backGroundColor");
             Uz.JSControlUtil.registProperty("btnHihoRireki_visible");
             Uz.JSControlUtil.registProperty("btnNinteiRireki_visible");
+            Uz.JSControlUtil.registProperty("btnRenrakusaki_displayNone");
         }
         
         /**
@@ -123,6 +138,7 @@ module DBZ {
             editablePropertyInfo["backGroundColor"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["backgroundColor"];
             editablePropertyInfo["btnHihoRireki_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).getEditablePropertyInfo()["visible"];
             editablePropertyInfo["btnNinteiRireki_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["btnRenrakusaki_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             
             return editablePropertyInfo;
         }
@@ -175,8 +191,7 @@ module DBZ {
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
+     "decorationClass": ""
     },
     {
      "fieldName": "txtShutokuYmd",
@@ -216,8 +231,7 @@ module DBZ {
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "txtShutokuJiyu",
@@ -262,8 +276,7 @@ module DBZ {
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
+     "decorationClass": ""
     },
     {
      "fieldName": "txtSoshitsuYmd",
@@ -303,8 +316,7 @@ module DBZ {
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "txtSoshitsuJiyu",
@@ -349,8 +361,7 @@ module DBZ {
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
+     "decorationClass": ""
     },
     {
      "fieldName": "txtJutokuKubun",
@@ -395,8 +406,7 @@ module DBZ {
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
+     "decorationClass": ""
     },
     {
      "fieldName": "txtYokaigoJotaiKubun",
@@ -441,8 +451,7 @@ module DBZ {
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
+     "decorationClass": ""
     },
     {
      "fieldName": "txtNinteiKaishiYmd",
@@ -482,8 +491,7 @@ module DBZ {
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "txtNinteiShuryoYmd",
@@ -523,8 +531,7 @@ module DBZ {
      "labelLAlign": 1,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "btnNinteiRireki",
@@ -581,6 +588,40 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "text": "被保履歴",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": true,
+     "displayChildDivName": "",
+     "dataPassing": [],
+     "visibleCloseButton": true,
+     "onOkClose": "",
+     "onBeforeOpenDialog": ""
+    },
+    {
+     "fieldName": "btnRenrakusaki",
+     "items": [],
+     "controlType": "ButtonDialog",
+     "width": "70",
+     "visible": true,
+     "displayNone": true,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0.4",
+     "selectControlID": "btnRenrakusaki",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "連絡先",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
@@ -689,6 +730,11 @@ module DBZ {
    "publicChildFieldName": "btnNinteiRireki",
    "publicChildProperty": "visible",
    "newPropertyName": "btnNinteiRireki_visible"
+  },
+  {
+   "publicChildFieldName": "btnRenrakusaki",
+   "publicChildProperty": "displayNone",
+   "newPropertyName": "btnRenrakusaki_displayNone"
   }
  ],
  "dataPassingForDialog": [],

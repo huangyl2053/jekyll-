@@ -21,6 +21,10 @@ public class SearchCriteriaDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("chkHihokensha")
+    private CheckBoxList chkHihokensha;
+    @JsonProperty("radMinashiNigo")
+    private RadioButton radMinashiNigo;
     @JsonProperty("chkMinashiNigo")
     private CheckBoxList chkMinashiNigo;
 
@@ -30,6 +34,26 @@ public class SearchCriteriaDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("chkHihokensha")
+    public CheckBoxList getChkHihokensha() {
+        return chkHihokensha;
+    }
+
+    @JsonProperty("chkHihokensha")
+    public void setChkHihokensha(CheckBoxList chkHihokensha) {
+        this.chkHihokensha=chkHihokensha;
+    }
+
+    @JsonProperty("radMinashiNigo")
+    public RadioButton getRadMinashiNigo() {
+        return radMinashiNigo;
+    }
+
+    @JsonProperty("radMinashiNigo")
+    public void setRadMinashiNigo(RadioButton radMinashiNigo) {
+        this.radMinashiNigo=radMinashiNigo;
+    }
+
     @JsonProperty("chkMinashiNigo")
     public CheckBoxList getChkMinashiNigo() {
         return chkMinashiNigo;

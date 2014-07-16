@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihon;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -43,6 +43,8 @@ public class KaigoShikakuKihonDiv extends Panel {
     private ButtonDialog btnNinteiRireki;
     @JsonProperty("btnHihoRireki")
     private ButtonDialog btnHihoRireki;
+    @JsonProperty("btnRenrakusaki")
+    private ButtonDialog btnRenrakusaki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -158,6 +160,16 @@ public class KaigoShikakuKihonDiv extends Panel {
     @JsonProperty("btnHihoRireki")
     public void setBtnHihoRireki(ButtonDialog btnHihoRireki) {
         this.btnHihoRireki=btnHihoRireki;
+    }
+
+    @JsonProperty("btnRenrakusaki")
+    public ButtonDialog getBtnRenrakusaki() {
+        return btnRenrakusaki;
+    }
+
+    @JsonProperty("btnRenrakusaki")
+    public void setBtnRenrakusaki(ButtonDialog btnRenrakusaki) {
+        this.btnRenrakusaki=btnRenrakusaki;
     }
 
 }
