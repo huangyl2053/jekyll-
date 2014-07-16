@@ -41,11 +41,11 @@ public class HihokenshaInputGuide {
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
         //検索キー氏名の初期値設定
-        inputGuideDiv.getHihokenshaFinder().getSearchCriteriaOfKojin().getTxtShimei().
+        inputGuideDiv.getHihokenshaFinder().getKaigoAtenaFinder().getTxtAtenaMeisho().
                 setValue(ymlData.getAsRString("検索条件氏名"));
 
         //前方一致を初期選択とする
-        inputGuideDiv.getHihokenshaFinder().getSearchCriteriaOfKojin().getDdlSearchPatternForName().
+        inputGuideDiv.getHihokenshaFinder().getKaigoAtenaFinder().getDdlAtenaSearchKubun().
                 setSelectedItem(new RString("1"));
 
         response.data = inputGuideDiv;
