@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -106,12 +106,12 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
     private static KyufuJissekiKeyInfo create給付実績キー情報() {
         KyufuJissekiKeyInfo ret;
         KaigoHihokenshaNo 被保番号 = new KaigoHihokenshaNo(new RString("0123456789"));
-        ServiceTeikyoYM サービス提供期間開始 = new ServiceTeikyoYM(new FlexibleDate("20140101"));
-        ServiceTeikyoYM サービス提供期間終了 = new ServiceTeikyoYM(new FlexibleDate("20141231"));
+        ServiceTeikyoYM サービス提供期間開始 = new ServiceTeikyoYM(new FlexibleYearMonth("201401"));
+        ServiceTeikyoYM サービス提供期間終了 = new ServiceTeikyoYM(new FlexibleYearMonth("201412"));
         Range<ServiceTeikyoYM> サービス提供期間 = new Range(サービス提供期間開始, サービス提供期間終了);
         InputShikibetsuNo 入力識別番号 = new InputShikibetsuNo(new Code("入力識別番号"), new RString("名称"), new RString("略称"));
         ServiceShurui サービス種類 = createサービス種類();
-        ServiceTeikyoYM サービス提供年月 = new ServiceTeikyoYM(new FlexibleDate("20140701"));
+        ServiceTeikyoYM サービス提供年月 = new ServiceTeikyoYM(new FlexibleYearMonth("201407"));
         ret = new KyufuJissekiKeyInfo(被保番号,
                 サービス提供期間,
                 入力識別番号,
