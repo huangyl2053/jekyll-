@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.entity.mapper;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihon;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
-import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3017KyufujissekiKihon200804EntityMock;
+import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3017KyufujissekiKihonEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
@@ -79,7 +79,7 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
 
         @Before
         public void setUp() {
-            result = KyufuJissekiMapper.to給付実績基本(DbT3017KyufujissekiKihon200804EntityMock.getSpiedInstance());
+            result = KyufuJissekiMapper.to給付実績基本(DbT3017KyufujissekiKihonEntityMock.getSpiedInstance());
         }
 
         @Test

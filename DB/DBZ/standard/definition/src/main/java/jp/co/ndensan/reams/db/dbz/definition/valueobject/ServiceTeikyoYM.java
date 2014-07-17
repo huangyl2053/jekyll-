@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
@@ -17,19 +17,19 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class ServiceTeikyoYM implements IDbColumnMappable, IValueObject, Comparable<ServiceTeikyoYM> {
 
-    private final FlexibleDate serviceTeikyoYM;
+    private final FlexibleYearMonth serviceTeikyoYM;
 
     /**
      * インスタンスを生成します。
      *
      * @param serviceTeikyoYM サービス提供年月
      */
-    public ServiceTeikyoYM(FlexibleDate serviceTeikyoYM) throws NullPointerException {
+    public ServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) throws NullPointerException {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
     @Override
-    public FlexibleDate value() {
+    public FlexibleYearMonth value() {
         return serviceTeikyoYM;
     }
 
@@ -52,7 +52,7 @@ public class ServiceTeikyoYM implements IDbColumnMappable, IValueObject, Compara
     }
 
     @Override
-    public FlexibleDate getColumnValue() {
+    public FlexibleYearMonth getColumnValue() {
         return serviceTeikyoYM;
     }
 

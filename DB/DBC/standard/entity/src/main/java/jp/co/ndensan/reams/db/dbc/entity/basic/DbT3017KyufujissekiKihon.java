@@ -3,11 +3,13 @@ package jp.co.ndensan.reams.db.dbc.entity.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * DbT3017KyufujissekiKihon200804の項目定義クラスです
+ * 給付実績基本を表す列挙型です。
  *
+ * @author N8156 宮本 康
  */
-public enum DbT3017KyufujissekiKihon200804 implements IColumnDefinition {
+public enum DbT3017KyufujissekiKihon implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -45,7 +47,7 @@ public enum DbT3017KyufujissekiKihon200804 implements IColumnDefinition {
     kokuhoHokenshaNo(8, 0),
     kokuhoHiHokenshashoNo(20, 0),
     kokuhoKojinNo(10, 0),
-    kyotakuServicePlanSakuseiKubunCode(1, 0),
+    kyotakuServiceSakuseiKubunCode(1, 0),
     kyotakuKaigoShienJigyoshoNo(2147483647, 0),
     kaishiYMD(2147483647, 0),
     chushiYMD(2147483647, 0),
@@ -109,22 +111,23 @@ public enum DbT3017KyufujissekiKihon200804 implements IColumnDefinition {
     atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(10, 0),
     keikaiKubunCode(1, 0),
     shinsaYM(2147483647, 0),
+    seiriNo(10, 0),
     sofuYM(2147483647, 0),
     torikomiYM(2147483647, 0),
-    seiriNo(10, 0),
     dokujiSakuseiKubun(1, 0),
     hokenshaHoyuKyufujissekiJohoSakujoFlag(1, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT3017KyufujissekiKihon200804(int maxLength, int scale) {
+    private DbT3017KyufujissekiKihon(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }
 
     /**
      * getMaxLength
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -133,6 +136,7 @@ public enum DbT3017KyufujissekiKihon200804 implements IColumnDefinition {
 
     /**
      * getScale
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

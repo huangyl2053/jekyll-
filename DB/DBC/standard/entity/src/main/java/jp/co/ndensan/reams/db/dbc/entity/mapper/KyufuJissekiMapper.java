@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonNyutaisho;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonServiceKikan;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihon200804Entity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
@@ -37,7 +37,7 @@ public final class KyufuJissekiMapper {
      * @param entity 給付実績基本エンティティ
      * @return 給付実績基本情報
      */
-    public static KyufuJissekiKihon to給付実績基本(DbT3017KyufujissekiKihon200804Entity entity) {
+    public static KyufuJissekiKihon to給付実績基本(DbT3017KyufujissekiKihonEntity entity) {
         return new KyufuJissekiKihon(
                 KyufuSakuseiKubun.toValue(entity.getKyufuSakuseiKubunCode()),
                 entity.getYoKaigoJotaiKubunCode(),
@@ -52,7 +52,7 @@ public final class KyufuJissekiMapper {
                 to公費情報(entity));
     }
 
-    private static KyufuJissekiKihonHihokensha to被保険者情報(DbT3017KyufujissekiKihon200804Entity entity) {
+    private static KyufuJissekiKihonHihokensha to被保険者情報(DbT3017KyufujissekiKihonEntity entity) {
         return new KyufuJissekiKihonHihokensha(
                 entity.getKyuSochiNyushoshaTokureiCode(),
                 entity.getRojinHokenShichosonNo(),
@@ -64,21 +64,21 @@ public final class KyufuJissekiMapper {
                 entity.getKokuhoKojinNo());
     }
 
-    private static KyufuJissekiKihonKyotakuService to居宅サービス計画情報(DbT3017KyufujissekiKihon200804Entity entity) {
+    private static KyufuJissekiKihonKyotakuService to居宅サービス計画情報(DbT3017KyufujissekiKihonEntity entity) {
         return new KyufuJissekiKihonKyotakuService(
-                entity.getKyotakuServicePlanSakuseiKubunCode(),
+                entity.getKyotakuServiceSakuseiKubunCode(),
                 entity.getKyotakuKaigoShienJigyoshoNo(),
                 RString.EMPTY);
     }
 
-    private static KyufuJissekiKihonServiceKikan toサービス期間情報(DbT3017KyufujissekiKihon200804Entity entity) {
+    private static KyufuJissekiKihonServiceKikan toサービス期間情報(DbT3017KyufujissekiKihonEntity entity) {
         return new KyufuJissekiKihonServiceKikan(
                 entity.getKaishiYMD(),
                 entity.getChushiYMD(),
                 entity.getChushiRiyuNyushomaeJyokyoCode());
     }
 
-    private static KyufuJissekiKihonNyutaisho to施設入退所情報(DbT3017KyufujissekiKihon200804Entity entity) {
+    private static KyufuJissekiKihonNyutaisho to施設入退所情報(DbT3017KyufujissekiKihonEntity entity) {
         return new KyufuJissekiKihonNyutaisho(
                 entity.getNyushoYMD(),
                 entity.getTaishoYMD(),
@@ -88,7 +88,7 @@ public final class KyufuJissekiMapper {
                 entity.getTaishogoJotaiCode());
     }
 
-    private static KyufuJissekiKihonKyufuritsu to給付率情報(DbT3017KyufujissekiKihon200804Entity entity) {
+    private static KyufuJissekiKihonKyufuritsu to給付率情報(DbT3017KyufujissekiKihonEntity entity) {
         return new KyufuJissekiKihonKyufuritsu(
                 entity.getHokenKyufuritsu(),
                 entity.getKohi1Kyufuritsu(),
@@ -96,7 +96,7 @@ public final class KyufuJissekiMapper {
                 entity.getKohi3Kyufuritsu());
     }
 
-    private static KyufuJissekiKihonKohi to公費情報(DbT3017KyufujissekiKihon200804Entity entity) {
+    private static KyufuJissekiKihonKohi to公費情報(DbT3017KyufujissekiKihonEntity entity) {
         return new KyufuJissekiKihonKohi(
                 entity.getKohi1FutanshaNo(),
                 entity.getKohi1JukyushaNo(),

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.helper;
 
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihon200804Entity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -15,25 +15,25 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.mockito.Mockito.spy;
 
 /**
- * DbT3017KyufujissekiKihon200804Entityを生成するMockです。
+ * DbT3017KyufujissekiKihonEntityを生成するMockです。
  *
  * @author N8156 宮本 康
  */
-public class DbT3017KyufujissekiKihon200804EntityMock {
+public class DbT3017KyufujissekiKihonEntityMock {
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
      */
-    private DbT3017KyufujissekiKihon200804EntityMock() {
+    private DbT3017KyufujissekiKihonEntityMock() {
     }
 
     /**
-     * DbT3017KyufujissekiKihon200804Entityを生成して返します。
+     * DbT3017KyufujissekiKihonEntityを生成して返します。
      *
-     * @return DbT3017KyufujissekiKihon200804Entity
+     * @return DbT3017KyufujissekiKihonEntity
      */
-    public static DbT3017KyufujissekiKihon200804Entity getSpiedInstance() {
-        DbT3017KyufujissekiKihon200804Entity entity = new DbT3017KyufujissekiKihon200804Entity();
+    public static DbT3017KyufujissekiKihonEntity getSpiedInstance() {
+        DbT3017KyufujissekiKihonEntity entity = new DbT3017KyufujissekiKihonEntity();
 
         entity.setKyufuSakuseiKubunCode(new RString("1"));
         entity.setYoKaigoJotaiKubunCode(new RString("要介護１"));
@@ -51,7 +51,7 @@ public class DbT3017KyufujissekiKihon200804EntityMock {
         entity.setKokuhoHiHokenshashoNo(new RString("00000004"));
         entity.setKokuhoKojinNo(new RString("0000000005"));
 
-        entity.setKyotakuServicePlanSakuseiKubunCode(new RString("自己作成"));
+        entity.setKyotakuServiceSakuseiKubunCode(new RString("自己作成"));
         entity.setKyotakuKaigoShienJigyoshoNo(new JigyoshaNo(new RString("0000000001")));
 
         entity.setKaishiYMD(new FlexibleDate("20140101"));
