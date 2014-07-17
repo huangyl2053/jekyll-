@@ -19,12 +19,12 @@ public enum KyufuJissekiKubun {
      * 給付実績区分が「現物」であることを表します。 <br />
      * コード：１
      */
-    新規("1"),
+    現物("1"),
     /**
      * 給付実績区分が「償還」であることを表します。 <br />
      * コード：２
      */
-    削除("2");
+    償還("2");
     private final RString code;
 
     private KyufuJissekiKubun(String code) {

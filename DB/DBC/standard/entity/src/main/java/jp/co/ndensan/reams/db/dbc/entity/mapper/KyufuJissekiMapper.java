@@ -38,7 +38,7 @@ public final class KyufuJissekiMapper {
      * @return 給付実績基本情報
      */
     public static KyufuJissekiKihon to給付実績基本(DbT3017KyufujissekiKihonEntity entity) {
-        return new KyufuJissekiKihon(
+        return entity != null ? new KyufuJissekiKihon(
                 KyufuSakuseiKubun.toValue(entity.getKyufuSakuseiKubunCode()),
                 entity.getYoKaigoJotaiKubunCode(),
                 new Range<>(entity.getNinteiYukoKaishiYMD(), entity.getNinteiYukoShuryoYMD()),
@@ -49,7 +49,7 @@ public final class KyufuJissekiMapper {
                 toサービス期間情報(entity),
                 to施設入退所情報(entity),
                 to給付率情報(entity),
-                to公費情報(entity));
+                to公費情報(entity)) : null;
     }
 
     private static KyufuJissekiKihonHihokensha to被保険者情報(DbT3017KyufujissekiKihonEntity entity) {
