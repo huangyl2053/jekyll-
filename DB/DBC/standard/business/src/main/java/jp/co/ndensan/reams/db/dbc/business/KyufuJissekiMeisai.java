@@ -5,16 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.business;
 
-import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 給付実績の明細情報を保持するクラス
+ * 給付実績の明細情報を保持するクラスです。
  *
- * @author N8223　朴義一
+ * @author N8223 朴 義一
  */
 public class KyufuJissekiMeisai {
 
@@ -35,7 +33,7 @@ public class KyufuJissekiMeisai {
     private final FlexibleYearMonth 審査年月;
 
     /**
-     * コンストラクタです。
+     * インスタンスを生成します。
      *
      * @param サービス サービス
      * @param 適要 適要
@@ -53,9 +51,22 @@ public class KyufuJissekiMeisai {
      * @param 過誤回数 過誤回数
      * @param 審査年月 審査年月
      */
-    public KyufuJissekiMeisai(RString サービス, RString 適要, RString 決定, Decimal 単位, int 回数日数, int 公費1日数, int 公費2日数, int 公費3日数,
-            Decimal サービス単位, int 公費1単位, int 公費2単位, int 公費3単位, int 再審査回数, int 過誤回数, FlexibleYearMonth 審査年月) throws NullPointerException {
-
+    public KyufuJissekiMeisai(
+            RString サービス,
+            RString 適要,
+            RString 決定,
+            Decimal 単位,
+            int 回数日数,
+            int 公費1日数,
+            int 公費2日数,
+            int 公費3日数,
+            Decimal サービス単位,
+            int 公費1単位,
+            int 公費2単位,
+            int 公費3単位,
+            int 再審査回数,
+            int 過誤回数,
+            FlexibleYearMonth 審査年月) throws NullPointerException {
         this.サービス = サービス;
         this.適要 = 適要;
         this.決定 = 決定;
@@ -207,5 +218,4 @@ public class KyufuJissekiMeisai {
     public FlexibleYearMonth get審査年月() {
         return 審査年月;
     }
-
 }

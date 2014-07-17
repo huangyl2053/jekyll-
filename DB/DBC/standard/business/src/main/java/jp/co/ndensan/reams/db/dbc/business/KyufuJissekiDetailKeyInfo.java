@@ -11,10 +11,10 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.RecodeShubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 給付実績の詳細キー情報を保持するクラスです。
@@ -25,7 +25,7 @@ public class KyufuJissekiDetailKeyInfo {
 
     private final KokanShikibetsuNo 交換情報識別番号;
     private final InputShikibetsuNo 入力識別番号;
-    private final RecodeShubetsuCode レコード種別コード;
+    private final RString レコード種別コード;
     private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final KaigoHihokenshaNo 被保番号;
     private final ServiceTeikyoYM サービス提供年月;
@@ -53,7 +53,7 @@ public class KyufuJissekiDetailKeyInfo {
     public KyufuJissekiDetailKeyInfo(
             KokanShikibetsuNo 交換情報識別番号,
             InputShikibetsuNo 入力識別番号,
-            RecodeShubetsuCode レコード種別コード,
+            RString レコード種別コード,
             ShoKisaiHokenshaNo 証記載保険者番号,
             KaigoHihokenshaNo 被保番号,
             ServiceTeikyoYM サービス提供年月,
@@ -98,7 +98,7 @@ public class KyufuJissekiDetailKeyInfo {
      *
      * @return レコード種別コード
      */
-    public RecodeShubetsuCode getレコード種別コード() {
+    public RString getレコード種別コード() {
         return レコード種別コード;
     }
 
@@ -172,5 +172,69 @@ public class KyufuJissekiDetailKeyInfo {
      */
     public List<ServiceTeikyoYMListOfServiceShurui> get対象サービス種類リスト() {
         return 対象サービス種類リスト;
+    }
+
+    /**
+     * 前月の情報が存在するか判定する
+     *
+     * @return 存在する場合はtrueを返す
+     */
+    public boolean isPrevMonth() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * 次月の情報が存在するか判定する
+     *
+     * @return 存在する場合はtrueを返す
+     */
+    public boolean isNextMonth() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * 前事業所の情報が存在するか判定する
+     *
+     * @return 存在する場合はtrueを返す
+     */
+    public boolean isPrevJigyosha() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * 次事業所の情報が存在するか判定する
+     *
+     * @return 存在する場合はtrueを返す
+     */
+    public boolean isNextJigyosha() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * キー情報を前月に設定する
+     */
+    public void prevMonth() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * キー情報を次月に設定する
+     */
+    public void nextMonth() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * キー情報を前事業所に設定する
+     */
+    public void prevJigyosha() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * キー情報を次事業所に設定する
+     */
+    public void nextJigyosha() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

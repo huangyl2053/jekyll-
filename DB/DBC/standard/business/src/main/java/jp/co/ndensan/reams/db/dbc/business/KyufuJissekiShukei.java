@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 給付実績の集計情報を保持するクラス
+ * 給付実績の集計情報を保持するクラスです。
  *
- * @author N8223　朴義一
+ * @author N8223 朴 義一
  */
 public class KyufuJissekiShukei {
 
@@ -37,7 +37,7 @@ public class KyufuJissekiShukei {
     private final FlexibleYearMonth 審査年月;
 
     /**
-     * コンストラクタです。
+     * インスタンスを生成します。
      *
      * @param 種類 種類
      * @param 実日数 実日数
@@ -59,10 +59,26 @@ public class KyufuJissekiShukei {
      * @param 過誤回数 過誤回数
      * @param 審査年月 審査年月
      */
-    public KyufuJissekiShukei(RString 種類, int 実日数, Decimal 計画単位, Decimal 対象単位, Decimal 対象外単位, int 短計画日数, Decimal 保険公費,
-            RString 決定, int 短実日数, Decimal 単位合計, Decimal 単位数単価, Decimal 請求額, Decimal 利用者負担額, Decimal 出来高単位合計, Decimal 出来高請求,
-            Decimal 出来高本人負担額, int 再審査回数, int 過誤回数, FlexibleYearMonth 審査年月) throws NullPointerException {
-
+    public KyufuJissekiShukei(
+            RString 種類,
+            int 実日数,
+            Decimal 計画単位,
+            Decimal 対象単位,
+            Decimal 対象外単位,
+            int 短計画日数,
+            Decimal 保険公費,
+            RString 決定,
+            int 短実日数,
+            Decimal 単位合計,
+            Decimal 単位数単価,
+            Decimal 請求額,
+            Decimal 利用者負担額,
+            Decimal 出来高単位合計,
+            Decimal 出来高請求,
+            Decimal 出来高本人負担額,
+            int 再審査回数,
+            int 過誤回数,
+            FlexibleYearMonth 審査年月) throws NullPointerException {
         this.種類 = 種類;
         this.実日数 = 実日数;
         this.計画単位 = 計画単位;
@@ -82,7 +98,6 @@ public class KyufuJissekiShukei {
         this.再審査回数 = 再審査回数;
         this.過誤回数 = 過誤回数;
         this.審査年月 = 審査年月;
-
     }
 
     /**
@@ -149,7 +164,7 @@ public class KyufuJissekiShukei {
     }
 
     /**
-     * を返します。
+     * 決定を返します。
      *
      * @return 決定
      */
@@ -212,7 +227,7 @@ public class KyufuJissekiShukei {
     }
 
     /**
-     * を返します。
+     * 出来高請求を返します。
      *
      * @return
      */
@@ -230,7 +245,7 @@ public class KyufuJissekiShukei {
     }
 
     /**
-     * を返します。
+     * 再審査回数を返します。
      *
      * @return
      */

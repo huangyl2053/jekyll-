@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 給付実績の社会福祉法人軽減額情報を保持するクラス
+ * 給付実績の社会福祉法人軽減額情報を保持するクラスです。
  *
- * @author N8223　朴義一
+ * @author N8223 朴 義一
  */
 public class KyufuJissekiShafukuKeigen {
 
@@ -28,7 +28,7 @@ public class KyufuJissekiShafukuKeigen {
     private final FlexibleYearMonth 審査年月;
 
     /**
-     * コンストラクタです。
+     * インスタンスを生成します。
      *
      * @param 軽減率 軽減率
      * @param 種類 種類
@@ -40,12 +40,18 @@ public class KyufuJissekiShafukuKeigen {
      * @param 再審査回数 再審査回数
      * @param 過誤回数 過誤回数
      * @param 審査年月 審査年月
-     *
-     *
      */
-    public KyufuJissekiShafukuKeigen(RString 軽減率, RString 種類, RString 前後, Decimal 受領すべき利用者負担の総額, Decimal 軽減額,
-            Decimal 軽減後利用者負担額, RString 備考, int 再審査回数, int 過誤回数, FlexibleYearMonth 審査年月) {
-
+    public KyufuJissekiShafukuKeigen(
+            RString 軽減率,
+            RString 種類,
+            RString 前後,
+            Decimal 受領すべき利用者負担の総額,
+            Decimal 軽減額,
+            Decimal 軽減後利用者負担額,
+            RString 備考,
+            int 再審査回数,
+            int 過誤回数,
+            FlexibleYearMonth 審査年月) {
         this.軽減率 = 軽減率;
         this.種類 = 種類;
         this.前後 = 前後;
@@ -56,7 +62,6 @@ public class KyufuJissekiShafukuKeigen {
         this.再審査回数 = 再審査回数;
         this.過誤回数 = 過誤回数;
         this.審査年月 = 審査年月;
-
     }
 
     /**
@@ -123,7 +128,7 @@ public class KyufuJissekiShafukuKeigen {
     }
 
     /**
-     * を返します。
+     * 再審査回数を返します。
      *
      * @return 再審査回数
      */
@@ -148,5 +153,4 @@ public class KyufuJissekiShafukuKeigen {
     public FlexibleYearMonth get審査年月() {
         return 審査年月;
     }
-
 }
