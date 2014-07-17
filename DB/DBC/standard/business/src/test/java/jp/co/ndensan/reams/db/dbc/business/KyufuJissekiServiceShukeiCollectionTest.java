@@ -24,15 +24,15 @@ import static org.mockito.Mockito.mock;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class KyufuJissekiShukeiCollectionTest {
+public class KyufuJissekiServiceShukeiCollectionTest {
 
-    private static KyufuJissekiShukeiCollection sut;
+    private static KyufuJissekiServiceShukeiCollection sut;
 
     public static class コンストラクタのテスト extends DbcTestBase {
 
         @Test(expected = NullPointerException.class)
         public void nullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new KyufuJissekiShukeiCollection(null);
+            sut = new KyufuJissekiServiceShukeiCollection(null);
         }
     }
 
@@ -43,19 +43,19 @@ public class KyufuJissekiShukeiCollectionTest {
 
         @Test
         public void 合計対象_居宅サービス合計を指定したとき_居宅サービス合計の_合計単位を返す() {
-            sut = new KyufuJissekiShukeiCollection(create給付実績サービス種類集計List());
+            sut = new KyufuJissekiServiceShukeiCollection(create給付実績サービス種類集計List());
             assertThat(sut.get給付実績特定サービス集計(KyufuJissekiShukeiGokeiTaisho.居宅サービス合計).get合計単位(), is(new Decimal("100")));
         }
 
         @Test
         public void 合計対象_施設サービス合計を指定したとき_施設サービス合計の_合計単位を返す() {
-            sut = new KyufuJissekiShukeiCollection(create給付実績サービス種類集計List());
+            sut = new KyufuJissekiServiceShukeiCollection(create給付実績サービス種類集計List());
             assertThat(sut.get給付実績特定サービス集計(KyufuJissekiShukeiGokeiTaisho.施設サービス合計).get合計単位(), is(new Decimal("200")));
         }
 
         @Test
         public void 合計対象_地域密着型サービス合計を指定したとき_地域密着型サービス合計の_合計単位を返す() {
-            sut = new KyufuJissekiShukeiCollection(create給付実績サービス種類集計List());
+            sut = new KyufuJissekiServiceShukeiCollection(create給付実績サービス種類集計List());
             assertThat(sut.get給付実績特定サービス集計(KyufuJissekiShukeiGokeiTaisho.地域密着型サービス合計).get合計単位(), is(new Decimal("300")));
         }
 
@@ -65,13 +65,13 @@ public class KyufuJissekiShukeiCollectionTest {
 
         @Test
         public void コンストラクタから長さ3のリストを渡されたとき_isEmptyはfalseを返す() {
-            sut = new KyufuJissekiShukeiCollection(create給付実績サービス種類集計List());
+            sut = new KyufuJissekiServiceShukeiCollection(create給付実績サービス種類集計List());
             assertThat(sut.isEmpty(), is(false));
         }
 
         @Test
         public void コンストラクタから空のリストを渡されたとき_isEmptyはtrueを返す() {
-            sut = new KyufuJissekiShukeiCollection(Collections.EMPTY_LIST);
+            sut = new KyufuJissekiServiceShukeiCollection(Collections.EMPTY_LIST);
             assertThat(sut.isEmpty(), is(true));
         }
     }
@@ -80,31 +80,31 @@ public class KyufuJissekiShukeiCollectionTest {
 
         @Test
         public void コンストラクタから長さ3のリストを渡されたとき_sizeは3を返す() {
-            sut = new KyufuJissekiShukeiCollection(create給付実績サービス種類集計List());
+            sut = new KyufuJissekiServiceShukeiCollection(create給付実績サービス種類集計List());
             assertThat(sut.size(), is(3));
         }
 
         @Test
         public void コンストラクタから空のリストを渡されたとき_sizeは0を返す() {
-            sut = new KyufuJissekiShukeiCollection(Collections.EMPTY_LIST);
+            sut = new KyufuJissekiServiceShukeiCollection(Collections.EMPTY_LIST);
             assertThat(sut.size(), is(0));
         }
     }
 
-    private static List<KyufuJissekiShukei> create給付実績サービス種類集計List() {
-        List<KyufuJissekiShukei> list = new ArrayList<>();
+    private static List<KyufuJissekiServiceShukei> create給付実績サービス種類集計List() {
+        List<KyufuJissekiServiceShukei> list = new ArrayList<>();
         list.add(create給付実績特定サービス(KyufuJissekiShukeiGokeiTaisho.居宅サービス合計, new Decimal("100")));
         list.add(create給付実績特定サービス(KyufuJissekiShukeiGokeiTaisho.施設サービス合計, new Decimal("200")));
         list.add(create給付実績特定サービス(KyufuJissekiShukeiGokeiTaisho.地域密着型サービス合計, new Decimal("300")));
         return list;
     }
 
-    private static KyufuJissekiShukei create給付実績特定サービス(
+    private static KyufuJissekiServiceShukei create給付実績特定サービス(
             KyufuJissekiShukeiGokeiTaisho 合計対象,
             Decimal 合計単位) {
         KyufuJissekiKeyInfo 給付実績キー情報 = mock(KyufuJissekiKeyInfo.class);
 
-        KyufuJissekiShukei kyufuJissekiShukei = new KyufuJissekiShukei(
+        KyufuJissekiServiceShukei kyufuJissekiShukei = new KyufuJissekiServiceShukei(
                 合計対象,
                 合計単位,
                 給付実績キー情報);

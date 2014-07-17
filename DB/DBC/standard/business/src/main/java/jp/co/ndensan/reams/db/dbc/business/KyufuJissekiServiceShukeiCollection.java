@@ -16,16 +16,16 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  *
  * @author N8187 久保田 英男
  */
-public class KyufuJissekiShukeiCollection implements Iterable {
+public class KyufuJissekiServiceShukeiCollection implements Iterable {
 
-    private final List<KyufuJissekiShukei> 給付実績特定サービス集計リスト;
+    private final List<KyufuJissekiServiceShukei> 給付実績特定サービス集計リスト;
 
     /**
      * インスタンスを生成します。
      *
      * @param 給付実績特定サービス集計リスト 給付実績特定サービス集計リスト
      */
-    public KyufuJissekiShukeiCollection(List<KyufuJissekiShukei> 給付実績特定サービス集計リスト) {
+    public KyufuJissekiServiceShukeiCollection(List<KyufuJissekiServiceShukei> 給付実績特定サービス集計リスト) {
         this.給付実績特定サービス集計リスト = requireNonNull(給付実績特定サービス集計リスト,
                 Messages.E00001.replace("給付実績特定サービス種類集計リスト").getMessage());
     }
@@ -36,8 +36,8 @@ public class KyufuJissekiShukeiCollection implements Iterable {
      * @param 合計対象 合計対象
      * @return 給付実績特定サービス集計
      */
-    public KyufuJissekiShukei get給付実績特定サービス集計(KyufuJissekiShukeiGokeiTaisho 合計対象) {
-        for (KyufuJissekiShukei 給付実績特定サービス集計 : 給付実績特定サービス集計リスト) {
+    public KyufuJissekiServiceShukei get給付実績特定サービス集計(KyufuJissekiShukeiGokeiTaisho 合計対象) {
+        for (KyufuJissekiServiceShukei 給付実績特定サービス集計 : 給付実績特定サービス集計リスト) {
             if (給付実績特定サービス集計.get給付実績合計対象().equals(合計対象)) {
                 return 給付実績特定サービス集計;
             }
@@ -51,14 +51,14 @@ public class KyufuJissekiShukeiCollection implements Iterable {
 //     * @param 合計対象 合計対象
 //     * @return 給付実績特定サービス集計のコレクション
 //     */
-//    public KyufuJissekiShukeiCollection sub給付実績集計List(KyufuJissekiShukeiGokeiTaisho 合計対象) {
+//    public KyufuJissekiServiceShukeiCollection sub給付実績集計List(KyufuJissekiShukeiGokeiTaisho 合計対象) {
 //        List<KyufuJissekiShukei> sub給付実績集計List = new ArrayList<>();
-//        for (KyufuJissekiShukei 給付実績集計 : 給付実績特定サービス集計リスト) {
+//        for (KyufuJissekiServiceShukei 給付実績集計 : 給付実績特定サービス集計リスト) {
 //            if (給付実績集計.get給付実績合計対象().equals(合計対象)) {
 //                sub給付実績集計List.add(給付実績集計);
 //            }
 //        }
-//        return new KyufuJissekiShukeiCollection(sub給付実績集計List);
+//        return new KyufuJissekiServiceShukeiCollection(sub給付実績集計List);
 //    }
     /**
      * 給付実績集計リストがEMPTYかどうか判定します。

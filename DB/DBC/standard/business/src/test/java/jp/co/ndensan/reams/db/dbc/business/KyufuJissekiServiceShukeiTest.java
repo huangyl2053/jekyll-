@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -23,11 +25,12 @@ import static org.mockito.Mockito.mock;
  *
  * @author N8187 久保田 英男
  */
-public class KyufuJissekiShukeiTest {
+@RunWith(Enclosed.class)
+public class KyufuJissekiServiceShukeiTest {
 
     public static class ConstructorTest extends DbcTestBase {
 
-        private static KyufuJissekiShukei sut;
+        private static KyufuJissekiServiceShukei sut;
 
         private static KyufuJissekiShukeiGokeiTaisho 給付実績合計対象;
         private static Decimal 合計単位;
@@ -35,24 +38,24 @@ public class KyufuJissekiShukeiTest {
 
         @Before
         public void setUp() {
-            給付実績合計対象 = mock(KyufuJissekiShukeiGokeiTaisho.class);
+            給付実績合計対象 = KyufuJissekiShukeiGokeiTaisho.居宅サービス合計;
             合計単位 = mock(Decimal.class);
             給付実績キー情報 = create給付実績キー情報();
         }
 
         @Test(expected = NullPointerException.class)
         public void 給付実績合計対象がnullの時_NullPointerExceptionが発生する() {
-            sut = new KyufuJissekiShukei(null, 合計単位, 給付実績キー情報);
+            sut = new KyufuJissekiServiceShukei(null, 合計単位, 給付実績キー情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 合計単位がnullの時_NullPointerExceptionが発生する() {
-            sut = new KyufuJissekiShukei(給付実績合計対象, null, 給付実績キー情報);
+            sut = new KyufuJissekiServiceShukei(給付実績合計対象, null, 給付実績キー情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 給付実績キー情報がnullの時_NullPointerExceptionが発生する() {
-            sut = new KyufuJissekiShukei(給付実績合計対象, 合計単位, null);
+            sut = new KyufuJissekiServiceShukei(給付実績合計対象, 合計単位, null);
         }
     }
 

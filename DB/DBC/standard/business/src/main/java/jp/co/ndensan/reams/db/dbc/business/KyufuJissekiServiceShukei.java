@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @author N8187 久保田 英男
  */
-public class KyufuJissekiShukei {
+public class KyufuJissekiServiceShukei {
 
     private final KyufuJissekiShukeiGokeiTaisho 給付実績合計対象;
     private final Decimal 合計単位;
@@ -28,7 +28,7 @@ public class KyufuJissekiShukei {
      * @param 合計単位 合計単位
      * @param 給付実績キー情報 給付実績キー情報
      */
-    public KyufuJissekiShukei(KyufuJissekiShukeiGokeiTaisho 給付実績合計対象,
+    public KyufuJissekiServiceShukei(KyufuJissekiShukeiGokeiTaisho 給付実績合計対象,
             Decimal 合計単位,
             KyufuJissekiKeyInfo 給付実績キー情報) {
         this.給付実績合計対象 = requireNonNull(給付実績合計対象, Messages.E00001.replace("給付実績合計対象").getMessage());
