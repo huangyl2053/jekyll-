@@ -69,6 +69,6 @@ public class KyufuJissekiFinder {
                 詳細キー情報.getサービス提供年月().value(),
                 詳細キー情報.get給付実績区分().getCode(),
                 詳細キー情報.get事業所番号(),
-                詳細キー情報.get通番().value()));
+                詳細キー情報.get通番()));
     }
 }

@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
+import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
+import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -20,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author N8156 宮本 康
  */
-public interface IKyufuJissekiKihonDac {
+public interface IKyufuJissekiKihonDac extends IReplaceable<DbT3017KyufujissekiKihonEntity>, IDeletable<DbT3017KyufujissekiKihonEntity> {
 
     /**
      * 引数の条件に該当する給付実績基本エンティティを取得します。
@@ -48,5 +51,5 @@ public interface IKyufuJissekiKihonDac {
             FlexibleYearMonth サービス提供年月,
             RString 給付実績区分コード,
             JigyoshaNo 事業所番号,
-            RString 通番);
+            ToshiNo 通番);
 }

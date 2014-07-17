@@ -78,7 +78,7 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
                 any(FlexibleYearMonth.class),
                 any(RString.class),
                 any(JigyoshaNo.class),
-                any(RString.class))).thenReturn(entity);
+                any(ToshiNo.class))).thenReturn(entity);
         return dac;
     }
 
@@ -88,16 +88,16 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
 
     private static KyufuJissekiDetailKeyInfo createKyufuJissekiDetailKeyInfo() {
         return new KyufuJissekiDetailKeyInfo(
-                new KokanShikibetsuNo(new RString("0000000000")),
-                new InputShikibetsuNo(new Code("1111111111"), new RString("名称"), new RString("略称")),
-                new RString("2222222222"),
-                new ShoKisaiHokenshaNo(new RString("3333333333")),
-                new KaigoHihokenshaNo(new RString("4444444444")),
+                new KokanShikibetsuNo(new RString("0000")),
+                new InputShikibetsuNo(new Code("0001"), new RString("名称"), new RString("略称")),
+                new RString("02"),
+                new ShoKisaiHokenshaNo(new RString("00000003")),
+                new KaigoHihokenshaNo(new RString("0000000004")),
                 new ServiceTeikyoYM(new FlexibleYearMonth("201401")),
-                new JigyoshaNo(new RString("5555555555")),
+                new JigyoshaNo(new RString("0000000005")),
                 KyufuSakuseiKubun.新規,
                 KyufuJissekiKubun.償還,
-                new ToshiNo(new RString("6666666666")),
+                new ToshiNo(new RString("0000000006")),
                 new ArrayList<ServiceTeikyoYMListOfServiceShurui>());
     }
 }

@@ -37,45 +37,45 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
         private KyufuJissekiKihon result;
 
         private final KyufuSakuseiKubun 作成区分 = KyufuSakuseiKubun.新規;
-        private final RString 要介護度 = new RString("要介護１");
+        private final RString 要介護度 = new RString("01");
         private final Range<FlexibleDate> 認定有効期間 = new Range<>(new FlexibleDate("20130701"), new FlexibleDate("20140630"));
         private final FlexibleYearMonth 審査年月 = new FlexibleYearMonth("201401");
         private final KeikokuKubun 警告区分 = KeikokuKubun.警告なし;
 
-        private final RString 旧措置入所者特例 = new RString("特例１");
+        private final RString 旧措置入所者特例 = new RString("1");
         private final RString 老人保健市町村番号 = new RString("00000001");
-        private final RString 老人保健受給者番号 = new RString("00000001");
+        private final RString 老人保健受給者番号 = new RString("0000001");
         private final RString 後期高齢保険者番号 = new RString("39000002");
         private final RString 後期高齢被保番号 = new RString("00000002");
         private final RString 国保保険者番号 = new RString("000003");
         private final RString 被保険者証番号 = new RString("00000004");
         private final RString 個人番号 = new RString("0000000005");
 
-        private final RString 居宅サービス計画作成区分 = new RString("自己作成");
+        private final RString 居宅サービス計画作成区分 = new RString("1");
         private final JigyoshaNo 事業所番号 = new JigyoshaNo(new RString("0000000001"));
 
         private final FlexibleDate 開始日 = new FlexibleDate("20140101");
         private final FlexibleDate 中止日 = new FlexibleDate("20140303");
-        private final RString 中止理由 = new RString("居宅");
+        private final RString 中止理由 = new RString("2");
 
         private final FlexibleDate 入所日 = new FlexibleDate("20140101");
         private final FlexibleDate 退所日 = new FlexibleDate("20140202");
         private final int 入所実日数 = 10;
         private final int 外泊日数 = 30;
-        private final RString 入所前の状況 = new RString("居宅");
-        private final RString 退所後の状況 = new RString("医療機関入院");
+        private final RString 入所前の状況 = new RString("2");
+        private final RString 退所後の状況 = new RString("3");
 
         private final HokenKyufuRitsu 保険 = new HokenKyufuRitsu(new Decimal(90));
         private final HokenKyufuRitsu 公費１ = new HokenKyufuRitsu(new Decimal(1));
         private final HokenKyufuRitsu 公費２ = new HokenKyufuRitsu(new Decimal(2));
         private final HokenKyufuRitsu 公費３ = new HokenKyufuRitsu(new Decimal(3));
 
-        private final RString 公費１負担者番号 = new RString("0000000001");
-        private final RString 公費１受給者番号 = new RString("1000000001");
-        private final RString 公費２負担者番号 = new RString("0000000002");
-        private final RString 公費２受給者番号 = new RString("1000000002");
-        private final RString 公費３負担者番号 = new RString("0000000003");
-        private final RString 公費３受給者番号 = new RString("1000000003");
+        private final RString 公費１負担者番号 = new RString("00000001");
+        private final RString 公費１受給者番号 = new RString("1000001");
+        private final RString 公費２負担者番号 = new RString("00000002");
+        private final RString 公費２受給者番号 = new RString("1000002");
+        private final RString 公費３負担者番号 = new RString("00000003");
+        private final RString 公費３受給者番号 = new RString("1000003");
 
         @Before
         public void setUp() {
