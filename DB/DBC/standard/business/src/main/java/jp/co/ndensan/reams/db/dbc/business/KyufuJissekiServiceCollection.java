@@ -29,7 +29,8 @@ public class KyufuJissekiServiceCollection implements Iterable {
     }
 
     /**
-     * 引数の条件に該当する給付実績サービス種類集計を返します。
+     * 引数の条件に該当する給付実績サービス種類集計を返します。<br/>
+     * 対応した給付実績サービス種類集計が存在しない場合はnullが返ります。
      *
      * @param サービス種類 サービス種類
      * @return 給付実績サービス種類集計
@@ -40,7 +41,7 @@ public class KyufuJissekiServiceCollection implements Iterable {
                 return 給付実績サービス種類集計;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("サービス種類").getMessage());
+        return null;
     }
 
 //    /**

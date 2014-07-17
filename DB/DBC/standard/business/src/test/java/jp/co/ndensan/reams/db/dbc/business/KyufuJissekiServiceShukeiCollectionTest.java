@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuJissekiShukeiGo
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
@@ -59,6 +60,11 @@ public class KyufuJissekiServiceShukeiCollectionTest {
             assertThat(sut.get給付実績特定サービス集計(KyufuJissekiShukeiGokeiTaisho.地域密着型サービス合計).get合計単位(), is(new Decimal("300")));
         }
 
+        @Test
+        public void 合計対象にnullを指定したとき_存在しないためnullを返す() {
+            sut = new KyufuJissekiServiceShukeiCollection(create給付実績サービス種類集計List());
+            assertThat(sut.get給付実績特定サービス集計(null), nullValue());
+        }
     }
 
     public static class isEmptyのテスト extends DbcTestBase {

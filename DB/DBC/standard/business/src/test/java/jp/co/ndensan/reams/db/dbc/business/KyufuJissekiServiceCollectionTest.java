@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -70,6 +71,12 @@ public class KyufuJissekiServiceCollectionTest extends DbcTestBase {
         public void サービス種類_12を指定したとき_サービス種類12の_集計情報を返す() {
             sut = new KyufuJissekiServiceCollection(create給付実績サービス集計List());
             assertThat(sut.get給付実績サービス(new ServiceShurui(new Code("12"), new RString("名称"), new RString("略称"))).get利用者負担額合計(), is(new Decimal("20")));
+        }
+
+        @Test
+        public void サービス種類_99を指定したとき_存在しないためnullを返す() {
+            sut = new KyufuJissekiServiceCollection(create給付実績サービス集計List());
+            assertThat(sut.get給付実績サービス(new ServiceShurui(new Code("99"), new RString("名称"), new RString("略称"))), nullValue());
         }
     }
 

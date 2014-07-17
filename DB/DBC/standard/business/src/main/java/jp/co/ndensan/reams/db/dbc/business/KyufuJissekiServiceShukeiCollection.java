@@ -31,7 +31,8 @@ public class KyufuJissekiServiceShukeiCollection implements Iterable {
     }
 
     /**
-     * 引数の条件に該当する給付実績特定サービス集計を返します。
+     * 引数の条件に該当する給付実績特定サービス集計を返します。<br/>
+     * 対応した給付実績特定サービス集計が存在しない場合はnullが返ります。
      *
      * @param 合計対象 合計対象
      * @return 給付実績特定サービス集計
@@ -42,7 +43,7 @@ public class KyufuJissekiServiceShukeiCollection implements Iterable {
                 return 給付実績特定サービス集計;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("合計対象").getMessage());
+        return null;
     }
 
 //    /**
