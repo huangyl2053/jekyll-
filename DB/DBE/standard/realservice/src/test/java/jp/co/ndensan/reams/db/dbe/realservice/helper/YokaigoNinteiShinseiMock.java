@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.realservice.helper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResultSimple;
+import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiRiyu;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.TorisageRiyu;
@@ -54,7 +55,7 @@ public class YokaigoNinteiShinseiMock {
                 new Code(new RString("認定申請区分_法令")),
                 new Code(new RString("認定申請有効区分")),
                 new Code(new RString("要支援申請区分")),
-                new RString("認定申請理由"),
+                new NinteiShinseiRiyu(new RString("認定申請理由")),
                 NinteiResultSimple.EMPTY,
                 true,
                 new NinteichosaIraiRirekiNo(1),

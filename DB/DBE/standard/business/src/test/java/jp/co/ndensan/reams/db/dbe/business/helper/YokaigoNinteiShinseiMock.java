@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResultSimple;
+import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiRiyu;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.TorisageRiyu;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
@@ -52,7 +53,7 @@ public class YokaigoNinteiShinseiMock {
                 new Code(RString.EMPTY),
                 new Code(RString.EMPTY),
                 new Code(RString.EMPTY),
-                RString.EMPTY,
+                NinteiShinseiRiyu.EMPTY,
                 NinteiResultSimple.EMPTY,
                 true,
                 new NinteichosaIraiRirekiNo(0),

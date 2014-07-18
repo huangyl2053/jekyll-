@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResultSimple;
+import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiRiyu;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.TorisageRiyu;
@@ -79,7 +80,7 @@ public final class YokaigoNinteiShinseiTestHelper {
                 認定申請区分_法令,
                 認定申請有効区分,
                 new Code(要支援申請区分),
-                認定申請理由,
+                new NinteiShinseiRiyu(認定申請理由),
                 前回認定結果,
                 情報提供への同意有無,
                 new NinteichosaIraiRirekiNo(認定調査依頼履歴番号),

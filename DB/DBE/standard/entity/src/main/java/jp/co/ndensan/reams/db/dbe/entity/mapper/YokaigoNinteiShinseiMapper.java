@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResultSimple;
+import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiRiyu;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.TorisageRiyu;
@@ -48,7 +49,7 @@ public final class YokaigoNinteiShinseiMapper {
                 entity.getNinteiShinseiHoreiKubunCode(),
                 entity.getNinteiShinseiYukoKubunCode(),
                 new Code(entity.getShienShinseiKubun()),
-                entity.getShinseiRiyu(),
+                new NinteiShinseiRiyu(entity.getShinseiRiyu()),
                 //TODO n3327 三浦凌 とりあえずは、すべて前回結果は「無し」とし、結果が参照可能となった時点で修正する。
                 NinteiResultSimple.EMPTY,
                 entity.getJohoteikyoDouiUmuKubun(),
@@ -90,7 +91,7 @@ public final class YokaigoNinteiShinseiMapper {
         entity.setNinteiShinseiYukoKubunCode(yokaigoNinteiShinsei.get認定申請有効区分());
         //TODO n8178 城間篤人 後日、要支援申請区分を作成予定 2014年2月末
         entity.setShienShinseiKubun(yokaigoNinteiShinsei.get要支援申請区分().getColumnValue());
-        entity.setShinseiRiyu(yokaigoNinteiShinsei.get認定申請理由());
+        entity.setShinseiRiyu(yokaigoNinteiShinsei.get認定申請理由().asRString());
         entity.setZenYokaigoKubunCode(yokaigoNinteiShinsei.get前回認定結果().get要介護度().getCode());
         entity.setZenYukoKikan(yokaigoNinteiShinsei.get前回認定結果().get認定有効期間().get有効期間月数().value());
         entity.setJohoteikyoDouiUmuKubun(yokaigoNinteiShinsei.is情報提供への同意有無());
