@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
@@ -19,7 +20,7 @@ public class KyufuJissekiKeyInfo {
     private final KaigoHihokenshaNo 被保番号;
     private final Range<ServiceTeikyoYM> サービス提供期間;
     private final InputShikibetsuNo 入力識別番号;
-    private final ServiceShurui サービス種類;
+    private final ServiceShuruiCode サービス種類コード;
     private final ServiceTeikyoYM サービス提供年月;
 
     /**
@@ -28,19 +29,19 @@ public class KyufuJissekiKeyInfo {
      * @param 被保番号 被保番号
      * @param サービス提供期間 サービス提供期間
      * @param 入力識別番号 入力識別番号
-     * @param サービス種類 サービス種類
+     * @param サービス種類コード サービス種類コード
      * @param サービス提供年月 サービス提供年月
      */
     public KyufuJissekiKeyInfo(
             KaigoHihokenshaNo 被保番号,
             Range<ServiceTeikyoYM> サービス提供期間,
             InputShikibetsuNo 入力識別番号,
-            ServiceShurui サービス種類,
+            ServiceShuruiCode サービス種類コード,
             ServiceTeikyoYM サービス提供年月) {
         this.被保番号 = 被保番号;
         this.サービス提供期間 = サービス提供期間;
         this.入力識別番号 = 入力識別番号;
-        this.サービス種類 = サービス種類;
+        this.サービス種類コード = サービス種類コード;
         this.サービス提供年月 = サービス提供年月;
     }
 
@@ -72,12 +73,12 @@ public class KyufuJissekiKeyInfo {
     }
 
     /**
-     * サービス種類を返します。
+     * サービス種類コードを返します。
      *
-     * @return サービス種類
+     * @return サービス種類コード
      */
-    public ServiceShurui getサービス種類() {
-        return サービス種類;
+    public ServiceShuruiCode getサービス種類コード() {
+        return サービス種類コード;
     }
 
     /**

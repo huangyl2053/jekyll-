@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 
 /**
  * サービス種類に対応するサービス提供年月のリストを保持するクラスです。
@@ -14,29 +15,29 @@ import java.util.List;
  */
 public class ServiceTeikyoYMListOfServiceShurui {
 
-    private final ServiceShurui サービス種類;
+    private final ServiceShuruiCode サービス種類コード;
     private final List<JigyoshaNoListOfServiceTeikyoYM> サービス提供年月リスト;
 
     /**
      * インスタンスを生成します。
      *
-     * @param サービス種類 サービス種類
+     * @param サービス種類コード サービス種類コード
      * @param サービス提供年月リスト サービス提供年月リスト
      */
     public ServiceTeikyoYMListOfServiceShurui(
-            ServiceShurui サービス種類,
+            ServiceShuruiCode サービス種類コード,
             List<JigyoshaNoListOfServiceTeikyoYM> サービス提供年月リスト) {
-        this.サービス種類 = サービス種類;
+        this.サービス種類コード = サービス種類コード;
         this.サービス提供年月リスト = サービス提供年月リスト;
     }
 
     /**
-     * サービス種類を返します。
+     * サービス種類コードを返します。
      *
-     * @return サービス種類
+     * @return サービス種類コード
      */
-    public ServiceShurui getサービス種類() {
-        return サービス種類;
+    public ServiceShuruiCode getサービス種類コード() {
+        return サービス種類コード;
     }
 
     /**

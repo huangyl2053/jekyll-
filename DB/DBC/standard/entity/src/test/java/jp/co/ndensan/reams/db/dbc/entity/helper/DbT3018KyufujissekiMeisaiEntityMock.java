@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.spy;
@@ -54,8 +53,8 @@ public class DbT3018KyufujissekiMeisaiEntityMock {
         entity.setServiceTeikyoYM(new FlexibleYearMonth("201401"));
         entity.setJigyoshoNo(new JigyoshaNo(new RString("0000000005")));
         entity.setToshiNo(new RString("0000000006"));
-        entity.setServiceShuruiCode(new ServiceShuruiCode(new Code("01")));
-        entity.setServiceKomokuCode(new ServiceKomokuCode(new Code("0002")));
+        entity.setServiceShuruiCode(new ServiceShuruiCode(new RString("01")));
+        entity.setServiceKomokuCode(new ServiceKomokuCode(new RString("0002")));
         entity.setShinsaYM(new FlexibleYearMonth("201402"));
         return entity;
     }
