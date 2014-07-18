@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihonEntity;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.InputShikibetsuNoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
@@ -19,39 +20,35 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 給付実績基本のデータアクセスインターフェースです。
+ * 給付実績集計のデータアクセスインターフェースです。
  *
  * @author N8156 宮本 康
  */
-public interface IKyufuJissekiKihonDac extends
-        IReplaceable<DbT3017KyufujissekiKihonEntity>,
-        IDeletable<DbT3017KyufujissekiKihonEntity> {
+public interface IKyufuJissekiShukeiDac extends
+        IReplaceable<DbT3033KyufujissekiShukeiEntity>,
+        IDeletable<DbT3033KyufujissekiShukeiEntity> {
 
     /**
-     * 引数の条件に該当する給付実績基本エンティティを取得します。
+     * 引数の条件に該当する給付実績集計エンティティを取得します。
      *
      * @param 交換情報識別番号
      * @param 入力識別番号
      * @param レコード種別コード
-     * @param 給付実績情報作成区分コード
      * @param 証記載保険者番号
      * @param 被保番号
      * @param サービス提供年月
-     * @param 給付実績区分コード
      * @param 事業所番号
      * @param 通番
-     * @return 給付実績基本エンティティ
+     * @return 給付実績集計エンティティ
      */
     @Transaction
-    DbT3017KyufujissekiKihonEntity select(
+    List<DbT3033KyufujissekiShukeiEntity> select(
             KokanShikibetsuNo 交換情報識別番号,
             InputShikibetsuNoCode 入力識別番号,
             RString レコード種別コード,
-            RString 給付実績情報作成区分コード,
             ShoKisaiHokenshaNo 証記載保険者番号,
             KaigoHihokenshaNo 被保番号,
             FlexibleYearMonth サービス提供年月,
-            RString 給付実績区分コード,
             JigyoshaNo 事業所番号,
             ToshiNo 通番);
 }
