@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShishoCode;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunHorei;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
@@ -68,7 +67,7 @@ public class YokaigoNinteiShinsei {
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 意見書依頼履歴番号 意見書依頼履歴番号
      * @param みなし要介護区分コード みなし要介護区分コード
-     * @param is延期通知有無同意 延期通知有無同意
+     * @param 延期通知発行同意有無 延期通知同意有無
      * @param is施設入所 施設入所
      * @param 市町村連絡事項 市町村連絡事項
      * @param 認定申請取下げ 認定申請取下げ
@@ -77,7 +76,7 @@ public class YokaigoNinteiShinsei {
             KaigoHihokenshaNo 介護被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 認定申請年月日, EdabanCode 枝番コード,
             Code 認定申請区分_申請時, Code 認定申請区分_法令, Code 認定申請有効区分, Code 要支援申請区分, RString 認定申請理由,
             NinteiResultSimple 前回認定結果, boolean 情報提供への同意有無, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
-            int 意見書依頼履歴番号, Code みなし要介護区分コード, boolean is延期通知有無同意, boolean is施設入所,
+            int 意見書依頼履歴番号, Code みなし要介護区分コード, boolean 延期通知発行同意有無, boolean is施設入所,
             RString 市町村連絡事項, NinteiShinseiTorisage 認定申請取下げ) {
         this.申請書管理番号 = 申請書管理番号;
         this.証記載保険者番号 = 証記載保険者番号;
@@ -96,7 +95,7 @@ public class YokaigoNinteiShinsei {
         this.認定調査依頼履歴番号 = 認定調査依頼履歴番号;
         this.意見書依頼履歴番号 = 意見書依頼履歴番号;
         this.みなし要介護区分コード = みなし要介護区分コード;
-        this.延期通知有無同意 = is延期通知有無同意;
+        this.延期通知有無同意 = 延期通知発行同意有無;
         this.施設入所 = is施設入所;
         this.市町村連絡事項 = 市町村連絡事項;
         this.認定申請取下げ = 認定申請取下げ;

@@ -40,7 +40,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     private final NinteichosaIraiManager ninteichosaIraiManager;
     private final KaigoNinteichosainManager kaigoNinteichosainManager;
     private final IKojinFinder kojinFinder;
-    private final YokaigoninteiProgressManager yokaigoninteiProgressManager;
+    private final YokaigoNinteiProgressManager yokaigoninteiProgressManager;
 
     /**
      * コンストラクタです。
@@ -50,7 +50,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
         ninteichosaIraiManager = new NinteichosaIraiManager();
         kaigoNinteichosainManager = new KaigoNinteichosainManager();
         kojinFinder = KojinService.createKojinFinder();
-        yokaigoninteiProgressManager = new YokaigoninteiProgressManager();
+        yokaigoninteiProgressManager = new YokaigoNinteiProgressManager();
     }
 
     /**
@@ -67,7 +67,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
             NinteichosaIraiManager ninteichosaIraiManager,
             KaigoNinteichosainManager kaigoNinteichosainManager,
             IKojinFinder kojinFinder,
-            YokaigoninteiProgressManager yokaigoninteiProgressManager) {
+            YokaigoNinteiProgressManager yokaigoninteiProgressManager) {
         this.torikomiTaishoshaDac = torikomiTaishoshaDac;
         this.ninteichosaIraiManager = ninteichosaIraiManager;
         this.kaigoNinteichosainManager = kaigoNinteichosainManager;
@@ -144,7 +144,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
 
     private NinteichosaKekkaTorikomiTaishosha create認定調査結果取込対象者(KaigoNinteiShoriTaishoshaEntity entity) {
         YokaigoNinteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
-        YokaigoNinteiShinsei 認定申請情報 = YokaigoNinteiShinseiMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
+        YokaigoNinteiShinsei 認定申請情報 = YokaigoNinteiShinseiMapper.toYokaigoNinteiShinsei(entity.getNinteiShinseiJohoEntity());
         NinteichosaIrai 認定調査依頼情報 = get認定調査依頼情報(認定進捗情報, 認定申請情報);
         KaigoNinteichosain 介護認定調査員 = get介護認定調査員(認定申請情報, 認定調査依頼情報);
         IKojin 個人 = get個人(認定申請情報);

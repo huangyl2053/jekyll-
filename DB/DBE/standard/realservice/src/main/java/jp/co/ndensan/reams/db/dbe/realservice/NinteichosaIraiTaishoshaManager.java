@@ -51,7 +51,7 @@ public class NinteichosaIraiTaishoshaManager {
     private final IKaigoJigyoshaFinder kaigoJigyoshaFinder;
     private final KaigoNinteichosainManager kaigoNinteichosainManager;
     private final INinteiChosainFinder ninteiChosainFinder;
-    private final YokaigoninteiProgressManager yokaigoninteiProgressManager;
+    private final YokaigoNinteiProgressManager yokaigoninteiProgressManager;
 
     /**
      * コンストラクタです。
@@ -65,7 +65,7 @@ public class NinteichosaIraiTaishoshaManager {
         kaigoJigyoshaFinder = KaigoJigyoshaFinderFactory.getInstance();
         kaigoNinteichosainManager = new KaigoNinteichosainManager();
         ninteiChosainFinder = NinteiChosainFinderFactory.getInstance();
-        yokaigoninteiProgressManager = new YokaigoninteiProgressManager();
+        yokaigoninteiProgressManager = new YokaigoNinteiProgressManager();
     }
 
     /**
@@ -88,7 +88,7 @@ public class NinteichosaIraiTaishoshaManager {
             IKaigoJigyoshaFinder kaigoJigyoshaFinder,
             KaigoNinteichosainManager kaigoNinteichosainManager,
             INinteiChosainFinder ninteiChosainFinder,
-            YokaigoninteiProgressManager yokaigoninteiProgressManager) {
+            YokaigoNinteiProgressManager yokaigoninteiProgressManager) {
         this.iraiTaishoshaDac = iraiTaishoshaDac;
         this.kojinFinder = kojinFinder;
         this.ninteichosaIraiManager = ninteichosaIraiManager;
@@ -168,7 +168,7 @@ public class NinteichosaIraiTaishoshaManager {
 
     private NinteichosaIraiTaishosha create認定調査依頼対象者(KaigoNinteiShoriTaishoshaEntity entity) {
         YokaigoNinteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
-        YokaigoNinteiShinsei 認定申請情報 = YokaigoNinteiShinseiMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
+        YokaigoNinteiShinsei 認定申請情報 = YokaigoNinteiShinseiMapper.toYokaigoNinteiShinsei(entity.getNinteiShinseiJohoEntity());
         IKojin 個人 = get個人(認定申請情報);
         NinteichosaIrai 認定調査依頼情報 = get認定調査依頼情報(認定申請情報);
         NinteichosaItakusaki 認定調査委託先情報 = get認定調査委託先情報(認定申請情報, 認定調査依頼情報);

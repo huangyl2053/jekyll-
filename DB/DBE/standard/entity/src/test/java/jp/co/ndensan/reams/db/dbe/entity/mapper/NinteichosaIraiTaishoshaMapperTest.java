@@ -88,7 +88,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
         @Before
         public void setUp() {
             認定進捗情報 = NinteiShinchokuJohoMock.create認定進捗情報();
-            認定申請情報 = YokaigoNinteiShinseiMapper.to認定申請情報(YokaigoNinteiShinseiTestHelper.create認定申請情報Entity());
+            認定申請情報 = YokaigoNinteiShinseiMapper.toYokaigoNinteiShinsei(YokaigoNinteiShinseiTestHelper.create認定申請情報Entity());
             個人 = KojinTestHelper.create個人();
             認定調査委託先 = NinteichosaItakusakiMapper.toNinteichosaItakusaki(NinteichosaItakusakiTestHelper.create認定調査委託先Entity());
             介護事業者 = KaigoJigyoshaMapper.toKaigoJigyosha(KaigoJigyoshaEntityMock.getSpiedInstance());

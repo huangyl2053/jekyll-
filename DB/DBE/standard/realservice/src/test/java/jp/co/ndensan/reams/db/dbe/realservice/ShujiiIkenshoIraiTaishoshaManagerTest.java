@@ -54,7 +54,7 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
     private static IKojinFinder kojinFinder;
     private static ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager;
     private static KaigoIryoKikanFinder kaigoIryoKikanFinder;
-    private static YokaigoninteiProgressManager yokaigoninteiProgressManager;
+    private static YokaigoNinteiProgressManager yokaigoninteiProgressManager;
     private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
     private static final RString 支所コード = new RString("0002");
     private static List<ShujiiIkenshoIraiTaishosha> resultList;
@@ -65,7 +65,7 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
         kojinFinder = mock(IKojinFinder.class);
         shujiiManager = mock(ShujiiIkenshoSakuseiIraiKirokuManager.class);
         kaigoIryoKikanFinder = mock(KaigoIryoKikanFinder.class);
-        yokaigoninteiProgressManager = mock(YokaigoninteiProgressManager.class);
+        yokaigoninteiProgressManager = mock(YokaigoNinteiProgressManager.class);
     }
 
     public static class get主治医意見書作成依頼対象者_引数なし extends DbeTestBase {

@@ -54,7 +54,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
     private static NinteichosaIraiManager ninteichosaIraiManager;
     private static KaigoNinteichosainManager kaigoNinteichosainManager;
     private static IKojinFinder kojinFinder;
-    private static YokaigoninteiProgressManager yokaigoninteiProgressManager;
+    private static YokaigoNinteiProgressManager yokaigoninteiProgressManager;
     private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
     private static final ShishoCode 支所コード = new ShishoCode(new RString("0001"));
     private static List<NinteichosaKekkaTorikomiTaishosha> resultList;
@@ -65,7 +65,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
         ninteichosaIraiManager = mock(NinteichosaIraiManager.class);
         kaigoNinteichosainManager = mock(KaigoNinteichosainManager.class);
         kojinFinder = mock(IKojinFinder.class);
-        yokaigoninteiProgressManager = mock(YokaigoninteiProgressManager.class);
+        yokaigoninteiProgressManager = mock(YokaigoNinteiProgressManager.class);
     }
 
     public static class get認定調査結果取込対象者 extends DbeTestBase {

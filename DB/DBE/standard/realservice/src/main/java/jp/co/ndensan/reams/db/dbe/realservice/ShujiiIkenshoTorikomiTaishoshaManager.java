@@ -39,7 +39,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
     private final ShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac;
     private final ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager;
     private final IKojinFinder kojinFinder;
-    private final YokaigoninteiProgressManager yokaigoninteiProgressManager;
+    private final YokaigoNinteiProgressManager yokaigoninteiProgressManager;
 
     /**
      * コンストラクタです。
@@ -48,7 +48,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
         torikomiTaishoshaDac = InstanceProvider.create(ShujiiIkenshoTorikomiTaishoshaDac.class);
         shujiiManager = new ShujiiIkenshoSakuseiIraiKirokuManager();
         kojinFinder = KojinService.createKojinFinder();
-        yokaigoninteiProgressManager = new YokaigoninteiProgressManager();
+        yokaigoninteiProgressManager = new YokaigoNinteiProgressManager();
     }
 
     /**
@@ -63,7 +63,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
             ShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac,
             ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager,
             IKojinFinder kojinFinder,
-            YokaigoninteiProgressManager yokaigoninteiProgressManager) {
+            YokaigoNinteiProgressManager yokaigoninteiProgressManager) {
         this.torikomiTaishoshaDac = torikomiTaishoshaDac;
         this.shujiiManager = shujiiManager;
         this.kojinFinder = kojinFinder;
@@ -139,7 +139,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
 
     private ShujiiIkenshoTorikomiTaishosha create主治医意見書取込対象者(KaigoNinteiShoriTaishoshaEntity entity) {
         YokaigoNinteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
-        YokaigoNinteiShinsei 認定申請情報 = YokaigoNinteiShinseiMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
+        YokaigoNinteiShinsei 認定申請情報 = YokaigoNinteiShinseiMapper.toYokaigoNinteiShinsei(entity.getNinteiShinseiJohoEntity());
         ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報 = get主治医意見書作成依頼情報(認定申請情報);
         IKojin 個人 = get個人(認定申請情報);
         KaigoDoctor 介護主治医 = 主治医意見書作成依頼情報.get介護医師();

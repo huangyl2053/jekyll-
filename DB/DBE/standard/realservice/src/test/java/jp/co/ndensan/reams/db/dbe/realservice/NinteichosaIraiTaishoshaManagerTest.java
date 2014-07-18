@@ -31,14 +31,9 @@ import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaFinder;
 import jp.co.ndensan.reams.ur.urf.realservice.INinteiChosainFinder;
-import jp.co.ndensan.reams.ur.urz.business.IJusho;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Name;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static org.hamcrest.CoreMatchers.is;
@@ -66,7 +61,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
     private static IKaigoJigyoshaFinder kaigoJigyoshaFinder;
     private static KaigoNinteichosainManager kaigoNinteichosainManager;
     private static INinteiChosainFinder ninteiChosainFinder;
-    private static YokaigoninteiProgressManager yokaigoninteiProgressManager;
+    private static YokaigoNinteiProgressManager yokaigoninteiProgressManager;
     private static List<NinteichosaIraiTaishosha> resultList;
     private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
     private static final RString 支所コード = new RString("1234");
@@ -80,7 +75,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
         kaigoJigyoshaFinder = mock(IKaigoJigyoshaFinder.class);
         kaigoNinteichosainManager = mock(KaigoNinteichosainManager.class);
         ninteiChosainFinder = mock(INinteiChosainFinder.class);
-        yokaigoninteiProgressManager = mock(YokaigoninteiProgressManager.class);
+        yokaigoninteiProgressManager = mock(YokaigoNinteiProgressManager.class);
     }
 
     public static class get認定調査依頼対象者 extends DbeTestBase {

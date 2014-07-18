@@ -42,7 +42,7 @@ public class ShujiiIkenshoIraiTaishoshaManager {
     private final IKojinFinder kojinFinder;
     private final ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager;
     private final KaigoIryoKikanFinder kaigoIryoKikanFinder;
-    private final YokaigoninteiProgressManager yokaigoninteiProgressManager;
+    private final YokaigoNinteiProgressManager yokaigoninteiProgressManager;
 
     /**
      * コンストラクタです。
@@ -52,7 +52,7 @@ public class ShujiiIkenshoIraiTaishoshaManager {
         kojinFinder = KojinService.createKojinFinder();
         shujiiManager = new ShujiiIkenshoSakuseiIraiKirokuManager();
         kaigoIryoKikanFinder = new KaigoIryoKikanFinder();
-        yokaigoninteiProgressManager = new YokaigoninteiProgressManager();
+        yokaigoninteiProgressManager = new YokaigoNinteiProgressManager();
     }
 
     /**
@@ -69,7 +69,7 @@ public class ShujiiIkenshoIraiTaishoshaManager {
             IKojinFinder kojinFinder,
             ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager,
             KaigoIryoKikanFinder kaigoIryoKikanFinder,
-            YokaigoninteiProgressManager yokaigoninteiProgressManager) {
+            YokaigoNinteiProgressManager yokaigoninteiProgressManager) {
         this.shujiiIkenshoIraiTaishoshaDac = shujiiIkenshoIraiTaishoshaDac;
         this.kojinFinder = kojinFinder;
         this.shujiiManager = shujiiManager;
@@ -146,7 +146,7 @@ public class ShujiiIkenshoIraiTaishoshaManager {
 
     private ShujiiIkenshoIraiTaishosha create主治医意見書作成依頼対象者(KaigoNinteiShoriTaishoshaEntity entity) {
         YokaigoNinteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
-        YokaigoNinteiShinsei 認定申請情報 = YokaigoNinteiShinseiMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
+        YokaigoNinteiShinsei 認定申請情報 = YokaigoNinteiShinseiMapper.toYokaigoNinteiShinsei(entity.getNinteiShinseiJohoEntity());
         IKojin 個人 = get個人(認定申請情報);
         RString 氏名 = 個人.get氏名().getName().value();
         RString 住所 = 個人.get住所().getValue();
