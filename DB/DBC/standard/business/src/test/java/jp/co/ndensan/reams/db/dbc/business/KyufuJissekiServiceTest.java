@@ -76,7 +76,7 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
         }
     }
 
-    public static class get合計金額のテスト extends DbcTestBase {
+    public static class getメソッドのテスト extends DbcTestBase {
 
         private static KyufuJissekiService sut;
 
@@ -86,18 +86,31 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
         private static Decimal 保険請求分請求額合計;
         private static KyufuJissekiKeyInfo 給付実績キー情報;
 
+        @Before
         public void setUp() {
-        }
-
-        @Test
-        public void get合計金額で_利用者負担額合計_単位数合計_保険請求分請求額合計_の合計を返す() {
             事業者番号 = new JigyoshaNo(new RString("001"));
             利用者負担額合計 = new Decimal("100");
             単位数合計 = new Decimal("150");
             保険請求分請求額合計 = new Decimal("200");
             給付実績キー情報 = create給付実績キー情報();
+        }
+
+        @Test
+        public void get利用者負担額合計で_利用者負担額合計を返す() {
             sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
-            assertThat(sut.get合計金額(), is(new Decimal("450")));
+            assertThat(sut.get利用者負担額合計(), is(new Decimal("100")));
+        }
+
+        @Test
+        public void get単位数合計で_単位数合計を返す() {
+            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
+            assertThat(sut.get単位数合計(), is(new Decimal("150")));
+        }
+
+        @Test
+        public void get保険請求分請求額合計で_保険請求分請求額合計を返す() {
+            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
+            assertThat(sut.get保険請求分請求額合計(), is(new Decimal("200")));
         }
     }
 

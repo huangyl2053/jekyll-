@@ -82,15 +82,6 @@ public class KyufuJissekiService {
     }
 
     /**
-     * 利用者負担額合計と単位数合計と保険請求分請求額合計の合計金額を返します。
-     *
-     * @return 合計金額
-     */
-    public Decimal get合計金額() {
-        return 利用者負担額合計.add(単位数合計).add(保険請求分請求額合計);
-    }
-
-    /**
      * 給付実績キー情報を返します。
      *
      * @return 給付実績キー情報

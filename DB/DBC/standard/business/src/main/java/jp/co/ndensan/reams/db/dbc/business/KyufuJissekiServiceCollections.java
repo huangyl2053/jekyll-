@@ -1,0 +1,47 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbc.business;
+
+import java.util.List;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
+
+/**
+ * 給付実績月別集計のコレクションクラスです。
+ *
+ * @author N8187 久保田 英男
+ */
+public class KyufuJissekiServiceCollections {
+
+    private final List<KyufuJissekiServiceCollection> 給付実績月別集計リスト;
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param 給付実績月別集計リスト 給付実績月別集計リスト
+     */
+    public KyufuJissekiServiceCollections(List<KyufuJissekiServiceCollection> 給付実績月別集計リスト) {
+        this.給付実績月別集計リスト = requireNonNull(給付実績月別集計リスト, Messages.E00001.replace("給付実績月別集計リスト").getMessage());
+    }
+
+    /**
+     * 指定されたサービス提供年月の給付実績月別集計を返します。<br/>
+     * 存在しない場合はnullが返ります。
+     *
+     * @param サービス提供年月 サービス提供年月
+     * @return 給付実績月別集計
+     */
+    public KyufuJissekiServiceCollection get給付実績月別集計(ServiceTeikyoYM サービス提供年月) {
+        for (KyufuJissekiServiceCollection 給付実績月別集計 : 給付実績月別集計リスト) {
+            if (給付実績月別集計.getサービス提供年月().equals(サービス提供年月)) {
+                return 給付実績月別集計;
+            }
+        }
+        return null;
+    }
+
+}
