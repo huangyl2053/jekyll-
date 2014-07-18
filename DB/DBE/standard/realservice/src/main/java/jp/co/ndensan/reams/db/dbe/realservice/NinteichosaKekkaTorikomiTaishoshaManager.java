@@ -12,9 +12,9 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaKekkaTorikomiTaishosha;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgressFactory;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgressFactory.ParticularDates;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgressFactory;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgressFactory.ParticularDates;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
@@ -121,8 +121,8 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
      * @return true:更新OK, false:更新NG
      */
     public boolean save認定調査完了年月日(NinteichosaKekkaTorikomiTaishosha 認定調査結果取込対象者, FlexibleDate 認定調査完了年月日) {
-        YokaigoninteiProgressFactory factory = new YokaigoninteiProgressFactory(認定調査結果取込対象者.get認定進捗情報());
-        YokaigoninteiProgress yokaigoninteiProgress = factory.createYokaigoninteiPorgressWith(
+        YokaigoNinteiProgressFactory factory = new YokaigoNinteiProgressFactory(認定調査結果取込対象者.get認定進捗情報());
+        YokaigoNinteiProgress yokaigoninteiProgress = factory.createYokaigoninteiPorgressWith(
                 ParticularDates.認定調査完了年月日, 認定調査完了年月日);
         return yokaigoninteiProgressManager.save(yokaigoninteiProgress);
     }
@@ -143,7 +143,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     }
 
     private NinteichosaKekkaTorikomiTaishosha create認定調査結果取込対象者(KaigoNinteiShoriTaishoshaEntity entity) {
-        YokaigoninteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
+        YokaigoNinteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
         NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
         NinteichosaIrai 認定調査依頼情報 = get認定調査依頼情報(認定進捗情報, 認定申請情報);
         KaigoNinteichosain 介護認定調査員 = get介護認定調査員(認定申請情報, 認定調査依頼情報);
@@ -161,7 +161,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     }
 
     private NinteichosaIrai get認定調査依頼情報(
-            YokaigoninteiProgress yokaigoninteiProgress,
+            YokaigoNinteiProgress yokaigoninteiProgress,
             NinteiShinseiJoho shinseiJoho) {
         return ninteichosaIraiManager.get認定調査依頼情報(
                 yokaigoninteiProgress.get申請書管理番号(),

@@ -28,7 +28,7 @@ public class ShujiiIkenshoIraiTaishoshaTest extends TestBase {
     public static class ConstructorTest extends TestBase {
 
         private ShujiiIkenshoIraiTaishosha sut;
-        private YokaigoninteiProgress 認定進捗情報;
+        private YokaigoNinteiProgress 認定進捗情報;
         private ShinseishoKanriNo 申請書管理番号;
         private ShoKisaiHokenshaNo 証記載保険者番号;
         private KaigoHihokenshaNo 被保険者番号;
@@ -42,7 +42,7 @@ public class ShujiiIkenshoIraiTaishoshaTest extends TestBase {
 
         @Override
         public void setUp() {
-            認定進捗情報 = mock(YokaigoninteiProgress.class);
+            認定進捗情報 = mock(YokaigoNinteiProgress.class);
             申請書管理番号 = new ShinseishoKanriNo(new RString("0001"));
             証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
             被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));

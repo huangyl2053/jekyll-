@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ChosainJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoJigyoshaEntityMock;
@@ -41,7 +41,7 @@ import org.junit.Before;
 @RunWith(Enclosed.class)
 public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
 
-    private static YokaigoninteiProgress 認定進捗情報;
+    private static YokaigoNinteiProgress 認定進捗情報;
     private static NinteiShinseiJoho 認定申請情報;
     private static IKojin 個人;
     private static NinteichosaItakusaki 認定調査委託先;
@@ -53,7 +53,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
 
         @Before
         public void setUp() {
-            認定進捗情報 = mock(YokaigoninteiProgress.class);
+            認定進捗情報 = mock(YokaigoNinteiProgress.class);
             認定申請情報 = mock(NinteiShinseiJoho.class);
             個人 = mock(IKojin.class);
             認定調査委託先 = mock(NinteichosaItakusaki.class);

@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -41,7 +41,7 @@ public class YokaigoninteiProgressManager {
      * @param yokaigoniteiProgress yokaigoniteiProgress
      * @return 更新結果
      */
-    public boolean save(YokaigoninteiProgress yokaigoniteiProgress) {
+    public boolean save(YokaigoNinteiProgress yokaigoniteiProgress) {
         return ninteiShinchokuJohoDac.update(NinteiShinchokuJohoMapper.toNinteiShinchokuJohoEntity(yokaigoniteiProgress)) != 0;
     }
 }

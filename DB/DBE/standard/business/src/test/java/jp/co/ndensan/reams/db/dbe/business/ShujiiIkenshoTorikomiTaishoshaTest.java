@@ -26,7 +26,7 @@ public class ShujiiIkenshoTorikomiTaishoshaTest extends DbeTestBase {
     public static class コンストラクタ extends DbeTestBase {
 
         private ShujiiIkenshoTorikomiTaishosha sut;
-        private YokaigoninteiProgress 認定進捗情報;
+        private YokaigoNinteiProgress 認定進捗情報;
         private NinteiShinseiJoho 認定申請情報;
         private ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報;
         private IKojin 個人;
@@ -34,7 +34,7 @@ public class ShujiiIkenshoTorikomiTaishoshaTest extends DbeTestBase {
 
         @Before
         public void setUp() {
-            認定進捗情報 = mock(YokaigoninteiProgress.class);
+            認定進捗情報 = mock(YokaigoNinteiProgress.class);
             認定申請情報 = mock(NinteiShinseiJoho.class);
             主治医意見書作成依頼情報 = mock(ShujiiIkenshoSakuseiIrai.class);
             個人 = mock(IKojin.class);

@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -31,7 +31,7 @@ import org.junit.Before;
 public class ShujiiIkenshoIraiTaishoshaMapperTest extends DbeTestBase {
 
     private static ShujiiIkenshoIraiTaishosha sut;
-    private static YokaigoninteiProgress 認定進捗情報;
+    private static YokaigoNinteiProgress 認定進捗情報;
     private static NinteiShinseiJoho 認定申請情報;
     private static IKojin 個人;
     private static RString 氏名;
@@ -43,7 +43,7 @@ public class ShujiiIkenshoIraiTaishoshaMapperTest extends DbeTestBase {
 
         @Before
         public void setUp() {
-            認定進捗情報 = mock(YokaigoninteiProgress.class);
+            認定進捗情報 = mock(YokaigoNinteiProgress.class);
             認定申請情報 = mock(NinteiShinseiJoho.class);
             個人 = mock(IKojin.class);
             氏名 = new RString("あああ");

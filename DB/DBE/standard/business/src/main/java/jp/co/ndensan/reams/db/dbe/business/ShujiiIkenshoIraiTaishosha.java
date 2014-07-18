@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShujiiIkenshoIraiTaishosha {
 
-    private final YokaigoninteiProgress 認定進捗情報;
+    private final YokaigoNinteiProgress 認定進捗情報;
     private final ShinseishoKanriNo 申請書管理番号;
     private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final KaigoHihokenshaNo 被保険者番号;
@@ -53,7 +53,7 @@ public class ShujiiIkenshoIraiTaishosha {
      * {@code 個人情報}がnullの場合、{@code 氏名}がnullの場合、または{@code 住所}がnullの場合
      */
     public ShujiiIkenshoIraiTaishosha(
-            YokaigoninteiProgress 認定進捗情報,
+            YokaigoNinteiProgress 認定進捗情報,
             ShinseishoKanriNo 申請書管理番号,
             ShoKisaiHokenshaNo 証記載保険者番号,
             KaigoHihokenshaNo 被保険者番号,
@@ -83,7 +83,7 @@ public class ShujiiIkenshoIraiTaishosha {
      *
      * @return 認定進捗情報
      */
-    public YokaigoninteiProgress get認定進捗情報() {
+    public YokaigoNinteiProgress get認定進捗情報() {
         return 認定進捗情報;
     }
 

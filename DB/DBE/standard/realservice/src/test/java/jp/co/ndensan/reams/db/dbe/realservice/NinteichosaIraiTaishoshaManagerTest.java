@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -200,7 +200,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
 
         @Test
         public void save認定調査依頼完了年月日_saveが成功した時_TRUEを返す() {
-            when(yokaigoninteiProgressManager.save(any(YokaigoninteiProgress.class))).thenReturn(true);
+            when(yokaigoninteiProgressManager.save(any(YokaigoNinteiProgress.class))).thenReturn(true);
             sut = new NinteichosaIraiTaishoshaManager(
                     iraiTaishoshaDac, kojinFinder, ninteichosaIraiManager, ninteichosaItakusakiManager,
                     kaigoJigyoshaFinder, kaigoNinteichosainManager, ninteiChosainFinder, yokaigoninteiProgressManager);
@@ -209,7 +209,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
 
         @Test
         public void save認定調査依頼完了年月日_saveが失敗した時_FALSEを返す() {
-            when(yokaigoninteiProgressManager.save(any(YokaigoninteiProgress.class))).thenReturn(false);
+            when(yokaigoninteiProgressManager.save(any(YokaigoNinteiProgress.class))).thenReturn(false);
             sut = new NinteichosaIraiTaishoshaManager(
                     iraiTaishoshaDac, kojinFinder, ninteichosaIraiManager, ninteichosaItakusakiManager,
                     kaigoJigyoshaFinder, kaigoNinteichosainManager, ninteiChosainFinder, yokaigoninteiProgressManager);

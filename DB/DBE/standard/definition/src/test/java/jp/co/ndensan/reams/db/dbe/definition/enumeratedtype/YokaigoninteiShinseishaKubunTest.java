@@ -27,7 +27,7 @@ public class YokaigoninteiShinseishaKubunTest extends DbzTestBase {
 
         @Test
         public void YokaigoninteiShinseishaKubun$本人_のtoRStringは_RStringの本人_を返す() {
-            YokaigoninteiShinseishaKubun sut = YokaigoninteiShinseishaKubun.本人;
+            YokaigoNinteiShinseishaKubun sut = YokaigoNinteiShinseishaKubun.本人;
             assertThat(sut.toRString(), is(new RString("本人")));
         }
     }

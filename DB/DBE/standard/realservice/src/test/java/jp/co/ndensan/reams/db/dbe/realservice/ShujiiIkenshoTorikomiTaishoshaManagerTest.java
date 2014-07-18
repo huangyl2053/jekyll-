@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoTorikomiTaishosha;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
@@ -148,14 +148,14 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
 
         @Test
         public void save主治医意見書登録完了年月日_saveが成功した時_TRUEを返す() {
-            when(yokaigoninteiProgressManager.save(any(YokaigoninteiProgress.class))).thenReturn(true);
+            when(yokaigoninteiProgressManager.save(any(YokaigoNinteiProgress.class))).thenReturn(true);
             sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, kojinFinder, yokaigoninteiProgressManager);
             assertThat(sut.save主治医意見書登録完了年月日(主治医意見書取込対象者, 主治医意見書登録完了年月日), is(true));
         }
 
         @Test
         public void save主治医意見書登録完了年月日_saveが失敗した時_FALSEを返す() {
-            when(yokaigoninteiProgressManager.save(any(YokaigoninteiProgress.class))).thenReturn(false);
+            when(yokaigoninteiProgressManager.save(any(YokaigoNinteiProgress.class))).thenReturn(false);
             sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, kojinFinder, yokaigoninteiProgressManager);
             assertThat(sut.save主治医意見書登録完了年月日(主治医意見書取込対象者, 主治医意見書登録完了年月日), is(false));
         }

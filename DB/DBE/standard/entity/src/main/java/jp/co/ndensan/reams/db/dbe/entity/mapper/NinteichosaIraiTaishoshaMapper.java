@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 // TODO N8187 久保田英男 URのNinteiChosainのキャメルケースをNinteichosainに修正する。URを修正するタイミングで対応する。
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
@@ -42,7 +42,7 @@ public final class NinteichosaIraiTaishoshaMapper {
      * {@code 認定進捗情報}がnullの場合、{@code 要介護認定申請情報}がnullの場合、または{@code 個人}がnullの場合
      */
     public static NinteichosaIraiTaishosha toNinteichosaIraiTaishosha(
-            YokaigoninteiProgress 認定進捗情報,
+            YokaigoNinteiProgress 認定進捗情報,
             NinteiShinseiJoho 要介護認定申請情報,
             IKojin 個人,
             NinteichosaItakusaki 認定調査委託先情報,

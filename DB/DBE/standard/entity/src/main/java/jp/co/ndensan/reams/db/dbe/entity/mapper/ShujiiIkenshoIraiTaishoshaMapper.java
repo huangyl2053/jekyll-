@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,7 +42,7 @@ public final class ShujiiIkenshoIraiTaishoshaMapper {
      * {@code 認定進捗情報}がnullの場合、または{@code 認定申請情報}がnullの場合
      */
     public static ShujiiIkenshoIraiTaishosha toShujiiIkenshoIraiTaishosha(
-            YokaigoninteiProgress 認定進捗情報,
+            YokaigoNinteiProgress 認定進捗情報,
             NinteiShinseiJoho 認定申請情報,
             IKojin 個人,
             RString 氏名,

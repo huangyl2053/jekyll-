@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  */
 public class ShujiiIkenshoTorikomiTaishosha {
 
-    private YokaigoninteiProgress 認定進捗情報;
+    private YokaigoNinteiProgress 認定進捗情報;
     private NinteiShinseiJoho 認定申請情報;
     private ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報;
     private IKojin 個人;
@@ -31,7 +31,7 @@ public class ShujiiIkenshoTorikomiTaishosha {
      * @param 介護主治医 介護主治医
      */
     public ShujiiIkenshoTorikomiTaishosha(
-            YokaigoninteiProgress 認定進捗情報,
+            YokaigoNinteiProgress 認定進捗情報,
             NinteiShinseiJoho 認定申請情報,
             ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報,
             IKojin 個人,
@@ -48,7 +48,7 @@ public class ShujiiIkenshoTorikomiTaishosha {
      *
      * @return 認定進捗情報
      */
-    public YokaigoninteiProgress get認定進捗情報() {
+    public YokaigoNinteiProgress get認定進捗情報() {
         return 認定進捗情報;
     }
 

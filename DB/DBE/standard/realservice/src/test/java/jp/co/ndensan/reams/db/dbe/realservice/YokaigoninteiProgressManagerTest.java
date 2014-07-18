@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiShinchokuJohoDac;
@@ -45,7 +45,7 @@ public class YokaigoninteiProgressManagerTest extends DbeTestBase {
         return new YokaigoninteiProgressManager(dac);
     }
 
-    private static YokaigoninteiProgress createYokaigoniteiProgress() {
+    private static YokaigoNinteiProgress createYokaigoniteiProgress() {
         return NinteiShinchokuJohoMock.create認定進捗情報();
     }
 }
