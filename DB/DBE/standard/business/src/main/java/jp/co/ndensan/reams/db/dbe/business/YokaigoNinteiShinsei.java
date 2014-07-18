@@ -33,7 +33,7 @@ public class YokaigoNinteiShinsei {
     private final ShikibetsuCode 識別コード;
     private final FlexibleDate 認定申請年月日;
     private final EdabanCode 枝番コード;
-    private final NinteiShinseiKubunShinsei 認定申請区分_申請時;
+    private final Code 認定申請区分_申請時;
     private final Code 認定申請区分_法令;
     private final Code 認定申請有効区分;
     private final Code 要支援申請区分;
@@ -75,8 +75,7 @@ public class YokaigoNinteiShinsei {
      */
     public YokaigoNinteiShinsei(ShinseishoKanriNo 申請書管理番号, ShoKisaiHokenshaNo 証記載保険者番号, ShishoCode 支所コード,
             KaigoHihokenshaNo 介護被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 認定申請年月日, EdabanCode 枝番コード,
-            NinteiShinseiKubunShinsei 認定申請区分_申請時, Code 認定申請区分_法令,
-            Code 認定申請有効区分, Code 要支援申請区分, RString 認定申請理由,
+            Code 認定申請区分_申請時, Code 認定申請区分_法令, Code 認定申請有効区分, Code 要支援申請区分, RString 認定申請理由,
             NinteiResultSimple 前回認定結果, boolean 情報提供への同意有無, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
             int 意見書依頼履歴番号, Code みなし要介護区分コード, boolean is延期通知有無同意, boolean is施設入所,
             RString 市町村連絡事項, NinteiShinseiTorisage 認定申請取下げ) {
@@ -181,7 +180,7 @@ public class YokaigoNinteiShinsei {
      * @return 申請時の認定申請区分
      */
     public NinteiShinseiKubunShinsei get認定申請区分_申請時() {
-        return 認定申請区分_申請時;
+        return NinteiShinseiKubunShinsei.toValue(Integer.valueOf(認定申請区分_申請時.value().toString()));
     }
 
     /**
@@ -291,4 +290,5 @@ public class YokaigoNinteiShinsei {
     public NinteiShinseiTorisage get認定申請取下げ() {
         return 認定申請取下げ;
     }
+
 }

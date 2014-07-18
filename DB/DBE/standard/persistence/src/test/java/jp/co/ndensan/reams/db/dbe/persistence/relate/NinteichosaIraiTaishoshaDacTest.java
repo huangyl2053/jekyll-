@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteiShinchokuJohoDacMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteiShinseiJohoDacMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -173,7 +174,7 @@ public class NinteichosaIraiTaishoshaDacTest extends DbeTestDacBase {
         DbT5001NinteiShinseiJohoEntity entity = YokaigoNinteiShinseiTestHelper.create認定申請情報Entity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
         entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        entity.setShishoCode(支所コード);
+        entity.setShishoCode(new ShishoCode(支所コード));
         return entity;
     }
 }

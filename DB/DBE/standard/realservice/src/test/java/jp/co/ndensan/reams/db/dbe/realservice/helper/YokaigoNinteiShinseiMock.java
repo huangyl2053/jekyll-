@@ -50,7 +50,7 @@ public class YokaigoNinteiShinseiMock {
                 new ShikibetsuCode(new RString("123456")),
                 FlexibleDate.MIN,
                 new EdabanCode(new RString("001")),
-                NinteiShinseiKubunShinsei.新規申請,
+                new Code(String.valueOf(NinteiShinseiKubunShinsei.新規申請.コード())),
                 new Code(new RString("認定申請区分_法令")),
                 new Code(new RString("認定申請有効区分")),
                 new Code(new RString("要支援申請区分")),

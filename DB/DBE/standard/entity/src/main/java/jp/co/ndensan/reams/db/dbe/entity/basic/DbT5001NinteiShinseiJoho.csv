@@ -1,11 +1,11 @@
 ﻿shinseishoKanriNo,varchar,ShinseishoKanriNo,,,,,A
 shoKisaiHokenshaNo,varchar,ShoKisaiHokenshaNo,,,,,A
-shishoCode,varchar,RString,,,,,A
+shishoCode,varchar,ShishoCode,,,,,A
 hihokenshaNo,varchar,KaigoHihokenshaNo,,,,,A
 shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
 ninteiShinseiYMD,UDD015YMD,FlexibleDate,,,,,A
 ninteiShinseiEdabanCode,UDD025EdabanCode,EdabanCode,,,,,A
-ninteiShinseiShinseijiKubunCode,UDD035Code,RString,,,,,A
+ninteiShinseiShinseijiKubunCode,UDD035Code,Code,,,,,A
 ninteiShinseiHoreiKubunCode,UDD035Code,Code,,,,,A
 ninteiShinseiYukoKubunCode,UDD035Code,Code,,,,,A
 shienShinseiKubun,bpchar,RString,,,,,A

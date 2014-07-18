@@ -37,12 +37,11 @@ public final class YokaigoNinteiShinseiTestHelper {
     private static final ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("123456"));
     private static final FlexibleDate 認定申請年月日 = FlexibleDate.MIN;
     private static final EdabanCode 枝番コード = new EdabanCode(new RString("001"));
-    private static final NinteiShinseiKubunShinsei 認定申請区分_申請時 = NinteiShinseiKubunShinsei.新規申請;
+    private static final Code 認定申請区分_申請時 = new Code(String.valueOf(NinteiShinseiKubunShinsei.新規申請.コード()));
     private static final Code 認定申請区分_法令 = new Code(new RString("認定申請区分（法令）コード"));
     private static final Code 認定申請有効区分 = new Code(new RString("認定申請有効区分"));
     private static final RString 要支援申請区分 = new RString("1");
     private static final RString 認定申請理由 = new RString("認定申請理由");
-    private static final Code 前回要介護状態区分コード = new Code(new RString("前回要介護状態区分コード"));
     private static final NinteiResultSimple 前回認定結果 = NinteiResultSimple.EMPTY;
     private static final boolean 情報提供への同意有無 = true;
     private static final int 認定調査依頼履歴番号 = 1;
@@ -99,7 +98,7 @@ public final class YokaigoNinteiShinseiTestHelper {
         DbT5001NinteiShinseiJohoEntity entity = new DbT5001NinteiShinseiJohoEntity();
         entity.setShinseishoKanriNo(申請書管理番号);
         entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        entity.setShishoCode(支所コード.value());
+        entity.setShishoCode(支所コード);
         entity.setHihokenshaNo(介護被保険者番号);
         entity.setShikibetsuCode(識別コード);
         entity.setNinteiShinseiYMD(認定申請年月日);

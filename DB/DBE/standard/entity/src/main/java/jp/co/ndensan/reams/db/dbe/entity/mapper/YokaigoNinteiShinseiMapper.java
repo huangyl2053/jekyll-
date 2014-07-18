@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShishoCode;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定申請情報のMapperです。
@@ -39,7 +41,7 @@ public final class YokaigoNinteiShinseiMapper {
         return new YokaigoNinteiShinsei(
                 entity.getShinseishoKanriNo(),
                 entity.getShoKisaiHokenshaNo(),
-                new ShishoCode(entity.getShishoCode()),
+                entity.getShishoCode(),
                 entity.getHihokenshaNo(),
                 entity.getShikibetsuCode(),
                 entity.getNinteiShinseiYMD(),
@@ -76,12 +78,12 @@ public final class YokaigoNinteiShinseiMapper {
         更新済みEntity.setShinseishoKanriNo(認定申請情報.get申請書管理番号());
         更新済みEntity.setNinteichosaIraiRirekiNo(認定申請情報.get認定調査依頼履歴番号().value());
         更新済みEntity.setShoKisaiHokenshaNo(認定申請情報.get証記載保険者番号());
-        更新済みEntity.setShishoCode(認定申請情報.get支所コード().value());
+        更新済みEntity.setShishoCode(認定申請情報.get支所コード());
         更新済みEntity.setHihokenshaNo(認定申請情報.get介護被保険者番号());
         更新済みEntity.setShikibetsuCode(認定申請情報.get識別コード());
         更新済みEntity.setNinteiShinseiYMD(認定申請情報.get認定申請年月日());
         更新済みEntity.setNinteiShinseiEdabanCode(認定申請情報.get枝番コード());
-        更新済みEntity.setNinteiShinseiShinseijiKubunCode(認定申請情報.get認定申請区分_申請時());
+        更新済みEntity.setNinteiShinseiShinseijiKubunCode(new Code(new RString(String.valueOf(認定申請情報.get認定申請区分_申請時().コード()))));
         更新済みEntity.setNinteiShinseiHoreiKubunCode(認定申請情報.get認定申請区分_法令());
         更新済みEntity.setNinteiShinseiYukoKubunCode(認定申請情報.get認定申請有効区分());
         //TODO n8178 城間篤人 後日、要支援申請区分を作成予定 2014年2月末

@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoIraiTaishoshaD
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
@@ -182,7 +183,7 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
 
             DbT5001NinteiShinseiJohoEntity shinseiEntity = YokaigoNinteiShinseiTestHelper.create認定申請情報Entity();
             shinseiEntity.setShoKisaiHokenshaNo(証記載保険者番号);
-            shinseiEntity.setShishoCode(支所コード);
+            shinseiEntity.setShishoCode(new ShishoCode(支所コード));
             entity.setNinteiShinseiJohoEntity(shinseiEntity);
             list.add(entity);
         }
