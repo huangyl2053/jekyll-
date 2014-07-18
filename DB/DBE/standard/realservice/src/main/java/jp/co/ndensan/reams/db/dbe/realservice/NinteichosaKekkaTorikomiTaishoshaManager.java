@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaKekkaTorikomiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgressFactory;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgressFactory.ParticularDates;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.YokaigoNinteiShinseiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaKekkaTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
@@ -144,7 +144,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
 
     private NinteichosaKekkaTorikomiTaishosha create認定調査結果取込対象者(KaigoNinteiShoriTaishoshaEntity entity) {
         YokaigoNinteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
-        NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
+        YokaigoNinteiShinsei 認定申請情報 = YokaigoNinteiShinseiMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
         NinteichosaIrai 認定調査依頼情報 = get認定調査依頼情報(認定進捗情報, 認定申請情報);
         KaigoNinteichosain 介護認定調査員 = get介護認定調査員(認定申請情報, 認定調査依頼情報);
         IKojin 個人 = get個人(認定申請情報);
@@ -156,20 +156,20 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
                 個人);
     }
 
-    private IKojin get個人(NinteiShinseiJoho 認定申請情報) {
+    private IKojin get個人(YokaigoNinteiShinsei 認定申請情報) {
         return kojinFinder.get個人(認定申請情報.get識別コード());
     }
 
     private NinteichosaIrai get認定調査依頼情報(
             YokaigoNinteiProgress yokaigoninteiProgress,
-            NinteiShinseiJoho shinseiJoho) {
+            YokaigoNinteiShinsei shinseiJoho) {
         return ninteichosaIraiManager.get認定調査依頼情報(
                 yokaigoninteiProgress.get申請書管理番号(),
                 shinseiJoho.get認定調査依頼履歴番号());
     }
 
     private KaigoNinteichosain get介護認定調査員(
-            NinteiShinseiJoho shinseiJoho,
+            YokaigoNinteiShinsei shinseiJoho,
             NinteichosaIrai iraiJoho) {
         return kaigoNinteichosainManager.get介護認定調査員(
                 shinseiJoho.get証記載保険者番号(),

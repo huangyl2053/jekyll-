@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
+import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KojinTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaItakusakiTestHelper;
@@ -221,7 +221,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
         List<KaigoNinteiShoriTaishoshaEntity> list = new ArrayList<>();
         for (int i = 0; i < num; i++) {
             KaigoNinteiShoriTaishoshaEntity entity = new KaigoNinteiShoriTaishoshaEntity();
-            entity.setNinteiShinseiJohoEntity(NinteiShinseiJohoTestHelper.create認定申請情報Entity());
+            entity.setNinteiShinseiJohoEntity(YokaigoNinteiShinseiTestHelper.create認定申請情報Entity());
             entity.setNinteiShinchokuJohoEntity(NinteiShinchokuJohoMock.create認定進捗情報Entity());
             list.add(entity);
         }

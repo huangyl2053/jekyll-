@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoTorikomiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirek
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KojinTestHelper;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
+import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoSakuseiIraiMock;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
@@ -170,7 +170,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
             DbT5005NinteiShinchokuJohoEntity shinchokuEntity = NinteiShinchokuJohoMock.create認定進捗情報Entity();
             entity.setNinteiShinchokuJohoEntity(shinchokuEntity);
 
-            DbT5001NinteiShinseiJohoEntity shinseiEntity = NinteiShinseiJohoTestHelper.create認定申請情報Entity();
+            DbT5001NinteiShinseiJohoEntity shinseiEntity = YokaigoNinteiShinseiTestHelper.create認定申請情報Entity();
             shinseiEntity.setShoKisaiHokenshaNo(証記載保険者番号);
             shinseiEntity.setShishoCode(支所コード);
             entity.setNinteiShinseiJohoEntity(shinseiEntity);
@@ -187,7 +187,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
     private static ShujiiIkenshoTorikomiTaishosha create主治医意見書取込対象者() {
         return new ShujiiIkenshoTorikomiTaishosha(
                 NinteiShinchokuJohoMock.create認定進捗情報(),
-                mock(NinteiShinseiJoho.class),
+                mock(YokaigoNinteiShinsei.class),
                 mock(ShujiiIkenshoSakuseiIrai.class),
                 KojinTestHelper.create個人(),
                 mock(KaigoDoctor.class));

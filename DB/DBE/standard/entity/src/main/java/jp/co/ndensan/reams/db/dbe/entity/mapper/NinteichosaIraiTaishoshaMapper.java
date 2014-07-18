@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
@@ -43,7 +43,7 @@ public final class NinteichosaIraiTaishoshaMapper {
      */
     public static NinteichosaIraiTaishosha toNinteichosaIraiTaishosha(
             YokaigoNinteiProgress 認定進捗情報,
-            NinteiShinseiJoho 要介護認定申請情報,
+            YokaigoNinteiShinsei 要介護認定申請情報,
             IKojin 個人,
             NinteichosaItakusaki 認定調査委託先情報,
             IKaigoJigyosha 事業者情報,

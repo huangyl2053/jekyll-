@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaKekkaTorikomiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KojinTestHelper;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
+import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaIraiTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaIraiMapper;
@@ -182,7 +182,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
             DbT5005NinteiShinchokuJohoEntity shinchokuEntity = NinteiShinchokuJohoMock.create認定進捗情報Entity();
             entity.setNinteiShinchokuJohoEntity(shinchokuEntity);
 
-            DbT5001NinteiShinseiJohoEntity shinseiEntity = NinteiShinseiJohoTestHelper.create認定申請情報Entity();
+            DbT5001NinteiShinseiJohoEntity shinseiEntity = YokaigoNinteiShinseiTestHelper.create認定申請情報Entity();
             shinseiEntity.setShoKisaiHokenshaNo(証記載保険者番号);
             shinseiEntity.setShishoCode(支所コード);
             entity.setNinteiShinseiJohoEntity(shinseiEntity);
@@ -195,7 +195,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
     private static NinteichosaKekkaTorikomiTaishosha create認定調査結果取込対象者() {
         return new NinteichosaKekkaTorikomiTaishosha(
                 NinteiShinchokuJohoMock.create認定進捗情報(),
-                mock(NinteiShinseiJoho.class),
+                mock(YokaigoNinteiShinsei.class),
                 mock(NinteichosaIrai.class),
                 mock(KaigoNinteichosain.class),
                 KojinTestHelper.create個人());

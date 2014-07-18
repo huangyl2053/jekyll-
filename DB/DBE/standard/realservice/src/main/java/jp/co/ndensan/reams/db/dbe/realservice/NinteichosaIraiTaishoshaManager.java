@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaIraiTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.YokaigoNinteiShinseiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaIraiTaishoshaDac;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
@@ -168,7 +168,7 @@ public class NinteichosaIraiTaishoshaManager {
 
     private NinteichosaIraiTaishosha create認定調査依頼対象者(KaigoNinteiShoriTaishoshaEntity entity) {
         YokaigoNinteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
-        NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
+        YokaigoNinteiShinsei 認定申請情報 = YokaigoNinteiShinseiMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
         IKojin 個人 = get個人(認定申請情報);
         NinteichosaIrai 認定調査依頼情報 = get認定調査依頼情報(認定申請情報);
         NinteichosaItakusaki 認定調査委託先情報 = get認定調査委託先情報(認定申請情報, 認定調査依頼情報);
@@ -184,17 +184,17 @@ public class NinteichosaIraiTaishoshaManager {
                 認定調査員情報);
     }
 
-    private IKojin get個人(NinteiShinseiJoho 認定申請情報) {
+    private IKojin get個人(YokaigoNinteiShinsei 認定申請情報) {
         return kojinFinder.get個人(認定申請情報.get識別コード());
     }
 
-    private NinteichosaIrai get認定調査依頼情報(NinteiShinseiJoho 認定申請情報) {
+    private NinteichosaIrai get認定調査依頼情報(YokaigoNinteiShinsei 認定申請情報) {
         return ninteichosaIraiManager.get認定調査依頼情報(
                 認定申請情報.get申請書管理番号(),
                 認定申請情報.get認定調査依頼履歴番号());
     }
 
-    private NinteichosaItakusaki get認定調査委託先情報(NinteiShinseiJoho 認定申請情報, NinteichosaIrai 認定調査依頼情報) {
+    private NinteichosaItakusaki get認定調査委託先情報(YokaigoNinteiShinsei 認定申請情報, NinteichosaIrai 認定調査依頼情報) {
         return ninteichosaItakusakiManager.get認定調査委託先介護事業者番号指定(
                 認定申請情報.get証記載保険者番号(),
                 認定調査依頼情報.get認定調査委託先コード(),
@@ -206,7 +206,7 @@ public class NinteichosaIraiTaishoshaManager {
                 認定調査依頼情報.get認定調査委託先コード().value());
     }
 
-    private KaigoNinteichosain get介護認定調査員(NinteiShinseiJoho 認定申請情報, NinteichosaIrai 認定調査依頼情報) {
+    private KaigoNinteichosain get介護認定調査員(YokaigoNinteiShinsei 認定申請情報, NinteichosaIrai 認定調査依頼情報) {
         return kaigoNinteichosainManager.get介護認定調査員(
                 認定申請情報.get証記載保険者番号(),
                 認定調査依頼情報.get認定調査委託先コード(),

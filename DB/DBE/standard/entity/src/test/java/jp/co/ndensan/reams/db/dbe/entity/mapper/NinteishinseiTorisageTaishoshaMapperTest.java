@@ -6,10 +6,11 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
+import jp.co.ndensan.reams.db.dbe.business.TorisageRiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
+import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -92,7 +93,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
 
         @Test
         public void 認定取下げ情報のget取下げ理由が_Entityの取下げ理由と同一になる() {
-            assertThat(sut.get認定申請取下げ().get取下げ理由(), is(取下げ理由));
+            assertThat(sut.get認定申請取下げ().get取下げ理由().asRString(), is(取下げ理由));
         }
 
         @Test
@@ -158,11 +159,11 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
         }
 
         private DbT5001NinteiShinseiJohoEntity createMockEntity() {
-            return NinteiShinseiJohoTestHelper.create認定申請情報Entity();
+            return YokaigoNinteiShinseiTestHelper.create認定申請情報Entity();
         }
 
         private NinteiShinseiTorisage create認定申請取下げ() {
-            return new NinteiShinseiTorisage(取下げ区分, 取下げ理由, 取下げ年月日, 審査継続区分);
+            return new NinteiShinseiTorisage(取下げ区分, new TorisageRiyu(取下げ理由), 取下げ年月日, 審査継続区分);
         }
     }
 }

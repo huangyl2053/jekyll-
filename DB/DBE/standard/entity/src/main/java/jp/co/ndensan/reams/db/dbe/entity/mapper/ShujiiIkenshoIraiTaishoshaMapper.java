@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
@@ -43,7 +43,7 @@ public final class ShujiiIkenshoIraiTaishoshaMapper {
      */
     public static ShujiiIkenshoIraiTaishosha toShujiiIkenshoIraiTaishosha(
             YokaigoNinteiProgress 認定進捗情報,
-            NinteiShinseiJoho 認定申請情報,
+            YokaigoNinteiShinsei 認定申請情報,
             IKojin 個人,
             RString 氏名,
             RString 住所,

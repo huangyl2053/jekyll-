@@ -5,8 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -26,7 +24,7 @@ public class NinteiShinseiTorisageTest extends TestBase {
 
         @Test
         public void インスタンスの生成() {
-            NinteiShinseiTorisage sut = new NinteiShinseiTorisage(null, RString.EMPTY, FlexibleDate.MAX, null);
+            NinteiShinseiTorisage sut = new NinteiShinseiTorisage(null, TorisageRiyu.EMPTY, FlexibleDate.MAX, null);
             assertThat(sut, instanceOf(NinteiShinseiTorisage.class));
         }
     }

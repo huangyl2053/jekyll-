@@ -27,7 +27,7 @@ public class NinteichosaKekkaTorikomiTaishoshaTest extends DbeTestBase {
 
         private NinteichosaKekkaTorikomiTaishosha sut;
         private YokaigoNinteiProgress 認定進捗情報;
-        private NinteiShinseiJoho 認定申請情報;
+        private YokaigoNinteiShinsei 認定申請情報;
         private NinteichosaIrai 認定調査依頼情報;
         private KaigoNinteichosain 介護認定調査員;
         private IKojin 個人;
@@ -35,7 +35,7 @@ public class NinteichosaKekkaTorikomiTaishoshaTest extends DbeTestBase {
         @Before
         public void setUp() {
             認定進捗情報 = mock(YokaigoNinteiProgress.class);
-            認定申請情報 = mock(NinteiShinseiJoho.class);
+            認定申請情報 = mock(YokaigoNinteiShinsei.class);
             認定調査依頼情報 = mock(NinteichosaIrai.class);
             介護認定調査員 = mock(KaigoNinteichosain.class);
             個人 = mock(IKojin.class);

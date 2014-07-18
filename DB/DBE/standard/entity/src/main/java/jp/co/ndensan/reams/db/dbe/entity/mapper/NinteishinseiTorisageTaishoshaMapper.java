@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
+import jp.co.ndensan.reams.db.dbe.business.TorisageRiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
@@ -35,8 +36,10 @@ public final class NinteishinseiTorisageTaishoshaMapper {
     }
 
     private static NinteiShinseiTorisage create認定申請取下げ(DbT5001NinteiShinseiJohoEntity entity) {
-        return new NinteiShinseiTorisage(TorisageKubun.toValue(entity.getTorisageKubunCode()),
-                entity.getTorisageRiyu(), entity.getTorisageYMD(),
+        return new NinteiShinseiTorisage(
+                TorisageKubun.toValue(entity.getTorisageKubunCode()),
+                new TorisageRiyu(entity.getTorisageRiyu()),
+                entity.getTorisageYMD(),
                 ShinsaKeizokuKubun.toValue(entity.getShinsaKeizokuKubun()));
     }
 
@@ -51,7 +54,7 @@ public final class NinteishinseiTorisageTaishoshaMapper {
             NinteiShinseiTorisage 認定申請取下げ情報) {
         DbT5001NinteiShinseiJohoEntity 更新済みEntity = cloneEntity(entity);
         更新済みEntity.setTorisageKubunCode(認定申請取下げ情報.get取下げ区分().get取下げ区分コード());
-        更新済みEntity.setTorisageRiyu(認定申請取下げ情報.get取下げ理由());
+        更新済みEntity.setTorisageRiyu(認定申請取下げ情報.get取下げ理由().asRString());
         更新済みEntity.setTorisageYMD(認定申請取下げ情報.get取下げ年月日());
         更新済みEntity.setShinsaKeizokuKubun(認定申請取下げ情報.get申請継続区分().is継続());
         return 更新済みEntity;

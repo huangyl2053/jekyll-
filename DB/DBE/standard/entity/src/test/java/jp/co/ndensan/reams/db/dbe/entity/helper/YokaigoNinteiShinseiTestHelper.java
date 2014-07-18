@@ -4,14 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.NinteiResultSimple;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
+import jp.co.ndensan.reams.db.dbe.business.TorisageRiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -25,11 +28,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8187 久保田 英男
  */
-public final class NinteiShinseiJohoTestHelper {
+public final class YokaigoNinteiShinseiTestHelper {
 
     private static final ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(new RString("申請書管理番号"));
     private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
-    private static final RString 支所コード = new RString("支所コード");
+    private static final ShishoCode 支所コード = new ShishoCode(new RString("支所コード"));
     private static final KaigoHihokenshaNo 介護被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));
     private static final ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("123456"));
     private static final FlexibleDate 認定申請年月日 = FlexibleDate.MIN;
@@ -40,7 +43,7 @@ public final class NinteiShinseiJohoTestHelper {
     private static final RString 要支援申請区分 = new RString("1");
     private static final RString 認定申請理由 = new RString("認定申請理由");
     private static final Code 前回要介護状態区分コード = new Code(new RString("前回要介護状態区分コード"));
-    private static final int 前回申請有効期間 = 0;
+    private static final NinteiResultSimple 前回認定結果 = NinteiResultSimple.EMPTY;
     private static final boolean 情報提供への同意有無 = true;
     private static final int 認定調査依頼履歴番号 = 1;
     private static final Code 認定調査識別コード = new Code(new RString("1"));
@@ -52,7 +55,7 @@ public final class NinteiShinseiJohoTestHelper {
     private static final boolean 施設入所 = true;
     private static final RString 市町村連絡事項 = new RString("市町村連絡事項");
     private static final Code 取下げ区分コード = new Code(new RString("3"));
-    private static final RString 取下げ理由 = new RString("取下げ理由");
+    private static final TorisageRiyu 取下げ理由 = new TorisageRiyu(new RString("取下げ理由"));
     private static final FlexibleDate 認定申請取下げ年月日 = FlexibleDate.MAX;
     private static final boolean 審査継続区分 = false;
     private static final NinteiShinseiTorisage 認定申請取下げ = new NinteiShinseiTorisage(
@@ -61,11 +64,11 @@ public final class NinteiShinseiJohoTestHelper {
             認定申請取下げ年月日,
             ShinsaKeizokuKubun.toValue(審査継続区分));
 
-    private NinteiShinseiJohoTestHelper() {
+    private YokaigoNinteiShinseiTestHelper() {
     }
 
-    public static NinteiShinseiJoho create認定申請情報() {
-        return new NinteiShinseiJoho(
+    public static YokaigoNinteiShinsei create認定申請情報() {
+        return new YokaigoNinteiShinsei(
                 申請書管理番号,
                 証記載保険者番号,
                 支所コード,
@@ -78,8 +81,7 @@ public final class NinteiShinseiJohoTestHelper {
                 認定申請有効区分,
                 new Code(要支援申請区分),
                 認定申請理由,
-                前回要介護状態区分コード,
-                前回申請有効期間,
+                前回認定結果,
                 情報提供への同意有無,
                 new NinteichosaIraiRirekiNo(認定調査依頼履歴番号),
                 // 認定調査識別コード,
@@ -97,7 +99,7 @@ public final class NinteiShinseiJohoTestHelper {
         DbT5001NinteiShinseiJohoEntity entity = new DbT5001NinteiShinseiJohoEntity();
         entity.setShinseishoKanriNo(申請書管理番号);
         entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        entity.setShishoCode(支所コード);
+        entity.setShishoCode(支所コード.value());
         entity.setHihokenshaNo(介護被保険者番号);
         entity.setShikibetsuCode(識別コード);
         entity.setNinteiShinseiYMD(認定申請年月日);
@@ -107,8 +109,8 @@ public final class NinteiShinseiJohoTestHelper {
         entity.setNinteiShinseiYukoKubunCode(認定申請有効区分);
         entity.setShienShinseiKubun(要支援申請区分);
         entity.setShinseiRiyu(認定申請理由);
-        entity.setZenYokaigoKubunCode(前回要介護状態区分コード);
-        entity.setZenYukoKikan(前回申請有効期間);
+        entity.setZenYokaigoKubunCode(前回認定結果.get要介護度().getCode());
+        entity.setZenYukoKikan(前回認定結果.get認定有効期間().get有効期間月数().value());
         entity.setJohoteikyoDouiUmuKubun(情報提供への同意有無);
         entity.setNinteichosaIraiRirekiNo(認定調査依頼履歴番号);
         entity.setNinteichosaShikibetsuCode(認定調査識別コード);
@@ -120,7 +122,7 @@ public final class NinteiShinseiJohoTestHelper {
         entity.setShisetsuNyushoUmuKubun(施設入所);
         entity.setSichosonRenrakuJiko(市町村連絡事項);
         entity.setTorisageKubunCode(取下げ区分コード);
-        entity.setTorisageRiyu(取下げ理由);
+        entity.setTorisageRiyu(取下げ理由.asRString());
         entity.setTorisageYMD(認定申請取下げ年月日);
         entity.setShinsaKeizokuKubun(審査継続区分);
         return entity;
