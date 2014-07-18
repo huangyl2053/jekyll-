@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class KyufuJissekiService {
 
-    private final ServiceShurui サービス種類;
+    private final JigyoshaNo 事業者番号;
     private final Decimal 利用者負担額合計;
     private final Decimal 単位数合計;
     private final Decimal 保険請求分請求額合計;
@@ -25,18 +26,18 @@ public class KyufuJissekiService {
     /**
      * インスタンスを生成します。
      *
-     * @param サービス種類 サービス種類
+     * @param 事業者番号 事業者番号
      * @param 利用者負担額合計 利用者負担額合計
      * @param 単位数合計 単位数合計
      * @param 保険請求分請求額合計 保険請求分請求額合計
      * @param 給付実績キー情報 給付実績キー情報
      */
-    public KyufuJissekiService(ServiceShurui サービス種類,
+    public KyufuJissekiService(JigyoshaNo 事業者番号,
             Decimal 利用者負担額合計,
             Decimal 単位数合計,
             Decimal 保険請求分請求額合計,
             KyufuJissekiKeyInfo 給付実績キー情報) {
-        this.サービス種類 = requireNonNull(サービス種類, Messages.E00001.replace("サービス種類コード").getMessage());
+        this.事業者番号 = requireNonNull(事業者番号, Messages.E00001.replace("事業者番号").getMessage());
         this.利用者負担額合計 = requireNonNull(利用者負担額合計, Messages.E00001.replace("利用者負担額合計").getMessage());
         this.単位数合計 = requireNonNull(単位数合計, Messages.E00001.replace("単位数合計").getMessage());
         this.保険請求分請求額合計 = requireNonNull(保険請求分請求額合計,
@@ -45,12 +46,12 @@ public class KyufuJissekiService {
     }
 
     /**
-     * サービス種類を返します。
+     * 事業者番号を返します。
      *
-     * @return サービス種類
+     * @return 事業者番号
      */
-    public ServiceShurui getサービス種類() {
-        return サービス種類;
+    public JigyoshaNo get事業者番号() {
+        return 事業者番号;
     }
 
     /**

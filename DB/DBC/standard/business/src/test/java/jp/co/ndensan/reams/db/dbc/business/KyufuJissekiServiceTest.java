@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.business;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -33,7 +35,7 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
 
         private static KyufuJissekiService sut;
 
-        private static ServiceShurui サービス種類;
+        private static JigyoshaNo 事業者番号;
         private static Decimal 利用者負担額合計;
         private static Decimal 単位数合計;
         private static Decimal 保険請求分請求額合計;
@@ -41,7 +43,7 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
 
         @Before
         public void setUp() {
-            サービス種類 = mock(ServiceShurui.class);
+            事業者番号 = mock(JigyoshaNo.class);
             利用者負担額合計 = mock(Decimal.class);
             単位数合計 = mock(Decimal.class);
             保険請求分請求額合計 = mock(Decimal.class);
@@ -55,22 +57,22 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 利用者負担額合計がnullの時_NullPointerExceptionが発生する() {
-            sut = new KyufuJissekiService(サービス種類, null, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
+            sut = new KyufuJissekiService(事業者番号, null, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 単位数合計がnullの時_NullPointerExceptionが発生する() {
-            sut = new KyufuJissekiService(サービス種類, 利用者負担額合計, null, 保険請求分請求額合計, 給付実績キー情報);
+            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, null, 保険請求分請求額合計, 給付実績キー情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 保険請求分請求額合計がnullの時_NullPointerExceptionが発生する() {
-            sut = new KyufuJissekiService(サービス種類, 利用者負担額合計, 単位数合計, null, 給付実績キー情報);
+            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, null, 給付実績キー情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 給付実績キー情報がnullの時_NullPointerExceptionが発生する() {
-            sut = new KyufuJissekiService(サービス種類, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, null);
+            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, null);
         }
     }
 
@@ -78,7 +80,7 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
 
         private static KyufuJissekiService sut;
 
-        private static ServiceShurui サービス種類;
+        private static JigyoshaNo 事業者番号;
         private static Decimal 利用者負担額合計;
         private static Decimal 単位数合計;
         private static Decimal 保険請求分請求額合計;
@@ -89,18 +91,18 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
 
         @Test
         public void get合計金額で_利用者負担額合計_単位数合計_保険請求分請求額合計_の合計を返す() {
-            サービス種類 = createサービス種類();
+            事業者番号 = new JigyoshaNo(new RString("001"));
             利用者負担額合計 = new Decimal("100");
             単位数合計 = new Decimal("150");
             保険請求分請求額合計 = new Decimal("200");
             給付実績キー情報 = create給付実績キー情報();
-            sut = new KyufuJissekiService(サービス種類, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
+            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
             assertThat(sut.get合計金額(), is(new Decimal("450")));
         }
     }
 
-    private static ServiceShurui createサービス種類() {
-        return new ServiceShurui(new Code("11"), new RString("名称"), new RString("略称"));
+    private static ServiceShuruiCode createサービス種類() {
+        return new ServiceShuruiCode(new RString("11"));
     }
 
     private static KyufuJissekiKeyInfo create給付実績キー情報() {
@@ -110,7 +112,7 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
         ServiceTeikyoYM サービス提供期間終了 = new ServiceTeikyoYM(new FlexibleYearMonth("201412"));
         Range<ServiceTeikyoYM> サービス提供期間 = new Range(サービス提供期間開始, サービス提供期間終了);
         InputShikibetsuNo 入力識別番号 = new InputShikibetsuNo(new Code("入力識別番号"), new RString("名称"), new RString("略称"));
-        ServiceShurui サービス種類 = createサービス種類();
+        ServiceShuruiCode サービス種類 = createサービス種類();
         ServiceTeikyoYM サービス提供年月 = new ServiceTeikyoYM(new FlexibleYearMonth("201407"));
         ret = new KyufuJissekiKeyInfo(被保番号,
                 サービス提供期間,
