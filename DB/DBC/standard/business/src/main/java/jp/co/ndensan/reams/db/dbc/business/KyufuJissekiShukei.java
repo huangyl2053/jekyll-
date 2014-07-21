@@ -22,7 +22,7 @@ public class KyufuJissekiShukei {
     private final Decimal 対象単位;
     private final Decimal 対象外単位;
     private final int 短計画日数;
-    private final Decimal 保険公費;
+    private final RString 保険公費;
     private final RString 決定;
     private final int 短実日数;
     private final Decimal 単位合計;
@@ -66,7 +66,7 @@ public class KyufuJissekiShukei {
             Decimal 対象単位,
             Decimal 対象外単位,
             int 短計画日数,
-            Decimal 保険公費,
+            RString 保険公費,
             RString 決定,
             int 短実日数,
             Decimal 単位合計,
@@ -159,7 +159,7 @@ public class KyufuJissekiShukei {
      *
      * @return
      */
-    public Decimal get保険公費() {
+    public RString get保険公費() {
         return 保険公費;
     }
 
