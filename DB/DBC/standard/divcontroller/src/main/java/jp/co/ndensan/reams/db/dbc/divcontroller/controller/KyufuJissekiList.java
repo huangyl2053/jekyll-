@@ -5,20 +5,30 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
-import java.awt.Color;
-import java.awt.PageAttributes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiServiceCategory;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiServiceCollection;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiServiceCollections;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ServiceCategorySubTitle;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiSearchDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiMeisaiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiGokeiList_Row;
+import jp.co.ndensan.reams.db.dbc.realservice.KyufuJissekiServiceFinder;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.*;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridColumn;
@@ -70,6 +80,15 @@ public class KyufuJissekiList {
         List<HashMap> kyufuJissekiMeisaiList = YamlLoader.DBC.loadAsList(
                 new RString("dbc0010000/KyufuJissekiMeisaiList.yml"));
 
+        ServiceTeikyoYM start = new ServiceTeikyoYM(new FlexibleDate("20140601").getYearMonth());
+        ServiceTeikyoYM end = new ServiceTeikyoYM(new FlexibleDate("20140901").getYearMonth());
+//        ServiceTeikyoYM start = new ServiceTeikyoYM(new FlexibleDate(panel2.getTxtKyufuJissekiSearchServiceTeikyoYM().getFromText()).getYearMonth());
+//        ServiceTeikyoYM end = new ServiceTeikyoYM(new FlexibleDate(panel2.getTxtKyufuJissekiSearchServiceTeikyoYM().getToText()).getYearMonth());
+        Range<ServiceTeikyoYM> serviceTeikyoYMRange = new Range(start, end);
+//        KyufuJissekiServiceFinder finder = new KyufuJissekiServiceFinder();
+//        KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(panel2.getTxtKyufuJissekiSearchHihokenshaNo().getValue());
+//        KyufuJissekiServiceCollections collections = finder.get給付実績一覧(hihokenshaNo, serviceTeikyoYMRange);
+        KyufuJissekiServiceCollections collections = new KyufuJissekiServiceCollections(KyufuJissekiListTest.get給付実績月別集計リスト());
         //ヘッダー情報取得、設定
         HashMap hashMap = kyufuJissekiMeisaiList.get(0);
         ControlGenerator ymlData = new ControlGenerator(hashMap);
@@ -85,7 +104,8 @@ public class KyufuJissekiList {
         panel.getTxtKyufuJissekiListSeinengappi().setValue(ymlData.getAsRString("Seinengappi"));
 
         //給付実績一覧明細データ取得、設定
-        List<dgKyufuJissekiMeisaiList_Row> arrayMeisaidata = createRowKyufuJissekiMeisaiList(kyufuJissekiMeisaiList);
+//        List<dgKyufuJissekiMeisaiList_Row> arrayMeisaidata = createRowKyufuJissekiMeisaiList(kyufuJissekiMeisaiList);
+        List<dgKyufuJissekiMeisaiList_Row> arrayMeisaidata = createRowKyufuJissekiMeisaiList(collections, serviceTeikyoYMRange);
 
         //バックカラーの設定
         RString serviceGroup1Value = RString.EMPTY;
@@ -240,54 +260,119 @@ public class KyufuJissekiList {
 //                new RString(txtYM1), new RString(txtYM2), new RString(txtYM3), new RString(txtYM4), new RString(txtYM5), new RString(txtYM6),
 //                new RString(txtYM7), new RString(txtYM8), new RString(txtYM9), new RString(txtYM10), new RString(txtYM11), new RString(txtYM12));
 //    }
+    private class rowData {
+
+        RString txtServiceGroup1;
+        RString txtServiceGroup2;
+        RString txtServiceShurui;
+        List<RString> txtYM = new ArrayList();
+    }
 
     /*
      *給付実績一覧明細情報の初期値をセットします。
      */
     private List createRowKyufuJissekiMeisaiList(
-            List<HashMap> kyufuJissekiMeisaiList) {
+            //            List<HashMap> kyufuJissekiMeisaiList) {
+            KyufuJissekiServiceCollections collections,
+            Range<ServiceTeikyoYM> range) {
 
         List arrayDataList = new ArrayList();
+        KyufuJissekiServiceCategory category = new KyufuJissekiServiceCategory();
 
-        for (int i = 1; i < kyufuJissekiMeisaiList.size(); i++) {
-            HashMap hashMap = kyufuJissekiMeisaiList.get(i);
-            ControlGenerator ymlData = new ControlGenerator(hashMap);
+        List<ServiceShuruiCode> dispList = category.get一覧表示サービス種類();
+        List<rowData> allDataList = new ArrayList();
 
-            RString rsServiceGroup1 = ymlData.getAsRString("txtServiceGroup1");
-            RString rsServiceGroup2 = ymlData.getAsRString("txtServiceGroup2");
-            RString rsServiceShurui = ymlData.getAsRString("txtServiceShurui");
-            RString rsYM1 = ymlData.getAsRString("txtYM1");
-            RString rsYM2 = ymlData.getAsRString("txtYM2");
-            RString rsYM3 = ymlData.getAsRString("txtYM3");
-            RString rsYM4 = ymlData.getAsRString("txtYM4");
-            RString rsYM5 = ymlData.getAsRString("txtYM5");
-            RString rsYM6 = ymlData.getAsRString("txtYM6");
-            RString rsYM7 = ymlData.getAsRString("txtYM7");
-            RString rsYM8 = ymlData.getAsRString("txtYM8");
-            RString rsYM9 = ymlData.getAsRString("txtYM9");
-            RString rsYM10 = ymlData.getAsRString("txtYM10");
-            RString rsYM11 = ymlData.getAsRString("txtYM11");
-            RString rsYM12 = ymlData.getAsRString("txtYM12");
+        for (ServiceShuruiCode code : dispList) {
+            FlexibleYearMonth start = range.getFrom().value();
+            rowData row = new rowData();
+            row.txtServiceShurui = new RString(category.getサービス種類タイトル(code).toString());
+            row.txtServiceGroup1 = new RString(category.get一覧タイトル(code).toString());
+            row.txtServiceGroup2 = RString.EMPTY;
+            if (!category.get一覧サブタイトル(code).equals(ServiceCategorySubTitle.サブタイトルなし)) {
+                row.txtServiceGroup2 = new RString(category.get一覧サブタイトル(code).toString());
+            }
+
+            while (start.isBeforeOrEquals(range.getTo().value())) {
+                KyufuJissekiServiceCollection col = collections.get給付実績月別集計(new ServiceTeikyoYM(start));
+                if (col != null) {
+                    Decimal data = col.get単位数合計Byサービス種類(code);
+                    if (data.equals(Decimal.ZERO)) {
+                        row.txtYM.add(RString.EMPTY);
+                    } else {
+                        row.txtYM.add(new RString(data.toString()));
+                    }
+                }
+                start = start.plusMonth(1);
+            }
+            allDataList.add(row);
+        }
+
+        for (rowData row : allDataList) {
+            List<RString> rsYM = new ArrayList<>();
+            for (int i = 0; i < 12; i++) {
+                if (i < row.txtYM.size()) {
+                    rsYM.add(row.txtYM.get(i));
+                } else {
+                    rsYM.add(RString.EMPTY);
+                }
+            }
 
             arrayDataList.add(createRowKyufuJissekiMeisaiList(
-                    rsServiceGroup1,
-                    rsServiceGroup2,
-                    rsServiceShurui,
-                    rsYM1,
-                    rsYM2,
-                    rsYM3,
-                    rsYM4,
-                    rsYM5,
-                    rsYM6,
-                    rsYM7,
-                    rsYM8,
-                    rsYM9,
-                    rsYM10,
-                    rsYM11,
-                    rsYM12
-            ));
-
+                    row.txtServiceGroup1,
+                    row.txtServiceGroup2,
+                    row.txtServiceShurui,
+                    rsYM.get(0),
+                    rsYM.get(1),
+                    rsYM.get(2),
+                    rsYM.get(3),
+                    rsYM.get(4),
+                    rsYM.get(5),
+                    rsYM.get(6),
+                    rsYM.get(7),
+                    rsYM.get(8),
+                    rsYM.get(9),
+                    rsYM.get(10),
+                    rsYM.get(11)));
         }
+//        for (int i = 1; i < kyufuJissekiMeisaiList.size(); i++) {
+//            HashMap hashMap = kyufuJissekiMeisaiList.get(i);
+//            ControlGenerator ymlData = new ControlGenerator(hashMap);
+//
+//            RString rsServiceGroup1 = ymlData.getAsRString("txtServiceGroup1");
+//            RString rsServiceGroup2 = ymlData.getAsRString("txtServiceGroup2");
+//            RString rsServiceShurui = ymlData.getAsRString("txtServiceShurui");
+//            RString rsYM1 = ymlData.getAsRString("txtYM1");
+//            RString rsYM2 = ymlData.getAsRString("txtYM2");
+//            RString rsYM3 = ymlData.getAsRString("txtYM3");
+//            RString rsYM4 = ymlData.getAsRString("txtYM4");
+//            RString rsYM5 = ymlData.getAsRString("txtYM5");
+//            RString rsYM6 = ymlData.getAsRString("txtYM6");
+//            RString rsYM7 = ymlData.getAsRString("txtYM7");
+//            RString rsYM8 = ymlData.getAsRString("txtYM8");
+//            RString rsYM9 = ymlData.getAsRString("txtYM9");
+//            RString rsYM10 = ymlData.getAsRString("txtYM10");
+//            RString rsYM11 = ymlData.getAsRString("txtYM11");
+//            RString rsYM12 = ymlData.getAsRString("txtYM12");
+//
+//            arrayDataList.add(createRowKyufuJissekiMeisaiList(
+//                    rsServiceGroup1,
+//                    rsServiceGroup2,
+//                    rsServiceShurui,
+//                    rsYM1,
+//                    rsYM2,
+//                    rsYM3,
+//                    rsYM4,
+//                    rsYM5,
+//                    rsYM6,
+//                    rsYM7,
+//                    rsYM8,
+//                    rsYM9,
+//                    rsYM10,
+//                    rsYM11,
+//                    rsYM12
+//            ));
+//
+//        }
         return arrayDataList;
     }
 

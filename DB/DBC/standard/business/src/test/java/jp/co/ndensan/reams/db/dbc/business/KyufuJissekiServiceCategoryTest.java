@@ -26,48 +26,50 @@ public class KyufuJissekiServiceCategoryTest extends DbcTestBase {
 
     public static class getカテゴリのテスト extends DbcTestBase {
 
+        KyufuJissekiServiceCategory sut = new KyufuJissekiServiceCategory();
+
         public void setUp() {
         }
 
-        @Test(expected = NullPointerException.class)
-        public void nullを指定したとき_NullPointerExceptionが発生する() {
-            assertThat(KyufuJissekiServiceCategory.getカテゴリ(null),
+        @Test
+        public void nullを指定したとき_nullを返す() {
+            assertThat(sut.get合計カテゴリ(null),
                     nullValue());
         }
 
         @Test
         public void サービス種類_訪問介護_11_を指定したとき_居宅サービスを返す() {
-            assertThat(KyufuJissekiServiceCategory.getカテゴリ(new ServiceShuruiCode(new RString("11"))),
+            assertThat(sut.get合計カテゴリ(new ServiceShuruiCode(new RString("11"))),
                     is(ServiceCategory.居宅サービス));
         }
 
         @Test
         public void サービス種類_予防特定施設入所者生活介護_35_を指定したとき_居宅サービスを返す() {
-            assertThat(KyufuJissekiServiceCategory.getカテゴリ(new ServiceShuruiCode(new RString("35"))),
+            assertThat(sut.get合計カテゴリ(new ServiceShuruiCode(new RString("35"))),
                     is(ServiceCategory.居宅サービス));
         }
 
         @Test
         public void サービス種類_介護福祉施設サービス_51_を指定したとき_施設サービスを返す() {
-            assertThat(KyufuJissekiServiceCategory.getカテゴリ(new ServiceShuruiCode(new RString("51"))),
+            assertThat(sut.get合計カテゴリ(new ServiceShuruiCode(new RString("51"))),
                     is(ServiceCategory.施設サービス));
         }
 
         @Test
         public void サービス種類_介護療養施設サービス_53_を指定したとき_施設サービスを返す() {
-            assertThat(KyufuJissekiServiceCategory.getカテゴリ(new ServiceShuruiCode(new RString("53"))),
+            assertThat(sut.get合計カテゴリ(new ServiceShuruiCode(new RString("53"))),
                     is(ServiceCategory.施設サービス));
         }
 
         @Test
         public void サービス種類_認知症対応型共同生活介護_32_を指定したとき_地域密着型サービスを返す() {
-            assertThat(KyufuJissekiServiceCategory.getカテゴリ(new ServiceShuruiCode(new RString("32"))),
+            assertThat(sut.get合計カテゴリ(new ServiceShuruiCode(new RString("32"))),
                     is(ServiceCategory.地域密着型サービス));
         }
 
         @Test
         public void サービス種類_地域密着型介護老人福祉施設_54_を指定したとき_地域密着型サービスを返す() {
-            assertThat(KyufuJissekiServiceCategory.getカテゴリ(new ServiceShuruiCode(new RString("54"))),
+            assertThat(sut.get合計カテゴリ(new ServiceShuruiCode(new RString("54"))),
                     is(ServiceCategory.地域密着型サービス));
         }
     }

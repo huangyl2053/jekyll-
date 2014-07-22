@@ -57,8 +57,9 @@ public class KyufuJissekiServiceCollection implements Iterable {
      */
     public Decimal get単位数合計Byサービスカテゴリ(ServiceCategory サービスカテゴリ) {
         Decimal ret = Decimal.ZERO;
+        KyufuJissekiServiceCategory category = new KyufuJissekiServiceCategory();
         for (KyufuJissekiService 給付実績種類明細情報 : 給付実績種類明細情報リスト) {
-            if (KyufuJissekiServiceCategory.getカテゴリ(給付実績種類明細情報.get給付実績キー情報().getサービス種類コード())
+            if (category.get合計カテゴリ(給付実績種類明細情報.get給付実績キー情報().getサービス種類コード())
                     .equals(サービスカテゴリ)) {
                 ret = ret.add(給付実績種類明細情報.get単位数合計());
             }
