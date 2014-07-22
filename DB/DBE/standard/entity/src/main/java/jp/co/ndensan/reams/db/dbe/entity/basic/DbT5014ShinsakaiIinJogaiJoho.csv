@@ -1,0 +1,4 @@
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,KaigoHihokenshaNo,,,,,A
+kanriNo,int4,int,,,,,A
+jogaiTaishoShinsakaiIinCode,varchar,RString,,,,,A
