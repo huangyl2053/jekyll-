@@ -20,7 +20,7 @@ public class JogaiShinsakaiIinList implements Iterable<JogaiShinsakaiIin> {
     private final List<JogaiShinsakaiIin> 除外審査会委員List;
 
     /**
-     * コンストラクタです。除外審査会委員のリストを受け取り、それを元にインスタンスをせいせいします。
+     * コンストラクタです。除外審査会委員のリストを受け取り、それを元にインスタンスを生成します。
      *
      * @param 除外審査会委員List 除外審査会委員List
      * @throws NullPointerException 引数にnullが渡されたとき
