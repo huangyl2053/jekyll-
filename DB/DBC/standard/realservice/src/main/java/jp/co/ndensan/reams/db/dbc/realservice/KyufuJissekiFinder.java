@@ -9,8 +9,14 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJisseki;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihon;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiMeisaiCollection;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigenCollection;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukeiCollection;
 import jp.co.ndensan.reams.db.dbc.entity.mapper.KyufuJissekiMapper;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiKihonDac;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiMeisaiDac;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiShafukuKeigenDac;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiShukeiDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -20,22 +26,38 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KyufuJissekiFinder {
 
-    private final IKyufuJissekiKihonDac dac;
+    private final IKyufuJissekiKihonDac kihonDac;
+    private final IKyufuJissekiMeisaiDac meisaiDac;
+    private final IKyufuJissekiShukeiDac shukeiDac;
+    private final IKyufuJissekiShafukuKeigenDac shafukuDac;
 
     /**
      * InstanceProviderを用いてDacのインスタンスを生成し、メンバ変数に保持します。
      */
     public KyufuJissekiFinder() {
-        dac = InstanceProvider.create(IKyufuJissekiKihonDac.class);
+        kihonDac = InstanceProvider.create(IKyufuJissekiKihonDac.class);
+        meisaiDac = InstanceProvider.create(IKyufuJissekiMeisaiDac.class);
+        shukeiDac = InstanceProvider.create(IKyufuJissekiShukeiDac.class);
+        shafukuDac = InstanceProvider.create(IKyufuJissekiShafukuKeigenDac.class);
     }
 
     /**
      * モックを使用するテスト用コンストラクタです。
      *
-     * @param dac 給付実績基本Dac
+     * @param kihonDac 給付実績基本Dac
+     * @param meisaiDac 給付実績明細Dac
+     * @param shukeiDac 給付実績集計Dac
+     * @param shafukuDac 給付実績社会福祉法人軽減額Dac
      */
-    KyufuJissekiFinder(IKyufuJissekiKihonDac dac) {
-        this.dac = dac;
+    KyufuJissekiFinder(
+            IKyufuJissekiKihonDac kihonDac,
+            IKyufuJissekiMeisaiDac meisaiDac,
+            IKyufuJissekiShukeiDac shukeiDac,
+            IKyufuJissekiShafukuKeigenDac shafukuDac) {
+        this.kihonDac = kihonDac;
+        this.meisaiDac = meisaiDac;
+        this.shukeiDac = shukeiDac;
+        this.shafukuDac = shafukuDac;
     }
 
     /**
@@ -55,11 +77,15 @@ public class KyufuJissekiFinder {
      * @return 給付実績情報
      */
     public KyufuJisseki get給付実績(KyufuJissekiDetailKeyInfo 詳細キー情報) {
-        return new KyufuJisseki(get給付実績基本(詳細キー情報), null, null, null);
+        return new KyufuJisseki(
+                get給付実績基本(詳細キー情報),
+                get給付実績明細(詳細キー情報),
+                get給付実績集計(詳細キー情報),
+                get給付実績社会福祉法人軽減額(詳細キー情報));
     }
 
     private KyufuJissekiKihon get給付実績基本(KyufuJissekiDetailKeyInfo 詳細キー情報) {
-        return KyufuJissekiMapper.to給付実績基本(dac.select(
+        return KyufuJissekiMapper.to給付実績基本(kihonDac.select(
                 詳細キー情報.get交換情報識別番号(),
                 詳細キー情報.get入力識別番号().getInputShikibetsuNoCode(),
                 詳細キー情報.getレコード種別コード(),
@@ -68,6 +94,42 @@ public class KyufuJissekiFinder {
                 詳細キー情報.get被保番号(),
                 詳細キー情報.getサービス提供年月().value(),
                 詳細キー情報.get給付実績区分().getCode(),
+                詳細キー情報.get事業所番号(),
+                詳細キー情報.get通番()));
+    }
+
+    private KyufuJissekiMeisaiCollection get給付実績明細(KyufuJissekiDetailKeyInfo 詳細キー情報) {
+        return KyufuJissekiMapper.to給付実績明細List(meisaiDac.select(
+                詳細キー情報.get交換情報識別番号(),
+                詳細キー情報.get入力識別番号().getInputShikibetsuNoCode(),
+                詳細キー情報.getレコード種別コード(),
+                詳細キー情報.get証記載保険者番号(),
+                詳細キー情報.get被保番号(),
+                詳細キー情報.getサービス提供年月().value(),
+                詳細キー情報.get事業所番号(),
+                詳細キー情報.get通番()));
+    }
+
+    private KyufuJissekiShukeiCollection get給付実績集計(KyufuJissekiDetailKeyInfo 詳細キー情報) {
+        return KyufuJissekiMapper.to給付実績集計List(shukeiDac.select(
+                詳細キー情報.get交換情報識別番号(),
+                詳細キー情報.get入力識別番号().getInputShikibetsuNoCode(),
+                詳細キー情報.getレコード種別コード(),
+                詳細キー情報.get証記載保険者番号(),
+                詳細キー情報.get被保番号(),
+                詳細キー情報.getサービス提供年月().value(),
+                詳細キー情報.get事業所番号(),
+                詳細キー情報.get通番()));
+    }
+
+    private KyufuJissekiShafukuKeigenCollection get給付実績社会福祉法人軽減額(KyufuJissekiDetailKeyInfo 詳細キー情報) {
+        return KyufuJissekiMapper.to給付実績社会福祉法人軽減額List(shafukuDac.select(
+                詳細キー情報.get交換情報識別番号(),
+                詳細キー情報.get入力識別番号().getInputShikibetsuNoCode(),
+                詳細キー情報.getレコード種別コード(),
+                詳細キー情報.get証記載保険者番号(),
+                詳細キー情報.get被保番号(),
+                詳細キー情報.getサービス提供年月().value(),
                 詳細キー情報.get事業所番号(),
                 詳細キー情報.get通番()));
     }
