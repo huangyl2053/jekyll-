@@ -75,7 +75,7 @@ public class KyufuJissekiShukeiCollectionTest extends DbcTestBase {
 
     private static KyufuJissekiShukei createKyufuJissekiShukei() {
         return new KyufuJissekiShukei(
-                new RString("種類"), 0, new Decimal(1), new Decimal(2), new Decimal(3), 4, new Decimal(5),
+                new RString("種類"), 0, new Decimal(1), new Decimal(2), new Decimal(3), 4, new RString("保険"),
                 new RString("決定"), 6, new Decimal("7"), new Decimal("8"), new Decimal("9"), new Decimal("10"),
                 new Decimal("11"), new Decimal("12"), new Decimal("13"), 14, 15, new FlexibleYearMonth("201401"));
     }

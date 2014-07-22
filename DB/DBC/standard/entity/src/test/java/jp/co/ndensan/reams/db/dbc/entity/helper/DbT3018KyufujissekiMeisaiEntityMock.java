@@ -56,6 +56,20 @@ public class DbT3018KyufujissekiMeisaiEntityMock {
         entity.setServiceShuruiCode(new ServiceShuruiCode(new RString("01")));
         entity.setServiceKomokuCode(new ServiceKomokuCode(new RString("0002")));
         entity.setShinsaYM(new FlexibleYearMonth("201402"));
+        entity.setServiceShuruiCode(new ServiceShuruiCode(new RString("11")));
+        entity.setTekiyo(new RString("概要"));
+        entity.setTanisu(1000);
+        entity.setNissuKaisu(4);
+        entity.setKohi1TaishoNissuKaisu(1);
+        entity.setKohi2TaishoNissuKaisu(2);
+        entity.setKohi3TaishoNissuKaisu(3);
+        entity.setServiceTanisu(1500);
+        entity.setKohi1TaishoServiceTanisu(1);
+        entity.setKohi2TaishoServiceTanisu(2);
+        entity.setKohi3TaishoServiceTanisu(3);
+        entity.setSaishinsaKaisu(1500);
+        entity.setKagoKaisu(2);
+        entity.setShinsaYM(new FlexibleYearMonth("201401"));
         return entity;
     }
 }
