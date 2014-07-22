@@ -629,7 +629,7 @@ module DBZ {
      "imageHeight": "",
      "icon": 0,
      "heightTextBoxMatches": true,
-     "displayChildDivName": "",
+     "displayChildDivName": "DBZ.KaigoRenrakusakiInfo",
      "dataPassing": [],
      "visibleCloseButton": true,
      "onOkClose": "",
