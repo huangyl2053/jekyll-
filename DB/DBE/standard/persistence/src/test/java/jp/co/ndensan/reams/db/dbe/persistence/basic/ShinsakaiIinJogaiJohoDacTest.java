@@ -48,7 +48,7 @@ public class ShinsakaiIinJogaiJohoDacTest {
 
         @Test
         public void データが存在しない場合_insertが実行される() {
-            int result = sut.insert(ShinsakaiMockEntityCreator.create審査会委員除外情報Entity(
+            int result = sut.insertOrUpdate(ShinsakaiMockEntityCreator.create審査会委員除外情報Entity(
                     証記載保険者番号_123456, 被保険者番号_0123456789, 管理番号_1, 審査会委員コード_12345678));
             assertThat(result, is(1));
         }
@@ -57,7 +57,7 @@ public class ShinsakaiIinJogaiJohoDacTest {
         public void 同じキー情報を持つデータをinsertOrUpdateした場合_updateが実行される() {
             sut.insert(ShinsakaiMockEntityCreator.create審査会委員除外情報Entity(
                     証記載保険者番号_123456, 被保険者番号_0123456789, 管理番号_1, 審査会委員コード_12345678));
-            int result = sut.update(ShinsakaiMockEntityCreator.create審査会委員除外情報Entity(
+            int result = sut.insertOrUpdate(ShinsakaiMockEntityCreator.create審査会委員除外情報Entity(
                     証記載保険者番号_123456, 被保険者番号_0123456789, 管理番号_1, new ShinsakaiIinCode(new RString("09090909"))));
             assertThat(result, is(1));
         }
