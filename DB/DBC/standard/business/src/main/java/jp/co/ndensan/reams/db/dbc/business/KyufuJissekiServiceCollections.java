@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business;
 
+import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  *
  * @author N8187 久保田 英男
  */
-public class KyufuJissekiServiceCollections {
+public class KyufuJissekiServiceCollections implements Iterable {
 
     private final List<KyufuJissekiServiceCollection> 給付実績月別集計リスト;
 
@@ -42,6 +43,29 @@ public class KyufuJissekiServiceCollections {
             }
         }
         return null;
+    }
+
+    /**
+     * 給付実績月別集計リストがEMPTYかどうか判定します。
+     *
+     * @return EMPTYの場合はtrueを返します。
+     */
+    public boolean isEmpty() {
+        return 給付実績月別集計リスト.isEmpty();
+    }
+
+    /**
+     * 給付実績月別集計リストのサイズを返します。
+     *
+     * @return 給付実績集計リストのサイズ
+     */
+    public int size() {
+        return 給付実績月別集計リスト.size();
+    }
+
+    @Override
+    public Iterator iterator() {
+        return 給付実績月別集計リスト.iterator();
     }
 
 }

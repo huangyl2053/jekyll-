@@ -112,6 +112,12 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
             sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
             assertThat(sut.get保険請求分請求額合計(), is(new Decimal("200")));
         }
+
+        @Test
+        public void get給付実績キー情報で_給付実績キー情報を返す() {
+            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
+            assertThat(sut.get給付実績キー情報().getサービス提供年月(), is(new ServiceTeikyoYM(new FlexibleYearMonth("201407"))));
+        }
     }
 
     private static ServiceShuruiCode createサービス種類() {

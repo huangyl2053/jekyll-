@@ -20,15 +20,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
 
 /**
- * 給付実績のサービス種類ごとの集計情報のCollectionのテストです。
+ * ひと月分の給付実績種類明細情報のリストを保持するコレクションクラスのテストです。
  *
  * @author N8187 久保田 英男
  */
@@ -64,27 +62,9 @@ public class KyufuJissekiServiceCollectionTest extends DbcTestBase {
                     is(new Decimal("31").add(new Decimal("41"))));
         }
 
-//        @Test
-//        public void サービス種類_11を指定したとき_サービス種類11の_保険請求分請求額合計を返す() {
-//            sut = new KyufuJissekiServiceCollection(create給付実績サービス集計List());
-//            assertThat(sut.get給付実績サービス(new ServiceShuruiCode(new Code("11"))).get保険請求分請求額合計(), is(new Decimal("12")));
-//        }
-//
-//        @Test
-//        public void サービス種類_11を指定したとき_サービス種類11の_合計金額を返す() {
-//            sut = new KyufuJissekiServiceCollection(create給付実績サービス集計List());
-//            assertThat(sut.get給付実績サービス(new ServiceShuruiCode(new Code("11"))).get合計金額(), is(new Decimal("33")));
-//        }
-//
-//        @Test
-//        public void サービス種類_12を指定したとき_サービス種類12の_集計情報を返す() {
-//            sut = new KyufuJissekiServiceCollection(create給付実績サービス集計List());
-//            assertThat(sut.get給付実績サービス(new ServiceShuruiCode(new Code("12"))).get利用者負担額合計(), is(new Decimal("20")));
-//        }
         @Test
-        public void サービス種類_99を指定したとき_存在しないためnullを返す() {
+        public void サービス種類_99を指定したとき_存在しないため0を返す() {
             sut = new KyufuJissekiServiceCollection(create給付実績サービス集計List());
-//            assertThat(sut.get単位数合計Byサービス種類(new ServiceShuruiCode(new RString("99"))), nullValue());
             assertThat(sut.get単位数合計Byサービス種類(new ServiceShuruiCode(new RString("99"))), is(new Decimal("0")));
         }
     }
@@ -101,12 +81,19 @@ public class KyufuJissekiServiceCollectionTest extends DbcTestBase {
                     is(new Decimal("11").add(new Decimal("21")).add(new Decimal("31")).add(new Decimal("41"))));
         }
 
+        @Test
+        public void サービスカテゴリ_施設サービスを指定したとき_居宅サービスの_単位数合計の集計値を返す() {
+            sut = new KyufuJissekiServiceCollection(create給付実績サービス集計List());
+            assertThat(sut.get単位数合計Byサービスカテゴリ(ServiceCategory.施設サービス),
+                    is(new Decimal("51").add(new Decimal("61"))));
+        }
+
     }
 
     public static class isEmptyのテスト extends DbcTestBase {
 
         @Test
-        public void コンストラクタから長さ4のリストを渡されたとき_isEmptyはfalseを返す() {
+        public void コンストラクタから長さ6のリストを渡されたとき_isEmptyはfalseを返す() {
             sut = new KyufuJissekiServiceCollection(create給付実績サービス集計List());
             assertThat(sut.isEmpty(), is(false));
         }
@@ -121,9 +108,9 @@ public class KyufuJissekiServiceCollectionTest extends DbcTestBase {
     public static class sizeのテスト extends DbcTestBase {
 
         @Test
-        public void コンストラクタから長さ4のリストを渡されたとき_sizeは4を返す() {
+        public void コンストラクタから長さ6のリストを渡されたとき_sizeは6を返す() {
             sut = new KyufuJissekiServiceCollection(create給付実績サービス集計List());
-            assertThat(sut.size(), is(4));
+            assertThat(sut.size(), is(6));
         }
 
         @Test
@@ -139,6 +126,8 @@ public class KyufuJissekiServiceCollectionTest extends DbcTestBase {
         list.add(create給付実績サービス("11", "12", new Decimal("20"), new Decimal("21"), new Decimal("22")));
         list.add(create給付実績サービス("12", "13", new Decimal("30"), new Decimal("31"), new Decimal("32")));
         list.add(create給付実績サービス("12", "14", new Decimal("40"), new Decimal("41"), new Decimal("42")));
+        list.add(create給付実績サービス("51", "11", new Decimal("50"), new Decimal("51"), new Decimal("52")));
+        list.add(create給付実績サービス("52", "12", new Decimal("60"), new Decimal("61"), new Decimal("62")));
         return list;
     }
 

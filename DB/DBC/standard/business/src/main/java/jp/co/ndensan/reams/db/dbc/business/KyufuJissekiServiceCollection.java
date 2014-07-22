@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 給付実績種類明細情報のコレクションクラスです。
+ * ひと月分の給付実績種類明細情報のリストを保持するコレクションクラスです。
  *
  * @author N8187 久保田 英男
  */
