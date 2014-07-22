@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiServiceCollection;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiServiceCollections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
 import jp.co.ndensan.reams.db.dbc.entity.mapper.KyufuJissekiServiceMapper;
-import jp.co.ndensan.reams.db.dbc.persistence.basic.JuryoininJigyoshaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.KyufuJissekiServiceDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
@@ -44,6 +43,14 @@ public class KyufuJissekiServiceFinder {
         this.dac = dac;
     }
 
+    /**
+     * 指定したサービス提供年月（１ヶ月分）の給付実績情報を取得します。
+     *
+     * @param 被保番号 被保番号
+     * @param サービス提供年月 サービス提供年月
+     * @param サービス提供年月期間 サービス提供年月期間
+     * @return 給付実績情報（１ヶ月分）
+     */
     public KyufuJissekiServiceCollection get給付実績月別(
             KaigoHihokenshaNo 被保番号, ServiceTeikyoYM サービス提供年月, Range<ServiceTeikyoYM> サービス提供年月期間) {
 
@@ -55,6 +62,13 @@ public class KyufuJissekiServiceFinder {
         return KyufuJissekiServiceMapper.toKyufuJissekiServiceCollection(entities, サービス提供年月期間);
     }
 
+    /**
+     * 指定したサービス提供年月期間の給付実績情報を取得します。
+     *
+     * @param 被保番号 被保番号
+     * @param サービス提供年月期間 サービス提供年月期間
+     * @return 給付実績情報（検索期間分）
+     */
     public KyufuJissekiServiceCollections get給付実績一覧(
             KaigoHihokenshaNo 被保番号, Range<ServiceTeikyoYM> サービス提供年月期間) {
 

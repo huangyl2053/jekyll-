@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
  *
  * @author N3317 塚田 萌
  */
-public class KyufuJissekiServiceMapper {
+public final class KyufuJissekiServiceMapper {
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -33,8 +33,8 @@ public class KyufuJissekiServiceMapper {
      * KyufujissekiShuruiDetailEntityをKyufuJissekiServiceにマッピングします。<br/>
      * 引数にnullが渡された場合は、nullを返します。<br/>
      *
-     * @param entity
-     * @param teikyoYMRange
+     * @param entity entity
+     * @param teikyoYMRange 提供年月期間
      * @return KyufuJissekiService
      */
     public static KyufuJissekiService toKyufuJissekiService(
