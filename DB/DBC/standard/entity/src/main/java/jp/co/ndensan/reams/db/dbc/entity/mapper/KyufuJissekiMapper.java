@@ -38,6 +38,12 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public final class KyufuJissekiMapper {
 
+    private static final RString ATO = new RString("後");
+    private static final RString HOKEN = new RString("保険");
+    private static final RString KORITSU1 = new RString("公率1");
+    private static final RString KORITSU2 = new RString("公率2");
+    private static final RString KORITSU3 = new RString("公率3");
+
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
      */
@@ -126,64 +132,39 @@ public final class KyufuJissekiMapper {
      * @return businessの実績明細情報リストクラス
      */
     public static KyufuJissekiMeisaiCollection to給付実績明細List(List<DbT3018KyufujissekiMeisaiEntity> entities) {
-
         if (entities == null || entities.isEmpty()) {
             return new KyufuJissekiMeisaiCollection(Collections.EMPTY_LIST);
         }
 
-        List<RString> 決定 = new ArrayList<>();
-        決定.add(0, RString.EMPTY);
-        決定.add(1, new RString("後"));
+        List<RString> 決定 = create前後List(RString.EMPTY, ATO);
         List<KyufuJissekiMeisai> 給付実績の明細情報List = new ArrayList<>();
-
         for (int i = 0; i < entities.size(); i++) {
-            for (int j = 0; j < 1; j++) {
-                給付実績の明細情報List.add(to給付実績の明細情報(決定.get(i), entities.get(i)));
+            for (int j = 0; j < 決定.size(); j++) {
+                給付実績の明細情報List.add(to給付実績の明細情報(決定.get(j), entities.get(i)));
             }
         }
 
         return new KyufuJissekiMeisaiCollection(給付実績の明細情報List);
-
     }
 
     private static KyufuJissekiMeisai to給付実績の明細情報(RString 決定, DbT3018KyufujissekiMeisaiEntity entity) {
-
-        if (!決定.equals("後")) {
-            return new KyufuJissekiMeisai(
-                    entity.getServiceShuruiCode().value(),
-                    entity.getTekiyo(),
-                    決定,
-                    new Decimal(entity.getTanisu()),
-                    entity.getNissuKaisu(),
-                    entity.getKohi1TaishoNissuKaisu(),
-                    entity.getKohi2TaishoNissuKaisu(),
-                    entity.getKohi3TaishoNissuKaisu(),
-                    new Decimal(entity.getServiceTanisu()),
-                    entity.getKohi1TaishoServiceTanisu(),
-                    entity.getKohi2TaishoServiceTanisu(),
-                    entity.getKohi3TaishoServiceTanisu(),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
-                    entity.getShinsaYM());
-        } else {
-            return new KyufuJissekiMeisai(
-                    entity.getServiceShuruiCode().value(),
-                    entity.getTekiyo(),
-                    決定,
-                    new Decimal(entity.getAtoTanisu()),
-                    entity.getAtoNissuKaisu(),
-                    entity.getAtoKohi1TaishoNissuKaisu(),
-                    entity.getAtoKohi2TaishoNissukaisu(),
-                    entity.getAtoKohi3TaishoNissuKaisu(),
-                    new Decimal(entity.getServiceTanisu()),
-                    entity.getAtoKohi1TaishoServiceTanisu(),
-                    entity.getAtoKohi2TaishoServiceTanisu(),
-                    entity.getAtoKohi3TaishoServiceTanisu(),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
-                    entity.getShinsaYM());
-        }
-
+        boolean flg = !ATO.equals(決定);
+        return new KyufuJissekiMeisai(
+                entity.getServiceShuruiCode().value(),
+                entity.getTekiyo(),
+                決定,
+                new Decimal(flg ? entity.getTanisu() : entity.getAtoTanisu()),
+                flg ? entity.getNissuKaisu() : entity.getAtoNissuKaisu(),
+                flg ? entity.getKohi1TaishoNissuKaisu() : entity.getAtoKohi1TaishoNissuKaisu(),
+                flg ? entity.getKohi2TaishoNissuKaisu() : entity.getAtoKohi2TaishoNissukaisu(),
+                flg ? entity.getKohi3TaishoNissuKaisu() : entity.getAtoKohi3TaishoNissuKaisu(),
+                new Decimal(entity.getServiceTanisu()),
+                flg ? entity.getKohi1TaishoServiceTanisu() : entity.getAtoKohi1TaishoServiceTanisu(),
+                flg ? entity.getKohi2TaishoServiceTanisu() : entity.getAtoKohi2TaishoServiceTanisu(),
+                flg ? entity.getKohi3TaishoServiceTanisu() : entity.getAtoKohi3TaishoServiceTanisu(),
+                entity.getSaishinsaKaisu(),
+                entity.getKagoKaisu(),
+                entity.getShinsaYM());
     }
 
     /**
@@ -193,244 +174,128 @@ public final class KyufuJissekiMapper {
      * @return businessの給付実績集計情報リストクラス
      */
     public static KyufuJissekiShukeiCollection to給付実績集計List(List<DbT3033KyufujissekiShukeiEntity> entities) {
-
         if (entities == null || entities.isEmpty()) {
             return new KyufuJissekiShukeiCollection(Collections.EMPTY_LIST);
         }
 
-        List<RString> 決定 = new ArrayList<>();
-        決定.add(0, RString.EMPTY);
-        決定.add(1, new RString("後"));
-
-        List<RString> 保険 = new ArrayList<>();
-        保険.add(0, new RString("保険"));
-        保険.add(1, RString.EMPTY);
-
-        List<RString> 公率1 = new ArrayList<>();
-        公率1.add(0, new RString("公率1"));
-        公率1.add(1, RString.EMPTY);
-
-        List<RString> 公率2 = new ArrayList<>();
-        公率2.add(0, new RString("公率2"));
-        公率2.add(1, RString.EMPTY);
-
-        List<RString> 公率3 = new ArrayList<>();
-        公率3.add(0, new RString("公率3"));
-        公率3.add(1, RString.EMPTY);
-
+        List<RString> 決定 = create前後List(RString.EMPTY, ATO);
+        List<RString> 保険 = create前後List(HOKEN, RString.EMPTY);
+        List<RString> 公率1 = create前後List(KORITSU1, RString.EMPTY);
+        List<RString> 公率2 = create前後List(KORITSU2, RString.EMPTY);
+        List<RString> 公率3 = create前後List(KORITSU3, RString.EMPTY);
         List<KyufuJissekiShukei> 給付実績集計情報List = new ArrayList<>();
-
         for (int i = 0; i < entities.size(); i++) {
-            for (int j = 0; j < 1; j++) {
-                給付実績集計情報List.add(to給給付保険実績集計(保険.get(i), 決定.get(i), entities.get(i)));
-                給付実績集計情報List.add(to給給付公率1実績集計(公率1.get(i), 決定.get(i), entities.get(i)));
-                給付実績集計情報List.add(to給給付公率2実績集計(公率2.get(i), 決定.get(i), entities.get(i)));
-                給付実績集計情報List.add(to給給付公率3実績集計(公率3.get(i), 決定.get(i), entities.get(i)));
-
+            for (int j = 0; j < 決定.size(); j++) {
+                給付実績集計情報List.add(to給付保険実績集計(保険.get(j), 決定.get(j), entities.get(i)));
+            }
+            for (int j = 0; j < 決定.size(); j++) {
+                給付実績集計情報List.add(to給付公率1実績集計(公率1.get(j), 決定.get(j), entities.get(i)));
+            }
+            for (int j = 0; j < 決定.size(); j++) {
+                給付実績集計情報List.add(to給付公率2実績集計(公率2.get(j), 決定.get(j), entities.get(i)));
+            }
+            for (int j = 0; j < 決定.size(); j++) {
+                給付実績集計情報List.add(to給付公率3実績集計(公率3.get(j), 決定.get(j), entities.get(i)));
             }
         }
 
         return new KyufuJissekiShukeiCollection(給付実績集計情報List);
-
     }
 
-    private static KyufuJissekiShukei to給給付保険実績集計(RString 保険, RString 決定, DbT3033KyufujissekiShukeiEntity entity) {
-
-        if (!保険.equals("保険")) {
-            return new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(),
-                    entity.getServiceJitsunissu(),
-                    new Decimal(entity.getPlanTanisu()),
-                    new Decimal(entity.getGendogakuKanriTaishoTanisu()),
-                    new Decimal(entity.getGendogakuKanritaishogaiTanisu()),
-                    entity.getTankiNyushoPlanNissu(),
-                    保険,
-                    決定,
-                    entity.getAtoTankiNyushoJitsunissu(),
-                    new Decimal(entity.getAtoHokenTanisuTotal()),
-                    new Decimal(0), //entity.getAtoHokenTanisuTani(),
-                    new Decimal(entity.getAtoHokenSeikyugaku().toString()),
-                    new Decimal(0), //new Decimal(entity.getAtoHokenRiyoshaFutangaku()),
-                    new Decimal(entity.getAtoHokenDekidakaTanisuTotal()),
-                    new Decimal(entity.getAtoHokenDekidakaSeikyugaku().toString()),
-                    new Decimal(entity.getHokenDekidakaIryohiRiyoshaFutangaku()),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
-                    entity.getShinsaYM()
-            );
-        } else {
-            return new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(),
-                    entity.getServiceJitsunissu(),
-                    new Decimal(entity.getPlanTanisu()),
-                    new Decimal(entity.getGendogakuKanriTaishoTanisu()),
-                    new Decimal(entity.getGendogakuKanritaishogaiTanisu()),
-                    entity.getTankiNyushoPlanNissu(),
-                    保険,
-                    決定,
-                    entity.getTankiNyushoJitsunissu(),
-                    new Decimal(entity.getHokenTanisuTotal()),
-                    entity.getHokenTanisuTani(),
-                    new Decimal(entity.getHokenSeikyugaku().toString()),
-                    new Decimal(entity.getHokenRiyoshaFutangaku()),
-                    new Decimal(entity.getHokenDekidakaTanisuTotal()),
-                    new Decimal(entity.getHokenDekidakaSeikyugaku().toString()),
-                    new Decimal(entity.getHokenDekidakaIryohiRiyoshaFutangaku()),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
-                    entity.getShinsaYM()
-            );
-        }
-
+    private static KyufuJissekiShukei to給付保険実績集計(RString 保険, RString 決定, DbT3033KyufujissekiShukeiEntity entity) {
+        boolean flg = !ATO.equals(決定);
+        return new KyufuJissekiShukei(
+                entity.getServiceSyuruiCode().value(),
+                entity.getServiceJitsunissu(),
+                new Decimal(entity.getPlanTanisu()),
+                new Decimal(entity.getGendogakuKanriTaishoTanisu()),
+                new Decimal(entity.getGendogakuKanritaishogaiTanisu()),
+                entity.getTankiNyushoPlanNissu(),
+                保険,
+                決定,
+                flg ? entity.getTankiNyushoJitsunissu() : entity.getAtoTankiNyushoJitsunissu(),
+                new Decimal(flg ? entity.getHokenTanisuTotal() : entity.getAtoHokenTanisuTotal()),
+                flg ? entity.getHokenTanisuTani() : new Decimal(0),
+                new Decimal(flg ? entity.getHokenSeikyugaku().toString() : entity.getAtoHokenSeikyugaku().toString()),
+                new Decimal(flg ? entity.getHokenRiyoshaFutangaku() : 0),
+                new Decimal(flg ? entity.getHokenDekidakaTanisuTotal() : entity.getAtoHokenDekidakaTanisuTotal()),
+                new Decimal(flg ? entity.getHokenDekidakaSeikyugaku().toString() : entity.getAtoHokenDekidakaSeikyugaku().toString()),
+                new Decimal(entity.getHokenDekidakaIryohiRiyoshaFutangaku()),
+                entity.getSaishinsaKaisu(),
+                entity.getKagoKaisu(),
+                entity.getShinsaYM());
     }
 
-    private static KyufuJissekiShukei to給給付公率1実績集計(RString 公率1, RString 決定, DbT3033KyufujissekiShukeiEntity entity) {
-
-        if (!公率1.equals("公率1")) {
-            return new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(),
-                    entity.getServiceJitsunissu(),
-                    new Decimal(entity.getPlanTanisu()),
-                    new Decimal(entity.getGendogakuKanriTaishoTanisu()),
-                    new Decimal(entity.getGendogakuKanritaishogaiTanisu()),
-                    entity.getTankiNyushoPlanNissu(),
-                    公率1,
-                    決定,
-                    entity.getAtoTankiNyushoJitsunissu(),
-                    new Decimal(entity.getAtoKohi1TanisuTotal()),
-                    new Decimal(0), //entity.getAtoKohi1TanisuTani(),
-                    new Decimal(entity.getAtoKohi1Seikyugaku().toString()),
-                    new Decimal(0), //new Decimal(entity.getAtoKohi1HonninFutangaku()),
-                    new Decimal(entity.getAtoKohi1DekidakaTanisuTotal()),
-                    new Decimal(entity.getAtoKohi1DekidakaSeikyugaku().toString()),
-                    new Decimal(0),//new Decimal(entity.getAtokohi1DekidakaIryohiRiyoshaFutangaku()),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
-                    entity.getShinsaYM()
-            );
-        } else {
-            return new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(),
-                    entity.getServiceJitsunissu(),
-                    new Decimal(entity.getPlanTanisu()),
-                    new Decimal(entity.getGendogakuKanriTaishoTanisu()),
-                    new Decimal(entity.getGendogakuKanritaishogaiTanisu()),
-                    entity.getTankiNyushoPlanNissu(),
-                    公率1,
-                    決定,
-                    entity.getTankiNyushoJitsunissu(),
-                    new Decimal(entity.getKohi1TanisuTotal()),
-                    new Decimal(0), //entity.getKohi1TanisuTani(),
-                    new Decimal(entity.getKohi1Seikyugaku().toString()),
-                    new Decimal(entity.getKohi1HonninFutangaku()),
-                    new Decimal(entity.getKohi1DekidakaTanisuTotal()),
-                    new Decimal(entity.getKohi1DekidakaSeikyugaku().toString()),
-                    new Decimal(entity.getKohi1DekidakaIryohiRiyoshaFutangaku()),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
-                    entity.getShinsaYM()
-            );
-        }
+    private static KyufuJissekiShukei to給付公率1実績集計(RString 公率1, RString 決定, DbT3033KyufujissekiShukeiEntity entity) {
+        boolean flg = !ATO.equals(決定);
+        return new KyufuJissekiShukei(
+                entity.getServiceSyuruiCode().value(),
+                entity.getServiceJitsunissu(),
+                new Decimal(entity.getPlanTanisu()),
+                new Decimal(entity.getGendogakuKanriTaishoTanisu()),
+                new Decimal(entity.getGendogakuKanritaishogaiTanisu()),
+                entity.getTankiNyushoPlanNissu(),
+                公率1,
+                決定,
+                flg ? entity.getTankiNyushoJitsunissu() : entity.getAtoTankiNyushoJitsunissu(),
+                new Decimal(flg ? entity.getKohi1TanisuTotal() : entity.getAtoKohi1TanisuTotal()),
+                new Decimal(0), //entity.getKohi1TanisuTani(),
+                new Decimal(flg ? entity.getKohi1Seikyugaku().toString() : entity.getAtoKohi1Seikyugaku().toString()),
+                new Decimal(flg ? entity.getKohi1HonninFutangaku() : 0),
+                new Decimal(flg ? entity.getKohi1DekidakaTanisuTotal() : entity.getAtoKohi1DekidakaTanisuTotal()),
+                new Decimal(flg ? entity.getKohi1DekidakaSeikyugaku().toString() : entity.getAtoKohi1DekidakaSeikyugaku().toString()),
+                new Decimal(flg ? entity.getKohi1DekidakaIryohiRiyoshaFutangaku() : 0),
+                entity.getSaishinsaKaisu(),
+                entity.getKagoKaisu(),
+                entity.getShinsaYM());
     }
 
-    private static KyufuJissekiShukei to給給付公率2実績集計(RString 公率2, RString 決定, DbT3033KyufujissekiShukeiEntity entity) {
-
-        if (!公率2.equals("公率2")) {
-            return new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(),
-                    entity.getServiceJitsunissu(),
-                    new Decimal(entity.getPlanTanisu()),
-                    new Decimal(entity.getGendogakuKanriTaishoTanisu()),
-                    new Decimal(entity.getGendogakuKanritaishogaiTanisu()),
-                    entity.getTankiNyushoPlanNissu(),
-                    公率2,
-                    決定,
-                    entity.getAtoTankiNyushoJitsunissu(),
-                    new Decimal(entity.getAtoKohi2TanisuTotal()),
-                    new Decimal(0), //entity.getAtoKohi2TanisuTani(),
-                    new Decimal(entity.getAtoKohi2Seikyugaku().toString()),
-                    new Decimal(0), //new Decimal(entity.getAtoKohi2HonninFutangaku()),
-                    new Decimal(entity.getAtoKohi2DekidakaTanisuTotal()),
-                    new Decimal(entity.getAtoKohi2DekidakaSeikyugaku().toString()),
-                    new Decimal(0),//new Decimal(entity.getAtokohi2DekidakaIryohiRiyoshaFutangaku()),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
-                    entity.getShinsaYM()
-            );
-        } else {
-            return new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(),
-                    entity.getServiceJitsunissu(),
-                    new Decimal(entity.getPlanTanisu()),
-                    new Decimal(entity.getGendogakuKanriTaishoTanisu()),
-                    new Decimal(entity.getGendogakuKanritaishogaiTanisu()),
-                    entity.getTankiNyushoPlanNissu(),
-                    公率2,
-                    決定,
-                    entity.getTankiNyushoJitsunissu(),
-                    new Decimal(entity.getKohi2TanisuTotal()),
-                    new Decimal(0), //entity.getKohi2TanisuTani(),
-                    new Decimal(entity.getKohi2Seikyugaku().toString()),
-                    new Decimal(entity.getKohi2HonninFutangaku()),
-                    new Decimal(entity.getKohi2DekidakaTanisuTotal()),
-                    new Decimal(entity.getKohi2DekidakaSeikyugaku().toString()),
-                    new Decimal(entity.getKohi2DekidakaIryohiRiyoshaFutangaku()),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
-                    entity.getShinsaYM()
-            );
-        }
-
+    private static KyufuJissekiShukei to給付公率2実績集計(RString 公率2, RString 決定, DbT3033KyufujissekiShukeiEntity entity) {
+        boolean flg = !ATO.equals(決定);
+        return new KyufuJissekiShukei(
+                entity.getServiceSyuruiCode().value(),
+                entity.getServiceJitsunissu(),
+                new Decimal(entity.getPlanTanisu()),
+                new Decimal(entity.getGendogakuKanriTaishoTanisu()),
+                new Decimal(entity.getGendogakuKanritaishogaiTanisu()),
+                entity.getTankiNyushoPlanNissu(),
+                公率2,
+                決定,
+                flg ? entity.getTankiNyushoJitsunissu() : entity.getAtoTankiNyushoJitsunissu(),
+                new Decimal(flg ? entity.getKohi2TanisuTotal() : entity.getAtoKohi2TanisuTotal()),
+                new Decimal(0), //entity.getKohi2TanisuTani(),
+                new Decimal(flg ? entity.getKohi2Seikyugaku().toString() : entity.getAtoKohi2Seikyugaku().toString()),
+                new Decimal(flg ? entity.getKohi2HonninFutangaku() : 0),
+                new Decimal(flg ? entity.getKohi2DekidakaTanisuTotal() : entity.getAtoKohi2DekidakaTanisuTotal()),
+                new Decimal(flg ? entity.getKohi2DekidakaSeikyugaku().toString() : entity.getAtoKohi2DekidakaSeikyugaku().toString()),
+                new Decimal(flg ? entity.getKohi2DekidakaIryohiRiyoshaFutangaku() : 0),
+                entity.getSaishinsaKaisu(),
+                entity.getKagoKaisu(),
+                entity.getShinsaYM());
     }
 
-    private static KyufuJissekiShukei to給給付公率3実績集計(RString 公率3, RString 決定, DbT3033KyufujissekiShukeiEntity entity) {
-
-        if (!公率3.equals("公率3")) {
-            return new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(),
-                    entity.getServiceJitsunissu(),
-                    new Decimal(entity.getPlanTanisu()),
-                    new Decimal(entity.getGendogakuKanriTaishoTanisu()),
-                    new Decimal(entity.getGendogakuKanritaishogaiTanisu()),
-                    entity.getTankiNyushoPlanNissu(),
-                    公率3,
-                    決定,
-                    entity.getAtoTankiNyushoJitsunissu(),
-                    new Decimal(entity.getAtoKohi3TanisuTotal()),
-                    new Decimal(0), //entity.getAtoKohi3TanisuTani(),
-                    new Decimal(entity.getAtoKohi3Seikyugaku().toString()),
-                    new Decimal(0), //new Decimal(entity.getAtoKohi3HonninFutangaku()),
-                    new Decimal(entity.getAtoKohi3DekidakaTanisuTotal()),
-                    new Decimal(entity.getAtoKohi3DekidakaSeikyugaku().toString()),
-                    new Decimal(0),//new Decimal(entity.getAtokohi3DekidakaIryohiRiyoshaFutangaku()),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
-                    entity.getShinsaYM()
-            );
-        } else {
-            return new KyufuJissekiShukei(
-                    entity.getServiceSyuruiCode().value(),
-                    entity.getServiceJitsunissu(),
-                    new Decimal(entity.getPlanTanisu()),
-                    new Decimal(entity.getGendogakuKanriTaishoTanisu()),
-                    new Decimal(entity.getGendogakuKanritaishogaiTanisu()),
-                    entity.getTankiNyushoPlanNissu(),
-                    公率3,
-                    決定,
-                    entity.getTankiNyushoJitsunissu(),
-                    new Decimal(entity.getKohi3TanisuTotal()),
-                    new Decimal(0), //entity.getKohi3TanisuTani(),
-                    new Decimal(entity.getKohi3Seikyugaku().toString()),
-                    new Decimal(entity.getKohi3HonninFutangaku()),
-                    new Decimal(entity.getKohi3DekidakaTanisuTotal()),
-                    new Decimal(entity.getKohi3DekidakaSeikyugaku().toString()),
-                    new Decimal(entity.getKohi3DekidakaIryohiRiyoshaFutangaku()),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
-                    entity.getShinsaYM()
-            );
-        }
-
+    private static KyufuJissekiShukei to給付公率3実績集計(RString 公率3, RString 決定, DbT3033KyufujissekiShukeiEntity entity) {
+        boolean flg = !ATO.equals(決定);
+        return new KyufuJissekiShukei(
+                entity.getServiceSyuruiCode().value(),
+                entity.getServiceJitsunissu(),
+                new Decimal(entity.getPlanTanisu()),
+                new Decimal(entity.getGendogakuKanriTaishoTanisu()),
+                new Decimal(entity.getGendogakuKanritaishogaiTanisu()),
+                entity.getTankiNyushoPlanNissu(),
+                公率3,
+                決定,
+                flg ? entity.getTankiNyushoJitsunissu() : entity.getAtoTankiNyushoJitsunissu(),
+                new Decimal(flg ? entity.getKohi3TanisuTotal() : entity.getAtoKohi3TanisuTotal()),
+                new Decimal(0), //entity.getKohi3TanisuTani(),
+                new Decimal(flg ? entity.getKohi3Seikyugaku().toString() : entity.getAtoKohi3Seikyugaku().toString()),
+                new Decimal(flg ? entity.getKohi3HonninFutangaku() : 0),
+                new Decimal(flg ? entity.getKohi3DekidakaTanisuTotal() : entity.getAtoKohi3DekidakaTanisuTotal()),
+                new Decimal(flg ? entity.getKohi3DekidakaSeikyugaku().toString() : entity.getAtoKohi3DekidakaSeikyugaku().toString()),
+                new Decimal(flg ? entity.getKohi3DekidakaIryohiRiyoshaFutangaku() : 0),
+                entity.getSaishinsaKaisu(),
+                entity.getKagoKaisu(),
+                entity.getShinsaYM());
     }
 
     /**
@@ -439,17 +304,14 @@ public final class KyufuJissekiMapper {
      * @param entities 給付実績社会福祉法人軽減額エンティティList
      * @return businessの給付実績社会福祉法人軽減額リストクラス
      */
-    public static KyufuJissekiShafukuKeigenCollection to給付実績社会福祉法人軽減額List(List<DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity> entities) {
-
+    public static KyufuJissekiShafukuKeigenCollection to給付実績社会福祉法人軽減額List(
+            List<DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity> entities) {
         if (entities == null || entities.isEmpty()) {
             return new KyufuJissekiShafukuKeigenCollection(Collections.EMPTY_LIST);
         }
 
-        List<RString> 前後 = new ArrayList<>();
-        前後.add(0, RString.EMPTY);
-        前後.add(1, new RString("後"));
+        List<RString> 前後 = create前後List(RString.EMPTY, ATO);
         List<KyufuJissekiShafukuKeigen> 給付実績社会福祉法人軽減額情報List = new ArrayList<>();
-
         for (int i = 0; i < entities.size(); i++) {
             for (int j = 0; j < 1; j++) {
                 給付実績社会福祉法人軽減額情報List.add(to給付実績社会福祉法人軽減額情報(前後.get(i), entities.get(i)));
@@ -457,36 +319,28 @@ public final class KyufuJissekiMapper {
         }
 
         return new KyufuJissekiShafukuKeigenCollection(給付実績社会福祉法人軽減額情報List);
-
     }
 
-    private static KyufuJissekiShafukuKeigen to給付実績社会福祉法人軽減額情報(RString 前後, DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity) {
-
-        if (!前後.equals("後")) {
-            return new KyufuJissekiShafukuKeigen(
-                    new RString(entity.getKeigenritsu().toString()),
-                    entity.getServiceSyuruiCode().value(),
-                    前後,
-                    new Decimal(entity.getRiyoshaFutanTotal()),
-                    new Decimal(entity.getKeigengaku()),
-                    new Decimal(entity.getKeigengoRiyoshaFutangaku()),
-                    entity.getBiko(),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
-                    entity.getShinsaYM());
-        } else {
-            return new KyufuJissekiShafukuKeigen(
-                    new RString(entity.getKeigenritsu().toString()),
-                    entity.getServiceSyuruiCode().value(),
-                    前後,
-                    new Decimal(entity.getAtoRiyoshaFutanTotal()),
-                    new Decimal(entity.getAtoKeigengaku()),
-                    new Decimal(entity.getAtoKeigengoRiyoshaFutangaku()),
-                    entity.getBiko(),
-                    entity.getSaishinsaKaisu(),
-                    entity.getKagoKaisu(),
-                    entity.getShinsaYM());
-        }
+    private static KyufuJissekiShafukuKeigen to給付実績社会福祉法人軽減額情報(
+            RString 前後, DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity) {
+        boolean flg = !ATO.equals(前後);
+        return new KyufuJissekiShafukuKeigen(
+                new RString(entity.getKeigenritsu().toString()),
+                entity.getServiceSyuruiCode().value(),
+                前後,
+                new Decimal(flg ? entity.getRiyoshaFutanTotal() : entity.getAtoRiyoshaFutanTotal()),
+                new Decimal(flg ? entity.getKeigengaku() : entity.getAtoKeigengaku()),
+                new Decimal(flg ? entity.getKeigengoRiyoshaFutangaku() : entity.getAtoKeigengoRiyoshaFutangaku()),
+                entity.getBiko(),
+                entity.getSaishinsaKaisu(),
+                entity.getKagoKaisu(),
+                entity.getShinsaYM());
     }
 
+    private static List<RString> create前後List(RString mae, RString ato) {
+        List<RString> list = new ArrayList<>();
+        list.add(mae);
+        list.add(ato);
+        return list;
+    }
 }

@@ -8,26 +8,32 @@ package jp.co.ndensan.reams.db.dbc.entity.mapper;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihon;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiMeisai;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigen;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukei;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3018KyufujissekiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3017KyufujissekiKihonEntityMock;
+import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3018KyufujissekiMeisaiEntityMock;
+import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityMock;
+import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3033KyufujissekiShukeiEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiMeisaiCollection;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3018KyufujissekiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3018KyufujissekiMeisaiEntityMock;
 
 /**
  * 給付実績エンティティを給付実績情報に変換するMapperクラスのテストクラスです。
@@ -258,10 +264,9 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
         }
     }
 
-    public static class to給付実績の明細情報 extends DbcTestBase {
+    public static class to給付実績明細List extends DbcTestBase {
 
-        private KyufuJissekiMeisaiCollection result;
-        private List<DbT3018KyufujissekiMeisaiEntity> entities;
+        private KyufuJissekiMeisai result;
 
         private final RString サービス = new RString("11");
         private final RString 適要 = new RString("概要");
@@ -276,87 +281,253 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
         private final int 公費3単位 = 3;
         private final int 再審査回数 = 1500;
         private final int 過誤回数 = 2;
-        private final FlexibleYearMonth 審査年月 = new FlexibleYearMonth("201401");
+        private final FlexibleYearMonth 審査年月 = new FlexibleYearMonth("201402");
 
         @Before
         public void setUp() {
-            entities = new ArrayList<>();
+            List<DbT3018KyufujissekiMeisaiEntity> entities = new ArrayList<>();
             entities.add(DbT3018KyufujissekiMeisaiEntityMock.getSpiedInstance());
-
-            result = KyufuJissekiMapper.to給付実績明細List(entities);
+            result = KyufuJissekiMapper.to給付実績明細List(entities).iterator().next();
         }
 
         @Test
-        public void サービスの設定がある時_to給付明細情報_getサービスは_設定値を返す() {
-            assertThat(result.iterator().next().getサービス(), is(サービス));
+        public void サービスの設定がある時_to給付実績明細List_getサービスは_設定値を返す() {
+            assertThat(result.getサービス(), is(サービス));
         }
 
         @Test
-        public void 単位の設定がある時_to給付明細情報_get単位は_設定値を返す() {
-            assertThat(result.iterator().next().get単位(), is(new Decimal(単位)));
+        public void 単位の設定がある時_to給付実績明細List_get単位は_設定値を返す() {
+            assertThat(result.get単位(), is(new Decimal(単位)));
         }
 
         @Test
-        public void 適要の設定がある時_to給付明細情報_get適要は_設定値を返す() {
-            assertThat(result.iterator().next().get適要(), is(適要));
+        public void 適要の設定がある時_to給付実績明細List_get適要は_設定値を返す() {
+            assertThat(result.get適要(), is(適要));
         }
 
         @Test
-        public void 回数日数の設定がある時_to給付明細情報_get回数日数は_設定値を返す() {
-            assertThat(result.iterator().next().get回数日数(), is(回数日数));
+        public void 回数日数の設定がある時_to給付実績明細List_get回数日数は_設定値を返す() {
+            assertThat(result.get回数日数(), is(回数日数));
         }
 
         @Test
-        public void 公費1日数の設定がある時_to給付明細情報_get公費1日数は_設定値を返す() {
-            assertThat(result.iterator().next().get公費1日数(), is(公費1日数));
+        public void 公費1日数の設定がある時_to給付実績明細List_get公費1日数は_設定値を返す() {
+            assertThat(result.get公費1日数(), is(公費1日数));
         }
 
         @Test
-        public void 公費2日数の設定がある時_to給付明細情報_get公費2日数は_設定値を返す() {
-            assertThat(result.iterator().next().get公費2日数(), is(公費2日数));
+        public void 公費2日数の設定がある時_to給付実績明細List_get公費2日数は_設定値を返す() {
+            assertThat(result.get公費2日数(), is(公費2日数));
         }
 
         @Test
-        public void 公費3日数の設定がある時_to給付明細情報_get公費3日数は_設定値を返す() {
-            assertThat(result.iterator().next().get公費3日数(), is(公費3日数));
+        public void 公費3日数の設定がある時_to給付実績明細List_get公費3日数は_設定値を返す() {
+            assertThat(result.get公費3日数(), is(公費3日数));
         }
 
         @Test
-        public void サービス単位の設定がある時_to給付明細情報_getサービス単位は_設定値を返す() {
-            assertThat(result.iterator().next().getサービス単位(), is(new Decimal(サービス単位)));
+        public void サービス単位の設定がある時_to給付実績明細List_getサービス単位は_設定値を返す() {
+            assertThat(result.getサービス単位(), is(new Decimal(サービス単位)));
         }
 
         @Test
-        public void 公費1単位の設定がある時_to給付明細情報_get公費1単位は_設定値を返す() {
-            assertThat(result.iterator().next().get公費1単位(), is(公費1単位));
+        public void 公費1単位の設定がある時_to給付実績明細List_get公費1単位は_設定値を返す() {
+            assertThat(result.get公費1単位(), is(公費1単位));
         }
 
         @Test
-        public void 公費2単位の設定がある時_to給付明細情報_get公費2単位は_設定値を返す() {
-            assertThat(result.iterator().next().get公費2単位(), is(公費2単位));
+        public void 公費2単位の設定がある時_to給付実績明細List_get公費2単位は_設定値を返す() {
+            assertThat(result.get公費2単位(), is(公費2単位));
         }
 
         @Test
-        public void 公費3単位の設定がある時_to給付明細情報_get公費3単位は_設定値を返す() {
-            assertThat(result.iterator().next().get公費3単位(), is(公費3単位));
+        public void 公費3単位の設定がある時_to給付実績明細List_get公費3単位は_設定値を返す() {
+            assertThat(result.get公費3単位(), is(公費3単位));
         }
 
         @Test
-        public void 再審査回数の設定がある時_to給付明細情報_get再審査回数は_設定値を返す() {
-            assertThat(result.iterator().next().get再審査回数(), is(再審査回数));
+        public void 再審査回数の設定がある時_to給付実績明細List_get再審査回数は_設定値を返す() {
+            assertThat(result.get再審査回数(), is(再審査回数));
         }
 
         @Test
-        public void 過誤回数の設定がある時_to給付明細情報_get過誤回数は_設定値を返す() {
-            //ssertThat(result.iterator().next().get過誤回数(), is(過誤回数));
-            //assertThat(result.iterator().next().get過誤回数(), is(過誤回数));
+        public void 過誤回数の設定がある時_to給付実績明細List_get過誤回数は_設定値を返す() {
+            assertThat(result.get過誤回数(), is(過誤回数));
         }
 
         @Test
-        public void 審査年月の設定がある時_to給付明細情報_get審査年月は_設定値を返す() {
-            assertThat(result.iterator().next().get審査年月(), is(審査年月));
+        public void 審査年月の設定がある時_to給付実績明細List_get審査年月は_設定値を返す() {
+            assertThat(result.get審査年月(), is(審査年月));
         }
-
     }
 
+    public static class to給付実績集計List extends DbcTestBase {
+
+        private KyufuJissekiShukei result;
+
+        private static final RString 種類 = new RString("11");
+        private static final int 実日数 = 1;
+        private static final Decimal 計画単位 = new Decimal(200);
+        private static final Decimal 対象単位 = new Decimal(300);
+        private static final Decimal 対象外単位 = new Decimal(400);
+        private static final int 短計画日数 = 5;
+        private static final int 短実日数 = 6;
+        private static final Decimal 単位合計 = new Decimal(100);
+        private static final Decimal 請求額 = new Decimal(102);
+        private static final Decimal 出来高単位合計 = new Decimal(104);
+        private static final Decimal 出来高請求 = new Decimal(105);
+        private static final Decimal 出来高本人負担額 = new Decimal(106);
+        private static final int 再審査回数 = 12;
+        private static final int 過誤回数 = 13;
+        private static final FlexibleYearMonth 審査年月 = new FlexibleYearMonth("201402");
+
+        @Before
+        public void setUp() {
+            List<DbT3033KyufujissekiShukeiEntity> entities = new ArrayList<>();
+            entities.add(DbT3033KyufujissekiShukeiEntityMock.getSpiedInstance());
+            result = KyufuJissekiMapper.to給付実績集計List(entities).iterator().next();
+        }
+
+        @Test
+        public void 種類の設定がある時_to給付実績集計List_get種類は_設定値を返す() {
+            assertThat(result.get種類(), is(種類));
+        }
+
+        @Test
+        public void 実日数の設定がある時_to給付実績集計List_get実日数は_設定値を返す() {
+            assertThat(result.get実日数(), is(実日数));
+        }
+
+        @Test
+        public void 計画単位の設定がある時_to給付実績集計List_get計画単位は_設定値を返す() {
+            assertThat(result.get計画単位(), is(計画単位));
+        }
+
+        @Test
+        public void 対象単位の設定がある時_to給付実績集計List_get対象単位は_設定値を返す() {
+            assertThat(result.get対象単位(), is(対象単位));
+        }
+
+        @Test
+        public void 対象外単位の設定がある時_to給付実績集計List_get対象外単位は_設定値を返す() {
+            assertThat(result.get対象外単位(), is(対象外単位));
+        }
+
+        @Test
+        public void 短計画日数の設定がある時_to給付実績集計List_get短計画日数は_設定値を返す() {
+            assertThat(result.get短計画日数(), is(短計画日数));
+        }
+
+        @Test
+        public void 短実日数の設定がある時_to給付実績集計List_get短実日数は_設定値を返す() {
+            assertThat(result.get短実日数(), is(短実日数));
+        }
+
+        @Test
+        public void 単位合計の設定がある時_to給付実績集計List_get単位合計は_設定値を返す() {
+            assertThat(result.get単位合計(), is(単位合計));
+        }
+
+        @Test
+        public void 請求額の設定がある時_to給付実績集計List_get請求額は_設定値を返す() {
+            assertThat(result.get請求額(), is(請求額));
+        }
+
+        @Test
+        public void 出来高単位合計の設定がある時_to給付実績集計List_get出来高単位合計は_設定値を返す() {
+            assertThat(result.get出来高単位合計(), is(出来高単位合計));
+        }
+
+        @Test
+        public void 出来高請求の設定がある時_to給付実績集計List_get出来高請求は_設定値を返す() {
+            assertThat(result.get出来高請求(), is(出来高請求));
+        }
+
+        @Test
+        public void 出来高本人負担額の設定がある時_to給付実績集計List_get出来高本人負担額は_設定値を返す() {
+            assertThat(result.get出来高本人負担額(), is(出来高本人負担額));
+        }
+
+        @Test
+        public void 再審査回数の設定がある時_to給付実績集計List_get再審査回数は_設定値を返す() {
+            assertThat(result.get再審査回数(), is(再審査回数));
+        }
+
+        @Test
+        public void 過誤回数の設定がある時_to給付実績集計List_get過誤回数は_設定値を返す() {
+            assertThat(result.get過誤回数(), is(過誤回数));
+        }
+
+        @Test
+        public void 審査年月の設定がある時_to給付実績集計List_get審査年月は_設定値を返す() {
+            assertThat(result.get審査年月(), is(審査年月));
+        }
+    }
+
+    public static class to給付実績社会福祉法人軽減額List extends DbcTestBase {
+
+        private KyufuJissekiShafukuKeigen result;
+
+        private static final RString 軽減率 = new RString("10");
+        private static final RString 種類 = new RString("01");
+        private static final Decimal 受領すべき利用者負担の総額 = new Decimal(200);
+        private static final Decimal 軽減額 = new Decimal(300);
+        private static final Decimal 軽減後利用者負担額 = new Decimal(400);
+        private static final RString 備考 = new RString("備考");
+        private static final int 再審査回数 = 5;
+        private static final int 過誤回数 = 6;
+        private static final FlexibleYearMonth 審査年月 = new FlexibleYearMonth("201402");
+
+        @Before
+        public void setUp() {
+            List<DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity> entities = new ArrayList<>();
+            entities.add(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityMock.getSpiedInstance());
+            result = KyufuJissekiMapper.to給付実績社会福祉法人軽減額List(entities).iterator().next();
+        }
+
+        @Test
+        public void 軽減率の設定がある時_to給付実績社会福祉法人軽減額List_get軽減率は_設定値を返す() {
+            assertThat(result.get軽減率(), is(軽減率));
+        }
+
+        @Test
+        public void 種類の設定がある時_to給付実績社会福祉法人軽減額List_get種類は_設定値を返す() {
+            assertThat(result.get種類(), is(種類));
+        }
+
+        @Test
+        public void 受領すべき利用者負担の総額の設定がある時_to給付実績社会福祉法人軽減額List_get受領すべき利用者負担の総額は_設定値を返す() {
+            assertThat(result.get受領すべき利用者負担の総額(), is(受領すべき利用者負担の総額));
+        }
+
+        @Test
+        public void 軽減額の設定がある時_to給付実績社会福祉法人軽減額List_get軽減額は_設定値を返す() {
+            assertThat(result.get軽減額(), is(軽減額));
+        }
+
+        @Test
+        public void 軽減後利用者負担額の設定がある時_to給付実績社会福祉法人軽減額List_get軽減後利用者負担額は_設定値を返す() {
+            assertThat(result.get軽減後利用者負担額(), is(軽減後利用者負担額));
+        }
+
+        @Test
+        public void 備考の設定がある時_to給付実績社会福祉法人軽減額List_get備考は_設定値を返す() {
+            assertThat(result.get備考(), is(備考));
+        }
+
+        @Test
+        public void 再審査回数の設定がある時_to給付実績社会福祉法人軽減額List_get再審査回数は_設定値を返す() {
+            assertThat(result.get再審査回数(), is(再審査回数));
+        }
+
+        @Test
+        public void 過誤回数の設定がある時_to給付実績社会福祉法人軽減額List_get過誤回数は_設定値を返す() {
+            assertThat(result.get過誤回数(), is(過誤回数));
+        }
+
+        @Test
+        public void 審査年月の設定がある時_to給付実績社会福祉法人軽減額List_get審査年月は_設定値を返す() {
+            assertThat(result.get審査年月(), is(審査年月));
+        }
+    }
 }

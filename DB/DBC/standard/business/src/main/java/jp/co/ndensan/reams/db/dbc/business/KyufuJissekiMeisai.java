@@ -206,7 +206,7 @@ public class KyufuJissekiMeisai {
      *
      * @return
      */
-    public int 過誤回数() {
+    public int get過誤回数() {
         return 過誤回数;
     }
 

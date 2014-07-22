@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.mockito.Mockito.spy;
 
 /**
@@ -54,6 +55,16 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityMock {
         entity.setToshiNo(new RString("0000000006"));
         entity.setServiceSyuruiCode(new ServiceShuruiCode(new RString("01")));
         entity.setShinsaYM(new FlexibleYearMonth("201402"));
+        entity.setKeigenritsu(new Decimal("10"));
+        entity.setRiyoshaFutanTotal(200);
+        entity.setKeigengaku(300);
+        entity.setKeigengoRiyoshaFutangaku(400);
+        entity.setAtoRiyoshaFutanTotal(210);
+        entity.setAtoKeigengaku(310);
+        entity.setAtoKeigengoRiyoshaFutangaku(410);
+        entity.setBiko(new RString("備考"));
+        entity.setSaishinsaKaisu(5);
+        entity.setKagoKaisu(6);
         return entity;
     }
 }

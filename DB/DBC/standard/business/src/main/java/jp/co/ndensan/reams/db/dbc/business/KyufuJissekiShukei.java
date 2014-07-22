@@ -90,7 +90,7 @@ public class KyufuJissekiShukei {
         this.短実日数 = 短実日数;
         this.単位合計 = 単位合計;
         this.単位数単価 = 単位数単価;
-        this.請求額 = 単位数単価;
+        this.請求額 = 請求額;
         this.利用者負担額 = 利用者負担額;
         this.出来高単位合計 = 出来高単位合計;
         this.出来高請求 = 出来高請求;
