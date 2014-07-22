@@ -25,6 +25,23 @@ public class JogaiShinsakaiIinListTest {
 
     private static JogaiShinsakaiIinList sut;
 
+    public static class コンストラクタのテスト extends DbeTestBase {
+
+        @Test(expected = NullPointerException.class)
+        public void 引数にnullが渡されたとき_NullPointerExceptionが発生する() {
+            sut = new JogaiShinsakaiIinList(null);
+            fail();
+        }
+
+        @Test
+
+        public void 引数に3件の要素を持つリストが渡されたとき_インスタンスが生成される() {
+            sut = createListMock(3);
+            assertThat(sut, is(instanceOf(
+                    JogaiShinsakaiIinList.class)));
+        }
+    }
+
     public static class isEmptyのテスト extends DbeTestBase {
 
         @Test
