@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiTestEntityCreator;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -41,12 +41,12 @@ public class ShinsakaiWariateIinJohoDacTest {
 
         @Before
         public void setUp() {
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(1, "19990101", "iin01"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(1, "19990101", "iin02"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(2, "20010101", "iin03"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(1, "19990101", "iin04"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(2, "20010101", "iin05"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(1, "19990101", "iin06"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(1, "19990101", "00000001"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(1, "19990101", "00000002"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(2, "20010101", "00000003"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(1, "19990101", "00000004"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(2, "20010101", "00000005"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(1, "19990101", "00000006"));
         }
 
         @Test
@@ -70,12 +70,12 @@ public class ShinsakaiWariateIinJohoDacTest {
 
         @Before
         public void setUp() {
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(1, "19990101", "iin01"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(1, "20000101", "iin02"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(2, "20010101", "iin03"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(1, "19990101", "iin04"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(1, "20010101", "iin05"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(2, "19990101", "iin06"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(1, "19990101", "00000001"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(1, "20000101", "00000002"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(2, "20010101", "00000003"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(1, "19990101", "00000004"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(1, "20010101", "00000005"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(2, "19990101", "00000006"));
         }
 
         @Test
@@ -104,9 +104,9 @@ public class ShinsakaiWariateIinJohoDacTest {
 
         @Before
         public void setUp() {
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(1, "19990101", "iin01"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(2, "20000101", "iin02"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(3, "20010101", "iin03"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(1, "19990101", "00000001"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(2, "20000101", "00000002"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(3, "20010101", "00000003"));
         }
 
         @Test
@@ -120,7 +120,7 @@ public class ShinsakaiWariateIinJohoDacTest {
 
         @Test
         public void 保存したデータを取得できる() {
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(1, "19990101", "iin01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(1, "19990101", "00000001"));
 
             開催番号 = new ShinsakaiKaisaiNo(1);
             開催年月日 = new FlexibleDate("19990101");
@@ -133,8 +133,8 @@ public class ShinsakaiWariateIinJohoDacTest {
 
         @Test
         public void 更新したデータを取得できる() {
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(1, "19990101", "iin01", new Code("shinsainKubun01")));
-            sut.update(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(1, "19990101", "iin01", new Code("shinsainKubun02")));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(1, "19990101", "00000001", new Code("shinsainKubun01")));
+            sut.update(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(1, "19990101", "00000001", new Code("shinsainKubun02")));
 
             開催番号 = new ShinsakaiKaisaiNo(1);
             開催年月日 = new FlexibleDate("19990101");
@@ -147,8 +147,8 @@ public class ShinsakaiWariateIinJohoDacTest {
 
         @Test
         public void 削除された情報は取得できない() {
-            sut.insert(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(1, "19990101", "iin01"));
-            sut.delete(ShinsakaiTestEntityCreator.create審査会割当委員情報Entity(1, "19990101", "iin01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(1, "19990101", "00000001"));
+            sut.delete(ShinsakaiMockEntityCreator.create審査会割当委員情報Entity(1, "19990101", "00000001"));
 
             開催番号 = new ShinsakaiKaisaiNo(1);
             開催年月日 = new FlexibleDate("19990101");

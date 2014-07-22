@@ -13,7 +13,8 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.GogitaiWariateDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiKaisaiBashoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.helper.ShinsakaiIinDacMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
-import static jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator.*;
+import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.Test;
@@ -51,8 +52,8 @@ public class GogitaiWariateShinsakaiIinDacTest {
 
         @Before
         public void setUp() {
-            gogitaiJohoInserter.insert(create合議体情報Entity(1, "19990101", "20001231", "basho01"));
-            kaisaiBashoInserter.insert(create開催場所Entity("basho01"));
+            gogitaiJohoInserter.insert(GogitaiMockEntityCreator.create合議体情報Entity(1, "19990101", "20001231", "basho01"));
+            kaisaiBashoInserter.insert(GogitaiMockEntityCreator.create開催場所Entity("basho01"));
             wariateIinInsert(1, "19990101", "20011231", "iin01", "19800101");
         }
 
@@ -85,18 +86,17 @@ public class GogitaiWariateShinsakaiIinDacTest {
 
         @Before
         public void setUp() {
-            gogitaiJohoInserter.insert(create合議体情報Entity(1, "19990101", "20001231", "basho01"));
-            kaisaiBashoInserter.insert(create開催場所Entity("basho01"));
+            gogitaiJohoInserter.insert(GogitaiMockEntityCreator.create合議体情報Entity(1, "19990101", "20001231", "basho01"));
+            kaisaiBashoInserter.insert(GogitaiMockEntityCreator.create開催場所Entity("basho01"));
             wariateIinInsert(1, "19990101", "20011231", "iin01", "19800101");
             wariateIinInsert(1, "19990101", "20011231", "iin02", "19801201");
 
-            gogitaiJohoInserter.insert(create合議体情報Entity(2, "19990101", "20001231", "basho02"));
-            kaisaiBashoInserter.insert(create開催場所Entity("basho02"));
+            gogitaiJohoInserter.insert(GogitaiMockEntityCreator.create合議体情報Entity(2, "19990101", "20001231", "basho02"));
+            kaisaiBashoInserter.insert(GogitaiMockEntityCreator.create開催場所Entity("basho02"));
             wariateIinInsert(2, "19990101", "20011231", "iin03", "19890101");
             wariateIinInsert(2, "20000101", "20011231", "iin04", "19800101");
 
-
-            gogitaiJohoInserter.insert(create合議体情報Entity(1, "20010101", "20021231", "basho1"));
+            gogitaiJohoInserter.insert(GogitaiMockEntityCreator.create合議体情報Entity(1, "20010101", "20021231", "basho1"));
             wariateIinInsert(1, "20010101", "20021231", "iin05", "19990909");
             wariateIinInsert(1, "20010101", "20021231", "iin06", "19870123");
             wariateIinInsert(1, "20010101", "20021231", "iin07", "19880315");
@@ -113,17 +113,17 @@ public class GogitaiWariateShinsakaiIinDacTest {
 
         @Before
         public void setUp() {
-            gogitaiJohoInserter.insert(create合議体情報Entity(1, "19990101", "20001231", "basho01"));
-            kaisaiBashoInserter.insert(create開催場所Entity("basho01"));
+            gogitaiJohoInserter.insert(GogitaiMockEntityCreator.create合議体情報Entity(1, "19990101", "20001231", "basho01"));
+            kaisaiBashoInserter.insert(GogitaiMockEntityCreator.create開催場所Entity("basho01"));
             wariateIinInsert(1, "19990101", "20011231", "iin01", "19800101");
             wariateIinInsert(1, "19990101", "20011231", "iin02", "19801201");
 
-            gogitaiJohoInserter.insert(create合議体情報Entity(2, "19990101", "20001231", "basho02"));
-            kaisaiBashoInserter.insert(create開催場所Entity("basho02"));
+            gogitaiJohoInserter.insert(GogitaiMockEntityCreator.create合議体情報Entity(2, "19990101", "20001231", "basho02"));
+            kaisaiBashoInserter.insert(GogitaiMockEntityCreator.create開催場所Entity("basho02"));
             wariateIinInsert(2, "19990101", "20011231", "iin03", "19890101");
             wariateIinInsert(2, "20000101", "20011231", "iin04", "19800101");
 
-            gogitaiJohoInserter.insert(create合議体情報Entity(1, "20010101", "20021231", "basho1"));
+            gogitaiJohoInserter.insert(GogitaiMockEntityCreator.create合議体情報Entity(1, "20010101", "20021231", "basho1"));
             wariateIinInsert(1, "20010101", "20021231", "iin05", "19990909");
             wariateIinInsert(1, "20010101", "20021231", "iin06", "19870123");
         }
@@ -145,18 +145,17 @@ public class GogitaiWariateShinsakaiIinDacTest {
 
         @Before
         public void setUp() {
-            gogitaiJohoInserter.insert(create合議体情報Entity(1, "19990101", "20001231", "basho01"));
-            kaisaiBashoInserter.insert(create開催場所Entity("basho01"));
+            gogitaiJohoInserter.insert(GogitaiMockEntityCreator.create合議体情報Entity(1, "19990101", "20001231", "basho01"));
+            kaisaiBashoInserter.insert(GogitaiMockEntityCreator.create開催場所Entity("basho01"));
             wariateIinInsert(1, "19990101", "20011231", "iin01", "19800101");
             wariateIinInsert(1, "19990101", "20011231", "iin02", "19801201");
 
-            gogitaiJohoInserter.insert(create合議体情報Entity(2, "19990101", "20001231", "basho02"));
-            kaisaiBashoInserter.insert(create開催場所Entity("basho02"));
+            gogitaiJohoInserter.insert(GogitaiMockEntityCreator.create合議体情報Entity(2, "19990101", "20001231", "basho02"));
+            kaisaiBashoInserter.insert(GogitaiMockEntityCreator.create開催場所Entity("basho02"));
             wariateIinInsert(2, "19990101", "20011231", "iin03", "19890101");
             wariateIinInsert(2, "19990101", "20011231", "iin04", "19800101");
 
-
-            gogitaiJohoInserter.insert(create合議体情報Entity(1, "20010101", "20021231", "basho1"));
+            gogitaiJohoInserter.insert(GogitaiMockEntityCreator.create合議体情報Entity(1, "20010101", "20021231", "basho1"));
             wariateIinInsert(1, "20010101", "20021231", "iin05", "19990909");
             wariateIinInsert(1, "20010101", "20021231", "iin06", "19870123");
         }
@@ -178,14 +177,14 @@ public class GogitaiWariateShinsakaiIinDacTest {
 
         @Before
         public void setUp() {
-            gogitaiJohoInserter.insert(create合議体情報Entity(1, "19990101", "20001231", "basho01"));
-            kaisaiBashoInserter.insert(create開催場所Entity("basho01"));
+            gogitaiJohoInserter.insert(GogitaiMockEntityCreator.create合議体情報Entity(1, "19990101", "20001231", "basho01"));
+            kaisaiBashoInserter.insert(GogitaiMockEntityCreator.create開催場所Entity("basho01"));
             wariateIinInsert(1, "19990101", "20011231", "iin01", "19800101");
             wariateIinInsert(1, "19990101", "20011231", "iin02", "19801201");
             wariateIinInsert(1, "19990101", "20011231", "iin03", "19890101");
 
-            gogitaiJohoInserter.insert(create合議体情報Entity(2, "20000101", "20011231", "basho2"));
-            kaisaiBashoInserter.insert(create開催場所Entity("basho02"));
+            gogitaiJohoInserter.insert(GogitaiMockEntityCreator.create合議体情報Entity(2, "20000101", "20011231", "basho2"));
+            kaisaiBashoInserter.insert(GogitaiMockEntityCreator.create開催場所Entity("basho02"));
             wariateIinInsert(2, "20000101", "20011231", "iin04", "19800101");
         }
 
@@ -204,7 +203,7 @@ public class GogitaiWariateShinsakaiIinDacTest {
 
     private static void wariateIinInsert(int 合議体番号, String 合議体開始年月日, String 合議体終了年月日,
             String 委員コード, String 審査会委員開始年月日) {
-        shinsakaiInserter.insert(create審査会委員Entity(委員コード, 審査会委員開始年月日));
-        wariateInserter.insert(create合議体割当Entity(合議体番号, 委員コード, 合議体開始年月日, 合議体終了年月日));
+        shinsakaiInserter.insert(ShinsakaiMockEntityCreator.create審査会委員Entity(委員コード));
+        wariateInserter.insert(GogitaiMockEntityCreator.create合議体割当Entity(合議体番号, 委員コード, 合議体開始年月日, 合議体終了年月日));
     }
 }

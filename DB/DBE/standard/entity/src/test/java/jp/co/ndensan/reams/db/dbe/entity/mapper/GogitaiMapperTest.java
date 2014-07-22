@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.Test;
@@ -92,30 +93,30 @@ public class GogitaiMapperTest {
 
     private static List<GogitaiWariateShinsakaiIinEntity> create合議体割当委員EntityList() {
         List<GogitaiWariateShinsakaiIinEntity> list = new ArrayList<>();
-        list.add(create合議体割当委員Entity(1, "19990101", "19991231", "iin01", "19800101", "basho01"));
-        list.add(create合議体割当委員Entity(1, "19990101", "19991231", "iin02", "19800102", "basho01"));
-        list.add(create合議体割当委員Entity(1, "19990101", "19991231", "iin03", "19800103", "basho01"));
+        list.add(create合議体割当委員Entity(1, "19990101", "19991231", "00000001", "19800101", "basho01"));
+        list.add(create合議体割当委員Entity(1, "19990101", "19991231", "00000002", "19800102", "basho01"));
+        list.add(create合議体割当委員Entity(1, "19990101", "19991231", "00000003", "19800103", "basho01"));
 
-        list.add(create合議体割当委員Entity(1, "20010101", "20011231", "iin01", "19800101", "basho02"));
-        list.add(create合議体割当委員Entity(1, "20010101", "20011231", "iin02", "19800102", "basho02"));
+        list.add(create合議体割当委員Entity(1, "20010101", "20011231", "00000001", "19800101", "basho02"));
+        list.add(create合議体割当委員Entity(1, "20010101", "20011231", "00000002", "19800102", "basho02"));
 
-        list.add(create合議体割当委員Entity(2, "19990101", "19991231", "iin04", "19800104", "basho01"));
-        list.add(create合議体割当委員Entity(2, "19990101", "19991231", "iin05", "19800105", "basho01"));
-        list.add(create合議体割当委員Entity(2, "19990101", "19991231", "iin06", "19800106", "basho01"));
+        list.add(create合議体割当委員Entity(2, "19990101", "19991231", "00000004", "19800104", "basho01"));
+        list.add(create合議体割当委員Entity(2, "19990101", "19991231", "00000005", "19800105", "basho01"));
+        list.add(create合議体割当委員Entity(2, "19990101", "19991231", "00000006", "19800106", "basho01"));
 
-        list.add(create合議体割当委員Entity(3, "20080101", "20081231", "iin01", "19800101", "basho02"));
+        list.add(create合議体割当委員Entity(3, "20080101", "20081231", "00000001", "19800101", "basho02"));
         return list;
     }
 
     private static List<GogitaiWariateShinsakaiIinEntity> create未ソート合議体割当委員EntityList() {
         List<GogitaiWariateShinsakaiIinEntity> list = new ArrayList<>();
 
-        list.add(create合議体割当委員Entity(1, "20010101", "20011231", "iin01", "19800101", "basho02"));
-        list.add(create合議体割当委員Entity(1, "19990101", "19991231", "iin02", "19800102", "basho01"));
-        list.add(create合議体割当委員Entity(2, "19990101", "19991231", "iin04", "19800104", "basho01"));
-        list.add(create合議体割当委員Entity(1, "19990101", "19991231", "iin01", "19800101", "basho01"));
-        list.add(create合議体割当委員Entity(2, "19990101", "19991231", "iin05", "19800105", "basho01"));
-        list.add(create合議体割当委員Entity(1, "20010101", "20011231", "iin02", "19800102", "basho02"));
+        list.add(create合議体割当委員Entity(1, "20010101", "20011231", "00000001", "19800101", "basho02"));
+        list.add(create合議体割当委員Entity(1, "19990101", "19991231", "00000002", "19800102", "basho01"));
+        list.add(create合議体割当委員Entity(2, "19990101", "19991231", "00000004", "19800104", "basho01"));
+        list.add(create合議体割当委員Entity(1, "19990101", "19991231", "00000001", "19800101", "basho01"));
+        list.add(create合議体割当委員Entity(2, "19990101", "19991231", "00000005", "19800105", "basho01"));
+        list.add(create合議体割当委員Entity(1, "20010101", "20011231", "00000002", "19800102", "basho02"));
 
         return list;
     }
@@ -127,7 +128,7 @@ public class GogitaiMapperTest {
                 合議体有効期間開始年月日, 合議体有効期間終了年月日));
         entity.set合議体情報Entity(GogitaiMockEntityCreator.create合議体情報Entity(合議体番号, 合議体有効期間開始年月日,
                 合議体有効期間終了年月日, 場所コード));
-        entity.set委員Entity(GogitaiMockEntityCreator.create審査会委員EntitySpy(委員コード, 委員開始年月日));
+        entity.set委員Entity(ShinsakaiMockEntityCreator.create審査会委員EntitySpy(委員コード));
         entity.set開催場所Entity(GogitaiMockEntityCreator.create開催場所EntitySpy(場所コード));
         return entity;
     }

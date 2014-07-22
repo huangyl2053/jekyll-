@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -35,14 +35,14 @@ public class ShinsakaiWariateIinListTest {
 
     @Before
     public void setUp() {
-        委員コード = new ShinsakaiIinCode(new RString("A001"));
+        委員コード = new ShinsakaiIinCode(new RString("00000001"));
         開催番号 = new ShinsakaiKaisaiNo(1);
         開催年月日 = new FlexibleDate("19990101");
 
         List<ShinsakaiWariateIin> list = new ArrayList<>();
-        list.add(ShinsakaiTestBusinessCreator.create審査会割当委員(1, "19990101", "A001"));
-        list.add(ShinsakaiTestBusinessCreator.create審査会割当委員(2, "20010101", "B001"));
-        list.add(ShinsakaiTestBusinessCreator.create審査会割当委員(3, "20100101", "C001"));
+        list.add(ShinsakaiMockBusinessCreator.create審査会割当委員(1, "19990101", "00000001"));
+        list.add(ShinsakaiMockBusinessCreator.create審査会割当委員(2, "20010101", "00000001"));
+        list.add(ShinsakaiMockBusinessCreator.create審査会割当委員(3, "20100101", "00000001"));
         sut = new ShinsakaiWariateIinList(list);
     }
 
@@ -85,7 +85,7 @@ public class ShinsakaiWariateIinListTest {
     private static ShinsakaiWariateIinList createList(int 件数) {
         List<ShinsakaiWariateIin> list = new ArrayList<>();
         for (int i = 0; i < 件数; i++) {
-            list.add(ShinsakaiTestBusinessCreator.create審査会割当委員(i, "20100101", "A001"));
+            list.add(ShinsakaiMockBusinessCreator.create審査会割当委員(i, "20100101", "00000001"));
         }
         return new ShinsakaiWariateIinList(list);
     }

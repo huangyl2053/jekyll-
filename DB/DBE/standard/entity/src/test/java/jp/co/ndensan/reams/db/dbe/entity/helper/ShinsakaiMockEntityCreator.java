@@ -8,14 +8,31 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKyukaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5014ShinsakaiIinJogaiJoho;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5014ShinsakaiIinJogaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.relate.JogaiShinsakaiIinEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.spy;
@@ -26,12 +43,12 @@ import static org.mockito.Mockito.doReturn;
  *
  * @author n8178 城間篤人
  */
-public final class ShinsakaiTestEntityCreator {
+public final class ShinsakaiMockEntityCreator {
 
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。
      */
-    private ShinsakaiTestEntityCreator() {
+    private ShinsakaiMockEntityCreator() {
     }
 
     /**
@@ -254,6 +271,121 @@ public final class ShinsakaiTestEntityCreator {
         List<DbT5106ShinsakaiWariateIinJohoEntity> list = new ArrayList<>();
         for (String 委員コード : 審査会委員コードList) {
             list.add(create審査会割当委員情報Entity(開催番号, 開催年月日, 委員コード));
+        }
+        return list;
+    }
+
+    /**
+     * 審査会委員情報Entityを生成します。
+     *
+     * @param 審査会委員コード 審査会委員コード
+     * @return 審査会委員Entity
+     */
+    public static DbT5102ShinsakaiIinJohoEntity create審査会委員Entity(String 審査会委員コード) {
+        DbT5102ShinsakaiIinJohoEntity 委員Entity = new DbT5102ShinsakaiIinJohoEntity();
+        委員Entity.setShinsakaiIinCode(new RString(審査会委員コード));
+        委員Entity.setShinsakaiIinKaishiYMD(FlexibleDate.MIN);
+        委員Entity.setShinsakaiIinShuryoYMD(FlexibleDate.MAX);
+        委員Entity.setShinsakaiIinJokyo(true);
+        委員Entity.setJigyoshaNo(new JigyoshaNo(new RString("0000000001")));
+        委員Entity.setJigyoshaKubun(new RString("1"));
+        委員Entity.setShinsakaiIinShimei(new AtenaMeisho(new RString("仮名")));
+        委員Entity.setShinsakaiIinKanaShimei(new AtenaKanaMeisho(new RString("ｶﾅ")));
+        委員Entity.setSeibetsu(Gender.MALE.getCode());
+        委員Entity.setShinsakaiIinShikakuCode(new Code(new RString("1")));
+        委員Entity.setShinsainYusoKubun(new RString("1"));
+        委員Entity.setYubinNo(new YubinNo("000-0000"));
+        委員Entity.setJusho(new AtenaJusho("test住所１１１１"));
+        委員Entity.setTelNo(new TelNo("098-0987-0987"));
+        委員Entity.setKinyuKikanCode(new KinyuKikanCode("1111"));
+        委員Entity.setKinyuKikanShitenCode(new KinyuKikanShitenCode("111"));
+        委員Entity.setKozaShubetsu(new RString("1"));
+        委員Entity.setKozaMeigi(new RString("test"));
+        委員Entity.setKozaMeigiKana(new RString("仮名"));
+        委員Entity.setKozaNo(new RString("0120123"));
+        return 委員Entity;
+    }
+
+    /**
+     * 審査会委員情報Entityを生成します。
+     *
+     * @param 審査会委員コード 審査会委員コード
+     * @return 審査会委員Entity
+     */
+    public static DbT5102ShinsakaiIinJohoEntity create審査会委員Entity(String 審査会委員コード, boolean 有効区分) {
+        DbT5102ShinsakaiIinJohoEntity entity = create審査会委員Entity(審査会委員コード);
+        entity.setShinsakaiIinJokyo(有効区分);
+        return entity;
+    }
+
+    /**
+     * 審査会委員Entityを生成して返します。（Spy)
+     *
+     * @param 委員コード 委員コード
+     * @return 審査会委員Entity
+     */
+    public static DbT5102ShinsakaiIinJohoEntity create審査会委員EntitySpy(String 委員コード, boolean 有効区分) {
+        DbT5102ShinsakaiIinJohoEntity entity = create審査会委員EntitySpy(委員コード);
+        entity.setShinsakaiIinJokyo(有効区分);
+        return entity;
+    }
+
+    /**
+     * 審査会委員Entityを生成して返します。（Spy)
+     *
+     * @param 委員コード 委員コード
+     * @param 開始年月日 開始年月日
+     * @return 審査会委員Entity
+     */
+    public static DbT5102ShinsakaiIinJohoEntity create審査会委員EntitySpy(String 委員コード) {
+        DbT5102ShinsakaiIinJohoEntity entity = spy(create審査会委員Entity(委員コード));
+        doReturn(new RString("meisho")).when(entity).getShinsakaiIinShikakuCodeMeisho();
+        doReturn(new RString("ryakusho")).when(entity).getShinsakaiIinShikakuCodeRyakusho();
+        return entity;
+    }
+
+    /**
+     * 審査会委員Entityを生成して返します。
+     *
+     * @param 審査会委員コード 審査会委員コード
+     * @param 開始年月日 開始年月日
+     * @return 審査会委員Entity
+     */
+    public static DbT5102ShinsakaiIinJohoEntity create審査会委員Entity(String 審査会委員コード, String 開始年月日) {
+        DbT5102ShinsakaiIinJohoEntity entity = create審査会委員Entity(審査会委員コード);
+        entity.setShinsakaiIinKaishiYMD(new FlexibleDate(開始年月日));
+        return entity;
+    }
+
+    /**
+     * 審査会委員除外情報Entityを作成して返します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 被保険者番号 被保険者番号
+     * @param 管理番号 管理番号
+     * @param 除外対象審査会委員コード 除外対象審査会委員コード
+     * @return 審査会委員除外情報Entity
+     */
+    public static DbT5014ShinsakaiIinJogaiJohoEntity create審査会委員除外情報Entity(ShoKisaiHokenshaNo 証記載保険者番号,
+            KaigoHihokenshaNo 被保険者番号, int 管理番号, ShinsakaiIinCode 除外対象審査会委員コード) {
+        DbT5014ShinsakaiIinJogaiJohoEntity entity = new DbT5014ShinsakaiIinJogaiJohoEntity();
+        entity.setShoKisaiHokenshaNo(証記載保険者番号);
+        entity.setHihokenshaNo(被保険者番号);
+        entity.setKanriNo(管理番号);
+        entity.setJogaiTaishoShinsakaiIinCode(除外対象審査会委員コード.value());
+        return entity;
+    }
+
+    public static JogaiShinsakaiIinEntity create除外対象審査会委員EntitySpy() {
+        return new JogaiShinsakaiIinEntity(create審査会委員EntitySpy("00000001"),
+                create審査会委員除外情報Entity(new ShoKisaiHokenshaNo(new RString("000001")),
+                        new KaigoHihokenshaNo(new RString("0000000001")), 1, new ShinsakaiIinCode(new RString("00001111"))));
+    }
+
+    public static List<JogaiShinsakaiIinEntity> create除外対象審査会委員EntityListSpy(int 件数) {
+        List<JogaiShinsakaiIinEntity> list = new ArrayList<>();
+        for (int i = 0; i < 件数; i++) {
+            list.add(create除外対象審査会委員EntitySpy());
         }
         return list;
     }

@@ -29,6 +29,25 @@ public class ShinsakaiIinCodeTest {
         @Test(expected = NullPointerException.class)
         public void 引数にnullが渡されたとき_NullPointerExceptionが発生する() {
             sut1 = new ShinsakaiIinCode(null);
+            fail();
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void 引数に8桁に満たない文字列が渡されたとき_IllegalArgumentExceptionが発生する() {
+            sut1 = new ShinsakaiIinCode(new RString("1234567"));
+            fail();
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void 引数に8桁より大きい文字列が渡されたとき_IllegalArgumentExceptionが発生する() {
+            sut1 = new ShinsakaiIinCode(new RString("123456789"));
+            fail();
+        }
+
+        @Test
+        public void 引数がnullでは無く_かつ8桁の文字列であるとき_インスタンスが生成される() {
+            sut1 = new ShinsakaiIinCode(new RString("12345678"));
+            assertThat(sut1, instanceOf(ShinsakaiIinCode.class));
         }
     }
 
@@ -36,8 +55,8 @@ public class ShinsakaiIinCodeTest {
 
         @Test
         public void 同一の審査会委員コードを持つとき_ハッシュコードが同値になる() {
-            sut1 = createShinsakaiIinCode("A001");
-            sut2 = createShinsakaiIinCode("A001");
+            sut1 = createShinsakaiIinCode("00000001");
+            sut2 = createShinsakaiIinCode("00000001");
             assertThat(sut1.hashCode(), is(sut2.hashCode()));
         }
     }
@@ -46,7 +65,7 @@ public class ShinsakaiIinCodeTest {
 
         @Before
         public void setUp() {
-            sut1 = createShinsakaiIinCode("A001");
+            sut1 = createShinsakaiIinCode("00000001");
         }
 
         @Test
@@ -56,18 +75,18 @@ public class ShinsakaiIinCodeTest {
 
         @Test
         public void 引数に_GogitaiMeisho型以外のものを渡したとき_falseが返る() {
-            assertThat(sut1.equals(new RString("A001")), is(false));
+            assertThat(sut1.equals(new RString("00000001")), is(false));
         }
 
         @Test
         public void 引数に_同値でない値を持っている審査会委員コードを渡したとき_falseが返る() {
-            sut2 = createShinsakaiIinCode("B001");
+            sut2 = createShinsakaiIinCode("00000002");
             assertThat(sut1.equals(sut2), is(false));
         }
 
         @Test
         public void 引数に_同値を持つ審査会委員コードを渡したとき_trueが返る() {
-            sut2 = createShinsakaiIinCode("A001");
+            sut2 = createShinsakaiIinCode("00000001");
             assertThat(sut1.equals(sut2), is(true));
         }
     }
@@ -76,24 +95,24 @@ public class ShinsakaiIinCodeTest {
 
         @Before
         public void setUp() {
-            sut1 = createShinsakaiIinCode("A001");
+            sut1 = createShinsakaiIinCode("00000001");
         }
 
         @Test
-        public void A001を持つ審査会委員コードを_B001を持つ審査会委員コードと比較したとき_0より小さい値が返る() {
-            sut2 = createShinsakaiIinCode("B001");
+        public void 審査会委員コード00000001と_審査会委員コード00000002を比較したとき_0より小さい値が返る() {
+            sut2 = createShinsakaiIinCode("00000002");
             assertThat(sut1.compareTo(sut2) < 0, is(true));
         }
 
         @Test
-        public void A001を持つ審査会委員コードを_0001を持つ審査会委員コードと比較したとき_0より大きい値が返る() {
-            sut2 = createShinsakaiIinCode("0001");
+        public void 審査会委員コード00000001と_審査会委員コード00000000を比較したとき_0より大きい値が返る() {
+            sut2 = createShinsakaiIinCode("00000000");
             assertThat(0 < sut1.compareTo(sut2), is(true));
         }
 
         @Test
-        public void A001を持つ審査会委員コードを_同値A001を持つ審査会委員コードと比較したとき_0が返る() {
-            sut2 = createShinsakaiIinCode("A001");
+        public void 審査会委員コード00000001と_審査会委員コード00000001を比較したとき_0が返る() {
+            sut2 = createShinsakaiIinCode("00000001");
             assertThat(sut1.compareTo(sut2) == 0, is(true));
         }
     }

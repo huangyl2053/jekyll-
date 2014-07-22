@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.GogitaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
-import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
@@ -68,7 +68,7 @@ public class GogitaiDetailFinderTest {
 
         private ShinsakaiKaisaiBashoManager create開催場所マネージャMock() {
             ShinsakaiKaisaiBashoManager 開催場所Manager = mock(ShinsakaiKaisaiBashoManager.class);
-            ShinsakaiKaisaiBasho 開催場所 = ShinsakaiTestBusinessCreator.create審査会開催場所("basho01");
+            ShinsakaiKaisaiBasho 開催場所 = ShinsakaiMockBusinessCreator.create審査会開催場所("basho01");
             when(開催場所Manager.get審査会開催場所(any(ShinsakaiKaisaiBashoCode.class))).thenReturn(開催場所);
             return 開催場所Manager;
         }

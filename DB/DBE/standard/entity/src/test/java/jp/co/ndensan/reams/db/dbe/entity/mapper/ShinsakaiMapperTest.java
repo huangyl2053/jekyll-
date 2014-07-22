@@ -8,9 +8,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.Shinsakai;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinList;
-import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiTestEntityCreator;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.Before;
 import static org.junit.Assert.*;
@@ -36,10 +36,10 @@ public class ShinsakaiMapperTest {
 
         @Before
         public void setUp() {
-            審査会割当委員EntityList =
-                    ShinsakaiTestEntityCreator.create審査会割当委員情報EntityListSpy(1, "19990101", "iin001", "iin002", "iin003");
-            委員List = ShinsakaiTestBusinessCreator.create審査会委員List("iin001", "iin002", "iin003");
-            審査会情報 = ShinsakaiTestBusinessCreator.create審査会情報(1, "19990101");
+            審査会割当委員EntityList
+                    = ShinsakaiMockEntityCreator.create審査会割当委員情報EntityListSpy(1, "19990101", "00000001", "00000002", "00000003");
+            委員List = ShinsakaiMockBusinessCreator.create審査会委員List("00000001", "00000002", "00000003");
+            審査会情報 = ShinsakaiMockBusinessCreator.create審査会情報(1, "19990101");
         }
 
         @Test
@@ -65,10 +65,10 @@ public class ShinsakaiMapperTest {
 
         @Before
         public void setUp() {
-            審査会割当委員EntityList =
-                    ShinsakaiTestEntityCreator.create審査会割当委員情報EntityListSpy(1, "19990101", "iin001", "iin002", "iin003");
-            委員List = ShinsakaiTestBusinessCreator.create審査会委員List("iin001", "iin002", "iin003");
-            審査会情報 = ShinsakaiTestBusinessCreator.create審査会情報(1, "19990101");
+            審査会割当委員EntityList
+                    = ShinsakaiMockEntityCreator.create審査会割当委員情報EntityListSpy(1, "19990101", "00000001", "00000002", "00000003");
+            委員List = ShinsakaiMockBusinessCreator.create審査会委員List("00000001", "00000002", "00000003");
+            審査会情報 = ShinsakaiMockBusinessCreator.create審査会情報(1, "19990101");
             result = ShinsakaiMapper.to審査会(審査会割当委員EntityList, 委員List, 審査会情報);
         }
 

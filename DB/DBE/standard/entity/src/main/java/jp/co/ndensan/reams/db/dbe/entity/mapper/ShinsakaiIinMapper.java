@@ -4,8 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinKoza;
+import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinShikaku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
@@ -21,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
  */
 public final class ShinsakaiIinMapper {
 
-    //TODO n8178 城間篤人 他チケットで実装予定の箇所のため、後に改修が入る可能性があり 2014年3月末
+    //TODO n8178 城間篤人 他チケットで実装予定の箇所のため、後に改修が入る可能性があり 2014年9月末
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。
      */
@@ -58,6 +62,24 @@ public final class ShinsakaiIinMapper {
     private static ShinsakaiIinKoza create審査会委員口座情報(DbT5102ShinsakaiIinJohoEntity 委員Entity) {
         return new ShinsakaiIinKoza(委員Entity.getKinyuKikanCode(), 委員Entity.getKinyuKikanShitenCode(),
                 委員Entity.getKozaShubetsu(), 委員Entity.getKozaMeigi(), 委員Entity.getKozaMeigiKana(), 委員Entity.getKozaNo());
+    }
+
+    /**
+     * 審査会委員EntityListをマッピングして、審査会委員Listを返します。nullが渡されたときは空のリストを返します。
+     *
+     * @param 委員EntityList 委員EntityList
+     * @return 審査会委員List
+     */
+    public static ShinsakaiIinList to審査会委員List(List<DbT5102ShinsakaiIinJohoEntity> 委員EntityList) {
+        if (委員EntityList == null) {
+            return new ShinsakaiIinList(Collections.EMPTY_LIST);
+        }
+
+        List<ShinsakaiIin> 審査会委員List = new ArrayList<>();
+        for (DbT5102ShinsakaiIinJohoEntity 委員Entity : 委員EntityList) {
+            審査会委員List.add(to審査会委員(委員Entity));
+        }
+        return new ShinsakaiIinList(審査会委員List);
     }
 
     /**
