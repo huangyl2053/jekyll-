@@ -98,7 +98,7 @@ public class ShujiiIkenshoIraiTaishoshaMapperTest extends DbeTestBase {
         public void 引き渡した_認定申請情報の被保険者番号_とtoShujiiIkenshoIraiTaishoshaの結果は一致する() {
             sut = ShujiiIkenshoIraiTaishoshaMapper.toShujiiIkenshoIraiTaishosha(
                     認定進捗情報, 認定申請情報, 個人, 氏名, 住所, 主治医医療機関, 主治医);
-            assertThat(sut.get被保険者番号(), is(認定申請情報.get介護被保険者番号()));
+            assertThat(sut.get被保険者番号(), is(認定申請情報.get被保番号()));
         }
 
         @Test

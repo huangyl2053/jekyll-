@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.TorisageRiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定申請情報のMapperです。
@@ -64,7 +64,9 @@ public final class YokaigoNinteiShinseiMapper {
                         new TorisageRiyu(entity.getTorisageRiyu()),
                         entity.getTorisageYMD(),
                         ShinsaKeizokuKubun.toValue(entity.getShinsaKeizokuKubun())
-                )
+                ),
+                //TODO n3327 三浦凌 ShinsakaiYusenWaritukeKubunがentityに存在しない。自動生成のために、DBのテーブルを修正する必要がある。
+                ShinsakaiYusenWaritsukeKubun.defaultValue()
         );
     }
 
@@ -80,13 +82,11 @@ public final class YokaigoNinteiShinseiMapper {
         entity.setNinteichosaIraiRirekiNo(yokaigoNinteiShinsei.get認定調査依頼履歴番号().value());
         entity.setShoKisaiHokenshaNo(yokaigoNinteiShinsei.get証記載保険者番号());
         entity.setShishoCode(yokaigoNinteiShinsei.get支所コード());
-        entity.setHihokenshaNo(yokaigoNinteiShinsei.get介護被保険者番号());
+        entity.setHihokenshaNo(yokaigoNinteiShinsei.get被保番号());
         entity.setShikibetsuCode(yokaigoNinteiShinsei.get識別コード());
         entity.setNinteiShinseiYMD(yokaigoNinteiShinsei.get認定申請年月日());
         entity.setNinteiShinseiEdabanCode(yokaigoNinteiShinsei.get枝番コード());
-        entity.setNinteiShinseiShinseijiKubunCode(
-                new Code(new RString(String.valueOf(yokaigoNinteiShinsei.get認定申請区分_申請時().コード())))
-        );
+        entity.setNinteiShinseiShinseijiKubunCode(yokaigoNinteiShinsei.get認定申請区分_申請時());
         entity.setNinteiShinseiHoreiKubunCode(yokaigoNinteiShinsei.get認定申請区分_法令());
         entity.setNinteiShinseiYukoKubunCode(yokaigoNinteiShinsei.get認定申請有効区分());
         //TODO n8178 城間篤人 後日、要支援申請区分を作成予定 2014年2月末

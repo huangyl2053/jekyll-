@@ -110,7 +110,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
 
         @Test
         public void 引き渡した_認定申請情報の被保険者番号_とtoNinteichosaIraiTaishoshaの結果は一致する() {
-            assertThat(sut.get被保険者番号(), is(認定申請情報.get介護被保険者番号()));
+            assertThat(sut.get被保険者番号(), is(認定申請情報.get被保番号()));
         }
 
         @Test

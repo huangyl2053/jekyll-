@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -206,7 +207,7 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
                 new ShoKisaiHokenshaNo(new RString("1234")),
                 new KaigoHihokenshaNo(new RString("1234567890")),
                 new FlexibleDate(new RString("20140101")),
-                NinteiShinseiKubunShinsei.更新申請,
+                new Code(String.valueOf(NinteiShinseiKubunShinsei.更新申請.コード())),
                 KojinTestHelper.create個人(),
                 new RString("氏名"),
                 new RString("住所"),

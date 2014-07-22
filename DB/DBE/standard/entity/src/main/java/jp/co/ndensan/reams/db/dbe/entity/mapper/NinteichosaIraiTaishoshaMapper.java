@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 // TODO N8187 久保田英男 URのNinteiChosainのキャメルケースをNinteichosainに修正する。URを修正するタイミングで対応する。
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * 認定調査依頼対象者の対応付けを行うクラスです。
@@ -57,7 +59,7 @@ public final class NinteichosaIraiTaishoshaMapper {
                 認定進捗情報,
                 要介護認定申請情報.get申請書管理番号(),
                 要介護認定申請情報.get証記載保険者番号(),
-                要介護認定申請情報.get介護被保険者番号(),
+                要介護認定申請情報.get被保番号(),
                 要介護認定申請情報.get認定申請年月日(),
                 要介護認定申請情報.get認定申請区分_申請時(),
                 個人,
@@ -67,4 +69,5 @@ public final class NinteichosaIraiTaishoshaMapper {
                 事業者情報,
                 認定調査員情報);
     }
+
 }

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.TorisageRiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -92,7 +93,7 @@ public final class YokaigoNinteiShinseiTestHelper {
                 延期通知有無同意,
                 施設入所,
                 市町村連絡事項,
-                認定申請取下げ);
+                認定申請取下げ, ShinsakaiYusenWaritsukeKubun.優先しない);
     }
 
     public static DbT5001NinteiShinseiJohoEntity create認定申請情報Entity() {

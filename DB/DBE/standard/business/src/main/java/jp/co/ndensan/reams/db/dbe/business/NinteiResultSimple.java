@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class NinteiResultSimple {
 
     /**
-     *
+     * 認定結果がないことを表すNinteiResultSimpleのインスタンスです。
      */
     public static final NinteiResultSimple EMPTY;
 

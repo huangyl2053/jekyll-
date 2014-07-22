@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
@@ -28,7 +29,7 @@ public class YokaigoNinteiShinsei {
     private final ShinseishoKanriNo 申請書管理番号;
     private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final ShishoCode 支所コード;
-    private final KaigoHihokenshaNo 介護被保険者番号;
+    private final KaigoHihokenshaNo 被保番号;
     private final ShikibetsuCode 識別コード;
     private final FlexibleDate 認定申請年月日;
     private final EdabanCode 枝番コード;
@@ -46,6 +47,7 @@ public class YokaigoNinteiShinsei {
     private final boolean 施設入所;
     private final RString 市町村連絡事項;
     private final NinteiShinseiTorisage 認定申請取下げ;
+    private final ShinsakaiYusenWaritsukeKubun 審査会優先割付区分;
 
     /**
      * 引数からメンバを受け取るコンストラクタです。
@@ -53,7 +55,7 @@ public class YokaigoNinteiShinsei {
      * @param 申請書管理番号 申請書管理番号
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
-     * @param 介護被保険者番号 介護被保険者番号
+     * @param 被保番号 被保番号
      * @param 識別コード 識別コード
      * @param 認定申請年月日 認定申請年月日
      * @param 枝番コード 枝番コード
@@ -73,15 +75,15 @@ public class YokaigoNinteiShinsei {
      * @param 認定申請取下げ 認定申請取下げ
      */
     public YokaigoNinteiShinsei(ShinseishoKanriNo 申請書管理番号, ShoKisaiHokenshaNo 証記載保険者番号, ShishoCode 支所コード,
-            KaigoHihokenshaNo 介護被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 認定申請年月日, EdabanCode 枝番コード,
+            KaigoHihokenshaNo 被保番号, ShikibetsuCode 識別コード, FlexibleDate 認定申請年月日, EdabanCode 枝番コード,
             Code 認定申請区分_申請時, Code 認定申請区分_法令, Code 認定申請有効区分, Code 要支援申請区分, NinteiShinseiRiyu 認定申請理由,
             NinteiResultSimple 前回認定結果, boolean 情報提供への同意有無, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
             int 意見書依頼履歴番号, Code みなし要介護区分コード, boolean 延期通知発行同意有無, boolean is施設入所,
-            RString 市町村連絡事項, NinteiShinseiTorisage 認定申請取下げ) {
+            RString 市町村連絡事項, NinteiShinseiTorisage 認定申請取下げ, ShinsakaiYusenWaritsukeKubun 審査会優先割付区分) {
         this.申請書管理番号 = 申請書管理番号;
         this.証記載保険者番号 = 証記載保険者番号;
         this.支所コード = 支所コード;
-        this.介護被保険者番号 = 介護被保険者番号;
+        this.被保番号 = 被保番号;
         this.識別コード = 識別コード;
         this.認定申請年月日 = 認定申請年月日;
         this.枝番コード = 枝番コード;
@@ -99,6 +101,7 @@ public class YokaigoNinteiShinsei {
         this.施設入所 = is施設入所;
         this.市町村連絡事項 = 市町村連絡事項;
         this.認定申請取下げ = 認定申請取下げ;
+        this.審査会優先割付区分 = 審査会優先割付区分;
     }
 
     /**
@@ -142,8 +145,8 @@ public class YokaigoNinteiShinsei {
      *
      * @return 介護被保険者番号
      */
-    public KaigoHihokenshaNo get介護被保険者番号() {
-        return 介護被保険者番号;
+    public KaigoHihokenshaNo get被保番号() {
+        return 被保番号;
     }
 
     /**
@@ -178,8 +181,8 @@ public class YokaigoNinteiShinsei {
      *
      * @return 申請時の認定申請区分
      */
-    public NinteiShinseiKubunShinsei get認定申請区分_申請時() {
-        return NinteiShinseiKubunShinsei.toValue(Integer.valueOf(認定申請区分_申請時.value().toString()));
+    public Code get認定申請区分_申請時() {
+        return 認定申請区分_申請時;
     }
 
     /**
@@ -290,4 +293,12 @@ public class YokaigoNinteiShinsei {
         return 認定申請取下げ;
     }
 
+    /**
+     * 審査会に優先的に割り付けるかどうかの区分を返します。
+     *
+     * @return 審査会優先割付区分
+     */
+    public ShinsakaiYusenWaritsukeKubun get審査会優先割付区分() {
+        return this.審査会優先割付区分;
+    }
 }

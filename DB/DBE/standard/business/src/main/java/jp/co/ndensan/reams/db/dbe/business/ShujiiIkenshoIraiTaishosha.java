@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -26,7 +27,7 @@ public class ShujiiIkenshoIraiTaishosha {
     private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final KaigoHihokenshaNo 被保険者番号;
     private final FlexibleDate 認定申請年月日;
-    private final NinteiShinseiKubunShinsei 認定申請区分;
+    private final Code 認定申請区分;
     private final IKojin 個人情報;
     private final RString 氏名;
     private final RString 住所;
@@ -58,7 +59,7 @@ public class ShujiiIkenshoIraiTaishosha {
             ShoKisaiHokenshaNo 証記載保険者番号,
             KaigoHihokenshaNo 被保険者番号,
             FlexibleDate 認定申請年月日,
-            NinteiShinseiKubunShinsei 認定申請区分,
+            Code 認定申請区分,
             IKojin 個人情報,
             RString 氏名,
             RString 住所,
@@ -128,7 +129,7 @@ public class ShujiiIkenshoIraiTaishosha {
      *
      * @return 認定申請区分
      */
-    public NinteiShinseiKubunShinsei get認定申請区分() {
+    public Code get認定申請区分() {
         return 認定申請区分;
     }
 

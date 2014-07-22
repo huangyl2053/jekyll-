@@ -28,7 +28,7 @@ public class YokaigoNinteiShinseiDac implements IReplaceable<DbT5001NinteiShinse
     private SqlSession session;
 
     @Transaction
-    public DbT5001NinteiShinseiJohoEntity selectKey(ShinseishoKanriNo shinseishoKanriNo) {
+    public DbT5001NinteiShinseiJohoEntity selectFromKey(ShinseishoKanriNo shinseishoKanriNo) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.
                 select().
@@ -40,7 +40,7 @@ public class YokaigoNinteiShinseiDac implements IReplaceable<DbT5001NinteiShinse
     @Override
     @Transaction
     public int insertOrUpdate(DbT5001NinteiShinseiJohoEntity data) {
-        return isNull(selectKey(data.getShinseishoKanriNo())) ? insert(data) : update(data);
+        return isNull(selectFromKey(data.getShinseishoKanriNo())) ? insert(data) : update(data);
     }
 
     private boolean isNull(Object target) {

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiIkenshoIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.DbT5001NinteiShinseiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.DbT5011ShujiiIkenshoIraiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.KaigoDoctorMock;
-import jp.co.ndensan.reams.db.dbe.realservice.helper.YokaigoNinteiShinseiMock;
+import jp.co.ndensan.reams.db.dbe.business.helper.YokaigoNinteiShinseiMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoSakuseiIraiMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;

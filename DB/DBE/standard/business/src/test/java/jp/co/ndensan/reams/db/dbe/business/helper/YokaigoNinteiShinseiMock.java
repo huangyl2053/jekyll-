@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.TorisageRiyu;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
@@ -48,7 +49,7 @@ public class YokaigoNinteiShinseiMock {
                 KaigoHihokenshaNo.NULL_VALUE,
                 new ShikibetsuCode("0"),
                 FlexibleDate.EMPTY,
-                new EdabanCode("0"),
+                new EdabanCode("000"),
                 new Code(RString.EMPTY),
                 new Code(RString.EMPTY),
                 new Code(RString.EMPTY),
@@ -62,7 +63,8 @@ public class YokaigoNinteiShinseiMock {
                 true,
                 true,
                 RString.EMPTY,
-                new NinteiShinseiTorisage(TorisageKubun.認定申請有効, TorisageRiyu.EMPTY, FlexibleDate.MAX, ShinsaKeizokuKubun.継続する)
+                new NinteiShinseiTorisage(TorisageKubun.認定申請有効, TorisageRiyu.EMPTY, FlexibleDate.MAX, ShinsaKeizokuKubun.継続する),
+                ShinsakaiYusenWaritsukeKubun.優先しない
         );
     }
 

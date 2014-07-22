@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
+//TODO n3327 URのものと内容が被っているので、こちらは削除した方がよいかもしれない。
 public enum YokaigoNinteiShinseiKubun {
 
     /**
