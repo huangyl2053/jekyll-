@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
  * @author n8178 城間篤人
  */
 public class JogaiShinsakaiIin {
+    //TODO n8178 城間篤人 審査会関連の本実装時にIShinsakaiIinインターフェース作成し、その後にそれを実装するように修正する 2014年9月末
 
     private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final KaigoHihokenshaNo 被保険者番号;
@@ -58,7 +59,7 @@ public class JogaiShinsakaiIin {
      *
      * @return 証記載保険者番号
      */
-    public ShoKisaiHokenshaNo get証記載被保険者番号() {
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
         return 証記載保険者番号;
     }
 
@@ -67,7 +68,7 @@ public class JogaiShinsakaiIin {
      *
      * @return 被保険者番号
      */
-    public KaigoHihokenshaNo get被保険者番号() {
+    public KaigoHihokenshaNo get対象被保険者番号() {
         return 被保険者番号;
     }
 

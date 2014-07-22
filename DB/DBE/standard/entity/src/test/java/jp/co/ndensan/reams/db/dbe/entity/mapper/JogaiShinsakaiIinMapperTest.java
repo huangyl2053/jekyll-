@@ -76,12 +76,12 @@ public class JogaiShinsakaiIinMapperTest {
 
         @Test
         public void マッピング後の除外委員情報が持つ証記載保険者番号と_マッピング前のEntityが持つ証記載保険者番号が_一致する() {
-            assertThat(sut.get証記載被保険者番号(), is(除外対象委員Entity.get除外委員情報Entity().getShoKisaiHokenshaNo()));
+            assertThat(sut.get証記載保険者番号(), is(除外対象委員Entity.get除外委員情報Entity().getShoKisaiHokenshaNo()));
         }
 
         @Test
         public void マッピング後の除外委員情報が持つ被保険者番号と_マッピング前のEntityが持つ被保険者番号が_一致する() {
-            assertThat(sut.get被保険者番号(), is(除外対象委員Entity.get除外委員情報Entity().getHihokenshaNo()));
+            assertThat(sut.get対象被保険者番号(), is(除外対象委員Entity.get除外委員情報Entity().getHihokenshaNo()));
         }
 
         @Test
@@ -143,12 +143,12 @@ public class JogaiShinsakaiIinMapperTest {
 
         @Test
         public void マッピング後のEntityが持つ証記載保険者番号と_マッピング前の除外委員情報が持つ証記載保険者番号が_一致する() {
-            assertThat(sut.getShoKisaiHokenshaNo(), is(除外委員.get証記載被保険者番号()));
+            assertThat(sut.getShoKisaiHokenshaNo(), is(除外委員.get証記載保険者番号()));
         }
 
         @Test
         public void マッピング後のEntityが持つ被保険者番号と_マッピング前の除外委員情報が持つ被保険者番号が_一致する() {
-            assertThat(sut.getHihokenshaNo(), is(除外委員.get被保険者番号()));
+            assertThat(sut.getHihokenshaNo(), is(除外委員.get対象被保険者番号()));
         }
 
         @Test

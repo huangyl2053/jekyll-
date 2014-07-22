@@ -79,8 +79,8 @@ public final class JogaiShinsakaiIinMapper {
             return null;
         }
         DbT5014ShinsakaiIinJogaiJohoEntity entity = new DbT5014ShinsakaiIinJogaiJohoEntity();
-        entity.setShoKisaiHokenshaNo(除外対象委員.get証記載被保険者番号());
-        entity.setHihokenshaNo(除外対象委員.get被保険者番号());
+        entity.setShoKisaiHokenshaNo(除外対象委員.get証記載保険者番号());
+        entity.setHihokenshaNo(除外対象委員.get対象被保険者番号());
         entity.setKanriNo(除外対象委員.get管理番号());
         entity.setJogaiTaishoShinsakaiIinCode(除外対象委員.get除外対象審査会委員().get審査会委員コード().value());
         return entity;
