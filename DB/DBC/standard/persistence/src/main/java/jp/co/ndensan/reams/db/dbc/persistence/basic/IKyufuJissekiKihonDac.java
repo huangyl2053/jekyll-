@@ -33,11 +33,9 @@ public interface IKyufuJissekiKihonDac extends
      * @param 交換情報識別番号
      * @param 入力識別番号
      * @param レコード種別コード
-     * @param 給付実績情報作成区分コード
      * @param 証記載保険者番号
      * @param 被保番号
      * @param サービス提供年月
-     * @param 給付実績区分コード
      * @param 事業所番号
      * @param 通番
      * @return 給付実績基本エンティティ
@@ -47,11 +45,9 @@ public interface IKyufuJissekiKihonDac extends
             KokanShikibetsuNo 交換情報識別番号,
             InputShikibetsuNoCode 入力識別番号,
             RString レコード種別コード,
-            RString 給付実績情報作成区分コード,
             ShoKisaiHokenshaNo 証記載保険者番号,
             KaigoHihokenshaNo 被保番号,
             FlexibleYearMonth サービス提供年月,
-            RString 給付実績区分コード,
             JigyoshaNo 事業所番号,
             ToshiNo 通番);
 }

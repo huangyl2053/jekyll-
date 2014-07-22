@@ -36,11 +36,9 @@ public class KyufuJissekiKihonDac implements IKyufuJissekiKihonDac {
             KokanShikibetsuNo 交換情報識別番号,
             InputShikibetsuNoCode 入力識別番号,
             RString レコード種別コード,
-            RString 給付実績情報作成区分コード,
             ShoKisaiHokenshaNo 証記載保険者番号,
             KaigoHihokenshaNo 被保番号,
             FlexibleYearMonth サービス提供年月,
-            RString 給付実績区分コード,
             JigyoshaNo 事業所番号,
             ToshiNo 通番) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -50,11 +48,9 @@ public class KyufuJissekiKihonDac implements IKyufuJissekiKihonDac {
                                 eq(kokanShikibetsuNo, 交換情報識別番号),
                                 eq(inputShikibetsuNo, 入力識別番号.value()),
                                 eq(recodeShubetsuCode, レコード種別コード),
-                                eq(kyufuSakuseiKubunCode, 給付実績情報作成区分コード),
                                 eq(hokenshaNo, 証記載保険者番号),
                                 eq(hiHokenshaNo, 被保番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(kyufuJissekiKubunCode, 給付実績区分コード),
                                 eq(jigyoshoNo, 事業所番号),
                                 eq(toshiNo, 通番)))
                 .toObject(DbT3017KyufujissekiKihonEntity.class);

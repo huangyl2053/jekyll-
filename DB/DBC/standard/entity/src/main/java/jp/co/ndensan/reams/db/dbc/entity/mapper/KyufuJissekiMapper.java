@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbc.entity.mapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.JigyoshaNoListOfServiceTeikyoYM;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonHihokensha;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonKohi;
@@ -21,12 +24,17 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigen;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigenCollection;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukeiCollection;
+import jp.co.ndensan.reams.db.dbc.business.ServiceTeikyoYMListOfServiceShurui;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3018KyufujissekiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -48,6 +56,63 @@ public final class KyufuJissekiMapper {
      * インスタンス化を防ぐためのプライベートコンストラクタです。
      */
     private KyufuJissekiMapper() {
+    }
+
+    /**
+     * 給付実績種類詳細エンティティから給付実績詳細キー情報を作成して返します。
+     *
+     * @param entities 給付実績種類詳細エンティティ
+     * @param キー情報 給付実績キー情報
+     * @return 給付実績詳細キー情報
+     */
+    public static KyufuJissekiDetailKeyInfo to給付実績詳細キー(List<DbV3016KyufujissekiShuruiDetailEntity> entities, KyufuJissekiKeyInfo キー情報) {
+        if (entities == null || entities.isEmpty()) {
+            return null;
+        }
+
+        DbV3016KyufujissekiShuruiDetailEntity entity = entities.get(0);
+        return new KyufuJissekiDetailKeyInfo(
+                entity.getKokanShikibetsuNo(),
+                キー情報.get入力識別番号(),
+                entity.getRecodeShubetsuCode(),
+                entity.getHokenshaNo(),
+                キー情報.get被保番号(),
+                キー情報.getサービス提供年月(),
+                entity.getJigyoshoNo(),
+                entity.getToshiNo(),
+                to対象サービス種類リスト(entities));
+    }
+
+    private static List<ServiceTeikyoYMListOfServiceShurui> to対象サービス種類リスト(List<DbV3016KyufujissekiShuruiDetailEntity> entities) {
+
+        List<JigyoshaNo> jigyoshaNoList = new ArrayList<>();
+        List<JigyoshaNoListOfServiceTeikyoYM> teikyoYMList = new ArrayList<>();
+        List<ServiceTeikyoYMListOfServiceShurui> shuruiCodeList = new ArrayList<>();
+
+        for (int index = 0; index < entities.size(); index++) {
+
+            jigyoshaNoList.add(entities.get(index).getJigyoshoNo());
+
+            boolean last = (index == (entities.size() - 1));
+
+            ServiceTeikyoYM teikyoYM = entities.get(index).getServiceTeikyoYM();
+            ServiceTeikyoYM nextTeikyoYM = !last ? entities.get(index + 1).getServiceTeikyoYM() : null;
+            if (last || !teikyoYM.equals(nextTeikyoYM)) {
+                teikyoYMList.add(new JigyoshaNoListOfServiceTeikyoYM(teikyoYM, jigyoshaNoList));
+                jigyoshaNoList = new ArrayList<>();
+            }
+
+            ServiceShuruiCode shuruiCode = entities.get(index).getServiceSyuruiCode();
+            ServiceShuruiCode nextShuruiCode = !last ? entities.get(index + 1).getServiceSyuruiCode() : null;
+            if (last || !shuruiCode.equals(nextShuruiCode)) {
+                shuruiCodeList.add(new ServiceTeikyoYMListOfServiceShurui(shuruiCode, teikyoYMList));
+                jigyoshaNoList = new ArrayList<>();
+                teikyoYMList = new ArrayList<>();
+            }
+
+        }
+
+        return shuruiCodeList;
     }
 
     /**

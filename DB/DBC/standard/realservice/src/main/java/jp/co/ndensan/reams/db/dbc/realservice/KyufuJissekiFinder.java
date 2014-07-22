@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiKihonDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiMeisaiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiShafukuKeigenDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiShukeiDac;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.KyufuJissekiServiceDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KyufuJissekiFinder {
 
+    private final KyufuJissekiServiceDac serviceDac;
     private final IKyufuJissekiKihonDac kihonDac;
     private final IKyufuJissekiMeisaiDac meisaiDac;
     private final IKyufuJissekiShukeiDac shukeiDac;
@@ -35,6 +37,7 @@ public class KyufuJissekiFinder {
      * InstanceProviderを用いてDacのインスタンスを生成し、メンバ変数に保持します。
      */
     public KyufuJissekiFinder() {
+        serviceDac = InstanceProvider.create(KyufuJissekiServiceDac.class);
         kihonDac = InstanceProvider.create(IKyufuJissekiKihonDac.class);
         meisaiDac = InstanceProvider.create(IKyufuJissekiMeisaiDac.class);
         shukeiDac = InstanceProvider.create(IKyufuJissekiShukeiDac.class);
@@ -50,10 +53,12 @@ public class KyufuJissekiFinder {
      * @param shafukuDac 給付実績社会福祉法人軽減額Dac
      */
     KyufuJissekiFinder(
+            KyufuJissekiServiceDac serviceDac,
             IKyufuJissekiKihonDac kihonDac,
             IKyufuJissekiMeisaiDac meisaiDac,
             IKyufuJissekiShukeiDac shukeiDac,
             IKyufuJissekiShafukuKeigenDac shafukuDac) {
+        this.serviceDac = serviceDac;
         this.kihonDac = kihonDac;
         this.meisaiDac = meisaiDac;
         this.shukeiDac = shukeiDac;
@@ -67,7 +72,10 @@ public class KyufuJissekiFinder {
      * @return 詳細キー情報
      */
     public KyufuJissekiDetailKeyInfo get給付実績詳細キー(KyufuJissekiKeyInfo キー情報) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return KyufuJissekiMapper.to給付実績詳細キー(serviceDac.select(
+                キー情報.get被保番号(),
+                キー情報.getサービス提供期間().getFrom(),
+                キー情報.getサービス提供期間().getTo()), キー情報);
     }
 
     /**
@@ -89,11 +97,9 @@ public class KyufuJissekiFinder {
                 詳細キー情報.get交換情報識別番号(),
                 詳細キー情報.get入力識別番号().getInputShikibetsuNoCode(),
                 詳細キー情報.getレコード種別コード(),
-                詳細キー情報.get給付実績情報作成区分().getCode(),
                 詳細キー情報.get証記載保険者番号(),
                 詳細キー情報.get被保番号(),
                 詳細キー情報.getサービス提供年月().value(),
-                詳細キー情報.get給付実績区分().getCode(),
                 詳細キー情報.get事業所番号(),
                 詳細キー情報.get通番()));
     }

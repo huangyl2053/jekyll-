@@ -40,11 +40,9 @@ public class KyufuJissekiKihonDacTest extends DbcTestDacBase {
     private static final KokanShikibetsuNo 交換情報識別番号_データあり = new KokanShikibetsuNo(new RString("1234"));
     private static final InputShikibetsuNoCode 入力識別番号 = new InputShikibetsuNoCode(new Code("0001"));
     private static final RString レコード種別コード = new RString("02");
-    private static final RString 給付実績情報作成区分コード = new RString("1");
     private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("00000003"));
     private static final KaigoHihokenshaNo 被保番号 = new KaigoHihokenshaNo(new RString("0000000004"));
     private static final FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth("201401");
-    private static final RString 給付実績区分コード = new RString("2");
     private static final JigyoshaNo 事業所番号 = new JigyoshaNo(new RString("0000000005"));
     private static final ToshiNo 通番 = new ToshiNo(new RString("0000000006"));
 
@@ -61,11 +59,9 @@ public class KyufuJissekiKihonDacTest extends DbcTestDacBase {
                     交換情報識別番号_データなし,
                     入力識別番号,
                     レコード種別コード,
-                    給付実績情報作成区分コード,
                     証記載保険者番号,
                     被保番号,
                     サービス提供年月,
-                    給付実績区分コード,
                     事業所番号,
                     通番), nullValue());
         }
@@ -77,11 +73,9 @@ public class KyufuJissekiKihonDacTest extends DbcTestDacBase {
                     交換情報識別番号_データあり,
                     入力識別番号,
                     レコード種別コード,
-                    給付実績情報作成区分コード,
                     証記載保険者番号,
                     被保番号,
                     サービス提供年月,
-                    給付実績区分コード,
                     事業所番号,
                     通番).getKokanShikibetsuNo(), is(交換情報識別番号_データあり));
         }

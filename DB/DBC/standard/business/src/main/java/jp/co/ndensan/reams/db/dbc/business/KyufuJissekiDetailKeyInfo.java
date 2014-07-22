@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuJissekiKubun;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
@@ -30,8 +28,6 @@ public class KyufuJissekiDetailKeyInfo {
     private final KaigoHihokenshaNo 被保番号;
     private final ServiceTeikyoYM サービス提供年月;
     private final JigyoshaNo 事業所番号;
-    private final KyufuSakuseiKubun 給付実績情報作成区分;
-    private final KyufuJissekiKubun 給付実績区分;
     private final ToshiNo 通番;
     private final List<ServiceTeikyoYMListOfServiceShurui> 対象サービス種類リスト;
 
@@ -45,8 +41,6 @@ public class KyufuJissekiDetailKeyInfo {
      * @param 被保番号 被保番号
      * @param サービス提供年月 サービス提供年月
      * @param 事業所番号 事業所番号
-     * @param 給付実績情報作成区分 給付実績情報作成区分
-     * @param 給付実績区分 給付実績区分
      * @param 通番 通番
      * @param 対象サービス種類リスト 対象サービス種類リスト
      */
@@ -58,8 +52,6 @@ public class KyufuJissekiDetailKeyInfo {
             KaigoHihokenshaNo 被保番号,
             ServiceTeikyoYM サービス提供年月,
             JigyoshaNo 事業所番号,
-            KyufuSakuseiKubun 給付実績情報作成区分,
-            KyufuJissekiKubun 給付実績区分,
             ToshiNo 通番,
             List<ServiceTeikyoYMListOfServiceShurui> 対象サービス種類リスト) {
         this.交換情報識別番号 = 交換情報識別番号;
@@ -69,8 +61,6 @@ public class KyufuJissekiDetailKeyInfo {
         this.被保番号 = 被保番号;
         this.サービス提供年月 = サービス提供年月;
         this.事業所番号 = 事業所番号;
-        this.給付実績情報作成区分 = 給付実績情報作成区分;
-        this.給付実績区分 = 給付実績区分;
         this.通番 = 通番;
         this.対象サービス種類リスト = 対象サービス種類リスト;
     }
@@ -136,24 +126,6 @@ public class KyufuJissekiDetailKeyInfo {
      */
     public JigyoshaNo get事業所番号() {
         return 事業所番号;
-    }
-
-    /**
-     * 給付実績情報作成区分を返します。
-     *
-     * @return 給付実績情報作成区分
-     */
-    public KyufuSakuseiKubun get給付実績情報作成区分() {
-        return 給付実績情報作成区分;
-    }
-
-    /**
-     * 給付実績区分を返します。
-     *
-     * @return 給付実績区分
-     */
-    public KyufuJissekiKubun get給付実績区分() {
-        return 給付実績区分;
     }
 
     /**

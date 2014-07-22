@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbc.entity.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiMeisai;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigen;
@@ -16,13 +19,22 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3018KyufujissekiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3017KyufujissekiKihonEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3018KyufujissekiMeisaiEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3033KyufujissekiShukeiEntityMock;
+import jp.co.ndensan.reams.db.dbc.entity.helper.KyufujissekiShuruiDetailEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -42,6 +54,66 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(Enclosed.class)
 public class KyufuJissekiMapperTest extends DbcTestBase {
+
+    public static class to給付実績詳細キー extends DbcTestBase {
+
+        private KyufuJissekiDetailKeyInfo result;
+
+        private static final KokanShikibetsuNo 交換情報識別番号 = new KokanShikibetsuNo(new RString("1137"));
+        private static final InputShikibetsuNo 入力識別番号
+                = new InputShikibetsuNo(new Code(new RString("7131")), new RString("居宅介護サービス"), new RString("居宅介護サービス"));
+        private static final RString レコード種別コード = new RString("01");
+        private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("00135985"));
+        private static final KaigoHihokenshaNo 被保番号 = new KaigoHihokenshaNo(new RString("0000000019"));
+        private static final ServiceTeikyoYM サービス提供年月 = new ServiceTeikyoYM(new FlexibleYearMonth("201407"));
+        private static final JigyoshaNo 事業所番号 = new JigyoshaNo(new RString("1258743695"));
+        private static final ToshiNo 通番 = new ToshiNo(new RString("568"));
+
+        @Before
+        public void setUp() {
+            result = KyufuJissekiMapper.to給付実績詳細キー(createDbV3016KyufujissekiShuruiDetailEntityList(), create給付実績キー情報());
+        }
+
+        @Test
+        public void 交換識別番号の設定がある時_to給付実績詳細キー_get交換識別番号は_設定値を返す() {
+            assertThat(result.get交換情報識別番号(), is(交換情報識別番号));
+        }
+
+        @Test
+        public void 入力識別番号の設定がある時_to給付実績詳細キー_get入力識別番号は_設定値を返す() {
+            assertThat(result.get入力識別番号(), is(入力識別番号));
+        }
+
+        @Test
+        public void レコード種別コードの設定がある時_to給付実績詳細キー_getレコード種別コードは_設定値を返す() {
+            assertThat(result.getレコード種別コード(), is(レコード種別コード));
+        }
+
+        @Test
+        public void 証記載保険者番号の設定がある時_to給付実績詳細キー_get証記載保険者番号は_設定値を返す() {
+            assertThat(result.get証記載保険者番号(), is(証記載保険者番号));
+        }
+
+        @Test
+        public void 被保険者番号の設定がある時_to給付実績詳細キー_get被保険者番号は_設定値を返す() {
+            assertThat(result.get被保番号(), is(被保番号));
+        }
+
+        @Test
+        public void サービス提供年月の設定がある時_to給付実績詳細キー_getサービス提供年月は_設定値を返す() {
+            assertThat(result.getサービス提供年月(), is(サービス提供年月));
+        }
+
+        @Test
+        public void 事業者番号の設定がある時_to給付実績詳細キー_get事業者番号は_設定値を返す() {
+            assertThat(result.get事業所番号(), is(事業所番号));
+        }
+
+        @Test
+        public void 通番の設定がある時_to給付実績詳細キー_get通番は_設定値を返す() {
+            assertThat(result.get通番(), is(通番));
+        }
+    }
 
     public static class to給付実績基本 extends DbcTestBase {
 
@@ -529,5 +601,21 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
         public void 審査年月の設定がある時_to給付実績社会福祉法人軽減額List_get審査年月は_設定値を返す() {
             assertThat(result.get審査年月(), is(審査年月));
         }
+    }
+
+    private static List<DbV3016KyufujissekiShuruiDetailEntity> createDbV3016KyufujissekiShuruiDetailEntityList() {
+        DbV3016KyufujissekiShuruiDetailEntity entity = KyufujissekiShuruiDetailEntityGenerator.createDbV3016KyufujissekiShuruiDetailEntity();
+        List<DbV3016KyufujissekiShuruiDetailEntity> list = new ArrayList<>();
+        list.add(entity);
+        return list;
+    }
+
+    private static KyufuJissekiKeyInfo create給付実績キー情報() {
+        return new KyufuJissekiKeyInfo(
+                new KaigoHihokenshaNo(new RString("0000000019")),
+                new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth("201401")), new ServiceTeikyoYM(new FlexibleYearMonth("201412"))),
+                new InputShikibetsuNo(new Code(new RString("7131")), new RString("居宅介護サービス"), new RString("居宅介護サービス")),
+                new ServiceShuruiCode(new RString("11")),
+                new ServiceTeikyoYM(new FlexibleYearMonth("201407")));
     }
 }
