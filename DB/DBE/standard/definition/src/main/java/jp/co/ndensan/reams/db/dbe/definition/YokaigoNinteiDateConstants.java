@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8187 久保田 英男
  */
-public final class YokaigoninteiDateConstants {
+public final class YokaigoNinteiDateConstants {
 
     /**
      * 認定調査完了年月日の初期状態の日付を表します。
@@ -34,7 +34,7 @@ public final class YokaigoninteiDateConstants {
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
      */
-    private YokaigoninteiDateConstants() {
+    private YokaigoNinteiDateConstants() {
     }
 
     static {

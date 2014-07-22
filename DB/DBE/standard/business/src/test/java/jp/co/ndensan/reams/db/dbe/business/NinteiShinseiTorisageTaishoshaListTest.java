@@ -85,7 +85,7 @@ public class NinteiShinseiTorisageTaishoshaListTest extends TestBase {
 //        NinteiShinseiTorisage 認定申請取下げ = mock(NinteiShinseiTorisage.class);
 
         NinteiShinseiTorisage 認定申請取下げ = new NinteiShinseiTorisage(TorisageKubun.認定申請有効,
-                new RString("取下げ理由"), new FlexibleDate("00000000"), ShinsaKeizokuKubun.継続する);
+                new TorisageRiyu(new RString("取下げ理由")), new FlexibleDate("00000000"), ShinsaKeizokuKubun.継続する);
 
         return new NinteiShinseiTorisageTaishosha(申請書管理番号, 証記載保険者番号,
                 被保険者番号, 認定申請年月日, 認定申請区分_申請時コード, 認定申請取下げ);

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author N1013 松本直樹
  */
+//TODO n3327 三浦凌 共通の発番ロジックを使う様になったのでた、このクラスは必要ない。
 public class HatsubanJoho implements IDbColumnMappable {
 
     private RString 発番;

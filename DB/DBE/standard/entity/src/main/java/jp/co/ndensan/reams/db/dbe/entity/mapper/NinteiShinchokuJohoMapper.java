@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -29,9 +29,9 @@ public final class NinteiShinchokuJohoMapper {
      * @param entity 認定進捗情報エンティティ
      * @return 認定進捗情報
      */
-    public static YokaigoninteiProgress toNinteiShinchokuJoho(DbT5005NinteiShinchokuJohoEntity entity) {
+    public static YokaigoNinteiProgress toNinteiShinchokuJoho(DbT5005NinteiShinchokuJohoEntity entity) {
         requireNonNull(entity, Messages.E00003.replace("認定進捗情報エンティティ", "認定進捗情報").getMessage());
-        return new YokaigoninteiProgress(
+        return new YokaigoNinteiProgress(
                 entity.getShinseishoKanriNo(),
                 entity.getNinteiShinseiJohoTorokuYMD(),
                 ConsentsToEnkitsuchiHakko.toValue(entity.isEnkitsuchiDoiUmuKubun()),
@@ -57,7 +57,7 @@ public final class NinteiShinchokuJohoMapper {
      * @param yokaigoninteiProgress 認定進捗情報
      * @return 認定進捗情報エンティティ
      */
-    public static DbT5005NinteiShinchokuJohoEntity toNinteiShinchokuJohoEntity(YokaigoninteiProgress yokaigoninteiProgress) {
+    public static DbT5005NinteiShinchokuJohoEntity toNinteiShinchokuJohoEntity(YokaigoNinteiProgress yokaigoninteiProgress) {
         requireNonNull(yokaigoninteiProgress, Messages.E00003.replace("認定進捗情報", "認定進捗情報エンティティ").getMessage());
         DbT5005NinteiShinchokuJohoEntity entity = new DbT5005NinteiShinchokuJohoEntity();
 

@@ -20,7 +20,6 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
 
 /**
  * 要介護認定申請取下げ対象者クラスのテストです。
@@ -32,18 +31,13 @@ public class NinteiShinseiTorisageTaishoshaTest extends TestBase {
 
     public static class コンストラクタのテスト {
 
-//        private ShinseishoKanriNo 申請書管理No = mock(ShinseishoKanriNo.class);
-//        private ShoKisaiHokenshaNo 証記載保険者番号 = mock(ShoKisaiHokenshaNo.class);
-//        private KaigoHihokenshaNo 被保険者番号 = mock(KaigoHihokenshaNo.class);
-//        private FlexibleDate 認定申請年月日 = mock(FlexibleDate.class);
-        private ShinseishoKanriNo 申請書管理No = new ShinseishoKanriNo(new RString("0000000001"));
-        private ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("20205"));
-        private KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("0000000001"));
-        private FlexibleDate 認定申請年月日 = new FlexibleDate("00000000");
-        private NinteiShinseiKubunShinsei 認定申請区分_申請時コード = NinteiShinseiKubunShinsei.新規申請;
-//        private NinteiShinseiTorisage 認定申請取下げ = mock(NinteiShinseiTorisage.class);
-        private NinteiShinseiTorisage 認定申請取下げ = new NinteiShinseiTorisage(TorisageKubun.認定申請有効,
-                new RString("取下げ理由"), new FlexibleDate("00000000"), ShinsaKeizokuKubun.継続する);
+        private final ShinseishoKanriNo 申請書管理No = new ShinseishoKanriNo(new RString("0000000001"));
+        private final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("20205"));
+        private final KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("0000000001"));
+        private final FlexibleDate 認定申請年月日 = new FlexibleDate("00000000");
+        private final NinteiShinseiKubunShinsei 認定申請区分_申請時コード = NinteiShinseiKubunShinsei.新規申請;
+        private final NinteiShinseiTorisage 認定申請取下げ = new NinteiShinseiTorisage(TorisageKubun.認定申請有効,
+                new TorisageRiyu(new RString("取下げ理由")), new FlexibleDate("00000000"), ShinsaKeizokuKubun.継続する);
 
         @Test
         public void 必須項目が渡されたとき_インスタンスが生成される() {

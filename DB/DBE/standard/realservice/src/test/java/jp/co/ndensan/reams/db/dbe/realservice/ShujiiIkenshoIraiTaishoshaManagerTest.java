@@ -11,24 +11,26 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KojinTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
+import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoSakuseiIraiMock;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoIraiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -53,7 +55,7 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
     private static IKojinFinder kojinFinder;
     private static ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager;
     private static KaigoIryoKikanFinder kaigoIryoKikanFinder;
-    private static YokaigoninteiProgressManager yokaigoninteiProgressManager;
+    private static YokaigoNinteiProgressManager yokaigoninteiProgressManager;
     private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
     private static final RString 支所コード = new RString("0002");
     private static List<ShujiiIkenshoIraiTaishosha> resultList;
@@ -64,7 +66,7 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
         kojinFinder = mock(IKojinFinder.class);
         shujiiManager = mock(ShujiiIkenshoSakuseiIraiKirokuManager.class);
         kaigoIryoKikanFinder = mock(KaigoIryoKikanFinder.class);
-        yokaigoninteiProgressManager = mock(YokaigoninteiProgressManager.class);
+        yokaigoninteiProgressManager = mock(YokaigoNinteiProgressManager.class);
     }
 
     public static class get主治医意見書作成依頼対象者_引数なし extends DbeTestBase {
@@ -159,14 +161,14 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
 
         @Test
         public void save主治医意見書作成依頼完了年月日_saveが成功した時_TRUEを返す() {
-            when(yokaigoninteiProgressManager.save(any(YokaigoninteiProgress.class))).thenReturn(true);
+            when(yokaigoninteiProgressManager.save(any(YokaigoNinteiProgress.class))).thenReturn(true);
             sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
             assertThat(sut.save主治医意見書作成依頼完了年月日(主治医意見書作成依頼対象者, 主治医意見書作成依頼完了年月日), is(true));
         }
 
         @Test
         public void save主治医意見書作成依頼完了年月日_saveが失敗した時_FALSEを返す() {
-            when(yokaigoninteiProgressManager.save(any(YokaigoninteiProgress.class))).thenReturn(false);
+            when(yokaigoninteiProgressManager.save(any(YokaigoNinteiProgress.class))).thenReturn(false);
             sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
             assertThat(sut.save主治医意見書作成依頼完了年月日(主治医意見書作成依頼対象者, 主治医意見書作成依頼完了年月日), is(false));
         }
@@ -180,9 +182,9 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
             DbT5005NinteiShinchokuJohoEntity shinchokuEntity = NinteiShinchokuJohoMock.create認定進捗情報Entity();
             entity.setNinteiShinchokuJohoEntity(shinchokuEntity);
 
-            DbT5001NinteiShinseiJohoEntity shinseiEntity = NinteiShinseiJohoTestHelper.create認定申請情報Entity();
+            DbT5001NinteiShinseiJohoEntity shinseiEntity = YokaigoNinteiShinseiTestHelper.create認定申請情報Entity();
             shinseiEntity.setShoKisaiHokenshaNo(証記載保険者番号);
-            shinseiEntity.setShishoCode(支所コード);
+            shinseiEntity.setShishoCode(new ShishoCode(支所コード));
             entity.setNinteiShinseiJohoEntity(shinseiEntity);
             list.add(entity);
         }
@@ -205,7 +207,7 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
                 new ShoKisaiHokenshaNo(new RString("1234")),
                 new KaigoHihokenshaNo(new RString("1234567890")),
                 new FlexibleDate(new RString("20140101")),
-                NinteiShinseiKubunShinsei.更新申請,
+                new Code(String.valueOf(NinteiShinseiKubunShinsei.更新申請.コード())),
                 KojinTestHelper.create個人(),
                 new RString("氏名"),
                 new RString("住所"),

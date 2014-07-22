@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8187 久保田 英男
  */
-public class YokaigoninteiProgress {
+public class YokaigoNinteiProgress {
 
     private final ShinseishoKanriNo 申請書管理番号;
     private final FlexibleDate 認定申請情報登録年月日;
@@ -57,7 +57,7 @@ public class YokaigoninteiProgress {
      * @param 認定審査会完了年月日 認定審査会完了年月日
      * @param センター送信年月日 センター送信年月日
      */
-    public YokaigoninteiProgress(ShinseishoKanriNo 申請書管理番号,
+    public YokaigoNinteiProgress(ShinseishoKanriNo 申請書管理番号,
             FlexibleDate 認定申請情報登録年月日,
             ConsentsToEnkitsuchiHakko 認定延期通知発行に対する同意有無,
             FlexibleDate 認定延期通知発行年月日,

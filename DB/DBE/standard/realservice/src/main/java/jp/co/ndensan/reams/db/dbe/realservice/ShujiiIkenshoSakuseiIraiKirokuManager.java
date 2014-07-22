@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.YokaigoNinteiShinseiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiIkenshoSakuseiIraiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiIkenshoIraiJohoDac;
@@ -123,9 +123,9 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @param 申請書管理番号 申請書管理番号
      * @return 認定申請情報
      */
-    public NinteiShinseiJoho get認定申請情報(ShinseishoKanriNo 申請書管理番号) {
+    public YokaigoNinteiShinsei get認定申請情報(ShinseishoKanriNo 申請書管理番号) {
         DbT5001NinteiShinseiJohoEntity entity = shinseiDac.select(申請書管理番号);
-        return entity == null ? null : NinteishinseiJohoMapper.to認定申請情報(entity);
+        return entity == null ? null : YokaigoNinteiShinseiMapper.toYokaigoNinteiShinsei(entity);
     }
 
     /**
@@ -134,8 +134,8 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @param 認定申請情報 認定申請情報
      * @return 更新が成功した場合はtrueを返します。
      */
-    public boolean save(NinteiShinseiJoho 認定申請情報) {
-        return shinseiDac.insert(NinteishinseiJohoMapper.to認定申請情報Entity(認定申請情報)) != 0;
+    public boolean save(YokaigoNinteiShinsei 認定申請情報) {
+        return shinseiDac.insert(YokaigoNinteiShinseiMapper.toDbT5001NinteiShinseiJohoEntity(認定申請情報)) != 0;
     }
 
     private ShujiiIkenshoSakuseiIrai getShujiiIkenshoSakuseiIrai(DbT5011ShujiiIkenshoIraiJohoEntity iraiEntity) {

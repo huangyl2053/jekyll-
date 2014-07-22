@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.YokaigoninteiDateConstants;
+import jp.co.ndensan.reams.db.dbe.definition.YokaigoNinteiDateConstants;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJoho;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
@@ -39,8 +39,8 @@ public class ShujiiIkenshoTorikomiTaishoshaDac {
         return accessor.select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
-                .where(and(lt(YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD),
-                eq(YokaigoninteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD)))
+                .where(and(lt(YokaigoNinteiDateConstants.主治医意見書作成依頼未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD),
+                                eq(YokaigoNinteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD)))
                 .toList(KaigoNinteiShoriTaishoshaEntity.class);
     }
 
@@ -56,9 +56,9 @@ public class ShujiiIkenshoTorikomiTaishoshaDac {
         return accessor.select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
-                .where(and(lt(YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD),
-                eq(YokaigoninteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD),
-                eq(証記載保険者番号, DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo)))
+                .where(and(lt(YokaigoNinteiDateConstants.主治医意見書作成依頼未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD),
+                                eq(YokaigoNinteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD),
+                                eq(証記載保険者番号, DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo)))
                 .toList(KaigoNinteiShoriTaishoshaEntity.class);
     }
 
@@ -75,10 +75,10 @@ public class ShujiiIkenshoTorikomiTaishoshaDac {
         return accessor.select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
-                .where(and(lt(YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD),
-                eq(YokaigoninteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD),
-                eq(証記載保険者番号, DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo),
-                eq(支所コード, DbT5001NinteiShinseiJoho.shishoCode)))
+                .where(and(lt(YokaigoNinteiDateConstants.主治医意見書作成依頼未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD),
+                                eq(YokaigoNinteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD),
+                                eq(証記載保険者番号, DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo),
+                                eq(支所コード, DbT5001NinteiShinseiJoho.shishoCode)))
                 .toList(KaigoNinteiShoriTaishoshaEntity.class);
     }
 }

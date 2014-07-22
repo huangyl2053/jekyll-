@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -14,14 +14,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @author N8187 久保田 英男
  */
-public class YokaigoninteiProgressManager {
+public class YokaigoNinteiProgressManager {
 
     private final NinteiShinchokuJohoDac ninteiShinchokuJohoDac;
 
     /**
      * デフォルトコンストラクタです。
      */
-    public YokaigoninteiProgressManager() {
+    public YokaigoNinteiProgressManager() {
         this.ninteiShinchokuJohoDac = InstanceProvider.create(NinteiShinchokuJohoDac.class);
     }
 
@@ -30,7 +30,7 @@ public class YokaigoninteiProgressManager {
      *
      * @param ninteiShinchokuJohoDac 認定進捗情報Dac
      */
-    YokaigoninteiProgressManager(
+    YokaigoNinteiProgressManager(
             NinteiShinchokuJohoDac ninteiShinchokuJohoDac) {
         this.ninteiShinchokuJohoDac = ninteiShinchokuJohoDac;
     }
@@ -41,7 +41,7 @@ public class YokaigoninteiProgressManager {
      * @param yokaigoniteiProgress yokaigoniteiProgress
      * @return 更新結果
      */
-    public boolean save(YokaigoninteiProgress yokaigoniteiProgress) {
+    public boolean save(YokaigoNinteiProgress yokaigoniteiProgress) {
         return ninteiShinchokuJohoDac.update(NinteiShinchokuJohoMapper.toNinteiShinchokuJohoEntity(yokaigoniteiProgress)) != 0;
     }
 }

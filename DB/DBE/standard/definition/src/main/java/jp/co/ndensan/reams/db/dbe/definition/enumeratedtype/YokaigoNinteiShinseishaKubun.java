@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public enum YokaigoninteiShinseishaKubun {
+public enum YokaigoNinteiShinseishaKubun {
 
     /**
      * 本人 <br />
@@ -38,7 +38,7 @@ public enum YokaigoninteiShinseishaKubun {
     private final RString code;
     private final RString name;
 
-    private YokaigoninteiShinseishaKubun(String code) {
+    private YokaigoNinteiShinseishaKubun(String code) {
         this.code = new RString(code);
         this.name = new RString(name());
     }
@@ -67,8 +67,8 @@ public enum YokaigoninteiShinseishaKubun {
      * @param code コード
      * @return コードに対応するYokaigoninteiShinseisha
      */
-    public static YokaigoninteiShinseishaKubun toValue(RString code) {
-        for (YokaigoninteiShinseishaKubun kubun : values()) {
+    public static YokaigoNinteiShinseishaKubun toValue(RString code) {
+        for (YokaigoNinteiShinseishaKubun kubun : values()) {
             if (kubun.getCode().equals(code)) {
                 return kubun;
             }

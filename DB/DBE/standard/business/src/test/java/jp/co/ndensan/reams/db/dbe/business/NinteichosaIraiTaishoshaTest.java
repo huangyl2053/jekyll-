@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -30,12 +31,12 @@ public class NinteichosaIraiTaishoshaTest extends TestBase {
     public static class ConstructorTest extends TestBase {
 
         NinteichosaIraiTaishosha sut;
-        private YokaigoninteiProgress 認定進捗情報;
+        private YokaigoNinteiProgress 認定進捗情報;
         private ShinseishoKanriNo 申請書管理番号;
         private ShoKisaiHokenshaNo 証記載保険者番号;
         private KaigoHihokenshaNo 被保険者;
         private FlexibleDate 認定申請年月日;
-        private NinteiShinseiKubunShinsei 認定申請区分;
+        private Code 認定申請区分;
         private IKojin 個人情報;
         private RString 氏名;
         private RString 住所;
@@ -45,12 +46,12 @@ public class NinteichosaIraiTaishoshaTest extends TestBase {
 
         @Override
         public void setUp() {
-            認定進捗情報 = mock(YokaigoninteiProgress.class);
+            認定進捗情報 = mock(YokaigoNinteiProgress.class);
             申請書管理番号 = new ShinseishoKanriNo(new RString("0001"));
             証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("0001"));
             被保険者 = new KaigoHihokenshaNo(new RString("0000000001"));
             認定申請年月日 = new FlexibleDate("20140101");
-            認定申請区分 = NinteiShinseiKubunShinsei.新規申請;
+            認定申請区分 = new Code(String.valueOf(NinteiShinseiKubunShinsei.新規申請.コード()));
             個人情報 = mock(IKojin.class);
             氏名 = new RString("あああ");
             住所 = new RString("長野市AAAAAAAA");

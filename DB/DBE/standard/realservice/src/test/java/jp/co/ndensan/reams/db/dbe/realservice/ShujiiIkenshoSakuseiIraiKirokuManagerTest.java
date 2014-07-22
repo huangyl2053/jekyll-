@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiIkenshoIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.DbT5001NinteiShinseiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.DbT5011ShujiiIkenshoIraiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.KaigoDoctorMock;
-import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteiShinseiJohoMock;
+import jp.co.ndensan.reams.db.dbe.business.helper.YokaigoNinteiShinseiMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoSakuseiIraiMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
@@ -218,8 +218,8 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest extends DbeTestBase {
         return list;
     }
 
-    private static NinteiShinseiJoho createShinseiJoho() {
-        return NinteiShinseiJohoMock.getSpiedInstance();
+    private static YokaigoNinteiShinsei createShinseiJoho() {
+        return YokaigoNinteiShinseiMock.getSpiedInstance();
     }
 
     private static DbT5001NinteiShinseiJohoEntity createShinseiEntity(int flg) {
