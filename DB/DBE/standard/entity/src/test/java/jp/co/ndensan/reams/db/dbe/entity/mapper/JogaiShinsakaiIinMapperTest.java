@@ -62,7 +62,7 @@ public class JogaiShinsakaiIinMapperTest {
 
     public static class toJogaiShinsakaiIinのテスト extends DbeTestBase {
 
-        private JogaiShinsakaiIin sut;
+        private JogaiShinsakaiIin result;
 
         @Before
         public void setUp() {
@@ -71,44 +71,44 @@ public class JogaiShinsakaiIinMapperTest {
                     被保険者番号_0000100012, 管理番号_1, 除外対象審査会委員コード_12345678);
             除外対象委員Entity = new JogaiShinsakaiIinEntity(審査会委員Entity, 審査会委員除外情報Entity);
 
-            sut = JogaiShinsakaiIinMapper.toJogaiShinsakaiIin(除外対象委員Entity);
+            result = JogaiShinsakaiIinMapper.toJogaiShinsakaiIin(除外対象委員Entity);
         }
 
         @Test
         public void マッピング後の除外委員情報が持つ証記載保険者番号と_マッピング前のEntityが持つ証記載保険者番号が_一致する() {
-            assertThat(sut.get証記載保険者番号(), is(除外対象委員Entity.get除外委員情報Entity().getShoKisaiHokenshaNo()));
+            assertThat(result.get証記載保険者番号(), is(除外対象委員Entity.get除外委員情報Entity().getShoKisaiHokenshaNo()));
         }
 
         @Test
         public void マッピング後の除外委員情報が持つ被保険者番号と_マッピング前のEntityが持つ被保険者番号が_一致する() {
-            assertThat(sut.get対象被保険者番号(), is(除外対象委員Entity.get除外委員情報Entity().getHihokenshaNo()));
+            assertThat(result.get対象被保険者番号(), is(除外対象委員Entity.get除外委員情報Entity().getHihokenshaNo()));
         }
 
         @Test
         public void マッピング後の除外委員情報が持つ管理番号と_マッピング前のEntityが持つ管理番号が_一致する() {
-            assertThat(sut.get管理番号(), is(除外対象委員Entity.get除外委員情報Entity().getKanriNo()));
+            assertThat(result.get管理番号(), is(除外対象委員Entity.get除外委員情報Entity().getKanriNo()));
         }
 
         @Test
         public void マッピング後の除外委員情報が持つ除外対象審査会委員コードと_マッピング前のEntityが持つ除外対象審査会委員コードが_一致する() {
-            assertThat(sut.get除外対象審査会委員().get審査会委員コード().value(), is(除外対象委員Entity.get審査会委員Entity().getShinsakaiIinCode()));
+            assertThat(result.get除外対象審査会委員().get審査会委員コード().value(), is(除外対象委員Entity.get審査会委員Entity().getShinsakaiIinCode()));
         }
     }
 
     public static class toJogaiShinsakaiIinListのテスト extends DbeTestBase {
 
-        private JogaiShinsakaiIinList sut;
+        private JogaiShinsakaiIinList result;
 
         @Test
         public void 引数にnullが渡されたとき_空のリストが返る() {
-            sut = JogaiShinsakaiIinMapper.toJogaiShinsakaiIinList(null);
-            assertThat(sut.size(), is(0));
+            result = JogaiShinsakaiIinMapper.toJogaiShinsakaiIinList(null);
+            assertThat(result.size(), is(0));
         }
 
         @Test
         public void 要素を3つ持つ除外審査員EntityのListが渡されたとき_3件の要素を持つ除外審査会委員Listが返る() {
-            sut = JogaiShinsakaiIinMapper.toJogaiShinsakaiIinList(createJogaiIinEntityList(3));
-            assertThat(sut.size(), is(3));
+            result = JogaiShinsakaiIinMapper.toJogaiShinsakaiIinList(createJogaiIinEntityList(3));
+            assertThat(result.size(), is(3));
         }
 
         public List<JogaiShinsakaiIinEntity> createJogaiIinEntityList(int 件数) {
@@ -127,55 +127,55 @@ public class JogaiShinsakaiIinMapperTest {
 
     public static class toShinsakaiIinJogaiJohoEntityのテスト extends DbeTestBase {
 
-        private DbT5014ShinsakaiIinJogaiJohoEntity sut;
+        private DbT5014ShinsakaiIinJogaiJohoEntity result;
 
         @Before
         public void setUp() {
             除外委員 = new JogaiShinsakaiIin(証記載保険者番号_123456, 被保険者番号_0000100012, 管理番号_1, 除外対象審査会委員_12345678);
-            sut = JogaiShinsakaiIinMapper.toShinsakaiIinJogaiJohoEntity(除外委員);
+            result = JogaiShinsakaiIinMapper.toShinsakaiIinJogaiJohoEntity(除外委員);
         }
 
         @Test
         public void 引数にnullが渡されたとき_nullが返る() {
-            sut = JogaiShinsakaiIinMapper.toShinsakaiIinJogaiJohoEntity(null);
-            assertThat(sut, is(nullValue()));
+            result = JogaiShinsakaiIinMapper.toShinsakaiIinJogaiJohoEntity(null);
+            assertThat(result, is(nullValue()));
         }
 
         @Test
         public void マッピング後のEntityが持つ証記載保険者番号と_マッピング前の除外委員情報が持つ証記載保険者番号が_一致する() {
-            assertThat(sut.getShoKisaiHokenshaNo(), is(除外委員.get証記載保険者番号()));
+            assertThat(result.getShoKisaiHokenshaNo(), is(除外委員.get証記載保険者番号()));
         }
 
         @Test
         public void マッピング後のEntityが持つ被保険者番号と_マッピング前の除外委員情報が持つ被保険者番号が_一致する() {
-            assertThat(sut.getHihokenshaNo(), is(除外委員.get対象被保険者番号()));
+            assertThat(result.getHihokenshaNo(), is(除外委員.get対象被保険者番号()));
         }
 
         @Test
         public void マッピング後のEntityが持つ管理番号と_マッピング前の除外委員情報が持つ管理番号が_一致する() {
-            assertThat(sut.getKanriNo(), is(除外委員.get管理番号()));
+            assertThat(result.getKanriNo(), is(除外委員.get管理番号()));
         }
 
         @Test
         public void マッピング後のEntityが持つ除外対象審査会委員コードと_マッピング前の除外委員情報が持つ除外対象審査会委員コードが_一致する() {
-            assertThat(sut.getJogaiTaishoShinsakaiIinCode(), is(除外委員.get除外対象審査会委員().get審査会委員コード().value()));
+            assertThat(result.getJogaiTaishoShinsakaiIinCode(), is(除外委員.get除外対象審査会委員().get審査会委員コード().value()));
         }
     }
 
     public static class toShinsakaiIinJogaiJohoEntityListのテスト extends DbeTestBase {
 
-        private List<DbT5014ShinsakaiIinJogaiJohoEntity> sut;
+        private List<DbT5014ShinsakaiIinJogaiJohoEntity> result;
 
         @Test
         public void 引数にnullが渡されたとき_空のリストが返る() {
-            sut = JogaiShinsakaiIinMapper.toShinsakaiIinJogaiJohoEntityList(null);
-            assertThat(sut, is(Collections.EMPTY_LIST));
+            result = JogaiShinsakaiIinMapper.toShinsakaiIinJogaiJohoEntityList(null);
+            assertThat(result, is(Collections.EMPTY_LIST));
         }
 
         @Test
         public void 要素を3つ持つ除外審査員Listが渡されたとき_3件の要素を持つ審査会委員除外情報EntityのListが返る() {
-            sut = JogaiShinsakaiIinMapper.toShinsakaiIinJogaiJohoEntityList(createJogaiIinList(3));
-            assertThat(sut.size(), is(3));
+            result = JogaiShinsakaiIinMapper.toShinsakaiIinJogaiJohoEntityList(createJogaiIinList(3));
+            assertThat(result.size(), is(3));
         }
 
         public JogaiShinsakaiIinList createJogaiIinList(int 件数) {
