@@ -9,13 +9,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
-import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 //import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiTestEntityCreator;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -55,7 +55,7 @@ public class ShinsakaiDetailFinderTest {
 
         private ShinsakaiJohoDac create審査会情報DacMock() {
             ShinsakaiJohoDac 審査会情報Dac = mock(ShinsakaiJohoDac.class);
-            DbT5101ShinsakaiJohoEntity entity = ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990101");
+            DbT5101ShinsakaiJohoEntity entity = ShinsakaiMockEntityCreator.create審査会情報Entity(1, "19990101");
 //            when(審査会情報Dac.select(any(ShinsakaiKaisaiNo.class), any(ShinsakaiKaisaiDate.class))).thenReturn(entity);
             when(審査会情報Dac.select(any(ShinsakaiKaisaiNo.class), any(FlexibleDate.class))).thenReturn(entity);
             return 審査会情報Dac;
@@ -129,14 +129,14 @@ public class ShinsakaiDetailFinderTest {
 
     private static GogitaiDetailFinder create合議体情報FinderMock() {
         GogitaiDetailFinder 合議体情報Finder = mock(GogitaiDetailFinder.class);
-        GogitaiDetail 合議体情報 = ShinsakaiTestBusinessCreator.create合議体情報(1);
+        GogitaiDetail 合議体情報 = ShinsakaiMockBusinessCreator.create合議体情報(1);
         when(合議体情報Finder.get合議体情報(any(GogitaiNo.class), any(FlexibleDate.class))).thenReturn(合議体情報);
         return 合議体情報Finder;
     }
 
     private static ShinsakaiKaisaiBashoManager create開催場所ManagerMock() {
         ShinsakaiKaisaiBashoManager 開催場所Manager = mock(ShinsakaiKaisaiBashoManager.class);
-        ShinsakaiKaisaiBasho 合議体情報 = ShinsakaiTestBusinessCreator.create審査会開催場所("basho01");
+        ShinsakaiKaisaiBasho 合議体情報 = ShinsakaiMockBusinessCreator.create審査会開催場所("basho01");
         when(開催場所Manager.get審査会開催場所(any(ShinsakaiKaisaiBashoCode.class))).thenReturn(合議体情報);
         return 開催場所Manager;
     }
@@ -144,7 +144,7 @@ public class ShinsakaiDetailFinderTest {
     private static List<DbT5101ShinsakaiJohoEntity> create審査会情報EntityList(int 件数) {
         List<DbT5101ShinsakaiJohoEntity> list = new ArrayList<>();
         for (int i = 0; i < 件数; i++) {
-            list.add(ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990101"));
+            list.add(ShinsakaiMockEntityCreator.create審査会情報Entity(1, "19990101"));
         }
         return list;
     }

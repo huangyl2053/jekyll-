@@ -27,7 +27,7 @@ public enum DaichoType {
     適用除外者台帳("2"),
     /**
      * 台帳種別が「他市町村住所地特例者台帳」であることを表します。 <br />
-     * コード：2
+     * コード：3
      */
     他市町村住所地特例者台帳("3");
     private final RString code;

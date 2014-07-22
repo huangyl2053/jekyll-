@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity
 import jp.co.ndensan.reams.db.dbe.persistence.basic.GogitaiWariateDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.GogitaiWariateShinsakaiIinDac;
 import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -99,13 +100,13 @@ public class GogitaiWariateIinManagerTest {
         @Test
         public void 削除結果が1件だった場合_trueが返る() {
             sut = new GogitaiWariateIinManager(null, create割当DacMock(1));
-            assertThat(sut.save(create合議体割当委員(1, "19990101", "iin01")), is(true));
+            assertThat(sut.save(create合議体割当委員(1, "19990101", "00000001")), is(true));
         }
 
         @Test
         public void 削除結果が0件だった場合_falseが返る() {
             sut = new GogitaiWariateIinManager(null, create割当DacMock(0));
-            assertThat(sut.save(create合議体割当委員(1, "19990101", "iin01")), is(false));
+            assertThat(sut.save(create合議体割当委員(1, "19990101", "00000001")), is(false));
         }
 
         private GogitaiWariateDac create割当DacMock(int 更新件数) {
@@ -120,13 +121,13 @@ public class GogitaiWariateIinManagerTest {
         @Test
         public void 削除結果が1件だった場合_trueが返る() {
             sut = new GogitaiWariateIinManager(null, create割当DacMock(1));
-            assertThat(sut.remove(create合議体割当委員(1, "19990101", "iin01")), is(true));
+            assertThat(sut.remove(create合議体割当委員(1, "19990101", "00000001")), is(true));
         }
 
         @Test
         public void 削除結果が0件だった場合_falseが返る() {
             sut = new GogitaiWariateIinManager(null, create割当DacMock(0));
-            assertThat(sut.remove(create合議体割当委員(1, "19990101", "iin01")), is(false));
+            assertThat(sut.remove(create合議体割当委員(1, "19990101", "00000001")), is(false));
         }
 
         private GogitaiWariateDac create割当DacMock(int 削除件数) {
@@ -166,9 +167,9 @@ public class GogitaiWariateIinManagerTest {
 
     private static GogitaiWariateShinsakaiIinEntity create合議体割当委員Entity() {
         GogitaiWariateShinsakaiIinEntity entity = new GogitaiWariateShinsakaiIinEntity();
-        entity.set割当Entity(GogitaiMockEntityCreator.create合議体割当EntitySpy(1, "iin01", "19990101", "19991231"));
+        entity.set割当Entity(GogitaiMockEntityCreator.create合議体割当EntitySpy(1, "00000001", "19990101", "19991231"));
         entity.set合議体情報Entity(GogitaiMockEntityCreator.create合議体情報EntitySpy(1, "19990101", "19991231", "basho1"));
-        entity.set委員Entity(GogitaiMockEntityCreator.create審査会委員EntitySpy("iin01", "19800101"));
+        entity.set委員Entity(ShinsakaiMockEntityCreator.create審査会委員EntitySpy("00000001"));
         entity.set開催場所Entity(GogitaiMockEntityCreator.create開催場所EntitySpy("basho1"));
         return entity;
     }

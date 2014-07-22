@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
-import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKyukaiKubun;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCod
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiTestEntityCreator;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -60,12 +60,12 @@ public class ShinsakaiDetailMapperTest {
 
         @Before
         public void setUp() {
-            審査会情報Entity = ShinsakaiTestEntityCreator.create審査会情報Entity(開催番号_1, 開催年月日_19990101,
+            審査会情報Entity = ShinsakaiMockEntityCreator.create審査会情報Entity(開催番号_1, 開催年月日_19990101,
                     合議体番号_22, 開始時間_0830, 終了時間_1730, 開催場所番号_A001, 審査会予定定員_6, 審査会最大定員_7,
                     審査会自動割当定員_8, 審査会委員定員_9, 精神科医存在区分_存在, 合議体ダミー区分_正規, 休会区分_開催,
                     審査会資料作成年月日_20090101, 審査会割当済み人数_5);
-            開催場所 = ShinsakaiTestBusinessCreator.create審査会開催場所(開催場所番号_A001.value().toString());
-            合議体情報 = ShinsakaiTestBusinessCreator.create合議体情報(合議体番号_22.value());
+            開催場所 = ShinsakaiMockBusinessCreator.create審査会開催場所(開催場所番号_A001.value().toString());
+            合議体情報 = ShinsakaiMockBusinessCreator.create合議体情報(合議体番号_22.value());
             result = ShinsakaiDetailMapper.to審査会情報(審査会情報Entity, 開催場所, 合議体情報);
         }
 
@@ -171,8 +171,8 @@ public class ShinsakaiDetailMapperTest {
         @Before
         public void setUp() {
             審査会情報 = new ShinsakaiDetail.Builder(開催番号_1, 開催年月日_19990101, 開始時間_0830, 終了時間_1730,
-                    ShinsakaiTestBusinessCreator.create合議体情報(合議体番号_22.value()))
-                    .set審査会開催場所(ShinsakaiTestBusinessCreator.create審査会開催場所(開催場所番号_A001.value().toString()))
+                    ShinsakaiMockBusinessCreator.create合議体情報(合議体番号_22.value()))
+                    .set審査会開催場所(ShinsakaiMockBusinessCreator.create審査会開催場所(開催場所番号_A001.value().toString()))
                     .set審査会予定定員(審査会予定定員_6).set審査会最大定員(審査会最大定員_7).set審査会自動割当定員(審査会自動割当定員_8)
                     .set審査会委員定員(審査会委員定員_9).set精神科医存在区分(精神科医存在区分_存在)
                     .set合議体ダミー区分(合議体ダミー区分_正規).set審査会資料作成年月日(審査会資料作成年月日_20090101)

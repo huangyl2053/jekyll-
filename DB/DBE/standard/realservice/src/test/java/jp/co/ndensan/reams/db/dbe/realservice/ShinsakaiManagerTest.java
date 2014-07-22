@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.db.dbe.business.Shinsakai;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiList;
-import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiTestEntityCreator;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiWariateIinJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShinsakaiAndShinskaiWariateIinDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -54,7 +54,7 @@ public class ShinsakaiManagerTest {
 
         private static ShinsakaiDetailFinder create審査会情報FinderMock() {
             ShinsakaiDetailFinder 審査会情報Finder = mock(ShinsakaiDetailFinder.class);
-            ShinsakaiDetail 審査会情報 = ShinsakaiTestBusinessCreator.create審査会情報(1, "19990101");
+            ShinsakaiDetail 審査会情報 = ShinsakaiMockBusinessCreator.create審査会情報(1, "19990101");
             when(審査会情報Finder.get審査会情報(any(ShinsakaiKaisaiNo.class), any(FlexibleDate.class))).thenReturn(審査会情報);
             return 審査会情報Finder;
         }
@@ -128,14 +128,14 @@ public class ShinsakaiManagerTest {
         @Test
         public void 審査会とそこに割り当てられている委員の情報について_1件以上の情報を更新した場合_trueが返る() {
             sut = new ShinsakaiManager(null, null, null, create審査会And割当委員Dac(4));
-            Shinsakai 審査会 = ShinsakaiTestBusinessCreator.create審査会(1, "19990101");
+            Shinsakai 審査会 = ShinsakaiMockBusinessCreator.create審査会(1, "19990101");
             assertThat(sut.save(審査会), is(true));
         }
 
         @Test
         public void 審査会とそこに割り当てられている委員の情報について_更新できなかった場合_falseが返る() {
             sut = new ShinsakaiManager(null, null, null, create審査会And割当委員Dac(0));
-            Shinsakai 審査会 = ShinsakaiTestBusinessCreator.create審査会(1, "19990101");
+            Shinsakai 審査会 = ShinsakaiMockBusinessCreator.create審査会(1, "19990101");
             assertThat(sut.save(審査会), is(false));
         }
 
@@ -151,14 +151,14 @@ public class ShinsakaiManagerTest {
         @Test
         public void 審査会とそこに割り当てられている委員の情報について_1件以上の情報を削除した場合_trueが返る() {
             sut = new ShinsakaiManager(null, null, null, create審査会And割当委員Dac(5));
-            Shinsakai 審査会 = ShinsakaiTestBusinessCreator.create審査会(1, "19990101");
+            Shinsakai 審査会 = ShinsakaiMockBusinessCreator.create審査会(1, "19990101");
             assertThat(sut.remove(審査会), is(true));
         }
 
         @Test
         public void 審査会とそこに割り当てられている委員の情報について_削除できなかった場合_falseが返る() {
             sut = new ShinsakaiManager(null, null, null, create審査会And割当委員Dac(0));
-            Shinsakai 審査会 = ShinsakaiTestBusinessCreator.create審査会(1, "19990101");
+            Shinsakai 審査会 = ShinsakaiMockBusinessCreator.create審査会(1, "19990101");
             assertThat(sut.remove(審査会), is(false));
         }
 
@@ -171,7 +171,7 @@ public class ShinsakaiManagerTest {
 
     private static ShinsakaiIinManager create委員Manager() {
         ShinsakaiIinManager 委員Manager = mock(ShinsakaiIinManager.class);
-        ShinsakaiIinList 審査会委員List = ShinsakaiTestBusinessCreator.create審査会委員List("iin01", "iin02", "iin03", "iin04");
+        ShinsakaiIinList 審査会委員List = ShinsakaiMockBusinessCreator.create審査会委員List("00000001", "00000002", "00000003", "00000004");
         when(委員Manager.get審査会委員List(any(List.class))).thenReturn(審査会委員List);
         return 委員Manager;
     }
@@ -179,15 +179,15 @@ public class ShinsakaiManagerTest {
     private static List<ShinsakaiDetail> create審査会割当委員List(int 件数) {
         List<ShinsakaiDetail> list = new ArrayList<>();
         for (int i = 0; i < 件数; i++) {
-            list.add(ShinsakaiTestBusinessCreator.create審査会情報(1, "19990101"));
+            list.add(ShinsakaiMockBusinessCreator.create審査会情報(1, "19990101"));
         }
         return list;
     }
 
     private static ShinsakaiWariateIinJohoDac create割当委員情報DacMock() {
         ShinsakaiWariateIinJohoDac 割当委員情報Dac = mock(ShinsakaiWariateIinJohoDac.class);
-        List<DbT5106ShinsakaiWariateIinJohoEntity> entityList =
-                ShinsakaiTestEntityCreator.create審査会割当委員情報EntityListSpy(1, "19990101", "iin01", "iin02", "iin03", "iin04");
+        List<DbT5106ShinsakaiWariateIinJohoEntity> entityList
+                = ShinsakaiMockEntityCreator.create審査会割当委員情報EntityListSpy(1, "19990101", "00000001", "00000002", "00000003", "00000004");
         when(割当委員情報Dac.select(any(ShinsakaiKaisaiNo.class), any(FlexibleDate.class))).thenReturn(entityList);
         return 割当委員情報Dac;
     }

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.GogitaichoKubun;
+import jp.co.ndensan.reams.db.dbe.business.JogaiShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.business.JogaiShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsainKubun;
 import jp.co.ndensan.reams.db.dbe.business.Shinsakai;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiDetail;
@@ -33,6 +35,8 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -51,9 +55,9 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
  *
  * @author n8178 城間篤人
  */
-public final class ShinsakaiTestBusinessCreator {
+public final class ShinsakaiMockBusinessCreator {
 
-    private ShinsakaiTestBusinessCreator() {
+    private ShinsakaiMockBusinessCreator() {
     }
 
     /**
@@ -84,6 +88,7 @@ public final class ShinsakaiTestBusinessCreator {
      * 審査会情報を生成します。
      *
      * @param 審査会開催番号 審査会開催番号
+     * @param 審査会開催年月日 審査会開催年月日
      * @return 審査会情報
      */
     public static ShinsakaiDetail create審査会情報(int 審査会開催番号, String 審査会開催年月日) {
@@ -151,12 +156,13 @@ public final class ShinsakaiTestBusinessCreator {
      * 審査会を生成して返します。
      *
      * @param 審査会開催番号 審査会開催番号
+     * @param 審査会開催年月日 審査会開催年月日
      * @return 審査会
      */
     public static Shinsakai create審査会(int 審査会開催番号, String 審査会開催年月日) {
         List<ShinsakaiWariateIin> list = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            list.add(ShinsakaiTestBusinessCreator.create審査会割当委員(審査会開催番号, 審査会開催年月日, "A001"));
+            list.add(ShinsakaiMockBusinessCreator.create審査会割当委員(審査会開催番号, 審査会開催年月日, "00000001"));
         }
 
         return new Shinsakai(create審査会情報(審査会開催番号, 審査会開催年月日), new ShinsakaiWariateIinList(list));
@@ -182,6 +188,12 @@ public final class ShinsakaiTestBusinessCreator {
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
+    /**
+     * 審査会委員のListを生成して返します。
+     *
+     * @param 委員コードList 生成される審査会委員に振られるコードのリスト
+     * @return 審査会委員List
+     */
     public static ShinsakaiIinList create審査会委員List(String... 委員コードList) {
         List<ShinsakaiIin> list = new ArrayList<>();
         for (String 委員コード : 委員コードList) {
@@ -189,4 +201,16 @@ public final class ShinsakaiTestBusinessCreator {
         }
         return new ShinsakaiIinList(list);
     }
+
+    /**
+     * 除外対象審査会委員を生成して返します。
+     *
+     * @return 除外審査会委員
+     */
+    public static JogaiShinsakaiIin create除外対象審査会委員() {
+        ShinsakaiIin iin = create審査会委員("00000001");
+        return new JogaiShinsakaiIin(new ShoKisaiHokenshaNo(new RString("000001")),
+                new KaigoHihokenshaNo(new RString("0000000001")), 1, iin);
+    }
+
 }

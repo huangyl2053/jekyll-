@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKyukaiKubun;
@@ -53,8 +53,8 @@ public class ShinsakaiDetailTest {
             審査会開催年月日 = new FlexibleDate("19800101");
             審査会開始時間 = new TimeString("1234");
             審査会終了時間 = new TimeString("2345");
-            合議体情報 = ShinsakaiTestBusinessCreator.create合議体情報(1);
-            開催場所 = ShinsakaiTestBusinessCreator.create審査会開催場所("A001");
+            合議体情報 = ShinsakaiMockBusinessCreator.create合議体情報(1);
+            開催場所 = ShinsakaiMockBusinessCreator.create審査会開催場所("A001");
             審査会予定定員 = 5;
             審査会最大定員 = 6;
             審査会自動割当定員 = 7;
@@ -144,8 +144,8 @@ public class ShinsakaiDetailTest {
             審査会開催年月日 = new FlexibleDate("19800101");
             審査会開始時間 = new TimeString("1234");
             審査会終了時間 = new TimeString("2345");
-            合議体情報 = ShinsakaiTestBusinessCreator.create合議体情報(1);
-            開催場所 = ShinsakaiTestBusinessCreator.create審査会開催場所("A001");
+            合議体情報 = ShinsakaiMockBusinessCreator.create合議体情報(1);
+            開催場所 = ShinsakaiMockBusinessCreator.create審査会開催場所("A001");
             審査会予定定員 = 5;
             審査会最大定員 = 6;
             審査会自動割当定員 = 7;
@@ -219,7 +219,7 @@ public class ShinsakaiDetailTest {
 
         @Test
         public void 合議体情報が違う値の場合_falseが返る() {
-            sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, ShinsakaiTestBusinessCreator.create合議体情報(24))
+            sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, ShinsakaiMockBusinessCreator.create合議体情報(24))
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
                     .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
@@ -229,7 +229,7 @@ public class ShinsakaiDetailTest {
         @Test
         public void 開催場所が違う値の場合_falseが返る() {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
-                    .set審査会開催場所(ShinsakaiTestBusinessCreator.create審査会開催場所("1")).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員)
+                    .set審査会開催場所(ShinsakaiMockBusinessCreator.create審査会開催場所("1")).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員)
                     .set審査会自動割当定員(審査会自動割当定員).set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
                     .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
             assertThat(sut.equals(sut2), is(false));

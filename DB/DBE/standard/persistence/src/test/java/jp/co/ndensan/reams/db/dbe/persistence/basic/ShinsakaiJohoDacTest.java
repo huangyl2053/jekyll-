@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiTestEntityCreator;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -43,7 +43,7 @@ public class ShinsakaiJohoDacTest {
 
         @Before
         public void setUp() {
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990101", 4, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(1, "19990101", 4, "0830", "basho01"));
             開催番号_1 = new ShinsakaiKaisaiNo(1);
             開催年月日_19990101 = new FlexibleDate("19990101");
         }
@@ -67,10 +67,10 @@ public class ShinsakaiJohoDacTest {
 
         @Before
         public void setUp() {
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990101", 4, "0830", "basho01"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(2, "19990204", 6, "0830", "basho01"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(3, "19990205", 4, "0830", "basho01"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(4, "19990401", 6, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(1, "19990101", 4, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(2, "19990204", 6, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(3, "19990205", 4, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(4, "19990401", 6, "0830", "basho01"));
         }
 
         @Test
@@ -93,10 +93,10 @@ public class ShinsakaiJohoDacTest {
 
         @Before
         public void setUp() {
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990201", 6, "0830", "basho01"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(2, "19990205", 4, "0830", "basho01"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(3, "19990205", 6, "0830", "basho01"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(4, "19990312", 4, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(1, "19990201", 6, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(2, "19990205", 4, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(3, "19990205", 6, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(4, "19990312", 4, "0830", "basho01"));
         }
 
         @Test
@@ -120,10 +120,10 @@ public class ShinsakaiJohoDacTest {
 
         @Before
         public void setUp() {
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho01"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(2, "19990205", 5, "0830", "basho01"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(3, "19990208", 4, "0830", "basho01"));
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(4, "19990312", 6, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(2, "19990205", 5, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(3, "19990208", 4, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(4, "19990312", 6, "0830", "basho01"));
         }
 
         @Test
@@ -137,7 +137,7 @@ public class ShinsakaiJohoDacTest {
 
         @Test
         public void 挿入した値を取得できる() {
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho01"));
 
             ShinsakaiKaisaiNo 開催番号 = new ShinsakaiKaisaiNo(1);
             FlexibleDate 開催年月日 = new FlexibleDate("19990201");
@@ -149,8 +149,8 @@ public class ShinsakaiJohoDacTest {
 
         @Test
         public void 更新した値を取得できる() {
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho01"));
-            sut.update(ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho02"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho01"));
+            sut.update(ShinsakaiMockEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho02"));
 
             ShinsakaiKaisaiNo 開催番号 = new ShinsakaiKaisaiNo(1);
             FlexibleDate 開催年月日 = new FlexibleDate("19990201");
@@ -162,8 +162,8 @@ public class ShinsakaiJohoDacTest {
 
         @Test
         public void 削除した値は取得できない() {
-            sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho01"));
-            sut.delete(ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho01"));
+            sut.insert(ShinsakaiMockEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho01"));
+            sut.delete(ShinsakaiMockEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho01"));
 
             ShinsakaiKaisaiNo 開催番号 = new ShinsakaiKaisaiNo(1);
             FlexibleDate 開催年月日 = new FlexibleDate("19990101");

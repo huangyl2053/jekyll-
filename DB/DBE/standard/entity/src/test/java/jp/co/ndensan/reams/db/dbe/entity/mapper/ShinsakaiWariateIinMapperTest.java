@@ -10,13 +10,13 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiWariateIinList;
-import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinShukketsuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiTestEntityCreator;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -44,7 +44,7 @@ public class ShinsakaiWariateIinMapperTest {
         private ShinsakaiWariateIin result;
         private ShinsakaiKaisaiNo 開催番号_1;
         private FlexibleDate 開催年月日_19990101;
-        private ShinsakaiIinCode 審査会委員コード_iin01;
+        private ShinsakaiIinCode 審査会委員コード_00000001;
         private Code 審査員区分_shinsain01;
         private Code 合議体長区分_gogitaicho01;
         private RString 開始時間_0830;
@@ -55,18 +55,18 @@ public class ShinsakaiWariateIinMapperTest {
         public void setUp() {
             開催番号_1 = new ShinsakaiKaisaiNo(1);
             開催年月日_19990101 = new FlexibleDate("19990101");
-            審査会委員コード_iin01 = new ShinsakaiIinCode(new RString("iin01"));
+            審査会委員コード_00000001 = new ShinsakaiIinCode(new RString("00000001"));
             審査員区分_shinsain01 = new Code("shinsain01");
             合議体長区分_gogitaicho01 = new Code("gogitaicho01");
             開始時間_0830 = new RString("0830");
             終了時間_1730 = new RString("1730");
             出欠区分_1 = new RString("1");
 
-            審査会割当委員Entity = ShinsakaiTestEntityCreator.create審査会割当委員情報EntitySpy(開催番号_1.value().intValue(),
-                    開催年月日_19990101, 審査会委員コード_iin01.value(), 審査員区分_shinsain01, 合議体長区分_gogitaicho01,
+            審査会割当委員Entity = ShinsakaiMockEntityCreator.create審査会割当委員情報EntitySpy(開催番号_1.value().intValue(),
+                    開催年月日_19990101, 審査会委員コード_00000001.value(), 審査員区分_shinsain01, 合議体長区分_gogitaicho01,
                     開始時間_0830, 終了時間_1730, 出欠区分_1);
-            委員 = ShinsakaiTestBusinessCreator.create審査会委員("iin01");
-            審査会情報 = ShinsakaiTestBusinessCreator.create審査会情報(1, "19990101");
+            委員 = ShinsakaiMockBusinessCreator.create審査会委員("00000001");
+            審査会情報 = ShinsakaiMockBusinessCreator.create審査会情報(1, "19990101");
             result = ShinsakaiWariateIinMapper.to審査会割当委員(審査会割当委員Entity, 委員, 審査会情報);
         }
 
@@ -93,7 +93,7 @@ public class ShinsakaiWariateIinMapperTest {
 
         @Test
         public void 返却された審査会割当委員が持つ_委員情報の委員コードは_iin01になる() {
-            assertThat(result.get審査会委員情報().get審査会委員コード().value(), is(審査会委員コード_iin01.value()));
+            assertThat(result.get審査会委員情報().get審査会委員コード().value(), is(審査会委員コード_00000001.value()));
         }
 
         @Test
@@ -135,10 +135,10 @@ public class ShinsakaiWariateIinMapperTest {
         public void setUp() {
             開催番号 = new ShinsakaiKaisaiNo(1);
             開催年月日 = new FlexibleDate("19990101");
-            審査会割当委員EntityList = ShinsakaiTestEntityCreator.create審査会割当委員情報EntityListSpy(開催番号.value(),
-                    開催年月日.toString(), "iin01", "iin02", "iin03");
-            委員List = ShinsakaiTestBusinessCreator.create審査会委員List("iin01", "iin02", "iin03");
-            審査会情報 = ShinsakaiTestBusinessCreator.create審査会情報(開催番号.value(), 開催年月日.toString());
+            審査会割当委員EntityList = ShinsakaiMockEntityCreator.create審査会割当委員情報EntityListSpy(開催番号.value(),
+                    開催年月日.toString(), "00000001", "00000002", "00000003");
+            委員List = ShinsakaiMockBusinessCreator.create審査会委員List("00000001", "00000002", "00000003");
+            審査会情報 = ShinsakaiMockBusinessCreator.create審査会情報(開催番号.value(), 開催年月日.toString());
         }
 
         @Test
@@ -167,24 +167,24 @@ public class ShinsakaiWariateIinMapperTest {
 
         @Test(expected = IllegalArgumentException.class)
         public void 割当委員EntityListと委員Listの要素数が違うとき_IllegalArgumentExceptionが発生する() {
-            審査会割当委員EntityList =
-                    ShinsakaiTestEntityCreator.create審査会割当委員情報EntityListSpy(開催番号.value(),
-                    開催年月日.toString(), "iin01", "iin02", "iin03");
-            委員List = ShinsakaiTestBusinessCreator.create審査会委員List("iin01", "iin02");
+            審査会割当委員EntityList
+                    = ShinsakaiMockEntityCreator.create審査会割当委員情報EntityListSpy(開催番号.value(),
+                            開催年月日.toString(), "00000001", "00000002", "00000003");
+            委員List = ShinsakaiMockBusinessCreator.create審査会委員List("00000001", "00000002");
             result = ShinsakaiWariateIinMapper.to審査会割当委員List(審査会割当委員EntityList, 委員List, 審査会情報);
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 割当委員EntityListと委員Listの要素間に_委員コードが一致しない要素が存在するとき_IllegalArgumentExceptionが発生する() {
-            審査会割当委員EntityList =
-                    ShinsakaiTestEntityCreator.create審査会割当委員情報EntityListSpy(開催番号.value(),
-                    開催年月日.toString(), "iin01", "iin04", "iin03");
-            委員List = ShinsakaiTestBusinessCreator.create審査会委員List("iin01", "iin02", "iin03");
+            審査会割当委員EntityList
+                    = ShinsakaiMockEntityCreator.create審査会割当委員情報EntityListSpy(開催番号.value(),
+                            開催年月日.toString(), "00000001", "00000004", "00000003");
+            委員List = ShinsakaiMockBusinessCreator.create審査会委員List("00000001", "00000002", "00000003");
             result = ShinsakaiWariateIinMapper.to審査会割当委員List(審査会割当委員EntityList, 委員List, 審査会情報);
         }
 
         public void 返却された審査会割当委員Listと_引数から渡された委員Listは_審査会委員コードがiin01の要素をそれぞれ持つ() {
-            ShinsakaiIinCode 委員コード = new ShinsakaiIinCode(new RString("iin01"));
+            ShinsakaiIinCode 委員コード = new ShinsakaiIinCode(new RString("00000001"));
             result = ShinsakaiWariateIinMapper.to審査会割当委員List(審査会割当委員EntityList, 委員List, 審査会情報);
 
             ShinsakaiIin iin1 = result.get審査会割当委員(開催番号, 委員コード).get審査会委員情報();
@@ -193,7 +193,7 @@ public class ShinsakaiWariateIinMapperTest {
         }
 
         public void 返却された審査会割当委員Listと_引数から渡された委員Listは_審査会委員コードがiin02の要素をそれぞれ持つ() {
-            ShinsakaiIinCode 委員コード = new ShinsakaiIinCode(new RString("iin02"));
+            ShinsakaiIinCode 委員コード = new ShinsakaiIinCode(new RString("00000002"));
             result = ShinsakaiWariateIinMapper.to審査会割当委員List(審査会割当委員EntityList, 委員List, 審査会情報);
 
             ShinsakaiIin iin1 = result.get審査会割当委員(開催番号, 委員コード).get審査会委員情報();
@@ -202,7 +202,7 @@ public class ShinsakaiWariateIinMapperTest {
         }
 
         public void 返却された審査会割当委員Listと_引数から渡された委員Listは_審査会委員コードがiin03の要素をそれぞれ持つ() {
-            ShinsakaiIinCode 委員コード = new ShinsakaiIinCode(new RString("iin03"));
+            ShinsakaiIinCode 委員コード = new ShinsakaiIinCode(new RString("00000003"));
             result = ShinsakaiWariateIinMapper.to審査会割当委員List(審査会割当委員EntityList, 委員List, 審査会情報);
 
             ShinsakaiIin iin1 = result.get審査会割当委員(開催番号, 委員コード).get審査会委員情報();
@@ -217,7 +217,7 @@ public class ShinsakaiWariateIinMapperTest {
         private ShinsakaiWariateIin 割当委員;
         private int 審査会開催番号_1;
         private FlexibleDate 審査会開催年月日_19990101;
-        private ShinsakaiIinCode 審査会委員コード_iin01;
+        private ShinsakaiIinCode 審査会委員コード_00000001;
         private Code 審査員区分_S001;
         private Code 合議体長区分_G001;
         private TimeString 開始時間_0830;
@@ -228,15 +228,15 @@ public class ShinsakaiWariateIinMapperTest {
         public void setUp() {
             審査会開催番号_1 = 1;
             審査会開催年月日_19990101 = new FlexibleDate("19990101");
-            審査会委員コード_iin01 = new ShinsakaiIinCode(new RString("iin01"));
+            審査会委員コード_00000001 = new ShinsakaiIinCode(new RString("00000001"));
             審査員区分_S001 = new Code("S001");
             合議体長区分_G001 = new Code("G001");
             開始時間_0830 = new TimeString("0830");
             終了時間_2359 = new TimeString("2359");
             出欠区分_出席 = ShinsakaiIinShukketsuKubun.出席;
 
-            割当委員 = ShinsakaiTestBusinessCreator.create審査会割当委員(審査会開催番号_1, 審査会開催年月日_19990101.toString(),
-                    審査会委員コード_iin01.value().toString(), 審査員区分_S001, 合議体長区分_G001, 開始時間_0830,
+            割当委員 = ShinsakaiMockBusinessCreator.create審査会割当委員(審査会開催番号_1, 審査会開催年月日_19990101.toString(),
+                    審査会委員コード_00000001.value().toString(), 審査員区分_S001, 合議体長区分_G001, 開始時間_0830,
                     終了時間_2359, 出欠区分_出席);
             result = ShinsakaiWariateIinMapper.to審査員割当委員Entity(割当委員);
         }
@@ -253,7 +253,7 @@ public class ShinsakaiWariateIinMapperTest {
 
         @Test
         public void 返却された割当委員Entityが持つ_審査会委員コードは_iin01になる() {
-            assertThat(result.getShinsakaiIinCode(), is(審査会委員コード_iin01.value()));
+            assertThat(result.getShinsakaiIinCode(), is(審査会委員コード_00000001.value()));
         }
 
         @Test
@@ -289,7 +289,7 @@ public class ShinsakaiWariateIinMapperTest {
 
         @Test
         public void 要素数が3件の割当委員が渡されたとき_3件の要素を持つ() {
-            割当委員List = ShinsakaiTestBusinessCreator.create審査会割当委員List(1, "19990101", "iin01", "iin02", "iin03");
+            割当委員List = ShinsakaiMockBusinessCreator.create審査会割当委員List(1, "19990101", "00000001", "00000002", "00000003");
             result = ShinsakaiWariateIinMapper.to審査会割当委員EntityList(割当委員List);
             assertThat(result.size(), is(3));
         }
