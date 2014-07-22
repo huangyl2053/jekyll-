@@ -57,20 +57,20 @@ public class JogaiShinsakaiIinManagerTest {
         }
     }
 
-    public static class save審査会委員除外情報 extends DbeTestBase {
+    public static class save extends DbeTestBase {
 
         @Test
         public void 保存に成功したときtrueが返る() {
             JogaiShinsakaiIin jogaiIin = ShinsakaiMockBusinessCreator.create除外対象審査会委員();
             sut = new JogaiShinsakaiIinManager(null, createMockDac(1));
-            assertThat(sut.save審査会委員除外情報(jogaiIin), is(true));
+            assertThat(sut.save(jogaiIin), is(true));
         }
 
         @Test
         public void 保存に失敗したときfalseが返る() {
             JogaiShinsakaiIin jogaiIin = ShinsakaiMockBusinessCreator.create除外対象審査会委員();
             sut = new JogaiShinsakaiIinManager(null, createMockDac(0));
-            assertThat(sut.save審査会委員除外情報(jogaiIin), is(false));
+            assertThat(sut.save(jogaiIin), is(false));
         }
 
         private ShinsakaiIinJogaiJohoDac createMockDac(int 件数) {
@@ -81,20 +81,20 @@ public class JogaiShinsakaiIinManagerTest {
 
     }
 
-    public static class remove審査会委員除外情報 extends DbeTestBase {
+    public static class remove extends DbeTestBase {
 
         @Test
         public void 削除に成功したときtrueが返る() {
             JogaiShinsakaiIin jogaiIin = ShinsakaiMockBusinessCreator.create除外対象審査会委員();
             sut = new JogaiShinsakaiIinManager(null, createMockDac(1));
-            assertThat(sut.remove審査会委員除外情報(jogaiIin), is(true));
+            assertThat(sut.remove(jogaiIin), is(true));
         }
 
         @Test
         public void 削除に失敗したときfalseが返る() {
             JogaiShinsakaiIin jogaiIin = ShinsakaiMockBusinessCreator.create除外対象審査会委員();
             sut = new JogaiShinsakaiIinManager(null, createMockDac(0));
-            assertThat(sut.remove審査会委員除外情報(jogaiIin), is(false));
+            assertThat(sut.remove(jogaiIin), is(false));
         }
 
         private ShinsakaiIinJogaiJohoDac createMockDac(int 件数) {

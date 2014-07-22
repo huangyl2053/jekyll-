@@ -47,7 +47,7 @@ public class JogaiShinsakaiIinManager {
     }
 
     /**
-     * 証記載保険者番号と被保険者番号を指定して、一人に申請者に対応する除外対象審査会委員情報をListで取得します。
+     * 証記載保険者番号と被保険者番号を指定して、一人の申請者に対応する除外対象審査会委員情報をListで取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @param 被保険者番号 被保険者番号
@@ -64,7 +64,7 @@ public class JogaiShinsakaiIinManager {
      * @param 除外対象審査会委員 除外対象審査会委員
      * @return 保存成功ならtrue
      */
-    public boolean save審査会委員除外情報(JogaiShinsakaiIin 除外対象審査会委員) {
+    public boolean save(JogaiShinsakaiIin 除外対象審査会委員) {
         DbT5014ShinsakaiIinJogaiJohoEntity entity = JogaiShinsakaiIinMapper.toShinsakaiIinJogaiJohoEntity(除外対象審査会委員);
         return shinsakaiIinJogaiJohoDac.insertOrUpdate(entity) != 0;
     }
@@ -75,7 +75,7 @@ public class JogaiShinsakaiIinManager {
      * @param 除外対象審査会委員 除外対象審査会委員
      * @return 削除成功ならtrue
      */
-    public boolean remove審査会委員除外情報(JogaiShinsakaiIin 除外対象審査会委員) {
+    public boolean remove(JogaiShinsakaiIin 除外対象審査会委員) {
         DbT5014ShinsakaiIinJogaiJohoEntity entity = JogaiShinsakaiIinMapper.toShinsakaiIinJogaiJohoEntity(除外対象審査会委員);
         return shinsakaiIinJogaiJohoDac.delete(entity) != 0;
     }
