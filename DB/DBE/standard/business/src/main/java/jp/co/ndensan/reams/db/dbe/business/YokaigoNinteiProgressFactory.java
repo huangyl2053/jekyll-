@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  *
  * @author N8187 久保田 英男
  */
-public class YokaigoninteiProgressFactory {
+public class YokaigoNinteiProgressFactory {
 
     /**
      * 要介護認定進捗情報の変更する年月日を表す列挙型です。
@@ -75,7 +75,7 @@ public class YokaigoninteiProgressFactory {
          */
         センター送信年月日;
     }
-    private final YokaigoninteiProgress progress;
+    private final YokaigoNinteiProgress progress;
     private Map<ParticularDates, FlexibleDate> mapOfDateItems;
 
     /**
@@ -83,7 +83,7 @@ public class YokaigoninteiProgressFactory {
      *
      * @param progress 要介護認定進捗情報
      */
-    public YokaigoninteiProgressFactory(YokaigoninteiProgress progress) {
+    public YokaigoNinteiProgressFactory(YokaigoNinteiProgress progress) {
         this.progress = requireNonNull(progress, Messages.E00001.replace("要介護認定進捗情報").getMessage());
         mapOfDateItems = toMapOnlyDateItems();
     }
@@ -95,13 +95,13 @@ public class YokaigoninteiProgressFactory {
      * @param date 年月日
      * @return 要介護認定進捗情報
      */
-    public YokaigoninteiProgress createYokaigoninteiPorgressWith(ParticularDates datesItem, FlexibleDate date) {
+    public YokaigoNinteiProgress createYokaigoninteiPorgressWith(ParticularDates datesItem, FlexibleDate date) {
         mapOfDateItems.put(datesItem, date);
         return toYokaigoninteiProgress(mapOfDateItems);
     }
 
-    private YokaigoninteiProgress toYokaigoninteiProgress(Map<ParticularDates, FlexibleDate> map) {
-        return new YokaigoninteiProgress(
+    private YokaigoNinteiProgress toYokaigoninteiProgress(Map<ParticularDates, FlexibleDate> map) {
+        return new YokaigoNinteiProgress(
                 progress.get申請書管理番号(),
                 map.get(ParticularDates.認定申請情報登録年月日),
                 progress.has認定延期通知発行に対する同意有無(),

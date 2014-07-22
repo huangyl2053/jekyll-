@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -125,7 +126,8 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
         entity.setShoKisaiHokenshaNo(証記載保険者番号);
         entity.setHihokenshaNo(被保険者No);
         entity.setNinteiShinseiYMD(認定申請年月日);
-        entity.setNinteiShinseiShinseijiKubunCode(認定申請区分コード_申請時);
+        entity.setNinteiShinseiShinseijiKubunCode(
+                new Code(String.valueOf(認定申請区分コード_申請時.コード())));
         entity.setTorisageKubunCode(取下げ区分.get取下げ区分コード());
         entity.setTorisageRiyu(取下げ理由);
         entity.setTorisageYMD(取下げ年月日);

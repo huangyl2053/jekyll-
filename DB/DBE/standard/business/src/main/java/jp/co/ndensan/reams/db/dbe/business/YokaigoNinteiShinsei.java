@@ -4,10 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShishoCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
@@ -22,30 +24,30 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 //TODO n8178 城間篤人 要介護認定申請記録で作成するクラスと共有するため、今後修正が入る予定 2014年2月末
 //現在のテーブルが最新でないため、自動生成だと項目が足りない。今後の修正時にまとめて修正を行い、Nullチェックなどのテストもそこで行う。
-public class NinteiShinseiJoho {
+public class YokaigoNinteiShinsei {
 
-    private ShinseishoKanriNo 申請書管理番号;
-    private ShoKisaiHokenshaNo 証記載保険者番号;
-    private RString 支所コード;
-    private KaigoHihokenshaNo 介護被保険者番号;
-    private ShikibetsuCode 識別コード;
-    private FlexibleDate 認定申請年月日;
-    private EdabanCode 枝番コード;
-    private NinteiShinseiKubunShinsei 認定申請区分_申請時;
-    private Code 認定申請区分_法令;
-    private Code 認定申請有効区分;
-    private Code 要支援申請区分;
-    private RString 認定申請理由;
-    private Code 前回要介護状態区分コード;
-    private int 前回申請有効期間;
-    private boolean 情報提供への同意有無;
-    private NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
-    private int 意見書依頼履歴番号;
-    private Code みなし要介護区分コード;
-    private boolean 延期通知有無同意;
-    private boolean 施設入所;
-    private RString 市町村連絡事項;
-    private NinteiShinseiTorisage 認定申請取下げ;
+    private final ShinseishoKanriNo 申請書管理番号;
+    private final ShoKisaiHokenshaNo 証記載保険者番号;
+    private final ShishoCode 支所コード;
+    private final KaigoHihokenshaNo 被保番号;
+    private final ShikibetsuCode 識別コード;
+    private final FlexibleDate 認定申請年月日;
+    private final EdabanCode 枝番コード;
+    private final Code 認定申請区分_申請時;
+    private final Code 認定申請区分_法令;
+    private final Code 認定申請有効区分;
+    private final Code 要支援申請区分;
+    private final NinteiShinseiRiyu 認定申請理由;
+    private final NinteiResultSimple 前回認定結果;
+    private final boolean 情報提供への同意有無;
+    private final NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
+    private final int 意見書依頼履歴番号;
+    private final Code みなし要介護区分コード;
+    private final boolean 延期通知有無同意;
+    private final boolean 施設入所;
+    private final RString 市町村連絡事項;
+    private final NinteiShinseiTorisage 認定申請取下げ;
+    private final ShinsakaiYusenWaritsukeKubun 審査会優先割付区分;
 
     /**
      * 引数からメンバを受け取るコンストラクタです。
@@ -53,7 +55,7 @@ public class NinteiShinseiJoho {
      * @param 申請書管理番号 申請書管理番号
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
-     * @param 介護被保険者番号 介護被保険者番号
+     * @param 被保番号 被保番号
      * @param 識別コード 識別コード
      * @param 認定申請年月日 認定申請年月日
      * @param 枝番コード 枝番コード
@@ -62,27 +64,26 @@ public class NinteiShinseiJoho {
      * @param 認定申請有効区分 認定申請有効区分
      * @param 要支援申請区分 要支援申請区分
      * @param 認定申請理由 認定申請理由
-     * @param 前回要介護状態区分コード 前回要介護状態区分コード
-     * @param 前回申請有効期間 前回申請有効期間
+     * @param 前回認定結果
      * @param 情報提供への同意有無 情報提供への同意有無
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 意見書依頼履歴番号 意見書依頼履歴番号
      * @param みなし要介護区分コード みなし要介護区分コード
-     * @param is延期通知有無同意 延期通知有無同意
+     * @param 延期通知発行同意有無 延期通知同意有無
      * @param is施設入所 施設入所
      * @param 市町村連絡事項 市町村連絡事項
      * @param 認定申請取下げ 認定申請取下げ
      */
-    public NinteiShinseiJoho(ShinseishoKanriNo 申請書管理番号, ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード,
-            KaigoHihokenshaNo 介護被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 認定申請年月日, EdabanCode 枝番コード,
-            NinteiShinseiKubunShinsei 認定申請区分_申請時, Code 認定申請区分_法令, Code 認定申請有効区分, Code 要支援申請区分, RString 認定申請理由,
-            Code 前回要介護状態区分コード, int 前回申請有効期間, boolean 情報提供への同意有無, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
-            int 意見書依頼履歴番号, Code みなし要介護区分コード, boolean is延期通知有無同意, boolean is施設入所,
-            RString 市町村連絡事項, NinteiShinseiTorisage 認定申請取下げ) {
+    public YokaigoNinteiShinsei(ShinseishoKanriNo 申請書管理番号, ShoKisaiHokenshaNo 証記載保険者番号, ShishoCode 支所コード,
+            KaigoHihokenshaNo 被保番号, ShikibetsuCode 識別コード, FlexibleDate 認定申請年月日, EdabanCode 枝番コード,
+            Code 認定申請区分_申請時, Code 認定申請区分_法令, Code 認定申請有効区分, Code 要支援申請区分, NinteiShinseiRiyu 認定申請理由,
+            NinteiResultSimple 前回認定結果, boolean 情報提供への同意有無, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
+            int 意見書依頼履歴番号, Code みなし要介護区分コード, boolean 延期通知発行同意有無, boolean is施設入所,
+            RString 市町村連絡事項, NinteiShinseiTorisage 認定申請取下げ, ShinsakaiYusenWaritsukeKubun 審査会優先割付区分) {
         this.申請書管理番号 = 申請書管理番号;
         this.証記載保険者番号 = 証記載保険者番号;
         this.支所コード = 支所コード;
-        this.介護被保険者番号 = 介護被保険者番号;
+        this.被保番号 = 被保番号;
         this.識別コード = 識別コード;
         this.認定申請年月日 = 認定申請年月日;
         this.枝番コード = 枝番コード;
@@ -91,16 +92,16 @@ public class NinteiShinseiJoho {
         this.認定申請有効区分 = 認定申請有効区分;
         this.要支援申請区分 = 要支援申請区分;
         this.認定申請理由 = 認定申請理由;
-        this.前回要介護状態区分コード = 前回要介護状態区分コード;
-        this.前回申請有効期間 = 前回申請有効期間;
+        this.前回認定結果 = 前回認定結果;
         this.情報提供への同意有無 = 情報提供への同意有無;
         this.認定調査依頼履歴番号 = 認定調査依頼履歴番号;
         this.意見書依頼履歴番号 = 意見書依頼履歴番号;
         this.みなし要介護区分コード = みなし要介護区分コード;
-        this.延期通知有無同意 = is延期通知有無同意;
+        this.延期通知有無同意 = 延期通知発行同意有無;
         this.施設入所 = is施設入所;
         this.市町村連絡事項 = 市町村連絡事項;
         this.認定申請取下げ = 認定申請取下げ;
+        this.審査会優先割付区分 = 審査会優先割付区分;
     }
 
     /**
@@ -135,7 +136,7 @@ public class NinteiShinseiJoho {
      *
      * @return 支所コード
      */
-    public RString get支所コード() {
+    public ShishoCode get支所コード() {
         return 支所コード;
     }
 
@@ -144,8 +145,8 @@ public class NinteiShinseiJoho {
      *
      * @return 介護被保険者番号
      */
-    public KaigoHihokenshaNo get介護被保険者番号() {
-        return 介護被保険者番号;
+    public KaigoHihokenshaNo get被保番号() {
+        return 被保番号;
     }
 
     /**
@@ -180,7 +181,7 @@ public class NinteiShinseiJoho {
      *
      * @return 申請時の認定申請区分
      */
-    public NinteiShinseiKubunShinsei get認定申請区分_申請時() {
+    public Code get認定申請区分_申請時() {
         return 認定申請区分_申請時;
     }
 
@@ -216,26 +217,17 @@ public class NinteiShinseiJoho {
      *
      * @return 認定申請理由
      */
-    public RString get認定申請理由() {
+    public NinteiShinseiRiyu get認定申請理由() {
         return 認定申請理由;
     }
 
     /**
-     * 前回要介護状態区分コードを返します。
+     * 前回認定結果を返します。
      *
-     * @return 前回要介護状態区分コード
+     * @return 前回認定結果
      */
-    public Code get前回要介護状態区分コード() {
-        return 前回要介護状態区分コード;
-    }
-
-    /**
-     * 前回申請有効期間を返します。
-     *
-     * @return 前回申請有効期間
-     */
-    public int get前回申請有効期間() {
-        return 前回申請有効期間;
+    public NinteiResultSimple get前回認定結果() {
+        return 前回認定結果;
     }
 
     /**
@@ -299,5 +291,14 @@ public class NinteiShinseiJoho {
      */
     public NinteiShinseiTorisage get認定申請取下げ() {
         return 認定申請取下げ;
+    }
+
+    /**
+     * 審査会に優先的に割り付けるかどうかの区分を返します。
+     *
+     * @return 審査会優先割付区分
+     */
+    public ShinsakaiYusenWaritsukeKubun get審査会優先割付区分() {
+        return this.審査会優先割付区分;
     }
 }

@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
+import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KojinTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaItakusakiTestHelper;
@@ -31,14 +31,10 @@ import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaFinder;
 import jp.co.ndensan.reams.ur.urf.realservice.INinteiChosainFinder;
-import jp.co.ndensan.reams.ur.urz.business.IJusho;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Name;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static org.hamcrest.CoreMatchers.is;
@@ -66,7 +62,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
     private static IKaigoJigyoshaFinder kaigoJigyoshaFinder;
     private static KaigoNinteichosainManager kaigoNinteichosainManager;
     private static INinteiChosainFinder ninteiChosainFinder;
-    private static YokaigoninteiProgressManager yokaigoninteiProgressManager;
+    private static YokaigoNinteiProgressManager yokaigoninteiProgressManager;
     private static List<NinteichosaIraiTaishosha> resultList;
     private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
     private static final RString 支所コード = new RString("1234");
@@ -80,7 +76,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
         kaigoJigyoshaFinder = mock(IKaigoJigyoshaFinder.class);
         kaigoNinteichosainManager = mock(KaigoNinteichosainManager.class);
         ninteiChosainFinder = mock(INinteiChosainFinder.class);
-        yokaigoninteiProgressManager = mock(YokaigoninteiProgressManager.class);
+        yokaigoninteiProgressManager = mock(YokaigoNinteiProgressManager.class);
     }
 
     public static class get認定調査依頼対象者 extends DbeTestBase {
@@ -200,7 +196,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
 
         @Test
         public void save認定調査依頼完了年月日_saveが成功した時_TRUEを返す() {
-            when(yokaigoninteiProgressManager.save(any(YokaigoninteiProgress.class))).thenReturn(true);
+            when(yokaigoninteiProgressManager.save(any(YokaigoNinteiProgress.class))).thenReturn(true);
             sut = new NinteichosaIraiTaishoshaManager(
                     iraiTaishoshaDac, kojinFinder, ninteichosaIraiManager, ninteichosaItakusakiManager,
                     kaigoJigyoshaFinder, kaigoNinteichosainManager, ninteiChosainFinder, yokaigoninteiProgressManager);
@@ -209,7 +205,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
 
         @Test
         public void save認定調査依頼完了年月日_saveが失敗した時_FALSEを返す() {
-            when(yokaigoninteiProgressManager.save(any(YokaigoninteiProgress.class))).thenReturn(false);
+            when(yokaigoninteiProgressManager.save(any(YokaigoNinteiProgress.class))).thenReturn(false);
             sut = new NinteichosaIraiTaishoshaManager(
                     iraiTaishoshaDac, kojinFinder, ninteichosaIraiManager, ninteichosaItakusakiManager,
                     kaigoJigyoshaFinder, kaigoNinteichosainManager, ninteiChosainFinder, yokaigoninteiProgressManager);
@@ -221,7 +217,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
         List<KaigoNinteiShoriTaishoshaEntity> list = new ArrayList<>();
         for (int i = 0; i < num; i++) {
             KaigoNinteiShoriTaishoshaEntity entity = new KaigoNinteiShoriTaishoshaEntity();
-            entity.setNinteiShinseiJohoEntity(NinteiShinseiJohoTestHelper.create認定申請情報Entity());
+            entity.setNinteiShinseiJohoEntity(YokaigoNinteiShinseiTestHelper.create認定申請情報Entity());
             entity.setNinteiShinchokuJohoEntity(NinteiShinchokuJohoMock.create認定進捗情報Entity());
             list.add(entity);
         }
@@ -251,7 +247,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
                 new ShoKisaiHokenshaNo(new RString("1234")),
                 new KaigoHihokenshaNo(new RString("1234567890")),
                 new FlexibleDate(new RString("20140101")),
-                NinteiShinseiKubunShinsei.新規申請,
+                new Code(String.valueOf(NinteiShinseiKubunShinsei.新規申請.コード())),
                 KojinTestHelper.create個人(),
                 new RString("氏名"),
                 new RString("住所"),

@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiShinchokuJohoDac;
@@ -26,7 +26,7 @@ public class YokaigoninteiProgressManagerTest extends DbeTestBase {
 
     public static class save extends DbeTestBase {
 
-        private static YokaigoninteiProgressManager sut;
+        private static YokaigoNinteiProgressManager sut;
 
         @Test
         public void 要介護認定進捗情報の保存が成功した時_saveは_TRUEを返す() {
@@ -39,13 +39,13 @@ public class YokaigoninteiProgressManagerTest extends DbeTestBase {
         }
     }
 
-    private static YokaigoninteiProgressManager createYokaigoniteiProgressManager(int flg) {
+    private static YokaigoNinteiProgressManager createYokaigoniteiProgressManager(int flg) {
         NinteiShinchokuJohoDac dac = mock(NinteiShinchokuJohoDac.class);
         when(dac.update(any(DbT5005NinteiShinchokuJohoEntity.class))).thenReturn(flg);
-        return new YokaigoninteiProgressManager(dac);
+        return new YokaigoNinteiProgressManager(dac);
     }
 
-    private static YokaigoninteiProgress createYokaigoniteiProgress() {
+    private static YokaigoNinteiProgress createYokaigoniteiProgress() {
         return NinteiShinchokuJohoMock.create認定進捗情報();
     }
 }

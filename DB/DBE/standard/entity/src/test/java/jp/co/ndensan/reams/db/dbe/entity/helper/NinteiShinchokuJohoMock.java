@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
@@ -70,8 +70,8 @@ public class NinteiShinchokuJohoMock {
      *
      * @return 認定進捗情報
      */
-    public static YokaigoninteiProgress create認定進捗情報() {
-        return new YokaigoninteiProgress(
+    public static YokaigoNinteiProgress create認定進捗情報() {
+        return new YokaigoNinteiProgress(
                 申請書管理番号,
                 認定申請情報登録年月日,
                 ConsentsToEnkitsuchiHakko.toValue(認定延期通知発行に対する同意有無),

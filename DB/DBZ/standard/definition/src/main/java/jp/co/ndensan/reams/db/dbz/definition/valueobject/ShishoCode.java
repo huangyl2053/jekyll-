@@ -19,6 +19,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class ShishoCode implements IValueObject<RString>, Comparable<ShishoCode>, IDbColumnMappable {
 
+    public static final ShishoCode NULL_VALUE;
+
+    static {
+        NULL_VALUE = new ShishoCode(RString.EMPTY);
+    }
+
     private final RString 支所コード;
 
     /**

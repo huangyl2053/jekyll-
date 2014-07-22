@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -25,7 +25,7 @@ public class NinteiShinchokuJohoMapperTest extends TestBase {
 
     public static class toNinteiShinchokuJoho extends TestBase {
 
-        YokaigoninteiProgress sut;
+        YokaigoNinteiProgress sut;
 
         @Override
         public void setUp() {

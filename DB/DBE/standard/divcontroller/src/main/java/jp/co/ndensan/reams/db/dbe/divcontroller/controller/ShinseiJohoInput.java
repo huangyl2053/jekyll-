@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoninteiShinseiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoninteiShinseishaKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiShinseiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiShinseishaKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData.Chosain;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiData.Doctor;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.YokaigoninteiShinseishaData;
@@ -161,10 +161,10 @@ public class ShinseiJohoInput {
 
         private void _onLoad() {
             List<KeyValueDataSource> dataSource = new ArrayList<>();
-            dataSource.add(new KeyValueDataSource(YokaigoninteiShinseiKubun.新規申請.getCode(),
-                    YokaigoninteiShinseiKubun.新規申請.toRString()));
-            dataSource.add(new KeyValueDataSource(YokaigoninteiShinseiKubun.更新申請.getCode(),
-                    YokaigoninteiShinseiKubun.更新申請.toRString()));
+            dataSource.add(new KeyValueDataSource(YokaigoNinteiShinseiKubun.新規申請.getCode(),
+                    YokaigoNinteiShinseiKubun.新規申請.toRString()));
+            dataSource.add(new KeyValueDataSource(YokaigoNinteiShinseiKubun.更新申請.getCode(),
+                    YokaigoNinteiShinseiKubun.更新申請.toRString()));
             div.getDdlShinseiKubunShinseiji().setDataSource(dataSource);
         }
 
@@ -245,7 +245,7 @@ public class ShinseiJohoInput {
 
         private List<KeyValueDataSource> createDataSourceForRadShinseishaKubun() {
             List<KeyValueDataSource> dataSource = new ArrayList<>();
-            for (YokaigoninteiShinseishaKubun kubun : YokaigoninteiShinseishaKubun.values()) {
+            for (YokaigoNinteiShinseishaKubun kubun : YokaigoNinteiShinseishaKubun.values()) {
                 dataSource.add(new KeyValueDataSource(kubun.getCode(), kubun.toRString()));
             }
             return dataSource;
@@ -258,7 +258,7 @@ public class ShinseiJohoInput {
         }
 
         private void _init(dgSearchResult_Row hihokensha) {
-            div.getRadShinseishaKubun().setSelectedItem(YokaigoninteiShinseishaKubun.本人.getCode());
+            div.getRadShinseishaKubun().setSelectedItem(YokaigoNinteiShinseishaKubun.本人.getCode());
             _onChange_radShinseishaKubun(hihokensha);
         }
 
@@ -291,7 +291,7 @@ public class ShinseiJohoInput {
         public void _onChange_radShinseishaKubun(dgSearchResult_Row hihokensha) {
             RadioButton shinseishaKubun = div.getRadShinseishaKubun();
             RString key = shinseishaKubun.getSelectedItem();
-            YokaigoninteiShinseishaKubun shinseisha = _toYokaigoninteiShinseishaKubun(key);
+            YokaigoNinteiShinseishaKubun shinseisha = _toYokaigoninteiShinseishaKubun(key);
             switch (shinseisha) {
                 case 本人:
                     _onChange_radShinseishaKubun_本人(hihokensha);
@@ -308,8 +308,8 @@ public class ShinseiJohoInput {
             }
         }
 
-        private YokaigoninteiShinseishaKubun _toYokaigoninteiShinseishaKubun(RString key) {
-            return YokaigoninteiShinseishaKubun.toValue(key);
+        private YokaigoNinteiShinseishaKubun _toYokaigoninteiShinseishaKubun(RString key) {
+            return YokaigoNinteiShinseishaKubun.toValue(key);
         }
 
         private void _onChange_radShinseishaKubun_本人(dgSearchResult_Row hihokensha) {
@@ -446,11 +446,11 @@ public class ShinseiJohoInput {
                     latestResult.yukoKikan().getFrom(), latestResult.yukoKikan().getTo());
             if (FlexibleDate.EMPTY.equals(latestResult.ninteiDate())) {
                 setDisplayNone(true);
-                this.shiseijiKubun.setSelectedItem(YokaigoninteiShinseiKubun.新規申請.getCode());
+                this.shiseijiKubun.setSelectedItem(YokaigoNinteiShinseiKubun.新規申請.getCode());
                 setDisplayNone_buttons_toCopyLatest(true);
             } else {
                 setDisplayNone(false);
-                this.shiseijiKubun.setSelectedItem(YokaigoninteiShinseiKubun.更新申請.getCode());
+                this.shiseijiKubun.setSelectedItem(YokaigoNinteiShinseiKubun.更新申請.getCode());
                 HihokenshaShujii.setLatestValue(shujii, hihokensha.getHihokenshaNo());
                 setDisplayNone_buttons_toCopyLatest(false);
             }
