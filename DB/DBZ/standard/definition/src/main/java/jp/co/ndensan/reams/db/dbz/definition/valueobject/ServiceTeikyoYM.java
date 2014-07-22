@@ -38,7 +38,7 @@ public class ServiceTeikyoYM implements IDbColumnMappable, IValueObject, Compara
         if (比較対象 == null) {
             return false;
         }
-        if (!(比較対象 instanceof KokanShikibetsuNo)) {
+        if (!(比較対象 instanceof ServiceTeikyoYM)) {
             return false;
         }
         return ((ServiceTeikyoYM) 比較対象).value().equals(serviceTeikyoYM);
