@@ -1,0 +1,11 @@
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+renrakusakiKubunNo,bpchar,RString,,,,,A
+shishoCode,DbUDD014ShishoCode,DbUDD014ShishoCode,,,,,A
+renrakusakiYubinNo,UDD003YubinNo,YubinNo,,,,,A
+renrakusakiTelNo,UDD026TelNo,TelNo,,,,,A
+renrakusakiJusho,UDD046AtenaJusho,AtenaJusho,,,,,A
+renrakusakiShimei,UDD042AtenaMeisho,AtenaMeisho,,,,,A
+renrakusakiKanaSimei,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,A
+renrakusakiTuzukigara,varchar,RString,,,,,A
+renrakusakiKeitaiTelNo,UDD026TelNo,TelNo,,,,,A
