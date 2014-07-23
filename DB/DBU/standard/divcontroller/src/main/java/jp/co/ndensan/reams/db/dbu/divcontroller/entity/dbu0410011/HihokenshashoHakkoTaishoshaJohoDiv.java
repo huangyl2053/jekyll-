@@ -1,17 +1,16 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * HihokenshashoHakkoTaishoshaJoho のクラスファイル 
- * 
+ * HihokenshashoHakkoTaishoshaJoho のクラスファイル
+ *
  * @author 自動生成
  */
 public class HihokenshashoHakkoTaishoshaJohoDiv extends Panel {
@@ -21,6 +20,7 @@ public class HihokenshashoHakkoTaishoshaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("HihokenshashoHakkoTaishoshaCommonJoho")
     private KaigoAtenaInfoDiv HihokenshashoHakkoTaishoshaCommonJoho;
     @JsonProperty("ccdKaigoShikakuKihon")
@@ -39,7 +39,7 @@ public class HihokenshashoHakkoTaishoshaJohoDiv extends Panel {
 
     @JsonProperty("HihokenshashoHakkoTaishoshaCommonJoho")
     public void setHihokenshashoHakkoTaishoshaCommonJoho(KaigoAtenaInfoDiv HihokenshashoHakkoTaishoshaCommonJoho) {
-        this.HihokenshashoHakkoTaishoshaCommonJoho=HihokenshashoHakkoTaishoshaCommonJoho;
+        this.HihokenshashoHakkoTaishoshaCommonJoho = HihokenshashoHakkoTaishoshaCommonJoho;
     }
 
     @JsonProperty("ccdKaigoShikakuKihon")
@@ -49,7 +49,7 @@ public class HihokenshashoHakkoTaishoshaJohoDiv extends Panel {
 
     @JsonProperty("ccdKaigoShikakuKihon")
     public void setCcdKaigoShikakuKihon(KaigoShikakuKihonDiv ccdKaigoShikakuKihon) {
-        this.ccdKaigoShikakuKihon=ccdKaigoShikakuKihon;
+        this.ccdKaigoShikakuKihon = ccdKaigoShikakuKihon;
     }
 
 }
