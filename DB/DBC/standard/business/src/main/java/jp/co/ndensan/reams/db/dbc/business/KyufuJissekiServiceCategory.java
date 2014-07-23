@@ -183,6 +183,16 @@ public class KyufuJissekiServiceCategory {
 
     }
 
+    public ServiceShuruiCode getサービス種類コード(RString サービス種類コード) {
+
+        for (serviceCodeRelation relate : relation) {
+            if (relate.shurui.toString().equals(サービス種類コード.toString())) {
+                return relate.code;
+            }
+        }
+        return null;
+    }
+
     public ServiceCategoryShurui getサービス種類タイトル(ServiceShuruiCode サービス種類コード) {
 
         for (serviceCodeRelation relate : relation) {
