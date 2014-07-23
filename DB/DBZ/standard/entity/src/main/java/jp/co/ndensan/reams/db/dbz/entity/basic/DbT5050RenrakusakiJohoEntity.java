@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import java.util.Objects;
 
 /**
@@ -32,9 +34,9 @@ public class DbT5050RenrakusakiJohoEntity implements IDbAccessable {
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private RString shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private RString hihokenshaNo;
+    private KaigoHihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString renrakusakiKubunNo;
     private RString shishoCode;
@@ -96,7 +98,7 @@ public class DbT5050RenrakusakiJohoEntity implements IDbAccessable {
      *
      * @return shoKisaiHokenshaNo
      */
-    public RString getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
@@ -105,7 +107,7 @@ public class DbT5050RenrakusakiJohoEntity implements IDbAccessable {
      *
      * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
      */
-    public void setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -114,7 +116,7 @@ public class DbT5050RenrakusakiJohoEntity implements IDbAccessable {
      *
      * @return hihokenshaNo
      */
-    public RString getHihokenshaNo() {
+    public KaigoHihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
@@ -123,7 +125,7 @@ public class DbT5050RenrakusakiJohoEntity implements IDbAccessable {
      *
      * @param hihokenshaNo hihokenshaNo
      */
-    public void setHihokenshaNo(RString hihokenshaNo) {
+    public void setHihokenshaNo(KaigoHihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 

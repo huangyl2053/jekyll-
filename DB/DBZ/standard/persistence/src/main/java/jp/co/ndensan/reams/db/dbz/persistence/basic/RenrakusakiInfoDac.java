@@ -12,7 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5050RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -37,10 +38,12 @@ public class RenrakusakiInfoDac implements IReplaceable<DbT5050RenrakusakiJohoEn
      * @return 連絡先情報EntityのList
      */
     @Transaction
-    public List<DbT5050RenrakusakiJohoEntity> select(RString hokenshaNo, RString hihoNo) {
+    public List<DbT5050RenrakusakiJohoEntity> select(ShoKisaiHokenshaNo hokenshaNo,
+            KaigoHihokenshaNo hihoNo) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5050RenrakusakiJoho.class).
-                where(and(eq(shoKisaiHokenshaNo, hokenshaNo.toString()), eq(hihokenshaNo, hihoNo.toString()))).
+                where(and(eq(shoKisaiHokenshaNo, hokenshaNo.getValue().toString()),
+                                eq(hihokenshaNo, hihoNo.value().toString()))).
                 toList(DbT5050RenrakusakiJohoEntity.class);
     }
 
