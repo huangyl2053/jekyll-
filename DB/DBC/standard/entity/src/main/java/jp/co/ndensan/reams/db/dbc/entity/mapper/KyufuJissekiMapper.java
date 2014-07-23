@@ -76,7 +76,8 @@ public final class KyufuJissekiMapper {
         for (int index = 0; index < entities.size(); index++) {
             entity = entities.get(index);
             if ((キー情報.get被保番号() == null || キー情報.get被保番号().equals(entity.getHiHokenshaNo()))
-                    && (キー情報.get入力識別番号() == null || キー情報.get入力識別番号().equals(entity.getInputShikibetsuNo()))
+                    && (キー情報.get入力識別番号() == null
+                    || キー情報.get入力識別番号().getInputShikibetsuNoCode().value().equals(entity.getInputShikibetsuNo()))
                     && (キー情報.getサービス種類コード() == null || キー情報.getサービス種類コード().equals(entity.getServiceSyuruiCode()))
                     && (キー情報.getサービス提供年月() == null || キー情報.getサービス提供年月().equals(entity.getServiceTeikyoYM()))) {
                 break;
