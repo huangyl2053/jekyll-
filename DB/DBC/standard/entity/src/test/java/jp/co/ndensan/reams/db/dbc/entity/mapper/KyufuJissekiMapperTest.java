@@ -81,7 +81,7 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
 
         @Test
         public void 入力識別番号の設定がある時_to給付実績詳細キー_get入力識別番号は_設定値を返す() {
-            assertThat(result.get入力識別番号(), is(入力識別番号));
+            assertThat(result.get入力識別番号().getInputShikibetsuNoCode(), is(入力識別番号.getInputShikibetsuNoCode()));
         }
 
         @Test
