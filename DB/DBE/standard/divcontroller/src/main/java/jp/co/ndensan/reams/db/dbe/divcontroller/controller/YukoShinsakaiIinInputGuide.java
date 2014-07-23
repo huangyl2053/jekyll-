@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.yukoshinsakaiiininputguide.YukoShinsakaiIinInputGuideDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.yukoshinsakaiiininputguide.dgYukoShinsakaiIin_Row;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiIinDac;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.realservice.ShinsakaiIinManager;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
