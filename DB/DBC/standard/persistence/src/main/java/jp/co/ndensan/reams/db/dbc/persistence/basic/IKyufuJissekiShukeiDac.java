@@ -31,14 +31,14 @@ public interface IKyufuJissekiShukeiDac extends
     /**
      * 引数の条件に該当する給付実績集計エンティティを取得します。
      *
-     * @param 交換情報識別番号
-     * @param 入力識別番号
-     * @param レコード種別コード
-     * @param 証記載保険者番号
-     * @param 被保番号
-     * @param サービス提供年月
-     * @param 事業所番号
-     * @param 通番
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 入力識別番号 入力識別番号
+     * @param レコード種別コード レコード種別コード
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 被保番号 被保番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 事業所番号 事業所番号
+     * @param 通番 通番
      * @return 給付実績集計エンティティ
      */
     @Transaction
