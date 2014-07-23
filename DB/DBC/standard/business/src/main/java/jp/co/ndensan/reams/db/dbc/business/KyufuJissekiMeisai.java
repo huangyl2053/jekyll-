@@ -66,7 +66,7 @@ public class KyufuJissekiMeisai {
             int 公費3単位,
             int 再審査回数,
             int 過誤回数,
-            FlexibleYearMonth 審査年月) throws NullPointerException {
+            FlexibleYearMonth 審査年月) {
         this.サービス = サービス;
         this.適要 = 適要;
         this.決定 = 決定;
@@ -204,7 +204,7 @@ public class KyufuJissekiMeisai {
     /**
      * 過誤回数を返します。
      *
-     * @return
+     * @return 過誤回数
      */
     public int get過誤回数() {
         return 過誤回数;

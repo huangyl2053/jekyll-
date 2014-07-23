@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business;
 
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
-
 /**
  * 給付実績の情報を保持するクラス
  *

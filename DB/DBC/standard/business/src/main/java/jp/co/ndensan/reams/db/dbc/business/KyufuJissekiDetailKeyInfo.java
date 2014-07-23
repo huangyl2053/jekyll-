@@ -31,6 +31,8 @@ public class KyufuJissekiDetailKeyInfo {
     private final ToshiNo 通番;
     private final List<ServiceTeikyoYMListOfServiceShurui> 対象サービス種類リスト;
 
+    private static final RString NOT_SUPPORT = new RString("Not supported yet.");
+
     /**
      * インスタンスを生成します。
      *
@@ -152,7 +154,7 @@ public class KyufuJissekiDetailKeyInfo {
      * @return 存在する場合はtrueを返す
      */
     public boolean isPrevMonth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORT.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -161,7 +163,7 @@ public class KyufuJissekiDetailKeyInfo {
      * @return 存在する場合はtrueを返す
      */
     public boolean isNextMonth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORT.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -170,7 +172,7 @@ public class KyufuJissekiDetailKeyInfo {
      * @return 存在する場合はtrueを返す
      */
     public boolean isPrevJigyosha() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORT.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -179,34 +181,34 @@ public class KyufuJissekiDetailKeyInfo {
      * @return 存在する場合はtrueを返す
      */
     public boolean isNextJigyosha() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORT.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
      * キー情報を前月に設定する
      */
     public void prevMonth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORT.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
      * キー情報を次月に設定する
      */
     public void nextMonth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORT.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
      * キー情報を前事業所に設定する
      */
     public void prevJigyosha() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORT.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
      * キー情報を次事業所に設定する
      */
     public void nextJigyosha() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(NOT_SUPPORT.toString()); //To change body of generated methods, choose Tools | Templates.
     }
 }

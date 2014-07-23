@@ -29,7 +29,7 @@ public class KyufuJissekiKihonKyotakuService {
     public KyufuJissekiKihonKyotakuService(
             RString 居宅サービス計画作成区分,
             JigyoshaNo 事業所番号,
-            RString 事業所名) throws NullPointerException {
+            RString 事業所名) {
         this.居宅サービス計画作成区分 = 居宅サービス計画作成区分;
         this.事業所番号 = 事業所番号;
         this.事業所名 = 事業所名;

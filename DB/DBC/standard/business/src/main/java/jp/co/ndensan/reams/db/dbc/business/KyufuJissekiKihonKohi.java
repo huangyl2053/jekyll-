@@ -37,7 +37,7 @@ public class KyufuJissekiKihonKohi {
             RString 公費２負担者番号,
             RString 公費２受給者番号,
             RString 公費３負担者番号,
-            RString 公費３受給者番号) throws NullPointerException {
+            RString 公費３受給者番号) {
         this.公費１負担者番号 = 公費１負担者番号;
         this.公費１受給者番号 = 公費１受給者番号;
         this.公費２負担者番号 = 公費２負担者番号;
@@ -58,7 +58,7 @@ public class KyufuJissekiKihonKohi {
     /**
      * 公費１受給者番号を返します。
      *
-     * @return
+     * @return 公費１
      */
     public RString get公費１受給者番号() {
         return 公費１受給者番号;

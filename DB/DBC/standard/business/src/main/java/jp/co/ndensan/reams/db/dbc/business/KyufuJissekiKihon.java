@@ -57,7 +57,7 @@ public class KyufuJissekiKihon {
             KyufuJissekiKihonServiceKikan サービス期間情報,
             KyufuJissekiKihonNyutaisho 施設入退所情報,
             KyufuJissekiKihonKyufuritsu 給付率情報,
-            KyufuJissekiKihonKohi 公費情報) throws NullPointerException {
+            KyufuJissekiKihonKohi 公費情報) {
         this.作成区分 = 作成区分;
         this.要介護度 = 要介護度;
         this.認定有効期間 = 認定有効期間;
@@ -152,7 +152,7 @@ public class KyufuJissekiKihon {
         return 施設入退所情報;
     }
 
-    /*
+    /**
      * 給付率情報を返します。
      *
      * @return 給付率情報

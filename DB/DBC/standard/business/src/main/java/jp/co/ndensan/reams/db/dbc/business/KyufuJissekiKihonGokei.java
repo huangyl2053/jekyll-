@@ -27,14 +27,14 @@ public class KyufuJissekiKihonGokei {
     /**
      * インスタンスを生成します。
      *
-     * @param 保険公費
-     * @param 前後
-     * @param サービス単位
-     * @param 保険料請求額
-     * @param 利用者負担額
-     * @param 緊急時施設療養費保険請求分合計
-     * @param 特定診療費公費請求分合計
-     * @param 特定入所者介護等請求額
+     * @param 保険公費 保険公費
+     * @param 前後 前後
+     * @param サービス単位 サービス単位
+     * @param 保険料請求額 保険料請求額
+     * @param 利用者負担額 利用者負担額
+     * @param 緊急時施設療養費保険請求分合計 緊急時施設療養費保険請求分合計
+     * @param 特定診療費公費請求分合計 特定診療費公費請求分合計
+     * @param 特定入所者介護等請求額 特定入所者介護等請求額
      */
     public KyufuJissekiKihonGokei(
             RString 保険公費,

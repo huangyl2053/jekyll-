@@ -29,7 +29,7 @@ public class KyufuJissekiKihonServiceKikan {
     public KyufuJissekiKihonServiceKikan(
             FlexibleDate 開始日,
             FlexibleDate 中止日,
-            RString 中止理由) throws NullPointerException {
+            RString 中止理由) {
         this.開始日 = 開始日;
         this.中止日 = 中止日;
         this.中止理由 = 中止理由;

@@ -78,7 +78,7 @@ public class KyufuJissekiShukei {
             Decimal 出来高本人負担額,
             int 再審査回数,
             int 過誤回数,
-            FlexibleYearMonth 審査年月) throws NullPointerException {
+            FlexibleYearMonth 審査年月) {
         this.種類 = 種類;
         this.実日数 = 実日数;
         this.計画単位 = 計画単位;
@@ -157,7 +157,7 @@ public class KyufuJissekiShukei {
     /**
      * 保険公費を返します。
      *
-     * @return
+     * @return 保険公費
      */
     public RString get保険公費() {
         return 保険公費;
@@ -229,7 +229,7 @@ public class KyufuJissekiShukei {
     /**
      * 出来高請求を返します。
      *
-     * @return
+     * @return 出来高請求
      */
     public Decimal get出来高請求() {
         return 出来高請求;
@@ -247,7 +247,7 @@ public class KyufuJissekiShukei {
     /**
      * 再審査回数を返します。
      *
-     * @return
+     * @return 再審査回数
      */
     public int get再審査回数() {
         return 再審査回数;
@@ -256,7 +256,7 @@ public class KyufuJissekiShukei {
     /**
      * 過誤回数を返します。
      *
-     * @return
+     * @return 過誤回数
      */
     public int get過誤回数() {
         return 過誤回数;

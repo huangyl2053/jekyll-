@@ -43,7 +43,7 @@ public class KyufuJissekiKihonHihokensha {
             RString 後期高齢被保番号,
             RString 国保保険者番号,
             RString 被保険者証番号,
-            RString 個人番号) throws NullPointerException {
+            RString 個人番号) {
         this.旧措置入所者特例 = 旧措置入所者特例;
         this.老人保健市町村番号 = 老人保健市町村番号;
         this.老人保健受給者番号 = 老人保健受給者番号;

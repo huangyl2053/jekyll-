@@ -31,7 +31,7 @@ public class KyufuJissekiKihonKyufuritsu {
             HokenKyufuRitsu 保険,
             HokenKyufuRitsu 公費１,
             HokenKyufuRitsu 公費２,
-            HokenKyufuRitsu 公費３) throws NullPointerException {
+            HokenKyufuRitsu 公費３) {
         this.保険 = 保険;
         this.公費１ = 公費１;
         this.公費２ = 公費２;

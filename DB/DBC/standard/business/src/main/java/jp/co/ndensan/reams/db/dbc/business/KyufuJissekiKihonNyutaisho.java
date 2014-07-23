@@ -38,7 +38,7 @@ public class KyufuJissekiKihonNyutaisho {
             int 入所実日数,
             int 外泊日数,
             RString 入所前の状況,
-            RString 退所後の状況) throws NullPointerException {
+            RString 退所後の状況) {
         this.入所日 = 入所日;
         this.退所日 = 退所日;
         this.入所実日数 = 入所実日数;
