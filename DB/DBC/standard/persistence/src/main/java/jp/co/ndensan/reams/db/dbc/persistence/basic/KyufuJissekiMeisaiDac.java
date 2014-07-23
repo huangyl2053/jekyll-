@@ -48,7 +48,7 @@ public class KyufuJissekiMeisaiDac implements IKyufuJissekiMeisaiDac {
                 .where(and(
                                 eq(kokanJohoShikibetsuNo, 交換情報識別番号),
                                 eq(inputShikibetsuNo, 入力識別番号.value()),
-                                eq(recodeShubetsuCode, レコード種別コード),
+                                //                                eq(recodeShubetsuCode, レコード種別コード),
                                 eq(shokisaiHokenshaNo, 証記載保険者番号),
                                 eq(hiHokenshaNo, 被保番号),
                                 eq(serviceTeikyoYM, サービス提供年月),

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.basic;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.InputShikibetsuNoCode;
@@ -42,18 +43,19 @@ public class KyufuJissekiKihonDac implements IKyufuJissekiKihonDac {
             JigyoshaNo 事業所番号,
             ToshiNo 通番) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.select()
+        List<DbT3017KyufujissekiKihonEntity> list = accessor.select()
                 .table(DbT3017KyufujissekiKihon.class)
                 .where(and(
                                 eq(kokanShikibetsuNo, 交換情報識別番号),
                                 eq(inputShikibetsuNo, 入力識別番号.value()),
-                                eq(recodeShubetsuCode, レコード種別コード),
+                                //                                eq(recodeShubetsuCode, レコード種別コード),
                                 eq(hokenshaNo, 証記載保険者番号),
                                 eq(hiHokenshaNo, 被保番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(jigyoshoNo, 事業所番号),
                                 eq(toshiNo, 通番)))
-                .toObject(DbT3017KyufujissekiKihonEntity.class);
+                .toList(DbT3017KyufujissekiKihonEntity.class);
+        return !list.isEmpty() ? list.get(0) : null;
     }
 
     @Override
