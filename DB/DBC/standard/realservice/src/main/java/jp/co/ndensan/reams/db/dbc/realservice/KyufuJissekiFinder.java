@@ -38,10 +38,10 @@ public class KyufuJissekiFinder {
      */
     public KyufuJissekiFinder() {
         serviceDac = InstanceProvider.create(KyufuJissekiServiceDac.class);
-        kihonDac = InstanceProvider.create(IKyufuJissekiKihonDac.class);
-        meisaiDac = InstanceProvider.create(IKyufuJissekiMeisaiDac.class);
-        shukeiDac = InstanceProvider.create(IKyufuJissekiShukeiDac.class);
-        shafukuDac = InstanceProvider.create(IKyufuJissekiShafukuKeigenDac.class);
+        kihonDac = InstanceProvider.createWithCustomize(IKyufuJissekiKihonDac.class);
+        meisaiDac = InstanceProvider.createWithCustomize(IKyufuJissekiMeisaiDac.class);
+        shukeiDac = InstanceProvider.createWithCustomize(IKyufuJissekiShukeiDac.class);
+        shafukuDac = InstanceProvider.createWithCustomize(IKyufuJissekiShafukuKeigenDac.class);
     }
 
     /**

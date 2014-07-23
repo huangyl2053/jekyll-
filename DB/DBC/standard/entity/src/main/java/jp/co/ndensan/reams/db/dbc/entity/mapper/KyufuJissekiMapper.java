@@ -66,18 +66,28 @@ public final class KyufuJissekiMapper {
      * @return 給付実績詳細キー情報
      */
     public static KyufuJissekiDetailKeyInfo to給付実績詳細キー(List<DbV3016KyufujissekiShuruiDetailEntity> entities, KyufuJissekiKeyInfo キー情報) {
-        if (entities == null || entities.isEmpty()) {
+        if (entities == null || entities.isEmpty() || キー情報 == null) {
             return null;
         }
 
-        DbV3016KyufujissekiShuruiDetailEntity entity = entities.get(0);
+        DbV3016KyufujissekiShuruiDetailEntity entity = new DbV3016KyufujissekiShuruiDetailEntity();
+        for (int index = 0; index < entities.size(); index++) {
+            entity = entities.get(index);
+            if ((キー情報.get被保番号() == null || キー情報.get被保番号().equals(entity.getHiHokenshaNo()))
+                    && (キー情報.get入力識別番号() == null || キー情報.get入力識別番号().equals(entity.getInputShikibetsuNo()))
+                    && (キー情報.getサービス種類コード() == null || キー情報.getサービス種類コード().equals(entity.getServiceSyuruiCode()))
+                    && (キー情報.getサービス提供年月() == null || キー情報.getサービス提供年月().equals(entity.getServiceTeikyoYM()))) {
+                break;
+            }
+        }
+
         return new KyufuJissekiDetailKeyInfo(
                 entity.getKokanShikibetsuNo(),
-                キー情報.get入力識別番号(),
+                entity.getInputShikibetsuNo(),
                 entity.getRecodeShubetsuCode(),
                 entity.getHokenshaNo(),
-                キー情報.get被保番号(),
-                キー情報.getサービス提供年月(),
+                entity.getHiHokenshaNo(),
+                entity.getServiceTeikyoYM(),
                 entity.getJigyoshoNo(),
                 entity.getToshiNo(),
                 to対象サービス種類リスト(entities));
