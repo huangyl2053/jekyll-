@@ -41,35 +41,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KyufuJissekiList {
 
-    public ResponseData<KyufuJissekiListDiv> onClick_btnSelect(KyufuJissekiListDiv panel,
-            KyufuJissekiSearchDiv panel2) {
-        ResponseData<KyufuJissekiListDiv> response = new ResponseData<>();
-
-//        KyufuJissekiServiceFinder finder = new KyufuJissekiServiceFinder();
-//        ServiceTeikyoYM start = new ServiceTeikyoYM(new FlexibleDate(panel2.getTxtKyufuJissekiSearchServiceTeikyoYM().getFromText()).getYearMonth());
-//        ServiceTeikyoYM end = new ServiceTeikyoYM(new FlexibleDate(panel2.getTxtKyufuJissekiSearchServiceTeikyoYM().getToText()).getYearMonth());
-//        Range<ServiceTeikyoYM> serviceTeikyoYMRange = new Range(start, end);
-//        KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(panel2.getTxtKyufuJissekiSearchHihokenshaNo().getValue());
-//        ServiceTeikyoYM サービス提供年月 = new ServiceTeikyoYM(new FlexibleDate("20140601").getYearMonth());
-//        KyufuJissekiServiceCollection collection = finder.get給付実績月別(hihokenshaNo, サービス提供年月, serviceTeikyoYMRange);
-        KyufuJissekiServiceCollection collection = KyufuJissekiListTest.get給付実績月別集計リスト().get(0);
-
-        KyufuJissekiServiceCategory category = new KyufuJissekiServiceCategory();
-        dgKyufuJissekiMeisaiList_Row row = panel.getDgKyufuJissekiMeisaiList().getActiveRow();
-        ServiceShuruiCode shuruiCode = category.getサービス種類コード(row.getTxtServiceShurui());
-        KyufuJissekiKeyInfo keyInfo = collection.getKeyInfo(shuruiCode);
-
-        ViewStateHolder.put("被保番号", new RString(keyInfo.get被保番号().toString()));
-        ViewStateHolder.put("サービス提供期間開始", new RString(keyInfo.getサービス提供期間().getFrom().value().toString()));
-        ViewStateHolder.put("サービス提供期間終了", new RString(keyInfo.getサービス提供期間().getTo().value().toString()));
-        ViewStateHolder.put("入力識別番号", new RString(keyInfo.get入力識別番号().getInputShikibetsuNoCode().toString()));
-        ViewStateHolder.put("サービス種類", keyInfo.getサービス種類コード().value());
-        ViewStateHolder.put("サービス提供年月", new RString(keyInfo.getサービス提供年月().value().toString()));
-
-        response.data = panel;
-        return response;
-    }
-
     public ResponseData<KyufuJissekiListDiv> onClick_btnKyufuJissekiSearch(KyufuJissekiListDiv panel,
             KyufuJissekiSearchDiv panel2) {
         ResponseData<KyufuJissekiListDiv> response = new ResponseData<>();
@@ -111,19 +82,14 @@ public class KyufuJissekiList {
         List<HashMap> kyufuJissekiMeisaiList = YamlLoader.DBC.loadAsList(
                 new RString("dbc0010000/KyufuJissekiMeisaiList.yml"));
 
-//        ServiceTeikyoYM start = new ServiceTeikyoYM(new FlexibleDate("20140601").getYearMonth());
-//        ServiceTeikyoYM end = new ServiceTeikyoYM(new FlexibleDate("20140901").getYearMonth());
         ServiceTeikyoYM start = new ServiceTeikyoYM(new FlexibleDate(panel2.getTxtKyufuJissekiSearchServiceTeikyoYM().getFromText()).getYearMonth());
         ServiceTeikyoYM end = new ServiceTeikyoYM(new FlexibleDate(panel2.getTxtKyufuJissekiSearchServiceTeikyoYM().getToText()).getYearMonth());
         Range<ServiceTeikyoYM> serviceTeikyoYMRange = new Range(start, end);
         KyufuJissekiServiceFinder finder = new KyufuJissekiServiceFinder();
         KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(panel2.getTxtKyufuJissekiSearchHihokenshaNo().getValue());
         KyufuJissekiServiceCollections collections = finder.get給付実績一覧(hihokenshaNo, serviceTeikyoYMRange);
-//        KyufuJissekiServiceCollections collections = new KyufuJissekiServiceCollections(KyufuJissekiListTest.get給付実績月別集計リスト());
 
         KyufuJissekiServiceCategory category = new KyufuJissekiServiceCategory();
-//        dgKyufuJissekiMeisaiList_Row row = panel.getDgKyufuJissekiMeisaiList().getActiveRow();
-//        ServiceShuruiCode shuruiCode = category.getサービス種類コード(row.getTxtServiceShurui());
         ServiceShuruiCode shuruiCode = category.getサービス種類コード(new RString("訪問介護"));
         KyufuJissekiKeyInfo keyInfo = collections.get給付実績月別集計(serviceTeikyoYMRange.getFrom()).getKeyInfo(shuruiCode);
 
@@ -379,45 +345,6 @@ public class KyufuJissekiList {
                     rsYM.get(10),
                     rsYM.get(11)));
         }
-//        for (int i = 1; i < kyufuJissekiMeisaiList.size(); i++) {
-//            HashMap hashMap = kyufuJissekiMeisaiList.get(i);
-//            ControlGenerator ymlData = new ControlGenerator(hashMap);
-//
-//            RString rsServiceGroup1 = ymlData.getAsRString("txtServiceGroup1");
-//            RString rsServiceGroup2 = ymlData.getAsRString("txtServiceGroup2");
-//            RString rsServiceShurui = ymlData.getAsRString("txtServiceShurui");
-//            RString rsYM1 = ymlData.getAsRString("txtYM1");
-//            RString rsYM2 = ymlData.getAsRString("txtYM2");
-//            RString rsYM3 = ymlData.getAsRString("txtYM3");
-//            RString rsYM4 = ymlData.getAsRString("txtYM4");
-//            RString rsYM5 = ymlData.getAsRString("txtYM5");
-//            RString rsYM6 = ymlData.getAsRString("txtYM6");
-//            RString rsYM7 = ymlData.getAsRString("txtYM7");
-//            RString rsYM8 = ymlData.getAsRString("txtYM8");
-//            RString rsYM9 = ymlData.getAsRString("txtYM9");
-//            RString rsYM10 = ymlData.getAsRString("txtYM10");
-//            RString rsYM11 = ymlData.getAsRString("txtYM11");
-//            RString rsYM12 = ymlData.getAsRString("txtYM12");
-//
-//            arrayDataList.add(createRowKyufuJissekiMeisaiList(
-//                    rsServiceGroup1,
-//                    rsServiceGroup2,
-//                    rsServiceShurui,
-//                    rsYM1,
-//                    rsYM2,
-//                    rsYM3,
-//                    rsYM4,
-//                    rsYM5,
-//                    rsYM6,
-//                    rsYM7,
-//                    rsYM8,
-//                    rsYM9,
-//                    rsYM10,
-//                    rsYM11,
-//                    rsYM12
-//            ));
-//
-//        }
         return arrayDataList;
     }
 
