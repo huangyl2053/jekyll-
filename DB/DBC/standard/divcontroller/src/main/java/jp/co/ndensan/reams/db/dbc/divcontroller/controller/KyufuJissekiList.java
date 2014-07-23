@@ -96,7 +96,7 @@ public class KyufuJissekiList {
         ViewStateHolder.put("被保番号", new RString(keyInfo.get被保番号().toString()));
         ViewStateHolder.put("サービス提供期間開始", new RString(keyInfo.getサービス提供期間().getFrom().value().toString()));
         ViewStateHolder.put("サービス提供期間終了", new RString(keyInfo.getサービス提供期間().getTo().value().toString()));
-        ViewStateHolder.put("入力識別番号", new RString(keyInfo.get入力識別番号().getInputShikibetsuNoCode().toString()));
+        ViewStateHolder.put("入力識別番号", new RString(keyInfo.get入力識別番号().getInputShikibetsuNoCode().value().toString()));
         ViewStateHolder.put("サービス種類", keyInfo.getサービス種類コード().value());
         ViewStateHolder.put("サービス提供年月", new RString(keyInfo.getサービス提供年月().value().toString()));
 
