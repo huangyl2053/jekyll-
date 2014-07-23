@@ -17,20 +17,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class HokenKyufuRitsu implements IValueObject, IDbColumnMappable, Comparable<HokenKyufuRitsu> {
 
-    private final Decimal hokenKyufuRitsu;
+    private final Decimal 給付率;
 
     /**
      * インスタンスを生成します。
      *
-     * @param hokenKyufuRitsu 給付率
+     * @param 給付率 給付率
      */
-    public HokenKyufuRitsu(Decimal hokenKyufuRitsu) {
-        this.hokenKyufuRitsu = hokenKyufuRitsu;
+    public HokenKyufuRitsu(Decimal 給付率) {
+        this.給付率 = 給付率;
     }
 
     @Override
     public Decimal value() {
-        return hokenKyufuRitsu;
+        return 給付率;
     }
 
     @Override
@@ -41,19 +41,19 @@ public class HokenKyufuRitsu implements IValueObject, IDbColumnMappable, Compara
         if (!(比較対象 instanceof HokenKyufuRitsu)) {
             return false;
         }
-        return ((HokenKyufuRitsu) 比較対象).value().equals(hokenKyufuRitsu);
+        return ((HokenKyufuRitsu) 比較対象).value().equals(給付率);
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.hokenKyufuRitsu);
+        hash = 37 * hash + Objects.hashCode(this.給付率);
         return hash;
     }
 
     @Override
     public Decimal getColumnValue() {
-        return hokenKyufuRitsu;
+        return 給付率;
     }
 
     @Override

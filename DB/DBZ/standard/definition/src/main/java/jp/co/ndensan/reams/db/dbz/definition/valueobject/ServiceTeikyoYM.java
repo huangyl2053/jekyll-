@@ -17,20 +17,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class ServiceTeikyoYM implements IDbColumnMappable, IValueObject, Comparable<ServiceTeikyoYM> {
 
-    private final FlexibleYearMonth serviceTeikyoYM;
+    private final FlexibleYearMonth サービス提供年月;
 
     /**
      * インスタンスを生成します。
      *
-     * @param serviceTeikyoYM サービス提供年月
+     * @param サービス提供年月 サービス提供年月
      */
-    public ServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) throws NullPointerException {
-        this.serviceTeikyoYM = serviceTeikyoYM;
+    public ServiceTeikyoYM(FlexibleYearMonth サービス提供年月) {
+        this.サービス提供年月 = サービス提供年月;
     }
 
     @Override
     public FlexibleYearMonth value() {
-        return serviceTeikyoYM;
+        return サービス提供年月;
     }
 
     @Override
@@ -41,19 +41,19 @@ public class ServiceTeikyoYM implements IDbColumnMappable, IValueObject, Compara
         if (!(比較対象 instanceof ServiceTeikyoYM)) {
             return false;
         }
-        return ((ServiceTeikyoYM) 比較対象).value().equals(serviceTeikyoYM);
+        return ((ServiceTeikyoYM) 比較対象).value().equals(サービス提供年月);
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.serviceTeikyoYM);
+        hash = 37 * hash + Objects.hashCode(this.サービス提供年月);
         return hash;
     }
 
     @Override
     public FlexibleYearMonth getColumnValue() {
-        return serviceTeikyoYM;
+        return サービス提供年月;
     }
 
     @Override

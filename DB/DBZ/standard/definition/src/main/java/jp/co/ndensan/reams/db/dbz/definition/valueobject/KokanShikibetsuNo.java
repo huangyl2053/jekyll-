@@ -17,20 +17,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class KokanShikibetsuNo implements IDbColumnMappable, IValueObject, Comparable<KokanShikibetsuNo> {
 
-    private final RString kokanShikibetsuNo;
+    private final RString 交換情報識別番号;
 
     /**
      * インスタンスを生成します。
      *
-     * @param kokanShikibetsuNo 交換情報識別番号
+     * @param 交換情報識別番号 交換情報識別番号
      */
-    public KokanShikibetsuNo(RString kokanShikibetsuNo) throws NullPointerException {
-        this.kokanShikibetsuNo = kokanShikibetsuNo;
+    public KokanShikibetsuNo(RString 交換情報識別番号) {
+        this.交換情報識別番号 = 交換情報識別番号;
     }
 
     @Override
     public RString value() {
-        return kokanShikibetsuNo;
+        return 交換情報識別番号;
     }
 
     @Override
@@ -41,19 +41,19 @@ public class KokanShikibetsuNo implements IDbColumnMappable, IValueObject, Compa
         if (!(比較対象 instanceof KokanShikibetsuNo)) {
             return false;
         }
-        return ((KokanShikibetsuNo) 比較対象).value().equals(kokanShikibetsuNo);
+        return ((KokanShikibetsuNo) 比較対象).value().equals(交換情報識別番号);
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.kokanShikibetsuNo);
+        hash = 37 * hash + Objects.hashCode(this.交換情報識別番号);
         return hash;
     }
 
     @Override
     public RString getColumnValue() {
-        return kokanShikibetsuNo;
+        return 交換情報識別番号;
     }
 
     @Override

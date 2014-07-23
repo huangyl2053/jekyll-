@@ -17,20 +17,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class ToshiNo implements IDbColumnMappable, IValueObject, Comparable<ToshiNo> {
 
-    private final RString toshiNo;
+    private final RString 通番;
 
     /**
      * インスタンスを生成します。
      *
-     * @param toshiNo 通番
+     * @param 通番 通番
      */
-    public ToshiNo(RString toshiNo) throws NullPointerException {
-        this.toshiNo = toshiNo;
+    public ToshiNo(RString 通番) {
+        this.通番 = 通番;
     }
 
     @Override
     public RString value() {
-        return toshiNo;
+        return 通番;
     }
 
     @Override
@@ -41,19 +41,19 @@ public class ToshiNo implements IDbColumnMappable, IValueObject, Comparable<Tosh
         if (!(比較対象 instanceof ToshiNo)) {
             return false;
         }
-        return ((ToshiNo) 比較対象).value().equals(toshiNo);
+        return ((ToshiNo) 比較対象).value().equals(通番);
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.toshiNo);
+        hash = 37 * hash + Objects.hashCode(this.通番);
         return hash;
     }
 
     @Override
     public RString getColumnValue() {
-        return toshiNo;
+        return 通番;
     }
 
     @Override

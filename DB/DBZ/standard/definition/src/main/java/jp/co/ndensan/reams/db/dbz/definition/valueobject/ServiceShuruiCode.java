@@ -17,20 +17,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class ServiceShuruiCode implements IDbColumnMappable, IValueObject, Comparable<ServiceShuruiCode> {
 
-    private final RString serviceShuruiCode;
+    private final RString サービス種類コード;
 
     /**
      * インスタンスを生成します。
      *
-     * @param serviceShuruiCode サービス種類コード
+     * @param サービス種類コード サービス種類コード
      */
-    public ServiceShuruiCode(RString serviceShuruiCode) throws NullPointerException {
-        this.serviceShuruiCode = serviceShuruiCode;
+    public ServiceShuruiCode(RString サービス種類コード) {
+        this.サービス種類コード = サービス種類コード;
     }
 
     @Override
     public RString value() {
-        return serviceShuruiCode;
+        return サービス種類コード;
     }
 
     @Override
@@ -41,19 +41,19 @@ public class ServiceShuruiCode implements IDbColumnMappable, IValueObject, Compa
         if (!(比較対象 instanceof ServiceShuruiCode)) {
             return false;
         }
-        return ((ServiceShuruiCode) 比較対象).value().equals(serviceShuruiCode);
+        return ((ServiceShuruiCode) 比較対象).value().equals(サービス種類コード);
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.serviceShuruiCode);
+        hash = 37 * hash + Objects.hashCode(this.サービス種類コード);
         return hash;
     }
 
     @Override
     public RString getColumnValue() {
-        return serviceShuruiCode;
+        return サービス種類コード;
     }
 
     @Override

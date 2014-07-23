@@ -17,20 +17,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class ServiceKomokuCode implements IDbColumnMappable, IValueObject, Comparable<ServiceKomokuCode> {
 
-    private final RString serviceKomokuCode;
+    private final RString サービス項目コード;
 
     /**
      * インスタンスを生成します。
      *
-     * @param serviceKomokuCode サービス項目コード
+     * @param サービス項目コード サービス項目コード
      */
-    public ServiceKomokuCode(RString serviceKomokuCode) throws NullPointerException {
-        this.serviceKomokuCode = serviceKomokuCode;
+    public ServiceKomokuCode(RString サービス項目コード) {
+        this.サービス項目コード = サービス項目コード;
     }
 
     @Override
     public RString value() {
-        return serviceKomokuCode;
+        return サービス項目コード;
     }
 
     @Override
@@ -41,19 +41,19 @@ public class ServiceKomokuCode implements IDbColumnMappable, IValueObject, Compa
         if (!(比較対象 instanceof ServiceKomokuCode)) {
             return false;
         }
-        return ((ServiceKomokuCode) 比較対象).value().equals(serviceKomokuCode);
+        return ((ServiceKomokuCode) 比較対象).value().equals(サービス項目コード);
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.serviceKomokuCode);
+        hash = 37 * hash + Objects.hashCode(this.サービス項目コード);
         return hash;
     }
 
     @Override
     public RString getColumnValue() {
-        return serviceKomokuCode;
+        return サービス項目コード;
     }
 
     @Override
