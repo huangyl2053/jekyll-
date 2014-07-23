@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 public class ShinsakaiIinDacMock implements IInsertable<DbT5102ShinsakaiIinJohoEntity> {
 
     @InjectSession
-    SqlSession session;
+    private SqlSession session;
 
     @Override
     public int insert(DbT5102ShinsakaiIinJohoEntity entity) {

@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5014ShinsakaiIinJogaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.relate.JogaiShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
@@ -66,6 +65,7 @@ public class JogaiShinsakaiIinMapperTest {
 
         @Before
         public void setUp() {
+
             審査会委員Entity = ShinsakaiMockEntityCreator.create審査会委員EntitySpy(除外対象審査会委員コード_12345678.value().toString());
             審査会委員除外情報Entity = ShinsakaiMockEntityCreator.create審査会委員除外情報Entity(証記載保険者番号_123456,
                     被保険者番号_0000100012, 管理番号_1, 除外対象審査会委員コード_12345678);
