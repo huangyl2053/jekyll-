@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.entity.mapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
 import jp.co.ndensan.reams.db.dbc.business.JigyoshaNoListOfServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
@@ -35,6 +36,7 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEn
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -83,7 +85,8 @@ public final class KyufuJissekiMapper {
 
         return new KyufuJissekiDetailKeyInfo(
                 entity.getKokanShikibetsuNo(),
-                entity.getInputShikibetsuNo(),
+                //TODO 名称などはどこから取ってくるのか
+                new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo()), new RString(""), new RString("")),
                 entity.getRecodeShubetsuCode(),
                 entity.getHokenshaNo(),
                 entity.getHiHokenshaNo(),

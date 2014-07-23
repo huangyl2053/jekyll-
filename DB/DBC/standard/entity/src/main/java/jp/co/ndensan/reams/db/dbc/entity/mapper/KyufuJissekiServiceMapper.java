@@ -8,11 +8,14 @@ package jp.co.ndensan.reams.db.dbc.entity.mapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiService;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiServiceCollection;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
@@ -84,7 +87,7 @@ public final class KyufuJissekiServiceMapper {
         return new KyufuJissekiKeyInfo(
                 entity.getHiHokenshaNo(),
                 teikyoYMRange,
-                entity.getInputShikibetsuNo(),
+                new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo()), new RString(""), new RString("")),
                 entity.getServiceSyuruiCode(),
                 entity.getServiceTeikyoYM());
     }

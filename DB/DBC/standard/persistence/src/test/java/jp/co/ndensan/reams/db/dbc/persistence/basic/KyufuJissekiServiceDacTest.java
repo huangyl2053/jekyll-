@@ -6,19 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.persistence.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihonEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
-import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3017KyufujissekiKihonEntityMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.InputShikibetsuNoCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -27,7 +18,6 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -50,15 +40,21 @@ public class KyufuJissekiServiceDacTest extends DbcTestDacBase {
     }
 
     public static class select extends DbcTestDacBase {
-//
-//        @Test
-//        public void 該当の給付実績基本が存在しない時_selectは_NULLを返す() {
-//            List<DbV3016KyufujissekiShuruiDetailEntity> result = sut.select(notFound被保番号, foundサービス提供年月1);
-//            assertThat(result, nullValue());
-//        }
 
         @Test
-        public void 該当の給付実績基本が存在する時_selectは_4件のデータが入ったentityを返す() {
+        public void 該当の給付実績基本が存在しない時_selectは_空のコレクションを返す() {
+            List<DbV3016KyufujissekiShuruiDetailEntity> result = sut.select(notFound被保番号, foundサービス提供年月_データ1件);
+            assertThat(result.isEmpty(), is(true));
+        }
+
+        @Test
+        public void データが1件あるサービス提供年月を指定した時_selectは_1件のデータが入ったentityListを返す() {
+            List<DbV3016KyufujissekiShuruiDetailEntity> result = sut.select(found被保番号, foundサービス提供年月_データ1件);
+            assertThat(result.size(), is(1));
+        }
+
+        @Test
+        public void データが4件あるサービス提供年月を指定した時_selectは_4件のデータが入ったentityListを返す() {
             List<DbV3016KyufujissekiShuruiDetailEntity> result = sut.select(found被保番号, foundサービス提供年月_データ4件);
             assertThat(result.size(), is(4));
         }

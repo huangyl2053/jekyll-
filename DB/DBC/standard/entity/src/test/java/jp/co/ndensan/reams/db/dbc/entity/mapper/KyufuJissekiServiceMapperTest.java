@@ -75,7 +75,7 @@ public class KyufuJissekiServiceMapperTest extends DbcTestBase {
 
         @Test
         public void get入力識別番号の結果が_Entityの入力識別番号と同一になる() {
-            assertThat(sut.get給付実績キー情報().get入力識別番号(), is(entity.getInputShikibetsuNo()));
+            assertThat(sut.get給付実績キー情報().get入力識別番号().getCode().getColumnValue(), is(entity.getInputShikibetsuNo()));
         }
 
         @Test

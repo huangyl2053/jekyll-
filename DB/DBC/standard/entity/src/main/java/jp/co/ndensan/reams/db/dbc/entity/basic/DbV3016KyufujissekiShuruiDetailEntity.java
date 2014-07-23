@@ -25,7 +25,7 @@ public class DbV3016KyufujissekiShuruiDetailEntity implements IDbAccessable {
     public static final RString TABLE_NAME = new RString("DbV3016KyufujissekiShuruiDetail");
 
     private KokanShikibetsuNo kokanShikibetsuNo;
-    private InputShikibetsuNo inputShikibetsuNo;
+    private RString inputShikibetsuNo;
     private RString recodeShubetsuCode;
     private ShoKisaiHokenshaNo hokenshaNo;
     private KaigoHihokenshaNo hiHokenshaNo;
@@ -37,7 +37,7 @@ public class DbV3016KyufujissekiShuruiDetailEntity implements IDbAccessable {
     private Decimal atoHokenTanisuTotal;
     private Decimal atoHokenSeikyugaku;
     private Decimal atoHokenDekidakaTanisuTotal;
-    private ServiceCode servicecode;
+    private RString servicecode;
     private Decimal atoservicetanisutotal;
     private Decimal atotanisu;
 
@@ -64,7 +64,7 @@ public class DbV3016KyufujissekiShuruiDetailEntity implements IDbAccessable {
      *
      * @return inputShikibetsuNo
      */
-    public InputShikibetsuNo getInputShikibetsuNo() {
+    public RString getInputShikibetsuNo() {
         return inputShikibetsuNo;
     }
 
@@ -73,7 +73,7 @@ public class DbV3016KyufujissekiShuruiDetailEntity implements IDbAccessable {
      *
      * @param inputShikibetsuNo inputShikibetsuNo
      */
-    public void setInputShikibetsuNo(InputShikibetsuNo inputShikibetsuNo) {
+    public void setInputShikibetsuNo(RString inputShikibetsuNo) {
         this.inputShikibetsuNo = inputShikibetsuNo;
     }
 
@@ -280,7 +280,7 @@ public class DbV3016KyufujissekiShuruiDetailEntity implements IDbAccessable {
      *
      * @return servicecode
      */
-    public ServiceCode getServicecode() {
+    public RString getServicecode() {
         return servicecode;
     }
 
@@ -289,7 +289,7 @@ public class DbV3016KyufujissekiShuruiDetailEntity implements IDbAccessable {
      *
      * @param servicecode servicecode
      */
-    public void setServicecode(ServiceCode servicecode) {
+    public void setServicecode(RString servicecode) {
         this.servicecode = servicecode;
     }
 

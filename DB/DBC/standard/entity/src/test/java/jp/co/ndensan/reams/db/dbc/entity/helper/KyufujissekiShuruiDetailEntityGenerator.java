@@ -30,8 +30,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public final class KyufujissekiShuruiDetailEntityGenerator {
 
     public static final KokanShikibetsuNo 交換識別番号 = new KokanShikibetsuNo(new RString("1137"));
-    public static final InputShikibetsuNo 入力識別番号
-            = new InputShikibetsuNo(new Code(new RString("7131")), new RString("居宅介護サービス"), new RString("居宅介護サービス"));
+    public static final RString 入力識別番号 = new RString("7131");
     public static final RString レコード種別コード = new RString("01");
     public static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("00135985"));
     public static final KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("0000000019"));
@@ -43,7 +42,7 @@ public final class KyufujissekiShuruiDetailEntityGenerator {
     public static final Decimal 保険対象合計 = new Decimal(5000);
     public static final Decimal 保険請求額 = new Decimal(5000);
     public static final Decimal 保険出来高単位数合計 = new Decimal(5000);
-    public static final ServiceCode サービスコード = new ServiceCode(new RString("113137"));
+    public static final RString サービスコード = new RString("113137");
     public static final Decimal サービス計画費単位数合計 = new Decimal(5000);
     public static final Decimal ケアマネジメント費単位数 = new Decimal(5000);
 
