@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RenrakusakiKubunNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -66,8 +67,8 @@ public class RenrakusakiInfo {
             List<dgRenrakusaki_Row> renrakusakiList = new ArrayList<>();
             for (KaigoRenrakusaki renrakusaki : list) {
                 renrakusakiList.add(createRenrakusakiListRow(
-                        renrakusaki.get連絡先区分番号().substring(
-                                renrakusaki.get連絡先区分番号().length() - 1),
+                        renrakusaki.get連絡先区分番号().value().substring(
+                                renrakusaki.get連絡先区分番号().value().length() - 1),
                         renrakusaki.get氏名().value(),
                         renrakusaki.get続柄(),
                         renrakusaki.get電話番号().value(),
@@ -212,9 +213,9 @@ public class RenrakusakiInfo {
                 new YubinNo(rowRenrakusaki.getYubinNo()),
                 new AtenaJusho(rowRenrakusaki.getJusho()),
                 rowRenrakusaki.getTsuzukigara(),
-                new RString(df.format(Integer.parseInt(
-                                        div.getDgRenrakusaki().getSelectedItems().get(0).
-                                        getRenrakusakiKbnNo().toString()))),
+                new RenrakusakiKubunNo(new RString(df.format(Integer.parseInt(
+                                                div.getDgRenrakusaki().getSelectedItems().get(0).
+                                                getRenrakusakiKbnNo().toString())))),
                 hokenshaNo,
                 hihokenshaNo);
 
@@ -286,7 +287,7 @@ public class RenrakusakiInfo {
                     new YubinNo(div.getSelectedContents().getTxtYubinNo().getText()),
                     new AtenaJusho(div.getSelectedContents().getTxtJusho().getValue()),
                     div.getSelectedContents().getTxtTsuzukigara().getValue(),
-                    div.getSelectedContents().getRenrakusakiKbnNo(),
+                    new RenrakusakiKubunNo(div.getSelectedContents().getRenrakusakiKbnNo()),
                     new ShoKisaiHokenshaNo(hokenshaNo),
                     new KaigoHihokenshaNo(hihokenshaNo));
 

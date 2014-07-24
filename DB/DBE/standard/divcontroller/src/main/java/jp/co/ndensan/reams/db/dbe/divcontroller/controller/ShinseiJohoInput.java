@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.JogaiShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.JogaiShinsakaiIinList;
+import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJohoValidate;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinKoza;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinShikaku;
@@ -56,6 +57,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
+import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
@@ -149,6 +152,17 @@ public class ShinseiJohoInput {
     public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestNinteichosain(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
         new NinteichosainAdvanceEntry(div).onClick_btnToCopyLatestNinteichosain(clickedItem());
         return createResponseData(div);
+    }
+
+    /**
+     * バリデーションをします
+     *
+     * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnValidation(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        return validate(div);
     }
 
     /**
@@ -1002,4 +1016,65 @@ public class ShinseiJohoInput {
         }
     }
 
+    private ResponseData<ShinseiJohoInputDiv> validate(ShinseiJohoInputDiv div) {
+        ResponseData<ShinseiJohoInputDiv> response = new ResponseData<>();
+        NinteiShinseiJohoValidate validate = new NinteiShinseiJohoValidate();
+
+//        div.getLatestNinteiResult().getTxtNinteiYukokikanTo().clearValue();                               //test用
+        div.getLatestNinteiResult().getTxtNinteiYukokikanTo().setValue(new FlexibleDate("20140920"));    //test用
+
+        if (validate.validateShinseiKbn(div.getDdlShinseiKubunShinseiji().getSelectedItem(), div.getTxtShinseiDate().getValue(),
+                new RString(div.getLatestNinteiResult().getTxtNinteiYukokikanTo().getValue().toString()))) {
+            response.addValidateMessage(new ErrorMessage("",
+                    YokaigoNinteiShinseiKubun.更新申請.toString() + "期間前です。申請区分を"
+                    + YokaigoNinteiShinseiKubun.区分変更申請.toString() + "に変更してください。"), "ddlShinseiKubunShinseiji");
+        }
+
+        //申請者が施設職員のとき
+        if (div.getNinteiShinseisha().getRadShinseishaKubun().getSelectedItem().equalsIgnoreCase(
+                YokaigoNinteiShinseishaKubun.施設職員.getCode())) {
+            if (div.getNinteiShinseisha().getNinteiShinseiJigyosha().getTxtJigyoshaCode().getText().isEmpty()) {
+                response.addValidateMessage(new ErrorMessage("", "事業者情報を入力してください。"), "txtJigyoshaCode");
+            } else if (validate.validateJigyosha(div.getNinteiShinseisha().getNinteiShinseiJigyosha().getTxtJigyoshaCode().getText(),
+                    div.getNinteiShinseisha().getNinteiShinseiJigyosha().getTxtJigyoshaName().getText())) {
+                response.addValidateMessage(new ErrorMessage("", "事業者情報が不正です。"), "txtJigyoshaCode");
+            }
+        }
+
+        if (validate.validateIryokikan(div.getHihokenshaShujii().getTxtIryokikanCode().getText(),
+                div.getHihokenshaShujii().getTxtIryokikanName().getText())) {
+            response.addValidateMessage(new ErrorMessage("", "医療機関情報が不正です。"), "txtIryokikanCode");
+        }
+
+        if (validate.validateShujii(div.getHihokenshaShujii().getTxtShujiiCode().getText(),
+                div.getHihokenshaShujii().getTxtShujiiName().getText())) {
+            response.addValidateMessage(new ErrorMessage("", "主治医情報が不正です。"), "txtShujiiCode");
+        }
+
+        //2号被保険者のときチェック
+//        if (div.getN2Hihokensha().getIryohokensha().getTxtIryohokenshaNo().getText().isEmpty()){
+//            response.addValidateMessage(new ErrorMessage("", "医療保険者番号を入力してください。"), "txtIryohokenshaNo");
+//        }
+//        if (div.getN2Hihokensha().getIryohokensha().getTxtIryohokenshaName().getText().isEmpty()){
+//            response.addValidateMessage(new ErrorMessage("", "医療保険者名を入力してください。"), "txtIryohokenshaName");
+//        }
+//        if (div.getN2Hihokensha().getIryohokensha().getTxtIryohokenKigo().getText().isEmpty()){
+//            response.addValidateMessage(new ErrorMessage("", "医療保険記号を入力してください。"), "txtIryohokenKigo");
+//        }
+//        if (div.getN2Hihokensha().getIryohokensha().getTxtIryohokenBango().getText().isEmpty()){
+//            response.addValidateMessage(new ErrorMessage("", "医療保険番号を入力してください。"), "txtIryohokenBango");
+//        }
+//        if (div.getN2Hihokensha().getDdltTokuteiShippei().getSelectedItem().equalsIgnoreCase("00")){
+//            response.addValidateMessage(new ErrorMessage("", "特定疾病を選択してください。"), "ddltTokuteiShippei");
+//        }
+        if (div.getChkEnkitsuchiHakko().getSelectedValues().isEmpty()) {
+            response.addValidateMessage(new WarningMessage("", "認定延期通知を発行しないことへの同意が選択されていません。"), "chkEnkitsuchiHakko");
+        }
+        if (div.getChkJohoteikyo().getSelectedValues().isEmpty()) {
+            response.addValidateMessage(new WarningMessage("", "認定調査/意見書/審査会へ情報提供をすることへの同意が選択されていません。"), "chkJohoteikyo");
+        }
+
+        response.data = div;
+        return response;
+    }
 }

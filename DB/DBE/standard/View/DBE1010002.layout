@@ -3768,6 +3768,35 @@
      "imageFileUrl": "",
      "icon": 0,
      "heightTextBoxMatches": false
+    },
+    {
+     "fieldName": "btnValidation",
+     "items": [],
+     "controlType": "Button",
+     "width": "120",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnValidation",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "ﾊﾞﾘﾃﾞｰｼｮﾝ",
+     "imageWidth": "",
+     "imageHeight": "",
+     "onClick": "onClick_btnValidation",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -3790,7 +3819,7 @@
    "onLoad": "",
    "title": "認定申請情報入力",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "ShinseiJohoInput"
@@ -3843,6 +3872,10 @@
     {
      "eventName": "onClick_btnDecideJogaiIin",
      "requestUrl": "dbe/db/dbe/ShinseiJohoInput/onClick_btnDecideJogaiIin"
+    },
+    {
+     "eventName": "onClick_btnValidation",
+     "requestUrl": "dbe/db/dbe/ShinseiJohoInput/onClick_btnValidation"
     }
    ],
    "hiddenInput": [],
