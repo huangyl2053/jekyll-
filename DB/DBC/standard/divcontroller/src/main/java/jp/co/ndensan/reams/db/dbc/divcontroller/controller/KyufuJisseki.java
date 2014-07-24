@@ -250,11 +250,12 @@ public class KyufuJisseki {
             RString rsSaiShinsaKaisu = new RString(String.valueOf(iMeisai.get再審査回数()));
             RString rsKagoKaisu = new RString(String.valueOf(iMeisai.get過誤回数()));
             RString rsShinsaYM = iMeisai.get審査年月().toDateString();
+            RString rsTekiyo = iMeisai.get適要();
 
             meisaiList.add(createKyufuJissekiMeisaiRow(
                     rsService, rsKettei, rsTani, rsKaisu, rsKohi1Nissu, rsKohi2Nissu,
                     rsKohi3Nissu, rsServiceTani, rsKohi1Tani, rsKohi2Tani, rsKohi3Tani,
-                    rsSaiShinsaKaisu, rsKagoKaisu, rsShinsaYM));
+                    rsSaiShinsaKaisu, rsKagoKaisu, rsShinsaYM, rsTekiyo));
         }
         panel.getKyufuJissekiMeisai().getDgKyufuJissekiMeisai().setDataSource(meisaiList);
 
@@ -479,11 +480,12 @@ public class KyufuJisseki {
     private dgKyufuJissekiMeisai_Row createKyufuJissekiMeisaiRow(
             RString txtService, RString txtKettei, RString txtTani, RString txtKaisu,
             RString txtKohi1Nissu, RString txtKohi2Nissu, RString txtKohi3Nissu, RString txtServiceTani, RString txtKohi1Tani,
-            RString txtKohi2Tani, RString txtKohi3Tani, RString txtSaiShinsaKaisu, RString txtKagoKaisu, RString txtShinsaYM) {
+            RString txtKohi2Tani, RString txtKohi3Tani, RString txtSaiShinsaKaisu, RString txtKagoKaisu, RString txtShinsaYM,
+            RString txtTekiyo) {
         return new dgKyufuJissekiMeisai_Row(
-                txtService, new Button(), txtKettei, txtTani, txtKaisu,
+                txtService, txtKettei, txtTani, txtKaisu,
                 txtKohi1Nissu, txtKohi2Nissu, txtKohi3Nissu, txtServiceTani, txtKohi1Tani,
-                txtKohi2Tani, txtKohi3Tani, txtSaiShinsaKaisu, txtKagoKaisu, txtShinsaYM);
+                txtKohi2Tani, txtKohi3Tani, txtSaiShinsaKaisu, txtKagoKaisu, txtShinsaYM, txtTekiyo);
     }
 
     private dgServiceKeikakuhiFromH2104_Row createServiceKeikakuhiFromH2104Row(

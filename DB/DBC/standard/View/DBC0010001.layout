@@ -5228,27 +5228,6 @@
               "sortKey": "txtService"
              },
              {
-              "columnName": "摘要",
-              "dataName": "btnTekiyo",
-              "toolTip": "",
-              "bgColor": 0,
-              "width": 60,
-              "visible": true,
-              "cellType": 8,
-              "cellDetails": {
-               "cellType": 8,
-               "text": "摘要",
-               "onClick": "",
-               "imageFileUrl": "",
-               "imageWidth": "",
-               "imageHeight": ""
-              },
-              "align": 1,
-              "resize": true,
-              "isPrivateInfo": false,
-              "sortKey": "btnTekiyo"
-             },
-             {
               "columnName": "決定",
               "dataName": "txtKettei",
               "toolTip": "",
@@ -5435,6 +5414,23 @@
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "txtShinsaYM"
+             },
+             {
+              "columnName": "摘要",
+              "dataName": "txtTekiyo",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 200,
+              "visible": true,
+              "cellType": 0,
+              "cellDetails": {
+               "cellType": 0,
+               "isSetValueToToolTip": false
+              },
+              "align": 0,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "txtTekiyo"
              }
             ]
            },
@@ -6517,7 +6513,7 @@
       "CareManagementhi"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "KyufuJissekiKihon",
+     "selectedItemFieldName": "KyufuJissekiMeisaiShukei",
      "initialTab": "1",
      "isLazyLoading": false
     },
