@@ -30,6 +30,7 @@ public class KyufuJissekiKihon {
     private final KyufuJissekiKihonNyutaisho 施設入退所情報;
     private final KyufuJissekiKihonKyufuritsu 給付率情報;
     private final KyufuJissekiKihonKohi 公費情報;
+    private final KyufuJissekiKihonGokeiCollection 合計;
 
     /**
      * インスタンスを生成します。
@@ -45,6 +46,7 @@ public class KyufuJissekiKihon {
      * @param 施設入退所情報 施設入退所情報
      * @param 給付率情報 給付率情報
      * @param 公費情報 公費情報
+     * @param 合計 合計
      */
     public KyufuJissekiKihon(
             KyufuSakuseiKubun 作成区分,
@@ -57,7 +59,8 @@ public class KyufuJissekiKihon {
             KyufuJissekiKihonServiceKikan サービス期間情報,
             KyufuJissekiKihonNyutaisho 施設入退所情報,
             KyufuJissekiKihonKyufuritsu 給付率情報,
-            KyufuJissekiKihonKohi 公費情報) {
+            KyufuJissekiKihonKohi 公費情報,
+            KyufuJissekiKihonGokeiCollection 合計) {
         this.作成区分 = 作成区分;
         this.要介護度 = 要介護度;
         this.認定有効期間 = 認定有効期間;
@@ -69,6 +72,7 @@ public class KyufuJissekiKihon {
         this.施設入退所情報 = 施設入退所情報;
         this.給付率情報 = 給付率情報;
         this.公費情報 = 公費情報;
+        this.合計 = 合計;
     }
 
     /**
@@ -168,5 +172,14 @@ public class KyufuJissekiKihon {
      */
     public KyufuJissekiKihonKohi get公費情報() {
         return 公費情報;
+    }
+
+    /**
+     * 合計を返します。
+     *
+     * @return 合計
+     */
+    public KyufuJissekiKihonGokeiCollection get合計() {
+        return 合計;
     }
 }

@@ -160,6 +160,13 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
         private final RString 公費３負担者番号 = new RString("00000003");
         private final RString 公費３受給者番号 = new RString("1000003");
 
+        private final Decimal サービス単位 = new Decimal(100);
+        private final Decimal 保険料請求額 = new Decimal(200);
+        private final Decimal 利用者負担額 = new Decimal(300);
+        private final Decimal 緊急時施設療養費保険請求分合計 = new Decimal(400);
+        private final Decimal 特定診療費公費請求分合計 = new Decimal(500);
+        private final Decimal 特定入所者介護等請求額 = new Decimal(600);
+
         @Before
         public void setUp() {
             result = KyufuJissekiMapper.to給付実績基本(DbT3017KyufujissekiKihonEntityMock.getSpiedInstance());
@@ -333,6 +340,36 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
         @Test
         public void 公費３受給者番号の設定がある時_to給付実績基本_get公費情報_get公費３受給者番号は_設定値を返す() {
             assertThat(result.get公費情報().get公費３受給者番号(), is(公費３受給者番号));
+        }
+
+        @Test
+        public void サービス単位の設定がある時_to給付実績基本_get合計_getサービス単位は_設定値を返す() {
+            assertThat(result.get合計().iterator().next().getサービス単位(), is(サービス単位));
+        }
+
+        @Test
+        public void 保険料請求額の設定がある時_to給付実績基本_get合計_get保険料請求額は_設定値を返す() {
+            assertThat(result.get合計().iterator().next().get保険料請求額(), is(保険料請求額));
+        }
+
+        @Test
+        public void 利用者負担額の設定がある時_to給付実績基本_get合計_get利用者負担額は_設定値を返す() {
+            assertThat(result.get合計().iterator().next().get利用者負担額(), is(利用者負担額));
+        }
+
+        @Test
+        public void 緊急時施設療養費保険請求分合計の設定がある時_to給付実績基本_get合計_get緊急時施設療養費保険請求分合計は_設定値を返す() {
+            assertThat(result.get合計().iterator().next().get緊急時施設療養費保険請求分合計(), is(緊急時施設療養費保険請求分合計));
+        }
+
+        @Test
+        public void 特定診療費公費請求分合計の設定がある時_to給付実績基本_get合計_get特定診療費公費請求分合計は_設定値を返す() {
+            assertThat(result.get合計().iterator().next().get特定診療費公費請求分合計(), is(特定診療費公費請求分合計));
+        }
+
+        @Test
+        public void 特定入所者介護等請求額の設定がある時_to給付実績基本_get合計_get特定入所者介護等請求額は_設定値を返す() {
+            assertThat(result.get合計().iterator().next().get特定入所者介護等請求額(), is(特定入所者介護等請求額));
         }
     }
 
