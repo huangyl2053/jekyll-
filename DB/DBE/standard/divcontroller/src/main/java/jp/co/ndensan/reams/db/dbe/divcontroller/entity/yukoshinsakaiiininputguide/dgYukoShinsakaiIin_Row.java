@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.yukoshinsakaiiininputgui
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jul 22 15:58:10 JST 2014 
+ * Wed Jul 23 17:24:45 JST 2014 
  */
 
 
@@ -23,6 +23,8 @@ public class dgYukoShinsakaiIin_Row extends DataRow {
 
     private RString shinsakaiIinCode;
     private TextBoxFlexibleDate kaishiDate;
+    private RString jigyoshaCode;
+    private RString jigyoshaMeisho;
     private RString jigyosha;
     private RString shimei;
     private RString gender;
@@ -33,6 +35,8 @@ public class dgYukoShinsakaiIin_Row extends DataRow {
         super();
         this.shinsakaiIinCode = RString.EMPTY;
         this.kaishiDate = new TextBoxFlexibleDate();
+        this.jigyoshaCode = RString.EMPTY;
+        this.jigyoshaMeisho = RString.EMPTY;
         this.jigyosha = RString.EMPTY;
         this.shimei = RString.EMPTY;
         this.gender = RString.EMPTY;
@@ -40,10 +44,12 @@ public class dgYukoShinsakaiIin_Row extends DataRow {
         this.telNo = RString.EMPTY;
     }
 
-    public dgYukoShinsakaiIin_Row(RString shinsakaiIinCode, TextBoxFlexibleDate kaishiDate, RString jigyosha, RString shimei, RString gender, RString jusho, RString telNo) {
+    public dgYukoShinsakaiIin_Row(RString shinsakaiIinCode, TextBoxFlexibleDate kaishiDate, RString jigyoshaCode, RString jigyoshaMeisho, RString jigyosha, RString shimei, RString gender, RString jusho, RString telNo) {
         super();
         this.setOriginalData("shinsakaiIinCode", shinsakaiIinCode);
         this.setOriginalData("kaishiDate", kaishiDate);
+        this.setOriginalData("jigyoshaCode", jigyoshaCode);
+        this.setOriginalData("jigyoshaMeisho", jigyoshaMeisho);
         this.setOriginalData("jigyosha", jigyosha);
         this.setOriginalData("shimei", shimei);
         this.setOriginalData("gender", gender);
@@ -51,6 +57,8 @@ public class dgYukoShinsakaiIin_Row extends DataRow {
         this.setOriginalData("telNo", telNo);
         this.shinsakaiIinCode = shinsakaiIinCode;
         this.kaishiDate = kaishiDate;
+        this.jigyoshaCode = jigyoshaCode;
+        this.jigyoshaMeisho = jigyoshaMeisho;
         this.jigyosha = jigyosha;
         this.shimei = shimei;
         this.gender = gender;
@@ -64,6 +72,14 @@ public class dgYukoShinsakaiIin_Row extends DataRow {
 
     public TextBoxFlexibleDate getKaishiDate() {
         return kaishiDate;
+    }
+
+    public RString getJigyoshaCode() {
+        return jigyoshaCode;
+    }
+
+    public RString getJigyoshaMeisho() {
+        return jigyoshaMeisho;
     }
 
     public RString getJigyosha() {
@@ -94,6 +110,16 @@ public class dgYukoShinsakaiIin_Row extends DataRow {
     public void setKaishiDate(TextBoxFlexibleDate kaishiDate) {
         this.setOriginalData("kaishiDate", kaishiDate);
         this.kaishiDate = kaishiDate;
+    }
+
+    public void setJigyoshaCode(RString jigyoshaCode) {
+        this.setOriginalData("jigyoshaCode", jigyoshaCode);
+        this.jigyoshaCode = jigyoshaCode;
+    }
+
+    public void setJigyoshaMeisho(RString jigyoshaMeisho) {
+        this.setOriginalData("jigyoshaMeisho", jigyoshaMeisho);
+        this.jigyoshaMeisho = jigyoshaMeisho;
     }
 
     public void setJigyosha(RString jigyosha) {

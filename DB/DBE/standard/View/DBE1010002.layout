@@ -3208,7 +3208,7 @@
        "text": "新規追加する",
        "imageWidth": "",
        "imageHeight": "",
-       "onClick": "",
+       "onClick": "onClick_btnToAddKankeiIin",
        "appearance": 0,
        "imageFileUrl": "",
        "icon": 0,
@@ -3218,7 +3218,7 @@
        "fieldName": "dgKankeiIin",
        "items": [],
        "controlType": "DataGrid",
-       "width": "660",
+       "width": "710",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -3244,10 +3244,10 @@
         "isShowFooter": true,
         "isShowFilter": false,
         "isShowFilterButton": false,
-        "isShowRowState": false,
+        "isShowRowState": true,
         "isShowSelectButtonColumn": false,
         "isShowModifyButtonColumn": true,
-        "isShowDeleteButtonColumn": false,
+        "isShowDeleteButtonColumn": true,
         "limitRowCount": 0,
         "selectedRowCount": 0,
         "header": {
@@ -3257,36 +3257,17 @@
         },
         "columns": [
          {
-          "columnName": "修正",
-          "dataName": "editButton",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 50,
-          "visible": false,
-          "cellType": 8,
-          "cellDetails": {
-           "cellType": 8,
-           "text": "修正",
-           "onClick": "",
-           "imageFileUrl": ""
-          },
-          "align": 1,
-          "resize": false,
-          "isPrivateInfo": false,
-          "sortKey": "editButton"
-         },
-         {
-          "columnName": "コード",
+          "columnName": "審査会委員コード",
           "dataName": "code",
           "toolTip": "",
           "bgColor": 0,
-          "width": 150,
+          "width": 130,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
            "cellType": 0
           },
-          "align": 0,
+          "align": 1,
           "resize": false,
           "isPrivateInfo": false,
           "sortKey": "code"
@@ -3322,6 +3303,60 @@
           "resize": true,
           "isPrivateInfo": false,
           "sortKey": "shozokuKikan"
+         },
+         {
+          "columnName": "所属機関コード",
+          "dataName": "shozokuKikanCode",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 0,
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "shozokuKikanCode"
+         },
+         {
+          "columnName": "所属機関名称",
+          "dataName": "shozokuKikanMeisho",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 0,
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "shozokuKikanMeisho"
+         },
+         {
+          "columnName": "管理番号",
+          "dataName": "kanriNo",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 0,
+          "visible": false,
+          "cellType": 5,
+          "cellDetails": {
+           "cellType": 5,
+           "maxLength": "1000000000000",
+           "minLength": "0",
+           "maxValue": "1.7976931348623157e+308",
+           "minValue": "0",
+           "isCurrency": false,
+           "isComma": false,
+           "decimalPointLength": "0",
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
+          },
+          "align": 2,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "kanriNo"
          }
         ]
        },
@@ -3329,8 +3364,8 @@
        "onSelect": "",
        "onSelectByDblClick": "",
        "onSelectBySelectButton": "",
-       "onSelectByModifyButton": "",
-       "onSelectByDeleteButton": "",
+       "onSelectByModifyButton": "onSelectByModifyButton_dgKankeiIin",
+       "onSelectByDeleteButton": "onSelectByDeleteButton_dgKankeiIin",
        "onAfterRequest": "",
        "onAfterRequestByDblClick": "",
        "onAfterRequestBySelectButton": "",
@@ -3369,8 +3404,8 @@
          "jpControlName": "",
          "readOnly": false,
          "required": false,
-         "maxLength": "8",
-         "minLength": "8",
+         "maxLength": "99999999",
+         "minLength": "00000000",
          "textAlign": 0,
          "placeHolder": "12345678",
          "textKind": 2,
@@ -3392,7 +3427,7 @@
          "labelRAlign": 0,
          "decorationClass": "",
          "permitCharactor": "",
-         "formatLength": 1
+         "formatLength": "8"
         },
         {
          "fieldName": "btnSearchShinsakaiIin",
@@ -3409,7 +3444,7 @@
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": "XS",
+         "marginLeft": "0",
          "marginRight": "XS",
          "selectControlID": "btnSearchShinsakaiIin",
          "helpMessageID": "",
@@ -3423,7 +3458,24 @@
          "icon": 0,
          "heightTextBoxMatches": true,
          "displayChildDivName": "DBE.YukoShinsakaiIinInputGuide",
-         "dataPassing": [],
+         "dataPassing": [
+          {
+           "key": "iinCode",
+           "controlName": "txtKankeiIinCode"
+          },
+          {
+           "key": "iinMeisho",
+           "controlName": "txtKankeiIinName"
+          },
+          {
+           "key": "shozokuKikanCode",
+           "controlName": "txtShozokuKikan"
+          },
+          {
+           "key": "shozokuKikanMeisho",
+           "controlName": "txtShozokuKikanMeisho"
+          }
+         ],
          "visibleCloseButton": true,
          "onOkClose": "",
          "onBeforeOpenDialog": ""
@@ -3432,18 +3484,18 @@
          "fieldName": "txtKankeiIinName",
          "items": [],
          "controlType": "TextBox",
-         "width": "M",
+         "width": "250",
          "visible": true,
          "displayNone": false,
-         "disabled": true,
+         "disabled": false,
          "accessKey": "",
          "nextFocusFieldName": "",
-         "wrap": true,
+         "wrap": false,
          "dependencies": [],
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": "XS",
+         "marginLeft": "0",
          "marginRight": "XS",
          "selectControlID": "txtKankeiIinName_core",
          "helpMessageID": "",
@@ -3467,7 +3519,7 @@
          "value": "",
          "labelLText": "氏名",
          "labelRText": "",
-         "labelLWidth": "80",
+         "labelLWidth": "35",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
@@ -3478,10 +3530,10 @@
          "fieldName": "txtShozokuKikan",
          "items": [],
          "controlType": "TextBox",
-         "width": "M",
+         "width": "82",
          "visible": true,
          "displayNone": false,
-         "disabled": true,
+         "disabled": false,
          "accessKey": "",
          "nextFocusFieldName": "",
          "wrap": true,
@@ -3519,16 +3571,91 @@
          "labelRAlign": 0,
          "decorationClass": "",
          "permitCharactor": ""
+        },
+        {
+         "fieldName": "txtShozokuKikanMeisho",
+         "items": [],
+         "controlType": "TextBox",
+         "width": "500",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "0",
+         "marginRight": "XS",
+         "selectControlID": "txtShozokuKikanMeisho_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": true,
+         "required": false,
+         "maxLength": 100000000,
+         "minLength": 0,
+         "textAlign": 0,
+         "placeHolder": "",
+         "textKind": 0,
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "isComboBox": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "onKeyPress": "",
+         "text": "",
+         "suggest": [],
+         "value": "",
+         "labelLText": "",
+         "labelRText": "",
+         "labelLWidth": "S",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
+         "decorationClass": "",
+         "permitCharactor": ""
+        },
+        {
+         "fieldName": "btnDecideJogaiIin",
+         "items": [],
+         "controlType": "Button",
+         "width": "S",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 2,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "btnDecideJogaiIin",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "text": "確定する",
+         "imageWidth": "",
+         "imageHeight": "",
+         "onClick": "onClick_btnDecideJogaiIin",
+         "appearance": 0,
+         "imageFileUrl": "",
+         "icon": 0,
+         "heightTextBoxMatches": false
         }
        ],
        "controlType": "Panel",
-       "width": "400",
+       "width": "710",
        "visible": true,
        "displayNone": false,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": false,
+       "wrap": true,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
@@ -3590,7 +3717,16 @@
       }
      ],
      "requestSettings": [],
-     "hiddenInput": [],
+     "hiddenInput": [
+      {
+       "propertyName": "kankeiIinGridSelectedRow",
+       "value": ""
+      },
+      {
+       "propertyName": "decideFlag",
+       "value": ""
+      }
+     ],
      "onOpen": "",
      "onClose": "",
      "session": {},
@@ -3666,7 +3802,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": ""
+     "requestUrl": "dbe/db/dbe/ShinseiJohoInput/onLoad"
     },
     {
      "eventName": "onChange_radShinseishaKubun",
@@ -3691,6 +3827,22 @@
     {
      "eventName": "onClick_btnCommonSaveShinsei",
      "requestUrl": "dbe/db/dbe/ShinseiJohoInput/onClick_btnCommonSaveShinsei"
+    },
+    {
+     "eventName": "onClick_btnToAddKankeiIin",
+     "requestUrl": "dbe/db/dbe/ShinseiJohoInput/onClick_btnToAddKankeiIin"
+    },
+    {
+     "eventName": "onSelectByModifyButton_dgKankeiIin",
+     "requestUrl": "dbe/db/dbe/ShinseiJohoInput/onSelectByModifyButton_dgKankeiIin"
+    },
+    {
+     "eventName": "onSelectByDeleteButton_dgKankeiIin",
+     "requestUrl": "dbe/db/dbe/ShinseiJohoInput/onSelectByDeleteButton_dgKankeiIin"
+    },
+    {
+     "eventName": "onClick_btnDecideJogaiIin",
+     "requestUrl": "dbe/db/dbe/ShinseiJohoInput/onClick_btnDecideJogaiIin"
     }
    ],
    "hiddenInput": [],

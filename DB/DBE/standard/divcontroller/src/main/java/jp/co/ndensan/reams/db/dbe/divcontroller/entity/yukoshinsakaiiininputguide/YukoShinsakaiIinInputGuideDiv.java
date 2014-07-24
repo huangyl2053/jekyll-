@@ -31,6 +31,10 @@ public class YukoShinsakaiIinInputGuideDiv extends Panel {
     private RString iinCode;
     @JsonProperty("iinMeisho")
     private RString iinMeisho;
+    @JsonProperty("shozokuKikanCode")
+    private RString shozokuKikanCode;
+    @JsonProperty("shozokuKikanMeisho")
+    private RString shozokuKikanMeisho;
     @JsonProperty("shozokuKikan")
     private RString shozokuKikan;
 
@@ -78,6 +82,26 @@ public class YukoShinsakaiIinInputGuideDiv extends Panel {
     @JsonProperty("iinMeisho")
     public void setIinMeisho(RString iinMeisho) {
         this.iinMeisho=iinMeisho;
+    }
+
+    @JsonProperty("shozokuKikanCode")
+    public RString getShozokuKikanCode() {
+        return shozokuKikanCode;
+    }
+
+    @JsonProperty("shozokuKikanCode")
+    public void setShozokuKikanCode(RString shozokuKikanCode) {
+        this.shozokuKikanCode=shozokuKikanCode;
+    }
+
+    @JsonProperty("shozokuKikanMeisho")
+    public RString getShozokuKikanMeisho() {
+        return shozokuKikanMeisho;
+    }
+
+    @JsonProperty("shozokuKikanMeisho")
+    public void setShozokuKikanMeisho(RString shozokuKikanMeisho) {
+        this.shozokuKikanMeisho=shozokuKikanMeisho;
     }
 
     @JsonProperty("shozokuKikan")

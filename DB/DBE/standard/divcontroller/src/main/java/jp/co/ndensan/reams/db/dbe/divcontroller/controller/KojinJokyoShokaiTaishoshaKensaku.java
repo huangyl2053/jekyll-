@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 public class KojinJokyoShokaiTaishoshaKensaku {
 
     /**
-     * 検索条件指示画面ロード時の処理を表します。
+     * // * 検索条件指示画面ロード時の処理を表します。
      *
      * @param div 検索条件指示Div
      * @return ResponseData

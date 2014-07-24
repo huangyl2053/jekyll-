@@ -24,6 +24,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 public class YukoShinsakaiIinInputGuide {
 
+    /**
+     * 共有子Divの読み込み時に実行します。 現在有効な審査会委員の情報をグリッドに表示します。
+     *
+     * @param inputGuideDiv 有効審査会委員入力ガイド
+     * @return レスポンスデータ
+     */
     public ResponseData onLoad(YukoShinsakaiIinInputGuideDiv inputGuideDiv) {
         ResponseData<YukoShinsakaiIinInputGuideDiv> response = new ResponseData<>();
 
@@ -47,14 +53,36 @@ public class YukoShinsakaiIinInputGuide {
 
     private dgYukoShinsakaiIin_Row toShinsakaiIinRow(ShinsakaiIin shinsakaiIin) {
         dgYukoShinsakaiIin_Row row = new dgYukoShinsakaiIin_Row(RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         row.setShinsakaiIinCode(shinsakaiIin.get審査会委員コード().value());
         row.getKaishiDate().setValue(shinsakaiIin.get委員着任期間().getFrom());
         row.setGender(shinsakaiIin.get性別().getCommonName());
-        row.setJigyosha(shinsakaiIin.get事業者番号().getColumnValue());
+        row.setJigyoshaCode(shinsakaiIin.get事業者番号().getColumnValue());
+        row.setJigyoshaMeisho(new RString("testest"));
+        row.setJigyosha(row.getJigyoshaCode().concat(":").concat(row.getJigyoshaMeisho()));
         row.setJusho(shinsakaiIin.get住所().getColumnValue());
         row.setShimei(shinsakaiIin.get氏名().getColumnValue());
         row.setTelNo(shinsakaiIin.get電話番号().getColumnValue());
         return row;
+    }
+
+    /**
+     * 共有子Divの読み込み時に実行します。 現在有効な審査会委員の情報をグリッドに表示します。
+     *
+     * @param inputGuideDiv 有効審査会委員入力ガイド
+     * @return レスポンスデータ
+     */
+    public ResponseData onSelectBySelectButton_dgYukoShinsakaiIin(YukoShinsakaiIinInputGuideDiv inputGuideDiv) {
+        ResponseData<YukoShinsakaiIinInputGuideDiv> response = new ResponseData<>();
+
+        dgYukoShinsakaiIin_Row row = inputGuideDiv.getDgYukoShinsakaiIin().getSelectedItems().get(0);
+        inputGuideDiv.setIinCode(row.getShinsakaiIinCode());
+        inputGuideDiv.setIinMeisho(row.getShimei());
+        inputGuideDiv.setShozokuKikan(row.getJigyosha());
+        inputGuideDiv.setShozokuKikanCode(row.getJigyoshaCode());
+        inputGuideDiv.setShozokuKikanMeisho(row.getJigyoshaMeisho());
+
+        response.data = inputGuideDiv;
+        return response;
     }
 }
