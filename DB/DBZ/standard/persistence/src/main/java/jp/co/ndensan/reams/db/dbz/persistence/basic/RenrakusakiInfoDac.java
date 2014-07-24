@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -44,6 +45,7 @@ public class RenrakusakiInfoDac implements IReplaceable<DbT5050RenrakusakiJohoEn
         return accessor.select().table(DbT5050RenrakusakiJoho.class).
                 where(and(eq(shoKisaiHokenshaNo, hokenshaNo.getValue().toString()),
                                 eq(hihokenshaNo, hihoNo.value().toString()))).
+                order(by(renrakusakiKubunNo, Order.ASC)).
                 toList(DbT5050RenrakusakiJohoEntity.class);
     }
 

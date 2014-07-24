@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbz.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbz.business.KaigoRenrakusaki;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RenrakusakiKubunNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5050RenrakusakiJohoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 連絡先情報ビジネスクラスとエンティティの変換を行うクラスです。
@@ -38,7 +40,7 @@ public final class RenrakusakiInfoMapper {
                 entity.getRenrakusakiYubinNo(),
                 entity.getRenrakusakiJusho(),
                 entity.getRenrakusakiTuzukigara(),
-                entity.getRenrakusakiKubunNo(),
+                new RenrakusakiKubunNo(entity.getRenrakusakiKubunNo()),
                 entity.getShoKisaiHokenshaNo(),
                 entity.getHihokenshaNo()
         );
@@ -62,7 +64,7 @@ public final class RenrakusakiInfoMapper {
         entity.setRenrakusakiYubinNo(renrakusakiJoho.get郵便番号());
         entity.setRenrakusakiJusho(renrakusakiJoho.get住所());
         entity.setRenrakusakiTuzukigara(renrakusakiJoho.get続柄());
-        entity.setRenrakusakiKubunNo(renrakusakiJoho.get連絡先区分番号());
+        entity.setRenrakusakiKubunNo(renrakusakiJoho.get連絡先区分番号().value());
         entity.setShoKisaiHokenshaNo(renrakusakiJoho.get保険者番号());
         entity.setHihokenshaNo(renrakusakiJoho.get被保険者番号());
 

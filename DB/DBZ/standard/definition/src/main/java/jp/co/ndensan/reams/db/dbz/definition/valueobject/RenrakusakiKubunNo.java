@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.valueobject;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,6 +19,14 @@ import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 public class RenrakusakiKubunNo implements IValueObject<RString>, Comparable<RenrakusakiKubunNo> {
 
     private static final int PERMISSIBLE_LENGTH = 8;
+    /**
+     * 連絡先区分番号がないことを表す値です。
+     */
+    public static final RenrakusakiKubunNo NULL_VALUE;
+
+    static {
+        NULL_VALUE = new RenrakusakiKubunNo(new RString("        "));
+    }
     private final RString 連絡先区分番号;
 
     /**

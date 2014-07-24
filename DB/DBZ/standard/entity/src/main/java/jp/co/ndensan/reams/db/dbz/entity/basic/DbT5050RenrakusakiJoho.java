@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT5050RenrakusakiJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -38,6 +39,7 @@ public enum DbT5050RenrakusakiJoho implements IColumnDefinition {
 
     /**
      * getMaxLength
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -46,6 +48,7 @@ public enum DbT5050RenrakusakiJoho implements IColumnDefinition {
 
     /**
      * getScale
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {
