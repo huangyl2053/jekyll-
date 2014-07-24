@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class YokaigoninteiShinseishaKubunTest extends DbzTestBase {
+public class YokaigoNinteiShinseishaKubunTest extends DbzTestBase {
 
     public static class toRString extends DbzTestBase {
 

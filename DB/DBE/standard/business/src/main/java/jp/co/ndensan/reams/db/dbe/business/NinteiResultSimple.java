@@ -20,10 +20,10 @@ public class NinteiResultSimple {
     /**
      * 認定結果がないことを表すNinteiResultSimpleのインスタンスです。
      */
-    public static final NinteiResultSimple EMPTY;
+    public static final NinteiResultSimple NONE;
 
     static {
-        EMPTY = new NinteiResultSimple(
+        NONE = new NinteiResultSimple(
                 new YokaigoJotaiKubun(new Code(RString.EMPTY), RString.EMPTY, RString.EMPTY),
                 new NinteiYukoKikan(FlexibleDate.EMPTY, new NinteiYukoKikanTsukisu(0), FlexibleDate.EMPTY)
         );

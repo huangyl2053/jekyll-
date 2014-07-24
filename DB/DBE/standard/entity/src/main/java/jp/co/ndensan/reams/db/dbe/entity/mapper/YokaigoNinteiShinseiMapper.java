@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定申請情報のMapperです。
@@ -51,7 +52,7 @@ public final class YokaigoNinteiShinseiMapper {
                 new Code(entity.getShienShinseiKubun()),
                 new NinteiShinseiRiyu(entity.getShinseiRiyu()),
                 //TODO n3327 三浦凌 とりあえずは、すべて前回結果は「無し」とし、結果が参照可能となった時点で修正する。
-                NinteiResultSimple.EMPTY,
+                NinteiResultSimple.NONE,
                 entity.getJohoteikyoDouiUmuKubun(),
                 new NinteichosaIraiRirekiNo(entity.getNinteichosaIraiRirekiNo()),
                 entity.getIkenshoIraiRirekiNo(),
@@ -95,6 +96,7 @@ public final class YokaigoNinteiShinseiMapper {
         entity.setZenYokaigoKubunCode(yokaigoNinteiShinsei.get前回認定結果().get要介護度().getCode());
         entity.setZenYukoKikan(yokaigoNinteiShinsei.get前回認定結果().get認定有効期間().get有効期間月数().value());
         entity.setJohoteikyoDouiUmuKubun(yokaigoNinteiShinsei.is情報提供への同意有無());
+        entity.setNinteichosaShikibetsuCode(new Code(RString.EMPTY));
         entity.setIkenshoIraiRirekiNo(yokaigoNinteiShinsei.get意見書依頼履歴番号());
         entity.setMinashiCode(yokaigoNinteiShinsei.getみなし要介護区分コード().getColumnValue());
         entity.setEnkitsuchiDoiUmuKubun(yokaigoNinteiShinsei.is延期通知有無同意());

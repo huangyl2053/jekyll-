@@ -5,9 +5,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * HihokenshaOutline のクラスファイル 
@@ -21,14 +21,10 @@ public class HihokenshaOutlineDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtHihokenshaNo")
-    private TextBoxCode txtHihokenshaNo;
-    @JsonProperty("txtHihokenshaKubun")
-    private TextBox txtHihokenshaKubun;
-    @JsonProperty("txtShimei")
-    private TextBox txtShimei;
-    @JsonProperty("btnRenrakusaki")
-    private ButtonDialog btnRenrakusaki;
+    @JsonProperty("AtenaInfo")
+    private KaigoAtenaInfoDiv AtenaInfo;
+    @JsonProperty("ShikakuKihon")
+    private KaigoShikakuKihonDiv ShikakuKihon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,44 +32,24 @@ public class HihokenshaOutlineDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtHihokenshaNo")
-    public TextBoxCode getTxtHihokenshaNo() {
-        return txtHihokenshaNo;
+    @JsonProperty("AtenaInfo")
+    public KaigoAtenaInfoDiv getAtenaInfo() {
+        return AtenaInfo;
     }
 
-    @JsonProperty("txtHihokenshaNo")
-    public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
-        this.txtHihokenshaNo=txtHihokenshaNo;
+    @JsonProperty("AtenaInfo")
+    public void setAtenaInfo(KaigoAtenaInfoDiv AtenaInfo) {
+        this.AtenaInfo=AtenaInfo;
     }
 
-    @JsonProperty("txtHihokenshaKubun")
-    public TextBox getTxtHihokenshaKubun() {
-        return txtHihokenshaKubun;
+    @JsonProperty("ShikakuKihon")
+    public KaigoShikakuKihonDiv getShikakuKihon() {
+        return ShikakuKihon;
     }
 
-    @JsonProperty("txtHihokenshaKubun")
-    public void setTxtHihokenshaKubun(TextBox txtHihokenshaKubun) {
-        this.txtHihokenshaKubun=txtHihokenshaKubun;
-    }
-
-    @JsonProperty("txtShimei")
-    public TextBox getTxtShimei() {
-        return txtShimei;
-    }
-
-    @JsonProperty("txtShimei")
-    public void setTxtShimei(TextBox txtShimei) {
-        this.txtShimei=txtShimei;
-    }
-
-    @JsonProperty("btnRenrakusaki")
-    public ButtonDialog getBtnRenrakusaki() {
-        return btnRenrakusaki;
-    }
-
-    @JsonProperty("btnRenrakusaki")
-    public void setBtnRenrakusaki(ButtonDialog btnRenrakusaki) {
-        this.btnRenrakusaki=btnRenrakusaki;
+    @JsonProperty("ShikakuKihon")
+    public void setShikakuKihon(KaigoShikakuKihonDiv ShikakuKihon) {
+        this.ShikakuKihon=ShikakuKihon;
     }
 
 }

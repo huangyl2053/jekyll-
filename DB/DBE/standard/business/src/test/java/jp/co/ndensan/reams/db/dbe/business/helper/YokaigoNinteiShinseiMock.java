@@ -55,7 +55,7 @@ public class YokaigoNinteiShinseiMock {
                 new Code(RString.EMPTY),
                 new Code(RString.EMPTY),
                 NinteiShinseiRiyu.EMPTY,
-                NinteiResultSimple.EMPTY,
+                NinteiResultSimple.NONE,
                 true,
                 new NinteichosaIraiRirekiNo(0),
                 0,

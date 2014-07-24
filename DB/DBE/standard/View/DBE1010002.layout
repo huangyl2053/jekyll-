@@ -137,7 +137,12 @@
      "postParameterPanelNames": "HihokenshaOutline"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbe/db/dbe/HihokenshaOutline/onStart"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -3653,6 +3658,9 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "ShinseiJohoInput"
+    },
+    {
+     "postParameterPanelNames": "HihokenshaOutline"
     }
    ],
    "requestSettings": [
@@ -3679,6 +3687,10 @@
     {
      "eventName": "onStart",
      "requestUrl": "dbe/db/dbe/ShinseiJohoInput/onStart"
+    },
+    {
+     "eventName": "onClick_btnCommonSaveShinsei",
+     "requestUrl": "dbe/db/dbe/ShinseiJohoInput/onClick_btnCommonSaveShinsei"
     }
    ],
    "hiddenInput": [],
@@ -3757,16 +3769,12 @@
      "postParameterPanelNames": "ShinseiJohoTorokuKanryo"
     },
     {
-     "postParameterPanelNames": "ShinseiJohoInput"
+     "postParameterPanelNames": "HihokenshaOutline"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/ShinseiJohoTorokuKanryo/onLoad"
-    },
-    {
-     "eventName": "onClick_btnCommonSaveShinsei",
      "requestUrl": "dbe/db/dbe/ShinseiJohoTorokuKanryo/onClick_btnCommonSaveShinsei"
     }
    ],
@@ -3972,15 +3980,13 @@
  ],
  "loadSequencePanelNames": [
   [
-   "EditShisetsuRereki",
-   "EditShinsakaiIin"
-  ],
-  [
+   "HihokenshaOutline",
    "ShinseiJohoInput",
    "ShinseiJohoTorokuKanryo"
   ],
   [
-   "HihokenshaOutline"
+   "EditShisetsuRereki",
+   "EditShinsakaiIin"
   ],
   [
    "AtenaInfo"
@@ -4102,11 +4108,11 @@
       "helpMessageID": "",
       "jpControlName": "",
       "text": "申請を登録する",
+      "imageWidth": "",
+      "imageHeight": "",
       "onClick": "onClick_btnCommonSaveShinsei",
       "appearance": 0,
       "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": ""

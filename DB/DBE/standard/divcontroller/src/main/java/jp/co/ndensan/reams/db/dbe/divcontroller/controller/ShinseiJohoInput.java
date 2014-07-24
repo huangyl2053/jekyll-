@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData.
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiData.Doctor;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.YokaigoninteiShinseishaData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaOutlineDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.HihokenshaSearchForShinseiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaShujiiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.KankeiIinDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.LatestNinteiResultDiv;
@@ -27,11 +26,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShichosonRenra
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShinseiJohoInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.dgKankeiIin_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.dgShisetsuRereki_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.mapper.YokaigoNinteiShinseiDivMapper;
+import jp.co.ndensan.reams.db.dbe.realservice.YokaigoNinteiShinseiManager;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -49,9 +51,10 @@ public class ShinseiJohoInput {
      * Divが表示されたときの、初期値を設定します。
      *
      * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onLoad(ShinseiJohoInputDiv div) {
+    public ResponseData<ShinseiJohoInputDiv> onLoad(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
         //三浦 onLoadが遅いのでいったんやめます。
         //new ShinseiJohoInputPanels(div).onLoad();
         return createResponseData(div);
@@ -61,11 +64,12 @@ public class ShinseiJohoInput {
      * onStart
      *
      * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onStart(ShinseiJohoInputDiv div) {
-        dgSearchResult_Row hihokensha = clickedItemOf();
-        new ShinseiJohoInputPanels(div).init(hihokensha);
+    public ResponseData<ShinseiJohoInputDiv> onStart(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+//        dgSearchResult_Row hihokensha = clickedItemOf();
+//        new ShinseiJohoInputPanels(div).init(hihokensha);
         return createResponseData(div);
     }
 
@@ -73,14 +77,15 @@ public class ShinseiJohoInput {
      * 申請者区分の変更によって、divの画面項目を編集します。
      *
      * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onChange_radShinseishaKubun(ShinseiJohoInputDiv div) {
-        new NinteiShinseisha(div).onChange_radShinseishaKubun(clickedItemOf());
+    public ResponseData<ShinseiJohoInputDiv> onChange_radShinseishaKubun(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        new NinteiShinseisha(div).onChange_radShinseishaKubun(clickedItem());
         return createResponseData(div);
     }
 
-    private dgSearchResult_Row clickedItemOf() {
+    private dgSearchResult_Row clickedItem() {
         return YokaigoNinteiShinseisha.getInstance().get();
     }
 
@@ -88,10 +93,11 @@ public class ShinseiJohoInput {
      * 前回の主治医を転写します。
      *
      * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestShujii(ShinseiJohoInputDiv div) {
-        new HihokenshaShujii(div).onClick_btnToCopyLatestShujii(clickedItemOf());
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestShujii(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        new HihokenshaShujii(div).onClick_btnToCopyLatestShujii(clickedItem());
         return createResponseData(div);
     }
 
@@ -99,10 +105,11 @@ public class ShinseiJohoInput {
      * 前回の認定調査委託先を転写します。
      *
      * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestItakusaki(ShinseiJohoInputDiv div) {
-        new NinteichosainAdvanceEntry(div).onClick_btnToCopyLatestItakusaki(clickedItemOf());
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestItakusaki(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        new NinteichosainAdvanceEntry(div).onClick_btnToCopyLatestItakusaki(clickedItem());
         return createResponseData(div);
     }
 
@@ -110,11 +117,30 @@ public class ShinseiJohoInput {
      * 前回の認定調査員を転写します。
      *
      * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestNinteichosain(ShinseiJohoInputDiv div) {
-        new NinteichosainAdvanceEntry(div).onClick_btnToCopyLatestNinteichosain(clickedItemOf());
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestNinteichosain(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        new NinteichosainAdvanceEntry(div).onClick_btnToCopyLatestNinteichosain(clickedItem());
         return createResponseData(div);
+    }
+
+    /**
+     * 申請情報を保存します。
+     *
+     * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnCommonSaveShinsei(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        ResponseData<ShinseiJohoInputDiv> response = createResponseData(div);
+        //      try {
+        new YokaigoNinteiShinseiManager().save(YokaigoNinteiShinseiDivMapper.toYokaigoNinteiShinsei(
+                new YokaigoNinteiShinseiDivMapper.YokaigoNinteiShinseiDiv(div, hihokenshaDiv)));
+//        } catch (Throwable e) {
+//            response.addMessage(new InformationMessage("", e.getMessage()));
+//        }
+        return response;
     }
 
     private ResponseData<ShinseiJohoInputDiv> createResponseData(ShinseiJohoInputDiv div) {
@@ -140,7 +166,6 @@ public class ShinseiJohoInput {
         private ShinseiJohoInputPanels(ShinseiJohoInputDiv div) {
             this.div = div;
             panelList = new ArrayList<>();
-            panelList.add(new HihokenshaOutline(div));
             panelList.add(new NinteiShinseisha(div));
             panelList.add(new LatestNinteiResult(div));
             panelList.add(new HihokenshaShujii(div));
@@ -187,37 +212,6 @@ public class ShinseiJohoInput {
                 editor.clear();
             }
         }
-    }
-
-    /**
-     * HihokenshaOutlineDivへの操作をまとめたクラスです。
-     */
-    private static final class HihokenshaOutline implements IPanelAdapter {
-
-        private final HihokenshaOutlineDiv panel;
-
-        private HihokenshaOutline(ShinseiJohoInputDiv div) {
-            this.panel = div.getHihokenshaOutline();
-        }
-
-        @Override
-        public void onLoad() {
-        }
-
-        @Override
-        public void init(dgSearchResult_Row hihokensha) {
-            panel.getTxtHihokenshaNo().setValue(hihokensha.getHihokenshaNo());
-            panel.getTxtHihokenshaKubun().setValue(hihokensha.getHihokenshaKubun());
-            panel.getTxtShimei().setValue(hihokensha.getShimei());
-        }
-
-        @Override
-        public void clear() {
-            panel.getTxtHihokenshaKubun().clearValue();
-            panel.getTxtHihokenshaNo().clearValue();
-            panel.getTxtShimei().clearValue();
-        }
-
     }
 
     /**
@@ -741,4 +735,5 @@ public class ShinseiJohoInput {
             div.getDgKankeiIin().setDataSource(Collections.EMPTY_LIST);
         }
     }
+
 }

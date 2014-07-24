@@ -15,6 +15,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  */
 public class NinteiShinseiTorisage {
 
+    public static final NinteiShinseiTorisage NONE;
+
+    static {
+        NONE = new NinteiShinseiTorisage(TorisageKubun.認定申請有効, TorisageRiyu.EMPTY, FlexibleDate.MAX, ShinsaKeizokuKubun.継続する);
+    }
+
     private final TorisageKubun 取下げ区分;
     private final TorisageRiyu 取下げ理由;
     private final FlexibleDate 取下げ年月日;

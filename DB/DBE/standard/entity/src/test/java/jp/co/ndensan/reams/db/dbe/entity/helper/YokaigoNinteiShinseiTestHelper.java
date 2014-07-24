@@ -44,7 +44,7 @@ public final class YokaigoNinteiShinseiTestHelper {
     private static final Code 認定申請有効区分 = new Code(new RString("認定申請有効区分"));
     private static final RString 要支援申請区分 = new RString("1");
     private static final RString 認定申請理由 = new RString("認定申請理由");
-    private static final NinteiResultSimple 前回認定結果 = NinteiResultSimple.EMPTY;
+    private static final NinteiResultSimple 前回認定結果 = NinteiResultSimple.NONE;
     private static final boolean 情報提供への同意有無 = true;
     private static final int 認定調査依頼履歴番号 = 1;
     private static final Code 認定調査識別コード = new Code(new RString("1"));
