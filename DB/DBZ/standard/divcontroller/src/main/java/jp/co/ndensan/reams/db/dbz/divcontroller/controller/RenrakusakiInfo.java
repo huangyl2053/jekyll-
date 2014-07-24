@@ -73,7 +73,7 @@ public class RenrakusakiInfo {
                         renrakusaki.get電話番号().value(),
                         renrakusaki.get携帯番号().value(),
                         renrakusaki.get氏名カナ().value(),
-                        renrakusaki.get郵便番号().value(),
+                        new YubinNo(renrakusaki.get郵便番号().value()).getEditedYubinNo(),
                         renrakusaki.get住所().value()
                 ));
             }
