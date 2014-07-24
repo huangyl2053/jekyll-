@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoRenrakusakiInfo;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jul 18 17:59:28 JST 2014 
+ * Wed Jul 23 15:06:02 JST 2014 
  */
 
 
@@ -20,49 +20,57 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgRenrakusaki_Row extends DataRow {
 
+    private RString renrakusakiKbnNo;
     private RString shimei;
+    private RString tsuzukigara;
     private RString tel;
     private RString keitaiNo;
     private RString shimeiKana;
     private RString yubinNo;
     private RString jusho;
-    private RString zokugara;
-    private RString renrakusakiKbnNo;
 
     public dgRenrakusaki_Row() {
         super();
+        this.renrakusakiKbnNo = RString.EMPTY;
         this.shimei = RString.EMPTY;
+        this.tsuzukigara = RString.EMPTY;
         this.tel = RString.EMPTY;
         this.keitaiNo = RString.EMPTY;
         this.shimeiKana = RString.EMPTY;
         this.yubinNo = RString.EMPTY;
         this.jusho = RString.EMPTY;
-        this.zokugara = RString.EMPTY;
-        this.renrakusakiKbnNo = RString.EMPTY;
     }
 
-    public dgRenrakusaki_Row(RString shimei, RString tel, RString keitaiNo, RString shimeiKana, RString yubinNo, RString jusho, RString zokugara, RString renrakusakiKbnNo) {
+    public dgRenrakusaki_Row(RString renrakusakiKbnNo, RString shimei, RString tsuzukigara, RString tel, RString keitaiNo, RString shimeiKana, RString yubinNo, RString jusho) {
         super();
+        this.setOriginalData("renrakusakiKbnNo", renrakusakiKbnNo);
         this.setOriginalData("shimei", shimei);
+        this.setOriginalData("tsuzukigara", tsuzukigara);
         this.setOriginalData("tel", tel);
         this.setOriginalData("keitaiNo", keitaiNo);
         this.setOriginalData("shimeiKana", shimeiKana);
         this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("jusho", jusho);
-        this.setOriginalData("zokugara", zokugara);
-        this.setOriginalData("renrakusakiKbnNo", renrakusakiKbnNo);
+        this.renrakusakiKbnNo = renrakusakiKbnNo;
         this.shimei = shimei;
+        this.tsuzukigara = tsuzukigara;
         this.tel = tel;
         this.keitaiNo = keitaiNo;
         this.shimeiKana = shimeiKana;
         this.yubinNo = yubinNo;
         this.jusho = jusho;
-        this.zokugara = zokugara;
-        this.renrakusakiKbnNo = renrakusakiKbnNo;
+    }
+
+    public RString getRenrakusakiKbnNo() {
+        return renrakusakiKbnNo;
     }
 
     public RString getShimei() {
         return shimei;
+    }
+
+    public RString getTsuzukigara() {
+        return tsuzukigara;
     }
 
     public RString getTel() {
@@ -85,17 +93,19 @@ public class dgRenrakusaki_Row extends DataRow {
         return jusho;
     }
 
-    public RString getZokugara() {
-        return zokugara;
-    }
-
-    public RString getRenrakusakiKbnNo() {
-        return renrakusakiKbnNo;
+    public void setRenrakusakiKbnNo(RString renrakusakiKbnNo) {
+        this.setOriginalData("renrakusakiKbnNo", renrakusakiKbnNo);
+        this.renrakusakiKbnNo = renrakusakiKbnNo;
     }
 
     public void setShimei(RString shimei) {
         this.setOriginalData("shimei", shimei);
         this.shimei = shimei;
+    }
+
+    public void setTsuzukigara(RString tsuzukigara) {
+        this.setOriginalData("tsuzukigara", tsuzukigara);
+        this.tsuzukigara = tsuzukigara;
     }
 
     public void setTel(RString tel) {
@@ -121,16 +131,6 @@ public class dgRenrakusaki_Row extends DataRow {
     public void setJusho(RString jusho) {
         this.setOriginalData("jusho", jusho);
         this.jusho = jusho;
-    }
-
-    public void setZokugara(RString zokugara) {
-        this.setOriginalData("zokugara", zokugara);
-        this.zokugara = zokugara;
-    }
-
-    public void setRenrakusakiKbnNo(RString renrakusakiKbnNo) {
-        this.setOriginalData("renrakusakiKbnNo", renrakusakiKbnNo);
-        this.renrakusakiKbnNo = renrakusakiKbnNo;
     }
 
 }

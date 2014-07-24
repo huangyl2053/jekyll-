@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoRenrakusakiInfo;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -33,10 +34,14 @@ public class SelectedContentsDiv extends Panel {
     private TextBoxYubinNo txtYubinNo;
     @JsonProperty("txtJusho")
     private TextBoxMultiLine txtJusho;
-    @JsonProperty("txtZokugara")
-    private TextBox txtZokugara;
-    @JsonProperty("txtRenrakusakiKbnNo")
-    private TextBox txtRenrakusakiKbnNo;
+    @JsonProperty("txtTsuzukigara")
+    private TextBox txtTsuzukigara;
+    @JsonProperty("btnUpdate")
+    private Button btnUpdate;
+    @JsonProperty("btnReturn")
+    private Button btnReturn;
+    @JsonProperty("renrakusakiKbnNo")
+    private RString renrakusakiKbnNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -104,24 +109,44 @@ public class SelectedContentsDiv extends Panel {
         this.txtJusho=txtJusho;
     }
 
-    @JsonProperty("txtZokugara")
-    public TextBox getTxtZokugara() {
-        return txtZokugara;
+    @JsonProperty("txtTsuzukigara")
+    public TextBox getTxtTsuzukigara() {
+        return txtTsuzukigara;
     }
 
-    @JsonProperty("txtZokugara")
-    public void setTxtZokugara(TextBox txtZokugara) {
-        this.txtZokugara=txtZokugara;
+    @JsonProperty("txtTsuzukigara")
+    public void setTxtTsuzukigara(TextBox txtTsuzukigara) {
+        this.txtTsuzukigara=txtTsuzukigara;
     }
 
-    @JsonProperty("txtRenrakusakiKbnNo")
-    public TextBox getTxtRenrakusakiKbnNo() {
-        return txtRenrakusakiKbnNo;
+    @JsonProperty("btnUpdate")
+    public Button getBtnUpdate() {
+        return btnUpdate;
     }
 
-    @JsonProperty("txtRenrakusakiKbnNo")
-    public void setTxtRenrakusakiKbnNo(TextBox txtRenrakusakiKbnNo) {
-        this.txtRenrakusakiKbnNo=txtRenrakusakiKbnNo;
+    @JsonProperty("btnUpdate")
+    public void setBtnUpdate(Button btnUpdate) {
+        this.btnUpdate=btnUpdate;
+    }
+
+    @JsonProperty("btnReturn")
+    public Button getBtnReturn() {
+        return btnReturn;
+    }
+
+    @JsonProperty("btnReturn")
+    public void setBtnReturn(Button btnReturn) {
+        this.btnReturn=btnReturn;
+    }
+
+    @JsonProperty("renrakusakiKbnNo")
+    public RString getRenrakusakiKbnNo() {
+        return renrakusakiKbnNo;
+    }
+
+    @JsonProperty("renrakusakiKbnNo")
+    public void setRenrakusakiKbnNo(RString renrakusakiKbnNo) {
+        this.renrakusakiKbnNo=renrakusakiKbnNo;
     }
 
 }

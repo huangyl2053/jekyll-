@@ -35,18 +35,8 @@ public class KojinJokyoShokaiTaishoshaKensaku {
 
         List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
-        if (cg.getAsRString("保険者番号").equalsIgnoreCase(new RString("152264"))) {
-            div.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getDdlHokensha().setSelectedItem(new RString("2"));
-            div.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getDdlHokensha().setDisplayNone(false);
-
-        } else {
-            div.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getDdlHokensha().setSelectedItem(new RString("1"));
-        }
 
         div.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getTxtTuchishoNo().setDisplayNone(true);
-// 共有子Divの修正により、突如エラーしたのでとりあえずコメントアウトします。
-//        div.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getLblJuminShubetsu().setDisplayNone(true);
-//        div.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getDdlJuminShubetsu().setDisabled(true);
 
         response.data = div;
         return response;

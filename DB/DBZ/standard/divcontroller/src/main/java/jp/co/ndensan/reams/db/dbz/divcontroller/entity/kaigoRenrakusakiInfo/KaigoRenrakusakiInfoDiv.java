@@ -24,20 +24,16 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgRenrakusaki")
-    private DataGrid<dgRenrakusaki_Row> dgRenrakusaki;
     @JsonProperty("btnAdd")
     private Button btnAdd;
     @JsonProperty("btnDelete")
     private Button btnDelete;
+    @JsonProperty("dgRenrakusaki")
+    private DataGrid<dgRenrakusaki_Row> dgRenrakusaki;
+    @JsonProperty("btnClose")
+    private Button btnClose;
     @JsonProperty("SelectedContents")
     private SelectedContentsDiv SelectedContents;
-    @JsonProperty("btnKoshin")
-    private Button btnKoshin;
-    @JsonProperty("btnKakutei")
-    private Button btnKakutei;
-    @JsonProperty("btnReturn")
-    private Button btnReturn;
     @JsonProperty("hihokenshaNo")
     private RString hihokenshaNo;
     @JsonProperty("shoriKbn")
@@ -49,16 +45,6 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("dgRenrakusaki")
-    public DataGrid<dgRenrakusaki_Row> getDgRenrakusaki() {
-        return dgRenrakusaki;
-    }
-
-    @JsonProperty("dgRenrakusaki")
-    public void setDgRenrakusaki(DataGrid<dgRenrakusaki_Row> dgRenrakusaki) {
-        this.dgRenrakusaki=dgRenrakusaki;
-    }
-
     @JsonProperty("btnAdd")
     public Button getBtnAdd() {
         return btnAdd;
@@ -79,6 +65,26 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
         this.btnDelete=btnDelete;
     }
 
+    @JsonProperty("dgRenrakusaki")
+    public DataGrid<dgRenrakusaki_Row> getDgRenrakusaki() {
+        return dgRenrakusaki;
+    }
+
+    @JsonProperty("dgRenrakusaki")
+    public void setDgRenrakusaki(DataGrid<dgRenrakusaki_Row> dgRenrakusaki) {
+        this.dgRenrakusaki=dgRenrakusaki;
+    }
+
+    @JsonProperty("btnClose")
+    public Button getBtnClose() {
+        return btnClose;
+    }
+
+    @JsonProperty("btnClose")
+    public void setBtnClose(Button btnClose) {
+        this.btnClose=btnClose;
+    }
+
     @JsonProperty("SelectedContents")
     public SelectedContentsDiv getSelectedContents() {
         return SelectedContents;
@@ -87,36 +93,6 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
     @JsonProperty("SelectedContents")
     public void setSelectedContents(SelectedContentsDiv SelectedContents) {
         this.SelectedContents=SelectedContents;
-    }
-
-    @JsonProperty("btnKoshin")
-    public Button getBtnKoshin() {
-        return btnKoshin;
-    }
-
-    @JsonProperty("btnKoshin")
-    public void setBtnKoshin(Button btnKoshin) {
-        this.btnKoshin=btnKoshin;
-    }
-
-    @JsonProperty("btnKakutei")
-    public Button getBtnKakutei() {
-        return btnKakutei;
-    }
-
-    @JsonProperty("btnKakutei")
-    public void setBtnKakutei(Button btnKakutei) {
-        this.btnKakutei=btnKakutei;
-    }
-
-    @JsonProperty("btnReturn")
-    public Button getBtnReturn() {
-        return btnReturn;
-    }
-
-    @JsonProperty("btnReturn")
-    public void setBtnReturn(Button btnReturn) {
-        this.btnReturn=btnReturn;
     }
 
     @JsonProperty("hihokenshaNo")

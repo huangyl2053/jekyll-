@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.mapper;
 
-import jp.co.ndensan.reams.db.dbz.business.RenrakusakiJoho;
+import jp.co.ndensan.reams.db.dbz.business.KaigoRenrakusaki;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5050RenrakusakiJohoEntity;
 
 /**
@@ -27,10 +27,10 @@ public final class RenrakusakiInfoMapper {
      * @param entity 連絡先情報Entity
      * @return 連絡先情報データ
      */
-    public static RenrakusakiJoho toRenrakusakiInfo(
+    public static KaigoRenrakusaki toRenrakusakiInfo(
             DbT5050RenrakusakiJohoEntity entity) throws NullPointerException {
 
-        return new RenrakusakiJoho(
+        return new KaigoRenrakusaki(
                 entity.getRenrakusakiShimei(),
                 entity.getRenrakusakiKanaSimei(),
                 entity.getRenrakusakiTelNo(),
@@ -51,7 +51,7 @@ public final class RenrakusakiInfoMapper {
      * @param renrakusakiJoho 連絡先情報
      * @return 連絡先情報エンティティ
      */
-    public static DbT5050RenrakusakiJohoEntity toRenrakusakiJohoEntity(RenrakusakiJoho renrakusakiJoho) {
+    public static DbT5050RenrakusakiJohoEntity toRenrakusakiJohoEntity(KaigoRenrakusaki renrakusakiJoho) {
 
         DbT5050RenrakusakiJohoEntity entity = new DbT5050RenrakusakiJohoEntity();
 

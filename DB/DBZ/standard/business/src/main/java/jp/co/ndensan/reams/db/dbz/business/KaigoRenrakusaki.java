@@ -10,13 +10,16 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 連絡先情報を表すクラスです。
  *
- * @author n9606
+ * @author n9606 漢那 憲作
  */
-public class RenrakusakiJoho {
+public class KaigoRenrakusaki {
 
     private final AtenaMeisho 氏名;
     private final AtenaKanaMeisho 氏名カナ;
@@ -26,8 +29,8 @@ public class RenrakusakiJoho {
     private final AtenaJusho 住所;
     private final RString 続柄;
     private final RString 連絡先区分番号;
-    private final RString 保険者番号;
-    private final RString 被保険者番号;
+    private final ShoKisaiHokenshaNo 保険者番号;
+    private final KaigoHihokenshaNo 被保険者番号;
 
     /**
      * インスタンスを生成します。
@@ -40,12 +43,13 @@ public class RenrakusakiJoho {
      * @param 住所 AtenaJusho
      * @param 続柄 RString
      * @param 連絡先区分番号 RString
-     * @param 保険者番号 RString
-     * @param 被保険者番号 RString
+     * @param 保険者番号 ShoKisaiHokenshaNo
+     * @param 被保険者番号 KaigoHihokenshaNo
      */
-    public RenrakusakiJoho(AtenaMeisho 氏名, AtenaKanaMeisho 氏名カナ,
+    public KaigoRenrakusaki(AtenaMeisho 氏名, AtenaKanaMeisho 氏名カナ,
             TelNo 電話番号, TelNo 携帯番号, YubinNo 郵便番号, AtenaJusho 住所,
-            RString 続柄, RString 連絡先区分番号, RString 保険者番号, RString 被保険者番号) {
+            RString 続柄, RString 連絡先区分番号, ShoKisaiHokenshaNo 保険者番号,
+            KaigoHihokenshaNo 被保険者番号) {
 
         this.氏名 = 氏名;
         this.氏名カナ = 氏名カナ;
@@ -137,7 +141,7 @@ public class RenrakusakiJoho {
      *
      * @return 保険者番号
      */
-    public RString get保険者番号() {
+    public ShoKisaiHokenshaNo get保険者番号() {
         return 保険者番号;
     }
 
@@ -146,7 +150,7 @@ public class RenrakusakiJoho {
      *
      * @return 被保険者番号
      */
-    public RString get被保険者番号() {
+    public KaigoHihokenshaNo get被保険者番号() {
         return 被保険者番号;
     }
 }

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.business.RenrakusakiJoho;
+import jp.co.ndensan.reams.db.dbz.business.KaigoRenrakusaki;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5050RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.mapper.RenrakusakiInfoMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.RenrakusakiInfoDac;
@@ -46,7 +46,7 @@ public class RenrakusakiInfoManager {
      * @param renrakusakiJoho 連絡先情報
      * @return 成功：true, 失敗：false。
      */
-    public boolean save(RenrakusakiJoho renrakusakiJoho) {
+    public boolean save(KaigoRenrakusaki renrakusakiJoho) {
         DbT5050RenrakusakiJohoEntity entity = RenrakusakiInfoMapper.toRenrakusakiJohoEntity(renrakusakiJoho);
 
         int result = this.dac.insertOrUpdate(entity);
@@ -59,7 +59,7 @@ public class RenrakusakiInfoManager {
      * @param renrakusakiJoho 連絡先情報
      * @return 成功：true, 失敗：false。
      */
-    public boolean remove(RenrakusakiJoho renrakusakiJoho) {
+    public boolean remove(KaigoRenrakusaki renrakusakiJoho) {
         DbT5050RenrakusakiJohoEntity entity = RenrakusakiInfoMapper.toRenrakusakiJohoEntity(renrakusakiJoho);
 
         int result = this.dac.delete(entity);
