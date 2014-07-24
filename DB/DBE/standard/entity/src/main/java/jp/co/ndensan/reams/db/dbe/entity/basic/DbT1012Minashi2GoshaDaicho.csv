@@ -1,0 +1,7 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+rirekiNo,int4,int,,,,,A
+hihokenshaKubunCode,varchar,RString,,,,,A
+minashi2GoshaTorokuYMD,UDD015YMD,FlexibleDate,,,,,A
+minashi2GoshaKaijoYMD,UDD015YMD,FlexibleDate,,,,,A
