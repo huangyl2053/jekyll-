@@ -106,7 +106,7 @@ public class KyufuJisseki {
         panel.getTxtKyufuJissekiKihonSakuseiKubun().setValue(new RString(kihon.get作成区分().name()));
         panel.getTxtKyufuJissekiKihonYokaigodo().setValue(kihon.get要介護度());
         panel.getTxtKyufuJissekiKihonNinteiYukoKikan().setFromValue(toRDate(kihon.get認定有効期間().getFrom()));
-        panel.getTxtKyufuJissekiKihonNinteiYukoKikan().setFromValue(toRDate(kihon.get認定有効期間().getTo()));
+        panel.getTxtKyufuJissekiKihonNinteiYukoKikan().setToValue(toRDate(kihon.get認定有効期間().getTo()));
         panel.getTxtKyufuJissekiKihonShinsaYM().setValue(toRDate(kihon.get審査年月()));
         panel.getTxtKyufuJissekiKihonKeikokuKubun().setValue(new RString(kihon.get警告区分().name()));
 
