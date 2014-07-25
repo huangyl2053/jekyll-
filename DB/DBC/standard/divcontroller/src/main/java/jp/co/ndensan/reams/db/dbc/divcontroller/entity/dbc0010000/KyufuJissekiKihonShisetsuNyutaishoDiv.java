@@ -22,11 +22,11 @@ public class KyufuJissekiKihonShisetsuNyutaishoDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtKyufuJissekiKihonNyushoYMD")
-    private TextBox txtKyufuJissekiKihonNyushoYMD;
+    private TextBoxDate txtKyufuJissekiKihonNyushoYMD;
     @JsonProperty("txtKyufuJissekiKihonNyushoJitsuNissu")
     private TextBox txtKyufuJissekiKihonNyushoJitsuNissu;
     @JsonProperty("txtKyufuJissekiKihonTaishoYMD")
-    private TextBox txtKyufuJissekiKihonTaishoYMD;
+    private TextBoxDate txtKyufuJissekiKihonTaishoYMD;
     @JsonProperty("txtKyufuJissekiKihonGaihakuNissu")
     private TextBox txtKyufuJissekiKihonGaihakuNissu;
     @JsonProperty("txtKyufuJissekiKihonNyushoMaeJokyo")
@@ -41,12 +41,12 @@ public class KyufuJissekiKihonShisetsuNyutaishoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("txtKyufuJissekiKihonNyushoYMD")
-    public TextBox getTxtKyufuJissekiKihonNyushoYMD() {
+    public TextBoxDate getTxtKyufuJissekiKihonNyushoYMD() {
         return txtKyufuJissekiKihonNyushoYMD;
     }
 
     @JsonProperty("txtKyufuJissekiKihonNyushoYMD")
-    public void setTxtKyufuJissekiKihonNyushoYMD(TextBox txtKyufuJissekiKihonNyushoYMD) {
+    public void setTxtKyufuJissekiKihonNyushoYMD(TextBoxDate txtKyufuJissekiKihonNyushoYMD) {
         this.txtKyufuJissekiKihonNyushoYMD=txtKyufuJissekiKihonNyushoYMD;
     }
 
@@ -61,12 +61,12 @@ public class KyufuJissekiKihonShisetsuNyutaishoDiv extends Panel {
     }
 
     @JsonProperty("txtKyufuJissekiKihonTaishoYMD")
-    public TextBox getTxtKyufuJissekiKihonTaishoYMD() {
+    public TextBoxDate getTxtKyufuJissekiKihonTaishoYMD() {
         return txtKyufuJissekiKihonTaishoYMD;
     }
 
     @JsonProperty("txtKyufuJissekiKihonTaishoYMD")
-    public void setTxtKyufuJissekiKihonTaishoYMD(TextBox txtKyufuJissekiKihonTaishoYMD) {
+    public void setTxtKyufuJissekiKihonTaishoYMD(TextBoxDate txtKyufuJissekiKihonTaishoYMD) {
         this.txtKyufuJissekiKihonTaishoYMD=txtKyufuJissekiKihonTaishoYMD;
     }
 

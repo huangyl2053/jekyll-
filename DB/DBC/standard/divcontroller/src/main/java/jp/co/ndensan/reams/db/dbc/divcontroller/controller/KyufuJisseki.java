@@ -52,8 +52,8 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukei;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -71,11 +71,11 @@ public class KyufuJisseki {
         KyufuJissekiKihon kihon = jisseki.get基本();
         panel.getTxtKyufuJissekiHihokenshaNo().setValue(kihon.get被保番号().value());
         panel.getTxtKyufuJissekiYokaigodo().setValue(kihon.get要介護度());
-        panel.getTxtKyufuJissekiNinteiYukoKikan().setFromValue(new RDate(kihon.get認定有効期間().getFrom().toString()));
-        panel.getTxtKyufuJissekiNinteiYukoKikan().setToValue(new RDate(kihon.get認定有効期間().getTo().toString()));
+        panel.getTxtKyufuJissekiNinteiYukoKikan().setFromValue(toRDate(kihon.get認定有効期間().getFrom()));
+        panel.getTxtKyufuJissekiNinteiYukoKikan().setToValue(toRDate(kihon.get認定有効期間().getTo()));
         panel.getTxtKyufuJissekiSeibetsu().setValue(kihon.get性別().getName().getShortJapanese());
-        panel.getTxtKyufuJissekiSeinengappi().setValue(new RString(kihon.get生年月日().toString()));
-        panel.getTxtKyufuJissekiTeikyoYM().setValue(kihon.get提供年月().value().toDateString());
+        panel.getTxtKyufuJissekiSeinengappi().setValue(toRDate(kihon.get生年月日()));
+        panel.getTxtKyufuJissekiTeikyoYM().setValue(toRDate(kihon.get提供年月().value()));
         panel.getTxtKyufuJissekiJissekiKubun().setValue(new RString(kihon.get実績区分().name()));
         panel.getTxtKyufuJissekiSeiriNo().setValue(kihon.get整理番号());
         panel.getTxtKyufuJissekiHokensha().setValue(kihon.get保険者());
@@ -102,9 +102,9 @@ public class KyufuJisseki {
 
         panel.getTxtKyufuJissekiKihonSakuseiKubun().setValue(new RString(kihon.get作成区分().name()));
         panel.getTxtKyufuJissekiKihonYokaigodo().setValue(kihon.get要介護度());
-        panel.getTxtKyufuJissekiKihonNinteiYukoKikan().setFromValue(new RDate(kihon.get認定有効期間().getFrom().toString()));
-        panel.getTxtKyufuJissekiKihonNinteiYukoKikan().setFromValue(new RDate(kihon.get認定有効期間().getTo().toString()));
-        panel.getTxtKyufuJissekiKihonShinsaYM().setValue(kihon.get審査年月().toDateString());
+        panel.getTxtKyufuJissekiKihonNinteiYukoKikan().setFromValue(toRDate(kihon.get認定有効期間().getFrom()));
+        panel.getTxtKyufuJissekiKihonNinteiYukoKikan().setFromValue(toRDate(kihon.get認定有効期間().getTo()));
+        panel.getTxtKyufuJissekiKihonShinsaYM().setValue(toRDate(kihon.get審査年月()));
         panel.getTxtKyufuJissekiKihonKeikokuKubun().setValue(new RString(kihon.get警告区分().name()));
 
         KyufuJissekiKihonHihokenshaDiv hihokenshaDiv = panel.getKyufuJissekiKihonHihokensha();
@@ -126,14 +126,14 @@ public class KyufuJisseki {
 
         KyufuJissekiKihonServiceKikanDiv serviceKikanDiv = panel.getKyufuJissekiKihonServiceKikan();
         KyufuJissekiKihonServiceKikan kikan = kihon.getサービス期間情報();
-        serviceKikanDiv.getTxtKyufuJissekiKihonKaishiYMD().setValue(new RString(kikan.get開始日().toString()));
-        serviceKikanDiv.getTxtKyufuJissekiKihonChushiYMD().setValue(new RString(kikan.get中止日().toString()));
+        serviceKikanDiv.getTxtKyufuJissekiKihonKaishiYMD().setValue(toRDate(kikan.get開始日()));
+        serviceKikanDiv.getTxtKyufuJissekiKihonChushiYMD().setValue(toRDate(kikan.get中止日()));
         serviceKikanDiv.getTxtKyufuJissekiKihonChushiRiyu().setValue(kikan.get中止理由());
 
         KyufuJissekiKihonShisetsuNyutaishoDiv shisetsuNyutaishoDiv = panel.getKyufuJissekiKihonShisetsuNyutaisho();
         KyufuJissekiKihonNyutaisho nyutaisho = kihon.get施設入退所情報();
-        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonNyushoYMD().setValue(new RString(nyutaisho.get入所日().toString()));
-        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonTaishoYMD().setValue(new RString(nyutaisho.get退所日().toString()));
+        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonNyushoYMD().setValue(toRDate(nyutaisho.get入所日()));
+        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonTaishoYMD().setValue(toRDate(nyutaisho.get退所日()));
         shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonNyushoJitsuNissu().setValue(new RString(Integer.toString(nyutaisho.get入所実日数())));
         shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonGaihakuNissu().setValue(new RString(Integer.toString(nyutaisho.get外泊日数())));
         shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonNyushoMaeJokyo().setValue(nyutaisho.get入所前の状況());
@@ -154,6 +154,20 @@ public class KyufuJisseki {
         kohiDiv.getTxtKyufuJissekiKihonKohiJukyushaNo1().setValue(kohi.get公費１受給者番号());
         kohiDiv.getTxtKyufuJissekiKihonKohiJukyushaNo2().setValue(kohi.get公費２受給者番号());
         kohiDiv.getTxtKyufuJissekiKihonKohiJukyushaNo3().setValue(kohi.get公費３受給者番号());
+    }
+
+    private RDate toRDate(FlexibleDate date) {
+        if (date == null || !date.isValid()) {
+            return null;
+        }
+        return new RDate(date.toString());
+    }
+
+    private RDate toRDate(FlexibleYearMonth date) {
+        if (date == null || !date.isValid()) {
+            return null;
+        }
+        return new RDate(date.toString());
     }
 
     private void setKyufuJissekiMeisai(KyufuJissekiMeisaiShukeiDiv panel, jp.co.ndensan.reams.db.dbc.business.KyufuJisseki kyufuJisseki) {
