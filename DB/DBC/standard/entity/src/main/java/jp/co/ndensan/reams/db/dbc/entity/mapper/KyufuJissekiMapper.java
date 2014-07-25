@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukeiCollection;
 import jp.co.ndensan.reams.db.dbc.business.ServiceTeikyoYMListOfServiceShurui;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KeikokuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3018KyufujissekiMeisaiEntity;
@@ -38,6 +39,7 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEn
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -144,6 +146,16 @@ public final class KyufuJissekiMapper {
      */
     public static KyufuJissekiKihon to給付実績基本(DbT3017KyufujissekiKihonEntity entity) {
         return entity != null ? new KyufuJissekiKihon(
+                entity.getHiHokenshaNo(),
+                RString.EMPTY,
+                Gender.toValue(entity.getSeibetsuCode()),
+                entity.getUmareYMD(),
+                new ServiceTeikyoYM(entity.getServiceTeikyoYM()),
+                KyufuJissekiKubun.toValue(entity.getKyufuJissekiKubunCode()),
+                entity.getSeiriNo(),
+                entity.getHokenshaNo().getValue(),
+                new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo()), RString.EMPTY, RString.EMPTY),
+                entity.getJigyoshoNo().value(),
                 KyufuSakuseiKubun.toValue(entity.getKyufuSakuseiKubunCode()),
                 entity.getYoKaigoJotaiKubunCode(),
                 new Range<>(entity.getNinteiYukoKaishiYMD(), entity.getNinteiYukoShuryoYMD()),

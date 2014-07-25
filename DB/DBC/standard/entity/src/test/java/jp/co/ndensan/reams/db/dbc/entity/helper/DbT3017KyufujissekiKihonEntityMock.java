@@ -60,6 +60,10 @@ public class DbT3017KyufujissekiKihonEntityMock {
         entity.setToshiNo(new ToshiNo(new RString("0000000006")));
         entity.setShinsaYM(new FlexibleYearMonth("201402"));
 
+        entity.setSeibetsuCode(new RString("2"));
+        entity.setUmareYMD(new FlexibleDate("20010101"));
+        entity.setSeiriNo(new RString("0000000007"));
+
         entity.setKyufuSakuseiKubunCode(new RString("1"));
         entity.setYoKaigoJotaiKubunCode(new RString("01"));
         entity.setNinteiYukoKaishiYMD(new FlexibleDate("20130701"));

@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -119,6 +120,10 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
 
         private KyufuJissekiKihon result;
 
+        private final Gender 性別 = Gender.FEMALE;
+        private final FlexibleDate 生年月日 = new FlexibleDate("20010101");
+        private final RString 整理番号 = new RString("0000000007");
+
         private final KyufuSakuseiKubun 作成区分 = KyufuSakuseiKubun.新規;
         private final RString 要介護度 = new RString("01");
         private final Range<FlexibleDate> 認定有効期間 = new Range<>(new FlexibleDate("20130701"), new FlexibleDate("20140630"));
@@ -170,6 +175,21 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
         @Before
         public void setUp() {
             result = KyufuJissekiMapper.to給付実績基本(DbT3017KyufujissekiKihonEntityMock.getSpiedInstance());
+        }
+
+        @Test
+        public void 性別の設定がある時_to給付実績基本_get性別は_設定値を返す() {
+            assertThat(result.get性別(), is(性別));
+        }
+
+        @Test
+        public void 生年月日の設定がある時_to給付実績基本_get生年月日は_設定値を返す() {
+            assertThat(result.get生年月日(), is(生年月日));
+        }
+
+        @Test
+        public void 整理番号の設定がある時_to給付実績基本_get整理番号は_設定値を返す() {
+            assertThat(result.get整理番号(), is(整理番号));
         }
 
         @Test

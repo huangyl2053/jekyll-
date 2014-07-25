@@ -37,145 +37,123 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.db.dbc.realservice.KyufuJissekiFinder;
-import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihon;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonHihokensha;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonKohi;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonKyotakuService;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonKyufuritsu;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonNyutaisho;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonServiceKikan;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiMeisai;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukei;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
+ * 給付実績照会のコントローラークラスです。
  *
  * @author N8156 宮本 康
  */
 public class KyufuJisseki {
 
-    private KyufuJissekiKihon 基本情報 = null;
-    private KyufuJissekiDetailKeyInfo 詳細キー情報 = null;
-    private jp.co.ndensan.reams.db.dbc.business.KyufuJisseki kyufuJisseki = null;
-
     public ResponseData<KyufuJissekiDiv> dispKyufuJisseki(KyufuJissekiDiv panel) {
         ResponseData<KyufuJissekiDiv> response = new ResponseData<>();
 
-        List<HashMap> kyufuJisseki = YamlLoader.DBC.loadAsList(
-                new RString("dbc0010000/KyufuJisseki.yml"));
+        jp.co.ndensan.reams.db.dbc.business.KyufuJisseki jisseki = get給付実績();
 
-        //ヘッダー情報取得、設定
-        HashMap hashMap = kyufuJisseki.get(0);
-        ControlGenerator ymlData = new ControlGenerator(hashMap);
+        KyufuJissekiKihon kihon = jisseki.get基本();
+        panel.getTxtKyufuJissekiHihokenshaNo().setValue(kihon.get被保番号().value());
+        panel.getTxtKyufuJissekiYokaigodo().setValue(kihon.get要介護度());
+        panel.getTxtKyufuJissekiNinteiYukoKikan().setFromValue(new RDate(kihon.get認定有効期間().getFrom().toString()));
+        panel.getTxtKyufuJissekiNinteiYukoKikan().setToValue(new RDate(kihon.get認定有効期間().getTo().toString()));
+        panel.getTxtKyufuJissekiSeibetsu().setValue(kihon.get性別().getName().getShortJapanese());
+        panel.getTxtKyufuJissekiSeinengappi().setValue(new RString(kihon.get生年月日().toString()));
+        panel.getTxtKyufuJissekiTeikyoYM().setValue(kihon.get提供年月().value().toDateString());
+        panel.getTxtKyufuJissekiJissekiKubun().setValue(new RString(kihon.get実績区分().name()));
+        panel.getTxtKyufuJissekiSeiriNo().setValue(kihon.get整理番号());
+        panel.getTxtKyufuJissekiHokensha().setValue(kihon.get保険者());
+        panel.getTxtKyufuJissekiShikibetsuCode().setValue(kihon.get明細書識別番号().getInputShikibetsuNoCode().value());
+        panel.getTxtKyufuJissekiJigyosha().setValue(kihon.get事業者());
 
-        panel.getTxtKyufuJissekiHihokenshaNo().setValue(ymlData.getAsRString("HihokenshaNo"));
-        panel.getTxtKyufuJissekiJuminShubetsu().setValue(ymlData.getAsRString("JuminShubetsu"));
-        panel.getTxtKyufuJissekiYokaigodo().setValue(ymlData.getAsRString("Yokaigodo"));
-        panel.getTxtKyufuJissekiNinteiYukoKikan().setFromValue(ymlData.getAsRDate("NinteiYukoKikanFrom"));
-        panel.getTxtKyufuJissekiNinteiYukoKikan().setToValue(ymlData.getAsRDate("NinteiYukoKikanTo"));
-        panel.getTxtKyufuJissekiName().setValue(ymlData.getAsRString("Name"));
-        panel.getTxtKyufuJissekiSeibetsu().setValue(ymlData.getAsRString("Seibetsu"));
-        panel.getTxtKyufuJissekiSeinengappi().setValue(ymlData.getAsRString("Seinengappi"));
-        panel.getTxtKyufuJissekiTeikyoYM().setValue(ymlData.getAsRString("TeikyoYM"));
-        panel.getTxtKyufuJissekiJissekiKubun().setValue(ymlData.getAsRString("JissekiKubun"));
-        panel.getTxtKyufuJissekiSeiriNo().setValue(ymlData.getAsRString("SeiriNo"));
-        panel.getTxtKyufuJissekiHokensha().setValue(ymlData.getAsRString("Hokensha"));
-        panel.getTxtKyufuJissekiShikibetsuCode().setValue(ymlData.getAsRString("ShikibetsuCode"));
-//        panel.getTxtKyufuJissekiShikibetsuName().setValue(ymlData.getAsRString("ShikibetsuName"));
-        panel.getTxtKyufuJissekiJigyosha().setValue(ymlData.getAsRString("Jigyosha"));
-
-        panel.getTxtKyufuJissekiHihokenshaNo().setValue(new RString("0000314323"));
         panel.getTxtKyufuJissekiJuminShubetsu().setValue(new RString("転出者"));
-        panel.getTxtKyufuJissekiYokaigodo().setValue(new RString("要介護１"));
-        panel.getTxtKyufuJissekiNinteiYukoKikan().setFromValue(new RDate("20140101"));
-        panel.getTxtKyufuJissekiNinteiYukoKikan().setToValue(new RDate("20140202"));
         panel.getTxtKyufuJissekiName().setValue(new RString("電算　太郎"));
-        panel.getTxtKyufuJissekiSeibetsu().setValue(new RString("男"));
-        panel.getTxtKyufuJissekiSeinengappi().setValue(new RString("昭03.03.03"));
-        panel.getTxtKyufuJissekiTeikyoYM().setValue(new RString("平26.01"));
-        panel.getTxtKyufuJissekiJissekiKubun().setValue(new RString("償還"));
-        panel.getTxtKyufuJissekiSeiriNo().setValue(new RString("0000000001"));
-        panel.getTxtKyufuJissekiHokensha().setValue(new RString("保険　次郎"));
-        panel.getTxtKyufuJissekiShikibetsuCode().setValue(new RString("0001"));
-//        panel.getTxtKyufuJissekiShikibetsuName().setValue(new RString("サービス提供証明書（訪問通所他）"));
-//        List<KeyValueDataSource> list = new ArrayList<>();
-//        list.add(new KeyValueDataSource(new RString("key0"), new RString("1114301032:雛菊サービス機関")));
-//        list.add(new KeyValueDataSource(new RString("key1"), new RString("2070500448:アネモネ福祉ランド")));
-//        panel.getDdlKyufuJissekiJigyosha().setDataSource(list);
-//        panel.getBtnTokuteiShinryohi().setWrap(true);
-//        panel.getBtnShokujiHiyo().setWrap(true);
-//        panel.getBtnTokuteiNyushoshaKaigoServicehi().setWrap(true);
-//        panel.getBtnShakaiFukushiHojinKeigengaku().setWrap(true);
 
-        jp.co.ndensan.reams.db.dbc.business.KyufuJisseki parmKyufuJisseki = get給付実績();
-
-        setKyufuJissekiKihon(panel.getTabKyufuJisseki().getKyufuJissekiKihon(), parmKyufuJisseki);
-        setKyufuJissekiMeisai(panel.getTabKyufuJisseki().getKyufuJissekiMeisaiShukei(), parmKyufuJisseki);
+        setKyufuJissekiKihon(panel.getTabKyufuJisseki().getKyufuJissekiKihon(), kihon);
+        setKyufuJissekiMeisai(panel.getTabKyufuJisseki().getKyufuJissekiMeisaiShukei(), jisseki);
         setServiceKeikakuhi(panel.getTabKyufuJisseki().getServiceKeikakuhi());
         setFukushiYoguKonyuhi(panel.getTabKyufuJisseki().getFukushiYoguKonyuhi());
         setJutakuKaishuhi(panel.getTabKyufuJisseki().getJutakuKaishuhi());
         setKogakuKaigoServicehi(panel.getTabKyufuJisseki().getKogakuKaigoServicehi());
         setCareManagementhi(panel.getTabKyufuJisseki().getCareManagementhi());
+
         response.data = panel;
+
         return response;
     }
 
-    private void setKyufuJissekiKihon(KyufuJissekiKihonDiv panel, jp.co.ndensan.reams.db.dbc.business.KyufuJisseki kyufuJisseki) {
+    private void setKyufuJissekiKihon(KyufuJissekiKihonDiv panel, KyufuJissekiKihon kihon) {
 
-        //ヘッダー情報取得、設定
-        panel.getTxtKyufuJissekiKihonSakuseiKubun().setValue(kyufuJisseki.get基本().get作成区分().getCode());
-        panel.getTxtKyufuJissekiKihonYokaigodo().setValue(kyufuJisseki.get基本().get要介護度());
-        panel.getTxtKyufuJissekiKihonNinteiYukoKikan().setFromValue(new RDate(kyufuJisseki.get基本().get認定有効期間().getFrom().toString()));
-        panel.getTxtKyufuJissekiKihonNinteiYukoKikan().setFromValue(new RDate(kyufuJisseki.get基本().get認定有効期間().getTo().toString()));
-        panel.getTxtKyufuJissekiKihonShinsaYM().setValue(kyufuJisseki.get基本().get審査年月().toDateString());
-        panel.getTxtKyufuJissekiKihonKeikokuKubun().setValue(kyufuJisseki.get基本().get警告区分().getCode());
+        panel.getTxtKyufuJissekiKihonSakuseiKubun().setValue(new RString(kihon.get作成区分().name()));
+        panel.getTxtKyufuJissekiKihonYokaigodo().setValue(kihon.get要介護度());
+        panel.getTxtKyufuJissekiKihonNinteiYukoKikan().setFromValue(new RDate(kihon.get認定有効期間().getFrom().toString()));
+        panel.getTxtKyufuJissekiKihonNinteiYukoKikan().setFromValue(new RDate(kihon.get認定有効期間().getTo().toString()));
+        panel.getTxtKyufuJissekiKihonShinsaYM().setValue(kihon.get審査年月().toDateString());
+        panel.getTxtKyufuJissekiKihonKeikokuKubun().setValue(new RString(kihon.get警告区分().name()));
 
         KyufuJissekiKihonHihokenshaDiv hihokenshaDiv = panel.getKyufuJissekiKihonHihokensha();
-        hihokenshaDiv.getTxtKyufuJissekiKihonKyusochiNyushoshaTokurei().setValue((kyufuJisseki.get基本().get被保険者情報().get旧措置入所者特例()));
-        hihokenshaDiv.getTxtKyufuJissekiKihonRojinHokenShichosonNo().setValue(kyufuJisseki.get基本().get被保険者情報().get老人保健受給者番号());
-        hihokenshaDiv.getTxtKyufuJissekiKihonRojinHokenJukyushaNo().setValue(kyufuJisseki.get基本().get被保険者情報().get老人保健市町村番号());
-        hihokenshaDiv.getTxtKyufuJissekiKihonKokiKoreiHokenshaNo().setValue(kyufuJisseki.get基本().get被保険者情報().get後期高齢保険者番号());
-        hihokenshaDiv.getTxtKyufuJissekiKihonKokiKoreiHihokenshaNo().setValue(kyufuJisseki.get基本().get被保険者情報().get後期高齢被保番号());
-        hihokenshaDiv.getTxtKyufuJissekiKihonKokuhoHokenshaNo().setValue(kyufuJisseki.get基本().get被保険者情報().get国保保険者番号());
-        hihokenshaDiv.getTxtKyufuJissekiKihonKokuhoHihokenshashoNo().setValue(kyufuJisseki.get基本().get被保険者情報().get被保険者証番号());
-        hihokenshaDiv.getTxtKyufuJissekiKihonKokuhoKojinNo().setValue(kyufuJisseki.get基本().get被保険者情報().get個人番号());
+        KyufuJissekiKihonHihokensha hihokensha = kihon.get被保険者情報();
+        hihokenshaDiv.getTxtKyufuJissekiKihonKyusochiNyushoshaTokurei().setValue((hihokensha.get旧措置入所者特例()));
+        hihokenshaDiv.getTxtKyufuJissekiKihonRojinHokenShichosonNo().setValue(hihokensha.get老人保健受給者番号());
+        hihokenshaDiv.getTxtKyufuJissekiKihonRojinHokenJukyushaNo().setValue(hihokensha.get老人保健市町村番号());
+        hihokenshaDiv.getTxtKyufuJissekiKihonKokiKoreiHokenshaNo().setValue(hihokensha.get後期高齢保険者番号());
+        hihokenshaDiv.getTxtKyufuJissekiKihonKokiKoreiHihokenshaNo().setValue(hihokensha.get後期高齢被保番号());
+        hihokenshaDiv.getTxtKyufuJissekiKihonKokuhoHokenshaNo().setValue(hihokensha.get国保保険者番号());
+        hihokenshaDiv.getTxtKyufuJissekiKihonKokuhoHihokenshashoNo().setValue(hihokensha.get被保険者証番号());
+        hihokenshaDiv.getTxtKyufuJissekiKihonKokuhoKojinNo().setValue(hihokensha.get個人番号());
 
         KyufuJissekiKihonKyotakuServiceKeikakuDiv serviceKeikakuDiv = panel.getKyufuJissekiKihonKyotakuServiceKeikaku();
-        serviceKeikakuDiv.getTxtKyufuJissekiKihonKyotakuServiceKeikakuSakuseiKubun().setValue(
-                kyufuJisseki.get基本().get居宅サービス計画情報().get居宅サービス計画作成区分());
-        serviceKeikakuDiv.getTxtKyufuJissekiKihonJigyoshoNo().setValue(kyufuJisseki.get基本().get居宅サービス計画情報().get事業所番号().value());
-        serviceKeikakuDiv.getTxtKyufuJissekiKihonJigyoshoName().setValue(kyufuJisseki.get基本().get居宅サービス計画情報().get事業所名());
+        KyufuJissekiKihonKyotakuService service = kihon.get居宅サービス計画情報();
+        serviceKeikakuDiv.getTxtKyufuJissekiKihonKyotakuServiceKeikakuSakuseiKubun().setValue(service.get居宅サービス計画作成区分());
+        serviceKeikakuDiv.getTxtKyufuJissekiKihonJigyoshoNo().setValue(service.get事業所番号().value());
+        serviceKeikakuDiv.getTxtKyufuJissekiKihonJigyoshoName().setValue(service.get事業所名());
 
         KyufuJissekiKihonServiceKikanDiv serviceKikanDiv = panel.getKyufuJissekiKihonServiceKikan();
-        serviceKikanDiv.getTxtKyufuJissekiKihonKaishiYMD().setValue(new RString(kyufuJisseki.get基本().getサービス期間情報().get開始日().toString()));
-        serviceKikanDiv.getTxtKyufuJissekiKihonChushiYMD().setValue(new RString(kyufuJisseki.get基本().getサービス期間情報().get中止日().toString()));
-        serviceKikanDiv.getTxtKyufuJissekiKihonChushiRiyu().setValue(kyufuJisseki.get基本().getサービス期間情報().get中止理由());
+        KyufuJissekiKihonServiceKikan kikan = kihon.getサービス期間情報();
+        serviceKikanDiv.getTxtKyufuJissekiKihonKaishiYMD().setValue(new RString(kikan.get開始日().toString()));
+        serviceKikanDiv.getTxtKyufuJissekiKihonChushiYMD().setValue(new RString(kikan.get中止日().toString()));
+        serviceKikanDiv.getTxtKyufuJissekiKihonChushiRiyu().setValue(kikan.get中止理由());
 
         KyufuJissekiKihonShisetsuNyutaishoDiv shisetsuNyutaishoDiv = panel.getKyufuJissekiKihonShisetsuNyutaisho();
-        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonNyushoYMD().setValue(new RString(kyufuJisseki.get基本().get施設入退所情報().get入所日().toString()));
-        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonTaishoYMD().setValue(new RString(kyufuJisseki.get基本().get施設入退所情報().get退所日().toString()));
-//        String nyushoJitsuNissu = kyufuJisseki.get基本().get施設入退所情報().get入所実日数();
-//        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonNyushoJitsuNissu().setValue(new RString(nyushoJitsuNissu));
-//        String gaihakuNissu = kyufuJisseki.get基本().get施設入退所情報().get外泊日数();
-//        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonGaihakuNissu().setValue(new RString(gaihakuNissu));
-        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonNyushoMaeJokyo().setValue(kyufuJisseki.get基本().get施設入退所情報().get入所前の状況());
-        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonNyushoAtoJokyo().setValue(kyufuJisseki.get基本().get施設入退所情報().get退所後の状況());
+        KyufuJissekiKihonNyutaisho nyutaisho = kihon.get施設入退所情報();
+        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonNyushoYMD().setValue(new RString(nyutaisho.get入所日().toString()));
+        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonTaishoYMD().setValue(new RString(nyutaisho.get退所日().toString()));
+        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonNyushoJitsuNissu().setValue(new RString(Integer.toString(nyutaisho.get入所実日数())));
+        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonGaihakuNissu().setValue(new RString(Integer.toString(nyutaisho.get外泊日数())));
+        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonNyushoMaeJokyo().setValue(nyutaisho.get入所前の状況());
+        shisetsuNyutaishoDiv.getTxtKyufuJissekiKihonNyushoAtoJokyo().setValue(nyutaisho.get退所後の状況());
 
         KyufuJissekiKihonKyufuritsuDiv kyufuritsuDiv = panel.getKyufuJissekiKihonKyufuritsu();
-        kyufuritsuDiv.getTxtKyufuJissekiKihonHokenKyufuRitsu().setValue(new RString(kyufuJisseki.get基本().get給付率情報().get保険().value().toString()));
-        kyufuritsuDiv.getTxtKyufuJissekiKihonKohi1KyufuRitsu().setValue(new RString(kyufuJisseki.get基本().get給付率情報().get公費１().value().toString()));
-        kyufuritsuDiv.getTxtKyufuJissekiKihonKohi2KyufuRitsu().setValue(new RString(kyufuJisseki.get基本().get給付率情報().get公費２().value().toString()));
-        kyufuritsuDiv.getTxtKyufuJissekiKihonKohi3KyufuRitsu().setValue(new RString(kyufuJisseki.get基本().get給付率情報().get公費３().value().toString()));
+        KyufuJissekiKihonKyufuritsu kyufuritsu = kihon.get給付率情報();
+        kyufuritsuDiv.getTxtKyufuJissekiKihonHokenKyufuRitsu().setValue(new RString(kyufuritsu.get保険().value().toString()));
+        kyufuritsuDiv.getTxtKyufuJissekiKihonKohi1KyufuRitsu().setValue(new RString(kyufuritsu.get公費１().value().toString()));
+        kyufuritsuDiv.getTxtKyufuJissekiKihonKohi2KyufuRitsu().setValue(new RString(kyufuritsu.get公費２().value().toString()));
+        kyufuritsuDiv.getTxtKyufuJissekiKihonKohi3KyufuRitsu().setValue(new RString(kyufuritsu.get公費３().value().toString()));
 
         KyufuJissekiKihonKohiDiv kohiDiv = panel.getKyufuJissekiKihonKohi();
-        kohiDiv.getTxtKyufuJissekiKihonKohiFutanshaNo1().setValue(kyufuJisseki.get基本().get公費情報().get公費１負担者番号());
-        kohiDiv.getTxtKyufuJissekiKihonKohiFutanshaNo2().setValue(kyufuJisseki.get基本().get公費情報().get公費２負担者番号());
-        kohiDiv.getTxtKyufuJissekiKihonKohiFutanshaNo3().setValue(kyufuJisseki.get基本().get公費情報().get公費３負担者番号());
-        kohiDiv.getTxtKyufuJissekiKihonKohiJukyushaNo1().setValue(kyufuJisseki.get基本().get公費情報().get公費１受給者番号());
-        kohiDiv.getTxtKyufuJissekiKihonKohiJukyushaNo2().setValue(kyufuJisseki.get基本().get公費情報().get公費２受給者番号());
-        kohiDiv.getTxtKyufuJissekiKihonKohiJukyushaNo3().setValue(kyufuJisseki.get基本().get公費情報().get公費３受給者番号());
-
+        KyufuJissekiKihonKohi kohi = kihon.get公費情報();
+        kohiDiv.getTxtKyufuJissekiKihonKohiFutanshaNo1().setValue(kohi.get公費１負担者番号());
+        kohiDiv.getTxtKyufuJissekiKihonKohiFutanshaNo2().setValue(kohi.get公費２負担者番号());
+        kohiDiv.getTxtKyufuJissekiKihonKohiFutanshaNo3().setValue(kohi.get公費３負担者番号());
+        kohiDiv.getTxtKyufuJissekiKihonKohiJukyushaNo1().setValue(kohi.get公費１受給者番号());
+        kohiDiv.getTxtKyufuJissekiKihonKohiJukyushaNo2().setValue(kohi.get公費２受給者番号());
+        kohiDiv.getTxtKyufuJissekiKihonKohiJukyushaNo3().setValue(kohi.get公費３受給者番号());
     }
 
     private void setKyufuJissekiMeisai(KyufuJissekiMeisaiShukeiDiv panel, jp.co.ndensan.reams.db.dbc.business.KyufuJisseki kyufuJisseki) {
