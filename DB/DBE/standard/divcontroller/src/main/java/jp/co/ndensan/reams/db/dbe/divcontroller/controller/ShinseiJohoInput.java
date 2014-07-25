@@ -854,7 +854,6 @@ public class ShinseiJohoInput {
             div.getDgKankeiIin().setDataSource(dataSource);
 
             this.div.setDecideFlag(KankeiIinDecideFlag.NOT_SELECTED.getFlagText());
-            this.div.setKankeiIinGridSelectedRow(new RString("0"));
             div.getEditShinsakaiIin().setDisabled(true);
         }
 
@@ -925,13 +924,12 @@ public class ShinseiJohoInput {
             if (div.getDecideFlag().equals(KankeiIinDecideFlag.ADD.getFlagText())) {
                 decideAdd(div.getDgKankeiIin(), div.getEditShinsakaiIin());
             } else {
-                int selectedRowValue = Integer.parseInt(this.div.getKankeiIinGridSelectedRow().toString());
-                dgKankeiIin_Row row = div.getDgKankeiIin().getSelectedItems().get(selectedRowValue);
+                dgKankeiIin_Row selectedRow = div.getDgKankeiIin().getSelectedItems().get(0);
 
                 if (div.getDecideFlag().equals(KankeiIinDecideFlag.MODIFY.getFlagText())) {
-                    decideUpdate(row, div.getEditShinsakaiIin());
+                    decideUpdate(selectedRow, div.getDgKankeiIin(), div.getEditShinsakaiIin());
                 } else if (div.getDecideFlag().equals(KankeiIinDecideFlag.DELETE.getFlagText())) {
-                    decideDelete(div.getDgKankeiIin(), row);
+                    decideDelete(selectedRow, div.getDgKankeiIin());
                 }
             }
 
@@ -949,11 +947,19 @@ public class ShinseiJohoInput {
             div.getEditShinsakaiIin().setDisabled(true);
         }
 
-        private void decideAdd(DataGrid<dgKankeiIin_Row> grid, EditShinsakaiIinDiv edivDiv) {
-            dgKankeiIin_Row row = createDgKankeiIin_Row(edivDiv.getTxtKankeiIinCode().getValue(),
-                    edivDiv.getTxtKankeiIinName().getValue(),
-                    edivDiv.getTxtShozokuKikan().getValue(),
-                    edivDiv.getTxtShozokuKikanMeisho().getValue(),
+        private void decideAdd(DataGrid<dgKankeiIin_Row> grid, EditShinsakaiIinDiv editDiv) {
+            //TODO n8178 城間篤人 ButtonのonBeforeClickイベントがUIデザイナ安定版で使用可能になった後、処理を移譲する。 2014年9月
+            RString iinCode = editDiv.getTxtKankeiIinCode().getValue();
+            for (dgKankeiIin_Row row : grid.getDataSource()) {
+                if (row.getCode().equals(iinCode)) {
+                    return;
+                }
+            }
+
+            dgKankeiIin_Row row = createDgKankeiIin_Row(iinCode,
+                    editDiv.getTxtKankeiIinName().getValue(),
+                    editDiv.getTxtShozokuKikan().getValue(),
+                    editDiv.getTxtShozokuKikanMeisho().getValue(),
                     new Decimal(getMaxKanriNo(grid.getDataSource()) + 1));
             row.setRowState(RowState.Added);
             grid.getDataSource().add(row);
@@ -970,20 +976,29 @@ public class ShinseiJohoInput {
             return maxKanriNo;
         }
 
-        private void decideUpdate(dgKankeiIin_Row row, EditShinsakaiIinDiv editDiv) {
-            row.setCode(editDiv.getTxtKankeiIinCode().getValue());
-            row.setName(editDiv.getTxtKankeiIinName().getValue());
-            row.setShozokuKikanCode(editDiv.getTxtShozokuKikan().getValue());
-            row.setShozokuKikanMeisho(editDiv.getTxtShozokuKikanMeisho().getValue());
-            row.setShozokuKikan(row.getShozokuKikanCode().concat(":").concat(row.getShozokuKikanMeisho()));
-            row.setRowState(RowState.Modified);
+        private void decideUpdate(dgKankeiIin_Row selectedRow, DataGrid<dgKankeiIin_Row> grid, EditShinsakaiIinDiv editDiv) {
+            //TODO n8178 城間篤人 ButtonのonBeforeClickイベントがUIデザイナ安定版で使用可能になった後、処理を移譲する。 2014年9月
+            RString iinCode = editDiv.getTxtKankeiIinCode().getValue();
+            for (dgKankeiIin_Row row : grid.getDataSource()) {
+                if (row.getId() == selectedRow.getId()) {
+                } else if (row.getCode().equals(iinCode)) {
+                    return;
+                }
+            }
+
+            selectedRow.setCode(editDiv.getTxtKankeiIinCode().getValue());
+            selectedRow.setName(editDiv.getTxtKankeiIinName().getValue());
+            selectedRow.setShozokuKikanCode(editDiv.getTxtShozokuKikan().getValue());
+            selectedRow.setShozokuKikanMeisho(editDiv.getTxtShozokuKikanMeisho().getValue());
+            selectedRow.setShozokuKikan(selectedRow.getShozokuKikanCode().concat(":").concat(selectedRow.getShozokuKikanMeisho()));
+            selectedRow.setRowState(RowState.Modified);
         }
 
-        private void decideDelete(DataGrid<dgKankeiIin_Row> grid, dgKankeiIin_Row row) {
-            if (row.getRowState().equals(RowState.Added)) {
-                grid.getDataSource().remove(row);
+        private void decideDelete(dgKankeiIin_Row selectedRow, DataGrid<dgKankeiIin_Row> grid) {
+            if (selectedRow.getRowState().equals(RowState.Added)) {
+                grid.getDataSource().remove(selectedRow);
             } else {
-                row.setRowState(RowState.Deleted);
+                selectedRow.setRowState(RowState.Deleted);
             }
         }
 
