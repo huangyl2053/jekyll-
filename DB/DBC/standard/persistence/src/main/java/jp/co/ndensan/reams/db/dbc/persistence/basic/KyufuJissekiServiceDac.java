@@ -55,20 +55,20 @@ public class KyufuJissekiServiceDac {
      * 引数の条件に合うentityを複数件取得します。
      *
      * @param 被保番号 被保番号
-     * @param サービス提供開始日 サービス提供開始日
-     * @param サービス提供終了日 サービス提供終了日
+     * @param サービス提供開始年月 サービス提供開始年月
+     * @param サービス提供終了年月 サービス提供終了年月
      * @return KyufuJissekiServiceエンティティリスト
      */
     @Transaction
     public List<DbV3016KyufujissekiShuruiDetailEntity> select(
-            KaigoHihokenshaNo 被保番号, ServiceTeikyoYM サービス提供開始日, ServiceTeikyoYM サービス提供終了日) {
+            KaigoHihokenshaNo 被保番号, ServiceTeikyoYM サービス提供開始年月, ServiceTeikyoYM サービス提供終了年月) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbV3016KyufujissekiShuruiDetail.class)
                 .where(and(
                                 eq(hiHokenshaNo, 被保番号),
-                                leq(サービス提供開始日, serviceTeikyoYM), leq(serviceTeikyoYM, サービス提供終了日)))
+                                leq(サービス提供開始年月, serviceTeikyoYM), leq(serviceTeikyoYM, サービス提供終了年月)))
                 .order(by(serviceSyuruiCode, Order.ASC), by(serviceTeikyoYM, Order.ASC), by(jigyoshoNo, Order.ASC))
                 .toList(DbV3016KyufujissekiShuruiDetailEntity.class);
     }

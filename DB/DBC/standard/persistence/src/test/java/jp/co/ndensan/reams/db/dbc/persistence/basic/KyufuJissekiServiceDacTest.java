@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
@@ -33,13 +34,19 @@ public class KyufuJissekiServiceDacTest extends DbcTestDacBase {
     private static final KaigoHihokenshaNo notFound被保番号 = new KaigoHihokenshaNo(new RString("0000000099"));
     private static final ServiceTeikyoYM foundサービス提供年月_データ4件 = new ServiceTeikyoYM(new FlexibleYearMonth("200511"));
     private static final ServiceTeikyoYM foundサービス提供年月_データ1件 = new ServiceTeikyoYM(new FlexibleYearMonth("201207"));
+    private static final Range<ServiceTeikyoYM> notFoundサービス提供期間
+            = new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth("201301")), new ServiceTeikyoYM(new FlexibleYearMonth("201306")));
+    private static final Range<ServiceTeikyoYM> foundサービス提供期間_データ5件
+            = new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth("200501")), new ServiceTeikyoYM(new FlexibleYearMonth("201212")));
+    private static final Range<ServiceTeikyoYM> foundサービス提供期間_データ1件
+            = new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth("201201")), new ServiceTeikyoYM(new FlexibleYearMonth("201212")));
 
     @BeforeClass
     public static void setUpClass() {
         sut = InstanceProvider.create(KyufuJissekiServiceDac.class);
     }
 
-    public static class select extends DbcTestDacBase {
+    public static class select_被保番号_サービス提供年月 extends DbcTestDacBase {
 
         @Test
         public void 該当の給付実績基本が存在しない時_selectは_空のコレクションを返す() {
@@ -57,6 +64,30 @@ public class KyufuJissekiServiceDacTest extends DbcTestDacBase {
         public void データが4件あるサービス提供年月を指定した時_selectは_4件のデータが入ったentityListを返す() {
             List<DbV3016KyufujissekiShuruiDetailEntity> result = sut.select(found被保番号, foundサービス提供年月_データ4件);
             assertThat(result.size(), is(4));
+        }
+    }
+
+    public static class select_被保番号_サービス提供期間 extends DbcTestDacBase {
+
+        @Test
+        public void 該当の給付実績基本が存在しない時_selectは_空のコレクションを返す() {
+            List<DbV3016KyufujissekiShuruiDetailEntity> result = sut.select(
+                    found被保番号, notFoundサービス提供期間.getFrom(), notFoundサービス提供期間.getTo());
+            assertThat(result.isEmpty(), is(true));
+        }
+
+        @Test
+        public void データが1件あるサービス提供期間を指定した時_selectは_1件のデータが入ったentityListを返す() {
+            List<DbV3016KyufujissekiShuruiDetailEntity> result = sut.select(
+                    found被保番号, foundサービス提供期間_データ1件.getFrom(), foundサービス提供期間_データ1件.getTo());
+            assertThat(result.size(), is(1));
+        }
+
+        @Test
+        public void データが4件あるサービス提供期間を指定した時_selectは_5件のデータが入ったentityListを返す() {
+            List<DbV3016KyufujissekiShuruiDetailEntity> result = sut.select(
+                    found被保番号, foundサービス提供期間_データ5件.getFrom(), foundサービス提供期間_データ5件.getTo());
+            assertThat(result.size(), is(5));
         }
     }
 }
