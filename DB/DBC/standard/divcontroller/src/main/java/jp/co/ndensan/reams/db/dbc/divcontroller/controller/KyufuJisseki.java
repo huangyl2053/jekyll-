@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -186,21 +187,21 @@ public class KyufuJisseki {
             RString rsJitsuNissu = new RString(String.valueOf(iShukei.get短実日数()));
             RString rsKeikakuTani = new RString(String.valueOf(iShukei.get短計画日数()));
             RString rsTaishoTani = new RString(String.valueOf(iShukei.get短実日数()));
-            RString rsTaishogaiTani = new RString(iShukei.get対象外単位().toString());
+            RString rsTaishogaiTani = new RString(setCommFormat(iShukei.get対象外単位().toString()));
             RString rsTankiKeikakuNissu = new RString(String.valueOf(iShukei.get短計画日数()));
             RString rsHokenKohi = iShukei.get保険公費();
             RString rsKettei = iShukei.get決定();
             RString rsTankiJitsuNissu = new RString(String.valueOf(iShukei.get短実日数()));
-            RString rsTaniGokei = new RString(iShukei.get単位合計().toString());
+            RString rsTaniGokei = new RString(setCommFormat(iShukei.get単位合計().toString()));
             RString rsTanisuTanka = new RString(iShukei.get単位数単価().toString());
-            RString rsSeikyugaku = new RString(iShukei.get請求額().toString());
-            RString rsRiyoshaFutangaku = new RString(iShukei.get利用者負担額().toString());
-            RString rsDekidakaTaniGokei = new RString(iShukei.get単位合計().toString());
+            RString rsSeikyugaku = new RString(setCommFormat(iShukei.get請求額().toString()));
+            RString rsRiyoshaFutangaku = new RString(setCommFormat(iShukei.get利用者負担額().toString()));
+            RString rsDekidakaTaniGokei = new RString(setCommFormat(iShukei.get単位合計().toString()));
             RString rsDekidakaSeikyugaku = new RString(iShukei.get単位数単価().toString());
-            RString rsDekidakaHonninFutangaku = new RString(iShukei.get出来高本人負担額().toString());
+            RString rsDekidakaHonninFutangaku = new RString(setCommFormat(iShukei.get出来高本人負担額().toString()));
             RString rsSaiShinsaKaisu = new RString(String.valueOf(iShukei.get再審査回数()));
             RString rsKagoKaisu = new RString(String.valueOf(iShukei.get過誤回数()));
-            RString rsShinsaYM = new RString(String.valueOf(iShukei.get審査年月().toDateString()));
+            RString rsShinsaYM = new RString(String.valueOf(setWareki(iShukei.get審査年月().toDateString()).substring(0, 6)));
 
             shukeiList.add(
                     createKyufuJissekiShukeiRow(rsServiceShurui, rsJitsuNissu, rsKeikakuTani, rsTaishoTani,
@@ -224,18 +225,18 @@ public class KyufuJisseki {
 
             RString rsService = iMeisai.getサービス();
             RString rsKettei = iMeisai.get決定();
-            RString rsTani = new RString(iMeisai.get単位().toString());
+            RString rsTani = new RString(setCommFormat(iMeisai.get単位().toString()));
             RString rsKaisu = new RString(String.valueOf(iMeisai.get回数日数()));
-            RString rsKohi1Nissu = new RString(String.valueOf(iMeisai.get公費1単位()));
-            RString rsKohi2Nissu = new RString(String.valueOf(iMeisai.get公費2単位()));
-            RString rsKohi3Nissu = new RString(String.valueOf(iMeisai.get公費3単位()));
-            RString rsServiceTani = new RString(iMeisai.getサービス単位().toString());
+            RString rsKohi1Nissu = new RString(setCommFormat(String.valueOf(iMeisai.get公費1単位())));
+            RString rsKohi2Nissu = new RString(setCommFormat(String.valueOf(iMeisai.get公費2単位())));
+            RString rsKohi3Nissu = new RString(setCommFormat(String.valueOf(iMeisai.get公費3単位())));
+            RString rsServiceTani = new RString(setCommFormat(iMeisai.getサービス単位().toString()));
             RString rsKohi1Tani = new RString(String.valueOf(iMeisai.get公費1日数()));
             RString rsKohi2Tani = new RString(String.valueOf(iMeisai.get公費2日数()));
             RString rsKohi3Tani = new RString(String.valueOf(iMeisai.get公費3日数()));
             RString rsSaiShinsaKaisu = new RString(String.valueOf(iMeisai.get再審査回数()));
             RString rsKagoKaisu = new RString(String.valueOf(iMeisai.get過誤回数()));
-            RString rsShinsaYM = iMeisai.get審査年月().toDateString();
+            RString rsShinsaYM = setWareki(iMeisai.get審査年月().toDateString()).substring(0, 6);
             RString rsTekiyo = iMeisai.get適要();
 
             meisaiList.add(createKyufuJissekiMeisaiRow(
@@ -280,12 +281,6 @@ public class KyufuJisseki {
         }
         panel.getDgServiceKeikakuhiFromH2104().setDataSource(serviceKeikakuhiList);
 
-//        List<dgServiceKeikakuhiFromH2104_Row> list = new ArrayList<>();
-//        list.add(createServiceKeikakuhiFromH2104Row("指定事業所", "平21.03.02", "432111:居宅支援I１", "10.00", "", "明細", "1,000", "10", "10,000", "", "20050594", "0", "0", "平26.02"));
-//        list.add(createServiceKeikakuhiFromH2104Row("", "", "", "", "", "合計", "", "", "10,000", "100,000", "", "", "", ""));
-//        list.add(createServiceKeikakuhiFromH2104Row("指定事業所", "平21.03.02", "432111:居宅支援I１", "10.00", "後", "明細", "1,000", "10", "10,000", "", "20050594", "0", "0", "平26.02"));
-//        list.add(createServiceKeikakuhiFromH2104Row("", "", "", "", "後", "合計", "", "", "10,000", "100,000", "", "", "", ""));
-//        panel.getDgServiceKeikakuhiFromH2104().setDataSource(list);
     }
 
     private void setFukushiYoguKonyuhi(FukushiYoguKonyuhiDiv panel) {
@@ -314,9 +309,6 @@ public class KyufuJisseki {
         }
         panel.getDgFukushiYoguKonyuhi().setDataSource(fukushiYoguKonyuhiList);
 
-//        List<dgFukushiYoguKonyuhi_Row> list = new ArrayList<>();
-//        list.add(createFukushiYoguKonyuhiRow("410000:特定福祉用具販売", "平18.10.13", "浴槽補助椅子", "03:特殊寝台", "ＤＥＮＳＡＮ（株）", "ＤＥＮＳＡＮ（株）", "12,500", "平18.12"));
-//        panel.getDgFukushiYoguKonyuhi().setDataSource(list);
     }
 
     private void setJutakuKaishuhi(JutakuKaishuhiDiv panel) {
@@ -342,9 +334,6 @@ public class KyufuJisseki {
         }
         panel.getDgJutakuKaishuhi().setDataSource(jutakuKaishuhiList);
 
-//        List<dgJutakuKaishuhi_Row> list = new ArrayList<>();
-//        list.add(createJutakuKaishuhiRow("420000:住宅改修", "平14.10.01", "銀杏組", "電算町紫原７２丁目", "56,000", "平18.05"));
-//        panel.getDgJutakuKaishuhi().setDataSource(list);
     }
 
     private void setKogakuKaigoServicehi(KogakuKaigoServicehiDiv panel) {
@@ -378,27 +367,6 @@ public class KyufuJisseki {
         panel.getTxtKogakuKaigoServicehiKohi3Futangaku().setValue(ymlData.getAsRString("Kohi3Futangaku"));
         panel.getTxtKogakuKaigoServicehiKohi3Shikyugaku().setValue(ymlData.getAsRString("Kohi3Shikyugaku"));
 
-//        panel.getTxtKogakuKaigoServicehiTeikyoYM().setValue(new RString("平26.01"));
-//        panel.getTxtKogakuKaigoServicehiJissekiKubun().setValue(new RString("償還"));
-//        panel.getTxtKogakuKaigoServicehiSakuseiKubun().setValue(new RString("新規"));
-//        panel.getTxtKogakuKaigoServicehiSeiriNo().setValue(new RString("0000000001"));
-//        panel.getTxtKogakuKaigoServicehiHokensha().setValue(new RString("保険　次郎"));
-//        panel.getTxtKogakuKaigoServicehiShikibetsuCode().setValue(new RString("0001"));
-//        panel.getTxtKogakuKaigoServicehiShikibetsuName().setValue(new RString("サービス提供証明書（訪問通所他）"));
-//        panel.getTxtKogakuKaigoServicehiKetteiYMD().setValue(new RString("平26.01.01"));
-//        panel.getTxtKogakuKaigoServicehiUketsukeYMD().setValue(new RString("平26.02.02"));
-//        panel.getTxtKogakuKaigoServicehiShinsaYM().setValue(new RString("平26.03"));
-//        panel.getTxtKogakuKaigoServicehiRiyoshaFutangaku().setValue(new RString("1,111"));
-//        panel.getTxtKogakuKaigoServicehiShikyugaku().setValue(new RString("2,222"));
-//        panel.getTxtKogakuKaigoServicehiKohi1FutanshaNo().setValue(new RString("0000000001"));
-//        panel.getTxtKogakuKaigoServicehiKohi1Futangaku().setValue(new RString("3,333"));
-//        panel.getTxtKogakuKaigoServicehiKohi1Shikyugaku().setValue(new RString("3,333"));
-//        panel.getTxtKogakuKaigoServicehiKohi2FutanshaNo().setValue(new RString("0000000002"));
-//        panel.getTxtKogakuKaigoServicehiKohi2Futangaku().setValue(new RString("4,444"));
-//        panel.getTxtKogakuKaigoServicehiKohi2Shikyugaku().setValue(new RString("4,444"));
-//        panel.getTxtKogakuKaigoServicehiKohi3FutanshaNo().setValue(new RString("0000000003"));
-//        panel.getTxtKogakuKaigoServicehiKohi3Futangaku().setValue(new RString("5,555"));
-//        panel.getTxtKogakuKaigoServicehiKohi3Shikyugaku().setValue(new RString("5,555"));
     }
 
     private void setCareManagementhi(CareManagementhiDiv panel) {
@@ -429,25 +397,6 @@ public class KyufuJisseki {
         panel.getCareManagementhiEtc().getTxtCareManagementhiSaishinsaKaisu().setValue(ymlData.getAsRString("SaishinsaKaisu"));
         panel.getCareManagementhiEtc().getTxtCareManagementhiKagoKaisu().setValue(ymlData.getAsRString("KagoKaisu"));
         panel.getCareManagementhiEtc().getTxtCareManagementhiShinsaYM().setValue(ymlData.getAsRString("ShinsaYM"));
-
-//        panel.getTxtCareManagementhiJigyoshoKubun().setValue(new RString("指定事業所"));
-//        panel.getTxtCareManagementhiServiceKeikakuSakuseiIraiTodokedeYMD().setValue(new RString("平26.01.01"));
-//        panel.getTxtCareManagementhiServiceShurui().setValue(new RString("サービス種類"));
-//        panel.getTxtCareManagementhiServiceKomoku().setValue(new RString("サービス項目"));
-//        panel.getTxtCareManagementhiServiceCode().setValue(new RString("0000000001"));
-//        panel.getTxtCareManagementhiServiceName().setValue(new RString("サービス名称"));
-//        panel.getCareManagementhiEtc().getTxtCareManagementhiTanka().setValue(new RString("10.00"));
-//        panel.getCareManagementhiEtc().getTxtCareManagementhiTani().setValue(new RString("1,000"));
-//        panel.getCareManagementhiEtc().getTxtCareManagementhiKaisu().setValue(new RString("1"));
-//        panel.getCareManagementhiEtc().getTxtCareManagementhiServiceTani().setValue(new RString("1,000"));
-//        panel.getCareManagementhiEtc().getTxtCareManagementhiServiceTaniGokei().setValue(new RString("10,000"));
-//        panel.getCareManagementhiEtc().getTxtCareManagementhiSeikyuKingaku().setValue(new RString("20,000"));
-//        panel.getCareManagementhiEtc().getTxtCareManagementhiRiyoshaFutangaku().setValue(new RString("5,000"));
-//        panel.getCareManagementhiEtc().getTxtCareManagementhiSenmoninNo().setValue(new RString("0000000001"));
-//        panel.getTxtCareManagementhiTekiyo().setValue(new RString("摘要"));
-//        panel.getCareManagementhiEtc().getTxtCareManagementhiSaishinsaKaisu().setValue(new RString("1"));
-//        panel.getCareManagementhiEtc().getTxtCareManagementhiKagoKaisu().setValue(new RString("2"));
-//        panel.getCareManagementhiEtc().getTxtCareManagementhiShinsaYM().setValue(new RString("平26.02"));
     }
 
     private dgKyufuJissekiShukei_Row createKyufuJissekiShukeiRow(
@@ -500,31 +449,6 @@ public class KyufuJisseki {
                 txtHiyo, txtShinsaYM);
     }
 
-//    private KyufuJissekiDetailKeyInfo createKyufuJissekiDetailKeyInfo() {
-//
-//
-//        return new KyufuJissekiDetailKeyInfo(
-//                new KokanShikibetsuNo(new RString("1117")),
-//                new InputShikibetsuNo(new Code("7131"), new RString("名称"), new RString("略称")),
-//                new RString("H1"),
-//                new ShoKisaiHokenshaNo(new RString("00202169")),
-//                new KaigoHihokenshaNo(new RString("0000000034")),
-//                new ServiceTeikyoYM(new FlexibleYearMonth("201207")),
-//                new JigyoshaNo(new RString("2000190013")),
-//                new ToshiNo(new RString("0000524400")),
-//                new ArrayList<ServiceTeikyoYMListOfServiceShurui>());
-////                new ArrayList<ServiceTeikyoYMListOfServiceShurui>());
-////                new KokanShikibetsuNo(new RString("1234")),
-////                new InputShikibetsuNo(new Code("0001"), new RString("名称"), new RString("略称")),
-////                new RString("03"),
-////                new ShoKisaiHokenshaNo(new RString("00000003")),
-////                new KaigoHihokenshaNo(new RString("0000000004")),
-////                new ServiceTeikyoYM(new FlexibleYearMonth("201401")),
-////                new JigyoshaNo(new RString("0000000005")),
-////                new ToshiNo(new RString("0000000006")),
-////                new ArrayList<ServiceTeikyoYMListOfServiceShurui>());
-//    }
-//
     private jp.co.ndensan.reams.db.dbc.business.KyufuJisseki get給付実績() {
 
         RString 被保番号 = (RString) ViewStateHolder.get("被保番号", RString.class);
@@ -546,4 +470,15 @@ public class KyufuJisseki {
         return detailKeyInfo != null ? finder.get給付実績(detailKeyInfo) : null;
     }
 
+    private String setCommFormat(String str) {
+        if (str.isEmpty()) {
+            return str;
+        }
+        return new Decimal(str).toString("##,###,###");
+    }
+
+    private RString setWareki(RString wareki) {
+        FlexibleDate warekiYmd = new FlexibleDate(wareki);
+        return warekiYmd.wareki().toDateString();
+    }
 }

@@ -6,20 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonGokeiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiKihonGokei_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJisseki;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
-import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigen;
 import jp.co.ndensan.reams.db.dbc.realservice.KyufuJissekiFinder;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
@@ -27,6 +23,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -50,8 +47,8 @@ public class KyufuJissekiKihonGokei {
             RString rsHokenKohi = iKihonGokei.get保険公費();
             RString rsZengo = iKihonGokei.get前後();
             RString rsServiceTani = new RString(String.valueOf(iKihonGokei.getサービス単位()));
-            RString rsRiyoshaFutangaku = new RString(String.valueOf(iKihonGokei.get利用者負担額()));
-            RString rsHokenryoSeikyugaku = new RString(String.valueOf(iKihonGokei.get保険料請求額()));
+            RString rsRiyoshaFutangaku = new RString(setCommFormat(String.valueOf(iKihonGokei.get利用者負担額())));
+            RString rsHokenryoSeikyugaku = new RString(setCommFormat(String.valueOf(iKihonGokei.get保険料請求額())));
             RString rsKinkyujiShisetsuRyoyohiHokenSeikyubunGokei = new RString(String.valueOf(iKihonGokei.get緊急時施設療養費保険請求分合計()));
             RString rsTokuteiShinryohiKohiSeikyubunGokei = new RString(String.valueOf(iKihonGokei.get特定診療費公費請求分合計()));
             RString rsTokuteiNyushoshaKaigotoSeikyugaku = new RString(String.valueOf(iKihonGokei.get特定入所者介護等請求額()));
@@ -95,4 +92,10 @@ public class KyufuJissekiKihonGokei {
         return detailKeyInfo != null ? finder.get給付実績(detailKeyInfo) : null;
     }
 
+    private String setCommFormat(String str) {
+        if (str.isEmpty()) {
+            return str;
+        }
+        return new Decimal(str).toString("##,###,###");
+    }
 }

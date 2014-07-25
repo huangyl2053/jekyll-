@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJisseki;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigen;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
@@ -48,14 +50,14 @@ public class ShakaiFukushiHojinKeigengaku {
             RString rsKeigenritsu = iFuJisseki.get軽減率();
             RString rsShurui = iFuJisseki.get種類();
             RString rsZengo = iFuJisseki.get前後();
-            RString rsJuryoSubekiRiyoshaFutanSogaku = new RString(String.valueOf(iFuJisseki.get受領すべき利用者負担の総額()));
-            RString rsKeigengaku = new RString(String.valueOf(iFuJisseki.get軽減額()));
-            RString rsKeigengoRiyoshaFutangaku = new RString(String.valueOf(iFuJisseki.get軽減後利用者負担額()));
+            RString rsJuryoSubekiRiyoshaFutanSogaku = new RString(setCommFormat(String.valueOf(iFuJisseki.get受領すべき利用者負担の総額())));
+            RString rsKeigengaku = new RString(setCommFormat(String.valueOf(iFuJisseki.get軽減額())));
+            RString rsKeigengoRiyoshaFutangaku = new RString(setCommFormat(String.valueOf(iFuJisseki.get軽減後利用者負担額())));
 
             RString rsBiko = iFuJisseki.get備考();
             RString rsSaishinsaKaisu = new RString(String.valueOf(iFuJisseki.get再審査回数()));
             RString rsKagoKaisu = new RString(String.valueOf(iFuJisseki.get過誤回数()));
-            RString rsShinsaYM = iFuJisseki.get審査年月().toDateString();
+            RString rsShinsaYM = setWareki(iFuJisseki.get審査年月().toDateString()).substring(0, 6);
 
             shakaiFukushiHojinKeigengakuList.add(createShakaiFukushiHojinKeigengakuRow(
                     rsKeigenritsu, rsShurui, rsZengo, rsJuryoSubekiRiyoshaFutanSogaku, rsKeigengaku,
@@ -98,4 +100,15 @@ public class ShakaiFukushiHojinKeigengaku {
         return detailKeyInfo != null ? finder.get給付実績(detailKeyInfo) : null;
     }
 
+    private RString setWareki(RString wareki) {
+        FlexibleDate warekiYmd = new FlexibleDate(wareki);
+        return warekiYmd.wareki().toDateString();
+    }
+
+    private String setCommFormat(String str) {
+        if (str.isEmpty()) {
+            return str;
+        }
+        return new Decimal(str).toString("##,###,###");
+    }
 }
