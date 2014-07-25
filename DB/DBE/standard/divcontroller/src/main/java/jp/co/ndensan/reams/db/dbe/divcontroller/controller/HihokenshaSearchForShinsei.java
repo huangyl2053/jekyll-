@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.business.IMinashi2GoshaDaicho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.YokaigoninteiShinseishaData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.HihokenshaSearchForShinseiDiv;
 import jp.co.ndensan.reams.db.dbe.realservice.IMinashi2GoshaDaichoFinder;
-import jp.co.ndensan.reams.db.dbe.realservice.Minashi2GoshaDaichoFinder;
+//import jp.co.ndensan.reams.db.dbe.realservice.Minashi2GoshaDaichoFinder;
 import jp.co.ndensan.reams.db.dbe.realservice.Minashi2GoshaDaichoFinderFactory;
 import jp.co.ndensan.reams.db.dbe.realservice.search.Minashi2GoshaDaichoSearchItem;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaFinder;
