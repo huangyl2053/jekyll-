@@ -13,18 +13,18 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 public final class Minashi2GoshaDaichoFinderFactory {
 
 // TODO 田辺 紘一 〆日に間に合わず 2014/07/24
-    /**
-     * インスタンス化を防ぐためのプライベートコンストラクタです。
-     */
-    private Minashi2GoshaDaichoFinderFactory() {
-    }
-
-    /**
-     * みなし2号被保険者Finderインスタンスを生成します。
-     *
-     * @return
-     */
-    public static IMinashi2GoshaDaichoFinder createInstance() {
-        return new Minashi2GoshaDaichoFinder();
-    }
+//    /**
+//     * インスタンス化を防ぐためのプライベートコンストラクタです。
+//     */
+//    private Minashi2GoshaDaichoFinderFactory() {
+//    }
+//
+//    /**
+//     * みなし2号被保険者Finderインスタンスを生成します。
+//     *
+//     * @return
+//     */
+//    public static IMinashi2GoshaDaichoFinder createInstance() {
+//        return new Minashi2GoshaDaichoFinder();
+//    }
 }
