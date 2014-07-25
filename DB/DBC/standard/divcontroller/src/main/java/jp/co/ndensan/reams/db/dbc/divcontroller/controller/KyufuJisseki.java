@@ -94,6 +94,8 @@ public class KyufuJisseki {
         setKogakuKaigoServicehi(panel.getTabKyufuJisseki().getKogakuKaigoServicehi());
         setCareManagementhi(panel.getTabKyufuJisseki().getCareManagementhi());
 
+        panel.getBtnShakaiFukushiHojinKeigengaku().setDisabled(jisseki.get社会福祉法人軽減額リスト().isEmpty());
+
         response.data = panel;
 
         return response;
