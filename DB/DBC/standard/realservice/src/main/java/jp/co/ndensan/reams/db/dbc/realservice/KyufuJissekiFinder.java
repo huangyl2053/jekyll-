@@ -96,7 +96,6 @@ public class KyufuJissekiFinder {
         return KyufuJissekiMapper.to給付実績基本(kihonDac.select(
                 詳細キー情報.get交換情報識別番号(),
                 詳細キー情報.get入力識別番号().getInputShikibetsuNoCode(),
-                詳細キー情報.getレコード種別コード(),
                 詳細キー情報.get証記載保険者番号(),
                 詳細キー情報.get被保番号(),
                 詳細キー情報.getサービス提供年月().value(),
@@ -108,7 +107,6 @@ public class KyufuJissekiFinder {
         return KyufuJissekiMapper.to給付実績明細List(meisaiDac.select(
                 詳細キー情報.get交換情報識別番号(),
                 詳細キー情報.get入力識別番号().getInputShikibetsuNoCode(),
-                詳細キー情報.getレコード種別コード(),
                 詳細キー情報.get証記載保険者番号(),
                 詳細キー情報.get被保番号(),
                 詳細キー情報.getサービス提供年月().value(),
@@ -120,7 +118,6 @@ public class KyufuJissekiFinder {
         return KyufuJissekiMapper.to給付実績集計List(shukeiDac.select(
                 詳細キー情報.get交換情報識別番号(),
                 詳細キー情報.get入力識別番号().getInputShikibetsuNoCode(),
-                詳細キー情報.getレコード種別コード(),
                 詳細キー情報.get証記載保険者番号(),
                 詳細キー情報.get被保番号(),
                 詳細キー情報.getサービス提供年月().value(),
@@ -132,7 +129,6 @@ public class KyufuJissekiFinder {
         return KyufuJissekiMapper.to給付実績社会福祉法人軽減額List(shafukuDac.select(
                 詳細キー情報.get交換情報識別番号(),
                 詳細キー情報.get入力識別番号().getInputShikibetsuNoCode(),
-                詳細キー情報.getレコード種別コード(),
                 詳細キー情報.get証記載保険者番号(),
                 詳細キー情報.get被保番号(),
                 詳細キー情報.getサービス提供年月().value(),

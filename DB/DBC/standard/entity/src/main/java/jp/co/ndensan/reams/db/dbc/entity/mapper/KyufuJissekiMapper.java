@@ -97,7 +97,6 @@ public final class KyufuJissekiMapper {
                 entity.getKokanShikibetsuNo(),
                 //TODO 名称などはどこから取ってくるのか
                 new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo()), new RString(""), new RString("")),
-                entity.getRecodeShubetsuCode(),
                 entity.getHokenshaNo(),
                 entity.getHiHokenshaNo(),
                 entity.getServiceTeikyoYM(),

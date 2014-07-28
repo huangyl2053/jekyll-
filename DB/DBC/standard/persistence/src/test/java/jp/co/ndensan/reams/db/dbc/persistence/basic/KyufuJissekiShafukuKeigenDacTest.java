@@ -39,7 +39,6 @@ public class KyufuJissekiShafukuKeigenDacTest extends DbcTestDacBase {
     private static final KokanShikibetsuNo 交換情報識別番号_データなし = new KokanShikibetsuNo(new RString("9999"));
     private static final KokanShikibetsuNo 交換情報識別番号_データあり = new KokanShikibetsuNo(new RString("1234"));
     private static final InputShikibetsuNoCode 入力識別番号 = new InputShikibetsuNoCode(new Code("0001"));
-    private static final RString レコード種別コード = new RString("02");
     private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("00000003"));
     private static final KaigoHihokenshaNo 被保番号 = new KaigoHihokenshaNo(new RString("0000000004"));
     private static final FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth("201401");
@@ -58,7 +57,6 @@ public class KyufuJissekiShafukuKeigenDacTest extends DbcTestDacBase {
             assertThat(sut.select(
                     交換情報識別番号_データなし,
                     入力識別番号,
-                    レコード種別コード,
                     証記載保険者番号,
                     被保番号,
                     サービス提供年月,
@@ -72,7 +70,6 @@ public class KyufuJissekiShafukuKeigenDacTest extends DbcTestDacBase {
             assertThat(sut.select(
                     交換情報識別番号_データあり,
                     入力識別番号,
-                    レコード種別コード,
                     証記載保険者番号,
                     被保番号,
                     サービス提供年月,

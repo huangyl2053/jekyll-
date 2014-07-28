@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukei.*;
@@ -36,7 +35,6 @@ public class KyufuJissekiShukeiDac implements IKyufuJissekiShukeiDac {
     public List<DbT3033KyufujissekiShukeiEntity> select(
             KokanShikibetsuNo 交換情報識別番号,
             InputShikibetsuNoCode 入力識別番号,
-            RString レコード種別コード,
             ShoKisaiHokenshaNo 証記載保険者番号,
             KaigoHihokenshaNo 被保番号,
             FlexibleYearMonth サービス提供年月,
@@ -48,7 +46,6 @@ public class KyufuJissekiShukeiDac implements IKyufuJissekiShukeiDac {
                 .where(and(
                                 eq(kokanJohoShikibetsuNo, 交換情報識別番号),
                                 eq(inputShikibetsuNo, 入力識別番号.value()),
-                                //                                eq(recodeShubetsuCode, レコード種別コード),
                                 eq(shokisaiHokenshaNo, 証記載保険者番号),
                                 eq(hiHokenshaNo, 被保番号),
                                 eq(serviceTeikyoYM, サービス提供年月),

@@ -97,7 +97,6 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
         when(dac.select(
                 any(KokanShikibetsuNo.class),
                 any(InputShikibetsuNoCode.class),
-                any(RString.class),
                 any(ShoKisaiHokenshaNo.class),
                 any(KaigoHihokenshaNo.class),
                 any(FlexibleYearMonth.class),
@@ -112,7 +111,6 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
         when(dac.select(
                 any(KokanShikibetsuNo.class),
                 any(InputShikibetsuNoCode.class),
-                any(RString.class),
                 any(ShoKisaiHokenshaNo.class),
                 any(KaigoHihokenshaNo.class),
                 any(FlexibleYearMonth.class),
@@ -127,7 +125,6 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
         when(dac.select(
                 any(KokanShikibetsuNo.class),
                 any(InputShikibetsuNoCode.class),
-                any(RString.class),
                 any(ShoKisaiHokenshaNo.class),
                 any(KaigoHihokenshaNo.class),
                 any(FlexibleYearMonth.class),
@@ -142,7 +139,6 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
         when(dac.select(
                 any(KokanShikibetsuNo.class),
                 any(InputShikibetsuNoCode.class),
-                any(RString.class),
                 any(ShoKisaiHokenshaNo.class),
                 any(KaigoHihokenshaNo.class),
                 any(FlexibleYearMonth.class),
@@ -181,7 +177,6 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
         return new KyufuJissekiDetailKeyInfo(
                 new KokanShikibetsuNo(new RString("0000")),
                 new InputShikibetsuNo(new Code("0001"), new RString("名称"), new RString("略称")),
-                new RString("02"),
                 new ShoKisaiHokenshaNo(new RString("00000003")),
                 new KaigoHihokenshaNo(new RString("0000000004")),
                 new ServiceTeikyoYM(new FlexibleYearMonth("201401")),

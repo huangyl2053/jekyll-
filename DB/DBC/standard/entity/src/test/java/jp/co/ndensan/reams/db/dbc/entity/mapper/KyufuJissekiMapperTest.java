@@ -86,11 +86,6 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
         }
 
         @Test
-        public void レコード種別コードの設定がある時_to給付実績詳細キー_getレコード種別コードは_設定値を返す() {
-            assertThat(result.getレコード種別コード(), is(レコード種別コード));
-        }
-
-        @Test
         public void 証記載保険者番号の設定がある時_to給付実績詳細キー_get証記載保険者番号は_設定値を返す() {
             assertThat(result.get証記載保険者番号(), is(証記載保険者番号));
         }

@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -33,7 +32,6 @@ public interface IKyufuJissekiShukeiDac extends
      *
      * @param 交換情報識別番号 交換情報識別番号
      * @param 入力識別番号 入力識別番号
-     * @param レコード種別コード レコード種別コード
      * @param 証記載保険者番号 証記載保険者番号
      * @param 被保番号 被保番号
      * @param サービス提供年月 サービス提供年月
@@ -45,7 +43,6 @@ public interface IKyufuJissekiShukeiDac extends
     List<DbT3033KyufujissekiShukeiEntity> select(
             KokanShikibetsuNo 交換情報識別番号,
             InputShikibetsuNoCode 入力識別番号,
-            RString レコード種別コード,
             ShoKisaiHokenshaNo 証記載保険者番号,
             KaigoHihokenshaNo 被保番号,
             FlexibleYearMonth サービス提供年月,

@@ -23,7 +23,6 @@ public class KyufuJissekiDetailKeyInfo {
 
     private final KokanShikibetsuNo 交換情報識別番号;
     private final InputShikibetsuNo 入力識別番号;
-    private final RString レコード種別コード;
     private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final KaigoHihokenshaNo 被保番号;
     private final ServiceTeikyoYM サービス提供年月;
@@ -38,7 +37,6 @@ public class KyufuJissekiDetailKeyInfo {
      *
      * @param 交換情報識別番号 交換情報識別番号
      * @param 入力識別番号 入力識別番号
-     * @param レコード種別コード レコード種別コード
      * @param 証記載保険者番号 証記載保険者番号
      * @param 被保番号 被保番号
      * @param サービス提供年月 サービス提供年月
@@ -49,7 +47,6 @@ public class KyufuJissekiDetailKeyInfo {
     public KyufuJissekiDetailKeyInfo(
             KokanShikibetsuNo 交換情報識別番号,
             InputShikibetsuNo 入力識別番号,
-            RString レコード種別コード,
             ShoKisaiHokenshaNo 証記載保険者番号,
             KaigoHihokenshaNo 被保番号,
             ServiceTeikyoYM サービス提供年月,
@@ -58,7 +55,6 @@ public class KyufuJissekiDetailKeyInfo {
             List<ServiceTeikyoYMListOfServiceShurui> 対象サービス種類リスト) {
         this.交換情報識別番号 = 交換情報識別番号;
         this.入力識別番号 = 入力識別番号;
-        this.レコード種別コード = レコード種別コード;
         this.証記載保険者番号 = 証記載保険者番号;
         this.被保番号 = 被保番号;
         this.サービス提供年月 = サービス提供年月;
@@ -83,15 +79,6 @@ public class KyufuJissekiDetailKeyInfo {
      */
     public InputShikibetsuNo get入力識別番号() {
         return 入力識別番号;
-    }
-
-    /**
-     * レコード種別コードを返します。
-     *
-     * @return レコード種別コード
-     */
-    public RString getレコード種別コード() {
-        return レコード種別コード;
     }
 
     /**
