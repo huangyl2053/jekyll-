@@ -122,6 +122,9 @@ public class RenrakusakiInfo {
     public ResponseData onSelect_Renrakusaki(KaigoRenrakusakiInfoDiv div) {
         ResponseData<KaigoRenrakusakiInfoDiv> response = new ResponseData<>();
 
+        div.getSelectedContents().getTxtRenrakusakiKbnNo().setValue(
+                div.getDgRenrakusaki().getClickedItem().getRenrakusakiKbnNo());
+
         div.getSelectedContents().getTxtShimei().setValue(
                 div.getDgRenrakusaki().getClickedItem().getShimei());
         div.getSelectedContents().getTxtShimeiKana().setValue(
@@ -137,12 +140,8 @@ public class RenrakusakiInfo {
         div.getSelectedContents().getTxtTsuzukigara().setValue(
                 div.getDgRenrakusaki().getClickedItem().getTsuzukigara());
 
-        DecimalFormat df = new DecimalFormat("00000000");
-        div.getSelectedContents().setRenrakusakiKbnNo(
-                new RString(df.format(Integer.parseInt(div.getDgRenrakusaki().getClickedItem().
-                                        getRenrakusakiKbnNo().toString()))));
-
         div.getSelectedContents().setDisplayNone(false);
+        div.getSelectedContents().getTxtRenrakusakiKbnNo().setDisabled(true);
         div.setShoriKbn(SHORIKBN_UPDATE);
 
         div.getBtnAdd().setDisabled(true);
@@ -161,6 +160,7 @@ public class RenrakusakiInfo {
     public ResponseData onClick_btnAdd(KaigoRenrakusakiInfoDiv div) {
         ResponseData<KaigoRenrakusakiInfoDiv> response = new ResponseData<>();
 
+        div.getSelectedContents().getTxtRenrakusakiKbnNo().clearValue();
         div.getSelectedContents().getTxtShimei().clearValue();
         div.getSelectedContents().getTxtShimeiKana().clearValue();
         div.getSelectedContents().getTxtTel().clearValue();
@@ -168,10 +168,8 @@ public class RenrakusakiInfo {
         div.getSelectedContents().getTxtYubinNo().clearValue();
         div.getSelectedContents().getTxtJusho().clearValue();
         div.getSelectedContents().getTxtTsuzukigara().clearValue();
-        DecimalFormat df = new DecimalFormat("00000000");
-        div.getSelectedContents().setRenrakusakiKbnNo(
-                new RString(df.format(div.getDgRenrakusaki().getTotalRecords() + 1)));
 
+        div.getSelectedContents().getTxtRenrakusakiKbnNo().setDisabled(false);
         div.getSelectedContents().setDisplayNone(false);
         div.setShoriKbn(SHORIKBN_INSERT);
 
@@ -279,6 +277,8 @@ public class RenrakusakiInfo {
                 hihokenshaNo = div.getHihokenshaNo();
             }
 
+            DecimalFormat df = new DecimalFormat("00000000");
+
             KaigoRenrakusaki renrakusakiJoho = new KaigoRenrakusaki(
                     new AtenaMeisho(div.getSelectedContents().getTxtShimei().getValue()),
                     new AtenaKanaMeisho(div.getSelectedContents().getTxtShimeiKana().getValue()),
@@ -287,7 +287,9 @@ public class RenrakusakiInfo {
                     new YubinNo(div.getSelectedContents().getTxtYubinNo().getText()),
                     new AtenaJusho(div.getSelectedContents().getTxtJusho().getValue()),
                     div.getSelectedContents().getTxtTsuzukigara().getValue(),
-                    new RenrakusakiKubunNo(div.getSelectedContents().getRenrakusakiKbnNo()),
+                    new RenrakusakiKubunNo(new RString(df.format(Integer.parseInt(
+                                                    div.getSelectedContents().
+                                                    getTxtRenrakusakiKbnNo().getValue().toString())))),
                     new ShoKisaiHokenshaNo(hokenshaNo),
                     new KaigoHihokenshaNo(hihokenshaNo));
 
@@ -300,8 +302,7 @@ public class RenrakusakiInfo {
 
                     List<dgRenrakusaki_Row> renrakusakiList = div.getDgRenrakusaki().getDataSource();
                     renrakusakiList.add(createRenrakusakiListRow(
-                            div.getSelectedContents().getRenrakusakiKbnNo().
-                            substring(div.getSelectedContents().getRenrakusakiKbnNo().length() - 1),
+                            div.getSelectedContents().getTxtRenrakusakiKbnNo().getValue(),
                             div.getSelectedContents().getTxtShimei().getValue(),
                             div.getSelectedContents().getTxtTsuzukigara().getValue(),
                             div.getSelectedContents().getTxtTel().getValue(),
@@ -356,6 +357,8 @@ public class RenrakusakiInfo {
 
     private boolean chkInputJoho(KaigoRenrakusakiInfoDiv div) {
 
+        Boolean hanteiFlg = Boolean.TRUE;
+
         if ((div.getSelectedContents().getTxtShimei().getValue().isEmpty())
                 || (div.getSelectedContents().getTxtShimeiKana().getValue().isEmpty())
                 || (div.getSelectedContents().getTxtTel().getValue().isEmpty())
@@ -363,10 +366,21 @@ public class RenrakusakiInfo {
                 || (div.getSelectedContents().getTxtYubinNo().getText().isEmpty())
                 || (div.getSelectedContents().getTxtJusho().getValue().isEmpty())
                 || (div.getSelectedContents().getTxtTsuzukigara().getValue().isEmpty())) {
-            return false;
-        } else {
-            return true;
+            hanteiFlg = Boolean.FALSE;
         }
 
+        if (div.getShoriKbn().equals(SHORIKBN_INSERT)) {
+
+            List<dgRenrakusaki_Row> list = div.getDgRenrakusaki().getDataSource();
+            for (dgRenrakusaki_Row rowRenrakusaki : list) {
+                if (rowRenrakusaki.getRenrakusakiKbnNo().equals(
+                        div.getSelectedContents().getTxtRenrakusakiKbnNo().getValue())) {
+                    hanteiFlg = Boolean.FALSE;
+                    break;
+                }
+            }
+        }
+
+        return hanteiFlg;
     }
 }

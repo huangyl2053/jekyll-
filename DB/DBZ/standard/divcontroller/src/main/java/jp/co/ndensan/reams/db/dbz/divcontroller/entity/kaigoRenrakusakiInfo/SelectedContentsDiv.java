@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoRenrakusakiInfo;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -22,14 +21,16 @@ public class SelectedContentsDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtRenrakusakiKbnNo")
+    private TextBoxCode txtRenrakusakiKbnNo;
     @JsonProperty("txtShimei")
     private TextBox txtShimei;
     @JsonProperty("txtShimeiKana")
     private TextBox txtShimeiKana;
     @JsonProperty("txtTel")
-    private TextBoxCode txtTel;
+    private TextBox txtTel;
     @JsonProperty("txtKeitaiNo")
-    private TextBoxCode txtKeitaiNo;
+    private TextBox txtKeitaiNo;
     @JsonProperty("txtYubinNo")
     private TextBoxYubinNo txtYubinNo;
     @JsonProperty("txtJusho")
@@ -40,8 +41,6 @@ public class SelectedContentsDiv extends Panel {
     private Button btnUpdate;
     @JsonProperty("btnReturn")
     private Button btnReturn;
-    @JsonProperty("renrakusakiKbnNo")
-    private RString renrakusakiKbnNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -49,6 +48,16 @@ public class SelectedContentsDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("txtRenrakusakiKbnNo")
+    public TextBoxCode getTxtRenrakusakiKbnNo() {
+        return txtRenrakusakiKbnNo;
+    }
+
+    @JsonProperty("txtRenrakusakiKbnNo")
+    public void setTxtRenrakusakiKbnNo(TextBoxCode txtRenrakusakiKbnNo) {
+        this.txtRenrakusakiKbnNo=txtRenrakusakiKbnNo;
+    }
+
     @JsonProperty("txtShimei")
     public TextBox getTxtShimei() {
         return txtShimei;
@@ -70,22 +79,22 @@ public class SelectedContentsDiv extends Panel {
     }
 
     @JsonProperty("txtTel")
-    public TextBoxCode getTxtTel() {
+    public TextBox getTxtTel() {
         return txtTel;
     }
 
     @JsonProperty("txtTel")
-    public void setTxtTel(TextBoxCode txtTel) {
+    public void setTxtTel(TextBox txtTel) {
         this.txtTel=txtTel;
     }
 
     @JsonProperty("txtKeitaiNo")
-    public TextBoxCode getTxtKeitaiNo() {
+    public TextBox getTxtKeitaiNo() {
         return txtKeitaiNo;
     }
 
     @JsonProperty("txtKeitaiNo")
-    public void setTxtKeitaiNo(TextBoxCode txtKeitaiNo) {
+    public void setTxtKeitaiNo(TextBox txtKeitaiNo) {
         this.txtKeitaiNo=txtKeitaiNo;
     }
 
@@ -137,16 +146,6 @@ public class SelectedContentsDiv extends Panel {
     @JsonProperty("btnReturn")
     public void setBtnReturn(Button btnReturn) {
         this.btnReturn=btnReturn;
-    }
-
-    @JsonProperty("renrakusakiKbnNo")
-    public RString getRenrakusakiKbnNo() {
-        return renrakusakiKbnNo;
-    }
-
-    @JsonProperty("renrakusakiKbnNo")
-    public void setRenrakusakiKbnNo(RString renrakusakiKbnNo) {
-        this.renrakusakiKbnNo=renrakusakiKbnNo;
     }
 
 }

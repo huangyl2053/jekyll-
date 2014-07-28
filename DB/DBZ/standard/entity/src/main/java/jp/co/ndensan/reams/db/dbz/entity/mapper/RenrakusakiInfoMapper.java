@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.entity.mapper;
 import jp.co.ndensan.reams.db.dbz.business.KaigoRenrakusaki;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RenrakusakiKubunNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5050RenrakusakiJohoEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 連絡先情報ビジネスクラスとエンティティの変換を行うクラスです。

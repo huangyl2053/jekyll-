@@ -95,7 +95,7 @@ public class RenrakusakiInfoDac implements IReplaceable<DbT5050RenrakusakiJohoEn
     @Transaction
     public int delete(DbT5050RenrakusakiJohoEntity entity) {
         DbAccessorNormalType dbAccessor = new DbAccessorNormalType(session);
-        return dbAccessor.delete(entity).execute();
+        return dbAccessor.deletePhysical(entity).execute();
     }
 
     /**
