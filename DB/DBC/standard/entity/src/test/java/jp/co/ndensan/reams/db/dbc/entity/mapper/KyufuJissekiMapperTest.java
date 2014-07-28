@@ -9,19 +9,25 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiJutakuKaishuhi;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiMeisai;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigen;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukei;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3018KyufujissekiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3027KyufujissekiJutakuKaishuhiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3017KyufujissekiKihonEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3018KyufujissekiMeisaiEntityMock;
+import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3026KyufujissekiFukushiYoguHanbaihiEntityMock;
+import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3027KyufujissekiJutakuKaishuhiEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3033KyufujissekiShukeiEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.KyufujissekiShuruiDetailEntityGenerator;
@@ -63,7 +69,6 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
         private static final KokanShikibetsuNo 交換情報識別番号 = new KokanShikibetsuNo(new RString("1137"));
         private static final InputShikibetsuNo 入力識別番号
                 = new InputShikibetsuNo(new Code(new RString("7131")), new RString("居宅介護サービス"), new RString("居宅介護サービス"));
-        private static final RString レコード種別コード = new RString("01");
         private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("00135985"));
         private static final KaigoHihokenshaNo 被保番号 = new KaigoHihokenshaNo(new RString("0000000019"));
         private static final ServiceTeikyoYM サービス提供年月 = new ServiceTeikyoYM(new FlexibleYearMonth("201407"));
@@ -651,6 +656,122 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
 
         @Test
         public void 審査年月の設定がある時_to給付実績社会福祉法人軽減額List_get審査年月は_設定値を返す() {
+            assertThat(result.get審査年月(), is(審査年月));
+        }
+    }
+
+    public static class to給付実績福祉用具購入費List extends DbcTestBase {
+
+        private KyufuJissekiYoguHanbaihi result;
+
+        private static final RString サービス = new RString("000007");
+        private static final FlexibleDate 購入日 = new FlexibleDate("20140201");
+        private static final RString 商品名 = new RString("福祉用具商品名");
+        private static final RString 種目 = new RString("08");
+        private static final RString 製造事業者名 = new RString("福祉用具製造事業者名");
+        private static final RString 販売事業者名 = new RString("福祉用具販売事業者名");
+        private static final Decimal 購入金額 = new Decimal(1234);
+        private static final FlexibleYearMonth 審査年月 = new FlexibleYearMonth("201403");
+        private static final RString 摘要 = new RString("適用１２３４５６７８９０");
+
+        @Before
+        public void setUp() {
+            List<DbT3026KyufujissekiFukushiYoguHanbaihiEntity> entities = new ArrayList<>();
+            entities.add(DbT3026KyufujissekiFukushiYoguHanbaihiEntityMock.getSpiedInstance());
+            result = KyufuJissekiMapper.to給付実績福祉用具購入費List(entities).iterator().next();
+        }
+
+        @Test
+        public void サービスの設定がある時_to給付実績福祉用具購入費List_getサービスは_設定値を返す() {
+            assertThat(result.getサービス(), is(サービス));
+        }
+
+        @Test
+        public void 購入日の設定がある時_to給付実績福祉用具購入費List_get購入日は_設定値を返す() {
+            assertThat(result.get購入日(), is(購入日));
+        }
+
+        @Test
+        public void 商品名の設定がある時_to給付実績福祉用具購入費List_get商品名は_設定値を返す() {
+            assertThat(result.get商品名(), is(商品名));
+        }
+
+        @Test
+        public void 種目の設定がある時_to給付実績福祉用具購入費List_get種目は_設定値を返す() {
+            assertThat(result.get種目(), is(種目));
+        }
+
+        @Test
+        public void 製造事業者名の設定がある時_to給付実績福祉用具購入費List_get製造事業者名は_設定値を返す() {
+            assertThat(result.get製造事業者名(), is(製造事業者名));
+        }
+
+        @Test
+        public void 販売事業者名の設定がある時_to給付実績福祉用具購入費List_get販売事業者名は_設定値を返す() {
+            assertThat(result.get販売事業者名(), is(販売事業者名));
+        }
+
+        @Test
+        public void 購入金額の設定がある時_to給付実績福祉用具購入費List_get購入金額は_設定値を返す() {
+            assertThat(result.get購入金額(), is(購入金額));
+        }
+
+        @Test
+        public void 審査年月の設定がある時_to給付実績福祉用具購入費List_get審査年月は_設定値を返す() {
+            assertThat(result.get審査年月(), is(審査年月));
+        }
+
+        @Test
+        public void 摘要の設定がある時_to給付実績福祉用具購入費List_get摘要は_設定値を返す() {
+            assertThat(result.get摘要(), is(摘要));
+        }
+    }
+
+    public static class to給付実績住宅改修費List extends DbcTestBase {
+
+        private KyufuJissekiJutakuKaishuhi result;
+
+        private static final RString サービス = new RString("000007");
+        private static final FlexibleDate 着工日 = new FlexibleDate("20140201");
+        private static final RString 事業者名 = new RString("住宅改修事業者名");
+        private static final RString 改修先住所 = new RString("住宅改修住宅住所");
+        private static final Decimal 改修費用 = new Decimal(1234);
+        private static final FlexibleYearMonth 審査年月 = new FlexibleYearMonth("201403");
+
+        @Before
+        public void setUp() {
+            List<DbT3027KyufujissekiJutakuKaishuhiEntity> entities = new ArrayList<>();
+            entities.add(DbT3027KyufujissekiJutakuKaishuhiEntityMock.getSpiedInstance());
+            result = KyufuJissekiMapper.to給付実績住宅改修費List(entities).iterator().next();
+        }
+
+        @Test
+        public void サービスの設定がある時_to給付実績住宅改修費List_getサービスは_設定値を返す() {
+            assertThat(result.getサービス(), is(サービス));
+        }
+
+        @Test
+        public void 着工日の設定がある時_to給付実績住宅改修費List_get着工日は_設定値を返す() {
+            assertThat(result.get着工日(), is(着工日));
+        }
+
+        @Test
+        public void 事業者名の設定がある時_to給付実績住宅改修費List_get事業者名は_設定値を返す() {
+            assertThat(result.get事業者名(), is(事業者名));
+        }
+
+        @Test
+        public void 改修先住所の設定がある時_to給付実績住宅改修費List_get改修先住所は_設定値を返す() {
+            assertThat(result.get改修先住所(), is(改修先住所));
+        }
+
+        @Test
+        public void 改修費用の設定がある時_to給付実績住宅改修費List_get改修費用は_設定値を返す() {
+            assertThat(result.get改修費用(), is(改修費用));
+        }
+
+        @Test
+        public void 審査年月の設定がある時_to給付実績住宅改修費List_get審査年月は_設定値を返す() {
             assertThat(result.get審査年月(), is(審査年月));
         }
     }

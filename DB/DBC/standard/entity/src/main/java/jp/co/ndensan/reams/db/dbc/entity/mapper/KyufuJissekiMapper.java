@@ -11,6 +11,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
 import jp.co.ndensan.reams.db.dbc.business.JigyoshaNoListOfServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiJutakuKaishuhi;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiJutakuKaishuhiCollection;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiYoguHanbaihi;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiYoguHanbaihiCollection;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonGokei;
@@ -33,6 +37,8 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3018KyufujissekiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3027KyufujissekiJutakuKaishuhiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
@@ -306,7 +312,7 @@ public final class KyufuJissekiMapper {
      * 給付実績明細エンティティから給付実績明細情報を作成して返す。
      *
      * @param entities 給付実績明細エンティティList
-     * @return businessの実績明細情報リストクラス
+     * @return 給付実績明細情報List
      */
     public static KyufuJissekiMeisaiCollection to給付実績明細List(List<DbT3018KyufujissekiMeisaiEntity> entities) {
         if (entities == null || entities.isEmpty()) {
@@ -349,7 +355,7 @@ public final class KyufuJissekiMapper {
      * 給付実績集計エンティティから給付実績集計情報を作成して返す。
      *
      * @param entities 給付実績集計エンティティList
-     * @return businessの給付実績集計情報リストクラス
+     * @return 給付実績集計情報List
      */
     public static KyufuJissekiShukeiCollection to給付実績集計List(List<DbT3033KyufujissekiShukeiEntity> entities) {
         if (entities == null || entities.isEmpty()) {
@@ -471,7 +477,7 @@ public final class KyufuJissekiMapper {
      * 給付実績社会福祉法人軽減額エンティティから給付実績社会福祉法人軽減額情報を作成して返す。
      *
      * @param entities 給付実績社会福祉法人軽減額エンティティList
-     * @return businessの給付実績社会福祉法人軽減額リストクラス
+     * @return 給付実績社会福祉法人軽減額情報List
      */
     public static KyufuJissekiShafukuKeigenCollection to給付実績社会福祉法人軽減額List(
             List<DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity> entities) {
@@ -502,5 +508,60 @@ public final class KyufuJissekiMapper {
         }
 
         return new KyufuJissekiShafukuKeigenCollection(list);
+    }
+
+    /**
+     * 給付実績福祉用具購入費エンティティから給付実績福祉用具購入費情報を作成して返す。
+     *
+     * @param entities 給付実績福祉用具購入費エンティティList
+     * @return 給付実績福祉用具購入費情報List
+     */
+    public static KyufuJissekiYoguHanbaihiCollection to給付実績福祉用具購入費List(
+            List<DbT3026KyufujissekiFukushiYoguHanbaihiEntity> entities) {
+        if (entities == null || entities.isEmpty()) {
+            return new KyufuJissekiYoguHanbaihiCollection(Collections.EMPTY_LIST);
+        }
+
+        List<KyufuJissekiYoguHanbaihi> list = new ArrayList<>();
+        for (DbT3026KyufujissekiFukushiYoguHanbaihiEntity entity : entities) {
+            list.add(new KyufuJissekiYoguHanbaihi(
+                    entity.getServiceCode(),
+                    entity.getFukushiyoguHanbaiYMD(),
+                    entity.getFukushiyoguShohinName(),
+                    entity.getFukushiyoguSyumokuCode(),
+                    entity.getFukushiyoguSeizoJigyoshaName(),
+                    entity.getFukushiyoguHanbaiJigyoshaName(),
+                    new Decimal(entity.getHanbaiKingaku()),
+                    entity.getShinsaYM(),
+                    entity.getTekiyo()));
+        }
+
+        return new KyufuJissekiYoguHanbaihiCollection(list);
+    }
+
+    /**
+     * 給付実績住宅改修費エンティティから給付実績住宅改修費情報を作成して返す。
+     *
+     * @param entities 給付実績住宅改修費エンティティList
+     * @return 給付実績住宅改修費情報List
+     */
+    public static KyufuJissekiJutakuKaishuhiCollection to給付実績住宅改修費List(
+            List<DbT3027KyufujissekiJutakuKaishuhiEntity> entities) {
+        if (entities == null || entities.isEmpty()) {
+            return new KyufuJissekiJutakuKaishuhiCollection(Collections.EMPTY_LIST);
+        }
+
+        List<KyufuJissekiJutakuKaishuhi> list = new ArrayList<>();
+        for (DbT3027KyufujissekiJutakuKaishuhiEntity entity : entities) {
+            list.add(new KyufuJissekiJutakuKaishuhi(
+                    entity.getServiceCode(),
+                    entity.getJutakuKaishuchakkoYMD(),
+                    entity.getJutakuKaishuJigyoshaName(),
+                    entity.getJuutakukaishuJyutakuAdress(),
+                    new Decimal(entity.getKaishuKingaku()),
+                    entity.getShinsaYM()));
+        }
+
+        return new KyufuJissekiJutakuKaishuhiCollection(list);
     }
 }
