@@ -134,11 +134,11 @@ public class KyufuJissekiYoguHanbaihi {
     }
 
     /**
-     * 適要を返します。
+     * 摘要を返します。
      *
-     * @return 適要
+     * @return 摘要
      */
-    public RString get適要() {
+    public RString get摘要() {
         return 摘要;
     }
 }
