@@ -11,25 +11,25 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
- * 福祉用具購入費リストを保持するコレクションクラスです。
+ * 住宅改修費情報リストを保持するコレクションクラスです。
  *
  * @author N8223　朴義一
  */
-public class KyufuJissekiFukushiYoguKonyuhiCollection implements Iterable<KyufuJissekiFukushiYoguKonyuhi> {
+public class KyufuJissekiJutakuKaishuhiCollection implements Iterable<KyufuJissekiJutakuKaishuhi> {
 
-    private final List<KyufuJissekiFukushiYoguKonyuhi> list;
+    private final List<KyufuJissekiJutakuKaishuhi> list;
 
     /**
      * インスタンスを生成します。
      *
-     * @param list 福祉用具購入費List
+     * @param list 住宅改修費情報List
      */
-    public KyufuJissekiFukushiYoguKonyuhiCollection(List<KyufuJissekiFukushiYoguKonyuhi> list) {
-        this.list = requireNonNull(list, Messages.E00001.replace("福祉用具購入費List").getMessage());
+    public KyufuJissekiJutakuKaishuhiCollection(List<KyufuJissekiJutakuKaishuhi> list) {
+        this.list = requireNonNull(list, Messages.E00001.replace("住宅改修費情報List").getMessage());
     }
 
     /**
-     * 福祉用具購入費ListがEMPTYかどうか判定します。
+     * 住宅改修費情報ListがEMPTYかどうか判定します。
      *
      * @return EMPTYの場合にtrueを返します。
      */
@@ -38,16 +38,16 @@ public class KyufuJissekiFukushiYoguKonyuhiCollection implements Iterable<KyufuJ
     }
 
     /**
-     * 福祉用具購入費Listの要素数を返します。
+     * 住宅改修費情報Listの要素数を返します。
      *
-     * @return 福祉用具購入費Listの要素数
+     * @return 住宅改修費情報Listの要素数
      */
     public int size() {
         return list.size();
     }
 
     @Override
-    public Iterator<KyufuJissekiFukushiYoguKonyuhi> iterator() {
+    public Iterator<KyufuJissekiJutakuKaishuhi> iterator() {
         return list.iterator();
     }
 

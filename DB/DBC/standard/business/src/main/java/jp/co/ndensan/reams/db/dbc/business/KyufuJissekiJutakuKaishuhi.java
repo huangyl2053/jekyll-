@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 給付実績の住宅改修費情報を保持するクラスです。
  *
- * @author N8223　朴義一
+ * @author N8223 朴 義一
  */
-public class KyufuJissekiFukushiJutakuKaishuhi {
+public class KyufuJissekiJutakuKaishuhi {
 
     private final RString サービス;
     private final FlexibleDate 着工日;
@@ -27,21 +27,20 @@ public class KyufuJissekiFukushiJutakuKaishuhi {
     /**
      * インスタンスを生成します。
      *
-     * @param サービス サービスコード
-     * @param 着工日 住宅改修着工年月日
-     * @param 事業者名 住宅改修事業者名
-     * @param 改修先住所 福祉用具種目コード
-     * @param 改修費用 改修金額
+     * @param サービス サービス
+     * @param 着工日 着工日
+     * @param 事業者名 事業者名
+     * @param 改修先住所 改修先住所
+     * @param 改修費用 改修費用
      * @param 審査年月 審査年月
      */
-    public KyufuJissekiFukushiJutakuKaishuhi(
+    public KyufuJissekiJutakuKaishuhi(
             RString サービス,
             FlexibleDate 着工日,
             RString 事業者名,
             RString 改修先住所,
             Decimal 改修費用,
-            FlexibleYearMonth 審査年月
-    ) {
+            FlexibleYearMonth 審査年月) {
         this.サービス = サービス;
         this.着工日 = 着工日;
         this.事業者名 = 事業者名;
@@ -60,9 +59,9 @@ public class KyufuJissekiFukushiJutakuKaishuhi {
     }
 
     /**
-     * 購入日を返します。
+     * 着工日を返します。
      *
-     * @return 購入日
+     * @return 着工日
      */
     public FlexibleDate get着工日() {
         return 着工日;
@@ -89,7 +88,7 @@ public class KyufuJissekiFukushiJutakuKaishuhi {
     /**
      * 改修費用を返します。
      *
-     * @return 購入金額
+     * @return 改修費用
      */
     public Decimal get改修費用() {
         return 改修費用;
@@ -103,5 +102,4 @@ public class KyufuJissekiFukushiJutakuKaishuhi {
     public FlexibleYearMonth get審査年月() {
         return 審査年月;
     }
-
 }
