@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonKyotakuService;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonKyufuritsu;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonNyutaisho;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonServiceKikan;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKyotakuService;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKyotakuServiceCollection;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiMeisai;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiMeisaiCollection;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigen;
@@ -37,6 +39,7 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3018KyufujissekiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3025KyufujissekiKyotakuServiceEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3027KyufujissekiJutakuKaishuhiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
@@ -47,6 +50,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -64,10 +69,14 @@ public final class KyufuJissekiMapper {
     private static final RString 公費1 = new RString("公費１");
     private static final RString 公費2 = new RString("公費２");
     private static final RString 公費3 = new RString("公費３");
+    private static final RString 明細 = new RString("明細");
+    private static final RString 合計 = new RString("合計");
 
     private static final RString[] 保険公費 = {保険, 空欄, 公費1, 空欄, 公費2, 空欄, 公費3, 空欄};
+    private static final RString[] 明細合計 = {明細, 合計, 明細, 合計};
     private static final RString[] 前後1 = {空欄, 後};
-    private static final RString[] 前後4 = {空欄, 後, 空欄, 後, 空欄, 後, 空欄, 後};
+    private static final RString[] 前後2 = {空欄, 空欄, 後, 後};
+    private static final RString[] 前後3 = {空欄, 後, 空欄, 後, 空欄, 後, 空欄, 後};
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -296,7 +305,7 @@ public final class KyufuJissekiMapper {
         for (int index = 0; index < 保険公費.length; index++) {
             list.add(new KyufuJissekiKihonGokei(
                     保険公費[index],
-                    前後4[index],
+                    前後3[index],
                     new Decimal(サービス単位[index]),
                     保険料請求額[index],
                     new Decimal(利用者負担額[index]),
@@ -455,7 +464,7 @@ public final class KyufuJissekiMapper {
                         new Decimal(entity.getGendogakuKanritaishogaiTanisu()),
                         entity.getTankiNyushoPlanNissu(),
                         保険公費[index],
-                        前後4[index],
+                        前後3[index],
                         短実日数[index],
                         new Decimal(単位合計[index]),
                         単位数単価[index],
@@ -508,6 +517,95 @@ public final class KyufuJissekiMapper {
         }
 
         return new KyufuJissekiShafukuKeigenCollection(list);
+    }
+
+    /**
+     * 給付実績サービス計画費エンティティから給付実績サービス計画費情報を作成して返す。
+     *
+     * @param entities 給付実績サービス計画費エンティティList
+     * @return 給付実績サービス計画費情報List
+     */
+    public static KyufuJissekiKyotakuServiceCollection to給付実績サービス計画費List(List<DbT3025KyufujissekiKyotakuServiceEntity> entities) {
+        if (entities == null || entities.isEmpty()) {
+            return new KyufuJissekiKyotakuServiceCollection(Collections.EMPTY_LIST);
+        }
+
+        List<KyufuJissekiKyotakuService> list = new ArrayList<>();
+        for (DbT3025KyufujissekiKyotakuServiceEntity entity : entities) {
+
+            RString[] 指定基準区分 = {
+                entity.getShiteiKijunGaitoJigyoshaKubunCode(), RString.EMPTY,
+                entity.getShiteiKijunGaitoJigyoshaKubunCode(), RString.EMPTY
+            };
+            FlexibleDate[] 届出日 = {
+                entity.getKyotakuServiceSakuseiIraiYMD(), null,
+                entity.getKyotakuServiceSakuseiIraiYMD(), null
+            };
+            RString[] サービス = {
+                entity.getServiceCode().value(), RString.EMPTY,
+                entity.getServiceCode().value(), RString.EMPTY
+            };
+            Decimal[] 単位数単価 = {
+                entity.getTanisuTanka(), null,
+                entity.getTanisuTanka(), null
+            };
+            Decimal[] 単位数 = {
+                new Decimal(entity.getTanisu()), null,
+                new Decimal(entity.getAtoTanisu()), null
+            };
+            Integer[] 回数 = {
+                new Integer(entity.getKaisu()), null,
+                new Integer(entity.getAtoKaisu()), null
+            };
+            Decimal[] サービス単位数 = {
+                new Decimal(entity.getServiceTanisu()), new Decimal(entity.getServiceTanisuTotal()),
+                new Decimal(entity.getAtoServiceTanisu()), new Decimal(entity.getAtoServiceTanisuTotal())
+            };
+            Decimal[] 請求金額 = {
+                null, new Decimal(entity.getSeikyuKingaku()),
+                null, new Decimal(entity.getAtoSeikyuKingaku())
+            };
+            RString[] 専門員番号 = {
+                entity.getTantouKaigoShienSemmoninNo(), RString.EMPTY,
+                entity.getTantouKaigoShienSemmoninNo(), RString.EMPTY,};
+            Integer[] 再審査回数 = {
+                new Integer(entity.getSaishinsaKaisu()), null,
+                new Integer(entity.getSaishinsaKaisu()), null
+            };
+            Integer[] 過誤回数 = {
+                new Integer(entity.getKagoKaisu()), null,
+                new Integer(entity.getKagoKaisu()), null
+            };
+            FlexibleYearMonth[] 審査年月 = {
+                entity.getShinsaYM(), null,
+                entity.getShinsaYM(), null
+            };
+            RString[] 摘要 = {
+                entity.getTekiyo(), RString.EMPTY,
+                entity.getTekiyo(), RString.EMPTY
+            };
+
+            for (int index = 0; index < 明細合計.length; index++) {
+                list.add(new KyufuJissekiKyotakuService(
+                        指定基準区分[index],
+                        届出日[index],
+                        サービス[index],
+                        単位数単価[index],
+                        前後2[index],
+                        明細合計[index],
+                        単位数[index],
+                        回数[index],
+                        サービス単位数[index],
+                        請求金額[index],
+                        専門員番号[index],
+                        再審査回数[index],
+                        過誤回数[index],
+                        審査年月[index],
+                        摘要[index]));
+            }
+        }
+
+        return new KyufuJissekiKyotakuServiceCollection(list);
     }
 
     /**
