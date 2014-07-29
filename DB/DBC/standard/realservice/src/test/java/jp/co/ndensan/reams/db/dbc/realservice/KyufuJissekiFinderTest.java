@@ -13,21 +13,24 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.ServiceTeikyoYMListOfServiceShurui;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3018KyufujissekiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3025KyufujissekiKyotakuServiceEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3027KyufujissekiJutakuKaishuhiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3017KyufujissekiKihonEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3018KyufujissekiMeisaiEntityMock;
-import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3025KyufujissekiKyotakuServiceEntityMock;
+import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3026KyufujissekiFukushiYoguHanbaihiEntityMock;
+import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3027KyufujissekiJutakuKaishuhiEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3033KyufujissekiShukeiEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.KyufujissekiShuruiDetailEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiKihonDac;
-import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiKyotakuServiceDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiMeisaiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiShafukuKeigenDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiShukeiDac;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufujissekiFukushiYoguHanbaihiDac;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufujissekiJutakuKaishuhiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.KyufuJissekiServiceDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.InputShikibetsuNoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
@@ -82,7 +85,8 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
                 createKyufuJissekiMeisaiDac(flg),
                 createKyufuJissekiShukeiDac(flg),
                 createKyufuJissekiShafukuKeigenDac(flg),
-                createKyufuJissekiKyotakuServiceDac(flg));
+                createKyufuJissekiFukushiYoguHanbaihiDac(flg),
+                createKyufuJissekiJutakuKaishuhiDac(flg));
     }
 
     private static KyufuJissekiServiceDac createKyufuJissekiServiceDac(int flg) {
@@ -151,9 +155,23 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
         return dac;
     }
 
-    private static IKyufuJissekiKyotakuServiceDac createKyufuJissekiKyotakuServiceDac(int flg) {
-        IKyufuJissekiKyotakuServiceDac dac = mock(IKyufuJissekiKyotakuServiceDac.class);
-        List<DbT3025KyufujissekiKyotakuServiceEntity> entityList = createDbT3025KyufujissekiKyotakuServiceEntityList(flg);
+    private static IKyufujissekiFukushiYoguHanbaihiDac createKyufuJissekiFukushiYoguHanbaihiDac(int flg) {
+        IKyufujissekiFukushiYoguHanbaihiDac dac = mock(IKyufujissekiFukushiYoguHanbaihiDac.class);
+        List<DbT3026KyufujissekiFukushiYoguHanbaihiEntity> entityList = createDbT3026KyufujissekiFukushiYoguHanbaihiEntityList(flg);
+        when(dac.select(
+                any(KokanShikibetsuNo.class),
+                any(InputShikibetsuNoCode.class),
+                any(ShoKisaiHokenshaNo.class),
+                any(KaigoHihokenshaNo.class),
+                any(FlexibleYearMonth.class),
+                any(JigyoshaNo.class),
+                any(ToshiNo.class))).thenReturn(entityList);
+        return dac;
+    }
+
+    private static IKyufujissekiJutakuKaishuhiDac createKyufuJissekiJutakuKaishuhiDac(int flg) {
+        IKyufujissekiJutakuKaishuhiDac dac = mock(IKyufujissekiJutakuKaishuhiDac.class);
+        List<DbT3027KyufujissekiJutakuKaishuhiEntity> entityList = createDbT3027KyufujissekiJutakuKaishuhiEntityList(flg);
         when(dac.select(
                 any(KokanShikibetsuNo.class),
                 any(InputShikibetsuNoCode.class),
@@ -191,9 +209,15 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
         return flg == AS_給付実績あり ? list : null;
     }
 
-    private static List<DbT3025KyufujissekiKyotakuServiceEntity> createDbT3025KyufujissekiKyotakuServiceEntityList(int flg) {
-        List<DbT3025KyufujissekiKyotakuServiceEntity> list = new ArrayList<>();
-        list.add(DbT3025KyufujissekiKyotakuServiceEntityMock.getSpiedInstance());
+    private static List<DbT3026KyufujissekiFukushiYoguHanbaihiEntity> createDbT3026KyufujissekiFukushiYoguHanbaihiEntityList(int flg) {
+        List<DbT3026KyufujissekiFukushiYoguHanbaihiEntity> list = new ArrayList<>();
+        list.add(DbT3026KyufujissekiFukushiYoguHanbaihiEntityMock.getSpiedInstance());
+        return flg == AS_給付実績あり ? list : null;
+    }
+
+    private static List<DbT3027KyufujissekiJutakuKaishuhiEntity> createDbT3027KyufujissekiJutakuKaishuhiEntityList(int flg) {
+        List<DbT3027KyufujissekiJutakuKaishuhiEntity> list = new ArrayList<>();
+        list.add(DbT3027KyufujissekiJutakuKaishuhiEntityMock.getSpiedInstance());
         return flg == AS_給付実績あり ? list : null;
     }
 
