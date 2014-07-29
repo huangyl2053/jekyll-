@@ -6209,7 +6209,7 @@
              "cellType": 0,
              "isSetValueToToolTip": false
             },
-            "align": 1,
+            "align": 0,
             "resize": true,
             "isPrivateInfo": false,
             "sortKey": "btnTekiyo"
@@ -6470,7 +6470,7 @@
       "CareManagementhi"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "KyufuJissekiKihon",
+     "selectedItemFieldName": "FukushiYoguKonyuhi",
      "initialTab": "0",
      "isLazyLoading": false
     },
