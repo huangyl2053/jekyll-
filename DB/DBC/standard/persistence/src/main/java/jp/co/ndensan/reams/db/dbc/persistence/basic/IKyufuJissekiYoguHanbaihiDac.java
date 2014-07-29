@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author N8223　朴義一
  */
-public interface IKyufujissekiFukushiYoguHanbaihiDac extends
+public interface IKyufuJissekiYoguHanbaihiDac extends
         IReplaceable<DbT3026KyufujissekiFukushiYoguHanbaihiEntity>,
         IDeletable<DbT3026KyufujissekiFukushiYoguHanbaihiEntity> {
 

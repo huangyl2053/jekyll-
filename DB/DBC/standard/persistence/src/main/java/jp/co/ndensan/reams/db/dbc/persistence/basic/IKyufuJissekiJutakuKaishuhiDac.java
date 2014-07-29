@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author N8223　朴義一
  */
-public interface IKyufujissekiJutakuKaishuhiDac extends
+public interface IKyufuJissekiJutakuKaishuhiDac extends
         IReplaceable<DbT3027KyufujissekiJutakuKaishuhiEntity>,
         IDeletable<DbT3027KyufujissekiJutakuKaishuhiEntity> {
 

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.CareManagementhiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.FukushiYoguKonyuhiDiv;
@@ -35,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.db.dbc.realservice.KyufuJissekiFinder;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
@@ -180,12 +178,7 @@ public class KyufuJisseki {
         //DBの情報を取る。
         List<dgKyufuJissekiShukei_Row> shukeiList = new ArrayList<>();
 
-        //給付実績集計データ取得、設定　集計
-        KyufuJissekiShukei iShukei = null;
-
-        for (Iterator<KyufuJissekiShukei> i = kyufuJisseki.get集計リスト().iterator(); i.hasNext();) {
-
-            iShukei = i.next();
+        for (KyufuJissekiShukei iShukei : kyufuJisseki.get集計リスト()) {
 
             RString rsServiceShurui = iShukei.get種類();
             RString rsJitsuNissu = new RString(String.valueOf(iShukei.get短実日数()));
@@ -220,12 +213,7 @@ public class KyufuJisseki {
 
         List<dgKyufuJissekiMeisai_Row> meisaiList = new ArrayList<>();
 
-        //給付実績明細データ取得、設定 明細
-        KyufuJissekiMeisai iMeisai = null;
-
-        for (Iterator<KyufuJissekiMeisai> i = kyufuJisseki.get明細リスト().iterator(); i.hasNext();) {
-
-            iMeisai = i.next();
+        for (KyufuJissekiMeisai iMeisai : kyufuJisseki.get明細リスト()) {
 
             RString rsService = iMeisai.getサービス();
             RString rsKettei = iMeisai.get決定();
@@ -292,12 +280,7 @@ public class KyufuJisseki {
         //DBの情報を取る。
         List<dgFukushiYoguKonyuhi_Row> fukushiYoguKonyuhiList = new ArrayList<>();
 
-        //祉用具購入費データ取得、設定　集計
-        KyufuJissekiYoguHanbaihi iFukushiYoguKonyuh = null;
-
-        for (Iterator<KyufuJissekiYoguHanbaihi> i = kyufuJisseki.get祉用具購入費リスト().iterator(); i.hasNext();) {
-
-            iFukushiYoguKonyuh = i.next();
+        for (KyufuJissekiYoguHanbaihi iFukushiYoguKonyuh : kyufuJisseki.get祉用具購入費リスト()) {
 
             RString rsService = iFukushiYoguKonyuh.getサービス();
             RString rsKonyuYMD = setWareki(toRDate(iFukushiYoguKonyuh.get購入日()).toDateString());
@@ -307,10 +290,11 @@ public class KyufuJisseki {
             RString rsHanbaiJigyoshaName = iFukushiYoguKonyuh.get販売事業者名();
             RString rsKonyuKingaku = new RString(setCommFormat(String.valueOf(iFukushiYoguKonyuh.get購入金額())));
             RString rsShinsaYM = setWareki(iFukushiYoguKonyuh.get審査年月().toDateString()).substring(0, 6);
+            RString rsTekiyo = iFukushiYoguKonyuh.get摘要();
 
             fukushiYoguKonyuhiList.add(createFukushiYoguKonyuhiRow(
                     rsService, rsKonyuYMD, rsShohinName, rsShumoku, rsSeizoJigyoshaName, rsHanbaiJigyoshaName,
-                    rsKonyuKingaku, rsShinsaYM));
+                    rsKonyuKingaku, rsShinsaYM, rsTekiyo));
         }
         panel.getDgFukushiYoguKonyuhi().setDataSource(fukushiYoguKonyuhiList);
 
@@ -321,12 +305,7 @@ public class KyufuJisseki {
         //DBの情報を取る。
         List<dgJutakuKaishuhi_Row> jutakuKaishuhiList = new ArrayList<>();
 
-        //住宅改修費データ取得、設定
-        KyufuJissekiJutakuKaishuhi iJutakuKaishuhi = null;
-
-        for (Iterator<KyufuJissekiJutakuKaishuhi> i = kyufuJisseki.get住宅改修費情報リスト().iterator(); i.hasNext();) {
-
-            iJutakuKaishuhi = i.next();
+        for (KyufuJissekiJutakuKaishuhi iJutakuKaishuhi : kyufuJisseki.get住宅改修費情報リスト()) {
 
             RString rsService = iJutakuKaishuhi.getサービス();
             RString rsChakkoYMD = setWareki(toRDate(iJutakuKaishuhi.get着工日()).toDateString());
@@ -435,16 +414,16 @@ public class KyufuJisseki {
             RString txtSeikyuKingaku, RString txtTantoKaigoShienSenmoninNo, RString txtSaishinsaKaisu, RString txtKagoKaisu, RString txtShinsaYM) {
         return new dgServiceKeikakuhiFromH2104_Row(
                 txtShiteiKijunGaitoJigyoshoKubun, txtIraiTodokedeYMD, txtService,
-                txtTaniTanka, new Button(), txtKettei, txtMeisaiGokei, txtTanisu, txtKaisu, txtServiceTanisu,
-                txtSeikyuKingaku, txtTantoKaigoShienSenmoninNo, txtSaishinsaKaisu, txtKagoKaisu, txtShinsaYM);
+                txtTaniTanka, txtKettei, txtMeisaiGokei, txtTanisu, txtKaisu, txtServiceTanisu,
+                txtSeikyuKingaku, txtTantoKaigoShienSenmoninNo, txtSaishinsaKaisu, txtKagoKaisu, txtShinsaYM, RString.EMPTY);
     }
 
     private dgFukushiYoguKonyuhi_Row createFukushiYoguKonyuhiRow(
             RString txtService, RString txtKonyuYMD, RString txtShohinName, RString txtShumoku,
-            RString txtSeizoJigyoshaName, RString txtHanbaiJigyoshaName, RString txtKonyuKingaku, RString txtShinsaYM) {
+            RString txtSeizoJigyoshaName, RString txtHanbaiJigyoshaName, RString txtKonyuKingaku, RString txtShinsaYM, RString txtTekiyo) {
         return new dgFukushiYoguKonyuhi_Row(
-                txtService, new Button(), txtKonyuYMD, txtShohinName, txtShumoku,
-                txtSeizoJigyoshaName, txtHanbaiJigyoshaName, txtKonyuKingaku, txtShinsaYM);
+                txtService, txtKonyuYMD, txtShohinName, txtShumoku,
+                txtSeizoJigyoshaName, txtHanbaiJigyoshaName, txtKonyuKingaku, txtShinsaYM, txtTekiyo);
     }
 
     private dgJutakuKaishuhi_Row createJutakuKaishuhiRow(

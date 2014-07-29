@@ -32,9 +32,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class KyufujissekiJutakuKaishuhiDacTest extends DbcTestDacBase {
+public class KyufuJissekiJutakuKaishuhiDacTest extends DbcTestDacBase {
 
-    private static IKyufujissekiJutakuKaishuhiDac sut;
+    private static IKyufuJissekiJutakuKaishuhiDac sut;
 
     private static final KokanShikibetsuNo 交換情報識別番号_データなし = new KokanShikibetsuNo(new RString("9999"));
     private static final KokanShikibetsuNo 交換情報識別番号_データあり = new KokanShikibetsuNo(new RString("1234"));
@@ -47,7 +47,7 @@ public class KyufujissekiJutakuKaishuhiDacTest extends DbcTestDacBase {
 
     @BeforeClass
     public static void setUpClass() {
-        sut = InstanceProvider.create(KyufujissekiJutakuKaishuhiDac.class);
+        sut = InstanceProvider.create(KyufuJissekiJutakuKaishuhiDac.class);
     }
 
     public static class select extends DbcTestDacBase {
