@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.db.dbc.realservice.KyufuJissekiFinder;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiJutakuKaishuhi;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonHihokensha;
@@ -49,6 +50,7 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonNyutaisho;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonServiceKikan;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiMeisai;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukei;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
@@ -89,8 +91,8 @@ public class KyufuJisseki {
         setKyufuJissekiKihon(panel.getTabKyufuJisseki().getKyufuJissekiKihon(), kihon);
         setKyufuJissekiMeisai(panel.getTabKyufuJisseki().getKyufuJissekiMeisaiShukei(), jisseki);
         setServiceKeikakuhi(panel.getTabKyufuJisseki().getServiceKeikakuhi());
-        setFukushiYoguKonyuhi(panel.getTabKyufuJisseki().getFukushiYoguKonyuhi());
-        setJutakuKaishuhi(panel.getTabKyufuJisseki().getJutakuKaishuhi());
+        setFukushiYoguKonyuhi(panel.getTabKyufuJisseki().getFukushiYoguKonyuhi(), jisseki);
+        setJutakuKaishuhi(panel.getTabKyufuJisseki().getJutakuKaishuhi(), jisseki);
         setKogakuKaigoServicehi(panel.getTabKyufuJisseki().getKogakuKaigoServicehi());
         setCareManagementhi(panel.getTabKyufuJisseki().getCareManagementhi());
 
@@ -175,7 +177,7 @@ public class KyufuJisseki {
 
     private void setKyufuJissekiMeisai(KyufuJissekiMeisaiShukeiDiv panel, jp.co.ndensan.reams.db.dbc.business.KyufuJisseki kyufuJisseki) {
 
-        ///DBの情報を取る。
+        //DBの情報を取る。
         List<dgKyufuJissekiShukei_Row> shukeiList = new ArrayList<>();
 
         //給付実績集計データ取得、設定　集計
@@ -213,7 +215,7 @@ public class KyufuJisseki {
 
         }
 
-        ///DBの情報を取る。
+        //DBの情報を取る。
         panel.getKyufuJissekiShukei().getDgKyufuJissekiShukei().setDataSource(shukeiList);
 
         List<dgKyufuJissekiMeisai_Row> meisaiList = new ArrayList<>();
@@ -285,25 +287,26 @@ public class KyufuJisseki {
 
     }
 
-    private void setFukushiYoguKonyuhi(FukushiYoguKonyuhiDiv panel) {
+    private void setFukushiYoguKonyuhi(FukushiYoguKonyuhiDiv panel, jp.co.ndensan.reams.db.dbc.business.KyufuJisseki kyufuJisseki) {
 
-        //福祉用具購入費データ取得、設定
-        List<HashMap> fukushiYoguKonyuhi = YamlLoader.DBC.loadAsList(
-                new RString("dbc0010000/FukushiYoguKonyuhi.yml"));
-
+        //DBの情報を取る。
         List<dgFukushiYoguKonyuhi_Row> fukushiYoguKonyuhiList = new ArrayList<>();
-        for (int i = 0; i < fukushiYoguKonyuhi.size(); i++) {
-            HashMap hashMap = fukushiYoguKonyuhi.get(i);
-            ControlGenerator ymlData = new ControlGenerator(hashMap);
 
-            RString rsService = ymlData.getAsRString("txtService");
-            RString rsKonyuYMD = ymlData.getAsRString("txtKonyuYMD");
-            RString rsShohinName = ymlData.getAsRString("txtShohinName");
-            RString rsShumoku = ymlData.getAsRString("txtShumoku");
-            RString rsSeizoJigyoshaName = ymlData.getAsRString("txtSeizoJigyoshaName");
-            RString rsHanbaiJigyoshaName = ymlData.getAsRString("txtHanbaiJigyoshaName");
-            RString rsKonyuKingaku = ymlData.getAsRString("txtKonyuKingaku");
-            RString rsShinsaYM = ymlData.getAsRString("txtShinsaYM");
+        //祉用具購入費データ取得、設定　集計
+        KyufuJissekiYoguHanbaihi iFukushiYoguKonyuh = null;
+
+        for (Iterator<KyufuJissekiYoguHanbaihi> i = kyufuJisseki.get祉用具購入費リスト().iterator(); i.hasNext();) {
+
+            iFukushiYoguKonyuh = i.next();
+
+            RString rsService = iFukushiYoguKonyuh.getサービス();
+            RString rsKonyuYMD = setWareki(toRDate(iFukushiYoguKonyuh.get購入日()).toDateString());
+            RString rsShohinName = iFukushiYoguKonyuh.get商品名();
+            RString rsShumoku = iFukushiYoguKonyuh.get種目();
+            RString rsSeizoJigyoshaName = iFukushiYoguKonyuh.get製造事業者名();
+            RString rsHanbaiJigyoshaName = iFukushiYoguKonyuh.get販売事業者名();
+            RString rsKonyuKingaku = new RString(setCommFormat(String.valueOf(iFukushiYoguKonyuh.get購入金額())));
+            RString rsShinsaYM = setWareki(iFukushiYoguKonyuh.get審査年月().toDateString()).substring(0, 6);
 
             fukushiYoguKonyuhiList.add(createFukushiYoguKonyuhiRow(
                     rsService, rsKonyuYMD, rsShohinName, rsShumoku, rsSeizoJigyoshaName, rsHanbaiJigyoshaName,
@@ -313,23 +316,24 @@ public class KyufuJisseki {
 
     }
 
-    private void setJutakuKaishuhi(JutakuKaishuhiDiv panel) {
+    private void setJutakuKaishuhi(JutakuKaishuhiDiv panel, jp.co.ndensan.reams.db.dbc.business.KyufuJisseki kyufuJisseki) {
+
+        //DBの情報を取る。
+        List<dgJutakuKaishuhi_Row> jutakuKaishuhiList = new ArrayList<>();
 
         //住宅改修費データ取得、設定
-        List<HashMap> jutakuKaishuhi = YamlLoader.DBC.loadAsList(
-                new RString("dbc0010000/JutakuKaishuhi.yml"));
+        KyufuJissekiJutakuKaishuhi iJutakuKaishuhi = null;
 
-        List<dgJutakuKaishuhi_Row> jutakuKaishuhiList = new ArrayList<>();
-        for (int i = 0; i < jutakuKaishuhi.size(); i++) {
-            HashMap hashMap = jutakuKaishuhi.get(i);
-            ControlGenerator ymlData = new ControlGenerator(hashMap);
+        for (Iterator<KyufuJissekiJutakuKaishuhi> i = kyufuJisseki.get住宅改修費情報リスト().iterator(); i.hasNext();) {
 
-            RString rsService = ymlData.getAsRString("txtService");
-            RString rsChakkoYMD = ymlData.getAsRString("txtChakkoYMD");
-            RString rsJigyoshaName = ymlData.getAsRString("txtJigyoshaName");
-            RString rsJusho = ymlData.getAsRString("txtJusho");
-            RString rsHiyo = ymlData.getAsRString("txtHiyo");
-            RString rsShinsaYM = ymlData.getAsRString("txtShinsaYM");
+            iJutakuKaishuhi = i.next();
+
+            RString rsService = iJutakuKaishuhi.getサービス();
+            RString rsChakkoYMD = setWareki(toRDate(iJutakuKaishuhi.get着工日()).toDateString());
+            RString rsJigyoshaName = iJutakuKaishuhi.get事業者名();
+            RString rsJusho = iJutakuKaishuhi.get改修先住所();
+            RString rsHiyo = new RString(setCommFormat(String.valueOf(iJutakuKaishuhi.get改修費用())));
+            RString rsShinsaYM = setWareki(iJutakuKaishuhi.get審査年月().toDateString()).substring(0, 6);
 
             jutakuKaishuhiList.add(createJutakuKaishuhiRow(
                     rsService, rsChakkoYMD, rsJigyoshaName, rsJusho, rsHiyo, rsShinsaYM));
