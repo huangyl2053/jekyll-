@@ -89,7 +89,8 @@ public class KyufuJissekiFinder {
                 get給付実績基本(詳細キー情報),
                 get給付実績明細(詳細キー情報),
                 get給付実績集計(詳細キー情報),
-                get給付実績社会福祉法人軽減額(詳細キー情報));
+                get給付実績社会福祉法人軽減額(詳細キー情報),
+                null);
     }
 
     private KyufuJissekiKihon get給付実績基本(KyufuJissekiDetailKeyInfo 詳細キー情報) {
