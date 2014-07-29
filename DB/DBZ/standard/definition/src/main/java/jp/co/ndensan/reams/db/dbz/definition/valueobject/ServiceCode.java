@@ -10,13 +10,14 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * サービスコードを表すクラスです。
  *
  * @author N3317 塚田 萌
  */
-public class ServiceCode implements IValueObject, Comparable<ServiceCode> {
+public class ServiceCode implements IDbColumnMappable, IValueObject, Comparable<ServiceCode> {
 
     private final RString code;
 
@@ -53,5 +54,10 @@ public class ServiceCode implements IValueObject, Comparable<ServiceCode> {
         int hash = 7;
         hash = 71 * hash + Objects.hashCode(this.code);
         return hash;
+    }
+
+    @Override
+    public RString getColumnValue() {
+        return code;
     }
 }
