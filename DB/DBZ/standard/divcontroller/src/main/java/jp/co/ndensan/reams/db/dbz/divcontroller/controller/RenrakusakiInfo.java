@@ -361,11 +361,13 @@ public class RenrakusakiInfo {
 
         if ((div.getSelectedContents().getTxtShimei().getValue().isEmpty())
                 || (div.getSelectedContents().getTxtShimeiKana().getValue().isEmpty())
-                || (div.getSelectedContents().getTxtTel().getValue().isEmpty())
-                || (div.getSelectedContents().getTxtKeitaiNo().getValue().isEmpty())
-                || (div.getSelectedContents().getTxtYubinNo().getText().isEmpty())
-                || (div.getSelectedContents().getTxtJusho().getValue().isEmpty())
-                || (div.getSelectedContents().getTxtTsuzukigara().getValue().isEmpty())) {
+                || (div.getSelectedContents().getTxtTsuzukigara().getValue().isEmpty())
+                || (div.getSelectedContents().getTxtRenrakusakiKbnNo().getValue().isEmpty())) {
+            hanteiFlg = Boolean.FALSE;
+        }
+
+        if ((div.getSelectedContents().getTxtTel().getValue().isEmpty())
+                && (div.getSelectedContents().getTxtKeitaiNo().getValue().isEmpty())) {
             hanteiFlg = Boolean.FALSE;
         }
 

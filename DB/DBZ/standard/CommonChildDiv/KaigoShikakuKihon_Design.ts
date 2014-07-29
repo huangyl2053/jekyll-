@@ -191,7 +191,8 @@ module DBZ {
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtShutokuYmd",
@@ -231,7 +232,8 @@ module DBZ {
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtShutokuJiyu",
@@ -276,7 +278,8 @@ module DBZ {
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtSoshitsuYmd",
@@ -316,7 +319,8 @@ module DBZ {
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtSoshitsuJiyu",
@@ -361,7 +365,8 @@ module DBZ {
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtJutokuKubun",
@@ -406,7 +411,8 @@ module DBZ {
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtYokaigoJotaiKubun",
@@ -451,7 +457,8 @@ module DBZ {
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtNinteiKaishiYmd",
@@ -491,7 +498,8 @@ module DBZ {
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtNinteiShuryoYmd",
@@ -531,7 +539,8 @@ module DBZ {
      "labelLAlign": 1,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "btnNinteiRireki",
@@ -630,7 +639,12 @@ module DBZ {
      "icon": 0,
      "heightTextBoxMatches": true,
      "displayChildDivName": "DBZ.KaigoRenrakusakiInfo",
-     "dataPassing": [],
+     "dataPassing": [
+      {
+       "key": "hihokenshaNo",
+       "controlName": "txtHihokenshaNo"
+      }
+     ],
      "visibleCloseButton": true,
      "onOkClose": "",
      "onBeforeOpenDialog": ""

@@ -202,7 +202,8 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtShutokuYmd",
@@ -242,7 +243,8 @@ var DBZ;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "ymdKubun": 2,
-                            "displayFormat": 0
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
                         },
                         {
                             "fieldName": "txtShutokuJiyu",
@@ -287,7 +289,8 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtSoshitsuYmd",
@@ -327,7 +330,8 @@ var DBZ;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "ymdKubun": 2,
-                            "displayFormat": 0
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
                         },
                         {
                             "fieldName": "txtSoshitsuJiyu",
@@ -372,7 +376,8 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtJutokuKubun",
@@ -417,7 +422,8 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtYokaigoJotaiKubun",
@@ -462,7 +468,8 @@ var DBZ;
                             "labelRWidth": "0",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtNinteiKaishiYmd",
@@ -502,7 +509,8 @@ var DBZ;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "ymdKubun": 2,
-                            "displayFormat": 0
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
                         },
                         {
                             "fieldName": "txtNinteiShuryoYmd",
@@ -542,7 +550,8 @@ var DBZ;
                             "labelLAlign": 1,
                             "labelRAlign": 0,
                             "ymdKubun": 2,
-                            "displayFormat": 0
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
                         },
                         {
                             "fieldName": "btnNinteiRireki",
@@ -641,7 +650,12 @@ var DBZ;
                             "icon": 0,
                             "heightTextBoxMatches": true,
                             "displayChildDivName": "DBZ.KaigoRenrakusakiInfo",
-                            "dataPassing": [],
+                            "dataPassing": [
+                                {
+                                    "key": "hihokenshaNo",
+                                    "controlName": "txtHihokenshaNo"
+                                }
+                            ],
                             "visibleCloseButton": true,
                             "onOkClose": "",
                             "onBeforeOpenDialog": ""

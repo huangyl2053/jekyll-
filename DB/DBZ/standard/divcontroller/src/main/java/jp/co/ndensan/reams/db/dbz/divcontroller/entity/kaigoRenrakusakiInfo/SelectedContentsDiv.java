@@ -27,6 +27,8 @@ public class SelectedContentsDiv extends Panel {
     private TextBox txtShimei;
     @JsonProperty("txtShimeiKana")
     private TextBox txtShimeiKana;
+    @JsonProperty("txtTsuzukigara")
+    private TextBox txtTsuzukigara;
     @JsonProperty("txtTel")
     private TextBox txtTel;
     @JsonProperty("txtKeitaiNo")
@@ -35,8 +37,6 @@ public class SelectedContentsDiv extends Panel {
     private TextBoxYubinNo txtYubinNo;
     @JsonProperty("txtJusho")
     private TextBoxMultiLine txtJusho;
-    @JsonProperty("txtTsuzukigara")
-    private TextBox txtTsuzukigara;
     @JsonProperty("btnUpdate")
     private Button btnUpdate;
     @JsonProperty("btnReturn")
@@ -78,6 +78,16 @@ public class SelectedContentsDiv extends Panel {
         this.txtShimeiKana=txtShimeiKana;
     }
 
+    @JsonProperty("txtTsuzukigara")
+    public TextBox getTxtTsuzukigara() {
+        return txtTsuzukigara;
+    }
+
+    @JsonProperty("txtTsuzukigara")
+    public void setTxtTsuzukigara(TextBox txtTsuzukigara) {
+        this.txtTsuzukigara=txtTsuzukigara;
+    }
+
     @JsonProperty("txtTel")
     public TextBox getTxtTel() {
         return txtTel;
@@ -116,16 +126,6 @@ public class SelectedContentsDiv extends Panel {
     @JsonProperty("txtJusho")
     public void setTxtJusho(TextBoxMultiLine txtJusho) {
         this.txtJusho=txtJusho;
-    }
-
-    @JsonProperty("txtTsuzukigara")
-    public TextBox getTxtTsuzukigara() {
-        return txtTsuzukigara;
-    }
-
-    @JsonProperty("txtTsuzukigara")
-    public void setTxtTsuzukigara(TextBox txtTsuzukigara) {
-        this.txtTsuzukigara=txtTsuzukigara;
     }
 
     @JsonProperty("btnUpdate")
