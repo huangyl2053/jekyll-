@@ -38,7 +38,7 @@ public class KyufuJissekiServiceCollections implements Iterable {
      */
     public KyufuJissekiServiceCollection get給付実績月別集計(ServiceTeikyoYM サービス提供年月) {
         for (KyufuJissekiServiceCollection 給付実績月別集計 : 給付実績月別集計リスト) {
-            if (給付実績月別集計.getサービス提供年月().equals(サービス提供年月)) {
+            if (給付実績月別集計 != null && !給付実績月別集計.isEmpty() && 給付実績月別集計.getサービス提供年月().equals(サービス提供年月)) {
                 return 給付実績月別集計;
             }
         }
