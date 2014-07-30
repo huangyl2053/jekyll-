@@ -52,6 +52,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntityMock {
         entity.setServiceTeikyoYM(new FlexibleYearMonth("201401"));
         entity.setJigyoshoNo(new JigyoshaNo(new RString("0000000005")));
         entity.setToshiNo(new RString("0000000006"));
+        entity.setMeisaiNo(new RString("1"));
         entity.setServiceCode(new RString("000007"));
         entity.setFukushiyoguHanbaiYMD(new FlexibleDate("20140201"));
         entity.setFukushiyoguShohinName(new RString("福祉用具商品名"));

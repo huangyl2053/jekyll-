@@ -52,6 +52,7 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntityMock {
         entity.setServiceTeikyoYM(new FlexibleYearMonth("201401"));
         entity.setJigyoshoNo(new JigyoshaNo(new RString("0000000005")));
         entity.setToshiNo(new RString("0000000006"));
+        entity.setMeisaiNo(new RString("1"));
         entity.setServiceCode(new RString("000007"));
         entity.setJutakuKaishuchakkoYMD(new FlexibleDate("20140201"));
         entity.setJutakuKaishuJigyoshaName(new RString("住宅改修事業者名"));
