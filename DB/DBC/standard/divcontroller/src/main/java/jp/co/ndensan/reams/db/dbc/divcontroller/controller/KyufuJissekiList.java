@@ -74,6 +74,45 @@ public class KyufuJissekiList {
         return response;
     }
 
+    public ResponseData<KyufuJissekiListDiv> onClick_Meisai_btnYM(KyufuJissekiListDiv panel, KyufuJissekiSearchDiv panel2) {
+        ResponseData<KyufuJissekiListDiv> response = new ResponseData<>();
+
+        putViewState(panel2, panel.getDgKyufuJissekiMeisaiList().getClickedItem().getTxtServiceShurui());
+
+        response.data = panel;
+        return response;
+    }
+
+    public ResponseData<KyufuJissekiListDiv> onClick_Gokei_btnYM(KyufuJissekiListDiv panel, KyufuJissekiSearchDiv panel2) {
+        ResponseData<KyufuJissekiListDiv> response = new ResponseData<>();
+
+        putViewState(panel2, panel.getDgKyufuJissekiGokeiList().getClickedItem().getTxtServiceShurui());
+
+        response.data = panel;
+        return response;
+    }
+
+    private void putViewState(KyufuJissekiSearchDiv panel2, RString serviceShurui) {
+
+        ServiceTeikyoYM start = new ServiceTeikyoYM(new FlexibleDate(panel2.getTxtKyufuJissekiSearchServiceTeikyoYM().getFromText()).getYearMonth());
+        ServiceTeikyoYM end = new ServiceTeikyoYM(new FlexibleDate(panel2.getTxtKyufuJissekiSearchServiceTeikyoYM().getToText()).getYearMonth());
+        Range<ServiceTeikyoYM> serviceTeikyoYMRange = new Range(start, end);
+        KyufuJissekiServiceFinder finder = new KyufuJissekiServiceFinder();
+        KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(panel2.getTxtKyufuJissekiSearchHihokenshaNo().getValue());
+        KyufuJissekiServiceCollections collections = finder.get給付実績一覧(hihokenshaNo, serviceTeikyoYMRange);
+
+        KyufuJissekiServiceCategory category = new KyufuJissekiServiceCategory();
+        ServiceShuruiCode shuruiCode = category.getサービス種類コード(serviceShurui);
+        KyufuJissekiKeyInfo keyInfo = collections.get給付実績月別集計(serviceTeikyoYMRange.getFrom()).getKeyInfo(shuruiCode);
+
+        ViewStateHolder.put("被保番号", new RString(keyInfo.get被保番号().toString()));
+        ViewStateHolder.put("サービス提供期間開始", new RString(keyInfo.getサービス提供期間().getFrom().value().toString()));
+        ViewStateHolder.put("サービス提供期間終了", new RString(keyInfo.getサービス提供期間().getTo().value().toString()));
+        ViewStateHolder.put("入力識別番号", new RString(keyInfo.get入力識別番号().getInputShikibetsuNoCode().value().toString()));
+        ViewStateHolder.put("サービス種類", keyInfo.getサービス種類コード().value());
+        ViewStateHolder.put("サービス提供年月", new RString(keyInfo.getサービス提供年月().value().toString()));
+    }
+
     private void setData(KyufuJissekiListDiv panel, KyufuJissekiSearchDiv panel2) {
 
         Boolean blnChangeColorFlg1 = false;
@@ -88,17 +127,6 @@ public class KyufuJissekiList {
         KyufuJissekiServiceFinder finder = new KyufuJissekiServiceFinder();
         KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(panel2.getTxtKyufuJissekiSearchHihokenshaNo().getValue());
         KyufuJissekiServiceCollections collections = finder.get給付実績一覧(hihokenshaNo, serviceTeikyoYMRange);
-
-        KyufuJissekiServiceCategory category = new KyufuJissekiServiceCategory();
-        ServiceShuruiCode shuruiCode = category.getサービス種類コード(new RString("訪問介護"));
-        KyufuJissekiKeyInfo keyInfo = collections.get給付実績月別集計(serviceTeikyoYMRange.getFrom()).getKeyInfo(shuruiCode);
-
-        ViewStateHolder.put("被保番号", new RString(keyInfo.get被保番号().toString()));
-        ViewStateHolder.put("サービス提供期間開始", new RString(keyInfo.getサービス提供期間().getFrom().value().toString()));
-        ViewStateHolder.put("サービス提供期間終了", new RString(keyInfo.getサービス提供期間().getTo().value().toString()));
-        ViewStateHolder.put("入力識別番号", new RString(keyInfo.get入力識別番号().getInputShikibetsuNoCode().value().toString()));
-        ViewStateHolder.put("サービス種類", keyInfo.getサービス種類コード().value());
-        ViewStateHolder.put("サービス提供年月", new RString(keyInfo.getサービス提供年月().value().toString()));
 
         //ヘッダー情報取得、設定
         HashMap hashMap = kyufuJissekiMeisaiList.get(0);
@@ -352,53 +380,13 @@ public class KyufuJissekiList {
      *引数を元にデータグリッド内に挿入する給付実績一覧明細データを作成します。
      */
     private dgKyufuJissekiMeisaiList_Row createRowKyufuJissekiMeisaiList(
-            RString rsServiceGroup1,
-            RString rsServiceGroup2,
-            RString rsServiceShurui,
-            RString rsYM1,
-            RString rsYM2,
-            RString rsYM3,
-            RString rsYM4,
-            RString rsYM5,
-            RString rsYM6,
-            RString rsYM7,
-            RString rsYM8,
-            RString rsYM9,
-            RString rsYM10,
-            RString rsYM11,
-            RString rsYM12
-    ) {
-        dgKyufuJissekiMeisaiList_Row rowKyufuJissekiMeisaiList
-                = new dgKyufuJissekiMeisaiList_Row(
-                        rsServiceGroup1,
-                        rsServiceGroup2,
-                        rsServiceShurui,
-                        new Button(),
-                        rsYM1,
-                        new Button(),
-                        rsYM2,
-                        new Button(),
-                        rsYM3,
-                        new Button(),
-                        rsYM4,
-                        new Button(),
-                        rsYM5,
-                        new Button(),
-                        rsYM6,
-                        new Button(),
-                        rsYM7,
-                        new Button(),
-                        rsYM8,
-                        new Button(),
-                        rsYM9,
-                        new Button(),
-                        rsYM10,
-                        new Button(),
-                        rsYM11,
-                        new Button(),
-                        rsYM12
-                );
-        return rowKyufuJissekiMeisaiList;
+            RString rsServiceGroup1, RString rsServiceGroup2, RString rsServiceShurui,
+            RString rsYM1, RString rsYM2, RString rsYM3, RString rsYM4, RString rsYM5, RString rsYM6,
+            RString rsYM7, RString rsYM8, RString rsYM9, RString rsYM10, RString rsYM11, RString rsYM12) {
+        return new dgKyufuJissekiMeisaiList_Row(
+                rsServiceGroup1, rsServiceGroup2, rsServiceShurui,
+                new Button(), rsYM1, new Button(), rsYM2, new Button(), rsYM3, new Button(), rsYM4, new Button(), rsYM5, new Button(), rsYM6,
+                new Button(), rsYM7, new Button(), rsYM8, new Button(), rsYM9, new Button(), rsYM10, new Button(), rsYM11, new Button(), rsYM12);
     }
 
     /*
@@ -455,40 +443,12 @@ public class KyufuJissekiList {
      *引数を元にデータグリッド内に挿入する給付実績一覧合計データを作成します。
      */
     private dgKyufuJissekiGokeiList_Row createRowKyufuJissekiGokeiList(
-            RString rsServiceGroup1,
-            RString rsServiceGroup2,
-            RString rsServiceShurui,
-            RString rsYM1,
-            RString rsYM2,
-            RString rsYM3,
-            RString rsYM4,
-            RString rsYM5,
-            RString rsYM6,
-            RString rsYM7,
-            RString rsYM8,
-            RString rsYM9,
-            RString rsYM10,
-            RString rsYM11,
-            RString rsYM12
-    ) {
-        dgKyufuJissekiGokeiList_Row rowKyufuJissekiGokeiList
-                = new dgKyufuJissekiGokeiList_Row(
-                        rsServiceGroup1,
-                        rsServiceGroup2,
-                        rsServiceShurui,
-                        rsYM1,
-                        rsYM2,
-                        rsYM3,
-                        rsYM4,
-                        rsYM5,
-                        rsYM6,
-                        rsYM7,
-                        rsYM8,
-                        rsYM9,
-                        rsYM10,
-                        rsYM11,
-                        rsYM12
-                );
-        return rowKyufuJissekiGokeiList;
+            RString rsServiceGroup1, RString rsServiceGroup2, RString rsServiceShurui,
+            RString rsYM1, RString rsYM2, RString rsYM3, RString rsYM4, RString rsYM5, RString rsYM6,
+            RString rsYM7, RString rsYM8, RString rsYM9, RString rsYM10, RString rsYM11, RString rsYM12) {
+        return new dgKyufuJissekiGokeiList_Row(
+                rsServiceGroup1, rsServiceGroup2, rsServiceShurui,
+                new Button(), rsYM1, new Button(), rsYM2, new Button(), rsYM3, new Button(), rsYM4, new Button(), rsYM5, new Button(), rsYM6,
+                new Button(), rsYM7, new Button(), rsYM8, new Button(), rsYM9, new Button(), rsYM10, new Button(), rsYM11, new Button(), rsYM12);
     }
 }
