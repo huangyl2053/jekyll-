@@ -71,6 +71,16 @@ public class KyufuJissekiServiceCategory {
     private static final ServiceShuruiCode 出来高請求費１ = new ServiceShuruiCode(new RString("52"));
     private static final ServiceShuruiCode 出来高請求費２ = new ServiceShuruiCode(new RString("53"));
 
+    // TODO コードは見直す
+    private static final ServiceShuruiCode 施設サービス合計単位 = new ServiceShuruiCode(new RString("G1"));
+    private static final ServiceShuruiCode 地域密着型サービス合計単位 = new ServiceShuruiCode(new RString("G2"));
+    private static final ServiceShuruiCode 給付費合計 = new ServiceShuruiCode(new RString("G3"));
+    private static final ServiceShuruiCode 利用者負担合計 = new ServiceShuruiCode(new RString("G4"));
+    private static final ServiceShuruiCode 高額介護費 = new ServiceShuruiCode(new RString("G5"));
+
+    private static final ServiceShuruiCode 福祉用具販売 = new ServiceShuruiCode(new RString("41"));
+    private static final ServiceShuruiCode 住宅改修 = new ServiceShuruiCode(new RString("42"));
+
     private static final class ServiceCodeRelation {
 
         private final ServiceShuruiCode code;
@@ -199,6 +209,14 @@ public class KyufuJissekiServiceCategory {
                 ServiceCategorySubTitle.サブタイトルなし, ServiceCategory.施設サービス));
         relation.add(new ServiceCodeRelation(出来高請求費２, ServiceCategoryShurui.出来高請求費, ServiceCategoryTitle.指定施設サービス等,
                 ServiceCategorySubTitle.サブタイトルなし, ServiceCategory.施設サービス));
+
+        relation.add(new ServiceCodeRelation(施設サービス合計単位, ServiceCategoryShurui.施設サービス合計単位, null, null, null));
+        relation.add(new ServiceCodeRelation(地域密着型サービス合計単位, ServiceCategoryShurui.地域密着型サービス合計単位, null, null, null));
+        relation.add(new ServiceCodeRelation(給付費合計, ServiceCategoryShurui.給付費合計, null, null, null));
+        relation.add(new ServiceCodeRelation(利用者負担合計, ServiceCategoryShurui.利用者負担合計, null, null, null));
+        relation.add(new ServiceCodeRelation(高額介護費, ServiceCategoryShurui.高額介護費, null, null, null));
+        relation.add(new ServiceCodeRelation(福祉用具販売, ServiceCategoryShurui.福祉用具販売, null, null, null));
+        relation.add(new ServiceCodeRelation(住宅改修, ServiceCategoryShurui.住宅改修, null, null, null));
     }
 
     /**
@@ -232,6 +250,26 @@ public class KyufuJissekiServiceCategory {
         list.add(介護保健施設サービス);
         list.add(介護療養施設サービス);
         list.add(地域密着型介護老人福祉施設);
+
+        return list;
+
+    }
+
+    /**
+     * 一覧画面の合計に表示するサービス種類のリストを返す。
+     *
+     * @return list
+     */
+    public List<ServiceShuruiCode> get合計表示サービス種類() {
+
+        List<ServiceShuruiCode> list = new ArrayList<>();
+        list.add(施設サービス合計単位);
+        list.add(地域密着型サービス合計単位);
+        list.add(給付費合計);
+        list.add(利用者負担合計);
+        list.add(高額介護費);
+        list.add(福祉用具販売);
+        list.add(住宅改修);
 
         return list;
 

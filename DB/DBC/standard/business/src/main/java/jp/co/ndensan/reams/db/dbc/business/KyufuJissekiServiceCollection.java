@@ -50,6 +50,22 @@ public class KyufuJissekiServiceCollection implements Iterable {
     }
 
     /**
+     * サービス種類ごとの保険請求分請求額合計の集計値を返します。
+     *
+     * @param サービス種類コード サービス種類コード
+     * @return 保険請求分請求額合計の集計値
+     */
+    public Decimal get保険請求分請求額合計Byサービス種類(ServiceShuruiCode サービス種類コード) {
+        Decimal ret = Decimal.ZERO;
+        for (KyufuJissekiService 給付実績種類明細情報 : 給付実績種類明細情報リスト) {
+            if (給付実績種類明細情報.get給付実績キー情報().getサービス種類コード().equals(サービス種類コード)) {
+                ret = ret.add(給付実績種類明細情報.get保険請求分請求額合計());
+            }
+        }
+        return ret;
+    }
+
+    /**
      * サービスカテゴリごとの単位数合計の集計値を返します。
      *
      * @param サービスカテゴリ サービスカテゴリ
