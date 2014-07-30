@@ -24,6 +24,7 @@ public enum DbT3027KyufujissekiJutakuKaishuhi implements IColumnDefinition {
     serviceTeikyoYM(2147483647, 0),
     jigyoshoNo(2147483647, 0),
     toshiNo(10, 0),
+    meisaiNo(4, 0),
     serviceCode(2147483647, 0),
     jutakuKaishuchakkoYMD(2147483647, 0),
     jutakuKaishuJigyoshaName(20, 0),

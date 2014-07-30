@@ -24,6 +24,7 @@ public enum DbT3026KyufujissekiFukushiYoguHanbaihi implements IColumnDefinition 
     serviceTeikyoYM(2147483647, 0),
     jigyoshoNo(2147483647, 0),
     toshiNo(10, 0),
+    meisaiNo(4, 0),
     serviceCode(2147483647, 0),
     fukushiyoguHanbaiYMD(2147483647, 0),
     fukushiyoguShohinName(30, 0),

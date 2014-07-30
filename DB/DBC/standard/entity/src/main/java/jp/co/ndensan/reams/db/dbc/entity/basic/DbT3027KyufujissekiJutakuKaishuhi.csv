@@ -6,6 +6,7 @@ hiHokenshaNo,DbUDD002HihokenshaNo,KaigoHihokenshaNo,,,,,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,A
 jigyoshoNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,A
 toshiNo,varchar,RString,,,,,A
+meisaiNo,bpchar,RString,,,,,A
 serviceCode,DbUDD007ServiceCode,RString,,,,,A
 jutakuKaishuchakkoYMD,UDD015YMD,FlexibleDate,,,,,A
 jutakuKaishuJigyoshaName,varchar,RString,,,,,A

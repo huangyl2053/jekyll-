@@ -20,6 +20,7 @@ import java.util.Objects;
  */
 public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3026KyufujissekiFukushiYoguHanbaihi");
 
@@ -47,6 +48,8 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
     private JigyoshaNo jigyoshoNo;
     @PrimaryKey
     private RString toshiNo;
+    @PrimaryKey
+    private RString meisaiNo;
     private RString serviceCode;
     private FlexibleDate fukushiyoguHanbaiYMD;
     private RString fukushiyoguShohinName;
@@ -61,6 +64,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getInsertDantaiCd
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -69,6 +73,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setInsertDantaiCd
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -77,6 +82,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getIsDeleted
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -85,15 +91,16 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setIsDeleted
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * setLastUpdateReamsLoginId
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -102,6 +109,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getKokanJohoShikibetsuNo
+     *
      * @return kokanJohoShikibetsuNo
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
@@ -110,6 +118,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setKokanJohoShikibetsuNo
+     *
      * @param kokanJohoShikibetsuNo kokanJohoShikibetsuNo
      */
     public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
@@ -118,6 +127,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getInputShikibetsuNo
+     *
      * @return inputShikibetsuNo
      */
     public RString getInputShikibetsuNo() {
@@ -126,6 +136,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setInputShikibetsuNo
+     *
      * @param inputShikibetsuNo inputShikibetsuNo
      */
     public void setInputShikibetsuNo(RString inputShikibetsuNo) {
@@ -134,6 +145,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getRecodeShubetsuCode
+     *
      * @return recodeShubetsuCode
      */
     public RString getRecodeShubetsuCode() {
@@ -142,6 +154,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setRecodeShubetsuCode
+     *
      * @param recodeShubetsuCode recodeShubetsuCode
      */
     public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
@@ -150,6 +163,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getShokisaiHokenshaNo
+     *
      * @return shokisaiHokenshaNo
      */
     public ShoKisaiHokenshaNo getShokisaiHokenshaNo() {
@@ -158,6 +172,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setShokisaiHokenshaNo
+     *
      * @param shokisaiHokenshaNo shokisaiHokenshaNo
      */
     public void setShokisaiHokenshaNo(ShoKisaiHokenshaNo shokisaiHokenshaNo) {
@@ -166,6 +181,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getHiHokenshaNo
+     *
      * @return hiHokenshaNo
      */
     public KaigoHihokenshaNo getHiHokenshaNo() {
@@ -174,6 +190,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setHiHokenshaNo
+     *
      * @param hiHokenshaNo hiHokenshaNo
      */
     public void setHiHokenshaNo(KaigoHihokenshaNo hiHokenshaNo) {
@@ -182,6 +199,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getServiceTeikyoYM
+     *
      * @return serviceTeikyoYM
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -190,6 +208,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setServiceTeikyoYM
+     *
      * @param serviceTeikyoYM serviceTeikyoYM
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -198,6 +217,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getJigyoshoNo
+     *
      * @return jigyoshoNo
      */
     public JigyoshaNo getJigyoshoNo() {
@@ -206,6 +226,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setJigyoshoNo
+     *
      * @param jigyoshoNo jigyoshoNo
      */
     public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
@@ -214,6 +235,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getToshiNo
+     *
      * @return toshiNo
      */
     public RString getToshiNo() {
@@ -222,6 +244,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setToshiNo
+     *
      * @param toshiNo toshiNo
      */
     public void setToshiNo(RString toshiNo) {
@@ -229,7 +252,26 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
     }
 
     /**
+     * getMeisaiNo
+     *
+     * @return meisaiNo
+     */
+    public RString getMeisaiNo() {
+        return meisaiNo;
+    }
+
+    /**
+     * setMeisaiNo
+     *
+     * @param meisaiNo meisaiNo
+     */
+    public void setMeisaiNo(RString meisaiNo) {
+        this.meisaiNo = meisaiNo;
+    }
+
+    /**
      * getServiceCode
+     *
      * @return serviceCode
      */
     public RString getServiceCode() {
@@ -238,6 +280,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setServiceCode
+     *
      * @param serviceCode serviceCode
      */
     public void setServiceCode(RString serviceCode) {
@@ -246,6 +289,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getFukushiyoguHanbaiYMD
+     *
      * @return fukushiyoguHanbaiYMD
      */
     public FlexibleDate getFukushiyoguHanbaiYMD() {
@@ -254,6 +298,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setFukushiyoguHanbaiYMD
+     *
      * @param fukushiyoguHanbaiYMD fukushiyoguHanbaiYMD
      */
     public void setFukushiyoguHanbaiYMD(FlexibleDate fukushiyoguHanbaiYMD) {
@@ -262,6 +307,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getFukushiyoguShohinName
+     *
      * @return fukushiyoguShohinName
      */
     public RString getFukushiyoguShohinName() {
@@ -270,6 +316,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setFukushiyoguShohinName
+     *
      * @param fukushiyoguShohinName fukushiyoguShohinName
      */
     public void setFukushiyoguShohinName(RString fukushiyoguShohinName) {
@@ -278,6 +325,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getFukushiyoguSyumokuCode
+     *
      * @return fukushiyoguSyumokuCode
      */
     public RString getFukushiyoguSyumokuCode() {
@@ -286,6 +334,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setFukushiyoguSyumokuCode
+     *
      * @param fukushiyoguSyumokuCode fukushiyoguSyumokuCode
      */
     public void setFukushiyoguSyumokuCode(RString fukushiyoguSyumokuCode) {
@@ -294,6 +343,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getFukushiyoguSeizoJigyoshaName
+     *
      * @return fukushiyoguSeizoJigyoshaName
      */
     public RString getFukushiyoguSeizoJigyoshaName() {
@@ -302,6 +352,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setFukushiyoguSeizoJigyoshaName
+     *
      * @param fukushiyoguSeizoJigyoshaName fukushiyoguSeizoJigyoshaName
      */
     public void setFukushiyoguSeizoJigyoshaName(RString fukushiyoguSeizoJigyoshaName) {
@@ -310,6 +361,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getFukushiyoguHanbaiJigyoshaName
+     *
      * @return fukushiyoguHanbaiJigyoshaName
      */
     public RString getFukushiyoguHanbaiJigyoshaName() {
@@ -318,6 +370,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setFukushiyoguHanbaiJigyoshaName
+     *
      * @param fukushiyoguHanbaiJigyoshaName fukushiyoguHanbaiJigyoshaName
      */
     public void setFukushiyoguHanbaiJigyoshaName(RString fukushiyoguHanbaiJigyoshaName) {
@@ -326,6 +379,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getHanbaiKingaku
+     *
      * @return hanbaiKingaku
      */
     public int getHanbaiKingaku() {
@@ -334,6 +388,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setHanbaiKingaku
+     *
      * @param hanbaiKingaku hanbaiKingaku
      */
     public void setHanbaiKingaku(int hanbaiKingaku) {
@@ -342,6 +397,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getTekiyo
+     *
      * @return tekiyo
      */
     public RString getTekiyo() {
@@ -350,6 +406,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setTekiyo
+     *
      * @param tekiyo tekiyo
      */
     public void setTekiyo(RString tekiyo) {
@@ -358,6 +415,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getShinsaYM
+     *
      * @return shinsaYM
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -366,6 +424,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setShinsaYM
+     *
      * @param shinsaYM shinsaYM
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
@@ -374,6 +433,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getSeiriNo
+     *
      * @return seiriNo
      */
     public RString getSeiriNo() {
@@ -382,6 +442,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setSeiriNo
+     *
      * @param seiriNo seiriNo
      */
     public void setSeiriNo(RString seiriNo) {
@@ -390,6 +451,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * getTorikomiYM
+     *
      * @return torikomiYM
      */
     public FlexibleYearMonth getTorikomiYM() {
@@ -398,6 +460,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * setTorikomiYM
+     *
      * @param torikomiYM torikomiYM
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -406,10 +469,9 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
 
     /**
      * このエンティティの主キーが他の{@literal DbT3026KyufujissekiFukushiYoguHanbaihiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT3026KyufujissekiFukushiYoguHanbaihiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT3026KyufujissekiFukushiYoguHanbaihiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     public boolean equalsPrimaryKeys(DbT3026KyufujissekiFukushiYoguHanbaihiEntity other) {
         if (other == null) {
@@ -437,6 +499,9 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
             return false;
         }
         if (!Objects.equals(this.toshiNo, other.toshiNo)) {
+            return false;
+        }
+        if (!Objects.equals(this.meisaiNo, other.meisaiNo)) {
             return false;
         }
         return true;
