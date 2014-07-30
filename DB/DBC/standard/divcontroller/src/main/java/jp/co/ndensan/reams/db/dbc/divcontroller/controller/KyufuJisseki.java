@@ -46,6 +46,7 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonKyotakuService;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonKyufuritsu;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonNyutaisho;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonServiceKikan;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKyotakuService;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiMeisai;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiYoguHanbaihi;
@@ -88,7 +89,7 @@ public class KyufuJisseki {
 
         setKyufuJissekiKihon(panel.getTabKyufuJisseki().getKyufuJissekiKihon(), kihon);
         setKyufuJissekiMeisai(panel.getTabKyufuJisseki().getKyufuJissekiMeisaiShukei(), jisseki);
-        setServiceKeikakuhi(panel.getTabKyufuJisseki().getServiceKeikakuhi());
+        setServiceKeikakuhi(panel.getTabKyufuJisseki().getServiceKeikakuhi(), jisseki);
         setFukushiYoguKonyuhi(panel.getTabKyufuJisseki().getFukushiYoguKonyuhi(), jisseki);
         setJutakuKaishuhi(panel.getTabKyufuJisseki().getJutakuKaishuhi(), jisseki);
         setKogakuKaigoServicehi(panel.getTabKyufuJisseki().getKogakuKaigoServicehi());
@@ -240,31 +241,27 @@ public class KyufuJisseki {
 
     }
 
-    private void setServiceKeikakuhi(ServiceKeikakuhiDiv panel) {
+    private void setServiceKeikakuhi(ServiceKeikakuhiDiv panel, jp.co.ndensan.reams.db.dbc.business.KyufuJisseki kyufuJisseki) {
 
-        //サービス計画費データ取得、設定
-        List<HashMap> serviceKeikakuhi = YamlLoader.DBC.loadAsList(
-                new RString("dbc0010000/ServiceKeikakuhi.yml"));
-
+        //DBの情報を取る。
         List<dgServiceKeikakuhiFromH2104_Row> serviceKeikakuhiList = new ArrayList<>();
-        for (int i = 0; i < serviceKeikakuhi.size(); i++) {
-            HashMap hashMap = serviceKeikakuhi.get(i);
-            ControlGenerator ymlData = new ControlGenerator(hashMap);
 
-            RString rsShiteiKijunGaitoJigyoshoKubun = ymlData.getAsRString("txtShiteiKijunGaitoJigyoshoKubun");
-            RString rsIraiTodokedeYMD = ymlData.getAsRString("txtIraiTodokedeYMD");
-            RString rsService = ymlData.getAsRString("txtService");
-            RString rsTanisuTanka = ymlData.getAsRString("txtTanisuTanka");
-            RString rsKettei = ymlData.getAsRString("txtKettei");
-            RString rsMeisaiGokei = ymlData.getAsRString("txtMeisaiGokei");
-            RString rsTanisu = ymlData.getAsRString("txtTanisu");
-            RString rsKaisu = ymlData.getAsRString("txtKaisu");
-            RString rsServiceTanisu = ymlData.getAsRString("txtServiceTanisu");
-            RString rsSeikyuKingaku = ymlData.getAsRString("txtSeikyuKingaku");
-            RString rsTantoKaigoShienSenmoninNo = ymlData.getAsRString("txtTantoKaigoShienSenmoninNo");
-            RString rsSaishinsaKaisu = ymlData.getAsRString("txtSaishinsaKaisu");
-            RString rsKagoKaisu = ymlData.getAsRString("txtKagoKaisu");
-            RString rsShinsaYM = ymlData.getAsRString("txtShinsaYM");
+        for (KyufuJissekiKyotakuService iKyotakuService : kyufuJisseki.getサービス計画費リスト()) {
+
+            RString rsShiteiKijunGaitoJigyoshoKubun = iKyotakuService.get指定基準区分();
+            RString rsIraiTodokedeYMD = setWareki(toRDate(iKyotakuService.get届出日()).toDateString());
+            RString rsService = iKyotakuService.getサービス();
+            RString rsTanisuTanka = new RString(setCommFormat(String.valueOf(iKyotakuService.get単位数単価())));
+            RString rsKettei = iKyotakuService.get決定();
+            RString rsMeisaiGokei = iKyotakuService.get明細合計();
+            RString rsTanisu = new RString(setCommFormat(String.valueOf(iKyotakuService.get単位数())));
+            RString rsKaisu = new RString(String.valueOf(iKyotakuService.get回数()));
+            RString rsServiceTanisu = new RString(String.valueOf(iKyotakuService.getサービス単位数()));
+            RString rsSeikyuKingaku = new RString(String.valueOf(iKyotakuService.getサービス単位数()));
+            RString rsTantoKaigoShienSenmoninNo = new RString(String.valueOf(iKyotakuService.get過誤回数()));
+            RString rsSaishinsaKaisu = new RString(String.valueOf(iKyotakuService.get再審査回数()));
+            RString rsKagoKaisu = new RString(String.valueOf(iKyotakuService.get過誤回数()));
+            RString rsShinsaYM = setWareki(iKyotakuService.get審査年月().toDateString()).substring(0, 6);
 
             serviceKeikakuhiList.add(createServiceKeikakuhiFromH2104Row(
                     rsShiteiKijunGaitoJigyoshoKubun, rsIraiTodokedeYMD, rsService, rsTanisuTanka, rsKettei, rsMeisaiGokei,
