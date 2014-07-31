@@ -155,7 +155,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   },
   {
    "fieldName": "ShinseiJohoInput",
@@ -373,6 +374,8 @@
      "text": "連絡先を照会する",
      "imageWidth": "",
      "imageHeight": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
@@ -410,13 +413,28 @@
        "text": "定型文を選ぶ",
        "imageWidth": "",
        "imageHeight": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
        "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
        "icon": 0,
        "heightTextBoxMatches": false,
-       "displayChildDivName": "",
-       "dataPassing": [],
+       "displayChildDivName": "DBZ.KaigoTeikeibun",
+       "dataPassing": [
+        {
+         "key": "teikeiKbn",
+         "controlName": "SinseiRiyu.teikeiKbn"
+        },
+        {
+         "key": "teikeiShubetsu",
+         "controlName": "SinseiRiyu.teikeiShubetsu"
+        },
+        {
+         "key": "teikeibunNaiyo",
+         "controlName": "txtShinseiRiyu"
+        }
+       ],
        "visibleCloseButton": true,
        "onOkClose": "",
        "onBeforeOpenDialog": ""
@@ -443,7 +461,7 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "S",
-       "required": true,
+       "required": false,
        "maxLength": "200",
        "minLength": 0,
        "placeHolder": "",
@@ -492,7 +510,16 @@
       }
      ],
      "requestSettings": [],
-     "hiddenInput": [],
+     "hiddenInput": [
+      {
+       "propertyName": "teikeiKbn",
+       "value": ""
+      },
+      {
+       "propertyName": "teikeiShubetsu",
+       "value": ""
+      }
+     ],
      "onOpen": "",
      "onClose": "",
      "session": {},
@@ -504,7 +531,8 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     },
     {
      "fieldName": "NinteiShinseisha",
@@ -894,6 +922,8 @@
        "text": "世帯一覧から選ぶ",
        "imageWidth": "",
        "imageHeight": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
        "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
@@ -978,6 +1008,8 @@
          "text": "ButtonDialog1",
          "imageWidth": "15",
          "imageHeight": "15",
+         "onBeforeClick": "",
+         "onAfterClick": "",
          "onClick": "",
          "appearance": 2,
          "imageFileUrl": "/uz/uza/image/UZ_Search.png",
@@ -1136,7 +1168,8 @@
        "panelDisplay": 1,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "canPost": true
       }
      ],
      "controlType": "Panel",
@@ -1178,7 +1211,8 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     },
     {
      "fieldName": "LatestNinteiResult",
@@ -1392,7 +1426,8 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     },
     {
      "fieldName": "HihokenshaShujii",
@@ -1467,6 +1502,8 @@
        "text": "ButtonDialog1",
        "imageWidth": "15",
        "imageHeight": "15",
+       "onBeforeClick": "",
+       "onAfterClick": "",
        "onClick": "",
        "appearance": 2,
        "imageFileUrl": "/uz/uza/image/UZ_Search.png",
@@ -1657,6 +1694,8 @@
        "text": "前回を複写する",
        "imageWidth": "",
        "imageHeight": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
        "onClick": "onClick_btnToCopyLatestShujii",
        "appearance": 0,
        "imageFileUrl": "",
@@ -1703,7 +1742,8 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     },
     {
      "fieldName": "N2Hihokensha",
@@ -1999,7 +2039,8 @@
        "panelDisplay": 0,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "canPost": true
       },
       {
        "fieldName": "linN2Hihokensha",
@@ -2164,7 +2205,8 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     },
     {
      "fieldName": "NinteichosainAdvanceEntry",
@@ -2239,6 +2281,8 @@
        "text": "ButtonDialog1",
        "imageWidth": "",
        "imageHeight": "15",
+       "onBeforeClick": "",
+       "onAfterClick": "",
        "onClick": "",
        "appearance": 2,
        "imageFileUrl": "/uz/uza/css/Link.jpg",
@@ -2336,6 +2380,8 @@
        "text": "前回を複写する",
        "imageWidth": "",
        "imageHeight": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
        "onClick": "onClick_btnToCopyLatestItakusaki",
        "appearance": 0,
        "imageFileUrl": "",
@@ -2484,6 +2530,8 @@
        "text": "前回を複写する",
        "imageWidth": "",
        "imageHeight": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
        "onClick": "onClick_btnToCopyLatestNinteichosain",
        "appearance": 0,
        "imageFileUrl": "",
@@ -2530,7 +2578,8 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     },
     {
      "fieldName": "NyuinNyusho",
@@ -2558,6 +2607,8 @@
        "text": "新規追加する",
        "imageWidth": "",
        "imageHeight": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
        "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
@@ -2587,6 +2638,8 @@
        "text": "選択行を複写して追加する",
        "imageWidth": "",
        "imageHeight": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
        "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
@@ -2805,6 +2858,8 @@
          "text": "ButtonDialog1",
          "imageWidth": "",
          "imageHeight": "",
+         "onBeforeClick": "",
+         "onAfterClick": "",
          "onClick": "",
          "appearance": 2,
          "imageFileUrl": "/uz/uza/css/Link.jpg",
@@ -2938,7 +2993,8 @@
        "panelDisplay": 1,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "canPost": true
       }
      ],
      "controlType": "Panel",
@@ -2980,7 +3036,8 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     },
     {
      "fieldName": "chkEnkitsuchiHakko",
@@ -3154,7 +3211,8 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     },
     {
      "fieldName": "KankeiIin",
@@ -3208,6 +3266,8 @@
        "text": "新規追加する",
        "imageWidth": "",
        "imageHeight": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
        "onClick": "onClick_btnToAddKankeiIin",
        "appearance": 0,
        "imageFileUrl": "",
@@ -3452,6 +3512,8 @@
          "text": "ButtonDialog1",
          "imageWidth": "",
          "imageHeight": "",
+         "onBeforeClick": "",
+         "onAfterClick": "",
          "onClick": "",
          "appearance": 2,
          "imageFileUrl": "/uz/uza/css/Link.jpg",
@@ -3641,6 +3703,8 @@
          "text": "確定する",
          "imageWidth": "",
          "imageHeight": "",
+         "onBeforeClick": "",
+         "onAfterClick": "",
          "onClick": "onClick_btnDecideJogaiIin",
          "appearance": 0,
          "imageFileUrl": "",
@@ -3687,7 +3751,8 @@
        "panelDisplay": 1,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "canPost": true
       }
      ],
      "controlType": "Panel",
@@ -3738,7 +3803,8 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     },
     {
      "fieldName": "btnHiddenStart",
@@ -3763,6 +3829,8 @@
      "text": "onStart",
      "imageWidth": "",
      "imageHeight": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "onClick": "onStart",
      "appearance": 0,
      "imageFileUrl": "",
@@ -3792,6 +3860,8 @@
      "text": "ﾊﾞﾘﾃﾞｰｼｮﾝ",
      "imageWidth": "",
      "imageHeight": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "onClick": "onClick_btnValidation",
      "appearance": 0,
      "imageFileUrl": "",
@@ -3890,7 +3960,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   },
   {
    "fieldName": "ShinseiJohoTorokuKanryo",
@@ -3975,7 +4046,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": null,

@@ -18,12 +18,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 連絡先情報を検索するためのクラスです。
  *
- * @author n9606
+ * @author n9606 漢那 憲作
  */
 public class RenrakusakiInfoFinder {
 
     private final RenrakusakiInfoDac dac;
-    //private final RenrakusakiInfoFinder finder;
 
     /**
      * コンストラクタクラスです。
@@ -31,7 +30,6 @@ public class RenrakusakiInfoFinder {
      */
     public RenrakusakiInfoFinder() {
         dac = InstanceProvider.create(RenrakusakiInfoDac.class);
-        //finder = new RenrakusakiInfoFinder();
     }
 
     /**
@@ -40,7 +38,6 @@ public class RenrakusakiInfoFinder {
      */
     RenrakusakiInfoFinder(RenrakusakiInfoDac dac) {
         this.dac = dac;
-        //this.finder = finder;
     }
 
     /**

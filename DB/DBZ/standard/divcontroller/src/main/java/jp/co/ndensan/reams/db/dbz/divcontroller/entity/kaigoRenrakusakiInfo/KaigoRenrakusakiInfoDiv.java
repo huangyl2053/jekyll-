@@ -34,6 +34,8 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
     private Button btnClose;
     @JsonProperty("SelectedContents")
     private SelectedContentsDiv SelectedContents;
+    @JsonProperty("hokenshaNo")
+    private RString hokenshaNo;
     @JsonProperty("hihokenshaNo")
     private RString hihokenshaNo;
     @JsonProperty("shoriKbn")
@@ -93,6 +95,16 @@ public class KaigoRenrakusakiInfoDiv extends Panel {
     @JsonProperty("SelectedContents")
     public void setSelectedContents(SelectedContentsDiv SelectedContents) {
         this.SelectedContents=SelectedContents;
+    }
+
+    @JsonProperty("hokenshaNo")
+    public RString getHokenshaNo() {
+        return hokenshaNo;
+    }
+
+    @JsonProperty("hokenshaNo")
+    public void setHokenshaNo(RString hokenshaNo) {
+        this.hokenshaNo=hokenshaNo;
     }
 
     @JsonProperty("hihokenshaNo")

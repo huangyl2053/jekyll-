@@ -831,6 +831,10 @@ var DBZ;
                     ],
                     "hiddenInput": [
                         {
+                            "propertyName": "hokenshaNo",
+                            "value": ""
+                        },
+                        {
                             "propertyName": "hihokenshaNo",
                             "value": ""
                         },
@@ -876,6 +880,10 @@ var DBZ;
             "marginBottom": 0,
             "originalProperty": [],
             "dataPassingForDialog": [
+                {
+                    "key": "hokenshaNo",
+                    "controlName": "KaigoRenrakusakiInfo.hokenshaNo"
+                },
                 {
                     "key": "hihokenshaNo",
                     "controlName": "KaigoRenrakusakiInfo.hihokenshaNo"

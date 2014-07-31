@@ -36,12 +36,15 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShichosonRenra
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShinseiJohoInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.dgKankeiIin_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.dgShisetsuRereki_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.SinseiRiyuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.mapper.YokaigoNinteiShinseiDivMapper;
 import jp.co.ndensan.reams.db.dbe.realservice.JogaiShinsakaiIinManager;
 import jp.co.ndensan.reams.db.dbe.realservice.YokaigoNinteiShinseiManager;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunShubetsu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -264,6 +267,7 @@ public class ShinseiJohoInput {
             panelList.add(new NyuinNyusho(div));
             panelList.add(new ShichosonRenrakuJiko(div));
             panelList.add(new KankeiIin(div));
+            panelList.add(new SinseiRiyu(div));
         }
 
         @Override
@@ -1029,6 +1033,32 @@ public class ShinseiJohoInput {
                             RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY)
             );
         }
+    }
+
+    private static final class SinseiRiyu implements IPanelAdapter {
+
+        private final SinseiRiyuDiv div;
+
+        SinseiRiyu(ShinseiJohoInputDiv div) {
+            this.div = div.getSinseiRiyu();
+        }
+
+        @Override
+        public void onLoad() {
+            div.setTeikeiKbn(TeikeibunKubun.特記事項以外.getCode());
+            div.setTeikeiShubetsu(TeikeibunShubetsu.申請理由.getCode());
+        }
+
+        @Override
+        public void init(dgSearchResult_Row hihokensha) {
+            div.setIsOpen(false);
+        }
+
+        @Override
+        public void clear() {
+            div.getTxtShinseiRiyu().clearValue();
+        }
+
     }
 
     private ResponseData<ShinseiJohoInputDiv> validate(ShinseiJohoInputDiv div) {

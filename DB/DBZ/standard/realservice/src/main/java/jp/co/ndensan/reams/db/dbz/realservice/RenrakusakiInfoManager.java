@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 連絡先情報を管理するためのクラスです。
  *
- * @author n9606
+ * @author n9606 漢那 憲作
  */
 public class RenrakusakiInfoManager {
 

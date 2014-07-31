@@ -1,0 +1,4 @@
+﻿teikeiKubun,bpchar,RString,,,,,A
+shubetsu,bpchar,RString,,,,,A
+teikeibunCd,bpchar,RString,,,,,A
+teikeibunNaiyo,text,RString,,,,,A
