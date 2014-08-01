@@ -217,6 +217,8 @@
      "text": "条件をクリアする",
      "onClick": "onClick_btnKyufuJissekiSearchClear",
      "icon": 0,
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -246,6 +248,8 @@
      "text": "検索する",
      "onClick": "onClick_btnKyufuJissekiSearch",
      "icon": 0,
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -305,7 +309,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   },
   {
    "fieldName": "KyufuJissekiList",
@@ -1247,7 +1252,7 @@
      "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
-     "onMultiRows": "",
+     "onMultiRows": "onMulti_dgKyufuJissekiMeisaiList",
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -1782,7 +1787,7 @@
      "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
-     "onMultiRows": "",
+     "onMultiRows": "onMulti_dgKyufuJissekiGokeiList",
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -1811,6 +1816,8 @@
      "text": "再検索する",
      "onClick": "onClick_btnKyufuJissekiResearch",
      "icon": 0,
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -1881,7 +1888,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": null,
@@ -1972,15 +1980,7 @@
  "UIContainerEventMapping": [
   {
    "alias": "onClick_btnYM",
-   "eventName": "dgKyufuJissekiMeisaiList[btnYM1].onClick"
-  },
-  {
-   "alias": "onClick_btnYM",
-   "eventName": "dgKyufuJissekiMeisaiList[btnYM2].onClick"
-  },
-  {
-   "alias": "onClick_btnYM",
-   "eventName": "dgKyufuJissekiMeisaiList[btnYM3].onClick"
+   "eventName": "dgKyufuJissekiMeisaiList.onMultiRows"
   },
   {
    "alias": "onClick_btnSearch",
@@ -1988,15 +1988,7 @@
   },
   {
    "alias": "onClick_btnYM",
-   "eventName": "dgKyufuJissekiGokeiList[btnYM1].onClick"
-  },
-  {
-   "alias": "onClick_btnYM",
-   "eventName": "dgKyufuJissekiGokeiList[btnYM2].onClick"
-  },
-  {
-   "alias": "onClick_btnYM",
-   "eventName": "dgKyufuJissekiGokeiList[btnYM3].onClick"
+   "eventName": "dgKyufuJissekiGokeiList.onMultiRows"
   }
  ],
  "loadSequencePanelNames": [

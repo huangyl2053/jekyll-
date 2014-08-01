@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
+ * 給付実績照会一覧のコントローラークラスです。
  *
  * @author N8156 宮本 康
  */
@@ -80,6 +81,9 @@ public class KyufuJissekiList {
 
         putViewState(panel2, panel.getDgKyufuJissekiMeisaiList().getClickedItem().getTxtServiceShurui());
 
+        // TODO ViewState設定後に状態遷移させる為のダミーイベント（要見直）
+        panel.getDgKyufuJissekiMeisaiList().setIsTriggerEventOnMultiRow(true);
+
         response.data = panel;
         return response;
     }
@@ -88,6 +92,9 @@ public class KyufuJissekiList {
         ResponseData<KyufuJissekiListDiv> response = new ResponseData<>();
 
         putViewState(panel2, panel.getDgKyufuJissekiGokeiList().getClickedItem().getTxtServiceShurui());
+
+        // TODO ViewState設定後に状態遷移させる為のダミーイベント（要見直）
+        panel.getDgKyufuJissekiGokeiList().setIsTriggerEventOnMultiRow(true);
 
         response.data = panel;
         return response;
