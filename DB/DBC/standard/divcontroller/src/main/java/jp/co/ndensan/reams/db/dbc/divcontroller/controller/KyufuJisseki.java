@@ -50,6 +50,9 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKyotakuService;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiMeisai;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiYoguHanbaihi;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiYoshiki;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuJissekiYoshikiKubun;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.tabKyufuJissekiDiv;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
@@ -59,7 +62,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 給付実績照会のコントローラークラスです。
+ * 給付実績照会詳細のコントローラークラスです。
  *
  * @author N8156 宮本 康
  */
@@ -68,7 +71,9 @@ public class KyufuJisseki {
     public ResponseData<KyufuJissekiDiv> dispKyufuJisseki(KyufuJissekiDiv panel) {
         ResponseData<KyufuJissekiDiv> response = new ResponseData<>();
 
-        jp.co.ndensan.reams.db.dbc.business.KyufuJisseki jisseki = get給付実績();
+        KyufuJissekiKeyInfo keiInfo = createKeyInfo();
+        setKyufuJissekiYoshiki(panel, keiInfo.get入力識別番号().getInputShikibetsuNoCode().value());
+        jp.co.ndensan.reams.db.dbc.business.KyufuJisseki jisseki = get給付実績(keiInfo);
 
         KyufuJissekiKihon kihon = jisseki.get基本();
         panel.getTxtKyufuJissekiHihokenshaNo().setValue(kihon.get被保番号().value());
@@ -100,6 +105,36 @@ public class KyufuJisseki {
         response.data = panel;
 
         return response;
+    }
+
+    private void setKyufuJissekiYoshiki(KyufuJissekiDiv panel, RString 入力識別番号) {
+
+        KyufuJissekiYoshikiKubun kubun = KyufuJissekiYoshiki.get様式区分(入力識別番号);
+        tabKyufuJissekiDiv tab = panel.getTabKyufuJisseki();
+        tab.getKyufuJissekiKihon().setVisible(kubun.is基本());
+        tab.getKyufuJissekiMeisaiShukei().setVisible(kubun.is明細() || kubun.is集計());
+        tab.getKyufuJissekiMeisaiShukei().getKyufuJissekiMeisai().setVisible(kubun.is明細());
+        tab.getKyufuJissekiMeisaiShukei().getKyufuJissekiMeisai().setTitle(new RString(kubun.is集計() ? "明細" : ""));
+        tab.getKyufuJissekiMeisaiShukei().getKyufuJissekiShukei().setVisible(kubun.is集計());
+        tab.getKyufuJissekiMeisaiShukei().getKyufuJissekiShukei().setTitle(new RString(kubun.is明細() ? "集計" : ""));
+        tab.getKyufuJissekiMeisaiShukei().setTitle(
+                new RString((kubun.is明細() && !kubun.is集計()) ? "明細情報" : (!kubun.is明細() && kubun.is集計()) ? "集計情報" : "明細・集計情報"));
+        tab.getServiceKeikakuhi().setVisible(kubun.is居宅サービス計画費());
+        tab.getFukushiYoguKonyuhi().setVisible(kubun.is福祉用具販売費());
+        tab.getJutakuKaishuhi().setVisible(kubun.is住宅改修費());
+        tab.getKogakuKaigoServicehi().setVisible(kubun.is高額介護サービス費());
+        tab.getCareManagementhi().setVisible(kubun.isケアマネジメント費());
+
+        panel.getBtnKinkyujiShisetsuRyoyohi().setVisible(kubun.is緊急時施設療養() || kubun.is所定疾患施設療養費());
+        panel.getBtnKinkyujiShisetsuRyoyohi().setDisplayNone(!kubun.is緊急時施設療養() && !kubun.is所定疾患施設療養費());
+        panel.getBtnTokuteiShinryohi().setVisible(kubun.is特定診療費_特別療養費());
+        panel.getBtnTokuteiShinryohi().setDisplayNone(!kubun.is特定診療費_特別療養費());
+        panel.getBtnShokujiHiyo().setVisible(kubun.is食事費用());
+        panel.getBtnShokujiHiyo().setDisplayNone(!kubun.is食事費用());
+        panel.getBtnTokuteiNyushoshaKaigoServicehi().setVisible(kubun.is特定入所者介護サービス費用());
+        panel.getBtnTokuteiNyushoshaKaigoServicehi().setDisplayNone(!kubun.is特定入所者介護サービス費用());
+        panel.getBtnShakaiFukushiHojinKeigengaku().setVisible(kubun.is社会福祉法人軽減額());
+        panel.getBtnShakaiFukushiHojinKeigengaku().setDisplayNone(!kubun.is社会福祉法人軽減額());
     }
 
     private void setKyufuJissekiKihon(KyufuJissekiKihonDiv panel, KyufuJissekiKihon kihon) {
@@ -431,7 +466,7 @@ public class KyufuJisseki {
                 txtHiyo, txtShinsaYM);
     }
 
-    private jp.co.ndensan.reams.db.dbc.business.KyufuJisseki get給付実績() {
+    private KyufuJissekiKeyInfo createKeyInfo() {
 
         RString 被保番号 = (RString) ViewStateHolder.get("被保番号", RString.class);
         RString サービス提供期間開始 = (RString) ViewStateHolder.get("サービス提供期間開始", RString.class);
@@ -440,12 +475,15 @@ public class KyufuJisseki {
         RString サービス種類 = (RString) ViewStateHolder.get("サービス種類", RString.class);
         RString サービス提供年月 = (RString) ViewStateHolder.get("サービス提供年月", RString.class);
 
-        KyufuJissekiKeyInfo keyInfo = new KyufuJissekiKeyInfo(
+        return new KyufuJissekiKeyInfo(
                 new KaigoHihokenshaNo(被保番号),
                 new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供期間開始)), new ServiceTeikyoYM((new FlexibleYearMonth(サービス提供期間終了)))),
                 new InputShikibetsuNo(new Code(入力識別番号), RString.EMPTY, RString.EMPTY),
                 new ServiceShuruiCode(サービス種類),
                 new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供年月)));
+    }
+
+    private jp.co.ndensan.reams.db.dbc.business.KyufuJisseki get給付実績(KyufuJissekiKeyInfo keyInfo) {
 
         KyufuJissekiFinder finder = new KyufuJissekiFinder();
         KyufuJissekiDetailKeyInfo detailKeyInfo = finder.get給付実績詳細キー(keyInfo);
