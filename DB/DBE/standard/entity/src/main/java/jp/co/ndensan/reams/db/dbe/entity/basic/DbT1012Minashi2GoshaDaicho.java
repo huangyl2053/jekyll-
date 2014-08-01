@@ -9,8 +9,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 public enum DbT1012Minashi2GoshaDaicho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
- // TODO 田辺 紘一 〆日に間に合わず 2014/07/24
-
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -37,6 +35,7 @@ public enum DbT1012Minashi2GoshaDaicho implements IColumnDefinition {
 
     /**
      * getMaxLength
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -45,6 +44,7 @@ public enum DbT1012Minashi2GoshaDaicho implements IColumnDefinition {
 
     /**
      * getScale
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

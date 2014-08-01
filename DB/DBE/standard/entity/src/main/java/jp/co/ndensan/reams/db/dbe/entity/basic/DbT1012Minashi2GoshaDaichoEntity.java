@@ -19,8 +19,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 public class DbT1012Minashi2GoshaDaichoEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
- // TODO 田辺 紘一 〆日に間に合わず 2014/07/24
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1012Minashi2GoshaDaicho");
 

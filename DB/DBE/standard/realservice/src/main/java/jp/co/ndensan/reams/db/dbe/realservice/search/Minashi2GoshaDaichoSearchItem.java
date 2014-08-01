@@ -16,7 +16,6 @@ import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaicho
  */
 public enum Minashi2GoshaDaichoSearchItem implements ISearchItem {
 
-// TODO 田辺 紘一 〆日に間に合わず 2014/07/24
     //検索項目は取り合えず下記のみで、後に追加予定
     市町村コード(shichosonCode),
     被保番号(hihokenshaNo),

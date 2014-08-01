@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IInsertable;
-//import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public interface IMinashi2GoshaDaichoDac extends IInsertable<DbT1012Minashi2GoshaDaichoEntity> {
 
-    // TODO 田辺 紘一 〆日に間に合わず 2014/07/24
-//    @Transaction
-//    List<DbT1012Minashi2GoshaDaichoEntity> select(ISearchCondition condition);
+    @Transaction
+    List<DbT1012Minashi2GoshaDaichoEntity> select(ITrueFalseCriteria criteria);
+
+    @Transaction
+    int insert(DbT1012Minashi2GoshaDaichoEntity data);
 }

@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Minashi2GoHihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * みなし2号被保険者を管理するインターフェースです。
@@ -17,8 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author N8211 田辺 紘一
  */
 public interface IMinashi2GoshaDaicho {
-
-    // TODO 田辺 紘一 〆日に間に合わず 2014/07/24
 
     /**
      * 市町村コードを返します。
@@ -53,7 +51,7 @@ public interface IMinashi2GoshaDaicho {
      *
      * @return 被保険者区分
      */
-    RString get被保険者区分コード();
+    Minashi2GoHihokenshaKubun get被保険者区分コード();
 
     /**
      * みなし2号登録年月日を返します。
