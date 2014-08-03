@@ -19,6 +19,7 @@ public class KyufuJisseki {
     private final KyufuJissekiKyotakuServiceCollection サービス計画費リスト;
     private final KyufuJissekiYoguHanbaihiCollection 祉用具購入費リスト;
     private final KyufuJissekiJutakuKaishuhiCollection 住宅改修費情報リスト;
+    private final KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoCollection 特定入所者リスト;
 
     /**
      * 引数から値を受け取るコンストラクタです。
@@ -38,7 +39,8 @@ public class KyufuJisseki {
             KyufuJissekiShafukuKeigenCollection 社会福祉法人軽減額リスト,
             KyufuJissekiKyotakuServiceCollection サービス計画費リスト,
             KyufuJissekiYoguHanbaihiCollection 祉用具購入費リスト,
-            KyufuJissekiJutakuKaishuhiCollection 住宅改修費情報リスト) {
+            KyufuJissekiJutakuKaishuhiCollection 住宅改修費情報リスト,
+            KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoCollection 特定入所者リスト) {
         this.基本 = 基本;
         this.明細リスト = 明細リスト;
         this.集計リスト = 集計リスト;
@@ -46,6 +48,8 @@ public class KyufuJisseki {
         this.サービス計画費リスト = サービス計画費リスト;
         this.祉用具購入費リスト = 祉用具購入費リスト;
         this.住宅改修費情報リスト = 住宅改修費情報リスト;
+        this.特定入所者リスト = 特定入所者リスト;
+
     }
 
     /**
@@ -110,4 +114,14 @@ public class KyufuJisseki {
     public KyufuJissekiJutakuKaishuhiCollection get住宅改修費情報リスト() {
         return 住宅改修費情報リスト;
     }
+
+    /**
+     * 特定入所者リストの情報を返します。
+     *
+     * @return 特定入所者リスト
+     */
+    public KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoCollection get特定入所者リスト() {
+        return 特定入所者リスト;
+    }
+
 }

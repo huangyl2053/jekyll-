@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigen;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigenCollection;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukeiCollection;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoCollection;
 import jp.co.ndensan.reams.db.dbc.business.ServiceTeikyoYMListOfServiceShurui;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuJissekiKubun;
@@ -42,6 +44,7 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3018KyufujissekiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3025KyufujissekiKyotakuServiceEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3027KyufujissekiJutakuKaishuhiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
@@ -614,7 +617,7 @@ public final class KyufuJissekiMapper {
      * @param entities 給付実績福祉用具購入費エンティティList
      * @return 給付実績福祉用具購入費情報List
      */
-    public static KyufuJissekiYoguHanbaihiCollection to給付実績福祉用具購入費List(
+    public static KyufuJissekiYoguHanbaihiCollection to福祉用具購入費List(
             List<DbT3026KyufujissekiFukushiYoguHanbaihiEntity> entities) {
         if (entities == null || entities.isEmpty()) {
             return new KyufuJissekiYoguHanbaihiCollection(Collections.EMPTY_LIST);
@@ -643,7 +646,7 @@ public final class KyufuJissekiMapper {
      * @param entities 給付実績住宅改修費エンティティList
      * @return 給付実績住宅改修費情報List
      */
-    public static KyufuJissekiJutakuKaishuhiCollection to給付実績住宅改修費List(
+    public static KyufuJissekiJutakuKaishuhiCollection to住宅改修費情報List(
             List<DbT3027KyufujissekiJutakuKaishuhiEntity> entities) {
         if (entities == null || entities.isEmpty()) {
             return new KyufuJissekiJutakuKaishuhiCollection(Collections.EMPTY_LIST);
@@ -662,4 +665,139 @@ public final class KyufuJissekiMapper {
 
         return new KyufuJissekiJutakuKaishuhiCollection(list);
     }
+
+    /**
+     * 給付実績の特定入所者エンティティから給付実績の特定入所者情報を作成して返す。
+     *
+     * @param entities 給付実績の特定入所者エンティティList
+     * @return 給付実績の特定入所者List
+     */
+    public static KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoCollection to特定入所者List(
+            List<DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity> entities) {
+        if (entities == null || entities.isEmpty()) {
+            return new KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoCollection(Collections.EMPTY_LIST);
+        }
+
+        List<KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo> list = new ArrayList<>();
+        //前　明細
+        for (DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity : entities) {
+            list.add(
+                    new KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo(
+                            new RString(entity.getServiceSyuruiCode().toString().concat(entity.getServiceKomokuCode().toString())),
+                            new Decimal(entity.getFutanGendogaku()),
+                            前後1[0],
+                            明細,
+                            new Decimal(entity.getHiyoTanka()),
+                            entity.getNissu(),
+                            new Decimal(entity.getHiyogaku()),
+                            new Decimal(entity.getHokenbunSeikyugaku()),
+                            new Decimal(entity.getRiyoshaFutangaku()),
+                            entity.getKohi1Nissu(),
+                            new Decimal(entity.getKohi1Futangaku()),
+                            null,
+                            null,
+                            entity.getKohi2Nissu(),
+                            new Decimal(entity.getKohi2Futangaku()),
+                            null,
+                            null,
+                            entity.getKohi3Nissu(),
+                            new Decimal(entity.getKohi3Futangaku()),
+                            null,
+                            null,
+                            entity.getSaishinsaKaisu(),
+                            entity.getKagoKaisu(),
+                            entity.getShinsaYM()
+                    ));
+        }
+
+        //前　合計
+        list.add(new KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo(
+                null,
+                null,
+                前後1[0],
+                合計,
+                null,
+                0,
+                new Decimal(entities.get(0).getHiyogakuTotal()),
+                new Decimal(entities.get(0).getHokenbunSeikyugakuTotal()),
+                new Decimal(entities.get(0).getRiyoshaFutangakuTotal()),
+                0,
+                new Decimal(entities.get(0).getKohi1FutangakuTotal()),
+                new Decimal(entities.get(0).getKohi1Seikyugaku()),
+                new Decimal(entities.get(0).getKohi1HonninFutanGetsugaku()),
+                0,
+                new Decimal(entities.get(0).getKohi2FutangakuTotal()),
+                new Decimal(entities.get(0).getKohi2Seikyugaku()),
+                new Decimal(entities.get(0).getKohi2HonninFutanGetsugaku()),
+                0,
+                new Decimal(entities.get(0).getKohi3FutangakuTotal()),
+                new Decimal(entities.get(0).getKohi3Seikyugaku()),
+                new Decimal(entities.get(0).getKohi3HonninFutanGetsugaku()),
+                0,
+                0,
+                null
+        ));
+
+        //後　明細
+        for (DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity : entities) {
+            list.add(
+                    new KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo(
+                            new RString(entity.getServiceSyuruiCode().toString().concat(entity.getServiceKomokuCode().toString())),
+                            new Decimal(entity.getFutanGendogaku()),
+                            前後1[1],
+                            明細,
+                            new Decimal(entity.getAtoHiyoTanka()),
+                            entity.getAtoNissu(),
+                            new Decimal(entity.getAtoHiyogaku()),
+                            new Decimal(entity.getAtoHokenbunSeikyugaku()),
+                            new Decimal(entity.getAtoRiyoshaFutangaku()),
+                            entity.getAtoKohi1Nissu(),
+                            new Decimal(entity.getAtoKohi1Futangaku()),
+                            null,
+                            null,
+                            entity.getAtoKohi2Nissu(),
+                            new Decimal(entity.getAtoKohi2Futangaku()),
+                            null,
+                            null,
+                            entity.getAtoKohi3Nissu(),
+                            new Decimal(entity.getAtoKohi3Futangaku()),
+                            null,
+                            null,
+                            entity.getSaishinsaKaisu(),
+                            entity.getKagoKaisu(),
+                            entity.getShinsaYM()
+                    ));
+        }
+
+        //後　合計
+        list.add(new KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo(
+                null,
+                null,
+                前後1[1],
+                合計,
+                null,
+                0,
+                new Decimal(entities.get(0).getAtoHiyogakuTotal()),
+                new Decimal(entities.get(0).getAtoHokenbunSeikyugakuTotal()),
+                new Decimal(entities.get(0).getAtoRiyoshaFutangakuTotal()),
+                0,
+                new Decimal(entities.get(0).getAtoKohi1FutangakuTotal()),
+                new Decimal(entities.get(0).getAtoKohi1Seikyugaku()),
+                new Decimal(entities.get(0).getAtoKohi1HonninFutanGetsugaku()),
+                0,
+                new Decimal(entities.get(0).getAtoKohi2FutangakuTotal()),
+                new Decimal(entities.get(0).getAtoKohi2Seikyugaku()),
+                new Decimal(entities.get(0).getAtoKohi2HonninFutanGetsugaku()),
+                0,
+                new Decimal(entities.get(0).getAtoKohi3FutangakuTotal()),
+                new Decimal(entities.get(0).getAtoKohi3Seikyugaku()),
+                new Decimal(entities.get(0).getAtoKohi3HonninFutanGetsugaku()),
+                0,
+                0,
+                null
+        ));
+
+        return new KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoCollection(list);
+    }
+
 }

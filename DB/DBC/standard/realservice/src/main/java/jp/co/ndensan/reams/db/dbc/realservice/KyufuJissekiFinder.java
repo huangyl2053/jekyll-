@@ -172,7 +172,7 @@ public class KyufuJissekiFinder {
     }
 
     private KyufuJissekiYoguHanbaihiCollection get給付実績福祉用具購入費(KyufuJissekiDetailKeyInfo 詳細キー情報) {
-        return KyufuJissekiMapper.to給付実績福祉用具購入費List(yoguDac.select(
+        return KyufuJissekiMapper.to福祉用具購入費List(yoguDac.select(
                 詳細キー情報.get交換情報識別番号(),
                 詳細キー情報.get入力識別番号().getInputShikibetsuNoCode(),
                 詳細キー情報.get証記載保険者番号(),
@@ -183,7 +183,7 @@ public class KyufuJissekiFinder {
     }
 
     private KyufuJissekiJutakuKaishuhiCollection get給付実績住宅改修費(KyufuJissekiDetailKeyInfo 詳細キー情報) {
-        return KyufuJissekiMapper.to給付実績住宅改修費List(jutakuDac.select(
+        return KyufuJissekiMapper.to住宅改修費情報List(jutakuDac.select(
                 詳細キー情報.get交換情報識別番号(),
                 詳細キー情報.get入力識別番号().getInputShikibetsuNoCode(),
                 詳細キー情報.get証記載保険者番号(),
