@@ -26,7 +26,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
  *
  * @author N8223　朴義一
  */
-public class KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac implements IKyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac {
+public class KyufuJissekiTokuteiNyushohiDac implements IKyufuJissekiTokuteiNyushohiDac {
 
     @InjectSession
     private SqlSession session;

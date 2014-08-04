@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author N8223　朴義一
  */
-public interface IKyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac extends
+public interface IKyufuJissekiTokuteiNyushohiDac extends
         IReplaceable<DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity>,
         IDeletable<DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity> {
 

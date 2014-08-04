@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiShafukuKeigenDa
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiYoguHanbaihiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiJutakuKaishuhiDac;
-import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiTokuteiNyushohiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.KyufuJissekiServiceDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.InputShikibetsuNoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
@@ -205,8 +205,8 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
         return dac;
     }
 
-    private static IKyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac createKyufuJissekiTokuteiNyushohiDac(int flg) {
-        IKyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac dac = mock(IKyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac.class);
+    private static IKyufuJissekiTokuteiNyushohiDac createKyufuJissekiTokuteiNyushohiDac(int flg) {
+        IKyufuJissekiTokuteiNyushohiDac dac = mock(IKyufuJissekiTokuteiNyushohiDac.class);
         List<DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity> entityList = createDbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityList(flg);
         when(dac.select(
                 any(KokanShikibetsuNo.class),

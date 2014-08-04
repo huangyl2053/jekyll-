@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3029KyufujissekiTokuteiNyushos
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -51,6 +53,8 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityMock {
         entity.setServiceTeikyoYM(new FlexibleYearMonth("201401"));
         entity.setJigyoshoNo(new JigyoshaNo(new RString("0000000005")));
         entity.setToshiNo(new RString("0000000006"));
+        entity.setServiceSyuruiCode(new ServiceShuruiCode(new RString("12")));
+        entity.setServiceKomokuCode(new ServiceKomokuCode(new RString("3456")));
         return entity;
     }
 }

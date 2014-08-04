@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiShafukuKeigenDa
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiYoguHanbaihiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiJutakuKaishuhiDac;
-import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiTokuteiNyushohiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.KyufuJissekiServiceDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -43,7 +43,7 @@ public class KyufuJissekiFinder {
     private final IKyufuJissekiKyotakuServiceDac kyotakuDac;
     private final IKyufuJissekiYoguHanbaihiDac yoguDac;
     private final IKyufuJissekiJutakuKaishuhiDac jutakuDac;
-    private final IKyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac nyushoDac;
+    private final IKyufuJissekiTokuteiNyushohiDac nyushoDac;
 
     /**
      * InstanceProviderを用いてDacのインスタンスを生成し、メンバ変数に保持します。
@@ -57,7 +57,7 @@ public class KyufuJissekiFinder {
         kyotakuDac = InstanceProvider.createWithCustomize(IKyufuJissekiKyotakuServiceDac.class);
         yoguDac = InstanceProvider.createWithCustomize(IKyufuJissekiYoguHanbaihiDac.class);
         jutakuDac = InstanceProvider.createWithCustomize(IKyufuJissekiJutakuKaishuhiDac.class);
-        nyushoDac = InstanceProvider.createWithCustomize(IKyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac.class);
+        nyushoDac = InstanceProvider.createWithCustomize(IKyufuJissekiTokuteiNyushohiDac.class);
     }
 
     /**
@@ -81,7 +81,7 @@ public class KyufuJissekiFinder {
             IKyufuJissekiKyotakuServiceDac kyotakuDac,
             IKyufuJissekiYoguHanbaihiDac yoguDac,
             IKyufuJissekiJutakuKaishuhiDac jutakuDac,
-            IKyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac nyushoDac) {
+            IKyufuJissekiTokuteiNyushohiDac nyushoDac) {
         this.serviceDac = serviceDac;
         this.kihonDac = kihonDac;
         this.meisaiDac = meisaiDac;

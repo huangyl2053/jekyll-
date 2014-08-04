@@ -18,8 +18,8 @@ public class KyufuJisseki {
     private final KyufuJissekiShafukuKeigenCollection 社会福祉法人軽減額リスト;
     private final KyufuJissekiKyotakuServiceCollection サービス計画費リスト;
     private final KyufuJissekiYoguHanbaihiCollection 祉用具購入費リスト;
-    private final KyufuJissekiJutakuKaishuhiCollection 住宅改修費情報リスト;
-    private final KyufuJissekiTokuteiNyushohiCollection 特定入所者リスト;
+    private final KyufuJissekiJutakuKaishuhiCollection 住宅改修費リスト;
+    private final KyufuJissekiTokuteiNyushohiCollection 特定入所者費用リスト;
 
     /**
      * 引数から値を受け取るコンストラクタです。
@@ -30,7 +30,8 @@ public class KyufuJisseki {
      * @param 社会福祉法人軽減額リスト 社会福祉法人軽減額リスト
      * @param サービス計画費リスト サービス計画費リスト
      * @param 祉用具購入費リスト 祉用具購入費リスト
-     * @param 住宅改修費情報リスト 住宅改修費情報リスト
+     * @param 住宅改修費リスト 住宅改修費リスト
+     * @param 特定入所者費用リスト 特定入所者費用リスト
      */
     public KyufuJisseki(
             KyufuJissekiKihon 基本,
@@ -39,17 +40,16 @@ public class KyufuJisseki {
             KyufuJissekiShafukuKeigenCollection 社会福祉法人軽減額リスト,
             KyufuJissekiKyotakuServiceCollection サービス計画費リスト,
             KyufuJissekiYoguHanbaihiCollection 祉用具購入費リスト,
-            KyufuJissekiJutakuKaishuhiCollection 住宅改修費情報リスト,
-            KyufuJissekiTokuteiNyushohiCollection 特定入所者リスト) {
+            KyufuJissekiJutakuKaishuhiCollection 住宅改修費リスト,
+            KyufuJissekiTokuteiNyushohiCollection 特定入所者費用リスト) {
         this.基本 = 基本;
         this.明細リスト = 明細リスト;
         this.集計リスト = 集計リスト;
         this.社会福祉法人軽減額リスト = 社会福祉法人軽減額リスト;
         this.サービス計画費リスト = サービス計画費リスト;
         this.祉用具購入費リスト = 祉用具購入費リスト;
-        this.住宅改修費情報リスト = 住宅改修費情報リスト;
-        this.特定入所者リスト = 特定入所者リスト;
-
+        this.住宅改修費リスト = 住宅改修費リスト;
+        this.特定入所者費用リスト = 特定入所者費用リスト;
     }
 
     /**
@@ -107,21 +107,20 @@ public class KyufuJisseki {
     }
 
     /**
-     * 住宅改修費情報リストの情報を返します。
+     * 住宅改修費リストの情報を返します。
      *
-     * @return 住宅改修費情報リスト
+     * @return 住宅改修費リスト
      */
     public KyufuJissekiJutakuKaishuhiCollection get住宅改修費情報リスト() {
-        return 住宅改修費情報リスト;
+        return 住宅改修費リスト;
     }
 
     /**
-     * 特定入所者リストの情報を返します。
+     * 特定入所者費用リストの情報を返します。
      *
-     * @return 特定入所者リスト
+     * @return 特定入所者費用リスト
      */
-    public KyufuJissekiTokuteiNyushohiCollection get特定入所者リスト() {
-        return 特定入所者リスト;
+    public KyufuJissekiTokuteiNyushohiCollection get特定入所者費用リスト() {
+        return 特定入所者費用リスト;
     }
-
 }
