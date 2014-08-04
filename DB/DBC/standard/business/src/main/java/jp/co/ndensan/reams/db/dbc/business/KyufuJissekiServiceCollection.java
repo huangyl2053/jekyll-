@@ -43,7 +43,11 @@ public class KyufuJissekiServiceCollection implements Iterable {
         Decimal ret = Decimal.ZERO;
         for (KyufuJissekiService 給付実績種類明細情報 : 給付実績種類明細情報リスト) {
             if (給付実績種類明細情報.get給付実績キー情報().getサービス種類コード().equals(サービス種類コード)) {
-                ret = ret.add(給付実績種類明細情報.get単位数合計());
+                if (給付実績種類明細情報.get単位数合計() != null) {
+                    ret = ret.add(給付実績種類明細情報.get単位数合計());
+                } else if (給付実績種類明細情報.getサービス単位数合計() != null) {
+                    ret = ret.add(給付実績種類明細情報.getサービス単位数合計());
+                }
             }
         }
         return ret;

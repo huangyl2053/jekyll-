@@ -49,6 +49,7 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiH
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
@@ -65,6 +66,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @author N8156 宮本 康
  */
 public final class KyufuJissekiMapper {
+
+    private static final int SERVICE_SHURUI_CODE_LENGTH = 2;
 
     private static final RString 空欄 = RString.EMPTY;
     private static final RString 後 = new RString("後");
@@ -105,7 +108,7 @@ public final class KyufuJissekiMapper {
             if ((キー情報.get被保番号() == null || キー情報.get被保番号().equals(entity.getHiHokenshaNo()))
                     && (キー情報.get入力識別番号() == null
                     || キー情報.get入力識別番号().getInputShikibetsuNoCode().value().equals(entity.getInputShikibetsuNo()))
-                    && (キー情報.getサービス種類コード() == null || キー情報.getサービス種類コード().equals(entity.getServiceSyuruiCode()))
+                    && (キー情報.getサービス種類コード() == null || キー情報.getサービス種類コード().equals(getサービス種類コード(entity)))
                     && (キー情報.getサービス提供年月() == null || キー情報.getサービス提供年月().equals(entity.getServiceTeikyoYM()))) {
                 break;
             }
@@ -121,6 +124,18 @@ public final class KyufuJissekiMapper {
                 entity.getJigyoshoNo(),
                 entity.getToshiNo(),
                 to対象サービス種類リスト(entities));
+    }
+
+    private static ServiceShuruiCode getサービス種類コード(DbV3016KyufujissekiShuruiDetailEntity entity) {
+        ServiceShuruiCode serviceShuruiCode = entity.getServiceSyuruiCode();
+        ServiceCode serviceCode = entity.getServiceCode();
+        if (serviceShuruiCode != null && !serviceShuruiCode.value().isEmpty()) {
+            return serviceShuruiCode;
+        } else if (serviceCode != null && SERVICE_SHURUI_CODE_LENGTH <= serviceCode.value().length()) {
+            return new ServiceShuruiCode(serviceCode.value().substring(0, SERVICE_SHURUI_CODE_LENGTH));
+        } else {
+            return null;
+        }
     }
 
     private static List<ServiceTeikyoYMListOfServiceShurui> to対象サービス種類リスト(List<DbV3016KyufujissekiShuruiDetailEntity> entities) {

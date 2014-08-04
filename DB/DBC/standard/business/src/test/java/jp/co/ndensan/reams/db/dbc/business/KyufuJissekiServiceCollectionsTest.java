@@ -113,7 +113,7 @@ public class KyufuJissekiServiceCollectionsTest extends DbcTestBase {
 
     private static List<KyufuJissekiService> create給付実績サービス集計List(String 提供年月) {
         List<KyufuJissekiService> list = new ArrayList<>();
-        list.add(create給付実績サービス("11", "11", new Decimal("10"), new Decimal("11"), new Decimal("12"), 提供年月));
+        list.add(create給付実績サービス("11", "11", new Decimal("10"), new Decimal("11"), new Decimal("12"), new Decimal("13"), 提供年月));
         return list;
     }
 
@@ -123,6 +123,7 @@ public class KyufuJissekiServiceCollectionsTest extends DbcTestBase {
             Decimal 利用者負担額合計,
             Decimal 単位数合計,
             Decimal 保険請求分請求額合計,
+            Decimal サービス単位数合計,
             String 提供年月) {
 
         JigyoshaNo 事業者番号 = new JigyoshaNo(new RString(事業者No));
@@ -133,6 +134,7 @@ public class KyufuJissekiServiceCollectionsTest extends DbcTestBase {
                 利用者負担額合計,
                 単位数合計,
                 保険請求分請求額合計,
+                サービス単位数合計,
                 給付実績キー情報);
 
         return kyufujissekiService;

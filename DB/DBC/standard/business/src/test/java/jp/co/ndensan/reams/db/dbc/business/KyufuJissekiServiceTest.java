@@ -39,6 +39,7 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
         private static Decimal 利用者負担額合計;
         private static Decimal 単位数合計;
         private static Decimal 保険請求分請求額合計;
+        private static Decimal サービス単位数合計;
         private static KyufuJissekiKeyInfo 給付実績キー情報;
 
         @Before
@@ -47,32 +48,18 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
             利用者負担額合計 = mock(Decimal.class);
             単位数合計 = mock(Decimal.class);
             保険請求分請求額合計 = mock(Decimal.class);
+            サービス単位数合計 = mock(Decimal.class);
             給付実績キー情報 = mock(KyufuJissekiKeyInfo.class);
         }
 
         @Test(expected = NullPointerException.class)
-        public void サービス種類がnullの時_NullPointerExceptionが発生する() {
-            sut = new KyufuJissekiService(null, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 利用者負担額合計がnullの時_NullPointerExceptionが発生する() {
-            sut = new KyufuJissekiService(事業者番号, null, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 単位数合計がnullの時_NullPointerExceptionが発生する() {
-            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, null, 保険請求分請求額合計, 給付実績キー情報);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 保険請求分請求額合計がnullの時_NullPointerExceptionが発生する() {
-            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, null, 給付実績キー情報);
+        public void 事業者番号がnullの時_NullPointerExceptionが発生する() {
+            sut = new KyufuJissekiService(null, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, サービス単位数合計, 給付実績キー情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 給付実績キー情報がnullの時_NullPointerExceptionが発生する() {
-            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, null);
+            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, サービス単位数合計, null);
         }
     }
 
@@ -84,6 +71,7 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
         private static Decimal 利用者負担額合計;
         private static Decimal 単位数合計;
         private static Decimal 保険請求分請求額合計;
+        private static Decimal サービス単位数合計;
         private static KyufuJissekiKeyInfo 給付実績キー情報;
 
         @Before
@@ -92,30 +80,31 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
             利用者負担額合計 = new Decimal("100");
             単位数合計 = new Decimal("150");
             保険請求分請求額合計 = new Decimal("200");
+            サービス単位数合計 = new Decimal("300");
             給付実績キー情報 = create給付実績キー情報();
         }
 
         @Test
         public void get利用者負担額合計で_利用者負担額合計を返す() {
-            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
+            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, サービス単位数合計, 給付実績キー情報);
             assertThat(sut.get利用者負担額合計(), is(new Decimal("100")));
         }
 
         @Test
         public void get単位数合計で_単位数合計を返す() {
-            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
+            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, サービス単位数合計, 給付実績キー情報);
             assertThat(sut.get単位数合計(), is(new Decimal("150")));
         }
 
         @Test
         public void get保険請求分請求額合計で_保険請求分請求額合計を返す() {
-            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
+            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, サービス単位数合計, 給付実績キー情報);
             assertThat(sut.get保険請求分請求額合計(), is(new Decimal("200")));
         }
 
         @Test
         public void get給付実績キー情報で_給付実績キー情報を返す() {
-            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, 給付実績キー情報);
+            sut = new KyufuJissekiService(事業者番号, 利用者負担額合計, 単位数合計, 保険請求分請求額合計, サービス単位数合計, 給付実績キー情報);
             assertThat(sut.get給付実績キー情報().getサービス提供年月(), is(new ServiceTeikyoYM(new FlexibleYearMonth("201407"))));
         }
     }

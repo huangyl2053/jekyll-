@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiService;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiServiceCollection;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
  * @author N3317 塚田 萌
  */
 public final class KyufuJissekiServiceMapper {
+
+    private static final int SERVICE_SHURUI_CODE_LENGTH = 2;
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -52,6 +56,7 @@ public final class KyufuJissekiServiceMapper {
                 entity.getHokenRiyoshaFutangaku(),
                 entity.getAtoHokenTanisuTotal(),
                 entity.getAtoHokenSeikyugaku(),
+                entity.getAtoServiceTanisuTotal(),
                 create給付実績Key(entity, teikyoYMRange));
     }
 
@@ -88,7 +93,19 @@ public final class KyufuJissekiServiceMapper {
                 entity.getHiHokenshaNo(),
                 teikyoYMRange,
                 new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo()), new RString(""), new RString("")),
-                entity.getServiceSyuruiCode(),
+                getサービス種類コード(entity),
                 entity.getServiceTeikyoYM());
+    }
+
+    private static ServiceShuruiCode getサービス種類コード(DbV3016KyufujissekiShuruiDetailEntity entity) {
+        ServiceShuruiCode serviceShuruiCode = entity.getServiceSyuruiCode();
+        ServiceCode serviceCode = entity.getServiceCode();
+        if (serviceShuruiCode != null && !serviceShuruiCode.value().isEmpty()) {
+            return serviceShuruiCode;
+        } else if (serviceCode != null && SERVICE_SHURUI_CODE_LENGTH <= serviceCode.value().length()) {
+            return new ServiceShuruiCode(serviceCode.value().substring(0, SERVICE_SHURUI_CODE_LENGTH));
+        } else {
+            return null;
+        }
     }
 }

@@ -21,6 +21,7 @@ public class KyufuJissekiService {
     private final Decimal 利用者負担額合計;
     private final Decimal 単位数合計;
     private final Decimal 保険請求分請求額合計;
+    private final Decimal サービス単位数合計;
     private final KyufuJissekiKeyInfo 給付実績キー情報;
 
     /**
@@ -30,18 +31,20 @@ public class KyufuJissekiService {
      * @param 利用者負担額合計 利用者負担額合計
      * @param 単位数合計 単位数合計
      * @param 保険請求分請求額合計 保険請求分請求額合計
+     * @param サービス単位数合計 サービス単位数合計
      * @param 給付実績キー情報 給付実績キー情報
      */
     public KyufuJissekiService(JigyoshaNo 事業者番号,
             Decimal 利用者負担額合計,
             Decimal 単位数合計,
             Decimal 保険請求分請求額合計,
+            Decimal サービス単位数合計,
             KyufuJissekiKeyInfo 給付実績キー情報) {
         this.事業者番号 = requireNonNull(事業者番号, Messages.E00001.replace("事業者番号").getMessage());
-        this.利用者負担額合計 = requireNonNull(利用者負担額合計, Messages.E00001.replace("利用者負担額合計").getMessage());
-        this.単位数合計 = requireNonNull(単位数合計, Messages.E00001.replace("単位数合計").getMessage());
-        this.保険請求分請求額合計 = requireNonNull(保険請求分請求額合計,
-                Messages.E00001.replace("保険請求分請求額合計").getMessage());
+        this.利用者負担額合計 = 利用者負担額合計;
+        this.単位数合計 = 単位数合計;
+        this.保険請求分請求額合計 = 保険請求分請求額合計;
+        this.サービス単位数合計 = サービス単位数合計;
         this.給付実績キー情報 = requireNonNull(給付実績キー情報, Messages.E00001.replace("給付実績キー情報").getMessage());
     }
 
@@ -79,6 +82,15 @@ public class KyufuJissekiService {
      */
     public Decimal get保険請求分請求額合計() {
         return 保険請求分請求額合計;
+    }
+
+    /**
+     * サービス単位数合計を返します。
+     *
+     * @return サービス単位数合計
+     */
+    public Decimal getサービス単位数合計() {
+        return サービス単位数合計;
     }
 
     /**
