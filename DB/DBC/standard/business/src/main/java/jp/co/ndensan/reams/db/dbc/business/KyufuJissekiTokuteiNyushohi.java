@@ -160,7 +160,7 @@ public class KyufuJissekiTokuteiNyushohi {
      *
      * @return 日数
      */
-    public int ge日数() {
+    public int get日数() {
         return 日数;
     }
 
