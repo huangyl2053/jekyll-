@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @author N8223　朴義一
  */
-public class KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo {
+public class KyufuJissekiTokuteiNyushohi {
 
     private final RString サービス;
     private final Decimal 負担限度額;
@@ -69,7 +69,7 @@ public class KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo {
      * @param 過誤回数 過誤回数
      * @param 審査年月 審査年月
      */
-    public KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo(
+    public KyufuJissekiTokuteiNyushohi(
             RString サービス,
             Decimal 負担限度額,
             RString 決定,

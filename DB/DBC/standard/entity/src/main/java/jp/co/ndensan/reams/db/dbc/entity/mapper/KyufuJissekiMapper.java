@@ -33,8 +33,8 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigen;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigenCollection;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukeiCollection;
-import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo;
-import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoCollection;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiTokuteiNyushohi;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiTokuteiNyushohiCollection;
 import jp.co.ndensan.reams.db.dbc.business.ServiceTeikyoYMListOfServiceShurui;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuJissekiKubun;
@@ -617,7 +617,7 @@ public final class KyufuJissekiMapper {
      * @param entities 給付実績福祉用具購入費エンティティList
      * @return 給付実績福祉用具購入費情報List
      */
-    public static KyufuJissekiYoguHanbaihiCollection to福祉用具購入費List(
+    public static KyufuJissekiYoguHanbaihiCollection to給付実績福祉用具購入費List(
             List<DbT3026KyufujissekiFukushiYoguHanbaihiEntity> entities) {
         if (entities == null || entities.isEmpty()) {
             return new KyufuJissekiYoguHanbaihiCollection(Collections.EMPTY_LIST);
@@ -646,7 +646,7 @@ public final class KyufuJissekiMapper {
      * @param entities 給付実績住宅改修費エンティティList
      * @return 給付実績住宅改修費情報List
      */
-    public static KyufuJissekiJutakuKaishuhiCollection to住宅改修費情報List(
+    public static KyufuJissekiJutakuKaishuhiCollection to給付実績住宅改修費List(
             List<DbT3027KyufujissekiJutakuKaishuhiEntity> entities) {
         if (entities == null || entities.isEmpty()) {
             return new KyufuJissekiJutakuKaishuhiCollection(Collections.EMPTY_LIST);
@@ -672,17 +672,17 @@ public final class KyufuJissekiMapper {
      * @param entities 給付実績の特定入所者エンティティList
      * @return 給付実績の特定入所者List
      */
-    public static KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoCollection to特定入所者List(
+    public static KyufuJissekiTokuteiNyushohiCollection to給付実績特定入所者費用List(
             List<DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity> entities) {
         if (entities == null || entities.isEmpty()) {
-            return new KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoCollection(Collections.EMPTY_LIST);
+            return new KyufuJissekiTokuteiNyushohiCollection(Collections.EMPTY_LIST);
         }
 
-        List<KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo> list = new ArrayList<>();
+        List<KyufuJissekiTokuteiNyushohi> list = new ArrayList<>();
         //前　明細
         for (DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity : entities) {
             list.add(
-                    new KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo(
+                    new KyufuJissekiTokuteiNyushohi(
                             new RString(entity.getServiceSyuruiCode().toString().concat(entity.getServiceKomokuCode().toString())),
                             new Decimal(entity.getFutanGendogaku()),
                             前後1[0],
@@ -711,7 +711,7 @@ public final class KyufuJissekiMapper {
         }
 
         //前　合計
-        list.add(new KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo(
+        list.add(new KyufuJissekiTokuteiNyushohi(
                 null,
                 null,
                 前後1[0],
@@ -741,7 +741,7 @@ public final class KyufuJissekiMapper {
         //後　明細
         for (DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity : entities) {
             list.add(
-                    new KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo(
+                    new KyufuJissekiTokuteiNyushohi(
                             new RString(entity.getServiceSyuruiCode().toString().concat(entity.getServiceKomokuCode().toString())),
                             new Decimal(entity.getFutanGendogaku()),
                             前後1[1],
@@ -770,7 +770,7 @@ public final class KyufuJissekiMapper {
         }
 
         //後　合計
-        list.add(new KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo(
+        list.add(new KyufuJissekiTokuteiNyushohi(
                 null,
                 null,
                 前後1[1],
@@ -797,7 +797,7 @@ public final class KyufuJissekiMapper {
                 null
         ));
 
-        return new KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoCollection(list);
+        return new KyufuJissekiTokuteiNyushohiCollection(list);
     }
 
 }

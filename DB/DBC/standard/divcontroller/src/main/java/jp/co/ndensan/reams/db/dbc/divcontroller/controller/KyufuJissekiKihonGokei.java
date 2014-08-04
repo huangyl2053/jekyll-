@@ -36,13 +36,10 @@ public class KyufuJissekiKihonGokei {
         ResponseData<KyufuJissekiKihonGokeiDiv> response = new ResponseData<>();
 
         KyufuJisseki kyufuJisseki = get給付実績();
-        jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonGokei iKihonGokei = null;
 
         //給付実績基本合計データ取得、設定
         List<dgKyufuJissekiKihonGokei_Row> kyufuJissekiKihonGokeiList = new ArrayList<>();
-        for (Iterator<jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonGokei> i = kyufuJisseki.get基本().get合計().iterator(); i.hasNext();) {
-
-            iKihonGokei = i.next();
+        for (jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonGokei iKihonGokei : kyufuJisseki.get基本().get合計()) {
 
             RString rsHokenKohi = iKihonGokei.get保険公費();
             RString rsZengo = iKihonGokei.get前後();

@@ -37,9 +37,9 @@ public class KyufuJissekiServiceDacTest extends DbcTestDacBase {
     private static final Range<ServiceTeikyoYM> notFoundサービス提供期間
             = new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth("201301")), new ServiceTeikyoYM(new FlexibleYearMonth("201306")));
     private static final Range<ServiceTeikyoYM> foundサービス提供期間_データ5件
-            = new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth("200501")), new ServiceTeikyoYM(new FlexibleYearMonth("201212")));
+            = new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth("200501")), new ServiceTeikyoYM(new FlexibleYearMonth("200712")));
     private static final Range<ServiceTeikyoYM> foundサービス提供期間_データ1件
-            = new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth("201201")), new ServiceTeikyoYM(new FlexibleYearMonth("201212")));
+            = new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth("201206")), new ServiceTeikyoYM(new FlexibleYearMonth("201208")));
 
     @BeforeClass
     public static void setUpClass() {
@@ -84,7 +84,7 @@ public class KyufuJissekiServiceDacTest extends DbcTestDacBase {
         }
 
         @Test
-        public void データが4件あるサービス提供期間を指定した時_selectは_5件のデータが入ったentityListを返す() {
+        public void データが5件あるサービス提供期間を指定した時_selectは_5件のデータが入ったentityListを返す() {
             List<DbV3016KyufujissekiShuruiDetailEntity> result = sut.select(
                     found被保番号, foundサービス提供期間_データ5件.getFrom(), foundサービス提供期間_データ5件.getTo());
             assertThat(result.size(), is(5));

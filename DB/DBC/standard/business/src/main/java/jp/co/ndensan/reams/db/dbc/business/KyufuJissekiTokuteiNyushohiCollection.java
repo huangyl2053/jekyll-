@@ -15,16 +15,16 @@ import static java.util.Objects.requireNonNull;
  *
  * @author N8223　朴義一
  */
-public class KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoCollection implements Iterable<KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo> {
+public class KyufuJissekiTokuteiNyushohiCollection implements Iterable<KyufuJissekiTokuteiNyushohi> {
 
-    private final List<KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo> list;
+    private final List<KyufuJissekiTokuteiNyushohi> list;
 
     /**
      * インスタンスを生成します。
      *
      * @param list 給付実績の特定入所者費情報List
      */
-    public KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoCollection(List<KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo> list) {
+    public KyufuJissekiTokuteiNyushohiCollection(List<KyufuJissekiTokuteiNyushohi> list) {
         this.list = requireNonNull(list, Messages.E00001.replace("給付実績の特定入所者費情報List").getMessage());
     }
 
@@ -47,7 +47,7 @@ public class KyufuJissekiTokuteiNyushosyaKaigoServiceHiyoCollection implements I
     }
 
     @Override
-    public Iterator<KyufuJissekiTokuteiNyushosyaKaigoServiceHiyo> iterator() {
+    public Iterator<KyufuJissekiTokuteiNyushohi> iterator() {
         return list.iterator();
     }
 }

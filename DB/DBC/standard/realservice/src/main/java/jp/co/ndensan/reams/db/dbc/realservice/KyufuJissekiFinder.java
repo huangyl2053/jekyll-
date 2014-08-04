@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKyotakuServiceCollection;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiMeisaiCollection;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigenCollection;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukeiCollection;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiTokuteiNyushohiCollection;
 import jp.co.ndensan.reams.db.dbc.entity.mapper.KyufuJissekiMapper;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiKihonDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiKyotakuServiceDac;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiShafukuKeigenDa
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiYoguHanbaihiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiJutakuKaishuhiDac;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.KyufuJissekiServiceDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -41,6 +43,7 @@ public class KyufuJissekiFinder {
     private final IKyufuJissekiKyotakuServiceDac kyotakuDac;
     private final IKyufuJissekiYoguHanbaihiDac yoguDac;
     private final IKyufuJissekiJutakuKaishuhiDac jutakuDac;
+    private final IKyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac nyushoDac;
 
     /**
      * InstanceProviderを用いてDacのインスタンスを生成し、メンバ変数に保持します。
@@ -54,6 +57,7 @@ public class KyufuJissekiFinder {
         kyotakuDac = InstanceProvider.createWithCustomize(IKyufuJissekiKyotakuServiceDac.class);
         yoguDac = InstanceProvider.createWithCustomize(IKyufuJissekiYoguHanbaihiDac.class);
         jutakuDac = InstanceProvider.createWithCustomize(IKyufuJissekiJutakuKaishuhiDac.class);
+        nyushoDac = InstanceProvider.createWithCustomize(IKyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac.class);
     }
 
     /**
@@ -66,6 +70,7 @@ public class KyufuJissekiFinder {
      * @param kyotakuDac 給付実績サービス計画費Dac
      * @param yoguDac 給付実績福祉用具購入費Dac
      * @param jutakuDac 給付実績住宅改修費Dac
+     * @param nyushoDac 給付実績特定入所者費用Dac
      */
     KyufuJissekiFinder(
             KyufuJissekiServiceDac serviceDac,
@@ -74,16 +79,18 @@ public class KyufuJissekiFinder {
             IKyufuJissekiShukeiDac shukeiDac,
             IKyufuJissekiShafukuKeigenDac shafukuDac,
             IKyufuJissekiKyotakuServiceDac kyotakuDac,
-            IKyufuJissekiYoguHanbaihiDac fukushiYoguHanbaihiDac,
-            IKyufuJissekiJutakuKaishuhiDac jutakuKaishuhiDac) {
+            IKyufuJissekiYoguHanbaihiDac yoguDac,
+            IKyufuJissekiJutakuKaishuhiDac jutakuDac,
+            IKyufuJissekiTokuteiNyushosyaKaigoServiceHiyoDac nyushoDac) {
         this.serviceDac = serviceDac;
         this.kihonDac = kihonDac;
         this.meisaiDac = meisaiDac;
         this.shukeiDac = shukeiDac;
         this.shafukuDac = shafukuDac;
         this.kyotakuDac = kyotakuDac;
-        this.yoguDac = fukushiYoguHanbaihiDac;
-        this.jutakuDac = jutakuKaishuhiDac;
+        this.yoguDac = yoguDac;
+        this.jutakuDac = jutakuDac;
+        this.nyushoDac = nyushoDac;
     }
 
     /**
@@ -113,7 +120,8 @@ public class KyufuJissekiFinder {
                 get給付実績社会福祉法人軽減額(詳細キー情報),
                 get給付実績サービス計画費(詳細キー情報),
                 get給付実績福祉用具購入費(詳細キー情報),
-                get給付実績住宅改修費(詳細キー情報));
+                get給付実績住宅改修費(詳細キー情報),
+                get特定入所者費用(詳細キー情報));
     }
 
     private KyufuJissekiKihon get給付実績基本(KyufuJissekiDetailKeyInfo 詳細キー情報) {
@@ -172,7 +180,7 @@ public class KyufuJissekiFinder {
     }
 
     private KyufuJissekiYoguHanbaihiCollection get給付実績福祉用具購入費(KyufuJissekiDetailKeyInfo 詳細キー情報) {
-        return KyufuJissekiMapper.to福祉用具購入費List(yoguDac.select(
+        return KyufuJissekiMapper.to給付実績福祉用具購入費List(yoguDac.select(
                 詳細キー情報.get交換情報識別番号(),
                 詳細キー情報.get入力識別番号().getInputShikibetsuNoCode(),
                 詳細キー情報.get証記載保険者番号(),
@@ -183,7 +191,18 @@ public class KyufuJissekiFinder {
     }
 
     private KyufuJissekiJutakuKaishuhiCollection get給付実績住宅改修費(KyufuJissekiDetailKeyInfo 詳細キー情報) {
-        return KyufuJissekiMapper.to住宅改修費情報List(jutakuDac.select(
+        return KyufuJissekiMapper.to給付実績住宅改修費List(jutakuDac.select(
+                詳細キー情報.get交換情報識別番号(),
+                詳細キー情報.get入力識別番号().getInputShikibetsuNoCode(),
+                詳細キー情報.get証記載保険者番号(),
+                詳細キー情報.get被保番号(),
+                詳細キー情報.getサービス提供年月().value(),
+                詳細キー情報.get事業所番号(),
+                詳細キー情報.get通番()));
+    }
+
+    private KyufuJissekiTokuteiNyushohiCollection get特定入所者費用(KyufuJissekiDetailKeyInfo 詳細キー情報) {
+        return KyufuJissekiMapper.to給付実績特定入所者費用List(nyushoDac.select(
                 詳細キー情報.get交換情報識別番号(),
                 詳細キー情報.get入力識別番号().getInputShikibetsuNoCode(),
                 詳細キー情報.get証記載保険者番号(),
