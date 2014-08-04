@@ -7,11 +7,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceCode;
@@ -23,7 +23,6 @@ import java.util.Objects;
  */
 public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3025KyufujissekiKyotakuService");
 
@@ -38,11 +37,10 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
     @PrimaryKey
     private KokanShikibetsuNo kokanJohoShikibetsuNo;
     @PrimaryKey
-    private NyuryokuShikibetsuNo inputShikibetsuNo;
+    private RString inputShikibetsuNo;
     @PrimaryKey
     private RString recodeShubetsuCode;
     @PrimaryKey
-    //TODO n8178 城間篤人 項目名は証記載保険者であるが、DB上の型が証記載保険者ではない。テーブルの修正かEntity再生成のいずれかが必要 2014年7月末
     private ShoKisaiHokenshaNo shokisaiHokenshaNo;
     @PrimaryKey
     private KaigoHihokenshaNo hiHokenshaNo;
@@ -51,27 +49,25 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
     @PrimaryKey
     private JigyoshaNo jigyoshoNo;
     @PrimaryKey
-    private RString toshiNo;
+    private RString servicePlanhiMeisaiLineNo;
     @PrimaryKey
+    private ToshiNo toshiNo;
     private RString shiteiKijunGaitoJigyoshaKubunCode;
     private Decimal tanisuTanka;
-    @PrimaryKey
     private FlexibleDate kyotakuServiceSakuseiIraiYMD;
-    @PrimaryKey
-    private RString servicePlanhiMeisaiLineNo;
     private ServiceCode serviceCode;
-    private int tanisu;
+    private Decimal tanisu;
     private int kaisu;
-    private int serviceTanisu;
-    private int serviceTanisuTotal;
-    private int seikyuKingaku;
+    private Decimal serviceTanisu;
+    private Decimal serviceTanisuTotal;
+    private Decimal seikyuKingaku;
     private RString tantouKaigoShienSemmoninNo;
     private RString tekiyo;
-    private int atoTanisu;
+    private Decimal atoTanisu;
     private int atoKaisu;
-    private int atoServiceTanisu;
-    private int atoServiceTanisuTotal;
-    private int atoSeikyuKingaku;
+    private Decimal atoServiceTanisu;
+    private Decimal atoServiceTanisuTotal;
+    private Decimal atoSeikyuKingaku;
     private int saishinsaKaisu;
     private int kagoKaisu;
     private FlexibleYearMonth shinsaYM;
@@ -80,7 +76,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getInsertDantaiCd
-     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -89,7 +84,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setInsertDantaiCd
-     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -98,7 +92,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getIsDeleted
-     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -107,16 +100,15 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setIsDeleted
-     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * setLastUpdateReamsLoginId
-     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -125,7 +117,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getKokanJohoShikibetsuNo
-     *
      * @return kokanJohoShikibetsuNo
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
@@ -134,7 +125,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setKokanJohoShikibetsuNo
-     *
      * @param kokanJohoShikibetsuNo kokanJohoShikibetsuNo
      */
     public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
@@ -143,25 +133,22 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getInputShikibetsuNo
-     *
      * @return inputShikibetsuNo
      */
-    public NyuryokuShikibetsuNo getInputShikibetsuNo() {
+    public RString getInputShikibetsuNo() {
         return inputShikibetsuNo;
     }
 
     /**
      * setInputShikibetsuNo
-     *
      * @param inputShikibetsuNo inputShikibetsuNo
      */
-    public void setInputShikibetsuNo(NyuryokuShikibetsuNo inputShikibetsuNo) {
+    public void setInputShikibetsuNo(RString inputShikibetsuNo) {
         this.inputShikibetsuNo = inputShikibetsuNo;
     }
 
     /**
      * getRecodeShubetsuCode
-     *
      * @return recodeShubetsuCode
      */
     public RString getRecodeShubetsuCode() {
@@ -170,7 +157,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setRecodeShubetsuCode
-     *
      * @param recodeShubetsuCode recodeShubetsuCode
      */
     public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
@@ -179,7 +165,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getShokisaiHokenshaNo
-     *
      * @return shokisaiHokenshaNo
      */
     public ShoKisaiHokenshaNo getShokisaiHokenshaNo() {
@@ -188,7 +173,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setShokisaiHokenshaNo
-     *
      * @param shokisaiHokenshaNo shokisaiHokenshaNo
      */
     public void setShokisaiHokenshaNo(ShoKisaiHokenshaNo shokisaiHokenshaNo) {
@@ -197,7 +181,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getHiHokenshaNo
-     *
      * @return hiHokenshaNo
      */
     public KaigoHihokenshaNo getHiHokenshaNo() {
@@ -206,7 +189,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setHiHokenshaNo
-     *
      * @param hiHokenshaNo hiHokenshaNo
      */
     public void setHiHokenshaNo(KaigoHihokenshaNo hiHokenshaNo) {
@@ -215,7 +197,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getServiceTeikyoYM
-     *
      * @return serviceTeikyoYM
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -224,7 +205,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setServiceTeikyoYM
-     *
      * @param serviceTeikyoYM serviceTeikyoYM
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -233,7 +213,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getJigyoshoNo
-     *
      * @return jigyoshoNo
      */
     public JigyoshaNo getJigyoshoNo() {
@@ -242,7 +221,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setJigyoshoNo
-     *
      * @param jigyoshoNo jigyoshoNo
      */
     public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
@@ -250,81 +228,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
     }
 
     /**
-     * getToshiNo
-     *
-     * @return toshiNo
-     */
-    public RString getToshiNo() {
-        return toshiNo;
-    }
-
-    /**
-     * setToshiNo
-     *
-     * @param toshiNo toshiNo
-     */
-    public void setToshiNo(RString toshiNo) {
-        this.toshiNo = toshiNo;
-    }
-
-    /**
-     * getShiteiKijunGaitoJigyoshaKubunCode
-     *
-     * @return shiteiKijunGaitoJigyoshaKubunCode
-     */
-    public RString getShiteiKijunGaitoJigyoshaKubunCode() {
-        return shiteiKijunGaitoJigyoshaKubunCode;
-    }
-
-    /**
-     * setShiteiKijunGaitoJigyoshaKubunCode
-     *
-     * @param shiteiKijunGaitoJigyoshaKubunCode
-     * shiteiKijunGaitoJigyoshaKubunCode
-     */
-    public void setShiteiKijunGaitoJigyoshaKubunCode(RString shiteiKijunGaitoJigyoshaKubunCode) {
-        this.shiteiKijunGaitoJigyoshaKubunCode = shiteiKijunGaitoJigyoshaKubunCode;
-    }
-
-    /**
-     * getTanisuTanka
-     *
-     * @return tanisuTanka
-     */
-    public Decimal getTanisuTanka() {
-        return tanisuTanka;
-    }
-
-    /**
-     * setTanisuTanka
-     *
-     * @param tanisuTanka tanisuTanka
-     */
-    public void setTanisuTanka(Decimal tanisuTanka) {
-        this.tanisuTanka = tanisuTanka;
-    }
-
-    /**
-     * getKyotakuServiceSakuseiIraiYMD
-     *
-     * @return kyotakuServiceSakuseiIraiYMD
-     */
-    public FlexibleDate getKyotakuServiceSakuseiIraiYMD() {
-        return kyotakuServiceSakuseiIraiYMD;
-    }
-
-    /**
-     * setKyotakuServiceSakuseiIraiYMD
-     *
-     * @param kyotakuServiceSakuseiIraiYMD kyotakuServiceSakuseiIraiYMD
-     */
-    public void setKyotakuServiceSakuseiIraiYMD(FlexibleDate kyotakuServiceSakuseiIraiYMD) {
-        this.kyotakuServiceSakuseiIraiYMD = kyotakuServiceSakuseiIraiYMD;
-    }
-
-    /**
      * getServicePlanhiMeisaiLineNo
-     *
      * @return servicePlanhiMeisaiLineNo
      */
     public RString getServicePlanhiMeisaiLineNo() {
@@ -333,7 +237,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setServicePlanhiMeisaiLineNo
-     *
      * @param servicePlanhiMeisaiLineNo servicePlanhiMeisaiLineNo
      */
     public void setServicePlanhiMeisaiLineNo(RString servicePlanhiMeisaiLineNo) {
@@ -341,8 +244,71 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
     }
 
     /**
+     * getToshiNo
+     * @return toshiNo
+     */
+    public ToshiNo getToshiNo() {
+        return toshiNo;
+    }
+
+    /**
+     * setToshiNo
+     * @param toshiNo toshiNo
+     */
+    public void setToshiNo(ToshiNo toshiNo) {
+        this.toshiNo = toshiNo;
+    }
+
+    /**
+     * getShiteiKijunGaitoJigyoshaKubunCode
+     * @return shiteiKijunGaitoJigyoshaKubunCode
+     */
+    public RString getShiteiKijunGaitoJigyoshaKubunCode() {
+        return shiteiKijunGaitoJigyoshaKubunCode;
+    }
+
+    /**
+     * setShiteiKijunGaitoJigyoshaKubunCode
+     * @param shiteiKijunGaitoJigyoshaKubunCode shiteiKijunGaitoJigyoshaKubunCode
+     */
+    public void setShiteiKijunGaitoJigyoshaKubunCode(RString shiteiKijunGaitoJigyoshaKubunCode) {
+        this.shiteiKijunGaitoJigyoshaKubunCode = shiteiKijunGaitoJigyoshaKubunCode;
+    }
+
+    /**
+     * getTanisuTanka
+     * @return tanisuTanka
+     */
+    public Decimal getTanisuTanka() {
+        return tanisuTanka;
+    }
+
+    /**
+     * setTanisuTanka
+     * @param tanisuTanka tanisuTanka
+     */
+    public void setTanisuTanka(Decimal tanisuTanka) {
+        this.tanisuTanka = tanisuTanka;
+    }
+
+    /**
+     * getKyotakuServiceSakuseiIraiYMD
+     * @return kyotakuServiceSakuseiIraiYMD
+     */
+    public FlexibleDate getKyotakuServiceSakuseiIraiYMD() {
+        return kyotakuServiceSakuseiIraiYMD;
+    }
+
+    /**
+     * setKyotakuServiceSakuseiIraiYMD
+     * @param kyotakuServiceSakuseiIraiYMD kyotakuServiceSakuseiIraiYMD
+     */
+    public void setKyotakuServiceSakuseiIraiYMD(FlexibleDate kyotakuServiceSakuseiIraiYMD) {
+        this.kyotakuServiceSakuseiIraiYMD = kyotakuServiceSakuseiIraiYMD;
+    }
+
+    /**
      * getServiceCode
-     *
      * @return serviceCode
      */
     public ServiceCode getServiceCode() {
@@ -351,7 +317,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setServiceCode
-     *
      * @param serviceCode serviceCode
      */
     public void setServiceCode(ServiceCode serviceCode) {
@@ -360,25 +325,22 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getTanisu
-     *
      * @return tanisu
      */
-    public int getTanisu() {
+    public Decimal getTanisu() {
         return tanisu;
     }
 
     /**
      * setTanisu
-     *
      * @param tanisu tanisu
      */
-    public void setTanisu(int tanisu) {
+    public void setTanisu(Decimal tanisu) {
         this.tanisu = tanisu;
     }
 
     /**
      * getKaisu
-     *
      * @return kaisu
      */
     public int getKaisu() {
@@ -387,7 +349,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setKaisu
-     *
      * @param kaisu kaisu
      */
     public void setKaisu(int kaisu) {
@@ -396,61 +357,54 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getServiceTanisu
-     *
      * @return serviceTanisu
      */
-    public int getServiceTanisu() {
+    public Decimal getServiceTanisu() {
         return serviceTanisu;
     }
 
     /**
      * setServiceTanisu
-     *
      * @param serviceTanisu serviceTanisu
      */
-    public void setServiceTanisu(int serviceTanisu) {
+    public void setServiceTanisu(Decimal serviceTanisu) {
         this.serviceTanisu = serviceTanisu;
     }
 
     /**
      * getServiceTanisuTotal
-     *
      * @return serviceTanisuTotal
      */
-    public int getServiceTanisuTotal() {
+    public Decimal getServiceTanisuTotal() {
         return serviceTanisuTotal;
     }
 
     /**
      * setServiceTanisuTotal
-     *
      * @param serviceTanisuTotal serviceTanisuTotal
      */
-    public void setServiceTanisuTotal(int serviceTanisuTotal) {
+    public void setServiceTanisuTotal(Decimal serviceTanisuTotal) {
         this.serviceTanisuTotal = serviceTanisuTotal;
     }
 
     /**
      * getSeikyuKingaku
-     *
      * @return seikyuKingaku
      */
-    public int getSeikyuKingaku() {
+    public Decimal getSeikyuKingaku() {
         return seikyuKingaku;
     }
 
     /**
      * setSeikyuKingaku
-     *
      * @param seikyuKingaku seikyuKingaku
      */
-    public void setSeikyuKingaku(int seikyuKingaku) {
+    public void setSeikyuKingaku(Decimal seikyuKingaku) {
         this.seikyuKingaku = seikyuKingaku;
     }
 
     /**
      * getTantouKaigoShienSemmoninNo
-     *
      * @return tantouKaigoShienSemmoninNo
      */
     public RString getTantouKaigoShienSemmoninNo() {
@@ -459,7 +413,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setTantouKaigoShienSemmoninNo
-     *
      * @param tantouKaigoShienSemmoninNo tantouKaigoShienSemmoninNo
      */
     public void setTantouKaigoShienSemmoninNo(RString tantouKaigoShienSemmoninNo) {
@@ -468,7 +421,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getTekiyo
-     *
      * @return tekiyo
      */
     public RString getTekiyo() {
@@ -477,7 +429,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setTekiyo
-     *
      * @param tekiyo tekiyo
      */
     public void setTekiyo(RString tekiyo) {
@@ -486,25 +437,22 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getAtoTanisu
-     *
      * @return atoTanisu
      */
-    public int getAtoTanisu() {
+    public Decimal getAtoTanisu() {
         return atoTanisu;
     }
 
     /**
      * setAtoTanisu
-     *
      * @param atoTanisu atoTanisu
      */
-    public void setAtoTanisu(int atoTanisu) {
+    public void setAtoTanisu(Decimal atoTanisu) {
         this.atoTanisu = atoTanisu;
     }
 
     /**
      * getAtoKaisu
-     *
      * @return atoKaisu
      */
     public int getAtoKaisu() {
@@ -513,7 +461,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setAtoKaisu
-     *
      * @param atoKaisu atoKaisu
      */
     public void setAtoKaisu(int atoKaisu) {
@@ -522,61 +469,54 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getAtoServiceTanisu
-     *
      * @return atoServiceTanisu
      */
-    public int getAtoServiceTanisu() {
+    public Decimal getAtoServiceTanisu() {
         return atoServiceTanisu;
     }
 
     /**
      * setAtoServiceTanisu
-     *
      * @param atoServiceTanisu atoServiceTanisu
      */
-    public void setAtoServiceTanisu(int atoServiceTanisu) {
+    public void setAtoServiceTanisu(Decimal atoServiceTanisu) {
         this.atoServiceTanisu = atoServiceTanisu;
     }
 
     /**
      * getAtoServiceTanisuTotal
-     *
      * @return atoServiceTanisuTotal
      */
-    public int getAtoServiceTanisuTotal() {
+    public Decimal getAtoServiceTanisuTotal() {
         return atoServiceTanisuTotal;
     }
 
     /**
      * setAtoServiceTanisuTotal
-     *
      * @param atoServiceTanisuTotal atoServiceTanisuTotal
      */
-    public void setAtoServiceTanisuTotal(int atoServiceTanisuTotal) {
+    public void setAtoServiceTanisuTotal(Decimal atoServiceTanisuTotal) {
         this.atoServiceTanisuTotal = atoServiceTanisuTotal;
     }
 
     /**
      * getAtoSeikyuKingaku
-     *
      * @return atoSeikyuKingaku
      */
-    public int getAtoSeikyuKingaku() {
+    public Decimal getAtoSeikyuKingaku() {
         return atoSeikyuKingaku;
     }
 
     /**
      * setAtoSeikyuKingaku
-     *
      * @param atoSeikyuKingaku atoSeikyuKingaku
      */
-    public void setAtoSeikyuKingaku(int atoSeikyuKingaku) {
+    public void setAtoSeikyuKingaku(Decimal atoSeikyuKingaku) {
         this.atoSeikyuKingaku = atoSeikyuKingaku;
     }
 
     /**
      * getSaishinsaKaisu
-     *
      * @return saishinsaKaisu
      */
     public int getSaishinsaKaisu() {
@@ -585,7 +525,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setSaishinsaKaisu
-     *
      * @param saishinsaKaisu saishinsaKaisu
      */
     public void setSaishinsaKaisu(int saishinsaKaisu) {
@@ -594,7 +533,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getKagoKaisu
-     *
      * @return kagoKaisu
      */
     public int getKagoKaisu() {
@@ -603,7 +541,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setKagoKaisu
-     *
      * @param kagoKaisu kagoKaisu
      */
     public void setKagoKaisu(int kagoKaisu) {
@@ -612,7 +549,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getShinsaYM
-     *
      * @return shinsaYM
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -621,7 +557,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setShinsaYM
-     *
      * @param shinsaYM shinsaYM
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
@@ -630,7 +565,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getSeiriNo
-     *
      * @return seiriNo
      */
     public RString getSeiriNo() {
@@ -639,7 +573,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setSeiriNo
-     *
      * @param seiriNo seiriNo
      */
     public void setSeiriNo(RString seiriNo) {
@@ -648,7 +581,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * getTorikomiYM
-     *
      * @return torikomiYM
      */
     public FlexibleYearMonth getTorikomiYM() {
@@ -657,7 +589,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * setTorikomiYM
-     *
      * @param torikomiYM torikomiYM
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -666,9 +597,9 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
     /**
      * このエンティティの主キーが他の{@literal DbT3025KyufujissekiKyotakuServiceEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return
+     * @@return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3025KyufujissekiKyotakuServiceEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     public boolean equalsPrimaryKeys(DbT3025KyufujissekiKyotakuServiceEntity other) {
@@ -696,20 +627,16 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
         if (!Objects.equals(this.jigyoshoNo, other.jigyoshoNo)) {
             return false;
         }
-        if (!Objects.equals(this.toshiNo, other.toshiNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.shiteiKijunGaitoJigyoshaKubunCode, other.shiteiKijunGaitoJigyoshaKubunCode)) {
-            return false;
-        }
-        if (!Objects.equals(this.kyotakuServiceSakuseiIraiYMD, other.kyotakuServiceSakuseiIraiYMD)) {
-            return false;
-        }
         if (!Objects.equals(this.servicePlanhiMeisaiLineNo, other.servicePlanhiMeisaiLineNo)) {
+            return false;
+        }
+        if (!Objects.equals(this.toshiNo, other.toshiNo)) {
             return false;
         }
         return true;
     }
 
 // </editor-fold>
+
+
 }

@@ -553,20 +553,20 @@ public final class KyufuJissekiMapper {
                 entity.getTanisuTanka(), null
             };
             Decimal[] 単位数 = {
-                new Decimal(entity.getTanisu()), null,
-                new Decimal(entity.getAtoTanisu()), null
+                entity.getTanisu(), null,
+                entity.getAtoTanisu(), null
             };
             Integer[] 回数 = {
                 new Integer(entity.getKaisu()), null,
                 new Integer(entity.getAtoKaisu()), null
             };
             Decimal[] サービス単位数 = {
-                new Decimal(entity.getServiceTanisu()), new Decimal(entity.getServiceTanisuTotal()),
-                new Decimal(entity.getAtoServiceTanisu()), new Decimal(entity.getAtoServiceTanisuTotal())
+                entity.getServiceTanisu(), entity.getServiceTanisuTotal(),
+                entity.getAtoServiceTanisu(), entity.getAtoServiceTanisuTotal()
             };
             Decimal[] 請求金額 = {
-                null, new Decimal(entity.getSeikyuKingaku()),
-                null, new Decimal(entity.getAtoSeikyuKingaku())
+                null, entity.getSeikyuKingaku(),
+                null, entity.getAtoSeikyuKingaku()
             };
             RString[] 専門員番号 = {
                 entity.getTantouKaigoShienSemmoninNo(), RString.EMPTY,

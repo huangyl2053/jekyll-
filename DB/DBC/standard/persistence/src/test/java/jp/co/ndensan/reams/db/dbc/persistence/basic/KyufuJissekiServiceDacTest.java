@@ -33,13 +33,13 @@ public class KyufuJissekiServiceDacTest extends DbcTestDacBase {
     private static final KaigoHihokenshaNo found被保番号 = new KaigoHihokenshaNo(new RString("0000000034"));
     private static final KaigoHihokenshaNo notFound被保番号 = new KaigoHihokenshaNo(new RString("0000000099"));
     private static final ServiceTeikyoYM foundサービス提供年月_データ4件 = new ServiceTeikyoYM(new FlexibleYearMonth("200511"));
-    private static final ServiceTeikyoYM foundサービス提供年月_データ1件 = new ServiceTeikyoYM(new FlexibleYearMonth("201207"));
+    private static final ServiceTeikyoYM foundサービス提供年月_データ1件 = new ServiceTeikyoYM(new FlexibleYearMonth("200704"));
     private static final Range<ServiceTeikyoYM> notFoundサービス提供期間
             = new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth("201301")), new ServiceTeikyoYM(new FlexibleYearMonth("201306")));
     private static final Range<ServiceTeikyoYM> foundサービス提供期間_データ5件
             = new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth("200501")), new ServiceTeikyoYM(new FlexibleYearMonth("200712")));
     private static final Range<ServiceTeikyoYM> foundサービス提供期間_データ1件
-            = new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth("201206")), new ServiceTeikyoYM(new FlexibleYearMonth("201208")));
+            = new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth("200703")), new ServiceTeikyoYM(new FlexibleYearMonth("200705")));
 
     @BeforeClass
     public static void setUpClass() {

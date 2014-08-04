@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.entity.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
@@ -17,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -42,7 +40,7 @@ public final class KyufujissekiShuruiDetailEntityGenerator {
     public static final Decimal 保険対象合計 = new Decimal(5000);
     public static final Decimal 保険請求額 = new Decimal(5000);
     public static final Decimal 保険出来高単位数合計 = new Decimal(5000);
-    public static final RString サービスコード = new RString("113137");
+    public static final ServiceCode サービスコード = new ServiceCode(new RString("113137"));
     public static final Decimal サービス計画費単位数合計 = new Decimal(5000);
     public static final Decimal ケアマネジメント費単位数 = new Decimal(5000);
 
@@ -62,11 +60,11 @@ public final class KyufujissekiShuruiDetailEntityGenerator {
         entity.setToshiNo(通番);
         entity.setServiceSyuruiCode(サービス種類コード);
         entity.setHokenRiyoshaFutangaku(保険利用負担額);
-        entity.setAtoHokenTanisuTotalDecimal(保険対象合計);
+        entity.setAtoHokenTanisuTotal(保険対象合計);
         entity.setAtoHokenSeikyugaku(保険請求額);
         entity.setAtoHokenDekidakaTanisuTotal(保険出来高単位数合計);
-        entity.setServicecode(サービスコード);
-        entity.setAtoservicetanisutotal(サービス計画費単位数合計);
+        entity.setServiceCode(サービスコード);
+        entity.setAtoServiceTanisuTotal(サービス計画費単位数合計);
         entity.setAtotanisu(ケアマネジメント費単位数);
 
         return entity;

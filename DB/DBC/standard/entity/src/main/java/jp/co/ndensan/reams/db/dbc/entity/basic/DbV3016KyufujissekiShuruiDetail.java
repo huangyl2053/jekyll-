@@ -21,8 +21,8 @@ public enum DbV3016KyufujissekiShuruiDetail implements IColumnDefinition {
     atoHokenTanisuTotal(10, 0),
     atoHokenSeikyugaku(9, 0),
     atoHokenDekidakaTanisuTotal(10, 0),
-    servicecode(2147483647, 0),
-    atoservicetanisutotal(2147483647, 0),
+    serviceCode(2147483647, 0),
+    atoServiceTanisuTotal(10, 0),
     atotanisu(2147483647, 0);
 
     private final int maxLength;
