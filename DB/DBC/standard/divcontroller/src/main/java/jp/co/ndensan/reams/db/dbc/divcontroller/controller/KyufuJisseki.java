@@ -278,8 +278,8 @@ public class KyufuJisseki {
             RString rsTanisu = setCommFormat(iKyotakuService.get単位数());
             RString rsKaisu = toRString(iKyotakuService.get回数());
             RString rsServiceTanisu = toRString(iKyotakuService.getサービス単位数());
-            RString rsSeikyuKingaku = toRString(iKyotakuService.getサービス単位数());
-            RString rsTantoKaigoShienSenmoninNo = toRString(iKyotakuService.get過誤回数());
+            RString rsSeikyuKingaku = toRString(iKyotakuService.get請求金額());
+            RString rsTantoKaigoShienSenmoninNo = iKyotakuService.get専門員番号();
             RString rsSaishinsaKaisu = toRString(iKyotakuService.get再審査回数());
             RString rsKagoKaisu = toRString(iKyotakuService.get過誤回数());
             RString rsShinsaYM = toWareki(iKyotakuService.get審査年月());
