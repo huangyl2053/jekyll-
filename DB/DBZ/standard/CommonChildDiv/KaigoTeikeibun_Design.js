@@ -27,6 +27,48 @@ var DBZ;
                     "fieldName": "KaigoTeikeibun",
                     "items": [
                         {
+                            "fieldName": "ddlTeikenbunShubetsu",
+                            "items": [],
+                            "controlType": "DropDownList",
+                            "width": "250",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "ddlTeikenbunShubetsu_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "onChange": "onChange_ddlTeikenbunShubetsu",
+                            "selectedItem": "",
+                            "dataSource": [
+                                {
+                                    "key": "key0",
+                                    "value": "value0"
+                                },
+                                {
+                                    "key": "key1",
+                                    "value": "value1"
+                                }
+                            ],
+                            "labelLText": "項目",
+                            "labelRText": "",
+                            "labelLWidth": "40",
+                            "labelRWidth": "S",
+                            "labelLAlign": 0,
+                            "labelRAlign": 0,
+                            "onFocus": "",
+                            "onBlur": ""
+                        },
+                        {
                             "fieldName": "dgTeikeibun",
                             "items": [],
                             "controlType": "DataGrid",
@@ -48,6 +90,7 @@ var DBZ;
                             "jpControlName": "",
                             "readOnly": false,
                             "height": "317",
+                            "dataSource": [],
                             "gridSetting": {
                                 "rowHeight": 25,
                                 "isMultiSelectable": false,
@@ -111,7 +154,6 @@ var DBZ;
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
-                            "dataSource": [],
                             "sortOrder": "naiyo",
                             "isAscending": true,
                             "filterList": [],
@@ -185,6 +227,10 @@ var DBZ;
                         {
                             "eventName": "onSelectBySB_Teikeibun",
                             "requestUrl": "dbz/db/dbz/KaigoTeikeibunSelector/onSelectBySelectButton_dgTeikeibun"
+                        },
+                        {
+                            "eventName": "onChange_ddlTeikenbunShubetsu",
+                            "requestUrl": "dbz/db/dbz/KaigoTeikeibunSelector/onChange_ddlTeikenbunShubetsu"
                         }
                     ],
                     "hiddenInput": [

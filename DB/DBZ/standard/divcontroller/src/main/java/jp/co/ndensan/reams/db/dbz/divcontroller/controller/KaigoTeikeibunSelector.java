@@ -6,16 +6,17 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.KaigoTeikeibun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoTeikeibun.KaigoTeikeibunDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoTeikeibun.dgTeikeibun_Row;
 import jp.co.ndensan.reams.db.dbz.realservice.KaigoTeikeibunFinder;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunShubetsu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunShubetsuTokki;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunShubetsuElseTokki;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunKubun;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  *
@@ -32,43 +33,34 @@ public class KaigoTeikeibunSelector {
     public ResponseData onLoad(KaigoTeikeibunDiv div) {
         ResponseData<KaigoTeikeibunDiv> response = new ResponseData<>();
 
-        //タイトル設定
-        if (div.getTeikeiKbn().equals(TeikeibunKubun.特記事項.getCode())) {
-            div.setTitle(TeikeibunKubun.特記事項.toRString());
-        } else if (div.getTeikeiKbn().equals(TeikeibunKubun.特記事項以外.getCode())) {
+        //定型文種別ドロップダウンリスト設定
+        div.getDdlTeikenbunShubetsu().setDataSource(
+                getTeikeibunShubetsuList(div));
 
-            if (div.getTeikeiShubetsu().isEmpty()) {
-                div.setTitle(TeikeibunKubun.特記事項以外.toRString());
-            } else {
-                div.setTitle(TeikeibunShubetsu.toValue(div.getTeikeiShubetsu()).toRString());
-            }
-        }
+        div.getDdlTeikenbunShubetsu().setSelectedIndex(0);
 
         List<KaigoTeikeibun> list = new ArrayList<>();
         if (div.getTeikeiShubetsu().isEmpty()) {
-            //定型区分をキーにして定型文情報を検索
+            //定型区分、種別"001"をキーにして定型文情報を検索
             list = new KaigoTeikeibunFinder().getTeikeibunList(
-                    div.getTeikeiKbn());
+                    div.getTeikeiKbn(),
+                    new RString("001"));
+
+//            //定型区分をキーにして定型文情報を検索
+//            list = new KaigoTeikeibunFinder().getTeikeibunList(
+//                    div.getTeikeiKbn());
         } else {
             //定型区分、種別をキーにして定型文情報を検索
             list = new KaigoTeikeibunFinder().getTeikeibunList(
                     div.getTeikeiKbn(),
                     div.getTeikeiShubetsu());
+
+            div.getDdlTeikenbunShubetsu().setDisabled(true);
         }
 
-        if (list.isEmpty()) {
-            div.getDgTeikeibun().setDataSource(Collections.EMPTY_LIST);
-        } else {
-            //定型文データグリッド設定
-            List<dgTeikeibun_Row> teikeibunList = new ArrayList<>();
-            for (KaigoTeikeibun teikeibun : list) {
-                teikeibunList.add(createTeikeibunListRow(
-                        teikeibun.getコード(),
-                        teikeibun.get内容()
-                ));
-            }
-            div.getDgTeikeibun().setDataSource(teikeibunList);
-        }
+        //定型文データグリッドの設定
+        List<dgTeikeibun_Row> teikeibunList = getDgTeikeibunList(list);
+        div.getDgTeikeibun().setDataSource(teikeibunList);
 
         response.data = div;
         return response;
@@ -86,6 +78,75 @@ public class KaigoTeikeibunSelector {
     }
 
     /**
+     * 定型文種別ドロップダウンリストに表示するデータを取得します。
+     *
+     * @param div 定型文情報Div
+     * @return 定型文種別表示List
+     */
+    private List<KeyValueDataSource> getTeikeibunShubetsuList(KaigoTeikeibunDiv div) {
+
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+
+        if (div.getTeikeiKbn().equals(TeikeibunKubun.特記事項.getCode())) {
+
+            if (div.getTeikeiShubetsu().isEmpty()) {
+
+                for (TeikeibunShubetsuTokki value : TeikeibunShubetsuTokki.values()) {
+                    dataSource.add(new KeyValueDataSource(
+                            value.getCode(), value.toRString())
+                    );
+                }
+
+            } else {
+
+                dataSource.add(new KeyValueDataSource(
+                        TeikeibunShubetsuTokki.toValue(div.getTeikeiShubetsu()).getCode(),
+                        TeikeibunShubetsuTokki.toValue(div.getTeikeiShubetsu()).toRString()));
+
+            }
+
+        } else if (div.getTeikeiKbn().equals(TeikeibunKubun.特記事項以外.getCode())) {
+
+            if (div.getTeikeiShubetsu().isEmpty()) {
+
+                for (TeikeibunShubetsuElseTokki value : TeikeibunShubetsuElseTokki.values()) {
+                    dataSource.add(new KeyValueDataSource(
+                            value.getCode(), value.toRString())
+                    );
+                }
+
+            } else {
+
+                dataSource.add(new KeyValueDataSource(
+                        TeikeibunShubetsuElseTokki.toValue(div.getTeikeiShubetsu()).getCode(),
+                        TeikeibunShubetsuElseTokki.toValue(div.getTeikeiShubetsu()).toRString()));
+
+            }
+        }
+        return dataSource;
+    }
+
+    /**
+     * 定型文データグリッドに表示するデータを取得します。
+     *
+     * @param div 介護定型文情報List
+     * @return 定型文表示List
+     */
+    private List<dgTeikeibun_Row> getDgTeikeibunList(List<KaigoTeikeibun> list) {
+        List<dgTeikeibun_Row> teikeibunList = new ArrayList<>();
+
+        if (!list.isEmpty()) {
+            for (KaigoTeikeibun teikeibun : list) {
+                teikeibunList.add(createTeikeibunListRow(
+                        teikeibun.getコード(),
+                        teikeibun.get内容()
+                ));
+            }
+        }
+        return teikeibunList;
+    }
+
+    /**
      * 定型文選択画面-「定型文データグリッド」選択時の処理を表します。
      *
      * @param div 定型文情報Div
@@ -100,4 +161,25 @@ public class KaigoTeikeibunSelector {
         return response;
     }
 
+    /**
+     * 定型文選択画面-「定型文種別ドロップダウンリスト」選択変更時の処理を表します。
+     *
+     * @param div 定型文情報Div
+     * @return ResponseData
+     */
+    public ResponseData onChange_ddlTeikenbunShubetsu(KaigoTeikeibunDiv div) {
+        ResponseData<KaigoTeikeibunDiv> response = new ResponseData<>();
+
+        List<KaigoTeikeibun> list = new ArrayList<>();
+        list = new KaigoTeikeibunFinder().getTeikeibunList(
+                div.getTeikeiKbn(),
+                div.getDdlTeikenbunShubetsu().getSelectedKey());
+
+        //定型文データグリッドの設定
+        List<dgTeikeibun_Row> teikeibunList = getDgTeikeibunList(list);
+        div.getDgTeikeibun().setDataSource(teikeibunList);
+
+        response.data = div;
+        return response;
+    }
 }

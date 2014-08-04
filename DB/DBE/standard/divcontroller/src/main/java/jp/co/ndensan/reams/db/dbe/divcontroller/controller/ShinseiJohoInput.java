@@ -44,7 +44,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunShubetsu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunShubetsuElseTokki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -1046,7 +1046,7 @@ public class ShinseiJohoInput {
         @Override
         public void onLoad() {
             div.setTeikeiKbn(TeikeibunKubun.特記事項以外.getCode());
-            div.setTeikeiShubetsu(TeikeibunShubetsu.申請理由.getCode());
+            div.setTeikeiShubetsu(TeikeibunShubetsuElseTokki.申請理由.getCode());
         }
 
         @Override
