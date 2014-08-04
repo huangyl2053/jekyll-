@@ -195,20 +195,6 @@ public class KyufuJisseki {
         kohiDiv.getTxtKyufuJissekiKihonKohiJukyushaNo3().setValue(kohi.get公費３受給者番号());
     }
 
-    private RDate toRDate(FlexibleDate date) {
-        if (date == null || !date.isValid()) {
-            return null;
-        }
-        return new RDate(date.toString());
-    }
-
-    private RDate toRDate(FlexibleYearMonth date) {
-        if (date == null || !date.isValid()) {
-            return null;
-        }
-        return new RDate(date.toString());
-    }
-
     private void setKyufuJissekiMeisai(KyufuJissekiMeisaiShukeiDiv panel, jp.co.ndensan.reams.db.dbc.business.KyufuJisseki kyufuJisseki) {
 
         //DBの情報を取る。
@@ -284,19 +270,19 @@ public class KyufuJisseki {
         for (KyufuJissekiKyotakuService iKyotakuService : kyufuJisseki.getサービス計画費リスト()) {
 
             RString rsShiteiKijunGaitoJigyoshoKubun = iKyotakuService.get指定基準区分();
-            RString rsIraiTodokedeYMD = setWareki(toRDate(iKyotakuService.get届出日()).toDateString());
+            RString rsIraiTodokedeYMD = toWareki(iKyotakuService.get届出日());
             RString rsService = iKyotakuService.getサービス();
-            RString rsTanisuTanka = new RString(setCommFormat(String.valueOf(iKyotakuService.get単位数単価())));
+            RString rsTanisuTanka = setCommFormat(iKyotakuService.get単位数単価());
             RString rsKettei = iKyotakuService.get決定();
             RString rsMeisaiGokei = iKyotakuService.get明細合計();
-            RString rsTanisu = new RString(setCommFormat(String.valueOf(iKyotakuService.get単位数())));
-            RString rsKaisu = new RString(String.valueOf(iKyotakuService.get回数()));
-            RString rsServiceTanisu = new RString(String.valueOf(iKyotakuService.getサービス単位数()));
-            RString rsSeikyuKingaku = new RString(String.valueOf(iKyotakuService.getサービス単位数()));
-            RString rsTantoKaigoShienSenmoninNo = new RString(String.valueOf(iKyotakuService.get過誤回数()));
-            RString rsSaishinsaKaisu = new RString(String.valueOf(iKyotakuService.get再審査回数()));
-            RString rsKagoKaisu = new RString(String.valueOf(iKyotakuService.get過誤回数()));
-            RString rsShinsaYM = setWareki(iKyotakuService.get審査年月().toDateString()).substring(0, 6);
+            RString rsTanisu = setCommFormat(iKyotakuService.get単位数());
+            RString rsKaisu = toRString(iKyotakuService.get回数());
+            RString rsServiceTanisu = toRString(iKyotakuService.getサービス単位数());
+            RString rsSeikyuKingaku = toRString(iKyotakuService.getサービス単位数());
+            RString rsTantoKaigoShienSenmoninNo = toRString(iKyotakuService.get過誤回数());
+            RString rsSaishinsaKaisu = toRString(iKyotakuService.get再審査回数());
+            RString rsKagoKaisu = toRString(iKyotakuService.get過誤回数());
+            RString rsShinsaYM = toWareki(iKyotakuService.get審査年月());
 
             serviceKeikakuhiList.add(createServiceKeikakuhiFromH2104Row(
                     rsShiteiKijunGaitoJigyoshoKubun, rsIraiTodokedeYMD, rsService, rsTanisuTanka, rsKettei, rsMeisaiGokei,
@@ -497,8 +483,60 @@ public class KyufuJisseki {
         return new Decimal(str).toString("##,###,###");
     }
 
+    private RString setCommFormat(Decimal data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return new RString(data.toString("##,###,###"));
+    }
+
+    private RDate toRDate(FlexibleDate data) {
+        if (data == null || !data.isValid()) {
+            return null;
+        }
+        return new RDate(data.toString());
+    }
+
+    private RDate toRDate(FlexibleYearMonth data) {
+        if (data == null || !data.isValid()) {
+            return null;
+        }
+        return new RDate(data.toString());
+    }
+
     private RString setWareki(RString wareki) {
+        if (wareki == null) {
+            return RString.EMPTY;
+        }
         FlexibleDate warekiYmd = new FlexibleDate(wareki);
         return warekiYmd.wareki().toDateString();
+    }
+
+    private RString toWareki(FlexibleDate data) {
+        if (data == null || !data.isValid()) {
+            return RString.EMPTY;
+        }
+        return data.wareki().toDateString();
+    }
+
+    private RString toWareki(FlexibleYearMonth data) {
+        if (data == null || !data.isValid()) {
+            return RString.EMPTY;
+        }
+        return data.wareki().toDateString().substring(0, 6);
+    }
+
+    private RString toRString(Decimal data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return new RString(data.toString());
+    }
+
+    private RString toRString(Integer data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return new RString(data.toString());
     }
 }
