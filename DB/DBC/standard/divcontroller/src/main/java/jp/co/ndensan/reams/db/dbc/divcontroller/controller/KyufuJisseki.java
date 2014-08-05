@@ -101,6 +101,7 @@ public class KyufuJisseki {
         setCareManagementhi(panel.getTabKyufuJisseki().getCareManagementhi());
 
         panel.getBtnShakaiFukushiHojinKeigengaku().setDisabled(jisseki.get社会福祉法人軽減額リスト().isEmpty());
+        panel.getBtnShakaiFukushiHojinKeigengaku().setDisabled(jisseki.get特定入所者リスト().isEmpty());
 
         response.data = panel;
 
@@ -203,24 +204,24 @@ public class KyufuJisseki {
         for (KyufuJissekiShukei iShukei : kyufuJisseki.get集計リスト()) {
 
             RString rsServiceShurui = iShukei.get種類();
-            RString rsJitsuNissu = new RString(String.valueOf(iShukei.get短実日数()));
-            RString rsKeikakuTani = new RString(String.valueOf(iShukei.get短計画日数()));
-            RString rsTaishoTani = new RString(String.valueOf(iShukei.get短実日数()));
-            RString rsTaishogaiTani = new RString(setCommFormat(iShukei.get対象外単位().toString()));
-            RString rsTankiKeikakuNissu = new RString(String.valueOf(iShukei.get短計画日数()));
+            RString rsJitsuNissu = toRString(iShukei.get短実日数());
+            RString rsKeikakuTani = toRString(iShukei.get短計画日数());
+            RString rsTaishoTani = toRString(iShukei.get短実日数());
+            RString rsTaishogaiTani = setCommFormat(iShukei.get対象外単位());
+            RString rsTankiKeikakuNissu = toRString(iShukei.get短計画日数());
             RString rsHokenKohi = iShukei.get保険公費();
             RString rsKettei = iShukei.get決定();
-            RString rsTankiJitsuNissu = new RString(String.valueOf(iShukei.get短実日数()));
-            RString rsTaniGokei = new RString(setCommFormat(iShukei.get単位合計().toString()));
-            RString rsTanisuTanka = new RString(iShukei.get単位数単価().toString());
-            RString rsSeikyugaku = new RString(setCommFormat(iShukei.get請求額().toString()));
-            RString rsRiyoshaFutangaku = new RString(setCommFormat(iShukei.get利用者負担額().toString()));
-            RString rsDekidakaTaniGokei = new RString(setCommFormat(iShukei.get単位合計().toString()));
-            RString rsDekidakaSeikyugaku = new RString(iShukei.get単位数単価().toString());
-            RString rsDekidakaHonninFutangaku = new RString(setCommFormat(iShukei.get出来高本人負担額().toString()));
-            RString rsSaiShinsaKaisu = new RString(String.valueOf(iShukei.get再審査回数()));
-            RString rsKagoKaisu = new RString(String.valueOf(iShukei.get過誤回数()));
-            RString rsShinsaYM = new RString(String.valueOf(setWareki(iShukei.get審査年月().toDateString()).substring(0, 6)));
+            RString rsTankiJitsuNissu = toRString(iShukei.get短実日数());
+            RString rsTaniGokei = setCommFormat(iShukei.get単位合計());
+            RString rsTanisuTanka = toRString(iShukei.get単位数単価());
+            RString rsSeikyugaku = setCommFormat(iShukei.get請求額());
+            RString rsRiyoshaFutangaku = setCommFormat(iShukei.get利用者負担額());
+            RString rsDekidakaTaniGokei = setCommFormat(iShukei.get単位合計());
+            RString rsDekidakaSeikyugaku = toRString(iShukei.get単位数単価());
+            RString rsDekidakaHonninFutangaku = setCommFormat(iShukei.get出来高本人負担額());
+            RString rsSaiShinsaKaisu = toRString(iShukei.get再審査回数());
+            RString rsKagoKaisu = toRString(iShukei.get過誤回数());
+            RString rsShinsaYM = toWareki(iShukei.get審査年月());
 
             shukeiList.add(
                     createKyufuJissekiShukeiRow(rsServiceShurui, rsJitsuNissu, rsKeikakuTani, rsTaishoTani,
@@ -239,18 +240,18 @@ public class KyufuJisseki {
 
             RString rsService = iMeisai.getサービス();
             RString rsKettei = iMeisai.get決定();
-            RString rsTani = new RString(setCommFormat(iMeisai.get単位().toString()));
-            RString rsKaisu = new RString(String.valueOf(iMeisai.get回数日数()));
-            RString rsKohi1Nissu = new RString(setCommFormat(String.valueOf(iMeisai.get公費1単位())));
-            RString rsKohi2Nissu = new RString(setCommFormat(String.valueOf(iMeisai.get公費2単位())));
-            RString rsKohi3Nissu = new RString(setCommFormat(String.valueOf(iMeisai.get公費3単位())));
-            RString rsServiceTani = new RString(setCommFormat(iMeisai.getサービス単位().toString()));
-            RString rsKohi1Tani = new RString(String.valueOf(iMeisai.get公費1日数()));
-            RString rsKohi2Tani = new RString(String.valueOf(iMeisai.get公費2日数()));
-            RString rsKohi3Tani = new RString(String.valueOf(iMeisai.get公費3日数()));
-            RString rsSaiShinsaKaisu = new RString(String.valueOf(iMeisai.get再審査回数()));
-            RString rsKagoKaisu = new RString(String.valueOf(iMeisai.get過誤回数()));
-            RString rsShinsaYM = setWareki(iMeisai.get審査年月().toDateString()).substring(0, 6);
+            RString rsTani = setCommFormat(iMeisai.get単位());
+            RString rsKaisu = toRString(iMeisai.get回数日数());
+            RString rsKohi1Nissu = toRString(iMeisai.get公費1単位());
+            RString rsKohi2Nissu = toRString(iMeisai.get公費2単位());
+            RString rsKohi3Nissu = toRString(iMeisai.get公費3単位());
+            RString rsServiceTani = setCommFormat(iMeisai.getサービス単位());
+            RString rsKohi1Tani = toRString(iMeisai.get公費1日数());
+            RString rsKohi2Tani = toRString(iMeisai.get公費2日数());
+            RString rsKohi3Tani = toRString(iMeisai.get公費3日数());
+            RString rsSaiShinsaKaisu = toRString(iMeisai.get再審査回数());
+            RString rsKagoKaisu = toRString(iMeisai.get過誤回数());
+            RString rsShinsaYM = toWareki(iMeisai.get審査年月());
             RString rsTekiyo = iMeisai.get適要();
 
             meisaiList.add(createKyufuJissekiMeisaiRow(
@@ -301,13 +302,13 @@ public class KyufuJisseki {
         for (KyufuJissekiYoguHanbaihi iFukushiYoguKonyuh : kyufuJisseki.get祉用具購入費リスト()) {
 
             RString rsService = iFukushiYoguKonyuh.getサービス();
-            RString rsKonyuYMD = setWareki(toRDate(iFukushiYoguKonyuh.get購入日()).toDateString());
+            RString rsKonyuYMD = toWareki(iFukushiYoguKonyuh.get購入日());
             RString rsShohinName = iFukushiYoguKonyuh.get商品名();
             RString rsShumoku = iFukushiYoguKonyuh.get種目();
             RString rsSeizoJigyoshaName = iFukushiYoguKonyuh.get製造事業者名();
             RString rsHanbaiJigyoshaName = iFukushiYoguKonyuh.get販売事業者名();
-            RString rsKonyuKingaku = new RString(setCommFormat(String.valueOf(iFukushiYoguKonyuh.get購入金額())));
-            RString rsShinsaYM = setWareki(iFukushiYoguKonyuh.get審査年月().toDateString()).substring(0, 6);
+            RString rsKonyuKingaku = setCommFormat(iFukushiYoguKonyuh.get購入金額());
+            RString rsShinsaYM = toWareki(iFukushiYoguKonyuh.get審査年月());
             RString rsTekiyo = iFukushiYoguKonyuh.get摘要();
 
             fukushiYoguKonyuhiList.add(createFukushiYoguKonyuhiRow(
@@ -326,11 +327,11 @@ public class KyufuJisseki {
         for (KyufuJissekiJutakuKaishuhi iJutakuKaishuhi : kyufuJisseki.get住宅改修費情報リスト()) {
 
             RString rsService = iJutakuKaishuhi.getサービス();
-            RString rsChakkoYMD = setWareki(toRDate(iJutakuKaishuhi.get着工日()).toDateString());
+            RString rsChakkoYMD = toWareki(iJutakuKaishuhi.get着工日());
             RString rsJigyoshaName = iJutakuKaishuhi.get事業者名();
             RString rsJusho = iJutakuKaishuhi.get改修先住所();
-            RString rsHiyo = new RString(setCommFormat(String.valueOf(iJutakuKaishuhi.get改修費用())));
-            RString rsShinsaYM = setWareki(iJutakuKaishuhi.get審査年月().toDateString()).substring(0, 6);
+            RString rsHiyo = setCommFormat(iJutakuKaishuhi.get改修費用());
+            RString rsShinsaYM = toWareki(iJutakuKaishuhi.get審査年月());
 
             jutakuKaishuhiList.add(createJutakuKaishuhiRow(
                     rsService, rsChakkoYMD, rsJigyoshaName, rsJusho, rsHiyo, rsShinsaYM));
@@ -476,13 +477,6 @@ public class KyufuJisseki {
         return detailKeyInfo != null ? finder.get給付実績(detailKeyInfo) : null;
     }
 
-    private String setCommFormat(String str) {
-        if (str.isEmpty()) {
-            return str;
-        }
-        return new Decimal(str).toString("##,###,###");
-    }
-
     private RString setCommFormat(Decimal data) {
         if (data == null) {
             return RString.EMPTY;
@@ -502,14 +496,6 @@ public class KyufuJisseki {
             return null;
         }
         return new RDate(data.toString());
-    }
-
-    private RString setWareki(RString wareki) {
-        if (wareki == null) {
-            return RString.EMPTY;
-        }
-        FlexibleDate warekiYmd = new FlexibleDate(wareki);
-        return warekiYmd.wareki().toDateString();
     }
 
     private RString toWareki(FlexibleDate data) {

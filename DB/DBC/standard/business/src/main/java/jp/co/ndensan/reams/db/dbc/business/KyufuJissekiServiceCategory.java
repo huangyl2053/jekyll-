@@ -234,6 +234,7 @@ public class KyufuJissekiServiceCategory {
         list.add(通所介護);
         list.add(通所リハビリ);
         list.add(福祉用具貸与);
+        list.add(生活介護);
         list.add(療養介護老人保険施設);
         list.add(療養介護療養型医療施設等);
         list.add(出来高請求費短期入所療養介護１);

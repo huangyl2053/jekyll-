@@ -22,9 +22,12 @@ public class KyufuJissekiYoshiki {
     static {
         map = new HashMap<>();
         map.put(new RString("7131"), KyufuJissekiYoshikiKubun.様式第二);
+        map.put(new RString("7141"), KyufuJissekiYoshikiKubun.様式第三);
+        map.put(new RString("7143"), KyufuJissekiYoshikiKubun.様式第三);
         map.put(new RString("8124"), KyufuJissekiYoshikiKubun.様式第七);
         map.put(new RString("21C1"), KyufuJissekiYoshikiKubun.様式第十三);
         map.put(new RString("21D1"), KyufuJissekiYoshikiKubun.様式第十四);
+
     }
 
     /**

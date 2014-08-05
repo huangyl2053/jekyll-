@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -41,32 +40,32 @@ public class TokuteiNyushoshaKaigoServicehi {
         //特定入所者介護サービスデータ取得、設定
         List<dgTokuteiNyushoshaKaigoServicehi_Row> tokuteiNyushoshaKaigoServicehiList = new ArrayList<>();
 
-        for (KyufuJissekiTokuteiNyushohi iTokute : kyufuJisseki.get特定入所者費用リスト()) {
+        for (KyufuJissekiTokuteiNyushohi iTokute : kyufuJisseki.get特定入所者リスト()) {
 
             RString rsService = iTokute.getサービス();
-            RString rsFutanGendogaku = new RString(setCommFormat(String.valueOf(iTokute.get負担限度額())));
+            RString rsFutanGendogaku = setCommFormat(iTokute.get負担限度額());
             RString rsKettei = iTokute.get決定();
             RString rsMeisaiGokei = iTokute.get明細合計();
-            RString rsHiyoTanka = new RString(String.valueOf(iTokute.get費用単価()));
-            RString rsNissu = new RString(String.valueOf(iTokute.get日数()));
-            RString rsHiyogaku = new RString(setCommFormat(String.valueOf(iTokute.get費用額())));
-            RString rsSeikyugaku = new RString(setCommFormat(String.valueOf(iTokute.get請求額())));
-            RString rsRiyoshaFutangaku = new RString(setCommFormat(String.valueOf(iTokute.get利用者負担額())));
-            RString rsKohi1Nissu = new RString(String.valueOf(iTokute.get公費1日数()));
-            RString rsKohi1Futangaku = new RString(String.valueOf(iTokute.get公費1日数()));
-            RString rsKohi1Seikyugaku = new RString(setCommFormat(String.valueOf(iTokute.get公費1負担額())));
-            RString rsKohi1HonninFutangaku = new RString(setCommFormat(String.valueOf(iTokute.get公費1本人負担額())));
-            RString rsKohi2Nissu = new RString(String.valueOf(iTokute.get公費2日数()));
-            RString rsKohi2Futangaku = new RString(setCommFormat(String.valueOf(iTokute.get公費2負担額())));
-            RString rsKohi2Seikyugaku = new RString(setCommFormat(String.valueOf(iTokute.get公費2請求額())));
-            RString rsKohi2HonninFutangaku = new RString(setCommFormat(String.valueOf(iTokute.get公費2本人負担額())));
-            RString rsKohi3Nissu = new RString(String.valueOf(iTokute.get公費3日数()));
-            RString rsKohi3Futangaku = new RString(setCommFormat(String.valueOf(iTokute.get公費3負担額())));
-            RString rsKohi3Seikyugaku = new RString(setCommFormat(String.valueOf(iTokute.get公費3請額())));
-            RString rsKohi3HonninFutangaku = new RString(setCommFormat(String.valueOf(iTokute.get公費3本人負担額())));
-            RString rsSaishinsaKaisu = new RString(String.valueOf(iTokute.get再審査回数()));
-            RString rsKagoKaisu = new RString(String.valueOf(iTokute.get過誤回数()));
-            RString rsShinsaYM = setWareki(iTokute.get審査年月().toDateString()).substring(0, 6);
+            RString rsHiyoTanka = setCommFormat(iTokute.get費用単価());
+            RString rsNissu = toRString(iTokute.get日数());
+            RString rsHiyogaku = setCommFormat(iTokute.get費用額());
+            RString rsSeikyugaku = setCommFormat(iTokute.get請求額());
+            RString rsRiyoshaFutangaku = setCommFormat(iTokute.get利用者負担額());
+            RString rsKohi1Nissu = toRString(iTokute.get公費1日数());
+            RString rsKohi1Futangaku = toRString(iTokute.get公費1日数());
+            RString rsKohi1Seikyugaku = setCommFormat(iTokute.get公費1負担額());
+            RString rsKohi1HonninFutangaku = setCommFormat(iTokute.get公費1本人負担額());
+            RString rsKohi2Nissu = toRString(iTokute.get公費2日数());
+            RString rsKohi2Futangaku = setCommFormat(iTokute.get公費2負担額());
+            RString rsKohi2Seikyugaku = setCommFormat(iTokute.get公費2請求額());
+            RString rsKohi2HonninFutangaku = setCommFormat(iTokute.get公費2本人負担額());
+            RString rsKohi3Nissu = toRString(iTokute.get公費3日数());
+            RString rsKohi3Futangaku = setCommFormat(iTokute.get公費3負担額());
+            RString rsKohi3Seikyugaku = setCommFormat(iTokute.get公費3請額());
+            RString rsKohi3HonninFutangaku = setCommFormat(iTokute.get公費3本人負担額());
+            RString rsSaishinsaKaisu = toRString(iTokute.get再審査回数());
+            RString rsKagoKaisu = toRString(iTokute.get過誤回数());
+            RString rsShinsaYM = toWareki(iTokute.get審査年月());
 
             tokuteiNyushoshaKaigoServicehiList.add(createTokuteiNyushoshaKaigoServicehiRow(
                     rsService, rsFutanGendogaku, rsKettei, rsMeisaiGokei, rsHiyoTanka, rsNissu,
@@ -126,8 +125,25 @@ public class TokuteiNyushoshaKaigoServicehi {
         return new Decimal(str).toString("##,###,###");
     }
 
-    private RString setWareki(RString wareki) {
-        FlexibleDate warekiYmd = new FlexibleDate(wareki);
-        return warekiYmd.wareki().toDateString();
+    private RString setCommFormat(Decimal data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return new RString(data.toString("##,###,###"));
     }
+
+    private RString toWareki(FlexibleYearMonth data) {
+        if (data == null || !data.isValid()) {
+            return RString.EMPTY;
+        }
+        return data.wareki().toDateString().substring(0, 6);
+    }
+
+    private RString toRString(Integer data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return new RString(data.toString());
+    }
+
 }

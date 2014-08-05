@@ -43,12 +43,12 @@ public class KyufuJissekiKihonGokei {
 
             RString rsHokenKohi = iKihonGokei.get保険公費();
             RString rsZengo = iKihonGokei.get前後();
-            RString rsServiceTani = new RString(String.valueOf(iKihonGokei.getサービス単位()));
-            RString rsRiyoshaFutangaku = new RString(setCommFormat(String.valueOf(iKihonGokei.get利用者負担額())));
-            RString rsHokenryoSeikyugaku = new RString(setCommFormat(String.valueOf(iKihonGokei.get保険料請求額())));
-            RString rsKinkyujiShisetsuRyoyohiHokenSeikyubunGokei = new RString(String.valueOf(iKihonGokei.get緊急時施設療養費保険請求分合計()));
-            RString rsTokuteiShinryohiKohiSeikyubunGokei = new RString(String.valueOf(iKihonGokei.get特定診療費公費請求分合計()));
-            RString rsTokuteiNyushoshaKaigotoSeikyugaku = new RString(String.valueOf(iKihonGokei.get特定入所者介護等請求額()));
+            RString rsServiceTani = toRString(iKihonGokei.getサービス単位());
+            RString rsRiyoshaFutangaku = setCommFormat(iKihonGokei.get利用者負担額());
+            RString rsHokenryoSeikyugaku = setCommFormat(iKihonGokei.get保険料請求額());
+            RString rsKinkyujiShisetsuRyoyohiHokenSeikyubunGokei = setCommFormat(iKihonGokei.get緊急時施設療養費保険請求分合計());
+            RString rsTokuteiShinryohiKohiSeikyubunGokei = setCommFormat(iKihonGokei.get特定診療費公費請求分合計());
+            RString rsTokuteiNyushoshaKaigotoSeikyugaku = setCommFormat(iKihonGokei.get特定入所者介護等請求額());
 
             kyufuJissekiKihonGokeiList.add(createKyufuJissekiKihonGokeiRow(
                     rsHokenKohi, rsZengo, rsServiceTani, rsHokenryoSeikyugaku, rsRiyoshaFutangaku,
@@ -89,10 +89,18 @@ public class KyufuJissekiKihonGokei {
         return detailKeyInfo != null ? finder.get給付実績(detailKeyInfo) : null;
     }
 
-    private String setCommFormat(String str) {
-        if (str.isEmpty()) {
-            return str;
+    private RString setCommFormat(Decimal data) {
+        if (data == null) {
+            return RString.EMPTY;
         }
-        return new Decimal(str).toString("##,###,###");
+        return new RString(data.toString("##,###,###"));
     }
+
+    private RString toRString(Decimal data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return new RString(data.toString());
+    }
+
 }

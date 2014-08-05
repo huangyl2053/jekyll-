@@ -50,14 +50,14 @@ public class ShakaiFukushiHojinKeigengaku {
             RString rsKeigenritsu = iFuJisseki.get軽減率();
             RString rsShurui = iFuJisseki.get種類();
             RString rsZengo = iFuJisseki.get前後();
-            RString rsJuryoSubekiRiyoshaFutanSogaku = new RString(setCommFormat(String.valueOf(iFuJisseki.get受領すべき利用者負担の総額())));
-            RString rsKeigengaku = new RString(setCommFormat(String.valueOf(iFuJisseki.get軽減額())));
-            RString rsKeigengoRiyoshaFutangaku = new RString(setCommFormat(String.valueOf(iFuJisseki.get軽減後利用者負担額())));
+            RString rsJuryoSubekiRiyoshaFutanSogaku = setCommFormat(iFuJisseki.get受領すべき利用者負担の総額());
+            RString rsKeigengaku = setCommFormat(iFuJisseki.get軽減額());
+            RString rsKeigengoRiyoshaFutangaku = setCommFormat(iFuJisseki.get軽減後利用者負担額());
 
             RString rsBiko = iFuJisseki.get備考();
-            RString rsSaishinsaKaisu = new RString(String.valueOf(iFuJisseki.get再審査回数()));
-            RString rsKagoKaisu = new RString(String.valueOf(iFuJisseki.get過誤回数()));
-            RString rsShinsaYM = setWareki(iFuJisseki.get審査年月().toDateString()).substring(0, 6);
+            RString rsSaishinsaKaisu = toRString(iFuJisseki.get再審査回数());
+            RString rsKagoKaisu = toRString(iFuJisseki.get過誤回数());
+            RString rsShinsaYM = toWareki(iFuJisseki.get審査年月());
 
             shakaiFukushiHojinKeigengakuList.add(createShakaiFukushiHojinKeigengakuRow(
                     rsKeigenritsu, rsShurui, rsZengo, rsJuryoSubekiRiyoshaFutanSogaku, rsKeigengaku,
@@ -100,15 +100,24 @@ public class ShakaiFukushiHojinKeigengaku {
         return detailKeyInfo != null ? finder.get給付実績(detailKeyInfo) : null;
     }
 
-    private RString setWareki(RString wareki) {
-        FlexibleDate warekiYmd = new FlexibleDate(wareki);
-        return warekiYmd.wareki().toDateString();
+    private RString toWareki(FlexibleYearMonth data) {
+        if (data == null || !data.isValid()) {
+            return RString.EMPTY;
+        }
+        return data.wareki().toDateString().substring(0, 6);
     }
 
-    private String setCommFormat(String str) {
-        if (str.isEmpty()) {
-            return str;
+    private RString setCommFormat(Decimal data) {
+        if (data == null) {
+            return RString.EMPTY;
         }
-        return new Decimal(str).toString("##,###,###");
+        return new RString(data.toString("##,###,###"));
+    }
+
+    private RString toRString(Integer data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return new RString(data.toString());
     }
 }
