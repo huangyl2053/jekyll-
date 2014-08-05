@@ -49,8 +49,9 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
     @PrimaryKey
     private JigyoshaNo jigyoshoNo;
     @PrimaryKey
-    private ToshiNo toshiNo;
     private RString recodeJunjiNo;
+    @PrimaryKey
+    private ToshiNo toshiNo;
     private ServiceShuruiCode serviceSyuruiCode;
     private ServiceKomokuCode serviceKomokuCode;
     private Decimal hiyoTanka;
@@ -260,22 +261,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
     }
 
     /**
-     * getToshiNo
-     * @return toshiNo
-     */
-    public ToshiNo getToshiNo() {
-        return toshiNo;
-    }
-
-    /**
-     * setToshiNo
-     * @param toshiNo toshiNo
-     */
-    public void setToshiNo(ToshiNo toshiNo) {
-        this.toshiNo = toshiNo;
-    }
-
-    /**
      * getRecodeJunjiNo
      * @return recodeJunjiNo
      */
@@ -289,6 +274,22 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
      */
     public void setRecodeJunjiNo(RString recodeJunjiNo) {
         this.recodeJunjiNo = recodeJunjiNo;
+    }
+
+    /**
+     * getToshiNo
+     * @return toshiNo
+     */
+    public ToshiNo getToshiNo() {
+        return toshiNo;
+    }
+
+    /**
+     * setToshiNo
+     * @param toshiNo toshiNo
+     */
+    public void setToshiNo(ToshiNo toshiNo) {
+        this.toshiNo = toshiNo;
     }
 
     /**
@@ -1187,6 +1188,9 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
         if (!Objects.equals(this.jigyoshoNo, other.jigyoshoNo)) {
             return false;
         }
+        if (!Objects.equals(this.recodeJunjiNo, other.recodeJunjiNo)) {
+            return false;
+        }
         if (!Objects.equals(this.toshiNo, other.toshiNo)) {
             return false;
         }
@@ -1194,6 +1198,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
     }
 
 // </editor-fold>
+
 
 
 }

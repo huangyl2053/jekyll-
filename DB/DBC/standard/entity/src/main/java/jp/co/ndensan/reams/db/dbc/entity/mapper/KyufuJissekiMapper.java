@@ -681,22 +681,21 @@ public final class KyufuJissekiMapper {
         DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity = entities.get(entities.size() - 1);
         maeList.add(new KyufuJissekiTokuteiNyushohi(
                 null, null,
-                前, 合計, null, 0,
-                entity.getHiyogakuTotal(), entity.getHokenbunSeikyugakuTotal(), entity.getRiyoshaFutangakuTotal(), 0,
-                entity.getKohi1FutangakuTotal(), entity.getKohi1Seikyugaku(), entity.getKohi1HonninFutanGetsugaku(), 0,
-                entity.getKohi2FutangakuTotal(), entity.getKohi2Seikyugaku(), entity.getKohi2HonninFutanGetsugaku(), 0,
-                entity.getKohi3FutangakuTotal(), entity.getKohi3Seikyugaku(), entity.getKohi3HonninFutanGetsugaku(), 0, 0, null));
+                前, 合計, null, null,
+                entity.getHiyogakuTotal(), entity.getHokenbunSeikyugakuTotal(), entity.getRiyoshaFutangakuTotal(), null,
+                entity.getKohi1FutangakuTotal(), entity.getKohi1Seikyugaku(), entity.getKohi1HonninFutanGetsugaku(), null,
+                entity.getKohi2FutangakuTotal(), entity.getKohi2Seikyugaku(), entity.getKohi2HonninFutanGetsugaku(), null,
+                entity.getKohi3FutangakuTotal(), entity.getKohi3Seikyugaku(), entity.getKohi3HonninFutanGetsugaku(), null, null, null));
         atoList.add(new KyufuJissekiTokuteiNyushohi(
                 null, null,
-                後, 合計, null, 0,
-                entity.getAtoHiyogakuTotal(), entity.getAtoHokenbunSeikyugakuTotal(), entity.getAtoRiyoshaFutangakuTotal(), 0,
-                entity.getAtoKohi1FutangakuTotal(), entity.getAtoKohi1Seikyugaku(), entity.getAtoKohi1HonninFutanGetsugaku(), 0,
-                entity.getAtoKohi2FutangakuTotal(), entity.getAtoKohi2Seikyugaku(), entity.getAtoKohi2HonninFutanGetsugaku(), 0,
-                entity.getAtoKohi3FutangakuTotal(), entity.getAtoKohi3Seikyugaku(), entity.getAtoKohi3HonninFutanGetsugaku(), 0, 0, null));
+                後, 合計, null, null,
+                entity.getAtoHiyogakuTotal(), entity.getAtoHokenbunSeikyugakuTotal(), entity.getAtoRiyoshaFutangakuTotal(), null,
+                entity.getAtoKohi1FutangakuTotal(), entity.getAtoKohi1Seikyugaku(), entity.getAtoKohi1HonninFutanGetsugaku(), null,
+                entity.getAtoKohi2FutangakuTotal(), entity.getAtoKohi2Seikyugaku(), entity.getAtoKohi2HonninFutanGetsugaku(), null,
+                entity.getAtoKohi3FutangakuTotal(), entity.getAtoKohi3Seikyugaku(), entity.getAtoKohi3HonninFutanGetsugaku(), null, null, null));
 
         maeList.addAll(atoList);
 
         return new KyufuJissekiTokuteiNyushohiCollection(maeList);
-
     }
 }
