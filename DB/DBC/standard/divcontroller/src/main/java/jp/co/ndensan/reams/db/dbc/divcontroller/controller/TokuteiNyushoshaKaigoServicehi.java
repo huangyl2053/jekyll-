@@ -41,7 +41,7 @@ public class TokuteiNyushoshaKaigoServicehi {
         //特定入所者介護サービスデータ取得、設定
         List<dgTokuteiNyushoshaKaigoServicehi_Row> tokuteiNyushoshaKaigoServicehiList = new ArrayList<>();
 
-        for (KyufuJissekiTokuteiNyushohi iTokute : kyufuJisseki.get特定入所者リスト()) {
+        for (KyufuJissekiTokuteiNyushohi iTokute : kyufuJisseki.get特定入所者費用リスト()) {
 
             RString rsService = iTokute.getサービス();
             RString rsFutanGendogaku = new RString(setCommFormat(String.valueOf(iTokute.get負担限度額())));
