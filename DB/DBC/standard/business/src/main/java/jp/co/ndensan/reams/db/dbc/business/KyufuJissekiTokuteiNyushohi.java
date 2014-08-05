@@ -21,24 +21,24 @@ public class KyufuJissekiTokuteiNyushohi {
     private final RString 決定;
     private final RString 明細合計;
     private final Decimal 費用単価;
-    private final int 日数;
+    private final Integer 日数;
     private final Decimal 費用額;
     private final Decimal 請求額;
     private final Decimal 利用者負担額;
-    private final int 公費1日数;
+    private final Integer 公費1日数;
     private final Decimal 公費1負担額;
     private final Decimal 公費1請求額;
     private final Decimal 公費1本人負担額;
-    private final int 公費2日数;
+    private final Integer 公費2日数;
     private final Decimal 公費2負担額;
     private final Decimal 公費2請求額;
     private final Decimal 公費2本人負担額;
-    private final int 公費3日数;
+    private final Integer 公費3日数;
     private final Decimal 公費3負担額;
     private final Decimal 公費3請額;
     private final Decimal 公費3本人負担額;
-    private final int 再審査回数;
-    private final int 過誤回数;
+    private final Integer 再審査回数;
+    private final Integer 過誤回数;
     private final FlexibleYearMonth 審査年月;
 
     /**
@@ -75,24 +75,24 @@ public class KyufuJissekiTokuteiNyushohi {
             RString 決定,
             RString 明細合計,
             Decimal 費用単価,
-            int 日数,
+            Integer 日数,
             Decimal 費用額,
             Decimal 請求額,
             Decimal 利用者負担額,
-            int 公費1日数,
+            Integer 公費1日数,
             Decimal 公費1負担額,
             Decimal 公費1請求額,
             Decimal 公費1本人負担額,
-            int 公費2日数,
+            Integer 公費2日数,
             Decimal 公費2負担額,
             Decimal 公費2請求額,
             Decimal 公費2本人負担額,
-            int 公費3日数,
+            Integer 公費3日数,
             Decimal 公費3負担額,
             Decimal 公費3請額,
             Decimal 公費3本人負担額,
-            int 再審査回数,
-            int 過誤回数,
+            Integer 再審査回数,
+            Integer 過誤回数,
             FlexibleYearMonth 審査年月) {
         this.サービス = サービス;
         this.負担限度額 = 負担限度額;
@@ -129,10 +129,20 @@ public class KyufuJissekiTokuteiNyushohi {
         return サービス;
     }
 
+    /**
+     * 負担限度額を返します。
+     *
+     * @return 負担限度額
+     */
     public Decimal get負担限度額() {
         return 負担限度額;
     }
 
+    /**
+     * 決定を返します。
+     *
+     * @return 決定
+     */
     public RString get決定() {
         return 決定;
     }
@@ -160,7 +170,7 @@ public class KyufuJissekiTokuteiNyushohi {
      *
      * @return 日数
      */
-    public int get日数() {
+    public Integer get日数() {
         return 日数;
     }
 
@@ -196,7 +206,7 @@ public class KyufuJissekiTokuteiNyushohi {
      *
      * @return 公費1日数
      */
-    public int get公費1日数() {
+    public Integer get公費1日数() {
         return 公費1日数;
     }
 
@@ -232,7 +242,7 @@ public class KyufuJissekiTokuteiNyushohi {
      *
      * @return 公費2日数
      */
-    public int get公費2日数() {
+    public Integer get公費2日数() {
         return 公費2日数;
     }
 
@@ -268,7 +278,7 @@ public class KyufuJissekiTokuteiNyushohi {
      *
      * @return 公費3日数
      */
-    public int get公費3日数() {
+    public Integer get公費3日数() {
         return 公費3日数;
     }
 
@@ -304,7 +314,7 @@ public class KyufuJissekiTokuteiNyushohi {
      *
      * @return 再審査回数
      */
-    public int get再審査回数() {
+    public Integer get再審査回数() {
         return 再審査回数;
     }
 
@@ -313,7 +323,7 @@ public class KyufuJissekiTokuteiNyushohi {
      *
      * @return 過誤回数
      */
-    public int get過誤回数() {
+    public Integer get過誤回数() {
         return 過誤回数;
     }
 
@@ -325,5 +335,4 @@ public class KyufuJissekiTokuteiNyushohi {
     public FlexibleYearMonth get審査年月() {
         return 審査年月;
     }
-
 }

@@ -54,9 +54,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -70,6 +69,7 @@ public final class KyufuJissekiMapper {
     private static final int SERVICE_SHURUI_CODE_LENGTH = 2;
 
     private static final RString 空欄 = RString.EMPTY;
+    private static final RString 前 = RString.EMPTY;
     private static final RString 後 = new RString("後");
     private static final RString 保険 = new RString("保険");
     private static final RString 公費1 = new RString("公費１");
@@ -79,10 +79,8 @@ public final class KyufuJissekiMapper {
     private static final RString 合計 = new RString("合計");
 
     private static final RString[] 保険公費 = {保険, 空欄, 公費1, 空欄, 公費2, 空欄, 公費3, 空欄};
-    private static final RString[] 明細合計 = {明細, 合計, 明細, 合計};
-    private static final RString[] 前後1 = {空欄, 後};
-    private static final RString[] 前後2 = {空欄, 空欄, 後, 後};
-    private static final RString[] 前後3 = {空欄, 後, 空欄, 後, 空欄, 後, 空欄, 後};
+    private static final RString[] 前後1 = {前, 後};
+    private static final RString[] 前後3 = {前, 後, 前, 後, 前, 後, 前, 後};
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -548,82 +546,43 @@ public final class KyufuJissekiMapper {
             return new KyufuJissekiKyotakuServiceCollection(Collections.EMPTY_LIST);
         }
 
-        List<KyufuJissekiKyotakuService> list = new ArrayList<>();
+        List<KyufuJissekiKyotakuService> maeList = new ArrayList<>();
+        List<KyufuJissekiKyotakuService> atoList = new ArrayList<>();
+
         for (DbT3025KyufujissekiKyotakuServiceEntity entity : entities) {
-
-            RString[] 指定基準区分 = {
-                entity.getShiteiKijunGaitoJigyoshaKubunCode(), RString.EMPTY,
-                entity.getShiteiKijunGaitoJigyoshaKubunCode(), RString.EMPTY
-            };
-            FlexibleDate[] 届出日 = {
-                entity.getKyotakuServiceSakuseiIraiYMD(), null,
-                entity.getKyotakuServiceSakuseiIraiYMD(), null
-            };
-            RString[] サービス = {
-                entity.getServiceCode().value(), RString.EMPTY,
-                entity.getServiceCode().value(), RString.EMPTY
-            };
-            Decimal[] 単位数単価 = {
-                entity.getTanisuTanka(), null,
-                entity.getTanisuTanka(), null
-            };
-            Decimal[] 単位数 = {
-                entity.getTanisu(), null,
-                entity.getAtoTanisu(), null
-            };
-            Integer[] 回数 = {
-                new Integer(entity.getKaisu()), null,
-                new Integer(entity.getAtoKaisu()), null
-            };
-            Decimal[] サービス単位数 = {
-                entity.getServiceTanisu(), entity.getServiceTanisuTotal(),
-                entity.getAtoServiceTanisu(), entity.getAtoServiceTanisuTotal()
-            };
-            Decimal[] 請求金額 = {
-                null, entity.getSeikyuKingaku(),
-                null, entity.getAtoSeikyuKingaku()
-            };
-            RString[] 専門員番号 = {
-                entity.getTantouKaigoShienSemmoninNo(), RString.EMPTY,
-                entity.getTantouKaigoShienSemmoninNo(), RString.EMPTY,};
-            Integer[] 再審査回数 = {
-                new Integer(entity.getSaishinsaKaisu()), null,
-                new Integer(entity.getSaishinsaKaisu()), null
-            };
-            Integer[] 過誤回数 = {
-                new Integer(entity.getKagoKaisu()), null,
-                new Integer(entity.getKagoKaisu()), null
-            };
-            FlexibleYearMonth[] 審査年月 = {
-                entity.getShinsaYM(), null,
-                entity.getShinsaYM(), null
-            };
-            RString[] 摘要 = {
-                entity.getTekiyo(), RString.EMPTY,
-                entity.getTekiyo(), RString.EMPTY
-            };
-
-            for (int index = 0; index < 明細合計.length; index++) {
-                list.add(new KyufuJissekiKyotakuService(
-                        指定基準区分[index],
-                        届出日[index],
-                        サービス[index],
-                        単位数単価[index],
-                        前後2[index],
-                        明細合計[index],
-                        単位数[index],
-                        回数[index],
-                        サービス単位数[index],
-                        請求金額[index],
-                        専門員番号[index],
-                        再審査回数[index],
-                        過誤回数[index],
-                        審査年月[index],
-                        摘要[index]));
-            }
+            maeList.add(new KyufuJissekiKyotakuService(
+                    entity.getShiteiKijunGaitoJigyoshaKubunCode(),
+                    entity.getKyotakuServiceSakuseiIraiYMD(),
+                    entity.getServiceCode().value(),
+                    entity.getTanisuTanka(),
+                    前, 明細,
+                    entity.getTanisu(), entity.getKaisu(), entity.getServiceTanisu(), null,
+                    entity.getTantouKaigoShienSemmoninNo(),
+                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM(), entity.getTekiyo()));
+            atoList.add(new KyufuJissekiKyotakuService(
+                    entity.getShiteiKijunGaitoJigyoshaKubunCode(),
+                    entity.getKyotakuServiceSakuseiIraiYMD(),
+                    entity.getServiceCode().value(),
+                    entity.getTanisuTanka(),
+                    後, 明細,
+                    entity.getAtoTanisu(), entity.getAtoKaisu(), entity.getAtoServiceTanisu(), null,
+                    entity.getTantouKaigoShienSemmoninNo(),
+                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM(), entity.getTekiyo()));
         }
 
-        return new KyufuJissekiKyotakuServiceCollection(list);
+        DbT3025KyufujissekiKyotakuServiceEntity entity = entities.get(entities.size() - 1);
+        maeList.add(new KyufuJissekiKyotakuService(
+                null, null, null, null,
+                前, 合計, null, null,
+                entity.getServiceTanisuTotal(), entity.getSeikyuKingaku(), null, null, null, null, null));
+        atoList.add(new KyufuJissekiKyotakuService(
+                null, null, null, null,
+                後, 合計, null, null,
+                entity.getAtoServiceTanisuTotal(), entity.getAtoSeikyuKingaku(), null, null, null, null, null));
+
+        maeList.addAll(atoList);
+
+        return new KyufuJissekiKyotakuServiceCollection(maeList);
     }
 
     /**
@@ -693,126 +652,51 @@ public final class KyufuJissekiMapper {
             return new KyufuJissekiTokuteiNyushohiCollection(Collections.EMPTY_LIST);
         }
 
-        List<KyufuJissekiTokuteiNyushohi> list = new ArrayList<>();
-        //前　明細
+        List<KyufuJissekiTokuteiNyushohi> maeList = new ArrayList<>();
+        List<KyufuJissekiTokuteiNyushohi> atoList = new ArrayList<>();
+
         for (DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity : entities) {
-            list.add(
-                    new KyufuJissekiTokuteiNyushohi(
-                            new RString(entity.getServiceSyuruiCode().toString().concat(entity.getServiceKomokuCode().toString())),
-                            new Decimal(entity.getFutanGendogaku()),
-                            前後1[0],
-                            明細,
-                            new Decimal(entity.getHiyoTanka()),
-                            entity.getNissu(),
-                            new Decimal(entity.getHiyogaku()),
-                            new Decimal(entity.getHokenbunSeikyugaku()),
-                            new Decimal(entity.getRiyoshaFutangaku()),
-                            entity.getKohi1Nissu(),
-                            new Decimal(entity.getKohi1Futangaku()),
-                            null,
-                            null,
-                            entity.getKohi2Nissu(),
-                            new Decimal(entity.getKohi2Futangaku()),
-                            null,
-                            null,
-                            entity.getKohi3Nissu(),
-                            new Decimal(entity.getKohi3Futangaku()),
-                            null,
-                            null,
-                            entity.getSaishinsaKaisu(),
-                            entity.getKagoKaisu(),
-                            entity.getShinsaYM()
-                    ));
+            RStringBuilder sb = new RStringBuilder();
+            sb.append(entity.getServiceSyuruiCode().value()).append(entity.getServiceKomokuCode().value());
+            maeList.add(new KyufuJissekiTokuteiNyushohi(
+                    sb.toRString(), entity.getFutanGendogaku(),
+                    前, 明細,
+                    entity.getHiyoTanka(), entity.getNissu(),
+                    entity.getHiyogaku(), entity.getHokenbunSeikyugaku(), entity.getRiyoshaFutangaku(),
+                    entity.getKohi1Nissu(), entity.getKohi1Futangaku(), null, null,
+                    entity.getKohi2Nissu(), entity.getKohi2Futangaku(), null, null,
+                    entity.getKohi3Nissu(), entity.getKohi3Futangaku(), null, null,
+                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM()));
+            atoList.add(new KyufuJissekiTokuteiNyushohi(
+                    sb.toRString(), entity.getFutanGendogaku(),
+                    後, 明細,
+                    entity.getAtoHiyoTanka(), entity.getAtoNissu(),
+                    entity.getAtoHiyogaku(), entity.getAtoHokenbunSeikyugaku(), entity.getAtoRiyoshaFutangaku(),
+                    entity.getAtoKohi1Nissu(), entity.getAtoKohi1Futangaku(), null, null,
+                    entity.getAtoKohi2Nissu(), entity.getAtoKohi2Futangaku(), null, null,
+                    entity.getAtoKohi3Nissu(), entity.getAtoKohi3Futangaku(), null, null,
+                    entity.getSaishinsaKaisu(), entity.getKagoKaisu(), entity.getShinsaYM()));
         }
 
-        //前　合計
-        list.add(new KyufuJissekiTokuteiNyushohi(
-                null,
-                null,
-                前後1[0],
-                合計,
-                null,
-                0,
-                new Decimal(entities.get(0).getHiyogakuTotal()),
-                new Decimal(entities.get(0).getHokenbunSeikyugakuTotal()),
-                new Decimal(entities.get(0).getRiyoshaFutangakuTotal()),
-                0,
-                new Decimal(entities.get(0).getKohi1FutangakuTotal()),
-                new Decimal(entities.get(0).getKohi1Seikyugaku()),
-                new Decimal(entities.get(0).getKohi1HonninFutanGetsugaku()),
-                0,
-                new Decimal(entities.get(0).getKohi2FutangakuTotal()),
-                new Decimal(entities.get(0).getKohi2Seikyugaku()),
-                new Decimal(entities.get(0).getKohi2HonninFutanGetsugaku()),
-                0,
-                new Decimal(entities.get(0).getKohi3FutangakuTotal()),
-                new Decimal(entities.get(0).getKohi3Seikyugaku()),
-                new Decimal(entities.get(0).getKohi3HonninFutanGetsugaku()),
-                0,
-                0,
-                null
-        ));
+        DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity = entities.get(entities.size() - 1);
+        maeList.add(new KyufuJissekiTokuteiNyushohi(
+                null, null,
+                前, 合計, null, 0,
+                entity.getHiyogakuTotal(), entity.getHokenbunSeikyugakuTotal(), entity.getRiyoshaFutangakuTotal(), 0,
+                entity.getKohi1FutangakuTotal(), entity.getKohi1Seikyugaku(), entity.getKohi1HonninFutanGetsugaku(), 0,
+                entity.getKohi2FutangakuTotal(), entity.getKohi2Seikyugaku(), entity.getKohi2HonninFutanGetsugaku(), 0,
+                entity.getKohi3FutangakuTotal(), entity.getKohi3Seikyugaku(), entity.getKohi3HonninFutanGetsugaku(), 0, 0, null));
+        atoList.add(new KyufuJissekiTokuteiNyushohi(
+                null, null,
+                後, 合計, null, 0,
+                entity.getAtoHiyogakuTotal(), entity.getAtoHokenbunSeikyugakuTotal(), entity.getAtoRiyoshaFutangakuTotal(), 0,
+                entity.getAtoKohi1FutangakuTotal(), entity.getAtoKohi1Seikyugaku(), entity.getAtoKohi1HonninFutanGetsugaku(), 0,
+                entity.getAtoKohi2FutangakuTotal(), entity.getAtoKohi2Seikyugaku(), entity.getAtoKohi2HonninFutanGetsugaku(), 0,
+                entity.getAtoKohi3FutangakuTotal(), entity.getAtoKohi3Seikyugaku(), entity.getAtoKohi3HonninFutanGetsugaku(), 0, 0, null));
 
-        //後　明細
-        for (DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity : entities) {
-            list.add(
-                    new KyufuJissekiTokuteiNyushohi(
-                            new RString(entity.getServiceSyuruiCode().toString().concat(entity.getServiceKomokuCode().toString())),
-                            new Decimal(entity.getFutanGendogaku()),
-                            前後1[1],
-                            明細,
-                            new Decimal(entity.getAtoHiyoTanka()),
-                            entity.getAtoNissu(),
-                            new Decimal(entity.getAtoHiyogaku()),
-                            new Decimal(entity.getAtoHokenbunSeikyugaku()),
-                            new Decimal(entity.getAtoRiyoshaFutangaku()),
-                            entity.getAtoKohi1Nissu(),
-                            new Decimal(entity.getAtoKohi1Futangaku()),
-                            null,
-                            null,
-                            entity.getAtoKohi2Nissu(),
-                            new Decimal(entity.getAtoKohi2Futangaku()),
-                            null,
-                            null,
-                            entity.getAtoKohi3Nissu(),
-                            new Decimal(entity.getAtoKohi3Futangaku()),
-                            null,
-                            null,
-                            entity.getSaishinsaKaisu(),
-                            entity.getKagoKaisu(),
-                            entity.getShinsaYM()
-                    ));
-        }
+        maeList.addAll(atoList);
 
-        //後　合計
-        list.add(new KyufuJissekiTokuteiNyushohi(
-                null,
-                null,
-                前後1[1],
-                合計,
-                null,
-                0,
-                new Decimal(entities.get(0).getAtoHiyogakuTotal()),
-                new Decimal(entities.get(0).getAtoHokenbunSeikyugakuTotal()),
-                new Decimal(entities.get(0).getAtoRiyoshaFutangakuTotal()),
-                0,
-                new Decimal(entities.get(0).getAtoKohi1FutangakuTotal()),
-                new Decimal(entities.get(0).getAtoKohi1Seikyugaku()),
-                new Decimal(entities.get(0).getAtoKohi1HonninFutanGetsugaku()),
-                0,
-                new Decimal(entities.get(0).getAtoKohi2FutangakuTotal()),
-                new Decimal(entities.get(0).getAtoKohi2Seikyugaku()),
-                new Decimal(entities.get(0).getAtoKohi2HonninFutanGetsugaku()),
-                0,
-                new Decimal(entities.get(0).getAtoKohi3FutangakuTotal()),
-                new Decimal(entities.get(0).getAtoKohi3Seikyugaku()),
-                new Decimal(entities.get(0).getAtoKohi3HonninFutanGetsugaku()),
-                0,
-                0,
-                null
-        ));
+        return new KyufuJissekiTokuteiNyushohiCollection(maeList);
 
-        return new KyufuJissekiTokuteiNyushohiCollection(list);
     }
-
 }

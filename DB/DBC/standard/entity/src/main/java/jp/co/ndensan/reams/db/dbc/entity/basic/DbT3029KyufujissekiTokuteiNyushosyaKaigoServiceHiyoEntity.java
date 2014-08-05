@@ -6,14 +6,16 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceKomokuCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import java.util.Objects;
 
 /**
  * DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoの項目定義クラスです
@@ -21,7 +23,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
  */
 public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo");
 
@@ -48,66 +49,65 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
     @PrimaryKey
     private JigyoshaNo jigyoshoNo;
     @PrimaryKey
-    private RString toshiNo;
+    private ToshiNo toshiNo;
     private RString recodeJunjiNo;
     private ServiceShuruiCode serviceSyuruiCode;
     private ServiceKomokuCode serviceKomokuCode;
-    private int hiyoTanka;
-    private int futanGendogaku;
-    private int nissu;
-    private int kohi1Nissu;
-    private int kohi2Nissu;
-    private int kohi3Nissu;
-    private int hiyogaku;
-    private int hokenbunSeikyugaku;
-    private int kohi1Futangaku;
-    private int kohi2Futangaku;
-    private int kohi3Futangaku;
-    private int riyoshaFutangaku;
-    private int hiyogakuTotal;
-    private int hokenbunSeikyugakuTotal;
-    private int riyoshaFutangakuTotal;
-    private int kohi1FutangakuTotal;
-    private int kohi1Seikyugaku;
-    private int kohi1HonninFutanGetsugaku;
-    private int kohi2FutangakuTotal;
-    private int kohi2Seikyugaku;
-    private int kohi2HonninFutanGetsugaku;
-    private int kohi3FutangakuTotal;
-    private int kohi3Seikyugaku;
-    private int kohi3HonninFutanGetsugaku;
-    private int atoHiyoTanka;
-    private int atoNissu;
-    private int atoKohi1Nissu;
-    private int atoKohi2Nissu;
-    private int atoKohi3Nissu;
-    private int atoHiyogaku;
-    private int atoHokenbunSeikyugaku;
-    private int atoKohi1Futangaku;
-    private int atoKohi2Futangaku;
-    private int atoKohi3Futangaku;
-    private int atoRiyoshaFutangaku;
-    private int atoHiyogakuTotal;
-    private int atoHokenbunSeikyugakuTotal;
-    private int atoRiyoshaFutangakuTotal;
-    private int atoKohi1FutangakuTotal;
-    private int atoKohi1Seikyugaku;
-    private int atoKohi1HonninFutanGetsugaku;
-    private int atoKohi2FutangakuTotal;
-    private int atoKohi2Seikyugaku;
-    private int atoKohi2HonninFutanGetsugaku;
-    private int atoKohi3FutangakuTotal;
-    private int atoKohi3Seikyugaku;
-    private int atoKohi3HonninFutanGetsugaku;
-    private int saishinsaKaisu;
-    private int kagoKaisu;
+    private Decimal hiyoTanka;
+    private Decimal futanGendogaku;
+    private Integer nissu;
+    private Integer kohi1Nissu;
+    private Integer kohi2Nissu;
+    private Integer kohi3Nissu;
+    private Decimal hiyogaku;
+    private Decimal hokenbunSeikyugaku;
+    private Decimal kohi1Futangaku;
+    private Decimal kohi2Futangaku;
+    private Decimal kohi3Futangaku;
+    private Decimal riyoshaFutangaku;
+    private Decimal hiyogakuTotal;
+    private Decimal hokenbunSeikyugakuTotal;
+    private Decimal riyoshaFutangakuTotal;
+    private Decimal kohi1FutangakuTotal;
+    private Decimal kohi1Seikyugaku;
+    private Decimal kohi1HonninFutanGetsugaku;
+    private Decimal kohi2FutangakuTotal;
+    private Decimal kohi2Seikyugaku;
+    private Decimal kohi2HonninFutanGetsugaku;
+    private Decimal kohi3FutangakuTotal;
+    private Decimal kohi3Seikyugaku;
+    private Decimal kohi3HonninFutanGetsugaku;
+    private Decimal atoHiyoTanka;
+    private Integer atoNissu;
+    private Integer atoKohi1Nissu;
+    private Integer atoKohi2Nissu;
+    private Integer atoKohi3Nissu;
+    private Decimal atoHiyogaku;
+    private Decimal atoHokenbunSeikyugaku;
+    private Decimal atoKohi1Futangaku;
+    private Decimal atoKohi2Futangaku;
+    private Decimal atoKohi3Futangaku;
+    private Decimal atoRiyoshaFutangaku;
+    private Decimal atoHiyogakuTotal;
+    private Decimal atoHokenbunSeikyugakuTotal;
+    private Decimal atoRiyoshaFutangakuTotal;
+    private Decimal atoKohi1FutangakuTotal;
+    private Decimal atoKohi1Seikyugaku;
+    private Decimal atoKohi1HonninFutanGetsugaku;
+    private Decimal atoKohi2FutangakuTotal;
+    private Decimal atoKohi2Seikyugaku;
+    private Decimal atoKohi2HonninFutanGetsugaku;
+    private Decimal atoKohi3FutangakuTotal;
+    private Decimal atoKohi3Seikyugaku;
+    private Decimal atoKohi3HonninFutanGetsugaku;
+    private Integer saishinsaKaisu;
+    private Integer kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
 
     /**
      * getInsertDantaiCd
-     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -116,7 +116,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setInsertDantaiCd
-     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -125,7 +124,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * getIsDeleted
-     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -134,16 +132,15 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setIsDeleted
-     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * setLastUpdateReamsLoginId
-     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -152,7 +149,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * getKokanJohoShikibetsuNo
-     *
      * @return kokanJohoShikibetsuNo
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
@@ -161,7 +157,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setKokanJohoShikibetsuNo
-     *
      * @param kokanJohoShikibetsuNo kokanJohoShikibetsuNo
      */
     public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
@@ -170,7 +165,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * getInputShikibetsuNo
-     *
      * @return inputShikibetsuNo
      */
     public RString getInputShikibetsuNo() {
@@ -179,7 +173,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setInputShikibetsuNo
-     *
      * @param inputShikibetsuNo inputShikibetsuNo
      */
     public void setInputShikibetsuNo(RString inputShikibetsuNo) {
@@ -188,7 +181,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * getRecodeShubetsuCode
-     *
      * @return recodeShubetsuCode
      */
     public RString getRecodeShubetsuCode() {
@@ -197,7 +189,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setRecodeShubetsuCode
-     *
      * @param recodeShubetsuCode recodeShubetsuCode
      */
     public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
@@ -206,7 +197,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * getShokisaiHokenshaNo
-     *
      * @return shokisaiHokenshaNo
      */
     public ShoKisaiHokenshaNo getShokisaiHokenshaNo() {
@@ -215,7 +205,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setShokisaiHokenshaNo
-     *
      * @param shokisaiHokenshaNo shokisaiHokenshaNo
      */
     public void setShokisaiHokenshaNo(ShoKisaiHokenshaNo shokisaiHokenshaNo) {
@@ -224,7 +213,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * getHiHokenshaNo
-     *
      * @return hiHokenshaNo
      */
     public KaigoHihokenshaNo getHiHokenshaNo() {
@@ -233,7 +221,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setHiHokenshaNo
-     *
      * @param hiHokenshaNo hiHokenshaNo
      */
     public void setHiHokenshaNo(KaigoHihokenshaNo hiHokenshaNo) {
@@ -242,7 +229,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * getServiceTeikyoYM
-     *
      * @return serviceTeikyoYM
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -251,7 +237,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setServiceTeikyoYM
-     *
      * @param serviceTeikyoYM serviceTeikyoYM
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -260,7 +245,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * getJigyoshoNo
-     *
      * @return jigyoshoNo
      */
     public JigyoshaNo getJigyoshoNo() {
@@ -269,7 +253,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setJigyoshoNo
-     *
      * @param jigyoshoNo jigyoshoNo
      */
     public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
@@ -278,25 +261,22 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * getToshiNo
-     *
      * @return toshiNo
      */
-    public RString getToshiNo() {
+    public ToshiNo getToshiNo() {
         return toshiNo;
     }
 
     /**
      * setToshiNo
-     *
      * @param toshiNo toshiNo
      */
-    public void setToshiNo(RString toshiNo) {
+    public void setToshiNo(ToshiNo toshiNo) {
         this.toshiNo = toshiNo;
     }
 
     /**
      * getRecodeJunjiNo
-     *
      * @return recodeJunjiNo
      */
     public RString getRecodeJunjiNo() {
@@ -305,7 +285,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setRecodeJunjiNo
-     *
      * @param recodeJunjiNo recodeJunjiNo
      */
     public void setRecodeJunjiNo(RString recodeJunjiNo) {
@@ -314,7 +293,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * getServiceSyuruiCode
-     *
      * @return serviceSyuruiCode
      */
     public ServiceShuruiCode getServiceSyuruiCode() {
@@ -323,7 +301,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setServiceSyuruiCode
-     *
      * @param serviceSyuruiCode serviceSyuruiCode
      */
     public void setServiceSyuruiCode(ServiceShuruiCode serviceSyuruiCode) {
@@ -332,7 +309,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * getServiceKomokuCode
-     *
      * @return serviceKomokuCode
      */
     public ServiceKomokuCode getServiceKomokuCode() {
@@ -341,7 +317,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setServiceKomokuCode
-     *
      * @param serviceKomokuCode serviceKomokuCode
      */
     public void setServiceKomokuCode(ServiceKomokuCode serviceKomokuCode) {
@@ -350,889 +325,790 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * getHiyoTanka
-     *
      * @return hiyoTanka
      */
-    public int getHiyoTanka() {
+    public Decimal getHiyoTanka() {
         return hiyoTanka;
     }
 
     /**
      * setHiyoTanka
-     *
      * @param hiyoTanka hiyoTanka
      */
-    public void setHiyoTanka(int hiyoTanka) {
+    public void setHiyoTanka(Decimal hiyoTanka) {
         this.hiyoTanka = hiyoTanka;
     }
 
     /**
      * getFutanGendogaku
-     *
      * @return futanGendogaku
      */
-    public int getFutanGendogaku() {
+    public Decimal getFutanGendogaku() {
         return futanGendogaku;
     }
 
     /**
      * setFutanGendogaku
-     *
      * @param futanGendogaku futanGendogaku
      */
-    public void setFutanGendogaku(int futanGendogaku) {
+    public void setFutanGendogaku(Decimal futanGendogaku) {
         this.futanGendogaku = futanGendogaku;
     }
 
     /**
      * getNissu
-     *
      * @return nissu
      */
-    public int getNissu() {
+    public Integer getNissu() {
         return nissu;
     }
 
     /**
      * setNissu
-     *
      * @param nissu nissu
      */
-    public void setNissu(int nissu) {
+    public void setNissu(Integer nissu) {
         this.nissu = nissu;
     }
 
     /**
      * getKohi1Nissu
-     *
      * @return kohi1Nissu
      */
-    public int getKohi1Nissu() {
+    public Integer getKohi1Nissu() {
         return kohi1Nissu;
     }
 
     /**
      * setKohi1Nissu
-     *
      * @param kohi1Nissu kohi1Nissu
      */
-    public void setKohi1Nissu(int kohi1Nissu) {
+    public void setKohi1Nissu(Integer kohi1Nissu) {
         this.kohi1Nissu = kohi1Nissu;
     }
 
     /**
      * getKohi2Nissu
-     *
      * @return kohi2Nissu
      */
-    public int getKohi2Nissu() {
+    public Integer getKohi2Nissu() {
         return kohi2Nissu;
     }
 
     /**
      * setKohi2Nissu
-     *
      * @param kohi2Nissu kohi2Nissu
      */
-    public void setKohi2Nissu(int kohi2Nissu) {
+    public void setKohi2Nissu(Integer kohi2Nissu) {
         this.kohi2Nissu = kohi2Nissu;
     }
 
     /**
      * getKohi3Nissu
-     *
      * @return kohi3Nissu
      */
-    public int getKohi3Nissu() {
+    public Integer getKohi3Nissu() {
         return kohi3Nissu;
     }
 
     /**
      * setKohi3Nissu
-     *
      * @param kohi3Nissu kohi3Nissu
      */
-    public void setKohi3Nissu(int kohi3Nissu) {
+    public void setKohi3Nissu(Integer kohi3Nissu) {
         this.kohi3Nissu = kohi3Nissu;
     }
 
     /**
      * getHiyogaku
-     *
      * @return hiyogaku
      */
-    public int getHiyogaku() {
+    public Decimal getHiyogaku() {
         return hiyogaku;
     }
 
     /**
      * setHiyogaku
-     *
      * @param hiyogaku hiyogaku
      */
-    public void setHiyogaku(int hiyogaku) {
+    public void setHiyogaku(Decimal hiyogaku) {
         this.hiyogaku = hiyogaku;
     }
 
     /**
      * getHokenbunSeikyugaku
-     *
      * @return hokenbunSeikyugaku
      */
-    public int getHokenbunSeikyugaku() {
+    public Decimal getHokenbunSeikyugaku() {
         return hokenbunSeikyugaku;
     }
 
     /**
      * setHokenbunSeikyugaku
-     *
      * @param hokenbunSeikyugaku hokenbunSeikyugaku
      */
-    public void setHokenbunSeikyugaku(int hokenbunSeikyugaku) {
+    public void setHokenbunSeikyugaku(Decimal hokenbunSeikyugaku) {
         this.hokenbunSeikyugaku = hokenbunSeikyugaku;
     }
 
     /**
      * getKohi1Futangaku
-     *
      * @return kohi1Futangaku
      */
-    public int getKohi1Futangaku() {
+    public Decimal getKohi1Futangaku() {
         return kohi1Futangaku;
     }
 
     /**
      * setKohi1Futangaku
-     *
      * @param kohi1Futangaku kohi1Futangaku
      */
-    public void setKohi1Futangaku(int kohi1Futangaku) {
+    public void setKohi1Futangaku(Decimal kohi1Futangaku) {
         this.kohi1Futangaku = kohi1Futangaku;
     }
 
     /**
      * getKohi2Futangaku
-     *
      * @return kohi2Futangaku
      */
-    public int getKohi2Futangaku() {
+    public Decimal getKohi2Futangaku() {
         return kohi2Futangaku;
     }
 
     /**
      * setKohi2Futangaku
-     *
      * @param kohi2Futangaku kohi2Futangaku
      */
-    public void setKohi2Futangaku(int kohi2Futangaku) {
+    public void setKohi2Futangaku(Decimal kohi2Futangaku) {
         this.kohi2Futangaku = kohi2Futangaku;
     }
 
     /**
      * getKohi3Futangaku
-     *
      * @return kohi3Futangaku
      */
-    public int getKohi3Futangaku() {
+    public Decimal getKohi3Futangaku() {
         return kohi3Futangaku;
     }
 
     /**
      * setKohi3Futangaku
-     *
      * @param kohi3Futangaku kohi3Futangaku
      */
-    public void setKohi3Futangaku(int kohi3Futangaku) {
+    public void setKohi3Futangaku(Decimal kohi3Futangaku) {
         this.kohi3Futangaku = kohi3Futangaku;
     }
 
     /**
      * getRiyoshaFutangaku
-     *
      * @return riyoshaFutangaku
      */
-    public int getRiyoshaFutangaku() {
+    public Decimal getRiyoshaFutangaku() {
         return riyoshaFutangaku;
     }
 
     /**
      * setRiyoshaFutangaku
-     *
      * @param riyoshaFutangaku riyoshaFutangaku
      */
-    public void setRiyoshaFutangaku(int riyoshaFutangaku) {
+    public void setRiyoshaFutangaku(Decimal riyoshaFutangaku) {
         this.riyoshaFutangaku = riyoshaFutangaku;
     }
 
     /**
      * getHiyogakuTotal
-     *
      * @return hiyogakuTotal
      */
-    public int getHiyogakuTotal() {
+    public Decimal getHiyogakuTotal() {
         return hiyogakuTotal;
     }
 
     /**
      * setHiyogakuTotal
-     *
      * @param hiyogakuTotal hiyogakuTotal
      */
-    public void setHiyogakuTotal(int hiyogakuTotal) {
+    public void setHiyogakuTotal(Decimal hiyogakuTotal) {
         this.hiyogakuTotal = hiyogakuTotal;
     }
 
     /**
      * getHokenbunSeikyugakuTotal
-     *
      * @return hokenbunSeikyugakuTotal
      */
-    public int getHokenbunSeikyugakuTotal() {
+    public Decimal getHokenbunSeikyugakuTotal() {
         return hokenbunSeikyugakuTotal;
     }
 
     /**
      * setHokenbunSeikyugakuTotal
-     *
      * @param hokenbunSeikyugakuTotal hokenbunSeikyugakuTotal
      */
-    public void setHokenbunSeikyugakuTotal(int hokenbunSeikyugakuTotal) {
+    public void setHokenbunSeikyugakuTotal(Decimal hokenbunSeikyugakuTotal) {
         this.hokenbunSeikyugakuTotal = hokenbunSeikyugakuTotal;
     }
 
     /**
      * getRiyoshaFutangakuTotal
-     *
      * @return riyoshaFutangakuTotal
      */
-    public int getRiyoshaFutangakuTotal() {
+    public Decimal getRiyoshaFutangakuTotal() {
         return riyoshaFutangakuTotal;
     }
 
     /**
      * setRiyoshaFutangakuTotal
-     *
      * @param riyoshaFutangakuTotal riyoshaFutangakuTotal
      */
-    public void setRiyoshaFutangakuTotal(int riyoshaFutangakuTotal) {
+    public void setRiyoshaFutangakuTotal(Decimal riyoshaFutangakuTotal) {
         this.riyoshaFutangakuTotal = riyoshaFutangakuTotal;
     }
 
     /**
      * getKohi1FutangakuTotal
-     *
      * @return kohi1FutangakuTotal
      */
-    public int getKohi1FutangakuTotal() {
+    public Decimal getKohi1FutangakuTotal() {
         return kohi1FutangakuTotal;
     }
 
     /**
      * setKohi1FutangakuTotal
-     *
      * @param kohi1FutangakuTotal kohi1FutangakuTotal
      */
-    public void setKohi1FutangakuTotal(int kohi1FutangakuTotal) {
+    public void setKohi1FutangakuTotal(Decimal kohi1FutangakuTotal) {
         this.kohi1FutangakuTotal = kohi1FutangakuTotal;
     }
 
     /**
      * getKohi1Seikyugaku
-     *
      * @return kohi1Seikyugaku
      */
-    public int getKohi1Seikyugaku() {
+    public Decimal getKohi1Seikyugaku() {
         return kohi1Seikyugaku;
     }
 
     /**
      * setKohi1Seikyugaku
-     *
      * @param kohi1Seikyugaku kohi1Seikyugaku
      */
-    public void setKohi1Seikyugaku(int kohi1Seikyugaku) {
+    public void setKohi1Seikyugaku(Decimal kohi1Seikyugaku) {
         this.kohi1Seikyugaku = kohi1Seikyugaku;
     }
 
     /**
      * getKohi1HonninFutanGetsugaku
-     *
      * @return kohi1HonninFutanGetsugaku
      */
-    public int getKohi1HonninFutanGetsugaku() {
+    public Decimal getKohi1HonninFutanGetsugaku() {
         return kohi1HonninFutanGetsugaku;
     }
 
     /**
      * setKohi1HonninFutanGetsugaku
-     *
      * @param kohi1HonninFutanGetsugaku kohi1HonninFutanGetsugaku
      */
-    public void setKohi1HonninFutanGetsugaku(int kohi1HonninFutanGetsugaku) {
+    public void setKohi1HonninFutanGetsugaku(Decimal kohi1HonninFutanGetsugaku) {
         this.kohi1HonninFutanGetsugaku = kohi1HonninFutanGetsugaku;
     }
 
     /**
      * getKohi2FutangakuTotal
-     *
      * @return kohi2FutangakuTotal
      */
-    public int getKohi2FutangakuTotal() {
+    public Decimal getKohi2FutangakuTotal() {
         return kohi2FutangakuTotal;
     }
 
     /**
      * setKohi2FutangakuTotal
-     *
      * @param kohi2FutangakuTotal kohi2FutangakuTotal
      */
-    public void setKohi2FutangakuTotal(int kohi2FutangakuTotal) {
+    public void setKohi2FutangakuTotal(Decimal kohi2FutangakuTotal) {
         this.kohi2FutangakuTotal = kohi2FutangakuTotal;
     }
 
     /**
      * getKohi2Seikyugaku
-     *
      * @return kohi2Seikyugaku
      */
-    public int getKohi2Seikyugaku() {
+    public Decimal getKohi2Seikyugaku() {
         return kohi2Seikyugaku;
     }
 
     /**
      * setKohi2Seikyugaku
-     *
      * @param kohi2Seikyugaku kohi2Seikyugaku
      */
-    public void setKohi2Seikyugaku(int kohi2Seikyugaku) {
+    public void setKohi2Seikyugaku(Decimal kohi2Seikyugaku) {
         this.kohi2Seikyugaku = kohi2Seikyugaku;
     }
 
     /**
      * getKohi2HonninFutanGetsugaku
-     *
      * @return kohi2HonninFutanGetsugaku
      */
-    public int getKohi2HonninFutanGetsugaku() {
+    public Decimal getKohi2HonninFutanGetsugaku() {
         return kohi2HonninFutanGetsugaku;
     }
 
     /**
      * setKohi2HonninFutanGetsugaku
-     *
      * @param kohi2HonninFutanGetsugaku kohi2HonninFutanGetsugaku
      */
-    public void setKohi2HonninFutanGetsugaku(int kohi2HonninFutanGetsugaku) {
+    public void setKohi2HonninFutanGetsugaku(Decimal kohi2HonninFutanGetsugaku) {
         this.kohi2HonninFutanGetsugaku = kohi2HonninFutanGetsugaku;
     }
 
     /**
      * getKohi3FutangakuTotal
-     *
      * @return kohi3FutangakuTotal
      */
-    public int getKohi3FutangakuTotal() {
+    public Decimal getKohi3FutangakuTotal() {
         return kohi3FutangakuTotal;
     }
 
     /**
      * setKohi3FutangakuTotal
-     *
      * @param kohi3FutangakuTotal kohi3FutangakuTotal
      */
-    public void setKohi3FutangakuTotal(int kohi3FutangakuTotal) {
+    public void setKohi3FutangakuTotal(Decimal kohi3FutangakuTotal) {
         this.kohi3FutangakuTotal = kohi3FutangakuTotal;
     }
 
     /**
      * getKohi3Seikyugaku
-     *
      * @return kohi3Seikyugaku
      */
-    public int getKohi3Seikyugaku() {
+    public Decimal getKohi3Seikyugaku() {
         return kohi3Seikyugaku;
     }
 
     /**
      * setKohi3Seikyugaku
-     *
      * @param kohi3Seikyugaku kohi3Seikyugaku
      */
-    public void setKohi3Seikyugaku(int kohi3Seikyugaku) {
+    public void setKohi3Seikyugaku(Decimal kohi3Seikyugaku) {
         this.kohi3Seikyugaku = kohi3Seikyugaku;
     }
 
     /**
      * getKohi3HonninFutanGetsugaku
-     *
      * @return kohi3HonninFutanGetsugaku
      */
-    public int getKohi3HonninFutanGetsugaku() {
+    public Decimal getKohi3HonninFutanGetsugaku() {
         return kohi3HonninFutanGetsugaku;
     }
 
     /**
      * setKohi3HonninFutanGetsugaku
-     *
      * @param kohi3HonninFutanGetsugaku kohi3HonninFutanGetsugaku
      */
-    public void setKohi3HonninFutanGetsugaku(int kohi3HonninFutanGetsugaku) {
+    public void setKohi3HonninFutanGetsugaku(Decimal kohi3HonninFutanGetsugaku) {
         this.kohi3HonninFutanGetsugaku = kohi3HonninFutanGetsugaku;
     }
 
     /**
      * getAtoHiyoTanka
-     *
      * @return atoHiyoTanka
      */
-    public int getAtoHiyoTanka() {
+    public Decimal getAtoHiyoTanka() {
         return atoHiyoTanka;
     }
 
     /**
      * setAtoHiyoTanka
-     *
      * @param atoHiyoTanka atoHiyoTanka
      */
-    public void setAtoHiyoTanka(int atoHiyoTanka) {
+    public void setAtoHiyoTanka(Decimal atoHiyoTanka) {
         this.atoHiyoTanka = atoHiyoTanka;
     }
 
     /**
      * getAtoNissu
-     *
      * @return atoNissu
      */
-    public int getAtoNissu() {
+    public Integer getAtoNissu() {
         return atoNissu;
     }
 
     /**
      * setAtoNissu
-     *
      * @param atoNissu atoNissu
      */
-    public void setAtoNissu(int atoNissu) {
+    public void setAtoNissu(Integer atoNissu) {
         this.atoNissu = atoNissu;
     }
 
     /**
      * getAtoKohi1Nissu
-     *
      * @return atoKohi1Nissu
      */
-    public int getAtoKohi1Nissu() {
+    public Integer getAtoKohi1Nissu() {
         return atoKohi1Nissu;
     }
 
     /**
      * setAtoKohi1Nissu
-     *
      * @param atoKohi1Nissu atoKohi1Nissu
      */
-    public void setAtoKohi1Nissu(int atoKohi1Nissu) {
+    public void setAtoKohi1Nissu(Integer atoKohi1Nissu) {
         this.atoKohi1Nissu = atoKohi1Nissu;
     }
 
     /**
      * getAtoKohi2Nissu
-     *
      * @return atoKohi2Nissu
      */
-    public int getAtoKohi2Nissu() {
+    public Integer getAtoKohi2Nissu() {
         return atoKohi2Nissu;
     }
 
     /**
      * setAtoKohi2Nissu
-     *
      * @param atoKohi2Nissu atoKohi2Nissu
      */
-    public void setAtoKohi2Nissu(int atoKohi2Nissu) {
+    public void setAtoKohi2Nissu(Integer atoKohi2Nissu) {
         this.atoKohi2Nissu = atoKohi2Nissu;
     }
 
     /**
      * getAtoKohi3Nissu
-     *
      * @return atoKohi3Nissu
      */
-    public int getAtoKohi3Nissu() {
+    public Integer getAtoKohi3Nissu() {
         return atoKohi3Nissu;
     }
 
     /**
      * setAtoKohi3Nissu
-     *
      * @param atoKohi3Nissu atoKohi3Nissu
      */
-    public void setAtoKohi3Nissu(int atoKohi3Nissu) {
+    public void setAtoKohi3Nissu(Integer atoKohi3Nissu) {
         this.atoKohi3Nissu = atoKohi3Nissu;
     }
 
     /**
      * getAtoHiyogaku
-     *
      * @return atoHiyogaku
      */
-    public int getAtoHiyogaku() {
+    public Decimal getAtoHiyogaku() {
         return atoHiyogaku;
     }
 
     /**
      * setAtoHiyogaku
-     *
      * @param atoHiyogaku atoHiyogaku
      */
-    public void setAtoHiyogaku(int atoHiyogaku) {
+    public void setAtoHiyogaku(Decimal atoHiyogaku) {
         this.atoHiyogaku = atoHiyogaku;
     }
 
     /**
      * getAtoHokenbunSeikyugaku
-     *
      * @return atoHokenbunSeikyugaku
      */
-    public int getAtoHokenbunSeikyugaku() {
+    public Decimal getAtoHokenbunSeikyugaku() {
         return atoHokenbunSeikyugaku;
     }
 
     /**
      * setAtoHokenbunSeikyugaku
-     *
      * @param atoHokenbunSeikyugaku atoHokenbunSeikyugaku
      */
-    public void setAtoHokenbunSeikyugaku(int atoHokenbunSeikyugaku) {
+    public void setAtoHokenbunSeikyugaku(Decimal atoHokenbunSeikyugaku) {
         this.atoHokenbunSeikyugaku = atoHokenbunSeikyugaku;
     }
 
     /**
      * getAtoKohi1Futangaku
-     *
      * @return atoKohi1Futangaku
      */
-    public int getAtoKohi1Futangaku() {
+    public Decimal getAtoKohi1Futangaku() {
         return atoKohi1Futangaku;
     }
 
     /**
      * setAtoKohi1Futangaku
-     *
      * @param atoKohi1Futangaku atoKohi1Futangaku
      */
-    public void setAtoKohi1Futangaku(int atoKohi1Futangaku) {
+    public void setAtoKohi1Futangaku(Decimal atoKohi1Futangaku) {
         this.atoKohi1Futangaku = atoKohi1Futangaku;
     }
 
     /**
      * getAtoKohi2Futangaku
-     *
      * @return atoKohi2Futangaku
      */
-    public int getAtoKohi2Futangaku() {
+    public Decimal getAtoKohi2Futangaku() {
         return atoKohi2Futangaku;
     }
 
     /**
      * setAtoKohi2Futangaku
-     *
      * @param atoKohi2Futangaku atoKohi2Futangaku
      */
-    public void setAtoKohi2Futangaku(int atoKohi2Futangaku) {
+    public void setAtoKohi2Futangaku(Decimal atoKohi2Futangaku) {
         this.atoKohi2Futangaku = atoKohi2Futangaku;
     }
 
     /**
      * getAtoKohi3Futangaku
-     *
      * @return atoKohi3Futangaku
      */
-    public int getAtoKohi3Futangaku() {
+    public Decimal getAtoKohi3Futangaku() {
         return atoKohi3Futangaku;
     }
 
     /**
      * setAtoKohi3Futangaku
-     *
      * @param atoKohi3Futangaku atoKohi3Futangaku
      */
-    public void setAtoKohi3Futangaku(int atoKohi3Futangaku) {
+    public void setAtoKohi3Futangaku(Decimal atoKohi3Futangaku) {
         this.atoKohi3Futangaku = atoKohi3Futangaku;
     }
 
     /**
      * getAtoRiyoshaFutangaku
-     *
      * @return atoRiyoshaFutangaku
      */
-    public int getAtoRiyoshaFutangaku() {
+    public Decimal getAtoRiyoshaFutangaku() {
         return atoRiyoshaFutangaku;
     }
 
     /**
      * setAtoRiyoshaFutangaku
-     *
      * @param atoRiyoshaFutangaku atoRiyoshaFutangaku
      */
-    public void setAtoRiyoshaFutangaku(int atoRiyoshaFutangaku) {
+    public void setAtoRiyoshaFutangaku(Decimal atoRiyoshaFutangaku) {
         this.atoRiyoshaFutangaku = atoRiyoshaFutangaku;
     }
 
     /**
      * getAtoHiyogakuTotal
-     *
      * @return atoHiyogakuTotal
      */
-    public int getAtoHiyogakuTotal() {
+    public Decimal getAtoHiyogakuTotal() {
         return atoHiyogakuTotal;
     }
 
     /**
      * setAtoHiyogakuTotal
-     *
      * @param atoHiyogakuTotal atoHiyogakuTotal
      */
-    public void setAtoHiyogakuTotal(int atoHiyogakuTotal) {
+    public void setAtoHiyogakuTotal(Decimal atoHiyogakuTotal) {
         this.atoHiyogakuTotal = atoHiyogakuTotal;
     }
 
     /**
      * getAtoHokenbunSeikyugakuTotal
-     *
      * @return atoHokenbunSeikyugakuTotal
      */
-    public int getAtoHokenbunSeikyugakuTotal() {
+    public Decimal getAtoHokenbunSeikyugakuTotal() {
         return atoHokenbunSeikyugakuTotal;
     }
 
     /**
      * setAtoHokenbunSeikyugakuTotal
-     *
      * @param atoHokenbunSeikyugakuTotal atoHokenbunSeikyugakuTotal
      */
-    public void setAtoHokenbunSeikyugakuTotal(int atoHokenbunSeikyugakuTotal) {
+    public void setAtoHokenbunSeikyugakuTotal(Decimal atoHokenbunSeikyugakuTotal) {
         this.atoHokenbunSeikyugakuTotal = atoHokenbunSeikyugakuTotal;
     }
 
     /**
      * getAtoRiyoshaFutangakuTotal
-     *
      * @return atoRiyoshaFutangakuTotal
      */
-    public int getAtoRiyoshaFutangakuTotal() {
+    public Decimal getAtoRiyoshaFutangakuTotal() {
         return atoRiyoshaFutangakuTotal;
     }
 
     /**
      * setAtoRiyoshaFutangakuTotal
-     *
      * @param atoRiyoshaFutangakuTotal atoRiyoshaFutangakuTotal
      */
-    public void setAtoRiyoshaFutangakuTotal(int atoRiyoshaFutangakuTotal) {
+    public void setAtoRiyoshaFutangakuTotal(Decimal atoRiyoshaFutangakuTotal) {
         this.atoRiyoshaFutangakuTotal = atoRiyoshaFutangakuTotal;
     }
 
     /**
      * getAtoKohi1FutangakuTotal
-     *
      * @return atoKohi1FutangakuTotal
      */
-    public int getAtoKohi1FutangakuTotal() {
+    public Decimal getAtoKohi1FutangakuTotal() {
         return atoKohi1FutangakuTotal;
     }
 
     /**
      * setAtoKohi1FutangakuTotal
-     *
      * @param atoKohi1FutangakuTotal atoKohi1FutangakuTotal
      */
-    public void setAtoKohi1FutangakuTotal(int atoKohi1FutangakuTotal) {
+    public void setAtoKohi1FutangakuTotal(Decimal atoKohi1FutangakuTotal) {
         this.atoKohi1FutangakuTotal = atoKohi1FutangakuTotal;
     }
 
     /**
      * getAtoKohi1Seikyugaku
-     *
      * @return atoKohi1Seikyugaku
      */
-    public int getAtoKohi1Seikyugaku() {
+    public Decimal getAtoKohi1Seikyugaku() {
         return atoKohi1Seikyugaku;
     }
 
     /**
      * setAtoKohi1Seikyugaku
-     *
      * @param atoKohi1Seikyugaku atoKohi1Seikyugaku
      */
-    public void setAtoKohi1Seikyugaku(int atoKohi1Seikyugaku) {
+    public void setAtoKohi1Seikyugaku(Decimal atoKohi1Seikyugaku) {
         this.atoKohi1Seikyugaku = atoKohi1Seikyugaku;
     }
 
     /**
      * getAtoKohi1HonninFutanGetsugaku
-     *
      * @return atoKohi1HonninFutanGetsugaku
      */
-    public int getAtoKohi1HonninFutanGetsugaku() {
+    public Decimal getAtoKohi1HonninFutanGetsugaku() {
         return atoKohi1HonninFutanGetsugaku;
     }
 
     /**
      * setAtoKohi1HonninFutanGetsugaku
-     *
      * @param atoKohi1HonninFutanGetsugaku atoKohi1HonninFutanGetsugaku
      */
-    public void setAtoKohi1HonninFutanGetsugaku(int atoKohi1HonninFutanGetsugaku) {
+    public void setAtoKohi1HonninFutanGetsugaku(Decimal atoKohi1HonninFutanGetsugaku) {
         this.atoKohi1HonninFutanGetsugaku = atoKohi1HonninFutanGetsugaku;
     }
 
     /**
      * getAtoKohi2FutangakuTotal
-     *
      * @return atoKohi2FutangakuTotal
      */
-    public int getAtoKohi2FutangakuTotal() {
+    public Decimal getAtoKohi2FutangakuTotal() {
         return atoKohi2FutangakuTotal;
     }
 
     /**
      * setAtoKohi2FutangakuTotal
-     *
      * @param atoKohi2FutangakuTotal atoKohi2FutangakuTotal
      */
-    public void setAtoKohi2FutangakuTotal(int atoKohi2FutangakuTotal) {
+    public void setAtoKohi2FutangakuTotal(Decimal atoKohi2FutangakuTotal) {
         this.atoKohi2FutangakuTotal = atoKohi2FutangakuTotal;
     }
 
     /**
      * getAtoKohi2Seikyugaku
-     *
      * @return atoKohi2Seikyugaku
      */
-    public int getAtoKohi2Seikyugaku() {
+    public Decimal getAtoKohi2Seikyugaku() {
         return atoKohi2Seikyugaku;
     }
 
     /**
      * setAtoKohi2Seikyugaku
-     *
      * @param atoKohi2Seikyugaku atoKohi2Seikyugaku
      */
-    public void setAtoKohi2Seikyugaku(int atoKohi2Seikyugaku) {
+    public void setAtoKohi2Seikyugaku(Decimal atoKohi2Seikyugaku) {
         this.atoKohi2Seikyugaku = atoKohi2Seikyugaku;
     }
 
     /**
      * getAtoKohi2HonninFutanGetsugaku
-     *
      * @return atoKohi2HonninFutanGetsugaku
      */
-    public int getAtoKohi2HonninFutanGetsugaku() {
+    public Decimal getAtoKohi2HonninFutanGetsugaku() {
         return atoKohi2HonninFutanGetsugaku;
     }
 
     /**
      * setAtoKohi2HonninFutanGetsugaku
-     *
      * @param atoKohi2HonninFutanGetsugaku atoKohi2HonninFutanGetsugaku
      */
-    public void setAtoKohi2HonninFutanGetsugaku(int atoKohi2HonninFutanGetsugaku) {
+    public void setAtoKohi2HonninFutanGetsugaku(Decimal atoKohi2HonninFutanGetsugaku) {
         this.atoKohi2HonninFutanGetsugaku = atoKohi2HonninFutanGetsugaku;
     }
 
     /**
      * getAtoKohi3FutangakuTotal
-     *
      * @return atoKohi3FutangakuTotal
      */
-    public int getAtoKohi3FutangakuTotal() {
+    public Decimal getAtoKohi3FutangakuTotal() {
         return atoKohi3FutangakuTotal;
     }
 
     /**
      * setAtoKohi3FutangakuTotal
-     *
      * @param atoKohi3FutangakuTotal atoKohi3FutangakuTotal
      */
-    public void setAtoKohi3FutangakuTotal(int atoKohi3FutangakuTotal) {
+    public void setAtoKohi3FutangakuTotal(Decimal atoKohi3FutangakuTotal) {
         this.atoKohi3FutangakuTotal = atoKohi3FutangakuTotal;
     }
 
     /**
      * getAtoKohi3Seikyugaku
-     *
      * @return atoKohi3Seikyugaku
      */
-    public int getAtoKohi3Seikyugaku() {
+    public Decimal getAtoKohi3Seikyugaku() {
         return atoKohi3Seikyugaku;
     }
 
     /**
      * setAtoKohi3Seikyugaku
-     *
      * @param atoKohi3Seikyugaku atoKohi3Seikyugaku
      */
-    public void setAtoKohi3Seikyugaku(int atoKohi3Seikyugaku) {
+    public void setAtoKohi3Seikyugaku(Decimal atoKohi3Seikyugaku) {
         this.atoKohi3Seikyugaku = atoKohi3Seikyugaku;
     }
 
     /**
      * getAtoKohi3HonninFutanGetsugaku
-     *
      * @return atoKohi3HonninFutanGetsugaku
      */
-    public int getAtoKohi3HonninFutanGetsugaku() {
+    public Decimal getAtoKohi3HonninFutanGetsugaku() {
         return atoKohi3HonninFutanGetsugaku;
     }
 
     /**
      * setAtoKohi3HonninFutanGetsugaku
-     *
      * @param atoKohi3HonninFutanGetsugaku atoKohi3HonninFutanGetsugaku
      */
-    public void setAtoKohi3HonninFutanGetsugaku(int atoKohi3HonninFutanGetsugaku) {
+    public void setAtoKohi3HonninFutanGetsugaku(Decimal atoKohi3HonninFutanGetsugaku) {
         this.atoKohi3HonninFutanGetsugaku = atoKohi3HonninFutanGetsugaku;
     }
 
     /**
      * getSaishinsaKaisu
-     *
      * @return saishinsaKaisu
      */
-    public int getSaishinsaKaisu() {
+    public Integer getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
     /**
      * setSaishinsaKaisu
-     *
      * @param saishinsaKaisu saishinsaKaisu
      */
-    public void setSaishinsaKaisu(int saishinsaKaisu) {
+    public void setSaishinsaKaisu(Integer saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
     /**
      * getKagoKaisu
-     *
      * @return kagoKaisu
      */
-    public int getKagoKaisu() {
+    public Integer getKagoKaisu() {
         return kagoKaisu;
     }
 
     /**
      * setKagoKaisu
-     *
      * @param kagoKaisu kagoKaisu
      */
-    public void setKagoKaisu(int kagoKaisu) {
+    public void setKagoKaisu(Integer kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 
     /**
      * getShinsaYM
-     *
      * @return shinsaYM
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -1241,7 +1117,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setShinsaYM
-     *
      * @param shinsaYM shinsaYM
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
@@ -1250,7 +1125,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * getSeiriNo
-     *
      * @return seiriNo
      */
     public RString getSeiriNo() {
@@ -1259,7 +1133,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setSeiriNo
-     *
      * @param seiriNo seiriNo
      */
     public void setSeiriNo(RString seiriNo) {
@@ -1268,7 +1141,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * getTorikomiYM
-     *
      * @return torikomiYM
      */
     public FlexibleYearMonth getTorikomiYM() {
@@ -1277,7 +1149,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * setTorikomiYM
-     *
      * @param torikomiYM torikomiYM
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -1286,9 +1157,10 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
     /**
      * このエンティティの主キーが他の{@literal DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     public boolean equalsPrimaryKeys(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity other) {
         if (other == null) {
@@ -1322,4 +1194,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
     }
 
 // </editor-fold>
+
+
 }

@@ -57,19 +57,19 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
     private FlexibleDate kyotakuServiceSakuseiIraiYMD;
     private ServiceCode serviceCode;
     private Decimal tanisu;
-    private int kaisu;
+    private Integer kaisu;
     private Decimal serviceTanisu;
     private Decimal serviceTanisuTotal;
     private Decimal seikyuKingaku;
     private RString tantouKaigoShienSemmoninNo;
     private RString tekiyo;
     private Decimal atoTanisu;
-    private int atoKaisu;
+    private Integer atoKaisu;
     private Decimal atoServiceTanisu;
     private Decimal atoServiceTanisuTotal;
     private Decimal atoSeikyuKingaku;
-    private int saishinsaKaisu;
-    private int kagoKaisu;
+    private Integer saishinsaKaisu;
+    private Integer kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
@@ -343,7 +343,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
      * getKaisu
      * @return kaisu
      */
-    public int getKaisu() {
+    public Integer getKaisu() {
         return kaisu;
     }
 
@@ -351,7 +351,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
      * setKaisu
      * @param kaisu kaisu
      */
-    public void setKaisu(int kaisu) {
+    public void setKaisu(Integer kaisu) {
         this.kaisu = kaisu;
     }
 
@@ -455,7 +455,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
      * getAtoKaisu
      * @return atoKaisu
      */
-    public int getAtoKaisu() {
+    public Integer getAtoKaisu() {
         return atoKaisu;
     }
 
@@ -463,7 +463,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
      * setAtoKaisu
      * @param atoKaisu atoKaisu
      */
-    public void setAtoKaisu(int atoKaisu) {
+    public void setAtoKaisu(Integer atoKaisu) {
         this.atoKaisu = atoKaisu;
     }
 
@@ -519,7 +519,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
      * getSaishinsaKaisu
      * @return saishinsaKaisu
      */
-    public int getSaishinsaKaisu() {
+    public Integer getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
@@ -527,7 +527,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
      * setSaishinsaKaisu
      * @param saishinsaKaisu saishinsaKaisu
      */
-    public void setSaishinsaKaisu(int saishinsaKaisu) {
+    public void setSaishinsaKaisu(Integer saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
@@ -535,7 +535,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
      * getKagoKaisu
      * @return kagoKaisu
      */
-    public int getKagoKaisu() {
+    public Integer getKagoKaisu() {
         return kagoKaisu;
     }
 
@@ -543,7 +543,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
      * setKagoKaisu
      * @param kagoKaisu kagoKaisu
      */
-    public void setKagoKaisu(int kagoKaisu) {
+    public void setKagoKaisu(Integer kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 
@@ -637,6 +637,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
     }
 
 // </editor-fold>
+
 
 
 }
