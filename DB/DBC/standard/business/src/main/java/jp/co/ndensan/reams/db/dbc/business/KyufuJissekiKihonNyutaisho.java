@@ -17,8 +17,8 @@ public class KyufuJissekiKihonNyutaisho {
 
     private final FlexibleDate 入所日;
     private final FlexibleDate 退所日;
-    private final int 入所実日数;
-    private final int 外泊日数;
+    private final Integer 入所実日数;
+    private final Integer 外泊日数;
     private final RString 入所前の状況;
     private final RString 退所後の状況;
 
@@ -35,8 +35,8 @@ public class KyufuJissekiKihonNyutaisho {
     public KyufuJissekiKihonNyutaisho(
             FlexibleDate 入所日,
             FlexibleDate 退所日,
-            int 入所実日数,
-            int 外泊日数,
+            Integer 入所実日数,
+            Integer 外泊日数,
             RString 入所前の状況,
             RString 退所後の状況) {
         this.入所日 = 入所日;
@@ -70,7 +70,7 @@ public class KyufuJissekiKihonNyutaisho {
      *
      * @return 入所実日数
      */
-    public int get入所実日数() {
+    public Integer get入所実日数() {
         return 入所実日数;
     }
 
@@ -79,7 +79,7 @@ public class KyufuJissekiKihonNyutaisho {
      *
      * @return 外泊日数
      */
-    public int get外泊日数() {
+    public Integer get外泊日数() {
         return 外泊日数;
     }
 

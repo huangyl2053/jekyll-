@@ -17,14 +17,14 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class KyufuJissekiShukei {
 
     private final RString 種類;
-    private final int 実日数;
+    private final Integer 実日数;
     private final Decimal 計画単位;
     private final Decimal 対象単位;
     private final Decimal 対象外単位;
-    private final int 短計画日数;
+    private final Integer 短計画日数;
     private final RString 保険公費;
     private final RString 決定;
-    private final int 短実日数;
+    private final Integer 短実日数;
     private final Decimal 単位合計;
     private final Decimal 単位数単価;
     private final Decimal 請求額;
@@ -32,8 +32,8 @@ public class KyufuJissekiShukei {
     private final Decimal 出来高単位合計;
     private final Decimal 出来高請求;
     private final Decimal 出来高本人負担額;
-    private final int 再審査回数;
-    private final int 過誤回数;
+    private final Integer 再審査回数;
+    private final Integer 過誤回数;
     private final FlexibleYearMonth 審査年月;
 
     /**
@@ -61,14 +61,14 @@ public class KyufuJissekiShukei {
      */
     public KyufuJissekiShukei(
             RString 種類,
-            int 実日数,
+            Integer 実日数,
             Decimal 計画単位,
             Decimal 対象単位,
             Decimal 対象外単位,
-            int 短計画日数,
+            Integer 短計画日数,
             RString 保険公費,
             RString 決定,
-            int 短実日数,
+            Integer 短実日数,
             Decimal 単位合計,
             Decimal 単位数単価,
             Decimal 請求額,
@@ -76,8 +76,8 @@ public class KyufuJissekiShukei {
             Decimal 出来高単位合計,
             Decimal 出来高請求,
             Decimal 出来高本人負担額,
-            int 再審査回数,
-            int 過誤回数,
+            Integer 再審査回数,
+            Integer 過誤回数,
             FlexibleYearMonth 審査年月) {
         this.種類 = 種類;
         this.実日数 = 実日数;
@@ -114,7 +114,7 @@ public class KyufuJissekiShukei {
      *
      * @return 実日数
      */
-    public int get実日数() {
+    public Integer get実日数() {
         return 実日数;
     }
 
@@ -150,7 +150,7 @@ public class KyufuJissekiShukei {
      *
      * @return 短計画日数
      */
-    public int get短計画日数() {
+    public Integer get短計画日数() {
         return 短計画日数;
     }
 
@@ -177,7 +177,7 @@ public class KyufuJissekiShukei {
      *
      * @return 短実日数
      */
-    public int get短実日数() {
+    public Integer get短実日数() {
         return 短実日数;
     }
 
@@ -249,7 +249,7 @@ public class KyufuJissekiShukei {
      *
      * @return 再審査回数
      */
-    public int get再審査回数() {
+    public Integer get再審査回数() {
         return 再審査回数;
     }
 
@@ -258,7 +258,7 @@ public class KyufuJissekiShukei {
      *
      * @return 過誤回数
      */
-    public int get過誤回数() {
+    public Integer get過誤回数() {
         return 過誤回数;
     }
 

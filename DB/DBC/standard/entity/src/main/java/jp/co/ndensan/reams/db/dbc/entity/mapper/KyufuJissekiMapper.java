@@ -57,7 +57,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績エンティティを給付実績情報に変換するMapperクラスです。

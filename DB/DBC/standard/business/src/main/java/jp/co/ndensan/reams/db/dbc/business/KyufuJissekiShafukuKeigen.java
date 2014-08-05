@@ -23,8 +23,8 @@ public class KyufuJissekiShafukuKeigen {
     private final Decimal 軽減額;
     private final Decimal 軽減後利用者負担額;
     private final RString 備考;
-    private final int 再審査回数;
-    private final int 過誤回数;
+    private final Integer 再審査回数;
+    private final Integer 過誤回数;
     private final FlexibleYearMonth 審査年月;
 
     /**
@@ -49,8 +49,8 @@ public class KyufuJissekiShafukuKeigen {
             Decimal 軽減額,
             Decimal 軽減後利用者負担額,
             RString 備考,
-            int 再審査回数,
-            int 過誤回数,
+            Integer 再審査回数,
+            Integer 過誤回数,
             FlexibleYearMonth 審査年月) {
         this.軽減率 = 軽減率;
         this.種類 = 種類;
@@ -132,7 +132,7 @@ public class KyufuJissekiShafukuKeigen {
      *
      * @return 再審査回数
      */
-    public int get再審査回数() {
+    public Integer get再審査回数() {
         return 再審査回数;
     }
 
@@ -141,7 +141,7 @@ public class KyufuJissekiShafukuKeigen {
      *
      * @return 過誤回数
      */
-    public int get過誤回数() {
+    public Integer get過誤回数() {
         return 過誤回数;
     }
 

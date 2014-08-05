@@ -45,26 +45,26 @@ public class KyufuJissekiTokuteiNyushohi {
      * インスタンスを生成します。
      *
      * @param サービス サービス
-     * @param 負担限度額
-     * @param 決定
-     * @param 明細合計
-     * @param 費用単価
-     * @param 日数
-     * @param 費用額
-     * @param 請求額
-     * @param 利用者負担額
-     * @param 公費1日数
-     * @param 公費1負担額
-     * @param 公費1請求額
-     * @param 公費1本人負担額
-     * @param 公費2日数
-     * @param 公費2負担額
-     * @param 公費2請求額
-     * @param 公費2本人負担額
-     * @param 公費3日数
-     * @param 公費3負担額
-     * @param 公費3請求額
-     * @param 公費3本人負担額
+     * @param 負担限度額 負担限度額
+     * @param 決定 決定
+     * @param 明細合計 明細合計
+     * @param 費用単価 費用単価
+     * @param 日数 日数
+     * @param 費用額 費用額
+     * @param 請求額 請求額
+     * @param 利用者負担額 利用者負担額
+     * @param 公費1日数 公費1日数
+     * @param 公費1負担額 公費1負担額
+     * @param 公費1請求額 公費1請求額
+     * @param 公費1本人負担額 公費1本人負担額
+     * @param 公費2日数 公費2日数
+     * @param 公費2負担額 公費2負担額
+     * @param 公費2請求額 公費2請求額
+     * @param 公費2本人負担額 公費2本人負担額
+     * @param 公費3日数 公費3日数
+     * @param 公費3負担額 公費3負担額
+     * @param 公費3請求額 公費3請求額
+     * @param 公費3本人負担額 公費3本人負担額
      * @param 再審査回数 再審査回数
      * @param 過誤回数 過誤回数
      * @param 審査年月 審査年月

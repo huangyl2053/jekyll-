@@ -17,7 +17,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class KyufuJissekiKyotakuServiceCollection implements Iterable<KyufuJissekiKyotakuService> {
 
-    List<KyufuJissekiKyotakuService> list;
+    private final List<KyufuJissekiKyotakuService> list;
 
     /**
      * インスタンスを生成します。
