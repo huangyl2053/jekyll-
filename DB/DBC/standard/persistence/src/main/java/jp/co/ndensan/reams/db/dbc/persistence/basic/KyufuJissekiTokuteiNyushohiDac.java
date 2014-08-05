@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo.*;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
@@ -51,6 +52,7 @@ public class KyufuJissekiTokuteiNyushohiDac implements IKyufuJissekiTokuteiNyush
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(jigyoshoNo, 事業所番号),
                                 eq(toshiNo, 通番)))
+                .order(by(recodeJunjiNo, Order.ASC))
                 .toList(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity.class);
     }
 
