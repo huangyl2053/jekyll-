@@ -61,7 +61,7 @@ public class TokuteiNyushoshaKaigoServicehi {
             RString rsKohi2HonninFutangaku = setCommFormat(iTokute.get公費2本人負担額());
             RString rsKohi3Nissu = toRString(iTokute.get公費3日数());
             RString rsKohi3Futangaku = setCommFormat(iTokute.get公費3負担額());
-            RString rsKohi3Seikyugaku = setCommFormat(iTokute.get公費3請額());
+            RString rsKohi3Seikyugaku = setCommFormat(iTokute.get公費3請求額());
             RString rsKohi3HonninFutangaku = setCommFormat(iTokute.get公費3本人負担額());
             RString rsSaishinsaKaisu = toRString(iTokute.get再審査回数());
             RString rsKagoKaisu = toRString(iTokute.get過誤回数());

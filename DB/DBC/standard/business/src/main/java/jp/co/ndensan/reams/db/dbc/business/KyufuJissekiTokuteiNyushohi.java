@@ -35,7 +35,7 @@ public class KyufuJissekiTokuteiNyushohi {
     private final Decimal 公費2本人負担額;
     private final Integer 公費3日数;
     private final Decimal 公費3負担額;
-    private final Decimal 公費3請額;
+    private final Decimal 公費3請求額;
     private final Decimal 公費3本人負担額;
     private final Integer 再審査回数;
     private final Integer 過誤回数;
@@ -63,7 +63,7 @@ public class KyufuJissekiTokuteiNyushohi {
      * @param 公費2本人負担額
      * @param 公費3日数
      * @param 公費3負担額
-     * @param 公費3請額
+     * @param 公費3請求額
      * @param 公費3本人負担額
      * @param 再審査回数 再審査回数
      * @param 過誤回数 過誤回数
@@ -89,7 +89,7 @@ public class KyufuJissekiTokuteiNyushohi {
             Decimal 公費2本人負担額,
             Integer 公費3日数,
             Decimal 公費3負担額,
-            Decimal 公費3請額,
+            Decimal 公費3請求額,
             Decimal 公費3本人負担額,
             Integer 再審査回数,
             Integer 過誤回数,
@@ -113,7 +113,7 @@ public class KyufuJissekiTokuteiNyushohi {
         this.公費2本人負担額 = 公費2本人負担額;
         this.公費3日数 = 公費3日数;
         this.公費3負担額 = 公費3負担額;
-        this.公費3請額 = 公費3請額;
+        this.公費3請求額 = 公費3請求額;
         this.公費3本人負担額 = 公費3本人負担額;
         this.再審査回数 = 再審査回数;
         this.過誤回数 = 過誤回数;
@@ -292,12 +292,12 @@ public class KyufuJissekiTokuteiNyushohi {
     }
 
     /**
-     * 公費3請額を返します。
+     * 公費3請求額を返します。
      *
-     * @return 公費3請額
+     * @return 公費3請求額
      */
-    public Decimal get公費3請額() {
-        return 公費3請額;
+    public Decimal get公費3請求額() {
+        return 公費3請求額;
     }
 
     /**

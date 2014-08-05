@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKyotakuService;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiMeisai;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigen;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukei;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiTokuteiNyushohi;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3018KyufujissekiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3025KyufujissekiKyotakuServiceEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3027KyufujissekiJutakuKaishuhiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
@@ -31,6 +33,7 @@ import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3018KyufujissekiMeisaiEntityM
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3025KyufujissekiKyotakuServiceEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3026KyufujissekiFukushiYoguHanbaihiEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3027KyufujissekiJutakuKaishuhiEntityMock;
+import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3033KyufujissekiShukeiEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.KyufujissekiShuruiDetailEntityGenerator;
@@ -866,6 +869,151 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
 
         @Test
         public void 審査年月の設定がある時_to給付実績住宅改修費List_get審査年月は_設定値を返す() {
+            assertThat(result.get審査年月(), is(審査年月));
+        }
+    }
+
+    public static class to給付実績特定入所者費用List extends DbcTestBase {
+
+        private KyufuJissekiTokuteiNyushohi result;
+
+        private static final RString サービス = new RString("123456");
+        private static final Decimal 負担限度額 = new Decimal(100);
+        private static final Decimal 費用単価 = new Decimal(110);
+        private static final Integer 日数 = new Integer(10);
+        private static final Decimal 費用額 = new Decimal(120);
+        private static final Decimal 請求額 = new Decimal(130);
+        private static final Decimal 利用者負担額 = new Decimal(140);
+        private static final Integer 公費1日数 = new Integer(11);
+        private static final Decimal 公費1負担額 = new Decimal(150);
+        private static final Decimal 公費1請求額 = null;
+        private static final Decimal 公費1本人負担額 = null;
+        private static final Integer 公費2日数 = new Integer(12);
+        private static final Decimal 公費2負担額 = new Decimal(180);
+        private static final Decimal 公費2請求額 = null;
+        private static final Decimal 公費2本人負担額 = null;
+        private static final Integer 公費3日数 = new Integer(13);
+        private static final Decimal 公費3負担額 = new Decimal(210);
+        private static final Decimal 公費3請求額 = null;
+        private static final Decimal 公費3本人負担額 = null;
+        private static final Integer 再審査回数 = new Integer(14);
+        private static final Integer 過誤回数 = new Integer(15);
+        private static final FlexibleYearMonth 審査年月 = new FlexibleYearMonth("201401");
+
+        @Before
+        public void setUp() {
+            List<DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity> entities = new ArrayList<>();
+            entities.add(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityMock.getSpiedInstance());
+            result = KyufuJissekiMapper.to給付実績特定入所者費用List(entities).iterator().next();
+        }
+
+        @Test
+        public void サービスの設定がある時_to給付実績特定入所者費用List_getサービスは_設定値を返す() {
+            assertThat(result.getサービス(), is(サービス));
+        }
+
+        @Test
+        public void 負担限度額の設定がある時_to給付実績特定入所者費用List_get負担限度額は_設定値を返す() {
+            assertThat(result.get負担限度額(), is(負担限度額));
+        }
+
+        @Test
+        public void 費用単価の設定がある時_to給付実績特定入所者費用List_get費用単価は_設定値を返す() {
+            assertThat(result.get費用単価(), is(費用単価));
+        }
+
+        @Test
+        public void 日数の設定がある時_to給付実績特定入所者費用List_get日数は_設定値を返す() {
+            assertThat(result.get日数(), is(日数));
+        }
+
+        @Test
+        public void 費用額の設定がある時_to給付実績特定入所者費用List_get費用額は_設定値を返す() {
+            assertThat(result.get費用額(), is(費用額));
+        }
+
+        @Test
+        public void 請求額の設定がある時_to給付実績特定入所者費用List_get請求額は_設定値を返す() {
+            assertThat(result.get請求額(), is(請求額));
+        }
+
+        @Test
+        public void 利用者負担額の設定がある時_to給付実績特定入所者費用List_get利用者負担額は_設定値を返す() {
+            assertThat(result.get利用者負担額(), is(利用者負担額));
+        }
+
+        @Test
+        public void 公費1日数の設定がある時_to給付実績特定入所者費用List_get公費1日数は_設定値を返す() {
+            assertThat(result.get公費1日数(), is(公費1日数));
+        }
+
+        @Test
+        public void 公費1負担額の設定がある時_to給付実績特定入所者費用List_get公費1負担額は_設定値を返す() {
+            assertThat(result.get公費1負担額(), is(公費1負担額));
+        }
+
+        @Test
+        public void 公費1請求額の設定がある時_to給付実績特定入所者費用List_get公費1請求額は_設定値を返す() {
+            assertThat(result.get公費1請求額(), is(公費1請求額));
+        }
+
+        @Test
+        public void 公費1本人負担額の設定がある時_to給付実績特定入所者費用List_get公費1本人負担額は_設定値を返す() {
+            assertThat(result.get公費1本人負担額(), is(公費1本人負担額));
+        }
+
+        @Test
+        public void 公費2日数の設定がある時_to給付実績特定入所者費用List_get公費2日数は_設定値を返す() {
+            assertThat(result.get公費2日数(), is(公費2日数));
+        }
+
+        @Test
+        public void 公費2負担額の設定がある時_to給付実績特定入所者費用List_get公費2負担額は_設定値を返す() {
+            assertThat(result.get公費2負担額(), is(公費2負担額));
+        }
+
+        @Test
+        public void 公費2請求額の設定がある時_to給付実績特定入所者費用List_get公費2請求額は_設定値を返す() {
+            assertThat(result.get公費2請求額(), is(公費2請求額));
+        }
+
+        @Test
+        public void 公費2本人負担額の設定がある時_to給付実績特定入所者費用List_get公費2本人負担額は_設定値を返す() {
+            assertThat(result.get公費2本人負担額(), is(公費2本人負担額));
+        }
+
+        @Test
+        public void 公費3日数の設定がある時_to給付実績特定入所者費用List_get公費3日数は_設定値を返す() {
+            assertThat(result.get公費3日数(), is(公費3日数));
+        }
+
+        @Test
+        public void 公費3負担額の設定がある時_to給付実績特定入所者費用List_get公費3負担額は_設定値を返す() {
+            assertThat(result.get公費3負担額(), is(公費3負担額));
+        }
+
+        @Test
+        public void 公費3請求額の設定がある時_to給付実績特定入所者費用List_get公費3請求額は_設定値を返す() {
+            assertThat(result.get公費3請求額(), is(公費3請求額));
+        }
+
+        @Test
+        public void 公費3本人負担額の設定がある時_to給付実績特定入所者費用List_get公費3本人負担額は_設定値を返す() {
+            assertThat(result.get公費3本人負担額(), is(公費3本人負担額));
+        }
+
+        @Test
+        public void 再審査回数の設定がある時_to給付実績特定入所者費用List_get再審査回数は_設定値を返す() {
+            assertThat(result.get再審査回数(), is(再審査回数));
+        }
+
+        @Test
+        public void 過誤回数の設定がある時_to給付実績特定入所者費用List_get過誤回数は_設定値を返す() {
+            assertThat(result.get過誤回数(), is(過誤回数));
+        }
+
+        @Test
+        public void 審査年月の設定がある時_to給付実績特定入所者費用List_get審査年月は_設定値を返す() {
             assertThat(result.get審査年月(), is(審査年月));
         }
     }
