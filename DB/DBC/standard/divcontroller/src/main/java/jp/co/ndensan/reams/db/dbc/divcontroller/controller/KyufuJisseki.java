@@ -272,13 +272,13 @@ public class KyufuJisseki {
             RString rsShiteiKijunGaitoJigyoshoKubun = iKyotakuService.get指定基準区分();
             RString rsIraiTodokedeYMD = toWareki(iKyotakuService.get届出日());
             RString rsService = iKyotakuService.getサービス();
-            RString rsTanisuTanka = setCommFormat(iKyotakuService.get単位数単価());
+            RString rsTanisuTanka = toRString(iKyotakuService.get単位数単価());
             RString rsKettei = iKyotakuService.get決定();
             RString rsMeisaiGokei = iKyotakuService.get明細合計();
             RString rsTanisu = setCommFormat(iKyotakuService.get単位数());
             RString rsKaisu = toRString(iKyotakuService.get回数());
-            RString rsServiceTanisu = toRString(iKyotakuService.getサービス単位数());
-            RString rsSeikyuKingaku = toRString(iKyotakuService.get請求金額());
+            RString rsServiceTanisu = setCommFormat(iKyotakuService.getサービス単位数());
+            RString rsSeikyuKingaku = setCommFormat(iKyotakuService.get請求金額());
             RString rsTantoKaigoShienSenmoninNo = iKyotakuService.get専門員番号();
             RString rsSaishinsaKaisu = toRString(iKyotakuService.get再審査回数());
             RString rsKagoKaisu = toRString(iKyotakuService.get過誤回数());

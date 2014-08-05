@@ -329,7 +329,7 @@ public class KyufuJissekiList {
                 KyufuJissekiServiceCollection col = collections.get給付実績月別集計(new ServiceTeikyoYM(start));
                 if (col != null) {
                     Decimal data = isMeisai ? col.get単位数合計Byサービス種類(code) : col.get保険請求分請求額合計Byサービス種類(code);
-                    row.txtYM.add(data.equals(Decimal.ZERO) ? RString.EMPTY : new RString(data.toString()));
+                    row.txtYM.add(setCommFormat(data));
                 }
                 start = start.plusMonth(1);
             }
@@ -345,6 +345,13 @@ public class KyufuJissekiList {
             list.add(i < row.txtYM.size() ? row.txtYM.get(i) : RString.EMPTY);
         }
         return list;
+    }
+
+    private RString setCommFormat(Decimal data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return new RString(data.toString("##,###,###"));
     }
 
     private dgKyufuJissekiMeisaiList_Row createRowKyufuJissekiMeisaiList(
