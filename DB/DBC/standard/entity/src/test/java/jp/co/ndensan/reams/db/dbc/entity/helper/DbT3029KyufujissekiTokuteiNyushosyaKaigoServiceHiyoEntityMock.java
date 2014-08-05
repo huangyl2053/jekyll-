@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.mockito.Mockito.spy;
 
 /**
@@ -56,6 +57,27 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityMock {
         entity.setToshiNo(new ToshiNo(new RString("0000000006")));
         entity.setServiceSyuruiCode(new ServiceShuruiCode(new RString("12")));
         entity.setServiceKomokuCode(new ServiceKomokuCode(new RString("3456")));
+        entity.setFutanGendogaku(new Decimal(100));
+        entity.setHiyoTanka(new Decimal(110));
+        entity.setNissu(new Integer(10));
+        entity.setHiyogaku(new Decimal(120));
+        entity.setHokenbunSeikyugaku(new Decimal(130));
+        entity.setRiyoshaFutangaku(new Decimal(140));
+        entity.setKohi1Nissu(new Integer(11));
+        entity.setKohi1Futangaku(new Decimal(150));
+        entity.setKohi1Seikyugaku(new Decimal(160));
+        entity.setKohi1HonninFutanGetsugaku(new Decimal(170));
+        entity.setKohi2Nissu(new Integer(12));
+        entity.setKohi2Futangaku(new Decimal(180));
+        entity.setKohi2Seikyugaku(new Decimal(190));
+        entity.setKohi2HonninFutanGetsugaku(new Decimal(200));
+        entity.setKohi3Nissu(new Integer(13));
+        entity.setKohi3Futangaku(new Decimal(210));
+        entity.setKohi3Seikyugaku(new Decimal(220));
+        entity.setKohi3HonninFutanGetsugaku(new Decimal(230));
+        entity.setSaishinsaKaisu(new Integer(14));
+        entity.setKagoKaisu(new Integer(15));
+        entity.setShinsaYM(new FlexibleYearMonth("201401"));
         return entity;
     }
 }
