@@ -5,13 +5,13 @@ shokisaiHokenshaNo,DbUDD003HokenshaNo,ShoKisaiHokenshaNo,,,,,A
 hiHokenshaNo,DbUDD002HihokenshaNo,KaigoHihokenshaNo,,,,,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,A
 jigyoshoNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,A
-toshiNo,varchar,RString,,,,,A
-meisaiNo,bpchar,RString,,,,,A
+toshiNo,varchar,ToshiNo,,,,,A
 serviceCode,DbUDD007ServiceCode,RString,,,,,A
+meisaiNo,bpchar,RString,,,,,A
 jutakuKaishuchakkoYMD,UDD015YMD,FlexibleDate,,,,,A
 jutakuKaishuJigyoshaName,varchar,RString,,,,,A
 juutakukaishuJyutakuAdress,varchar,RString,,,,,A
-kaishuKingaku,int4,int,,,,,A
+kaishuKingaku,int4,Decimal,,,,,A
 shinsaYM,UDD014YM,FlexibleYearMonth,,,,,A
 seiriNo,varchar,RString,,,,,A
 torikomiYM,UDD014YM,FlexibleYearMonth,,,,,A

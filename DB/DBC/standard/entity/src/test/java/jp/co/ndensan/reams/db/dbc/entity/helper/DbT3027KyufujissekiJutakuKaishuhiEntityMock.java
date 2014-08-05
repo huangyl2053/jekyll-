@@ -10,9 +10,11 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.mockito.Mockito.spy;
 
 /**
@@ -51,13 +53,13 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntityMock {
         entity.setHiHokenshaNo(new KaigoHihokenshaNo(new RString("0000000004")));
         entity.setServiceTeikyoYM(new FlexibleYearMonth("201401"));
         entity.setJigyoshoNo(new JigyoshaNo(new RString("0000000005")));
-        entity.setToshiNo(new RString("0000000006"));
+        entity.setToshiNo(new ToshiNo(new RString("0000000006")));
         entity.setMeisaiNo(new RString("1"));
         entity.setServiceCode(new RString("000007"));
         entity.setJutakuKaishuchakkoYMD(new FlexibleDate("20140201"));
         entity.setJutakuKaishuJigyoshaName(new RString("住宅改修事業者名"));
         entity.setJuutakukaishuJyutakuAdress(new RString("住宅改修住宅住所"));
-        entity.setKaishuKingaku(1234);
+        entity.setKaishuKingaku(new Decimal(1234));
         entity.setShinsaYM(new FlexibleYearMonth("201403"));
         entity.setSeiriNo(new RString("0000000008"));
         entity.setTorikomiYM(new FlexibleYearMonth("201404"));

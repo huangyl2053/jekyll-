@@ -20,16 +20,16 @@ public class KyufuJissekiMeisai {
     private final RString 適要;
     private final RString 決定;
     private final Decimal 単位;
-    private final int 回数日数;
-    private final int 公費1日数;
-    private final int 公費2日数;
-    private final int 公費3日数;
+    private final Integer 回数日数;
+    private final Integer 公費1日数;
+    private final Integer 公費2日数;
+    private final Integer 公費3日数;
     private final Decimal サービス単位;
-    private final int 公費1単位;
-    private final int 公費2単位;
-    private final int 公費3単位;
-    private final int 再審査回数;
-    private final int 過誤回数;
+    private final Decimal 公費1単位;
+    private final Decimal 公費2単位;
+    private final Decimal 公費3単位;
+    private final Integer 再審査回数;
+    private final Integer 過誤回数;
     private final FlexibleYearMonth 審査年月;
 
     /**
@@ -56,16 +56,16 @@ public class KyufuJissekiMeisai {
             RString 適要,
             RString 決定,
             Decimal 単位,
-            int 回数日数,
-            int 公費1日数,
-            int 公費2日数,
-            int 公費3日数,
+            Integer 回数日数,
+            Integer 公費1日数,
+            Integer 公費2日数,
+            Integer 公費3日数,
             Decimal サービス単位,
-            int 公費1単位,
-            int 公費2単位,
-            int 公費3単位,
-            int 再審査回数,
-            int 過誤回数,
+            Decimal 公費1単位,
+            Decimal 公費2単位,
+            Decimal 公費3単位,
+            Integer 再審査回数,
+            Integer 過誤回数,
             FlexibleYearMonth 審査年月) {
         this.サービス = サービス;
         this.適要 = 適要;
@@ -125,7 +125,7 @@ public class KyufuJissekiMeisai {
      *
      * @return 回数日数
      */
-    public int get回数日数() {
+    public Integer get回数日数() {
         return 回数日数;
     }
 
@@ -134,7 +134,7 @@ public class KyufuJissekiMeisai {
      *
      * @return 公費1日数
      */
-    public int get公費1日数() {
+    public Integer get公費1日数() {
         return 公費1日数;
     }
 
@@ -143,7 +143,7 @@ public class KyufuJissekiMeisai {
      *
      * @return 公費2日数
      */
-    public int get公費2日数() {
+    public Integer get公費2日数() {
         return 公費2日数;
     }
 
@@ -152,7 +152,7 @@ public class KyufuJissekiMeisai {
      *
      * @return 公費3日数
      */
-    public int get公費3日数() {
+    public Integer get公費3日数() {
         return 公費3日数;
     }
 
@@ -170,7 +170,7 @@ public class KyufuJissekiMeisai {
      *
      * @return 公費1単位
      */
-    public int get公費1単位() {
+    public Decimal get公費1単位() {
         return 公費1単位;
     }
 
@@ -179,7 +179,7 @@ public class KyufuJissekiMeisai {
      *
      * @return 公費2単位
      */
-    public int get公費2単位() {
+    public Decimal get公費2単位() {
         return 公費2単位;
     }
 
@@ -188,7 +188,7 @@ public class KyufuJissekiMeisai {
      *
      * @return 公費3単位
      */
-    public int get公費3単位() {
+    public Decimal get公費3単位() {
         return 公費3単位;
     }
 
@@ -197,7 +197,7 @@ public class KyufuJissekiMeisai {
      *
      * @return 再審査回数
      */
-    public int get再審査回数() {
+    public Integer get再審査回数() {
         return 再審査回数;
     }
 
@@ -206,7 +206,7 @@ public class KyufuJissekiMeisai {
      *
      * @return 過誤回数
      */
-    public int get過誤回数() {
+    public Integer get過誤回数() {
         return 過誤回数;
     }
 

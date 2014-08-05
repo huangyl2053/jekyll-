@@ -105,12 +105,12 @@ public class DbT3017KyufujissekiKihonEntityMock {
         entity.setKohi3FutanshaNo(new RString("00000003"));
         entity.setKohi3JukyushaNo(new RString("1000003"));
 
-        entity.setMaeHokenServiceTanisu(100);
+        entity.setMaeHokenServiceTanisu(new Decimal(100));
         entity.setMaeHokenSeikyugaku(new Decimal(200));
-        entity.setMaeHokenRiyoshaFutangaku(300);
+        entity.setMaeHokenRiyoshaFutangaku(new Decimal(300));
         entity.setMaeHokenKinkyuShisetsuRyoyoSeikyugaku(new Decimal(400));
         entity.setMaeHokenTokuteiShinryohiSeikyugaku(new Decimal(500));
-        entity.setMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(600);
+        entity.setMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(new Decimal(600));
 
         return entity;
     }

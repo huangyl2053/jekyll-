@@ -3,13 +3,11 @@ package jp.co.ndensan.reams.db.dbc.entity.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 給付実績基本を表す列挙型です。
+ * DbT3017KyufujissekiKihonの項目定義クラスです
  *
- * @author N8156 宮本 康
  */
 public enum DbT3017KyufujissekiKihon implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
-
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -127,7 +125,6 @@ public enum DbT3017KyufujissekiKihon implements IColumnDefinition {
 
     /**
      * getMaxLength
-     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -136,7 +133,6 @@ public enum DbT3017KyufujissekiKihon implements IColumnDefinition {
 
     /**
      * getScale
-     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

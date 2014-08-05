@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
 
 /**
@@ -20,7 +22,6 @@ import java.util.Objects;
  */
 public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3027KyufujissekiJutakuKaishuhi");
 
@@ -47,21 +48,21 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
     @PrimaryKey
     private JigyoshaNo jigyoshoNo;
     @PrimaryKey
-    private RString toshiNo;
+    private ToshiNo toshiNo;
+    @PrimaryKey
+    private RString serviceCode;
     @PrimaryKey
     private RString meisaiNo;
-    private RString serviceCode;
     private FlexibleDate jutakuKaishuchakkoYMD;
     private RString jutakuKaishuJigyoshaName;
     private RString juutakukaishuJyutakuAdress;
-    private int kaishuKingaku;
+    private Decimal kaishuKingaku;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
 
     /**
      * getInsertDantaiCd
-     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -70,7 +71,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setInsertDantaiCd
-     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -79,7 +79,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * getIsDeleted
-     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -88,16 +87,15 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setIsDeleted
-     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * setLastUpdateReamsLoginId
-     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -106,7 +104,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * getKokanJohoShikibetsuNo
-     *
      * @return kokanJohoShikibetsuNo
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
@@ -115,7 +112,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setKokanJohoShikibetsuNo
-     *
      * @param kokanJohoShikibetsuNo kokanJohoShikibetsuNo
      */
     public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
@@ -124,7 +120,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * getInputShikibetsuNo
-     *
      * @return inputShikibetsuNo
      */
     public RString getInputShikibetsuNo() {
@@ -133,7 +128,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setInputShikibetsuNo
-     *
      * @param inputShikibetsuNo inputShikibetsuNo
      */
     public void setInputShikibetsuNo(RString inputShikibetsuNo) {
@@ -142,7 +136,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * getRecodeShubetsuCode
-     *
      * @return recodeShubetsuCode
      */
     public RString getRecodeShubetsuCode() {
@@ -151,7 +144,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setRecodeShubetsuCode
-     *
      * @param recodeShubetsuCode recodeShubetsuCode
      */
     public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
@@ -160,7 +152,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * getShokisaiHokenshaNo
-     *
      * @return shokisaiHokenshaNo
      */
     public ShoKisaiHokenshaNo getShokisaiHokenshaNo() {
@@ -169,7 +160,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setShokisaiHokenshaNo
-     *
      * @param shokisaiHokenshaNo shokisaiHokenshaNo
      */
     public void setShokisaiHokenshaNo(ShoKisaiHokenshaNo shokisaiHokenshaNo) {
@@ -178,7 +168,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * getHiHokenshaNo
-     *
      * @return hiHokenshaNo
      */
     public KaigoHihokenshaNo getHiHokenshaNo() {
@@ -187,7 +176,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setHiHokenshaNo
-     *
      * @param hiHokenshaNo hiHokenshaNo
      */
     public void setHiHokenshaNo(KaigoHihokenshaNo hiHokenshaNo) {
@@ -196,7 +184,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * getServiceTeikyoYM
-     *
      * @return serviceTeikyoYM
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -205,7 +192,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setServiceTeikyoYM
-     *
      * @param serviceTeikyoYM serviceTeikyoYM
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -214,7 +200,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * getJigyoshoNo
-     *
      * @return jigyoshoNo
      */
     public JigyoshaNo getJigyoshoNo() {
@@ -223,7 +208,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setJigyoshoNo
-     *
      * @param jigyoshoNo jigyoshoNo
      */
     public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
@@ -232,43 +216,22 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * getToshiNo
-     *
      * @return toshiNo
      */
-    public RString getToshiNo() {
+    public ToshiNo getToshiNo() {
         return toshiNo;
     }
 
     /**
      * setToshiNo
-     *
      * @param toshiNo toshiNo
      */
-    public void setToshiNo(RString toshiNo) {
+    public void setToshiNo(ToshiNo toshiNo) {
         this.toshiNo = toshiNo;
     }
 
     /**
-     * getMeisaiNo
-     *
-     * @return meisaiNo
-     */
-    public RString getMeisaiNo() {
-        return meisaiNo;
-    }
-
-    /**
-     * setMeisaiNo
-     *
-     * @param meisaiNo meisaiNo
-     */
-    public void setMeisaiNo(RString meisaiNo) {
-        this.meisaiNo = meisaiNo;
-    }
-
-    /**
      * getServiceCode
-     *
      * @return serviceCode
      */
     public RString getServiceCode() {
@@ -277,7 +240,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setServiceCode
-     *
      * @param serviceCode serviceCode
      */
     public void setServiceCode(RString serviceCode) {
@@ -285,8 +247,23 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
     }
 
     /**
+     * getMeisaiNo
+     * @return meisaiNo
+     */
+    public RString getMeisaiNo() {
+        return meisaiNo;
+    }
+
+    /**
+     * setMeisaiNo
+     * @param meisaiNo meisaiNo
+     */
+    public void setMeisaiNo(RString meisaiNo) {
+        this.meisaiNo = meisaiNo;
+    }
+
+    /**
      * getJutakuKaishuchakkoYMD
-     *
      * @return jutakuKaishuchakkoYMD
      */
     public FlexibleDate getJutakuKaishuchakkoYMD() {
@@ -295,7 +272,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setJutakuKaishuchakkoYMD
-     *
      * @param jutakuKaishuchakkoYMD jutakuKaishuchakkoYMD
      */
     public void setJutakuKaishuchakkoYMD(FlexibleDate jutakuKaishuchakkoYMD) {
@@ -304,7 +280,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * getJutakuKaishuJigyoshaName
-     *
      * @return jutakuKaishuJigyoshaName
      */
     public RString getJutakuKaishuJigyoshaName() {
@@ -313,7 +288,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setJutakuKaishuJigyoshaName
-     *
      * @param jutakuKaishuJigyoshaName jutakuKaishuJigyoshaName
      */
     public void setJutakuKaishuJigyoshaName(RString jutakuKaishuJigyoshaName) {
@@ -322,7 +296,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * getJuutakukaishuJyutakuAdress
-     *
      * @return juutakukaishuJyutakuAdress
      */
     public RString getJuutakukaishuJyutakuAdress() {
@@ -331,7 +304,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setJuutakukaishuJyutakuAdress
-     *
      * @param juutakukaishuJyutakuAdress juutakukaishuJyutakuAdress
      */
     public void setJuutakukaishuJyutakuAdress(RString juutakukaishuJyutakuAdress) {
@@ -340,25 +312,22 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * getKaishuKingaku
-     *
      * @return kaishuKingaku
      */
-    public int getKaishuKingaku() {
+    public Decimal getKaishuKingaku() {
         return kaishuKingaku;
     }
 
     /**
      * setKaishuKingaku
-     *
      * @param kaishuKingaku kaishuKingaku
      */
-    public void setKaishuKingaku(int kaishuKingaku) {
+    public void setKaishuKingaku(Decimal kaishuKingaku) {
         this.kaishuKingaku = kaishuKingaku;
     }
 
     /**
      * getShinsaYM
-     *
      * @return shinsaYM
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -367,7 +336,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setShinsaYM
-     *
      * @param shinsaYM shinsaYM
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
@@ -376,7 +344,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * getSeiriNo
-     *
      * @return seiriNo
      */
     public RString getSeiriNo() {
@@ -385,7 +352,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setSeiriNo
-     *
      * @param seiriNo seiriNo
      */
     public void setSeiriNo(RString seiriNo) {
@@ -394,7 +360,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * getTorikomiYM
-     *
      * @return torikomiYM
      */
     public FlexibleYearMonth getTorikomiYM() {
@@ -403,7 +368,6 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * setTorikomiYM
-     *
      * @param torikomiYM torikomiYM
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -412,9 +376,10 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
 
     /**
      * このエンティティの主キーが他の{@literal DbT3027KyufujissekiJutakuKaishuhiEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT3027KyufujissekiJutakuKaishuhiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT3027KyufujissekiJutakuKaishuhiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     public boolean equalsPrimaryKeys(DbT3027KyufujissekiJutakuKaishuhiEntity other) {
         if (other == null) {
@@ -444,6 +409,9 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
         if (!Objects.equals(this.toshiNo, other.toshiNo)) {
             return false;
         }
+        if (!Objects.equals(this.serviceCode, other.serviceCode)) {
+            return false;
+        }
         if (!Objects.equals(this.meisaiNo, other.meisaiNo)) {
             return false;
         }
@@ -451,4 +419,5 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
     }
 
 // </editor-fold>
+
 }

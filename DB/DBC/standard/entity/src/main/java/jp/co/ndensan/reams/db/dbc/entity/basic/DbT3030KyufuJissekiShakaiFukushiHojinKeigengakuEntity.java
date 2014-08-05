@@ -6,14 +6,15 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import java.util.Objects;
 
 /**
  * DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuの項目定義クラスです
@@ -21,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
  */
 public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku");
 
@@ -48,25 +48,25 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
     @PrimaryKey
     private JigyoshaNo jigyoshoNo;
     @PrimaryKey
-    private RString toshiNo;
+    private ToshiNo toshiNo;
     private Decimal keigenritsu;
+    @PrimaryKey
     private ServiceShuruiCode serviceSyuruiCode;
-    private int riyoshaFutanTotal;
-    private int keigengaku;
-    private int keigengoRiyoshaFutangaku;
+    private Decimal riyoshaFutanTotal;
+    private Decimal keigengaku;
+    private Decimal keigengoRiyoshaFutangaku;
     private RString biko;
-    private int atoRiyoshaFutanTotal;
-    private int atoKeigengaku;
-    private int atoKeigengoRiyoshaFutangaku;
-    private int saishinsaKaisu;
-    private int kagoKaisu;
+    private Decimal atoRiyoshaFutanTotal;
+    private Decimal atoKeigengaku;
+    private Decimal atoKeigengoRiyoshaFutangaku;
+    private Integer saishinsaKaisu;
+    private Integer kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
 
     /**
      * getInsertDantaiCd
-     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -75,7 +75,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setInsertDantaiCd
-     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -84,7 +83,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * getIsDeleted
-     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -93,16 +91,15 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setIsDeleted
-     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * setLastUpdateReamsLoginId
-     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -111,7 +108,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * getKokanJohoShikibetsuNo
-     *
      * @return kokanJohoShikibetsuNo
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
@@ -120,7 +116,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setKokanJohoShikibetsuNo
-     *
      * @param kokanJohoShikibetsuNo kokanJohoShikibetsuNo
      */
     public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
@@ -129,7 +124,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * getInputShikibetsuNo
-     *
      * @return inputShikibetsuNo
      */
     public RString getInputShikibetsuNo() {
@@ -138,7 +132,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setInputShikibetsuNo
-     *
      * @param inputShikibetsuNo inputShikibetsuNo
      */
     public void setInputShikibetsuNo(RString inputShikibetsuNo) {
@@ -147,7 +140,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * getRecodeShubetsuCode
-     *
      * @return recodeShubetsuCode
      */
     public RString getRecodeShubetsuCode() {
@@ -156,7 +148,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setRecodeShubetsuCode
-     *
      * @param recodeShubetsuCode recodeShubetsuCode
      */
     public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
@@ -165,7 +156,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * getShokisaiHokenshaNo
-     *
      * @return shokisaiHokenshaNo
      */
     public ShoKisaiHokenshaNo getShokisaiHokenshaNo() {
@@ -174,7 +164,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setShokisaiHokenshaNo
-     *
      * @param shokisaiHokenshaNo shokisaiHokenshaNo
      */
     public void setShokisaiHokenshaNo(ShoKisaiHokenshaNo shokisaiHokenshaNo) {
@@ -183,7 +172,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * getHiHokenshaNo
-     *
      * @return hiHokenshaNo
      */
     public KaigoHihokenshaNo getHiHokenshaNo() {
@@ -192,7 +180,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setHiHokenshaNo
-     *
      * @param hiHokenshaNo hiHokenshaNo
      */
     public void setHiHokenshaNo(KaigoHihokenshaNo hiHokenshaNo) {
@@ -201,7 +188,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * getServiceTeikyoYM
-     *
      * @return serviceTeikyoYM
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -210,7 +196,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setServiceTeikyoYM
-     *
      * @param serviceTeikyoYM serviceTeikyoYM
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -219,7 +204,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * getJigyoshoNo
-     *
      * @return jigyoshoNo
      */
     public JigyoshaNo getJigyoshoNo() {
@@ -228,7 +212,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setJigyoshoNo
-     *
      * @param jigyoshoNo jigyoshoNo
      */
     public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
@@ -237,25 +220,22 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * getToshiNo
-     *
      * @return toshiNo
      */
-    public RString getToshiNo() {
+    public ToshiNo getToshiNo() {
         return toshiNo;
     }
 
     /**
      * setToshiNo
-     *
      * @param toshiNo toshiNo
      */
-    public void setToshiNo(RString toshiNo) {
+    public void setToshiNo(ToshiNo toshiNo) {
         this.toshiNo = toshiNo;
     }
 
     /**
      * getKeigenritsu
-     *
      * @return keigenritsu
      */
     public Decimal getKeigenritsu() {
@@ -264,7 +244,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setKeigenritsu
-     *
      * @param keigenritsu keigenritsu
      */
     public void setKeigenritsu(Decimal keigenritsu) {
@@ -273,7 +252,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * getServiceSyuruiCode
-     *
      * @return serviceSyuruiCode
      */
     public ServiceShuruiCode getServiceSyuruiCode() {
@@ -282,7 +260,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setServiceSyuruiCode
-     *
      * @param serviceSyuruiCode serviceSyuruiCode
      */
     public void setServiceSyuruiCode(ServiceShuruiCode serviceSyuruiCode) {
@@ -291,61 +268,54 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * getRiyoshaFutanTotal
-     *
      * @return riyoshaFutanTotal
      */
-    public int getRiyoshaFutanTotal() {
+    public Decimal getRiyoshaFutanTotal() {
         return riyoshaFutanTotal;
     }
 
     /**
      * setRiyoshaFutanTotal
-     *
      * @param riyoshaFutanTotal riyoshaFutanTotal
      */
-    public void setRiyoshaFutanTotal(int riyoshaFutanTotal) {
+    public void setRiyoshaFutanTotal(Decimal riyoshaFutanTotal) {
         this.riyoshaFutanTotal = riyoshaFutanTotal;
     }
 
     /**
      * getKeigengaku
-     *
      * @return keigengaku
      */
-    public int getKeigengaku() {
+    public Decimal getKeigengaku() {
         return keigengaku;
     }
 
     /**
      * setKeigengaku
-     *
      * @param keigengaku keigengaku
      */
-    public void setKeigengaku(int keigengaku) {
+    public void setKeigengaku(Decimal keigengaku) {
         this.keigengaku = keigengaku;
     }
 
     /**
      * getKeigengoRiyoshaFutangaku
-     *
      * @return keigengoRiyoshaFutangaku
      */
-    public int getKeigengoRiyoshaFutangaku() {
+    public Decimal getKeigengoRiyoshaFutangaku() {
         return keigengoRiyoshaFutangaku;
     }
 
     /**
      * setKeigengoRiyoshaFutangaku
-     *
      * @param keigengoRiyoshaFutangaku keigengoRiyoshaFutangaku
      */
-    public void setKeigengoRiyoshaFutangaku(int keigengoRiyoshaFutangaku) {
+    public void setKeigengoRiyoshaFutangaku(Decimal keigengoRiyoshaFutangaku) {
         this.keigengoRiyoshaFutangaku = keigengoRiyoshaFutangaku;
     }
 
     /**
      * getBiko
-     *
      * @return biko
      */
     public RString getBiko() {
@@ -354,7 +324,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setBiko
-     *
      * @param biko biko
      */
     public void setBiko(RString biko) {
@@ -363,97 +332,86 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * getAtoRiyoshaFutanTotal
-     *
      * @return atoRiyoshaFutanTotal
      */
-    public int getAtoRiyoshaFutanTotal() {
+    public Decimal getAtoRiyoshaFutanTotal() {
         return atoRiyoshaFutanTotal;
     }
 
     /**
      * setAtoRiyoshaFutanTotal
-     *
      * @param atoRiyoshaFutanTotal atoRiyoshaFutanTotal
      */
-    public void setAtoRiyoshaFutanTotal(int atoRiyoshaFutanTotal) {
+    public void setAtoRiyoshaFutanTotal(Decimal atoRiyoshaFutanTotal) {
         this.atoRiyoshaFutanTotal = atoRiyoshaFutanTotal;
     }
 
     /**
      * getAtoKeigengaku
-     *
      * @return atoKeigengaku
      */
-    public int getAtoKeigengaku() {
+    public Decimal getAtoKeigengaku() {
         return atoKeigengaku;
     }
 
     /**
      * setAtoKeigengaku
-     *
      * @param atoKeigengaku atoKeigengaku
      */
-    public void setAtoKeigengaku(int atoKeigengaku) {
+    public void setAtoKeigengaku(Decimal atoKeigengaku) {
         this.atoKeigengaku = atoKeigengaku;
     }
 
     /**
      * getAtoKeigengoRiyoshaFutangaku
-     *
      * @return atoKeigengoRiyoshaFutangaku
      */
-    public int getAtoKeigengoRiyoshaFutangaku() {
+    public Decimal getAtoKeigengoRiyoshaFutangaku() {
         return atoKeigengoRiyoshaFutangaku;
     }
 
     /**
      * setAtoKeigengoRiyoshaFutangaku
-     *
      * @param atoKeigengoRiyoshaFutangaku atoKeigengoRiyoshaFutangaku
      */
-    public void setAtoKeigengoRiyoshaFutangaku(int atoKeigengoRiyoshaFutangaku) {
+    public void setAtoKeigengoRiyoshaFutangaku(Decimal atoKeigengoRiyoshaFutangaku) {
         this.atoKeigengoRiyoshaFutangaku = atoKeigengoRiyoshaFutangaku;
     }
 
     /**
      * getSaishinsaKaisu
-     *
      * @return saishinsaKaisu
      */
-    public int getSaishinsaKaisu() {
+    public Integer getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
     /**
      * setSaishinsaKaisu
-     *
      * @param saishinsaKaisu saishinsaKaisu
      */
-    public void setSaishinsaKaisu(int saishinsaKaisu) {
+    public void setSaishinsaKaisu(Integer saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
     /**
      * getKagoKaisu
-     *
      * @return kagoKaisu
      */
-    public int getKagoKaisu() {
+    public Integer getKagoKaisu() {
         return kagoKaisu;
     }
 
     /**
      * setKagoKaisu
-     *
      * @param kagoKaisu kagoKaisu
      */
-    public void setKagoKaisu(int kagoKaisu) {
+    public void setKagoKaisu(Integer kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 
     /**
      * getShinsaYM
-     *
      * @return shinsaYM
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -462,7 +420,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setShinsaYM
-     *
      * @param shinsaYM shinsaYM
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
@@ -471,7 +428,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * getSeiriNo
-     *
      * @return seiriNo
      */
     public RString getSeiriNo() {
@@ -480,7 +436,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setSeiriNo
-     *
      * @param seiriNo seiriNo
      */
     public void setSeiriNo(RString seiriNo) {
@@ -489,7 +444,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * getTorikomiYM
-     *
      * @return torikomiYM
      */
     public FlexibleYearMonth getTorikomiYM() {
@@ -498,7 +452,6 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * setTorikomiYM
-     *
      * @param torikomiYM torikomiYM
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -507,9 +460,10 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
     /**
      * このエンティティの主キーが他の{@literal DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     public boolean equalsPrimaryKeys(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity other) {
         if (other == null) {
@@ -539,8 +493,12 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
         if (!Objects.equals(this.toshiNo, other.toshiNo)) {
             return false;
         }
+        if (!Objects.equals(this.serviceSyuruiCode, other.serviceSyuruiCode)) {
+            return false;
+        }
         return true;
     }
 
 // </editor-fold>
+
 }

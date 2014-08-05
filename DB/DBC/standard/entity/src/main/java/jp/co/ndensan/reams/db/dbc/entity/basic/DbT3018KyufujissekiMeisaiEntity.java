@@ -6,14 +6,16 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceKomokuCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceKomokuCode;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import java.util.Objects;
 
 /**
  * DbT3018KyufujissekiMeisaiの項目定義クラスです
@@ -21,7 +23,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
  */
 public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3018KyufujissekiMeisai");
 
@@ -48,37 +49,38 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
     @PrimaryKey
     private JigyoshaNo jigyoshoNo;
     @PrimaryKey
-    private RString toshiNo;
+    private ToshiNo toshiNo;
+    @PrimaryKey
     private ServiceShuruiCode serviceShuruiCode;
+    @PrimaryKey
     private ServiceKomokuCode serviceKomokuCode;
-    private int tanisu;
-    private int nissuKaisu;
-    private int kohi1TaishoNissuKaisu;
-    private int kohi2TaishoNissuKaisu;
-    private int kohi3TaishoNissuKaisu;
-    private int serviceTanisu;
-    private int kohi1TaishoServiceTanisu;
-    private int kohi2TaishoServiceTanisu;
-    private int kohi3TaishoServiceTanisu;
+    private Decimal tanisu;
+    private Integer nissuKaisu;
+    private Integer kohi1TaishoNissuKaisu;
+    private Integer kohi2TaishoNissuKaisu;
+    private Integer kohi3TaishoNissuKaisu;
+    private Decimal serviceTanisu;
+    private Decimal kohi1TaishoServiceTanisu;
+    private Decimal kohi2TaishoServiceTanisu;
+    private Decimal kohi3TaishoServiceTanisu;
     private RString tekiyo;
-    private int atoTanisu;
-    private int atoNissuKaisu;
-    private int atoKohi1TaishoNissuKaisu;
-    private int atoKohi2TaishoNissukaisu;
-    private int atoKohi3TaishoNissuKaisu;
-    private int atoServiceTanisu;
-    private int atoKohi1TaishoServiceTanisu;
-    private int atoKohi2TaishoServiceTanisu;
-    private int atoKohi3TaishoServiceTanisu;
-    private int saishinsaKaisu;
-    private int kagoKaisu;
+    private Decimal atoTanisu;
+    private Integer atoNissuKaisu;
+    private Integer atoKohi1TaishoNissuKaisu;
+    private Integer atoKohi2TaishoNissukaisu;
+    private Integer atoKohi3TaishoNissuKaisu;
+    private Decimal atoServiceTanisu;
+    private Decimal atoKohi1TaishoServiceTanisu;
+    private Decimal atoKohi2TaishoServiceTanisu;
+    private Decimal atoKohi3TaishoServiceTanisu;
+    private Integer saishinsaKaisu;
+    private Integer kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
 
     /**
      * getInsertDantaiCd
-     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -87,7 +89,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setInsertDantaiCd
-     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -96,7 +97,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * getIsDeleted
-     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -105,16 +105,15 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setIsDeleted
-     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * setLastUpdateReamsLoginId
-     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -123,7 +122,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * getKokanJohoShikibetsuNo
-     *
      * @return kokanJohoShikibetsuNo
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
@@ -132,7 +130,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setKokanJohoShikibetsuNo
-     *
      * @param kokanJohoShikibetsuNo kokanJohoShikibetsuNo
      */
     public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
@@ -141,7 +138,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * getInputShikibetsuNo
-     *
      * @return inputShikibetsuNo
      */
     public RString getInputShikibetsuNo() {
@@ -150,7 +146,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setInputShikibetsuNo
-     *
      * @param inputShikibetsuNo inputShikibetsuNo
      */
     public void setInputShikibetsuNo(RString inputShikibetsuNo) {
@@ -159,7 +154,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * getRecodeShubetsuCode
-     *
      * @return recodeShubetsuCode
      */
     public RString getRecodeShubetsuCode() {
@@ -168,7 +162,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setRecodeShubetsuCode
-     *
      * @param recodeShubetsuCode recodeShubetsuCode
      */
     public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
@@ -177,7 +170,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * getShokisaiHokenshaNo
-     *
      * @return shokisaiHokenshaNo
      */
     public ShoKisaiHokenshaNo getShokisaiHokenshaNo() {
@@ -186,7 +178,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setShokisaiHokenshaNo
-     *
      * @param shokisaiHokenshaNo shokisaiHokenshaNo
      */
     public void setShokisaiHokenshaNo(ShoKisaiHokenshaNo shokisaiHokenshaNo) {
@@ -195,7 +186,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * getHiHokenshaNo
-     *
      * @return hiHokenshaNo
      */
     public KaigoHihokenshaNo getHiHokenshaNo() {
@@ -204,7 +194,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setHiHokenshaNo
-     *
      * @param hiHokenshaNo hiHokenshaNo
      */
     public void setHiHokenshaNo(KaigoHihokenshaNo hiHokenshaNo) {
@@ -213,7 +202,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * getServiceTeikyoYM
-     *
      * @return serviceTeikyoYM
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -222,7 +210,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setServiceTeikyoYM
-     *
      * @param serviceTeikyoYM serviceTeikyoYM
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -231,7 +218,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * getJigyoshoNo
-     *
      * @return jigyoshoNo
      */
     public JigyoshaNo getJigyoshoNo() {
@@ -240,7 +226,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setJigyoshoNo
-     *
      * @param jigyoshoNo jigyoshoNo
      */
     public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
@@ -249,25 +234,22 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * getToshiNo
-     *
      * @return toshiNo
      */
-    public RString getToshiNo() {
+    public ToshiNo getToshiNo() {
         return toshiNo;
     }
 
     /**
      * setToshiNo
-     *
      * @param toshiNo toshiNo
      */
-    public void setToshiNo(RString toshiNo) {
+    public void setToshiNo(ToshiNo toshiNo) {
         this.toshiNo = toshiNo;
     }
 
     /**
      * getServiceShuruiCode
-     *
      * @return serviceShuruiCode
      */
     public ServiceShuruiCode getServiceShuruiCode() {
@@ -276,7 +258,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setServiceShuruiCode
-     *
      * @param serviceShuruiCode serviceShuruiCode
      */
     public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
@@ -285,7 +266,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * getServiceKomokuCode
-     *
      * @return serviceKomokuCode
      */
     public ServiceKomokuCode getServiceKomokuCode() {
@@ -294,7 +274,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setServiceKomokuCode
-     *
      * @param serviceKomokuCode serviceKomokuCode
      */
     public void setServiceKomokuCode(ServiceKomokuCode serviceKomokuCode) {
@@ -303,169 +282,150 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * getTanisu
-     *
      * @return tanisu
      */
-    public int getTanisu() {
+    public Decimal getTanisu() {
         return tanisu;
     }
 
     /**
      * setTanisu
-     *
      * @param tanisu tanisu
      */
-    public void setTanisu(int tanisu) {
+    public void setTanisu(Decimal tanisu) {
         this.tanisu = tanisu;
     }
 
     /**
      * getNissuKaisu
-     *
      * @return nissuKaisu
      */
-    public int getNissuKaisu() {
+    public Integer getNissuKaisu() {
         return nissuKaisu;
     }
 
     /**
      * setNissuKaisu
-     *
      * @param nissuKaisu nissuKaisu
      */
-    public void setNissuKaisu(int nissuKaisu) {
+    public void setNissuKaisu(Integer nissuKaisu) {
         this.nissuKaisu = nissuKaisu;
     }
 
     /**
      * getKohi1TaishoNissuKaisu
-     *
      * @return kohi1TaishoNissuKaisu
      */
-    public int getKohi1TaishoNissuKaisu() {
+    public Integer getKohi1TaishoNissuKaisu() {
         return kohi1TaishoNissuKaisu;
     }
 
     /**
      * setKohi1TaishoNissuKaisu
-     *
      * @param kohi1TaishoNissuKaisu kohi1TaishoNissuKaisu
      */
-    public void setKohi1TaishoNissuKaisu(int kohi1TaishoNissuKaisu) {
+    public void setKohi1TaishoNissuKaisu(Integer kohi1TaishoNissuKaisu) {
         this.kohi1TaishoNissuKaisu = kohi1TaishoNissuKaisu;
     }
 
     /**
      * getKohi2TaishoNissuKaisu
-     *
      * @return kohi2TaishoNissuKaisu
      */
-    public int getKohi2TaishoNissuKaisu() {
+    public Integer getKohi2TaishoNissuKaisu() {
         return kohi2TaishoNissuKaisu;
     }
 
     /**
      * setKohi2TaishoNissuKaisu
-     *
      * @param kohi2TaishoNissuKaisu kohi2TaishoNissuKaisu
      */
-    public void setKohi2TaishoNissuKaisu(int kohi2TaishoNissuKaisu) {
+    public void setKohi2TaishoNissuKaisu(Integer kohi2TaishoNissuKaisu) {
         this.kohi2TaishoNissuKaisu = kohi2TaishoNissuKaisu;
     }
 
     /**
      * getKohi3TaishoNissuKaisu
-     *
      * @return kohi3TaishoNissuKaisu
      */
-    public int getKohi3TaishoNissuKaisu() {
+    public Integer getKohi3TaishoNissuKaisu() {
         return kohi3TaishoNissuKaisu;
     }
 
     /**
      * setKohi3TaishoNissuKaisu
-     *
      * @param kohi3TaishoNissuKaisu kohi3TaishoNissuKaisu
      */
-    public void setKohi3TaishoNissuKaisu(int kohi3TaishoNissuKaisu) {
+    public void setKohi3TaishoNissuKaisu(Integer kohi3TaishoNissuKaisu) {
         this.kohi3TaishoNissuKaisu = kohi3TaishoNissuKaisu;
     }
 
     /**
      * getServiceTanisu
-     *
      * @return serviceTanisu
      */
-    public int getServiceTanisu() {
+    public Decimal getServiceTanisu() {
         return serviceTanisu;
     }
 
     /**
      * setServiceTanisu
-     *
      * @param serviceTanisu serviceTanisu
      */
-    public void setServiceTanisu(int serviceTanisu) {
+    public void setServiceTanisu(Decimal serviceTanisu) {
         this.serviceTanisu = serviceTanisu;
     }
 
     /**
      * getKohi1TaishoServiceTanisu
-     *
      * @return kohi1TaishoServiceTanisu
      */
-    public int getKohi1TaishoServiceTanisu() {
+    public Decimal getKohi1TaishoServiceTanisu() {
         return kohi1TaishoServiceTanisu;
     }
 
     /**
      * setKohi1TaishoServiceTanisu
-     *
      * @param kohi1TaishoServiceTanisu kohi1TaishoServiceTanisu
      */
-    public void setKohi1TaishoServiceTanisu(int kohi1TaishoServiceTanisu) {
+    public void setKohi1TaishoServiceTanisu(Decimal kohi1TaishoServiceTanisu) {
         this.kohi1TaishoServiceTanisu = kohi1TaishoServiceTanisu;
     }
 
     /**
      * getKohi2TaishoServiceTanisu
-     *
      * @return kohi2TaishoServiceTanisu
      */
-    public int getKohi2TaishoServiceTanisu() {
+    public Decimal getKohi2TaishoServiceTanisu() {
         return kohi2TaishoServiceTanisu;
     }
 
     /**
      * setKohi2TaishoServiceTanisu
-     *
      * @param kohi2TaishoServiceTanisu kohi2TaishoServiceTanisu
      */
-    public void setKohi2TaishoServiceTanisu(int kohi2TaishoServiceTanisu) {
+    public void setKohi2TaishoServiceTanisu(Decimal kohi2TaishoServiceTanisu) {
         this.kohi2TaishoServiceTanisu = kohi2TaishoServiceTanisu;
     }
 
     /**
      * getKohi3TaishoServiceTanisu
-     *
      * @return kohi3TaishoServiceTanisu
      */
-    public int getKohi3TaishoServiceTanisu() {
+    public Decimal getKohi3TaishoServiceTanisu() {
         return kohi3TaishoServiceTanisu;
     }
 
     /**
      * setKohi3TaishoServiceTanisu
-     *
      * @param kohi3TaishoServiceTanisu kohi3TaishoServiceTanisu
      */
-    public void setKohi3TaishoServiceTanisu(int kohi3TaishoServiceTanisu) {
+    public void setKohi3TaishoServiceTanisu(Decimal kohi3TaishoServiceTanisu) {
         this.kohi3TaishoServiceTanisu = kohi3TaishoServiceTanisu;
     }
 
     /**
      * getTekiyo
-     *
      * @return tekiyo
      */
     public RString getTekiyo() {
@@ -474,7 +434,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setTekiyo
-     *
      * @param tekiyo tekiyo
      */
     public void setTekiyo(RString tekiyo) {
@@ -483,205 +442,182 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * getAtoTanisu
-     *
      * @return atoTanisu
      */
-    public int getAtoTanisu() {
+    public Decimal getAtoTanisu() {
         return atoTanisu;
     }
 
     /**
      * setAtoTanisu
-     *
      * @param atoTanisu atoTanisu
      */
-    public void setAtoTanisu(int atoTanisu) {
+    public void setAtoTanisu(Decimal atoTanisu) {
         this.atoTanisu = atoTanisu;
     }
 
     /**
      * getAtoNissuKaisu
-     *
      * @return atoNissuKaisu
      */
-    public int getAtoNissuKaisu() {
+    public Integer getAtoNissuKaisu() {
         return atoNissuKaisu;
     }
 
     /**
      * setAtoNissuKaisu
-     *
      * @param atoNissuKaisu atoNissuKaisu
      */
-    public void setAtoNissuKaisu(int atoNissuKaisu) {
+    public void setAtoNissuKaisu(Integer atoNissuKaisu) {
         this.atoNissuKaisu = atoNissuKaisu;
     }
 
     /**
      * getAtoKohi1TaishoNissuKaisu
-     *
      * @return atoKohi1TaishoNissuKaisu
      */
-    public int getAtoKohi1TaishoNissuKaisu() {
+    public Integer getAtoKohi1TaishoNissuKaisu() {
         return atoKohi1TaishoNissuKaisu;
     }
 
     /**
      * setAtoKohi1TaishoNissuKaisu
-     *
      * @param atoKohi1TaishoNissuKaisu atoKohi1TaishoNissuKaisu
      */
-    public void setAtoKohi1TaishoNissuKaisu(int atoKohi1TaishoNissuKaisu) {
+    public void setAtoKohi1TaishoNissuKaisu(Integer atoKohi1TaishoNissuKaisu) {
         this.atoKohi1TaishoNissuKaisu = atoKohi1TaishoNissuKaisu;
     }
 
     /**
      * getAtoKohi2TaishoNissukaisu
-     *
      * @return atoKohi2TaishoNissukaisu
      */
-    public int getAtoKohi2TaishoNissukaisu() {
+    public Integer getAtoKohi2TaishoNissukaisu() {
         return atoKohi2TaishoNissukaisu;
     }
 
     /**
      * setAtoKohi2TaishoNissukaisu
-     *
      * @param atoKohi2TaishoNissukaisu atoKohi2TaishoNissukaisu
      */
-    public void setAtoKohi2TaishoNissukaisu(int atoKohi2TaishoNissukaisu) {
+    public void setAtoKohi2TaishoNissukaisu(Integer atoKohi2TaishoNissukaisu) {
         this.atoKohi2TaishoNissukaisu = atoKohi2TaishoNissukaisu;
     }
 
     /**
      * getAtoKohi3TaishoNissuKaisu
-     *
      * @return atoKohi3TaishoNissuKaisu
      */
-    public int getAtoKohi3TaishoNissuKaisu() {
+    public Integer getAtoKohi3TaishoNissuKaisu() {
         return atoKohi3TaishoNissuKaisu;
     }
 
     /**
      * setAtoKohi3TaishoNissuKaisu
-     *
      * @param atoKohi3TaishoNissuKaisu atoKohi3TaishoNissuKaisu
      */
-    public void setAtoKohi3TaishoNissuKaisu(int atoKohi3TaishoNissuKaisu) {
+    public void setAtoKohi3TaishoNissuKaisu(Integer atoKohi3TaishoNissuKaisu) {
         this.atoKohi3TaishoNissuKaisu = atoKohi3TaishoNissuKaisu;
     }
 
     /**
      * getAtoServiceTanisu
-     *
      * @return atoServiceTanisu
      */
-    public int getAtoServiceTanisu() {
+    public Decimal getAtoServiceTanisu() {
         return atoServiceTanisu;
     }
 
     /**
      * setAtoServiceTanisu
-     *
      * @param atoServiceTanisu atoServiceTanisu
      */
-    public void setAtoServiceTanisu(int atoServiceTanisu) {
+    public void setAtoServiceTanisu(Decimal atoServiceTanisu) {
         this.atoServiceTanisu = atoServiceTanisu;
     }
 
     /**
      * getAtoKohi1TaishoServiceTanisu
-     *
      * @return atoKohi1TaishoServiceTanisu
      */
-    public int getAtoKohi1TaishoServiceTanisu() {
+    public Decimal getAtoKohi1TaishoServiceTanisu() {
         return atoKohi1TaishoServiceTanisu;
     }
 
     /**
      * setAtoKohi1TaishoServiceTanisu
-     *
      * @param atoKohi1TaishoServiceTanisu atoKohi1TaishoServiceTanisu
      */
-    public void setAtoKohi1TaishoServiceTanisu(int atoKohi1TaishoServiceTanisu) {
+    public void setAtoKohi1TaishoServiceTanisu(Decimal atoKohi1TaishoServiceTanisu) {
         this.atoKohi1TaishoServiceTanisu = atoKohi1TaishoServiceTanisu;
     }
 
     /**
      * getAtoKohi2TaishoServiceTanisu
-     *
      * @return atoKohi2TaishoServiceTanisu
      */
-    public int getAtoKohi2TaishoServiceTanisu() {
+    public Decimal getAtoKohi2TaishoServiceTanisu() {
         return atoKohi2TaishoServiceTanisu;
     }
 
     /**
      * setAtoKohi2TaishoServiceTanisu
-     *
      * @param atoKohi2TaishoServiceTanisu atoKohi2TaishoServiceTanisu
      */
-    public void setAtoKohi2TaishoServiceTanisu(int atoKohi2TaishoServiceTanisu) {
+    public void setAtoKohi2TaishoServiceTanisu(Decimal atoKohi2TaishoServiceTanisu) {
         this.atoKohi2TaishoServiceTanisu = atoKohi2TaishoServiceTanisu;
     }
 
     /**
      * getAtoKohi3TaishoServiceTanisu
-     *
      * @return atoKohi3TaishoServiceTanisu
      */
-    public int getAtoKohi3TaishoServiceTanisu() {
+    public Decimal getAtoKohi3TaishoServiceTanisu() {
         return atoKohi3TaishoServiceTanisu;
     }
 
     /**
      * setAtoKohi3TaishoServiceTanisu
-     *
      * @param atoKohi3TaishoServiceTanisu atoKohi3TaishoServiceTanisu
      */
-    public void setAtoKohi3TaishoServiceTanisu(int atoKohi3TaishoServiceTanisu) {
+    public void setAtoKohi3TaishoServiceTanisu(Decimal atoKohi3TaishoServiceTanisu) {
         this.atoKohi3TaishoServiceTanisu = atoKohi3TaishoServiceTanisu;
     }
 
     /**
      * getSaishinsaKaisu
-     *
      * @return saishinsaKaisu
      */
-    public int getSaishinsaKaisu() {
+    public Integer getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
     /**
      * setSaishinsaKaisu
-     *
      * @param saishinsaKaisu saishinsaKaisu
      */
-    public void setSaishinsaKaisu(int saishinsaKaisu) {
+    public void setSaishinsaKaisu(Integer saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
     /**
      * getKagoKaisu
-     *
      * @return kagoKaisu
      */
-    public int getKagoKaisu() {
+    public Integer getKagoKaisu() {
         return kagoKaisu;
     }
 
     /**
      * setKagoKaisu
-     *
      * @param kagoKaisu kagoKaisu
      */
-    public void setKagoKaisu(int kagoKaisu) {
+    public void setKagoKaisu(Integer kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 
     /**
      * getShinsaYM
-     *
      * @return shinsaYM
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -690,7 +626,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setShinsaYM
-     *
      * @param shinsaYM shinsaYM
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
@@ -699,7 +634,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * getSeiriNo
-     *
      * @return seiriNo
      */
     public RString getSeiriNo() {
@@ -708,7 +642,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setSeiriNo
-     *
      * @param seiriNo seiriNo
      */
     public void setSeiriNo(RString seiriNo) {
@@ -717,7 +650,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * getTorikomiYM
-     *
      * @return torikomiYM
      */
     public FlexibleYearMonth getTorikomiYM() {
@@ -726,7 +658,6 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * setTorikomiYM
-     *
      * @param torikomiYM torikomiYM
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -735,9 +666,10 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
 
     /**
      * このエンティティの主キーが他の{@literal DbT3018KyufujissekiMeisaiEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT3018KyufujissekiMeisaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT3018KyufujissekiMeisaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     public boolean equalsPrimaryKeys(DbT3018KyufujissekiMeisaiEntity other) {
         if (other == null) {
@@ -767,8 +699,15 @@ public class DbT3018KyufujissekiMeisaiEntity implements IDbAccessable {
         if (!Objects.equals(this.toshiNo, other.toshiNo)) {
             return false;
         }
+        if (!Objects.equals(this.serviceShuruiCode, other.serviceShuruiCode)) {
+            return false;
+        }
+        if (!Objects.equals(this.serviceKomokuCode, other.serviceKomokuCode)) {
+            return false;
+        }
         return true;
     }
 
 // </editor-fold>
+
 }

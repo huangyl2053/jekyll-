@@ -405,17 +405,17 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
 
         private final RString サービス = new RString("11");
         private final RString 適要 = new RString("概要");
-        private final int 単位 = 1000;
-        private final int 回数日数 = 4;
-        private final int 公費1日数 = 1;
-        private final int 公費2日数 = 2;
-        private final int 公費3日数 = 3;
-        private final int サービス単位 = 1500;
-        private final int 公費1単位 = 1;
-        private final int 公費2単位 = 2;
-        private final int 公費3単位 = 3;
-        private final int 再審査回数 = 1500;
-        private final int 過誤回数 = 2;
+        private final Decimal 単位 = new Decimal(1000);
+        private final Integer 回数日数 = new Integer(4);
+        private final Integer 公費1日数 = new Integer(1);
+        private final Integer 公費2日数 = new Integer(2);
+        private final Integer 公費3日数 = new Integer(3);
+        private final Decimal サービス単位 = new Decimal(1500);
+        private final Decimal 公費1単位 = new Decimal(1);
+        private final Decimal 公費2単位 = new Decimal(2);
+        private final Decimal 公費3単位 = new Decimal(3);
+        private final Integer 再審査回数 = new Integer(1500);
+        private final Integer 過誤回数 = new Integer(2);
         private final FlexibleYearMonth 審査年月 = new FlexibleYearMonth("201402");
 
         @Before
@@ -432,7 +432,7 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
 
         @Test
         public void 単位の設定がある時_to給付実績明細List_get単位は_設定値を返す() {
-            assertThat(result.get単位(), is(new Decimal(単位)));
+            assertThat(result.get単位(), is(単位));
         }
 
         @Test
@@ -462,7 +462,7 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
 
         @Test
         public void サービス単位の設定がある時_to給付実績明細List_getサービス単位は_設定値を返す() {
-            assertThat(result.getサービス単位(), is(new Decimal(サービス単位)));
+            assertThat(result.getサービス単位(), is(サービス単位));
         }
 
         @Test

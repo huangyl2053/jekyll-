@@ -10,9 +10,11 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.mockito.Mockito.spy;
 
 /**
@@ -51,7 +53,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntityMock {
         entity.setHiHokenshaNo(new KaigoHihokenshaNo(new RString("0000000004")));
         entity.setServiceTeikyoYM(new FlexibleYearMonth("201401"));
         entity.setJigyoshoNo(new JigyoshaNo(new RString("0000000005")));
-        entity.setToshiNo(new RString("0000000006"));
+        entity.setToshiNo(new ToshiNo(new RString("0000000006")));
         entity.setMeisaiNo(new RString("1"));
         entity.setServiceCode(new RString("000007"));
         entity.setFukushiyoguHanbaiYMD(new FlexibleDate("20140201"));
@@ -59,7 +61,7 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntityMock {
         entity.setFukushiyoguSyumokuCode(new RString("08"));
         entity.setFukushiyoguSeizoJigyoshaName(new RString("福祉用具製造事業者名"));
         entity.setFukushiyoguHanbaiJigyoshaName(new RString("福祉用具販売事業者名"));
-        entity.setHanbaiKingaku(1234);
+        entity.setHanbaiKingaku(new Decimal(1234));
         entity.setTekiyo(new RString("適用１２３４５６７８９０"));
         entity.setShinsaYM(new FlexibleYearMonth("201403"));
         entity.setSeiriNo(new RString("0000000009"));
