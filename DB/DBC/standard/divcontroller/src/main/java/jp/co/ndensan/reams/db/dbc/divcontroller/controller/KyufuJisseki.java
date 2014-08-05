@@ -101,7 +101,7 @@ public class KyufuJisseki {
         setCareManagementhi(panel.getTabKyufuJisseki().getCareManagementhi());
 
         panel.getBtnShakaiFukushiHojinKeigengaku().setDisabled(jisseki.get社会福祉法人軽減額リスト().isEmpty());
-        panel.getBtnShakaiFukushiHojinKeigengaku().setDisabled(jisseki.get特定入所者リスト().isEmpty());
+        panel.getBtnTokuteiNyushoshaKaigoServicehi().setDisabled(jisseki.get特定入所者リスト().isEmpty());
 
         response.data = panel;
 
