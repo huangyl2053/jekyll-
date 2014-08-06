@@ -17,10 +17,10 @@ public final class ShikakuSoshitsu extends ShikakuIdoBaseItem<ShikakuSoshitsuJiy
     /**
      * 資格喪失がないことを表すオブジェクトです。
      */
-    public static final ShikakuSoshitsu NOTHING;
+    public static final ShikakuSoshitsu NONE;
 
     static {
-        NOTHING = new ShikakuSoshitsu(ShikakuSoshitsuJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX);
+        NONE = new ShikakuSoshitsu(ShikakuSoshitsuJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX);
     }
 
     /**
@@ -36,6 +36,6 @@ public final class ShikakuSoshitsu extends ShikakuIdoBaseItem<ShikakuSoshitsuJiy
 
     @Override
     public boolean isNothing() {
-        return this == NOTHING;
+        return this == NONE;
     }
 }
