@@ -50,9 +50,8 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
     @PrimaryKey
     private ToshiNo toshiNo;
     @PrimaryKey
-    private RString serviceCode;
-    @PrimaryKey
     private RString meisaiNo;
+    private RString serviceCode;
     private FlexibleDate fukushiyoguHanbaiYMD;
     private RString fukushiyoguShohinName;
     private RString fukushiyoguSyumokuCode;
@@ -234,22 +233,6 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
     }
 
     /**
-     * getServiceCode
-     * @return serviceCode
-     */
-    public RString getServiceCode() {
-        return serviceCode;
-    }
-
-    /**
-     * setServiceCode
-     * @param serviceCode serviceCode
-     */
-    public void setServiceCode(RString serviceCode) {
-        this.serviceCode = serviceCode;
-    }
-
-    /**
      * getMeisaiNo
      * @return meisaiNo
      */
@@ -263,6 +246,22 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
      */
     public void setMeisaiNo(RString meisaiNo) {
         this.meisaiNo = meisaiNo;
+    }
+
+    /**
+     * getServiceCode
+     * @return serviceCode
+     */
+    public RString getServiceCode() {
+        return serviceCode;
+    }
+
+    /**
+     * setServiceCode
+     * @param serviceCode serviceCode
+     */
+    public void setServiceCode(RString serviceCode) {
+        this.serviceCode = serviceCode;
     }
 
     /**
@@ -460,9 +459,6 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
         if (!Objects.equals(this.toshiNo, other.toshiNo)) {
             return false;
         }
-        if (!Objects.equals(this.serviceCode, other.serviceCode)) {
-            return false;
-        }
         if (!Objects.equals(this.meisaiNo, other.meisaiNo)) {
             return false;
         }
@@ -470,5 +466,6 @@ public class DbT3026KyufujissekiFukushiYoguHanbaihiEntity implements IDbAccessab
     }
 
 // </editor-fold>
+
 
 }

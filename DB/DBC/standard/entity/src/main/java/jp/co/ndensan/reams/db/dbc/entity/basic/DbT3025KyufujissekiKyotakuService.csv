@@ -5,8 +5,8 @@ shokisaiHokenshaNo,DbUDD003HokenshaNo,ShoKisaiHokenshaNo,,,,,A
 hiHokenshaNo,DbUDD002HihokenshaNo,KaigoHihokenshaNo,,,,,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,A
 jigyoshoNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,A
-servicePlanhiMeisaiLineNo,varchar,RString,,,,,A
 toshiNo,varchar,ToshiNo,,,,,A
+servicePlanhiMeisaiLineNo,varchar,RString,,,,,A
 shiteiKijunGaitoJigyoshaKubunCode,varchar,RString,,,,,A
 tanisuTanka,numeric,Decimal,,,,,A
 kyotakuServiceSakuseiIraiYMD,UDD015YMD,FlexibleDate,,,,,A

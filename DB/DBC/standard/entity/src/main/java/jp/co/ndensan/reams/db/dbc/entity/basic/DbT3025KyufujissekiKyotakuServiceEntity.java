@@ -49,9 +49,9 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
     @PrimaryKey
     private JigyoshaNo jigyoshoNo;
     @PrimaryKey
-    private RString servicePlanhiMeisaiLineNo;
-    @PrimaryKey
     private ToshiNo toshiNo;
+    @PrimaryKey
+    private RString servicePlanhiMeisaiLineNo;
     private RString shiteiKijunGaitoJigyoshaKubunCode;
     private Decimal tanisuTanka;
     private FlexibleDate kyotakuServiceSakuseiIraiYMD;
@@ -228,22 +228,6 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
     }
 
     /**
-     * getServicePlanhiMeisaiLineNo
-     * @return servicePlanhiMeisaiLineNo
-     */
-    public RString getServicePlanhiMeisaiLineNo() {
-        return servicePlanhiMeisaiLineNo;
-    }
-
-    /**
-     * setServicePlanhiMeisaiLineNo
-     * @param servicePlanhiMeisaiLineNo servicePlanhiMeisaiLineNo
-     */
-    public void setServicePlanhiMeisaiLineNo(RString servicePlanhiMeisaiLineNo) {
-        this.servicePlanhiMeisaiLineNo = servicePlanhiMeisaiLineNo;
-    }
-
-    /**
      * getToshiNo
      * @return toshiNo
      */
@@ -257,6 +241,22 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
      */
     public void setToshiNo(ToshiNo toshiNo) {
         this.toshiNo = toshiNo;
+    }
+
+    /**
+     * getServicePlanhiMeisaiLineNo
+     * @return servicePlanhiMeisaiLineNo
+     */
+    public RString getServicePlanhiMeisaiLineNo() {
+        return servicePlanhiMeisaiLineNo;
+    }
+
+    /**
+     * setServicePlanhiMeisaiLineNo
+     * @param servicePlanhiMeisaiLineNo servicePlanhiMeisaiLineNo
+     */
+    public void setServicePlanhiMeisaiLineNo(RString servicePlanhiMeisaiLineNo) {
+        this.servicePlanhiMeisaiLineNo = servicePlanhiMeisaiLineNo;
     }
 
     /**
@@ -627,16 +627,17 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
         if (!Objects.equals(this.jigyoshoNo, other.jigyoshoNo)) {
             return false;
         }
-        if (!Objects.equals(this.servicePlanhiMeisaiLineNo, other.servicePlanhiMeisaiLineNo)) {
+        if (!Objects.equals(this.toshiNo, other.toshiNo)) {
             return false;
         }
-        if (!Objects.equals(this.toshiNo, other.toshiNo)) {
+        if (!Objects.equals(this.servicePlanhiMeisaiLineNo, other.servicePlanhiMeisaiLineNo)) {
             return false;
         }
         return true;
     }
 
 // </editor-fold>
+
 
 
 

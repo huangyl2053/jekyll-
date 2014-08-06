@@ -49,9 +49,9 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
     @PrimaryKey
     private JigyoshaNo jigyoshoNo;
     @PrimaryKey
-    private RString recodeJunjiNo;
-    @PrimaryKey
     private ToshiNo toshiNo;
+    @PrimaryKey
+    private RString recodeJunjiNo;
     private ServiceShuruiCode serviceSyuruiCode;
     private ServiceKomokuCode serviceKomokuCode;
     private Decimal hiyoTanka;
@@ -261,22 +261,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
     }
 
     /**
-     * getRecodeJunjiNo
-     * @return recodeJunjiNo
-     */
-    public RString getRecodeJunjiNo() {
-        return recodeJunjiNo;
-    }
-
-    /**
-     * setRecodeJunjiNo
-     * @param recodeJunjiNo recodeJunjiNo
-     */
-    public void setRecodeJunjiNo(RString recodeJunjiNo) {
-        this.recodeJunjiNo = recodeJunjiNo;
-    }
-
-    /**
      * getToshiNo
      * @return toshiNo
      */
@@ -290,6 +274,22 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
      */
     public void setToshiNo(ToshiNo toshiNo) {
         this.toshiNo = toshiNo;
+    }
+
+    /**
+     * getRecodeJunjiNo
+     * @return recodeJunjiNo
+     */
+    public RString getRecodeJunjiNo() {
+        return recodeJunjiNo;
+    }
+
+    /**
+     * setRecodeJunjiNo
+     * @param recodeJunjiNo recodeJunjiNo
+     */
+    public void setRecodeJunjiNo(RString recodeJunjiNo) {
+        this.recodeJunjiNo = recodeJunjiNo;
     }
 
     /**
@@ -1188,16 +1188,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
         if (!Objects.equals(this.jigyoshoNo, other.jigyoshoNo)) {
             return false;
         }
-        if (!Objects.equals(this.recodeJunjiNo, other.recodeJunjiNo)) {
+        if (!Objects.equals(this.toshiNo, other.toshiNo)) {
             return false;
         }
-        if (!Objects.equals(this.toshiNo, other.toshiNo)) {
+        if (!Objects.equals(this.recodeJunjiNo, other.recodeJunjiNo)) {
             return false;
         }
         return true;
     }
 
 // </editor-fold>
+
 
 
 

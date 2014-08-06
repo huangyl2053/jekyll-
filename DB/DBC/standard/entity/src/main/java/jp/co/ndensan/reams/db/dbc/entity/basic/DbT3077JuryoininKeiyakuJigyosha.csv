@@ -15,5 +15,5 @@ jutakuKaishuKeiyakuUmu,bool,boolean,,,,,A
 tokuteiFukushiYoguHanbaiKeiyakuUmu,bool,boolean,,,,,A
 shokanbaraiKyufuKeiyakuUmu,bool,boolean,,,,,A
 kogakuKyufuKeiyakuUmu,bool,boolean,,,,,A
-keiyakuJigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,A
+keiyakuJigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,A
 toriatsukaiKakuyakushoUmu,bool,boolean,,,,,A

@@ -5,8 +5,8 @@ shokisaiHokenshaNo,DbUDD003HokenshaNo,ShoKisaiHokenshaNo,,,,,A
 hiHokenshaNo,DbUDD002HihokenshaNo,KaigoHihokenshaNo,,,,,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,A
 jigyoshoNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,A
-recodeJunjiNo,varchar,RString,,,,,A
 toshiNo,varchar,ToshiNo,,,,,A
+recodeJunjiNo,varchar,RString,,,,,A
 serviceSyuruiCode,DbUDD005ServiceShuruiCode,ServiceShuruiCode,,,,,A
 serviceKomokuCode,DbUDD006ServiceKomokuCode,ServiceKomokuCode,,,,,A
 hiyoTanka,int2,Decimal,,,,,A
