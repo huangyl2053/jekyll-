@@ -30,10 +30,10 @@ import org.junit.Before;
 @RunWith(Enclosed.class)
 public class HihokenshaListTest extends DbzTestBase {
 
-    private static final LasdecCode l000001 = new LasdecCode(new RString("000001"));
-    private static final LasdecCode l000002 = new LasdecCode(new RString("000002"));
-    private static final LasdecCode l000003 = new LasdecCode(new RString("000003"));
-    private static final LasdecCode l000004 = new LasdecCode(new RString("000004"));
+    private static final LasdecCode l000001 = new LasdecCode("000001");
+    private static final LasdecCode l000002 = new LasdecCode("000002");
+    private static final LasdecCode l000003 = new LasdecCode("000003");
+    private static final LasdecCode l000004 = new LasdecCode("000004");
     private static final ShikibetsuCode s0000000001 = new ShikibetsuCode("0000000001");
     private static final ShikibetsuCode s0000000002 = new ShikibetsuCode("0000000002");
     private static final YMDHMS rt2014_04_01_00_00 = new YMDHMS("20140401000000");
@@ -74,7 +74,7 @@ public class HihokenshaListTest extends DbzTestBase {
         public void subHihokenshaListにより作られたsutの_sizeは_元のコンストラクタ引数内の_subHihokenshaListの引数である_条件への該当件数と一致する() {
             List<Hihokensha> list = createHihokenshaList();
             HihokenshaList sut = new HihokenshaList(list);
-            HihokenshaList afterSubList = sut.subHihokenshaList(s000001);
+            HihokenshaList afterSubList = sut.subHihokenshaList(l000001);
             assertThat(afterSubList.size(), is(1));
         }
     }
