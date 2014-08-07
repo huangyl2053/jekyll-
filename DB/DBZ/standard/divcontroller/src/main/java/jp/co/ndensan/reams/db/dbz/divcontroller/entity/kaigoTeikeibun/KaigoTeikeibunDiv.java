@@ -23,6 +23,8 @@ public class KaigoTeikeibunDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ddlTeikenbunShubetsu")
+    private DropDownList ddlTeikenbunShubetsu;
     @JsonProperty("dgTeikeibun")
     private DataGrid<dgTeikeibun_Row> dgTeikeibun;
     @JsonProperty("btnClose")
@@ -40,6 +42,16 @@ public class KaigoTeikeibunDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("ddlTeikenbunShubetsu")
+    public DropDownList getDdlTeikenbunShubetsu() {
+        return ddlTeikenbunShubetsu;
+    }
+
+    @JsonProperty("ddlTeikenbunShubetsu")
+    public void setDdlTeikenbunShubetsu(DropDownList ddlTeikenbunShubetsu) {
+        this.ddlTeikenbunShubetsu=ddlTeikenbunShubetsu;
+    }
+
     @JsonProperty("dgTeikeibun")
     public DataGrid<dgTeikeibun_Row> getDgTeikeibun() {
         return dgTeikeibun;

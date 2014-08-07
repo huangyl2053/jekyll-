@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.ur.urz.definition.lib.util.IRStringConvertable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 定型文種別の列挙型です。
+ * 特記事項以外定型文種別の列挙型です。
  *
  * @author n9606 漢那憲作
  */
-public enum TeikeibunShubetsu implements IRStringConvertable {
+public enum TeikeibunShubetsuElseTokki implements IRStringConvertable {
 
     /**
      * 申請理由 ("001")
@@ -49,20 +49,20 @@ public enum TeikeibunShubetsu implements IRStringConvertable {
     意見書意見(new RString("008"));
     private final RString code;
 
-    private TeikeibunShubetsu(RString code) {
+    private TeikeibunShubetsuElseTokki(RString code) {
         this.code = code;
     }
 
     /**
-     * 指定された定型文種別コードに該当する定型文種別を返します。
+     * 指定された特記事項以外の定型文種別コードに該当する定型文種別を返します。
      *
      * @param code 定型文種別コード
      * @return 引数のコードに対応するTeikeibunShubetsu型のenum
      * @throws IllegalArgumentException 実在しない定型文種別コードの場合
      */
-    public static TeikeibunShubetsu toValue(RString code) throws NullPointerException, IllegalArgumentException {
+    public static TeikeibunShubetsuElseTokki toValue(RString code) throws NullPointerException, IllegalArgumentException {
 
-        for (TeikeibunShubetsu item : TeikeibunShubetsu.values()) {
+        for (TeikeibunShubetsuElseTokki item : TeikeibunShubetsuElseTokki.values()) {
             if (item.code.equals(code)) {
                 return item;
             }
