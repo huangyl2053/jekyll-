@@ -194,6 +194,7 @@ public class RenrakusakiInfo {
         ResponseData<KaigoRenrakusakiInfoDiv> response = new ResponseData<>();
 
         Boolean result = Boolean.FALSE;
+        RString shishoCode = null;
 
         if (div.getHihokenshaNo() != null && div.getHihokenshaNo().isEmpty() == false) {
 
@@ -212,7 +213,8 @@ public class RenrakusakiInfo {
                                                     div.getDgRenrakusaki().getSelectedItems().get(0).
                                                     getRenrakusakiKbnNo().toString())))),
                     new ShoKisaiHokenshaNo(div.getHokenshaNo()),
-                    new KaigoHihokenshaNo(div.getHihokenshaNo()));
+                    new KaigoHihokenshaNo(div.getHihokenshaNo()),
+                    shishoCode);
 
             result = new RenrakusakiInfoManager().remove(renrakusakiJoho);
 
@@ -264,6 +266,7 @@ public class RenrakusakiInfo {
         ResponseData<KaigoRenrakusakiInfoDiv> response = new ResponseData<>();
 
         Boolean result = Boolean.FALSE;
+        RString shishoCode = null;
 
         if (chkInputJoho(div) == Boolean.TRUE) {
             if (div.getHihokenshaNo() != null && div.getHihokenshaNo().isEmpty() == false) {
@@ -282,7 +285,8 @@ public class RenrakusakiInfo {
                                                         div.getSelectedContents().
                                                         getTxtRenrakusakiKbnNo().getValue().toString())))),
                         new ShoKisaiHokenshaNo(div.getHokenshaNo()),
-                        new KaigoHihokenshaNo(div.getHihokenshaNo()));
+                        new KaigoHihokenshaNo(div.getHihokenshaNo()),
+                        shishoCode);
 
                 result = new RenrakusakiInfoManager().save(renrakusakiJoho);
 

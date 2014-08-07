@@ -30,6 +30,10 @@ public class KaigoTeikeibunMapper {
     public static KaigoTeikeibun toKaigoTeikeibun(
             DbT7103TeikeibunJohoEntity entity) throws NullPointerException {
 
+        if (entity == null) {
+            return null;
+        }
+
         return new KaigoTeikeibun(
                 entity.getTeikeiKubun(),
                 entity.getShubetsu(),
@@ -45,6 +49,10 @@ public class KaigoTeikeibunMapper {
      * @return 定型文情報エンティティ
      */
     public static DbT7103TeikeibunJohoEntity toKaigoTeikeibunEntity(KaigoTeikeibun teikeibunJoho) {
+
+        if (teikeibunJoho == null) {
+            return null;
+        }
 
         DbT7103TeikeibunJohoEntity entity = new DbT7103TeikeibunJohoEntity();
 

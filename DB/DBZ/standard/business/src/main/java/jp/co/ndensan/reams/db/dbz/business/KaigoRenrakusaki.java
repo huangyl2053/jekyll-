@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RenrakusakiKubunNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.Messages;
 
 /**
  * 連絡先情報を表すクラスです。
@@ -32,6 +34,7 @@ public class KaigoRenrakusaki {
     private final RenrakusakiKubunNo 連絡先区分番号;
     private final ShoKisaiHokenshaNo 保険者番号;
     private final KaigoHihokenshaNo 被保険者番号;
+    private final RString 支所コード;
 
     /**
      * インスタンスを生成します。
@@ -46,23 +49,23 @@ public class KaigoRenrakusaki {
      * @param 連絡先区分番号 RenrakusakiKubunNo
      * @param 保険者番号 ShoKisaiHokenshaNo
      * @param 被保険者番号 KaigoHihokenshaNo
+     * @param 支所コード RString
      */
     public KaigoRenrakusaki(AtenaMeisho 氏名, AtenaKanaMeisho 氏名カナ,
             TelNo 電話番号, TelNo 携帯番号, YubinNo 郵便番号, AtenaJusho 住所,
             RString 続柄, RenrakusakiKubunNo 連絡先区分番号, ShoKisaiHokenshaNo 保険者番号,
-            KaigoHihokenshaNo 被保険者番号) {
-
-        this.氏名 = 氏名;
-        this.氏名カナ = 氏名カナ;
+            KaigoHihokenshaNo 被保険者番号, RString 支所コード) {
+        this.氏名 = requireNonNull(氏名, Messages.E00001.getMessage());
+        this.氏名カナ = requireNonNull(氏名カナ, Messages.E00001.getMessage());
         this.電話番号 = 電話番号;
         this.携帯番号 = 携帯番号;
         this.郵便番号 = 郵便番号;
         this.住所 = 住所;
-        this.続柄 = 続柄;
-        this.連絡先区分番号 = 連絡先区分番号;
-        this.保険者番号 = 保険者番号;
-        this.被保険者番号 = 被保険者番号;
-
+        this.続柄 = requireNonNull(続柄, Messages.E00001.getMessage());
+        this.連絡先区分番号 = requireNonNull(連絡先区分番号, Messages.E00001.getMessage());
+        this.保険者番号 = requireNonNull(保険者番号, Messages.E00001.getMessage());
+        this.被保険者番号 = requireNonNull(被保険者番号, Messages.E00001.getMessage());
+        this.支所コード = 支所コード;
     }
 
     /**
@@ -153,5 +156,14 @@ public class KaigoRenrakusaki {
      */
     public KaigoHihokenshaNo get被保険者番号() {
         return 被保険者番号;
+    }
+
+    /**
+     * 支所コードを取得します。
+     *
+     * @return 支所コード
+     */
+    public RString get支所コード() {
+        return 支所コード;
     }
 }
