@@ -141,7 +141,7 @@ public class HihokenshaFinder {
     }
 
     private Hihokensha _toHihokensha(IHihokenshaShikaku shikaku) {
-        IKojin profile = profileSearcher.get個人(shikaku.get識別コード());
+        IKojin profile = profileSearcher.get個人_住基優先(shikaku.get識別コード());
         return isNull(profile) ? null : _createHihokensha(profile, shikaku);
     }
 
