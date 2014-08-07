@@ -37,8 +37,8 @@ public class MultiComparatorTest extends DbzTestBase {
 
         MultiComparator<Hihokensha> sut;
         List<Hihokensha> hihokenshaList;
-        private final LasdecCode l000001 = new LasdecCode(new RString("000001"));
-        private final LasdecCode l000002 = new LasdecCode(new RString("000002"));
+        private final LasdecCode l000001 = new LasdecCode("000001");
+        private final LasdecCode l000002 = new LasdecCode("000002");
         private final ShikibetsuCode s0000000001 = new ShikibetsuCode("0000000001");
         private final ShikibetsuCode s0000000002 = new ShikibetsuCode("0000000002");
         private final ShikibetsuCode s0000000003 = new ShikibetsuCode("0000000003");
