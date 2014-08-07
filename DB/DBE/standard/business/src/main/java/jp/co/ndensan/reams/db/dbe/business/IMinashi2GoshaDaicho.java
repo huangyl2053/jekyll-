@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * みなし2号被保険者を管理するインターフェースです。
+ * みなし2号者台帳で管理されることを表すインターフェースです。
  *
  * @author N8211 田辺 紘一
  */
