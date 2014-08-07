@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
+//TODO n8178 Aチームで方針が決まった後に改修予定。Merge Request #1691:の#41064 UI-リアル・通して実装(認定申請登録)のDiscussion参照 2014年9月末
 public interface INinteiShinseiTaishosha {
 
     /**
@@ -41,7 +42,7 @@ public interface INinteiShinseiTaishosha {
      *
      * @return 被保険者区分
      */
-    public IHihokenshaKubun get被保険者区分();
+    public HihokenshaKubun get被保険者区分();
 
     /**
      * 氏名を返します。
