@@ -62,9 +62,9 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
 
         public static class select_LasdecCode extends DbzTestDacBase {
 
-            private final LasdecCode code1 = new LasdecCode(new RString("111111"));
-            private final LasdecCode code2 = new LasdecCode(new RString("222222"));
-            private final LasdecCode code3 = new LasdecCode(new RString("333333"));
+            private final LasdecCode code1 = new LasdecCode("111111");
+            private final LasdecCode code2 = new LasdecCode("222222");
+            private final LasdecCode code3 = new LasdecCode("333333");
 
             @Before
             public void setUp() {
@@ -103,9 +103,9 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
         @RunWith(Enclosed.class)
         public static class selectAll_ITrueFalseCriteria extends DbzTestDacBase {
 
-            private static final LasdecCode code_111111 = new LasdecCode(new RString("111111"));
-            private static final LasdecCode code_222222 = new LasdecCode(new RString("222222"));
-            private static final LasdecCode code_333333 = new LasdecCode(new RString("333333"));
+            private static final LasdecCode code_111111 = new LasdecCode("111111");
+            private static final LasdecCode code_222222 = new LasdecCode("222222");
+            private static final LasdecCode code_333333 = new LasdecCode("333333");
             private static final KaigoHihokenshaNo hihokenshaNo_1234567890 = new KaigoHihokenshaNo(new RString("1234567890"));
 
             public static class LasdecCodeに111111_KaigoHihokenshaNoに1234567890を検索条件として指定した場合 extends DbzTestDacBase {
@@ -172,7 +172,7 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
             }
 
             private void initializeTable() {
-                lasdecCode = new LasdecCode(new RString("111111"));
+                lasdecCode = new LasdecCode("111111");
                 shikibetsuCode = new ShikibetsuCode("1234567890");
                 latestDate = new FlexibleDate("20140302");
 
@@ -210,7 +210,7 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
             }
 
             private void initializeTable() {
-                this.lasdecCode = new LasdecCode(new RString("111111"));
+                this.lasdecCode = new LasdecCode("111111");
                 this.shikibetsuCode = new ShikibetsuCode("1234567890");
                 this.hihokenshaNo = new KaigoHihokenshaNo(new RString("0987654321"));
                 FlexibleDate latestDate = new FlexibleDate("20140302");
@@ -256,7 +256,7 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
             }
 
             private void insertWithSpecifiedKey() {
-                lasdecCode = new LasdecCode(new RString("111111"));
+                lasdecCode = new LasdecCode("111111");
                 shikibetsuCode = new ShikibetsuCode("1234567890");
                 shoriTimestamp = new YMDHMS("20140402172000");
                 sut.insert(DbT1001HihokenshaDaichoEntityMock.createWithKey(lasdecCode, shikibetsuCode, shoriTimestamp));
@@ -294,7 +294,7 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
         }
 
         private void insertWithSpecifiedKey() {
-            lasdecCode = new LasdecCode(new RString("111111"));
+            lasdecCode = new LasdecCode("111111");
             shikibetsuCode = new ShikibetsuCode("1234567890");
             shoriTimestamp = new YMDHMS("20140402172000");
             sut.insert(DbT1001HihokenshaDaichoEntityMock.createWithKey(lasdecCode, shikibetsuCode, shoriTimestamp));
