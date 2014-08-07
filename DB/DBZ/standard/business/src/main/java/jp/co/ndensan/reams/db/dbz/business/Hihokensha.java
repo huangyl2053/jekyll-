@@ -82,7 +82,7 @@ public class Hihokensha implements IHihokenshaShikaku, INinteiShinseiTaishosha {
     }
 
     @Override
-    public IHihokenshaKubun get被保険者区分() {
+    public HihokenshaKubun get被保険者区分() {
         return this.shikaku.get被保険者区分();
     }
 

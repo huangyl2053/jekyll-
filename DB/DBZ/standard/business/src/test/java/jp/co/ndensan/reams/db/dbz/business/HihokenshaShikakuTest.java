@@ -48,7 +48,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
     private static final YMDHMS shoriTimestamp = new YMDHMS("20140802153700");
     private static final ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("123456"));
     private static final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567890"));
-    private static final IHihokenshaKubun hihokenshaKubun = new HihokenshaKubun(new Code("1"), new RString("第1号"));
+    private static final HihokenshaKubun hihokenshaKubun = new HihokenshaKubun(new Code("1"), new RString("第1号"));
     private static final RDate ichigoGaitoDate = new RDate("20140403");
     private static final FlexibleDate ichigoDate = new FlexibleDate(ichigoGaitoDate.toString());
 

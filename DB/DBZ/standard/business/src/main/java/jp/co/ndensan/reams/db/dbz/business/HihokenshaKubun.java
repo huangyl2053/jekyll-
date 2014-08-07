@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class HihokenshaKubun extends KaigoCodeAssignedItem<HihokenshaKubunCode> implements IHihokenshaKubun {
+public class HihokenshaKubun extends KaigoCodeAssignedItem<HihokenshaKubunCode> {
 
     /**
      * 被保険者区分を表すコードと区分名称を引数から渡し、インスタンスを生成します。
@@ -33,10 +33,5 @@ public class HihokenshaKubun extends KaigoCodeAssignedItem<HihokenshaKubunCode> 
      */
     public HihokenshaKubunCode get被保険者区分コード() {
         return getExtendedCode();
-    }
-
-    @Override
-    public RString get被保険者区分() {
-        return getMeisho();
     }
 }

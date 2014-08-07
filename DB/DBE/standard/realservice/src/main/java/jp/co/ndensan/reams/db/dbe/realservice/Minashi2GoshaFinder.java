@@ -56,7 +56,7 @@ public class Minashi2GoshaFinder {
     private Minashi2GoshaList toMinashi2GoshaList(List<IMinashi2GoshaDaicho> minashi2GoshaDaicho) {
         List<Minashi2Gosha> minashi2GoshaList = new ArrayList<>();
         for (IMinashi2GoshaDaicho minashiDaicho : minashi2GoshaDaicho) {
-            IKojin kojin = profileSearcher.get個人(minashiDaicho.get識別コード());
+            IKojin kojin = profileSearcher.get個人_住基優先(minashiDaicho.get識別コード());
             minashi2GoshaList.add(new Minashi2Gosha(minashiDaicho, kojin));
         }
         return new Minashi2GoshaList(minashi2GoshaList);

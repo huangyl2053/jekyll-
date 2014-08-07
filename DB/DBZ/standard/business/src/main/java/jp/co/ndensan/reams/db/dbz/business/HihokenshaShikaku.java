@@ -41,7 +41,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
     private final ShikibetsuCode shikibetsuCode;
     private final YMDHMS shoriTimeStamp;
     private final KaigoHihokenshaNo hihokenshaNo;
-    private final IHihokenshaKubun hihokenshaKubun;
+    private final HihokenshaKubun hihokenshaKubun;
     private final ShikakuShutoku shikakuShutoku;
     private final ShikakuSoshitsu shikakuSoshitsu;
     private final ShikakuHenko shikakuHenko;
@@ -106,7 +106,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
     }
 
     @Override
-    public IHihokenshaKubun get被保険者区分() {
+    public HihokenshaKubun get被保険者区分() {
         return this.hihokenshaKubun;
     }
 
@@ -197,7 +197,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         private final ShoKisaiHokenshaNo theShokisaiHokenshaNo;
         private final ShikibetsuCode theShikibetsuCode;
         private final YMDHMS shoriTimestamp;
-        private final IHihokenshaKubun hihokenshaKubun;
+        private final HihokenshaKubun hihokenshaKubun;
         private final FlexibleDate ichigoGaitoDate;
         private IKaigoShikaku kaigoShikaku;
         private KaigoHihokenshaNo theHihokenshaNo = KaigoHihokenshaNo.NULL_VALUE;
@@ -253,7 +253,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
          * @throws NullPointerException 引数にnullの項目があるとき。
          */
         public Builder(LasdecCode 市町村コード, ShikibetsuCode 識別コード, YMDHMS 処理日時, ShoKisaiHokenshaNo 証記載保険者番号,
-                IHihokenshaKubun 被保険者区分, FlexibleDate 第1号年齢到達日, ShikakuShutoku 資格取得) throws NullPointerException {
+                HihokenshaKubun 被保険者区分, FlexibleDate 第1号年齢到達日, ShikakuShutoku 資格取得) throws NullPointerException {
             this(市町村コード, 識別コード, 処理日時, 証記載保険者番号, 被保険者区分, 第1号年齢到達日);
 
             this.shutoku = requireNonNull(資格取得, errorMessageForE00003With("資格取得", simpleNameOf(ShikakuShutoku.class)));
@@ -272,7 +272,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
          */
         public Builder(IKaigoShikaku 介護資格, LasdecCode 市町村コード,
                 ShikibetsuCode 識別コード, YMDHMS 処理日時, ShoKisaiHokenshaNo 証記載保険者番号,
-                IHihokenshaKubun 被保険者区分) throws NullPointerException {
+                HihokenshaKubun 被保険者区分) throws NullPointerException {
             this(市町村コード, 識別コード, 処理日時, 証記載保険者番号, 被保険者区分,
                     toFlexibleDate(requireNonNullForKaigoShikaku(介護資格).get一号該当日()));
             this.kaigoShikaku = 介護資格;
@@ -294,12 +294,12 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
          * @param 第1号年齢到達日 {@link FlexibleDate 第1号年齢到達日}
          */
         private Builder(LasdecCode 市町村コード, ShikibetsuCode 識別コード, YMDHMS 処理日時,
-                ShoKisaiHokenshaNo 証記載保険者番号, IHihokenshaKubun 被保険者区分, FlexibleDate 第1号年齢到達日) {
+                ShoKisaiHokenshaNo 証記載保険者番号, HihokenshaKubun 被保険者区分, FlexibleDate 第1号年齢到達日) {
             this.theLasdecCode = requireNonNull(市町村コード, errorMessageForE00003With("市町村コード", simpleNameOf(LasdecCode.class)));
             this.theShikibetsuCode = requireNonNull(識別コード, errorMessageForE00003With("識別コード", simpleNameOf(ShikibetsuCode.class)));
             this.shoriTimestamp = requireNonNull(処理日時, errorMessageForE00003With("処理日時", simpleNameOf(YMDHMS.class)));
             this.theShokisaiHokenshaNo = requireNonNull(証記載保険者番号, errorMessageForE00003With("証記載保険者番号", simpleNameOf(ShoKisaiHokenshaNo.class)));
-            this.hihokenshaKubun = requireNonNull(被保険者区分, errorMessageForE00003With("被保険者区分", simpleNameOf(IHihokenshaKubun.class)));
+            this.hihokenshaKubun = requireNonNull(被保険者区分, errorMessageForE00003With("被保険者区分", simpleNameOf(HihokenshaKubun.class)));
             this.ichigoGaitoDate = requireNonNull(第1号年齢到達日, errorMessageForE00003With("第1号年齢到達日", simpleNameOf(FlexibleDate.class)));
         }
 
@@ -541,7 +541,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         }
 
         //TODO n8178 城間篤人 UR側の区分も今後、CodeAssignedItemの形に修正する予定。修正後にこのメソッドを削除する　2014年9月末
-        private ShikakuHihokenshaKubun toShikakuHihokenshaKubun(IHihokenshaKubun hihokenshaKubun) {
+        private ShikakuHihokenshaKubun toShikakuHihokenshaKubun(HihokenshaKubun hihokenshaKubun) {
             return ShikakuHihokenshaKubun.toValue(hihokenshaKubun.getCode().getColumnValue());
         }
 

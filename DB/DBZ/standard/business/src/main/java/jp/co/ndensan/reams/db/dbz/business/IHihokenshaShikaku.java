@@ -79,7 +79,7 @@ public interface IHihokenshaShikaku extends IHihokenshaNoGettable, IShikibetsuCo
      *
      * @return {@link IHihokenshaKubun 被保険者区分}
      */
-    IHihokenshaKubun get被保険者区分();
+    HihokenshaKubun get被保険者区分();
 
     /**
      * 指定の基準日時点で、被保険者資格を保持しているかどうかを返します。

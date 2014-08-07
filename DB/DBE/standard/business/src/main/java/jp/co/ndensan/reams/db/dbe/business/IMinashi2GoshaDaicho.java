@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -52,7 +53,7 @@ public interface IMinashi2GoshaDaicho {
      *
      * @return 被保険者区分
      */
-    Minashi2GoHihokenshaKubun getみなし2号被保険者区分();
+    HihokenshaKubun get被保険者区分();
 
     /**
      * みなし2号登録年月日を返します。

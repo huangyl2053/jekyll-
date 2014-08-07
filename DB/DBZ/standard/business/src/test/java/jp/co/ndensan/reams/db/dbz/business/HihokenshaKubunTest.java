@@ -39,11 +39,6 @@ public class HihokenshaKubunTest {
             assertThat(sut.get被保険者区分コード().value(), is(sut.getCode().value()));
         }
 
-        @Test
-        public void get被保険者区分とgetMeishoで取得した内容は_同一になる() {
-            assertThat(sut.get被保険者区分(), is(sut.getMeisho()));
-        }
-
     }
 
 }

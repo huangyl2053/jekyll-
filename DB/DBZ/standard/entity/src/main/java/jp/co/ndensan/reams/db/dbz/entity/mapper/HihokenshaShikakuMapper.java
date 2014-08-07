@@ -7,10 +7,9 @@ package jp.co.ndensan.reams.db.dbz.entity.mapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshashoSaikofu;
-import jp.co.ndensan.reams.db.dbz.business.IHihokenshaKubun;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.JushochitokureiKaijo;
 import jp.co.ndensan.reams.db.dbz.business.JushochitokureiTekiyo;
@@ -155,7 +154,7 @@ public final class HihokenshaShikakuMapper {
         ShoKisaiHokenshaNo shoKisaiHokenshaNo = entity.getShoKisaiHokenshaNo();
         ShikibetsuCode shikibetsuCode = entity.getShikibetsuCode();
         YMDHMS shoriTimestamp = entity.getShoriTimestamp();
-        IHihokenshaKubun hihokenshaKubun = new HihokenshaKubun(entity.getHihokennshaKubunCode(), entity.getHihokennshaKubunCodeMeisho());
+        HihokenshaKubun hihokenshaKubun = new HihokenshaKubun(entity.getHihokennshaKubunCode(), entity.getHihokennshaKubunCodeMeisho());
         HihokenshaShikaku shikaku
                 = new HihokenshaShikaku.Builder(kaigoShikaku, lasdecCode, shikibetsuCode, shoriTimestamp,
                         shoKisaiHokenshaNo, hihokenshaKubun).

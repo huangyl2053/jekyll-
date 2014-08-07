@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbz.business.IHihokenshaKubun;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
@@ -83,9 +83,9 @@ public class Minashi2GoshaTest {
 
         @Test
         public void getみなし2号被保険者区分コードは_コンストラクタ引数のMinashi2GoshaDaichoが持つみなし2号被保険者区分コードと_同じ値を返す() {
-            Minashi2GoHihokenshaKubun hihoKubun = new Minashi2GoHihokenshaKubun(new Code("1"), new RString("みなし2号"));
-            when(daichoJoho.getみなし2号被保険者区分()).thenReturn(hihoKubun);
-            assertThat(sut.getみなし2号被保険者区分(), is(hihoKubun));
+            HihokenshaKubun hihoKubun = new HihokenshaKubun(new Code("8"), new RString("みなし2号"));
+            when(daichoJoho.get被保険者区分()).thenReturn(hihoKubun);
+            assertThat(sut.get被保険者区分(), is(hihoKubun));
         }
 
         @Test
@@ -111,9 +111,9 @@ public class Minashi2GoshaTest {
 
         @Test
         public void get被保険者区分コードは_コンストラクタ引数のMinashi2GoshaDaichoが持つみなし2号被保険者区分コードと_同じ値を返す() {
-            Minashi2GoHihokenshaKubun hihoKubun = new Minashi2GoHihokenshaKubun(new Code("1"), new RString("みなし2号"));
-            when(daichoJoho.getみなし2号被保険者区分()).thenReturn(hihoKubun);
-            assertThat(sut.get被保険者区分(), is((IHihokenshaKubun) hihoKubun));
+            HihokenshaKubun hihoKubun = new HihokenshaKubun(new Code("8"), new RString("みなし2号"));
+            when(daichoJoho.get被保険者区分()).thenReturn(hihoKubun);
+            assertThat(sut.get被保険者区分(), is((HihokenshaKubun) hihoKubun));
         }
 
         @Test

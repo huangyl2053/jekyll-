@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.IHihokenshaKubun;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -59,8 +59,8 @@ public class Minashi2Gosha implements IMinashi2GoshaDaicho, INinteiShinseiTaisho
     }
 
     @Override
-    public IHihokenshaKubun get被保険者区分() {
-        return daichoJoho.getみなし2号被保険者区分();
+    public HihokenshaKubun get被保険者区分() {
+        return daichoJoho.get被保険者区分();
     }
 
     @Override
@@ -111,11 +111,6 @@ public class Minashi2Gosha implements IMinashi2GoshaDaicho, INinteiShinseiTaisho
     @Override
     public YMDHMS get処理日時() {
         return daichoJoho.get処理日時();
-    }
-
-    @Override
-    public Minashi2GoHihokenshaKubun getみなし2号被保険者区分() {
-        return daichoJoho.getみなし2号被保険者区分();
     }
 
     @Override

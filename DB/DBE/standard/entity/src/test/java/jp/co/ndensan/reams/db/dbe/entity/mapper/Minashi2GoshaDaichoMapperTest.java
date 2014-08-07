@@ -6,10 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.Minashi2GoshaDaicho;
-import jp.co.ndensan.reams.db.dbe.business.Minashi2GoHihokenshaKubun;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -37,7 +36,7 @@ public class Minashi2GoshaDaichoMapperTest {
     private static ShikibetsuCode 識別コード;
     private static KaigoHihokenshaNo 被保険者番号;
     private static YMDHMS 処理日時;
-    private static Minashi2GoHihokenshaKubun 被保険者区分;
+    private static HihokenshaKubun 被保険者区分;
     private static FlexibleDate みなし2号登録年月日;
     private static FlexibleDate みなし2号解除年月日;
     private static RString 福祉被保険者番号;
@@ -48,7 +47,7 @@ public class Minashi2GoshaDaichoMapperTest {
         識別コード = new ShikibetsuCode("123456789012345");
         被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));
         処理日時 = new YMDHMS("20071106010101");
-        被保険者区分 = new Minashi2GoHihokenshaKubun(new Code("1"), new RString("みなし2号"));
+        被保険者区分 = new HihokenshaKubun(new Code("1"), new RString("みなし2号"));
         みなし2号登録年月日 = new FlexibleDate("20140101");
         みなし2号解除年月日 = new FlexibleDate("20140101");
         福祉被保険者番号 = new RString("0123456789");
@@ -83,7 +82,7 @@ public class Minashi2GoshaDaichoMapperTest {
 
         @Test
         public void Entityが持つ被保険者区分コードと_変換後のみなし2号台帳が持つ被保険者区分コードが_一致する() {
-            assertThat(Minashi2GoshaDaichoMapper.toMinashi2GoshaDaicho(createEntity()).getみなし2号被保険者区分().getCode(), is(被保険者区分.getCode()));
+            assertThat(Minashi2GoshaDaichoMapper.toMinashi2GoshaDaicho(createEntity()).get被保険者区分().getCode(), is(被保険者区分.getCode()));
         }
 
         @Test

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -35,7 +36,7 @@ public class Minashi2GoshaDaichoTest {
         private ShikibetsuCode 識別コード;
         private KaigoHihokenshaNo 被保険者番号;
         private YMDHMS 処理日時;
-        private Minashi2GoHihokenshaKubun 被保険者区分コード;
+        private HihokenshaKubun 被保険者区分コード;
         private FlexibleDate みなし2号登録年月日;
         private FlexibleDate みなし2号解除年月日;
         private RString 福祉被保険者番号;
@@ -47,7 +48,7 @@ public class Minashi2GoshaDaichoTest {
             被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));
             処理日時 = new YMDHMS("20071103010101");
             福祉被保険者番号 = new RString("0123456789");
-            被保険者区分コード = new Minashi2GoHihokenshaKubun(new Code("1"), new RString("みなし2号"));
+            被保険者区分コード = new HihokenshaKubun(new Code("1"), new RString("みなし2号"));
             みなし2号登録年月日 = new FlexibleDate("20140101");
             みなし2号解除年月日 = new FlexibleDate("20140101");
         }

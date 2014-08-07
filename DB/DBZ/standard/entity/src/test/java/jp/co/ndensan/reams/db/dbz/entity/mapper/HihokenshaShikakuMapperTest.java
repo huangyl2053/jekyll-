@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshashoSaikofu;
-import jp.co.ndensan.reams.db.dbz.business.IHihokenshaKubun;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.JushochitokureiKaijo;
 import jp.co.ndensan.reams.db.dbz.business.JushochitokureiTekiyo;
@@ -67,7 +67,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
     private static final KaigoHihokenshaNo hihokenshaNo;
     private static final RDate ichigoGaitoDate;
     private static final IKaigoShikaku kaigoShikaku;
-    private static final IHihokenshaKubun hihokenshaKubun;
+    private static final HihokenshaKubun hihokenshaKubun;
 
     static {
         lasdecCode = new LasdecCode("123456");

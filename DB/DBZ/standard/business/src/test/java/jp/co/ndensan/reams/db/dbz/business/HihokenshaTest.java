@@ -128,7 +128,7 @@ public class HihokenshaTest extends DbzTestBase {
 
             @Test
             public void get被保険者区分は_コンストラクタ引数のIHihokenshaShikakuの_get被保険者区分と_同じ値を返す() {
-                IHihokenshaKubun kubun = new HihokenshaKubun(new Code("1"), new RString("第1号"));
+                HihokenshaKubun kubun = new HihokenshaKubun(new Code("1"), new RString("第1号"));
                 when(shikaku.get被保険者区分()).thenReturn(kubun);
                 assertThat(sut.get被保険者区分(), is(kubun));
             }

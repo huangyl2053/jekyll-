@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbe.business.Minashi2GoHihokenshaKubun;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaicho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
@@ -41,7 +41,7 @@ public class Minashi2GoshaDaichoDacTest extends DbeTestDacBase {
     private static LasdecCode 市町村コード;
     private static ShikibetsuCode 識別コード;
     private static YMDHMS 処理日時;
-    private static Minashi2GoHihokenshaKubun 被保険者区分コード;
+    private static HihokenshaKubun 被保険者区分コード;
     private static FlexibleDate みなし2号登録年月日;
     private static FlexibleDate みなし2号解除年月日;
     private static RString 福祉被保険者番号;
@@ -53,7 +53,7 @@ public class Minashi2GoshaDaichoDacTest extends DbeTestDacBase {
         市町村コード = new LasdecCode("123456");
         処理日時 = new YMDHMS("20071106010101");
         識別コード = new ShikibetsuCode(new RString("012345678900001"));
-        被保険者区分コード = new Minashi2GoHihokenshaKubun(new Code("1"), new RString("みなし2号"));
+        被保険者区分コード = new HihokenshaKubun(new Code("1"), new RString("みなし2号"));
         みなし2号登録年月日 = new FlexibleDate("20140101");
         みなし2号解除年月日 = new FlexibleDate("20140101");
         福祉被保険者番号 = new RString("0123456789");

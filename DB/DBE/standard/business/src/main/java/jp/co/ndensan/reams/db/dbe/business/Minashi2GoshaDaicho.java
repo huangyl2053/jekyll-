@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -25,7 +25,7 @@ public class Minashi2GoshaDaicho implements IMinashi2GoshaDaicho {
     private final ShikibetsuCode 識別コード;
     private final KaigoHihokenshaNo 被保険者番号;
     private final YMDHMS 処理日時;
-    private final Minashi2GoHihokenshaKubun 被保険者区分コード;
+    private final HihokenshaKubun 被保険者区分コード;
     private final FlexibleDate みなし2号登録年月日;
     private final FlexibleDate みなし2号解除年月日;
     //TODO n8178 城間篤人 福祉で使用されている被保険者番号に変更するか、新規で型を作る必要がある 2014年9月末
@@ -50,7 +50,7 @@ public class Minashi2GoshaDaicho implements IMinashi2GoshaDaicho {
             ShikibetsuCode 識別コード,
             KaigoHihokenshaNo 被保険者番号,
             YMDHMS 処理日時,
-            Minashi2GoHihokenshaKubun 被保険者区分コード,
+            HihokenshaKubun 被保険者区分コード,
             FlexibleDate みなし2号登録年月日,
             FlexibleDate みなし2号解除年月日,
             RString 福祉被保険者番号) throws NullPointerException {
@@ -91,7 +91,7 @@ public class Minashi2GoshaDaicho implements IMinashi2GoshaDaicho {
     }
 
     @Override
-    public Minashi2GoHihokenshaKubun getみなし2号被保険者区分() {
+    public HihokenshaKubun get被保険者区分() {
         return 被保険者区分コード;
     }
 
