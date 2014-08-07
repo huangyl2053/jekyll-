@@ -23,9 +23,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 public interface IHihokenshaShikaku extends IHihokenshaNoGettable, IShikibetsuCodeGettable {
 
     /**
-     * 被保険者の資格を管理する、地方公共団体コードを返します。
+     * 被保険者の資格を管理する、市町村コードを返します。
      *
-     * @return {@link ShoKisaiHokenshaNo 地方公共団体コード}
+     * @return {@link LasdecCode 市町村コード}
      */
     public LasdecCode get市町村コード();
 
