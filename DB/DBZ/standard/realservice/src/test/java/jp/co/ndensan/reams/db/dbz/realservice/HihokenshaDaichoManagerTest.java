@@ -59,7 +59,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
         public void setUp() {
             dac = mock(HihokenshaDaichoDac.class);
             sut = new HihokenshaDaichoManager(dac, HihokenshaNoSaibanService.forTestType(new RString("1234567890")));
-            shikaku = new HihokenshaShikaku.Builder(new LasdecCode(new RString("123456")), new ShikibetsuCode("1234567890"),
+            shikaku = new HihokenshaShikaku.Builder(new LasdecCode("123456"), new ShikibetsuCode("1234567890"),
                     new YMDHMS("20110912012345"), new ShoKisaiHokenshaNo(new RString("123456")),
                     new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
                     .build();
@@ -88,7 +88,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
         public void setUp() {
             dac = mock(HihokenshaDaichoDac.class);
             sut = new HihokenshaDaichoManager(dac, HihokenshaNoSaibanService.forTestType(new RString("1234567890")));
-            shikaku = new HihokenshaShikaku.Builder(new LasdecCode(new RString("123456")), new ShikibetsuCode("1234567890"),
+            shikaku = new HihokenshaShikaku.Builder(new LasdecCode("123456"), new ShikibetsuCode("1234567890"),
                     new YMDHMS("20110912012345"), new ShoKisaiHokenshaNo(new RString("123456")),
                     new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
                     .build();
@@ -111,7 +111,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
     public static class get extends DbzTestBase {
 
         private static HihokenshaDaichoDac dac;
-        private static final LasdecCode lasdecCode = new LasdecCode(new RString("123456"));
+        private static final LasdecCode lasdecCode = new LasdecCode("123456");
         private static final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("1234567890");
         private static final YMDHMS shoriTimestamp = new YMDHMS("20140417095900");
         private static final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1562483169"));
@@ -245,7 +245,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
 
             @Test
             public void get被保険者資格ListOfは_検索結果が得られないとき_Collections$EMPTY_LIST_を返す() {
-                List<IHihokenshaShikaku> result = sut.get被保険者資格ListOf(new LasdecCode(new RString("666666")));
+                List<IHihokenshaShikaku> result = sut.get被保険者資格ListOf(new LasdecCode("666666"));
                 assertThat(result, is(Collections.EMPTY_LIST));
             }
         }
@@ -288,7 +288,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
 
             @Test
             public void get被保険者資格ListOfは_検索結果が得られないとき_Collections$EMPTY_LIST_を返す() {
-                List<IHihokenshaShikaku> result = sut.get被保険者資格ListOf(new LasdecCode(new RString("666666")));
+                List<IHihokenshaShikaku> result = sut.get被保険者資格ListOf(new LasdecCode("666666"));
                 assertThat(result, is(Collections.EMPTY_LIST));
             }
         }

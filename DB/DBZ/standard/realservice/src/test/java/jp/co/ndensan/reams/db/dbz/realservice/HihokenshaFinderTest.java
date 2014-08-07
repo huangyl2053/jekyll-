@@ -54,7 +54,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
 
     public static class get被保険者_直近_ShikibetsuCode版 extends DbzTestBase {
 
-        private final LasdecCode lasdecCode = new LasdecCode(new RString("123456"));
+        private final LasdecCode lasdecCode = new LasdecCode("123456");
         private final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("1234567890");
         private final YMDHMS shoriTimestamp = new YMDHMS("20110719012345");
         private final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567892"));
@@ -93,7 +93,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
 
     public static class get被保険者_直近_KaigoHihokenshaNo版 extends DbzTestBase {
 
-        private final LasdecCode lasdecCode = new LasdecCode(new RString("123456"));
+        private final LasdecCode lasdecCode = new LasdecCode("123456");
         private final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("1234567890");
         private final YMDHMS shoriTimestamp = new YMDHMS("20110912012345");
         private final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567892"));
@@ -132,7 +132,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
 
     public static class get被保険者_主キー版 extends DbzTestBase {
 
-        private final LasdecCode lasdecCode = new LasdecCode(new RString("123456"));
+        private final LasdecCode lasdecCode = new LasdecCode("123456");
         private final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("1234567890");
         private final YMDHMS shoriTimestamp = new YMDHMS("20110912012345");
         private final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567892"));
@@ -176,7 +176,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
 
     public static class get被保険者List_引数が市町村コードの場合 extends DbzTestBase {
 
-        private final LasdecCode lasdecCode = new LasdecCode(new RString("123456"));
+        private final LasdecCode lasdecCode = new LasdecCode("123456");
         private final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567892"));
         List<IHihokenshaShikaku> list;
         private final int listSize = 3;
@@ -222,7 +222,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
     public static class get被保険者List_引数が検索条件の場合 extends DbzTestBase {
 
         private ISearchCondition condition;
-        private final LasdecCode lasdecCode = new LasdecCode(new RString("123456"));
+        private final LasdecCode lasdecCode = new LasdecCode("123456");
         private final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567892"));
         List<IHihokenshaShikaku> list;
         private HihokenshaList result;
