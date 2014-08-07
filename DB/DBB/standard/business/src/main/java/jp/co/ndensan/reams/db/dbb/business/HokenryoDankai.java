@@ -13,7 +13,7 @@ class HokenryoDankai {
 
     private String hokenryoDankai;
     private boolean tokureiTaisho;
-
+    private String systemDankai;
     /**
      * @return the hokenryoDankai
      */
@@ -40,5 +40,19 @@ class HokenryoDankai {
      */
     public void setTokureiTaisho(boolean tokureiTaisho) {
         this.tokureiTaisho = tokureiTaisho;
+    }
+
+    /**
+     * @return the systemDankai
+     */
+    public String getSystemDankai() {
+        return systemDankai;
+    }
+
+    /**
+     * @param systemDankai the systemDankai to set
+     */
+    public void setSystemDankai(String systemDankai) {
+        this.systemDankai = systemDankai;
     }
 }

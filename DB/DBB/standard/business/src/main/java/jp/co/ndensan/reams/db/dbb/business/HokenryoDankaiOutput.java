@@ -44,6 +44,19 @@ public class HokenryoDankaiOutput {
         保険料段階01月.setHokenryoDankai(hokenryoDankai);
         保険料段階02月.setHokenryoDankai(hokenryoDankai);
         保険料段階03月.setHokenryoDankai(hokenryoDankai);
+
+        保険料段階04月.setSystemDankai(hokenryoDankai);
+        保険料段階05月.setSystemDankai(hokenryoDankai);
+        保険料段階06月.setSystemDankai(hokenryoDankai);
+        保険料段階07月.setSystemDankai(hokenryoDankai);
+        保険料段階08月.setSystemDankai(hokenryoDankai);
+        保険料段階09月.setSystemDankai(hokenryoDankai);
+        保険料段階10月.setSystemDankai(hokenryoDankai);
+        保険料段階11月.setSystemDankai(hokenryoDankai);
+        保険料段階12月.setSystemDankai(hokenryoDankai);
+        保険料段階01月.setSystemDankai(hokenryoDankai);
+        保険料段階02月.setSystemDankai(hokenryoDankai);
+        保険料段階03月.setSystemDankai(hokenryoDankai);
     }
 
     protected void CreateHokenryoDankaiOutput(Map<String, HokenryoDankai> hokenryoDankaiMap) {
@@ -112,7 +125,7 @@ public class HokenryoDankaiOutput {
         hokenryoDankaiMap.put("10", get保険料段階10月());
         hokenryoDankaiMap.put("11", get保険料段階11月());
         hokenryoDankaiMap.put("12", get保険料段階12月());
-        
+
         return hokenryoDankaiMap;
     }
 

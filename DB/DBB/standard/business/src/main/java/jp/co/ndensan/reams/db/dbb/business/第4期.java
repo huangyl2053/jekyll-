@@ -32,16 +32,18 @@ public class 第4期 extends HokenryoDankaiHanteiHohoHozon {
         段階3.add(new 段階判定_世帯非課税());
         段階3.add(new 段階判定_本人非課税());
         段階3.add(new 段階判定_金額(基準年金収入1.add(1), 基準年金収入2));
+        段階3.add(new 段階判定_特例対象());
 
         List<IHanteiHoho> 段階4 = new ArrayList<>();
         段階4.add(new 段階判定_世帯非課税());
         段階4.add(new 段階判定_本人非課税());
-        段階4.add(new 段階判定_金額(基準年金収入2.add(1), new Decimal(-1)));
+        段階4.add(new 段階判定_金額(基準年金収入2.add(1), new Decimal(-1)));        
 
         List<IHanteiHoho> 段階5 = new ArrayList<>();
         段階5.add(new 段階判定_世帯課税());
         段階5.add(new 段階判定_本人非課税());
         段階5.add(new 段階判定_金額(new Decimal(0), 基準年金収入3));
+        段階5.add(new 段階判定_特例対象());
 
         List<IHanteiHoho> 段階6 = new ArrayList<>();
         段階6.add(new 段階判定_世帯課税());

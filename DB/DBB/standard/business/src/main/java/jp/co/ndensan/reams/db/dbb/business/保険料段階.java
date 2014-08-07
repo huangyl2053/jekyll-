@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -16,7 +17,7 @@ public class 保険料段階 {
 
     public HokenryoDankaiOutput HokenryoDankaiHantei(HokenryoDankaiInput hokenryoDankaiInput, HokenryoDankaiHanteiHohoHozon hokenryoDankaiHanteiHoho) {
 
-        String dankaiResult = null;
+        HokenryoDankaiOutput hokenryoDankaiOutput = null;
 
         //mapからkey(段階数)を取得
         for (String hanteiDankai : hokenryoDankaiHanteiHoho.hanteiHoho.keySet()) {
@@ -26,12 +27,13 @@ public class 保険料段階 {
             //hanteiResult = KakuDankaiHantei(hokenryoDankaiInput,hanteihohoList);
 
             if (各段階判定(hokenryoDankaiInput, hanteihohoList)) {
-                dankaiResult = hanteiDankai;
+                hokenryoDankaiOutput = 出力データ作成(hokenryoDankaiInput, hanteiDankai);
+                if (特例対象判定(hanteihohoList)) {
+                    特例対象設定(hokenryoDankaiOutput);
+                }
                 break;
             }
         }
-
-        HokenryoDankaiOutput hokenryoDankaiOutput = 出力データ作成(hokenryoDankaiInput, dankaiResult);
 
         //生保等判定を行う
         List<I1段階判定> dai1dankaiHanteiList;
@@ -61,6 +63,29 @@ public class 保険料段階 {
             }
         }
         return result;
+    }
+
+    private boolean 特例対象判定(List<IHanteiHoho> hanteihohoList) {
+
+        boolean result = false;
+
+        for (IHanteiHoho kakuhanteihoho : hanteihohoList) {
+            if (kakuhanteihoho instanceof 段階判定_特例対象) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    private void 特例対象設定(HokenryoDankaiOutput hokenryoDankaiOutput) {
+        Map<String, HokenryoDankai> hokenryoDankaiMap = hokenryoDankaiOutput.CreateHokenryoDankaiMap();
+        for (String hokenryoDankai : hokenryoDankaiMap.keySet()) {
+            //取得した段階の判定方法を取得
+            HokenryoDankai hanteihohoList = hokenryoDankaiMap.get(hokenryoDankai);
+            hanteihohoList.setTokureiTaisho(true);
+        }
     }
 
     protected static HokenryoDankaiOutput 出力データ作成(HokenryoDankaiInput hokenryoDankaiInput, String dankaiResult) {

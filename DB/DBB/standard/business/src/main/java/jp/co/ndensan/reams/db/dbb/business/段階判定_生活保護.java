@@ -67,6 +67,8 @@ public class 段階判定_生活保護 implements I1段階判定 {
 
             if (DateHantei(生活保護開始月, 判定年月)) {
                 hokenryoDankaiMap.get(tsuki).setHokenryoDankai("1");
+                hokenryoDankaiMap.get(tsuki).setSystemDankai("1");
+                hokenryoDankaiMap.get(tsuki).setTokureiTaisho(false);
             }
         }
 

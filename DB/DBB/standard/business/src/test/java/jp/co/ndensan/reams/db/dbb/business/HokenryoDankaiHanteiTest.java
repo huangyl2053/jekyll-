@@ -9,8 +9,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -101,8 +99,16 @@ public class HokenryoDankaiHanteiTest {
         expResult.get保険料段階02月().setHokenryoDankai("第4段階２");
         expResult.get保険料段階03月().setHokenryoDankai("第4段階２");
         HokenryoDankaiOutput result = instance.hokenryoDankaiHantei(hokenryodankaiinput);
-        if (!outputEquals(expResult, result)) {
-            fail("段階使用あり failed");
+        if (!HokenryoDankaiEquals(expResult, result)) {
+            fail("段階使用あり 保険料段階failed");
+        }
+
+        if (!SystemDankaiEquals(expResult, result)) {
+            fail("段階使用あり システム段階failed");
+        }
+
+        if (!TokureiTaishoEquals(expResult, result)) {
+            fail("段階使用あり 特例対象failed");
         }
 
     }
@@ -172,8 +178,14 @@ public class HokenryoDankaiHanteiTest {
         expResult.get保険料段階02月().setHokenryoDankai("第6段階");
         expResult.get保険料段階03月().setHokenryoDankai("第6段階");
         HokenryoDankaiOutput result = instance.hokenryoDankaiHantei(hokenryodankaiinput);
-        if (!outputEquals(expResult, result)) {
-            fail("段階使用なし failed");
+        if (!HokenryoDankaiEquals(expResult, result)) {
+            fail("段階使用なし 保険料段階failed");
+        }
+        if (!SystemDankaiEquals(expResult, result)) {
+            fail("段階使用なし システム段階failed");
+        }
+        if (!TokureiTaishoEquals(expResult, result)) {
+            fail("段階使用なし 特例対象failed");
         }
 
     }
@@ -241,9 +253,28 @@ public class HokenryoDankaiHanteiTest {
         expResult.get保険料段階02月().setHokenryoDankai("第4段階１");
         expResult.get保険料段階03月().setHokenryoDankai("第4段階１");
 
+        expResult.get保険料段階04月().setTokureiTaisho(true);
+        expResult.get保険料段階05月().setTokureiTaisho(true);
+        expResult.get保険料段階06月().setTokureiTaisho(true);
+        expResult.get保険料段階07月().setTokureiTaisho(true);
+        expResult.get保険料段階08月().setTokureiTaisho(true);
+        expResult.get保険料段階09月().setTokureiTaisho(true);
+        expResult.get保険料段階10月().setTokureiTaisho(true);
+        expResult.get保険料段階11月().setTokureiTaisho(true);
+        expResult.get保険料段階12月().setTokureiTaisho(true);
+        expResult.get保険料段階01月().setTokureiTaisho(true);
+        expResult.get保険料段階02月().setTokureiTaisho(true);
+        expResult.get保険料段階03月().setTokureiTaisho(true);
+
         HokenryoDankaiOutput result = instance.hokenryoDankaiHantei(hokenryodankaiinput);
-        if (!outputEquals(expResult, result)) {
-            fail("段階使用有無全無 5段階 failed");
+        if (!HokenryoDankaiEquals(expResult, result)) {
+            fail("段階使用有無全無 5段階 保険料段階failed");
+        }
+        if (!SystemDankaiEquals(expResult, result)) {
+            fail("段階使用有無全無 5段階 システム段階failed");
+        }
+        if (!TokureiTaishoEquals(expResult, result)) {
+            fail("段階使用有無全無 5段階 特例対象failed");
         }
 
     }
@@ -312,11 +343,36 @@ public class HokenryoDankaiHanteiTest {
         expResult.get保険料段階02月().setHokenryoDankai("第1段階");
         expResult.get保険料段階03月().setHokenryoDankai("第1段階");
 
-        HokenryoDankaiOutput result = instance.hokenryoDankaiHantei(hokenryodankaiinput);
-        if (!outputEquals(expResult, result)) {
-            fail("段階使用有無全無 途中から生保開始 failed");
-        }
+        expResult.get保険料段階07月().setSystemDankai("1");
+        expResult.get保険料段階08月().setSystemDankai("1");
+        expResult.get保険料段階09月().setSystemDankai("1");
+        expResult.get保険料段階10月().setSystemDankai("1");
+        expResult.get保険料段階11月().setSystemDankai("1");
+        expResult.get保険料段階12月().setSystemDankai("1");
+        expResult.get保険料段階01月().setSystemDankai("1");
+        expResult.get保険料段階02月().setSystemDankai("1");
+        expResult.get保険料段階03月().setSystemDankai("1");
 
+        expResult.get保険料段階07月().setTokureiTaisho(false);
+        expResult.get保険料段階08月().setTokureiTaisho(false);
+        expResult.get保険料段階09月().setTokureiTaisho(false);
+        expResult.get保険料段階10月().setTokureiTaisho(false);
+        expResult.get保険料段階11月().setTokureiTaisho(false);
+        expResult.get保険料段階12月().setTokureiTaisho(false);
+        expResult.get保険料段階01月().setTokureiTaisho(false);
+        expResult.get保険料段階02月().setTokureiTaisho(false);
+        expResult.get保険料段階03月().setTokureiTaisho(false);
+
+        HokenryoDankaiOutput result = instance.hokenryoDankaiHantei(hokenryodankaiinput);
+        if (!HokenryoDankaiEquals(expResult, result)) {
+            fail("段階使用有無全無 途中から生保開始 保険料段階failed");
+        }
+        if (!SystemDankaiEquals(expResult, result)) {
+            fail("段階使用有無全無 途中から生保開始 システム段階failed");
+        }
+        if (!TokureiTaishoEquals(expResult, result)) {
+            fail("段階使用有無全無 途中から生保開始 特例対象failed");
+        }
     }
 
     @Test
@@ -384,11 +440,42 @@ public class HokenryoDankaiHanteiTest {
         expResult.get保険料段階11月().setHokenryoDankai("第1段階");
         expResult.get保険料段階12月().setHokenryoDankai("第1段階");
 
-        HokenryoDankaiOutput result = instance.hokenryoDankaiHantei(hokenryodankaiinput);
-        if (!outputEquals(expResult, result)) {
-            fail("段階使用有無全無 途中で生保終了 failed");
-        }
+        expResult.get保険料段階01月().setSystemDankai("1");
+        expResult.get保険料段階02月().setSystemDankai("1");
+        expResult.get保険料段階03月().setSystemDankai("1");
+        expResult.get保険料段階04月().setSystemDankai("1");
+        expResult.get保険料段階05月().setSystemDankai("1");
+        expResult.get保険料段階06月().setSystemDankai("1");
+        expResult.get保険料段階07月().setSystemDankai("1");
+        expResult.get保険料段階08月().setSystemDankai("1");
+        expResult.get保険料段階09月().setSystemDankai("1");
+        expResult.get保険料段階10月().setSystemDankai("1");
+        expResult.get保険料段階11月().setSystemDankai("1");
+        expResult.get保険料段階12月().setSystemDankai("1");
 
+        expResult.get保険料段階01月().setTokureiTaisho(false);
+        expResult.get保険料段階02月().setTokureiTaisho(false);
+        expResult.get保険料段階03月().setTokureiTaisho(false);
+        expResult.get保険料段階04月().setTokureiTaisho(false);
+        expResult.get保険料段階05月().setTokureiTaisho(false);
+        expResult.get保険料段階06月().setTokureiTaisho(false);
+        expResult.get保険料段階07月().setTokureiTaisho(false);
+        expResult.get保険料段階08月().setTokureiTaisho(false);
+        expResult.get保険料段階09月().setTokureiTaisho(false);
+        expResult.get保険料段階10月().setTokureiTaisho(false);
+        expResult.get保険料段階11月().setTokureiTaisho(false);
+        expResult.get保険料段階12月().setTokureiTaisho(false);
+
+        HokenryoDankaiOutput result = instance.hokenryoDankaiHantei(hokenryodankaiinput);
+        if (!HokenryoDankaiEquals(expResult, result)) {
+            fail("段階使用有無全無 途中で生保終了 保険料段階failed");
+        }
+        if (!SystemDankaiEquals(expResult, result)) {
+            fail("段階使用有無全無 途中で生保終了 システム段階failed");
+        }
+        if (!TokureiTaishoEquals(expResult, result)) {
+            fail("段階使用有無全無 途中で生保終了 特例対象failed");
+        }
     }
 
     @Test
@@ -441,11 +528,8 @@ public class HokenryoDankaiHanteiTest {
         hokenryodankaiinput.setSeigyoJoho(seigyojoho);
 
         HokenryoDankaiHantei instance = new HokenryoDankaiHantei();
-        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("4");
+        HokenryoDankaiOutput expResult = new HokenryoDankaiOutput("3");
 
-        expResult.get保険料段階01月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階02月().setHokenryoDankai("第1段階");
-        expResult.get保険料段階03月().setHokenryoDankai("第1段階");
         expResult.get保険料段階04月().setHokenryoDankai("第3段階①");
         expResult.get保険料段階05月().setHokenryoDankai("第3段階①");
         expResult.get保険料段階06月().setHokenryoDankai("第3段階①");
@@ -455,12 +539,37 @@ public class HokenryoDankaiHanteiTest {
         expResult.get保険料段階10月().setHokenryoDankai("第3段階①");
         expResult.get保険料段階11月().setHokenryoDankai("第3段階①");
         expResult.get保険料段階12月().setHokenryoDankai("第3段階①");
+        expResult.get保険料段階01月().setHokenryoDankai("第1段階");
+        expResult.get保険料段階02月().setHokenryoDankai("第1段階");
+        expResult.get保険料段階03月().setHokenryoDankai("第1段階");
+
+        expResult.get保険料段階01月().setSystemDankai("1");
+        expResult.get保険料段階02月().setSystemDankai("1");
+        expResult.get保険料段階03月().setSystemDankai("1");
+
+        expResult.get保険料段階04月().setTokureiTaisho(true);
+        expResult.get保険料段階05月().setTokureiTaisho(true);
+        expResult.get保険料段階06月().setTokureiTaisho(true);
+        expResult.get保険料段階07月().setTokureiTaisho(true);
+        expResult.get保険料段階08月().setTokureiTaisho(true);
+        expResult.get保険料段階09月().setTokureiTaisho(true);
+        expResult.get保険料段階10月().setTokureiTaisho(true);
+        expResult.get保険料段階11月().setTokureiTaisho(true);
+        expResult.get保険料段階12月().setTokureiTaisho(true);
+        expResult.get保険料段階01月().setTokureiTaisho(false);
+        expResult.get保険料段階02月().setTokureiTaisho(false);
+        expResult.get保険料段階03月().setTokureiTaisho(false);
 
         HokenryoDankaiOutput result = instance.hokenryoDankaiHantei(hokenryodankaiinput);
-        if (!outputEquals(expResult, result)) {
-            fail("段階使用有無全無 途中で生保開始終了 failed");
+        if (!HokenryoDankaiEquals(expResult, result)) {
+            fail("段階使用有無全無 途中で生保開始終了 保険料段階failed");
         }
-
+        if (!SystemDankaiEquals(expResult, result)) {
+            fail("段階使用有無全無 途中で生保開始終了 システム段階failed");
+        }
+        if (!TokureiTaishoEquals(expResult, result)) {
+            fail("段階使用有無全無 途中で生保開始終了 特例対象failed");
+        }
     }
 
     protected static Date toDate(String str) {
@@ -473,64 +582,156 @@ public class HokenryoDankaiHanteiTest {
         return date;
     }
 
-    private boolean outputEquals(HokenryoDankaiOutput input1, HokenryoDankaiOutput input2) {
+    private boolean HokenryoDankaiEquals(HokenryoDankaiOutput input1, HokenryoDankaiOutput input2) {
 
         boolean result = true;
 
-        if (!(input1.get保険料段階01月().getHokenryoDankai().equals(input2.get保険料段階01月().getHokenryoDankai())
-                && input1.get保険料段階01月().isTokureiTaisho() == input2.get保険料段階01月().isTokureiTaisho())) {
+        if (!(input1.get保険料段階01月().getHokenryoDankai().equals(input2.get保険料段階01月().getHokenryoDankai()))) {
             result = false;
         }
 
-        if (!(input1.get保険料段階02月().getHokenryoDankai().equals(input2.get保険料段階02月().getHokenryoDankai())
-                && input1.get保険料段階02月().isTokureiTaisho() == input2.get保険料段階02月().isTokureiTaisho())) {
+        if (!(input1.get保険料段階02月().getHokenryoDankai().equals(input2.get保険料段階02月().getHokenryoDankai()))) {
             result = false;
         }
 
-        if (!(input1.get保険料段階03月().getHokenryoDankai().equals(input2.get保険料段階03月().getHokenryoDankai())
-                && input1.get保険料段階03月().isTokureiTaisho() == input2.get保険料段階03月().isTokureiTaisho())) {
+        if (!(input1.get保険料段階03月().getHokenryoDankai().equals(input2.get保険料段階03月().getHokenryoDankai()))) {
             result = false;
         }
 
-        if (!(input1.get保険料段階04月().getHokenryoDankai().equals(input2.get保険料段階04月().getHokenryoDankai())
-                && input1.get保険料段階04月().isTokureiTaisho() == input2.get保険料段階04月().isTokureiTaisho())) {
+        if (!(input1.get保険料段階04月().getHokenryoDankai().equals(input2.get保険料段階04月().getHokenryoDankai()))) {
             result = false;
         }
 
-        if (!(input1.get保険料段階05月().getHokenryoDankai().equals(input2.get保険料段階05月().getHokenryoDankai())
-                && input1.get保険料段階05月().isTokureiTaisho() == input2.get保険料段階05月().isTokureiTaisho())) {
+        if (!(input1.get保険料段階05月().getHokenryoDankai().equals(input2.get保険料段階05月().getHokenryoDankai()))) {
             result = false;
         }
 
-        if (!(input1.get保険料段階06月().getHokenryoDankai().equals(input2.get保険料段階06月().getHokenryoDankai())
-                && input1.get保険料段階06月().isTokureiTaisho() == input2.get保険料段階06月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(input1.get保険料段階07月().getHokenryoDankai().equals(input2.get保険料段階07月().getHokenryoDankai())
-                && input1.get保険料段階07月().isTokureiTaisho() == input2.get保険料段階07月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(input1.get保険料段階08月().getHokenryoDankai().equals(input2.get保険料段階08月().getHokenryoDankai())
-                && input1.get保険料段階08月().isTokureiTaisho() == input2.get保険料段階08月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(input1.get保険料段階09月().getHokenryoDankai().equals(input2.get保険料段階09月().getHokenryoDankai())
-                && input1.get保険料段階09月().isTokureiTaisho() == input2.get保険料段階09月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(input1.get保険料段階10月().getHokenryoDankai().equals(input2.get保険料段階10月().getHokenryoDankai())
-                && input1.get保険料段階10月().isTokureiTaisho() == input2.get保険料段階10月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(input1.get保険料段階11月().getHokenryoDankai().equals(input2.get保険料段階11月().getHokenryoDankai())
-                && input1.get保険料段階11月().isTokureiTaisho() == input2.get保険料段階11月().isTokureiTaisho())) {
-            result = false;
-        }
-        if (!(input1.get保険料段階12月().getHokenryoDankai().equals(input2.get保険料段階12月().getHokenryoDankai())
-                && input1.get保険料段階12月().isTokureiTaisho() == input2.get保険料段階12月().isTokureiTaisho())) {
+        if (!(input1.get保険料段階06月().getHokenryoDankai().equals(input2.get保険料段階06月().getHokenryoDankai()))) {
             result = false;
         }
 
+        if (!(input1.get保険料段階07月().getHokenryoDankai().equals(input2.get保険料段階07月().getHokenryoDankai()))) {
+            result = false;
+        }
+
+        if (!(input1.get保険料段階08月().getHokenryoDankai().equals(input2.get保険料段階08月().getHokenryoDankai()))) {
+            result = false;
+        }
+
+        if (!(input1.get保険料段階09月().getHokenryoDankai().equals(input2.get保険料段階09月().getHokenryoDankai()))) {
+            result = false;
+        }
+
+        if (!(input1.get保険料段階10月().getHokenryoDankai().equals(input2.get保険料段階10月().getHokenryoDankai()))) {
+            result = false;
+        }
+
+        if (!(input1.get保険料段階11月().getHokenryoDankai().equals(input2.get保険料段階11月().getHokenryoDankai()))) {
+            result = false;
+        }
+
+        if (!(input1.get保険料段階12月().getHokenryoDankai().equals(input2.get保険料段階12月().getHokenryoDankai()))) {
+            result = false;
+        }
+
+        return result;
+    }
+
+    private boolean SystemDankaiEquals(HokenryoDankaiOutput expResult, HokenryoDankaiOutput resultoutput) {
+
+        boolean result = true;
+
+        if (!(expResult.get保険料段階01月().getSystemDankai().equals(resultoutput.get保険料段階01月().getSystemDankai()))) {
+            result = false;
+        }
+
+        if (!(expResult.get保険料段階02月().getSystemDankai().equals(resultoutput.get保険料段階02月().getSystemDankai()))) {
+            result = false;
+        }
+
+        if (!(expResult.get保険料段階03月().getSystemDankai().equals(resultoutput.get保険料段階03月().getSystemDankai()))) {
+            result = false;
+        }
+
+        if (!(expResult.get保険料段階04月().getSystemDankai().equals(resultoutput.get保険料段階04月().getSystemDankai()))) {
+            result = false;
+        }
+
+        if (!(expResult.get保険料段階05月().getSystemDankai().equals(resultoutput.get保険料段階05月().getSystemDankai()))) {
+            result = false;
+        }
+
+        if (!(expResult.get保険料段階06月().getSystemDankai().equals(resultoutput.get保険料段階06月().getSystemDankai()))) {
+            result = false;
+        }
+
+        if (!(expResult.get保険料段階07月().getSystemDankai().equals(resultoutput.get保険料段階07月().getSystemDankai()))) {
+            result = false;
+        }
+
+        if (!(expResult.get保険料段階08月().getSystemDankai().equals(resultoutput.get保険料段階08月().getSystemDankai()))) {
+            result = false;
+        }
+
+        if (!(expResult.get保険料段階09月().getSystemDankai().equals(resultoutput.get保険料段階09月().getSystemDankai()))) {
+            result = false;
+        }
+
+        if (!(expResult.get保険料段階10月().getSystemDankai().equals(resultoutput.get保険料段階10月().getSystemDankai()))) {
+            result = false;
+        }
+
+        if (!(expResult.get保険料段階11月().getSystemDankai().equals(resultoutput.get保険料段階11月().getSystemDankai()))) {
+            result = false;
+        }
+
+        if (!(expResult.get保険料段階12月().getSystemDankai().equals(resultoutput.get保険料段階12月().getSystemDankai()))) {
+            result = false;
+        }
+
+        return result;
+    }
+
+    private boolean TokureiTaishoEquals(HokenryoDankaiOutput expResult, HokenryoDankaiOutput resultoutput) {
+
+        boolean result = true;
+
+        if (!(expResult.get保険料段階01月().isTokureiTaisho() == resultoutput.get保険料段階01月().isTokureiTaisho())) {
+            result = false;
+        }
+        if (!(expResult.get保険料段階02月().isTokureiTaisho() == resultoutput.get保険料段階02月().isTokureiTaisho())) {
+            result = false;
+        }
+        if (!(expResult.get保険料段階03月().isTokureiTaisho() == resultoutput.get保険料段階03月().isTokureiTaisho())) {
+            result = false;
+        }
+        if (!(expResult.get保険料段階04月().isTokureiTaisho() == resultoutput.get保険料段階04月().isTokureiTaisho())) {
+            result = false;
+        }
+        if (!(expResult.get保険料段階05月().isTokureiTaisho() == resultoutput.get保険料段階05月().isTokureiTaisho())) {
+            result = false;
+        }
+        if (!(expResult.get保険料段階06月().isTokureiTaisho() == resultoutput.get保険料段階06月().isTokureiTaisho())) {
+            result = false;
+        }
+        if (!(expResult.get保険料段階07月().isTokureiTaisho() == resultoutput.get保険料段階07月().isTokureiTaisho())) {
+            result = false;
+        }
+        if (!(expResult.get保険料段階08月().isTokureiTaisho() == resultoutput.get保険料段階08月().isTokureiTaisho())) {
+            result = false;
+        }
+        if (!(expResult.get保険料段階09月().isTokureiTaisho() == resultoutput.get保険料段階09月().isTokureiTaisho())) {
+            result = false;
+        }
+        if (!(expResult.get保険料段階10月().isTokureiTaisho() == resultoutput.get保険料段階10月().isTokureiTaisho())) {
+            result = false;
+        }
+        if (!(expResult.get保険料段階11月().isTokureiTaisho() == resultoutput.get保険料段階11月().isTokureiTaisho())) {
+            result = false;
+        }
+        if (!(expResult.get保険料段階12月().isTokureiTaisho() == resultoutput.get保険料段階12月().isTokureiTaisho())) {
+            result = false;
+        }
         return result;
     }
 }
