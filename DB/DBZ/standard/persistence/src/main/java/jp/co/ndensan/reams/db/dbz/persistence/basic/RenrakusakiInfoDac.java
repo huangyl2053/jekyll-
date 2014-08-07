@@ -49,6 +49,12 @@ public class RenrakusakiInfoDac implements IReplaceable<DbT5050RenrakusakiJohoEn
                 toList(DbT5050RenrakusakiJohoEntity.class);
     }
 
+    /**
+     * 連絡先情報に対し、追加または更新を行います。
+     *
+     * @param entity 連絡先情報Entity
+     * @return 追加結果
+     */
     @Override
     @Transaction
     public int insertOrUpdate(DbT5050RenrakusakiJohoEntity entity) {

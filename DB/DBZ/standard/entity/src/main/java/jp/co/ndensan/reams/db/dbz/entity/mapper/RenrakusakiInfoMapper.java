@@ -31,6 +31,10 @@ public final class RenrakusakiInfoMapper {
     public static KaigoRenrakusaki toRenrakusakiInfo(
             DbT5050RenrakusakiJohoEntity entity) throws NullPointerException {
 
+        if (entity == null) {
+            return null;
+        }
+
         return new KaigoRenrakusaki(
                 entity.getRenrakusakiShimei(),
                 entity.getRenrakusakiKanaSimei(),
@@ -41,7 +45,8 @@ public final class RenrakusakiInfoMapper {
                 entity.getRenrakusakiTuzukigara(),
                 new RenrakusakiKubunNo(entity.getRenrakusakiKubunNo()),
                 entity.getShoKisaiHokenshaNo(),
-                entity.getHihokenshaNo()
+                entity.getHihokenshaNo(),
+                entity.getShishoCode()
         );
 
     }
@@ -53,6 +58,10 @@ public final class RenrakusakiInfoMapper {
      * @return 連絡先情報エンティティ
      */
     public static DbT5050RenrakusakiJohoEntity toRenrakusakiJohoEntity(KaigoRenrakusaki renrakusakiJoho) {
+
+        if (renrakusakiJoho == null) {
+            return null;
+        }
 
         DbT5050RenrakusakiJohoEntity entity = new DbT5050RenrakusakiJohoEntity();
 
@@ -66,6 +75,7 @@ public final class RenrakusakiInfoMapper {
         entity.setRenrakusakiKubunNo(renrakusakiJoho.get連絡先区分番号().value());
         entity.setShoKisaiHokenshaNo(renrakusakiJoho.get保険者番号());
         entity.setHihokenshaNo(renrakusakiJoho.get被保険者番号());
+        entity.setShishoCode(renrakusakiJoho.get支所コード());
 
         return entity;
     }

@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.Messages;
 
 /**
  *
@@ -28,9 +30,9 @@ public class KaigoTeikeibun {
      */
     public KaigoTeikeibun(RString 区分, RString 種別, RString コード, RString 内容) {
 
-        this.区分 = 区分;
-        this.種別 = 種別;
-        this.コード = コード;
+        this.区分 = requireNonNull(区分, Messages.E00001.getMessage());
+        this.種別 = requireNonNull(種別, Messages.E00001.getMessage());
+        this.コード = requireNonNull(コード, Messages.E00001.getMessage());
         this.内容 = 内容;
 
     }
