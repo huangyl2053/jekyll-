@@ -11,9 +11,11 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.mapper.HihokenshaShikakuMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
+import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -46,30 +48,30 @@ public class HihokenshaDaichoManager {
     }
 
     /**
-     * 指定の{@link LasecCode 地方公共団体コード}, {@link ShikibetsuCode 識別コード}に該当する
+     * 指定の{@link LasdecCode 市町村コード}, {@link ShikibetsuCode 識別コード}に該当する
      * 被保険者の資格情報を返します。<br />
      * 得られる資格情報は、直近の登録内容です。 指定の値に相当する資格情報がないときは、nullを返します。
      *
-     * @param 地方公共団体コード {@link LasecCode 地方公共団体コード}
+     * @param 市町村コード {@link LasdecCode 市町村コード}
      * @param 識別コード {@link ShikibetsuCode 識別コード}
      * @return {@link IHihokenshaShikaku IHihokenshaShikaku}。もしくは、null。
      */
-    IHihokenshaShikaku get直近被保険者資格(LasdecCode 地方公共団体コード, ShikibetsuCode 識別コード) {
-        DbT1001HihokenshaDaichoEntity entity = dac.selectLatestOfPerson(地方公共団体コード, 識別コード);
+    IHihokenshaShikaku get直近被保険者資格(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+        DbT1001HihokenshaDaichoEntity entity = dac.selectLatestOfPerson(市町村コード, 識別コード);
         return HihokenshaShikakuMapper.toHihokenshaShikaku(entity);
     }
 
     /**
-     * 指定の{@link LasecCode 地方公共団体コード}, {@link KaigoHihokenshaNo 被保険者番号}に該当する
+     * 指定の{@link LasecCode 市町村コード}, {@link KaigoHihokenshaNo 被保険者番号}に該当する
      * 被保険者の資格情報を返します。<br />
      * 得られる資格情報は、直近の登録内容です。 指定の値に相当する資格情報がないときは、nullを返します。
      *
-     * @param 地方公共団体コード {@link LasecCode 地方公共団体コード}
+     * @param 市町村コード {@link LasdecCode 市町村コード}
      * @param 被保険者番号 {@link KaigoHihokenshaNo 被保険者番号}
      * @return {@link IHihokenshaShikaku IHihokenshaShikaku}。もしくは、null。
      */
-    IHihokenshaShikaku get直近被保険者資格(LasdecCode 地方公共団体コード, KaigoHihokenshaNo 被保険者番号) {
-        DbT1001HihokenshaDaichoEntity entity = dac.selectLatestOfPerson(地方公共団体コード, 被保険者番号);
+    IHihokenshaShikaku get直近被保険者資格(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
+        DbT1001HihokenshaDaichoEntity entity = dac.selectLatestOfPerson(市町村コード, 被保険者番号);
         return HihokenshaShikakuMapper.toHihokenshaShikaku(entity);
     }
 
@@ -77,26 +79,39 @@ public class HihokenshaDaichoManager {
      * 指定の項目に該当する被保険者の資格情報を返します。<br />
      * 指定の値に相当する資格情報がないときは、nullを返します。
      *
-     * @param 地方公共団体コード {@link LasecCode 地方公共団体コード}
+     * @param 市町村コード {@link LasdecCode 市町村コード}
      * @param 識別コード {@link ShikibetsuCode 識別コード}
-     * @param 被保険者台帳登録日時 {@link RDateTime 被保険者台帳登録日時}
+     * @param 処理日時 {@link YMDHMS 処理日時}
      * @return {@link IHihokenshaShikaku IHihokenshaShikaku}。もしくは、null。
      */
-    IHihokenshaShikaku get被保険者資格(LasdecCode 地方公共団体コード, ShikibetsuCode 識別コード, RDateTime 被保険者台帳登録日時) {
-        DbT1001HihokenshaDaichoEntity entity = dac.selectFromKey(地方公共団体コード, 識別コード, 被保険者台帳登録日時);
+    IHihokenshaShikaku get被保険者資格(LasdecCode 市町村コード, ShikibetsuCode 識別コード, YMDHMS 処理日時) {
+        DbT1001HihokenshaDaichoEntity entity = dac.selectFromKey(市町村コード, 識別コード, 処理日時);
         return HihokenshaShikakuMapper.toHihokenshaShikaku(entity);
     }
 
     /**
-     * 地方公共団体コードを指定して、当該市町村が管理する被保険者資格情報の一覧を返します。<br />
+     * 市町村コードを指定して、当該市町村が管理する被保険者資格情報の一覧を返します。<br />
      * 該当する資格情報がないときは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}を返します。
      *
-     * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
+     * @param 市町村コード {@link LasdecCode 市町村コード}
      * @return {@link IHihokenshaShikaku IHihokenshaShikaku}の{@link List list}。
      * もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}。
      */
-    List<IHihokenshaShikaku> get被保険者資格ListOf(LasdecCode 地方公共団体コード) {
-        List<DbT1001HihokenshaDaichoEntity> entites = dac.selectAll(地方公共団体コード);
+    List<IHihokenshaShikaku> get被保険者資格ListOf(LasdecCode 市町村コード) {
+        List<DbT1001HihokenshaDaichoEntity> entites = dac.selectAll(市町村コード);
+        return HihokenshaShikakuMapper.toListOfHihokenshaShikaku(entites);
+    }
+
+    /**
+     * 検索条件を指定して、その条件に該当する被保険者資格情報の一覧を返します。<br />
+     * 該当する資格情報がないときは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}を返します。
+     *
+     * @param 検索条件 {@link ISearchCondition 検索条件}
+     * @return {@link IHihokenshaShikaku IHihokenshaShikaku}の{@link List list}。
+     * もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}。
+     */
+    List<IHihokenshaShikaku> get被保険者資格ListOf(ISearchCondition 検索条件) {
+        List<DbT1001HihokenshaDaichoEntity> entites = dac.selectAll(検索条件.makeSearchCondition());
         return HihokenshaShikakuMapper.toListOfHihokenshaShikaku(entites);
     }
 
@@ -112,7 +127,7 @@ public class HihokenshaDaichoManager {
         if (entity.getHihokenshaNo() == KaigoHihokenshaNo.NULL_VALUE) {
             //TODO n3327 三浦凌 テスト用にいらない判定処理を設けている。採番APIの正しい使い方がわかり次第、修正する。
             if (this.sequencer == null) {
-                this.sequencer = createSequencer(被保険者資格.get被保険者区分());
+                this.sequencer = createSequencer(ShikakuHihokenshaKubun.toValue(被保険者資格.get被保険者区分().getCode().getColumnValue()));
             }
             KaigoHihokenshaNo hihokenshaNo = this.sequencer.number();
             assert hihokenshaNo != null;

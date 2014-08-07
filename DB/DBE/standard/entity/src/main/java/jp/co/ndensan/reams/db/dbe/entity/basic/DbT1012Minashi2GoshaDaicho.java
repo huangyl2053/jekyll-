@@ -8,7 +8,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT1012Minashi2GoshaDaicho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
-
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -18,12 +17,13 @@ public enum DbT1012Minashi2GoshaDaicho implements IColumnDefinition {
     lastUpdateTimestamp(29, 0),
     lastUpdateReamsLoginId(2147483647, 0),
     shichosonCode(2147483647, 0),
-    shikibetsuCode(2147483647, 0),
     hihokenshaNo(2147483647, 0),
-    rirekiNo(10, 0),
+    shoriTimestamp(2147483647, 0),
+    shikibetsuCode(2147483647, 0),
     hihokenshaKubunCode(1, 0),
     minashi2GoshaTorokuYMD(2147483647, 0),
-    minashi2GoshaKaijoYMD(2147483647, 0);
+    minashi2GoshaKaijoYMD(2147483647, 0),
+    fukushiHihokenshaNo(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
@@ -35,7 +35,6 @@ public enum DbT1012Minashi2GoshaDaicho implements IColumnDefinition {
 
     /**
      * getMaxLength
-     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -44,7 +43,6 @@ public enum DbT1012Minashi2GoshaDaicho implements IColumnDefinition {
 
     /**
      * getScale
-     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

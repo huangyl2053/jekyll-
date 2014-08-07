@@ -4,9 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.IMinashi2GoshaDaicho;
 import jp.co.ndensan.reams.db.dbe.business.Minashi2GoshaDaicho;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Minashi2GoHihokenshaKubun;
+import jp.co.ndensan.reams.db.dbe.business.Minashi2GoHihokenshaKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaichoEntity;
 
 /**
@@ -38,11 +37,11 @@ public final class Minashi2GoshaDaichoMapper {
                 entity.getShichosonCode(),
                 entity.getShikibetsuCode(),
                 entity.getHihokenshaNo(),
-                entity.getRirekiNo(),
-                Minashi2GoHihokenshaKubun.toValue(entity.getHihokenshaKubunCode()),
+                entity.getShoriTimestamp(),
+                new Minashi2GoHihokenshaKubun(entity.getHihokenshaKubunCode(), entity.getHihokenshaKubunCodeMeisho()),
                 entity.getMinashi2GoshaTorokuYMD(),
-                entity.getMinashi2GoshaKaijoYMD()) {
-                };
+                entity.getMinashi2GoshaKaijoYMD(),
+                entity.getFukushiHihokenshaNo());
     }
 
     /**
@@ -61,10 +60,11 @@ public final class Minashi2GoshaDaichoMapper {
         entity.setShichosonCode(minashi2GoshaDaicho.get市町村コード());
         entity.setShikibetsuCode(minashi2GoshaDaicho.get識別コード());
         entity.setHihokenshaNo(minashi2GoshaDaicho.get被保険者番号());
-        entity.setRirekiNo(minashi2GoshaDaicho.get履歴番号());
-        entity.setHihokenshaKubunCode(minashi2GoshaDaicho.get被保険者区分コード().getみなし2号区分());
+        entity.setShoriTimestamp(minashi2GoshaDaicho.get処理日時());
+        entity.setHihokenshaKubunCode(minashi2GoshaDaicho.getみなし2号被保険者区分().getCode());
         entity.setMinashi2GoshaTorokuYMD(minashi2GoshaDaicho.getみなし2号登録年月日());
         entity.setMinashi2GoshaKaijoYMD(minashi2GoshaDaicho.getみなし2号解除年月日());
+        entity.setFukushiHihokenshaNo(minashi2GoshaDaicho.get福祉被保険者番号());
         return entity;
     }
 

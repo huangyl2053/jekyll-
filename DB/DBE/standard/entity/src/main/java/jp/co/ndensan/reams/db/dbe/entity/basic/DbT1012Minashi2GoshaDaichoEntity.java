@@ -7,10 +7,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import java.util.Objects;
 
 /**
  * DbT1012Minashi2GoshaDaichoの項目定義クラスです
@@ -33,13 +38,15 @@ public class DbT1012Minashi2GoshaDaichoEntity implements IDbAccessable {
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private ShikibetsuCode shikibetsuCode;
-    @PrimaryKey
     private KaigoHihokenshaNo hihokenshaNo;
-    private int rirekiNo;
-    private RString hihokenshaKubunCode;
+    @PrimaryKey
+    private YMDHMS shoriTimestamp;
+    private ShikibetsuCode shikibetsuCode;
+    private Code hihokenshaKubunCode;
     private FlexibleDate minashi2GoshaTorokuYMD;
     private FlexibleDate minashi2GoshaKaijoYMD;
+    //TODO n8178 城間篤人 福祉で使用されている被保険者番号に変更するか、新規で型を作る必要がある 2014年9月末
+    private RString fukushiHihokenshaNo;
 
     /**
      * getInsertDantaiCd
@@ -105,24 +112,6 @@ public class DbT1012Minashi2GoshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getShikibetsuCode
-     *
-     * @return shikibetsuCode
-     */
-    public ShikibetsuCode getShikibetsuCode() {
-        return shikibetsuCode;
-    }
-
-    /**
-     * setShikibetsuCode
-     *
-     * @param shikibetsuCode shikibetsuCode
-     */
-    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
-        this.shikibetsuCode = shikibetsuCode;
-    }
-
-    /**
      * getHihokenshaNo
      *
      * @return hihokenshaNo
@@ -141,21 +130,39 @@ public class DbT1012Minashi2GoshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getRirekiNo
+     * getShoriTimestamp
      *
-     * @return rirekiNo
+     * @return shoriTimestamp
      */
-    public int getRirekiNo() {
-        return rirekiNo;
+    public YMDHMS getShoriTimestamp() {
+        return shoriTimestamp;
     }
 
     /**
-     * setRirekiNo
+     * setShoriTimestamp
      *
-     * @param rirekiNo rirekiNo
+     * @param shoriTimestamp shoriTimestamp
      */
-    public void setRirekiNo(int rirekiNo) {
-        this.rirekiNo = rirekiNo;
+    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
+        this.shoriTimestamp = shoriTimestamp;
+    }
+
+    /**
+     * getShikibetsuCode
+     *
+     * @return shikibetsuCode
+     */
+    public ShikibetsuCode getShikibetsuCode() {
+        return shikibetsuCode;
+    }
+
+    /**
+     * setShikibetsuCode
+     *
+     * @param shikibetsuCode shikibetsuCode
+     */
+    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
+        this.shikibetsuCode = shikibetsuCode;
     }
 
     /**
@@ -163,7 +170,7 @@ public class DbT1012Minashi2GoshaDaichoEntity implements IDbAccessable {
      *
      * @return hihokenshaKubunCode
      */
-    public RString getHihokenshaKubunCode() {
+    public Code getHihokenshaKubunCode() {
         return hihokenshaKubunCode;
     }
 
@@ -172,8 +179,30 @@ public class DbT1012Minashi2GoshaDaichoEntity implements IDbAccessable {
      *
      * @param hihokenshaKubunCode hihokenshaKubunCode
      */
-    public void setHihokenshaKubunCode(RString hihokenshaKubunCode) {
+    public void setHihokenshaKubunCode(Code hihokenshaKubunCode) {
         this.hihokenshaKubunCode = hihokenshaKubunCode;
+    }
+
+    /**
+     * getHihokenshaKubunCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getHihokenshaKubunCodeMeisho() {
+        //TODO n8178 城間篤人 コードマスタからの取得方法が確立された後修正予定 2014年9月
+        return new RString("みなし2号");
+//        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認定審査員区分, hihokenshaKubunCode);
+    }
+
+    /**
+     * getHihokenshaKubunCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getHihokenshaKubunCodeRyakusho() {
+        //TODO n8178 城間篤人 コードマスタからの取得方法が確立された後修正予定 2014年9月
+        return new RString("みなし2号");
+//        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認定審査員区分, hihokenshaKubunCode);
     }
 
     /**
@@ -213,10 +242,29 @@ public class DbT1012Minashi2GoshaDaichoEntity implements IDbAccessable {
     }
 
     /**
+     * getFukushiHihokenshaNo
+     *
+     * @return fukushiHihokenshaNo
+     */
+    public RString getFukushiHihokenshaNo() {
+        return fukushiHihokenshaNo;
+    }
+
+    /**
+     * setFukushiHihokenshaNo
+     *
+     * @param fukushiHihokenshaNo fukushiHihokenshaNo
+     */
+    public void setFukushiHihokenshaNo(RString fukushiHihokenshaNo) {
+        this.fukushiHihokenshaNo = fukushiHihokenshaNo;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT1012Minashi2GoshaDaichoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT1012Minashi2GoshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT1012Minashi2GoshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     public boolean equalsPrimaryKeys(DbT1012Minashi2GoshaDaichoEntity other) {
         if (other == null) {
@@ -225,10 +273,10 @@ public class DbT1012Minashi2GoshaDaichoEntity implements IDbAccessable {
         if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
             return false;
         }
-        if (!Objects.equals(this.shikibetsuCode, other.shikibetsuCode)) {
+        if (!Objects.equals(this.hihokenshaNo, other.hihokenshaNo)) {
             return false;
         }
-        if (!Objects.equals(this.hihokenshaNo, other.hihokenshaNo)) {
+        if (!Objects.equals(this.shoriTimestamp, other.shoriTimestamp)) {
             return false;
         }
         return true;

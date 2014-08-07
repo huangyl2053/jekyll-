@@ -24,14 +24,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class Minashi2GoshaDaichoFinder implements IMinashi2GoshaDaichoFinder {
 
     private final IMinashi2GoshaDaichoDac dac;
-    private final IKojinFinder profileSearcher;
 
     /**
      * コンストラクタです。
      */
     public Minashi2GoshaDaichoFinder() {
         dac = InstanceProvider.createWithCustomize(IMinashi2GoshaDaichoDac.class);
-        profileSearcher = ShikibetsuTaishoService.getKojinFinder();
     }
 
     /**
@@ -39,9 +37,8 @@ public class Minashi2GoshaDaichoFinder implements IMinashi2GoshaDaichoFinder {
      *
      * @param dac みなし2号被保険者のデータアクセス機能を提供するインタフェース
      */
-    Minashi2GoshaDaichoFinder(IMinashi2GoshaDaichoDac dac, IKojinFinder profileSearcher) {
+    Minashi2GoshaDaichoFinder(IMinashi2GoshaDaichoDac dac) {
         this.dac = dac;
-        this.profileSearcher = profileSearcher;
     }
 
     @Override

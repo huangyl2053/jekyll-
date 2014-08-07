@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbz.entity.mapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshashoSaikofu;
+import jp.co.ndensan.reams.db.dbz.business.IHihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.JushochitokureiKaijo;
 import jp.co.ndensan.reams.db.dbz.business.JushochitokureiTekiyo;
@@ -22,6 +24,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
@@ -32,9 +35,9 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKub
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -61,13 +64,13 @@ public final class HihokenshaShikakuMapper {
 
     private static DbT1001HihokenshaDaichoEntity _toHihokenshaDaichoEntity(IHihokenshaShikaku shikaku) {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
-        entity.setShichosonCode(shikaku.get地方公共団体コード());
+        entity.setShichosonCode(shikaku.get市町村コード());
+        entity.setShoKisaiHokenshaNo(shikaku.get証記載保険者番号());
         entity.setHihokenshaNo(shikaku.get被保険者番号());
         entity.setShikibetsuCode(shikaku.get識別コード());
-        entity.setShoriTimestamp(shikaku.get被保険者台帳登録日時());
-        entity.setHihokennshaKubunCode(shikaku.get被保険者区分().getコード());
+        entity.setShoriTimestamp(shikaku.get処理日時());
+        entity.setHihokennshaKubunCode(shikaku.get被保険者区分().getCode());
         entity.setIchigoHihokenshaNenreiTotatsuYMD(shikaku.get第一号年齢到達日());
-        entity.setShikakuIdouKubunCode(shikaku.get資格異動区分().getCode());
         entity.setShikakuShutokuJiyuCode(shikaku.get資格取得().getReason().getCode());
         entity.setShikakuShutokuTodokedeYMD(shikaku.get資格取得().getNoticeDate());
         entity.setShikakuShutokuYMD(shikaku.get資格取得().getActionDate());
@@ -85,7 +88,7 @@ public final class HihokenshaShikakuMapper {
         entity.setJushochitokureiKaijoYMD(shikaku.get住所地特例解除().getActionDate());
         entity.setJushochiTokureiFlag(shikaku.get住所地特例者区分().getコード());
         entity.setKoikinaiJushochiTokureiFlag(shikaku.get広域内住所地特例者区分().getCode());
-        entity.setKoikinaiTokureiSochimotoShichosonCode(shikaku.get広域内住所地特例措置元市町村コード());
+        entity.setKoikinaiTokureiSochimotoHokenshaNo(shikaku.get広域内住所地特例措置元保険者番号());
         entity.setKyuShichosonCode(shikaku.get旧市町村コード());
         entity.setSaikofuKubun(shikaku.get被保険者証再交付().get有無区分().getCode());
         entity.setSaikofuJiyuCode(shikaku.get被保険者証再交付().getReason().getCode());
@@ -148,19 +151,21 @@ public final class HihokenshaShikakuMapper {
                 entity.getSaikofuJiyuCode(),
                 entity.getChohyoKofuRirekiID());
 
-        LasdecCode shichosonCode = entity.getShichosonCode();
+        LasdecCode lasdecCode = entity.getShichosonCode();
+        ShoKisaiHokenshaNo shoKisaiHokenshaNo = entity.getShoKisaiHokenshaNo();
         ShikibetsuCode shikibetsuCode = entity.getShikibetsuCode();
-        RDateTime shoriTimestamp = entity.getShoriTimestamp();
-        ShikakuHihokenshaKubun hihokenshaKubun = ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode());
-        HihokenshaShikaku shikaku =
-                new HihokenshaShikaku.Builder(kaigoShikaku, shichosonCode, shikibetsuCode, shoriTimestamp, hihokenshaKubun).
+        YMDHMS shoriTimestamp = entity.getShoriTimestamp();
+        IHihokenshaKubun hihokenshaKubun = new HihokenshaKubun(entity.getHihokennshaKubunCode(), entity.getHihokennshaKubunCodeMeisho());
+        HihokenshaShikaku shikaku
+                = new HihokenshaShikaku.Builder(kaigoShikaku, lasdecCode, shikibetsuCode, shoriTimestamp,
+                        shoKisaiHokenshaNo, hihokenshaKubun).
                 hihokenshaNo(entity.getHihokenshaNo()).
                 shikakuHenko(資格変更).
                 jushochitokureiTekiyo(住所地特例適用).
                 jushochitokureiKaijo(住所地特例解除).
                 jushochiTokureishaKubun(JushochiTokureishaKubun.toValue(entity.getJushochiTokureiFlag())).
                 koikinaiJushochiTokureishaKubun(KoikinaiJushochitokureishaKubun.toValue(entity.getKoikinaiJushochiTokureiFlag())).
-                koikinaiJutokuSochimotoLasdecCode(entity.getKoikinaiTokureiSochimotoShichosonCode()).
+                koikinaiJutokuSochimotoLasdecCode(entity.getKoikinaiTokureiSochimotoHokenshaNo()).
                 oldLasdecCode(entity.getKyuShichosonCode()).
                 hihokenshashoSaikofu(被保険者証再交付).
                 build();
@@ -179,9 +184,9 @@ public final class HihokenshaShikakuMapper {
                 toRDateOrMax(entity.getShikakuSoshitsuYMD()),
                 toShikakuSoshitsuJiyu(entity.getShikakuSoshitsuJiyuCode()),
                 toValue(entity.getHihokenshaNo()),
-                toValue(entity.getShichosonCode()),
+                entity.getShoKisaiHokenshaNo().getColumnValue(),
                 toRDateOrMax(entity.getIchigoHihokenshaNenreiTotatsuYMD()),
-                ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode()),
+                ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode().getColumnValue()),
                 JushochiTokureishaKubun.toValue(entity.getJushochiTokureiFlag()));
 
         return kaigoShikaku;

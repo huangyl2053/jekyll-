@@ -5,11 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Minashi2GoHihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * みなし2号被保険者を管理するインターフェースです。
@@ -21,16 +22,9 @@ public interface IMinashi2GoshaDaicho {
     /**
      * 市町村コードを返します。
      *
-     * @return
+     * @return 市町村コード
      */
     LasdecCode get市町村コード();
-
-    /**
-     * 識別コードを返します。
-     *
-     * @return 識別コード
-     */
-    ShikibetsuCode get識別コード();
 
     /**
      * 被保番号を返します。
@@ -40,18 +34,25 @@ public interface IMinashi2GoshaDaicho {
     KaigoHihokenshaNo get被保険者番号();
 
     /**
+     * 識別コードを返します。
+     *
+     * @return 識別コード
+     */
+    ShikibetsuCode get識別コード();
+
+    /**
      * 履歴番号を返します。
      *
      * @return 履歴番号
      */
-    int get履歴番号();
+    YMDHMS get処理日時();
 
     /**
      * 被保険者区分コードを返します。
      *
      * @return 被保険者区分
      */
-    Minashi2GoHihokenshaKubun get被保険者区分コード();
+    Minashi2GoHihokenshaKubun getみなし2号被保険者区分();
 
     /**
      * みなし2号登録年月日を返します。
@@ -66,4 +67,11 @@ public interface IMinashi2GoshaDaicho {
      * @return みなし2号解除年月日
      */
     FlexibleDate getみなし2号解除年月日();
+
+    /**
+     * 福祉被保険者番号を返します。
+     *
+     * @return 福祉被保険者番号
+     */
+    RString get福祉被保険者番号();
 }

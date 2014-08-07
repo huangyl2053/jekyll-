@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiKaijo
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
 import jp.co.ndensan.reams.ur.urz.business.IJusho;
@@ -23,7 +23,8 @@ import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
+import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -91,10 +92,17 @@ public class HihokenshaTest extends DbzTestBase {
             }
 
             @Test
-            public void get地方公共団体コードは_コンストラクタ引数のIHihokenshaShikakuの_get地方公共団体コードと_同じ値を返す() {
+            public void get市町村コードは_コンストラクタ引数のIHihokenshaShikakuの_get市町村コードと_同じ値を返す() {
                 LasdecCode lasdecCode = new LasdecCode("000001");
-                when(shikaku.get地方公共団体コード()).thenReturn(lasdecCode);
-                assertThat(sut.get地方公共団体コード(), is(lasdecCode));
+                when(shikaku.get市町村コード()).thenReturn(lasdecCode);
+                assertThat(sut.get市町村コード(), is(lasdecCode));
+            }
+
+            @Test
+            public void get証記載保険者番号は_コンストラクタ引数のIHihokenshaShikakuの_get証記載保険者番号と_同じ値を返す() {
+                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("000001"));
+                when(shikaku.get証記載保険者番号()).thenReturn(shoKisaiHokenshaNo);
+                assertThat(sut.get証記載保険者番号(), is(shoKisaiHokenshaNo));
             }
 
             @Test
@@ -112,13 +120,6 @@ public class HihokenshaTest extends DbzTestBase {
             }
 
             @Test
-            public void get資格異動区分は_コンストラクタ引数のIHihokenshaShikakuの_get資格異動区分と_同じ値を返す() {
-                ShikakuIdoKubun kubun = ShikakuIdoKubun.資格取得;
-                when(shikaku.get資格異動区分()).thenReturn(kubun);
-                assertThat(sut.get資格異動区分(), is(kubun));
-            }
-
-            @Test
             public void get第一号年齢到達日は_コンストラクタ引数のIHihokenshaShikakuの_get第一号年齢到達日と_同じ値を返す() {
                 FlexibleDate date = new FlexibleDate("20111111");
                 when(shikaku.get第一号年齢到達日()).thenReturn(date);
@@ -127,7 +128,7 @@ public class HihokenshaTest extends DbzTestBase {
 
             @Test
             public void get被保険者区分は_コンストラクタ引数のIHihokenshaShikakuの_get被保険者区分と_同じ値を返す() {
-                ShikakuHihokenshaKubun kubun = ShikakuHihokenshaKubun.第１号被保険者;
+                IHihokenshaKubun kubun = new HihokenshaKubun(new Code("1"), new RString("第1号"));
                 when(shikaku.get被保険者区分()).thenReturn(kubun);
                 assertThat(sut.get被保険者区分(), is(kubun));
             }
@@ -162,9 +163,9 @@ public class HihokenshaTest extends DbzTestBase {
 
             @Test
             public void get広域内住所地特例措置元市町村コードは_コンストラクタ引数のIHihokenshaShikakuのものと_同じ値を返す() {
-                LasdecCode lasdecCode = new LasdecCode("000001");
-                when(shikaku.get広域内住所地特例措置元市町村コード()).thenReturn(lasdecCode);
-                assertThat(sut.get広域内住所地特例措置元市町村コード(), is(lasdecCode));
+                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("000001"));
+                when(shikaku.get広域内住所地特例措置元保険者番号()).thenReturn(shoKisaiHokenshaNo);
+                assertThat(sut.get広域内住所地特例措置元保険者番号(), is(shoKisaiHokenshaNo));
             }
 
             @Test
@@ -419,6 +420,20 @@ public class HihokenshaTest extends DbzTestBase {
             SetaiCode setaiCode = new SetaiCode("11111");
             when(this.profile.get世帯コード()).thenReturn(setaiCode);
             assertThat(sut.get世帯コード(), is(setaiCode));
+        }
+
+        @Test
+        public void get個人番号は_コンストラクタ引数のIkojinのget個人番号と_同じ値を返す() {
+            RString kojinNo = new RString("0123456789");
+            when(this.profile.get個人番号()).thenReturn(kojinNo);
+            assertThat(sut.get個人番号(), is(kojinNo));
+        }
+
+        @Test
+        public void get住民種別は_コンストラクタ引数のIkojinのget住民種別と_同じ値を返す() {
+            JuminShubetsu juminShubetsu = JuminShubetsu.住登外個人_外国人;
+            when(this.profile.get住民種別()).thenReturn(juminShubetsu);
+            assertThat(sut.get住民種別(), is(juminShubetsu));
         }
     }
 }
