@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
- * 被保険者区分を表すコードです。
+ * みなし2号者の被保険者区分を表すコードです。
  *
  * @author n8178 城間篤人
  */
