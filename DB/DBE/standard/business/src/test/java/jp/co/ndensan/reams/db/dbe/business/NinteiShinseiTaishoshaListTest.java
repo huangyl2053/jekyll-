@@ -48,6 +48,40 @@ public class NinteiShinseiTaishoshaListTest {
         }
     }
 
+    public static class AddAll_被保険者List extends DbeTestBase {
+
+        @Test
+        public void 要素を持たないListに_要素を3つ持っている被保険者Listをaddした場合_sizeは3を返す() {
+            sut = new NinteiShinseiTaishoshaList();
+            sut.addAll(createHihokenshaList(3));
+            assertThat(sut.size(), is(3));
+        }
+
+        @Test
+        public void みなし2号者を3つ_被保険者を2つ持っているListに_要素3つ持っている被保険者Listをaddした場合_sizeは8を返す() {
+            sut = new NinteiShinseiTaishoshaList(createHihokenshaList(3), createMinashi2GoshaList(2));
+            sut.addAll(createHihokenshaList(3));
+            assertThat(sut.size(), is(8));
+        }
+    }
+
+    public static class AddAll_みなし2号者List extends DbeTestBase {
+
+        @Test
+        public void 要素を持たないListに_要素を2つ持っているみなし2号者Listをaddした場合_sizeは2を返す() {
+            sut = new NinteiShinseiTaishoshaList();
+            sut.addAll(createMinashi2GoshaList(2));
+            assertThat(sut.size(), is(2));
+        }
+
+        @Test
+        public void みなし2号者を3つ_被保険者を2つ持っているListに_要素を2つ持っているみなし2号者Listをaddした場合_sizeは7を返す() {
+            sut = new NinteiShinseiTaishoshaList(createHihokenshaList(3), createMinashi2GoshaList(2));
+            sut.addAll(createMinashi2GoshaList(2));
+            assertThat(sut.size(), is(7));
+        }
+    }
+
     public static class Size extends DbeTestBase {
 
         @Test
