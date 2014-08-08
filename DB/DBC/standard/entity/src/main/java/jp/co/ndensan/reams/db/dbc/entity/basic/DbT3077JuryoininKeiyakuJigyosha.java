@@ -18,7 +18,7 @@ public enum DbT3077JuryoininKeiyakuJigyosha implements IColumnDefinition {
     lastUpdateReamsLoginId(2147483647, 0),
     jigyoshaKeiyakuNo(10, 0),
     kaishiYMD(2147483647, 0),
-    shoriTimestamp(29, 0),
+    shoriTimestamp(2147483647, 0),
     shuryoYMD(2147483647, 0),
     todokedeYMD(2147483647, 0),
     todokedeAddress(100, 0),

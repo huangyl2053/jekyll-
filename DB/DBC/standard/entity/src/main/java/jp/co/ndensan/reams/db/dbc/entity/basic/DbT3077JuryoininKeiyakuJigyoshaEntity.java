@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
@@ -34,7 +35,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity implements IDbAccessable {
     @PrimaryKey
     private FlexibleDate kaishiYMD;
     @PrimaryKey
-    private RDateTime shoriTimestamp;
+    private YMDHMS shoriTimestamp;
     private FlexibleDate shuryoYMD;
     private FlexibleDate todokedeYMD;
     private RString todokedeAddress;
@@ -129,7 +130,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity implements IDbAccessable {
      * getShoriTimestamp
      * @return shoriTimestamp
      */
-    public RDateTime getShoriTimestamp() {
+    public YMDHMS getShoriTimestamp() {
         return shoriTimestamp;
     }
 
@@ -137,7 +138,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity implements IDbAccessable {
      * setShoriTimestamp
      * @param shoriTimestamp shoriTimestamp
      */
-    public void setShoriTimestamp(RDateTime shoriTimestamp) {
+    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
         this.shoriTimestamp = shoriTimestamp;
     }
 
@@ -421,6 +422,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity implements IDbAccessable {
     }
 
 // </editor-fold>
+
 
 
 

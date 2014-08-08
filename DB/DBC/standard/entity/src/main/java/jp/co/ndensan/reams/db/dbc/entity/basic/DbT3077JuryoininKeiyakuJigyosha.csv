@@ -1,6 +1,6 @@
 ﻿jigyoshaKeiyakuNo,varchar,RString,,,,,A
 kaishiYMD,UDD015YMD,FlexibleDate,,,,,A
-shoriTimestamp,timestamp,RDateTime,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
 shuryoYMD,UDD015YMD,FlexibleDate,,,,,A
 todokedeYMD,UDD015YMD,FlexibleDate,,,,,A
 todokedeAddress,varchar,RString,,,,,A

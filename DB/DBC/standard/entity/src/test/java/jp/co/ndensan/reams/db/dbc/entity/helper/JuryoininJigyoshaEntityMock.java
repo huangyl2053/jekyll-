@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEn
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -27,7 +27,7 @@ public class JuryoininJigyoshaEntityMock {
         DbT3077JuryoininKeiyakuJigyoshaEntity entity = new DbT3077JuryoininKeiyakuJigyoshaEntity();
         entity.setJigyoshaKeiyakuNo(契約番号.value());
         entity.setKaishiYMD(new FlexibleDate("20110303"));
-        entity.setShoriTimestamp(RDateTime.of(2014, 1, 10, 11, 12));
+        entity.setShoriTimestamp(new YMDHMS("20140110111213"));
         entity.setShuryoYMD(new FlexibleDate("20130303"));
         entity.setTodokedeYMD(new FlexibleDate("20110203"));
         entity.setTodokedeAddress(new RString("長野市高田"));
