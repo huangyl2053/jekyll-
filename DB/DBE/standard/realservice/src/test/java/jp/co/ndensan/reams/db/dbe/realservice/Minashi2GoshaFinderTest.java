@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.db.dbe.realservice.search.Minashi2GoshaDaichoSearchIt
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IJukiKojin;
+import jp.co.ndensan.reams.ur.urz.realservice.IJukiKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.ur.urz.realservice.search.SearchConditionFactory;
@@ -100,12 +100,12 @@ public class Minashi2GoshaFinderTest {
         return minashiFinder;
     }
 
-    private static IKojinFinder createKojinFinderMock() {
-        IKojin kojin1 = mock(IKojin.class);
+    private static IJukiKojinFinder createKojinFinderMock() {
+        IJukiKojin kojin1 = mock(IJukiKojin.class);
         when(kojin1.get識別コード()).thenReturn(識別コード);
 
-        IKojinFinder kojinFinder = mock(IKojinFinder.class);
-        when(kojinFinder.get個人(識別コード)).thenReturn(kojin1);
+        IJukiKojinFinder kojinFinder = mock(IJukiKojinFinder.class);
+        when(kojinFinder.find住基個人(識別コード)).thenReturn(kojin1);
         return kojinFinder;
     }
 

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.IMinashi2GoshaDaicho;
 import jp.co.ndensan.reams.db.dbe.business.Minashi2Gosha;
 import jp.co.ndensan.reams.db.dbe.business.Minashi2GoshaList;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ur.urz.realservice.IJukiKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
@@ -23,20 +24,20 @@ import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 public class Minashi2GoshaFinder {
 
     private final Minashi2GoshaDaichoFinder minashiDaichoFinder;
-    private final IKojinFinder profileSearcher;
+    private final IJukiKojinFinder profileSearcher;
 
     /**
      * デフォルトコンストラクタです。
      */
     public Minashi2GoshaFinder() {
         minashiDaichoFinder = new Minashi2GoshaDaichoFinder();
-        profileSearcher = ShikibetsuTaishoService.getKojinFinder();
+        profileSearcher = ShikibetsuTaishoService.getJukiKojinFinder();
     }
 
     /**
      * テスト用コンストラクタです。
      */
-    Minashi2GoshaFinder(Minashi2GoshaDaichoFinder minashiDaichoFinder, IKojinFinder profileSearcher) {
+    Minashi2GoshaFinder(Minashi2GoshaDaichoFinder minashiDaichoFinder, IJukiKojinFinder profileSearcher) {
         this.minashiDaichoFinder = minashiDaichoFinder;
         this.profileSearcher = profileSearcher;
     }
@@ -56,7 +57,7 @@ public class Minashi2GoshaFinder {
     private Minashi2GoshaList toMinashi2GoshaList(List<IMinashi2GoshaDaicho> minashi2GoshaDaicho) {
         List<Minashi2Gosha> minashi2GoshaList = new ArrayList<>();
         for (IMinashi2GoshaDaicho minashiDaicho : minashi2GoshaDaicho) {
-            IKojin kojin = profileSearcher.get個人_住基優先(minashiDaicho.get識別コード());
+            IKojin kojin = profileSearcher.find住基個人(minashiDaicho.get識別コード());
             minashi2GoshaList.add(new Minashi2Gosha(minashiDaicho, kojin));
         }
         return new Minashi2GoshaList(minashi2GoshaList);

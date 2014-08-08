@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ur.urz.realservice.IJukiKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
@@ -27,14 +28,14 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 public class HihokenshaFinder {
 
     private final HihokenshaDaichoManager hihokenshaDaicho;
-    private final IKojinFinder profileSearcher;
+    private final IJukiKojinFinder profileSearcher;
 
     /**
      * 新しいHihokenshaFinderのインスタンスを生成します。
      */
     public HihokenshaFinder() {
         this.hihokenshaDaicho = new HihokenshaDaichoManager();
-        this.profileSearcher = ShikibetsuTaishoService.getKojinFinder();
+        this.profileSearcher = ShikibetsuTaishoService.getJukiKojinFinder();
     }
 
     /**
@@ -45,7 +46,7 @@ public class HihokenshaFinder {
      * {@link HihokenshaDaichoManager HihokenshaDaichoManager}
      * @param profileSearcher {@link IKojinFinder IKojinFinder}
      */
-    HihokenshaFinder(HihokenshaDaichoManager hihokenshaDaicho, IKojinFinder profileSearcher) {
+    HihokenshaFinder(HihokenshaDaichoManager hihokenshaDaicho, IJukiKojinFinder profileSearcher) {
         this.hihokenshaDaicho = hihokenshaDaicho;
         this.profileSearcher = profileSearcher;
     }
@@ -141,7 +142,7 @@ public class HihokenshaFinder {
     }
 
     private Hihokensha _toHihokensha(IHihokenshaShikaku shikaku) {
-        IKojin profile = profileSearcher.get個人_住基優先(shikaku.get識別コード());
+        IKojin profile = profileSearcher.find住基個人(shikaku.get識別コード());
         return isNull(profile) ? null : _createHihokensha(profile, shikaku);
     }
 
