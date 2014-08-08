@@ -6,14 +6,18 @@
 
 package jp.co.ndensan.reams.db.dbb.business;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author n3336
  */
 public class NengakuFukaKonkyo {
-    public String 賦課基準日;
-    public String 資格取得日;
-    public String 資格喪失日;
+    public Date 賦課基準日;
+    public Date 資格取得日;
+    public Date 資格喪失日;
     public HokenryoDankai 保険料段階_4月;
     public HokenryoDankai 保険料段階_5月;
     public HokenryoDankai 保険料段階_6月;
@@ -39,28 +43,65 @@ public class NengakuFukaKonkyo {
     public String ランク_2月;
     public String ランク_3月;
 
-    public String get賦課基準日() {
+    public Date get賦課基準日() {
         return 賦課基準日;
     }
 
-    public void set賦課基準日(String 賦課基準日) {
+    public void set賦課基準日(Date 賦課基準日) {
         this.賦課基準日 = 賦課基準日;
     }
 
-    public String get資格取得日() {
+    public Date get資格取得日() {
         return 資格取得日;
     }
 
-    public void set資格取得日(String 資格取得日) {
+    public void set資格取得日(Date 資格取得日) {
         this.資格取得日 = 資格取得日;
     }
 
-    public String get資格喪失日() {
+    public Date get資格喪失日() {
         return 資格喪失日;
     }
 
-    public void set資格喪失日(String 資格喪失日) {
+    public void set資格喪失日(Date 資格喪失日) {
         this.資格喪失日 = 資格喪失日;
+    }
+    
+    
+    public Map<String, HokenryoDankai> getHokenryoDankaiMap(){
+        Map<String, HokenryoDankai> map = new HashMap<>();
+        map.put("4月", 保険料段階_4月);
+        map.put("5月", 保険料段階_5月);
+        map.put("6月", 保険料段階_6月);
+        map.put("7月", 保険料段階_7月);
+        map.put("8月", 保険料段階_8月);
+        map.put("9月", 保険料段階_9月);
+        map.put("10月", 保険料段階_10月);
+        map.put("11月", 保険料段階_11月);
+        map.put("12月", 保険料段階_12月);
+        map.put("1月", 保険料段階_1月);
+        map.put("2月", 保険料段階_2月);
+        map.put("3月", 保険料段階_3月);
+        
+        return map;
+    }
+    
+    public Map<String, String> getRankMap(){
+        Map<String, String> map = new HashMap<>();
+        map.put("4月", ランク_4月);
+        map.put("5月", ランク_5月);
+        map.put("6月", ランク_6月);
+        map.put("7月", ランク_7月);
+        map.put("8月", ランク_8月);
+        map.put("9月", ランク_9月);
+        map.put("10月", ランク_10月);
+        map.put("11月", ランク_11月);
+        map.put("12月", ランク_12月);
+        map.put("1月", ランク_1月);
+        map.put("2月", ランク_2月);
+        map.put("3月", ランク_3月);
+        
+        return map;
     }
 
     public HokenryoDankai get保険料段階_4月() {
