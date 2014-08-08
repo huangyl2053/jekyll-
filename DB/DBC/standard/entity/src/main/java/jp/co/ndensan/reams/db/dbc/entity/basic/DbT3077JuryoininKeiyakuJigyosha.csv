@@ -1,6 +1,6 @@
 ﻿jigyoshaKeiyakuNo,varchar,RString,,,,,A
 kaishiYMD,UDD015YMD,FlexibleDate,,,,,A
-shoriTimestamp,timestamp,RDateTime,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
 shuryoYMD,UDD015YMD,FlexibleDate,,,,,A
 todokedeYMD,UDD015YMD,FlexibleDate,,,,,A
 todokedeAddress,varchar,RString,,,,,A
@@ -15,5 +15,5 @@ jutakuKaishuKeiyakuUmu,bool,boolean,,,,,A
 tokuteiFukushiYoguHanbaiKeiyakuUmu,bool,boolean,,,,,A
 shokanbaraiKyufuKeiyakuUmu,bool,boolean,,,,,A
 kogakuKyufuKeiyakuUmu,bool,boolean,,,,,A
-keiyakuJigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,A
+keiyakuJigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,A
 toriatsukaiKakuyakushoUmu,bool,boolean,,,,,A

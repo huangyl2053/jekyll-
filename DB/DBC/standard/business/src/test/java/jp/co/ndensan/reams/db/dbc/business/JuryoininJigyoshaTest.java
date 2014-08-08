@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.TokuteiFukushiYoguHa
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ToriatsukaiKakuyakushoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -35,7 +36,7 @@ public class JuryoininJigyoshaTest extends DbcTestBase {
     private static JuryoininJigyosha sut;
     private static KeiyakuNo 契約番号;
     private static Range<FlexibleDate> 契約期間;
-    private static RDateTime 処理日時;
+    private static YMDHMS 処理日時;
     private static FlexibleDate 届出年月日;
     private static Todokedesha 届出者;
     private static FlexibleDate 契約登録年月日;
@@ -50,7 +51,7 @@ public class JuryoininJigyoshaTest extends DbcTestBase {
     public static void setUp() {
         契約番号 = create契約番号();
         契約期間 = create契約期間();
-        処理日時 = mock(RDateTime.class);
+        処理日時 = mock(YMDHMS.class);
         届出年月日 = mock(FlexibleDate.class);
         届出者 = mock(Todokedesha.class);
         契約登録年月日 = mock(FlexibleDate.class);

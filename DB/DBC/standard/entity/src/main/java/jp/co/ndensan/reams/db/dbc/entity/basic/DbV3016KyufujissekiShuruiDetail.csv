@@ -1,0 +1,16 @@
+﻿kokanShikibetsuNo,DbUDD009KokanShikibetsuNo,KokanShikibetsuNo,,,,,A
+inputShikibetsuNo,DbUDD010NyuryokuShikibetsuNo,RString,,,,,A
+recodeShubetsuCode,varchar,RString,,,,,A
+hokenshaNo,DbUDD003HokenshaNo,ShoKisaiHokenshaNo,,,,,A
+hiHokenshaNo,DbUDD002HihokenshaNo,KaigoHihokenshaNo,,,,,A
+serviceTeikyoYM,UDD014YM,ServiceTeikyoYM,,,,,A
+jigyoshoNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,A
+toshiNo,varchar,ToshiNo,,,,,A
+serviceSyuruiCode,DbUDD005ServiceShuruiCode,ServiceShuruiCode,,,,,A
+hokenRiyoshaFutangaku,int4,Decimal,,,,,A
+atoHokenTanisuTotal,int4,Decimal,,,,,A
+atoHokenSeikyugaku,varchar,Decimal,,,,,A
+atoHokenDekidakaTanisuTotal,int4,Decimal,,,,,A
+serviceCode,DbUDD007ServiceCode,ServiceCode,,,,,A
+atoServiceTanisuTotal,int4,Decimal,,,,,A
+atotanisu,unknown,Decimal,,,,,A

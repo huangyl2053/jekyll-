@@ -36,16 +36,12 @@ import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.Hoj
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.NinkaChienDantai;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static org.mockito.Mockito.mock;
@@ -61,7 +57,7 @@ public class JuryoininJigyoshaMock {
         return new JuryoininJigyosha(
                 new KeiyakuNo(new RString("1234567890")),
                 new Range(new FlexibleDate("20110303"), new FlexibleDate("20130303")),
-                RDateTime.of(2014, 1, 10, 11, 12),
+                new YMDHMS("20140110111213"),
                 new FlexibleDate("20110203"),
                 create届出者(),
                 new FlexibleDate("20110208"),

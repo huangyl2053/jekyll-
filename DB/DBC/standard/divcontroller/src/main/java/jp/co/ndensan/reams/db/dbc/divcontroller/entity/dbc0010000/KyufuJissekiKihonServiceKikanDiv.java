@@ -22,9 +22,9 @@ public class KyufuJissekiKihonServiceKikanDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtKyufuJissekiKihonKaishiYMD")
-    private TextBox txtKyufuJissekiKihonKaishiYMD;
+    private TextBoxDate txtKyufuJissekiKihonKaishiYMD;
     @JsonProperty("txtKyufuJissekiKihonChushiYMD")
-    private TextBox txtKyufuJissekiKihonChushiYMD;
+    private TextBoxDate txtKyufuJissekiKihonChushiYMD;
     @JsonProperty("txtKyufuJissekiKihonChushiRiyu")
     private TextBox txtKyufuJissekiKihonChushiRiyu;
 
@@ -35,22 +35,22 @@ public class KyufuJissekiKihonServiceKikanDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("txtKyufuJissekiKihonKaishiYMD")
-    public TextBox getTxtKyufuJissekiKihonKaishiYMD() {
+    public TextBoxDate getTxtKyufuJissekiKihonKaishiYMD() {
         return txtKyufuJissekiKihonKaishiYMD;
     }
 
     @JsonProperty("txtKyufuJissekiKihonKaishiYMD")
-    public void setTxtKyufuJissekiKihonKaishiYMD(TextBox txtKyufuJissekiKihonKaishiYMD) {
+    public void setTxtKyufuJissekiKihonKaishiYMD(TextBoxDate txtKyufuJissekiKihonKaishiYMD) {
         this.txtKyufuJissekiKihonKaishiYMD=txtKyufuJissekiKihonKaishiYMD;
     }
 
     @JsonProperty("txtKyufuJissekiKihonChushiYMD")
-    public TextBox getTxtKyufuJissekiKihonChushiYMD() {
+    public TextBoxDate getTxtKyufuJissekiKihonChushiYMD() {
         return txtKyufuJissekiKihonChushiYMD;
     }
 
     @JsonProperty("txtKyufuJissekiKihonChushiYMD")
-    public void setTxtKyufuJissekiKihonChushiYMD(TextBox txtKyufuJissekiKihonChushiYMD) {
+    public void setTxtKyufuJissekiKihonChushiYMD(TextBoxDate txtKyufuJissekiKihonChushiYMD) {
         this.txtKyufuJissekiKihonChushiYMD=txtKyufuJissekiKihonChushiYMD;
     }
 

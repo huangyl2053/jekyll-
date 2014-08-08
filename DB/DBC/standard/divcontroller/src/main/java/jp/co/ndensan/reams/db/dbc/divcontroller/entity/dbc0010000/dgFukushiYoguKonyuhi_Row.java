@@ -3,14 +3,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri May 02 10:16:24 JST 2014 
+ * Tue Jul 29 15:54:08 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 
 
 /**
@@ -22,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 public class dgFukushiYoguKonyuhi_Row extends DataRow {
 
     private RString txtService;
-    private Button btnTekiyo;
     private RString txtKonyuYMD;
     private RString txtShohinName;
     private RString txtShumoku;
@@ -30,15 +28,24 @@ public class dgFukushiYoguKonyuhi_Row extends DataRow {
     private RString txtHanbaiJigyoshaName;
     private RString txtKonyuKingaku;
     private RString txtShinsaYM;
+    private RString btnTekiyo;
 
     public dgFukushiYoguKonyuhi_Row() {
         super();
+        this.txtService = RString.EMPTY;
+        this.txtKonyuYMD = RString.EMPTY;
+        this.txtShohinName = RString.EMPTY;
+        this.txtShumoku = RString.EMPTY;
+        this.txtSeizoJigyoshaName = RString.EMPTY;
+        this.txtHanbaiJigyoshaName = RString.EMPTY;
+        this.txtKonyuKingaku = RString.EMPTY;
+        this.txtShinsaYM = RString.EMPTY;
+        this.btnTekiyo = RString.EMPTY;
     }
 
-    public dgFukushiYoguKonyuhi_Row(RString txtService, Button btnTekiyo, RString txtKonyuYMD, RString txtShohinName, RString txtShumoku, RString txtSeizoJigyoshaName, RString txtHanbaiJigyoshaName, RString txtKonyuKingaku, RString txtShinsaYM) {
+    public dgFukushiYoguKonyuhi_Row(RString txtService, RString txtKonyuYMD, RString txtShohinName, RString txtShumoku, RString txtSeizoJigyoshaName, RString txtHanbaiJigyoshaName, RString txtKonyuKingaku, RString txtShinsaYM, RString btnTekiyo) {
         super();
         this.setOriginalData("txtService", txtService);
-        this.setOriginalData("btnTekiyo", btnTekiyo);
         this.setOriginalData("txtKonyuYMD", txtKonyuYMD);
         this.setOriginalData("txtShohinName", txtShohinName);
         this.setOriginalData("txtShumoku", txtShumoku);
@@ -46,8 +53,8 @@ public class dgFukushiYoguKonyuhi_Row extends DataRow {
         this.setOriginalData("txtHanbaiJigyoshaName", txtHanbaiJigyoshaName);
         this.setOriginalData("txtKonyuKingaku", txtKonyuKingaku);
         this.setOriginalData("txtShinsaYM", txtShinsaYM);
+        this.setOriginalData("btnTekiyo", btnTekiyo);
         this.txtService = txtService;
-        this.btnTekiyo = btnTekiyo;
         this.txtKonyuYMD = txtKonyuYMD;
         this.txtShohinName = txtShohinName;
         this.txtShumoku = txtShumoku;
@@ -55,14 +62,11 @@ public class dgFukushiYoguKonyuhi_Row extends DataRow {
         this.txtHanbaiJigyoshaName = txtHanbaiJigyoshaName;
         this.txtKonyuKingaku = txtKonyuKingaku;
         this.txtShinsaYM = txtShinsaYM;
+        this.btnTekiyo = btnTekiyo;
     }
 
     public RString getTxtService() {
         return txtService;
-    }
-
-    public Button getBtnTekiyo() {
-        return btnTekiyo;
     }
 
     public RString getTxtKonyuYMD() {
@@ -93,14 +97,13 @@ public class dgFukushiYoguKonyuhi_Row extends DataRow {
         return txtShinsaYM;
     }
 
+    public RString getBtnTekiyo() {
+        return btnTekiyo;
+    }
+
     public void setTxtService(RString txtService) {
         this.setOriginalData("txtService", txtService);
         this.txtService = txtService;
-    }
-
-    public void setBtnTekiyo(Button btnTekiyo) {
-        this.setOriginalData("btnTekiyo", btnTekiyo);
-        this.btnTekiyo = btnTekiyo;
     }
 
     public void setTxtKonyuYMD(RString txtKonyuYMD) {
@@ -136,6 +139,11 @@ public class dgFukushiYoguKonyuhi_Row extends DataRow {
     public void setTxtShinsaYM(RString txtShinsaYM) {
         this.setOriginalData("txtShinsaYM", txtShinsaYM);
         this.txtShinsaYM = txtShinsaYM;
+    }
+
+    public void setBtnTekiyo(RString btnTekiyo) {
+        this.setOriginalData("btnTekiyo", btnTekiyo);
+        this.btnTekiyo = btnTekiyo;
     }
 
 }
