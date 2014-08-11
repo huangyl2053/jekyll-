@@ -206,18 +206,11 @@
    "selectControlID": "ShikakuShutokuTaishoshaJoho",
    "helpMessageID": "",
    "jpControlName": "",
-   "onLoad": "onLoad_ShikakuShutokuTaishoshaJoho",
+   "onLoad": "",
    "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "ShikakuShutokuTaishoshaJoho"
-    },
-    {
-     "postParameterPanelNames": "ShikakuShutokuSearch"
-    }
-   ],
+   "postParameterPanelNames": [],
    "requestSettings": [
     {
      "eventName": "onLoad",
@@ -1716,7 +1709,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": null,
+           "selectedItem": "key0",
            "dataSource": [
             {
              "key": "key0",
@@ -3090,7 +3083,7 @@
       "tblShoruJokyu"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tplShikakuJoho",
+     "selectedItemFieldName": "tblShoruJokyu",
      "initialTab": "0",
      "isLazyLoading": false
     }
@@ -3325,12 +3318,12 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "btnSave",
+     "fieldName": "btnUpdate",
      "event": "onClick",
      "transition": "処理完了"
     },
     {
-     "fieldName": "btnComplete",
+     "fieldName": "btnCompleted",
      "event": "onClick",
      "transition": ""
     }
@@ -3356,12 +3349,12 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "btnSave",
+     "fieldName": "btnUpdate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnComplete",
+     "fieldName": "btnCompleted",
      "event": "onClick",
      "transition": "終了"
     }
@@ -3374,9 +3367,11 @@
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
-   "ShikakuShutokuSearch",
    "ShikakuShutokuTaishoshaJoho",
    "ShikakuShutokuComplete"
+  ],
+  [
+   "ShikakuShutokuSearch"
   ],
   [
    "ShikakuShutokuCommonJoho"
@@ -3479,7 +3474,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "資格情報を"
+      "additionalText": "資格登録を"
      }
     }
    ],
