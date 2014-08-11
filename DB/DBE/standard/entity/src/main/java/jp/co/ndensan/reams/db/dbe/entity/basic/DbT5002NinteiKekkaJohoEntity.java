@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
 /**
  * 要介護認定結果情報のエンティティクラスです。
@@ -34,6 +35,8 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
+    @PrimaryKey
+    private YMDHMS shoriTimestamp;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private KaigoHihokenshaNo hihokenshaNo;
     private FlexibleDate youkaigodoNinteiYMD;
@@ -85,6 +88,7 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
     private RString tuchiKubun;
     private RString ninteiRiyu;
     private RString shinsakaiMemo;
+    private FlexibleDate ifSofuYMD;
 
     /**
      * getInsertDantaiCd
@@ -147,6 +151,24 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
      */
     public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
+    }
+
+    /**
+     * getShoriTimestamp
+     *
+     * @return shoriTimestamp
+     */
+    public YMDHMS getShoriTimestamp() {
+        return shoriTimestamp;
+    }
+
+    /**
+     * setShoriTimestamp
+     *
+     * @param shoriTimestamp shoriTimestamp
+     */
+    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
+        this.shoriTimestamp = shoriTimestamp;
     }
 
     /**
@@ -1068,6 +1090,24 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
     }
 
     /**
+     * getIfSofuYMD
+     *
+     * @return ifSofuYMD
+     */
+    public FlexibleDate getIfSofuYMD() {
+        return ifSofuYMD;
+    }
+
+    /**
+     * setIfSofuYMD
+     *
+     * @param ifSofuYMD ifSofuYMD
+     */
+    public void setIfSofuYMD(FlexibleDate ifSofuYMD) {
+        this.ifSofuYMD = ifSofuYMD;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT5002NinteiKekkaJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
@@ -1082,6 +1122,9 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
             return false;
         }
         if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
+            return false;
+        }
+        if (!Objects.equals(this.shoriTimestamp, other.shoriTimestamp)) {
             return false;
         }
         return true;

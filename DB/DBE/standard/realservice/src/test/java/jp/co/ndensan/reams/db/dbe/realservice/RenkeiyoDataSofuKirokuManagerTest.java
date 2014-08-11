@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.definition.SaiSoufuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.RenkeiyoDataSofuKirokuDacMock;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -238,13 +239,14 @@ public class RenkeiyoDataSofuKirokuManagerTest extends TestBase {
 
     private static RenkeiyoDataSofuKiroku RenkeiData(ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
         KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));
+        YMDHMS 処理日時 = new YMDHMS(new RString("20140808102030"));
         NinteiShinseijiKubun 認定申請時区分 = NinteiShinseijiKubun.新規申請;
         HikiwatashiKubun 引渡し区分 = HikiwatashiKubun.引き渡し未済;
         SaiSoufuKubun 再送付区分 = SaiSoufuKubun.再送信;
         SaiChousaSoufuKubun 再調査送付区分 = SaiChousaSoufuKubun.未使用;
         SaiIkenshoSoufuKubun 再意見書送付区分 = SaiIkenshoSoufuKubun.未使用;
         RenkeiyoDataSofuKiroku 連携用データ送付記録 = new RenkeiyoDataSofuKiroku(
-                申請書管理番号, 被保険者番号, 認定申請時区分, 引渡し区分,
+                申請書管理番号, 処理日時, 被保険者番号, 認定申請時区分, 引渡し区分,
                 RDateTime.of(2014, 03, 14, 18, 45, 05),
                 再送付区分, 再調査送付区分, 再意見書送付区分);
         return 連携用データ送付記録;

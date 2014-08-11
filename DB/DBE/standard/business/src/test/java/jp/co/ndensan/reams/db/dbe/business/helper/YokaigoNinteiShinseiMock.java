@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.spy;
@@ -44,8 +45,9 @@ public class YokaigoNinteiShinseiMock {
     private static YokaigoNinteiShinsei createYokaogoNinteiShinsei() {
         return new YokaigoNinteiShinsei(
                 new ShinseishoKanriNo(RString.EMPTY),
+                new YMDHMS(new RString("20140808102030")),
                 new ShoKisaiHokenshaNo(new RString("000000")),
-                ShishoCode.NULL_VALUE,
+                new ShishoCode(new RString("0")),
                 KaigoHihokenshaNo.NULL_VALUE,
                 new ShikibetsuCode("0"),
                 FlexibleDate.EMPTY,
@@ -64,7 +66,8 @@ public class YokaigoNinteiShinseiMock {
                 true,
                 RString.EMPTY,
                 new NinteiShinseiTorisage(TorisageKubun.認定申請有効, TorisageRiyu.EMPTY, FlexibleDate.MAX, ShinsaKeizokuKubun.継続する),
-                ShinsakaiYusenWaritsukeKubun.優先しない
+                ShinsakaiYusenWaritsukeKubun.優先しない,
+                FlexibleDate.EMPTY
         );
     }
 

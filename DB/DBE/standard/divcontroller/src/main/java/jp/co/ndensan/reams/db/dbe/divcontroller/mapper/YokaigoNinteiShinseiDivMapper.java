@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -57,6 +58,7 @@ public class YokaigoNinteiShinseiDivMapper {
     public static YokaigoNinteiShinsei toYokaigoNinteiShinsei(YokaigoNinteiShinseiDiv div) {
         return new YokaigoNinteiShinsei(
                 Item.申請書管理番号.<ShinseishoKanriNo>extractValue(div),
+                Item.処理日時.<YMDHMS>extractValue(div),
                 Item.保険者番号.<ShoKisaiHokenshaNo>extractValue(div),
                 Item.支所コード.<ShishoCode>extractValue(div),
                 Item.被保番号.<KaigoHihokenshaNo>extractValue(div),
@@ -77,7 +79,8 @@ public class YokaigoNinteiShinseiDivMapper {
                 Item.施設入所.<Boolean>extractValue(div),
                 Item.市町村連絡事項.<RString>extractValue(div),
                 Item.認定申請取下げ.<NinteiShinseiTorisage>extractValue(div),
-                Item.審査会優先割付区分.<ShinsakaiYusenWaritsukeKubun>extractValue(div)
+                Item.審査会優先割付区分.<ShinsakaiYusenWaritsukeKubun>extractValue(div),
+                Item.IF送付年月日.<FlexibleDate>extractValue(div)
         );
     }
 
@@ -88,6 +91,14 @@ public class YokaigoNinteiShinseiDivMapper {
                     @Override
                     ShinseishoKanriNo extractValue(YokaigoNinteiShinseiDiv div) {
                         return new ShinseishoKanriNo(new RString("1111111111"));
+                    }
+
+                },
+        処理日時 {
+
+                    @Override
+                    YMDHMS extractValue(YokaigoNinteiShinseiDiv div) {
+                        return new YMDHMS(new RString("20140808102030"));
                     }
 
                 },
@@ -239,6 +250,13 @@ public class YokaigoNinteiShinseiDivMapper {
                     @Override
                     ShinsakaiYusenWaritsukeKubun extractValue(YokaigoNinteiShinseiDiv div) {
                         return ShinsakaiYusenWaritsukeKubun.優先しない;
+                    }
+                },
+        IF送付年月日 {
+
+                    @Override
+                    FlexibleDate extractValue(YokaigoNinteiShinseiDiv div) {
+                        return FlexibleDate.EMPTY;
                     }
                 };
 

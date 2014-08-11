@@ -20,16 +20,22 @@ import org.junit.Test;
 public class NinteiResultTest extends DbeTestBase {
 
     private static final int AS_申請書管理番号がNULL = 1;
-    private static final int AS_証記載保険者番号がNULL = 2;
-    private static final int AS_被保険者番号がNULL = 3;
-    private static final int AS_要介護度認定年月日がNULL = 4;
-    private static final int AS_要介護状態がNULL = 5;
+    private static final int AS_処理日時がNULL = 2;
+    private static final int AS_証記載保険者番号がNULL = 3;
+    private static final int AS_被保険者番号がNULL = 4;
+    private static final int AS_要介護度認定年月日がNULL = 5;
+    private static final int AS_要介護状態がNULL = 6;
 
     public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
             createNinteiResult(AS_申請書管理番号がNULL);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 処理日時がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createNinteiResult(AS_処理日時がNULL);
         }
 
         @Test(expected = NullPointerException.class)
@@ -57,6 +63,7 @@ public class NinteiResultTest extends DbeTestBase {
         NinteiResult ninteiResult = NinteiResultMock.getSpiedInstance();
         return new NinteiResult(
                 flg == AS_申請書管理番号がNULL ? null : ninteiResult.get申請書管理番号(),
+                flg == AS_処理日時がNULL ? null : ninteiResult.get処理日時(),
                 flg == AS_証記載保険者番号がNULL ? null : ninteiResult.get証記載保険者番号(),
                 flg == AS_被保険者番号がNULL ? null : ninteiResult.get被保険者番号(),
                 flg == AS_要介護度認定年月日がNULL ? null : FlexibleDate.MIN,
@@ -98,6 +105,7 @@ public class NinteiResultTest extends DbeTestBase {
                 ninteiResult.get認定結果異動(),
                 ninteiResult.get認定取消(),
                 ninteiResult.get通知区分(),
-                ninteiResult.get認定理由());
+                ninteiResult.get認定理由(),
+                ninteiResult.getIF送付年月日());
     }
 }

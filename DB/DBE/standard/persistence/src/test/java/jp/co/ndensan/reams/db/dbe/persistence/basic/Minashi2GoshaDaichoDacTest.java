@@ -52,7 +52,7 @@ public class Minashi2GoshaDaichoDacTest extends DbeTestDacBase {
 
         市町村コード = new LasdecCode("123456");
         処理日時 = new YMDHMS("20071106010101");
-        識別コード = new ShikibetsuCode(new RString("012345678900001"));
+        識別コード = new ShikibetsuCode(new RString("012345678900002"));
         被保険者区分コード = new HihokenshaKubun(new Code("1"), new RString("みなし2号"));
         みなし2号登録年月日 = new FlexibleDate("20140101");
         みなし2号解除年月日 = new FlexibleDate("20140101");
@@ -65,7 +65,7 @@ public class Minashi2GoshaDaichoDacTest extends DbeTestDacBase {
 
         @Test
         public void insert成功したら1を返す() {
-            被保険者番号 = new KaigoHihokenshaNo(new RString("0123400001"));
+            被保険者番号 = new KaigoHihokenshaNo(new RString("0123400002"));
             assertThat(sut.insert(createEntity(被保険者番号)), is(1));
         }
 
@@ -82,7 +82,7 @@ public class Minashi2GoshaDaichoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
 
-            被保険者番号1 = new KaigoHihokenshaNo(new RString("0123400001"));
+            被保険者番号1 = new KaigoHihokenshaNo(new RString("0123400000"));
             被保険者番号2 = new KaigoHihokenshaNo(new RString("0123400002"));
             被保険者番号3 = new KaigoHihokenshaNo(new RString("0123400003"));
             被保険者番号4 = new KaigoHihokenshaNo(new RString("0123400004"));

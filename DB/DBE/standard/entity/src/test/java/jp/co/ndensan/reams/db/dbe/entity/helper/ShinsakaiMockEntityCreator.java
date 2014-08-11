@@ -75,6 +75,7 @@ public final class ShinsakaiMockEntityCreator {
         entity.setShinsakaiShiryoSakuseiYMD(new FlexibleDate("20090101"));
         entity.setShinsakaiKyukaiFlag(false);
         entity.setShinsakaiWariateZumiNinzu(5);
+        entity.setShiryoSakuseiKubun(new Code("0"));
         return entity;
     }
 
@@ -129,12 +130,14 @@ public final class ShinsakaiMockEntityCreator {
      * @param 休会区分 休会区分
      * @param 審査会資料作成年月日 審査会資料作成年月日
      * @param 審査会割当済み人数 審査会割当済み人数
+     * @param 資料作成区分 資料作成区分
      * @return 審査会情報Entity
      */
     public static DbT5101ShinsakaiJohoEntity create審査会情報Entity(ShinsakaiKaisaiNo 開催番号, FlexibleDate 開催年月日,
             GogitaiNo 合議体番号, TimeString 開始時間, TimeString 終了時間, ShinsakaiKaisaiBashoCode 開催場所番号,
             int 審査会予定定員, int 審査会最大定員, int 審査会自動割当定員, int 審査会委員定員, GogitaiSeishinkaIshiSonzaiKubun 精神科医存在区分,
-            GogitaiDummyKubun 合議体ダミー区分, ShinsakaiKyukaiKubun 休会区分, FlexibleDate 審査会資料作成年月日, int 審査会割当済み人数) {
+            GogitaiDummyKubun 合議体ダミー区分, ShinsakaiKyukaiKubun 休会区分, FlexibleDate 審査会資料作成年月日, int 審査会割当済み人数,
+            Code 資料作成区分) {
         DbT5101ShinsakaiJohoEntity entity = new DbT5101ShinsakaiJohoEntity();
         entity.setShinsakaiKaisaiNo(開催番号.value());
         entity.setShinsakaiKaisaiYMD(開催年月日);
@@ -151,6 +154,7 @@ public final class ShinsakaiMockEntityCreator {
         entity.setShinsakaiShiryoSakuseiYMD(審査会資料作成年月日);
         entity.setShinsakaiKyukaiFlag(休会区分.is休会());
         entity.setShinsakaiWariateZumiNinzu(審査会割当済み人数);
+        entity.setShiryoSakuseiKubun(資料作成区分);
         return entity;
     }
 

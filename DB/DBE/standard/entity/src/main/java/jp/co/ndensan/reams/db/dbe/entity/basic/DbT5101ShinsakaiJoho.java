@@ -5,11 +5,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 /**
  * DbT5101ShinsakaiJohoの項目定義クラスです
  *
- * @author n8178 城間篤人
  */
 public enum DbT5101ShinsakaiJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
-
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -32,7 +30,9 @@ public enum DbT5101ShinsakaiJoho implements IColumnDefinition {
     gogitaiDummyFlag(1, 0),
     shinsakaiShiryoSakuseiYMD(2147483647, 0),
     shinsakaiKyukaiFlag(1, 0),
-    shinsakaiWariateZumiNinzu(5, 0);
+    shinsakaiWariateZumiNinzu(5, 0),
+    shiryoSakuseiKubun(2147483647, 0);
+
     private final int maxLength;
     private final int scale;
 
@@ -43,7 +43,6 @@ public enum DbT5101ShinsakaiJoho implements IColumnDefinition {
 
     /**
      * getMaxLength
-     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -52,11 +51,11 @@ public enum DbT5101ShinsakaiJoho implements IColumnDefinition {
 
     /**
      * getScale
-     *
      * @return 小数点以下の桁数
      */
     public int getScale() {
         return scale;
     }
+
 // </editor-fold>
 }

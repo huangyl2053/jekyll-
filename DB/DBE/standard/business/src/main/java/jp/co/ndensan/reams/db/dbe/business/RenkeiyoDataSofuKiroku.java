@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.definition.SaiChousaSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiIkenshoSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiSoufuKubun;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 public class RenkeiyoDataSofuKiroku {
 
     private final ShinseishoKanriNo 申請書管理番号;
+    private final YMDHMS 処理日時;
     private final KaigoHihokenshaNo 被保険者番号;
     private final NinteiShinseijiKubun 認定申請時区分;
     private final HikiwatashiKubun 引渡し区分;
@@ -35,6 +37,7 @@ public class RenkeiyoDataSofuKiroku {
      * コンストラクタです。
      *
      * @param 申請書管理番号 申請書管理番号
+     * @param 処理日時 処理日時
      * @param 被保険者番号 被保険者番号
      * @param 認定申請時区分 認定申請時区分
      * @param 引渡し区分 引渡し区分
@@ -44,12 +47,13 @@ public class RenkeiyoDataSofuKiroku {
      * @param 再意見書送付区分 再意見書送付区分
      * @throws NullPointerException 引数がnullの場合
      */
-    public RenkeiyoDataSofuKiroku(ShinseishoKanriNo 申請書管理番号, KaigoHihokenshaNo 被保険者番号,
-            NinteiShinseijiKubun 認定申請時区分,
+    public RenkeiyoDataSofuKiroku(ShinseishoKanriNo 申請書管理番号, YMDHMS 処理日時,
+            KaigoHihokenshaNo 被保険者番号, NinteiShinseijiKubun 認定申請時区分,
             HikiwatashiKubun 引渡し区分, RDateTime 引渡し日時,
             SaiSoufuKubun 再送付区分, SaiChousaSoufuKubun 再調査送付区分,
             SaiIkenshoSoufuKubun 再意見書送付区分) throws NullPointerException {
         Objects.requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
+        Objects.requireNonNull(処理日時, Messages.E00003.replace("処理日時", getClass().getName()).getMessage());
         Objects.requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", getClass().getName()).getMessage());
         Objects.requireNonNull(認定申請時区分, Messages.E00003.replace("認定申請時区分", getClass().getName()).getMessage());
         Objects.requireNonNull(引渡し区分, Messages.E00003.replace("引渡し区分", getClass().getName()).getMessage());
@@ -57,6 +61,7 @@ public class RenkeiyoDataSofuKiroku {
         Objects.requireNonNull(再送付区分, Messages.E00003.replace("再送付区分", getClass().getName()).getMessage());
 
         this.申請書管理番号 = 申請書管理番号;
+        this.処理日時 = 処理日時;
         this.被保険者番号 = 被保険者番号;
         this.認定申請時区分 = 認定申請時区分;
         this.引渡し区分 = 引渡し区分;
@@ -73,6 +78,15 @@ public class RenkeiyoDataSofuKiroku {
      */
     public ShinseishoKanriNo get申請書管理番号() {
         return 申請書管理番号;
+    }
+
+    /**
+     * 処理日時を取得します。
+     *
+     * @return 処理日時
+     */
+    public YMDHMS get処理日時() {
+        return 処理日時;
     }
 
     /**

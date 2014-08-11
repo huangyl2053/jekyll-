@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
 import jp.co.ndensan.reams.ur.urz.business._KaigoServiceShurui;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -47,6 +48,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
 
     private static NinteiKekkaMapper sut;
     private static final ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(new RString("1234567890"));
+    private static final YMDHMS 処理日時 = new YMDHMS(new RString("20140808102030"));
     private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
     private static final KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("1000000000"));
     private static final FlexibleDate 要介護度認定年月日 = new FlexibleDate("20140101");
@@ -97,6 +99,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
     private static final FlexibleDate 認定取消年月日 = new FlexibleDate("20140505");
     private static final TsuchiKubun 通知区分 = TsuchiKubun.認定;
     private static final RString 認定理由 = new RString("認定理由");
+    private static final FlexibleDate IF送付年月日 = new FlexibleDate("20140601");
 
     public static class toNinteiResult extends DbeTestBase {
 

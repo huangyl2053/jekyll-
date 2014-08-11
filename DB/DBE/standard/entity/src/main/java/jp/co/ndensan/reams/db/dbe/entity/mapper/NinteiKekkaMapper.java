@@ -88,6 +88,7 @@ public final class NinteiKekkaMapper {
         }
         return new NinteiResult(
                 entity.getShinseishoKanriNo(),
+                entity.getShoriTimestamp(),
                 entity.getShoKisaiHokenshaNo(),
                 entity.getHihokenshaNo(),
                 entity.getYoukaigodoNinteiYMD(),
@@ -129,7 +130,8 @@ public final class NinteiKekkaMapper {
                 new NinteiResultIdo(NinteiResultIdoJiyuKubun.toValue(entity.getNinteiKekkaIdoJiyu()), entity.getNinteiKekkaIdoYMD()),
                 new NinteiTorikeshi(entity.getNinteiTorikeshiRiyu(), entity.getNinteiTorikeshiYMD()),
                 TsuchiKubun.toValue(entity.getTuchiKubun()),
-                entity.getNinteiRiyu());
+                entity.getNinteiRiyu(),
+                entity.getIfSofuYMD());
     }
 
     private static YokaigoJotai create要介護状態(DbT5002NinteiKekkaJohoEntity entity) {
@@ -163,6 +165,7 @@ public final class NinteiKekkaMapper {
     public static DbT5002NinteiKekkaJohoEntity toDbT5002NinteiKekkaJohoEntity(NinteiResult ninteiResult) {
         DbT5002NinteiKekkaJohoEntity entity = new DbT5002NinteiKekkaJohoEntity();
         entity.setShinseishoKanriNo(ninteiResult.get申請書管理番号());
+        entity.setShoriTimestamp(ninteiResult.get処理日時());
         entity.setShoKisaiHokenshaNo(ninteiResult.get証記載保険者番号());
         entity.setHihokenshaNo(ninteiResult.get被保険者番号());
         entity.setYoukaigodoNinteiYMD(ninteiResult.get要介護度認定年月日());
@@ -185,6 +188,7 @@ public final class NinteiKekkaMapper {
         entity.setTuchiKubun(ninteiResult.get通知区分().getCode());
         entity.setNinteiRiyu(ninteiResult.get認定理由());
         entity.setShinsakaiMemo(ninteiResult.get認定審査会意見().get審査会メモ());
+        entity.setIfSofuYMD(ninteiResult.getIF送付年月日());
         return entity;
     }
 }

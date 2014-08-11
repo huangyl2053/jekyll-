@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -10,16 +6,21 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 
 /**
  * DbT5022RenkeiyoDataSofuKirokuの項目定義クラスです
  *
  */
 public class DbT5022RenkeiyoDataSofuKirokuEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5022RenkeiyoDataSofuKiroku");
+
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
     private RString insertReamsLoginId;
@@ -29,8 +30,10 @@ public class DbT5022RenkeiyoDataSofuKirokuEntity implements IDbAccessable {
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private RString shinseishoKanriNo;
-    private RString hihokenshaNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
+    @PrimaryKey
+    private YMDHMS shoriTimestamp;
+    private KaigoHihokenshaNo hihokenshaNo;
     private RString ninteiShinseiShinseijiKubun;
     private RString hikiwatashiKubun;
     private RDateTime hikiwatashiNichiji;
@@ -88,7 +91,7 @@ public class DbT5022RenkeiyoDataSofuKirokuEntity implements IDbAccessable {
      *
      * @return shinseishoKanriNo
      */
-    public RString getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
@@ -97,8 +100,26 @@ public class DbT5022RenkeiyoDataSofuKirokuEntity implements IDbAccessable {
      *
      * @param shinseishoKanriNo shinseishoKanriNo
      */
-    public void setShinseishoKanriNo(RString shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
+    }
+
+    /**
+     * getShoriTimestamp
+     *
+     * @return shoriTimestamp
+     */
+    public YMDHMS getShoriTimestamp() {
+        return shoriTimestamp;
+    }
+
+    /**
+     * setShoriTimestamp
+     *
+     * @param shoriTimestamp shoriTimestamp
+     */
+    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
+        this.shoriTimestamp = shoriTimestamp;
     }
 
     /**
@@ -106,7 +127,7 @@ public class DbT5022RenkeiyoDataSofuKirokuEntity implements IDbAccessable {
      *
      * @return hihokenshaNo
      */
-    public RString getHihokenshaNo() {
+    public KaigoHihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
@@ -115,7 +136,7 @@ public class DbT5022RenkeiyoDataSofuKirokuEntity implements IDbAccessable {
      *
      * @param hihokenshaNo hihokenshaNo
      */
-    public void setHihokenshaNo(RString hihokenshaNo) {
+    public void setHihokenshaNo(KaigoHihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -226,5 +247,26 @@ public class DbT5022RenkeiyoDataSofuKirokuEntity implements IDbAccessable {
     public void setSaiIkenshoSoufuKubun(RString saiIkenshoSoufuKubun) {
         this.saiIkenshoSoufuKubun = saiIkenshoSoufuKubun;
     }
+
+    /**
+     * このエンティティの主キーが他の{@literal DbT5022RenkeiyoDataSofuKirokuEntity}と等しいか判定します。
+     *
+     * @param other 比較するエンティティ
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5022RenkeiyoDataSofuKirokuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     */
+    public boolean equalsPrimaryKeys(DbT5022RenkeiyoDataSofuKirokuEntity other) {
+        if (other == null) {
+            return false;
+        }
+        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
+            return false;
+        }
+        if (!Objects.equals(this.shoriTimestamp, other.shoriTimestamp)) {
+            return false;
+        }
+        return true;
+    }
+
 // </editor-fold>
 }

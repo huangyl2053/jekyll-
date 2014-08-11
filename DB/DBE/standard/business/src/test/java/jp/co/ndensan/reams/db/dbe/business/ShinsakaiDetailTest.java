@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKyukaiKubun
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -44,6 +45,7 @@ public class ShinsakaiDetailTest {
     private static FlexibleDate 審査会資料作成年月日;
     private static ShinsakaiKyukaiKubun 休会区分;
     private static int 審査会割当済み人数;
+    private static Code 資料作成区分;
 
     public static class 審査会情報Builderコンストラクタのテスト extends DbeTestBase {
 
@@ -64,6 +66,7 @@ public class ShinsakaiDetailTest {
             審査会資料作成年月日 = new FlexibleDate("19901010");
             休会区分 = ShinsakaiKyukaiKubun.休会;
             審査会割当済み人数 = 9;
+            資料作成区分 = new Code("0");
         }
 
         @Test(expected = NullPointerException.class)
@@ -155,11 +158,12 @@ public class ShinsakaiDetailTest {
             審査会資料作成年月日 = new FlexibleDate("19901010");
             休会区分 = ShinsakaiKyukaiKubun.休会;
             審査会割当済み人数 = 9;
+            資料作成区分 = new Code(new RString("0"));
 
             sut = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
         }
 
         @Test
@@ -167,7 +171,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(true));
         }
 
@@ -186,7 +190,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(new ShinsakaiKaisaiNo(34), 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(false));
         }
 
@@ -195,7 +199,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, FlexibleDate.EMPTY, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(false));
         }
 
@@ -204,7 +208,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, new TimeString("0012"), 審査会終了時間, 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(false));
         }
 
@@ -213,7 +217,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, new TimeString("0001"), 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(false));
         }
 
@@ -222,7 +226,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, ShinsakaiMockBusinessCreator.create合議体情報(24))
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(false));
         }
 
@@ -231,7 +235,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(ShinsakaiMockBusinessCreator.create審査会開催場所("1")).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員)
                     .set審査会自動割当定員(審査会自動割当定員).set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(false));
         }
 
@@ -240,7 +244,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(99).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(false));
         }
 
@@ -249,7 +253,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(99).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(false));
         }
 
@@ -258,7 +262,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(99)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(false));
         }
 
@@ -267,7 +271,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(99).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(false));
         }
 
@@ -276,7 +280,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(GogitaiSeishinkaIshiSonzaiKubun.存在).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(false));
         }
 
@@ -285,7 +289,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(GogitaiDummyKubun.正規)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(false));
         }
 
@@ -294,7 +298,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(new FlexibleDate("29991212")).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(new FlexibleDate("29991212")).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(false));
         }
 
@@ -303,7 +307,7 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(ShinsakaiKyukaiKubun.開催).set審査会割当済み人数(審査会割当済み人数).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(ShinsakaiKyukaiKubun.開催).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(資料作成区分).build();
             assertThat(sut.equals(sut2), is(false));
         }
 
@@ -312,7 +316,16 @@ public class ShinsakaiDetailTest {
             sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
                     .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
-                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(99).build();
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(99).set資料作成区分(資料作成区分).build();
+            assertThat(sut.equals(sut2), is(false));
+        }
+
+        @Test
+        public void 資料作成区分が違う値の場合_falseが返る() {
+            sut2 = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
+                    .set審査会開催場所(開催場所).set審査会予定定員(審査会予定定員).set審査会最大定員(審査会最大定員).set審査会自動割当定員(審査会自動割当定員)
+                    .set審査会委員定員(審査会委員定員).set精神科医存在区分(精神科医師存在区分).set合議体ダミー区分(ダミー区分)
+                    .set審査会資料作成年月日(審査会資料作成年月日).set審査会休会区分(休会区分).set審査会割当済み人数(審査会割当済み人数).set資料作成区分(new Code(new RString("5"))).build();
             assertThat(sut.equals(sut2), is(false));
         }
     }

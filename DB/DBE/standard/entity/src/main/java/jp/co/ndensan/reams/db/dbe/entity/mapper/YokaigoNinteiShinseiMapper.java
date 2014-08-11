@@ -40,6 +40,7 @@ public final class YokaigoNinteiShinseiMapper {
     public static YokaigoNinteiShinsei toYokaigoNinteiShinsei(DbT5001NinteiShinseiJohoEntity entity) {
         return new YokaigoNinteiShinsei(
                 entity.getShinseishoKanriNo(),
+                entity.getShoriTimestamp(),
                 entity.getShoKisaiHokenshaNo(),
                 entity.getShishoCode(),
                 entity.getHihokenshaNo(),
@@ -67,7 +68,8 @@ public final class YokaigoNinteiShinseiMapper {
                         ShinsaKeizokuKubun.toValue(entity.getShinsaKeizokuKubun())
                 ),
                 //TODO n3327 三浦凌 ShinsakaiYusenWaritukeKubunがentityに存在しない。自動生成のために、DBのテーブルを修正する必要がある。
-                ShinsakaiYusenWaritsukeKubun.defaultValue()
+                ShinsakaiYusenWaritsukeKubun.defaultValue(),
+                entity.getIfSofuYMD()
         );
     }
 
@@ -80,6 +82,7 @@ public final class YokaigoNinteiShinseiMapper {
     public static DbT5001NinteiShinseiJohoEntity toDbT5001NinteiShinseiJohoEntity(YokaigoNinteiShinsei yokaigoNinteiShinsei) {
         DbT5001NinteiShinseiJohoEntity entity = new DbT5001NinteiShinseiJohoEntity();
         entity.setShinseishoKanriNo(yokaigoNinteiShinsei.get申請書管理番号());
+        entity.setShoriTimestamp(yokaigoNinteiShinsei.get処理日時());
         entity.setNinteichosaIraiRirekiNo(yokaigoNinteiShinsei.get認定調査依頼履歴番号().value());
         entity.setShoKisaiHokenshaNo(yokaigoNinteiShinsei.get証記載保険者番号());
         entity.setShishoCode(yokaigoNinteiShinsei.get支所コード());
@@ -106,6 +109,7 @@ public final class YokaigoNinteiShinseiMapper {
         entity.setTorisageRiyu(yokaigoNinteiShinsei.get認定申請取下げ().get取下げ理由().asRString());
         entity.setTorisageYMD(yokaigoNinteiShinsei.get認定申請取下げ().get取下げ年月日());
         entity.setShinsaKeizokuKubun(yokaigoNinteiShinsei.get認定申請取下げ().get申請継続区分().is継続());
+        entity.setIfSofuYMD(yokaigoNinteiShinsei.getIF送付年月日());
         return entity;
     }
 }

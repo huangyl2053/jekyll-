@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunSh
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -33,8 +34,9 @@ public class DbT5001NinteiShinseiJohoEntityMock {
     public static DbT5001NinteiShinseiJohoEntity getEntity() {
         DbT5001NinteiShinseiJohoEntity entity = new DbT5001NinteiShinseiJohoEntity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(RString.EMPTY));
+        entity.setShoriTimestamp(new YMDHMS("20140808102030"));
         entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("000000")));
-        entity.setShishoCode(ShishoCode.NULL_VALUE);
+        entity.setShishoCode(new ShishoCode(new RString("0")));
         entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0000000001")));
         entity.setShikibetsuCode(new ShikibetsuCode("1"));
         entity.setNinteiShinseiYMD(FlexibleDate.getNowDate());
@@ -48,6 +50,7 @@ public class DbT5001NinteiShinseiJohoEntityMock {
         entity.setNinteichosaIraiRirekiNo(0);
         entity.setIkenshoIraiRirekiNo(0);
         entity.setNinteichosaShikibetsuCode(new Code(""));
+        entity.setIfSofuYMD(FlexibleDate.EMPTY);
         return entity;
     }
 }

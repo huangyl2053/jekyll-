@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteichosaTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaTokkijikoDac;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
@@ -138,13 +139,14 @@ public class NinteichosaTokkijikoManagerTest extends TestBase {
         }
     }
 
-    private static NinteichosaTokkijiko create認定調査特記事項(String 申請書管理番号, int 認定調査依頼履歴番号, String 特記事項) {
+    private static NinteichosaTokkijiko create認定調査特記事項(String 申請書管理番号, int 認定調査依頼履歴番号,
+            Code 原本マスク区分, String 特記事項) {
         return new NinteichosaTokkijiko(new ShinseishoKanriNo(new RString(申請書管理番号)),
-                new NinteichosaIraiRirekiNo(認定調査依頼履歴番号), new RString("B001"), new RString(特記事項));
+                new NinteichosaIraiRirekiNo(認定調査依頼履歴番号), new RString("B001"), 原本マスク区分, new RString(特記事項));
     }
 
     private static NinteichosaTokkijiko create認定調査特記事項() {
-        return create認定調査特記事項("A001", 1, "特記事項を記入しましょう");
+        return create認定調査特記事項("A001", 1, new Code(new RString("1")), "特記事項を記入しましょう");
     }
 
     private static DbT5010NinteichosaTokkijikoEntity create認定調査特記事項Entity(String 申請書管理番号, int 認定調査依頼履歴番号, String 特記事項) {
@@ -152,6 +154,7 @@ public class NinteichosaTokkijikoManagerTest extends TestBase {
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString(申請書管理番号)));
         entity.setNinteichosaRirekiNo(new NinteichosaIraiRirekiNo(認定調査依頼履歴番号));
         entity.setNinteichosaTokkijikoNo(new RString("B001"));
+        entity.setGenponMaskKubun(new Code(new RString("1")));
         entity.setNinteichosaTokkijiko(new RString(特記事項));
         return entity;
     }

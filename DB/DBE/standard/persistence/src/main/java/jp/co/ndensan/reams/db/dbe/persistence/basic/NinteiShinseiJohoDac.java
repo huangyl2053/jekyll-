@@ -14,9 +14,10 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorForAddType;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定申請情報テーブルから情報を取得するクラスです。
@@ -30,7 +31,7 @@ public class NinteiShinseiJohoDac implements INinteiShinseiJohoDac {
 
     @Override
     public DbT5001NinteiShinseiJohoEntity select(ShinseishoKanriNo 申請書管理番号) {
-        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
                 .where(eq(shinseishoKanriNo, 申請書管理番号))
@@ -39,36 +40,38 @@ public class NinteiShinseiJohoDac implements INinteiShinseiJohoDac {
 
     @Override
     public List<DbT5001NinteiShinseiJohoEntity> selectAllBy認定申請年月日(ShoKisaiHokenshaNo 証記載保険者番号, Range<RDate> 認定申請年月日範囲) {
-        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
                 .where(and(eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                eq(torisageYMD, FlexibleDate.MIN),
-                leq(認定申請年月日範囲.getFrom().toDateString(), ninteiShinseiYMD),
-                leq(ninteiShinseiYMD, 認定申請年月日範囲.getTo().toDateString())))
+                                eq(torisageYMD, FlexibleDate.MIN),
+                                leq(認定申請年月日範囲.getFrom().toDateString(), ninteiShinseiYMD),
+                                leq(ninteiShinseiYMD, 認定申請年月日範囲.getTo().toDateString())))
                 .toList(DbT5001NinteiShinseiJohoEntity.class);
     }
 
     @Override
     public List<DbT5001NinteiShinseiJohoEntity> selectAllBy取下げ年月日(ShoKisaiHokenshaNo 証記載保険者番号, Range<RDate> 取下げ年月日範囲) {
-        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
                 .where(and(eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                not(eq(torisageYMD, FlexibleDate.MIN)),
-                leq(取下げ年月日範囲.getFrom().toDateString(), torisageYMD),
-                leq(torisageYMD, 取下げ年月日範囲.getTo().toDateString())))
+                                not(eq(torisageYMD, FlexibleDate.MIN)),
+                                leq(取下げ年月日範囲.getFrom().toDateString(), torisageYMD),
+                                leq(torisageYMD, 取下げ年月日範囲.getTo().toDateString())))
                 .toList(DbT5001NinteiShinseiJohoEntity.class);
     }
 
-//    @Override
-//    public int update(DbT5001NinteiShinseiJohoEntity entity) {
-//        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
-//        return accessor.update(entity).execute();
-//    }
+    @Transaction
+    public int update(DbT5001NinteiShinseiJohoEntity entity) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.update(entity).execute();
+    }
+
     @Override
+    @Transaction
     public int insert(DbT5001NinteiShinseiJohoEntity entity) {
-        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 }

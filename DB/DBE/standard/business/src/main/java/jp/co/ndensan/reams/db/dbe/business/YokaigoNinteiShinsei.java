@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunSh
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class YokaigoNinteiShinsei {
 
     private final ShinseishoKanriNo 申請書管理番号;
+    private final YMDHMS 処理日時;
     private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final ShishoCode 支所コード;
     private final KaigoHihokenshaNo 被保番号;
@@ -48,11 +50,13 @@ public class YokaigoNinteiShinsei {
     private final RString 市町村連絡事項;
     private final NinteiShinseiTorisage 認定申請取下げ;
     private final ShinsakaiYusenWaritsukeKubun 審査会優先割付区分;
+    private final FlexibleDate IF送付年月日;
 
     /**
      * 引数からメンバを受け取るコンストラクタです。
      *
      * @param 申請書管理番号 申請書管理番号
+     * @param 処理日時 処理日時
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
      * @param 被保番号 被保番号
@@ -73,14 +77,16 @@ public class YokaigoNinteiShinsei {
      * @param is施設入所 施設入所
      * @param 市町村連絡事項 市町村連絡事項
      * @param 認定申請取下げ 認定申請取下げ
+     * @param IF送付年月日 IF送付年月日
      */
-    public YokaigoNinteiShinsei(ShinseishoKanriNo 申請書管理番号, ShoKisaiHokenshaNo 証記載保険者番号, ShishoCode 支所コード,
+    public YokaigoNinteiShinsei(ShinseishoKanriNo 申請書管理番号, YMDHMS 処理日時, ShoKisaiHokenshaNo 証記載保険者番号, ShishoCode 支所コード,
             KaigoHihokenshaNo 被保番号, ShikibetsuCode 識別コード, FlexibleDate 認定申請年月日, EdabanCode 枝番コード,
             Code 認定申請区分_申請時, Code 認定申請区分_法令, Code 認定申請有効区分, Code 要支援申請区分, NinteiShinseiRiyu 認定申請理由,
             NinteiResultSimple 前回認定結果, boolean 情報提供への同意有無, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
             int 意見書依頼履歴番号, Code みなし要介護区分コード, boolean 延期通知発行同意有無, boolean is施設入所,
-            RString 市町村連絡事項, NinteiShinseiTorisage 認定申請取下げ, ShinsakaiYusenWaritsukeKubun 審査会優先割付区分) {
+            RString 市町村連絡事項, NinteiShinseiTorisage 認定申請取下げ, ShinsakaiYusenWaritsukeKubun 審査会優先割付区分, FlexibleDate IF送付年月日) {
         this.申請書管理番号 = 申請書管理番号;
+        this.処理日時 = 処理日時;
         this.証記載保険者番号 = 証記載保険者番号;
         this.支所コード = 支所コード;
         this.被保番号 = 被保番号;
@@ -102,6 +108,7 @@ public class YokaigoNinteiShinsei {
         this.市町村連絡事項 = 市町村連絡事項;
         this.認定申請取下げ = 認定申請取下げ;
         this.審査会優先割付区分 = 審査会優先割付区分;
+        this.IF送付年月日 = IF送付年月日;
     }
 
     /**
@@ -111,6 +118,15 @@ public class YokaigoNinteiShinsei {
      */
     public ShinseishoKanriNo get申請書管理番号() {
         return 申請書管理番号;
+    }
+
+    /**
+     * 処理日時を返します。
+     *
+     * @return 処理日時
+     */
+    public YMDHMS get処理日時() {
+        return 処理日時;
     }
 
     /**
@@ -300,5 +316,14 @@ public class YokaigoNinteiShinsei {
      */
     public ShinsakaiYusenWaritsukeKubun get審査会優先割付区分() {
         return this.審査会優先割付区分;
+    }
+
+    /**
+     * IF送付年月日を返します。
+     *
+     * @return IF送付年月日
+     */
+    public FlexibleDate getIF送付年月日() {
+        return IF送付年月日;
     }
 }

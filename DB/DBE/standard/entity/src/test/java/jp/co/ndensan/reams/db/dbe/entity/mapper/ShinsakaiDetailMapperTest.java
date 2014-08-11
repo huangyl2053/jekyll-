@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -50,6 +51,7 @@ public class ShinsakaiDetailMapperTest {
     private static ShinsakaiKyukaiKubun 休会区分_開催 = ShinsakaiKyukaiKubun.開催;
     private static FlexibleDate 審査会資料作成年月日_20090101 = new FlexibleDate("20090101");
     private static int 審査会割当済み人数_5 = 5;
+    private static Code 資料作成区分 = new Code("0");
 
     public static class to審査会情報のテスト extends DbeTestBase {
 
@@ -63,7 +65,7 @@ public class ShinsakaiDetailMapperTest {
             審査会情報Entity = ShinsakaiMockEntityCreator.create審査会情報Entity(開催番号_1, 開催年月日_19990101,
                     合議体番号_22, 開始時間_0830, 終了時間_1730, 開催場所番号_A001, 審査会予定定員_6, 審査会最大定員_7,
                     審査会自動割当定員_8, 審査会委員定員_9, 精神科医存在区分_存在, 合議体ダミー区分_正規, 休会区分_開催,
-                    審査会資料作成年月日_20090101, 審査会割当済み人数_5);
+                    審査会資料作成年月日_20090101, 審査会割当済み人数_5, 資料作成区分);
             開催場所 = ShinsakaiMockBusinessCreator.create審査会開催場所(開催場所番号_A001.value().toString());
             合議体情報 = ShinsakaiMockBusinessCreator.create合議体情報(合議体番号_22.value());
             result = ShinsakaiDetailMapper.to審査会情報(審査会情報Entity, 開催場所, 合議体情報);
@@ -161,6 +163,11 @@ public class ShinsakaiDetailMapperTest {
         public void to審査会情報で返された審査会情報が持つ_審査会割当済み人数は_5になる() {
             assertThat(result.get審査会割当済み人数(), is(審査会割当済み人数_5));
         }
+
+        @Test
+        public void to審査会情報で返された審査会情報が持つ_資料作成区分は_0になる() {
+            assertThat(result.get資料作成区分(), is(資料作成区分));
+        }
     }
 
     public static class to審査会情報Entityのテスト extends DbeTestBase {
@@ -176,7 +183,7 @@ public class ShinsakaiDetailMapperTest {
                     .set審査会予定定員(審査会予定定員_6).set審査会最大定員(審査会最大定員_7).set審査会自動割当定員(審査会自動割当定員_8)
                     .set審査会委員定員(審査会委員定員_9).set精神科医存在区分(精神科医存在区分_存在)
                     .set合議体ダミー区分(合議体ダミー区分_正規).set審査会資料作成年月日(審査会資料作成年月日_20090101)
-                    .set審査会休会区分(休会区分_開催).set審査会割当済み人数(審査会割当済み人数_5).build();
+                    .set審査会休会区分(休会区分_開催).set審査会割当済み人数(審査会割当済み人数_5).set資料作成区分(資料作成区分).build();
             result = ShinsakaiDetailMapper.to審査会情報Entity(審査会情報);
         }
 
@@ -258,6 +265,11 @@ public class ShinsakaiDetailMapperTest {
         @Test
         public void 戻り値の審査会情報Entityが持つ_割当済み人数は_5になる() {
             assertThat(result.getShinsakaiWariateZumiNinzu(), is(審査会割当済み人数_5));
+        }
+
+        @Test
+        public void 戻り値の審査会情報Entityが持つ_資料作成区分は_0になる() {
+            assertThat(result.getShiryoSakuseiKubun(), is(資料作成区分));
         }
     }
 }

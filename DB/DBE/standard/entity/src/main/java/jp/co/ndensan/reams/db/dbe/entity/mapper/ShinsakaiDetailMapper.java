@@ -55,7 +55,8 @@ public final class ShinsakaiDetailMapper {
                 .set合議体ダミー区分(GogitaiDummyKubun.toValue(審査会Entity.getGogitaiDummyFlag()))
                 .set審査会資料作成年月日(審査会Entity.getShinsakaiShiryoSakuseiYMD())
                 .set審査会休会区分(ShinsakaiKyukaiKubun.toValue(審査会Entity.getShinsakaiKyukaiFlag()))
-                .set審査会割当済み人数(審査会Entity.getShinsakaiWariateZumiNinzu()).build();
+                .set審査会割当済み人数(審査会Entity.getShinsakaiWariateZumiNinzu())
+                .set資料作成区分(審査会Entity.getShiryoSakuseiKubun()).build();
     }
 
     /**
@@ -84,6 +85,7 @@ public final class ShinsakaiDetailMapper {
         entity.setShinsakaiShiryoSakuseiYMD(審査会情報.get審査会資料作成年月日());
         entity.setShinsakaiKyukaiFlag(審査会情報.is休会());
         entity.setShinsakaiWariateZumiNinzu(審査会情報.get審査会割当済み人数());
+        entity.setShiryoSakuseiKubun(審査会情報.get資料作成区分());
         return entity;
     }
 }

@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
@@ -129,20 +130,21 @@ public class NinteichosaTokkijikoListTest extends TestBase {
         }
     }
 
-    private static NinteichosaTokkijiko create認定調査特記事項(int 認定調査依頼履歴番号, int 特記事項番号, String 特記事項) {
+    private static NinteichosaTokkijiko create認定調査特記事項(int 認定調査依頼履歴番号, int 特記事項番号, Code 原本マスク区分, String 特記事項) {
         return new NinteichosaTokkijiko(new ShinseishoKanriNo(new RString("A001")),
                 new NinteichosaIraiRirekiNo(認定調査依頼履歴番号),
                 new RString(Integer.toString(特記事項番号)),
+                原本マスク区分,
                 new RString(特記事項));
     }
 
     private static List<NinteichosaTokkijiko> create5件のリスト() {
         List<NinteichosaTokkijiko> list = new ArrayList<>();
-        list.add(create認定調査特記事項(1, 1, "特記その1"));
-        list.add(create認定調査特記事項(2, 1, "特記その2"));
-        list.add(create認定調査特記事項(1, 2, "特記その3"));
-        list.add(create認定調査特記事項(1, 3, "特記その4"));
-        list.add(create認定調査特記事項(2, 2, "特記その5"));
+        list.add(create認定調査特記事項(1, 1, new Code("1"), "特記その1"));
+        list.add(create認定調査特記事項(2, 1, new Code("1"), "特記その2"));
+        list.add(create認定調査特記事項(1, 2, new Code("1"), "特記その3"));
+        list.add(create認定調査特記事項(1, 3, new Code("1"), "特記その4"));
+        list.add(create認定調査特記事項(2, 2, new Code("1"), "特記その5"));
         return list;
     }
 }

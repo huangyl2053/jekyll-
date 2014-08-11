@@ -1,0 +1,7 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,A
+torikomiChoyoIDCode,UDD035Code,Code,,,,,A
+maskDataKubun,bpchar,RString,,,,,A
+torikomiPageNo,int2,int,,,,,A
+iraiRirekiNo,int2,int,,,,,A
+ninteiShinseiNen,int4,int,,,,,A
+fileHaichiBasho,text,RString,,,,,A
