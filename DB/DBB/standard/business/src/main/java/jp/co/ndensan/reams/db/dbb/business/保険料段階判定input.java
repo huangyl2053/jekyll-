@@ -11,9 +11,9 @@ package jp.co.ndensan.reams.db.dbb.business;
  * @author n3336
  */
 public class 保険料段階判定input {
-    public String 賦課年度;
-    public NengakuFukaKonkyo 年額賦課根拠;
-    public NengakuSeigyoJoho 年額制御情報;
+    private String 賦課年度;
+    private NengakuFukaKonkyo 年額賦課根拠;
+    private NengakuSeigyoJoho 年額制御情報;
 
     public String get賦課年度() {
         return 賦課年度;
