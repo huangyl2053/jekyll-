@@ -139,8 +139,8 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
         }
 
         @Test
-        public void 引き渡した_認定調査委託先の証記載保険者番号_とtoNinteichosaIraiTaishoshaの結果は一致する() {
-            assertThat(sut.get認定調査委託先().get証記載保険者番号(), is(認定調査委託先.get証記載保険者番号()));
+        public void 引き渡した_認定調査委託先の市町村コード_とtoNinteichosaIraiTaishoshaの結果は一致する() {
+            assertThat(sut.get認定調査委託先().getShichosonCode(), is(認定調査委託先.getShichosonCode()));
         }
 
         @Test

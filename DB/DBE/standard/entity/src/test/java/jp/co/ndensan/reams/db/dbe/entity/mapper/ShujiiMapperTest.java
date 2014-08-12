@@ -9,11 +9,10 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT7012ShujiiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-//import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,8 +33,8 @@ public class ShujiiMapperTest extends DbeTestBase {
     public static class toShujii extends DbeTestBase {
 
         @Test
-        public void 証記載保険者番号の設定がある時_toShujii_get証記載保険者番号は_設定値を返す() {
-            assertThat(createShujii().get証記載保険者番号().getValue(), is(new RString("証記載保険者番号")));
+        public void 市町村コードの設定がある時_toShujii_get市町村コードは_設定値を返す() {
+            assertThat(createShujii().get市町村コード().value(), is(new RString("000001")));
         }
 
         @Test
@@ -59,8 +58,8 @@ public class ShujiiMapperTest extends DbeTestBase {
         }
 
         @Test
-        public void 医師の状況の設定がある時_toShujii_is有効は_設定値を返す() {
-            assertThat(createShujii().is有効(), is(IshiJokyo.有効.is有効()));
+        public void 医師の状況の設定がある時_toShujii_get医師の状況は_設定値を返す() {
+            assertThat(createShujii().get医師の状況(), is(IshiJokyo.有効));
         }
 
         @Test
@@ -87,8 +86,8 @@ public class ShujiiMapperTest extends DbeTestBase {
     public static class toShujiiEntity extends DbeTestBase {
 
         @Test
-        public void 証記載保険者番号の設定がある時_toShujiiEntity_getShoKisaiHokenshaNoは_設定値を返す() {
-            assertThat(createShujiiEntity().getShoKisaiHokenshaNo(), is(new ShoKisaiHokenshaNo(new RString("証記載保険者番号"))));
+        public void 市町村コードの設定がある時_toShujiiEntity_getShoKisaiHokenshaNoは_設定値を返す() {
+            assertThat(createShujiiEntity().getShichosonCode(), is(new LasdecCode(new RString("000001"))));
         }
 
         @Test
@@ -114,7 +113,7 @@ public class ShujiiMapperTest extends DbeTestBase {
 
         @Test
         public void 医師の状況の設定がある時_toShujiiEntity_getShujiiJokyoは_設定値を返す() {
-            assertThat(createShujiiEntity().getShujiiJokyo(), is(IshiJokyo.有効.is有効()));
+            assertThat(createShujiiEntity().getShujiiJokyo(), is(IshiJokyo.有効.getCode()));
         }
 
         @Test

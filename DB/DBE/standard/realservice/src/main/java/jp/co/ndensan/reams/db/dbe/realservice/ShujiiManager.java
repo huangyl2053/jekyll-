@@ -44,14 +44,14 @@ public class ShujiiManager implements IShujiiManager {
     @Override
     public boolean saveAs有効(IShujii 主治医情報) {
         DbT7012ShujiiJohoEntity entity = ShujiiMapper.toEntity(主治医情報);
-        entity.setShujiiJokyo(IshiJokyo.有効.is有効());
+        entity.setShujiiJokyo(IshiJokyo.有効.getCode());
         return dac.insertOrUpdate(entity) != 0;
     }
 
     @Override
     public boolean saveAs無効(IShujii 主治医情報) {
         DbT7012ShujiiJohoEntity entity = ShujiiMapper.toEntity(主治医情報);
-        entity.setShujiiJokyo(IshiJokyo.無効.is有効());
+        entity.setShujiiJokyo(IshiJokyo.無効.getCode());
         return dac.insertOrUpdate(entity) != 0;
     }
 

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiIkenshoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.ShujiiIkenshoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -44,16 +45,19 @@ public class ShujiiIkenshoResultManager {
     /**
      * 引数の条件に該当する主治医意見書結果を取得します。
      *
+     * @param 市町村コード 市町村コード
      * @param 申請書管理番号 申請書管理番号
      * @param 意見書履歴番号 意見書履歴番号
      * @return 主治医意見書結果
      */
-    public ShujiiIkenshoResult get主治医意見書結果(ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書履歴番号) {
+    public ShujiiIkenshoResult get主治医意見書結果(
+            LasdecCode 市町村コード, ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書履歴番号) {
         ShujiiIkenshoEntity entity = dac.select(申請書管理番号, 意見書履歴番号);
         if (entity == null) {
             return null;
         }
-        return ShujiiIkenshoMapper.toShujiiIkenshoResult(entity, manager.get主治医意見書作成依頼情報(申請書管理番号, 意見書履歴番号).get介護医師());
+        return ShujiiIkenshoMapper.toShujiiIkenshoResult(entity, manager.get主治医意見書作成依頼情報(
+                市町村コード, 申請書管理番号, 意見書履歴番号).get介護医師());
     }
 
     /**

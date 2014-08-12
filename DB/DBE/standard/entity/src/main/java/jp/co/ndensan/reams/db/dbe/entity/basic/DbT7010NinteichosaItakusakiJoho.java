@@ -15,9 +15,9 @@ public enum DbT7010NinteichosaItakusakiJoho implements IColumnDefinition {
 //TODO 証記載保険者番号はILocalGovernmentCodeを使用するか検討する。 2014/02/14 期限
 
     /**
-     * 証記載保険者番号
+     * 市町村コード
      */
-    shoKisaiHokenshaNo(6, 0),
+    shichosonCode(6, 0),
     /**
      * 介護事業者番号
      */

@@ -1,9 +1,9 @@
-﻿shoKisaiHokenshaNo,varchar,ShoKisaiHokenshaNo,,,,,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
 kaigoIryokikanCode,varchar,KaigoIryoKikanCode,,,,,A
 kaigoIshiCode,varchar,RString,,,,,A
 iryokikanCode,varchar,RString,,,,,A
 ishiShikibetsuNo,varchar,RString,,,,,A
-shujiiJokyo,bool,boolean,,,,,A
+shujiiJokyo,bpchar,RString,,,,,A
 yubinNo,UDD003YubinNo,YubinNo,,,,,A
 jusho,UDD046AtenaJusho,AtenaJusho,,,,,A
 telNo,UDD026TelNo,TelNo,,,,,A

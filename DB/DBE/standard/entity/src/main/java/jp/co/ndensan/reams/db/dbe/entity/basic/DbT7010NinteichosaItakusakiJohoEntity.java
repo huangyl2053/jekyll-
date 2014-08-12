@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
@@ -28,7 +28,7 @@ public class DbT7010NinteichosaItakusakiJohoEntity implements IDbAccessable {
     @TableName
     public static final RString TABLE_NAME = new RString("T7010NinteichosaItakusakiJoho");
     @PrimaryKey
-    private ShoKisaiHokenshaNo 証記載保険者番号;
+    private LasdecCode 市町村コード;
     @PrimaryKey
     private KaigoJigyoshaNo 介護事業者番号;
     private JigyoshaNo 事業者番号;
@@ -47,7 +47,7 @@ public class DbT7010NinteichosaItakusakiJohoEntity implements IDbAccessable {
     /**
      * コンストラクタクラスです
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護事業者番号 介護事業者番号
      * @param 事業者番号 事業者番号
      * @param 介護事業者状況 介護事業者状況
@@ -56,10 +56,10 @@ public class DbT7010NinteichosaItakusakiJohoEntity implements IDbAccessable {
      * @param 割付地区 割付地区
      * @param 機関の区分 機関の区分
      */
-    public DbT7010NinteichosaItakusakiJohoEntity(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号,
+    public DbT7010NinteichosaItakusakiJohoEntity(LasdecCode 市町村コード, KaigoJigyoshaNo 介護事業者番号,
             JigyoshaNo 事業者番号, boolean 介護事業者状況, ChosaItakuKubun 調査委託区分,
             int 割付定員, RString 割付地区, RString 機関の区分) {
-        this.証記載保険者番号 = 証記載保険者番号;
+        this.市町村コード = 市町村コード;
         this.介護事業者番号 = 介護事業者番号;
         this.事業者番号 = 事業者番号;
         this.介護事業者状況 = 介護事業者状況;
@@ -76,7 +76,7 @@ public class DbT7010NinteichosaItakusakiJohoEntity implements IDbAccessable {
      * @param 認定調査委託先 認定調査委託先
      */
     public DbT7010NinteichosaItakusakiJohoEntity(NinteichosaItakusaki 認定調査委託先) {
-        this.証記載保険者番号 = 認定調査委託先.get証記載保険者番号();
+        this.市町村コード = 認定調査委託先.getShichosonCode();
         this.介護事業者番号 = 認定調査委託先.getKaigoJigyoshaNo();
         this.事業者番号 = 認定調査委託先.getJigyoshaNo();
         this.介護事業者状況 = 認定調査委託先.is有効();
@@ -88,12 +88,12 @@ public class DbT7010NinteichosaItakusakiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * 証記載保険者番号を返します
+     * 市町村コードを返します
      *
-     * @return 証記載保険者番号
+     * @return 市町村コード
      */
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return 証記載保険者番号;
+    public LasdecCode get市町村コード() {
+        return 市町村コード;
     }
 
     /**
@@ -160,12 +160,12 @@ public class DbT7010NinteichosaItakusakiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * 証記載保険者番号を設定します
+     * 市町村コードを設定します
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      */
-    public void set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
-        this.証記載保険者番号 = 証記載保険者番号;
+    public void set市町村コード(LasdecCode 市町村コード) {
+        this.市町村コード = 市町村コード;
     }
 
     /**

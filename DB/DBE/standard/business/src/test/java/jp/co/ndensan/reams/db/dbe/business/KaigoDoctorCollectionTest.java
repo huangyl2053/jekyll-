@@ -9,12 +9,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-//import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,25 +45,25 @@ public class KaigoDoctorCollectionTest extends DbeTestBase {
         @Test
         public void 介護医師情報が存在する時_get介護医師は_該当の介護医師情報を返す() {
             KaigoDoctorCollection sut = createKaigoDoctorList();
-            assertThat(sut.get介護医師(createShoKisaiHokenshaNo("S002"), createKaigoIryoKikanCode("K00A"), createKaigoDoctorCode("I0A2")).get介護医師コード().value(), is(new RString("I0A2")));
+            assertThat(sut.get介護医師(createShichosonCode("000002"), createKaigoIryoKikanCode("K00A"), createKaigoDoctorCode("I0A2")).get介護医師コード().value(), is(new RString("I0A2")));
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 証記載保険者番号が該当しない時_get介護医師は_IllegalArgumentExceptionを投げる() {
             KaigoDoctorCollection sut = createKaigoDoctorList();
-            sut.get介護医師(createShoKisaiHokenshaNo("S999"), createKaigoIryoKikanCode("K00A"), createKaigoDoctorCode("I0A2"));
+            sut.get介護医師(createShichosonCode("000999"), createKaigoIryoKikanCode("K00A"), createKaigoDoctorCode("I0A2"));
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 介護医療機関コードが該当しない時_get介護医師は_IllegalArgumentExceptionを投げる() {
             KaigoDoctorCollection sut = createKaigoDoctorList();
-            sut.get介護医師(createShoKisaiHokenshaNo("S002"), createKaigoIryoKikanCode("K999"), createKaigoDoctorCode("I0A2"));
+            sut.get介護医師(createShichosonCode("000002"), createKaigoIryoKikanCode("K999"), createKaigoDoctorCode("I0A2"));
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 介護医師コードが該当しない時_get介護医師は_IllegalArgumentExceptionを投げる() {
             KaigoDoctorCollection sut = createKaigoDoctorList();
-            sut.get介護医師(createShoKisaiHokenshaNo("S002"), createKaigoIryoKikanCode("K00A"), createKaigoDoctorCode("I999"));
+            sut.get介護医師(createShichosonCode("000002"), createKaigoIryoKikanCode("K00A"), createKaigoDoctorCode("I999"));
         }
     }
 
@@ -100,17 +99,17 @@ public class KaigoDoctorCollectionTest extends DbeTestBase {
 
     private static KaigoDoctorCollection createKaigoDoctorList() {
         List<KaigoDoctor> list = new ArrayList<>();
-        list.add(createKaigoDoctor("S001", "K00A", "I0A1"));
-        list.add(createKaigoDoctor("S002", "K00A", "I0A2"));
-        list.add(createKaigoDoctor("S003", "K00B", "I0B1"));
+        list.add(createKaigoDoctor("000001", "K00A", "I0A1"));
+        list.add(createKaigoDoctor("000002", "K00A", "I0A2"));
+        list.add(createKaigoDoctor("000003", "K00B", "I0B1"));
         return new KaigoDoctorCollection(list);
     }
 
-    private static KaigoDoctor createKaigoDoctor(String 証記載保険者番号, String 介護医療機関コード, String 介護医師コード) {
+    private static KaigoDoctor createKaigoDoctor(String 市町村コード, String 介護医療機関コード, String 介護医師コード) {
         return new KaigoDoctor(
                 mock(IDoctor.class),
                 new Shujii(
-                        createShoKisaiHokenshaNo(証記載保険者番号),
+                        createShichosonCode(市町村コード),
                         createKaigoIryoKikanCode(介護医療機関コード),
                         createKaigoDoctorCode(介護医師コード),
                         mock(IIryoKikanCode.class), new RString("1234"), IshiJokyo.有効,
@@ -118,8 +117,8 @@ public class KaigoDoctorCollectionTest extends DbeTestBase {
                 mock(KaigoIryoKikan.class));
     }
 
-    private static ShoKisaiHokenshaNo createShoKisaiHokenshaNo(String code) {
-        return new ShoKisaiHokenshaNo(new RString(code));
+    private static LasdecCode createShichosonCode(String code) {
+        return new LasdecCode(new RString(code));
     }
 
     private static KaigoIryoKikanCode createKaigoIryoKikanCode(String code) {

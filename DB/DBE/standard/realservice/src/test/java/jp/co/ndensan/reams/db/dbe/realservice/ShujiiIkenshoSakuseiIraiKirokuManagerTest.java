@@ -21,9 +21,9 @@ import jp.co.ndensan.reams.db.dbe.business.helper.YokaigoNinteiShinseiMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoSakuseiIraiMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -52,12 +52,12 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest extends DbeTestBase {
 
         @Test
         public void 該当の主治医意見書作成依頼情報が存在しない時_get主治医意見書作成依頼情報は_NULLを返す() {
-            assertThat(createManager(AS_情報0件).get主治医意見書作成依頼情報(createKanriNo(), createRirekiNo()), nullValue());
+            assertThat(createManager(AS_情報0件).get主治医意見書作成依頼情報(createShichosonCode(), createKanriNo(), createRirekiNo()), nullValue());
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が存在する時_get主治医意見書作成依頼情報は_該当の情報を返す() {
-            assertThat(createManager(AS_情報1件).get主治医意見書作成依頼情報(createKanriNo(), createRirekiNo()).get申請書管理番号(), is(createKanriNo()));
+            assertThat(createManager(AS_情報1件).get主治医意見書作成依頼情報(createShichosonCode(), createKanriNo(), createRirekiNo()).get申請書管理番号(), is(createKanriNo()));
         }
     }
 
@@ -65,17 +65,17 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest extends DbeTestBase {
 
         @Test
         public void 該当の主治医意見書作成依頼情報が0件の時_get主治医意見書作成依頼情報By申請書管理番号は_EMPTYを返す() {
-            assertThat(createManager(AS_情報0件).get主治医意見書作成依頼情報By申請書管理番号(createKanriNo()), is(Collections.EMPTY_LIST));
+            assertThat(createManager(AS_情報0件).get主治医意見書作成依頼情報By申請書管理番号(createShichosonCode(), createKanriNo()), is(Collections.EMPTY_LIST));
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が1件の時_get主治医意見書作成依頼情報By申請書管理番号は_1件の情報を返す() {
-            assertThat(createManager(AS_情報1件).get主治医意見書作成依頼情報By申請書管理番号(createKanriNo()).size(), is(1));
+            assertThat(createManager(AS_情報1件).get主治医意見書作成依頼情報By申請書管理番号(createShichosonCode(), createKanriNo()).size(), is(1));
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が2件の時_get主治医意見書作成依頼情報By申請書管理番号は_2件の情報を返す() {
-            assertThat(createManager(AS_情報2件).get主治医意見書作成依頼情報By申請書管理番号(createKanriNo()).size(), is(2));
+            assertThat(createManager(AS_情報2件).get主治医意見書作成依頼情報By申請書管理番号(createShichosonCode(), createKanriNo()).size(), is(2));
         }
     }
 
@@ -83,17 +83,17 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest extends DbeTestBase {
 
         @Test
         public void 該当の主治医意見書作成依頼情報が0件の時_get主治医意見書作成依頼情報By依頼年月日は_EMPTYを返す() {
-            assertThat(createManager(AS_情報0件).get主治医意見書作成依頼情報By依頼年月日(FlexibleDate.MAX), is(Collections.EMPTY_LIST));
+            assertThat(createManager(AS_情報0件).get主治医意見書作成依頼情報By依頼年月日(createShichosonCode(), FlexibleDate.MAX), is(Collections.EMPTY_LIST));
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が1件の時_get主治医意見書作成依頼情報By依頼年月日は_1件の情報を返す() {
-            assertThat(createManager(AS_情報1件).get主治医意見書作成依頼情報By依頼年月日(FlexibleDate.MAX).size(), is(1));
+            assertThat(createManager(AS_情報1件).get主治医意見書作成依頼情報By依頼年月日(createShichosonCode(), FlexibleDate.MAX).size(), is(1));
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が2件の時_get主治医意見書作成依頼情報By依頼年月日は_2件の情報を返す() {
-            assertThat(createManager(AS_情報2件).get主治医意見書作成依頼情報By依頼年月日(FlexibleDate.MAX).size(), is(2));
+            assertThat(createManager(AS_情報2件).get主治医意見書作成依頼情報By依頼年月日(createShichosonCode(), FlexibleDate.MAX).size(), is(2));
         }
     }
 
@@ -101,17 +101,17 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest extends DbeTestBase {
 
         @Test
         public void 該当の主治医意見書作成依頼情報が0件の時_get主治医意見書作成依頼情報By主治医情報は_EMPTYを返す() {
-            assertThat(createManager(AS_情報0件).get主治医意見書作成依頼情報By主治医情報(createKaigoIryoKikanCode(), createKaigoDoctorCode()), is(Collections.EMPTY_LIST));
+            assertThat(createManager(AS_情報0件).get主治医意見書作成依頼情報By主治医情報(createShichosonCode(), createKaigoIryoKikanCode(), createKaigoDoctorCode()), is(Collections.EMPTY_LIST));
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が1件の時_get主治医意見書作成依頼情報By主治医情報は_1件の情報を返す() {
-            assertThat(createManager(AS_情報1件).get主治医意見書作成依頼情報By主治医情報(createKaigoIryoKikanCode(), createKaigoDoctorCode()).size(), is(1));
+            assertThat(createManager(AS_情報1件).get主治医意見書作成依頼情報By主治医情報(createShichosonCode(), createKaigoIryoKikanCode(), createKaigoDoctorCode()).size(), is(1));
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が2件の時_get主治医意見書作成依頼情報By主治医情報は_2件の情報を返す() {
-            assertThat(createManager(AS_情報2件).get主治医意見書作成依頼情報By主治医情報(createKaigoIryoKikanCode(), createKaigoDoctorCode()).size(), is(2));
+            assertThat(createManager(AS_情報2件).get主治医意見書作成依頼情報By主治医情報(createShichosonCode(), createKaigoIryoKikanCode(), createKaigoDoctorCode()).size(), is(2));
         }
     }
 
@@ -119,17 +119,17 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest extends DbeTestBase {
 
         @Test
         public void 該当の主治医意見書作成依頼情報が0件の時_get主治医意見書作成依頼情報By督促年月日は_EMPTYを返す() {
-            assertThat(createManager(AS_情報0件).get主治医意見書作成依頼情報By督促年月日(FlexibleDate.MAX), is(Collections.EMPTY_LIST));
+            assertThat(createManager(AS_情報0件).get主治医意見書作成依頼情報By督促年月日(createShichosonCode(), FlexibleDate.MAX), is(Collections.EMPTY_LIST));
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が1件の時_get主治医意見書作成依頼情報By督促年月日は_1件の情報を返す() {
-            assertThat(createManager(AS_情報1件).get主治医意見書作成依頼情報By督促年月日(FlexibleDate.MAX).size(), is(1));
+            assertThat(createManager(AS_情報1件).get主治医意見書作成依頼情報By督促年月日(createShichosonCode(), FlexibleDate.MAX).size(), is(1));
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が2件の時_get主治医意見書作成依頼情報By督促年月日は_2件の情報を返す() {
-            assertThat(createManager(AS_情報2件).get主治医意見書作成依頼情報By督促年月日(FlexibleDate.MAX).size(), is(2));
+            assertThat(createManager(AS_情報2件).get主治医意見書作成依頼情報By督促年月日(createShichosonCode(), FlexibleDate.MAX).size(), is(2));
         }
     }
 
@@ -198,7 +198,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest extends DbeTestBase {
 
     private static KaigoDoctorManager createKaigoDoctorManager() {
         KaigoDoctorManager manager = mock(KaigoDoctorManager.class);
-        when(manager.get介護医師(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class))).thenReturn(KaigoDoctorMock.getSpiedInstance());
+        when(manager.get介護医師(any(LasdecCode.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class))).thenReturn(KaigoDoctorMock.getSpiedInstance());
         return manager;
     }
 
@@ -224,6 +224,10 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest extends DbeTestBase {
 
     private static DbT5001NinteiShinseiJohoEntity createShinseiEntity(int flg) {
         return flg == 0 ? null : DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance();
+    }
+
+    private static LasdecCode createShichosonCode() {
+        return new LasdecCode(new RString("000001"));
     }
 
     private static ShinseishoKanriNo createKanriNo() {

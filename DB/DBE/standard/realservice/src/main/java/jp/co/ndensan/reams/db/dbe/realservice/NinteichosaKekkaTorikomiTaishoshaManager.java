@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -78,39 +79,48 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     /**
      * 認定調査結果取込対象者を取得します。
      *
+     * @param 市町村コード 市町村コード
      * @return 認定調査結果取込対象者リスト
      */
-    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者() {
+    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者(
+            LasdecCode 市町村コード) throws NullPointerException {
+        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
         List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.selectAll();
-        return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
+
+        return create認定調査結果取込対象者List(市町村コード, torikomiTaishoshaEntityList);
     }
 
     /**
      * 証記載保険者番号を指定して、認定調査結果取込対象者を取得します。
      *
+     * @param 市町村コード 市町村コード
      * @param 証記載保険者番号 証記載保険者番号
      * @return 認定調査結果取込対象者リスト
      * @throws NullPointerException 引数がnullの場合
      */
-    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者(ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
+    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者(LasdecCode 市町村コード, ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
+        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
         requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
         List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select証記載保険者番号(証記載保険者番号);
-        return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
+        return create認定調査結果取込対象者List(市町村コード, torikomiTaishoshaEntityList);
     }
 
     /**
-     * 証記載保険者番号と支所コードを指定して、認定調査結果取込対象者を取得します。
+     * 市町村コードと証記載保険者番号と支所コードを指定して、認定調査結果取込対象者を取得します。
      *
+     * @param 市町村コード 市町村コード
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
      * @return 認定調査結果取込対象者リスト
      * @throws NullPointerException 引数がnullの場合
      */
-    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) throws NullPointerException {
+    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者(
+            LasdecCode 市町村コード, ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) throws NullPointerException {
+        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
         requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
         requireNonNull(支所コード, Messages.E00001.replace("支所コード").getMessage());
         List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select証記載保険者番号及び支所コード(証記載保険者番号, 支所コード);
-        return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
+        return create認定調査結果取込対象者List(市町村コード, torikomiTaishoshaEntityList);
     }
 
     /**
@@ -128,11 +138,12 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     }
 
     private List<NinteichosaKekkaTorikomiTaishosha> create認定調査結果取込対象者List(
+            LasdecCode 市町村コード,
             List<KaigoNinteiShoriTaishoshaEntity> entityList) {
         List<NinteichosaKekkaTorikomiTaishosha> list = new ArrayList<>();
 
         for (KaigoNinteiShoriTaishoshaEntity entity : entityList) {
-            list.add(create認定調査結果取込対象者(entity));
+            list.add(create認定調査結果取込対象者(市町村コード, entity));
         }
 
         if (list.isEmpty()) {
@@ -142,11 +153,13 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
         return list;
     }
 
-    private NinteichosaKekkaTorikomiTaishosha create認定調査結果取込対象者(KaigoNinteiShoriTaishoshaEntity entity) {
+    private NinteichosaKekkaTorikomiTaishosha create認定調査結果取込対象者(
+            LasdecCode 市町村コード,
+            KaigoNinteiShoriTaishoshaEntity entity) {
         YokaigoNinteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
         YokaigoNinteiShinsei 認定申請情報 = YokaigoNinteiShinseiMapper.toYokaigoNinteiShinsei(entity.getNinteiShinseiJohoEntity());
         NinteichosaIrai 認定調査依頼情報 = get認定調査依頼情報(認定進捗情報, 認定申請情報);
-        KaigoNinteichosain 介護認定調査員 = get介護認定調査員(認定申請情報, 認定調査依頼情報);
+        KaigoNinteichosain 介護認定調査員 = get介護認定調査員(市町村コード, 認定調査依頼情報);
         IKojin 個人 = get個人(認定申請情報);
         return new NinteichosaKekkaTorikomiTaishosha(
                 認定進捗情報,
@@ -169,10 +182,10 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     }
 
     private KaigoNinteichosain get介護認定調査員(
-            YokaigoNinteiShinsei shinseiJoho,
+            LasdecCode 市町村コード,
             NinteichosaIrai iraiJoho) {
         return kaigoNinteichosainManager.get介護認定調査員(
-                shinseiJoho.get証記載保険者番号(),
+                市町村コード,
                 iraiJoho.get認定調査委託先コード(),
                 new KaigoNinteichosainNo(iraiJoho.get調査員番号コード().value()));
     }

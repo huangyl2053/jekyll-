@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT7012ShujiiJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -16,7 +17,7 @@ public enum DbT7012ShujiiJoho implements IColumnDefinition {
     updateCount(10, 0),
     lastUpdateTimestamp(29, 0),
     lastUpdateReamsLoginId(2147483647, 0),
-    shoKisaiHokenshaNo(6, 0),
+    shichosonCode(6, 0),
     kaigoIryokikanCode(10, 0),
     kaigoIshiCode(10, 0),
     iryokikanCode(10, 0),
@@ -37,6 +38,7 @@ public enum DbT7012ShujiiJoho implements IColumnDefinition {
 
     /**
      * getMaxLength
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -45,6 +47,7 @@ public enum DbT7012ShujiiJoho implements IColumnDefinition {
 
     /**
      * getScale
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

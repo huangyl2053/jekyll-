@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiIkenshoIraiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -58,53 +59,63 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
     /**
      * 引数の条件に該当する主治医意見書作成依頼情報を取得します。
      *
+     * @param 市町村コード 市町村コード
      * @param 申請書管理番号 申請書管理番号
      * @param 意見書作成依頼履歴番号 意見書作成依頼履歴番号
      * @return 主治医意見書作成依頼情報
      */
-    public ShujiiIkenshoSakuseiIrai get主治医意見書作成依頼情報(ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書作成依頼履歴番号) {
-        return getShujiiIkenshoSakuseiIrai(iraiDac.select(申請書管理番号, 意見書作成依頼履歴番号));
+    public ShujiiIkenshoSakuseiIrai get主治医意見書作成依頼情報(
+            LasdecCode 市町村コード, ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書作成依頼履歴番号) {
+        return getShujiiIkenshoSakuseiIrai(市町村コード, iraiDac.select(申請書管理番号, 意見書作成依頼履歴番号));
     }
 
     /**
      * 引数の条件に該当する主治医意見書作成依頼情報を取得します。
      *
+     * @param 市町村コード 市町村コード
      * @param 申請書管理番号 申請書管理番号
      * @return 主治医意見書作成依頼情報
      */
-    public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
-        return getShujiiIkenshoSakuseiIraiList(iraiDac.selectBy申請書管理番号(申請書管理番号));
+    public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By申請書管理番号(
+            LasdecCode 市町村コード, ShinseishoKanriNo 申請書管理番号) {
+        return getShujiiIkenshoSakuseiIraiList(市町村コード, iraiDac.selectBy申請書管理番号(申請書管理番号));
     }
 
     /**
      * 引数の条件に該当する主治医意見書作成依頼情報を取得します。
      *
+     * @param 市町村コード 市町村コード
      * @param 意見書作成依頼年月日 意見書作成依頼年月日
      * @return 主治医意見書作成依頼情報
      */
-    public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By依頼年月日(FlexibleDate 意見書作成依頼年月日) {
-        return getShujiiIkenshoSakuseiIraiList(iraiDac.selectBy依頼年月日(意見書作成依頼年月日));
+    public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By依頼年月日(
+            LasdecCode 市町村コード, FlexibleDate 意見書作成依頼年月日) {
+        return getShujiiIkenshoSakuseiIraiList(市町村コード, iraiDac.selectBy依頼年月日(意見書作成依頼年月日));
     }
 
     /**
      * 引数の条件に該当する主治医意見書作成依頼情報を取得します。
      *
+     * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
      * @param 介護医師コード 介護医師コード
      * @return 主治医意見書作成依頼情報
      */
-    public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By主治医情報(KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
-        return getShujiiIkenshoSakuseiIraiList(iraiDac.selectBy主治医情報(介護医療機関コード, 介護医師コード));
+    public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By主治医情報(
+            LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
+        return getShujiiIkenshoSakuseiIraiList(市町村コード, iraiDac.selectBy主治医情報(介護医療機関コード, 介護医師コード));
     }
 
     /**
      * 引数の条件に該当する主治医意見書作成依頼情報を取得します。
      *
+     * @param 市町村コード 市町村コード
      * @param 意見書作成督促年月日 意見書作成督促年月日
      * @return 主治医意見書作成依頼情報
      */
-    public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By督促年月日(FlexibleDate 意見書作成督促年月日) {
-        return getShujiiIkenshoSakuseiIraiList(iraiDac.selectBy督促年月日(意見書作成督促年月日));
+    public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By督促年月日(
+            LasdecCode 市町村コード, FlexibleDate 意見書作成督促年月日) {
+        return getShujiiIkenshoSakuseiIraiList(市町村コード, iraiDac.selectBy督促年月日(意見書作成督促年月日));
     }
 
     /**
@@ -138,7 +149,8 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
         return shinseiDac.insert(YokaigoNinteiShinseiMapper.toDbT5001NinteiShinseiJohoEntity(認定申請情報)) != 0;
     }
 
-    private ShujiiIkenshoSakuseiIrai getShujiiIkenshoSakuseiIrai(DbT5011ShujiiIkenshoIraiJohoEntity iraiEntity) {
+    private ShujiiIkenshoSakuseiIrai getShujiiIkenshoSakuseiIrai(
+            LasdecCode 市町村コード, DbT5011ShujiiIkenshoIraiJohoEntity iraiEntity) {
         if (iraiEntity == null) {
             return null;
         }
@@ -146,7 +158,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
         if (shinseiEntity == null) {
             return null;
         }
-        KaigoDoctor kaigoDoctor = kaigoDoctorManager.get介護医師(shinseiEntity.getShoKisaiHokenshaNo(),
+        KaigoDoctor kaigoDoctor = kaigoDoctorManager.get介護医師(市町村コード,
                 new KaigoIryoKikanCode(iraiEntity.getKaigoIryokikanCode()), new KaigoDoctorCode(iraiEntity.getKaigoIshiCode()));
         if (kaigoDoctor == null) {
             return null;
@@ -154,10 +166,11 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
         return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIrai(iraiEntity, kaigoDoctor);
     }
 
-    private List<ShujiiIkenshoSakuseiIrai> getShujiiIkenshoSakuseiIraiList(List<DbT5011ShujiiIkenshoIraiJohoEntity> iraiEntityList) {
+    private List<ShujiiIkenshoSakuseiIrai> getShujiiIkenshoSakuseiIraiList(
+            LasdecCode 市町村コード, List<DbT5011ShujiiIkenshoIraiJohoEntity> iraiEntityList) {
         List<ShujiiIkenshoSakuseiIrai> list = new ArrayList<>();
         for (DbT5011ShujiiIkenshoIraiJohoEntity entity : iraiEntityList) {
-            ShujiiIkenshoSakuseiIrai sakuseiIrai = getShujiiIkenshoSakuseiIrai(entity);
+            ShujiiIkenshoSakuseiIrai sakuseiIrai = getShujiiIkenshoSakuseiIrai(市町村コード, entity);
             if (sakuseiIrai != null) {
                 list.add(sakuseiIrai);
             }

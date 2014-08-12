@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikan;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
@@ -29,11 +28,11 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static org.mockito.Mockito.spy;
@@ -71,7 +70,7 @@ public class KaigoDoctorMock {
 
     private static IShujii createShujii() {
         return new Shujii(
-                new ShoKisaiHokenshaNo(new RString("証記載保険者番号")),
+                new LasdecCode(new RString("000001")),
                 new KaigoIryoKikanCode(new RString("介護医療機関コード")),
                 new KaigoDoctorCode(new RString("介護医師コード")),
                 new _IryoKikanCode(new RString("1234567890")),
@@ -108,7 +107,7 @@ public class KaigoDoctorMock {
 
     private static IShujiiIryoKikan createShujiiIryoKikan() {
         return new ShujiiIryoKikan(
-                new ShoKisaiHokenshaNo(new RString("証記載保険者番号")),
+                new LasdecCode(new RString("000001")),
                 new KaigoIryoKikanCode(new RString("1234567890")),
                 new _IryoKikanCode(new RString("1234567890")),
                 IryoKikanJokyo.有効,

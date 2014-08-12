@@ -13,13 +13,13 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.KaigoDoctorDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.KaigoDoctorEntityMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.realservice.IDoctorManager;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -38,101 +38,101 @@ import static org.mockito.Mockito.*;
 @RunWith(Enclosed.class)
 public class KaigoDoctorManagerTest extends DbeTestBase {
 
-    public static class get介護医師_証記載保険者番号_介護医療機関コード_介護医師コード extends DbeTestBase {
+    public static class get介護医師_市町村コード_介護医療機関コード_介護医師コード extends DbeTestBase {
 
         @Test
         public void 介護医師情報が存在する時_get介護医師は_介護医師情報を返す() {
-            assertThat(createKaigoDoctorManager(1).get介護医師(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class)), instanceOf(KaigoDoctor.class));
+            assertThat(createKaigoDoctorManager(1).get介護医師(any(LasdecCode.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class)), instanceOf(KaigoDoctor.class));
         }
 
         @Test
         public void 介護医師情報が存在しない時_get介護医師は_NULLを返す() {
-            assertThat(createKaigoDoctorManager(0).get介護医師(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class)), is(nullValue()));
+            assertThat(createKaigoDoctorManager(0).get介護医師(any(LasdecCode.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class)), is(nullValue()));
         }
     }
 
-    public static class get介護医師_証記載保険者番号_介護医療機関コード_介護医師コード_医師の状況 extends DbeTestBase {
+    public static class get介護医師_市町村コード_介護医療機関コード_介護医師コード_医師の状況 extends DbeTestBase {
 
         @Test
         public void 介護医師情報が存在する時_get介護医師は_介護医師情報を返す() {
-            assertThat(createKaigoDoctorManager(1).get介護医師(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class), any(IshiJokyo.class)), instanceOf(KaigoDoctor.class));
+            assertThat(createKaigoDoctorManager(1).get介護医師(any(LasdecCode.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class), any(IshiJokyo.class)), instanceOf(KaigoDoctor.class));
         }
 
         @Test
         public void 介護医師情報が存在しない時_get介護医師は_NULLを返す() {
-            assertThat(createKaigoDoctorManager(0).get介護医師(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class), any(IshiJokyo.class)), is(nullValue()));
+            assertThat(createKaigoDoctorManager(0).get介護医師(any(LasdecCode.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class), any(IshiJokyo.class)), is(nullValue()));
         }
     }
 
-    public static class get介護医師リストOf_証記載保険者番号_介護医療機関コード extends DbeTestBase {
+    public static class get介護医師リストOf_市町村コード_介護医療機関コード extends DbeTestBase {
 
         @Test
         public void 介護医師情報が0件の時_get介護医師は_0件の介護医師情報を返す() {
-            assertThat(createKaigoDoctorManager(0).get介護医師リストOf(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class)).size(), is(0));
+            assertThat(createKaigoDoctorManager(0).get介護医師リストOf(any(LasdecCode.class), any(KaigoIryoKikanCode.class)).size(), is(0));
         }
 
         @Test
         public void 介護医師情報が1件の時_get介護医師は_1件の介護医師情報を返す() {
-            assertThat(createKaigoDoctorManager(1).get介護医師リストOf(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class)).size(), is(1));
+            assertThat(createKaigoDoctorManager(1).get介護医師リストOf(any(LasdecCode.class), any(KaigoIryoKikanCode.class)).size(), is(1));
         }
 
         @Test
         public void 介護医師情報が2件の時_get介護医師は_2件の介護医師情報を返す() {
-            assertThat(createKaigoDoctorManager(2).get介護医師リストOf(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class)).size(), is(2));
+            assertThat(createKaigoDoctorManager(2).get介護医師リストOf(any(LasdecCode.class), any(KaigoIryoKikanCode.class)).size(), is(2));
         }
     }
 
-    public static class get介護医師リストOf_証記載保険者番号_介護医療機関コード_医師の状況 extends DbeTestBase {
+    public static class get介護医師リストOf_市町村コード_介護医療機関コード_医師の状況 extends DbeTestBase {
 
         @Test
         public void 介護医師情報が0件の時_get介護医師は_0件の介護医師情報を返す() {
-            assertThat(createKaigoDoctorManager(0).get介護医師リストOf(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class), any(IshiJokyo.class)).size(), is(0));
+            assertThat(createKaigoDoctorManager(0).get介護医師リストOf(any(LasdecCode.class), any(KaigoIryoKikanCode.class), any(IshiJokyo.class)).size(), is(0));
         }
 
         @Test
         public void 介護医師情報が1件の時_get介護医師は_1件の介護医師情報を返す() {
-            assertThat(createKaigoDoctorManager(1).get介護医師リストOf(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class), any(IshiJokyo.class)).size(), is(1));
+            assertThat(createKaigoDoctorManager(1).get介護医師リストOf(any(LasdecCode.class), any(KaigoIryoKikanCode.class), any(IshiJokyo.class)).size(), is(1));
         }
 
         @Test
         public void 介護医師情報が2件の時_get介護医師は_2件の介護医師情報を返す() {
-            assertThat(createKaigoDoctorManager(2).get介護医師リストOf(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class), any(IshiJokyo.class)).size(), is(2));
+            assertThat(createKaigoDoctorManager(2).get介護医師リストOf(any(LasdecCode.class), any(KaigoIryoKikanCode.class), any(IshiJokyo.class)).size(), is(2));
         }
     }
 
-    public static class get介護医師リストOf_証記載保険者番号 extends DbeTestBase {
+    public static class get介護医師リストOf_市町村コード extends DbeTestBase {
 
         @Test
         public void 介護医師情報が0件の時_get介護医師は_0件の介護医師情報を返す() {
-            assertThat(createKaigoDoctorManager(0).get介護医師リストOf(any(ShoKisaiHokenshaNo.class)).size(), is(0));
+            assertThat(createKaigoDoctorManager(0).get介護医師リストOf(any(LasdecCode.class)).size(), is(0));
         }
 
         @Test
         public void 介護医師情報が1件の時_get介護医師は_1件の介護医師情報を返す() {
-            assertThat(createKaigoDoctorManager(1).get介護医師リストOf(any(ShoKisaiHokenshaNo.class)).size(), is(1));
+            assertThat(createKaigoDoctorManager(1).get介護医師リストOf(any(LasdecCode.class)).size(), is(1));
         }
 
         @Test
         public void 介護医師情報が2件の時_get介護医師は_2件の介護医師情報を返す() {
-            assertThat(createKaigoDoctorManager(2).get介護医師リストOf(any(ShoKisaiHokenshaNo.class)).size(), is(2));
+            assertThat(createKaigoDoctorManager(2).get介護医師リストOf(any(LasdecCode.class)).size(), is(2));
         }
     }
 
-    public static class get介護医師リストOf_証記載保険者番号_医師の状況 extends DbeTestBase {
+    public static class get介護医師リストOf_市町村コード_医師の状況 extends DbeTestBase {
 
         @Test
         public void 介護医師情報が0件の時_get介護医師は_0件の介護医師情報を返す() {
-            assertThat(createKaigoDoctorManager(0).get介護医師リストOf(any(ShoKisaiHokenshaNo.class), any(IshiJokyo.class)).size(), is(0));
+            assertThat(createKaigoDoctorManager(0).get介護医師リストOf(any(LasdecCode.class), any(IshiJokyo.class)).size(), is(0));
         }
 
         @Test
         public void 介護医師情報が1件の時_get介護医師は_1件の介護医師情報を返す() {
-            assertThat(createKaigoDoctorManager(1).get介護医師リストOf(any(ShoKisaiHokenshaNo.class), any(IshiJokyo.class)).size(), is(1));
+            assertThat(createKaigoDoctorManager(1).get介護医師リストOf(any(LasdecCode.class), any(IshiJokyo.class)).size(), is(1));
         }
 
         @Test
         public void 介護医師情報が2件の時_get介護医師は_2件の介護医師情報を返す() {
-            assertThat(createKaigoDoctorManager(2).get介護医師リストOf(any(ShoKisaiHokenshaNo.class), any(IshiJokyo.class)).size(), is(2));
+            assertThat(createKaigoDoctorManager(2).get介護医師リストOf(any(LasdecCode.class), any(IshiJokyo.class)).size(), is(2));
         }
     }
 
@@ -187,12 +187,12 @@ public class KaigoDoctorManagerTest extends DbeTestBase {
     private static KaigoDoctorDac createKaigoDoctorDac(int flg) {
         KaigoDoctorDac dac = mock(KaigoDoctorDac.class);
         when(dac.select(any(ITrueFalseCriteria.class))).thenReturn(createKaigoDoctorEntityList(flg));
-        when(dac.select(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class))).thenReturn(createKaigoDoctorEntity(flg));
-        when(dac.select(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class), any(IshiJokyo.class))).thenReturn(createKaigoDoctorEntity(flg));
-        when(dac.select(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class))).thenReturn(createKaigoDoctorEntityList(flg));
-        when(dac.select(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class), any(IshiJokyo.class))).thenReturn(createKaigoDoctorEntityList(flg));
-        when(dac.select(any(ShoKisaiHokenshaNo.class))).thenReturn(createKaigoDoctorEntityList(flg));
-        when(dac.select(any(ShoKisaiHokenshaNo.class), any(IshiJokyo.class))).thenReturn(createKaigoDoctorEntityList(flg));
+        when(dac.select(any(LasdecCode.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class))).thenReturn(createKaigoDoctorEntity(flg));
+        when(dac.select(any(LasdecCode.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class), any(IshiJokyo.class))).thenReturn(createKaigoDoctorEntity(flg));
+        when(dac.select(any(LasdecCode.class), any(KaigoIryoKikanCode.class))).thenReturn(createKaigoDoctorEntityList(flg));
+        when(dac.select(any(LasdecCode.class), any(KaigoIryoKikanCode.class), any(IshiJokyo.class))).thenReturn(createKaigoDoctorEntityList(flg));
+        when(dac.select(any(LasdecCode.class))).thenReturn(createKaigoDoctorEntityList(flg));
+        when(dac.select(any(LasdecCode.class), any(IshiJokyo.class))).thenReturn(createKaigoDoctorEntityList(flg));
         return dac;
     }
 
@@ -212,7 +212,7 @@ public class KaigoDoctorManagerTest extends DbeTestBase {
 
     private static IKaigoIryoKikanFinder createKaigoIryoKikanFinder(int flg) {
         IKaigoIryoKikanFinder finder = mock(IKaigoIryoKikanFinder.class);
-        when(finder.get介護医療機関(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class))).thenReturn(mock(KaigoIryoKikan.class));
+        when(finder.get介護医療機関(any(LasdecCode.class), any(KaigoIryoKikanCode.class))).thenReturn(mock(KaigoIryoKikan.class));
         return finder;
     }
 

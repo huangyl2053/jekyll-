@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -57,6 +58,7 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
     private static KaigoIryoKikanFinder kaigoIryoKikanFinder;
     private static YokaigoNinteiProgressManager yokaigoninteiProgressManager;
     private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
+    private static final LasdecCode 市町村コード = new LasdecCode(new RString("000001"));
     private static final RString 支所コード = new RString("0002");
     private static List<ShujiiIkenshoIraiTaishosha> resultList;
 
@@ -69,87 +71,98 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
         yokaigoninteiProgressManager = mock(YokaigoNinteiProgressManager.class);
     }
 
-    public static class get主治医意見書作成依頼対象者_引数なし extends DbeTestBase {
-
-        @Test
-        public void get主治医意見書作成依頼対象者で_主治医意見書作成依頼対象者が登録されていないとき_COLLECTIONS_EMPTYを返す() {
-            when(shujiiIkenshoIraiTaishoshaDac.selectAll()).thenReturn(Collections.EMPTY_LIST);
-            sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
-            resultList = sut.get主治医意見書作成依頼対象者();
-            assertThat(resultList, is(Collections.EMPTY_LIST));
-        }
-
-        @Test
-        public void get主治医意見書作成依頼対象者で_主治医意見書作成依頼対象者が1件登録されているとき_1件の対象者を取得する() {
-            when(shujiiIkenshoIraiTaishoshaDac.selectAll()).thenReturn(create介護認定処理対象者List(1));
-            when(shujiiManager.get主治医意見書作成依頼情報(any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
-            IKojin kojin = create個人();
-            when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(kojin);
-            when(kaigoIryoKikanFinder.get介護医療機関(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class))).thenReturn(mock(KaigoIryoKikan.class));
-            sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
-            resultList = sut.get主治医意見書作成依頼対象者();
-            assertThat(resultList.size(), is(1));
-        }
-    }
-
-    public static class get主治医意見書作成依頼対象者_証記載保険者番号 extends DbeTestBase {
+    public static class get主治医意見書作成依頼対象者_市町村コード extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
-        public void get主治医意見書作成依頼対象者_証記載保険者番号の指定で_引数がNULLの場合_NullPointerExceptionが発生する() {
-            when(shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号(any(ShoKisaiHokenshaNo.class))).thenReturn(Collections.EMPTY_LIST);
+        public void get主治医意見書作成依頼対象者_市町村コードの指定で_引数がNULLの場合_NullPointerExceptionが発生する() {
+            when(shujiiIkenshoIraiTaishoshaDac.selectAll()).thenReturn(Collections.EMPTY_LIST);
             sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
             resultList = sut.get主治医意見書作成依頼対象者(null);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
 
         @Test
-        public void get主治医意見書作成依頼対象者_証記載保険者番号の指定で_主治医意見書作成依頼対象者が登録されていないとき_COLLECTIONS_EMPTYを返す() {
-            when(shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号(any(ShoKisaiHokenshaNo.class))).thenReturn(Collections.EMPTY_LIST);
+        public void get主治医意見書作成依頼対象者_市町村コードの指定で_主治医意見書作成依頼対象者が登録されていないとき_COLLECTIONS_EMPTYを返す() {
+            when(shujiiIkenshoIraiTaishoshaDac.selectAll()).thenReturn(Collections.EMPTY_LIST);
             sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
-            resultList = sut.get主治医意見書作成依頼対象者(証記載保険者番号);
+            resultList = sut.get主治医意見書作成依頼対象者(市町村コード);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
 
         @Test
-        public void get主治医意見書作成依頼対象者_証記載保険者番号の指定で_主治医意見書作成依頼対象者が1件登録されているとき_1件の対象者を取得する() {
-            when(shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号(any(ShoKisaiHokenshaNo.class))).thenReturn(create介護認定処理対象者List(1));
-            when(shujiiManager.get主治医意見書作成依頼情報(any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
+        public void get主治医意見書作成依頼対象者_市町村コードの指定で_主治医意見書作成依頼対象者が1件登録されているとき_1件の対象者を取得する() {
+            when(shujiiIkenshoIraiTaishoshaDac.selectAll()).thenReturn(create介護認定処理対象者List(1));
+            when(shujiiManager.get主治医意見書作成依頼情報(
+                    any(LasdecCode.class), any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
             IKojin kojin = create個人();
             when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(kojin);
-            when(kaigoIryoKikanFinder.get介護医療機関(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class))).thenReturn(mock(KaigoIryoKikan.class));
+            when(kaigoIryoKikanFinder.get介護医療機関(any(LasdecCode.class), any(KaigoIryoKikanCode.class))).thenReturn(mock(KaigoIryoKikan.class));
             sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
-            resultList = sut.get主治医意見書作成依頼対象者(証記載保険者番号);
+            resultList = sut.get主治医意見書作成依頼対象者(市町村コード);
             assertThat(resultList.size(), is(1));
         }
     }
 
-    public static class get主治医意見書作成依頼対象者_証記載保険者番号_支所コード extends DbeTestBase {
+    public static class get主治医意見書作成依頼対象者_市町村コード_証記載保険者番号 extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
-        public void get主治医意見書作成依頼対象者_証記載保険者番号と支所コードの指定で_引数がNULLの場合_NullPointerExceptionが発生する() {
-            when(shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号及び支所コード(any(ShoKisaiHokenshaNo.class), any(RString.class))).thenReturn(Collections.EMPTY_LIST);
+        public void get主治医意見書作成依頼対象者_市町村コード_証記載保険者番号の指定で_引数がNULLの場合_NullPointerExceptionが発生する() {
+            when(shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号(any(ShoKisaiHokenshaNo.class))).thenReturn(Collections.EMPTY_LIST);
             sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
             resultList = sut.get主治医意見書作成依頼対象者(null, null);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
 
         @Test
-        public void get主治医意見書作成依頼対象者_証記載保険者番号と支所コードの指定で_主治医意見書作成依頼対象者が登録されていないとき_COLLECTIONS_EMPTYを返す() {
-            when(shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号及び支所コード(any(ShoKisaiHokenshaNo.class), any(RString.class))).thenReturn(Collections.EMPTY_LIST);
+        public void get主治医意見書作成依頼対象者_市町村コード_証記載保険者番号の指定で_主治医意見書作成依頼対象者が登録されていないとき_COLLECTIONS_EMPTYを返す() {
+            when(shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号(any(ShoKisaiHokenshaNo.class))).thenReturn(Collections.EMPTY_LIST);
             sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
-            resultList = sut.get主治医意見書作成依頼対象者(証記載保険者番号, 支所コード);
+            resultList = sut.get主治医意見書作成依頼対象者(市町村コード, 証記載保険者番号);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
 
         @Test
-        public void get主治医意見書作成依頼対象者_証記載保険者番号と支所コードの指定で_主治医意見書作成依頼対象者が1件登録されているとき_1件の対象者を取得する() {
-            when(shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号及び支所コード(any(ShoKisaiHokenshaNo.class), any(RString.class))).thenReturn(create介護認定処理対象者List(1));
-            when(shujiiManager.get主治医意見書作成依頼情報(any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
+        public void get主治医意見書作成依頼対象者_市町村コード_証記載保険者番号の指定で_主治医意見書作成依頼対象者が1件登録されているとき_1件の対象者を取得する() {
+            when(shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号(any(ShoKisaiHokenshaNo.class))).thenReturn(create介護認定処理対象者List(1));
+            when(shujiiManager.get主治医意見書作成依頼情報(
+                    any(LasdecCode.class), any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
             IKojin kojin = create個人();
             when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(kojin);
-            when(kaigoIryoKikanFinder.get介護医療機関(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class))).thenReturn(mock(KaigoIryoKikan.class));
+            when(kaigoIryoKikanFinder.get介護医療機関(any(LasdecCode.class), any(KaigoIryoKikanCode.class))).thenReturn(mock(KaigoIryoKikan.class));
             sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
-            resultList = sut.get主治医意見書作成依頼対象者(証記載保険者番号, 支所コード);
+            resultList = sut.get主治医意見書作成依頼対象者(市町村コード, 証記載保険者番号);
+            assertThat(resultList.size(), is(1));
+        }
+    }
+
+    public static class get主治医意見書作成依頼対象者_市町村コード_証記載保険者番号_支所コード extends DbeTestBase {
+
+        @Test(expected = NullPointerException.class)
+        public void get主治医意見書作成依頼対象者_市町村コード_証記載保険者番号と支所コードの指定で_引数がNULLの場合_NullPointerExceptionが発生する() {
+            when(shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号及び支所コード(any(ShoKisaiHokenshaNo.class), any(RString.class))).thenReturn(Collections.EMPTY_LIST);
+            sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
+            resultList = sut.get主治医意見書作成依頼対象者(null, null, null);
+            assertThat(resultList, is(Collections.EMPTY_LIST));
+        }
+
+        @Test
+        public void get主治医意見書作成依頼対象者_市町村コード_証記載保険者番号と支所コードの指定で_主治医意見書作成依頼対象者が登録されていないとき_COLLECTIONS_EMPTYを返す() {
+            when(shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号及び支所コード(any(ShoKisaiHokenshaNo.class), any(RString.class))).thenReturn(Collections.EMPTY_LIST);
+            sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
+            resultList = sut.get主治医意見書作成依頼対象者(市町村コード, 証記載保険者番号, 支所コード);
+            assertThat(resultList, is(Collections.EMPTY_LIST));
+        }
+
+        @Test
+        public void get主治医意見書作成依頼対象者_市町村コード_証記載保険者番号と支所コードの指定で_主治医意見書作成依頼対象者が1件登録されているとき_1件の対象者を取得する() {
+            when(shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号及び支所コード(any(ShoKisaiHokenshaNo.class), any(RString.class))).thenReturn(create介護認定処理対象者List(1));
+            when(shujiiManager.get主治医意見書作成依頼情報(
+                    any(LasdecCode.class), any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
+            IKojin kojin = create個人();
+            when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(kojin);
+            when(kaigoIryoKikanFinder.get介護医療機関(any(LasdecCode.class), any(KaigoIryoKikanCode.class))).thenReturn(mock(KaigoIryoKikan.class));
+            sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
+            resultList = sut.get主治医意見書作成依頼対象者(市町村コード, 証記載保険者番号, 支所コード);
             assertThat(resultList.size(), is(1));
         }
     }

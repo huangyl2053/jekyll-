@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -16,7 +15,9 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 介護医師の情報を扱うクラスです。
@@ -150,13 +151,13 @@ public class KaigoDoctor implements IShujii, IDoctor {
     }
 
     /**
-     * 証記載保険者番号を返します。
+     * 市町村コードを返します。
      *
-     * @return 証記載保険者番号
+     * @return 市町村コード
      */
     @Override
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return 主治医.get証記載保険者番号();
+    public LasdecCode get市町村コード() {
+        return 主治医.get市町村コード();
     }
 
     /**
@@ -192,11 +193,11 @@ public class KaigoDoctor implements IShujii, IDoctor {
     /**
      * 医師の状況が有効かどうかを判定します。
      *
-     * @return 有効の場合はtrueを返します。
+     * @return 医師の状況
      */
     @Override
-    public boolean is有効() {
-        return 主治医.is有効();
+    public IshiJokyo get医師の状況() {
+        return 主治医.get医師の状況();
     }
 
     /**

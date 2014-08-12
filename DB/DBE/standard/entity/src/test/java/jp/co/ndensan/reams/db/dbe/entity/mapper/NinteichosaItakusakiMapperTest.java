@@ -4,22 +4,18 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
-import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaItakusakiMapper;
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.MockNinteichosaItakusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -43,10 +39,10 @@ public class NinteichosaItakusakiMapperTest extends TestBase {
         }
 
         @Test
-        public void 引き渡した証記載保険者番号とtoNinteichosaItakusakiの結果は一致する() {
-            testentity.set証記載保険者番号(new ShoKisaiHokenshaNo(new RString("202050")));
+        public void 引き渡した市町村コードとtoNinteichosaItakusakiの結果は一致する() {
+            testentity.set市町村コード(new LasdecCode(new RString("202050")));
             NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(testentity);
-            assertThat(result.get証記載保険者番号(), is(new ShoKisaiHokenshaNo(new RString("202050"))));
+            assertThat(result.getShichosonCode(), is(new LasdecCode(new RString("202050"))));
         }
 
         @Test

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJoho;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -31,19 +31,19 @@ public class NinteichosaItakusakiDac {
     private SqlSession session;
 
     /**
-     * 指定した証記載保険者番号で有効又は無効の認定調査委託先を取得します
+     * 指定した市町村コードで有効又は無効の認定調査委託先を取得します
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護事業状況 介護事業状況
      * @return 認定調査委託先情報エンティティ
      */
     @Transaction
-    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(ShoKisaiHokenshaNo 証記載保険者番号, boolean 介護事業状況) {
+    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(LasdecCode 市町村コード, boolean 介護事業状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
                 .table(DbT7010NinteichosaItakusakiJoho.class)
-                .where(and(eq(DbT7010NinteichosaItakusakiJoho.shoKisaiHokenshaNo, 証記載保険者番号),
-                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaJokyo, 介護事業状況)))
+                .where(and(eq(DbT7010NinteichosaItakusakiJoho.shichosonCode, 市町村コード),
+                                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaJokyo, 介護事業状況)))
                 .order(by(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaNo, Order.DESC))
                 .toList(DbT7010NinteichosaItakusakiJohoEntity.class);
 
@@ -52,18 +52,18 @@ public class NinteichosaItakusakiDac {
     }
 
     /**
-     * 指定した証記載保険者番号で登録されている全ての認定調査委託先を取得します
+     * 指定した市町村コードで登録されている全ての認定調査委託先を取得します
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @return 認定調査委託先情報エンティティ
      */
     @Transaction
-    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(ShoKisaiHokenshaNo 証記載保険者番号) {
+    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(LasdecCode 市町村コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
                 .table(DbT7010NinteichosaItakusakiJoho.class)
-                .where(eq(DbT7010NinteichosaItakusakiJoho.shoKisaiHokenshaNo, 証記載保険者番号))
+                .where(eq(DbT7010NinteichosaItakusakiJoho.shichosonCode, 市町村コード))
                 .order(by(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaNo, Order.DESC))
                 .toList(DbT7010NinteichosaItakusakiJohoEntity.class);
 
@@ -74,20 +74,20 @@ public class NinteichosaItakusakiDac {
     /**
      * 市町村・介護事業者番号・介護事業状況を指定して認定調査委託先を取得します
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護事業者番号 介護事業者番号
      * @param 介護事業状況 介護事業状況
      * @return 認定調査委託先情報エンティティ
      */
     @Transaction
-    public DbT7010NinteichosaItakusakiJohoEntity select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況) {
+    public DbT7010NinteichosaItakusakiJohoEntity select(LasdecCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
                 .table(DbT7010NinteichosaItakusakiJoho.class)
-                .where(and(eq(DbT7010NinteichosaItakusakiJoho.shoKisaiHokenshaNo, 証記載保険者番号),
-                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaNo, 介護事業者番号),
-                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaJokyo, 介護事業状況)))
+                .where(and(eq(DbT7010NinteichosaItakusakiJoho.shichosonCode, 市町村コード),
+                                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaNo, 介護事業者番号),
+                                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaJokyo, 介護事業状況)))
                 .order(by(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaNo, Order.DESC))
                 .toList(DbT7010NinteichosaItakusakiJohoEntity.class);
 
@@ -98,22 +98,22 @@ public class NinteichosaItakusakiDac {
     }
 
     /**
-     * 証記載保険者番号・事業者番号・介護事業状況を指定して認定調査委託先を取得します
+     * 市町村コード・事業者番号・介護事業状況を指定して認定調査委託先を取得します
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 事業者番号 事業者番号
      * @param 介護事業状況 介護事業状況
      * @return 認定調査委託先情報エンティティ
      */
     @Transaction
-    public DbT7010NinteichosaItakusakiJohoEntity select(ShoKisaiHokenshaNo 証記載保険者番号, JigyoshaNo 事業者番号, boolean 介護事業状況) {
+    public DbT7010NinteichosaItakusakiJohoEntity select(LasdecCode 市町村コード, JigyoshaNo 事業者番号, boolean 介護事業状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
                 .table(DbT7010NinteichosaItakusakiJoho.class)
-                .where(and(eq(DbT7010NinteichosaItakusakiJoho.shoKisaiHokenshaNo, 証記載保険者番号),
-                eq(DbT7010NinteichosaItakusakiJoho.jigyoshaNo, 事業者番号),
-                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaJokyo, 介護事業状況)))
+                .where(and(eq(DbT7010NinteichosaItakusakiJoho.shichosonCode, 市町村コード),
+                                eq(DbT7010NinteichosaItakusakiJoho.jigyoshaNo, 事業者番号),
+                                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaJokyo, 介護事業状況)))
                 .order(by(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaNo, Order.DESC))
                 .toList(DbT7010NinteichosaItakusakiJohoEntity.class);
 
@@ -187,8 +187,8 @@ public class NinteichosaItakusakiDac {
         return accessor.
                 select().
                 table(DbT7010NinteichosaItakusakiJoho.class).
-                where(and(eq(DbT7010NinteichosaItakusakiJoho.shoKisaiHokenshaNo, entity.get証記載保険者番号()),
-                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaNo, entity.get介護事業者番号()))).
+                where(and(eq(DbT7010NinteichosaItakusakiJoho.shichosonCode, entity.get市町村コード()),
+                                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaNo, entity.get介護事業者番号()))).
                 getCount();
     }
 }
