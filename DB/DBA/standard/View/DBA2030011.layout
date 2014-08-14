@@ -24,6 +24,8 @@
      "selectControlID": "btnToDecide",
      "helpMessageID": "",
      "jpControlName": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "onClick": "onClick_btnToDecide",
      "text": "Decide",
      "appearance": 0,
@@ -78,7 +80,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   },
   {
    "fieldName": "JutokuTekiyoTaishoshaJoho",
@@ -113,6 +116,8 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
      "AtenaShokaiSimple_eraseBorder": true,
@@ -184,6 +189,9 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "btnRenrakusaki_displayNone": true,
      "backGroundColor": 0,
      "btnHihoRireki_visible": false,
      "btnNinteiRireki_visible": true
@@ -240,7 +248,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   },
   {
    "fieldName": "JutokuTekiyoJoho",
@@ -281,6 +290,8 @@
          "dialogCancelEventNameForDialog": "",
          "canTransferEvent": true,
          "heightForDialog": "M",
+         "firstFocusFieldName": "",
+         "lastFocusFieldName": "",
          "onSelectByDblClick": "",
          "onSelectByModifyButton": "onSelectByModifyButton_dgShikakuShutokuRireki",
          "onSelectByDeleteButton": "onSelectByDeleteButton_dgShikakuShutokuRireki",
@@ -290,46 +301,6 @@
         {
          "fieldName": "JutokuTekiyoInput",
          "items": [
-          {
-           "fieldName": "ddlJutokuTekiyoJiyu",
-           "items": [],
-           "controlType": "DropDownList",
-           "width": "140",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "selectControlID": "ddlJutokuTekiyoJiyu_core",
-           "helpMessageID": "",
-           "jpControlName": "",
-           "readOnly": false,
-           "required": false,
-           "onFocus": "",
-           "onBlur": "",
-           "onChange": "",
-           "labelLText": "適用事由",
-           "labelRText": "",
-           "labelLWidth": "80",
-           "labelRWidth": "S",
-           "labelLAlign": 2,
-           "labelRAlign": 0,
-           "selectedItem": "jutokuTekiyo",
-           "dataSource": [
-            {
-             "key": "jutokuTekiyo",
-             "value": "住所地特例適用"
-            }
-           ],
-           "disabledItem": []
-          },
           {
            "fieldName": "txtJutokuTekiyoDate",
            "items": [],
@@ -413,6 +384,46 @@
            "ymdKubun": 2,
            "displayFormat": 0,
            "permitCharactor": "./_-"
+          },
+          {
+           "fieldName": "ddlJutokuTekiyoJiyu",
+           "items": [],
+           "controlType": "DropDownList",
+           "width": "140",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "ddlJutokuTekiyoJiyu_core",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "readOnly": false,
+           "required": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "labelLText": "適用事由",
+           "labelRText": "",
+           "labelLWidth": "70",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "selectedItem": "jutokuTekiyo",
+           "dataSource": [
+            {
+             "key": "jutokuTekiyo",
+             "value": "住所地特例適用"
+            }
+           ],
+           "disabledItem": []
           }
          ],
          "controlType": "Panel",
@@ -436,11 +447,7 @@
          "title": "住所地特例適用情報",
          "isOpen": true,
          "canOpenAndClose": false,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "JutokuTekiyoInput"
-          }
-         ],
+         "postParameterPanelNames": [],
          "requestSettings": [],
          "hiddenInput": [],
          "onOpen": "",
@@ -454,7 +461,8 @@
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "canPost": false
         },
         {
          "fieldName": "btnUpdateShikaku",
@@ -476,6 +484,8 @@
          "selectControlID": "btnUpdateShikaku",
          "helpMessageID": "",
          "jpControlName": "",
+         "onBeforeClick": "",
+         "onAfterClick": "",
          "onClick": "onClick_btnUpdateShikaku",
          "text": "異動内容を確定する",
          "appearance": 0,
@@ -530,6 +540,8 @@
          "selectControlID": "btnAddIryoHoken",
          "helpMessageID": "",
          "jpControlName": "",
+         "onBeforeClick": "",
+         "onAfterClick": "",
          "onClick": "onClick_btnAddIryoHoken",
          "text": "医療保険を追加する",
          "appearance": 0,
@@ -582,6 +594,8 @@
          "dialogCancelEventNameForDialog": "",
          "canTransferEvent": true,
          "heightForDialog": "M",
+         "firstFocusFieldName": "",
+         "lastFocusFieldName": "",
          "onSelectByModifyButton": "onSelectByModifyButton_dgIryoHokenRireki",
          "onSelectByDeleteButton": "onSelectByDeleteButton_dgIryoHokenRireki",
          "panel_width": "1030",
@@ -903,11 +917,7 @@
          "title": "医療保険情報",
          "isOpen": true,
          "canOpenAndClose": false,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "IryoHokenInput"
-          }
-         ],
+         "postParameterPanelNames": [],
          "requestSettings": [],
          "hiddenInput": [],
          "onOpen": "",
@@ -921,7 +931,8 @@
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "canPost": false
         },
         {
          "fieldName": "btnUpdateIryoHoken",
@@ -943,6 +954,8 @@
          "selectControlID": "btnUpdateIryoHoken",
          "helpMessageID": "",
          "jpControlName": "",
+         "onBeforeClick": "",
+         "onAfterClick": "",
          "onClick": "onClick_btnUpdateIryoHoken",
          "text": "医療保険を確定する",
          "appearance": 0,
@@ -1000,6 +1013,8 @@
            "selectControlID": "btnAddRofukuNenkin",
            "helpMessageID": "",
            "jpControlName": "",
+           "onBeforeClick": "",
+           "onAfterClick": "",
            "onClick": "",
            "text": "老福年金を追加する",
            "appearance": 0,
@@ -1128,7 +1143,8 @@
            "sortOrder": "jukyushaNo",
            "isAscending": true,
            "filterList": [],
-           "activeRowId": -1
+           "activeRowId": -1,
+           "gridAction": []
           },
           {
            "fieldName": "RohukuNenkinInput",
@@ -1286,11 +1302,7 @@
            "title": "老福年金情報",
            "isOpen": true,
            "canOpenAndClose": false,
-           "postParameterPanelNames": [
-            {
-             "postParameterPanelNames": "RohukuNenkinInput"
-            }
-           ],
+           "postParameterPanelNames": [],
            "requestSettings": [],
            "hiddenInput": [],
            "onOpen": "",
@@ -1304,7 +1316,8 @@
            "panelDisplay": 1,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto"
+           "height": "Auto",
+           "canPost": false
           },
           {
            "fieldName": "btnUpdateRofukuNenkin",
@@ -1326,6 +1339,8 @@
            "selectControlID": "btnUpdateRofukuNenkin",
            "helpMessageID": "",
            "jpControlName": "",
+           "onBeforeClick": "",
+           "onAfterClick": "",
            "onClick": "",
            "text": "老福年金を確定する",
            "appearance": 0,
@@ -1357,11 +1372,7 @@
          "title": "",
          "isOpen": true,
          "canOpenAndClose": true,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "RohukuNenkin"
-          }
-         ],
+         "postParameterPanelNames": [],
          "requestSettings": [],
          "hiddenInput": [],
          "onOpen": "",
@@ -1375,7 +1386,8 @@
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "canPost": false
         }
        ],
        "controlType": "TabPanel",
@@ -1431,7 +1443,9 @@
          "dialogOkEventNameForDialog": "",
          "dialogCancelEventNameForDialog": "",
          "canTransferEvent": true,
-         "heightForDialog": "M"
+         "heightForDialog": "M",
+         "firstFocusFieldName": "",
+         "lastFocusFieldName": ""
         }
        ],
        "controlType": "TabPanel",
@@ -1481,6 +1495,8 @@
            "selectControlID": "btnAddSeikatsuHogo",
            "helpMessageID": "",
            "jpControlName": "",
+           "onBeforeClick": "",
+           "onAfterClick": "",
            "onClick": "",
            "text": "生活保護を追加する",
            "appearance": 0,
@@ -1637,7 +1653,8 @@
            "sortOrder": "jukyushaNo",
            "isAscending": true,
            "filterList": [],
-           "activeRowId": -1
+           "activeRowId": -1,
+           "gridAction": []
           },
           {
            "fieldName": "SeikatsuHogoInput",
@@ -1879,11 +1896,7 @@
            "title": "生活保護情報",
            "isOpen": true,
            "canOpenAndClose": false,
-           "postParameterPanelNames": [
-            {
-             "postParameterPanelNames": "SeikatsuHogoInput"
-            }
-           ],
+           "postParameterPanelNames": [],
            "requestSettings": [],
            "hiddenInput": [],
            "onOpen": "",
@@ -1897,7 +1910,8 @@
            "panelDisplay": 1,
            "isGroupBox": false,
            "readOnly": false,
-           "height": "Auto"
+           "height": "Auto",
+           "canPost": false
           },
           {
            "fieldName": "btnUpdataSeikatsuHogo",
@@ -1919,6 +1933,8 @@
            "selectControlID": "btnUpdataSeikatsuHogo",
            "helpMessageID": "",
            "jpControlName": "",
+           "onBeforeClick": "",
+           "onAfterClick": "",
            "onClick": "",
            "text": "生活保護を確定する",
            "appearance": 0,
@@ -1950,11 +1966,7 @@
          "title": "",
          "isOpen": true,
          "canOpenAndClose": true,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "SeikatsuHogo"
-          }
-         ],
+         "postParameterPanelNames": [],
          "requestSettings": [],
          "hiddenInput": [],
          "onOpen": "",
@@ -1968,7 +1980,8 @@
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "canPost": false
         }
        ],
        "controlType": "TabPanel",
@@ -2121,7 +2134,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   },
   {
    "fieldName": "JutokuTekiyoComplete",
@@ -2156,6 +2170,8 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
      "KanryoMessage_width": "G12"
     }
    ],
@@ -2210,7 +2226,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": null,

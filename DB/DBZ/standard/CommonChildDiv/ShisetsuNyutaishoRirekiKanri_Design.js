@@ -46,6 +46,8 @@ var DBZ;
                             "selectControlID": "btnAddShisetsuNyutaisho",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
                             "onClick": "onClick_btnAddShisetsuNyutaisho",
                             "text": "施設入退所を追加する",
                             "appearance": 0,
@@ -260,7 +262,8 @@ var DBZ;
                             "sortOrder": "shisetsuShurui",
                             "isAscending": true,
                             "filterList": [],
-                            "activeRowId": -1
+                            "activeRowId": -1,
+                            "gridAction": []
                         },
                         {
                             "fieldName": "ShisetsuNyutaishoInput",
@@ -432,6 +435,8 @@ var DBZ;
                                     "dialogCancelEventNameForDialog": "",
                                     "canTransferEvent": true,
                                     "heightForDialog": "M",
+                                    "firstFocusFieldName": "",
+                                    "lastFocusFieldName": "",
                                     "btnJigyoshaInputGuide_displayNone": false,
                                     "btnOtherTokureiShisetsuInputGuide_displayNone": true,
                                     "btnJogaiShisetsuInputGuide_displayNone": true,
@@ -478,7 +483,8 @@ var DBZ;
                             "panelDisplay": 1,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "canPost": true
                         },
                         {
                             "fieldName": "btnUpdateShisetsuNyutaisho",
@@ -500,6 +506,8 @@ var DBZ;
                             "selectControlID": "btnUpdateShisetsuNyutaisho",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
                             "onClick": "onClick_btnUpdateShisetsuNyutaisho",
                             "text": "施設入退所を確定する",
                             "appearance": 0,
@@ -587,7 +595,8 @@ var DBZ;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "Auto",
+                    "canPost": true
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -617,7 +626,9 @@ var DBZ;
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "M"
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": ""
         };
         return ShisetsuNyutaishoRirekiKanri_Design;
     })(Uz.CommonChildDiv);

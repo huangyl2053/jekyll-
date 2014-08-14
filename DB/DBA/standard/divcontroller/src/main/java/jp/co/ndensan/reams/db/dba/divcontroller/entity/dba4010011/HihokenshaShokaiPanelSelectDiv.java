@@ -4,12 +4,23 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiSetaiShokaiDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiShikakuTokusoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiShinseiTodokedeDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiShisetsuNyutaishoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiShoKofuKaishuDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgSetaiJoho_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgShinseishoTodokede_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tabHihokenshaShokaiDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplHihokenshaRirekiDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplIryoHokenDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplRofukuNenkinDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplSeikatsuHogoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplSetaiShokaiDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplShinseiTodokedeDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplShisetsuNyutaishoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplShoKofuKaishuDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.IryoHokenRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -26,32 +37,8 @@ public class HihokenshaShokaiPanelSelectDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnShikakuTokuso")
-    private Button btnShikakuTokuso;
-    @JsonProperty("btnSetaiShokai")
-    private Button btnSetaiShokai;
-    @JsonProperty("btnIryoHoken")
-    private Button btnIryoHoken;
-    @JsonProperty("btnSeikatsuHogo")
-    private Button btnSeikatsuHogo;
-    @JsonProperty("btnRofukuNenkin")
-    private Button btnRofukuNenkin;
-    @JsonProperty("btnShisetsuNyutaisho")
-    private Button btnShisetsuNyutaisho;
-    @JsonProperty("btnShoKofu")
-    private Button btnShoKofu;
-    @JsonProperty("btnShinseiTodokede")
-    private Button btnShinseiTodokede;
-    @JsonProperty("HihokenshaShokaiShikakuTokuso")
-    private HihokenshaShokaiShikakuTokusoDiv HihokenshaShokaiShikakuTokuso;
-    @JsonProperty("HihokenshaShokaiSetaiShokai")
-    private HihokenshaShokaiSetaiShokaiDiv HihokenshaShokaiSetaiShokai;
-    @JsonProperty("HihokenshaShokaiShisetsuNyutaisho")
-    private HihokenshaShokaiShisetsuNyutaishoDiv HihokenshaShokaiShisetsuNyutaisho;
-    @JsonProperty("HihokenshaShokaiShoKofuKaishu")
-    private HihokenshaShokaiShoKofuKaishuDiv HihokenshaShokaiShoKofuKaishu;
-    @JsonProperty("HihokenshaShokaiShinseiTodokede")
-    private HihokenshaShokaiShinseiTodokedeDiv HihokenshaShokaiShinseiTodokede;
+    @JsonProperty("tabHihokenshaShokai")
+    private tabHihokenshaShokaiDiv tabHihokenshaShokai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -59,134 +46,177 @@ public class HihokenshaShokaiPanelSelectDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnShikakuTokuso")
-    public Button getBtnShikakuTokuso() {
-        return btnShikakuTokuso;
+    @JsonProperty("tabHihokenshaShokai")
+    public tabHihokenshaShokaiDiv getTabHihokenshaShokai() {
+        return tabHihokenshaShokai;
     }
 
-    @JsonProperty("btnShikakuTokuso")
-    public void setBtnShikakuTokuso(Button btnShikakuTokuso) {
-        this.btnShikakuTokuso=btnShikakuTokuso;
+    @JsonProperty("tabHihokenshaShokai")
+    public void setTabHihokenshaShokai(tabHihokenshaShokaiDiv tabHihokenshaShokai) {
+        this.tabHihokenshaShokai=tabHihokenshaShokai;
     }
 
-    @JsonProperty("btnSetaiShokai")
-    public Button getBtnSetaiShokai() {
-        return btnSetaiShokai;
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public tplHihokenshaRirekiDiv getTplHihokenshaRireki() {
+        return this.getTabHihokenshaShokai().getTplHihokenshaRireki();
     }
 
-    @JsonProperty("btnSetaiShokai")
-    public void setBtnSetaiShokai(Button btnSetaiShokai) {
-        this.btnSetaiShokai=btnSetaiShokai;
+    @JsonIgnore
+    public void  setTplHihokenshaRireki(tplHihokenshaRirekiDiv tplHihokenshaRireki) {
+        this.getTabHihokenshaShokai().setTplHihokenshaRireki(tplHihokenshaRireki);
     }
 
-    @JsonProperty("btnIryoHoken")
-    public Button getBtnIryoHoken() {
-        return btnIryoHoken;
+    @JsonIgnore
+    public ShikakuTokusoRirekiDiv getShikakuTokusoRireki() {
+        return this.getTabHihokenshaShokai().getTplHihokenshaRireki().getShikakuTokusoRireki();
     }
 
-    @JsonProperty("btnIryoHoken")
-    public void setBtnIryoHoken(Button btnIryoHoken) {
-        this.btnIryoHoken=btnIryoHoken;
+    @JsonIgnore
+    public void  setShikakuTokusoRireki(ShikakuTokusoRirekiDiv ShikakuTokusoRireki) {
+        this.getTabHihokenshaShokai().getTplHihokenshaRireki().setShikakuTokusoRireki(ShikakuTokusoRireki);
     }
 
-    @JsonProperty("btnSeikatsuHogo")
-    public Button getBtnSeikatsuHogo() {
-        return btnSeikatsuHogo;
+    @JsonIgnore
+    public tplSetaiShokaiDiv getTplSetaiShokai() {
+        return this.getTabHihokenshaShokai().getTplSetaiShokai();
     }
 
-    @JsonProperty("btnSeikatsuHogo")
-    public void setBtnSeikatsuHogo(Button btnSeikatsuHogo) {
-        this.btnSeikatsuHogo=btnSeikatsuHogo;
+    @JsonIgnore
+    public void  setTplSetaiShokai(tplSetaiShokaiDiv tplSetaiShokai) {
+        this.getTabHihokenshaShokai().setTplSetaiShokai(tplSetaiShokai);
     }
 
-    @JsonProperty("btnRofukuNenkin")
-    public Button getBtnRofukuNenkin() {
-        return btnRofukuNenkin;
+    @JsonIgnore
+    public DataGrid<dgSetaiJoho_Row> getDgSetaiJoho() {
+        return this.getTabHihokenshaShokai().getTplSetaiShokai().getDgSetaiJoho();
     }
 
-    @JsonProperty("btnRofukuNenkin")
-    public void setBtnRofukuNenkin(Button btnRofukuNenkin) {
-        this.btnRofukuNenkin=btnRofukuNenkin;
+    @JsonIgnore
+    public void  setDgSetaiJoho(DataGrid<dgSetaiJoho_Row> dgSetaiJoho) {
+        this.getTabHihokenshaShokai().getTplSetaiShokai().setDgSetaiJoho(dgSetaiJoho);
     }
 
-    @JsonProperty("btnShisetsuNyutaisho")
-    public Button getBtnShisetsuNyutaisho() {
-        return btnShisetsuNyutaisho;
+    @JsonIgnore
+    public tplIryoHokenDiv getTplIryoHoken() {
+        return this.getTabHihokenshaShokai().getTplIryoHoken();
     }
 
-    @JsonProperty("btnShisetsuNyutaisho")
-    public void setBtnShisetsuNyutaisho(Button btnShisetsuNyutaisho) {
-        this.btnShisetsuNyutaisho=btnShisetsuNyutaisho;
+    @JsonIgnore
+    public void  setTplIryoHoken(tplIryoHokenDiv tplIryoHoken) {
+        this.getTabHihokenshaShokai().setTplIryoHoken(tplIryoHoken);
     }
 
-    @JsonProperty("btnShoKofu")
-    public Button getBtnShoKofu() {
-        return btnShoKofu;
+    @JsonIgnore
+    public IryoHokenRirekiDiv getIryoHokenRireki() {
+        return this.getTabHihokenshaShokai().getTplIryoHoken().getIryoHokenRireki();
     }
 
-    @JsonProperty("btnShoKofu")
-    public void setBtnShoKofu(Button btnShoKofu) {
-        this.btnShoKofu=btnShoKofu;
+    @JsonIgnore
+    public void  setIryoHokenRireki(IryoHokenRirekiDiv IryoHokenRireki) {
+        this.getTabHihokenshaShokai().getTplIryoHoken().setIryoHokenRireki(IryoHokenRireki);
     }
 
-    @JsonProperty("btnShinseiTodokede")
-    public Button getBtnShinseiTodokede() {
-        return btnShinseiTodokede;
+    @JsonIgnore
+    public tplSeikatsuHogoDiv getTplSeikatsuHogo() {
+        return this.getTabHihokenshaShokai().getTplSeikatsuHogo();
     }
 
-    @JsonProperty("btnShinseiTodokede")
-    public void setBtnShinseiTodokede(Button btnShinseiTodokede) {
-        this.btnShinseiTodokede=btnShinseiTodokede;
+    @JsonIgnore
+    public void  setTplSeikatsuHogo(tplSeikatsuHogoDiv tplSeikatsuHogo) {
+        this.getTabHihokenshaShokai().setTplSeikatsuHogo(tplSeikatsuHogo);
     }
 
-    @JsonProperty("HihokenshaShokaiShikakuTokuso")
-    public HihokenshaShokaiShikakuTokusoDiv getHihokenshaShokaiShikakuTokuso() {
-        return HihokenshaShokaiShikakuTokuso;
+    @JsonIgnore
+    public Label getLblSeikatsuHogo() {
+        return this.getTabHihokenshaShokai().getTplSeikatsuHogo().getLblSeikatsuHogo();
     }
 
-    @JsonProperty("HihokenshaShokaiShikakuTokuso")
-    public void setHihokenshaShokaiShikakuTokuso(HihokenshaShokaiShikakuTokusoDiv HihokenshaShokaiShikakuTokuso) {
-        this.HihokenshaShokaiShikakuTokuso=HihokenshaShokaiShikakuTokuso;
+    @JsonIgnore
+    public void  setLblSeikatsuHogo(Label lblSeikatsuHogo) {
+        this.getTabHihokenshaShokai().getTplSeikatsuHogo().setLblSeikatsuHogo(lblSeikatsuHogo);
     }
 
-    @JsonProperty("HihokenshaShokaiSetaiShokai")
-    public HihokenshaShokaiSetaiShokaiDiv getHihokenshaShokaiSetaiShokai() {
-        return HihokenshaShokaiSetaiShokai;
+    @JsonIgnore
+    public tplRofukuNenkinDiv getTplRofukuNenkin() {
+        return this.getTabHihokenshaShokai().getTplRofukuNenkin();
     }
 
-    @JsonProperty("HihokenshaShokaiSetaiShokai")
-    public void setHihokenshaShokaiSetaiShokai(HihokenshaShokaiSetaiShokaiDiv HihokenshaShokaiSetaiShokai) {
-        this.HihokenshaShokaiSetaiShokai=HihokenshaShokaiSetaiShokai;
+    @JsonIgnore
+    public void  setTplRofukuNenkin(tplRofukuNenkinDiv tplRofukuNenkin) {
+        this.getTabHihokenshaShokai().setTplRofukuNenkin(tplRofukuNenkin);
     }
 
-    @JsonProperty("HihokenshaShokaiShisetsuNyutaisho")
-    public HihokenshaShokaiShisetsuNyutaishoDiv getHihokenshaShokaiShisetsuNyutaisho() {
-        return HihokenshaShokaiShisetsuNyutaisho;
+    @JsonIgnore
+    public Label getLblRofukuNenkin() {
+        return this.getTabHihokenshaShokai().getTplRofukuNenkin().getLblRofukuNenkin();
     }
 
-    @JsonProperty("HihokenshaShokaiShisetsuNyutaisho")
-    public void setHihokenshaShokaiShisetsuNyutaisho(HihokenshaShokaiShisetsuNyutaishoDiv HihokenshaShokaiShisetsuNyutaisho) {
-        this.HihokenshaShokaiShisetsuNyutaisho=HihokenshaShokaiShisetsuNyutaisho;
+    @JsonIgnore
+    public void  setLblRofukuNenkin(Label lblRofukuNenkin) {
+        this.getTabHihokenshaShokai().getTplRofukuNenkin().setLblRofukuNenkin(lblRofukuNenkin);
     }
 
-    @JsonProperty("HihokenshaShokaiShoKofuKaishu")
-    public HihokenshaShokaiShoKofuKaishuDiv getHihokenshaShokaiShoKofuKaishu() {
-        return HihokenshaShokaiShoKofuKaishu;
+    @JsonIgnore
+    public tplShisetsuNyutaishoDiv getTplShisetsuNyutaisho() {
+        return this.getTabHihokenshaShokai().getTplShisetsuNyutaisho();
     }
 
-    @JsonProperty("HihokenshaShokaiShoKofuKaishu")
-    public void setHihokenshaShokaiShoKofuKaishu(HihokenshaShokaiShoKofuKaishuDiv HihokenshaShokaiShoKofuKaishu) {
-        this.HihokenshaShokaiShoKofuKaishu=HihokenshaShokaiShoKofuKaishu;
+    @JsonIgnore
+    public void  setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
+        this.getTabHihokenshaShokai().setTplShisetsuNyutaisho(tplShisetsuNyutaisho);
     }
 
-    @JsonProperty("HihokenshaShokaiShinseiTodokede")
-    public HihokenshaShokaiShinseiTodokedeDiv getHihokenshaShokaiShinseiTodokede() {
-        return HihokenshaShokaiShinseiTodokede;
+    @JsonIgnore
+    public ShisetsuNyutaishoRirekiKanriDiv getShisetsuNyutaishoRireki() {
+        return this.getTabHihokenshaShokai().getTplShisetsuNyutaisho().getShisetsuNyutaishoRireki();
     }
 
-    @JsonProperty("HihokenshaShokaiShinseiTodokede")
-    public void setHihokenshaShokaiShinseiTodokede(HihokenshaShokaiShinseiTodokedeDiv HihokenshaShokaiShinseiTodokede) {
-        this.HihokenshaShokaiShinseiTodokede=HihokenshaShokaiShinseiTodokede;
+    @JsonIgnore
+    public void  setShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiKanriDiv ShisetsuNyutaishoRireki) {
+        this.getTabHihokenshaShokai().getTplShisetsuNyutaisho().setShisetsuNyutaishoRireki(ShisetsuNyutaishoRireki);
+    }
+
+    @JsonIgnore
+    public tplShoKofuKaishuDiv getTplShoKofuKaishu() {
+        return this.getTabHihokenshaShokai().getTplShoKofuKaishu();
+    }
+
+    @JsonIgnore
+    public void  setTplShoKofuKaishu(tplShoKofuKaishuDiv tplShoKofuKaishu) {
+        this.getTabHihokenshaShokai().setTplShoKofuKaishu(tplShoKofuKaishu);
+    }
+
+    @JsonIgnore
+    public ShoKaishuKirokuKanriDiv getShoKofuKaishuKiroku() {
+        return this.getTabHihokenshaShokai().getTplShoKofuKaishu().getShoKofuKaishuKiroku();
+    }
+
+    @JsonIgnore
+    public void  setShoKofuKaishuKiroku(ShoKaishuKirokuKanriDiv ShoKofuKaishuKiroku) {
+        this.getTabHihokenshaShokai().getTplShoKofuKaishu().setShoKofuKaishuKiroku(ShoKofuKaishuKiroku);
+    }
+
+    @JsonIgnore
+    public tplShinseiTodokedeDiv getTplShinseiTodokede() {
+        return this.getTabHihokenshaShokai().getTplShinseiTodokede();
+    }
+
+    @JsonIgnore
+    public void  setTplShinseiTodokede(tplShinseiTodokedeDiv tplShinseiTodokede) {
+        this.getTabHihokenshaShokai().setTplShinseiTodokede(tplShinseiTodokede);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgShinseishoTodokede_Row> getDgShinseishoTodokede() {
+        return this.getTabHihokenshaShokai().getTplShinseiTodokede().getDgShinseishoTodokede();
+    }
+
+    @JsonIgnore
+    public void  setDgShinseishoTodokede(DataGrid<dgShinseishoTodokede_Row> dgShinseishoTodokede) {
+        this.getTabHihokenshaShokai().getTplShinseiTodokede().setDgShinseishoTodokede(dgShinseishoTodokede);
     }
 
 }
