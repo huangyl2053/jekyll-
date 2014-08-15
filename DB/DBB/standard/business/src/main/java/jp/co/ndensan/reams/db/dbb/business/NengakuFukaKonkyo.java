@@ -70,36 +70,36 @@ public class NengakuFukaKonkyo {
     
     public Map<String, HokenryoDankai> createHokenryoDankaiMap(){
         Map<String, HokenryoDankai> map = new HashMap<>();
-        map.put("4月", 保険料段階_4月);
-        map.put("5月", 保険料段階_5月);
-        map.put("6月", 保険料段階_6月);
-        map.put("7月", 保険料段階_7月);
-        map.put("8月", 保険料段階_8月);
-        map.put("9月", 保険料段階_9月);
-        map.put("10月", 保険料段階_10月);
-        map.put("11月", 保険料段階_11月);
-        map.put("12月", 保険料段階_12月);
-        map.put("1月", 保険料段階_1月);
-        map.put("2月", 保険料段階_2月);
-        map.put("3月", 保険料段階_3月);
+        map.put("4", 保険料段階_4月);
+        map.put("5", 保険料段階_5月);
+        map.put("6", 保険料段階_6月);
+        map.put("7", 保険料段階_7月);
+        map.put("8", 保険料段階_8月);
+        map.put("9", 保険料段階_9月);
+        map.put("10", 保険料段階_10月);
+        map.put("11", 保険料段階_11月);
+        map.put("12", 保険料段階_12月);
+        map.put("1", 保険料段階_1月);
+        map.put("2", 保険料段階_2月);
+        map.put("3", 保険料段階_3月);
         
         return map;
     }
     
     public Map<String, String> createRankMap(){
         Map<String, String> map = new HashMap<>();
-        map.put("4月", ランク_4月);
-        map.put("5月", ランク_5月);
-        map.put("6月", ランク_6月);
-        map.put("7月", ランク_7月);
-        map.put("8月", ランク_8月);
-        map.put("9月", ランク_9月);
-        map.put("10月", ランク_10月);
-        map.put("11月", ランク_11月);
-        map.put("12月", ランク_12月);
-        map.put("1月", ランク_1月);
-        map.put("2月", ランク_2月);
-        map.put("3月", ランク_3月);
+        map.put("4", ランク_4月);
+        map.put("5", ランク_5月);
+        map.put("6", ランク_6月);
+        map.put("7", ランク_7月);
+        map.put("8", ランク_8月);
+        map.put("9", ランク_9月);
+        map.put("10", ランク_10月);
+        map.put("11", ランク_11月);
+        map.put("12", ランク_12月);
+        map.put("1", ランク_1月);
+        map.put("2", ランク_2月);
+        map.put("3", ランク_3月);
         
         return map;
     }
