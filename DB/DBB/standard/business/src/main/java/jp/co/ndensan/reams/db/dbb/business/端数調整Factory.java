@@ -48,47 +48,20 @@ public class 端数調整Factory {
             choseiTani    = input.get年額制御情報().get端数単位();
         }
         
-        if( chouseiHouhou.equals("切り上げ") ){
-            switch(choseiTani.intValue()){
-                case 10:
-                    return new 端数調整_切り上げ_10円();
-                case 100:
-                    return new 端数調整_切り上げ_100円();
-                case 1000:
-                    return new 端数調整_切り上げ_1000円();
-                    
-                default:
-                    return new 端数調整しない();
-            }
-        }
-         if( chouseiHouhou.equals("切捨て") ){
-            switch(choseiTani.intValue()){
-                case 10:
-                    return new 端数調整_切捨て_10円();
-                case 100:
-                    return new 端数調整_切捨て_100円();
-                case 1000:
-                    return new 端数調整_切捨て_1000円();
-                    
-                default:
-                    return new 端数調整しない();
-            }
-        }
-        if( chouseiHouhou.equals("四捨五入") ){
-            switch(choseiTani.intValue()){
-                case 10:
-                    return new 端数調整_四捨五入_10円();
-                case 100:
-                    return new 端数調整_四捨五入_100円();
-                case 1000:
-                    return new 端数調整_四捨五入_1000円();
-                    
-                default:
-                    return new 端数調整しない();
-            }
-        }
-        
-        return new 端数調整しない();
+        switch(chouseiHouhou){
+            case("切り上げ"):
+                return new 端数調整_切り上げ(choseiTani.toString());
+                
+            case("切捨て"):
+                return new 端数調整_切捨て(choseiTani.toString());
+                
+            case("四捨五入"):
+                return new 端数調整_四捨五入(choseiTani.toString());
+                
+            default:
+                return new 端数調整しない();
+        } 
+            
     }
     
 }
