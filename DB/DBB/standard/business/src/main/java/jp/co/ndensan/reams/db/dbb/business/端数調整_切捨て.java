@@ -13,12 +13,13 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @author n3336
  */
 public class 端数調整_切捨て implements I端数調整{
-     private String tanni;
+     private final String tanni;
 
     public 端数調整_切捨て(String tanni) {
         this.tanni = tanni;
     }
      
+     @Override
       public Decimal Calc端数(Decimal 年額保険料) {
         return 年額保険料.subtract(年額保険料.remainder(new Decimal(this.tanni)));    
     }   

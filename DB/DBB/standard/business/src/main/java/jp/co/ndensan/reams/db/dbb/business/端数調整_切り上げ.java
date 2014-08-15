@@ -19,6 +19,7 @@ public class 端数調整_切り上げ implements I端数調整{
         this.tanni = tanni;
     }
     
+    @Override
     public Decimal Calc端数(Decimal 年額保険料) {
         if(年額保険料.remainder(new Decimal(this.tanni)).compareTo(new Decimal("0")) != 0){
             return 年額保険料.subtract(年額保険料.remainder(new Decimal(this.tanni))).add(new Decimal(this.tanni));        

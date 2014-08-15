@@ -38,25 +38,25 @@ public class 端数調整Factory {
        
         端数調整判定 rankChange = new ランクが4月_翌3月まで変更無いか();
         String chouseiHouhou;
-        Decimal choseiTani;
+        Decimal choseiTanni;
         if( rankChange.JudgeHasuu(input) == true ){
             chouseiHouhou = input.get年額制御情報().get端数調整方法_ランク用();
-            choseiTani    = input.get年額制御情報().get端数単位_ランク用();               
+            choseiTanni    = input.get年額制御情報().get端数単位_ランク用();               
         }
         else{
             chouseiHouhou = input.get年額制御情報().get端数調整方法();
-            choseiTani    = input.get年額制御情報().get端数単位();
+            choseiTanni    = input.get年額制御情報().get端数単位();
         }
         
         switch(chouseiHouhou){
             case("切り上げ"):
-                return new 端数調整_切り上げ(choseiTani.toString());
+                return new 端数調整_切り上げ(choseiTanni.toString());
                 
             case("切捨て"):
-                return new 端数調整_切捨て(choseiTani.toString());
+                return new 端数調整_切捨て(choseiTanni.toString());
                 
             case("四捨五入"):
-                return new 端数調整_四捨五入(choseiTani.toString());
+                return new 端数調整_四捨五入(choseiTanni.toString());
                 
             default:
                 return new 端数調整しない();
