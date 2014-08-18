@@ -1,0 +1,16 @@
+﻿nyushoShisetsuShurui,varchar,RString,,,,,A
+nyushoShisetsuCode,varchar,RString,,,,,A
+shoriTimestamp,timestamp,RDateTime,,,,,A
+yukoKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+yukoShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+shisetsuRyakusho,varchar,RString,,,,,A
+shisetsuKanaRyakusho,varchar,RString,,,,,A
+shisetsuKanaJusho,varchar,RString,,,,,A
+idoJiyuCode,varchar,RString,,,,,A
+idoYMD,UDD015YMD,FlexibleDate,,,,,A
+hojinShubetsuCode,varchar,RString,,,,,A
+shisetsuKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+shisetsuKyushiYMD,UDD015YMD,FlexibleDate,,,,,A
+shisetsuHaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+shisetsuSaikaiYMD,UDD015YMD,FlexibleDate,,,,,A

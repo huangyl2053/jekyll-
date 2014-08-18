@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.SakuseiryoSeikyuKubu
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
@@ -34,11 +33,11 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import org.junit.Test;
@@ -46,7 +45,6 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Mockito.*;
 
 /**
  * 主治医意見書作成依頼情報を保持するクラスのテストクラスです。
@@ -185,12 +183,12 @@ public class ShujiiIkenshoSakuseiIraiTest extends DbeTestBase {
                 new RString("休止区分"), new RString("異動自由"),
                 new RString("会員区分"), true);
         KaigoIryoKikanCode 介護医療機関コード = new KaigoIryoKikanCode(new RString("0000000001"));
-        IShujiiIryoKikan 主治医医療機関 = new ShujiiIryoKikan(new ShoKisaiHokenshaNo(new RString("202050")),
+        IShujiiIryoKikan 主治医医療機関 = new ShujiiIryoKikan(new LasdecCode(new RString("202050")),
                 介護医療機関コード, iryoKikanCode, IryoKikanJokyo.有効,
                 new IryoKikanKubun(new RString("医療機関区分コード"), RString.EMPTY, RString.EMPTY));
         KaigoIryoKikan 介護医療機関 = new KaigoIryoKikan(iryoKikan, 主治医医療機関);
         KaigoDoctorCode 介護医師 = new KaigoDoctorCode(new RString("0000000001"));
-        IShujii 主治医 = new Shujii(new ShoKisaiHokenshaNo(new RString("202050")), 介護医療機関コード,
+        IShujii 主治医 = new Shujii(new LasdecCode(new RString("202050")), 介護医療機関コード,
                 介護医師, iryoKikanCode, new RString("0000000001"), IshiJokyo.有効,
                 new YubinNo(new RString("3010000")), new AtenaJusho(new RString("住所")),
                 new TelNo(new RString("3010000")), new RString("0262340000"));

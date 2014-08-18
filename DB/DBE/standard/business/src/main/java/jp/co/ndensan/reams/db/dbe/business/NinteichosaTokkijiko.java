@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * 認定調査特記事項を表すクラスです。
@@ -21,6 +22,7 @@ public class NinteichosaTokkijiko {
     private final NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
     //TODO n8178 城間篤人 認定調査項目を表すクラスが実装された後、それと置き換え予定 2014年2月末
     private final RString 認定調査特記事項番号;
+    private final Code 原本マスク区分;
     private final RString 特記事項;
 
     /**
@@ -29,18 +31,22 @@ public class NinteichosaTokkijiko {
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @param 原本マスク区分 原本マスク区分
      * @param 特記事項 特記事項
      * @throws NullPointerException 申請書管理番号、認定調査依頼履歴番号、認定調査特記事項番号にnullが渡されたとき
      */
-    public NinteichosaTokkijiko(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号, RString 認定調査特記事項番号, RString 特記事項)
+    public NinteichosaTokkijiko(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号, RString 認定調査特記事項番号,
+            Code 原本マスク区分, RString 特記事項)
             throws NullPointerException {
         requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
         requireNonNull(認定調査依頼履歴番号, Messages.E00003.replace("認定調査依頼履歴番号", getClass().getName()).getMessage());
         requireNonNull(認定調査特記事項番号, Messages.E00003.replace("認定調査特記事項番号", getClass().getName()).getMessage());
+        requireNonNull(原本マスク区分, Messages.E00003.replace("原本マスク区分", getClass().getName()).getMessage());
 
         this.申請書管理番号 = 申請書管理番号;
         this.認定調査依頼履歴番号 = 認定調査依頼履歴番号;
         this.認定調査特記事項番号 = 認定調査特記事項番号;
+        this.原本マスク区分 = 原本マスク区分;
         this.特記事項 = 特記事項;
     }
 
@@ -69,6 +75,15 @@ public class NinteichosaTokkijiko {
      */
     public RString get認定調査特記事項番号() {
         return 認定調査特記事項番号;
+    }
+
+    /**
+     * 原本マスク区分を返します。
+     *
+     * @return 原本マスク区分
+     */
+    public Code get原本マスク区分() {
+        return 原本マスク区分;
     }
 
     /**

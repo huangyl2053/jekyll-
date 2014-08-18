@@ -24,7 +24,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
 
     public static class コンストラクタ extends DbeTestBase {
 
-        private static YokaigoninteiProgress sut;
+        private static YokaigoNinteiProgress sut;
         private ShinseishoKanriNo 申請書管理番号;
         private FlexibleDate 認定申請情報登録年月日;
         private ConsentsToEnkitsuchiHakko 認定延期通知発行に対する同意有無;
@@ -67,7 +67,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号にnullが渡されたとき_NullPointerException発生() {
             申請書管理番号 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);
@@ -76,7 +76,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void 認定申請情報登録年月日にnullが渡されたとき_NullPointerException発生() {
             認定申請情報登録年月日 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);
@@ -85,7 +85,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void 認定延期通知発行年月日にnullが渡されたとき_NullPointerException発生() {
             認定延期通知発行年月日 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);
@@ -94,7 +94,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void 要介護認定延期理由にnullが渡されたとき_NullPointerException発生() {
             要介護認定延期理由 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);
@@ -103,7 +103,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void 要介護認定一次判定情報抽出年月日にnullが渡されたとき_NullPointerException発生() {
             要介護認定一次判定情報抽出年月日 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);
@@ -112,7 +112,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void 依頼情報データ送信年月日にnullが渡されたとき_NullPointerException発生() {
             依頼情報データ送信年月日 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);
@@ -121,7 +121,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void 認定調査依頼完了年月日にnullが渡されたとき_NullPointerException発生() {
             認定調査依頼完了年月日 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);
@@ -130,7 +130,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void 認定調査完了年月日にnullが渡されたとき_NullPointerException発生() {
             認定調査完了年月日 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);
@@ -139,7 +139,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void 主治医意見書作成依頼完了年月日にnullが渡されたとき_NullPointerException発生() {
             主治医意見書作成依頼完了年月日 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);
@@ -148,7 +148,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void 主治医意見書登録完了年月日にnullが渡されたとき_NullPointerException発生() {
             主治医意見書登録完了年月日 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);
@@ -157,7 +157,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void 要介護認定一次判定完了年月日にnullが渡されたとき_NullPointerException発生() {
             要介護認定一次判定完了年月日 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);
@@ -166,7 +166,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void 要介護認定1_5次判定完了年月日にnullが渡されたとき_NullPointerException発生() {
             要介護認定1_5次判定完了年月日 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);
@@ -175,7 +175,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void 認定審査会割当完了年月日にnullが渡されたとき_NullPointerException発生() {
             認定審査会割当完了年月日 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);
@@ -184,7 +184,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void 認定審査会完了年月日にnullが渡されたとき_NullPointerException発生() {
             認定審査会完了年月日 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);
@@ -193,7 +193,7 @@ public class YokaigoninteiProgressTest extends DbeTestBase {
         @Test(expected = NullPointerException.class)
         public void センター送信年月日にnullが渡されたとき_NullPointerException発生() {
             センター送信年月日 = null;
-            sut = new YokaigoninteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
+            sut = new YokaigoNinteiProgress(申請書管理番号, 認定申請情報登録年月日, 認定延期通知発行に対する同意有無, 認定延期通知発行年月日,
                     認定延期通知発行回数, 要介護認定延期理由, 要介護認定一次判定情報抽出年月日, 依頼情報データ送信年月日, 認定調査依頼完了年月日,
                     認定調査完了年月日, 主治医意見書作成依頼完了年月日, 主治医意見書登録完了年月日, 要介護認定一次判定完了年月日, 要介護認定1_5次判定完了年月日,
                     認定審査会割当完了年月日, 認定審査会完了年月日, センター送信年月日);

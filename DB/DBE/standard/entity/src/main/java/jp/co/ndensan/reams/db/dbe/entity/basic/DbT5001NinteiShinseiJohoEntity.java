@@ -1,20 +1,21 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShishoCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 
 /**
  * DbT5001NinteiShinseiJohoの項目定義クラスです
@@ -25,8 +26,8 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5001NinteiShinseiJoho");
+
     private RString insertDantaiCd;
-    @PrimaryKey
     private RDateTime insertTimestamp;
     private RString insertReamsLoginId;
     private UUID insertContextId;
@@ -36,13 +37,15 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
+    @PrimaryKey
+    private YMDHMS shoriTimestamp;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
-    private RString shishoCode;
+    private ShishoCode shishoCode;
     private KaigoHihokenshaNo hihokenshaNo;
     private ShikibetsuCode shikibetsuCode;
     private FlexibleDate ninteiShinseiYMD;
     private EdabanCode ninteiShinseiEdabanCode;
-    private RString ninteiShinseiShinseijiKubunCode;
+    private Code ninteiShinseiShinseijiKubunCode;
     private Code ninteiShinseiHoreiKubunCode;
     private Code ninteiShinseiYukoKubunCode;
     private RString shienShinseiKubun;
@@ -63,6 +66,8 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private RString torisageRiyu;
     private FlexibleDate torisageYMD;
     private boolean shinsaKeizokuKubun;
+    private Code shinsakaiYusenWaritsukeKubunCode;
+    private FlexibleDate ifSofuYMD;
 
     /**
      * getInsertDantaiCd
@@ -128,6 +133,24 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     }
 
     /**
+     * getShoriTimestamp
+     *
+     * @return shoriTimestamp
+     */
+    public YMDHMS getShoriTimestamp() {
+        return shoriTimestamp;
+    }
+
+    /**
+     * setShoriTimestamp
+     *
+     * @param shoriTimestamp shoriTimestamp
+     */
+    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
+        this.shoriTimestamp = shoriTimestamp;
+    }
+
+    /**
      * getShoKisaiHokenshaNo
      *
      * @return shoKisaiHokenshaNo
@@ -150,7 +173,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return shishoCode
      */
-    public RString getShishoCode() {
+    public ShishoCode getShishoCode() {
         return shishoCode;
     }
 
@@ -159,7 +182,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @param shishoCode shishoCode
      */
-    public void setShishoCode(RString shishoCode) {
+    public void setShishoCode(ShishoCode shishoCode) {
         this.shishoCode = shishoCode;
     }
 
@@ -240,8 +263,8 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return ninteiShinseiShinseijiKubunCode
      */
-    public NinteiShinseiKubunShinsei getNinteiShinseiShinseijiKubunCode() {
-        return NinteiShinseiKubunShinsei.valueOf(ninteiShinseiShinseijiKubunCode.toString());
+    public Code getNinteiShinseiShinseijiKubunCode() {
+        return ninteiShinseiShinseijiKubunCode;
     }
 
     /**
@@ -249,8 +272,8 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @param ninteiShinseiShinseijiKubunCode ninteiShinseiShinseijiKubunCode
      */
-    public void setNinteiShinseiShinseijiKubunCode(NinteiShinseiKubunShinsei ninteiShinseiShinseijiKubunCode) {
-        this.ninteiShinseiShinseijiKubunCode = new RString(ninteiShinseiShinseijiKubunCode.toString());
+    public void setNinteiShinseiShinseijiKubunCode(Code ninteiShinseiShinseijiKubunCode) {
+        this.ninteiShinseiShinseijiKubunCode = ninteiShinseiShinseijiKubunCode;
     }
 
     /**
@@ -614,6 +637,42 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     }
 
     /**
+     * getShinsakaiYusenWaritsukeKubunCode
+     *
+     * @return shinsakaiYusenWaritsukeKubunCode
+     */
+    public Code getShinsakaiYusenWaritsukeKubunCode() {
+        return shinsakaiYusenWaritsukeKubunCode;
+    }
+
+    /**
+     * setShinsakaiYusenWaritsukeKubunCode
+     *
+     * @param shinsakaiYusenWaritsukeKubunCode shinsakaiYusenWaritsukeKubunCode
+     */
+    public void setShinsakaiYusenWaritsukeKubunCode(Code shinsakaiYusenWaritsukeKubunCode) {
+        this.shinsakaiYusenWaritsukeKubunCode = shinsakaiYusenWaritsukeKubunCode;
+    }
+
+    /**
+     * getIfSofuYMD
+     *
+     * @return ifSofuYMD
+     */
+    public FlexibleDate getIfSofuYMD() {
+        return ifSofuYMD;
+    }
+
+    /**
+     * setIfSofuYMD
+     *
+     * @param ifSofuYMD ifSofuYMD
+     */
+    public void setIfSofuYMD(FlexibleDate ifSofuYMD) {
+        this.ifSofuYMD = ifSofuYMD;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT5001NinteiShinseiJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
@@ -624,13 +683,14 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.insertTimestamp, other.insertTimestamp)) {
+        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
             return false;
         }
-        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
+        if (!Objects.equals(this.shoriTimestamp, other.shoriTimestamp)) {
             return false;
         }
         return true;
     }
+
 // </editor-fold>
 }

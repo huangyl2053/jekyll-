@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJoho.*;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -25,10 +25,10 @@ public class ShujiiIryoKikanDacMock implements IShujiiIryoKikanDacMock {
     private SqlSession session;
 
     @Override
-    public DbT7011ShujiiIryoKikanJohoEntity select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード) {
+    public DbT7011ShujiiIryoKikanJohoEntity select(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.select().table(DbT7011ShujiiIryoKikanJoho.class).
-                where(and(eq(shoKisaiHokenshaNo, 証記載保険者番号), eq(kaigoIryokikanCode, 介護医療機関コード))).
+                where(and(eq(shichosonCode, 市町村コード), eq(kaigoIryokikanCode, 介護医療機関コード))).
                 toObject(DbT7011ShujiiIryoKikanJohoEntity.class);
     }
 }

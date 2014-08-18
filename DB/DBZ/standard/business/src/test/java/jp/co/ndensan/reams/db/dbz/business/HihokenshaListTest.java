@@ -9,10 +9,11 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.helper.HihokenshaMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -32,13 +33,17 @@ public class HihokenshaListTest extends DbzTestBase {
     private static final LasdecCode l000001 = new LasdecCode("000001");
     private static final LasdecCode l000002 = new LasdecCode("000002");
     private static final LasdecCode l000003 = new LasdecCode("000003");
-    private static final LasdecCode l000004 = new LasdecCode("000003");
+    private static final LasdecCode l000004 = new LasdecCode("000004");
     private static final ShikibetsuCode s0000000001 = new ShikibetsuCode("0000000001");
     private static final ShikibetsuCode s0000000002 = new ShikibetsuCode("0000000002");
-    private static final RDateTime rt2014_04_01_00_00 = RDateTime.of(2014, 4, 1, 0, 0);
-    private static final RDateTime rt2014_04_02_00_00 = RDateTime.of(2014, 4, 2, 0, 0);
-    private static final RDateTime rt2014_04_03_00_00 = RDateTime.of(2014, 4, 3, 0, 0);
-    private static final RDateTime rt2014_04_04_00_00 = RDateTime.of(2014, 4, 4, 0, 0);
+    private static final YMDHMS rt2014_04_01_00_00 = new YMDHMS("20140401000000");
+    private static final YMDHMS rt2014_04_02_00_00 = new YMDHMS("20140402000000");
+    private static final YMDHMS rt2014_04_03_00_00 = new YMDHMS("20140403000000");
+    private static final YMDHMS rt2014_04_04_00_00 = new YMDHMS("20140404000000");
+    private static final ShoKisaiHokenshaNo s000001 = new ShoKisaiHokenshaNo(new RString("000001"));
+    private static final ShoKisaiHokenshaNo s000002 = new ShoKisaiHokenshaNo(new RString("000002"));
+    private static final ShoKisaiHokenshaNo s000003 = new ShoKisaiHokenshaNo(new RString("000003"));
+    private static final ShoKisaiHokenshaNo s000004 = new ShoKisaiHokenshaNo(new RString("000004"));
     private static final KaigoHihokenshaNo hn0000000001 = new KaigoHihokenshaNo(new RString("0000000001"));
     private static final KaigoHihokenshaNo hn0000000002 = new KaigoHihokenshaNo(new RString("0000000002"));
 
@@ -119,10 +124,10 @@ public class HihokenshaListTest extends DbzTestBase {
 
     private static List<Hihokensha> createHihokenshaList() {
         List<Hihokensha> list = new ArrayList<>();
-        list.add(HihokenshaMock.createHihokensha(l000002, s0000000001, rt2014_04_04_00_00, hn0000000002));
-        list.add(HihokenshaMock.createHihokensha(l000003, s0000000001, rt2014_04_02_00_00, hn0000000002));
-        list.add(HihokenshaMock.createHihokensha(l000004, s0000000002, rt2014_04_01_00_00, hn0000000001));
-        list.add(HihokenshaMock.createHihokensha(l000001, s0000000002, rt2014_04_03_00_00, hn0000000001));
+        list.add(HihokenshaMock.createHihokensha(l000002, s0000000001, rt2014_04_04_00_00, s000002, hn0000000002));
+        list.add(HihokenshaMock.createHihokensha(l000003, s0000000001, rt2014_04_02_00_00, s000003, hn0000000002));
+        list.add(HihokenshaMock.createHihokensha(l000004, s0000000002, rt2014_04_01_00_00, s000004, hn0000000001));
+        list.add(HihokenshaMock.createHihokensha(l000001, s0000000002, rt2014_04_03_00_00, s000001, hn0000000001));
         return list;
     }
 }

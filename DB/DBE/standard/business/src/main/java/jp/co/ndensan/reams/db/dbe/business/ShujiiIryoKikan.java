@@ -4,13 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 主治医医療機関を表すクラスです。
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  */
 public class ShujiiIryoKikan implements IShujiiIryoKikan {
 
-    private final ShoKisaiHokenshaNo 証記載保険者番号;
+    private final LasdecCode 市町村コード;
     private final KaigoIryoKikanCode 介護医療機関コード;
     private final IIryoKikanCode 医療機関コード;
     private final IryoKikanJokyo 医療機関の状況;
@@ -28,22 +28,21 @@ public class ShujiiIryoKikan implements IShujiiIryoKikan {
     /**
      * 引数からメンバを受け取るコンストラクタです。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
      * @param 医療機関コード 医療機関コード
      * @param 医療機関の状況 医療機関の状況
      * @param 医療機関の区分 医療機関の区分
-     * @throws NullPointerException
-     * 証記載保険者番号、介護医療機関コード、医療機関コード、医療機関状況にNULLが渡された場合
+     * @throws NullPointerException 市町村コード、介護医療機関コード、医療機関コード、医療機関状況にNULLが渡された場合
      */
-    public ShujiiIryoKikan(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード,
+    public ShujiiIryoKikan(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード,
             IIryoKikanCode 医療機関コード, IryoKikanJokyo 医療機関の状況, IryoKikanKubun 医療機関の区分) throws NullPointerException {
-        requireNonNull(証記載保険者番号, Messages.E00003.replace("証記載保険者番号", getClass().getName()).getMessage());
+        requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", getClass().getName()).getMessage());
         requireNonNull(介護医療機関コード, Messages.E00003.replace("介護医療機関コード", getClass().getName()).getMessage());
         requireNonNull(医療機関コード, Messages.E00003.replace("get医療機関コード", getClass().getName()).getMessage());
         requireNonNull(医療機関の状況, Messages.E00003.replace("医療機関の状況", getClass().getName()).getMessage());
 
-        this.証記載保険者番号 = 証記載保険者番号;
+        this.市町村コード = 市町村コード;
         this.介護医療機関コード = 介護医療機関コード;
         this.医療機関コード = 医療機関コード;
         this.医療機関の状況 = 医療機関の状況;
@@ -51,8 +50,8 @@ public class ShujiiIryoKikan implements IShujiiIryoKikan {
     }
 
     @Override
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return 証記載保険者番号;
+    public LasdecCode get市町村コード() {
+        return 市町村コード;
     }
 
     @Override

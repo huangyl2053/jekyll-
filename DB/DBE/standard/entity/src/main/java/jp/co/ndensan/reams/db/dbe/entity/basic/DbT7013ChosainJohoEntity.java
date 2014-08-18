@@ -7,13 +7,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 
 /**
@@ -34,13 +34,13 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private LasdecCode shichosonCode;
     @PrimaryKey
     private RString kaigoJigyoshaNo;
     @PrimaryKey
     private RString kaigoChosainNo;
     private RString jigyoshaNo;
-    private boolean kaigoChosainJokyo;
+    private RString kaigoChosainJokyo;
     private AtenaMeisho chosainShimei;
     private AtenaKanaMeisho chosainKanaShimei;
     private RString seibetsu;
@@ -96,21 +96,21 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getShoKisaiHokenshaNo
+     * getShichosonCode
      *
-     * @return shoKisaiHokenshaNo
+     * @return shichosonCode
      */
-    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
+    public LasdecCode getShichosonCode() {
+        return shichosonCode;
     }
 
     /**
-     * setShoKisaiHokenshaNo
+     * setShichosonCode
      *
-     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     * @param shichosonCode shichosonCode
      */
-    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+    public void setShichosonCode(LasdecCode shichosonCode) {
+        this.shichosonCode = shichosonCode;
     }
 
     /**
@@ -172,7 +172,7 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
      *
      * @return kaigoChosainJokyo
      */
-    public boolean getKaigoChosainJokyo() {
+    public RString getKaigoChosainJokyo() {
         return kaigoChosainJokyo;
     }
 
@@ -181,7 +181,7 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
      *
      * @param kaigoChosainJokyo kaigoChosainJokyo
      */
-    public void setKaigoChosainJokyo(boolean kaigoChosainJokyo) {
+    public void setKaigoChosainJokyo(RString kaigoChosainJokyo) {
         this.kaigoChosainJokyo = kaigoChosainJokyo;
     }
 
@@ -340,7 +340,7 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
+        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
             return false;
         }
         if (!Objects.equals(this.kaigoJigyoshaNo, other.kaigoJigyoshaNo)) {

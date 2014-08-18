@@ -8,6 +8,7 @@ import java.util.Objects;
 //TODO n3327 三浦凌　ILocalGovernmentCodeがdefinitionに移動したら、アンコメントする。
 //import jp.co.ndensan.reams.ur.urz.business.ILocalGovernmentCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 //import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author N3327 三浦 凌
  */
-public class ShoKisaiHokenshaNo implements IDbColumnMappable {
+public class ShoKisaiHokenshaNo implements IDbColumnMappable, Comparable<ShoKisaiHokenshaNo> {
 
     private final RString 証記載保険者番号;
 
@@ -27,7 +28,8 @@ public class ShoKisaiHokenshaNo implements IDbColumnMappable {
      * @param コード 証記載保険者番号の値
      */
     public ShoKisaiHokenshaNo(RString コード) {
-        this.証記載保険者番号 = Objects.requireNonNull(コード, Messages.E00003.replace("コード", "証記載保険者番号").getMessage());
+        this.証記載保険者番号 = Objects.requireNonNull(コード, UrSystemErrorMessages.引数がnullのため生成不可
+                .getReplacedMessage("コード", "証記載保険者番号"));
     }
 
 //    /**
@@ -85,5 +87,10 @@ public class ShoKisaiHokenshaNo implements IDbColumnMappable {
     @Override
     public RString getColumnValue() {
         return 証記載保険者番号;
+    }
+
+    @Override
+    public int compareTo(ShoKisaiHokenshaNo 比較対象) {
+        return this.getColumnValue().compareTo(比較対象.getColumnValue());
     }
 }

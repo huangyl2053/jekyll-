@@ -8,12 +8,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import java.util.Objects;
 
 /**
- * DbT1001HihokenshaDaichoの項目定義クラスです。
+ * DbT1001HihokenshaDaichoの項目定義クラスです
  *
  */
 public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
@@ -21,8 +27,8 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1001HihokenshaDaicho");
+
     private RString insertDantaiCd;
-    @PrimaryKey
     private RDateTime insertTimestamp;
     private RString insertReamsLoginId;
     private UUID insertContextId;
@@ -32,32 +38,32 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private LasdecCode shichosonCode;
+    @PrimaryKey
     private KaigoHihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private RDateTime shoriTimestamp;
-    @PrimaryKey
+    private YMDHMS shoriTimestamp;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private ShikibetsuCode shikibetsuCode;
-    private FlexibleDate shikakuShutokuTodokedeYMD;
     private RString shikakuShutokuJiyuCode;
     private FlexibleDate shikakuShutokuYMD;
+    private FlexibleDate shikakuShutokuTodokedeYMD;
     private FlexibleDate ichigoHihokenshaNenreiTotatsuYMD;
-    private RString hihokennshaKubunCode;
+    private Code hihokennshaKubunCode;
     private RString shikakuSoshitsuJiyuCode;
-    private FlexibleDate shikakuSoshitsuTodokedeYMD;
     private FlexibleDate shikakuSoshitsuYMD;
+    private FlexibleDate shikakuSoshitsuTodokedeYMD;
     private RString jushochiTokureiFlag;
-    private RString shikakuIdouKubunCode;
     private RString shikakuHenkoJiyuCode;
-    private FlexibleDate shikakuHenkoTodokedeYMD;
     private FlexibleDate shikakuHenkoYMD;
+    private FlexibleDate shikakuHenkoTodokedeYMD;
     private RString jushochitokureiTekiyoJiyuCode;
-    private FlexibleDate jushochitokureiTekiyoTodokedeYMD;
     private FlexibleDate jushochitokureiTekiyoYMD;
+    private FlexibleDate jushochitokureiTekiyoTodokedeYMD;
     private RString jushochitokureiKaijoJiyuCode;
-    private FlexibleDate jushochitokureiKaijoTodokedeYMD;
     private FlexibleDate jushochitokureiKaijoYMD;
+    private FlexibleDate jushochitokureiKaijoTodokedeYMD;
     private RString koikinaiJushochiTokureiFlag;
-    private LasdecCode koikinaiTokureiSochimotoShichosonCode;
+    private ShoKisaiHokenshaNo koikinaiTokureiSochimotoHokenshaNo;
     private LasdecCode kyuShichosonCode;
     private RString saikofuKubun;
     private RString saikofuJiyuCode;
@@ -149,7 +155,7 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      *
      * @return shoriTimestamp
      */
-    public RDateTime getShoriTimestamp() {
+    public YMDHMS getShoriTimestamp() {
         return shoriTimestamp;
     }
 
@@ -158,8 +164,26 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      *
      * @param shoriTimestamp shoriTimestamp
      */
-    public void setShoriTimestamp(RDateTime shoriTimestamp) {
+    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
         this.shoriTimestamp = shoriTimestamp;
+    }
+
+    /**
+     * getShoKisaiHokenshaNo
+     *
+     * @return shoKisaiHokenshaNo
+     */
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+        return shoKisaiHokenshaNo;
+    }
+
+    /**
+     * setShoKisaiHokenshaNo
+     *
+     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     */
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
@@ -178,24 +202,6 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
-    }
-
-    /**
-     * getShikakuShutokuTodokedeYMD
-     *
-     * @return shikakuShutokuTodokedeYMD
-     */
-    public FlexibleDate getShikakuShutokuTodokedeYMD() {
-        return shikakuShutokuTodokedeYMD;
-    }
-
-    /**
-     * setShikakuShutokuTodokedeYMD
-     *
-     * @param shikakuShutokuTodokedeYMD shikakuShutokuTodokedeYMD
-     */
-    public void setShikakuShutokuTodokedeYMD(FlexibleDate shikakuShutokuTodokedeYMD) {
-        this.shikakuShutokuTodokedeYMD = shikakuShutokuTodokedeYMD;
     }
 
     /**
@@ -235,6 +241,24 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
+     * getShikakuShutokuTodokedeYMD
+     *
+     * @return shikakuShutokuTodokedeYMD
+     */
+    public FlexibleDate getShikakuShutokuTodokedeYMD() {
+        return shikakuShutokuTodokedeYMD;
+    }
+
+    /**
+     * setShikakuShutokuTodokedeYMD
+     *
+     * @param shikakuShutokuTodokedeYMD shikakuShutokuTodokedeYMD
+     */
+    public void setShikakuShutokuTodokedeYMD(FlexibleDate shikakuShutokuTodokedeYMD) {
+        this.shikakuShutokuTodokedeYMD = shikakuShutokuTodokedeYMD;
+    }
+
+    /**
      * getIchigoHihokenshaNenreiTotatsuYMD
      *
      * @return ichigoHihokenshaNenreiTotatsuYMD
@@ -257,7 +281,7 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      *
      * @return hihokennshaKubunCode
      */
-    public RString getHihokennshaKubunCode() {
+    public Code getHihokennshaKubunCode() {
         return hihokennshaKubunCode;
     }
 
@@ -266,8 +290,30 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      *
      * @param hihokennshaKubunCode hihokennshaKubunCode
      */
-    public void setHihokennshaKubunCode(RString hihokennshaKubunCode) {
+    public void setHihokennshaKubunCode(Code hihokennshaKubunCode) {
         this.hihokennshaKubunCode = hihokennshaKubunCode;
+    }
+
+    /**
+     * getHihokennshaKubunCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getHihokennshaKubunCodeMeisho() {
+        //TODO n8178 城間篤人 コード取得法がわかり次第修正 2014年9月末
+        return new RString("第1号被保険者");
+        //return CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DbeShubetsuKey.認定審査員区分, hihokennshaKubunCode);
+    }
+
+    /**
+     * getHihokennshaKubunCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getHihokennshaKubunCodeRyakusho() {
+        //TODO n8178 城間篤人 コード取得法がわかり次第修正 2014年9月末
+        return new RString("第1号");
+        //return CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, DbeShubetsuKey.認定審査員区分, hihokennshaKubunCode);
     }
 
     /**
@@ -289,24 +335,6 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getShikakuSoshitsuTodokedeYMD
-     *
-     * @return shikakuSoshitsuTodokedeYMD
-     */
-    public FlexibleDate getShikakuSoshitsuTodokedeYMD() {
-        return shikakuSoshitsuTodokedeYMD;
-    }
-
-    /**
-     * setShikakuSoshitsuTodokedeYMD
-     *
-     * @param shikakuSoshitsuTodokedeYMD shikakuSoshitsuTodokedeYMD
-     */
-    public void setShikakuSoshitsuTodokedeYMD(FlexibleDate shikakuSoshitsuTodokedeYMD) {
-        this.shikakuSoshitsuTodokedeYMD = shikakuSoshitsuTodokedeYMD;
-    }
-
-    /**
      * getShikakuSoshitsuYMD
      *
      * @return shikakuSoshitsuYMD
@@ -322,6 +350,24 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      */
     public void setShikakuSoshitsuYMD(FlexibleDate shikakuSoshitsuYMD) {
         this.shikakuSoshitsuYMD = shikakuSoshitsuYMD;
+    }
+
+    /**
+     * getShikakuSoshitsuTodokedeYMD
+     *
+     * @return shikakuSoshitsuTodokedeYMD
+     */
+    public FlexibleDate getShikakuSoshitsuTodokedeYMD() {
+        return shikakuSoshitsuTodokedeYMD;
+    }
+
+    /**
+     * setShikakuSoshitsuTodokedeYMD
+     *
+     * @param shikakuSoshitsuTodokedeYMD shikakuSoshitsuTodokedeYMD
+     */
+    public void setShikakuSoshitsuTodokedeYMD(FlexibleDate shikakuSoshitsuTodokedeYMD) {
+        this.shikakuSoshitsuTodokedeYMD = shikakuSoshitsuTodokedeYMD;
     }
 
     /**
@@ -343,24 +389,6 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getShikakuIdouKubunCode
-     *
-     * @return shikakuIdouKubunCode
-     */
-    public RString getShikakuIdouKubunCode() {
-        return shikakuIdouKubunCode;
-    }
-
-    /**
-     * setShikakuIdouKubunCode
-     *
-     * @param shikakuIdouKubunCode shikakuIdouKubunCode
-     */
-    public void setShikakuIdouKubunCode(RString shikakuIdouKubunCode) {
-        this.shikakuIdouKubunCode = shikakuIdouKubunCode;
-    }
-
-    /**
      * getShikakuHenkoJiyuCode
      *
      * @return shikakuHenkoJiyuCode
@@ -376,24 +404,6 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      */
     public void setShikakuHenkoJiyuCode(RString shikakuHenkoJiyuCode) {
         this.shikakuHenkoJiyuCode = shikakuHenkoJiyuCode;
-    }
-
-    /**
-     * getShikakuHenkoTodokedeYMD
-     *
-     * @return shikakuHenkoTodokedeYMD
-     */
-    public FlexibleDate getShikakuHenkoTodokedeYMD() {
-        return shikakuHenkoTodokedeYMD;
-    }
-
-    /**
-     * setShikakuHenkoTodokedeYMD
-     *
-     * @param shikakuHenkoTodokedeYMD shikakuHenkoTodokedeYMD
-     */
-    public void setShikakuHenkoTodokedeYMD(FlexibleDate shikakuHenkoTodokedeYMD) {
-        this.shikakuHenkoTodokedeYMD = shikakuHenkoTodokedeYMD;
     }
 
     /**
@@ -415,6 +425,24 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
+     * getShikakuHenkoTodokedeYMD
+     *
+     * @return shikakuHenkoTodokedeYMD
+     */
+    public FlexibleDate getShikakuHenkoTodokedeYMD() {
+        return shikakuHenkoTodokedeYMD;
+    }
+
+    /**
+     * setShikakuHenkoTodokedeYMD
+     *
+     * @param shikakuHenkoTodokedeYMD shikakuHenkoTodokedeYMD
+     */
+    public void setShikakuHenkoTodokedeYMD(FlexibleDate shikakuHenkoTodokedeYMD) {
+        this.shikakuHenkoTodokedeYMD = shikakuHenkoTodokedeYMD;
+    }
+
+    /**
      * getJushochitokureiTekiyoJiyuCode
      *
      * @return jushochitokureiTekiyoJiyuCode
@@ -430,24 +458,6 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      */
     public void setJushochitokureiTekiyoJiyuCode(RString jushochitokureiTekiyoJiyuCode) {
         this.jushochitokureiTekiyoJiyuCode = jushochitokureiTekiyoJiyuCode;
-    }
-
-    /**
-     * getJushochitokureiTekiyoTodokedeYMD
-     *
-     * @return jushochitokureiTekiyoTodokedeYMD
-     */
-    public FlexibleDate getJushochitokureiTekiyoTodokedeYMD() {
-        return jushochitokureiTekiyoTodokedeYMD;
-    }
-
-    /**
-     * setJushochitokureiTekiyoTodokedeYMD
-     *
-     * @param jushochitokureiTekiyoTodokedeYMD jushochitokureiTekiyoTodokedeYMD
-     */
-    public void setJushochitokureiTekiyoTodokedeYMD(FlexibleDate jushochitokureiTekiyoTodokedeYMD) {
-        this.jushochitokureiTekiyoTodokedeYMD = jushochitokureiTekiyoTodokedeYMD;
     }
 
     /**
@@ -469,6 +479,24 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
+     * getJushochitokureiTekiyoTodokedeYMD
+     *
+     * @return jushochitokureiTekiyoTodokedeYMD
+     */
+    public FlexibleDate getJushochitokureiTekiyoTodokedeYMD() {
+        return jushochitokureiTekiyoTodokedeYMD;
+    }
+
+    /**
+     * setJushochitokureiTekiyoTodokedeYMD
+     *
+     * @param jushochitokureiTekiyoTodokedeYMD jushochitokureiTekiyoTodokedeYMD
+     */
+    public void setJushochitokureiTekiyoTodokedeYMD(FlexibleDate jushochitokureiTekiyoTodokedeYMD) {
+        this.jushochitokureiTekiyoTodokedeYMD = jushochitokureiTekiyoTodokedeYMD;
+    }
+
+    /**
      * getJushochitokureiKaijoJiyuCode
      *
      * @return jushochitokureiKaijoJiyuCode
@@ -484,24 +512,6 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      */
     public void setJushochitokureiKaijoJiyuCode(RString jushochitokureiKaijoJiyuCode) {
         this.jushochitokureiKaijoJiyuCode = jushochitokureiKaijoJiyuCode;
-    }
-
-    /**
-     * getJushochitokureiKaijoTodokedeYMD
-     *
-     * @return jushochitokureiKaijoTodokedeYMD
-     */
-    public FlexibleDate getJushochitokureiKaijoTodokedeYMD() {
-        return jushochitokureiKaijoTodokedeYMD;
-    }
-
-    /**
-     * setJushochitokureiKaijoTodokedeYMD
-     *
-     * @param jushochitokureiKaijoTodokedeYMD jushochitokureiKaijoTodokedeYMD
-     */
-    public void setJushochitokureiKaijoTodokedeYMD(FlexibleDate jushochitokureiKaijoTodokedeYMD) {
-        this.jushochitokureiKaijoTodokedeYMD = jushochitokureiKaijoTodokedeYMD;
     }
 
     /**
@@ -523,6 +533,24 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
+     * getJushochitokureiKaijoTodokedeYMD
+     *
+     * @return jushochitokureiKaijoTodokedeYMD
+     */
+    public FlexibleDate getJushochitokureiKaijoTodokedeYMD() {
+        return jushochitokureiKaijoTodokedeYMD;
+    }
+
+    /**
+     * setJushochitokureiKaijoTodokedeYMD
+     *
+     * @param jushochitokureiKaijoTodokedeYMD jushochitokureiKaijoTodokedeYMD
+     */
+    public void setJushochitokureiKaijoTodokedeYMD(FlexibleDate jushochitokureiKaijoTodokedeYMD) {
+        this.jushochitokureiKaijoTodokedeYMD = jushochitokureiKaijoTodokedeYMD;
+    }
+
+    /**
      * getKoikinaiJushochiTokureiFlag
      *
      * @return koikinaiJushochiTokureiFlag
@@ -541,22 +569,22 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getKoikinaiTokureiSochimotoShichosonCode
+     * getKoikinaiTokureiSochimotoHokenshaNo
      *
-     * @return koikinaiTokureiSochimotoShichosonCode
+     * @return koikinaiTokureiSochimotoHokenshaNo
      */
-    public LasdecCode getKoikinaiTokureiSochimotoShichosonCode() {
-        return koikinaiTokureiSochimotoShichosonCode;
+    public ShoKisaiHokenshaNo getKoikinaiTokureiSochimotoHokenshaNo() {
+        return koikinaiTokureiSochimotoHokenshaNo;
     }
 
     /**
-     * setKoikinaiTokureiSochimotoShichosonCode
+     * setKoikinaiTokureiSochimotoHokenshaNo
      *
-     * @param koikinaiTokureiSochimotoShichosonCode
-     * koikinaiTokureiSochimotoShichosonCode
+     * @param koikinaiTokureiSochimotoHokenshaNo
+     * koikinaiTokureiSochimotoHokenshaNo
      */
-    public void setKoikinaiTokureiSochimotoShichosonCode(LasdecCode koikinaiTokureiSochimotoShichosonCode) {
-        this.koikinaiTokureiSochimotoShichosonCode = koikinaiTokureiSochimotoShichosonCode;
+    public void setKoikinaiTokureiSochimotoHokenshaNo(ShoKisaiHokenshaNo koikinaiTokureiSochimotoHokenshaNo) {
+        this.koikinaiTokureiSochimotoHokenshaNo = koikinaiTokureiSochimotoHokenshaNo;
     }
 
     /**
@@ -642,19 +670,17 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.insertTimestamp, other.insertTimestamp)) {
+        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
             return false;
         }
-        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
+        if (!Objects.equals(this.hihokenshaNo, other.hihokenshaNo)) {
             return false;
         }
         if (!Objects.equals(this.shoriTimestamp, other.shoriTimestamp)) {
             return false;
         }
-        if (!Objects.equals(this.shikibetsuCode, other.shikibetsuCode)) {
-            return false;
-        }
         return true;
     }
+
 // </editor-fold>
 }

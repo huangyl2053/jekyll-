@@ -1,22 +1,21 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.ButtonsShosaiShijiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.NinteiDetailDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.NinteiRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * JukyushaShokai のクラスファイル 
- * 
+ * JukyushaShokai のクラスファイル
+ *
  * @author 自動生成
  */
 public class JukyushaShokaiDiv extends Panel {
@@ -26,6 +25,7 @@ public class JukyushaShokaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("kaigoAtena")
     private KaigoAtenaInfoDiv kaigoAtena;
     @JsonProperty("kaigoShikaku")
@@ -54,7 +54,7 @@ public class JukyushaShokaiDiv extends Panel {
 
     @JsonProperty("kaigoAtena")
     public void setKaigoAtena(KaigoAtenaInfoDiv kaigoAtena) {
-        this.kaigoAtena=kaigoAtena;
+        this.kaigoAtena = kaigoAtena;
     }
 
     @JsonProperty("kaigoShikaku")
@@ -64,7 +64,7 @@ public class JukyushaShokaiDiv extends Panel {
 
     @JsonProperty("kaigoShikaku")
     public void setKaigoShikaku(KaigoShikakuKihonDiv kaigoShikaku) {
-        this.kaigoShikaku=kaigoShikaku;
+        this.kaigoShikaku = kaigoShikaku;
     }
 
     @JsonProperty("txtHihokenshaNo")
@@ -74,7 +74,7 @@ public class JukyushaShokaiDiv extends Panel {
 
     @JsonProperty("txtHihokenshaNo")
     public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
-        this.txtHihokenshaNo=txtHihokenshaNo;
+        this.txtHihokenshaNo = txtHihokenshaNo;
     }
 
     @JsonProperty("btnHiddenStart")
@@ -84,7 +84,7 @@ public class JukyushaShokaiDiv extends Panel {
 
     @JsonProperty("btnHiddenStart")
     public void setBtnHiddenStart(Button btnHiddenStart) {
-        this.btnHiddenStart=btnHiddenStart;
+        this.btnHiddenStart = btnHiddenStart;
     }
 
     @JsonProperty("ButtonsShosaiShiji")
@@ -94,7 +94,7 @@ public class JukyushaShokaiDiv extends Panel {
 
     @JsonProperty("ButtonsShosaiShiji")
     public void setButtonsShosaiShiji(ButtonsShosaiShijiDiv ButtonsShosaiShiji) {
-        this.ButtonsShosaiShiji=ButtonsShosaiShiji;
+        this.ButtonsShosaiShiji = ButtonsShosaiShiji;
     }
 
     @JsonProperty("NinteiRireki")
@@ -104,7 +104,7 @@ public class JukyushaShokaiDiv extends Panel {
 
     @JsonProperty("NinteiRireki")
     public void setNinteiRireki(NinteiRirekiDiv NinteiRireki) {
-        this.NinteiRireki=NinteiRireki;
+        this.NinteiRireki = NinteiRireki;
     }
 
     @JsonProperty("NinteiDetail")
@@ -114,7 +114,7 @@ public class JukyushaShokaiDiv extends Panel {
 
     @JsonProperty("NinteiDetail")
     public void setNinteiDetail(NinteiDetailDiv NinteiDetail) {
-        this.NinteiDetail=NinteiDetail;
+        this.NinteiDetail = NinteiDetail;
     }
 
 }

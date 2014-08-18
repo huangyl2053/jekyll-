@@ -30,6 +30,7 @@ public class ShinsakaiIin {
     private final ShinsakaiIinCode 審査会委員コード;
     private final Range<FlexibleDate> 委員着任期間;
     private final ShinsakaiIinJokyo 審査会委員状況;
+    //TODO n8178 城間篤人 事業者コードだけでなく、事業者の情報を持つように修正が必要 2014年10月末
     private final JigyoshaNo 事業者番号;
     private final AtenaMeisho 氏名;
     private final AtenaKanaMeisho カナ氏名;

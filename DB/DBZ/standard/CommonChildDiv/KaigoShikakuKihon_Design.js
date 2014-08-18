@@ -654,6 +654,45 @@ var DBZ;
                             "visibleCloseButton": true,
                             "onOkClose": "",
                             "onBeforeOpenDialog": ""
+                        },
+                        {
+                            "fieldName": "btnRenrakusaki",
+                            "items": [],
+                            "controlType": "ButtonDialog",
+                            "width": "70",
+                            "visible": true,
+                            "displayNone": true,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0",
+                            "marginRight": "0.4",
+                            "selectControlID": "btnRenrakusaki",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "連絡先",
+                            "onClick": "",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": true,
+                            "displayChildDivName": "DBZ.KaigoRenrakusakiInfo",
+                            "dataPassing": [
+                                {
+                                    "key": "hihokenshaNo",
+                                    "controlName": "txtHihokenshaNo"
+                                }
+                            ],
+                            "visibleCloseButton": true,
+                            "onOkClose": "",
+                            "onBeforeOpenDialog": ""
                         }
                     ],
                     "controlType": "Panel",

@@ -112,52 +112,6 @@ public final class GogitaiMockEntityCreator {
     }
 
     /**
-     * 審査会委員Entityを生成して返します。（Spy)
-     *
-     * @param 委員コード 委員コード
-     * @param 開始年月日 開始年月日
-     * @return 審査会委員Entity
-     */
-    public static DbT5102ShinsakaiIinJohoEntity create審査会委員EntitySpy(String 委員コード, String 開始年月日) {
-        DbT5102ShinsakaiIinJohoEntity entity = spy(create審査会委員Entity(委員コード, 開始年月日));
-        doReturn(new RString("meisho")).when(entity).getShinsakaiIinShikakuCodeMeisho();
-        doReturn(new RString("ryakusho")).when(entity).getShinsakaiIinShikakuCodeRyakusho();
-        return entity;
-    }
-
-    /**
-     * 審査会委員Entityを生成して返します。
-     *
-     * @param 委員コード 委員コード
-     * @param 開始年月日 開始年月日
-     * @return 審査会委員Entity
-     */
-    public static DbT5102ShinsakaiIinJohoEntity create審査会委員Entity(String 委員コード, String 開始年月日) {
-        DbT5102ShinsakaiIinJohoEntity entity = new DbT5102ShinsakaiIinJohoEntity();
-        entity.setShinsakaiIinCode(new RString(委員コード));
-        entity.setShinsakaiIinKaishiYMD(new FlexibleDate(開始年月日));
-        entity.setShinsakaiIinShuryoYMD(FlexibleDate.MAX);
-        entity.setShinsakaiIinJokyo(Boolean.TRUE);
-        entity.setJigyoshaKubun(new RString("1"));
-        entity.setJigyoshaNo(new JigyoshaNo(new RString("ABCD00021")));
-        entity.setShinsakaiIinShimei(new AtenaMeisho(RString.EMPTY));
-        entity.setShinsakaiIinKanaShimei(new AtenaKanaMeisho(RString.EMPTY));
-        entity.setSeibetsu(Gender.FEMALE.getCode());
-        entity.setShinsakaiIinShikakuCode(new Code(RString.EMPTY));
-        entity.setShinsainYusoKubun(new RString("1"));
-        entity.setYubinNo(new YubinNo(new RString("123-1234")));
-        entity.setJusho(new AtenaJusho(RString.EMPTY));
-        entity.setTelNo(new TelNo(RString.EMPTY));
-        entity.setKinyuKikanCode(new KinyuKikanCode(new RString("0001")));
-        entity.setKinyuKikanShitenCode(new KinyuKikanShitenCode(new RString("011")));
-        entity.setKozaShubetsu(RString.EMPTY);
-        entity.setKozaMeigi(RString.EMPTY);
-        entity.setKozaMeigiKana(RString.EMPTY);
-        entity.setKozaNo(RString.EMPTY);
-        return entity;
-    }
-
-    /**
      * 審査会開催場所Entityを生成して返します。（Spy)
      *
      * @param 審査会開催場所 審査会開催場所

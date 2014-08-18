@@ -47,7 +47,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.*;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun.*;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import static org.mockito.Mockito.spy;
 
 /**
@@ -100,7 +100,7 @@ public class ShujiiIkenshoResultMock {
                         new Code(new RString("所属診療科")),
                         new Code(new RString("医師区分"))),
                 new Shujii(
-                        new ShoKisaiHokenshaNo(new RString("202052")),
+                        new LasdecCode(new RString("202052")),
                         new KaigoIryoKikanCode(new RString("介護医療機関コード")),
                         new KaigoDoctorCode(new RString("介護医師コード")),
                         new _IryoKikanCode(new RString("1234567890")),
@@ -128,7 +128,7 @@ public class ShujiiIkenshoResultMock {
                                 new RString("会員区分"),
                                 true),
                         new ShujiiIryoKikan(
-                                new ShoKisaiHokenshaNo(new RString("202052")),
+                                new LasdecCode(new RString("202052")),
                                 new KaigoIryoKikanCode(new RString("1234567890")),
                                 new _IryoKikanCode(new RString("1234567890")),
                                 IryoKikanJokyo.有効,

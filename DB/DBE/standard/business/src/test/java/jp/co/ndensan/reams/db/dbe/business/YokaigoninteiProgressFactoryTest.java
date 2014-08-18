@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import com.google.common.base.Objects;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgressFactory.ParticularDates;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgressFactory.ParticularDates;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -28,25 +28,25 @@ public class YokaigoninteiProgressFactoryTest extends DbeTestBase {
 
     public static class コンストラクタ extends DbeTestBase {
 
-        private static YokaigoninteiProgressFactory sut;
+        private static YokaigoNinteiProgressFactory sut;
 
         @Test(expected = NullPointerException.class)
         public void コンストラクタで_引数にNULLが渡されたとき_NullPointerExceptionが発生すること() {
-            YokaigoninteiProgress progress = null;
-            sut = new YokaigoninteiProgressFactory(progress);
+            YokaigoNinteiProgress progress = null;
+            sut = new YokaigoNinteiProgressFactory(progress);
         }
     }
 
     public static class createYokaigoninteiPorgressWith extends DbeTestBase {
 
-        private static YokaigoninteiProgressFactory sut;
-        private static YokaigoninteiProgress newProgress;
+        private static YokaigoNinteiProgressFactory sut;
+        private static YokaigoNinteiProgress newProgress;
         private static FlexibleDate 変更年月日;
 
         @Before
         public void setUp() {
             変更年月日 = new FlexibleDate(new RString("20100101"));
-            sut = new YokaigoninteiProgressFactory(create認定進捗情報());
+            sut = new YokaigoNinteiProgressFactory(create認定進捗情報());
         }
 
         @Test
@@ -128,7 +128,7 @@ public class YokaigoninteiProgressFactoryTest extends DbeTestBase {
         }
     }
 
-    private static YokaigoninteiProgress create認定進捗情報() {
+    private static YokaigoNinteiProgress create認定進捗情報() {
         ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(new RString("0001"));
         FlexibleDate 認定申請情報登録年月日 = new FlexibleDate(new RString("20140101"));
         boolean 認定延期通知発行に対する同意有無 = true;
@@ -146,7 +146,7 @@ public class YokaigoninteiProgressFactoryTest extends DbeTestBase {
         FlexibleDate 認定審査会割当完了年月日 = new FlexibleDate(new RString("20140111"));
         FlexibleDate 認定審査会完了年月日 = new FlexibleDate(new RString("20140112"));
         FlexibleDate センター送信年月日 = new FlexibleDate(new RString("20140113"));
-        return new YokaigoninteiProgress(
+        return new YokaigoNinteiProgress(
                 申請書管理番号,
                 認定申請情報登録年月日,
                 ConsentsToEnkitsuchiHakko.toValue(認定延期通知発行に対する同意有無),

@@ -1,0 +1,9 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+ninteiShinseiShinseijiKubunCode,UDD035Code,Code,,,,,A
+hikiwatashiKubun,bpchar,RString,,,,,A
+hikiwatashiYMDHMS,UDD018YMDHMS,YMDHMS,,,,,A
+saiSoufuKubun,bpchar,RString,,,,,A
+saiChousaSoufuKubun,bpchar,RString,,,,,A
+saiIkenshoSoufuKubun,bpchar,RString,,,,,A

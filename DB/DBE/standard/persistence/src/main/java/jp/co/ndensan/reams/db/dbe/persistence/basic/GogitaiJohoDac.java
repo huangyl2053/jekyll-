@@ -68,7 +68,7 @@ public class GogitaiJohoDac implements IReplaceable<DbT5103GogitaiJohoEntity>, I
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5103GogitaiJoho.class).
                 where(and(eq(gogitaiNo, 合議体番号.value()),
-                and(leq(gogitaiYukoKikanKaishiYMD, 年月日), leq(年月日, gogitaiYukoKikanShuryoYMD)))).
+                                and(leq(gogitaiYukoKikanKaishiYMD, 年月日), leq(年月日, gogitaiYukoKikanShuryoYMD)))).
                 toObject(DbT5103GogitaiJohoEntity.class);
     }
 

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8156 宮本 康
  */
+//TODO N3327 三浦凌 YokaigoJotaiKubun(extend Enum)がURDにある。見直しが必要。
 public class YokaigoJotaiKubun extends KaigoCodeAssignedItem<YokaigoJotaiKubunCode> {
 
     /**

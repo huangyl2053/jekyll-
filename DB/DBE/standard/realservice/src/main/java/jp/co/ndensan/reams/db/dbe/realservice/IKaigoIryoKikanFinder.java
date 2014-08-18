@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikanCollection;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 医療機関の情報を取得するためのクラスのインターフェースです。
@@ -18,38 +18,38 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 public interface IKaigoIryoKikanFinder {
 
     /**
-     * 証記載保険者番号と介護医療機関コードを元に、介護医療機関の情報を返します。
+     * 市町村コードと介護医療機関コードを元に、介護医療機関の情報を返します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
      * @return 介護医療機関情報
      */
-    KaigoIryoKikan get介護医療機関(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード);
+    KaigoIryoKikan get介護医療機関(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード);
 
     /**
-     * 証記載保険者番号、介護医療機関コード、医療機関情報を元に、介護医療機関の情報を返します。
+     * 市町村コード、介護医療機関コード、医療機関情報を元に、介護医療機関の情報を返します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
      * @param 医療機関の状況 医療機関の状況
      * @return 介護医療機関情報
      */
-    KaigoIryoKikan get介護医療機関(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード, IryoKikanJokyo 医療機関の状況);
+    KaigoIryoKikan get介護医療機関(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IryoKikanJokyo 医療機関の状況);
 
     /**
-     * 証記載保険者番号を指定して、介護医療機関の情報をリストで返します。
+     * 市町村コードを指定して、介護医療機関の情報をリストで返します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @return 介護医療機関情報のリスト
      */
-    KaigoIryoKikanCollection get介護医療機関Collection(ShoKisaiHokenshaNo 証記載保険者番号);
+    KaigoIryoKikanCollection get介護医療機関Collection(LasdecCode 市町村コード);
 
     /**
-     * 証記載保険者番号と医療機関情報を指定して、介護医療機関の情報をリストで返します。
+     * 市町村コードと医療機関情報を指定して、介護医療機関の情報をリストで返します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 医療機関の状況 医療機関の状況
      * @return 介護医療機関情報のリスト
      */
-    KaigoIryoKikanCollection get介護医療機関Collection(ShoKisaiHokenshaNo 証記載保険者番号, IryoKikanJokyo 医療機関の状況);
+    KaigoIryoKikanCollection get介護医療機関Collection(LasdecCode 市町村コード, IryoKikanJokyo 医療機関の状況);
 }

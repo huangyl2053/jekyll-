@@ -1,4 +1,5 @@
 ﻿shinseishoKanriNo,varchar,ShinseishoKanriNo,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
 shoKisaiHokenshaNo,varchar,shoKisaiHokenshaNo,,,,,A
 hihokenshaNo,varchar,KaigoHihokenshaNo,,,,,A
 youkaigodoNinteiYMD,UDD015YMD,FlexibleDate,,,,,A
@@ -21,3 +22,4 @@ ninteiTorikeshiYMD,UDD015YMD,FlexibleDate,,,,,A
 tuchiKubun,bpchar,RString,,,,,A
 ninteiRiyu,text,RString,,,,,A
 shinsakaiMemo,text,RString,,,,,A
+ifSofuYMD,UDD015YMD,FlexibleDate,,,,,A

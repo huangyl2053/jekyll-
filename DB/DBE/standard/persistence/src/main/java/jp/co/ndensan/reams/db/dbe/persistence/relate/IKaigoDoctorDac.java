@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -32,63 +32,63 @@ public interface IKaigoDoctorDac {
     /**
      * 引数の条件に該当する介護医師情報エンティティを取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
      * @param 介護医師コード 介護医師コード
      * @return 介護医師情報エンティティ
      */
     @Transaction
-    KaigoDoctorEntity select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード);
+    KaigoDoctorEntity select(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード);
 
     /**
      * 引数の条件に該当する介護医師情報エンティティを取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
      * @param 介護医師コード 介護医師コード
      * @param 医師の状況 医師の状況
      * @return 介護医師情報エンティティ
      */
     @Transaction
-    KaigoDoctorEntity select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード, IshiJokyo 医師の状況);
+    KaigoDoctorEntity select(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード, IshiJokyo 医師の状況);
 
     /**
      * 引数の条件に該当する介護医師情報エンティティのリストを取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
      * @return 介護医師情報エンティティリスト
      */
     @Transaction
-    List<KaigoDoctorEntity> select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード);
+    List<KaigoDoctorEntity> select(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード);
 
     /**
      * 引数の条件に該当する介護医師情報エンティティのリストを取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
      * @param 医師の状況 医師の状況
      * @return 介護医師情報エンティティリスト
      */
     @Transaction
-    List<KaigoDoctorEntity> select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード, IshiJokyo 医師の状況);
+    List<KaigoDoctorEntity> select(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IshiJokyo 医師の状況);
 
     /**
      * 引数の条件に該当する介護医師情報エンティティのリストを取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @return 介護医師情報エンティティリスト
      */
     @Transaction
-    List<KaigoDoctorEntity> select(ShoKisaiHokenshaNo 証記載保険者番号);
+    List<KaigoDoctorEntity> select(LasdecCode 市町村コード);
 
     /**
      * 引数の条件に該当する介護医師情報エンティティのリストを取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 医師の状況 医師の状況
      * @return 介護医師情報エンティティリスト
      */
     @Transaction
-    List<KaigoDoctorEntity> select(ShoKisaiHokenshaNo 証記載保険者番号, IshiJokyo 医師の状況);
+    List<KaigoDoctorEntity> select(LasdecCode 市町村コード, IshiJokyo 医師の状況);
 }

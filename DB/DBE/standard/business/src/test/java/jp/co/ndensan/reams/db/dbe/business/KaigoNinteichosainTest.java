@@ -5,16 +5,17 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,10 +35,10 @@ public class KaigoNinteichosainTest extends TestBase {
     public static class ConstructorTest extends TestBase {
 
         private KaigoNinteichosain sut;
-        private ShoKisaiHokenshaNo 証記載保険者番号;
+        private LasdecCode 市町村コード;
         private KaigoJigyoshaNo 介護事業者番号;
         private KaigoNinteichosainNo 介護調査員番号;
-        private boolean 調査員状況;
+        private ChosainJokyo 調査員状況;
         private AtenaMeisho 調査員氏名;
         private AtenaKanaMeisho 調査員氏名カナ;
         private Gender 性別;
@@ -51,10 +52,10 @@ public class KaigoNinteichosainTest extends TestBase {
         @Override
         protected void setUp() {
 
-            証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("0001"));
+            市町村コード = new LasdecCode(new RString("000001"));
             介護事業者番号 = new KaigoJigyoshaNo(new RString("0001"));
             介護調査員番号 = new KaigoNinteichosainNo(new RString("0001"));
-            調査員状況 = true;
+            調査員状況 = ChosainJokyo.有効;
             調査員氏名 = new AtenaMeisho(new RString("山田"));
             調査員氏名カナ = new AtenaKanaMeisho(new RString("あああ"));
             性別 = Gender.MALE;
@@ -63,7 +64,7 @@ public class KaigoNinteichosainTest extends TestBase {
             郵便番号 = new YubinNo(new RString("001"));
             住所 = new AtenaJusho(new RString("長野市"));
             電話番号 = new TelNo(new RString("0001"));
-            認定調査委託先 = new NinteichosaItakusaki(new ShoKisaiHokenshaNo(new RString("202130")),
+            認定調査委託先 = new NinteichosaItakusaki(new LasdecCode(new RString("202130")),
                     new KaigoJigyoshaNo(new RString("0000000001")),
                     new JigyoshaNo(new RString("0000000001")),
                     true,
@@ -74,79 +75,79 @@ public class KaigoNinteichosainTest extends TestBase {
         }
 
         @Test(expected = NullPointerException.class)
-        public void 証記載保険者番号がNullの場合_コンストラクタは_NullPointerExceptionを投げる() {
-            証記載保険者番号 = null;
-            sut = new KaigoNinteichosain(証記載保険者番号, 介護事業者番号, 介護調査員番号, 調査員状況,
+        public void 市町村コードがNullの場合_コンストラクタは_NullPointerExceptionを投げる() {
+            市町村コード = null;
+            sut = new KaigoNinteichosain(市町村コード, 介護事業者番号, 介護調査員番号, 調査員状況,
                     調査員氏名, 調査員氏名カナ, 性別, 調査員資格コード, 地区コード, 郵便番号, 住所, 電話番号, 認定調査委託先);
         }
 
         @Test(expected = NullPointerException.class)
         public void 介護事業者番号がNullの場合_コンストラクタは_NullPointerExceptionを投げる() {
             介護事業者番号 = null;
-            sut = new KaigoNinteichosain(証記載保険者番号, 介護事業者番号, 介護調査員番号, 調査員状況,
+            sut = new KaigoNinteichosain(市町村コード, 介護事業者番号, 介護調査員番号, 調査員状況,
                     調査員氏名, 調査員氏名カナ, 性別, 調査員資格コード, 地区コード, 郵便番号, 住所, 電話番号, 認定調査委託先);
         }
 
         @Test(expected = NullPointerException.class)
         public void 介護調査員番号がNullの場合_コンストラクタは_NullPointerExceptionを投げる() {
             介護調査員番号 = null;
-            sut = new KaigoNinteichosain(証記載保険者番号, 介護事業者番号, 介護調査員番号, 調査員状況,
+            sut = new KaigoNinteichosain(市町村コード, 介護事業者番号, 介護調査員番号, 調査員状況,
                     調査員氏名, 調査員氏名カナ, 性別, 調査員資格コード, 地区コード, 郵便番号, 住所, 電話番号, 認定調査委託先);
         }
 
         @Test(expected = NullPointerException.class)
         public void 調査員氏名がNullの場合_コンストラクタは_NullPointerExceptionを投げる() {
             調査員氏名 = null;
-            sut = new KaigoNinteichosain(証記載保険者番号, 介護事業者番号, 介護調査員番号, 調査員状況,
+            sut = new KaigoNinteichosain(市町村コード, 介護事業者番号, 介護調査員番号, 調査員状況,
                     調査員氏名, 調査員氏名カナ, 性別, 調査員資格コード, 地区コード, 郵便番号, 住所, 電話番号, 認定調査委託先);
         }
 
         @Test(expected = NullPointerException.class)
         public void 調査員氏名カナがNullの場合_コンストラクタは_NullPointerExceptionを投げる() {
             調査員氏名カナ = null;
-            sut = new KaigoNinteichosain(証記載保険者番号, 介護事業者番号, 介護調査員番号, 調査員状況,
+            sut = new KaigoNinteichosain(市町村コード, 介護事業者番号, 介護調査員番号, 調査員状況,
                     調査員氏名, 調査員氏名カナ, 性別, 調査員資格コード, 地区コード, 郵便番号, 住所, 電話番号, 認定調査委託先);
         }
 
         @Test(expected = NullPointerException.class)
         public void 調査員資格コードがNullの場合_コンストラクタは_NullPointerExceptionを投げる() {
             調査員資格コード = null;
-            sut = new KaigoNinteichosain(証記載保険者番号, 介護事業者番号, 介護調査員番号, 調査員状況,
+            sut = new KaigoNinteichosain(市町村コード, 介護事業者番号, 介護調査員番号, 調査員状況,
                     調査員氏名, 調査員氏名カナ, 性別, 調査員資格コード, 地区コード, 郵便番号, 住所, 電話番号, 認定調査委託先);
         }
 
         @Test(expected = NullPointerException.class)
         public void 地区コードがNullの場合_コンストラクタは_NullPointerExceptionを投げる() {
             地区コード = null;
-            sut = new KaigoNinteichosain(証記載保険者番号, 介護事業者番号, 介護調査員番号, 調査員状況,
+            sut = new KaigoNinteichosain(市町村コード, 介護事業者番号, 介護調査員番号, 調査員状況,
                     調査員氏名, 調査員氏名カナ, 性別, 調査員資格コード, 地区コード, 郵便番号, 住所, 電話番号, 認定調査委託先);
         }
 
         @Test(expected = NullPointerException.class)
         public void 郵便番号がNullの場合_コンストラクタは_NullPointerExceptionを投げる() {
             郵便番号 = null;
-            sut = new KaigoNinteichosain(証記載保険者番号, 介護事業者番号, 介護調査員番号, 調査員状況,
+            sut = new KaigoNinteichosain(市町村コード, 介護事業者番号, 介護調査員番号, 調査員状況,
                     調査員氏名, 調査員氏名カナ, 性別, 調査員資格コード, 地区コード, 郵便番号, 住所, 電話番号, 認定調査委託先);
         }
 
         @Test(expected = NullPointerException.class)
         public void 住所がNullの場合_コンストラクタは_NullPointerExceptionを投げる() {
             住所 = null;
-            sut = new KaigoNinteichosain(証記載保険者番号, 介護事業者番号, 介護調査員番号, 調査員状況,
+            sut = new KaigoNinteichosain(市町村コード, 介護事業者番号, 介護調査員番号, 調査員状況,
                     調査員氏名, 調査員氏名カナ, 性別, 調査員資格コード, 地区コード, 郵便番号, 住所, 電話番号, 認定調査委託先);
         }
 
         @Test(expected = NullPointerException.class)
         public void 電話番号がNullの場合_コンストラクタは_NullPointerExceptionを投げる() {
             電話番号 = null;
-            sut = new KaigoNinteichosain(証記載保険者番号, 介護事業者番号, 介護調査員番号, 調査員状況,
+            sut = new KaigoNinteichosain(市町村コード, 介護事業者番号, 介護調査員番号, 調査員状況,
                     調査員氏名, 調査員氏名カナ, 性別, 調査員資格コード, 地区コード, 郵便番号, 住所, 電話番号, 認定調査委託先);
         }
 
         @Test(expected = NullPointerException.class)
         public void 認定調査委託先がNullの場合_コンストラクタは_NullPointerExceptionを投げる() {
             認定調査委託先 = null;
-            sut = new KaigoNinteichosain(証記載保険者番号, 介護事業者番号, 介護調査員番号, 調査員状況,
+            sut = new KaigoNinteichosain(市町村コード, 介護事業者番号, 介護調査員番号, 調査員状況,
                     調査員氏名, 調査員氏名カナ, 性別, 調査員資格コード, 地区コード, 郵便番号, 住所, 電話番号, 認定調査委託先);
         }
     }

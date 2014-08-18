@@ -36,7 +36,7 @@ public final class NinteichosaTokkijikoMapper {
             return null;
         }
         return new NinteichosaTokkijiko(entity.getShinseishoKanriNo(), entity.getNinteichosaRirekiNo(),
-                entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijiko());
+                entity.getNinteichosaTokkijikoNo(), entity.getGenponMaskKubun(), entity.getNinteichosaTokkijiko());
     }
 
     /**
@@ -74,6 +74,7 @@ public final class NinteichosaTokkijikoMapper {
         entity.setShinseishoKanriNo(認定調査特記事項.get申請書管理番号());
         entity.setNinteichosaRirekiNo(認定調査特記事項.get認定調査依頼履歴番号());
         entity.setNinteichosaTokkijikoNo(認定調査特記事項.get認定調査特記事項番号());
+        entity.setGenponMaskKubun(認定調査特記事項.get原本マスク区分());
         entity.setNinteichosaTokkijiko(認定調査特記事項.get特記事項());
         return entity;
     }

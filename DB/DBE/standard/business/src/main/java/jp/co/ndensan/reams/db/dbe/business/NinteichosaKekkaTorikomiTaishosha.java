@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  */
 public class NinteichosaKekkaTorikomiTaishosha {
 
-    private YokaigoninteiProgress 認定進捗情報;
-    private NinteiShinseiJoho 認定申請情報;
+    private YokaigoNinteiProgress 認定進捗情報;
+    private YokaigoNinteiShinsei 認定申請情報;
     private NinteichosaIrai 認定調査依頼情報;
     private KaigoNinteichosain 介護認定調査員;
     private IKojin 個人;
@@ -31,8 +31,8 @@ public class NinteichosaKekkaTorikomiTaishosha {
      * @param 個人 個人
      */
     public NinteichosaKekkaTorikomiTaishosha(
-            YokaigoninteiProgress 認定進捗情報,
-            NinteiShinseiJoho 認定申請情報,
+            YokaigoNinteiProgress 認定進捗情報,
+            YokaigoNinteiShinsei 認定申請情報,
             NinteichosaIrai 認定調査依頼情報,
             KaigoNinteichosain 介護認定調査員,
             IKojin 個人) {
@@ -48,7 +48,7 @@ public class NinteichosaKekkaTorikomiTaishosha {
      *
      * @return 認定進捗情報
      */
-    public YokaigoninteiProgress get認定進捗情報() {
+    public YokaigoNinteiProgress get認定進捗情報() {
         return 認定進捗情報;
     }
 
@@ -57,7 +57,7 @@ public class NinteichosaKekkaTorikomiTaishosha {
      *
      * @return 認定申請情報
      */
-    public NinteiShinseiJoho get認定申請情報() {
+    public YokaigoNinteiShinsei get認定申請情報() {
         return 認定申請情報;
     }
 

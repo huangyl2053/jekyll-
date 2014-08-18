@@ -7,7 +7,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT5022RenkeiyoDataSofuKiroku implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -16,8 +17,9 @@ public enum DbT5022RenkeiyoDataSofuKiroku implements IColumnDefinition {
     updateCount(10, 0),
     lastUpdateTimestamp(29, 0),
     lastUpdateReamsLoginId(2147483647, 0),
-    shinseishoKanriNo(10, 0),
-    hihokenshaNo(10, 0),
+    shinseishoKanriNo(2147483647, 0),
+    shoriTimestamp(2147483647, 0),
+    hihokenshaNo(2147483647, 0),
     ninteiShinseiShinseijiKubun(2147483647, 0),
     hikiwatashiKubun(1, 0),
     hikiwatashiNichiji(2147483647, 0),
@@ -35,6 +37,7 @@ public enum DbT5022RenkeiyoDataSofuKiroku implements IColumnDefinition {
 
     /**
      * getMaxLength
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -43,6 +46,7 @@ public enum DbT5022RenkeiyoDataSofuKiroku implements IColumnDefinition {
 
     /**
      * getScale
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

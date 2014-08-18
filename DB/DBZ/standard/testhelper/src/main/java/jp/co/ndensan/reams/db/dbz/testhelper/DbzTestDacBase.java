@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -7,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.testhelper;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase3;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
@@ -21,6 +23,11 @@ public class DbzTestDacBase extends TestDacBase3 {
     public static void setUpClass() {
         setDummyControlData(new RString("DBZ"));
         openMainSession();
+    }
+
+    @After
+    public void tearDown() {
+        rollback();
     }
 
     @AfterClass

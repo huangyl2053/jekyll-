@@ -6,30 +6,31 @@ package jp.co.ndensan.reams.db.dbz.business;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
 import jp.co.ndensan.reams.ur.urz.business.IJusho;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護保険の被保険者です。
  *
  * @author N3327 三浦 凌
  */
-public class Hihokensha implements IHihokenshaShikaku {
+public class Hihokensha implements IHihokenshaShikaku, INinteiShinseiTaishosha {
 
     private final IKojin profile;
     private final IHihokenshaShikaku shikaku;
@@ -46,8 +47,13 @@ public class Hihokensha implements IHihokenshaShikaku {
     }
 
     @Override
-    public LasdecCode get地方公共団体コード() {
-        return this.shikaku.get地方公共団体コード();
+    public LasdecCode get市町村コード() {
+        return this.shikaku.get市町村コード();
+    }
+
+    @Override
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
+        return this.shikaku.get証記載保険者番号();
     }
 
     @Override
@@ -56,18 +62,13 @@ public class Hihokensha implements IHihokenshaShikaku {
     }
 
     @Override
-    public RDateTime get被保険者台帳登録日時() {
-        return this.shikaku.get被保険者台帳登録日時();
+    public YMDHMS get処理日時() {
+        return this.shikaku.get処理日時();
     }
 
     @Override
     public KaigoHihokenshaNo get被保険者番号() {
         return this.shikaku.get被保険者番号();
-    }
-
-    @Override
-    public ShikakuIdoKubun get資格異動区分() {
-        return this.shikaku.get資格異動区分();
     }
 
     @Override
@@ -81,7 +82,7 @@ public class Hihokensha implements IHihokenshaShikaku {
     }
 
     @Override
-    public ShikakuHihokenshaKubun get被保険者区分() {
+    public HihokenshaKubun get被保険者区分() {
         return this.shikaku.get被保険者区分();
     }
 
@@ -121,8 +122,8 @@ public class Hihokensha implements IHihokenshaShikaku {
     }
 
     @Override
-    public LasdecCode get広域内住所地特例措置元市町村コード() {
-        return this.shikaku.get広域内住所地特例措置元市町村コード();
+    public ShoKisaiHokenshaNo get広域内住所地特例措置元保険者番号() {
+        return this.shikaku.get広域内住所地特例措置元保険者番号();
     }
 
     @Override
@@ -140,52 +141,42 @@ public class Hihokensha implements IHihokenshaShikaku {
         return this.shikaku.toKaigoShikaku();
     }
 
-    /**
-     * 氏名を返します。
-     *
-     * @return 氏名
-     */
+    @Override
     public IName get氏名() {
         return this.profile.get氏名();
     }
 
-    /**
-     * 性別を返します。
-     *
-     * @return 性別
-     */
+    @Override
     public Gender get性別() {
         return this.profile.get性別();
     }
 
-    /**
-     * 生年月日を返します。
-     *
-     * @return 生年月日
-     */
+    @Override
     public IDateOfBirth get生年月日() {
         return this.profile.get生年月日();
     }
 
-    /**
-     * 住所を返します。
-     *
-     * @return 住所
-     */
+    @Override
     public IJusho get住所() {
         return this.profile.get住所();
     }
 
-    /**
-     * 世帯コードを返します。
-     *
-     * @return 世帯コード
-     */
+    @Override
     public SetaiCode get世帯コード() {
         return this.profile.get世帯コード();
     }
 
+    @Override
+    public RString get個人番号() {
+        return this.profile.get個人番号();
+    }
+
+    @Override
+    public JuminShubetsu get住民種別() {
+        return this.profile.get住民種別();
+    }
+
     private String errorMessageFor(Class clazz) {
-        return Messages.E00003.replace("引数の" + clazz.getSimpleName(), getClass().getSimpleName()).getMessage();
+        return UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("引数の" + clazz.getSimpleName(), getClass().getSimpleName());
     }
 }

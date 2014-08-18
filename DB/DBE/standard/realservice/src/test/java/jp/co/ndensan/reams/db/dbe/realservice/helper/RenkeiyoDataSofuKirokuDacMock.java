@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5022RenkeiyoDataSofuKirokuEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IRenkeiyoDataSofuKirokuDac;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
@@ -33,6 +34,7 @@ public class RenkeiyoDataSofuKirokuDacMock implements IRenkeiyoDataSofuKirokuDac
     public static RString 登録可能な申請書管理番号 = new RString("更新可能");
     public static ShinseishoKanriNo shinseishokanriNo;
     public static KaigoHihokenshaNo hihokennshaNo;
+    public static YMDHMS shoriTimestamp;
 
     public static DbT5022RenkeiyoDataSofuKirokuEntity getSpiedInstance() {
 
@@ -40,11 +42,16 @@ public class RenkeiyoDataSofuKirokuDacMock implements IRenkeiyoDataSofuKirokuDac
 
         shinseishokanriNo = mock(ShinseishoKanriNo.class);
         shinseishokanriNo = new ShinseishoKanriNo(new RString("100000001"));
+
+        shoriTimestamp = mock(YMDHMS.class);
+        shoriTimestamp = new YMDHMS(new RString("20140808102030"));
+
         hihokennshaNo = mock(KaigoHihokenshaNo.class);
         hihokennshaNo = new KaigoHihokenshaNo(new RString("1234567890"));
 
-        entity.setShinseishoKanriNo(new RString("100000001"));
-        entity.setHihokenshaNo(new RString("1234567890"));
+        entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("100000001")));
+        entity.setShoriTimestamp(new YMDHMS(new RString("20140808102030")));
+        entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("1234567890")));
         entity.setNinteiShinseiShinseijiKubun(new RString("01"));
         entity.setHikiwatashiKubun(new RString("0"));
         entity.setHikiwatashiNichiji(RDateTime.of(2014, 03, 14, 18, 45, 05));
@@ -129,7 +136,7 @@ public class RenkeiyoDataSofuKirokuDacMock implements IRenkeiyoDataSofuKirokuDac
 
     @Override
     public int delete(DbT5022RenkeiyoDataSofuKirokuEntity data) {
-        if (data.getShinseishoKanriNo().equals(削除可能な申請書管理番号)) {
+        if (data.getShinseishoKanriNo().getColumnValue().equals(削除可能な申請書管理番号)) {
             return 1;
         }
         return 0;
@@ -137,7 +144,7 @@ public class RenkeiyoDataSofuKirokuDacMock implements IRenkeiyoDataSofuKirokuDac
 
     @Override
     public int insertOrUpdate(DbT5022RenkeiyoDataSofuKirokuEntity entity) {
-        if (entity.getShinseishoKanriNo().equals(登録可能な申請書管理番号)) {
+        if (entity.getShinseishoKanriNo().getColumnValue().equals(登録可能な申請書管理番号)) {
             return 1;
         }
         return 0;
@@ -145,7 +152,7 @@ public class RenkeiyoDataSofuKirokuDacMock implements IRenkeiyoDataSofuKirokuDac
 
     @Override
     public int insert(DbT5022RenkeiyoDataSofuKirokuEntity entity) {
-        if (entity.getShinseishoKanriNo().equals(登録可能な申請書管理番号)) {
+        if (entity.getShinseishoKanriNo().getColumnValue().equals(登録可能な申請書管理番号)) {
             return 1;
         }
         return 0;
@@ -153,7 +160,7 @@ public class RenkeiyoDataSofuKirokuDacMock implements IRenkeiyoDataSofuKirokuDac
 
     @Override
     public int update(DbT5022RenkeiyoDataSofuKirokuEntity entity) {
-        if (entity.getShinseishoKanriNo().equals(登録可能な申請書管理番号)) {
+        if (entity.getShinseishoKanriNo().getColumnValue().equals(登録可能な申請書管理番号)) {
             return 1;
         }
         return 0;

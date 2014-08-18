@@ -4,7 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dba.business.helper;
 
-import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
 
@@ -19,7 +20,7 @@ public class HihokenshaKubunMock {
     }
 
     public static HihokenshaKubun getSpiedInstance() {
-        HihokenshaKubun 被保険者区分 = new HihokenshaKubun(new RString("コード"), new RString("名称"));
+        HihokenshaKubun 被保険者区分 = new HihokenshaKubun(new Code("コード"), new RString("名称"));
         return spy(被保険者区分);
     }
 }

@@ -5,9 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 
@@ -25,10 +26,10 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
  */
 public class KaigoNinteichosain {
 
-    private final ShoKisaiHokenshaNo 証記載保険者番号;
+    private final LasdecCode 市町村コード;
     private final KaigoJigyoshaNo 介護事業者番号;
     private final KaigoNinteichosainNo 介護調査員番号;
-    private final boolean 調査員状況;
+    private final ChosainJokyo 調査員状況;
     private final AtenaMeisho 調査員氏名;
     private final AtenaKanaMeisho 調査員氏名カナ;
     private final Gender 性別;
@@ -43,7 +44,7 @@ public class KaigoNinteichosain {
     /**
      * コンストラクタです。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護事業者番号 介護事業者番号
      * @param 介護調査員番号 介護調査員番号
      * @param 調査員状況 調査員状況
@@ -58,10 +59,10 @@ public class KaigoNinteichosain {
      * @param 認定調査委託先 認定調査委託先
      * @throws NullPointerException 調査員状況および性別以外の引数にNULLが渡された場合
      */
-    public KaigoNinteichosain(ShoKisaiHokenshaNo 証記載保険者番号,
+    public KaigoNinteichosain(LasdecCode 市町村コード,
             KaigoJigyoshaNo 介護事業者番号,
             KaigoNinteichosainNo 介護調査員番号,
-            boolean 調査員状況,
+            ChosainJokyo 調査員状況,
             AtenaMeisho 調査員氏名,
             AtenaKanaMeisho 調査員氏名カナ,
             Gender 性別,
@@ -72,7 +73,7 @@ public class KaigoNinteichosain {
             TelNo 電話番号,
             NinteichosaItakusaki 認定調査委託先) throws NullPointerException {
 
-        this.証記載保険者番号 = requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
+        this.市町村コード = requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
         this.介護事業者番号 = requireNonNull(介護事業者番号, Messages.E00001.replace("介護事業者番号").getMessage());
         this.介護調査員番号 = requireNonNull(介護調査員番号, Messages.E00001.replace("介護調査員番号").getMessage());
         this.調査員状況 = 調査員状況;
@@ -88,12 +89,12 @@ public class KaigoNinteichosain {
     }
 
     /**
-     * 証記載保険者番号を返します。
+     * 市町村コードを返します。
      *
-     * @return 証記載保険者番号
+     * @return 市町村コード
      */
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return 証記載保険者番号;
+    public LasdecCode get市町村コード() {
+        return 市町村コード;
     }
 
     /**
@@ -119,7 +120,7 @@ public class KaigoNinteichosain {
      *
      * @return 調査員状況
      */
-    public boolean is調査員状況() {
+    public ChosainJokyo get調査員状況() {
         return 調査員状況;
     }
 

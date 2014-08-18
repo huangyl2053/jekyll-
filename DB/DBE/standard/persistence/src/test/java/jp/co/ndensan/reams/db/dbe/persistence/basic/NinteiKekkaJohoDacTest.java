@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5002NinteiKekkaJohoEntityMock
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
+import jp.co.ndensan.reams.uz.uza.util.db._SQLOptimisticLockFaildException;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -32,7 +34,7 @@ public class NinteiKekkaJohoDacTest extends DbeTestDacBase {
     private static final int AS_既存データ = 2;
     private static final ShinseishoKanriNo 新規管理番号 = new ShinseishoKanriNo(new RString("9999999999"));
     private static final ShinseishoKanriNo 既存管理番号 = new ShinseishoKanriNo(new RString("1234567899"));
-    private static final int 最新審査会番号 = 300;
+    private static final int 審査会番号 = 100;
 
     @BeforeClass
     public static void setUpClass() {
@@ -52,8 +54,8 @@ public class NinteiKekkaJohoDacTest extends DbeTestDacBase {
         }
 
         @Test
-        public void 該当の認定結果情報が存在する時_selectは_該当の最新情報を返す() {
-            assertThat(sut.select(既存管理番号).getShinsakaiKaisaiNo(), is(最新審査会番号));
+        public void 該当の認定結果情報が存在する時_selectは_該当の認定結果情報を返す() {
+            assertThat(sut.select(既存管理番号).getShinsakaiKaisaiNo(), is(審査会番号));
         }
     }
 
@@ -75,9 +77,9 @@ public class NinteiKekkaJohoDacTest extends DbeTestDacBase {
             assertThat(sut.select(新規管理番号).getShinseishoKanriNo(), is(新規管理番号));
         }
 
-        @Test
-        public void 追記型は指定した認定結果情報が存在する時も_insertが_成功する() {
-            assertThat(sut.insert(createEntity(AS_既存データ)), is(1));
+        @Test(expected = SystemException.class)
+        public void 認定結果情報が存在する_insertが_失敗する() {
+            assertThat(sut.insert(createEntity(AS_既存データ)), is(0));
         }
     }
 
@@ -99,18 +101,16 @@ public class NinteiKekkaJohoDacTest extends DbeTestDacBase {
             assertThat(sut.select(既存管理番号), nullValue());
         }
 
-        @Test
-        public void 追記型は指定した認定結果情報が存在しない時も_deleteが_成功する() {
-            assertThat(sut.delete(createEntity(AS_新規データ)), is(1));
+        @Test(expected = _SQLOptimisticLockFaildException.class)
+        public void 指定した認定結果情報が存在しない時_deleteは_失敗する() {
+            assertThat(sut.delete(createEntity(AS_新規データ)), is(0));
         }
     }
 
     private static void initializeEntityData() {
         DbT5002NinteiKekkaJohoEntity entity = createEntity(AS_既存データ);
-        for (int i = 0; i < 3; i++) {
-            entity.setShinsakaiKaisaiNo((i + 1) * 100);
-            sut.insert(entity);
-        }
+        entity.setShinsakaiKaisaiNo(審査会番号);
+        sut.insert(entity);
     }
 
     private static DbT5002NinteiKekkaJohoEntity createEntity(int flg) {

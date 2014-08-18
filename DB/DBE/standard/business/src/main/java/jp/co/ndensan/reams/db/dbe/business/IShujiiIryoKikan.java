@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 主治医医療機関を表すインターフェースです。
@@ -18,11 +18,11 @@ import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 public interface IShujiiIryoKikan {
 
     /**
-     * 証記載保険者番号を取得する。
+     * 市町村コードを取得する。
      *
-     * @return 証記載保険者番号
+     * @return 市町村コード
      */
-    ShoKisaiHokenshaNo get証記載保険者番号();
+    LasdecCode get市町村コード();
 
     /**
      * 介護独自の医療機関コードを取得する。

@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business._KaigoServiceShurui;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -57,6 +58,7 @@ public class NinteiResultMock {
     private static NinteiResult createNinteiResult() {
         return new NinteiResult(
                 new ShinseishoKanriNo(new RString("1234567890")),
+                new YMDHMS(new RString("20140808102030")),
                 new ShoKisaiHokenshaNo(new RString("1234567890")),
                 new KaigoHihokenshaNo(new RString("4567890123")),
                 new FlexibleDate("20140101"),
@@ -98,7 +100,8 @@ public class NinteiResultMock {
                 createNinteiResultIdo(),
                 createNinteiTorikeshi(),
                 TsuchiKubun.認定,
-                new RString("認定理由"));
+                new RString("認定理由"),
+                FlexibleDate.EMPTY);
     }
 
     private static YokaigoJotai createYokaigoJotai() {

@@ -56,7 +56,7 @@ public class ShinsakaiIinTest {
 
         @Before
         public void setUp() {
-            委員コード = new ShinsakaiIinCode(RString.EMPTY);
+            委員コード = new ShinsakaiIinCode(new RString("00000001"));
 //            委員着任期間 = mock(Range.class);
             委員着任期間 = new Range<>(new FlexibleDate("20140301"), new FlexibleDate("20140331"));
             審査会委員状況 = ShinsakaiIinJokyo.有効;

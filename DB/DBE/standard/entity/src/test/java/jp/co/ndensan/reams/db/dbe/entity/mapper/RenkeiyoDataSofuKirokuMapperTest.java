@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.RenkeiyoDataSofuKiroku;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5022RenkeiyoDataSofuKirokuEntity;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -28,6 +29,7 @@ public class RenkeiyoDataSofuKirokuMapperTest extends TestBase {
     public static class toRenkeiyoDataSofuKirokui extends TestBase {
 
         private ShinseishoKanriNo 申請書管理番号;
+        private YMDHMS 処理日時;
         private KaigoHihokenshaNo 被保険者番号;
         private RString 認定申請時区分;
         private RString 引渡し区分;
@@ -40,6 +42,7 @@ public class RenkeiyoDataSofuKirokuMapperTest extends TestBase {
         @Override
         public void setUp() {
             申請書管理番号 = new ShinseishoKanriNo(new RString("100000001"));
+            処理日時 = new YMDHMS(new RString("20140808102030"));
             被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));
             認定申請時区分 = new RString("01");
             引渡し区分 = new RString("1");
@@ -53,6 +56,11 @@ public class RenkeiyoDataSofuKirokuMapperTest extends TestBase {
         @Test
         public void 引き渡した申請書管理番号と_toRenkeiyoDataSofuKirokui_の結果は一致する() {
             assertThat(sut.get申請書管理番号().value(), is(申請書管理番号.value()));
+        }
+
+        @Test
+        public void 引き渡した処理日時と_toRenkeiyoDataSofuKirokui_の結果は一致する() {
+            assertThat(sut.get処理日時(), is(処理日時));
         }
 
         @Test
@@ -92,8 +100,9 @@ public class RenkeiyoDataSofuKirokuMapperTest extends TestBase {
 
         private DbT5022RenkeiyoDataSofuKirokuEntity create連携用送付記録Entity() {
             DbT5022RenkeiyoDataSofuKirokuEntity entity = new DbT5022RenkeiyoDataSofuKirokuEntity();
-            entity.setShinseishoKanriNo(申請書管理番号.value());
-            entity.setHihokenshaNo(被保険者番号.getColumnValue());
+            entity.setShinseishoKanriNo(申請書管理番号);
+            entity.setShoriTimestamp(処理日時);
+            entity.setHihokenshaNo(被保険者番号);
             entity.setNinteiShinseiShinseijiKubun(認定申請時区分);
             entity.setHikiwatashiKubun(引渡し区分);
             entity.setHikiwatashiNichiji(引渡し日時);

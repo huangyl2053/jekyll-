@@ -1,8 +1,8 @@
-﻿shoKisaiHokenshaNo,varchar,ShoKisaiHokenshaNo,,,,,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
 kaigoJigyoshaNo,varchar,RString,,,,,A
 kaigoChosainNo,varchar,RString,,,,,A
 jigyoshaNo,varchar,RString,,,,,A
-kaigoChosainJokyo,bool,boolean,,,,,A
+kaigoChosainJokyo,bpchar,RString,,,,,A
 chosainShimei,UDD042AtenaMeisho,AtenaMeisho,,,,,A
 chosainKanaShimei,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,A
 seibetsu,bpchar,RString,,,,,A

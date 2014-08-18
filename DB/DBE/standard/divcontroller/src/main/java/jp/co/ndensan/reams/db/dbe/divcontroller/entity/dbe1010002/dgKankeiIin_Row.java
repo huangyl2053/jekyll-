@@ -3,14 +3,14 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jul 01 14:37:34 JST 2014 
+ * Thu Jul 24 11:13:45 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -21,33 +21,37 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgKankeiIin_Row extends DataRow {
 
-    private Button editButton;
     private RString code;
     private RString name;
     private RString shozokuKikan;
+    private RString shozokuKikanCode;
+    private RString shozokuKikanMeisho;
+    private TextBoxNum kanriNo;
 
     public dgKankeiIin_Row() {
         super();
-        this.editButton = new Button();
         this.code = RString.EMPTY;
         this.name = RString.EMPTY;
         this.shozokuKikan = RString.EMPTY;
+        this.shozokuKikanCode = RString.EMPTY;
+        this.shozokuKikanMeisho = RString.EMPTY;
+        this.kanriNo = new TextBoxNum();
     }
 
-    public dgKankeiIin_Row(Button editButton, RString code, RString name, RString shozokuKikan) {
+    public dgKankeiIin_Row(RString code, RString name, RString shozokuKikan, RString shozokuKikanCode, RString shozokuKikanMeisho, TextBoxNum kanriNo) {
         super();
-        this.setOriginalData("editButton", editButton);
         this.setOriginalData("code", code);
         this.setOriginalData("name", name);
         this.setOriginalData("shozokuKikan", shozokuKikan);
-        this.editButton = editButton;
+        this.setOriginalData("shozokuKikanCode", shozokuKikanCode);
+        this.setOriginalData("shozokuKikanMeisho", shozokuKikanMeisho);
+        this.setOriginalData("kanriNo", kanriNo);
         this.code = code;
         this.name = name;
         this.shozokuKikan = shozokuKikan;
-    }
-
-    public Button getEditButton() {
-        return editButton;
+        this.shozokuKikanCode = shozokuKikanCode;
+        this.shozokuKikanMeisho = shozokuKikanMeisho;
+        this.kanriNo = kanriNo;
     }
 
     public RString getCode() {
@@ -62,9 +66,16 @@ public class dgKankeiIin_Row extends DataRow {
         return shozokuKikan;
     }
 
-    public void setEditButton(Button editButton) {
-        this.setOriginalData("editButton", editButton);
-        this.editButton = editButton;
+    public RString getShozokuKikanCode() {
+        return shozokuKikanCode;
+    }
+
+    public RString getShozokuKikanMeisho() {
+        return shozokuKikanMeisho;
+    }
+
+    public TextBoxNum getKanriNo() {
+        return kanriNo;
     }
 
     public void setCode(RString code) {
@@ -80,6 +91,21 @@ public class dgKankeiIin_Row extends DataRow {
     public void setShozokuKikan(RString shozokuKikan) {
         this.setOriginalData("shozokuKikan", shozokuKikan);
         this.shozokuKikan = shozokuKikan;
+    }
+
+    public void setShozokuKikanCode(RString shozokuKikanCode) {
+        this.setOriginalData("shozokuKikanCode", shozokuKikanCode);
+        this.shozokuKikanCode = shozokuKikanCode;
+    }
+
+    public void setShozokuKikanMeisho(RString shozokuKikanMeisho) {
+        this.setOriginalData("shozokuKikanMeisho", shozokuKikanMeisho);
+        this.shozokuKikanMeisho = shozokuKikanMeisho;
+    }
+
+    public void setKanriNo(TextBoxNum kanriNo) {
+        this.setOriginalData("kanriNo", kanriNo);
+        this.kanriNo = kanriNo;
     }
 
 }

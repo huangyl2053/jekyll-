@@ -20,6 +20,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @author N8156 宮本 康
  */
+// TODO N3327 Baseは一般的に抽象クラスに使われる傾向があるので、名前を見直した方が良いかもしれない。
 public class ShujiiIkenshoBase {
 
     private final ShinseishoKanriNo 申請書管理番号;

@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.YokaigoninteiDateConstants;
+import jp.co.ndensan.reams.db.dbe.definition.YokaigoNinteiDateConstants;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJoho;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
@@ -40,12 +40,12 @@ public class NinteichosaIraiTaishoshaDac {
                 .select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
-                .where(eq(YokaigoninteiDateConstants.認定調査依頼未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD))
+                .where(eq(YokaigoNinteiDateConstants.認定調査依頼未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD))
                 .toList(KaigoNinteiShoriTaishoshaEntity.class);
     }
 
     /**
-     * 指定された証記載保険者番号に該当する、認定調査依頼対象者を取得します。
+     * 指定された市町村コードに該当する、認定調査依頼対象者を取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @return 介護認定処理対象者エンティティのリスト
@@ -57,8 +57,8 @@ public class NinteichosaIraiTaishoshaDac {
                 .select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
-                .where(and(eq(YokaigoninteiDateConstants.認定調査依頼未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD),
-                eq(証記載保険者番号, DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo)))
+                .where(and(eq(YokaigoNinteiDateConstants.認定調査依頼未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD),
+                                eq(証記載保険者番号, DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo)))
                 .toList(KaigoNinteiShoriTaishoshaEntity.class);
     }
 
@@ -76,9 +76,9 @@ public class NinteichosaIraiTaishoshaDac {
                 .select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
-                .where(and(eq(YokaigoninteiDateConstants.認定調査依頼未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD),
-                eq(証記載保険者番号, DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo),
-                eq(支所コード, DbT5001NinteiShinseiJoho.shishoCode)))
+                .where(and(eq(YokaigoNinteiDateConstants.認定調査依頼未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD),
+                                eq(証記載保険者番号, DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo),
+                                eq(支所コード, DbT5001NinteiShinseiJoho.shishoCode)))
                 .toList(KaigoNinteiShoriTaishoshaEntity.class);
     }
 }

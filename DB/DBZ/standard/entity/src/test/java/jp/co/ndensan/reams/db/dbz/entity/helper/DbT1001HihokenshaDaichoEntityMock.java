@@ -10,17 +10,17 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiKaijo
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
 
@@ -49,13 +49,13 @@ public final class DbT1001HihokenshaDaichoEntityMock {
      */
     public static DbT1001HihokenshaDaichoEntity create() {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
-        entity.setShichosonCode(new LasdecCode("000000"));
+        entity.setShichosonCode(new LasdecCode(new RString("000000")));
+        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("000000")));
         entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("1234567890")));
         entity.setShikibetsuCode(new ShikibetsuCode("0000000001"));
-        entity.setShoriTimestamp(RDateTime.of(2014, 03, 28, 0, 0));
-        entity.setHihokennshaKubunCode(ShikakuHihokenshaKubun.第１号被保険者.getコード());
+        entity.setShoriTimestamp(new YMDHMS("20140328000000"));
+        entity.setHihokennshaKubunCode(new Code("1"));
         entity.setIchigoHihokenshaNenreiTotatsuYMD(new FlexibleDate("20140328"));
-        entity.setShikakuIdouKubunCode(ShikakuIdoKubun.資格取得.getCode());
         entity.setShikakuShutokuJiyuCode(ShikakuShutokuJiyu.年齢到達.getCode());
         entity.setShikakuShutokuTodokedeYMD(new FlexibleDate("20130327"));
         entity.setShikakuShutokuYMD(new FlexibleDate("20130327"));
@@ -73,7 +73,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
         entity.setJushochitokureiKaijoYMD(new FlexibleDate("00000000"));
         entity.setJushochiTokureiFlag(JushochiTokureishaKubun.通常資格者.getコード());
         entity.setKoikinaiJushochiTokureiFlag(KoikinaiJushochitokureishaKubun.通常資格者.getCode());
-        entity.setKoikinaiTokureiSochimotoShichosonCode(null);
+        entity.setKoikinaiTokureiSochimotoHokenshaNo(null);
         entity.setKyuShichosonCode(null);
         entity.setSaikofuKubun(HihokenshashoSaikofuKubun.なし.getCode());
         entity.setSaikofuJiyuCode(HihokenshashoSaikofuJiyu.なし.getCode());
@@ -83,16 +83,35 @@ public final class DbT1001HihokenshaDaichoEntityMock {
     }
 
     /**
-     * 市町村コードを指定して、DbT1001HihokenshaDaichoEntityを生成します。
+     * 市町村コード、識別コード、処理日時を指定して、DbT1001HihokenshaDaichoEntityを生成します。
      *
-     * @param lasdecCode 市町村コード
+     * @param shichosonCode 市町村コード
+     * @param shikibetsuCode 識別コード
+     * @param timeStamp 処理日時
      * @return DbT1001HihokenshaDaichoEntity
      */
     public static DbT1001HihokenshaDaichoEntity createWithKey(
-            LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode, RDateTime timeStamp) {
+            LasdecCode shichosonCode, ShikibetsuCode shikibetsuCode, YMDHMS timeStamp) {
         DbT1001HihokenshaDaichoEntity entity = create();
-        entity.setShichosonCode(lasdecCode);
+        entity.setShichosonCode(shichosonCode);
         entity.setShikibetsuCode(shikibetsuCode);
+        entity.setShoriTimestamp(timeStamp);
+        return entity;
+    }
+
+    /**
+     * 市町村コード、被保険者番号、処理日時を指定して、DbT1001HihokenshaDaichoEntityを生成します。
+     *
+     * @param shichosonCode 市町村コード
+     * @param hihokenshaNo 被保険者番号
+     * @param timeStamp 処理日時
+     * @return DbT1001HihokenshaDaichoEntity
+     */
+    public static DbT1001HihokenshaDaichoEntity createWithKey(
+            LasdecCode shichosonCode, KaigoHihokenshaNo hihokenshaNo, YMDHMS timeStamp) {
+        DbT1001HihokenshaDaichoEntity entity = create();
+        entity.setShichosonCode(shichosonCode);
+        entity.setHihokenshaNo(hihokenshaNo);
         entity.setShoriTimestamp(timeStamp);
         return entity;
     }

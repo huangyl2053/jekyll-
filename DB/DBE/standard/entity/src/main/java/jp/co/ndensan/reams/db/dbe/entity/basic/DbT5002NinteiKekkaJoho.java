@@ -19,6 +19,7 @@ public enum DbT5002NinteiKekkaJoho implements IColumnDefinition {
     lastUpdateTimestamp(29, 0),
     lastUpdateReamsLoginId(2147483647, 0),
     shinseishoKanriNo(10, 0),
+    shoriTimestamp(2147483647, 0),
     shoKisaiHokenshaNo(6, 0),
     hihokenshaNo(10, 0),
     youkaigodoNinteiYMD(2147483647, 0),
@@ -69,7 +70,8 @@ public enum DbT5002NinteiKekkaJoho implements IColumnDefinition {
     ninteiTorikeshiYMD(2147483647, 0),
     tuchiKubun(2, 0),
     ninteiRiyu(2147483647, 0),
-    shinsakaiMemo(2147483647, 0);
+    shinsakaiMemo(2147483647, 0),
+    ifSofuYMD(2147483647, 0);
     private final int maxLength;
     private final int scale;
 

@@ -10,12 +10,12 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJoho.*;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -33,117 +33,117 @@ public class KaigoNinteichosainDac implements IReplaceable<DbT7013ChosainJohoEnt
     /**
      * 引数の条件に該当する調査員情報エンティティを取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護事業者番号 介護事業者番号
      * @param 介護調査員番号 介護調査員番号
      * @return 調査員情報エンティティ
      */
     @Transaction
-    public DbT7013ChosainJohoEntity select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号) {
+    public DbT7013ChosainJohoEntity select(LasdecCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7013ChosainJoho.class)
                 .where(and(
-                eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                eq(kaigoJigyoshaNo, 介護事業者番号),
-                eq(kaigoChosainNo, 介護調査員番号.value())))
+                                eq(shichosonCode, 市町村コード),
+                                eq(kaigoJigyoshaNo, 介護事業者番号),
+                                eq(kaigoChosainNo, 介護調査員番号.value())))
                 .toObject(DbT7013ChosainJohoEntity.class);
     }
 
     /**
      * 引数の条件に該当する調査員情報エンティティを取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護事業者番号 介護事業者番号
      * @param 介護調査員番号 介護調査員番号
      * @param 調査員の状況 調査員の状況
      * @return 調査員情報エンティティ
      */
     @Transaction
-    public DbT7013ChosainJohoEntity select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
+    public DbT7013ChosainJohoEntity select(LasdecCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7013ChosainJoho.class)
                 .where(and(
-                eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                eq(kaigoJigyoshaNo, 介護事業者番号),
-                eq(kaigoChosainNo, 介護調査員番号.value()),
-                eq(kaigoChosainJokyo, 調査員の状況.is有効())))
+                                eq(shichosonCode, 市町村コード),
+                                eq(kaigoJigyoshaNo, 介護事業者番号),
+                                eq(kaigoChosainNo, 介護調査員番号.value()),
+                                eq(kaigoChosainJokyo, 調査員の状況.有効.getCode())))
                 .toObject(DbT7013ChosainJohoEntity.class);
     }
 
     /**
      * 引数の条件に該当する調査員情報エンティティをリストで取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護事業者番号 介護事業者番号
      * @return 調査員情報エンティティのリスト
      */
     @Transaction
-    public List<DbT7013ChosainJohoEntity> selectAll(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号) {
+    public List<DbT7013ChosainJohoEntity> selectAll(LasdecCode 市町村コード, KaigoJigyoshaNo 介護事業者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor
                 .select()
                 .table(DbT7013ChosainJoho.class)
                 .where(and(
-                eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                eq(kaigoJigyoshaNo, 介護事業者番号)))
+                                eq(shichosonCode, 市町村コード),
+                                eq(kaigoJigyoshaNo, 介護事業者番号)))
                 .toList(DbT7013ChosainJohoEntity.class);
     }
 
     /**
      * 引数の条件に該当する調査員情報エンティティをリストで取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護事業者番号 介護事業者番号
      * @param 調査員の状況 調査員の状況
      * @return 調査員情報エンティティのリスト
      */
     @Transaction
-    public List<DbT7013ChosainJohoEntity> selectAll(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, ChosainJokyo 調査員の状況) {
+    public List<DbT7013ChosainJohoEntity> selectAll(LasdecCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, ChosainJokyo 調査員の状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor
                 .select()
                 .table(DbT7013ChosainJoho.class)
                 .where(and(
-                eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                eq(kaigoJigyoshaNo, 介護事業者番号),
-                eq(kaigoChosainJokyo, 調査員の状況.is有効())))
+                                eq(shichosonCode, 市町村コード),
+                                eq(kaigoJigyoshaNo, 介護事業者番号),
+                                eq(kaigoChosainJokyo, 調査員の状況.有効.getCode())))
                 .toList(DbT7013ChosainJohoEntity.class);
     }
 
     /**
      * 引数の条件に該当する調査員情報エンティティをリストで取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 調査員の状況 調査員の状況
      * @return 調査員情報エンティティのリスト
      */
     @Transaction
-    public List<DbT7013ChosainJohoEntity> selectAll(ShoKisaiHokenshaNo 証記載保険者番号, ChosainJokyo 調査員の状況) {
+    public List<DbT7013ChosainJohoEntity> selectAll(LasdecCode 市町村コード, ChosainJokyo 調査員の状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor
                 .select()
                 .table(DbT7013ChosainJoho.class)
                 .where(and(
-                eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                eq(kaigoChosainJokyo, 調査員の状況.is有効())))
+                                eq(shichosonCode, 市町村コード),
+                                eq(kaigoChosainJokyo, 調査員の状況.有効.getCode())))
                 .toList(DbT7013ChosainJohoEntity.class);
     }
 
     /**
      * 引数の条件に該当する調査員情報エンティティをリストで取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @return 調査員情報エンティティのリスト
      */
     @Transaction
-    public List<DbT7013ChosainJohoEntity> selectAll(ShoKisaiHokenshaNo 証記載保険者番号) {
+    public List<DbT7013ChosainJohoEntity> selectAll(LasdecCode 市町村コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor
                 .select()
                 .table(DbT7013ChosainJoho.class)
-                .where(eq(shoKisaiHokenshaNo, 証記載保険者番号))
+                .where(eq(shichosonCode, 市町村コード))
                 .toList(DbT7013ChosainJohoEntity.class);
     }
 
@@ -175,9 +175,9 @@ public class KaigoNinteichosainDac implements IReplaceable<DbT7013ChosainJohoEnt
         return accessor.select()
                 .table(DbT7013ChosainJoho.class)
                 .where(and(
-                eq(shoKisaiHokenshaNo, entity.getShoKisaiHokenshaNo().getValue()),
-                eq(kaigoJigyoshaNo, entity.getKaigoJigyoshaNo()),
-                eq(kaigoChosainNo, entity.getKaigoChosainNo())))
+                                eq(shichosonCode, entity.getShichosonCode().value()),
+                                eq(kaigoJigyoshaNo, entity.getKaigoJigyoshaNo()),
+                                eq(kaigoChosainNo, entity.getKaigoChosainNo())))
                 .getCount();
     }
 }

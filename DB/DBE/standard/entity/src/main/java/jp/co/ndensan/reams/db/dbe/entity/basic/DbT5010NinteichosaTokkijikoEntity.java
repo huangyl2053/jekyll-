@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * DbT5010NinteichosaTokkijikoの項目定義クラスです
@@ -33,6 +34,8 @@ public class DbT5010NinteichosaTokkijikoEntity implements IDbAccessable {
     private NinteichosaIraiRirekiNo ninteichosaRirekiNo;
     @PrimaryKey
     private RString ninteichosaTokkijikoNo;
+    @PrimaryKey
+    private Code genponMaskKubun;
     private RString ninteichosaTokkijiko;
 
     /**
@@ -132,6 +135,24 @@ public class DbT5010NinteichosaTokkijikoEntity implements IDbAccessable {
      */
     public void setNinteichosaTokkijikoNo(RString ninteichosaTokkijikoNo) {
         this.ninteichosaTokkijikoNo = ninteichosaTokkijikoNo;
+    }
+
+    /**
+     * getGenponMaskKubun
+     *
+     * @return genponMaskKubun
+     */
+    public Code getGenponMaskKubun() {
+        return genponMaskKubun;
+    }
+
+    /**
+     * setGenponMaskKubun
+     *
+     * @param genponMaskKubun genponMaskKubun
+     */
+    public void setGenponMaskKubun(Code genponMaskKubun) {
+        this.genponMaskKubun = genponMaskKubun;
     }
 
     /**

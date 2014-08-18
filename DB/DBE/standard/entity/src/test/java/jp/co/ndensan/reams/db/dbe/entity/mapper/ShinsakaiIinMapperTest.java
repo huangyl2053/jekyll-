@@ -4,16 +4,19 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinKoza;
+import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinShikaku;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinShikakuCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -41,25 +44,25 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ShinsakaiIinMapperTest {
 
-    private static ShinsakaiIinCode 委員コード_iin01 = new ShinsakaiIinCode(new RString("iin01"));
-    private static Range<FlexibleDate> 委員着任期間_19991212_20101212 = new Range(new FlexibleDate("19991212"), new FlexibleDate("20101212"));
-    private static ShinsakaiIinJokyo 審査会委員状況_有効 = ShinsakaiIinJokyo.有効;
-    private static JigyoshaNo 事業者番号_jigyo01 = new JigyoshaNo(new RString("jogyo01"));
-    private static AtenaMeisho 氏名_太郎 = new AtenaMeisho(new RString("太郎"));
-    private static AtenaKanaMeisho カナ氏名_タロウ = new AtenaKanaMeisho(new RString("タロウ"));
-    private static Gender 性別_MALE = Gender.MALE;
-    private static ShinsakaiIinShikaku 審査会委員資格_code_name
+    private static final ShinsakaiIinCode 委員コード_00000001 = new ShinsakaiIinCode(new RString("00000001"));
+    private static final Range<FlexibleDate> 委員着任期間_19991212_20101212 = new Range(new FlexibleDate("19991212"), new FlexibleDate("20101212"));
+    private static final ShinsakaiIinJokyo 審査会委員状況_有効 = ShinsakaiIinJokyo.有効;
+    private static final JigyoshaNo 事業者番号_jigyo01 = new JigyoshaNo(new RString("jogyo01"));
+    private static final AtenaMeisho 氏名_太郎 = new AtenaMeisho(new RString("太郎"));
+    private static final AtenaKanaMeisho カナ氏名_タロウ = new AtenaKanaMeisho(new RString("タロウ"));
+    private static final Gender 性別_MALE = Gender.MALE;
+    private static final ShinsakaiIinShikaku 審査会委員資格_code_name
             = new ShinsakaiIinShikaku(new Code("code"), new RString("name"), new RString("ryakusho"));
-    private static ShinsainYusoKubun 審査委員郵送区分_自宅 = ShinsainYusoKubun.自宅;
-    private static YubinNo 郵便番号_1231234 = new YubinNo("1231234");
-    private static AtenaJusho 住所_山田市 = new AtenaJusho(new RString("山田市"));
-    private static TelNo 電話番号_0981234567 = new TelNo("0981234567");
-    private static KinyuKikanCode 金融機関コード_0001 = new KinyuKikanCode(new RString("0001"));
-    private static KinyuKikanShitenCode 金融機関支店コード_011 = new KinyuKikanShitenCode(new RString("011"));
-    private static RString 口座種別_普通 = new RString("普通");
-    private static RString 口座名義人_次郎 = new RString("次郎");
-    private static RString 口座名義人カナ_ジロウ = new RString("ジロウ");
-    private static RString 口座番号_1237890 = new RString("1237890");
+    private static final ShinsainYusoKubun 審査委員郵送区分_自宅 = ShinsainYusoKubun.自宅;
+    private static final YubinNo 郵便番号_1231234 = new YubinNo("1231234");
+    private static final AtenaJusho 住所_山田市 = new AtenaJusho(new RString("山田市"));
+    private static final TelNo 電話番号_0981234567 = new TelNo("0981234567");
+    private static final KinyuKikanCode 金融機関コード_0001 = new KinyuKikanCode(new RString("0001"));
+    private static final KinyuKikanShitenCode 金融機関支店コード_011 = new KinyuKikanShitenCode(new RString("011"));
+    private static final RString 口座種別_普通 = new RString("普通");
+    private static final RString 口座名義人_次郎 = new RString("次郎");
+    private static final RString 口座名義人カナ_ジロウ = new RString("ジロウ");
+    private static final RString 口座番号_1237890 = new RString("1237890");
 
     public static class to審査会委員のテスト extends DbeTestBase {
 
@@ -74,7 +77,7 @@ public class ShinsakaiIinMapperTest {
         @Test
         public void 委員コードにiin01を持つEntityが渡されたとき_委員コードにiin01を持つ審査会委員が返る() {
             sut = ShinsakaiIinMapper.to審査会委員(createEntity());
-            assertThat(sut.get審査会委員コード(), is(委員コード_iin01));
+            assertThat(sut.get審査会委員コード(), is(委員コード_00000001));
         }
 
         @Test
@@ -186,6 +189,24 @@ public class ShinsakaiIinMapperTest {
         }
     }
 
+    public static class to審査会委員Listのテスト extends DbeTestBase {
+
+        private ShinsakaiIinList sut;
+
+        @Test
+        public void 審査会委員Entityを3件受け取ったとき_3件の要素を持つ審査会委員Listを返す() {
+            sut = ShinsakaiIinMapper.to審査会委員List(createList(3));
+            assertThat(sut.size(), is(3));
+        }
+
+        @Test
+        public void nullを受け取ったとき_空のリストを返す() {
+            sut = ShinsakaiIinMapper.to審査会委員List(null);
+            assertThat(sut.isEmpty(), is(true));
+        }
+
+    }
+
     public static class to審査会委員Entityのテスト extends DbeTestBase {
 
         private DbT5102ShinsakaiIinJohoEntity sut;
@@ -199,7 +220,7 @@ public class ShinsakaiIinMapperTest {
         @Test
         public void 委員コードにiin01を持つ審査会委員が渡されたとき_委員コードにiin01を持つEntityが返す() {
             sut = ShinsakaiIinMapper.to審査会委員Entity(createShinsakaiIin());
-            assertThat(sut.getShinsakaiIinCode(), is(委員コード_iin01.value()));
+            assertThat(sut.getShinsakaiIinCode(), is(委員コード_00000001.value()));
         }
 
         @Test
@@ -315,15 +336,14 @@ public class ShinsakaiIinMapperTest {
         ShinsakaiIinKoza kozaJoho = new ShinsakaiIinKoza(金融機関コード_0001,
                 金融機関支店コード_011, 口座種別_普通, 口座名義人_次郎, 口座名義人カナ_ジロウ, 口座番号_1237890);
 
-        return new ShinsakaiIin(委員コード_iin01, 委員着任期間_19991212_20101212, 審査会委員状況_有効,
+        return new ShinsakaiIin(委員コード_00000001, 委員着任期間_19991212_20101212, 審査会委員状況_有効,
                 事業者番号_jigyo01, 氏名_太郎, カナ氏名_タロウ, 性別_MALE, 審査会委員資格_code_name,
                 審査委員郵送区分_自宅, 郵便番号_1231234, 住所_山田市, 電話番号_0981234567, kozaJoho);
     }
 
     private static DbT5102ShinsakaiIinJohoEntity createEntity() {
-        DbT5102ShinsakaiIinJohoEntity 委員Entity = GogitaiMockEntityCreator.create審査会委員EntitySpy(委員コード_iin01.value().toString(),
-                委員着任期間_19991212_20101212.getFrom().toString());
-        委員Entity.setShinsakaiIinCode(委員コード_iin01.value());
+        DbT5102ShinsakaiIinJohoEntity 委員Entity = ShinsakaiMockEntityCreator.create審査会委員EntitySpy(委員コード_00000001.value().toString());
+        委員Entity.setShinsakaiIinCode(委員コード_00000001.value());
         委員Entity.setShinsakaiIinKaishiYMD(委員着任期間_19991212_20101212.getFrom());
         委員Entity.setShinsakaiIinShuryoYMD(委員着任期間_19991212_20101212.getTo());
         委員Entity.setShinsakaiIinJokyo(審査会委員状況_有効.is有効());
@@ -343,5 +363,13 @@ public class ShinsakaiIinMapperTest {
         委員Entity.setKozaMeigiKana(口座名義人カナ_ジロウ);
         委員Entity.setKozaNo(口座番号_1237890);
         return 委員Entity;
+    }
+
+    private static List<DbT5102ShinsakaiIinJohoEntity> createList(int 件数) {
+        List<DbT5102ShinsakaiIinJohoEntity> entityList = new ArrayList<>();
+        for (int i = 0; i < 件数; i++) {
+            entityList.add(createEntity());
+        }
+        return entityList;
     }
 }

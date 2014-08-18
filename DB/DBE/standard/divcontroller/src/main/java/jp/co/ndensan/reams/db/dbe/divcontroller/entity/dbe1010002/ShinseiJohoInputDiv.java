@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaOutlineDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaShujiiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.KankeiIinDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.LatestNinteiResultDiv;
@@ -31,8 +30,6 @@ public class ShinseiJohoInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("HihokenshaOutline")
-    private HihokenshaOutlineDiv HihokenshaOutline;
     @JsonProperty("ddlShinseiKubunShinseiji")
     private DropDownList ddlShinseiKubunShinseiji;
     @JsonProperty("txtShinseiDate")
@@ -41,6 +38,8 @@ public class ShinseiJohoInputDiv extends Panel {
     private TextBox txtShinseiYukoKubun;
     @JsonProperty("ddlChiku")
     private DropDownList ddlChiku;
+    @JsonProperty("btnRenrakusaki")
+    private ButtonDialog btnRenrakusaki;
     @JsonProperty("SinseiRiyu")
     private SinseiRiyuDiv SinseiRiyu;
     @JsonProperty("NinteiShinseisha")
@@ -72,16 +71,6 @@ public class ShinseiJohoInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("HihokenshaOutline")
-    public HihokenshaOutlineDiv getHihokenshaOutline() {
-        return HihokenshaOutline;
-    }
-
-    @JsonProperty("HihokenshaOutline")
-    public void setHihokenshaOutline(HihokenshaOutlineDiv HihokenshaOutline) {
-        this.HihokenshaOutline=HihokenshaOutline;
-    }
-
     @JsonProperty("ddlShinseiKubunShinseiji")
     public DropDownList getDdlShinseiKubunShinseiji() {
         return ddlShinseiKubunShinseiji;
@@ -120,6 +109,16 @@ public class ShinseiJohoInputDiv extends Panel {
     @JsonProperty("ddlChiku")
     public void setDdlChiku(DropDownList ddlChiku) {
         this.ddlChiku=ddlChiku;
+    }
+
+    @JsonProperty("btnRenrakusaki")
+    public ButtonDialog getBtnRenrakusaki() {
+        return btnRenrakusaki;
+    }
+
+    @JsonProperty("btnRenrakusaki")
+    public void setBtnRenrakusaki(ButtonDialog btnRenrakusaki) {
+        this.btnRenrakusaki=btnRenrakusaki;
     }
 
     @JsonProperty("SinseiRiyu")

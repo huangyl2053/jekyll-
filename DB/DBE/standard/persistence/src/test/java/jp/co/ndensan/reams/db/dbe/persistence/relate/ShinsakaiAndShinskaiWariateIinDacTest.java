@@ -8,7 +8,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiTestEntityCreator;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -39,9 +39,9 @@ public class ShinsakaiAndShinskaiWariateIinDacTest {
 
         @Before
         public void setUp() {
-            審査会Entity = ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990101");
-            割当委員EntityList = ShinsakaiTestEntityCreator.create審査会割当委員情報EntityList(1, "19990101",
-                    "iin01", "iin02", "iin03", "iin04", "iin05");
+            審査会Entity = ShinsakaiMockEntityCreator.create審査会情報Entity(1, "19990101");
+            割当委員EntityList = ShinsakaiMockEntityCreator.create審査会割当委員情報EntityList(1, "19990101",
+                    "00000001", "00000002", "00000003", "00000004", "00000005");
         }
 
         @Test
@@ -54,9 +54,9 @@ public class ShinsakaiAndShinskaiWariateIinDacTest {
 
         @Before
         public void setUp() {
-            審査会Entity = ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990101");
-            割当委員EntityList = ShinsakaiTestEntityCreator.create審査会割当委員情報EntityList(1, "19990101",
-                    "iin01", "iin02", "iin03", "iin04", "iin05", "iin06");
+            審査会Entity = ShinsakaiMockEntityCreator.create審査会情報Entity(1, "19990101");
+            割当委員EntityList = ShinsakaiMockEntityCreator.create審査会割当委員情報EntityList(1, "19990101",
+                    "00000001", "00000002", "00000003", "00000004", "00000005", "00000006");
             sut.insertOrUpdate(審査会Entity, 割当委員EntityList);
         }
 

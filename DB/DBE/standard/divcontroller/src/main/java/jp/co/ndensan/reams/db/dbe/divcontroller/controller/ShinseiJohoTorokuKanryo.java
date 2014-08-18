@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShinseiJohoInputDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaOutlineDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShinseiJohoTorokuKanryoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoKanryoMessage;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -21,28 +21,28 @@ public class ShinseiJohoTorokuKanryo {
      * onLoad
      *
      * @param div ShinseiJohoTorokuKanryoDiv
-     * @param shinsei ShinseiJohoInputDiv
+     * @param outline ShinseiJohoInputDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoTorokuKanryoDiv> onLoad(ShinseiJohoTorokuKanryoDiv div, ShinseiJohoInputDiv shinsei) {
-        return onClick_btnCommonSaveShinsei(div, shinsei);
+    public ResponseData<ShinseiJohoTorokuKanryoDiv> onLoad(ShinseiJohoTorokuKanryoDiv div, HihokenshaOutlineDiv outline) {
+        return onClick_btnCommonSaveShinsei(div, outline);
     }
 
-    public ResponseData<ShinseiJohoTorokuKanryoDiv> onClick_btnCommonSaveShinsei(ShinseiJohoTorokuKanryoDiv div, ShinseiJohoInputDiv shinsei) {
+    public ResponseData<ShinseiJohoTorokuKanryoDiv> onClick_btnCommonSaveShinsei(ShinseiJohoTorokuKanryoDiv div, HihokenshaOutlineDiv outline) {
         KaigoKanryoMessage.setMessage(div.getKanryoMessage(),
                 new RString("申請を登録しました。"),
-                new RString("被保番号: " + extractHihokenshaNo(shinsei)),
-                new RString("　　氏名: " + extractHihokenshaShimei(shinsei)));
+                new RString("被保番号: " + extractHihokenshaNo(outline)),
+                new RString("　　氏名: " + extractHihokenshaShimei(outline)));
         div.setDisplayNone(false);
         return _createResponseData(div);
     }
 
-    private RString extractHihokenshaNo(ShinseiJohoInputDiv shinsei) {
-        return shinsei.getHihokenshaOutline().getTxtHihokenshaNo().getValue();
+    private RString extractHihokenshaNo(HihokenshaOutlineDiv outline) {
+        return outline.getShikakuKihon().getTxtHihokenshaNo().getValue();
     }
 
-    private RString extractHihokenshaShimei(ShinseiJohoInputDiv shinsei) {
-        return shinsei.getHihokenshaOutline().getTxtShimei().getValue();
+    private RString extractHihokenshaShimei(HihokenshaOutlineDiv outline) {
+        return outline.getAtenaInfo().getAtenaInfo().getTxtAtenaMeisho().getValue();
     }
 
     private ResponseData<ShinseiJohoTorokuKanryoDiv> _createResponseData(ShinseiJohoTorokuKanryoDiv div) {

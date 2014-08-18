@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IInsertable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorForAddType;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJoho.*;
@@ -34,7 +34,7 @@ public class NinteiKekkaJohoDac implements IInsertable<DbT5002NinteiKekkaJohoEnt
      */
     @Transaction
     public DbT5002NinteiKekkaJohoEntity select(ShinseishoKanriNo 申請書管理番号) {
-        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT5002NinteiKekkaJoho.class)
                 .where(eq(shinseishoKanriNo, 申請書管理番号))
@@ -44,14 +44,20 @@ public class NinteiKekkaJohoDac implements IInsertable<DbT5002NinteiKekkaJohoEnt
     @Override
     @Transaction
     public int insert(DbT5002NinteiKekkaJohoEntity entity) {
-        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
     @Override
     @Transaction
     public int delete(DbT5002NinteiKekkaJohoEntity entity) {
-        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
-        return accessor.insertDenialRow(entity).execute();
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.delete(entity).execute();
+    }
+
+    @Transaction
+    public int update(DbT5002NinteiKekkaJohoEntity entity) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.update(entity).execute();
     }
 }

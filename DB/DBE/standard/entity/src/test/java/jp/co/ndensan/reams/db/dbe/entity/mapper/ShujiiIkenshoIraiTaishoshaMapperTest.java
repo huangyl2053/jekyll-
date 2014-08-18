@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
+import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -31,8 +31,8 @@ import org.junit.Before;
 public class ShujiiIkenshoIraiTaishoshaMapperTest extends DbeTestBase {
 
     private static ShujiiIkenshoIraiTaishosha sut;
-    private static YokaigoninteiProgress 認定進捗情報;
-    private static NinteiShinseiJoho 認定申請情報;
+    private static YokaigoNinteiProgress 認定進捗情報;
+    private static YokaigoNinteiShinsei 認定申請情報;
     private static IKojin 個人;
     private static RString 氏名;
     private static RString 住所;
@@ -43,8 +43,8 @@ public class ShujiiIkenshoIraiTaishoshaMapperTest extends DbeTestBase {
 
         @Before
         public void setUp() {
-            認定進捗情報 = mock(YokaigoninteiProgress.class);
-            認定申請情報 = mock(NinteiShinseiJoho.class);
+            認定進捗情報 = mock(YokaigoNinteiProgress.class);
+            認定申請情報 = mock(YokaigoNinteiShinsei.class);
             個人 = mock(IKojin.class);
             氏名 = new RString("あああ");
             住所 = new RString("長野市");
@@ -72,7 +72,7 @@ public class ShujiiIkenshoIraiTaishoshaMapperTest extends DbeTestBase {
         @Before
         public void setUp() {
             認定進捗情報 = NinteiShinchokuJohoMock.create認定進捗情報();
-            認定申請情報 = NinteiShinseiJohoTestHelper.create認定申請情報();
+            認定申請情報 = YokaigoNinteiShinseiTestHelper.create認定申請情報();
             個人 = mock(IKojin.class);
             氏名 = new RString("あああ");
             住所 = new RString("長野市");
@@ -98,7 +98,7 @@ public class ShujiiIkenshoIraiTaishoshaMapperTest extends DbeTestBase {
         public void 引き渡した_認定申請情報の被保険者番号_とtoShujiiIkenshoIraiTaishoshaの結果は一致する() {
             sut = ShujiiIkenshoIraiTaishoshaMapper.toShujiiIkenshoIraiTaishosha(
                     認定進捗情報, 認定申請情報, 個人, 氏名, 住所, 主治医医療機関, 主治医);
-            assertThat(sut.get被保険者番号(), is(認定申請情報.get介護被保険者番号()));
+            assertThat(sut.get被保険者番号(), is(認定申請情報.get被保番号()));
         }
 
         @Test

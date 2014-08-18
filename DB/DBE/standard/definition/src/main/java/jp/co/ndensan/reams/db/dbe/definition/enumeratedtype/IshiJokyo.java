@@ -4,6 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 /**
  * 医師の状況を表す列挙型です。
  *
@@ -12,35 +15,51 @@ package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 public enum IshiJokyo {
 
     /**
-     * 医師の状況が「有効」であることを表します。
+     * 有効 コード : "1"
      */
-    有効(true),
+    有効(new RString("1")),
     /**
-     * 医師の状況が「無効」であることを表します。
+     * 無効 コード : "0"
      */
-    無効(false);
-    private final boolean jokyo;
+    無効(new RString("0"));
+    private final RString jokyo;
 
-    private IshiJokyo(boolean jokyo) {
-        this.jokyo = jokyo;
+    private IshiJokyo(RString code) {
+        this.jokyo = code;
     }
 
     /**
-     * 医師の状況が有効かどうかを判定します。
+     * コードを返します。
      *
-     * @return 有効の場合はtrueを返します。
+     * @return コード
      */
-    public boolean is有効() {
-        return jokyo;
+    public RString getCode() {
+        return this.jokyo;
     }
 
     /**
-     * 引数（boolean型）に対応する医師の状況（列挙型）を返します。
+     * name()と同じ文字列をRString型で返します。
      *
-     * @param jokyo 医師の状況（boolean型）
-     * @return 医師の状況（列挙型）
+     * @return name()と同じ文字列を持ったRString
      */
-    public static IshiJokyo toValue(boolean jokyo) {
-        return jokyo ? 有効 : 無効;
+    public RString toRString() {
+        return new RString(this.toString());
+    }
+
+    /**
+     * 指定された医師の状況コードに該当する医師の状況を返します。
+     *
+     * @param code 医師の状況コード
+     * @return 引数のコードに対応するIshiJokyo型のenum
+     * @throws IllegalArgumentException 実在しない医師状況コードの場合
+     */
+    public static IshiJokyo toValue(RString code) throws NullPointerException, IllegalArgumentException {
+
+        for (IshiJokyo item : IshiJokyo.values()) {
+            if (item.jokyo.equals(code)) {
+                return item;
+            }
+        }
+        throw new IllegalArgumentException(Messages.E00006.replace("該当する医師の状況").getMessage());
     }
 }

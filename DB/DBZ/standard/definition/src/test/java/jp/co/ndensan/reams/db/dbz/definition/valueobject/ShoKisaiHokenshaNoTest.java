@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 //TODO n3327 三浦凌 ILocalGovernmentCodeが参照可能になったら、テストをアンコメントする。
 //import jp.co.ndensan.reams.ur.urz.business.ILocalGovernmentCode;
 //import jp.co.ndensan.reams.ur.urz.business._LocalGovernmentCode;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
@@ -14,6 +15,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import org.junit.Before;
 
 /**
  * 証記載保険者番号のテストクラスです。
@@ -118,4 +120,33 @@ public class ShoKisaiHokenshaNoTest extends TestBase {
 //    private static ILocalGovernmentCode create地方公共団体コード() {
 //        return mock(_LocalGovernmentCode.class);
 //    }
+
+    public static class CompareTo extends DbzTestBase {
+
+        private ShoKisaiHokenshaNo sut;
+        private ShoKisaiHokenshaNo comparison;
+
+        @Before
+        public void setUp() {
+            sut = new ShoKisaiHokenshaNo(new RString("11"));
+        }
+
+        @Test
+        public void 自身より大きい値と比較した場合_0より小さい数字を返す() {
+            comparison = new ShoKisaiHokenshaNo(new RString("12"));
+            assertThat(sut.compareTo(comparison) < 0, is(true));
+        }
+
+        @Test
+        public void 自身と同じ値と比較した場合_0を返す() {
+            comparison = new ShoKisaiHokenshaNo(new RString("11"));
+            assertThat(sut.compareTo(comparison) == 0, is(true));
+        }
+
+        @Test
+        public void 自身より小さい値と比較した場合_0より大きい数字を返す() {
+            comparison = new ShoKisaiHokenshaNo(new RString("10"));
+            assertThat(0 < sut.compareTo(comparison), is(true));
+        }
+    }
 }

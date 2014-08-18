@@ -218,8 +218,9 @@ public class RenkeiyoDataSofuKirokuManager {
      */
     private DbT5022RenkeiyoDataSofuKirokuEntity toDbT5022RenkeiyoDataSofuKirokuEntity(RenkeiyoDataSofuKiroku renkeiyoDataSofuKiroku) {
         DbT5022RenkeiyoDataSofuKirokuEntity entity = new DbT5022RenkeiyoDataSofuKirokuEntity();
-        entity.setShinseishoKanriNo(renkeiyoDataSofuKiroku.get申請書管理番号().getColumnValue());
-        entity.setHihokenshaNo(renkeiyoDataSofuKiroku.get被保険者番号().getColumnValue());
+        entity.setShinseishoKanriNo(renkeiyoDataSofuKiroku.get申請書管理番号());
+        entity.setShoriTimestamp(renkeiyoDataSofuKiroku.get処理日時());
+        entity.setHihokenshaNo(renkeiyoDataSofuKiroku.get被保険者番号());
         entity.setNinteiShinseiShinseijiKubun(renkeiyoDataSofuKiroku.get認定申請時区分().getCode());
         entity.setHikiwatashiKubun(renkeiyoDataSofuKiroku.get引渡し区分().getCode());
         entity.setHikiwatashiNichiji(renkeiyoDataSofuKiroku.get引渡し日時());

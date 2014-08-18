@@ -4,6 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 /**
  * 調査員の状況を表す列挙型です。
  *
@@ -12,35 +15,51 @@ package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 public enum ChosainJokyo {
 
     /**
-     * 有効
+     * 有効 コード : "1"
      */
-    有効(true),
+    有効(new RString("1")),
     /**
-     * 無効
+     * 無効 コード : "0"
      */
-    無効(false);
-    private final boolean jokyo;
+    無効(new RString("0"));
+    private final RString jokyo;
 
-    private ChosainJokyo(boolean jokyo) {
-        this.jokyo = jokyo;
+    private ChosainJokyo(RString code) {
+        this.jokyo = code;
     }
 
     /**
-     * 調査員の状況が有効かどうかを返します。
+     * コードを返します。
      *
-     * @return 有効ならtrue、無効ならfalse
+     * @return コード
      */
-    public boolean is有効() {
-        return jokyo;
+    public RString getCode() {
+        return this.jokyo;
     }
 
     /**
-     * 引数（boolean型）に対応する調査員の状況（列挙型）を返します。
+     * name()と同じ文字列をRString型で返します。
      *
-     * @param is有効 調査員の状況（boolean型）
-     * @return 調査員の状況（列挙型）
+     * @return name()と同じ文字列を持ったRString
      */
-    public static ChosainJokyo toValue(boolean is有効) {
-        return is有効 ? ChosainJokyo.有効 : ChosainJokyo.無効;
+    public RString toRString() {
+        return new RString(this.toString());
+    }
+
+    /**
+     * 指定された調査員の状況コードに該当する調査員の状況を返します。
+     *
+     * @param code 調査員状況コード
+     * @return 引数のコードに対応するChosainJokyo型のenum
+     * @throws IllegalArgumentException 実在しない調査員状況コードの場合
+     */
+    public static ChosainJokyo toValue(RString code) throws NullPointerException, IllegalArgumentException {
+
+        for (ChosainJokyo item : ChosainJokyo.values()) {
+            if (item.jokyo.equals(code)) {
+                return item;
+            }
+        }
+        throw new IllegalArgumentException(Messages.E00006.replace("該当する調査員の状況").getMessage());
     }
 }
