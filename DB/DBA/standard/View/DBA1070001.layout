@@ -390,7 +390,7 @@
         "toolTip": "",
         "bgColor": 0,
         "width": 220,
-        "visible": true,
+        "visible": false,
         "cellType": 0,
         "cellDetails": null,
         "align": 1,

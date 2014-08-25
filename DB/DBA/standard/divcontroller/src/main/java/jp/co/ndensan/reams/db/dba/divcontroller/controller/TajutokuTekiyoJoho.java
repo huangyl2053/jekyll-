@@ -82,22 +82,22 @@ public class TajutokuTekiyoJoho {
 
         row.setTekiyoJiyu(generator.getAsRString("適用事由"));
         row.getTekiyoDate().setValue(generator.getAsFlexibleDate("適用日"));
-        row.getTekiyoTodokedeDate().setValue(generator.getAsFlexibleDate("届出日"));
+        row.getTekiyoTodokedeDate().setValue(generator.getAsFlexibleDate("適用届出日"));
 
         row.setKaijoJiyu(generator.getAsRString("解除事由"));
         row.getKaijoDate().setValue(generator.getAsFlexibleDate("解除日"));
-        row.getKaijoTodokedeDate().setValue(generator.getAsFlexibleDate("届出日"));
+        row.getKaijoTodokedeDate().setValue(generator.getAsFlexibleDate("解除届出日"));
 
-        row.setSochiHihokenshaNo(generator.getAsRString("保険者番号"));
-        row.setSochiHokenshaNo(generator.getAsRString("保険者"));
-        row.setSochiHokenshaMeisho(generator.getAsRString("被保番号"));
+        row.setSochiHihokenshaNo(generator.getAsRString("被保番号"));
+        row.setSochiHokenshaNo(generator.getAsRString("保険者番号"));
+        row.setSochiHokenshaMeisho(generator.getAsRString("保険者"));
 
         row.getNyushoDate().setValue(generator.getAsFlexibleDate("入所日"));
         row.getTaishoDate().setValue(generator.getAsFlexibleDate("退所日"));
         row.setShisetsuShurui(generator.getAsRString("施設種類"));
-        row.setShisetsuCode(generator.getAsRString("入所施設"));
-        row.setShisetsuMeisho(generator.getAsRString("施設コード"));
-        row.setNyushoShisetsu(generator.getAsRString("施設名称"));
+        row.setShisetsuCode(generator.getAsRString("施設コード"));
+        row.setShisetsuMeisho(generator.getAsRString("施設名称"));
+        row.setNyushoShisetsu(row.getShisetsuCode().concat(":").concat(row.getShisetsuMeisho()));
 
         row.getRenrakuhyoHakkoDate().setValue(generator.getAsFlexibleDate("連絡票発行年月日"));
         row.getShisetsuHenkoTuchiHakkoDate().setValue(generator.getAsFlexibleDate("施設退所通知発行年月日"));

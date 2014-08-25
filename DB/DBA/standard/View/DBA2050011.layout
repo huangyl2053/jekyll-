@@ -24,12 +24,14 @@
      "selectControlID": "btnDecide",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "onClick_btnToDecide",
      "text": "decide",
-     "appearance": 0,
-     "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "onClick": "onClick_btnToDecide",
+     "appearance": 0,
+     "imageFileUrl": "",
      "icon": 0,
      "heightTextBoxMatches": false
     }
@@ -78,7 +80,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   },
   {
    "fieldName": "TekiyoJogaiTaishoshaJoho",
@@ -116,13 +119,13 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "AtenaShokaiSimple_eraseBorder": true,
      "AtenaKanaMeisho_visible": true,
-     "AtenaMeisho_visible": true,
      "SeinengappiYMD_visible": true,
      "Nenrei_visible": true,
      "Seibetsu_visible": true,
-     "JuminShubetsu_visible": true,
-     "NihonjinGaikokujin_visible": true,
      "JuminJotai_visible": true,
      "YubinNo_visible": true,
      "Jusho_visible": true,
@@ -131,8 +134,6 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnMemo_displayNone": false,
-     "btnDainosya_displayNone": true,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
      "btnKoza_displayNone": true,
@@ -151,7 +152,9 @@
      "SubGyomuUmu": "0",
      "SubGyomuSearchUmu": "0",
      "DainoninHyojiUmu": "1",
-     "AtenaShokaiSimple_eraseBorder": true
+     "AtenaMeisho_visible": true,
+     "JuminShubetsu_visible": true,
+     "btnDainosya_displayNone": true
     },
     {
      "fieldName": "ShikakuJoho",
@@ -186,6 +189,9 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "btnRenrakusaki_displayNone": true,
      "backGroundColor": 0,
      "btnHihoRireki_visible": false,
      "btnNinteiRireki_visible": false
@@ -242,7 +248,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   },
   {
    "fieldName": "TekiyoJogaiJoho",
@@ -269,6 +276,9 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "S",
+     "onSelectByDblClick": "",
+     "onSelectByModifyButton": "onSelectByModifyButton_dgTekiyoJogaiRireki",
+     "onSelectByDeleteButton": "",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -282,22 +292,33 @@
       "isShowDeleteButtonColumn": false,
       "limitRowCount": 0,
       "selectedRowCount": 0,
+      "selectLimitRowCount": 0,
       "header": {
        "combineColumns": [
         {
          "combineColumnName": "適用情報",
          "combineItem": [
-          "tekiyoJiyu",
           "tekiyoDate",
           "tekiyoTodokedeDate"
          ]
         },
         {
+         "combineColumnName": "適用情報",
+         "combineItem": [
+          "tekiyoJiyu"
+         ]
+        },
+        {
          "combineColumnName": "解除情報",
          "combineItem": [
-          "kaijoJiyu",
           "kaijoDate",
           "kaijoTodokedeDate"
+         ]
+        },
+        {
+         "combineColumnName": "解除情報",
+         "combineItem": [
+          "kaijoJiyu"
          ]
         },
         {
@@ -315,36 +336,6 @@
        "headerHeight": 0
       },
       "columns": [
-       {
-        "columnName": "適用事由Key",
-        "dataName": "tekiyoJiyuKey",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 0,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "tekiyoJiyuKey"
-       },
-       {
-        "columnName": "適用事由",
-        "dataName": "tekiyoJiyu",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 80,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "tekiyoJiyu"
-       },
        {
         "columnName": "適用日",
         "dataName": "tekiyoDate",
@@ -388,8 +379,8 @@
         "sortKey": "tekiyoTodokedeDate"
        },
        {
-        "columnName": "解除事由Key",
-        "dataName": "kaijoJiyuKey",
+        "columnName": "適用事由Key",
+        "dataName": "tekiyoJiyuKey",
         "toolTip": "",
         "bgColor": 0,
         "width": 0,
@@ -399,21 +390,23 @@
         "align": 0,
         "resize": false,
         "isPrivateInfo": false,
-        "sortKey": "kaijoJiyuKey"
+        "sortKey": "tekiyoJiyuKey"
        },
        {
-        "columnName": "解除事由",
-        "dataName": "kaijoJiyu",
+        "columnName": "適用事由",
+        "dataName": "tekiyoJiyu",
         "toolTip": "",
         "bgColor": 0,
         "width": 80,
         "visible": true,
         "cellType": 0,
-        "cellDetails": null,
+        "cellDetails": {
+         "cellType": 0
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "kaijoJiyu"
+        "sortKey": "tekiyoJiyu"
        },
        {
         "columnName": "解除日",
@@ -456,6 +449,34 @@
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "kaijoTodokedeDate"
+       },
+       {
+        "columnName": "解除事由Key",
+        "dataName": "kaijoJiyuKey",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "kaijoJiyuKey"
+       },
+       {
+        "columnName": "解除事由",
+        "dataName": "kaijoJiyu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "kaijoJiyu"
        },
        {
         "columnName": "入所日",
@@ -608,10 +629,7 @@
      },
      "onSort": "",
      "onSelect": "",
-     "onSelectByDblClick": "",
      "onSelectBySelectButton": "",
-     "onSelectByModifyButton": "onSelectByModifyButton_dgTekiyoJogaiRireki",
-     "onSelectByDeleteButton": "",
      "onAfterRequest": "",
      "onAfterRequestByDblClick": "",
      "onAfterRequestBySelectButton": "",
@@ -624,7 +642,8 @@
      "sortOrder": "shisetsu",
      "isAscending": true,
      "filterList": [],
-     "activeRowId": -1
+     "activeRowId": -1,
+     "gridAction": []
     },
     {
      "fieldName": "TekiyoJogaiToroku",
@@ -632,54 +651,6 @@
       {
        "fieldName": "JogaishaTekiyoInput",
        "items": [
-        {
-         "fieldName": "ddlTekiyoJiyu",
-         "items": [],
-         "controlType": "DropDownList",
-         "width": "110",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "selectControlID": "ddlTekiyoJiyu_core",
-         "helpMessageID": "",
-         "jpControlName": "",
-         "readOnly": false,
-         "required": false,
-         "onFocus": "",
-         "onBlur": "",
-         "onChange": "",
-         "labelLText": "適用事由",
-         "labelRText": "",
-         "labelLWidth": "70",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "dataSource": [
-          {
-           "key": "jogaishaTekiyo",
-           "value": "除外者適用"
-          },
-          {
-           "key": "shokkenTekiyo",
-           "value": "職権適用"
-          },
-          {
-           "key": "other",
-           "value": "その他"
-          }
-         ],
-         "selectedItem": "jogaishaTekiyo",
-         "disabledItem": []
-        },
         {
          "fieldName": "txtShisetsuNyushoDate",
          "items": [],
@@ -701,7 +672,6 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "text": "",
          "required": false,
          "placeHolder": "",
          "textKind": 0,
@@ -711,10 +681,11 @@
          "onBlur": "onBlur_txtShisetsuNyushoDate",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "value": "",
          "labelLText": "入所日",
          "labelRText": "",
-         "labelLWidth": "50",
+         "labelLWidth": "70",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
@@ -743,7 +714,6 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "text": "",
          "required": false,
          "placeHolder": "",
          "textKind": 0,
@@ -753,6 +723,7 @@
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "value": "",
          "labelLText": "適用日",
          "labelRText": "",
@@ -785,7 +756,6 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "text": "",
          "required": false,
          "placeHolder": "",
          "textKind": 0,
@@ -795,6 +765,7 @@
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "value": "",
          "labelLText": "適用届出日",
          "labelRText": "",
@@ -805,6 +776,54 @@
          "ymdKubun": 2,
          "displayFormat": 0,
          "permitCharactor": "./_-"
+        },
+        {
+         "fieldName": "ddlTekiyoJiyu",
+         "items": [],
+         "controlType": "DropDownList",
+         "width": "110",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "ddlTekiyoJiyu_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "required": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "labelLText": "適用事由",
+         "labelRText": "",
+         "labelLWidth": "70",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
+         "selectedItem": "jogaishaTekiyo",
+         "dataSource": [
+          {
+           "key": "jogaishaTekiyo",
+           "value": "除外者適用"
+          },
+          {
+           "key": "shokkenTekiyo",
+           "value": "職権適用"
+          },
+          {
+           "key": "other",
+           "value": "その他"
+          }
+         ],
+         "disabledItem": []
         },
         {
          "fieldName": "JogaishaTekiyoJogaiShisetsu",
@@ -836,6 +855,8 @@
          "dialogCancelEventNameForDialog": "",
          "canTransferEvent": true,
          "heightForDialog": "M",
+         "firstFocusFieldName": "",
+         "lastFocusFieldName": "",
          "btnJigyoshaInputGuide_displayNone": false,
          "btnOtherTokureiShisetsuInputGuide_displayNone": true,
          "btnJogaiShisetsuInputGuide_displayNone": true,
@@ -887,67 +908,12 @@
        "panelDisplay": 1,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "canPost": true
       },
       {
        "fieldName": "JogaishaKaijoInput",
        "items": [
-        {
-         "fieldName": "ddlKaijoJiyu",
-         "items": [],
-         "controlType": "DropDownList",
-         "width": "110",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "selectControlID": "ddlKaijoJiyu_core",
-         "helpMessageID": "",
-         "jpControlName": "",
-         "readOnly": false,
-         "required": false,
-         "onFocus": "",
-         "onBlur": "",
-         "onChange": "",
-         "labelLText": "解除事由",
-         "labelRText": "",
-         "labelLWidth": "80",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "dataSource": [
-          {
-           "key": "jogaishaKaijo",
-           "value": "除外者解除"
-          },
-          {
-           "key": "jogaishaTenshutsu",
-           "value": "除外者転出"
-          },
-          {
-           "key": "jogaishaShibo",
-           "value": "除外者死亡"
-          },
-          {
-           "key": "shokkenKaijo",
-           "value": "職権解除"
-          },
-          {
-           "key": "other",
-           "value": "その他"
-          }
-         ],
-         "selectedItem": "jogaishaKaijo",
-         "disabledItem": []
-        },
         {
          "fieldName": "txtTaishoDate",
          "items": [],
@@ -969,7 +935,6 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "text": "",
          "required": false,
          "placeHolder": "",
          "textKind": 0,
@@ -979,10 +944,11 @@
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "value": "",
          "labelLText": "退所日",
          "labelRText": "",
-         "labelLWidth": "50",
+         "labelLWidth": "70",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
@@ -1011,7 +977,6 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "text": "",
          "required": false,
          "placeHolder": "",
          "textKind": 0,
@@ -1021,6 +986,7 @@
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "value": "",
          "labelLText": "解除日",
          "labelRText": "",
@@ -1053,7 +1019,6 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "text": "",
          "required": false,
          "placeHolder": "",
          "textKind": 0,
@@ -1063,6 +1028,7 @@
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "value": "",
          "labelLText": "解除届出日",
          "labelRText": "",
@@ -1073,6 +1039,62 @@
          "ymdKubun": 2,
          "displayFormat": 0,
          "permitCharactor": "./_-"
+        },
+        {
+         "fieldName": "ddlKaijoJiyu",
+         "items": [],
+         "controlType": "DropDownList",
+         "width": "110",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "ddlKaijoJiyu_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "required": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "labelLText": "解除事由",
+         "labelRText": "",
+         "labelLWidth": "70",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
+         "selectedItem": "jogaishaKaijo",
+         "dataSource": [
+          {
+           "key": "jogaishaKaijo",
+           "value": "除外者解除"
+          },
+          {
+           "key": "jogaishaTenshutsu",
+           "value": "除外者転出"
+          },
+          {
+           "key": "jogaishaShibo",
+           "value": "除外者死亡"
+          },
+          {
+           "key": "shokkenKaijo",
+           "value": "職権解除"
+          },
+          {
+           "key": "other",
+           "value": "その他"
+          }
+         ],
+         "disabledItem": []
         }
        ],
        "controlType": "Panel",
@@ -1114,7 +1136,8 @@
        "panelDisplay": 1,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "canPost": true
       },
       {
        "fieldName": "JogaiShisetsuHenkoInput",
@@ -1140,7 +1163,6 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "text": "",
          "required": false,
          "placeHolder": "",
          "textKind": 0,
@@ -1150,10 +1172,11 @@
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "value": "",
-         "labelLText": "施設入所日",
+         "labelLText": "入所日",
          "labelRText": "",
-         "labelLWidth": "80",
+         "labelLWidth": "70",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
@@ -1191,6 +1214,8 @@
          "dialogCancelEventNameForDialog": "",
          "canTransferEvent": true,
          "heightForDialog": "M",
+         "firstFocusFieldName": "",
+         "lastFocusFieldName": "",
          "btnJigyoshaInputGuide_displayNone": false,
          "btnOtherTokureiShisetsuInputGuide_displayNone": true,
          "btnJogaiShisetsuInputGuide_displayNone": true,
@@ -1237,7 +1262,8 @@
        "panelDisplay": 1,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "canPost": true
       },
       {
        "fieldName": "btnInsertTekiyoJogaiJoho",
@@ -1259,12 +1285,14 @@
        "selectControlID": "btnInsertTekiyoJogaiJoho",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "onClick_btnInsertTekiyoJogaiJoho",
        "text": "適用除外情報を確定する",
-       "appearance": 0,
-       "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "onClick": "onClick_btnInsertTekiyoJogaiJoho",
+       "appearance": 0,
+       "imageFileUrl": "",
        "icon": 0,
        "heightTextBoxMatches": false
       }
@@ -1313,7 +1341,8 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     }
    ],
    "controlType": "Panel",
@@ -1384,7 +1413,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   },
   {
    "fieldName": "TekiyoJogaiComplete",
@@ -1419,6 +1449,8 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
      "KanryoMessage_width": "G12"
     }
    ],
@@ -1473,7 +1505,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": null,

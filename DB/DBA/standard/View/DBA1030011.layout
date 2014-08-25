@@ -239,7 +239,7 @@
            "onKeyPress": "",
            "text": "",
            "value": "",
-           "labelLText": "取得日",
+           "labelLText": "喪失日",
            "labelRText": "",
            "labelLWidth": "50",
            "labelRWidth": "S",
@@ -2123,7 +2123,7 @@
       "tplShoruiJokyo"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tplSeikatsuHogo",
+     "selectedItemFieldName": "tplShikakuJoho",
      "initialTab": "0",
      "isLazyLoading": false
     }
