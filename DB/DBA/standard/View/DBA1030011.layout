@@ -1445,7 +1445,175 @@
          "canTransferEvent": true,
          "heightForDialog": "M",
          "firstFocusFieldName": "",
-         "lastFocusFieldName": ""
+         "lastFocusFieldName": "",
+         "gridSetting": {
+          "rowHeight": 25,
+          "isMultiSelectable": false,
+          "isShowHeader": true,
+          "isShowFooter": true,
+          "isShowFilter": false,
+          "isShowFilterButton": false,
+          "isShowRowState": true,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": true,
+          "isShowDeleteButtonColumn": true,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
+          "header": {
+           "combineColumns": [],
+           "frozenColumn": "",
+           "headerHeight": 0
+          },
+          "columns": [
+           {
+            "columnName": "入所日",
+            "dataName": "nyushoDate",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": true,
+            "cellType": 7,
+            "cellDetails": {
+             "cellType": 7,
+             "ymdKubun": 2,
+             "displayFormat": 0,
+             "onChange": "",
+             "isSetValueToToolTip": false,
+             "readOnly": true
+            },
+            "align": 1,
+            "resize": true,
+            "isPrivateInfo": false,
+            "sortKey": "nyushoDate"
+           },
+           {
+            "columnName": "退所日",
+            "dataName": "taishoDate",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": true,
+            "cellType": 7,
+            "cellDetails": {
+             "cellType": 7,
+             "ymdKubun": 2,
+             "displayFormat": 0,
+             "onChange": "",
+             "isSetValueToToolTip": false,
+             "readOnly": true
+            },
+            "align": 1,
+            "resize": true,
+            "isPrivateInfo": false,
+            "sortKey": ""
+           },
+           {
+            "columnName": "施設コード",
+            "dataName": "shisetsuCode",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0
+            },
+            "align": 1,
+            "resize": true,
+            "isPrivateInfo": false,
+            "sortKey": ""
+           },
+           {
+            "columnName": "施設名称",
+            "dataName": "shisetsuMeisho",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 200,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0
+            },
+            "align": 0,
+            "resize": true,
+            "isPrivateInfo": false,
+            "sortKey": ""
+           },
+           {
+            "columnName": "入所施設",
+            "dataName": "shisetsu",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 390,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": true,
+            "isPrivateInfo": false,
+            "sortKey": ""
+           },
+           {
+            "columnName": "対象情報key",
+            "dataName": "taishoJohoKey",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 0,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": ""
+           },
+           {
+            "columnName": "対象情報",
+            "dataName": "taishoJoho",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 180,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": true,
+            "isPrivateInfo": false,
+            "sortKey": ""
+           },
+           {
+            "columnName": "施設種類key",
+            "dataName": "shisetsuShuruiKey",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 0,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": ""
+           },
+           {
+            "columnName": "施設種類",
+            "dataName": "shisetsuShurui",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 150,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": true,
+            "isPrivateInfo": false,
+            "sortKey": ""
+           }
+          ]
+         },
+         "InputPanelDisplayNone": false,
+         "AddButtonDisplayNone": false,
+         "UpdateButtonDisplayNone": false
         }
        ],
        "controlType": "TabPanel",
@@ -2117,8 +2285,8 @@
      "tabpanelPosition": [
       "tplShikakuJoho",
       "tplIryoHoken",
-      "tplRofukuNenkin",
       "tplSeikatsuHogo",
+      "tplRofukuNenkin",
       "tplShisetsuNyutaisho",
       "tplShoruiJokyo"
      ],
@@ -2210,7 +2378,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "資格喪失登録",
+ "title": "資格喪失異動",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
@@ -2300,7 +2468,7 @@
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "資格取得情報入力",
  "id": "DBA1030011",
  "WFParameter": [],
  "UIContainerEventMapping": [
