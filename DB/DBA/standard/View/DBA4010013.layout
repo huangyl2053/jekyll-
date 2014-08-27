@@ -1300,7 +1300,9 @@
          "jpControlName": "",
          "readOnly": false,
          "height": "S",
-         "dataSource": [],
+         "onSelectByDblClick": "",
+         "onSelectByModifyButton": "",
+         "onSelectByDeleteButton": "",
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
@@ -1549,10 +1551,7 @@
          },
          "onSort": "",
          "onSelect": "",
-         "onSelectByDblClick": "",
          "onSelectBySelectButton": "",
-         "onSelectByModifyButton": "",
-         "onSelectByDeleteButton": "",
          "onAfterRequest": "",
          "onAfterRequestByDblClick": "",
          "onAfterRequestBySelectButton": "",
@@ -1561,6 +1560,7 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
+         "dataSource": [],
          "sortOrder": "tekiyoTodokedeDate",
          "isAscending": true,
          "filterList": [],
@@ -1689,11 +1689,15 @@
              "dataSource": [
               {
                "key": "1",
-               "value": "他特例適用"
+               "value": "住所地特例適用"
               },
               {
                "key": "2",
-               "value": "value1"
+               "value": "職権適用"
+              },
+              {
+               "key": "3",
+               "value": "その他"
               }
              ],
              "disabledItem": []
@@ -2029,11 +2033,23 @@
              "dataSource": [
               {
                "key": "1",
-               "value": "他特例解除"
+               "value": "住所地特例解除"
               },
               {
                "key": "2",
-               "value": "value1"
+               "value": "適用者転出"
+              },
+              {
+               "key": "3",
+               "value": "適用者死亡"
+              },
+              {
+               "key": "4",
+               "value": "職権解除"
+              },
+              {
+               "key": "4",
+               "value": "その他"
               }
              ],
              "disabledItem": []
@@ -2368,7 +2384,9 @@
          "jpControlName": "",
          "readOnly": false,
          "height": "S",
-         "dataSource": [],
+         "onSelectByDblClick": "",
+         "onSelectByModifyButton": "",
+         "onSelectByDeleteButton": "",
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
@@ -2514,10 +2532,7 @@
          },
          "onSort": "",
          "onSelect": "",
-         "onSelectByDblClick": "",
          "onSelectBySelectButton": "",
-         "onSelectByModifyButton": "",
-         "onSelectByDeleteButton": "",
          "onAfterRequest": "",
          "onAfterRequestByDblClick": "",
          "onAfterRequestBySelectButton": "",
@@ -2526,6 +2541,7 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
+         "dataSource": [],
          "sortOrder": "henkoTodokedeDate",
          "isAscending": true,
          "filterList": [],
@@ -3128,7 +3144,11 @@
          },
          "InputPanelDisplayNone": false,
          "AddButtonDisplayNone": true,
-         "UpdateButtonDisplayNone": false
+         "UpdateButtonDisplayNone": false,
+         "radShisetsuShuruiDisplayNone": false,
+         "jigyoshaInputGuideDisplayNone": false,
+         "otherShisetsuInputGuideDisplayNone": true,
+         "jogaiShisetsuInputGuideDisplayNone": true
         }
        ],
        "controlType": "TabPanel",
@@ -3179,7 +3199,7 @@
      ],
      "isDraggable": false,
      "selectedItemFieldName": "tplJutoku",
-     "initialTab": 0,
+     "initialTab": "2",
      "isLazyLoading": false
     }
    ],
