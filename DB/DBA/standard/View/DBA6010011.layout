@@ -2291,7 +2291,7 @@
          "helpMessageID": "",
          "jpControlName": "",
          "onLoad": "",
-         "title": "居住費の負担限度日額　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　(円）",
+         "title": "居住費の負担限度日額 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　(円）",
          "marginTop": "0",
          "marginBottom": "0",
          "canOpenAndClose": false,
@@ -2997,7 +2997,7 @@
    "events": []
   }
  ],
- "currentState": "介護保険連絡票 　【実質的負担軽減者（給付率９５％以上の旧措置入所者）】非該当",
+ "currentState": "All",
  "id": "DBA6010011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
