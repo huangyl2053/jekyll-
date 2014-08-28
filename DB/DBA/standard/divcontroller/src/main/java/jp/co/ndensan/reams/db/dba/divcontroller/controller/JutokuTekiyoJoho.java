@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
@@ -121,12 +122,14 @@ public class JutokuTekiyoJoho {
     }
 
     private dgShikakuShutokuRireki_Row createJutokuTekiyoRirekiRowFromHashMap(HashMap hihokenshaDaichoData) {
-        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
-                RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(),
-                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
-                RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY);
+
+        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(new Button(), new TextBoxFlexibleDate(),
+                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
         ControlGenerator generator = new ControlGenerator(hihokenshaDaichoData);
         row.getShutokuTodokedeDate().setValue(generator.getAsFlexibleDate("取得届出日"));
@@ -153,8 +156,6 @@ public class JutokuTekiyoJoho {
         row.setHenkoJiyuKey(generator.getAsRString("変更事由Key"));
         row.getNenreiTotatsuDate().setValue(generator.getAsFlexibleDate("1号年齢到達日"));
         row.setKyuHokensha(generator.getAsRString("旧保険者"));
-        row.setSaikofuKubun(generator.getAsRString("再交付区分"));
-        row.setSaikofuJiyu(generator.getAsRString("再交付事由"));
         row.setShikibetsuCode(generator.getAsRString("識別コード"));
         return row;
     }
@@ -470,12 +471,13 @@ public class JutokuTekiyoJoho {
     }
 
     private dgShikakuShutokuRireki_Row createJutokuTekiyoRirekiRowFromInputValue(tplShikakuJohoDiv tplShikakuJoho) {
-        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
-                RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(),
-                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
-                RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY);
+        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(new Button(), new TextBoxFlexibleDate(),
+                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         setJutokuTekiyoRirekiRowFromInputValue(tplShikakuJoho, row);
         return row;
     }

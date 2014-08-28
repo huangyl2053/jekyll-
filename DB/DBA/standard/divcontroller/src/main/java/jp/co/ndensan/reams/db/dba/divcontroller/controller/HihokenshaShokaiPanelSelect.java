@@ -118,12 +118,13 @@ public class HihokenshaShokaiPanelSelect {
     }
 
     private dgShikakuShutokuRireki_Row createShikakuTokusoRirekiRow(ControlGenerator generator) {
-        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
-                RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(),
-                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
-                RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY);
+        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(new Button(), new TextBoxFlexibleDate(),
+                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
         row.getShutokuTodokedeDate().setValue(generator.getAsFlexibleDate("取得届出日"));
         row.getShutokuDate().setValue(generator.getAsFlexibleDate("取得日"));
@@ -149,8 +150,6 @@ public class HihokenshaShokaiPanelSelect {
         row.setHenkoJiyuKey(generator.getAsRString("変更事由Key"));
         row.getNenreiTotatsuDate().setValue(generator.getAsFlexibleDate("1号年齢到達日"));
         row.setKyuHokensha(generator.getAsRString("旧保険者"));
-        row.setSaikofuKubun(generator.getAsRString("再交付区分"));
-        row.setSaikofuJiyu(generator.getAsRString("再交付事由"));
         row.setShikibetsuCode(generator.getAsRString("識別コード"));
         return row;
     }
