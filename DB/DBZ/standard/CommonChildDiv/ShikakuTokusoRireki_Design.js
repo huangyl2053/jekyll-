@@ -140,7 +140,7 @@ var DBZ;
                             "fieldName": "dgShikakuShutokuRireki",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "1085",
+                            "width": "1090",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -220,10 +220,31 @@ var DBZ;
                                             ]
                                         }
                                     ],
-                                    "frozenColumn": "shutokuJiyu",
+                                    "frozenColumn": "",
                                     "headerHeight": 0
                                 },
                                 "columns": [
+                                    {
+                                        "columnName": "詳細",
+                                        "dataName": "shosai",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 40,
+                                        "visible": true,
+                                        "cellType": 8,
+                                        "cellDetails": {
+                                            "cellType": 8,
+                                            "text": "...",
+                                            "onClick": "",
+                                            "imageFileUrl": "/ur/urz/image/UR_Book_On.png",
+                                            "imageWidth": "20",
+                                            "imageHeight": "20"
+                                        },
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
                                     {
                                         "columnName": "取得日",
                                         "dataName": "shutokuDate",
@@ -285,7 +306,7 @@ var DBZ;
                                         "dataName": "shutokuJiyu",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 90,
+                                        "width": 100,
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": {
@@ -295,6 +316,34 @@ var DBZ;
                                         "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": "shutokuJiyu"
+                                    },
+                                    {
+                                        "columnName": "被保区分",
+                                        "dataName": "hihokenshaKubun",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 70,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "hihokenshaKubun"
+                                    },
+                                    {
+                                        "columnName": "被保区分Key",
+                                        "dataName": "hihokenshaKubunKey",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "hihokenshaKubunKey"
                                     },
                                     {
                                         "columnName": "喪失日",
@@ -357,7 +406,7 @@ var DBZ;
                                         "dataName": "soshitsuJiyu",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 90,
+                                        "width": 100,
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": null,
@@ -367,40 +416,12 @@ var DBZ;
                                         "sortKey": "soshitsuJiyu"
                                     },
                                     {
-                                        "columnName": "被保区分Key",
-                                        "dataName": "hihokenshaKubunKey",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 0,
-                                        "visible": false,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": "hihokenshaKubunKey"
-                                    },
-                                    {
-                                        "columnName": "被保区分",
-                                        "dataName": "hihokenshaKubun",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 70,
-                                        "visible": true,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": true,
-                                        "isPrivateInfo": false,
-                                        "sortKey": "hihokenshaKubun"
-                                    },
-                                    {
                                         "columnName": "適用日",
                                         "dataName": "jutokuTekiyoDate",
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 80,
-                                        "visible": true,
+                                        "visible": false,
                                         "cellType": 7,
                                         "cellDetails": {
                                             "cellType": 7,
@@ -421,7 +442,7 @@ var DBZ;
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 80,
-                                        "visible": true,
+                                        "visible": false,
                                         "cellType": 7,
                                         "cellDetails": {
                                             "cellType": 7,
@@ -456,7 +477,7 @@ var DBZ;
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 150,
-                                        "visible": true,
+                                        "visible": false,
                                         "cellType": 0,
                                         "cellDetails": {
                                             "cellType": 0,
@@ -473,7 +494,7 @@ var DBZ;
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 80,
-                                        "visible": true,
+                                        "visible": false,
                                         "cellType": 7,
                                         "cellDetails": {
                                             "cellType": 7,
@@ -494,7 +515,7 @@ var DBZ;
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 80,
-                                        "visible": true,
+                                        "visible": false,
                                         "cellType": 7,
                                         "cellDetails": {
                                             "cellType": 7,
@@ -529,7 +550,7 @@ var DBZ;
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 150,
-                                        "visible": true,
+                                        "visible": false,
                                         "cellType": 0,
                                         "cellDetails": null,
                                         "align": 0,
@@ -543,7 +564,7 @@ var DBZ;
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 80,
-                                        "visible": true,
+                                        "visible": false,
                                         "cellType": 7,
                                         "cellDetails": {
                                             "cellType": 7,
@@ -564,7 +585,7 @@ var DBZ;
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 80,
-                                        "visible": true,
+                                        "visible": false,
                                         "cellType": 7,
                                         "cellDetails": {
                                             "cellType": 7,
@@ -599,7 +620,7 @@ var DBZ;
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 90,
-                                        "visible": true,
+                                        "visible": false,
                                         "cellType": 0,
                                         "cellDetails": {
                                             "cellType": 0
@@ -615,7 +636,7 @@ var DBZ;
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 120,
-                                        "visible": true,
+                                        "visible": false,
                                         "cellType": 7,
                                         "cellDetails": {
                                             "cellType": 7,
@@ -631,18 +652,32 @@ var DBZ;
                                         "sortKey": "nenreiTotatsuDate"
                                     },
                                     {
-                                        "columnName": "保険者",
-                                        "dataName": "hokensha",
+                                        "columnName": "住特区分",
+                                        "dataName": "jutokuKubun",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 90,
-                                        "visible": false,
+                                        "width": 70,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "jutokuKubun"
+                                    },
+                                    {
+                                        "columnName": "所在保険者",
+                                        "dataName": "shozaiHokensha",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 110,
+                                        "visible": true,
                                         "cellType": 0,
                                         "cellDetails": null,
                                         "align": 0,
-                                        "resize": false,
+                                        "resize": true,
                                         "isPrivateInfo": false,
-                                        "sortKey": "hokensha"
+                                        "sortKey": "shozaiHokensha"
                                     },
                                     {
                                         "columnName": "措置元保険者",
@@ -650,11 +685,11 @@ var DBZ;
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 120,
-                                        "visible": false,
+                                        "visible": true,
                                         "cellType": 0,
                                         "cellDetails": null,
                                         "align": 0,
-                                        "resize": false,
+                                        "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": "sochimotoHokensha"
                                     },
@@ -663,7 +698,7 @@ var DBZ;
                                         "dataName": "kyuHokensha",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 90,
+                                        "width": 100,
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": null,
@@ -673,54 +708,12 @@ var DBZ;
                                         "sortKey": "kyuHokensha"
                                     },
                                     {
-                                        "columnName": "再交付区分",
-                                        "dataName": "saikofuKubun",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 100,
-                                        "visible": true,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": true,
-                                        "isPrivateInfo": false,
-                                        "sortKey": "saikofuKubun"
-                                    },
-                                    {
-                                        "columnName": "再交付事由",
-                                        "dataName": "saikofuJiyu",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 100,
-                                        "visible": true,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": true,
-                                        "isPrivateInfo": false,
-                                        "sortKey": "saikofuJiyu"
-                                    },
-                                    {
-                                        "columnName": "帳票交付履歴ID",
-                                        "dataName": "chohyoKofuRirekiId",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 140,
-                                        "visible": false,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": "chohyoKofuRirekiId"
-                                    },
-                                    {
                                         "columnName": "識別コード",
                                         "dataName": "shikibetsuCode",
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 150,
-                                        "visible": true,
+                                        "visible": false,
                                         "cellType": 0,
                                         "cellDetails": null,
                                         "align": 1,

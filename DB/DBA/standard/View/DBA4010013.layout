@@ -1257,7 +1257,7 @@
      "width": "XS",
      "visible": true,
      "displayNone": false,
-     "disabled": false,
+     "disabled": true,
      "accessKey": "",
      "nextFocusFieldName": "",
      "wrap": true,
@@ -1878,7 +1878,7 @@
            "controlType": "Panel",
            "width": "800",
            "visible": true,
-           "displayNone": false,
+           "displayNone": true,
            "disabled": false,
            "accessKey": "",
            "nextFocusFieldName": "",
@@ -2230,7 +2230,7 @@
            "controlType": "Panel",
            "width": "800",
            "visible": true,
-           "displayNone": true,
+           "displayNone": false,
            "disabled": false,
            "accessKey": "",
            "nextFocusFieldName": "",
@@ -2663,15 +2663,51 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": "key0",
+           "selectedItem": "3",
            "dataSource": [
             {
-             "key": "key0",
-             "value": "value0"
+             "key": "1",
+             "value": "転居"
             },
             {
-             "key": "key1",
-             "value": "value1"
+             "key": "2",
+             "value": "氏名変更"
+            },
+            {
+             "key": "3",
+             "value": "広域内転入"
+            },
+            {
+             "key": "4",
+             "value": "広域内転出"
+            },
+            {
+             "key": "5",
+             "value": "広住特適用"
+            },
+            {
+             "key": "6",
+             "value": "広住特転入"
+            },
+            {
+             "key": "7",
+             "value": "広住特居住"
+            },
+            {
+             "key": "8",
+             "value": "広住特解除"
+            },
+            {
+             "key": "9",
+             "value": "合併内転居"
+            },
+            {
+             "key": "10",
+             "value": "一本化"
+            },
+            {
+             "key": "11",
+             "value": "その他"
             }
            ],
            "disabledItem": []
@@ -2986,7 +3022,7 @@
           "isShowRowState": true,
           "isShowSelectButtonColumn": false,
           "isShowModifyButtonColumn": true,
-          "isShowDeleteButtonColumn": true,
+          "isShowDeleteButtonColumn": false,
           "limitRowCount": 0,
           "selectedRowCount": 0,
           "selectLimitRowCount": 0,
@@ -3198,8 +3234,8 @@
       "TabPanel1"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tplJutoku",
-     "initialTab": "2",
+     "selectedItemFieldName": "tplHenko",
+     "initialTab": "0",
      "isLazyLoading": false
     }
    ],
@@ -3267,37 +3303,6 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "照会",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "KihonJoho",
-     "panelState": "visible",
-     "fixedDiv": "Yes"
-    },
-    {
-     "visibleDiv": "Atena",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ShikakuKihon",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ShikakuShosai",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": []
-  },
-  {
-   "order": "2",
    "stateName": "入力",
    "showWizard": false,
    "visibleDivs": [
@@ -3353,6 +3358,37 @@
     },
     {
      "visibleDiv": "HenkoHokenshaJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": []
+  },
+  {
+   "order": "2",
+   "stateName": "照会",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KihonJoho",
+     "panelState": "visible",
+     "fixedDiv": "Yes"
+    },
+    {
+     "visibleDiv": "Atena",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShikakuKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShikakuShosai",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -3468,6 +3504,174 @@
    "states": [
     {
      "state": "照会"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "button2",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonUpdate",
+     "buttonProperty": {
+      "fieldName": "btnUpdate",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnUpdate",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "保存",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "施設変更を"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnBackHihokenshaRireki",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnBackHihokenshaRireki",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "確認",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "被保履歴を",
+      "suffixText": "する"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "undefined"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "button3",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonUpdate",
+     "buttonProperty": {
+      "fieldName": "btnUpdate",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnUpdate",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "保存",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "異動内容を"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnBackHihokenshaRireki",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnBackHihokenshaRireki",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "確認",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "被保履歴を",
+      "suffixText": "する"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "入力"
     }
    ],
    "isFinishButtonOnTheRight": false,
