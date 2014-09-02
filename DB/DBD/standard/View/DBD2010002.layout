@@ -139,6 +139,7 @@
        "jpControlName": "",
        "readOnly": false,
        "height": "192",
+       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -303,7 +304,6 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "dataSource": [],
        "sortOrder": "txtShuryoJokyo",
        "isAscending": true,
        "filterList": [],
@@ -583,7 +583,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "TextBox3_core",
+     "selectControlID": "TextBox1_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
@@ -715,7 +715,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "TextBox3_core",
+     "selectControlID": "TextBox2_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
@@ -847,7 +847,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "TextBox3_core",
+     "selectControlID": "TextBox4_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
@@ -979,7 +979,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "TextBox3_core",
+     "selectControlID": "TextBox5_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
@@ -1130,7 +1130,7 @@
    "events": []
   }
  ],
- "currentState": "履歴一覧",
+ "currentState": "All",
  "id": "DBD2010002",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -1151,9 +1151,9 @@
    "commonButtonAreaId": "履歴一覧",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonExecute",
+     "buttonKind": "CommonButtonReportPublish",
      "buttonProperty": {
-      "fieldName": "btnExec",
+      "fieldName": "btnPrint",
       "items": [],
       "controlType": "CommonButtonNext",
       "width": 0,
@@ -1169,9 +1169,10 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btnExec",
+      "selectControlID": "btnPrint",
       "helpMessageID": "",
       "jpControlName": "",
+      "postParameterPanelNames": [],
       "text": "戻る",
       "imageWidth": "",
       "imageHeight": "",
@@ -1182,7 +1183,16 @@
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": ""
+      "additionalText": "",
+      "validateUrl": "",
+      "sourceCreateUrl": "",
+      "afterPrintUrl": "",
+      "isModal": true,
+      "isInstruction": true,
+      "isPreview": false,
+      "printable": false,
+      "copiesChangeable": false,
+      "progressVisible": false
      }
     },
     {
