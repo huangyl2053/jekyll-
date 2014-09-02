@@ -51,7 +51,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "required": false,
+     "required": true,
      "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
@@ -68,9 +68,9 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "decorationClass": "",
+     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "HorizontalLine1",
@@ -128,13 +128,13 @@
            "labelLAlign": 2,
            "onClick": "",
            "icon": [],
+           "selectedItem": "key0",
            "dataSource": [
             {
              "key": "key0",
              "value": "全登録者"
             }
            ],
-           "selectedItem": "key0",
            "newLineItemNumber": 1,
            "spaceSize": "M",
            "disabledItem": []
@@ -166,13 +166,13 @@
            "labelLAlign": 2,
            "onClick": "",
            "icon": [],
+           "selectedItem": "",
            "dataSource": [
             {
              "key": "key0",
              "value": "全登録者以外"
             }
            ],
-           "selectedItem": "",
            "newLineItemNumber": 1,
            "spaceSize": "M",
            "disabledItem": []
@@ -213,13 +213,13 @@
                  "labelLAlign": 2,
                  "onClick": "",
                  "icon": [],
+                 "selectedItem": "",
                  "dataSource": [
                   {
                    "key": "key0",
                    "value": "通知書未発行者"
                   }
                  ],
-                 "selectedItem": "",
                  "newLineItemNumber": 1,
                  "spaceSize": "M",
                  "disabledItem": [],
@@ -256,13 +256,13 @@
                  "labelLAlign": 2,
                  "onClick": "",
                  "icon": [],
+                 "selectedItem": "",
                  "dataSource": [
                   {
                    "key": "key0",
                    "value": "減額適用中者"
                   }
                  ],
-                 "selectedItem": "",
                  "newLineItemNumber": 1,
                  "spaceSize": "M",
                  "disabledItem": [],
@@ -310,9 +310,9 @@
                  "labelLAlign": 2,
                  "labelRAlign": 0,
                  "decorationClass": "",
+                 "permitCharactor": "./_-",
                  "ymdKubun": 2,
-                 "displayFormat": 0,
-                 "permitCharactor": "./_-"
+                 "displayFormat": 0
                 },
                 {
                  "fieldName": "CheckBoxList9",
@@ -341,13 +341,13 @@
                  "labelLAlign": 2,
                  "onClick": "",
                  "icon": [],
+                 "selectedItem": "",
                  "dataSource": [
                   {
                    "key": "key0",
                    "value": "減額終了日抽出"
                   }
                  ],
-                 "selectedItem": "",
                  "newLineItemNumber": 1,
                  "spaceSize": "M",
                  "disabledItem": [],
@@ -395,9 +395,9 @@
                  "labelLAlign": 2,
                  "labelRAlign": 2,
                  "decorationClass": "",
+                 "permitCharactor": "./_-",
                  "ymdKubun": 2,
-                 "displayFormat": 0,
-                 "permitCharactor": "./_-"
+                 "displayFormat": 0
                 },
                 {
                  "fieldName": "TextBoxDate8",
@@ -437,9 +437,9 @@
                  "labelLAlign": 2,
                  "labelRAlign": 0,
                  "decorationClass": "",
+                 "permitCharactor": "./_-",
                  "ymdKubun": 2,
-                 "displayFormat": 0,
-                 "permitCharactor": "./_-"
+                 "displayFormat": 0
                 }
                ],
                "controlType": "Panel",
@@ -587,13 +587,13 @@
            "labelLAlign": 2,
            "onClick": "",
            "icon": [],
+           "selectedItem": "",
            "dataSource": [
             {
              "key": "key0",
              "value": "保険料完納者も出力"
             }
            ],
-           "selectedItem": "",
            "newLineItemNumber": 1,
            "spaceSize": "M",
            "disabledItem": [],
@@ -739,7 +739,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "抽出条件*",
+   "title": "抽出条件",
    "isOpen": true,
    "canOpenAndClose": false,
    "postParameterPanelNames": [
@@ -818,7 +818,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "給付額減額管理一覧ＣＳＶ",
+ "title": "給付額減額管理リスト",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
@@ -873,7 +873,7 @@
    "events": []
   }
  ],
- "currentState": "発行画面",
+ "currentState": "All",
  "id": "DBD2020004",
  "WFParameter": [],
  "UIContainerEventMapping": [

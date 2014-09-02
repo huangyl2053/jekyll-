@@ -51,7 +51,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "required": false,
+     "required": true,
      "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
@@ -68,9 +68,9 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "decorationClass": "",
+     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "HorizontalLine1",
@@ -177,13 +177,13 @@
          "labelLAlign": 2,
          "onClick": "",
          "icon": [],
+         "selectedItem": "key0",
          "dataSource": [
           {
            "key": "key0",
            "value": "全登録者"
           }
          ],
-         "selectedItem": "key0",
          "newLineItemNumber": 1,
          "spaceSize": "M",
          "disabledItem": []
@@ -215,13 +215,13 @@
          "labelLAlign": 2,
          "onClick": "",
          "icon": [],
+         "selectedItem": "",
          "dataSource": [
           {
            "key": "key0",
            "value": "全登録者以外"
           }
          ],
-         "selectedItem": "",
          "newLineItemNumber": 1,
          "spaceSize": "M",
          "disabledItem": []
@@ -256,13 +256,13 @@
            "labelLAlign": 2,
            "onClick": "",
            "icon": [],
+           "selectedItem": "",
            "dataSource": [
             {
              "key": "key0",
              "value": "２号差止予告登録者"
             }
            ],
-           "selectedItem": "",
            "newLineItemNumber": 1,
            "spaceSize": "M",
            "disabledItem": [],
@@ -299,13 +299,13 @@
            "labelLAlign": 2,
            "onClick": "",
            "icon": [],
+           "selectedItem": "",
            "dataSource": [
             {
              "key": "key0",
              "value": "２号差止登録者"
             }
            ],
-           "selectedItem": "",
            "newLineItemNumber": 1,
            "spaceSize": "M",
            "disabledItem": [],
@@ -342,13 +342,13 @@
            "labelLAlign": 2,
            "onClick": "",
            "icon": [],
+           "selectedItem": "",
            "dataSource": [
             {
              "key": "key0",
              "value": "１号償還予告登録者"
             }
            ],
-           "selectedItem": "",
            "newLineItemNumber": 1,
            "spaceSize": "M",
            "disabledItem": [],
@@ -385,13 +385,13 @@
            "labelLAlign": 2,
            "onClick": "",
            "icon": [],
+           "selectedItem": "",
            "dataSource": [
             {
              "key": "key0",
              "value": "１号償還決定登録者"
             }
            ],
-           "selectedItem": "",
            "newLineItemNumber": 1,
            "spaceSize": "M",
            "disabledItem": [],
@@ -428,13 +428,13 @@
            "labelLAlign": 2,
            "onClick": "",
            "icon": [],
+           "selectedItem": "",
            "dataSource": [
             {
              "key": "key0",
              "value": "１号償還決定登録者（差止中あり）"
             }
            ],
-           "selectedItem": "",
            "newLineItemNumber": 1,
            "spaceSize": "M",
            "disabledItem": [],
@@ -471,13 +471,13 @@
            "labelLAlign": 2,
            "onClick": "",
            "icon": [],
+           "selectedItem": "",
            "dataSource": [
             {
              "key": "key0",
              "value": "１号償還決定登録者（保険料控除あり）"
             }
            ],
-           "selectedItem": "",
            "newLineItemNumber": 1,
            "spaceSize": "M",
            "disabledItem": [],
@@ -514,13 +514,13 @@
            "labelLAlign": 2,
            "onClick": "",
            "icon": [],
+           "selectedItem": "",
            "dataSource": [
             {
              "key": "key0",
              "value": "１号給付制限登録者"
             }
            ],
-           "selectedItem": "",
            "newLineItemNumber": 1,
            "spaceSize": "M",
            "disabledItem": [],
@@ -677,13 +677,13 @@
        "labelLAlign": 2,
        "onClick": "",
        "icon": [],
+       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
          "value": "全て"
         }
        ],
-       "selectedItem": "key0",
        "newLineItemNumber": 1,
        "spaceSize": "M",
        "disabledItem": []
@@ -715,13 +715,13 @@
        "labelLAlign": 2,
        "onClick": "",
        "icon": [],
+       "selectedItem": "",
        "dataSource": [
         {
          "key": "key0",
          "value": "適用中"
         }
        ],
-       "selectedItem": "",
        "newLineItemNumber": 1,
        "spaceSize": "M",
        "disabledItem": []
@@ -753,13 +753,13 @@
        "labelLAlign": 2,
        "onClick": "",
        "icon": [],
+       "selectedItem": "",
        "dataSource": [
         {
          "key": "key0",
          "value": "終了"
         }
        ],
-       "selectedItem": "",
        "newLineItemNumber": 1,
        "spaceSize": "M",
        "disabledItem": []
@@ -822,7 +822,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "抽出条件*",
+   "title": "抽出条件",
    "isOpen": true,
    "canOpenAndClose": false,
    "postParameterPanelNames": [
@@ -946,7 +946,7 @@
    "events": []
   }
  ],
- "currentState": "発行画面",
+ "currentState": "All",
  "id": "DBD2020005",
  "WFParameter": [],
  "UIContainerEventMapping": [
