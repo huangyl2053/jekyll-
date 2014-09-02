@@ -25,13 +25,8 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "required": true,
      "onChange": "",
-     "labelLText": "新規・更新区分",
-     "labelLWidth": "120",
-     "labelLAlign": 2,
-     "onClick": "",
-     "icon": [],
+     "selectedItem": "key2",
      "dataSource": [
       {
        "key": "key0",
@@ -46,10 +41,15 @@
        "value": "更新"
       }
      ],
-     "selectedItem": "key2",
+     "required": true,
+     "onClick": "",
      "newLineItemNumber": 3,
      "spaceSize": "M",
-     "disabledItem": []
+     "labelLText": "新規・更新区分",
+     "labelLWidth": "120",
+     "labelLAlign": 2,
+     "disabledItem": [],
+     "icon": []
     },
     {
      "fieldName": "CheckBoxList1",
@@ -72,23 +72,23 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "required": false,
      "onChange": "",
-     "labelLText": "",
-     "labelLWidth": "S",
-     "labelLAlign": 2,
-     "onClick": "",
-     "icon": [],
+     "selectedItem": "",
      "dataSource": [
       {
        "key": "key0",
        "value": "課税世帯の被保険者を含む"
       }
      ],
-     "selectedItem": "",
+     "required": false,
+     "onClick": "",
      "newLineItemNumber": 2,
      "spaceSize": "M",
+     "labelLText": "",
+     "labelLWidth": "S",
+     "labelLAlign": 2,
      "disabledItem": [],
+     "icon": [],
      "selectedItems": [],
      "minCheckedItem": 0,
      "maxCheckedItem": 2,
@@ -116,16 +116,8 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "required": true,
-     "onFocus": "",
-     "onBlur": "",
      "onChange": "",
-     "labelLText": "減免・減額種類",
-     "labelRText": "",
-     "labelLWidth": "120",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
+     "selectedItem": "key0",
      "dataSource": [
       {
        "key": "key0",
@@ -136,8 +128,16 @@
        "value": "value1"
       }
      ],
-     "selectedItem": "key0",
-     "disabledItem": []
+     "required": true,
+     "labelLText": "減免・減額種類",
+     "labelLWidth": "120",
+     "labelLAlign": 2,
+     "disabledItem": [],
+     "labelRText": "",
+     "labelRWidth": "S",
+     "labelRAlign": 0,
+     "onFocus": "",
+     "onBlur": ""
     },
     {
      "fieldName": "HorizontalLine1",
@@ -183,16 +183,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "required": true,
-       "onFocus": "",
-       "onBlur": "",
        "onChange": "",
-       "labelLText": "旧措置区分",
-       "labelRText": "",
-       "labelLWidth": "120",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
+       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -203,8 +195,16 @@
          "value": "value1"
         }
        ],
-       "selectedItem": "key0",
-       "disabledItem": []
+       "required": true,
+       "labelLText": "旧措置区分",
+       "labelLWidth": "120",
+       "labelLAlign": 2,
+       "disabledItem": [],
+       "labelRText": "",
+       "labelRWidth": "S",
+       "labelRAlign": 0,
+       "onFocus": "",
+       "onBlur": ""
       },
       {
        "fieldName": "RadioButton1",
@@ -227,13 +227,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "required": true,
        "onChange": "",
-       "labelLText": "施設入所区分",
-       "labelLWidth": "105",
-       "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -248,10 +243,15 @@
          "value": "入所者以外"
         }
        ],
-       "selectedItem": "key0",
+       "required": true,
+       "onClick": "",
        "newLineItemNumber": 3,
        "spaceSize": "M",
-       "disabledItem": []
+       "labelLText": "施設入所区分",
+       "labelLWidth": "105",
+       "labelLAlign": 2,
+       "disabledItem": [],
+       "icon": []
       },
       {
        "fieldName": "DropDownList5",
@@ -274,16 +274,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "required": true,
-       "onFocus": "",
-       "onBlur": "",
        "onChange": "",
-       "labelLText": "利用者負担段階",
-       "labelRText": "",
-       "labelLWidth": "120",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
+       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -294,8 +286,16 @@
          "value": "value1"
         }
        ],
-       "selectedItem": "key0",
-       "disabledItem": []
+       "required": true,
+       "labelLText": "利用者負担段階",
+       "labelLWidth": "120",
+       "labelLAlign": 2,
+       "disabledItem": [],
+       "labelRText": "",
+       "labelRWidth": "S",
+       "labelRAlign": 0,
+       "onFocus": "",
+       "onBlur": ""
       }
      ],
      "controlType": "Panel",
@@ -361,16 +361,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "required": true,
-       "onFocus": "",
-       "onBlur": "",
        "onChange": "",
-       "labelLText": "旧措置区分",
-       "labelRText": "",
-       "labelLWidth": "90",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
+       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -381,8 +373,16 @@
          "value": "value1"
         }
        ],
-       "selectedItem": "key0",
-       "disabledItem": []
+       "required": true,
+       "labelLText": "旧措置区分",
+       "labelLWidth": "90",
+       "labelLAlign": 2,
+       "disabledItem": [],
+       "labelRText": "",
+       "labelRWidth": "S",
+       "labelRAlign": 0,
+       "onFocus": "",
+       "onBlur": ""
       },
       {
        "fieldName": "RadioButton4",
@@ -405,13 +405,8 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "required": true,
        "onChange": "",
-       "labelLText": "施設入所区分",
-       "labelLWidth": "105",
-       "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -426,10 +421,15 @@
          "value": "入所者以外"
         }
        ],
-       "selectedItem": "key0",
+       "required": true,
+       "onClick": "",
        "newLineItemNumber": 3,
        "spaceSize": "M",
-       "disabledItem": []
+       "labelLText": "施設入所区分",
+       "labelLWidth": "105",
+       "labelLAlign": 2,
+       "disabledItem": [],
+       "icon": []
       },
       {
        "fieldName": "CheckBoxList7",
@@ -453,21 +453,21 @@
        "jpControlName": "",
        "readOnly": false,
        "onChange": "",
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": "",
        "dataSource": [
         {
          "key": "key0",
          "value": "市町村民税非課税世帯"
         }
        ],
-       "selectedItem": "",
+       "onClick": "",
        "newLineItemNumber": 2,
        "spaceSize": "M",
+       "labelLText": "",
+       "labelLWidth": "S",
+       "labelLAlign": 2,
        "disabledItem": [],
+       "icon": [],
        "selectedItems": [],
        "minCheckedItem": 0,
        "maxCheckedItem": 2,
@@ -496,21 +496,21 @@
        "jpControlName": "",
        "readOnly": false,
        "onChange": "",
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": "",
        "dataSource": [
         {
          "key": "key0",
          "value": "市町村民税本人非課税者"
         }
        ],
-       "selectedItem": "",
+       "onClick": "",
        "newLineItemNumber": 2,
        "spaceSize": "M",
+       "labelLText": "",
+       "labelLWidth": "S",
+       "labelLAlign": 2,
        "disabledItem": [],
+       "icon": [],
        "selectedItems": [],
        "minCheckedItem": 0,
        "maxCheckedItem": 2,
@@ -539,21 +539,21 @@
        "jpControlName": "",
        "readOnly": false,
        "onChange": "",
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": "",
        "dataSource": [
         {
          "key": "key0",
          "value": "老齢福祉年金受給者"
         }
        ],
-       "selectedItem": "",
+       "onClick": "",
        "newLineItemNumber": 2,
        "spaceSize": "M",
+       "labelLText": "",
+       "labelLWidth": "S",
+       "labelLAlign": 2,
        "disabledItem": [],
+       "icon": [],
        "selectedItems": [],
        "minCheckedItem": 0,
        "maxCheckedItem": 2,
@@ -582,21 +582,21 @@
        "jpControlName": "",
        "readOnly": false,
        "onChange": "",
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": "",
        "dataSource": [
         {
          "key": "key0",
          "value": "生活保護受給者"
         }
        ],
-       "selectedItem": "",
+       "onClick": "",
        "newLineItemNumber": 2,
        "spaceSize": "M",
+       "labelLText": "",
+       "labelLWidth": "S",
+       "labelLAlign": 2,
        "disabledItem": [],
+       "icon": [],
        "selectedItems": [],
        "minCheckedItem": 0,
        "maxCheckedItem": 2,
@@ -702,7 +702,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "減免申請対象者把握",
+ "title": "減免減額申請書発行用対象者把握",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
