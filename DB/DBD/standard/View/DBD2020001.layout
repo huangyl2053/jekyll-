@@ -51,7 +51,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "required": false,
+     "required": true,
      "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
@@ -68,9 +68,9 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "decorationClass": "",
+     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "HorizontalLine1",
@@ -128,13 +128,13 @@
            "labelLAlign": 2,
            "onClick": "",
            "icon": [],
+           "selectedItem": "key0",
            "dataSource": [
             {
              "key": "key0",
              "value": "被保険者全員"
             }
            ],
-           "selectedItem": "key0",
            "newLineItemNumber": 1,
            "spaceSize": "M",
            "disabledItem": []
@@ -183,12 +183,12 @@
            "labelLAlign": 2,
            "labelRAlign": 0,
            "decorationClass": "",
+           "permitCharactor": "+-,.\\",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
            "isComma": false,
-           "decimalPointLength": 0,
-           "permitCharactor": "+-,.\\"
+           "decimalPointLength": 0
           },
           {
            "fieldName": "TextBox1",
@@ -263,13 +263,13 @@
            "labelLAlign": 2,
            "onClick": "",
            "icon": [],
+           "selectedItem": "",
            "dataSource": [
             {
              "key": "key0",
              "value": "被保険者全員以外"
             }
            ],
-           "selectedItem": "",
            "newLineItemNumber": 1,
            "spaceSize": "M",
            "disabledItem": []
@@ -304,13 +304,13 @@
              "labelLAlign": 2,
              "onClick": "",
              "icon": [],
+             "selectedItem": "",
              "dataSource": [
               {
                "key": "key0",
                "value": "受給者全員"
               }
              ],
-             "selectedItem": "",
              "newLineItemNumber": 1,
              "spaceSize": "M",
              "disabledItem": [],
@@ -364,12 +364,12 @@
              "labelLAlign": 2,
              "labelRAlign": 0,
              "decorationClass": "",
+             "permitCharactor": "+-,.\\",
              "maxValue": 1.7976931348623157e+308,
              "minValue": 0,
              "isCurrency": false,
              "isComma": false,
-             "decimalPointLength": 0,
-             "permitCharactor": "+-,.\\"
+             "decimalPointLength": 0
             },
             {
              "fieldName": "TextBox3",
@@ -444,13 +444,13 @@
              "labelLAlign": 2,
              "onClick": "",
              "icon": [],
+             "selectedItem": "",
              "dataSource": [
               {
                "key": "key0",
                "value": "受給認定申請中者"
               }
              ],
-             "selectedItem": "",
              "newLineItemNumber": 1,
              "spaceSize": "M",
              "disabledItem": [],
@@ -504,12 +504,12 @@
              "labelLAlign": 2,
              "labelRAlign": 0,
              "decorationClass": "",
+             "permitCharactor": "+-,.\\",
              "maxValue": 1.7976931348623157e+308,
              "minValue": 0,
              "isCurrency": false,
              "isComma": false,
-             "decimalPointLength": 0,
-             "permitCharactor": "+-,.\\"
+             "decimalPointLength": 0
             },
             {
              "fieldName": "TextBox4",
@@ -584,13 +584,13 @@
              "labelLAlign": 2,
              "onClick": "",
              "icon": [],
+             "selectedItem": "",
              "dataSource": [
               {
                "key": "key0",
                "value": "受給認定日抽出"
               }
              ],
-             "selectedItem": "",
              "newLineItemNumber": 1,
              "spaceSize": "M",
              "disabledItem": [],
@@ -638,9 +638,9 @@
              "labelLAlign": 2,
              "labelRAlign": 2,
              "decorationClass": "",
+             "permitCharactor": "./_-",
              "ymdKubun": 2,
-             "displayFormat": 0,
-             "permitCharactor": "./_-"
+             "displayFormat": 0
             },
             {
              "fieldName": "TextBoxDate6",
@@ -680,9 +680,9 @@
              "labelLAlign": 2,
              "labelRAlign": 0,
              "decorationClass": "",
+             "permitCharactor": "./_-",
              "ymdKubun": 2,
-             "displayFormat": 0,
-             "permitCharactor": "./_-"
+             "displayFormat": 0
             },
             {
              "fieldName": "TextBoxNum8",
@@ -728,12 +728,12 @@
              "labelLAlign": 2,
              "labelRAlign": 0,
              "decorationClass": "",
+             "permitCharactor": "+-,.\\",
              "maxValue": 1.7976931348623157e+308,
              "minValue": 0,
              "isCurrency": false,
              "isComma": false,
-             "decimalPointLength": 0,
-             "permitCharactor": "+-,.\\"
+             "decimalPointLength": 0
             },
             {
              "fieldName": "TextBox5",
@@ -808,13 +808,13 @@
              "labelLAlign": 2,
              "onClick": "",
              "icon": [],
+             "selectedItem": "",
              "dataSource": [
               {
                "key": "key0",
                "value": "償還申請中者"
               }
              ],
-             "selectedItem": "",
              "newLineItemNumber": 1,
              "spaceSize": "M",
              "disabledItem": [],
@@ -868,12 +868,12 @@
              "labelLAlign": 2,
              "labelRAlign": 0,
              "decorationClass": "",
+             "permitCharactor": "+-,.\\",
              "maxValue": 1.7976931348623157e+308,
              "minValue": 0,
              "isCurrency": false,
              "isComma": false,
-             "decimalPointLength": 0,
-             "permitCharactor": "+-,.\\"
+             "decimalPointLength": 0
             },
             {
              "fieldName": "TextBox6",
@@ -948,13 +948,13 @@
              "labelLAlign": 2,
              "onClick": "",
              "icon": [],
+             "selectedItem": "",
              "dataSource": [
               {
                "key": "key0",
                "value": "償還支給決定日抽出"
               }
              ],
-             "selectedItem": "",
              "newLineItemNumber": 1,
              "spaceSize": "M",
              "disabledItem": [],
@@ -1002,9 +1002,9 @@
              "labelLAlign": 2,
              "labelRAlign": 2,
              "decorationClass": "",
+             "permitCharactor": "./_-",
              "ymdKubun": 2,
-             "displayFormat": 0,
-             "permitCharactor": "./_-"
+             "displayFormat": 0
             },
             {
              "fieldName": "TextBoxDate8",
@@ -1044,9 +1044,9 @@
              "labelLAlign": 2,
              "labelRAlign": 0,
              "decorationClass": "",
+             "permitCharactor": "./_-",
              "ymdKubun": 2,
-             "displayFormat": 0,
-             "permitCharactor": "./_-"
+             "displayFormat": 0
             },
             {
              "fieldName": "TextBoxNum10",
@@ -1092,12 +1092,12 @@
              "labelLAlign": 2,
              "labelRAlign": 0,
              "decorationClass": "",
+             "permitCharactor": "+-,.\\",
              "maxValue": 1.7976931348623157e+308,
              "minValue": 0,
              "isCurrency": false,
              "isComma": false,
-             "decimalPointLength": 0,
-             "permitCharactor": "+-,.\\"
+             "decimalPointLength": 0
             },
             {
              "fieldName": "TextBox7",
@@ -1321,7 +1321,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "抽出条件*",
+   "title": "抽出条件",
    "isOpen": true,
    "canOpenAndClose": false,
    "postParameterPanelNames": [
@@ -1400,7 +1400,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "支払方法変更把握一覧ＣＳＶ",
+ "title": "支払方法変更滞納者把握リスト",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
