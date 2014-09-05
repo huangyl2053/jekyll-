@@ -5,23 +5,23 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.IryoHokenRirekiDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * HihokenshaShokaiIryoHoken のクラスファイル 
+ * tplShoKofuKaishu のクラスファイル 
  * 
  * @author 自動生成
  */
-public class HihokenshaShokaiIryoHokenDiv extends Panel {
+public class tplShoKofuKaishuDiv extends TabPanel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("IryoHokenRireki")
-    private IryoHokenRirekiDiv IryoHokenRireki;
+    @JsonProperty("ShoKofuKaishuKiroku")
+    private ShoKaishuKirokuKanriDiv ShoKofuKaishuKiroku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -29,14 +29,14 @@ public class HihokenshaShokaiIryoHokenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("IryoHokenRireki")
-    public IryoHokenRirekiDiv getIryoHokenRireki() {
-        return IryoHokenRireki;
+    @JsonProperty("ShoKofuKaishuKiroku")
+    public ShoKaishuKirokuKanriDiv getShoKofuKaishuKiroku() {
+        return ShoKofuKaishuKiroku;
     }
 
-    @JsonProperty("IryoHokenRireki")
-    public void setIryoHokenRireki(IryoHokenRirekiDiv IryoHokenRireki) {
-        this.IryoHokenRireki=IryoHokenRireki;
+    @JsonProperty("ShoKofuKaishuKiroku")
+    public void setShoKofuKaishuKiroku(ShoKaishuKirokuKanriDiv ShoKofuKaishuKiroku) {
+        this.ShoKofuKaishuKiroku=ShoKofuKaishuKiroku;
     }
 
 }

@@ -13,16 +13,18 @@ import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiPanelSelectDiv;
 //import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiRofukuNenkinDiv;
 //import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiSeikatsuHogoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiSetaiShokaiDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiShikakuTokusoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiShinseiTodokedeDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiShisetsuNyutaishoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiShoKofuKaishuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiTaishoSearchDiv;
 //import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgRoreiFukushiRireki_Row;
 //import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgSeikatsuHogoRireki_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgSetaiJoho_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgShinseishoTodokede_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplHihokenshaRirekiDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplIryoHokenDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplSetaiShokaiDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplShinseiTodokedeDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplShisetsuNyutaishoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplShoKofuKaishuDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IryoHokenRireki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShisetsuNyutaishoRirekiKanri;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShoKaishuKirokuKanri;
 //import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IryoHokenRireki;
@@ -61,21 +63,21 @@ public class HihokenshaShokaiPanelSelect {
     public ResponseData onClick_btnToDecide(HihokenshaShokaiPanelSelectDiv selectDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
         ResponseData<HihokenshaShokaiPanelSelectDiv> response = new ResponseData<>();
 
-        setShikakuDiv(selectDiv.getHihokenshaShokaiShikakuTokuso(), searchDiv);
-        setSetaiDiv(selectDiv.getHihokenshaShokaiSetaiShokai(), searchDiv);
+        setShikakuDiv(selectDiv.getTplHihokenshaRireki(), searchDiv);
+        setSetaiDiv(selectDiv.getTplSetaiShokai(), searchDiv);
 //        setSeikatsuHogoDiv(selectDiv.getHihokenshaShokaiSeikatsuHogo(), searchDiv);
 //        setRofukuNenkinDiv(selectDiv.getHihokenshaShokaiRofukuNenkin(), searchDiv);
-//        setIryoHokenDiv(selectDiv.getHihokenshaShokaiIryoHoken(), searchDiv);
-        setNyutaishoDiv(selectDiv.getHihokenshaShokaiShisetsuNyutaisho(), searchDiv);
-        setShoKofuKaishuDiv(selectDiv.getHihokenshaShokaiShoKofuKaishu(), searchDiv);
-        setShinseiTodokedeDiv(selectDiv.getHihokenshaShokaiShinseiTodokede(), searchDiv);
+        setIryoHokenDiv(selectDiv.getTplIryoHoken(), searchDiv);
+        setNyutaishoDiv(selectDiv.getTplShisetsuNyutaisho(), searchDiv);
+        setShoKofuKaishuDiv(selectDiv.getTplShoKofuKaishu(), searchDiv);
+        setShinseiTodokedeDiv(selectDiv.getTplShinseiTodokede(), searchDiv);
 
         setStateButtonDisabled(selectDiv);
 
-        ShoKaishuKirokuKanri.setMode(selectDiv.getHihokenshaShokaiShoKofuKaishu().getShoKofuKaishuKiroku(), ModeType.SHOKAI_MODE);
-        ShisetsuNyutaishoRirekiKanri.setMode(selectDiv.getHihokenshaShokaiShisetsuNyutaisho().getShisetsuNyutaishoRireki(), ModeType.SHOKAI_MODE);
-        ShikakuTokusoRireki.setMode(selectDiv.getHihokenshaShokaiShikakuTokuso().getShikakuTokusoRireki(), ModeType.SHOKAI_MODE);
-//        IryoHokenRireki.setMode(selectDiv.getHihokenshaShokaiIryoHoken().getIryoHokenRireki(), ModeType.SHOKAI_MODE);
+        ShoKaishuKirokuKanri.setMode(selectDiv.getTplShoKofuKaishu().getShoKofuKaishuKiroku(), ModeType.SHOKAI_MODE);
+        ShisetsuNyutaishoRirekiKanri.setMode(selectDiv.getTplShisetsuNyutaisho().getShisetsuNyutaishoRireki(), ModeType.SHOKAI_MODE);
+        ShikakuTokusoRireki.setMode(selectDiv.getTplHihokenshaRireki().getShikakuTokusoRireki(), ModeType.SHOKAI_MODE);
+        IryoHokenRireki.setMode(selectDiv.getTplIryoHoken().getIryoHokenRireki(), ModeType.SHOKAI_MODE);
         response.data = selectDiv;
         return response;
     }
@@ -90,12 +92,11 @@ public class HihokenshaShokaiPanelSelect {
      * @param searchDiv 検索Div
      * @return 資格得喪Div
      */
-    private HihokenshaShokaiShikakuTokusoDiv setShikakuDiv(HihokenshaShokaiShikakuTokusoDiv shikakuDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
+    private void setShikakuDiv(tplHihokenshaRirekiDiv shikakuDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
         DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setShikakuTokusoJoho(shikakuDiv.getShikakuTokusoRireki().getDgShikakuShutokuRireki(), hihokenshaNo);
-        return shikakuDiv;
     }
 
     private void setShikakuTokusoJoho(DataGrid<dgShikakuShutokuRireki_Row> dgShikakuShutokuRireki, RString hihokenshaNo) {
@@ -117,12 +118,13 @@ public class HihokenshaShokaiPanelSelect {
     }
 
     private dgShikakuShutokuRireki_Row createShikakuTokusoRirekiRow(ControlGenerator generator) {
-        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
-                RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(),
-                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
-                RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY);
+        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(new Button(), new TextBoxFlexibleDate(),
+                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
         row.getShutokuTodokedeDate().setValue(generator.getAsFlexibleDate("取得届出日"));
         row.getShutokuDate().setValue(generator.getAsFlexibleDate("取得日"));
@@ -148,8 +150,6 @@ public class HihokenshaShokaiPanelSelect {
         row.setHenkoJiyuKey(generator.getAsRString("変更事由Key"));
         row.getNenreiTotatsuDate().setValue(generator.getAsFlexibleDate("1号年齢到達日"));
         row.setKyuHokensha(generator.getAsRString("旧保険者"));
-        row.setSaikofuKubun(generator.getAsRString("再交付区分"));
-        row.setSaikofuJiyu(generator.getAsRString("再交付事由"));
         row.setShikibetsuCode(generator.getAsRString("識別コード"));
         return row;
     }
@@ -164,12 +164,11 @@ public class HihokenshaShokaiPanelSelect {
      * @param searchDiv 検索Div
      * @return 世帯照会Div
      */
-    private HihokenshaShokaiSetaiShokaiDiv setSetaiDiv(HihokenshaShokaiSetaiShokaiDiv setaiDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
+    private void setSetaiDiv(tplSetaiShokaiDiv setaiDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
         DemoKojin demoKojin = new DemoKojin("第1号");
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         setSetaiJoho(setaiDiv.getDgSetaiJoho(), shikibetsuCode);
-        return setaiDiv;
     }
 
     private void setSetaiJoho(DataGrid<dgSetaiJoho_Row> dgSetaiJoho, RString shikibetsuCode) {
@@ -191,16 +190,17 @@ public class HihokenshaShokaiPanelSelect {
     }
 
     private dgSetaiJoho_Row createSetaiJohoRow(ControlGenerator generator) {
-        dgSetaiJoho_Row row = new dgSetaiJoho_Row(RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY);
+        dgSetaiJoho_Row row = new dgSetaiJoho_Row(RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
+        row.setHihokenshaNo(generator.getAsRString("被保番号"));
         row.setShimei(generator.getAsRString("氏名"));
         row.getDateOfBirth().setValue(generator.getAsFlexibleDate("生年月日"));
         row.setAge(generator.getAsRString("年齢"));
         row.setGender(generator.getAsRString("性別"));
         row.setTsuzukigara(generator.getAsRString("続柄"));
         row.setJuminJotai(generator.getAsRString("住民状態"));
-        row.setNotJuminDate(generator.getAsTextBoxFlexibleDate("住民でなくなった日"));
+        row.setHihokenshaKubun(generator.getAsRString("被保区分"));
         row.setShikibetsuCode(generator.getAsRString("識別コード"));
         row.setKojinNo(generator.getAsRString("個人番号"));
         return row;
@@ -290,49 +290,52 @@ public class HihokenshaShokaiPanelSelect {
 //        row.getKaishiYMD().setValue(generator.getAsFlexibleDate("廃止日"));
 //        return row;
 //    }
-//    private static final RString IRYO_HOKEN = new RString("DBA4010011/iryoHoken.yml");
+    private static final RString IRYO_HOKEN = new RString("DBA4010011/iryoHoken.yml");
+
     /**
      * // * 該当者一覧から、被保険者照会の対象となる個人が選択された際に実行します。<br/>
      * // * 選択した個人の識別コードを元に、医療保険の情報を表示します。 // * // * @param iryoHokenDiv
      * 医療保険Div // * @param searchDiv 検索Div // * @return 医療保険Div //
      */
-//    private HihokenshaShokaiIryoHokenDiv setIryoHokenDiv(HihokenshaShokaiIryoHokenDiv iryoHokenDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
-//
-//        RString shikibetsuCode = SHIKIBETSU_CODE;
-//        setIryoHokenJoho(iryoHokenDiv.getIryoHokenRireki().getDgIryoHokenRireki(), shikibetsuCode);
-//        return iryoHokenDiv;
-//    }
-//    private void setIryoHokenJoho(DataGrid<dgIryoHokenRireki_Row> dgIryoHoken, RString shikibetsuCode) {
-//
-//        List<HashMap> yamlIryoHokenDataList = YamlLoader.DBA.loadAsList(IRYO_HOKEN);
-//        List<HashMap> iryoHokenDataList = new ArrayList<>();
-//        for (HashMap yamlIryoHokenData : yamlIryoHokenDataList) {
-//            ControlGenerator generator = new ControlGenerator(yamlIryoHokenData);
-//            if (generator.getAsRString("識別コード").equals(shikibetsuCode)) {
-//                iryoHokenDataList = (List<HashMap>) generator.get("医療保険");
-//            }
-//        }
-//
-//        List<dgIryoHokenRireki_Row> iryoHokenDataSource = new ArrayList<>();
-//        for (HashMap seikatuHogo : iryoHokenDataList) {
-//            iryoHokenDataSource.add(createIryoHokenRow(new ControlGenerator(seikatuHogo)));
-//        }
-//        dgIryoHoken.setDataSource(iryoHokenDataSource);
-//    }
-//    private dgIryoHokenRireki_Row createIryoHokenRow(ControlGenerator generator) {
-//        dgIryoHokenRireki_Row row = new dgIryoHokenRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
-//                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
-//
-//        row.setKanyuDate(generator.getAsTextBoxFlexibleDate("加入日"));
-//        row.setDattaiDate(generator.getAsTextBoxFlexibleDate("脱退日"));
-//        row.setIryoHokenShubetsuKey(generator.getAsRString("保険者種別Key"));
-//        row.setIryoHokenShubetsu(generator.getAsRString("保険者種別"));
-//        row.setHokenshaNo(generator.getAsRString("保険者番号"));
-//        row.setHokenshaMeisho(generator.getAsRString("保険者名称"));
-//        row.setHokensha(row.getHokenshaNo().concat(":").concat(row.getHokenshaMeisho()));
-//        row.setKigoNo(generator.getAsRString("記号番号"));
-//        return row;
-//    }
+    private void setIryoHokenDiv(tplIryoHokenDiv iryoHokenDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
+
+        DemoKojin demoKojin = new DemoKojin("第1号");
+        RString shikibetsuCode = demoKojin.getShikibetsuCode();
+        setIryoHokenJoho(iryoHokenDiv.getIryoHokenRireki().getDgIryoHokenRireki(), shikibetsuCode);
+    }
+
+    private void setIryoHokenJoho(DataGrid<dgIryoHokenRireki_Row> dgIryoHoken, RString shikibetsuCode) {
+
+        List<HashMap> yamlIryoHokenDataList = YamlLoader.DBA.loadAsList(IRYO_HOKEN);
+        List<HashMap> iryoHokenDataList = new ArrayList<>();
+        for (HashMap yamlIryoHokenData : yamlIryoHokenDataList) {
+            ControlGenerator generator = new ControlGenerator(yamlIryoHokenData);
+            if (generator.getAsRString("識別コード").equals(shikibetsuCode)) {
+                iryoHokenDataList = (List<HashMap>) generator.get("医療保険");
+            }
+        }
+
+        List<dgIryoHokenRireki_Row> iryoHokenDataSource = new ArrayList<>();
+        for (HashMap seikatuHogo : iryoHokenDataList) {
+            iryoHokenDataSource.add(createIryoHokenRow(new ControlGenerator(seikatuHogo)));
+        }
+        dgIryoHoken.setDataSource(iryoHokenDataSource);
+    }
+
+    private dgIryoHokenRireki_Row createIryoHokenRow(ControlGenerator generator) {
+        dgIryoHokenRireki_Row row = new dgIryoHokenRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+
+        row.setKanyuDate(generator.getAsTextBoxFlexibleDate("加入日"));
+        row.setDattaiDate(generator.getAsTextBoxFlexibleDate("脱退日"));
+        row.setIryoHokenShubetsuKey(generator.getAsRString("保険者種別Key"));
+        row.setIryoHokenShubetsu(generator.getAsRString("保険者種別"));
+        row.setHokenshaNo(generator.getAsRString("保険者番号"));
+        row.setHokenshaMeisho(generator.getAsRString("保険者名称"));
+        row.setHokensha(row.getHokenshaNo().concat(":").concat(row.getHokenshaMeisho()));
+        row.setKigoNo(generator.getAsRString("記号番号"));
+        return row;
+    }
     private static final RString SHISETSU_NYUTAISHO = new RString("DBA4010011/shisetsuNyutaisho.yml");
 
     /**
@@ -343,13 +346,12 @@ public class HihokenshaShokaiPanelSelect {
      * @param searchDiv 検索Div
      * @return 施設入退所Div
      */
-    private HihokenshaShokaiShisetsuNyutaishoDiv setNyutaishoDiv(HihokenshaShokaiShisetsuNyutaishoDiv nyutaishoDiv,
+    private void setNyutaishoDiv(tplShisetsuNyutaishoDiv nyutaishoDiv,
             HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
         DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setNyutaishoJoho(nyutaishoDiv.getShisetsuNyutaishoRireki().getDgShisetsuNyutaishoRireki(), hihokenshaNo);
-        return nyutaishoDiv;
     }
 
     private void setNyutaishoJoho(DataGrid<dgShisetsuNyutaishoRireki_Row> dgNyutaisho, RString hihokenshaNo) {
@@ -396,13 +398,12 @@ public class HihokenshaShokaiPanelSelect {
      * @param searchDiv 検索Div
      * @return 証交付回収Div
      */
-    private HihokenshaShokaiShoKofuKaishuDiv setShoKofuKaishuDiv(HihokenshaShokaiShoKofuKaishuDiv nyutaishoDiv,
+    private void setShoKofuKaishuDiv(tplShoKofuKaishuDiv nyutaishoDiv,
             HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
         DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setShoKofuKaishuJoho(nyutaishoDiv.getShoKofuKaishuKiroku().getShoKaishuJokyoList().getDgShoKaishuJokyo(), hihokenshaNo);
-        return nyutaishoDiv;
     }
 
     private void setShoKofuKaishuJoho(DataGrid<dgShoKaishuJokyo_Row> dgShoKofu, RString hihokenshaNo) {
@@ -447,13 +448,12 @@ public class HihokenshaShokaiPanelSelect {
      * @param searchDiv 検索Div
      * @return 申請届出Div
      */
-    private HihokenshaShokaiShinseiTodokedeDiv setShinseiTodokedeDiv(HihokenshaShokaiShinseiTodokedeDiv todokedeDiv,
+    private void setShinseiTodokedeDiv(tplShinseiTodokedeDiv todokedeDiv,
             HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
         DemoKojin demoKojin = new DemoKojin("第1号");
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         setTodokedeJoho(todokedeDiv.getDgShinseishoTodokede(), shikibetsuCode);
-        return todokedeDiv;
     }
 
     private void setTodokedeJoho(DataGrid<dgShinseishoTodokede_Row> dgTodokede, RString shikibetsuCode) {
@@ -504,11 +504,13 @@ public class HihokenshaShokaiPanelSelect {
      * @param selectDiv 照会情報選択Div
      */
     private void setStateButtonDisabled(HihokenshaShokaiPanelSelectDiv selectDiv) {
-//        if (isEmptyToDataGrid(selectDiv.getHihokenshaShokaiIryoHoken().getIryoHokenRireki().getDgIryoHokenRireki())) {
-//            selectDiv.getBtnIryoHoken().setDisabled(true);
-//        } else {
-//            selectDiv.getBtnIryoHoken().setDisabled(false);
-//        }
+        if (isEmptyToDataGrid(selectDiv.getTplIryoHoken().getIryoHokenRireki().getDgIryoHokenRireki())) {
+            selectDiv.getTplIryoHoken().setDisabled(true);
+        } else {
+            selectDiv.getTplIryoHoken().setDisabled(false);
+        }
+        selectDiv.getTplRofukuNenkin().setDisabled(true);
+        selectDiv.getTplSeikatsuHogo().setDisabled(true);
 //        if (isEmptyToDataGrid(selectDiv.getHihokenshaShokaiRofukuNenkin().getDgRoreiFukushiRireki())) {
 //            selectDiv.getBtnRofukuNenkin().setDisabled(true);
 //        } else {
@@ -519,30 +521,30 @@ public class HihokenshaShokaiPanelSelect {
 //        } else {
 //            selectDiv.getBtnSeikatsuHogo().setDisabled(false);
 //        }
-        if (isEmptyToDataGrid(selectDiv.getHihokenshaShokaiSetaiShokai().getDgSetaiJoho())) {
-            selectDiv.getBtnSetaiShokai().setDisabled(true);
+        if (isEmptyToDataGrid(selectDiv.getTplSetaiShokai().getDgSetaiJoho())) {
+            selectDiv.getTplSetaiShokai().setDisabled(true);
         } else {
-            selectDiv.getBtnSetaiShokai().setDisabled(false);
+            selectDiv.getTplSetaiShokai().setDisabled(false);
         }
-        if (isEmptyToDataGrid(selectDiv.getHihokenshaShokaiShikakuTokuso().getShikakuTokusoRireki().getDgShikakuShutokuRireki())) {
-            selectDiv.getBtnShikakuTokuso().setDisabled(true);
+        if (isEmptyToDataGrid(selectDiv.getTplHihokenshaRireki().getShikakuTokusoRireki().getDgShikakuShutokuRireki())) {
+            selectDiv.getTplHihokenshaRireki().setDisabled(true);
         } else {
-            selectDiv.getBtnShikakuTokuso().setDisabled(false);
+            selectDiv.getTplHihokenshaRireki().setDisabled(false);
         }
-        if (isEmptyToDataGrid(selectDiv.getHihokenshaShokaiShinseiTodokede().getDgShinseishoTodokede())) {
-            selectDiv.getBtnShinseiTodokede().setDisabled(true);
+        if (isEmptyToDataGrid(selectDiv.getTplShinseiTodokede().getDgShinseishoTodokede())) {
+            selectDiv.getTplShinseiTodokede().setDisabled(true);
         } else {
-            selectDiv.getBtnShinseiTodokede().setDisabled(false);
+            selectDiv.getTplShinseiTodokede().setDisabled(false);
         }
-        if (isEmptyToDataGrid(selectDiv.getHihokenshaShokaiShisetsuNyutaisho().getShisetsuNyutaishoRireki().getDgShisetsuNyutaishoRireki())) {
-            selectDiv.getBtnShisetsuNyutaisho().setDisabled(true);
+        if (isEmptyToDataGrid(selectDiv.getTplShisetsuNyutaisho().getShisetsuNyutaishoRireki().getDgShisetsuNyutaishoRireki())) {
+            selectDiv.getTplShisetsuNyutaisho().setDisabled(true);
         } else {
-            selectDiv.getBtnShisetsuNyutaisho().setDisabled(false);
+            selectDiv.getTplShisetsuNyutaisho().setDisabled(false);
         }
-        if (isEmptyToDataGrid(selectDiv.getHihokenshaShokaiShoKofuKaishu().getShoKofuKaishuKiroku().getShoKaishuJokyoList().getDgShoKaishuJokyo())) {
-            selectDiv.getBtnShoKofu().setDisabled(true);
+        if (isEmptyToDataGrid(selectDiv.getTplShoKofuKaishu().getShoKofuKaishuKiroku().getShoKaishuJokyoList().getDgShoKaishuJokyo())) {
+            selectDiv.getTplShoKofuKaishu().setDisabled(true);
         } else {
-            selectDiv.getBtnShoKofu().setDisabled(false);
+            selectDiv.getTplShoKofuKaishu().setDisabled(false);
         }
     }
 

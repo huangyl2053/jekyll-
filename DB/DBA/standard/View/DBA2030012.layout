@@ -251,9 +251,9 @@
            "onKeyPress": "",
            "text": "",
            "value": "",
-           "labelLText": "入所日",
+           "labelLText": "退所日",
            "labelRText": "",
-           "labelLWidth": "63",
+           "labelLWidth": "50",
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
@@ -293,7 +293,7 @@
            "onKeyPress": "",
            "text": "",
            "value": "",
-           "labelLText": "適用日",
+           "labelLText": "解除日",
            "labelRText": "",
            "labelLWidth": "50",
            "labelRWidth": "S",
@@ -370,7 +370,7 @@
            "onFocus": "",
            "onBlur": "",
            "onChange": "",
-           "labelLText": "適用事由",
+           "labelLText": "解除事由",
            "labelRText": "",
            "labelLWidth": "70",
            "labelRWidth": "S",
@@ -380,56 +380,26 @@
            "dataSource": [
             {
              "key": "1",
-             "value": "住所地特例適用"
+             "value": "住所地特例解除"
             },
             {
              "key": "2",
-             "value": "職権適用"
+             "value": "適用者転出"
             },
             {
              "key": "3",
+             "value": "適用者死亡"
+            },
+            {
+             "key": "4",
+             "value": "職権適用"
+            },
+            {
+             "key": "5",
              "value": "その他"
             }
            ],
            "disabledItem": []
-          },
-          {
-           "fieldName": "ShisetsuInput",
-           "items": [],
-           "controlType": "CommonChildDiv",
-           "width": "XS",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": true,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "0",
-           "marginRight": "0",
-           "selectControlID": "ShisetsuInput",
-           "helpMessageID": "",
-           "jpControlName": "",
-           "relation": [],
-           "marginTop": 0,
-           "marginBottom": 0,
-           "businessId": "DBZ",
-           "controlName": "ShisetsuJoho",
-           "dataPassingForDialog": [],
-           "dialogOkEventNameForDialog": "",
-           "dialogCancelEventNameForDialog": "",
-           "canTransferEvent": true,
-           "heightForDialog": "M",
-           "firstFocusFieldName": "",
-           "lastFocusFieldName": "",
-           "btnJigyoshaInputGuide_displayNone": false,
-           "btnOtherTokureiShisetsuInputGuide_displayNone": true,
-           "btnJogaiShisetsuInputGuide_displayNone": true,
-           "radShisetsuShurui_displayNone": false,
-           "ShisetsuJoho_width": "800"
           }
          ],
          "controlType": "Panel",
@@ -2753,8 +2723,8 @@
    ]
   }
  ],
- "currentState": "All",
- "id": "DBA2030011",
+ "currentState": "解除",
+ "id": "DBA2030012",
  "WFParameter": [],
  "UIContainerEventMapping": [
   {
@@ -2817,12 +2787,14 @@
       "selectControlID": "btnSave",
       "helpMessageID": "",
       "jpControlName": "",
-      "onClick": "onClick_btnSave",
       "text": "完了",
-      "appearance": 0,
-      "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "onClick_btnSave",
+      "appearance": 0,
+      "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": "資格情報を"
@@ -2898,6 +2870,15 @@
    "states": [
     {
      "state": "適用"
+    },
+    {
+     "state": "解除"
+    },
+    {
+     "state": "施設変更"
+    },
+    {
+     "state": "訂正"
     }
    ],
    "isFinishButtonOnTheRight": false,
