@@ -7,15 +7,15 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgSetaiJoho_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * HihokenshaShokaiSetaiShokai のクラスファイル 
+ * tplSetaiShokai のクラスファイル 
  * 
  * @author 自動生成
  */
-public class HihokenshaShokaiSetaiShokaiDiv extends Panel {
+public class tplSetaiShokaiDiv extends TabPanel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
