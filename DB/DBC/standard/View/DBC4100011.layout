@@ -1,0 +1,195 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "ServiceIdoRenrakuhyo",
+   "items": [
+    {
+     "fieldName": "chkServiceSentaku",
+     "items": [],
+     "controlType": "CheckBoxList",
+     "width": "L",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "chkServiceSentaku_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "required": true,
+     "onChange": "",
+     "labelLText": "作成対象",
+     "labelLWidth": "80px",
+     "labelLAlign": 2,
+     "onClick": "",
+     "icon": [],
+     "selectedItem": "",
+     "dataSource": [
+      {
+       "key": "key0",
+       "value": "地域密着型サービス"
+      },
+      {
+       "key": "key1",
+       "value": "介護予防・日常生活支援総合事業サービス"
+      }
+     ],
+     "newLineItemNumber": 1,
+     "spaceSize": "M",
+     "disabledItem": [],
+     "selectedItems": [],
+     "minCheckedItem": 0,
+     "maxCheckedItem": 2,
+     "isAllSelectable": true,
+     "isAllSelectableBreakLine": false
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "Default",
+   "marginRight": "Default",
+   "selectControlID": "ServiceIdoRenrakuhyo",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "抽出条件",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "focusPositionID": "idProperty",
+   "canPost": false
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "サービスコード異動連絡票作成",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "処理起動",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "ServiceIdoRenrakuhyo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": []
+  }
+ ],
+ "currentState": "処理起動",
+ "id": "DBC4100011",
+ "WFParameter": [],
+ "UIContainerEventMapping": [],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "btnJikko",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonExecute",
+     "buttonProperty": {
+      "fieldName": "btnJikko",
+      "items": [],
+      "controlType": "CommonButtonExecute",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnJikko",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "text": "実行",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "処理起動"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ],
+ "packageName": ""
+}
