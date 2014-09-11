@@ -26,7 +26,6 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "580",
-     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -40,6 +39,7 @@
       "isShowDeleteButtonColumn": false,
       "limitRowCount": 0,
       "selectedRowCount": 0,
+      "selectLimitRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -79,7 +79,7 @@
         "sortKey": "txtHihoNo"
        },
        {
-        "columnName": "カナ氏名",
+        "columnName": "被保険者氏名",
         "dataName": "txtHihokenshaName",
         "toolTip": "",
         "bgColor": 0,
@@ -95,11 +95,25 @@
         "sortKey": "txtHihokenshaName"
        },
        {
+        "columnName": "送付区分",
+        "dataName": "txtSofuKubun",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtSofuKubun"
+       },
+       {
         "columnName": "項目",
         "dataName": "txtKomoku",
         "toolTip": "",
         "bgColor": 0,
-        "width": 550,
+        "width": 460,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -126,6 +140,7 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
+     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -199,7 +214,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "受給異動情報履歴訂正一覧",
+ "title": "共同処理用受給者異動連絡票履歴訂正一覧",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
@@ -221,7 +236,7 @@
   }
  ],
  "currentState": "All",
- "id": "DBC0200001",
+ "id": "DBC0200101",
  "WFParameter": [],
  "UIContainerEventMapping": [
   {
