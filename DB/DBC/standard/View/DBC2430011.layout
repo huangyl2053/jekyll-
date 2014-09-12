@@ -2,53 +2,13 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "JukusyaTotsugoJohoSakusei",
+   "fieldName": "JutakukaishuTesuryoKettei",
    "items": [
     {
-     "fieldName": "ddlChushutsuKubun",
-     "items": [],
-     "controlType": "DropDownList",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "ddlChushutsuKubun_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": false,
-     "dataSource": [
-      {
-       "key": "key0",
-       "value": "認定期間内の最新情報"
-      }
-     ],
-     "required": true,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "labelLText": "抽出区分",
-     "labelRText": "",
-     "labelLWidth": "S",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "selectedItem": "key0",
-     "isBlankLine": false
-    },
-    {
-     "fieldName": "txtTaishoYM",
+     "fieldName": "txtKetteiYMD",
      "items": [],
      "controlType": "TextBoxDateRange",
-     "width": "60px",
+     "width": "80px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -61,7 +21,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "txtTaishoYM_core",
+     "selectControlID": "txtKetteiYMD_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
@@ -71,18 +31,17 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "labelLText": "対象年月",
+     "labelLText": "決定日",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "ymdKubun": 1,
+     "ymdKubun": 2,
      "displayFormat": 0,
      "permitCharactor": "",
-     "fromRequired": false,
-     "fromPlaceHolder": "",
-     "toRequired": false,
+     "fromRequired": true,
+     "fromPlaceHolder": "平26.04.01",
      "toPlaceHolder": "",
      "minDate": "",
      "maxDate": "",
@@ -90,15 +49,15 @@
      "toText": "",
      "fromValue": "",
      "toValue": "",
-     "fromSelectControlID": "txtTaishoYMFrom",
-     "toSelectControlID": "txtTaishoYMTo",
-     "autoRangeTo": false
+     "fromSelectControlID": "txtKetteiYMDFrom",
+     "toSelectControlID": "txtKetteiYMDTo",
+     "autoRangeTo": true
     },
     {
-     "fieldName": "txtNinteiYM",
+     "fieldName": "spaMain",
      "items": [],
-     "controlType": "TextBoxDate",
-     "width": "60px",
+     "controlType": "Space",
+     "width": "Default",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -106,35 +65,14 @@
      "nextFocusFieldName": "",
      "wrap": true,
      "dependencies": [],
-     "float": 0,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "txtNinteiYM_core",
+     "selectControlID": "spaMain",
      "helpMessageID": "",
      "jpControlName": "",
-     "readOnly": false,
-     "text": "",
-     "required": false,
-     "placeHolder": "",
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "labelLText": "認定年月",
-     "labelRText": "",
-     "labelLWidth": "S",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "ymdKubun": 1,
-     "displayFormat": 0,
-     "value": "",
-     "decorationClass": "",
-     "permitCharactor": "./_-"
+     "height": "XS"
     }
    ],
    "controlType": "Panel",
@@ -151,7 +89,7 @@
    "authorityMode": 0,
    "marginLeft": "Default",
    "marginRight": "Default",
-   "selectControlID": "JukusyaTotsugoJohoSakusei",
+   "selectControlID": "JutakukaishuTesuryoKettei",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -173,7 +111,7 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "focusPositionID": "idProperty",
+   "focusPositionID": "Page",
    "canPost": false
   }
  ],
@@ -195,18 +133,18 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "受給者突合依頼情報作成",
+ "title": "住宅改修理由書作成手数料支給（不支給）決定通知書作成",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "処理起動",
+   "stateName": "起動画面",
    "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "JukusyaTotsugoJohoSakusei",
+     "visibleDiv": "JutakukaishuTesuryoKettei",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -217,8 +155,8 @@
    "events": []
   }
  ],
- "currentState": "処理起動",
- "id": "DBC2800011",
+ "currentState": "All",
+ "id": "DBC2430011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
  "panelMargin": 1,
@@ -227,12 +165,12 @@
  "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "Kido",
+   "commonButtonAreaId": "btnJikko",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonCreate",
+     "buttonKind": "CommonButtonExecute",
      "buttonProperty": {
-      "fieldName": "btnCreate",
+      "fieldName": "btnJikko",
       "items": [],
       "controlType": "CommonButtonExecute",
       "width": "S",
@@ -248,18 +186,18 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btnCreate",
+      "selectControlID": "btnJikko",
       "helpMessageID": "",
       "jpControlName": "",
+      "text": "実行",
+      "onClick": "",
+      "icon": 0,
       "onBeforeClick": "",
       "onAfterClick": "",
-      "onClick": "",
-      "text": "実行",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": ""
      }
@@ -267,7 +205,7 @@
    ],
    "states": [
     {
-     "state": "処理起動"
+     "state": "起動画面"
     }
    ],
    "isFinishButtonOnTheRight": false,
