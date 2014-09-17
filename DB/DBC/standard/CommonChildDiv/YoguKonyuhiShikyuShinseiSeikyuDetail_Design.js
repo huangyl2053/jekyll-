@@ -13,13 +13,13 @@ var DBC;
         }
         Object.defineProperty(YoguKonyuhiShikyuShinseiSeikyuDetail_Design.prototype, "btnModifyDetail_onClick", {
             get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"])["onClick"];
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[10]["fieldName"])["onClick"];
             },
             set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"])["onClick"] = value;
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[10]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[10]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[10]["fieldName"])["onClick"] = value;
                 } else {
-                    this.layout.items[0].items[1].items[9]["onClick"] = value;
+                    this.layout.items[0].items[1].items[10]["onClick"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -30,13 +30,13 @@ var DBC;
 
         Object.defineProperty(YoguKonyuhiShikyuShinseiSeikyuDetail_Design.prototype, "btnModifyDetail_text", {
             get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"])["text"];
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[10]["fieldName"])["text"];
             },
             set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"])["text"] = value;
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[10]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[10]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[10]["fieldName"])["text"] = value;
                 } else {
-                    this.layout.items[0].items[1].items[9]["text"] = value;
+                    this.layout.items[0].items[1].items[10]["text"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -54,8 +54,8 @@ var DBC;
 
         YoguKonyuhiShikyuShinseiSeikyuDetail_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
-            editablePropertyInfo["btnModifyDetail_onClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).getEditablePropertyInfo()["onClick"];
-            editablePropertyInfo["btnModifyDetail_text"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).getEditablePropertyInfo()["text"];
+            editablePropertyInfo["btnModifyDetail_onClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[10]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["btnModifyDetail_text"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[10]["fieldName"]).getEditablePropertyInfo()["text"];
 
             return editablePropertyInfo;
         };
@@ -69,7 +69,7 @@ var DBC;
                             "fieldName": "dgSeikyuDetail",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "545",
+                            "width": "545px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -80,13 +80,13 @@ var DBC;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
                             "selectControlID": "dgSeikyuDetail",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
-                            "height": "236",
+                            "height": "236px",
                             "gridSetting": {
                                 "rowHeight": 25,
                                 "isMultiSelectable": false,
@@ -229,7 +229,8 @@ var DBC;
                             "sortOrder": "txtShinsaMethod",
                             "isAscending": true,
                             "filterList": [],
-                            "activeRowId": -1
+                            "activeRowId": -1,
+                            "gridAction": []
                         },
                         {
                             "fieldName": "YoguKonyuhiShikyuShinseiSeikyuDetailInput",
@@ -238,7 +239,7 @@ var DBC;
                                     "fieldName": "txtBuyYMD",
                                     "items": [],
                                     "controlType": "TextBoxDate",
-                                    "width": "85",
+                                    "width": "85px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -266,13 +267,14 @@ var DBC;
                                     "text": "",
                                     "labelLText": "購入日",
                                     "labelRText": "",
-                                    "labelLWidth": "90",
+                                    "labelLWidth": "90px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
                                     "ymdKubun": 2,
                                     "displayFormat": 0,
                                     "value": "",
+                                    "decorationClass": "",
                                     "textKind": 0,
                                     "permitCharactor": "./_-"
                                 },
@@ -280,7 +282,7 @@ var DBC;
                                     "fieldName": "ddlShumoku",
                                     "items": [],
                                     "controlType": "DropDownList",
-                                    "width": "250",
+                                    "width": "250px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -333,18 +335,19 @@ var DBC;
                                     "onChange": "",
                                     "labelLText": "種目",
                                     "labelRText": "",
-                                    "labelLWidth": "90",
+                                    "labelLWidth": "90px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
                                     "selectedItem": "code00",
+                                    "isBlankLine": false,
                                     "disabledItem": []
                                 },
                                 {
                                     "fieldName": "txtShohinName",
                                     "items": [],
                                     "controlType": "TextBox",
-                                    "width": "340",
+                                    "width": "340px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -372,25 +375,56 @@ var DBC;
                                     "text": "",
                                     "labelLText": "商品名",
                                     "labelRText": "",
-                                    "labelLWidth": "90",
+                                    "labelLWidth": "90px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
                                     "value": "",
+                                    "decorationClass": "",
                                     "maxLength": 100000000,
                                     "minLength": 0,
                                     "textAlign": 0,
                                     "textKind": 0,
                                     "isComboBox": false,
                                     "suggest": [],
-                                    "decorationClass": "",
                                     "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "btnShohinmeiSearch",
+                                    "items": [],
+                                    "controlType": "Button",
+                                    "width": "S",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0px",
+                                    "marginRight": "XS",
+                                    "selectControlID": "btnShohinmeiSearch",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "text": "",
+                                    "onClick": "",
+                                    "icon": 0,
+                                    "onBeforeClick": "",
+                                    "onAfterClick": "",
+                                    "appearance": 2,
+                                    "imageFileUrl": "/uz/uza/image/UZ_Search.png",
+                                    "imageWidth": "",
+                                    "imageHeight": "",
+                                    "heightTextBoxMatches": true
                                 },
                                 {
                                     "fieldName": "txtSeizoJigyosha",
                                     "items": [],
                                     "controlType": "TextBox",
-                                    "width": "300",
+                                    "width": "300px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -418,25 +452,25 @@ var DBC;
                                     "text": "",
                                     "labelLText": "製造事業者",
                                     "labelRText": "",
-                                    "labelLWidth": "90",
+                                    "labelLWidth": "90px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
                                     "value": "",
+                                    "decorationClass": "",
                                     "maxLength": 100000000,
                                     "minLength": 0,
                                     "textAlign": 0,
                                     "textKind": 0,
                                     "isComboBox": false,
                                     "suggest": [],
-                                    "decorationClass": "",
                                     "permitCharactor": ""
                                 },
                                 {
                                     "fieldName": "txtHanbaiJigyosha",
                                     "items": [],
                                     "controlType": "TextBox",
-                                    "width": "300",
+                                    "width": "300px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -464,25 +498,25 @@ var DBC;
                                     "text": "",
                                     "labelLText": "販売事業者",
                                     "labelRText": "",
-                                    "labelLWidth": "90",
+                                    "labelLWidth": "90px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
                                     "value": "",
+                                    "decorationClass": "",
                                     "maxLength": 100000000,
                                     "minLength": 0,
                                     "textAlign": 0,
                                     "textKind": 0,
                                     "isComboBox": false,
                                     "suggest": [],
-                                    "decorationClass": "",
                                     "permitCharactor": ""
                                 },
                                 {
                                     "fieldName": "txtBuyAmount",
                                     "items": [],
                                     "controlType": "TextBoxNum",
-                                    "width": "80",
+                                    "width": "80px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -510,18 +544,18 @@ var DBC;
                                     "text": "",
                                     "labelLText": "購入金額",
                                     "labelRText": "",
-                                    "labelLWidth": "90",
+                                    "labelLWidth": "90px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
                                     "value": "",
+                                    "decorationClass": "",
                                     "maxLength": 100000000,
                                     "minLength": 0,
                                     "textAlign": 2,
                                     "textKind": 2,
                                     "isComboBox": false,
                                     "suggest": [],
-                                    "decorationClass": "",
                                     "maxValue": 1.7976931348623157e+308,
                                     "minValue": 0,
                                     "isCurrency": false,
@@ -533,7 +567,7 @@ var DBC;
                                     "fieldName": "txtHinmokuCode",
                                     "items": [],
                                     "controlType": "TextBoxCode",
-                                    "width": "300",
+                                    "width": "300px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -561,18 +595,18 @@ var DBC;
                                     "text": "",
                                     "labelLText": "品目コード",
                                     "labelRText": "",
-                                    "labelLWidth": "90",
+                                    "labelLWidth": "90px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
                                     "value": "",
+                                    "decorationClass": "",
                                     "maxLength": 100000000,
                                     "minLength": 0,
                                     "textAlign": 0,
                                     "textKind": 2,
                                     "isComboBox": false,
                                     "suggest": [],
-                                    "decorationClass": "",
                                     "permitCharactor": "",
                                     "formatLength": "10"
                                 },
@@ -610,7 +644,7 @@ var DBC;
                                     "required": false,
                                     "onChange": "",
                                     "labelLText": "審査方法",
-                                    "labelLWidth": "90",
+                                    "labelLWidth": "90px",
                                     "labelLAlign": 2,
                                     "selectedItem": "judgeDone",
                                     "onClick": "",
@@ -642,6 +676,8 @@ var DBC;
                                     "text": "入力内容をクリアする",
                                     "onClick": "onClick_btnClear",
                                     "icon": 0,
+                                    "onBeforeClick": "",
+                                    "onAfterClick": "",
                                     "appearance": 0,
                                     "imageFileUrl": "",
                                     "imageWidth": "",
@@ -671,6 +707,8 @@ var DBC;
                                     "text": "明細を追加する",
                                     "onClick": "onClick_btnModifyDetail",
                                     "icon": 0,
+                                    "onBeforeClick": "",
+                                    "onAfterClick": "",
                                     "appearance": 0,
                                     "imageFileUrl": "",
                                     "imageWidth": "",
@@ -679,7 +717,7 @@ var DBC;
                                 }
                             ],
                             "controlType": "Panel",
-                            "width": "545",
+                            "width": "545px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -691,7 +729,7 @@ var DBC;
                             "toolTip": "",
                             "authorityMode": 0,
                             "marginLeft": "XS",
-                            "marginRight": "0",
+                            "marginRight": "0em",
                             "selectControlID": "YoguKonyuhiShikyuShinseiSeikyuDetailInput",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -722,11 +760,12 @@ var DBC;
                             "panelDisplay": 0,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "canPost": true
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "1105",
+                    "width": "1105px",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -760,7 +799,7 @@ var DBC;
                         },
                         {
                             "eventName": "onClick_btnAddSeikyuDetail",
-                            "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiSeikyuDetail/onClick_btnAddSeikyuDetail"
+                            "requestUrl": ""
                         }
                     ],
                     "hiddenInput": [],
@@ -773,7 +812,8 @@ var DBC;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "Auto",
+                    "canPost": true
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -788,16 +828,17 @@ var DBC;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": "0",
-            "marginRight": "0",
+            "marginLeft": "0em",
+            "marginRight": "0em",
             "selectControlID": "defaultLayout",
             "helpMessageID": "",
             "jpControlName": "",
             "relation": [],
+            "packageName": "",
             "businessId": "DBC",
             "controlName": "YoguKonyuhiShikyuShinseiSeikyuDetail",
-            "marginTop": 0,
-            "marginBottom": 0,
+            "marginTop": "0em",
+            "marginBottom": "0em",
             "originalProperty": [
                 {
                     "publicChildFieldName": "btnModifyDetail",
@@ -819,7 +860,9 @@ var DBC;
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "M"
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": ""
         };
         return YoguKonyuhiShikyuShinseiSeikyuDetail_Design;
     })(Uz.CommonChildDiv);

@@ -994,6 +994,37 @@
      "formatLength": "10"
     },
     {
+     "fieldName": "Button2",
+     "items": [],
+     "controlType": "Button",
+     "width": "290px",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "Button2",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onClick": "",
+     "icon": 0,
+     "text": "契約事業者情報を送付先へコピーする",
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "heightTextBoxMatches": false
+    },
+    {
      "fieldName": "TextBoxDate1",
      "items": [],
      "controlType": "TextBoxDate",
@@ -1948,7 +1979,7 @@
    "onLoad": "",
    "title": "契約事業者",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "Panel2"
@@ -2068,10 +2099,10 @@
    "canPost": true
   },
   {
-   "fieldName": "PanelPublish1",
+   "fieldName": "Panel5",
    "items": [
     {
-     "fieldName": "TextBoxDate4",
+     "fieldName": "TextBoxDate5",
      "items": [],
      "controlType": "TextBoxDate",
      "width": "90px",
@@ -2087,7 +2118,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "TextBoxDate4_core",
+     "selectControlID": "TextBoxDate5_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
@@ -2113,7 +2144,7 @@
      "displayFormat": 0
     }
    ],
-   "controlType": "PanelPublish",
+   "controlType": "Panel",
    "width": "G12",
    "visible": true,
    "displayNone": false,
@@ -2127,7 +2158,7 @@
    "authorityMode": 0,
    "marginLeft": "Default",
    "marginRight": "Default",
-   "selectControlID": "PanelPublish1",
+   "selectControlID": "Panel5",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -2149,9 +2180,7 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "canPost": false,
-   "isPublish": true,
-   "isEmptyControl": false
+   "canPost": false
   }
  ],
  "controlType": null,
@@ -2229,9 +2258,14 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "PanelPublish1",
+     "visibleDiv": "Panel4",
      "panelState": "visible",
-     "fixedDiv": "false"
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "CommonChildDiv2",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "supplementInfo": "",
@@ -2254,6 +2288,11 @@
      "visibleDiv": "CommonChildDiv1",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Panel5",
+     "panelState": "visible",
+     "fixedDiv": "false"
     }
    ],
    "supplementInfo": "",
@@ -2377,6 +2416,54 @@
    "states": [
     {
      "state": "入力"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "btn1",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonReportPublish",
+     "buttonProperty": {
+      "fieldName": "Element11",
+      "items": [],
+      "controlType": "ButtonReportPublish",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "Element11",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "postParameterPanelNames": [],
+      "additionalText": "",
+      "validateUrl": "",
+      "sourceCreateUrl": "",
+      "afterPrintUrl": "",
+      "isModal": true,
+      "isInstruction": true,
+      "isPreview": false,
+      "printable": false,
+      "copiesChangeable": false,
+      "progressVisible": false
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "完了"
     }
    ],
    "isFinishButtonOnTheRight": false,

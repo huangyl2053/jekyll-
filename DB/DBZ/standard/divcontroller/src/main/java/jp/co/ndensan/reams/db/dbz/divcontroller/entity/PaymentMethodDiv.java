@@ -24,12 +24,16 @@ public class PaymentMethodDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("radPayMethod")
-    private RadioButton radPayMethod;
+    @JsonProperty("radPayMethod1")
+    private RadioButton radPayMethod1;
     @JsonProperty("JuryoininJoho")
     private JuryoininJohoDiv JuryoininJoho;
+    @JsonProperty("radPayMethod2")
+    private RadioButton radPayMethod2;
     @JsonProperty("KozaPayment")
     private KozaPaymentDiv KozaPayment;
+    @JsonProperty("radPayMethod3")
+    private RadioButton radPayMethod3;
     @JsonProperty("MadoguchiPayment")
     private MadoguchiPaymentDiv MadoguchiPayment;
 
@@ -39,14 +43,14 @@ public class PaymentMethodDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("radPayMethod")
-    public RadioButton getRadPayMethod() {
-        return radPayMethod;
+    @JsonProperty("radPayMethod1")
+    public RadioButton getRadPayMethod1() {
+        return radPayMethod1;
     }
 
-    @JsonProperty("radPayMethod")
-    public void setRadPayMethod(RadioButton radPayMethod) {
-        this.radPayMethod=radPayMethod;
+    @JsonProperty("radPayMethod1")
+    public void setRadPayMethod1(RadioButton radPayMethod1) {
+        this.radPayMethod1=radPayMethod1;
     }
 
     @JsonProperty("JuryoininJoho")
@@ -59,6 +63,16 @@ public class PaymentMethodDiv extends Panel {
         this.JuryoininJoho=JuryoininJoho;
     }
 
+    @JsonProperty("radPayMethod2")
+    public RadioButton getRadPayMethod2() {
+        return radPayMethod2;
+    }
+
+    @JsonProperty("radPayMethod2")
+    public void setRadPayMethod2(RadioButton radPayMethod2) {
+        this.radPayMethod2=radPayMethod2;
+    }
+
     @JsonProperty("KozaPayment")
     public KozaPaymentDiv getKozaPayment() {
         return KozaPayment;
@@ -67,6 +81,16 @@ public class PaymentMethodDiv extends Panel {
     @JsonProperty("KozaPayment")
     public void setKozaPayment(KozaPaymentDiv KozaPayment) {
         this.KozaPayment=KozaPayment;
+    }
+
+    @JsonProperty("radPayMethod3")
+    public RadioButton getRadPayMethod3() {
+        return radPayMethod3;
+    }
+
+    @JsonProperty("radPayMethod3")
+    public void setRadPayMethod3(RadioButton radPayMethod3) {
+        this.radPayMethod3=radPayMethod3;
     }
 
     @JsonProperty("MadoguchiPayment")

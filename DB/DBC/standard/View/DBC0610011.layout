@@ -11,7 +11,7 @@
        "fieldName": "txtShikyuShinseiDateRange",
        "items": [],
        "controlType": "TextBoxDateRange",
-       "width": "85",
+       "width": "85px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -34,26 +34,27 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "labelLText": "支給申請日",
+       "labelRText": "",
+       "labelLWidth": "90px",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "ymdKubun": 2,
+       "displayFormat": 0,
        "permitCharactor": "",
        "fromRequired": false,
        "fromPlaceHolder": "",
        "toPlaceHolder": "",
-       "ymdKubun": 2,
-       "displayFormat": 0,
        "minDate": "",
        "maxDate": "",
        "fromText": "",
        "toText": "",
        "fromValue": "",
        "toValue": "",
-       "labelLText": "支給申請日",
-       "labelRText": "",
-       "labelLWidth": "90",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
        "fromSelectControlID": "txtShikyuShinseiDateRangeFrom",
-       "toSelectControlID": "txtShikyuShinseiDateRangeTo"
+       "toSelectControlID": "txtShikyuShinseiDateRangeTo",
+       "autoRangeTo": true
       },
       {
        "fieldName": "btnSearchMishinsa",
@@ -75,12 +76,14 @@
        "selectControlID": "btnSearchMishinsa",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "onClick_btnSearchMishinsa",
        "text": "未審査分を検索する",
-       "appearance": 0,
-       "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "onClick": "onClick_btnSearchMishinsa",
+       "appearance": 0,
+       "imageFileUrl": "",
        "icon": 0,
        "heightTextBoxMatches": false
       },
@@ -105,16 +108,16 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "required": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "labelLText": "保険者",
        "labelRText": "",
-       "labelLWidth": "60",
+       "labelLWidth": "60px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "key0",
        "dataSource": [
         {
          "key": "key0",
@@ -125,7 +128,8 @@
          "value": "白馬村"
         }
        ],
-       "required": false,
+       "selectedItem": "key0",
+       "isBlankLine": false,
        "disabledItem": []
       }
      ],
@@ -141,26 +145,31 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "0em",
      "marginRight": "XS",
      "selectControlID": "YoguKonyuhiShikyuShinseiMishinsaSearchCondition",
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
      "title": "未審査支給申請検索条件",
-     "isOpen": true,
+     "isOpen": false,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
        "postParameterPanelNames": "YoguKonyuhiShikyuShinseiMishinsaSearchCondition"
       }
      ],
-     "requestSettings": [],
+     "requestSettings": [
+      {
+       "eventName": "onLoad",
+       "requestUrl": ""
+      }
+     ],
      "hiddenInput": [],
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "marginTop": "0",
+     "marginTop": "0em",
      "marginBottom": "Default",
      "eraseBorder": false,
      "backgroundColor": 0,
@@ -169,16 +178,17 @@
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "restoreLayoutButton"
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": true
     },
     {
      "fieldName": "YoguKonyuhiShikyuShinseiMishinsaResultList",
      "items": [
       {
-       "fieldName": "txtShinsaDate",
+       "fieldName": "TextBoxDate2",
        "items": [],
        "controlType": "TextBoxDate",
-       "width": "85",
+       "width": "85px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -191,35 +201,36 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "selectControlID": "txtShinsaDate_core",
+       "selectControlID": "TextBoxDate2_core",
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "required": false,
+       "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "permitCharactor": "./_-",
-       "ymdKubun": 2,
-       "displayFormat": 0,
-       "labelLText": "審査日",
+       "text": "",
+       "value": "",
+       "labelLText": "決定日",
        "labelRText": "",
-       "labelLWidth": "55",
+       "labelLWidth": "55px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "text": "",
-       "required": false,
-       "placeHolder": "",
-       "value": ""
+       "decorationClass": "",
+       "ymdKubun": 2,
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "dgYoguKonyuhiShisaMishinsaShikyuShinseiList",
        "items": [],
        "controlType": "DataGrid",
-       "width": "1010",
+       "width": "1070px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -236,8 +247,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "height": "425",
-       "dataSource": [],
+       "height": "470px",
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": true,
@@ -245,12 +255,13 @@
         "isShowFooter": true,
         "isShowFilter": false,
         "isShowFilterButton": false,
-        "isShowRowState": true,
+        "isShowRowState": false,
         "isShowSelectButtonColumn": false,
         "isShowModifyButtonColumn": true,
         "isShowDeleteButtonColumn": false,
         "limitRowCount": 0,
         "selectedRowCount": 0,
+        "selectLimitRowCount": 0,
         "header": {
          "combineColumns": [],
          "frozenColumn": "",
@@ -258,11 +269,25 @@
         },
         "columns": [
          {
+          "columnName": "状態",
+          "dataName": "txtJotai",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 50,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtJotai"
+         },
+         {
           "columnName": "支給<br>申請日",
           "dataName": "txtShikyuShinseiDate",
           "toolTip": "",
           "bgColor": 0,
-          "width": 80,
+          "width": 90,
           "visible": true,
           "cellType": 6,
           "cellDetails": {
@@ -277,11 +302,11 @@
           "sortKey": "txtShikyuShinseiDate"
          },
          {
-          "columnName": "提供<br>年月",
+          "columnName": "提供(購入)<br>年月",
           "dataName": "txtTenkyoYM",
           "toolTip": "",
           "bgColor": 0,
-          "width": 60,
+          "width": 90,
           "visible": true,
           "cellType": 6,
           "cellDetails": {
@@ -471,16 +496,18 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
+       "dataSource": [],
        "sortOrder": "txtSeiriNo",
        "isAscending": true,
        "filterList": [],
-       "activeRowId": -1
+       "activeRowId": -1,
+       "gridAction": []
       },
       {
        "fieldName": "btnIkkatsuShinsa",
        "items": [],
        "controlType": "Button",
-       "width": "M",
+       "width": "270px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -496,12 +523,14 @@
        "selectControlID": "btnIkkatsuShinsa",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "onClick_btnIkkatsuShinsa",
-       "text": "支給申請内容を一括審査する",
-       "appearance": 0,
-       "imageFileUrl": "",
+       "text": "支給申請内容を一括審査・決定する",
        "imageWidth": "",
        "imageHeight": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "onClick": "onClick_btnIkkatsuShinsa",
+       "appearance": 0,
+       "imageFileUrl": "",
        "icon": 0,
        "heightTextBoxMatches": false
       }
@@ -518,7 +547,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "0em",
      "marginRight": "XS",
      "selectControlID": "YoguKonyuhiShikyuShinseiMishinsaResultList",
      "helpMessageID": "",
@@ -538,7 +567,7 @@
      "onClose": "",
      "session": {},
      "marginTop": "Default",
-     "marginBottom": "0",
+     "marginBottom": "0em",
      "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
@@ -546,7 +575,8 @@
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "restoreLayoutButton"
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": true
     }
    ],
    "controlType": "Panel",
@@ -561,7 +591,7 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
+   "marginLeft": "0em",
    "marginRight": "XS",
    "selectControlID": "YoguKonyuhiShikyuShinseiMishinsaSearchPanel",
    "helpMessageID": "",
@@ -578,7 +608,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiMishinsaSearchPanel/onLoad"
+     "requestUrl": ""
     },
     {
      "eventName": "onClick_btnSearchMishinsa",
@@ -586,19 +616,19 @@
     },
     {
      "eventName": "onClick_btnIkkatsuShinsa",
-     "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiMishinsaSearchPanel/onClick_btnIkkatsuShinsa"
+     "requestUrl": ""
     },
     {
      "eventName": "onClick_btnDummy",
-     "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiMishinsaSearchPanel/onClick_btnModifyShinsei"
+     "requestUrl": ""
     }
    ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "0",
-   "marginBottom": "0",
+   "marginTop": "0em",
+   "marginBottom": "0em",
    "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
@@ -606,7 +636,8 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "focusPositionID": "restoreLayoutButton"
+   "focusPositionID": "restoreLayoutButton",
+   "canPost": true
   },
   {
    "fieldName": "DummyModifiedPanel",
@@ -631,12 +662,14 @@
      "selectControlID": "btnDummy",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "onClick_btnDummy",
      "text": "Button1",
-     "appearance": 0,
-     "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "onClick": "onClick_btnDummy",
+     "appearance": 0,
+     "imageFileUrl": "",
      "icon": 0,
      "heightTextBoxMatches": false
     }
@@ -680,7 +713,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": null,
@@ -701,7 +735,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "福祉用具購入費支給申請審査",
+ "title": "福祉用具購入費支給申請一括審査・決定",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
@@ -768,7 +802,7 @@
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "審査",
  "id": "DBC0610011",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -850,5 +884,6 @@
    "FinishButtonVisible": false,
    "SuspendButtonVisible": false
   }
- ]
+ ],
+ "packageName": ""
 }
