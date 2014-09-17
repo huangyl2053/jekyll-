@@ -2,92 +2,13 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "KyufuJissekiSearch",
+   "fieldName": "KyufuJissekiShokai",
    "items": [
     {
-     "fieldName": "KyufuJissekiChushutsuTaisho",
-     "items": [
-      {
-       "fieldName": "txtKyufuJissekiSearchHihokenshaNo",
-       "items": [],
-       "controlType": "TextBoxCode",
-       "width": "80",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": true,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "txtKyufuJissekiSearchHihokenshaNo_core",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "readOnly": false,
-       "required": true,
-       "maxLength": "10",
-       "minLength": 0,
-       "textAlign": 0,
-       "placeHolder": "",
-       "textKind": 2,
-       "isPrivateInfo": false,
-       "isPassword": false,
-       "isComboBox": false,
-       "onFocus": "",
-       "onBlur": "",
-       "onChange": "",
-       "onKeyPress": "",
-       "text": "",
-       "suggest": [],
-       "value": "",
-       "labelLText": "被保番号",
-       "labelRText": "",
-       "labelLWidth": "75",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "decorationClass": "",
-       "permitCharactor": "",
-       "formatLength": "10"
-      },
-      {
-       "fieldName": "btnHihoNo",
-       "items": [],
-       "controlType": "Button",
-       "width": "S",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "XS",
-       "selectControlID": "btnHihoNo",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "text": "Button1",
-       "onBeforeClick": "",
-       "onAfterClick": "",
-       "onClick": "",
-       "appearance": 2,
-       "imageFileUrl": "/uz/uza/image/UZ_Search.png",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0,
-       "heightTextBoxMatches": true
-      }
-     ],
-     "controlType": "Panel",
-     "width": "G2",
+     "fieldName": "KyufuJissekiKihon",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -98,33 +19,160 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "KyufuJissekiChushutsuTaisho",
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyufuJissekiKihon",
      "helpMessageID": "",
      "jpControlName": "",
-     "onLoad": "",
-     "title": "抽出対象",
-     "isOpen": true,
-     "canOpenAndClose": false,
-     "postParameterPanelNames": [],
-     "requestSettings": [],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "Default",
-     "marginBottom": "Default",
-     "eraseBorder": false,
-     "backgroundColor": 0,
-     "widthAuto": true,
-     "panelDisplay": 1,
-     "isGroupBox": false,
-     "readOnly": false,
-     "height": "55",
-     "focusPositionID": "Page",
-     "canPost": false
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "KaigoAtenaInfo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "atenaInfo_title": "",
+     "atenaInfo_canOpenAndClose": true,
+     "AtenaShokaiSimple_eraseBorder": true,
+     "AtenaKanaMeisho_visible": true,
+     "AtenaMisho_visible": true,
+     "SeinengappiYMD_visible": true,
+     "Nenrei_visible": true,
+     "Seibetsu_visible": true,
+     "JuminShubetsu_Visible": true,
+     "NihonjinGaikokujin_visible": true,
+     "JuminJotai_visible": true,
+     "YubinNo_visible": true,
+     "Jusho_visible": true,
+     "Gyoseiku_visible": true,
+     "ShikibetsuCode_visible": true,
+     "KojinHojinCode_visible": true,
+     "SetaiCode_visible": true,
+     "lblButtonMargin_displayNone": false,
+     "btnDainosha_displayNone": false,
+     "btnSofusaki_displayNone": false,
+     "btnDainoSofusakiKakunin_displayNone": false,
+     "btnKoza_displayNone": false,
+     "btnRenrakusaki_displayNone": false,
+     "btnShosai_displayNone": false,
+     "btnAtenaRireki_displayNone": false,
+     "btnSetaiIchiran_displayNone": false,
+     "btnDoitsunin_displayNone": false,
+     "btnToriatsukaiChui_displayNone": false,
+     "btnEltax_displayNone": false,
+     "btnShiyoJokyo_displayNone": false,
+     "btnAtesakiKakunin_displayNone": false,
+     "SubGyomuCode": "",
+     "JukiYusennKubun": "1",
+     "AgeArrivalDay": "1",
+     "SubGyomuUmu": "0",
+     "SubGyomuSearchUmu": "0",
+     "DainoninHyojiUmu": "1"
     },
+    {
+     "fieldName": "KyufuJissekiKaigoKihon",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyufuJissekiKaigoKihon",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "title": "",
+     "relation": [],
+     "canOpenAndClose": true,
+     "marginTop": 0,
+     "marginBottom": 0,
+     "eraseBorder": true,
+     "businessId": "DBZ",
+     "controlName": "KaigoShikakuKihon",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "btnRenrakusaki_displayNone": true,
+     "backGroundColor": 0,
+     "btnHihoRireki_visible": true,
+     "btnNinteiRireki_visible": true
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "KyufuJissekiShokai",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KyufuJissekiShokai"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KyufuJissekiSearch/onLoad"
+    },
+    {
+     "eventName": "onClick_btnKyufuJissekiSearchClear",
+     "requestUrl": "dbc/db/dbc/KyufuJissekiSearch/onClick_btnKyufuJissekiSearchClear"
+    },
+    {
+     "eventName": "onChange_radKyufuJissekiSearchDateType",
+     "requestUrl": "dbc/db/dbc/KyufuJissekiSearch/onChange_radKyufuJissekiSearchDateType"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "XS",
+   "marginBottom": "XS",
+   "eraseBorder": true,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "canPost": true
+  },
+  {
+   "fieldName": "KyufuJissekiSearch",
+   "items": [
     {
      "fieldName": "KyufuJissekiChushutsuHani",
      "items": [
@@ -321,12 +369,12 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "KyufuJissekiChushutsuHani",
      "helpMessageID": "",
@@ -473,26 +521,6 @@
      "canPost": false
     },
     {
-     "fieldName": "linSearch",
-     "items": [],
-     "controlType": "HorizontalLine",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "linSearch",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "size": "Default"
-    },
-    {
      "fieldName": "btnKyufuJissekiSearchClear",
      "items": [],
      "controlType": "Button",
@@ -562,7 +590,7 @@
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
-   "wrap": true,
+   "wrap": false,
    "dependencies": [],
    "float": 0,
    "toolTip": "",
@@ -576,31 +604,14 @@
    "title": "検索条件",
    "isOpen": true,
    "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KyufuJissekiSearch"
-    }
-   ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/KyufuJissekiSearch/onLoad"
-    },
-    {
-     "eventName": "onClick_btnKyufuJissekiSearchClear",
-     "requestUrl": "dbc/db/dbc/KyufuJissekiSearch/onClick_btnKyufuJissekiSearchClear"
-    },
-    {
-     "eventName": "onChange_radKyufuJissekiSearchDateType",
-     "requestUrl": "dbc/db/dbc/KyufuJissekiSearch/onChange_radKyufuJissekiSearchDateType"
-    }
-   ],
+   "postParameterPanelNames": [],
+   "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "XS",
-   "marginBottom": "XS",
+   "marginTop": "Default",
+   "marginBottom": "Default",
    "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
@@ -608,7 +619,7 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "canPost": true
+   "canPost": false
   },
   {
    "fieldName": "KyufuJissekiList",
@@ -958,6 +969,7 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "203",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 22,
       "isMultiSelectable": false,
@@ -1550,7 +1562,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "onMulti_dgKyufuJissekiMeisaiList",
-     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -1579,6 +1590,7 @@
      "jpControlName": "",
      "readOnly": false,
      "height": "154",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 22,
       "isMultiSelectable": false,
@@ -2086,7 +2098,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "onMulti_dgKyufuJissekiGokeiList",
-     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -2132,7 +2143,7 @@
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
-   "wrap": true,
+   "wrap": false,
    "dependencies": [],
    "float": 0,
    "toolTip": "",
@@ -2151,7 +2162,7 @@
      "postParameterPanelNames": "KyufuJissekiList"
     },
     {
-     "postParameterPanelNames": "KyufuJissekiSearch"
+     "postParameterPanelNames": "KyufuJissekiShokai"
     }
    ],
    "requestSettings": [
@@ -2187,7 +2198,7 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": true,
+   "readOnly": false,
    "height": "Auto",
    "canPost": true
   }
@@ -2220,17 +2231,22 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "KyufuJissekiSearch",
+     "visibleDiv": "KyufuJissekiShokai",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KyufuJissekiList",
-     "panelState": "readOnly visible",
-     "fixedDiv": ""
+     "visibleDiv": "KyufuJissekiKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KyufuJissekiChushutsuTaisho",
+     "visibleDiv": "KyufuJissekiKaigoKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyufuJissekiSearch",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -2265,27 +2281,22 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "KyufuJissekiSearch",
-     "panelState": "readOnly close",
-     "fixedDiv": ""
+     "visibleDiv": "KyufuJissekiShokai",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyufuJissekiKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyufuJissekiKaigoKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "KyufuJissekiList",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KyufuJissekiChushutsuTaisho",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KyufuJissekiChushutsuHani",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KyufuJissekiKensakuTaisho",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -2325,13 +2336,68 @@
  ],
  "loadSequencePanelNames": [
   [
-   "KyufuJissekiSearch",
+   "KyufuJissekiShokai",
    "KyufuJissekiList"
+  ],
+  [
+   "KyufuJissekiKihon"
+  ],
+  [
+   "KyufuJissekiKaigoKihon"
   ]
  ],
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "給付実績検索",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnReturn",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReturn",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "対象者検索に"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "給付実績検索"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ]
 }

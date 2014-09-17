@@ -5,6 +5,136 @@
    "fieldName": "KyufuTsuchiSakusei",
    "items": [
     {
+     "fieldName": "KyufuTsuchiSakuseiKihon",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyufuTsuchiSakuseiKihon",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "KaigoAtenaInfo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "atenaInfo_title": "",
+     "atenaInfo_canOpenAndClose": true,
+     "AtenaShokaiSimple_eraseBorder": true,
+     "AtenaKanaMeisho_visible": true,
+     "AtenaMisho_visible": true,
+     "SeinengappiYMD_visible": true,
+     "Nenrei_visible": true,
+     "Seibetsu_visible": true,
+     "JuminShubetsu_Visible": true,
+     "NihonjinGaikokujin_visible": true,
+     "JuminJotai_visible": true,
+     "YubinNo_visible": true,
+     "Jusho_visible": true,
+     "Gyoseiku_visible": true,
+     "ShikibetsuCode_visible": true,
+     "KojinHojinCode_visible": true,
+     "SetaiCode_visible": true,
+     "lblButtonMargin_displayNone": false,
+     "btnDainosha_displayNone": false,
+     "btnSofusaki_displayNone": false,
+     "btnDainoSofusakiKakunin_displayNone": false,
+     "btnKoza_displayNone": false,
+     "btnRenrakusaki_displayNone": false,
+     "btnShosai_displayNone": false,
+     "btnAtenaRireki_displayNone": false,
+     "btnSetaiIchiran_displayNone": false,
+     "btnDoitsunin_displayNone": false,
+     "btnToriatsukaiChui_displayNone": false,
+     "btnEltax_displayNone": false,
+     "btnShiyoJokyo_displayNone": false,
+     "btnAtesakiKakunin_displayNone": false,
+     "SubGyomuCode": "",
+     "JukiYusennKubun": "1",
+     "AgeArrivalDay": "1",
+     "SubGyomuUmu": "0",
+     "SubGyomuSearchUmu": "0",
+     "DainoninHyojiUmu": "1"
+    },
+    {
+     "fieldName": "KyufuTsuchiSakuseiKaigoKihon",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyufuTsuchiSakuseiKaigoKihon",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "title": "",
+     "relation": [],
+     "canOpenAndClose": true,
+     "marginTop": 0,
+     "marginBottom": 0,
+     "eraseBorder": true,
+     "businessId": "DBZ",
+     "controlName": "KaigoShikakuKihon",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "btnRenrakusaki_displayNone": true,
+     "backGroundColor": 0,
+     "btnHihoRireki_visible": true,
+     "btnNinteiRireki_visible": true
+    },
+    {
+     "fieldName": "HorizontalLine2",
+     "items": [],
+     "controlType": "HorizontalLine",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "HorizontalLine2",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "size": "Default"
+    },
+    {
      "fieldName": "TextBoxDateRange1",
      "items": [],
      "controlType": "TextBoxDateRange",
@@ -14,7 +144,7 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
@@ -117,82 +247,6 @@
      "size": "Default"
     },
     {
-     "fieldName": "CheckBoxList5",
-     "items": [],
-     "controlType": "CheckBoxList",
-     "width": "650",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "CheckBoxList5_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": false,
-     "required": true,
-     "onChange": "",
-     "labelLText": "要介護度",
-     "labelLWidth": "105",
-     "labelLAlign": 2,
-     "onClick": "",
-     "icon": [],
-     "selectedItem": "",
-     "dataSource": [
-      {
-       "key": "key1",
-       "value": "要介護１"
-      },
-      {
-       "key": "key2",
-       "value": "要介護２"
-      },
-      {
-       "key": "key3",
-       "value": "要介護３"
-      },
-      {
-       "key": "key4",
-       "value": "要介護４"
-      },
-      {
-       "key": "key5",
-       "value": "要介護５"
-      },
-      {
-       "key": "key6",
-       "value": "要支援１"
-      },
-      {
-       "key": "key7",
-       "value": "要支援２"
-      },
-      {
-       "key": "key8",
-       "value": "経過的要介護(要支援)"
-      },
-      {
-       "key": "key9",
-       "value": "旧措置　自立"
-      }
-     ],
-     "selectedItems": [],
-     "newLineItemNumber": 5,
-     "minCheckedItem": 0,
-     "maxCheckedItem": "5",
-     "spaceSize": "M",
-     "isAllSelectable": true,
-     "isAllSelectableBreakLine": true,
-     "disabledItem": []
-    },
-    {
      "fieldName": "KyufuTsuchiSakusei1",
      "items": [
       {
@@ -278,30 +332,26 @@
        "dataSource": [
         {
          "key": "key0",
-         "value": "死亡者分を対象としない"
-        },
-        {
-         "key": "key1",
          "value": "ゼロ査定実績を対象としない"
         },
         {
-         "key": "key2",
+         "key": "key1",
          "value": "再審査分を対象としない"
         },
         {
-         "key": "key3",
+         "key": "key2",
          "value": "過誤分を対象としない"
         },
         {
-         "key": "key4",
+         "key": "key3",
          "value": "施設分を対象としない"
         },
         {
-         "key": "key5",
+         "key": "key4",
          "value": "特定入所者介護を対象としない"
         },
         {
-         "key": "key6",
+         "key": "key5",
          "value": "償還分を対象としない"
         }
        ],
@@ -864,40 +914,6 @@
      "imageFileUrl": "",
      "icon": 0,
      "heightTextBoxMatches": true
-    },
-    {
-     "fieldName": "KyufuTsuchiSakuseiOrder",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "0",
-     "selectControlID": "KyufuTsuchiSakuseiOrder",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "KaigoChohyoShutsuryokujun",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "firstFocusFieldName": "",
-     "lastFocusFieldName": "",
-     "ChohyoShutsuryokujun_width": "1099"
     }
    ],
    "controlType": "Panel",
@@ -958,7 +974,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "給付費通知書作成（一括）",
+ "title": "給付費通知書作成",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
@@ -978,11 +994,6 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KyufuTsuchiSakuseiOrder",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "KyufuTsuchiSakuseiSetting",
      "panelState": "visible",
      "fixedDiv": "No"
@@ -996,6 +1007,16 @@
      "visibleDiv": "KyufuTsuchiSakusei2",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyufuTsuchiSakuseiKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyufuTsuchiSakuseiKaigoKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "supplementInfo": "",
@@ -1005,15 +1026,18 @@
   }
  ],
  "currentState": "All",
- "id": "DBC1320011",
+ "id": "DBC1330011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
-   "KyufuTsuchiSakuseiSetting"
+   "KyufuTsuchiSakuseiKihon"
   ],
   [
-   "KyufuTsuchiSakuseiOrder"
+   "KyufuTsuchiSakuseiKaigoKihon"
+  ],
+  [
+   "KyufuTsuchiSakuseiSetting"
   ]
  ],
  "panelMargin": 1,
