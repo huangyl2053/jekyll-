@@ -19,14 +19,15 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
+     "marginLeft": "0em",
+     "marginRight": "0em",
      "selectControlID": "KanryoMessage",
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
+     "packageName": "",
+     "marginTop": "0em",
+     "marginBottom": "0em",
      "businessId": "DBZ",
      "controlName": "KaigoKanryoMessage",
      "dataPassingForDialog": [],
@@ -34,6 +35,8 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
      "KanryoMessage_width": "G12"
     }
    ],
@@ -66,7 +69,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/YoguShinsaKanryoPanel/onLoad"
+     "requestUrl": ""
     }
    ],
    "hiddenInput": [],
@@ -82,7 +85,8 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "focusPositionID": "Page"
+   "focusPositionID": "Page",
+   "canPost": true
   }
  ],
  "controlType": null,
@@ -103,7 +107,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "福祉用具購入費支給申請審査",
+ "title": "福祉用具購入費支給申請一括審査・決定",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
@@ -135,7 +139,7 @@
    ]
   }
  ],
- "currentState": "更新完了",
+ "currentState": "All",
  "id": "DBC0610013",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -156,5 +160,6 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": []
+ "commonButtonAreaData": [],
+ "packageName": ""
 }

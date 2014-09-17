@@ -433,7 +433,7 @@
    "commonButtonAreaId": "commonButton",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonExecute",
+     "buttonKind": "CommonButtonReportPublish",
      "buttonProperty": {
       "fieldName": "Element1",
       "items": [],
