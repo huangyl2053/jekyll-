@@ -1,0 +1,265 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "JukyuIdoJohoRirekiTeseiList",
+   "items": [
+    {
+     "fieldName": "dgJukyuIdoJohoRirekiTeseiList",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "1098",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "dgJukyuIdoJohoRirekiTeseiList",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "height": "580",
+     "gridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": false,
+      "isShowHeader": true,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": true,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": true,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
+      "selectLimitRowCount": 0,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "",
+       "headerHeight": 0
+      },
+      "columns": [
+       {
+        "columnName": "異動日",
+        "dataName": "txtIdoYMD",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtIdoYMD"
+       },
+       {
+        "columnName": "被保番号",
+        "dataName": "txtHihoNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtHihoNo"
+       },
+       {
+        "columnName": "被保険者氏名",
+        "dataName": "txtHihokenshaName",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 270,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtHihokenshaName"
+       },
+       {
+        "columnName": "送付区分",
+        "dataName": "txtSofuKubun",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtSofuKubun"
+       },
+       {
+        "columnName": "項目",
+        "dataName": "txtKomoku",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 460,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtKomoku"
+       }
+      ]
+     },
+     "onSort": "",
+     "onSelect": "",
+     "onSelectByDblClick": "onClick_btnModify",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "onClick_btnModify",
+     "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "dataSource": [],
+     "sortOrder": "",
+     "isAscending": true,
+     "filterList": [],
+     "activeRowId": -1,
+     "gridAction": []
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "JukyuIdoJohoRirekiTeseiList",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "JukyuIdoJohoRirekiTeseiList"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/JukyuIdoJohoRirekiTeseiList/onLoad"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "canPost": true
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "共同処理用受給者異動連絡票履歴訂正一覧",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "履歴訂正一覧",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "JukyuIdoJohoRirekiTeseiList",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": []
+  }
+ ],
+ "currentState": "All",
+ "id": "DBC0200101",
+ "WFParameter": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "modify",
+   "eventName": "dgJukyuIdoJohoRirekiTeseiList.onSelectByModifyButton"
+  },
+  {
+   "alias": "modify",
+   "eventName": "dgJukyuIdoJohoRirekiTeseiList.onSelectByDblClick"
+  },
+  {
+   "alias": "onload",
+   "eventName": "JukyuIdoJohoRirekiTeseiList.onLoad"
+  }
+ ],
+ "loadSequencePanelNames": [
+  [
+   "JukyuIdoJohoRirekiTeseiList"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": []
+}
