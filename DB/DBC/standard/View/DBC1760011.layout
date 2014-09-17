@@ -64,7 +64,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "総合事業対象者情報作成条件",
+   "title": "二次予防情報対象者情報作成条件",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -157,7 +157,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "総合事業対象者情報作成一覧表",
+   "title": "二次予防情報対象者情報作成一覧表",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [],
@@ -199,7 +199,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "総合事業対象者情報作成",
+ "title": "二次予防情報対象者情報作成",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [

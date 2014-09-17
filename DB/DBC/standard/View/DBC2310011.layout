@@ -210,6 +210,20 @@
         "sortKey": "defaultDataName16"
        },
        {
+        "columnName": "助成種類",
+        "dataName": "defaultDataName26",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 230,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "defaultDataName26"
+       },
+       {
         "columnName": "申請日",
         "dataName": "defaultDataName0",
         "toolTip": "",
@@ -442,6 +456,20 @@
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "defaultDataName14"
+       },
+       {
+        "columnName": "給付額",
+        "dataName": "defaultDataName25",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "defaultDataName25"
        }
       ]
      },
@@ -460,7 +488,7 @@
      "onNoRow": "",
      "onMultiRows": "",
      "dataSource": [],
-     "sortOrder": "defaultDataName3",
+     "sortOrder": "defaultDataName4",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1,
@@ -485,7 +513,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "市町村単独助成金交付申請一覧",
+   "title": "市町村単独助成金給付申請一覧",
    "marginTop": "Default",
    "marginBottom": "Default",
    "isOpen": true,
@@ -525,7 +553,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "市町村単独助成金交付申請登録",
+ "title": "市町村単独助成金給付申請登録",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [

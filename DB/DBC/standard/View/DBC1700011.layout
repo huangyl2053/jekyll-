@@ -90,7 +90,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "総合事業対象者抽出条件",
+   "title": "二次予防情報対象者抽出条件",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -183,7 +183,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "総合事業対象者登録一覧表",
+   "title": "二次予防情報対象者登録一覧表",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [],
@@ -225,7 +225,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "総合事業対象者抽出",
+ "title": "二次予防情報対象者抽出",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
@@ -257,7 +257,7 @@
    "events": []
   }
  ],
- "currentState": "対象者抽出バッチ起動",
+ "currentState": "All",
  "id": "DBC1700011",
  "WFParameter": [],
  "UIContainerEventMapping": [],

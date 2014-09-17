@@ -2,13 +2,13 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "Sofujoho",
+   "fieldName": "Saisisa",
    "items": [
     {
      "fieldName": "txtSofuYM",
      "items": [],
      "controlType": "TextBoxDate",
-     "width": "60",
+     "width": "60px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -36,19 +36,20 @@
      "text": "",
      "labelLText": "送付年月",
      "labelRText": "",
-     "labelLWidth": "80",
+     "labelLWidth": "80px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 1,
      "displayFormat": 0,
-     "value": ""
+     "value": "",
+     "decorationClass": ""
     },
     {
      "fieldName": "ddlShichosonName",
      "items": [],
      "controlType": "DropDownList",
-     "width": "120",
+     "width": "120px",
      "visible": false,
      "displayNone": true,
      "disabled": false,
@@ -72,7 +73,7 @@
      "text": "",
      "labelLText": "市町村",
      "labelRText": "",
-     "labelLWidth": "55",
+     "labelLWidth": "55px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -86,7 +87,8 @@
        "key": "key1",
        "value": "佐久市"
       }
-     ]
+     ],
+     "isBlankLine": false
     },
     {
      "fieldName": "btnSearchSofuzumi",
@@ -109,6 +111,8 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "送付年月を指定して表示する",
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "onClick": "onClick_btnSofuzumi",
      "appearance": 0,
      "imageFileUrl": "",
@@ -138,6 +142,8 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "未送付情報を表示する",
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "onClick": "onClick_btnMisofu",
      "appearance": 0,
      "imageFileUrl": "",
@@ -147,13 +153,13 @@
      "heightTextBoxMatches": false
     },
     {
-     "fieldName": "SofuIchiran",
+     "fieldName": "dgSaisisa",
      "items": [
       {
        "fieldName": "dgSofuIchiran",
        "items": [],
        "controlType": "DataGrid",
-       "width": "1098",
+       "width": "1098px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -164,13 +170,13 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": "0em",
+       "marginRight": "0em",
        "selectControlID": "dgSofuIchiran",
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "height": "550",
+       "height": "550px",
        "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
@@ -185,6 +191,7 @@
         "isShowDeleteButtonColumn": false,
         "limitRowCount": 0,
         "selectedRowCount": 0,
+        "selectLimitRowCount": 0,
         "header": {
          "combineColumns": [],
          "frozenColumn": "",
@@ -196,7 +203,7 @@
           "dataName": "txtJigyoshaNo",
           "toolTip": "",
           "bgColor": 0,
-          "width": 95,
+          "width": 90,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -230,7 +237,7 @@
           "dataName": "txtHihoNo",
           "toolTip": "",
           "bgColor": 0,
-          "width": 95,
+          "width": 90,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -247,7 +254,7 @@
           "dataName": "txtHihoName",
           "toolTip": "",
           "bgColor": 0,
-          "width": 140,
+          "width": 200,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -260,110 +267,130 @@
           "sortKey": "txtHihoName"
          },
          {
-          "columnName": "申立者区分",
-          "dataName": "txtMoshitateshaKubun",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 140,
-          "visible": true,
-          "cellType": 0,
-          "cellDetails": {
-           "cellType": 0,
-           "isSetValueToToolTip": false
-          },
-          "align": 0,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "txtMoshitateshaKubun"
-         },
-         {
-          "columnName": "様式",
-          "dataName": "txtStyle",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 100,
-          "visible": true,
-          "cellType": 0,
-          "cellDetails": {
-           "cellType": 0,
-           "isSetValueToToolTip": false
-          },
-          "align": 0,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "txtStyle"
-         },
-         {
-          "columnName": "申立理由",
-          "dataName": "txtMoshitateRiyu",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 100,
-          "visible": true,
-          "cellType": 0,
-          "cellDetails": {
-           "cellType": 0,
-           "isSetValueToToolTip": false
-          },
-          "align": 0,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "txtMoshitateRiyu"
-         },
-         {
-          "columnName": "サービス<br>提供年月",
-          "dataName": "txtServiceTeikyoYM",
+          "columnName": "提供年月",
+          "dataName": "txtTeYm",
           "toolTip": "",
           "bgColor": 0,
           "width": 80,
           "visible": true,
           "cellType": 0,
-          "cellDetails": {
-           "cellType": 6,
-           "ymdKubun": 1,
-           "displayFormat": 0,
-           "onChange": "",
-           "isSetValueToToolTip": false,
-           "readOnly": true
-          },
-          "align": 1,
+          "cellDetails": null,
+          "align": 0,
           "resize": true,
           "isPrivateInfo": false,
-          "sortKey": "txtServiceTeikyoYM"
+          "sortKey": "txtTeYm"
          },
          {
-          "columnName": "申立日",
-          "dataName": "txtMoshitateYMD",
+          "columnName": "サービス<br>コード",
+          "dataName": "txtServiceRui",
           "toolTip": "",
           "bgColor": 0,
           "width": 80,
           "visible": true,
           "cellType": 0,
-          "cellDetails": {
-           "cellType": 0,
-           "isSetValueToToolTip": false
-          },
-          "align": 1,
+          "cellDetails": null,
+          "align": 0,
           "resize": true,
           "isPrivateInfo": false,
-          "sortKey": "txtMoshitateYMD"
+          "sortKey": "txtServiceRui"
          },
          {
           "columnName": "証記載<br>保険者番号",
-          "dataName": "txtShokisaiHokenshaNo",
+          "dataName": "txtHokenNo",
           "toolTip": "",
           "bgColor": 0,
-          "width": 115,
+          "width": 100,
           "visible": true,
           "cellType": 0,
-          "cellDetails": {
-           "cellType": 0,
-           "isSetValueToToolTip": false
-          },
-          "align": 1,
+          "cellDetails": null,
+          "align": 0,
           "resize": true,
           "isPrivateInfo": false,
-          "sortKey": "txtShokisaiHokenshaNo"
+          "sortKey": "txtHokenNo"
+         },
+         {
+          "columnName": "申立日",
+          "dataName": "txtMotahi",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 90,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtMotahi"
+         },
+         {
+          "columnName": "申立者区分",
+          "dataName": "txtMotkubu",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 120,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtMotkubu"
+         },
+         {
+          "columnName": "申立単位",
+          "dataName": "txtMotadai",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtMotadai"
+         },
+         {
+          "columnName": "申立事由(項目）",
+          "dataName": "txtTaitem",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 150,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtTaitem"
+         },
+         {
+          "columnName": "申立事由(理由）",
+          "dataName": "txtRiyu",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 150,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtRiyu"
+         },
+         {
+          "columnName": "送付年月",
+          "dataName": "txtSendYm",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 90,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtSendYm"
          }
         ]
        },
@@ -381,10 +408,11 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "sortOrder": "txtShokisaiHokenshaNo",
+       "sortOrder": "txtServiceRui",
        "isAscending": true,
        "filterList": [],
-       "activeRowId": -1
+       "activeRowId": -1,
+       "gridAction": []
       }
      ],
      "controlType": "Panel",
@@ -401,7 +429,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "SofuIchiran",
+     "selectControlID": "dgSaisisa",
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
@@ -410,7 +438,7 @@
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "SofuIchiran"
+       "postParameterPanelNames": "dgSaisisa"
       }
      ],
      "requestSettings": [],
@@ -426,7 +454,8 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     }
    ],
    "controlType": "Panel",
@@ -441,47 +470,31 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
-   "selectControlID": "Sofujoho",
+   "marginLeft": "0em",
+   "marginRight": "0em",
+   "selectControlID": "Saisisa",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
    "title": "",
    "isOpen": true,
    "canOpenAndClose": false,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "Sofujoho"
-    }
-   ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/Sofujoho/onLoad"
-    },
-    {
-     "eventName": "onClick_btnMisofu",
-     "requestUrl": "dbc/db/dbc/Sofujoho/onClick_btnMisofu"
-    },
-    {
-     "eventName": "onClick_btnSofuzumi",
-     "requestUrl": "dbc/db/dbc/Sofujoho/onClick_btnSofuzumi"
-    }
-   ],
+   "postParameterPanelNames": [],
+   "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "0",
-   "marginBottom": "0",
+   "marginTop": "0em",
+   "marginBottom": "0em",
    "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": null,
@@ -502,7 +515,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "過誤申立書送付情報照会",
+ "title": "再審査申立書情報照会",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
@@ -512,11 +525,11 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Sofujoho",
+     "visibleDiv": "Saisisa",
      "panelState": "visible"
     },
     {
-     "visibleDiv": "SofuIchiran",
+     "visibleDiv": "dgSaisisa",
      "panelState": "readOnly visible"
     }
    ],
@@ -540,5 +553,6 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": []
+ "commonButtonAreaData": [],
+ "packageName": ""
 }

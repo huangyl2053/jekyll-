@@ -183,7 +183,7 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
@@ -302,6 +302,34 @@
         "sortKey": "defaultDataName3"
        },
        {
+        "columnName": "委託先情報者コード",
+        "dataName": "defaultDataName8",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 200,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "defaultDataName8"
+       },
+       {
+        "columnName": "委託先情報者名",
+        "dataName": "defaultDataName9",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 200,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "defaultDataName9"
+       },
+       {
         "columnName": "開始日",
         "dataName": "defaultDataName4",
         "toolTip": "",
@@ -358,6 +386,20 @@
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "defaultDataName7"
+       },
+       {
+        "columnName": "更新日",
+        "dataName": "defaultDataName10",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "defaultDataName10"
        }
       ]
      },
@@ -477,7 +519,7 @@
    "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "一覧",
  "id": "DBC0020011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
