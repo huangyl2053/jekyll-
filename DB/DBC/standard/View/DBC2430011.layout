@@ -73,6 +73,44 @@
      "helpMessageID": "",
      "jpControlName": "",
      "height": "XS"
+    },
+    {
+     "fieldName": "ccdChohyoShutsuryokujun",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0px",
+     "marginRight": "0px",
+     "selectControlID": "ccdChohyoShutsuryokujun",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "packageName": "",
+     "marginTop": "0px",
+     "marginBottom": "0px",
+     "businessId": "DBZ",
+     "controlName": "KaigoChohyoShutsuryokujun",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "modes": [],
+     "publicEvents": [],
+     "publicEventsAlias": [],
+     "ChohyoShutsuryokujun_width": "G12"
     }
    ],
    "controlType": "Panel",
@@ -155,7 +193,7 @@
    "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "起動画面",
  "id": "DBC2430011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -165,12 +203,12 @@
  "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "btnJikko",
+   "commonButtonAreaId": "ShoriKido",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonExecute",
+     "buttonKind": "CommonButtonReportPublish",
      "buttonProperty": {
-      "fieldName": "btnJikko",
+      "fieldName": "btnHakko",
       "items": [],
       "controlType": "CommonButtonExecute",
       "width": "S",
@@ -186,10 +224,21 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btnJikko",
+      "selectControlID": "btnHakko",
       "helpMessageID": "",
       "jpControlName": "",
+      "postParameterPanelNames": [],
       "text": "実行",
+      "validateUrl": "",
+      "sourceCreateUrl": "",
+      "afterPrintUrl": "",
+      "isModal": true,
+      "isInstruction": true,
+      "isPreview": false,
+      "printable": false,
+      "copiesChangeable": false,
+      "progressVisible": false,
+      "additionalText": "",
       "onClick": "",
       "icon": 0,
       "onBeforeClick": "",
@@ -198,8 +247,7 @@
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "heightTextBoxMatches": false,
-      "additionalText": ""
+      "heightTextBoxMatches": false
      }
     }
    ],
