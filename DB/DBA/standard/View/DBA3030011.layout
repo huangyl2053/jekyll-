@@ -621,7 +621,7 @@
      "jpControlName": "",
      "readOnly": false,
      "required": false,
-     "maxLength": 100000000,
+     "maxLength": "10",
      "minLength": "0000000000",
      "textAlign": 0,
      "placeHolder": "",
@@ -668,7 +668,7 @@
      "jpControlName": "",
      "readOnly": false,
      "required": false,
-     "maxLength": 100000000,
+     "maxLength": "200",
      "minLength": 0,
      "textAlign": 0,
      "placeHolder": "",
@@ -714,7 +714,7 @@
      "jpControlName": "",
      "readOnly": false,
      "required": false,
-     "maxLength": 100000000,
+     "maxLength": "600",
      "minLength": 0,
      "textAlign": 0,
      "placeHolder": "",
@@ -1313,7 +1313,7 @@
    ]
   }
  ],
- "currentState": "照会",
+ "currentState": "All",
  "id": "DBA3030011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -1581,14 +1581,6 @@
      "state": "削除"
     }
    ],
-   "isFinishButtonOnTheRight": false,
-   "FinishButtonVisible": false,
-   "SuspendButtonVisible": false
-  },
-  {
-   "commonButtonAreaId": "Refer",
-   "buttonSetting": "",
-   "states": "",
    "isFinishButtonOnTheRight": false,
    "FinishButtonVisible": false,
    "SuspendButtonVisible": false
