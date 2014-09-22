@@ -2,7 +2,7 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "KaigoAtenaShikakuShutokuJoho",
+   "fieldName": "IryoHokenJuminKihonJoho",
    "items": [
     {
      "fieldName": "ccbKaigoAtenaInfo",
@@ -137,7 +137,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "KaigoAtenaShikakuShutokuJoho",
+   "selectControlID": "IryoHokenJuminKihonJoho",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -162,7 +162,7 @@
    "canPost": false
   },
   {
-   "fieldName": "IryoHokenKanyuJoho",
+   "fieldName": "IryoHokenIchiran",
    "items": [
     {
      "fieldName": "btnAddIryoHoken",
@@ -414,7 +414,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "IryoHokenKanyuJoho",
+   "selectControlID": "IryoHokenIchiran",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -423,7 +423,7 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "IryoHokenKanyuJoho"
+     "postParameterPanelNames": "IryoHokenIchiran"
     }
    ],
    "requestSettings": [],
@@ -438,13 +438,13 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false,
+   "readOnly": true,
    "height": "Auto",
    "focusPositionID": "ui-accordion-WestAccordion-header-0",
    "canPost": true
   },
   {
-   "fieldName": "IryoHokenInput",
+   "fieldName": "IryoHokenMeisai",
    "items": [
     {
      "fieldName": "txtIryoHokenKanyuDate",
@@ -596,8 +596,7 @@
       }
      ],
      "selectedItem": "key0",
-     "isBlankLine": false,
-     "disabledItem": []
+     "isBlankLine": false
     },
     {
      "fieldName": "txtHokensha",
@@ -666,7 +665,7 @@
      "selectControlID": "txtHokenshamei_core",
      "helpMessageID": "",
      "jpControlName": "",
-     "readOnly": false,
+     "readOnly": true,
      "required": false,
      "maxLength": "200",
      "minLength": 0,
@@ -714,7 +713,7 @@
      "jpControlName": "",
      "readOnly": false,
      "required": false,
-     "maxLength": "600",
+     "maxLength": "30",
      "minLength": 0,
      "textAlign": 0,
      "placeHolder": "",
@@ -753,11 +752,11 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "IryoHokenInput",
+   "selectControlID": "IryoHokenMeisai",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "医療保険情報",
+   "title": "明細",
    "isOpen": true,
    "canOpenAndClose": false,
    "postParameterPanelNames": [],
@@ -779,7 +778,7 @@
    "canPost": false
   },
   {
-   "fieldName": "comKaigoKanryoMessage",
+   "fieldName": "ccdKaigoKanryoMessage",
    "items": [],
    "controlType": "CommonChildDiv",
    "width": "XS",
@@ -795,7 +794,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "comKaigoKanryoMessage",
+   "selectControlID": "ccdKaigoKanryoMessage",
    "helpMessageID": "",
    "jpControlName": "",
    "relation": [],
@@ -846,12 +845,12 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "KaigoAtenaShikakuShutokuJoho",
+     "visibleDiv": "IryoHokenJuminKihonJoho",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenKanyuJoho",
+     "visibleDiv": "IryoHokenIchiran",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -871,7 +870,7 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenInput",
+     "visibleDiv": "IryoHokenMeisai",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     }
@@ -881,43 +880,53 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "Element2",
+     "fieldName": "btnAddCancel",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element4",
+     "fieldName": "btnModCancel",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element7",
+     "fieldName": "btnDelCancel",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element8",
+     "fieldName": "btnAddUpdate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element3",
+     "fieldName": "btnModUpdate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element6",
+     "fieldName": "btnDelUpdate",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnAddIryoHoken",
+     "event": "onClick",
+     "transition": "追加"
     },
     {
      "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
-     "event": "onSelectByDblClick",
-     "transition": ""
+     "event": "onSelectByModifyButton",
+     "transition": "修正"
     },
     {
      "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
-     "event": "onSelect",
+     "event": "onSelectByDeleteButton",
+     "transition": "削除"
+    },
+    {
+     "fieldName": "btnBackShokai",
+     "event": "onClick",
      "transition": ""
     }
    ]
@@ -929,17 +938,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "KaigoAtenaShikakuShutokuJoho",
+     "visibleDiv": "IryoHokenJuminKihonJoho",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenKanyuJoho",
+     "visibleDiv": "IryoHokenIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenInput",
+     "visibleDiv": "IryoHokenMeisai",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -964,43 +973,53 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "Element2",
+     "fieldName": "btnAddCancel",
      "event": "onClick",
      "transition": "照会"
     },
     {
-     "fieldName": "Element4",
+     "fieldName": "btnModCancel",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element7",
+     "fieldName": "btnDelCancel",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element8",
+     "fieldName": "btnAddUpdate",
      "event": "onClick",
      "transition": "完了"
     },
     {
-     "fieldName": "Element3",
+     "fieldName": "btnModUpdate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element6",
+     "fieldName": "btnDelUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnAddIryoHoken",
      "event": "onClick",
      "transition": ""
     },
     {
      "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
-     "event": "onSelectByDblClick",
+     "event": "onSelectByModifyButton",
      "transition": ""
     },
     {
      "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
-     "event": "onSelect",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnBackShokai",
+     "event": "onClick",
      "transition": ""
     }
    ]
@@ -1012,17 +1031,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "KaigoAtenaShikakuShutokuJoho",
+     "visibleDiv": "IryoHokenJuminKihonJoho",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenKanyuJoho",
+     "visibleDiv": "IryoHokenIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenInput",
+     "visibleDiv": "IryoHokenMeisai",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -1047,43 +1066,53 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "Element2",
+     "fieldName": "btnAddCancel",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element4",
+     "fieldName": "btnModCancel",
      "event": "onClick",
      "transition": "照会"
     },
     {
-     "fieldName": "Element7",
+     "fieldName": "btnDelCancel",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element8",
+     "fieldName": "btnAddUpdate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element3",
+     "fieldName": "btnModUpdate",
      "event": "onClick",
      "transition": "完了"
     },
     {
-     "fieldName": "Element6",
+     "fieldName": "btnDelUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnAddIryoHoken",
      "event": "onClick",
      "transition": ""
     },
     {
      "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
-     "event": "onSelectByDblClick",
+     "event": "onSelectByModifyButton",
      "transition": ""
     },
     {
      "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
-     "event": "onSelect",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnBackShokai",
+     "event": "onClick",
      "transition": ""
     }
    ]
@@ -1095,17 +1124,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "KaigoAtenaShikakuShutokuJoho",
+     "visibleDiv": "IryoHokenJuminKihonJoho",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenKanyuJoho",
+     "visibleDiv": "IryoHokenIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenInput",
+     "visibleDiv": "IryoHokenMeisai",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
@@ -1130,43 +1159,53 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "Element2",
+     "fieldName": "btnAddCancel",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element4",
+     "fieldName": "btnModCancel",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element7",
+     "fieldName": "btnDelCancel",
      "event": "onClick",
      "transition": "照会"
     },
     {
-     "fieldName": "Element8",
+     "fieldName": "btnAddUpdate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element3",
+     "fieldName": "btnModUpdate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element6",
+     "fieldName": "btnDelUpdate",
      "event": "onClick",
      "transition": "完了"
     },
     {
-     "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
-     "event": "onSelectByDblClick",
+     "fieldName": "btnAddIryoHoken",
+     "event": "onClick",
      "transition": ""
     },
     {
      "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
-     "event": "onSelect",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnBackShokai",
+     "event": "onClick",
      "transition": ""
     }
    ]
@@ -1178,7 +1217,7 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "comKaigoKanryoMessage",
+     "visibleDiv": "ccdKaigoKanryoMessage",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -1188,126 +1227,53 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "Element2",
+     "fieldName": "btnAddCancel",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element4",
+     "fieldName": "btnModCancel",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element7",
+     "fieldName": "btnDelCancel",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element8",
+     "fieldName": "btnAddUpdate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element3",
+     "fieldName": "btnModUpdate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "Element6",
+     "fieldName": "btnDelUpdate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
-     "event": "onSelect",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "6",
-   "stateName": "一覧選択",
-   "wizardName": "",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "KaigoAtenaShikakuShutokuJoho",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "IryoHokenKanyuJoho",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "IryoHokenInput",
-     "panelState": "readOnly visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ccbKaigoAtenaInfo",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ccbKaigoShikakuKihon",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ccbIryoHokenRireki",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "Element2",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "Element4",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "Element7",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "Element8",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "Element3",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "Element6",
+     "fieldName": "btnAddIryoHoken",
      "event": "onClick",
      "transition": ""
     },
     {
      "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
-     "event": "onSelectByDblClick",
-     "transition": "照会"
+     "event": "onSelectByModifyButton",
+     "transition": ""
     },
     {
      "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
-     "event": "onSelect",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnBackShokai",
+     "event": "onClick",
      "transition": "照会"
     }
    ]
@@ -1339,7 +1305,7 @@
     {
      "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
-      "fieldName": "Element1",
+      "fieldName": "btnAddUpdate",
       "items": [],
       "controlType": "CommonButtonUpdate",
       "width": "S",
@@ -1355,7 +1321,7 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "Element1",
+      "selectControlID": "btnAddUpdate",
       "helpMessageID": "",
       "jpControlName": "",
       "text": "保存",
@@ -1374,7 +1340,7 @@
     {
      "buttonKind": "CommonButtonFree",
      "buttonProperty": {
-      "fieldName": "Element2",
+      "fieldName": "btnAddCancel",
       "items": [],
       "controlType": "CommonButtonFree",
       "width": "S",
@@ -1390,10 +1356,10 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "Element2",
+      "selectControlID": "btnAddCancel",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "追加をやめる",
+      "text": "やめる",
       "imageWidth": "",
       "imageHeight": "",
       "onBeforeClick": "",
@@ -1403,7 +1369,7 @@
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "prefixText": "",
+      "prefixText": "追加を",
       "suffixText": ""
      }
     }
@@ -1423,7 +1389,7 @@
     {
      "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
-      "fieldName": "Element3",
+      "fieldName": "btnModUpdate",
       "items": [],
       "controlType": "CommonButtonUpdate",
       "width": "S",
@@ -1439,7 +1405,7 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "Element3",
+      "selectControlID": "btnModUpdate",
       "helpMessageID": "",
       "jpControlName": "",
       "text": "保存",
@@ -1458,7 +1424,7 @@
     {
      "buttonKind": "CommonButtonFree",
      "buttonProperty": {
-      "fieldName": "Element4",
+      "fieldName": "btnModCancel",
       "items": [],
       "controlType": "CommonButtonFree",
       "width": "S",
@@ -1474,10 +1440,10 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "Element4",
+      "selectControlID": "btnModCancel",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "修正をやめる",
+      "text": "やめる",
       "imageWidth": "",
       "imageHeight": "",
       "onBeforeClick": "",
@@ -1487,7 +1453,7 @@
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "prefixText": "",
+      "prefixText": "修正を",
       "suffixText": ""
      }
     }
@@ -1507,7 +1473,7 @@
     {
      "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
-      "fieldName": "Element6",
+      "fieldName": "btnDelUpdate",
       "items": [],
       "controlType": "CommonButtonUpdate",
       "width": "S",
@@ -1523,7 +1489,7 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "Element6",
+      "selectControlID": "btnDelUpdate",
       "helpMessageID": "",
       "jpControlName": "",
       "text": "保存",
@@ -1542,7 +1508,7 @@
     {
      "buttonKind": "CommonButtonFree",
      "buttonProperty": {
-      "fieldName": "Element7",
+      "fieldName": "btnDelCancel",
       "items": [],
       "controlType": "CommonButtonFree",
       "width": "S",
@@ -1558,10 +1524,10 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "Element7",
+      "selectControlID": "btnDelCancel",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "削除をやめる",
+      "text": "やめる",
       "imageWidth": "",
       "imageHeight": "",
       "onBeforeClick": "",
@@ -1571,7 +1537,7 @@
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "prefixText": "",
+      "prefixText": "削除を",
       "suffixText": ""
      }
     }
@@ -1589,12 +1555,12 @@
    "commonButtonAreaId": "Complete",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonBack",
      "buttonProperty": {
-      "fieldName": "Element8",
+      "fieldName": "btnBackMenu",
       "items": [],
       "controlType": "CommonButtonFree",
-      "width": "S",
+      "width": "1px",
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -1607,7 +1573,7 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "Element8",
+      "selectControlID": "btnBackMenu",
       "helpMessageID": "",
       "jpControlName": "",
       "text": "照会へ戻る",
@@ -1620,8 +1586,77 @@
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "prefixText": "",
-      "suffixText": ""
+      "additionalText": "メニューへ"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnBackShokai",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": "1px",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnBackShokai",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "照会へ"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonReSearch",
+     "buttonProperty": {
+      "fieldName": "btnReSearchComplete",
+      "items": [],
+      "controlType": "CommonButtonReSearch",
+      "width": "1px",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReSearchComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "再検索",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
      }
     }
    ],
@@ -1633,8 +1668,55 @@
    "isFinishButtonOnTheRight": false,
    "FinishButtonVisible": false,
    "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "Shokai",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonReSearch",
+     "buttonProperty": {
+      "fieldName": "btnReSearchShokai",
+      "items": [],
+      "controlType": "CommonButtonReSearch",
+      "width": "1px",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReSearchShokai",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "再検索",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "照会"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ],
- "packageName": "",
- "subGyomuCode": "uza"
+ "packageName": ""
 }
