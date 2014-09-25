@@ -2,6 +2,44 @@
  "fieldName": "Page",
  "items": [
   {
+   "fieldName": "ccdKaigoKanryoMessage",
+   "items": [],
+   "controlType": "CommonChildDiv",
+   "width": "XS",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0px",
+   "marginRight": "0px",
+   "selectControlID": "ccdKaigoKanryoMessage",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "relation": [],
+   "packageName": "",
+   "marginTop": "0px",
+   "marginBottom": "0px",
+   "businessId": "DBZ",
+   "controlName": "KaigoKanryoMessage",
+   "dataPassingForDialog": [],
+   "dialogOkEventNameForDialog": "",
+   "dialogCancelEventNameForDialog": "",
+   "canTransferEvent": true,
+   "heightForDialog": "M",
+   "firstFocusFieldName": "",
+   "lastFocusFieldName": "",
+   "modes": [],
+   "publicEvents": [],
+   "publicEventsAlias": [],
+   "KanryoMessage_width": "G12"
+  },
+  {
    "fieldName": "IryoHokenJuminKihonJoho",
    "items": [
     {
@@ -162,7 +200,7 @@
    "canPost": false
   },
   {
-   "fieldName": "IryoHokenIchiran",
+   "fieldName": "Dba3030011IryoHokenIchiran",
    "items": [
     {
      "fieldName": "btnAddIryoHoken",
@@ -414,7 +452,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "IryoHokenIchiran",
+   "selectControlID": "Dba3030011IryoHokenIchiran",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -423,7 +461,7 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "IryoHokenIchiran"
+     "postParameterPanelNames": "Dba3030011IryoHokenIchiran"
     }
    ],
    "requestSettings": [],
@@ -444,7 +482,7 @@
    "canPost": true
   },
   {
-   "fieldName": "IryoHokenMeisai",
+   "fieldName": "Dba3030011IryoHokenMeisai",
    "items": [
     {
      "fieldName": "txtIryoHokenKanyuDate",
@@ -752,7 +790,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "IryoHokenMeisai",
+   "selectControlID": "Dba3030011IryoHokenMeisai",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -772,48 +810,10 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": true,
+   "readOnly": false,
    "height": "Auto",
    "focusPositionID": "Page",
    "canPost": false
-  },
-  {
-   "fieldName": "ccdKaigoKanryoMessage",
-   "items": [],
-   "controlType": "CommonChildDiv",
-   "width": "XS",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "0px",
-   "marginRight": "0px",
-   "selectControlID": "ccdKaigoKanryoMessage",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "relation": [],
-   "packageName": "",
-   "marginTop": "0px",
-   "marginBottom": "0px",
-   "businessId": "DBZ",
-   "controlName": "KaigoKanryoMessage",
-   "dataPassingForDialog": [],
-   "dialogOkEventNameForDialog": "",
-   "dialogCancelEventNameForDialog": "",
-   "canTransferEvent": true,
-   "heightForDialog": "M",
-   "firstFocusFieldName": "",
-   "lastFocusFieldName": "",
-   "modes": [],
-   "publicEvents": [],
-   "publicEventsAlias": [],
-   "KanryoMessage_width": "G12"
   }
  ],
  "controlType": null,
@@ -850,7 +850,7 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenIchiran",
+     "visibleDiv": "Dba3030011IryoHokenIchiran",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -870,7 +870,7 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenMeisai",
+     "visibleDiv": "Dba3030011IryoHokenMeisai",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     }
@@ -923,11 +923,6 @@
      "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
      "event": "onSelectByDeleteButton",
      "transition": "削除"
-    },
-    {
-     "fieldName": "btnBackShokai",
-     "event": "onClick",
-     "transition": ""
     }
    ]
   },
@@ -943,12 +938,12 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenIchiran",
+     "visibleDiv": "Dba3030011IryoHokenIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenMeisai",
+     "visibleDiv": "Dba3030011IryoHokenMeisai",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -1015,11 +1010,6 @@
     {
      "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
      "event": "onSelectByDeleteButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnBackShokai",
-     "event": "onClick",
      "transition": ""
     }
    ]
@@ -1036,12 +1026,12 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenIchiran",
+     "visibleDiv": "Dba3030011IryoHokenIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenMeisai",
+     "visibleDiv": "Dba3030011IryoHokenMeisai",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -1108,11 +1098,6 @@
     {
      "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
      "event": "onSelectByDeleteButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnBackShokai",
-     "event": "onClick",
      "transition": ""
     }
    ]
@@ -1129,12 +1114,12 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenIchiran",
+     "visibleDiv": "Dba3030011IryoHokenIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "IryoHokenMeisai",
+     "visibleDiv": "Dba3030011IryoHokenMeisai",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
@@ -1202,11 +1187,6 @@
      "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
      "event": "onSelectByDeleteButton",
      "transition": ""
-    },
-    {
-     "fieldName": "btnBackShokai",
-     "event": "onClick",
-     "transition": ""
     }
    ]
   },
@@ -1218,6 +1198,16 @@
    "visibleDivs": [
     {
      "visibleDiv": "ccdKaigoKanryoMessage",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Dba3030011IryoHokenIchiran",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccbIryoHokenRireki",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -1270,11 +1260,6 @@
      "fieldName": "ccbIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
      "event": "onSelectByDeleteButton",
      "transition": ""
-    },
-    {
-     "fieldName": "btnBackShokai",
-     "event": "onClick",
-     "transition": "照会"
     }
    ]
   }
@@ -1557,42 +1542,7 @@
     {
      "buttonKind": "CommonButtonBack",
      "buttonProperty": {
-      "fieldName": "btnBackMenu",
-      "items": [],
-      "controlType": "CommonButtonFree",
-      "width": "1px",
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnBackMenu",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "照会へ戻る",
-      "imageWidth": "",
-      "imageHeight": "",
-      "onBeforeClick": "",
-      "onAfterClick": "",
-      "onClick": "",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": "メニューへ"
-     }
-    },
-    {
-     "buttonKind": "CommonButtonBack",
-     "buttonProperty": {
-      "fieldName": "btnBackShokai",
+      "fieldName": "btnBackGaitoIchiran",
       "items": [],
       "controlType": "CommonButtonNext",
       "width": "1px",
@@ -1608,7 +1558,7 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btnBackShokai",
+      "selectControlID": "btnBackGaitoIchiran",
       "helpMessageID": "",
       "jpControlName": "",
       "text": "戻る",
@@ -1621,7 +1571,7 @@
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "照会へ"
+      "additionalText": "該当者一覧へ"
      }
     },
     {
@@ -1665,7 +1615,7 @@
      "state": "完了"
     }
    ],
-   "isFinishButtonOnTheRight": false,
+   "isFinishButtonOnTheRight": true,
    "FinishButtonVisible": false,
    "SuspendButtonVisible": false
   },
