@@ -1,5 +1,6 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBZ {
     /**
@@ -64,6 +65,20 @@ module DBZ {
             }
         }
         
+        public get gird_gridSetting() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"];
+        }
+        
+        public set gird_gridSetting(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"] = value;
+            } else {
+                this.layout.items[0].items[0]["gridSetting"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, IryoHokenRireki_Design.myLayout, fieldName);
         }
@@ -78,6 +93,7 @@ module DBZ {
             Uz.JSControlUtil.registProperty("onSelectByDeleteButton");
             Uz.JSControlUtil.registProperty("panel_width");
             Uz.JSControlUtil.registProperty("grid_width");
+            Uz.JSControlUtil.registProperty("gird_gridSetting");
         }
         
         /**
@@ -91,6 +107,7 @@ module DBZ {
             editablePropertyInfo["onSelectByDeleteButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onSelectByDeleteButton"];
             editablePropertyInfo["panel_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["width"];
             editablePropertyInfo["grid_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["width"];
+            editablePropertyInfo["gird_gridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
             
             return editablePropertyInfo;
         }
@@ -104,7 +121,7 @@ module DBZ {
      "fieldName": "dgIryoHokenRireki",
      "items": [],
      "controlType": "DataGrid",
-     "width": "1010",
+     "width": "1010px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -115,8 +132,8 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
+     "marginLeft": "0em",
+     "marginRight": "0em",
      "selectControlID": "dgIryoHokenRireki",
      "helpMessageID": "",
      "jpControlName": "",
@@ -289,11 +306,12 @@ module DBZ {
      "sortOrder": "kigoNo",
      "isAscending": true,
      "filterList": [],
-     "activeRowId": -1
+     "activeRowId": -1,
+     "gridAction": []
     }
    ],
    "controlType": "Panel",
-   "width": "1015",
+   "width": "1015px",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -341,7 +359,8 @@ module DBZ {
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": "CommonChildDiv",
@@ -356,16 +375,17 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": "0",
- "marginRight": "0",
+ "marginLeft": "0em",
+ "marginRight": "0em",
  "selectControlID": "defaultLayout",
  "helpMessageID": "",
  "jpControlName": "",
  "relation": [],
+ "packageName": "",
  "businessId": "DBZ",
  "controlName": "IryoHokenRireki",
- "marginTop": 0,
- "marginBottom": 0,
+ "marginTop": "0em",
+ "marginBottom": "0em",
  "originalProperty": [
   {
    "publicChildFieldName": "dgIryoHokenRireki",
@@ -386,6 +406,11 @@ module DBZ {
    "publicChildFieldName": "dgIryoHokenRireki",
    "publicChildProperty": "width",
    "newPropertyName": "grid_width"
+  },
+  {
+   "publicChildFieldName": "dgIryoHokenRireki",
+   "publicChildProperty": "gridSetting",
+   "newPropertyName": "gird_gridSetting"
   }
  ],
  "dataPassingForDialog": [
@@ -405,8 +430,59 @@ module DBZ {
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": "",
  "canTransferEvent": true,
- "heightForDialog": "M"
+ "heightForDialog": "M",
+ "firstFocusFieldName": "",
+ "lastFocusFieldName": "",
+ "modes": [],
+ "publicEvents": [],
+ "publicEventsAlias": []
 }        
     }
+
+     export module IryoHokenRireki {
+
+        export class Events {
+
+            public static onSelectByModifyButton_dgIryoHokenRireki(): string {
+                return "onSelectByModifyButton_dgIryoHokenRireki";
+            }
+
+            public static onSelectByDeleteButton_dgIryoHokenRireki(): string {
+                return "onSelectByDeleteButton_dgIryoHokenRireki";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static myType(): string {
+                return "IryoHokenRireki";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType();
+            }
+
+            public convFiledName(fieldName: string): string {
+                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType() + "_" + fieldName;
+            }
+
+            public IryoHokenRireki(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("IryoHokenRireki"));
+            }
+
+            public dgIryoHokenRireki(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgIryoHokenRireki"));
+            }
+
+        }
+
+     }
+
 }
 
