@@ -2,13 +2,97 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "SearchShoKaishuKanri",
+   "fieldName": "Dbu0500011KanryoMessagePnl",
+   "items": [
+    {
+     "fieldName": "ccdKaigoKanryoMessage",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0em",
+     "marginRight": "0em",
+     "selectControlID": "ccdKaigoKanryoMessage",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "packageName": "",
+     "marginTop": "0em",
+     "marginBottom": "0em",
+     "businessId": "DBZ",
+     "controlName": "KaigoKanryoMessage",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "modes": [],
+     "publicEvents": [],
+     "publicEventsAlias": [],
+     "KanryoMessage_width": "G12"
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0em",
+   "marginRight": "0em",
+   "selectControlID": "Dbu0500011KanryoMessagePnl",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "Dbu0500011KanryoMessagePnl"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "0em",
+   "marginBottom": "0em",
+   "eraseBorder": true,
+   "backgroundColor": 0,
+   "widthAuto": true,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "canPost": true
+  },
+  {
+   "fieldName": "Dbu0500011SearchShoKaishuKanri",
    "items": [
     {
      "fieldName": "txtSearchHihokenshaNo",
      "items": [],
      "controlType": "TextBoxCode",
-     "width": "80",
+     "width": "80px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -25,29 +109,29 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
      "required": true,
-     "labelLText": "被保番号",
-     "labelLWidth": "70",
-     "labelLAlign": 2,
-     "text": "",
-     "placeHolder": "",
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "onBlur_txtSearchHihokenshaNo",
-     "onKeyPress": "",
-     "labelRText": "",
-     "labelRWidth": "S",
-     "labelRAlign": 0,
-     "value": "",
-     "decorationClass": "",
      "maxLength": 100000000,
      "minLength": "0000000000",
      "textAlign": 0,
+     "placeHolder": "",
      "textKind": 2,
+     "isPrivateInfo": false,
+     "isPassword": false,
      "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "onBlur_txtSearchHihokenshaNo",
+     "onChange": "",
+     "onKeyPress": "",
+     "text": "",
      "suggest": [],
+     "value": "",
+     "labelLText": "被保番号",
+     "labelRText": "",
+     "labelLWidth": "70px",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": "",
      "formatLength": "10"
     },
@@ -55,7 +139,7 @@
      "fieldName": "btnHihokenshaInputGuide",
      "items": [],
      "controlType": "ButtonDialog",
-     "width": "20",
+     "width": "20px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -66,18 +150,20 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
+     "marginLeft": "0em",
+     "marginRight": "0em",
      "selectControlID": "btnHihokenshaInputGuide",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "",
-     "icon": 0,
      "text": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "onClick": "",
      "appearance": 2,
      "imageFileUrl": "/uz/uza/image/UZ_Search.png",
-     "imageWidth": "20",
-     "imageHeight": "16",
+     "imageWidth": "20px",
+     "imageHeight": "16px",
+     "icon": 0,
      "heightTextBoxMatches": true,
      "displayChildDivName": "DBZ.HihokenshaInputGuide",
      "dataPassing": [
@@ -98,7 +184,7 @@
      "fieldName": "txtSearchHihokenshaMeisho",
      "items": [],
      "controlType": "TextBox",
-     "width": "300",
+     "width": "300px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -115,36 +201,36 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
-     "onChange": "",
      "required": false,
-     "labelLText": "",
-     "labelLWidth": "S",
-     "labelLAlign": 2,
-     "text": "",
-     "placeHolder": "",
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onKeyPress": "",
-     "labelRText": "",
-     "labelRWidth": "S",
-     "labelRAlign": 0,
-     "value": "",
-     "decorationClass": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
+     "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
+     "isPassword": false,
      "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "text": "",
      "suggest": [],
+     "value": "",
+     "labelLText": "",
+     "labelRText": "",
+     "labelLWidth": "S",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": ""
     },
     {
      "fieldName": "radSearchKohushoShurui",
      "items": [],
      "controlType": "RadioButton",
-     "width": "300",
+     "width": "300px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -161,7 +247,13 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "required": false,
      "onChange": "",
+     "labelLText": "証類選択",
+     "labelLWidth": "70px",
+     "labelLAlign": 2,
+     "onClick": "",
+     "icon": [],
      "selectedItem": null,
      "dataSource": [
       {
@@ -173,21 +265,15 @@
        "value": "資格者証発行済"
       }
      ],
-     "required": false,
-     "onClick": "",
      "newLineItemNumber": 1,
      "spaceSize": "M",
-     "labelLText": "証類選択",
-     "labelLWidth": "70",
-     "labelLAlign": 2,
-     "disabledItem": [],
-     "icon": []
+     "disabledItem": []
     },
     {
      "fieldName": "txtSearchKofuKikan",
      "items": [],
      "controlType": "TextBoxDateRange",
-     "width": "90",
+     "width": "90px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -204,23 +290,23 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
-     "labelLText": "交付期間",
-     "labelLWidth": "70",
-     "labelLAlign": 2,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
+     "onChange": "",
      "onKeyPress": "",
+     "labelLText": "交付期間",
      "labelRText": "",
+     "labelLWidth": "70px",
      "labelRWidth": "S",
+     "labelLAlign": 2,
      "labelRAlign": 0,
-     "ymdKubun": 2,
-     "displayFormat": 0,
      "permitCharactor": "",
      "fromPlaceHolder": "",
      "toPlaceHolder": "",
+     "ymdKubun": 2,
+     "displayFormat": 0,
      "minDate": "",
      "maxDate": "",
      "fromText": "",
@@ -228,13 +314,14 @@
      "fromValue": "",
      "toValue": "",
      "fromSelectControlID": "txtSearchKofuKikanFrom",
-     "toSelectControlID": "txtSearchKofuKikanTo"
+     "toSelectControlID": "txtSearchKofuKikanTo",
+     "autoRangeTo": true
     },
     {
      "fieldName": "chkKaishuKirokuZumi",
      "items": [],
      "controlType": "CheckBoxList",
-     "width": "180",
+     "width": "180px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -251,7 +338,13 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "required": false,
      "onChange": "",
+     "labelLText": "",
+     "labelLWidth": "S",
+     "labelLAlign": 2,
+     "onClick": "",
+     "icon": [],
      "selectedItem": null,
      "dataSource": [
       {
@@ -259,20 +352,14 @@
        "value": "回収記録登録済も含む"
       }
      ],
-     "required": false,
-     "onClick": "",
-     "selectedItems": [],
      "newLineItemNumber": 1,
+     "spaceSize": "M",
+     "disabledItem": [],
+     "selectedItems": [],
      "minCheckedItem": "0",
      "maxCheckedItem": "2",
-     "spaceSize": "M",
-     "labelLText": "",
-     "labelLWidth": "S",
-     "labelLAlign": 2,
      "isAllSelectable": false,
-     "isAllSelectableBreakLine": false,
-     "disabledItem": [],
-     "icon": []
+     "isAllSelectableBreakLine": false
     },
     {
      "fieldName": "btnSearchShoKaishuKanri",
@@ -294,13 +381,15 @@
      "selectControlID": "btnSearchShoKaishuKanri",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "onClick_btnSearchShoKaishuKanri",
-     "icon": 0,
      "text": "以上の条件で検索する",
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "onClick": "onClick_btnSearchShoKaishuKanri",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],
@@ -316,9 +405,9 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
+   "marginLeft": "0em",
    "marginRight": "XS",
-   "selectControlID": "SearchShoKaishuKanri",
+   "selectControlID": "Dbu0500011SearchShoKaishuKanri",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -327,19 +416,10 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "SearchShoKaishuKanri"
+     "postParameterPanelNames": "Dbu0500011SearchShoKaishuKanri"
     }
    ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": "dbu/db/dbu/SearchShoKaishuKanri/onLoad"
-    },
-    {
-     "eventName": "onBlur_txtSearchHihokenshaNo",
-     "requestUrl": "dbu/db/dbu/SearchShoKaishuKanri/onBlur_txtSearchHihokenshaNo"
-    }
-   ],
+   "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -352,13 +432,14 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   },
   {
-   "fieldName": "SearchResultShoKaishuKanri",
+   "fieldName": "Dbu0500011SearchResultShoKaishuKanri",
    "items": [
     {
-     "fieldName": "SearchResultShoKaishuJokyoList",
+     "fieldName": "ccdShoKaishuJokyoList",
      "items": [],
      "controlType": "CommonChildDiv",
      "width": "XS",
@@ -372,14 +453,32 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "SearchResultShoKaishuJokyoList",
+     "marginLeft": "0em",
+     "marginRight": "0em",
+     "selectControlID": "ccdShoKaishuJokyoList",
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
+     "packageName": "",
+     "marginTop": "0em",
+     "marginBottom": "0em",
+     "businessId": "DBZ",
+     "controlName": "ShoKaishuJokyoList",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "modes": [
+      {
+       "modeKey": "一覧パネル高さ",
+       "modeValue": "サイズ350"
+      }
+     ],
+     "publicEvents": [],
+     "publicEventsAlias": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -580,14 +679,7 @@
       ]
      },
      "onSelectByDblClick": "onSelectByDblClick_dgShoKaishuJokyo",
-     "onSelectBySelectButton": "onSelectBySelectButton_dgShoKaishuJokyo",
-     "businessId": "DBZ",
-     "controlName": "ShoKaishuJokyoList",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M"
+     "onSelectBySelectButton": "onSelectBySelectButton_dgShoKaishuJokyo"
     }
    ],
    "controlType": "Panel",
@@ -602,33 +694,21 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
+   "marginLeft": "0em",
    "marginRight": "XS",
-   "selectControlID": "SearchResultShoKaishuKanri",
+   "selectControlID": "Dbu0500011SearchResultShoKaishuKanri",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
    "title": "証類一覧",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "SearchResultShoKaishuKanri"
-    },
-    {
-     "postParameterPanelNames": "SearchShoKaishuKanri"
+     "postParameterPanelNames": "Dbu0500011SearchResultShoKaishuKanri"
     }
    ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": ""
-    },
-    {
-     "eventName": "onClick_btnSearchShoKaishuKanri",
-     "requestUrl": "dbu/db/dbu/SearchResultShoKaishuKanri/onClick_btnSearchShoKaishuKanri"
-    }
-   ],
+   "requestSettings": [],
    "hiddenInput": [
     {
      "propertyName": "hihokenshaNo",
@@ -646,13 +726,14 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   },
   {
-   "fieldName": "ShoKaishuKanriTaishoshaJoho",
+   "fieldName": "Dbu0500011ShoKaishuKanriTaishoshaJoho",
    "items": [
     {
-     "fieldName": "ShoKaishuKanriTaishoshaCommonJoho",
+     "fieldName": "ccdKaigoAtenaInfo",
      "items": [],
      "controlType": "CommonChildDiv",
      "width": "XS",
@@ -666,14 +747,15 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "ShoKaishuKanriTaishoshaCommonJoho",
+     "marginLeft": "0em",
+     "marginRight": "0em",
+     "selectControlID": "ccdKaigoAtenaInfo",
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
+     "packageName": "",
+     "marginTop": "0em",
+     "marginBottom": "0em",
      "businessId": "DBZ",
      "controlName": "KaigoAtenaInfo",
      "dataPassingForDialog": [],
@@ -681,6 +763,11 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "modes": [],
+     "publicEvents": [],
+     "publicEventsAlias": [],
      "atenaInfo_title": "",
      "atenaInfo_canOpenAndClose": true,
      "AtenaShokaiSimple_eraseBorder": true,
@@ -690,7 +777,6 @@
      "Nenrei_visible": true,
      "Seibetsu_visible": true,
      "JuminShubetsu_Visible": true,
-     "NihonjinGaikokujin_visible": true,
      "JuminJotai_visible": true,
      "YubinNo_visible": true,
      "Jusho_visible": true,
@@ -734,16 +820,17 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
+     "marginLeft": "0em",
+     "marginRight": "0em",
      "selectControlID": "ccdKaigoShikakuKihon",
      "helpMessageID": "",
      "jpControlName": "",
      "title": "",
      "relation": [],
+     "packageName": "",
      "canOpenAndClose": true,
-     "marginTop": 0,
-     "marginBottom": 0,
+     "marginTop": "0em",
+     "marginBottom": "0em",
      "eraseBorder": true,
      "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
@@ -752,9 +839,11 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
-     "backGroundColor": 0,
-     "btnHihoRireki_visible": true,
-     "btnNinteiRireki_visible": true
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "modes": [],
+     "publicEvents": [],
+     "publicEventsAlias": []
     }
    ],
    "controlType": "Panel",
@@ -769,9 +858,9 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
+   "marginLeft": "0em",
    "marginRight": "XS",
-   "selectControlID": "ShoKaishuKanriTaishoshaJoho",
+   "selectControlID": "Dbu0500011ShoKaishuKanriTaishoshaJoho",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -780,22 +869,10 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "ShoKaishuKanriTaishoshaJoho"
-    },
-    {
-     "postParameterPanelNames": "SearchShoKaishuKanri"
+     "postParameterPanelNames": "Dbu0500011ShoKaishuKanriTaishoshaJoho"
     }
    ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": ""
-    },
-    {
-     "eventName": "onClick_btnSelect",
-     "requestUrl": "dbu/db/dbu/ShoKaishuKanriTaishoshaJoho/onSelectBySelectButton_SearchResultShoKaishuJokyoList"
-    }
-   ],
+   "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -808,13 +885,14 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   },
   {
-   "fieldName": "ShoKaishuJokyo",
+   "fieldName": "Dbu0500011ShoKaishuJokyo",
    "items": [
     {
-     "fieldName": "ShoKaishuJokyoShosai",
+     "fieldName": "ccdShoKaishuJokyoShosai",
      "items": [],
      "controlType": "CommonChildDiv",
      "width": "XS",
@@ -828,14 +906,15 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "ShoKaishuJokyoShosai",
+     "marginLeft": "0em",
+     "marginRight": "0em",
+     "selectControlID": "ccdShoKaishuJokyoShosai",
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
-     "marginTop": "0",
-     "marginBottom": 0,
+     "packageName": "",
+     "marginTop": "0em",
+     "marginBottom": "0em",
      "businessId": "DBZ",
      "controlName": "ShoKaishuJokyoShosai",
      "dataPassingForDialog": [],
@@ -843,6 +922,11 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "modes": [],
+     "publicEvents": [],
+     "publicEventsAlias": [],
      "onBlur_txtKaishuDate": "onBlur_txtKaishuDate",
      "onChange_ddlKaishuJiyu": "onChange_ddlKaishuJiyu",
      "onBlur_txtKaishuRiyu": "",
@@ -862,9 +946,9 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
+   "marginLeft": "0em",
    "marginRight": "XS",
-   "selectControlID": "ShoKaishuJokyo",
+   "selectControlID": "Dbu0500011ShoKaishuJokyo",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -873,30 +957,10 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "ShoKaishuJokyo"
-    },
-    {
-     "postParameterPanelNames": "SearchResultShoKaishuKanri"
+     "postParameterPanelNames": "Dbu0500011ShoKaishuJokyo"
     }
    ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": ""
-    },
-    {
-     "eventName": "onClick_btnSelect",
-     "requestUrl": "dbu/db/dbu/ShoKaishuJokyo/onSelectBySelectButton_SearchResultShoKaishuJokyoList"
-    },
-    {
-     "eventName": "onBlur_txtKaishuDate",
-     "requestUrl": "dbu/db/dbu/ShoKaishuJokyo/setEnableControl"
-    },
-    {
-     "eventName": "onChange_ddlKaishuJiyu",
-     "requestUrl": "dbu/db/dbu/ShoKaishuJokyo/setEnableControl"
-    }
-   ],
+   "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -909,92 +973,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
-  },
-  {
-   "fieldName": "KanryoMessagePnl",
-   "items": [
-    {
-     "fieldName": "ccdKaigoKanryoMessage",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "ccdKaigoKanryoMessage",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "KaigoKanryoMessage",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "canTransferEvent": true,
-     "heightForDialog": "M",
-     "KanryoMessage_width": "G12"
-    }
-   ],
-   "controlType": "Panel",
-   "width": "G12",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
-   "selectControlID": "KanryoMessagePnl",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "onLoad": "",
-   "title": "",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KanryoMessagePnl"
-    },
-    {
-     "postParameterPanelNames": "ShoKaishuKanriTaishoshaJoho"
-    }
-   ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": "dbu/db/dbu/ShoKaishuKanriKanryoMessage/onLoad"
-    }
-   ],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "0",
-   "marginBottom": "0",
-   "eraseBorder": true,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": null,
@@ -1015,27 +995,28 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "回収記録登録",
+ "title": "証回収記録管理",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
   {
    "order": "1",
    "stateName": "対象者検索",
+   "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "SearchShoKaishuKanri",
+     "visibleDiv": "Dbu0500011SearchShoKaishuKanri",
      "panelState": "visible",
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "SearchResultShoKaishuKanri",
+     "visibleDiv": "Dbu0500011SearchResultShoKaishuKanri",
      "panelState": "close",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "SearchResultShoKaishuJokyoList",
+     "visibleDiv": "ccdShoKaishuJokyoList",
      "panelState": "visible",
      "fixedDiv": ""
     }
@@ -1043,14 +1024,14 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "SearchResultShoKaishuJokyoList_ShoKaishuJokyoList_dgShoKaishuJokyo",
+     "fieldName": "ccdShoKaishuJokyoList_ShoKaishuJokyoList_dgShoKaishuJokyo",
      "event": "onSelectByDblClick",
-     "transition": "回収記録登録"
+     "transition": "証回収記録追記"
     },
     {
      "fieldName": "SearchResultShoKaishuJokyoList_ShoKaishuJokyoList_dgShoKaishuJokyo[btnSelect]",
      "event": "onClick",
-     "transition": "回収記録登録"
+     "transition": "証回収記録追記"
     },
     {
      "fieldName": "btnSave",
@@ -1071,21 +1052,22 @@
   },
   {
    "order": "2",
-   "stateName": "回収記録登録",
+   "stateName": "証回収記録追記",
+   "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "ShoKaishuKanriTaishoshaJoho",
+     "visibleDiv": "Dbu0500011ShoKaishuKanriTaishoshaJoho",
      "panelState": "visible",
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "ShoKaishuJokyo",
+     "visibleDiv": "Dbu0500011ShoKaishuJokyo",
      "panelState": "visible",
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "ShoKaishuJokyoShosai",
+     "visibleDiv": "ccdShoKaishuJokyoShosai",
      "panelState": "visible",
      "fixedDiv": ""
     },
@@ -1095,7 +1077,7 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ShoKaishuKanriTaishoshaCommonJoho",
+     "visibleDiv": "ccdKaigoAtenaInfo",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -1103,7 +1085,7 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "SearchResultShoKaishuJokyoList_ShoKaishuJokyoList_dgShoKaishuJokyo",
+     "fieldName": "ccdShoKaishuJokyoList_ShoKaishuJokyoList_dgShoKaishuJokyo",
      "event": "onSelectByDblClick",
      "transition": ""
     },
@@ -1132,15 +1114,26 @@
   {
    "order": "3",
    "stateName": "登録完了",
+   "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "KanryoMessagePnl",
+     "visibleDiv": "Dbu0500011KanryoMessagePnl",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
      "visibleDiv": "ccdKaigoKanryoMessage",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Dbu0500011SearchResultShoKaishuKanri",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdShoKaishuJokyoList",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -1149,7 +1142,7 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "SearchResultShoKaishuJokyoList_ShoKaishuJokyoList_dgShoKaishuJokyo",
+     "fieldName": "ccdShoKaishuJokyoList_ShoKaishuJokyoList_dgShoKaishuJokyo",
      "event": "onSelectByDblClick",
      "transition": ""
     },
@@ -1255,39 +1248,6 @@
       "validateUrl": "",
       "submitUrl": ""
      }
-    },
-    {
-     "buttonKind": "CommonButtonReSearch",
-     "buttonProperty": {
-      "fieldName": "btnReSearch",
-      "items": [],
-      "controlType": "CommonButtonReSearch",
-      "width": 1,
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnReSearch",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "再検索",
-      "onClick": "",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": ""
-     }
     }
    ],
    "states": [
@@ -1345,5 +1305,6 @@
    "FinishButtonVisible": false,
    "SuspendButtonVisible": false
   }
- ]
+ ],
+ "packageName": ""
 }

@@ -1,17 +1,45 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
-var DBZ;
+﻿var DBZ;
 (function (DBZ) {
-    var ShoKaishuJokyoShosai = (function (_super) {
-        __extends(ShoKaishuJokyoShosai, _super);
-        function ShoKaishuJokyoShosai() {
-            _super.apply(this, arguments);
-        }
-        return ShoKaishuJokyoShosai;
-    })(DBZ.ShoKaishuJokyoShosai_Design);
-    DBZ.ShoKaishuJokyoShosai = ShoKaishuJokyoShosai;
+    (function (ShoKaishuJokyoShosai) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShoKaishuJokyoShosai.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [
+                    "表示方法"
+                ];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.表示方法 = function () {
+                return new Modes.表示方法(this.controls);
+            };
+            return ModeController;
+        })();
+        ShoKaishuJokyoShosai.ModeController = ModeController;
+
+        (function (Modes) {
+            var 表示方法 = (function () {
+                function 表示方法(controls) {
+                    this.controls = controls;
+                }
+                表示方法.prototype.照会 = function () {
+                    this.controls.ShoKaishuJokyoShosai().disabled = true;
+                };
+
+                表示方法.prototype.入力 = function () {
+                    this.controls.ShoKaishuJokyoShosai().disabled = false;
+                };
+                return 表示方法;
+            })();
+            Modes.表示方法 = 表示方法;
+        })(ShoKaishuJokyoShosai.Modes || (ShoKaishuJokyoShosai.Modes = {}));
+        var Modes = ShoKaishuJokyoShosai.Modes;
+    })(DBZ.ShoKaishuJokyoShosai || (DBZ.ShoKaishuJokyoShosai = {}));
+    var ShoKaishuJokyoShosai = DBZ.ShoKaishuJokyoShosai;
 })(DBZ || (DBZ = {}));
