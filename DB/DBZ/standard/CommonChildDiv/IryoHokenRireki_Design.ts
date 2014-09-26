@@ -9,76 +9,6 @@ module DBZ {
      */
     export class IryoHokenRireki_Design extends Uz.CommonChildDiv {
     
-        public get onSelectByModifyButton() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByModifyButton"];
-        }
-        
-        public set onSelectByModifyButton(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByModifyButton"] = value;
-            } else {
-                this.layout.items[0].items[0]["onSelectByModifyButton"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get onSelectByDeleteButton() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByDeleteButton"];
-        }
-        
-        public set onSelectByDeleteButton(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByDeleteButton"] = value;
-            } else {
-                this.layout.items[0].items[0]["onSelectByDeleteButton"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get panel_width() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["width"];
-        }
-        
-        public set panel_width(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["width"] = value;
-            } else {
-                this.layout.items[0]["width"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get grid_width() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"];
-        }
-        
-        public set grid_width(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"] = value;
-            } else {
-                this.layout.items[0].items[0]["width"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get gird_gridSetting() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"];
-        }
-        
-        public set gird_gridSetting(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"] = value;
-            } else {
-                this.layout.items[0].items[0]["gridSetting"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, IryoHokenRireki_Design.myLayout, fieldName);
         }
@@ -89,11 +19,6 @@ module DBZ {
          */
         public registProperty() {
             super.registProperty();
-            Uz.JSControlUtil.registProperty("onSelectByModifyButton");
-            Uz.JSControlUtil.registProperty("onSelectByDeleteButton");
-            Uz.JSControlUtil.registProperty("panel_width");
-            Uz.JSControlUtil.registProperty("grid_width");
-            Uz.JSControlUtil.registProperty("gird_gridSetting");
         }
         
         /**
@@ -103,11 +28,6 @@ module DBZ {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
-            editablePropertyInfo["onSelectByModifyButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onSelectByModifyButton"];
-            editablePropertyInfo["onSelectByDeleteButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onSelectByDeleteButton"];
-            editablePropertyInfo["panel_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["width"];
-            editablePropertyInfo["grid_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["width"];
-            editablePropertyInfo["gird_gridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
             
             return editablePropertyInfo;
         }
@@ -121,7 +41,7 @@ module DBZ {
      "fieldName": "dgIryoHokenRireki",
      "items": [],
      "controlType": "DataGrid",
-     "width": "1010px",
+     "width": "980px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -146,12 +66,13 @@ module DBZ {
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
-      "isShowRowState": true,
+      "isShowRowState": false,
       "isShowSelectButtonColumn": false,
       "isShowModifyButtonColumn": true,
       "isShowDeleteButtonColumn": true,
       "limitRowCount": 0,
       "selectedRowCount": 0,
+      "selectLimitRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -386,33 +307,7 @@ module DBZ {
  "controlName": "IryoHokenRireki",
  "marginTop": "0em",
  "marginBottom": "0em",
- "originalProperty": [
-  {
-   "publicChildFieldName": "dgIryoHokenRireki",
-   "publicChildProperty": "onSelectByModifyButton",
-   "newPropertyName": "onSelectByModifyButton"
-  },
-  {
-   "publicChildFieldName": "dgIryoHokenRireki",
-   "publicChildProperty": "onSelectByDeleteButton",
-   "newPropertyName": "onSelectByDeleteButton"
-  },
-  {
-   "publicChildFieldName": "IryoHokenRireki",
-   "publicChildProperty": "width",
-   "newPropertyName": "panel_width"
-  },
-  {
-   "publicChildFieldName": "dgIryoHokenRireki",
-   "publicChildProperty": "width",
-   "newPropertyName": "grid_width"
-  },
-  {
-   "publicChildFieldName": "dgIryoHokenRireki",
-   "publicChildProperty": "gridSetting",
-   "newPropertyName": "gird_gridSetting"
-  }
- ],
+ "originalProperty": [],
  "dataPassingForDialog": [
   {
    "key": "",
@@ -434,7 +329,14 @@ module DBZ {
  "firstFocusFieldName": "",
  "lastFocusFieldName": "",
  "modes": [],
- "publicEvents": [],
+ "publicEvents": [
+  {
+   "eventName": "onSelectByModifyButton_dgIryoHokenRireki"
+  },
+  {
+   "eventName": "onSelectByDeleteButton_dgIryoHokenRireki"
+  }
+ ],
  "publicEventsAlias": []
 }        
     }

@@ -17,15 +17,19 @@ module DBZ
                     this.controls = new Controls(fieldName);
                 }
 
-                public DisplayType() {
-                    return new Modes.DisplayType(this.controls);
+                public DisplayMode() {
+                    return new Modes.DisplayMode(this.controls);
                 }
-            
+                
+                public WidthMode() {
+                    return new Modes.WidthMode(this.controls);
+                }
+
             }
             
             export module Modes {
 
-                export class DisplayType {
+                export class DisplayMode {
                     private controls: Controls;
 
                     constructor(controls: Controls) {
@@ -33,8 +37,7 @@ module DBZ
                     }
 
                     public Shokai(): void {
-                       // this.controls.btnAddRireki().displayNone = true;
-                        
+
                         this.controls.dgIryoHokenRireki().readOnly = true;
 
                         var gridSetting = this.controls.dgIryoHokenRireki().gridSetting;
@@ -43,11 +46,11 @@ module DBZ
                         
                         this.controls.dgIryoHokenRireki().gridSetting = gridSetting;
 
-                        this.controls.dgIryoHokenRireki().width = 188;
+                        this.controls.dgIryoHokenRireki().width = 940;
                     }
 
                     public Toroku(): void {
-                        //this.controls.btnAddRireki().displayNone = false;
+
                         this.controls.dgIryoHokenRireki().readOnly = false;
 
                         var gridSetting = this.controls.dgIryoHokenRireki().gridSetting;
@@ -56,7 +59,24 @@ module DBZ
 
                         this.controls.dgIryoHokenRireki().gridSetting = gridSetting;
 
-                       this.controls.dgIryoHokenRireki().width = 268;
+                       this.controls.dgIryoHokenRireki().width = 980;
+
+                    }
+                }
+
+                export class WidthMode {
+                    private controls: Controls;
+
+                    constructor(controls: Controls) {
+                        this.controls = controls;
+                    }
+
+                    public Width1(): void {
+                        this.controls.dgIryoHokenRireki().width = 800;
+                    }
+
+                    public Width2(): void {
+                        this.controls.dgIryoHokenRireki().width = 700;
 
                     }
                 }
