@@ -6,9 +6,9 @@
         <artifactId>dba</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>DbaPersistence</artifactId>
+    <artifactId>DbaModel</artifactId>
     <packaging>jar</packaging>
-    <name>DbaPersistence</name>
+    <name>DbaModel</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -20,31 +20,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbaEntity</artifactId>
             <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>DbaBusiness</artifactId>
-                    <groupId>jp.co.ndensan.reams.db.dba</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DbaDefinition</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzPersistence</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbaModel</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbaModel</artifactId>
+            <artifactId>DbaEntity</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
