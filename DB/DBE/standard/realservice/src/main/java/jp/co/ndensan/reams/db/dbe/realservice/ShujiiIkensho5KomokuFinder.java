@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkensho5Komoku;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiIkensho5KomokuMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.ShujiiIkensho5KomokuMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShujiiIkenshoShosaiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

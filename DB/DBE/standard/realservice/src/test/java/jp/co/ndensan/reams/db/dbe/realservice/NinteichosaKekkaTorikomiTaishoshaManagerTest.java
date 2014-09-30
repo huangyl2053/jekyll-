@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.KojinTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaIraiTestHelper;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaIraiMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.NinteichosaIraiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaKekkaTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
