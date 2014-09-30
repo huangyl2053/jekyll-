@@ -64,7 +64,7 @@ public final class NinteichosaIraiTaishoshaMapper {
                 要介護認定申請情報.get認定申請区分_申請時(),
                 個人,
                 個人.get氏名().getName().value(),
-                個人.get住所().getValue(),
+                個人.get住所().get住所(),
                 認定調査委託先情報,
                 事業者情報,
                 認定調査員情報);

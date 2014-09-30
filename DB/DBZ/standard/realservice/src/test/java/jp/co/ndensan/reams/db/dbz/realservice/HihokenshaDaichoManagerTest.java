@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
-import jp.co.ndensan.reams.db.dbz.entity.mapper.HihokenshaShikakuMapper;
+import jp.co.ndensan.reams.db.dbz.business.mapper.HihokenshaShikakuMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.realservice.search.HihokenshaSearchItem;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;

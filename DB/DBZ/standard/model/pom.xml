@@ -6,9 +6,9 @@
         <artifactId>dbz</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>DbzBusiness</artifactId>
+    <artifactId>DbzModel</artifactId>
     <packaging>jar</packaging>
-    <name>DbzBusiness</name>
+    <name>DbzModel</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -17,29 +17,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
-            <artifactId>UrdBusiness</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzBusiness</artifactId>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DbzDefinition</artifactId>
+            <artifactId>DbzEntity</artifactId>
             <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbzModel</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbzModel</artifactId>
-            <version>${project.version}</version>
-            <type>test-jar</type>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

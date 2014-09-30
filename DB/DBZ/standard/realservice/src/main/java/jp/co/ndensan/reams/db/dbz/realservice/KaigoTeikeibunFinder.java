@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.KaigoTeikeibun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7103TeikeibunJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.mapper.KaigoTeikeibunMapper;
+import jp.co.ndensan.reams.db.dbz.business.mapper.KaigoTeikeibunMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.KaigoTeikeibunDac;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.business.KaigoRenrakusaki;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5050RenrakusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.mapper.RenrakusakiInfoMapper;
+import jp.co.ndensan.reams.db.dbz.business.mapper.RenrakusakiInfoMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.RenrakusakiInfoDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
