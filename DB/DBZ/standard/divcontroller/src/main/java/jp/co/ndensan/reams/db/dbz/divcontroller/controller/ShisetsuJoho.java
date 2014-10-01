@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,8 +21,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
  * 施設情報を入力する共有子Divのコントローラです。
  *
  * @author n8178 城間篤人
+ * @author N8211 田辺 紘一
  */
-public class ShisetsuJoho {
+public class ShisetsuJoho implements Serializable {
 
     private static final RString JIGYOSHA_DATA_SOURCE = new RString("shisetsuJoho/shisetsuData.yml");
     private static final RString OTHER_SHISETSU_DATA_SOURCE = new RString("shisetsuJoho/otherShisetsuData.yml");
@@ -41,71 +43,22 @@ public class ShisetsuJoho {
     }
 
     /**
-     * 引数から渡された施設情報Divの表示を変更します。<br/>
-     * ここでは、住所地特例登録処理などの処理からの使用を想定しており、入力ガイド起動ボタンとラジオボタンに表示される情報を
-     * 介護保険施設とその他特例施設に限定します。
-     *
-     * @param div 施設情報Div
-     */
-    public static void setJutokuMode(ShisetsuJohoDiv div) {
-        div.getRadShisetsuShurui().setDataSource(SHISETSU_SHURUI_DDL_SOURCE.subList(0, 2));
-        div.getRadShisetsuShurui().setSelectedItem(new RString("kaigoHokenShisetsu"));
-        div.getBtnJigyoshaInputGuide().setDisplayNone(false);
-        div.getBtnOtherTokureiShisetsuInputGuide().setDisplayNone(true);
-        div.getBtnJogaiShisetsuInputGuide().setDisplayNone(true);
-    }
-
-    /**
-     * 引数から渡された施設情報Divの表示を変更します。<br/>
-     * ここでは、その他特例施設入居による適用などの処理からの使用を想定しており、入力ガイド起動ボタンとラジオボタンに表示される情報を
-     * 適用除外施設に限定します。
-     *
-     * @param div 施設情報Div
-     */
-    public static void setTekiyoJogaiMode(ShisetsuJohoDiv div) {
-        div.getRadShisetsuShurui().setDataSource(SHISETSU_SHURUI_DDL_SOURCE.subList(2, 3));
-        div.getRadShisetsuShurui().setSelectedItem(new RString("tekiyoJogaiShisetsu"));
-        div.getBtnJigyoshaInputGuide().setDisplayNone(true);
-        div.getBtnOtherTokureiShisetsuInputGuide().setDisplayNone(true);
-        div.getBtnJogaiShisetsuInputGuide().setDisplayNone(false);
-
-    }
-
-    /**
      * 施設種類ラジオボタンの選択項目が変更された際に実行します。<br/>
-     * 選択された項目に合わせて、必要な入力補助ダイアログを表示します。また、既に施設コードと名称が入力されていた場合、
-     * 既に入力されている情報を削除し、施設種類と施設情報に不整合が出ないようにします。
+     * 選択された項目に合わせて、必要な入力補助ダイアログを表示します。 <br/>
+     * また、既に施設コードと名称が入力されていた場合、 既に入力されている情報を削除し、施設種類と施設情報に不整合が出ないようにします。
      *
      * @param div 施設情報Div
      * @return レスポンス
      */
     public ResponseData onChange_radShisetsuShurui(ShisetsuJohoDiv div) {
-        ResponseData<ShisetsuJohoDiv> response = new ResponseData<>();
-        setShowShisetsuInputGuide(div);
+
+        ShisetsuJohoHandler handler = div.getHandler();
+        handler.onChange_radShisetsuShurui();
 
         div.getTxtShisetsuCode().setValue(null);
         div.getTxtShisetsuMeisho().setValue(null);
-        response.data = div;
-        return response;
-    }
 
-    private void setShowShisetsuInputGuide(ShisetsuJohoDiv div) {
-        RadioButton rad = div.getRadShisetsuShurui();
-        div.getBtnJigyoshaInputGuide().setDisplayNone(true);
-        div.getBtnOtherTokureiShisetsuInputGuide().setDisplayNone(true);
-        div.getBtnJogaiShisetsuInputGuide().setDisplayNone(true);
-
-        switch (rad.getSelectedItem().toString()) {
-            case "kaigoHokenShisetsu":
-                div.getBtnJigyoshaInputGuide().setDisplayNone(false);
-                break;
-            case "other":
-                div.getBtnOtherTokureiShisetsuInputGuide().setDisplayNone(false);
-                break;
-            default:
-                div.getBtnJogaiShisetsuInputGuide().setDisplayNone(false);
-                break;
-        }
+        return getResponseData(div);
     }
 
     /**
@@ -178,6 +131,20 @@ public class ShisetsuJoho {
                 div.getTxtShisetsuMeisho().setValue(new RString(shisetsuJoho.get("事業者名称").toString()));
             }
         }
+    }
+
+    /**
+     * 最終的に返すレイアウトデータを生成
+     *
+     * @param requestDiv
+     * @return
+     */
+    private ResponseData<ShisetsuJohoDiv> getResponseData(ShisetsuJohoDiv div) {
+
+        ResponseData<ShisetsuJohoDiv> response = new ResponseData();
+        response.data = div;
+
+        return response;
     }
 
 }
