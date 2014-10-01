@@ -41,4 +41,22 @@ public final class NinteichosaItakusakiMapper {
                 認定調査委託先Entity.get割付地区(),
                 認定調査委託先Entity.get機関の区分());
     }
+
+    //TODO n3317塚田萌　モデルパッケージ導入時にエラーが出るので、暫定対応
+    public static DbT7010NinteichosaItakusakiJohoEntity toNinteichosaItakusakiEntity(NinteichosaItakusaki 認定調査委託先) throws NullPointerException {
+        requireNonNull(認定調査委託先, Messages.E00003.replace("認定調査委託先", " 認定調査委託先エンティティ").getMessage());
+
+        DbT7010NinteichosaItakusakiJohoEntity entity = new DbT7010NinteichosaItakusakiJohoEntity();
+
+        entity.set事業者番号(認定調査委託先.getJigyoshaNo());
+        entity.set介護事業者状況(認定調査委託先.is有効());
+        entity.set介護事業者番号(認定調査委託先.getKaigoJigyoshaNo());
+        entity.set割付地区(認定調査委託先.getWaritsukeChiku());
+        entity.set割付定員(認定調査委託先.getWaritsukeTeiin());
+        entity.set市町村コード(認定調査委託先.getShichosonCode());
+        entity.set機関の区分(認定調査委託先.getKikanKubun());
+        entity.set調査委託区分(認定調査委託先.getChosaItakuKubun());
+
+        return entity;
+    }
 }

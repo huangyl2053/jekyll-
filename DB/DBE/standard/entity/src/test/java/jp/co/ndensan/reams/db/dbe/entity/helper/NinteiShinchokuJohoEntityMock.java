@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8187 久保田 英男
  */
-public class NinteiShinchokuJohoMock {
+public class NinteiShinchokuJohoEntityMock {
 
     public static final ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(new RString("0001"));
     public static final FlexibleDate 認定申請情報登録年月日 = new FlexibleDate(new RString("20140101"));

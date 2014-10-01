@@ -38,10 +38,11 @@ public class DbT7010NinteichosaItakusakiJohoEntity implements IDbAccessable {
     private RString 割付地区;
     private RString 機関の区分;
 
+    //TODO n3317塚田萌　モデルパッケージ導入時にエラーが出るので、暫定対応
     /**
      * ORマッパーのためのデフォルトコンストラクタです。
      */
-    DbT7010NinteichosaItakusakiJohoEntity() {
+    public DbT7010NinteichosaItakusakiJohoEntity() {
     }
 
     /**

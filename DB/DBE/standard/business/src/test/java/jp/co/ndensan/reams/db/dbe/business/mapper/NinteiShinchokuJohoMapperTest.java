@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock.*;
+import static jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoEntityMock.*;
 
 /**
  * 認定進捗情報を変換するMapperのテストです。

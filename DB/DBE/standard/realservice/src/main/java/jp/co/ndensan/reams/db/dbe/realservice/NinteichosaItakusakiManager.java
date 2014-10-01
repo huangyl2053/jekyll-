@@ -139,7 +139,7 @@ public class NinteichosaItakusakiManager {
      * @return 追加・更新結果
      */
     public int save(NinteichosaItakusaki ninteichosaitakusaki) {
-        int result = dac.insertOrUpdate(new DbT7010NinteichosaItakusakiJohoEntity(ninteichosaitakusaki));
+        int result = dac.insertOrUpdate(NinteichosaItakusakiMapper.toNinteichosaItakusakiEntity(ninteichosaitakusaki));
         if (result != 1) {
             throw new ApplicationException(Messages.E00003.replace("認定調査委託先の更新").getMessage());
         }
