@@ -282,7 +282,7 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "G12",
+                    "width": "1035px",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,

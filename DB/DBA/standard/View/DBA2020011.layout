@@ -283,7 +283,24 @@
      "heightForDialog": "M",
      "firstFocusFieldName": "",
      "lastFocusFieldName": "",
-     "modes": [],
+     "modes": [
+      {
+       "modeKey": "表示モード",
+       "modeValue": "登録"
+      },
+      {
+       "modeKey": "表示Heightサイズ",
+       "modeValue": "サイズ250"
+      },
+      {
+       "modeKey": "表示widthサイズ",
+       "modeValue": "モード2"
+      },
+      {
+       "modeKey": "台帳種別の列を",
+       "modeValue": "表示する"
+      }
+     ],
      "publicEvents": [
       {
        "eventName": "onClick_btnAddShisetsuNyutaisho"
@@ -381,19 +398,19 @@
      "labelLAlign": 2,
      "dataSource": [
       {
-       "key": "key0",
+       "key": "hihokenshaDaicho",
        "value": "被保険者台帳"
       },
       {
-       "key": "key1",
+       "key": "tekiyoJogaishaDaicho",
        "value": "適用除外者台帳"
       },
       {
-       "key": "key2",
+       "key": "tashichosonJushochiTokureishaDaicho",
        "value": "他市町村住所地特例者台帳"
       }
      ],
-     "selectedItem": "key0",
+     "selectedItem": null,
      "isBlankLine": false,
      "disabledItem": []
     },
@@ -514,7 +531,24 @@
      "heightForDialog": "M",
      "firstFocusFieldName": "",
      "lastFocusFieldName": "",
-     "modes": [],
+     "modes": [
+      {
+       "modeKey": "施設選択表示",
+       "modeValue": "表示しない"
+      },
+      {
+       "modeKey": "事業者選択",
+       "modeValue": "表示しない"
+      },
+      {
+       "modeKey": "他特例施設選択",
+       "modeValue": "表示しない"
+      },
+      {
+       "modeKey": "除外施設選択",
+       "modeValue": "表示する"
+      }
+     ],
      "publicEvents": [],
      "publicEventsAlias": []
     }
@@ -587,7 +621,7 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "異動登録",
+   "stateName": "照会",
    "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
@@ -615,30 +649,159 @@
      "visibleDiv": "ccdShisetsuJoho",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
-   "events": [
-    {
-     "fieldName": "btnSave",
-     "event": "onClick",
-     "transition": "異動完了"
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnToDecide",
-     "event": "onClick",
-     "transition": "異動登録"
-    }
-   ]
+   "events": []
   },
   {
    "order": "2",
-   "stateName": "異動完了",
+   "stateName": "追加",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "Dba2020011ShisetsuNyutaishoKanriTaishoshaJoho",
+     "panelState": "visible",
+     "fixedDiv": "Yes"
+    },
+    {
+     "visibleDiv": "ccdAtenaShokaiSimple",
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "ccdKaigoShikakuKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Dba2020011Meisai",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdShisetsuJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "validation": {},
+   "events": []
+  },
+  {
+   "order": "3",
+   "stateName": "修正",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "Dba2020011ShisetsuNyutaishoKanriTaishoshaJoho",
+     "panelState": "visible",
+     "fixedDiv": "Yes"
+    },
+    {
+     "visibleDiv": "ccdAtenaShokaiSimple",
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "ccdKaigoShikakuKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Dba2020011Meisai",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdShisetsuJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "validation": {},
+   "events": []
+  },
+  {
+   "order": "4",
+   "stateName": "削除",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "Dba2020011ShisetsuNyutaishoKanriTaishoshaJoho",
+     "panelState": "visible",
+     "fixedDiv": "Yes"
+    },
+    {
+     "visibleDiv": "ccdAtenaShokaiSimple",
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "ccdKaigoShikakuKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Dba2020011Meisai",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdShisetsuJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "validation": {},
+   "events": []
+  },
+  {
+   "order": "5",
+   "stateName": "完了",
    "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
@@ -651,26 +814,22 @@
      "visibleDiv": "ccdKaigoKanryoMessage",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
    "validation": {},
-   "events": [
-    {
-     "fieldName": "btnSave",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnComplete",
-     "event": "onClick",
-     "transition": "終了"
-    },
-    {
-     "fieldName": "btnToDecide",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
+   "events": []
   }
  ],
  "currentState": "All",
@@ -716,125 +875,63 @@
  "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "ShisetsuNyutaishoKyotsu",
+   "commonButtonAreaId": "照会",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonReSearch",
+     "buttonProperty": {
+      "fieldName": "btnReSearch",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": "2px",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReSearch",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "更新",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "照会"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "追加",
    "buttonSetting": [
     {
      "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
-      "fieldName": "btnSave",
-      "items": [],
-      "controlType": "CommonButtonUpdate",
-      "width": 2,
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnSave",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "onClick": "onClick_btnSave",
-      "text": "更新",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": "施設入退所異動を"
-     }
-    },
-    {
-     "buttonKind": "CommonButtonBack",
-     "buttonProperty": {
-      "fieldName": "btnResearch",
-      "items": [],
-      "controlType": "CommonButtonNext",
-      "width": 2,
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnResearch",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "onClick": "onClick_btnResearch",
-      "text": "戻る",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": "対象者検索に"
-     }
-    },
-    {
-     "buttonKind": "CommonButtonBack",
-     "buttonProperty": {
-      "fieldName": "btnReturnSearchResult",
-      "items": [],
-      "controlType": "CommonButtonNext",
-      "width": 2,
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnReturnSearchResult",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "onClick": "",
-      "text": "戻る",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": "該当者一覧に"
-     }
-    }
-   ],
-   "states": [
-    {
-     "state": "異動登録"
-    }
-   ],
-   "isFinishButtonOnTheRight": false
-  },
-  {
-   "commonButtonAreaId": "Complete",
-   "buttonSetting": [
-    {
-     "buttonKind": "CommonButtonComplete",
-     "buttonProperty": {
-      "fieldName": "btnComplete",
+      "fieldName": "btnAddUpdate",
       "items": [],
       "controlType": "CommonButtonComplete",
-      "width": 2,
+      "width": "S",
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -847,27 +944,318 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btnComplete",
+      "selectControlID": "btnAddUpdate",
       "helpMessageID": "",
       "jpControlName": "",
-      "onClick": "",
       "text": "完了",
-      "appearance": 0,
-      "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "施設入退所異動を"
+      "additionalText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnAddCancel",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnAddCancel",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "やめる",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "追加を",
+      "suffixText": ""
      }
     }
    ],
    "states": [
     {
-     "state": "異動完了"
+     "state": "追加"
     }
    ],
-   "isFinishButtonOnTheRight": false
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "修正",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonUpdate",
+     "buttonProperty": {
+      "fieldName": "btnModifyUpdate",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnModifyUpdate",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "保存",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnModifyCancel",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnModifyCancel",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "やめる",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "修正を",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "修正"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "削除",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonUpdate",
+     "buttonProperty": {
+      "fieldName": "btnDeleteUpdate",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnDeleteUpdate",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "保存",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnDeleteCancel",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnDeleteCancel",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "やめる",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "prefixText": "削除を",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "削除"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "完了",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnBack",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnBack",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "該当一覧へ戻る"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonReSearch",
+     "buttonProperty": {
+      "fieldName": "btnCompleteReSaerch",
+      "items": [],
+      "controlType": "CommonButtonReSearch",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCompleteReSaerch",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "再検索",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "完了"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
   }
  ],
  "packageName": ""
