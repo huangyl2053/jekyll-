@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinchiNoryokuKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShokujiKoiHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TankiKiokuKomoku;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.IchijiHanteiTestEntityCreator;
+import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
