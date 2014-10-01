@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002.FukaErrorShori
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002.dgFukaErrorList_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.mapper.FukaErrorGridMapper;
 import jp.co.ndensan.reams.db.dbb.realservice.FukaErrorReportService;
+import jp.co.ndensan.reams.db.dbb.realservice.report.FukaErrorListPrinter;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReport;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportBatchInfo;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportConverterFactory;
@@ -26,7 +27,10 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.report.IReportPublishable;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 
 /**
  * 賦課エラー修正画面の、エラー一覧を表示するパネルについての処理を行うクラスです。
@@ -40,7 +44,7 @@ public class FukaErrorReportView {
 
     static {
         サブ業務コード = SubGyomuCode.DBB介護賦課;
-        内部帳票ID = new RString("0123");
+        内部帳票ID = new RString("FukaErrorList");
     }
 
     /**
@@ -91,8 +95,8 @@ public class FukaErrorReportView {
      * @param div 賦課エラー一覧パネル
      * @return FileData
      */
-    public FileData onClick_btnCsvDownload(FukaErrorReportViewDiv div) {
-        FileData response = new FileData();
+    public IDownLoadServletResponse onClick_btnCsvDownload(FukaErrorReportViewDiv div, IDownLoadServletResponse response) {
+//        FileData response = new FileData();
         InternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
 
         InternalReportInfo reportInfo = InternalReportKihon.getInternalReportInfo(kihonDiv);
@@ -103,7 +107,7 @@ public class FukaErrorReportView {
         InternalReportCsvConverter converter = InternalReportConverterFactory.createCsvConvertor(サブ業務コード);
         byte[] csvByteData = converter.convertCsvByteData(internalReport);
 
-        response.setFileData(csvByteData);
+        response.writeData(csvByteData);
         response.setFileName(converter.getFileName(internalReport));
         return response;
     }
@@ -141,7 +145,6 @@ public class FukaErrorReportView {
 
     /**
      * 資格不整合処理へ遷移するボタンをクリックした際、onClickEvent前に実行されるバリデーションチェックイベントです。<br/>
-     * 現在選択中の
      *
      * @param div 賦課エラー一覧パネル
      * @return ResponseData
@@ -219,6 +222,39 @@ public class FukaErrorReportView {
         ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
         //TODO n8178 城間篤人 画面遷移先に渡すデータなどの設定を行う。Model化後に対応したほうがよい？ 2014年10月3日まで
         response.data = div;
+        return response;
+    }
+
+    /**
+     * 発行ボタンがクリックされた際に実行されるイベントです。<br/>
+     * グリッド上に表示されている内部帳票の情報を、印刷可能なソースデータに変換してプレビュー画面に引き渡します。
+     *
+     * @param div 賦課エラー一覧パネル
+     * @return ResponseData
+     */
+    public ResponseData<SourceDataCollection> onClick_btnReportPublish(FukaErrorReportViewDiv div) {
+        return new FukaErrorListPublisher().publish(div);
+    }
+
+    private static final class FukaErrorListPublisher implements IReportPublishable<FukaErrorReportViewDiv> {
+
+        @Override
+        public ResponseData<SourceDataCollection> publish(FukaErrorReportViewDiv div) {
+            FukaErrorListPrinter printer = new FukaErrorListPrinter();
+
+            InternalReportInfo info = InternalReportKihon.getInternalReportInfo(div.getCcdFukaErrorCommon());
+            InternalReportBatchInfo batchInfo = InternalReportKihon.getInternalReportBatchInfo(div.getCcdFukaErrorCommon());
+            List<FukaErrorReportItem> reportItemList = FukaErrorGridMapper.toFukaErrorReportItemList(div.getDgFukaErrorList().getDataSource());
+            FukaErrorReport report = new FukaErrorReport(サブ業務コード, info, batchInfo, reportItemList);
+
+            SourceDataCollection sdc = printer.print(report);
+            return _createResponseData(sdc);
+        }
+    }
+
+    private static <T> ResponseData<T> _createResponseData(T setIntoData) {
+        ResponseData<T> response = new ResponseData<>();
+        response.data = setIntoData;
         return response;
     }
 
