@@ -23,26 +23,50 @@ var DBZ;
                 }
                 DisplayMode.prototype.Shokai = function () {
                     this.controls.dgIryoHokenRireki().readOnly = true;
+                    this.controls.btnAddIryoHoken().displayNone = true;
 
                     var gridSetting = this.controls.dgIryoHokenRireki().gridSetting;
                     gridSetting.isShowDeleteButtonColumn = false;
                     gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.columns[0].visible = false;
 
                     this.controls.dgIryoHokenRireki().gridSetting = gridSetting;
 
                     this.controls.dgIryoHokenRireki().width = 940;
+
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
                 };
 
                 DisplayMode.prototype.Toroku = function () {
                     this.controls.dgIryoHokenRireki().readOnly = false;
+                    this.controls.btnAddIryoHoken().displayNone = false;
 
                     var gridSetting = this.controls.dgIryoHokenRireki().gridSetting;
                     gridSetting.isShowDeleteButtonColumn = true;
                     gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.columns[0].visible = false;
 
                     this.controls.dgIryoHokenRireki().gridSetting = gridSetting;
 
                     this.controls.dgIryoHokenRireki().width = 980;
+
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
+                };
+
+                DisplayMode.prototype.ShikakuIdo = function () {
+                    this.controls.dgIryoHokenRireki().readOnly = false;
+                    this.controls.btnAddIryoHoken().displayNone = false;
+
+                    var gridSetting = this.controls.dgIryoHokenRireki().gridSetting;
+                    gridSetting.isShowDeleteButtonColumn = true;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.columns[0].visible = true;
+
+                    this.controls.dgIryoHokenRireki().gridSetting = gridSetting;
+
+                    this.controls.dgIryoHokenRireki().width = 980;
+
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
                 };
                 return DisplayMode;
             })();
@@ -54,10 +78,12 @@ var DBZ;
                 }
                 WidthMode.prototype.Width1 = function () {
                     this.controls.dgIryoHokenRireki().width = 800;
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
                 };
 
                 WidthMode.prototype.Width2 = function () {
                     this.controls.dgIryoHokenRireki().width = 700;
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
                 };
                 return WidthMode;
             })();

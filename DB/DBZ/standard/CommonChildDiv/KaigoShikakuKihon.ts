@@ -14,8 +14,8 @@ module DBZ {
                 this.controls = new Controls(fieldName);
             }
 
-            public RenrakusakiNashiMode() {
-                return new Modes.RenrakusakiNashiMode(this.controls);
+            public RenrakusakiAriMode() {
+                return new Modes.RenrakusakiAriMode(this.controls);
             }
             
             public HihokenrirekiNashiMode() {
@@ -29,15 +29,17 @@ module DBZ {
 
         export module Modes {
 
-            export class RenrakusakiNashiMode {
+            export class RenrakusakiAriMode {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
                     this.controls = controls;
                 }
 
-                public RenrakusakiNashi(): void {
-                    this.controls.btnRenrakusaki().displayNone = true;
+                public RenrakusakiAri(): void {
+                    this.controls.btnRenrakusaki().displayNone = false;
+
+                 
                 }
             }
 
@@ -60,7 +62,7 @@ module DBZ {
                     this.controls = controls;
                 }
 
-                public NinteirirekiNashi(): void {
+                public NinteirirekiAri(): void {
                     this.controls.btnNinteiRireki().displayNone = true;
                 }
             }

@@ -219,9 +219,45 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
         _CommonChildDivModeUtil.setMode( this.modes, HihokenrirekiNashiMode.class , value );
     }
 
+    public static enum RenrakusakiAriMode implements ICommonChildDivMode {
+
+        RenrakusakiAri("RenrakusakiAri");
+
+        private final String name;
+
+        private RenrakusakiAriMode(final String name) {
+            this.name = name;
+        }
+
+        public static RenrakusakiAriMode getEnum(String str) {
+            RenrakusakiAriMode[] enumArray = RenrakusakiAriMode.values();
+
+            for (RenrakusakiAriMode enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public RenrakusakiAriMode getMode_RenrakusakiAriMode() {
+        return (RenrakusakiAriMode) _CommonChildDivModeUtil.getMode( this.modes, RenrakusakiAriMode.class );
+    }
+
+    public void setMode_RenrakusakiAriMode( RenrakusakiAriMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, RenrakusakiAriMode.class , value );
+    }
+
     public static enum NinteirirekiNashiMode implements ICommonChildDivMode {
 
-        NinteirirekiNashi("NinteirirekiNashi");
+        NinteirirekiAri("NinteirirekiAri");
 
         private final String name;
 
@@ -253,42 +289,6 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     public void setMode_NinteirirekiNashiMode( NinteirirekiNashiMode value ) {
         _CommonChildDivModeUtil.setMode( this.modes, NinteirirekiNashiMode.class , value );
-    }
-
-    public static enum RenrakusakiNashiMode implements ICommonChildDivMode {
-
-        RenrakusakiNashi("RenrakusakiNashi");
-
-        private final String name;
-
-        private RenrakusakiNashiMode(final String name) {
-            this.name = name;
-        }
-
-        public static RenrakusakiNashiMode getEnum(String str) {
-            RenrakusakiNashiMode[] enumArray = RenrakusakiNashiMode.values();
-
-            for (RenrakusakiNashiMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public RenrakusakiNashiMode getMode_RenrakusakiNashiMode() {
-        return (RenrakusakiNashiMode) _CommonChildDivModeUtil.getMode( this.modes, RenrakusakiNashiMode.class );
-    }
-
-    public void setMode_RenrakusakiNashiMode( RenrakusakiNashiMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, RenrakusakiNashiMode.class , value );
     }
 
     //--------------- この行より下にコードを追加してください -------------------

@@ -5,8 +5,8 @@
             function ModeController(fieldName) {
                 this.controls = new KaigoShikakuKihon.Controls(fieldName);
             }
-            ModeController.prototype.RenrakusakiNashiMode = function () {
-                return new Modes.RenrakusakiNashiMode(this.controls);
+            ModeController.prototype.RenrakusakiAriMode = function () {
+                return new Modes.RenrakusakiAriMode(this.controls);
             };
 
             ModeController.prototype.HihokenrirekiNashiMode = function () {
@@ -21,16 +21,16 @@
         KaigoShikakuKihon.ModeController = ModeController;
 
         (function (Modes) {
-            var RenrakusakiNashiMode = (function () {
-                function RenrakusakiNashiMode(controls) {
+            var RenrakusakiAriMode = (function () {
+                function RenrakusakiAriMode(controls) {
                     this.controls = controls;
                 }
-                RenrakusakiNashiMode.prototype.RenrakusakiNashi = function () {
-                    this.controls.btnRenrakusaki().displayNone = true;
+                RenrakusakiAriMode.prototype.RenrakusakiAri = function () {
+                    this.controls.btnRenrakusaki().displayNone = false;
                 };
-                return RenrakusakiNashiMode;
+                return RenrakusakiAriMode;
             })();
-            Modes.RenrakusakiNashiMode = RenrakusakiNashiMode;
+            Modes.RenrakusakiAriMode = RenrakusakiAriMode;
 
             var HihokenrirekiNashiMode = (function () {
                 function HihokenrirekiNashiMode(controls) {
@@ -47,7 +47,7 @@
                 function NinteirirekiNashiMode(controls) {
                     this.controls = controls;
                 }
-                NinteirirekiNashiMode.prototype.NinteirirekiNashi = function () {
+                NinteirirekiNashiMode.prototype.NinteirirekiAri = function () {
                     this.controls.btnNinteiRireki().displayNone = true;
                 };
                 return NinteirirekiNashiMode;

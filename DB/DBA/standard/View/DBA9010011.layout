@@ -2,6 +2,90 @@
  "fieldName": "Page",
  "items": [
   {
+   "fieldName": "Dba9010011KaigoKanryoMessage",
+   "items": [
+    {
+     "fieldName": "ccdKaigoKanryoMessage",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0px",
+     "marginRight": "0px",
+     "selectControlID": "ccdKaigoKanryoMessage",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "packageName": "",
+     "marginTop": "0px",
+     "marginBottom": "0px",
+     "businessId": "DBZ",
+     "controlName": "KaigoKanryoMessage",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "modes": [],
+     "publicEvents": [],
+     "publicEventsAlias": [],
+     "KanryoMessage_width": "G12"
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0px",
+   "marginRight": "0px",
+   "selectControlID": "Dba9010011KaigoKanryoMessage",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "Dba9010011KaigoKanryoMessage"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "0px",
+   "marginBottom": "0px",
+   "eraseBorder": true,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "canPost": true
+  },
+  {
    "fieldName": "Dba9010011TennyuHoryuTokuteiJushIchiran",
    "items": [
     {
@@ -33,7 +117,7 @@
      "imageWidth": "",
      "imageHeight": "",
      "icon": 0,
-     "heightTextBoxMatches": false
+     "heightTextBoxMatches": true
     },
     {
      "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
@@ -64,7 +148,7 @@
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
-      "isShowRowState": true,
+      "isShowRowState": false,
       "isShowSelectButtonColumn": false,
       "isShowModifyButtonColumn": true,
       "isShowDeleteButtonColumn": true,
@@ -77,6 +161,20 @@
        "headerHeight": 0
       },
       "columns": [
+       {
+        "columnName": "状態",
+        "dataName": "state",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "state"
+       },
        {
         "columnName": "市町村コード",
         "dataName": "lasdecCode",
@@ -299,24 +397,28 @@
    "onLoad": "",
    "title": "",
    "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [],
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "Dba9010011TennyuHoryuTokuteiJushIchiran"
+    }
+   ],
    "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
+   "marginTop": "0px",
+   "marginBottom": "D0",
    "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false,
+   "readOnly": true,
    "height": "Auto",
    "focusPositionID": "stateTransitionProperty",
-   "canPost": false
+   "canPost": true
   },
   {
    "fieldName": "Dba9010011TennyuHoryuTokuteiJushoMeisai",
@@ -450,7 +552,7 @@
      "permitCharactor": ""
     },
     {
-     "fieldName": "ccbChoikiInput",
+     "fieldName": "ccdChoikiInput",
      "items": [],
      "controlType": "CommonChildDiv",
      "width": "XS",
@@ -466,7 +568,7 @@
      "authorityMode": 0,
      "marginLeft": "0em",
      "marginRight": "0em",
-     "selectControlID": "ccbChoikiInput",
+     "selectControlID": "ccdChoikiInput",
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
@@ -491,7 +593,7 @@
      "txtChoikiName_width": "450px"
     },
     {
-     "fieldName": "ccbBanchi",
+     "fieldName": "ccdBanchi",
      "items": [],
      "controlType": "CommonChildDiv",
      "width": "XS",
@@ -507,7 +609,7 @@
      "authorityMode": 0,
      "marginLeft": "0em",
      "marginRight": "0em",
-     "selectControlID": "ccbBanchi",
+     "selectControlID": "ccdBanchi",
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
@@ -534,7 +636,7 @@
      "txtBanchiCode4_displayNone": true
     },
     {
-     "fieldName": "ccbNyushoShisetsuJohoInput",
+     "fieldName": "ccdNyushoShisetsuJohoInput",
      "items": [],
      "controlType": "CommonChildDiv",
      "width": "XS",
@@ -550,7 +652,7 @@
      "authorityMode": 0,
      "marginLeft": "0em",
      "marginRight": "0em",
-     "selectControlID": "ccbNyushoShisetsuJohoInput",
+     "selectControlID": "ccdNyushoShisetsuJohoInput",
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
@@ -568,12 +670,7 @@
      "lastFocusFieldName": "",
      "modes": [],
      "publicEvents": [],
-     "publicEventsAlias": [],
-     "btnJigyoshaInputGuide_displayNone": false,
-     "btnOtherTokureiShisetsuInputGuide_displayNone": true,
-     "btnJogaiShisetsuInputGuide_displayNone": true,
-     "radShisetsuShurui_displayNone": false,
-     "ShisetsuJoho_width": "800px"
+     "publicEventsAlias": []
     }
    ],
    "controlType": "Panel",
@@ -614,44 +711,6 @@
    "height": "Auto",
    "focusPositionID": "restoreLayoutButton",
    "canPost": false
-  },
-  {
-   "fieldName": "ccbKaigoKanryoMessage",
-   "items": [],
-   "controlType": "CommonChildDiv",
-   "width": "XS",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "0px",
-   "marginRight": "0px",
-   "selectControlID": "ccbKaigoKanryoMessage",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "relation": [],
-   "packageName": "",
-   "marginTop": "0px",
-   "marginBottom": "0px",
-   "businessId": "DBZ",
-   "controlName": "KaigoKanryoMessage",
-   "dataPassingForDialog": [],
-   "dialogOkEventNameForDialog": "",
-   "dialogCancelEventNameForDialog": "",
-   "canTransferEvent": true,
-   "heightForDialog": "M",
-   "firstFocusFieldName": "",
-   "lastFocusFieldName": "",
-   "modes": [],
-   "publicEvents": [],
-   "publicEventsAlias": [],
-   "KanryoMessage_width": "G12"
   }
  ],
  "controlType": null,
@@ -693,17 +752,17 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccbBanchi",
+     "visibleDiv": "ccdBanchi",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccbChoikiInput",
+     "visibleDiv": "ccdChoikiInput",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccbNyushoShisetsuJohoInput",
+     "visibleDiv": "ccdNyushoShisetsuJohoInput",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     }
@@ -738,17 +797,17 @@
      "transition": ""
     },
     {
-     "fieldName": "btnUpdateAdd",
+     "fieldName": "btnAddUpdate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnUpDateMod",
+     "fieldName": "btnModUpDate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnUpdateDel",
+     "fieldName": "btnDelUpdate",
      "event": "onClick",
      "transition": ""
     }
@@ -771,17 +830,17 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccbChoikiInput",
+     "visibleDiv": "ccdChoikiInput",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccbBanchi",
+     "visibleDiv": "ccdBanchi",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccbNyushoShisetsuJohoInput",
+     "visibleDiv": "ccdNyushoShisetsuJohoInput",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -816,17 +875,17 @@
      "transition": "照会"
     },
     {
-     "fieldName": "btnUpdateAdd",
+     "fieldName": "btnAddUpdate",
      "event": "onClick",
      "transition": "完了"
     },
     {
-     "fieldName": "btnUpDateMod",
+     "fieldName": "btnModUpDate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnUpdateDel",
+     "fieldName": "btnDelUpdate",
      "event": "onClick",
      "transition": ""
     }
@@ -849,17 +908,17 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccbChoikiInput",
+     "visibleDiv": "ccdChoikiInput",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccbBanchi",
+     "visibleDiv": "ccdBanchi",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccbNyushoShisetsuJohoInput",
+     "visibleDiv": "ccdNyushoShisetsuJohoInput",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -894,17 +953,17 @@
      "transition": ""
     },
     {
-     "fieldName": "btnUpdateAdd",
+     "fieldName": "btnAddUpdate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnUpDateMod",
+     "fieldName": "btnModUpDate",
      "event": "onClick",
      "transition": "完了"
     },
     {
-     "fieldName": "btnUpdateDel",
+     "fieldName": "btnDelUpdate",
      "event": "onClick",
      "transition": ""
     }
@@ -927,17 +986,17 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccbChoikiInput",
+     "visibleDiv": "ccdChoikiInput",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccbBanchi",
+     "visibleDiv": "ccdBanchi",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccbNyushoShisetsuJohoInput",
+     "visibleDiv": "ccdNyushoShisetsuJohoInput",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     }
@@ -972,17 +1031,17 @@
      "transition": ""
     },
     {
-     "fieldName": "btnUpdateAdd",
+     "fieldName": "btnAddUpdate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnUpDateMod",
+     "fieldName": "btnModUpDate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnUpdateDel",
+     "fieldName": "btnDelUpdate",
      "event": "onClick",
      "transition": "完了"
     }
@@ -995,87 +1054,19 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "ccbKaigoKanryoMessage",
+     "visibleDiv": "ccdKaigoKanryoMessage",
      "panelState": "visible",
      "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "btnModCancel",
-     "event": "onClick",
-     "transition": ""
     },
     {
-     "fieldName": "btnDelCancel",
-     "event": "onClick",
-     "transition": ""
+     "visibleDiv": "Dba9010011KaigoKanryoMessage",
+     "panelState": "visible",
+     "fixedDiv": "No"
     },
-    {
-     "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
-     "event": "onSelect",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnAddCancel",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnUpdateAdd",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnUpDateMod",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnUpdateDel",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "6",
-   "stateName": "一覧選択",
-   "wizardName": "",
-   "showWizard": false,
-   "visibleDivs": [
     {
      "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushIchiran",
      "panelState": "visible",
      "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushoMeisai",
-     "panelState": "readOnly visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ccbChoikiInput",
-     "panelState": "readOnly visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ccbBanchi",
-     "panelState": "readOnly visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ccbNyushoShisetsuJohoInput",
-     "panelState": "readOnly visible",
-     "fixedDiv": "No"
     }
    ],
    "supplementInfo": "",
@@ -1095,12 +1086,12 @@
     {
      "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
      "event": "onSelect",
-     "transition": "照会"
+     "transition": ""
     },
     {
      "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
      "event": "onSelectByDblClick",
-     "transition": "照会"
+     "transition": ""
     },
     {
      "fieldName": "btnAddCancel",
@@ -1108,24 +1099,24 @@
      "transition": ""
     },
     {
-     "fieldName": "btnUpdateAdd",
+     "fieldName": "btnAddUpdate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnUpDateMod",
+     "fieldName": "btnModUpDate",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnUpdateDel",
+     "fieldName": "btnDelUpdate",
      "event": "onClick",
      "transition": ""
     }
    ]
   }
  ],
- "currentState": "照会",
+ "currentState": "完了",
  "id": "DBA9010011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -1151,7 +1142,7 @@
     {
      "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
-      "fieldName": "btnUpdateAdd",
+      "fieldName": "btnAddUpdate",
       "items": [],
       "controlType": "CommonButtonUpdate",
       "width": "S",
@@ -1167,12 +1158,12 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btnUpdateAdd",
+      "selectControlID": "btnAddUpdate",
       "helpMessageID": "",
       "jpControlName": "",
       "onBeforeClick": "",
       "onAfterClick": "",
-      "onClick": "",
+      "onClick": "onClick_btnAddUpdate",
       "text": "保存",
       "appearance": 0,
       "imageFileUrl": "",
@@ -1207,8 +1198,8 @@
       "jpControlName": "",
       "onBeforeClick": "",
       "onAfterClick": "",
-      "onClick": "",
-      "text": "追加",
+      "onClick": "onClick_btnAddCancel",
+      "text": "追加を",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
@@ -1216,7 +1207,7 @@
       "icon": 0,
       "heightTextBoxMatches": false,
       "prefixText": "",
-      "suffixText": "をやめる"
+      "suffixText": "やめる"
      }
     }
    ],
@@ -1235,7 +1226,7 @@
     {
      "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
-      "fieldName": "btnUpDateMod",
+      "fieldName": "btnModUpDate",
       "items": [],
       "controlType": "CommonButtonUpdate",
       "width": "S",
@@ -1251,12 +1242,12 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btnUpDateMod",
+      "selectControlID": "btnModUpDate",
       "helpMessageID": "",
       "jpControlName": "",
       "onBeforeClick": "",
       "onAfterClick": "",
-      "onClick": "",
+      "onClick": "onClick_btnModUpDate",
       "text": "保存",
       "appearance": 0,
       "imageFileUrl": "",
@@ -1291,8 +1282,8 @@
       "jpControlName": "",
       "onBeforeClick": "",
       "onAfterClick": "",
-      "onClick": "",
-      "text": "修正",
+      "onClick": "onClick_btnModCancel",
+      "text": "修正を",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
@@ -1300,7 +1291,7 @@
       "icon": 0,
       "heightTextBoxMatches": false,
       "prefixText": "",
-      "suffixText": "をやめる"
+      "suffixText": "やめる"
      }
     }
    ],
@@ -1319,7 +1310,7 @@
     {
      "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
-      "fieldName": "btnUpdateDel",
+      "fieldName": "btnDelUpdate",
       "items": [],
       "controlType": "CommonButtonUpdate",
       "width": "S",
@@ -1335,12 +1326,12 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btnUpdateDel",
+      "selectControlID": "btnDelUpdate",
       "helpMessageID": "",
       "jpControlName": "",
       "onBeforeClick": "",
       "onAfterClick": "",
-      "onClick": "",
+      "onClick": "onClick_btnDelUpdate",
       "text": "保存",
       "appearance": 0,
       "imageFileUrl": "",
@@ -1375,8 +1366,8 @@
       "jpControlName": "",
       "onBeforeClick": "",
       "onAfterClick": "",
-      "onClick": "",
-      "text": "削除",
+      "onClick": "onClick_btnDelCancel",
+      "text": "削除を",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
@@ -1384,7 +1375,7 @@
       "icon": 0,
       "heightTextBoxMatches": false,
       "prefixText": "",
-      "suffixText": "をやめる"
+      "suffixText": "やめる"
      }
     }
    ],
@@ -1403,7 +1394,7 @@
     {
      "buttonKind": "CommonButtonBack",
      "buttonProperty": {
-      "fieldName": "Element7",
+      "fieldName": "btnBackGaitoIchiran",
       "items": [],
       "controlType": "CommonButtonFree",
       "width": "1px",
@@ -1419,12 +1410,12 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "Element7",
+      "selectControlID": "btnBackGaitoIchiran",
       "helpMessageID": "",
       "jpControlName": "",
       "onBeforeClick": "",
       "onAfterClick": "",
-      "onClick": "",
+      "onClick": "onClick_btnBackGaitoIchiran",
       "text": "該当一覧",
       "appearance": 0,
       "imageFileUrl": "",
@@ -1438,9 +1429,9 @@
      }
     },
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonReSearch",
      "buttonProperty": {
-      "fieldName": "Element8",
+      "fieldName": "btnReSearchComplete",
       "items": [],
       "controlType": "CommonButtonFree",
       "width": "S",
@@ -1456,12 +1447,12 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "Element8",
+      "selectControlID": "btnReSearchComplete",
       "helpMessageID": "",
       "jpControlName": "",
       "onBeforeClick": "",
       "onAfterClick": "",
-      "onClick": "",
+      "onClick": "onClick_btnReSearchComplete",
       "text": "再検索をする",
       "appearance": 0,
       "imageFileUrl": "",
@@ -1469,6 +1460,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
+      "additionalText": "",
       "prefixText": "",
       "suffixText": ""
      }
@@ -1510,7 +1502,7 @@
       "jpControlName": "",
       "onBeforeClick": "",
       "onAfterClick": "",
-      "onClick": "",
+      "onClick": "onClick_btnReSeacrh",
       "text": "再検索",
       "appearance": 0,
       "imageFileUrl": "",

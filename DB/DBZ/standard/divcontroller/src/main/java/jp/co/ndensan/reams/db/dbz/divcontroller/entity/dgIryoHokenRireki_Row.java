@@ -3,14 +3,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Sep 26 17:23:05 JST 2014 
+ * Tue Sep 30 16:43:45 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgIryoHokenRireki_Row extends DataRow {
 
+    private RString state;
     private TextBoxFlexibleDate kanyuDate;
     private TextBoxFlexibleDate dattaiDate;
     private RString iryoHokenShubetsuKey;
@@ -32,6 +33,7 @@ public class dgIryoHokenRireki_Row extends DataRow {
 
     public dgIryoHokenRireki_Row() {
         super();
+        this.state = RString.EMPTY;
         this.kanyuDate = new TextBoxFlexibleDate();
         this.dattaiDate = new TextBoxFlexibleDate();
         this.iryoHokenShubetsuKey = RString.EMPTY;
@@ -42,8 +44,9 @@ public class dgIryoHokenRireki_Row extends DataRow {
         this.kigoNo = RString.EMPTY;
     }
 
-    public dgIryoHokenRireki_Row(TextBoxFlexibleDate kanyuDate, TextBoxFlexibleDate dattaiDate, RString iryoHokenShubetsuKey, RString iryoHokenShubetsu, RString hokenshaNo, RString hokenshaMeisho, RString hokensha, RString kigoNo) {
+    public dgIryoHokenRireki_Row(RString state, TextBoxFlexibleDate kanyuDate, TextBoxFlexibleDate dattaiDate, RString iryoHokenShubetsuKey, RString iryoHokenShubetsu, RString hokenshaNo, RString hokenshaMeisho, RString hokensha, RString kigoNo) {
         super();
+        this.setOriginalData("state", state);
         this.setOriginalData("kanyuDate", kanyuDate);
         this.setOriginalData("dattaiDate", dattaiDate);
         this.setOriginalData("iryoHokenShubetsuKey", iryoHokenShubetsuKey);
@@ -52,6 +55,7 @@ public class dgIryoHokenRireki_Row extends DataRow {
         this.setOriginalData("hokenshaMeisho", hokenshaMeisho);
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("kigoNo", kigoNo);
+        this.state = state;
         this.kanyuDate = kanyuDate;
         this.dattaiDate = dattaiDate;
         this.iryoHokenShubetsuKey = iryoHokenShubetsuKey;
@@ -60,6 +64,10 @@ public class dgIryoHokenRireki_Row extends DataRow {
         this.hokenshaMeisho = hokenshaMeisho;
         this.hokensha = hokensha;
         this.kigoNo = kigoNo;
+    }
+
+    public RString getState() {
+        return state;
     }
 
     public TextBoxFlexibleDate getKanyuDate() {
@@ -92,6 +100,11 @@ public class dgIryoHokenRireki_Row extends DataRow {
 
     public RString getKigoNo() {
         return kigoNo;
+    }
+
+    public void setState(RString state) {
+        this.setOriginalData("state", state);
+        this.state = state;
     }
 
     public void setKanyuDate(TextBoxFlexibleDate kanyuDate) {

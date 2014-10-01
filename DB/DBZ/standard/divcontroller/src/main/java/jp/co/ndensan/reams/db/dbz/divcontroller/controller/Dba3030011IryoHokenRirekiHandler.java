@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IryoHokenRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IryoHokenRirekiDiv.DisplayMode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * @author N8223　朴義一
@@ -47,6 +46,7 @@ public class Dba3030011IryoHokenRirekiHandler {
      */
     private void applyVisibility() {
         div.setMode_DisplayMode(DisplayMode.Shokai);
+        //div.setMode_DisplayMode(DisplayMode.Toroku);
     }
 
     void setModeDisplayMode(DisplayMode DisplayMode) {

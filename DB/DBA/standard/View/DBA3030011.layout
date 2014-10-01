@@ -251,37 +251,6 @@
    "fieldName": "Dba3030011IryoHokenIchiran",
    "items": [
     {
-     "fieldName": "btnAddIryoHoken",
-     "items": [],
-     "controlType": "Button",
-     "width": "S",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnAddIryoHoken",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "text": "追加する",
-     "imageWidth": "",
-     "imageHeight": "",
-     "onBeforeClick": "",
-     "onAfterClick": "",
-     "onClick": "onClick_btnAddIryoHoken",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "icon": 0,
-     "heightTextBoxMatches": false
-    },
-    {
      "fieldName": "ccdryoHokenRireki",
      "items": [],
      "controlType": "CommonChildDiv",
@@ -327,7 +296,12 @@
      "heightForDialog": "M",
      "firstFocusFieldName": "",
      "lastFocusFieldName": "",
-     "modes": [],
+     "modes": [
+      {
+       "modeKey": "DisplayMode",
+       "modeValue": "Toroku"
+      }
+     ],
      "publicEvents": [],
      "publicEventsAlias": [],
      "gridSetting": {
@@ -535,7 +509,7 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": true,
+   "readOnly": false,
    "height": "Auto",
    "focusPositionID": "ui-accordion-WestAccordion-header-0",
    "canPost": true
@@ -762,7 +736,7 @@
      "selectControlID": "txtHokenshamei_core",
      "helpMessageID": "",
      "jpControlName": "",
-     "readOnly": true,
+     "readOnly": false,
      "required": false,
      "text": "",
      "isPrivateInfo": false,
@@ -869,7 +843,7 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false,
+   "readOnly": true,
    "height": "Auto",
    "focusPositionID": "Page",
    "canPost": false
@@ -921,6 +895,16 @@
     {
      "visibleDiv": "Dba3030011IryoHokenMeisai",
      "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoAtenaInfo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoShikakuKihon",
+     "panelState": "visible",
      "fixedDiv": "No"
     }
    ],
@@ -998,6 +982,16 @@
     },
     {
      "visibleDiv": "ccdryoHokenRireki",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoAtenaInfo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoShikakuKihon",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -1078,6 +1072,16 @@
      "visibleDiv": "ccdryoHokenRireki",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoAtenaInfo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoShikakuKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "supplementInfo": "",
@@ -1154,6 +1158,16 @@
     },
     {
      "visibleDiv": "ccdryoHokenRireki",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoAtenaInfo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoShikakuKihon",
      "panelState": "visible",
      "fixedDiv": "No"
     }

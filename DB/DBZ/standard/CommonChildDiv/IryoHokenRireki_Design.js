@@ -27,6 +27,37 @@ var DBZ;
                     "fieldName": "IryoHokenRireki",
                     "items": [
                         {
+                            "fieldName": "btnAddIryoHoken",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnAddIryoHoken",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "onClick": "onClick_btnAddIryoHoken",
+                            "text": "追加する",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": true
+                        },
+                        {
                             "fieldName": "dgIryoHokenRireki",
                             "items": [],
                             "controlType": "DataGrid",
@@ -68,6 +99,20 @@ var DBZ;
                                     "headerHeight": 0
                                 },
                                 "columns": [
+                                    {
+                                        "columnName": "状態",
+                                        "dataName": "state",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 50,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "state"
+                                    },
                                     {
                                         "columnName": "加入日",
                                         "dataName": "kanyuDate",
@@ -199,8 +244,8 @@ var DBZ;
                                 ]
                             },
                             "onSort": "",
-                            "onSelect": "",
-                            "onSelectByDblClick": "",
+                            "onSelect": "onSelect_dgIryoHokenRireki",
+                            "onSelectByDblClick": "onSelectByDbClick_dgIryoHokenRireki",
                             "onSelectBySelectButton": "",
                             "onSelectByModifyButton": "onSelectByModifyButton_dgIryoHokenRireki",
                             "onSelectByDeleteButton": "onSelectByDeleteButton_dgIryoHokenRireki",
@@ -213,7 +258,7 @@ var DBZ;
                             "onNoRow": "",
                             "onMultiRows": "",
                             "dataSource": [],
-                            "sortOrder": "kigoNo",
+                            "sortOrder": "hokensha",
                             "isAscending": true,
                             "filterList": [],
                             "activeRowId": -1,
@@ -324,6 +369,15 @@ var DBZ;
                 },
                 {
                     "eventName": "onSelectByDeleteButton_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onSelect_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onSelectByDbClick_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onClick_btnAddIryoHoken"
                 }
             ],
             "publicEventsAlias": []
@@ -336,6 +390,18 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnAddIryoHoken = function () {
+                return "onClick_btnAddIryoHoken";
+            };
+
+            Events.onSelect_dgIryoHokenRireki = function () {
+                return "onSelect_dgIryoHokenRireki";
+            };
+
+            Events.onSelectByDbClick_dgIryoHokenRireki = function () {
+                return "onSelectByDbClick_dgIryoHokenRireki";
+            };
+
             Events.onSelectByModifyButton_dgIryoHokenRireki = function () {
                 return "onSelectByModifyButton_dgIryoHokenRireki";
             };
@@ -365,6 +431,10 @@ var DBZ;
 
             Controls.prototype.IryoHokenRireki = function () {
                 return new UZA.Panel(this.convFiledName("IryoHokenRireki"));
+            };
+
+            Controls.prototype.btnAddIryoHoken = function () {
+                return new UZA.Button(this.convFiledName("btnAddIryoHoken"));
             };
 
             Controls.prototype.dgIryoHokenRireki = function () {
