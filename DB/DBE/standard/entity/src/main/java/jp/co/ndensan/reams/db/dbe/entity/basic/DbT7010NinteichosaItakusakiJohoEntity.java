@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.basic;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
+//import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -69,23 +69,24 @@ public class DbT7010NinteichosaItakusakiJohoEntity implements IDbAccessable {
         this.機関の区分 = 機関の区分;
 
     }
-
-    /**
-     * 認定調査委託先クラスからのコンストラクタです
-     *
-     * @param 認定調査委託先 認定調査委託先
-     */
-    public DbT7010NinteichosaItakusakiJohoEntity(NinteichosaItakusaki 認定調査委託先) {
-        this.市町村コード = 認定調査委託先.getShichosonCode();
-        this.介護事業者番号 = 認定調査委託先.getKaigoJigyoshaNo();
-        this.事業者番号 = 認定調査委託先.getJigyoshaNo();
-        this.介護事業者状況 = 認定調査委託先.is有効();
-        this.調査委託区分 = 認定調査委託先.getChosaItakuKubun();
-        this.割付定員 = 認定調査委託先.getWaritsukeTeiin();
-        this.割付地区 = 認定調査委託先.getWaritsukeChiku();
-        this.機関の区分 = 認定調査委託先.getKikanKubun();
-
-    }
+    //TODO n3317 塚田萌　モデルパッケージ導入時にエラーになるためコメント。対応するときに考える
+//
+//    /**
+//     * 認定調査委託先クラスからのコンストラクタです
+//     *
+//     * @param 認定調査委託先 認定調査委託先
+//     */
+//    public DbT7010NinteichosaItakusakiJohoEntity(NinteichosaItakusaki 認定調査委託先) {
+//        this.市町村コード = 認定調査委託先.getShichosonCode();
+//        this.介護事業者番号 = 認定調査委託先.getKaigoJigyoshaNo();
+//        this.事業者番号 = 認定調査委託先.getJigyoshaNo();
+//        this.介護事業者状況 = 認定調査委託先.is有効();
+//        this.調査委託区分 = 認定調査委託先.getChosaItakuKubun();
+//        this.割付定員 = 認定調査委託先.getWaritsukeTeiin();
+//        this.割付地区 = 認定調査委託先.getWaritsukeChiku();
+//        this.機関の区分 = 認定調査委託先.getKikanKubun();
+//
+//    }
 
     /**
      * 市町村コードを返します

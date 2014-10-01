@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakusei
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoEntityMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoResultMock;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoResultMock;
 import jp.co.ndensan.reams.db.dbe.entity.relate.ShujiiIkenshoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;

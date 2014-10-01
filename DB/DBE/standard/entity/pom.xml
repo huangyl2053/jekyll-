@@ -29,5 +29,10 @@
             <artifactId>DbzEntity</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbeDefinition</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

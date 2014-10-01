@@ -1,8 +1,9 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.helper;
+package jp.co.ndensan.reams.db.dbe.business.helper;
 
 import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbe.business.IShujii;
@@ -38,9 +39,9 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static org.mockito.Mockito.spy;
 
 /**
- * KaigoDoctorを生成するMockです。
+ * モデルパッケージ作成時にエラーになったため仮作成。対応するときに考える。
  *
- * @author N8156 宮本 康
+ * @author N3317 塚田 萌
  */
 public class KaigoDoctorMock {
 

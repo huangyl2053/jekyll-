@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.mapper.KaigoNinteichosainMapper;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
+import static jp.co.ndensan.reams.db.dbe.business.helper.KaigoNinteichosainTestHelper.create認定調査員;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.KaigoNinteichosainTestHelper.*;
 import jp.co.ndensan.reams.db.dbe.entity.helper.MockNinteichosaItakusakiJohoEntity;

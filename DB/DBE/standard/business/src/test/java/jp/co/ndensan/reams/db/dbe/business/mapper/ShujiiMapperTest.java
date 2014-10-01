@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.IShujii;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT7012ShujiiJohoEntityMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiMock;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;

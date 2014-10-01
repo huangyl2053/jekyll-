@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.mapper.ShujiiIkenshoSakuseiIraiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoSakuseiTokusokuHoho;
@@ -13,8 +12,8 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.SakuseiryoSeikyuKubu
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5011ShujiiIkenshoIraiJohoEntityMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoDoctorMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoSakuseiIraiMock;
+import jp.co.ndensan.reams.db.dbe.business.helper.KaigoDoctorMock;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoSakuseiIraiMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

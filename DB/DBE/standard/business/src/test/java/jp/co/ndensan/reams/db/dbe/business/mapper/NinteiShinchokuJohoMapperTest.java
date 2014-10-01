@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.mapper.NinteiShinchokuJohoMapper;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
+import static jp.co.ndensan.reams.db.dbe.business.helper.NinteiShinchokuJohoMock.create認定進捗情報;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;

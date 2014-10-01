@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.mapper.ShujiiIkenshoConverter;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoFactory;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoResultMock;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoResultMock;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;

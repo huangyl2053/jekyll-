@@ -4,9 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.mapper.NinteichosaIraiTaishoshaMapper;
-import jp.co.ndensan.reams.db.dbe.business.mapper.YokaigoNinteiShinseiMapper;
-import jp.co.ndensan.reams.db.dbe.business.mapper.NinteichosaItakusakiMapper;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
@@ -15,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.ChosainJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KojinTestHelper;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
+import jp.co.ndensan.reams.db.dbe.business.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaItakusakiTestHelper;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;

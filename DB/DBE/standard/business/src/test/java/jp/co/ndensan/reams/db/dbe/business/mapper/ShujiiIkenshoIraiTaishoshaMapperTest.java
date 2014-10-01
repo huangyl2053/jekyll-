@@ -4,14 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.mapper.ShujiiIkenshoIraiTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
+import jp.co.ndensan.reams.db.dbe.business.helper.NinteiShinchokuJohoMock;
+import jp.co.ndensan.reams.db.dbe.business.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

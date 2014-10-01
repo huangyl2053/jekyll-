@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaKekkaEntityMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaResultMock;
+import jp.co.ndensan.reams.db.dbe.business.helper.NinteichosaResultMock;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

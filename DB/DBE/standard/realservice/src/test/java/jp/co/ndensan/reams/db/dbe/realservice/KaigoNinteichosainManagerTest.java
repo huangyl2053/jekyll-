@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import java.util.ArrayList;
 import java.util.List;
+import static jp.co.ndensan.reams.db.dbe.business.helper.KaigoNinteichosainTestHelper.create認定調査員;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
