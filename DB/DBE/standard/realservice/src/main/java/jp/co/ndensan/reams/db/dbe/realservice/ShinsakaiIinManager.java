@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.ShinsakaiIinMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.ShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiIinDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 

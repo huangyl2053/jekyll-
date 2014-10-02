@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.relate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteiShinchokuJohoDacMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteiShinseiJohoDacMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -158,7 +158,7 @@ public class NinteichosaKekkaTorikomiTaishoshaDacTest extends DbeTestDacBase {
     }
 
     private static DbT5005NinteiShinchokuJohoEntity create認定進捗情報Entity(RString 申請書管理番号, ChosaShinchoku 調査進捗) {
-        DbT5005NinteiShinchokuJohoEntity entity = NinteiShinchokuJohoMock.create認定進捗情報Entity();
+        DbT5005NinteiShinchokuJohoEntity entity = NinteiShinchokuJohoEntityMock.create認定進捗情報Entity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
         switch (調査進捗) {
             case 未調査:

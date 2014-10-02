@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteiShinchokuJohoDacMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -59,7 +59,7 @@ public class NinteiShinchokuJohoDacTest extends DbeTestDacBase {
     }
 
     private static DbT5005NinteiShinchokuJohoEntity create認定進捗情報Entity(RString 申請書管理番号, FlexibleDate 主治医意見書登録完了年月日, FlexibleDate 主治医意見書作成依頼完了年月日) {
-        DbT5005NinteiShinchokuJohoEntity entity = NinteiShinchokuJohoMock.create認定進捗情報Entity();
+        DbT5005NinteiShinchokuJohoEntity entity = NinteiShinchokuJohoEntityMock.create認定進捗情報Entity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
         entity.setIkenshoTorokuKanryoYMD(主治医意見書登録完了年月日);
         entity.setIkenshoSakuseiIraiKanryoYMD(主治医意見書作成依頼完了年月日);

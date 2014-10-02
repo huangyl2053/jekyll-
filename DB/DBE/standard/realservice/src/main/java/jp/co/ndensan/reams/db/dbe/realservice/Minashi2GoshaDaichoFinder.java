@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.IMinashi2GoshaDaicho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.Minashi2GoshaDaichoMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.Minashi2GoshaDaichoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IMinashi2GoshaDaichoDac;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;

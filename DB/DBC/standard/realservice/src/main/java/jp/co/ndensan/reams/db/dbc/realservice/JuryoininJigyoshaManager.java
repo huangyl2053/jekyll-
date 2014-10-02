@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.realservice;
 import jp.co.ndensan.reams.db.dbc.business.JuryoininJigyosha;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.mapper.JuryoininJigyoshaMapper;
+import jp.co.ndensan.reams.db.dbc.business.mapper.JuryoininJigyoshaMapper;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.JuryoininJigyoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;

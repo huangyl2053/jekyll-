@@ -27,6 +27,7 @@
         <module>realservice</module>
         <module>divcontroller</module>
         <module>workflowcontroller</module>
+        <module>model</module>
     </modules>
     <dependencyManagement>
         <dependencies>

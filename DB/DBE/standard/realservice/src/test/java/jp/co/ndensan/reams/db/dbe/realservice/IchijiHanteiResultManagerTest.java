@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultDetail;
 import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5016IchijiHanteiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.IchijiHanteiTestEntityCreator;
+import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestEntityCreator;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IchijiHanteiKekkaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

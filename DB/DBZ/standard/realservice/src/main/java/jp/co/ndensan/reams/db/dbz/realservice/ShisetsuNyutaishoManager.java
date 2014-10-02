@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.mapper.ShisetsuNyutaishoMapper;
+import jp.co.ndensan.reams.db.dbz.business.mapper.ShisetsuNyutaishoMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
