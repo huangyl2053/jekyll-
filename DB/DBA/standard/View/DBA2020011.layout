@@ -320,7 +320,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": true,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -521,7 +521,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "G8",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -618,18 +618,69 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
+     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
+     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
      "panelState": "visible",
      "fixedDiv": "No"
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": "追加"
+    },
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": "修正"
+    },
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": "削除"
+    },
+    {
+     "fieldName": "btnAddUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnAddCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnModifyUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnModifyCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDeleteUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDeleteCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnBack",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   },
   {
    "order": "2",
@@ -663,18 +714,69 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
+     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
+     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
      "panelState": "visible",
      "fixedDiv": "No"
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnAddUpdate",
+     "event": "onClick",
+     "transition": "完了"
+    },
+    {
+     "fieldName": "btnAddCancel",
+     "event": "onClick",
+     "transition": "照会"
+    },
+    {
+     "fieldName": "btnModifyUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnModifyCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDeleteUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDeleteCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnBack",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   },
   {
    "order": "3",
@@ -708,18 +810,69 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
+     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
+     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
      "panelState": "visible",
      "fixedDiv": "No"
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnAddUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnAddCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnModifyUpdate",
+     "event": "onClick",
+     "transition": "完了"
+    },
+    {
+     "fieldName": "btnModifyCancel",
+     "event": "onClick",
+     "transition": "照会"
+    },
+    {
+     "fieldName": "btnDeleteUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDeleteCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnBack",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   },
   {
    "order": "4",
@@ -753,18 +906,69 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
+     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
+     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
      "panelState": "visible",
      "fixedDiv": "No"
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnAddUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnAddCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnModifyUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnModifyCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDeleteUpdate",
+     "event": "onClick",
+     "transition": "完了"
+    },
+    {
+     "fieldName": "btnDeleteCancel",
+     "event": "onClick",
+     "transition": "照会"
+    },
+    {
+     "fieldName": "btnBack",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   },
   {
    "order": "5",
@@ -796,7 +1000,58 @@
    "supplementInfo": "",
    "supplementInfoPostParamData": [],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnAddUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnAddCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnModifyUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnModifyCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDeleteUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDeleteCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnBack",
+     "event": "onClick",
+     "transition": "照会"
+    }
+   ]
   }
  ],
  "currentState": "All",
@@ -1176,7 +1431,7 @@
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "該当一覧へ戻る"
+      "additionalText": "該当一覧へ"
      }
     },
     {

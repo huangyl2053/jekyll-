@@ -55,7 +55,7 @@ var DBZ;
                             "imageWidth": "",
                             "imageHeight": "",
                             "icon": 0,
-                            "heightTextBoxMatches": true
+                            "heightTextBoxMatches": false
                         },
                         {
                             "fieldName": "dgShisetsuNyutaishoRireki",
