@@ -117,10 +117,10 @@
      "appearance": 0,
      "imageFileUrl": "",
      "icon": 0,
-     "heightTextBoxMatches": true
+     "heightTextBoxMatches": false
     },
     {
-     "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
+     "fieldName": "dgTennyuHoryuTokuteiJushIchiran",
      "items": [],
      "controlType": "DataGrid",
      "width": "1090px",
@@ -136,7 +136,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
+     "selectControlID": "dgTennyuHoryuTokuteiJushIchiran",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
@@ -161,20 +161,6 @@
        "headerHeight": 0
       },
       "columns": [
-       {
-        "columnName": "状態",
-        "dataName": "state",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 50,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "state"
-       },
        {
         "columnName": "市町村コード",
         "dataName": "lasdecCode",
@@ -306,7 +292,7 @@
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
-        "align": 2,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "shisetsuShurui"
@@ -320,7 +306,7 @@
         "visible": false,
         "cellType": 0,
         "cellDetails": null,
-        "align": 1,
+        "align": 0,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "shisetsuCode"
@@ -415,7 +401,7 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": true,
+   "readOnly": false,
    "height": "Auto",
    "focusPositionID": "stateTransitionProperty",
    "canPost": true
@@ -451,7 +437,7 @@
      "labelRText": "",
      "labelRWidth": "S",
      "labelRAlign": 0,
-     "maxLength": 100000000,
+     "maxLength": "6",
      "minLength": 0,
      "textAlign": 0,
      "placeHolder": "",
@@ -533,7 +519,7 @@
      "labelRText": "",
      "labelRWidth": "S",
      "labelRAlign": 0,
-     "maxLength": 100000000,
+     "maxLength": "200",
      "minLength": 0,
      "textAlign": 0,
      "placeHolder": "",
@@ -712,7 +698,7 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false,
+   "readOnly": true,
    "height": "Auto",
    "focusPositionID": "restoreLayoutButton",
    "canPost": false
@@ -787,12 +773,12 @@
      "transition": ""
     },
     {
-     "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
+     "fieldName": "dgTennyuHoryuTokuteiJushIchiran",
      "event": "onSelect",
      "transition": ""
     },
     {
-     "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
+     "fieldName": "dgTennyuHoryuTokuteiJushIchiran",
      "event": "onSelectByDblClick",
      "transition": ""
     },
@@ -820,84 +806,6 @@
   },
   {
    "order": "2",
-   "stateName": "追加",
-   "wizardName": "",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushIchiran",
-     "panelState": "readOnly visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushoMeisai",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ccdChoikiInput",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ccdBanchi",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ccdNyushoShisetsuJohoInput",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "btnModCancel",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnDelCancel",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
-     "event": "onSelect",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnAddCancel",
-     "event": "onClick",
-     "transition": "照会"
-    },
-    {
-     "fieldName": "btnAddUpdate",
-     "event": "onClick",
-     "transition": "完了"
-    },
-    {
-     "fieldName": "btnModUpDate",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnDelUpdate",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "3",
    "stateName": "修正",
    "wizardName": "",
    "showWizard": false,
@@ -943,12 +851,12 @@
      "transition": ""
     },
     {
-     "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
+     "fieldName": "dgTennyuHoryuTokuteiJushIchiran",
      "event": "onSelect",
      "transition": ""
     },
     {
-     "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
+     "fieldName": "dgTennyuHoryuTokuteiJushIchiran",
      "event": "onSelectByDblClick",
      "transition": ""
     },
@@ -966,6 +874,84 @@
      "fieldName": "btnModUpDate",
      "event": "onClick",
      "transition": "完了"
+    },
+    {
+     "fieldName": "btnDelUpdate",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "3",
+   "stateName": "追加",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushIchiran",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushoMeisai",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdChoikiInput",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdBanchi",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdNyushoShisetsuJohoInput",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnModCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDelCancel",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgTennyuHoryuTokuteiJushIchiran",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgTennyuHoryuTokuteiJushIchiran",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnAddCancel",
+     "event": "onClick",
+     "transition": "照会"
+    },
+    {
+     "fieldName": "btnAddUpdate",
+     "event": "onClick",
+     "transition": "完了"
+    },
+    {
+     "fieldName": "btnModUpDate",
+     "event": "onClick",
+     "transition": ""
     },
     {
      "fieldName": "btnDelUpdate",
@@ -1021,12 +1007,12 @@
      "transition": "照会"
     },
     {
-     "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
+     "fieldName": "dgTennyuHoryuTokuteiJushIchiran",
      "event": "onSelect",
      "transition": ""
     },
     {
-     "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
+     "fieldName": "dgTennyuHoryuTokuteiJushIchiran",
      "event": "onSelectByDblClick",
      "transition": ""
     },
@@ -1089,12 +1075,12 @@
      "transition": ""
     },
     {
-     "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
+     "fieldName": "dgTennyuHoryuTokuteiJushIchiran",
      "event": "onSelect",
      "transition": ""
     },
     {
-     "fieldName": "dgDba9010011TennyuHoryuTokuteiJushIchiran",
+     "fieldName": "dgTennyuHoryuTokuteiJushIchiran",
      "event": "onSelectByDblClick",
      "transition": ""
     },
@@ -1121,7 +1107,7 @@
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "照会",
  "id": "DBA9010011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -1166,14 +1152,14 @@
       "selectControlID": "btnAddUpdate",
       "helpMessageID": "",
       "jpControlName": "",
+      "text": "保存",
+      "imageWidth": "",
+      "imageHeight": "",
       "onBeforeClick": "",
       "onAfterClick": "",
       "onClick": "onClick_btnAddUpdate",
-      "text": "保存",
       "appearance": 0,
       "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": ""
@@ -1201,18 +1187,18 @@
       "selectControlID": "btnAddCancel",
       "helpMessageID": "",
       "jpControlName": "",
+      "text": "やめる",
+      "imageWidth": "",
+      "imageHeight": "",
       "onBeforeClick": "",
       "onAfterClick": "",
       "onClick": "onClick_btnAddCancel",
-      "text": "追加を",
       "appearance": 0,
       "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "prefixText": "",
-      "suffixText": "やめる"
+      "prefixText": "追加を",
+      "suffixText": ""
      }
     }
    ],
@@ -1285,18 +1271,18 @@
       "selectControlID": "btnModCancel",
       "helpMessageID": "",
       "jpControlName": "",
+      "text": "やめる",
+      "imageWidth": "",
+      "imageHeight": "",
       "onBeforeClick": "",
       "onAfterClick": "",
       "onClick": "onClick_btnModCancel",
-      "text": "修正を",
       "appearance": 0,
       "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "prefixText": "",
-      "suffixText": "やめる"
+      "prefixText": "修正を",
+      "suffixText": ""
      }
     }
    ],
@@ -1369,18 +1355,18 @@
       "selectControlID": "btnDelCancel",
       "helpMessageID": "",
       "jpControlName": "",
+      "text": "やめる",
+      "imageWidth": "",
+      "imageHeight": "",
       "onBeforeClick": "",
       "onAfterClick": "",
       "onClick": "onClick_btnDelCancel",
-      "text": "削除を",
       "appearance": 0,
       "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "prefixText": "",
-      "suffixText": "やめる"
+      "prefixText": "削除を",
+      "suffixText": ""
      }
     }
    ],
@@ -1418,14 +1404,14 @@
       "selectControlID": "btnBackGaitoIchiran",
       "helpMessageID": "",
       "jpControlName": "",
+      "text": "該当一覧",
+      "imageWidth": "",
+      "imageHeight": "",
       "onBeforeClick": "",
       "onAfterClick": "",
       "onClick": "onClick_btnBackGaitoIchiran",
-      "text": "該当一覧",
       "appearance": 0,
       "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": "該当一覧へ",
@@ -1505,14 +1491,14 @@
       "selectControlID": "btnReSeacrh",
       "helpMessageID": "",
       "jpControlName": "",
+      "text": "再検索",
+      "imageWidth": "",
+      "imageHeight": "",
       "onBeforeClick": "",
       "onAfterClick": "",
       "onClick": "onClick_btnReSeacrh",
-      "text": "再検索",
       "appearance": 0,
       "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": ""

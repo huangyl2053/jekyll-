@@ -2,13 +2,13 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "NenReiTotatsuSearchCondition",
+   "fieldName": "Dba1020011NenReiTotatsuSearchCondition",
    "items": [
     {
      "fieldName": "txtZenkaiFrom",
      "items": [],
      "controlType": "TextBoxFlexibleDate",
-     "width": "80",
+     "width": "80px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -20,7 +20,7 @@
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
-     "marginRight": "0",
+     "marginRight": "0em",
      "selectControlID": "txtZenkaiFrom_core",
      "helpMessageID": "",
      "jpControlName": "",
@@ -34,22 +34,22 @@
      "onChange": "",
      "onKeyPress": "",
      "text": "",
-     "value": "",
      "labelLText": "前回処理期間",
      "labelRText": "",
-     "labelLWidth": "100",
+     "labelLWidth": "100px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "value": "",
+     "decorationClass": ""
     },
     {
      "fieldName": "txtZenkaiTo",
      "items": [],
      "controlType": "TextBoxFlexibleDate",
-     "width": "80",
+     "width": "80px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -60,7 +60,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "0em",
      "marginRight": "XS",
      "selectControlID": "txtZenkaiTo_core",
      "helpMessageID": "",
@@ -75,22 +75,22 @@
      "onChange": "",
      "onKeyPress": "",
      "text": "",
-     "value": "",
      "labelLText": "～",
      "labelRText": "",
-     "labelLWidth": "20",
+     "labelLWidth": "20px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "value": "",
+     "decorationClass": ""
     },
     {
      "fieldName": "txtNenreiTotatsuKikanFrom",
      "items": [],
      "controlType": "TextBoxFlexibleDate",
-     "width": "80",
+     "width": "80px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -102,7 +102,7 @@
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
-     "marginRight": "0",
+     "marginRight": "0em",
      "selectControlID": "txtNenreiTotatsuKikanFrom_core",
      "helpMessageID": "",
      "jpControlName": "",
@@ -116,22 +116,22 @@
      "onChange": "",
      "onKeyPress": "",
      "text": "",
-     "value": "",
      "labelLText": "年齢到達期間",
      "labelRText": "",
-     "labelLWidth": "100",
+     "labelLWidth": "100px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "value": "",
+     "decorationClass": ""
     },
     {
      "fieldName": "txtNenreiTotatsuKikanTo",
      "items": [],
      "controlType": "TextBoxFlexibleDate",
-     "width": "80",
+     "width": "80px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -142,7 +142,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "0em",
      "marginRight": "XS",
      "selectControlID": "txtNenreiTotatsuKikanTo_core",
      "helpMessageID": "",
@@ -157,16 +157,16 @@
      "onChange": "",
      "onKeyPress": "",
      "text": "",
-     "value": "",
      "labelLText": "～",
      "labelRText": "",
-     "labelLWidth": "20",
+     "labelLWidth": "20px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "value": "",
+     "decorationClass": ""
     }
    ],
    "controlType": "Panel",
@@ -181,9 +181,9 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "Default",
-   "marginRight": "Default",
-   "selectControlID": "NenReiTotatsuSearchCondition",
+   "marginLeft": "0px",
+   "marginRight": "0px",
+   "selectControlID": "Dba1020011NenReiTotatsuSearchCondition",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -196,8 +196,8 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
+   "marginTop": "0px",
+   "marginBottom": "0px",
    "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
@@ -233,11 +233,12 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "年齢到達異動バッチ起動",
+   "stateName": "検索",
+   "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "NenReiTotatsuSearchCondition",
+     "visibleDiv": "Dba1020011NenReiTotatsuSearchCondition",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -249,16 +250,12 @@
   },
   {
    "order": "2",
-   "stateName": "年齢到達者検索",
+   "stateName": "バッチ実行",
+   "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "NenReiTotatsuSearchCondition",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "HokenshaJoho",
+     "visibleDiv": "Dba1020011NenReiTotatsuSearchCondition",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -269,10 +266,15 @@
    "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "検索",
  "id": "DBA1020011",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "search",
+   "eventName": "btnSearchNenreiTotatsu.onClick"
+  }
+ ],
  "loadSequencePanelNames": [],
  "panelMargin": 1,
  "controlMargin": 1,
@@ -280,7 +282,7 @@
  "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "nenreiTotatsuShikakuIdo",
+   "commonButtonAreaId": "Execute",
    "buttonSetting": [
     {
      "buttonKind": "CommonButtonExecute",
@@ -288,7 +290,7 @@
       "fieldName": "btnExecuteNenreiTotatsuIdo",
       "items": [],
       "controlType": "CommonButtonNext",
-      "width": 2,
+      "width": "2px",
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -304,23 +306,23 @@
       "selectControlID": "btnExecuteNenreiTotatsuIdo",
       "helpMessageID": "",
       "jpControlName": "",
-      "onClick": "",
-      "icon": 0,
       "text": "次へ",
       "onBeforeClick": "",
       "onAfterClick": "",
+      "onClick": "onClick_btnExecuteNenreiTotatsuIdo",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "年齢到達異動を"
+      "additionalText": ""
      }
     }
    ],
    "states": [
     {
-     "state": "年齢到達異動バッチ起動"
+     "state": "バッチ実行"
     }
    ],
    "isFinishButtonOnTheRight": false,
@@ -328,15 +330,15 @@
    "SuspendButtonVisible": false
   },
   {
-   "commonButtonAreaId": "nenreiTotatsuShaSearch",
+   "commonButtonAreaId": "Search",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonFree",
+     "buttonKind": "CommonButtonSearch",
      "buttonProperty": {
       "fieldName": "btnSearchNenreiTotatsu",
       "items": [],
       "controlType": "CommonButtonSearchResult",
-      "width": 2,
+      "width": "2px",
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -352,29 +354,29 @@
       "selectControlID": "btnSearchNenreiTotatsu",
       "helpMessageID": "",
       "jpControlName": "",
-      "onClick": "",
-      "icon": 0,
       "text": "検索",
       "onBeforeClick": "",
       "onAfterClick": "",
+      "onClick": "onClick_btnSearchNenreiTotatsu",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
+      "icon": 0,
       "heightTextBoxMatches": false,
-      "prefixText": "年齢到達者を",
-      "suffixText": "する"
+      "additionalText": ""
      }
     }
    ],
    "states": [
     {
-     "state": "年齢到達者検索"
+     "state": "検索"
     }
    ],
    "isFinishButtonOnTheRight": false,
    "FinishButtonVisible": false,
    "SuspendButtonVisible": false
   }
- ]
+ ],
+ "packageName": ""
 }
