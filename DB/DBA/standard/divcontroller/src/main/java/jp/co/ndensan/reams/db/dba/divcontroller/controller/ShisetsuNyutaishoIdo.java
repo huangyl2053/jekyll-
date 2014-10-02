@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2020011.ShisetsuNyutai
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2020011.ShisetsuNyutaishoKanriTaishoshaSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoInputDiv;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
@@ -56,41 +56,40 @@ public class ShisetsuNyutaishoIdo {
         setDdlTaishoShisetsu(idoRirekiDiv);
         setRadShisetsuShurui(idoRirekiDiv);
 
-        if (idoRirekiList.isEmpty()) {
-            rirekiKanriDiv.getShisetsuNyutaishoInput().setDisabled(false);
-            rirekiKanriDiv.getBtnUpdateShisetsuNyutaisho().setDisabled(false);
-        } else {
-            rirekiKanriDiv.getShisetsuNyutaishoInput().setDisabled(true);
-            rirekiKanriDiv.getBtnUpdateShisetsuNyutaisho().setDisabled(true);
-        }
-
+//        if (idoRirekiList.isEmpty()) {
+//            rirekiKanriDiv.getShisetsuNyutaishoInput().setDisabled(false);
+//            rirekiKanriDiv.getBtnUpdateShisetsuNyutaisho().setDisabled(false);
+//        } else {
+//            rirekiKanriDiv.getShisetsuNyutaishoInput().setDisabled(true);
+//            rirekiKanriDiv.getBtnUpdateShisetsuNyutaisho().setDisabled(true);
+//        }
         response.data = idoRirekiDiv;
         return response;
     }
 
     private void setRadShisetsuShurui(ShisetsuNyutaishoIdoDiv idoRirekiDiv) {
-        ShisetsuJohoDiv shisetsuJoho = idoRirekiDiv.getShisetsuNyutaishoKanri().getShisetsuNyutaishoInput().getShisetsuJoho();
-        List<KeyValueDataSource> sourceList = new ArrayList<>();
-        KeyValueDataSource source1 = new KeyValueDataSource(new RString("kaigoHokenShisetsu"), new RString("介護保険施設"));
-        KeyValueDataSource source2 = new KeyValueDataSource(new RString("other"), new RString("その他特例施設"));
-        sourceList.add(source1);
-        sourceList.add(source2);
-        shisetsuJoho.getRadShisetsuShurui().setDataSource(sourceList);
-        shisetsuJoho.getRadShisetsuShurui().setSelectedItem(new RString("kaigoHokenShisetsu"));
-
-        shisetsuJoho.getBtnJigyoshaInputGuide().setDisplayNone(false);
-        shisetsuJoho.getBtnOtherTokureiShisetsuInputGuide().setDisplayNone(true);
-        shisetsuJoho.getBtnJogaiShisetsuInputGuide().setDisplayNone(true);
+//        ShisetsuJohoDiv shisetsuJoho = idoRirekiDiv.getShisetsuNyutaishoKanri().getShisetsuNyutaishoInput().getShisetsuJoho();
+//        List<KeyValueDataSource> sourceList = new ArrayList<>();
+//        KeyValueDataSource source1 = new KeyValueDataSource(new RString("kaigoHokenShisetsu"), new RString("介護保険施設"));
+//        KeyValueDataSource source2 = new KeyValueDataSource(new RString("other"), new RString("その他特例施設"));
+//        sourceList.add(source1);
+//        sourceList.add(source2);
+//        shisetsuJoho.getRadShisetsuShurui().setDataSource(sourceList);
+//        shisetsuJoho.getRadShisetsuShurui().setSelectedItem(new RString("kaigoHokenShisetsu"));
+//
+//        shisetsuJoho.getBtnJigyoshaInputGuide().setDisplayNone(false);
+//        shisetsuJoho.getBtnOtherTokureiShisetsuInputGuide().setDisplayNone(true);
+//        shisetsuJoho.getBtnJogaiShisetsuInputGuide().setDisplayNone(true);
     }
 
     private void setDdlTaishoShisetsu(ShisetsuNyutaishoIdoDiv idoRirekiDiv) {
-        ShisetsuNyutaishoInputDiv inputDiv = idoRirekiDiv.getShisetsuNyutaishoKanri().getShisetsuNyutaishoInput();
-        List<KeyValueDataSource> sourceList = new ArrayList<>();
-        KeyValueDataSource source1 = new KeyValueDataSource(new RString("kannai"), new RString("管内施設"));
-        KeyValueDataSource source2 = new KeyValueDataSource(new RString("jutoku"), new RString("住所地特例措置"));
-        sourceList.add(source1);
-        sourceList.add(source2);
-        inputDiv.getDdlTaishoJoho().setDataSource(sourceList);
+//        ShisetsuNyutaishoInputDiv inputDiv = idoRirekiDiv.getShisetsuNyutaishoKanri().getShisetsuNyutaishoInput();
+//        List<KeyValueDataSource> sourceList = new ArrayList<>();
+//        KeyValueDataSource source1 = new KeyValueDataSource(new RString("kannai"), new RString("管内施設"));
+//        KeyValueDataSource source2 = new KeyValueDataSource(new RString("jutoku"), new RString("住所地特例措置"));
+//        sourceList.add(source1);
+//        sourceList.add(source2);
+//        inputDiv.getDdlTaishoJoho().setDataSource(sourceList);
     }
 
     private List<HashMap> getIdoRireki(RString hihokenshaNo) {
@@ -116,16 +115,16 @@ public class ShisetsuNyutaishoIdo {
         dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(new TextBoxFlexibleDate(),
                 new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         row.getNyushoDate().setValue(new FlexibleDate(gaitosha.get("入所日").toString()));
-        if (gaitosha.get("退所日") != null) {
-            row.getTaishoDate().setValue(new FlexibleDate(gaitosha.get("退所日").toString()));
-        }
-        row.setShisetsuCode(new RString(gaitosha.get("施設コード").toString()));
-        row.setShisetsuMeisho(new RString(gaitosha.get("施設名称").toString()));
-        row.setShisetsu(row.getShisetsuCode().concat(":").concat(row.getShisetsuMeisho()));
-        row.setShisetsuShuruiKey(new RString(gaitosha.get("施設種類Key").toString()));
-        row.setShisetsuShurui(new RString(gaitosha.get("施設種類").toString()));
-        row.setTaishoJohoKey(new RString(gaitosha.get("対象情報Key").toString()));
-        row.setTaishoJoho(new RString(gaitosha.get("対象情報").toString()));
+//        if (gaitosha.get("退所日") != null) {
+//            row.getTaishoDate().setValue(new FlexibleDate(gaitosha.get("退所日").toString()));
+//        }
+//        row.setShisetsuCode(new RString(gaitosha.get("施設コード").toString()));
+//        row.setShisetsuMeisho(new RString(gaitosha.get("施設名称").toString()));
+//        row.setShisetsu(row.getShisetsuCode().concat(":").concat(row.getShisetsuMeisho()));
+//        row.setShisetsuShuruiKey(new RString(gaitosha.get("施設種類Key").toString()));
+//        row.setShisetsuShurui(new RString(gaitosha.get("施設種類").toString()));
+//        row.setTaishoJohoKey(new RString(gaitosha.get("対象情報Key").toString()));
+//        row.setTaishoJoho(new RString(gaitosha.get("対象情報").toString()));
         return row;
     }
 }

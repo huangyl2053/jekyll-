@@ -32,7 +32,7 @@ module DBZ {
             }
 
             public 表示Heightサイズ() {
-                return new Modes.表示Heightサイズ(this.controls);
+                return new Modes.表示heightサイズ(this.controls);
             }
 
             public 表示widthサイズ() {
@@ -55,7 +55,6 @@ module DBZ {
 
                 public 登録(): void {
 
-                    this.controls.ShisetsuNyutaishoRirekiKanri().disabled = false;
                     this.controls.btnAddShisetsuNyutaisho().displayNone = false;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -63,18 +62,19 @@ module DBZ {
                     gridSetting.isShowModifyButtonColumn = true;
                     var columns = gridSetting.columns;
                     for (var i = 0; i < columns.length; i++) {
-                        if (columns[i].dataName === 'state ') {
+                        if (columns[i].dataName === 'state') {
                             columns[i].visible = false;
                         }
                     }
+                    gridSetting.colums = columns;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
                 }
 
+
                 public 照会(): void {
 
-                    this.controls.ShisetsuNyutaishoRirekiKanri().disabled = true;
                     this.controls.btnAddShisetsuNyutaisho().displayNone = true;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -82,10 +82,11 @@ module DBZ {
                     gridSetting.isShowModifyButtonColumn = false;
                     var columns = gridSetting.columns;
                     for (var i = 0; i < columns.length; i++) {
-                        if (columns[i].dataName === 'state ') {
+                        if (columns[i].dataName === 'state') {
                             columns[i].visible = false;
                         }
                     }
+                    gridSetting.colums = columns;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
@@ -93,7 +94,6 @@ module DBZ {
 
                 public 資格異動(): void {
 
-                    this.controls.ShisetsuNyutaishoRirekiKanri().disabled = false;
                     this.controls.btnAddShisetsuNyutaisho().displayNone = false;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -101,10 +101,11 @@ module DBZ {
                     gridSetting.isShowModifyButtonColumn = true;
                     var columns = gridSetting.columns;
                     for (var i = 0; i < columns.length; i++) {
-                        if (columns[i].dataName === 'state ') {
+                        if (columns[i].dataName === 'state') {
                             columns[i].visible = true;
                         }
                     }
+                    gridSetting.colums = columns;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
@@ -112,7 +113,7 @@ module DBZ {
             }
 
 
-            export class 表示Heightサイズ {
+            export class 表示heightサイズ {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
@@ -156,23 +157,23 @@ module DBZ {
                 }
 
                 public モード1(): void {
-                    this.controls.dgShisetsuNyutaishoRireki().width = 1010;
+                    this.controls.dgShisetsuNyutaishoRireki().width = "1030";
                 }
 
                 public モード2(): void {
-                    this.controls.dgShisetsuNyutaishoRireki().width = 980;
+                    this.controls.dgShisetsuNyutaishoRireki().width = "980";
                 }
 
                 public モード3(): void {
-                    this.controls.dgShisetsuNyutaishoRireki().width = 900;
+                    this.controls.dgShisetsuNyutaishoRireki().width = "900";
                 }
 
                 public モード4(): void {
-                    this.controls.dgShisetsuNyutaishoRireki().width = 800;
+                    this.controls.dgShisetsuNyutaishoRireki().width = "800";
                 }
 
                 public モード5(): void {
-                    this.controls.dgShisetsuNyutaishoRireki().width = 720;
+                    this.controls.dgShisetsuNyutaishoRireki().width = "720";
                 }
             }
 

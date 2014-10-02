@@ -24,7 +24,7 @@
             };
 
             ModeController.prototype.表示Heightサイズ = function () {
-                return new Modes.表示Heightサイズ(this.controls);
+                return new Modes.表示heightサイズ(this.controls);
             };
 
             ModeController.prototype.表示widthサイズ = function () {
@@ -44,7 +44,6 @@
                     this.controls = controls;
                 }
                 表示モード.prototype.登録 = function () {
-                    this.controls.ShisetsuNyutaishoRirekiKanri().disabled = false;
                     this.controls.btnAddShisetsuNyutaisho().displayNone = false;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -52,16 +51,16 @@
                     gridSetting.isShowModifyButtonColumn = true;
                     var columns = gridSetting.columns;
                     for (var i = 0; i < columns.length; i++) {
-                        if (columns[i].dataName === 'state ') {
+                        if (columns[i].dataName === 'state') {
                             columns[i].visible = false;
                         }
                     }
+                    gridSetting.colums = columns;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
                 };
 
                 表示モード.prototype.照会 = function () {
-                    this.controls.ShisetsuNyutaishoRirekiKanri().disabled = true;
                     this.controls.btnAddShisetsuNyutaisho().displayNone = true;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -69,16 +68,16 @@
                     gridSetting.isShowModifyButtonColumn = false;
                     var columns = gridSetting.columns;
                     for (var i = 0; i < columns.length; i++) {
-                        if (columns[i].dataName === 'state ') {
+                        if (columns[i].dataName === 'state') {
                             columns[i].visible = false;
                         }
                     }
+                    gridSetting.colums = columns;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
                 };
 
                 表示モード.prototype.資格異動 = function () {
-                    this.controls.ShisetsuNyutaishoRirekiKanri().disabled = false;
                     this.controls.btnAddShisetsuNyutaisho().displayNone = false;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -86,10 +85,11 @@
                     gridSetting.isShowModifyButtonColumn = true;
                     var columns = gridSetting.columns;
                     for (var i = 0; i < columns.length; i++) {
-                        if (columns[i].dataName === 'state ') {
+                        if (columns[i].dataName === 'state') {
                             columns[i].visible = true;
                         }
                     }
+                    gridSetting.colums = columns;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
                 };
@@ -97,63 +97,63 @@
             })();
             Modes.表示モード = 表示モード;
 
-            var 表示Heightサイズ = (function () {
-                function 表示Heightサイズ(controls) {
+            var 表示heightサイズ = (function () {
+                function 表示heightサイズ(controls) {
                     this.controls = controls;
                 }
-                表示Heightサイズ.prototype.サイズ200 = function () {
+                表示heightサイズ.prototype.サイズ200 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().height = "200";
                 };
 
-                表示Heightサイズ.prototype.サイズ250 = function () {
+                表示heightサイズ.prototype.サイズ250 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().height = "250";
                 };
 
-                表示Heightサイズ.prototype.サイズ300 = function () {
+                表示heightサイズ.prototype.サイズ300 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().height = "300";
                 };
 
-                表示Heightサイズ.prototype.サイズ350 = function () {
+                表示heightサイズ.prototype.サイズ350 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().height = "350";
                 };
 
-                表示Heightサイズ.prototype.サイズ400 = function () {
+                表示heightサイズ.prototype.サイズ400 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().height = "400";
                 };
 
-                表示Heightサイズ.prototype.サイズ450 = function () {
+                表示heightサイズ.prototype.サイズ450 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().height = "450";
                 };
 
-                表示Heightサイズ.prototype.サイズ500 = function () {
+                表示heightサイズ.prototype.サイズ500 = function () {
                     this.controls.dgShisetsuNyutaishoRireki().height = "500";
                 };
-                return 表示Heightサイズ;
+                return 表示heightサイズ;
             })();
-            Modes.表示Heightサイズ = 表示Heightサイズ;
+            Modes.表示heightサイズ = 表示heightサイズ;
 
             var 表示widthサイズ = (function () {
                 function 表示widthサイズ(controls) {
                     this.controls = controls;
                 }
                 表示widthサイズ.prototype.モード1 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = 1010;
+                    this.controls.dgShisetsuNyutaishoRireki().width = "1030";
                 };
 
                 表示widthサイズ.prototype.モード2 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = 980;
+                    this.controls.dgShisetsuNyutaishoRireki().width = "980";
                 };
 
                 表示widthサイズ.prototype.モード3 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = 900;
+                    this.controls.dgShisetsuNyutaishoRireki().width = "900";
                 };
 
                 表示widthサイズ.prototype.モード4 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = 800;
+                    this.controls.dgShisetsuNyutaishoRireki().width = "800";
                 };
 
                 表示widthサイズ.prototype.モード5 = function () {
-                    this.controls.dgShisetsuNyutaishoRireki().width = 720;
+                    this.controls.dgShisetsuNyutaishoRireki().width = "720";
                 };
                 return 表示widthサイズ;
             })();
