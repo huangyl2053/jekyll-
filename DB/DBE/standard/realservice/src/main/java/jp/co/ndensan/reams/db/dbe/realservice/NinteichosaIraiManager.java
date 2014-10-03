@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiCollection;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaIraiMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.NinteichosaIraiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaIraiDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

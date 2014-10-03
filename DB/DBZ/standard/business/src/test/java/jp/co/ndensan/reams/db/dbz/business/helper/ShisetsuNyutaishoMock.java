@@ -59,7 +59,7 @@ public class ShisetsuNyutaishoMock {
 
     public static IHojin createHojinMock() {
         IJusho jushoMock = mock(IJusho.class);
-        when(jushoMock.getValue()).thenReturn(new RString("施設住所"));
+        when(jushoMock.get住所()).thenReturn(new RString("施設住所"));
 
         IHojin hojinMock = mock(IHojin.class);
         when(hojinMock.get住所()).thenReturn(jushoMock);

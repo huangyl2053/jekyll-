@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiMeisaiCollection;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigenCollection;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShukeiCollection;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiTokuteiNyushohiCollection;
-import jp.co.ndensan.reams.db.dbc.entity.mapper.KyufuJissekiMapper;
+import jp.co.ndensan.reams.db.dbc.business.mapper.KyufuJissekiMapper;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiKihonDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiKyotakuServiceDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiMeisaiDac;

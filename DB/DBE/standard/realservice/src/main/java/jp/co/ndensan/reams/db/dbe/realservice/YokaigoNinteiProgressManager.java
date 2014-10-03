@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.NinteiShinchokuJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 

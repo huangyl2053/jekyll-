@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.KaigoNinteichosainMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.KaigoNinteichosainMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.KaigoNinteichosainDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

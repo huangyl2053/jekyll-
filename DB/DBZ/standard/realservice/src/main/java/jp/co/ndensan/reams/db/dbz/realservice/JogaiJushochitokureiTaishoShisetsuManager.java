@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.business.JogaiJushochitokureiTaishoShisetsu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogai_TokureiTaishoShisetsuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.mapper.JogaiJushochitokureiTaishoShisetsuMapper;
+import jp.co.ndensan.reams.db.dbz.business.mapper.JogaiJushochitokureiTaishoShisetsuMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.JogaiJushochitokureiTaishoShisetsuDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 

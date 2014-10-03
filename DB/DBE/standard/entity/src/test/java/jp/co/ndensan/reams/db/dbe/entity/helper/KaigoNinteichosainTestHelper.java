@@ -4,13 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaItakusakiMapper;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -62,20 +59,4 @@ public class KaigoNinteichosainTestHelper {
         return entity;
     }
 
-    public static KaigoNinteichosain create認定調査員() {
-        return new KaigoNinteichosain(
-                市町村コード,
-                介護事業者番号,
-                new KaigoNinteichosainNo(介護調査員番号),
-                調査員状況,
-                調査員氏名,
-                調査員氏名カナ,
-                性別,
-                調査員資格コード,
-                地区コード,
-                郵便番号,
-                住所,
-                電話番号,
-                NinteichosaItakusakiMapper.toNinteichosaItakusaki(MockNinteichosaItakusakiJohoEntity.getSpiedInstance()));
-    }
 }
