@@ -40,6 +40,6 @@ public final class NyushoShisetsuMapper {
                 施設コード,
                 法人.get氏名().getName().value(),
                 法人.get氏名().getKana().value(),
-                法人.get住所().getValue());
+                法人.get住所().get住所());
     }
 }

@@ -42,7 +42,8 @@ public class ShinseiJohoTorokuKanryo {
     }
 
     private RString extractHihokenshaShimei(HihokenshaOutlineDiv outline) {
-        return outline.getAtenaInfo().getAtenaInfo().getTxtAtenaMeisho().getValue();
+//        return outline.getAtenaInfo().getAtenaInfo().getTxtAtenaMeisho().getValue();
+        return RString.EMPTY;
     }
 
     private ResponseData<ShinseiJohoTorokuKanryoDiv> _createResponseData(ShinseiJohoTorokuKanryoDiv div) {

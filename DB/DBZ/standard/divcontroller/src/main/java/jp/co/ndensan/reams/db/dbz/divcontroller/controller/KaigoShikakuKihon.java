@@ -34,8 +34,7 @@ public final class KaigoShikakuKihon {
      */
     public static void setData(KaigoAtenaInfoDiv atenaDiv, KaigoShikakuKihonDiv kaigoDiv, ShikibetsuCode 識別コード, int rowId) {
 
-        AtenaShokaiSimple.setData(atenaDiv.getAtenaInfo(), 識別コード);
-
+//        AtenaShokaiSimple.setData(atenaDiv.getAtenaInfo(), 識別コード);
         List<HashMap> targetSource = YamlLoader.DBZ.loadAsList(new RString("KaigoShikakuKihon.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(rowId));
 

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitoku
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
-import jp.co.ndensan.reams.ur.urz.business.IJusho;
+import jp.co.ndensan.reams.ur.urz.business.jusho.IJusho;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;

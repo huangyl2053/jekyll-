@@ -1,24 +1,20 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.IShisetsuNyutaishoRirekiKanriDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * ShisetsuNyutaishoRirekiKanri のクラスファイル 
- * 
+ * ShisetsuNyutaishoRirekiKanri のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuNyutaishoRirekiKanriDiv {
@@ -28,6 +24,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("btnAddShisetsuNyutaisho")
     private Button btnAddShisetsuNyutaisho;
     @JsonProperty("dgShisetsuNyutaishoRireki")
@@ -50,7 +47,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
 
     @JsonProperty("btnAddShisetsuNyutaisho")
     public void setBtnAddShisetsuNyutaisho(Button btnAddShisetsuNyutaisho) {
-        this.btnAddShisetsuNyutaisho=btnAddShisetsuNyutaisho;
+        this.btnAddShisetsuNyutaisho = btnAddShisetsuNyutaisho;
     }
 
     @JsonProperty("dgShisetsuNyutaishoRireki")
@@ -60,7 +57,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
 
     @JsonProperty("dgShisetsuNyutaishoRireki")
     public void setDgShisetsuNyutaishoRireki(DataGrid<dgShisetsuNyutaishoRireki_Row> dgShisetsuNyutaishoRireki) {
-        this.dgShisetsuNyutaishoRireki=dgShisetsuNyutaishoRireki;
+        this.dgShisetsuNyutaishoRireki = dgShisetsuNyutaishoRireki;
     }
 
     @JsonProperty("selectRow")
@@ -70,7 +67,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
 
     @JsonProperty("selectRow")
     public void setSelectRow(RString selectRow) {
-        this.selectRow=selectRow;
+        this.selectRow = selectRow;
     }
 
     @JsonProperty("inputMode")
@@ -80,7 +77,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
 
     @JsonProperty("inputMode")
     public void setInputMode(RString inputMode) {
-        this.inputMode=inputMode;
+        this.inputMode = inputMode;
     }
 
     /*
@@ -109,7 +106,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
             表示Heightサイズ[] enumArray = 表示Heightサイズ.values();
 
             for (表示Heightサイズ enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -124,11 +121,11 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     public 表示Heightサイズ getMode_表示Heightサイズ() {
-        return (表示Heightサイズ) _CommonChildDivModeUtil.getMode( this.modes, 表示Heightサイズ.class );
+        return (表示Heightサイズ) _CommonChildDivModeUtil.getMode(this.modes, 表示Heightサイズ.class);
     }
 
-    public void setMode_表示Heightサイズ( 表示Heightサイズ value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 表示Heightサイズ.class , value );
+    public void setMode_表示Heightサイズ(表示Heightサイズ value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 表示Heightサイズ.class, value);
     }
 
     public static enum 表示widthサイズ implements ICommonChildDivMode {
@@ -149,7 +146,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
             表示widthサイズ[] enumArray = 表示widthサイズ.values();
 
             for (表示widthサイズ enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -164,11 +161,11 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     public 表示widthサイズ getMode_表示widthサイズ() {
-        return (表示widthサイズ) _CommonChildDivModeUtil.getMode( this.modes, 表示widthサイズ.class );
+        return (表示widthサイズ) _CommonChildDivModeUtil.getMode(this.modes, 表示widthサイズ.class);
     }
 
-    public void setMode_表示widthサイズ( 表示widthサイズ value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 表示widthサイズ.class , value );
+    public void setMode_表示widthサイズ(表示widthサイズ value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 表示widthサイズ.class, value);
     }
 
     public static enum 表示モード implements ICommonChildDivMode {
@@ -187,7 +184,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
             表示モード[] enumArray = 表示モード.values();
 
             for (表示モード enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -202,11 +199,11 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     public 表示モード getMode_表示モード() {
-        return (表示モード) _CommonChildDivModeUtil.getMode( this.modes, 表示モード.class );
+        return (表示モード) _CommonChildDivModeUtil.getMode(this.modes, 表示モード.class);
     }
 
-    public void setMode_表示モード( 表示モード value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 表示モード.class , value );
+    public void setMode_表示モード(表示モード value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 表示モード.class, value);
     }
 
     public static enum 台帳種別の列を implements ICommonChildDivMode {
@@ -224,7 +221,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
             台帳種別の列を[] enumArray = 台帳種別の列を.values();
 
             for (台帳種別の列を enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -239,13 +236,12 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     public 台帳種別の列を getMode_台帳種別の列を() {
-        return (台帳種別の列を) _CommonChildDivModeUtil.getMode( this.modes, 台帳種別の列を.class );
+        return (台帳種別の列を) _CommonChildDivModeUtil.getMode(this.modes, 台帳種別の列を.class);
     }
 
-    public void setMode_台帳種別の列を( 台帳種別の列を value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 台帳種別の列を.class , value );
+    public void setMode_台帳種別の列を(台帳種別の列を value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 台帳種別の列を.class, value);
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

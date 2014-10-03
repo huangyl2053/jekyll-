@@ -31,8 +31,8 @@ public final class KaigoKanryoMessage {
      * @param messageTaisho2 完了メッセージ対象情報2
      */
     public static void setMessage(KaigoKanryoMessageDiv messageDiv, RString messageMain, RString messageTaisho1, RString messageTaisho2) {
-
-        KanryoMessage.setMessage(messageDiv.getKanryoMessage(), messageMain, messageTaisho1, messageTaisho2);
+        //n3327 前と同じように動作するかは不明です。
+        messageDiv.getKanryoMessage().setMessage(messageMain, messageTaisho1, messageTaisho2, true);
     }
 
     /**
@@ -43,7 +43,6 @@ public final class KaigoKanryoMessage {
      * @param messageMain 完了メッセージメイン
      */
     public static void setMessage(KaigoKanryoMessageDiv messageDiv, RString messageMain) {
-
-        KanryoMessage.setMessage(messageDiv.getKanryoMessage(), messageMain, RString.EMPTY, RString.EMPTY);
+        messageDiv.getKanryoMessage().setMessage(messageMain, RString.EMPTY, RString.EMPTY, true);
     }
 }

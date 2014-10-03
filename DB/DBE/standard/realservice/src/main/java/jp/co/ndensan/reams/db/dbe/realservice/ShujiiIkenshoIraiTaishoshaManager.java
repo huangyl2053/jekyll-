@@ -160,7 +160,7 @@ public class ShujiiIkenshoIraiTaishoshaManager {
         YokaigoNinteiShinsei 認定申請情報 = YokaigoNinteiShinseiMapper.toYokaigoNinteiShinsei(entity.getNinteiShinseiJohoEntity());
         IKojin 個人 = get個人(認定申請情報);
         RString 氏名 = 個人.get氏名().getName().value();
-        RString 住所 = 個人.get住所().getValue();
+        RString 住所 = 個人.get住所().get住所();
         ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報 = get主治医意見書作成依頼情報(市町村コード, 認定申請情報);
         KaigoIryoKikan 主治医医療機関情報 = get主治医医療機関情報(市町村コード, 主治医意見書作成依頼情報);
         KaigoDoctor 主治医情報 = 主治医意見書作成依頼情報.get介護医師();

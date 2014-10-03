@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.ur.urf.entity.mapper.KaigoJigyoshaMapper;
 import jp.co.ndensan.reams.ur.urf.entity.mapper.NinteiChosainMapper;
-import jp.co.ndensan.reams.ur.urz.business.IJusho;
+import jp.co.ndensan.reams.ur.urz.business.jusho.IJusho;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -135,7 +135,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
 
         @Test
         public void 引き渡した_個人の住所_とtoNinteichosaIraiTaishoshaの結果は一致する() {
-            assertThat(sut.get住所(), is(個人.get住所().getValue()));
+            assertThat(sut.get住所(), is(個人.get住所().get住所()));
         }
 
         @Test
@@ -177,7 +177,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
 
     private static IJusho toJusho(String jusho) {
         IJusho adress = mock(IJusho.class);
-        when(adress.getValue()).thenReturn(new RString(jusho));
+        when(adress.get住所()).thenReturn(new RString(jusho));
         return adress;
     }
 }
