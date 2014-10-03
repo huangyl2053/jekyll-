@@ -59,7 +59,7 @@ module DBZ {
      "jpControlName": "",
      "onBeforeClick": "",
      "onAfterClick": "",
-     "onClick": "",
+     "onClick": "onClick_btnAdd",
      "text": "追加する",
      "appearance": 0,
      "imageFileUrl": "",
@@ -98,7 +98,7 @@ module DBZ {
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
-      "isShowSelectButtonColumn": false,
+      "isShowSelectButtonColumn": true,
       "isShowModifyButtonColumn": true,
       "isShowDeleteButtonColumn": true,
       "limitRowCount": 0,
@@ -368,11 +368,11 @@ module DBZ {
       ]
      },
      "onSort": "",
-     "onSelect": "",
-     "onSelectByDblClick": "",
-     "onSelectBySelectButton": "",
+     "onSelect": "onSelect_dgJushochiTokureiRireki",
+     "onSelectByDblClick": "onSelectByDblClick_dgJushochiTokureiRireki",
+     "onSelectBySelectButton": "onSelectBySelectButton_dgJushochiTokureiRireki",
      "onSelectByModifyButton": "onSelectByModifyButton_dgJushochiTokureiRireki",
-     "onSelectByDeleteButton": "",
+     "onSelectByDeleteButton": "onSelectByDeleteButton_dgJushochiTokureiRireki",
      "onAfterRequest": "",
      "onAfterRequestByDblClick": "",
      "onAfterRequestBySelectButton": "",
@@ -460,7 +460,26 @@ module DBZ {
  "firstFocusFieldName": "",
  "lastFocusFieldName": "",
  "modes": [],
- "publicEvents": [],
+ "publicEvents": [
+  {
+   "eventName": "onClick_btnAdd"
+  },
+  {
+   "eventName": "onSelect_dgJushochiTokureiRireki"
+  },
+  {
+   "eventName": "onSelectByDblClick_dgJushochiTokureiRireki"
+  },
+  {
+   "eventName": "onSelectBySelectButton_dgJushochiTokureiRireki"
+  },
+  {
+   "eventName": "onSelectByModifyButton_dgJushochiTokureiRireki"
+  },
+  {
+   "eventName": "onSelectByDeleteButton_dgJushochiTokureiRireki"
+  }
+ ],
  "publicEventsAlias": []
 }        
     }
@@ -469,8 +488,28 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_btnAdd(): string {
+                return "onClick_btnAdd";
+            }
+
+            public static onSelect_dgJushochiTokureiRireki(): string {
+                return "onSelect_dgJushochiTokureiRireki";
+            }
+
+            public static onSelectByDblClick_dgJushochiTokureiRireki(): string {
+                return "onSelectByDblClick_dgJushochiTokureiRireki";
+            }
+
+            public static onSelectBySelectButton_dgJushochiTokureiRireki(): string {
+                return "onSelectBySelectButton_dgJushochiTokureiRireki";
+            }
+
             public static onSelectByModifyButton_dgJushochiTokureiRireki(): string {
                 return "onSelectByModifyButton_dgJushochiTokureiRireki";
+            }
+
+            public static onSelectByDeleteButton_dgJushochiTokureiRireki(): string {
+                return "onSelectByDeleteButton_dgJushochiTokureiRireki";
             }
 
         }

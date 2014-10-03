@@ -41,7 +41,7 @@ module DBZ
                     this.controls.dgJushochiTokureiRireki().readOnly = false;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting.isShowSelectButtonColumn = false;
-                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowModifyButtonColumn = true;
+                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowModifyButtonColumn = false;
                     this.controls.dgJushochiTokureiRireki().gridSetting.isShowDeleteButtonColumn = false;
                     this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
                 }

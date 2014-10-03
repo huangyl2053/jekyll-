@@ -2,7 +2,7 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "Dba2040011KaigoKanryoMessage",
+   "fieldName": "KaigoKanryoMessage",
    "items": [
     {
      "fieldName": "ccdKaigoKanryoMessage",
@@ -57,7 +57,7 @@
    "authorityMode": 0,
    "marginLeft": "Default",
    "marginRight": "Default",
-   "selectControlID": "Dba2040011KaigoKanryoMessage",
+   "selectControlID": "KaigoKanryoMessage",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -66,10 +66,10 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "Dba2040011KaigoKanryoMessage"
+     "postParameterPanelNames": "KaigoKanryoMessage"
     },
     {
-     "postParameterPanelNames": "Dba2040011ShikakuKihonJoho"
+     "postParameterPanelNames": "ShikakuKihonJoho"
     }
    ],
    "requestSettings": [
@@ -94,7 +94,7 @@
    "canPost": true
   },
   {
-   "fieldName": "Dba2040011ShikakuKihonJoho",
+   "fieldName": "ShikakuKihonJoho",
    "items": [
     {
      "fieldName": "ccdKaigoAtenaInfo",
@@ -192,7 +192,7 @@
    "authorityMode": 0,
    "marginLeft": "0em",
    "marginRight": "0em",
-   "selectControlID": "Dba2040011ShikakuKihonJoho",
+   "selectControlID": "ShikakuKihonJoho",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -201,7 +201,7 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "Dba2040011ShikakuKihonJoho"
+     "postParameterPanelNames": "ShikakuKihonJoho"
     }
    ],
    "requestSettings": [
@@ -226,7 +226,7 @@
    "canPost": true
   },
   {
-   "fieldName": "Dba2040011TajutokuIdoIchiran",
+   "fieldName": "TajutokuIdoIchiran",
    "items": [
     {
      "fieldName": "ccdJushochiTokureiRireki",
@@ -261,13 +261,27 @@
      "heightForDialog": "M",
      "firstFocusFieldName": "",
      "lastFocusFieldName": "",
-     "modes": [
+     "modes": [],
+     "publicEvents": [
       {
-       "modeKey": "DisplayMode",
-       "modeValue": "IdoToroku"
+       "eventName": "onClick_btnAdd"
+      },
+      {
+       "eventName": "onSelect_dgJushochiTokureiRireki"
+      },
+      {
+       "eventName": "onSelectByDblClick_dgJushochiTokureiRireki"
+      },
+      {
+       "eventName": "onSelectBySelectButton_dgJushochiTokureiRireki"
+      },
+      {
+       "eventName": "onSelectByModifyButton_dgJushochiTokureiRireki"
+      },
+      {
+       "eventName": "onSelectByDeleteButton_dgJushochiTokureiRireki"
       }
      ],
-     "publicEvents": [],
      "publicEventsAlias": []
     }
    ],
@@ -285,7 +299,7 @@
    "authorityMode": 0,
    "marginLeft": "0em",
    "marginRight": "0em",
-   "selectControlID": "Dba2040011TajutokuIdoIchiran",
+   "selectControlID": "TajutokuIdoIchiran",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -294,7 +308,7 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "Dba2040011TajutokuIdoIchiran"
+     "postParameterPanelNames": "TajutokuIdoIchiran"
     }
    ],
    "requestSettings": [
@@ -314,12 +328,12 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false,
+   "readOnly": true,
    "height": "Auto",
    "canPost": true
   },
   {
-   "fieldName": "Dba2040011TajutokuIdoTekiyoKaijoMeisai",
+   "fieldName": "TajutokuIdoTekiyoKaijoMeisai",
    "items": [
     {
      "fieldName": "TekiyoJiyuInput",
@@ -1003,7 +1017,7 @@
    "authorityMode": 0,
    "marginLeft": "0em",
    "marginRight": "0em",
-   "selectControlID": "Dba2040011TajutokuIdoTekiyoKaijoMeisai",
+   "selectControlID": "TajutokuIdoTekiyoKaijoMeisai",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -1012,7 +1026,7 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "Dba2040011TajutokuIdoTekiyoKaijoMeisai"
+     "postParameterPanelNames": "TajutokuIdoTekiyoKaijoMeisai"
     }
    ],
    "requestSettings": [],
@@ -1027,12 +1041,12 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": true,
+   "readOnly": false,
    "height": "Auto",
    "canPost": true
   },
   {
-   "fieldName": "Dba2040011TajutokuIdoHenkoMeisai",
+   "fieldName": "TajutokuIdoHenkoMeisai",
    "items": [
     {
      "fieldName": "HenkoJiyuInput",
@@ -1478,7 +1492,7 @@
    "authorityMode": 0,
    "marginLeft": "0em",
    "marginRight": "0em",
-   "selectControlID": "Dba2040011TajutokuIdoHenkoMeisai",
+   "selectControlID": "TajutokuIdoHenkoMeisai",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -1487,7 +1501,7 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "Dba2040011TajutokuIdoIchiran"
+     "postParameterPanelNames": "TajutokuIdoIchiran"
     }
    ],
    "requestSettings": [
@@ -1512,7 +1526,7 @@
    "canPost": true
   },
   {
-   "fieldName": "Dba2040011TajutokuIdoTekiyoPrint",
+   "fieldName": "TajutokuIdoTekiyoPrint",
    "items": [
     {
      "fieldName": "ccdTajutokuIdoTekiyoPrintSetting",
@@ -1570,7 +1584,7 @@
      "nextFocusFieldName": "",
      "wrap": false,
      "dependencies": [],
-     "float": 0,
+     "float": 2,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
@@ -1591,7 +1605,7 @@
     }
    ],
    "controlType": "PanelPublish",
-   "width": "G2",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1604,7 +1618,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "Dba2040011TajutokuIdoTekiyoPrint",
+   "selectControlID": "TajutokuIdoTekiyoPrint",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -1621,7 +1635,7 @@
    "marginBottom": "Default",
    "eraseBorder": false,
    "backgroundColor": 0,
-   "widthAuto": true,
+   "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
@@ -1632,7 +1646,7 @@
    "isEmptyControl": false
   },
   {
-   "fieldName": "Dba2040011TajutokuIdoKaijoPrint",
+   "fieldName": "TajutokuIdoKaijoPrint",
    "items": [
     {
      "fieldName": "ccdTajutokuIdoKaijoPrintSetting",
@@ -1690,7 +1704,7 @@
      "nextFocusFieldName": "",
      "wrap": false,
      "dependencies": [],
-     "float": 0,
+     "float": 2,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
@@ -1711,7 +1725,7 @@
     }
    ],
    "controlType": "PanelPublish",
-   "width": "G2",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1724,7 +1738,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "Dba2040011TajutokuIdoKaijoPrint",
+   "selectControlID": "TajutokuIdoKaijoPrint",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -1741,7 +1755,7 @@
    "marginBottom": "Default",
    "eraseBorder": false,
    "backgroundColor": 0,
-   "widthAuto": true,
+   "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
@@ -1752,7 +1766,7 @@
    "isEmptyControl": false
   },
   {
-   "fieldName": "Dba2040011TajutokuIdoHenkoPrint",
+   "fieldName": "TajutokuIdoHenkoPrint",
    "items": [
     {
      "fieldName": "ccdTajutokuIdoHenkoPrintSetting",
@@ -1810,7 +1824,7 @@
      "nextFocusFieldName": "",
      "wrap": false,
      "dependencies": [],
-     "float": 0,
+     "float": 2,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
@@ -1831,7 +1845,7 @@
     }
    ],
    "controlType": "PanelPublish",
-   "width": "G2",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1844,7 +1858,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "Dba2040011TajutokuIdoHenkoPrint",
+   "selectControlID": "TajutokuIdoHenkoPrint",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -1861,7 +1875,7 @@
    "marginBottom": "Default",
    "eraseBorder": false,
    "backgroundColor": 0,
-   "widthAuto": true,
+   "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
@@ -1901,17 +1915,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba2040011ShikakuKihonJoho",
+     "visibleDiv": "ShikakuKihonJoho",
      "panelState": "visible",
      "fixedDiv": "Yes"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoIchiran",
+     "visibleDiv": "TajutokuIdoIchiran",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoTekiyoKaijoMeisai",
+     "visibleDiv": "TajutokuIdoTekiyoKaijoMeisai",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
@@ -1984,17 +1998,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba2040011ShikakuKihonJoho",
+     "visibleDiv": "ShikakuKihonJoho",
      "panelState": "visible",
      "fixedDiv": "Yes"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoIchiran",
+     "visibleDiv": "TajutokuIdoIchiran",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoTekiyoKaijoMeisai",
+     "visibleDiv": "TajutokuIdoTekiyoKaijoMeisai",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
@@ -2067,17 +2081,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba2040011ShikakuKihonJoho",
+     "visibleDiv": "ShikakuKihonJoho",
      "panelState": "visible",
      "fixedDiv": "Yes"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoIchiran",
+     "visibleDiv": "TajutokuIdoIchiran",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoHenkoMeisai",
+     "visibleDiv": "TajutokuIdoHenkoMeisai",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
@@ -2150,17 +2164,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba2040011ShikakuKihonJoho",
+     "visibleDiv": "ShikakuKihonJoho",
      "panelState": "visible",
      "fixedDiv": "Yes"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoIchiran",
+     "visibleDiv": "TajutokuIdoIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoTekiyoKaijoMeisai",
+     "visibleDiv": "TajutokuIdoTekiyoKaijoMeisai",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -2233,17 +2247,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba2040011ShikakuKihonJoho",
+     "visibleDiv": "ShikakuKihonJoho",
      "panelState": "visible",
      "fixedDiv": "Yes"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoIchiran",
+     "visibleDiv": "TajutokuIdoIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoTekiyoKaijoMeisai",
+     "visibleDiv": "TajutokuIdoTekiyoKaijoMeisai",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -2316,17 +2330,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba2040011ShikakuKihonJoho",
+     "visibleDiv": "ShikakuKihonJoho",
      "panelState": "visible",
      "fixedDiv": "Yes"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoIchiran",
+     "visibleDiv": "TajutokuIdoIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoHenkoMeisai",
+     "visibleDiv": "TajutokuIdoHenkoMeisai",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -2399,17 +2413,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba2040011KaigoKanryoMessage",
+     "visibleDiv": "KaigoKanryoMessage",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoIchiran",
+     "visibleDiv": "TajutokuIdoIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoTekiyoPrint",
+     "visibleDiv": "TajutokuIdoTekiyoPrint",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -2457,17 +2471,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba2040011KaigoKanryoMessage",
+     "visibleDiv": "KaigoKanryoMessage",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoIchiran",
+     "visibleDiv": "TajutokuIdoIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoKaijoPrint",
+     "visibleDiv": "TajutokuIdoKaijoPrint",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -2515,17 +2529,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba2040011KaigoKanryoMessage",
+     "visibleDiv": "KaigoKanryoMessage",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoIchiran",
+     "visibleDiv": "TajutokuIdoIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2040011TajutokuIdoHenkoPrint",
+     "visibleDiv": "TajutokuIdoHenkoPrint",
      "panelState": "visible",
      "fixedDiv": "No"
     },
