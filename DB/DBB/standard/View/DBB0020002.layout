@@ -297,11 +297,7 @@
      "selectControlID": "btnFukaErrorPublish",
      "helpMessageID": "",
      "jpControlName": "",
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "FukaErrorReportView"
-      }
-     ],
+     "postParameterPanelNames": [],
      "validateUrl": "",
      "sourceCreateUrl": "FukaErrorReportView/onClick_btnReportPublish",
      "afterPrintUrl": "",
@@ -311,43 +307,6 @@
      "printable": false,
      "copiesChangeable": false,
      "progressVisible": false
-    },
-    {
-     "fieldName": "btnPreview",
-     "items": [],
-     "controlType": "ButtonPreview",
-     "width": "S",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnPreview",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "FukaErrorReportView"
-      }
-     ],
-     "validateUrl": "",
-     "sourceCreateUrl": "FukaErrorReportView/onClick_btnReportPublish",
-     "afterPrintUrl": "",
-     "isModal": true,
-     "isInstruction": false,
-     "isPreview": true,
-     "printable": false,
-     "copiesChangeable": false,
-     "progressVisible": false,
-     "dialogWidth": "1200",
-     "dialogHeight": "570"
     },
     {
      "fieldName": "FukaErrorShoriButton",
@@ -514,35 +473,35 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onLoad"
+     "requestUrl": ""
     },
     {
      "eventName": "onChangeToDdlCreationDateTiem",
-     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onChangeToDdlCreationDateTiem"
+     "requestUrl": ""
     },
     {
      "eventName": "onClick_btnCsvDownload",
-     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onClick_btnCsvDownload"
+     "requestUrl": ""
     },
     {
      "eventName": "onSelect_dgFukaErrorList",
-     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onSelect_dgFukaErrorList"
+     "requestUrl": ""
     },
     {
      "eventName": "onBeforeClick_btnShikakuFuseigo",
-     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onBeforeClick_btnShikakuFuseigo"
+     "requestUrl": ""
     },
     {
      "eventName": "onClick_btnShikakuFuseigo",
-     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onClick_btnShikakuFuseigo"
+     "requestUrl": ""
     },
     {
      "eventName": "onBeforeClick_btnFukaKosei",
-     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onBeforeClick_btnFukaKosei"
+     "requestUrl": ""
     },
     {
      "eventName": "onClick_btnFukaKosei",
-     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onClick_btnFukaKosei"
+     "requestUrl": ""
     }
    ],
    "hiddenInput": [],
@@ -618,8 +577,7 @@
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
-   "FukaErrorList",
-   "FukaErrorShoriButton"
+   "FukaErrorReportView"
   ]
  ],
  "panelMargin": 1,

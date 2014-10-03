@@ -20,8 +20,7 @@ import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportConverte
 import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportCsvConverter;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportInfo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.divcontroller.controller.InternalReportKihon;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.InternalReportKihonDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.IInternalReportKihonDiv;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -29,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.report.IReportPublishable;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 
 /**
@@ -57,10 +55,10 @@ public class FukaErrorReportView {
      */
     public ResponseData onLoad(FukaErrorReportViewDiv div) {
         ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
-        InternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
+        IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
 
-        InternalReportKihon.setInternalReportKihonData(kihonDiv, サブ業務コード, 内部帳票ID);
-        RDateTime creationDateTime = InternalReportKihon.getSelectedListCreationDateTime(kihonDiv);
+        kihonDiv.setInternalReportKihonData(サブ業務コード, 内部帳票ID);
+        RDateTime creationDateTime = kihonDiv.getSelectedListCreationDateTime();
 
         FukaErrorReport report = new FukaErrorReportService().getFukaErrorReport(creationDateTime);
         div.getDgFukaErrorList().setDataSource(FukaErrorGridMapper.toFukaErrorListGrid(report.getItemList()));
@@ -78,8 +76,8 @@ public class FukaErrorReportView {
      */
     public ResponseData onChangeToDdlCreationDateTiem(FukaErrorReportViewDiv div) {
         ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
-        InternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
-        RDateTime creationDateTime = InternalReportKihon.getSelectedListCreationDateTime(kihonDiv);
+        IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
+        RDateTime creationDateTime = kihonDiv.getSelectedListCreationDateTime();
 
         FukaErrorReport report = new FukaErrorReportService().getFukaErrorReport(creationDateTime);
         div.getDgFukaErrorList().setDataSource(FukaErrorGridMapper.toFukaErrorListGrid(report.getItemList()));
@@ -93,14 +91,14 @@ public class FukaErrorReportView {
      * 現在賦課エラー一覧グリッドに表示されている情報をCSV化してダウンロードします。
      *
      * @param div 賦課エラー一覧パネル
-     * @return FileData
+     * @param response レスポンスデータ
+     * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_btnCsvDownload(FukaErrorReportViewDiv div, IDownLoadServletResponse response) {
-//        FileData response = new FileData();
-        InternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
+        IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
 
-        InternalReportInfo reportInfo = InternalReportKihon.getInternalReportInfo(kihonDiv);
-        InternalReportBatchInfo batchInfo = InternalReportKihon.getInternalReportBatchInfo(kihonDiv);
+        InternalReportInfo reportInfo = kihonDiv.getInternalReportInfo();
+        InternalReportBatchInfo batchInfo = kihonDiv.getInternalReportBatchInfo();
         List<FukaErrorReportItem> reportItem = FukaErrorGridMapper.toFukaErrorReportItemList(div.getDgFukaErrorList().getDataSource());
         IInternalReport internalReport = new FukaErrorReport(サブ業務コード, reportInfo, batchInfo, reportItem);
 
@@ -241,9 +239,10 @@ public class FukaErrorReportView {
         @Override
         public ResponseData<SourceDataCollection> publish(FukaErrorReportViewDiv div) {
             FukaErrorListPrinter printer = new FukaErrorListPrinter();
+            IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
 
-            InternalReportInfo info = InternalReportKihon.getInternalReportInfo(div.getCcdFukaErrorCommon());
-            InternalReportBatchInfo batchInfo = InternalReportKihon.getInternalReportBatchInfo(div.getCcdFukaErrorCommon());
+            InternalReportInfo info = kihonDiv.getInternalReportInfo();
+            InternalReportBatchInfo batchInfo = kihonDiv.getInternalReportBatchInfo();
             List<FukaErrorReportItem> reportItemList = FukaErrorGridMapper.toFukaErrorReportItemList(div.getDgFukaErrorList().getDataSource());
             FukaErrorReport report = new FukaErrorReport(サブ業務コード, info, batchInfo, reportItemList);
 

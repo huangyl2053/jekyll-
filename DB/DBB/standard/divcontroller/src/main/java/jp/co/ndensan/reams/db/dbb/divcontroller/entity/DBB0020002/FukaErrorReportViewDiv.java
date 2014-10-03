@@ -8,13 +8,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002.FukaErrorShoriButtonDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002.dgFukaErrorList_Row;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.IInternalReportKihonDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.InternalReportKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * FukaErrorReportView のクラスファイル 
+ * FukaErrorIchiran のクラスファイル 
  * 
  * @author 自動生成
  */
@@ -31,6 +32,10 @@ public class FukaErrorReportViewDiv extends Panel {
     private DataGrid<dgFukaErrorList_Row> dgFukaErrorList;
     @JsonProperty("btnCsvDownload")
     private ButtonDownLoad btnCsvDownload;
+    @JsonProperty("btnFukaErrorPublish")
+    private ButtonReportPublish btnFukaErrorPublish;
+    @JsonProperty("btnPreview")
+    private ButtonPreview btnPreview;
     @JsonProperty("FukaErrorShoriButton")
     private FukaErrorShoriButtonDiv FukaErrorShoriButton;
 
@@ -41,13 +46,8 @@ public class FukaErrorReportViewDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("ccdFukaErrorCommon")
-    public InternalReportKihonDiv getCcdFukaErrorCommon() {
+    public IInternalReportKihonDiv getCcdFukaErrorCommon() {
         return ccdFukaErrorCommon;
-    }
-
-    @JsonProperty("ccdFukaErrorCommon")
-    public void setCcdFukaErrorCommon(InternalReportKihonDiv ccdFukaErrorCommon) {
-        this.ccdFukaErrorCommon=ccdFukaErrorCommon;
     }
 
     @JsonProperty("dgFukaErrorList")
@@ -68,6 +68,26 @@ public class FukaErrorReportViewDiv extends Panel {
     @JsonProperty("btnCsvDownload")
     public void setBtnCsvDownload(ButtonDownLoad btnCsvDownload) {
         this.btnCsvDownload=btnCsvDownload;
+    }
+
+    @JsonProperty("btnFukaErrorPublish")
+    public ButtonReportPublish getBtnFukaErrorPublish() {
+        return btnFukaErrorPublish;
+    }
+
+    @JsonProperty("btnFukaErrorPublish")
+    public void setBtnFukaErrorPublish(ButtonReportPublish btnFukaErrorPublish) {
+        this.btnFukaErrorPublish=btnFukaErrorPublish;
+    }
+
+    @JsonProperty("btnPreview")
+    public ButtonPreview getBtnPreview() {
+        return btnPreview;
+    }
+
+    @JsonProperty("btnPreview")
+    public void setBtnPreview(ButtonPreview btnPreview) {
+        this.btnPreview=btnPreview;
     }
 
     @JsonProperty("FukaErrorShoriButton")
