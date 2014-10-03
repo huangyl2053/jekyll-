@@ -28,7 +28,7 @@ public final class ShikibetsuCodeComparator implements Comparator<IShikibetsuCod
         ASC = new ShikibetsuCodeComparator(SortOrder.ASC);
         DESC = new ShikibetsuCodeComparator(SortOrder.DESC);
     }
-    private SortOrder order;
+    private final SortOrder order;
 
     /**
      * ソート順を指定して、ShikibetsuCodeComparatorを生成します。<br />
@@ -43,6 +43,6 @@ public final class ShikibetsuCodeComparator implements Comparator<IShikibetsuCod
 
     @Override
     public int compare(IShikibetsuCodeGettable o1, IShikibetsuCodeGettable o2) {
-        return o1.get識別コード().compareTo(o2.get識別コード()) * order.getRate();
+        return o1.get識別コード().compareTo(o2.get識別コード()) * order.rate();
     }
 }

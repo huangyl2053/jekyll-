@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.comparator;
+package jp.co.ndensan.reams.db.dbz.business.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,6 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
 import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaComparators.RegisterDateTimeComparator;
 import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaComparators.ShichosonCodeComparator;
+import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaNoComparator;
+import jp.co.ndensan.reams.db.dbz.business.comparator.ShikibetsuCodeComparator;
 import jp.co.ndensan.reams.db.dbz.business.helper.HihokenshaMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;

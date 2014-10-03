@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.comparator;
+package jp.co.ndensan.reams.db.dbz.business.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class MultiComparator<T> implements Comparator<T> {
 
-    private List<Comparator<? super T>> comparatorList = new ArrayList<>();
+    private final List<Comparator<? super T>> comparatorList = new ArrayList<>();
 
     /**
      * comparatorを優先順に列挙することで、新しいMultiComparatorを生成します。
