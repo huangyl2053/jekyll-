@@ -48,7 +48,7 @@ var DBZ;
                             "jpControlName": "",
                             "onBeforeClick": "",
                             "onAfterClick": "",
-                            "onClick": "",
+                            "onClick": "onClick_btnAdd",
                             "text": "追加する",
                             "appearance": 0,
                             "imageFileUrl": "",
@@ -87,7 +87,7 @@ var DBZ;
                                 "isShowFilter": false,
                                 "isShowFilterButton": false,
                                 "isShowRowState": false,
-                                "isShowSelectButtonColumn": false,
+                                "isShowSelectButtonColumn": true,
                                 "isShowModifyButtonColumn": true,
                                 "isShowDeleteButtonColumn": true,
                                 "limitRowCount": 0,
@@ -357,11 +357,11 @@ var DBZ;
                                 ]
                             },
                             "onSort": "",
-                            "onSelect": "",
-                            "onSelectByDblClick": "",
-                            "onSelectBySelectButton": "",
+                            "onSelect": "onSelect_dgJushochiTokureiRireki",
+                            "onSelectByDblClick": "onSelectByDblClick_dgJushochiTokureiRireki",
+                            "onSelectBySelectButton": "onSelectBySelectButton_dgJushochiTokureiRireki",
                             "onSelectByModifyButton": "onSelectByModifyButton_dgJushochiTokureiRireki",
-                            "onSelectByDeleteButton": "",
+                            "onSelectByDeleteButton": "onSelectByDeleteButton_dgJushochiTokureiRireki",
                             "onAfterRequest": "",
                             "onAfterRequestByDblClick": "",
                             "onAfterRequestBySelectButton": "",
@@ -449,7 +449,26 @@ var DBZ;
             "firstFocusFieldName": "",
             "lastFocusFieldName": "",
             "modes": [],
-            "publicEvents": [],
+            "publicEvents": [
+                {
+                    "eventName": "onClick_btnAdd"
+                },
+                {
+                    "eventName": "onSelect_dgJushochiTokureiRireki"
+                },
+                {
+                    "eventName": "onSelectByDblClick_dgJushochiTokureiRireki"
+                },
+                {
+                    "eventName": "onSelectBySelectButton_dgJushochiTokureiRireki"
+                },
+                {
+                    "eventName": "onSelectByModifyButton_dgJushochiTokureiRireki"
+                },
+                {
+                    "eventName": "onSelectByDeleteButton_dgJushochiTokureiRireki"
+                }
+            ],
             "publicEventsAlias": []
         };
         return JushochiTokureiRireki_Design;
@@ -460,8 +479,28 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnAdd = function () {
+                return "onClick_btnAdd";
+            };
+
+            Events.onSelect_dgJushochiTokureiRireki = function () {
+                return "onSelect_dgJushochiTokureiRireki";
+            };
+
+            Events.onSelectByDblClick_dgJushochiTokureiRireki = function () {
+                return "onSelectByDblClick_dgJushochiTokureiRireki";
+            };
+
+            Events.onSelectBySelectButton_dgJushochiTokureiRireki = function () {
+                return "onSelectBySelectButton_dgJushochiTokureiRireki";
+            };
+
             Events.onSelectByModifyButton_dgJushochiTokureiRireki = function () {
                 return "onSelectByModifyButton_dgJushochiTokureiRireki";
+            };
+
+            Events.onSelectByDeleteButton_dgJushochiTokureiRireki = function () {
+                return "onSelectByDeleteButton_dgJushochiTokureiRireki";
             };
             return Events;
         })();
