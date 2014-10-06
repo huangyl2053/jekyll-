@@ -44,7 +44,7 @@ public class KyufuKanrihyoKihon {
 
     private void setAtenaData(KyufuKanrihyoKihonDiv panel) {
         ControlGenerator cg = new ControlGenerator(getYaml().get(0));
-        AtenaShokaiSimple.setData(panel.getKyufuKanrihyoKaigoAtena().getAtenaInfo(), new ShikibetsuCode(cg.getAsRString("識別コード")));
+//        AtenaShokaiSimple.setData(panel.getKyufuKanrihyoKaigoAtena().getAtenaInfo(), new ShikibetsuCode(cg.getAsRString("識別コード")));
     }
 
     private void setKihonData(KyufuKanrihyoKihonDiv panel) {

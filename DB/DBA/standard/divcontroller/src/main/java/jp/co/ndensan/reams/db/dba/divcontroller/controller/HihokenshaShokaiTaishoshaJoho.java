@@ -44,7 +44,7 @@ public class HihokenshaShokaiTaishoshaJoho {
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
 
-        AtenaShokaiSimple.setData(johoDiv.getHihokenshaShokaiCommonJoho().getAtenaInfo(), new ShikibetsuCode(shikibetsuCode));
+//        AtenaShokaiSimple.setData(johoDiv.getHihokenshaShokaiCommonJoho().getAtenaInfo(), new ShikibetsuCode(shikibetsuCode));
         setDbData(johoDiv.getHihokenshaShokaiDbJoho(), hihokenshaNo);
         response.data = johoDiv;
         return response;

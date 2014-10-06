@@ -63,39 +63,38 @@ public class FukaTaishoSearch {
             searchValue.put("通知書番号", div.getSearchCriteriaOfHihokensha().getTxtTuchishoNo().getValue());
         }
 
-        if (div.getKaigoAtenaFinder().getTxtShikibetsuCode().getValue().length() > 0) {
-            searchValue.put("識別コード", div.getKaigoAtenaFinder().getTxtShikibetsuCode().getValue());
-        }
-
-        if (div.getKaigoAtenaFinder().getTxtSetaiCode().getValue().length() > 0) {
-            searchValue.put("世帯コード", div.getKaigoAtenaFinder().getTxtSetaiCode().getValue());
-        }
-
-        if (div.getKaigoAtenaFinder().getTxtKojinNo().getValue().length() > 0) {
-            searchValue.put("個人番号", div.getKaigoAtenaFinder().getTxtKojinNo().getValue());
-        }
-
-        if (div.getKaigoAtenaFinder().getTxtAtenaMeisho().getValue().length() > 0) {
-            searchValue.put("氏名", div.getKaigoAtenaFinder().getTxtAtenaMeisho().getValue());
-            searchValue.put("検索条件_氏名", div.getKaigoAtenaFinder().getDdlAtenaSearchKubun().getSelectedValue());
-        }
-
-        if (div.getKaigoAtenaFinder().getTxtYubinNo().getValue() != null) {
-            searchValue.put("郵便番号", div.getKaigoAtenaFinder().getTxtYubinNo().getValue());
-        }
-
-        if (div.getKaigoAtenaFinder().getTxtZenkokuJushoCode().getValue().length() > 0) {
-            searchValue.put("住所", div.getKaigoAtenaFinder().getTxtZenkokuJushoCode().getValue());
-        }
-
-        if (div.getKaigoAtenaFinder().getTxtSeinenGappi().getValue() != null) {
-            searchValue.put("生年月日", div.getKaigoAtenaFinder().getTxtSeinenGappi().getText());
-        }
-
-        if (div.getKaigoAtenaFinder().getDdlSeibetsu().getSelectedValue().length() > 0) {
-            searchValue.put("性別", div.getKaigoAtenaFinder().getDdlSeibetsu().getSelectedValue());
-        }
-
+//        if (div.getKaigoAtenaFinder().getTxtShikibetsuCode().getValue().length() > 0) {
+//            searchValue.put("識別コード", div.getKaigoAtenaFinder().getTxtShikibetsuCode().getValue());
+//        }
+//
+//        if (div.getKaigoAtenaFinder().getTxtSetaiCode().getValue().length() > 0) {
+//            searchValue.put("世帯コード", div.getKaigoAtenaFinder().getTxtSetaiCode().getValue());
+//        }
+//
+//        if (div.getKaigoAtenaFinder().getTxtKojinNo().getValue().length() > 0) {
+//            searchValue.put("個人番号", div.getKaigoAtenaFinder().getTxtKojinNo().getValue());
+//        }
+//
+//        if (div.getKaigoAtenaFinder().getTxtAtenaMeisho().getValue().length() > 0) {
+//            searchValue.put("氏名", div.getKaigoAtenaFinder().getTxtAtenaMeisho().getValue());
+//            searchValue.put("検索条件_氏名", div.getKaigoAtenaFinder().getDdlAtenaSearchKubun().getSelectedValue());
+//        }
+//
+//        if (div.getKaigoAtenaFinder().getTxtYubinNo().getValue() != null) {
+//            searchValue.put("郵便番号", div.getKaigoAtenaFinder().getTxtYubinNo().getValue());
+//        }
+//
+//        if (div.getKaigoAtenaFinder().getTxtZenkokuJushoCode().getValue().length() > 0) {
+//            searchValue.put("住所", div.getKaigoAtenaFinder().getTxtZenkokuJushoCode().getValue());
+//        }
+//
+//        if (div.getKaigoAtenaFinder().getTxtSeinenGappi().getValue() != null) {
+//            searchValue.put("生年月日", div.getKaigoAtenaFinder().getTxtSeinenGappi().getText());
+//        }
+//
+//        if (div.getKaigoAtenaFinder().getDdlSeibetsu().getSelectedValue().length() > 0) {
+//            searchValue.put("性別", div.getKaigoAtenaFinder().getDdlSeibetsu().getSelectedValue());
+//        }
         if (div.getSearchCriteriaOfHihokensha().getDdlFukaNendo().getSelectedValue().length() > 0) {
             searchValue.put("賦課年度", div.getSearchCriteriaOfHihokensha().getDdlFukaNendo().getSelectedValue());
         }

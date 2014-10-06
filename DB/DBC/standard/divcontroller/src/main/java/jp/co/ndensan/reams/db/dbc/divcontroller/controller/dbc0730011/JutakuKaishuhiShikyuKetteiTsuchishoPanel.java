@@ -49,8 +49,8 @@ public class JutakuKaishuhiShikyuKetteiTsuchishoPanel {
         //デモでは初期値を表示しない
 //        setPaymentInfo(panel);
         //　出力順序・改頁の情の初期値を設定する。
-        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder().getKaigoChohyoShutsuryokujun().getTxtSortName()
-                .setValue(new RString(ymlData.get(yamlNo).get("出力順名").toString()));
+//        panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder().getKaigoChohyoShutsuryokujun().getTxtSortName()
+//                .setValue(new RString(ymlData.get(yamlNo).get("出力順名").toString()));
         panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder().getKaigoChohyoShutsuryokujun().getTxtKaiPage()
                 .setValue(new RString(ymlData.get(yamlNo).get("改頁").toString()));
         panel.getJutakuKaishuhiShikyuKetteiTsuchishoOutputOrder().getKaigoChohyoShutsuryokujun().getTxtSort()
