@@ -37,7 +37,7 @@ public class FukaKoseiTaskDetailManageable implements ITaskDetailManageable {
             rsb.append(氏名);
 
             check.put(new RString("key"), new RString("1"));
-            FlowParameterAccessor.merge(check);
+//            FlowParameterAccessor.merge(check);
         } else {
             RString 被保番号 = new RString("被保番号：0000000108");
             RString 氏名 = new RString("氏名：秋田　よし子");

@@ -143,7 +143,7 @@ public class HihokenshaSearchForShinsei {
                             taishosha.get性別(),
                             taishosha.get生年月日().toDate(),
                             taishosha.get住所().get郵便番号(),
-                            new AtenaJusho(taishosha.get住所().getValue()),
+                            new AtenaJusho(taishosha.get住所().get住所()),
                             taishosha.get個人番号(),
                             taishosha.get住民種別(),
                             taishosha.get世帯コード())

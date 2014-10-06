@@ -17,6 +17,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 public class AtenaShokaiSimpleAdapter {
 
     public static void setDemoData(KaigoAtenaInfoDiv div, ShikibetsuCode 識別コード) {
-        AtenaShokaiSimple.setData(div.getAtenaInfo(), 識別コード);
+//        AtenaShokaiSimple.setData(div.getAtenaInfo(), 識別コード);
     }
 }

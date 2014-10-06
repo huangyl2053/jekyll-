@@ -41,7 +41,7 @@ public class TajutokuTaishosaJoho {
         DemoKojin demoKojin = new DemoKojin("第1号");
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
-        AtenaShokaiSimple.setData(taishoshaJohoDiv.getAtenaJoho(), new ShikibetsuCode(shikibetsuCode));
+//        AtenaShokaiSimple.setData(taishoshaJohoDiv.getAtenaJoho(), new ShikibetsuCode(shikibetsuCode));
         setTaishoshaData(taishoshaJohoDiv, hihokenshaNo);
 
         response.data = taishoshaJohoDiv;

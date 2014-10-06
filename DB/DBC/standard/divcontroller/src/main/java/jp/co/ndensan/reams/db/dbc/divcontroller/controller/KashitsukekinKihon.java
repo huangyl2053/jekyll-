@@ -48,7 +48,7 @@ public class KashitsukekinKihon {
     // 基本情報を設定する
     private void setKihonInfo(KashitsukekinKihonDiv panel) {
         ControlGenerator cg = new ControlGenerator(getYamlData(YML_KAIGO_KIHON).get(0));
-        AtenaShokaiSimple.setData(panel.getKashitsukekinKihonInfo().getAtenaInfo(), new ShikibetsuCode(cg.getAsRString("識別コード")));
+//        AtenaShokaiSimple.setData(panel.getKashitsukekinKihonInfo().getAtenaInfo(), new ShikibetsuCode(cg.getAsRString("識別コード")));
         KaigoShikakuKihonDiv kaigoKihonDiv = panel.getKashitsukekinKaigoKihonInfo();
         kaigoKihonDiv.getTxtHihokenshaNo().setValue(cg.getAsRString("被保番号"));
         kaigoKihonDiv.getTxtShutokuYmd().setValue(cg.getAsRDate("取得日"));

@@ -32,7 +32,7 @@ public final class KaigoKanryoMessage {
      */
     public static void setMessage(KaigoKanryoMessageDiv messageDiv, RString messageMain, RString messageTaisho1, RString messageTaisho2) {
 
-        KanryoMessage.setMessage(messageDiv.getKanryoMessage(), messageMain, messageTaisho1, messageTaisho2);
+//        KanryoMessage.setMessage(messageDiv.getKanryoMessage(), messageMain, messageTaisho1, messageTaisho2);
     }
 
     /**
@@ -44,6 +44,6 @@ public final class KaigoKanryoMessage {
      */
     public static void setMessage(KaigoKanryoMessageDiv messageDiv, RString messageMain) {
 
-        KanryoMessage.setMessage(messageDiv.getKanryoMessage(), messageMain, RString.EMPTY, RString.EMPTY);
+//        KanryoMessage.setMessage(messageDiv.getKanryoMessage(), messageMain, RString.EMPTY, RString.EMPTY);
     }
 }

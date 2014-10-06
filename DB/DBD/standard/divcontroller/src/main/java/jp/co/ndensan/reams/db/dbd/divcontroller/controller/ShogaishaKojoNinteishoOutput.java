@@ -49,7 +49,7 @@ public class ShogaishaKojoNinteishoOutput {
         panel.getPrintContentsSetting().getTxtIssueDate().setValue(new RDate(cg.getAsRString("発行日").toString()));
 
         cg = new ControlGenerator(targetSource.get(1));
-        panel.getOutputOrder().getKaigoChohyoShutsuryokujun().getTxtSortName().setValue(cg.getAsRString("出力順名"));
+//        panel.getOutputOrder().getKaigoChohyoShutsuryokujun().getTxtSortName().setValue(cg.getAsRString("出力順名"));
         panel.getOutputOrder().getKaigoChohyoShutsuryokujun().getTxtKaiPage().setValue(cg.getAsRString("改頁"));
         panel.getOutputOrder().getKaigoChohyoShutsuryokujun().getTxtSort().setValue(cg.getAsRString("出力順"));
     }
