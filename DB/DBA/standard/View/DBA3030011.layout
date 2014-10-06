@@ -2,7 +2,7 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "Dba3030011KaigoKanryoMessage",
+   "fieldName": "KaigoKanryoMessage",
    "items": [
     {
      "fieldName": "ccdKaigoKanryoMessage",
@@ -57,7 +57,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "Dba3030011KaigoKanryoMessage",
+   "selectControlID": "KaigoKanryoMessage",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -66,17 +66,13 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "Dba3030011KaigoKanryoMessage"
+     "postParameterPanelNames": "KaigoKanryoMessage"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
      "requestUrl": ""
-    },
-    {
-     "eventName": "onClick_btnAddUpdate",
-     "requestUrl": "dba/db/dba/Dba3030011KaigoKanryoMessage/onClick_btnAddUpdate"
     }
    ],
    "hiddenInput": [],
@@ -96,7 +92,7 @@
    "canPost": true
   },
   {
-   "fieldName": "Dba3030011ShikakuKihonJoho",
+   "fieldName": "KihonJoho",
    "items": [
     {
      "fieldName": "ccdKaigoAtenaInfo",
@@ -223,7 +219,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "Dba3030011ShikakuKihonJoho",
+   "selectControlID": "KihonJoho",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -248,7 +244,7 @@
    "canPost": false
   },
   {
-   "fieldName": "Dba3030011IryoHokenIchiran",
+   "fieldName": "IryoHokenIchiran",
    "items": [
     {
      "fieldName": "ccdryoHokenRireki",
@@ -472,7 +468,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "Dba3030011IryoHokenIchiran",
+   "selectControlID": "IryoHokenIchiran",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -481,21 +477,13 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "Dba3030011IryoHokenIchiran"
+     "postParameterPanelNames": "IryoHokenIchiran"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dba/db/dba/Dba3030011IryoHokenIchiran/onLoad"
-    },
-    {
-     "eventName": "onClick_btnAddIryoHoken",
-     "requestUrl": "dba/db/dba/Dba3030011IryoHokenIchiran/onClick_btnAddIryoHoken"
-    },
-    {
-     "eventName": "onClick_btnAddUpdate",
-     "requestUrl": "dba/db/dba/Dba3030011IryoHokenIchiran/onClick_btnAddUpdate"
+     "requestUrl": ""
     }
    ],
    "hiddenInput": [],
@@ -515,7 +503,7 @@
    "canPost": true
   },
   {
-   "fieldName": "Dba3030011IryoHokenMeisai",
+   "fieldName": "IryoHokenMeisai",
    "items": [
     {
      "fieldName": "txtIryoHokenKanyuDate",
@@ -823,7 +811,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "Dba3030011IryoHokenMeisai",
+   "selectControlID": "IryoHokenMeisai",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -878,12 +866,12 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba3030011ShikakuKihonJoho",
+     "visibleDiv": "KihonJoho",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba3030011IryoHokenIchiran",
+     "visibleDiv": "IryoHokenIchiran",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -893,7 +881,7 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba3030011IryoHokenMeisai",
+     "visibleDiv": "IryoHokenMeisai",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
@@ -943,7 +931,7 @@
      "transition": ""
     },
     {
-     "fieldName": "btnAddIryoHoken",
+     "fieldName": "ccdryoHokenRireki_IryoHokenRireki_btnAddIryoHoken",
      "event": "onClick",
      "transition": "追加"
     },
@@ -966,17 +954,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba3030011ShikakuKihonJoho",
+     "visibleDiv": "KihonJoho",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba3030011IryoHokenIchiran",
+     "visibleDiv": "IryoHokenIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba3030011IryoHokenMeisai",
+     "visibleDiv": "IryoHokenMeisai",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -1031,7 +1019,7 @@
      "transition": ""
     },
     {
-     "fieldName": "btnAddIryoHoken",
+     "fieldName": "ccdryoHokenRireki_IryoHokenRireki_btnAddIryoHoken",
      "event": "onClick",
      "transition": ""
     },
@@ -1054,17 +1042,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba3030011ShikakuKihonJoho",
+     "visibleDiv": "KihonJoho",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba3030011IryoHokenIchiran",
+     "visibleDiv": "IryoHokenIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba3030011IryoHokenMeisai",
+     "visibleDiv": "IryoHokenMeisai",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -1119,7 +1107,7 @@
      "transition": ""
     },
     {
-     "fieldName": "btnAddIryoHoken",
+     "fieldName": "ccdryoHokenRireki_IryoHokenRireki_btnAddIryoHoken",
      "event": "onClick",
      "transition": ""
     },
@@ -1142,17 +1130,17 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba3030011ShikakuKihonJoho",
+     "visibleDiv": "KihonJoho",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba3030011IryoHokenIchiran",
+     "visibleDiv": "IryoHokenIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba3030011IryoHokenMeisai",
+     "visibleDiv": "IryoHokenMeisai",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
@@ -1207,7 +1195,7 @@
      "transition": "完了"
     },
     {
-     "fieldName": "btnAddIryoHoken",
+     "fieldName": "ccdryoHokenRireki_IryoHokenRireki_btnAddIryoHoken",
      "event": "onClick",
      "transition": ""
     },
@@ -1235,8 +1223,8 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba3030011IryoHokenIchiran",
-     "panelState": "visible",
+     "visibleDiv": "IryoHokenIchiran",
+     "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
@@ -1245,7 +1233,7 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba3030011KaigoKanryoMessage",
+     "visibleDiv": "KaigoKanryoMessage",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -1285,7 +1273,7 @@
      "transition": ""
     },
     {
-     "fieldName": "btnAddIryoHoken",
+     "fieldName": "ccdryoHokenRireki_IryoHokenRireki_btnAddIryoHoken",
      "event": "onClick",
      "transition": ""
     },

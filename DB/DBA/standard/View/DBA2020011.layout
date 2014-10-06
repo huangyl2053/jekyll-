@@ -2,7 +2,7 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "Dba2020011ShisetsuNyutaishoComplete",
+   "fieldName": "KaigoKanryoMessage",
    "items": [
     {
      "fieldName": "ccdKaigoKanryoMessage",
@@ -57,7 +57,7 @@
    "authorityMode": 0,
    "marginLeft": "Default",
    "marginRight": "Default",
-   "selectControlID": "Dba2020011ShisetsuNyutaishoComplete",
+   "selectControlID": "KaigoKanryoMessage",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -66,7 +66,7 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "Dba2020011ShisetsuNyutaishoComplete"
+     "postParameterPanelNames": "KaigoKanryoMessage"
     }
    ],
    "requestSettings": [],
@@ -87,7 +87,7 @@
    "canPost": true
   },
   {
-   "fieldName": "Dba2020011ShisetsuNyutaishoKanriTaishoshaJoho",
+   "fieldName": "KihonJoho",
    "items": [
     {
      "fieldName": "ccdAtenaShokaiSimple",
@@ -185,7 +185,7 @@
    "authorityMode": 0,
    "marginLeft": "0em",
    "marginRight": "0em",
-   "selectControlID": "Dba2020011ShisetsuNyutaishoKanriTaishoshaJoho",
+   "selectControlID": "KihonJoho",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -194,7 +194,7 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "Dba2020011ShisetsuNyutaishoKanriTaishoshaJoho"
+     "postParameterPanelNames": "KihonJoho"
     }
    ],
    "requestSettings": [],
@@ -215,7 +215,7 @@
    "canPost": true
   },
   {
-   "fieldName": "Dba2020011ShisetsuNyutaishoRirekiSummary",
+   "fieldName": "ShisetsuNyutaishoRireki",
    "items": [
     {
      "fieldName": "ccdShisetsuNyutaishoRirekiKanri",
@@ -232,15 +232,15 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0px",
-     "marginRight": "0px",
+     "marginLeft": "XS",
+     "marginRight": "XS",
      "selectControlID": "ccdShisetsuNyutaishoRirekiKanri",
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
      "packageName": "",
-     "marginTop": "0px",
-     "marginBottom": "0px",
+     "marginTop": "XS",
+     "marginBottom": "XS",
      "businessId": "DBZ",
      "controlName": "ShisetsuNyutaishoRirekiKanri",
      "dataPassingForDialog": [],
@@ -305,7 +305,7 @@
    "authorityMode": 0,
    "marginLeft": "Default",
    "marginRight": "Default",
-   "selectControlID": "Dba2020011ShisetsuNyutaishoRirekiSummary",
+   "selectControlID": "ShisetsuNyutaishoRireki",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -331,56 +331,8 @@
    "canPost": false
   },
   {
-   "fieldName": "Dba2020011Meisai",
+   "fieldName": "ShisetsuNyutaishoMeisai",
    "items": [
-    {
-     "fieldName": "ddlDaichoShubetsu",
-     "items": [],
-     "controlType": "DropDownList",
-     "width": "200px",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "ddlDaichoShubetsu_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": false,
-     "labelRText": "",
-     "labelRWidth": "S",
-     "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "labelLText": "台帳種別",
-     "labelLWidth": "70px",
-     "labelLAlign": 2,
-     "dataSource": [
-      {
-       "key": "hihokenshaDaicho",
-       "value": "被保険者台帳"
-      },
-      {
-       "key": "tekiyoJogaishaDaicho",
-       "value": "適用除外者台帳"
-      },
-      {
-       "key": "tashichosonJushochiTokureishaDaicho",
-       "value": "他市町村住所地特例者台帳"
-      }
-     ],
-     "selectedItem": null,
-     "isBlankLine": false,
-     "disabledItem": []
-    },
     {
      "fieldName": "txtNyushoDate",
      "items": [],
@@ -402,7 +354,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "required": false,
+     "required": true,
      "text": "",
      "isPrivateInfo": false,
      "decorationClass": "",
@@ -417,7 +369,7 @@
      "onKeyPress": "",
      "value": "",
      "labelLText": "入所日",
-     "labelLWidth": "50px",
+     "labelLWidth": "65px",
      "labelLAlign": 2,
      "ymdKubun": 2,
      "displayFormat": 0,
@@ -475,7 +427,7 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
@@ -534,7 +486,7 @@
    "authorityMode": 0,
    "marginLeft": "Default",
    "marginRight": "XS",
-   "selectControlID": "Dba2020011Meisai",
+   "selectControlID": "ShisetsuNyutaishoMeisai",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -543,7 +495,7 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "Dba2020011Meisai"
+     "postParameterPanelNames": "ShisetsuNyutaishoMeisai"
     }
    ],
    "requestSettings": [],
@@ -593,7 +545,7 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba2020011ShisetsuNyutaishoKanriTaishoshaJoho",
+     "visibleDiv": "KihonJoho",
      "panelState": "visible",
      "fixedDiv": "Yes"
     },
@@ -608,8 +560,8 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2020011Meisai",
-     "panelState": "visible",
+     "visibleDiv": "ShisetsuNyutaishoMeisai",
+     "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
@@ -618,7 +570,7 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
+     "visibleDiv": "ShisetsuNyutaishoRireki",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -630,21 +582,6 @@
    ],
    "validation": {},
    "events": [
-    {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
-     "event": "onClick",
-     "transition": "追加"
-    },
-    {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
-     "event": "onSelectByModifyButton",
-     "transition": "修正"
-    },
-    {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
-     "event": "onSelectByDeleteButton",
-     "transition": "削除"
-    },
     {
      "fieldName": "btnAddUpdate",
      "event": "onClick",
@@ -679,6 +616,21 @@
      "fieldName": "btnBack",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": "追加"
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": "修正"
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": "削除"
     }
    ]
   },
@@ -689,7 +641,7 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba2020011ShisetsuNyutaishoKanriTaishoshaJoho",
+     "visibleDiv": "KihonJoho",
      "panelState": "visible",
      "fixedDiv": "Yes"
     },
@@ -704,7 +656,7 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2020011Meisai",
+     "visibleDiv": "ShisetsuNyutaishoMeisai",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -714,8 +666,8 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
-     "panelState": "visible",
+     "visibleDiv": "ShisetsuNyutaishoRireki",
+     "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
@@ -726,21 +678,6 @@
    ],
    "validation": {},
    "events": [
-    {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
-     "event": "onSelectByModifyButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
-     "event": "onSelectByDeleteButton",
-     "transition": ""
-    },
     {
      "fieldName": "btnAddUpdate",
      "event": "onClick",
@@ -774,6 +711,21 @@
     {
      "fieldName": "btnBack",
      "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
      "transition": ""
     }
    ]
@@ -785,7 +737,7 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba2020011ShisetsuNyutaishoKanriTaishoshaJoho",
+     "visibleDiv": "KihonJoho",
      "panelState": "visible",
      "fixedDiv": "Yes"
     },
@@ -800,7 +752,7 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2020011Meisai",
+     "visibleDiv": "ShisetsuNyutaishoMeisai",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -810,8 +762,8 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
-     "panelState": "visible",
+     "visibleDiv": "ShisetsuNyutaishoRireki",
+     "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
@@ -822,21 +774,6 @@
    ],
    "validation": {},
    "events": [
-    {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
-     "event": "onSelectByModifyButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
-     "event": "onSelectByDeleteButton",
-     "transition": ""
-    },
     {
      "fieldName": "btnAddUpdate",
      "event": "onClick",
@@ -870,6 +807,21 @@
     {
      "fieldName": "btnBack",
      "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
      "transition": ""
     }
    ]
@@ -881,7 +833,7 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba2020011ShisetsuNyutaishoKanriTaishoshaJoho",
+     "visibleDiv": "KihonJoho",
      "panelState": "visible",
      "fixedDiv": "Yes"
     },
@@ -896,8 +848,8 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2020011Meisai",
-     "panelState": "visible",
+     "visibleDiv": "ShisetsuNyutaishoMeisai",
+     "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
@@ -906,8 +858,8 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
-     "panelState": "visible",
+     "visibleDiv": "ShisetsuNyutaishoRireki",
+     "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
@@ -918,21 +870,6 @@
    ],
    "validation": {},
    "events": [
-    {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
-     "event": "onSelectByModifyButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
-     "event": "onSelectByDeleteButton",
-     "transition": ""
-    },
     {
      "fieldName": "btnAddUpdate",
      "event": "onClick",
@@ -967,6 +904,21 @@
      "fieldName": "btnBack",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
     }
    ]
   },
@@ -977,7 +929,7 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba2020011ShisetsuNyutaishoComplete",
+     "visibleDiv": "KaigoKanryoMessage",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -987,8 +939,8 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba2020011ShisetsuNyutaishoRirekiSummary",
-     "panelState": "visible",
+     "visibleDiv": "ShisetsuNyutaishoRireki",
+     "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
@@ -1002,21 +954,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
-     "event": "onSelectByModifyButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "1_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
-     "event": "onSelectByDeleteButton",
-     "transition": ""
-    },
-    {
      "fieldName": "btnAddUpdate",
      "event": "onClick",
      "transition": ""
@@ -1050,6 +987,21 @@
      "fieldName": "btnBack",
      "event": "onClick",
      "transition": "照会"
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
     }
    ]
   }
@@ -1431,7 +1383,7 @@
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "該当一覧へ"
+      "additionalText": "該当者一覧へ"
      }
     },
     {
