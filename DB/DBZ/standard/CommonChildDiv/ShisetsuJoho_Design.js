@@ -27,10 +27,10 @@ var DBZ;
                     "fieldName": "ShisetsuJoho",
                     "items": [
                         {
-                            "fieldName": "radShisetsuShurui",
+                            "fieldName": "ddlDaichoShubetsu",
                             "items": [],
-                            "controlType": "RadioButton",
-                            "width": "260px",
+                            "controlType": "DropDownList",
+                            "width": "200px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -41,7 +41,55 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0.15em",
+                            "marginLeft": "0px",
+                            "marginRight": "XS",
+                            "selectControlID": "ddlDaichoShubetsu_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "onChange": "",
+                            "selectedItem": null,
+                            "dataSource": [
+                                {
+                                    "key": "hihokenshaDaicho",
+                                    "value": "被保険者台帳"
+                                },
+                                {
+                                    "key": "tekiyoJogaishaDaicho",
+                                    "value": "適用除外者台帳"
+                                },
+                                {
+                                    "key": "tashichosonJushochiTokureishaDaicho",
+                                    "value": "他市町村住所地特例者台帳"
+                                }
+                            ],
+                            "labelLText": "台帳種別",
+                            "labelRText": "",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "isBlankLine": false,
+                            "disabledItem": []
+                        },
+                        {
+                            "fieldName": "radShisetsuShurui",
+                            "items": [],
+                            "controlType": "RadioButton",
+                            "width": "380px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0px",
                             "marginRight": "0em",
                             "selectControlID": "radShisetsuShurui_core",
                             "helpMessageID": "",
@@ -57,43 +105,21 @@ var DBZ;
                                 {
                                     "key": "other",
                                     "value": "その他特例施設"
+                                },
+                                {
+                                    "key": "tekiyojogaishisetsu",
+                                    "value": "適用除外施設"
                                 }
                             ],
                             "required": false,
+                            "labelLText": "施設種類",
+                            "labelLWidth": "70px",
+                            "labelLAlign": 2,
                             "onClick": "",
                             "newLineItemNumber": 3,
                             "spaceSize": "S",
-                            "labelLText": "",
-                            "labelLWidth": "S",
-                            "labelLAlign": 2,
                             "disabledItem": [],
                             "icon": []
-                        },
-                        {
-                            "fieldName": "lblOtherShisetsuShurui",
-                            "items": [],
-                            "controlType": "Label",
-                            "width": "60px",
-                            "visible": true,
-                            "displayNone": true,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": false,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
-                            "selectControlID": "lblOtherShisetsuShurui",
-                            "helpMessageID": "",
-                            "jpControlName": "",
-                            "required": false,
-                            "align": 1,
-                            "text": "kannai",
-                            "isPrivateInfo": false,
-                            "decorationClass": ""
                         },
                         {
                             "fieldName": "txtShisetsuCode",
@@ -119,26 +145,26 @@ var DBZ;
                             "onChange": "",
                             "required": false,
                             "labelLText": "入所施設",
+                            "labelRText": "",
                             "labelLWidth": "70px",
+                            "labelRWidth": "S",
                             "labelLAlign": 2,
-                            "text": "",
-                            "isPrivateInfo": false,
-                            "decorationClass": "",
+                            "labelRAlign": 0,
+                            "onFocus": "",
+                            "onBlur": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
                             "placeHolder": "",
                             "textKind": 2,
+                            "isPrivateInfo": false,
                             "isPassword": false,
                             "isComboBox": false,
-                            "onFocus": "",
-                            "onBlur": "",
                             "onKeyPress": "",
+                            "text": "",
                             "suggest": [],
                             "value": "",
-                            "labelRText": "",
-                            "labelRWidth": "S",
-                            "labelRAlign": 0,
+                            "decorationClass": "",
                             "permitCharactor": "",
                             "formatLength": "10"
                         },
@@ -285,7 +311,7 @@ var DBZ;
                             "fieldName": "txtShisetsuMeisho",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "450px",
+                            "width": "500px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -305,31 +331,31 @@ var DBZ;
                             "onChange": "",
                             "required": false,
                             "labelLText": "",
+                            "labelRText": "",
                             "labelLWidth": "S",
+                            "labelRWidth": "S",
                             "labelLAlign": 2,
-                            "text": "",
-                            "isPrivateInfo": false,
-                            "decorationClass": "",
+                            "labelRAlign": 0,
+                            "onFocus": "",
+                            "onBlur": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
                             "placeHolder": "",
                             "textKind": 0,
+                            "isPrivateInfo": false,
                             "isPassword": false,
                             "isComboBox": false,
-                            "onFocus": "",
-                            "onBlur": "",
                             "onKeyPress": "",
+                            "text": "",
                             "suggest": [],
                             "value": "",
-                            "labelRText": "",
-                            "labelRWidth": "S",
-                            "labelRAlign": 0,
+                            "decorationClass": "",
                             "permitCharactor": ""
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "700px",
+                    "width": "750px",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -362,7 +388,11 @@ var DBZ;
                             "requestUrl": ""
                         },
                         {
-                            "eventName": "onChange_radShisetsuShurui",
+                            "eventName": "onChange_ddlDaichoShubetsu",
+                            "requestUrl": "dbz/db/dbz/ShisetsuJoho/onChange_ddlDaichoShubetsu"
+                        },
+                        {
+                            "eventName": "onChange_onChange_radShisetsuShurui",
                             "requestUrl": "dbz/db/dbz/ShisetsuJoho/onChange_radShisetsuShurui"
                         },
                         {
@@ -390,6 +420,7 @@ var DBZ;
                     "isGroupBox": false,
                     "readOnly": false,
                     "height": "Auto",
+                    "focusPositionID": "restoreLayoutButton",
                     "canPost": true
                 }
             ],
@@ -467,12 +498,12 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("ShisetsuJoho"));
             };
 
-            Controls.prototype.radShisetsuShurui = function () {
-                return new UZA.RadioButton(this.convFiledName("radShisetsuShurui"));
+            Controls.prototype.ddlDaichoShubetsu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlDaichoShubetsu"));
             };
 
-            Controls.prototype.lblOtherShisetsuShurui = function () {
-                return new UZA.Label(this.convFiledName("lblOtherShisetsuShurui"));
+            Controls.prototype.radShisetsuShurui = function () {
+                return new UZA.RadioButton(this.convFiledName("radShisetsuShurui"));
             };
 
             Controls.prototype.txtShisetsuCode = function () {

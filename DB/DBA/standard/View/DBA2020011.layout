@@ -410,24 +410,7 @@
        "heightForDialog": "M",
        "firstFocusFieldName": "",
        "lastFocusFieldName": "",
-       "modes": [
-        {
-         "modeKey": "施設選択表示",
-         "modeValue": "表示しない"
-        },
-        {
-         "modeKey": "事業者選択",
-         "modeValue": "表示しない"
-        },
-        {
-         "modeKey": "他特例施設選択",
-         "modeValue": "表示しない"
-        },
-        {
-         "modeKey": "除外施設選択",
-         "modeValue": "表示する"
-        }
-       ],
+       "modes": [],
        "publicEvents": [],
        "publicEventsAlias": []
       }

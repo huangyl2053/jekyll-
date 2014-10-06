@@ -1,12 +1,11 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.事業者選択;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.他特例施設選択;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.施設選択表示;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.除外施設選択;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.入力補助;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.台帳種別;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.施設種類;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
@@ -16,9 +15,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
  */
 public interface IShisetsuJohoDiv {
 
-    RadioButton getRadShisetsuShurui();
+    DropDownList getDdlDaichoShubetsu();
 
-    Label getLblOtherShisetsuShurui();
+    RadioButton getRadShisetsuShurui();
 
     TextBoxCode getTxtShisetsuCode();
 
@@ -34,24 +33,25 @@ public interface IShisetsuJohoDiv {
 
     RString getInputMode();
 
-    除外施設選択 getMode_除外施設選択();
+    台帳種別 getMode_台帳種別();
 
-    void setMode_除外施設選択(除外施設選択 value);
+    void setMode_台帳種別(台帳種別 value);
 
-    他特例施設選択 getMode_他特例施設選択();
+    施設種類 getMode_施設種類();
 
-    void setMode_他特例施設選択(他特例施設選択 value);
+    void setMode_施設種類(ShisetsuJohoDiv.施設種類 value);
 
-    事業者選択 getMode_事業者選択();
+    入力補助 getMode_入力補助();
 
-    void setMode_事業者選択(事業者選択 value);
-
-    施設選択表示 getMode_施設選択表示();
-
-    void setMode_施設選択表示(施設選択表示 value);
+    void setMode_入力補助(ShisetsuJohoDiv.入力補助 value);
 
     /**
      * 施設種類ラジオボタンの選択項目が変更された際に実行します。
      */
     void onChange_radShisetsuShurui();
+
+    /**
+     * 台帳種別DropDonwnListの選択項目が変更された際に実行します。
+     */
+    void onChange_ddlDaichoShubetsu();
 }

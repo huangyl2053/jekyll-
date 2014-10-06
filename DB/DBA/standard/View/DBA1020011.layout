@@ -2,54 +2,13 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "Dba1020011NenReiTotatsuSearchCondition",
+   "fieldName": "NenReiTotatsuSearchCondition",
    "items": [
     {
-     "fieldName": "txtZenkaiFrom",
+     "fieldName": "ccdNenReiTotatsuSearchCondition",
      "items": [],
-     "controlType": "TextBoxFlexibleDate",
-     "width": "80px",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "0em",
-     "selectControlID": "txtZenkaiFrom_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": true,
-     "required": false,
-     "placeHolder": "",
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "text": "",
-     "labelLText": "前回処理期間",
-     "labelRText": "",
-     "labelLWidth": "100px",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "decorationClass": ""
-    },
-    {
-     "fieldName": "txtZenkaiTo",
-     "items": [],
-     "controlType": "TextBoxFlexibleDate",
-     "width": "80px",
+     "controlType": "CommonChildDiv",
+     "width": "XS",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -60,113 +19,36 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0em",
-     "marginRight": "XS",
-     "selectControlID": "txtZenkaiTo_core",
+     "marginLeft": "0px",
+     "marginRight": "0px",
+     "selectControlID": "ccdNenReiTotatsuSearchCondition",
      "helpMessageID": "",
      "jpControlName": "",
-     "readOnly": true,
-     "required": false,
-     "placeHolder": "",
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "text": "",
-     "labelLText": "～",
-     "labelRText": "",
-     "labelLWidth": "20px",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "decorationClass": ""
-    },
-    {
-     "fieldName": "txtNenreiTotatsuKikanFrom",
-     "items": [],
-     "controlType": "TextBoxFlexibleDate",
-     "width": "80px",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "0em",
-     "selectControlID": "txtNenreiTotatsuKikanFrom_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": false,
-     "required": false,
-     "placeHolder": "平26.08.23",
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "text": "",
-     "labelLText": "年齢到達期間",
-     "labelRText": "",
-     "labelLWidth": "100px",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "decorationClass": ""
-    },
-    {
-     "fieldName": "txtNenreiTotatsuKikanTo",
-     "items": [],
-     "controlType": "TextBoxFlexibleDate",
-     "width": "80px",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0em",
-     "marginRight": "XS",
-     "selectControlID": "txtNenreiTotatsuKikanTo_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": false,
-     "required": false,
-     "placeHolder": "",
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "text": "",
-     "labelLText": "～",
-     "labelRText": "",
-     "labelLWidth": "20px",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "decorationClass": ""
+     "relation": [],
+     "packageName": "",
+     "marginTop": "0px",
+     "marginBottom": "0px",
+     "businessId": "DBZ",
+     "controlName": "NenReiTotatsuSrchConInfo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "modes": [
+      {
+       "modeKey": "DisplayMode",
+       "modeValue": "ChushutsuInput"
+      }
+     ],
+     "publicEvents": [
+      {
+       "eventName": "onClick_btnKensaku"
+      }
+     ],
+     "publicEventsAlias": []
     }
    ],
    "controlType": "Panel",
@@ -183,14 +65,18 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "Dba1020011NenReiTotatsuSearchCondition",
+   "selectControlID": "NenReiTotatsuSearchCondition",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "年齢到達条件",
+   "title": "",
    "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [],
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "NenReiTotatsuSearchCondition"
+    }
+   ],
    "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
@@ -205,8 +91,8 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "focusPositionID": "Page",
-   "canPost": false
+   "focusPositionID": "ui-accordion-WestAccordion-header-0",
+   "canPost": true
   }
  ],
  "controlType": null,
@@ -233,29 +119,17 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "検索",
-   "wizardName": "",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "Dba1020011NenReiTotatsuSearchCondition",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "supplementInfoPostParamData": [],
-   "validation": {},
-   "events": []
-  },
-  {
-   "order": "2",
    "stateName": "バッチ実行",
    "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba1020011NenReiTotatsuSearchCondition",
+     "visibleDiv": "NenReiTotatsuSearchCondition",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdNenReiTotatsuSearchCondition",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -266,7 +140,7 @@
    "events": []
   }
  ],
- "currentState": "検索",
+ "currentState": "バッチ実行",
  "id": "DBA1020011",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -323,54 +197,6 @@
    "states": [
     {
      "state": "バッチ実行"
-    }
-   ],
-   "isFinishButtonOnTheRight": false,
-   "FinishButtonVisible": false,
-   "SuspendButtonVisible": false
-  },
-  {
-   "commonButtonAreaId": "Search",
-   "buttonSetting": [
-    {
-     "buttonKind": "CommonButtonSearch",
-     "buttonProperty": {
-      "fieldName": "btnSearchNenreiTotatsu",
-      "items": [],
-      "controlType": "CommonButtonSearchResult",
-      "width": "2px",
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnSearchNenreiTotatsu",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "検索",
-      "onBeforeClick": "",
-      "onAfterClick": "",
-      "onClick": "onClick_btnSearchNenreiTotatsu",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": ""
-     }
-    }
-   ],
-   "states": [
-    {
-     "state": "検索"
     }
    ],
    "isFinishButtonOnTheRight": false,

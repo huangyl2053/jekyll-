@@ -2,10 +2,49 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "ccdKaigoKanryoMessage",
-   "items": [],
-   "controlType": "CommonChildDiv",
-   "width": "XS",
+   "fieldName": "KaigoKanryoMessage",
+   "items": [
+    {
+     "fieldName": "ccdKaigoKanryoMessage",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0px",
+     "marginRight": "0px",
+     "selectControlID": "ccdKaigoKanryoMessage",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "packageName": "",
+     "marginTop": "0px",
+     "marginBottom": "0px",
+     "businessId": "DBZ",
+     "controlName": "KaigoKanryoMessage",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "modes": [],
+     "publicEvents": [],
+     "publicEventsAlias": [],
+     "KanryoMessage_width": "G12"
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -18,32 +57,132 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "ccdKaigoKanryoMessage",
+   "selectControlID": "KaigoKanryoMessage",
    "helpMessageID": "",
    "jpControlName": "",
-   "relation": [],
-   "packageName": "",
-   "businessId": "DBZ",
-   "controlName": "KaigoKanryoMessage",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KaigoKanryoMessage"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
    "marginTop": "0px",
    "marginBottom": "0px",
-   "dataPassingForDialog": [],
-   "dialogOkEventNameForDialog": "",
-   "dialogCancelEventNameForDialog": "",
-   "canTransferEvent": true,
-   "heightForDialog": "M",
-   "firstFocusFieldName": "",
-   "lastFocusFieldName": "",
-   "modes": [],
-   "publicEvents": [],
-   "publicEventsAlias": [],
-   "KanryoMessage_width": "G12"
+   "eraseBorder": true,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "canPost": true
   },
   {
-   "fieldName": "Dba1080011JogaishaToroku",
+   "fieldName": "NenReiTotatsuSearchCondition",
    "items": [
     {
-     "fieldName": "Dba1080011DbaNenreiTotatsh",
+     "fieldName": "ccdNenReiTotatsuSrchCondition",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0px",
+     "marginRight": "0px",
+     "selectControlID": "ccdNenReiTotatsuSrchCondition",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "packageName": "",
+     "marginTop": "0px",
+     "marginBottom": "0px",
+     "businessId": "DBZ",
+     "controlName": "NenReiTotatsuSrchConInfo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "modes": [
+      {
+       "modeKey": "DisplayMode",
+       "modeValue": "KensakuInput"
+      }
+     ],
+     "publicEvents": [
+      {
+       "eventName": "onClick_btnKensaku"
+      }
+     ],
+     "publicEventsAlias": []
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0px",
+   "marginRight": "0px",
+   "selectControlID": "NenReiTotatsuSearchCondition",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "NenReiTotatsuSearchCondition"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "0px",
+   "marginBottom": "0px",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "focusPositionID": "ui-accordion-WestAccordion-header-0",
+   "canPost": true
+  },
+  {
+   "fieldName": "JogaishaTorokuIchiran",
+   "items": [
+    {
+     "fieldName": "NenreiTotatsh",
      "items": [
       {
        "fieldName": "dgNenreiTotatshusha",
@@ -306,18 +445,16 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "Dba1080011DbaNenreiTotatsh",
+     "selectControlID": "NenreiTotatsh",
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
      "title": "年齢到達者",
-     "marginTop": "0px",
-     "marginBottom": "0px",
      "isOpen": true,
      "canOpenAndClose": false,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "Dba1080011DbaNenreiTotatsh"
+       "postParameterPanelNames": "NenreiTotatsh"
       }
      ],
      "requestSettings": [],
@@ -325,12 +462,14 @@
      "onOpen": "",
      "onClose": "",
      "session": {},
+     "marginTop": "0px",
+     "marginBottom": "0px",
      "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
-     "readOnly": true,
+     "readOnly": false,
      "height": "Auto",
      "canPost": true
     },
@@ -397,7 +536,7 @@
      "heightTextBoxMatches": false
     },
     {
-     "fieldName": "Dba1080011JogaiTaisho",
+     "fieldName": "JogaiTaishoIchiran",
      "items": [
       {
        "fieldName": "dgJogaiTaisho",
@@ -689,18 +828,16 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "Dba1080011JogaiTaisho",
+     "selectControlID": "JogaiTaishoIchiran",
      "helpMessageID": "",
      "jpControlName": "",
      "onLoad": "",
      "title": "除外対象者",
-     "marginTop": "0px",
-     "marginBottom": "0px",
      "isOpen": true,
      "canOpenAndClose": false,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "Dba1080011JogaiTaisho"
+       "postParameterPanelNames": "JogaiTaishoIchiran"
       }
      ],
      "requestSettings": [],
@@ -708,12 +845,14 @@
      "onOpen": "",
      "onClose": "",
      "session": {},
+     "marginTop": "0px",
+     "marginBottom": "0px",
      "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
-     "readOnly": true,
+     "readOnly": false,
      "height": "Auto",
      "canPost": true
     }
@@ -732,18 +871,16 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "Dba1080011JogaishaToroku",
+   "selectControlID": "JogaishaTorokuIchiran",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
    "title": "除外者登録",
-   "marginTop": "0px",
-   "marginBottom": "0px",
    "isOpen": true,
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "Dba1080011JogaishaToroku"
+     "postParameterPanelNames": "JogaishaTorokuIchiran"
     }
    ],
    "requestSettings": [],
@@ -751,56 +888,17 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
+   "marginTop": "0px",
+   "marginBottom": "0px",
    "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": true,
+   "readOnly": false,
    "height": "Auto",
    "focusPositionID": "Page",
    "canPost": true
-  },
-  {
-   "fieldName": "Dba1080011KaigoKanryoMessage",
-   "items": [],
-   "controlType": "Panel",
-   "width": "G12",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "0px",
-   "marginRight": "0px",
-   "selectControlID": "Dba1080011KaigoKanryoMessage",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "onLoad": "",
-   "title": "",
-   "marginTop": "0px",
-   "marginBottom": "0px",
-   "isOpen": true,
-   "canOpenAndClose": false,
-   "postParameterPanelNames": [],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "eraseBorder": true,
-   "backgroundColor": 0,
-   "widthAuto": true,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false,
-   "height": "Auto",
-   "canPost": false
   }
  ],
  "controlType": null,
@@ -827,22 +925,17 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "登録",
+   "stateName": "検索",
    "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba1080011JogaishaToroku",
+     "visibleDiv": "NenReiTotatsuSearchCondition",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba1080011DbaNenreiTotatsh",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "Dba1080011JogaiTaisho",
+     "visibleDiv": "ccdNenReiTotatsuSrchCondition",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -854,27 +947,54 @@
   },
   {
    "order": "2",
+   "stateName": "明細",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "JogaishaTorokuIchiran",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "NenreiTotatsh",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "JogaiTaishoIchiran",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": []
+  },
+  {
+   "order": "3",
    "stateName": "完了",
    "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba1080011JogaishaToroku",
+     "visibleDiv": "JogaishaTorokuIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba1080011DbaNenreiTotatsh",
+     "visibleDiv": "NenreiTotatsh",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba1080011JogaiTaisho",
+     "visibleDiv": "JogaiTaishoIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba1080011KaigoKanryoMessage",
+     "visibleDiv": "KaigoKanryoMessage",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -890,7 +1010,7 @@
    "events": []
   }
  ],
- "currentState": "完了",
+ "currentState": "All",
  "id": "DBA1080011",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -981,7 +1101,7 @@
    ],
    "states": [
     {
-     "state": "登録"
+     "state": "明細"
     }
    ],
    "isFinishButtonOnTheRight": false,

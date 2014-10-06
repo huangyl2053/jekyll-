@@ -8,10 +8,9 @@
             }
             ModeController.prototype.priorities = function () {
                 return [
-                    "施設選択表示",
-                    "事業者選択",
-                    "他特例施設選択",
-                    "除外施設選択"
+                    "台帳種別",
+                    "施設種類",
+                    "入力補助"
                 ];
             };
 
@@ -19,85 +18,76 @@
                 return new UZA.CommonChildDiv(this.fieldName);
             };
 
-            ModeController.prototype.施設選択表示 = function () {
-                return new Modes.施設選択表示(this.controls);
+            ModeController.prototype.台帳種別 = function () {
+                return new Modes.台帳種別(this.controls);
             };
 
-            ModeController.prototype.事業者選択 = function () {
-                return new Modes.事業者選択(this.controls);
+            ModeController.prototype.施設種類 = function () {
+                return new Modes.施設種類(this.controls);
             };
 
-            ModeController.prototype.他特例施設選択 = function () {
-                return new Modes.他特例施設選択(this.controls);
-            };
-
-            ModeController.prototype.除外施設選択 = function () {
-                return new Modes.除外施設選択(this.controls);
+            ModeController.prototype.入力補助 = function () {
+                return new Modes.入力補助(this.controls);
             };
             return ModeController;
         })();
         ShisetsuJoho.ModeController = ModeController;
 
         (function (Modes) {
-            var 施設選択表示 = (function () {
-                function 施設選択表示(controls) {
+            var 台帳種別 = (function () {
+                function 台帳種別(controls) {
                     this.controls = controls;
                 }
-                施設選択表示.prototype.表示する = function () {
+                台帳種別.prototype.台帳種別表示する = function () {
+                    this.controls.ddlDaichoShubetsu().displayNone = false;
+                };
+
+                台帳種別.prototype.台帳種別非表示する = function () {
+                    this.controls.ddlDaichoShubetsu().displayNone = true;
+                };
+                return 台帳種別;
+            })();
+            Modes.台帳種別 = 台帳種別;
+
+            var 施設種類 = (function () {
+                function 施設種類(controls) {
+                    this.controls = controls;
+                }
+                施設種類.prototype.施設種類を表示する = function () {
                     this.controls.radShisetsuShurui().displayNone = false;
                 };
 
-                施設選択表示.prototype.表示しない = function () {
+                施設種類.prototype.施設種類を表示しない = function () {
                     this.controls.radShisetsuShurui().displayNone = true;
                 };
-                return 施設選択表示;
+                return 施設種類;
             })();
-            Modes.施設選択表示 = 施設選択表示;
+            Modes.施設種類 = 施設種類;
 
-            var 事業者選択 = (function () {
-                function 事業者選択(controls) {
+            var 入力補助 = (function () {
+                function 入力補助(controls) {
                     this.controls = controls;
                 }
-                事業者選択.prototype.表示する = function () {
+                入力補助.prototype.事業者を表示する = function () {
                     this.controls.btnJigyoshaInputGuide().displayNone = false;
-                };
-
-                事業者選択.prototype.表示しない = function () {
-                    this.controls.btnJigyoshaInputGuide().displayNone = true;
-                };
-                return 事業者選択;
-            })();
-            Modes.事業者選択 = 事業者選択;
-
-            var 他特例施設選択 = (function () {
-                function 他特例施設選択(controls) {
-                    this.controls = controls;
-                }
-                他特例施設選択.prototype.表示する = function () {
-                    this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = false;
-                };
-
-                他特例施設選択.prototype.表示しない = function () {
                     this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = true;
-                };
-                return 他特例施設選択;
-            })();
-            Modes.他特例施設選択 = 他特例施設選択;
-
-            var 除外施設選択 = (function () {
-                function 除外施設選択(controls) {
-                    this.controls = controls;
-                }
-                除外施設選択.prototype.表示する = function () {
-                    this.controls.btnJogaiShisetsuInputGuide().displayNone = false;
-                };
-
-                除外施設選択.prototype.表示しない = function () {
                     this.controls.btnJogaiShisetsuInputGuide().displayNone = true;
                 };
-                return 除外施設選択;
+
+                入力補助.prototype.他特例施設を表示する = function () {
+                    this.controls.btnJigyoshaInputGuide().displayNone = true;
+                    this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = false;
+                    this.controls.btnJogaiShisetsuInputGuide().displayNone = true;
+                };
+
+                入力補助.prototype.除外施設を表示する = function () {
+                    this.controls.btnJigyoshaInputGuide().displayNone = true;
+                    this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = true;
+                    this.controls.btnJogaiShisetsuInputGuide().displayNone = false;
+                };
+                return 入力補助;
             })();
-            Modes.除外施設選択 = 除外施設選択;
+            Modes.入力補助 = 入力補助;
         })(ShisetsuJoho.Modes || (ShisetsuJoho.Modes = {}));
         var Modes = ShisetsuJoho.Modes;
     })(DBZ.ShisetsuJoho || (DBZ.ShisetsuJoho = {}));

@@ -2,7 +2,7 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "Dba9010011KaigoKanryoMessage",
+   "fieldName": "KaigoKanryoMessage",
    "items": [
     {
      "fieldName": "ccdKaigoKanryoMessage",
@@ -57,7 +57,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "Dba9010011KaigoKanryoMessage",
+   "selectControlID": "KaigoKanryoMessage",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -66,7 +66,7 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "Dba9010011KaigoKanryoMessage"
+     "postParameterPanelNames": "KaigoKanryoMessage"
     }
    ],
    "requestSettings": [],
@@ -86,7 +86,7 @@
    "canPost": true
   },
   {
-   "fieldName": "Dba9010011TennyuHoryuTokuteiJushIchiran",
+   "fieldName": "TennyuHoryuTokuteiJushIchiran",
    "items": [
     {
      "fieldName": "btnAddJusho",
@@ -377,7 +377,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "Dba9010011TennyuHoryuTokuteiJushIchiran",
+   "selectControlID": "TennyuHoryuTokuteiJushIchiran",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -386,7 +386,7 @@
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "Dba9010011TennyuHoryuTokuteiJushIchiran"
+     "postParameterPanelNames": "TennyuHoryuTokuteiJushIchiran"
     }
    ],
    "requestSettings": [],
@@ -407,7 +407,7 @@
    "canPost": true
   },
   {
-   "fieldName": "Dba9010011TennyuHoryuTokuteiJushoMeisai",
+   "fieldName": "TennyuHoryuTokuteiJushoMeisai",
    "items": [
     {
      "fieldName": "txtLasdecCode",
@@ -654,12 +654,7 @@
      "heightForDialog": "M",
      "firstFocusFieldName": "",
      "lastFocusFieldName": "",
-     "modes": [
-      {
-       "modeKey": "他特例施設選択",
-       "modeValue": "表示する"
-      }
-     ],
+     "modes": [],
      "publicEvents": [],
      "publicEventsAlias": []
     }
@@ -678,7 +673,7 @@
    "authorityMode": 0,
    "marginLeft": "0px",
    "marginRight": "0px",
-   "selectControlID": "Dba9010011TennyuHoryuTokuteiJushoMeisai",
+   "selectControlID": "TennyuHoryuTokuteiJushoMeisai",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -733,12 +728,12 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushIchiran",
+     "visibleDiv": "TennyuHoryuTokuteiJushIchiran",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushoMeisai",
+     "visibleDiv": "TennyuHoryuTokuteiJushoMeisai",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
@@ -811,12 +806,12 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushIchiran",
+     "visibleDiv": "TennyuHoryuTokuteiJushIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushoMeisai",
+     "visibleDiv": "TennyuHoryuTokuteiJushoMeisai",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -889,12 +884,12 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushIchiran",
+     "visibleDiv": "TennyuHoryuTokuteiJushIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushoMeisai",
+     "visibleDiv": "TennyuHoryuTokuteiJushoMeisai",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -967,12 +962,12 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushIchiran",
+     "visibleDiv": "TennyuHoryuTokuteiJushIchiran",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushoMeisai",
+     "visibleDiv": "TennyuHoryuTokuteiJushoMeisai",
      "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
@@ -1050,12 +1045,12 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba9010011KaigoKanryoMessage",
+     "visibleDiv": "KaigoKanryoMessage",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Dba9010011TennyuHoryuTokuteiJushIchiran",
+     "visibleDiv": "TennyuHoryuTokuteiJushIchiran",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -1107,7 +1102,7 @@
    ]
   }
  ],
- "currentState": "照会",
+ "currentState": "All",
  "id": "DBA9010011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
