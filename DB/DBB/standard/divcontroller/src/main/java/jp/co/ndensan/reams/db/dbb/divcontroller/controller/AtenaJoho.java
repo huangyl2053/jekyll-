@@ -40,7 +40,7 @@ public class AtenaJoho {
             AtenaShokaiSimpleDiv atenashokaiDiv = div.getKaigoAtenaInfo().getAtenaInfo();
             //ShikibetsuCode shikibetsuCode = new ShikibetsuCode((RString) ViewStateHolder.get("対象者識別コード", RString.class));
             ShikibetsuCode shikibetsuCode = new ShikibetsuCode("000000000000019");
-            AtenaShokaiSimple.setData(atenashokaiDiv, shikibetsuCode);
+//            AtenaShokaiSimple.setData(atenashokaiDiv, shikibetsuCode);
             KaigoFukaKihonDiv kaigofukakihonDiv = div.getKaigoFukaKihon();
 
             loadKaigoFukaKihon(kaigofukakihonDiv);

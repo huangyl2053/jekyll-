@@ -297,7 +297,11 @@
      "selectControlID": "btnFukaErrorPublish",
      "helpMessageID": "",
      "jpControlName": "",
-     "postParameterPanelNames": [],
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "FukaErrorReportView"
+      }
+     ],
      "validateUrl": "",
      "sourceCreateUrl": "FukaErrorReportView/onClick_btnReportPublish",
      "afterPrintUrl": "",
@@ -473,35 +477,35 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": ""
+     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onLoad"
     },
     {
      "eventName": "onChangeToDdlCreationDateTiem",
-     "requestUrl": ""
+     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onChangeToDdlCreationDateTiem"
     },
     {
      "eventName": "onClick_btnCsvDownload",
-     "requestUrl": ""
+     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onClick_btnCsvDownload"
     },
     {
      "eventName": "onSelect_dgFukaErrorList",
-     "requestUrl": ""
+     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onSelect_dgFukaErrorList"
     },
     {
      "eventName": "onBeforeClick_btnShikakuFuseigo",
-     "requestUrl": ""
+     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onBeforeClick_btnShikakuFuseigo"
     },
     {
      "eventName": "onClick_btnShikakuFuseigo",
-     "requestUrl": ""
+     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onClick_btnShikakuFuseigo"
     },
     {
      "eventName": "onBeforeClick_btnFukaKosei",
-     "requestUrl": ""
+     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onBeforeClick_btnFukaKosei"
     },
     {
      "eventName": "onClick_btnFukaKosei",
-     "requestUrl": ""
+     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onClick_btnFukaKosei"
     }
    ],
    "hiddenInput": [],
@@ -574,7 +578,16 @@
  "currentState": "All",
  "id": "DBB0020002",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "nextFukaKosei",
+   "eventName": "btnFukaKosei.onAfterClick"
+  },
+  {
+   "alias": "nextShikakuFuseigo",
+   "eventName": "btnShikakuFuseigo.onAfterClick"
+  }
+ ],
  "loadSequencePanelNames": [
   [
    "FukaErrorReportView"

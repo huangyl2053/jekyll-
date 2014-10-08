@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.basic;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.basic.testhelper.FukaErrorListInserter;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -17,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -105,8 +105,8 @@ public class FukaErrorListDacTest {
     public static class select_引数に賦課年度と通知書番号を渡した場合 extends DbbTestDacBase {
 
         private final RDateTime dateTime1999 = RDateTime.of(1999, 12, 31, 0, 0, 0);
-        private final RYear year1999 = new RYear(dateTime1999.getYear());
-        private final RString tsuchishoNo = new RString("0123");
+        private final FlexibleYear year1999 = new FlexibleYear(Integer.toString(dateTime1999.getYear()));
+        private final TsuchishoNo tsuchishoNo = new TsuchishoNo(new RString("0123"));
 
         @Test
         public void 対応するデータが存在し_指定した賦課年度が1999年である場合_賦課年度に1999年を持つデータが取得できる() {
@@ -127,6 +127,23 @@ public class FukaErrorListDacTest {
 
     }
 
+    public static class update extends DbbTestDacBase {
+
+        private final RDateTime dateTime = RDateTime.of(1999, 12, 31, 0, 0, 0);
+
+        @Test
+        public void 更新対象のデータが存在した場合_updateに成功し_1が返る() {
+            inserter.insert(createEntity(dateTime, "01"));
+            assertThat(sut.update(createEntity(dateTime, "01")), is(1));
+        }
+
+        @Test(expected = ApplicationException.class)
+        public void 更新対象のデータが存在しなかった場合_updateに失敗し_例外が発生する() {
+            assertThat(sut.update(createEntity(dateTime, "02")), is(0));
+            fail();
+        }
+    }
+
     public static class delete extends DbbTestDacBase {
 
         private final RDateTime dateTime = RDateTime.of(1999, 12, 31, 0, 0, 0);
@@ -139,7 +156,7 @@ public class FukaErrorListDacTest {
 
         @Test(expected = ApplicationException.class)
         public void 削除対象のデータが存在しなかった場合_deleteに失敗し_例外が発生する() {
-            assertThat(sut.delete(createEntity(dateTime, "01")), is(1));
+            assertThat(sut.delete(createEntity(dateTime, "01")), is(0));
             fail();
         }
     }
@@ -152,7 +169,7 @@ public class FukaErrorListDacTest {
         entity.setBatchId(new RString("0001"));
         entity.setBatchStartingDateTime(RDateTime.of(2008, 1, 1, 12, 12, 12));
         entity.setFukaNendo(new FlexibleYear(listCreatringDateTime.getDate().getYear().toDateString()));
-        entity.setTsuchishoNo(new RString(tsuchishoNo));
+        entity.setTsuchishoNo(new TsuchishoNo(new RString(tsuchishoNo)));
         entity.setErrorCode(new Code("01"));
         entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("1234500001")));
         entity.setShikibetsuCode(new ShikibetsuCode("012345678900002"));
@@ -160,7 +177,7 @@ public class FukaErrorListDacTest {
         return entity;
     }
 
-    private static DbT2010FukaErrorListEntity createEntity(RDateTime listCreatringDateTime, String tsuchishoNo, RYear fukaNendo) {
+    private static DbT2010FukaErrorListEntity createEntity(RDateTime listCreatringDateTime, String tsuchishoNo, FlexibleYear fukaNendo) {
         DbT2010FukaErrorListEntity entity = createEntity(listCreatringDateTime, tsuchishoNo);
         entity.setFukaNendo(new FlexibleYear(fukaNendo.toDateString()));
         return entity;

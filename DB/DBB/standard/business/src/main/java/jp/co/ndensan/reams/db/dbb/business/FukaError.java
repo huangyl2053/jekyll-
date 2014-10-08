@@ -25,7 +25,10 @@ public class FukaError extends KaigoCodeAssignedItem<FukaErrorCode> {
      * @param codeRyakusho 略称
      */
     public FukaError(Code code, RString codeMeisho, RString codeRyakusho) {
-        super(new FukaErrorCode(code), code, codeMeisho, codeRyakusho);
+        super(new FukaErrorCode(code),
+                code,
+                codeMeisho,
+                codeRyakusho);
     }
 
     /**
@@ -39,6 +42,6 @@ public class FukaError extends KaigoCodeAssignedItem<FukaErrorCode> {
 
     @Override
     public String toString() {
-        return getCode().toString().concat(":").concat(getMeisho().toString());
+        return getMeisho().toString();
     }
 }

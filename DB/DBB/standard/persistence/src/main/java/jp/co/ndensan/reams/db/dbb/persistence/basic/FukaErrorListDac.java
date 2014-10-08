@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbb.persistence.basic;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorList;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
@@ -60,7 +60,7 @@ public class FukaErrorListDac {
      * @return 賦課エラー一覧の、一行分のデータ
      */
     @Transaction
-    public DbT2010FukaErrorListEntity select(RYear fukaNendo, RString tsuchishoNo) {
+    public DbT2010FukaErrorListEntity select(FlexibleYear fukaNendo, TsuchishoNo tsuchishoNo) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT2010FukaErrorList.class)
                 .where(
@@ -70,6 +70,18 @@ public class FukaErrorListDac {
                         )
                 )
                 .toObject(DbT2010FukaErrorListEntity.class);
+    }
+
+    /**
+     * 賦課エラー一覧Entityを受け取り、その情報を元にテーブルを更新します。
+     *
+     * @param entity 賦課エラー一覧Entity
+     * @return 更新に成功した場合、1
+     */
+    @Transaction
+    public int update(DbT2010FukaErrorListEntity entity) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.update(entity).execute();
     }
 
     /**

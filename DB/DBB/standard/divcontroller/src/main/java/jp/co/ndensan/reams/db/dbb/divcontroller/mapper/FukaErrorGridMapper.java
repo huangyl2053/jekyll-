@@ -7,13 +7,16 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.FukaError;
-import jp.co.ndensan.reams.db.dbb.business.FukaErrorReportItem;
+import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItem;
+import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItemList;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002.dgFukaErrorList_Row;
+import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -37,9 +40,9 @@ public final class FukaErrorGridMapper {
      * @param reportItemList 賦課エラー一覧が持つデータ
      * @return グリッドに設定できるDataSource
      */
-    public static List<dgFukaErrorList_Row> toFukaErrorListGrid(List<FukaErrorReportItem> reportItemList) {
+    public static List<dgFukaErrorList_Row> toFukaErrorListGrid(FukaErrorInternalReportItemList reportItemList) {
         List<dgFukaErrorList_Row> list = new ArrayList<>();
-        for (FukaErrorReportItem reportItem : reportItemList) {
+        for (FukaErrorInternalReportItem reportItem : reportItemList) {
             list.add(toFukaErrorListRow(reportItem));
         }
         return list;
@@ -51,12 +54,12 @@ public final class FukaErrorGridMapper {
      * @param dataSource グリッドのDataSource
      * @return 賦課エラー一覧のデータ
      */
-    public static List<FukaErrorReportItem> toFukaErrorReportItemList(List<dgFukaErrorList_Row> dataSource) {
-        List<FukaErrorReportItem> list = new ArrayList<>();
+    public static FukaErrorInternalReportItemList toFukaErrorReportItemList(List<dgFukaErrorList_Row> dataSource) {
+        List<FukaErrorInternalReportItem> list = new ArrayList<>();
         for (dgFukaErrorList_Row row : dataSource) {
             list.add(toFukaErrorReportItem(row));
         }
-        return list;
+        return new FukaErrorInternalReportItemList(list);
     }
 
     /**
@@ -65,13 +68,13 @@ public final class FukaErrorGridMapper {
      * @param reportItem 賦課エラー一覧の1行分のデータ
      * @return グリッドのDataSource1行分
      */
-    public static dgFukaErrorList_Row toFukaErrorListRow(FukaErrorReportItem reportItem) {
+    public static dgFukaErrorList_Row toFukaErrorListRow(FukaErrorInternalReportItem reportItem) {
         dgFukaErrorList_Row row = new dgFukaErrorList_Row(RString.EMPTY, RString.EMPTY, new TextBoxDate(), RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         row.getFukaNendo().setValue(new RDate(reportItem.get賦課年度().getYearValue()));
-        row.setTsuchishoNo(reportItem.get通知書番号());
-        row.setErrorCode(reportItem.getエラー内容().getFukaErrorCode().value());
-        row.setErrorDetail(reportItem.getエラー内容().getMeisho());
+        row.setTsuchishoNo(reportItem.get通知書番号().getColumnValue());
+        row.setErrorCode(reportItem.getエラー詳細().getFukaErrorCode().value());
+        row.setErrorDetail(reportItem.getエラー詳細().getMeisho());
         row.setHihokenshaNo(reportItem.get被保険者番号().getColumnValue());
         row.setShikibetsuCode(reportItem.get識別コード().getColumnValue());
         row.setShoriJokyoCode(reportItem.getShoriKubun().getCode().value());
@@ -85,13 +88,14 @@ public final class FukaErrorGridMapper {
      * @param row グリッドのDataSource1行分
      * @return 賦課エラー一覧1行分のデータ
      */
-    public static FukaErrorReportItem toFukaErrorReportItem(dgFukaErrorList_Row row) {
-        FukaErrorReportItem reportItem = new FukaErrorReportItem(row.getFukaNendo().getValue().getYear(),
-                row.getTsuchishoNo(),
-                new FukaError(new Code(row.getErrorCode()), row.getErrorDetail(), row.getErrorDetail()),
-                new KaigoHihokenshaNo(row.getHihokenshaNo()),
-                new ShikibetsuCode(row.getShikibetsuCode()),
-                InternalReportShoriKubun.toValue(new Code(row.getShoriJokyoCode())));
-        return reportItem;
+    public static FukaErrorInternalReportItem toFukaErrorReportItem(dgFukaErrorList_Row row) {
+        FukaErrorModel model = new FukaErrorModel();
+        model.set賦課年度(new FlexibleYear(row.getFukaNendo().getValue().getYear().toDateString()));
+        model.set通知書番号(new TsuchishoNo(row.getTsuchishoNo()));
+        model.setエラーコード(new Code(row.getErrorCode()));
+        model.set被保険者番号(new KaigoHihokenshaNo(row.getHihokenshaNo()));
+        model.set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
+        model.set処理区分(InternalReportShoriKubun.toValue(new Code(row.getShoriJokyoCode())));
+        return new FukaErrorInternalReportItem(model);
     }
 }

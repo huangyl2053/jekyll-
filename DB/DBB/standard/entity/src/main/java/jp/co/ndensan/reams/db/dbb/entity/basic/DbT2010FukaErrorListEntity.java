@@ -7,8 +7,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -38,17 +39,17 @@ public class DbT2010FukaErrorListEntity implements IDbAccessable {
     private SubGyomuCode subGyomuCode;
     @PrimaryKey
     private RString internalReportId;
-    @PrimaryKey
-    private FlexibleYear fukaNendo;
-    @PrimaryKey
-    private RString tsuchishoNo;
     private RDateTime listCreationDateTime;
     private RString batchId;
     private RDateTime batchStartingDateTime;
+    private Code shoriKubunCode;
+    @PrimaryKey
+    private FlexibleYear fukaNendo;
+    @PrimaryKey
+    private TsuchishoNo tsuchishoNo;
     private Code errorCode;
     private KaigoHihokenshaNo hihokenshaNo;
     private ShikibetsuCode shikibetsuCode;
-    private Code shoriKubunCode;
 
     /**
      * getInsertDantaiCd
@@ -132,42 +133,6 @@ public class DbT2010FukaErrorListEntity implements IDbAccessable {
     }
 
     /**
-     * getFukaNendo
-     *
-     * @return fukaNendo
-     */
-    public FlexibleYear getFukaNendo() {
-        return fukaNendo;
-    }
-
-    /**
-     * setFukaNendo
-     *
-     * @param fukaNendo fukaNendo
-     */
-    public void setFukaNendo(FlexibleYear fukaNendo) {
-        this.fukaNendo = fukaNendo;
-    }
-
-    /**
-     * getTsuchishoNo
-     *
-     * @return tsuchishoNo
-     */
-    public RString getTsuchishoNo() {
-        return tsuchishoNo;
-    }
-
-    /**
-     * setTsuchishoNo
-     *
-     * @param tsuchishoNo tsuchishoNo
-     */
-    public void setTsuchishoNo(RString tsuchishoNo) {
-        this.tsuchishoNo = tsuchishoNo;
-    }
-
-    /**
      * getListCreationDateTime
      *
      * @return listCreationDateTime
@@ -219,6 +184,60 @@ public class DbT2010FukaErrorListEntity implements IDbAccessable {
      */
     public void setBatchStartingDateTime(RDateTime batchStartingDateTime) {
         this.batchStartingDateTime = batchStartingDateTime;
+    }
+
+    /**
+     * getShoriKubunCode
+     *
+     * @return shoriKubunCode
+     */
+    public Code getShoriKubunCode() {
+        return shoriKubunCode;
+    }
+
+    /**
+     * setShoriKubunCode
+     *
+     * @param shoriKubunCode shoriKubunCode
+     */
+    public void setShoriKubunCode(Code shoriKubunCode) {
+        this.shoriKubunCode = shoriKubunCode;
+    }
+
+    /**
+     * getFukaNendo
+     *
+     * @return fukaNendo
+     */
+    public FlexibleYear getFukaNendo() {
+        return fukaNendo;
+    }
+
+    /**
+     * setFukaNendo
+     *
+     * @param fukaNendo fukaNendo
+     */
+    public void setFukaNendo(FlexibleYear fukaNendo) {
+        this.fukaNendo = fukaNendo;
+    }
+
+    /**
+     * getTsuchishoNo
+     *
+     * @return tsuchishoNo
+     */
+    public TsuchishoNo getTsuchishoNo() {
+        return tsuchishoNo;
+    }
+
+    /**
+     * setTsuchishoNo
+     *
+     * @param tsuchishoNo tsuchishoNo
+     */
+    public void setTsuchishoNo(TsuchishoNo tsuchishoNo) {
+        this.tsuchishoNo = tsuchishoNo;
     }
 
     /**
@@ -313,24 +332,6 @@ public class DbT2010FukaErrorListEntity implements IDbAccessable {
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
-    }
-
-    /**
-     * getShoriKubunCode
-     *
-     * @return shoriKubunCode
-     */
-    public Code getShoriKubunCode() {
-        return shoriKubunCode;
-    }
-
-    /**
-     * setShoriKubunCode
-     *
-     * @param shoriKubunCode shoriKubunCode
-     */
-    public void setShoriKubunCode(Code shoriKubunCode) {
-        this.shoriKubunCode = shoriKubunCode;
     }
 
     /**

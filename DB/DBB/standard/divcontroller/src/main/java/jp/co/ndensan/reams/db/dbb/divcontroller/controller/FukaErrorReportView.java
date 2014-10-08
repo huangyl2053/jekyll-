@@ -5,30 +5,32 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.FukaErrorReport;
-import jp.co.ndensan.reams.db.dbb.business.FukaErrorReportItem;
+import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReport;
+import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItem;
+import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItemList;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.messagemapping.FukaErrorValidationMessageMapping;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002.FukaErrorReportViewDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002.FukaErrorShoriButtonDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002.dgFukaErrorList_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.mapper.FukaErrorGridMapper;
-import jp.co.ndensan.reams.db.dbb.realservice.FukaErrorReportService;
+import jp.co.ndensan.reams.db.dbb.realservice.FukaErrorInternalReportService;
+import jp.co.ndensan.reams.db.dbb.realservice.FukaErrorInternalReportItemValidationService;
 import jp.co.ndensan.reams.db.dbb.realservice.report.FukaErrorListPrinter;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReport;
-import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportBatchInfo;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportConverterFactory;
-import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportCsvConverter;
-import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportInfo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCsvConverter;
+import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCommon;
+import jp.co.ndensan.reams.ur.urz.business.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.IInternalReportKihonDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationHelper;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.report.IReportPublishable;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
+//import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 
 /**
  * 賦課エラー修正画面の、エラー一覧を表示するパネルについての処理を行うクラスです。
@@ -57,11 +59,11 @@ public class FukaErrorReportView {
         ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
         IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
 
-        kihonDiv.setInternalReportKihonData(サブ業務コード, 内部帳票ID);
-        RDateTime creationDateTime = kihonDiv.getSelectedListCreationDateTime();
+        FukaErrorInternalReport report = new FukaErrorInternalReportService().getFukaErrorInternalReport();
+        kihonDiv.setKihonData(report);
 
-        FukaErrorReport report = new FukaErrorReportService().getFukaErrorReport(creationDateTime);
-        div.getDgFukaErrorList().setDataSource(FukaErrorGridMapper.toFukaErrorListGrid(report.getItemList()));
+        div.getDgFukaErrorList().setDataSource(FukaErrorGridMapper.toFukaErrorListGrid(report.get賦課エラーList()));
+        div.getFukaErrorShoriButton().setDisabled(true);
 
         response.data = div;
         return response;
@@ -79,8 +81,8 @@ public class FukaErrorReportView {
         IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
         RDateTime creationDateTime = kihonDiv.getSelectedListCreationDateTime();
 
-        FukaErrorReport report = new FukaErrorReportService().getFukaErrorReport(creationDateTime);
-        div.getDgFukaErrorList().setDataSource(FukaErrorGridMapper.toFukaErrorListGrid(report.getItemList()));
+        FukaErrorInternalReport report = new FukaErrorInternalReportService().getFukaErrorInternalReport(creationDateTime);
+        div.getDgFukaErrorList().setDataSource(FukaErrorGridMapper.toFukaErrorListGrid(report.get賦課エラーList()));
 
         response.data = div;
         return response;
@@ -94,25 +96,25 @@ public class FukaErrorReportView {
      * @param response レスポンスデータ
      * @return IDownLoadServletResponse
      */
-    public IDownLoadServletResponse onClick_btnCsvDownload(FukaErrorReportViewDiv div, IDownLoadServletResponse response) {
+    //TODO n8178 城間篤人 uzのリリースが完了するまで、IDownLoadServletResponseが使用不可。リリース後コメントアウトをはずす 2014年10月末
+    public FileData onClick_btnCsvDownload(FukaErrorReportViewDiv div) {//, IDownLoadServletResponse response) {
         IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
 
-        InternalReportInfo reportInfo = kihonDiv.getInternalReportInfo();
-        InternalReportBatchInfo batchInfo = kihonDiv.getInternalReportBatchInfo();
-        List<FukaErrorReportItem> reportItem = FukaErrorGridMapper.toFukaErrorReportItemList(div.getDgFukaErrorList().getDataSource());
-        IInternalReport internalReport = new FukaErrorReport(サブ業務コード, reportInfo, batchInfo, reportItem);
+        IInternalReportCommon reportCommon = kihonDiv.getInternalReportCommon();
+        FukaErrorInternalReportItemList reportItem = FukaErrorGridMapper.toFukaErrorReportItemList(div.getDgFukaErrorList().getDataSource());
+        IInternalReport internalReport = new FukaErrorInternalReport(reportCommon, reportItem);
 
-        InternalReportCsvConverter converter = InternalReportConverterFactory.createCsvConvertor(サブ業務コード);
+        IInternalReportCsvConverter converter = InternalReportConverterFactory.createCsvConvertor(サブ業務コード);
         byte[] csvByteData = converter.convertCsvByteData(internalReport);
 
-        response.writeData(csvByteData);
-        response.setFileName(converter.getFileName(internalReport));
-        return response;
+//        response.writeData(csvByteData);
+//        response.setFileName(converter.getFileName(internalReport));
+        return new FileData();//response;
     }
 
     /**
      * 賦課エラー一覧グリッドから、1行選択した際に実行されるイベントです。<br/>
-     * 選択した行のエラー内容に合わせて、修正処理へ遷移するボタンの表示非表示を切り替えます。
+     * 選択した行のエラー内容に合わせて、修正処理へ遷移するボタンの表示非表示を切り替え、遷移可能な状態に切り替えます。
      *
      * @param div 賦課エラー一覧パネル
      * @return ResponseData
@@ -132,6 +134,8 @@ public class FukaErrorReportView {
                 break;
         }
 
+        div.getFukaErrorShoriButton().setDisabled(false);
+
         response.data = div;
         return response;
     }
@@ -149,24 +153,18 @@ public class FukaErrorReportView {
      */
     public ResponseData onBeforeClick_btnShikakuFuseigo(FukaErrorReportViewDiv div) {
         ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
-
-        if (div.getDgFukaErrorList().getSelectedItems().isEmpty()) {
-            response.addValidateMessage(UrErrorMessages.実行不可.getMessage().replace("処理対象が未選択のため、修正処理画面へ移動すること"));
-            response.data = div;
-            return response;
-        }
-
-        dgFukaErrorList_Row row = div.getDgFukaErrorList().getSelectedItems().get(0);
-        RYear fukaNendo = row.getFukaNendo().getValue().getYear();
-        RString tsuchishoNo = row.getTsuchishoNo();
-
-        FukaErrorReportService service = new FukaErrorReportService();
-        if (!service.canErrorShusei(fukaNendo, tsuchishoNo)) {
-            response.addValidateMessage(UrErrorMessages.実行不可.getMessage().replace("未処理状態でないため、修正処理画面へ移動すること"));
-        }
-
+        IValidationMessages validationMessages = validate(div);
+        ValidationHelper.appendMessages(response, validationMessages, FukaErrorValidationMessageMapping.class);
         response.data = div;
         return response;
+    }
+
+    private IValidationMessages validate(FukaErrorReportViewDiv div) {
+        dgFukaErrorList_Row row = div.getDgFukaErrorList().getSelectedItems().get(0);
+        FukaErrorInternalReportItem item = FukaErrorGridMapper.toFukaErrorReportItem(row);
+
+        FukaErrorInternalReportItemValidationService service = new FukaErrorInternalReportItemValidationService(item);
+        return service.validate();
     }
 
     /**
@@ -190,22 +188,8 @@ public class FukaErrorReportView {
      */
     public ResponseData onBeforeClick_btnFukaKosei(FukaErrorReportViewDiv div) {
         ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
-
-        if (div.getDgFukaErrorList().getSelectedItems().isEmpty()) {
-            response.addValidateMessage(UrErrorMessages.実行不可.getMessage().replace("処理対象が未選択のため、修正処理画面へ移動すること"));
-            response.data = div;
-            return response;
-        }
-
-        dgFukaErrorList_Row row = div.getDgFukaErrorList().getSelectedItems().get(0);
-        RYear fukaNendo = row.getFukaNendo().getValue().getYear();
-        RString tsuchishoNo = row.getTsuchishoNo();
-
-        FukaErrorReportService service = new FukaErrorReportService();
-        if (!service.canErrorShusei(fukaNendo, tsuchishoNo)) {
-            response.addValidateMessage(UrErrorMessages.実行不可.getMessage().replace("選択した処理対象が未処理のものでないため、修正処理画面へ移動すること"));
-        }
-
+        IValidationMessages validationMessages = validate(div);
+        ValidationHelper.appendMessages(response, validationMessages, FukaErrorValidationMessageMapping.class);
         response.data = div;
         return response;
     }
@@ -238,23 +222,19 @@ public class FukaErrorReportView {
 
         @Override
         public ResponseData<SourceDataCollection> publish(FukaErrorReportViewDiv div) {
+            ResponseData<SourceDataCollection> response = new ResponseData<>();
+
             FukaErrorListPrinter printer = new FukaErrorListPrinter();
             IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
 
-            InternalReportInfo info = kihonDiv.getInternalReportInfo();
-            InternalReportBatchInfo batchInfo = kihonDiv.getInternalReportBatchInfo();
-            List<FukaErrorReportItem> reportItemList = FukaErrorGridMapper.toFukaErrorReportItemList(div.getDgFukaErrorList().getDataSource());
-            FukaErrorReport report = new FukaErrorReport(サブ業務コード, info, batchInfo, reportItemList);
+            IInternalReportCommon reportCommon = kihonDiv.getInternalReportCommon();
+            FukaErrorInternalReportItemList reportItemList = FukaErrorGridMapper.toFukaErrorReportItemList(div.getDgFukaErrorList().getDataSource());
+            FukaErrorInternalReport report = new FukaErrorInternalReport(reportCommon, reportItemList);
 
             SourceDataCollection sdc = printer.print(report);
-            return _createResponseData(sdc);
+            response.data = sdc;
+            return response;
         }
-    }
-
-    private static <T> ResponseData<T> _createResponseData(T setIntoData) {
-        ResponseData<T> response = new ResponseData<>();
-        response.data = setIntoData;
-        return response;
     }
 
 }
