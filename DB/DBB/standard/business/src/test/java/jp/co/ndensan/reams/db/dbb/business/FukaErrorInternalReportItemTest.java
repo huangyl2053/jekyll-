@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business;
 
-import jp.co.ndensan.reams.db.dbb.business.validations.FukaErrorValidationMessage;
+import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportValidationMessage;
 import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
@@ -95,30 +95,6 @@ public class FukaErrorInternalReportItemTest extends DbbTestBase {
             model.set識別コード(null);
             sut = new FukaErrorInternalReportItem(model);
             assertThat(sut, is(instanceOf(FukaErrorInternalReportItem.class)));
-        }
-    }
-
-    public static class validate extends DbbTestBase {
-
-        @Before
-        public void setUp() {
-            setDefaultData();
-        }
-
-        @Test
-        public void 処理区分が未処理である場合_バリデーションメッセージを保持してない() {
-            model.set処理区分(InternalReportShoriKubun.処理無し);
-            sut = new FukaErrorInternalReportItem(model);
-            IValidationMessages result = sut.validate();
-            assertThat(result.contains(FukaErrorValidationMessage.更正対象が未処理状態ではないため実行不可), is(false));
-        }
-
-        @Test
-        public void 処理区分が未処理以外である場合_バリデーションメッセージを保持している() {
-            model.set処理区分(InternalReportShoriKubun.処理済);
-            sut = new FukaErrorInternalReportItem(model);
-            IValidationMessages result = sut.validate();
-            assertThat(result.contains(FukaErrorValidationMessage.更正対象が未処理状態ではないため実行不可), is(true));
         }
     }
 

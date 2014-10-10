@@ -105,18 +105,19 @@ public class FukaErrorListDacTest {
     public static class select_引数に賦課年度と通知書番号を渡した場合 extends DbbTestDacBase {
 
         private final RDateTime dateTime1999 = RDateTime.of(1999, 12, 31, 0, 0, 0);
-        private final FlexibleYear year1999 = new FlexibleYear(Integer.toString(dateTime1999.getYear()));
-        private final TsuchishoNo tsuchishoNo = new TsuchishoNo(new RString("0123"));
+        private final FlexibleYear year1999 = new FlexibleYear("1999");
+        private final String tsuchishoNoStr = "0123";
+        private final TsuchishoNo tsuchishoNo = new TsuchishoNo(new RString(tsuchishoNoStr));
 
         @Test
         public void 対応するデータが存在し_指定した賦課年度が1999年である場合_賦課年度に1999年を持つデータが取得できる() {
-            inserter.insert(createEntity(dateTime1999, tsuchishoNo.toString(), year1999));
+            inserter.insert(createEntity(dateTime1999, tsuchishoNoStr, year1999));
             assertThat(sut.select(year1999, tsuchishoNo).getFukaNendo(), is(new FlexibleYear(year1999.toDateString())));
         }
 
         @Test
         public void 対応するデータが存在し_指定した通知書番号が0123である場合_通知書番号に0123を持つデータが取得できる() {
-            inserter.insert(createEntity(dateTime1999, tsuchishoNo.toString(), year1999));
+            inserter.insert(createEntity(dateTime1999, tsuchishoNoStr, year1999));
             assertThat(sut.select(year1999, tsuchishoNo).getTsuchishoNo(), is(tsuchishoNo));
         }
 
@@ -165,7 +166,7 @@ public class FukaErrorListDacTest {
         DbT2010FukaErrorListEntity entity = new DbT2010FukaErrorListEntity();
         entity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
         entity.setInternalReportId(new RString("0123"));
-        entity.setListCreationDateTime(listCreatringDateTime);
+        entity.setInternalReportCreationDateTime(listCreatringDateTime);
         entity.setBatchId(new RString("0001"));
         entity.setBatchStartingDateTime(RDateTime.of(2008, 1, 1, 12, 12, 12));
         entity.setFukaNendo(new FlexibleYear(listCreatringDateTime.getDate().getYear().toDateString()));
@@ -179,7 +180,8 @@ public class FukaErrorListDacTest {
 
     private static DbT2010FukaErrorListEntity createEntity(RDateTime listCreatringDateTime, String tsuchishoNo, FlexibleYear fukaNendo) {
         DbT2010FukaErrorListEntity entity = createEntity(listCreatringDateTime, tsuchishoNo);
-        entity.setFukaNendo(new FlexibleYear(fukaNendo.toDateString()));
+        entity.setFukaNendo(new FlexibleYear(
+                fukaNendo.toDateString()));
         return entity;
     }
 

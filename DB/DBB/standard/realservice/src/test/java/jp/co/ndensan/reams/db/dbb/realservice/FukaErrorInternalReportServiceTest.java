@@ -167,7 +167,7 @@ public class FukaErrorInternalReportServiceTest extends DbbTestBase {
         DbT2010FukaErrorListEntity entity = new DbT2010FukaErrorListEntity();
         entity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
         entity.setInternalReportId(new RString("0123"));
-        entity.setListCreationDateTime(RDateTime.of(1999, 12, 12, 12, 12));
+        entity.setInternalReportCreationDateTime(RDateTime.of(1999, 12, 12, 12, 12));
         entity.setBatchId(new RString("0001"));
         entity.setBatchStartingDateTime(RDateTime.MAX);
         entity.setFukaNendo(fukaNendo);

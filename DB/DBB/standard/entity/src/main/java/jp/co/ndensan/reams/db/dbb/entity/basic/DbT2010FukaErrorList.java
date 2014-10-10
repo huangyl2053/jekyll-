@@ -18,14 +18,14 @@ public enum DbT2010FukaErrorList implements IColumnDefinition {
     lastUpdateReamsLoginId(2147483647, 0),
     subGyomuCode(2147483647, 0),
     internalReportId(128, 0),
-    listCreationDateTime(2147483647, 0),
+    internalReportCreationDateTime(2147483647, 0),
     batchId(255, 0),
     batchStartingDateTime(2147483647, 0),
     shoriKubunCode(2147483647, 0),
     fukaNendo(2147483647, 0),
-    tsuchishoNo(20, 0),
+    tsuchishoNo(2147483647, 0),
     errorCode(2147483647, 0),
-    hihokenshaNo(10, 0),
+    hihokenshaNo(2147483647, 0),
     shikibetsuCode(2147483647, 0);
 
     private final int maxLength;

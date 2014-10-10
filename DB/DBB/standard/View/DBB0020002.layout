@@ -477,7 +477,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onLoad"
+     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onLoad2"
     },
     {
      "eventName": "onChangeToDdlCreationDateTiem",

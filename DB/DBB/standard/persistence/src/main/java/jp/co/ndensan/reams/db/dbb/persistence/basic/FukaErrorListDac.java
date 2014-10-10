@@ -48,7 +48,7 @@ public class FukaErrorListDac {
     public List<DbT2010FukaErrorListEntity> select(RDateTime reportCreationDateTime) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT2010FukaErrorList.class)
-                .where(eq(DbT2010FukaErrorList.listCreationDateTime, reportCreationDateTime))
+                .where(eq(DbT2010FukaErrorList.internalReportCreationDateTime, reportCreationDateTime))
                 .toList(DbT2010FukaErrorListEntity.class);
     }
 

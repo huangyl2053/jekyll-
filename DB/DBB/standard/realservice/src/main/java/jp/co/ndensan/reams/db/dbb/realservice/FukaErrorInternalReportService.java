@@ -64,12 +64,12 @@ public class FukaErrorInternalReportService {
     }
 
     /**
-     * 直近の作成日時を指定して、賦課エラー一覧の情報を取得します。
+     * 直近の作成日時の、賦課エラー一覧情報を取得します。
      *
      * @return 賦課エラー一覧
      */
     public FukaErrorInternalReport getFukaErrorInternalReport() {
-        RDateTime creationDateTime = service.getCreationDateTime(サブ業務コード, 内部帳票ID);
+        RDateTime creationDateTime = service.getRecentCreationDateTime(サブ業務コード, 内部帳票ID);
         return getFukaErrorInternalReport(creationDateTime);
     }
 

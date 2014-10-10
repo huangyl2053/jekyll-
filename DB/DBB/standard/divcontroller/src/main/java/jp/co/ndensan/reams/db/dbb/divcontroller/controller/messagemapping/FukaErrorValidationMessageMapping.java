@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.messagemapping;
 
-import jp.co.ndensan.reams.db.dbb.business.validations.FukaErrorValidationMessage;
+import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportValidationMessage;
 import jp.co.ndensan.reams.ur.urz.business.validations.IValidationMessage;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.IValidationMessageMapping;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
  */
 public enum FukaErrorValidationMessageMapping implements IValidationMessageMapping {
 
-    エラー処理対象が未処理でない(FukaErrorValidationMessage.更正対象が未処理状態ではないため実行不可, "dgFukaErrorList");
+    エラー処理対象が未処理でない(InternalReportValidationMessage.更正対象が未処理状態ではないため実行不可, "dgFukaErrorList");
 
     private final IValidationMessage message;
     private final String fieldName;

@@ -6,17 +6,13 @@
 package jp.co.ndensan.reams.db.dbb.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportItem;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.validations.FukaErrorValidationMessage;
 import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
-import jp.co.ndensan.reams.ur.urz.business.validations.IValidatable;
-import jp.co.ndensan.reams.ur.urz.business.validations.IValidationMessages;
-import jp.co.ndensan.reams.ur.urz.business.validations.ValidationMessagesFactory;
+import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportItem;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 
@@ -25,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
  *
  * @author n8178 城間篤人
  */
-public class FukaErrorInternalReportItem implements IInternalReportItem, IValidatable {
+public class FukaErrorInternalReportItem extends InternalReportItem {
 
     @CsvField(order = 10, name = "賦課年度")
     private final FlexibleYear 賦課年度;
@@ -132,18 +128,6 @@ public class FukaErrorInternalReportItem implements IInternalReportItem, IValida
     @Override
     public InternalReportShoriKubun getShoriKubun() {
         return 処理区分;
-    }
-
-    @Override
-    public IValidationMessages validate() {
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-
-        if (!処理区分.equals(InternalReportShoriKubun.処理無し)) {
-            messages.add(FukaErrorValidationMessage.更正対象が未処理状態ではないため実行不可,
-                    "未処理状態でないため、修正処理画面へ移動すること");
-        }
-
-        return messages;
     }
 
 }

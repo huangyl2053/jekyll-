@@ -1,11 +1,11 @@
 ﻿subGyomuCode,UDD055SubGyomuCode,SubGyomuCode,,,,,A
 internalReportId,varchar,RString,,,,,A
-listCreationDateTime,UDD019Timestamp,RDateTime,,,,,A
+internalReportCreationDateTime,UDD019Timestamp,RDateTime,,,,,A
 batchId,varchar,RString,,,,,A
 batchStartingDateTime,UDD019Timestamp,RDateTime,,,,,A
 shoriKubunCode,UDD035Code,Code,,,,,A
 fukaNendo,UDD012YSeireki,FlexibleYear,,,,,A
-tsuchishoNo,varchar,TsuchishoNo,,,,,A
-errorCode,UDD035Code,Code,1,1,1,,A
-hihokenshaNo,varchar,KaigoHihokenshaNo,,,,,A
+tsuchishoNo,DbUDD008TsuchishoNo,TsuchishoNo,,,,,A
+errorCode,UDD035Code,Code,1,1,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,KaigoHihokenshaNo,,,,,A
 shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A

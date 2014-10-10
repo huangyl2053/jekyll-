@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReport;
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItem;
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItemList;
@@ -23,14 +24,16 @@ import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCommon;
 import jp.co.ndensan.reams.ur.urz.business.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.IInternalReportKihonDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationHelper;
+import jp.co.ndensan.reams.ur.urz.realservice.internalreport.IInternalReportService;
+import jp.co.ndensan.reams.ur.urz.realservice.internalreport.InternalReportServiceFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportPublishable;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
-//import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
+//import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 
 /**
  * 賦課エラー修正画面の、エラー一覧を表示するパネルについての処理を行うクラスです。
@@ -70,6 +73,30 @@ public class FukaErrorReportView {
     }
 
     /**
+     * 画面の読み込み時に実行されるイベントです。<br/>
+     * 賦課エラー一覧の、最新のリスト作成日時に対応する情報を、画面上に表示します。<br/>
+     * また、次処理への遷移ボタンを、グリッドの1行目に表示されているエラー内容に合わせて表示します。
+     *
+     * @param div 賦課エラー一覧Div
+     * @return ResponseData
+     */
+    public ResponseData onLoad2(FukaErrorReportViewDiv div) {
+        ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
+        IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
+
+        IInternalReportService service = InternalReportServiceFactory.getInternalReportService();
+        List<RDateTime> dateTimeList = service.getRecentCreationDateTimeList(サブ業務コード, 内部帳票ID);
+        FukaErrorInternalReport report = new FukaErrorInternalReportService().getFukaErrorInternalReport(dateTimeList.get(7));
+        kihonDiv.setKihonData(report);
+
+        div.getDgFukaErrorList().setDataSource(FukaErrorGridMapper.toFukaErrorListGrid(report.get賦課エラーList()));
+        div.getFukaErrorShoriButton().setDisabled(true);
+
+        response.data = div;
+        return response;
+    }
+
+    /**
      * リスト作成日時DDLが選択している項目が変更された際に実行されるイベントです。<br/>
      * 選択した作成日時に合わせて賦課エラー一覧のデータを取得し、グリッド上に表示しなおします。
      *
@@ -97,7 +124,7 @@ public class FukaErrorReportView {
      * @return IDownLoadServletResponse
      */
     //TODO n8178 城間篤人 uzのリリースが完了するまで、IDownLoadServletResponseが使用不可。リリース後コメントアウトをはずす 2014年10月末
-    public FileData onClick_btnCsvDownload(FukaErrorReportViewDiv div) {//, IDownLoadServletResponse response) {
+    public IDownLoadServletResponse onClick_btnCsvDownload(FukaErrorReportViewDiv div, IDownLoadServletResponse response) {
         IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
 
         IInternalReportCommon reportCommon = kihonDiv.getInternalReportCommon();
@@ -107,9 +134,9 @@ public class FukaErrorReportView {
         IInternalReportCsvConverter converter = InternalReportConverterFactory.createCsvConvertor(サブ業務コード);
         byte[] csvByteData = converter.convertCsvByteData(internalReport);
 
-//        response.writeData(csvByteData);
-//        response.setFileName(converter.getFileName(internalReport));
-        return new FileData();//response;
+        response.writeData(csvByteData);
+        response.setFileName(converter.getFileName(internalReport));
+        return response;
     }
 
     /**

@@ -39,7 +39,7 @@ public class DbT2010FukaErrorListEntity implements IDbAccessable {
     private SubGyomuCode subGyomuCode;
     @PrimaryKey
     private RString internalReportId;
-    private RDateTime listCreationDateTime;
+    private RDateTime internalReportCreationDateTime;
     private RString batchId;
     private RDateTime batchStartingDateTime;
     private Code shoriKubunCode;
@@ -133,21 +133,21 @@ public class DbT2010FukaErrorListEntity implements IDbAccessable {
     }
 
     /**
-     * getListCreationDateTime
+     * getInternalReportCreationDateTime
      *
-     * @return listCreationDateTime
+     * @return internalReportCreationDateTime
      */
-    public RDateTime getListCreationDateTime() {
-        return listCreationDateTime;
+    public RDateTime getInternalReportCreationDateTime() {
+        return internalReportCreationDateTime;
     }
 
     /**
-     * setListCreationDateTime
+     * setInternalReportCreationDateTime
      *
-     * @param listCreationDateTime listCreationDateTime
+     * @param internalReportCreationDateTime internalReportCreationDateTime
      */
-    public void setListCreationDateTime(RDateTime listCreationDateTime) {
-        this.listCreationDateTime = listCreationDateTime;
+    public void setInternalReportCreationDateTime(RDateTime internalReportCreationDateTime) {
+        this.internalReportCreationDateTime = internalReportCreationDateTime;
     }
 
     /**

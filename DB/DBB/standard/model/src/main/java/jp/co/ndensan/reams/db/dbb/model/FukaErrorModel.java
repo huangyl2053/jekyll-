@@ -35,7 +35,7 @@ public class FukaErrorModel implements IInternalReportCommonModel {
         entity.setInternalReportId(RString.EMPTY);
         entity.setFukaNendo(FlexibleYear.MIN);
         entity.setTsuchishoNo(new TsuchishoNo(RString.EMPTY));
-        entity.setListCreationDateTime(RDateTime.MIN);
+        entity.setInternalReportCreationDateTime(RDateTime.MIN);
         entity.setBatchId(RString.EMPTY);
         entity.setBatchStartingDateTime(RDateTime.MIN);
         entity.setErrorCode(Code.EMPTY);
@@ -83,7 +83,7 @@ public class FukaErrorModel implements IInternalReportCommonModel {
 
     @Override
     public RDateTime get内部帳票作成日時() {
-        return entity.getListCreationDateTime();
+        return entity.getInternalReportCreationDateTime();
     }
 
     @Override
@@ -180,7 +180,7 @@ public class FukaErrorModel implements IInternalReportCommonModel {
 
     @Override
     public void set内部帳票作成日時(RDateTime 内部帳票作成日時) {
-        entity.setListCreationDateTime(内部帳票作成日時);
+        entity.setInternalReportCreationDateTime(内部帳票作成日時);
     }
 
     @Override

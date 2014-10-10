@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.realservice;
 
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItem;
-import jp.co.ndensan.reams.db.dbb.business.validations.FukaErrorValidationMessage;
+import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportValidationMessage;
 import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
@@ -47,7 +47,7 @@ public class FukaErrorInternalReportItemValidationServiceTest extends DbbTestBas
         @Test
         public void 最新の処理区分が未処理以外である場合_更正対象が未処理状態でないことを示すメッセージを_戻り値が保持している() {
             IValidationMessages result = sut.validate();
-            assertThat(result.contains(FukaErrorValidationMessage.更正対象が未処理状態ではないため実行不可), is(true));
+            assertThat(result.contains(InternalReportValidationMessage.更正対象が未処理状態ではないため実行不可), is(true));
         }
 
     }
