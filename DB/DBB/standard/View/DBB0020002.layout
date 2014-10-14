@@ -251,7 +251,7 @@
      "controlType": "ButtonDownLoad",
      "width": "S",
      "visible": true,
-     "displayNone": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -283,7 +283,7 @@
      "controlType": "ButtonReportPublish",
      "width": "XS",
      "visible": true,
-     "displayNone": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -477,7 +477,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onLoad2"
+     "requestUrl": "dbb/db/dbb/FukaErrorReportView/onLoad"
     },
     {
      "eventName": "onChangeToDdlCreationDateTiem",

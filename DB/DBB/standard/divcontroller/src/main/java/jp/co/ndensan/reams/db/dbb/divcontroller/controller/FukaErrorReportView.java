@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReport;
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItem;
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItemList;
@@ -24,8 +23,6 @@ import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCommon;
 import jp.co.ndensan.reams.ur.urz.business.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.IInternalReportKihonDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationHelper;
-import jp.co.ndensan.reams.ur.urz.realservice.internalreport.IInternalReportService;
-import jp.co.ndensan.reams.ur.urz.realservice.internalreport.InternalReportServiceFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -43,11 +40,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 public class FukaErrorReportView {
 
     private static final SubGyomuCode サブ業務コード;
-    private static final RString 内部帳票ID;
 
     static {
         サブ業務コード = SubGyomuCode.DBB介護賦課;
-        内部帳票ID = new RString("FukaErrorList");
     }
 
     /**
@@ -63,31 +58,7 @@ public class FukaErrorReportView {
         IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
 
         FukaErrorInternalReport report = new FukaErrorInternalReportService().getFukaErrorInternalReport();
-        kihonDiv.setKihonData(report);
-
-        div.getDgFukaErrorList().setDataSource(FukaErrorGridMapper.toFukaErrorListGrid(report.get賦課エラーList()));
-        div.getFukaErrorShoriButton().setDisabled(true);
-
-        response.data = div;
-        return response;
-    }
-
-    /**
-     * 画面の読み込み時に実行されるイベントです。<br/>
-     * 賦課エラー一覧の、最新のリスト作成日時に対応する情報を、画面上に表示します。<br/>
-     * また、次処理への遷移ボタンを、グリッドの1行目に表示されているエラー内容に合わせて表示します。
-     *
-     * @param div 賦課エラー一覧Div
-     * @return ResponseData
-     */
-    public ResponseData onLoad2(FukaErrorReportViewDiv div) {
-        ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
-        IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
-
-        IInternalReportService service = InternalReportServiceFactory.getInternalReportService();
-        List<RDateTime> dateTimeList = service.getRecentCreationDateTimeList(サブ業務コード, 内部帳票ID);
-        FukaErrorInternalReport report = new FukaErrorInternalReportService().getFukaErrorInternalReport(dateTimeList.get(7));
-        kihonDiv.setKihonData(report);
+        kihonDiv.setKihonDataAndCreationDateTime(report);
 
         div.getDgFukaErrorList().setDataSource(FukaErrorGridMapper.toFukaErrorListGrid(report.get賦課エラーList()));
         div.getFukaErrorShoriButton().setDisabled(true);
@@ -98,7 +69,7 @@ public class FukaErrorReportView {
 
     /**
      * リスト作成日時DDLが選択している項目が変更された際に実行されるイベントです。<br/>
-     * 選択した作成日時に合わせて賦課エラー一覧のデータを取得し、グリッド上に表示しなおします。
+     * 選択した作成日時に合わせて賦おｎCh課エラー一覧のデータを取得し、グリッド上に表示しなおします。
      *
      * @param div 賦課エラー一覧Div
      * @return ResponseData
@@ -109,6 +80,7 @@ public class FukaErrorReportView {
         RDateTime creationDateTime = kihonDiv.getSelectedListCreationDateTime();
 
         FukaErrorInternalReport report = new FukaErrorInternalReportService().getFukaErrorInternalReport(creationDateTime);
+        kihonDiv.setKihonData(report);
         div.getDgFukaErrorList().setDataSource(FukaErrorGridMapper.toFukaErrorListGrid(report.get賦課エラーList()));
 
         response.data = div;
@@ -159,6 +131,10 @@ public class FukaErrorReportView {
             case "02":
                 buttonDiv.getBtnShikakuFuseigo().setDisplayNone(false);
                 break;
+            default:
+                setButtonDisplayNone(buttonDiv);
+                break;
+
         }
 
         div.getFukaErrorShoriButton().setDisabled(false);

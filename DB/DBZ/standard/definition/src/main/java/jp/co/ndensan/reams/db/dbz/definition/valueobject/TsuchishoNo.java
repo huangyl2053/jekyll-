@@ -74,4 +74,9 @@ public class TsuchishoNo implements IValueObject<RString>, Comparable<TsuchishoN
         return tsuchishoNo;
     }
 
+    @Override
+    public String toString() {
+        return tsuchishoNo.toString();
+    }
+
 }
