@@ -48,11 +48,6 @@
             <artifactId>DbzRealService</artifactId>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzTestHelper</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeEntity</artifactId>
             <version>${project.version}</version>

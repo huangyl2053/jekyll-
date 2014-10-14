@@ -60,7 +60,7 @@
                 <classifier>classes</classifier>
             </dependency>
             <dependency>
-                <groupId>jp.ndensan.reams.db.dbz</groupId>
+                <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzTestHelper</artifactId>
                 <version>${jp.co.ndensan.reams.dbzVersion}</version>
                 <scope>test</scope>
