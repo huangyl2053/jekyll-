@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
+import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
 import jp.co.ndensan.reams.ur.urz.business.jusho.IJusho;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;

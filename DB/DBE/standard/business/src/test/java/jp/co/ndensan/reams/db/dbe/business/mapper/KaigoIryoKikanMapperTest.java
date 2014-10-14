@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoIryoKikanTestHelper;
+import jp.co.ndensan.reams.db.dbe.business.helper.KaigoIryoKikanTestHelper;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
