@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.mapper;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
-import jp.co.ndensan.reams.ur.urz.entity.mapper.DoctorMapper;
+import jp.co.ndensan.reams.ur.urz.business.mapper.DoctorMapper;
 
 /**
  * 介護医師情報を変換するMapperクラスです。

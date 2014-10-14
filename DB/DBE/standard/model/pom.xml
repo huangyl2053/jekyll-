@@ -17,6 +17,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzModel</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeEntity</artifactId>
             <version>${project.version}</version>
