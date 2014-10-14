@@ -7,21 +7,30 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
-import jp.co.ndensan.reams.db.dbz.entity.mapper.HihokenshaShikakuMapper;
+import jp.co.ndensan.reams.db.dbz.business.mapper.HihokenshaShikakuMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.realservice.search.HihokenshaSearchItem;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
+import jp.co.ndensan.reams.ur.urz.realservice.search.BooleanOperator;
+import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
+import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
+import jp.co.ndensan.reams.ur.urz.realservice.search.SearchConditionFactory;
+import jp.co.ndensan.reams.ur.urz.realservice.search.StringOperator;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -51,8 +60,8 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
             dac = mock(HihokenshaDaichoDac.class);
             sut = new HihokenshaDaichoManager(dac, HihokenshaNoSaibanService.forTestType(new RString("1234567890")));
             shikaku = new HihokenshaShikaku.Builder(new LasdecCode("123456"), new ShikibetsuCode("1234567890"),
-                    RDateTime.of(2014, 3, 14, 15, 0),
-                    ShikakuHihokenshaKubun.第１号被保険者, FlexibleDate.MAX, ShikakuShutoku.NOTHING)
+                    new YMDHMS("20110912012345"), new ShoKisaiHokenshaNo(new RString("123456")),
+                    new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
                     .build();
         }
 
@@ -80,8 +89,8 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
             dac = mock(HihokenshaDaichoDac.class);
             sut = new HihokenshaDaichoManager(dac, HihokenshaNoSaibanService.forTestType(new RString("1234567890")));
             shikaku = new HihokenshaShikaku.Builder(new LasdecCode("123456"), new ShikibetsuCode("1234567890"),
-                    RDateTime.of(2014, 3, 14, 15, 0),
-                    ShikakuHihokenshaKubun.第１号被保険者, FlexibleDate.MAX, ShikakuShutoku.NOTHING)
+                    new YMDHMS("20110912012345"), new ShoKisaiHokenshaNo(new RString("123456")),
+                    new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
                     .build();
         }
 
@@ -104,7 +113,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
         private static HihokenshaDaichoDac dac;
         private static final LasdecCode lasdecCode = new LasdecCode("123456");
         private static final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("1234567890");
-        private static final RDateTime shoriTimestamp = RDateTime.of(2014, 4, 17, 9, 59);
+        private static final YMDHMS shoriTimestamp = new YMDHMS("20140417095900");
         private static final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1562483169"));
         private static IHihokenshaShikaku shikaku;
         private static HihokenshaDaichoManager sut;
@@ -129,9 +138,9 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
         public static class get直近被保険者資格_ShikibetsuCode版 extends DbzTestBase {
 
             @Test
-            public void get直近被保険者資格_ShikibetsuCode版_の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_地方公共団体コードが一致する() {
+            public void get直近被保険者資格_ShikibetsuCode版_の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_市町村コードが一致する() {
                 IHihokenshaShikaku result = sut.get直近被保険者資格(lasdecCode, shikibetsuCode);
-                assertThat(result.get地方公共団体コード(), is(shikaku.get地方公共団体コード()));
+                assertThat(result.get市町村コード(), is(shikaku.get市町村コード()));
             }
 
             @Test
@@ -143,7 +152,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
             @Test
             public void get直近被保険者資格_ShikibetsuCode版_の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_被保険者台帳登録日時が一致する() {
                 IHihokenshaShikaku result = sut.get直近被保険者資格(lasdecCode, shikibetsuCode);
-                assertThat(result.get被保険者台帳登録日時(), is(shikaku.get被保険者台帳登録日時()));
+                assertThat(result.get処理日時(), is(shikaku.get処理日時()));
             }
 
             @Test
@@ -156,9 +165,9 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
         public static class get直近被保険者資格_KaigoHihokenshaNo版 extends DbzTestBase {
 
             @Test
-            public void get直近被保険者資格_KaigoHihokenshaNo版_の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_地方公共団体コードが一致する() {
+            public void get直近被保険者資格_KaigoHihokenshaNo版_の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_市町村コードが一致する() {
                 IHihokenshaShikaku result = sut.get直近被保険者資格(lasdecCode, hihokenshaNo);
-                assertThat(result.get地方公共団体コード(), is(shikaku.get地方公共団体コード()));
+                assertThat(result.get市町村コード(), is(shikaku.get市町村コード()));
             }
 
             @Test
@@ -170,7 +179,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
             @Test
             public void get直近被保険者資格_KaigoHihokenshaNo版_の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_被保険者台帳登録日時が一致する() {
                 IHihokenshaShikaku result = sut.get直近被保険者資格(lasdecCode, hihokenshaNo);
-                assertThat(result.get被保険者台帳登録日時(), is(shikaku.get被保険者台帳登録日時()));
+                assertThat(result.get処理日時(), is(shikaku.get処理日時()));
             }
 
             @Test
@@ -183,9 +192,9 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
         public static class get被保険者資格 extends DbzTestBase {
 
             @Test
-            public void get被保険者資格の結果は_同じ条件のHihokenshaDaichoDac$selectFromKeyの結果をHihokenshaShikakuMapperで変換したものと_地方公共団体コードが一致する() {
+            public void get被保険者資格の結果は_同じ条件のHihokenshaDaichoDac$selectFromKeyの結果をHihokenshaShikakuMapperで変換したものと_市町村コードが一致する() {
                 IHihokenshaShikaku result = sut.get被保険者資格(lasdecCode, shikibetsuCode, shoriTimestamp);
-                assertThat(result.get地方公共団体コード(), is(shikaku.get地方公共団体コード()));
+                assertThat(result.get市町村コード(), is(shikaku.get市町村コード()));
             }
 
             @Test
@@ -197,7 +206,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
             @Test
             public void get被保険者資格の結果は_同じ条件のHihokenshaDaichoDac$selectFromKeyの結果をHihokenshaShikakuMapperで変換したものと_被保険者台帳登録日時が一致する() {
                 IHihokenshaShikaku result = sut.get被保険者資格(lasdecCode, shikibetsuCode, shoriTimestamp);
-                assertThat(result.get被保険者台帳登録日時(), is(shikaku.get被保険者台帳登録日時()));
+                assertThat(result.get処理日時(), is(shikaku.get処理日時()));
             }
 
             @Test
@@ -207,7 +216,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
             }
         }
 
-        public static class get被保険者資格ListOf extends DbzTestBase {
+        public static class get被保険者資格ListOf_市町村コード指定 extends DbzTestBase {
 
             List<DbT1001HihokenshaDaichoEntity> entities;
 
@@ -227,11 +236,11 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
             }
 
             @Test
-            public void get被保険者資格ListOfの結果はすべて_HihokenshaDaichoDac$selectの検索条件と_地方公共団体コードが一致する() {
+            public void get被保険者資格ListOfの結果はすべて_HihokenshaDaichoDac$selectの検索条件と_市町村コードが一致する() {
                 List<IHihokenshaShikaku> result = sut.get被保険者資格ListOf(lasdecCode);
-                assertThat(result.get(0).get地方公共団体コード(), is(lasdecCode));
-                assertThat(result.get(1).get地方公共団体コード(), is(lasdecCode));
-                assertThat(result.get(2).get地方公共団体コード(), is(lasdecCode));
+                assertThat(result.get(0).get市町村コード(), is(lasdecCode));
+                assertThat(result.get(1).get市町村コード(), is(lasdecCode));
+                assertThat(result.get(2).get市町村コード(), is(lasdecCode));
             }
 
             @Test
@@ -241,11 +250,65 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
             }
         }
 
-        private static DbT1001HihokenshaDaichoEntity createEntity(LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode, RDateTime shoriTimestamp) {
-            DbT1001HihokenshaDaichoEntity entity =
-                    DbT1001HihokenshaDaichoEntityMock.getSpiedInstance();
+        public static class get被保険者資格ListOf_検索条件指定 extends DbzTestBase {
+
+            List<DbT1001HihokenshaDaichoEntity> entities;
+            ISearchCondition condition;
+
+            @Before
+            public void setUp() {
+                INewSearchCondition lasdecCodeCriteria = SearchConditionFactory.condition(HihokenshaSearchItem.市町村コード,
+                        StringOperator.完全一致, lasdecCode.getColumnValue());
+                INewSearchCondition hihokenshaNoCriteria = SearchConditionFactory.condition(HihokenshaSearchItem.被保険者番号,
+                        StringOperator.完全一致, hihokenshaNo.getColumnValue());
+                condition = hihokenshaNoCriteria.and(lasdecCodeCriteria);
+
+                entities = new ArrayList<>();
+                entities.add(createEntity(lasdecCode, hihokenshaNo, shoriTimestamp));
+                when(dac.selectAll(any(ITrueFalseCriteria.class))).thenReturn(entities);
+            }
+
+            @Test
+            public void get被保険者資格ListOfの結果は_同じ条件のHihokenshaDaichoDac$selectの結果と_listのサイズが一致する() {
+                List<IHihokenshaShikaku> result = sut.get被保険者資格ListOf(condition);
+                assertThat(result.size(), is(entities.size()));
+            }
+
+            @Test
+            public void get被保険者資格ListOfの結果はすべて_HihokenshaDaichoDac$selectの検索条件と_市町村コードが一致する() {
+                List<IHihokenshaShikaku> result = sut.get被保険者資格ListOf(condition);
+                assertThat(result.get(0).get市町村コード(), is(lasdecCode));
+            }
+
+            @Test
+            public void get被保険者資格ListOfの結果はすべて_HihokenshaDaichoDac$selectの検索条件と_被保険者番号が一致する() {
+                List<IHihokenshaShikaku> result = sut.get被保険者資格ListOf(condition);
+                assertThat(result.get(0).get被保険者番号(), is(hihokenshaNo));
+            }
+
+            @Test
+            public void get被保険者資格ListOfは_検索結果が得られないとき_Collections$EMPTY_LIST_を返す() {
+                List<IHihokenshaShikaku> result = sut.get被保険者資格ListOf(new LasdecCode("666666"));
+                assertThat(result, is(Collections.EMPTY_LIST));
+            }
+        }
+
+        private static DbT1001HihokenshaDaichoEntity createEntity(LasdecCode lasdecCode,
+                ShikibetsuCode shikibetsuCode, YMDHMS shoriTimestamp) {
+            DbT1001HihokenshaDaichoEntity entity
+                    = DbT1001HihokenshaDaichoEntityMock.getSpiedInstance();
             entity.setShichosonCode(lasdecCode);
             entity.setShikibetsuCode(shikibetsuCode);
+            entity.setShoriTimestamp(shoriTimestamp);
+            return entity;
+        }
+
+        private static DbT1001HihokenshaDaichoEntity createEntity(LasdecCode lasdecCode,
+                KaigoHihokenshaNo hihokenshaNo, YMDHMS shoriTimestamp) {
+            DbT1001HihokenshaDaichoEntity entity
+                    = DbT1001HihokenshaDaichoEntityMock.getSpiedInstance();
+            entity.setShichosonCode(lasdecCode);
+            entity.setHihokenshaNo(hihokenshaNo);
             entity.setShoriTimestamp(shoriTimestamp);
             return entity;
         }

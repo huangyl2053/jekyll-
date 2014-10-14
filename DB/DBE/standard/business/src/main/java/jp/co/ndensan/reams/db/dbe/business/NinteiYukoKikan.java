@@ -16,6 +16,8 @@ import static java.util.Objects.requireNonNull;
  * @author N8156 宮本 康
  */
 // TODO N8156 宮本 康 コンストラクタの見直しが必要（登録時にチェックを行い値を設定する為、有効期間月数による再計算は不要と考えられる）
+// TODO N3327 三浦 凌 コンストラクタの有効期間の計算ロジックが間違っている。
+// (終了日は、開始日から有効期間月数ヶ月後の月末、開始日が一日のときは、有効期間月数-1ヶ月後の月末)
 public class NinteiYukoKikan {
 
     private final NinteiYukoKikanTsukisu 有効期間月数;

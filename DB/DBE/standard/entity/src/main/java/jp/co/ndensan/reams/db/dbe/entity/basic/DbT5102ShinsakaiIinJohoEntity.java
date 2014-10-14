@@ -292,7 +292,9 @@ public class DbT5102ShinsakaiIinJohoEntity implements IDbAccessable {
      * @return Meisho
      */
     public RString getShinsakaiIinShikakuCodeMeisho() {
-        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.資格, shinsakaiIinShikakuCode);
+        return RString.EMPTY;
+        //TODO n8178 城間篤人 コードマスタから値が取得できなかったため一時的にコメントアウト 2014年9月
+//        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.資格, shinsakaiIinShikakuCode);
     }
 
     /**
@@ -301,7 +303,9 @@ public class DbT5102ShinsakaiIinJohoEntity implements IDbAccessable {
      * @return Ryakusho
      */
     public RString getShinsakaiIinShikakuCodeRyakusho() {
-        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.資格, shinsakaiIinShikakuCode);
+        return RString.EMPTY;
+        //TODO n8178 城間篤人 コードマスタから値が取得できなかったため一時的にコメントアウト 2014年9月
+//        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.資格, shinsakaiIinShikakuCode);
     }
 
     /**

@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class SokujiKouseiJumin {
 
     public ResponseData<SokujiKouseiJuminDiv> onLoad_SokujiKouseiJumin(SokujiKouseiJuminDiv sokujiKouseiJuminDiv) {
-        AtenaShokaiSimple.setData(sokujiKouseiJuminDiv.getSokujiKouseiAtena().getAtenaInfo(), new ShikibetsuCode("000000000000094"));
+//        AtenaShokaiSimple.setData(sokujiKouseiJuminDiv.getSokujiKouseiAtena().getAtenaInfo(), new ShikibetsuCode("000000000000094"));
 
         List<HashMap> SokujiKouseiKihonData = YamlLoader.DBB.loadAsList(new RString("DBB8120001/SokujiKouseiKihon.yml"));
         sokujiKouseiJuminDiv.getSokujiKouseiKihon().getTxtTsuchishoNo().setValue(new RString(SokujiKouseiKihonData.get(0).get("通知書番号").toString()));

@@ -21,6 +21,10 @@
             <artifactId>UrdRealService</artifactId>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urf</groupId>
+            <artifactId>UrfRealService</artifactId>
+        </dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzRealService</artifactId>
         </dependency>
@@ -45,6 +49,17 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzPersistence</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urf</groupId>
+            <artifactId>UrfDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzBusiness</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

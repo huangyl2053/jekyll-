@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import jp.co.ndensan.reams.db.dbe.business.IShujiiIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiIryoKikanMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.ShujiiIryoKikanMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShuJiiIryoKikanDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 

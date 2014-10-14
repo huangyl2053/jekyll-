@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoDoctorCollection;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 介護医師情報を管理するインターフェースです。
@@ -22,59 +22,59 @@ public interface IKaigoDoctorManager {
     /**
      * 引数の条件に該当する介護医師情報を取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
      * @param 介護医師コード 介護医師コード
      * @return 介護医師情報
      */
-    KaigoDoctor get介護医師(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード);
+    KaigoDoctor get介護医師(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード);
 
     /**
      * 引数の条件に該当する介護医師情報を取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
      * @param 介護医師コード 介護医師コード
      * @param 医師の状況 医師の状況
      * @return 介護医師情報
      */
-    KaigoDoctor get介護医師(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード, IshiJokyo 医師の状況);
+    KaigoDoctor get介護医師(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード, IshiJokyo 医師の状況);
 
     /**
      * 引数の条件に該当する介護医師情報のリストを取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
      * @return 介護医師情報リスト
      */
-    KaigoDoctorCollection get介護医師リストOf(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード);
+    KaigoDoctorCollection get介護医師リストOf(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード);
 
     /**
      * 引数の条件に該当する介護医師情報のリストを取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
      * @param 医師の状況 医師の状況
      * @return 介護医師情報リスト
      */
-    KaigoDoctorCollection get介護医師リストOf(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード, IshiJokyo 医師の状況);
+    KaigoDoctorCollection get介護医師リストOf(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IshiJokyo 医師の状況);
 
     /**
      * 引数の条件に該当する介護医師情報のリストを取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @return 介護医師情報リスト
      */
-    KaigoDoctorCollection get介護医師リストOf(ShoKisaiHokenshaNo 証記載保険者番号);
+    KaigoDoctorCollection get介護医師リストOf(LasdecCode 市町村コード);
 
     /**
      * 引数の条件に該当する介護医師情報のリストを取得します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 医師の状況 医師の状況
      * @return 介護医師情報リスト
      */
-    KaigoDoctorCollection get介護医師リストOf(ShoKisaiHokenshaNo 証記載保険者番号, IshiJokyo 医師の状況);
+    KaigoDoctorCollection get介護医師リストOf(LasdecCode 市町村コード, IshiJokyo 医師の状況);
 
     /**
      * 引数の条件に該当する介護医師情報のリストを取得します。

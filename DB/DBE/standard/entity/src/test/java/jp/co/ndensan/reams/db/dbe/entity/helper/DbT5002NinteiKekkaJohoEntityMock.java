@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.spy;
@@ -46,6 +47,7 @@ public class DbT5002NinteiKekkaJohoEntityMock {
     public static DbT5002NinteiKekkaJohoEntity getDbT5002NinteiKekkaJohoEntity() {
         DbT5002NinteiKekkaJohoEntity entity = new DbT5002NinteiKekkaJohoEntity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("1234567890")));
+        entity.setShoriTimestamp(new YMDHMS(new RString("20140808102030")));
         entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("123456")));
         entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("1234567890")));
         entity.setYoukaigodoNinteiYMD(new FlexibleDate("20140101"));
@@ -68,6 +70,7 @@ public class DbT5002NinteiKekkaJohoEntityMock {
         entity.setTuchiKubun(TsuchiKubun.認定.getCode());
         entity.setNinteiRiyu(new RString("認定理由"));
         entity.setShinsakaiMemo(new RString("審査会メモ"));
+        entity.setIfSofuYMD(new FlexibleDate("20140501"));
         return entity;
     }
 }

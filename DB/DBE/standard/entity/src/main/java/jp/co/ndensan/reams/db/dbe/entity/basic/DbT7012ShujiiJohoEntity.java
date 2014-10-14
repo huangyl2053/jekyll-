@@ -7,10 +7,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 
 /**
@@ -31,14 +31,14 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private LasdecCode shichosonCode;
     @PrimaryKey
     private KaigoIryoKikanCode kaigoIryokikanCode;
     @PrimaryKey
     private RString kaigoIshiCode;
     private RString iryokikanCode;
     private RString ishiShikibetsuNo;
-    private boolean shujiiJokyo;
+    private RString shujiiJokyo;
     private YubinNo yubinNo;
     private AtenaJusho jusho;
     private TelNo telNo;
@@ -90,21 +90,21 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getShoKisaiHokenshaNo
+     * getShichosonCode
      *
-     * @return shoKisaiHokenshaNo
+     * @return shichosonCode
      */
-    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
+    public LasdecCode getShichosonCode() {
+        return shichosonCode;
     }
 
     /**
-     * setShoKisaiHokenshaNo
+     * setShichosonCode
      *
-     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     * @param shichosonCode shichosonCode
      */
-    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+    public void setShichosonCode(LasdecCode shichosonCode) {
+        this.shichosonCode = shichosonCode;
     }
 
     /**
@@ -184,7 +184,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      *
      * @return shujiiJokyo
      */
-    public boolean getShujiiJokyo() {
+    public RString getShujiiJokyo() {
         return shujiiJokyo;
     }
 
@@ -193,7 +193,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      *
      * @param shujiiJokyo shujiiJokyo
      */
-    public void setShujiiJokyo(boolean shujiiJokyo) {
+    public void setShujiiJokyo(RString shujiiJokyo) {
         this.shujiiJokyo = shujiiJokyo;
     }
 
@@ -280,7 +280,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
+        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
             return false;
         }
         if (!Objects.equals(this.kaigoIryokikanCode, other.kaigoIryokikanCode)) {

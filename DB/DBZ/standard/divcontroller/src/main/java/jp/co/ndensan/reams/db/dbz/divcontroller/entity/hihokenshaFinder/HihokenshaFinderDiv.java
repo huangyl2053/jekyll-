@@ -8,11 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.ButtonsForHihokenshaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoSaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoSaikinShorishaRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaDetailDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfHihokenshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfHokenshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfKojinDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfOtherDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaFinderDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -27,16 +24,10 @@ public class HihokenshaFinderDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("SearchCriteriaOfHokensha")
-    private SearchCriteriaOfHokenshaDiv SearchCriteriaOfHokensha;
     @JsonProperty("SearchCriteriaOfHihokensha")
     private SearchCriteriaOfHihokenshaDiv SearchCriteriaOfHihokensha;
-    @JsonProperty("SearchCriteriaOfKojin")
-    private SearchCriteriaOfKojinDiv SearchCriteriaOfKojin;
-    @JsonProperty("SearchCriteriaOfOther")
-    private SearchCriteriaOfOtherDiv SearchCriteriaOfOther;
-    @JsonProperty("SearchCriteriaDetail")
-    private SearchCriteriaDetailDiv SearchCriteriaDetail;
+    @JsonProperty("KaigoAtenaFinder")
+    private AtenaFinderDiv KaigoAtenaFinder;
     @JsonProperty("ButtonsForHihokenshaFinder")
     private ButtonsForHihokenshaFinderDiv ButtonsForHihokenshaFinder;
     @JsonProperty("saikinShorisha")
@@ -48,16 +39,6 @@ public class HihokenshaFinderDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("SearchCriteriaOfHokensha")
-    public SearchCriteriaOfHokenshaDiv getSearchCriteriaOfHokensha() {
-        return SearchCriteriaOfHokensha;
-    }
-
-    @JsonProperty("SearchCriteriaOfHokensha")
-    public void setSearchCriteriaOfHokensha(SearchCriteriaOfHokenshaDiv SearchCriteriaOfHokensha) {
-        this.SearchCriteriaOfHokensha=SearchCriteriaOfHokensha;
-    }
-
     @JsonProperty("SearchCriteriaOfHihokensha")
     public SearchCriteriaOfHihokenshaDiv getSearchCriteriaOfHihokensha() {
         return SearchCriteriaOfHihokensha;
@@ -68,34 +49,14 @@ public class HihokenshaFinderDiv extends Panel {
         this.SearchCriteriaOfHihokensha=SearchCriteriaOfHihokensha;
     }
 
-    @JsonProperty("SearchCriteriaOfKojin")
-    public SearchCriteriaOfKojinDiv getSearchCriteriaOfKojin() {
-        return SearchCriteriaOfKojin;
+    @JsonProperty("KaigoAtenaFinder")
+    public AtenaFinderDiv getKaigoAtenaFinder() {
+        return KaigoAtenaFinder;
     }
 
-    @JsonProperty("SearchCriteriaOfKojin")
-    public void setSearchCriteriaOfKojin(SearchCriteriaOfKojinDiv SearchCriteriaOfKojin) {
-        this.SearchCriteriaOfKojin=SearchCriteriaOfKojin;
-    }
-
-    @JsonProperty("SearchCriteriaOfOther")
-    public SearchCriteriaOfOtherDiv getSearchCriteriaOfOther() {
-        return SearchCriteriaOfOther;
-    }
-
-    @JsonProperty("SearchCriteriaOfOther")
-    public void setSearchCriteriaOfOther(SearchCriteriaOfOtherDiv SearchCriteriaOfOther) {
-        this.SearchCriteriaOfOther=SearchCriteriaOfOther;
-    }
-
-    @JsonProperty("SearchCriteriaDetail")
-    public SearchCriteriaDetailDiv getSearchCriteriaDetail() {
-        return SearchCriteriaDetail;
-    }
-
-    @JsonProperty("SearchCriteriaDetail")
-    public void setSearchCriteriaDetail(SearchCriteriaDetailDiv SearchCriteriaDetail) {
-        this.SearchCriteriaDetail=SearchCriteriaDetail;
+    @JsonProperty("KaigoAtenaFinder")
+    public void setKaigoAtenaFinder(AtenaFinderDiv KaigoAtenaFinder) {
+        this.KaigoAtenaFinder=KaigoAtenaFinder;
     }
 
     @JsonProperty("ButtonsForHihokenshaFinder")

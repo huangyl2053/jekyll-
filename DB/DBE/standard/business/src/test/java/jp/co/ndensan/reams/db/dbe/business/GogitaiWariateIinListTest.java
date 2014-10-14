@@ -48,21 +48,21 @@ public class GogitaiWariateIinListTest {
         @Before
         public void setUp() {
             List<GogitaiWariateIin> 合議体割当委員List = new ArrayList<>();
-            合議体割当委員List.add(create合議体割当委員("0001", create合議体情報(1, "19990101")));
-            合議体割当委員List.add(create合議体割当委員("0002", create合議体情報(2, "20010204")));
-            合議体割当委員List.add(create合議体割当委員("0003", create合議体情報(3, "20050508")));
+            合議体割当委員List.add(create合議体割当委員("00000001", create合議体情報(1, "19990101")));
+            合議体割当委員List.add(create合議体割当委員("00000002", create合議体情報(2, "20010204")));
+            合議体割当委員List.add(create合議体割当委員("00000003", create合議体情報(3, "20050508")));
             sut = new GogitaiWariateIinList(合議体割当委員List);
         }
 
         @Test
         public void 合議体番号1_有効期間開始年月日19990101を持つ合議体情報と_審査委員コード0001を指定したとき_対応する合議体割当委員が取得できる() {
-            GogitaiWariateIin result = sut.get合議体割当委員(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("19990101"), create委員コード("0001"));
-            assertThat(result.get委員情報().get審査会委員コード(), is(create委員コード("0001")));
+            GogitaiWariateIin result = sut.get合議体割当委員(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("19990101"), create委員コード("00000001"));
+            assertThat(result.get委員情報().get審査会委員コード(), is(create委員コード("00000001")));
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 指定した審査会委員コードに対応する合議体割当委員が存在しないとき_IllegalArgumentExceptionが発生する() {
-            GogitaiWariateIin result = sut.get合議体割当委員(new GogitaiNo(33), new GogitaiYukoKikanKaishiDate("26641212"), create委員コード("9999"));
+            GogitaiWariateIin result = sut.get合議体割当委員(new GogitaiNo(33), new GogitaiYukoKikanKaishiDate("26641212"), create委員コード("00009999"));
         }
 
         private GogitaiWariateIin create合議体割当委員(String str, GogitaiDetail 合議体情報) {

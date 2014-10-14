@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0600011.SogoShokaiSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfKojinDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -66,8 +66,8 @@ public class SogoShokaiSearch {
     // 検索条件情報を設定する
     private void setSerachInfo(SogoShokaiSearchDiv panel) {
         HashMap map = getYamlData(YML_SEARCH).get(0);
-        SearchCriteriaOfKojinDiv kojinDiv = panel.getSogoShokaiSearchInfo().getSearchCriteriaOfKojin();
-        kojinDiv.getTxtShimei().setValue(new RString(map.get("氏名").toString()));
+        AtenaFinderDiv kojinDiv = panel.getSogoShokaiSearchInfo().getKaigoAtenaFinder();
+        kojinDiv.getTxtAtenaMeisho().setValue(new RString(map.get("氏名").toString()));
         //kojinDiv.getRadSearchPatternOfShimei().setSelectedItem(new RString("key0"));
     }
 

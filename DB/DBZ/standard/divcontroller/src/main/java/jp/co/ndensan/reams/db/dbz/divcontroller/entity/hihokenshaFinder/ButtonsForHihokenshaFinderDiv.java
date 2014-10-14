@@ -25,6 +25,8 @@ public class ButtonsForHihokenshaFinderDiv extends Panel {
     private Button btnToClear;
     @JsonProperty("btnToSearch")
     private Button btnToSearch;
+    @JsonProperty("txtMaxNumber")
+    private TextBoxNum txtMaxNumber;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,6 +52,16 @@ public class ButtonsForHihokenshaFinderDiv extends Panel {
     @JsonProperty("btnToSearch")
     public void setBtnToSearch(Button btnToSearch) {
         this.btnToSearch=btnToSearch;
+    }
+
+    @JsonProperty("txtMaxNumber")
+    public TextBoxNum getTxtMaxNumber() {
+        return txtMaxNumber;
+    }
+
+    @JsonProperty("txtMaxNumber")
+    public void setTxtMaxNumber(TextBoxNum txtMaxNumber) {
+        this.txtMaxNumber=txtMaxNumber;
     }
 
 }

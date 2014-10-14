@@ -1,17 +1,16 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KyotakuJikoTodokedeKihon のクラスファイル 
- * 
+ * KyotakuJikoTodokedeKihon のクラスファイル
+ *
  * @author 自動生成
  */
 public class KyotakuJikoTodokedeKihonDiv extends Panel {
@@ -21,6 +20,7 @@ public class KyotakuJikoTodokedeKihonDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("KyotakuJikoTodokedeKihonAtena")
     private KaigoAtenaInfoDiv KyotakuJikoTodokedeKihonAtena;
     @JsonProperty("KyotakuJikoTodokedeKaigoKihon")
@@ -39,7 +39,7 @@ public class KyotakuJikoTodokedeKihonDiv extends Panel {
 
     @JsonProperty("KyotakuJikoTodokedeKihonAtena")
     public void setKyotakuJikoTodokedeKihonAtena(KaigoAtenaInfoDiv KyotakuJikoTodokedeKihonAtena) {
-        this.KyotakuJikoTodokedeKihonAtena=KyotakuJikoTodokedeKihonAtena;
+        this.KyotakuJikoTodokedeKihonAtena = KyotakuJikoTodokedeKihonAtena;
     }
 
     @JsonProperty("KyotakuJikoTodokedeKaigoKihon")
@@ -49,7 +49,7 @@ public class KyotakuJikoTodokedeKihonDiv extends Panel {
 
     @JsonProperty("KyotakuJikoTodokedeKaigoKihon")
     public void setKyotakuJikoTodokedeKaigoKihon(KaigoShikakuKihonDiv KyotakuJikoTodokedeKaigoKihon) {
-        this.KyotakuJikoTodokedeKaigoKihon=KyotakuJikoTodokedeKaigoKihon;
+        this.KyotakuJikoTodokedeKaigoKihon = KyotakuJikoTodokedeKaigoKihon;
     }
 
 }

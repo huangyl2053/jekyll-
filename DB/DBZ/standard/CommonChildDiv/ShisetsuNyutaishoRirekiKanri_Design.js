@@ -11,12 +11,164 @@ var DBZ;
         function ShisetsuNyutaishoRirekiKanri_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, ShisetsuNyutaishoRirekiKanri_Design.myLayout, fieldName);
         }
+        Object.defineProperty(ShisetsuNyutaishoRirekiKanri_Design.prototype, "InputPanelDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[2]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShisetsuNyutaishoRirekiKanri_Design.prototype, "AddButtonDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[0]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShisetsuNyutaishoRirekiKanri_Design.prototype, "UpdateButtonDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[3]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShisetsuNyutaishoRirekiKanri_Design.prototype, "gridSetting", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["gridSetting"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["gridSetting"] = value;
+                } else {
+                    this.layout.items[0].items[1]["gridSetting"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShisetsuNyutaishoRirekiKanri_Design.prototype, "radShisetsuShuruiDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"])["radShisetsuShurui_displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"])["radShisetsuShurui_displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[2].items[3]["radShisetsuShurui_displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShisetsuNyutaishoRirekiKanri_Design.prototype, "jigyoshaInputGuideDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"])["btnJigyoshaInputGuide_displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"])["btnJigyoshaInputGuide_displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[2].items[3]["btnJigyoshaInputGuide_displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShisetsuNyutaishoRirekiKanri_Design.prototype, "otherShisetsuInputGuideDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"])["btnOtherTokureiShisetsuInputGuide_displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"])["btnOtherTokureiShisetsuInputGuide_displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[2].items[3]["btnOtherTokureiShisetsuInputGuide_displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShisetsuNyutaishoRirekiKanri_Design.prototype, "jogaiShisetsuInputGuideDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"])["btnJogaiShisetsuInputGuide_displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"])["btnJogaiShisetsuInputGuide_displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[2].items[3]["btnJogaiShisetsuInputGuide_displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         ShisetsuNyutaishoRirekiKanri_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("InputPanelDisplayNone");
+            Uz.JSControlUtil.registProperty("AddButtonDisplayNone");
+            Uz.JSControlUtil.registProperty("UpdateButtonDisplayNone");
+            Uz.JSControlUtil.registProperty("gridSetting");
+            Uz.JSControlUtil.registProperty("radShisetsuShuruiDisplayNone");
+            Uz.JSControlUtil.registProperty("jigyoshaInputGuideDisplayNone");
+            Uz.JSControlUtil.registProperty("otherShisetsuInputGuideDisplayNone");
+            Uz.JSControlUtil.registProperty("jogaiShisetsuInputGuideDisplayNone");
         };
 
         ShisetsuNyutaishoRirekiKanri_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["InputPanelDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["AddButtonDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["UpdateButtonDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["gridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
+            editablePropertyInfo["radShisetsuShuruiDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"]).getEditablePropertyInfo()["radShisetsuShurui_displayNone"];
+            editablePropertyInfo["jigyoshaInputGuideDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"]).getEditablePropertyInfo()["btnJigyoshaInputGuide_displayNone"];
+            editablePropertyInfo["otherShisetsuInputGuideDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"]).getEditablePropertyInfo()["btnOtherTokureiShisetsuInputGuide_displayNone"];
+            editablePropertyInfo["jogaiShisetsuInputGuideDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[3]["fieldName"]).getEditablePropertyInfo()["btnJogaiShisetsuInputGuide_displayNone"];
 
             return editablePropertyInfo;
         };
@@ -46,6 +198,8 @@ var DBZ;
                             "selectControlID": "btnAddShisetsuNyutaisho",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
                             "onClick": "onClick_btnAddShisetsuNyutaisho",
                             "text": "施設入退所を追加する",
                             "appearance": 0,
@@ -260,7 +414,8 @@ var DBZ;
                             "sortOrder": "shisetsuShurui",
                             "isAscending": true,
                             "filterList": [],
-                            "activeRowId": -1
+                            "activeRowId": -1,
+                            "gridAction": []
                         },
                         {
                             "fieldName": "ShisetsuNyutaishoInput",
@@ -432,6 +587,8 @@ var DBZ;
                                     "dialogCancelEventNameForDialog": "",
                                     "canTransferEvent": true,
                                     "heightForDialog": "M",
+                                    "firstFocusFieldName": "",
+                                    "lastFocusFieldName": "",
                                     "btnJigyoshaInputGuide_displayNone": false,
                                     "btnOtherTokureiShisetsuInputGuide_displayNone": true,
                                     "btnJogaiShisetsuInputGuide_displayNone": true,
@@ -478,7 +635,8 @@ var DBZ;
                             "panelDisplay": 1,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "canPost": true
                         },
                         {
                             "fieldName": "btnUpdateShisetsuNyutaisho",
@@ -500,6 +658,8 @@ var DBZ;
                             "selectControlID": "btnUpdateShisetsuNyutaisho",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
                             "onClick": "onClick_btnUpdateShisetsuNyutaisho",
                             "text": "施設入退所を確定する",
                             "appearance": 0,
@@ -587,7 +747,8 @@ var DBZ;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "Auto",
+                    "canPost": true
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -612,12 +773,55 @@ var DBZ;
             "controlName": "ShisetsuNyutaishoRirekiKanri",
             "marginTop": 0,
             "marginBottom": 0,
-            "originalProperty": [],
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "ShisetsuNyutaishoInput",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "InputPanelDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "btnAddShisetsuNyutaisho",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "AddButtonDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "btnUpdateShisetsuNyutaisho",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "UpdateButtonDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "dgShisetsuNyutaishoRireki",
+                    "publicChildProperty": "gridSetting",
+                    "newPropertyName": "gridSetting"
+                },
+                {
+                    "publicChildFieldName": "ShisetsuJoho",
+                    "publicChildProperty": "radShisetsuShurui_displayNone",
+                    "newPropertyName": "radShisetsuShuruiDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "ShisetsuJoho",
+                    "publicChildProperty": "btnJigyoshaInputGuide_displayNone",
+                    "newPropertyName": "jigyoshaInputGuideDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "ShisetsuJoho",
+                    "publicChildProperty": "btnOtherTokureiShisetsuInputGuide_displayNone",
+                    "newPropertyName": "otherShisetsuInputGuideDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "ShisetsuJoho",
+                    "publicChildProperty": "btnJogaiShisetsuInputGuide_displayNone",
+                    "newPropertyName": "jogaiShisetsuInputGuideDisplayNone"
+                }
+            ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "M"
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": ""
         };
         return ShisetsuNyutaishoRirekiKanri_Design;
     })(Uz.CommonChildDiv);

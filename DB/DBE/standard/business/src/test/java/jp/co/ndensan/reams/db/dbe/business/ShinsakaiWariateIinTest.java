@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinShukketsuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -40,8 +40,8 @@ public class ShinsakaiWariateIinTest {
 
         @Before
         public void setUp() {
-            審査会情報 = ShinsakaiTestBusinessCreator.create審査会情報(1, "19990101");
-            委員情報 = ShinsakaiTestBusinessCreator.create審査会委員("iin01");
+            審査会情報 = ShinsakaiMockBusinessCreator.create審査会情報(1, "19990101");
+            委員情報 = ShinsakaiMockBusinessCreator.create審査会委員("00000001");
             認定審査員区分 = new ShinsainKubun(new Code("A001"), RString.EMPTY, RString.EMPTY);
             合議体長区分 = new GogitaichoKubun(new Code("A001"), RString.EMPTY, RString.EMPTY);
             審査時間 = new Range(FlexibleDate.MIN, FlexibleDate.MAX);

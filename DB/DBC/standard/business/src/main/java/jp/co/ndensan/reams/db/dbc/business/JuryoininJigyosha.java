@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ToriatsukaiKakuyakus
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
@@ -27,7 +27,7 @@ public class JuryoininJigyosha {
 
     private final KeiyakuNo 契約番号;
     private final Range<FlexibleDate> 契約期間;
-    private final RDateTime 処理日時;
+    private final YMDHMS 処理日時;
     private final FlexibleDate 届出年月日;
     private final Todokedesha 届出者;
     private final FlexibleDate 契約登録年月日;
@@ -54,7 +54,7 @@ public class JuryoininJigyosha {
      * @param 高額給付契約有無 高額給付契約であるか否か
      * @param 取扱確約書有無 取扱確約書を持っているか否か
      */
-    public JuryoininJigyosha(KeiyakuNo 契約番号, Range<FlexibleDate> 契約期間, RDateTime 処理日時,
+    public JuryoininJigyosha(KeiyakuNo 契約番号, Range<FlexibleDate> 契約期間, YMDHMS 処理日時,
             FlexibleDate 届出年月日, Todokedesha 届出者, FlexibleDate 契約登録年月日, KeiyakuJigyosha 契約事業者,
             JutakuKaishuKeiyakuKubun 住宅改修契約有無,
             TokuteiFukushiYoguHanbaiKeiyakuKubun 特定福祉用具販売契約有無,
@@ -99,7 +99,7 @@ public class JuryoininJigyosha {
      *
      * @return 処理日時
      */
-    public RDateTime get処理日時() {
+    public YMDHMS get処理日時() {
         return 処理日時;
     }
 

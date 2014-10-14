@@ -12,11 +12,13 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ur.urz.realservice.IJukiKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
 /**
  * 介護保険の被保険者を検索するためのクラスです。
@@ -26,14 +28,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 public class HihokenshaFinder {
 
     private final HihokenshaDaichoManager hihokenshaDaicho;
-    private final IKojinFinder profileSearcher;
+    private final IJukiKojinFinder profileSearcher;
 
     /**
      * 新しいHihokenshaFinderのインスタンスを生成します。
      */
     public HihokenshaFinder() {
         this.hihokenshaDaicho = new HihokenshaDaichoManager();
-        this.profileSearcher = KojinService.createKojinFinder();
+        this.profileSearcher = ShikibetsuTaishoService.getJukiKojinFinder();
     }
 
     /**
@@ -44,36 +46,36 @@ public class HihokenshaFinder {
      * {@link HihokenshaDaichoManager HihokenshaDaichoManager}
      * @param profileSearcher {@link IKojinFinder IKojinFinder}
      */
-    HihokenshaFinder(HihokenshaDaichoManager hihokenshaDaicho, IKojinFinder profileSearcher) {
+    HihokenshaFinder(HihokenshaDaichoManager hihokenshaDaicho, IJukiKojinFinder profileSearcher) {
         this.hihokenshaDaicho = hihokenshaDaicho;
         this.profileSearcher = profileSearcher;
     }
 
     /**
-     * {@link LasdecCode 地方公共団体コード}と{@link ShikibetsuCode 識別コード}から、
+     * {@link LasdecCode 市町村コード}と{@link ShikibetsuCode 識別コード}から、
      * 直近の資格情報を保持した{@link Hihokensha Hihokensha}を返します。<br />
      * 該当するHihokenshaがいないときは、nullを返します。
      *
-     * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
+     * @param 市町村コード {@link LasdecCode 市町村コード}
      * @param 識別コード {@link ShikibetsuCode 識別コード}
      * @return {@link Hihokensha Hihokensha}。もしくは、null。
      */
-    public Hihokensha get被保険者(LasdecCode 地方公共団体コード, ShikibetsuCode 識別コード) {
-        IHihokenshaShikaku shikaku = hihokenshaDaicho.get直近被保険者資格(地方公共団体コード, 識別コード);
+    public Hihokensha get被保険者(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+        IHihokenshaShikaku shikaku = hihokenshaDaicho.get直近被保険者資格(市町村コード, 識別コード);
         return toHihokensha(shikaku);
     }
 
     /**
-     * {@link LasdecCode 地方公共団体コード}と{@link KaigoHihokenshaNo 被保険者番号}から、
+     * {@link LasdecCode 市町村コード}と{@link KaigoHihokenshaNo 被保険者番号}から、
      * 直近の資格情報を保持した{@link Hihokensha Hihokensha}を返します。<br />
      * 該当するHihokenshaがいないときは、nullを返します。
      *
-     * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
+     * @param 市町村コード {@link LasdecCode 市町村コード}
      * @param 被保険者番号 {@link KaigoHihokenshaNo 被保険者番号}
      * @return {@link Hihokensha Hihokensha}。もしくは、null。
      */
-    public Hihokensha get被保険者(LasdecCode 地方公共団体コード, KaigoHihokenshaNo 被保険者番号) {
-        IHihokenshaShikaku shikaku = hihokenshaDaicho.get直近被保険者資格(地方公共団体コード, 被保険者番号);
+    public Hihokensha get被保険者(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
+        IHihokenshaShikaku shikaku = hihokenshaDaicho.get直近被保険者資格(市町村コード, 被保険者番号);
         return toHihokensha(shikaku);
     }
 
@@ -81,13 +83,13 @@ public class HihokenshaFinder {
      * 引数に応じた{@link Hihokensha Hihokensha}を返します。<br />
      * 該当するHihokenshaがいないときは、nullを返します。
      *
-     * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
+     * @param 市町村コード {@link LasdecCode 市町村コード}
      * @param 識別コード {@link ShikibetsuCode 識別コード}
-     * @param 被保険者台帳登録日時 {@link RDateTime 被保険者台帳登録日時}
+     * @param 処理日時 {@link YMDHMS 処理日時}
      * @return {@link Hihokensha Hihokensha}。もしくは、null。
      */
-    public Hihokensha get被保険者(LasdecCode 地方公共団体コード, ShikibetsuCode 識別コード, RDateTime 被保険者台帳登録日時) {
-        IHihokenshaShikaku shikaku = hihokenshaDaicho.get被保険者資格(地方公共団体コード, 識別コード, 被保険者台帳登録日時);
+    public Hihokensha get被保険者(LasdecCode 市町村コード, ShikibetsuCode 識別コード, YMDHMS 処理日時) {
+        IHihokenshaShikaku shikaku = hihokenshaDaicho.get被保険者資格(市町村コード, 識別コード, 処理日時);
         return toHihokensha(shikaku);
     }
 
@@ -95,12 +97,26 @@ public class HihokenshaFinder {
      * 指定の地方公共団体が管理する{@link HihokenshaList Hihokenshaのリスト}を返します。<br />
      * 該当する被保険者がいないときは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}を返します。
      *
-     * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
+     * @param 市町村コード {@link LasdecCode 市町村コード}
      * @return
      * {@link HihokenshaList HihokenshaList}。もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}。
      */
-    public HihokenshaList get被保険者List(LasdecCode 地方公共団体コード) {
-        List<IHihokenshaShikaku> shikakuList = hihokenshaDaicho.get被保険者資格ListOf(地方公共団体コード);
+    public HihokenshaList get被保険者List(LasdecCode 市町村コード) {
+        List<IHihokenshaShikaku> shikakuList = hihokenshaDaicho.get被保険者資格ListOf(市町村コード);
+        List<Hihokensha> hihokenshaList = toListOfHihokensha(shikakuList);
+        return new HihokenshaList(hihokenshaList);
+    }
+
+    /**
+     * 検索条件を指定して、該当する{@link HihokenshaList Hihokenshaのリスト}を返します。<br />
+     * 該当する被保険者がいないときは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}を返します。
+     *
+     * @param 検索条件 {@link ISearchCondition 検索条件}
+     * @return
+     * {@link HihokenshaList HihokenshaList}。もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}。
+     */
+    public HihokenshaList get被保険者List(ISearchCondition 検索条件) {
+        List<IHihokenshaShikaku> shikakuList = hihokenshaDaicho.get被保険者資格ListOf(検索条件);
         List<Hihokensha> hihokenshaList = toListOfHihokensha(shikakuList);
         return new HihokenshaList(hihokenshaList);
     }
@@ -126,7 +142,7 @@ public class HihokenshaFinder {
     }
 
     private Hihokensha _toHihokensha(IHihokenshaShikaku shikaku) {
-        IKojin profile = profileSearcher.get個人(shikaku.get識別コード());
+        IKojin profile = profileSearcher.find住基個人(shikaku.get識別コード());
         return isNull(profile) ? null : _createHihokensha(profile, shikaku);
     }
 

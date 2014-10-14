@@ -7,17 +7,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import java.util.Objects;
 
 /**
  * DbT5101ShinsakaiJohoの項目定義クラスです
  *
- * @author n8178 城間篤人
  */
 public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5101ShinsakaiJoho");
+
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
     private RString insertReamsLoginId;
@@ -28,10 +29,13 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private int shinsakaiKaisaiNo;
+    @PrimaryKey
     private FlexibleDate shinsakaiKaisaiYMD;
+    @PrimaryKey
     private RString shinsakaiKaishiTime;
     private RString shinsakaiShuryoTime;
     private RString shinsakaiKaisaiBashoCode;
+    @PrimaryKey
     private int gogitaiNo;
     private int shinsakaiYoteiTeiin;
     private int shinsakaiSaidaiTeiin;
@@ -42,10 +46,10 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
     private FlexibleDate shinsakaiShiryoSakuseiYMD;
     private boolean shinsakaiKyukaiFlag;
     private int shinsakaiWariateZumiNinzu;
+    private Code shiryoSakuseiKubun;
 
     /**
      * getInsertDantaiCd
-     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -54,7 +58,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setInsertDantaiCd
-     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -63,7 +66,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getIsDeleted
-     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -72,16 +74,15 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setIsDeleted
-     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * setLastUpdateReamsLoginId
-     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -90,7 +91,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getShinsakaiKaisaiNo
-     *
      * @return shinsakaiKaisaiNo
      */
     public int getShinsakaiKaisaiNo() {
@@ -99,7 +99,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setShinsakaiKaisaiNo
-     *
      * @param shinsakaiKaisaiNo shinsakaiKaisaiNo
      */
     public void setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
@@ -108,7 +107,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getShinsakaiKaisaiYMD
-     *
      * @return shinsakaiKaisaiYMD
      */
     public FlexibleDate getShinsakaiKaisaiYMD() {
@@ -117,7 +115,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setShinsakaiKaisaiYMD
-     *
      * @param shinsakaiKaisaiYMD shinsakaiKaisaiYMD
      */
     public void setShinsakaiKaisaiYMD(FlexibleDate shinsakaiKaisaiYMD) {
@@ -126,7 +123,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getShinsakaiKaishiTime
-     *
      * @return shinsakaiKaishiTime
      */
     public RString getShinsakaiKaishiTime() {
@@ -135,7 +131,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setShinsakaiKaishiTime
-     *
      * @param shinsakaiKaishiTime shinsakaiKaishiTime
      */
     public void setShinsakaiKaishiTime(RString shinsakaiKaishiTime) {
@@ -144,7 +139,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getShinsakaiShuryoTime
-     *
      * @return shinsakaiShuryoTime
      */
     public RString getShinsakaiShuryoTime() {
@@ -153,7 +147,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setShinsakaiShuryoTime
-     *
      * @param shinsakaiShuryoTime shinsakaiShuryoTime
      */
     public void setShinsakaiShuryoTime(RString shinsakaiShuryoTime) {
@@ -162,7 +155,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getShinsakaiKaisaiBashoCode
-     *
      * @return shinsakaiKaisaiBashoCode
      */
     public RString getShinsakaiKaisaiBashoCode() {
@@ -171,7 +163,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setShinsakaiKaisaiBashoCode
-     *
      * @param shinsakaiKaisaiBashoCode shinsakaiKaisaiBashoCode
      */
     public void setShinsakaiKaisaiBashoCode(RString shinsakaiKaisaiBashoCode) {
@@ -180,7 +171,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getGogitaiNo
-     *
      * @return gogitaiNo
      */
     public int getGogitaiNo() {
@@ -189,7 +179,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setGogitaiNo
-     *
      * @param gogitaiNo gogitaiNo
      */
     public void setGogitaiNo(int gogitaiNo) {
@@ -198,7 +187,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getShinsakaiYoteiTeiin
-     *
      * @return shinsakaiYoteiTeiin
      */
     public int getShinsakaiYoteiTeiin() {
@@ -207,7 +195,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setShinsakaiYoteiTeiin
-     *
      * @param shinsakaiYoteiTeiin shinsakaiYoteiTeiin
      */
     public void setShinsakaiYoteiTeiin(int shinsakaiYoteiTeiin) {
@@ -216,7 +203,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getShinsakaiSaidaiTeiin
-     *
      * @return shinsakaiSaidaiTeiin
      */
     public int getShinsakaiSaidaiTeiin() {
@@ -225,7 +211,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setShinsakaiSaidaiTeiin
-     *
      * @param shinsakaiSaidaiTeiin shinsakaiSaidaiTeiin
      */
     public void setShinsakaiSaidaiTeiin(int shinsakaiSaidaiTeiin) {
@@ -234,7 +219,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getShinsakaiJidoWariateTeiin
-     *
      * @return shinsakaiJidoWariateTeiin
      */
     public int getShinsakaiJidoWariateTeiin() {
@@ -243,7 +227,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setShinsakaiJidoWariateTeiin
-     *
      * @param shinsakaiJidoWariateTeiin shinsakaiJidoWariateTeiin
      */
     public void setShinsakaiJidoWariateTeiin(int shinsakaiJidoWariateTeiin) {
@@ -252,7 +235,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getShinsakaiIinTeiin
-     *
      * @return shinsakaiIinTeiin
      */
     public int getShinsakaiIinTeiin() {
@@ -261,7 +243,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setShinsakaiIinTeiin
-     *
      * @param shinsakaiIinTeiin shinsakaiIinTeiin
      */
     public void setShinsakaiIinTeiin(int shinsakaiIinTeiin) {
@@ -270,7 +251,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getGogitaiSeishinkaiSonzaiFlag
-     *
      * @return gogitaiSeishinkaiSonzaiFlag
      */
     public boolean getGogitaiSeishinkaiSonzaiFlag() {
@@ -279,7 +259,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setGogitaiSeishinkaiSonzaiFlag
-     *
      * @param gogitaiSeishinkaiSonzaiFlag gogitaiSeishinkaiSonzaiFlag
      */
     public void setGogitaiSeishinkaiSonzaiFlag(boolean gogitaiSeishinkaiSonzaiFlag) {
@@ -288,7 +267,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getGogitaiDummyFlag
-     *
      * @return gogitaiDummyFlag
      */
     public boolean getGogitaiDummyFlag() {
@@ -297,7 +275,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setGogitaiDummyFlag
-     *
      * @param gogitaiDummyFlag gogitaiDummyFlag
      */
     public void setGogitaiDummyFlag(boolean gogitaiDummyFlag) {
@@ -306,7 +283,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getShinsakaiShiryoSakuseiYMD
-     *
      * @return shinsakaiShiryoSakuseiYMD
      */
     public FlexibleDate getShinsakaiShiryoSakuseiYMD() {
@@ -315,7 +291,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setShinsakaiShiryoSakuseiYMD
-     *
      * @param shinsakaiShiryoSakuseiYMD shinsakaiShiryoSakuseiYMD
      */
     public void setShinsakaiShiryoSakuseiYMD(FlexibleDate shinsakaiShiryoSakuseiYMD) {
@@ -324,7 +299,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getShinsakaiKyukaiFlag
-     *
      * @return shinsakaiKyukaiFlag
      */
     public boolean getShinsakaiKyukaiFlag() {
@@ -333,7 +307,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setShinsakaiKyukaiFlag
-     *
      * @param shinsakaiKyukaiFlag shinsakaiKyukaiFlag
      */
     public void setShinsakaiKyukaiFlag(boolean shinsakaiKyukaiFlag) {
@@ -342,7 +315,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * getShinsakaiWariateZumiNinzu
-     *
      * @return shinsakaiWariateZumiNinzu
      */
     public int getShinsakaiWariateZumiNinzu() {
@@ -351,7 +323,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
 
     /**
      * setShinsakaiWariateZumiNinzu
-     *
      * @param shinsakaiWariateZumiNinzu shinsakaiWariateZumiNinzu
      */
     public void setShinsakaiWariateZumiNinzu(int shinsakaiWariateZumiNinzu) {
@@ -359,10 +330,26 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
     }
 
     /**
+     * getShiryoSakuseiKubun
+     * @return shiryoSakuseiKubun
+     */
+    public Code getShiryoSakuseiKubun() {
+        return shiryoSakuseiKubun;
+    }
+
+    /**
+     * setShiryoSakuseiKubun
+     * @param shiryoSakuseiKubun shiryoSakuseiKubun
+     */
+    public void setShiryoSakuseiKubun(Code shiryoSakuseiKubun) {
+        this.shiryoSakuseiKubun = shiryoSakuseiKubun;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT5101ShinsakaiJohoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return
+     * @@return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5101ShinsakaiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     public boolean equalsPrimaryKeys(DbT5101ShinsakaiJohoEntity other) {
@@ -372,7 +359,17 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
         if (this.shinsakaiKaisaiNo != other.shinsakaiKaisaiNo) {
             return false;
         }
+        if (!Objects.equals(this.shinsakaiKaisaiYMD, other.shinsakaiKaisaiYMD)) {
+            return false;
+        }
+        if (!Objects.equals(this.shinsakaiKaishiTime, other.shinsakaiKaishiTime)) {
+            return false;
+        }
+        if (this.gogitaiNo != other.gogitaiNo) {
+            return false;
+        }
         return true;
     }
+
 // </editor-fold>
 }

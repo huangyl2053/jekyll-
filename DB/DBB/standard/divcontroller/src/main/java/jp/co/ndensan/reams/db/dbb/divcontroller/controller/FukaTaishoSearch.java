@@ -34,13 +34,14 @@ public class FukaTaishoSearch {
 
     public ResponseData<FukaTaishoSearchDiv> onLoad_FukaTaishoSearch(FukaTaishoSearchDiv div) {
 
-        div.getTaishoshaSearch().getSearchCriteriaOfOther().getTxtMaxNumber().setValue(DEFAULT_MAX_NUMBER);
+        div.getTaishoshaSearch().getButtonsForHihokenshaFinder().getTxtMaxNumber().setValue(DEFAULT_MAX_NUMBER);
 
+        // TODO 田辺 紘一 この初期化処理は何のためか不明。修正者の意図が不明なので、ビジネスロジック開発時などに調査が必要。
         DropDownList ddl = new DropDownList();
         ddl.setDataSource(createFukanendoDDL());
-        div.getTaishoshaSearch().getSearchCriteriaOfOther().setDdlFukaNendo(ddl);
-        div.getTaishoshaSearch().getSearchCriteriaOfOther().getDdlFukaNendo().setSelectedItem(new RString(("平成26年度")));
-        div.getTaishoshaSearch().getSearchCriteriaOfOther().getDdlFukaNendo().setLabelLText(new RString("賦課年度"));
+        div.getTaishoshaSearch().getSearchCriteriaOfHihokensha().setDdlFukaNendo(ddl);
+        div.getTaishoshaSearch().getSearchCriteriaOfHihokensha().getDdlFukaNendo().setSelectedItem(new RString(("平成26年度")));
+        div.getTaishoshaSearch().getSearchCriteriaOfHihokensha().getDdlFukaNendo().setLabelLText(new RString("賦課年度"));
         return createResponseData(div);
     }
 
@@ -62,7 +63,7 @@ public class FukaTaishoSearch {
 
         List yamlSearchResult = getYamlSearchResult(div, searchValue);
 
-        RString selectedValue = div.getTaishoshaSearch().getSearchCriteriaOfOther().getDdlFukaNendo().getSelectedValue();
+        RString selectedValue = div.getTaishoshaSearch().getSearchCriteriaOfHihokensha().getDdlFukaNendo().getSelectedValue();
         if (selectedValue == null || selectedValue.isEmpty()) {
         } else {
             div.getTaishoshaSentaku().getTxtFukanendo().setValue(new RDate(selectedValue.toString()));
@@ -83,45 +84,45 @@ public class FukaTaishoSearch {
             searchValue.put("通知書番号", div.getSearchCriteriaOfHihokensha().getTxtTuchishoNo().getValue());
         }
 
-        if (div.getSearchCriteriaOfKojin().getTxtShikibetsuCode().getValue().length() > 0) {
-            searchValue.put("識別コード", div.getSearchCriteriaOfKojin().getTxtShikibetsuCode().getValue());
+//        if (div.getKaigoAtenaFinder().getTxtShikibetsuCode().getValue().length() > 0) {
+//            searchValue.put("識別コード", div.getKaigoAtenaFinder().getTxtShikibetsuCode().getValue());
+//        }
+//
+//        if (div.getKaigoAtenaFinder().getTxtSetaiCode().getValue().length() > 0) {
+//            searchValue.put("世帯コード", div.getKaigoAtenaFinder().getTxtSetaiCode().getValue());
+//        }
+//
+//        if (div.getKaigoAtenaFinder().getTxtKojinNo().getValue().length() > 0) {
+//            searchValue.put("個人番号", div.getKaigoAtenaFinder().getTxtKojinNo().getValue());
+//        }
+//        
+        // TODO 田辺 紘一 レイアウト変更に伴い仕様変更があったので、修正が必要
+//        if (!div.getKaigoAtenaFinder().getDdlJuminShubetsu().getSelectedValue().equals(new RString("指定なし"))) {
+//            searchValue.put("住民種別", div.getKaigoAtenaFinder().getDdlJuminShubetsu().getSelectedValue());
+//        }
+        if (div.getKaigoAtenaFinder().getTxtAtenaMeisho().getValue().length() > 0) {
+            searchValue.put("氏名", div.getKaigoAtenaFinder().getTxtAtenaMeisho().getValue());
+            searchValue.put("検索条件_氏名", div.getKaigoAtenaFinder().getDdlAtenaSearchKubun().getSelectedValue());
         }
 
-        if (div.getSearchCriteriaOfKojin().getTxtSetaiCode().getValue().length() > 0) {
-            searchValue.put("世帯コード", div.getSearchCriteriaOfKojin().getTxtSetaiCode().getValue());
+        if (div.getKaigoAtenaFinder().getTxtYubinNo().getValue() != null) {
+            searchValue.put("郵便番号", div.getKaigoAtenaFinder().getTxtYubinNo().getValue());
         }
 
-        if (div.getSearchCriteriaOfKojin().getTxtKojinNo().getValue().length() > 0) {
-            searchValue.put("個人番号", div.getSearchCriteriaOfKojin().getTxtKojinNo().getValue());
+        // TODO 田辺 紘一 レイアウト変更に伴い仕様変更があったので、修正が必要
+//        if (div.getKaigoAtenaFinder().getTxtJusho().getValue().length() > 0) {
+//            searchValue.put("住所", div.getKaigoAtenaFinder().getTxtJusho().getValue());
+//        }
+        if (div.getKaigoAtenaFinder().getTxtSeinenGappi().getValue() != null) {
+            searchValue.put("生年月日", div.getKaigoAtenaFinder().getTxtSeinenGappi().getText());
         }
 
-        if (!div.getSearchCriteriaOfKojin().getDdlJuminShubetsu().getSelectedValue().equals(new RString("指定なし"))) {
-            searchValue.put("住民種別", div.getSearchCriteriaOfKojin().getDdlJuminShubetsu().getSelectedValue());
-        }
-
-        if (div.getSearchCriteriaOfKojin().getTxtShimei().getValue().length() > 0) {
-            searchValue.put("氏名", div.getSearchCriteriaOfKojin().getTxtShimei().getValue());
-            searchValue.put("検索条件_氏名", div.getSearchCriteriaOfKojin().getDdlSearchPatternForName().getSelectedValue());
-        }
-
-        if (div.getSearchCriteriaOfKojin().getTxtYubinNo().getValue() != null) {
-            searchValue.put("郵便番号", div.getSearchCriteriaOfKojin().getTxtYubinNo().getValue());
-        }
-
-        if (div.getSearchCriteriaOfKojin().getTxtJusho().getValue().length() > 0) {
-            searchValue.put("住所", div.getSearchCriteriaOfKojin().getTxtJusho().getValue());
-        }
-
-        if (div.getSearchCriteriaOfKojin().getTxtBirthDay().getValue() != null) {
-            searchValue.put("生年月日", div.getSearchCriteriaOfKojin().getTxtBirthDay().getText());
-        }
-
-        if (div.getSearchCriteriaOfKojin().getChkGender().getSelectedValues().size() > 0) {
-            searchValue.put("性別", div.getSearchCriteriaOfKojin().getChkGender().getSelectedValues().get(0));
-        }
-
-        if (div.getSearchCriteriaOfOther().getDdlFukaNendo().getSelectedValue().length() > 0) {
-            searchValue.put("賦課年度", div.getSearchCriteriaOfOther().getDdlFukaNendo().getSelectedValue());
+        // TODO 田辺 紘一 レイアウト変更に伴い仕様変更があったので、修正が必要
+//        if (div.getKaigoAtenaFinder().getChkGender().getSelectedValues().size() > 0) {
+//            searchValue.put("性別", div.getKaigoAtenaFinder().getChkGender().getSelectedValues().get(0));
+//        }
+        if (div.getSearchCriteriaOfHihokensha().getDdlFukaNendo().getSelectedValue().length() > 0) {
+            searchValue.put("賦課年度", div.getSearchCriteriaOfHihokensha().getDdlFukaNendo().getSelectedValue());
         }
 
         return searchValue;

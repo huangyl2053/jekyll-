@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
@@ -34,8 +34,7 @@ public final class KaigoShikakuKihon {
      */
     public static void setData(KaigoAtenaInfoDiv atenaDiv, KaigoShikakuKihonDiv kaigoDiv, ShikibetsuCode 識別コード, int rowId) {
 
-        AtenaShokaiSimple.setData(atenaDiv.getAtenaInfo(), 識別コード);
-
+//        AtenaShokaiSimple.setData(atenaDiv.getAtenaInfo(), 識別コード);
         List<HashMap> targetSource = YamlLoader.DBZ.loadAsList(new RString("KaigoShikakuKihon.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(rowId));
 

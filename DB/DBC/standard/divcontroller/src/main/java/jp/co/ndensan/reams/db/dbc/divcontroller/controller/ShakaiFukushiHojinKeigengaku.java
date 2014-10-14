@@ -7,13 +7,27 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.ShakaiFukushiHojinKeigengakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgShakaiFukushiHojinKeigengaku_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.db.dbc.realservice.KyufuJissekiFinder;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJisseki;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiShafukuKeigen;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
@@ -24,25 +38,26 @@ public class ShakaiFukushiHojinKeigengaku {
     public ResponseData<ShakaiFukushiHojinKeigengakuDiv> onLoad(ShakaiFukushiHojinKeigengakuDiv panel) {
         ResponseData<ShakaiFukushiHojinKeigengakuDiv> response = new ResponseData<>();
 
-        //社会福祉法人軽減額データ取得、設定
-        List<HashMap> shakaiFukushiHojinKeigengaku = YamlLoader.DBC.loadAsList(
-                new RString("dbc0010000/ShakaiFukushiHojinKeigengaku.yml"));
+        KyufuJisseki kyufuJisseki = get給付実績();
+        KyufuJissekiShafukuKeigen iFuJisseki = null;
 
         List<dgShakaiFukushiHojinKeigengaku_Row> shakaiFukushiHojinKeigengakuList = new ArrayList<>();
-        for (int i = 0; i < shakaiFukushiHojinKeigengaku.size(); i++) {
-            HashMap hashMap = shakaiFukushiHojinKeigengaku.get(i);
-            ControlGenerator ymlData = new ControlGenerator(hashMap);
 
-            RString rsKeigenritsu = ymlData.getAsRString("txtKeigenritsu");
-            RString rsShurui = ymlData.getAsRString("txtShurui");
-            RString rsZengo = ymlData.getAsRString("txtZengo");
-            RString rsJuryoSubekiRiyoshaFutanSogaku = ymlData.getAsRString("txtJuryoSubekiRiyoshaFutanSogaku");
-            RString rsKeigengaku = ymlData.getAsRString("txtKeigengaku");
-            RString rsKeigengoRiyoshaFutangaku = ymlData.getAsRString("txtKeigengoRiyoshaFutangaku");
-            RString rsBiko = ymlData.getAsRString("txtBiko");
-            RString rsSaishinsaKaisu = ymlData.getAsRString("txtSaishinsaKaisu");
-            RString rsKagoKaisu = ymlData.getAsRString("txtKagoKaisu");
-            RString rsShinsaYM = ymlData.getAsRString("txtShinsaYM");
+        for (Iterator<KyufuJissekiShafukuKeigen> i = kyufuJisseki.get社会福祉法人軽減額リスト().iterator(); i.hasNext();) {
+
+            iFuJisseki = i.next();
+
+            RString rsKeigenritsu = iFuJisseki.get軽減率();
+            RString rsShurui = iFuJisseki.get種類();
+            RString rsZengo = iFuJisseki.get前後();
+            RString rsJuryoSubekiRiyoshaFutanSogaku = setCommFormat(iFuJisseki.get受領すべき利用者負担の総額());
+            RString rsKeigengaku = setCommFormat(iFuJisseki.get軽減額());
+            RString rsKeigengoRiyoshaFutangaku = setCommFormat(iFuJisseki.get軽減後利用者負担額());
+
+            RString rsBiko = iFuJisseki.get備考();
+            RString rsSaishinsaKaisu = toRString(iFuJisseki.get再審査回数());
+            RString rsKagoKaisu = toRString(iFuJisseki.get過誤回数());
+            RString rsShinsaYM = toWareki(iFuJisseki.get審査年月());
 
             shakaiFukushiHojinKeigengakuList.add(createShakaiFukushiHojinKeigengakuRow(
                     rsKeigenritsu, rsShurui, rsZengo, rsJuryoSubekiRiyoshaFutanSogaku, rsKeigengaku,
@@ -51,10 +66,6 @@ public class ShakaiFukushiHojinKeigengaku {
         }
         panel.getDgShakaiFukushiHojinKeigengaku().setDataSource(shakaiFukushiHojinKeigengakuList);
 
-//        List<dgShakaiFukushiHojinKeigengaku_Row> list = new ArrayList<>();
-//        list.add(createShakaiFukushiHojinKeigengakuRow("55.0", "21:短期入所生活介護", "", "50,000", "5,000", "9,500", "備考１", "1", "2", "平26.01"));
-//        list.add(createShakaiFukushiHojinKeigengakuRow("", "", "後", "10,015", "1,025", "9,005", "", "", "", ""));
-//        panel.getDgShakaiFukushiHojinKeigengaku().setDataSource(list);
         response.data = panel;
         return response;
     }
@@ -63,12 +74,50 @@ public class ShakaiFukushiHojinKeigengaku {
             RString txtKeigenritsu, RString txtShurui, RString txtZengo, RString txtJuryoSubekiRiyoshaFutanSogaku,
             RString txtKeigengaku, RString txtKeigengoRiyoshaFutangaku, RString txtBiko, RString txtSaishinsaKaisu,
             RString txtKagoKaisu, RString txtShinsaYM) {
-//            String txtKeigenritsu, String txtShurui, String txtZengo, String txtJuryoSubekiRiyoshaFutanSogaku,
-//            String txtKeigengaku, String txtKeigengoRiyoshaFutangaku, String txtBiko, String txtSaishinsaKaisu, String txtKagoKaisu, String txtShinsaYM) {
         return new dgShakaiFukushiHojinKeigengaku_Row(
                 txtKeigenritsu, txtShurui, txtZengo, txtJuryoSubekiRiyoshaFutanSogaku,
                 txtKeigengaku, txtKeigengoRiyoshaFutangaku, txtBiko, txtSaishinsaKaisu, txtKagoKaisu, txtShinsaYM);
-//                new RString(txtKeigenritsu), new RString(txtShurui), new RString(txtZengo), new RString(txtJuryoSubekiRiyoshaFutanSogaku),
-//                new RString(txtKeigengaku), new RString(txtKeigengoRiyoshaFutangaku), new RString(txtBiko), new RString(txtSaishinsaKaisu), new RString(txtKagoKaisu), new RString(txtShinsaYM));
+    }
+
+    private KyufuJisseki get給付実績() {
+
+        RString 被保番号 = (RString) ViewStateHolder.get("被保番号", RString.class);
+        RString サービス提供期間開始 = (RString) ViewStateHolder.get("サービス提供期間開始", RString.class);
+        RString サービス提供期間終了 = (RString) ViewStateHolder.get("サービス提供期間終了", RString.class);
+        RString 入力識別番号 = (RString) ViewStateHolder.get("入力識別番号", RString.class);
+        RString サービス種類 = (RString) ViewStateHolder.get("サービス種類", RString.class);
+        RString サービス提供年月 = (RString) ViewStateHolder.get("サービス提供年月", RString.class);
+
+        KyufuJissekiKeyInfo keyInfo = new KyufuJissekiKeyInfo(
+                new KaigoHihokenshaNo(被保番号),
+                new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供期間開始)), new ServiceTeikyoYM((new FlexibleYearMonth(サービス提供期間終了)))),
+                new InputShikibetsuNo(new Code(入力識別番号), RString.EMPTY, RString.EMPTY),
+                new ServiceShuruiCode(サービス種類),
+                new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供年月)));
+
+        KyufuJissekiFinder finder = new KyufuJissekiFinder();
+        KyufuJissekiDetailKeyInfo detailKeyInfo = finder.get給付実績詳細キー(keyInfo);
+        return detailKeyInfo != null ? finder.get給付実績(detailKeyInfo) : null;
+    }
+
+    private RString toWareki(FlexibleYearMonth data) {
+        if (data == null || !data.isValid()) {
+            return RString.EMPTY;
+        }
+        return data.wareki().toDateString().substring(0, 6);
+    }
+
+    private RString setCommFormat(Decimal data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return new RString(data.toString("##,###,###"));
+    }
+
+    private RString toRString(Integer data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return new RString(data.toString());
     }
 }

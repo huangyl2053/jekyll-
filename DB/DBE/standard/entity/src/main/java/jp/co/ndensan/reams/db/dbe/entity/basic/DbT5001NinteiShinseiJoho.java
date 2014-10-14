@@ -16,10 +16,11 @@ public enum DbT5001NinteiShinseiJoho implements IColumnDefinition {
     updateCount(10, 0),
     lastUpdateTimestamp(29, 0),
     lastUpdateReamsLoginId(2147483647, 0),
-    shinseishoKanriNo(10, 0),
-    shoKisaiHokenshaNo(6, 0),
-    shishoCode(9, 0),
-    hihokenshaNo(10, 0),
+    shinseishoKanriNo(2147483647, 0),
+    shoriTimestamp(2147483647, 0),
+    shoKisaiHokenshaNo(2147483647, 0),
+    shishoCode(2147483647, 0),
+    hihokenshaNo(2147483647, 0),
     shikibetsuCode(2147483647, 0),
     ninteiShinseiYMD(2147483647, 0),
     ninteiShinseiEdabanCode(2147483647, 0),
@@ -43,7 +44,9 @@ public enum DbT5001NinteiShinseiJoho implements IColumnDefinition {
     torisageKubunCode(2147483647, 0),
     torisageRiyu(2147483647, 0),
     torisageYMD(2147483647, 0),
-    shinsaKeizokuKubun(1, 0);
+    shinsaKeizokuKubun(1, 0),
+    shinsakaiYusenWaritsukeKubunCode(2147483647, 0),
+    ifSofuYMD(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteichosaTokkijikoList;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteichosaTokkijikoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaTokkijikoMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.NinteichosaTokkijikoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaTokkijikoDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 

@@ -29,6 +29,10 @@ public class EditShinsakaiIinDiv extends Panel {
     private TextBox txtKankeiIinName;
     @JsonProperty("txtShozokuKikan")
     private TextBox txtShozokuKikan;
+    @JsonProperty("txtShozokuKikanMeisho")
+    private TextBox txtShozokuKikanMeisho;
+    @JsonProperty("btnDecideJogaiIin")
+    private Button btnDecideJogaiIin;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -74,6 +78,26 @@ public class EditShinsakaiIinDiv extends Panel {
     @JsonProperty("txtShozokuKikan")
     public void setTxtShozokuKikan(TextBox txtShozokuKikan) {
         this.txtShozokuKikan=txtShozokuKikan;
+    }
+
+    @JsonProperty("txtShozokuKikanMeisho")
+    public TextBox getTxtShozokuKikanMeisho() {
+        return txtShozokuKikanMeisho;
+    }
+
+    @JsonProperty("txtShozokuKikanMeisho")
+    public void setTxtShozokuKikanMeisho(TextBox txtShozokuKikanMeisho) {
+        this.txtShozokuKikanMeisho=txtShozokuKikanMeisho;
+    }
+
+    @JsonProperty("btnDecideJogaiIin")
+    public Button getBtnDecideJogaiIin() {
+        return btnDecideJogaiIin;
+    }
+
+    @JsonProperty("btnDecideJogaiIin")
+    public void setBtnDecideJogaiIin(Button btnDecideJogaiIin) {
+        this.btnDecideJogaiIin=btnDecideJogaiIin;
     }
 
 }

@@ -5,6 +5,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonHihokenshaDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonKohiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonKyotakuServiceKeikakuDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonKyufuritsuDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonServiceKikanDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonShisetsuNyutaishoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -30,7 +36,7 @@ public class KyufuJissekiKihonDiv extends TabPanel {
     @JsonProperty("txtKyufuJissekiKihonNinteiYukoKikan")
     private TextBoxDateRange txtKyufuJissekiKihonNinteiYukoKikan;
     @JsonProperty("txtKyufuJissekiKihonShinsaYM")
-    private TextBox txtKyufuJissekiKihonShinsaYM;
+    private TextBoxDate txtKyufuJissekiKihonShinsaYM;
     @JsonProperty("txtKyufuJissekiKihonKeikokuKubun")
     private TextBox txtKyufuJissekiKihonKeikokuKubun;
     @JsonProperty("KyufuJissekiKihonHihokensha")
@@ -93,12 +99,12 @@ public class KyufuJissekiKihonDiv extends TabPanel {
     }
 
     @JsonProperty("txtKyufuJissekiKihonShinsaYM")
-    public TextBox getTxtKyufuJissekiKihonShinsaYM() {
+    public TextBoxDate getTxtKyufuJissekiKihonShinsaYM() {
         return txtKyufuJissekiKihonShinsaYM;
     }
 
     @JsonProperty("txtKyufuJissekiKihonShinsaYM")
-    public void setTxtKyufuJissekiKihonShinsaYM(TextBox txtKyufuJissekiKihonShinsaYM) {
+    public void setTxtKyufuJissekiKihonShinsaYM(TextBoxDate txtKyufuJissekiKihonShinsaYM) {
         this.txtKyufuJissekiKihonShinsaYM=txtKyufuJissekiKihonShinsaYM;
     }
 

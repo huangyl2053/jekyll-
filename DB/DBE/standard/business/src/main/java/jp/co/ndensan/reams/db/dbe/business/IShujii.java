@@ -4,11 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,11 +22,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public interface IShujii {
 
     /**
-     * 証記載保険者番号を返します。
+     * 市町村コードを返します。
      *
-     * @return 証記載保険者番号
+     * @return 市町村コード
      */
-    ShoKisaiHokenshaNo get証記載保険者番号();
+    LasdecCode get市町村コード();
 
     /**
      * 介護医療機関コードを返します。
@@ -56,11 +57,11 @@ public interface IShujii {
     RString get医師識別番号();
 
     /**
-     * 医師の状況が有効かどうかを判定します。
+     * 医師の状況を返します。
      *
-     * @return 有効の場合はtrueを返します。
+     * @return 医師の状況
      */
-    boolean is有効();
+    IshiJokyo get医師の状況();
 
     /**
      * 郵便番号を返します。

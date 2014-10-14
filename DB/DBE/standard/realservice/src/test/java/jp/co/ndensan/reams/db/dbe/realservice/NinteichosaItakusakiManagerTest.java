@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5020HatsubanKanriJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.IHatsubanKanriJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import static org.hamcrest.CoreMatchers.is;
@@ -57,7 +57,7 @@ public class NinteichosaItakusakiManagerTest {
         entity = mock(DbT7010NinteichosaItakusakiJohoEntity.class);
         hatsubanentity = mock(DbT5020HatsubanKanriJohoEntity.class);
         list = new ArrayList<>();
-        when(entity.get証記載保険者番号()).thenReturn(new ShoKisaiHokenshaNo(new RString("202030")));
+        when(entity.get市町村コード()).thenReturn(new LasdecCode(new RString("202030")));
         kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000001"));
         when(entity.get介護事業者番号()).thenReturn(kaigojigyoshaNo);
         jigyoshaNo = new JigyoshaNo(new RString("2020300001"));
@@ -73,9 +73,9 @@ public class NinteichosaItakusakiManagerTest {
         emptyList = Collections.EMPTY_LIST;
         when(ninteichosaItakusakiDac.selectAll(null, true)).thenReturn(emptyList);
         when(ninteichosaItakusakiDac.selectAll(null)).thenReturn(emptyList);
-        when(ninteichosaItakusakiDac.selectAll(new ShoKisaiHokenshaNo(new RString("20203")), true)).thenReturn(list);
+        when(ninteichosaItakusakiDac.selectAll(new LasdecCode(new RString("202030")), true)).thenReturn(list);
 
-        when(entity.get証記載保険者番号()).thenReturn(new ShoKisaiHokenshaNo(new RString("202030")));
+        when(entity.get市町村コード()).thenReturn(new LasdecCode(new RString("202030")));
         kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000002"));
         when(entity.get介護事業者番号()).thenReturn(kaigojigyoshaNo);
         jigyoshaNo = new JigyoshaNo(new RString("2020300002"));
@@ -86,7 +86,7 @@ public class NinteichosaItakusakiManagerTest {
         entity.set機関の区分(new RString("d"));
         entity.set調査委託区分(ChosaItakuKubun.指定なし);
         list.add(entity);
-        when(ninteichosaItakusakiDac.selectAll(new ShoKisaiHokenshaNo(new RString("20203")))).thenReturn(list);
+        when(ninteichosaItakusakiDac.selectAll(new LasdecCode(new RString("202030")))).thenReturn(list);
 
     }
 
@@ -111,13 +111,13 @@ public class NinteichosaItakusakiManagerTest {
 
         @Test
         public void 市町村指定の場合get認定調査委託先市町村指定全件事業状況ありは有効な件数を返却する() {
-            List<NinteichosaItakusaki> resultList = sut.get認定調査委託先市町村指定全件(new ShoKisaiHokenshaNo(new RString("20203")), true);
+            List<NinteichosaItakusaki> resultList = sut.get認定調査委託先市町村指定全件(new LasdecCode(new RString("202030")), true);
             assertThat(resultList.size(), is(2));
         }
 
         @Test
         public void 市町村指定の場合get認定調査委託先市町村指定全件事業状況なしは市町村の全ての件数を返却する() {
-            List<NinteichosaItakusaki> resultList = sut.get認定調査委託先市町村指定全件(new ShoKisaiHokenshaNo(new RString("20203")));
+            List<NinteichosaItakusaki> resultList = sut.get認定調査委託先市町村指定全件(new LasdecCode(new RString("202030")));
             assertThat(resultList.size(), is(2));
         }
     }
@@ -139,8 +139,8 @@ public class NinteichosaItakusakiManagerTest {
 
         @Test
         public void 引数を指定した場合get認定調査委託先介護事業者番号指定は指定した情報を返却する() {
-            when(ninteichosaItakusakiDac.select(new ShoKisaiHokenshaNo(new RString("20203")), kaigojigyoshaNo, false)).thenReturn(entity);
-            NinteichosaItakusaki result = sut.get認定調査委託先介護事業者番号指定(new ShoKisaiHokenshaNo(new RString("20203")), kaigojigyoshaNo, false);
+            when(ninteichosaItakusakiDac.select(new LasdecCode(new RString("202030")), kaigojigyoshaNo, false)).thenReturn(entity);
+            NinteichosaItakusaki result = sut.get認定調査委託先介護事業者番号指定(new LasdecCode(new RString("202030")), kaigojigyoshaNo, false);
             assertThat(result.getKaigoJigyoshaNo(), is(kaigojigyoshaNo));
         }
     }
@@ -154,18 +154,16 @@ public class NinteichosaItakusakiManagerTest {
 
         @Test
         public void 引数の指定がない場合get認定調査委託先事業者番号指定はNullを返却する() {
-//            jigyoshaNo = new JigyoshaNo(null);
             jigyoshaNo = null;
-            when(ninteichosaItakusakiDac.select(new ShoKisaiHokenshaNo(new RString("20205")), jigyoshaNo, true)).thenReturn(null);
+            when(ninteichosaItakusakiDac.select(new LasdecCode(new RString("202050")), jigyoshaNo, true)).thenReturn(null);
             NinteichosaItakusaki result = sut.get認定調査委託先事業者番号指定(null, jigyoshaNo, true);
             assertThat(result, nullValue());
         }
 
         @Test
         public void 引数を指定した場合get認定調査委託先事業者番号指定は指定した情報を返却する() {
-//            jigyoshaNo = new JigyoshaNo(new RString("2020300002"));
-            when(ninteichosaItakusakiDac.select(new ShoKisaiHokenshaNo(new RString("20203")), jigyoshaNo, false)).thenReturn(entity);
-            NinteichosaItakusaki result = sut.get認定調査委託先事業者番号指定(new ShoKisaiHokenshaNo(new RString("20203")), jigyoshaNo, false);
+            when(ninteichosaItakusakiDac.select(new LasdecCode(new RString("202030")), jigyoshaNo, false)).thenReturn(entity);
+            NinteichosaItakusaki result = sut.get認定調査委託先事業者番号指定(new LasdecCode(new RString("202030")), jigyoshaNo, false);
             assertThat(result.getJigyoshaNo(), is(jigyoshaNo));
         }
     }

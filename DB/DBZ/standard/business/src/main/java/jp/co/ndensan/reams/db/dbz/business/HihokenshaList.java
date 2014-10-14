@@ -14,7 +14,10 @@ import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaComparators.Regi
 import jp.co.ndensan.reams.db.dbz.business.comparator.MultiComparator;
 import jp.co.ndensan.reams.db.dbz.business.comparator.ShikibetsuCodeComparator;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
@@ -41,15 +44,16 @@ public class HihokenshaList implements Iterable<Hihokensha> {
     }
 
     /**
-     * {@link LasdecCode 地方公共団体コード}を指定して、新しいHihokenshaListを返します。
+     * {@link LasdecCode 市町村コード}を指定して、新しいHihokenshaListを返します。
      *
-     * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
-     * @return 指定の市町村に属する{@link Hihokensha Hihokensha}だけを集めた、新しいHihokenshaList
+     * @param 市町村コード {@link LasdecCode 市町村コード}
+     * @return
+     * 指定の保険者（市町村）に属する{@link Hihokensha Hihokensha}だけを集めた、新しいHihokenshaList
      */
-    public HihokenshaList subHihokenshaList(LasdecCode 地方公共団体コード) {
+    public HihokenshaList subHihokenshaList(LasdecCode 市町村コード) {
         List<Hihokensha> subList = new ArrayList<>();
         for (Hihokensha hihokensha : list) {
-            if (isHihokenshaWhoLivesIn(地方公共団体コード, hihokensha)) {
+            if (isHihokenshaWhoLivesIn(市町村コード, hihokensha)) {
                 subList.add(hihokensha);
             }
         }
@@ -126,7 +130,7 @@ public class HihokenshaList implements Iterable<Hihokensha> {
     }
 
     private boolean isHihokenshaWhoLivesIn(LasdecCode lasdecCode, Hihokensha hihokensha) {
-        return lasdecCode.equals(hihokensha.get地方公共団体コード());
+        return lasdecCode.equals(hihokensha.get市町村コード());
     }
 
     private boolean isHihokenshawhoseHihokenshaNoIs(KaigoHihokenshaNo hihokenshaNo, Hihokensha hihokensha) {
@@ -150,10 +154,10 @@ public class HihokenshaList implements Iterable<Hihokensha> {
     }
 
     private String errorMessageForConstructor(String str) {
-        return Messages.E00003.replace(str, simpleNameOf(HihokenshaList.class)).getMessage();
+        return UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage(str, simpleNameOf(HihokenshaList.class));
     }
 
     private String errorMessageForMethod(String str) {
-        return Messages.E00006.replace(str + "に一致する" + simpleNameOf(Hihokensha.class)).getMessage();
+        return UrErrorMessages.存在しない.getMessage().replace(str + "に一致する" + simpleNameOf(Hihokensha.class)).getMessage();
     }
 }

@@ -41,7 +41,6 @@ public class KaigoHihokenshaNo implements IValueObject<RString>, Comparable<Kaig
         requireNonNull(value, Messages.E00003.replace("value", getClass().getName()).getMessage());
         validate(value);
         this.被保険者番号 = value;
-
     }
 
     /**

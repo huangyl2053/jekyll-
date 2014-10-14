@@ -6,11 +6,12 @@ package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoEntityMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteiShinchokuJohoDacMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteiShinseiJohoDacMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -157,7 +158,7 @@ public class ShujiiIkenshoIraiTaishoshaDacTest extends TestBase {
     }
 
     private static DbT5005NinteiShinchokuJohoEntity create認定進捗情報Entity(RString 申請書管理番号, ChosaShinchoku 調査進捗) {
-        DbT5005NinteiShinchokuJohoEntity entity = NinteiShinchokuJohoMock.create認定進捗情報Entity();
+        DbT5005NinteiShinchokuJohoEntity entity = NinteiShinchokuJohoEntityMock.create認定進捗情報Entity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
         switch (調査進捗) {
             case 作成依頼未完了:
@@ -171,10 +172,10 @@ public class ShujiiIkenshoIraiTaishoshaDacTest extends TestBase {
     }
 
     private static DbT5001NinteiShinseiJohoEntity create認定申請情報Entity(RString 申請書管理番号, ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) {
-        DbT5001NinteiShinseiJohoEntity entity = NinteiShinseiJohoTestHelper.create認定申請情報Entity();
+        DbT5001NinteiShinseiJohoEntity entity = YokaigoNinteiShinseiTestHelper.create認定申請情報Entity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
         entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        entity.setShishoCode(支所コード);
+        entity.setShishoCode(new ShishoCode(支所コード));
         return entity;
     }
 }

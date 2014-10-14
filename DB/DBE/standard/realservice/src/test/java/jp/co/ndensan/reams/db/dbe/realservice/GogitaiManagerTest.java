@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity
 import jp.co.ndensan.reams.db.dbe.persistence.relate.GogitaiAndGogitaiWariateIinDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.GogitaiWariateShinsakaiIinDac;
 import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
+import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -125,9 +126,9 @@ public class GogitaiManagerTest {
 
     private static GogitaiWariateShinsakaiIinEntity create合議体割当委員Entity(int 合議体番号) {
         GogitaiWariateShinsakaiIinEntity entity = new GogitaiWariateShinsakaiIinEntity();
-        entity.set割当Entity(GogitaiMockEntityCreator.create合議体割当EntitySpy(合議体番号, "iin01", "19991212", "19991231"));
+        entity.set割当Entity(GogitaiMockEntityCreator.create合議体割当EntitySpy(合議体番号, "00000001", "19991212", "19991231"));
         entity.set合議体情報Entity(GogitaiMockEntityCreator.create合議体情報EntitySpy(合議体番号, "19991212", "19991231", "basho1"));
-        entity.set委員Entity(GogitaiMockEntityCreator.create審査会委員EntitySpy("iin01", "19800101"));
+        entity.set委員Entity(ShinsakaiMockEntityCreator.create審査会委員EntitySpy("00000001"));
         entity.set開催場所Entity(GogitaiMockEntityCreator.create開催場所EntitySpy("basho1"));
         return entity;
     }

@@ -13,3 +13,4 @@ gogitaiDummyFlag,bool,boolean,,,,,A
 shinsakaiShiryoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,A
 shinsakaiKyukaiFlag,bool,boolean,,,,,A
 shinsakaiWariateZumiNinzu,int2,int,,,,,A
+shiryoSakuseiKubun,UDD035Code,Code,,,,,A

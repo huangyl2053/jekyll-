@@ -35,7 +35,7 @@ public class SearchHihokenshaPanel {
         ResponseData<SearchHihokenshaPanelDiv> response = new ResponseData<>();
 
         //TO DO　被保険者の検索の内容を閉じる
-        panel.getHihokenshaFinder().getSearchCriteriaOfHokensha().setIsOpen(false);
+        panel.getHihokenshaFinder().getSearchCriteriaOfHihokensha().setIsOpen(false);
         /////////////////////////////////////////////////////////////////////////////////////////
         //TO DO  JutakuData1.xml ①
         List<HashMap> ymlData = ymlData();

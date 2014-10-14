@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -17,5 +17,5 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public interface IShujiiIryoKikanDacMock {
 
     @Transaction
-    DbT7011ShujiiIryoKikanJohoEntity select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード);
+    DbT7011ShujiiIryoKikanJohoEntity select(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード);
 }

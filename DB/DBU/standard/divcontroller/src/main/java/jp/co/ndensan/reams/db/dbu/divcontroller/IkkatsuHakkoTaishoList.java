@@ -191,9 +191,9 @@ public class IkkatsuHakkoTaishoList {
         panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().getKaigoChohyoShutsuryokujun().
                 getTxtSort().setValue(ymlData.getAsRString("sort"));
 
-        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().getKaigoChohyoShutsuryokujun()
-                .getTxtSortName().setValue(ymlData.getAsRString("sortname"));
-
+//        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().getKaigoChohyoShutsuryokujun()
+//                .getTxtSortName().setValue(ymlData.getAsRString("sortname"));
+//
         panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().getKaigoChohyoShutsuryokujun()
                 .getTxtKaiPage().setValue(ymlData.getAsRString("kaipage"));
 
@@ -203,9 +203,9 @@ public class IkkatsuHakkoTaishoList {
         panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().getKaigoChohyoShutsuryokujun()
                 .getTxtSort().setValue(ymlData.getAsRString("sort"));
 
-        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().getKaigoChohyoShutsuryokujun()
-                .getTxtSortName().setValue(ymlData.getAsRString("sortname"));
-
+//        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().getKaigoChohyoShutsuryokujun()
+//                .getTxtSortName().setValue(ymlData.getAsRString("sortname"));
+//
         panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().getKaigoChohyoShutsuryokujun()
                 .getTxtKaiPage().setValue(ymlData.getAsRString("kaipage"));
     }

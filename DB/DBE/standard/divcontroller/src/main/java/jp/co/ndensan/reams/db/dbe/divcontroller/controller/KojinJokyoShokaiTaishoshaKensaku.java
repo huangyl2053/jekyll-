@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 public class KojinJokyoShokaiTaishoshaKensaku {
 
     /**
-     * 検索条件指示画面ロード時の処理を表します。
+     * // * 検索条件指示画面ロード時の処理を表します。
      *
      * @param div 検索条件指示Div
      * @return ResponseData
@@ -35,17 +35,8 @@ public class KojinJokyoShokaiTaishoshaKensaku {
 
         List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
-        if (cg.getAsRString("保険者番号").equalsIgnoreCase(new RString("152264"))) {
-            div.getHihokenshaFinder().getSearchCriteriaOfHokensha().getDdlHokensha().setSelectedItem(new RString("2"));
-            div.getHihokenshaFinder().getSearchCriteriaOfHokensha().getDdlHokensha().setDisplayNone(false);
-
-        } else {
-            div.getHihokenshaFinder().getSearchCriteriaOfHokensha().getDdlHokensha().setSelectedItem(new RString("1"));
-        }
 
         div.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getTxtTuchishoNo().setDisplayNone(true);
-        div.getHihokenshaFinder().getSearchCriteriaOfKojin().getLblJuminShubetsu().setDisplayNone(true);
-        div.getHihokenshaFinder().getSearchCriteriaOfKojin().getDdlJuminShubetsu().setDisabled(true);
 
         response.data = div;
         return response;

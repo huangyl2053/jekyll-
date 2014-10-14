@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.EditShinsakaiIinDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.dgKankeiIin_Row;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -31,6 +32,10 @@ public class KankeiIinDiv extends Panel {
     private DataGrid<dgKankeiIin_Row> dgKankeiIin;
     @JsonProperty("EditShinsakaiIin")
     private EditShinsakaiIinDiv EditShinsakaiIin;
+    @JsonProperty("kankeiIinGridSelectedRow")
+    private RString kankeiIinGridSelectedRow;
+    @JsonProperty("decideFlag")
+    private RString decideFlag;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -76,6 +81,26 @@ public class KankeiIinDiv extends Panel {
     @JsonProperty("EditShinsakaiIin")
     public void setEditShinsakaiIin(EditShinsakaiIinDiv EditShinsakaiIin) {
         this.EditShinsakaiIin=EditShinsakaiIin;
+    }
+
+    @JsonProperty("kankeiIinGridSelectedRow")
+    public RString getKankeiIinGridSelectedRow() {
+        return kankeiIinGridSelectedRow;
+    }
+
+    @JsonProperty("kankeiIinGridSelectedRow")
+    public void setKankeiIinGridSelectedRow(RString kankeiIinGridSelectedRow) {
+        this.kankeiIinGridSelectedRow=kankeiIinGridSelectedRow;
+    }
+
+    @JsonProperty("decideFlag")
+    public RString getDecideFlag() {
+        return decideFlag;
+    }
+
+    @JsonProperty("decideFlag")
+    public void setDecideFlag(RString decideFlag) {
+        this.decideFlag=decideFlag;
     }
 
 }

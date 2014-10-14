@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiMockBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.Test;
@@ -33,9 +33,9 @@ public class ShinsakaiListTest {
         @Before
         public void setUp() {
             List<Shinsakai> list = new ArrayList<>();
-            list.add(ShinsakaiTestBusinessCreator.create審査会(1, "19990101"));
-            list.add(ShinsakaiTestBusinessCreator.create審査会(2, "20000101"));
-            list.add(ShinsakaiTestBusinessCreator.create審査会(3, "20010101"));
+            list.add(ShinsakaiMockBusinessCreator.create審査会(1, "19990101"));
+            list.add(ShinsakaiMockBusinessCreator.create審査会(2, "20000101"));
+            list.add(ShinsakaiMockBusinessCreator.create審査会(3, "20010101"));
             sut = new ShinsakaiList(list);
             開催番号 = new ShinsakaiKaisaiNo(2);
         }
@@ -73,7 +73,7 @@ public class ShinsakaiListTest {
     private static ShinsakaiList createList(int 件数) {
         List<Shinsakai> list = new ArrayList<>();
         for (int i = 0; i < 件数; i++) {
-            list.add(ShinsakaiTestBusinessCreator.create審査会(1, "19990101"));
+            list.add(ShinsakaiMockBusinessCreator.create審査会(1, "19990101"));
         }
         return new ShinsakaiList(list);
     }

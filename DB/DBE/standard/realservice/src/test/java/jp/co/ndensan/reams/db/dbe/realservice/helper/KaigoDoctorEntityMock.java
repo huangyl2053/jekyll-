@@ -8,11 +8,11 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0517IshiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -55,12 +55,12 @@ public class KaigoDoctorEntityMock {
 
     private static DbT7012ShujiiJohoEntity createDbT7012ShujiiJohoEntity() {
         DbT7012ShujiiJohoEntity entity = new DbT7012ShujiiJohoEntity();
-        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("証記載保険者番号")));
+        entity.setShichosonCode(new LasdecCode(new RString("000001")));
         entity.setKaigoIryokikanCode(new KaigoIryoKikanCode(new RString("介護医療機関コード")));
         entity.setKaigoIshiCode(new RString("介護医師コード"));
         entity.setIryokikanCode(new RString("1234567890"));
         entity.setIshiShikibetsuNo(new RString("医師識別番号"));
-        entity.setShujiiJokyo(IshiJokyo.有効.is有効());
+        entity.setShujiiJokyo(IshiJokyo.有効.getCode());
         entity.setYubinNo(new YubinNo(new RString("1234567")));
         entity.setJusho(new AtenaJusho(new RString("住所コード")));
         entity.setTelNo(new TelNo(new RString("電話番号")));

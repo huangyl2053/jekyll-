@@ -21,6 +21,7 @@ public enum DbT5010NinteichosaTokkijiko implements IColumnDefinition {
     shinseishoKanriNo(10, 0),
     ninteichosaRirekiNo(5, 0),
     ninteichosaTokkijikoNo(3, 0),
+    genponMaskKubun(2147483647, 0),
     ninteichosaTokkijiko(2147483647, 0);
     private final int maxLength;
     private final int scale;

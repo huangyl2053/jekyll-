@@ -284,7 +284,7 @@
     {
      "fieldName": "txtKyufuJissekiSeinengappi",
      "items": [],
-     "controlType": "TextBox",
+     "controlType": "TextBoxDate",
      "width": "85",
      "visible": true,
      "displayNone": false,
@@ -303,20 +303,14 @@
      "jpControlName": "",
      "readOnly": true,
      "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
-     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
      "text": "",
-     "suggest": [],
      "value": "",
      "labelLText": "生年月日",
      "labelRText": "",
@@ -324,13 +318,14 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
+     "permitCharactor": "./_-",
+     "ymdKubun": 2,
+     "displayFormat": 0
     },
     {
      "fieldName": "txtKyufuJissekiTeikyoYM",
      "items": [],
-     "controlType": "TextBox",
+     "controlType": "TextBoxDate",
      "width": "57",
      "visible": true,
      "displayNone": false,
@@ -349,20 +344,14 @@
      "jpControlName": "",
      "readOnly": true,
      "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
-     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
      "text": "",
-     "suggest": [],
      "value": "",
      "labelLText": "提供年月",
      "labelRText": "",
@@ -370,8 +359,9 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": "",
-     "permitCharactor": ""
+     "permitCharactor": "./_-",
+     "ymdKubun": 1,
+     "displayFormat": 0
     },
     {
      "fieldName": "txtKyufuJissekiJissekiKubun",
@@ -607,8 +597,8 @@
      "fieldName": "btnKinkyujiShisetsuRyoyohi",
      "items": [],
      "controlType": "Button",
-     "width": "210",
-     "visible": true,
+     "width": "220",
+     "visible": false,
      "displayNone": true,
      "disabled": false,
      "accessKey": "",
@@ -625,19 +615,21 @@
      "jpControlName": "",
      "text": "緊急時施設療養費を表示する",
      "onClick": "",
+     "icon": 0,
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnTokuteiShinryohi",
      "items": [],
      "controlType": "Button",
-     "width": "200",
-     "visible": true,
+     "width": "220",
+     "visible": false,
      "displayNone": true,
      "disabled": false,
      "accessKey": "",
@@ -654,19 +646,21 @@
      "jpControlName": "",
      "text": "特定診療費を表示する",
      "onClick": "",
+     "icon": 0,
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnShokujiHiyo",
      "items": [],
      "controlType": "Button",
-     "width": "200",
-     "visible": true,
+     "width": "220",
+     "visible": false,
      "displayNone": true,
      "disabled": false,
      "accessKey": "",
@@ -683,19 +677,21 @@
      "jpControlName": "",
      "text": "食事費用を表示する",
      "onClick": "",
+     "icon": 0,
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnTokuteiNyushoshaKaigoServicehi",
      "items": [],
      "controlType": "Button",
-     "width": "210",
-     "visible": true,
+     "width": "220",
+     "visible": false,
      "displayNone": true,
      "disabled": false,
      "accessKey": "",
@@ -712,20 +708,22 @@
      "jpControlName": "",
      "text": "特定入所者費用を表示する",
      "onClick": "",
+     "icon": 0,
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnShakaiFukushiHojinKeigengaku",
      "items": [],
      "controlType": "Button",
-     "width": "210",
-     "visible": true,
-     "displayNone": false,
+     "width": "220",
+     "visible": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -741,11 +739,13 @@
      "jpControlName": "",
      "text": "社福軽減費を表示する",
      "onClick": "",
+     "icon": 0,
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -758,7 +758,7 @@
          "fieldName": "btnKyufuJissekiKihonGokei",
          "items": [],
          "controlType": "Button",
-         "width": "210",
+         "width": "220",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -776,11 +776,13 @@
          "jpControlName": "",
          "text": "合計情報を表示する",
          "onClick": "",
+         "icon": 0,
+         "onBeforeClick": "",
+         "onAfterClick": "",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": "",
-         "icon": 0,
          "heightTextBoxMatches": false
         },
         {
@@ -925,7 +927,7 @@
         {
          "fieldName": "txtKyufuJissekiKihonShinsaYM",
          "items": [],
-         "controlType": "TextBox",
+         "controlType": "TextBoxDate",
          "width": "57",
          "visible": true,
          "displayNone": false,
@@ -937,27 +939,21 @@
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": "0",
+         "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtKyufuJissekiKihonShinsaYM_core",
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": true,
          "required": false,
-         "maxLength": 100000000,
-         "minLength": 0,
-         "textAlign": 0,
          "placeHolder": "",
-         "textKind": 0,
          "isPrivateInfo": false,
          "isPassword": false,
-         "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
          "text": "",
-         "suggest": [],
          "value": "",
          "labelLText": "審査年月",
          "labelRText": "",
@@ -965,8 +961,9 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "decorationClass": "",
-         "permitCharactor": ""
+         "permitCharactor": "./_-",
+         "ymdKubun": 1,
+         "displayFormat": 0
         },
         {
          "fieldName": "txtKyufuJissekiKihonKeikokuKubun",
@@ -1407,11 +1404,7 @@
          "title": "被保険者",
          "isOpen": true,
          "canOpenAndClose": false,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "KyufuJissekiShukei"
-          }
-         ],
+         "postParameterPanelNames": [],
          "requestSettings": [],
          "hiddenInput": [],
          "onOpen": "",
@@ -1425,7 +1418,8 @@
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "canPost": true
         },
         {
          "fieldName": "KyufuJissekiKihonKyotakuServiceKeikaku",
@@ -1590,11 +1584,7 @@
          "title": "居宅サービス計画",
          "isOpen": true,
          "canOpenAndClose": false,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "KyufuJissekiKihonKyotakuServiceKeikaku"
-          }
-         ],
+         "postParameterPanelNames": [],
          "requestSettings": [],
          "hiddenInput": [],
          "onOpen": "",
@@ -1608,7 +1598,8 @@
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "canPost": true
         },
         {
          "fieldName": "KyufuJissekiKihonServiceKikan",
@@ -1616,7 +1607,7 @@
           {
            "fieldName": "txtKyufuJissekiKihonKaishiYMD",
            "items": [],
-           "controlType": "TextBox",
+           "controlType": "TextBoxDate",
            "width": "85",
            "visible": true,
            "displayNone": false,
@@ -1635,20 +1626,14 @@
            "jpControlName": "",
            "readOnly": true,
            "required": false,
-           "maxLength": 100000000,
-           "minLength": 0,
-           "textAlign": 0,
            "placeHolder": "",
-           "textKind": 0,
            "isPrivateInfo": false,
            "isPassword": false,
-           "isComboBox": false,
            "onFocus": "",
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
            "text": "",
-           "suggest": [],
            "value": "",
            "labelLText": "開始日",
            "labelRText": "",
@@ -1656,13 +1641,14 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "permitCharactor": "./_-",
+           "ymdKubun": 2,
+           "displayFormat": 0
           },
           {
            "fieldName": "txtKyufuJissekiKihonChushiYMD",
            "items": [],
-           "controlType": "TextBox",
+           "controlType": "TextBoxDate",
            "width": "85",
            "visible": true,
            "displayNone": false,
@@ -1681,20 +1667,14 @@
            "jpControlName": "",
            "readOnly": true,
            "required": false,
-           "maxLength": 100000000,
-           "minLength": 0,
-           "textAlign": 0,
            "placeHolder": "",
-           "textKind": 0,
            "isPrivateInfo": false,
            "isPassword": false,
-           "isComboBox": false,
            "onFocus": "",
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
            "text": "",
-           "suggest": [],
            "value": "",
            "labelLText": "中止日",
            "labelRText": "",
@@ -1702,8 +1682,9 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "permitCharactor": "./_-",
+           "ymdKubun": 2,
+           "displayFormat": 0
           },
           {
            "fieldName": "txtKyufuJissekiKihonChushiRiyu",
@@ -1773,11 +1754,7 @@
          "title": "サービス期間",
          "isOpen": true,
          "canOpenAndClose": false,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "KyufuJissekiShukei"
-          }
-         ],
+         "postParameterPanelNames": [],
          "requestSettings": [],
          "hiddenInput": [],
          "onOpen": "",
@@ -1791,7 +1768,8 @@
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "canPost": true
         },
         {
          "fieldName": "KyufuJissekiKihonShisetsuNyutaisho",
@@ -1799,7 +1777,7 @@
           {
            "fieldName": "txtKyufuJissekiKihonNyushoYMD",
            "items": [],
-           "controlType": "TextBox",
+           "controlType": "TextBoxDate",
            "width": "85",
            "visible": true,
            "displayNone": false,
@@ -1818,20 +1796,14 @@
            "jpControlName": "",
            "readOnly": true,
            "required": false,
-           "maxLength": 100000000,
-           "minLength": 0,
-           "textAlign": 0,
            "placeHolder": "",
-           "textKind": 0,
            "isPrivateInfo": false,
            "isPassword": false,
-           "isComboBox": false,
            "onFocus": "",
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
            "text": "",
-           "suggest": [],
            "value": "",
            "labelLText": "入所日",
            "labelRText": "",
@@ -1839,8 +1811,9 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "permitCharactor": "./_-",
+           "ymdKubun": 2,
+           "displayFormat": 0
           },
           {
            "fieldName": "txtKyufuJissekiKihonNyushoJitsuNissu",
@@ -1891,7 +1864,7 @@
           {
            "fieldName": "txtKyufuJissekiKihonTaishoYMD",
            "items": [],
-           "controlType": "TextBox",
+           "controlType": "TextBoxDate",
            "width": "85",
            "visible": true,
            "displayNone": false,
@@ -1910,20 +1883,14 @@
            "jpControlName": "",
            "readOnly": true,
            "required": false,
-           "maxLength": 100000000,
-           "minLength": 0,
-           "textAlign": 0,
            "placeHolder": "",
-           "textKind": 0,
            "isPrivateInfo": false,
            "isPassword": false,
-           "isComboBox": false,
            "onFocus": "",
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
            "text": "",
-           "suggest": [],
            "value": "",
            "labelLText": "退所日",
            "labelRText": "",
@@ -1931,8 +1898,9 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "decorationClass": "",
-           "permitCharactor": ""
+           "permitCharactor": "./_-",
+           "ymdKubun": 2,
+           "displayFormat": 0
           },
           {
            "fieldName": "txtKyufuJissekiKihonGaihakuNissu",
@@ -2094,11 +2062,7 @@
          "title": "施設入退所(院)",
          "isOpen": true,
          "canOpenAndClose": false,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "KyufuJissekiShukei"
-          }
-         ],
+         "postParameterPanelNames": [],
          "requestSettings": [],
          "hiddenInput": [],
          "onOpen": "",
@@ -2112,7 +2076,8 @@
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "canPost": true
         },
         {
          "fieldName": "KyufuJissekiKihonKyufuritsu",
@@ -2323,11 +2288,7 @@
          "title": "給付率",
          "isOpen": true,
          "canOpenAndClose": false,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "KyufuJissekiKihonKyufuritsu"
-          }
-         ],
+         "postParameterPanelNames": [],
          "requestSettings": [],
          "hiddenInput": [],
          "onOpen": "",
@@ -2341,7 +2302,8 @@
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "canPost": true
         },
         {
          "fieldName": "KyufuJissekiKihonKohi",
@@ -2748,11 +2710,7 @@
          "title": "公費",
          "isOpen": true,
          "canOpenAndClose": false,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "KyufuJissekiShukei"
-          }
-         ],
+         "postParameterPanelNames": [],
          "requestSettings": [],
          "hiddenInput": [],
          "onOpen": "",
@@ -2766,12 +2724,13 @@
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "canPost": true
         }
        ],
        "controlType": "TabPanel",
        "width": "960",
-       "visible": true,
+       "visible": false,
        "displayNone": false,
        "disabled": false,
        "accessKey": "",
@@ -4695,11 +4654,7 @@
          "title": "",
          "isOpen": true,
          "canOpenAndClose": true,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "CareManagementhiEtc"
-          }
-         ],
+         "postParameterPanelNames": [],
          "requestSettings": [],
          "hiddenInput": [],
          "onOpen": "",
@@ -4713,7 +4668,8 @@
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "canPost": true
         },
         {
          "fieldName": "txtCareManagementhiTekiyo",
@@ -4808,6 +4764,7 @@
            "jpControlName": "",
            "readOnly": false,
            "height": "222",
+           "dataSource": [],
            "gridSetting": {
             "rowHeight": 28,
             "isMultiSelectable": false,
@@ -5119,7 +5076,6 @@
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
-           "dataSource": [],
            "sortOrder": "txtSeikyugaku",
            "isAscending": true,
            "filterList": [],
@@ -5147,11 +5103,7 @@
          "title": "集計",
          "isOpen": true,
          "canOpenAndClose": false,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "KyufuJissekiShukei"
-          }
-         ],
+         "postParameterPanelNames": [],
          "requestSettings": [],
          "hiddenInput": [],
          "onOpen": "",
@@ -5159,13 +5111,14 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorder": false,
+         "eraseBorder": true,
          "backgroundColor": 0,
          "widthAuto": true,
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "canPost": true
         },
         {
          "fieldName": "KyufuJissekiMeisai",
@@ -5192,6 +5145,7 @@
            "jpControlName": "",
            "readOnly": false,
            "height": "198",
+           "dataSource": [],
            "gridSetting": {
             "rowHeight": 28,
             "isMultiSelectable": false,
@@ -5226,27 +5180,6 @@
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "txtService"
-             },
-             {
-              "columnName": "摘要",
-              "dataName": "btnTekiyo",
-              "toolTip": "",
-              "bgColor": 0,
-              "width": 60,
-              "visible": true,
-              "cellType": 8,
-              "cellDetails": {
-               "cellType": 8,
-               "text": "摘要",
-               "onClick": "",
-               "imageFileUrl": "",
-               "imageWidth": "",
-               "imageHeight": ""
-              },
-              "align": 1,
-              "resize": true,
-              "isPrivateInfo": false,
-              "sortKey": "btnTekiyo"
              },
              {
               "columnName": "決定",
@@ -5435,6 +5368,23 @@
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "txtShinsaYM"
+             },
+             {
+              "columnName": "摘要",
+              "dataName": "txtTekiyo",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 200,
+              "visible": true,
+              "cellType": 0,
+              "cellDetails": {
+               "cellType": 0,
+               "isSetValueToToolTip": false
+              },
+              "align": 0,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "txtTekiyo"
              }
             ]
            },
@@ -5452,7 +5402,6 @@
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
-           "dataSource": [],
            "sortOrder": "txtKohi1Tani",
            "isAscending": true,
            "filterList": [],
@@ -5480,11 +5429,7 @@
          "title": "明細",
          "isOpen": true,
          "canOpenAndClose": false,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "KyufuJissekiMeisai"
-          }
-         ],
+         "postParameterPanelNames": [],
          "requestSettings": [],
          "hiddenInput": [],
          "onOpen": "",
@@ -5492,18 +5437,19 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorder": false,
+         "eraseBorder": true,
          "backgroundColor": 0,
          "widthAuto": true,
          "panelDisplay": 0,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "canPost": true
         }
        ],
        "controlType": "TabPanel",
        "width": "960",
-       "visible": true,
+       "visible": false,
        "displayNone": false,
        "disabled": false,
        "accessKey": "",
@@ -5547,6 +5493,7 @@
          "jpControlName": "",
          "readOnly": false,
          "height": "335",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 28,
           "isMultiSelectable": false,
@@ -5629,27 +5576,6 @@
             "resize": true,
             "isPrivateInfo": false,
             "sortKey": "txtTanisuTanka"
-           },
-           {
-            "columnName": "摘要",
-            "dataName": "btnTekiyo",
-            "toolTip": "",
-            "bgColor": 0,
-            "width": 60,
-            "visible": true,
-            "cellType": 8,
-            "cellDetails": {
-             "cellType": 8,
-             "text": "摘要",
-             "onClick": "",
-             "imageFileUrl": "",
-             "imageWidth": "",
-             "imageHeight": ""
-            },
-            "align": 1,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "btnTekiyo"
            },
            {
             "columnName": "決定",
@@ -5792,6 +5718,23 @@
             "resize": true,
             "isPrivateInfo": false,
             "sortKey": "txtShinsaYM"
+           },
+           {
+            "columnName": "摘要",
+            "dataName": "btnTekiyo",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 200,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0,
+             "isSetValueToToolTip": false
+            },
+            "align": 0,
+            "resize": true,
+            "isPrivateInfo": false,
+            "sortKey": "btnTekiyo"
            }
           ]
          },
@@ -5809,7 +5752,6 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
@@ -5837,6 +5779,7 @@
          "jpControlName": "",
          "readOnly": false,
          "height": "320",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 22,
           "isMultiSelectable": false,
@@ -6048,8 +5991,7 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
-         "sortOrder": "",
+         "sortOrder": "txtTaniTanka",
          "isAscending": true,
          "filterList": [],
          "activeRowId": -1
@@ -6101,6 +6043,7 @@
          "jpControlName": "",
          "readOnly": false,
          "height": "335",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 28,
           "isMultiSelectable": false,
@@ -6135,27 +6078,6 @@
             "resize": true,
             "isPrivateInfo": false,
             "sortKey": "txtService"
-           },
-           {
-            "columnName": "摘要",
-            "dataName": "btnTekiyo",
-            "toolTip": "",
-            "bgColor": 0,
-            "width": 60,
-            "visible": true,
-            "cellType": 8,
-            "cellDetails": {
-             "cellType": 8,
-             "text": "摘要",
-             "onClick": "",
-             "imageFileUrl": "",
-             "imageWidth": "",
-             "imageHeight": ""
-            },
-            "align": 1,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "btnTekiyo"
            },
            {
             "columnName": "購入日",
@@ -6260,6 +6182,23 @@
             "resize": true,
             "isPrivateInfo": false,
             "sortKey": "txtShinsaYM"
+           },
+           {
+            "columnName": "摘要",
+            "dataName": "btnTekiyo",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 200,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0,
+             "isSetValueToToolTip": false
+            },
+            "align": 0,
+            "resize": true,
+            "isPrivateInfo": false,
+            "sortKey": "btnTekiyo"
            }
           ]
          },
@@ -6277,7 +6216,6 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
@@ -6330,6 +6268,7 @@
          "jpControlName": "",
          "readOnly": false,
          "height": "335",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 28,
           "isMultiSelectable": false,
@@ -6459,7 +6398,6 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
@@ -6518,14 +6456,14 @@
      ],
      "isDraggable": false,
      "selectedItemFieldName": "KyufuJissekiKihon",
-     "initialTab": "1",
+     "initialTab": "0",
      "isLazyLoading": false
     },
     {
      "fieldName": "btnKyufuJissekiZengetsu",
      "items": [],
      "controlType": "Button",
-     "width": "210",
+     "width": "220",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -6543,18 +6481,20 @@
      "jpControlName": "",
      "text": "前月の情報を表示する",
      "onClick": "",
+     "icon": 0,
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
      "fieldName": "btnKyufuJissekiJigetsu",
      "items": [],
      "controlType": "Button",
-     "width": "210",
+     "width": "220",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -6572,11 +6512,13 @@
      "jpControlName": "",
      "text": "次月の情報を表示する",
      "onClick": "",
+     "icon": 0,
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     },
     {
@@ -6601,11 +6543,13 @@
      "jpControlName": "",
      "text": "給付実績一覧に戻る",
      "onClick": "",
+     "icon": 0,
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0,
      "heightTextBoxMatches": false
     }
    ],
@@ -6657,7 +6601,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": null,

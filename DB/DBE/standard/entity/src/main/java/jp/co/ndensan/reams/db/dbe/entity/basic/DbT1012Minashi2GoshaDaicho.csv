@@ -1,0 +1,8 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,KaigoHihokenshaNo,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+hihokenshaKubunCode,varchar,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.認定審査員区分,,,A
+minashi2GoshaTorokuYMD,UDD015YMD,FlexibleDate,,,,,A
+minashi2GoshaKaijoYMD,UDD015YMD,FlexibleDate,,,,,A
+fukushiHihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,A

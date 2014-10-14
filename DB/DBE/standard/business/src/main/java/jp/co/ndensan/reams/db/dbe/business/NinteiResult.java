@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
 /**
  * 要介護認定結果を保持するクラスです。
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 public class NinteiResult {
 
     private final ShinseishoKanriNo 申請書管理番号;
+    private final YMDHMS 処理日時;
     private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final KaigoHihokenshaNo 被保険者番号;
     private final FlexibleDate 要介護度認定年月日;
@@ -65,11 +67,13 @@ public class NinteiResult {
     private final NinteiTorikeshi 認定取消;
     private final TsuchiKubun 通知区分;
     private final RString 認定理由;
+    private final FlexibleDate IF送付年月日;
 
     /**
      * インスタンスを生成します。
      *
      * @param 申請書管理番号 申請書管理番号
+     * @param 処理日時 処理日時
      * @param 証記載保険者番号 証記載保険者番号
      * @param 被保険者番号 被保険者番号
      * @param 要介護度認定年月日 要介護度認定年月日
@@ -82,9 +86,11 @@ public class NinteiResult {
      * @param 認定結果異動 認定結果異動
      * @param 認定取消 認定取消
      * @param 認定理由 認定理由
+     * @param IF送付年月日 IF送付年月日
      */
     public NinteiResult(
             ShinseishoKanriNo 申請書管理番号,
+            YMDHMS 処理日時,
             ShoKisaiHokenshaNo 証記載保険者番号,
             KaigoHihokenshaNo 被保険者番号,
             FlexibleDate 要介護度認定年月日,
@@ -126,8 +132,10 @@ public class NinteiResult {
             NinteiResultIdo 認定結果異動,
             NinteiTorikeshi 認定取消,
             TsuchiKubun 通知区分,
-            RString 認定理由) {
+            RString 認定理由,
+            FlexibleDate IF送付年月日) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
+        this.処理日時 = requireNonNull(処理日時, Messages.E00001.replace("処理日時").getMessage());
         this.証記載保険者番号 = requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
         this.被保険者番号 = requireNonNull(被保険者番号, Messages.E00001.replace("被保険者番号").getMessage());
         this.要介護度認定年月日 = requireNonNull(要介護度認定年月日, Messages.E00001.replace("要介護度認定年月日").getMessage());
@@ -170,6 +178,7 @@ public class NinteiResult {
         this.認定取消 = 認定取消;
         this.通知区分 = 通知区分;
         this.認定理由 = 認定理由;
+        this.IF送付年月日 = IF送付年月日;
     }
 
     /**
@@ -179,6 +188,15 @@ public class NinteiResult {
      */
     public ShinseishoKanriNo get申請書管理番号() {
         return 申請書管理番号;
+    }
+
+    /**
+     * 処理日時を返します。
+     *
+     * @return 処理日時
+     */
+    public YMDHMS get処理日時() {
+        return 処理日時;
     }
 
     /**
@@ -557,5 +575,14 @@ public class NinteiResult {
      */
     public RString get認定理由() {
         return 認定理由;
+    }
+
+    /**
+     * IF送付年月日を返します。
+     *
+     * @return IF送付年月日
+     */
+    public FlexibleDate getIF送付年月日() {
+        return IF送付年月日;
     }
 }

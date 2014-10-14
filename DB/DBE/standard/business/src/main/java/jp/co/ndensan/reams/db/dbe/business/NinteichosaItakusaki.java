@@ -8,8 +8,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -18,9 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author N1013 松本直樹
  */
 public class NinteichosaItakusaki {
-//TODO 証記載保険者番号は介護で作成したShoKisaiHokenshaNoを使用するようにする　2014/02/14期限
 
-    private final ShoKisaiHokenshaNo 証記載保険者番号;
+    private final LasdecCode 市町村コード;
     private final KaigoJigyoshaNo 介護事業者番号;
     private final JigyoshaNo 事業者番号;
     private final boolean 有効区分;
@@ -32,7 +31,7 @@ public class NinteichosaItakusaki {
     /**
      * コンストラクタクラスです
      *
-     * @param 証記載保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 介護事業者番号 介護事業者番号
      * @param 事業者番号 事業者番号
      * @param 有効区分 有効区分
@@ -42,16 +41,16 @@ public class NinteichosaItakusaki {
      * @param 機関の区分 機関の区分
      * @throws NullPointerException 引数がnullの場合
      */
-    public NinteichosaItakusaki(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, JigyoshaNo 事業者番号,
+    public NinteichosaItakusaki(LasdecCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, JigyoshaNo 事業者番号,
             boolean 有効区分, ChosaItakuKubun 調査委託区分,
             int 割付定員, RString 割付地区, RString 機関の区分) throws NullPointerException {
 
-        requireNonNull(証記載保険者番号, Messages.E00003.replace("証記載保険者番号", getClass().getName()).getMessage());
+        requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", getClass().getName()).getMessage());
         requireNonNull(事業者番号, Messages.E00003.replace("事業者番号", getClass().getName()).getMessage());
         requireNonNull(介護事業者番号, Messages.E00003.replace("介護事業者番号", getClass().getName()).getMessage());
         requireNonNull(有効区分, Messages.E00003.replace("介護保険事業者の状況", getClass().getName()).getMessage());
 
-        this.証記載保険者番号 = 証記載保険者番号;
+        this.市町村コード = 市町村コード;
         this.事業者番号 = 事業者番号;
         this.介護事業者番号 = 介護事業者番号;
         this.有効区分 = 有効区分;
@@ -71,12 +70,12 @@ public class NinteichosaItakusaki {
     }
 
     /**
-     * 証記載保険者番号を取得します
+     * 市町村コードを取得します
      *
-     * @return 証記載保険者番号
+     * @return 市町村コード
      */
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return 証記載保険者番号;
+    public LasdecCode getShichosonCode() {
+        return 市町村コード;
     }
 
     /**

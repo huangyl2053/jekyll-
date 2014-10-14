@@ -3,14 +3,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri May 02 10:16:24 JST 2014 
+ * Thu Jul 24 15:09:01 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 
 
 /**
@@ -22,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 public class dgKyufuJissekiMeisai_Row extends DataRow {
 
     private RString txtService;
-    private Button btnTekiyo;
     private RString txtKettei;
     private RString txtTani;
     private RString txtKaisu;
@@ -36,15 +34,30 @@ public class dgKyufuJissekiMeisai_Row extends DataRow {
     private RString txtSaiShinsaKaisu;
     private RString txtKagoKaisu;
     private RString txtShinsaYM;
+    private RString txtTekiyo;
 
     public dgKyufuJissekiMeisai_Row() {
         super();
+        this.txtService = RString.EMPTY;
+        this.txtKettei = RString.EMPTY;
+        this.txtTani = RString.EMPTY;
+        this.txtKaisu = RString.EMPTY;
+        this.txtKohi1Nissu = RString.EMPTY;
+        this.txtKohi2Nissu = RString.EMPTY;
+        this.txtKohi3Nissu = RString.EMPTY;
+        this.txtServiceTani = RString.EMPTY;
+        this.txtKohi1Tani = RString.EMPTY;
+        this.txtKohi2Tani = RString.EMPTY;
+        this.txtKohi3Tani = RString.EMPTY;
+        this.txtSaiShinsaKaisu = RString.EMPTY;
+        this.txtKagoKaisu = RString.EMPTY;
+        this.txtShinsaYM = RString.EMPTY;
+        this.txtTekiyo = RString.EMPTY;
     }
 
-    public dgKyufuJissekiMeisai_Row(RString txtService, Button btnTekiyo, RString txtKettei, RString txtTani, RString txtKaisu, RString txtKohi1Nissu, RString txtKohi2Nissu, RString txtKohi3Nissu, RString txtServiceTani, RString txtKohi1Tani, RString txtKohi2Tani, RString txtKohi3Tani, RString txtSaiShinsaKaisu, RString txtKagoKaisu, RString txtShinsaYM) {
+    public dgKyufuJissekiMeisai_Row(RString txtService, RString txtKettei, RString txtTani, RString txtKaisu, RString txtKohi1Nissu, RString txtKohi2Nissu, RString txtKohi3Nissu, RString txtServiceTani, RString txtKohi1Tani, RString txtKohi2Tani, RString txtKohi3Tani, RString txtSaiShinsaKaisu, RString txtKagoKaisu, RString txtShinsaYM, RString txtTekiyo) {
         super();
         this.setOriginalData("txtService", txtService);
-        this.setOriginalData("btnTekiyo", btnTekiyo);
         this.setOriginalData("txtKettei", txtKettei);
         this.setOriginalData("txtTani", txtTani);
         this.setOriginalData("txtKaisu", txtKaisu);
@@ -58,8 +71,8 @@ public class dgKyufuJissekiMeisai_Row extends DataRow {
         this.setOriginalData("txtSaiShinsaKaisu", txtSaiShinsaKaisu);
         this.setOriginalData("txtKagoKaisu", txtKagoKaisu);
         this.setOriginalData("txtShinsaYM", txtShinsaYM);
+        this.setOriginalData("txtTekiyo", txtTekiyo);
         this.txtService = txtService;
-        this.btnTekiyo = btnTekiyo;
         this.txtKettei = txtKettei;
         this.txtTani = txtTani;
         this.txtKaisu = txtKaisu;
@@ -73,14 +86,11 @@ public class dgKyufuJissekiMeisai_Row extends DataRow {
         this.txtSaiShinsaKaisu = txtSaiShinsaKaisu;
         this.txtKagoKaisu = txtKagoKaisu;
         this.txtShinsaYM = txtShinsaYM;
+        this.txtTekiyo = txtTekiyo;
     }
 
     public RString getTxtService() {
         return txtService;
-    }
-
-    public Button getBtnTekiyo() {
-        return btnTekiyo;
     }
 
     public RString getTxtKettei() {
@@ -135,14 +145,13 @@ public class dgKyufuJissekiMeisai_Row extends DataRow {
         return txtShinsaYM;
     }
 
+    public RString getTxtTekiyo() {
+        return txtTekiyo;
+    }
+
     public void setTxtService(RString txtService) {
         this.setOriginalData("txtService", txtService);
         this.txtService = txtService;
-    }
-
-    public void setBtnTekiyo(Button btnTekiyo) {
-        this.setOriginalData("btnTekiyo", btnTekiyo);
-        this.btnTekiyo = btnTekiyo;
     }
 
     public void setTxtKettei(RString txtKettei) {
@@ -208,6 +217,11 @@ public class dgKyufuJissekiMeisai_Row extends DataRow {
     public void setTxtShinsaYM(RString txtShinsaYM) {
         this.setOriginalData("txtShinsaYM", txtShinsaYM);
         this.txtShinsaYM = txtShinsaYM;
+    }
+
+    public void setTxtTekiyo(RString txtTekiyo) {
+        this.setOriginalData("txtTekiyo", txtTekiyo);
+        this.txtTekiyo = txtTekiyo;
     }
 
 }

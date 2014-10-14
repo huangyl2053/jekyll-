@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -37,6 +38,7 @@ public final class ShinsakaiDetail {
     private final FlexibleDate 審査会資料作成年月日;
     private final ShinsakaiKyukaiKubun 審査会休会区分;
     private final int 審査会割当済み人数;
+    private final Code 資料作成区分;
 
     /**
      * Builderで設定した情報を受け取るコンストラクタです。
@@ -59,6 +61,7 @@ public final class ShinsakaiDetail {
         this.審査会資料作成年月日 = builder.documentationDate;
         this.審査会休会区分 = builder.kyukaiKubun;
         this.審査会割当済み人数 = builder.wariatesumi;
+        this.資料作成区分 = builder.shiryoSakuseiKubun;
     }
 
     /**
@@ -223,6 +226,15 @@ public final class ShinsakaiDetail {
         return 審査会割当済み人数;
     }
 
+    /**
+     * 資料作成区分を返します。
+     *
+     * @return 資料作成区分
+     */
+    public Code get資料作成区分() {
+        return 資料作成区分;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7
@@ -239,7 +251,8 @@ public final class ShinsakaiDetail {
                 + 29 * Objects.hashCode(this.合議体ダミー区分)
                 + 29 * Objects.hashCode(this.審査会資料作成年月日)
                 + 29 * Objects.hashCode(this.審査会休会区分)
-                + 29 * this.審査会割当済み人数;
+                + 29 * this.審査会割当済み人数
+                + 29 * Objects.hashCode(this.資料作成区分);
         return hash;
     }
 
@@ -297,6 +310,9 @@ public final class ShinsakaiDetail {
         if (this.審査会割当済み人数 != other.審査会割当済み人数) {
             return false;
         }
+        if (!Objects.equals(this.資料作成区分, other.資料作成区分)) {
+            return false;
+        }
         return true;
     }
 
@@ -320,6 +336,7 @@ public final class ShinsakaiDetail {
         private FlexibleDate documentationDate;
         private ShinsakaiKyukaiKubun kyukaiKubun;
         private int wariatesumi;
+        private Code shiryoSakuseiKubun;
         private static final RString エラーメッセージ_0以上 = new RString("0以下");
 
         /**
@@ -361,6 +378,7 @@ public final class ShinsakaiDetail {
             this.documentationDate = FlexibleDate.MIN;
             this.kyukaiKubun = ShinsakaiKyukaiKubun.開催;
             this.wariatesumi = 0;
+            this.shiryoSakuseiKubun = new Code(new RString("0"));
         }
 
         /**
@@ -499,6 +517,17 @@ public final class ShinsakaiDetail {
         public Builder set審査会割当済み人数(int 審査会割当済み人数) throws IllegalArgumentException {
             check0以上(審査会割当済み人数, Messages.E00013.replace("審査会割当済み人数", エラーメッセージ_0以上.toString()).getMessage());
             wariatesumi = 審査会割当済み人数;
+            return this;
+        }
+
+        /**
+         * 資料作成区分を設定して、自身を返します。
+         *
+         * @param 資料作成区分 資料作成区分
+         * @return 審査会情報Builder
+         */
+        public Builder set資料作成区分(Code 資料作成区分) {
+            shiryoSakuseiKubun = 資料作成区分;
             return this;
         }
     }

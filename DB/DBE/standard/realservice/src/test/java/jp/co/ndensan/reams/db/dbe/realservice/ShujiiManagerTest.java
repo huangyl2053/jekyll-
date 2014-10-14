@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.IShujii;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.ShujiiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.KaigoDoctorEntityMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

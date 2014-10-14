@@ -9,15 +9,15 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoTorikomiTaishosha;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgressFactory;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgressFactory.ParticularDates;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgressFactory;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgressFactory.ParticularDates;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.NinteiShinchokuJohoMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.YokaigoNinteiShinseiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -39,7 +40,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
     private final ShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac;
     private final ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager;
     private final IKojinFinder kojinFinder;
-    private final YokaigoninteiProgressManager yokaigoninteiProgressManager;
+    private final YokaigoNinteiProgressManager yokaigoninteiProgressManager;
 
     /**
      * コンストラクタです。
@@ -48,7 +49,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
         torikomiTaishoshaDac = InstanceProvider.create(ShujiiIkenshoTorikomiTaishoshaDac.class);
         shujiiManager = new ShujiiIkenshoSakuseiIraiKirokuManager();
         kojinFinder = KojinService.createKojinFinder();
-        yokaigoninteiProgressManager = new YokaigoninteiProgressManager();
+        yokaigoninteiProgressManager = new YokaigoNinteiProgressManager();
     }
 
     /**
@@ -63,7 +64,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
             ShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac,
             ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager,
             IKojinFinder kojinFinder,
-            YokaigoninteiProgressManager yokaigoninteiProgressManager) {
+            YokaigoNinteiProgressManager yokaigoninteiProgressManager) {
         this.torikomiTaishoshaDac = torikomiTaishoshaDac;
         this.shujiiManager = shujiiManager;
         this.kojinFinder = kojinFinder;
@@ -73,39 +74,48 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
     /**
      * 主治医意見書取込対象者を取得します。
      *
+     * @param 市町村コード 市町村コード
      * @return 主治医意見書取込対象者リスト
+     * @throws NullPointerException 引数がnullの場合
      */
-    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者() {
+    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者(LasdecCode 市町村コード) throws NullPointerException {
+        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
         List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.selectAll();
-        return create主治医意見書取込対象者List(torikomiTaishoshaEntityList);
+        return create主治医意見書取込対象者List(市町村コード, torikomiTaishoshaEntityList);
     }
 
     /**
      * 証記載保険者番号を指定して、主治医意見書取込対象者を取得します。
      *
+     * @param 市町村コード 市町村コード
      * @param 証記載保険者番号 証記載保険者番号
      * @return 主治医意見書取込対象者リスト
      * @throws NullPointerException 引数がnullの場合
      */
-    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者(ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
+    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者(
+            LasdecCode 市町村コード, ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
+        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
         requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
         List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select証記載保険者番号(証記載保険者番号);
-        return create主治医意見書取込対象者List(torikomiTaishoshaEntityList);
+        return create主治医意見書取込対象者List(市町村コード, torikomiTaishoshaEntityList);
     }
 
     /**
      * 証記載保険者番号と支所コードを指定して、主治医意見書取込対象者を取得します。
      *
+     * @param 市町村コード 市町村コード
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
      * @return 主治医意見書取込対象者リスト
      * @throws NullPointerException 引数がnullの場合
      */
-    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) throws NullPointerException {
+    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者(
+            LasdecCode 市町村コード, ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) throws NullPointerException {
+        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
         requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
         requireNonNull(支所コード, Messages.E00001.replace("支所コード").getMessage());
         List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select証記載保険者番号及び支所コード(証記載保険者番号, 支所コード);
-        return create主治医意見書取込対象者List(torikomiTaishoshaEntityList);
+        return create主治医意見書取込対象者List(市町村コード, torikomiTaishoshaEntityList);
     }
 
     /**
@@ -116,18 +126,19 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
      * @return true:更新OK, false:更新NG
      */
     public boolean save主治医意見書登録完了年月日(ShujiiIkenshoTorikomiTaishosha 主治医意見書取込対象者, FlexibleDate 主治医意見書登録完了年月日) {
-        YokaigoninteiProgressFactory factory = new YokaigoninteiProgressFactory(主治医意見書取込対象者.get認定進捗情報());
-        YokaigoninteiProgress yokaigoninteiProgress = factory.createYokaigoninteiPorgressWith(
+        YokaigoNinteiProgressFactory factory = new YokaigoNinteiProgressFactory(主治医意見書取込対象者.get認定進捗情報());
+        YokaigoNinteiProgress yokaigoninteiProgress = factory.createYokaigoninteiPorgressWith(
                 ParticularDates.主治医意見書登録完了年月日, 主治医意見書登録完了年月日);
         return yokaigoninteiProgressManager.save(yokaigoninteiProgress);
     }
 
     private List<ShujiiIkenshoTorikomiTaishosha> create主治医意見書取込対象者List(
+            LasdecCode 市町村コード,
             List<KaigoNinteiShoriTaishoshaEntity> entityList) {
         List<ShujiiIkenshoTorikomiTaishosha> list = new ArrayList<>();
 
         for (KaigoNinteiShoriTaishoshaEntity entity : entityList) {
-            list.add(create主治医意見書取込対象者(entity));
+            list.add(create主治医意見書取込対象者(市町村コード, entity));
         }
 
         if (list.isEmpty()) {
@@ -137,10 +148,10 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
         return list;
     }
 
-    private ShujiiIkenshoTorikomiTaishosha create主治医意見書取込対象者(KaigoNinteiShoriTaishoshaEntity entity) {
-        YokaigoninteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
-        NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
-        ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報 = get主治医意見書作成依頼情報(認定申請情報);
+    private ShujiiIkenshoTorikomiTaishosha create主治医意見書取込対象者(LasdecCode 市町村コード, KaigoNinteiShoriTaishoshaEntity entity) {
+        YokaigoNinteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
+        YokaigoNinteiShinsei 認定申請情報 = YokaigoNinteiShinseiMapper.toYokaigoNinteiShinsei(entity.getNinteiShinseiJohoEntity());
+        ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報 = get主治医意見書作成依頼情報(市町村コード, 認定申請情報);
         IKojin 個人 = get個人(認定申請情報);
         KaigoDoctor 介護主治医 = 主治医意見書作成依頼情報.get介護医師();
 
@@ -152,12 +163,13 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
                 介護主治医);
     }
 
-    private IKojin get個人(NinteiShinseiJoho 認定申請情報) {
+    private IKojin get個人(YokaigoNinteiShinsei 認定申請情報) {
         return kojinFinder.get個人(認定申請情報.get識別コード());
     }
 
-    private ShujiiIkenshoSakuseiIrai get主治医意見書作成依頼情報(NinteiShinseiJoho 認定申請情報) {
+    private ShujiiIkenshoSakuseiIrai get主治医意見書作成依頼情報(LasdecCode 市町村コード, YokaigoNinteiShinsei 認定申請情報) {
         return shujiiManager.get主治医意見書作成依頼情報(
+                市町村コード,
                 認定申請情報.get申請書管理番号(),
                 new IkenshosakuseiIraiRirekiNo(認定申請情報.get意見書依頼履歴番号()));
     }

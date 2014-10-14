@@ -6,14 +6,25 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.InputShikibetsuNo;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiKihonGokeiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiKihonGokei_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJisseki;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
+import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
+import jp.co.ndensan.reams.db.dbc.realservice.KyufuJissekiFinder;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -24,24 +35,20 @@ public class KyufuJissekiKihonGokei {
     public ResponseData<KyufuJissekiKihonGokeiDiv> onLoad(KyufuJissekiKihonGokeiDiv panel) {
         ResponseData<KyufuJissekiKihonGokeiDiv> response = new ResponseData<>();
 
+        KyufuJisseki kyufuJisseki = get給付実績();
+
         //給付実績基本合計データ取得、設定
-        List<HashMap> kyufuJissekiKihonGokei = YamlLoader.DBC.loadAsList(
-                new RString("dbc0010000/KyufuJissekiKihonGokei.yml"));
-
         List<dgKyufuJissekiKihonGokei_Row> kyufuJissekiKihonGokeiList = new ArrayList<>();
-        for (int i = 0; i < kyufuJissekiKihonGokei.size(); i++) {
-            HashMap hashMap = kyufuJissekiKihonGokei.get(i);
-            ControlGenerator ymlData = new ControlGenerator(hashMap);
+        for (jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKihonGokei iKihonGokei : kyufuJisseki.get基本().get合計()) {
 
-            RString rsHokenKohi = ymlData.getAsRString("txtHokenKohi");
-            RString rsZengo = ymlData.getAsRString("txtZengo");
-            RString rsServiceTani = ymlData.getAsRString("txtServiceTani");
-            RString rsRiyoshaFutangaku = ymlData.getAsRString("txtHokenryoSeikyugaku");
-            RString rsHokenryoSeikyugaku = ymlData.getAsRString("txtRiyoshaFutangaku");
-            RString rsKinkyujiShisetsuRyoyohiHokenSeikyubunGokei = ymlData.getAsRString(
-                    "txtKinkyujiShisetsuRyoyohiHokenSeikyubunGokei");
-            RString rsTokuteiShinryohiKohiSeikyubunGokei = ymlData.getAsRString("txtTokuteiShinryohiKohiSeikyubunGokei");
-            RString rsTokuteiNyushoshaKaigotoSeikyugaku = ymlData.getAsRString("txtTokuteiNyushoshaKaigotoSeikyugaku");
+            RString rsHokenKohi = iKihonGokei.get保険公費();
+            RString rsZengo = iKihonGokei.get前後();
+            RString rsServiceTani = toRString(iKihonGokei.getサービス単位());
+            RString rsRiyoshaFutangaku = setCommFormat(iKihonGokei.get利用者負担額());
+            RString rsHokenryoSeikyugaku = setCommFormat(iKihonGokei.get保険料請求額());
+            RString rsKinkyujiShisetsuRyoyohiHokenSeikyubunGokei = setCommFormat(iKihonGokei.get緊急時施設療養費保険請求分合計());
+            RString rsTokuteiShinryohiKohiSeikyubunGokei = setCommFormat(iKihonGokei.get特定診療費公費請求分合計());
+            RString rsTokuteiNyushoshaKaigotoSeikyugaku = setCommFormat(iKihonGokei.get特定入所者介護等請求額());
 
             kyufuJissekiKihonGokeiList.add(createKyufuJissekiKihonGokeiRow(
                     rsHokenKohi, rsZengo, rsServiceTani, rsHokenryoSeikyugaku, rsRiyoshaFutangaku,
@@ -49,30 +56,51 @@ public class KyufuJissekiKihonGokei {
         }
         panel.getDgKyufuJissekiKihonGokei().setDataSource(kyufuJissekiKihonGokeiList);
 
-//        List<dgKyufuJissekiKihonGokei_Row> list = new ArrayList<>();
-//        list.add(createKyufuJissekiKihonGokeiRow("保険", "", "1,111", "1,111", "1,111", "1,111", "1,111", "1,111"));
-//        list.add(createKyufuJissekiKihonGokeiRow("", "後", "2,222", "2,222", "2,222", "2,222", "2,222", "2,222"));
-//        list.add(createKyufuJissekiKihonGokeiRow("公費１", "", "3,333", "3,333", "3,333", "3,333", "3,333", "3,333"));
-//        list.add(createKyufuJissekiKihonGokeiRow("", "後", "4,444", "4,444", "4,444", "4,444", "4,444", "4,444"));
-//        list.add(createKyufuJissekiKihonGokeiRow("公費２", "", "5,555", "5,555", "5,555", "5,555", "5,555", "5,555"));
-//        list.add(createKyufuJissekiKihonGokeiRow("", "後", "6,666", "6,666", "6,666", "6,666", "6,666", "6,666"));
-//        list.add(createKyufuJissekiKihonGokeiRow("公費３", "", "7,777", "7,777", "7,777", "7,777", "7,777", "7,777"));
-//        list.add(createKyufuJissekiKihonGokeiRow("", "後", "8,888", "8,888", "8,888", "8,888", "8,888", "8,888"));
-//        panel.getDgKyufuJissekiKihonGokei().setDataSource(list);
         response.data = panel;
         return response;
     }
 
     private dgKyufuJissekiKihonGokei_Row createKyufuJissekiKihonGokeiRow(
-            //            String txtHokenKohi, String txtKettei, String txtServiceTanisu, String txtHokenryoSeikyugaku, String txtRiyoshaFutangaku,
-            //            String txtShisetsuRyoyohi, String txtTokuteiShinryohi, String txtTokuteiNyushoshaKaigo) {
             RString txtHokenKohi, RString txtKettei, RString txtServiceTanisu, RString txtHokenryoSeikyugaku, RString txtRiyoshaFutangaku,
             RString txtShisetsuRyoyohi, RString txtTokuteiShinryohi, RString txtTokuteiNyushoshaKaigo) {
         return new dgKyufuJissekiKihonGokei_Row(
-                //                new RString(txtHokenKohi), new RString(txtKettei), new RString(txtServiceTanisu), new RString(txtHokenryoSeikyugaku), new RString(txtRiyoshaFutangaku),
-                //                new RString(txtShisetsuRyoyohi), new RString(txtTokuteiShinryohi), new RString(txtTokuteiNyushoshaKaigo));
                 txtHokenKohi, txtKettei, txtServiceTanisu, txtHokenryoSeikyugaku, txtRiyoshaFutangaku,
                 txtShisetsuRyoyohi, txtTokuteiShinryohi, txtTokuteiNyushoshaKaigo);
+    }
+
+    private KyufuJisseki get給付実績() {
+
+        RString 被保番号 = (RString) ViewStateHolder.get("被保番号", RString.class);
+        RString サービス提供期間開始 = (RString) ViewStateHolder.get("サービス提供期間開始", RString.class);
+        RString サービス提供期間終了 = (RString) ViewStateHolder.get("サービス提供期間終了", RString.class);
+        RString 入力識別番号 = (RString) ViewStateHolder.get("入力識別番号", RString.class);
+        RString サービス種類 = (RString) ViewStateHolder.get("サービス種類", RString.class);
+        RString サービス提供年月 = (RString) ViewStateHolder.get("サービス提供年月", RString.class);
+
+        KyufuJissekiKeyInfo keyInfo = new KyufuJissekiKeyInfo(
+                new KaigoHihokenshaNo(被保番号),
+                new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供期間開始)), new ServiceTeikyoYM((new FlexibleYearMonth(サービス提供期間終了)))),
+                new InputShikibetsuNo(new Code(入力識別番号), RString.EMPTY, RString.EMPTY),
+                new ServiceShuruiCode(サービス種類),
+                new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供年月)));
+
+        KyufuJissekiFinder finder = new KyufuJissekiFinder();
+        KyufuJissekiDetailKeyInfo detailKeyInfo = finder.get給付実績詳細キー(keyInfo);
+        return detailKeyInfo != null ? finder.get給付実績(detailKeyInfo) : null;
+    }
+
+    private RString setCommFormat(Decimal data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return new RString(data.toString("##,###,###"));
+    }
+
+    private RString toRString(Decimal data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return new RString(data.toString());
     }
 
 }

@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -25,6 +26,10 @@ public class SinseiRiyuDiv extends Panel {
     private ButtonDialog btnTeikeibun;
     @JsonProperty("txtShinseiRiyu")
     private TextBoxMultiLine txtShinseiRiyu;
+    @JsonProperty("teikeiKbn")
+    private RString teikeiKbn;
+    @JsonProperty("teikeiShubetsu")
+    private RString teikeiShubetsu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,6 +55,26 @@ public class SinseiRiyuDiv extends Panel {
     @JsonProperty("txtShinseiRiyu")
     public void setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
         this.txtShinseiRiyu=txtShinseiRiyu;
+    }
+
+    @JsonProperty("teikeiKbn")
+    public RString getTeikeiKbn() {
+        return teikeiKbn;
+    }
+
+    @JsonProperty("teikeiKbn")
+    public void setTeikeiKbn(RString teikeiKbn) {
+        this.teikeiKbn=teikeiKbn;
+    }
+
+    @JsonProperty("teikeiShubetsu")
+    public RString getTeikeiShubetsu() {
+        return teikeiShubetsu;
+    }
+
+    @JsonProperty("teikeiShubetsu")
+    public void setTeikeiShubetsu(RString teikeiShubetsu) {
+        this.teikeiShubetsu=teikeiShubetsu;
     }
 
 }

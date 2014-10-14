@@ -4,12 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -19,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class NinteichosaItakusakiTestHelper {
 
-    public static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
+    public static final LasdecCode 市町村コード = new LasdecCode(new RString("123456"));
     public static final KaigoJigyoshaNo 介護事業者番号 = new KaigoJigyoshaNo(new RString("123456"));
     public static final JigyoshaNo 事業者番号 = new JigyoshaNo(new RString("123456"));
     public static final boolean 介護事業者状況 = true;
@@ -35,7 +34,7 @@ public class NinteichosaItakusakiTestHelper {
      */
     public static DbT7010NinteichosaItakusakiJohoEntity create認定調査委託先Entity() {
         DbT7010NinteichosaItakusakiJohoEntity entity = new DbT7010NinteichosaItakusakiJohoEntity(
-                証記載保険者番号,
+                市町村コード,
                 介護事業者番号,
                 事業者番号,
                 介護事業者状況,
@@ -45,23 +44,5 @@ public class NinteichosaItakusakiTestHelper {
                 機関の区分);
 
         return entity;
-    }
-
-    /**
-     * テスト用認定調査委託先を返します。
-     *
-     * @return 認定調査委託先
-     */
-    public static NinteichosaItakusaki create認定調査委託先() {
-        NinteichosaItakusaki itakusaki = new NinteichosaItakusaki(
-                証記載保険者番号,
-                介護事業者番号,
-                事業者番号,
-                介護事業者状況,
-                調査委託区分,
-                割付定員,
-                割付地区,
-                機関の区分);
-        return itakusaki;
     }
 }

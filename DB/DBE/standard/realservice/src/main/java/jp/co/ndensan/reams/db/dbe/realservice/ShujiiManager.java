@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import jp.co.ndensan.reams.db.dbe.business.IShujii;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.ShujiiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -44,14 +44,14 @@ public class ShujiiManager implements IShujiiManager {
     @Override
     public boolean saveAs有効(IShujii 主治医情報) {
         DbT7012ShujiiJohoEntity entity = ShujiiMapper.toEntity(主治医情報);
-        entity.setShujiiJokyo(IshiJokyo.有効.is有効());
+        entity.setShujiiJokyo(IshiJokyo.有効.getCode());
         return dac.insertOrUpdate(entity) != 0;
     }
 
     @Override
     public boolean saveAs無効(IShujii 主治医情報) {
         DbT7012ShujiiJohoEntity entity = ShujiiMapper.toEntity(主治医情報);
-        entity.setShujiiJokyo(IshiJokyo.無効.is有効());
+        entity.setShujiiJokyo(IshiJokyo.無効.getCode());
         return dac.insertOrUpdate(entity) != 0;
     }
 

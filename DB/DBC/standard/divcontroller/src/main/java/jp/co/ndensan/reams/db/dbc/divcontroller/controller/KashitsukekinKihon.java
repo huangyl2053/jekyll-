@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukekinKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
@@ -48,7 +48,7 @@ public class KashitsukekinKihon {
     // 基本情報を設定する
     private void setKihonInfo(KashitsukekinKihonDiv panel) {
         ControlGenerator cg = new ControlGenerator(getYamlData(YML_KAIGO_KIHON).get(0));
-        AtenaShokaiSimple.setData(panel.getKashitsukekinKihonInfo().getAtenaInfo(), new ShikibetsuCode(cg.getAsRString("識別コード")));
+//        AtenaShokaiSimple.setData(panel.getKashitsukekinKihonInfo().getAtenaInfo(), new ShikibetsuCode(cg.getAsRString("識別コード")));
         KaigoShikakuKihonDiv kaigoKihonDiv = panel.getKashitsukekinKaigoKihonInfo();
         kaigoKihonDiv.getTxtHihokenshaNo().setValue(cg.getAsRString("被保番号"));
         kaigoKihonDiv.getTxtShutokuYmd().setValue(cg.getAsRDate("取得日"));

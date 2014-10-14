@@ -136,7 +136,7 @@ declare module Uz {
         static getComboboxTypeEditableProperty(selectedValue: string, eNum: any, enabled?: boolean): {};
         static getCheckBoxTypeEditableProperty(value: boolean, enabled?: boolean): {};
         static getButtonTypeEditableProperty(buttonText: string, callBackFunction: Function): {};
-        static getGridTypeEditableProperty(columnInfos: any[], rowData: any[]): {};
+        static getGridTypeEditableProperty(columnInfos: any[], rowData: any[], enabled?: boolean): {};
         static getPropertyColumnInfo(name: string, editType: PropertyEditType, editOptions?: any, width?: number, editable?: boolean, frozen?: boolean, defaultVal?: any): {};
         private static getDefaultValString(editType, editOptions, defaultVal);
         static getUniqueId(): string;
@@ -617,6 +617,7 @@ declare module Uz {
         private _isGroupBox;
         private _height;
         private _focusPositionID;
+        private _canPost;
         private _closingNow;
         public isFirstLoadFinished : boolean;
         public title : string;
@@ -648,6 +649,7 @@ declare module Uz {
         public readOnly : boolean;
         public isGroupBox : boolean;
         public focusPositionID : any;
+        public canPost : boolean;
         public fieldNameChanged(beforeFieldName, newFieldName): void;
         constructor($parentElement: JQuery, isDesignMode: boolean);
         public changeWidth(): void;
@@ -703,7 +705,11 @@ declare module Uz {
         private _iconFileUrl;
         private _iconDirs;
         private _heightTextBoxMatches;
+        private _onBeforeClick;
+        private _onAfterClick;
         public onClick : string;
+        public onBeforeClick : string;
+        public onAfterClick : string;
         public text : string;
         public appearance : Uz.Appearance;
         public imageFileUrl : string;
@@ -711,8 +717,8 @@ declare module Uz {
         public imageWidth : any;
         public icon : any;
         public heightTextBoxMatches : boolean;
-        private setheightTextBoxMatchesForButton();
-        private setheightTextBoxMatchesForImage(isChange);
+        private setHeightTextBoxMatchesForButton();
+        private setHeightTextBoxMatchesForImage(isChange);
         public setMargin(): void;
         public setWidth(): void;
         public changeWidth(): void;
@@ -722,6 +728,10 @@ declare module Uz {
         public recreateDomElement(isImage: boolean): void;
         public getEditablePropertyInfo(): any;
         public bindData(data: any): void;
+        public receivedResponse(triggerControlInfo: any): void;
+        private checkValidateInputError();
+        private checkValidateServerError();
+        private onClickRequest();
         public changeStateOfControl(): void;
         public reSizeHeightImage(isHeightValue: boolean): void;
         public reSizeWidthImage(isWidthValue: boolean): void;
@@ -1563,6 +1573,7 @@ declare module Uz {
         static validateMaxValue(text: string, maxValue: number, decimalPointLength: number, id: string, jpControlName: string): any;
         static validateMinValue(text: string, minValue: number, decimalPointLength: number, id: string, jpControlName: string): any;
         static validateTextKindForNum(text: string, permitCharactor: string, decimalPointLength: number, id: string, jpControlName: string): any;
+        static validateDecimalPartValue(text: string, decimalPointLength: number, id: string, jpControlName: string): any;
     }
 }
 declare module Uz {
@@ -1992,6 +2003,7 @@ declare module Uz {
         private _isAscending;
         private _filterList;
         private _activeRowId;
+        private _passingDataRowId;
         private _onSort;
         private _onSelect;
         private _onSelectByDblClick;
@@ -2017,6 +2029,7 @@ declare module Uz {
         public isAscending : any;
         public filterList : any[];
         public activeRowId : number;
+        public passingDataRowId : number;
         public onSort : string;
         public onSelect : string;
         public onSelectByDblClick : string;
@@ -2085,7 +2098,7 @@ declare module Uz {
         private setSelectedRows();
         private setSortColumn();
         private getComparerFunc(sortOrder);
-        private convertDataSource(data, colModel);
+        private convertDataSource(data, colModel, activeRowId);
         private convertDataForClient(rowId, data, colModel);
         private convertDataForServer(data, colModel);
         private denyControlClickEvent();
@@ -2095,11 +2108,13 @@ declare module Uz {
         public getShowFilterState(): boolean;
         public getOutputParameterForDialog(rowId: number, dataName: string): any;
         public setOutputParameterForDialog(rowId: number, dataName: string, value: any): void;
+        private getConvertValueForCheckBox(value);
         private waitLoadingForDialog(thisInstance, column);
         private showDialog(thisInstance, column);
         public resizeControl(): void;
         public changedParentState(): void;
         public changeStateOfControl(): void;
+        public addNewRow(): void;
     }
     enum _GridRowNum {
         rows_5,
@@ -2131,6 +2146,7 @@ declare module Uz {
         TextBoxMultiLine,
         TextBoxTime,
         Icon,
+        DataGridColumnCheckBox,
     }
     enum _GridAlign {
         left,
@@ -2788,14 +2804,31 @@ declare module Uz {
 }
 declare module Uz {
     class _StaticImage extends Uz._ViewControl {
+        private static DEFAULT_CORE_ID;
+        private static DEFAULT_LABELR_ID;
+        private $coreElement;
+        private $labelRElemnt;
         private _src;
         private _imageWidth;
         private _imageHeight;
+        private _labelRText;
+        private _labelRWidth;
+        private _labelRAlign;
         public src : string;
         public imageHeight : any;
         public imageWidth : any;
+        public labelRText : string;
+        private createLabelRElement();
+        public labelRWidth : any;
+        private decideWidth(beforeWidth, afterWidth);
+        public labelRAlign : Uz.Align;
+        private addLabelRAlignClass(newAlign, beforeAlign);
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        public getCoreID(): string;
+        private getLabelRID();
         constructor($parentElement: JQuery, isDesignMode: boolean);
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLImageElement;
+        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
+        private createImgDomElement(fieldName, $parent);
         public registProperty(): void;
         public getEditablePropertyInfo(): any;
         public bindData(data: any): void;

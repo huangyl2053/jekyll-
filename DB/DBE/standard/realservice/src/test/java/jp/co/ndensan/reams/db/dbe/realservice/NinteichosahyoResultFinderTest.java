@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoKaitoHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.IchijiHanteiTestEntityCreator;
+import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestEntityCreator;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteichosahyoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

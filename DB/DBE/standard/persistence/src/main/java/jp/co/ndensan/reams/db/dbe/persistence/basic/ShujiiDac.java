@@ -8,11 +8,11 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJoho.*;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
 /**
@@ -27,14 +27,14 @@ public class ShujiiDac implements IShujiiDac {
 
     @Override
     public DbT7012ShujiiJohoEntity select(
-            ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
+            LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .where(and(
-                eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                eq(kaigoIryokikanCode, 介護医療機関コード),
-                eq(kaigoIshiCode, 介護医師コード)))
+                                eq(shichosonCode, 市町村コード),
+                                eq(kaigoIryokikanCode, 介護医療機関コード),
+                                eq(kaigoIshiCode, 介護医師コード)))
                 .toObject(DbT7012ShujiiJohoEntity.class);
     }
 
@@ -66,9 +66,9 @@ public class ShujiiDac implements IShujiiDac {
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .where(and(
-                eq(shoKisaiHokenshaNo, entity.getShoKisaiHokenshaNo()),
-                eq(kaigoIryokikanCode, entity.getKaigoIryokikanCode()),
-                eq(kaigoIshiCode, entity.getKaigoIshiCode())))
+                                eq(shichosonCode, entity.getShichosonCode()),
+                                eq(kaigoIryokikanCode, entity.getKaigoIryokikanCode()),
+                                eq(kaigoIshiCode, entity.getKaigoIshiCode())))
                 .getCount();
     }
 }

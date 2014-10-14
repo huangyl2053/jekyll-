@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -22,13 +23,22 @@ public class IshiJokyoTest extends DbeTestBase {
     public static class toValue extends DbeTestBase {
 
         @Test
-        public void 引数がTRUEの時_toValueは_有効を返す() {
-            assertThat(IshiJokyo.toValue(true), is(IshiJokyo.有効));
+        public void toValueは_指定のコードに対応する列挙子があれば_それを返す() {
+            IshiJokyo sut = IshiJokyo.有効;
+            assertThat(IshiJokyo.toValue(sut.getCode()), is(sut));
         }
 
+        @Test(expected = IllegalArgumentException.class)
+        public void toValueは_指定のコードに対応する列挙子がなければ_IllegalArgumentExceptionを返す() {
+            IshiJokyo sut = IshiJokyo.toValue(new RString("2"));
+        }
+    }
+
+    public static class toRString extends DbeTestBase {
+
         @Test
-        public void 引数がFALSEの時_toValueは_無効を返す() {
-            assertThat(IshiJokyo.toValue(false), is(IshiJokyo.無効));
+        public void toRStringは_Enumクラスのnameと同じ値を返す() {
+            assertThat(IshiJokyo.無効.toRString().toString(), is(IshiJokyo.無効.name()));
         }
     }
 }

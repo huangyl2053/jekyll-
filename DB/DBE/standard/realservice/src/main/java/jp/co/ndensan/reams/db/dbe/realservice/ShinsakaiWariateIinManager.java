@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.ShinsakaiWariateIinMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.ShinsakaiWariateIinMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiWariateIinJohoDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShikaiTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiTaishoSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.RootTitleSetter;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
@@ -44,7 +44,7 @@ public class HihokenshaShokaiTaishoshaJoho {
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
 
-        AtenaShokaiSimple.setData(johoDiv.getHihokenshaShokaiCommonJoho().getAtenaInfo(), new ShikibetsuCode(shikibetsuCode));
+//        AtenaShokaiSimple.setData(johoDiv.getHihokenshaShokaiCommonJoho().getAtenaInfo(), new ShikibetsuCode(shikibetsuCode));
         setDbData(johoDiv.getHihokenshaShokaiDbJoho(), hihokenshaNo);
         response.data = johoDiv;
         return response;

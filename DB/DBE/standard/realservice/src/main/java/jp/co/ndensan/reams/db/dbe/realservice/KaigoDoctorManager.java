@@ -13,15 +13,15 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.ShujiiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.KaigoDoctorDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.entity.mapper.DoctorMapper;
 import jp.co.ndensan.reams.ur.urz.realservice.DoctorManagerFactory;
 import jp.co.ndensan.reams.ur.urz.realservice.IDoctorManager;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -66,34 +66,34 @@ public class KaigoDoctorManager implements IKaigoDoctorManager {
     }
 
     @Override
-    public KaigoDoctor get介護医師(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
-        return get介護医師(kaigoDoctorDac.select(証記載保険者番号, 介護医療機関コード, 介護医師コード));
+    public KaigoDoctor get介護医師(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
+        return get介護医師(kaigoDoctorDac.select(市町村コード, 介護医療機関コード, 介護医師コード));
     }
 
     @Override
     public KaigoDoctor get介護医師(
-            ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード, IshiJokyo 医師の状況) {
-        return get介護医師(kaigoDoctorDac.select(証記載保険者番号, 介護医療機関コード, 介護医師コード, 医師の状況));
+            LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード, IshiJokyo 医師の状況) {
+        return get介護医師(kaigoDoctorDac.select(市町村コード, 介護医療機関コード, 介護医師コード, 医師の状況));
     }
 
     @Override
-    public KaigoDoctorCollection get介護医師リストOf(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード) {
-        return get介護医師Collection(kaigoDoctorDac.select(証記載保険者番号, 介護医療機関コード));
+    public KaigoDoctorCollection get介護医師リストOf(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード) {
+        return get介護医師Collection(kaigoDoctorDac.select(市町村コード, 介護医療機関コード));
     }
 
     @Override
-    public KaigoDoctorCollection get介護医師リストOf(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード, IshiJokyo 医師の状況) {
-        return get介護医師Collection(kaigoDoctorDac.select(証記載保険者番号, 介護医療機関コード, 医師の状況));
+    public KaigoDoctorCollection get介護医師リストOf(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IshiJokyo 医師の状況) {
+        return get介護医師Collection(kaigoDoctorDac.select(市町村コード, 介護医療機関コード, 医師の状況));
     }
 
     @Override
-    public KaigoDoctorCollection get介護医師リストOf(ShoKisaiHokenshaNo 証記載保険者番号) {
-        return get介護医師Collection(kaigoDoctorDac.select(証記載保険者番号));
+    public KaigoDoctorCollection get介護医師リストOf(LasdecCode 市町村コード) {
+        return get介護医師Collection(kaigoDoctorDac.select(市町村コード));
     }
 
     @Override
-    public KaigoDoctorCollection get介護医師リストOf(ShoKisaiHokenshaNo 証記載保険者番号, IshiJokyo 医師の状況) {
-        return get介護医師Collection(kaigoDoctorDac.select(証記載保険者番号, 医師の状況));
+    public KaigoDoctorCollection get介護医師リストOf(LasdecCode 市町村コード, IshiJokyo 医師の状況) {
+        return get介護医師Collection(kaigoDoctorDac.select(市町村コード, 医師の状況));
     }
 
     @Override
@@ -125,7 +125,7 @@ public class KaigoDoctorManager implements IKaigoDoctorManager {
         }
         IDoctor doctor = DoctorMapper.toDoctor(entity.getDoctorEntity());
         IShujii shujii = ShujiiMapper.toShujii(entity.getDbT7012ShujiiJohoEntity());
-        KaigoIryoKikan kaigoIryoKikan = kaigoIryoKikanFinder.get介護医療機関(shujii.get証記載保険者番号(), shujii.get介護医療機関コード());
+        KaigoIryoKikan kaigoIryoKikan = kaigoIryoKikanFinder.get介護医療機関(shujii.get市町村コード(), shujii.get介護医療機関コード());
         return new KaigoDoctor(doctor, shujii, kaigoIryoKikan);
     }
 }

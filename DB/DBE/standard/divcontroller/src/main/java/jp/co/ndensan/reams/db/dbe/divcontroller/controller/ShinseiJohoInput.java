@@ -8,11 +8,21 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoninteiShinseiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoninteiShinseishaKubun;
+import jp.co.ndensan.reams.db.dbe.business.JogaiShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.business.JogaiShinsakaiIinList;
+import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJohoValidate;
+import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinKoza;
+import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinShikaku;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiShinseiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiShinseishaKubun;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData.Chosain;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiData.Doctor;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.YokaigoninteiShinseishaData;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.EditShinsakaiIinDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaOutlineDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaShujiiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.KankeiIinDiv;
@@ -26,16 +36,40 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShichosonRenra
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShinseiJohoInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.dgKankeiIin_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.dgShisetsuRereki_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.SinseiRiyuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.mapper.YokaigoNinteiShinseiDivMapper;
+import jp.co.ndensan.reams.db.dbe.realservice.JogaiShinsakaiIinManager;
+import jp.co.ndensan.reams.db.dbe.realservice.YokaigoNinteiShinseiManager;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunShubetsuElseTokki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
+import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * 申請情報入力用Div制御クラスです。
@@ -48,11 +82,13 @@ public class ShinseiJohoInput {
      * Divが表示されたときの、初期値を設定します。
      *
      * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onLoad(ShinseiJohoInputDiv div) {
+    public ResponseData<ShinseiJohoInputDiv> onLoad(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
         //三浦 onLoadが遅いのでいったんやめます。
         //new ShinseiJohoInputPanels(div).onLoad();
+        new ShinseiJohoInputPanels(div).onLoad();
         return createResponseData(div);
     }
 
@@ -60,11 +96,12 @@ public class ShinseiJohoInput {
      * onStart
      *
      * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onStart(ShinseiJohoInputDiv div) {
-        dgSearchResult_Row hihokensha = clickedItemOf();
-        new ShinseiJohoInputPanels(div).init(hihokensha);
+    public ResponseData<ShinseiJohoInputDiv> onStart(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+//        dgSearchResult_Row hihokensha = clickedItemOf();
+//        new ShinseiJohoInputPanels(div).init(hihokensha);
         return createResponseData(div);
     }
 
@@ -72,14 +109,15 @@ public class ShinseiJohoInput {
      * 申請者区分の変更によって、divの画面項目を編集します。
      *
      * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onChange_radShinseishaKubun(ShinseiJohoInputDiv div) {
-        new NinteiShinseisha(div).onChange_radShinseishaKubun(clickedItemOf());
+    public ResponseData<ShinseiJohoInputDiv> onChange_radShinseishaKubun(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        new NinteiShinseisha(div).onChange_radShinseishaKubun(clickedItem());
         return createResponseData(div);
     }
 
-    private dgSearchResult_Row clickedItemOf() {
+    private dgSearchResult_Row clickedItem() {
         return YokaigoNinteiShinseisha.getInstance().get();
     }
 
@@ -87,10 +125,11 @@ public class ShinseiJohoInput {
      * 前回の主治医を転写します。
      *
      * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestShujii(ShinseiJohoInputDiv div) {
-        new HihokenshaShujii(div).onClick_btnToCopyLatestShujii(clickedItemOf());
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestShujii(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        new HihokenshaShujii(div).onClick_btnToCopyLatestShujii(clickedItem());
         return createResponseData(div);
     }
 
@@ -98,10 +137,11 @@ public class ShinseiJohoInput {
      * 前回の認定調査委託先を転写します。
      *
      * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestItakusaki(ShinseiJohoInputDiv div) {
-        new NinteichosainAdvanceEntry(div).onClick_btnToCopyLatestItakusaki(clickedItemOf());
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestItakusaki(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        new NinteichosainAdvanceEntry(div).onClick_btnToCopyLatestItakusaki(clickedItem());
         return createResponseData(div);
     }
 
@@ -109,10 +149,90 @@ public class ShinseiJohoInput {
      * 前回の認定調査員を転写します。
      *
      * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
      * @return ResponseData
      */
-    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestNinteichosain(ShinseiJohoInputDiv div) {
-        new NinteichosainAdvanceEntry(div).onClick_btnToCopyLatestNinteichosain(clickedItemOf());
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnToCopyLatestNinteichosain(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        new NinteichosainAdvanceEntry(div).onClick_btnToCopyLatestNinteichosain(clickedItem());
+        return createResponseData(div);
+    }
+
+    /**
+     * バリデーションをします
+     *
+     * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnValidation(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        return validate(div);
+    }
+
+    /**
+     * 申請情報を保存します。
+     *
+     * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnCommonSaveShinsei(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        ResponseData<ShinseiJohoInputDiv> response = createResponseData(div);
+        //      try {
+        new YokaigoNinteiShinseiManager().save(YokaigoNinteiShinseiDivMapper.toYokaigoNinteiShinsei(
+                new YokaigoNinteiShinseiDivMapper.YokaigoNinteiShinseiDiv(div, hihokenshaDiv)));
+
+        new KankeiIin(div).save();
+//        } catch (Throwable e) {
+//            response.addMessage(new InformationMessage("", e.getMessage()));
+//        }
+        return response;
+    }
+
+    /**
+     * 申請者に関係する除外審査会委員の情報について、追加、修正、削除情報を確定します。
+     *
+     * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnDecideJogaiIin(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        new KankeiIin(div).onClick_btnDecideJogaiIin();
+        return createResponseData(div);
+    }
+
+    /**
+     * 関係委員gridに対する追加ボタンを押した際に、gridに情報を追加する準備を行います。
+     *
+     * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShinseiJohoInputDiv> onClick_btnToAddKankeiIin(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        new KankeiIin(div).onClick_btnToAddKankeiIin();
+        return createResponseData(div);
+    }
+
+    /**
+     * 関係委員grid内の修正ボタンを押した際に、gridの情報を修正する準備を行います。
+     *
+     * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShinseiJohoInputDiv> onSelectByModifyButton_dgKankeiIin(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        new KankeiIin(div).onSelectByModifyButton_dgKankeiIin();
+        return createResponseData(div);
+    }
+
+    /**
+     * 関係委員grid内の削除ボタンを押した際に、gridの情報を削除する準備を行います。
+     *
+     * @param div ShinseiJohoInputDiv
+     * @param hihokenshaDiv HihokenshaOutlineDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShinseiJohoInputDiv> onSelectByDeleteButton_dgKankeiIin(ShinseiJohoInputDiv div, HihokenshaOutlineDiv hihokenshaDiv) {
+        new KankeiIin(div).onSelectByDeleteButton_dgKankeiIin();
         return createResponseData(div);
     }
 
@@ -139,7 +259,6 @@ public class ShinseiJohoInput {
         private ShinseiJohoInputPanels(ShinseiJohoInputDiv div) {
             this.div = div;
             panelList = new ArrayList<>();
-            panelList.add(new HihokenshaOutline(div));
             panelList.add(new NinteiShinseisha(div));
             panelList.add(new LatestNinteiResult(div));
             panelList.add(new HihokenshaShujii(div));
@@ -148,6 +267,7 @@ public class ShinseiJohoInput {
             panelList.add(new NyuinNyusho(div));
             panelList.add(new ShichosonRenrakuJiko(div));
             panelList.add(new KankeiIin(div));
+            panelList.add(new SinseiRiyu(div));
         }
 
         @Override
@@ -160,10 +280,10 @@ public class ShinseiJohoInput {
 
         private void _onLoad() {
             List<KeyValueDataSource> dataSource = new ArrayList<>();
-            dataSource.add(new KeyValueDataSource(YokaigoninteiShinseiKubun.新規申請.getCode(),
-                    YokaigoninteiShinseiKubun.新規申請.toRString()));
-            dataSource.add(new KeyValueDataSource(YokaigoninteiShinseiKubun.更新申請.getCode(),
-                    YokaigoninteiShinseiKubun.更新申請.toRString()));
+            dataSource.add(new KeyValueDataSource(YokaigoNinteiShinseiKubun.新規申請.getCode(),
+                    YokaigoNinteiShinseiKubun.新規申請.toRString()));
+            dataSource.add(new KeyValueDataSource(YokaigoNinteiShinseiKubun.更新申請.getCode(),
+                    YokaigoNinteiShinseiKubun.更新申請.toRString()));
             div.getDdlShinseiKubunShinseiji().setDataSource(dataSource);
         }
 
@@ -189,38 +309,7 @@ public class ShinseiJohoInput {
     }
 
     /**
-     * HihokenshaOutlineDivへの操作をまとめたクラスです。
-     */
-    private static final class HihokenshaOutline implements IPanelAdapter {
-
-        private final HihokenshaOutlineDiv panel;
-
-        private HihokenshaOutline(ShinseiJohoInputDiv div) {
-            this.panel = div.getHihokenshaOutline();
-        }
-
-        @Override
-        public void onLoad() {
-        }
-
-        @Override
-        public void init(dgSearchResult_Row hihokensha) {
-            panel.getTxtHihokenshaNo().setValue(hihokensha.getHihokenshaNo());
-            panel.getTxtHihokenshaKubun().setValue(hihokensha.getHihokenshaKubun());
-            panel.getTxtShimei().setValue(hihokensha.getShimei());
-        }
-
-        @Override
-        public void clear() {
-            panel.getTxtHihokenshaKubun().clearValue();
-            panel.getTxtHihokenshaNo().clearValue();
-            panel.getTxtShimei().clearValue();
-        }
-
-    }
-
-    /**
-     * NinteiShinseishaDivへの操作をまとめたクラスです。
+     * Stashed changes NinteiShinseishaDivへの操作をまとめたクラスです。
      */
     private static final class NinteiShinseisha implements IPanelAdapter {
 
@@ -244,7 +333,7 @@ public class ShinseiJohoInput {
 
         private List<KeyValueDataSource> createDataSourceForRadShinseishaKubun() {
             List<KeyValueDataSource> dataSource = new ArrayList<>();
-            for (YokaigoninteiShinseishaKubun kubun : YokaigoninteiShinseishaKubun.values()) {
+            for (YokaigoNinteiShinseishaKubun kubun : YokaigoNinteiShinseishaKubun.values()) {
                 dataSource.add(new KeyValueDataSource(kubun.getCode(), kubun.toRString()));
             }
             return dataSource;
@@ -257,7 +346,7 @@ public class ShinseiJohoInput {
         }
 
         private void _init(dgSearchResult_Row hihokensha) {
-            div.getRadShinseishaKubun().setSelectedItem(YokaigoninteiShinseishaKubun.本人.getCode());
+            div.getRadShinseishaKubun().setSelectedItem(YokaigoNinteiShinseishaKubun.本人.getCode());
             _onChange_radShinseishaKubun(hihokensha);
         }
 
@@ -290,7 +379,7 @@ public class ShinseiJohoInput {
         public void _onChange_radShinseishaKubun(dgSearchResult_Row hihokensha) {
             RadioButton shinseishaKubun = div.getRadShinseishaKubun();
             RString key = shinseishaKubun.getSelectedItem();
-            YokaigoninteiShinseishaKubun shinseisha = _toYokaigoninteiShinseishaKubun(key);
+            YokaigoNinteiShinseishaKubun shinseisha = _toYokaigoninteiShinseishaKubun(key);
             switch (shinseisha) {
                 case 本人:
                     _onChange_radShinseishaKubun_本人(hihokensha);
@@ -307,8 +396,8 @@ public class ShinseiJohoInput {
             }
         }
 
-        private YokaigoninteiShinseishaKubun _toYokaigoninteiShinseishaKubun(RString key) {
-            return YokaigoninteiShinseishaKubun.toValue(key);
+        private YokaigoNinteiShinseishaKubun _toYokaigoninteiShinseishaKubun(RString key) {
+            return YokaigoNinteiShinseishaKubun.toValue(key);
         }
 
         private void _onChange_radShinseishaKubun_本人(dgSearchResult_Row hihokensha) {
@@ -445,11 +534,11 @@ public class ShinseiJohoInput {
                     latestResult.yukoKikan().getFrom(), latestResult.yukoKikan().getTo());
             if (FlexibleDate.EMPTY.equals(latestResult.ninteiDate())) {
                 setDisplayNone(true);
-                this.shiseijiKubun.setSelectedItem(YokaigoninteiShinseiKubun.新規申請.getCode());
+                this.shiseijiKubun.setSelectedItem(YokaigoNinteiShinseiKubun.新規申請.getCode());
                 setDisplayNone_buttons_toCopyLatest(true);
             } else {
                 setDisplayNone(false);
-                this.shiseijiKubun.setSelectedItem(YokaigoninteiShinseiKubun.更新申請.getCode());
+                this.shiseijiKubun.setSelectedItem(YokaigoNinteiShinseiKubun.更新申請.getCode());
                 HihokenshaShujii.setLatestValue(shujii, hihokensha.getHihokenshaNo());
                 setDisplayNone_buttons_toCopyLatest(false);
             }
@@ -711,16 +800,65 @@ public class ShinseiJohoInput {
 
         private final KankeiIinDiv div;
 
+        //TODO n8178 城間篤人 固定値で必要な項目を用意。本来は基本情報から取得すべきで、修正が必要 2014年9月
+        private final ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("012345"));
+        private final KaigoHihokenshaNo kaigoHihokenshaNo = new KaigoHihokenshaNo(new RString("0123456789"));
+
+        private enum KankeiIinDecideFlag {
+
+            ADD("add"), MODIFY("update"), DELETE("delete"), NOT_SELECTED("notSelected");
+            private final RString flagText;
+
+            private KankeiIinDecideFlag(String flagText) {
+                this.flagText = new RString(flagText);
+            }
+
+            public RString getFlagText() {
+                return flagText;
+            }
+        }
+
         public KankeiIin(ShinseiJohoInputDiv div) {
             this.div = div.getKankeiIin();
         }
 
         private dgKankeiIin_Row createDgKankeiIin_Row(RString code, RString name, RString shozokuKikan) {
-            return new dgKankeiIin_Row(new Button(), code, name, shozokuKikan);
+            return createDgKankeiIin_Row(code, name, shozokuKikan, RString.EMPTY, new Decimal(1));
+        }
+
+        private dgKankeiIin_Row createDgKankeiIin_Row(RString code, RString name, RString shozokuKikanCode,
+                RString shozokuKikanMeisho, Decimal kanriNo) {
+            dgKankeiIin_Row row = new dgKankeiIin_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, new TextBoxNum());
+            row.setCode(code);
+            row.setName(name);
+            row.setShozokuKikanCode(shozokuKikanCode);
+            row.setShozokuKikanMeisho(shozokuKikanMeisho);
+            row.setShozokuKikan(row.getShozokuKikanCode().concat(":").concat(row.getShozokuKikanMeisho()));
+            row.getKanriNo().setValue(kanriNo);
+            return row;
         }
 
         @Override
         public void onLoad() {
+
+            JogaiShinsakaiIinManager jogaiShinsakaiIinManager = new JogaiShinsakaiIinManager();
+            JogaiShinsakaiIinList jogaiIinList = jogaiShinsakaiIinManager.get除外審査会委員List(shoKisaiHokenshaNo, kaigoHihokenshaNo);
+
+            List<dgKankeiIin_Row> dataSource = new ArrayList<>();
+            for (JogaiShinsakaiIin jogaiIin : jogaiIinList) {
+                dataSource.add(
+                        createDgKankeiIin_Row(jogaiIin.get除外対象審査会委員().get審査会委員コード().value(),
+                                jogaiIin.get除外対象審査会委員().get氏名().getColumnValue(),
+                                jogaiIin.get除外対象審査会委員().get事業者番号().value(),
+                                new RString("電算介護支援協会"),
+                                new Decimal(jogaiIin.get管理番号()))
+                );
+            }
+            div.getDgKankeiIin().setDataSource(dataSource);
+
+            this.div.setDecideFlag(KankeiIinDecideFlag.NOT_SELECTED.getFlagText());
+            div.getEditShinsakaiIin().setDisabled(true);
         }
 
         @Override
@@ -739,5 +877,249 @@ public class ShinseiJohoInput {
         public void clear() {
             div.getDgKankeiIin().setDataSource(Collections.EMPTY_LIST);
         }
+
+        /**
+         * 追加ボタンを押した際に、gridに情報を追加する準備を行います。
+         */
+        public void onClick_btnToAddKankeiIin() {
+            div.setDecideFlag(KankeiIinDecideFlag.ADD.getFlagText());
+
+            div.getEditShinsakaiIin().setTitle(new RString("関係審査会委員追加"));
+            div.getEditShinsakaiIin().setDisabled(false);
+        }
+
+        /**
+         * グリッド内の修正ボタンを押した際に、gridの情報を修正する準備を行います。
+         */
+        public void onSelectByModifyButton_dgKankeiIin() {
+            div.setDecideFlag(KankeiIinDecideFlag.MODIFY.getFlagText());
+            dgKankeiIin_Row row = div.getDgKankeiIin().getSelectedItems().get(0);
+            setEditShinsakaiIinDiv(div.getEditShinsakaiIin(), row);
+
+            div.getEditShinsakaiIin().setTitle(new RString("関係審査会委員修正"));
+            div.getEditShinsakaiIin().setDisabled(false);
+        }
+
+        /**
+         * グリッド内の削除ボタンを押した際に、gridの情報を削除する準備を行います。
+         */
+        public void onSelectByDeleteButton_dgKankeiIin() {
+            div.setDecideFlag(KankeiIinDecideFlag.DELETE.getFlagText());
+            dgKankeiIin_Row row = div.getDgKankeiIin().getSelectedItems().get(0);
+            setEditShinsakaiIinDiv(div.getEditShinsakaiIin(), row);
+
+            div.getEditShinsakaiIin().setTitle(new RString("関係審査会委員削除"));
+            div.getEditShinsakaiIin().getTxtKankeiIinCode().setReadOnly(true);
+            div.getEditShinsakaiIin().setDisabled(false);
+        }
+
+        private void setEditShinsakaiIinDiv(EditShinsakaiIinDiv editDiv, dgKankeiIin_Row row) {
+            editDiv.getTxtKankeiIinCode().setValue(row.getCode());
+            editDiv.getTxtKankeiIinName().setValue(row.getName());
+            editDiv.getTxtShozokuKikan().setValue(row.getShozokuKikanCode());
+            editDiv.getTxtShozokuKikanMeisho().setValue(row.getShozokuKikanMeisho());
+        }
+
+        /**
+         * 申請者に関係する除外審査会委員の情報について、追加、修正、削除情報を確定し、gridに反映します。
+         */
+        public void onClick_btnDecideJogaiIin() {
+
+            if (div.getDecideFlag().equals(KankeiIinDecideFlag.ADD.getFlagText())) {
+                decideAdd(div.getDgKankeiIin(), div.getEditShinsakaiIin());
+            } else {
+                dgKankeiIin_Row selectedRow = div.getDgKankeiIin().getSelectedItems().get(0);
+
+                if (div.getDecideFlag().equals(KankeiIinDecideFlag.MODIFY.getFlagText())) {
+                    decideUpdate(selectedRow, div.getDgKankeiIin(), div.getEditShinsakaiIin());
+                } else if (div.getDecideFlag().equals(KankeiIinDecideFlag.DELETE.getFlagText())) {
+                    decideDelete(selectedRow, div.getDgKankeiIin());
+                }
+            }
+
+            clearEditShinsakaiIin();
+        }
+
+        private void clearEditShinsakaiIin() {
+            div.getEditShinsakaiIin().getTxtKankeiIinCode().setValue(RString.EMPTY);
+            div.getEditShinsakaiIin().getTxtKankeiIinName().setValue(RString.EMPTY);
+            div.getEditShinsakaiIin().getTxtShozokuKikan().setValue(RString.EMPTY);
+            div.getEditShinsakaiIin().getTxtShozokuKikanMeisho().setValue(RString.EMPTY);
+
+            div.getEditShinsakaiIin().setTitle(new RString("関係審査会委員"));
+            div.getEditShinsakaiIin().getTxtKankeiIinCode().setReadOnly(false);
+            div.getEditShinsakaiIin().setDisabled(true);
+        }
+
+        private void decideAdd(DataGrid<dgKankeiIin_Row> grid, EditShinsakaiIinDiv editDiv) {
+            //TODO n8178 城間篤人 ButtonのonBeforeClickイベントがUIデザイナ安定版で使用可能になった後、処理を移譲する。 2014年9月
+            RString iinCode = editDiv.getTxtKankeiIinCode().getValue();
+            for (dgKankeiIin_Row row : grid.getDataSource()) {
+                if (row.getCode().equals(iinCode)) {
+                    return;
+                }
+            }
+
+            dgKankeiIin_Row row = createDgKankeiIin_Row(iinCode,
+                    editDiv.getTxtKankeiIinName().getValue(),
+                    editDiv.getTxtShozokuKikan().getValue(),
+                    editDiv.getTxtShozokuKikanMeisho().getValue(),
+                    new Decimal(getMaxKanriNo(grid.getDataSource()) + 1));
+            row.setRowState(RowState.Added);
+            grid.getDataSource().add(row);
+        }
+
+        private int getMaxKanriNo(List<dgKankeiIin_Row> dataSource) {
+            int maxKanriNo = 0;
+            for (dgKankeiIin_Row row : dataSource) {
+                int comparisonValue = row.getKanriNo().getValue().intValue();
+                if (maxKanriNo < comparisonValue) {
+                    maxKanriNo = comparisonValue;
+                }
+            }
+            return maxKanriNo;
+        }
+
+        private void decideUpdate(dgKankeiIin_Row selectedRow, DataGrid<dgKankeiIin_Row> grid, EditShinsakaiIinDiv editDiv) {
+            //TODO n8178 城間篤人 ButtonのonBeforeClickイベントがUIデザイナ安定版で使用可能になった後、処理を移譲する。 2014年9月
+            RString iinCode = editDiv.getTxtKankeiIinCode().getValue();
+            for (dgKankeiIin_Row row : grid.getDataSource()) {
+                if (row.getId() == selectedRow.getId()) {
+                } else if (row.getCode().equals(iinCode)) {
+                    return;
+                }
+            }
+
+            selectedRow.setCode(editDiv.getTxtKankeiIinCode().getValue());
+            selectedRow.setName(editDiv.getTxtKankeiIinName().getValue());
+            selectedRow.setShozokuKikanCode(editDiv.getTxtShozokuKikan().getValue());
+            selectedRow.setShozokuKikanMeisho(editDiv.getTxtShozokuKikanMeisho().getValue());
+            selectedRow.setShozokuKikan(selectedRow.getShozokuKikanCode().concat(":").concat(selectedRow.getShozokuKikanMeisho()));
+            selectedRow.setRowState(RowState.Modified);
+        }
+
+        private void decideDelete(dgKankeiIin_Row selectedRow, DataGrid<dgKankeiIin_Row> grid) {
+            if (selectedRow.getRowState().equals(RowState.Added)) {
+                grid.getDataSource().remove(selectedRow);
+            } else {
+                selectedRow.setRowState(RowState.Deleted);
+            }
+        }
+
+        public void save() {
+            JogaiShinsakaiIinManager manager = new JogaiShinsakaiIinManager();
+            for (dgKankeiIin_Row row : div.getDgKankeiIin().getDataSource()) {
+
+                //TODO n8178 城間篤人 後日、Div用Mapperに処理を移譲予定 2014年9月
+                JogaiShinsakaiIin jogaiIin = new JogaiShinsakaiIin(shoKisaiHokenshaNo, kaigoHihokenshaNo,
+                        row.getKanriNo().getValue().intValue(), create審査会委員(row.getCode().toString()));
+
+                if (row.getRowState().equals(RowState.Added) || row.getRowState().equals(RowState.Modified)) {
+                    manager.save(jogaiIin);
+                } else if (row.getRowState().equals(RowState.Deleted)) {
+                    manager.remove(jogaiIin);
+                }
+            }
+        }
+
+        //TODO n8178 城間篤人 除外審査会委員を生成するために、委員情報をDBから取得or除外情報のみで扱える形にクラスを修正のいずれかが必要。 2014年9月
+        private ShinsakaiIin create審査会委員(String 委員コード) {
+            return new ShinsakaiIin(new ShinsakaiIinCode(new RString(委員コード)),
+                    new Range(new FlexibleDate("19800101"), FlexibleDate.MAX), ShinsakaiIinJokyo.有効,
+                    new JigyoshaNo(RString.EMPTY), new AtenaMeisho("宛名名称"), new AtenaKanaMeisho("アテナカナメイショウ"),
+                    Gender.MALE, new ShinsakaiIinShikaku(new Code("kubun01"), RString.EMPTY, RString.EMPTY), ShinsainYusoKubun.自宅,
+                    new YubinNo("904-0000"), new AtenaJusho("住所"), new TelNo("098-000-0000"),
+                    new ShinsakaiIinKoza(new KinyuKikanCode("0001"), new KinyuKikanShitenCode("011"),
+                            RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY)
+            );
+        }
+    }
+
+    private static final class SinseiRiyu implements IPanelAdapter {
+
+        private final SinseiRiyuDiv div;
+
+        SinseiRiyu(ShinseiJohoInputDiv div) {
+            this.div = div.getSinseiRiyu();
+        }
+
+        @Override
+        public void onLoad() {
+            div.setTeikeiKbn(TeikeibunKubun.特記事項以外.getCode());
+            div.setTeikeiShubetsu(TeikeibunShubetsuElseTokki.申請理由.getCode());
+        }
+
+        @Override
+        public void init(dgSearchResult_Row hihokensha) {
+            div.setIsOpen(false);
+        }
+
+        @Override
+        public void clear() {
+            div.getTxtShinseiRiyu().clearValue();
+        }
+
+    }
+
+    private ResponseData<ShinseiJohoInputDiv> validate(ShinseiJohoInputDiv div) {
+        ResponseData<ShinseiJohoInputDiv> response = new ResponseData<>();
+        NinteiShinseiJohoValidate validate = new NinteiShinseiJohoValidate();
+
+//        div.getLatestNinteiResult().getTxtNinteiYukokikanTo().clearValue();                               //test用
+        div.getLatestNinteiResult().getTxtNinteiYukokikanTo().setValue(new FlexibleDate("20140920"));    //test用
+
+        if (validate.validateShinseiKbn(div.getDdlShinseiKubunShinseiji().getSelectedItem(), div.getTxtShinseiDate().getValue(),
+                new RString(div.getLatestNinteiResult().getTxtNinteiYukokikanTo().getValue().toString()))) {
+            response.addValidateMessage(new ErrorMessage("",
+                    YokaigoNinteiShinseiKubun.更新申請.toString() + "期間前です。申請区分を"
+                    + YokaigoNinteiShinseiKubun.区分変更申請.toString() + "に変更してください。"), "ddlShinseiKubunShinseiji");
+        }
+
+        //申請者が施設職員のとき
+        if (div.getNinteiShinseisha().getRadShinseishaKubun().getSelectedItem().equalsIgnoreCase(
+                YokaigoNinteiShinseishaKubun.施設職員.getCode())) {
+            if (div.getNinteiShinseisha().getNinteiShinseiJigyosha().getTxtJigyoshaCode().getText().isEmpty()) {
+                response.addValidateMessage(new ErrorMessage("", "事業者情報を入力してください。"), "txtJigyoshaCode");
+            } else if (validate.validateJigyosha(div.getNinteiShinseisha().getNinteiShinseiJigyosha().getTxtJigyoshaCode().getText(),
+                    div.getNinteiShinseisha().getNinteiShinseiJigyosha().getTxtJigyoshaName().getText())) {
+                response.addValidateMessage(new ErrorMessage("", "事業者情報が不正です。"), "txtJigyoshaCode");
+            }
+        }
+
+        if (validate.validateIryokikan(div.getHihokenshaShujii().getTxtIryokikanCode().getText(),
+                div.getHihokenshaShujii().getTxtIryokikanName().getText())) {
+            response.addValidateMessage(new ErrorMessage("", "医療機関情報が不正です。"), "txtIryokikanCode");
+        }
+
+        if (validate.validateShujii(div.getHihokenshaShujii().getTxtShujiiCode().getText(),
+                div.getHihokenshaShujii().getTxtShujiiName().getText())) {
+            response.addValidateMessage(new ErrorMessage("", "主治医情報が不正です。"), "txtShujiiCode");
+        }
+
+        //2号被保険者のときチェック
+//        if (div.getN2Hihokensha().getIryohokensha().getTxtIryohokenshaNo().getText().isEmpty()){
+//            response.addValidateMessage(new ErrorMessage("", "医療保険者番号を入力してください。"), "txtIryohokenshaNo");
+//        }
+//        if (div.getN2Hihokensha().getIryohokensha().getTxtIryohokenshaName().getText().isEmpty()){
+//            response.addValidateMessage(new ErrorMessage("", "医療保険者名を入力してください。"), "txtIryohokenshaName");
+//        }
+//        if (div.getN2Hihokensha().getIryohokensha().getTxtIryohokenKigo().getText().isEmpty()){
+//            response.addValidateMessage(new ErrorMessage("", "医療保険記号を入力してください。"), "txtIryohokenKigo");
+//        }
+//        if (div.getN2Hihokensha().getIryohokensha().getTxtIryohokenBango().getText().isEmpty()){
+//            response.addValidateMessage(new ErrorMessage("", "医療保険番号を入力してください。"), "txtIryohokenBango");
+//        }
+//        if (div.getN2Hihokensha().getDdltTokuteiShippei().getSelectedItem().equalsIgnoreCase("00")){
+//            response.addValidateMessage(new ErrorMessage("", "特定疾病を選択してください。"), "ddltTokuteiShippei");
+//        }
+        if (div.getChkEnkitsuchiHakko().getSelectedValues().isEmpty()) {
+            response.addValidateMessage(new WarningMessage("", "認定延期通知を発行しないことへの同意が選択されていません。"), "chkEnkitsuchiHakko");
+        }
+        if (div.getChkJohoteikyo().getSelectedValues().isEmpty()) {
+            response.addValidateMessage(new WarningMessage("", "認定調査/意見書/審査会へ情報提供をすることへの同意が選択されていません。"), "chkJohoteikyo");
+        }
+
+        response.data = div;
+        return response;
     }
 }

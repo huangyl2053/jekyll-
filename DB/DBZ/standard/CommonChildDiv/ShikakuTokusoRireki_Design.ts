@@ -136,7 +136,7 @@ module DBZ {
      "fieldName": "dgShikakuShutokuRireki",
      "items": [],
      "controlType": "DataGrid",
-     "width": "1085",
+     "width": "1090",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -167,13 +167,14 @@ module DBZ {
       "isShowDeleteButtonColumn": true,
       "limitRowCount": 0,
       "selectedRowCount": 0,
+      "selectLimitRowCount": 0,
       "header": {
        "combineColumns": [
         {
          "combineColumnName": "取得情報",
          "combineItem": [
-          "shutokuTodokedeDate",
           "shutokuDate",
+          "shutokuTodokedeDate",
           "shutokuJiyuKey",
           "shutokuJiyu"
          ]
@@ -181,8 +182,8 @@ module DBZ {
         {
          "combineColumnName": "喪失情報",
          "combineItem": [
-          "soshitsuTodokedeDate",
           "soshitsuDate",
+          "soshitsuTodokedeDate",
           "soshitsuJiyuKey",
           "soshitsuJiyu"
          ]
@@ -190,8 +191,8 @@ module DBZ {
         {
          "combineColumnName": "住所地特例適用",
          "combineItem": [
-          "jutokuTekiyoTodokedeDate",
           "jutokuTekiyoDate",
+          "jutokuTekiyoTodokedeDate",
           "jutokuTekiyoJiyuKey",
           "jutokuTekiyoJiyu"
          ]
@@ -199,8 +200,8 @@ module DBZ {
         {
          "combineColumnName": "住所地特例解除",
          "combineItem": [
-          "jutokuKaijoTodokedeDate",
           "jutokuKaijoDate",
+          "jutokuKaijoTodokedeDate",
           "jutokuKaijoJiyuKey",
           "jutokuKaijoJiyu"
          ]
@@ -208,37 +209,37 @@ module DBZ {
         {
          "combineColumnName": "変更情報",
          "combineItem": [
-          "henkoTodokedeDate",
           "henkoDate",
+          "henkoTodokedeDate",
           "henkoJiyuKey",
           "henkoJiyu"
          ]
         }
        ],
-       "frozenColumn": "shutokuJiyu",
+       "frozenColumn": "",
        "headerHeight": 0
       },
       "columns": [
        {
-        "columnName": "届出日",
-        "dataName": "shutokuTodokedeDate",
+        "columnName": "詳細",
+        "dataName": "shosai",
         "toolTip": "",
         "bgColor": 0,
-        "width": 80,
+        "width": 40,
         "visible": true,
-        "cellType": 7,
+        "cellType": 8,
         "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": "",
-         "isSetValueToToolTip": false,
-         "readOnly": true
+         "cellType": 8,
+         "text": "...",
+         "onClick": "",
+         "imageFileUrl": "/ur/urz/image/UR_Book_On.png",
+         "imageWidth": "20",
+         "imageHeight": "20"
         },
         "align": 1,
-        "resize": true,
+        "resize": false,
         "isPrivateInfo": false,
-        "sortKey": "shutokuTodokedeDate"
+        "sortKey": ""
        },
        {
         "columnName": "取得日",
@@ -262,6 +263,27 @@ module DBZ {
         "sortKey": "shutokuDate"
        },
        {
+        "columnName": "届出日",
+        "dataName": "shutokuTodokedeDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "shutokuTodokedeDate"
+       },
+       {
         "columnName": "取得事由Key",
         "dataName": "shutokuJiyuKey",
         "toolTip": "",
@@ -280,7 +302,7 @@ module DBZ {
         "dataName": "shutokuJiyu",
         "toolTip": "",
         "bgColor": 0,
-        "width": 90,
+        "width": 100,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -292,25 +314,32 @@ module DBZ {
         "sortKey": "shutokuJiyu"
        },
        {
-        "columnName": "届出日",
-        "dataName": "soshitsuTodokedeDate",
+        "columnName": "被保区分",
+        "dataName": "hihokenshaKubun",
         "toolTip": "",
         "bgColor": 0,
-        "width": 80,
+        "width": 70,
         "visible": true,
-        "cellType": 7,
-        "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": "",
-         "isSetValueToToolTip": false,
-         "readOnly": true
-        },
-        "align": 1,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "soshitsuTodokedeDate"
+        "sortKey": "hihokenshaKubun"
+       },
+       {
+        "columnName": "被保区分Key",
+        "dataName": "hihokenshaKubunKey",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "hihokenshaKubunKey"
        },
        {
         "columnName": "喪失日",
@@ -334,6 +363,27 @@ module DBZ {
         "sortKey": "soshitsuDate"
        },
        {
+        "columnName": "届出日",
+        "dataName": "soshitsuTodokedeDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "soshitsuTodokedeDate"
+       },
+       {
         "columnName": "喪失事由Key",
         "dataName": "soshitsuJiyuKey",
         "toolTip": "",
@@ -352,7 +402,7 @@ module DBZ {
         "dataName": "soshitsuJiyu",
         "toolTip": "",
         "bgColor": 0,
-        "width": 90,
+        "width": 100,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -362,61 +412,12 @@ module DBZ {
         "sortKey": "soshitsuJiyu"
        },
        {
-        "columnName": "被保区分Key",
-        "dataName": "hihokenshaKubunKey",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 0,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "hihokenshaKubunKey"
-       },
-       {
-        "columnName": "被保区分",
-        "dataName": "hihokenshaKubun",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 70,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "hihokenshaKubun"
-       },
-       {
-        "columnName": "届出日",
-        "dataName": "jutokuTekiyoTodokedeDate",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 80,
-        "visible": true,
-        "cellType": 7,
-        "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": "",
-         "isSetValueToToolTip": false,
-         "readOnly": true
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "jutokuTekiyoTodokedeDate"
-       },
-       {
         "columnName": "適用日",
         "dataName": "jutokuTekiyoDate",
         "toolTip": "",
         "bgColor": 0,
         "width": 80,
-        "visible": true,
+        "visible": false,
         "cellType": 7,
         "cellDetails": {
          "cellType": 7,
@@ -430,6 +431,27 @@ module DBZ {
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "jutokuTekiyoDate"
+       },
+       {
+        "columnName": "届出日",
+        "dataName": "jutokuTekiyoTodokedeDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": false,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "jutokuTekiyoTodokedeDate"
        },
        {
         "columnName": "適用事由Key",
@@ -451,7 +473,7 @@ module DBZ {
         "toolTip": "",
         "bgColor": 0,
         "width": 150,
-        "visible": true,
+        "visible": false,
         "cellType": 0,
         "cellDetails": {
          "cellType": 0,
@@ -463,33 +485,12 @@ module DBZ {
         "sortKey": "jutokuTekiyoJiyu"
        },
        {
-        "columnName": "届出日",
-        "dataName": "jutokuKaijoTodokedeDate",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 80,
-        "visible": true,
-        "cellType": 7,
-        "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": "",
-         "isSetValueToToolTip": false,
-         "readOnly": true
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "jutokuKaijoTodokedeDate"
-       },
-       {
         "columnName": "解除日",
         "dataName": "jutokuKaijoDate",
         "toolTip": "",
         "bgColor": 0,
         "width": 80,
-        "visible": true,
+        "visible": false,
         "cellType": 7,
         "cellDetails": {
          "cellType": 7,
@@ -503,6 +504,27 @@ module DBZ {
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "jutokuKaijoDate"
+       },
+       {
+        "columnName": "届出日",
+        "dataName": "jutokuKaijoTodokedeDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": false,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "jutokuKaijoTodokedeDate"
        },
        {
         "columnName": "解除事由Key",
@@ -524,7 +546,7 @@ module DBZ {
         "toolTip": "",
         "bgColor": 0,
         "width": 150,
-        "visible": true,
+        "visible": false,
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
@@ -533,33 +555,12 @@ module DBZ {
         "sortKey": "jutokuKaijoJiyu"
        },
        {
-        "columnName": "届出日",
-        "dataName": "henkoTodokedeDate",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 80,
-        "visible": true,
-        "cellType": 7,
-        "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": "",
-         "isSetValueToToolTip": false,
-         "readOnly": true
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "henkoTodokedeDate"
-       },
-       {
         "columnName": "変更日",
         "dataName": "henkoDate",
         "toolTip": "",
         "bgColor": 0,
         "width": 80,
-        "visible": true,
+        "visible": false,
         "cellType": 7,
         "cellDetails": {
          "cellType": 7,
@@ -573,6 +574,27 @@ module DBZ {
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "henkoDate"
+       },
+       {
+        "columnName": "届出日",
+        "dataName": "henkoTodokedeDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": false,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "henkoTodokedeDate"
        },
        {
         "columnName": "変更事由Key",
@@ -594,7 +616,7 @@ module DBZ {
         "toolTip": "",
         "bgColor": 0,
         "width": 90,
-        "visible": true,
+        "visible": false,
         "cellType": 0,
         "cellDetails": {
          "cellType": 0
@@ -610,7 +632,7 @@ module DBZ {
         "toolTip": "",
         "bgColor": 0,
         "width": 120,
-        "visible": true,
+        "visible": false,
         "cellType": 7,
         "cellDetails": {
          "cellType": 7,
@@ -626,18 +648,32 @@ module DBZ {
         "sortKey": "nenreiTotatsuDate"
        },
        {
-        "columnName": "保険者",
-        "dataName": "hokensha",
+        "columnName": "住特区分",
+        "dataName": "jutokuKubun",
         "toolTip": "",
         "bgColor": 0,
-        "width": 90,
-        "visible": false,
+        "width": 70,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "jutokuKubun"
+       },
+       {
+        "columnName": "所在保険者",
+        "dataName": "shozaiHokensha",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 110,
+        "visible": true,
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "hokensha"
+        "sortKey": "shozaiHokensha"
        },
        {
         "columnName": "措置元保険者",
@@ -645,11 +681,11 @@ module DBZ {
         "toolTip": "",
         "bgColor": 0,
         "width": 120,
-        "visible": false,
+        "visible": true,
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "sochimotoHokensha"
        },
@@ -658,7 +694,7 @@ module DBZ {
         "dataName": "kyuHokensha",
         "toolTip": "",
         "bgColor": 0,
-        "width": 90,
+        "width": 100,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -668,54 +704,12 @@ module DBZ {
         "sortKey": "kyuHokensha"
        },
        {
-        "columnName": "再交付区分",
-        "dataName": "saikofuKubun",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 100,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "saikofuKubun"
-       },
-       {
-        "columnName": "再交付事由",
-        "dataName": "saikofuJiyu",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 100,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "saikofuJiyu"
-       },
-       {
-        "columnName": "帳票交付履歴ID",
-        "dataName": "chohyoKofuRirekiId",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 140,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "chohyoKofuRirekiId"
-       },
-       {
         "columnName": "識別コード",
         "dataName": "shikibetsuCode",
         "toolTip": "",
         "bgColor": 0,
         "width": 150,
-        "visible": true,
+        "visible": false,
         "cellType": 0,
         "cellDetails": null,
         "align": 1,
@@ -743,7 +737,8 @@ module DBZ {
      "sortOrder": "jutokuTekiyoTodokedeDate",
      "isAscending": true,
      "filterList": [],
-     "activeRowId": -1
+     "activeRowId": -1,
+     "gridAction": []
     }
    ],
    "controlType": "Panel",
@@ -803,7 +798,8 @@ module DBZ {
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": "CommonChildDiv",
@@ -864,7 +860,9 @@ module DBZ {
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": "",
  "canTransferEvent": true,
- "heightForDialog": "M"
+ "heightForDialog": "M",
+ "firstFocusFieldName": "",
+ "lastFocusFieldName": ""
 }        
     }
 }

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoResultMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoSakuseiIraiMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -37,17 +38,20 @@ public class ShujiiIkenshoResultManagerTest extends DbeTestBase {
     private static final int AS_save失敗 = 0;
     private static final int AS_remove成功 = 1;
     private static final int AS_remove失敗 = 0;
+    private static final LasdecCode 市町村コード = new LasdecCode(new RString("000001"));
 
     public static class get主治医意見書結果 extends DbeTestBase {
 
         @Test
         public void 意見書結果ありの時_get主治医意見書結果は_該当の意見書結果を返す() {
-            assertThat(createShujiiIkenshoResultManager(AS_意見書結果あり).get主治医意見書結果(createShinseishoKanriNo(), createRirekiNo()).get基本情報().get申請書管理番号().value(), is(new RString("1234567890")));
+            assertThat(createShujiiIkenshoResultManager(AS_意見書結果あり).get主治医意見書結果(
+                    市町村コード, createShinseishoKanriNo(), createRirekiNo()).get基本情報().get申請書管理番号().value(), is(new RString("1234567890")));
         }
 
         @Test
         public void 意見書結果なしの時_get主治医意見書結果は_NULLを返す() {
-            assertThat(createShujiiIkenshoResultManager(AS_意見書結果なし).get主治医意見書結果(createShinseishoKanriNo(), createRirekiNo()), nullValue());
+            assertThat(createShujiiIkenshoResultManager(AS_意見書結果なし).get主治医意見書結果(
+                    市町村コード, createShinseishoKanriNo(), createRirekiNo()), nullValue());
         }
     }
 
@@ -95,7 +99,8 @@ public class ShujiiIkenshoResultManagerTest extends DbeTestBase {
     private static ShujiiIkenshoSakuseiIraiKirokuManager createShujiiIkenshoSakuseiIraiKirokuManager() {
         ShujiiIkenshoSakuseiIraiKirokuManager manager = mock(ShujiiIkenshoSakuseiIraiKirokuManager.class);
         ShujiiIkenshoSakuseiIrai sakuseiIrai = ShujiiIkenshoSakuseiIraiMock.getSpiedInstance();
-        when(manager.get主治医意見書作成依頼情報(any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(sakuseiIrai);
+        when(manager.get主治医意見書作成依頼情報(
+                any(LasdecCode.class), any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(sakuseiIrai);
         return manager;
     }
 

@@ -4,10 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.MobileDataShutsuryoku;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
@@ -38,23 +34,6 @@ public class NinteichosaIraiTestHelper {
     public static RString ninteichosaTokusokuHoho = new RString("1");
     public static int ninteichosaTokusokuKaisu = 2;
     public static RString ninteichosaTokusokuMemo = new RString("督促");
-
-    /**
-     * テスト用認定調査依頼情報を返します。
-     *
-     * @return 認定調査依頼情報
-     */
-    public static NinteichosaIrai create認定調査依頼情報() {
-
-        return new NinteichosaIrai(shinseishoKanriNo, ninteichosaIraiRirekiNo,
-                ninteichosaItakusakiCode, chousainCode,
-                NinteichosaIraiKubun.toValue(ninteichousaIraiKubunCode), ninteichosaIraiKaisu,
-                ninteichosaIraiYMD.toRDate(), ninteichosaKigenYMD.toRDate(),
-                iraishoShutsuryokuYMD.toRDate(), chosahyoTouShutsuryokuYMD.toRDate(),
-                MobileDataShutsuryoku.toValue(mobileDataShutsuryokuFlag), ninteichosaTokusokuYMD.toRDate(),
-                NinteichosaTokusokuHoho.toValue(ninteichosaTokusokuHoho),
-                ninteichosaTokusokuKaisu, ninteichosaTokusokuMemo);
-    }
 
     /**
      * テスト用エンティティを返します。
