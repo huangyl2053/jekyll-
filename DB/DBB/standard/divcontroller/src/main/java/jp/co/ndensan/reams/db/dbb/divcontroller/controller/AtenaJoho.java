@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @author N2810
  */
 public class AtenaJoho {
+    //TODO n8178 城間篤人 デモ時の実装のため、現状との不整合が起きている。修正、もしくはオフショアに出すなら破棄の必要があり 2014年11月
 
     private static final RString FukaKihon = new RString("FukaKihon.yml");
 
@@ -40,7 +41,7 @@ public class AtenaJoho {
 
         if (atenajoho == null) {
             KaigoAtenaInfoDiv atenashokaiDiv = div.getKaigoAtenaInfo();
-            //TODO n8178 城間篤人 検索周りの使用が確定してから、ViewStateから何を受け取るかを決める 2014年11月
+            //TODO n8178 城間篤人 デモ対応時の実装をコメントアウト。検索周りの使用が確定し、ViewStateから何を受け取るかを決めたあと修正 2014年11月
             //ShikibetsuCode shikibetsuCode = new ShikibetsuCode((RString) ViewStateHolder.get("対象者識別コード", RString.class));
             ShikibetsuCode shikibetsuCode = new ShikibetsuCode("000000000000019");
             AtenaShokaiSimpleAdapter.setDemoData(atenashokaiDiv, shikibetsuCode);
