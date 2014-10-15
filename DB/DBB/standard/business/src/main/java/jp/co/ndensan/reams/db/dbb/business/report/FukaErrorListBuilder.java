@@ -19,7 +19,7 @@ public final class FukaErrorListBuilder implements IReportSourceBuilder<FukaErro
     private final IFukaErrorListEditor editor;
 
     /**
-     * 引数からエディタを受け取り、インスタンスを生成します。
+     * コンストラクタです。
      *
      * @param editor 賦課エラー一覧エディタ
      */

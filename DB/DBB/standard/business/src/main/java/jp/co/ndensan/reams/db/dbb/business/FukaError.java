@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class FukaError extends KaigoCodeAssignedItem<FukaErrorCode> {
 
     /**
-     * 引数から賦課エラーコード・名称・略称を渡し、インスタンスを生成します。
+     * 引数から賦課エラーコード・名称・略称を受け取るコンストラクタです。
      *
      * @param code 賦課エラーコード
      * @param codeMeisho 名称

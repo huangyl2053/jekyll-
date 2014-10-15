@@ -24,7 +24,7 @@ public class FukaErrorInternalReportItemList implements Iterable<FukaErrorIntern
     private final List<FukaErrorInternalReportItem> itemList;
 
     /**
-     * 引数から賦課エラー一覧のListを受け取り、インスタンスを生成します。
+     * コンストラクタです。
      *
      * @param itemList 賦課エラー一覧EntityList
      */

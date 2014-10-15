@@ -25,7 +25,7 @@ public class FukaErrorInternalReport implements IInternalReport {
     private final FukaErrorInternalReportItemList itemList;
 
     /**
-     * 引数から賦課エラー一覧の要素を受け取り、インスタンスを生成します。
+     * コンストラクタです。
      *
      * @param reportCommon 内部帳票共通情報
      * @param itemList 内部帳票項目List

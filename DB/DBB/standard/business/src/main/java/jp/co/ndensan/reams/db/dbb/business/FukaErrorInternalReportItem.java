@@ -38,9 +38,9 @@ public class FukaErrorInternalReportItem extends InternalReportItem {
     private final InternalReportShoriKubun 処理区分;
 
     /**
-     * 引数から賦課エラーのModelを受け取り、インスタンスを生成します。
+     * コンストラクタです。
      *
-     * @param model 賦課エラーModel
+     * @param model 賦課エラー情報を持つテーブルに対応したModelクラス
      * @throws NullPointerException 賦課年度、通知書番号、処理区分にnullが渡されたとき
      */
     public FukaErrorInternalReportItem(FukaErrorModel model) throws NullPointerException {
