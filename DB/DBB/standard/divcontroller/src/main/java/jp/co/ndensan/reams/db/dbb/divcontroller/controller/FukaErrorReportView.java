@@ -140,7 +140,7 @@ public class FukaErrorReportView {
     }
 
     /**
-     * 資格不整合処理へ遷移するボタンをクリックした際、onClickEvent前に実行されるバリデーションチェックイベントです。<br/>
+     * 資格不整合処理へ遷移するボタンをクリックした際、onClickEvent前に実行されるバリデーションチェックイベントです。
      *
      * @param div 賦課エラー一覧Div
      * @return 賦課エラー一覧Divを持つResponseData
@@ -162,7 +162,7 @@ public class FukaErrorReportView {
     }
 
     /**
-     * 資格不整合処理へ遷移するボタンをクリックした際に実行されるイベントです。<br/>
+     * 資格不整合処理へ遷移するボタンをクリックした際に実行されるイベントです。
      *
      * @param div 賦課エラー一覧Div
      * @return 賦課エラー一覧Divを持つResponseData
@@ -173,7 +173,7 @@ public class FukaErrorReportView {
     }
 
     /**
-     * 資格不整合処理へ遷移するボタンをクリックした際、onClickEvent前に実行されるバリデーションチェックイベントです。<br/>
+     * 資格不整合処理へ遷移するボタンをクリックした際、onClickEvent前に実行されるバリデーションチェックイベントです。
      *
      * @param div 賦課エラー一覧Div
      * @return 賦課エラー一覧Divを持つResponseData
@@ -187,7 +187,7 @@ public class FukaErrorReportView {
     }
 
     /**
-     * 資格不整合処理へ遷移するボタンをクリックした際に実行されるイベントです。<br/>
+     * 資格不整合処理へ遷移するボタンをクリックした際に実行されるイベントです。
      *
      * @param div 賦課エラー一覧Div
      * @return 賦課エラー一覧Divを持つResponseData
