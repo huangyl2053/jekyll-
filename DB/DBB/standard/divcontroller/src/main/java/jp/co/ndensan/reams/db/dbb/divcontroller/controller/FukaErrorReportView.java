@@ -49,7 +49,7 @@ public class FukaErrorReportView {
      * また、次処理への遷移ボタンを、グリッドの1行目に表示されているエラー内容に合わせて表示します。
      *
      * @param div 賦課エラー一覧Div
-     * @return ResponseData
+     * @return 賦課エラー一覧Divを持つResponseData
      */
     public ResponseData onLoad(FukaErrorReportViewDiv div) {
         IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
@@ -68,7 +68,7 @@ public class FukaErrorReportView {
      * 選択した作成日時に合わせて賦おｎCh課エラー一覧のデータを取得し、グリッド上に表示しなおします。
      *
      * @param div 賦課エラー一覧Div
-     * @return ResponseData
+     * @return 賦課エラー一覧Divを持つResponseData
      */
     public ResponseData onChangeToDdlCreationDateTiem(FukaErrorReportViewDiv div) {
         IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
@@ -85,9 +85,9 @@ public class FukaErrorReportView {
      * CSVダウンロードボタンをクリックした際に実行されるイベントです。<br/>
      * 現在賦課エラー一覧グリッドに表示されている情報をCSV化してダウンロードします。
      *
-     * @param div 賦課エラー一覧パネル
-     * @param response レスポンスデータ
-     * @return IDownLoadServletResponse
+     * @param div 賦課エラー一覧Div
+     * @param response IDownLoadServletResponse。ダウンロード処理の際、引数の最後にもたせる必要がある。
+     * @return ダウンロードするCsvファイルの、ファイル名とByteデータを持つReponseData
      */
     //TODO n8178 城間篤人 uzのリリースが完了するまで、IDownLoadServletResponseが使用不可。リリース後コメントアウトをはずす 2014年10月末
     public IDownLoadServletResponse onClick_btnCsvDownload(FukaErrorReportViewDiv div, IDownLoadServletResponse response) {
@@ -109,8 +109,8 @@ public class FukaErrorReportView {
      * 賦課エラー一覧グリッドから、1行選択した際に実行されるイベントです。<br/>
      * 選択した行のエラー内容に合わせて、修正処理へ遷移するボタンの表示非表示を切り替え、遷移可能な状態に切り替えます。
      *
-     * @param div 賦課エラー一覧パネル
-     * @return ResponseData
+     * @param div 賦課エラー一覧Div
+     * @return 賦課エラー一覧Divを持つResponseData
      */
     public ResponseData onSelect_dgFukaErrorList(FukaErrorReportViewDiv div) {
 
@@ -142,8 +142,8 @@ public class FukaErrorReportView {
     /**
      * 資格不整合処理へ遷移するボタンをクリックした際、onClickEvent前に実行されるバリデーションチェックイベントです。<br/>
      *
-     * @param div 賦課エラー一覧パネル
-     * @return ResponseData
+     * @param div 賦課エラー一覧Div
+     * @return 賦課エラー一覧Divを持つResponseData
      */
     public ResponseData onBeforeClick_btnShikakuFuseigo(FukaErrorReportViewDiv div) {
         ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
@@ -164,8 +164,8 @@ public class FukaErrorReportView {
     /**
      * 資格不整合処理へ遷移するボタンをクリックした際に実行されるイベントです。<br/>
      *
-     * @param div 賦課エラー一覧パネル
-     * @return ResponseData
+     * @param div 賦課エラー一覧Div
+     * @return 賦課エラー一覧Divを持つResponseData
      */
     public ResponseData onClick_btnShikakuFuseigo(FukaErrorReportViewDiv div) {
         //TODO n8178 城間篤人 画面遷移先に渡すデータなどの設定を行う。遷移先の画面ができてから実装を予定 2014年11月
@@ -175,8 +175,8 @@ public class FukaErrorReportView {
     /**
      * 資格不整合処理へ遷移するボタンをクリックした際、onClickEvent前に実行されるバリデーションチェックイベントです。<br/>
      *
-     * @param div 賦課エラー一覧パネル
-     * @return ResponseData
+     * @param div 賦課エラー一覧Div
+     * @return 賦課エラー一覧Divを持つResponseData
      */
     public ResponseData onBeforeClick_btnFukaKosei(FukaErrorReportViewDiv div) {
         ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
@@ -189,8 +189,8 @@ public class FukaErrorReportView {
     /**
      * 資格不整合処理へ遷移するボタンをクリックした際に実行されるイベントです。<br/>
      *
-     * @param div 賦課エラー一覧パネル
-     * @return ResponseData
+     * @param div 賦課エラー一覧Div
+     * @return 賦課エラー一覧Divを持つResponseData
      */
     public ResponseData onClick_btnFukaKosei(FukaErrorReportViewDiv div) {
         //TODO n8178 城間篤人 画面遷移先に渡すデータなどの設定を行う。遷移先の画面ができてから実装を予定 2014年11月
@@ -202,7 +202,7 @@ public class FukaErrorReportView {
      * グリッド上に表示されている内部帳票の情報を、印刷可能なソースデータに変換してプレビュー画面に引き渡します。
      *
      * @param div 賦課エラー一覧パネル
-     * @return ResponseData
+     * @return 印刷可能なソースデータを持つResponseData
      */
     public ResponseData<SourceDataCollection> onClick_btnReportPublish(FukaErrorReportViewDiv div) {
         return new FukaErrorListPublisher().publish(div);
