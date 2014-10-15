@@ -10,12 +10,14 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.AtenaJohoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.dgdGaitoushaIchiran_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.AtenaShokaiSimpleAdapter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoFukaKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -37,10 +39,11 @@ public class AtenaJoho {
         ResponseData<AtenaJohoDiv> response = new ResponseData<>();
 
         if (atenajoho == null) {
-            AtenaShokaiSimpleDiv atenashokaiDiv = div.getKaigoAtenaInfo().getAtenaInfo();
+            KaigoAtenaInfoDiv atenashokaiDiv = div.getKaigoAtenaInfo();
+            //TODO n8178 城間篤人 検索周りの使用が確定してから、ViewStateから何を受け取るかを決める 2014年11月
             //ShikibetsuCode shikibetsuCode = new ShikibetsuCode((RString) ViewStateHolder.get("対象者識別コード", RString.class));
             ShikibetsuCode shikibetsuCode = new ShikibetsuCode("000000000000019");
-//            AtenaShokaiSimple.setData(atenashokaiDiv, shikibetsuCode);
+            AtenaShokaiSimpleAdapter.setDemoData(atenashokaiDiv, shikibetsuCode);
             KaigoFukaKihonDiv kaigofukakihonDiv = div.getKaigoFukaKihon();
 
             loadKaigoFukaKihon(kaigofukakihonDiv);
