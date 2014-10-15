@@ -26,10 +26,8 @@ import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationHelper;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportPublishable;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-//import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 
 /**
@@ -54,7 +52,6 @@ public class FukaErrorReportView {
      * @return ResponseData
      */
     public ResponseData onLoad(FukaErrorReportViewDiv div) {
-        ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
         IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
 
         FukaErrorInternalReport report = new FukaErrorInternalReportService().getFukaErrorInternalReport();
@@ -63,8 +60,7 @@ public class FukaErrorReportView {
         div.getDgFukaErrorList().setDataSource(FukaErrorGridMapper.toFukaErrorListGrid(report.get賦課エラーList()));
         div.getFukaErrorShoriButton().setDisabled(true);
 
-        response.data = div;
-        return response;
+        return _createResponseData(div);
     }
 
     /**
@@ -75,7 +71,6 @@ public class FukaErrorReportView {
      * @return ResponseData
      */
     public ResponseData onChangeToDdlCreationDateTiem(FukaErrorReportViewDiv div) {
-        ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
         IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
         RDateTime creationDateTime = kihonDiv.getSelectedListCreationDateTime();
 
@@ -83,8 +78,7 @@ public class FukaErrorReportView {
         kihonDiv.setKihonData(report);
         div.getDgFukaErrorList().setDataSource(FukaErrorGridMapper.toFukaErrorListGrid(report.get賦課エラーList()));
 
-        response.data = div;
-        return response;
+        return _createResponseData(div);
     }
 
     /**
@@ -119,7 +113,6 @@ public class FukaErrorReportView {
      * @return ResponseData
      */
     public ResponseData onSelect_dgFukaErrorList(FukaErrorReportViewDiv div) {
-        ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
 
         FukaErrorShoriButtonDiv buttonDiv = div.getFukaErrorShoriButton();
         setButtonDisplayNone(buttonDiv);
@@ -138,9 +131,7 @@ public class FukaErrorReportView {
         }
 
         div.getFukaErrorShoriButton().setDisabled(false);
-
-        response.data = div;
-        return response;
+        return _createResponseData(div);
     }
 
     private void setButtonDisplayNone(FukaErrorShoriButtonDiv buttonDiv) {
@@ -177,10 +168,8 @@ public class FukaErrorReportView {
      * @return ResponseData
      */
     public ResponseData onClick_btnShikakuFuseigo(FukaErrorReportViewDiv div) {
-        ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
-        //TODO n8178 城間篤人 画面遷移先に渡すデータなどの設定を行う。Model化後に対応したほうがよい？ 2014年10月3日まで
-        response.data = div;
-        return response;
+        //TODO n8178 城間篤人 画面遷移先に渡すデータなどの設定を行う。遷移先の画面ができてから実装を予定 2014年11月
+        return _createResponseData(div);
     }
 
     /**
@@ -204,10 +193,8 @@ public class FukaErrorReportView {
      * @return ResponseData
      */
     public ResponseData onClick_btnFukaKosei(FukaErrorReportViewDiv div) {
-        ResponseData<FukaErrorReportViewDiv> response = new ResponseData<>();
-        //TODO n8178 城間篤人 画面遷移先に渡すデータなどの設定を行う。Model化後に対応したほうがよい？ 2014年10月3日まで
-        response.data = div;
-        return response;
+        //TODO n8178 城間篤人 画面遷移先に渡すデータなどの設定を行う。遷移先の画面ができてから実装を予定 2014年11月
+        return _createResponseData(div);
     }
 
     /**
@@ -225,7 +212,6 @@ public class FukaErrorReportView {
 
         @Override
         public ResponseData<SourceDataCollection> publish(FukaErrorReportViewDiv div) {
-            ResponseData<SourceDataCollection> response = new ResponseData<>();
 
             FukaErrorListPrinter printer = new FukaErrorListPrinter();
             IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
@@ -235,9 +221,13 @@ public class FukaErrorReportView {
             FukaErrorInternalReport report = new FukaErrorInternalReport(reportCommon, reportItemList);
 
             SourceDataCollection sdc = printer.print(report);
-            response.data = sdc;
-            return response;
+            return _createResponseData(sdc);
         }
     }
 
+    private static <T> ResponseData<T> _createResponseData(T setIntoData) {
+        ResponseData<T> response = new ResponseData<>();
+        response.data = setIntoData;
+        return response;
+    }
 }
