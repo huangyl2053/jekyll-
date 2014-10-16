@@ -30,7 +30,7 @@ public final class DbOptional<T> implements IOptional<T> {
     }
 
     /**
-     * 空の{@link IOptional IOptional}を返します。<br/>
+     * emptyな{@link IOptional IOptional}を返します。<br/>
      * 確実にnullの値を{@link #ofNullable(java.lang.Object) ofNullable()}に渡す様ならば、こちらを使ってください。
      *
      * @param <T> 保持するオブジェクトの型
@@ -59,7 +59,7 @@ public final class DbOptional<T> implements IOptional<T> {
     }
 
     /**
-     * 引数がnullの時は空の{@link #empty() empty()}、null出ないときは{@link #of(java.lang.Object) of()}と同じ値を返します。
+     * 引数がnullの時は{@link #empty() empty()}、nullでない時は{@link #of(java.lang.Object) of()}と同じ値を返します。
      *
      * @param <T> 保持するオブジェクトの型
      * @param value 保持する値
