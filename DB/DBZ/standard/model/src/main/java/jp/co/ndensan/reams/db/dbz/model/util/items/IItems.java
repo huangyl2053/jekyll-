@@ -26,12 +26,12 @@ public interface IItems<E> extends Iterable<E> {
     List<E> asList();
 
     /**
-     * 保持する要素をすべて{@link IFunction IFunction}により変換し、
+     * 保持する要素をすべて{@link IFunction mapper}により変換し、
      * その結果をもった新しい{@link IItems IItems}を返します。
      *
      * @param <R> 変換後の{@link IItems IItems}が保持する型
-     * @param mapper 変換に用いる{@link IFunction IFunction}
-     * @return converterにより変換された結果を保持した{@link IItems IItems}
+     * @param mapper 変換に用いる{@link IFunction mapper}
+     * @return mapperにより変換された結果を保持した{@link IItems IItems}
      */
     <R> IItems<R> map(IFunction<? super E, ? extends R> mapper);
 
