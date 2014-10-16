@@ -16,7 +16,9 @@ import jp.co.ndensan.reams.db.dbz.model.util.optional.DbOptional;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 
 /**
- * {@link IItems IItems}の標準の実装です。
+ * {@link IItems IItems}の標準の実装です。<br/>
+ * {@link IItems IItems}を実装したクラスを新しく作る場合には、可能なメソッドはこのクラスに処理を委譲します。
+ * そうすることで実装の手間を省略できます。{@link ItemList ItemList}の実装を参考にしてください。
  *
  * @author N3327 三浦 凌
  * @param <E> 保持するオブジェクトの型
