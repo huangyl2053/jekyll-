@@ -52,7 +52,7 @@ public interface IItems<E> extends Iterable<E> {
     /**
      * 引数の要素を含むかどうかを返します。
      *
-     * @param o 探索対象
+     * @param o 含まれるかどうかを調べるオブジェクト
      * @return 含む場合は{@code true}, 含まなければ{@code false}
      */
     boolean contains(Object o);
@@ -60,15 +60,15 @@ public interface IItems<E> extends Iterable<E> {
     /**
      * 引数のcollectionの要素をすべて含むかどうかを返します。
      *
-     * @param c 探索対象のcollection
+     * @param c 含まれるかどうかを調べるcollection
      * @return すべて含む場合は{@code true}, そうでなければ{@code false}
      */
     boolean containsAll(Collection<?> c);
 
     /**
-     * 引数のitemsの要素をすべて含むかどうかを返します。
+     * 引数の{@link IItems items}の要素をすべて含むかどうかを返します。
      *
-     * @param items 探索するIItems
+     * @param items 含まれるかどうかを調べる{@link IItems items}
      * @return すべて含む場合は{@code true}, そうでなければ{@code false}
      */
     boolean containsAllItems(IItems<?> items);
@@ -82,7 +82,7 @@ public interface IItems<E> extends Iterable<E> {
 
     /**
      * 保持する要素が1件の時、そのオブジェクトを保持する{@link IOptional IOptional}を返します。
-     * 複数件の要素を保持する時やemptyの場合は、空の{@link IOptional IOptional}を返します。
+     * 複数件の要素を保持する時や何も保持していない空の場合は、emptyな{@link IOptional IOptional}を返します。
      *
      * @return {@link IOptional IOptional}
      */

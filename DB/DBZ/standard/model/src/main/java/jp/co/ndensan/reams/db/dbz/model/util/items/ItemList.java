@@ -27,7 +27,7 @@ public final class ItemList<E> implements IItemList<E> {
     private final _ItemCollection<E> defaultImpl;
 
     /**
-     * 空の{@link IItems I_ItemCollection}を生成します。
+     * 何も要素を保持しない空の{@link IItems I_ItemCollection}を生成します。
      *
      * @param <T> {@link IItems I_ItemCollection}が保持する要素の型
      * @return 空の{@link IItems I_ItemCollection}
