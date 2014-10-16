@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.model.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * {@link List List}を扱うユーティリティです。
