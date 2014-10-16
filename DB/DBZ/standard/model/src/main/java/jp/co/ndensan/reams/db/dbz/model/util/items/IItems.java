@@ -36,9 +36,9 @@ public interface IItems<E> extends Iterable<E> {
     <R> IItems<R> map(IFunction<? super E, ? extends R> mapper);
 
     /**
-     * 保持する要素が空のとき{@code true}を返します。
+     * 保持する要素がない空のとき{@code true}を返します。
      *
-     * @return 保持する要素が空のとき{@code true}, そうでなければ{@code false}
+     * @return 保持する要素がないとき{@code true}
      */
     boolean isEmpty();
 
@@ -53,7 +53,7 @@ public interface IItems<E> extends Iterable<E> {
      * 引数の要素を含むかどうかを返します。
      *
      * @param o 探索対象
-     * @return 含む場合は{@code true}, そうでなければ{@code false}
+     * @return 含む場合は{@code true}, 含まなければ{@code false}
      */
     boolean contains(Object o);
 
@@ -61,7 +61,7 @@ public interface IItems<E> extends Iterable<E> {
      * 引数のcollectionの要素をすべて含むかどうかを返します。
      *
      * @param c 探索対象のcollection
-     * @return 含む場合は{@code true}, そうでなければ{@code false}
+     * @return すべて含む場合は{@code true}, そうでなければ{@code false}
      */
     boolean containsAll(Collection<?> c);
 
@@ -69,7 +69,7 @@ public interface IItems<E> extends Iterable<E> {
      * 引数のitemsの要素をすべて含むかどうかを返します。
      *
      * @param items 探索するIItems
-     * @return 含む場合は{@code true}, そうでなければ{@code false}
+     * @return すべて含む場合は{@code true}, そうでなければ{@code false}
      */
     boolean containsAllItems(IItems<?> items);
 
