@@ -48,13 +48,13 @@ public final class ItemList<E> implements IItemList<E> {
         return new ItemList<>(list);
     }
 
-    private ItemList(List<E> models) {
-        Objects.requireNonNull(models);
-        if (models.contains(null)) {
+    private ItemList(List<E> list) {
+        Objects.requireNonNull(list);
+        if (list.contains(null)) {
             throw new NullPointerException("nullの要素を含むため、生成できません。");
         }
-        this.elements = models;
-        this.defaultImpl = new _ItemCollection<>(models);
+        this.elements = list;
+        this.defaultImpl = new _ItemCollection<>(list);
     }
 
     @Override
