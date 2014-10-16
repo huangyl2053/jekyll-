@@ -8,7 +8,8 @@ package jp.co.ndensan.reams.db.dbz.model.util.supplier;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
 
 /**
- * {@link Throwable Throwable}なオブジェクトを生成するsupplierを提供します。
+ * {@link Throwable Throwable}なオブジェクトを生成するsupplierを提供します。<br/>
+ * 他のexceptionを追加する場合は、{@link #nullPointerException() nullPointerException()}を参考にしてください。
  *
  * @author N3327 三浦 凌
  */
@@ -38,8 +39,8 @@ public final class ExceptionSuppliers {
      *
      * @return NullPointerExceptionのsupplier
      */
-    //<editor-fold defaultstate="collapsed" desc="ForNullPointerException">
     public static IExceptionSupplier<NullPointerException> nullPointerException() {
+        //<editor-fold defaultstate="collapsed" desc="return supplier for NullPointerException">
         return new IExceptionSupplier<NullPointerException>() {
             @Override
             public NullPointerException get() {
@@ -56,6 +57,6 @@ public final class ExceptionSuppliers {
                 };
             }
         };
+        //</editor-fold>
     }
-    //</editor-fold>
 }

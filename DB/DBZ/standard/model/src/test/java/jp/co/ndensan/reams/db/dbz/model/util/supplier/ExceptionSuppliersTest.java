@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.util.supplier;
 
-import jp.co.ndensan.reams.db.dbz.model.util.supplier.ExceptionSuppliers;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.isA;
