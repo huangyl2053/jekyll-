@@ -86,18 +86,20 @@ public class ItemListTest extends DbzTestBase {
             private IItemList<RString> created;
             private final RString a = new RString("1"), b = new RString("2"), c = new RString("3");
 
-            @Before
-            public void setUp() {
-                created = sut.of(toList(a, b, c));
-            }
-
-            private List<RString> toList(RString... a) {
-                return Arrays.asList(a);
-            }
-
             @Test
             public void of_により空でないListから生成したIItemListは_isEmptyでfalseを返す() {
+                created = sut.of(Arrays.asList(a, b, c));
                 assertThat(created.isEmpty(), is(false));
+            }
+
+            @Test(expected = NullPointerException.class)
+            public void of_にnullを渡した時_NullPointerExceptionをスローする() {
+                sut.of(null);
+            }
+
+            @Test(expected = NullPointerException.class)
+            public void of_にnullを含むlistを渡した時_NullPointerExceptionをスローする() {
+                sut.of(Arrays.asList(a, b, null, c));
             }
         }
     }
