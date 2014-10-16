@@ -18,12 +18,12 @@ import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 public interface IItemList<E> extends IItems<E> {
 
     /**
-     * 保持する要素をすべて{@link IFunction IFunction}により変換し、
+     * 保持する要素をすべて{@link IFunction mapper}により変換し、
      * その結果をもった新しい{@link IItemList IItemList}を返します。
      *
      * @param <R> 変換後の{@link IItemList IItemList}が保持する型
-     * @param mapper 変換に用いる{@link IFunction IFunction}
-     * @return applyerにより変換された結果を保持した{@link IItemList ItemList}
+     * @param mapper 変換に用いる{@link IFunction mapper}
+     * @return mapperにより変換された結果を保持した{@link IItemList ItemList}
      */
     @Override
     <R> IItemList<R> map(IFunction<? super E, ? extends R> mapper);
