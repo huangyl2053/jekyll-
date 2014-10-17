@@ -24,7 +24,7 @@ public final class ValueObjects {
     private ValueObjects() {
     }
 
-    //<editor-fold defaultstate="collapsed" desc="ErrorMessage関係">
+//<editor-fold defaultstate="collapsed" desc="    /* ErrorMessage関係 */ ">
     /**
      * ValueObjectsがスローするexceptionで用いるメッセージです。
      */
@@ -52,28 +52,28 @@ public final class ValueObjects {
     }
 
     private static Message createErrorMessageFor(ILengthOfValueMatcher condition) {
-        StringBuilder keta = new StringBuilder(condition.specifiedLength()).append("桁");
+        StringBuilder digits = new StringBuilder().append(condition.specifiedLength()).append("桁");
         switch (condition.type()) {
             case equal:
-                return 項目に対する制約.getMessage().replace("value", keta.toString());
+                return 項目に対する制約.getMessage().replace("value", digits.toString());
             case lessThan:
-                return 項目に対する制約.getMessage().replace("value", keta.append("未満").toString());
+                return 項目に対する制約.getMessage().replace("value", digits.append("未満").toString());
             case lessOrEqual:
-                return 項目に対する制約.getMessage().replace("value", keta.append("以下").toString());
+                return 項目に対する制約.getMessage().replace("value", digits.append("以下").toString());
             default:
                 return MyErrorMessages.桁数_不正.getMessage();
         }
     }
 
     private static Message createErrorMessageFrom(int specifiedLength, IValidLengthMathcer condition) {
-        StringBuilder keta = new StringBuilder(specifiedLength).append("桁");
+        StringBuilder digits = new StringBuilder().append(specifiedLength).append("桁");
         switch (condition.requestType()) {
             case equal:
-                return 項目に対する制約.getMessage().replace("value", keta.toString());
+                return 項目に対する制約.getMessage().replace("value", digits.toString());
             case lessThan:
-                return 項目に対する制約.getMessage().replace("value", keta.append("超過").toString());
+                return 項目に対する制約.getMessage().replace("value", digits.append("超過").toString());
             case lessOrEqual:
-                return 項目に対する制約.getMessage().replace("value", keta.append("以上").toString());
+                return 項目に対する制約.getMessage().replace("value", digits.append("以上").toString());
             default:
                 return MyErrorMessages.桁数_不正.getMessage();
         }
@@ -172,7 +172,7 @@ public final class ValueObjects {
 
     }
 
-    //<editor-fold defaultstate="collapsed" desc="public enum LengthCheckType{}">
+//<editor-fold defaultstate="collapsed" desc="    public enum LengthCheckType{}">
     public enum LengthCheckType {
 
         lessThan {
@@ -302,7 +302,7 @@ public final class ValueObjects {
         LengthCheckType type();
     }
 
-//<editor-fold defaultstate="collapsed" desc="class _LengthOfValueMathcher implements ILengthOfValueMatcher{}">
+//<editor-fold defaultstate="collapsed" desc="    private static class _LengthOfValueMathcher implements ILengthOfValueMatcher{}">
     private static final class _LengthOfValueMathcher implements ILengthOfValueMatcher {
 
         private final int theLength;
@@ -439,7 +439,7 @@ public final class ValueObjects {
         RString value();
     }
 
-//<editor-fold defaultstate="collapsed" desc="class _RStringValidLengthMathcher implements IRStringValidLengthMathcher {}">
+//<editor-fold defaultstate="collapsed" desc="    private static class _RStringValidLengthMathcher implements IRStringValidLengthMathcher {}">
     private final static class _RStringValidLengthMathcher implements IRStringValidLengthMathcher {
 
         private final RString theValue;
@@ -528,7 +528,7 @@ public final class ValueObjects {
 
     }
 
-//<editor-fold defaultstate="collapsed" desc="class _ValueObjectValidLengthMatcher implements IValueObjectValidLengthMatcher{}">
+//<editor-fold defaultstate="collapsed" desc="    private static class _ValueObjectValidLengthMatcher implements IValueObjectValidLengthMatcher{}">
     private final static class _ValueObjectValidLengthMatcher<V extends IValueObject<RString>>
             implements IValueObjectValidLengthMatcher<V> {
 
