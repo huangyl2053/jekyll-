@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.model.util.items;
 
 import java.util.Collection;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 
@@ -72,6 +73,15 @@ public interface IItems<E> extends Iterable<E> {
      * @return すべて含む場合は{@code true}, そうでなければ{@code false}
      */
     boolean containsAllItems(IItems<?> items);
+
+    /**
+     * 引数の{@link ICondition IConditon}に該当する要素があるかどうかを返します。
+     *
+     * @param condition 条件
+     * @return {@link ICondition IConditon}に該当する要素があれば{@code true},
+     * なければ{@code false}
+     */
+    boolean containsLike(ICondition<? super E> condition);
 
     /**
      * 保持する要素が1件の時{@code true}を返します。
