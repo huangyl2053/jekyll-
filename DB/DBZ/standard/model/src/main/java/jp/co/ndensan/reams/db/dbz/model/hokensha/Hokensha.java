@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
  *
  * @author N3327 三浦 凌
  */
-final class _Hokensha implements IHokensha {
+public final class Hokensha implements IHokensha {
 
     private final ShoKisaiHokenshaNo hokenshaNo;
     private final AtenaJusho jusho;
@@ -31,7 +31,7 @@ final class _Hokensha implements IHokensha {
      * @param yubinNo 郵便番号
      * @param telNo 電話番号
      */
-    _Hokensha(ShoKisaiHokenshaNo hokenshaNo, AtenaJusho jusho, YubinNo yubinNo, TelNo telNo) {
+    public Hokensha(ShoKisaiHokenshaNo hokenshaNo, AtenaJusho jusho, YubinNo yubinNo, TelNo telNo) {
         this.hokenshaNo = Objects.requireNonNull(hokenshaNo);
         this.jusho = Objects.requireNonNull(jusho);
         this.yubinNo = Objects.requireNonNull(yubinNo);
