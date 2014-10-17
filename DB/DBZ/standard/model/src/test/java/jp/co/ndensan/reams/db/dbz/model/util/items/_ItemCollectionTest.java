@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -240,6 +241,47 @@ public class _ItemCollectionTest extends DbzTestBase {
         public void containsAllItems_は引数のitemsが保持する要素をコンストラクタ引数のcollectionが保持する時_trueを返す() {
             target = new _ItemCollection<>(asList(VAL1, VAL2, VAL3, VAL1));
             assertThat(sut.containsAllItems(target), is(true));
+        }
+    }
+
+    public static class containsLike extends DbzTestBase {
+
+        private _ItemCollection<RString> sut;
+        private _ItemCollection<RString> target;
+        private List<RString> input;
+
+        @Before
+        public void setUp() {
+            sut = new _ItemCollection<>(asList(VAL1, VAL2, VAL3));
+
+        }
+
+        @Test
+        public void containsLike_は引数の条件に当てはまるオブジェクトがある時_trueを返す() {
+            assertThat(sut.containsLike(equalsVAL1()), is(true));
+        }
+
+        private ICondition<RString> equalsVAL1() {
+            return new ICondition<RString>() {
+                @Override
+                public boolean check(RString t) {
+                    return t.equals(VAL1);
+                }
+            };
+        }
+
+        @Test
+        public void containsLike_は引数の条件に当てはまるオブジェクトが無い時_falseを返す() {
+            assertThat(sut.containsLike(lengthIsFive()), is(false));
+        }
+
+        private ICondition<RString> lengthIsFive() {
+            return new ICondition<RString>() {
+                @Override
+                public boolean check(RString t) {
+                    return t.length() == 5;
+                }
+            };
         }
     }
 }
