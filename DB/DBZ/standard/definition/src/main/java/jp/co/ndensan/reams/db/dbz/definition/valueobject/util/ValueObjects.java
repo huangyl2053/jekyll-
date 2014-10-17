@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject.util;
 
+import java.util.Arrays;
+import java.util.List;
 import static jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages.不正;
 import static jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages.項目に対する制約;
 import static jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages.値がnull;
@@ -26,56 +28,77 @@ public final class ValueObjects {
 
 //<editor-fold defaultstate="collapsed" desc="    /* ErrorMessage関係 */ ">
     /**
+     * exceptionのメッセージに用いる定数群です。
+     */
+    private enum Literal {
+
+        value("value"),
+        length("length"),
+        桁("桁");
+
+        private final RString theValue;
+
+        private Literal(String value) {
+            this.theValue = new RString(value);
+        }
+
+        @Override
+        public String toString() {
+            return this.theValue.toString();
+        }
+    }
+
+    /**
      * ValueObjectsがスローするexceptionで用いるメッセージです。
      */
     private enum MyErrorMessages {
 
-        半角数字のみにしろ(項目に対する制約, "value", "半角数字のみ"),
-        半角英数のみにしろ(項目に対する制約, "value", "半角英数字のみ"),
-        桁数が不正だ(不正, "value"),
-        lengthは0以上にしろ(項目に対する制約, "length", "0以上"),
-        lengthは1以上にしろ(項目に対する制約, "length", "1以上");
+        半角数字のみにしろ(項目に対する制約, Literal.value.toString(), "半角数字のみ"),
+        半角英数のみにしろ(項目に対する制約, Literal.value.toString(), "半角英数字のみ"),
+        桁数が不正だ(不正, Literal.value.toString()),
+        lengthは0以上にしろ(項目に対する制約, Literal.length.toString(), "0以上"),
+        lengthは1以上にしろ(項目に対する制約, Literal.length.toString(), "1以上");
         private final Message message;
-        private final String[] replaces;
+        private final List<String> replaces;
 
         private MyErrorMessages(IMessageGettable mg, String... replaces) {
-            this.replaces = replaces;
-            this.message = mg.getMessage().replace(replaces);
+            this.replaces = Arrays.asList(replaces);
+            this.message = mg.getMessage();
         }
 
         /**
-         * Exceptionの発生原因によるメッセージへすでに置き換えたmessageを返します。
+         * Exceptionの発生原因によるメッセージを返します。
          *
          * @return message
          */
         Message getMessage() {
-            return this.message.replace(replaces);
+            return this.message.replace(replaces.toArray(new String[replaces.size()]));
         }
     }
 
-    private static Message createErrorMessageFor(ILengthOfValueMatcher condition) {
-        StringBuilder digits = new StringBuilder().append(condition.specifiedLength()).append("桁");
-        switch (condition.type()) {
+    private static Message createErrorMessageFor(ILengthOfValueMatcher matcher) {
+        StringBuilder digits = new StringBuilder().append(matcher.specifiedLength()).append(Literal.桁);
+        switch (matcher.type()) {
             case equal:
-                return 項目に対する制約.getMessage().replace("value", digits.toString());
+                return 項目に対する制約.getMessage().replace(Literal.value.toString(), digits.toString());
             case lessThan:
-                return 項目に対する制約.getMessage().replace("value", digits.append("未満").toString());
+                return 項目に対する制約.getMessage().replace(Literal.value.toString(), digits.append("未満").toString());
             case lessOrEqual:
-                return 項目に対する制約.getMessage().replace("value", digits.append("以下").toString());
+                return 項目に対する制約.getMessage().replace(Literal.value.toString(), digits.append("以下").toString());
             default:
                 return MyErrorMessages.桁数が不正だ.getMessage();
         }
     }
 
-    private static Message createErrorMessageFrom(int specifiedLength, IValidLengthMathcer condition) {
-        StringBuilder digits = new StringBuilder().append(specifiedLength).append("桁");
-        switch (condition.requestType()) {
+    private static Message createErrorMessageFrom(int specifiedLength, IValidLengthMathcer mathcer) {
+        StringBuilder digits = new StringBuilder().append(specifiedLength).append(Literal.桁);
+        switch (mathcer.requestType()) {
             case equal:
-                return 項目に対する制約.getMessage().replace("value", digits.toString());
+                return 項目に対する制約.getMessage().replace(Literal.value.name(), digits.toString());
             case lessThan:
-                return 項目に対する制約.getMessage().replace("value", digits.append("超過").toString());
+                return 項目に対する制約.getMessage().replace(Literal.value.name(), digits.append("超過").toString());
             case lessOrEqual:
-                return 項目に対する制約.getMessage().replace("value", digits.append("以上").toString());
+                return 項目に対する制約.getMessage().replace(Literal.value.name(), digits.append("以上").toString());
             default:
                 return MyErrorMessages.桁数が不正だ.getMessage();
         }
@@ -95,7 +118,7 @@ public final class ValueObjects {
         if (value != null) {
             return value;
         }
-        throw new IllegalInitialValueException(値がnull.getReplacedMessage("value"));
+        throw new IllegalInitialValueException(値がnull.getReplacedMessage(Literal.value.name()));
     }
 
     /**
@@ -175,8 +198,14 @@ public final class ValueObjects {
     }
 
 //<editor-fold defaultstate="collapsed" desc="    public enum LengthCheckType{}">
+    /**
+     * 文字列の長さチェックの種類です。
+     */
     public enum LengthCheckType {
 
+        /**
+         * 未満
+         */
         lessThan {
                     @Override
                     boolean check(RString rstr, int length) {
@@ -194,6 +223,9 @@ public final class ValueObjects {
                         return length < rstr.length();
                     }
                 },
+        /**
+         * 同じ
+         */
         equal {
                     @Override
                     boolean check(RString rstr, int length) {
@@ -211,6 +243,9 @@ public final class ValueObjects {
                         return length == rstr.length();
                     }
                 },
+        /**
+         * 以下
+         */
         lessOrEqual {
                     @Override
                     boolean check(RString rstr, int length) {
@@ -379,8 +414,11 @@ public final class ValueObjects {
      * @param matcher lengthと比較するmather
      * @return matherの内容を満たす場合は、検査対象の文字列
      * @throws IllegalInitialValueException matherの内容を満たさない場合
+     * @throws IllegalArgumentException
+     * mahterのタイプが{@link LengthCheckType#lessThan lessThan}でlengthが1より小さい時、もしくは、lengthが0より小さい時
      */
-    public static RString requireLength(int length, IRStringValidLengthMathcher matcher) throws IllegalInitialValueException {
+    public static RString requireLength(int length, IRStringValidLengthMathcher matcher)
+            throws IllegalInitialValueException, IllegalArgumentException {
         if (matcher.requestType() == LengthCheckType.lessThan && length < 1) {
             throw new IllegalArgumentException(MyErrorMessages.lengthは1以上にしろ.getMessage().evaluate());
         }
@@ -402,8 +440,11 @@ public final class ValueObjects {
      * @param matcher lengthと比較するmather
      * @return matherの内容を満たす場合は、検査対象の文字列をもつvalueObject
      * @throws IllegalInitialValueException matherの内容を満たさない場合
+     * @throws IllegalArgumentException
+     * mahterのタイプが{@link LengthCheckType#lessThan lessThan}でlengthが1より小さい時、もしくは、lengthが0より小さい時
      */
-    public static <V extends IValueObject<RString>> V requireLength(int length, IValueObjectValidLengthMatcher<V> matcher) throws IllegalInitialValueException {
+    public static <V extends IValueObject<RString>> V requireLength(int length, IValueObjectValidLengthMatcher<V> matcher)
+            throws IllegalInitialValueException, IllegalArgumentException {
         if (matcher.requestType() == LengthCheckType.lessThan && length < 1) {
             throw new IllegalArgumentException(MyErrorMessages.lengthは1以上にしろ.getMessage().evaluate());
         }
@@ -463,7 +504,7 @@ public final class ValueObjects {
     }
 
 //<editor-fold defaultstate="collapsed" desc="    private static class _RStringValidLengthMathcher implements IRStringValidLengthMathcher {}">
-    private final static class _RStringValidLengthMathcher implements IRStringValidLengthMathcher {
+    private static final class _RStringValidLengthMathcher implements IRStringValidLengthMathcher {
 
         private final RString theValue;
         private final LengthCheckType type;
@@ -534,10 +575,10 @@ public final class ValueObjects {
         /**
          * 検査対象の{@link RString 文字列}を保持する{@link IValueObject valueObject}を返します。
          *
-         * @return
+         * @return 検査対象の{@link RString 文字列}を保持する{@link IValueObject valueObject}
          */
         @Override
-        public V value();
+        V value();
 
         /**
          * 引数の文字列の長さと{@link #value() value}が保持する文字列を比較して、
@@ -552,7 +593,7 @@ public final class ValueObjects {
     }
 
 //<editor-fold defaultstate="collapsed" desc="    private static class _ValueObjectValidLengthMatcher implements IValueObjectValidLengthMatcher{}">
-    private final static class _ValueObjectValidLengthMatcher<V extends IValueObject<RString>>
+    private static final class _ValueObjectValidLengthMatcher<V extends IValueObject<RString>>
             implements IValueObjectValidLengthMatcher<V> {
 
         private final V theValue;
