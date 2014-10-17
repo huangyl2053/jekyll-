@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.model.util.Lists;
+import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.DbOptional;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
@@ -90,5 +91,15 @@ final class _ItemCollection<E> implements IItems<E> {
     @Override
     public boolean containsAllItems(IItems<?> items) {
         return this.elements.containsAll(items.asList());
+    }
+
+    @Override
+    public boolean containsLike(ICondition<? super E> condition) {
+        for (E element : elements) {
+            if (condition.check(element)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
