@@ -1,0 +1,73 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "0",
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0020002",
+   "layoutTitle": "賦課エラー修正",
+   "eventName": "nextFukaKosei",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB8120001",
+   "toLayoutTitle": null,
+   "toEventName": ""
+  },
+  {
+   "id": "1",
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB8120001",
+   "layoutTitle": null,
+   "eventName": "",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB3110001",
+   "toLayoutTitle": null,
+   "toEventName": ""
+  },
+  {
+   "id": "2",
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB3110001",
+   "layoutTitle": null,
+   "eventName": "",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0020002",
+   "toLayoutTitle": "賦課エラー修正",
+   "toEventName": ""
+  },
+  {
+   "id": "3",
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0020002",
+   "layoutTitle": "賦課エラー修正",
+   "eventName": "nextShikakuFuseigo",
+   "toLayoutSubGyomuCode": "DBA",
+   "toLayoutName": "DBA4010011",
+   "toLayoutTitle": null,
+   "toEventName": ""
+  },
+  {
+   "id": "4",
+   "layoutSubGyomuCode": "DBA",
+   "layoutName": "DBA4010011",
+   "layoutTitle": null,
+   "eventName": "",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB8120001",
+   "toLayoutTitle": null,
+   "toEventName": ""
+  },
+  {
+   "id": "5",
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB8120001",
+   "layoutTitle": null,
+   "eventName": "",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0020002",
+   "toLayoutTitle": "賦課エラー修正",
+   "toEventName": ""
+  }
+ ],
+ "wizardOrderList": [],
+ "subGyomuCode": "DBB",
+ "uiContainerName": "DBBUC00201"
+}
