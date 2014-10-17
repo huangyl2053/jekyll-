@@ -30,9 +30,11 @@ public final class ValueObjects {
      */
     private enum MyErrorMessages {
 
-        半角数字のみ(項目に対する制約, "value", "半角数字のみ"),
-        半角英数のみ(項目に対する制約, "value", "半角英数字のみ"),
-        桁数_不正(不正, "value");
+        半角数字のみにしろ(項目に対する制約, "value", "半角数字のみ"),
+        半角英数のみにしろ(項目に対する制約, "value", "半角英数字のみ"),
+        桁数が不正だ(不正, "value"),
+        lengthは0以上にしろ(項目に対する制約, "length", "0以上"),
+        lengthは1以上にしろ(項目に対する制約, "length", "1以上");
         private final Message message;
         private final String[] replaces;
 
@@ -61,7 +63,7 @@ public final class ValueObjects {
             case lessOrEqual:
                 return 項目に対する制約.getMessage().replace("value", digits.append("以下").toString());
             default:
-                return MyErrorMessages.桁数_不正.getMessage();
+                return MyErrorMessages.桁数が不正だ.getMessage();
         }
     }
 
@@ -75,7 +77,7 @@ public final class ValueObjects {
             case lessOrEqual:
                 return 項目に対する制約.getMessage().replace("value", digits.append("以上").toString());
             default:
-                return MyErrorMessages.桁数_不正.getMessage();
+                return MyErrorMessages.桁数が不正だ.getMessage();
         }
     }
 //</editor-fold>
@@ -112,7 +114,7 @@ public final class ValueObjects {
         if (RStringUtil.isHalfsizeNumberOnly(value.value())) {
             return value;
         }
-        throw new IllegalInitialValueException(MyErrorMessages.半角数字のみ.getMessage());
+        throw new IllegalInitialValueException(MyErrorMessages.半角数字のみにしろ.getMessage());
     }
 
     /**
@@ -130,7 +132,7 @@ public final class ValueObjects {
         if (RStringUtil.isHalfsizeNumberOnly(value)) {
             return value;
         }
-        throw new IllegalInitialValueException(MyErrorMessages.半角数字のみ.getMessage());
+        throw new IllegalInitialValueException(MyErrorMessages.半角数字のみにしろ.getMessage());
     }
 
     /**
@@ -149,7 +151,7 @@ public final class ValueObjects {
         if (RStringUtil.isAlphabetAndHalfsizeNumberOnly(value.value())) {
             return value;
         }
-        throw new IllegalInitialValueException(MyErrorMessages.半角英数のみ.getMessage());
+        throw new IllegalInitialValueException(MyErrorMessages.半角英数のみにしろ.getMessage());
 
     }
 
@@ -168,7 +170,7 @@ public final class ValueObjects {
         if (RStringUtil.isAlphabetAndHalfsizeNumberOnly(value)) {
             return value;
         }
-        throw new IllegalInitialValueException(MyErrorMessages.半角英数のみ.getMessage());
+        throw new IllegalInitialValueException(MyErrorMessages.半角英数のみにしろ.getMessage());
 
     }
 
@@ -337,6 +339,9 @@ public final class ValueObjects {
      * @return 文字列の長さが引数の値と一致するかどうかを調べる{@link ILengthOfValueMatcher matcher}
      */
     public static ILengthOfValueMatcher equal(final int length) {
+        if (length < 0) {
+            throw new IllegalArgumentException(MyErrorMessages.lengthは0以上にしろ.getMessage().evaluate());
+        }
         return new _LengthOfValueMathcher(length, LengthCheckType.equal);
     }
 
@@ -347,6 +352,9 @@ public final class ValueObjects {
      * @return 文字列の長さが引数の値より小さいかどうかを調べる{@link ILengthOfValueMatcher matcher}
      */
     public static ILengthOfValueMatcher lessThan(final int length) {
+        if (length < 1) {
+            throw new IllegalArgumentException(MyErrorMessages.lengthは1以上にしろ.getMessage().evaluate());
+        }
         return new _LengthOfValueMathcher(length, LengthCheckType.lessThan);
     }
 
@@ -357,6 +365,9 @@ public final class ValueObjects {
      * @return 文字列の長さが引数の値以下かどうかを調べる{@link ILengthOfValueMatcher matcher}
      */
     public static ILengthOfValueMatcher lessOrEqual(final int length) {
+        if (length < 0) {
+            throw new IllegalArgumentException(MyErrorMessages.lengthは0以上にしろ.getMessage().evaluate());
+        }
         return new _LengthOfValueMathcher(length, LengthCheckType.lessOrEqual);
     }
 
@@ -370,6 +381,12 @@ public final class ValueObjects {
      * @throws IllegalInitialValueException matherの内容を満たさない場合
      */
     public static RString requireLength(int length, IRStringValidLengthMathcher matcher) throws IllegalInitialValueException {
+        if (matcher.requestType() == LengthCheckType.lessThan && length < 1) {
+            throw new IllegalArgumentException(MyErrorMessages.lengthは1以上にしろ.getMessage().evaluate());
+        }
+        if (length < 0) {
+            throw new IllegalArgumentException(MyErrorMessages.lengthは0以上にしろ.getMessage().evaluate());
+        }
         if (matcher.matches(length)) {
             return matcher.value();
         }
@@ -387,6 +404,12 @@ public final class ValueObjects {
      * @throws IllegalInitialValueException matherの内容を満たさない場合
      */
     public static <V extends IValueObject<RString>> V requireLength(int length, IValueObjectValidLengthMatcher<V> matcher) throws IllegalInitialValueException {
+        if (matcher.requestType() == LengthCheckType.lessThan && length < 1) {
+            throw new IllegalArgumentException(MyErrorMessages.lengthは1以上にしろ.getMessage().evaluate());
+        }
+        if (length < 0) {
+            throw new IllegalArgumentException(MyErrorMessages.lengthは0以上にしろ.getMessage().evaluate());
+        }
         if (matcher.matches(length)) {
             return matcher.value();
         }
@@ -546,6 +569,9 @@ public final class ValueObjects {
         }
 
         protected RString valueAsRString() {
+            if (theValue == null) {
+                return null;
+            }
             return ((IValueObject<RString>) this.theValue).value();
         }
 

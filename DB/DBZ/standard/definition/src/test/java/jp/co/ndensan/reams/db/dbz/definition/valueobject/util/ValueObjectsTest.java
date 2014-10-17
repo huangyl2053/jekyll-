@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject.util;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.ValueObjects.ILengthOfValueMatcher;
 import static jp.co.ndensan.reams.db.dbz.definition.valueobject.util.ValueObjects.equal;
 import static jp.co.ndensan.reams.db.dbz.definition.valueobject.util.ValueObjects.lessOrEqual;
 import static jp.co.ndensan.reams.db.dbz.definition.valueobject.util.ValueObjects.lessThan;
@@ -229,6 +230,11 @@ public class ValueObjectsTest extends DbzTestBase {
         public static class equal extends DbzTestBase {
 
             @Test
+            public void requireLengthは_左にvalue_右にValueObjects$equalを置いた時_valueがnullを受け取ったら_nullを返す() {
+                assertThat(sut.requireLength((RString) null, equal(5)), is(nullValue()));
+            }
+
+            @Test
             public void requireLengthは_左にvalue_右にValueObjects$equalを置いた時_valueの文字数とequalsの引数の値が一致したら_valueを返す() {
                 assertThat(sut.requireLength(VALUE, equal(5)), is(VALUE));
             }
@@ -240,6 +246,11 @@ public class ValueObjectsTest extends DbzTestBase {
         }
 
         public static class lessThan extends DbzTestBase {
+
+            @Test
+            public void requireLengthは_左にvalue_右にValueObjects$lessThanを置いた時_valueがnullを受け取ったら_nullを返す() {
+                assertThat(sut.requireLength((RString) null, lessThan(5)), is(nullValue()));
+            }
 
             @Test
             public void requireLengthは_左にvalue_右にValueObjects$lessThanを置いた時_valueの文字数がlessThanの引数の値より小さければ_valueを返す() {
@@ -258,6 +269,11 @@ public class ValueObjectsTest extends DbzTestBase {
         }
 
         public static class lessOrEqual extends DbzTestBase {
+
+            @Test
+            public void requireLengthは_左にvalue_右にValueObjects$lessOrEqualを置いた時_valueがnullを受け取ったら_nullを返す() {
+                assertThat(sut.requireLength((RString) null, lessOrEqual(5)), is(nullValue()));
+            }
 
             @Test
             public void requireLengthは_左にvalue_右にValueObjects$lessOrEqualを置いた時_valueの文字数がlessOrEqualの引数の値より小さければ_valueを返す() {
@@ -289,6 +305,11 @@ public class ValueObjectsTest extends DbzTestBase {
         public static class equal extends DbzTestBase {
 
             @Test
+            public void requireLengthは_左にvalue_右にValueObjects$equalを置いた時_valueがnullを受け取ったら_nullを返す() {
+                assertThat(sut.requireLength((IValueObject<RString>) null, equal(5)), is(nullValue()));
+            }
+
+            @Test
             public void requireLengthは_左にvalue_右にValueObjects$equalを置いた時_valueの保持する文字列の文字数とequalsの引数の値が一致したら_valueを返す() {
                 assertThat(sut.requireLength(VALUE, equal(5)), is(VALUE));
             }
@@ -300,6 +321,11 @@ public class ValueObjectsTest extends DbzTestBase {
         }
 
         public static class lessThan extends DbzTestBase {
+
+            @Test
+            public void requireLengthは_左にvalue_右にValueObjects$lessThanを置いた時_valueがnullを受け取ったら_nullを返す() {
+                assertThat(sut.requireLength((IValueObject<RString>) null, lessThan(5)), is(nullValue()));
+            }
 
             @Test
             public void requireLengthは_左にvalue_右にValueObjects$lessThanを置いた時_valueの保持する文字列の文字数がlessThanの引数の値より小さければ_valueを返す() {
@@ -318,6 +344,11 @@ public class ValueObjectsTest extends DbzTestBase {
         }
 
         public static class lessOrEqual extends DbzTestBase {
+
+            @Test
+            public void requireLengthは_左にvalue_右にValueObjects$lessOrEqualを置いた時_valueがnullを受け取ったら_nullを返す() {
+                assertThat(sut.requireLength((IValueObject<RString>) null, lessOrEqual(5)), is(nullValue()));
+            }
 
             @Test
             public void requireLengthは_左にvalue_右にValueObjects$lessOrEqualを置いた時_valueの保持する文字列の文字数がlessOrEqualの引数の値より小さければ_valueを返す() {
@@ -348,12 +379,22 @@ public class ValueObjectsTest extends DbzTestBase {
         public static class equal extends DbzTestBase {
 
             @Test
-            public void requireLengthは_左にlength_右にValueObjects$equalを置いた時_lengthとequalsの引数の文字数が一致したら_valueを返す() {
+            public void requireLengthは_左にlength_右にValueObjects$equalを置いた時_equalsがnullを受け取ったら_nullを返す() {
+                assertThat(sut.requireLength(5, equal((RString) null)), is(nullValue()));
+            }
+
+            @Test(expected = IllegalArgumentException.class)
+            public void requireLengthは_左にlength_右にValueObjects$equalを置いた時_lengthに0より小さい数値を受け取ったら_IllegalArgumentExceptionをスローする() {
+                assertThat(sut.requireLength(-1, equal(VALUE)), is(VALUE));
+            }
+
+            @Test
+            public void requireLengthは_左にlength_右にValueObjects$equalを置いた時_lengthとequalの引数の文字数が一致したら_equalの引数を返す() {
                 assertThat(sut.requireLength(5, equal(VALUE)), is(VALUE));
             }
 
             @Test(expected = IllegalInitialValueException.class)
-            public void requireLengthは_左にlength_右にValueObjects$equalを置いた時_lengthとequalsの引数の文字数が一致しなかったら_IllegalInitialValueExceptionをスローする() {
+            public void requireLengthは_左にlength_右にValueObjects$equalを置いた時_lengthとequalの引数の文字数が一致しなかったら_IllegalInitialValueExceptionをスローする() {
                 sut.requireLength(6, equal(VALUE));
             }
         }
@@ -361,8 +402,18 @@ public class ValueObjectsTest extends DbzTestBase {
         public static class lessThan extends DbzTestBase {
 
             @Test
-            public void requireLengthは_左にlength_右にValueObjects$lessThanを置いた時_lengthがlessThanの引数の文字数より小さければ_valueを返す() {
-                assertThat(sut.requireLength(4, lessThan(VALUE)), is(VALUE));
+            public void requireLengthは_左にlength_右にValueObjects$lessThanを置いた時_lessThanがnullを受け取ったら_nullを返す() {
+                assertThat(sut.requireLength(5, lessThan((RString) null)), is(nullValue()));
+            }
+
+            @Test(expected = IllegalArgumentException.class)
+            public void requireLengthは_左にlength_右にValueObjects$lessThanを置いた時_lengthに1より小さい数値を受け取ったら_IllegalArgumentExceptionをスローする() {
+                assertThat(sut.requireLength(0, lessThan(VALUE)), is(VALUE));
+            }
+
+            @Test
+            public void requireLengthは_左にlength_右にValueObjects$lessThanを置いた時_lengthがlessThanの引数の文字数より小さければ_lessThanの引数を返す() {
+                assertThat(sut.requireLength(1, lessThan(VALUE)), is(VALUE));
             }
 
             @Test(expected = IllegalInitialValueException.class)
@@ -379,12 +430,22 @@ public class ValueObjectsTest extends DbzTestBase {
         public static class lessOrEqual extends DbzTestBase {
 
             @Test
-            public void requireLengthは_左にlength_右にValueObjects$lessOrEqualを置いた時_lengthがlessOrEqualの引数の文字数より小さければ_valueを返す() {
-                assertThat(sut.requireLength(4, lessOrEqual(VALUE)), is(VALUE));
+            public void requireLengthは_左にlength_右にValueObjects$lessOrEqualを置いた時_lessOrEqualがnullを受け取ったら_nullを返す() {
+                assertThat(sut.requireLength(5, lessOrEqual((RString) null)), is(nullValue()));
+            }
+
+            @Test(expected = IllegalArgumentException.class)
+            public void requireLengthは_左にlength_右にValueObjects$lessOrEqualを置いた時_lengthに0より小さい数値を受け取ったら_IllegalArgumentExceptionをスローする() {
+                assertThat(sut.requireLength(-1, lessThan(VALUE)), is(VALUE));
             }
 
             @Test
-            public void requireLengthは_左にlength_右にValueObjects$lessOrEqualを置いた時_lengthがlessOrEqualの引数の文字数と一致したら_valueを返す() {
+            public void requireLengthは_左にlength_右にValueObjects$lessOrEqualを置いた時_lengthがlessOrEqualの引数の文字数より小さければ_lessOrEqualの引数を返す() {
+                assertThat(sut.requireLength(0, lessOrEqual(VALUE)), is(VALUE));
+            }
+
+            @Test
+            public void requireLengthは_左にlength_右にValueObjects$lessOrEqualを置いた時_lengthがlessOrEqualの引数の文字数と一致したら_lessOrEqualの引数を返す() {
                 assertThat(sut.requireLength(5, lessOrEqual(VALUE)), is(VALUE));
             }
 
@@ -408,12 +469,22 @@ public class ValueObjectsTest extends DbzTestBase {
         public static class equal extends DbzTestBase {
 
             @Test
-            public void requireLengthは_左にlength_右にValueObjects$equalを置いた時_lengthとequalsの引数の保持する文字列の文字数が一致したら_valueを返す() {
+            public void requireLengthは_左にlength_右にValueObjects$equalを置いた時_equalがnullを受け取ったら_nullを返す() {
+                assertThat(sut.requireLength(5, equal((IValueObject<RString>) null)), is(nullValue()));
+            }
+
+            @Test(expected = IllegalArgumentException.class)
+            public void requireLengthは_左にlength_右にValueObjects$equalを置いた時_lengthに0より小さい数値を受け取ったら_IllegalArgumentExceptionをスローする() {
+                assertThat(sut.requireLength(-1, equal(VALUE)), is(VALUE));
+            }
+
+            @Test
+            public void requireLengthは_左にlength_右にValueObjects$equalを置いた時_lengthとequalの引数の保持する文字列の文字数が一致したら_equalの引数を返す() {
                 assertThat(sut.requireLength(5, equal(VALUE)), is(VALUE));
             }
 
             @Test(expected = IllegalInitialValueException.class)
-            public void requireLengthは_左にlength_右にValueObjects$equalを置いた時_lengthとequalsの引数の保持する文字列の文字数が一致しなかったら_IllegalInitialValueExceptionをスローする() {
+            public void requireLengthは_左にlength_右にValueObjects$equalを置いた時_lengthとequalの引数の保持する文字列の文字数が一致しなかったら_IllegalInitialValueExceptionをスローする() {
                 sut.requireLength(6, equal(VALUE));
             }
         }
@@ -421,8 +492,18 @@ public class ValueObjectsTest extends DbzTestBase {
         public static class lessThan extends DbzTestBase {
 
             @Test
-            public void requireLengthは_左にlength_右にValueObjects$lessThanを置いた時_lengthがlessThanの引数保持する文字列の文字数より小さければ_valueを返す() {
-                assertThat(sut.requireLength(4, lessThan(VALUE)), is(VALUE));
+            public void requireLengthは_左にlength_右にValueObjects$lessThanを置いた時_lessThanがnullを受け取ったら_nullを返す() {
+                assertThat(sut.requireLength(4, lessThan((IValueObject<RString>) null)), is(nullValue()));
+            }
+
+            @Test(expected = IllegalArgumentException.class)
+            public void requireLengthは_左にlength_右にValueObjects$lessThanを置いた時_lengthに1より小さい数値を受け取ったら_IllegalArgumentExceptionをスローする() {
+                assertThat(sut.requireLength(0, lessThan(VALUE)), is(VALUE));
+            }
+
+            @Test
+            public void requireLengthは_左にlength_右にValueObjects$lessThanを置いた時_lengthがlessThanの引数保持する文字列の文字数より小さければ_lessThanの引数を返す() {
+                assertThat(sut.requireLength(1, lessThan(VALUE)), is(VALUE));
             }
 
             @Test(expected = IllegalInitialValueException.class)
@@ -439,12 +520,22 @@ public class ValueObjectsTest extends DbzTestBase {
         public static class lessOrEqual extends DbzTestBase {
 
             @Test
-            public void requireLengthは_左にlength_右にValueObjects$lessOrEqualを置いた時_lengthがlessOrEqualの引数の保持する文字列の文字数より小さければ_valueを返す() {
-                assertThat(sut.requireLength(4, lessOrEqual(VALUE)), is(VALUE));
+            public void requireLengthは_左にlength_右にValueObjects$lessOrEqualを置いた時_lessOrEqualがnullを受け取ったら_nullを返す() {
+                assertThat(sut.requireLength(4, lessOrEqual((IValueObject<RString>) null)), is(nullValue()));
+            }
+
+            @Test(expected = IllegalArgumentException.class)
+            public void requireLengthは_左にlength_右にValueObjects$lessOrEqualを置いた時_lengthに0より小さい数値を受け取ったら_IllegalArgumentExceptionをスローする() {
+                assertThat(sut.requireLength(-1, lessOrEqual(VALUE)), is(VALUE));
             }
 
             @Test
-            public void requireLengthは_左にlength_右にValueObjects$lessOrEqualを置いた時_lengthがlessOrEqualの引数の保持する文字列の文字数と一致したら_valueを返す() {
+            public void requireLengthは_左にlength_右にValueObjects$lessOrEqualを置いた時_lengthがlessOrEqualの引数の保持する文字列の文字数より小さければ_lessOrEqualの引数を返す() {
+                assertThat(sut.requireLength(0, lessOrEqual(VALUE)), is(VALUE));
+            }
+
+            @Test
+            public void requireLengthは_左にlength_右にValueObjects$lessOrEqualを置いた時_lengthがlessOrEqualの引数の保持する文字列の文字数と一致したら_lessOrEqualの引数を返す() {
                 assertThat(sut.requireLength(5, lessOrEqual(VALUE)), is(VALUE));
             }
 
@@ -452,6 +543,39 @@ public class ValueObjectsTest extends DbzTestBase {
             public void requireLengthは_左にlength_右にValueObjects$lessOrEqualを置いた時_lengthがlessOrEqualの引数の保持する文字列の文字数より大きければ_IllegalInitialValueExceptionをスローする() {
                 sut.requireLength(6, lessOrEqual(VALUE));
             }
+        }
+    }
+
+    public static class ILengthOfValueMatcherTest extends DbzTestBase {
+
+        @Test(expected = IllegalArgumentException.class)
+        public void equalは_lengthに0より小さい数値を受け取ったら_IllegalArgumentExceptionをスローする() {
+            sut.equal(-1);
+        }
+
+        @Test
+        public void equalは_lengthに0以上の数値を受け取ったら_ILengthOfValueMatcherを生成する() {
+            assertThat(sut.equal(0), isA(ILengthOfValueMatcher.class));
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void lessOrEqualは_lengthに0より小さい数値を受け取ったら_IllegalArgumentExceptionをスローする() {
+            sut.lessOrEqual(-1);
+        }
+
+        @Test
+        public void lessOrEqualは_lengthに0以上の数値を受け取ったら_ILengthOfValueMatcherを生成する() {
+            assertThat(sut.lessOrEqual(0), isA(ILengthOfValueMatcher.class));
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void lessThanは_lengthに1より小さい数値を受け取ったら_IllegalArgumentExceptionをスローする() {
+            sut.lessThan(0);
+        }
+
+        @Test
+        public void lessThanは_lengthに1以上の数値を受け取ったら_ILengthOfValueMatcherを生成する() {
+            assertThat(sut.lessThan(1), isA(ILengthOfValueMatcher.class));
         }
     }
 }
