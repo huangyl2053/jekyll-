@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki;
 
+import java.io.Serializable;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.IllegalInitialValueException;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.ValueObjects;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public final class ShichosonShikibetsuID implements IValueObject<RString>, Comparable<ShichosonShikibetsuID> {
+public final class ShichosonShikibetsuID implements IValueObject<RString>, Comparable<ShichosonShikibetsuID>, Serializable {
 
     private static final int LENGTH = 2;
     private final RString theValue;

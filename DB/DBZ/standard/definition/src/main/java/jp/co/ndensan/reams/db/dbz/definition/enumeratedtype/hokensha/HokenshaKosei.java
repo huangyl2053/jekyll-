@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -14,7 +17,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum HokenshaKosei {
 
-    単一市町村("1"), 広域市町村("2");
+    /**
+     * 単一市町村の保険者であることを表します。<br/>
+     * コード:"1"
+     */
+    単一市町村("1"),
+    /**
+     * 広域保険者であることを表します。<br/>
+     * コード:"2"
+     */
+    広域市町村("2");
     private final RString theCode;
 
     private HokenshaKosei(String code) {
@@ -29,4 +41,38 @@ public enum HokenshaKosei {
     public RString code() {
         return this.theCode;
     }
+
+    /**
+     * 引数のコードに対応する HokenshaKosei を返します。
+     *
+     * @param code コード
+     * @return コードに対応する HokenshaKosei
+     * @throws IllegalArgumentException コードに対応する HokenshaKosei が無い時
+     */
+    public static HokenshaKosei toValue(RString code) throws IllegalArgumentException {
+        HokenshaKosei value = CodeToValue.get(code);
+        if (value != null) {
+            return value;
+        }
+        throw new IllegalArgumentException();
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="CodeToValue">
+    private static final class CodeToValue {
+
+        private static final Map<RString, HokenshaKosei> DICTHIONARY;
+
+        static {
+            Map<RString, HokenshaKosei> map = new HashMap<>();
+            for (HokenshaKosei value : values()) {
+                map.put(value.code(), value);
+            }
+            DICTHIONARY = Collections.unmodifiableMap(map);
+        }
+
+        static HokenshaKosei get(RString code) {
+            return DICTHIONARY.get(code);
+        }
+    }
+    //</editor-fold>
 }

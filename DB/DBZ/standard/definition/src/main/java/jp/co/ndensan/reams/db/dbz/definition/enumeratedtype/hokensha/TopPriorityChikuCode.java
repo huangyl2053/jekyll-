@@ -11,25 +11,35 @@ import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 都道府県名の印字有無です。
+ * 最優先地区コードの区分です。
  *
  * @author N3327 三浦 凌
  */
-public enum TodofukenNamePrint {
+public enum TopPriorityChikuCode {
 
     /**
-     * 印字することを表します。<br/>
+     * 地区コード１<br/>
      * コード:"1"
      */
-    印字する("1"),
+    地区コード１("1"),
     /**
-     * 印字しないことを表します。<br/>
-     * コード:"0"
+     * 地区コード２<br/>
+     * コード:"2"
      */
-    印字しない("0");
+    地区コード２("2"),
+    /**
+     * 地区コード３<br/>
+     * コード:"3"
+     */
+    地区コード３("3"),
+    /**
+     * 未使用<br/>
+     * コード:"4"
+     */
+    未使用("4");
     private final RString theCode;
 
-    private TodofukenNamePrint(String code) {
+    private TopPriorityChikuCode(String code) {
         this.theCode = new RString(code);
     }
 
@@ -43,14 +53,14 @@ public enum TodofukenNamePrint {
     }
 
     /**
-     * 引数のコードに対応する TodofukenNamePrint を返します。
+     * 引数のコードに対応する TopPriorityChikuCode を返します。
      *
      * @param code コード
-     * @return コードに対応する TodofukenNamePrint
-     * @throws IllegalArgumentException コードに対応するTodofukenNamePrint が無い時
+     * @return コードに対応する TopPriorityChikuCode
+     * @throws IllegalArgumentException コードに対応する TopPriorityChikuCode が無い時
      */
-    public static TodofukenNamePrint toValue(RString code) throws IllegalArgumentException {
-        TodofukenNamePrint value = CodeToValue.get(code);
+    public static TopPriorityChikuCode toValue(RString code) throws IllegalArgumentException {
+        TopPriorityChikuCode value = CodeToValue.get(code);
         if (value != null) {
             return value;
         }
@@ -60,17 +70,17 @@ public enum TodofukenNamePrint {
     //<editor-fold defaultstate="collapsed" desc="CodeToValue">
     private static final class CodeToValue {
 
-        private static final Map<RString, TodofukenNamePrint> DICTHIONARY;
+        private static final Map<RString, TopPriorityChikuCode> DICTHIONARY;
 
         static {
-            Map<RString, TodofukenNamePrint> map = new HashMap<>();
-            for (TodofukenNamePrint value : values()) {
+            Map<RString, TopPriorityChikuCode> map = new HashMap<>();
+            for (TopPriorityChikuCode value : values()) {
                 map.put(value.code(), value);
             }
             DICTHIONARY = Collections.unmodifiableMap(map);
         }
 
-        static TodofukenNamePrint get(RString code) {
+        static TopPriorityChikuCode get(RString code) {
             return DICTHIONARY.get(code);
         }
     }
