@@ -11,13 +11,15 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.model.koiki.KoikiKoseiShichosonModel;
+import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster.*;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -40,7 +42,7 @@ public class KoseiShichosonMasterDac implements IReplaceable<DbT7051KoseiShichos
      * @return 合併情報リスト
      */
     @Transaction
-    public List<IKoikiKoseiShichoson> select(ITrueFalseCriteria 検索条件) {
+    public IItemList<IKoikiKoseiShichoson> select(ITrueFalseCriteria 検索条件) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT7051KoseiShichosonMasterEntity> entityList = accessor.
                 select().
@@ -50,12 +52,12 @@ public class KoseiShichosonMasterDac implements IReplaceable<DbT7051KoseiShichos
         return getModelList(entityList);
     }
 
-    private List<IKoikiKoseiShichoson> getModelList(List<DbT7051KoseiShichosonMasterEntity> entityList) {
+    private IItemList<IKoikiKoseiShichoson> getModelList(List<DbT7051KoseiShichosonMasterEntity> entityList) {
         List<IKoikiKoseiShichoson> list = new ArrayList<>();
         for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
             list.add(new KoikiKoseiShichosonModel(entity));
         }
-        return list;
+        return ItemList.of(list);
     }
 
     @Override

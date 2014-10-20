@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiJohoModel;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;
+import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -38,7 +40,7 @@ public class GappeiJohoDac implements IReplaceable<DbT7055GappeiJohoEntity>, IDe
      * @return 合併情報リスト
      */
     @Transaction
-    public List<IGappeiJoho> selectAll() {
+    public IItemList<IGappeiJoho> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT7055GappeiJohoEntity> entityList = accessor.
                 select().
@@ -54,7 +56,7 @@ public class GappeiJohoDac implements IReplaceable<DbT7055GappeiJohoEntity>, IDe
      * @return 合併情報リスト
      */
     @Transaction
-    public List<IGappeiJoho> select(ITrueFalseCriteria 検索条件) {
+    public IItemList<IGappeiJoho> select(ITrueFalseCriteria 検索条件) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT7055GappeiJohoEntity> entityList = accessor.
                 select().
@@ -64,12 +66,12 @@ public class GappeiJohoDac implements IReplaceable<DbT7055GappeiJohoEntity>, IDe
         return getModelList(entityList);
     }
 
-    private List<IGappeiJoho> getModelList(List<DbT7055GappeiJohoEntity> entityList) {
+    private IItemList<IGappeiJoho> getModelList(List<DbT7055GappeiJohoEntity> entityList) {
         List<IGappeiJoho> list = new ArrayList<>();
         for (DbT7055GappeiJohoEntity entity : entityList) {
             list.add(new GappeiJohoModel(entity));
         }
-        return list;
+        return ItemList.of(list);
     }
 
     @Override

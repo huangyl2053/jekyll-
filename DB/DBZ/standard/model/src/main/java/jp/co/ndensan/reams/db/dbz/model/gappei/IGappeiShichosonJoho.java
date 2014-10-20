@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.gappei;
 
-import java.util.List;
+import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 
 /**
  * 合併市町村情報のインターフェースです。
@@ -19,12 +20,12 @@ public interface IGappeiShichosonJoho {
      *
      * @return 合併情報
      */
-    IGappeiJoho get合併情報();
+    IOptional<IGappeiJoho> get合併情報();
 
     /**
      * 合併市町村を返します。
      *
      * @return 合併市町村
      */
-    List<IGappeiShichoson> get合併市町村();
+    IItemList<IGappeiShichoson> get合併市町村();
 }

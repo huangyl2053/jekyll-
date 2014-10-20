@@ -11,13 +11,15 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonModel;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
+import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson.*;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -38,7 +40,7 @@ public class GappeiShichosonDac implements IReplaceable<DbT7056GappeiShichosonEn
      * @return 合併市町村リスト
      */
     @Transaction
-    public List<IGappeiShichoson> selectAll() {
+    public IItemList<IGappeiShichoson> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT7056GappeiShichosonEntity> entityList = accessor.
                 select().
@@ -54,7 +56,7 @@ public class GappeiShichosonDac implements IReplaceable<DbT7056GappeiShichosonEn
      * @return 合併情報リスト
      */
     @Transaction
-    public List<IGappeiShichoson> select(ITrueFalseCriteria 検索条件) {
+    public IItemList<IGappeiShichoson> select(ITrueFalseCriteria 検索条件) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT7056GappeiShichosonEntity> entityList = accessor.
                 select().
@@ -64,12 +66,12 @@ public class GappeiShichosonDac implements IReplaceable<DbT7056GappeiShichosonEn
         return getModelList(entityList);
     }
 
-    private List<IGappeiShichoson> getModelList(List<DbT7056GappeiShichosonEntity> entityList) {
+    private IItemList<IGappeiShichoson> getModelList(List<DbT7056GappeiShichosonEntity> entityList) {
         List<IGappeiShichoson> list = new ArrayList<>();
         for (DbT7056GappeiShichosonEntity entity : entityList) {
             list.add(new GappeiShichosonModel(entity));
         }
-        return list;
+        return ItemList.of(list);
     }
 
     @Override

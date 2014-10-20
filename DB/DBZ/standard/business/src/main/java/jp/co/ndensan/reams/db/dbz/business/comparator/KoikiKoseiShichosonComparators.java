@@ -14,35 +14,41 @@ import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
  *
  * @author N8156 宮本 康
  */
-public final class KoikiKoseiShichosonComparators implements Comparator<IKoikiKoseiShichoson> {
+public final class KoikiKoseiShichosonComparators {
 
     /**
-     * 昇順ソート用のKoikiKoseiShichosonComparatorsです。
+     * 地域番号用のコンパレータです。
      */
-    public static final KoikiKoseiShichosonComparators ASC;
-    /**
-     * 降順ソート用のKoikiKoseiShichosonComparatorsです。
-     */
-    public static final KoikiKoseiShichosonComparators DESC;
+    public static final class ChiikiNoComparator implements Comparator<IKoikiKoseiShichoson> {
 
-    static {
-        ASC = new KoikiKoseiShichosonComparators(SortOrder.ASC);
-        DESC = new KoikiKoseiShichosonComparators(SortOrder.DESC);
-    }
-    private final SortOrder order;
+        /**
+         * 昇順ソート用のChiikiNoComparatorです。
+         */
+        public static final ChiikiNoComparator ASC;
+        /**
+         * 降順ソート用のChiikiNoComparatorです。
+         */
+        public static final ChiikiNoComparator DESC;
 
-    /**
-     * ソート順を指定して、KoikiKoseiShichosonComparatorsを生成します。<br /> {@link SortOrder#ASC SortOrder.ASC}のときは、昇順ソート用のComparatorを、
-     * {@link SortOrder#DESC SortOrder.DESC}のときは、降順ソート用のComparatorを生成します。
-     *
-     * @param order {@link SortOrder ソート順}
-     */
-    private KoikiKoseiShichosonComparators(SortOrder order) {
-        this.order = order;
-    }
+        static {
+            ASC = new ChiikiNoComparator(SortOrder.ASC);
+            DESC = new ChiikiNoComparator(SortOrder.DESC);
+        }
+        private final SortOrder order;
 
-    @Override
-    public int compare(IKoikiKoseiShichoson o1, IKoikiKoseiShichoson o2) {
-        return o1.get合併情報地域番号().compareTo(o2.get合併情報地域番号()) * order.getRate();
+        /**
+         * ソート順を指定して、ChiikiNoComparatorを生成します。<br /> {@link SortOrder#ASC SortOrder.ASC}のときは、昇順ソート用のComparatorを、
+         * {@link SortOrder#DESC SortOrder.DESC}のときは、降順ソート用のComparatorを生成します。
+         *
+         * @param order {@link SortOrder ソート順}
+         */
+        private ChiikiNoComparator(SortOrder order) {
+            this.order = order;
+        }
+
+        @Override
+        public int compare(IKoikiKoseiShichoson o1, IKoikiKoseiShichoson o2) {
+            return o1.get合併情報地域番号().compareTo(o2.get合併情報地域番号()) * order.getRate();
+        }
     }
 }
