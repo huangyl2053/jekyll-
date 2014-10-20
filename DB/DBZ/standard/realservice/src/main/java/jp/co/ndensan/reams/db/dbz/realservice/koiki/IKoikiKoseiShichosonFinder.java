@@ -5,9 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice.koiki;
 
-import java.util.List;
+import jp.co.ndensan.reams.db.dbz.model.koiki.KoikiKoseiShichosonModel;
+import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 
 /**
+ * 広域構成市町村に関する情報を取得できます。
  *
  * @author N3327 三浦 凌
  */
@@ -18,12 +21,12 @@ public interface IKoikiKoseiShichosonFinder {
      *
      * @return 広域構成市町村(旧市町村を含む)
      */
-    List/*<KoikiKoseiShichosonModel>*/ get全広域構成市町村();
+    IItemList<KoikiKoseiShichosonModel> load広域構成市町村(ContainsKyuShichoson contains合併旧市町村);
 
     /**
-     * 旧市町村を含まない、広域構成市町村をすべて返します。
      *
-     * @return 広域構成市町村(旧市町村を含まない)
+     * @param searchCondition
+     * @return
      */
-    List get現広域構成市町村();
+    IOptional<KoikiKoseiShichosonModel> find構成市町村(IKoikiKoseiShichosonSearchCondition searchCondition);
 }

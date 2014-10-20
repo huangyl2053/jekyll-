@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.koiki;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonShikibetsuID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.model.hokensha.IHokensha;
 
@@ -27,5 +27,4 @@ public interface IKoikiKoseiShichoson extends IHokensha {
      * @return
      */
     ShichosonCode get市町村コード();
-
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.IllegalInitialValueException;
@@ -26,7 +26,7 @@ public final class ShichosonShikibetsuID implements IValueObject<RString>, Compa
      * 指定の値をもった ShichosonShikibetsuID を生成します。
      *
      * @param value 値
-     * @throws IllegalInitialValueException 引数がnullの時、引数が半角の数字以外を含む時、引数が5文字でない時
+     * @throws IllegalInitialValueException 引数がnullの時、引数が半角の数字以外を含む時、引数が2文字でない時
      */
     public ShichosonShikibetsuID(String value) throws IllegalInitialValueException {
         this(new RString(ValueObjects.requireNonNull(value)));
@@ -36,7 +36,7 @@ public final class ShichosonShikibetsuID implements IValueObject<RString>, Compa
      * 指定の値をもった ShichosonShikibetsuID を生成します。
      *
      * @param value 値
-     * @throws IllegalInitialValueException 引数がnullの時、引数が半角の数字以外を含む時、引数が5文字でない時
+     * @throws IllegalInitialValueException 引数がnullの時、引数が半角の数字以外を含む時、引数が2文字でない時
      */
     public ShichosonShikibetsuID(RString value) throws IllegalInitialValueException {
         ValueObjects.requireNonNull(value);
