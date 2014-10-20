@@ -202,7 +202,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         private IKaigoShikaku kaigoShikaku;
         private KaigoHihokenshaNo theHihokenshaNo = KaigoHihokenshaNo.NULL_VALUE;
         private ShikakuShutoku shutoku = ShikakuShutoku.NOTHING;
-        private ShikakuSoshitsu soshitsu = ShikakuSoshitsu.NOTHING;
+        private ShikakuSoshitsu soshitsu = ShikakuSoshitsu.NONE;
         private ShikakuHenko henko = ShikakuHenko.NOTHING;
         private JushochitokureiTekiyo jutokuTekiyo = JushochitokureiTekiyo.NOTHING;
         private JushochitokureiKaijo jutokuKaijo = JushochitokureiKaijo.NOTHING;

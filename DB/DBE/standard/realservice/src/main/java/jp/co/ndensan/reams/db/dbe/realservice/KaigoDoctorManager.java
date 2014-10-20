@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.business.mapper.ShujiiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.KaigoDoctorDac;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
-import jp.co.ndensan.reams.ur.urz.entity.mapper.DoctorMapper;
+import jp.co.ndensan.reams.ur.urz.business.mapper.DoctorMapper;
 import jp.co.ndensan.reams.ur.urz.realservice.DoctorManagerFactory;
 import jp.co.ndensan.reams.ur.urz.realservice.IDoctorManager;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;

@@ -21,7 +21,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDivController</artifactId>
-            <version>${project.version}</version>
             <classifier>classes</classifier>
         </dependency>
         <dependency>
@@ -52,6 +51,11 @@
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbeBusiness</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShuJiiIryoKikanDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiIryoKikanDacMock;
-import jp.co.ndensan.reams.db.dbe.persistence.testhelper.KaigoIryoKikanTestHelper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu;
 //import jp.co.ndensan.reams.ur.urz.persistence.basic.IIryoKikanDac;

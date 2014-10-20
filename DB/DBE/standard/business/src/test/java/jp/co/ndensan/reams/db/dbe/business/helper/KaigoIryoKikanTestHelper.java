@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.helper;
+package jp.co.ndensan.reams.db.dbe.business.helper;
 
 import java.util.ArrayList;
 import java.util.List;

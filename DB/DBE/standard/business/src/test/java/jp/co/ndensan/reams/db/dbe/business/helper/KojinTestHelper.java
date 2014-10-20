@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.entity.helper;
+package jp.co.ndensan.reams.db.dbe.business.helper;
 
 import jp.co.ndensan.reams.ur.urz.business.jusho.IJusho;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;

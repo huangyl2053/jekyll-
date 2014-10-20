@@ -9,8 +9,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
+import jp.co.ndensan.reams.ur.urz.business.mapper.IryoKikanMapper;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.ur.urz.entity.mapper.IryoKikanMapper;
 
 /**
  * 介護医療機関エンティティを介護医療機関クラスにマッピングします。
