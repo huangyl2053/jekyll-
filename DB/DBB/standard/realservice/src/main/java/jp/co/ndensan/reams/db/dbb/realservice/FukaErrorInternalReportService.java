@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
 import jp.co.ndensan.reams.db.dbb.persistence.basic.FukaErrorListDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCommon;
-import jp.co.ndensan.reams.ur.urz.business.validations.IValidationMessages;
-import jp.co.ndensan.reams.ur.urz.business.validations.ValidationMessagesFactory;
-import jp.co.ndensan.reams.ur.urz.realservice.internalreport.IInternalReportService;
+import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
+import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
+//import jp.co.ndensan.reams.ur.urz.realservice.internalreport.IInternalReportService;
 import jp.co.ndensan.reams.ur.urz.realservice.internalreport.InternalReportServiceFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class FukaErrorInternalReportService {
 
     private final FukaErrorListDac dac;
-    private final IInternalReportService service;
+//    private final IInternalReportService service;
 
     private static final SubGyomuCode サブ業務コード;
     private static final RString 内部帳票ID;
@@ -48,28 +48,29 @@ public class FukaErrorInternalReportService {
      */
     public FukaErrorInternalReportService() {
         dac = InstanceProvider.create(FukaErrorListDac.class);
-        service = InternalReportServiceFactory.getInternalReportService();
+//        service = InternalReportServiceFactory.getInternalReportService();
     }
 
-    /**
-     * テスト用コンストラクタです。引数からモックを受け取ります。
-     *
-     * @param dac テスト用モックDac
-     * @param reportInfoService 内部帳票情報サービス
-     * @param batchInfoService 内部帳票バッチ情報サービス
-     */
-    FukaErrorInternalReportService(FukaErrorListDac dac, IInternalReportService service) {
-        this.dac = dac;
-        this.service = service;
-    }
-
+//    /**
+//     * テスト用コンストラクタです。引数からモックを受け取ります。
+//     *
+//     * @param dac テスト用モックDac
+//     * @param reportInfoService 内部帳票情報サービス
+//     * @param batchInfoService 内部帳票バッチ情報サービス
+//     */
+//    FukaErrorInternalReportService(FukaErrorListDac dac, IInternalReportService service) {
+//        this.dac = dac;
+//        this.service = service;
+//    }
+//
     /**
      * 直近の作成日時の、賦課エラー一覧情報を取得します。
      *
      * @return 賦課エラー一覧
      */
     public FukaErrorInternalReport getFukaErrorInternalReport() {
-        RDateTime creationDateTime = service.getRecentCreationDateTime(サブ業務コード, 内部帳票ID);
+//        RDateTime creationDateTime = service.getRecentCreationDateTime(サブ業務コード, 内部帳票ID);
+        RDateTime creationDateTime = RDateTime.now();
         return getFukaErrorInternalReport(creationDateTime);
     }
 
@@ -119,7 +120,8 @@ public class FukaErrorInternalReportService {
         if (representativeEntity == null) {
             return null;
         }
-        return service.createInternalReportCommonForReport(new FukaErrorModel(representativeEntity));
+//        return service.createInternalReportCommonForReport(new FukaErrorModel(representativeEntity));
+        return null; // 暫定対応
     }
 
     /**
