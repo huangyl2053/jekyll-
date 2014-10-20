@@ -10,11 +10,14 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.IMinashi2GoshaDaicho;
 import jp.co.ndensan.reams.db.dbe.business.Minashi2Gosha;
 import jp.co.ndensan.reams.db.dbe.business.Minashi2GoshaList;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.realservice.IJukiKojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IJuminKihonDaichoSearchKey;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.JuminKihonDaichoSearchKeyBuilder;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
+import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.IJukiKojinFinder;
+import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * みなし2号者の情報を取得します。
@@ -57,9 +60,13 @@ public class Minashi2GoshaFinder {
     private Minashi2GoshaList toMinashi2GoshaList(List<IMinashi2GoshaDaicho> minashi2GoshaDaicho) {
         List<Minashi2Gosha> minashi2GoshaList = new ArrayList<>();
         for (IMinashi2GoshaDaicho minashiDaicho : minashi2GoshaDaicho) {
-            IKojin kojin = profileSearcher.find住基個人(minashiDaicho.get識別コード());
+            IKojin kojin = profileSearcher.find住基個人(createSearchKey(minashiDaicho.get識別コード()));
             minashi2GoshaList.add(new Minashi2Gosha(minashiDaicho, kojin));
         }
         return new Minashi2GoshaList(minashi2GoshaList);
+    }
+
+    private IJuminKihonDaichoSearchKey createSearchKey(ShikibetsuCode shikibetsuCode) {
+        return new JuminKihonDaichoSearchKeyBuilder(GyomuCode.DB介護保険).set識別コード(shikibetsuCode).build();
     }
 }

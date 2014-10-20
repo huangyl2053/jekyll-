@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.messagemapping;
 
 import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportValidationMessage;
-import jp.co.ndensan.reams.ur.urz.business.validations.IValidationMessage;
+import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.IValidationMessageMapping;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 

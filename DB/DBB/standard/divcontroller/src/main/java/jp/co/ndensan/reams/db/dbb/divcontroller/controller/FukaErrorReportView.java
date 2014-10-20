@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReport;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportConverterFactory;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCsvConverter;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCommon;
-import jp.co.ndensan.reams.ur.urz.business.validations.IValidationMessages;
+import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.IInternalReportKihonDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationHelper;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
