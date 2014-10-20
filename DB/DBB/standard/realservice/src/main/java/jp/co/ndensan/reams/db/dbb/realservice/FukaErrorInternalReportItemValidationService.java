@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.realservice;
 
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItem;
-import jp.co.ndensan.reams.ur.urz.business.validations.IValidatable;
-import jp.co.ndensan.reams.ur.urz.business.validations.IValidationMessages;
-import static jp.co.ndensan.reams.ur.urz.business.validations.ValidationChain.validateFollowingItems;
+import jp.co.ndensan.reams.ur.urz.model.validations.IValidatable;
+import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
+import static jp.co.ndensan.reams.ur.urz.model.validations.ValidationChain.validateFollowingItems;
 
 /**
  * 賦課エラー一覧情報に対するValidationを提供するサービスです。

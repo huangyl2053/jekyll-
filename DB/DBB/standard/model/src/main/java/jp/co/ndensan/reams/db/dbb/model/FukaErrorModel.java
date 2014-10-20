@@ -246,5 +246,4 @@ public class FukaErrorModel implements IInternalReportCommonModel {
     public void set処理区分(InternalReportShoriKubun 処理区分) {
         entity.setShoriKubunCode(処理区分.getCode());
     }
-
 }

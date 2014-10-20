@@ -15,13 +15,16 @@ import jp.co.ndensan.reams.db.dbe.realservice.search.Minashi2GoshaDaichoSearchIt
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IJukiKojin;
-import jp.co.ndensan.reams.ur.urz.realservice.IJukiKojinFinder;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.jukikojin.IJukiKojin;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IJuminKihonDaichoSearchKey;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.JuminKihonDaichoSearchKeyBuilder;
 import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.ur.urz.realservice.search.SearchConditionFactory;
 import jp.co.ndensan.reams.ur.urz.realservice.search.StringOperator;
+import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.IJukiKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -105,8 +108,13 @@ public class Minashi2GoshaFinderTest {
         when(kojin1.get識別コード()).thenReturn(識別コード);
 
         IJukiKojinFinder kojinFinder = mock(IJukiKojinFinder.class);
-        when(kojinFinder.find住基個人(識別コード)).thenReturn(kojin1);
+        IJuminKihonDaichoSearchKey searchKey = createSearchKey(識別コード);
+        when(kojinFinder.find住基個人(searchKey)).thenReturn(kojin1);
         return kojinFinder;
+    }
+
+    private static IJuminKihonDaichoSearchKey createSearchKey(ShikibetsuCode shikibetsuCode) {
+        return new JuminKihonDaichoSearchKeyBuilder(GyomuCode.DB介護保険).set識別コード(shikibetsuCode).build();
     }
 
 }
