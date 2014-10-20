@@ -11,25 +11,31 @@ import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 広域における市町村の種類です。
+ * 広域保険者の運用形態の区分です。
  *
  * @author N3327 三浦 凌
  */
-public enum ShichosonType {
+public enum UnyoKeitaiKubun {
 
     /**
-     * 合併して、今は存在しない市町村であることを表します。
+     * 単独<br/>
+     * コード:"1"
      */
-    合併旧市町村("1"),
+    単独("1"),
     /**
-     * 広域の構成市町村であることを表します。
+     * 広域連合<br/>
+     * コード:"2"
      */
-    構成市町村("0");
+    広域連合("2"),
+    /**
+     * 一部事務組合<br/>
+     * コード:"3"
+     */
+    一部事務組合("3");
     private final RString theCode;
 
-    private ShichosonType(String code) {
+    private UnyoKeitaiKubun(String code) {
         this.theCode = new RString(code);
-
     }
 
     /**
@@ -42,14 +48,14 @@ public enum ShichosonType {
     }
 
     /**
-     * 引数のコードに対応する ShichosonType を返します。
+     * 引数のコードに対応する UnyoKeitaiKubun を返します。
      *
      * @param code コード
-     * @return コードに対応する ShichosonType
-     * @throws IllegalArgumentException コードに対応する ShichosonType が無い時
+     * @return コードに対応する UnyoKeitaiKubun
+     * @throws IllegalArgumentException コードに対応する UnyoKeitaiKubun が無い時
      */
-    public static ShichosonType toValue(RString code) throws IllegalArgumentException {
-        ShichosonType value = CodeToValue.get(code);
+    public static UnyoKeitaiKubun toValue(RString code) throws IllegalArgumentException {
+        UnyoKeitaiKubun value = CodeToValue.get(code);
         if (value != null) {
             return value;
         }
@@ -59,17 +65,17 @@ public enum ShichosonType {
     //<editor-fold defaultstate="collapsed" desc="CodeToValue">
     private static final class CodeToValue {
 
-        private static final Map<RString, ShichosonType> DICTHIONARY;
+        private static final Map<RString, UnyoKeitaiKubun> DICTHIONARY;
 
         static {
-            Map<RString, ShichosonType> map = new HashMap<>();
-            for (ShichosonType value : values()) {
+            Map<RString, UnyoKeitaiKubun> map = new HashMap<>();
+            for (UnyoKeitaiKubun value : values()) {
                 map.put(value.code(), value);
             }
             DICTHIONARY = Collections.unmodifiableMap(map);
         }
 
-        static ShichosonType get(RString code) {
+        static UnyoKeitaiKubun get(RString code) {
             return DICTHIONARY.get(code);
         }
     }
