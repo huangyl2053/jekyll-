@@ -16,10 +16,13 @@ import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IJukiKojin;
-import jp.co.ndensan.reams.ur.urz.realservice.IJukiKojinFinder;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.jukikojin.IJukiKojin;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IJuminKihonDaichoSearchKey;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.JuminKihonDaichoSearchKeyBuilder;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
+import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.IJukiKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -200,7 +203,8 @@ public class HihokenshaFinderTest extends DbzTestBase {
         public void get被保険者Listにより得られるlistは_IKojinFinderの結果にnullがあるとき_その数だけ_HihokenshaDaichoManager$get被保険者資格ListOfの結果よりも_sizeが小さくなる() {
             ShikibetsuCode code = new ShikibetsuCode("9999999999");
             list.add(createHihokenshaShikaku(lasdecCode, code, new YMDHMS("20110912012345"), hihokenshaNo));
-            when(profileSearcher.find住基個人(code)).thenReturn(null);
+            IJuminKihonDaichoSearchKey searchKey = new JuminKihonDaichoSearchKeyBuilder(GyomuCode.DB介護保険).set識別コード(code).build();
+            when(profileSearcher.find住基個人(searchKey)).thenReturn(null);
 
             when(hihokenshaDaicho.get被保険者資格ListOf(lasdecCode)).thenReturn(list);
             int size = hihokenshaDaicho.get被保険者資格ListOf(lasdecCode).size();
@@ -246,7 +250,8 @@ public class HihokenshaFinderTest extends DbzTestBase {
         public void get被保険者Listにより得られるlistは_IKojinFinderの結果にnullがあるとき_その数だけ_HihokenshaDaichoManager$get被保険者資格ListOfの結果よりも_sizeが小さくなる() {
             ShikibetsuCode code = new ShikibetsuCode("9999999999");
             list.add(createHihokenshaShikaku(lasdecCode, code, new YMDHMS("20110912012345"), hihokenshaNo));
-            when(profileSearcher.find住基個人(code)).thenReturn(null);
+            IJuminKihonDaichoSearchKey searchKey = new JuminKihonDaichoSearchKeyBuilder(GyomuCode.DB介護保険).set識別コード(code).build();
+            when(profileSearcher.find住基個人(searchKey)).thenReturn(null);
 
             when(hihokenshaDaicho.get被保険者資格ListOf(condition)).thenReturn(list);
             int size = hihokenshaDaicho.get被保険者資格ListOf(condition).size();
@@ -288,11 +293,13 @@ public class HihokenshaFinderTest extends DbzTestBase {
     private static void _setUpMockOfIKojinFinder_returnIKojinFor(ShikibetsuCode shikibetsuCode) {
         IJukiKojin profile = mock(IJukiKojin.class);
         when(profile.get識別コード()).thenReturn(shikibetsuCode);
-        when(profileSearcher.find住基個人(shikibetsuCode)).thenReturn(profile);
+        IJuminKihonDaichoSearchKey searchKey = new JuminKihonDaichoSearchKeyBuilder(GyomuCode.DB介護保険).set識別コード(shikibetsuCode).build();
+        when(profileSearcher.find住基個人(searchKey)).thenReturn(profile);
     }
 
     private static void _setUpMockOfIKojinFinder_returnNullAt(ShikibetsuCode shikibetsuCode) {
-        when(profileSearcher.find住基個人(shikibetsuCode)).thenReturn(null);
+        IJuminKihonDaichoSearchKey searchKey = new JuminKihonDaichoSearchKeyBuilder(GyomuCode.DB介護保険).set識別コード(shikibetsuCode).build();
+        when(profileSearcher.find住基個人(searchKey)).thenReturn(null);
     }
 
     private static List<IHihokenshaShikaku> createListOfHihokenshaShikaku(LasdecCode lasdecCode, int listSize) {
