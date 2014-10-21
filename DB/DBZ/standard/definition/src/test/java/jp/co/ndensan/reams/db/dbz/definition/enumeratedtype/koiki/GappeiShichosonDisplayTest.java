@@ -3,34 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha;
+package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.koiki;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
 
 /**
- * TopPriorityAreaのテストです。
+ * GappeiShichosonDisplayのテストです。
  *
  * @author N3327 三浦 凌
  */
-@RunWith(Enclosed.class)
-public class TopPriorityAreaTest extends DbzTestBase {
+public class GappeiShichosonDisplayTest {
 
-    public TopPriorityAreaTest() {
+    public GappeiShichosonDisplayTest() {
     }
 
     public static class toValue extends DbzTestBase {
 
-        private TopPriorityArea sut;
+        private GappeiShichosonDisplay sut;
 
         @Test
         public void toValue_は引数のcodeに該当するオブジェクトが存在する時_それを返す() {
-            TopPriorityArea item = TopPriorityArea.地区コード１;
+            GappeiShichosonDisplay item = GappeiShichosonDisplay.表示しない;
             assertThat(sut.toValue(item.code()), is(item));
         }
 
