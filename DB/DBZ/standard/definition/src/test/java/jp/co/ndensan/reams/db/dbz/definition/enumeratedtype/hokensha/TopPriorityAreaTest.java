@@ -19,9 +19,9 @@ import org.junit.runner.RunWith;
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class TopPriorityChikuCodeTest extends DbzTestBase {
+public class TopPriorityChikuAreaTest extends DbzTestBase {
 
-    public TopPriorityChikuCodeTest() {
+    public TopPriorityChikuAreaTest() {
     }
 
     public static class toValue extends DbzTestBase {
