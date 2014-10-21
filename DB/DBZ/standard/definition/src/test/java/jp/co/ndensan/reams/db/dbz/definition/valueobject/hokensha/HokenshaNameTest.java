@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.IllegalInitialValueException;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -18,12 +18,15 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * GappeiLinkNoのテストです。
+ * HokenshaNameのテストです。
  *
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class GappeiLinkNoTest {
+public class HokenshaNameTest {
+
+    public HokenshaNameTest() {
+    }
 
     @RunWith(Enclosed.class)
     public static class Constructor extends DbzTestBase {
@@ -32,29 +35,24 @@ public class GappeiLinkNoTest {
 
             @Test(expected = IllegalInitialValueException.class)
             public void コンストラクタは_引数がnullの時_IllegalInitialValueExceptionをスローする() {
-                GappeiLinkNo sut = new GappeiLinkNo((String) null);
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数に半角数字以外を含む時_IllegalInitialValueExceptionをスローする() {
-                GappeiLinkNo sut = new GappeiLinkNo("a1");
-                assertThat(sut, isA(GappeiLinkNo.class));
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が1桁の時_IllegalInitialValueExceptionをスローする() {
-                GappeiLinkNo sut = new GappeiLinkNo("1");
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が3桁の時_IllegalInitialValueExceptionをスローする() {
-                GappeiLinkNo sut = new GappeiLinkNo("123");
+                HokenshaName sut = new HokenshaName((String) null);
             }
 
             @Test
-            public void コンストラクタは_引数が2桁の時_GappeiLinkNoのインスタンスを生成する() {
-                GappeiLinkNo sut = new GappeiLinkNo("12");
-                assertThat(sut, isA(GappeiLinkNo.class));
+            public void コンストラクタは_引数が19桁の時_HokenshaNameのインスタンスを生成する() {
+                HokenshaName sut = new HokenshaName("あいうえおかきくけこさしすせそたちつて");
+                assertThat(sut, isA(HokenshaName.class));
+            }
+
+            @Test(expected = IllegalInitialValueException.class)
+            public void コンストラクタは_引数が21桁の時_IllegalInitialValueExceptionをスローする() {
+                HokenshaName sut = new HokenshaName("あいうえおかきくけこさしすせそたちつてとな");
+            }
+
+            @Test
+            public void コンストラクタは_引数が2桁の時_HokenshaNameのインスタンスを生成する() {
+                HokenshaName sut = new HokenshaName("あいうえおかきくけこさしすせそたちつてと");
+                assertThat(sut, isA(HokenshaName.class));
             }
         }
 
@@ -62,42 +60,37 @@ public class GappeiLinkNoTest {
 
             @Test(expected = IllegalInitialValueException.class)
             public void コンストラクタは_引数がnullの時_IllegalInitialValueExceptionをスローする() {
-                GappeiLinkNo sut = new GappeiLinkNo((RString) null);
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数に半角数字以外を含む時_IllegalInitialValueExceptionをスローする() {
-                GappeiLinkNo sut = new GappeiLinkNo(new RString("愛それは愛"));
-                assertThat(sut, isA(GappeiLinkNo.class));
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が1桁の時_IllegalInitialValueExceptionをスローする() {
-                GappeiLinkNo sut = new GappeiLinkNo(new RString("1"));
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が3桁の時_IllegalInitialValueExceptionをスローする() {
-                GappeiLinkNo sut = new GappeiLinkNo(new RString("123"));
+                HokenshaName sut = new HokenshaName((RString) null);
             }
 
             @Test
-            public void コンストラクタは_引数が2桁の時_GappeiLinkNoのインスタンスを生成する() {
-                GappeiLinkNo sut = new GappeiLinkNo(new RString("12"));
-                assertThat(sut, isA(GappeiLinkNo.class));
+            public void コンストラクタは_引数が19桁の時_HokenshaNameのインスタンスを生成する() {
+                HokenshaName sut = new HokenshaName(new RString("あいうえおかきくけこさしすせそたちつて"));
+                assertThat(sut, isA(HokenshaName.class));
+            }
+
+            @Test(expected = IllegalInitialValueException.class)
+            public void コンストラクタは_引数が21桁の時_IllegalInitialValueExceptionをスローする() {
+                HokenshaName sut = new HokenshaName(new RString("あいうえおかきくけこさしすせそたちつてとな"));
+            }
+
+            @Test
+            public void コンストラクタは_引数が2桁の時_HokenshaNameのインスタンスを生成する() {
+                HokenshaName sut = new HokenshaName(new RString("あいうえおかきくけこさしすせそたちつてと"));
+                assertThat(sut, isA(HokenshaName.class));
             }
         }
     }
 
     public static class valueAndGetColumnValue_createFromRString extends DbzTestBase {
 
-        private GappeiLinkNo sut;
+        private HokenshaName sut;
         private RString value;
 
         @Before
         public void setUp() {
-            value = new RString("12");
-            sut = new GappeiLinkNo(value);
+            value = new RString("保険者");
+            sut = new HokenshaName(value);
         }
 
         @Test
@@ -109,13 +102,13 @@ public class GappeiLinkNoTest {
 
     public static class valueAndGetColumnValue_createFromString extends DbzTestBase {
 
-        private GappeiLinkNo sut;
+        private HokenshaName sut;
         private String value;
 
         @Before
         public void setUp() {
-            value = "12";
-            sut = new GappeiLinkNo(value);
+            value = "保険者";
+            sut = new HokenshaName(value);
         }
 
         @Test
@@ -128,33 +121,23 @@ public class GappeiLinkNoTest {
 
         @Test
         public void compareToは_値が同じものと比較したときは_0を返す() {
-            GappeiLinkNo sut = new GappeiLinkNo("12");
-            GappeiLinkNo other = new GappeiLinkNo("12");
+            HokenshaName sut = new HokenshaName("電算市");
+            HokenshaName other = new HokenshaName("電算市");
             assertThat(sut.compareTo(other), is(0));
         }
 
         @Test
         public void compareToは_値が小さいものと比較したときは_0より大きい値を返す() {
-            GappeiLinkNo sut = new GappeiLinkNo("12");
-            GappeiLinkNo other = new GappeiLinkNo("11");
+            HokenshaName sut = new HokenshaName("でんさん市");
+            HokenshaName other = new HokenshaName("ごんさん市");
             assertThat(0 < sut.compareTo(other), is(true));
         }
 
         @Test
         public void compareToは_自身より値が大きいものと比較したときは_0より小さい値を返す() {
-            GappeiLinkNo sut = new GappeiLinkNo("12");
-            GappeiLinkNo other = new GappeiLinkNo("99");
+            HokenshaName sut = new HokenshaName("でんさん市");
+            HokenshaName other = new HokenshaName("ばんさん市");
             assertThat(sut.compareTo(other) < 0, is(true));
-        }
-    }
-
-    public static class EMPTY extends DbzTestBase {
-
-        private final GappeiLinkNo sut = GappeiLinkNo.EMPTY;
-
-        @Test
-        public void GappeiLinkNo$EMPTYは_valueで_RString$EMPTYを返す() {
-            assertThat(sut.value(), is(RString.EMPTY));
         }
     }
 
@@ -162,35 +145,35 @@ public class GappeiLinkNoTest {
 
         @Test
         public void equalsは_比較対象がnullなら_falseを返す() {
-            GappeiLinkNo sut = new GappeiLinkNo("12");
-            assertThat(sut.equals((GappeiLinkNo) null), is(false));
+            HokenshaName sut = new HokenshaName("保険者");
+            assertThat(sut.equals((HokenshaName) null), is(false));
         }
 
         @Test
-        public void equalsは_比較対象がGappeiLinkNo型でないなら_falseを返す() {
-            RString otherType = new RString("12");
-            GappeiLinkNo sut = new GappeiLinkNo("12");
+        public void equalsは_比較対象がHokenshaName型でないなら_falseを返す() {
+            RString otherType = new RString("電算広域");
+            HokenshaName sut = new HokenshaName("電算広域");
             assertThat(sut.equals(otherType), is(false));
         }
 
         @Test
         public void equalsは_同一の値で生成されたインスタンス同士では_trueを返す() {
-            GappeiLinkNo sut = new GappeiLinkNo("12");
-            GappeiLinkNo other = new GappeiLinkNo("12");
+            HokenshaName sut = new HokenshaName("電算市");
+            HokenshaName other = new HokenshaName("電算市");
             assertThat(sut.equals(other), is(true));
         }
 
         @Test
         public void equalsは_同じ文字列で生成されたインスタンス同士では_trueを返す() {
-            GappeiLinkNo sut = new GappeiLinkNo("12");
-            GappeiLinkNo other = new GappeiLinkNo(new RString("12"));
+            HokenshaName sut = new HokenshaName("電算市");
+            HokenshaName other = new HokenshaName(new RString("電算市"));
             assertThat(sut.equals(other), is(true));
         }
 
         @Test
         public void equalsは_異なった値で生成されたインスタンス同士では_falseを返す() {
-            GappeiLinkNo sut = new GappeiLinkNo("12");
-            GappeiLinkNo other = new GappeiLinkNo("13");
+            HokenshaName sut = new HokenshaName("電算市");
+            HokenshaName other = new HokenshaName("電算広域");
             assertThat(sut.equals(other), is(false));
         }
     }
@@ -199,15 +182,15 @@ public class GappeiLinkNoTest {
 
         @Test
         public void hashCodeは_同一の値で生成されたインスタンス同士は_同じ値を返す() {
-            GappeiLinkNo sut = new GappeiLinkNo("12");
-            GappeiLinkNo other = new GappeiLinkNo("12");
+            HokenshaName sut = new HokenshaName("電算広域");
+            HokenshaName other = new HokenshaName("電算広域");
             assertThat(sut.hashCode(), is(other.hashCode()));
         }
 
         @Test
         public void hashCodeは_異なった値で生成されたインスタンス同士は_違う値を返す() {
-            GappeiLinkNo sut = new GappeiLinkNo("12");
-            GappeiLinkNo other = new GappeiLinkNo("13");
+            HokenshaName sut = new HokenshaName("電算市");
+            HokenshaName other = new HokenshaName("電算広域");
             assertThat(sut.hashCode(), is(not(other.hashCode())));
         }
     }

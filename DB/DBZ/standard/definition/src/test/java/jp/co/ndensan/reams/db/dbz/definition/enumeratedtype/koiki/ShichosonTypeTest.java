@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.koiki;
+package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.koiki;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -14,7 +14,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * ShichosonTypeのテストです。
+ * GappeiKyuShichosonKubunのテストです。
  *
  * @author N3327 三浦 凌
  */
@@ -26,11 +26,11 @@ public class ShichosonTypeTest extends DbzTestBase {
 
     public static class toValue extends DbzTestBase {
 
-        private ShichosonType sut;
+        private GappeiKyuShichosonKubun sut;
 
         @Test
         public void toValue_は引数のcodeに該当するオブジェクトが存在する時_それを返す() {
-            ShichosonType item = ShichosonType.合併旧市町村;
+            GappeiKyuShichosonKubun item = GappeiKyuShichosonKubun.合併旧市町村;
             assertThat(sut.toValue(item.code()), is(item));
         }
 
