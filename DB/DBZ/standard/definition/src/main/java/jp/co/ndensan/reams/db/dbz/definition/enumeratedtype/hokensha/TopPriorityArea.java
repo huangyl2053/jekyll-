@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public enum TopPriorityChikuCode {
+public enum TopPriorityArea {
 
     /**
      * 地区コード１<br/>
@@ -39,7 +39,7 @@ public enum TopPriorityChikuCode {
     未使用("4");
     private final RString theCode;
 
-    private TopPriorityChikuCode(String code) {
+    private TopPriorityArea(String code) {
         this.theCode = new RString(code);
     }
 
@@ -53,14 +53,14 @@ public enum TopPriorityChikuCode {
     }
 
     /**
-     * 引数のコードに対応する TopPriorityChikuCode を返します。
+     * 引数のコードに対応する TopPriorityArea を返します。
      *
      * @param code コード
-     * @return コードに対応する TopPriorityChikuCode
-     * @throws IllegalArgumentException コードに対応する TopPriorityChikuCode が無い時
+     * @return コードに対応する TopPriorityArea
+     * @throws IllegalArgumentException コードに対応する TopPriorityArea が無い時
      */
-    public static TopPriorityChikuCode toValue(RString code) throws IllegalArgumentException {
-        TopPriorityChikuCode value = CodeToValue.get(code);
+    public static TopPriorityArea toValue(RString code) throws IllegalArgumentException {
+        TopPriorityArea value = CodeToValue.get(code);
         if (value != null) {
             return value;
         }
@@ -70,17 +70,17 @@ public enum TopPriorityChikuCode {
     //<editor-fold defaultstate="collapsed" desc="CodeToValue">
     private static final class CodeToValue {
 
-        private static final Map<RString, TopPriorityChikuCode> DICTHIONARY;
+        private static final Map<RString, TopPriorityArea> DICTHIONARY;
 
         static {
-            Map<RString, TopPriorityChikuCode> map = new HashMap<>();
-            for (TopPriorityChikuCode value : values()) {
+            Map<RString, TopPriorityArea> map = new HashMap<>();
+            for (TopPriorityArea value : values()) {
                 map.put(value.code(), value);
             }
             DICTHIONARY = Collections.unmodifiableMap(map);
         }
 
-        static TopPriorityChikuCode get(RString code) {
+        static TopPriorityArea get(RString code) {
             return DICTHIONARY.get(code);
         }
     }

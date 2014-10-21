@@ -14,49 +14,39 @@ import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 合併市町村同士を結びつけるための番号です。
+ * 老人保健の市町村番号です。
  *
  * @author N3327 三浦 凌
  */
-public final class GappeiLinkNo implements IValueObject<RString>, Comparable<GappeiLinkNo>, Serializable {
+public final class RokenShichosonNo implements IValueObject<RString>, Comparable<RokenShichosonNo>, Serializable {
 
-    /**
-     * 空の GappeiLinkNo です。
-     * {@link #value() value()}で{@link RString#EMPTY RString.EMPTY}を返します。
-     */
-    public static final GappeiLinkNo EMPTY;
+    public static final RokenShichosonNo EMPTY;
 
     static {
-        EMPTY = new GappeiLinkNo();
+        EMPTY = new RokenShichosonNo(RString.EMPTY);
     }
-
-    /**
-     * {@link #EMPTY}を生成するためのプライベートコンストラクタです。
-     */
-    private GappeiLinkNo() {
-        this.theValue = RString.EMPTY;
-    }
-
-    private static final int LENGTH = 2;
+    private static final int LENGTH = 8;
     private final RString theValue;
 
     /**
-     * 引数に指定した2桁の半角数字をもった GappeiLinkNo を生成します。
+     * 指定の値をもった RokenShichosonNo を生成します。
      *
      * @param value 値
-     * @throws IllegalInitialValueException 引数がnullの時, 引数が半角数字のみでない時, 引数が2桁でない時
+     * @throws IllegalInitialValueException 引数がnullの時, 引数の長さが8文字でない時,
+     * 引数が半角数字のみでない時
      */
-    public GappeiLinkNo(String value) throws IllegalInitialValueException {
+    public RokenShichosonNo(String value) throws IllegalInitialValueException {
         this(new RString(ValueObjects.requireNonNull(value)));
     }
 
     /**
-     * 引数に指定した2桁の半角数字をもった GappeiLinkNo を生成します。
+     * 指定の値をもった RokenShichosonNo を生成します。
      *
      * @param value 値
-     * @throws IllegalInitialValueException 引数がnullの時, 引数が半角数字のみでない時, 引数が2桁でない時
+     * @throws IllegalInitialValueException 引数がnullの時, 引数の長さが8文字でない時,
+     * 引数が半角数字のみでない時
      */
-    public GappeiLinkNo(RString value) throws IllegalInitialValueException {
+    public RokenShichosonNo(RString value) throws IllegalInitialValueException {
         ValueObjects.requireNonNull(value);
         if (!value.isEmpty()) {
             ValueObjects.requireHalfSizeNumberOnly(value);
@@ -71,7 +61,7 @@ public final class GappeiLinkNo implements IValueObject<RString>, Comparable<Gap
     }
 
     @Override
-    public int compareTo(GappeiLinkNo o) {
+    public int compareTo(RokenShichosonNo o) {
         return this.theValue.compareTo(o.theValue);
     }
 
@@ -80,17 +70,17 @@ public final class GappeiLinkNo implements IValueObject<RString>, Comparable<Gap
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof GappeiLinkNo)) {
+        if (!(obj instanceof RokenShichosonNo)) {
             return false;
         }
-        GappeiLinkNo other = (GappeiLinkNo) obj;
+        RokenShichosonNo other = (RokenShichosonNo) obj;
         return Objects.equals(this.theValue, other.theValue);
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.theValue);
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.theValue);
         return hash;
     }
 }

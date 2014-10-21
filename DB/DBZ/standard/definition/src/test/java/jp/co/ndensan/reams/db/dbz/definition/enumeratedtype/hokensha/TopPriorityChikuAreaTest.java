@@ -14,7 +14,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * TopPriorityChikuCodeのテストです。
+ * TopPriorityAreaのテストです。
  *
  * @author N3327 三浦 凌
  */
@@ -26,11 +26,11 @@ public class TopPriorityChikuCodeTest extends DbzTestBase {
 
     public static class toValue extends DbzTestBase {
 
-        private TopPriorityChikuCode sut;
+        private TopPriorityArea sut;
 
         @Test
         public void toValue_は引数のcodeに該当するオブジェクトが存在する時_それを返す() {
-            TopPriorityChikuCode item = TopPriorityChikuCode.地区コード１;
+            TopPriorityArea item = TopPriorityArea.地区コード１;
             assertThat(sut.toValue(item.code()), is(item));
         }
 
