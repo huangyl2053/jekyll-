@@ -36,7 +36,12 @@ public enum TopPriorityArea {
      * 未使用<br/>
      * コード:"4"
      */
-    未使用("4");
+    未使用("4"),
+    /**
+     * 未設定<br/>
+     * コード:""
+     */
+    未設定("");
     private final RString theCode;
 
     private TopPriorityArea(String code) {

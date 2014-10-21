@@ -147,6 +147,16 @@ public class KokuhorenKoikiShichosonNoTest {
         }
     }
 
+    public static class EMPTY extends DbzTestBase {
+
+        private final KokuhorenKoikiShichosonNo sut = KokuhorenKoikiShichosonNo.EMPTY;
+
+        @Test
+        public void KokuhorenKoikiShichosonNo$EMPTYは_valueで_RString$EMPTYを返す() {
+            assertThat(sut.value(), is(RString.EMPTY));
+        }
+    }
+
     public static class equals extends DbzTestBase {
 
         @Test

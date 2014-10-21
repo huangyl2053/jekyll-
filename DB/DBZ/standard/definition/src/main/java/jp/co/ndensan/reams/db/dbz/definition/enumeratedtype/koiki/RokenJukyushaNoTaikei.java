@@ -31,7 +31,12 @@ public enum RokenJukyushaNoTaikei {
      * 市町村独自<br/>
      * コード:"3"
      */
-    市町村独自("3");
+    市町村独自("3"),
+    /**
+     * 設定なし<br/>
+     * コード:"" (空文字)
+     */
+    設定なし("");
     private final RString theCode;
 
     private RokenJukyushaNoTaikei(String code) {

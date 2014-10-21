@@ -20,6 +20,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class KokuhorenKoikiShichosonNo implements IValueObject<RString>, Comparable<KokuhorenKoikiShichosonNo>, Serializable {
 
+    /**
+     *
+     */
+    public static final KokuhorenKoikiShichosonNo EMPTY;
+
+    static {
+        EMPTY = new KokuhorenKoikiShichosonNo(RString.EMPTY);
+    }
+
     private static final int LENGTH = 3;
     private final RString theValue;
 

@@ -26,7 +26,13 @@ public enum GappeiKyuShichosonOutput {
      * 表示しない<br/>
      * コード:"2"
      */
-    表示しない("0");
+    表示しない("0"),
+    /**
+     * 設定なし<br/>
+     * コード:"" (空文字)
+     */
+    設定なし("");
+
     private final RString theCode;
 
     private GappeiKyuShichosonOutput(String code) {

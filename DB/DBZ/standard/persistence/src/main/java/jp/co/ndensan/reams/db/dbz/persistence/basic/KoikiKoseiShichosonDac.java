@@ -5,19 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.koiki.GappeiKyuShichosonKubun;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.model.koiki.KoikiKoseiShichosonModel;
-import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
 /**
+ * 広域構成市町村マスタのDACです。
  *
  * @author N3327 三浦 凌
  */
@@ -26,10 +28,21 @@ public class KoikiKoseiShichosonDac {
     @InjectSession
     private SqlSession session;
 
+    /**
+     * 広域構成市町村
+     *
+     * @param shichosonType
+     * @return
+     */
     @Transaction
-    public List<KoikiKoseiShichosonModel> select広域構成市町村(boolean contains合併旧市町村) {
+    public List<KoikiKoseiShichosonModel> select広域構成市町村(GappeiKyuShichosonKubun shichosonType) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return Collections.emptyList();
+        List<DbT7051KoseiShichosonMasterEntity> result = accessor
+                .select()
+                .table(DbT7051KoseiShichosonMaster.class)
+                .where(eq(DbT7051KoseiShichosonMaster.gappeiKyuShichosonKubun, shichosonType.code()))
+                .toList(DbT7051KoseiShichosonMasterEntity.class);
+        return toModelList(result);
     }
 
     /**
@@ -37,16 +50,21 @@ public class KoikiKoseiShichosonDac {
      * @param criteria
      * @return
      */
-    public KoikiKoseiShichosonModel selectForm(ITrueFalseCriteria criteria) {
+    public List<KoikiKoseiShichosonModel> selectForm(ITrueFalseCriteria criteria) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        //本来ならentity,                        本来ならentityに対応するColumnDifinition
-        Object result = accessor.select().table((Class<? extends Enum>) null)
+        List<DbT7051KoseiShichosonMasterEntity> result = accessor
+                .select()
+                .table(DbT7051KoseiShichosonMaster.class)
                 .where(criteria)
-                .toObject(Object.class);
-        if (result == null) {
-            return null;
-        }
-        return new KoikiKoseiShichosonModel(/*result*/);
+                .toList(DbT7051KoseiShichosonMasterEntity.class);
+        return toModelList(result);
     }
 
+    private List<KoikiKoseiShichosonModel> toModelList(List<DbT7051KoseiShichosonMasterEntity> entities) {
+        List<KoikiKoseiShichosonModel> list = new ArrayList<>();
+        for (DbT7051KoseiShichosonMasterEntity entity : entities) {
+            list.add(new KoikiKoseiShichosonModel(entity));
+        }
+        return list;
+    }
 }

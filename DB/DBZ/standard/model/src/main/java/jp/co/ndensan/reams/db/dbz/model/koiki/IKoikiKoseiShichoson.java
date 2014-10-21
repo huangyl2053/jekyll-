@@ -73,7 +73,7 @@ public interface IKoikiKoseiShichoson extends IHokensha {
     /**
      * 最優先地区を返します。
      *
-     * @return `{@link TopPriorityArea 最優先地区}
+     * @return {@link TopPriorityArea 最優先地区}
      */
     TopPriorityArea get最優先地区();
 
