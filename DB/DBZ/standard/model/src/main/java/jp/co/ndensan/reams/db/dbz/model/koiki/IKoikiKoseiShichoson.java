@@ -5,9 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.koiki;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ForeignersNameOutput;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TopPriorityArea;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.koiki.GappeiKyuShichosonKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.koiki.GappeiKyuShichosonOutput;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.koiki.RokenJukyushaNoTaikei;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.koiki.UnyoKeitaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki.GappeiLinkNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki.KokuhorenKoikiShichosonNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki.RokenShichosonNo;
 import jp.co.ndensan.reams.db.dbz.model.hokensha.IHokensha;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 広域構成市町村です。
@@ -17,14 +29,142 @@ import jp.co.ndensan.reams.db.dbz.model.hokensha.IHokensha;
 public interface IKoikiKoseiShichoson extends IHokensha {
 
     /**
+     * 市町村識別IDを返します。
      *
-     * @return
+     * @return {@link ShichosonShikibetsuID 市町村識別ID}
      */
     ShichosonShikibetsuID get市町村識別ID();
 
     /**
+     * 市町村コード(5桁)を返します。
      *
-     * @return
+     * @return {@link ShichosonCode 市町村コード}
      */
     ShichosonCode get市町村コード();
+
+    /**
+     * 国保連広域内市町村番号を返します。
+     *
+     * @return {@link KokuhorenKoikiShichosonNo 国保連広域内市町村番号}
+     */
+    KokuhorenKoikiShichosonNo get国保連広域内市町村番号();
+
+    /**
+     * 市町村名を返します。
+     *
+     * @return 市町村名
+     */
+    RString get市町村名();
+
+    /**
+     * 都道府県名を返します。
+     *
+     * @return 都道府県名
+     */
+    RString get都道府県名();
+
+    /**
+     * 群名を返します。
+     *
+     * @return 群名
+     */
+    RString get郡名();
+
+    /**
+     * 最優先地区を返します。
+     *
+     * @return `{@link TopPriorityArea 最優先地区}
+     */
+    TopPriorityArea get最優先地区();
+
+    /**
+     * 外国人の氏名の表示方法を返します。
+     *
+     * @return {@link ForeignersNameOutput 外国人}
+     */
+    ForeignersNameOutput get外国人氏名表示方法();
+
+    /**
+     * 老人保健市町村番号を返します。
+     *
+     * @return {@link RokenShichosonNo 老人保健市町村番号}
+     */
+    RokenShichosonNo get老人保健市町村番号();
+
+    /**
+     * 老人保健受給者番号体系を返します。
+     *
+     * @return {@link RokenJukyushaNoTaikei 老人保健受給者番号体系}
+     */
+    public RokenJukyushaNoTaikei get老人保健受給者番号体系();
+
+    /**
+     * 移行日を返します。
+     *
+     * @return 移行日
+     */
+    public FlexibleDate get移行日();
+
+    /**
+     * 広域への加入日を返します。
+     *
+     * @return 加入日
+     */
+    public FlexibleDate get加入日();
+
+    /**
+     * 広域からの脱退日を返します。
+     *
+     * @return 広域からの脱退日
+     */
+    public FlexibleDate get離脱日();
+
+    /**
+     * 合併した旧市町村かそうでないかの区分を返します。
+     *
+     * @return {@link GappeiKyuShichosonKubun 合併旧市町村区分}
+     */
+    public GappeiKyuShichosonKubun get合併旧市町村区分();
+
+    /**
+     * 合併旧市町村で表示をする必要がある市町村かどうかを返します。
+     *
+     * @return {@link GappeiKyuShichosonOutput 合併旧市町村表示有無}
+     */
+    public GappeiKyuShichosonOutput get合併旧市町村表示有無();
+
+    /**
+     * 合併情報地域番号を返します。
+     *
+     * @return {@link GappeiLinkNo 合併情報地域番号}
+     */
+    public GappeiLinkNo get合併情報地域番号();
+
+    /**
+     * 運用保険者番号を返します。
+     *
+     * @return 運用{@link ShoKisaiHokenshaNo 保険者番号}
+     */
+    public ShoKisaiHokenshaNo get運用保険者番号();
+
+    /**
+     * 運用開始日を返します。
+     *
+     * @return 運用開始日
+     */
+    public FlexibleDate get運用開始日();
+
+    /**
+     * 運用終了日を返します。
+     *
+     * @return 運用終了日
+     */
+    public FlexibleDate get運用終了日();
+
+    /**
+     * 運用形態区分を返します。
+     *
+     * @return {@link UnyoKeitaiKubun 運用形態区分}
+     */
+    public UnyoKeitaiKubun get運用形態区分();
 }

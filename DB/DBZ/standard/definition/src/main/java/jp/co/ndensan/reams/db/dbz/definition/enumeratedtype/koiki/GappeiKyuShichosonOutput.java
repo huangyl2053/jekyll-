@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public enum GappeiShichosonDisplay {
+public enum GappeiKyuShichosonOutput {
 
     /**
      * 表示する<br/>
@@ -29,7 +29,7 @@ public enum GappeiShichosonDisplay {
     表示しない("0");
     private final RString theCode;
 
-    private GappeiShichosonDisplay(String code) {
+    private GappeiKyuShichosonOutput(String code) {
         this.theCode = new RString(code);
     }
 
@@ -43,14 +43,14 @@ public enum GappeiShichosonDisplay {
     }
 
     /**
-     * 引数のコードに対応する GappeiShichosonDisplay を返します。
+     * 引数のコードに対応する GappeiKyuShichosonOutput を返します。
      *
      * @param code コード
-     * @return コードに対応する GappeiShichosonDisplay
-     * @throws IllegalArgumentException コードに対応する GappeiShichosonDisplay が無い時
+     * @return コードに対応する GappeiKyuShichosonOutput
+     * @throws IllegalArgumentException コードに対応する GappeiKyuShichosonOutput が無い時
      */
-    public static GappeiShichosonDisplay toValue(RString code) throws IllegalArgumentException {
-        GappeiShichosonDisplay value = CodeToValue.get(code);
+    public static GappeiKyuShichosonOutput toValue(RString code) throws IllegalArgumentException {
+        GappeiKyuShichosonOutput value = CodeToValue.get(code);
         if (value != null) {
             return value;
         }
@@ -60,17 +60,17 @@ public enum GappeiShichosonDisplay {
     //<editor-fold defaultstate="collapsed" desc="CodeToValue">
     private static final class CodeToValue {
 
-        private static final Map<RString, GappeiShichosonDisplay> DICTHIONARY;
+        private static final Map<RString, GappeiKyuShichosonOutput> DICTHIONARY;
 
         static {
-            Map<RString, GappeiShichosonDisplay> map = new HashMap<>();
-            for (GappeiShichosonDisplay value : values()) {
+            Map<RString, GappeiKyuShichosonOutput> map = new HashMap<>();
+            for (GappeiKyuShichosonOutput value : values()) {
                 map.put(value.code(), value);
             }
             DICTHIONARY = Collections.unmodifiableMap(map);
         }
 
-        static GappeiShichosonDisplay get(RString code) {
+        static GappeiKyuShichosonOutput get(RString code) {
             return DICTHIONARY.get(code);
         }
     }

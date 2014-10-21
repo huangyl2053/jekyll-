@@ -10,24 +10,27 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
- * GappeiShichosonDisplayのテストです。
+ * GappeiKyuShichosonKubunのテストです。
  *
  * @author N3327 三浦 凌
  */
-public class GappeiShichosonDisplayTest {
+@RunWith(Enclosed.class)
+public class GappeiKyuShichosonKubunTest extends DbzTestBase {
 
-    public GappeiShichosonDisplayTest() {
+    public GappeiKyuShichosonKubunTest() {
     }
 
     public static class toValue extends DbzTestBase {
 
-        private GappeiShichosonDisplay sut;
+        private GappeiKyuShichosonKubun sut;
 
         @Test
         public void toValue_は引数のcodeに該当するオブジェクトが存在する時_それを返す() {
-            GappeiShichosonDisplay item = GappeiShichosonDisplay.表示しない;
+            GappeiKyuShichosonKubun item = GappeiKyuShichosonKubun.合併旧市町村;
             assertThat(sut.toValue(item.code()), is(item));
         }
 

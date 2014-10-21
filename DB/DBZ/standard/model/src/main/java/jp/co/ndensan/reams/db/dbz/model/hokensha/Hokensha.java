@@ -36,6 +36,7 @@ public final class Hokensha implements IHokensha {
      * @param jusho 住所
      * @param yubinNo 郵便番号
      * @param telNo 電話番号
+     * @param howToEditJusho 編集方法
      */
     public Hokensha(ShoKisaiHokenshaNo hokenshaNo, AtenaJusho jusho, YubinNo yubinNo, TelNo telNo, IHowToEditJusho howToEditJusho) {
         this.hokenshaNo = Objects.requireNonNull(hokenshaNo);
