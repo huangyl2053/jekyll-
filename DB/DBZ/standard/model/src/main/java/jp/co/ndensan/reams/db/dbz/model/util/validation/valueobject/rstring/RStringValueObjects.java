@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject;
+package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.rstring;
 
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.Unit;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common.NotEmptyCheckers;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,13 +14,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectValidatable;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common.NotNullCheker;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.ValidationChain;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * ValueObjectに対するバリデーターです。
+ * RString を保持するValueObjectに対するバリデーションの定義や、専用のバリデータを取得する機能を持ちます。
  *
  * @author N3327 三浦 凌
  */
@@ -28,26 +35,35 @@ public final class RStringValueObjects {
     }
 
     /**
+     * バリデーションの定義を行います。
+     * <p>
+     * 以下の様に定義をします。
+     * <pre>
+     * ①被保番号(②KaigoHihokenshaNo.class, ③Unit.桁, ④check(notNull(), CharType.半角数のみ, Length.equal(10))),
      *
-     * @param <T>
-     * @param type
-     * @return
+     * ①: valueObjectの名前です。バリデーションのメッセージで用いられます。
+     * ②: 対応するクラスです。
+     * ③: valueObjectが持つ文字列の1文字をどのように数えるかを定義します。文字の長さをチェックをする時、バリデーションのメッセージで用いられます。
+     * ④: check()の中にどのようなバリデーションを行うかを設定します。　任意の個数、設定できます。
+     *     ・notNull()  … 保持する値としてnullを禁止します。
+     *     ・notEmpty() … 保持する値としてRString.EMPTYを禁止します。
+     *     ・CharType   … 文字列の種類を設定します。
+     *     ・Length     … 文字列の長さに対する制約を設定します。
+     *     上の例では、「null禁止」「半角数字のみ」「10桁」の3項目をチェックする、ということになります。
+     * </pre>
+     * </p>
      */
-    public static <T extends IValueObject<RString>> IValueObjectValidatable<T> validationFor(Class<T> type) {
-        return ValidationSpecifications.getValidatable(type);
-    }
-
     private enum ValidationSpecifications implements IValueObjectValidatable<IValueObject<RString>> {
 
         被保番号(KaigoHihokenshaNo.class, Unit.桁, check(notNull(), CharType.半角数のみ, Length.equal(10)));
 
         private final Class<?> clazz;
-        private final ValueObjectInfo objInfo;
+        private final IValueObjectInfo objInfo;
         private final CheckItems checkItems;
 
         private <V extends IValueObject<RString>> ValidationSpecifications(Class<V> clazz, Unit unit, CheckItems checkItems) {
             this.clazz = clazz;
-            this.objInfo = new ValueObjectInfo(new RString(name()), unit);
+            this.objInfo = new ValueObjectInfo.Builder(new RString(name())).setUnit(unit).build();
             this.checkItems = checkItems;
         }
 
@@ -65,12 +81,12 @@ public final class RStringValueObjects {
         }
 
         /**
-         * 引数のクラスに対応する IValueObjectValidatable を返します。
+         * 引数のclassに対応する IValueObjectValidatable を返します。
          *
-         * @param type clazz
-         * @return クラスに対応する IValueObjectValidatable
-         * @throws IllegalArgumentException クラスに対応する IValueObjectValidatable
-         * が無い時
+         * @param type valueObjectのclass
+         * @return 引数のclassに対応する IValueObjectValidatable
+         * @throws IllegalArgumentException 引数のclassに対応する
+         * IValueObjectValidatable が無い時
          */
         static <T extends IValueObject<RString>> IValueObjectValidatable getValidatable(Class<T> type) throws IllegalArgumentException {
             ValidationSpecifications validator = ClassToValue.get(type);
@@ -80,7 +96,8 @@ public final class RStringValueObjects {
             throw new IllegalArgumentException(new StringBuilder()
                     .append(type.getSimpleName())
                     .append("に対応するvalidatorがありません。必要な場合は作成してください。")
-                    .toString());
+                    .toString()
+            );
         }
 
         //<editor-fold defaultstate="collapsed" desc="ClassToValue">
@@ -103,6 +120,17 @@ public final class RStringValueObjects {
         //</editor-fold>
     }
 
+    /**
+     * 引数のclass専用の{@link IValueObjectValidatable バリデーションロジック}を返します。
+     *
+     * @param <T> RStringを保持するvalueObjectの型
+     * @param type RStringを保持するvalueObjectのclass
+     * @return 引数のclass専用の{@link IValueObjectValidatable バリデーションロジック}
+     */
+    public static <T extends IValueObject<RString>> IValueObjectValidatable<T> validationFor(Class<T> type) {
+        return ValidationSpecifications.getValidatable(type);
+    }
+
 //<editor-fold defaultstate="collapsed" desc="    private static class CheckItems {...}">
     private static class CheckItems implements Iterable<IValueObjectCheckable<RString>> {
 
@@ -114,7 +142,7 @@ public final class RStringValueObjects {
 
         @Override
         public Iterator<IValueObjectCheckable<RString>> iterator() {
-            return list.iterator();
+            return this.list.iterator();
         }
     }
 //</editor-fold>
@@ -123,11 +151,11 @@ public final class RStringValueObjects {
         return new CheckItems(Arrays.asList(validators));
     }
 
-    private static IValueObjectCheckable<RString> notNull() {
+    static IValueObjectCheckable<RString> notNull() {
         return NotNullCheker.getInstance(RString.class);
     }
 
-    private static IValueObjectCheckable<RString> notEmpty() {
+    static IValueObjectCheckable<RString> notEmpty() {
         return NotEmptyCheckers.RSTRING;
     }
 }

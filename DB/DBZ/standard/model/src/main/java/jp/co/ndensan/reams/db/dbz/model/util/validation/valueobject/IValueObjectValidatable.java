@@ -22,5 +22,5 @@ public interface IValueObjectValidatable<T extends IValueObject> {
      * @param v ValueObject
      * @return バリデーションメッセージ
      */
-    public IValidationMessages validate(T v);
+    IValidationMessages validate(T v);
 }

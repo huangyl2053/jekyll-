@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject;
+package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common;
 
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
@@ -16,12 +19,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-class NotEmptyCheckers {
+public final class NotEmptyCheckers {
 
     /**
      * 引数のRStringの{@code isEmpty()}がtrueならば、「必須入力」のバリデーションメッセージを返します。
      */
-    static final IValueObjectCheckable<RString> RSTRING;
+    public static final IValueObjectCheckable<RString> RSTRING;
 
     static {
         RSTRING = forRString();
@@ -51,10 +54,10 @@ class NotEmptyCheckers {
     private abstract static class _NotEmptyChecker<T> implements IValueObjectCheckable<T> {
 
         @Override
-        public IValidationMessages check(IValueObject v, ValueObjectInfo objInfo) {
+        public IValidationMessages check(IValueObject v, IValueObjectInfo objInfo) {
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
             if (!isValid(v)) {
-                messages.add(ValidationMessages.必須入力項目, objInfo.name().toString());
+                messages.add(ValidationMessages.必須入力項目, objInfo.getName().toString());
             }
             return messages;
         }

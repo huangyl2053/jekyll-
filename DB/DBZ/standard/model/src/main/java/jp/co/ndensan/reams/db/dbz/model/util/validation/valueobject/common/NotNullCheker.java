@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject;
+package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common;
 
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
@@ -13,8 +16,9 @@ import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
  * nullでないことをチェックします。
  *
  * @author N3327 三浦 凌
+ * @param <T> valueObjectの型
  */
-final class NotNullCheker<T> implements IValueObjectCheckable<T> {
+public final class NotNullCheker<T> implements IValueObjectCheckable<T> {
 
     private static final NotNullCheker<?> INSTANCE;
 
@@ -29,7 +33,7 @@ final class NotNullCheker<T> implements IValueObjectCheckable<T> {
      * @param clazz チェックするvalueObjectが保持する値のclass
      * @return NotNullChekerのインスタンス
      */
-    static <T> NotNullCheker<T> getInstance(Class<T> clazz) {
+    public static <T> NotNullCheker<T> getInstance(Class<T> clazz) {
         return (NotNullCheker<T>) INSTANCE;
     }
 
@@ -42,10 +46,10 @@ final class NotNullCheker<T> implements IValueObjectCheckable<T> {
     }
 
     @Override
-    public IValidationMessages check(IValueObject<T> v, ValueObjectInfo objInfo) {
+    public IValidationMessages check(IValueObject<T> v, IValueObjectInfo objInfo) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         if (!isValid(v)) {
-            messages.add(ValidationMessages.必須入力項目, objInfo.name().toString());
+            messages.add(ValidationMessages.必須入力項目, objInfo.getName().toString());
         }
         return messages;
     }

@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject;
+package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.rstring;
 
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
@@ -13,11 +16,15 @@ import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 文字の種類をチェックできるオブジェクトの列挙です。
  *
  * @author N3327 三浦 凌
  */
-enum CharType implements IValueObjectCheckable<RString> {
+public enum CharType implements IValueObjectCheckable<RString> {
 
+    /**
+     * 文字列が「半角数のみ」かをチェックします。
+     */
     半角数のみ(ValidationMessages.半角数のみ) {
 
                 @Override
@@ -26,21 +33,18 @@ enum CharType implements IValueObjectCheckable<RString> {
                 }
 
                 @Override
-                public IValidationMessages check(IValueObject<RString> value, ValueObjectInfo objInfo) {
+                public IValidationMessages check(IValueObject<RString> value, IValueObjectInfo objInfo) {
                     IValidationMessages messages = ValidationMessagesFactory.createInstance();
                     if (!isValid(value)) {
-                        messages.add(ValidationMessages.半角数のみ, objInfo.name().toString(), "半角数字のみ");
+                        messages.add(getMessage(), objInfo.getName().toString(), "半角数字のみ");
                     }
                     return messages;
                 }
             },
+    /**
+     * 文字列が「半角英数のみ」かをチェックします。
+     */
     半角英数のみ(ValidationMessages.半角英数のみ) {
-
-                final RString description;
-
-                {
-                    description = new RString("半角英数のみ");
-                }
 
                 @Override
                 public boolean isValid(IValueObject<RString> v) {
@@ -48,17 +52,26 @@ enum CharType implements IValueObjectCheckable<RString> {
                 }
 
                 @Override
-                public IValidationMessages check(IValueObject<RString> value, ValueObjectInfo objInfo) {
+                public IValidationMessages check(IValueObject<RString> value, IValueObjectInfo objInfo) {
                     IValidationMessages messages = ValidationMessagesFactory.createInstance();
                     if (!isValid(value)) {
-                        messages.add(ValidationMessages.半角英数のみ, objInfo.name().toString(), "半角英数のみ");
+                        messages.add(getMessage(), objInfo.getName().toString(), "半角英数のみ");
                     }
                     return messages;
                 }
             };
-    protected final IValidationMessage message;
+    private final IValidationMessage message;
 
     private CharType(ValidationMessages message) {
         this.message = message;
+    }
+
+    /**
+     * バリデーションメッセージを返します。
+     *
+     * @return バリデーションメッセージ
+     */
+    protected IValidationMessage getMessage() {
+        return this.message;
     }
 }
