@@ -104,7 +104,7 @@ public class NotEmptyCheckersTest extends DbzTestBase {
         }
 
         @Test
-        public void checkは_引数$valueがRString$Emptyでない値を返す時_戻り値に_ValidationMessages$必須入力_を含む() {
+        public void checkは_引数$valueがRString$Emptyでない値を返す時_戻り値に_ValidationMessages$必須入力_を含まない() {
             value = mock(IValueObject.class);
             when(value.value()).thenReturn(new RString("a"));
             assertThat(sut.check(value, info).contains(ValidationMessages.必須入力項目), is(false));
