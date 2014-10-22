@@ -33,8 +33,13 @@ public class ValueObjectInfoTest extends DbzTestBase {
             private ValueObjectInfo.Builder sut;
 
             @Test(expected = NullPointerException.class)
-            public void Builderは_コンストラクタ引数にnullを受け取ったとき_NullPointerExceptionをスローする() {
-                sut = new ValueObjectInfo.Builder(null);
+            public void Builderは_コンストラクタ引数にnullのStringを受け取ったとき_NullPointerExceptionをスローする() {
+                sut = new ValueObjectInfo.Builder((String) null);
+            }
+
+            @Test(expected = NullPointerException.class)
+            public void Builderは_コンストラクタ引数にnullのRStringを受け取ったとき_NullPointerExceptionをスローする() {
+                sut = new ValueObjectInfo.Builder((RString) null);
             }
 
             @Test(expected = NullPointerException.class)

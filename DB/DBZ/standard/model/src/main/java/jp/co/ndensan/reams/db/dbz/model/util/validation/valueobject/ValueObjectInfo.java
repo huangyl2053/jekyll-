@@ -54,6 +54,16 @@ public final class ValueObjectInfo implements IValueObjectInfo {
          * @param name valueObjectの名前
          * @throws NullPointerException 引数が{@code null}のとき
          */
+        public Builder(String name) throws NullPointerException {
+            this(new RString(Objects.requireNonNull(name)));
+        }
+
+        /**
+         * valueObjectの名前を指定し、Builderを生成します。
+         *
+         * @param name valueObjectの名前
+         * @throws NullPointerException 引数が{@code null}のとき
+         */
         public Builder(RString name) throws NullPointerException {
             Objects.requireNonNull(name);
             this.theName = name;

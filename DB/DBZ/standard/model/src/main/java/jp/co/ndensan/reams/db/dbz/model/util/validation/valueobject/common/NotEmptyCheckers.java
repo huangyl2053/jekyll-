@@ -40,6 +40,9 @@ public final class NotEmptyCheckers {
                 if (v == null) {
                     return true;
                 }
+                if (v.value() == null) {
+                    return true;
+                }
                 return !v.value().isEmpty();
             }
         };
