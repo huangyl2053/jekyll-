@@ -16,9 +16,8 @@ import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * NotNullChekerのテストです。
@@ -48,15 +47,30 @@ public class NotNullChekerTest extends DbzTestBase {
     }
 
     @Test
-    public void isValidは_引数がnullでない時_trueを返す() {
+    public void isValidは_引数のvalueObject$valueがnullの時_falseを返す() {
         value = mock(IValueObject.class);
+        when(value.value()).thenReturn(null);
+        assertThat(sut.isValid(value), is(false));
+    }
+
+    @Test
+    public void checkは_引数のvalueObject$valueがnullの時_戻り値に_ValidationMessages$必須入力項目_を含む() {
+        value = mock(IValueObject.class);
+        when(value.value()).thenReturn(null);
+        assertThat(sut.check(value, info).contains(ValidationMessages.必須入力項目), is(true));
+    }
+
+    @Test
+    public void isValidは_引数のvalueObject$valueがnullでない時_trueを返す() {
+        value = mock(IValueObject.class);
+        when(value.value()).thenReturn(new RString("value"));
         assertThat(sut.isValid(value), is(true));
     }
 
     @Test
-    public void checkは_引数がnullでない時_戻り値に_ValidationMessages$必須入力項目_を含まない() {
+    public void checkは_引数のvalueObject$valueがnullでない時_戻り値に_ValidationMessages$必須入力項目_を含まない() {
         value = mock(IValueObject.class);
+        when(value.value()).thenReturn(new RString("value"));
         assertThat(sut.check(value, info).contains(ValidationMessages.必須入力項目), is(false));
     }
-
 }

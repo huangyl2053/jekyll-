@@ -42,7 +42,10 @@ public final class NotNullCheker<T> implements IValueObjectCheckable<T> {
 
     @Override
     public boolean isValid(IValueObject<T> v) {
-        return v != null;
+        if (v == null) {
+            return false;
+        }
+        return v.value() != null;
     }
 
     @Override
