@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business;
+package jp.co.ndensan.reams.db.dbz.business;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,7 +12,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
-import jp.co.ndensan.reams.ur.urz.business.mapper.HihokenjaHokenryoMapper;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
@@ -22,7 +21,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
  */
 public class HihokenshaDaichoList implements Iterable {
 
-    private final IItemList<HihokenshaDaicho> hihokenshaDaichoList;
+    private final IItemList<HihokenshaDaichoModel> hihokenshaDaichoList;
 
     /**
      * コンストラクタです。
@@ -32,11 +31,7 @@ public class HihokenshaDaichoList implements Iterable {
     public HihokenshaDaichoList(IItemList<HihokenshaDaichoModel> hihokenshaDaichoList) {
         requireNonNull(hihokenshaDaichoList, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("引数のList", getClass().getSimpleName()));
-        List<HihokenshaDaicho> list = new ArrayList<>();
-        for (HihokenshaDaichoModel model : hihokenshaDaichoList) {
-            list.add(new HihokenshaDaicho(model));
-        }
-        this.hihokenshaDaichoList = ItemList.of(list);
+        this.hihokenshaDaichoList = hihokenshaDaichoList;
     }
 
     /**
@@ -44,8 +39,8 @@ public class HihokenshaDaichoList implements Iterable {
      *
      * @return 被保険者台帳List
      */
-    public IItemList<HihokenshaDaicho> to資格得喪List() {
-        List<HihokenshaDaicho> daichoList = new ArrayList<>();
+    public IItemList<HihokenshaDaichoModel> to資格得喪List() {
+        List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
         //TODO #52997
         //資格得喪を表現するためには、被保険者台帳から、
         //a, 同じ取得日を持つ情報の内、最新のデータ
@@ -67,8 +62,8 @@ public class HihokenshaDaichoList implements Iterable {
      *
      * @return 被保険者台帳List
      */
-    public IItemList<HihokenshaDaicho> to住所地特例List() {
-        List<HihokenshaDaicho> daichoList = new ArrayList<>();
+    public IItemList<HihokenshaDaichoModel> to住所地特例List() {
+        List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
         //TODO #52997
         //住所地特例を表現するためには、適用情報と解除情報をそれぞれ取得する必要がある。
         //解除情報を持つ被保険者台帳は、
@@ -103,8 +98,8 @@ public class HihokenshaDaichoList implements Iterable {
      *
      * @return 被保険者台帳List
      */
-    public IItemList<HihokenshaDaicho> to資格関連異動List() {
-        List<HihokenshaDaicho> daichoList = new ArrayList<>();
+    public IItemList<HihokenshaDaichoModel> to資格関連異動List() {
+        List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
         //TODO #52997
         //資格関連異動を表現するためには、被保険者台帳から、
         //a, 被保険者台帳の変更日にデータを持つもの
@@ -132,7 +127,7 @@ public class HihokenshaDaichoList implements Iterable {
     }
 
     @Override
-    public Iterator<HihokenshaDaicho> iterator() {
+    public Iterator<HihokenshaDaichoModel> iterator() {
         return hihokenshaDaichoList.iterator();
     }
 

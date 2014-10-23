@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dba.business.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dba.business.HihokenshaDaichoList;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA4010012.ShikakuShosaiDiv;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KaigoViewStateKey;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
@@ -35,7 +34,7 @@ public class ShikakuShosai {
 
     //TODO #52997
     //ヘッダー情報の初期表示の制御、値の設定などを行います。
-    private void initializedShikakuShosai(ShikakuShosaiDiv div, HihokenshaDaicho hihokenshaDaicho) {
+    private void initializedShikakuShosai(ShikakuShosaiDiv div, HihokenshaDaichoModel hihokenshaDaicho) {
         //TODO #52997
         //1, 資格詳細画面のTablePanel上に配置されている、取得日などのヘッダー情報に値を設定する。
         //2, 業務Configの保険者情報を元に、ヘッダー情報の表示非表示を設定する。
