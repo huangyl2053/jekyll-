@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.persistence;
 import jp.co.ndensan.reams.db.dba.model.ShikakuShutokuKanrenJohoModel;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class ShikakuShutokuKanrenJohoDac {
 
+    @InjectSession
     private SqlSession session;
 
     /**
