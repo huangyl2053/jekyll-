@@ -182,8 +182,8 @@ public class DbOptionalTest {
 
         private IOptional<RString> sut;
 
-        @Test(expected = Throwable.class)
-        public void get_はコンストラクタで受け取った値がnullの時_Exceptionをスローする() {
+        @Test(expected = NoSuchElementException.class)
+        public void get_はコンストラクタで受け取った値がnullの時_NoSuchElementExceptionをスローする() {
             sut = DbOptional.empty();
             sut.get();
         }
