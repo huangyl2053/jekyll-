@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common;
+package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common;
 
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
@@ -18,12 +18,12 @@ import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
  * @author N3327 三浦 凌
  * @param <T> valueObjectの型
  */
-public final class NotNullCheker<T> implements IValueObjectCheckable<T> {
+public final class NotNullChecker<T> implements IValueObjectCheckable<T> {
 
-    private static final NotNullCheker<?> INSTANCE;
+    private static final NotNullChecker<?> INSTANCE;
 
     static {
-        INSTANCE = new NotNullCheker<>();
+        INSTANCE = new NotNullChecker<>();
     }
 
     /**
@@ -31,13 +31,13 @@ public final class NotNullCheker<T> implements IValueObjectCheckable<T> {
      *
      * @param <T> チェックするvalueObjectが保持する値の型
      * @param clazz チェックするvalueObjectが保持する値のclass
-     * @return NotNullChekerのインスタンス
+     * @return NotNullCheckerのインスタンス
      */
-    public static <T> NotNullCheker<T> getInstance(Class<T> clazz) {
-        return (NotNullCheker<T>) INSTANCE;
+    public static <T> NotNullChecker<T> getInstance(Class<T> clazz) {
+        return (NotNullChecker<T>) INSTANCE;
     }
 
-    private NotNullCheker() {
+    private NotNullChecker() {
     }
 
     @Override

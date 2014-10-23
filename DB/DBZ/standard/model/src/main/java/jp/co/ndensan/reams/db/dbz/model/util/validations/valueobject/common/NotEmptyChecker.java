@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common;
+package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common;
 
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
@@ -19,21 +19,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public final class NotEmptyCheckers {
+public final class NotEmptyChecker {
 
     /**
      * 引数のRStringの{@code isEmpty()}がtrueならば、「必須入力」のバリデーションメッセージを返します。
      */
-    public static final IValueObjectCheckable<RString> RSTRING;
+    private static final IValueObjectCheckable<RString> RSTRING;
 
     static {
-        RSTRING = forRString();
+        RSTRING = createForRString();
     }
 
-    private NotEmptyCheckers() {
+    private NotEmptyChecker() {
     }
 
-    private static _NotEmptyChecker<RString> forRString() {
+    private static _NotEmptyChecker<RString> createForRString() {
         return new _NotEmptyChecker<RString>() {
             @Override
             public boolean isValid(IValueObject<RString> v) {
@@ -46,6 +46,15 @@ public final class NotEmptyCheckers {
                 return !v.value().isEmpty();
             }
         };
+    }
+
+    /**
+     * RString用のEmptyチェックオブジェクトを返します。
+     *
+     * @return RString用のEmptyチェックオブジェクト
+     */
+    public static IValueObjectCheckable<RString> forRString() {
+        return NotEmptyChecker.RSTRING;
     }
 
     /**

@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common;
+package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common;
 
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common.NotNullChecker;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValidationMessages;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectInfo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,11 +21,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * NotNullChekerのテストです。
+ * NotNullCheckerのテストです。
  *
  * @author N3327 三浦 凌
  */
-public class NotNullChekerTest extends DbzTestBase {
+public class NotNullCheckerTest extends DbzTestBase {
 
     private IValueObjectCheckable<RString> sut;
     private IValueObject<RString> value;
@@ -32,7 +33,7 @@ public class NotNullChekerTest extends DbzTestBase {
 
     @Before
     public void setUp() {
-        sut = NotNullCheker.getInstance(RString.class);
+        sut = NotNullChecker.getInstance(RString.class);
         info = new ValueObjectInfo.Builder("test").build();
     }
 

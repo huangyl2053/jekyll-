@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject;
+package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject;
 
 import static jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages.必須;
 import static jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages.項目に対する制約;

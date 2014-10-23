@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.rstring;
+package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring;
 
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public enum CharType implements IValueObjectCheckable<RString> {
+enum CharType implements IValueObjectCheckable<RString> {
 
     /**
      * 文字列が「半角数のみ」かをチェックします。

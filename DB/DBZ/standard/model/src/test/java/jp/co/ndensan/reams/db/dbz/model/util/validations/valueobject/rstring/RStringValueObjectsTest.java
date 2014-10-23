@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.rstring;
+package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectValidatable;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.rstring.RStringChekers.Definitions;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectValidatable;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValidationMessages;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring.RStringValueObjects.Definitions;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -19,14 +19,14 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * RStringChekersのテストです。
+ * RStringValueObjectsのテストです。
  *
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class RStringChekersTest {
+public class RStringValueObjectsTest {
 
-    public RStringChekersTest() {
+    public RStringValueObjectsTest() {
     }
 
     /**
@@ -35,7 +35,7 @@ public class RStringChekersTest {
     @RunWith(Enclosed.class)
     public static class hihokenshaNo extends DbzTestBase {
 
-        private static RStringChekers sut;
+        private static RStringValueObjects sut;
         private static IValueObjectValidatable<HihokenshaNo> validation;
 
         @BeforeClass

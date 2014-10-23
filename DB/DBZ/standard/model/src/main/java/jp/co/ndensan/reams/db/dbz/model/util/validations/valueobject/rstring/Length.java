@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.rstring;
+package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValidationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public final class Length implements IValueObjectCheckable<RString> {
+final class Length implements IValueObjectCheckable<RString> {
 
     private static final RString PARAM_NAME;
     private static final RString MUST_BE_GREATER_OR_EQUAL_0;
@@ -66,7 +66,7 @@ public final class Length implements IValueObjectCheckable<RString> {
      * @return 文字列の長さが、引数の数以上かどうかをチェックする Length
      * @throws IllegalArgumentException 引数が0より小さい時
      */
-    public static IValueObjectCheckable<RString> greaterOrEqual(int length) throws IllegalArgumentException {
+    static IValueObjectCheckable<RString> greaterOrEqual(int length) throws IllegalArgumentException {
         if (length < 0) {
             throw new IllegalArgumentException(
                     UrErrorMessages.項目に対する制約.getMessage()
@@ -84,7 +84,7 @@ public final class Length implements IValueObjectCheckable<RString> {
      * @return 文字列の長さが、引数と一致するかどうかをチェックする Length
      * @throws IllegalArgumentException 引数が0より小さい時
      */
-    public static IValueObjectCheckable<RString> equal(int length) throws IllegalArgumentException {
+    static IValueObjectCheckable<RString> equal(int length) throws IllegalArgumentException {
         if (length < 0) {
             throw new IllegalArgumentException(
                     UrErrorMessages.項目に対する制約.getMessage()
@@ -102,7 +102,7 @@ public final class Length implements IValueObjectCheckable<RString> {
      * @return 文字列の長さが、引数の数以下かどうかをチェックする Length
      * @throws IllegalArgumentException 引数が0より小さい時
      */
-    public static IValueObjectCheckable<RString> lessOrEqual(int length) throws IllegalArgumentException {
+    static IValueObjectCheckable<RString> lessOrEqual(int length) throws IllegalArgumentException {
         if (length < 0) {
             throw new IllegalArgumentException(
                     UrErrorMessages.項目に対する制約.getMessage()
@@ -120,7 +120,7 @@ public final class Length implements IValueObjectCheckable<RString> {
      * @return 文字列の長さが、引数の数未満かどうかをチェックする Length
      * @throws IllegalArgumentException 引数が0以下の時
      */
-    public static IValueObjectCheckable<RString> lessThan(int length) throws IllegalArgumentException {
+    static IValueObjectCheckable<RString> lessThan(int length) throws IllegalArgumentException {
         if (length <= 0) {
             throw new IllegalArgumentException(
                     UrErrorMessages.項目に対する制約.getMessage()

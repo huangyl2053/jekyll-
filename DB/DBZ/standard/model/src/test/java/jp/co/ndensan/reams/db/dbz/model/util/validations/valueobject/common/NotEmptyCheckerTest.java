@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common;
+package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common;
 
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common.NotEmptyChecker;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValidationMessages;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectInfo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,14 +23,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * NotEmptyCheckersのテストです。
+ * NotEmptyCheckerのテストです。
  *
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class NotEmptyCheckersTest extends DbzTestBase {
+public class NotEmptyCheckerTest extends DbzTestBase {
 
-    public NotEmptyCheckersTest() {
+    public NotEmptyCheckerTest() {
     }
 
     public static class RSTRING extends DbzTestBase {
@@ -40,7 +41,7 @@ public class NotEmptyCheckersTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-            sut = NotEmptyCheckers.RSTRING;
+            sut = NotEmptyChecker.forRString();
             info = new ValueObjectInfo.Builder("テスト").build();
         }
 

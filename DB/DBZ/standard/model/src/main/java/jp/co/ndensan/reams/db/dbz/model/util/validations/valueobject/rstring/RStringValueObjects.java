@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.rstring;
+package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring;
 
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.Unit;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common.NotEmptyCheckers;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.Unit;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common.NotEmptyChecker;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectValidatable;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common.NotNullCheker;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectValidatable;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common.NotNullChecker;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.ValidationChain;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
@@ -27,9 +27,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public final class RStringChekers {
+public final class RStringValueObjects {
 
-    private RStringChekers() {
+    private RStringValueObjects() {
     }
 
     /**
@@ -160,7 +160,7 @@ public final class RStringChekers {
      * @return nullでないことを調べるインスタンス
      */
     public static IValueObjectCheckable<RString> notNull() {
-        return NotNullCheker.getInstance(RString.class);
+        return NotNullChecker.getInstance(RString.class);
     }
 
     /**
@@ -169,6 +169,6 @@ public final class RStringChekers {
      * @return {@link RString#EMPTY RStirng.EMPTY}でないことを調べるインスタンス
      */
     public static IValueObjectCheckable<RString> notEmpty() {
-        return NotEmptyCheckers.RSTRING;
+        return NotEmptyChecker.forRString();
     }
 }
