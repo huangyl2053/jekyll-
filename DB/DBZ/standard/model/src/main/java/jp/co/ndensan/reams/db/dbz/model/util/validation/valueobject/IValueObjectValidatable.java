@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 
 /**
- * ValueObjectに対するバリデーションが可能であることを表します。
+ * ValueObjectに対するバリデーションができることを表します。
  *
  * @author N3327 三浦 凌
  * @param <T> ValueObject

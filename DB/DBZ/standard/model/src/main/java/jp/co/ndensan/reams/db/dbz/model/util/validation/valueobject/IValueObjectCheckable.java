@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 
 /**
- * ValueObjectについて、値の妥当性をチェックしたり、その内容をメッセージとして返すことができる能力を持つことを表します。
+ * ValueObjectについて、値の妥当性をチェックしたり、その内容をメッセージとして返すことができることを表します。
  *
  * @author N3327 三浦 凌
  * @param <T> ValueObjectが保持する型
