@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.realservice;
 
-import jp.co.ndensan.reams.db.dba.business.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dba.business.HihokenshaDaichoList;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
@@ -27,35 +26,6 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Enclosed.class)
 public class HihokenshaDaichoManagerTest {
-
-    public static class get被保険者台帳 extends DbaTestBase {
-        //TODO #52997
-        //Dacが想定どおりに呼び出せていることをテストします。
-        //テスト用コンストラクタから、処理が通るように作成したMockDacを渡して、想定どおりの戻り値が返るかどうかのテストを作成してください。
-    }
-
-    public static class get被保険者台帳List__市町村コード_被保険者番号を引数で受け取る場合 extends DbaTestBase {
-        //TODO #52997
-        //Dacが想定どおりに呼び出せていることをテストします。
-        //テスト用コンストラクタから、処理が通るように作成したMockDacを渡して、想定どおりの戻り値が返るかどうかのテストを作成してください。
-        //
-        //例：
-        //1, 3件のListを返すMockDacを用意。
-        //2, MockDacをテスト用コンストラクタに渡して、HihokenshaDaichoManagerのインスタンスを生成。
-        //3, get被保険者台帳Listを実行して、3件のListが返るかを確認する。
-    }
-
-    public static class get被保険者台帳List__市町村コード_識別コードを引数で受け取る場合 extends DbaTestBase {
-        //TODO #52997
-        //Dacが想定どおりに呼び出せていることをテストします。
-        //テスト用コンストラクタから、処理が通るように作成したMockDacを渡して、想定どおりの戻り値が返るかどうかのテストを作成してください。
-    }
-
-    public static class get被保険者台帳List__市町村コード_被保険者番号_資格取得日を引数で受け取る場合 extends DbaTestBase {
-        //TODO #52997
-        //Dacが想定どおりに呼び出せていることをテストします。
-        //テスト用コンストラクタから、処理が通るように作成したMockDacを渡して、想定どおりの戻り値が返るかどうかのテストを作成してください。
-    }
 
     public static class save extends DbaTestBase {
         //TODO #52997
