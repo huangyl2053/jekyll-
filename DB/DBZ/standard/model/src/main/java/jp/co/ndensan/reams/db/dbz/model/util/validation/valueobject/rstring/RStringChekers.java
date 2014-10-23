@@ -108,8 +108,8 @@ public final class RStringChekers {
     /**
      * Definitions において、表示する名前を定義するのに用います。
      *
-     * @param name
-     * @return
+     * @param name 表示する名前
+     * @return 表示する名前を返すsupplier
      */
     private static ISupplier<RString> nameToDisplay(final String name) {
         Objects.requireNonNull(name);
