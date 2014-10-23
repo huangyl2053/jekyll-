@@ -73,7 +73,7 @@ public final class DbOptional<T> implements IOptional<T> {
     @Override
     public T get() {
         if (this.value == null) {
-            throw new RuntimeException("value is not present.");
+            throw new NoSuchElementException("value is not present.");
         }
         return value;
     }
