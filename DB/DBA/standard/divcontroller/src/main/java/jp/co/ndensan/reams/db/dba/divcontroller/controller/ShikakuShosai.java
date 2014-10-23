@@ -8,7 +8,10 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA4010012.ShikakuShosaiDiv;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KaigoViewStateKey;
+import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 被保険者が資格を取得してから喪失するまでの、詳細な情報を表示するDivControllerです。
@@ -19,7 +22,7 @@ public class ShikakuShosai {
 
     public ResponseData<ShikakuShosaiDiv> initialize(ShikakuShosaiDiv div) {
         //1, ViewStateから、前画面で設定したModelを取得する。
-        //      ViewStateHolder.put("引継ぎ対象者", model)
+        //      ViewStateHolder.get(KaigoViewStateKey.被保険者台帳.getKey(), HihokenshaDaichoModel.class)
         //1, ViewStateから取得したModelが持つキー情報を元に、以下のデータを取得する。
         //      被保険者台帳（List）、施設入退所（List）
         //3, それぞれの初期化処理を呼び出して実行してください。
