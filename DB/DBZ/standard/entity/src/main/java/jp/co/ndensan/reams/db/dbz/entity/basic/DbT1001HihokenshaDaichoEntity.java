@@ -1,7 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,20 +12,18 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuKaijo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuTekiyo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuHihokensha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuHihokennsha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KofuJiyu;
 
 /**
  * DbT1001HihokenshaDaichoの項目定義クラスです
  *
  */
-public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001HihokenshaDaichoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1001HihokenshaDaicho");
@@ -47,29 +44,29 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
     private YMDHMS shoriTimestamp;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private ShikibetsuCode shikibetsuCode;
-    private KaigoshikakuShutokuJiyuHihokensha shikakuShutokuJiyuCode;
+    private RString shikakuShutokuJiyuCode;
     private FlexibleDate shikakuShutokuYMD;
     private FlexibleDate shikakuShutokuTodokedeYMD;
     private FlexibleDate ichigoHihokenshaNenreiTotatsuYMD;
-    private RString hihokennshaKubunCode;
-    private KaigoshikakuSoshitsuJiyuHihokennsha shikakuSoshitsuJiyuCode;
+    private Code hihokennshaKubunCode;
+    private RString shikakuSoshitsuJiyuCode;
     private FlexibleDate shikakuSoshitsuYMD;
     private FlexibleDate shikakuSoshitsuTodokedeYMD;
     private RString jushochiTokureiFlag;
-    private KaigoshikakuHenkoJiyuHihokensha shikakuHenkoJiyuCode;
+    private RString shikakuHenkoJiyuCode;
     private FlexibleDate shikakuHenkoYMD;
     private FlexibleDate shikakuHenkoTodokedeYMD;
-    private KaigoshikakuJutokuTekiyo jushochitokureiTekiyoJiyuCode;
+    private RString jushochitokureiTekiyoJiyuCode;
     private FlexibleDate jushochitokureiTekiyoYMD;
     private FlexibleDate jushochitokureiTekiyoTodokedeYMD;
-    private KaigoshikakuJutokuKaijo jushochitokureiKaijoJiyuCode;
+    private RString jushochitokureiKaijoJiyuCode;
     private FlexibleDate jushochitokureiKaijoYMD;
     private FlexibleDate jushochitokureiKaijoTodokedeYMD;
     private RString koikinaiJushochiTokureiFlag;
     private ShoKisaiHokenshaNo koikinaiTokureiSochimotoHokenshaNo;
     private LasdecCode kyuShichosonCode;
     private RString saikofuKubun;
-    private KofuJiyu saikofuJiyuCode;
+    private RString saikofuJiyuCode;
     private RString chohyoKofuRirekiID;
 
     /**
@@ -212,7 +209,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return shikakuShutokuJiyuCode
      */
-    public KaigoshikakuShutokuJiyuHihokensha getShikakuShutokuJiyuCode() {
+    public RString getShikakuShutokuJiyuCode() {
         return shikakuShutokuJiyuCode;
     }
 
@@ -221,7 +218,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param shikakuShutokuJiyuCode shikakuShutokuJiyuCode
      */
-    public void setShikakuShutokuJiyuCode(KaigoshikakuShutokuJiyuHihokensha shikakuShutokuJiyuCode) {
+    public void setShikakuShutokuJiyuCode(RString shikakuShutokuJiyuCode) {
         this.shikakuShutokuJiyuCode = shikakuShutokuJiyuCode;
     }
 
@@ -284,7 +281,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return hihokennshaKubunCode
      */
-    public RString getHihokennshaKubunCode() {
+    public Code getHihokennshaKubunCode() {
         return hihokennshaKubunCode;
     }
 
@@ -293,8 +290,30 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param hihokennshaKubunCode hihokennshaKubunCode
      */
-    public void setHihokennshaKubunCode(RString hihokennshaKubunCode) {
+    public void setHihokennshaKubunCode(Code hihokennshaKubunCode) {
         this.hihokennshaKubunCode = hihokennshaKubunCode;
+    }
+
+    /**
+     * getHihokennshaKubunCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getHihokennshaKubunCodeMeisho() {
+        //TODO n8178 城間篤人 コード取得法がわかり次第修正 2014年9月末
+        return new RString("第1号被保険者");
+        //return CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DbeShubetsuKey.認定審査員区分, hihokennshaKubunCode);
+    }
+
+    /**
+     * getHihokennshaKubunCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getHihokennshaKubunCodeRyakusho() {
+        //TODO n8178 城間篤人 コード取得法がわかり次第修正 2014年9月末
+        return new RString("第1号");
+        //return CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, DbeShubetsuKey.認定審査員区分, hihokennshaKubunCode);
     }
 
     /**
@@ -302,7 +321,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return shikakuSoshitsuJiyuCode
      */
-    public KaigoshikakuSoshitsuJiyuHihokennsha getShikakuSoshitsuJiyuCode() {
+    public RString getShikakuSoshitsuJiyuCode() {
         return shikakuSoshitsuJiyuCode;
     }
 
@@ -311,7 +330,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param shikakuSoshitsuJiyuCode shikakuSoshitsuJiyuCode
      */
-    public void setShikakuSoshitsuJiyuCode(KaigoshikakuSoshitsuJiyuHihokennsha shikakuSoshitsuJiyuCode) {
+    public void setShikakuSoshitsuJiyuCode(RString shikakuSoshitsuJiyuCode) {
         this.shikakuSoshitsuJiyuCode = shikakuSoshitsuJiyuCode;
     }
 
@@ -374,7 +393,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return shikakuHenkoJiyuCode
      */
-    public KaigoshikakuHenkoJiyuHihokensha getShikakuHenkoJiyuCode() {
+    public RString getShikakuHenkoJiyuCode() {
         return shikakuHenkoJiyuCode;
     }
 
@@ -383,7 +402,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param shikakuHenkoJiyuCode shikakuHenkoJiyuCode
      */
-    public void setShikakuHenkoJiyuCode(KaigoshikakuHenkoJiyuHihokensha shikakuHenkoJiyuCode) {
+    public void setShikakuHenkoJiyuCode(RString shikakuHenkoJiyuCode) {
         this.shikakuHenkoJiyuCode = shikakuHenkoJiyuCode;
     }
 
@@ -428,7 +447,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return jushochitokureiTekiyoJiyuCode
      */
-    public KaigoshikakuJutokuTekiyo getJushochitokureiTekiyoJiyuCode() {
+    public RString getJushochitokureiTekiyoJiyuCode() {
         return jushochitokureiTekiyoJiyuCode;
     }
 
@@ -437,7 +456,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param jushochitokureiTekiyoJiyuCode jushochitokureiTekiyoJiyuCode
      */
-    public void setJushochitokureiTekiyoJiyuCode(KaigoshikakuJutokuTekiyo jushochitokureiTekiyoJiyuCode) {
+    public void setJushochitokureiTekiyoJiyuCode(RString jushochitokureiTekiyoJiyuCode) {
         this.jushochitokureiTekiyoJiyuCode = jushochitokureiTekiyoJiyuCode;
     }
 
@@ -482,7 +501,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return jushochitokureiKaijoJiyuCode
      */
-    public KaigoshikakuJutokuKaijo getJushochitokureiKaijoJiyuCode() {
+    public RString getJushochitokureiKaijoJiyuCode() {
         return jushochitokureiKaijoJiyuCode;
     }
 
@@ -491,7 +510,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param jushochitokureiKaijoJiyuCode jushochitokureiKaijoJiyuCode
      */
-    public void setJushochitokureiKaijoJiyuCode(KaigoshikakuJutokuKaijo jushochitokureiKaijoJiyuCode) {
+    public void setJushochitokureiKaijoJiyuCode(RString jushochitokureiKaijoJiyuCode) {
         this.jushochitokureiKaijoJiyuCode = jushochitokureiKaijoJiyuCode;
     }
 
@@ -609,7 +628,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return saikofuJiyuCode
      */
-    public KofuJiyu getSaikofuJiyuCode() {
+    public RString getSaikofuJiyuCode() {
         return saikofuJiyuCode;
     }
 
@@ -618,7 +637,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param saikofuJiyuCode saikofuJiyuCode
      */
-    public void setSaikofuJiyuCode(KofuJiyu saikofuJiyuCode) {
+    public void setSaikofuJiyuCode(RString saikofuJiyuCode) {
         this.saikofuJiyuCode = saikofuJiyuCode;
     }
 
@@ -647,7 +666,6 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT1001HihokenshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
-    @Override
     public boolean equalsPrimaryKeys(DbT1001HihokenshaDaichoEntity other) {
         if (other == null) {
             return false;
@@ -662,52 +680,6 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
             return false;
         }
         return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void shallowCopy(DbT1001HihokenshaDaichoEntity entity) {
-        this.shichosonCode = entity.shichosonCode;
-        this.hihokenshaNo = entity.hihokenshaNo;
-        this.shoriTimestamp = entity.shoriTimestamp;
-        this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
-        this.shikibetsuCode = entity.shikibetsuCode;
-        this.shikakuShutokuJiyuCode = entity.shikakuShutokuJiyuCode;
-        this.shikakuShutokuYMD = entity.shikakuShutokuYMD;
-        this.shikakuShutokuTodokedeYMD = entity.shikakuShutokuTodokedeYMD;
-        this.ichigoHihokenshaNenreiTotatsuYMD = entity.ichigoHihokenshaNenreiTotatsuYMD;
-        this.hihokennshaKubunCode = entity.hihokennshaKubunCode;
-        this.shikakuSoshitsuJiyuCode = entity.shikakuSoshitsuJiyuCode;
-        this.shikakuSoshitsuYMD = entity.shikakuSoshitsuYMD;
-        this.shikakuSoshitsuTodokedeYMD = entity.shikakuSoshitsuTodokedeYMD;
-        this.jushochiTokureiFlag = entity.jushochiTokureiFlag;
-        this.shikakuHenkoJiyuCode = entity.shikakuHenkoJiyuCode;
-        this.shikakuHenkoYMD = entity.shikakuHenkoYMD;
-        this.shikakuHenkoTodokedeYMD = entity.shikakuHenkoTodokedeYMD;
-        this.jushochitokureiTekiyoJiyuCode = entity.jushochitokureiTekiyoJiyuCode;
-        this.jushochitokureiTekiyoYMD = entity.jushochitokureiTekiyoYMD;
-        this.jushochitokureiTekiyoTodokedeYMD = entity.jushochitokureiTekiyoTodokedeYMD;
-        this.jushochitokureiKaijoJiyuCode = entity.jushochitokureiKaijoJiyuCode;
-        this.jushochitokureiKaijoYMD = entity.jushochitokureiKaijoYMD;
-        this.jushochitokureiKaijoTodokedeYMD = entity.jushochitokureiKaijoTodokedeYMD;
-        this.koikinaiJushochiTokureiFlag = entity.koikinaiJushochiTokureiFlag;
-        this.koikinaiTokureiSochimotoHokenshaNo = entity.koikinaiTokureiSochimotoHokenshaNo;
-        this.kyuShichosonCode = entity.kyuShichosonCode;
-        this.saikofuKubun = entity.saikofuKubun;
-        this.saikofuJiyuCode = entity.saikofuJiyuCode;
-        this.chohyoKofuRirekiID = entity.chohyoKofuRirekiID;
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return {@inheritDoc}
-     */
-    @Override
-    public RString getMd5() {
-        return super.toMd5(shichosonCode, hihokenshaNo, shoriTimestamp, shoKisaiHokenshaNo, shikibetsuCode, shikakuShutokuJiyuCode, shikakuShutokuYMD, shikakuShutokuTodokedeYMD, ichigoHihokenshaNenreiTotatsuYMD, hihokennshaKubunCode, shikakuSoshitsuJiyuCode, shikakuSoshitsuYMD, shikakuSoshitsuTodokedeYMD, jushochiTokureiFlag, shikakuHenkoJiyuCode, shikakuHenkoYMD, shikakuHenkoTodokedeYMD, jushochitokureiTekiyoJiyuCode, jushochitokureiTekiyoYMD, jushochitokureiTekiyoTodokedeYMD, jushochitokureiKaijoJiyuCode, jushochitokureiKaijoYMD, jushochitokureiKaijoTodokedeYMD, koikinaiJushochiTokureiFlag, koikinaiTokureiSochimotoHokenshaNo, kyuShichosonCode, saikofuKubun, saikofuJiyuCode, chohyoKofuRirekiID);
     }
 
 // </editor-fold>
