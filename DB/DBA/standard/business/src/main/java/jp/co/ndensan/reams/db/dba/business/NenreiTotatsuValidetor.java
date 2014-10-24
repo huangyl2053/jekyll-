@@ -42,10 +42,15 @@ public class NenreiTotatsuValidetor implements IValidatable {
         //TODO #52997
         //生年月日と資格取得日を比較して、資格取得可能な年齢であるかどうかを判定する処理を実装してください。
         //資格取得可能な年齢は、取得事由によって変化するため、以下のように判定処理を分岐させてください。
-        //if(取得事由 == 年齢到達) の場合
-        //      (資格取得日 - 生年月日) < 65 ならメッセージを返す。
-        //else
-        //      (資格取得日 - 生年月日) < 40 ならメッセージを返す。
+        //
+        //1, 業務コンフィグから、年齢到達の基準を取得する。
+        //  if(取得事由 == 年齢到達) の場合
+        //      年齢到達の基準：65歳
+        //  else
+        //      年齢到達の基準：40歳
+        //
+        //2, 取得した年齢到達の基準を元に、以下の判定を行う。
+        //      (資格取得日 - 生年月日) < 年齢到達の基準 : 条件を満たす場合メッセージを返す。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
