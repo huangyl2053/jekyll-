@@ -4,12 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryokikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
@@ -21,7 +21,7 @@ public class ShujiiIryoKikan implements IShujiiIryoKikan {
 
     private final LasdecCode 市町村コード;
     private final KaigoIryoKikanCode 介護医療機関コード;
-    private final IIryoKikanCode 医療機関コード;
+    private final IryokikanCode 医療機関コード;
     private final IryoKikanJokyo 医療機関の状況;
     private final IryoKikanKubun 医療機関の区分;
 
@@ -36,7 +36,7 @@ public class ShujiiIryoKikan implements IShujiiIryoKikan {
      * @throws NullPointerException 市町村コード、介護医療機関コード、医療機関コード、医療機関状況にNULLが渡された場合
      */
     public ShujiiIryoKikan(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード,
-            IIryoKikanCode 医療機関コード, IryoKikanJokyo 医療機関の状況, IryoKikanKubun 医療機関の区分) throws NullPointerException {
+            IryokikanCode 医療機関コード, IryoKikanJokyo 医療機関の状況, IryoKikanKubun 医療機関の区分) throws NullPointerException {
         requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", getClass().getName()).getMessage());
         requireNonNull(介護医療機関コード, Messages.E00003.replace("介護医療機関コード", getClass().getName()).getMessage());
         requireNonNull(医療機関コード, Messages.E00003.replace("get医療機関コード", getClass().getName()).getMessage());
@@ -60,7 +60,7 @@ public class ShujiiIryoKikan implements IShujiiIryoKikan {
     }
 
     @Override
-    public IIryoKikanCode get医療機関コード() {
+    public IryokikanCode get医療機関コード() {
         return 医療機関コード;
     }
 
