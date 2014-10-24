@@ -43,6 +43,7 @@ public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
         //TODO #52997
         //1, Dacクラスの、市町村コード・被保険者番号・処理日時を指定するメソッドを呼び出し、DbT1001HihokenshaDaichoEntityを取得します。
         //   Dacに当該メソッドが存在しない場合は追加してください。
+        //   Dacから返る検索結果は、nullがきても大丈夫なようにIOptionalを利用して受け取ってください。
         //2, EntityをHihokenshaDaichoModelに変換してreturnします。
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -52,6 +53,7 @@ public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
         //TODO #52997
         //1, Dacクラスの、市町村コード・被保険者番号を指定するメソッドを呼び出し、DbT1001HihokenshaDaichoEntityのListを取得します。
         //   Dacに当該メソッドが存在しない場合は追加してください。Dacが返るListは必ず、取得日の降順になるようにしてください。
+        //   Dacから返る検索結果は、IItemListを利用して受け取ってください。
         //2, EntityのListをHihokenshaDaichoListに変換してreturnします。
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -61,6 +63,7 @@ public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
         //TODO #52997
         //1, Dacクラスの、市町村コード・識別コードを指定するメソッドを呼び出し、DbT1001HihokenshaDaichoEntityのListを取得します。
         //   Dacに当該メソッドが存在しない場合は追加してください。Dacが返るListは必ず、取得日の降順になるようにしてください。
+        //   Dacから返る検索結果は、IItemListを利用して受け取ってください。
         //2, 取得したEntityListから、識別コードに紐付く最新のEntityを取得します。
         //3, 最新のEntityが持つ被保険者番号を取得します。
         //4, 取得した被保険者番号を元にもう一度検索を行います。
@@ -74,6 +77,7 @@ public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
         //TODO #52997
         //1, Dacクラスの、市町村コード・被保険者番号・資格取得日を指定するメソッドを呼び出し、DbT1001HihokenshaDaichoEntityのListを取得します。
         //   Dacに当該メソッドが存在しない場合は追加してください。Dacが返るListは必ず、取得日の降順になるようにしてください。
+        //   Dacから返る検索結果は、IItemListを利用して受け取ってください。
         //2, EntityのListをHihokenshaDaichoListに変換してreturnします。
         throw new UnsupportedOperationException("Not supported yet.");
     }
