@@ -17,6 +17,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzModel</artifactId>
+        </dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzModel</artifactId>
         </dependency>

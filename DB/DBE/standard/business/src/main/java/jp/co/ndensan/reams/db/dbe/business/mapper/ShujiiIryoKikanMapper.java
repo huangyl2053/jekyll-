@@ -10,9 +10,8 @@ import jp.co.ndensan.reams.db.dbe.business.ShujiiIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryokikanCode;
 
 /**
  * 主治医医療機関のマッパーです。
@@ -44,8 +43,8 @@ public final class ShujiiIryoKikanMapper {
                 create医療機関区分(shujiiIryokikanEntity));
     }
 
-    private static IIryoKikanCode create医療機関コード(DbT7011ShujiiIryoKikanJohoEntity entity) {
-        return new _IryoKikanCode(entity.getIryokikanCode());
+    private static IryokikanCode create医療機関コード(DbT7011ShujiiIryoKikanJohoEntity entity) {
+        return new IryokikanCode(entity.getIryokikanCode());
     }
 
     private static IryoKikanKubun create医療機関区分(DbT7011ShujiiIryoKikanJohoEntity entity) {
@@ -69,7 +68,7 @@ public final class ShujiiIryoKikanMapper {
         entity.setShichosonCode(iryoKikan.get市町村コード());
         entity.setKaigoIryokikanCode(iryoKikan.get介護医療機関コード());
         //TODO n8178 城間篤人 IDbColumnMappableじゃないが、共通の医療機関テーブルが確定するまでは、扱いを保留にする 2014年2月末
-        entity.setIryokikanCode(iryoKikan.get医療機関コード().getValue());
+        entity.setIryokikanCode(iryoKikan.get医療機関コード().value());
         entity.setIryokikanJokyo(iryoKikan.is有効());
         entity.setKikanKubunCode(iryoKikan.get医療機関区分().getCode());
         return entity;

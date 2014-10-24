@@ -9,14 +9,10 @@
     <artifactId>DbzTestHelper</artifactId>
     <packaging>jar</packaging>
     <name>DbzTestHelper</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
     </dependencies>
-
-
 </project>
