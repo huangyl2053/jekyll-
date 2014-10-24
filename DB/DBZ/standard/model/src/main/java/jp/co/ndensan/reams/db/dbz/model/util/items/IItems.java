@@ -81,7 +81,7 @@ public interface IItems<E> extends Iterable<E> {
      * @return {@link ICondition IConditon}に該当する要素があれば{@code true},
      * なければ{@code false}
      */
-    boolean containsLike(ICondition<? super E> condition);
+    boolean containsAny(ICondition<? super E> condition);
 
     /**
      * 保持する要素が1件の時{@code true}を返します。

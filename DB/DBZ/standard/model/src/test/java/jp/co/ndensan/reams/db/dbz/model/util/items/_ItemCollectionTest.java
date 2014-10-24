@@ -244,7 +244,7 @@ public class _ItemCollectionTest extends DbzTestBase {
         }
     }
 
-    public static class containsLike extends DbzTestBase {
+    public static class containsAny extends DbzTestBase {
 
         private _ItemCollection<RString> sut;
         private _ItemCollection<RString> target;
@@ -257,8 +257,8 @@ public class _ItemCollectionTest extends DbzTestBase {
         }
 
         @Test
-        public void containsLike_は引数の条件に当てはまるオブジェクトがある時_trueを返す() {
-            assertThat(sut.containsLike(equalsVAL1()), is(true));
+        public void containsAny_は引数の条件に当てはまるオブジェクトがある時_trueを返す() {
+            assertThat(sut.containsAny(equalsVAL1()), is(true));
         }
 
         private ICondition<RString> equalsVAL1() {
@@ -271,8 +271,8 @@ public class _ItemCollectionTest extends DbzTestBase {
         }
 
         @Test
-        public void containsLike_は引数の条件に当てはまるオブジェクトが無い時_falseを返す() {
-            assertThat(sut.containsLike(lengthIsFive()), is(false));
+        public void containsAny_は引数の条件に当てはまるオブジェクトが無い時_falseを返す() {
+            assertThat(sut.containsAny(lengthIsFive()), is(false));
         }
 
         private ICondition<RString> lengthIsFive() {

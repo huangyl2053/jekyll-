@@ -9,16 +9,14 @@
     <artifactId>DbzDefinition</artifactId>
     <packaging>jar</packaging>
     <name>DbzDefinition</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
-            <artifactId>UrdDefinition</artifactId>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzDefinition</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
