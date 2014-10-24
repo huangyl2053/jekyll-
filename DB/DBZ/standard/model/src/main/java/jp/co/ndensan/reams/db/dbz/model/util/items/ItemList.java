@@ -120,7 +120,7 @@ public final class ItemList<E> implements IItemList<E> {
     }
 
     @Override
-    public boolean containsLike(ICondition<? super E> condition) {
-        return this.defaultImpl.containsLike(condition);
+    public boolean containsAny(ICondition<? super E> condition) {
+        return this.defaultImpl.containsAny(condition);
     }
 }

@@ -94,7 +94,7 @@ final class _ItemCollection<E> implements IItems<E> {
     }
 
     @Override
-    public boolean containsLike(ICondition<? super E> condition) {
+    public boolean containsAny(ICondition<? super E> condition) {
         for (E element : elements) {
             if (condition.check(element)) {
                 return true;

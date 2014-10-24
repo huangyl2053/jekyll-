@@ -4,8 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.mapper.KaigoIryoKikanMapper;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
@@ -13,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbe.business.helper.KaigoIryoKikanTestHelper;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -55,7 +52,6 @@ public class KaigoIryoKikanMapperTest extends TestBase {
         private IIryoKikanCode 医療機関コード;
         private IryoKikanJokyo 医療機関状況;
         private IryoKikanKubun 医療機関区分;
-        private List<IKoza> 口座;
         private KaigoIryoKikan sut;
 
         @Override
@@ -81,40 +77,34 @@ public class KaigoIryoKikanMapperTest extends TestBase {
             医療機関コード = new _IryoKikanCode(new RString("C00000001"));
             医療機関状況 = IryoKikanJokyo.有効;
             医療機関区分 = new IryoKikanKubun(new RString("100"), new RString("名称"), new RString("略称"));
-            口座 = KaigoIryoKikanTestHelper.create口座List(3);
 
-            sut = KaigoIryoKikanMapper.toKaigoIryoKikan(create介護医療機関Entity(), 口座);
+            sut = KaigoIryoKikanMapper.toKaigoIryoKikan(create介護医療機関Entity());
         }
 
         @Test
         public void 必須項目がそろっている場合_インスタンスが生成される() {
-            sut = KaigoIryoKikanMapper.toKaigoIryoKikan(create介護医療機関Entity(), null);
+            sut = KaigoIryoKikanMapper.toKaigoIryoKikan(create介護医療機関Entity());
             assertThat(sut, instanceOf(KaigoIryoKikan.class));
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の介護医療機関エンティティにnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = KaigoIryoKikanMapper.toKaigoIryoKikan(null, 口座);
+            sut = KaigoIryoKikanMapper.toKaigoIryoKikan(null);
         }
 
         @Test
         public void 引数から渡された医療機関コードと_戻り値の介護医療機関クラスの医療機関コードが同一になる() {
-            assertThat(sut.get医療機関コード().getValue(), is(医療機関コード.getValue()));
-        }
-
-        @Test
-        public void 引数から渡された識別コードと_戻り値の介護医療機関クラスの識別コードが同一になる() {
-            assertThat(sut.get識別コード().getColumnValue(), is(識別コード));
+            assertThat(sut.get医療機関コード().value(), is(医療機関コード.getValue()));
         }
 
         @Test
         public void 引数から渡された医療機関名称と_戻り値の介護医療機関クラスの医療機関名称が同一になる() {
-            assertThat(sut.get医療機関名称().getName().value(), is(医療機関名称));
+            assertThat(sut.get医療機関名称().value(), is(医療機関名称));
         }
 
         @Test
         public void 引数から渡された医療機関略称と_戻り値の介護医療機関クラスの医療機関略称が同一になる() {
-            assertThat(sut.get医療機関略称().getName().value(), is(医療機関略称));
+            assertThat(sut.get医療機関略称(), is(医療機関略称));
         }
 
 //        @Test
@@ -152,40 +142,39 @@ public class KaigoIryoKikanMapperTest extends TestBase {
 //        public void 引数から渡された新設年月日から廃止年月日までの期間の外に_基準日を設定すると_is有効医療機関がfalseを返す() {
 //            sut.is有効医療機関(new FlexibleDate("20211212"));
 //        }
-        @Test
-        public void 引数から渡された所属医師が空である() {
-            assertThat(sut.get所属医師().iterator().hasNext(), is(false));
-        }
-
-        @Test
-        public void 引数から渡された口座Listと_戻り値の介護医療機関クラスの口座Listが同一になる() {
-            assertThat(sut.get口座(), is(口座));
-        }
-
+//        @Test
+//        public void 引数から渡された所属医師が空である() {
+//            assertThat(sut.get所属医師().iterator().hasNext(), is(false));
+//        }
+//        @Test
+//        public void 引数から渡された口座Listと_戻り値の介護医療機関クラスの口座Listが同一になる() {
+//            assertThat(sut.get口座(), is(口座));
+//        }
+//
         @Test
         public void 引数から渡された異動年月日と_戻り値の介護医療機関クラスの異動年月日が同一になる() {
             assertThat(sut.get異動年月日(), is(異動年月日));
         }
-
-        @Test
-        public void 引数から渡された休止区分と_戻り値の介護医療機関クラスの休止区分が同一になる() {
-            assertThat(sut.get休止区分(), is(休止区分));
-        }
-
-        @Test
-        public void 引数から渡された異動事由と_戻り値の介護医療機関クラスの異動事由が同一になる() {
-            assertThat(sut.get異動事由(), is(異動事由));
-        }
-
-        @Test
-        public void 引数から渡された会員区分と_戻り値の介護医療機関クラスの会員区分が同一になる() {
-            assertThat(sut.get会員区分(), is(会員区分));
-        }
-
-        @Test
-        public void 引数から渡された医療機関コードの点数表区分_戻り値の介護医療機関クラスの点数表が同一になる() {
-            assertThat(sut.get点数表(), is(医療機関コード.get点数表区分()));
-        }
+//
+//        @Test
+//        public void 引数から渡された休止区分と_戻り値の介護医療機関クラスの休止区分が同一になる() {
+//            assertThat(sut.get休止区分(), is(休止区分));
+//        }
+//
+//        @Test
+//        public void 引数から渡された異動事由と_戻り値の介護医療機関クラスの異動事由が同一になる() {
+//            assertThat(sut.get異動事由(), is(異動事由));
+//        }
+//
+//        @Test
+//        public void 引数から渡された会員区分と_戻り値の介護医療機関クラスの会員区分が同一になる() {
+//            assertThat(sut.get会員区分(), is(会員区分));
+//        }
+//
+//        @Test
+//        public void 引数から渡された医療機関コードの点数表区分_戻り値の介護医療機関クラスの点数表が同一になる() {
+//            assertThat(sut.get点数表(), is(医療機関コード.get点数表区分()));
+//        }
 
         @Test
         public void 引数から渡された指定自立支援医療機関flagと_戻り値の介護医療機関クラスの指定自立支援医療機関flagが同一になる() {

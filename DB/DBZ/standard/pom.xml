@@ -6,17 +6,14 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>DBZ</name>
-
     <parent>
         <groupId>jp.co.ndensan.reams.db</groupId>
         <artifactId>db</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../../</relativePath>
     </parent>
-
     <properties>
     </properties>
-
     <modules>
         <module>entity</module>
         <module>business</module>
@@ -28,5 +25,4 @@
         <module>testhelper</module>
         <module>model</module>
     </modules>
-
 </project>

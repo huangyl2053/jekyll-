@@ -11,8 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShuJiiIryoKikanDac;
-import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryokikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -110,7 +109,7 @@ public class ShujiiIryoKikanManagerTest extends TestBase {
     private static IShujiiIryoKikan create主治医医療機関() {
         LasdecCode 市町村コード_000001 = new LasdecCode(new RString("000001"));
         KaigoIryoKikanCode 介護医療機関コード_B001 = new KaigoIryoKikanCode(new RString("B001"));
-        IIryoKikanCode 医療機関コード_C00000001 = new _IryoKikanCode(new RString("C00000001"));
+        IryokikanCode 医療機関コード_C00000001 = new IryokikanCode(new RString("C00000001"));
         IryoKikanJokyo 医療機関状況_有効 = IryoKikanJokyo.有効;
         IryoKikanKubun 医療機関区分_ABC = new IryoKikanKubun(new RString("ABC"), new RString("名称"), new RString("略称"));
 
