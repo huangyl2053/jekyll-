@@ -48,6 +48,12 @@ public class HihokenshaDaichoModel implements IHihokensaDaicho {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public void setState() {
+        //TODO #52997
+        //Entityの更新stateを設定する処理を実装してください。
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
     //TODO #52997
     //以下のgetterは、それぞれのメソッドに対応する値をEntityからgetする形で実装してください。
     @Override
@@ -195,4 +201,6 @@ public class HihokenshaDaichoModel implements IHihokensaDaicho {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    //TODO #52997
+    //以下に、Entityのメンバに対して値を設定するためのsetterを用意してください。
 }
