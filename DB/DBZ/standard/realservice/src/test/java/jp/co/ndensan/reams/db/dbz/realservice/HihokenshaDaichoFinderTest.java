@@ -40,7 +40,7 @@ public class HihokenshaDaichoFinderTest {
         //
         //例：
         //1, 3件のListを返すMockDacを用意。
-        //2, MockDacをテスト用コンストラクタに渡して、HihokenshaDaichoManagerのインスタンスを生成。
+        //2, MockDacをテスト用コンストラクタに渡して、HihokenshaDaichoFinderのインスタンスを生成。
         //3, get被保険者台帳Listを実行して、3件のListが返るかを確認する。
     }
 
