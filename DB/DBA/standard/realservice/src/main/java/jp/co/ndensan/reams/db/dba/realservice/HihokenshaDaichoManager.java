@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.realservice;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.realservice.IHihokenshaDaichoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -45,7 +46,7 @@ public class HihokenshaDaichoManager implements IHihokenshaDaichoFinder {
     //  this.finder = finder;
     //}
     @Override
-    public HihokenshaDaichoModel find被保険者台帳(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号, YMDHMS 処理日時) {
+    public IOptional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号, YMDHMS 処理日時) {
         //TODO #52997
         //1, finderで実装している同じメソッドを呼び出して実装してください。
         throw new UnsupportedOperationException("Not supported yet.");

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -39,11 +40,10 @@ public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
     //  this.dac = dac;
     //}
     @Override
-    public HihokenshaDaichoModel find被保険者台帳(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号, YMDHMS 処理日時) {
+    public IOptional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号, YMDHMS 処理日時) {
         //TODO #52997
         //1, Dacクラスの、市町村コード・被保険者番号・処理日時を指定するメソッドを呼び出し、DbT1001HihokenshaDaichoEntityを取得します。
         //   Dacに当該メソッドが存在しない場合は追加してください。
-        //   Dacから返る検索結果は、nullがきても大丈夫なようにIOptionalを利用して受け取ってください。
         //2, EntityをHihokenshaDaichoModelに変換してreturnします。
         throw new UnsupportedOperationException("Not supported yet.");
     }

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -34,7 +35,7 @@ public interface IHihokenshaDaichoFinder {
      * @param 処理日時 処理日時
      * @return 被保険者台帳
      */
-    HihokenshaDaichoModel find被保険者台帳(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号, YMDHMS 処理日時);
+    IOptional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号, YMDHMS 処理日時);
 
     /**
      * 被保険者番号と市町村コードを指定して、特定の被保険者の台帳情報をListで取得します。
