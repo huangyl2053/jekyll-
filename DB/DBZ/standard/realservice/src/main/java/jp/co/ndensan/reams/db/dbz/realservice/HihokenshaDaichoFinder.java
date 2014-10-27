@@ -27,12 +27,12 @@ public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
      */
     public HihokenshaDaichoFinder() {
         //TODO #52997
-        //HihokenshaDaichoDacが作成されたら、コメントアウトしてください。
+        //HihokenshaDaichoDacが作成されたら、コメントを解除してください。
         //dac = InstanceProvider.create(HihokenshaDaichoDac.class)
     }
 
     //TODO #52997
-    //HihokenshaDaichoDacが作成されたら、コメントアウトしてください。
+    //HihokenshaDaichoDacが作成されたら、コメントを解除してください。
 //    /**
 //     * テスト用コンストラクタです。
 //     *
