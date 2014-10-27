@@ -12,6 +12,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
+ * {@link NenreiTotatsuValidetor}のテストです。
  *
  * @author n8178 城間篤人
  */
