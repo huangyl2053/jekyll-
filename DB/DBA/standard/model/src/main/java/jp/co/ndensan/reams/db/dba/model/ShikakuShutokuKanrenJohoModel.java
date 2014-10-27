@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.model;
 
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
  * @author n8178 城間篤人
  */
 public class ShikakuShutokuKanrenJohoModel {
+
     //TODO #52997
     //更新対象となるModelのListをメンバとして保持している。
     //以下のように、各メンバを宣言していく。
@@ -21,7 +23,7 @@ public class ShikakuShutokuKanrenJohoModel {
     //※genericsに指定しているModelの型は仮に設定しています。
     //Modelの自動生成後に、それぞれ対応する型に変更してください。
     //
-    //private List<HihokenshaDaichoModel> 被保険者台帳ModelList;
+    private List<HihokenshaDaichoModel> 被保険者台帳ModelList;
     //private List<IryoHokenKanyuJokyoModel> 医療保険加入状況ModelList;
     //private List<SeikatsuHogoModel> 生活保護ModelList;
     //private List<RoreiHukusiModel> 老齢福祉ModelList;
@@ -42,11 +44,11 @@ public class ShikakuShutokuKanrenJohoModel {
         //受け取る引数は、全てnullチェックをお願いします。
     }
 
-    public List<HihokenshaDaichoModel> get被保険者台帳Model() {
-        //return 被保険者台帳ModelList;
-        throw new UnsupportedOperationException("Not supported yet.");
+    public List<HihokenshaDaichoModel> get被保険者台帳ModelList() {
+        return Collections.unmodifiableList(被保険者台帳ModelList);
     }
 
     //TODO #52997
-    //各メンバのgetterを以下に実装してください。
+    //get被保険者台帳Modelを参考に、各メンバのgetterを以下に実装してください。
+    //戻り値は必ず、Collestions.ummodifiableListを使用して、変更不可のListにして返すようにしてください。
 }
