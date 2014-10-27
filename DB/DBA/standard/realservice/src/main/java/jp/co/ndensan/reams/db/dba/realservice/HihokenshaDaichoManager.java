@@ -9,12 +9,15 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.IHihokenshaDaichoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 被保険者台帳情報の取得、保存、削除を提供するクラスです。
@@ -23,28 +26,28 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  */
 public class HihokenshaDaichoManager implements IHihokenshaDaichoFinder {
 
-    //private final HihokenshaDaichoDac dac;
-    //private final IHihokenshaDaichoFinder finder;
+    private final HihokenshaDaichoDac dac;
+    private final IHihokenshaDaichoFinder finder;
+
     /**
      * コンストラクタです。
      */
     public HihokenshaDaichoManager() {
-        //TODO #52997
-        //メンバのHihokenshaDaichoDacのインスタンスを、InstanceProviderを使用して作成します。
-        //
-        //実装イメージ（Dacクラスは、自動生成されたものに置き換えてください。
-        //dac = InstanceProvider.create(HihokenshaDaichoDac.class)
-        //Finderもコンストラクタで初期化します。
-        //finder = new HihokenshaDaichoFinder();
+        dac = InstanceProvider.create(HihokenshaDaichoDac.class);
+        finder = new HihokenshaDaichoFinder();
     }
 
-    //TODO #52997
-    //引数からDacを受け取る、テスト用コンストラクタを用意してください。
-    //アクセス修飾子は指定無し(package private)にしてください。
-    //HihoHihokenshaDaichoManager(HihokenshaDaichoDac dac, IHihokenshaDaichoFinder finder){
-    //  this.dac = dac;
-    //  this.finder = finder;
-    //}
+    /**
+     * テスト用コンストラクタです。
+     *
+     * @param dac
+     * @param finder
+     */
+    HihokenshaDaichoManager(HihokenshaDaichoDac dac, IHihokenshaDaichoFinder finder) {
+        this.dac = dac;
+        this.finder = finder;
+    }
+
     @Override
     public IOptional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号, YMDHMS 処理日時) {
         //TODO #52997
