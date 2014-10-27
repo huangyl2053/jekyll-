@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- * 被保険者台帳情報の取得、保存、削除を提供するクラスです。
+ * 被保険者台帳情報を検索できることを示すインターフェースです。
  *
  * @author n8178 城間篤人
  */
