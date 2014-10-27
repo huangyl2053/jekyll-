@@ -86,52 +86,52 @@ public class HihokenshaDaichoModel implements IHihokensaDaicho {
     }
 
     @Override
-    public FlexibleDate get取得日() {
+    public FlexibleDate get資格取得日() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public FlexibleDate get取得届出日() {
+    public FlexibleDate get資格取得届出日() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public FlexibleDate get喪失日() {
+    public FlexibleDate get資格喪失日() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public FlexibleDate get喪失届出日() {
+    public FlexibleDate get資格喪失届出日() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public FlexibleDate get変更日() {
+    public FlexibleDate get資格変更日() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public FlexibleDate get変更届出日() {
+    public FlexibleDate get資格変更届出日() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public FlexibleDate get適用日() {
+    public FlexibleDate get住所地特例適用日() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public FlexibleDate get適用届出日() {
+    public FlexibleDate get住所地特例適用届出日() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public FlexibleDate get解除日() {
+    public FlexibleDate get住所地特例解除日() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public FlexibleDate get解除届出日() {
+    public FlexibleDate get住所地特例解除届出日() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -146,12 +146,12 @@ public class HihokenshaDaichoModel implements IHihokensaDaicho {
     }
 
     @Override
-    public KaigoshikakuShutokuJiyuHihokensha get取得事由() {
+    public KaigoshikakuShutokuJiyuHihokensha get資格取得事由() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public KaigoshikakuSoshitsuJiyuHihokennsha get喪失事由() {
+    public KaigoshikakuSoshitsuJiyuHihokennsha get資格喪失事由() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -161,17 +161,17 @@ public class HihokenshaDaichoModel implements IHihokensaDaicho {
     }
 
     @Override
-    public KaigoshikakuHenkoJiyuHihokensha get変更事由() {
+    public KaigoshikakuHenkoJiyuHihokensha get資格変更事由() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public KaigoshikakuJutokuTekiyo get適用事由() {
+    public KaigoshikakuJutokuTekiyo get住所地特例適用事由() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public KaigoshikakuJutokuKaijo get解除事由() {
+    public KaigoshikakuJutokuKaijo get住所地特例解除事由() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
