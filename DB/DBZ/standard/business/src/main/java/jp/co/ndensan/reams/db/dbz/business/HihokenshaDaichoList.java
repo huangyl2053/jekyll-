@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
  *
  * @author n8178 城間篤人
  */
-public class HihokenshaDaichoList implements Iterable {
+public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
 
     private final IItemList<HihokenshaDaichoModel> hihokenshaDaichoList;
 
