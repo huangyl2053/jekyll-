@@ -9,10 +9,12 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 被保険者台帳情報の取得、保存、削除を提供するクラスです。
@@ -21,26 +23,26 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  */
 public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
 
-    //private final HihokenshaDaichoDac dac;
+    private final HihokenshaDaichoDac dac;
+
     /**
      * コンストラクタです。
      */
     public HihokenshaDaichoFinder() {
-        //TODO #52997
-        //HihokenshaDaichoDacが作成されたら、コメントを解除してください。
-        //dac = InstanceProvider.create(HihokenshaDaichoDac.class)
+        dac = InstanceProvider.create(HihokenshaDaichoDac.class);
     }
 
     //TODO #52997
     //HihokenshaDaichoDacが作成されたら、コメントを解除してください。
-//    /**
-//     * テスト用コンストラクタです。
-//     *
-//     * @param dac テスト用MockDac
-//     */
-//    HihokenshaDaichoFinder(HihokenshaDaichoDac dac) {
-//        this.dac = dac;
-//    }
+    /**
+     * テスト用コンストラクタです。
+     *
+     * @param dac テスト用MockDac
+     */
+    HihokenshaDaichoFinder(HihokenshaDaichoDac dac) {
+        this.dac = dac;
+    }
+
     @Override
     public IOptional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号, YMDHMS 処理日時) {
         //TODO #52997
