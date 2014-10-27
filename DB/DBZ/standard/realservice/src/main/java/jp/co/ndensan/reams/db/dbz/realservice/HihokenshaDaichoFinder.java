@@ -27,18 +27,20 @@ public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
      */
     public HihokenshaDaichoFinder() {
         //TODO #52997
-        //メンバのHihokenshaDaichoDacのインスタンスを、InstanceProviderを使用して作成します。
-        //
-        //実装イメージ（Dacクラスは、自動生成されたものに置き換えてください。
+        //HihokenshaDaichoDacが作成されたら、コメントアウトしてください。
         //dac = InstanceProvider.create(HihokenshaDaichoDac.class)
     }
 
     //TODO #52997
-    //引数からDacを受け取る、テスト用コンストラクタを用意してください。
-    //アクセス修飾子は指定無し(package private)にしてください。
-    //HihoHihokenshaDaichoManager(HihokenshaDaichoDac dac){
-    //  this.dac = dac;
-    //}
+    //HihokenshaDaichoDacが作成されたら、コメントアウトしてください。
+//    /**
+//     * テスト用コンストラクタです。
+//     *
+//     * @param dac テスト用MockDac
+//     */
+//    HihokenshaDaichoFinder(HihokenshaDaichoDac dac) {
+//        this.dac = dac;
+//    }
     @Override
     public IOptional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号, YMDHMS 処理日時) {
         //TODO #52997
