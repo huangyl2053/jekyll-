@@ -125,13 +125,6 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
         return ItemList.of(daichoList);
     }
 
-    public IItemList<HihokenshaDaichoModel> toModelList() {
-        List<HihokenshaDaichoModel> modelList = new ArrayList<>();
-        //TODO #52997
-        //HihokenshaDaichoのtoModelを利用して、HihokenshaDaichoModelのListを作成してください。
-        return ItemList.of(modelList);
-    }
-
     @Override
     public Iterator<HihokenshaDaichoModel> iterator() {
         return hihokenshaDaichoList.iterator();

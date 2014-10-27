@@ -49,11 +49,4 @@ public class HihokenshaDaichoListTest {
         //実行した結果の戻り値が、想定した結果になっているかをテストしてください。
     }
 
-    public static class toModelList extends DbaTestBase {
-        //TODO #52997
-        //引数から受け取るModelListと、toModelListを実行して受け取るModelListを大きさを比較してテストします。
-        //1, コンストラクタの引数から受け取るModelListと、toModeListの戻り値は、sizeが一致するか。
-        //2, 空のModelListからインスタンスを生成した場合、toModelListの戻り値はemptyとなるか。
-    }
-
 }
