@@ -107,7 +107,6 @@ public class ShikakuShutokuJoho {
     public ResponseData<ShikakuShutokuJohoDiv> onClick_btnShikakuShosai(ShikakuShutokuJohoDiv div) {
         //1, 選択行の情報を取得する。
         //2, 選択行の情報をModel化し、ViewStateに保存する。
-        //      ViewStateHolder.put(KaigoViewStateKey.被保険者台帳.getKey(), model)
         return _createResponseData(div);
     }
 
