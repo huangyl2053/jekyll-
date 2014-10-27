@@ -21,6 +21,7 @@ public class NenreiTotatsuValidetor implements IValidatable {
 
     private final HihokenshaDaichoModel model;
     private final IDateOfBirth dateOfBirth;
+    private final NenreiTotatsuKijunConfig config;
 
     /**
      * コンストラクタです。
@@ -35,6 +36,20 @@ public class NenreiTotatsuValidetor implements IValidatable {
                 .getReplacedMessage("生年月日", getClass().getSimpleName()));
         this.model = model;
         this.dateOfBirth = dateOfBirth;
+        this.config = new NenreiTotatsuKijunConfig();
+    }
+
+    /**
+     * テスト用コンストラクタです。
+     *
+     * @param model 被保険者台帳Model
+     * @param dateOfBirth 生年月日
+     * @param config 業務コンフィグクラスのMock
+     */
+    NenreiTotatsuValidetor(HihokenshaDaichoModel model, IDateOfBirth dateOfBirth, NenreiTotatsuKijunConfig config) {
+        this.model = model;
+        this.dateOfBirth = dateOfBirth;
+        this.config = config;
     }
 
     @Override
@@ -43,11 +58,12 @@ public class NenreiTotatsuValidetor implements IValidatable {
         //生年月日と資格取得日を比較して、資格取得可能な年齢であるかどうかを判定する処理を実装してください。
         //資格取得可能な年齢は、取得事由によって変化するため、以下のように判定処理を分岐させてください。
         //
-        //1, 業務コンフィグから、年齢到達の基準を取得する。
-        //  if(取得事由 == 年齢到達) の場合
-        //      年齢到達の基準：65歳
-        //  else
-        //      年齢到達の基準：40歳
+        //1, NenreiTotatsuKijunConfigとConfigKeysNenreiTotatsuKijunを利用して、
+        //   業務コンフィグから年齢到達の基準を取得する。
+        //      取得事由 == 年齢到達 の場合
+        //          ConfigKeysNenreiTotatsuKijun.年齢到達基準_65歳を使用して取得する。
+        //      それ以外の場合
+        //          ConfigKeysNenreiTotatsuKijun.年齢到達基準_40歳を指定して取得する。
         //
         //2, 取得した年齢到達の基準を元に、以下の判定を行う。
         //      (資格取得日 - 生年月日) < 年齢到達の基準 : 条件を満たす場合メッセージを返す。
