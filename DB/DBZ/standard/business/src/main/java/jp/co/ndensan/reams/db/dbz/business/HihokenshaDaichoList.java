@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 被保険者台帳のListを扱うクラスです。
@@ -83,12 +84,12 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
         //1, 被保険者台帳の適用日を格納する変数tekiyoDateを用意（初期値 = null)。
         //2, 被保険者台帳Listの各要素daichoに対して以下の処理を繰り返し実行し、対象の情報を抽出する。
         //  2-1, 次の判定を行う。
-        //      2-1-1, daicho.get解除日() != null
+        //      2-1-1, !daicho.get解除日().equals(FlexibleDate.EMPTY)
         //  2-2, 2-1の判定結果がtrueの場合、以下の処理を実行する。
         //      2-2-1, daichoList.add(daicho)
         //      2-2-2, continueで、以降の処理を省略して次のループ処理に移行する。
         //  2-3, 解除情報が取得できなかった場合、以下の判定を行う。
-        //      2-3-1, daicho.get適用日() != null
+        //      2-3-1, !daicho.get適用日().equals(FlexibleDate.EMPTY)
         //  2-4, 2-3の判定結果がtrueの場合、さらに以下の判定を行う。
         //      2-4-1, !daicho.get適用日().equals(tekiyoDate)
         //  2-5, 5-1の判定結果がtrueの場合、以下の処理を行う。
@@ -116,7 +117,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
         //1, 被保険者台帳の変更日を格納する変数henkoDateを用意（初期値 = null)。
         //2, 被保険者台帳Listの各要素daichoに対して以下の処理を繰り返し実行し、対象の情報を抽出する。
         //  2-1, 次の判定を行う。
-        //      2-1-1, daicho.get変更日() != null
+        //      2-1-1, !daicho.get変更日().equals(FlexibleDate.EMPTY)
         //      2-1-2, !daicho.get変更日().equals(henkoDate)
         //  2-2, 2-1の判定結果が両方ともtrueの場合、以下の処理を行う。
         //      2-2-1, daichoList.add(daicho)
