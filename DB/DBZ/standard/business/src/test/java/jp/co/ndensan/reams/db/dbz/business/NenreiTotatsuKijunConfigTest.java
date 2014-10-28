@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business;
+package jp.co.ndensan.reams.db.dbz.business;
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -36,20 +36,21 @@ public class NenreiTotatsuKijunConfigTest {
 
         @Test
         public void 年齢到達基準_65歳を指定したとき_65が返る() {
-            int result = sut.get(ConfigKeysNenreiTotatsuKijun.年齢到達基準_65歳);
+            int result = sut.get(ConfigKeysNenreiTotatsuKijun.介護保険法情報_第１号被保険者到達基準年齢);
             assertThat(result, is(65));
         }
 
+        @Test
         public void 年齢到達基準_40歳を指定したとき_40が返る() {
-            int result = sut.get(ConfigKeysNenreiTotatsuKijun.年齢到達基準_40歳);
+            int result = sut.get(ConfigKeysNenreiTotatsuKijun.介護保険法情報_第２号被保険者到達基準年齢);
             assertThat(result, is(40));
         }
     }
 
     private static Map<ConfigKeysNenreiTotatsuKijun, RString> createMap() {
         Map<ConfigKeysNenreiTotatsuKijun, RString> map = new HashMap<>();
-        map.put(ConfigKeysNenreiTotatsuKijun.年齢到達基準_65歳, new RString("65"));
-        map.put(ConfigKeysNenreiTotatsuKijun.年齢到達基準_40歳, new RString("40"));
+        map.put(ConfigKeysNenreiTotatsuKijun.介護保険法情報_第１号被保険者到達基準年齢, new RString("65"));
+        map.put(ConfigKeysNenreiTotatsuKijun.介護保険法情報_第２号被保険者到達基準年齢, new RString("40"));
         return map;
     }
 
