@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateChangeState;
 
 /**
- * {@link ViewStateHolder ViewStateHolder}により、{@literal ViewState}へ保持されたり、取得されたりする値であることを表します。
+ * {@link ViewStateHolder ViewStateHolder}により、{@code ViewState}へ保持されたり、取得されたりする値であることを表します。
  *
  * @author N3327 三浦 凌
  * @param <T> 扱うオブジェクトの型
@@ -18,14 +18,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateChangeState;
 public interface IViewStateValue<T extends Serializable> {
 
     /**
-     * {@literal ViewState}へ保持されている値を取得します。ただし、値は保持されていないこともあります。
+     * {@code ViewState}へ保持されている値を取得します。ただし、値は保持されていないこともあります。
      *
      * @return ViewStateに保持されている値(ただし、保持していないかもしれない。)
      */
     IOptional<T> tryToGet();
 
     /**
-     * 引数の値を、{@literal ViewState}へ保持します。
+     * 引数の値を、{@code ViewState}へ保持します。
      *
      * @param value ViewStateへ保持する値
      */

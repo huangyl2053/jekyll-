@@ -10,7 +10,7 @@ import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * {@literal ViewState}において、あるclassと1対1で対応させるためのキーです。
+ * {@code ViewState}において、あるclassと1対1で対応させるためのキーです。
  *
  * @author N3327 三浦 凌
  */
@@ -22,7 +22,7 @@ public final class ViewStateKeyAssignedClass implements IViewStateKey {
     /**
      * インスタンスを生成します。
      *
-     * @param clazz {@literal ViewState}で保持したい型のclass
+     * @param clazz {@code ViewState}で保持したい型のclass
      */
     public ViewStateKeyAssignedClass(Class<? extends Serializable> clazz) {
         Objects.requireNonNull(clazz);

@@ -9,7 +9,7 @@ import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * {@literal ViewState}を扱うユーティリティです。
+ * {@code ViewState}を扱うユーティリティです。
  *
  * @author N3327 三浦 凌
  */
@@ -25,7 +25,7 @@ public final class ViewStates {
     }
 
     /**
-     * {@literal ViewState}へアクセスするためのインスタンスを生成します。<br/>
+     * {@code ViewState}へアクセスするためのインスタンスを生成します。<br/>
      * ViewStateHolderを用いる時とこのメソッドを用いる時の違いを、実装例で示します。
      * <p>
      * 取得時 :
@@ -59,7 +59,7 @@ public final class ViewStates {
      * </pre>
      * </p>
      *
-     * @return {@literal ViewState}へアクセスするためのインスタンス
+     * @return {@code ViewState}へアクセスするためのインスタンス
      */
     public static IViewStateAccessors access() {
         return ACCESSORS;
@@ -69,7 +69,7 @@ public final class ViewStates {
      * 指定のキーが存在するかどうかを返します。
      *
      * @param key キー
-     * @return キーが存在する時は{@literal true}
+     * @return キーが存在する時は{@code true}
      * @throws NullPointerException 引数がnullのとき
      */
     public static boolean containsKey(IViewStateKey key) throws NullPointerException {
