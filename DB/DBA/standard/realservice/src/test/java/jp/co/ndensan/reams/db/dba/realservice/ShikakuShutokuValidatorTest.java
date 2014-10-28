@@ -17,7 +17,7 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class HihokenshaDaichoValidatorTest {
+public class ShikakuShutokuValidatorTest {
 
     public static class constructor extends DbaTestBase {
         //TODO #52997

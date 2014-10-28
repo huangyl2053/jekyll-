@@ -19,7 +19,7 @@ import static jp.co.ndensan.reams.ur.urz.model.validations.ValidationChain.valid
  *
  * @author n8178 城間篤人
  */
-public class HihokenshaDaichoValidator implements IValidatable {
+public class ShikakuShutokuValidator implements IValidatable {
 
     private final IItemList<HihokenshaDaichoModel> hihokenshaDaichoModelList;
     private final IDateOfBirth dateOfBirth;
@@ -32,7 +32,7 @@ public class HihokenshaDaichoValidator implements IValidatable {
      * @throw NullPointerException 引数のいずれかにNullが渡された場合
      * @throw IllegalArgumentException 引数から渡された被保険者台帳ModelListが空だった場合
      */
-    public HihokenshaDaichoValidator(IItemList<HihokenshaDaichoModel> hihokenshaDaichoModelList, IDateOfBirth dateOfBirth)
+    public ShikakuShutokuValidator(IItemList<HihokenshaDaichoModel> hihokenshaDaichoModelList, IDateOfBirth dateOfBirth)
             throws NullPointerException, IllegalArgumentException {
         requireNonNull(hihokenshaDaichoModelList, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("引数のmodelList", getClass().getSimpleName()));
