@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business;
+package jp.co.ndensan.reams.db.dbz.business.config;
 
+import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuKijunConfig;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijun;
