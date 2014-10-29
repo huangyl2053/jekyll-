@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaDaichoConparators;
+import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaDaichoModelComparators;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
@@ -41,7 +41,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      * @return 被保険者台帳List
      */
     public IItemList<HihokenshaDaichoModel> to資格得喪List() {
-        hihokenshaDaichoList.sortBy(HihokenshaDaichoConparators.createShikakuShutokuDateComparator());
+        hihokenshaDaichoList.sortBy(HihokenshaDaichoModelComparators.資格取得日.getDesc());
         List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
         //TODO #52997
         //資格得喪を表現するためには、被保険者台帳から、
@@ -66,7 +66,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      * @return 被保険者台帳List
      */
     public IItemList<HihokenshaDaichoModel> to住所地特例List() {
-        hihokenshaDaichoList.sortBy(HihokenshaDaichoConparators.createShikakuShutokuDateComparator());
+        hihokenshaDaichoList.sortBy(HihokenshaDaichoModelComparators.資格取得日.getDesc());
         List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
         //TODO #52997
         //住所地特例を表現するためには、適用情報と解除情報をそれぞれ取得する必要がある。
@@ -104,7 +104,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      * @return 被保険者台帳List
      */
     public IItemList<HihokenshaDaichoModel> to資格関連異動List() {
-        hihokenshaDaichoList.sortBy(HihokenshaDaichoConparators.createShikakuShutokuDateComparator());
+        hihokenshaDaichoList.sortBy(HihokenshaDaichoModelComparators.資格取得日.getDesc());
         List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
         //TODO #52997
         //資格関連異動を表現するためには、被保険者台帳から、

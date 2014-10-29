@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofu
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
@@ -33,8 +34,24 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 //改めて実装するようにしてください。
 public class HihokenshaDaichoModel implements IHihokensaDaicho {
 
-    //private final DbT1001HihokenshaDaichoEntity entity;
+    private final DbT1001HihokenshaDaichoEntity entity;
+
+    /**
+     * コンストラクタです。メンバのEntityを生成して初期化します。
+     */
     public HihokenshaDaichoModel() {
+        entity = new DbT1001HihokenshaDaichoEntity();
+        //TODO #52997
+        //entityが持つメンバに対して初期値を設定する処理を実装してください。
+    }
+
+    /**
+     * コンストラクタです。引数からEntityを受け取ります。
+     *
+     * @param entity 被保険者台帳Entity
+     */
+    public HihokenshaDaichoModel(DbT1001HihokenshaDaichoEntity entity) {
+        this.entity = entity;
     }
 
     /**
@@ -54,8 +71,13 @@ public class HihokenshaDaichoModel implements IHihokensaDaicho {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
+    public FlexibleDate get資格取得日() {
+        return entity.getShikakuShutokuYMD();
+    }
+
     //TODO #52997
-    //以下のgetterは、それぞれのメソッドに対応する値をEntityからgetする形で実装してください。
+    //以下のgetterは、get資格取得日()を参考に、それぞれのメソッドに対応する値をEntityからgetする形で実装してください。
     @Override
     public LasdecCode get市町村コード() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -88,11 +110,6 @@ public class HihokenshaDaichoModel implements IHihokensaDaicho {
 
     @Override
     public LasdecCode get旧市町村コード() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public FlexibleDate get資格取得日() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -201,6 +218,14 @@ public class HihokenshaDaichoModel implements IHihokensaDaicho {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 資格取得日を設定します。
+     *
+     * @param 資格取得日 資格取得日
+     */
+    public void set資格取得日(FlexibleDate 資格取得日) {
+        entity.setShikakuShutokuYMD(資格取得日);
+    }
     //TODO #52997
-    //以下に、Entityのメンバに対して値を設定するためのsetterを用意してください。
+    //以下に、set資格取得日を参考に、Entityのメンバに対して値を設定するためのsetterを用意してください。
 }
