@@ -5,11 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
-import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuKijunConfig;
-import java.util.HashMap;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
+import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -17,6 +16,9 @@ import static org.hamcrest.CoreMatchers.*;
 import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.any;
 
 /**
  * {@link NenreiTotatsuKijunConfigTest}のテストです。
@@ -32,7 +34,7 @@ public class NenreiTotatsuKijunConfigTest {
 
         @Before
         public void setUp() {
-            sut = new NenreiTotatsuKijunConfig(createMap());
+            sut = new NenreiTotatsuKijunConfig(createBusinessConfigMock());
         }
 
         @Test
@@ -48,11 +50,18 @@ public class NenreiTotatsuKijunConfigTest {
         }
     }
 
-    private static Map<ConfigKeysNenreiTotatsuKijun, RString> createMap() {
-        Map<ConfigKeysNenreiTotatsuKijun, RString> map = new HashMap<>();
-        map.put(ConfigKeysNenreiTotatsuKijun.介護保険法情報_第１号被保険者到達基準年齢, new RString("65"));
-        map.put(ConfigKeysNenreiTotatsuKijun.介護保険法情報_第２号被保険者到達基準年齢, new RString("40"));
-        return map;
-    }
+    private static IUrBusinessConfig createBusinessConfigMock() {
+        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
+        RDate nowDate = RDate.getNowDate();
 
+        when(mock.get(
+                ConfigKeysNenreiTotatsuKijun.介護保険法情報_第１号被保険者到達基準年齢,
+                nowDate
+        )).thenReturn(new RString("65"));
+        when(mock.get(
+                ConfigKeysNenreiTotatsuKijun.介護保険法情報_第２号被保険者到達基準年齢,
+                nowDate
+        )).thenReturn(new RString("40"));
+        return mock;
+    }
 }

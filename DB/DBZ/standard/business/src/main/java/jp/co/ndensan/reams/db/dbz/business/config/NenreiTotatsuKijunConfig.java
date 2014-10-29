@@ -11,7 +11,6 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijun;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -22,24 +21,27 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class NenreiTotatsuKijunConfig {
 
-    private Map<ConfigKeysNenreiTotatsuKijun, RString> configs;
+    private final Map<ConfigKeysNenreiTotatsuKijun, RString> configs;
 
     /**
      * コンストラクタです。
      */
     public NenreiTotatsuKijunConfig() {
-        IUrBusinessConfig loader = UrBusinessConfigFactory.createInstance();
-        Map<ConfigKeysNenreiTotatsuKijun, RString> configs = new EnumMap<>(ConfigKeysNenreiTotatsuKijun.class);
-        RDate nowDate = RDate.getNowDate();
-        for (ConfigKeysNenreiTotatsuKijun target : ConfigKeysNenreiTotatsuKijun.values()) {
-            this.configs.put(target, loader.get(target, nowDate));
-        }
-        this.configs = Collections.unmodifiableMap(configs);
+        this(UrBusinessConfigFactory.createInstance());
     }
 
-    //コンフィグ情報を外から注入する場合のコンストラクタ（バッチ、テスト時に使用する）
-    public NenreiTotatsuKijunConfig(Map<ConfigKeysNenreiTotatsuKijun, RString> configs) {
-        this.configs = configs;
+    /**
+     * コンフィグ情報を外から注入する場合のコンストラクタです。テスト時に使用します。
+     *
+     * @param businessConfig 業務コンフィグを取得するインスタンス
+     */
+    NenreiTotatsuKijunConfig(IUrBusinessConfig businessConfig) {
+        Map<ConfigKeysNenreiTotatsuKijun, RString> map = new EnumMap<>(ConfigKeysNenreiTotatsuKijun.class);
+        RDate nowDate = RDate.getNowDate();
+        for (ConfigKeysNenreiTotatsuKijun target : ConfigKeysNenreiTotatsuKijun.values()) {
+            map.put(target, businessConfig.get(target, nowDate));
+        }
+        this.configs = Collections.unmodifiableMap(map);
     }
 
     public Integer get(ConfigKeysNenreiTotatsuKijun key) {
