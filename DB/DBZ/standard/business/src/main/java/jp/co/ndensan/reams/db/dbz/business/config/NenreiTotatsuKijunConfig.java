@@ -5,8 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijun;
+import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
+import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,9 +28,13 @@ public class NenreiTotatsuKijunConfig {
      * コンストラクタです。
      */
     public NenreiTotatsuKijunConfig() {
+        IUrBusinessConfig loader = UrBusinessConfigFactory.createInstance();
+        Map<ConfigKeysNenreiTotatsuKijun, RString> configs = new EnumMap<>(ConfigKeysNenreiTotatsuKijun.class);
+        RDate nowDate = RDate.getNowDate();
         for (ConfigKeysNenreiTotatsuKijun target : ConfigKeysNenreiTotatsuKijun.values()) {
-            this.configs.put(target, BusinessConfig.get(target, RDate.getNowDate()));
+            this.configs.put(target, loader.get(target, nowDate));
         }
+        this.configs = Collections.unmodifiableMap(configs);
     }
 
     //コンフィグ情報を外から注入する場合のコンストラクタ（バッチ、テスト時に使用する）
