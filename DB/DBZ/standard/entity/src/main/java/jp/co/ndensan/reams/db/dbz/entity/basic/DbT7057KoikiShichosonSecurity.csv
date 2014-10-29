@@ -1,0 +1,3 @@
+﻿groupID,varchar,RString,,,,,A
+shichosonShikibetsuID,bpchar,ShichosonShikibetsuID,,,,,A
+shichosonCode,DbUDD001ShichosonCode,ShichosonCode,,,,,A
