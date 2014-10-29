@@ -21,12 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  */
 public interface IHihokenshaDaichoFinder {
 
-    //TODO #52997
-    //引数からDacを受け取る、テスト用コンストラクタを用意してください。
-    //アクセス修飾子は指定無し(package private)にしてください。
-    //HihoHihokenshaDaichoManager(HihokenshaDaichoDac dac){
-    //  this.dac = dac;
-    //}
     /**
      * 被保険者台帳のキー項目を指定して、該当する被保険者台帳を1件取得します。
      *
