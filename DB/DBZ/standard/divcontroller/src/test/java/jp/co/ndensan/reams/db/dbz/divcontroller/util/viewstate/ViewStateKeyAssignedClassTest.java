@@ -58,17 +58,11 @@ public class ViewStateKeyAssignedClassTest {
     public static class HashCode extends DbzTestBase {
 
         @Test
-        public void hashCodeは_同一のClassから生成されたインスタンス同士は_同じ値を返す() {
+        public void hashCodeは_equalsがtrueとなるインスタンス同士では_同じ値を返す() {
             ViewStateKeyAssignedClass sut = new ViewStateKeyAssignedClass(RString.class);
             ViewStateKeyAssignedClass other = new ViewStateKeyAssignedClass(RString.class);
+            assertThat(sut.equals(other), is(true));
             assertThat(sut.hashCode(), is(other.hashCode()));
-        }
-
-        @Test
-        public void hashCodeは_異なったClassから生成されたインスタンス同士では_違う値を返す() {
-            ViewStateKeyAssignedClass sut = new ViewStateKeyAssignedClass(RString.class);
-            ViewStateKeyAssignedClass other = new ViewStateKeyAssignedClass(String.class);
-            assertThat(sut.hashCode(), is(not(other.hashCode())));
         }
     }
 }
