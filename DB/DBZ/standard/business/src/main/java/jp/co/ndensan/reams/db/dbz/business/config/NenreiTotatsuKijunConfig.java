@@ -44,7 +44,7 @@ public class NenreiTotatsuKijunConfig {
         this.configs = Collections.unmodifiableMap(map);
     }
 
-    public Integer get(ConfigKeysNenreiTotatsuKijun key) {
+    public int get(ConfigKeysNenreiTotatsuKijun key) {
         return new Integer(configs.get(key).toString());
     }
 }
