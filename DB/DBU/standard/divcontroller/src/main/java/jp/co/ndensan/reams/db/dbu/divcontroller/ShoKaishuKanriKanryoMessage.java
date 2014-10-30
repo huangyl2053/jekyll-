@@ -27,16 +27,16 @@ public class ShoKaishuKanriKanryoMessage {
     public ResponseData<KanryoMessagePnlDiv> onLoad(
             KanryoMessagePnlDiv panel, ShoKaishuKanriTaishoshaJohoDiv panel2) {
         ResponseData<KanryoMessagePnlDiv> response = new ResponseData<>();
-
-        panel.getCcdKaigoKanryoMessage().getKanryoMessage().getLblMessageMain().setText(
-                new RString("回収記録を更新しました。"));
-
-        panel.getCcdKaigoKanryoMessage().getKanryoMessage().getLblTaishoMessage1().setText(
-                panel2.getCcdKaigoShikakuKihon().getTxtHihokenshaNo().getValue());
-
-        panel.getCcdKaigoKanryoMessage().getKanryoMessage().getLblTaishoMessage2().setText(
-                panel2.getShoKaishuKanriTaishoshaCommonJoho().getAtenaInfo().getTxtAtenaMeisho().getValue());
-
+//
+//        panel.getCcdKaigoKanryoMessage().getKanryoMessage().getLblMessageMain().setText(
+//                new RString("回収記録を更新しました。"));
+//
+//        panel.getCcdKaigoKanryoMessage().getKanryoMessage().getLblTaishoMessage1().setText(
+//                panel2.getCcdKaigoShikakuKihon().getTxtHihokenshaNo().getValue());
+//
+//        panel.getCcdKaigoKanryoMessage().getKanryoMessage().getLblTaishoMessage2().setText(
+//                panel2.getShoKaishuKanriTaishoshaCommonJoho().getAtenaInfo().getTxtAtenaMeisho().getValue());
+//
         response.data = panel;
         return response;
 
