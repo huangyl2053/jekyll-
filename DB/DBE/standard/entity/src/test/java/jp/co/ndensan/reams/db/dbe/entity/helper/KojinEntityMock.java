@@ -1,5 +1,6 @@
-//TODO n3317　塚田萌　使ってないようなのでコメントアウト。確認取れたら削除
+package jp.co.ndensan.reams.db.dbe.entity.helper;
 
+//TODO n3317　塚田萌　使ってないようなのでコメントアウト。確認取れたら削除
 //import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.AgeArrivalDay;
 //import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KannaiKangai;
 //import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.UnknownDate;
