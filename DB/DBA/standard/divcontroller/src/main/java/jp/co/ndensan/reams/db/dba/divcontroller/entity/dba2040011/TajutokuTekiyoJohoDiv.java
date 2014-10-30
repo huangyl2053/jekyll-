@@ -1,8 +1,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.JutokuJohoInputDiv;
@@ -13,8 +12,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TajutokuTekiyoJoho のクラスファイル 
- * 
+ * TajutokuTekiyoJoho のクラスファイル
+ *
  * @author 自動生成
  */
 public class TajutokuTekiyoJohoDiv extends Panel {
@@ -24,6 +23,7 @@ public class TajutokuTekiyoJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("dgJushochiTokureiRireki")
     private DataGrid<dgJushochiTokureiRireki_Row> dgJushochiTokureiRireki;
     @JsonProperty("JutokuJohoInput")
@@ -44,7 +44,7 @@ public class TajutokuTekiyoJohoDiv extends Panel {
 
     @JsonProperty("dgJushochiTokureiRireki")
     public void setDgJushochiTokureiRireki(DataGrid<dgJushochiTokureiRireki_Row> dgJushochiTokureiRireki) {
-        this.dgJushochiTokureiRireki=dgJushochiTokureiRireki;
+        this.dgJushochiTokureiRireki = dgJushochiTokureiRireki;
     }
 
     @JsonProperty("JutokuJohoInput")
@@ -54,7 +54,7 @@ public class TajutokuTekiyoJohoDiv extends Panel {
 
     @JsonProperty("JutokuJohoInput")
     public void setJutokuJohoInput(JutokuJohoInputDiv JutokuJohoInput) {
-        this.JutokuJohoInput=JutokuJohoInput;
+        this.JutokuJohoInput = JutokuJohoInput;
     }
 
     @JsonProperty("ShisetsuHenkoInput")
@@ -64,7 +64,7 @@ public class TajutokuTekiyoJohoDiv extends Panel {
 
     @JsonProperty("ShisetsuHenkoInput")
     public void setShisetsuHenkoInput(ShisetsuHenkoInputDiv ShisetsuHenkoInput) {
-        this.ShisetsuHenkoInput=ShisetsuHenkoInput;
+        this.ShisetsuHenkoInput = ShisetsuHenkoInput;
     }
 
 }
