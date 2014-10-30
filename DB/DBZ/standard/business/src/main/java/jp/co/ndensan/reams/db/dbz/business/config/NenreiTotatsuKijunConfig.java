@@ -27,7 +27,7 @@ public class NenreiTotatsuKijunConfig {
      * コンストラクタです。
      */
     public NenreiTotatsuKijunConfig() {
-        this(UrBusinessConfigFactory.createInstance());
+        this.configs = createMap(UrBusinessConfigFactory.createInstance());
     }
 
     /**
@@ -36,12 +36,16 @@ public class NenreiTotatsuKijunConfig {
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
     NenreiTotatsuKijunConfig(IUrBusinessConfig businessConfig) {
+        this.configs = createMap(businessConfig);
+    }
+
+    private Map<ConfigKeysNenreiTotatsuKijun, RString> createMap(IUrBusinessConfig businessConfig) {
         Map<ConfigKeysNenreiTotatsuKijun, RString> map = new EnumMap<>(ConfigKeysNenreiTotatsuKijun.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysNenreiTotatsuKijun target : ConfigKeysNenreiTotatsuKijun.values()) {
             map.put(target, businessConfig.get(target, nowDate));
         }
-        this.configs = Collections.unmodifiableMap(map);
+        return Collections.unmodifiableMap(map);
     }
 
     public int get(ConfigKeysNenreiTotatsuKijun key) {
