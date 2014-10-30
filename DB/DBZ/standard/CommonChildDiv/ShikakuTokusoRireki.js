@@ -10,7 +10,8 @@ var DBZ;
                     "DisplayType",
                     "BtnDisplayMode",
                     "HokenshaJohoDisplayMode",
-                    "DataGridWidth"
+                    "DataGridWidth",
+                    "DataGridHeight"
                 ];
             };
 
@@ -29,6 +30,10 @@ var DBZ;
             ModeController.prototype.DataGridWidth = function () {
                 return new Modes.DataGridWidth(this.controls);
             };
+
+            ModeController.prototype.DataGridHeight = function () {
+                return new Modes.DataGridHeight(this.controls);
+            };
             return ModeController;
         })();
         ShikakuTokusoRireki.ModeController = ModeController;
@@ -44,6 +49,8 @@ var DBZ;
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
                     gridSetting.columns[0].visible = false;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
 
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
@@ -56,6 +63,22 @@ var DBZ;
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
                     gridSetting.columns[0].visible = true;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
+
+                    this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
+
+                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                };
+
+                DisplayType.prototype.teiseitoroku = function () {
+                    this.controls.dgShikakuShutokuRireki().readOnly = false;
+
+                    var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
+
+                    gridSetting.columns[0].visible = true;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
 
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
@@ -177,6 +200,49 @@ var DBZ;
                 return DataGridWidth;
             })();
             Modes.DataGridWidth = DataGridWidth;
+
+            var DataGridHeight = (function () {
+                function DataGridHeight(controls) {
+                    this.controls = controls;
+                }
+                DataGridHeight.prototype.Size1 = function () {
+                    this.controls.dgShikakuShutokuRireki().height = 450;
+
+                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                };
+
+                DataGridHeight.prototype.Size2 = function () {
+                    this.controls.dgShikakuShutokuRireki().height = 400;
+
+                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                };
+
+                DataGridHeight.prototype.Size3 = function () {
+                    this.controls.dgShikakuShutokuRireki().height = 350;
+
+                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                };
+
+                DataGridHeight.prototype.Size4 = function () {
+                    this.controls.dgShikakuShutokuRireki().height = 300;
+
+                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                };
+
+                DataGridHeight.prototype.Size5 = function () {
+                    this.controls.dgShikakuShutokuRireki().height = 250;
+
+                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                };
+
+                DataGridHeight.prototype.Size6 = function () {
+                    this.controls.dgShikakuShutokuRireki().height = 200;
+
+                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                };
+                return DataGridHeight;
+            })();
+            Modes.DataGridHeight = DataGridHeight;
         })(ShikakuTokusoRireki.Modes || (ShikakuTokusoRireki.Modes = {}));
         var Modes = ShikakuTokusoRireki.Modes;
     })(DBZ.ShikakuTokusoRireki || (DBZ.ShikakuTokusoRireki = {}));

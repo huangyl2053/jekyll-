@@ -307,10 +307,6 @@
              "modeValue": "toroku"
             },
             {
-             "modeKey": "HokenshaJohoDisplayMode",
-             "modeValue": "KoikiGappeiNashi"
-            },
-            {
              "modeKey": "DataGridWidth",
              "modeValue": "Size1"
             }
@@ -698,7 +694,7 @@
            "widthAuto": true,
            "panelDisplay": 1,
            "isGroupBox": false,
-           "readOnly": false,
+           "readOnly": true,
            "height": "Auto",
            "canPost": true
           }
@@ -1375,7 +1371,7 @@
            "widthAuto": false,
            "panelDisplay": 1,
            "isGroupBox": false,
-           "readOnly": false,
+           "readOnly": true,
            "height": "Auto",
            "canPost": true
           }
@@ -1414,7 +1410,7 @@
          "widthAuto": true,
          "panelDisplay": 0,
          "isGroupBox": false,
-         "readOnly": false,
+         "readOnly": true,
          "height": "Auto",
          "canPost": false
         }
@@ -1499,6 +1495,7 @@
            "jpControlName": "",
            "readOnly": false,
            "height": "S",
+           "dataSource": [],
            "gridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": false,
@@ -1592,7 +1589,6 @@
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
-           "dataSource": [],
            "sortOrder": "shuryoDate",
            "isAscending": true,
            "filterList": [],
@@ -1775,7 +1771,7 @@
            "widthAuto": false,
            "panelDisplay": 1,
            "isGroupBox": false,
-           "readOnly": false,
+           "readOnly": true,
            "height": "Auto",
            "canPost": true
           },
@@ -1850,7 +1846,7 @@
          "widthAuto": false,
          "panelDisplay": 0,
          "isGroupBox": false,
-         "readOnly": false,
+         "readOnly": true,
          "height": "Auto",
          "canPost": true
         }
@@ -2179,7 +2175,7 @@
            "widthAuto": false,
            "panelDisplay": 1,
            "isGroupBox": false,
-           "readOnly": false,
+           "readOnly": true,
            "height": "Auto",
            "canPost": true
           }
@@ -2215,10 +2211,10 @@
          "marginBottom": "Default",
          "eraseBorder": true,
          "backgroundColor": 0,
-         "widthAuto": false,
+         "widthAuto": true,
          "panelDisplay": 0,
          "isGroupBox": false,
-         "readOnly": false,
+         "readOnly": true,
          "height": "Auto",
          "canPost": false
         }
@@ -2303,6 +2299,7 @@
            "jpControlName": "",
            "readOnly": false,
            "height": "S",
+           "dataSource": [],
            "gridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": false,
@@ -2424,7 +2421,6 @@
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
-           "dataSource": [],
            "sortOrder": "jukyushaNo",
            "isAscending": true,
            "filterList": [],
@@ -2692,7 +2688,7 @@
            "widthAuto": false,
            "panelDisplay": 1,
            "isGroupBox": false,
-           "readOnly": false,
+           "readOnly": true,
            "height": "Auto",
            "canPost": true
           },
@@ -2767,7 +2763,7 @@
          "widthAuto": false,
          "panelDisplay": 0,
          "isGroupBox": false,
-         "readOnly": false,
+         "readOnly": true,
          "height": "Auto",
          "canPost": true
         }
@@ -2821,7 +2817,7 @@
       "tplShisetsuNyutaisho"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tplShikakuJoho",
+     "selectedItemFieldName": "tplShisetsuNyutaisho",
      "initialTab": "0",
      "isLazyLoading": false
     }
@@ -2951,45 +2947,10 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "資格取得情報入力",
+   "stateName": "資格取得情報登録",
    "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
-    {
-     "visibleDiv": "ShikakuShutokuJoho",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ShikakuShutokuInput",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "IryoHokenInput",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "RohukuNenkin",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "RofukuNenkinInput",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "SeikatsuHogo",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "SeikatsuHogoInput",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
     {
      "visibleDiv": "KihonJoho",
      "panelState": "visible",
@@ -3006,17 +2967,12 @@
      "fixedDiv": "No"
     },
     {
+     "visibleDiv": "ShikakuShutokuJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
      "visibleDiv": "ShikakuTokusoRireki",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "IryoHokenRireki",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ShisetsuNyutaishoRireki",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -3026,8 +2982,13 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ShisetsuNyutaishoInput",
+     "visibleDiv": "IryoHokenRireki",
      "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "IryoHokenInput",
+     "panelState": "readOnly visible",
      "fixedDiv": "No"
     },
     {
@@ -3036,28 +2997,133 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
+     "visibleDiv": "RohukuNenkin",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccdShisetsuJoho",
+     "visibleDiv": "RofukuNenkinInput",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "SeikatsuHogo",
      "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "SeikatsuHogoInput",
+     "panelState": "readOnly visible",
      "fixedDiv": "No"
     }
    ],
    "validation": {},
    "events": [
     {
-     "fieldName": "btnSave",
+     "fieldName": "btnUpdate",
      "event": "onClick",
-     "transition": "処理完了"
+     "transition": "完了"
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_btnAdd",
+     "event": "onClick",
+     "transition": "被保履歴入力"
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_dgShikakuShutokuRireki",
+     "event": "onSelectByDblClick",
+     "transition": "被保履歴入力"
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_dgShikakuShutokuRireki",
+     "event": "onSelect",
+     "transition": "被保履歴入力"
+    },
+    {
+     "fieldName": "btnShikakuShutokuKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShikakuShutokuTorikeshi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_btnAddIryoHoken",
+     "event": "onClick",
+     "transition": "医療保険入力"
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByModifyButton",
+     "transition": "医療保険入力"
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": "医療保険入力"
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByDblClick",
+     "transition": "医療保険入力"
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelect",
+     "transition": "医療保険入力"
+    },
+    {
+     "fieldName": "btnIryoHokenKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnIryoHokenTorikeshi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": "施設入退所入力"
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": "施設入退所入力"
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": "施設入退所入力"
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDblClick",
+     "transition": "施設入退所入力"
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelect",
+     "transition": "施設入退所入力"
+    },
+    {
+     "fieldName": "btnShisetsuNyutaishoKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShisetsuNyutaishoTorikeshi",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
   {
    "order": "2",
-   "stateName": "処理完了",
+   "stateName": "完了",
    "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
@@ -3097,11 +3163,6 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ShisetsuNyutaishoRireki",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "ccdShikakuTokusoRireki",
      "panelState": "visible",
      "fixedDiv": "No"
@@ -3110,18 +3171,735 @@
      "visibleDiv": "ccdIryoHokenRireki",
      "panelState": "visible",
      "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "ccdShisetsuNyutaishoRirekiKanri",
-     "panelState": "visible",
-     "fixedDiv": "No"
     }
    ],
    "supplementInfo": "",
    "validation": {},
    "events": [
     {
-     "fieldName": "btnSave",
+     "fieldName": "btnUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_btnAdd",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_dgShikakuShutokuRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_dgShikakuShutokuRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShikakuShutokuKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShikakuShutokuTorikeshi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_btnAddIryoHoken",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnIryoHokenKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnIryoHokenTorikeshi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShisetsuNyutaishoKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShisetsuNyutaishoTorikeshi",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "3",
+   "stateName": "被保履歴入力",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KihonJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoAtenaInfo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoShikakuKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShikakuShutokuJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShikakuTokusoRireki",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "IryoHokenRireki",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "RohukuNenkin",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "SeikatsuHogo",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdShikakuTokusoRireki",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_btnAdd",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_dgShikakuShutokuRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_dgShikakuShutokuRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShikakuShutokuKakutei",
+     "event": "onClick",
+     "transition": "資格取得情報登録"
+    },
+    {
+     "fieldName": "btnShikakuShutokuTorikeshi",
+     "event": "onClick",
+     "transition": "資格取得情報登録"
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_btnAddIryoHoken",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnIryoHokenKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnIryoHokenTorikeshi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShisetsuNyutaishoKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShisetsuNyutaishoTorikeshi",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "4",
+   "stateName": "医療保険入力",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KihonJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoAtenaInfo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoShikakuKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShikakuShutokuJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShikakuTokusoRireki",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "IryoHokenRireki",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "IryoHokenInput",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdIryoHokenRireki",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "RohukuNenkin",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "SeikatsuHogo",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_btnAdd",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_dgShikakuShutokuRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_dgShikakuShutokuRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShikakuShutokuKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShikakuShutokuTorikeshi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_btnAddIryoHoken",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnIryoHokenKakutei",
+     "event": "onClick",
+     "transition": "資格取得情報登録"
+    },
+    {
+     "fieldName": "btnIryoHokenTorikeshi",
+     "event": "onClick",
+     "transition": "資格取得情報登録"
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShisetsuNyutaishoKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShisetsuNyutaishoTorikeshi",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "5",
+   "stateName": "施設入退所入力",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KihonJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoAtenaInfo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoShikakuKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShikakuShutokuJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShikakuTokusoRireki",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "IryoHokenRireki",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "RohukuNenkin",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "SeikatsuHogo",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_btnAdd",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_dgShikakuShutokuRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_dgShikakuShutokuRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShikakuShutokuKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShikakuShutokuTorikeshi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_btnAddIryoHoken",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnIryoHokenKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnIryoHokenTorikeshi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShisetsuNyutaishoKakutei",
+     "event": "onClick",
+     "transition": "資格取得情報登録"
+    },
+    {
+     "fieldName": "btnShisetsuNyutaishoTorikeshi",
+     "event": "onClick",
+     "transition": "資格取得情報登録"
+    }
+   ]
+  },
+  {
+   "order": "6",
+   "stateName": "資格訂正",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KihonJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoAtenaInfo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoShikakuKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShikakuShutokuJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShikakuTokusoRireki",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "IryoHokenRireki",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "RohukuNenkin",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "SeikatsuHogo",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_btnAdd",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_dgShikakuShutokuRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShikakuTokusoRireki_ShikakuTokusoRireki_dgShikakuShutokuRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShikakuShutokuKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShikakuShutokuTorikeshi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_btnAddIryoHoken",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdIryoHokenRireki_IryoHokenRireki_dgIryoHokenRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnIryoHokenKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnIryoHokenTorikeshi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_btnAddShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDeleteButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ccdShisetsuNyutaishoRirekiKanri_ShisetsuNyutaishoRirekiKanri_dgShisetsuNyutaishoRireki",
+     "event": "onSelect",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShisetsuNyutaishoKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShisetsuNyutaishoTorikeshi",
      "event": "onClick",
      "transition": ""
     }
@@ -3173,10 +3951,10 @@
     {
      "buttonKind": "CommonButtonUpdate",
      "buttonProperty": {
-      "fieldName": "btnSave",
+      "fieldName": "btnUpdate",
       "items": [],
-      "controlType": "CommonButtonComplete",
-      "width": "1px",
+      "controlType": "CommonButtonUpdate",
+      "width": "S",
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -3189,55 +3967,20 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btnSave",
+      "selectControlID": "btnUpdate",
       "helpMessageID": "",
       "jpControlName": "",
-      "text": "完了",
+      "text": "保存",
       "imageWidth": "",
       "imageHeight": "",
       "onBeforeClick": "",
       "onAfterClick": "",
-      "onClick": "onClick_btnSave",
+      "onClick": "onClick_btnUpdate",
       "appearance": 0,
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": "資格取得情報を"
-     }
-    },
-    {
-     "buttonKind": "CommonButtonBack",
-     "buttonProperty": {
-      "fieldName": "btnBackTaishoshaSearch",
-      "items": [],
-      "controlType": "CommonButtonNext",
-      "width": "1px",
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnBackTaishoshaSearch",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "text": "戻る",
-      "imageWidth": "",
-      "imageHeight": "",
-      "onBeforeClick": "",
-      "onAfterClick": "",
-      "onClick": "onClick_btnBackTaishoshaSearch",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "additionalText": "対象者検索へ"
+      "additionalText": ""
      }
     },
     {
@@ -3274,24 +4017,11 @@
       "heightTextBoxMatches": false,
       "additionalText": "該当者一覧へ"
      }
-    }
-   ],
-   "states": [
-    {
-     "state": "資格取得情報入力"
-    }
-   ],
-   "isFinishButtonOnTheRight": false,
-   "FinishButtonVisible": false,
-   "SuspendButtonVisible": false
-  },
-  {
-   "commonButtonAreaId": "Complete",
-   "buttonSetting": [
+    },
     {
      "buttonKind": "CommonButtonReSearch",
      "buttonProperty": {
-      "fieldName": "btnReSearch",
+      "fieldName": "btnReSearchNyuryoku",
       "items": [],
       "controlType": "CommonButtonReSearch",
       "width": "1px",
@@ -3307,7 +4037,7 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btnReSearch",
+      "selectControlID": "btnReSearchNyuryoku",
       "helpMessageID": "",
       "jpControlName": "",
       "text": "再検索",
@@ -3315,14 +4045,27 @@
       "imageHeight": "",
       "onBeforeClick": "",
       "onAfterClick": "",
-      "onClick": "",
+      "onClick": "onClick_btnReSearchNyuryoku",
       "appearance": 0,
       "imageFileUrl": "",
       "icon": 0,
       "heightTextBoxMatches": false,
       "additionalText": ""
      }
-    },
+    }
+   ],
+   "states": [
+    {
+     "state": "資格取得情報登録"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "Complete",
+   "buttonSetting": [
     {
      "buttonKind": "CommonButtonBack",
      "buttonProperty": {
@@ -3357,14 +4100,132 @@
       "heightTextBoxMatches": false,
       "additionalText": "該当者一覧へ"
      }
+    },
+    {
+     "buttonKind": "CommonButtonReSearch",
+     "buttonProperty": {
+      "fieldName": "btnReSearchComplete",
+      "items": [],
+      "controlType": "CommonButtonReSearch",
+      "width": "1px",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReSearchComplete",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "再検索",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "onClick_btnReSearchComplete",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
     }
    ],
    "states": [
     {
-     "state": "処理完了"
+     "state": "完了"
     }
    ],
    "isFinishButtonOnTheRight": true,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "ShikakuTeisei",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnBackGaitoshaResult",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": "1px",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnBackGaitoshaResult",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "戻る",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "該当者一覧へ"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonReSearch",
+     "buttonProperty": {
+      "fieldName": "btnReSearchTeisei",
+      "items": [],
+      "controlType": "CommonButtonReSearch",
+      "width": "0px",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReSearchTeisei",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "再検索",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "資格訂正"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
    "FinishButtonVisible": false,
    "SuspendButtonVisible": false
   }

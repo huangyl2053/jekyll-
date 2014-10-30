@@ -5,7 +5,7 @@
    "fieldName": "TennyuTensyutsuHoryuTaishosha",
    "items": [
     {
-     "fieldName": "tabTaishosa",
+     "fieldName": "tabHoryuTaishosha",
      "items": [
       {
        "fieldName": "tplTenshutsu",
@@ -14,7 +14,7 @@
          "fieldName": "dgTenshutsu",
          "items": [],
          "controlType": "DataGrid",
-         "width": "1070",
+         "width": "1080px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -31,10 +31,7 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "height": "460",
-         "onSelectByDblClick": "",
-         "onSelectByModifyButton": "",
-         "onSelectByDeleteButton": "",
+         "height": "460px",
          "gridSetting": {
           "rowHeight": 50,
           "isMultiSelectable": true,
@@ -64,13 +61,19 @@
              ]
             },
             {
-             "combineColumnName": "市町村コード",
+             "combineColumnName": "状況",
              "combineItem": [
-              "shichosonCode"
+              "jokyo"
              ]
             },
             {
-             "combineColumnName": "被保険者番号",
+             "combineColumnName": "市町村",
+             "combineItem": [
+              "shichosonCodeAndshichosonMei"
+             ]
+            },
+            {
+             "combineColumnName": "被保番号",
              "combineItem": [
               "hihokenshaNoAndShikibetsuCode"
              ]
@@ -100,13 +103,13 @@
              ]
             },
             {
-             "combineColumnName": "転入転出予定住所",
+             "combineColumnName": "転出予定住所",
              "combineItem": [
               "tennyuTenshutsuYoteiJusho"
              ]
             },
             {
-             "combineColumnName": "転入前／転出後全国住所コード",
+             "combineColumnName": "転出予定全国住所コード",
              "combineItem": [
               "tennyuTenshutsuZenkokuJushoCode"
              ]
@@ -171,11 +174,25 @@
            },
            {
             "columnName": "",
+            "dataName": "jokyo",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 65,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "jokyo"
+           },
+           {
+            "columnName": "",
             "dataName": "shichosonCode",
             "toolTip": "",
             "bgColor": 0,
             "width": 120,
-            "visible": true,
+            "visible": false,
             "cellType": 0,
             "cellDetails": {
              "cellType": 0,
@@ -185,6 +202,20 @@
             "resize": false,
             "isPrivateInfo": false,
             "sortKey": "shichosonCode"
+           },
+           {
+            "columnName": "",
+            "dataName": "shichosonCodeAndshichosonMei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shichosonCodeAndshichosonMei"
            },
            {
             "columnName": "被保番号",
@@ -422,7 +453,10 @@
          },
          "onSort": "",
          "onSelect": "",
+         "onSelectByDblClick": "",
          "onSelectBySelectButton": "",
+         "onSelectByModifyButton": "",
+         "onSelectByDeleteButton": "",
          "onAfterRequest": "",
          "onAfterRequestByDblClick": "",
          "onAfterRequestBySelectButton": "",
@@ -442,7 +476,7 @@
          "fieldName": "btnIkkatsuSoshitsu",
          "items": [],
          "controlType": "Button",
-         "width": "180",
+         "width": "180px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -458,14 +492,14 @@
          "selectControlID": "btnIkkatsuSoshitsu",
          "helpMessageID": "",
          "jpControlName": "",
-         "text": "一括で喪失処理を行う",
-         "imageWidth": "",
-         "imageHeight": "",
          "onBeforeClick": "",
          "onAfterClick": "",
          "onClick": "",
+         "text": "一括で喪失処理を行う",
          "appearance": 0,
          "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": "",
          "icon": 0,
          "heightTextBoxMatches": false
         }
@@ -498,7 +532,7 @@
          "fieldName": "dgTennyu",
          "items": [],
          "controlType": "DataGrid",
-         "width": "1070",
+         "width": "1080px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -515,10 +549,7 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "height": "490",
-         "onSelectByDblClick": "",
-         "onSelectByModifyButton": "",
-         "onSelectByDeleteButton": "",
+         "height": "490px",
          "gridSetting": {
           "rowHeight": 50,
           "isMultiSelectable": false,
@@ -548,13 +579,19 @@
              ]
             },
             {
-             "combineColumnName": "市町村コード",
+             "combineColumnName": "状況",
              "combineItem": [
-              "shichosonCode"
+              "jokyo"
              ]
             },
             {
-             "combineColumnName": "被保険者番号",
+             "combineColumnName": "市町村",
+             "combineItem": [
+              "shichosonCodeAndshichosonMei"
+             ]
+            },
+            {
+             "combineColumnName": "被保番号",
              "combineItem": [
               "hihokenshaNoAndShikibetsuCode"
              ]
@@ -584,13 +621,13 @@
              ]
             },
             {
-             "combineColumnName": "転入転出予定住所",
+             "combineColumnName": "転入前住所",
              "combineItem": [
               "tennyuTenshutsuYoteiJusho"
              ]
             },
             {
-             "combineColumnName": "転入前／転出後全国住所コード",
+             "combineColumnName": "転入前全国住所コード",
              "combineItem": [
               "tennyuTenshutsuZenkokuJushoCode"
              ]
@@ -659,11 +696,25 @@
            },
            {
             "columnName": "",
+            "dataName": "jokyo",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 65,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "jokyo"
+           },
+           {
+            "columnName": "市町村コード",
             "dataName": "shichosonCode",
             "toolTip": "",
             "bgColor": 0,
             "width": 120,
-            "visible": true,
+            "visible": false,
             "cellType": 0,
             "cellDetails": {
              "cellType": 0,
@@ -673,6 +724,20 @@
             "resize": false,
             "isPrivateInfo": false,
             "sortKey": "shichosonCode"
+           },
+           {
+            "columnName": "",
+            "dataName": "shichosonCodeAndshichosonMei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shichosonCodeAndshichosonMei"
            },
            {
             "columnName": "被保番号",
@@ -910,7 +975,10 @@
          },
          "onSort": "",
          "onSelect": "",
+         "onSelectByDblClick": "",
          "onSelectBySelectButton": "",
+         "onSelectByModifyButton": "",
+         "onSelectByDeleteButton": "",
          "onAfterRequest": "",
          "onAfterRequestByDblClick": "",
          "onAfterRequestBySelectButton": "",
@@ -955,7 +1023,7 @@
          "fieldName": "dgKoiki",
          "items": [],
          "controlType": "DataGrid",
-         "width": "1070",
+         "width": "1080px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -972,10 +1040,7 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "height": "490",
-         "onSelectByDblClick": "",
-         "onSelectByModifyButton": "",
-         "onSelectByDeleteButton": "",
+         "height": "490px",
          "gridSetting": {
           "rowHeight": 50,
           "isMultiSelectable": false,
@@ -1005,9 +1070,15 @@
              ]
             },
             {
-             "combineColumnName": "市町村コード",
+             "combineColumnName": "状況",
              "combineItem": [
-              "shichosonCode"
+              "jokyo"
+             ]
+            },
+            {
+             "combineColumnName": "市町村",
+             "combineItem": [
+              "shichosonCodeAndshichosonMei"
              ]
             },
             {
@@ -1112,11 +1183,25 @@
            },
            {
             "columnName": "",
+            "dataName": "jokyo",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 65,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "jokyo"
+           },
+           {
+            "columnName": "市町村コード",
             "dataName": "shichosonCode",
             "toolTip": "",
             "bgColor": 0,
             "width": 120,
-            "visible": true,
+            "visible": false,
             "cellType": 0,
             "cellDetails": {
              "cellType": 0,
@@ -1126,6 +1211,20 @@
             "resize": false,
             "isPrivateInfo": false,
             "sortKey": "shichosonCode"
+           },
+           {
+            "columnName": "",
+            "dataName": "shichosonCodeAndshichosonMei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shichosonCodeAndshichosonMei"
            },
            {
             "columnName": "被保番号",
@@ -1363,7 +1462,10 @@
          },
          "onSort": "",
          "onSelect": "",
+         "onSelectByDblClick": "",
          "onSelectBySelectButton": "",
+         "onSelectByModifyButton": "",
+         "onSelectByDeleteButton": "",
          "onAfterRequest": "",
          "onAfterRequestByDblClick": "",
          "onAfterRequestBySelectButton": "",
@@ -1403,7 +1505,7 @@
       }
      ],
      "controlType": "TabContainer",
-     "width": "1090",
+     "width": "1090px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1416,15 +1518,15 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "tabTaishosa",
+     "selectControlID": "tabHoryuTaishosha",
      "helpMessageID": "",
      "jpControlName": "",
      "onChange": "",
      "selectedItem": null,
      "tabpanelPosition": [
-      "TabPanel1",
-      "TabPanel2",
-      "TabPanel3"
+      "tplTenshutsu",
+      "tplTennyu",
+      "tplKoiki"
      ],
      "isDraggable": false,
      "selectedItemFieldName": "tplKoiki",
@@ -1444,15 +1546,15 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "Default",
-   "marginRight": "Default",
+   "marginLeft": "0px",
+   "marginRight": "0px",
    "selectControlID": "TennyuTensyutsuHoryuTaishosha",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
    "title": "転入転出保留対象者一覧",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "TennyuTensyutsuHoryuTaishosha"
@@ -1500,7 +1602,8 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "転入転出保留対象者一覧",
+   "stateName": "転入転出保留対象者管理",
+   "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
     {
@@ -1515,7 +1618,7 @@
    "events": []
   }
  ],
- "currentState": "転入転出保留対象者一覧",
+ "currentState": "転入転出保留対象者管理",
  "id": "DBA1070011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -1528,5 +1631,19 @@
  "controlMargin": 1,
  "supplementInfoAllSet": "",
  "supplementInfoAllPostParam": [],
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "HoryuTaishoshaKanri",
+   "buttonSetting": "",
+   "states": [
+    {
+     "state": "転入転出保留対象者管理"
+    }
+   ],
+   "isFinishButtonOnTheRight": true,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ],
+ "packageName": ""
 }

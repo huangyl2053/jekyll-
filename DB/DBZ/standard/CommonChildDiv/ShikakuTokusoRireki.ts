@@ -20,7 +20,8 @@ module DBZ
                     "DisplayType",
                     "BtnDisplayMode",
                     "HokenshaJohoDisplayMode",
-                    "DataGridWidth"
+                    "DataGridWidth",
+                    "DataGridHeight"
                     ];
                 }
 
@@ -38,6 +39,10 @@ module DBZ
 
                 public DataGridWidth() {
                     return new Modes.DataGridWidth(this.controls);
+                }
+
+                public DataGridHeight() {
+                    return new Modes.DataGridHeight(this.controls);
                 }
             
             }
@@ -57,6 +62,8 @@ module DBZ
                         var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
                         
                         gridSetting.columns[0].visible = false;
+                        gridSetting.isShowModifyButtonColumn = false;
+                        gridSetting.isShowDeleteButtonColumn = false;
 
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
@@ -69,6 +76,22 @@ module DBZ
                         var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
                         
                         gridSetting.columns[0].visible = true;
+                        gridSetting.isShowModifyButtonColumn = false;
+                        gridSetting.isShowDeleteButtonColumn = false;
+
+                        this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
+
+                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+                    }
+
+                    public teiseitoroku(): void {
+                        this.controls.dgShikakuShutokuRireki().readOnly = false;
+
+                        var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
+
+                        gridSetting.columns[0].visible = true;
+                        gridSetting.isShowModifyButtonColumn = true;
+                        gridSetting.isShowDeleteButtonColumn = true;
 
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
@@ -199,6 +222,56 @@ module DBZ
 
                     public Size6(): void {
                         this.controls.dgShikakuShutokuRireki().width = 870;
+
+                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+
+                    }
+                }
+
+                export class DataGridHeight {
+                    private controls: Controls;
+
+                    constructor(controls: Controls) {
+                        this.controls = controls;
+                    }
+
+                    public Size1(): void {
+                        this.controls.dgShikakuShutokuRireki().height = 450;
+
+                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+
+                    }
+
+                    public Size2(): void {
+                        this.controls.dgShikakuShutokuRireki().height = 400;
+
+                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+
+                    }
+
+                    public Size3(): void {
+                        this.controls.dgShikakuShutokuRireki().height = 350;
+
+                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+
+                    }
+
+                    public Size4(): void {
+                        this.controls.dgShikakuShutokuRireki().height = 300;
+
+                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+
+                    }
+
+                    public Size5(): void {
+                        this.controls.dgShikakuShutokuRireki().height = 250;
+
+                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
+
+                    }
+
+                    public Size6(): void {
+                        this.controls.dgShikakuShutokuRireki().height = 200;
 
                         this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
