@@ -7,10 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbz.business.INinteiShinseiTaishosha;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
-import jp.co.ndensan.reams.ur.urz.business.jusho.IJusho;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -20,6 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
+import jp.co.ndensan.reams.ur.urz.model.IJusho;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
@@ -90,7 +90,7 @@ public class Minashi2Gosha implements IMinashi2GoshaDaicho, INinteiShinseiTaisho
 
     @Override
     public RString get個人番号() {
-        return profile.get個人番号();
+        return profile.get個人番号().value();
     }
 
     @Override
@@ -122,5 +122,4 @@ public class Minashi2Gosha implements IMinashi2GoshaDaicho, INinteiShinseiTaisho
     public FlexibleDate getみなし2号解除年月日() {
         return daichoJoho.getみなし2号解除年月日();
     }
-
 }

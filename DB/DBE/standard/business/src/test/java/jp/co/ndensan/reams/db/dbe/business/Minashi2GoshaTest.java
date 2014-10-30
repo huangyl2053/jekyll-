@@ -8,13 +8,14 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
-import jp.co.ndensan.reams.ur.urz.business.jusho.IJusho;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
+import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
+import jp.co.ndensan.reams.ur.urz.model.IJusho;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KojinNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -172,7 +173,7 @@ public class Minashi2GoshaTest {
         @Test
         public void get個人番号は_コンストラクタ引数のIKojinが持つ個人番号と_同じ値を返す() {
             RString kojinNo = new RString("0123456789");
-            when(profile.get個人番号()).thenReturn(kojinNo);
+            when(profile.get個人番号()).thenReturn(new KojinNo(kojinNo));
             assertThat(sut.get個人番号(), is(kojinNo));
         }
 

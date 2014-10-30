@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.KaigoRenrakusaki;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5050RenrakusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.mapper.RenrakusakiInfoMapper;
+import jp.co.ndensan.reams.db.dbz.business.mapper.RenrakusakiInfoMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.RenrakusakiInfoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import jp.co.ndensan.reams.db.dbe.business.NinteiResult;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5002NinteiKekkaJohoEntityMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiResultMock;
+import jp.co.ndensan.reams.db.dbe.business.helper.NinteiResultMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

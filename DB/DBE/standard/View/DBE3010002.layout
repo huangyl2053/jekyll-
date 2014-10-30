@@ -1,0 +1,262 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "torikomiJoken",
+   "items": [
+    {
+     "fieldName": "btnTorikomi",
+     "items": [],
+     "controlType": "ButtonDialog",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnTorikomi",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "onClick": "",
+     "text": "取込みする",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false,
+     "displayChildDivName": "",
+     "dataPassing": [],
+     "visibleCloseButton": true,
+     "onOkClose": "",
+     "onBeforeOpenDialog": ""
+    },
+    {
+     "fieldName": "txtFileName",
+     "items": [],
+     "controlType": "TextBox",
+     "width": "350px",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0px",
+     "marginRight": "XS",
+     "selectControlID": "txtFileName_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
+     "text": "",
+     "required": false,
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "placeHolder": "",
+     "textKind": 0,
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "suggest": [],
+     "value": "",
+     "labelLText": "ファイル名",
+     "labelRText": "",
+     "labelLWidth": "90px",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "decorationClass": "",
+     "permitCharactor": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0em",
+   "marginRight": "0em",
+   "selectControlID": "torikomiJoken",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "取込条件",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "torikomiJoken"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "focusPositionID": "restoreLayoutButton",
+   "canPost": true
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "一次判定結果取込み",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "作成",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "torikomiJoken",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "validation": {},
+   "events": []
+  }
+ ],
+ "currentState": "All",
+ "id": "DBE3010002",
+ "WFParameter": [],
+ "UIContainerEventMapping": [],
+ "loadSequencePanelNames": [
+  [
+   "KogakuShikyuKetteiTsuchiSakusei"
+  ],
+  [
+   "KogakuShikyuKetteiTsuchiSakuseiListPanel"
+  ],
+  [
+   "KogakuShikyuKetteiTsuchiSakuseiListtHakkoDate"
+  ],
+  [
+   "CommonKariChildDiv1"
+  ],
+  [
+   "KogakuShikyuKetteiTsuchiSakuseishoPanel"
+  ],
+  [
+   "KogakuShikyuKetteiTsuchiSakuseishoHakkoDate"
+  ],
+  [
+   "KogakuShikyuKetteiTsuchiSakuseishoPaymentMethod"
+  ],
+  [
+   "CommonKariChildDiv2"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "btn",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonExecute",
+     "buttonProperty": {
+      "fieldName": "btnExecute",
+      "items": [],
+      "controlType": "CommonButtonExecute",
+      "width": "1px",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnExecute",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "text": "実行",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "作成"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ],
+ "packageName": ""
+}

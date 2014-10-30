@@ -21,7 +21,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDivController</artifactId>
-            <version>${project.version}</version>
             <classifier>classes</classifier>
         </dependency>
         <dependency>
@@ -44,6 +43,18 @@
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDivController</artifactId>
             <classifier>classes</classifier>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbdModel</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbdModel</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.yaml</groupId>

@@ -62,7 +62,6 @@ public class FukaTaishoSearch {
         if (div.getSearchCriteriaOfHihokensha().getTxtTuchishoNo().getValue().length() > 0) {
             searchValue.put("通知書番号", div.getSearchCriteriaOfHihokensha().getTxtTuchishoNo().getValue());
         }
-//AtensaShokaiSimpleの変更に際してコメントアウト。(対応するメソッドがないため。)
 //        if (div.getKaigoAtenaFinder().getTxtShikibetsuCode().getValue().length() > 0) {
 //            searchValue.put("識別コード", div.getKaigoAtenaFinder().getTxtShikibetsuCode().getValue());
 //        }

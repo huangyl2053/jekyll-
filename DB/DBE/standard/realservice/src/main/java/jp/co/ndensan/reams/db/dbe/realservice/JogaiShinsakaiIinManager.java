@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.JogaiShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.JogaiShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5014ShinsakaiIinJogaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.JogaiShinsakaiIinMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.JogaiShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.JogaiShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiIinJogaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.JogaiShinsakaiIinDac;

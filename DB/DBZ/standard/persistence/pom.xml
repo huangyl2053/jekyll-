@@ -18,6 +18,11 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>DbzDefinition</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>DbzEntity</artifactId>
             <version>${project.version}</version>
             <exclusions>
@@ -29,12 +34,19 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DbzDefinition</artifactId>
+            <artifactId>DbzEntity</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzModel</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DbzEntity</artifactId>
+            <artifactId>DbzModel</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>

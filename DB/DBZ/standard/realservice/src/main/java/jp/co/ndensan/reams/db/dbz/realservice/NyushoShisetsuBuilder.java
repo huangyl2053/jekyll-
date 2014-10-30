@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.NyushoShisetsu;
-import jp.co.ndensan.reams.db.dbz.entity.mapper.NyushoShisetsuMapper;
+import jp.co.ndensan.reams.db.dbz.business.mapper.NyushoShisetsuMapper;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.KaigoHokenNyushoShisetsuBunrui;

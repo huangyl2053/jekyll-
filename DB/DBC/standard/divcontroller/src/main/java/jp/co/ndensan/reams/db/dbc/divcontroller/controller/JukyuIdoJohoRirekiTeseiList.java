@@ -15,8 +15,9 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.workflow.flow.task.process.tray.TrayTaskManager;
-import jp.co.ndensan.reams.uz.uza.workflow.flow.task.process.tray.TrayToTaskSingle;
+import jp.co.ndensan.reams.uz.uza.workflow.flow.task.process.tray.TrayToTask;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.IdentificationKeyValue;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.IdentificationKeyValues;
 
 /**
  * 受給異動情報履歴訂正一覧のコントローラークラスです。
@@ -76,11 +77,10 @@ public class JukyuIdoJohoRirekiTeseiList {
     }
 
     private void completeTrayTask() {
-        TrayTaskManager mgr = new TrayTaskManager();
-        for (TrayToTaskSingle data : mgr.getAllIdentificationValues()) {
-            IdentificationKeyValue keyValue = data.getIdKeyVal();
-            mgr.grabTask(keyValue);
-            mgr.completeTask(keyValue);
+        for (TrayToTask data : TrayTaskManager.getIdentificationValues()) {
+            IdentificationKeyValues keyValues = data.getIdKeyVal();
+            TrayTaskManager.grabTask(keyValues);
+            TrayTaskManager.completeTask(keyValues);
             break;
         }
     }

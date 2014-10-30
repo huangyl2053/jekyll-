@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
@@ -45,23 +44,5 @@ public class NinteichosaItakusakiTestHelper {
                 機関の区分);
 
         return entity;
-    }
-
-    /**
-     * テスト用認定調査委託先を返します。
-     *
-     * @return 認定調査委託先
-     */
-    public static NinteichosaItakusaki create認定調査委託先() {
-        NinteichosaItakusaki itakusaki = new NinteichosaItakusaki(
-                市町村コード,
-                介護事業者番号,
-                事業者番号,
-                介護事業者状況,
-                調査委託区分,
-                割付定員,
-                割付地区,
-                機関の区分);
-        return itakusaki;
     }
 }

@@ -1,24 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package jp.co.ndensan.reams.db.dbe.entity.helper;
+//TODO n3317　塚田萌　使ってないようなのでコメントアウト。確認取れたら削除
 
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.AgeArrivalDay;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KannaiKangai;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.UnknownDate;
-import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JukiIdoJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminJotai;
-import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.StatusOfMidToLongTermResidence;
-import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.StatusOfResidence;
-import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.Tsuzukigara;
+//import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.AgeArrivalDay;
+//import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KannaiKangai;
+//import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.UnknownDate;
+//import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JukiIdoJiyu;
+//import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminJotai;
+//import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
+//import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.StatusOfMidToLongTermResidence;
+//import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.StatusOfResidence;
+//import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.Tsuzukigara;
 //import jp.co.ndensan.reams.ur.urz.entity.basic.KojinEntity;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static org.mockito.Mockito.*;
-
+//import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+//import jp.co.ndensan.reams.uz.uza.lang.RDate;
+//import jp.co.ndensan.reams.uz.uza.lang.RString;
+//import static org.mockito.Mockito.*;
 /**
  * KojinEntityを生成するためのMockクラスです
  *
@@ -28,7 +23,6 @@ public final class KojinEntityMock {
 
     private KojinEntityMock() {
     }
-
 //    public static KojinEntity getSpiedInstance() {
 //        KojinEntity defaultData = new KojinEntity();
 //        defaultData.setワークスペース_名称(new RString("ワークスペース_名称"));

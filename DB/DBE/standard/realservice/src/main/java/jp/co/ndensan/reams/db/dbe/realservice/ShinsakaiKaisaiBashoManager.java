@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.ShinsakaiKaisaiBashoMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.ShinsakaiKaisaiBashoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiKaisaiBashoDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 

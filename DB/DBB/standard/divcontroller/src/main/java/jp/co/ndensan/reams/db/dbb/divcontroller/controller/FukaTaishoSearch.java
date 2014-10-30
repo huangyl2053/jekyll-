@@ -84,18 +84,18 @@ public class FukaTaishoSearch {
             searchValue.put("通知書番号", div.getSearchCriteriaOfHihokensha().getTxtTuchishoNo().getValue());
         }
 
-        if (div.getKaigoAtenaFinder().getTxtShikibetsuCode().getValue().length() > 0) {
-            searchValue.put("識別コード", div.getKaigoAtenaFinder().getTxtShikibetsuCode().getValue());
-        }
-
-        if (div.getKaigoAtenaFinder().getTxtSetaiCode().getValue().length() > 0) {
-            searchValue.put("世帯コード", div.getKaigoAtenaFinder().getTxtSetaiCode().getValue());
-        }
-
-        if (div.getKaigoAtenaFinder().getTxtKojinNo().getValue().length() > 0) {
-            searchValue.put("個人番号", div.getKaigoAtenaFinder().getTxtKojinNo().getValue());
-        }
-
+//        if (div.getKaigoAtenaFinder().getTxtShikibetsuCode().getValue().length() > 0) {
+//            searchValue.put("識別コード", div.getKaigoAtenaFinder().getTxtShikibetsuCode().getValue());
+//        }
+//
+//        if (div.getKaigoAtenaFinder().getTxtSetaiCode().getValue().length() > 0) {
+//            searchValue.put("世帯コード", div.getKaigoAtenaFinder().getTxtSetaiCode().getValue());
+//        }
+//
+//        if (div.getKaigoAtenaFinder().getTxtKojinNo().getValue().length() > 0) {
+//            searchValue.put("個人番号", div.getKaigoAtenaFinder().getTxtKojinNo().getValue());
+//        }
+//        
         // TODO 田辺 紘一 レイアウト変更に伴い仕様変更があったので、修正が必要
 //        if (!div.getKaigoAtenaFinder().getDdlJuminShubetsu().getSelectedValue().equals(new RString("指定なし"))) {
 //            searchValue.put("住民種別", div.getKaigoAtenaFinder().getDdlJuminShubetsu().getSelectedValue());

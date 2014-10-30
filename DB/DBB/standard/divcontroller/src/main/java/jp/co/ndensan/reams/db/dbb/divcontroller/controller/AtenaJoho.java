@@ -10,12 +10,14 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.AtenaJohoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.dgdGaitoushaIchiran_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.AtenaShokaiSimpleAdapter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoFukaKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -28,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @author N2810
  */
 public class AtenaJoho {
+    //TODO n8178 城間篤人 デモ時の実装のため、現状との不整合が起きている。修正、もしくはオフショアに出すなら破棄の必要があり 2014年11月
 
     private static final RString FukaKihon = new RString("FukaKihon.yml");
 
@@ -37,10 +40,11 @@ public class AtenaJoho {
         ResponseData<AtenaJohoDiv> response = new ResponseData<>();
 
         if (atenajoho == null) {
-            AtenaShokaiSimpleDiv atenashokaiDiv = div.getKaigoAtenaInfo().getAtenaInfo();
+            KaigoAtenaInfoDiv atenashokaiDiv = div.getKaigoAtenaInfo();
+            //TODO n8178 城間篤人 デモ対応時の実装をコメントアウト。検索周りの使用が確定し、ViewStateから何を受け取るかを決めたあと修正 2014年11月
             //ShikibetsuCode shikibetsuCode = new ShikibetsuCode((RString) ViewStateHolder.get("対象者識別コード", RString.class));
             ShikibetsuCode shikibetsuCode = new ShikibetsuCode("000000000000019");
-            AtenaShokaiSimple.setData(atenashokaiDiv, shikibetsuCode);
+            AtenaShokaiSimpleAdapter.setDemoData(atenashokaiDiv, shikibetsuCode);
             KaigoFukaKihonDiv kaigofukakihonDiv = div.getKaigoFukaKihon();
 
             loadKaigoFukaKihon(kaigofukakihonDiv);

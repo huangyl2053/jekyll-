@@ -10,14 +10,14 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikanCollection;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.KaigoIryoKikanMapper;
+import jp.co.ndensan.reams.db.dbe.business.mapper.KaigoIryoKikanMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IKaigoIryoKikanDac;
-import jp.co.ndensan.reams.ur.urz.business.IKoza;
+//import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.realservice.IKozaManager;
 import jp.co.ndensan.reams.ur.urz.realservice.KozaService;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+//import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -77,8 +77,8 @@ public class KaigoIryoKikanFinder implements IKaigoIryoKikanFinder {
 
         //TODO n8178 城間篤人 基準日をどうするか確認する。また、これ以外のget口座を利用するのかもしれないため、要検討。 2014年2月末
 //        List<IKoza> kozaList = kozaManager.get口座(RDate.MIN, create識別コード(entity));
-        List<IKoza> kozaList = kozaManager.get口座(RDate.MIN, entity.getIryoKikanEntity().getShikibetsuCode());
-        return KaigoIryoKikanMapper.toKaigoIryoKikan(entity, kozaList);
+//        List<IKoza> kozaList = kozaManager.get口座(RDate.MIN, entity.getIryoKikanEntity().getShikibetsuCode());
+        return KaigoIryoKikanMapper.toKaigoIryoKikan(entity);
     }
 
 //    //医療機関Entityが修正され、識別コードを直接とってこれるようになったらこの処理は不要 2014年2月末

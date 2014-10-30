@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
+import java.util.HashSet;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.IShisetsuJohoDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,8 +11,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
-
-import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShisetsuJohoHandler;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
@@ -286,11 +285,12 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
         getHandler().onChange_radShisetsuShurui();
     }
 
-    @Override
-    public void onChange_ddlDaichoShubetsu() {
-        getHandler().onChange_ddlDaichoShubetsu();
-    }
-
+//    メソッドが存在しないのでコメントアウト。
+//    @Override
+//    public void onChange_ddlDaichoShubetsu() {
+//        getHandler().onChange_ddlDaichoShubetsu();
+//    }
+//
 // 以下のメソッドはインタフェースに定義していないので業務には公開されません。
     @JsonIgnore
     public ShisetsuJohoHandler getHandler() {

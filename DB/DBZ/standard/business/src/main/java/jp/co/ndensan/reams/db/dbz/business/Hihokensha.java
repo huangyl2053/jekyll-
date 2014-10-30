@@ -8,15 +8,15 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
-import jp.co.ndensan.reams.ur.urz.business.jusho.IJusho;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
+import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
+import jp.co.ndensan.reams.ur.urz.model.IJusho;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -168,7 +168,7 @@ public class Hihokensha implements IHihokenshaShikaku, INinteiShinseiTaishosha {
 
     @Override
     public RString get個人番号() {
-        return this.profile.get個人番号();
+        return this.profile.get個人番号().value();
     }
 
     @Override

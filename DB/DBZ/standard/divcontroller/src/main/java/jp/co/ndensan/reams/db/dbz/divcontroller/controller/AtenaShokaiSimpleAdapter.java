@@ -27,7 +27,7 @@ public class AtenaShokaiSimpleAdapter {
      */
     @Deprecated
     public static void setDemoData(KaigoAtenaInfoDiv div, ShikibetsuCode 識別コード) {
-        //AtenaShokaiSimple.setData(div.getAtenaInfo(), 識別コード);
+//        AtenaShokaiSimple.setData(div.getAtenaInfo(), 識別コード);
     }
 
 //TODO n3327 三浦凌 AtenaShokaiSimpleを簡単に使うための介護用ユーティリティを作る。このクラスを拡張で実現するかどうかも含めて検討する。

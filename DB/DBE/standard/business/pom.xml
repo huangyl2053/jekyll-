@@ -17,16 +17,16 @@
 
     <dependencies>
         <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzBusiness</artifactId>
+        </dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdBusiness</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urf</groupId>
             <artifactId>UrfBusiness</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzBusiness</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -36,7 +36,31 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbeModel</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbeModel</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbeEntity</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzDefinition</artifactId>
+            <version>1.1-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

@@ -15,10 +15,7 @@
     </parent>
 
     <properties>
-        <jp.co.ndensan.reams.uzVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.uzVersion>
-        <jp.co.ndensan.reams.urVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.urVersion>
         <jp.co.ndensan.reams.dbzVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbzVersion>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <modules>
@@ -29,11 +26,43 @@
         <module>persistence</module>
         <module>realservice</module>
         <module>divcontroller</module>
+        <module>model</module>
     </modules>
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>jp.ndensan.reams.db.dbz</groupId>
+                <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+                <artifactId>DbzDefinition</artifactId>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+                <artifactId>DbzEntity</artifactId>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+                <artifactId>DbzModel</artifactId>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+                <artifactId>DbzBusiness</artifactId>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+                <artifactId>DbzRealService</artifactId>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+                <artifactId>DbzDivController</artifactId>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
+                <classifier>classes</classifier>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzTestHelper</artifactId>
                 <version>${jp.co.ndensan.reams.dbzVersion}</version>
                 <scope>test</scope>

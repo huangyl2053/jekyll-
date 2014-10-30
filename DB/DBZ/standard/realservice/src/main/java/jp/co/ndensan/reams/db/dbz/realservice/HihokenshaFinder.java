@@ -11,11 +11,13 @@ import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.realservice.IJukiKojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IJuminKihonDaichoSearchKey;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.JuminKihonDaichoSearchKeyBuilder;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
+import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.IJukiKojinFinder;
+import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -142,7 +144,8 @@ public class HihokenshaFinder {
     }
 
     private Hihokensha _toHihokensha(IHihokenshaShikaku shikaku) {
-        IKojin profile = profileSearcher.find住基個人(shikaku.get識別コード());
+        IJuminKihonDaichoSearchKey searchKey = new JuminKihonDaichoSearchKeyBuilder(GyomuCode.DB介護保険).set識別コード(shikaku.get識別コード()).build();
+        IKojin profile = profileSearcher.find住基個人(searchKey);
         return isNull(profile) ? null : _createHihokensha(profile, shikaku);
     }
 

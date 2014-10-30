@@ -16,13 +16,14 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
-import jp.co.ndensan.reams.db.dbe.entity.helper.KojinTestHelper;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaItakusakiTestHelper;
+import jp.co.ndensan.reams.db.dbe.business.helper.NinteiShinchokuJohoMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoEntityMock;
+import jp.co.ndensan.reams.db.dbe.business.helper.NinteichosaItakusakiTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaIraiTaishoshaDac;
-import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoNinteichosainTestHelper;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaIraiTestHelper;
+import jp.co.ndensan.reams.db.dbe.business.helper.KaigoNinteichosainTestHelper;
+import jp.co.ndensan.reams.db.dbe.business.helper.KojinTestHelper;
+import jp.co.ndensan.reams.db.dbe.business.helper.NinteichosaIraiTestHelper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
@@ -230,7 +231,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
         for (int i = 0; i < num; i++) {
             KaigoNinteiShoriTaishoshaEntity entity = new KaigoNinteiShoriTaishoshaEntity();
             entity.setNinteiShinseiJohoEntity(YokaigoNinteiShinseiTestHelper.create認定申請情報Entity());
-            entity.setNinteiShinchokuJohoEntity(NinteiShinchokuJohoMock.create認定進捗情報Entity());
+            entity.setNinteiShinchokuJohoEntity(NinteiShinchokuJohoEntityMock.create認定進捗情報Entity());
             list.add(entity);
         }
         return list;

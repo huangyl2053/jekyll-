@@ -53,5 +53,5 @@ public interface IShisetsuJohoDiv {
     /**
      * 台帳種別DropDonwnListの選択項目が変更された際に実行します。
      */
-    void onChange_ddlDaichoShubetsu();
+//    void onChange_ddlDaichoShubetsu();
 }

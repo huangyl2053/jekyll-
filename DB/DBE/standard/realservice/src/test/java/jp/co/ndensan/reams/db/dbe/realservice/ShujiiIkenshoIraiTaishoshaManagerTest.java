@@ -12,13 +12,14 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.helper.KojinTestHelper;
+import jp.co.ndensan.reams.db.dbe.business.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.KojinTestHelper;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
-import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoSakuseiIraiMock;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoSakuseiIraiMock;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoIraiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
@@ -192,7 +193,7 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
         KaigoNinteiShoriTaishoshaEntity entity;
         for (int i = 0; i < num; i++) {
             entity = new KaigoNinteiShoriTaishoshaEntity();
-            DbT5005NinteiShinchokuJohoEntity shinchokuEntity = NinteiShinchokuJohoMock.create認定進捗情報Entity();
+            DbT5005NinteiShinchokuJohoEntity shinchokuEntity = NinteiShinchokuJohoEntityMock.create認定進捗情報Entity();
             entity.setNinteiShinchokuJohoEntity(shinchokuEntity);
 
             DbT5001NinteiShinseiJohoEntity shinseiEntity = YokaigoNinteiShinseiTestHelper.create認定申請情報Entity();
