@@ -29,7 +29,7 @@ public class ShikakuShutokuValidator {
     /**
      * バリデーションチェックの対象となる被保険者台帳Modelを設定します。
      *
-     * @param validationTarget バリデーションちぇっくっ対象の被保険者台帳Model
+     * @param validationTarget バリデーションチェック対象の被保険者台帳Model
      * @return 前履歴の被保険者台帳Modelを渡すためのクラス
      */
     public IBeforeDataSetter setValidationTarget(HihokenshaDaichoModel validationTarget) {
