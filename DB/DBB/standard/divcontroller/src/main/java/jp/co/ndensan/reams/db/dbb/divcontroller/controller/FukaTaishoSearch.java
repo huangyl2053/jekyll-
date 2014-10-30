@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0010003.FukaTaishoSearchDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0010003.dgTaishoshaIchiran_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZU030001.FukaTaishoSearchDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZU030001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -95,36 +95,36 @@ public class FukaTaishoSearch {
 //        if (div.getKaigoAtenaFinder().getTxtKojinNo().getValue().length() > 0) {
 //            searchValue.put("個人番号", div.getKaigoAtenaFinder().getTxtKojinNo().getValue());
 //        }
-//        
+//
         // TODO 田辺 紘一 レイアウト変更に伴い仕様変更があったので、修正が必要
 //        if (!div.getKaigoAtenaFinder().getDdlJuminShubetsu().getSelectedValue().equals(new RString("指定なし"))) {
 //            searchValue.put("住民種別", div.getKaigoAtenaFinder().getDdlJuminShubetsu().getSelectedValue());
 //        }
-        if (div.getKaigoAtenaFinder().getTxtAtenaMeisho().getValue().length() > 0) {
-            searchValue.put("氏名", div.getKaigoAtenaFinder().getTxtAtenaMeisho().getValue());
-            searchValue.put("検索条件_氏名", div.getKaigoAtenaFinder().getDdlAtenaSearchKubun().getSelectedValue());
-        }
-
-        if (div.getKaigoAtenaFinder().getTxtYubinNo().getValue() != null) {
-            searchValue.put("郵便番号", div.getKaigoAtenaFinder().getTxtYubinNo().getValue());
-        }
-
+//        if (div.getKaigoAtenaFinder().getTxtAtenaMeisho().getValue().length() > 0) {
+//            searchValue.put("氏名", div.getKaigoAtenaFinder().getTxtAtenaMeisho().getValue());
+//            searchValue.put("検索条件_氏名", div.getKaigoAtenaFinder().getDdlAtenaSearchKubun().getSelectedValue());
+//        }
+//
+//        if (div.getKaigoAtenaFinder().getTxtYubinNo().getValue() != null) {
+//            searchValue.put("郵便番号", div.getKaigoAtenaFinder().getTxtYubinNo().getValue());
+//        }
+//
         // TODO 田辺 紘一 レイアウト変更に伴い仕様変更があったので、修正が必要
 //        if (div.getKaigoAtenaFinder().getTxtJusho().getValue().length() > 0) {
 //            searchValue.put("住所", div.getKaigoAtenaFinder().getTxtJusho().getValue());
 //        }
-        if (div.getKaigoAtenaFinder().getTxtSeinenGappi().getValue() != null) {
-            searchValue.put("生年月日", div.getKaigoAtenaFinder().getTxtSeinenGappi().getText());
-        }
-
+//        if (div.getKaigoAtenaFinder().getTxtSeinenGappi().getValue() != null) {
+//            searchValue.put("生年月日", div.getKaigoAtenaFinder().getTxtSeinenGappi().getText());
+//        }
+//
         // TODO 田辺 紘一 レイアウト変更に伴い仕様変更があったので、修正が必要
 //        if (div.getKaigoAtenaFinder().getChkGender().getSelectedValues().size() > 0) {
 //            searchValue.put("性別", div.getKaigoAtenaFinder().getChkGender().getSelectedValues().get(0));
 //        }
-        if (div.getSearchCriteriaOfHihokensha().getDdlFukaNendo().getSelectedValue().length() > 0) {
-            searchValue.put("賦課年度", div.getSearchCriteriaOfHihokensha().getDdlFukaNendo().getSelectedValue());
-        }
-
+//        if (div.getSearchCriteriaOfHihokensha().getDdlFukaNendo().getSelectedValue().length() > 0) {
+//            searchValue.put("賦課年度", div.getSearchCriteriaOfHihokensha().getDdlFukaNendo().getSelectedValue());
+//        }
+//
         return searchValue;
     }
 
@@ -274,8 +274,8 @@ public class FukaTaishoSearch {
     private void setDataGrid(FukaTaishoSearchDiv div, List searchResult) {
         List<dgTaishoshaIchiran_Row> arrayRowList = new ArrayList<>();
         for (int i = 0; i < searchResult.size(); i++) {
-            dgTaishoshaIchiran_Row row
-                    = new dgTaishoshaIchiran_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+            dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
             ControlGenerator cg = (ControlGenerator) searchResult.get(i);
 
