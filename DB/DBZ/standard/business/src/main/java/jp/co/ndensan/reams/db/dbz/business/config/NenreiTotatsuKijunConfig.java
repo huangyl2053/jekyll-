@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTota
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 資格取得における、年齢到達の基準年齢を扱う業務コンフィグ取得クラスです。
@@ -21,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class NenreiTotatsuKijunConfig {
 
-    private final Map<ConfigKeysNenreiTotatsuKijun, RString> configs;
+    private final Map<ConfigKeysNenreiTotatsuKijun, Integer> configs;
 
     /**
      * コンストラクタです。
@@ -39,16 +38,17 @@ public class NenreiTotatsuKijunConfig {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysNenreiTotatsuKijun, RString> createMap(IUrBusinessConfig businessConfig) {
-        Map<ConfigKeysNenreiTotatsuKijun, RString> map = new EnumMap<>(ConfigKeysNenreiTotatsuKijun.class);
+    private Map<ConfigKeysNenreiTotatsuKijun, Integer> createMap(IUrBusinessConfig businessConfig) {
+        Map<ConfigKeysNenreiTotatsuKijun, Integer> map = new EnumMap<>(ConfigKeysNenreiTotatsuKijun.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysNenreiTotatsuKijun target : ConfigKeysNenreiTotatsuKijun.values()) {
-            map.put(target, businessConfig.get(target, nowDate));
+            Integer value = new Integer(businessConfig.get(target, nowDate).toString());
+            map.put(target, value);
         }
         return Collections.unmodifiableMap(map);
     }
 
     public int get(ConfigKeysNenreiTotatsuKijun key) {
-        return new Integer(configs.get(key).toString());
+        return configs.get(key);
     }
 }
