@@ -371,7 +371,7 @@ var DBZ;
                             "onNoRow": "",
                             "onMultiRows": "",
                             "dataSource": [],
-                            "sortOrder": "nyushoShisetsu",
+                            "sortOrder": "sochiHihokenshaNo",
                             "isAscending": true,
                             "filterList": [],
                             "activeRowId": -1,
