@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.controller;
+package jp.co.ndensan.reams.db.dba.divcontroller.controller.dba1010011;
 
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ResponseDataCreator;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateChangeState;
@@ -22,10 +24,10 @@ public class ShikakuShutokuJoho {
     /**
      * 画面の初期化処理を行います。
      *
-     * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
+     * @param shikakuShutokuDiv {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> initialize(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> initialize(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 以下のデータを取得し、それぞれの履歴一覧に設定する。
         //      被保険者台帳、医療保険加入、生活保護、老齢福祉年金、施設入退所
         //
@@ -48,7 +50,7 @@ public class ShikakuShutokuJoho {
         //
         //4, 取得事由ドロップダウンリストに、コード種別:0117(介護資格取得事由（被保険者）)のデータを設定する。
         //
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -58,7 +60,7 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnAddShikakuTokuso(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnAddShikakuTokuso(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //TODO #52997
         //1, 「追加する」ボタンを押下不可にする。
         //2, 「資格得喪履歴一覧」をreadOnlyにする。
@@ -81,7 +83,7 @@ public class ShikakuShutokuJoho {
         //  メニューID == DBAMN21006(帰化により取得):「帰化」
         //  メニューID == DBAMN21007(職権により取得):「職権取得」
         //  メニューID == DBAMN21008(その他事由により取得):「その他」
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -91,13 +93,13 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onSelect_ccdShikakuTokusoRireki(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onSelect_ccdShikakuTokusoRireki(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 「追加する」ボタンを押下不可にする。
         //2, 「資格得喪履歴一覧」をreadOnlyにする。
         //3, 明細エリアに選択行の内容を表示する。
         //4, 追加行を選択している場合、明細エリアの項目を入力可にする。(※取得事由は除く)。
         //  以外の行を選択した場合、明細エリアの項目を入力不可にして「確定する」ボタンを押下不可にする。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -107,10 +109,10 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnShikakuShosai(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnShikakuShosai(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 選択行の情報を取得する。
         //2, 選択行の情報をModel化し、ViewStateに保存する。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -120,7 +122,7 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onBeforeClick_btnDecideShikakuShutokuInput(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onBeforeClick_btnDecideShikakuShutokuInput(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //バリデーションチェックを実装します。
         //以下のサンプルを参考に実装を行ってください。
         ResponseData<ShikakuShutokuJohoDiv> response = new ResponseData<>();
@@ -130,7 +132,7 @@ public class ShikakuShutokuJoho {
         return response;
     }
 
-    private IValidationMessages validate(ShikakuShutokuJohoDiv div) {
+    private IValidationMessages validate(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 被保険者履歴一覧グリッドのデータを、Listで取得する。
         //2, 介護基本情報から、生年月日を取得する。
         //3, HihokenshaDaichoValidatorに、グリッドから取得したListと生年月日を渡してインスタンスを生成する。
@@ -145,10 +147,10 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnDecideShikakuShutokuInput(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnDecideShikakuShutokuInput(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 明細エリアの入力内容を被保履歴一覧 に反映させる。
         //2, 「被保険者履歴一覧」のReadOnlyを外す。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -157,7 +159,7 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnCancelShikakuShutoku(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnCancelShikakuShutoku(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //以下のページの、6.1.3質問を参考に実装を行う。
         //http://zrtechwiki/techwiki/index.php/メッセージ・例外制御ガイドライン
         //
@@ -166,7 +168,7 @@ public class ShikakuShutokuJoho {
         //2, 表示されたダイアログのボタンをクリックした後、以下の処理に分岐する。
         //      はい：onYesの処理に進む。（明細エリアの値を破棄する）
         //      いいえ: ダイアログを閉じる
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -175,11 +177,11 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnCancelShikakuShutoku_onYes(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnCancelShikakuShutoku_onYes(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 明細エリアの各項目の値をクリアする。
         //2, 「被保険者履歴一覧」のReadOnlyを外す。
         //3, 最新履歴として追加行が存在し、追加行の退所日が空白の場合、「追加する」ボタンを押下不可の状態にして、以外の場合は押下可能にする。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -188,11 +190,11 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnAddIryoHokenRirekiIchiran(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnAddIryoHokenRirekiIchiran(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 「追加する」ボタンを押下不可にする。
         //2, 「医療保険履歴一覧」をreadOnlyにする。
         //3, 明細エリアの項目を空白で表示する。【入力可】
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -201,12 +203,12 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onSelect_ccdIryoHokenRireki(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onSelect_ccdIryoHokenRireki(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 「追加する」ボタンを押下不可にする。
         //2, 「医療保険履歴一覧」をreadOnlyにする。
         //3, 明細エリアに選択行の内容を表示する。
         //4, 「確定する」ボタンを押下不可にする。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -215,12 +217,12 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onSelectByModifyButton_ccdIryoHokenRireki(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onSelectByModifyButton_ccdIryoHokenRireki(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 「追加する」ボタンを押下不可にする。
         //2, 「医療保険履歴一覧」をreadOnlyにする。
         //3, 明細エリアに選択行の内容を表示する。
         //4, 加入日を入力不可にする。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -229,11 +231,11 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onSelectByDeleteButton_ccdIryoHokenRireki(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onSelectByDeleteButton_ccdIryoHokenRireki(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 「追加する」ボタンを押下不可にする。
         //2, 「医療保険履歴一覧」をreadOnlyにする。
         //3, 明細エリアに選択行の内容を表示する。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -242,14 +244,14 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onBeforeClick_btnDecideIryoHokenInput(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onBeforeClick_btnDecideIryoHokenInput(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 加入日 ＞ 脱退日 のとき、エラーメッセージを表示する。
         // メッセージID：URZE00027（期間が不正です。%1－%2） %1:加入日, %2:脱退日
         //2, 修正時のみ 脱退日 ≧ 次の履歴データの加入日 のとき、エラーメッセージを表示する。
         // メッセージID：URZE00025（期間が重複しています。）
         //3, 追加時のみ 加入日 ≦ 前の履歴データの脱退日 のとき、エラーメッセージを表示する。
         // メッセージID：URZE00025（期間が重複しています。）
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -258,11 +260,11 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnDecideIryoHokenInput(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnDecideIryoHokenInput(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 明細エリアの入力内容を医療保険履歴一覧 に反映させる。
         //2, 「医療保険履歴一覧」のReadOnlyを外す。
         //3, 最新履歴として追加行が存在し、追加行の脱退日が空白の場合、「追加する」ボタンを押下不可の状態にして、以外の場合は押下可能にする。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -271,7 +273,7 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnCancelIryoHokenInput(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnCancelIryoHokenInput(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //以下のページの、6.1.3質問を参考に実装を行う。
         //http://zrtechwiki/techwiki/index.php/メッセージ・例外制御ガイドライン
         //
@@ -280,7 +282,7 @@ public class ShikakuShutokuJoho {
         //2, 表示されたダイアログのボタンをクリックした後、以下の処理に分岐する。
         //      はい：onYesの処理に進む。（明細エリアの値を破棄する）
         //      いいえ: ダイアログを閉じる
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -289,11 +291,11 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onBlick_btnCancelIryoHokenInput_onYes(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onBlick_btnCancelIryoHokenInput_onYes(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 明細エリアの各項目の値をクリアする。
         //2,「医療保険履歴一覧」のReadOnlyを外す。
         //3, 最新履歴として追加行が存在し、追加行の脱退日が空白の場合、「追加する」ボタンを押下不可の状態にして、以外の場合は押下可能にする。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -302,11 +304,11 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnAddShisetsuNyutaishoRireki(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnAddShisetsuNyutaishoRireki(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 「追加する」ボタンを押下不可にする。
         //2, 「施設入退所履歴一覧」をreadOnlyにする。
         //3, 明細エリアの項目を空白で表示する。【入力可】
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -315,7 +317,7 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onSelect_ShisetsuNyutaishoRireki(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onSelect_ShisetsuNyutaishoRireki(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 「追加する」ボタンを押下不可にする。
         //2, 「施設入退所履歴一覧」をreadOnlyにする。
         //3, 明細エリアに選択行の内容を表示する。
@@ -324,7 +326,7 @@ public class ShikakuShutokuJoho {
         //4-2, 状態が「修正」の場合、明細エリアの項目を入力可にする。(※入所日は入力不可)
         //4-3, 状態が「削除」の場合、明細エリアの項目を入力不可にする。
         //4-4, 状態が「空白」の場合、明細エリアの項目を入力不可にして「確定する」ボタンを押下不可にする。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -333,12 +335,12 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onSelectByModifyButton_ShisetsuNyutaishoRireki(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onSelectByModifyButton_ShisetsuNyutaishoRireki(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 「追加する」ボタンを押下不可にする。
         //2, 「施設入退所履歴一覧」をreadOnlyにする。
         //3, 明細エリアに選択行の内容を表示する。
         //4, 入所日を入力不可にする。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -347,11 +349,11 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onSelectByDeleteButton_ShisetsuNyutaishoRireki(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onSelectByDeleteButton_ShisetsuNyutaishoRireki(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 「追加する」ボタンを押下不可にする。
         //2, 「施設入退所履歴一覧」をreadOnlyにする。
         //3, 明細エリアに選択行の内容を表示する。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -360,14 +362,14 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onBeforeClick_btnDecideShisetsuNyutaishoInput(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onBeforeClick_btnDecideShisetsuNyutaishoInput(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 入所日 ＞ 退所日 のとき、エラーメッセージを表示する。
         // メッセージID：URZE00027（期間が不正です。%1－%2） %1:入所日, %2:退所日
         //2, 修正時のみ 退所日 ≧ 次の履歴データの入所日 のとき、エラーメッセージを表示する。
         // メッセージID：URZE00025（期間が重複しています。）
         //3, 追加時のみ 入所日 ≦ 前の履歴データの退所日 のとき、エラーメッセージを表示する。
         // メッセージID：URZE00025（期間が重複しています。）
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -376,11 +378,11 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnDecideShisetsuNyutaishoInput(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnDecideShisetsuNyutaishoInput(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1,  明細エリアの入力内容を施設入退所履歴一覧 に反映させる。
         //2,  「施設入退所履歴一覧」のReadOnlyを外す。
         //3,  最新履歴として追加行が存在し、追加行の退所日が空白の場合、「追加する」ボタンを押下不可の状態にして、以外の場合は押下可能にする。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -389,7 +391,7 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnCancelShisetsuNyutaishoInput(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnCancelShisetsuNyutaishoInput(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //以下のページの、6.1.3質問を参考に実装を行う。
         //http://zrtechwiki/techwiki/index.php/メッセージ・例外制御ガイドライン
         //
@@ -398,7 +400,7 @@ public class ShikakuShutokuJoho {
         //2, 表示されたダイアログのボタンをクリックした後、以下の処理に分岐する。
         //      はい：onYesの処理に進む。（明細エリアの値を破棄する）
         //      いいえ: ダイアログを閉じる
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -407,11 +409,11 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnCancelShisetsuNyutaishoInput_onYes(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnCancelShisetsuNyutaishoInput_onYes(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 明細エリアの各項目の値をクリアする。
         //2, 「施設入退所履歴一覧」のReadOnlyを外す。
         //3, 最新履歴として追加行が存在し、追加行の退所日が空白の場合、「追加する」ボタンを押下不可の状態にして、以外の場合は押下可能にする。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -420,10 +422,10 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onBeforeClick_btnSave(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onBeforeClick_btnSave(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 編集がない場合、エラーメッセージを表示する。
         //      メッセージID：URZE00045（編集されていないため、更新できません。）
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -432,7 +434,7 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnSave(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnSave(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //以下のページの、6.1.3質問を参考に実装を行う。
         //http://zrtechwiki/techwiki/index.php/メッセージ・例外制御ガイドライン
         //
@@ -441,7 +443,7 @@ public class ShikakuShutokuJoho {
         //2, 表示されたダイアログのボタンをクリックした後、以下の処理に分岐する。
         //      はい：onYesの処理に進む。（明細エリアの値を破棄する）
         //      いいえ: ダイアログを閉じる
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -451,7 +453,7 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnSave_onYes(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnSave_onYes(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 業務Configの被保険者番号方法を使用して、以下の分岐処理を実装する。
         //1-1, 被保険者番号方法が「自動連番付番」である場合
         //      採番マスタの被保番号の値＋１した前ゼロ10桁の値とする。
@@ -470,7 +472,7 @@ public class ShikakuShutokuJoho {
         //
         //3, 更新後の内容で再表示を行います。
         //   各履歴の表示モードを「照会」に変更し、追加するボタンがある場合はそれぞれ非表示にします。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -480,7 +482,7 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnBackGaitoshaIchiran(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnBackGaitoshaIchiran(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //以下のページの、6.1.3質問を参考に実装を行う。
         //http://zrtechwiki/techwiki/index.php/メッセージ・例外制御ガイドライン
         //
@@ -490,7 +492,7 @@ public class ShikakuShutokuJoho {
         //          はい：入力を破棄し、該当者一覧画面へ遷移する。
         //          いいえ: ダイアログを閉じる
         //2, 編集が行われていない場合、該当者一覧画面へ遷移する。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
     /**
@@ -500,19 +502,14 @@ public class ShikakuShutokuJoho {
      * @param div {@link ShikakuShutokuJohoDiv 資格取得情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnReserch(ShikakuShutokuJohoDiv div) {
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnReserch(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonJohoDiv) {
         //1, 編集が行われていた場合、以下のメッセージを持つダイアログを表示する。
         //   メッセージID：URZQ00003（編集されています。検索画面へ遷移してもよろしいですか？）
         //      1-1, 表示されたダイアログのボタンをクリックした後、以下の処理に分岐する。
         //          はい：入力を破棄し、検索画面へ遷移する。
         //          いいえ: ダイアログを閉じる
         //2, 編集が行われていない場合、検索画面へ遷移する。
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShutokuDiv);
     }
 
-    private static <T> ResponseData<T> _createResponseData(T setIntoData) {
-        ResponseData<T> response = new ResponseData<>();
-        response.data = setIntoData;
-        return response;
-    }
 }

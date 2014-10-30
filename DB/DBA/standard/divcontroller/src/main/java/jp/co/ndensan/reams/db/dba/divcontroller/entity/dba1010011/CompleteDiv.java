@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA4010012;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011;
 
 /**
  *
@@ -12,5 +12,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA4010012;
 //TODO #52997
 //スケルトンコード記述のため、仮に作成したクラスです。
 //画面から対象のDivを生成して置き換えを行ってください。
-public class ShikakuShosaiDiv {
+public class CompleteDiv {
+
 }

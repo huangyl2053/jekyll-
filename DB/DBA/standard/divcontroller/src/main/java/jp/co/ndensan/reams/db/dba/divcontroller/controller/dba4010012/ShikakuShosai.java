@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.controller;
+package jp.co.ndensan.reams.db.dba.divcontroller.controller.dba4010012;
 
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaDaichoList;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA4010012.ShikakuShosaiDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010012.ShikakuShosaiDiv;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KaigoViewStateKey;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
