@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.comparator;
 
+import java.util.Collections;
 import java.util.Comparator;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SortOrder;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
@@ -33,7 +34,7 @@ public enum HihokenshaDaichoModelComparators {
 
     private HihokenshaDaichoModelComparators(Comparator<HihokenshaDaichoModel> comparator) {
         asc = comparator;
-        desc = reverce(comparator);
+        desc = Collections.reverseOrder(comparator);
     }
 
     /**
@@ -54,12 +55,4 @@ public enum HihokenshaDaichoModelComparators {
         return this.desc;
     }
 
-    private Comparator<HihokenshaDaichoModel> reverce(final Comparator<HihokenshaDaichoModel> comparator) {
-        return new Comparator<HihokenshaDaichoModel>() {
-            @Override
-            public int compare(HihokenshaDaichoModel model1, HihokenshaDaichoModel model2) {
-                return comparator.compare(model1, model2) * SortOrder.DESC.getRate();
-            }
-        };
-    }
 }
