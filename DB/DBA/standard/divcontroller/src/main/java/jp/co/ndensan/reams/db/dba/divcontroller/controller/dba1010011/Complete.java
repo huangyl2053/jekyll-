@@ -22,6 +22,7 @@ public class Complete {
      * 該当者検索画面など、前画面から受け取った情報を元に、宛名と介護資格の情報をそれぞれ設定します。
      *
      * @param completeDiv {@link CompleteDiv 完了メッセージDiv}
+     * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
      * @return 完了メッセージDivを持つResposeData
      */
     public ResponseData initialize(CompleteDiv completeDiv, KihonJohoDiv kihonDiv) {

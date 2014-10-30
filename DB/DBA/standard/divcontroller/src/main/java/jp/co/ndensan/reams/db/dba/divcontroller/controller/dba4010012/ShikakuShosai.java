@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.dba4010012;
 
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010012.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010012.ShikakuShosaiDiv;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KaigoViewStateKey;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ResponseDataCreator;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 被保険者が資格を取得してから喪失するまでの、詳細な情報を表示するDivControllerです。
@@ -19,7 +19,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShikakuShosai {
 
-    public ResponseData<ShikakuShosaiDiv> initialize(ShikakuShosaiDiv div) {
+    /**
+     * 詳細画面の初期化処理です。
+     *
+     * @param shikakuShosaiDiv {@link ShikakuShosaiDiv 資格詳細Div}
+     * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
+     * @return 資格取得情報Divを持つResponseData
+     */
+    public ResponseData<ShikakuShosaiDiv> initialize(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) {
         //1, ViewStateから、前画面で設定したModelを取得する。
         //      ViewStateHolder.get(KaigoViewStateKey.被保険者台帳.getKey(), HihokenshaDaichoModel.class)
         //1, ViewStateから取得したModelが持つキー情報を元に、以下のデータを取得する。
@@ -29,7 +36,7 @@ public class ShikakuShosai {
         //      initializedJutoku(div, Modelのキー情報を元に取得した被保険者台帳のList)
         //      initializedShikakuKanrenIdo(div, Modelのキー情報を元に取得した被保険者台帳のList)
         //      initializedShikakuKanrenIdo(div, Modelのキー情報を元に取得した施設入退所のList)
-        return _createResponseData(div);
+        return ResponseDataCreator.create(shikakuShosaiDiv);
     }
 
     //TODO #52997
@@ -112,11 +119,5 @@ public class ShikakuShosai {
         //2, 施設入退所履歴グリッドに、引数から受け取った施設入退所情報を設定する。
         //3, 施設入退所入力明細エリアのDisplayNoneにtrueを設定する。
         //4, 明細エリアの各項目の値をクリアする。
-    }
-
-    private static <T> ResponseData<T> _createResponseData(T setIntoData) {
-        ResponseData<T> response = new ResponseData<>();
-        response.data = setIntoData;
-        return response;
     }
 }
