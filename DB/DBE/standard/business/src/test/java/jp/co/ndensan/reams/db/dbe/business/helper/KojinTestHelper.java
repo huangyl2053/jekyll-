@@ -41,7 +41,7 @@ public final class KojinTestHelper {
 
     private static IJusho createJusho() {
         ZenkokuJushoCode jushoCd = new ZenkokuJushoCode("00000000010");
-        YubinNo yubinNo = new YubinNo(new RString("382-0034"));
+        YubinNo yubinNo = new YubinNo("382-0034");
         RString value = new RString("町域");
         IJusho jusho = mock(IJusho.class);
         when(jusho.get全国住所コード()).thenReturn(jushoCd);
