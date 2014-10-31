@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekik
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Aug 27 10:09:41 JST 2014 
+ * Tue Sep 30 19:39:42 JST 2014 
  */
 
 
@@ -26,8 +26,8 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
     private RString shisetsuCode;
     private RString shisetsuMeisho;
     private RString shisetsu;
-    private RString taishoJohoKey;
-    private RString taishoJoho;
+    private RString daichoShubetsuKey;
+    private RString daichoShubetsu;
     private RString shisetsuShuruiKey;
     private RString shisetsuShurui;
 
@@ -38,21 +38,21 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.shisetsuCode = RString.EMPTY;
         this.shisetsuMeisho = RString.EMPTY;
         this.shisetsu = RString.EMPTY;
-        this.taishoJohoKey = RString.EMPTY;
-        this.taishoJoho = RString.EMPTY;
+        this.daichoShubetsuKey = RString.EMPTY;
+        this.daichoShubetsu = RString.EMPTY;
         this.shisetsuShuruiKey = RString.EMPTY;
         this.shisetsuShurui = RString.EMPTY;
     }
 
-    public dgShisetsuNyutaishoRireki_Row(TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString shisetsuCode, RString shisetsuMeisho, RString shisetsu, RString taishoJohoKey, RString taishoJoho, RString shisetsuShuruiKey, RString shisetsuShurui) {
+    public dgShisetsuNyutaishoRireki_Row(TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString shisetsuCode, RString shisetsuMeisho, RString shisetsu, RString daichoShubetsuKey, RString daichoShubetsu, RString shisetsuShuruiKey, RString shisetsuShurui) {
         super();
         this.setOriginalData("nyushoDate", nyushoDate);
         this.setOriginalData("taishoDate", taishoDate);
         this.setOriginalData("shisetsuCode", shisetsuCode);
         this.setOriginalData("shisetsuMeisho", shisetsuMeisho);
         this.setOriginalData("shisetsu", shisetsu);
-        this.setOriginalData("taishoJohoKey", taishoJohoKey);
-        this.setOriginalData("taishoJoho", taishoJoho);
+        this.setOriginalData("daichoShubetsuKey", daichoShubetsuKey);
+        this.setOriginalData("daichoShubetsu", daichoShubetsu);
         this.setOriginalData("shisetsuShuruiKey", shisetsuShuruiKey);
         this.setOriginalData("shisetsuShurui", shisetsuShurui);
         this.nyushoDate = nyushoDate;
@@ -60,8 +60,8 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.shisetsuCode = shisetsuCode;
         this.shisetsuMeisho = shisetsuMeisho;
         this.shisetsu = shisetsu;
-        this.taishoJohoKey = taishoJohoKey;
-        this.taishoJoho = taishoJoho;
+        this.daichoShubetsuKey = daichoShubetsuKey;
+        this.daichoShubetsu = daichoShubetsu;
         this.shisetsuShuruiKey = shisetsuShuruiKey;
         this.shisetsuShurui = shisetsuShurui;
     }
@@ -86,12 +86,12 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         return shisetsu;
     }
 
-    public RString getTaishoJohoKey() {
-        return taishoJohoKey;
+    public RString getDaichoShubetsuKey() {
+        return daichoShubetsuKey;
     }
 
-    public RString getTaishoJoho() {
-        return taishoJoho;
+    public RString getDaichoShubetsu() {
+        return daichoShubetsu;
     }
 
     public RString getShisetsuShuruiKey() {
@@ -127,14 +127,14 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.shisetsu = shisetsu;
     }
 
-    public void setTaishoJohoKey(RString taishoJohoKey) {
-        this.setOriginalData("taishoJohoKey", taishoJohoKey);
-        this.taishoJohoKey = taishoJohoKey;
+    public void setDaichoShubetsuKey(RString daichoShubetsuKey) {
+        this.setOriginalData("daichoShubetsuKey", daichoShubetsuKey);
+        this.daichoShubetsuKey = daichoShubetsuKey;
     }
 
-    public void setTaishoJoho(RString taishoJoho) {
-        this.setOriginalData("taishoJoho", taishoJoho);
-        this.taishoJoho = taishoJoho;
+    public void setDaichoShubetsu(RString daichoShubetsu) {
+        this.setOriginalData("daichoShubetsu", daichoShubetsu);
+        this.daichoShubetsu = daichoShubetsu;
     }
 
     public void setShisetsuShuruiKey(RString shisetsuShuruiKey) {

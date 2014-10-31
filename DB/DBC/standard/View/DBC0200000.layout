@@ -43,8 +43,7 @@
      "ymdKubun": 1,
      "displayFormat": 0,
      "value": "2009/01/31",
-     "textKind": 0,
-     "permitCharactor": "./_-"
+     "textKind": 0
     },
     {
      "fieldName": "lblHokenshaSofuList",
@@ -93,6 +92,8 @@
      "helpMessageID": "",
      "jpControlName": "",
      "text": "表示する",
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
@@ -105,7 +106,7 @@
      "fieldName": "dgHokenshaSofuList",
      "items": [],
      "controlType": "DataGrid",
-     "width": "910",
+     "width": "940",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -122,7 +123,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "517",
+     "height": "500",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -136,6 +137,7 @@
       "isShowDeleteButtonColumn": false,
       "limitRowCount": 0,
       "selectedRowCount": 0,
+      "selectLimitRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -163,7 +165,7 @@
         "dataName": "txtZenZengetsu",
         "toolTip": "",
         "bgColor": 0,
-        "width": 90,
+        "width": 100,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -179,7 +181,7 @@
         "dataName": "txtZengetsu",
         "toolTip": "",
         "bgColor": 0,
-        "width": 90,
+        "width": 100,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -240,11 +242,12 @@
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
-     "activeRowId": -1
+     "activeRowId": -1,
+     "gridAction": []
     }
    ],
    "controlType": "Panel",
-   "width": "G10",
+   "width": "G2",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -263,7 +266,7 @@
    "onLoad": "",
    "title": "送付一覧",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "HokenshaSofuList"
@@ -283,11 +286,12 @@
    "marginBottom": "Default",
    "eraseBorder": false,
    "backgroundColor": 0,
-   "widthAuto": false,
+   "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   },
   {
    "fieldName": "JukyushaIdoRenrakuhyoSakusei",
@@ -331,8 +335,7 @@
      "ymdKubun": 1,
      "displayFormat": 0,
      "value": "",
-     "textKind": 0,
-     "permitCharactor": "./_-"
+     "textKind": 0
     },
     {
      "fieldName": "txtSaiShoriKubun",
@@ -377,8 +380,7 @@
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": [],
-     "permitCharactor": ""
+     "suggest": []
     },
     {
      "fieldName": "txtFileName",
@@ -423,8 +425,7 @@
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": [],
-     "permitCharactor": ""
+     "suggest": []
     }
    ],
    "controlType": "Panel",
@@ -475,7 +476,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   },
   {
    "fieldName": "JukyushaIdoSofuTaishoshaList",
@@ -515,6 +517,8 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
      "txtSendData_displayNone": true,
      "PrintContentsSetting_title": "",
      "PrintContentsSetting_eraseBorderTop": true,
@@ -552,8 +556,12 @@
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
      "ChohyoShutsuryokujun_width": "1099",
-     "txtSort_width": "885"
+     "txtSort_width": "885",
+     "ReportId": "",
+     "SubGyomuCode": ""
     }
    ],
    "controlType": "PanelPublish",
@@ -605,6 +613,7 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
+   "canPost": true,
    "isPublish": true,
    "isEmptyControl": false
   }
@@ -746,12 +755,12 @@
    "commonButtonAreaId": "1",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonCreate",
+     "buttonKind": "CommonButtonExecute",
      "buttonProperty": {
       "fieldName": "btnExec",
       "items": [],
       "controlType": "CommonButtonCreate",
-      "width": 0,
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -768,6 +777,8 @@
       "helpMessageID": "",
       "jpControlName": "",
       "text": "作成",
+      "onBeforeClick": "",
+      "onAfterClick": "",
       "onClick": "",
       "appearance": 0,
       "imageFileUrl": "",
@@ -784,7 +795,7 @@
       "fieldName": "btnRetuen",
       "items": [],
       "controlType": "CommonButtonNext",
-      "width": 0,
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -801,6 +812,8 @@
       "helpMessageID": "",
       "jpControlName": "",
       "text": "戻る",
+      "onBeforeClick": "",
+      "onAfterClick": "",
       "onClick": "",
       "appearance": 0,
       "imageFileUrl": "",
@@ -808,7 +821,7 @@
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "additionalText": ""
+      "additionalText": "送付一覧に"
      }
     }
    ],

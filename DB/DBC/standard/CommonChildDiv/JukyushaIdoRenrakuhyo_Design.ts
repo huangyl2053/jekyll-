@@ -8,6 +8,34 @@ module DBC {
      */
     export class JukyushaIdoRenrakuhyo_Design extends Uz.CommonChildDiv {
     
+        public get TeiseiInfoVisible() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["visible"];
+        }
+        
+        public set TeiseiInfoVisible(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["visible"] = value;
+            } else {
+                this.layout.items[0].items[1]["visible"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get TeiseiInfoDisplayNone() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"];
+        }
+        
+        public set TeiseiInfoDisplayNone(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"] = value;
+            } else {
+                this.layout.items[0].items[1]["displayNone"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, JukyushaIdoRenrakuhyo_Design.myLayout, fieldName);
         }
@@ -18,6 +46,8 @@ module DBC {
          */
         public registProperty() {
             super.registProperty();
+            Uz.JSControlUtil.registProperty("TeiseiInfoVisible");
+            Uz.JSControlUtil.registProperty("TeiseiInfoDisplayNone");
         }
         
         /**
@@ -27,6 +57,8 @@ module DBC {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
+            editablePropertyInfo["TeiseiInfoVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["TeiseiInfoDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             
             return editablePropertyInfo;
         }
@@ -60,13 +92,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "異動日",
@@ -78,13 +110,13 @@ module DBC {
        "ymdKubun": 2,
        "displayFormat": 0,
        "value": "",
-       "permitCharactor": "./_-",
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
        "textKind": 0,
        "isComboBox": false,
-       "suggest": []
+       "suggest": [],
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "radRenrakuhyoIdoKubun",
@@ -107,14 +139,12 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": null,
        "required": false,
+       "onChange": "",
        "labelLText": "異動区分",
        "labelLWidth": "70",
        "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "new",
@@ -129,9 +159,11 @@ module DBC {
          "value": "終了"
         }
        ],
+       "onClick": "",
        "newLineItemNumber": 3,
        "spaceSize": "M",
-       "disabledItem": []
+       "disabledItem": [],
+       "icon": []
       },
       {
        "fieldName": "ddlIdoJiyu",
@@ -154,11 +186,10 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": "space",
        "required": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "text": "",
        "labelLText": "異動事由",
        "labelRText": "",
@@ -166,6 +197,7 @@ module DBC {
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "selectedItem": "space",
        "dataSource": [
         {
          "key": "space",
@@ -195,6 +227,37 @@ module DBC {
        "disabledItem": []
       },
       {
+       "fieldName": "Button1",
+       "items": [],
+       "controlType": "Button",
+       "width": "180",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "Button1",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "資格履歴を表示する",
+       "onClick": "",
+       "icon": 0,
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "heightTextBoxMatches": false
+      },
+      {
        "fieldName": "txtRenrakuhyoHihoNo",
        "items": [],
        "controlType": "TextBoxCode",
@@ -215,13 +278,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "被保番号",
@@ -231,7 +294,6 @@ module DBC {
        "labelLAlign": 2,
        "labelRAlign": 0,
        "value": "",
-       "permitCharactor": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -239,6 +301,7 @@ module DBC {
        "isComboBox": false,
        "suggest": [],
        "decorationClass": "",
+       "permitCharactor": "",
        "formatLength": "10"
       },
       {
@@ -262,13 +325,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "カナ氏名",
@@ -278,7 +341,6 @@ module DBC {
        "labelLAlign": 2,
        "labelRAlign": 0,
        "value": "",
-       "permitCharactor": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -286,6 +348,7 @@ module DBC {
        "isComboBox": false,
        "suggest": [],
        "decorationClass": "",
+       "permitCharactor": "",
        "kanjiInField": "TextBox1",
        "kanaType": 0
       },
@@ -310,13 +373,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "生年月日",
@@ -328,13 +391,13 @@ module DBC {
        "ymdKubun": 2,
        "displayFormat": 0,
        "value": "",
-       "permitCharactor": "./_-",
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
        "textKind": 0,
        "isComboBox": false,
-       "suggest": []
+       "suggest": [],
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "radHihoSex",
@@ -357,14 +420,12 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": null,
        "required": false,
+       "onChange": "",
        "labelLText": "性別",
        "labelLWidth": "40",
        "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "man",
@@ -375,9 +436,11 @@ module DBC {
          "value": "女"
         }
        ],
+       "onClick": "",
        "newLineItemNumber": 2,
        "spaceSize": "M",
-       "disabledItem": []
+       "disabledItem": [],
+       "icon": []
       },
       {
        "fieldName": "txtShikakuShutokuDate",
@@ -400,13 +463,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "資格取得日",
@@ -418,13 +481,13 @@ module DBC {
        "ymdKubun": 2,
        "displayFormat": 0,
        "value": "",
-       "permitCharactor": "./_-",
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
        "textKind": 0,
        "isComboBox": false,
-       "suggest": []
+       "suggest": [],
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "txtShikakuSoshitsuDate",
@@ -447,13 +510,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "資格喪失日",
@@ -465,13 +528,13 @@ module DBC {
        "ymdKubun": 2,
        "displayFormat": 0,
        "value": "",
-       "permitCharactor": "./_-",
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
        "textKind": 0,
        "isComboBox": false,
-       "suggest": []
+       "suggest": [],
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "txtShokisaiHokenshaNo",
@@ -494,13 +557,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "証記載保険者番号",
@@ -510,7 +573,6 @@ module DBC {
        "labelLAlign": 2,
        "labelRAlign": 0,
        "value": "",
-       "permitCharactor": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -518,6 +580,7 @@ module DBC {
        "isComboBox": false,
        "suggest": [],
        "decorationClass": "",
+       "permitCharactor": "",
        "formatLength": "6"
       },
       {
@@ -541,13 +604,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "広域保険者番号",
@@ -557,7 +620,6 @@ module DBC {
        "labelLAlign": 2,
        "labelRAlign": 0,
        "value": "",
-       "permitCharactor": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -565,6 +627,7 @@ module DBC {
        "isComboBox": false,
        "suggest": [],
        "decorationClass": "",
+       "permitCharactor": "",
        "formatLength": "6"
       },
       {
@@ -588,13 +651,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "送付年月",
@@ -606,13 +669,13 @@ module DBC {
        "ymdKubun": 1,
        "displayFormat": 0,
        "value": "",
-       "permitCharactor": "./_-",
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
        "textKind": 0,
        "isComboBox": false,
-       "suggest": []
+       "suggest": [],
+       "permitCharactor": "./_-"
       }
      ],
      "controlType": "Panel",
@@ -655,7 +718,174 @@ module DBC {
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "restoreLayoutButton"
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": true
+    },
+    {
+     "fieldName": "JukyushaIdoRenrakuhyoTeisei",
+     "items": [
+      {
+       "fieldName": "HorizontalLine1",
+       "items": [],
+       "controlType": "HorizontalLine",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "HorizontalLine1",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "size": "Default"
+      },
+      {
+       "fieldName": "TextBoxDate1",
+       "items": [],
+       "controlType": "TextBoxDate",
+       "width": "80",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "TextBoxDate1_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "required": false,
+       "placeHolder": "",
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "text": "",
+       "labelLText": "訂正日",
+       "labelRText": "",
+       "labelLWidth": "92",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "ymdKubun": 2,
+       "displayFormat": 0,
+       "value": "",
+       "permitCharactor": "./_-"
+      },
+      {
+       "fieldName": "RadioButton1",
+       "items": [],
+       "controlType": "RadioButton",
+       "width": "120",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "RadioButton1_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "onChange": "",
+       "labelLText": "訂正区分",
+       "labelLWidth": "70",
+       "labelLAlign": 2,
+       "selectedItem": "",
+       "dataSource": [
+        {
+         "key": "key0",
+         "value": "修正"
+        },
+        {
+         "key": "key1",
+         "value": "削除"
+        }
+       ],
+       "onClick": "",
+       "newLineItemNumber": 2,
+       "spaceSize": "S",
+       "disabledItem": [],
+       "icon": []
+      },
+      {
+       "fieldName": "HorizontalLine2",
+       "items": [],
+       "controlType": "HorizontalLine",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "HorizontalLine2",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "size": "Default"
+      }
+     ],
+     "controlType": "Panel",
+     "width": "1105",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "JukyushaIdoRenrakuhyoTeisei",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "",
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "eraseBorder": true,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto",
+     "focusPositionID": "defaultLayout",
+     "canPost": false
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoYokaigonintei",
@@ -681,13 +911,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "申請日 ",
@@ -699,13 +929,13 @@ module DBC {
        "ymdKubun": 2,
        "displayFormat": 0,
        "value": "",
-       "permitCharactor": "./_-",
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
        "textKind": 0,
        "isComboBox": false,
-       "suggest": []
+       "suggest": [],
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "radShinseiType",
@@ -728,14 +958,12 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": null,
        "required": false,
+       "onChange": "",
        "labelLText": "申請種別",
        "labelLWidth": "260",
        "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "nashi",
@@ -758,9 +986,42 @@ module DBC {
          "value": "職権"
         }
        ],
+       "onClick": "",
        "newLineItemNumber": 5,
        "spaceSize": "M",
-       "disabledItem": []
+       "disabledItem": [],
+       "icon": []
+      },
+      {
+       "fieldName": "Button3",
+       "items": [],
+       "controlType": "Button",
+       "width": "180",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "Button3",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "詳細情報を表示する",
+       "onClick": "",
+       "icon": 0,
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "ddlYokaigoJotaiKubun",
@@ -783,11 +1044,10 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": "space",
        "required": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "text": "",
        "labelLText": "状態区分",
        "labelRText": "",
@@ -795,6 +1055,7 @@ module DBC {
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "selectedItem": "space",
        "dataSource": [
         {
          "key": "space",
@@ -860,14 +1121,12 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": null,
        "required": false,
+       "onChange": "",
        "labelLText": "変更申請中区分",
        "labelLWidth": "144",
        "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "nashi",
@@ -886,9 +1145,11 @@ module DBC {
          "value": "決定済"
         }
        ],
+       "onClick": "",
        "newLineItemNumber": 4,
        "spaceSize": "M",
-       "disabledItem": []
+       "disabledItem": [],
+       "icon": []
       },
       {
        "fieldName": "txtNinteiDateRange",
@@ -911,11 +1172,11 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "labelLText": "認定期間",
        "labelRText": "",
@@ -958,14 +1219,12 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": null,
        "required": false,
+       "onChange": "",
        "labelLText": "みなし区分",
        "labelLWidth": "110",
        "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "nashi",
@@ -984,9 +1243,11 @@ module DBC {
          "value": "やむを得ない事由"
         }
        ],
+       "onClick": "",
        "newLineItemNumber": 4,
        "spaceSize": "M",
-       "disabledItem": []
+       "disabledItem": [],
+       "icon": []
       }
      ],
      "controlType": "Panel",
@@ -1029,7 +1290,8 @@ module DBC {
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "restoreLayoutButton"
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": true
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoShikyugendoKijungaku",
@@ -1081,13 +1343,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "基準額",
@@ -1097,7 +1359,6 @@ module DBC {
        "labelLAlign": 2,
        "labelRAlign": 0,
        "value": "",
-       "permitCharactor": "+-,.",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 2,
@@ -1105,6 +1366,7 @@ module DBC {
        "isComboBox": false,
        "suggest": [],
        "decorationClass": "",
+       "permitCharactor": "+-,.",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
@@ -1132,11 +1394,11 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "labelLText": "管理適用期間",
        "labelRText": "",
@@ -1205,13 +1467,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "基準額",
@@ -1221,7 +1483,6 @@ module DBC {
        "labelLAlign": 2,
        "labelRAlign": 0,
        "value": "",
-       "permitCharactor": "+-,.",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 2,
@@ -1229,6 +1490,7 @@ module DBC {
        "isComboBox": false,
        "suggest": [],
        "decorationClass": "",
+       "permitCharactor": "+-,.",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
@@ -1256,11 +1518,11 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "labelLText": "管理適用期間",
        "labelRText": "",
@@ -1323,7 +1585,8 @@ module DBC {
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "restoreLayoutButton"
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": true
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoKyotakuServicePlan",
@@ -1349,14 +1612,12 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": null,
        "required": false,
+       "onChange": "",
        "labelLText": "計画作成区分",
        "labelLWidth": "105",
        "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "selectNot",
@@ -1375,9 +1636,42 @@ module DBC {
          "value": "介護予防支援事業所作成"
         }
        ],
+       "onClick": "",
        "newLineItemNumber": 4,
        "spaceSize": "M",
-       "disabledItem": []
+       "disabledItem": [],
+       "icon": []
+      },
+      {
+       "fieldName": "Button4",
+       "items": [],
+       "controlType": "Button",
+       "width": "180",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "Button4",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "詳細情報を表示する",
+       "onClick": "",
+       "icon": 0,
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "txtShienJigyoshaNo",
@@ -1400,13 +1694,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "支援事業者",
@@ -1416,7 +1710,6 @@ module DBC {
        "labelLAlign": 2,
        "labelRAlign": 0,
        "value": "",
-       "permitCharactor": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -1424,6 +1717,7 @@ module DBC {
        "isComboBox": false,
        "suggest": [],
        "decorationClass": "",
+       "permitCharactor": "",
        "formatLength": "10"
       },
       {
@@ -1447,13 +1741,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "",
@@ -1463,7 +1757,6 @@ module DBC {
        "labelLAlign": 2,
        "labelRAlign": 0,
        "value": "",
-       "permitCharactor": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -1471,6 +1764,7 @@ module DBC {
        "isComboBox": false,
        "suggest": [],
        "decorationClass": "",
+       "permitCharactor": "",
        "kanjiInField": "TextBox1",
        "kanaType": 0
       },
@@ -1495,11 +1789,11 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "labelLText": "適用期間",
        "labelRText": "",
@@ -1542,14 +1836,12 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": null,
        "required": false,
+       "onChange": "",
        "labelLText": "小規模居宅サービス利用",
        "labelLWidth": "185",
        "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "selectNot",
@@ -1564,9 +1856,11 @@ module DBC {
          "value": "あり"
         }
        ],
+       "onClick": "",
        "newLineItemNumber": 3,
        "spaceSize": "M",
-       "disabledItem": []
+       "disabledItem": [],
+       "icon": []
       }
      ],
      "controlType": "Panel",
@@ -1609,7 +1903,8 @@ module DBC {
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "restoreLayoutButton"
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": true
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoGemmenGengaku",
@@ -1635,14 +1930,12 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": null,
        "required": false,
+       "onChange": "",
        "labelLText": "減免申請中区分",
        "labelLWidth": "120",
        "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "nashi",
@@ -1661,9 +1954,42 @@ module DBC {
          "value": "決定済"
         }
        ],
+       "onClick": "",
        "newLineItemNumber": 4,
        "spaceSize": "M",
-       "disabledItem": []
+       "disabledItem": [],
+       "icon": []
+      },
+      {
+       "fieldName": "Button5",
+       "items": [],
+       "controlType": "Button",
+       "width": "180",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "Button5",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "詳細情報を表示する",
+       "onClick": "",
+       "icon": 0,
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "JukyushaIdoRenrakuhyoGemmenGengakuSub",
@@ -1692,14 +2018,12 @@ module DBC {
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
-           "selectedItem": null,
            "required": false,
+           "onChange": "",
            "labelLText": "区分",
            "labelLWidth": "55",
            "labelLAlign": 2,
-           "onClick": "",
-           "icon": [],
+           "selectedItem": null,
            "dataSource": [
             {
              "key": "nashi",
@@ -1714,9 +2038,11 @@ module DBC {
              "value": "特定標準負担"
             }
            ],
+           "onClick": "",
            "newLineItemNumber": 3,
            "spaceSize": "M",
-           "disabledItem": []
+           "disabledItem": [],
+           "icon": []
           },
           {
            "fieldName": "txtRiyoshaFutanKyufuritsu",
@@ -1739,13 +2065,13 @@ module DBC {
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
            "required": false,
            "placeHolder": "",
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
            "text": "",
            "labelLText": "給付率",
@@ -1755,7 +2081,6 @@ module DBC {
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
-           "permitCharactor": "+-,.",
            "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
@@ -1763,6 +2088,7 @@ module DBC {
            "isComboBox": false,
            "suggest": [],
            "decorationClass": "",
+           "permitCharactor": "+-,.",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -1790,11 +2116,11 @@ module DBC {
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
            "labelLText": "適用期間",
            "labelRText": "",
@@ -1856,8 +2182,9 @@ module DBC {
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "focusPositionID": "restoreLayoutButton"
+         "height": "52",
+         "focusPositionID": "restoreLayoutButton",
+         "canPost": true
         },
         {
          "fieldName": "JukyushaIdoRenrakuhyoFukushiHojinKeigen",
@@ -1883,13 +2210,13 @@ module DBC {
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
            "required": false,
            "placeHolder": "",
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
            "text": "",
            "labelLText": "軽減率",
@@ -1899,7 +2226,6 @@ module DBC {
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
-           "permitCharactor": "+-,.",
            "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
@@ -1907,6 +2233,7 @@ module DBC {
            "isComboBox": false,
            "suggest": [],
            "decorationClass": "",
+           "permitCharactor": "+-,.",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -1934,11 +2261,11 @@ module DBC {
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
            "labelLText": "適用期間",
            "labelRText": "",
@@ -1980,7 +2307,7 @@ module DBC {
          "jpControlName": "",
          "onLoad": "",
          "title": "社会福祉法人軽減情報",
-         "marginTop": "Default",
+         "marginTop": "0.6",
          "marginBottom": "Default",
          "isOpen": true,
          "canOpenAndClose": false,
@@ -2000,8 +2327,9 @@ module DBC {
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "focusPositionID": "restoreLayoutButton"
+         "height": "29",
+         "focusPositionID": "restoreLayoutButton",
+         "canPost": true
         },
         {
          "fieldName": "JukyushaIdoRenrakuhyoHyojunFutan",
@@ -2027,14 +2355,12 @@ module DBC {
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
-           "selectedItem": null,
            "required": false,
+           "onChange": "",
            "labelLText": "区分",
            "labelLWidth": "55",
            "labelLAlign": 2,
-           "onClick": "",
-           "icon": [],
+           "selectedItem": null,
            "dataSource": [
             {
              "key": "nashi",
@@ -2049,9 +2375,11 @@ module DBC {
              "value": "旧措置入所者利用者負担"
             }
            ],
+           "onClick": "",
            "newLineItemNumber": 3,
            "spaceSize": "M",
-           "disabledItem": []
+           "disabledItem": [],
+           "icon": []
           },
           {
            "fieldName": "txtHyojunFutangaku",
@@ -2074,13 +2402,13 @@ module DBC {
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
            "required": false,
            "placeHolder": "",
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
            "text": "",
            "labelLText": "負担額",
@@ -2090,7 +2418,6 @@ module DBC {
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
-           "permitCharactor": "+-,.",
            "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
@@ -2098,6 +2425,7 @@ module DBC {
            "isComboBox": false,
            "suggest": [],
            "decorationClass": "",
+           "permitCharactor": "+-,.",
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
@@ -2125,11 +2453,11 @@ module DBC {
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "onChange": "",
            "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
            "labelLText": "適用期間",
            "labelRText": "",
@@ -2171,7 +2499,7 @@ module DBC {
          "jpControlName": "",
          "onLoad": "",
          "title": "標準負担",
-         "marginTop": "Default",
+         "marginTop": "0.6",
          "marginBottom": "Default",
          "isOpen": true,
          "canOpenAndClose": false,
@@ -2191,8 +2519,9 @@ module DBC {
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto",
-         "focusPositionID": "restoreLayoutButton"
+         "height": "52",
+         "focusPositionID": "restoreLayoutButton",
+         "canPost": true
         }
        ],
        "controlType": "Panel",
@@ -2235,7 +2564,8 @@ module DBC {
        "isGroupBox": false,
        "readOnly": false,
        "height": "Auto",
-       "focusPositionID": "restoreLayoutButton"
+       "focusPositionID": "restoreLayoutButton",
+       "canPost": true
       },
       {
        "fieldName": "JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi",
@@ -2261,14 +2591,12 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
-         "selectedItem": null,
          "required": false,
+         "onChange": "",
          "labelLText": "認定申請中区分",
          "labelLWidth": "155",
          "labelLAlign": 2,
-         "onClick": "",
-         "icon": [],
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "nashi",
@@ -2287,9 +2615,11 @@ module DBC {
            "value": "決定済"
           }
          ],
+         "onClick": "",
          "newLineItemNumber": 4,
          "spaceSize": "M",
-         "disabledItem": []
+         "disabledItem": [],
+         "icon": []
         },
         {
          "fieldName": "radServiceKubun",
@@ -2312,14 +2642,12 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
-         "selectedItem": null,
          "required": false,
+         "onChange": "",
          "labelLText": "サービス区分",
          "labelLWidth": "155",
          "labelLAlign": 2,
-         "onClick": "",
-         "icon": [],
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "nashi",
@@ -2334,9 +2662,11 @@ module DBC {
            "value": "旧措置入所者"
           }
          ],
+         "onClick": "",
          "newLineItemNumber": 3,
          "spaceSize": "M",
-         "disabledItem": []
+         "disabledItem": [],
+         "icon": []
         },
         {
          "fieldName": "radTokureiKeigenSochiTaisho",
@@ -2359,14 +2689,12 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
-         "selectedItem": null,
          "required": false,
+         "onChange": "",
          "labelLText": "特例減額措置対象",
          "labelLWidth": "155",
          "labelLAlign": 2,
-         "onClick": "",
-         "icon": [],
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "selectnashi",
@@ -2381,9 +2709,11 @@ module DBC {
            "value": "該当有"
           }
          ],
+         "onClick": "",
          "newLineItemNumber": 3,
          "spaceSize": "M",
-         "disabledItem": []
+         "disabledItem": [],
+         "icon": []
         },
         {
          "fieldName": "txtShokuhiFutanGendogaku",
@@ -2406,13 +2736,13 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
          "required": false,
          "placeHolder": "",
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "text": "",
          "labelLText": "食費負担限度額 ",
@@ -2422,7 +2752,6 @@ module DBC {
          "labelLAlign": 2,
          "labelRAlign": 0,
          "value": "",
-         "permitCharactor": "+-,.",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 2,
@@ -2430,6 +2759,7 @@ module DBC {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
@@ -2457,11 +2787,11 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "labelLText": "負担限度額適用期間",
          "labelRText": "",
@@ -2530,13 +2860,13 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
          "required": false,
          "placeHolder": "",
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "text": "",
          "labelLText": "ユニット型個室",
@@ -2546,7 +2876,6 @@ module DBC {
          "labelLAlign": 2,
          "labelRAlign": 0,
          "value": "",
-         "permitCharactor": "+-,.",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 2,
@@ -2554,6 +2883,7 @@ module DBC {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
@@ -2581,13 +2911,13 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
          "required": false,
          "placeHolder": "",
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "text": "",
          "labelLText": "ユニット型準個室",
@@ -2597,7 +2927,6 @@ module DBC {
          "labelLAlign": 2,
          "labelRAlign": 0,
          "value": "",
-         "permitCharactor": "+-,.",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 2,
@@ -2605,6 +2934,7 @@ module DBC {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
@@ -2632,13 +2962,13 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
          "required": false,
          "placeHolder": "",
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "text": "",
          "labelLText": "従来型個室(特養等)",
@@ -2648,7 +2978,6 @@ module DBC {
          "labelLAlign": 2,
          "labelRAlign": 0,
          "value": "",
-         "permitCharactor": "+-,.",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 2,
@@ -2656,6 +2985,7 @@ module DBC {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
@@ -2683,13 +3013,13 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
          "required": false,
          "placeHolder": "",
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "text": "",
          "labelLText": "(老健、療養等)",
@@ -2699,7 +3029,6 @@ module DBC {
          "labelLAlign": 2,
          "labelRAlign": 0,
          "value": "",
-         "permitCharactor": "+-,.",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 2,
@@ -2707,6 +3036,7 @@ module DBC {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
@@ -2734,13 +3064,13 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
          "required": false,
          "placeHolder": "",
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "text": "",
          "labelLText": "多床室",
@@ -2750,7 +3080,6 @@ module DBC {
          "labelLAlign": 2,
          "labelRAlign": 0,
          "value": "",
-         "permitCharactor": "+-,.",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 2,
@@ -2758,6 +3087,7 @@ module DBC {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "+-,.",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
@@ -2784,7 +3114,7 @@ module DBC {
        "jpControlName": "",
        "onLoad": "",
        "title": "特定入所者サービス費",
-       "marginTop": "-1.3",
+       "marginTop": "Default",
        "marginBottom": "Default",
        "isOpen": true,
        "canOpenAndClose": false,
@@ -2805,7 +3135,8 @@ module DBC {
        "isGroupBox": false,
        "readOnly": false,
        "height": "Auto",
-       "focusPositionID": "restoreLayoutButton"
+       "focusPositionID": "restoreLayoutButton",
+       "canPost": true
       }
      ],
      "controlType": "Panel",
@@ -2848,7 +3179,8 @@ module DBC {
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "restoreLayoutButton"
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": true
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoKokiKoreiKokuho",
@@ -2877,13 +3209,13 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
          "required": false,
          "placeHolder": "",
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "text": "",
          "labelLText": "保険者番号",
@@ -2893,7 +3225,6 @@ module DBC {
          "labelLAlign": 2,
          "labelRAlign": 0,
          "value": "",
-         "permitCharactor": "",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
@@ -2901,6 +3232,7 @@ module DBC {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "",
          "formatLength": "8"
         },
         {
@@ -2924,13 +3256,13 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
          "required": false,
          "placeHolder": "",
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "text": "",
          "labelLText": "被保番号",
@@ -2940,7 +3272,6 @@ module DBC {
          "labelLAlign": 2,
          "labelRAlign": 0,
          "value": "",
-         "permitCharactor": "",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
@@ -2948,6 +3279,7 @@ module DBC {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "",
          "formatLength": "8"
         }
        ],
@@ -2991,7 +3323,8 @@ module DBC {
        "isGroupBox": false,
        "readOnly": false,
        "height": "Auto",
-       "focusPositionID": "restoreLayoutButton"
+       "focusPositionID": "restoreLayoutButton",
+       "canPost": true
       },
       {
        "fieldName": "JukyushaIdoRenrakuhyoKokuho",
@@ -3017,13 +3350,13 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
          "required": false,
          "placeHolder": "",
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "text": "",
          "labelLText": "保険者番号",
@@ -3033,7 +3366,6 @@ module DBC {
          "labelLAlign": 2,
          "labelRAlign": 0,
          "value": "",
-         "permitCharactor": "",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
@@ -3041,6 +3373,7 @@ module DBC {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "",
          "formatLength": "8"
         },
         {
@@ -3064,13 +3397,13 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
          "required": false,
          "placeHolder": "",
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "text": "",
          "labelLText": "被保険者証番号",
@@ -3080,7 +3413,6 @@ module DBC {
          "labelLAlign": 2,
          "labelRAlign": 0,
          "value": "",
-         "permitCharactor": "",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
@@ -3088,6 +3420,7 @@ module DBC {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "",
          "formatLength": "20"
         },
         {
@@ -3111,13 +3444,13 @@ module DBC {
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "onChange": "",
          "required": false,
          "placeHolder": "",
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
+         "onChange": "",
          "onKeyPress": "",
          "text": "",
          "labelLText": "個人番号",
@@ -3127,7 +3460,6 @@ module DBC {
          "labelLAlign": 2,
          "labelRAlign": 0,
          "value": "",
-         "permitCharactor": "",
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
@@ -3135,6 +3467,7 @@ module DBC {
          "isComboBox": false,
          "suggest": [],
          "decorationClass": "",
+         "permitCharactor": "",
          "formatLength": "10"
         }
        ],
@@ -3178,7 +3511,8 @@ module DBC {
        "isGroupBox": false,
        "readOnly": false,
        "height": "Auto",
-       "focusPositionID": "restoreLayoutButton"
+       "focusPositionID": "restoreLayoutButton",
+       "canPost": true
       }
      ],
      "controlType": "Panel",
@@ -3221,7 +3555,8 @@ module DBC {
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "restoreLayoutButton"
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": true
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoKyufuSeigen",
@@ -3247,14 +3582,12 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": null,
        "required": false,
+       "onChange": "",
        "labelLText": "公費負担上限額減額(生活保護等)",
        "labelLWidth": "245",
        "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "selnashi",
@@ -3269,9 +3602,42 @@ module DBC {
          "value": "あり"
         }
        ],
+       "onClick": "",
        "newLineItemNumber": 3,
        "spaceSize": "M",
-       "disabledItem": []
+       "disabledItem": [],
+       "icon": []
+      },
+      {
+       "fieldName": "Button6",
+       "items": [],
+       "controlType": "Button",
+       "width": "180",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "Button6",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "詳細情報を表示する",
+       "onClick": "",
+       "icon": 0,
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "heightTextBoxMatches": false
       },
       {
        "fieldName": "txtKyufuritsuHikisageDateRange",
@@ -3294,11 +3660,11 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "labelLText": "償還払化期間",
        "labelRText": "",
@@ -3341,11 +3707,11 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "labelLText": "給付率引下げ期間",
        "labelRText": "",
@@ -3408,7 +3774,8 @@ module DBC {
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "restoreLayoutButton"
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": true
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoNijiyoboJigyo",
@@ -3434,14 +3801,12 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
-       "selectedItem": null,
        "required": false,
+       "onChange": "",
        "labelLText": "事業区分",
        "labelLWidth": "70",
        "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "selnashi",
@@ -3456,9 +3821,11 @@ module DBC {
          "value": "該当"
         }
        ],
+       "onClick": "",
        "newLineItemNumber": 3,
        "spaceSize": "M",
-       "disabledItem": []
+       "disabledItem": [],
+       "icon": []
       },
       {
        "fieldName": "txtNijiyoboJigyoYukoDateRange",
@@ -3481,11 +3848,11 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "labelLText": "事業有効期間",
        "labelRText": "",
@@ -3506,6 +3873,37 @@ module DBC {
        "toValue": "",
        "fromSelectControlID": "txtNijiyoboJigyoYukoDateRangeFrom",
        "toSelectControlID": "txtNijiyoboJigyoYukoDateRangeTo"
+      },
+      {
+       "fieldName": "Button7",
+       "items": [],
+       "controlType": "Button",
+       "width": "180",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "Button7",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "詳細情報を表示する",
+       "onClick": "",
+       "icon": 0,
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
@@ -3548,7 +3946,8 @@ module DBC {
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "restoreLayoutButton"
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": true
     },
     {
      "fieldName": "JukyushaIdoRenrakuhyoRojinHoken",
@@ -3574,13 +3973,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "市町村番号",
@@ -3590,7 +3989,6 @@ module DBC {
        "labelLAlign": 2,
        "labelRAlign": 0,
        "value": "",
-       "permitCharactor": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -3598,6 +3996,7 @@ module DBC {
        "isComboBox": false,
        "suggest": [],
        "decorationClass": "",
+       "permitCharactor": "",
        "formatLength": "8"
       },
       {
@@ -3621,13 +4020,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "受給者番号",
@@ -3637,7 +4036,6 @@ module DBC {
        "labelLAlign": 2,
        "labelRAlign": 0,
        "value": "",
-       "permitCharactor": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -3645,6 +4043,7 @@ module DBC {
        "isComboBox": false,
        "suggest": [],
        "decorationClass": "",
+       "permitCharactor": "",
        "formatLength": "8"
       },
       {
@@ -3668,13 +4067,13 @@ module DBC {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "text": "",
        "labelLText": "公費負担者番号",
@@ -3684,7 +4083,6 @@ module DBC {
        "labelLAlign": 2,
        "labelRAlign": 0,
        "value": "",
-       "permitCharactor": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
@@ -3692,7 +4090,39 @@ module DBC {
        "isComboBox": false,
        "suggest": [],
        "decorationClass": "",
+       "permitCharactor": "",
        "formatLength": "8"
+      },
+      {
+       "fieldName": "Button8",
+       "items": [],
+       "controlType": "Button",
+       "width": "180",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "Button8",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "詳細情報を表示する",
+       "onClick": "",
+       "icon": 0,
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
@@ -3735,11 +4165,12 @@ module DBC {
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "restoreLayoutButton"
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": true
     }
    ],
    "controlType": "Panel",
-   "width": "G12",
+   "width": "1110",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -3756,7 +4187,7 @@ module DBC {
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "受給者異動連絡票",
+   "title": "",
    "marginTop": "0",
    "marginBottom": "0",
    "isOpen": true,
@@ -3771,14 +4202,15 @@ module DBC {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorder": false,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "focusPositionID": "restoreLayoutButton"
+   "focusPositionID": "restoreLayoutButton",
+   "canPost": true
   }
  ],
  "controlType": "CommonChildDiv",
@@ -3803,12 +4235,25 @@ module DBC {
  "controlName": "JukyushaIdoRenrakuhyo",
  "marginTop": 0,
  "marginBottom": 0,
- "originalProperty": [],
+ "originalProperty": [
+  {
+   "publicChildFieldName": "JukyushaIdoRenrakuhyoTeisei",
+   "publicChildProperty": "visible",
+   "newPropertyName": "TeiseiInfoVisible"
+  },
+  {
+   "publicChildFieldName": "JukyushaIdoRenrakuhyoTeisei",
+   "publicChildProperty": "displayNone",
+   "newPropertyName": "TeiseiInfoDisplayNone"
+  }
+ ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": "",
  "canTransferEvent": true,
- "heightForDialog": "M"
+ "heightForDialog": "M",
+ "firstFocusFieldName": "",
+ "lastFocusFieldName": ""
 }        
     }
 }

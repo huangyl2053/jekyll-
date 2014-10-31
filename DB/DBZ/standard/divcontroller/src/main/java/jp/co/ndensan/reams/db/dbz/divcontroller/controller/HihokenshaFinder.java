@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.demodata.KoikiKoseiShichosonData
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaDetailDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfHihokenshaDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaFinderDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaFinderDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
+//TODO デモ版用なのでプロダクト用に書き直す。
 public final class HihokenshaFinder {
 
     public enum Mode {
@@ -128,17 +129,17 @@ public final class HihokenshaFinder {
             div.getTxtTuchishoNo().clearValue();
             div.getDdlFukaNendo().setSelectedItem(new RString("key0"));
         }
-        
+
         private void clear(SearchCriteriaDetailDiv div) {
             div.getChkHihokensha().setSelectedItems(Collections.EMPTY_LIST);
             div.getRadMinashiNigo().setSelectedItem(new RString("1"));
-            div.getChkMinashiNigo().setSelectedItems(Collections.EMPTY_LIST);            
+            div.getChkMinashiNigo().setSelectedItems(Collections.EMPTY_LIST);
         }
-        
-        private void clear(AtenaFinderDiv div) {
-            div.getTxtAtenaMeisho().clearValue();
-            div.getTxtSeinenGappi().clearValue();
-        }        
+
+        private void clear(IAtenaFinderDiv div) {
+//            div.getTxtAtenaMeisho().clearValue();
+//            div.getTxtSeinenGappi().clearValue();
+        }
     }
 
     private ResponseData<HihokenshaFinderDiv> _createResponseData(HihokenshaFinderDiv div) {

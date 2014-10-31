@@ -1,17 +1,65 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
-var DBZ;
+﻿var DBZ;
 (function (DBZ) {
-    var ShoKaishuJokyoList = (function (_super) {
-        __extends(ShoKaishuJokyoList, _super);
-        function ShoKaishuJokyoList() {
-            _super.apply(this, arguments);
-        }
-        return ShoKaishuJokyoList;
-    })(DBZ.ShoKaishuJokyoList_Design);
-    DBZ.ShoKaishuJokyoList = ShoKaishuJokyoList;
+    (function (ShoKaishuJokyoList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShoKaishuJokyoList.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [
+                    "一覧パネル高さ"
+                ];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.一覧パネル高さ = function () {
+                return new Modes.一覧パネル高さ(this.controls);
+            };
+            return ModeController;
+        })();
+        ShoKaishuJokyoList.ModeController = ModeController;
+
+        (function (Modes) {
+            var 一覧パネル高さ = (function () {
+                function 一覧パネル高さ(controls) {
+                    this.controls = controls;
+                }
+                一覧パネル高さ.prototype.サイズ200 = function () {
+                    this.controls.dgShoKaishuJokyo().height = "200";
+                };
+
+                一覧パネル高さ.prototype.サイズ250 = function () {
+                    this.controls.dgShoKaishuJokyo().height = "250";
+                };
+
+                一覧パネル高さ.prototype.サイズ300 = function () {
+                    this.controls.dgShoKaishuJokyo().height = "300";
+                };
+
+                一覧パネル高さ.prototype.サイズ350 = function () {
+                    this.controls.dgShoKaishuJokyo().height = "350";
+                };
+
+                一覧パネル高さ.prototype.サイズ400 = function () {
+                    this.controls.dgShoKaishuJokyo().height = "400";
+                };
+
+                一覧パネル高さ.prototype.サイズ450 = function () {
+                    this.controls.dgShoKaishuJokyo().height = "450";
+                };
+
+                一覧パネル高さ.prototype.サイズ500 = function () {
+                    this.controls.dgShoKaishuJokyo().height = "500";
+                };
+                return 一覧パネル高さ;
+            })();
+            Modes.一覧パネル高さ = 一覧パネル高さ;
+        })(ShoKaishuJokyoList.Modes || (ShoKaishuJokyoList.Modes = {}));
+        var Modes = ShoKaishuJokyoList.Modes;
+    })(DBZ.ShoKaishuJokyoList || (DBZ.ShoKaishuJokyoList = {}));
+    var ShoKaishuJokyoList = DBZ.ShoKaishuJokyoList;
 })(DBZ || (DBZ = {}));
