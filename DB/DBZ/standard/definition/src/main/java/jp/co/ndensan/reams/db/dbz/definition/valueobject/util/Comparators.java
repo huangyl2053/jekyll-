@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.Objects;
 
 /**
- * Comparatorに関するユーティリティです。
+ * 汎用的なComparatorを生成する機能を持ったユーティリティです。
  *
  * @author N3327 三浦 凌
  */
