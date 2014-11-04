@@ -113,7 +113,7 @@ public final class ValueObjects {
      * @param value 検査対象
      * @return 引数がnullでない場合は引数
      * @throws IllegalInitialValueException 引数がnullの場合
-     * @deprecated ValueObjectのnullチェックは、バリデーションで行ってください。
+     * @deprecated nullチェックは、バリデーションで行ってください。
      */
     @Deprecated
     public static <T> T requireNonNull(T value) throws IllegalInitialValueException {
@@ -131,7 +131,7 @@ public final class ValueObjects {
      * @param value 検査対象
      * @return 引数のvalueObjectが保持する文字列が半角数字のみの場合は、引数のvalueObjectをそのまま
      * @throws IllegalInitialValueException 引数が保持する値に半角数字以外が含まれる場合
-     * @deprecated ValueObjectの文字列のチェックは、バリデーションで行ってください。
+     * @deprecated 文字列のチェックは、バリデーションで行ってください。
      */
     @Deprecated
     public static <V extends IValueObject<RString>> V requireHalfSizeNumberOnly(V value) throws IllegalInitialValueException {
@@ -151,7 +151,7 @@ public final class ValueObjects {
      * @param value 検査対象
      * @return 引数の文字列が半角数字のみの場合は、引数の文字列
      * @throws IllegalInitialValueException 引数が保持する値に半角数字以外が含まれる場合
-     * @deprecated ValueObjectの文字列のチェックは、バリデーションで行ってください。
+     * @deprecated 文字列のチェックは、バリデーションで行ってください。
      */
     @Deprecated
     public static RString requireHalfSizeNumberOnly(RString value) throws IllegalInitialValueException {
@@ -172,7 +172,7 @@ public final class ValueObjects {
      * @param value 検査対象
      * @return 引数のvalueObjectが保持する文字列が半角英数字のみの場合は、引数のvalueObjectをそのまま
      * @throws IllegalInitialValueException 引数が保持する値に半角英数字以外が含まれる場合
-     * @deprecated ValueObjectの文字列のチェックは、バリデーションで行ってください。
+     * @deprecated 文字列のチェックは、バリデーションで行ってください。
      */
     @Deprecated
     public static <V extends IValueObject<RString>> V requireAlphabetAndHalfsizeNumberOnly(V value) throws IllegalInitialValueException {
@@ -193,7 +193,7 @@ public final class ValueObjects {
      * @param value 検査対象
      * @return 引数の文字列が半角英数字のみの場合は、引数の文字列
      * @throws IllegalInitialValueException 引数が保持する値に半角英数字以外が含まれる場合
-     * @deprecated ValueObjectの文字列のチェックは、バリデーションで行ってください。
+     * @deprecated 文字列のチェックは、バリデーションで行ってください。
      */
     @Deprecated
     public static RString requireAlphabetAndHalfsizeNumberOnly(RString value) throws IllegalInitialValueException {
