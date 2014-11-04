@@ -17,14 +17,19 @@ import static jp.co.ndensan.reams.ur.urz.model.validations.ValidationChain.valid
  * 資格取得処理で利用するバリデーションチェック処理を提供するクラスです。<br/>
  * <pre>
  * 使用例：
- * new ShikakuShutokuValidator().setValidationTarget(targetModel)
+ * ShikakuShutokuValidator.setValidationTarget(targetModel)
  *      .setBeforeData(beforeModel).setDateOfBirth(dateOfBirth).validate();
  * </pre>
  *
- *
  * @author n8178 城間篤人
  */
-public class ShikakuShutokuValidator {
+public final class ShikakuShutokuValidator {
+
+    /**
+     * インスタンス化防止のためのプライベートコンストラクタです。
+     */
+    private ShikakuShutokuValidator() {
+    }
 
     /**
      * バリデーションチェックの対象となる被保険者台帳Modelを設定します。
@@ -32,7 +37,7 @@ public class ShikakuShutokuValidator {
      * @param validationTarget バリデーションチェック対象の被保険者台帳Model
      * @return 前履歴の被保険者台帳Modelを渡すためのクラス
      */
-    public IBeforeDataSetter setValidationTarget(HihokenshaDaichoModel validationTarget) {
+    public static IBeforeDataSetter setValidationTarget(HihokenshaDaichoModel validationTarget) {
         return new _ShikakuShutokuValidator(validationTarget);
     }
 
