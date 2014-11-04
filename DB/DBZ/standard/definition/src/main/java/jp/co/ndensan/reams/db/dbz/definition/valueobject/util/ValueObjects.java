@@ -113,7 +113,9 @@ public final class ValueObjects {
      * @param value 検査対象
      * @return 引数がnullでない場合は引数
      * @throws IllegalInitialValueException 引数がnullの場合
+     * @deprecated ValueObjectのnullチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static <T> T requireNonNull(T value) throws IllegalInitialValueException {
         if (value != null) {
             return value;
@@ -129,7 +131,9 @@ public final class ValueObjects {
      * @param value 検査対象
      * @return 引数のvalueObjectが保持する文字列が半角数字のみの場合は、引数のvalueObjectをそのまま
      * @throws IllegalInitialValueException 引数が保持する値に半角数字以外が含まれる場合
+     * @deprecated ValueObjectの文字列のチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static <V extends IValueObject<RString>> V requireHalfSizeNumberOnly(V value) throws IllegalInitialValueException {
         if (value == null) {
             return value;
@@ -147,7 +151,9 @@ public final class ValueObjects {
      * @param value 検査対象
      * @return 引数の文字列が半角数字のみの場合は、引数の文字列
      * @throws IllegalInitialValueException 引数が保持する値に半角数字以外が含まれる場合
+     * @deprecated ValueObjectの文字列のチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static RString requireHalfSizeNumberOnly(RString value) throws IllegalInitialValueException {
         if (value == null) {
             return value;
@@ -166,7 +172,9 @@ public final class ValueObjects {
      * @param value 検査対象
      * @return 引数のvalueObjectが保持する文字列が半角英数字のみの場合は、引数のvalueObjectをそのまま
      * @throws IllegalInitialValueException 引数が保持する値に半角英数字以外が含まれる場合
+     * @deprecated ValueObjectの文字列のチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static <V extends IValueObject<RString>> V requireAlphabetAndHalfsizeNumberOnly(V value) throws IllegalInitialValueException {
         if (value == null) {
             return value;
@@ -185,7 +193,9 @@ public final class ValueObjects {
      * @param value 検査対象
      * @return 引数の文字列が半角英数字のみの場合は、引数の文字列
      * @throws IllegalInitialValueException 引数が保持する値に半角英数字以外が含まれる場合
+     * @deprecated ValueObjectの文字列のチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static RString requireAlphabetAndHalfsizeNumberOnly(RString value) throws IllegalInitialValueException {
         if (value == null) {
             return value;
@@ -200,7 +210,10 @@ public final class ValueObjects {
 //<editor-fold defaultstate="collapsed" desc="    public enum LengthCheckType{}">
     /**
      * 文字列の長さチェックの種類です。
+     *
+     * @deprecated 文字列の長さチェックは、バリデーションで行います。
      */
+    @Deprecated
     public enum LengthCheckType {
 
         /**
@@ -278,7 +291,9 @@ public final class ValueObjects {
      * @param matcher valueと比較するmather
      * @return matherの内容を満たす場合は、検査対象の文字列
      * @throws IllegalInitialValueException matherの内容を満たさない場合
+     * @deprecated 文字列の長さのチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static RString requireLength(RString value, ILengthOfValueMatcher matcher) throws IllegalInitialValueException {
         if (value == null) {
             return value;
@@ -298,7 +313,9 @@ public final class ValueObjects {
      * @param matcher valueと比較するmather
      * @return matherの内容を満たす場合は、検査対象の文字列をもつvalueObject
      * @throws IllegalInitialValueException matherの内容を満たさない場合
+     * @deprecated 文字列の長さのチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static <V extends IValueObject<RString>> V requireLength(V value, ILengthOfValueMatcher matcher) throws IllegalInitialValueException {
         if (value == null) {
             return value;
@@ -312,7 +329,10 @@ public final class ValueObjects {
 
     /**
      * 値ベースで、文字列の長さについて判定できることを表します。
+     *
+     * @deprecated 文字列の長さのチェックは、バリデーションで行います。
      */
+    @Deprecated
     public interface ILengthOfValueMatcher {
 
         /**
@@ -372,7 +392,9 @@ public final class ValueObjects {
      *
      * @param length 文字列に期待する長さの基準
      * @return 文字列の長さが引数の値と一致するかどうかを調べる{@link ILengthOfValueMatcher matcher}
+     * @deprecated 文字列の長さのチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static ILengthOfValueMatcher equal(final int length) {
         if (length < 0) {
             throw new IllegalArgumentException(MyErrorMessages.lengthは0以上にしろ.getMessage().evaluate());
@@ -385,7 +407,9 @@ public final class ValueObjects {
      *
      * @param length 文字列に期待する長さの基準
      * @return 文字列の長さが引数の値より小さいかどうかを調べる{@link ILengthOfValueMatcher matcher}
+     * @deprecated 文字列の長さのチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static ILengthOfValueMatcher lessThan(final int length) {
         if (length < 1) {
             throw new IllegalArgumentException(MyErrorMessages.lengthは1以上にしろ.getMessage().evaluate());
@@ -398,7 +422,9 @@ public final class ValueObjects {
      *
      * @param length 文字列に期待する長さの基準
      * @return 文字列の長さが引数の値以下かどうかを調べる{@link ILengthOfValueMatcher matcher}
+     * @deprecated 文字列の長さのチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static ILengthOfValueMatcher lessOrEqual(final int length) {
         if (length < 0) {
             throw new IllegalArgumentException(MyErrorMessages.lengthは0以上にしろ.getMessage().evaluate());
@@ -416,7 +442,9 @@ public final class ValueObjects {
      * @throws IllegalInitialValueException matherの内容を満たさない場合
      * @throws IllegalArgumentException
      * mahterのタイプが{@link LengthCheckType#lessThan lessThan}でlengthが1より小さい時、もしくは、lengthが0より小さい時
+     * @deprecated 文字列の長さのチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static RString requireLength(int length, IRStringValidLengthMathcher matcher)
             throws IllegalInitialValueException, IllegalArgumentException {
         if (matcher.requestType() == LengthCheckType.lessThan && length < 1) {
@@ -442,7 +470,9 @@ public final class ValueObjects {
      * @throws IllegalInitialValueException matherの内容を満たさない場合
      * @throws IllegalArgumentException
      * mahterのタイプが{@link LengthCheckType#lessThan lessThan}でlengthが1より小さい時、もしくは、lengthが0より小さい時
+     * @deprecated 文字列の長さのチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static <V extends IValueObject<RString>> V requireLength(int length, IValueObjectValidLengthMatcher<V> matcher)
             throws IllegalInitialValueException, IllegalArgumentException {
         if (matcher.requestType() == LengthCheckType.lessThan && length < 1) {
@@ -462,7 +492,9 @@ public final class ValueObjects {
      * 文字列ベースで、文字列の長さについて判定できることを表します。
      *
      * @param <V> 検査対象の型
+     * @deprecated 文字列の長さのチェックは、バリデーションで行います。
      */
+    @Deprecated
     private interface IValidLengthMathcer<V> {
 
         /**
@@ -491,7 +523,10 @@ public final class ValueObjects {
 
     /**
      * RStringの長さについて判定できることを表します。
+     *
+     * @deprecated 文字列の長さのチェックは、バリデーションで行います。
      */
+    @Deprecated
     public interface IRStringValidLengthMathcher extends IValidLengthMathcer<RString> {
 
         /**
@@ -537,7 +572,9 @@ public final class ValueObjects {
      * @param value 文字列
      * @return
      * 期待する値と引数の文字列の長さが一致するかどうかを調べる{@link IRStringValidLengthMathcher matcher}
+     * @deprecated 文字列の長さのチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static IRStringValidLengthMathcher equal(final RString value) {
         return new _RStringValidLengthMathcher(value, LengthCheckType.equal);
     }
@@ -548,7 +585,9 @@ public final class ValueObjects {
      * @param value 文字列
      * @return
      * 待する値が引数の文字列の長さより小さいかどうかを調べる{@link IRStringValidLengthMathcher matcher}
+     * @deprecated 文字列の長さのチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static IRStringValidLengthMathcher lessThan(final RString value) {
         return new _RStringValidLengthMathcher(value, LengthCheckType.lessThan);
     }
@@ -559,7 +598,9 @@ public final class ValueObjects {
      * @param value 文字列
      * @return
      * 期待する値が引数の文字列の長さ以下かどうかを調べる{@link IRStringValidLengthMathcher matcher}
+     * @deprecated 文字列の長さのチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static IRStringValidLengthMathcher lessOrEqual(final RString value) {
         return new _RStringValidLengthMathcher(value, LengthCheckType.lessOrEqual);
 
@@ -569,7 +610,9 @@ public final class ValueObjects {
      * {@link RString RString}を保持する{@link IValueObject valueObject}について判定できることを表します。
      *
      * @param <V> {@link RString RString}を保持する{@link IValueObject valueObject}の型
+     * @deprecated 文字列の長さのチェックは、バリデーションで行います。
      */
+    @Deprecated
     public interface IValueObjectValidLengthMatcher<V extends IValueObject<RString>> extends IValidLengthMathcer<V> {
 
         /**
@@ -636,7 +679,9 @@ public final class ValueObjects {
      * @param value 文字列を持つvalueObject
      * @return
      * 期待する値が引数のvalueObjectが持つ文字列の長さと一致するかどうかを調べる{@link IValueObjectValidLengthMatcher matcher}
+     * @deprecated 文字列の長さのチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static <V extends IValueObject<RString>> IValueObjectValidLengthMatcher<V> equal(final V value) {
         return new _ValueObjectValidLengthMatcher<>(value, LengthCheckType.equal);
     }
@@ -648,7 +693,9 @@ public final class ValueObjects {
      * @param value 文字列を持つvalueObject
      * @return
      * 期待する値が引数のvalueObjectが持つ文字列の長さより小さいかどうかを調べる{@link IValueObjectValidLengthMatcher matcher}
+     * @deprecated 文字列の長さのチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static <V extends IValueObject<RString>> IValueObjectValidLengthMatcher<V> lessThan(final V value) {
         return new _ValueObjectValidLengthMatcher(value, LengthCheckType.lessThan);
     }
@@ -660,7 +707,9 @@ public final class ValueObjects {
      * @param value 文字列を持つvalueObject
      * @return
      * 期待する値が引数のvalueObjectが持つ文字列の長さ以下かどうかを調べる{@link IValueObjectValidLengthMatcher matcher}
+     * @deprecated 文字列の長さのチェックは、バリデーションで行ってください。
      */
+    @Deprecated
     public static <V extends IValueObject<RString>> IValueObjectValidLengthMatcher<V> lessOrEqual(final V value) {
         return new _ValueObjectValidLengthMatcher(value, LengthCheckType.lessOrEqual);
     }
