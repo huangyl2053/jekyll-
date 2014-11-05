@@ -47,9 +47,24 @@ public final class JigyoshaNo implements IValueObject<RString>, Comparable<Jigyo
         this.事業者番号 = 事業者番号;
     }
 
+    /**
+     * 事業者番号を取得します。
+     *
+     * @return 事業者番号
+     */
     @Override
     public RString value() {
         return 事業者番号;
+    }
+
+    @Override
+    public RString getColumnValue() {
+        return 事業者番号;
+    }
+
+    @Override
+    public int compareTo(JigyoshaNo 比較対象) {
+        return Objects.compare(this.事業者番号, 比較対象.事業者番号, NaturalOrderComparator.ASC.getInstance());
     }
 
     @Override
@@ -68,20 +83,5 @@ public final class JigyoshaNo implements IValueObject<RString>, Comparable<Jigyo
         int hash = 7;
         hash = 37 * hash + Objects.hashCode(this.事業者番号);
         return hash;
-    }
-
-    /**
-     * 事業者番号を取得します。
-     *
-     * @return 事業者番号
-     */
-    @Override
-    public RString getColumnValue() {
-        return 事業者番号;
-    }
-
-    @Override
-    public int compareTo(JigyoshaNo 比較対象) {
-        return Objects.compare(this.事業者番号, 比較対象.事業者番号, NaturalOrderComparator.ASC.getInstance());
     }
 }

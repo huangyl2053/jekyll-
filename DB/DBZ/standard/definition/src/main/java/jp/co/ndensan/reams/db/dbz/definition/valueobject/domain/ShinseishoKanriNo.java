@@ -49,10 +49,18 @@ public final class ShinseishoKanriNo implements IValueObject<RString>, Comparabl
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.申請書管理番号);
-        return hash;
+    public RString value() {
+        return 申請書管理番号;
+    }
+
+    @Override
+    public RString getColumnValue() {
+        return 申請書管理番号;
+    }
+
+    @Override
+    public int compareTo(ShinseishoKanriNo 比較対象) {
+        return Objects.compare(this.申請書管理番号, 比較対象.申請書管理番号, NaturalOrderComparator.ASC.getInstance());
     }
 
     @Override
@@ -68,17 +76,9 @@ public final class ShinseishoKanriNo implements IValueObject<RString>, Comparabl
     }
 
     @Override
-    public RString getColumnValue() {
-        return 申請書管理番号;
-    }
-
-    @Override
-    public RString value() {
-        return 申請書管理番号;
-    }
-
-    @Override
-    public int compareTo(ShinseishoKanriNo 比較対象) {
-        return Objects.compare(this.申請書管理番号, 比較対象.申請書管理番号, NaturalOrderComparator.ASC.getInstance());
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.申請書管理番号);
+        return hash;
     }
 }

@@ -54,15 +54,13 @@ public final class TsuchishoNo implements IValueObject<RString>, Comparable<Tsuc
     }
 
     @Override
-    public int compareTo(TsuchishoNo target) {
-        return Objects.compare(this.theValue, target.theValue, NaturalOrderComparator.ASC.getInstance());
+    public RString getColumnValue() {
+        return theValue;
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 13 * hash + Objects.hashCode(this.value());
-        return hash;
+    public int compareTo(TsuchishoNo target) {
+        return Objects.compare(this.theValue, target.theValue, NaturalOrderComparator.ASC.getInstance());
     }
 
     @Override
@@ -78,8 +76,10 @@ public final class TsuchishoNo implements IValueObject<RString>, Comparable<Tsuc
     }
 
     @Override
-    public RString getColumnValue() {
-        return theValue;
+    public int hashCode() {
+        int hash = 3;
+        hash = 13 * hash + Objects.hashCode(this.value());
+        return hash;
     }
 
     @Override

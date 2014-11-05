@@ -55,6 +55,11 @@ public final class ShoKisaiHokenshaNo implements IValueObject<RString>, Comparab
     }
 
     @Override
+    public RString getColumnValue() {
+        return this.theValue;
+    }
+
+    @Override
     public int compareTo(ShoKisaiHokenshaNo o) {
         return Objects.compare(this.theValue, o.theValue, NaturalOrderComparator.ASC.getInstance());
     }
@@ -76,10 +81,5 @@ public final class ShoKisaiHokenshaNo implements IValueObject<RString>, Comparab
         int hash = 3;
         hash = 83 * hash + Objects.hashCode(this.theValue);
         return hash;
-    }
-
-    @Override
-    public RString getColumnValue() {
-        return this.theValue;
     }
 }

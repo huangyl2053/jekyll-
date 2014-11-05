@@ -53,6 +53,11 @@ public final class ServiceCode implements IValueObject<RString>, Comparable<Serv
     }
 
     @Override
+    public RString getColumnValue() {
+        return code;
+    }
+
+    @Override
     public int compareTo(ServiceCode 比較対象) {
         return Objects.compare(this.code, 比較対象.code, NaturalOrderComparator.ASC.getInstance());
     }
@@ -74,10 +79,5 @@ public final class ServiceCode implements IValueObject<RString>, Comparable<Serv
         int hash = 7;
         hash = 71 * hash + Objects.hashCode(this.code);
         return hash;
-    }
-
-    @Override
-    public RString getColumnValue() {
-        return code;
     }
 }

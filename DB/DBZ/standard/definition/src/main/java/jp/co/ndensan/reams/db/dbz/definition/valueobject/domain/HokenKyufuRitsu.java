@@ -46,6 +46,16 @@ public final class HokenKyufuRitsu implements IValueObject<Decimal>, Comparable<
     }
 
     @Override
+    public Decimal getColumnValue() {
+        return 給付率;
+    }
+
+    @Override
+    public int compareTo(HokenKyufuRitsu 比較対象) {
+        return Objects.compare(this.給付率, 比較対象.給付率, NaturalOrderComparator.ASC.getInstance());
+    }
+
+    @Override
     public boolean equals(Object 比較対象) {
         if (比較対象 == null) {
             return false;
@@ -62,15 +72,5 @@ public final class HokenKyufuRitsu implements IValueObject<Decimal>, Comparable<
         int hash = 7;
         hash = 37 * hash + Objects.hashCode(this.給付率);
         return hash;
-    }
-
-    @Override
-    public Decimal getColumnValue() {
-        return 給付率;
-    }
-
-    @Override
-    public int compareTo(HokenKyufuRitsu 比較対象) {
-        return Objects.compare(this.給付率, 比較対象.給付率, NaturalOrderComparator.ASC.getInstance());
     }
 }

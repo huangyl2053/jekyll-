@@ -54,6 +54,11 @@ public final class ShishoCode implements IValueObject<RString>, Comparable<Shish
     }
 
     @Override
+    public RString getColumnValue() {
+        return this.theValue;
+    }
+
+    @Override
     public int compareTo(ShishoCode o) {
         return Objects.compare(this.theValue, o.theValue, NaturalOrderComparator.ASC.getInstance());
     }
@@ -75,10 +80,5 @@ public final class ShishoCode implements IValueObject<RString>, Comparable<Shish
         int hash = 5;
         hash = 41 * hash + Objects.hashCode(this.theValue);
         return hash;
-    }
-
-    @Override
-    public RString getColumnValue() {
-        return this.theValue;
     }
 }

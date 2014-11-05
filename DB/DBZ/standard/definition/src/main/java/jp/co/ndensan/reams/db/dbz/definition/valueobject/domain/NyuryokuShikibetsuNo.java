@@ -40,20 +40,18 @@ public final class NyuryokuShikibetsuNo implements IValueObject<RString>, Compar
     }
 
     @Override
-    public RString getColumnValue() {
-        return 入力識別番号;
-    }
-
-    @Override
     public RString value() {
         return 入力識別番号;
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.value());
-        return hash;
+    public RString getColumnValue() {
+        return 入力識別番号;
+    }
+
+    @Override
+    public int compareTo(NyuryokuShikibetsuNo 比較対象) {
+        return Objects.compare(this.入力識別番号, 比較対象.入力識別番号, NaturalOrderComparator.ASC.getInstance());
     }
 
     @Override
@@ -69,7 +67,9 @@ public final class NyuryokuShikibetsuNo implements IValueObject<RString>, Compar
     }
 
     @Override
-    public int compareTo(NyuryokuShikibetsuNo 比較対象) {
-        return Objects.compare(this.入力識別番号, 比較対象.入力識別番号, NaturalOrderComparator.ASC.getInstance());
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.value());
+        return hash;
     }
 }

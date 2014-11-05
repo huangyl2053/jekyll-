@@ -55,6 +55,16 @@ public final class KokanShikibetsuNo implements IValueObject<RString>, Comparabl
     }
 
     @Override
+    public RString getColumnValue() {
+        return 交換情報識別番号;
+    }
+
+    @Override
+    public int compareTo(KokanShikibetsuNo 比較対象) {
+        return Objects.compare(this.交換情報識別番号, 比較対象.交換情報識別番号, NaturalOrderComparator.ASC.getInstance());
+    }
+
+    @Override
     public boolean equals(Object 比較対象) {
         if (比較対象 == null) {
             return false;
@@ -71,15 +81,5 @@ public final class KokanShikibetsuNo implements IValueObject<RString>, Comparabl
         int hash = 7;
         hash = 37 * hash + Objects.hashCode(this.交換情報識別番号);
         return hash;
-    }
-
-    @Override
-    public RString getColumnValue() {
-        return 交換情報識別番号;
-    }
-
-    @Override
-    public int compareTo(KokanShikibetsuNo 比較対象) {
-        return Objects.compare(this.交換情報識別番号, 比較対象.交換情報識別番号, NaturalOrderComparator.ASC.getInstance());
     }
 }
