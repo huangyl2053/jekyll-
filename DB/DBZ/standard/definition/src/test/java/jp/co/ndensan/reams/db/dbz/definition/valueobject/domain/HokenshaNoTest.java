@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class HokenshaNoTest {
+public class HokenshaNoTest extends DbzTestBase {
 
     public HokenshaNoTest() {
     }

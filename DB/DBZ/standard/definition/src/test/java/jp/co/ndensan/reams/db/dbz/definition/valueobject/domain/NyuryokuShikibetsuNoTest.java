@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -21,12 +20,12 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class NyuryokuShikibetsuNoTest {
+public class NyuryokuShikibetsuNoTest extends DbzTestBase {
 
     private static NyuryokuShikibetsuNo sut1;
     private static NyuryokuShikibetsuNo sut2;
 
-    public static class constructorのテスト extends DbcTestBase {
+    public static class constructorのテスト extends DbzTestBase {
 
         @Test
         public void 引数にnullでない値が渡されたとき_インスタンスが生成される() {
@@ -35,7 +34,7 @@ public class NyuryokuShikibetsuNoTest {
         }
     }
 
-    public static class hashCodeのテスト extends DbcTestBase {
+    public static class hashCodeのテスト extends DbzTestBase {
 
         @Before
         public void setUp() {
@@ -49,7 +48,7 @@ public class NyuryokuShikibetsuNoTest {
         }
     }
 
-    public static class equalsのテスト extends DbcTestBase {
+    public static class equalsのテスト extends DbzTestBase {
 
         @Before
         public void setUp() {
@@ -79,7 +78,7 @@ public class NyuryokuShikibetsuNoTest {
         }
     }
 
-    public static class compareToのテスト extends DbcTestBase {
+    public static class compareToのテスト extends DbzTestBase {
 
         @Before
         public void setUp() {

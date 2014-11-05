@@ -1,152 +1,186 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
-//TODO n3327 三浦凌 ILocalGovernmentCodeが参照可能になったら、テストをアンコメントする。
-//import jp.co.ndensan.reams.ur.urz.business.ILocalGovernmentCode;
-//import jp.co.ndensan.reams.ur.urz.business._LocalGovernmentCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
+import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.is;
-import org.junit.Before;
 
 /**
- * 証記載保険者番号のテストクラスです。
+ * ShoKisaiHokenshaNoのテストです。
  *
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class ShoKisaiHokenshaNoTest extends TestBase {
+//TODO ファイル名を訂正してください。訂正したらこのコメントを削除してください。
+public class ShoKisaiHokenshaNoTest extends DbzTestBase {
 
-    public static class コンストラクタ_RString extends TestBase {
-
-        @Test(expected = NullPointerException.class)
-        public void コンストラクタ引数のRStringにnullを指定した時_NullPointerExceptionを返す() {
-            RString test = null;
-            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(test);
-        }
+    public ShoKisaiHokenshaNoTest() {
     }
 
-//    public static class コンストラクタ_ILocalGovernment extends TestBase {
-//
-//        @Test(expected = NullPointerException.class)
-//        public void コンストラクタ引数のILocalGovernmentにnullを指定した時_NullPointerExceptionを返す() {
-//            ILocalGovernmentCode test = null;
-//            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(test);
-//        }
-//    }
-//    public static class GetValue extends TestBase {
-//
-//        @Test
-//        public void インスタンスが地方公共団体コードから生成されたとき_getCodeは_都道府県コードと市区町村コードの値を結合したものと同値を返す() {
-//            ILocalGovernmentCode 地方公共団体コード = create地方公共団体コード();
-//
-//            String 都道府県コード = "12";
-//            when(地方公共団体コード.get都道府県コード()).thenReturn(new RString(都道府県コード));
-//
-//            String 市区町村コード = "345";
-//            when(地方公共団体コード.get市区町村コード()).thenReturn(new RString(市区町村コード));
-//
-//            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(地方公共団体コード);
-//            assertThat(sut.getValue(), is(new RString(都道府県コード + 市区町村コード)));
-//        }
-//    }
-    public static class Equals extends TestBase {
-
-        @Test
-        public void 比較対象がnullなら_falseを返す() {
-
-            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(new RString("1"));
-            ShoKisaiHokenshaNo 比較対象 = null;
-
-            assertThat(sut.equals(比較対象), is(false));
-        }
-
-        @Test
-        public void 比較対象がShoKisaiHokenshaNoのインスタンスでないなら_falseを返す() {
-            RString コード = new RString("1");
-
-            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(コード);
-
-            assertThat(sut.equals(コード), is(false));
-        }
-
-        @Test
-        public void 同一の値で生成されたインスタンス同士は_trueを返す() {
-            RString 同じコード = new RString("1");
-
-            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(同じコード);
-            ShoKisaiHokenshaNo 比較対象 = new ShoKisaiHokenshaNo(同じコード);
-
-            assertThat(sut.equals(比較対象), is(true));
-        }
-
-        @Test
-        public void 異なった値で生成されたインスタンス同士は_falseを返す() {
-            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(new RString("11"));
-            ShoKisaiHokenshaNo 比較対象 = new ShoKisaiHokenshaNo(new RString("22"));
-
-            assertThat(sut.equals(比較対象), is(false));
-        }
-    }
-
-    public static class HashCode extends TestBase {
-
-        @Test
-        public void 同一の値で生成されたインスタンス同士は_同じ値を返す() {
-            RString 同じコード = new RString("1");
-
-            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(同じコード);
-            ShoKisaiHokenshaNo 比較対象 = new ShoKisaiHokenshaNo(同じコード);
-
-            assertThat((sut.hashCode() == 比較対象.hashCode()), is(true));
-        }
-
-        @Test
-        public void 異なった値で生成されたインスタンス同士は_違う値を返す() {
-            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(new RString("11"));
-            ShoKisaiHokenshaNo 比較対象 = new ShoKisaiHokenshaNo(new RString("22"));
-
-            assertThat((sut.hashCode() == 比較対象.hashCode()), is(false));
-        }
-    }
-//    private static ILocalGovernmentCode create地方公共団体コード() {
-//        return mock(_LocalGovernmentCode.class);
-//    }
-
-    public static class CompareTo extends DbzTestBase {
+    public static class valueAndGetColumnValue_createFromRString extends DbzTestBase {
 
         private ShoKisaiHokenshaNo sut;
-        private ShoKisaiHokenshaNo comparison;
+        private RString value;
 
         @Before
         public void setUp() {
-            sut = new ShoKisaiHokenshaNo(new RString("11"));
+            value = new RString("12");
+            sut = new ShoKisaiHokenshaNo(value);
         }
 
         @Test
-        public void 自身より大きい値と比較した場合_0より小さい数字を返す() {
-            comparison = new ShoKisaiHokenshaNo(new RString("12"));
-            assertThat(sut.compareTo(comparison) < 0, is(true));
+        public void RStringから生成したとき_valueは_コンストラクタ引数と_同じ値を返す() {
+            assertThat(sut.value(), is(value));
         }
 
         @Test
-        public void 自身と同じ値と比較した場合_0を返す() {
-            comparison = new ShoKisaiHokenshaNo(new RString("11"));
-            assertThat(sut.compareTo(comparison) == 0, is(true));
+        public void RStringから生成したとき_getColumnValueは_コンストラクタ引数と_同じ値を返す() {
+            assertThat(sut.getColumnValue(), is(value));
+        }
+    }
+
+    public static class valueAndGetColumnValue_createFromString extends DbzTestBase {
+
+        private ShoKisaiHokenshaNo sut;
+        private String value;
+
+        @Before
+        public void setUp() {
+            value = "12";
+            sut = new ShoKisaiHokenshaNo(value);
         }
 
         @Test
-        public void 自身より小さい値と比較した場合_0より大きい数字を返す() {
-            comparison = new ShoKisaiHokenshaNo(new RString("10"));
-            assertThat(0 < sut.compareTo(comparison), is(true));
+        public void Stringから生成したとき_valueは_コンストラクタ引数をRStringへ変換したものと_同じ値を返す() {
+            assertThat(sut.value(), is(new RString(value)));
+        }
+
+        @Test
+        public void Stringから生成したとき_getColumnValueは_コンストラクタ引数をRStringへ変換したものと_同じ値を返す() {
+            assertThat(sut.getColumnValue(), is(new RString(value)));
+        }
+    }
+
+    public static class CompareTo extends DbzTestBase {
+
+        @Test
+        public void compareToは_自身と値が同じものを比較したときは_0を返す() {
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo("0");
+            ShoKisaiHokenshaNo other = new ShoKisaiHokenshaNo("0");
+            assertThat(sut.compareTo(other), is(0));
+        }
+
+        @Test
+        public void compareToは_equalsがtrueを返すオブジェクトと比較したとき_0を返す() {
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo("0");
+            ShoKisaiHokenshaNo other = new ShoKisaiHokenshaNo("0");
+            assertThat(sut.equals(other), is(true));
+            assertThat(sut.compareTo(other), is(0));
+        }
+
+        @Test
+        public void compareToは_自身より値が小さいものと比較したときは_0より大きい値を返す() {
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(new RString("1"));
+            ShoKisaiHokenshaNo other = new ShoKisaiHokenshaNo(new RString("0"));
+            assertThat((0 < sut.compareTo(other)), is(true));
+        }
+
+        @Test
+        public void compareToは_自身より値が大きいものと比較したときは_0より小さい値を返す() {
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo("0");
+            ShoKisaiHokenshaNo other = new ShoKisaiHokenshaNo("1");
+            assertThat((sut.compareTo(other) < 0), is(true));
+        }
+    }
+
+    public static class Equals extends DbzTestBase {
+
+        @Test
+        public void equalsは_比較対象がnullなら_falseを返す() {
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo("0");
+            assertThat(sut.equals((ShoKisaiHokenshaNo) null), is(false));
+        }
+
+        @Test
+        public void equalsは_比較対象がShoKisaiHokenshaNoのインスタンスでないなら_falseを返す() {
+            RString target = new RString("0");
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(target);
+            assertThat(sut.equals(target), is(false));
+        }
+
+        @Test
+        public void equalsは_同じ文字列から生成されたインスタンス同士では_trueを返す() {
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo("0");
+            ShoKisaiHokenshaNo other = new ShoKisaiHokenshaNo("0");
+            assertThat(sut.equals(other), is(true));
+        }
+
+        @Test
+        public void equalsは_同じ文字列を持ったRStringから生成されたインスタンス同士では_trueを返す() {
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(new RString("0"));
+            ShoKisaiHokenshaNo other = new ShoKisaiHokenshaNo(new RString("0"));
+            assertThat(sut.equals(other), is(true));
+        }
+
+        @Test
+        public void equalsは_ある文字列と_それと同じ文字列を持ったRStringから生成されたインスタンス同士では_trueを返す() {
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo("0");
+            ShoKisaiHokenshaNo other = new ShoKisaiHokenshaNo(new RString("0"));
+            assertThat(sut.equals(other), is(true));
+        }
+
+        @Test
+        public void equalsは_異なる文字列から生成されたインスタンス同士では_falseを返す() {
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo("1");
+            ShoKisaiHokenshaNo other = new ShoKisaiHokenshaNo("0");
+            assertThat(sut.equals(other), is(false));
+        }
+
+        @Test
+        public void equalsは_異なる文字列を持ったRStringから生成されたインスタンス同士では_falseを返す() {
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(new RString("1"));
+            ShoKisaiHokenshaNo other = new ShoKisaiHokenshaNo(new RString("0"));
+            assertThat(sut.equals(other), is(false));
+        }
+
+        @Test
+        public void equalsは_ある文字列と_それと異なる文字列を持ったRStringから生成されたインスタンス同士では_falseを返す() {
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo("0");
+            ShoKisaiHokenshaNo other = new ShoKisaiHokenshaNo(new RString("1"));
+            assertThat(sut.equals(other), is(false));
+        }
+    }
+
+    public static class HashCode extends DbzTestBase {
+
+        @Test
+        public void hashCodeは_同じ文字列から生成されたインスタンスは_同じ値を返す() {
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo("12");
+            ShoKisaiHokenshaNo other = new ShoKisaiHokenshaNo("12");
+            assertThat(sut.hashCode(), is(other.hashCode()));
+        }
+
+        @Test
+        public void hashCodeは_同じ文字列を持ったRStringから生成されたインスタンスは_同じ値を返す() {
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(new RString("12"));
+            ShoKisaiHokenshaNo other = new ShoKisaiHokenshaNo(new RString("12"));
+            assertThat(sut.hashCode(), is(other.hashCode()));
+        }
+
+        @Test
+        public void hashCodeは_ある文字列と_それと同じ文字列を持ったRStringから生成されたインスタンスは_同じ値を返す() {
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo("12");
+            ShoKisaiHokenshaNo other = new ShoKisaiHokenshaNo(new RString("12"));
+            assertThat(sut.hashCode(), is(other.hashCode()));
         }
     }
 }
