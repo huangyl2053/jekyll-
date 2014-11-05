@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaComparators.Regi
 import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaComparators.ShichosonCodeComparator;
 import jp.co.ndensan.reams.db.dbz.business.helper.HihokenshaMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -44,8 +43,6 @@ public class MultiComparatorTest extends DbzTestBase {
         private final ShikibetsuCode s0000000003 = new ShikibetsuCode("0000000003");
         private final YMDHMS rt2014_04_07_00_00 = new YMDHMS("20140407000000");
         private final YMDHMS rt2014_04_08_00_00 = new YMDHMS("20140408000000");
-        private final ShoKisaiHokenshaNo s000001 = new ShoKisaiHokenshaNo(new RString("000001"));
-        private final ShoKisaiHokenshaNo s000002 = new ShoKisaiHokenshaNo(new RString("000002"));
         private final KaigoHihokenshaNo hn0000000001 = new KaigoHihokenshaNo(new RString("0000000001"));
         private final KaigoHihokenshaNo hn0000000002 = new KaigoHihokenshaNo(new RString("0000000002"));
         private final KaigoHihokenshaNo hn0000000003 = new KaigoHihokenshaNo(new RString("0000000003"));
@@ -103,11 +100,11 @@ public class MultiComparatorTest extends DbzTestBase {
 
         private List<Hihokensha> createHihokenshaList() {
             List<Hihokensha> list = new ArrayList<>();
-            list.add(HihokenshaMock.createHihokensha(l000002, s0000000003, rt2014_04_07_00_00, s000002, hn0000000003));
-            list.add(HihokenshaMock.createHihokensha(l000001, s0000000001, rt2014_04_07_00_00, s000001, hn0000000002));
-            list.add(HihokenshaMock.createHihokensha(l000002, s0000000003, rt2014_04_07_00_00, s000002, hn0000000001));
-            list.add(HihokenshaMock.createHihokensha(l000001, s0000000002, rt2014_04_07_00_00, s000001, hn0000000004));
-            list.add(HihokenshaMock.createHihokensha(l000001, s0000000002, rt2014_04_08_00_00, s000001, hn0000000005));
+            list.add(HihokenshaMock.createHihokensha(l000002, s0000000003, rt2014_04_07_00_00, hn0000000003));
+            list.add(HihokenshaMock.createHihokensha(l000001, s0000000001, rt2014_04_07_00_00, hn0000000002));
+            list.add(HihokenshaMock.createHihokensha(l000002, s0000000003, rt2014_04_07_00_00, hn0000000001));
+            list.add(HihokenshaMock.createHihokensha(l000001, s0000000002, rt2014_04_07_00_00, hn0000000004));
+            list.add(HihokenshaMock.createHihokensha(l000001, s0000000002, rt2014_04_08_00_00, hn0000000005));
             return list;
         }
     }

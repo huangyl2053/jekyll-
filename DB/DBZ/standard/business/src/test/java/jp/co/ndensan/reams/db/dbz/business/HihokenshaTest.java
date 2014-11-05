@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
@@ -100,13 +99,6 @@ public class HihokenshaTest extends DbzTestBase {
             }
 
             @Test
-            public void get証記載保険者番号は_コンストラクタ引数のIHihokenshaShikakuの_get証記載保険者番号と_同じ値を返す() {
-                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("000001"));
-                when(shikaku.get証記載保険者番号()).thenReturn(shoKisaiHokenshaNo);
-                assertThat(sut.get証記載保険者番号(), is(shoKisaiHokenshaNo));
-            }
-
-            @Test
             public void get識別コードは_コンストラクタ引数のIHihokenshaShikakuの_get識別コードと_同じ値を返す() {
                 ShikibetsuCode shikibetsuCode = new ShikibetsuCode("0000000001");
                 when(shikaku.get識別コード()).thenReturn(shikibetsuCode);
@@ -164,9 +156,9 @@ public class HihokenshaTest extends DbzTestBase {
 
             @Test
             public void get広域内住所地特例措置元市町村コードは_コンストラクタ引数のIHihokenshaShikakuのものと_同じ値を返す() {
-                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("000001"));
-                when(shikaku.get広域内住所地特例措置元保険者番号()).thenReturn(shoKisaiHokenshaNo);
-                assertThat(sut.get広域内住所地特例措置元保険者番号(), is(shoKisaiHokenshaNo));
+                LasdecCode lasdecCode = new LasdecCode("000001");
+                when(shikaku.get広域内住所地特例措置元市町村コード()).thenReturn(lasdecCode);
+                assertThat(sut.get広域内住所地特例措置元市町村コード(), is(lasdecCode));
             }
 
             @Test
@@ -425,7 +417,7 @@ public class HihokenshaTest extends DbzTestBase {
 
         @Test
         public void get個人番号は_コンストラクタ引数のIkojinのget個人番号と_同じ値を返す() {
-            RString kojinNo = new RString("0123456789");
+            RString kojinNo = new RString("123456789012");
             when(this.profile.get個人番号()).thenReturn(new KojinNo(kojinNo));
             assertThat(sut.get個人番号(), is(kojinNo));
         }

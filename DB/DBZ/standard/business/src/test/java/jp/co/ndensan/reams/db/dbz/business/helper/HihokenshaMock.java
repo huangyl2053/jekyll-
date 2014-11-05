@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -31,16 +30,15 @@ public final class HihokenshaMock {
         LasdecCode lasdecCode = new LasdecCode("123456");
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode("1234567890");
         YMDHMS shoriTimeStamp = new YMDHMS("20110912012345");
-        ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("123456"));
         KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("12134567890"));
-        Hihokensha hihokensha = createHihokensha(lasdecCode, shikibetsuCode, shoriTimeStamp, shoKisaiHokenshaNo, hihokenshaNo);
+        Hihokensha hihokensha = createHihokensha(lasdecCode, shikibetsuCode, shoriTimeStamp, hihokenshaNo);
         return spy(hihokensha);
     }
 
     public static Hihokensha createHihokensha(LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode, YMDHMS shoriTimeStamp,
-            ShoKisaiHokenshaNo shoKisaiHokenshaNo, KaigoHihokenshaNo hihokenshaNo) {
+            KaigoHihokenshaNo hihokenshaNo) {
         IHihokenshaShikaku shikaku = new HihokenshaShikaku.Builder(lasdecCode, shikibetsuCode, shoriTimeStamp,
-                shoKisaiHokenshaNo, new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
+                new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
                 .hihokenshaNo(hihokenshaNo).build();
 
         IKojin profile = mock(IKojin.class);

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoViewModel;
 import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
@@ -17,8 +16,8 @@ import jp.co.ndensan.reams.db.dbz.model.util.optional.DbOptional;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoViewDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -65,34 +64,13 @@ public class KojutokushaFinder {
     }
 
     /**
-     * 指定した保険者番号に合致する広住特者の識別コードを返します。
-     *
-     * @param 保険者番号 保険者番号
-     * @return 識別コード
-     */
-    public IItemList<ShikibetsuCode> get広住特者(ShoKisaiHokenshaNo 保険者番号) {
-        return get識別コードList(保険者番号, 被保険者番号未指定, 措置元先制御なし);
-    }
-
-    /**
-     * 指定した保険者番号に合致する広住特者の識別コードを返します。<br/>
-     * コンフィグの設定により、対象の市町村は「措置元」「措置先」「措置元・措置先」の何れかとなります。
-     *
-     * @param 保険者番号 保険者番号
-     * @return 識別コード
-     */
-    public IItemList<ShikibetsuCode> get広住特者_措置元先制御あり(ShoKisaiHokenshaNo 保険者番号) {
-        return get識別コードList(保険者番号, 被保険者番号未指定, 措置元先制御あり);
-    }
-
-    /**
      * 指定した市町村コードに合致する広住特者の識別コードを返します。
      *
      * @param 市町村コード 市町村コード
      * @return 識別コード
      */
-    public IItemList<ShikibetsuCode> get広住特者(RString 市町村コード) {
-        return get識別コードList(get保険者番号(市町村コード), 被保険者番号未指定, 措置元先制御なし);
+    public IItemList<ShikibetsuCode> get広住特者(LasdecCode 市町村コード) {
+        return get識別コードList(市町村コード, 被保険者番号未指定, 措置元先制御なし);
     }
 
     /**
@@ -102,8 +80,8 @@ public class KojutokushaFinder {
      * @param 市町村コード 市町村コード
      * @return 識別コード
      */
-    public IItemList<ShikibetsuCode> get広住特者_措置元先制御あり(RString 市町村コード) {
-        return get識別コードList(get保険者番号(市町村コード), 被保険者番号未指定, 措置元先制御あり);
+    public IItemList<ShikibetsuCode> get広住特者_措置元先制御あり(LasdecCode 市町村コード) {
+        return get識別コードList(市町村コード, 被保険者番号未指定, 措置元先制御あり);
     }
 
     /**
@@ -113,8 +91,8 @@ public class KojutokushaFinder {
      * @param 被保険者番号 被保険者番号
      * @return 識別コード
      */
-    public IItemList<ShikibetsuCode> get広住特者(RString 市町村コード, KaigoHihokenshaNo 被保険者番号) {
-        return get識別コードList(get保険者番号(市町村コード), 被保険者番号, 措置元先制御なし);
+    public IItemList<ShikibetsuCode> get広住特者(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
+        return get識別コードList(市町村コード, 被保険者番号, 措置元先制御なし);
     }
 
     /**
@@ -125,13 +103,8 @@ public class KojutokushaFinder {
      * @param 被保険者番号 被保険者番号
      * @return 識別コード
      */
-    public IItemList<ShikibetsuCode> get広住特者_措置元先制御あり(RString 市町村コード, KaigoHihokenshaNo 被保険者番号) {
-        return get識別コードList(get保険者番号(市町村コード), 被保険者番号, 措置元先制御あり);
-    }
-
-    private ShoKisaiHokenshaNo get保険者番号(RString 市町村コード) {
-        // TODO N8156 宮本 康 構成市町村マスタから保険者番号を取得する。（※別チケットで対応）
-        return new ShoKisaiHokenshaNo(new RString("123456"));
+    public IItemList<ShikibetsuCode> get広住特者_措置元先制御あり(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
+        return get識別コードList(市町村コード, 被保険者番号, 措置元先制御あり);
     }
 
     private IOptional<ShikibetsuCode> get識別コード(KaigoHihokenshaNo 被保険者番号) {
@@ -139,20 +112,20 @@ public class KojutokushaFinder {
         return DbOptional.ofNullable(!daichoList.isEmpty() ? daichoList.asList().get(0).get識別コード() : null);
     }
 
-    private IItemList<ShikibetsuCode> get識別コードList(ShoKisaiHokenshaNo 保険者番号, KaigoHihokenshaNo 被保険者番号, boolean 出力制御) {
+    private IItemList<ShikibetsuCode> get識別コードList(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号, boolean 出力制御) {
         return to識別コードList(出力制御
-                ? get被保険者台帳List_措置元先制御あり(保険者番号, 被保険者番号)
-                : dac.selectBy証記載保険者番号(保険者番号, 被保険者番号));
+                ? get被保険者台帳List_措置元先制御あり(市町村コード, 被保険者番号)
+                : dac.selectBy市町村コード(市町村コード, 被保険者番号));
     }
 
-    private IItemList<HihokenshaDaichoViewModel> get被保険者台帳List_措置元先制御あり(ShoKisaiHokenshaNo 保険者番号, KaigoHihokenshaNo 被保険者番号) {
+    private IItemList<HihokenshaDaichoViewModel> get被保険者台帳List_措置元先制御あり(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
         switch (config.get措置元措置先区分_介護資格()) {
             case 措置元:
-                return dac.selectBy証記載保険者番号(保険者番号, 被保険者番号);
+                return dac.selectBy市町村コード(市町村コード, 被保険者番号);
             case 措置先:
-                return dac.selectBy広住特措置元保険者番号(保険者番号, 被保険者番号);
+                return dac.selectBy広住特措置元市町村コード(市町村コード, 被保険者番号);
             case 措置元_措置先:
-                return dac.selectBy保険者番号(保険者番号, 被保険者番号);
+                return dac.selectByAny市町村コード(市町村コード, 被保険者番号);
             default:
                 break;
         }

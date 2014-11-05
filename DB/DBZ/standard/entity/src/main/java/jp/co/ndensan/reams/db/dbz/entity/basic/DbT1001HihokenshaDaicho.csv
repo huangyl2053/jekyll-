@@ -1,7 +1,6 @@
 ﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
 hihokenshaNo,varchar,KaigoHihokenshaNo,,,,,A
 shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
-shoKisaiHokenshaNo,varchar,ShoKisaiHokenshaNo,,,,,A
 shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
 shikakuShutokuJiyuCode,varchar,RString,,,,,A
 shikakuShutokuYMD,UDD015YMD,FlexibleDate,,,,,A
@@ -22,7 +21,7 @@ jushochitokureiKaijoJiyuCode,varchar,RString,,,,,A
 jushochitokureiKaijoYMD,UDD015YMD,FlexibleDate,,,,,A
 jushochitokureiKaijoTodokedeYMD,UDD015YMD,FlexibleDate,,,,,A
 koikinaiJushochiTokureiFlag,varchar,RString,,,,,A
-koikinaiTokureiSochimotoHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,A
+koikinaiTokureiSochimotoShichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
 kyuShichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
 saikofuKubun,varchar,RString,,,,,A
 saikofuJiyuCode,varchar,RString,,,,,A

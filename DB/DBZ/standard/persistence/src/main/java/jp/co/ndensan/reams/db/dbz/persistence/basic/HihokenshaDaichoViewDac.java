@@ -8,12 +8,12 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV1001HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoViewModel;
 import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -49,61 +49,61 @@ public class HihokenshaDaichoViewDac {
     }
 
     /**
-     * 指定した保険者番号に合致する被保険者台帳ビューを取得します。
+     * 指定した市町村コードに合致する被保険者台帳ビューを取得します。
      *
-     * @param 保険者番号 証記載保険者番号、又は広住特措置元保険者番号
+     * @param 市町村コード 市町村コード、又は広住特措置元市町村コード
      * @param 被保険者番号 被保険者番号
      * @return 被保険者台帳ビューリスト
      */
     @Transaction
-    public IItemList<HihokenshaDaichoViewModel> selectBy保険者番号(ShoKisaiHokenshaNo 保険者番号, KaigoHihokenshaNo 被保険者番号) {
+    public IItemList<HihokenshaDaichoViewModel> selectByAny市町村コード(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbV1001HihokenshaDaichoEntity> entityList = accessor.
                 select().
                 table(DbV1001HihokenshaDaicho.class).
                 where(被保険者番号 != null
-                        ? and(or(eq(shoKisaiHokenshaNo, 保険者番号), eq(koikinaiTokureiSochimotoHokenshaNo, 保険者番号)), eq(hihokenshaNo, 被保険者番号))
-                        : or(eq(shoKisaiHokenshaNo, 保険者番号), eq(koikinaiTokureiSochimotoHokenshaNo, 保険者番号))).
+                        ? and(or(eq(shichosonCode, 市町村コード), eq(koikinaiTokureiSochimotoShichosonCode, 市町村コード)), eq(hihokenshaNo, 被保険者番号))
+                        : or(eq(shichosonCode, 市町村コード), eq(koikinaiTokureiSochimotoShichosonCode, 市町村コード))).
                 toList(DbV1001HihokenshaDaichoEntity.class);
         return getModelList(entityList);
     }
 
     /**
-     * 指定した証記載保険者番号に合致する被保険者台帳ビューを取得します。
+     * 指定した市町村コードに合致する被保険者台帳ビューを取得します。
      *
-     * @param 保険者番号 証記載保険者番号
+     * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
      * @return 被保険者台帳ビューリスト
      */
     @Transaction
-    public IItemList<HihokenshaDaichoViewModel> selectBy証記載保険者番号(ShoKisaiHokenshaNo 保険者番号, KaigoHihokenshaNo 被保険者番号) {
+    public IItemList<HihokenshaDaichoViewModel> selectBy市町村コード(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbV1001HihokenshaDaichoEntity> entityList = accessor.
                 select().
                 table(DbV1001HihokenshaDaicho.class).
                 where(被保険者番号 != null
-                        ? and(eq(shoKisaiHokenshaNo, 保険者番号), eq(hihokenshaNo, 被保険者番号))
-                        : eq(shoKisaiHokenshaNo, 保険者番号)).
+                        ? and(eq(shichosonCode, 市町村コード), eq(hihokenshaNo, 被保険者番号))
+                        : eq(shichosonCode, 市町村コード)).
                 toList(DbV1001HihokenshaDaichoEntity.class);
         return getModelList(entityList);
     }
 
     /**
-     * 指定した広住特措置元保険者番号に合致する被保険者台帳ビューを取得します。
+     * 指定した広住特措置元市町村コードに合致する被保険者台帳ビューを取得します。
      *
-     * @param 保険者番号 広住特措置元保険者番号
+     * @param 市町村コード 広住特措置元市町村コード
      * @param 被保険者番号 被保険者番号
      * @return 被保険者台帳ビューリスト
      */
     @Transaction
-    public IItemList<HihokenshaDaichoViewModel> selectBy広住特措置元保険者番号(ShoKisaiHokenshaNo 保険者番号, KaigoHihokenshaNo 被保険者番号) {
+    public IItemList<HihokenshaDaichoViewModel> selectBy広住特措置元市町村コード(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbV1001HihokenshaDaichoEntity> entityList = accessor.
                 select().
                 table(DbV1001HihokenshaDaicho.class).
                 where(被保険者番号 != null
-                        ? and(eq(koikinaiTokureiSochimotoHokenshaNo, 保険者番号), eq(hihokenshaNo, 被保険者番号))
-                        : eq(koikinaiTokureiSochimotoHokenshaNo, 保険者番号)).
+                        ? and(eq(koikinaiTokureiSochimotoShichosonCode, 市町村コード), eq(hihokenshaNo, 被保険者番号))
+                        : eq(koikinaiTokureiSochimotoShichosonCode, 市町村コード)).
                 toList(DbV1001HihokenshaDaichoEntity.class);
         return getModelList(entityList);
     }

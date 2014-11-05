@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.model;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -49,15 +48,6 @@ public class HihokenshaDaichoViewModel {
      */
     public YMDHMS get処理日時() {
         return entity.getShoriTimestamp();
-    }
-
-    /**
-     * 証記載保険者番号を返します。
-     *
-     * @return 証記載保険者番号
-     */
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
     }
 
     /**
@@ -241,12 +231,12 @@ public class HihokenshaDaichoViewModel {
     }
 
     /**
-     * 広住特措置元保険者番号を返します。
+     * 広住特措置元市町村コードを返します。
      *
-     * @return 広住特措置元保険者番号
+     * @return 広住特措置元市町村コード
      */
-    public ShoKisaiHokenshaNo get広住特措置元保険者番号() {
-        return entity.getKoikinaiTokureiSochimotoHokenshaNo();
+    public LasdecCode get広住特措置元市町村コード() {
+        return entity.getKoikinaiTokureiSochimotoShichosonCode();
     }
 
     /**

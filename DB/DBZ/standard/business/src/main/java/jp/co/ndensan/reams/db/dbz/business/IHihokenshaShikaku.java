@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbz.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -28,13 +27,6 @@ public interface IHihokenshaShikaku extends IHihokenshaNoGettable, IShikibetsuCo
      * @return {@link LasdecCode 市町村コード}
      */
     public LasdecCode get市町村コード();
-
-    /**
-     * 被保険者の証記載保険者番号を返します。
-     *
-     * @return {@link ShoKisaiHokenshaNo 地方公共団体コード}
-     */
-    ShoKisaiHokenshaNo get証記載保険者番号();
 
     /**
      * 被保険者の識別コードを返します。
@@ -135,9 +127,9 @@ public interface IHihokenshaShikaku extends IHihokenshaNoGettable, IShikibetsuCo
      * 広域内住所地特例の措置元市町村を表す地方公共団体コードを返します。<br />
      * 広域内住所地特例措置元市町村がないとき、nullを返します。
      *
-     * @return 広域内の住所地特例措置元の保険者番号。もしくは、null。
+     * @return 広域内の住所地特例措置元の地方公共団体コード。もしくは、null。
      */
-    ShoKisaiHokenshaNo get広域内住所地特例措置元保険者番号();
+    LasdecCode get広域内住所地特例措置元市町村コード();
 
     /**
      * 合併前の市町村を表す地方公共団体コードを返します。<br />

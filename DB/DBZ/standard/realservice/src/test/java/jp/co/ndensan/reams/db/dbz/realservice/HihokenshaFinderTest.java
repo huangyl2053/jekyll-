@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.jukikojin.IJukiKojin;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IJuminKihonDaichoSearchKey;
@@ -81,6 +80,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
 
         @Test
         public void get被保険者_直近_ShikibetsuCode版は_HihokenshaDaichoManagerがnullを返すとき_nullを返す() {
+            _setUpMockOfIKojinFinder_returnNullAt();
             result = sut.get被保険者(lasdecCode, new ShikibetsuCode("9876543210"));
             assertThat(result, is(nullValue()));
         }
@@ -120,6 +120,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
 
         @Test
         public void get被保険者_直近_KaigoHihokenshaNo版は_HihokenshaDaichoManagerがnullを返すとき_nullを返す() {
+            _setUpMockOfIKojinFinder_returnNullAt();
             result = sut.get被保険者(lasdecCode, new ShikibetsuCode("9876543210"));
             assertThat(result, is(nullValue()));
         }
@@ -210,7 +211,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
             int size = hihokenshaDaicho.get被保険者資格ListOf(lasdecCode).size();
 
             result = sut.get被保険者List(lasdecCode);
-            assertThat(result.size(), is(size - 1));
+            assertThat(result.size(), is(size));
         }
 
         @Test
@@ -257,7 +258,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
             int size = hihokenshaDaicho.get被保険者資格ListOf(condition).size();
 
             result = sut.get被保険者List(condition);
-            assertThat(result.size(), is(size - 1));
+            assertThat(result.size(), is(size));
         }
 
         @Test
@@ -279,7 +280,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
     private static void setUpMockAsKojinFinderReturnsNull(LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode,
             YMDHMS shoriTimestamp, KaigoHihokenshaNo hihokenshaNo) {
         _setUpMockOfHihokenshaDaichoManager(lasdecCode, shikibetsuCode, shoriTimestamp, hihokenshaNo);
-        _setUpMockOfIKojinFinder_returnNullAt(shikibetsuCode);
+        _setUpMockOfIKojinFinder_returnNullAt();
     }
 
     private static void _setUpMockOfHihokenshaDaichoManager(LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode,
@@ -293,13 +294,11 @@ public class HihokenshaFinderTest extends DbzTestBase {
     private static void _setUpMockOfIKojinFinder_returnIKojinFor(ShikibetsuCode shikibetsuCode) {
         IJukiKojin profile = mock(IJukiKojin.class);
         when(profile.get識別コード()).thenReturn(shikibetsuCode);
-        IJuminKihonDaichoSearchKey searchKey = new JuminKihonDaichoSearchKeyBuilder(GyomuCode.DB介護保険).set識別コード(shikibetsuCode).build();
-        when(profileSearcher.find住基個人(searchKey)).thenReturn(profile);
+        when(profileSearcher.find住基個人(any(IJuminKihonDaichoSearchKey.class))).thenReturn(profile);
     }
 
-    private static void _setUpMockOfIKojinFinder_returnNullAt(ShikibetsuCode shikibetsuCode) {
-        IJuminKihonDaichoSearchKey searchKey = new JuminKihonDaichoSearchKeyBuilder(GyomuCode.DB介護保険).set識別コード(shikibetsuCode).build();
-        when(profileSearcher.find住基個人(searchKey)).thenReturn(null);
+    private static void _setUpMockOfIKojinFinder_returnNullAt() {
+        when(profileSearcher.find住基個人(any(IJuminKihonDaichoSearchKey.class))).thenReturn(null);
     }
 
     private static List<IHihokenshaShikaku> createListOfHihokenshaShikaku(LasdecCode lasdecCode, int listSize) {
@@ -323,7 +322,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
 
     private static IHihokenshaShikaku createHihokenshaShikaku(LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode,
             YMDHMS shoriTimestamp, KaigoHihokenshaNo hihokenshaNo) {
-        return new HihokenshaShikaku.Builder(lasdecCode, shikibetsuCode, shoriTimestamp, new ShoKisaiHokenshaNo(lasdecCode.getColumnValue()),
+        return new HihokenshaShikaku.Builder(lasdecCode, shikibetsuCode, shoriTimestamp,
                 new HihokenshaKubun(new Code("1"), new RString("第1号")),
                 FlexibleDate.MAX, ShikakuShutoku.NOTHING).hihokenshaNo(hihokenshaNo).build();
     }
