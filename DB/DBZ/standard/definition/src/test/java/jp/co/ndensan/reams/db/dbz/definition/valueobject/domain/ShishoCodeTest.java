@@ -182,4 +182,20 @@ public class ShishoCodeTest extends DbzTestBase {
             assertThat(sut.hashCode(), is(other.hashCode()));
         }
     }
+
+    public static class isEmpty extends DbzTestBase {
+
+        @Test
+        public void EMPTYのisEmptyは_trueを返す() {
+            ShishoCode sut = ShishoCode.EMPTY;
+            assertThat(sut.isEmpty(), is(true));
+        }
+
+        @Test
+        public void EMPTYとequalsでtrueを返さないインスタンスのisEmptyは_falseを返す() {
+            ShishoCode sut = new ShishoCode("100");
+            assertThat(sut.equals(ShishoCode.EMPTY), is(false));
+            assertThat(sut.isEmpty(), is(false));
+        }
+    }
 }

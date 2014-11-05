@@ -182,4 +182,20 @@ public class ServiceShuruiCodeTest extends DbzTestBase {
             assertThat(sut.hashCode(), is(other.hashCode()));
         }
     }
+
+    public static class isEmpty extends DbzTestBase {
+
+        @Test
+        public void EMPTYのisEmptyは_trueを返す() {
+            ServiceShuruiCode sut = ServiceShuruiCode.EMPTY;
+            assertThat(sut.isEmpty(), is(true));
+        }
+
+        @Test
+        public void EMPTYとequalsでtrueを返さないインスタンスのisEmptyは_falseを返す() {
+            ServiceShuruiCode sut = new ServiceShuruiCode("100");
+            assertThat(sut.equals(ServiceShuruiCode.EMPTY), is(false));
+            assertThat(sut.isEmpty(), is(false));
+        }
+    }
 }

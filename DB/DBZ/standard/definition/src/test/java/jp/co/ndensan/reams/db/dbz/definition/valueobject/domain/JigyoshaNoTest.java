@@ -96,6 +96,22 @@ public class JigyoshaNoTest extends DbzTestBase {
         }
     }
 
+    public static class isEmpty extends DbzTestBase {
+
+        @Test
+        public void EMPTYのisEmptyは_trueを返す() {
+            JigyoshaNo sut = JigyoshaNo.EMPTY;
+            assertThat(sut.isEmpty(), is(true));
+        }
+
+        @Test
+        public void EMPTYとequalsでtrueを返さないインスタンスのisEmptyは_falseを返す() {
+            JigyoshaNo sut = new JigyoshaNo("100");
+            assertThat(sut.equals(JigyoshaNo.EMPTY), is(false));
+            assertThat(sut.isEmpty(), is(false));
+        }
+    }
+
     private static JigyoshaNo createJigyoshaNo(String no) {
         return new JigyoshaNo(new RString(no));
     }

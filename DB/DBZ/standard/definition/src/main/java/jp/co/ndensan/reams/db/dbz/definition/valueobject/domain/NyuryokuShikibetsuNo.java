@@ -19,6 +19,16 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public final class NyuryokuShikibetsuNo implements IValueObject<RString>, Comparable<NyuryokuShikibetsuNo>, IDbColumnMappable, Serializable {
 
+    /**
+     * 空の NyuryokuShikibetsuNo です。
+     * {@link #value() value()}で{@link RString#EMPTY}を返します。
+     */
+    public static final NyuryokuShikibetsuNo EMPTY;
+
+    static {
+        EMPTY = new NyuryokuShikibetsuNo(RString.EMPTY);
+    }
+
     private final RString 入力識別番号;
 
     /**
@@ -52,6 +62,15 @@ public final class NyuryokuShikibetsuNo implements IValueObject<RString>, Compar
     @Override
     public int compareTo(NyuryokuShikibetsuNo 比較対象) {
         return Objects.compare(this.入力識別番号, 比較対象.入力識別番号, NaturalOrderComparator.ASC.getInstance());
+    }
+
+    /**
+     * {@link #EMPTY EMPTY}と等しい時、{@code true}を返します。
+     *
+     * @return {@link #EMPTY EMPTY}と等しい時、{@code true}
+     */
+    public boolean isEmpty() {
+        return EMPTY.equals(this);
     }
 
     @Override

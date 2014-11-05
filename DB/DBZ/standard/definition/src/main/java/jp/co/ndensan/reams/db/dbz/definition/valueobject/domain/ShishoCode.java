@@ -63,6 +63,15 @@ public final class ShishoCode implements IValueObject<RString>, Comparable<Shish
         return Objects.compare(this.theValue, o.theValue, NaturalOrderComparator.ASC.getInstance());
     }
 
+    /**
+     * {@link #EMPTY EMPTY}と等しい時、{@code true}を返します。
+     *
+     * @return {@link #EMPTY EMPTY}と等しい時、{@code true}
+     */
+    public boolean isEmpty() {
+        return EMPTY.equals(this);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

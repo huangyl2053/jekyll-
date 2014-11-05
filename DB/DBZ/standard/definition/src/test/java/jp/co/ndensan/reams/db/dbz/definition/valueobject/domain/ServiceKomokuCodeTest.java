@@ -182,4 +182,20 @@ public class ServiceKomokuCodeTest extends DbzTestBase {
             assertThat(sut.hashCode(), is(other.hashCode()));
         }
     }
+
+    public static class isEmpty extends DbzTestBase {
+
+        @Test
+        public void EMPTYのisEmptyは_trueを返す() {
+            ServiceKomokuCode sut = ServiceKomokuCode.EMPTY;
+            assertThat(sut.isEmpty(), is(true));
+        }
+
+        @Test
+        public void EMPTYとequalsでtrueを返さないインスタンスのisEmptyは_falseを返す() {
+            ServiceKomokuCode sut = new ServiceKomokuCode("100");
+            assertThat(sut.equals(ServiceKomokuCode.EMPTY), is(false));
+            assertThat(sut.isEmpty(), is(false));
+        }
+    }
 }

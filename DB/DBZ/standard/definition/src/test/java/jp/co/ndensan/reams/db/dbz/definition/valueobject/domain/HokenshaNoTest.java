@@ -182,4 +182,20 @@ public class HokenshaNoTest extends DbzTestBase {
             assertThat(sut.hashCode(), is(other.hashCode()));
         }
     }
+
+    public static class isEmpty extends DbzTestBase {
+
+        @Test
+        public void EMPTYのisEmptyは_trueを返す() {
+            HokenshaNo sut = HokenshaNo.EMPTY;
+            assertThat(sut.isEmpty(), is(true));
+        }
+
+        @Test
+        public void EMPTYとequalsでtrueを返さないインスタンスのisEmptyは_falseを返す() {
+            HokenshaNo sut = new HokenshaNo("100");
+            assertThat(sut.equals(HokenshaNo.EMPTY), is(false));
+            assertThat(sut.isEmpty(), is(false));
+        }
+    }
 }

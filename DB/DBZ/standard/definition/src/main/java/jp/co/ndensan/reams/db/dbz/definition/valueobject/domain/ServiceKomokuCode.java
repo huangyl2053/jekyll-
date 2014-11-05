@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author n8223 朴 義一
  */
-public class ServiceKomokuCode implements IValueObject<RString>, Comparable<ServiceKomokuCode>, IDbColumnMappable, Serializable {
+public final class ServiceKomokuCode implements IValueObject<RString>, Comparable<ServiceKomokuCode>, IDbColumnMappable, Serializable {
 
     /**
      * 空の ServiceKomokuCode です。
@@ -62,6 +62,15 @@ public class ServiceKomokuCode implements IValueObject<RString>, Comparable<Serv
     @Override
     public int compareTo(ServiceKomokuCode 比較対象) {
         return Objects.compare(this.code, 比較対象.code, NaturalOrderComparator.ASC.getInstance());
+    }
+
+    /**
+     * {@link #EMPTY EMPTY}と等しい時、{@code true}を返します。
+     *
+     * @return {@link #EMPTY EMPTY}と等しい時、{@code true}
+     */
+    public boolean isEmpty() {
+        return EMPTY.equals(this);
     }
 
     @Override

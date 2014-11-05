@@ -63,6 +63,15 @@ public final class ShinseishoKanriNo implements IValueObject<RString>, Comparabl
         return Objects.compare(this.申請書管理番号, 比較対象.申請書管理番号, NaturalOrderComparator.ASC.getInstance());
     }
 
+    /**
+     * {@link #EMPTY EMPTY}と等しい時、{@code true}を返します。
+     *
+     * @return {@link #EMPTY EMPTY}と等しい時、{@code true}
+     */
+    public boolean isEmpty() {
+        return EMPTY.equals(this);
+    }
+
     @Override
     public boolean equals(Object 比較対象) {
         if (比較対象 == null) {

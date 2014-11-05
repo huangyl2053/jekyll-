@@ -92,6 +92,22 @@ public class ServiceCodeTest extends DbzTestBase {
         }
     }
 
+    public static class isEmpty extends DbzTestBase {
+
+        @Test
+        public void EMPTYのisEmptyは_trueを返す() {
+            ServiceCode sut = ServiceCode.EMPTY;
+            assertThat(sut.isEmpty(), is(true));
+        }
+
+        @Test
+        public void EMPTYとequalsでtrueを返さないインスタンスのisEmptyは_falseを返す() {
+            ServiceCode sut = new ServiceCode("100");
+            assertThat(sut.equals(ServiceCode.EMPTY), is(false));
+            assertThat(sut.isEmpty(), is(false));
+        }
+    }
+
     private static ServiceCode createServiceCode(String code) {
         return new ServiceCode(new RString(code));
     }

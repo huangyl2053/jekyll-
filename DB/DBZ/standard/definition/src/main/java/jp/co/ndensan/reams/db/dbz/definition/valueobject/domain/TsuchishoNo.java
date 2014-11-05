@@ -63,6 +63,15 @@ public final class TsuchishoNo implements IValueObject<RString>, Comparable<Tsuc
         return Objects.compare(this.theValue, target.theValue, NaturalOrderComparator.ASC.getInstance());
     }
 
+    /**
+     * {@link #EMPTY EMPTY}と等しい時、{@code true}を返します。
+     *
+     * @return {@link #EMPTY EMPTY}と等しい時、{@code true}
+     */
+    public boolean isEmpty() {
+        return EMPTY.equals(this);
+    }
+
     @Override
     public boolean equals(Object target) {
         if (target == null) {
