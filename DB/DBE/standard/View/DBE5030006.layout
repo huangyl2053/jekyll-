@@ -1,0 +1,1168 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "ChosaOCRTorikomi",
+   "items": [
+    {
+     "fieldName": "btnOCRTorikomi",
+     "items": [],
+     "controlType": "Button",
+     "width": "180px",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnOCRTorikomi",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "onClick": "",
+     "text": "審査結果OCRを取込む",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
+    },
+    {
+     "fieldName": "lblTorikomiKekka",
+     "items": [],
+     "controlType": "Label",
+     "width": "100px",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "lblTorikomiKekka",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "取込み結果",
+     "required": false,
+     "align": 0,
+     "isPrivateInfo": false,
+     "decorationClass": ""
+    },
+    {
+     "fieldName": "txtErrKensu",
+     "items": [],
+     "controlType": "TextBoxNum",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "txtErrKensu_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
+     "text": "",
+     "required": false,
+     "isPrivateInfo": false,
+     "decorationClass": "",
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 2,
+     "placeHolder": "",
+     "textKind": 2,
+     "isPassword": false,
+     "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "suggest": [],
+     "value": "",
+     "labelLText": "エラー",
+     "labelRText": "件",
+     "labelLWidth": "S",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "maxValue": 1.7976931348623157e+308,
+     "minValue": 0,
+     "isCurrency": false,
+     "isComma": false,
+     "decimalPointLength": 0,
+     "permitCharactor": "+-,.\\"
+    },
+    {
+     "fieldName": "dgChosahyoTorikomiKekka",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "708px",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "dgChosahyoTorikomiKekka",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "height": "317px",
+     "gridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": false,
+      "isShowHeader": true,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "",
+       "headerHeight": 1
+      },
+      "columns": [
+       {
+        "columnName": "選択<br>",
+        "dataName": "btnSelect",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 40,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "選択",
+         "onClick": "dispChosaKekkaShosai",
+         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
+         "imageWidth": "20",
+         "imageHeight": "20"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "btnSelect"
+       },
+       {
+        "columnName": "No",
+        "dataName": "no",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 45,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "no"
+       },
+       {
+        "columnName": "OK/NG",
+        "dataName": "okOrNg",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 65,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "okOrNg"
+       },
+       {
+        "columnName": "保険者",
+        "dataName": "hokensha",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 65,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "hokensha"
+       },
+       {
+        "columnName": "被保番号",
+        "dataName": "hihokenshaNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "hihokenshaNo"
+       },
+       {
+        "columnName": "申請日",
+        "dataName": "txtShinseiDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtShinseiDate"
+       },
+       {
+        "columnName": "申請<br>区分",
+        "dataName": "shinseiKubun",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "shinseiKubun"
+       },
+       {
+        "columnName": "調査<br>実施日",
+        "dataName": "chosaJisshiDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosaJisshiDate"
+       },
+       {
+        "columnName": "調査票<br>受領日",
+        "dataName": "chosahyoJuryoDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosahyoJuryoDate"
+       }
+      ]
+     },
+     "onSort": "",
+     "onSelect": "",
+     "onSelectByDblClick": "dispChosaKekkaShosai",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "dataSource": [],
+     "sortOrder": "txtShinseiDate",
+     "isAscending": true,
+     "filterList": [],
+     "activeRowId": -1,
+     "gridAction": []
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G8",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0em",
+   "marginRight": "XS",
+   "selectControlID": "ChosaOCRTorikomi",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "審査会結果OCR取込",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "ChosaOCRTorikomi"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "canPost": true
+  },
+  {
+   "fieldName": "ChosaKekkaShosaiMain",
+   "items": [
+    {
+     "fieldName": "ChosaKekkaShosai",
+     "items": [
+      {
+       "fieldName": "dgChosakekka1",
+       "items": [],
+       "controlType": "DataGrid",
+       "width": "1080px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "0em",
+       "selectControlID": "dgChosakekka1",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "height": "160px",
+       "gridSetting": {
+        "rowHeight": 25,
+        "isMultiSelectable": false,
+        "isShowHeader": true,
+        "isShowFooter": false,
+        "isShowFilter": false,
+        "isShowFilterButton": false,
+        "isShowRowState": false,
+        "isShowSelectButtonColumn": false,
+        "isShowModifyButtonColumn": true,
+        "isShowDeleteButtonColumn": false,
+        "limitRowCount": 0,
+        "selectedRowCount": 0,
+        "selectLimitRowCount": 0,
+        "header": {
+         "combineColumns": [],
+         "frozenColumn": "",
+         "headerHeight": 0
+        },
+        "columns": [
+         {
+          "columnName": "市町村コード",
+          "dataName": "shichosonCode",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0,
+           "isSetValueToToolTip": false
+          },
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": ""
+         },
+         {
+          "columnName": "被保番号",
+          "dataName": "hihoNo",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 80,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0,
+           "isSetValueToToolTip": false
+          },
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": ""
+         },
+         {
+          "columnName": "被保険者氏名",
+          "dataName": "hihoName",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": ""
+         },
+         {
+          "columnName": "1次判定結果",
+          "dataName": "firstJudgmentResult",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0
+          },
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": ""
+         },
+         {
+          "columnName": "要介護状態像例",
+          "dataName": "yokaigoJotaizorei",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 120,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": ""
+         },
+         {
+          "columnName": "2次判定結果",
+          "dataName": "secondJudgmentResult",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": ""
+         },
+         {
+          "columnName": "認定有効期間",
+          "dataName": "ninteiYukoKikan",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 110,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": ""
+         },
+         {
+          "columnName": "認定有効期間開始日",
+          "dataName": "ninteiYukoKikanKaishiYMD",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 150,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": ""
+         },
+         {
+          "columnName": "認定有効期間終了日",
+          "dataName": "ninteiYukoKikanShuryoYMD",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 150,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": ""
+         },
+         {
+          "columnName": "認定審査結果区分",
+          "dataName": "ninteiShinsaResultKubun",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 140,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": ""
+         },
+         {
+          "columnName": "利用可能指定サービス種類",
+          "dataName": "riyoKanoShiteiServiceShurui",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 200,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": ""
+         }
+        ]
+       },
+       "onSort": "",
+       "onSelect": "",
+       "onSelectByDblClick": "",
+       "onSelectBySelectButton": "",
+       "onSelectByModifyButton": "",
+       "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
+       "dataSource": [],
+       "sortOrder": "結果",
+       "isAscending": true,
+       "filterList": [],
+       "activeRowId": -1,
+       "gridAction": []
+      }
+     ],
+     "controlType": "Panel",
+     "width": "1098px",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "ChosaKekkaShosai",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorder": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto",
+     "canPost": false
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0em",
+   "marginRight": "XS",
+   "selectControlID": "ChosaKekkaShosaiMain",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "審査結果登録",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "ChosaKekkaShosaiMain"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "canPost": true
+  },
+  {
+   "fieldName": "OcrSoftKido",
+   "items": [
+    {
+     "fieldName": "btnOcrDataNyuryoku",
+     "items": [],
+     "controlType": "Button",
+     "width": "160px",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnOcrDataNyuryoku",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "onClick": "onClick_btnOcrDataNyuryoku",
+     "text": "審査結果OCRを取込む",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
+    },
+    {
+     "fieldName": "lblOcrSoft",
+     "items": [],
+     "controlType": "Label",
+     "width": "200px",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "lblOcrSoft",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "認定調査票OCR取込みソフト",
+     "required": false,
+     "align": 2,
+     "isPrivateInfo": false,
+     "decorationClass": ""
+    },
+    {
+     "fieldName": "btnCloseOcrSoft",
+     "items": [],
+     "controlType": "Button",
+     "width": "160px",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnCloseOcrSoft",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "onClick": "",
+     "text": "一覧に戻る",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G8",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0em",
+   "marginRight": "XS",
+   "selectControlID": "OcrSoftKido",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "認定調査OCRソフト",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "OcrSoftKido"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "canPost": true
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "審査結果OCR登録",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "OCR取込み",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "ChosaOCRTorikomi",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnOCRTorikomi",
+     "event": "onClick",
+     "transition": "OCRソフト"
+    },
+    {
+     "fieldName": "dgChosahyoTorikomiKekka[btnSelect]",
+     "event": "onClick",
+     "transition": "取込み結果登録"
+    },
+    {
+     "fieldName": "dgChosahyoTorikomiKekka",
+     "event": "onSelectBySelectButton",
+     "transition": "取込み結果登録"
+    },
+    {
+     "fieldName": "btnCloseOcrSoft",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnOcrDataNyuryoku",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCommonUpdateChosaResult",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCommonBackToIchiran",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "OCRソフト",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "OcrSoftKido",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnOCRTorikomi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosahyoTorikomiKekka[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosahyoTorikomiKekka",
+     "event": "onSelectBySelectButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseOcrSoft",
+     "event": "onClick",
+     "transition": "OCR取込み"
+    },
+    {
+     "fieldName": "btnOcrDataNyuryoku",
+     "event": "onClick",
+     "transition": "OCR取込み"
+    },
+    {
+     "fieldName": "btnCommonUpdateChosaResult",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCommonBackToIchiran",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "3",
+   "stateName": "取込み結果登録",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "ChosaKekkaShosaiMain",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "ChosaKekkaShosai",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnOCRTorikomi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosahyoTorikomiKekka[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosahyoTorikomiKekka",
+     "event": "onSelectBySelectButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseOcrSoft",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnOcrDataNyuryoku",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCommonUpdateChosaResult",
+     "event": "onClick",
+     "transition": "OCR取込み"
+    },
+    {
+     "fieldName": "btnCommonBackToIchiran",
+     "event": "onClick",
+     "transition": "OCR取込み"
+    }
+   ]
+  }
+ ],
+ "currentState": "All",
+ "id": "DBE5030006",
+ "WFParameter": [],
+ "UIContainerEventMapping": [],
+ "loadSequencePanelNames": [
+  [
+   "ChosaOCRTorikomi",
+   "ChosaKekkaShosaiMain",
+   "OcrSoftKido"
+  ],
+  [
+   "ChosaKekkaShosai",
+   "ChosaKekkaShusei"
+  ],
+  [
+   "KihonJoho"
+  ],
+  [
+   "ChosaItakuJoho"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "ChosaResultDetail",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonUpdate",
+     "buttonProperty": {
+      "fieldName": "btnCommonUpdateChosaResult",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCommonUpdateChosaResult",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "",
+      "text": "戻る",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnCommonBackToIchiran",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCommonBackToIchiran",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "更新",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "一覧へ"
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "取込み結果登録"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "OCRTorikomi",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonUpdate",
+     "buttonProperty": {
+      "fieldName": "btnCommonSaveOCRContent",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": 1,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCommonSaveOCRContent",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "onClick_btnCommonSaveOCRContent",
+      "text": "更新",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "OCR取込み"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ],
+ "packageName": ""
+}

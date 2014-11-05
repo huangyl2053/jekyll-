@@ -1,32 +1,20 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgSetaiJoho_Row;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgShinseishoTodokede_Row;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplHihokenshaRirekiDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplIryoHokenDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplRofukuNenkinDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplSeikatsuHogoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplSetaiShokaiDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplShinseiTodokedeDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplShisetsuNyutaishoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplShoKofuKaishuDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.ShikakuTokusoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.IryoHokenRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tabHihokenshaShokai のクラスファイル 
- * 
+ * tabHihokenshaShokai のクラスファイル
+ *
  * @author 自動生成
  */
 public class tabHihokenshaShokaiDiv extends TabContainer {
@@ -36,6 +24,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("tplHihokenshaRireki")
     private tplHihokenshaRirekiDiv tplHihokenshaRireki;
     @JsonProperty("tplSetaiShokai")
@@ -66,7 +55,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
 
     @JsonProperty("tplHihokenshaRireki")
     public void setTplHihokenshaRireki(tplHihokenshaRirekiDiv tplHihokenshaRireki) {
-        this.tplHihokenshaRireki=tplHihokenshaRireki;
+        this.tplHihokenshaRireki = tplHihokenshaRireki;
     }
 
     @JsonProperty("tplSetaiShokai")
@@ -76,7 +65,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
 
     @JsonProperty("tplSetaiShokai")
     public void setTplSetaiShokai(tplSetaiShokaiDiv tplSetaiShokai) {
-        this.tplSetaiShokai=tplSetaiShokai;
+        this.tplSetaiShokai = tplSetaiShokai;
     }
 
     @JsonProperty("tplIryoHoken")
@@ -86,7 +75,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
 
     @JsonProperty("tplIryoHoken")
     public void setTplIryoHoken(tplIryoHokenDiv tplIryoHoken) {
-        this.tplIryoHoken=tplIryoHoken;
+        this.tplIryoHoken = tplIryoHoken;
     }
 
     @JsonProperty("tplSeikatsuHogo")
@@ -96,7 +85,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
 
     @JsonProperty("tplSeikatsuHogo")
     public void setTplSeikatsuHogo(tplSeikatsuHogoDiv tplSeikatsuHogo) {
-        this.tplSeikatsuHogo=tplSeikatsuHogo;
+        this.tplSeikatsuHogo = tplSeikatsuHogo;
     }
 
     @JsonProperty("tplRofukuNenkin")
@@ -106,7 +95,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
 
     @JsonProperty("tplRofukuNenkin")
     public void setTplRofukuNenkin(tplRofukuNenkinDiv tplRofukuNenkin) {
-        this.tplRofukuNenkin=tplRofukuNenkin;
+        this.tplRofukuNenkin = tplRofukuNenkin;
     }
 
     @JsonProperty("tplShisetsuNyutaisho")
@@ -116,7 +105,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
 
     @JsonProperty("tplShisetsuNyutaisho")
     public void setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
-        this.tplShisetsuNyutaisho=tplShisetsuNyutaisho;
+        this.tplShisetsuNyutaisho = tplShisetsuNyutaisho;
     }
 
     @JsonProperty("tplShoKofuKaishu")
@@ -126,7 +115,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
 
     @JsonProperty("tplShoKofuKaishu")
     public void setTplShoKofuKaishu(tplShoKofuKaishuDiv tplShoKofuKaishu) {
-        this.tplShoKofuKaishu=tplShoKofuKaishu;
+        this.tplShoKofuKaishu = tplShoKofuKaishu;
     }
 
     @JsonProperty("tplShinseiTodokede")
@@ -136,7 +125,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
 
     @JsonProperty("tplShinseiTodokede")
     public void setTplShinseiTodokede(tplShinseiTodokedeDiv tplShinseiTodokede) {
-        this.tplShinseiTodokede=tplShinseiTodokede;
+        this.tplShinseiTodokede = tplShinseiTodokede;
     }
 
     /*
@@ -148,7 +137,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setShikakuTokusoRireki(ShikakuTokusoRirekiDiv ShikakuTokusoRireki) {
+    public void setShikakuTokusoRireki(ShikakuTokusoRirekiDiv ShikakuTokusoRireki) {
         this.getTplHihokenshaRireki().setShikakuTokusoRireki(ShikakuTokusoRireki);
     }
 
@@ -158,7 +147,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setDgSetaiJoho(DataGrid<dgSetaiJoho_Row> dgSetaiJoho) {
+    public void setDgSetaiJoho(DataGrid<dgSetaiJoho_Row> dgSetaiJoho) {
         this.getTplSetaiShokai().setDgSetaiJoho(dgSetaiJoho);
     }
 
@@ -168,7 +157,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setIryoHokenRireki(IryoHokenRirekiDiv IryoHokenRireki) {
+    public void setIryoHokenRireki(IryoHokenRirekiDiv IryoHokenRireki) {
         this.getTplIryoHoken().setIryoHokenRireki(IryoHokenRireki);
     }
 
@@ -178,7 +167,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setLblSeikatsuHogo(Label lblSeikatsuHogo) {
+    public void setLblSeikatsuHogo(Label lblSeikatsuHogo) {
         this.getTplSeikatsuHogo().setLblSeikatsuHogo(lblSeikatsuHogo);
     }
 
@@ -188,7 +177,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setLblRofukuNenkin(Label lblRofukuNenkin) {
+    public void setLblRofukuNenkin(Label lblRofukuNenkin) {
         this.getTplRofukuNenkin().setLblRofukuNenkin(lblRofukuNenkin);
     }
 
@@ -198,7 +187,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiKanriDiv ShisetsuNyutaishoRireki) {
+    public void setShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiKanriDiv ShisetsuNyutaishoRireki) {
         this.getTplShisetsuNyutaisho().setShisetsuNyutaishoRireki(ShisetsuNyutaishoRireki);
     }
 
@@ -208,7 +197,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setShoKofuKaishuKiroku(ShoKaishuKirokuKanriDiv ShoKofuKaishuKiroku) {
+    public void setShoKofuKaishuKiroku(ShoKaishuKirokuKanriDiv ShoKofuKaishuKiroku) {
         this.getTplShoKofuKaishu().setShoKofuKaishuKiroku(ShoKofuKaishuKiroku);
     }
 
@@ -218,7 +207,7 @@ public class tabHihokenshaShokaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public void  setDgShinseishoTodokede(DataGrid<dgShinseishoTodokede_Row> dgShinseishoTodokede) {
+    public void setDgShinseishoTodokede(DataGrid<dgShinseishoTodokede_Row> dgShinseishoTodokede) {
         this.getTplShinseiTodokede().setDgShinseishoTodokede(dgShinseishoTodokede);
     }
 

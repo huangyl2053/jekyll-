@@ -48,7 +48,7 @@ public class TekiyoJogaiJoho {
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         //RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
         setTekiyoJogaiGrid(tekiyoJogaiJohoDiv.getDgTekiyoJogaiRireki(), hihokenshaNo);
-        ShisetsuJoho.setTekiyoJogaiMode(tekiyoJogaiJohoDiv.getTekiyoJogaiToroku().getJogaishaTekiyoInput().getJogaishaTekiyoJogaiShisetsu());
+//        ShisetsuJoho.setTekiyoJogaiMode(tekiyoJogaiJohoDiv.getTekiyoJogaiToroku().getJogaishaTekiyoInput().getJogaishaTekiyoJogaiShisetsu());
 
         response.data = tekiyoJogaiJohoDiv;
         return response;

@@ -69,12 +69,12 @@ public class SearchHihokenshashoHakkoTaishosha {
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
         //検索キー氏名の初期値設定
-        panel.getCcdSearchHihokenshashoHakkoTaishosha().getKaigoAtenaFinder().getTxtAtenaMeisho().
-                setValue(ymlData.getAsRString("searchShimei"));
-
+//        panel.getCcdSearchHihokenshashoHakkoTaishosha().getKaigoAtenaFinder().getTxtAtenaMeisho().
+//                setValue(ymlData.getAsRString("searchShimei"));
+//
         //前方一致を初期選択とする
-        panel.getCcdSearchHihokenshashoHakkoTaishosha().getKaigoAtenaFinder().getDdlAtenaSearchKubun().setSelectedItem(new RString("1"));
-
+//        panel.getCcdSearchHihokenshashoHakkoTaishosha().getKaigoAtenaFinder().getDdlAtenaSearchKubun().setSelectedItem(new RString("1"));
+//
 //        //最近処理対象者の設定
 //        List<KeyValueDataSource> dataSource = new ArrayList<>();
 //        dataSource.add(new KeyValueDataSource(new RString("0"), RString.EMPTY));

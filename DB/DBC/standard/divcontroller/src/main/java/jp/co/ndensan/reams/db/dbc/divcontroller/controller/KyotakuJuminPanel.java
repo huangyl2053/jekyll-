@@ -40,35 +40,35 @@ public class KyotakuJuminPanel {
 
         //高額介護サービス費情報  (被保険者番号～所得段階）
         //氏名漢字～個人番号
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtAtenaMeisho().setValue(
-                ymlDt.getAsRString("atenaMeisho"));
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtAtenaKanaMeisho().setValue(
-                ymlDt.getAsRString("atenaKanMeisho"));
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtSeinengappiYMD().setValue(
-                ymlDt.getAsRDate("seinengappiYmd"));
-
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtNenrei().setValue(
-                ymlDt.getAsRString("nenrei"));
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtSeibetsu().setValue(
-                ymlDt.getAsRString("seibetsu"));
-
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtJusho().setValue(
-                ymlDt.getAsRString("jusho"));
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtGyoseiku().setValue(
-                ymlDt.getAsRString("gyoseiku"));
-
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtShikibetsuCode().setValue(
-                ymlDt.getAsRString("shikibetsuCode"));
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtYubinNo().setValue(
-                ymlDt.getAsYubinNo("yubinNoe"));
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtJuminJotai().setValue(
-                ymlDt.getAsRString("juminJotai"));
-
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtSetaiCode().setValue(
-                ymlDt.getAsRString("setaiCode"));
-        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtKojinHojinCode().setValue(
-                ymlDt.getAsRString("kojinHojinCode"));
-
+//        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtAtenaMeisho().setValue(
+//                ymlDt.getAsRString("atenaMeisho"));
+//        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtAtenaKanaMeisho().setValue(
+//                ymlDt.getAsRString("atenaKanMeisho"));
+//        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtSeinengappiYMD().setValue(
+//                ymlDt.getAsRDate("seinengappiYmd"));
+//
+//        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtNenrei().setValue(
+//                ymlDt.getAsRString("nenrei"));
+//        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtSeibetsu().setValue(
+//                ymlDt.getAsRString("seibetsu"));
+//
+//        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtJusho().setValue(
+//                ymlDt.getAsRString("jusho"));
+//        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtGyoseiku().setValue(
+//                ymlDt.getAsRString("gyoseiku"));
+//
+//        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtShikibetsuCode().setValue(
+//                ymlDt.getAsRString("shikibetsuCode"));
+//        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtYubinNo().setValue(
+//                ymlDt.getAsYubinNo("yubinNoe"));
+//        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtJuminJotai().setValue(
+//                ymlDt.getAsRString("juminJotai"));
+//
+//        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtSetaiCode().setValue(
+//                ymlDt.getAsRString("setaiCode"));
+//        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtKojinHojinCode().setValue(
+//                ymlDt.getAsRString("kojinHojinCode"));
+//        
         //資格取得 ～　認定期間
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtHihokenshaNo().setValue(
                 ymlDt.getAsRString("hihokenshaNo"));

@@ -16,7 +16,9 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.TajutokuTaisho
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.TajutokuTekiyoJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.TekiyoJiyuInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.dgJushochiTokureiRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShisetsuJoho;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShisetsuJoho;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.IShisetsuJohoDiv;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -25,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+//import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 他市町村住所地特例の適用情報を入力するDivのControllerです。
@@ -49,9 +51,8 @@ public class TajutokuTekiyoJoho {
         DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setTajutokuJoho(tajutokuDiv.getDgJushochiTokureiRireki(), hihokenshaNo);
-        ShisetsuJoho.setJutokuMode(tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho());
-        tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho().getLblOtherShisetsuShurui().setText(new RString("keyKannai"));
-
+//        ShisetsuJoho.setJutokuMode(tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho());
+//        tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho().getLblOtherShisetsuShurui().setText(new RString("keyKannai"));
         response.data = tajutokuDiv;
         return response;
     }

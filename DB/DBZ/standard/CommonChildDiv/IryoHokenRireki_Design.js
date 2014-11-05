@@ -11,88 +11,12 @@ var DBZ;
         function IryoHokenRireki_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, IryoHokenRireki_Design.myLayout, fieldName);
         }
-        Object.defineProperty(IryoHokenRireki_Design.prototype, "onSelectByModifyButton", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByModifyButton"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByModifyButton"] = value;
-                } else {
-                    this.layout.items[0].items[0]["onSelectByModifyButton"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(IryoHokenRireki_Design.prototype, "onSelectByDeleteButton", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByDeleteButton"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByDeleteButton"] = value;
-                } else {
-                    this.layout.items[0].items[0]["onSelectByDeleteButton"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(IryoHokenRireki_Design.prototype, "panel_width", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["width"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["width"] = value;
-                } else {
-                    this.layout.items[0]["width"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(IryoHokenRireki_Design.prototype, "grid_width", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"] = value;
-                } else {
-                    this.layout.items[0].items[0]["width"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
         IryoHokenRireki_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
-            Uz.JSControlUtil.registProperty("onSelectByModifyButton");
-            Uz.JSControlUtil.registProperty("onSelectByDeleteButton");
-            Uz.JSControlUtil.registProperty("panel_width");
-            Uz.JSControlUtil.registProperty("grid_width");
         };
 
         IryoHokenRireki_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
-            editablePropertyInfo["onSelectByModifyButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onSelectByModifyButton"];
-            editablePropertyInfo["onSelectByDeleteButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onSelectByDeleteButton"];
-            editablePropertyInfo["panel_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["width"];
-            editablePropertyInfo["grid_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["width"];
 
             return editablePropertyInfo;
         };
@@ -103,10 +27,41 @@ var DBZ;
                     "fieldName": "IryoHokenRireki",
                     "items": [
                         {
+                            "fieldName": "btnAddIryoHoken",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnAddIryoHoken",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "onClick": "onClick_btnAddIryoHoken",
+                            "text": "追加する",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": true
+                        },
+                        {
                             "fieldName": "dgIryoHokenRireki",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "1010",
+                            "width": "980px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -117,8 +72,8 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
                             "selectControlID": "dgIryoHokenRireki",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -131,18 +86,33 @@ var DBZ;
                                 "isShowFooter": true,
                                 "isShowFilter": false,
                                 "isShowFilterButton": false,
-                                "isShowRowState": true,
+                                "isShowRowState": false,
                                 "isShowSelectButtonColumn": false,
                                 "isShowModifyButtonColumn": true,
                                 "isShowDeleteButtonColumn": true,
                                 "limitRowCount": 0,
                                 "selectedRowCount": 0,
+                                "selectLimitRowCount": 0,
                                 "header": {
                                     "combineColumns": [],
                                     "frozenColumn": "",
                                     "headerHeight": 0
                                 },
                                 "columns": [
+                                    {
+                                        "columnName": "状態",
+                                        "dataName": "state",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 50,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "state"
+                                    },
                                     {
                                         "columnName": "加入日",
                                         "dataName": "kanyuDate",
@@ -274,8 +244,8 @@ var DBZ;
                                 ]
                             },
                             "onSort": "",
-                            "onSelect": "",
-                            "onSelectByDblClick": "",
+                            "onSelect": "onSelect_dgIryoHokenRireki",
+                            "onSelectByDblClick": "onSelectByDbClick_dgIryoHokenRireki",
                             "onSelectBySelectButton": "",
                             "onSelectByModifyButton": "onSelectByModifyButton_dgIryoHokenRireki",
                             "onSelectByDeleteButton": "onSelectByDeleteButton_dgIryoHokenRireki",
@@ -288,14 +258,15 @@ var DBZ;
                             "onNoRow": "",
                             "onMultiRows": "",
                             "dataSource": [],
-                            "sortOrder": "kigoNo",
+                            "sortOrder": "hokensha",
                             "isAscending": true,
                             "filterList": [],
-                            "activeRowId": -1
+                            "activeRowId": -1,
+                            "gridAction": []
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "1015",
+                    "width": "1015px",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -343,7 +314,8 @@ var DBZ;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "Auto",
+                    "canPost": true
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -358,38 +330,18 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": "0",
-            "marginRight": "0",
+            "marginLeft": "0em",
+            "marginRight": "0em",
             "selectControlID": "defaultLayout",
             "helpMessageID": "",
             "jpControlName": "",
             "relation": [],
+            "packageName": "",
             "businessId": "DBZ",
             "controlName": "IryoHokenRireki",
-            "marginTop": 0,
-            "marginBottom": 0,
-            "originalProperty": [
-                {
-                    "publicChildFieldName": "dgIryoHokenRireki",
-                    "publicChildProperty": "onSelectByModifyButton",
-                    "newPropertyName": "onSelectByModifyButton"
-                },
-                {
-                    "publicChildFieldName": "dgIryoHokenRireki",
-                    "publicChildProperty": "onSelectByDeleteButton",
-                    "newPropertyName": "onSelectByDeleteButton"
-                },
-                {
-                    "publicChildFieldName": "IryoHokenRireki",
-                    "publicChildProperty": "width",
-                    "newPropertyName": "panel_width"
-                },
-                {
-                    "publicChildFieldName": "dgIryoHokenRireki",
-                    "publicChildProperty": "width",
-                    "newPropertyName": "grid_width"
-                }
-            ],
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [],
             "dataPassingForDialog": [
                 {
                     "key": "",
@@ -407,9 +359,90 @@ var DBZ;
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "M"
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [
+                {
+                    "eventName": "onSelectByModifyButton_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onSelectByDeleteButton_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onSelect_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onSelectByDbClick_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onClick_btnAddIryoHoken"
+                }
+            ],
+            "publicEventsAlias": []
         };
         return IryoHokenRireki_Design;
     })(Uz.CommonChildDiv);
     DBZ.IryoHokenRireki_Design = IryoHokenRireki_Design;
+
+    (function (IryoHokenRireki) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnAddIryoHoken = function () {
+                return "onClick_btnAddIryoHoken";
+            };
+
+            Events.onSelect_dgIryoHokenRireki = function () {
+                return "onSelect_dgIryoHokenRireki";
+            };
+
+            Events.onSelectByDbClick_dgIryoHokenRireki = function () {
+                return "onSelectByDbClick_dgIryoHokenRireki";
+            };
+
+            Events.onSelectByModifyButton_dgIryoHokenRireki = function () {
+                return "onSelectByModifyButton_dgIryoHokenRireki";
+            };
+
+            Events.onSelectByDeleteButton_dgIryoHokenRireki = function () {
+                return "onSelectByDeleteButton_dgIryoHokenRireki";
+            };
+            return Events;
+        })();
+        IryoHokenRireki.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "IryoHokenRireki";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.IryoHokenRireki = function () {
+                return new UZA.Panel(this.convFiledName("IryoHokenRireki"));
+            };
+
+            Controls.prototype.btnAddIryoHoken = function () {
+                return new UZA.Button(this.convFiledName("btnAddIryoHoken"));
+            };
+
+            Controls.prototype.dgIryoHokenRireki = function () {
+                return new UZA.DataGrid(this.convFiledName("dgIryoHokenRireki"));
+            };
+            return Controls;
+        })();
+        IryoHokenRireki.Controls = Controls;
+    })(DBZ.IryoHokenRireki || (DBZ.IryoHokenRireki = {}));
+    var IryoHokenRireki = DBZ.IryoHokenRireki;
 })(DBZ || (DBZ = {}));

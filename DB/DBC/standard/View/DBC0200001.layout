@@ -25,7 +25,8 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "542",
+     "height": "580",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -125,11 +126,11 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
-     "activeRowId": -1
+     "activeRowId": -1,
+     "gridAction": []
     }
    ],
    "controlType": "Panel",
@@ -150,7 +151,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "受給異動情報履歴訂正一覧",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -176,7 +177,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": null,
@@ -197,7 +199,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "保険者情報送付",
+ "title": "受給異動情報履歴訂正一覧",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [

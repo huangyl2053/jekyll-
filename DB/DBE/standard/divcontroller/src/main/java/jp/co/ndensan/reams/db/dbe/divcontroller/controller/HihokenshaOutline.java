@@ -24,9 +24,9 @@ public class HihokenshaOutline {
     public ResponseData<HihokenshaOutlineDiv> onStart(HihokenshaOutlineDiv div) {
         dgSearchResult_Row hihokensha = clickedItem();
         div.getShikakuKihon().getTxtHihokenshaNo().setValue(hihokensha.getHihokenshaNo());
-        div.getAtenaInfo().getAtenaInfo().getTxtShikibetsuCode().setValue(hihokensha.getShikibetsuCode());
-        div.getAtenaInfo().getAtenaInfo().getTxtAtenaKanaMeisho().setValue(hihokensha.getKanaShimsei());
-        div.getAtenaInfo().getAtenaInfo().getTxtAtenaMeisho().setValue(hihokensha.getShimei());
+//        div.getAtenaInfo().getAtenaInfo().getTxtShikibetsuCode().setValue(hihokensha.getShikibetsuCode());
+//        div.getAtenaInfo().getAtenaInfo().getTxtAtenaKanaMeisho().setValue(hihokensha.getKanaShimsei());
+//        div.getAtenaInfo().getAtenaInfo().getTxtAtenaMeisho().setValue(hihokensha.getShimei());
         return _createResponseData(div);
     }
 

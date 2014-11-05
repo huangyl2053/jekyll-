@@ -93,10 +93,10 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanel {
     }
 
     private void set申請者情報(ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv panel) {
-        AtenaShokaiSimpleDiv atenaDiv = panel.getTaishoshaAtena().getAtenaInfo();
+//        AtenaShokaiSimpleDiv atenaDiv = panel.getTaishoshaAtena().getAtenaInfo();
         ShogaishaKojoShinseishaDiv shinseishaDiv = panel.getShogaishaKojoNinteishoHakko().getShogaishaKojoNinteisho().getShogaishaKojoShinseisha();
-        shinseishaDiv.getTxtShinseishaName().setValue(atenaDiv.getTxtAtenaMeisho().getValue());
-        shinseishaDiv.getTxtShinseishaJusho().setValue(atenaDiv.getTxtJusho().getValue());
+//        shinseishaDiv.getTxtShinseishaName().setValue(atenaDiv.getTxtAtenaMeisho().getValue());
+//        shinseishaDiv.getTxtShinseishaJusho().setValue(atenaDiv.getTxtJusho().getValue());
     }
 
     private void clear申請者情報(ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv panel) {

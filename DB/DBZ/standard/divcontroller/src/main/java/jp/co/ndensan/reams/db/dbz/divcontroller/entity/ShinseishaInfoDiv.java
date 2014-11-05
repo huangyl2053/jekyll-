@@ -27,10 +27,14 @@ public class ShinseishaInfoDiv extends Panel {
     private DropDownList ddlShinseishaKubun;
     @JsonProperty("txtUketsukeDate")
     private TextBoxDate txtUketsukeDate;
+    @JsonProperty("txtShinseiRiyu")
+    private TextBoxMultiLine txtShinseiRiyu;
     @JsonProperty("txtJigyoshaNo")
     private TextBoxCode txtJigyoshaNo;
     @JsonProperty("btnJigyoshaInputGuide")
     private ButtonDialog btnJigyoshaInputGuide;
+    @JsonProperty("btnHonninJohoCopy")
+    private Button btnHonninJohoCopy;
     @JsonProperty("ddlHokensha")
     private DropDownList ddlHokensha;
     @JsonProperty("txtShinseishaNameKana")
@@ -80,6 +84,16 @@ public class ShinseishaInfoDiv extends Panel {
         this.txtUketsukeDate=txtUketsukeDate;
     }
 
+    @JsonProperty("txtShinseiRiyu")
+    public TextBoxMultiLine getTxtShinseiRiyu() {
+        return txtShinseiRiyu;
+    }
+
+    @JsonProperty("txtShinseiRiyu")
+    public void setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
+        this.txtShinseiRiyu=txtShinseiRiyu;
+    }
+
     @JsonProperty("txtJigyoshaNo")
     public TextBoxCode getTxtJigyoshaNo() {
         return txtJigyoshaNo;
@@ -98,6 +112,16 @@ public class ShinseishaInfoDiv extends Panel {
     @JsonProperty("btnJigyoshaInputGuide")
     public void setBtnJigyoshaInputGuide(ButtonDialog btnJigyoshaInputGuide) {
         this.btnJigyoshaInputGuide=btnJigyoshaInputGuide;
+    }
+
+    @JsonProperty("btnHonninJohoCopy")
+    public Button getBtnHonninJohoCopy() {
+        return btnHonninJohoCopy;
+    }
+
+    @JsonProperty("btnHonninJohoCopy")
+    public void setBtnHonninJohoCopy(Button btnHonninJohoCopy) {
+        this.btnHonninJohoCopy=btnHonninJohoCopy;
     }
 
     @JsonProperty("ddlHokensha")
