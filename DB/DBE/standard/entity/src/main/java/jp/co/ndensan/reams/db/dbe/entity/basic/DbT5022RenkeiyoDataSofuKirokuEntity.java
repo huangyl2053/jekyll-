@@ -9,7 +9,7 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * DbT5022RenkeiyoDataSofuKirokuの項目定義クラスです

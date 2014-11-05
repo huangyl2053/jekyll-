@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.Iterator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
