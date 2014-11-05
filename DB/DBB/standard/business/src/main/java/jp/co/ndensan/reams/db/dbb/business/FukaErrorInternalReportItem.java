@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportItem;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;

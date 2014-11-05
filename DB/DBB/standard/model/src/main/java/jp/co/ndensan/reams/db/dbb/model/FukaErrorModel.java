@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.model;
 
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.model.IInternalReportCommonModel;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItemList;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
 import jp.co.ndensan.reams.db.dbb.persistence.basic.FukaErrorListDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCommon;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
