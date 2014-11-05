@@ -48,7 +48,7 @@ public class YokaigoNinteiShinseiMock {
                 new YMDHMS(new RString("20140808102030")),
                 new ShoKisaiHokenshaNo(new RString("000000")),
                 new ShishoCode(new RString("0")),
-                KaigoHihokenshaNo.NULL_VALUE,
+                KaigoHihokenshaNo.EMPTY,
                 new ShikibetsuCode("0"),
                 FlexibleDate.EMPTY,
                 new EdabanCode("000"),

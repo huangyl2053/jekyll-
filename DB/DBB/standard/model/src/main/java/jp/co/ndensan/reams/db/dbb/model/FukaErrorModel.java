@@ -39,7 +39,7 @@ public class FukaErrorModel implements IInternalReportCommonModel {
         entity.setBatchId(RString.EMPTY);
         entity.setBatchStartingDateTime(RDateTime.MIN);
         entity.setErrorCode(Code.EMPTY);
-        entity.setHihokenshaNo(KaigoHihokenshaNo.NULL_VALUE);
+        entity.setHihokenshaNo(KaigoHihokenshaNo.EMPTY);
         entity.setShikibetsuCode(ShikibetsuCode.EMPTY);
         entity.setShoriKubunCode(InternalReportShoriKubun.処理無し.getCode());
     }

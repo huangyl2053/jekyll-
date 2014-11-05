@@ -200,7 +200,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         private final HihokenshaKubun hihokenshaKubun;
         private final FlexibleDate ichigoGaitoDate;
         private IKaigoShikaku kaigoShikaku;
-        private KaigoHihokenshaNo theHihokenshaNo = KaigoHihokenshaNo.NULL_VALUE;
+        private KaigoHihokenshaNo theHihokenshaNo = KaigoHihokenshaNo.EMPTY;
         private ShikakuShutoku shutoku = ShikakuShutoku.NOTHING;
         private ShikakuSoshitsu soshitsu = ShikakuSoshitsu.NONE;
         private ShikakuHenko henko = ShikakuHenko.NOTHING;

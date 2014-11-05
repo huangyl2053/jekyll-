@@ -1,35 +1,71 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.is;
 
 /**
- * 介護被保険者番号のテストです。
+ * KaigoHihokenshaNoのテストです。
  *
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
 public class KaigoHihokenshaNoTest extends DbzTestBase {
 
-    public static class Constructor extends DbzTestBase {
+    public KaigoHihokenshaNoTest() {
+    }
 
-        @Test(expected = NullPointerException.class)
-        public void コンストラクタは_引数がnullのとき_NullPointerExceptionをスローする() {
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo((RString) null);
+    public static class valueAndGetColumnValue_createFromRString extends DbzTestBase {
+
+        private KaigoHihokenshaNo sut;
+        private RString value;
+
+        @Before
+        public void setUp() {
+            value = new RString("12");
+            sut = new KaigoHihokenshaNo(value);
         }
 
-        @Test(expected = IllegalArgumentException.class)
-        public void コンストラクタは_引数が10桁でないとき_IllegalArgumentExceptionをスローする() {
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString(""));
+        @Test
+        public void RStringから生成したとき_valueは_コンストラクタ引数と_同じ値を返す() {
+            assertThat(sut.value(), is(value));
+        }
+
+        @Test
+        public void RStringから生成したとき_getColumnValueは_コンストラクタ引数と_同じ値を返す() {
+            assertThat(sut.getColumnValue(), is(value));
+        }
+    }
+
+    public static class valueAndGetColumnValue_createFromString extends DbzTestBase {
+
+        private KaigoHihokenshaNo sut;
+        private String value;
+
+        @Before
+        public void setUp() {
+            value = "12";
+            sut = new KaigoHihokenshaNo(value);
+        }
+
+        @Test
+        public void Stringから生成したとき_valueは_コンストラクタ引数をRStringへ変換したものと_同じ値を返す() {
+            assertThat(sut.value(), is(new RString(value)));
+        }
+
+        @Test
+        public void Stringから生成したとき_getColumnValueは_コンストラクタ引数をRStringへ変換したものと_同じ値を返す() {
+            assertThat(sut.getColumnValue(), is(new RString(value)));
         }
     }
 
@@ -37,37 +73,31 @@ public class KaigoHihokenshaNoTest extends DbzTestBase {
 
         @Test
         public void compareToは_自身と値が同じものを比較したときは_0を返す() {
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("0000000000"));
-            KaigoHihokenshaNo target = new KaigoHihokenshaNo(new RString("0000000000"));
-            assertThat(sut.compareTo(target), is(0));
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo("0");
+            KaigoHihokenshaNo other = new KaigoHihokenshaNo("0");
+            assertThat(sut.compareTo(other), is(0));
+        }
+
+        @Test
+        public void compareToは_equalsがtrueを返すオブジェクトと比較したとき_0を返す() {
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo("0");
+            KaigoHihokenshaNo other = new KaigoHihokenshaNo("0");
+            assertThat(sut.equals(other), is(true));
+            assertThat(sut.compareTo(other), is(0));
         }
 
         @Test
         public void compareToは_自身より値が小さいものと比較したときは_0より大きい値を返す() {
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("1000000000"));
-            KaigoHihokenshaNo target = new KaigoHihokenshaNo(new RString("0000000001"));
-            assertThat((0 < sut.compareTo(target)), is(true));
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("1"));
+            KaigoHihokenshaNo other = new KaigoHihokenshaNo(new RString("0"));
+            assertThat((0 < sut.compareTo(other)), is(true));
         }
 
         @Test
         public void compareToは_自身より値が大きいものと比較したときは_0より小さい値を返す() {
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("0000000001"));
-            KaigoHihokenshaNo target = new KaigoHihokenshaNo(new RString("1000000000"));
-            assertThat((sut.compareTo(target) < 0), is(true));
-        }
-
-        @Test
-        public void compareToは_H始まりでない自身とH始まりの物を比較したとき_0より小さい値を返す() {
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("1000000000"));
-            KaigoHihokenshaNo target = new KaigoHihokenshaNo(new RString("H000000001"));
-            assertThat((sut.compareTo(target) < 0), is(true));
-        }
-
-        @Test
-        public void compareToは_H始まりの自身とH始まりの値が小さい物を比較したとき_0より大きい値を返す() {
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("H100000000"));
-            KaigoHihokenshaNo target = new KaigoHihokenshaNo(new RString("H000000001"));
-            assertThat((0 < sut.compareTo(target)), is(true));
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo("0");
+            KaigoHihokenshaNo other = new KaigoHihokenshaNo("1");
+            assertThat((sut.compareTo(other) < 0), is(true));
         }
     }
 
@@ -75,46 +105,81 @@ public class KaigoHihokenshaNoTest extends DbzTestBase {
 
         @Test
         public void equalsは_比較対象がnullなら_falseを返す() {
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("0000000001"));
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo("0");
             assertThat(sut.equals((KaigoHihokenshaNo) null), is(false));
         }
 
         @Test
         public void equalsは_比較対象がKaigoHihokenshaNoのインスタンスでないなら_falseを返す() {
-            RString target = new RString("0000000001");
+            RString target = new RString("0");
             KaigoHihokenshaNo sut = new KaigoHihokenshaNo(target);
             assertThat(sut.equals(target), is(false));
         }
 
         @Test
-        public void equalsは_同一の値で生成されたインスタンス同士では_trueを返す() {
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("0000000001"));
-            KaigoHihokenshaNo target = new KaigoHihokenshaNo(new RString("0000000001"));
-            assertThat(sut.equals(target), is(true));
+        public void equalsは_同じ文字列から生成されたインスタンス同士では_trueを返す() {
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo("0");
+            KaigoHihokenshaNo other = new KaigoHihokenshaNo("0");
+            assertThat(sut.equals(other), is(true));
         }
 
         @Test
-        public void equalsは_異なった値で生成されたインスタンス同士では_falseを返す() {
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("1000000000"));
-            KaigoHihokenshaNo target = new KaigoHihokenshaNo(new RString("H000000001"));
-            assertThat(sut.equals(target), is(false));
+        public void equalsは_同じ文字列を持ったRStringから生成されたインスタンス同士では_trueを返す() {
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("0"));
+            KaigoHihokenshaNo other = new KaigoHihokenshaNo(new RString("0"));
+            assertThat(sut.equals(other), is(true));
+        }
+
+        @Test
+        public void equalsは_ある文字列と_それと同じ文字列を持ったRStringから生成されたインスタンス同士では_trueを返す() {
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo("0");
+            KaigoHihokenshaNo other = new KaigoHihokenshaNo(new RString("0"));
+            assertThat(sut.equals(other), is(true));
+        }
+
+        @Test
+        public void equalsは_異なる文字列から生成されたインスタンス同士では_falseを返す() {
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo("1");
+            KaigoHihokenshaNo other = new KaigoHihokenshaNo("0");
+            assertThat(sut.equals(other), is(false));
+        }
+
+        @Test
+        public void equalsは_異なる文字列を持ったRStringから生成されたインスタンス同士では_falseを返す() {
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("1"));
+            KaigoHihokenshaNo other = new KaigoHihokenshaNo(new RString("0"));
+            assertThat(sut.equals(other), is(false));
+        }
+
+        @Test
+        public void equalsは_ある文字列と_それと異なる文字列を持ったRStringから生成されたインスタンス同士では_falseを返す() {
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo("0");
+            KaigoHihokenshaNo other = new KaigoHihokenshaNo(new RString("1"));
+            assertThat(sut.equals(other), is(false));
         }
     }
 
     public static class HashCode extends DbzTestBase {
 
         @Test
-        public void hashCodeは_同一の値で生成されたインスタンス同士は_同じ値を返す() {
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("0000000001"));
-            KaigoHihokenshaNo target = new KaigoHihokenshaNo(new RString("0000000001"));
-            assertThat((sut.hashCode() == target.hashCode()), is(true));
+        public void hashCodeは_同じ文字列から生成されたインスタンスは_同じ値を返す() {
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo("12");
+            KaigoHihokenshaNo other = new KaigoHihokenshaNo("12");
+            assertThat(sut.hashCode(), is(other.hashCode()));
         }
 
         @Test
-        public void hashCodeは_異なった値で生成されたインスタンス同士は_違う値を返す() {
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("1000000000"));
-            KaigoHihokenshaNo target = new KaigoHihokenshaNo(new RString("H000000001"));
-            assertThat((sut.hashCode() == target.hashCode()), is(false));
+        public void hashCodeは_同じ文字列を持ったRStringから生成されたインスタンスは_同じ値を返す() {
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("12"));
+            KaigoHihokenshaNo other = new KaigoHihokenshaNo(new RString("12"));
+            assertThat(sut.hashCode(), is(other.hashCode()));
+        }
+
+        @Test
+        public void hashCodeは_ある文字列と_それと同じ文字列を持ったRStringから生成されたインスタンスは_同じ値を返す() {
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo("12");
+            KaigoHihokenshaNo other = new KaigoHihokenshaNo(new RString("12"));
+            assertThat(sut.hashCode(), is(other.hashCode()));
         }
     }
 }

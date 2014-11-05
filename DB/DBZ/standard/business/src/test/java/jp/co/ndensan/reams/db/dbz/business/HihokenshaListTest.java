@@ -107,7 +107,7 @@ public class HihokenshaListTest extends DbzTestBase {
 
         @Test(expected = IllegalArgumentException.class)
         public void KaigoHihokenshaNo指定の_getHihokenshaは_該当のHihokenshaが見つからないとき_IllegalArgumentExceptionをスローする() {
-            Hihokensha result = sut.getHihokensha(KaigoHihokenshaNo.NULL_VALUE);
+            Hihokensha result = sut.getHihokensha(KaigoHihokenshaNo.EMPTY);
         }
 
         @Test
