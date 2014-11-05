@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaOutl
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShinseiJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShishoCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
@@ -113,7 +113,7 @@ public class YokaigoNinteiShinseiDivMapper {
 
                     @Override
                     ShishoCode extractValue(YokaigoNinteiShinseiDiv div) {
-                        return ShishoCode.NULL_VALUE;
+                        return ShishoCode.EMPTY;
                     }
                 },
         被保番号 {
