@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -81,6 +82,6 @@ public class JigyoshaNo implements IValueObject, IDbColumnMappable, Comparable<J
 
     @Override
     public int compareTo(JigyoshaNo 比較対象) {
-        return value().compareTo(比較対象.value());
+        return Objects.compare(this.事業者番号, 比較対象.事業者番号, Comparators.NaturalOrderComparator.ASC.getInstance());
     }
 }
