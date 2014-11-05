@@ -15,25 +15,25 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * HihokenshaNoのテストです。
+ * HokenshaNoのテストです。
  *
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class HihokenshaNoTest {
+public class HokenshaNoTest {
 
-    public HihokenshaNoTest() {
+    public HokenshaNoTest() {
     }
 
     public static class valueAndGetColumnValue_createFromRString extends DbzTestBase {
 
-        private HihokenshaNo sut;
+        private HokenshaNo sut;
         private RString value;
 
         @Before
         public void setUp() {
             value = new RString("12");
-            sut = new HihokenshaNo(value);
+            sut = new HokenshaNo(value);
         }
 
         @Test
@@ -49,13 +49,13 @@ public class HihokenshaNoTest {
 
     public static class valueAndGetColumnValue_createFromString extends DbzTestBase {
 
-        private HihokenshaNo sut;
+        private HokenshaNo sut;
         private String value;
 
         @Before
         public void setUp() {
             value = "12";
-            sut = new HihokenshaNo(value);
+            sut = new HokenshaNo(value);
         }
 
         @Test
@@ -73,30 +73,30 @@ public class HihokenshaNoTest {
 
         @Test
         public void compareToは_自身と値が同じものを比較したときは_0を返す() {
-            HihokenshaNo sut = new HihokenshaNo("0");
-            HihokenshaNo other = new HihokenshaNo("0");
+            HokenshaNo sut = new HokenshaNo("0");
+            HokenshaNo other = new HokenshaNo("0");
             assertThat(sut.compareTo(other), is(0));
         }
 
         @Test
         public void compareToは_equalsがtrueを返すオブジェクトと比較したとき_0を返す() {
-            HihokenshaNo sut = new HihokenshaNo("0");
-            HihokenshaNo other = new HihokenshaNo("0");
+            HokenshaNo sut = new HokenshaNo("0");
+            HokenshaNo other = new HokenshaNo("0");
             assertThat(sut.equals(other), is(true));
             assertThat(sut.compareTo(other), is(0));
         }
 
         @Test
         public void compareToは_自身より値が小さいものと比較したときは_0より大きい値を返す() {
-            HihokenshaNo sut = new HihokenshaNo(new RString("1"));
-            HihokenshaNo other = new HihokenshaNo(new RString("0"));
+            HokenshaNo sut = new HokenshaNo(new RString("1"));
+            HokenshaNo other = new HokenshaNo(new RString("0"));
             assertThat((0 < sut.compareTo(other)), is(true));
         }
 
         @Test
         public void compareToは_自身より値が大きいものと比較したときは_0より小さい値を返す() {
-            HihokenshaNo sut = new HihokenshaNo("0");
-            HihokenshaNo other = new HihokenshaNo("1");
+            HokenshaNo sut = new HokenshaNo("0");
+            HokenshaNo other = new HokenshaNo("1");
             assertThat((sut.compareTo(other) < 0), is(true));
         }
     }
@@ -105,56 +105,56 @@ public class HihokenshaNoTest {
 
         @Test
         public void equalsは_比較対象がnullなら_falseを返す() {
-            HihokenshaNo sut = new HihokenshaNo("0");
-            assertThat(sut.equals((HihokenshaNo) null), is(false));
+            HokenshaNo sut = new HokenshaNo("0");
+            assertThat(sut.equals((HokenshaNo) null), is(false));
         }
 
         @Test
-        public void equalsは_比較対象がHihokenshaNoのインスタンスでないなら_falseを返す() {
+        public void equalsは_比較対象がHokenshaNoのインスタンスでないなら_falseを返す() {
             RString target = new RString("0");
-            HihokenshaNo sut = new HihokenshaNo(target);
+            HokenshaNo sut = new HokenshaNo(target);
             assertThat(sut.equals(target), is(false));
         }
 
         @Test
         public void equalsは_同じ文字列から生成されたインスタンス同士では_trueを返す() {
-            HihokenshaNo sut = new HihokenshaNo("0");
-            HihokenshaNo other = new HihokenshaNo("0");
+            HokenshaNo sut = new HokenshaNo("0");
+            HokenshaNo other = new HokenshaNo("0");
             assertThat(sut.equals(other), is(true));
         }
 
         @Test
         public void equalsは_同じ文字列を持ったRStringから生成されたインスタンス同士では_trueを返す() {
-            HihokenshaNo sut = new HihokenshaNo(new RString("0"));
-            HihokenshaNo other = new HihokenshaNo(new RString("0"));
+            HokenshaNo sut = new HokenshaNo(new RString("0"));
+            HokenshaNo other = new HokenshaNo(new RString("0"));
             assertThat(sut.equals(other), is(true));
         }
 
         @Test
         public void equalsは_ある文字列と_それと同じ文字列を持ったRStringから生成されたインスタンス同士では_trueを返す() {
-            HihokenshaNo sut = new HihokenshaNo("0");
-            HihokenshaNo other = new HihokenshaNo(new RString("0"));
+            HokenshaNo sut = new HokenshaNo("0");
+            HokenshaNo other = new HokenshaNo(new RString("0"));
             assertThat(sut.equals(other), is(true));
         }
 
         @Test
         public void equalsは_異なる文字列から生成されたインスタンス同士では_falseを返す() {
-            HihokenshaNo sut = new HihokenshaNo("1");
-            HihokenshaNo other = new HihokenshaNo("0");
+            HokenshaNo sut = new HokenshaNo("1");
+            HokenshaNo other = new HokenshaNo("0");
             assertThat(sut.equals(other), is(false));
         }
 
         @Test
         public void equalsは_異なる文字列を持ったRStringから生成されたインスタンス同士では_falseを返す() {
-            HihokenshaNo sut = new HihokenshaNo(new RString("1"));
-            HihokenshaNo other = new HihokenshaNo(new RString("0"));
+            HokenshaNo sut = new HokenshaNo(new RString("1"));
+            HokenshaNo other = new HokenshaNo(new RString("0"));
             assertThat(sut.equals(other), is(false));
         }
 
         @Test
         public void equalsは_ある文字列と_それと異なる文字列を持ったRStringから生成されたインスタンス同士では_falseを返す() {
-            HihokenshaNo sut = new HihokenshaNo("0");
-            HihokenshaNo other = new HihokenshaNo(new RString("1"));
+            HokenshaNo sut = new HokenshaNo("0");
+            HokenshaNo other = new HokenshaNo(new RString("1"));
             assertThat(sut.equals(other), is(false));
         }
     }
@@ -163,22 +163,22 @@ public class HihokenshaNoTest {
 
         @Test
         public void hashCodeは_同じ文字列から生成されたインスタンスは_同じ値を返す() {
-            HihokenshaNo sut = new HihokenshaNo("12");
-            HihokenshaNo other = new HihokenshaNo("12");
+            HokenshaNo sut = new HokenshaNo("12");
+            HokenshaNo other = new HokenshaNo("12");
             assertThat(sut.hashCode(), is(other.hashCode()));
         }
 
         @Test
         public void hashCodeは_同じ文字列を持ったRStringから生成されたインスタンスは_同じ値を返す() {
-            HihokenshaNo sut = new HihokenshaNo(new RString("12"));
-            HihokenshaNo other = new HihokenshaNo(new RString("12"));
+            HokenshaNo sut = new HokenshaNo(new RString("12"));
+            HokenshaNo other = new HokenshaNo(new RString("12"));
             assertThat(sut.hashCode(), is(other.hashCode()));
         }
 
         @Test
         public void hashCodeは_ある文字列と_それと同じ文字列を持ったRStringから生成されたインスタンスは_同じ値を返す() {
-            HihokenshaNo sut = new HihokenshaNo("12");
-            HihokenshaNo other = new HihokenshaNo(new RString("12"));
+            HokenshaNo sut = new HokenshaNo("12");
+            HokenshaNo other = new HokenshaNo(new RString("12"));
             assertThat(sut.hashCode(), is(other.hashCode()));
         }
     }
