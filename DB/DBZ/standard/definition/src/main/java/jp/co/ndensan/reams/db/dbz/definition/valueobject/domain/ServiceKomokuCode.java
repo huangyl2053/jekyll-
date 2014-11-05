@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public class ServiceKomokuCode implements IValueObject, Comparable<ServiceKomokuCode>, IDbColumnMappable, Serializable {
 
     /**
-     * 空の ServiceKomokuCode
-     * です。{@link #value() value()}で{@link RString#EMPTY}を返します。
+     * 空の ServiceKomokuCode です。
+     * {@link #value() value()}で{@link RString#EMPTY}を返します。
      */
     public static final ServiceKomokuCode EMPTY;
 

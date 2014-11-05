@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public final class ServiceShuruiCode implements IValueObject, Comparable<ServiceShuruiCode>, IDbColumnMappable, Serializable {
 
     /**
-     * 空の ServiceShuruiCode
-     * です。{@link #value() value()}で{@link RString#EMPTY}を返します。
+     * 空の ServiceShuruiCode です。
+     * {@link #value() value()}で{@link RString#EMPTY}を返します。
      */
     public static final ServiceShuruiCode EMPTY;
 

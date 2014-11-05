@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NaturalOrderComparator;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -17,7 +18,26 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class KokanShikibetsuNo implements IDbColumnMappable, IValueObject, Comparable<KokanShikibetsuNo> {
 
+    /**
+     * 空の KokanShikibetsuNo です。
+     * {@link #value() value()}で{@link RString#EMPTY}を返します。
+     */
+    public static final KokanShikibetsuNo EMPTY;
+
+    static {
+        EMPTY = new KokanShikibetsuNo(RString.EMPTY);
+    }
+
     private final RString 交換情報識別番号;
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param 交換情報識別番号 交換情報識別番号
+     */
+    public KokanShikibetsuNo(String 交換情報識別番号) {
+        this.交換情報識別番号 = (交換情報識別番号 == null) ? null : new RString(交換情報識別番号);
+    }
 
     /**
      * インスタンスを生成します。
@@ -41,7 +61,8 @@ public class KokanShikibetsuNo implements IDbColumnMappable, IValueObject, Compa
         if (!(比較対象 instanceof KokanShikibetsuNo)) {
             return false;
         }
-        return ((KokanShikibetsuNo) 比較対象).value().equals(交換情報識別番号);
+        KokanShikibetsuNo other = (KokanShikibetsuNo) 比較対象;
+        return Objects.equals(this.交換情報識別番号, other.交換情報識別番号);
     }
 
     @Override
@@ -58,6 +79,6 @@ public class KokanShikibetsuNo implements IDbColumnMappable, IValueObject, Compa
 
     @Override
     public int compareTo(KokanShikibetsuNo 比較対象) {
-        return value().compareTo(比較対象.value());
+        return Objects.compare(this.交換情報識別番号, 比較対象.交換情報識別番号, NaturalOrderComparator.ASC.getInstance());
     }
 }
