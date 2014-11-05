@@ -32,7 +32,7 @@ public final class ServiceCode implements IValueObject, Comparable<ServiceCode>,
     /**
      * 指定した値からサービスコードを生成します。
      *
-     * @param code サービスコード
+     * @param code サービスコード サービスコード
      */
     public ServiceCode(String code) {
         this.code = (code == null) ? null : new RString(code);

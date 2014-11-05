@@ -34,7 +34,7 @@ public final class ServiceShuruiCode implements IValueObject, Comparable<Service
     /**
      * インスタンスを生成します。
      *
-     * @param サービス種類コード
+     * @param サービス種類コード サービス種類コード
      */
     public ServiceShuruiCode(String サービス種類コード) {
         this.code = (サービス種類コード == null) ? null : new RString(サービス種類コード);
