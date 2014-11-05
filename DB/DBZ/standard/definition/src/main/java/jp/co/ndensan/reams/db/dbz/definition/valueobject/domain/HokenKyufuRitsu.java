@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NaturalOrderComparator;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -15,7 +17,17 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author n8223 朴 義一
  */
-public class HokenKyufuRitsu implements IValueObject, IDbColumnMappable, Comparable<HokenKyufuRitsu> {
+public final class HokenKyufuRitsu implements IValueObject<Decimal>, Comparable<HokenKyufuRitsu>, IDbColumnMappable, Serializable {
+
+    /**
+     * {@link IValueObject#value() value()}で{@link Decimal#ZERO Decimal.ZERO}を返す
+     * HokenKyufuRitsu です。
+     */
+    public static final HokenKyufuRitsu ZERO;
+
+    static {
+        ZERO = new HokenKyufuRitsu(Decimal.ZERO);
+    }
 
     private final Decimal 給付率;
 
@@ -41,7 +53,8 @@ public class HokenKyufuRitsu implements IValueObject, IDbColumnMappable, Compara
         if (!(比較対象 instanceof HokenKyufuRitsu)) {
             return false;
         }
-        return ((HokenKyufuRitsu) 比較対象).value().equals(給付率);
+        HokenKyufuRitsu other = (HokenKyufuRitsu) 比較対象;
+        return Objects.equals(this.給付率, other.給付率);
     }
 
     @Override
@@ -58,6 +71,6 @@ public class HokenKyufuRitsu implements IValueObject, IDbColumnMappable, Compara
 
     @Override
     public int compareTo(HokenKyufuRitsu 比較対象) {
-        return value().compareTo(比較対象.value());
+        return Objects.compare(this.給付率, 比較対象.給付率, NaturalOrderComparator.ASC.getInstance());
     }
 }
