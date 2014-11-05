@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author N3317 塚田 萌
  */
-public class JigyoshaNo implements IValueObject, IDbColumnMappable, Comparable<JigyoshaNo>, Serializable {
+public final class JigyoshaNo implements IValueObject, IDbColumnMappable, Comparable<JigyoshaNo>, Serializable {
 
     /**
      * 空の JigyoshaNo です。{@link #value() value()}で{@link RString#EMPTY}を返します。
