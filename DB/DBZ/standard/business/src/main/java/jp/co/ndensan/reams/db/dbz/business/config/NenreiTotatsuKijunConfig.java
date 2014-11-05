@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.config;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijunJoho;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
  */
 public class NenreiTotatsuKijunConfig {
 
-    private final Map<ConfigKeysNenreiTotatsuKijun, Integer> configs;
+    private final Map<ConfigKeysNenreiTotatsuKijunJoho, Integer> configs;
 
     /**
      * コンストラクタです。
@@ -38,17 +38,18 @@ public class NenreiTotatsuKijunConfig {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysNenreiTotatsuKijun, Integer> createMap(IUrBusinessConfig businessConfig) {
-        Map<ConfigKeysNenreiTotatsuKijun, Integer> map = new EnumMap<>(ConfigKeysNenreiTotatsuKijun.class);
+    private Map<ConfigKeysNenreiTotatsuKijunJoho, Integer> createMap(IUrBusinessConfig businessConfig) {
+        Map<ConfigKeysNenreiTotatsuKijunJoho, Integer> map = new EnumMap<>(ConfigKeysNenreiTotatsuKijunJoho.class);
         RDate nowDate = RDate.getNowDate();
-        for (ConfigKeysNenreiTotatsuKijun target : ConfigKeysNenreiTotatsuKijun.values()) {
+        for (ConfigKeysNenreiTotatsuKijunJoho target : ConfigKeysNenreiTotatsuKijunJoho.values()) {
             Integer value = new Integer(businessConfig.get(target, nowDate).toString());
             map.put(target, value);
         }
         return Collections.unmodifiableMap(map);
     }
 
-    public int get(ConfigKeysNenreiTotatsuKijun key) {
+    public int get(ConfigKeysNenreiTotatsuKijunJoho key) {
         return configs.get(key);
     }
+
 }

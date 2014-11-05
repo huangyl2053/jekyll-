@@ -66,8 +66,8 @@ public class NenreiTotatsuValidetor implements IValidatable {
         //      それ以外の場合
         //          ConfigKeysNenreiTotatsuKijun.年齢到達基準_40歳を指定して取得する。
         //
-        //2, 取得した年齢到達の基準を元に、以下の判定を行う。
-        //      (資格取得日 - 生年月日) < 年齢到達の基準 : 条件を満たす場合メッセージを返す。
+        //2, 取得した年齢到達の基準を元に判定を行う。
+        //   NenreiTotatsuCheckerを使用して判定を行い、条件を満たす場合メッセージを返す。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

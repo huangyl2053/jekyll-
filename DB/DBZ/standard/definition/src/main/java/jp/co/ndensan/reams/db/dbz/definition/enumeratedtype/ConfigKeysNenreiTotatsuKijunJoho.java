@@ -10,14 +10,14 @@ package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
  *
  * @author n8178 城間篤人
  */
-public enum ConfigKeysNenreiTotatsuKijun {
+public enum ConfigKeysNenreiTotatsuKijunJoho {
 
     /**
      * 介護保険法における、第１号被保険者となる到達基準年齢
      */
-    介護保険法情報_第１号被保険者到達基準年齢,
+    年齢到達基準_第１号被保険者到達基準年齢,
     /**
      * 介護保険法における、第２号被保険者となる到達基準年齢
      */
-    介護保険法情報_第２号被保険者到達基準年齢;
+    年齢到達基準_第２号被保険者到達基準年齢;
 }

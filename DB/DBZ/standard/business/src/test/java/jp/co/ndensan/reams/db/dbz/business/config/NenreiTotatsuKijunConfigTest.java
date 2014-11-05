@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijunJoho;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -18,7 +18,6 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.any;
 
 /**
  * {@link NenreiTotatsuKijunConfigTest}のテストです。
@@ -39,13 +38,13 @@ public class NenreiTotatsuKijunConfigTest {
 
         @Test
         public void 年齢到達基準_65歳を指定したとき_65が返る() {
-            int result = sut.get(ConfigKeysNenreiTotatsuKijun.介護保険法情報_第１号被保険者到達基準年齢);
+            int result = sut.get(ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢);
             assertThat(result, is(65));
         }
 
         @Test
         public void 年齢到達基準_40歳を指定したとき_40が返る() {
-            int result = sut.get(ConfigKeysNenreiTotatsuKijun.介護保険法情報_第２号被保険者到達基準年齢);
+            int result = sut.get(ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第２号被保険者到達基準年齢);
             assertThat(result, is(40));
         }
     }
@@ -55,11 +54,11 @@ public class NenreiTotatsuKijunConfigTest {
         RDate nowDate = RDate.getNowDate();
 
         when(mock.get(
-                ConfigKeysNenreiTotatsuKijun.介護保険法情報_第１号被保険者到達基準年齢,
+                ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢,
                 nowDate
         )).thenReturn(new RString("65"));
         when(mock.get(
-                ConfigKeysNenreiTotatsuKijun.介護保険法情報_第２号被保険者到達基準年齢,
+                ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第２号被保険者到達基準年齢,
                 nowDate
         )).thenReturn(new RString("40"));
         return mock;
