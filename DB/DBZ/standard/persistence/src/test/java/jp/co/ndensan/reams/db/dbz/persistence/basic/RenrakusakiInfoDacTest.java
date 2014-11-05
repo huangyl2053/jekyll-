@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5050RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.RenrakusakiJohoEntityMock;
@@ -62,9 +62,9 @@ public class RenrakusakiInfoDacTest extends DbzTestDacBase {
 
         private static final ShoKisaiHokenshaNo 保険者番号 = new ShoKisaiHokenshaNo(
                 new RString("123456"));
-        private static final KaigoHihokenshaNo 被保番号 = new KaigoHihokenshaNo(
+        private static final HihokenshaNo 被保番号 = new HihokenshaNo(
                 new RString("1111111111"));
-        private static final KaigoHihokenshaNo notFount被保番号 = new KaigoHihokenshaNo(
+        private static final HihokenshaNo notFount被保番号 = new HihokenshaNo(
                 new RString("9999999999"));
 
         @Test
@@ -107,9 +107,9 @@ public class RenrakusakiInfoDacTest extends DbzTestDacBase {
 
         private static final ShoKisaiHokenshaNo 保険者番号 = new ShoKisaiHokenshaNo(
                 new RString("123456"));
-        private static final KaigoHihokenshaNo 被保番号 = new KaigoHihokenshaNo(
+        private static final HihokenshaNo 被保番号 = new HihokenshaNo(
                 new RString("1111111111"));
-        private static final KaigoHihokenshaNo notFount被保番号 = new KaigoHihokenshaNo(
+        private static final HihokenshaNo notFount被保番号 = new HihokenshaNo(
                 new RString("9999999999"));
 
         @Before
@@ -154,12 +154,12 @@ public class RenrakusakiInfoDacTest extends DbzTestDacBase {
 
         private static final ShoKisaiHokenshaNo 保険者番号 = new ShoKisaiHokenshaNo(
                 new RString("123456"));
-        private static final KaigoHihokenshaNo 被保番号 = new KaigoHihokenshaNo(
+        private static final HihokenshaNo 被保番号 = new HihokenshaNo(
                 new RString("1234567890"));
 
         private static final ShoKisaiHokenshaNo 保険者番号2 = new ShoKisaiHokenshaNo(
                 new RString("987654"));
-        private static final KaigoHihokenshaNo 被保番号2 = new KaigoHihokenshaNo(
+        private static final HihokenshaNo 被保番号2 = new HihokenshaNo(
                 new RString("9876543210"));
 
         @Before
@@ -176,7 +176,7 @@ public class RenrakusakiInfoDacTest extends DbzTestDacBase {
 
         @Test
         public void 指定する被保険者番号に対応するデータがない時_select保険者番号_被保番号は_空のリストを返す() {
-            KaigoHihokenshaNo notFound被保番号 = new KaigoHihokenshaNo(new RString("1111111110"));
+            HihokenshaNo notFound被保番号 = new HihokenshaNo(new RString("1111111110"));
             List<DbT5050RenrakusakiJohoEntity> result = sut.select(保険者番号, notFound被保番号);
             assertThat(result, is(Collections.EMPTY_LIST));
         }

@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
@@ -32,7 +32,7 @@ public class ShujiiIkenshoIraiTaishoshaTest extends TestBase {
         private YokaigoNinteiProgress 認定進捗情報;
         private ShinseishoKanriNo 申請書管理番号;
         private ShoKisaiHokenshaNo 証記載保険者番号;
-        private KaigoHihokenshaNo 被保険者番号;
+        private HihokenshaNo 被保険者番号;
         private FlexibleDate 認定申請年月日;
         private Code 認定申請区分;
         private IKojin 個人情報;
@@ -46,7 +46,7 @@ public class ShujiiIkenshoIraiTaishoshaTest extends TestBase {
             認定進捗情報 = mock(YokaigoNinteiProgress.class);
             申請書管理番号 = new ShinseishoKanriNo(new RString("0001"));
             証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
-            被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));
+            被保険者番号 = new HihokenshaNo(new RString("1234567890"));
             認定申請年月日 = new FlexibleDate("20140101");
             認定申請区分 = new Code(String.valueOf(NinteiShinseiKubunShinsei.新規申請.コード()));
             個人情報 = mock(IKojin.class);

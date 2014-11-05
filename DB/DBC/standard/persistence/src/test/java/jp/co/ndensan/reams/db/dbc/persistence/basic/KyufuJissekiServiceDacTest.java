@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -30,8 +30,8 @@ import static org.junit.Assert.assertThat;
 public class KyufuJissekiServiceDacTest extends DbcTestDacBase {
 
     private static KyufuJissekiServiceDac sut;
-    private static final KaigoHihokenshaNo found被保番号 = new KaigoHihokenshaNo(new RString("0000000034"));
-    private static final KaigoHihokenshaNo notFound被保番号 = new KaigoHihokenshaNo(new RString("0000000099"));
+    private static final HihokenshaNo found被保番号 = new HihokenshaNo(new RString("0000000034"));
+    private static final HihokenshaNo notFound被保番号 = new HihokenshaNo(new RString("0000000099"));
     private static final ServiceTeikyoYM foundサービス提供年月_データ4件 = new ServiceTeikyoYM(new FlexibleYearMonth("200511"));
     private static final ServiceTeikyoYM foundサービス提供年月_データ1件 = new ServiceTeikyoYM(new FlexibleYearMonth("200704"));
     private static final Range<ServiceTeikyoYM> notFoundサービス提供期間

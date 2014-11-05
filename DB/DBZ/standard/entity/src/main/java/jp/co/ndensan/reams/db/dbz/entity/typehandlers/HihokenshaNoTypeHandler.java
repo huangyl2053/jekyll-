@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.entity.typehandlers;
+package jp.co.ndensan.reams.db.dbz.entity.typehandlers;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class HihokenshaNoTypeHandler extends BaseTypeHandler<HihokenshaNo> {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
-
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, HihokenshaNo parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, parameter == null ? null : parameter.getColumnValue().toString());

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.helper;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5050RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -26,7 +26,7 @@ public class RenrakusakiJohoEntityMock {
 
         DbT5050RenrakusakiJohoEntity entity = new DbT5050RenrakusakiJohoEntity();
         entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("123456")));
-        entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("1111111111")));
+        entity.setHihokenshaNo(new HihokenshaNo(new RString("1111111111")));
         entity.setRenrakusakiShimei(new AtenaMeisho(new RString("連絡　てすと")));
         entity.setRenrakusakiKanaSimei(new AtenaKanaMeisho(new RString("レンラク　テスト")));
         entity.setRenrakusakiTuzukigara(new RString("父"));

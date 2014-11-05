@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5014ShinsakaiIinJogaiJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5014ShinsakaiIinJogaiJoho.*;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJoho;
 import jp.co.ndensan.reams.db.dbe.entity.relate.JogaiShinsakaiIinEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -37,7 +37,7 @@ public class JogaiShinsakaiIinDac {
      * @return 除外審査会委員EntityList
      */
     @Transaction
-    public List<JogaiShinsakaiIinEntity> select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoHihokenshaNo 被保険者番号) {
+    public List<JogaiShinsakaiIinEntity> select(ShoKisaiHokenshaNo 証記載保険者番号, HihokenshaNo 被保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5014ShinsakaiIinJogaiJoho.class)
                 .leftJoin(DbT5102ShinsakaiIinJoho.class,

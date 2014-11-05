@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
  */
 public class KyufuJissekiKeyInfo {
 
-    private final KaigoHihokenshaNo 被保番号;
+    private final HihokenshaNo 被保番号;
     private final Range<ServiceTeikyoYM> サービス提供期間;
     private final InputShikibetsuNo 入力識別番号;
     private final ServiceShuruiCode サービス種類コード;
@@ -33,7 +33,7 @@ public class KyufuJissekiKeyInfo {
      * @param サービス提供年月 サービス提供年月
      */
     public KyufuJissekiKeyInfo(
-            KaigoHihokenshaNo 被保番号,
+            HihokenshaNo 被保番号,
             Range<ServiceTeikyoYM> サービス提供期間,
             InputShikibetsuNo 入力識別番号,
             ServiceShuruiCode サービス種類コード,
@@ -50,7 +50,7 @@ public class KyufuJissekiKeyInfo {
      *
      * @return 被保番号
      */
-    public KaigoHihokenshaNo get被保番号() {
+    public HihokenshaNo get被保番号() {
         return 被保番号;
     }
 

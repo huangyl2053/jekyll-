@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
@@ -20,7 +20,7 @@ public class JogaiShinsakaiIin {
     //TODO n8178 城間篤人 審査会関連の本実装時にIShinsakaiIinインターフェース作成し、その後にそれを実装するように修正する 2014年9月末
 
     private final ShoKisaiHokenshaNo 証記載保険者番号;
-    private final KaigoHihokenshaNo 被保険者番号;
+    private final HihokenshaNo 被保険者番号;
     private final int 管理番号;
     private final ShinsakaiIin 除外対象審査会委員;
 
@@ -34,7 +34,7 @@ public class JogaiShinsakaiIin {
      * @throws NullPointerException 証記載保険者番号、被保険者番号、除外対象審査会委員に対してnullが渡されたとき
      * @throws IllegalArgumentException 管理番号に0以下の値が渡されたとき
      */
-    public JogaiShinsakaiIin(ShoKisaiHokenshaNo 証記載保険者番号, KaigoHihokenshaNo 被保険者番号,
+    public JogaiShinsakaiIin(ShoKisaiHokenshaNo 証記載保険者番号, HihokenshaNo 被保険者番号,
             int 管理番号, ShinsakaiIin 除外対象審査会委員) throws NullPointerException, IllegalArgumentException {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
@@ -68,7 +68,7 @@ public class JogaiShinsakaiIin {
      *
      * @return 被保険者番号
      */
-    public KaigoHihokenshaNo get対象被保険者番号() {
+    public HihokenshaNo get対象被保険者番号() {
         return 被保険者番号;
     }
 

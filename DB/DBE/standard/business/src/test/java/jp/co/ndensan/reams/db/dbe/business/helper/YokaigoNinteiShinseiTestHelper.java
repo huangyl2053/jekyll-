@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
@@ -37,7 +37,7 @@ public class YokaigoNinteiShinseiTestHelper {
     private static final YMDHMS 処理日時 = new YMDHMS(new RString("20140808102030"));
     private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
     private static final ShishoCode 支所コード = ShishoCode.EMPTY;
-    private static final KaigoHihokenshaNo 介護被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));
+    private static final HihokenshaNo 介護被保険者番号 = new HihokenshaNo(new RString("1234567890"));
     private static final ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("123456"));
     private static final FlexibleDate 認定申請年月日 = FlexibleDate.MIN;
     private static final EdabanCode 枝番コード = new EdabanCode(new RString("001"));

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItem;
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItemList;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002.dgFukaErrorList_Row;
 import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -93,7 +93,7 @@ public final class FukaErrorGridMapper {
         model.set賦課年度(new FlexibleYear(row.getFukaNendo().getValue().getYear().toDateString()));
         model.set通知書番号(new TsuchishoNo(row.getTsuchishoNo()));
         model.setエラーコード(new Code(row.getErrorCode()));
-        model.set被保険者番号(new KaigoHihokenshaNo(row.getHihokenshaNo()));
+        model.set被保険者番号(new HihokenshaNo(row.getHihokenshaNo()));
         model.set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
         model.set処理区分(InternalReportShoriKubun.toValue(new Code(row.getShoriJokyoCode())));
         return new FukaErrorInternalReportItem(model);

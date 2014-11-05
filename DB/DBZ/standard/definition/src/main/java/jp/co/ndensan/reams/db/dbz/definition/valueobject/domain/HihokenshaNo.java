@@ -53,6 +53,11 @@ public final class HihokenshaNo implements IValueObject<RString>, Comparable<Hih
     }
 
     @Override
+    public RString getColumnValue() {
+        return this.theValue;
+    }
+
+    @Override
     public int compareTo(HihokenshaNo o) {
         return Objects.compare(this.theValue, o.theValue, NaturalOrderComparator.ASC.getInstance());
     }
@@ -67,11 +72,6 @@ public final class HihokenshaNo implements IValueObject<RString>, Comparable<Hih
         }
         HihokenshaNo other = (HihokenshaNo) obj;
         return Objects.equals(this.theValue, other.theValue);
-    }
-
-    @Override
-    public RString getColumnValue() {
-        return this.theValue;
     }
 
     @Override

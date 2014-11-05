@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5014ShinsakaiIinJogaiJohoEntit
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.relate.JogaiShinsakaiIinEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -41,7 +41,7 @@ public class JogaiShinsakaiIinMapperTest {
     private static JogaiShinsakaiIinEntity 除外対象委員Entity;
 
     private static ShoKisaiHokenshaNo 証記載保険者番号_123456;
-    private static KaigoHihokenshaNo 被保険者番号_0000100012;
+    private static HihokenshaNo 被保険者番号_0000100012;
     private static int 管理番号_1;
     private static ShinsakaiIinCode 除外対象審査会委員コード_12345678;
 
@@ -53,7 +53,7 @@ public class JogaiShinsakaiIinMapperTest {
     public static void setUpBeforeClass() {
 
         証記載保険者番号_123456 = new ShoKisaiHokenshaNo(new RString("123456"));
-        被保険者番号_0000100012 = new KaigoHihokenshaNo(new RString("0000100012"));
+        被保険者番号_0000100012 = new HihokenshaNo(new RString("0000100012"));
         管理番号_1 = 1;
         除外対象審査会委員コード_12345678 = new ShinsakaiIinCode(new RString("12345678"));
         除外対象審査会委員_12345678 = ShinsakaiMockBusinessCreator.create審査会委員(

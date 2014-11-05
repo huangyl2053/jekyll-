@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.basic;
 
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.basic.testhelper.FukaErrorListInserter;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
@@ -172,7 +172,7 @@ public class FukaErrorListDacTest {
         entity.setFukaNendo(new FlexibleYear(listCreatringDateTime.getDate().getYear().toDateString()));
         entity.setTsuchishoNo(new TsuchishoNo(new RString(tsuchishoNo)));
         entity.setErrorCode(new Code("01"));
-        entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("1234500001")));
+        entity.setHihokenshaNo(new HihokenshaNo(new RString("1234500001")));
         entity.setShikibetsuCode(new ShikibetsuCode("012345678900002"));
         entity.setShoriKubunCode(InternalReportShoriKubun.未処理.getCode());
         return entity;

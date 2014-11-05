@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.helper;
 
 import jp.co.ndensan.reams.db.dbz.business.KaigoRenrakusaki;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RenrakusakiKubunNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -34,7 +34,7 @@ public class KaigoRenrakusakiMock {
                 new RString("父"),
                 new RenrakusakiKubunNo(new RString("00000001")),
                 new ShoKisaiHokenshaNo(new RString("123456")),
-                new KaigoHihokenshaNo(new RString("1111111111")),
+                new HihokenshaNo(new RString("1111111111")),
                 new RString("01"));
     }
 }

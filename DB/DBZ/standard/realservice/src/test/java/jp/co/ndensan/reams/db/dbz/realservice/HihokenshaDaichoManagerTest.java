@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
@@ -114,7 +114,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
         private static final LasdecCode lasdecCode = new LasdecCode("123456");
         private static final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("1234567890");
         private static final YMDHMS shoriTimestamp = new YMDHMS("20140417095900");
-        private static final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1562483169"));
+        private static final HihokenshaNo hihokenshaNo = new HihokenshaNo(new RString("1562483169"));
         private static IHihokenshaShikaku shikaku;
         private static HihokenshaDaichoManager sut;
 
@@ -184,7 +184,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
 
             @Test
             public void get直近被保険者資格_KaigoHihokenshaNo版_は_検索結果が得られないとき_nullを返す() {
-                IHihokenshaShikaku result = sut.get直近被保険者資格(lasdecCode, new KaigoHihokenshaNo(new RString("9876543210")));
+                IHihokenshaShikaku result = sut.get直近被保険者資格(lasdecCode, new HihokenshaNo(new RString("9876543210")));
                 assertThat(result, is(nullValue()));
             }
         }
@@ -304,7 +304,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
         }
 
         private static DbT1001HihokenshaDaichoEntity createEntity(LasdecCode lasdecCode,
-                KaigoHihokenshaNo hihokenshaNo, YMDHMS shoriTimestamp) {
+                HihokenshaNo hihokenshaNo, YMDHMS shoriTimestamp) {
             DbT1001HihokenshaDaichoEntity entity
                     = DbT1001HihokenshaDaichoEntityMock.getSpiedInstance();
             entity.setShichosonCode(lasdecCode);

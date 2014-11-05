@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
@@ -55,10 +55,10 @@ public interface IHihokenshaShikaku extends IHihokenshaNoGettable, IShikibetsuCo
      * 被保険者の被保険者番号を返します。 <br />
      * 被保険者番号がないとき、nullを返します。
      *
-     * @return {@link KaigoHihokenshaNo 被保険者番号}。もしくは、null。
+     * @return {@link HihokenshaNo 被保険者番号}。もしくは、null。
      */
     @Override
-    KaigoHihokenshaNo get被保険者番号();
+    HihokenshaNo get被保険者番号();
 
     /**
      * 資格取得に関する結果を取得します。

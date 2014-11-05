@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class DbT1012Minashi2GoshaDaichoEntityGenerator {
 
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode(new RString("123456"));
-    public static final KaigoHihokenshaNo DEFAULT_被保険者番号 = new KaigoHihokenshaNo(new RString("0000000001"));
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("0000000001"));
     public static final YMDHMS DEFAULT_更新日時 = new YMDHMS("20081106010101");
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("00000000000001");
     public static final Code DEFAULT_被保険者区分コード = new Code("1");

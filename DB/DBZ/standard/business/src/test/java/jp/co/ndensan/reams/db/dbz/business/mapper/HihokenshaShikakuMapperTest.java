@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
@@ -65,7 +65,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
     private static final ShikibetsuCode shikibetsuCode;
     private static final YMDHMS shoriTimestamp;
     private static final ShoKisaiHokenshaNo shoKisaiHokenshaNo;
-    private static final KaigoHihokenshaNo hihokenshaNo;
+    private static final HihokenshaNo hihokenshaNo;
     private static final RDate ichigoGaitoDate;
     private static final IKaigoShikaku kaigoShikaku;
     private static final HihokenshaKubun hihokenshaKubun;
@@ -75,7 +75,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
         shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("123456"));
         shikibetsuCode = new ShikibetsuCode("1020304050");
         shoriTimestamp = new YMDHMS("20140402154700");
-        hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567890"));
+        hihokenshaNo = new HihokenshaNo(new RString("1234567890"));
         ichigoGaitoDate = new RDate("20140328");
 
         kaigoShikaku = mock(IKaigoShikaku.class);

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.relate.JogaiShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiIinJogaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.helper.ShinsakaiIinDacMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -38,9 +38,9 @@ public class JogaiShinsakaiIinDacTest {
     private static ShinsakaiIinJogaiJohoDac shinsakaiIinJogaiJohoDac;
 
     private static ShoKisaiHokenshaNo 証記載保険者番号_123456;
-    private static KaigoHihokenshaNo 被保険者番号_0123456789;
+    private static HihokenshaNo 被保険者番号_0123456789;
     private static ShoKisaiHokenshaNo 証記載保険者番号_654321;
-    private static KaigoHihokenshaNo 被保険者番号_9876543210;
+    private static HihokenshaNo 被保険者番号_9876543210;
 
     @BeforeClass
     public static void setUpBeforeClass() {
@@ -49,9 +49,9 @@ public class JogaiShinsakaiIinDacTest {
         shinsakaiIinJogaiJohoDac = InstanceProvider.create(ShinsakaiIinJogaiJohoDac.class);
 
         証記載保険者番号_123456 = new ShoKisaiHokenshaNo(new RString("123456"));
-        被保険者番号_0123456789 = new KaigoHihokenshaNo(new RString("0123456789"));
+        被保険者番号_0123456789 = new HihokenshaNo(new RString("0123456789"));
         証記載保険者番号_654321 = new ShoKisaiHokenshaNo(new RString("654321"));
-        被保険者番号_9876543210 = new KaigoHihokenshaNo(new RString("9876543210"));
+        被保険者番号_9876543210 = new HihokenshaNo(new RString("9876543210"));
     }
 
     public static class selectのテスト extends DbeTestDacBase {
@@ -78,7 +78,7 @@ public class JogaiShinsakaiIinDacTest {
         }
 
         private List<JogaiShinsakaiIinEntity> createSelectData(ShoKisaiHokenshaNo 証記載保険者番号,
-                KaigoHihokenshaNo 被保険者番号, String... 審査会委員コードs) {
+                HihokenshaNo 被保険者番号, String... 審査会委員コードs) {
             List<JogaiShinsakaiIinEntity> list = new ArrayList<>();
 
             int i = 0;

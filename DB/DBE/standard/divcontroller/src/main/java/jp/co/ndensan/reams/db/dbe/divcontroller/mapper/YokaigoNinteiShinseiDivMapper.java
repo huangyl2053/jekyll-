@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirek
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaOutlineDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShinseiJohoInputDiv;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
@@ -61,7 +61,7 @@ public class YokaigoNinteiShinseiDivMapper {
                 Item.処理日時.<YMDHMS>extractValue(div),
                 Item.保険者番号.<ShoKisaiHokenshaNo>extractValue(div),
                 Item.支所コード.<ShishoCode>extractValue(div),
-                Item.被保番号.<KaigoHihokenshaNo>extractValue(div),
+                Item.被保番号.<HihokenshaNo>extractValue(div),
                 Item.識別コード.<ShikibetsuCode>extractValue(div),
                 Item.認定申請日.<FlexibleDate>extractValue(div),
                 Item.枝番コード.<EdabanCode>extractValue(div),
@@ -118,8 +118,8 @@ public class YokaigoNinteiShinseiDivMapper {
                 },
         被保番号 {
                     @Override
-                    KaigoHihokenshaNo extractValue(YokaigoNinteiShinseiDiv div) {
-                        return new KaigoHihokenshaNo(
+                    HihokenshaNo extractValue(YokaigoNinteiShinseiDiv div) {
+                        return new HihokenshaNo(
                                 div.getHihokenshaOUtline().getShikakuKihon().getTxtHihokenshaNo().getValue());
                     }
                 },

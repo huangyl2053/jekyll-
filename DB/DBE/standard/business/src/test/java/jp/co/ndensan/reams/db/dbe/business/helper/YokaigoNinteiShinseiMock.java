@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
@@ -48,7 +48,7 @@ public class YokaigoNinteiShinseiMock {
                 new YMDHMS(new RString("20140808102030")),
                 new ShoKisaiHokenshaNo(new RString("000000")),
                 new ShishoCode(new RString("0")),
-                KaigoHihokenshaNo.EMPTY,
+                HihokenshaNo.EMPTY,
                 new ShikibetsuCode("0"),
                 FlexibleDate.EMPTY,
                 new EdabanCode("000"),

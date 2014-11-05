@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.realservice.helper;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
@@ -40,7 +40,7 @@ public class DbT5001NinteiShinseiJohoEntityMock {
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("申請書管理番号")));
         entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("証記載保険者番号")));
         entity.setShishoCode(new ShishoCode(new RString("支所コード")));
-        entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("1234567890")));
+        entity.setHihokenshaNo(new HihokenshaNo(new RString("1234567890")));
         entity.setShikibetsuCode(new ShikibetsuCode(new RString("123456")));
         entity.setNinteiShinseiYMD(FlexibleDate.MIN);
         entity.setNinteiShinseiEdabanCode(new EdabanCode(new RString("001")));

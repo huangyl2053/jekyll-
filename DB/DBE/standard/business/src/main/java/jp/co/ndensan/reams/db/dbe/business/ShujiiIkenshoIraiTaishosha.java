@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
@@ -25,7 +25,7 @@ public class ShujiiIkenshoIraiTaishosha {
     private final YokaigoNinteiProgress 認定進捗情報;
     private final ShinseishoKanriNo 申請書管理番号;
     private final ShoKisaiHokenshaNo 証記載保険者番号;
-    private final KaigoHihokenshaNo 被保険者番号;
+    private final HihokenshaNo 被保険者番号;
     private final FlexibleDate 認定申請年月日;
     private final Code 認定申請区分;
     private final IKojin 個人情報;
@@ -57,7 +57,7 @@ public class ShujiiIkenshoIraiTaishosha {
             YokaigoNinteiProgress 認定進捗情報,
             ShinseishoKanriNo 申請書管理番号,
             ShoKisaiHokenshaNo 証記載保険者番号,
-            KaigoHihokenshaNo 被保険者番号,
+            HihokenshaNo 被保険者番号,
             FlexibleDate 認定申請年月日,
             Code 認定申請区分,
             IKojin 個人情報,
@@ -111,7 +111,7 @@ public class ShujiiIkenshoIraiTaishosha {
      *
      * @return 被保険者番号
      */
-    public KaigoHihokenshaNo get被保険者番号() {
+    public HihokenshaNo get被保険者番号() {
         return 被保険者番号;
     }
 

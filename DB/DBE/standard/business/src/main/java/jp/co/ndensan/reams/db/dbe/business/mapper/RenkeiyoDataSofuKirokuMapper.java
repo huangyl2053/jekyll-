@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.SaiChousaSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiIkenshoSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiSoufuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5022RenkeiyoDataSofuKirokuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -41,7 +41,7 @@ public final class RenkeiyoDataSofuKirokuMapper {
         requireNonNull(entity, Messages.E00003.replace("連携用データ送付記録Entity", "連携用データ送付記録").getMessage());
         ShinseishoKanriNo 申請書管理番号 = entity.getShinseishoKanriNo();
         YMDHMS 処理日時 = entity.getShoriTimestamp();
-        KaigoHihokenshaNo 被保険者番号 = entity.getHihokenshaNo();
+        HihokenshaNo 被保険者番号 = entity.getHihokenshaNo();
         NinteiShinseijiKubun 認定申請時区分 = NinteiShinseijiKubun.toValue(entity.getNinteiShinseiShinseijiKubun());
         HikiwatashiKubun 引渡し区分 = HikiwatashiKubun.toValue(entity.getHikiwatashiKubun());
         SaiSoufuKubun 再送付区分 = SaiSoufuKubun.toValue(entity.getSaiSoufuKubun());

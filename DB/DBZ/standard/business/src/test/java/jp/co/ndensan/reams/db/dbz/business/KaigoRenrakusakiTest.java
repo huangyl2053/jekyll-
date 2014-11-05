@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RenrakusakiKubunNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -42,7 +42,7 @@ public class KaigoRenrakusakiTest extends DbzTestBase {
     private static RString 続柄;
     private static RenrakusakiKubunNo 連絡先区分番号;
     private static ShoKisaiHokenshaNo 保険者番号;
-    private static KaigoHihokenshaNo 被保険者番号;
+    private static HihokenshaNo 被保険者番号;
     private static RString 支所コード;
 
     @BeforeClass
@@ -56,7 +56,7 @@ public class KaigoRenrakusakiTest extends DbzTestBase {
         続柄 = new RString("父");
         連絡先区分番号 = mock(RenrakusakiKubunNo.class);
         保険者番号 = mock(ShoKisaiHokenshaNo.class);
-        被保険者番号 = mock(KaigoHihokenshaNo.class);
+        被保険者番号 = mock(HihokenshaNo.class);
         支所コード = new RString("01");
     }
 

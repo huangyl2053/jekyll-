@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData.Chosain;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiData.Doctor;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaForSearchResult;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IHihokenshaForSearchResult;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
@@ -53,7 +53,7 @@ public class YokaigoninteiShinseishaData {
             private IHihokenshaForSearchResult toIHihokneshaForSearchResult(Map map) {
                 ControlGenerator cg = new ControlGenerator(map);
                 return new HihokenshaForSearchResult(
-                        new KaigoHihokenshaNo(cg.getAsRString("被保番号")),
+                        new HihokenshaNo(cg.getAsRString("被保番号")),
                         new ShikibetsuCode(cg.getAsRString("識別コード")),
                         cg.getAsRString("被保区分"),
                         cg.getAsRString("氏名"),

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
  */
 public class KyufuJissekiKihon {
 
-    private final KaigoHihokenshaNo 被保番号;
+    private final HihokenshaNo 被保番号;
     private final RString 氏名;
     private final Gender 性別;
     private final FlexibleDate 生年月日;
@@ -73,7 +73,7 @@ public class KyufuJissekiKihon {
      * @param 合計 合計
      */
     public KyufuJissekiKihon(
-            KaigoHihokenshaNo 被保番号,
+            HihokenshaNo 被保番号,
             RString 氏名,
             Gender 性別,
             FlexibleDate 生年月日,
@@ -124,7 +124,7 @@ public class KyufuJissekiKihon {
      *
      * @return 被保番号
      */
-    public KaigoHihokenshaNo get被保番号() {
+    public HihokenshaNo get被保番号() {
         return 被保番号;
     }
 

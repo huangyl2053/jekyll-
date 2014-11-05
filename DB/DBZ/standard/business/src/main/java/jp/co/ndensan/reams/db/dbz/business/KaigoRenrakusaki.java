@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RenrakusakiKubunNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.Messages;
@@ -33,7 +33,7 @@ public class KaigoRenrakusaki {
     private final RString 続柄;
     private final RenrakusakiKubunNo 連絡先区分番号;
     private final ShoKisaiHokenshaNo 保険者番号;
-    private final KaigoHihokenshaNo 被保険者番号;
+    private final HihokenshaNo 被保険者番号;
     private final RString 支所コード;
 
     /**
@@ -54,7 +54,7 @@ public class KaigoRenrakusaki {
     public KaigoRenrakusaki(AtenaMeisho 氏名, AtenaKanaMeisho 氏名カナ,
             TelNo 電話番号, TelNo 携帯番号, YubinNo 郵便番号, AtenaJusho 住所,
             RString 続柄, RenrakusakiKubunNo 連絡先区分番号, ShoKisaiHokenshaNo 保険者番号,
-            KaigoHihokenshaNo 被保険者番号, RString 支所コード) {
+            HihokenshaNo 被保険者番号, RString 支所コード) {
         this.氏名 = requireNonNull(氏名, Messages.E00001.getMessage());
         this.氏名カナ = requireNonNull(氏名カナ, Messages.E00001.getMessage());
         this.電話番号 = 電話番号;
@@ -154,7 +154,7 @@ public class KaigoRenrakusaki {
      *
      * @return 被保険者番号
      */
-    public KaigoHihokenshaNo get被保険者番号() {
+    public HihokenshaNo get被保険者番号() {
         return 被保険者番号;
     }
 

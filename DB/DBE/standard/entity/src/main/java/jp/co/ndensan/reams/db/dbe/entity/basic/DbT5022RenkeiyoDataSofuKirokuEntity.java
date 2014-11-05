@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 
 /**
@@ -33,7 +33,7 @@ public class DbT5022RenkeiyoDataSofuKirokuEntity implements IDbAccessable {
     private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private YMDHMS shoriTimestamp;
-    private KaigoHihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     private RString ninteiShinseiShinseijiKubun;
     private RString hikiwatashiKubun;
     private RDateTime hikiwatashiNichiji;
@@ -127,7 +127,7 @@ public class DbT5022RenkeiyoDataSofuKirokuEntity implements IDbAccessable {
      *
      * @return hihokenshaNo
      */
-    public KaigoHihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
@@ -136,7 +136,7 @@ public class DbT5022RenkeiyoDataSofuKirokuEntity implements IDbAccessable {
      *
      * @param hihokenshaNo hihokenshaNo
      */
-    public void setHihokenshaNo(KaigoHihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 

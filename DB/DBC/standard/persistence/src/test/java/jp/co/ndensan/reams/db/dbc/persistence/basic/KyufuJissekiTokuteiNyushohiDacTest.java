@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3029KyufujissekiTokuteiNyushos
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.InputShikibetsuNoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
@@ -37,7 +37,7 @@ public class KyufuJissekiTokuteiNyushohiDacTest {
     private static final KokanShikibetsuNo 交換情報識別番号_データあり = new KokanShikibetsuNo(new RString("1234"));
     private static final InputShikibetsuNoCode 入力識別番号 = new InputShikibetsuNoCode(new Code("0001"));
     private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("00000003"));
-    private static final KaigoHihokenshaNo 被保番号 = new KaigoHihokenshaNo(new RString("0000000004"));
+    private static final HihokenshaNo 被保番号 = new HihokenshaNo(new RString("0000000004"));
     private static final FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth("201401");
     private static final JigyoshaNo 事業所番号 = new JigyoshaNo(new RString("0000000005"));
     private static final ToshiNo 通番 = new ToshiNo(new RString("0000000006"));

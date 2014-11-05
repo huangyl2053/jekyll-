@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IMinashi2GoshaDaichoDac;
 import jp.co.ndensan.reams.db.dbe.realservice.search.Minashi2GoshaDaichoSearchItem;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
@@ -47,7 +47,7 @@ public class Minashi2GoshaDaichoFinderTest {
     private static Minashi2GoshaDaichoFinder sut;
     private static LasdecCode 市町村コード;
     private static ShikibetsuCode 識別コード;
-    private static KaigoHihokenshaNo 被保険者番号;
+    private static HihokenshaNo 被保険者番号;
     private static YMDHMS 処理日時;
     private static HihokenshaKubun 被保険者区分コード;
     private static FlexibleDate みなし2号登録年月日;
@@ -60,7 +60,7 @@ public class Minashi2GoshaDaichoFinderTest {
         市町村コード = new LasdecCode("123456");
         福祉被保険者番号 = new RString("123456");
         識別コード = new ShikibetsuCode("123456789012345");
-        被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));
+        被保険者番号 = new HihokenshaNo(new RString("1234567890"));
         処理日時 = new YMDHMS("20081106010101");
         被保険者区分コード = new HihokenshaKubun(new Code("1"), new RString("みなし2号"));
         みなし2号登録年月日 = new FlexibleDate("20140101");

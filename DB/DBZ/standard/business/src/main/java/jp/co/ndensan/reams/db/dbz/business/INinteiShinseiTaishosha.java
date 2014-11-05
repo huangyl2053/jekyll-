@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
@@ -28,7 +28,7 @@ public interface INinteiShinseiTaishosha {
      *
      * @return 被保険者番号
      */
-    public KaigoHihokenshaNo get被保険者番号();
+    public HihokenshaNo get被保険者番号();
 
     /**
      * 識別コードを返します。

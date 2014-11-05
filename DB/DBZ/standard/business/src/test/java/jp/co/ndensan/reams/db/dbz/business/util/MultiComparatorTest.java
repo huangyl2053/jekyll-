@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaComparators.Shic
 import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaNoComparator;
 import jp.co.ndensan.reams.db.dbz.business.comparator.ShikibetsuCodeComparator;
 import jp.co.ndensan.reams.db.dbz.business.helper.HihokenshaMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -48,11 +48,11 @@ public class MultiComparatorTest extends DbzTestBase {
         private final YMDHMS rt2014_04_08_00_00 = new YMDHMS("20140408000000");
         private final ShoKisaiHokenshaNo s000001 = new ShoKisaiHokenshaNo(new RString("000001"));
         private final ShoKisaiHokenshaNo s000002 = new ShoKisaiHokenshaNo(new RString("000002"));
-        private final KaigoHihokenshaNo hn0000000001 = new KaigoHihokenshaNo(new RString("0000000001"));
-        private final KaigoHihokenshaNo hn0000000002 = new KaigoHihokenshaNo(new RString("0000000002"));
-        private final KaigoHihokenshaNo hn0000000003 = new KaigoHihokenshaNo(new RString("0000000003"));
-        private final KaigoHihokenshaNo hn0000000004 = new KaigoHihokenshaNo(new RString("0000000004"));
-        private final KaigoHihokenshaNo hn0000000005 = new KaigoHihokenshaNo(new RString("0000000005"));
+        private final HihokenshaNo hn0000000001 = new HihokenshaNo(new RString("0000000001"));
+        private final HihokenshaNo hn0000000002 = new HihokenshaNo(new RString("0000000002"));
+        private final HihokenshaNo hn0000000003 = new HihokenshaNo(new RString("0000000003"));
+        private final HihokenshaNo hn0000000004 = new HihokenshaNo(new RString("0000000004"));
+        private final HihokenshaNo hn0000000005 = new HihokenshaNo(new RString("0000000005"));
 
         @Before
         public void setUp() {
@@ -97,8 +97,8 @@ public class MultiComparatorTest extends DbzTestBase {
             assertThat(hihokenshaList.get(3).get市町村コード(), is(hihokenshaList.get(4).get市町村コード()));
             assertThat(hihokenshaList.get(3).get識別コード(), is(hihokenshaList.get(4).get識別コード()));
             assertThat(hihokenshaList.get(3).get処理日時(), is(hihokenshaList.get(4).get処理日時()));
-            KaigoHihokenshaNo hihokenshaNo3 = hihokenshaList.get(3).get被保険者番号();
-            KaigoHihokenshaNo hihokenshaNo4 = hihokenshaList.get(4).get被保険者番号();
+            HihokenshaNo hihokenshaNo3 = hihokenshaList.get(3).get被保険者番号();
+            HihokenshaNo hihokenshaNo4 = hihokenshaList.get(4).get被保険者番号();
             assertThat(hihokenshaNo3.equals(hihokenshaNo4), is(false));
             assertThat(hihokenshaNo3.compareTo(hihokenshaNo4) < 0, is(true));
         }

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.basic;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.InputShikibetsuNoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
@@ -43,7 +43,7 @@ public interface IKyufuJissekiKihonDac extends
             KokanShikibetsuNo 交換情報識別番号,
             InputShikibetsuNoCode 入力識別番号,
             ShoKisaiHokenshaNo 証記載保険者番号,
-            KaigoHihokenshaNo 被保番号,
+            HihokenshaNo 被保番号,
             FlexibleYearMonth サービス提供年月,
             JigyoshaNo 事業所番号,
             ToshiNo 通番);

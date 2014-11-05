@@ -177,7 +177,7 @@ public final class KyufuJissekiMapper {
                 new ServiceTeikyoYM(entity.getServiceTeikyoYM()),
                 KyufuJissekiKubun.toValue(entity.getKyufuJissekiKubunCode()),
                 entity.getSeiriNo(),
-                entity.getHokenshaNo().getValue(),
+                entity.getHokenshaNo().value(),
                 new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo()), RString.EMPTY, RString.EMPTY),
                 entity.getJigyoshoNo().value(),
                 KyufuSakuseiKubun.toValue(entity.getKyufuSakuseiKubunCode()),

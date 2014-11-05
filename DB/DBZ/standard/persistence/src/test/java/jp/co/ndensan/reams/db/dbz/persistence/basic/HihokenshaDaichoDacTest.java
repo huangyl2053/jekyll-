@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
@@ -86,17 +86,17 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
             private void initializeTable() {
                 YMDHMS shoriTimeStamp = new YMDHMS("20110912012345");
                 sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code1, new KaigoHihokenshaNo(new RString("1234567890")), shoriTimeStamp));
+                        .createWithKey(code1, new HihokenshaNo(new RString("1234567890")), shoriTimeStamp));
                 sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code1, new KaigoHihokenshaNo(new RString("1234567891")), shoriTimeStamp));
+                        .createWithKey(code1, new HihokenshaNo(new RString("1234567891")), shoriTimeStamp));
                 sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code1, new KaigoHihokenshaNo(new RString("1234567892")), shoriTimeStamp));
+                        .createWithKey(code1, new HihokenshaNo(new RString("1234567892")), shoriTimeStamp));
                 sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code2, new KaigoHihokenshaNo(new RString("1234567893")), shoriTimeStamp));
+                        .createWithKey(code2, new HihokenshaNo(new RString("1234567893")), shoriTimeStamp));
                 sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code2, new KaigoHihokenshaNo(new RString("1234567894")), shoriTimeStamp));
+                        .createWithKey(code2, new HihokenshaNo(new RString("1234567894")), shoriTimeStamp));
                 sut.insert(DbT1001HihokenshaDaichoEntityMock.
-                        createWithKey(code3, new KaigoHihokenshaNo(new RString("1234567895")), shoriTimeStamp));
+                        createWithKey(code3, new HihokenshaNo(new RString("1234567895")), shoriTimeStamp));
             }
         }
 
@@ -106,7 +106,7 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
             private static final LasdecCode code_111111 = new LasdecCode("111111");
             private static final LasdecCode code_222222 = new LasdecCode("222222");
             private static final LasdecCode code_333333 = new LasdecCode("333333");
-            private static final KaigoHihokenshaNo hihokenshaNo_1234567890 = new KaigoHihokenshaNo(new RString("1234567890"));
+            private static final HihokenshaNo hihokenshaNo_1234567890 = new HihokenshaNo(new RString("1234567890"));
 
             public static class LasdecCodeに111111_KaigoHihokenshaNoに1234567890を検索条件として指定した場合 extends DbzTestDacBase {
 
@@ -140,17 +140,17 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
             private static void initializeTable() {
                 YMDHMS shoriTimeStamp = new YMDHMS("20110912012345");
                 sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code_111111, new KaigoHihokenshaNo(new RString("1234567890")), shoriTimeStamp));
+                        .createWithKey(code_111111, new HihokenshaNo(new RString("1234567890")), shoriTimeStamp));
                 sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code_111111, new KaigoHihokenshaNo(new RString("1234567891")), shoriTimeStamp));
+                        .createWithKey(code_111111, new HihokenshaNo(new RString("1234567891")), shoriTimeStamp));
                 sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code_111111, new KaigoHihokenshaNo(new RString("1234567892")), shoriTimeStamp));
+                        .createWithKey(code_111111, new HihokenshaNo(new RString("1234567892")), shoriTimeStamp));
                 sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code_222222, new KaigoHihokenshaNo(new RString("1234567893")), shoriTimeStamp));
+                        .createWithKey(code_222222, new HihokenshaNo(new RString("1234567893")), shoriTimeStamp));
                 sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code_222222, new KaigoHihokenshaNo(new RString("1234567894")), shoriTimeStamp));
+                        .createWithKey(code_222222, new HihokenshaNo(new RString("1234567894")), shoriTimeStamp));
                 sut.insert(DbT1001HihokenshaDaichoEntityMock.
-                        createWithKey(code_333333, new KaigoHihokenshaNo(new RString("1234567895")), shoriTimeStamp));
+                        createWithKey(code_333333, new HihokenshaNo(new RString("1234567895")), shoriTimeStamp));
             }
         }
 
@@ -196,7 +196,7 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
             private LasdecCode lasdecCode;
             private ShikibetsuCode shikibetsuCode;
             private YMDHMS latestShoriTimeDate;
-            private KaigoHihokenshaNo hihokenshaNo;
+            private HihokenshaNo hihokenshaNo;
 
             @Before
             public void setUp() {
@@ -212,7 +212,7 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
             private void initializeTable() {
                 this.lasdecCode = new LasdecCode("111111");
                 this.shikibetsuCode = new ShikibetsuCode("1234567890");
-                this.hihokenshaNo = new KaigoHihokenshaNo(new RString("0987654321"));
+                this.hihokenshaNo = new HihokenshaNo(new RString("0987654321"));
                 FlexibleDate latestDate = new FlexibleDate("20140302");
 
                 this.latestShoriTimeDate = toYMDHMS(latestDate);
