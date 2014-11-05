@@ -55,7 +55,7 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuJissekiYoshikiK
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.tabKyufuJissekiDiv;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
