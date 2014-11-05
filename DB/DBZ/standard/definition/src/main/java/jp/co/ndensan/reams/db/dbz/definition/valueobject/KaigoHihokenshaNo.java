@@ -30,7 +30,7 @@ public final class KaigoHihokenshaNo implements IValueObject<RString>, Comparabl
     static {
         EMPTY = new KaigoHihokenshaNo(RString.EMPTY);
     }
-    // RString以外の型の場合は、変更してください。
+
     private final RString theValue;
 
     /**
