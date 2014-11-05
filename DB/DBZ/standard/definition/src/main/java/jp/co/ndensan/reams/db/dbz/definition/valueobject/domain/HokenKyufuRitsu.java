@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public final class HokenKyufuRitsu implements IValueObject<Decimal>, Comparable<HokenKyufuRitsu>, IDbColumnMappable, Serializable {
 
     /**
-     * {@link IValueObject#value() value()}で{@link Decimal#ZERO Decimal.ZERO}を返す
+     * {@link #value() value()}で{@link Decimal#ZERO Decimal.ZERO}を返す
      * HokenKyufuRitsu です。
      */
     public static final HokenKyufuRitsu ZERO;
