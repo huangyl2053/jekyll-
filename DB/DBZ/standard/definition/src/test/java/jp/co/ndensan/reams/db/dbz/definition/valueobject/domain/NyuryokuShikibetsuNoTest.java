@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -27,17 +28,10 @@ public class NyuryokuShikibetsuNoTest {
 
     public static class constructorのテスト extends DbcTestBase {
 
-        @Test(expected = NullPointerException.class)
-        public void 引数にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut1 = new NyuryokuShikibetsuNo(null);
-            fail();
-        }
-
         public void 引数にnullでない値が渡されたとき_インスタンスが生成される() {
             sut1 = new NyuryokuShikibetsuNo(new RString("0123"));
-            assertThat(sut1, is(instanceOf(NyuryokuShikibetsuNo.class)));
+            assertThat(sut1, isA(NyuryokuShikibetsuNo.class));
         }
-
     }
 
     public static class hashCodeのテスト extends DbcTestBase {
@@ -51,12 +45,6 @@ public class NyuryokuShikibetsuNoTest {
         public void 同値の値を持つ入力識別番号は_hashCodeの値が一致する() {
             sut2 = new NyuryokuShikibetsuNo(new RString("0123"));
             assertThat(sut1.hashCode(), is(sut2.hashCode()));
-        }
-
-        @Test
-        public void 異なる値を持つ入力識別番号は_hashCodeの値が不一致となる() {
-            sut2 = new NyuryokuShikibetsuNo(new RString("0124"));
-            assertThat(sut1.hashCode(), is(not(sut2.hashCode())));
         }
     }
 

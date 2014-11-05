@@ -3,21 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 入力識別番号を表すクラスです。
  *
  * @author n8178 城間篤人
  */
-public class NyuryokuShikibetsuNo implements IDbColumnMappable, IValueObject, Comparable<NyuryokuShikibetsuNo> {
+public final class NyuryokuShikibetsuNo implements IValueObject<RString>, Comparable<NyuryokuShikibetsuNo>, IDbColumnMappable, Serializable {
 
     private final RString 入力識別番号;
 
@@ -25,10 +24,17 @@ public class NyuryokuShikibetsuNo implements IDbColumnMappable, IValueObject, Co
      * 文字列を受け取り、インスタンスを生成します。
      *
      * @param 入力識別番号 入力識別番号
-     * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public NyuryokuShikibetsuNo(RString 入力識別番号) throws NullPointerException {
-        requireNonNull(入力識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("入力識別番号"));
+    public NyuryokuShikibetsuNo(String 入力識別番号) {
+        this.入力識別番号 = (入力識別番号 == null) ? null : new RString(入力識別番号);
+    }
+
+    /**
+     * 文字列を受け取り、インスタンスを生成します。
+     *
+     * @param 入力識別番号 入力識別番号
+     */
+    public NyuryokuShikibetsuNo(RString 入力識別番号) {
         this.入力識別番号 = 入力識別番号;
     }
 
@@ -51,10 +57,14 @@ public class NyuryokuShikibetsuNo implements IDbColumnMappable, IValueObject, Co
 
     @Override
     public boolean equals(Object 比較対象) {
-        if (比較対象 == null || getClass() != 比較対象.getClass()) {
+        if (比較対象 == null) {
             return false;
         }
-        return Objects.equals(this.value(), ((NyuryokuShikibetsuNo) 比較対象).value());
+        if (!(比較対象 instanceof NyuryokuShikibetsuNo)) {
+            return false;
+        }
+        NyuryokuShikibetsuNo other = (NyuryokuShikibetsuNo) 比較対象;
+        return Objects.equals(this.入力識別番号, other.入力識別番号);
     }
 
     @Override

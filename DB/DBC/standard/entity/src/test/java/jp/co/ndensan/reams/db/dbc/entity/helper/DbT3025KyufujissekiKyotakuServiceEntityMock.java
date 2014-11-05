@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3025KyufujissekiKyotakuService
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
