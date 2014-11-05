@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NaturalOrderComparator;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -54,7 +54,7 @@ public final class ServiceCode implements IValueObject<RString>, Comparable<Serv
 
     @Override
     public int compareTo(ServiceCode 比較対象) {
-        return Objects.compare(this.code, 比較対象.code, Comparators.NaturalOrderComparator.ASC.getInstance());
+        return Objects.compare(this.code, 比較対象.code, NaturalOrderComparator.ASC.getInstance());
     }
 
     @Override

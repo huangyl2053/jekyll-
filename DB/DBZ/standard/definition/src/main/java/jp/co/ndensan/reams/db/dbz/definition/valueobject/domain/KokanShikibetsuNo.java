@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author n8223 朴 義一
  */
-public final class KokanShikibetsuNo implements IValueObject, Comparable<KokanShikibetsuNo>, IDbColumnMappable, Serializable {
+public final class KokanShikibetsuNo implements IValueObject<RString>, Comparable<KokanShikibetsuNo>, IDbColumnMappable, Serializable {
 
     /**
      * 空の KokanShikibetsuNo です。
