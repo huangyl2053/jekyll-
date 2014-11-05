@@ -31,10 +31,10 @@ public enum DbzSystemErrorMessages {
     private DbzSystemErrorMessages(int no, String message) {
         this.code = toCode("S", no);
         this.message = message;
-        this.numOfReplacees = countReplaceesIn(message);
+        this.numOfReplacees = countNumOfReplaceesIn(message);
     }
 
-    private int countReplaceesIn(String message) {
+    private int countNumOfReplaceesIn(String message) {
         int count = 0;
         int position = 0;
         while (true) {
