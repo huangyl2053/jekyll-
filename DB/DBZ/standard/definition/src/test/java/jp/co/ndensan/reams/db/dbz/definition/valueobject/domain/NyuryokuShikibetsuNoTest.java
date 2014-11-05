@@ -113,9 +113,9 @@ public class NyuryokuShikibetsuNoTest extends DbzTestBase {
         }
 
         @Test
-        public void EMPTYとequalsでtrueを返さないインスタンスのisEmptyは_falseを返す() {
+        public void EMPTYと同じ値を持たないインスタンスのisEmptyは_falseを返す() {
             NyuryokuShikibetsuNo sut = new NyuryokuShikibetsuNo("100");
-            assertThat(sut.equals(NyuryokuShikibetsuNo.EMPTY), is(false));
+            assertThat(sut.value(), is(not(NyuryokuShikibetsuNo.EMPTY.value())));
             assertThat(sut.isEmpty(), is(false));
         }
     }

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
@@ -101,9 +102,9 @@ public class ServiceCodeTest extends DbzTestBase {
         }
 
         @Test
-        public void EMPTYとequalsでtrueを返さないインスタンスのisEmptyは_falseを返す() {
+        public void EMPTYと同じ値を持たないインスタンスのisEmptyは_falseを返す() {
             ServiceCode sut = new ServiceCode("100");
-            assertThat(sut.equals(ServiceCode.EMPTY), is(false));
+            assertThat(sut.value(), is(not(ServiceCode.EMPTY.value())));
             assertThat(sut.isEmpty(), is(false));
         }
     }

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokensha
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -194,9 +195,9 @@ public class ShoKisaiHokenshaNoTest extends DbzTestBase {
         }
 
         @Test
-        public void EMPTYとequalsでtrueを返さないインスタンスのisEmptyは_falseを返す() {
+        public void EMPTYと同じ値を持たないインスタンスのisEmptyは_falseを返す() {
             ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo("100");
-            assertThat(sut.equals(ShoKisaiHokenshaNo.EMPTY), is(false));
+            assertThat(sut.value(), is(not(ShoKisaiHokenshaNo.EMPTY.value())));
             assertThat(sut.isEmpty(), is(false));
         }
     }

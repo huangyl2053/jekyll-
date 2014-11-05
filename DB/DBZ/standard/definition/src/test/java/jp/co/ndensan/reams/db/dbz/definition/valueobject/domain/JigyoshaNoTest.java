@@ -105,9 +105,9 @@ public class JigyoshaNoTest extends DbzTestBase {
         }
 
         @Test
-        public void EMPTYとequalsでtrueを返さないインスタンスのisEmptyは_falseを返す() {
+        public void EMPTYと同じ値を持たないインスタンスのisEmptyは_falseを返す() {
             JigyoshaNo sut = new JigyoshaNo("100");
-            assertThat(sut.equals(JigyoshaNo.EMPTY), is(false));
+            assertThat(sut.value(), is(not(JigyoshaNo.EMPTY.value())));
             assertThat(sut.isEmpty(), is(false));
         }
     }

@@ -65,12 +65,12 @@ public final class KokanShikibetsuNo implements IValueObject<RString>, Comparabl
     }
 
     /**
-     * {@link #EMPTY EMPTY}と等しい時、{@code true}を返します。
+     * 保持する値が{@link #EMPTY EMPTY}と等しい時、{@code true}を返します。
      *
-     * @return {@link #EMPTY EMPTY}と等しい時、{@code true}
+     * @return 保持する値が{@link #EMPTY EMPTY}と等しい時、{@code true}
      */
     public boolean isEmpty() {
-        return EMPTY.equals(this);
+        return Objects.equals(EMPTY.交換情報識別番号, this.交換情報識別番号);
     }
 
     @Override

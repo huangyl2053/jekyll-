@@ -68,12 +68,12 @@ public final class JigyoshaNo implements IValueObject<RString>, Comparable<Jigyo
     }
 
     /**
-     * {@link #EMPTY EMPTY}と等しい時、{@code true}を返します。
+     * 保持する値が{@link #EMPTY EMPTY}と等しい時、{@code true}を返します。
      *
-     * @return {@link #EMPTY EMPTY}と等しい時、{@code true}
+     * @return 保持する値が{@link #EMPTY EMPTY}と等しい時、{@code true}
      */
     public boolean isEmpty() {
-        return EMPTY.equals(this);
+        return Objects.equals(EMPTY.事業者番号, this.事業者番号);
     }
 
     @Override

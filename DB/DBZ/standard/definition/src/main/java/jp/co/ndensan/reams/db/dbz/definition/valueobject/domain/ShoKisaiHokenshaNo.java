@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
+import static jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo.EMPTY;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NaturalOrderComparator;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -65,12 +66,12 @@ public final class ShoKisaiHokenshaNo implements IValueObject<RString>, Comparab
     }
 
     /**
-     * {@link #EMPTY EMPTY}と等しい時、{@code true}を返します。
+     * 保持する値が{@link #EMPTY EMPTY}と等しい時、{@code true}を返します。
      *
-     * @return {@link #EMPTY EMPTY}と等しい時、{@code true}
+     * @return 保持する値が{@link #EMPTY EMPTY}と等しい時、{@code true}
      */
     public boolean isEmpty() {
-        return EMPTY.equals(this);
+        return Objects.equals(EMPTY.theValue, this.theValue);
     }
 
     @Override
