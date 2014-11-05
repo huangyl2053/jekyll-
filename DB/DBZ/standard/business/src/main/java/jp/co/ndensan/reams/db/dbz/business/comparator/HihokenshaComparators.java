@@ -41,7 +41,7 @@ public final class HihokenshaComparators {
 
         @Override
         public int compare(Hihokensha hihokensha1, Hihokensha hihokensha2) {
-            return hihokensha1.get処理日時().compareTo(hihokensha2.get処理日時()) * order.getRate();
+            return hihokensha1.get処理日時().compareTo(hihokensha2.get処理日時()) * order.rate();
         }
     }
 
@@ -71,7 +71,7 @@ public final class HihokenshaComparators {
 
         @Override
         public int compare(Hihokensha hihokensha1, Hihokensha hihokensha2) {
-            return hihokensha1.get市町村コード().compareTo(hihokensha2.get市町村コード()) * order.getRate();
+            return hihokensha1.get市町村コード().compareTo(hihokensha2.get市町村コード()) * order.rate();
         }
     }
 }

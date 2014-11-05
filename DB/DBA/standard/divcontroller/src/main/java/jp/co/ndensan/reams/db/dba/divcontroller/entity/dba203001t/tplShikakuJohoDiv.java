@@ -1,19 +1,16 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba203001t;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba203001t.JutokuTekiyoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tplShikakuJoho のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.ShikakuTokusoRirekiDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
+
+/**
+ * tplShikakuJoho のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplShikakuJohoDiv extends TabPanel {
@@ -23,6 +20,7 @@ public class tplShikakuJohoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ShikakuTokusoRireki")
     private ShikakuTokusoRirekiDiv ShikakuTokusoRireki;
     @JsonProperty("JutokuTekiyoInput")
@@ -43,7 +41,7 @@ public class tplShikakuJohoDiv extends TabPanel {
 
     @JsonProperty("ShikakuTokusoRireki")
     public void setShikakuTokusoRireki(ShikakuTokusoRirekiDiv ShikakuTokusoRireki) {
-        this.ShikakuTokusoRireki=ShikakuTokusoRireki;
+        this.ShikakuTokusoRireki = ShikakuTokusoRireki;
     }
 
     @JsonProperty("JutokuTekiyoInput")
@@ -53,7 +51,7 @@ public class tplShikakuJohoDiv extends TabPanel {
 
     @JsonProperty("JutokuTekiyoInput")
     public void setJutokuTekiyoInput(JutokuTekiyoInputDiv JutokuTekiyoInput) {
-        this.JutokuTekiyoInput=JutokuTekiyoInput;
+        this.JutokuTekiyoInput = JutokuTekiyoInput;
     }
 
     @JsonProperty("btnUpdateShikaku")
@@ -63,7 +61,7 @@ public class tplShikakuJohoDiv extends TabPanel {
 
     @JsonProperty("btnUpdateShikaku")
     public void setBtnUpdateShikaku(Button btnUpdateShikaku) {
-        this.btnUpdateShikaku=btnUpdateShikaku;
+        this.btnUpdateShikaku = btnUpdateShikaku;
     }
 
 }

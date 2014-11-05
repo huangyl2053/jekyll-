@@ -27,6 +27,8 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetailInputDiv extends Panel {
     private DropDownList ddlShumoku;
     @JsonProperty("txtShohinName")
     private TextBox txtShohinName;
+    @JsonProperty("btnShohinmeiSearch")
+    private Button btnShohinmeiSearch;
     @JsonProperty("txtSeizoJigyosha")
     private TextBox txtSeizoJigyosha;
     @JsonProperty("txtHanbaiJigyosha")
@@ -76,6 +78,16 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetailInputDiv extends Panel {
     @JsonProperty("txtShohinName")
     public void setTxtShohinName(TextBox txtShohinName) {
         this.txtShohinName=txtShohinName;
+    }
+
+    @JsonProperty("btnShohinmeiSearch")
+    public Button getBtnShohinmeiSearch() {
+        return btnShohinmeiSearch;
+    }
+
+    @JsonProperty("btnShohinmeiSearch")
+    public void setBtnShohinmeiSearch(Button btnShohinmeiSearch) {
+        this.btnShohinmeiSearch=btnShohinmeiSearch;
     }
 
     @JsonProperty("txtSeizoJigyosha")

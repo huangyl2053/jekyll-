@@ -20,17 +20,17 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba203001t.tplShikakuJoho
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba203001t.tplShisetsuNyutaishoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba203001t.TaskJutokuTekiyoJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.dgIryoHokenRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.dgShikakuShutokuRireki_Row;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+//import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+//import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+//import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
@@ -69,10 +69,10 @@ public class TaskJutokuTekiyoJoho {
         RString shikibetsuCode = demoKojin.getShikibetsuCode();
 
         setShikakuJoho(jutokuTekiyoJohoDiv, shikibetsuCode);
-        setIryoHoken(jutokuTekiyoJohoDiv, shikibetsuCode);
-        setRofukuNenkin(jutokuTekiyoJohoDiv, shikibetsuCode);
-        setSeikatsuHogo(jutokuTekiyoJohoDiv, shikibetsuCode);
-        setShisetsuNyutaisho(jutokuTekiyoJohoDiv, shikibetsuCode);
+//        setIryoHoken(jutokuTekiyoJohoDiv, shikibetsuCode);
+//        setRofukuNenkin(jutokuTekiyoJohoDiv, shikibetsuCode);
+//        setSeikatsuHogo(jutokuTekiyoJohoDiv, shikibetsuCode);
+//        setShisetsuNyutaisho(jutokuTekiyoJohoDiv, shikibetsuCode);
 
         response.data = jutokuTekiyoJohoDiv;
         return response;
@@ -88,75 +88,74 @@ public class TaskJutokuTekiyoJoho {
         tplShikakuJohoDiv tplShikakuJoho = jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho();
 
         List<HashMap> hihokenshaDaichoDataList = YamlLoader.DBA.loadAsList(HIHOKENSHA_DAICHO_DATA);
-        DataGrid<dgShikakuShutokuRireki_Row> grid = tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki();
-        List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
+//        DataGrid<dgShikakuShutokuRireki_Row> grid = tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki();
+//        List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
         for (HashMap hihokenshaDaichoData : hihokenshaDaichoDataList) {
             if (hihokenshaDaichoData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
-                dataSource = createJutokuTekiyoRirekiList((List<HashMap>) hihokenshaDaichoData.get("被保台帳"));
+//                dataSource = createJutokuTekiyoRirekiList((List<HashMap>) hihokenshaDaichoData.get("被保台帳"));
             }
         }
-        grid.setDataSource(dataSource);
+//        grid.setDataSource(dataSource);
 
-        if (dataSource.isEmpty()) {
-            jutokuTekiyoJohoDiv.setShikakuInputMode(SHIKAKU_ADD);
-            setShikakuJohoDisabled(tplShikakuJoho, false);
-            jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho().getShikakuTokusoRireki()
-                    .getDgShikakuShutokuRireki().getGridSetting().setIsShowDeleteButtonColumn(false);
-        } else {
-            jutokuTekiyoJohoDiv.setShikakuInputMode(SHIKAKU_MODIFY);
-            jutokuTekiyoJohoDiv.setShikakuSelectRow(new RString("0"));
-            setShikakuJohoDisabled(tplShikakuJoho, false);
-            jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho().getShikakuTokusoRireki()
-                    .getDgShikakuShutokuRireki().getGridSetting().setIsShowDeleteButtonColumn(false);
-        }
+//        if (dataSource.isEmpty()) {
+//            jutokuTekiyoJohoDiv.setShikakuInputMode(SHIKAKU_ADD);
+//            setShikakuJohoDisabled(tplShikakuJoho, false);
+//            jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho().getShikakuTokusoRireki()
+//                    .getDgShikakuShutokuRireki().getGridSetting().setIsShowDeleteButtonColumn(false);
+//        } else {
+//            jutokuTekiyoJohoDiv.setShikakuInputMode(SHIKAKU_MODIFY);
+//            jutokuTekiyoJohoDiv.setShikakuSelectRow(new RString("0"));
+//            setShikakuJohoDisabled(tplShikakuJoho, false);
+//            jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho().getShikakuTokusoRireki()
+//                    .getDgShikakuShutokuRireki().getGridSetting().setIsShowDeleteButtonColumn(false);
     }
 
-    private List<dgShikakuShutokuRireki_Row> createJutokuTekiyoRirekiList(List<HashMap> hihokenshaDaichoData) {
-        List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
-        for (HashMap hihoDaichoDataRow : hihokenshaDaichoData) {
-            dataSource.add(createJutokuTekiyoRirekiRowFromHashMap(hihoDaichoDataRow));
-        }
-        return dataSource;
-    }
-
-    private dgShikakuShutokuRireki_Row createJutokuTekiyoRirekiRowFromHashMap(HashMap hihokenshaDaichoData) {
-        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(new Button(), new TextBoxFlexibleDate(),
-                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
-
-        ControlGenerator generator = new ControlGenerator(hihokenshaDaichoData);
-        row.getShutokuTodokedeDate().setValue(generator.getAsFlexibleDate("取得届出日"));
-        row.getShutokuDate().setValue(generator.getAsFlexibleDate("取得日"));
-        row.setShutokuJiyu(generator.getAsRString("取得事由"));
-        row.setShutokuJiyuKey(generator.getAsRString("取得事由Key"));
-        row.getSoshitsuTodokedeDate().setValue(generator.getAsFlexibleDate("喪失届出日"));
-        row.getSoshitsuDate().setValue(generator.getAsFlexibleDate("喪失日"));
-        row.setSoshitsuJiyu(generator.getAsRString("喪失事由"));
-        row.setSoshitsuJiyuKey(generator.getAsRString("喪失事由Key"));
-        row.setHihokenshaKubunKey(generator.getAsRString("被保区分Key"));
-        row.setHihokenshaKubun(generator.getAsRString("被保区分"));
-        row.getJutokuKaijoTodokedeDate().setValue(generator.getAsFlexibleDate("解除届出日"));
-        row.getJutokuKaijoDate().setValue(generator.getAsFlexibleDate("解除日"));
-        row.setJutokuKaijoJiyu(generator.getAsRString("解除事由"));
-        row.setJutokuKaijoJiyuKey(generator.getAsRString("解除事由Key"));
-        row.getJutokuTekiyoTodokedeDate().setValue(generator.getAsFlexibleDate("適用届出日"));
-        row.getJutokuTekiyoDate().setValue(generator.getAsFlexibleDate("適用日"));
-        row.setJutokuTekiyoJiyu(generator.getAsRString("適用事由"));
-        row.setJutokuTekiyoJiyuKey(generator.getAsRString("適用事由Key"));
-        row.getHenkoTodokedeDate().setValue(generator.getAsFlexibleDate("変更届出日"));
-        row.getHenkoDate().setValue(generator.getAsFlexibleDate("変更日"));
-        row.setHenkoJiyu(generator.getAsRString("変更事由"));
-        row.setHenkoJiyuKey(generator.getAsRString("変更事由Key"));
-        row.getNenreiTotatsuDate().setValue(generator.getAsFlexibleDate("1号年齢到達日"));
-        row.setKyuHokensha(generator.getAsRString("旧保険者"));
-        row.setShikibetsuCode(generator.getAsRString("識別コード"));
-        return row;
-    }
-
+//
+//    private List<dgShikakuShutokuRireki_Row> createJutokuTekiyoRirekiList(List<HashMap> hihokenshaDaichoData) {
+//        List<dgShikakuShutokuRireki_Row> dataSource = new ArrayList<>();
+//        for (HashMap hihoDaichoDataRow : hihokenshaDaichoData) {
+//            dataSource.add(createJutokuTekiyoRirekiRowFromHashMap(hihoDaichoDataRow));
+//        }
+//        return dataSource;
+//    }
+//
+//    private dgShikakuShutokuRireki_Row createJutokuTekiyoRirekiRowFromHashMap(HashMap hihokenshaDaichoData) {
+//        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(new Button(), new TextBoxFlexibleDate(),
+//                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+//                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+//                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+//                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+//                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+//                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+//
+//        ControlGenerator generator = new ControlGenerator(hihokenshaDaichoData);
+//        row.getShutokuTodokedeDate().setValue(generator.getAsFlexibleDate("取得届出日"));
+//        row.getShutokuDate().setValue(generator.getAsFlexibleDate("取得日"));
+//        row.setShutokuJiyu(generator.getAsRString("取得事由"));
+//        row.setShutokuJiyuKey(generator.getAsRString("取得事由Key"));
+//        row.getSoshitsuTodokedeDate().setValue(generator.getAsFlexibleDate("喪失届出日"));
+//        row.getSoshitsuDate().setValue(generator.getAsFlexibleDate("喪失日"));
+//        row.setSoshitsuJiyu(generator.getAsRString("喪失事由"));
+//        row.setSoshitsuJiyuKey(generator.getAsRString("喪失事由Key"));
+//        row.setHihokenshaKubunKey(generator.getAsRString("被保区分Key"));
+//        row.setHihokenshaKubun(generator.getAsRString("被保区分"));
+//        row.getJutokuKaijoTodokedeDate().setValue(generator.getAsFlexibleDate("解除届出日"));
+//        row.getJutokuKaijoDate().setValue(generator.getAsFlexibleDate("解除日"));
+//        row.setJutokuKaijoJiyu(generator.getAsRString("解除事由"));
+//        row.setJutokuKaijoJiyuKey(generator.getAsRString("解除事由Key"));
+//        row.getJutokuTekiyoTodokedeDate().setValue(generator.getAsFlexibleDate("適用届出日"));
+//        row.getJutokuTekiyoDate().setValue(generator.getAsFlexibleDate("適用日"));
+//        row.setJutokuTekiyoJiyu(generator.getAsRString("適用事由"));
+//        row.setJutokuTekiyoJiyuKey(generator.getAsRString("適用事由Key"));
+//        row.getHenkoTodokedeDate().setValue(generator.getAsFlexibleDate("変更届出日"));
+//        row.getHenkoDate().setValue(generator.getAsFlexibleDate("変更日"));
+//        row.setHenkoJiyu(generator.getAsRString("変更事由"));
+//        row.setHenkoJiyuKey(generator.getAsRString("変更事由Key"));
+//        row.getNenreiTotatsuDate().setValue(generator.getAsFlexibleDate("1号年齢到達日"));
+//        row.setKyuHokensha(generator.getAsRString("旧保険者"));
+//        row.setShikibetsuCode(generator.getAsRString("識別コード"));
+//        return row;
+//    }
     private void setShikakuJohoDisabled(tplShikakuJohoDiv tplShikakuJoho, boolean disableValue) {
         tplShikakuJoho.getJutokuTekiyoInput().setDisabled(disableValue);
         tplShikakuJoho.getBtnUpdateShikaku().setDisabled(disableValue);
@@ -344,10 +343,10 @@ public class TaskJutokuTekiyoJoho {
             setShisetsuNyutaishoDisabled(tplShisetsuNyutaisho, true);
         }
 
-        DropDownList ddl = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().getDdlTaishoJoho();
-        ddl.setDataSource(ddl.getDataSource().subList(0, 2));
-        RadioButton rad = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().getShisetsuJoho().getRadShisetsuShurui();
-        rad.setDataSource(rad.getDataSource().subList(0, 2));
+//        DropDownList ddl = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().getDdlTaishoJoho();
+//        ddl.setDataSource(ddl.getDataSource().subList(0, 2));
+//        RadioButton rad = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().getShisetsuJoho().getRadShisetsuShurui();
+//        rad.setDataSource(rad.getDataSource().subList(0, 2));
     }
 
     private List<dgShisetsuNyutaishoRireki_Row> createShisetsuNyutaishoList(List<HashMap> shisetsuNyutaishoData) {
@@ -369,16 +368,16 @@ public class TaskJutokuTekiyoJoho {
         row.setShisetsuCode(generator.getAsRString("施設コード"));
         row.setShisetsuMeisho(generator.getAsRString("施設名称"));
         row.setShisetsu(row.getShisetsuCode().concat(":").concat(row.getShisetsuMeisho()));
-        row.setTaishoJohoKey(generator.getAsRString("対象情報Key"));
-        row.setTaishoJoho(generator.getAsRString("対象情報"));
+//        row.setTaishoJohoKey(generator.getAsRString("対象情報Key"));
+//        row.setTaishoJoho(generator.getAsRString("対象情報"));
         row.setShisetsuShuruiKey(generator.getAsRString("施設種類Key"));
         row.setShisetsuShurui(generator.getAsRString("施設種類"));
         return row;
     }
 
     private void setShisetsuNyutaishoDisabled(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho, boolean disableValue) {
-        tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().setDisabled(disableValue);
-        tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getBtnUpdateShisetsuNyutaisho().setDisabled(disableValue);
+//        tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().setDisabled(disableValue);
+//        tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getBtnUpdateShisetsuNyutaisho().setDisabled(disableValue);
     }
 
     /**
@@ -393,10 +392,10 @@ public class TaskJutokuTekiyoJoho {
         tplShikakuJohoDiv tplShikakuJoho = jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho();
 
         jutokuTekiyoJohoDiv.setShikakuInputMode(SHIKAKU_MODIFY);
-        jutokuTekiyoJohoDiv.setShikakuSelectRow(
-                new RString(Integer.toString(tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedRowId())));
-        setJutokuTekiyoInput(tplShikakuJoho, tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedItem());
-        setShikakuJohoDisabled(tplShikakuJoho, false);
+//        jutokuTekiyoJohoDiv.setShikakuSelectRow(
+        //                new RString(Integer.toString(tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedRowId())));
+        //        setJutokuTekiyoInput(tplShikakuJoho, tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedItem());
+        //                setShikakuJohoDisabled(tplShikakuJoho, false);
         response.data = jutokuTekiyoJohoDiv;
         return response;
     }
@@ -413,8 +412,8 @@ public class TaskJutokuTekiyoJoho {
         tplShikakuJohoDiv tplShikakuJoho = jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho();
 
         jutokuTekiyoJohoDiv.setShikakuInputMode(SHIKAKU_DELETE);
-        jutokuTekiyoJohoDiv.setShikakuSelectRow(new RString(Integer.toString(tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedRowId())));
-        setJutokuTekiyoInput(tplShikakuJoho, tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedItem());
+//        jutokuTekiyoJohoDiv.setShikakuSelectRow(new RString(Integer.toString(tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedRowId())));
+//        setJutokuTekiyoInput(tplShikakuJoho, tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedItem());
         setShikakuJohoDisabled(tplShikakuJoho, true);
         tplShikakuJoho.getBtnUpdateShikaku().setDisabled(false);
         response.data = jutokuTekiyoJohoDiv;
@@ -434,28 +433,28 @@ public class TaskJutokuTekiyoJoho {
         ResponseData<TaskJutokuTekiyoJohoDiv> response = new ResponseData<>();
         tplShikakuJohoDiv tplShikakuJoho = jutokuTekiyoJohoDiv.getTabInputs().getTplShikakuJoho();
         int selectRowNum;
-        dgShikakuShutokuRireki_Row selectRow;
+//        dgShikakuShutokuRireki_Row selectRow;
 
         if (jutokuTekiyoJohoDiv.getShikakuInputMode().equals(SHIKAKU_ADD)) {
-            dgShikakuShutokuRireki_Row row = createJutokuTekiyoRirekiRowFromInputValue(tplShikakuJoho);
-            row.setRowState(RowState.Added);
-            tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().add(0, row);
+//            dgShikakuShutokuRireki_Row row = createJutokuTekiyoRirekiRowFromInputValue(tplShikakuJoho);
+//            row.setRowState(RowState.Added);
+//            tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().add(0, row);
         } else if (jutokuTekiyoJohoDiv.getShikakuInputMode().equals(SHIKAKU_MODIFY)) {
             selectRowNum = Integer.parseInt(jutokuTekiyoJohoDiv.getShikakuSelectRow().toString());
-            selectRow = tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().get(selectRowNum);
-            setJutokuTekiyoRirekiRowFromInputValue(tplShikakuJoho, selectRow);
-            if (selectRow.getRowState().equals(RowState.Added)) {
-            } else {
-                selectRow.setRowState(RowState.Modified);
-            }
+//            selectRow = tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().get(selectRowNum);
+//            setJutokuTekiyoRirekiRowFromInputValue(tplShikakuJoho, selectRow);
+//            if (selectRow.getRowState().equals(RowState.Added)) {
+//            } else {
+//                selectRow.setRowState(RowState.Modified);
+//            }
         } else if (jutokuTekiyoJohoDiv.getShikakuInputMode().equals(SHIKAKU_DELETE)) {
             selectRowNum = Integer.parseInt(jutokuTekiyoJohoDiv.getShikakuSelectRow().toString());
-            selectRow = tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().get(selectRowNum);
-            if (selectRow.getRowState().equals(RowState.Added)) {
-                tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().remove(selectRowNum);
-            } else {
-                tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().get(selectRowNum).setRowState(RowState.Deleted);
-            }
+//            selectRow = tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().get(selectRowNum);
+//            if (selectRow.getRowState().equals(RowState.Added)) {
+//                tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().remove(selectRowNum);
+//            } else {
+//                tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().get(selectRowNum).setRowState(RowState.Deleted);
+//            }
         }
 
         setShikakuJohoDisabled(tplShikakuJoho, true);
@@ -463,33 +462,33 @@ public class TaskJutokuTekiyoJoho {
         response.data = jutokuTekiyoJohoDiv;
         return response;
     }
-
-    private dgShikakuShutokuRireki_Row createJutokuTekiyoRirekiRowFromInputValue(tplShikakuJohoDiv tplShikakuJoho) {
-        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(new Button(), new TextBoxFlexibleDate(),
-                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
-
-        setJutokuTekiyoRirekiRowFromInputValue(tplShikakuJoho, row);
-        return row;
-    }
-
-    private void setJutokuTekiyoRirekiRowFromInputValue(tplShikakuJohoDiv tplShikakuJoho, dgShikakuShutokuRireki_Row row) {
-
-        JutokuTekiyoInputDiv shutoku = tplShikakuJoho.getJutokuTekiyoInput();
-        row.getJutokuTekiyoDate().setValue(shutoku.getTxtJutokuTekiyoDate().getValue());
-        row.getJutokuTekiyoTodokedeDate().setValue(shutoku.getTxtJutokuTekiyoTodokedeDate().getValue());
-        row.setJutokuTekiyoJiyu(shutoku.getDdlJutokuTekiyoJiyu().getSelectedValue());
-        row.setJutokuTekiyoJiyuKey(shutoku.getDdlJutokuTekiyoJiyu().getSelectedItem());
-    }
-
-    private void setJutokuTekiyoInput(tplShikakuJohoDiv tplShikakuJoho, dgShikakuShutokuRireki_Row row) {
-        setJutokuTekiyoJohoInput(tplShikakuJoho, row.getJutokuTekiyoJiyuKey(), row.getJutokuTekiyoDate().getValue(),
-                row.getJutokuTekiyoTodokedeDate().getValue());
-    }
+//
+//    private dgShikakuShutokuRireki_Row createJutokuTekiyoRirekiRowFromInputValue(tplShikakuJohoDiv tplShikakuJoho) {
+//        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(new Button(), new TextBoxFlexibleDate(),
+//                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+//                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+//                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+//                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+//                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+//                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+//
+//        setJutokuTekiyoRirekiRowFromInputValue(tplShikakuJoho, row);
+//        return row;
+//    }
+//
+//    private void setJutokuTekiyoRirekiRowFromInputValue(tplShikakuJohoDiv tplShikakuJoho, dgShikakuShutokuRireki_Row row) {
+//
+//        JutokuTekiyoInputDiv shutoku = tplShikakuJoho.getJutokuTekiyoInput();
+//        row.getJutokuTekiyoDate().setValue(shutoku.getTxtJutokuTekiyoDate().getValue());
+//        row.getJutokuTekiyoTodokedeDate().setValue(shutoku.getTxtJutokuTekiyoTodokedeDate().getValue());
+//        row.setJutokuTekiyoJiyu(shutoku.getDdlJutokuTekiyoJiyu().getSelectedValue());
+//        row.setJutokuTekiyoJiyuKey(shutoku.getDdlJutokuTekiyoJiyu().getSelectedItem());
+//    }
+//
+//    private void setJutokuTekiyoInput(tplShikakuJohoDiv tplShikakuJoho, dgShikakuShutokuRireki_Row row) {
+//        setJutokuTekiyoJohoInput(tplShikakuJoho, row.getJutokuTekiyoJiyuKey(), row.getJutokuTekiyoDate().getValue(),
+//                row.getJutokuTekiyoTodokedeDate().getValue());
+//    }
 
     private void clearJutokuTekiyoInput(tplShikakuJohoDiv tplShikakuJoho) {
         setJutokuTekiyoJohoInput(tplShikakuJoho, new RString("jutokuTekiyo"), null, null);

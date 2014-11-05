@@ -1,16 +1,16 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigokanryomessage;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KaigoKanryoMessage のクラスファイル 
- * 
+ * KaigoKanryoMessage のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoKanryoMessageDiv extends Panel {
@@ -20,8 +20,9 @@ public class KaigoKanryoMessageDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("KanryoMessage")
-    private KanryoMessageDiv KanryoMessage;
+    private IKanryoMessageDiv KanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,13 +31,13 @@ public class KaigoKanryoMessageDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("KanryoMessage")
-    public KanryoMessageDiv getKanryoMessage() {
+    public IKanryoMessageDiv getKanryoMessage() {
         return KanryoMessage;
     }
 
     @JsonProperty("KanryoMessage")
     public void setKanryoMessage(KanryoMessageDiv KanryoMessage) {
-        this.KanryoMessage=KanryoMessage;
+        this.KanryoMessage = KanryoMessage;
     }
 
 }

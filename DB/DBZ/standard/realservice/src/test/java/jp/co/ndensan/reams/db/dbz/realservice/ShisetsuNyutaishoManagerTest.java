@@ -119,7 +119,7 @@ public class ShisetsuNyutaishoManagerTest extends DbzTestBase {
     public static class get個人台帳別施設入退所履歴 {
 
         private static final ShikibetsuCode 個人識別コード = new ShikibetsuCode(new RString("1111111111"));
-        private static final DaichoType 台帳種別 = DaichoType.被保険者台帳;
+        private static final DaichoType 台帳種別 = DaichoType.被保険者;
 
         @Test
         public void 該当の施設入退所情報がない時_get個人台帳別施設入退所履歴は_空のリストを返す() {

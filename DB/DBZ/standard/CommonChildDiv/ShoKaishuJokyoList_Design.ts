@@ -1,5 +1,6 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBZ {
     /**
@@ -40,7 +41,7 @@ module DBZ {
      "fieldName": "dgShoKaishuJokyo",
      "items": [],
      "controlType": "DataGrid",
-     "width": "940",
+     "width": "910px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -51,8 +52,8 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
+     "marginLeft": "0em",
+     "marginRight": "0em",
      "selectControlID": "dgShoKaishuJokyo",
      "helpMessageID": "",
      "jpControlName": "",
@@ -65,39 +66,19 @@ module DBZ {
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
-      "isShowRowState": true,
-      "isShowSelectButtonColumn": false,
+      "isShowRowState": false,
+      "isShowSelectButtonColumn": true,
       "isShowModifyButtonColumn": false,
       "isShowDeleteButtonColumn": false,
       "limitRowCount": 0,
       "selectedRowCount": 0,
+      "selectLimitRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
        "headerHeight": 0
       },
       "columns": [
-       {
-        "columnName": "選択",
-        "dataName": "btnSelect",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 40,
-        "visible": true,
-        "cellType": 8,
-        "cellDetails": {
-         "cellType": 8,
-         "text": "",
-         "onClick": "onClick_btnSelect",
-         "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
-         "imageWidth": "20",
-         "imageHeight": "20"
-        },
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": ""
-       },
        {
         "columnName": "交付証種類",
         "dataName": "kofushoShurui",
@@ -281,11 +262,12 @@ module DBZ {
      "sortOrder": "kaishuDate",
      "isAscending": true,
      "filterList": [],
-     "activeRowId": -1
+     "activeRowId": -1,
+     "gridAction": []
     }
    ],
    "controlType": "Panel",
-   "width": "945",
+   "width": "945px",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -296,8 +278,8 @@ module DBZ {
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
+   "marginLeft": "0em",
+   "marginRight": "0em",
    "selectControlID": "ShoKaishuJokyoList",
    "helpMessageID": "",
    "jpControlName": "",
@@ -328,7 +310,8 @@ module DBZ {
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": "CommonChildDiv",
@@ -343,23 +326,67 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": "0",
- "marginRight": "0",
+ "marginLeft": "0em",
+ "marginRight": "0em",
  "selectControlID": "defaultLayout",
  "helpMessageID": "",
  "jpControlName": "",
  "relation": [],
+ "packageName": "",
  "businessId": "DBZ",
  "controlName": "ShoKaishuJokyoList",
- "marginTop": 0,
- "marginBottom": 0,
+ "marginTop": "0em",
+ "marginBottom": "0em",
  "originalProperty": [],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": "",
  "canTransferEvent": true,
- "heightForDialog": "M"
+ "heightForDialog": "M",
+ "firstFocusFieldName": "",
+ "lastFocusFieldName": "",
+ "modes": [],
+ "publicEvents": [],
+ "publicEventsAlias": []
 }        
     }
+
+     export module ShoKaishuJokyoList {
+
+        export class Events {
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static myType(): string {
+                return "ShoKaishuJokyoList";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + DBZ.ShoKaishuJokyoList.Controls.myType();
+            }
+
+            public convFiledName(fieldName: string): string {
+                return this._myName + "_" + DBZ.ShoKaishuJokyoList.Controls.myType() + "_" + fieldName;
+            }
+
+            public ShoKaishuJokyoList(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShoKaishuJokyoList"));
+            }
+
+            public dgShoKaishuJokyo(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgShoKaishuJokyo"));
+            }
+
+        }
+
+     }
+
 }
 

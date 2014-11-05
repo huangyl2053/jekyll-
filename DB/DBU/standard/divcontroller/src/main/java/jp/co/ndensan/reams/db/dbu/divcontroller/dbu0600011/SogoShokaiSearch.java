@@ -66,8 +66,8 @@ public class SogoShokaiSearch {
     // 検索条件情報を設定する
     private void setSerachInfo(SogoShokaiSearchDiv panel) {
         HashMap map = getYamlData(YML_SEARCH).get(0);
-        AtenaFinderDiv kojinDiv = panel.getSogoShokaiSearchInfo().getKaigoAtenaFinder();
-        kojinDiv.getTxtAtenaMeisho().setValue(new RString(map.get("氏名").toString()));
+//        AtenaFinderDiv kojinDiv = panel.getSogoShokaiSearchInfo().getKaigoAtenaFinder();
+//        kojinDiv.getTxtAtenaMeisho().setValue(new RString(map.get("氏名").toString()));
         //kojinDiv.getRadSearchPatternOfShimei().setSelectedItem(new RString("key0"));
     }
 
