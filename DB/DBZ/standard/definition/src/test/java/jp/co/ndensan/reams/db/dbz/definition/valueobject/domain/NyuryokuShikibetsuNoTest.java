@@ -28,6 +28,7 @@ public class NyuryokuShikibetsuNoTest {
 
     public static class constructorのテスト extends DbcTestBase {
 
+        @Test
         public void 引数にnullでない値が渡されたとき_インスタンスが生成される() {
             sut1 = new NyuryokuShikibetsuNo(new RString("0123"));
             assertThat(sut1, isA(NyuryokuShikibetsuNo.class));

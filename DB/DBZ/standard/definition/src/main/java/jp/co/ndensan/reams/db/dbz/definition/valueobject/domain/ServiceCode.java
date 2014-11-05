@@ -43,7 +43,7 @@ public final class ServiceCode implements IValueObject<RString>, Comparable<Serv
      *
      * @param code サービスコード
      */
-    public ServiceCode(RString code) throws NullPointerException {
+    public ServiceCode(RString code) {
         this.code = code;
     }
 
