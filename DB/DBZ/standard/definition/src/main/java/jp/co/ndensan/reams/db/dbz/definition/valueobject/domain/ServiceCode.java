@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -17,18 +17,34 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author N3317 塚田 萌
  */
-public class ServiceCode implements IDbColumnMappable, IValueObject, Comparable<ServiceCode> {
+public final class ServiceCode implements IValueObject, Comparable<ServiceCode>, IDbColumnMappable, Serializable {
 
+    /**
+     * 空の ServiceCode です。{@link #value() value()}で{@link RString#EMPTY}を返します。
+     */
+    public static final ServiceCode EMPTY;
+
+    static {
+        EMPTY = new ServiceCode(RString.EMPTY);
+    }
     private final RString code;
 
     /**
      * 指定した値からサービスコードを生成します。
      *
      * @param code サービスコード
-     * @throws NullPointerException 引数にnullが渡されたとき
+     */
+    public ServiceCode(String code) {
+        this.code = (code == null) ? null : new RString(code);
+    }
+
+    /**
+     * 指定した値からサービスコードを生成します。
+     *
+     * @param code サービスコード
      */
     public ServiceCode(RString code) throws NullPointerException {
-        this.code = requireNonNull(code, UrSystemErrorMessages.値がnull.getReplacedMessage("サービスコード"));
+        this.code = code;
     }
 
     @Override
@@ -38,15 +54,19 @@ public class ServiceCode implements IDbColumnMappable, IValueObject, Comparable<
 
     @Override
     public int compareTo(ServiceCode 比較対象) {
-        return this.value().compareTo(比較対象.value());
+        return Objects.compare(this.code, 比較対象.code, Comparators.NaturalOrderComparator.ASC.getInstance());
     }
 
     @Override
     public boolean equals(Object 比較対象) {
-        if (比較対象 == null || getClass() != 比較対象.getClass()) {
+        if (比較対象 == null) {
             return false;
         }
-        return ((ServiceCode) 比較対象).value().equals(this.value());
+        if (!(比較対象 instanceof ServiceCode)) {
+            return false;
+        }
+        ServiceCode other = (ServiceCode) 比較対象;
+        return Objects.equals(this.code, other.code);
     }
 
     @Override

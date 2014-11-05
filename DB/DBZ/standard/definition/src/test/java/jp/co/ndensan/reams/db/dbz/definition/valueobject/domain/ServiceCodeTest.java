@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -23,14 +24,6 @@ import org.junit.runner.RunWith;
 public class ServiceCodeTest extends DbzTestBase {
 
     private static ServiceCode sut;
-
-    public static class Constructor {
-
-        @Test(expected = NullPointerException.class)
-        public void 引数がnullの時_NullPointerExceptionが発生する() {
-            sut = new ServiceCode(null);
-        }
-    }
 
     public static class value {
 
@@ -98,14 +91,6 @@ public class ServiceCodeTest extends DbzTestBase {
             ServiceCode testData = createServiceCode("1234567890");
 
             assertThat(sut.hashCode(), is(testData.hashCode()));
-        }
-
-        @Test
-        public void 異なる値で生成されたインスタンス同士は_異なる値を返す() {
-            sut = createServiceCode("1234567890");
-            ServiceCode testData = createServiceCode("0000000000");
-
-            assertThat(sut.hashCode(), not(testData.hashCode()));
         }
     }
 

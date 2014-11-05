@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
 import java.util.Objects;
 
 /**
