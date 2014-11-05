@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author n8223 朴 義一
  */
-public final class ServiceShuruiCode implements IValueObject, Comparable<ServiceShuruiCode>, IDbColumnMappable, Serializable {
+public final class ServiceShuruiCode implements IValueObject<RString>, Comparable<ServiceShuruiCode>, IDbColumnMappable, Serializable {
 
     /**
      * 空の ServiceShuruiCode です。

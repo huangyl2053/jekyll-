@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author n8223 朴 義一
  */
-public class ServiceKomokuCode implements IValueObject, Comparable<ServiceKomokuCode>, IDbColumnMappable, Serializable {
+public class ServiceKomokuCode implements IValueObject<RString>, Comparable<ServiceKomokuCode>, IDbColumnMappable, Serializable {
 
     /**
      * 空の ServiceKomokuCode です。

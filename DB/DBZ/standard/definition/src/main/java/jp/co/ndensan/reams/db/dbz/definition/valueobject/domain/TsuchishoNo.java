@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NaturalOrderComparator;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author n8178 城間篤人
  */
-public final class TsuchishoNo implements IValueObject<RString>, Comparable<TsuchishoNo>, IDbColumnMappable {
+public final class TsuchishoNo implements IValueObject<RString>, Comparable<TsuchishoNo>, IDbColumnMappable, Serializable {
 
     /**
      * 空の TsuchishoNo です。{@link #value() value()}で{@link RString#EMPTY}を返します。

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NaturalOrderComparator;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author n8223 朴 義一
  */
-public class KokanShikibetsuNo implements IDbColumnMappable, IValueObject, Comparable<KokanShikibetsuNo> {
+public final class KokanShikibetsuNo implements IValueObject, Comparable<KokanShikibetsuNo>, IDbColumnMappable, Serializable {
 
     /**
      * 空の KokanShikibetsuNo です。

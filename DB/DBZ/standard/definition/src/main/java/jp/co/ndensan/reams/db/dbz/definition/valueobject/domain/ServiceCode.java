@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author N3317 塚田 萌
  */
-public final class ServiceCode implements IValueObject, Comparable<ServiceCode>, IDbColumnMappable, Serializable {
+public final class ServiceCode implements IValueObject<RString>, Comparable<ServiceCode>, IDbColumnMappable, Serializable {
 
     /**
      * 空の ServiceCode です。{@link #value() value()}で{@link RString#EMPTY}を返します。
