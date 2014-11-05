@@ -19,6 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public final class HokenshaNo implements IValueObject<RString>, Comparable<HokenshaNo>, IDbColumnMappable, Serializable {
 
+    /**
+     * 空の HokenshaNo です。{@link #value() value()}で{@link RString#EMPTY}を返します。
+     */
     public static final HokenshaNo EMPTY;
 
     static {
@@ -70,7 +73,7 @@ public final class HokenshaNo implements IValueObject<RString>, Comparable<Hoken
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 97 * hash + Objects.hashCode(this.theValue);
+        hash = 41 * hash + Objects.hashCode(this.theValue);
         return hash;
     }
 

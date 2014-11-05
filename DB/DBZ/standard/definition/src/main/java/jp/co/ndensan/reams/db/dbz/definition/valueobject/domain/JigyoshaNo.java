@@ -2,24 +2,43 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 事業者番号を表すクラスです
+ * 事業者番号を表すクラスです。
  *
  * @author N3317 塚田 萌
  */
-public class JigyoshaNo implements IValueObject, IDbColumnMappable, Comparable<JigyoshaNo> {
+public class JigyoshaNo implements IValueObject, IDbColumnMappable, Comparable<JigyoshaNo>, Serializable {
+
+    /**
+     * 空の JigyoshaNo です。{@link #value() value()}で{@link RString#EMPTY}を返します。
+     */
+    public static final JigyoshaNo EMPTY;
+
+    static {
+        EMPTY = new JigyoshaNo(RString.EMPTY);
+    }
 
     private final RString 事業者番号;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
+     *
+     * @param 事業者番号 事業者番号
+     */
+    public JigyoshaNo(String 事業者番号) {
+        this.事業者番号 = (事業者番号 == null) ? null : new RString(事業者番号);
+    }
+
+    /**
+     * コンストラクタです。
      *
      * @param 事業者番号 事業者番号
      */
@@ -40,7 +59,7 @@ public class JigyoshaNo implements IValueObject, IDbColumnMappable, Comparable<J
         if (!(比較対象 instanceof JigyoshaNo)) {
             return false;
         }
-        return ((JigyoshaNo) 比較対象).value().equals(事業者番号);
+        return Objects.equals(((JigyoshaNo) 比較対象).事業者番号, 事業者番号);
     }
 
     @Override
@@ -51,7 +70,7 @@ public class JigyoshaNo implements IValueObject, IDbColumnMappable, Comparable<J
     }
 
     /**
-     * 事業者番号を取得します
+     * 事業者番号を取得します。
      *
      * @return 事業者番号
      */
