@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiSe
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiMeisaiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiGokeiList_Row;
 import jp.co.ndensan.reams.db.dbc.realservice.KyufuJissekiServiceFinder;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;

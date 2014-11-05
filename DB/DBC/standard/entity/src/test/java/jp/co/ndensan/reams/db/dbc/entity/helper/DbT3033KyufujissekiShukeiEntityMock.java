@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.helper;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;

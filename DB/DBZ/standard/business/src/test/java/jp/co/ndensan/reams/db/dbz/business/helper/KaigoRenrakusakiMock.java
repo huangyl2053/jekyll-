@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.helper;
 
 import jp.co.ndensan.reams.db.dbz.business.KaigoRenrakusaki;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RenrakusakiKubunNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;

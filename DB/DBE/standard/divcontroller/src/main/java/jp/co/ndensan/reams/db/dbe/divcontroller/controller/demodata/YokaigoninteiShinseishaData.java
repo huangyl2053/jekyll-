@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData.Chosain;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiData.Doctor;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaForSearchResult;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IHihokenshaForSearchResult;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;

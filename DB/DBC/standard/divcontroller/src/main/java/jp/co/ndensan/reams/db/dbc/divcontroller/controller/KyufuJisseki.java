@@ -53,7 +53,7 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiYoshiki;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuJissekiYoshikiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.tabKyufuJissekiDiv;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

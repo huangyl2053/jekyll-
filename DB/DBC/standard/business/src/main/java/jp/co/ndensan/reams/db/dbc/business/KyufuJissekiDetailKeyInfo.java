@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;

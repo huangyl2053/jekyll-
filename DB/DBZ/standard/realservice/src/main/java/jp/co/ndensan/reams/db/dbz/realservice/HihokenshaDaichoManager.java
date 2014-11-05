@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.business.mapper.HihokenshaShikakuMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;

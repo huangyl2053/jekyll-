@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.mapper.JogaiShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.JogaiShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiIinJogaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.JogaiShinsakaiIinDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 

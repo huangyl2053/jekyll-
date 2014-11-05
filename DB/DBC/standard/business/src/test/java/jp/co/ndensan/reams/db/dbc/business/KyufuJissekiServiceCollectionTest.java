@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ServiceCategory;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;

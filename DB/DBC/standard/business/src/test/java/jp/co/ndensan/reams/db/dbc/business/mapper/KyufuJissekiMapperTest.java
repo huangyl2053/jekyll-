@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3033KyufujissekiShukeiEntityM
 import jp.co.ndensan.reams.db.dbc.entity.helper.KyufujissekiShuruiDetailEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;

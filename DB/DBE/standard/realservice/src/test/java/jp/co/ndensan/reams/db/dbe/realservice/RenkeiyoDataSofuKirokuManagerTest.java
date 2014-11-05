@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.NinteiShinseijiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiChousaSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiIkenshoSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiSoufuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.RenkeiyoDataSofuKirokuDacMock;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;

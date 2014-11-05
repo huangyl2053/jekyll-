@@ -41,7 +41,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.mapper.YokaigoNinteiShinseiDivMa
 import jp.co.ndensan.reams.db.dbe.realservice.JogaiShinsakaiIinManager;
 import jp.co.ndensan.reams.db.dbe.realservice.YokaigoNinteiShinseiManager;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunShubetsuElseTokki;

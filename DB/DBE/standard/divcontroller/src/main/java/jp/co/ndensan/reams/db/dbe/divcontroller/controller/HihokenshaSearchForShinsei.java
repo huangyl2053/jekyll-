@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.realservice.Minashi2GoshaFinder;
 import jp.co.ndensan.reams.db.dbe.realservice.search.Minashi2GoshaDaichoSearchItem;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dbz.business.INinteiShinseiTaishosha;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaFinder;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaForSearchResult;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IHihokenshaForSearchResult;

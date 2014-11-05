@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

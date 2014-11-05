@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.definition.HikiwatashiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.NinteiShinseijiKubun;

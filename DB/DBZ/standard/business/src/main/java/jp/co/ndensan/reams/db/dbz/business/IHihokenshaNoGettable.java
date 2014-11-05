@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 
 /**
  * {@link KaigoHihokenshaNo 介護保険被保険者番号}が取得可能であることをあらわします。

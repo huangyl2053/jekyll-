@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuJissekiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuSakuseiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

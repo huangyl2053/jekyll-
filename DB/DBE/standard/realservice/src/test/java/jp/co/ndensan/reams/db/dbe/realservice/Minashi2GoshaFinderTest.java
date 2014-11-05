@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbe.business.Minashi2GoshaDaicho;
 import jp.co.ndensan.reams.db.dbe.business.Minashi2GoshaList;
 import jp.co.ndensan.reams.db.dbe.realservice.search.Minashi2GoshaDaichoSearchItem;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.jukikojin.IJukiKojin;

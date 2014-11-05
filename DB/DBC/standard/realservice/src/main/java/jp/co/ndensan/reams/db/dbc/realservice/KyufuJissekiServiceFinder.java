@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiServiceCollections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
 import jp.co.ndensan.reams.db.dbc.business.mapper.KyufuJissekiServiceMapper;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.KyufuJissekiServiceDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

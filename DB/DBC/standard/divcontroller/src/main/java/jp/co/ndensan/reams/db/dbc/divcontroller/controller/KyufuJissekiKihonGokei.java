@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJisseki;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiDetailKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.realservice.KyufuJissekiFinder;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

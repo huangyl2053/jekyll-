@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItem;
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItemList;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020002.dgFukaErrorList_Row;
 import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

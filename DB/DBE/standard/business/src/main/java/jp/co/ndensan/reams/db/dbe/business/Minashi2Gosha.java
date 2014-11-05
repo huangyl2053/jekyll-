@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbz.business.INinteiShinseiTaishosha;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
