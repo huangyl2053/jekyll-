@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -28,18 +29,11 @@ public class TsuchishoNoTest extends DbbTestBase {
 
     public static class constructor extends DbbTestBase {
 
-        @Test(expected = NullPointerException.class)
-        public void 通知書番号にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new TsuchishoNo(null);
-            fail();
-        }
-
         @Test
         public void 必須項目が渡されたとき_インスタンスが生成される() {
             sut = new TsuchishoNo(new RString("012"));
             assertThat(sut, is(instanceOf(TsuchishoNo.class)));
         }
-
     }
 
     public static class compareTo extends DbbTestBase {

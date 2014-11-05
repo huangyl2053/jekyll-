@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ServiceCategory;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ServiceCategorySubTitle;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ServiceCategoryTitle;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

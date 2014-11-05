@@ -53,9 +53,9 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiYoshiki;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KyufuJissekiYoshikiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.tabKyufuJissekiDiv;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -463,7 +463,7 @@ public class KyufuJisseki {
         RString サービス提供年月 = (RString) ViewStateHolder.get("サービス提供年月", RString.class);
 
         return new KyufuJissekiKeyInfo(
-                new KaigoHihokenshaNo(被保番号),
+                new HihokenshaNo(被保番号),
                 new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth(サービス提供期間開始)), new ServiceTeikyoYM((new FlexibleYearMonth(サービス提供期間終了)))),
                 new InputShikibetsuNo(new Code(入力識別番号), RString.EMPTY, RString.EMPTY),
                 new ServiceShuruiCode(サービス種類),

@@ -21,9 +21,9 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.JogaiShinsakaiIinEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -371,7 +371,7 @@ public final class ShinsakaiMockEntityCreator {
      * @return 審査会委員除外情報Entity
      */
     public static DbT5014ShinsakaiIinJogaiJohoEntity create審査会委員除外情報Entity(ShoKisaiHokenshaNo 証記載保険者番号,
-            KaigoHihokenshaNo 被保険者番号, int 管理番号, ShinsakaiIinCode 除外対象審査会委員コード) {
+            HihokenshaNo 被保険者番号, int 管理番号, ShinsakaiIinCode 除外対象審査会委員コード) {
         DbT5014ShinsakaiIinJogaiJohoEntity entity = new DbT5014ShinsakaiIinJogaiJohoEntity();
         entity.setShoKisaiHokenshaNo(証記載保険者番号);
         entity.setHihokenshaNo(被保険者番号);
@@ -383,7 +383,7 @@ public final class ShinsakaiMockEntityCreator {
     public static JogaiShinsakaiIinEntity create除外対象審査会委員EntitySpy() {
         return new JogaiShinsakaiIinEntity(create審査会委員EntitySpy("00000001"),
                 create審査会委員除外情報Entity(new ShoKisaiHokenshaNo(new RString("000001")),
-                        new KaigoHihokenshaNo(new RString("0000000001")), 1, new ShinsakaiIinCode(new RString("00001111"))));
+                        new HihokenshaNo(new RString("0000000001")), 1, new ShinsakaiIinCode(new RString("00001111"))));
     }
 
     public static List<JogaiShinsakaiIinEntity> create除外対象審査会委員EntityListSpy(int 件数) {

@@ -6,10 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShishoCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
@@ -37,7 +37,7 @@ public class DbT5001NinteiShinseiJohoEntityMock {
         entity.setShoriTimestamp(new YMDHMS("20140808102030"));
         entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("000000")));
         entity.setShishoCode(new ShishoCode(new RString("0")));
-        entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0000000001")));
+        entity.setHihokenshaNo(new HihokenshaNo(new RString("0000000001")));
         entity.setShikibetsuCode(new ShikibetsuCode("1"));
         entity.setNinteiShinseiYMD(FlexibleDate.getNowDate());
         entity.setNinteiShinseiEdabanCode(new EdabanCode("000"));

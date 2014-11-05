@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.model;
 
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorListEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.model.IInternalReportCommonModel;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -39,7 +39,7 @@ public class FukaErrorModel implements IInternalReportCommonModel {
         entity.setBatchId(RString.EMPTY);
         entity.setBatchStartingDateTime(RDateTime.MIN);
         entity.setErrorCode(Code.EMPTY);
-        entity.setHihokenshaNo(KaigoHihokenshaNo.NULL_VALUE);
+        entity.setHihokenshaNo(HihokenshaNo.EMPTY);
         entity.setShikibetsuCode(ShikibetsuCode.EMPTY);
         entity.setShoriKubunCode(InternalReportShoriKubun.処理無し.getCode());
     }
@@ -146,7 +146,7 @@ public class FukaErrorModel implements IInternalReportCommonModel {
      *
      * @return 被保険者番号
      */
-    public KaigoHihokenshaNo get被保険者番号() {
+    public HihokenshaNo get被保険者番号() {
         return entity.getHihokenshaNo();
     }
 
@@ -225,7 +225,7 @@ public class FukaErrorModel implements IInternalReportCommonModel {
      *
      * @param 被保険者番号 被保険者番号
      */
-    public void set被保険者番号(KaigoHihokenshaNo 被保険者番号) {
+    public void set被保険者番号(HihokenshaNo 被保険者番号) {
         entity.setHihokenshaNo(被保険者番号);
     }
 

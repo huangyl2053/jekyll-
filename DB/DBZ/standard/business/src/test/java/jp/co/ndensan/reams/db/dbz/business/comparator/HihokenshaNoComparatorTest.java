@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaNoGettable;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -26,24 +26,24 @@ import org.junit.Before;
 @RunWith(Enclosed.class)
 public class HihokenshaNoComparatorTest extends DbzTestBase {
 
-    private static KaigoHihokenshaNo n0000000001 = new KaigoHihokenshaNo(new RString("0000000001"));
-    private static KaigoHihokenshaNo n0000000002 = new KaigoHihokenshaNo(new RString("0000000002"));
-    private static KaigoHihokenshaNo n0000000003 = new KaigoHihokenshaNo(new RString("0000000003"));
-    private static KaigoHihokenshaNo n0000000004 = new KaigoHihokenshaNo(new RString("0000000004"));
+    private static HihokenshaNo n0000000001 = new HihokenshaNo(new RString("0000000001"));
+    private static HihokenshaNo n0000000002 = new HihokenshaNo(new RString("0000000002"));
+    private static HihokenshaNo n0000000003 = new HihokenshaNo(new RString("0000000003"));
+    private static HihokenshaNo n0000000004 = new HihokenshaNo(new RString("0000000004"));
 
     /**
      * HihokenshaNoComparatorTest用のIHihokenshaNoGettable単純実装クラスです。
      */
     private static class Sample implements IHihokenshaNoGettable {
 
-        private final KaigoHihokenshaNo hihokenshaNo;
+        private final HihokenshaNo hihokenshaNo;
 
-        public Sample(KaigoHihokenshaNo hihokenshaNo) {
+        public Sample(HihokenshaNo hihokenshaNo) {
             this.hihokenshaNo = hihokenshaNo;
         }
 
         @Override
-        public KaigoHihokenshaNo get被保険者番号() {
+        public HihokenshaNo get被保険者番号() {
             return this.hihokenshaNo;
         }
     }

@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbe.definition.NinteiShinseijiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiChousaSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiIkenshoSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiSoufuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,7 +34,7 @@ public class RenkeiyoDataSofuKirokuTest extends TestBase {
         RenkeiyoDataSofuKiroku sut;
         private ShinseishoKanriNo 申請書管理番号;
         private YMDHMS 処理日時;
-        private KaigoHihokenshaNo 被保険者番号;
+        private HihokenshaNo 被保険者番号;
         private NinteiShinseijiKubun 認定申請時区分;
         private HikiwatashiKubun 引渡し区分;
         private RDateTime 引渡し日時;
@@ -47,7 +47,7 @@ public class RenkeiyoDataSofuKirokuTest extends TestBase {
 
             申請書管理番号 = new ShinseishoKanriNo(new RString("1000000000"));
             処理日時 = new YMDHMS(new RString("20140808102030"));
-            被保険者番号 = new KaigoHihokenshaNo(new RString("H999999999"));
+            被保険者番号 = new HihokenshaNo(new RString("H999999999"));
             認定申請時区分 = NinteiShinseijiKubun.toValue(new RString("01"));
             引渡し区分 = HikiwatashiKubun.toValue(new RString("1"));
             引渡し日時 = RDateTime.of(2014, 03, 15, 22, 23, 44);

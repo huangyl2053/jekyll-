@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.jukikojin.IJukiKojin;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IJuminKihonDaichoSearchKey;
@@ -60,7 +60,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
         private final LasdecCode lasdecCode = new LasdecCode("123456");
         private final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("1234567890");
         private final YMDHMS shoriTimestamp = new YMDHMS("20110719012345");
-        private final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567892"));
+        private final HihokenshaNo hihokenshaNo = new HihokenshaNo(new RString("1234567892"));
         private Hihokensha result;
 
         @Before
@@ -99,7 +99,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
         private final LasdecCode lasdecCode = new LasdecCode("123456");
         private final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("1234567890");
         private final YMDHMS shoriTimestamp = new YMDHMS("20110912012345");
-        private final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567892"));
+        private final HihokenshaNo hihokenshaNo = new HihokenshaNo(new RString("1234567892"));
         private Hihokensha result;
 
         @Before
@@ -138,7 +138,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
         private final LasdecCode lasdecCode = new LasdecCode("123456");
         private final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("1234567890");
         private final YMDHMS shoriTimestamp = new YMDHMS("20110912012345");
-        private final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567892"));
+        private final HihokenshaNo hihokenshaNo = new HihokenshaNo(new RString("1234567892"));
         private Hihokensha result;
 
         @Before
@@ -180,7 +180,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
     public static class get被保険者List_引数が市町村コードの場合 extends DbzTestBase {
 
         private final LasdecCode lasdecCode = new LasdecCode("123456");
-        private final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567892"));
+        private final HihokenshaNo hihokenshaNo = new HihokenshaNo(new RString("1234567892"));
         List<IHihokenshaShikaku> list;
         private final int listSize = 3;
         private HihokenshaList result;
@@ -227,7 +227,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
 
         private ISearchCondition condition;
         private final LasdecCode lasdecCode = new LasdecCode("123456");
-        private final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567892"));
+        private final HihokenshaNo hihokenshaNo = new HihokenshaNo(new RString("1234567892"));
         List<IHihokenshaShikaku> list;
         private HihokenshaList result;
 
@@ -271,19 +271,19 @@ public class HihokenshaFinderTest extends DbzTestBase {
     }
 
     private static void setUpMock(LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode,
-            YMDHMS shoriTimestamp, KaigoHihokenshaNo hihokenshaNo) {
+            YMDHMS shoriTimestamp, HihokenshaNo hihokenshaNo) {
         _setUpMockOfHihokenshaDaichoManager(lasdecCode, shikibetsuCode, shoriTimestamp, hihokenshaNo);
         _setUpMockOfIKojinFinder_returnIKojinFor(shikibetsuCode);
     }
 
     private static void setUpMockAsKojinFinderReturnsNull(LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode,
-            YMDHMS shoriTimestamp, KaigoHihokenshaNo hihokenshaNo) {
+            YMDHMS shoriTimestamp, HihokenshaNo hihokenshaNo) {
         _setUpMockOfHihokenshaDaichoManager(lasdecCode, shikibetsuCode, shoriTimestamp, hihokenshaNo);
         _setUpMockOfIKojinFinder_returnNullAt(shikibetsuCode);
     }
 
     private static void _setUpMockOfHihokenshaDaichoManager(LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode,
-            YMDHMS shoriTimestamp, KaigoHihokenshaNo hihokenshaNo) {
+            YMDHMS shoriTimestamp, HihokenshaNo hihokenshaNo) {
         IHihokenshaShikaku shikaku = createHihokenshaShikaku(lasdecCode, shikibetsuCode, shoriTimestamp, hihokenshaNo);
         when(hihokenshaDaicho.get直近被保険者資格(lasdecCode, shikibetsuCode)).thenReturn(shikaku);
         when(hihokenshaDaicho.get直近被保険者資格(lasdecCode, hihokenshaNo)).thenReturn(shikaku);
@@ -306,14 +306,14 @@ public class HihokenshaFinderTest extends DbzTestBase {
         List<IHihokenshaShikaku> list = new ArrayList<>();
         for (int i = 0; i < listSize; i++) {
             ShikibetsuCode shikibetsuCode = new ShikibetsuCode("000000000" + i);
-            KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("000000000" + i));
+            HihokenshaNo hihokenshaNo = new HihokenshaNo(new RString("000000000" + i));
             list.add(createHihokenshaShikaku(lasdecCode, shikibetsuCode, new YMDHMS("20110912012345"), hihokenshaNo));
             _setUpMockOfIKojinFinder_returnIKojinFor(shikibetsuCode);
         }
         return list;
     }
 
-    private static List<IHihokenshaShikaku> createListOfHihokenshaShikaku(LasdecCode lasdecCode, KaigoHihokenshaNo hihokenshaNo) {
+    private static List<IHihokenshaShikaku> createListOfHihokenshaShikaku(LasdecCode lasdecCode, HihokenshaNo hihokenshaNo) {
         List<IHihokenshaShikaku> list = new ArrayList<>();
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode("012345678900001");
         list.add(createHihokenshaShikaku(lasdecCode, shikibetsuCode, new YMDHMS("20110912012345"), hihokenshaNo));
@@ -322,7 +322,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
     }
 
     private static IHihokenshaShikaku createHihokenshaShikaku(LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode,
-            YMDHMS shoriTimestamp, KaigoHihokenshaNo hihokenshaNo) {
+            YMDHMS shoriTimestamp, HihokenshaNo hihokenshaNo) {
         return new HihokenshaShikaku.Builder(lasdecCode, shikibetsuCode, shoriTimestamp, new ShoKisaiHokenshaNo(lasdecCode.getColumnValue()),
                 new HihokenshaKubun(new Code("1"), new RString("第1号")),
                 FlexibleDate.MAX, ShikakuShutoku.NOTHING).hihokenshaNo(hihokenshaNo).build();

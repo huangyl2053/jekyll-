@@ -14,10 +14,10 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirek
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.HihokenshaOutlineDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.ShinseiJohoInputDiv;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShishoCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -61,7 +61,7 @@ public class YokaigoNinteiShinseiDivMapper {
                 Item.処理日時.<YMDHMS>extractValue(div),
                 Item.保険者番号.<ShoKisaiHokenshaNo>extractValue(div),
                 Item.支所コード.<ShishoCode>extractValue(div),
-                Item.被保番号.<KaigoHihokenshaNo>extractValue(div),
+                Item.被保番号.<HihokenshaNo>extractValue(div),
                 Item.識別コード.<ShikibetsuCode>extractValue(div),
                 Item.認定申請日.<FlexibleDate>extractValue(div),
                 Item.枝番コード.<EdabanCode>extractValue(div),
@@ -113,13 +113,13 @@ public class YokaigoNinteiShinseiDivMapper {
 
                     @Override
                     ShishoCode extractValue(YokaigoNinteiShinseiDiv div) {
-                        return ShishoCode.NULL_VALUE;
+                        return ShishoCode.EMPTY;
                     }
                 },
         被保番号 {
                     @Override
-                    KaigoHihokenshaNo extractValue(YokaigoNinteiShinseiDiv div) {
-                        return new KaigoHihokenshaNo(
+                    HihokenshaNo extractValue(YokaigoNinteiShinseiDiv div) {
+                        return new HihokenshaNo(
                                 div.getHihokenshaOUtline().getShikakuKihon().getTxtHihokenshaNo().getValue());
                     }
                 },

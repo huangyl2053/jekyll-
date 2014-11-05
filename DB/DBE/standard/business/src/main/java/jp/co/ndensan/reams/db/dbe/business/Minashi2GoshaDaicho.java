@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -23,7 +23,7 @@ public class Minashi2GoshaDaicho implements IMinashi2GoshaDaicho {
 
     private final LasdecCode 市町村コード;
     private final ShikibetsuCode 識別コード;
-    private final KaigoHihokenshaNo 被保険者番号;
+    private final HihokenshaNo 被保険者番号;
     private final YMDHMS 処理日時;
     private final HihokenshaKubun 被保険者区分コード;
     private final FlexibleDate みなし2号登録年月日;
@@ -48,7 +48,7 @@ public class Minashi2GoshaDaicho implements IMinashi2GoshaDaicho {
     public Minashi2GoshaDaicho(
             LasdecCode 市町村コード,
             ShikibetsuCode 識別コード,
-            KaigoHihokenshaNo 被保険者番号,
+            HihokenshaNo 被保険者番号,
             YMDHMS 処理日時,
             HihokenshaKubun 被保険者区分コード,
             FlexibleDate みなし2号登録年月日,
@@ -81,7 +81,7 @@ public class Minashi2GoshaDaicho implements IMinashi2GoshaDaicho {
     }
 
     @Override
-    public KaigoHihokenshaNo get被保険者番号() {
+    public HihokenshaNo get被保険者番号() {
         return 被保険者番号;
     }
 

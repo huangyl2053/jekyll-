@@ -15,6 +15,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 final class MessageCreateHelper {
 
+    private MessageCreateHelper() {
+    }
+
     static String toCode(String prefix, int no) {
 
         RString noString = new RString(Integer.toString(no));
