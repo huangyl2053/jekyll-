@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV1001HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoViewModel;
@@ -38,7 +38,7 @@ public class HihokenshaDaichoViewDac {
      * @return 被保険者台帳ビューリスト
      */
     @Transaction
-    public IItemList<HihokenshaDaichoViewModel> selectBy被保険者番号(KaigoHihokenshaNo 被保険者番号) {
+    public IItemList<HihokenshaDaichoViewModel> selectBy被保険者番号(HihokenshaNo 被保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbV1001HihokenshaDaichoEntity> entityList = accessor.
                 select().
@@ -56,7 +56,7 @@ public class HihokenshaDaichoViewDac {
      * @return 被保険者台帳ビューリスト
      */
     @Transaction
-    public IItemList<HihokenshaDaichoViewModel> selectByAny市町村コード(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
+    public IItemList<HihokenshaDaichoViewModel> selectByAny市町村コード(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbV1001HihokenshaDaichoEntity> entityList = accessor.
                 select().
@@ -76,7 +76,7 @@ public class HihokenshaDaichoViewDac {
      * @return 被保険者台帳ビューリスト
      */
     @Transaction
-    public IItemList<HihokenshaDaichoViewModel> selectBy市町村コード(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
+    public IItemList<HihokenshaDaichoViewModel> selectBy市町村コード(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbV1001HihokenshaDaichoEntity> entityList = accessor.
                 select().
@@ -96,7 +96,7 @@ public class HihokenshaDaichoViewDac {
      * @return 被保険者台帳ビューリスト
      */
     @Transaction
-    public IItemList<HihokenshaDaichoViewModel> selectBy広住特措置元市町村コード(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
+    public IItemList<HihokenshaDaichoViewModel> selectBy広住特措置元市町村コード(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbV1001HihokenshaDaichoEntity> entityList = accessor.
                 select().

@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.jukikojin.IJukiKojin;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IJuminKihonDaichoSearchKey;
@@ -323,7 +322,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
 
     private static IHihokenshaShikaku createHihokenshaShikaku(LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode,
             YMDHMS shoriTimestamp, HihokenshaNo hihokenshaNo) {
-        return new HihokenshaShikaku.Builder(lasdecCode, shikibetsuCode, shoriTimestamp, new ShoKisaiHokenshaNo(lasdecCode.getColumnValue()),
+        return new HihokenshaShikaku.Builder(lasdecCode, shikibetsuCode, shoriTimestamp,
                 new HihokenshaKubun(new Code("1"), new RString("第1号")),
                 FlexibleDate.MAX, ShikakuShutoku.NOTHING).hihokenshaNo(hihokenshaNo).build();
     }

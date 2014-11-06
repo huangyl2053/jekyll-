@@ -1,5 +1,5 @@
 ﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
-hihokenshaNo,varchar,KaigoHihokenshaNo,,,,,A
+hihokenshaNo,varchar,HihokenshaNo,,,,,A
 shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
 shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
 shikakuShutokuJiyuCode,varchar,RString,,,,,A

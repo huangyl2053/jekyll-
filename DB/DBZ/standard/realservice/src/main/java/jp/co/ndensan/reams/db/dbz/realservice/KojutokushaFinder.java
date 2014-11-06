@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoViewModel;
 import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
@@ -30,7 +30,7 @@ public class KojutokushaFinder {
     private final HihokenshaDaichoViewDac dac;
     private final GaitoshaKensakuConfig config;
 
-    private static final KaigoHihokenshaNo 被保険者番号未指定 = null;
+    private static final HihokenshaNo 被保険者番号未指定 = null;
     private static final boolean 措置元先制御あり = true;
     private static final boolean 措置元先制御なし = false;
 
@@ -59,7 +59,7 @@ public class KojutokushaFinder {
      * @param 被保険者番号 被保険者番号
      * @return 識別コード
      */
-    public IOptional<ShikibetsuCode> get広住特者(KaigoHihokenshaNo 被保険者番号) {
+    public IOptional<ShikibetsuCode> get広住特者(HihokenshaNo 被保険者番号) {
         return get識別コード(被保険者番号);
     }
 
@@ -91,7 +91,7 @@ public class KojutokushaFinder {
      * @param 被保険者番号 被保険者番号
      * @return 識別コード
      */
-    public IItemList<ShikibetsuCode> get広住特者(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
+    public IItemList<ShikibetsuCode> get広住特者(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         return get識別コードList(市町村コード, 被保険者番号, 措置元先制御なし);
     }
 
@@ -103,22 +103,22 @@ public class KojutokushaFinder {
      * @param 被保険者番号 被保険者番号
      * @return 識別コード
      */
-    public IItemList<ShikibetsuCode> get広住特者_措置元先制御あり(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
+    public IItemList<ShikibetsuCode> get広住特者_措置元先制御あり(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         return get識別コードList(市町村コード, 被保険者番号, 措置元先制御あり);
     }
 
-    private IOptional<ShikibetsuCode> get識別コード(KaigoHihokenshaNo 被保険者番号) {
+    private IOptional<ShikibetsuCode> get識別コード(HihokenshaNo 被保険者番号) {
         IItemList<HihokenshaDaichoViewModel> daichoList = dac.selectBy被保険者番号(被保険者番号);
         return DbOptional.ofNullable(!daichoList.isEmpty() ? daichoList.asList().get(0).get識別コード() : null);
     }
 
-    private IItemList<ShikibetsuCode> get識別コードList(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号, boolean 出力制御) {
+    private IItemList<ShikibetsuCode> get識別コードList(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, boolean 出力制御) {
         return to識別コードList(出力制御
                 ? get被保険者台帳List_措置元先制御あり(市町村コード, 被保険者番号)
                 : dac.selectBy市町村コード(市町村コード, 被保険者番号));
     }
 
-    private IItemList<HihokenshaDaichoViewModel> get被保険者台帳List_措置元先制御あり(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
+    private IItemList<HihokenshaDaichoViewModel> get被保険者台帳List_措置元先制御あり(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         switch (config.get措置元措置先区分_介護資格()) {
             case 措置元:
                 return dac.selectBy市町村コード(市町村コード, 被保険者番号);

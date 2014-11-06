@@ -52,11 +52,6 @@ public class Hihokensha implements IHihokenshaShikaku, INinteiShinseiTaishosha {
     }
 
     @Override
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return this.shikaku.get証記載保険者番号();
-    }
-
-    @Override
     public ShikibetsuCode get識別コード() {
         return this.shikaku.get識別コード();
     }
@@ -122,8 +117,8 @@ public class Hihokensha implements IHihokenshaShikaku, INinteiShinseiTaishosha {
     }
 
     @Override
-    public ShoKisaiHokenshaNo get広域内住所地特例措置元保険者番号() {
-        return this.shikaku.get広域内住所地特例措置元保険者番号();
+    public LasdecCode get広域内住所地特例措置元市町村コード() {
+        return this.shikaku.get広域内住所地特例措置元市町村コード();
     }
 
     @Override

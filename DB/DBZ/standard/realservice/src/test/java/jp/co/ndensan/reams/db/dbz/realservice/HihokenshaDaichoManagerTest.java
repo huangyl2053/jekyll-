@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
 import jp.co.ndensan.reams.db.dbz.business.mapper.HihokenshaShikakuMapper;
@@ -60,7 +59,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
             dac = mock(HihokenshaDaichoDac.class);
             sut = new HihokenshaDaichoManager(dac, HihokenshaNoSaibanService.forTestType(new RString("1234567890")));
             shikaku = new HihokenshaShikaku.Builder(new LasdecCode("123456"), new ShikibetsuCode("1234567890"),
-                    new YMDHMS("20110912012345"), new ShoKisaiHokenshaNo(new RString("123456")),
+                    new YMDHMS("20110912012345"),
                     new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
                     .build();
         }
@@ -89,7 +88,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
             dac = mock(HihokenshaDaichoDac.class);
             sut = new HihokenshaDaichoManager(dac, HihokenshaNoSaibanService.forTestType(new RString("1234567890")));
             shikaku = new HihokenshaShikaku.Builder(new LasdecCode("123456"), new ShikibetsuCode("1234567890"),
-                    new YMDHMS("20110912012345"), new ShoKisaiHokenshaNo(new RString("123456")),
+                    new YMDHMS("20110912012345"),
                     new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
                     .build();
         }

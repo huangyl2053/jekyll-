@@ -32,8 +32,7 @@ import static org.mockito.Mockito.*;
 public final class DbT1001HihokenshaDaichoEntityMock {
 
     /**
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の
-     * {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
      *
      * @return DbT1001HihokenshaDaichoEntityのスパイ
      */
@@ -50,7 +49,6 @@ public final class DbT1001HihokenshaDaichoEntityMock {
     public static DbT1001HihokenshaDaichoEntity create() {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setShichosonCode(new LasdecCode(new RString("000000")));
-        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("000000")));
         entity.setHihokenshaNo(new HihokenshaNo(new RString("1234567890")));
         entity.setShikibetsuCode(new ShikibetsuCode("0000000001"));
         entity.setShoriTimestamp(new YMDHMS("20140328000000"));
@@ -73,7 +71,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
         entity.setJushochitokureiKaijoYMD(new FlexibleDate("00000000"));
         entity.setJushochiTokureiFlag(JushochiTokureishaKubun.通常資格者.getコード());
         entity.setKoikinaiJushochiTokureiFlag(KoikinaiJushochitokureishaKubun.通常資格者.getCode());
-        entity.setKoikinaiTokureiSochimotoHokenshaNo(null);
+        entity.setKoikinaiTokureiSochimotoShichosonCode(null);
         entity.setKyuShichosonCode(null);
         entity.setSaikofuKubun(HihokenshashoSaikofuKubun.なし.getCode());
         entity.setSaikofuJiyuCode(HihokenshashoSaikofuJiyu.なし.getCode());

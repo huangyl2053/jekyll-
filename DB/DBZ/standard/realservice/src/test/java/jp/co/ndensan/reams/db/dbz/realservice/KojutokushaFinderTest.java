@@ -12,7 +12,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysGaitoshaKensaku;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SochimotoSochisakiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoViewModel;
 import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
@@ -38,7 +38,7 @@ import static org.mockito.Mockito.when;
 @RunWith(Enclosed.class)
 public class KojutokushaFinderTest extends DbzTestBase {
 
-    private static final KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("0000000001"));
+    private static final HihokenshaNo 被保険者番号 = new HihokenshaNo("0000000001");
     private static final LasdecCode 市町村コード = new LasdecCode("000001");
     private static final ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000001");
 
@@ -148,10 +148,10 @@ public class KojutokushaFinderTest extends DbzTestBase {
     private static HihokenshaDaichoViewDac createDaichoViewDac(int count) {
         HihokenshaDaichoViewDac dac = mock(HihokenshaDaichoViewDac.class);
         IItemList<HihokenshaDaichoViewModel> list = createHihokenshaDaichoViewList(count);
-        when(dac.selectBy被保険者番号(any(KaigoHihokenshaNo.class))).thenReturn(list);
-        when(dac.selectByAny市町村コード(any(LasdecCode.class), any(KaigoHihokenshaNo.class))).thenReturn(list);
-        when(dac.selectBy市町村コード(any(LasdecCode.class), any(KaigoHihokenshaNo.class))).thenReturn(list);
-        when(dac.selectBy広住特措置元市町村コード(any(LasdecCode.class), any(KaigoHihokenshaNo.class))).thenReturn(list);
+        when(dac.selectBy被保険者番号(any(HihokenshaNo.class))).thenReturn(list);
+        when(dac.selectByAny市町村コード(any(LasdecCode.class), any(HihokenshaNo.class))).thenReturn(list);
+        when(dac.selectBy市町村コード(any(LasdecCode.class), any(HihokenshaNo.class))).thenReturn(list);
+        when(dac.selectBy広住特措置元市町村コード(any(LasdecCode.class), any(HihokenshaNo.class))).thenReturn(list);
         return dac;
     }
 
