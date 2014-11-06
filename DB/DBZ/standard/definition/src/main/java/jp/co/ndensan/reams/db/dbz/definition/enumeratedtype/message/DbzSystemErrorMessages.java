@@ -19,12 +19,33 @@ public enum DbzSystemErrorMessages {
     // TODO 一つ目の要素が定義されたらこの要素は削除する。
     ダミーメッセージ(0, "");
 
+    private static final RString REPLACEE;
+
+    static {
+        REPLACEE = new RString("?");
+    }
     private final String code;
     private final String message;
+    private final int numOfReplacees;
 
     private DbzSystemErrorMessages(int no, String message) {
         this.code = toCode("S", no);
         this.message = message;
+        this.numOfReplacees = countNumOfReplaceesIn(message);
+    }
+
+    private int countNumOfReplaceesIn(String message) {
+        int count = 0;
+        int position = 0;
+        while (true) {
+            int index = message.indexOf(REPLACEE.toString(), position);
+            if (index == -1) {
+                break;
+            }
+            position += (index + 1);
+            count++;
+        }
+        return count;
     }
 
     /**
@@ -44,9 +65,7 @@ public enum DbzSystemErrorMessages {
      */
     public String getReplacedMessage(String... replacers) {
 
-        final RString REPLACEE = new RString("?");
-
-        if (getReplacerCount() != replacers.length) {
+        if (numOfReplacees != replacers.length) {
             throw new IllegalArgumentException("置換予定部分の数と、指定する置換文字列の数を一致させてください。");
         }
 
@@ -55,24 +74,9 @@ public enum DbzSystemErrorMessages {
 
         while (true) {
             replaced = replaced.replaceFirst(Pattern.quote(REPLACEE.toString()), replacers[i++]);
-
             if (replaced.indexOf(REPLACEE.toString()) < 0) {
                 return replaced;
             }
         }
-    }
-
-    private int getReplacerCount() {
-        int count = 0;
-        int position = 0;
-        while (true) {
-            int index = message.indexOf("?", position);
-            if (index == -1) {
-                break;
-            }
-            position += (index + 1);
-            count++;
-        }
-        return count;
     }
 }

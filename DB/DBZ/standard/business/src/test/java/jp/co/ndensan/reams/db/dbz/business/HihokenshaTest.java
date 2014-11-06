@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
@@ -115,7 +115,7 @@ public class HihokenshaTest extends DbzTestBase {
 
             @Test
             public void get被保険者番号は_コンストラクタ引数のIHihokenshaShikakuの_get被保険者番号_同じ値を返す() {
-                KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("0000000000"));
+                HihokenshaNo hihokenshaNo = new HihokenshaNo(new RString("0000000000"));
                 when(shikaku.get被保険者番号()).thenReturn(hihokenshaNo);
                 assertThat(sut.get被保険者番号(), is(hihokenshaNo));
             }

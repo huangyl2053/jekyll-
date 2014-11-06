@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5016IchijiHanteiKekkaJohoEntit
 import jp.co.ndensan.reams.db.dbe.business.mapper.IchijiHanteiKeikokuMapper;
 import jp.co.ndensan.reams.db.dbe.business.mapper.IchijiHanteiResultDetailMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IchijiHanteiKekkaDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * DbT5015NinteiImageJohoの項目定義クラスです

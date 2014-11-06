@@ -22,11 +22,11 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoSakuseiIraiMock;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoIraiTaishoshaDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShishoCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
@@ -219,7 +219,7 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
                 NinteiShinchokuJohoMock.create認定進捗情報(),
                 new ShinseishoKanriNo(new RString("1234")),
                 new ShoKisaiHokenshaNo(new RString("1234")),
-                new KaigoHihokenshaNo(new RString("1234567890")),
+                new HihokenshaNo(new RString("1234567890")),
                 new FlexibleDate(new RString("20140101")),
                 new Code(String.valueOf(NinteiShinseiKubunShinsei.更新申請.コード())),
                 KojinTestHelper.create個人(),

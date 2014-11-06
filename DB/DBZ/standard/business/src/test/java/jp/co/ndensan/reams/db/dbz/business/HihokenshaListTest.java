@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.helper.HihokenshaMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -44,8 +44,8 @@ public class HihokenshaListTest extends DbzTestBase {
     private static final ShoKisaiHokenshaNo s000002 = new ShoKisaiHokenshaNo(new RString("000002"));
     private static final ShoKisaiHokenshaNo s000003 = new ShoKisaiHokenshaNo(new RString("000003"));
     private static final ShoKisaiHokenshaNo s000004 = new ShoKisaiHokenshaNo(new RString("000004"));
-    private static final KaigoHihokenshaNo hn0000000001 = new KaigoHihokenshaNo(new RString("0000000001"));
-    private static final KaigoHihokenshaNo hn0000000002 = new KaigoHihokenshaNo(new RString("0000000002"));
+    private static final HihokenshaNo hn0000000001 = new HihokenshaNo(new RString("0000000001"));
+    private static final HihokenshaNo hn0000000002 = new HihokenshaNo(new RString("0000000002"));
 
     public static class Constructor extends DbzTestBase {
 
@@ -107,7 +107,7 @@ public class HihokenshaListTest extends DbzTestBase {
 
         @Test(expected = IllegalArgumentException.class)
         public void KaigoHihokenshaNo指定の_getHihokenshaは_該当のHihokenshaが見つからないとき_IllegalArgumentExceptionをスローする() {
-            Hihokensha result = sut.getHihokensha(KaigoHihokenshaNo.NULL_VALUE);
+            Hihokensha result = sut.getHihokensha(HihokenshaNo.EMPTY);
         }
 
         @Test

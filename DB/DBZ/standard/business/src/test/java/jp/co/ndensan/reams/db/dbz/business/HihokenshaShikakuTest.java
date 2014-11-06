@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiTekiy
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
@@ -47,7 +47,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
     private static final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("3327");
     private static final YMDHMS shoriTimestamp = new YMDHMS("20140802153700");
     private static final ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("123456"));
-    private static final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567890"));
+    private static final HihokenshaNo hihokenshaNo = new HihokenshaNo(new RString("1234567890"));
     private static final HihokenshaKubun hihokenshaKubun = new HihokenshaKubun(new Code("1"), new RString("第1号"));
     private static final RDate ichigoGaitoDate = new RDate("20140403");
     private static final FlexibleDate ichigoDate = new FlexibleDate(ichigoGaitoDate.toString());

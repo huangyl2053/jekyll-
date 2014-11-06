@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.entity.helper;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.EigyoKeitai;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;

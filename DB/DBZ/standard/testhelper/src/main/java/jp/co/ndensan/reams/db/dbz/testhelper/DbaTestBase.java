@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.uz.uza.testhelper.TestBase3;
 import org.junit.BeforeClass;
 
 /**
- * {@link TestBase}のラッパークラスです。
+ * {@link TestBase3}のラッパークラスです。
  *
- * @author n8178 城間篤人
+ * @author N9606 漢那 憲作
  */
 public class DbaTestBase extends TestBase3 {
 

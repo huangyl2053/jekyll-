@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.business;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -24,7 +24,7 @@ public class KyufuJissekiDetailKeyInfo {
     private final KokanShikibetsuNo 交換情報識別番号;
     private final InputShikibetsuNo 入力識別番号;
     private final ShoKisaiHokenshaNo 証記載保険者番号;
-    private final KaigoHihokenshaNo 被保番号;
+    private final HihokenshaNo 被保番号;
     private final ServiceTeikyoYM サービス提供年月;
     private final JigyoshaNo 事業所番号;
     private final ToshiNo 通番;
@@ -48,7 +48,7 @@ public class KyufuJissekiDetailKeyInfo {
             KokanShikibetsuNo 交換情報識別番号,
             InputShikibetsuNo 入力識別番号,
             ShoKisaiHokenshaNo 証記載保険者番号,
-            KaigoHihokenshaNo 被保番号,
+            HihokenshaNo 被保番号,
             ServiceTeikyoYM サービス提供年月,
             JigyoshaNo 事業所番号,
             ToshiNo 通番,
@@ -95,7 +95,7 @@ public class KyufuJissekiDetailKeyInfo {
      *
      * @return 被保番号
      */
-    public KaigoHihokenshaNo get被保番号() {
+    public HihokenshaNo get被保番号() {
         return 被保番号;
     }
 

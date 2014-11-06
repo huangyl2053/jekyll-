@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitoku
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -51,7 +51,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setShichosonCode(new LasdecCode(new RString("000000")));
         entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("000000")));
-        entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("1234567890")));
+        entity.setHihokenshaNo(new HihokenshaNo(new RString("1234567890")));
         entity.setShikibetsuCode(new ShikibetsuCode("0000000001"));
         entity.setShoriTimestamp(new YMDHMS("20140328000000"));
         entity.setHihokennshaKubunCode(new Code("1"));
@@ -108,7 +108,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
      * @return DbT1001HihokenshaDaichoEntity
      */
     public static DbT1001HihokenshaDaichoEntity createWithKey(
-            LasdecCode shichosonCode, KaigoHihokenshaNo hihokenshaNo, YMDHMS timeStamp) {
+            LasdecCode shichosonCode, HihokenshaNo hihokenshaNo, YMDHMS timeStamp) {
         DbT1001HihokenshaDaichoEntity entity = create();
         entity.setShichosonCode(shichosonCode);
         entity.setHihokenshaNo(hihokenshaNo);

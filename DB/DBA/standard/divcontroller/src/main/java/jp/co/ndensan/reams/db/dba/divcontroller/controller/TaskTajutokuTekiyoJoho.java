@@ -46,9 +46,9 @@ public class TaskTajutokuTekiyoJoho {
         DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
         setTajutokuJoho(tajutokuDiv.getDgJushochiTokureiRireki(), hihokenshaNo);
-        ShisetsuJoho.setJutokuMode(tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho());
-        tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho().getLblOtherShisetsuShurui().setText(new RString("keyKannai"));
-
+//        ShisetsuJoho.setJutokuMode(tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho());
+//        tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho().getLblOtherShisetsuShurui().setText(new RString("keyKannai"));
+//
         response.data = tajutokuDiv;
         return response;
     }

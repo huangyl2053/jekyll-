@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.TokuteiFukushiYoguHa
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ToriatsukaiKakuyakushoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;

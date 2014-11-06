@@ -8,7 +8,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJoho.*;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;

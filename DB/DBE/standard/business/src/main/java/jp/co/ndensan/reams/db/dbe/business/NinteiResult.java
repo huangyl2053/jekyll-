@@ -6,14 +6,14 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
 /**
@@ -26,7 +26,7 @@ public class NinteiResult {
     private final ShinseishoKanriNo 申請書管理番号;
     private final YMDHMS 処理日時;
     private final ShoKisaiHokenshaNo 証記載保険者番号;
-    private final KaigoHihokenshaNo 被保険者番号;
+    private final HihokenshaNo 被保険者番号;
     private final FlexibleDate 要介護度認定年月日;
     private final YokaigoJotai 要介護状態;
     private final YokaigoJotaizoRei 要介護状態像例;
@@ -92,7 +92,7 @@ public class NinteiResult {
             ShinseishoKanriNo 申請書管理番号,
             YMDHMS 処理日時,
             ShoKisaiHokenshaNo 証記載保険者番号,
-            KaigoHihokenshaNo 被保険者番号,
+            HihokenshaNo 被保険者番号,
             FlexibleDate 要介護度認定年月日,
             YokaigoJotai 要介護状態,
             YokaigoJotaizoRei 要介護状態像例,
@@ -213,7 +213,7 @@ public class NinteiResult {
      *
      * @return 被保険者番号
      */
-    public KaigoHihokenshaNo get被保険者番号() {
+    public HihokenshaNo get被保険者番号() {
         return 被保険者番号;
     }
 

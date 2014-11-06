@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.basic;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetail;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -40,7 +40,7 @@ public class KyufuJissekiServiceDac {
      */
     @Transaction
     public List<DbV3016KyufujissekiShuruiDetailEntity> select(
-            KaigoHihokenshaNo 被保番号, ServiceTeikyoYM サービス提供年月) {
+            HihokenshaNo 被保番号, ServiceTeikyoYM サービス提供年月) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
@@ -61,7 +61,7 @@ public class KyufuJissekiServiceDac {
      */
     @Transaction
     public List<DbV3016KyufujissekiShuruiDetailEntity> select(
-            KaigoHihokenshaNo 被保番号, ServiceTeikyoYM サービス提供開始年月, ServiceTeikyoYM サービス提供終了年月) {
+            HihokenshaNo 被保番号, ServiceTeikyoYM サービス提供開始年月, ServiceTeikyoYM サービス提供終了年月) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()

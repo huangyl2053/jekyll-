@@ -8,7 +8,7 @@
      "fieldName": "txtShikyuShinseiDate",
      "items": [],
      "controlType": "TextBoxDateRange",
-     "width": "85",
+     "width": "85px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -31,27 +31,28 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "labelLText": "支給申請日",
+     "labelRText": "",
+     "labelLWidth": "90px",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "ymdKubun": 2,
+     "displayFormat": 0,
      "permitCharactor": "",
      "fromRequired": false,
      "fromPlaceHolder": "",
      "toRequired": false,
      "toPlaceHolder": "",
-     "ymdKubun": 2,
-     "displayFormat": 0,
      "minDate": "",
      "maxDate": "",
      "fromText": "",
      "toText": "",
      "fromValue": "",
      "toValue": "",
-     "labelLText": "支給申請日",
-     "labelRText": "",
-     "labelLWidth": "90",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
      "fromSelectControlID": "txtShikyuShinseiDateFrom",
-     "toSelectControlID": "txtShikyuShinseiDateTo"
+     "toSelectControlID": "txtShikyuShinseiDateTo",
+     "autoRangeTo": true
     },
     {
      "fieldName": "btnSearchMishinsa",
@@ -73,12 +74,14 @@
      "selectControlID": "btnSearchMishinsa",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "onClick_btnSearchMishinsa",
      "text": "未審査分を検索する",
-     "appearance": 0,
-     "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "onClick": "onClick_btnSearchMishinsa",
+     "appearance": 0,
+     "imageFileUrl": "",
      "icon": 0,
      "heightTextBoxMatches": false
     }
@@ -95,14 +98,14 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
+   "marginLeft": "0em",
    "marginRight": "XS",
    "selectControlID": "SearchConditionToMishinsaShikyuShinseiPanel",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
    "title": "未審査支給申請検索条件",
-   "isOpen": true,
+   "isOpen": false,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -128,16 +131,17 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "focusPositionID": "restoreLayoutButton"
+   "focusPositionID": "restoreLayoutButton",
+   "canPost": true
   },
   {
    "fieldName": "MishinsaShikyuShinseiListPanel",
    "items": [
     {
-     "fieldName": "txtShinsaDate",
+     "fieldName": "TextBoxDate2",
      "items": [],
      "controlType": "TextBoxDate",
-     "width": "85",
+     "width": "85px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -150,35 +154,36 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "txtShinsaDate_core",
+     "selectControlID": "TextBoxDate2_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "required": false,
+     "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "permitCharactor": "./_-",
-     "ymdKubun": 2,
-     "displayFormat": 0,
-     "labelLText": "審査日",
+     "text": "",
+     "value": "",
+     "labelLText": "決定日",
      "labelRText": "",
-     "labelLWidth": "55",
+     "labelLWidth": "55px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "text": "",
-     "required": false,
-     "placeHolder": "",
-     "value": ""
+     "decorationClass": "",
+     "ymdKubun": 2,
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "dgMishinsaShikyuShinsei",
      "items": [],
      "controlType": "DataGrid",
-     "width": "1100",
+     "width": "1100px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -195,7 +200,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "400",
+     "height": "440px",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -203,12 +208,13 @@
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
-      "isShowRowState": true,
+      "isShowRowState": false,
       "isShowSelectButtonColumn": false,
       "isShowModifyButtonColumn": true,
       "isShowDeleteButtonColumn": false,
       "limitRowCount": 0,
       "selectedRowCount": 0,
+      "selectLimitRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -216,11 +222,25 @@
       },
       "columns": [
        {
+        "columnName": "状態",
+        "dataName": "txtJotai",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtJotai"
+       },
+       {
         "columnName": "支給<br>申請日",
         "dataName": "txtShikyuShinseiDate",
         "toolTip": "",
         "bgColor": 0,
-        "width": 80,
+        "width": 90,
         "visible": true,
         "cellType": 6,
         "cellDetails": {
@@ -237,11 +257,11 @@
         "sortKey": "txtShikyuShinseiDate"
        },
        {
-        "columnName": "提供<br>年月",
+        "columnName": "提供(着工)<br>年月",
         "dataName": "txtTeikyoYM",
         "toolTip": "",
         "bgColor": 0,
-        "width": 60,
+        "width": 90,
         "visible": true,
         "cellType": 6,
         "cellDetails": {
@@ -459,7 +479,8 @@
      "sortOrder": "txtTeikyoYM",
      "isAscending": true,
      "filterList": [],
-     "activeRowId": -1
+     "activeRowId": -1,
+     "gridAction": []
     },
     {
      "fieldName": "ShinsaButton",
@@ -468,7 +489,7 @@
        "fieldName": "btnShinsa",
        "items": [],
        "controlType": "Button",
-       "width": "M",
+       "width": "270px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -484,18 +505,20 @@
        "selectControlID": "btnShinsa",
        "helpMessageID": "",
        "jpControlName": "",
-       "onClick": "onClick_btnShinsa",
-       "text": "支給申請内容を一括審査する",
-       "appearance": 0,
-       "imageFileUrl": "",
+       "text": "支給申請内容を一括審査・決定する",
        "imageWidth": "",
        "imageHeight": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "onClick": "onClick_btnShinsa",
+       "appearance": 0,
+       "imageFileUrl": "",
        "icon": 0,
        "heightTextBoxMatches": false
       }
      ],
      "controlType": "Panel",
-     "width": "220",
+     "width": "220px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -520,13 +543,18 @@
        "postParameterPanelNames": "ShinsaButton"
       }
      ],
-     "requestSettings": [],
+     "requestSettings": [
+      {
+       "eventName": "onLoad",
+       "requestUrl": ""
+      }
+     ],
      "hiddenInput": [],
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "marginTop": "1.4",
-     "marginBottom": "-0.4",
+     "marginTop": "1.4em",
+     "marginBottom": "-0.4em",
      "eraseBorder": true,
      "backgroundColor": 0,
      "widthAuto": true,
@@ -534,7 +562,8 @@
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "restoreLayoutButton"
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": true
     },
     {
      "fieldName": "SystemCheck",
@@ -543,7 +572,7 @@
        "fieldName": "chkResetCheck",
        "items": [],
        "controlType": "CheckBoxList",
-       "width": "470",
+       "width": "470px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -560,13 +589,13 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "required": false,
        "onChange": "",
        "labelLText": "",
        "labelLWidth": "S",
        "labelLAlign": 2,
        "onClick": "",
        "icon": [],
-       "required": false,
        "dataSource": [
         {
          "key": "tenkyo",
@@ -578,6 +607,9 @@
         }
        ],
        "selectedItem": null,
+       "newLineItemNumber": 2,
+       "spaceSize": "M",
+       "disabledItem": [],
        "selectedItems": [
         {
          "key": "isAllSelect",
@@ -592,13 +624,10 @@
          "value": "３段階リセットの判定を行う"
         }
        ],
-       "newLineItemNumber": 2,
        "minCheckedItem": "0",
        "maxCheckedItem": 2,
-       "spaceSize": "M",
        "isAllSelectable": false,
-       "isAllSelectableBreakLine": false,
-       "disabledItem": []
+       "isAllSelectableBreakLine": false
       }
      ],
      "controlType": "Panel",
@@ -641,7 +670,8 @@
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "restoreLayoutButton"
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": true
     }
    ],
    "controlType": "Panel",
@@ -673,19 +703,19 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/MishinsaShikyuShinseiListPanel/onLoad"
+     "requestUrl": ""
     },
     {
      "eventName": "onClick_btnShinsa",
-     "requestUrl": "dbc/db/dbc/MishinsaShikyuShinseiListPanel/onClick_btnShinsa"
+     "requestUrl": ""
     },
     {
      "eventName": "onSelectByModifyButton",
-     "requestUrl": "dbc/db/dbc/MishinsaShikyuShinseiListPanel/onSelectByModifyButton"
+     "requestUrl": ""
     },
     {
      "eventName": "onClick_btnModifyShinseiContents",
-     "requestUrl": "dbc/db/dbc/MishinsaShikyuShinseiListPanel/onClick_btnModifyShinseiContents"
+     "requestUrl": ""
     }
    ],
    "hiddenInput": [],
@@ -701,7 +731,8 @@
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "focusPositionID": "undoButton"
+   "focusPositionID": "undoButton",
+   "canPost": true
   },
   {
    "fieldName": "DummyPanel",
@@ -726,12 +757,14 @@
      "selectControlID": "btnDummyModifyShinsei",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "onClick_btnModifyShinseiContents",
      "text": "Button1",
-     "appearance": 0,
-     "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "onClick": "onClick_btnModifyShinseiContents",
+     "appearance": 0,
+     "imageFileUrl": "",
      "icon": 0,
      "heightTextBoxMatches": false
     }
@@ -775,7 +808,8 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": null,
@@ -796,7 +830,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "住宅改修費支給申請審査",
+ "title": "住宅改修費支給申請一括審査・決定",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
@@ -873,7 +907,7 @@
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "申請審査",
  "id": "DBC0720011",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -958,5 +992,6 @@
    "FinishButtonVisible": false,
    "SuspendButtonVisible": false
   }
- ]
+ ],
+ "packageName": ""
 }

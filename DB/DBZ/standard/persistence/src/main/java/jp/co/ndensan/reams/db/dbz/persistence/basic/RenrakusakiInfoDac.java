@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5050RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
@@ -40,10 +40,10 @@ public class RenrakusakiInfoDac implements IReplaceable<DbT5050RenrakusakiJohoEn
      */
     @Transaction
     public List<DbT5050RenrakusakiJohoEntity> select(ShoKisaiHokenshaNo hokenshaNo,
-            KaigoHihokenshaNo hihoNo) {
+            HihokenshaNo hihoNo) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5050RenrakusakiJoho.class).
-                where(and(eq(shoKisaiHokenshaNo, hokenshaNo.getValue().toString()),
+                where(and(eq(shoKisaiHokenshaNo, hokenshaNo.value().toString()),
                                 eq(hihokenshaNo, hihoNo.value().toString()))).
                 order(by(renrakusakiKubunNo, Order.ASC)).
                 toList(DbT5050RenrakusakiJohoEntity.class);

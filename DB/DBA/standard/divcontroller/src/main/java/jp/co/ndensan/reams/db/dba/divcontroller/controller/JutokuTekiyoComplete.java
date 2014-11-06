@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2030011.JutokuTekiyoCompleteDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2030011.JutokuTekiyoTaishoshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoKanryoMessage;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoKanryoMessage;
+//import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+//import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 住所地特例処理の完了を行うDivControllerです。
@@ -29,11 +29,11 @@ public class JutokuTekiyoComplete {
     public ResponseData onClick_btnSave(JutokuTekiyoCompleteDiv completeDiv, JutokuTekiyoTaishoshaJohoDiv taishoshaJohoDiv) {
         ResponseData<JutokuTekiyoCompleteDiv> response = new ResponseData<>();
 
-        AtenaShokaiSimpleDiv atena = taishoshaJohoDiv.getJutokuTekiyoCommonJoho().getAtenaInfo();
-
-        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("住所地特例適用を更新しました。"),
-                atena.getTxtShikibetsuCode().getValue(), atena.getTxtAtenaMeisho().getValue());
-
+//        AtenaShokaiSimpleDiv atena = taishoshaJohoDiv.getJutokuTekiyoCommonJoho().getAtenaInfo();
+//
+//        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("住所地特例適用を更新しました。"),
+//                atena.getTxtShikibetsuCode().getValue(), atena.getTxtAtenaMeisho().getValue());
+//
         response.data = completeDiv;
         return response;
     }

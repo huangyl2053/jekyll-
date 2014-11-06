@@ -3,15 +3,15 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Aug 26 20:57:57 JST 2014 
+ * Thu Oct 09 10:39:12 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
 /**
@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgShikakuShutokuRireki_Row extends DataRow {
 
+    private RString state;
     private Button shosai;
     private TextBoxFlexibleDate shutokuDate;
     private TextBoxFlexibleDate shutokuTodokedeDate;
@@ -33,19 +34,7 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
     private TextBoxFlexibleDate soshitsuTodokedeDate;
     private RString soshitsuJiyuKey;
     private RString soshitsuJiyu;
-    private TextBoxFlexibleDate jutokuTekiyoDate;
-    private TextBoxFlexibleDate jutokuTekiyoTodokedeDate;
-    private RString jutokuTekiyoJiyuKey;
-    private RString jutokuTekiyoJiyu;
-    private TextBoxFlexibleDate jutokuKaijoDate;
-    private TextBoxFlexibleDate jutokuKaijoTodokedeDate;
-    private RString jutokuKaijoJiyuKey;
-    private RString jutokuKaijoJiyu;
     private TextBoxFlexibleDate henkoDate;
-    private TextBoxFlexibleDate henkoTodokedeDate;
-    private RString henkoJiyuKey;
-    private RString henkoJiyu;
-    private TextBoxFlexibleDate nenreiTotatsuDate;
     private RString jutokuKubun;
     private RString shozaiHokensha;
     private RString sochimotoHokensha;
@@ -54,6 +43,7 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
 
     public dgShikakuShutokuRireki_Row() {
         super();
+        this.state = RString.EMPTY;
         this.shosai = new Button();
         this.shutokuDate = new TextBoxFlexibleDate();
         this.shutokuTodokedeDate = new TextBoxFlexibleDate();
@@ -65,19 +55,7 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
         this.soshitsuTodokedeDate = new TextBoxFlexibleDate();
         this.soshitsuJiyuKey = RString.EMPTY;
         this.soshitsuJiyu = RString.EMPTY;
-        this.jutokuTekiyoDate = new TextBoxFlexibleDate();
-        this.jutokuTekiyoTodokedeDate = new TextBoxFlexibleDate();
-        this.jutokuTekiyoJiyuKey = RString.EMPTY;
-        this.jutokuTekiyoJiyu = RString.EMPTY;
-        this.jutokuKaijoDate = new TextBoxFlexibleDate();
-        this.jutokuKaijoTodokedeDate = new TextBoxFlexibleDate();
-        this.jutokuKaijoJiyuKey = RString.EMPTY;
-        this.jutokuKaijoJiyu = RString.EMPTY;
         this.henkoDate = new TextBoxFlexibleDate();
-        this.henkoTodokedeDate = new TextBoxFlexibleDate();
-        this.henkoJiyuKey = RString.EMPTY;
-        this.henkoJiyu = RString.EMPTY;
-        this.nenreiTotatsuDate = new TextBoxFlexibleDate();
         this.jutokuKubun = RString.EMPTY;
         this.shozaiHokensha = RString.EMPTY;
         this.sochimotoHokensha = RString.EMPTY;
@@ -85,8 +63,9 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
         this.shikibetsuCode = RString.EMPTY;
     }
 
-    public dgShikakuShutokuRireki_Row(Button shosai, TextBoxFlexibleDate shutokuDate, TextBoxFlexibleDate shutokuTodokedeDate, RString shutokuJiyuKey, RString shutokuJiyu, RString hihokenshaKubun, RString hihokenshaKubunKey, TextBoxFlexibleDate soshitsuDate, TextBoxFlexibleDate soshitsuTodokedeDate, RString soshitsuJiyuKey, RString soshitsuJiyu, TextBoxFlexibleDate jutokuTekiyoDate, TextBoxFlexibleDate jutokuTekiyoTodokedeDate, RString jutokuTekiyoJiyuKey, RString jutokuTekiyoJiyu, TextBoxFlexibleDate jutokuKaijoDate, TextBoxFlexibleDate jutokuKaijoTodokedeDate, RString jutokuKaijoJiyuKey, RString jutokuKaijoJiyu, TextBoxFlexibleDate henkoDate, TextBoxFlexibleDate henkoTodokedeDate, RString henkoJiyuKey, RString henkoJiyu, TextBoxFlexibleDate nenreiTotatsuDate, RString jutokuKubun, RString shozaiHokensha, RString sochimotoHokensha, RString kyuHokensha, RString shikibetsuCode) {
+    public dgShikakuShutokuRireki_Row(RString state, Button shosai, TextBoxFlexibleDate shutokuDate, TextBoxFlexibleDate shutokuTodokedeDate, RString shutokuJiyuKey, RString shutokuJiyu, RString hihokenshaKubun, RString hihokenshaKubunKey, TextBoxFlexibleDate soshitsuDate, TextBoxFlexibleDate soshitsuTodokedeDate, RString soshitsuJiyuKey, RString soshitsuJiyu, TextBoxFlexibleDate henkoDate, RString jutokuKubun, RString shozaiHokensha, RString sochimotoHokensha, RString kyuHokensha, RString shikibetsuCode) {
         super();
+        this.setOriginalData("state", state);
         this.setOriginalData("shosai", shosai);
         this.setOriginalData("shutokuDate", shutokuDate);
         this.setOriginalData("shutokuTodokedeDate", shutokuTodokedeDate);
@@ -98,24 +77,13 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
         this.setOriginalData("soshitsuTodokedeDate", soshitsuTodokedeDate);
         this.setOriginalData("soshitsuJiyuKey", soshitsuJiyuKey);
         this.setOriginalData("soshitsuJiyu", soshitsuJiyu);
-        this.setOriginalData("jutokuTekiyoDate", jutokuTekiyoDate);
-        this.setOriginalData("jutokuTekiyoTodokedeDate", jutokuTekiyoTodokedeDate);
-        this.setOriginalData("jutokuTekiyoJiyuKey", jutokuTekiyoJiyuKey);
-        this.setOriginalData("jutokuTekiyoJiyu", jutokuTekiyoJiyu);
-        this.setOriginalData("jutokuKaijoDate", jutokuKaijoDate);
-        this.setOriginalData("jutokuKaijoTodokedeDate", jutokuKaijoTodokedeDate);
-        this.setOriginalData("jutokuKaijoJiyuKey", jutokuKaijoJiyuKey);
-        this.setOriginalData("jutokuKaijoJiyu", jutokuKaijoJiyu);
         this.setOriginalData("henkoDate", henkoDate);
-        this.setOriginalData("henkoTodokedeDate", henkoTodokedeDate);
-        this.setOriginalData("henkoJiyuKey", henkoJiyuKey);
-        this.setOriginalData("henkoJiyu", henkoJiyu);
-        this.setOriginalData("nenreiTotatsuDate", nenreiTotatsuDate);
         this.setOriginalData("jutokuKubun", jutokuKubun);
         this.setOriginalData("shozaiHokensha", shozaiHokensha);
         this.setOriginalData("sochimotoHokensha", sochimotoHokensha);
         this.setOriginalData("kyuHokensha", kyuHokensha);
         this.setOriginalData("shikibetsuCode", shikibetsuCode);
+        this.state = state;
         this.shosai = shosai;
         this.shutokuDate = shutokuDate;
         this.shutokuTodokedeDate = shutokuTodokedeDate;
@@ -127,24 +95,16 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
         this.soshitsuTodokedeDate = soshitsuTodokedeDate;
         this.soshitsuJiyuKey = soshitsuJiyuKey;
         this.soshitsuJiyu = soshitsuJiyu;
-        this.jutokuTekiyoDate = jutokuTekiyoDate;
-        this.jutokuTekiyoTodokedeDate = jutokuTekiyoTodokedeDate;
-        this.jutokuTekiyoJiyuKey = jutokuTekiyoJiyuKey;
-        this.jutokuTekiyoJiyu = jutokuTekiyoJiyu;
-        this.jutokuKaijoDate = jutokuKaijoDate;
-        this.jutokuKaijoTodokedeDate = jutokuKaijoTodokedeDate;
-        this.jutokuKaijoJiyuKey = jutokuKaijoJiyuKey;
-        this.jutokuKaijoJiyu = jutokuKaijoJiyu;
         this.henkoDate = henkoDate;
-        this.henkoTodokedeDate = henkoTodokedeDate;
-        this.henkoJiyuKey = henkoJiyuKey;
-        this.henkoJiyu = henkoJiyu;
-        this.nenreiTotatsuDate = nenreiTotatsuDate;
         this.jutokuKubun = jutokuKubun;
         this.shozaiHokensha = shozaiHokensha;
         this.sochimotoHokensha = sochimotoHokensha;
         this.kyuHokensha = kyuHokensha;
         this.shikibetsuCode = shikibetsuCode;
+    }
+
+    public RString getState() {
+        return state;
     }
 
     public Button getShosai() {
@@ -191,56 +151,8 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
         return soshitsuJiyu;
     }
 
-    public TextBoxFlexibleDate getJutokuTekiyoDate() {
-        return jutokuTekiyoDate;
-    }
-
-    public TextBoxFlexibleDate getJutokuTekiyoTodokedeDate() {
-        return jutokuTekiyoTodokedeDate;
-    }
-
-    public RString getJutokuTekiyoJiyuKey() {
-        return jutokuTekiyoJiyuKey;
-    }
-
-    public RString getJutokuTekiyoJiyu() {
-        return jutokuTekiyoJiyu;
-    }
-
-    public TextBoxFlexibleDate getJutokuKaijoDate() {
-        return jutokuKaijoDate;
-    }
-
-    public TextBoxFlexibleDate getJutokuKaijoTodokedeDate() {
-        return jutokuKaijoTodokedeDate;
-    }
-
-    public RString getJutokuKaijoJiyuKey() {
-        return jutokuKaijoJiyuKey;
-    }
-
-    public RString getJutokuKaijoJiyu() {
-        return jutokuKaijoJiyu;
-    }
-
     public TextBoxFlexibleDate getHenkoDate() {
         return henkoDate;
-    }
-
-    public TextBoxFlexibleDate getHenkoTodokedeDate() {
-        return henkoTodokedeDate;
-    }
-
-    public RString getHenkoJiyuKey() {
-        return henkoJiyuKey;
-    }
-
-    public RString getHenkoJiyu() {
-        return henkoJiyu;
-    }
-
-    public TextBoxFlexibleDate getNenreiTotatsuDate() {
-        return nenreiTotatsuDate;
     }
 
     public RString getJutokuKubun() {
@@ -261,6 +173,11 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
 
     public RString getShikibetsuCode() {
         return shikibetsuCode;
+    }
+
+    public void setState(RString state) {
+        this.setOriginalData("state", state);
+        this.state = state;
     }
 
     public void setShosai(Button shosai) {
@@ -318,69 +235,9 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
         this.soshitsuJiyu = soshitsuJiyu;
     }
 
-    public void setJutokuTekiyoDate(TextBoxFlexibleDate jutokuTekiyoDate) {
-        this.setOriginalData("jutokuTekiyoDate", jutokuTekiyoDate);
-        this.jutokuTekiyoDate = jutokuTekiyoDate;
-    }
-
-    public void setJutokuTekiyoTodokedeDate(TextBoxFlexibleDate jutokuTekiyoTodokedeDate) {
-        this.setOriginalData("jutokuTekiyoTodokedeDate", jutokuTekiyoTodokedeDate);
-        this.jutokuTekiyoTodokedeDate = jutokuTekiyoTodokedeDate;
-    }
-
-    public void setJutokuTekiyoJiyuKey(RString jutokuTekiyoJiyuKey) {
-        this.setOriginalData("jutokuTekiyoJiyuKey", jutokuTekiyoJiyuKey);
-        this.jutokuTekiyoJiyuKey = jutokuTekiyoJiyuKey;
-    }
-
-    public void setJutokuTekiyoJiyu(RString jutokuTekiyoJiyu) {
-        this.setOriginalData("jutokuTekiyoJiyu", jutokuTekiyoJiyu);
-        this.jutokuTekiyoJiyu = jutokuTekiyoJiyu;
-    }
-
-    public void setJutokuKaijoDate(TextBoxFlexibleDate jutokuKaijoDate) {
-        this.setOriginalData("jutokuKaijoDate", jutokuKaijoDate);
-        this.jutokuKaijoDate = jutokuKaijoDate;
-    }
-
-    public void setJutokuKaijoTodokedeDate(TextBoxFlexibleDate jutokuKaijoTodokedeDate) {
-        this.setOriginalData("jutokuKaijoTodokedeDate", jutokuKaijoTodokedeDate);
-        this.jutokuKaijoTodokedeDate = jutokuKaijoTodokedeDate;
-    }
-
-    public void setJutokuKaijoJiyuKey(RString jutokuKaijoJiyuKey) {
-        this.setOriginalData("jutokuKaijoJiyuKey", jutokuKaijoJiyuKey);
-        this.jutokuKaijoJiyuKey = jutokuKaijoJiyuKey;
-    }
-
-    public void setJutokuKaijoJiyu(RString jutokuKaijoJiyu) {
-        this.setOriginalData("jutokuKaijoJiyu", jutokuKaijoJiyu);
-        this.jutokuKaijoJiyu = jutokuKaijoJiyu;
-    }
-
     public void setHenkoDate(TextBoxFlexibleDate henkoDate) {
         this.setOriginalData("henkoDate", henkoDate);
         this.henkoDate = henkoDate;
-    }
-
-    public void setHenkoTodokedeDate(TextBoxFlexibleDate henkoTodokedeDate) {
-        this.setOriginalData("henkoTodokedeDate", henkoTodokedeDate);
-        this.henkoTodokedeDate = henkoTodokedeDate;
-    }
-
-    public void setHenkoJiyuKey(RString henkoJiyuKey) {
-        this.setOriginalData("henkoJiyuKey", henkoJiyuKey);
-        this.henkoJiyuKey = henkoJiyuKey;
-    }
-
-    public void setHenkoJiyu(RString henkoJiyu) {
-        this.setOriginalData("henkoJiyu", henkoJiyu);
-        this.henkoJiyu = henkoJiyu;
-    }
-
-    public void setNenreiTotatsuDate(TextBoxFlexibleDate nenreiTotatsuDate) {
-        this.setOriginalData("nenreiTotatsuDate", nenreiTotatsuDate);
-        this.nenreiTotatsuDate = nenreiTotatsuDate;
     }
 
     public void setJutokuKubun(RString jutokuKubun) {

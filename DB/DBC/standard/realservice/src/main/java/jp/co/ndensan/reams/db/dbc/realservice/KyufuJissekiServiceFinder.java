@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiServiceCollections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
 import jp.co.ndensan.reams.db.dbc.business.mapper.KyufuJissekiServiceMapper;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.KyufuJissekiServiceDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -52,7 +52,7 @@ public class KyufuJissekiServiceFinder {
      * @return 給付実績情報（１ヶ月分）
      */
     public KyufuJissekiServiceCollection get給付実績月別(
-            KaigoHihokenshaNo 被保番号, ServiceTeikyoYM サービス提供年月, Range<ServiceTeikyoYM> サービス提供年月期間) {
+            HihokenshaNo 被保番号, ServiceTeikyoYM サービス提供年月, Range<ServiceTeikyoYM> サービス提供年月期間) {
 
         List<DbV3016KyufujissekiShuruiDetailEntity> entities = dac.select(被保番号, サービス提供年月);
 
@@ -70,7 +70,7 @@ public class KyufuJissekiServiceFinder {
      * @return 給付実績情報（検索期間分）
      */
     public KyufuJissekiServiceCollections get給付実績一覧(
-            KaigoHihokenshaNo 被保番号, Range<ServiceTeikyoYM> サービス提供年月期間) {
+            HihokenshaNo 被保番号, Range<ServiceTeikyoYM> サービス提供年月期間) {
 
         List<KyufuJissekiServiceCollection> list = new ArrayList<>();
         List<ServiceTeikyoYM> サービス提供年月List = getサービス提供年月List(サービス提供年月期間);

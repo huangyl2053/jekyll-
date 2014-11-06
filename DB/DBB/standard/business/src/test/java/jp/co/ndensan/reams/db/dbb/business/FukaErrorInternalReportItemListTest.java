@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

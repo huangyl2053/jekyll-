@@ -60,8 +60,7 @@ public enum TeikeibunShubetsuElseTokki implements IRStringConvertable {
      * @return 引数のコードに対応するTeikeibunShubetsu型のenum
      * @throws IllegalArgumentException 実在しない定型文種別コードの場合
      */
-    public static TeikeibunShubetsuElseTokki toValue(RString code) throws NullPointerException, IllegalArgumentException {
-
+    public static TeikeibunShubetsuElseTokki toValue(RString code) throws IllegalArgumentException {
         for (TeikeibunShubetsuElseTokki item : TeikeibunShubetsuElseTokki.values()) {
             if (item.code.equals(code)) {
                 return item;

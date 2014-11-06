@@ -1,0 +1,203 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "KyufuKashitsukeHenkanCsvSakusei",
+   "items": [
+    {
+     "fieldName": "RadioButton2",
+     "items": [],
+     "controlType": "RadioButton",
+     "width": "240",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "RadioButton2_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "required": true,
+     "onChange": "",
+     "labelLText": "完納状態",
+     "labelLWidth": "70",
+     "labelLAlign": 2,
+     "onClick": "",
+     "icon": [],
+     "dataSource": [
+      {
+       "key": "key0",
+       "value": "全て"
+      },
+      {
+       "key": "key1",
+       "value": "未納分"
+      },
+      {
+       "key": "key2",
+       "value": "完納分"
+      }
+     ],
+     "selectedItem": "key0",
+     "newLineItemNumber": 3,
+     "spaceSize": "M",
+     "disabledItem": []
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G2",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "Default",
+   "marginRight": "Default",
+   "selectControlID": "KyufuKashitsukeHenkanCsvSakusei",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "抽出条件",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": true,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "focusPositionID": "Page",
+   "canPost": false
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "給付費貸付金・返還管理一覧CSV作成",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "抽出条件",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KyufuKashitsukeHenkanCsvSakusei",
+     "panelState": "visible",
+     "fixedDiv": "false"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": []
+  }
+ ],
+ "currentState": "抽出条件",
+ "id": "DBC1820011",
+ "WFParameter": [],
+ "UIContainerEventMapping": [],
+ "loadSequencePanelNames": [],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "抽出条件",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonCreate",
+     "buttonProperty": {
+      "fieldName": "btnExec",
+      "items": [],
+      "controlType": "CommonButtonExecute",
+      "width": 0,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnExec",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "postParameterPanelNames": [],
+      "text": "実行",
+      "imageWidth": "",
+      "imageHeight": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "",
+      "validateUrl": "",
+      "sourceCreateUrl": "",
+      "afterPrintUrl": "",
+      "isModal": true,
+      "isInstruction": true,
+      "isPreview": false,
+      "printable": false,
+      "copiesChangeable": false,
+      "progressVisible": false
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "抽出条件"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ]
+}

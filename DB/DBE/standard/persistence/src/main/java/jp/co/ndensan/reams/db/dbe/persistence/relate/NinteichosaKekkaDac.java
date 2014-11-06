@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteichosahyoJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteichosaKekkaJohoDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

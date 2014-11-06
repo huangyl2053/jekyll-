@@ -1,5 +1,6 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBZ {
     /**
@@ -8,90 +9,6 @@ module DBZ {
      */
     export class ShikakuTokusoRireki_Design extends Uz.CommonChildDiv {
     
-        public get onSelectByDblClick() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByDblClick"];
-        }
-        
-        public set onSelectByDblClick(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByDblClick"] = value;
-            } else {
-                this.layout.items[0].items[0]["onSelectByDblClick"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get onSelectByModifyButton() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByModifyButton"];
-        }
-        
-        public set onSelectByModifyButton(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByModifyButton"] = value;
-            } else {
-                this.layout.items[0].items[0]["onSelectByModifyButton"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get onSelectByDeleteButton() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByDeleteButton"];
-        }
-        
-        public set onSelectByDeleteButton(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByDeleteButton"] = value;
-            } else {
-                this.layout.items[0].items[0]["onSelectByDeleteButton"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get panel_width() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["width"];
-        }
-        
-        public set panel_width(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["width"] = value;
-            } else {
-                this.layout.items[0]["width"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get grid_width() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"];
-        }
-        
-        public set grid_width(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"] = value;
-            } else {
-                this.layout.items[0].items[0]["width"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get () {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["visible"];
-        }
-        
-        public set (value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["visible"] = value;
-            } else {
-                this.layout.items[0]["visible"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, ShikakuTokusoRireki_Design.myLayout, fieldName);
         }
@@ -102,12 +19,6 @@ module DBZ {
          */
         public registProperty() {
             super.registProperty();
-            Uz.JSControlUtil.registProperty("onSelectByDblClick");
-            Uz.JSControlUtil.registProperty("onSelectByModifyButton");
-            Uz.JSControlUtil.registProperty("onSelectByDeleteButton");
-            Uz.JSControlUtil.registProperty("panel_width");
-            Uz.JSControlUtil.registProperty("grid_width");
-            Uz.JSControlUtil.registProperty("");
         }
         
         /**
@@ -117,12 +28,6 @@ module DBZ {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
-            editablePropertyInfo["onSelectByDblClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
-            editablePropertyInfo["onSelectByModifyButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onSelectByModifyButton"];
-            editablePropertyInfo["onSelectByDeleteButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onSelectByDeleteButton"];
-            editablePropertyInfo["panel_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["width"];
-            editablePropertyInfo["grid_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["width"];
-            editablePropertyInfo[""] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["visible"];
             
             return editablePropertyInfo;
         }
@@ -133,10 +38,41 @@ module DBZ {
    "fieldName": "ShikakuTokusoRireki",
    "items": [
     {
+     "fieldName": "btnAdd",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnAdd",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "onClick": "onClick_btnAdd",
+     "text": "追加する",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": true
+    },
+    {
      "fieldName": "dgShikakuShutokuRireki",
      "items": [],
      "controlType": "DataGrid",
-     "width": "1090",
+     "width": "1090px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -147,13 +83,13 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
+     "marginLeft": "0px",
+     "marginRight": "0px",
      "selectControlID": "dgShikakuShutokuRireki",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "S",
+     "height": "217px",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -161,10 +97,10 @@ module DBZ {
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
-      "isShowRowState": true,
+      "isShowRowState": false,
       "isShowSelectButtonColumn": false,
-      "isShowModifyButtonColumn": true,
-      "isShowDeleteButtonColumn": true,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
       "limitRowCount": 0,
       "selectedRowCount": 0,
       "selectLimitRowCount": 0,
@@ -189,30 +125,9 @@ module DBZ {
          ]
         },
         {
-         "combineColumnName": "住所地特例適用",
-         "combineItem": [
-          "jutokuTekiyoDate",
-          "jutokuTekiyoTodokedeDate",
-          "jutokuTekiyoJiyuKey",
-          "jutokuTekiyoJiyu"
-         ]
-        },
-        {
-         "combineColumnName": "住所地特例解除",
-         "combineItem": [
-          "jutokuKaijoDate",
-          "jutokuKaijoTodokedeDate",
-          "jutokuKaijoJiyuKey",
-          "jutokuKaijoJiyu"
-         ]
-        },
-        {
          "combineColumnName": "変更情報",
          "combineItem": [
-          "henkoDate",
-          "henkoTodokedeDate",
-          "henkoJiyuKey",
-          "henkoJiyu"
+          "henkoDate"
          ]
         }
        ],
@@ -220,6 +135,20 @@ module DBZ {
        "headerHeight": 0
       },
       "columns": [
+       {
+        "columnName": "状態",
+        "dataName": "state",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "state"
+       },
        {
         "columnName": "詳細",
         "dataName": "shosai",
@@ -230,8 +159,8 @@ module DBZ {
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
-         "text": "...",
-         "onClick": "",
+         "text": "",
+         "onClick": "onClickShosaiButton_dgShikakuShutokuRireki",
          "imageFileUrl": "/ur/urz/image/UR_Book_On.png",
          "imageWidth": "20",
          "imageHeight": "20"
@@ -412,149 +341,6 @@ module DBZ {
         "sortKey": "soshitsuJiyu"
        },
        {
-        "columnName": "適用日",
-        "dataName": "jutokuTekiyoDate",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 80,
-        "visible": false,
-        "cellType": 7,
-        "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": "",
-         "isSetValueToToolTip": false,
-         "readOnly": true
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "jutokuTekiyoDate"
-       },
-       {
-        "columnName": "届出日",
-        "dataName": "jutokuTekiyoTodokedeDate",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 80,
-        "visible": false,
-        "cellType": 7,
-        "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": "",
-         "isSetValueToToolTip": false,
-         "readOnly": true
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "jutokuTekiyoTodokedeDate"
-       },
-       {
-        "columnName": "適用事由Key",
-        "dataName": "jutokuTekiyoJiyuKey",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 0,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "jutokuTekiyoJiyuKey"
-       },
-       {
-        "columnName": "適用事由",
-        "dataName": "jutokuTekiyoJiyu",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 150,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0,
-         "isSetValueToToolTip": false
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "jutokuTekiyoJiyu"
-       },
-       {
-        "columnName": "解除日",
-        "dataName": "jutokuKaijoDate",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 80,
-        "visible": false,
-        "cellType": 7,
-        "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": "",
-         "isSetValueToToolTip": false,
-         "readOnly": true
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "jutokuKaijoDate"
-       },
-       {
-        "columnName": "届出日",
-        "dataName": "jutokuKaijoTodokedeDate",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 80,
-        "visible": false,
-        "cellType": 7,
-        "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": "",
-         "isSetValueToToolTip": false,
-         "readOnly": true
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "jutokuKaijoTodokedeDate"
-       },
-       {
-        "columnName": "解除事由Key",
-        "dataName": "jutokuKaijoJiyuKey",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 0,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "jutokuKaijoJiyuKey"
-       },
-       {
-        "columnName": "解除事由",
-        "dataName": "jutokuKaijoJiyu",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 150,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "jutokuKaijoJiyu"
-       },
-       {
         "columnName": "変更日",
         "dataName": "henkoDate",
         "toolTip": "",
@@ -574,78 +360,6 @@ module DBZ {
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "henkoDate"
-       },
-       {
-        "columnName": "届出日",
-        "dataName": "henkoTodokedeDate",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 80,
-        "visible": false,
-        "cellType": 7,
-        "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": "",
-         "isSetValueToToolTip": false,
-         "readOnly": true
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "henkoTodokedeDate"
-       },
-       {
-        "columnName": "変更事由Key",
-        "dataName": "henkoJiyuKey",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 0,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "henkoJiyuKey"
-       },
-       {
-        "columnName": "変更事由",
-        "dataName": "henkoJiyu",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 90,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "henkoJiyu"
-       },
-       {
-        "columnName": "1号年齢到達日",
-        "dataName": "nenreiTotatsuDate",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 120,
-        "visible": false,
-        "cellType": 7,
-        "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": "",
-         "isSetValueToToolTip": false,
-         "readOnly": true
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "nenreiTotatsuDate"
        },
        {
         "columnName": "住特区分",
@@ -709,7 +423,7 @@ module DBZ {
         "toolTip": "",
         "bgColor": 0,
         "width": 150,
-        "visible": false,
+        "visible": true,
         "cellType": 0,
         "cellDetails": null,
         "align": 1,
@@ -720,8 +434,8 @@ module DBZ {
       ]
      },
      "onSort": "",
-     "onSelect": "",
-     "onSelectByDblClick": "",
+     "onSelect": "onSelect_dgShikakuShutokuRireki",
+     "onSelectByDblClick": "onSelectByDblClick_dgShikakuShutokuRireki",
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "onSelectByModifyButton_dgShikakuShutokuRireki",
      "onSelectByDeleteButton": "onSelectByDeleteButton_dgShikakuShutokuRireki",
@@ -742,7 +456,7 @@ module DBZ {
     }
    ],
    "controlType": "Panel",
-   "width": "1090",
+   "width": "1090px",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -753,8 +467,8 @@ module DBZ {
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
+   "marginLeft": "0em",
+   "marginRight": "0em",
    "selectControlID": "ShikakuTokusoRireki",
    "helpMessageID": "",
    "jpControlName": "",
@@ -814,56 +528,114 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": "0",
- "marginRight": "0",
+ "marginLeft": "0px",
+ "marginRight": "0px",
  "selectControlID": "defaultLayout",
  "helpMessageID": "",
  "jpControlName": "",
  "relation": [],
+ "packageName": "",
  "businessId": "DBZ",
  "controlName": "ShikakuTokusoRireki",
- "marginTop": 0,
- "marginBottom": 0,
- "originalProperty": [
-  {
-   "publicChildFieldName": "dgShikakuShutokuRireki",
-   "publicChildProperty": "onSelectByDblClick",
-   "newPropertyName": "onSelectByDblClick"
-  },
-  {
-   "publicChildFieldName": "dgShikakuShutokuRireki",
-   "publicChildProperty": "onSelectByModifyButton",
-   "newPropertyName": "onSelectByModifyButton"
-  },
-  {
-   "publicChildFieldName": "dgShikakuShutokuRireki",
-   "publicChildProperty": "onSelectByDeleteButton",
-   "newPropertyName": "onSelectByDeleteButton"
-  },
-  {
-   "publicChildFieldName": "ShikakuTokusoRireki",
-   "publicChildProperty": "width",
-   "newPropertyName": "panel_width"
-  },
-  {
-   "publicChildFieldName": "dgShikakuShutokuRireki",
-   "publicChildProperty": "width",
-   "newPropertyName": "grid_width"
-  },
-  {
-   "publicChildFieldName": "ShikakuTokusoRireki",
-   "publicChildProperty": "visible",
-   "newPropertyName": ""
-  }
- ],
+ "marginTop": "0px",
+ "marginBottom": "0px",
+ "originalProperty": [],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": "",
  "canTransferEvent": true,
  "heightForDialog": "M",
  "firstFocusFieldName": "",
- "lastFocusFieldName": ""
+ "lastFocusFieldName": "",
+ "modes": [],
+ "publicEvents": [
+  {
+   "eventName": "onSelect_dgShikakuShutokuRireki"
+  },
+  {
+   "eventName": "onSelectByDblClick_dgShikakuShutokuRireki"
+  },
+  {
+   "eventName": "onSelectByModifyButton_dgShikakuShutokuRireki"
+  },
+  {
+   "eventName": "onSelectByDeleteButton_dgShikakuShutokuRireki"
+  },
+  {
+   "eventName": "onClickShosaiButton_dgShikakuShutokuRireki"
+  },
+  {
+   "eventName": "onClick_btnAdd"
+  }
+ ],
+ "publicEventsAlias": []
 }        
     }
+
+     export module ShikakuTokusoRireki {
+
+        export class Events {
+
+            public static onLoad_ShikakuShutokuTaishoshaJoho(): string {
+                return "onLoad_ShikakuShutokuTaishoshaJoho";
+            }
+
+            public static onClick_btnAdd(): string {
+                return "onClick_btnAdd";
+            }
+
+            public static onSelect_dgShikakuShutokuRireki(): string {
+                return "onSelect_dgShikakuShutokuRireki";
+            }
+
+            public static onSelectByDblClick_dgShikakuShutokuRireki(): string {
+                return "onSelectByDblClick_dgShikakuShutokuRireki";
+            }
+
+            public static onSelectByModifyButton_dgShikakuShutokuRireki(): string {
+                return "onSelectByModifyButton_dgShikakuShutokuRireki";
+            }
+
+            public static onSelectByDeleteButton_dgShikakuShutokuRireki(): string {
+                return "onSelectByDeleteButton_dgShikakuShutokuRireki";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static myType(): string {
+                return "ShikakuTokusoRireki";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + DBZ.ShikakuTokusoRireki.Controls.myType();
+            }
+
+            public convFiledName(fieldName: string): string {
+                return this._myName + "_" + DBZ.ShikakuTokusoRireki.Controls.myType() + "_" + fieldName;
+            }
+
+            public ShikakuTokusoRireki(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShikakuTokusoRireki"));
+            }
+
+            public btnAdd(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            }
+
+            public dgShikakuShutokuRireki(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgShikakuShutokuRireki"));
+            }
+
+        }
+
+     }
+
 }
 

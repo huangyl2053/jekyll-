@@ -34,9 +34,9 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCod
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -210,7 +210,7 @@ public final class ShinsakaiMockBusinessCreator {
     public static JogaiShinsakaiIin create除外対象審査会委員() {
         ShinsakaiIin iin = create審査会委員("00000001");
         return new JogaiShinsakaiIin(new ShoKisaiHokenshaNo(new RString("000001")),
-                new KaigoHihokenshaNo(new RString("0000000001")), 1, iin);
+                new HihokenshaNo(new RString("0000000001")), 1, iin);
     }
 
 }

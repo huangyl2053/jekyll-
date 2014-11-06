@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.definition.DbeShubetsuKey;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 
 /**
  * DbT5102ShinsakaiIinJohoの項目定義クラスです
