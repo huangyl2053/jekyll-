@@ -12,9 +12,9 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -38,7 +38,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
 
         private ShinseishoKanriNo 申請書管理No;
         private ShoKisaiHokenshaNo 証記載保険者番号;
-        private KaigoHihokenshaNo 被保険者No;
+        private HihokenshaNo 被保険者No;
         private FlexibleDate 認定申請年月日;
         private NinteiShinseiKubunShinsei 認定申請区分コード_申請時;
         private TorisageKubun 取下げ区分;
@@ -51,7 +51,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
         public void setUp() {
             申請書管理No = new ShinseishoKanriNo(new RString("0123"));
             証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("101200"));
-            被保険者No = new KaigoHihokenshaNo(new RString("1234567890"));
+            被保険者No = new HihokenshaNo(new RString("1234567890"));
             認定申請年月日 = new FlexibleDate(new RString("20120101"));
             認定申請区分コード_申請時 = NinteiShinseiKubunShinsei.新規申請;
             取下げ区分 = TorisageKubun.区分変更却下;

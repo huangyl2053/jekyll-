@@ -5,13 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbb.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportItem;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
@@ -30,7 +30,7 @@ public class FukaErrorInternalReportItem extends InternalReportItem {
     @CsvField(order = 30, name = "エラー内容")
     private final FukaError エラー詳細;
     @CsvField(order = 40, name = "被保険者番号")
-    private final KaigoHihokenshaNo 被保険者番号;
+    private final HihokenshaNo 被保険者番号;
     @CsvField(order = 50, name = "識別コード")
     private final ShikibetsuCode 識別コード;
 
@@ -112,7 +112,7 @@ public class FukaErrorInternalReportItem extends InternalReportItem {
      *
      * @return 被保険者番号
      */
-    public KaigoHihokenshaNo get被保険者番号() {
+    public HihokenshaNo get被保険者番号() {
         return 被保険者番号;
     }
 

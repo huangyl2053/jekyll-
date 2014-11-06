@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.business;
 
 import jp.co.ndensan.reams.db.dbb.model.FukaErrorModel;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -36,7 +36,7 @@ public class FukaErrorInternalReportItemTest extends DbbTestBase {
     private static FlexibleYear 賦課年度;
     private static TsuchishoNo 通知書番号;
     private static FukaError エラー内容;
-    private static KaigoHihokenshaNo 被保険者番号;
+    private static HihokenshaNo 被保険者番号;
     private static ShikibetsuCode 識別コード;
     private static InternalReportShoriKubun 処理区分;
 
@@ -45,7 +45,7 @@ public class FukaErrorInternalReportItemTest extends DbbTestBase {
         賦課年度 = new FlexibleYear("2014");
         通知書番号 = new TsuchishoNo(new RString("12341234"));
         エラー内容 = new FukaError(new Code("010"), RString.EMPTY, RString.EMPTY);
-        被保険者番号 = new KaigoHihokenshaNo(new RString("0123123123"));
+        被保険者番号 = new HihokenshaNo(new RString("0123123123"));
         識別コード = new ShikibetsuCode("012345678900001");
         処理区分 = InternalReportShoriKubun.処理無し;
 

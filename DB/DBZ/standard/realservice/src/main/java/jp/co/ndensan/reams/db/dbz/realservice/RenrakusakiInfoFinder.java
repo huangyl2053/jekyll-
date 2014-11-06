@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbz.business.KaigoRenrakusaki;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5050RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.business.mapper.RenrakusakiInfoMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.RenrakusakiInfoDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -48,7 +48,7 @@ public class RenrakusakiInfoFinder {
      * @return RenrakusakiInfo
      */
     public List<KaigoRenrakusaki> getRenrakusakiList(ShoKisaiHokenshaNo hokenshaNo,
-            KaigoHihokenshaNo hihoNo) {
+            HihokenshaNo hihoNo) {
         List<KaigoRenrakusaki> list = new ArrayList();
         List<DbT5050RenrakusakiJohoEntity> entityList = dac.select(hokenshaNo, hihoNo);
 

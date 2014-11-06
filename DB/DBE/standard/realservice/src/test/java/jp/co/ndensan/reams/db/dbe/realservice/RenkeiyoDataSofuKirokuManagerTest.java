@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbe.definition.NinteiShinseijiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiChousaSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiIkenshoSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiSoufuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.RenkeiyoDataSofuKirokuDacMock;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -238,7 +238,7 @@ public class RenkeiyoDataSofuKirokuManagerTest extends TestBase {
     }
 
     private static RenkeiyoDataSofuKiroku RenkeiData(ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
-        KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("1234567890"));
         YMDHMS 処理日時 = new YMDHMS(new RString("20140808102030"));
         NinteiShinseijiKubun 認定申請時区分 = NinteiShinseijiKubun.新規申請;
         HikiwatashiKubun 引渡し区分 = HikiwatashiKubun.引き渡し未済;

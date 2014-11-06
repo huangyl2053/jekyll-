@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.shichosonCode;
@@ -95,14 +95,14 @@ public class HihokenshaDaichoDac implements IInsertable<DbT1001HihokenshaDaichoE
     }
 
     /**
-     * 指定の{@link LasdecCode 市町村コード}と{@link KaigoHihokenshaNo 被保険者番号}から特定される被保険者の、
+     * 指定の{@link LasdecCode 市町村コード}と{@link HihokenshaNo 被保険者番号}から特定される被保険者の、
      * 直近の資格情報を検索します。
      *
      * @param 市町村コード {@link LasdecCode 市町村コード}
-     * @param 被保険者番号 {@link KaigoHihokenshaNo 被保険者番号}
+     * @param 被保険者番号 {@link HihokenshaNo 被保険者番号}
      * @return 直近の資格情報を保持した{@link DbT1001HihokenshaDaichoEntity 被保険者台帳Entity}
      */
-    public DbT1001HihokenshaDaichoEntity selectLatestOfPerson(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
+    public DbT1001HihokenshaDaichoEntity selectLatestOfPerson(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT1001HihokenshaDaichoEntity> entities = accessor.
                 select().

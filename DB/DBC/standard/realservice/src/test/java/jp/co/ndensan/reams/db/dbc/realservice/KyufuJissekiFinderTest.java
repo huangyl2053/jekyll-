@@ -39,11 +39,11 @@ import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiJutakuKaishuhiD
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiTokuteiNyushohiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.KyufuJissekiServiceDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.InputShikibetsuNoCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -101,7 +101,7 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
         KyufuJissekiServiceDac dac = mock(KyufuJissekiServiceDac.class);
         List<DbV3016KyufujissekiShuruiDetailEntity> entity = createDbV3016KyufujissekiShuruiDetailEntity(flg);
         when(dac.select(
-                any(KaigoHihokenshaNo.class),
+                any(HihokenshaNo.class),
                 any(ServiceTeikyoYM.class),
                 any(ServiceTeikyoYM.class))).thenReturn(entity);
         return dac;
@@ -114,7 +114,7 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
                 any(KokanShikibetsuNo.class),
                 any(InputShikibetsuNoCode.class),
                 any(ShoKisaiHokenshaNo.class),
-                any(KaigoHihokenshaNo.class),
+                any(HihokenshaNo.class),
                 any(FlexibleYearMonth.class),
                 any(JigyoshaNo.class),
                 any(ToshiNo.class))).thenReturn(entity);
@@ -128,7 +128,7 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
                 any(KokanShikibetsuNo.class),
                 any(InputShikibetsuNoCode.class),
                 any(ShoKisaiHokenshaNo.class),
-                any(KaigoHihokenshaNo.class),
+                any(HihokenshaNo.class),
                 any(FlexibleYearMonth.class),
                 any(JigyoshaNo.class),
                 any(ToshiNo.class))).thenReturn(entityList);
@@ -142,7 +142,7 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
                 any(KokanShikibetsuNo.class),
                 any(InputShikibetsuNoCode.class),
                 any(ShoKisaiHokenshaNo.class),
-                any(KaigoHihokenshaNo.class),
+                any(HihokenshaNo.class),
                 any(FlexibleYearMonth.class),
                 any(JigyoshaNo.class),
                 any(ToshiNo.class))).thenReturn(entityList);
@@ -156,7 +156,7 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
                 any(KokanShikibetsuNo.class),
                 any(InputShikibetsuNoCode.class),
                 any(ShoKisaiHokenshaNo.class),
-                any(KaigoHihokenshaNo.class),
+                any(HihokenshaNo.class),
                 any(FlexibleYearMonth.class),
                 any(JigyoshaNo.class),
                 any(ToshiNo.class))).thenReturn(entityList);
@@ -170,7 +170,7 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
                 any(KokanShikibetsuNo.class),
                 any(InputShikibetsuNoCode.class),
                 any(ShoKisaiHokenshaNo.class),
-                any(KaigoHihokenshaNo.class),
+                any(HihokenshaNo.class),
                 any(FlexibleYearMonth.class),
                 any(JigyoshaNo.class),
                 any(ToshiNo.class))).thenReturn(entityList);
@@ -184,7 +184,7 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
                 any(KokanShikibetsuNo.class),
                 any(InputShikibetsuNoCode.class),
                 any(ShoKisaiHokenshaNo.class),
-                any(KaigoHihokenshaNo.class),
+                any(HihokenshaNo.class),
                 any(FlexibleYearMonth.class),
                 any(JigyoshaNo.class),
                 any(ToshiNo.class))).thenReturn(entityList);
@@ -198,7 +198,7 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
                 any(KokanShikibetsuNo.class),
                 any(InputShikibetsuNoCode.class),
                 any(ShoKisaiHokenshaNo.class),
-                any(KaigoHihokenshaNo.class),
+                any(HihokenshaNo.class),
                 any(FlexibleYearMonth.class),
                 any(JigyoshaNo.class),
                 any(ToshiNo.class))).thenReturn(entityList);
@@ -212,7 +212,7 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
                 any(KokanShikibetsuNo.class),
                 any(InputShikibetsuNoCode.class),
                 any(ShoKisaiHokenshaNo.class),
-                any(KaigoHihokenshaNo.class),
+                any(HihokenshaNo.class),
                 any(FlexibleYearMonth.class),
                 any(JigyoshaNo.class),
                 any(ToshiNo.class))).thenReturn(entityList);
@@ -274,7 +274,7 @@ public class KyufuJissekiFinderTest extends DbcTestBase {
                 new KokanShikibetsuNo(new RString("0000")),
                 new InputShikibetsuNo(new Code("0001"), new RString("名称"), new RString("略称")),
                 new ShoKisaiHokenshaNo(new RString("00000003")),
-                new KaigoHihokenshaNo(new RString("0000000004")),
+                new HihokenshaNo(new RString("0000000004")),
                 new ServiceTeikyoYM(new FlexibleYearMonth("201401")),
                 new JigyoshaNo(new RString("0000000005")),
                 new ToshiNo(new RString("0000000006")),

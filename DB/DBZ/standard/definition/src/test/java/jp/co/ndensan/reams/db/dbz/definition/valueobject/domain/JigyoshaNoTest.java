@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -65,14 +65,6 @@ public class JigyoshaNoTest extends DbzTestBase {
 
             assertThat(sut.hashCode(), is(testData.hashCode()));
         }
-
-        @Test
-        public void 異なる値で生成されたインスタンス同士は_異なる値を返す() {
-            sut = createJigyoshaNo("1234567890");
-            JigyoshaNo testData = createJigyoshaNo("0000000000");
-
-            assertThat(sut.hashCode(), not(testData.hashCode()));
-        }
     }
 
     public static class CompareToTest {
@@ -101,6 +93,22 @@ public class JigyoshaNoTest extends DbzTestBase {
             testData = createJigyoshaNo("9999999999");
 
             assertThat(sut.compareTo(testData) < 0, is(true));
+        }
+    }
+
+    public static class isEmpty extends DbzTestBase {
+
+        @Test
+        public void EMPTYのisEmptyは_trueを返す() {
+            JigyoshaNo sut = JigyoshaNo.EMPTY;
+            assertThat(sut.isEmpty(), is(true));
+        }
+
+        @Test
+        public void EMPTYと同じ値を持たないインスタンスのisEmptyは_falseを返す() {
+            JigyoshaNo sut = new JigyoshaNo("100");
+            assertThat(sut.value(), is(not(JigyoshaNo.EMPTY.value())));
+            assertThat(sut.isEmpty(), is(false));
         }
     }
 

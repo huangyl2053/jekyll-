@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * {@link Code Code}をwrapしたValueObjectです。
  *
  * @author N3327 三浦 凌
+ * @deprecated コードマスタの考え方が変わったため、このインタフェースを使用する必要はありません。
  */
+@Deprecated
 public interface ICodeWrapValueObject extends IValueObject<RString> {
 
     /**

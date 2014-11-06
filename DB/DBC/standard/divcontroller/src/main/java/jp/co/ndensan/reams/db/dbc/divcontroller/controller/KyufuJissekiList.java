@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.KyufuJissekiSe
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiMeisaiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0010000.dgKyufuJissekiGokeiList_Row;
 import jp.co.ndensan.reams.db.dbc.realservice.KyufuJissekiServiceFinder;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -121,7 +121,7 @@ public class KyufuJissekiList {
 
     private KyufuJissekiServiceCollections getKyufuJissekiServiceCollections(KyufuJissekiSearchDiv panel2) {
         KyufuJissekiServiceFinder finder = new KyufuJissekiServiceFinder();
-        KaigoHihokenshaNo hihoNo = new KaigoHihokenshaNo(panel2.getTxtKyufuJissekiSearchHihokenshaNo().getValue());
+        HihokenshaNo hihoNo = new HihokenshaNo(panel2.getTxtKyufuJissekiSearchHihokenshaNo().getValue());
         return finder.get給付実績一覧(hihoNo, getServiceTeikyoKikan(panel2));
     }
 

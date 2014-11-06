@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -30,7 +30,7 @@ public class ShinsakaiIinJogaiJohoDacTest {
     private static ShinsakaiIinJogaiJohoDac sut;
 
     private static ShoKisaiHokenshaNo 証記載保険者番号_123456;
-    private static KaigoHihokenshaNo 被保険者番号_0123456789;
+    private static HihokenshaNo 被保険者番号_0123456789;
     private static int 管理番号_1;
     private static ShinsakaiIinCode 審査会委員コード_12345678;
 
@@ -39,7 +39,7 @@ public class ShinsakaiIinJogaiJohoDacTest {
         sut = InstanceProvider.create(ShinsakaiIinJogaiJohoDac.class);
 
         証記載保険者番号_123456 = new ShoKisaiHokenshaNo(new RString("123456"));
-        被保険者番号_0123456789 = new KaigoHihokenshaNo(new RString("0123456789"));
+        被保険者番号_0123456789 = new HihokenshaNo(new RString("0123456789"));
         管理番号_1 = 1;
         審査会委員コード_12345678 = new ShinsakaiIinCode(new RString("12345678"));
     }

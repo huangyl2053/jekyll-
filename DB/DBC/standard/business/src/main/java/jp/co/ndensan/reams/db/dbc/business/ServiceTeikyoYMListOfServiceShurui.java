@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 
 /**
  * サービス種類に対応するサービス提供年月のリストを保持するクラスです。

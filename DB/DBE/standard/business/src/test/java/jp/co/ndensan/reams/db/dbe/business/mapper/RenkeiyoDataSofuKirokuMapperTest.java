@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbe.business.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.mapper.RenkeiyoDataSofuKirokuMapper;
 import jp.co.ndensan.reams.db.dbe.business.RenkeiyoDataSofuKiroku;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5022RenkeiyoDataSofuKirokuEntity;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -31,7 +31,7 @@ public class RenkeiyoDataSofuKirokuMapperTest extends TestBase {
 
         private ShinseishoKanriNo 申請書管理番号;
         private YMDHMS 処理日時;
-        private KaigoHihokenshaNo 被保険者番号;
+        private HihokenshaNo 被保険者番号;
         private RString 認定申請時区分;
         private RString 引渡し区分;
         private RDateTime 引渡し日時;
@@ -44,7 +44,7 @@ public class RenkeiyoDataSofuKirokuMapperTest extends TestBase {
         public void setUp() {
             申請書管理番号 = new ShinseishoKanriNo(new RString("100000001"));
             処理日時 = new YMDHMS(new RString("20140808102030"));
-            被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));
+            被保険者番号 = new HihokenshaNo(new RString("1234567890"));
             認定申請時区分 = new RString("01");
             引渡し区分 = new RString("1");
             引渡し日時 = RDateTime.of(2014, 03, 14, 18, 45, 59);

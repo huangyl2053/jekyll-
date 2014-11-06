@@ -7,8 +7,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -38,9 +39,10 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private KaigoHihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private YMDHMS shoriTimestamp;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private ShikibetsuCode shikibetsuCode;
     private RString shikakuShutokuJiyuCode;
     private FlexibleDate shikakuShutokuYMD;
@@ -61,7 +63,7 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     private FlexibleDate jushochitokureiKaijoYMD;
     private FlexibleDate jushochitokureiKaijoTodokedeYMD;
     private RString koikinaiJushochiTokureiFlag;
-    private LasdecCode koikinaiTokureiSochimotoShichosonCode;
+    private ShoKisaiHokenshaNo koikinaiTokureiSochimotoHokenshaNo;
     private LasdecCode kyuShichosonCode;
     private RString saikofuKubun;
     private RString saikofuJiyuCode;
@@ -135,7 +137,7 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      *
      * @return hihokenshaNo
      */
-    public KaigoHihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
@@ -144,7 +146,7 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      *
      * @param hihokenshaNo hihokenshaNo
      */
-    public void setHihokenshaNo(KaigoHihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -164,6 +166,24 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      */
     public void setShoriTimestamp(YMDHMS shoriTimestamp) {
         this.shoriTimestamp = shoriTimestamp;
+    }
+
+    /**
+     * getShoKisaiHokenshaNo
+     *
+     * @return shoKisaiHokenshaNo
+     */
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+        return shoKisaiHokenshaNo;
+    }
+
+    /**
+     * setShoKisaiHokenshaNo
+     *
+     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     */
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
@@ -549,21 +569,22 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getKoikinaiTokureiSochimotoShichosonCode
+     * getKoikinaiTokureiSochimotoHokenshaNo
      *
-     * @return koikinaiTokureiSochimotoShichosonCode
+     * @return koikinaiTokureiSochimotoHokenshaNo
      */
-    public LasdecCode getKoikinaiTokureiSochimotoShichosonCode() {
-        return koikinaiTokureiSochimotoShichosonCode;
+    public ShoKisaiHokenshaNo getKoikinaiTokureiSochimotoHokenshaNo() {
+        return koikinaiTokureiSochimotoHokenshaNo;
     }
 
     /**
-     * setKoikinaiTokureiSochimotoShichosonCode
+     * setKoikinaiTokureiSochimotoHokenshaNo
      *
-     * @param koikinaiTokureiSochimotoShichosonCode koikinaiTokureiSochimotoShichosonCode
+     * @param koikinaiTokureiSochimotoHokenshaNo
+     * koikinaiTokureiSochimotoHokenshaNo
      */
-    public void setKoikinaiTokureiSochimotoShichosonCode(LasdecCode koikinaiTokureiSochimotoShichosonCode) {
-        this.koikinaiTokureiSochimotoShichosonCode = koikinaiTokureiSochimotoShichosonCode;
+    public void setKoikinaiTokureiSochimotoHokenshaNo(ShoKisaiHokenshaNo koikinaiTokureiSochimotoHokenshaNo) {
+        this.koikinaiTokureiSochimotoHokenshaNo = koikinaiTokureiSochimotoHokenshaNo;
     }
 
     /**
@@ -642,7 +663,8 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      * このエンティティの主キーが他の{@literal DbT1001HihokenshaDaichoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT1001HihokenshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT1001HihokenshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     public boolean equalsPrimaryKeys(DbT1001HihokenshaDaichoEntity other) {
         if (other == null) {

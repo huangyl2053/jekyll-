@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,14 +23,6 @@ import org.junit.runner.RunWith;
 public class ServiceCodeTest extends DbzTestBase {
 
     private static ServiceCode sut;
-
-    public static class Constructor {
-
-        @Test(expected = NullPointerException.class)
-        public void 引数がnullの時_NullPointerExceptionが発生する() {
-            sut = new ServiceCode(null);
-        }
-    }
 
     public static class value {
 
@@ -99,13 +91,21 @@ public class ServiceCodeTest extends DbzTestBase {
 
             assertThat(sut.hashCode(), is(testData.hashCode()));
         }
+    }
+
+    public static class isEmpty extends DbzTestBase {
 
         @Test
-        public void 異なる値で生成されたインスタンス同士は_異なる値を返す() {
-            sut = createServiceCode("1234567890");
-            ServiceCode testData = createServiceCode("0000000000");
+        public void EMPTYのisEmptyは_trueを返す() {
+            ServiceCode sut = ServiceCode.EMPTY;
+            assertThat(sut.isEmpty(), is(true));
+        }
 
-            assertThat(sut.hashCode(), not(testData.hashCode()));
+        @Test
+        public void EMPTYと同じ値を持たないインスタンスのisEmptyは_falseを返す() {
+            ServiceCode sut = new ServiceCode("100");
+            assertThat(sut.value(), is(not(ServiceCode.EMPTY.value())));
+            assertThat(sut.isEmpty(), is(false));
         }
     }
 

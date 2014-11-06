@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirek
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.business.mapper.ShujiiIkensho5KomokuMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShujiiIkenshoShosaiJohoDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**

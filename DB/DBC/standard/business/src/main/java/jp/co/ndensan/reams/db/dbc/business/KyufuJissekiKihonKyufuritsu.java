@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
 
 /**
  * 給付実績の基本情報（給付率）を保持するクラスです。

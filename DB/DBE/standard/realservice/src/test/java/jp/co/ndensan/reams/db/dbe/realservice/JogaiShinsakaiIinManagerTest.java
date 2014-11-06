@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.relate.JogaiShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiIinJogaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.JogaiShinsakaiIinDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -44,7 +44,7 @@ public class JogaiShinsakaiIinManagerTest {
             sut = new JogaiShinsakaiIinManager(createMockDac(), null);
 
             ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("012345"));
-            KaigoHihokenshaNo 介護被保険者番号 = new KaigoHihokenshaNo(new RString("0123456789"));
+            HihokenshaNo 介護被保険者番号 = new HihokenshaNo(new RString("0123456789"));
             JogaiShinsakaiIinList result = sut.get除外審査会委員List(証記載保険者番号, 介護被保険者番号);
             assertThat(result.size(), is(3));
         }
@@ -52,7 +52,7 @@ public class JogaiShinsakaiIinManagerTest {
         private JogaiShinsakaiIinDac createMockDac() {
             JogaiShinsakaiIinDac mockDac = mock(JogaiShinsakaiIinDac.class);
             List<JogaiShinsakaiIinEntity> list = ShinsakaiMockEntityCreator.create除外対象審査会委員EntityListSpy(3);
-            when(mockDac.select(any(ShoKisaiHokenshaNo.class), any(KaigoHihokenshaNo.class))).thenReturn(list);
+            when(mockDac.select(any(ShoKisaiHokenshaNo.class), any(HihokenshaNo.class))).thenReturn(list);
             return mockDac;
         }
     }

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
@@ -70,7 +70,7 @@ public class Minashi2GoshaTest {
 
         @Test
         public void get被保険者番号は_コンストラクタ引数のMinashi2GoshaDaichoが持つ被保険者番号と_同じ値を返す() {
-            KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("0123456789"));
+            HihokenshaNo hihokenshaNo = new HihokenshaNo(new RString("0123456789"));
             when(daichoJoho.get被保険者番号()).thenReturn(hihokenshaNo);
             assertThat(sut.get被保険者番号(), is(hihokenshaNo));
         }

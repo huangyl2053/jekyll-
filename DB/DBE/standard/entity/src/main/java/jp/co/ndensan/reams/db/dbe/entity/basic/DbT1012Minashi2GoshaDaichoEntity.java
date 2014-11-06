@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -38,7 +38,7 @@ public class DbT1012Minashi2GoshaDaichoEntity implements IDbAccessable {
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private KaigoHihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private YMDHMS shoriTimestamp;
     private ShikibetsuCode shikibetsuCode;
@@ -116,7 +116,7 @@ public class DbT1012Minashi2GoshaDaichoEntity implements IDbAccessable {
      *
      * @return hihokenshaNo
      */
-    public KaigoHihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
@@ -125,7 +125,7 @@ public class DbT1012Minashi2GoshaDaichoEntity implements IDbAccessable {
      *
      * @param hihokenshaNo hihokenshaNo
      */
-    public void setHihokenshaNo(KaigoHihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.realservice.Minashi2GoshaFinder;
 import jp.co.ndensan.reams.db.dbe.realservice.search.Minashi2GoshaDaichoSearchItem;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dbz.business.INinteiShinseiTaishosha;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaFinder;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaForSearchResult;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IHihokenshaForSearchResult;
@@ -104,7 +104,7 @@ public class HihokenshaSearchForShinsei {
 
         LasdecCode 市町村コード = new LasdecCode("123456");
 //        LasdecCode 市町村コード = new LasdecCode(div.getDdlHokensha().getSelectedItem());
-        KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(div.getTxtHihokenshaNo().getValue());
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHihokenshaNo().getValue());
 
         INewSearchCondition 市町村コード検索条件 = SearchConditionFactory.condition(HihokenshaSearchItem.市町村コード,
                 StringOperator.完全一致, new RString(市町村コード.toString()));
@@ -117,7 +117,7 @@ public class HihokenshaSearchForShinsei {
 
         LasdecCode 市町村コード = new LasdecCode("123456");
 //        LasdecCode 市町村コード = new LasdecCode(div.getDdlHokensha().getSelectedItem());
-        KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(div.getTxtHihokenshaNo().getValue());
+        HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getTxtHihokenshaNo().getValue());
 
         INewSearchCondition 市町村コード検索条件 = SearchConditionFactory.condition(Minashi2GoshaDaichoSearchItem.市町村コード,
                 StringOperator.完全一致, new RString(市町村コード.toString()));

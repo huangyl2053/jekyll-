@@ -9,7 +9,8 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -30,15 +31,16 @@ public final class HihokenshaMock {
         LasdecCode lasdecCode = new LasdecCode("123456");
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode("1234567890");
         YMDHMS shoriTimeStamp = new YMDHMS("20110912012345");
-        KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("12134567890"));
-        Hihokensha hihokensha = createHihokensha(lasdecCode, shikibetsuCode, shoriTimeStamp, hihokenshaNo);
+        ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("123456"));
+        HihokenshaNo hihokenshaNo = new HihokenshaNo(new RString("12134567890"));
+        Hihokensha hihokensha = createHihokensha(lasdecCode, shikibetsuCode, shoriTimeStamp, shoKisaiHokenshaNo, hihokenshaNo);
         return spy(hihokensha);
     }
 
     public static Hihokensha createHihokensha(LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode, YMDHMS shoriTimeStamp,
-            KaigoHihokenshaNo hihokenshaNo) {
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo, HihokenshaNo hihokenshaNo) {
         IHihokenshaShikaku shikaku = new HihokenshaShikaku.Builder(lasdecCode, shikibetsuCode, shoriTimeStamp,
-                new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
+                shoKisaiHokenshaNo, new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
                 .hihokenshaNo(hihokenshaNo).build();
 
         IKojin profile = mock(IKojin.class);
