@@ -153,8 +153,6 @@ public final class NenreiTotatsuChecker {
         @Override
         public boolean isValid() {
             RDate nenreiTotatsuDate = dateOfBirth.get年齢到達日(config.get(nenreiTotatsuKijun));
-            System.out.println(kijunDate);
-            System.out.println(nenreiTotatsuDate);
             return kijunDate.isBeforeOrEquals(nenreiTotatsuDate);
         }
     }
