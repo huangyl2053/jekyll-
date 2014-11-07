@@ -10,7 +10,7 @@ import java.util.Comparator;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 
 /**
- * 被保険者台帳の項目でソートするための比較メソッドを提供します。
+ * {@link jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel 被保険者台帳Model}をソートするためのComparatorを提供します。
  *
  * @author n8178 城間篤人
  */
