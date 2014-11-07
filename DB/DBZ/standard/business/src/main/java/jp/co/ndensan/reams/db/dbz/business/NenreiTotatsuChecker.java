@@ -91,7 +91,7 @@ public final class NenreiTotatsuChecker {
      * @return 判定を行うインターフェース
      */
     public INenreiTotatsuValider bornOn(IDateOfBirth dateOfBirth) {
-        return new _NenreiTotatsuChecker(nenreiTotatsuKijun, kijunDate, config, dateOfBirth);
+        return new _NenreiTotatsuChecker(dateOfBirth);
     }
 
     /**
@@ -101,8 +101,7 @@ public final class NenreiTotatsuChecker {
      * @return 判定を行うインターフェース
      */
     public INenreiTotatsuValider bornOn(RDate dateOfBirth) {
-        return new _NenreiTotatsuChecker(nenreiTotatsuKijun, kijunDate, config,
-                DateOfBirthFactory.createInstance(dateOfBirth));
+        return new _NenreiTotatsuChecker(DateOfBirthFactory.createInstance(dateOfBirth));
     }
 
     /**
@@ -112,8 +111,7 @@ public final class NenreiTotatsuChecker {
      * @return 判定を行うインターフェース
      */
     public INenreiTotatsuValider bornOn(FlexibleDate dateOfBirth) {
-        return new _NenreiTotatsuChecker(nenreiTotatsuKijun, kijunDate, config,
-                DateOfBirthFactory.createInstance(dateOfBirth));
+        return new _NenreiTotatsuChecker(DateOfBirthFactory.createInstance(dateOfBirth));
     }
 
     public interface INenreiTotatsuValider {
@@ -128,9 +126,6 @@ public final class NenreiTotatsuChecker {
 
     private class _NenreiTotatsuChecker implements INenreiTotatsuValider {
 
-        private final NenreiTotatsuKijunConfig config;
-        private final ConfigKeysNenreiTotatsuKijunJoho nenreiTotatsuKijun;
-        private final RDate kijunDate;
         private final IDateOfBirth dateOfBirth;
 
         /**
@@ -141,12 +136,8 @@ public final class NenreiTotatsuChecker {
          * @param config 判定に使用する、年齢到達情報の業務コンフィグ取得クラス
          * @param dateOfBirth 判定対象の生年月日
          */
-        public _NenreiTotatsuChecker(ConfigKeysNenreiTotatsuKijunJoho nenreiTotatsuKijun, RDate kijunDate,
-                NenreiTotatsuKijunConfig config, IDateOfBirth dateOfBirth) {
+        public _NenreiTotatsuChecker(IDateOfBirth dateOfBirth) {
 
-            this.nenreiTotatsuKijun = nenreiTotatsuKijun;
-            this.kijunDate = kijunDate;
-            this.config = config;
             this.dateOfBirth = dateOfBirth;
         }
 
