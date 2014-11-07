@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.realservice;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidatable;

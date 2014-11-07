@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model;
+package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  *
  * @author n8178 城間篤人
  */
-public interface IHihokensaDaicho {
+public interface IHihokenshaDaicho {
 
     /**
      * 市町村コードを返します。

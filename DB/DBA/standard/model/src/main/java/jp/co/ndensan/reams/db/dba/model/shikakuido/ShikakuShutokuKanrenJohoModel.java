@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.model;
+package jp.co.ndensan.reams.db.dba.model.shikakuido;
 
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 
 /**
  * 資格取得の際、1トランザクションでまとめて登録したい情報を保持するModelです。

@@ -106,14 +106,6 @@ public class ShikakuShutokuJoho {
         return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
-    /**
-     * 被保険者履歴一覧グリッドの詳細ボタンをクリックした際に実行されます。<br/>
-     * 資格詳細画面へ遷移する前に、選択している被保険者履歴の情報をViewStateに保存します。
-     *
-     * @param shikakuShutokuDiv {@link ShikakuShutokuJohoDiv 資格取得情報Div}
-     * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
-     * @return 資格取得情報Divを持つResponseData
-     */
     public ResponseData<ShikakuShutokuJohoDiv> onClick_btnShikakuShosai(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonDiv) {
         //1, 選択行の情報を取得する。
         //2, 選択行の情報をModel化し、ViewStateに保存する。

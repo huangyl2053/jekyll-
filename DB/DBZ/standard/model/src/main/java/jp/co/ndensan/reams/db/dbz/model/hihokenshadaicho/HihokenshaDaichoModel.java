@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model;
+package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 //このクラスは、他のスケルトンコード実装用のdummyです。
 //現在定義されているメソッドは、ツールによって作成しなおした後に、
 //改めて実装するようにしてください。
-public class HihokenshaDaichoModel implements IHihokensaDaicho {
+public class HihokenshaDaichoModel implements IHihokenshaDaicho {
 
     private final DbT1001HihokenshaDaichoEntity entity;
 

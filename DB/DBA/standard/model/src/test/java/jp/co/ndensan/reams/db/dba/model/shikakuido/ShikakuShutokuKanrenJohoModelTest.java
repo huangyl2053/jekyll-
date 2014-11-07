@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.model;
+package jp.co.ndensan.reams.db.dba.model.shikakuido;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import org.junit.Test;

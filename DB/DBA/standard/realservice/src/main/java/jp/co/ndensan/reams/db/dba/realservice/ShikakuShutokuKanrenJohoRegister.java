@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.realservice;
 
-import jp.co.ndensan.reams.db.dba.model.ShikakuShutokuKanrenJohoModel;
+import jp.co.ndensan.reams.db.dba.model.shikakuido.ShikakuShutokuKanrenJohoModel;
 import jp.co.ndensan.reams.db.dba.persistence.ShikakuShutokuKanrenJohoDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 

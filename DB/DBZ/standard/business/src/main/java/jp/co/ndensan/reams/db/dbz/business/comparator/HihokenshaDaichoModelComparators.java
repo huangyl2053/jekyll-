@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.comparator;
 
 import java.util.Collections;
 import java.util.Comparator;
-import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel 被保険者台帳Model}をソートするためのComparatorを提供します。
