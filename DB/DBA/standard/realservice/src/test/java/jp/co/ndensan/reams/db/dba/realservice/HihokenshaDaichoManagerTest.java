@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.realservice;
 
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaDaichoList;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

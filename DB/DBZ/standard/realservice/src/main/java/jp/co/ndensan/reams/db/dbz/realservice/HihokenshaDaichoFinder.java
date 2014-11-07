@@ -33,8 +33,6 @@ public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
         dac = InstanceProvider.create(HihokenshaDaichoDac.class);
     }
 
-    //TODO #52997
-    //HihokenshaDaichoDacが作成されたら、コメントを解除してください。
     /**
      * テスト用コンストラクタです。
      *
