@@ -42,7 +42,7 @@ public class NenreiTotatsuKijunConfig {
         Map<ConfigKeysNenreiTotatsuKijunJoho, Integer> map = new EnumMap<>(ConfigKeysNenreiTotatsuKijunJoho.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysNenreiTotatsuKijunJoho target : ConfigKeysNenreiTotatsuKijunJoho.values()) {
-            Integer value = new Integer(businessConfig.get(target, nowDate).toString());
+            Integer value = Integer.valueOf(businessConfig.get(target, nowDate).toString());
             map.put(target, value);
         }
         return Collections.unmodifiableMap(map);

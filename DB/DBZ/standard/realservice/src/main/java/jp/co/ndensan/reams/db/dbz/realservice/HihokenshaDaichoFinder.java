@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;

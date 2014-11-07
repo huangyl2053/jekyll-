@@ -34,7 +34,13 @@ public class ShikakuShutokuKanrenJohoRegister {
         this.dac = dac;
     }
 
-    public boolean save(ShikakuShutokuKanrenJohoModel 資格取得関連情報) {
+    /**
+     * 引数から資格取得関連情報Modelを受け取り、その情報を元にDBを更新します。
+     *
+     * @param 資格取得関連情報Model 資格取得関連情報Model
+     * @return 保存に成功した場合、true
+     */
+    public boolean save(ShikakuShutokuKanrenJohoModel 資格取得関連情報Model) {
         //TODO #52997
         //一括保存用のDacを呼び出して保存する。
         throw new UnsupportedOperationException("Not supported yet.");

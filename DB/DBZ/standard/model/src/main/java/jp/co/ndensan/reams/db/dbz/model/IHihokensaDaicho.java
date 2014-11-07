@@ -231,6 +231,6 @@ public interface IHihokensaDaicho {
      *
      * @return 帳票交付履歴ID
      */
-    public int get帳票交付履歴ID();
+    int get帳票交付履歴ID();
 
 }

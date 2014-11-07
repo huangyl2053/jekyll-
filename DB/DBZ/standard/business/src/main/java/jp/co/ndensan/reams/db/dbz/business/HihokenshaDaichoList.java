@@ -22,17 +22,17 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
  */
 public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
 
-    private final IItemList<HihokenshaDaichoModel> hihokenshaDaichoList;
+    private final IItemList<HihokenshaDaichoModel> daichoList;
 
     /**
      * コンストラクタです。
      *
-     * @param hihokenshaDaichoList 被保険者台帳List
+     * @param daichoList 被保険者台帳List
      */
-    public HihokenshaDaichoList(IItemList<HihokenshaDaichoModel> hihokenshaDaichoList) {
-        requireNonNull(hihokenshaDaichoList, UrSystemErrorMessages.引数がnullのため生成不可
+    public HihokenshaDaichoList(IItemList<HihokenshaDaichoModel> daichoList) {
+        requireNonNull(daichoList, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("引数のList", getClass().getSimpleName()));
-        this.hihokenshaDaichoList = hihokenshaDaichoList;
+        this.daichoList = daichoList;
     }
 
     /**
@@ -41,7 +41,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      * @return 被保険者台帳List
      */
     public IItemList<HihokenshaDaichoModel> to資格得喪List() {
-        hihokenshaDaichoList.sortBy(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
+        daichoList.sortBy(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
         List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
         //TODO #52997
         //資格得喪を表現するためには、被保険者台帳から、
@@ -66,7 +66,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      * @return 被保険者台帳List
      */
     public IItemList<HihokenshaDaichoModel> to住所地特例List() {
-        hihokenshaDaichoList.sortBy(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
+        daichoList.sortBy(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
         List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
         //TODO #52997
         //住所地特例を表現するためには、適用情報と解除情報をそれぞれ取得する必要がある。
@@ -104,7 +104,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      * @return 被保険者台帳List
      */
     public IItemList<HihokenshaDaichoModel> to資格関連異動List() {
-        hihokenshaDaichoList.sortBy(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
+        daichoList.sortBy(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
         List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
         //TODO #52997
         //資格関連異動を表現するためには、被保険者台帳から、
@@ -127,7 +127,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
 
     @Override
     public Iterator<HihokenshaDaichoModel> iterator() {
-        return hihokenshaDaichoList.iterator();
+        return daichoList.iterator();
     }
 
 }

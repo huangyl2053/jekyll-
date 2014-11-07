@@ -65,9 +65,9 @@ public class HihokenshaDaichoModel implements IHihokensaDaicho {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setState() {
-        //TODO #52997
-        //Entityの更新stateを設定する処理を実装してください。
+    //TODO #52997
+    //Entityの更新stateを設定する処理を実装してください。
+    public void setState(EntityDataState state) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

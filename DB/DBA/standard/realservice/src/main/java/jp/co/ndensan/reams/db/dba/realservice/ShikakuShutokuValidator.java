@@ -41,6 +41,9 @@ public final class ShikakuShutokuValidator {
         return new _ShikakuShutokuValidator(validationTarget);
     }
 
+    /**
+     * バリデーションチェックで比較対象となる、1つ前の履歴情報を設定する機能を提供することを示すインターフェースです。
+     */
     public interface IBeforeDataSetter {
 
         /**
@@ -52,6 +55,9 @@ public final class ShikakuShutokuValidator {
         IDateOfBirthSetter setBeforeData(HihokenshaDaichoModel beforeData);
     }
 
+    /**
+     * バリデーションチェックで使用する、生年月日を設定する機能を提供するインターフェースです。
+     */
     public interface IDateOfBirthSetter {
 
         /**

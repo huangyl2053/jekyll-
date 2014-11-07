@@ -18,11 +18,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
  * 資格取得可能な年齢に到達しているかの判定を行うクラスです。<br/>
  *
  * <pre>
- //使用例
- NenreiTotatsuChecker checker = new NenreiTotatsuChecker(
-      ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢, RDate.getNowDate());
- checker.personBornOn(dateOfBirth).isValid();
- </pre>
+ * //使用例
+ * NenreiTotatsuChecker checker = new NenreiTotatsuChecker(
+ * ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢, RDate.getNowDate());
+ * checker.personBornOn(dateOfBirth).isValid();
+ * </pre>
  *
  * @author n8178 城間篤人
  */
@@ -90,7 +90,7 @@ public final class NenreiTotatsuChecker {
      * @param dateOfBirth チェック対象の生年月日
      * @return 判定を行うインターフェース
      */
-    public INenreiTotatsuValider personBornOn(IDateOfBirth dateOfBirth) {
+    public INenreiTotatshValidChecker personBornOn(IDateOfBirth dateOfBirth) {
         return new _NenreiTotatsuChecker(dateOfBirth);
     }
 
@@ -100,7 +100,7 @@ public final class NenreiTotatsuChecker {
      * @param dateOfBirth チェック対象の生年月日(暦上日)
      * @return 判定を行うインターフェース
      */
-    public INenreiTotatsuValider personBornOn(RDate dateOfBirth) {
+    public INenreiTotatshValidChecker personBornOn(RDate dateOfBirth) {
         return new _NenreiTotatsuChecker(DateOfBirthFactory.createInstance(dateOfBirth));
     }
 
@@ -110,11 +110,14 @@ public final class NenreiTotatsuChecker {
      * @param dateOfBirth チェック対象の生年月日(非暦上日)
      * @return 判定を行うインターフェース
      */
-    public INenreiTotatsuValider personBornOn(FlexibleDate dateOfBirth) {
+    public INenreiTotatshValidChecker personBornOn(FlexibleDate dateOfBirth) {
         return new _NenreiTotatsuChecker(DateOfBirthFactory.createInstance(dateOfBirth));
     }
 
-    public interface INenreiTotatsuValider {
+    /**
+     * 年齢到達の要件を満たしているかどうかを判断する機能を提供するインターフェースです。
+     */
+    public interface INenreiTotatshValidChecker {
 
         /**
          * 年齢到達の基準を満たしているかの判定を行います。
@@ -124,7 +127,7 @@ public final class NenreiTotatsuChecker {
         boolean isValid();
     }
 
-    private class _NenreiTotatsuChecker implements INenreiTotatsuValider {
+    private class _NenreiTotatsuChecker implements INenreiTotatshValidChecker {
 
         private final IDateOfBirth dateOfBirth;
 

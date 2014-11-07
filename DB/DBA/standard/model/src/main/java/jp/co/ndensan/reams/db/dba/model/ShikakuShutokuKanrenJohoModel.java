@@ -44,6 +44,11 @@ public class ShikakuShutokuKanrenJohoModel {
         //受け取る引数は、全てnullチェックをお願いします。
     }
 
+    /**
+     * 被保険者台帳ModelのListを取得します。
+     *
+     * @return 被保険者台帳ModelList
+     */
     public List<HihokenshaDaichoModel> get被保険者台帳ModelList() {
         return Collections.unmodifiableList(被保険者台帳ModelList);
     }

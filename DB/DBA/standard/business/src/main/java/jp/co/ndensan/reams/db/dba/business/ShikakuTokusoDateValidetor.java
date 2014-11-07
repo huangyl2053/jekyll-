@@ -19,6 +19,12 @@ import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 public class ShikakuTokusoDateValidetor {
 
     /**
+     * インスタンス化防止のためのパッケージプライベートのコンストラクタです。
+     */
+    private ShikakuTokusoDateValidetor() {
+    }
+
+    /**
      * 比較対象となる、ひとつ前の被保険者台帳情報を受け取ります。
      *
      * @param previous 比較対象となる、ひとつ前の被保険者台帳情報
@@ -28,6 +34,9 @@ public class ShikakuTokusoDateValidetor {
         return new _ShikakuTokusoDateValidetor(previous);
     }
 
+    /**
+     * 比較対象となる、次の被保険者台帳情報を設定する処理を提供します。
+     */
     public interface IShikakuTosusoDateValidetor {
 
         /**

@@ -114,7 +114,7 @@ public class ShikakuShosai {
     //TODO #52997
     //施設入退所Tabの初期表示の制御、値の設定などを行います。
     //ShisetsuNyutaishoの情報を持つクラスは仮で設定しています。後に依頼する施設入退所で作成したクラスを使用してください。
-    private void initializedShikakuKanrenIdo(ShikakuShosaiDiv div) {//, ShisetsuNyutaishoRirekiList shisetsuNyutaishoList) {
+    private void initializedShikakuKanrenIdo(ShikakuShosaiDiv div) { //, ShisetsuNyutaishoRirekiList shisetsuNyutaishoList) {
         //1, 施設入退所履歴管理共有子Divのモードに、照会を設定する。
         //2, 施設入退所履歴グリッドに、引数から受け取った施設入退所情報を設定する。
         //3, 施設入退所入力明細エリアのDisplayNoneにtrueを設定する。
