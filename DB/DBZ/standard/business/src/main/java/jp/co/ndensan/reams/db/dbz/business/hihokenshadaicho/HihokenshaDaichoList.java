@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 被保険者台帳のListを扱うクラスです。
@@ -36,13 +37,28 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
     }
 
     /**
+     * 被保険者台帳Listから、資格を取得してから喪失するまでの、1期間分の履歴を抽出します。
+     *
+     * @param 資格取得日 資格取得日
+     * @return 1期間分の被保険者台帳List
+     */
+    public IItemList<HihokenshaDaichoModel> toOneSeasonList(FlexibleDate 資格取得日) {
+        daichoList.sortBy(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
+        List<HihokenshaDaichoModel> list = new ArrayList<>();
+        //TODO #52997
+        //1, 被保険者台帳Listの要素の中から、引数から渡された資格取得日に一致するものを抽出します。
+        //2, 抽出した結果をreturnします。
+        return ItemList.of(list);
+    }
+
+    /**
      * 被保険者台帳Listから、資格得喪情報の表現に必要な要素を抽出して返します。
      *
      * @return 被保険者台帳List
      */
     public IItemList<HihokenshaDaichoModel> to資格得喪List() {
         daichoList.sortBy(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
-        List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
+        List<HihokenshaDaichoModel> list = new ArrayList<>();
         //TODO #52997
         //資格得喪を表現するためには、被保険者台帳から、
         //  a, 同じ取得日を持つ情報の内、最新のデータ
@@ -57,7 +73,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
         //      2-2-1, daichoList.add(daicho)
         //      2-2-2, shutokuDate = daicho.get取得日()
         //3, 抽出した結果を戻り値として返す。
-        return ItemList.of(daichoList);
+        return ItemList.of(list);
     }
 
     /**
@@ -67,7 +83,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      */
     public IItemList<HihokenshaDaichoModel> to住所地特例List() {
         daichoList.sortBy(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
-        List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
+        List<HihokenshaDaichoModel> list = new ArrayList<>();
         //TODO #52997
         //住所地特例を表現するためには、適用情報と解除情報をそれぞれ取得する必要がある。
         //解除情報を持つ被保険者台帳は、
@@ -95,7 +111,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
         //      2-5-1, daichoList.add(daicho)
         //      2-5-2, tekiyoDate = daicho.get変更日()
         //3, 抽出した結果を戻り値として返す。
-        return ItemList.of(daichoList);
+        return ItemList.of(list);
     }
 
     /**
@@ -105,7 +121,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      */
     public IItemList<HihokenshaDaichoModel> to資格関連異動List() {
         daichoList.sortBy(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
-        List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
+        List<HihokenshaDaichoModel> list = new ArrayList<>();
         //TODO #52997
         //資格関連異動を表現するためには、被保険者台帳から、
         //  a, 被保険者台帳の変更日にデータを持つもの
@@ -122,7 +138,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
         //      2-2-1, daichoList.add(daicho)
         //      2-2-2, henkoDate = daicho.get変更日()
         //3, 抽出した結果を戻り値として返す。
-        return ItemList.of(daichoList);
+        return ItemList.of(list);
     }
 
     @Override

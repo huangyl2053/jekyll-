@@ -25,6 +25,17 @@ public class HihokenshaDaichoListTest {
         //1, nullCheckについてテストします。
     }
 
+    public static class toOneSeasonList extends DbaTestBase {
+        //TODO #52997
+        //テスト用の被保険者台帳Listを用意し、toOneSeasonListを実行します。
+        //実行した結果の戻り値が、想定した結果になっているかをテストしてください。
+        //
+        //例：5件のテストデータを用意してtoOneSeasonListを実行 →　2件のデータが抽出できる場合
+        //1, to資格得喪Listのsizeは2となるか。
+        //2, 戻り値のListの1番目の要素が持つ資格取得日は、引数から受け取った資格取得日と一致するか。
+        //2, 戻り値のListの2番目の要素が持つ資格取得日は、引数から受け取った資格取得日と一致するか。
+    }
+
     public static class to資格得喪List extends DbaTestBase {
         //TODO #52997
         //テスト用の被保険者台帳Listを用意し、to資格得喪Listを実行します。

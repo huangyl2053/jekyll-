@@ -27,10 +27,17 @@ public class ShikakuShosai {
      * @return 資格取得情報Divを持つResponseData
      */
     public ResponseData<ShikakuShosaiDiv> initialize(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) {
-        //1, ViewStateから、前画面で設定したModelを取得する。
-        //      ViewStateHolder.get(KaigoViewStateKey.被保険者台帳.getKey(), HihokenshaDaichoModel.class)
-        //1, ViewStateから取得したModelが持つキー情報を元に、以下のデータを取得する。
-        //      被保険者台帳（List）、施設入退所（List）
+        //1, 被保険者台帳情報の初期設定を行う。
+        //1-1, 被保険者台帳の情報を取得する
+        //  1-1-1, ViewStateに被保険者台帳の情報が存在する場合、ViewStateから取得する。
+        //  1-1-2, ViewStateに被保険者台帳の情報が存在しない場合、HihokenshaDaichoManagerを利用して、被保険者台帳情報を取得する。
+        //      1-1-2-1, HihokenshaDaichoManagerを利用して被保険者台帳情報を取得した場合、その情報をViewStateに保持する。
+        //1-2, HihokenshaDaichoList.getOneSeasonListを利用して、被保険者台帳情報から1期間分の資格得喪履歴Listを取得する。
+        //  1-2-1, 引数となる資格取得日は、資格取得画面からの遷移前にViewStateに保存した、単品の被保険者台帳Modelから取得する。
+        //
+        //2, 施設入退所の情報を設定する。
+        //   共有子Div側に用意されているloadメソッド等を利用して、それぞれ履歴を設定する。
+        //
         //3, それぞれの初期化処理を呼び出して実行してください。
         //      initializedShikakuShosai(div, Modelのキー情報を元に取得した被保険者台帳のListから取得した1件)
         //      initializedJutoku(div, Modelのキー情報を元に取得した被保険者台帳のList)
