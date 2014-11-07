@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.dba1010011;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ResponseDataCreator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
@@ -52,7 +52,7 @@ public class ShikakuShutokuJoho {
         //
         //4, 取得事由ドロップダウンリストに、コード種別:0117(介護資格取得事由（被保険者）)のデータを設定する。
         //
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -86,7 +86,7 @@ public class ShikakuShutokuJoho {
         //  メニューID == DBAMN21006(帰化により取得):「帰化」
         //  メニューID == DBAMN21007(職権により取得):「職権取得」
         //  メニューID == DBAMN21008(その他事由により取得):「その他」
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -103,7 +103,7 @@ public class ShikakuShutokuJoho {
         //3, 明細エリアに選択行の内容を表示する。
         //4, 追加行を選択している場合、明細エリアの項目を入力可にする。(※取得事由は除く)。
         //  以外の行を選択した場合、明細エリアの項目を入力不可にして「確定する」ボタンを押下不可にする。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -117,7 +117,7 @@ public class ShikakuShutokuJoho {
     public ResponseData<ShikakuShutokuJohoDiv> onClick_btnShikakuShosai(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonDiv) {
         //1, 選択行の情報を取得する。
         //2, 選択行の情報をModel化し、ViewStateに保存する。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -157,7 +157,7 @@ public class ShikakuShutokuJoho {
     public ResponseData<ShikakuShutokuJohoDiv> onClick_btnDecideShikakuShutokuInput(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonDiv) {
         //1, 明細エリアの入力内容を被保履歴一覧 に反映させる。
         //2, 「被保険者履歴一覧」のReadOnlyを外す。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -176,7 +176,7 @@ public class ShikakuShutokuJoho {
         //2, 表示されたダイアログのボタンをクリックした後、以下の処理に分岐する。
         //      はい：onYesの処理に進む。（明細エリアの値を破棄する）
         //      いいえ: ダイアログを閉じる
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -190,7 +190,7 @@ public class ShikakuShutokuJoho {
         //1, 明細エリアの各項目の値をクリアする。
         //2, 「被保険者履歴一覧」のReadOnlyを外す。
         //3, 最新履歴として追加行が存在し、追加行の退所日が空白の場合、「追加する」ボタンを押下不可の状態にして、以外の場合は押下可能にする。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -204,7 +204,7 @@ public class ShikakuShutokuJoho {
         //1, 「追加する」ボタンを押下不可にする。
         //2, 「医療保険履歴一覧」をreadOnlyにする。
         //3, 明細エリアの項目を空白で表示する。【入力可】
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -219,7 +219,7 @@ public class ShikakuShutokuJoho {
         //2, 「医療保険履歴一覧」をreadOnlyにする。
         //3, 明細エリアに選択行の内容を表示する。
         //4, 「確定する」ボタンを押下不可にする。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -234,7 +234,7 @@ public class ShikakuShutokuJoho {
         //2, 「医療保険履歴一覧」をreadOnlyにする。
         //3, 明細エリアに選択行の内容を表示する。
         //4, 加入日を入力不可にする。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -248,7 +248,7 @@ public class ShikakuShutokuJoho {
         //1, 「追加する」ボタンを押下不可にする。
         //2, 「医療保険履歴一覧」をreadOnlyにする。
         //3, 明細エリアに選択行の内容を表示する。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -265,7 +265,7 @@ public class ShikakuShutokuJoho {
         // メッセージID：URZE00025（期間が重複しています。）
         //3, 追加時のみ 加入日 ≦ 前の履歴データの脱退日 のとき、エラーメッセージを表示する。
         // メッセージID：URZE00025（期間が重複しています。）
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -279,7 +279,7 @@ public class ShikakuShutokuJoho {
         //1, 明細エリアの入力内容を医療保険履歴一覧 に反映させる。
         //2, 「医療保険履歴一覧」のReadOnlyを外す。
         //3, 最新履歴として追加行が存在し、追加行の脱退日が空白の場合、「追加する」ボタンを押下不可の状態にして、以外の場合は押下可能にする。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -298,7 +298,7 @@ public class ShikakuShutokuJoho {
         //2, 表示されたダイアログのボタンをクリックした後、以下の処理に分岐する。
         //      はい：onYesの処理に進む。（明細エリアの値を破棄する）
         //      いいえ: ダイアログを閉じる
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -312,7 +312,7 @@ public class ShikakuShutokuJoho {
         //1, 明細エリアの各項目の値をクリアする。
         //2,「医療保険履歴一覧」のReadOnlyを外す。
         //3, 最新履歴として追加行が存在し、追加行の脱退日が空白の場合、「追加する」ボタンを押下不可の状態にして、以外の場合は押下可能にする。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -326,7 +326,7 @@ public class ShikakuShutokuJoho {
         //1, 「追加する」ボタンを押下不可にする。
         //2, 「施設入退所履歴一覧」をreadOnlyにする。
         //3, 明細エリアの項目を空白で表示する。【入力可】
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -345,7 +345,7 @@ public class ShikakuShutokuJoho {
         //4-2, 状態が「修正」の場合、明細エリアの項目を入力可にする。(※入所日は入力不可)
         //4-3, 状態が「削除」の場合、明細エリアの項目を入力不可にする。
         //4-4, 状態が「空白」の場合、明細エリアの項目を入力不可にして「確定する」ボタンを押下不可にする。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -360,7 +360,7 @@ public class ShikakuShutokuJoho {
         //2, 「施設入退所履歴一覧」をreadOnlyにする。
         //3, 明細エリアに選択行の内容を表示する。
         //4, 入所日を入力不可にする。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -374,7 +374,7 @@ public class ShikakuShutokuJoho {
         //1, 「追加する」ボタンを押下不可にする。
         //2, 「施設入退所履歴一覧」をreadOnlyにする。
         //3, 明細エリアに選択行の内容を表示する。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -391,7 +391,7 @@ public class ShikakuShutokuJoho {
         // メッセージID：URZE00025（期間が重複しています。）
         //3, 追加時のみ 入所日 ≦ 前の履歴データの退所日 のとき、エラーメッセージを表示する。
         // メッセージID：URZE00025（期間が重複しています。）
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -405,7 +405,7 @@ public class ShikakuShutokuJoho {
         //1,  明細エリアの入力内容を施設入退所履歴一覧 に反映させる。
         //2,  「施設入退所履歴一覧」のReadOnlyを外す。
         //3,  最新履歴として追加行が存在し、追加行の退所日が空白の場合、「追加する」ボタンを押下不可の状態にして、以外の場合は押下可能にする。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -424,7 +424,7 @@ public class ShikakuShutokuJoho {
         //2, 表示されたダイアログのボタンをクリックした後、以下の処理に分岐する。
         //      はい：onYesの処理に進む。（明細エリアの値を破棄する）
         //      いいえ: ダイアログを閉じる
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -438,7 +438,7 @@ public class ShikakuShutokuJoho {
         //1, 明細エリアの各項目の値をクリアする。
         //2, 「施設入退所履歴一覧」のReadOnlyを外す。
         //3, 最新履歴として追加行が存在し、追加行の退所日が空白の場合、「追加する」ボタンを押下不可の状態にして、以外の場合は押下可能にする。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -451,7 +451,7 @@ public class ShikakuShutokuJoho {
     public ResponseData<ShikakuShutokuJohoDiv> onBeforeClick_btnSave(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonDiv) {
         //1, 編集がない場合、エラーメッセージを表示する。
         //      メッセージID：URZE00045（編集されていないため、更新できません。）
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -470,7 +470,7 @@ public class ShikakuShutokuJoho {
         //2, 表示されたダイアログのボタンをクリックした後、以下の処理に分岐する。
         //      はい：onYesの処理に進む。（明細エリアの値を破棄する）
         //      いいえ: ダイアログを閉じる
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -500,7 +500,7 @@ public class ShikakuShutokuJoho {
         //
         //3, 更新後の内容で再表示を行います。
         //   各履歴の表示モードを「照会」に変更し、追加するボタンがある場合はそれぞれ非表示にします。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -521,7 +521,7 @@ public class ShikakuShutokuJoho {
         //          はい：入力を破棄し、該当者一覧画面へ遷移する。
         //          いいえ: ダイアログを閉じる
         //2, 編集が行われていない場合、該当者一覧画面へ遷移する。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
     /**
@@ -539,7 +539,7 @@ public class ShikakuShutokuJoho {
         //          はい：入力を破棄し、検索画面へ遷移する。
         //          いいえ: ダイアログを閉じる
         //2, 編集が行われていない場合、検索画面へ遷移する。
-        return ResponseDataCreator.create(shikakuShutokuDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
 }

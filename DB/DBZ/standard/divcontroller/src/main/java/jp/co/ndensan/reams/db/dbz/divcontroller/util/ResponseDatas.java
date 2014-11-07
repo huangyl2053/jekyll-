@@ -3,31 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.helper;
+package jp.co.ndensan.reams.db.dbz.divcontroller.util;
 
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
- * 各DivControllerで共通的に使用される、ReponseData作成処理を提供します。
+ * ResponseData用のユーティリティです。
  *
  * @author n8178 城間篤人
  */
-public final class ResponseDataCreator {
+public final class ResponseDatas {
 
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。
      */
-    private ResponseDataCreator() {
+    private ResponseDatas() {
     }
 
     /**
-     * 引数から受け取った方をデータとして持つResponseDataを生成して返します。
+     * ResponseDataを生成し、引数から受け取った値を設定して返します。
      *
      * @param <T> ResponseDataに渡すデータの型
      * @param setIntoData ResponseDataに渡すデータ
      * @return 引数の値を持つResponseData
      */
-    public static <T> ResponseData<T> create(T setIntoData) {
+    public static <T> ResponseData<T> createSettingDataTo(T setIntoData) {
         ResponseData<T> response = new ResponseData<>();
         response.data = setIntoData;
         return response;

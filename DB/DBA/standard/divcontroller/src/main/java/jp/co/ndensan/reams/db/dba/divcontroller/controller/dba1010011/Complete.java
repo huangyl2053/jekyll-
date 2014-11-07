@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.dba1010011;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.CompleteDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.KihonJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ResponseDataCreator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -33,7 +33,7 @@ public class Complete {
         //  messageTaisho2：漢字氏名
         //
         //被保険者番号と漢字氏名は、KihonJohoDivから受け取って設定してください。
-        return ResponseDataCreator.create(completeDiv);
+        return ResponseDatas.createSettingDataTo(completeDiv);
     }
 
 }

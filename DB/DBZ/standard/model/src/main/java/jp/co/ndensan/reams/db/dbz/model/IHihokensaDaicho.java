@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.model;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
@@ -41,7 +41,7 @@ public interface IHihokensaDaicho {
      *
      * @return 被保険者番号
      */
-    KaigoHihokenshaNo get被保険者番号();
+    HihokenshaNo get被保険者番号();
 
     /**
      * 処理日時を返します。

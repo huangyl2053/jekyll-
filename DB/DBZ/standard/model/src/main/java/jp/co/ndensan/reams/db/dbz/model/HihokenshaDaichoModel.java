@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.model;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
@@ -84,7 +84,7 @@ public class HihokenshaDaichoModel implements IHihokensaDaicho {
     }
 
     @Override
-    public KaigoHihokenshaNo get被保険者番号() {
+    public HihokenshaNo get被保険者番号() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

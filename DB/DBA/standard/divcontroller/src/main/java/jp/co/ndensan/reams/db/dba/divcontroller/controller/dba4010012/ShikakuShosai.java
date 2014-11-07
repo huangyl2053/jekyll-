@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.dba4010012;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010012.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010012.ShikakuShosaiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ResponseDataCreator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
@@ -36,7 +36,7 @@ public class ShikakuShosai {
         //      initializedJutoku(div, Modelのキー情報を元に取得した被保険者台帳のList)
         //      initializedShikakuKanrenIdo(div, Modelのキー情報を元に取得した被保険者台帳のList)
         //      initializedShikakuKanrenIdo(div, Modelのキー情報を元に取得した施設入退所のList)
-        return ResponseDataCreator.create(shikakuShosaiDiv);
+        return ResponseDatas.createSettingDataTo(shikakuShosaiDiv);
     }
 
     //TODO #52997

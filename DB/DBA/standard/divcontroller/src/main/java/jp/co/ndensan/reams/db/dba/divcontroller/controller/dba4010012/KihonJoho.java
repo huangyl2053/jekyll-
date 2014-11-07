@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.dba4010012;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010012.KihonJohoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ResponseDataCreator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 
 /**
  * 被保険者資格詳細照会画面における、基本情報エリアのDivControllerです。
@@ -33,6 +33,6 @@ public class KihonJoho {
         //2, 資格基本情報の設定を行います。
         //  KaigoShikakuKihonDivが持つload(ShikibetsuCode)を利用して、初期設定を行ってください。
         //
-        return ResponseDataCreator.create(div);
+        return ResponseDatas.createSettingDataTo(div);
     }
 }
