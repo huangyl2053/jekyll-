@@ -51,15 +51,14 @@ public final class NenreiTotatsuChecker {
     }
 
     /**
-     * コンストラクタです。<br/>
-     * 年齢到達に関する業務コンフィグ取得クラスを外部から引数として受けとります。
+     * テスト用のコンストラクタです。引数から業務コンフィグ取得クラスのMockを受け取ります。
      *
      * @param nenreiTotatsuKijun 年齢到達基準
      * @param kijunDate 年齢到達判定の基準日
      * @param config 年齢到達の業務コンフィグ取得クラス
      * @throws NullPointerException 引数のいずれかにnullが渡された場合
      */
-    public NenreiTotatsuChecker(ConfigKeysNenreiTotatsuKijunJoho nenreiTotatsuKijun, RDate kijunDate,
+    NenreiTotatsuChecker(ConfigKeysNenreiTotatsuKijunJoho nenreiTotatsuKijun, RDate kijunDate,
             NenreiTotatsuKijunConfig config) throws NullPointerException {
         requireNonNull基準日(kijunDate);
         requireNonNull年齢到達基準(nenreiTotatsuKijun);
