@@ -41,7 +41,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      * @return 被保険者台帳List
      */
     public IItemList<HihokenshaDaichoModel> to資格得喪List() {
-        hihokenshaDaichoList.sortBy(HihokenshaDaichoModelComparators.資格取得日.getDesc());
+        hihokenshaDaichoList.sortBy(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
         List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
         //TODO #52997
         //資格得喪を表現するためには、被保険者台帳から、
@@ -66,7 +66,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      * @return 被保険者台帳List
      */
     public IItemList<HihokenshaDaichoModel> to住所地特例List() {
-        hihokenshaDaichoList.sortBy(HihokenshaDaichoModelComparators.資格取得日.getDesc());
+        hihokenshaDaichoList.sortBy(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
         List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
         //TODO #52997
         //住所地特例を表現するためには、適用情報と解除情報をそれぞれ取得する必要がある。
@@ -104,7 +104,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      * @return 被保険者台帳List
      */
     public IItemList<HihokenshaDaichoModel> to資格関連異動List() {
-        hihokenshaDaichoList.sortBy(HihokenshaDaichoModelComparators.資格取得日.getDesc());
+        hihokenshaDaichoList.sortBy(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
         List<HihokenshaDaichoModel> daichoList = new ArrayList<>();
         //TODO #52997
         //資格関連異動を表現するためには、被保険者台帳から、

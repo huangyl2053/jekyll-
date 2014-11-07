@@ -50,25 +50,25 @@ public class HihokenshaDaichoModelComparatorsTest {
 
         @Test
         public void ascでソートした場合_一番小さい値が先頭に来る() {
-            Collections.sort(list, HihokenshaDaichoModelComparators.資格取得日.getAsc());
+            Collections.sort(list, HihokenshaDaichoModelComparators.orderBy資格取得日.asc());
             assertThat(list.get(0).get資格取得日(), is(min.get資格取得日()));
         }
 
         @Test
         public void ascでソートした場合_1番大きい値が最後になる() {
-            Collections.sort(list, HihokenshaDaichoModelComparators.資格取得日.getAsc());
+            Collections.sort(list, HihokenshaDaichoModelComparators.orderBy資格取得日.asc());
             assertThat(list.get(list.size() - 1).get資格取得日(), is(max.get資格取得日()));
         }
 
         @Test
         public void descでソートした場合_一番大きい値が先頭に来る() {
-            Collections.sort(list, HihokenshaDaichoModelComparators.資格取得日.getDesc());
+            Collections.sort(list, HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
             assertThat(list.get(0).get資格取得日(), is(max.get資格取得日()));
         }
 
         @Test
         public void descでソートした場合_1番小さい値が最後になる() {
-            Collections.sort(list, HihokenshaDaichoModelComparators.資格取得日.getDesc());
+            Collections.sort(list, HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
             assertThat(list.get(list.size() - 1).get資格取得日(), is(min.get資格取得日()));
         }
     }

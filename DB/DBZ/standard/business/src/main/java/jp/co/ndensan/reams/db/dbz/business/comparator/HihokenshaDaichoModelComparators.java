@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.comparator;
 
 import java.util.Collections;
 import java.util.Comparator;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SortOrder;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 
 /**
@@ -18,9 +17,9 @@ import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 public enum HihokenshaDaichoModelComparators {
 
     /**
-     * 資格取得日で被保険者台帳Modelをソートする機能を持ちます。
+     * orderBy資格取得日で被保険者台帳Modelをソートする機能を持ちます。
      */
-    資格取得日(
+    orderBy資格取得日(
             new Comparator<HihokenshaDaichoModel>() {
                 @Override
                 public int compare(HihokenshaDaichoModel model1, HihokenshaDaichoModel model2) {
@@ -42,7 +41,7 @@ public enum HihokenshaDaichoModelComparators {
      *
      * @return 昇順ソート
      */
-    public Comparator<HihokenshaDaichoModel> getAsc() {
+    public Comparator<HihokenshaDaichoModel> asc() {
         return this.asc;
     }
 
@@ -51,7 +50,7 @@ public enum HihokenshaDaichoModelComparators {
      *
      * @return 降順ソート
      */
-    public Comparator<HihokenshaDaichoModel> getDesc() {
+    public Comparator<HihokenshaDaichoModel> desc() {
         return this.desc;
     }
 
