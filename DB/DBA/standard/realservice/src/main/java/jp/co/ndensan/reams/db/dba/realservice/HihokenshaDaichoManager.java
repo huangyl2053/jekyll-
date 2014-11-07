@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dba.realservice;
 
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaDaichoList;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
@@ -49,28 +49,28 @@ public class HihokenshaDaichoManager implements IHihokenshaDaichoFinder {
     }
 
     @Override
-    public IOptional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号, YMDHMS 処理日時) {
+    public IOptional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
         //TODO #52997
         //1, finderで実装している同じメソッドを呼び出して実装してください。
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public HihokenshaDaichoList find被保険者台帳List(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
+    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         //TODO #52997
         //1, finderで実装している同じメソッドを呼び出して実装してください。
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public HihokenshaDaichoList find被保険者台帳List(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
         //TODO #52997
         //1, finderで実装している同じメソッドを呼び出して実装してください。
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public HihokenshaDaichoList find被保険者台帳List(LasdecCode 市町村コード, KaigoHihokenshaNo 被保険者番号, FlexibleDate 資格取得日) {
+    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, FlexibleDate 資格取得日) {
         //TODO #52997
         //1, finderで実装している同じメソッドを呼び出して実装してください。
         throw new UnsupportedOperationException("Not supported yet.");

@@ -29,6 +29,9 @@ public class ShikakuShutokuJoho {
     public ResponseData<ShikakuShutokuJohoDiv> initialize(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonDiv) {
         //1, 以下のデータを取得し、それぞれの履歴一覧に設定する。
         //      被保険者台帳、医療保険加入、生活保護、老齢福祉年金、施設入退所
+        //1-1, 被保険者台帳の情報は、HihokenshaDaichoListクラスを利用して、資格得喪Listを抽出してから履歴一覧に設定します。
+        //1-2, 医療保険加入、生活保護、老齢福祉年金、施設入退所は、それぞれ共有子Divになっている。
+        //     共有子Div側に用意されているloadメソッド等を利用して、それぞれ履歴を設定する。
         //
         //2, 保険者情報表示制御、幅調整のモード設定を行う。
         //   保険者の情報を取得し、その情報を元に以下のようにグリッドの表示を変更する。
