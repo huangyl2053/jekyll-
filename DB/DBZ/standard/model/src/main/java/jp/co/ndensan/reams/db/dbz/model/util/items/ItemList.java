@@ -28,22 +28,22 @@ public final class ItemList<E> implements IItemList<E> {
     private final _ItemCollection<E> defaultImpl;
 
     /**
-     * 何も要素を保持しない空の{@link IItems I_ItemCollection}を生成します。
+     * 何も要素を保持しない空の{@link ItemList ItemList}を生成します。
      *
-     * @param <T> {@link IItems I_ItemCollection}が保持する要素の型
-     * @return 空の{@link IItems I_ItemCollection}
+     * @param <T> {@link ItemList ItemList}が保持する要素の型
+     * @return 空の{@link ItemList ItemList}
      */
     public static <T> ItemList<T> empty() {
         return new ItemList<>(Collections.<T>emptyList());
     }
 
     /**
-     * 引数のlistを保持する{@link IItems I_ItemCollection}を生成します。
+     * 引数のlistを保持する{@link ItemList ItemList}を生成します。
      *
-     * @param <T> {@link IItems I_ItemCollection}が保持する要素の型
-     * @param list {@link IItems I_ItemCollection}が保持する要素のlist
+     * @param <T> {@link ItemList ItemList}が保持する要素の型
+     * @param list {@link ItemList ItemList}が保持する要素のlist
      * @throws NullPointerException 引数がnullの時, listがnullの要素を含むとき
-     * @return 引数のlistを保持する{@link IItems I_ItemCollection}
+     * @return 引数のlistを保持する{@link ItemList ItemList}
      */
     public static <T> ItemList<T> of(List<T> list) throws NullPointerException {
         return new ItemList<>(list);

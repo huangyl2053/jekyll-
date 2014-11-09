@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiServiceCollections;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
 import jp.co.ndensan.reams.db.dbc.entity.helper.KyufujissekiShuruiDetailEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.KyufuJissekiServiceDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -43,7 +43,7 @@ public class KyufuJissekiServiceFinderTest extends DbcTestBase {
         public void 給付実績なしの時_get給付実績月別は_空のCollectionが返る() {
             sut = createFinder(AS_給付実績なし);
             KyufuJissekiServiceCollection result = sut.get給付実績月別(
-                    new KaigoHihokenshaNo(new RString("1234567890")),
+                    new HihokenshaNo(new RString("1234567890")),
                     new ServiceTeikyoYM(new FlexibleYearMonth("201405")),
                     createサービス提供年月期間());
             assertThat(result.isEmpty(), is(true));
@@ -53,7 +53,7 @@ public class KyufuJissekiServiceFinderTest extends DbcTestBase {
         public void 給付実績ありの時_get給付実績月別は_該当の１か月分の給付実績情報が返る() {
             sut = createFinder(AS_給付実績あり);
             KyufuJissekiServiceCollection result = sut.get給付実績月別(
-                    new KaigoHihokenshaNo(new RString("1234567890")),
+                    new HihokenshaNo(new RString("1234567890")),
                     new ServiceTeikyoYM(new FlexibleYearMonth("201405")),
                     createサービス提供年月期間());
             assertThat(result, instanceOf(KyufuJissekiServiceCollection.class));
@@ -63,7 +63,7 @@ public class KyufuJissekiServiceFinderTest extends DbcTestBase {
         public void 給付実績サービスデータを３件積んだ時_get給付実績月別は_３件のデータが入っている給付実績情報を返す() {
             sut = createFinder(AS_給付実績あり);
             KyufuJissekiServiceCollection result = sut.get給付実績月別(
-                    new KaigoHihokenshaNo(new RString("1234567890")),
+                    new HihokenshaNo(new RString("1234567890")),
                     new ServiceTeikyoYM(new FlexibleYearMonth("201405")),
                     createサービス提供年月期間());
             assertThat(result.size(), is(3));
@@ -76,7 +76,7 @@ public class KyufuJissekiServiceFinderTest extends DbcTestBase {
         public void 給付実績ありの時_get給付実績一覧は_該当の給付実績情報が返る() {
             sut = createFinder(AS_給付実績あり);
             KyufuJissekiServiceCollections result = sut.get給付実績一覧(
-                    new KaigoHihokenshaNo(new RString("1234567890")),
+                    new HihokenshaNo(new RString("1234567890")),
                     createサービス提供年月期間());
             assertThat(result, instanceOf(KyufuJissekiServiceCollections.class));
         }
@@ -91,7 +91,7 @@ public class KyufuJissekiServiceFinderTest extends DbcTestBase {
 
         KyufuJissekiServiceDac dac = mock(KyufuJissekiServiceDac.class);
         when(dac.select(
-                any(KaigoHihokenshaNo.class),
+                any(HihokenshaNo.class),
                 any(ServiceTeikyoYM.class))).thenReturn(entities);
         return dac;
     }

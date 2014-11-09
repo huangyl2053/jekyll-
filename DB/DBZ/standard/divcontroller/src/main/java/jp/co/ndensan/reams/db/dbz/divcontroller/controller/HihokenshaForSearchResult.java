@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -51,7 +51,7 @@ public class HihokenshaForSearchResult implements IHihokenshaForSearchResult {
      * @param juminShubetsu 住民種別
      * @param setaiCode 世帯コード
      */
-    public HihokenshaForSearchResult(KaigoHihokenshaNo hihokenshaNo, ShikibetsuCode shikibetsuCode, RString hihokenshaKubun,
+    public HihokenshaForSearchResult(HihokenshaNo hihokenshaNo, ShikibetsuCode shikibetsuCode, RString hihokenshaKubun,
             RString shimei, RString kanaShimei, Gender gender, RDate birthDay, YubinNo yubinNo, AtenaJusho jusho,
             RString kojinNo, JuminShubetsu juminShubetsu, SetaiCode setaiCode) {
 

@@ -31,10 +31,10 @@
          "helpMessageID": "",
          "jpControlName": "",
          "readOnly": false,
-         "height": "460px",
+         "height": "490px",
          "gridSetting": {
           "rowHeight": 50,
-          "isMultiSelectable": true,
+          "isMultiSelectable": false,
           "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": true,
@@ -58,12 +58,6 @@
              "combineColumnName": "選択",
              "combineItem": [
               "btnNext"
-             ]
-            },
-            {
-             "combineColumnName": "状況",
-             "combineItem": [
-              "jokyo"
              ]
             },
             {
@@ -171,20 +165,6 @@
             "resize": false,
             "isPrivateInfo": false,
             "sortKey": "btnNext"
-           },
-           {
-            "columnName": "",
-            "dataName": "jokyo",
-            "toolTip": "",
-            "bgColor": 0,
-            "width": 65,
-            "visible": true,
-            "cellType": 0,
-            "cellDetails": null,
-            "align": 1,
-            "resize": false,
-            "isPrivateInfo": false,
-            "sortKey": "jokyo"
            },
            {
             "columnName": "",
@@ -454,7 +434,7 @@
          "onSort": "",
          "onSelect": "",
          "onSelectByDblClick": "",
-         "onSelectBySelectButton": "",
+         "onSelectBySelectButton": "onSelectBySelectButton_dgTenshutsu",
          "onSelectByModifyButton": "",
          "onSelectByDeleteButton": "",
          "onAfterRequest": "",
@@ -471,37 +451,6 @@
          "filterList": [],
          "activeRowId": -1,
          "gridAction": []
-        },
-        {
-         "fieldName": "btnIkkatsuSoshitsu",
-         "items": [],
-         "controlType": "Button",
-         "width": "180px",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 2,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "selectControlID": "btnIkkatsuSoshitsu",
-         "helpMessageID": "",
-         "jpControlName": "",
-         "onBeforeClick": "",
-         "onAfterClick": "",
-         "onClick": "",
-         "text": "一括で喪失処理を行う",
-         "appearance": 0,
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": "",
-         "icon": 0,
-         "heightTextBoxMatches": false
         }
        ],
        "controlType": "TabPanel",
@@ -576,12 +525,6 @@
              "combineColumnName": "選択",
              "combineItem": [
               "btnNext"
-             ]
-            },
-            {
-             "combineColumnName": "状況",
-             "combineItem": [
-              "jokyo"
              ]
             },
             {
@@ -695,20 +638,6 @@
             "sortKey": "btnNext"
            },
            {
-            "columnName": "",
-            "dataName": "jokyo",
-            "toolTip": "",
-            "bgColor": 0,
-            "width": 65,
-            "visible": true,
-            "cellType": 0,
-            "cellDetails": null,
-            "align": 1,
-            "resize": false,
-            "isPrivateInfo": false,
-            "sortKey": "jokyo"
-           },
-           {
             "columnName": "市町村コード",
             "dataName": "shichosonCode",
             "toolTip": "",
@@ -976,7 +905,7 @@
          "onSort": "",
          "onSelect": "",
          "onSelectByDblClick": "",
-         "onSelectBySelectButton": "",
+         "onSelectBySelectButton": "onSelectBySelectButton_dgTennyu",
          "onSelectByModifyButton": "",
          "onSelectByDeleteButton": "",
          "onAfterRequest": "",
@@ -1067,12 +996,6 @@
              "combineColumnName": "選択",
              "combineItem": [
               "btnNext"
-             ]
-            },
-            {
-             "combineColumnName": "状況",
-             "combineItem": [
-              "jokyo"
              ]
             },
             {
@@ -1182,20 +1105,6 @@
             "sortKey": "btnNext"
            },
            {
-            "columnName": "",
-            "dataName": "jokyo",
-            "toolTip": "",
-            "bgColor": 0,
-            "width": 65,
-            "visible": true,
-            "cellType": 0,
-            "cellDetails": null,
-            "align": 1,
-            "resize": false,
-            "isPrivateInfo": false,
-            "sortKey": "jokyo"
-           },
-           {
             "columnName": "市町村コード",
             "dataName": "shichosonCode",
             "toolTip": "",
@@ -1463,7 +1372,7 @@
          "onSort": "",
          "onSelect": "",
          "onSelectByDblClick": "",
-         "onSelectBySelectButton": "",
+         "onSelectBySelectButton": "onSelectBySelectButton_dgKoiki",
          "onSelectByModifyButton": "",
          "onSelectByDeleteButton": "",
          "onAfterRequest": "",

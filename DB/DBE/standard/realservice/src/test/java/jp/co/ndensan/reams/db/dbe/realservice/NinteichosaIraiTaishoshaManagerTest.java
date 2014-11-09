@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoEntityMock;
@@ -24,9 +24,9 @@ import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaIraiTaishoshaDac
 import jp.co.ndensan.reams.db.dbe.business.helper.KaigoNinteichosainTestHelper;
 import jp.co.ndensan.reams.db.dbe.business.helper.KojinTestHelper;
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteichosaIraiTestHelper;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
@@ -258,7 +258,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
                 NinteiShinchokuJohoMock.create認定進捗情報(),
                 new ShinseishoKanriNo(new RString("1234")),
                 new ShoKisaiHokenshaNo(new RString("1234")),
-                new KaigoHihokenshaNo(new RString("1234567890")),
+                new HihokenshaNo(new RString("1234567890")),
                 new FlexibleDate(new RString("20140101")),
                 new Code(String.valueOf(NinteiShinseiKubunShinsei.新規申請.コード())),
                 KojinTestHelper.create個人(),

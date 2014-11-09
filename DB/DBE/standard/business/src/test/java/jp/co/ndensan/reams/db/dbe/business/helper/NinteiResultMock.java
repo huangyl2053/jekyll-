@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business._KaigoServiceShurui;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -60,7 +60,7 @@ public class NinteiResultMock {
                 new ShinseishoKanriNo(new RString("1234567890")),
                 new YMDHMS(new RString("20140808102030")),
                 new ShoKisaiHokenshaNo(new RString("1234567890")),
-                new KaigoHihokenshaNo(new RString("4567890123")),
+                new HihokenshaNo(new RString("4567890123")),
                 new FlexibleDate("20140101"),
                 createYokaigoJotai(),
                 createYokaigoJotaizoRei(),

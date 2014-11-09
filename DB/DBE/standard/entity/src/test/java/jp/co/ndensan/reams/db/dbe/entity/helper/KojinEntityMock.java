@@ -1,6 +1,9 @@
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
-//TODO n3317　塚田萌　使ってないようなのでコメントアウト。確認取れたら削除
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 //import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.AgeArrivalDay;
 //import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KannaiKangai;
 //import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.UnknownDate;
@@ -20,10 +23,12 @@ package jp.co.ndensan.reams.db.dbe.entity.helper;
  *
  * @author N8187 久保田 英男
  */
+//TODO n3317　塚田萌　使ってないようなのでコメントアウト。確認取れたら削除
 public final class KojinEntityMock {
 
     private KojinEntityMock() {
     }
+
 //    public static KojinEntity getSpiedInstance() {
 //        KojinEntity defaultData = new KojinEntity();
 //        defaultData.setワークスペース_名称(new RString("ワークスペース_名称"));

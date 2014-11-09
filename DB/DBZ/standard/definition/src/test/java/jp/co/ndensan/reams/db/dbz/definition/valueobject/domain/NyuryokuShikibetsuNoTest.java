@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
-import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -20,27 +20,21 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class NyuryokuShikibetsuNoTest {
+public class NyuryokuShikibetsuNoTest extends DbzTestBase {
 
     private static NyuryokuShikibetsuNo sut1;
     private static NyuryokuShikibetsuNo sut2;
 
-    public static class constructorのテスト extends DbcTestBase {
+    public static class constructorのテスト extends DbzTestBase {
 
-        @Test(expected = NullPointerException.class)
-        public void 引数にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut1 = new NyuryokuShikibetsuNo(null);
-            fail();
-        }
-
+        @Test
         public void 引数にnullでない値が渡されたとき_インスタンスが生成される() {
             sut1 = new NyuryokuShikibetsuNo(new RString("0123"));
-            assertThat(sut1, is(instanceOf(NyuryokuShikibetsuNo.class)));
+            assertThat(sut1, isA(NyuryokuShikibetsuNo.class));
         }
-
     }
 
-    public static class hashCodeのテスト extends DbcTestBase {
+    public static class hashCodeのテスト extends DbzTestBase {
 
         @Before
         public void setUp() {
@@ -52,15 +46,9 @@ public class NyuryokuShikibetsuNoTest {
             sut2 = new NyuryokuShikibetsuNo(new RString("0123"));
             assertThat(sut1.hashCode(), is(sut2.hashCode()));
         }
-
-        @Test
-        public void 異なる値を持つ入力識別番号は_hashCodeの値が不一致となる() {
-            sut2 = new NyuryokuShikibetsuNo(new RString("0124"));
-            assertThat(sut1.hashCode(), is(not(sut2.hashCode())));
-        }
     }
 
-    public static class equalsのテスト extends DbcTestBase {
+    public static class equalsのテスト extends DbzTestBase {
 
         @Before
         public void setUp() {
@@ -90,7 +78,7 @@ public class NyuryokuShikibetsuNoTest {
         }
     }
 
-    public static class compareToのテスト extends DbcTestBase {
+    public static class compareToのテスト extends DbzTestBase {
 
         @Before
         public void setUp() {
@@ -116,4 +104,19 @@ public class NyuryokuShikibetsuNoTest {
         }
     }
 
+    public static class isEmpty extends DbzTestBase {
+
+        @Test
+        public void EMPTYのisEmptyは_trueを返す() {
+            NyuryokuShikibetsuNo sut = NyuryokuShikibetsuNo.EMPTY;
+            assertThat(sut.isEmpty(), is(true));
+        }
+
+        @Test
+        public void EMPTYと同じ値を持たないインスタンスのisEmptyは_falseを返す() {
+            NyuryokuShikibetsuNo sut = new NyuryokuShikibetsuNo("100");
+            assertThat(sut.value(), is(not(NyuryokuShikibetsuNo.EMPTY.value())));
+            assertThat(sut.isEmpty(), is(false));
+        }
+    }
 }

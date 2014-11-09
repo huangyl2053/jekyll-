@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.EigyoKeitai;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;

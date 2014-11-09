@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NaturalOrderComparator;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -29,16 +30,12 @@ public final class HihokenshaNo implements IValueObject<RString>, Comparable<Hih
     private final RString theValue;
 
     /**
-     * 指定の値をもった HihokenshaNo を生成します。引数がnullのとき、空文字を設定します。
+     * 指定の値をもった HihokenshaNo を生成します。
      *
      * @param value 値
      */
     public HihokenshaNo(String value) {
-        if (value == null) {
-            this.theValue = RString.EMPTY;
-        } else {
-            this.theValue = new RString(value);
-        }
+        this.theValue = (value == null) ? null : new RString(value);
     }
 
     /**
@@ -56,8 +53,22 @@ public final class HihokenshaNo implements IValueObject<RString>, Comparable<Hih
     }
 
     @Override
+    public RString getColumnValue() {
+        return this.theValue;
+    }
+
+    @Override
     public int compareTo(HihokenshaNo o) {
-        return this.theValue.compareTo(o.theValue);
+        return Objects.compare(this.theValue, o.theValue, NaturalOrderComparator.ASC.getInstance());
+    }
+
+    /**
+     * 保持する値が{@link #EMPTY EMPTY}と等しい時、{@code true}を返します。
+     *
+     * @return 保持する値が{@link #EMPTY EMPTY}と等しい時、{@code true}
+     */
+    public boolean isEmpty() {
+        return Objects.equals(EMPTY.theValue, this.theValue);
     }
 
     @Override
@@ -70,11 +81,6 @@ public final class HihokenshaNo implements IValueObject<RString>, Comparable<Hih
         }
         HihokenshaNo other = (HihokenshaNo) obj;
         return Objects.equals(this.theValue, other.theValue);
-    }
-
-    @Override
-    public RString getColumnValue() {
-        return this.theValue;
     }
 
     @Override

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJoho.*;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;

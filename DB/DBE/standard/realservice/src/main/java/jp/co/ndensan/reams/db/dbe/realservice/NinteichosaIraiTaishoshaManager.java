@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgressFactory.Particul
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.business.mapper.NinteiShinchokuJohoMapper;
 import jp.co.ndensan.reams.db.dbe.business.mapper.NinteichosaIraiTaishoshaMapper;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbe.business.mapper.YokaigoNinteiShinseiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaIraiTaishoshaDac;

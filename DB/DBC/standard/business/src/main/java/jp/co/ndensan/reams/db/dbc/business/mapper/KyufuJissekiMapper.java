@@ -48,9 +48,9 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3029KyufujissekiTokuteiNyushos
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -177,7 +177,7 @@ public final class KyufuJissekiMapper {
                 new ServiceTeikyoYM(entity.getServiceTeikyoYM()),
                 KyufuJissekiKubun.toValue(entity.getKyufuJissekiKubunCode()),
                 entity.getSeiriNo(),
-                entity.getHokenshaNo().getValue(),
+                entity.getHokenshaNo().value(),
                 new InputShikibetsuNo(new Code(entity.getInputShikibetsuNo()), RString.EMPTY, RString.EMPTY),
                 entity.getJigyoshoNo().value(),
                 KyufuSakuseiKubun.toValue(entity.getKyufuSakuseiKubunCode()),

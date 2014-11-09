@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitoku
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
@@ -40,7 +40,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
     private final ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private final ShikibetsuCode shikibetsuCode;
     private final YMDHMS shoriTimeStamp;
-    private final KaigoHihokenshaNo hihokenshaNo;
+    private final HihokenshaNo hihokenshaNo;
     private final HihokenshaKubun hihokenshaKubun;
     private final ShikakuShutoku shikakuShutoku;
     private final ShikakuSoshitsu shikakuSoshitsu;
@@ -96,7 +96,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
     }
 
     @Override
-    public KaigoHihokenshaNo get被保険者番号() {
+    public HihokenshaNo get被保険者番号() {
         return this.hihokenshaNo;
     }
 
@@ -200,7 +200,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         private final HihokenshaKubun hihokenshaKubun;
         private final FlexibleDate ichigoGaitoDate;
         private IKaigoShikaku kaigoShikaku;
-        private KaigoHihokenshaNo theHihokenshaNo = KaigoHihokenshaNo.NULL_VALUE;
+        private HihokenshaNo theHihokenshaNo = HihokenshaNo.EMPTY;
         private ShikakuShutoku shutoku = ShikakuShutoku.NOTHING;
         private ShikakuSoshitsu soshitsu = ShikakuSoshitsu.NONE;
         private ShikakuHenko henko = ShikakuHenko.NOTHING;
@@ -321,10 +321,10 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         /**
          * 被保険者番号を設定します。
          *
-         * @param hihokenshaNo {@link KaigoHihokenshaNo 被保険者番号}
+         * @param hihokenshaNo {@link HihokenshaNo 被保険者番号}
          * @return 被保険者番号を設定したBuilder自身
          */
-        public Builder hihokenshaNo(KaigoHihokenshaNo hihokenshaNo) {
+        public Builder hihokenshaNo(HihokenshaNo hihokenshaNo) {
             this.theHihokenshaNo = hihokenshaNo;
             return this;
         }
@@ -493,12 +493,12 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
             this.soshitsu = createShikakuSoshitsu();
         }
 
-        private KaigoHihokenshaNo createKaigoHihokenshaNo() {
+        private HihokenshaNo createKaigoHihokenshaNo() {
             RString value = this.kaigoShikaku.get被保険者番号();
             if (isNull(value)) {
                 return null;
             }
-            return new KaigoHihokenshaNo(value);
+            return new HihokenshaNo(value);
         }
 
         private ShikakuShutoku createShikakuShutoku() {

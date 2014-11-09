@@ -77,5 +77,4 @@ public enum DbzErrorMessages implements IMessageGettable {
     public Message getMessage() {
         return message;
     }
-
 }

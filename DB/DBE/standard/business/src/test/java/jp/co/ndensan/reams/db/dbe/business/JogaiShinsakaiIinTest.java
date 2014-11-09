@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -31,14 +31,14 @@ public class JogaiShinsakaiIinTest {
     public static class constructor extends DbeTestBase {
 
         private ShoKisaiHokenshaNo 証記載被保険者番号;
-        private KaigoHihokenshaNo 被保険者番号;
+        private HihokenshaNo 被保険者番号;
         private int 管理番号;
         private ShinsakaiIin 除外対象審査会委員;
 
         @Before
         public void setUp() {
             証記載被保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
-            被保険者番号 = new KaigoHihokenshaNo(new RString("0123456789"));
+            被保険者番号 = new HihokenshaNo(new RString("0123456789"));
             管理番号 = 1;
             除外対象審査会委員 = createShinsakaiIinMock(new RString("12345678"));
         }

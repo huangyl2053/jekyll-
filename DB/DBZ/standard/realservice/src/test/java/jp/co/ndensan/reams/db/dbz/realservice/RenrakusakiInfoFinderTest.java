@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.KaigoRenrakusaki;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.RenrakusakiInfoDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5050RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.RenrakusakiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -40,8 +40,8 @@ public class RenrakusakiInfoFinderTest extends DbzTestBase {
 
         private static final ShoKisaiHokenshaNo 保険者番号
                 = new ShoKisaiHokenshaNo(new RString("123456"));
-        private static final KaigoHihokenshaNo 被保険者番号
-                = new KaigoHihokenshaNo(new RString("1111111111"));
+        private static final HihokenshaNo 被保険者番号
+                = new HihokenshaNo(new RString("1111111111"));
         private static final ShoKisaiHokenshaNo notFound保険者番号
                 = new ShoKisaiHokenshaNo(new RString("987654"));
 

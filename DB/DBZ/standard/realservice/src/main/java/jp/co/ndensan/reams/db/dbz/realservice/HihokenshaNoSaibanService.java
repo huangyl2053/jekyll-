@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -35,7 +35,7 @@ public final class HihokenshaNoSaibanService {
      *
      * @return 通常の被保険者番号を採番するための{@link IKaigoSaiban オブジェクト}
      */
-    public static IKaigoSaiban<KaigoHihokenshaNo> normalType() {
+    public static IKaigoSaiban<HihokenshaNo> normalType() {
         return NORMAL_TYPE;
     }
 
@@ -44,11 +44,11 @@ public final class HihokenshaNoSaibanService {
      *
      * @return 無資格者の被保険者番号を採番するための{@link IKaigoSaiban オブジェクト}
      */
-    public static IKaigoSaiban<KaigoHihokenshaNo> forMushikakushaType() {
+    public static IKaigoSaiban<HihokenshaNo> forMushikakushaType() {
         return FOR_MUSHIKAKUSHA_TYPE;
     }
 
-    static IKaigoSaiban<KaigoHihokenshaNo> forTestType(RString next) {
+    static IKaigoSaiban<HihokenshaNo> forTestType(RString next) {
         return new ForTestType(next);
     }
 
@@ -102,11 +102,11 @@ public final class HihokenshaNoSaibanService {
     /**
      * 被保険者番号を採番をするクラスの抽象です。
      */
-    private abstract static class HihokenshaNoSaibanBase implements IKaigoSaiban<KaigoHihokenshaNo> {
+    private abstract static class HihokenshaNoSaibanBase implements IKaigoSaiban<HihokenshaNo> {
 
         @Override
-        public KaigoHihokenshaNo number() {
-            return new KaigoHihokenshaNo(nextRString());
+        public HihokenshaNo number() {
+            return new HihokenshaNo(nextRString());
         }
 
         /**
