@@ -49,12 +49,6 @@ public class NenreiTotatsuCheckerTest {
 
         @Test
         public void 基準日時点で65歳以上になる場合_trueが返る() {
-            dateOfBirth = new RDate("19491201");
-            assertThat(sut.personBornOn(dateOfBirth).has年齢到達(), is(true));
-        }
-
-        @Test
-        public void 基準日時点で_年齢到達基準を満たす場合_trueが返る() {
             dateOfBirth = new RDate("19491202");
             assertThat(sut.personBornOn(dateOfBirth).has年齢到達(), is(true));
         }
@@ -80,12 +74,6 @@ public class NenreiTotatsuCheckerTest {
 
         @Test
         public void 基準日時点で40歳以上になる場合_trueが返る() {
-            dateOfBirth = new RDate("19741201");
-            assertThat(sut.personBornOn(dateOfBirth).has年齢到達(), is(true));
-        }
-
-        @Test
-        public void 基準日時点で_年齢到達基準を満たす場合_trueが返る() {
             dateOfBirth = new RDate("19741202");
             assertThat(sut.personBornOn(dateOfBirth).has年齢到達(), is(true));
         }
