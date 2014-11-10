@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
-import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuChecker;
-import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuKijunConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijunJoho;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.model.DateOfBirthFactory;

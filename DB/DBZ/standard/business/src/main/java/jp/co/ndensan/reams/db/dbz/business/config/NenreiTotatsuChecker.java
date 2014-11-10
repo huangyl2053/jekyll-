@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.config;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuKijunConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijunJoho;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.DateOfBirthFactory;
@@ -28,9 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
  */
 public final class NenreiTotatsuChecker {
 
-    private final NenreiTotatsuKijunConfig config;
-    private final ConfigKeysNenreiTotatsuKijunJoho nenreiTotatsuKijun;
-    private final RDate kijunDate;
+    private final _NenreiTotatsuChecker checker;
 
     /**
      * コンストラクタです。<br/>
@@ -45,9 +42,7 @@ public final class NenreiTotatsuChecker {
         requireNonNull基準日(kijunDate);
         requireNonNull年齢到達基準(nenreiTotatsuKijun);
 
-        this.nenreiTotatsuKijun = nenreiTotatsuKijun;
-        this.kijunDate = kijunDate;
-        this.config = new NenreiTotatsuKijunConfig();
+        checker = new _NenreiTotatsuChecker(nenreiTotatsuKijun, kijunDate, new NenreiTotatsuKijunConfig());
     }
 
     /**
@@ -64,9 +59,7 @@ public final class NenreiTotatsuChecker {
         requireNonNull年齢到達基準(nenreiTotatsuKijun);
         requireNonNull年齢到達業務コンフィグ(config);
 
-        this.nenreiTotatsuKijun = nenreiTotatsuKijun;
-        this.kijunDate = kijunDate;
-        this.config = config;
+        checker = new _NenreiTotatsuChecker(nenreiTotatsuKijun, kijunDate, config);
     }
 
     private ConfigKeysNenreiTotatsuKijunJoho requireNonNull年齢到達基準(ConfigKeysNenreiTotatsuKijunJoho nenreiTotatsuKijun) {
@@ -91,7 +84,7 @@ public final class NenreiTotatsuChecker {
      * @return 判定を行うインターフェース
      */
     public INenreiTotatsuJudicative personBornOn(IDateOfBirth dateOfBirth) {
-        return new _NenreiTotatsuChecker(dateOfBirth);
+        return checker.setDateOfBirth(dateOfBirth);
     }
 
     /**
@@ -101,7 +94,7 @@ public final class NenreiTotatsuChecker {
      * @return 判定を行うインターフェース
      */
     public INenreiTotatsuJudicative personBornOn(RDate dateOfBirth) {
-        return new _NenreiTotatsuChecker(DateOfBirthFactory.createInstance(dateOfBirth));
+        return checker.setDateOfBirth(DateOfBirthFactory.createInstance(dateOfBirth));
     }
 
     /**
@@ -111,13 +104,13 @@ public final class NenreiTotatsuChecker {
      * @return 判定を行うインターフェース
      */
     public INenreiTotatsuJudicative personBornOn(FlexibleDate dateOfBirth) {
-        return new _NenreiTotatsuChecker(DateOfBirthFactory.createInstance(dateOfBirth));
+        return checker.setDateOfBirth(DateOfBirthFactory.createInstance(dateOfBirth));
     }
 
     /**
      * 年齢到達の要件を満たしているかどうかを判断する機能を提供するインターフェースです。
      */
-    public interface INenreiTotatsuJudicative {
+    public static interface INenreiTotatsuJudicative {
 
         /**
          * 年齢到達の基準を満たしているかの判定を行います。
@@ -127,9 +120,12 @@ public final class NenreiTotatsuChecker {
         boolean has年齢到達();
     }
 
-    private class _NenreiTotatsuChecker implements INenreiTotatsuJudicative {
+    private static class _NenreiTotatsuChecker implements INenreiTotatsuJudicative {
 
-        private final IDateOfBirth dateOfBirth;
+        private final NenreiTotatsuKijunConfig config;
+        private final ConfigKeysNenreiTotatsuKijunJoho nenreiTotatsuKijun;
+        private final RDate kijunDate;
+        private IDateOfBirth dateOfBirth;
 
         /**
          * コンストラクタです。
@@ -139,9 +135,17 @@ public final class NenreiTotatsuChecker {
          * @param config 判定に使用する、年齢到達情報の業務コンフィグ取得クラス
          * @param dateOfBirth 判定対象の生年月日
          */
-        public _NenreiTotatsuChecker(IDateOfBirth dateOfBirth) {
+        public _NenreiTotatsuChecker(ConfigKeysNenreiTotatsuKijunJoho nenreiTotatsuKijun, RDate kijunDate,
+                NenreiTotatsuKijunConfig config) {
 
+            this.config = config;
+            this.kijunDate = kijunDate;
+            this.nenreiTotatsuKijun = nenreiTotatsuKijun;
+        }
+
+        public _NenreiTotatsuChecker setDateOfBirth(IDateOfBirth dateOfBirth) {
             this.dateOfBirth = dateOfBirth;
+            return this;
         }
 
         @Override
