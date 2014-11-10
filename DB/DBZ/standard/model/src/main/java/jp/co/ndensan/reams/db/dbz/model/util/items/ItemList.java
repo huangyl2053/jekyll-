@@ -61,7 +61,7 @@ public final class ItemList<E> implements IItemList<E> {
      * @throws NullPointerException 引数がnullの時
      */
     public static <T> ItemList<T> of(T t) throws NullPointerException {
-        Objects.requireNonNull(null);
+        Objects.requireNonNull(t);
         return new ItemList<>(Arrays.asList(t));
     }
 
