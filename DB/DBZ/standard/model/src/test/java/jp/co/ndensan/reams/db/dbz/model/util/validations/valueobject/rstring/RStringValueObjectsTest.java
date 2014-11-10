@@ -8,7 +8,8 @@ package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectValidatable;
 import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValidationMessages;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring.RStringValueObjects.Definitions;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectValidations;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring.RStringValueObjects.ValidationSpec;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -35,12 +36,11 @@ public class RStringValueObjectsTest {
     @RunWith(Enclosed.class)
     public static class hihokenshaNo extends DbzTestBase {
 
-        private static RStringValueObjects sut;
         private static IValueObjectValidatable<HihokenshaNo> validation;
 
         @BeforeClass
         public static void setUp() {
-            validation = sut.createValidation(Definitions.被保番号_半角数, HihokenshaNo.class);
+            validation = ValueObjectValidations.createValidationFor(HihokenshaNo.class, ValidationSpec.被保番号_半角数);
         }
 
         public static class NullCheck extends DbzTestBase {

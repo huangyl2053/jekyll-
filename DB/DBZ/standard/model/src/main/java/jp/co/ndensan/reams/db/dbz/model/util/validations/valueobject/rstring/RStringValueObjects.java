@@ -5,21 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring;
 
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.Unit;
 import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common.NotEmptyChecker;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
 import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectCheckable;
 import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectValidatable;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectValidationSpec;
+import static jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.Unit.桁;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectCheckList;
+import static jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectCheckList.checks;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectInfo.IValueObjectInfoBuilder;
+import static jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectInfo.displayName;
 import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common.NotNullChecker;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
-import jp.co.ndensan.reams.ur.urz.model.validations.ValidationChain;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -51,107 +46,34 @@ public final class RStringValueObjects {
      * </pre>
      * </p>
      */
-    public enum Definitions {
+    public enum ValidationSpec implements IValueObjectValidationSpec<RString> {
 
         /**
          * 被保番号, 半角数字のみ可
          */
-        被保番号_半角数(nameToDisplay("被保番号"), Unit.桁, check(notNull(), CharType.半角数のみ, Length.equal(10))),
+        被保番号_半角数(displayName("被保番号").unit(桁), checks(notNull(), CharType.半角数のみ, Length.equal(10))),
         /**
          * 被保番号, 半角英数も可
          */
-        被保番号_半角英数(nameToDisplay("被保番号"), Unit.桁, check(notNull(), CharType.半角英数のみ, Length.equal(10)));
+        被保番号_半角英数(displayName("被保険者番号").unit(桁), checks(notNull(), CharType.半角英数のみ, Length.equal(10)));
 
         private final IValueObjectInfo objInfo;
-        private final CheckItems checkItems;
+        private final ValueObjectCheckList<RString> checkItems;
 
-        private Definitions(ISupplier<RString> dispName, Unit unit, CheckItems checkItems) {
-            this.objInfo = new ValueObjectInfo.Builder(dispName.get()).setUnit(unit).build();
+        private ValidationSpec(IValueObjectInfoBuilder builder, ValueObjectCheckList<RString> checkItems) {
+            this.objInfo = builder.build();
             this.checkItems = checkItems;
         }
-    }
 
-    /**
-     * 指定の定義と対象のvalueObjectのclassから、バリデーションロジックを生成して返します。
-     *
-     * @param <T> valueObjectの型
-     * @param def バリデーションの定義
-     * @param clazz valueObjectのclass
-     * @return 指定の定義と対象のvalueObjectのclassに対応する、バリデーションロジック
-     */
-    public static <T extends IValueObject<RString>> IValueObjectValidatable<T> createValidation(Definitions def, Class<T> clazz) {
-        return new _RStringValueObjectValidator<>(def);
-    }
-
-    //<editor-fold defaultstate="collapsed" desc="private static final class _RStringValueObjectValidator{...}">
-    private static final class _RStringValueObjectValidator<T extends IValueObject<RString>> implements IValueObjectValidatable<T> {
-
-        private final IValueObjectInfo objInfo;
-        private final CheckItems checkItems;
-
-        private <T extends IValueObject<RString>> _RStringValueObjectValidator(Definitions a) {
-            this.objInfo = a.objInfo;
-            this.checkItems = a.checkItems;
+        @Override
+        public IValueObjectInfo getValueObjectInfo() {
+            return this.objInfo;
         }
 
         @Override
-        public IValidationMessages validate(T v) {
-            ValidationChain chain = ValidationChain.validateFollowingItems();
-            for (IValueObjectCheckable<RString> checkItem : this.checkItems) {
-                chain.then(checkItem.check(v, this.objInfo));
-            }
-            return chain.end();
+        public ValueObjectCheckList<RString> getCheckList() {
+            return this.checkItems;
         }
-    }
-    //</editor-fold>
-
-    /**
-     * Definitions において、表示する名前を定義するのに用います。
-     *
-     * @param name 表示する名前
-     * @return 表示する名前を返すsupplier
-     */
-    private static ISupplier<RString> nameToDisplay(final String name) {
-        Objects.requireNonNull(name);
-        //<editor-fold defaultstate="collapsed" desc="return ()->{return new RString(name);};">
-        return new ISupplier<RString>() {
-            @Override
-            public RString get() {
-                return new RString(name);
-            }
-        };
-        //</editor-fold>
-    }
-
-    /**
-     * {@literal IValueObjectCheckable<RString>}のlistを持ちます。<br/>
-     * Definitions で、チェック項目を定義する際に用います。
-     */
-    //<editor-fold defaultstate="collapsed" desc="private static class CheckItems {...}">
-    private static class CheckItems implements Iterable<IValueObjectCheckable<RString>> {
-
-        private final List<IValueObjectCheckable<RString>> list;
-
-        CheckItems(List<IValueObjectCheckable<RString>> list) {
-            this.list = list;
-        }
-
-        @Override
-        public Iterator<IValueObjectCheckable<RString>> iterator() {
-            return this.list.iterator();
-        }
-    }
-    //</editor-fold>
-
-    /**
-     * Definitions で、チェックする項目を定義するのに用います。
-     * {@literal IValueObjectCheckable<RString>}を複数受け取り、CheckItems を生成します。
-     *
-     * @param validators チェック項目
-     * @return CheckItems
-     */
-    private static CheckItems check(IValueObjectCheckable<RString>... validators) {
-        return new CheckItems(Arrays.asList(validators));
     }
 
     /**

@@ -161,19 +161,19 @@ final class Length implements IValueObjectCheckable<RString> {
         List<String> list = new ArrayList<>();
         switch (this.type) {
             case GreaterOrEqual:
-                list.add(objInfo.getName().toString());
+                list.add(objInfo.getDisplayName().toString());
                 list.add(new StringBuilder().append(objInfo.getUnit().name()).append("以上").toString());
                 break;
             case Equal:
-                list.add(objInfo.getName().toString());
+                list.add(objInfo.getDisplayName().toString());
                 list.add(new StringBuilder().append(objInfo.getUnit().name()).toString());
                 break;
             case LessOrEqual:
-                list.add(objInfo.getName().toString());
+                list.add(objInfo.getDisplayName().toString());
                 list.add(new StringBuilder().append(objInfo.getUnit().name()).append("以下").toString());
                 break;
             case LessThan:
-                list.add(objInfo.getName().toString());
+                list.add(objInfo.getDisplayName().toString());
                 list.add(new StringBuilder().append(objInfo.getUnit().name()).append("未満").toString());
             default:
                 break;

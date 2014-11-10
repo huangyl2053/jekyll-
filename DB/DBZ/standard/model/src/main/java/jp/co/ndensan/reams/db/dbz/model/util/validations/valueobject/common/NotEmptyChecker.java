@@ -69,7 +69,7 @@ public final class NotEmptyChecker {
         public IValidationMessages check(IValueObject v, IValueObjectInfo objInfo) {
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
             if (!isValid(v)) {
-                messages.add(ValidationMessages.必須入力項目, objInfo.getName().toString());
+                messages.add(ValidationMessages.必須入力項目, objInfo.getDisplayName().toString());
             }
             return messages;
         }

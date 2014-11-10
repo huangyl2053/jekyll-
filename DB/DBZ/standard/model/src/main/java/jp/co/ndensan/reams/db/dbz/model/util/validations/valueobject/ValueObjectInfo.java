@@ -10,64 +10,32 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link IValueObjectInfo IValueObjectInfo}の実装です。
- * {@link IValueObjectInfo IValueObjectInfo}のインスタンスを生成する{@link ValueObjectInfo.Builder Builder}を持ちます。
+ * {@link IValueObjectInfo IValueObjectInfo}のインスタンスを生成する{@link ValueObjectInfo._Builder Builder}を持ちます。
  *
  * @author N3327 三浦 凌
  */
-public final class ValueObjectInfo implements IValueObjectInfo {
-
-    private final RString theName;
-    private final Unit theUnit;
+public final class ValueObjectInfo {
 
     /**
-     * ValueObjectの名前と、1文字を数える単位から、インスタンスを生成します。
+     * valueObjectの名前を指定し、{@link IValueObjectInfoBuilder Builder}を生成します。
      *
-     * @param name 名前
-     * @param unit 単位
+     * @param name valueObjectの名前
+     * @return
+     * @throws NullPointerException 引数が{@code null}のとき
      */
-    private ValueObjectInfo(RString name, Unit unit) {
-        this.theName = name;
-        this.theUnit = unit;
+    public static IValueObjectInfoBuilder displayName(String name) throws NullPointerException {
+        return new _Builder(name);
     }
 
-    @Override
-    public RString getName() {
-        return this.theName;
-    }
-
-    @Override
-    public Unit getUnit() {
-        return this.theUnit;
+    public static IValueObjectInfoBuilder displayName(RString name) throws NullPointerException {
+        Objects.requireNonNull(name);
+        return new _Builder(name.toString());
     }
 
     /**
-     * {@link IValueObjectInfo IValueObjectInfo}を生成します。
+     * {@link IValueObjectInfo IValueObjectInfo}を生成する機能を持つことを表します。
      */
-    public static final class Builder {
-
-        private final RString theName;
-        private Unit theUnit = Unit.桁;
-
-        /**
-         * valueObjectの名前を指定し、Builderを生成します。
-         *
-         * @param name valueObjectの名前
-         * @throws NullPointerException 引数が{@code null}のとき
-         */
-        public Builder(String name) throws NullPointerException {
-            this(new RString(Objects.requireNonNull(name)));
-        }
-
-        /**
-         * valueObjectの名前を指定し、Builderを生成します。
-         *
-         * @param name valueObjectの名前
-         * @throws NullPointerException 引数が{@code null}のとき
-         */
-        public Builder(RString name) throws NullPointerException {
-            Objects.requireNonNull(name);
-            this.theName = name;
-        }
+    public interface IValueObjectInfoBuilder {
 
         /**
          * valueObjectの単位を設定します。defaultは{@link Unit#桁 桁}です。
@@ -77,19 +45,57 @@ public final class ValueObjectInfo implements IValueObjectInfo {
          * @return {@link IValueObjectInfo IValueObjectInfo}を生成できるインスタンス
          * @throws NullPointerException 引数が{@code null}のとき
          */
-        public Builder setUnit(Unit unit) throws NullPointerException {
-            Objects.requireNonNull(unit);
-            this.theUnit = unit;
-            return this;
-        }
+        IValueObjectInfoBuilder unit(Unit unit) throws NullPointerException;
 
         /**
          * {@link IValueObjectInfo IValueObjectInfo}を生成します。
          *
          * @return {@link IValueObjectInfo IValueObjectInfo}
          */
+        IValueObjectInfo build();
+    }
+
+    private static final class _Builder implements IValueObjectInfoBuilder {
+
+        private final RString theName;
+        private Unit theUnit = Unit.桁;
+
+        private _Builder(String name) {
+            Objects.requireNonNull(name);
+            this.theName = new RString(name);
+        }
+
+        @Override
+        public IValueObjectInfoBuilder unit(Unit unit) {
+            Objects.requireNonNull(unit);
+            this.theUnit = unit;
+            return this;
+        }
+
+        @Override
         public IValueObjectInfo build() {
-            return new ValueObjectInfo(theName, theUnit);
+            return new _ValueObjectInfo(theName, theUnit);
+        }
+    }
+
+    private static class _ValueObjectInfo implements IValueObjectInfo {
+
+        private final RString theName;
+        private final Unit theUnit;
+
+        private _ValueObjectInfo(RString name, Unit unit) {
+            this.theName = name;
+            this.theUnit = unit;
+        }
+
+        @Override
+        public RString getDisplayName() {
+            return this.theName;
+        }
+
+        @Override
+        public Unit getUnit() {
+            return this.theUnit;
         }
     }
 }

@@ -15,11 +15,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public interface IValueObjectInfo {
 
     /**
-     * 名前を返します。
+     * 表示名を返します。
      *
      * @return 名前
      */
-    RString getName();
+    RString getDisplayName();
 
     /**
      * 単位を返します。
