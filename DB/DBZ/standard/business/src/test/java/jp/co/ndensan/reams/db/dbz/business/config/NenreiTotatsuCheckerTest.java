@@ -50,19 +50,19 @@ public class NenreiTotatsuCheckerTest {
         @Test
         public void 基準日時点で65歳以上になる場合_trueが返る() {
             dateOfBirth = new RDate("19491201");
-            assertThat(sut.personBornOn(dateOfBirth).isValid(), is(true));
+            assertThat(sut.personBornOn(dateOfBirth).has年齢到達(), is(true));
         }
 
         @Test
         public void 基準日時点で_年齢到達基準を満たす場合_trueが返る() {
             dateOfBirth = new RDate("19491202");
-            assertThat(sut.personBornOn(dateOfBirth).isValid(), is(true));
+            assertThat(sut.personBornOn(dateOfBirth).has年齢到達(), is(true));
         }
 
         @Test
         public void 基準日時点で_年齢到達基準を満たさない場合_falseが返る() {
             dateOfBirth = new RDate("19491203");
-            assertThat(sut.personBornOn(dateOfBirth).isValid(), is(false));
+            assertThat(sut.personBornOn(dateOfBirth).has年齢到達(), is(false));
         }
     }
 
@@ -81,19 +81,19 @@ public class NenreiTotatsuCheckerTest {
         @Test
         public void 基準日時点で40歳以上になる場合_trueが返る() {
             dateOfBirth = new RDate("19741201");
-            assertThat(sut.personBornOn(dateOfBirth).isValid(), is(true));
+            assertThat(sut.personBornOn(dateOfBirth).has年齢到達(), is(true));
         }
 
         @Test
         public void 基準日時点で_年齢到達基準を満たす場合_trueが返る() {
             dateOfBirth = new RDate("19741202");
-            assertThat(sut.personBornOn(dateOfBirth).isValid(), is(true));
+            assertThat(sut.personBornOn(dateOfBirth).has年齢到達(), is(true));
         }
 
         @Test
         public void 基準日時点で_年齢到達基準を満たさない場合_falseが返る() {
             dateOfBirth = new RDate("19741203");
-            assertThat(sut.personBornOn(dateOfBirth).isValid(), is(false));
+            assertThat(sut.personBornOn(dateOfBirth).has年齢到達(), is(false));
         }
     }
 
@@ -114,19 +114,19 @@ public class NenreiTotatsuCheckerTest {
         @Test
         public void 引数に暦上日クラスを渡した場合_処理が成功する() {
             dateOfBirth_RDate = new RDate("19741202");
-            assertThat(sut.personBornOn(dateOfBirth_RDate).isValid(), is(true));
+            assertThat(sut.personBornOn(dateOfBirth_RDate).has年齢到達(), is(true));
         }
 
         @Test
         public void 引数に非暦上日クラスを渡した場合_処理が成功する() {
             dateOfBirth_FlexibleDate = new FlexibleDate("19741202");
-            assertThat(sut.personBornOn(dateOfBirth_FlexibleDate).isValid(), is(true));
+            assertThat(sut.personBornOn(dateOfBirth_FlexibleDate).has年齢到達(), is(true));
         }
 
         @Test
         public void 引数に生年月日クラスを渡した場合_処理が成功する() {
             dateOfBirth_IDateOfBirth = DateOfBirthFactory.createInstance(new RDate("19741202"));
-            assertThat(sut.personBornOn(dateOfBirth_IDateOfBirth).isValid(), is(true));
+            assertThat(sut.personBornOn(dateOfBirth_IDateOfBirth).has年齢到達(), is(true));
         }
 
     }

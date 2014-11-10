@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
  * <pre>
  * //使用例
  * NenreiTotatsuChecker checker = new NenreiTotatsuChecker(
- * ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢, RDate.getNowDate());
- * checker.personBornOn(dateOfBirth).isValid();
+ *      ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢, RDate.getNowDate());
+ * checker.personBornOn(dateOfBirth).has年齢到達();
  * </pre>
  *
  * @author n8178 城間篤人
@@ -90,7 +90,7 @@ public final class NenreiTotatsuChecker {
      * @param dateOfBirth チェック対象の生年月日
      * @return 判定を行うインターフェース
      */
-    public INenreiTotatshValidChecker personBornOn(IDateOfBirth dateOfBirth) {
+    public INenreiTotatsuJudicative personBornOn(IDateOfBirth dateOfBirth) {
         return new _NenreiTotatsuChecker(dateOfBirth);
     }
 
@@ -100,7 +100,7 @@ public final class NenreiTotatsuChecker {
      * @param dateOfBirth チェック対象の生年月日(暦上日)
      * @return 判定を行うインターフェース
      */
-    public INenreiTotatshValidChecker personBornOn(RDate dateOfBirth) {
+    public INenreiTotatsuJudicative personBornOn(RDate dateOfBirth) {
         return new _NenreiTotatsuChecker(DateOfBirthFactory.createInstance(dateOfBirth));
     }
 
@@ -110,24 +110,24 @@ public final class NenreiTotatsuChecker {
      * @param dateOfBirth チェック対象の生年月日(非暦上日)
      * @return 判定を行うインターフェース
      */
-    public INenreiTotatshValidChecker personBornOn(FlexibleDate dateOfBirth) {
+    public INenreiTotatsuJudicative personBornOn(FlexibleDate dateOfBirth) {
         return new _NenreiTotatsuChecker(DateOfBirthFactory.createInstance(dateOfBirth));
     }
 
     /**
      * 年齢到達の要件を満たしているかどうかを判断する機能を提供するインターフェースです。
      */
-    public interface INenreiTotatshValidChecker {
+    public interface INenreiTotatsuJudicative {
 
         /**
          * 年齢到達の基準を満たしているかの判定を行います。
          *
          * @return 年齢到達基準を満たしている場合はtrue
          */
-        boolean isValid();
+        boolean has年齢到達();
     }
 
-    private class _NenreiTotatsuChecker implements INenreiTotatshValidChecker {
+    private class _NenreiTotatsuChecker implements INenreiTotatsuJudicative {
 
         private final IDateOfBirth dateOfBirth;
 
@@ -145,7 +145,7 @@ public final class NenreiTotatsuChecker {
         }
 
         @Override
-        public boolean isValid() {
+        public boolean has年齢到達() {
             RDate nenreiTotatsuDate = dateOfBirth.get年齢到達日(config.get(nenreiTotatsuKijun));
             return nenreiTotatsuDate.isBeforeOrEquals(kijunDate);
         }
