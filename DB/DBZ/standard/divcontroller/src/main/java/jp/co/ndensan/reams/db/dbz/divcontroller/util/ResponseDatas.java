@@ -23,13 +23,13 @@ public final class ResponseDatas {
     /**
      * ResponseDataを生成し、引数から受け取った値を設定して返します。
      *
-     * @param <T> ResponseDataに渡すデータの型
-     * @param setIntoData ResponseDataに渡すデータ
-     * @return 引数の値を持つResponseData
+     * @param <T> ResponseDataが持つdataの型
+     * @param postData ResponseDataに渡すデータ
+     * @return 引数から受け取った値を、dataに設定したResponseData
      */
-    public static <T> ResponseData<T> createSettingDataTo(T setIntoData) {
+    public static <T> ResponseData<T> createSettingDataTo(T postData) {
         ResponseData<T> response = new ResponseData<>();
-        response.data = setIntoData;
+        response.data = postData;
         return response;
     }
 }
