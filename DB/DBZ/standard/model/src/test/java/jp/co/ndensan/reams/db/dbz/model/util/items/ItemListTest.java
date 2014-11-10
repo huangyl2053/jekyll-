@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,6 +21,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * ItemListのテストです。
@@ -65,12 +69,12 @@ public class ItemListTest extends DbzTestBase {
 
             @Test
             public void empty_から生成したIItemListは_isOnlyでfalseを返す() {
-                assertThat(created.isOnly(), is(false));
+                assertThat(created.isJustOne(), is(false));
             }
 
             @Test
             public void empty_から生成したIItemListは_onlyOneで空のIOptionalを返す() {
-                assertThat(created.getOnlyOne().isPresent(), is(false));
+                assertThat(created.findFirst().isPresent(), is(false));
             }
 
             @Test
@@ -93,7 +97,12 @@ public class ItemListTest extends DbzTestBase {
 
             @Test(expected = NullPointerException.class)
             public void of_にnullを渡した時_NullPointerExceptionをスローする() {
-                sut.of(null);
+                sut.of((RString) null);
+            }
+
+            @Test(expected = NullPointerException.class)
+            public void of_にnullを含む引数を渡した時_NullPointerExceptionをスローする() {
+                sut.of(VAL1, VAL2, null);
             }
 
             @Test(expected = NullPointerException.class)
@@ -103,7 +112,7 @@ public class ItemListTest extends DbzTestBase {
         }
     }
 
-    public static class sortBy extends DbzTestBase {
+    public static class sortedByComparator extends DbzTestBase {
 
         private IItemList<RString> sut;
         private IItemList<RString> sorted;
@@ -113,7 +122,7 @@ public class ItemListTest extends DbzTestBase {
         public void setUp() {
             input = asList(VAL1, VAL2, VAL3);
             sut = ItemList.of(input);
-            sorted = sut.sortBy(createComparator());
+            sorted = sut.sorted(createComparator());
             Collections.sort(input, createComparator());
         }
 
@@ -127,30 +136,78 @@ public class ItemListTest extends DbzTestBase {
         }
 
         @Test
-        public void sortBy_の戻り値の先頭は_コンストラクタ引数のcollectionを_引数のcomparatorで並び変えた結果の先頭と_一致する() {
+        public void sorted_Comparator指定_の戻り値の先頭は_コンストラクタ引数のcollectionを_引数のcomparatorで並び変えた結果の先頭と_一致する() {
             assertThat(sorted.asList().get(0), is(input.get(0)));
         }
 
         @Test
-        public void sortBy_の戻り値の2番目は_コンストラクタ引数のcollectionを_引数のcomparatorで並び変えた結果の2番目と_一致する() {
+        public void sorted_Comparator指定_の戻り値の2番目は_コンストラクタ引数のcollectionを_引数のcomparatorで並び変えた結果の2番目と_一致する() {
             assertThat(sorted.asList().get(1), is(input.get(1)));
         }
 
         @Test
-        public void sortBy_の戻り値の最後は_コンストラクタ引数のcollectionを_引数のcomparatorで並び変えた結果の最後と_一致する() {
+        public void sorted_Comparator指定_の戻り値の最後は_コンストラクタ引数のcollectionを_引数のcomparatorで並び変えた結果の最後と_一致する() {
             int lastOfInput = input.size() - 1;
             int lastOfSorted = sorted.size() - 1;
             assertThat(sorted.asList().get(lastOfSorted), is(input.get(lastOfInput)));
         }
 
         @Test
-        public void sortBy_の戻り値は_コンストラクタ引数のcollectionの要素を_すべて含む() {
+        public void sorted_Comparator指定_の戻り値は_コンストラクタ引数のcollectionの要素を_すべて含む() {
             assertThat(sorted.containsAll(input), is(true));
         }
 
         @Test
-        public void sortBy_の戻り値のsizeは_コンストラクタ引数のcollectionと_一致する() {
+        public void sorted_Comparator指定_の戻り値のsizeは_コンストラクタ引数のcollectionと_一致する() {
             assertThat(sorted.size(), is(input.size()));
+        }
+    }
+
+    public static class sortedNaturalOrder extends DbzTestBase {
+
+        private IItemList<RString> sut;
+        private IItemList<RString> sorted;
+        private List<RString> input;
+
+        @Before
+        public void setUp() {
+            input = Arrays.asList(VAL2, VAL1, VAL3);
+            sut = ItemList.of(input);
+            sorted = sut.sorted();
+            Collections.sort(input);
+        }
+
+        @Test
+        public void sorted_引数なし_の戻り値の先頭は_コンストラクタ引数のcollectionを_自然順に並び変えた結果の先頭と_一致する() {
+            assertThat(sorted.asList().get(0), is(input.get(0)));
+        }
+
+        @Test
+        public void sorted_引数なし_の戻り値の2番目は_コンストラクタ引数のcollectionを_自然順に並び変えた結果の2番目と_一致する() {
+            assertThat(sorted.asList().get(1), is(input.get(1)));
+        }
+
+        @Test
+        public void sorted_引数なし_の戻り値の最後は_コンストラクタ引数のcollectionを_自然順に並び変えた結果の最後と_一致する() {
+            int lastOfInput = input.size() - 1;
+            int lastOfSorted = sorted.size() - 1;
+            assertThat(sorted.asList().get(lastOfSorted), is(input.get(lastOfInput)));
+        }
+
+        @Test
+        public void sorted_引数なし_の戻り値は_コンストラクタ引数のcollectionの要素を_すべて含む() {
+            assertThat(sorted.containsAll(input), is(true));
+        }
+
+        @Test
+        public void sorted_引数なし_の戻り値のsizeは_コンストラクタ引数のcollectionと_一致する() {
+            assertThat(sorted.size(), is(input.size()));
+        }
+
+        @Test(expected = ClassCastException.class)
+        public void sorted_引数なし_は_保持する要素がComparableじゃないとき_ClassCastExceptionをスローする() {
+            IItemList<Object> sut = ItemList.of(Arrays.asList(new Object(), new Object()));
+            sut.sorted();
         }
     }
 
@@ -188,6 +245,52 @@ public class ItemListTest extends DbzTestBase {
         @Test
         public void map_の戻り値のsizeは_生成に用いたlistと_一致する() {
             assertThat(mapped.size(), is(input.size()));
+        }
+    }
+
+    public static class filter extends DbzTestBase {
+
+        private IItemList<IValue> sut;
+        private IItemList<IValue> result;
+        private IValue value1, value2, value3;
+
+        @Before
+        public void setUp() {
+            value1 = initValue(true);
+            value2 = initValue(false);
+            value3 = initValue(true);
+            sut = ItemList.of(value1, value2, value3);
+            result = sut.filter(return_true());
+        }
+
+        private ICondition<IValue> return_true() {
+            return new ICondition<IValue>() {
+                @Override
+                public boolean check(IValue t) {
+                    return t.tureOrFalse();
+                }
+            };
+        }
+
+        private interface IValue {
+
+            boolean tureOrFalse();
+        }
+
+        @Test
+        public void filterは_引数に該当する要素が2件の時_2件の要素を保持するIItemListを返す() {
+            assertThat(result.size(), is(2));
+        }
+
+        @Test
+        public void filterの結果は_該当する要素が存在するとき_先頭の要素が条件に該当する() {
+            assertThat(return_true().check(result.findFirst().get()), is(true));
+        }
+
+        private IValue initValue(boolean trueOrFalse) {
+            IValue value = mock(IValue.class);
+            when(value.tureOrFalse()).thenReturn(trueOrFalse);
+            return value;
         }
     }
 }

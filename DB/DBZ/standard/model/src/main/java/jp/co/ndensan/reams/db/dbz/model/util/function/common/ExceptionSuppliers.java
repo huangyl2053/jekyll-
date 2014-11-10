@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.function.supplier;
+package jp.co.ndensan.reams.db.dbz.model.util.function.common;
 
 import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
 
