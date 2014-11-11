@@ -37,6 +37,14 @@ public interface IItems<E> extends Iterable<E> {
     <R> IItems<R> map(IFunction<? super E, ? extends R> mapper);
 
     /**
+     * 指定の条件に該当する要素だけを保持する{@link IItems IItems}を返します。
+     *
+     * @param condition 条件
+     * @return 指定の条件に該当する要素だけを保持する{@link IItems IItems}
+     */
+    IItems<E> filter(ICondition<? super E> condition);
+
+    /**
      * 保持する要素がない空のとき{@code true}を返します。
      *
      * @return 保持する要素がないとき{@code true}
@@ -51,7 +59,7 @@ public interface IItems<E> extends Iterable<E> {
     int size();
 
     /**
-     * 引数の要素を含むかどうかを返します。
+     * 指定の要素を含むかどうかを返します。
      *
      * @param o 含まれるかどうかを調べるオブジェクト
      * @return 含む場合は{@code true}, 含まなければ{@code false}
@@ -59,7 +67,7 @@ public interface IItems<E> extends Iterable<E> {
     boolean contains(Object o);
 
     /**
-     * 引数のcollectionの要素をすべて含むかどうかを返します。
+     * 指定のcollectionの要素をすべて含むかどうかを返します。
      *
      * @param c 含まれるかどうかを調べるcollection
      * @return すべて含む場合は{@code true}, そうでなければ{@code false}
@@ -67,7 +75,7 @@ public interface IItems<E> extends Iterable<E> {
     boolean containsAll(Collection<?> c);
 
     /**
-     * 引数の{@link IItems items}の要素をすべて含むかどうかを返します。
+     * 指定の{@link IItems items}の要素をすべて含むかどうかを返します。
      *
      * @param items 含まれるかどうかを調べる{@link IItems items}
      * @return すべて含む場合は{@code true}, そうでなければ{@code false}
@@ -75,20 +83,38 @@ public interface IItems<E> extends Iterable<E> {
     boolean containsAllItems(IItems<?> items);
 
     /**
-     * 引数の{@link ICondition IConditon}に該当する要素があるかどうかを返します。
+     * 指定の{@link ICondition IConditon}に該当する要素があるかどうかを返します。
      *
      * @param condition 条件
      * @return {@link ICondition IConditon}に該当する要素があれば{@code true},
      * なければ{@code false}
      */
-    boolean containsAny(ICondition<? super E> condition);
+    boolean anyMatch(ICondition<? super E> condition);
+
+    /**
+     * 指定の{@link ICondition IConditon}にすべての要素が該当するかどうかを返します。
+     *
+     * @param condition 条件
+     * @return {@link ICondition IConditon}にすべての要素が該当すれば{@code true},
+     * 該当しないものがあれば{@code false}
+     */
+    boolean allMatch(ICondition<? super E> condition);
+
+    /**
+     * 指定の{@link ICondition IConditon}にすべての要素が該当しないかどうかを返します。
+     *
+     * @param condition 条件
+     * @return {@link ICondition IConditon}にすべての要素が該当しなければ{@code true},
+     * 該当するものがあれば{@code false}
+     */
+    boolean noneMatch(ICondition<? super E> condition);
 
     /**
      * 保持する要素が1件の時{@code true}を返します。
      *
      * @return 保持する要素が1件の時{@code true}, そうでなければ{@code false}
      */
-    boolean isOnly();
+    boolean isJustOne();
 
     /**
      * 保持する要素が1件の時、そのオブジェクトを保持する{@link IOptional IOptional}を返します。
@@ -96,5 +122,12 @@ public interface IItems<E> extends Iterable<E> {
      *
      * @return {@link IOptional IOptional}
      */
-    IOptional<E> getOnlyOne();
+    IOptional<E> findJustOne();
+
+    /**
+     * 保持する要素の中で先頭の物を保持する{@link IOptional IOptional}を返します。
+     *
+     * @return {@link IOptional IOptional}
+     */
+    IOptional<E> findFirst();
 }

@@ -25,4 +25,14 @@
         <module>testhelper</module>
         <module>model</module>
     </modules>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+                <artifactId>DbzTestHelper</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

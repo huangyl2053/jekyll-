@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.model.util.Lists;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
@@ -24,7 +25,7 @@ import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
  * @author N3327 三浦 凌
  * @param <E> 保持するオブジェクトの型
  */
-final class _ItemCollection<E> implements IItems<E> {
+class _Items<E> implements IItems<E> {
 
     private final Collection<E> elements;
 
@@ -33,7 +34,8 @@ final class _ItemCollection<E> implements IItems<E> {
      *
      * @param elements Collection
      */
-    _ItemCollection(Collection<E> elements) {
+    protected _Items(Collection<E> elements) {
+        Objects.requireNonNull(elements);
         this.elements = elements;
     }
 
@@ -43,12 +45,23 @@ final class _ItemCollection<E> implements IItems<E> {
     }
 
     @Override
+    public IItems<E> filter(ICondition<? super E> condition) {
+        List<E> list = new ArrayList<>();
+        for (E item : this.elements) {
+            if (condition.check(item)) {
+                list.add(item);
+            }
+        }
+        return new _Items<>(list);
+    }
+
+    @Override
     public <R> IItems<R> map(IFunction<? super E, ? extends R> mapper) {
         List<R> list = new ArrayList<>();
         for (E item : this.elements) {
             list.add(mapper.apply(item));
         }
-        return new _ItemCollection<>(list);
+        return new _Items<>(list);
     }
 
     @Override
@@ -57,15 +70,27 @@ final class _ItemCollection<E> implements IItems<E> {
     }
 
     @Override
-    public boolean isOnly() {
+    public boolean isJustOne() {
         return this.elements.size() == 1;
     }
 
+    private E _firstItem() {
+        assert !elements.isEmpty();
+        return (E) this.elements.toArray()[0];
+    }
+
     @Override
-    public IOptional<E> getOnlyOne() {
-        return isOnly()
-                ? DbOptional.of((E) this.elements.toArray()[0])
+    public IOptional<E> findJustOne() {
+        return this.isJustOne()
+                ? DbOptional.of(_firstItem())
                 : DbOptional.<E>empty();
+    }
+
+    @Override
+    public IOptional<E> findFirst() {
+        return this.elements.isEmpty()
+                ? DbOptional.<E>empty()
+                : DbOptional.of(_firstItem());
     }
 
     @Override
@@ -94,12 +119,32 @@ final class _ItemCollection<E> implements IItems<E> {
     }
 
     @Override
-    public boolean containsAny(ICondition<? super E> condition) {
+    public boolean anyMatch(ICondition<? super E> condition) {
         for (E element : elements) {
             if (condition.check(element)) {
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean allMatch(ICondition<? super E> condition) {
+        for (E element : elements) {
+            if (!(condition.check(element))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean noneMatch(ICondition<? super E> condition) {
+        for (E element : elements) {
+            if (condition.check(element)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -6,8 +6,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
-import static jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo.EMPTY;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NaturalOrderComparator;
+import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -61,7 +60,7 @@ public final class ShinseishoKanriNo implements IValueObject<RString>, Comparabl
 
     @Override
     public int compareTo(ShinseishoKanriNo 比較対象) {
-        return Objects.compare(this.申請書管理番号, 比較対象.申請書管理番号, NaturalOrderComparator.ASC.getInstance());
+        return Objects.compare(this.申請書管理番号, 比較対象.申請書管理番号, Comparators.naturalOrder());
     }
 
     /**
