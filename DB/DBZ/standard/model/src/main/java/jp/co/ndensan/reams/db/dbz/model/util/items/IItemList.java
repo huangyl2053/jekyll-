@@ -53,4 +53,12 @@ public interface IItemList<E> extends IItems<E> {
      * @return ソート結果から構成される{@link IItemList IItemList}
      */
     IItemList<E> sorted();
+
+    /**
+     * 保持する要素を自然順序の逆順にソートした結果から構成される、新しい{@link IItemList IItemList}を返します。
+     * ただし、保持する要素が{@link Comparable Comparable}でない、{@link ClassCastException}がスローされる可能性があります。
+     *
+     * @return ソート結果から構成される{@link IItemList IItemList}
+     */
+    IItemList<E> reversed();
 }

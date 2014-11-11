@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.model.util.function.common;
 
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 
 /**
  * {@link IFunction IFunction}をより便利に扱うためのユーティリティです。
@@ -27,6 +26,14 @@ public final class Functions {
     private Functions() {
     }
 
+    private static class _WithOutChange<A> implements IFunction<A, A> {
+
+        @Override
+        public A apply(A t) {
+            return t;
+        }
+    }
+
     /**
      * あるオブジェクトをそのオブジェクトへ変換する{@link IFunction IFunction}を返します。<br/>
      * このFunctionは、例えば、{@link IOptional#map(jp.co.ndensan.reams.db.dbz.model.util.function.IFunction) IOptional#map()}などで、
@@ -37,13 +44,13 @@ public final class Functions {
      * @return あるオブジェクトをあるオブジェクトへ変換する{@link IFunction IFunction}
      */
     public static <T> IFunction<T, T> to(Class<T> clazz) {
-        return (IFunction<T, T>) WITHOUT_CHANGE;
+        return (_WithOutChange<T>) WITHOUT_CHANGE;
     }
 
-    private static class _WithOutChange<A> implements IFunction<A, A> {
+    private static class _ChildToParent<C extends P, P> implements IFunction<C, P> {
 
         @Override
-        public A apply(A t) {
+        public P apply(C t) {
             return t;
         }
     }
@@ -59,7 +66,7 @@ public final class Functions {
      * @return あるオブジェクトを親のオブジェクトへ変換する{@link IFunction IFunction}
      */
     public static <C extends P, P> IFunction<C, P> toParent(Class<P> parentType) {
-        return (IFunction<C, P>) CHILD_TO_PARENT;
+        return (_ChildToParent<C, P>) CHILD_TO_PARENT;
     }
 
     /**
@@ -74,14 +81,6 @@ public final class Functions {
      * @return あるオブジェクトを親のオブジェクトへ変換する{@link IFunction IFunction}
      */
     public static <C extends P, P> IFunction<C, P> childToParent() {
-        return (IFunction<C, P>) CHILD_TO_PARENT;
-    }
-
-    private static class _ChildToParent<C extends P, P> implements IFunction<C, P> {
-
-        @Override
-        public P apply(C t) {
-            return t;
-        }
+        return (_ChildToParent<C, P>) CHILD_TO_PARENT;
     }
 }

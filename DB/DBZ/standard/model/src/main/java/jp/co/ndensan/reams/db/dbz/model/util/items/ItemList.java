@@ -13,7 +13,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators;
+import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
 import jp.co.ndensan.reams.db.dbz.model.util.Lists;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
@@ -109,7 +109,7 @@ public final class ItemList<E> implements IItemList<E> {
     @Override
     public IItemList<E> sorted() {
         List<E> copied = Lists.newArrayList(this.elements);
-        Collections.sort(copied, (Comparator<E>) Comparators.NaturalOrderComparator.ASC.getInstance());
+        Collections.sort(copied, (Comparator<E>) Comparators.naturalOrder());
         return new ItemList<>(copied);
     }
 
@@ -117,6 +117,13 @@ public final class ItemList<E> implements IItemList<E> {
     public IItemList<E> sorted(Comparator<? super E> comparator) {
         List<E> copied = Lists.newArrayList(this.elements);
         Collections.sort(copied, comparator);
+        return new ItemList<>(copied);
+    }
+
+    @Override
+    public IItemList<E> reversed() {
+        List<E> copied = Lists.newArrayList(this.elements);
+        Collections.sort(copied, (Comparator<E>) Comparators.reverseOrder());
         return new ItemList<>(copied);
     }
 
