@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject;
 
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring.ValidationSpec;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 
 /**
@@ -24,11 +26,27 @@ public final class ValueObjectValidations {
      * @param <T> ValueObjectが保持する値の型
      * @param <V> ValueObjectの型
      * @param clazz ValueObjectのclass
-     * @param spec バリデーションの定義
      * @return 指定の定義から生成した、指定のValueObjectに対するバリデーション
      */
-    public static <T, V extends IValueObject<T>> IValueObjectValidatable<V>
-            createValidationFor(Class<V> clazz, IValueObjectValidationSpec<T> spec) {
-        return new _ValueObjectValidator<>(Objects.requireNonNull(spec));
+    public static <T, V extends IValueObject<T>> IValueObjectValidatorBuilder<T, V>
+            createValidationFor(Class<V> clazz) {
+        return new _ValueObjectValidatiorBuilder<>();
+    }
+
+    public interface IValueObjectValidatorBuilder<T, V extends IValueObject<T>> {
+
+        IValueObjectValidatable<V> setSpec(IValueObjectValidationSpec<T> spec);
+    }
+
+    private static class _ValueObjectValidatiorBuilder<T, V extends IValueObject<T>>
+            implements IValueObjectValidatorBuilder<T, V> {
+
+        private _ValueObjectValidatiorBuilder() {
+        }
+
+        @Override
+        public IValueObjectValidatable<V> setSpec(IValueObjectValidationSpec<T> spec) {
+            return new _ValueObjectValidator<>(Objects.requireNonNull(spec));
+        }
     }
 }
