@@ -74,7 +74,7 @@ public class _ValueObjectValidatorTest extends DbzTestBase {
 
             assertThat(check1.check(ValueObject.INSTANCE, info).contains(Message01.INSTANCE), is(true));
             assertThat(sut.validate(ValueObject.INSTANCE).contains(Message01.INSTANCE), is(true));
-            assertThat(check1.check(ValueObject.INSTANCE, info).contains(Message02.INSTANCE), is(true));
+            assertThat(check2.check(ValueObject.INSTANCE, info).contains(Message02.INSTANCE), is(true));
             assertThat(sut.validate(ValueObject.INSTANCE).contains(Message02.INSTANCE), is(true));
         }
 
