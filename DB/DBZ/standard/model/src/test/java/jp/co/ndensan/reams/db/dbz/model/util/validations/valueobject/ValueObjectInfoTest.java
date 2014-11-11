@@ -39,6 +39,7 @@ public class ValueObjectInfoTest extends DbzTestBase {
         }
     }
 
+    @RunWith(Enclosed.class)
     public static class Builder extends DbzTestBase {
 
         private static ValueObjectInfo sut;
