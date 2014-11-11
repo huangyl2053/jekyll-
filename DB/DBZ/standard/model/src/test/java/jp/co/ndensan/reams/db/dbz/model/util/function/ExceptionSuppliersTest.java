@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.function.common;
+package jp.co.ndensan.reams.db.dbz.model.util.function;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.is;
