@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.util.function;
 
-import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
-
 /**
  * {@link IFunction IFunction}をより便利に扱うためのユーティリティです。
  * 汎用的な{@link IFunction IFunction}を持ちます。
