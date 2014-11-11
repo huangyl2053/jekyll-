@@ -5,12 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.util.optional;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
-import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ExceptionSuppliers;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -288,6 +284,36 @@ public class DbOptionalTest {
         public void map_の戻り値は_emptyの時_emptyである() {
             sut = DbOptional.empty();
             mapped = sut.map(createMapper());
+            assertThat(mapped.isPresent(), is(false));
+        }
+    }
+
+    public static class flatMap extends DbzTestBase {
+
+        private IOptional<RString> sut;
+        private IOptional<String> mapped;
+        private RString input;
+
+        private IFunction<RString, IOptional<String>> createMapper() {
+            return new IFunction<RString, IOptional<String>>() {
+                @Override
+                public IOptional<String> apply(RString t) {
+                    return DbOptional.of(t.toString());
+                }
+            };
+        }
+
+        @Test
+        public void flatMap_の戻り値は_保持する値を引数のIFuntionにより変換した値をもつ_IOptionalである() {
+            sut = DbOptional.of(new RString("input"));
+            mapped = sut.flatMap(createMapper());
+            assertThat(mapped.get(), is(createMapper().apply(sut.get()).get()));
+        }
+
+        @Test
+        public void flatMap_の戻り値は_emptyの時_emptyである() {
+            sut = DbOptional.empty();
+            mapped = sut.flatMap(createMapper());
             assertThat(mapped.isPresent(), is(false));
         }
     }

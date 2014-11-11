@@ -100,13 +100,13 @@ public final class DbOptional<T> implements IOptional<T> {
     @Override
     public String toString() {
         return this.value != null
-                ? String.format("IOptional[%s]", value)
+                ? String.format("IOptional[%s]", this.value)
                 : "empty";
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(value);
+        return Objects.hashCode(this.value);
     }
 
     @Override
@@ -118,7 +118,7 @@ public final class DbOptional<T> implements IOptional<T> {
             return false;
         }
         DbOptional<?> other = (DbOptional<?>) obj;
-        return Objects.equals(value, other.value);
+        return Objects.equals(this.value, other.value);
     }
 
     @Override
@@ -127,7 +127,17 @@ public final class DbOptional<T> implements IOptional<T> {
         if (!isPresent()) {
             return empty();
         } else {
-            return DbOptional.ofNullable(mapper.apply(value));
+            return DbOptional.ofNullable(mapper.apply(this.value));
+        }
+    }
+
+    @Override
+    public <R> IOptional<R> flatMap(IFunction<? super T, IOptional<R>> mapper) {
+        Objects.requireNonNull(mapper);
+        if (!isPresent()) {
+            return empty();
+        } else {
+            return Objects.requireNonNull(mapper.apply(this.value));
         }
     }
 }
