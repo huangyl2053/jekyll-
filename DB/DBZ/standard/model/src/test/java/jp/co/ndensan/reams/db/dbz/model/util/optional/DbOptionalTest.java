@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.model.util.optional;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ExceptionSuppliers;
+import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -315,6 +316,54 @@ public class DbOptionalTest {
             sut = DbOptional.empty();
             mapped = sut.flatMap(createMapper());
             assertThat(mapped.isPresent(), is(false));
+        }
+    }
+
+    public static class filter extends DbzTestBase {
+
+        private String value;
+        private IOptional<String> sut;
+
+        @Before
+        public void setUp() {
+            value = "test";
+            sut = DbOptional.of(value);
+        }
+
+        @Test
+        public void filterは_引数のIConditon$checkに対して_自身が保持する値を渡すと_trueが返る時_空でないIOptionalを返す() {
+            assertThat(sut.filter(new ICondition<String>() {
+                @Override
+                public boolean check(String t) {
+                    return true;
+                }
+            }).isPresent(), is(true));
+        }
+
+        @Test
+        public void filterは_引数のIConditon$checkに対して_自身が保持する値を渡すと_falseが返える時_空のIOptionalを返す() {
+            assertThat(sut.filter(new ICondition<String>() {
+                @Override
+                public boolean check(String t) {
+                    return false;
+                }
+            }).isPresent(), is(false));
+        }
+
+        @Test
+        public void filterは_自身が値を保持していないとき_引数のIConditionにかかわらず_空のIOptionalを返す() {
+            assertThat(DbOptional.<String>empty().filter(new ICondition<String>() {
+                @Override
+                public boolean check(String t) {
+                    return true;
+                }
+            }).isPresent(), is(false));
+            assertThat(DbOptional.<String>empty().filter(new ICondition<String>() {
+                @Override
+                public boolean check(String t) {
+                    return false;
+                }
+            }).isPresent(), is(false));
         }
     }
 }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.util.optional;
 
+import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
 
@@ -71,6 +72,15 @@ public interface IOptional<T> {
      * emptyの場合はemptyな{@link IOptional IOptional}
      */
     <R> IOptional<R> flatMap(IFunction<? super T, IOptional<R>> mapper);
+
+    /**
+     * 保持する値が指定の{@link ICondition IConditon}に当てはまるときは自身を、
+     * 当てはまらない時はemptyな{@link IOptional IOptional}を返します。
+     *
+     * @param condtion {@link ICondition IConditon}に定義される条件
+     * @return 指定の条件にあてはまる時は自身をそのまま、あてはまらない時はemptyな{@link IOptional IOptional}
+     */
+    IOptional<T> filter(ICondition<? super T> condtion);
 
     /**
      * デバッグ用の文字列を返します。

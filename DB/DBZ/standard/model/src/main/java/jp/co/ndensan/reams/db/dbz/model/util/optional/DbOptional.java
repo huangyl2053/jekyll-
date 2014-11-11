@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.model.util.optional;
 
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
+import jp.co.ndensan.reams.uz.uza.workflow.flow.entity.UzT1603FlowWaitMessage;
 
 /**
  * {@link IOptional IOptional}を生成します。
@@ -139,5 +141,17 @@ public final class DbOptional<T> implements IOptional<T> {
         } else {
             return Objects.requireNonNull(mapper.apply(this.value));
         }
+    }
+
+    @Override
+    public IOptional<T> filter(ICondition<? super T> condtion) {
+        Objects.requireNonNull(condtion);
+        if (!isPresent()) {
+            return this;
+        }
+        if (condtion.check(this.value)) {
+            return this;
+        }
+        return empty();
     }
 }
