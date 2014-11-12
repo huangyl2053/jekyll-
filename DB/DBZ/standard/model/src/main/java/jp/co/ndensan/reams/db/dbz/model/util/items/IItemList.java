@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.model.util.items;
 
 import java.util.Comparator;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 
@@ -61,4 +62,12 @@ public interface IItemList<E> extends IItems<E> {
      * @return ソート結果から構成される{@link IItemList IItemList}
      */
     IItemList<E> reversed();
+
+    /**
+     * 保持する要素のビューを、編集できない{@link List List}として返します。
+     *
+     * @return 編集できない要素のビュー
+     */
+    @Override
+    public List<E> asList();
 }

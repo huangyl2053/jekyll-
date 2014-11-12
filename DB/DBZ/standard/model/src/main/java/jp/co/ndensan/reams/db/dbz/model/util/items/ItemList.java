@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.util.items;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -14,7 +15,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
-import jp.co.ndensan.reams.db.dbz.model.util.Lists;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
@@ -25,10 +25,21 @@ import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
  * @author N3327 三浦 凌
  * @param <E> 保持する要素の型
  */
-public final class ItemList<E> implements IItemList<E> {
+public final class ItemList<E> implements IItemList<E>, Serializable {
 
     private final List<E> elements;
     private final _Items<E> defaultImpl;
+
+    /**
+     * 指定の{@link ItemList ItemList}から、同じ要素を保持する新しい{@link ItemList ItemList}を生成します。
+     *
+     * @param <T> {@link ItemList ItemList}が保持する要素の型
+     * @param itemlist {@link ItemList ItemList}
+     * @return 指定の{@link ItemList ItemList}から生成した、新しい{@link ItemList ItemList}
+     */
+    public static <T> ItemList<T> newItemList(IItemList<? extends T> itemlist) {
+        return new ItemList<>(itemlist.asList());
+    }
 
     /**
      * 何も要素を保持しない空の{@link ItemList ItemList}を生成します。
@@ -48,7 +59,7 @@ public final class ItemList<E> implements IItemList<E> {
      * @return 引数のlistを保持する{@link ItemList ItemList}
      * @throws NullPointerException 引数がnullの時, listがnullの要素を含むとき
      */
-    public static <T> ItemList<T> of(List<T> list) throws NullPointerException {
+    public static <T> ItemList<T> of(List<? extends T> list) throws NullPointerException {
         return new ItemList<>(list);
     }
 
@@ -77,13 +88,13 @@ public final class ItemList<E> implements IItemList<E> {
         return new ItemList<>(Arrays.asList(t));
     }
 
-    private ItemList(List<E> list) {
+    private ItemList(List<? extends E> list) {
         Objects.requireNonNull(list);
         if (list.contains(null)) {
             throw new NullPointerException("nullの要素を含むため、生成できません。");
         }
-        this.elements = list;
-        this.defaultImpl = new _Items<>(list);
+        this.elements = new ArrayList<>(list);
+        this.defaultImpl = new _Items<>(this.elements);
     }
 
     @Override
@@ -108,21 +119,21 @@ public final class ItemList<E> implements IItemList<E> {
 
     @Override
     public IItemList<E> sorted() {
-        List<E> copied = Lists.newArrayList(this.elements);
+        List<E> copied = new ArrayList<>(this.elements);
         Collections.sort(copied, (Comparator<E>) Comparators.naturalOrder());
         return new ItemList<>(copied);
     }
 
     @Override
     public IItemList<E> sorted(Comparator<? super E> comparator) {
-        List<E> copied = Lists.newArrayList(this.elements);
+        List<E> copied = new ArrayList<>(this.elements);
         Collections.sort(copied, comparator);
         return new ItemList<>(copied);
     }
 
     @Override
     public IItemList<E> reversed() {
-        List<E> copied = Lists.newArrayList(this.elements);
+        List<E> copied = new ArrayList<>(this.elements);
         Collections.sort(copied, (Comparator<E>) Comparators.reverseOrder());
         return new ItemList<>(copied);
     }

@@ -341,7 +341,7 @@ public class DbOptionalTest {
         }
 
         @Test
-        public void filterは_引数のIConditon$checkに対して_自身が保持する値を渡すと_falseが返える時_空のIOptionalを返す() {
+        public void filterは_引数のIConditon$checkに対して_自身が保持する値を渡すと_falseが返る時_空のIOptionalを返す() {
             assertThat(sut.filter(new ICondition<String>() {
                 @Override
                 public boolean check(String t) {

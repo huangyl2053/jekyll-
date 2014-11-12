@@ -109,6 +109,16 @@ public class ItemListTest extends DbzTestBase {
                 sut.of(Arrays.asList(a, b, null, c));
             }
         }
+
+        public static class newItemList extends DbzTestBase {
+
+            private ItemList sut;
+
+            @Test(expected = NullPointerException.class)
+            public void newItemListは_引数がnullの時_NullPointerExceptionをスローする() {
+                sut.newItemList(null);
+            }
+        }
     }
 
     public static class sortedByComparator extends DbzTestBase {

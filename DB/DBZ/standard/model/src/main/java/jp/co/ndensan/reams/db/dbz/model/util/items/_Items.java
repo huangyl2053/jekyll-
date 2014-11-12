@@ -5,13 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.util.items;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.model.util.Lists;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.DbOptional;
@@ -25,7 +24,7 @@ import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
  * @author N3327 三浦 凌
  * @param <E> 保持するオブジェクトの型
  */
-class _Items<E> implements IItems<E> {
+class _Items<E> implements IItems<E>, Serializable {
 
     private final Collection<E> elements;
 
@@ -41,7 +40,7 @@ class _Items<E> implements IItems<E> {
 
     @Override
     public List<E> asList() {
-        return Collections.unmodifiableList(Lists.newArrayList(elements));
+        return new ArrayList<>(elements);
     }
 
     @Override
