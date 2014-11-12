@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 import java.util.Objects;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -35,7 +36,7 @@ public class DbT7056GappeiShichosonEntity implements IDbAccessable {
     @PrimaryKey
     private RString chiikiNo;
     @PrimaryKey
-    private RString kyuShichosonCode;
+    private LasdecCode kyuShichosonCode;
     private FlexibleDate unyoKaishiYMD;
     private FlexibleDate unyoShuryoYMD;
     private ShoKisaiHokenshaNo kyuHokenshaNo;
@@ -134,7 +135,7 @@ public class DbT7056GappeiShichosonEntity implements IDbAccessable {
      *
      * @return kyuShichosonCode
      */
-    public RString getKyuShichosonCode() {
+    public LasdecCode getKyuShichosonCode() {
         return kyuShichosonCode;
     }
 
@@ -143,7 +144,7 @@ public class DbT7056GappeiShichosonEntity implements IDbAccessable {
      *
      * @param kyuShichosonCode kyuShichosonCode
      */
-    public void setKyuShichosonCode(RString kyuShichosonCode) {
+    public void setKyuShichosonCode(LasdecCode kyuShichosonCode) {
         this.kyuShichosonCode = kyuShichosonCode;
     }
 

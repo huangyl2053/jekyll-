@@ -18,10 +18,12 @@ import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster.*;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 
 /**
@@ -48,6 +50,7 @@ public class KoseiShichosonMasterDac implements IReplaceable<DbT7051KoseiShichos
                 select().
                 table(DbT7051KoseiShichosonMaster.class).
                 where(検索条件).
+                order(by(kanyuYMD, Order.ASC)).
                 toList(DbT7051KoseiShichosonMasterEntity.class);
         return getModelList(entityList);
     }

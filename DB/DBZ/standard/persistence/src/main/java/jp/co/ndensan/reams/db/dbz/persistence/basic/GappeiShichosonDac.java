@@ -18,10 +18,12 @@ import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson.*;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 
 /**
@@ -45,6 +47,7 @@ public class GappeiShichosonDac implements IReplaceable<DbT7056GappeiShichosonEn
         List<DbT7056GappeiShichosonEntity> entityList = accessor.
                 select().
                 table(DbT7056GappeiShichoson.class).
+                order(by(gappeiYMD, Order.ASC)).
                 toList(DbT7056GappeiShichosonEntity.class);
         return getModelList(entityList);
     }
@@ -62,6 +65,7 @@ public class GappeiShichosonDac implements IReplaceable<DbT7056GappeiShichosonEn
                 select().
                 table(DbT7056GappeiShichoson.class).
                 where(検索条件).
+                order(by(gappeiYMD, Order.ASC)).
                 toList(DbT7056GappeiShichosonEntity.class);
         return getModelList(entityList);
     }

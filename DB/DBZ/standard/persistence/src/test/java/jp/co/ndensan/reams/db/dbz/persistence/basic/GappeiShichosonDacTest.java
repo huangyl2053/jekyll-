@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokensha
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -97,7 +98,7 @@ public class GappeiShichosonDacTest extends DbzTestDacBase {
         DbT7056GappeiShichosonEntity entity = new DbT7056GappeiShichosonEntity();
         entity.setGappeiYMD(new FlexibleDate(String.format("201401%1$02d", no)));
         entity.setChiikiNo(new RString(String.format("%1$02d", no)));
-        entity.setKyuShichosonCode(new RString(String.format("%1$05d", no)));
+        entity.setKyuShichosonCode(new LasdecCode(String.format("%1$06d", no)));
         entity.setUnyoKaishiYMD(new FlexibleDate("20140201"));
         entity.setUnyoShuryoYMD(new FlexibleDate("20140301"));
         entity.setKyuHokenshaNo(new ShoKisaiHokenshaNo(new RString("00000001")));

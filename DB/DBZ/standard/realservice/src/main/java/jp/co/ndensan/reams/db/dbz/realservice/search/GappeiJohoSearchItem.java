@@ -16,8 +16,11 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho.*;
  */
 public enum GappeiJohoSearchItem implements ISearchItem {
 
+    合併日(gappeiYMD),
     地域番号(chiikiNo),
-    市町村コード(shichosonCode);
+    市町村コード(shichosonCode),
+    保険者番号(hokenshaNo),
+    国保連データ連携開始日(kokuhorenDataFromYMD);
 
     private final IColumnDefinition columnDefinition;
 

@@ -7,6 +7,11 @@ package jp.co.ndensan.reams.db.dbz.realservice.gappei;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.config.GappeiJohoConfig;
+import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GappeiJohoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HokenshaKoseiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiJohoModel;
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonModel;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;
@@ -23,7 +28,9 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.ur.urz.realservice.search.SearchConditionFactory;
 import jp.co.ndensan.reams.ur.urz.realservice.search.StringOperator;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import org.junit.experimental.runners.Enclosed;
@@ -41,6 +48,12 @@ import static org.mockito.Mockito.*;
 @RunWith(Enclosed.class)
 public class GappeiShichosonFinderTest extends DbzTestBase {
 
+    private static final LasdecCode 市町村コード = new LasdecCode("000001");
+    private static final LasdecCode 旧市町村コード = new LasdecCode("000002");
+    private static final ShoKisaiHokenshaNo 保険者番号 = new ShoKisaiHokenshaNo("000001");
+    private static final ShoKisaiHokenshaNo 旧保険者番号 = new ShoKisaiHokenshaNo("000002");
+    private static final FlexibleYearMonth 基準年月 = new FlexibleYearMonth("201301");
+
     private static final int 特殊パターン = 99;
 
     public static class get旧市町村情報付与終了日 {
@@ -52,224 +65,217 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
         }
     }
 
-    public static class get全合併市町村 {
+    public static class get合併市町村情報_表示フラグ {
 
         @Test
-        public void 合併市町村情報が0件の時_get全合併市町村は_0件の情報を返す() {
+        public void 合併市町村情報が0件の時_get合併市町村情報Listは_0件の情報を返す() {
             GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 0, 0);
-            assertThat(sut.get全合併市町村(true).size(), is(0));
+            assertThat(sut.get合併市町村情報(true).size(), is(0));
         }
 
         @Test
-        public void 合併市町村情報が1件の時_get全合併市町村は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 5, 0);
-            assertThat(sut.get全合併市町村(true).size(), is(1));
+        public void 合併市町村情報が1件の時_get合併市町村情報Listは_1件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 1, 1);
+            assertThat(sut.get合併市町村情報(true).size(), is(1));
         }
 
         @Test
-        public void 合併市町村情報が2件の時_get全合併市町村は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(2, 5, 0);
-            assertThat(sut.get全合併市町村(true).size(), is(2));
+        public void 合併市町村情報が2件の時_get合併市町村情報Listは_2件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(2, 1, 1);
+            assertThat(sut.get合併市町村情報(true).size(), is(2));
         }
     }
 
-    public static class get全旧市町村 {
+    public static class get合併市町村情報_旧市町村コード {
 
         @Test
-        public void 合併市町村が0件の時_get全旧市町村は_0件の情報を返す() {
+        public void 合併市町村情報が0件の時_get合併市町村情報Listは_0件の情報を返す() {
             GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 0, 0);
-            assertThat(sut.get全旧市町村().size(), is(0));
+            assertThat(sut.get合併市町村情報(旧市町村コード).size(), is(0));
         }
 
         @Test
-        public void 合併市町村が1件の時_get全旧市町村は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 1, 0);
-            assertThat(sut.get全旧市町村().size(), is(1));
-        }
-
-        @Test
-        public void 合併市町村が2件の時_get全旧市町村は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 2, 0);
-            assertThat(sut.get全旧市町村().size(), is(2));
-        }
-
-        @Test
-        public void 合併市町村が複数件の時_get全旧市町村は_最新のリストを返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 特殊パターン, 0);
-            assertThat(sut.get全旧市町村().size(), is(3));
+        public void 合併市町村情報が1件の時_get合併市町村情報Listは_1件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 1, 1);
+            assertThat(sut.get合併市町村情報(旧市町村コード).size(), is(1));
         }
     }
 
-    public static class find合併市町村 {
+    public static class get合併市町村情報_旧保険者番号 {
 
         @Test
-        public void 合併市町村情報が0件の時_find合併市町村は_0件の情報を返す() {
+        public void 合併市町村情報が0件の時_get合併市町村情報Listは_0件の情報を返す() {
             GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 0, 0);
-            assertThat(sut.find合併市町村(createSearchCondition(), true).size(), is(0));
+            assertThat(sut.get合併市町村情報(旧保険者番号).size(), is(0));
         }
 
         @Test
-        public void 合併市町村情報が1件の時_find合併市町村は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 5, 0);
-            assertThat(sut.find合併市町村(createSearchCondition(), true).size(), is(1));
-        }
-
-        @Test
-        public void 合併市町村情報が2件の時_find合併市町村は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(2, 5, 0);
-            assertThat(sut.find合併市町村(createSearchCondition(), true).size(), is(2));
+        public void 合併市町村情報が1件の時_get合併市町村情報Listは_1件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 1, 1);
+            assertThat(sut.get合併市町村情報(旧保険者番号).size(), is(1));
         }
     }
 
-    public static class get全広域合併市町村 {
+    public static class get最新合併市町村情報_市町村コード {
 
         @Test
-        public void 広域合併市町村情報が0件の時_get全広域合併市町村は_0件の情報を返す() {
+        public void 合併市町村情報が0件の時_get最新合併市町村情報は_0件の情報を返す() {
             GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 0, 0);
-            assertThat(sut.get全広域合併市町村(true).size(), is(0));
+            assertThat(sut.get最新合併市町村情報(市町村コード).isPresent(), is(false));
         }
 
         @Test
-        public void 広域合併市町村情報が1件の時_get全広域合併市町村は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 0, 5);
-            assertThat(sut.get全広域合併市町村(true).size(), is(1));
-        }
-
-        @Test
-        public void 広域合併市町村情報が2件の時_get全広域合併市町村は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(2, 0, 5);
-            assertThat(sut.get全広域合併市町村(true).size(), is(2));
+        public void 合併市町村情報が1件の時_get最新合併市町村情報は_1件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 1, 1);
+            assertThat(sut.get最新合併市町村情報(市町村コード).isPresent(), is(true));
         }
     }
 
-    public static class get地域ごとの最新広域合併市町村 {
+    public static class get最新合併市町村情報_保険者番号 {
 
         @Test
-        public void 広域合併市町村情報が0件の時_get地域ごとの最新広域合併市町村は_0件の情報を返す() {
+        public void 合併市町村情報が0件の時_get最新合併市町村情報は_0件の情報を返す() {
             GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 0, 0);
-            assertThat(sut.get地域ごとの最新広域合併市町村().size(), is(0));
+            assertThat(sut.get最新合併市町村情報(保険者番号).isPresent(), is(false));
         }
 
         @Test
-        public void 広域合併市町村情報が1件の時_get地域ごとの最新広域合併市町村は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 0, 5);
-            assertThat(sut.get地域ごとの最新広域合併市町村().size(), is(1));
-        }
-
-        @Test
-        public void 広域合併市町村情報が2件の時_get地域ごとの最新広域合併市町村は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(2, 0, 5);
-            assertThat(sut.get地域ごとの最新広域合併市町村().size(), is(2));
-        }
-
-        @Test
-        public void 合併情報が複数件の時_get地域ごとの最新広域合併市町村は_最新のリストを返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(特殊パターン, 0, 5);
-            assertThat(sut.get地域ごとの最新広域合併市町村().size(), is(3));
+        public void 合併市町村情報が1件の時_get最新合併市町村情報は_1件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 1, 1);
+            assertThat(sut.get最新合併市町村情報(保険者番号).isPresent(), is(true));
         }
     }
 
-    public static class get地域ごとの広域合併市町村 {
+    public static class get最新合併市町村情報_保険者番号_基準年月 {
 
         @Test
-        public void 広域合併市町村情報が0件の時_get地域ごとの広域合併市町村は_nullを返す() {;
+        public void 合併市町村情報が0件の時_get最新合併市町村情報は_0件の情報を返す() {
             GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 0, 0);
-            assertThat(sut.get地域ごとの広域合併市町村(RString.EMPTY).isPresent(), is(false));
+            assertThat(sut.get最新合併市町村情報(保険者番号, 基準年月).isPresent(), is(false));
         }
 
         @Test
-        public void 広域合併市町村情報が1件の時_get地域ごとの広域合併市町村は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 0, 5);
-            assertThat(sut.get地域ごとの広域合併市町村(RString.EMPTY).isPresent(), is(true));
+        public void 合併市町村情報が1件の時_get最新合併市町村情報は_1件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 1, 1);
+            assertThat(sut.get最新合併市町村情報(保険者番号, 基準年月).isPresent(), is(true));
         }
     }
 
-    public static class get全地域の広域合併市町村 {
+    public static class get最古合併市町村情報_旧市町村コード {
 
         @Test
-        public void 広域合併市町村情報が0件の時_get全地域の広域合併市町村は_0件の情報を返す() {
+        public void 合併市町村情報が0件の時_get最古合併市町村情報は_0件の情報を返す() {
             GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 0, 0);
-            assertThat(sut.get全地域の広域合併市町村().size(), is(0));
+            assertThat(sut.get最古合併市町村情報(旧市町村コード).isPresent(), is(false));
         }
 
         @Test
-        public void 広域合併市町村情報が1件の時_get全地域の広域合併市町村は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 0, 5);
-            assertThat(sut.get全地域の広域合併市町村().size(), is(1));
-        }
-
-        @Test
-        public void 広域合併市町村情報が2件の時_get全地域の広域合併市町村は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(2, 0, 5);
-            assertThat(sut.get全地域の広域合併市町村().size(), is(2));
+        public void 合併市町村情報が1件の時_get最古合併市町村情報は_1件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 1, 1);
+            assertThat(sut.get最古合併市町村情報(旧市町村コード).isPresent(), is(true));
         }
     }
 
-    public static class find広域合併市町村 {
+    public static class get直近合併市町村情報_旧保険者番号 {
 
         @Test
-        public void 広域合併市町村情報が0件の時_find広域合併市町村は_0件の情報を返す() {
+        public void 合併市町村情報が0件の時_get直近合併市町村情報は_0件の情報を返す() {
             GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 0, 0);
-            assertThat(sut.find広域合併市町村(createSearchCondition()).size(), is(0));
+            assertThat(sut.get直近合併市町村情報(旧保険者番号).isPresent(), is(false));
         }
 
         @Test
-        public void 広域合併市町村情報が1件の時_find広域合併市町村は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 0, 5);
-            assertThat(sut.find広域合併市町村(createSearchCondition()).size(), is(1));
-        }
-
-        @Test
-        public void 広域合併市町村情報が2件の時_find広域合併市町村は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(2, 0, 5);
-            assertThat(sut.find広域合併市町村(createSearchCondition()).size(), is(2));
+        public void 合併市町村情報が1件の時_get直近合併市町村情報は_1件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 1, 1);
+            assertThat(sut.get直近合併市町村情報(旧保険者番号).isPresent(), is(true));
         }
     }
 
-    public static class find広域合併市町村By合併後市町村コード {
+    public static class get直近合併市町村情報_旧保険者番号_基準年月 {
 
         @Test
-        public void 広域合併市町村情報が0件の時_find広域合併市町村By合併後市町村コードは_nullを返す() {
+        public void 合併市町村情報が0件の時_get直近合併市町村情報は_0件の情報を返す() {
             GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 0, 0);
-            assertThat(sut.find広域合併市町村By合併後市町村コード(RString.EMPTY).isPresent(), is(false));
+            assertThat(sut.get直近合併市町村情報(旧保険者番号, 基準年月).isPresent(), is(false));
         }
 
         @Test
-        public void 広域合併市町村情報が1件の時_find広域合併市町村By合併後市町村コードは_1件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 0, 5);
-            assertThat(sut.find広域合併市町村By合併後市町村コード(RString.EMPTY).isPresent(), is(true));
-        }
-
-        @Test
-        public void 広域合併市町村が複数件の時_find広域合併市町村By合併後市町村コードは_最新の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 0, 5);
-            assertThat(sut.find広域合併市町村By合併後市町村コード(RString.EMPTY).get().get構成市町村().asList().get(0).get合併情報地域番号(), is(new RString("05")));
+        public void 合併市町村情報が1件の時_get直近合併市町村情報は_1件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 1, 1);
+            assertThat(sut.get直近合併市町村情報(旧保険者番号, 基準年月).isPresent(), is(true));
         }
     }
 
-    public static class find広域合併市町村By合併元市町村コード {
+    public static class get市町村情報_市町村コード {
 
         @Test
-        public void 広域合併市町村情報が0件の時_find広域合併市町村By合併元市町村コードは_nullを返す() {
+        public void 合併市町村情報が0件の時_get市町村情報は_0件の情報を返す() {
             GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 0, 0);
-            assertThat(sut.find広域合併市町村By合併元市町村コード(RString.EMPTY).isPresent(), is(false));
+            assertThat(sut.get市町村情報(市町村コード).get().get合併市町村().size(), is(0));
         }
 
         @Test
-        public void 広域合併市町村情報が1件の時_find広域合併市町村By合併元市町村コードは_1件の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 0, 5);
-            assertThat(sut.find広域合併市町村By合併元市町村コード(RString.EMPTY).isPresent(), is(true));
+        public void 合併市町村情報が1件の時_get市町村情報は_1件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 1, 1);
+            assertThat(sut.get市町村情報(市町村コード).get().get合併市町村().size(), is(1));
+        }
+    }
+
+    public static class get市町村情報_保険者番号 {
+
+        @Test
+        public void 合併市町村情報が0件の時_get市町村情報は_0件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 0, 0);
+            assertThat(sut.get市町村情報(保険者番号).get().get合併市町村().size(), is(0));
         }
 
         @Test
-        public void 広域合併市町村が複数件の時_find広域合併市町村By合併元市町村コードは_最古の情報を返す() {
-            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 0, 5);
-            assertThat(sut.find広域合併市町村By合併元市町村コード(RString.EMPTY).get().get構成市町村().asList().get(0).get合併情報地域番号(), is(new RString("01")));
+        public void 合併市町村情報が1件の時_get市町村情報は_1件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 1, 1);
+            assertThat(sut.get市町村情報(保険者番号).get().get合併市町村().size(), is(1));
+        }
+    }
+
+    public static class get最古市町村情報_市町村コード {
+
+        @Test
+        public void 合併市町村情報が0件の時_get市町村情報は_0件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 0, 0);
+            assertThat(sut.get最古市町村情報(市町村コード).get().get合併市町村().size(), is(0));
+        }
+
+        @Test
+        public void 合併市町村情報が1件の時_get市町村情報は_1件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 1, 1);
+            assertThat(sut.get最古市町村情報(市町村コード).get().get合併市町村().size(), is(1));
+        }
+    }
+
+    public static class find合併市町村情報_検索条件 {
+
+        @Test
+        public void 合併市町村情報が0件の時_find合併市町村情報は_0件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(0, 0, 0);
+            assertThat(sut.find合併市町村情報(createSearchCondition(), true).size(), is(0));
+        }
+
+        @Test
+        public void 合併市町村情報が1件の時_find合併市町村情報は_1件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(1, 1, 1);
+            assertThat(sut.find合併市町村情報(createSearchCondition(), true).size(), is(1));
+        }
+
+        @Test
+        public void 合併市町村情報が2件の時_find合併市町村情報は_2件の情報を返す() {
+            GappeiShichosonFinder sut = createGappeiShichosonFinder(2, 1, 1);
+            assertThat(sut.find合併市町村情報(createSearchCondition(), true).size(), is(2));
         }
     }
 
     private static GappeiShichosonFinder createGappeiShichosonFinder(int count1, int count2, int count3) {
-        return new GappeiShichosonFinder(createGappeiJohoDac(count1), createGappeiShichosonDac(count2), createKoseiShichosonMasterDac(count3));
+        return new GappeiShichosonFinder(
+                createGappeiJohoDac(count1), createGappeiShichosonDac(count2), createKoseiShichosonMasterDac(count3),
+                createGappeiJohoConfig(), createHokenshaJohoConfig());
     }
 
     private static GappeiJohoDac createGappeiJohoDac(int count) {
@@ -295,16 +301,25 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
         return dac;
     }
 
+    private static GappeiJohoConfig createGappeiJohoConfig() {
+        GappeiJohoConfig config = mock(GappeiJohoConfig.class);
+        when(config.get合併情報区分()).thenReturn(GappeiJohoKubun.合併あり);
+        return config;
+    }
+
+    private static HokenshaJohoConfig createHokenshaJohoConfig() {
+        HokenshaJohoConfig config = mock(HokenshaJohoConfig.class);
+        when(config.get保険者構成()).thenReturn(HokenshaKoseiKubun.単一市町村);
+        return config;
+    }
+
     private static IGappeiJoho createGappeiJoho(int param1, int param2) {
         IGappeiJoho gappeiJoho = mock(GappeiJohoModel.class);
-        FlexibleDate 合併日 = new FlexibleDate(String.format("2014%1$02d%2$02d", param1, param2));
-        RString 地域番号 = new RString(String.format("%1$02d", param1));
-        RString 市町村コード = new RString(String.format("%1$05d", param1));
-        FlexibleDate 旧市町村情報付与終了日 = new FlexibleDate(String.format("2014%1$02d%2$02d", param1, param2));
-        when(gappeiJoho.get合併日()).thenReturn(合併日);
-        when(gappeiJoho.get地域番号()).thenReturn(地域番号);
-        when(gappeiJoho.get市町村コード()).thenReturn(市町村コード);
-        when(gappeiJoho.get旧市町村情報付与終了日()).thenReturn(旧市町村情報付与終了日);
+        when(gappeiJoho.get合併日()).thenReturn(new FlexibleDate(String.format("2014%1$02d%2$02d", param1, param2)));
+        when(gappeiJoho.get地域番号()).thenReturn(new RString(String.format("%1$02d", param1)));
+        when(gappeiJoho.get市町村コード()).thenReturn(new LasdecCode(String.format("%1$06d", param1)));
+        when(gappeiJoho.get旧市町村情報付与終了日()).thenReturn(new FlexibleDate(String.format("2014%1$02d%2$02d", param1, param2)));
+        when(gappeiJoho.get国保連データ連携開始日()).thenReturn(new FlexibleDate(String.format("2014%1$02d%2$02d", param1, param2)));
         return gappeiJoho;
     }
 
@@ -326,12 +341,9 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
     private static IGappeiShichoson createGappeiShichoson(int param1, int param2) {
         IGappeiShichoson gappeiShichoson = mock(GappeiShichosonModel.class);
-        FlexibleDate 合併日 = new FlexibleDate(String.format("2014%1$02d%2$02d", param1, param2));
-        RString 地域番号 = new RString(String.format("%1$02d", param1));
-        RString 旧市町村コード = new RString(String.format("%1$05d", param2));
-        when(gappeiShichoson.get合併日()).thenReturn(合併日);
-        when(gappeiShichoson.get地域番号()).thenReturn(地域番号);
-        when(gappeiShichoson.get旧市町村コード()).thenReturn(旧市町村コード);
+        when(gappeiShichoson.get合併日()).thenReturn(new FlexibleDate(String.format("2014%1$02d%2$02d", param1, param2)));
+        when(gappeiShichoson.get地域番号()).thenReturn(new RString(String.format("%1$02d", param1)));
+        when(gappeiShichoson.get旧市町村コード()).thenReturn(new LasdecCode(String.format("%1$06d", param2)));
         return gappeiShichoson;
     }
 
@@ -353,8 +365,7 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
     private static IKoikiKoseiShichoson createKoseiShichoson(int index) {
         IKoikiKoseiShichoson koikiKoseiShichoson = mock(KoikiKoseiShichosonModel.class);
-        RString 合併情報地域番号 = new RString(String.format("%1$02d", index));
-        when(koikiKoseiShichoson.get合併情報地域番号()).thenReturn(合併情報地域番号);
+        when(koikiKoseiShichoson.get合併情報地域番号()).thenReturn(new RString(String.format("%1$02d", index)));
         return koikiKoseiShichoson;
     }
 

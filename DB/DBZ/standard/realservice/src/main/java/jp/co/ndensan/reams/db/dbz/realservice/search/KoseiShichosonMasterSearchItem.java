@@ -17,6 +17,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaste
 public enum KoseiShichosonMasterSearchItem implements ISearchItem {
 
     市町村コード(shichosonCode),
+    証記載保険者番号(shoKisaiHokenshaNo),
     合併旧市町村表示有無(gappeiKyuShichosonHyojiUmu),
     合併情報地域番号(gappeiLinkNo);
 

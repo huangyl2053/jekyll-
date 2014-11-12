@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokensha
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
@@ -34,7 +35,7 @@ public class GappeiJohoDacTest extends DbzTestDacBase {
 
     private static final ITrueFalseCriteria 検索条件_該当0件 = Restrictions.eq(new RString("99"), DbT7055GappeiJoho.chiikiNo);
     private static final ITrueFalseCriteria 検索条件_該当1件 = Restrictions.eq(new RString("01"), DbT7055GappeiJoho.chiikiNo);
-    private static final ITrueFalseCriteria 検索条件_該当2件 = Restrictions.eq(new RString("00001"), DbT7055GappeiJoho.shichosonCode);
+    private static final ITrueFalseCriteria 検索条件_該当2件 = Restrictions.eq(new RString("000001"), DbT7055GappeiJoho.shichosonCode);
 
     @BeforeClass
     public static void setUpClass() {
@@ -95,7 +96,7 @@ public class GappeiJohoDacTest extends DbzTestDacBase {
         DbT7055GappeiJohoEntity entity = new DbT7055GappeiJohoEntity();
         entity.setGappeiYMD(new FlexibleDate(String.format("201401%1$02d", no)));
         entity.setChiikiNo(new RString(String.format("%1$02d", no)));
-        entity.setShichosonCode(new RString("00001"));
+        entity.setShichosonCode(new LasdecCode("000001"));
         entity.setGappeiShurui(new RString("1"));
         entity.setHokenshaNo(new ShoKisaiHokenshaNo(new RString("000001")));
         entity.setKyuJohoFuyoToYMD(new FlexibleDate("20140201"));

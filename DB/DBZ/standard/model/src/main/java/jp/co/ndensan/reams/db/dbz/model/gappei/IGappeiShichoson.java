@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.model.gappei;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -37,7 +38,7 @@ public interface IGappeiShichoson {
      *
      * @return 旧市町村コード
      */
-    RString get旧市町村コード();
+    LasdecCode get旧市町村コード();
 
     /**
      * 運用開始日を返します。

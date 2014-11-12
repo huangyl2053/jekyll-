@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.model.gappei;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -42,7 +43,7 @@ public class GappeiShichosonModel implements Serializable, IGappeiShichoson {
     }
 
     @Override
-    public RString get旧市町村コード() {
+    public LasdecCode get旧市町村コード() {
         return entity.getKyuShichosonCode();
     }
 

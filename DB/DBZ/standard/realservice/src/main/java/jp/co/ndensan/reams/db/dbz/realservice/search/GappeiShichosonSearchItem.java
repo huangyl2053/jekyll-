@@ -16,7 +16,10 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson.*;
  */
 public enum GappeiShichosonSearchItem implements ISearchItem {
 
+    合併日(gappeiYMD),
     地域番号(chiikiNo),
+    旧市町村コード(kyuShichosonCode),
+    旧保険者番号(kyuHokenshaNo),
     表示有無(hyojiUmu);
 
     private final IColumnDefinition columnDefinition;
