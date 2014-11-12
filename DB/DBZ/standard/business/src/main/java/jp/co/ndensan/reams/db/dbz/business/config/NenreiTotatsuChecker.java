@@ -110,7 +110,7 @@ public final class NenreiTotatsuChecker {
     /**
      * 年齢到達の要件を満たしているかどうかを判断する機能を提供するインターフェースです。
      */
-    public static interface INenreiTotatsuJudicative {
+    public interface INenreiTotatsuJudicative {
 
         /**
          * 年齢到達の基準を満たしているかの判定を行います。
