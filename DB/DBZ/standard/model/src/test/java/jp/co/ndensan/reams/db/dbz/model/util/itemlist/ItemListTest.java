@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.items;
+package jp.co.ndensan.reams.db.dbz.model.util.itemlist;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -26,12 +25,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * _ItemCollectionのテストです。
+ * ItemListのテストです。
  *
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class ItemsTest extends DbzTestBase {
+public class ItemListTest extends DbzTestBase {
 
     private static final RString VAL1;
     private static final RString VAL2;
@@ -47,7 +46,7 @@ public class ItemsTest extends DbzTestBase {
         return Arrays.asList(values);
     }
 
-    public ItemsTest() {
+    public ItemListTest() {
     }
 
     @RunWith(Enclosed.class)

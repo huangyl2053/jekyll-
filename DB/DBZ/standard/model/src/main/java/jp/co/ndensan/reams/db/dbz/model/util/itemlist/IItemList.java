@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.items;
+package jp.co.ndensan.reams.db.dbz.model.util.itemlist;
 
 import java.util.Collection;
 import java.util.Comparator;
