@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
  * @author N3327 三浦 凌
  * @param <E> 保持するオブジェクトの型
  */
-class _Items<E> implements IItems<E>, Serializable {
+final class _Items<E> implements IItems<E>, Serializable {
 
     private final ArrayList<E> elements;
 
