@@ -1,0 +1,6 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+shoriTimeStamp,UDD018YMDHMS,YMDHMS,,,,,A
+shikakuShutokuJogaiRiyu,varchar,RString,,,,,A
+shikakuShutokuJogaiYMD,UDD015YMD,FlexibleDate,,,,,A
+shikakuShutokuJogaiKaijoYMD,UDD015YMD,FlexibleDate,,,,,A

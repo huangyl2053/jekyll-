@@ -1,0 +1,7 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+codeKubun,varchar,RString,,,,,A
+naibuCode,varchar,RString,,,,,A
+naibuNo,varchar,RString,,,,,A
+gaibuCode,varchar,RString,,,,,A
+shichosonCode2,UDD023LasdecCode,LasdecCode,,,,,A
+gaibuCode2,varchar,RString,,,,,A

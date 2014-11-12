@@ -1,0 +1,7 @@
+﻿choteiNendo,UDD012YSeireki,FlexibleYear,,,,,A
+fukaNendo,UDD012YSeireki,FlexibleYear,,,,,A
+tsuchishoNo,DbUDD008TsuchishoNo,DbUDD008TsuchishoNo,,,,,A
+shoriTimestamp,timestamp,RDateTime,,,,,A
+choshuHoho,varchar,RString,,,,,A
+ki,int4,int,,,,,A
+choteiId,numeric,Decimal,,,,,A

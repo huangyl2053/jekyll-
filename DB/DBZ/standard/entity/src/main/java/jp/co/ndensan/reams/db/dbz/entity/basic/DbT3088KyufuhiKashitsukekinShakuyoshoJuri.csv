@@ -1,0 +1,14 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+kariireShinseiYMD,UDD015YMD,FlexibleDate,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+kariukeYMD,UDD015YMD,FlexibleDate,,,,,A
+kariukeninYubinNo,UDD003YubinNo,YubinNo,,,,,A
+kariukeninJusho,varchar,RString,,,,,A
+kariukeninShimeiKana,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,A
+kariukeninShimei,UDD042AtenaMeisho,AtenaMeisho,,,,,A
+kariukeninTelNo,UDD026TelNo,TelNo,,,,,A
+hoshoninShimeiKana,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,A
+hoshoninShimei,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,A
+hoshoninYubinNo,UDD003YubinNo,YubinNo,,,,,A
+hoshoninJusho,varchar,RString,,,,,A
+hoshoninTelNo,UDD026TelNo,TelNo,,,,,A

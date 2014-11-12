@@ -1,13 +1,13 @@
 ﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
-hihokenshaNo,varchar,KaigoHihokenshaNo,,,,,A
+hihokenshaNo,varchar,RString,,,,,A
 shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
-shoKisaiHokenshaNo,varchar,ShoKisaiHokenshaNo,,,,,A
+shoKisaiHokenshaNo,varchar,RString,,,,,A
 shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
 shikakuShutokuJiyuCode,varchar,RString,,,,,A
 shikakuShutokuYMD,UDD015YMD,FlexibleDate,,,,,A
 shikakuShutokuTodokedeYMD,UDD015YMD,FlexibleDate,,,,,A
 ichigoHihokenshaNenreiTotatsuYMD,UDD015YMD,FlexibleDate,,,,,A
-hihokennshaKubunCode,varchar,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.認定審査員区分,,,A
+hihokennshaKubunCode,varchar,RString,,,,,A
 shikakuSoshitsuJiyuCode,varchar,RString,,,,,A
 shikakuSoshitsuYMD,UDD015YMD,FlexibleDate,,,,,A
 shikakuSoshitsuTodokedeYMD,UDD015YMD,FlexibleDate,,,,,A
@@ -22,7 +22,7 @@ jushochitokureiKaijoJiyuCode,varchar,RString,,,,,A
 jushochitokureiKaijoYMD,UDD015YMD,FlexibleDate,,,,,A
 jushochitokureiKaijoTodokedeYMD,UDD015YMD,FlexibleDate,,,,,A
 koikinaiJushochiTokureiFlag,varchar,RString,,,,,A
-koikinaiTokureiSochimotoHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,A
+koikinaiTokureiSochimotoShichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
 kyuShichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
 saikofuKubun,varchar,RString,,,,,A
 saikofuJiyuCode,varchar,RString,,,,,A
