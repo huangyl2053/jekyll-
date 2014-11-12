@@ -9,12 +9,10 @@
     <artifactId>DbdDefinition</artifactId>
     <packaging>jar</packaging>
     <name>DbdDefinition</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>

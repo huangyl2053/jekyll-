@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.util;
+package jp.co.ndensan.reams.db.dbz.definition.util;
 
 import java.util.Comparator;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NaturalOrderComparator;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NullComparator;
+import jp.co.ndensan.reams.db.dbz.definition.util.Comparators.NullComparator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
@@ -29,7 +28,7 @@ public class ComparatorsTest {
 
     public static class NaturalOrderComparatorTest extends DbzTestBase {
 
-        private NaturalOrderComparator sut;
+        private Comparators sut;
         private Comparator<ComparableValue> created;
         private ComparableValue value1;
         private ComparableValue value2;
@@ -42,37 +41,37 @@ public class ComparatorsTest {
 
         @Test
         public void ASCにより生成したインスタンスのcompareは_第1引数のcompareToに_第2引数を渡した結果と_同じ値を返す() {
-            created = sut.ASC.getInstance();
+            created = sut.naturalOrder();
             assertThat(created.compare(value1, value2), is(value1.compareTo(value2)));
         }
 
         @Test(expected = NullPointerException.class)
         public void ASCにより生成したインスタンスのcompareは_第1引数にnullを受け取った時_NullPointerExceptionをスローする() {
-            created = sut.ASC.getInstance();
+            created = sut.naturalOrder();
             created.compare(null, value2);
         }
 
         @Test(expected = NullPointerException.class)
         public void ASCにより生成したインスタンスのcompareは_第2引数にnullを受け取った時_NullPointerExceptionをスローする() {
-            created = sut.ASC.getInstance();
+            created = sut.naturalOrder();
             created.compare(value1, null);
         }
 
         @Test
         public void DESCにより生成したインスタンスのcompareは_第2引数のcompareToに_第1引数を渡した結果と_同じ値を返す() {
-            created = sut.DESC.getInstance();
+            created = sut.reverseOrder();
             assertThat(created.compare(value1, value2), is(value2.compareTo(value1)));
         }
 
         @Test(expected = NullPointerException.class)
         public void DESCにより生成したインスタンスのcompareは_第1引数にnullを受け取った時_NullPointerExceptionをスローする() {
-            created = sut.DESC.getInstance();
+            created = sut.reverseOrder();
             created.compare(null, value2);
         }
 
         @Test(expected = NullPointerException.class)
         public void DESCにより生成したインスタンスのcompareは_第2引数にnullを受け取った時_NullPointerExceptionをスローする() {
-            created = sut.DESC.getInstance();
+            created = sut.reverseOrder();
             created.compare(value1, null);
         }
 
@@ -112,7 +111,7 @@ public class ComparatorsTest {
 
             @Before
             public void setUp() {
-                base = NaturalOrderComparator.ASC.getInstance();
+                base = Comparators.naturalOrder();
                 created = sut.NullsFirst.of(base);
             }
 
@@ -145,7 +144,7 @@ public class ComparatorsTest {
 
             @Before
             public void setUp() {
-                base = NaturalOrderComparator.ASC.getInstance();
+                base = Comparators.naturalOrder();
                 created = sut.NullsLast.of(base);
             }
 

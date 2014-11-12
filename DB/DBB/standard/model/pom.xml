@@ -9,17 +9,23 @@
     <artifactId>DbbModel</artifactId>
     <packaging>jar</packaging>
     <name>DbbModel</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzModel</artifactId>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbEntity</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -27,10 +33,6 @@
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzModel</artifactId>
         </dependency>
     </dependencies>
 </project>
