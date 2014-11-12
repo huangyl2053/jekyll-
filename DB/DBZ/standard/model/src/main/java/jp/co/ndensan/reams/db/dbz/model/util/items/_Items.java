@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
  */
 class _Items<E> implements IItems<E>, Serializable {
 
-    private final Collection<E> elements;
+    private final ArrayList<E> elements;
 
     /**
      * Collectionからインスタンスを生成します。
@@ -35,7 +35,7 @@ class _Items<E> implements IItems<E>, Serializable {
      */
     protected _Items(Collection<E> elements) {
         Objects.requireNonNull(elements);
-        this.elements = elements;
+        this.elements = new ArrayList<>(elements);
     }
 
     @Override
