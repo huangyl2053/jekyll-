@@ -20,16 +20,35 @@ public final class ValueObjectInfo {
      * valueObjectの名前を指定し、{@link IValueObjectInfoBuilder Builder}を生成します。
      *
      * @param name valueObjectの名前
-     * @return
+     * @return {@link IValueObjectInfoBuilder Builder}
      * @throws NullPointerException 引数が{@code null}のとき
      */
     public static IValueObjectInfoBuilder displayName(String name) throws NullPointerException {
         return new _Builder(name);
     }
 
+    /**
+     * valueObjectの名前を指定し、{@link IValueObjectInfoBuilder Builder}を生成します。
+     *
+     * @param name valueObjectの名前
+     * @return {@link IValueObjectInfoBuilder Builder}
+     * @throws NullPointerException 引数が{@code null}のとき
+     */
     public static IValueObjectInfoBuilder displayName(RString name) throws NullPointerException {
         Objects.requireNonNull(name);
         return new _Builder(name.toString());
+    }
+
+    /**
+     * valueObjectの名前と単位を指定して、{@link IValueObjectInfoBuilder Builder}を生成します。
+     *
+     * @param name valueObjectの名前
+     * @param unit valueObjectの単位
+     * @return {@link IValueObjectInfoBuilder Builder}
+     * @throws NullPointerException 引数が{@code null}を含むとき
+     */
+    public static IValueObjectInfo of(String name, Unit unit) throws NullPointerException {
+        return new _Builder(name).unit(unit).build();
     }
 
     /**

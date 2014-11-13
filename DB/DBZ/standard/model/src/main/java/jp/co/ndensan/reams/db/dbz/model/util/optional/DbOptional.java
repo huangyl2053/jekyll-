@@ -9,7 +9,6 @@ import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
-import jp.co.ndensan.reams.uz.uza.workflow.flow.entity.UzT1603FlowWaitMessage;
 
 /**
  * {@link IOptional IOptional}を生成します。

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring;
 
 import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
 import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectValidationSpec;
+import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.Unit;
 import static jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.Unit.桁;
 import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectCheckList;
 import static jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectCheckList.checks;
@@ -41,7 +42,7 @@ public enum ValidationSpec implements IValueObjectValidationSpec<RString> {
     /**
      * 被保番号, 半角数字のみ可
      */
-    被保番号_半角数(displayName("被保番号").unit(桁), checks(notNull(), CharType.半角数のみ, Length.equal(10))),
+    被保番号_半角数("被保番号", Unit.桁, checks(notNull(), CharType.半角数のみ, Length.equal(10))),
     /**
      * 被保番号, 半角英数も可
      */
@@ -52,6 +53,11 @@ public enum ValidationSpec implements IValueObjectValidationSpec<RString> {
 
     private ValidationSpec(ValueObjectInfo.IValueObjectInfoBuilder builder, ValueObjectCheckList<RString> checkItems) {
         this.objInfo = builder.build();
+        this.checkItems = checkItems;
+    }
+
+    private ValidationSpec(String name, Unit unit, ValueObjectCheckList<RString> checkItems) {
+        this.objInfo = ValueObjectInfo.of(name, unit);
         this.checkItems = checkItems;
     }
 

@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-final class Length implements IValueObjectCheckable<RString> {
+public final class Length implements IValueObjectCheckable<RString> {
 
     private static final RString PARAM_NAME;
     private static final RString MUST_BE_GREATER_OR_EQUAL_0;
@@ -66,7 +66,7 @@ final class Length implements IValueObjectCheckable<RString> {
      * @return 文字列の長さが、引数の数以上かどうかをチェックする Length
      * @throws IllegalArgumentException 引数が0より小さい時
      */
-    static IValueObjectCheckable<RString> greaterOrEqual(int length) throws IllegalArgumentException {
+    public static IValueObjectCheckable<RString> greaterOrEqual(int length) throws IllegalArgumentException {
         if (length < 0) {
             throw new IllegalArgumentException(
                     UrErrorMessages.項目に対する制約.getMessage()
@@ -84,7 +84,7 @@ final class Length implements IValueObjectCheckable<RString> {
      * @return 文字列の長さが、引数と一致するかどうかをチェックする Length
      * @throws IllegalArgumentException 引数が0より小さい時
      */
-    static IValueObjectCheckable<RString> equal(int length) throws IllegalArgumentException {
+    public static IValueObjectCheckable<RString> equal(int length) throws IllegalArgumentException {
         if (length < 0) {
             throw new IllegalArgumentException(
                     UrErrorMessages.項目に対する制約.getMessage()
@@ -102,7 +102,7 @@ final class Length implements IValueObjectCheckable<RString> {
      * @return 文字列の長さが、引数の数以下かどうかをチェックする Length
      * @throws IllegalArgumentException 引数が0より小さい時
      */
-    static IValueObjectCheckable<RString> lessOrEqual(int length) throws IllegalArgumentException {
+    public static IValueObjectCheckable<RString> lessOrEqual(int length) throws IllegalArgumentException {
         if (length < 0) {
             throw new IllegalArgumentException(
                     UrErrorMessages.項目に対する制約.getMessage()
@@ -120,7 +120,7 @@ final class Length implements IValueObjectCheckable<RString> {
      * @return 文字列の長さが、引数の数未満かどうかをチェックする Length
      * @throws IllegalArgumentException 引数が0以下の時
      */
-    static IValueObjectCheckable<RString> lessThan(int length) throws IllegalArgumentException {
+    public static IValueObjectCheckable<RString> lessThan(int length) throws IllegalArgumentException {
         if (length <= 0) {
             throw new IllegalArgumentException(
                     UrErrorMessages.項目に対する制約.getMessage()
