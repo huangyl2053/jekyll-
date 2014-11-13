@@ -15,10 +15,6 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbzTestHelper</artifactId>
-        </dependency>
-        <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdRealService</artifactId>
         </dependency>
@@ -57,6 +53,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzModel</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzTestHelper</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
