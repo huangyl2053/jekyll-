@@ -32,6 +32,7 @@ public class ShikakuShosai {
         //  1-1-1, ViewStateに被保険者台帳の情報が存在する場合、ViewStateから取得する。
         //  1-1-2, ViewStateに被保険者台帳の情報が存在しない場合、HihokenshaDaichoManagerの
         //         find被保険者台帳List(市町村コード, 被保険者番号)を利用して、被保険者台帳情報を取得する。
+        //         検索の際にキーとして指定する被保険者番号は、前画面で資格得喪履歴の詳細ボタンを押下して遷移した場合、ViewStateが保持している。
         //      1-1-2-1, HihokenshaDaichoManagerを利用して被保険者台帳情報を取得した場合、その情報をViewStateに保持する。
         //1-2, HihokenshaDaichoList.getOneSeasonListを利用して、被保険者台帳情報から1期間分の資格得喪履歴Listを取得する。
         //  1-2-1, 引数となる資格取得日は、資格取得画面からの遷移前にViewStateに保存した、単品の被保険者台帳Modelから取得する。

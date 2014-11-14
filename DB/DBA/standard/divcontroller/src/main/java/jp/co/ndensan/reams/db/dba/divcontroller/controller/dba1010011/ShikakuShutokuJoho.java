@@ -117,8 +117,7 @@ public class ShikakuShutokuJoho {
     }
 
     public ResponseData<ShikakuShutokuJohoDiv> onClick_btnShikakuShosai(ShikakuShutokuJohoDiv shikakuShutokuDiv, KihonJohoDiv kihonDiv) {
-        //1, 選択行の情報を取得する。
-        //2, 選択行の情報をModel化し、ViewStateに保存する。
+        //1, 選択行の情報を共有子Divから取得し、ViewStateに保持する。
         return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
     }
 
