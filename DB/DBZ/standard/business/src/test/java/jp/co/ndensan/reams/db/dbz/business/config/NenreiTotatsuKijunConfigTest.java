@@ -37,13 +37,13 @@ public class NenreiTotatsuKijunConfigTest {
         }
 
         @Test
-        public void 年齢到達基準_65歳を指定したとき_65が返る() {
+        public void 年齢到達基準_第１号被保険者到達基準年齢を指定したとき_65が返る() {
             int result = sut.get(ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢);
             assertThat(result, is(65));
         }
 
         @Test
-        public void 年齢到達基準_40歳を指定したとき_40が返る() {
+        public void 年齢到達基準_第２号被保険者到達基準年齢を指定したとき_40が返る() {
             int result = sut.get(ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第２号被保険者到達基準年齢);
             assertThat(result, is(40));
         }

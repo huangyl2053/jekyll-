@@ -62,9 +62,9 @@ public class NenreiTotatsuValidetor implements IValidatable {
         //1, NenreiTotatsuKijunConfigとConfigKeysNenreiTotatsuKijunを利用して、
         //   業務コンフィグから年齢到達の基準を取得する。
         //      取得事由 == 年齢到達 の場合
-        //          ConfigKeysNenreiTotatsuKijun.年齢到達基準_65歳を使用して取得する。
+        //          ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢を使用して取得する。
         //      それ以外の場合
-        //          ConfigKeysNenreiTotatsuKijun.年齢到達基準_40歳を指定して取得する。
+        //          ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第２号被保険者到達基準年齢を指定して取得する。
         //
         //2, 取得した年齢到達の基準を元に判定を行う。
         //   NenreiTotatsuCheckerを使用して判定を行い、条件を満たす場合メッセージを返す。
