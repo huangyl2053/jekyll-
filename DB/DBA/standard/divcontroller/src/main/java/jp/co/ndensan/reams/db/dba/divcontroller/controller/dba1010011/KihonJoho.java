@@ -23,7 +23,7 @@ public class KihonJoho {
      * @param div {@link KihonJohoDiv 基本情報Div}
      * @return 基本情報Divを持つResposeData
      */
-    public ResponseData initialize(KihonJohoDiv div) {
+    public ResponseData<KihonJohoDiv> initialize(KihonJohoDiv div) {
         //TODO #52997
         //1, 宛名情報の設定を行います。
         //  AtenaShokaiSimpleDivが持つload(IAtenaSearchKey)を利用して、初期設定を行ってください。

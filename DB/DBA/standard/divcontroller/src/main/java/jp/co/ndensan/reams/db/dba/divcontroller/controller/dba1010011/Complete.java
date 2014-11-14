@@ -25,7 +25,7 @@ public class Complete {
      * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
      * @return 完了メッセージDivを持つResposeData
      */
-    public ResponseData initialize(CompleteDiv completeDiv, KihonJohoDiv kihonDiv) {
+    public ResponseData<CompleteDiv> initialize(CompleteDiv completeDiv, KihonJohoDiv kihonDiv) {
         //TODO #52997
         //1, メッセージを設定します。
         //  messageMain：URZI00001（保存は正常に終了しました）
