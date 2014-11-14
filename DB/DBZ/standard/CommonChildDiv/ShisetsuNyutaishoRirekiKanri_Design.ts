@@ -1,6 +1,7 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="./ShisetsuJoho.ts" />
 
 module DBZ {
     /**
@@ -290,6 +291,243 @@ module DBZ {
      "filterList": [],
      "activeRowId": -1,
      "gridAction": []
+    },
+    {
+     "fieldName": "ShisetsuNyutaishoInput",
+     "items": [
+      {
+       "fieldName": "txtNyushoDate",
+       "items": [],
+       "controlType": "TextBoxFlexibleDate",
+       "width": "80px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "txtNyushoDate_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "text": "",
+       "required": false,
+       "placeHolder": "",
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "labelLText": "入所日",
+       "labelRText": "",
+       "labelLWidth": "63px",
+       "labelRWidth": "0px",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "ymdKubun": 2,
+       "displayFormat": 0,
+       "value": "",
+       "decorationClass": "",
+       "textKind": 0,
+       "permitCharactor": "./_-"
+      },
+      {
+       "fieldName": "txtTaishoDate",
+       "items": [],
+       "controlType": "TextBoxFlexibleDate",
+       "width": "80px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "txtTaishoDate_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "text": "",
+       "required": false,
+       "placeHolder": "",
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "labelLText": "退所日",
+       "labelRText": "",
+       "labelLWidth": "60px",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "ymdKubun": 2,
+       "displayFormat": 0,
+       "value": "",
+       "decorationClass": "",
+       "textKind": 0,
+       "permitCharactor": "./_-"
+      },
+      {
+       "fieldName": "ccdShisetsuJoho",
+       "items": [],
+       "controlType": "CommonChildDiv",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "0px",
+       "marginRight": "0px",
+       "selectControlID": "ccdShisetsuJoho",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "relation": [],
+       "packageName": "",
+       "businessId": "DBZ",
+       "controlName": "ShisetsuJoho",
+       "marginTop": "0px",
+       "marginBottom": "0px",
+       "originalProperty": [],
+       "dataPassingForDialog": [],
+       "dialogOkEventNameForDialog": "",
+       "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
+       "firstFocusFieldName": "",
+       "lastFocusFieldName": "",
+       "modes": [],
+       "publicEvents": [
+        {
+         "eventName": "onChange_radShisetsuShurui"
+        }
+       ],
+       "publicEventsAlias": []
+      },
+      {
+       "fieldName": "btnShisetsuNyutaishoKakutei",
+       "items": [],
+       "controlType": "Button",
+       "width": "110px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnShisetsuNyutaishoKakutei",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "onClick": "onClick_btnShisetsuNyutaishoKakutei",
+       "text": "確定する",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0,
+       "heightTextBoxMatches": true
+      },
+      {
+       "fieldName": "btnShisetsuNyutaishoTorikeshi",
+       "items": [],
+       "controlType": "Button",
+       "width": "110px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "0em",
+       "selectControlID": "btnShisetsuNyutaishoTorikeshi",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "onClick": "onClick_btnShisetsuNyutaishoTorikeshi",
+       "text": "取消する",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0,
+       "heightTextBoxMatches": true
+      }
+     ],
+     "controlType": "Panel",
+     "width": "760px",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "ShisetsuNyutaishoInput",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "施設入退所",
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "isOpen": true,
+     "canOpenAndClose": false,
+     "postParameterPanelNames": [],
+     "requestSettings": [
+      {
+       "eventName": "onLoad",
+       "requestUrl": ""
+      }
+     ],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "eraseBorder": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "panelDisplay": 1,
+     "isGroupBox": false,
+     "readOnly": true,
+     "height": "Auto",
+     "canPost": true
     }
    ],
    "controlType": "Panel",
@@ -428,6 +666,14 @@ module DBZ {
                 return "onSelectByDeleteButton_dgShisetsuNyutaishoRireki";
             }
 
+            public static onClick_btnShisetsuNyutaishoKakutei(): string {
+                return "onClick_btnShisetsuNyutaishoKakutei";
+            }
+
+            public static onClick_btnShisetsuNyutaishoTorikeshi(): string {
+                return "onClick_btnShisetsuNyutaishoTorikeshi";
+            }
+
         }
 
         export class Controls {
@@ -450,7 +696,7 @@ module DBZ {
             }
 
             public ShisetsuNyutaishoRirekiKanri(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("ShisetsuNyutaishoRirekiKanri"));
+                return new UZA.Panel(this.convFiledNameSelf());
             }
 
             public btnAddShisetsuNyutaisho(): UZA.Button {
@@ -459,6 +705,30 @@ module DBZ {
 
             public dgShisetsuNyutaishoRireki(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgShisetsuNyutaishoRireki"));
+            }
+
+            public ShisetsuNyutaishoInput(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShisetsuNyutaishoInput"));
+            }
+
+            public txtNyushoDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNyushoDate"));
+            }
+
+            public txtTaishoDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTaishoDate"));
+            }
+
+            public ccdShisetsuJoho(): DBZ.ShisetsuJoho.ModeController {
+                return new DBZ.ShisetsuJoho.ModeController("ccdShisetsuJoho");
+            }
+
+            public btnShisetsuNyutaishoKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShisetsuNyutaishoKakutei"));
+            }
+
+            public btnShisetsuNyutaishoTorikeshi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShisetsuNyutaishoTorikeshi"));
             }
 
         }

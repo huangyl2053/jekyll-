@@ -38,7 +38,7 @@ module DBZ {
    "fieldName": "ShikakuTokusoRireki",
    "items": [
     {
-     "fieldName": "btnAdd",
+     "fieldName": "btnAddShikakuShutoku",
      "items": [],
      "controlType": "Button",
      "width": "S",
@@ -54,12 +54,12 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "btnAdd",
+     "selectControlID": "btnAddShikakuShutoku",
      "helpMessageID": "",
      "jpControlName": "",
      "onBeforeClick": "",
      "onAfterClick": "",
-     "onClick": "onClick_btnAdd",
+     "onClick": "onClick_btnAddShikakuShutoku",
      "text": "追加する",
      "appearance": 0,
      "imageFileUrl": "",
@@ -472,7 +472,7 @@ module DBZ {
    "selectControlID": "ShikakuTokusoRireki",
    "helpMessageID": "",
    "jpControlName": "",
-   "onLoad": "onLoad_ShikakuShutokuTaishoshaJoho",
+   "onLoad": "",
    "title": "",
    "marginTop": "Default",
    "marginBottom": "Default",
@@ -550,6 +550,9 @@ module DBZ {
  "modes": [],
  "publicEvents": [
   {
+   "eventName": "onClick_btnAddShikakuShutoku"
+  },
+  {
    "eventName": "onSelect_dgShikakuShutokuRireki"
   },
   {
@@ -563,9 +566,6 @@ module DBZ {
   },
   {
    "eventName": "onClickShosaiButton_dgShikakuShutokuRireki"
-  },
-  {
-   "eventName": "onClick_btnAdd"
   }
  ],
  "publicEventsAlias": []
@@ -576,12 +576,8 @@ module DBZ {
 
         export class Events {
 
-            public static onLoad_ShikakuShutokuTaishoshaJoho(): string {
-                return "onLoad_ShikakuShutokuTaishoshaJoho";
-            }
-
-            public static onClick_btnAdd(): string {
-                return "onClick_btnAdd";
+            public static onClick_btnAddShikakuShutoku(): string {
+                return "onClick_btnAddShikakuShutoku";
             }
 
             public static onSelect_dgShikakuShutokuRireki(): string {
@@ -622,11 +618,11 @@ module DBZ {
             }
 
             public ShikakuTokusoRireki(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("ShikakuTokusoRireki"));
+                return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public btnAdd(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnAdd"));
+            public btnAddShikakuShutoku(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnAddShikakuShutoku"));
             }
 
             public dgShikakuShutokuRireki(): UZA.DataGrid {

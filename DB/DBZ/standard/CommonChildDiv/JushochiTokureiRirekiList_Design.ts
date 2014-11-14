@@ -57,10 +57,10 @@ module DBZ {
      "selectControlID": "btnAdd",
      "helpMessageID": "",
      "jpControlName": "",
+     "text": "追加する",
      "onBeforeClick": "",
      "onAfterClick": "",
      "onClick": "onClick_btnAdd",
-     "text": "追加する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -90,6 +90,7 @@ module DBZ {
      "jpControlName": "",
      "readOnly": false,
      "height": "217px",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -364,12 +365,882 @@ module DBZ {
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "tekiyoDate",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1,
      "gridAction": []
+    },
+    {
+     "fieldName": "JutokuInput",
+     "items": [
+      {
+       "fieldName": "JutokuTekiyoInput",
+       "items": [
+        {
+         "fieldName": "txtTekiyoDate",
+         "items": [],
+         "controlType": "TextBoxFlexibleDate",
+         "width": "80px",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": true,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "txtTekiyoDate_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "required": false,
+         "placeHolder": "",
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "onKeyPress": "",
+         "text": "",
+         "value": "",
+         "labelLText": "適用日",
+         "labelRText": "",
+         "labelLWidth": "50px",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
+         "decorationClass": "",
+         "ymdKubun": 2,
+         "displayFormat": 0
+        },
+        {
+         "fieldName": "txtTekiyoTodokedeDate",
+         "items": [],
+         "controlType": "TextBoxFlexibleDate",
+         "width": "80px",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "txtTekiyoTodokedeDate_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "required": false,
+         "placeHolder": "",
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "onKeyPress": "",
+         "text": "",
+         "value": "",
+         "labelLText": "届出日",
+         "labelRText": "",
+         "labelLWidth": "50px",
+         "labelRWidth": "",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
+         "decorationClass": "",
+         "ymdKubun": 2,
+         "displayFormat": 0
+        },
+        {
+         "fieldName": "ddlTekiyoJiyu",
+         "items": [],
+         "controlType": "DropDownList",
+         "width": "140px",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "ddlTekiyoJiyu_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "labelLText": "適用事由",
+         "labelRText": "",
+         "labelLWidth": "65px",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
+         "selectedItem": "",
+         "dataSource": [
+          {
+           "key": "key0",
+           "value": "value0"
+          },
+          {
+           "key": "key1",
+           "value": "value1"
+          }
+         ],
+         "isBlankLine": true
+        },
+        {
+         "fieldName": "tekiyojiHokenshaJoho",
+         "items": [
+          {
+           "fieldName": "ddlTekiyojiShozaiHokensha",
+           "items": [],
+           "controlType": "DropDownList",
+           "width": "150px",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "ddlTekiyojiShozaiHokensha_core",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "readOnly": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "labelLText": "所在保険者",
+           "labelRText": "",
+           "labelLWidth": "80px",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "selectedItem": "",
+           "dataSource": [
+            {
+             "key": "key0",
+             "value": ""
+            },
+            {
+             "key": "key1",
+             "value": ""
+            }
+           ],
+           "isBlankLine": true
+          },
+          {
+           "fieldName": "ddlTekiyojiSochimotoHokensha",
+           "items": [],
+           "controlType": "DropDownList",
+           "width": "150px",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "ddlTekiyojiSochimotoHokensha_core",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "readOnly": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "labelLText": "措置元保険者",
+           "labelRText": "",
+           "labelLWidth": "100px",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "selectedItem": "",
+           "dataSource": [
+            {
+             "key": "key0",
+             "value": ""
+            },
+            {
+             "key": "key1",
+             "value": ""
+            }
+           ],
+           "isBlankLine": true
+          },
+          {
+           "fieldName": "ddlTekiyojiKyuHokensha",
+           "items": [],
+           "controlType": "DropDownList",
+           "width": "150px",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "ddlTekiyojiKyuHokensha_core",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "readOnly": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "labelLText": "旧保険者",
+           "labelRText": "",
+           "labelLWidth": "70px",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "selectedItem": "",
+           "dataSource": [
+            {
+             "key": "key0",
+             "value": ""
+            },
+            {
+             "key": "key1",
+             "value": ""
+            }
+           ],
+           "isBlankLine": true
+          },
+          {
+           "fieldName": "ddlTekiyojiJuminJoho",
+           "items": [],
+           "controlType": "DropDownList",
+           "width": "600px",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": true,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "ddlTekiyojiJuminJoho_core",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "readOnly": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "labelLText": "住民情報",
+           "labelRText": "",
+           "labelLWidth": "80px",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "selectedItem": "",
+           "dataSource": [
+            {
+             "key": "key0",
+             "value": ""
+            },
+            {
+             "key": "key1",
+             "value": ""
+            }
+           ],
+           "isBlankLine": true
+          }
+         ],
+         "controlType": "Panel",
+         "width": "G2",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": true,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "tekiyojiHokenshaJoho",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "onLoad": "",
+         "title": "保険者・住民情報",
+         "marginTop": "Default",
+         "marginBottom": "Default",
+         "isOpen": true,
+         "canOpenAndClose": false,
+         "postParameterPanelNames": [],
+         "requestSettings": [],
+         "hiddenInput": [],
+         "onOpen": "",
+         "onClose": "",
+         "session": {},
+         "eraseBorder": false,
+         "backgroundColor": 0,
+         "widthAuto": true,
+         "panelDisplay": 1,
+         "isGroupBox": false,
+         "readOnly": false,
+         "height": "Auto",
+         "focusPositionID": "labelRTextProperty",
+         "canPost": false
+        }
+       ],
+       "controlType": "Panel",
+       "width": "800px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "JutokuTekiyoInput",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "onLoad": "",
+       "title": "適用情報入力",
+       "marginTop": "Default",
+       "marginBottom": "Default",
+       "isOpen": true,
+       "canOpenAndClose": false,
+       "postParameterPanelNames": [],
+       "requestSettings": [],
+       "hiddenInput": [],
+       "onOpen": "",
+       "onClose": "",
+       "session": {},
+       "eraseBorder": false,
+       "backgroundColor": 0,
+       "widthAuto": false,
+       "panelDisplay": 1,
+       "isGroupBox": false,
+       "readOnly": false,
+       "height": "Auto",
+       "focusPositionID": "restoreLayoutButton",
+       "canPost": false
+      },
+      {
+       "fieldName": "JutokuKaijoInput",
+       "items": [
+        {
+         "fieldName": "txtKaijoDate",
+         "items": [],
+         "controlType": "TextBoxFlexibleDate",
+         "width": "80px",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": true,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "txtKaijoDate_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "required": false,
+         "placeHolder": "",
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "onKeyPress": "",
+         "text": "",
+         "value": "",
+         "labelLText": "解除日",
+         "labelRText": "",
+         "labelLWidth": "50px",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
+         "decorationClass": "",
+         "ymdKubun": 2,
+         "displayFormat": 0
+        },
+        {
+         "fieldName": "txtKaijoTodokedeDate",
+         "items": [],
+         "controlType": "TextBoxFlexibleDate",
+         "width": "80px",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "txtKaijoTodokedeDate_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "required": false,
+         "placeHolder": "",
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "onKeyPress": "",
+         "text": "",
+         "value": "",
+         "labelLText": "届出日",
+         "labelRText": "",
+         "labelLWidth": "50px",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
+         "decorationClass": "",
+         "ymdKubun": 2,
+         "displayFormat": 0
+        },
+        {
+         "fieldName": "ddlKaijoJiyu",
+         "items": [],
+         "controlType": "DropDownList",
+         "width": "140px",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "ddlKaijoJiyu_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "labelLText": "解除事由",
+         "labelRText": "",
+         "labelLWidth": "65px",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
+         "selectedItem": "",
+         "dataSource": [
+          {
+           "key": "key0",
+           "value": ""
+          },
+          {
+           "key": "key1",
+           "value": ""
+          }
+         ],
+         "isBlankLine": true
+        },
+        {
+         "fieldName": "kaijojiHokenshaJoho",
+         "items": [
+          {
+           "fieldName": "ddlKaijojiShozaiHokensha",
+           "items": [],
+           "controlType": "DropDownList",
+           "width": "150px",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "ddlKaijojiShozaiHokensha_core",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "readOnly": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "labelLText": "所在保険者",
+           "labelRText": "",
+           "labelLWidth": "80px",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "selectedItem": "",
+           "dataSource": [
+            {
+             "key": "key0",
+             "value": ""
+            },
+            {
+             "key": "key1",
+             "value": ""
+            }
+           ],
+           "isBlankLine": true
+          },
+          {
+           "fieldName": "ddlKaijojiSochimotoHokensha",
+           "items": [],
+           "controlType": "DropDownList",
+           "width": "150px",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "ddlKaijojiSochimotoHokensha_core",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "readOnly": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "labelLText": "措置元保険者",
+           "labelRText": "",
+           "labelLWidth": "100px",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "selectedItem": "",
+           "dataSource": [
+            {
+             "key": "key0",
+             "value": "value0"
+            },
+            {
+             "key": "key1",
+             "value": "value1"
+            }
+           ],
+           "isBlankLine": true
+          },
+          {
+           "fieldName": "ddlKaijojiKyuHokensha",
+           "items": [],
+           "controlType": "DropDownList",
+           "width": "150px",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "ddlKaijojiKyuHokensha_core",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "readOnly": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "labelLText": "旧保険者",
+           "labelRText": "",
+           "labelLWidth": "70px",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "selectedItem": "",
+           "dataSource": [
+            {
+             "key": "key0",
+             "value": ""
+            },
+            {
+             "key": "key1",
+             "value": ""
+            }
+           ],
+           "isBlankLine": true
+          },
+          {
+           "fieldName": "ddlKaijojiJuminJono",
+           "items": [],
+           "controlType": "DropDownList",
+           "width": "600px",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": true,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "ddlKaijojiJuminJono_core",
+           "helpMessageID": "",
+           "jpControlName": "",
+           "readOnly": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "labelLText": "住民情報",
+           "labelRText": "",
+           "labelLWidth": "80px",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "selectedItem": "",
+           "dataSource": [
+            {
+             "key": "key0",
+             "value": "value0"
+            },
+            {
+             "key": "key1",
+             "value": "value1"
+            }
+           ],
+           "isBlankLine": true
+          }
+         ],
+         "controlType": "Panel",
+         "width": "G2",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": true,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "kaijojiHokenshaJoho",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "onLoad": "",
+         "title": "保険者・住民情報",
+         "marginTop": "Default",
+         "marginBottom": "Default",
+         "isOpen": true,
+         "canOpenAndClose": false,
+         "postParameterPanelNames": [],
+         "requestSettings": [],
+         "hiddenInput": [],
+         "onOpen": "",
+         "onClose": "",
+         "session": {},
+         "eraseBorder": false,
+         "backgroundColor": 0,
+         "widthAuto": true,
+         "panelDisplay": 1,
+         "isGroupBox": false,
+         "readOnly": true,
+         "height": "Auto",
+         "focusPositionID": "labelRTextProperty",
+         "canPost": false
+        }
+       ],
+       "controlType": "Panel",
+       "width": "800px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "JutokuKaijoInput",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "onLoad": "",
+       "title": "解除情報入力",
+       "marginTop": "Default",
+       "marginBottom": "Default",
+       "isOpen": true,
+       "canOpenAndClose": false,
+       "postParameterPanelNames": [],
+       "requestSettings": [],
+       "hiddenInput": [],
+       "onOpen": "",
+       "onClose": "",
+       "session": {},
+       "eraseBorder": true,
+       "backgroundColor": 0,
+       "widthAuto": false,
+       "panelDisplay": 1,
+       "isGroupBox": false,
+       "readOnly": false,
+       "height": "Auto",
+       "focusPositionID": "restoreLayoutButton",
+       "canPost": false
+      },
+      {
+       "fieldName": "btnJutokuKakutei",
+       "items": [],
+       "controlType": "Button",
+       "width": "110px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnJutokuKakutei",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "確定する",
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "onClick": "onClick_btnJutokuKakutei",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0,
+       "heightTextBoxMatches": true
+      },
+      {
+       "fieldName": "btnJutokuTorikeshi",
+       "items": [],
+       "controlType": "Button",
+       "width": "110px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnJutokuTorikeshi",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "取消する",
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "onClick": "onClick_btnJutokuTorikeshi",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0,
+       "heightTextBoxMatches": true
+      }
+     ],
+     "controlType": "Panel",
+     "width": "820px",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0em",
+     "marginRight": "XS",
+     "selectControlID": "JutokuInput",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "",
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "isOpen": true,
+     "canOpenAndClose": false,
+     "postParameterPanelNames": [],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "eraseBorder": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": true,
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": false
     }
    ],
    "controlType": "Panel",
@@ -488,6 +1359,14 @@ module DBZ {
                 return "onSelectByDeleteButton_dgJutoku";
             }
 
+            public static onClick_btnJutokuKakutei(): string {
+                return "onClick_btnJutokuKakutei";
+            }
+
+            public static onClick_btnJutokuTorikeshi(): string {
+                return "onClick_btnJutokuTorikeshi";
+            }
+
         }
 
         export class Controls {
@@ -510,7 +1389,7 @@ module DBZ {
             }
 
             public JushochiTokureiRirekiList(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JushochiTokureiRirekiList"));
+                return new UZA.Panel(this.convFiledNameSelf());
             }
 
             public btnAdd(): UZA.Button {
@@ -519,6 +1398,90 @@ module DBZ {
 
             public dgJutoku(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgJutoku"));
+            }
+
+            public JutokuInput(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("JutokuInput"));
+            }
+
+            public JutokuTekiyoInput(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput"));
+            }
+
+            public txtTekiyoDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoDate"));
+            }
+
+            public txtTekiyoTodokedeDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoTodokedeDate"));
+            }
+
+            public ddlTekiyoJiyu(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyu"));
+            }
+
+            public tekiyojiHokenshaJoho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput_tekiyojiHokenshaJoho"));
+            }
+
+            public ddlTekiyojiShozaiHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiShozaiHokensha"));
+            }
+
+            public ddlTekiyojiSochimotoHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiSochimotoHokensha"));
+            }
+
+            public ddlTekiyojiKyuHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiKyuHokensha"));
+            }
+
+            public ddlTekiyojiJuminJoho(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiJuminJoho"));
+            }
+
+            public JutokuKaijoInput(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput"));
+            }
+
+            public txtKaijoDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKaijoDate"));
+            }
+
+            public txtKaijoTodokedeDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKaijoTodokedeDate"));
+            }
+
+            public ddlKaijoJiyu(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijoJiyu"));
+            }
+
+            public kaijojiHokenshaJoho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput_kaijojiHokenshaJoho"));
+            }
+
+            public ddlKaijojiShozaiHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijojiShozaiHokensha"));
+            }
+
+            public ddlKaijojiSochimotoHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijojiSochimotoHokensha"));
+            }
+
+            public ddlKaijojiKyuHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijojiKyuHokensha"));
+            }
+
+            public ddlKaijojiJuminJono(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijojiJuminJono"));
+            }
+
+            public btnJutokuKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnJutokuKakutei"));
+            }
+
+            public btnJutokuTorikeshi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnJutokuTorikeshi"));
             }
 
         }

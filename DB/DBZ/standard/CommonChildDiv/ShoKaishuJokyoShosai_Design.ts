@@ -577,7 +577,7 @@ module DBZ {
             }
 
             public ShoKaishuJokyoShosai(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("ShoKaishuJokyoShosai"));
+                return new UZA.Panel(this.convFiledNameSelf());
             }
 
             public txtShoKofuShurui(): UZA.TextBox {

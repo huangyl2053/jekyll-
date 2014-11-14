@@ -1,24 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist.IShoKaishuJokyoListDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist.dgShoKaishuJokyo_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShisetsuJohoHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShoKaishuJokyoListHandler;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * ShoKaishuJokyoList のクラスファイル
- *
+ * ShoKaishuJokyoList のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ShoKaishuJokyoListDiv extends Panel implements IShoKaishuJokyoListDiv {
@@ -28,7 +27,6 @@ public class ShoKaishuJokyoListDiv extends Panel implements IShoKaishuJokyoListD
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("dgShoKaishuJokyo")
     private DataGrid<dgShoKaishuJokyo_Row> dgShoKaishuJokyo;
 
@@ -45,7 +43,7 @@ public class ShoKaishuJokyoListDiv extends Panel implements IShoKaishuJokyoListD
 
     @JsonProperty("dgShoKaishuJokyo")
     public void setDgShoKaishuJokyo(DataGrid<dgShoKaishuJokyo_Row> dgShoKaishuJokyo) {
-        this.dgShoKaishuJokyo = dgShoKaishuJokyo;
+        this.dgShoKaishuJokyo=dgShoKaishuJokyo;
     }
 
     /*
@@ -54,22 +52,23 @@ public class ShoKaishuJokyoListDiv extends Panel implements IShoKaishuJokyoListD
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    public static enum DataGridのisShowSelectButtonColumn implements ICommonChildDivMode {
+    public static enum グリッド表示モード implements ICommonChildDivMode {
 
-        表示する("表示する"),
-        表示しない("表示しない");
+        shokai("shokai"),
+        toroku("toroku"),
+        select("select");
 
         private final String name;
 
-        private DataGridのisShowSelectButtonColumn(final String name) {
+        private グリッド表示モード(final String name) {
             this.name = name;
         }
 
-        public static DataGridのisShowSelectButtonColumn getEnum(String str) {
-            DataGridのisShowSelectButtonColumn[] enumArray = DataGridのisShowSelectButtonColumn.values();
+        public static グリッド表示モード getEnum(String str) {
+            グリッド表示モード[] enumArray = グリッド表示モード.values();
 
-            for (DataGridのisShowSelectButtonColumn enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+            for (グリッド表示モード enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -83,16 +82,15 @@ public class ShoKaishuJokyoListDiv extends Panel implements IShoKaishuJokyoListD
 
     }
 
-    public DataGridのisShowSelectButtonColumn getMode_DataGridのisShowSelectButtonColumn() {
-        return (DataGridのisShowSelectButtonColumn) _CommonChildDivModeUtil.getMode(this.modes, DataGridのisShowSelectButtonColumn.class);
+    public グリッド表示モード getMode_グリッド表示モード() {
+        return (グリッド表示モード) _CommonChildDivModeUtil.getMode( this.modes, グリッド表示モード.class );
     }
 
-    @Override
-    public void setMode_DataGridのisShowSelectButtonColumn(DataGridのisShowSelectButtonColumn value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DataGridのisShowSelectButtonColumn.class, value);
+    public void setMode_グリッド表示モード( グリッド表示モード value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, グリッド表示モード.class , value );
     }
 
-    public static enum DataGridのheight implements ICommonChildDivMode {
+    public static enum 一覧パネル高さ implements ICommonChildDivMode {
 
         サイズ200("サイズ200"),
         サイズ250("サイズ250"),
@@ -104,15 +102,15 @@ public class ShoKaishuJokyoListDiv extends Panel implements IShoKaishuJokyoListD
 
         private final String name;
 
-        private DataGridのheight(final String name) {
+        private 一覧パネル高さ(final String name) {
             this.name = name;
         }
 
-        public static DataGridのheight getEnum(String str) {
-            DataGridのheight[] enumArray = DataGridのheight.values();
+        public static 一覧パネル高さ getEnum(String str) {
+            一覧パネル高さ[] enumArray = 一覧パネル高さ.values();
 
-            for (DataGridのheight enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+            for (一覧パネル高さ enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -126,19 +124,14 @@ public class ShoKaishuJokyoListDiv extends Panel implements IShoKaishuJokyoListD
 
     }
 
-    public DataGridのheight getMode_DataGridのheight() {
-        return (DataGridのheight) _CommonChildDivModeUtil.getMode(this.modes, DataGridのheight.class);
+    public 一覧パネル高さ getMode_一覧パネル高さ() {
+        return (一覧パネル高さ) _CommonChildDivModeUtil.getMode( this.modes, 一覧パネル高さ.class );
     }
 
-    @Override
-    public void setMode_DataGridのheight(DataGridのheight value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DataGridのheight.class, value);
+    public void setMode_一覧パネル高さ( 一覧パネル高さ value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, 一覧パネル高さ.class , value );
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-// 以下のメソッドはインタフェースに定義していないので業務には公開されません。
-    @JsonIgnore
-    public ShoKaishuJokyoListHandler getHandler() {
-        return new ShoKaishuJokyoListHandler(this);
-    }
+
 }

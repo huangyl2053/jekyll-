@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IryoHokenRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IryoHokenRirekiDiv.DisplayMode;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.IryoHokenRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.IryoHokenRirekiDiv.DisplayMode;
 
 /**
  * @author N8223　朴義一

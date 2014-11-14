@@ -8,12 +8,17 @@
             }
             ModeController.prototype.priorities = function () {
                 return [
+                    "グリッド表示モード",
                     "一覧パネル高さ"
                 ];
             };
 
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.グリッド表示モード = function () {
+                return new Modes.グリッド表示モード(this.controls);
             };
 
             ModeController.prototype.一覧パネル高さ = function () {
@@ -24,6 +29,46 @@
         ShoKaishuJokyoList.ModeController = ModeController;
 
         (function (Modes) {
+            var グリッド表示モード = (function () {
+                function グリッド表示モード(controls) {
+                    this.controls = controls;
+                }
+                グリッド表示モード.prototype.shokai = function () {
+                    var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.columns[0].visible = false;
+
+                    this.controls.dgShoKaishuJokyo().gridSetting = gridSetting;
+
+                    this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
+                };
+
+                グリッド表示モード.prototype.toroku = function () {
+                    var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.columns[0].visible = true;
+
+                    this.controls.dgShoKaishuJokyo().gridSetting = gridSetting;
+
+                    this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
+                };
+
+                グリッド表示モード.prototype.select = function () {
+                    var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.columns[0].visible = false;
+
+                    this.controls.dgShoKaishuJokyo().gridSetting = gridSetting;
+
+                    this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
+                };
+                return グリッド表示モード;
+            })();
+            Modes.グリッド表示モード = グリッド表示モード;
+
             var 一覧パネル高さ = (function () {
                 function 一覧パネル高さ(controls) {
                     this.controls = controls;

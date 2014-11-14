@@ -18,7 +18,8 @@ module DBZ {
                 return [
                     "台帳種別",
                     "施設種類",
-                    "入力補助"
+                    "入力補助",
+                    "表示モード"
                 ];
             }
 
@@ -32,10 +33,14 @@ module DBZ {
 
             public 施設種類() {
                 return new Modes.施設種類(this.controls);
-            } 
+            }
 
             public 入力補助() {
                 return new Modes.入力補助(this.controls);
+            }
+
+            public 表示モード() {
+                return new Modes.表示モード(this.controls);
             }
 
         }
@@ -105,6 +110,32 @@ module DBZ {
                     this.controls.btnJigyoshaInputGuide().displayNone = true;
                     this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = true;
                     this.controls.btnJogaiShisetsuInputGuide().displayNone = false;
+                }
+            }
+
+            export class 表示モード {
+                private controls: Controls;
+
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public defaultView(): void {
+                    
+                    this.controls.ShisetsuJoho().readOnly = false;
+                    this.controls.ShisetsuJoho().displayNone = false;
+                }
+
+                public readOnly(): void {
+                    
+                    this.controls.ShisetsuJoho().readOnly = true;
+                    this.controls.ShisetsuJoho().displayNone = false;
+                }
+
+                public displayNone(): void {
+                    
+                    this.controls.ShisetsuJoho().readOnly = true;
+                    this.controls.ShisetsuJoho().displayNone = true;
                 }
             }
 

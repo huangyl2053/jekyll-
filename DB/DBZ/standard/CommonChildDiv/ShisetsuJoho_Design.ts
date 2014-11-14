@@ -58,8 +58,6 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
-     "selectedItem": null,
      "dataSource": [
       {
        "key": "hihokenshaDaicho",
@@ -74,14 +72,16 @@ module DBZ {
        "value": "他市町村住所地特例者台帳"
       }
      ],
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
      "labelLText": "台帳種別",
      "labelRText": "",
      "labelLWidth": "70px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
+     "selectedItem": null,
      "isBlankLine": false,
      "disabledItem": []
     },
@@ -106,8 +106,6 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "onChange_radShisetsuShurui",
-     "selectedItem": null,
      "dataSource": [
       {
        "key": "kaigoHokenShisetsu",
@@ -122,15 +120,17 @@ module DBZ {
        "value": "適用除外施設"
       }
      ],
+     "onClick": "",
+     "icon": [],
      "required": false,
+     "onChange": "onChange_radShisetsuShurui",
      "labelLText": "施設種類",
      "labelLWidth": "70px",
      "labelLAlign": 2,
-     "onClick": "",
+     "selectedItem": null,
      "newLineItemNumber": 3,
      "spaceSize": "S",
-     "disabledItem": [],
-     "icon": []
+     "disabledItem": []
     },
     {
      "fieldName": "txtShisetsuCode",
@@ -153,29 +153,29 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
+     "text": "",
      "required": false,
+     "placeHolder": "",
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
      "labelLText": "入所施設",
      "labelRText": "",
      "labelLWidth": "70px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
+     "value": "",
+     "decorationClass": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "placeHolder": "",
      "textKind": 2,
-     "isPrivateInfo": false,
-     "isPassword": false,
      "isComboBox": false,
-     "onKeyPress": "",
-     "text": "",
      "suggest": [],
-     "value": "",
-     "decorationClass": "",
      "permitCharactor": "",
      "formatLength": "10"
     },
@@ -199,15 +199,15 @@ module DBZ {
      "selectControlID": "btnJigyoshaInputGuide",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "",
-     "icon": 0,
-     "text": "",
      "onBeforeClick": "",
      "onAfterClick": "",
+     "onClick": "",
+     "text": "",
      "appearance": 2,
      "imageFileUrl": "/uz/uza/image/UZ_Search.png",
      "imageWidth": "",
      "imageHeight": "",
+     "icon": 0,
      "heightTextBoxMatches": true,
      "displayChildDivName": "DBZ.JigyoshaInputGuide",
      "dataPassing": [
@@ -244,15 +244,15 @@ module DBZ {
      "selectControlID": "btnOtherTokureiShisetsuInputGuide",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "",
-     "icon": 0,
-     "text": "■",
      "onBeforeClick": "",
      "onAfterClick": "",
+     "onClick": "",
+     "text": "■",
      "appearance": 2,
      "imageFileUrl": "/uz/uza/image/UZ_Search.png",
      "imageWidth": "20px",
      "imageHeight": "15px",
+     "icon": 0,
      "heightTextBoxMatches": true,
      "displayChildDivName": "DBZ.OtherTokureiShisetsuInputGuide",
      "dataPassing": [
@@ -293,15 +293,15 @@ module DBZ {
      "selectControlID": "btnJogaiShisetsuInputGuide",
      "helpMessageID": "",
      "jpControlName": "",
-     "onClick": "",
-     "icon": 0,
-     "text": "■",
      "onBeforeClick": "",
      "onAfterClick": "",
+     "onClick": "",
+     "text": "■",
      "appearance": 2,
      "imageFileUrl": "/uz/uza/image/UZ_Search.png",
      "imageWidth": "20px",
      "imageHeight": "15px",
+     "icon": 0,
      "heightTextBoxMatches": true,
      "displayChildDivName": "DBZ.TekiyoJogaiShisetsuInputGuide",
      "dataPassing": [
@@ -339,29 +339,29 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
-     "onChange": "",
+     "text": "",
      "required": false,
+     "placeHolder": "",
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
+     "value": "",
+     "decorationClass": "",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "placeHolder": "",
      "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
      "isComboBox": false,
-     "onKeyPress": "",
-     "text": "",
      "suggest": [],
-     "value": "",
-     "decorationClass": "",
      "permitCharactor": ""
     }
    ],
@@ -393,24 +393,7 @@ module DBZ {
      "postParameterPanelNames": "ShisetsuJoho"
     }
    ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": ""
-    },
-    {
-     "eventName": "onChange_ddlDaichoShubetsu",
-     "requestUrl": "dbz/db/dbz/ShisetsuJoho/onChange_ddlDaichoShubetsu"
-    },
-    {
-     "eventName": "onChange_onChange_radShisetsuShurui",
-     "requestUrl": "dbz/db/dbz/ShisetsuJoho/onChange_radShisetsuShurui"
-    },
-    {
-     "eventName": "onBlur_txtShisetsuCode",
-     "requestUrl": "dbz/db/dbz/ShisetsuJoho/onBlur_txtShisetsuCode"
-    }
-   ],
+   "requestSettings": [],
    "hiddenInput": [
     {
      "propertyName": "selectRow",
@@ -506,7 +489,7 @@ module DBZ {
             }
 
             public ShisetsuJoho(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("ShisetsuJoho"));
+                return new UZA.Panel(this.convFiledNameSelf());
             }
 
             public ddlDaichoShubetsu(): UZA.DropDownList {

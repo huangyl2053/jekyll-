@@ -41,11 +41,18 @@ module DBZ
                 }
 
                 public 照会(): void {
-                    this.controls.ShoKaishuJokyoShosai().disabled = true;
+                    this.controls.ShoKaishuJokyoShosai().readOnly = true;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = false;
                 }
 
                 public 入力(): void {
-                    this.controls.ShoKaishuJokyoShosai().disabled = false;
+                    this.controls.ShoKaishuJokyoShosai().readOnly = false;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = false;
+                }
+
+                public 非表示(): void {
+                    this.controls.ShoKaishuJokyoShosai().readOnly = true;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = true;
                 }
             }
 

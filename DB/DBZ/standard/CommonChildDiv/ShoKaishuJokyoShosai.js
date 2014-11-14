@@ -29,11 +29,18 @@
                     this.controls = controls;
                 }
                 表示方法.prototype.照会 = function () {
-                    this.controls.ShoKaishuJokyoShosai().disabled = true;
+                    this.controls.ShoKaishuJokyoShosai().readOnly = true;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = false;
                 };
 
                 表示方法.prototype.入力 = function () {
-                    this.controls.ShoKaishuJokyoShosai().disabled = false;
+                    this.controls.ShoKaishuJokyoShosai().readOnly = false;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = false;
+                };
+
+                表示方法.prototype.非表示 = function () {
+                    this.controls.ShoKaishuJokyoShosai().readOnly = true;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = true;
                 };
                 return 表示方法;
             })();
