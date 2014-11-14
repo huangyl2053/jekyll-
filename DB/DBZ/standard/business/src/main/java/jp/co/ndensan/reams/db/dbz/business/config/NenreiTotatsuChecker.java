@@ -39,8 +39,6 @@ public final class NenreiTotatsuChecker {
      */
     public NenreiTotatsuChecker(ConfigKeysNenreiTotatsuKijunJoho nenreiTotatsuKijun, RDate kijunDate)
             throws NullPointerException {
-        requireNonNull基準日(kijunDate);
-        requireNonNull年齢到達基準(nenreiTotatsuKijun);
 
         checker = new _NenreiTotatsuChecker(nenreiTotatsuKijun, kijunDate, new NenreiTotatsuKijunConfig());
     }
@@ -55,26 +53,8 @@ public final class NenreiTotatsuChecker {
      */
     NenreiTotatsuChecker(ConfigKeysNenreiTotatsuKijunJoho nenreiTotatsuKijun, RDate kijunDate,
             NenreiTotatsuKijunConfig config) throws NullPointerException {
-        requireNonNull基準日(kijunDate);
-        requireNonNull年齢到達基準(nenreiTotatsuKijun);
-        requireNonNull年齢到達業務コンフィグ(config);
 
         checker = new _NenreiTotatsuChecker(nenreiTotatsuKijun, kijunDate, config);
-    }
-
-    private ConfigKeysNenreiTotatsuKijunJoho requireNonNull年齢到達基準(ConfigKeysNenreiTotatsuKijunJoho nenreiTotatsuKijun) {
-        return requireNonNull(nenreiTotatsuKijun, UrSystemErrorMessages.引数がnullのため生成不可
-                .getReplacedMessage("年齢到達基準", getClass().getSimpleName()));
-    }
-
-    private RDate requireNonNull基準日(RDate kijunDate) {
-        return requireNonNull(kijunDate, UrSystemErrorMessages.引数がnullのため生成不可
-                .getReplacedMessage("基準日", getClass().getSimpleName()));
-    }
-
-    private NenreiTotatsuKijunConfig requireNonNull年齢到達業務コンフィグ(NenreiTotatsuKijunConfig config) {
-        return requireNonNull(config, UrSystemErrorMessages.引数がnullのため生成不可
-                .getReplacedMessage("年齢到達の業務コンフィグ取得クラス", getClass().getSimpleName()));
     }
 
     /**
@@ -137,6 +117,12 @@ public final class NenreiTotatsuChecker {
          */
         public _NenreiTotatsuChecker(ConfigKeysNenreiTotatsuKijunJoho nenreiTotatsuKijun, RDate kijunDate,
                 NenreiTotatsuKijunConfig config) {
+            requireNonNull(nenreiTotatsuKijun, UrSystemErrorMessages.引数がnullのため生成不可
+                    .getReplacedMessage("年齢到達基準", getClass().getSimpleName()));
+            requireNonNull(kijunDate, UrSystemErrorMessages.引数がnullのため生成不可
+                    .getReplacedMessage("基準日", getClass().getSimpleName()));
+            requireNonNull(config, UrSystemErrorMessages.引数がnullのため生成不可
+                    .getReplacedMessage("年齢到達の業務コンフィグ取得クラス", getClass().getSimpleName()));
 
             this.config = config;
             this.kijunDate = kijunDate;
@@ -144,6 +130,8 @@ public final class NenreiTotatsuChecker {
         }
 
         public _NenreiTotatsuChecker setDateOfBirth(IDateOfBirth dateOfBirth) {
+            requireNonNull(dateOfBirth, UrSystemErrorMessages.引数がnullのため生成不可
+                    .getReplacedMessage("生年月日", getClass().getSimpleName()));
             this.dateOfBirth = dateOfBirth;
             return this;
         }

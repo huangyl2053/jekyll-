@@ -83,7 +83,7 @@ public class NenreiTotatsuCheckerTest {
         }
     }
 
-    public static class bornOn extends DbzTestBase {
+    public static class personBornOn extends DbzTestBase {
 
         private RDate dateOfBirth_RDate;
         private FlexibleDate dateOfBirth_FlexibleDate;
@@ -97,22 +97,25 @@ public class NenreiTotatsuCheckerTest {
             sut = new NenreiTotatsuChecker(nenreiTotatsuKijun, kijunDate, config);
         }
 
-        @Test
-        public void 引数に暦上日クラスを渡した場合_処理が成功する() {
-            dateOfBirth_RDate = new RDate("19741202");
-            assertThat(sut.personBornOn(dateOfBirth_RDate).has年齢到達(), is(true));
+        @Test(expected = NullPointerException.class)
+        public void 暦上日としてnullが渡された場合_NullPointerExceptionが発生する() {
+            dateOfBirth_IDateOfBirth = null;
+            sut.personBornOn(dateOfBirth_RDate).has年齢到達();
+            fail();
         }
 
-        @Test
-        public void 引数に非暦上日クラスを渡した場合_処理が成功する() {
-            dateOfBirth_FlexibleDate = new FlexibleDate("19741202");
-            assertThat(sut.personBornOn(dateOfBirth_FlexibleDate).has年齢到達(), is(true));
+        @Test(expected = NullPointerException.class)
+        public void 非暦上日としてnullが渡された場合_NullPointerExceptionが発生する() {
+            dateOfBirth_FlexibleDate = null;
+            sut.personBornOn(dateOfBirth_FlexibleDate).has年齢到達();
+            fail();
         }
 
-        @Test
-        public void 引数に生年月日クラスを渡した場合_処理が成功する() {
-            dateOfBirth_IDateOfBirth = DateOfBirthFactory.createInstance(new RDate("19741202"));
-            assertThat(sut.personBornOn(dateOfBirth_IDateOfBirth).has年齢到達(), is(true));
+        @Test(expected = NullPointerException.class)
+        public void 生年月日としてnullが渡された場合_NullPointerExceptionが発生する() {
+            dateOfBirth_IDateOfBirth = null;
+            sut.personBornOn(dateOfBirth_IDateOfBirth).has年齢到達();
+            fail();
         }
 
     }
