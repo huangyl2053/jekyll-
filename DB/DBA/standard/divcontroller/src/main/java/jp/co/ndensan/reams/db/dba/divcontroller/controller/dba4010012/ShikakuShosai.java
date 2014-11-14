@@ -27,6 +27,7 @@ public class ShikakuShosai {
      * @return 資格取得情報Divを持つResponseData
      */
     public ResponseData<ShikakuShosaiDiv> initialize(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) {
+        //TODO #52997
         //1, 被保険者台帳情報の初期設定を行う。
         //1-1, 被保険者台帳の情報を取得する
         //  1-1-1, ViewStateに被保険者台帳の情報が存在する場合、ViewStateから取得する。
@@ -67,6 +68,7 @@ public class ShikakuShosai {
     //TODO #52997
     //住所地特例情報Tabの初期表示の制御、値の設定などを行います。
     private void initializedJutoku(ShikakuShosaiDiv div, HihokenshaDaichoList hihokenshaDaichoList) {
+        //TODO #52997
         //1, hihokenshaDaichoList.to住所地特例List()を実行して、住所地特例情報を抽出する。
         //2, 抽出したデータを住所地特例履歴一覧グリッドに設定する。
         //3, 「追加する」ボタンを非表示にする。
@@ -99,6 +101,7 @@ public class ShikakuShosai {
     //TODO #52997
     //資格関連異動（資格変更）Tabの初期表示の制御、値の設定などを行います。
     private void initializedShikakuKanrenIdo(ShikakuShosaiDiv div, HihokenshaDaichoList hihokenshaDaichoList) {
+        //TODO #52997
         //1, hihokenshaDaichoList.to資格関連異動List()を実行して、資格関連異動情報を抽出する。
         //2, 抽出したデータを資格変更履歴一覧グリッドに設定する。
         //3, 「追加する」ボタンを非表示にする。
@@ -124,6 +127,7 @@ public class ShikakuShosai {
     //施設入退所Tabの初期表示の制御、値の設定などを行います。
     //ShisetsuNyutaishoの情報を持つクラスは仮で設定しています。後に依頼する施設入退所で作成したクラスを使用してください。
     private void initializedShikakuKanrenIdo(ShikakuShosaiDiv div) { //, ShisetsuNyutaishoRirekiList shisetsuNyutaishoList) {
+        //TODO #52997
         //1, 施設入退所履歴管理共有子Divのモードに、照会を設定する。
         //2, 施設入退所履歴グリッドに、引数から受け取った施設入退所情報を設定する。
         //3, 施設入退所入力明細エリアのDisplayNoneにtrueを設定する。
