@@ -31,7 +31,12 @@ public class ShikakuShutokuJoho {
         //1-1, 被保険者台帳の情報を取得する
         //  1-1-1, ViewStateに被保険者台帳の情報が存在する場合、ViewStateから取得する。
         //  1-1-2, ViewStateに被保険者台帳の情報が存在しない場合、HihokenshaDaichoManagerを利用して、被保険者台帳情報を取得する。
-        //      1-1-2-1, HihokenshaDaichoManagerを利用して被保険者台帳情報を取得した場合、その情報をViewStateに保持する。
+        //      1-1-2-1, 検索画面から遷移した場合、ViewStateに処理対象の情報が設定されている。
+        //          1-1-2-1-1, 処理対象の情報が被保険者番号を持っている場合、
+        //          HihokenshaDaichoManagerのfind被保険者台帳List(市町村コード, 被保険者番号)を使用します。
+        //          1-1-2-1-2, 処理対象の情報が被保険者番号を持っておらず、識別コードを持っている場合、
+        //          HihokenshaDaichoManagerのfind被保険者台帳List(市町村コード, 識別コード)を使用します。
+        //      1-1-2-2, HihokenshaDaichoManagerを利用して被保険者台帳情報を取得した場合、その情報をViewStateに保持する。
         //1-2, HihokenshaDaichoListを利用して、被保険者台帳情報から資格得喪Listを取得する。
         //1-3, 資格得喪Listを、被保険者履歴一覧グリッドに設定する。
         //
