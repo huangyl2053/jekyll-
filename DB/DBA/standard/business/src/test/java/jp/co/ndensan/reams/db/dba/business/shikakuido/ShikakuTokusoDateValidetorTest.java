@@ -22,8 +22,9 @@ public class ShikakuTokusoDateValidetorTest {
     public static class validate extends DbaTestBase {
         //TODO #52997
         //バリデーション処理のテストを実装してください。
-        //1, previous.get喪失日() >= next.get取得日()の場合、メッセージを返す。
+        //1, next.get取得日() < previous.get喪失日()の場合、メッセージを返す。
         //2, 上記の条件を満たさない場合、メッセージを返さない。
+
     }
 
 }

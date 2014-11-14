@@ -67,7 +67,8 @@ public class ShikakuTokusoDateValidetor {
         public IValidationMessages validate() {
             //TODO #52997
             //資格の取得・喪失日に不整合が起きていないかのチェック処理を実装してください。
-            //previous.get喪失日() >= next.get取得日()の場合、メッセージを返します。
+            //1, next.get取得日() < previous.get喪失日()の場合、メッセージを返します。
+            //      　メッセージID：URZE00025（期間が重複しています。）
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
