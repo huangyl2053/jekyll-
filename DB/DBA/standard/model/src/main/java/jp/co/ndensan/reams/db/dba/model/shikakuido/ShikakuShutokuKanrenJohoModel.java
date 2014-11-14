@@ -40,8 +40,10 @@ public class ShikakuShutokuKanrenJohoModel {
      */
     public ShikakuShutokuKanrenJohoModel(List<HihokenshaDaichoModel> 被保険者台帳ModelList) {// List 医療保険加入状況ModelList ... ) {
         //TODO #52997
-        //コンストラクタで、各メンバの値を引数から受け取るように実装してください。
-        //受け取る引数は、全てnullチェックをお願いします。
+        //1), コンストラクタで、各メンバの値を引数から受け取るように実装してください。
+        //    受け取る引数は、全てnullチェックをお願いします。
+        //2), メンバに値を代入する際は、以下のようにListを生成し直してから、メンバに代入してください。
+        //    this.被保険者台帳ModelList = new ArrayList<>(被保険者台帳ModelList);
     }
 
     /**
