@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.model.IHihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
-import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.DbOptional;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.realservice.gappei.IGappeiShichosonFinder;

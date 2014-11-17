@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysGaitoshaKe
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SochimotoSochisakiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoViewModel;
-import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoViewDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

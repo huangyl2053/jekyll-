@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.model.gappei;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import static java.util.Objects.requireNonNull;
 

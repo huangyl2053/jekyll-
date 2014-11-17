@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.model.gappei;
 
 import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
-import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 
 /**

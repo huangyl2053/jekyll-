@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.model.KoikiShichosonSecurityModel;
-import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.KoikiShichosonSecurityDac;
 import jp.co.ndensan.reams.db.dbz.realservice.search.KoikiShichosonSecuritySearchItem;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;

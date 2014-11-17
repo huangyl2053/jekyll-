@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShinKyuHokenshaNoHen
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
-import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
