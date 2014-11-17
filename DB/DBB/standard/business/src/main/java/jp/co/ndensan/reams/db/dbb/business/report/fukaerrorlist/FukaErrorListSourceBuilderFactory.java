@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.report.parts;
+package jp.co.ndensan.reams.db.dbb.business.report.fukaerrorlist;
 
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItem;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCommon;
@@ -14,28 +14,29 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- * 賦課エラー一覧内部帳票のエディタを生成するファクトリクラスです。
+ * 賦課エラー一覧内部帳票のSourceBuilderを生成するファクトリクラスです。
  *
  * @author N9606 漢那 憲作
  */
-public final class FukaErrorListEditorFactory {
+public final class FukaErrorListSourceBuilderFactory {
 
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。
      */
-    private FukaErrorListEditorFactory() {
+    private FukaErrorListSourceBuilderFactory() {
     }
 
     /**
-     * 引数から内部帳票情報、バッチ情報、賦課エラー一覧1行分のデータを受け取り、エディタにマッピングして返します。
+     * 引数から内部帳票情報、バッチ情報、賦課エラー一覧1行分のデータを受け取り、
+     * その内容でソースを編集する{@link IFukaErrorListSourceBuilder IFukaErrorListSourceBuilder}を生成して返します。
      *
      * @param common 内部帳票情報
      * @param item 賦課エラー一覧、1行分のデータ
-     * @return 賦課エラー一覧エディタ
+     * @return {@link IFukaErrorListSourceBuilder IFukaErrorListSourceBuilder}
      */
-    public static IFukaErrorListEditor createInstance(final IInternalReportCommon common, final FukaErrorInternalReportItem item) {
+    public static IFukaErrorListSourceBuilder createInstance(final IInternalReportCommon common, final FukaErrorInternalReportItem item) {
 
-        return new IFukaErrorListEditor() {
+        return new IFukaErrorListSourceBuilder() {
             @Override
             public FukaErrorListSource buildSource() {
                 FukaErrorListSource source = new FukaErrorListSource();

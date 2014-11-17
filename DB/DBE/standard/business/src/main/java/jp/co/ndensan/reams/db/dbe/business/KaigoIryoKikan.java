@@ -101,11 +101,11 @@ public class KaigoIryoKikan implements IShujiiIryoKikan {
     }
 
     public Code get異動事由() {
-        return 医療機関.get異動事由();
+        return 医療機関.get異動事由().value();
     }
 
     public Code get会員区分() {
-        return 医療機関.get会員区分();
+        return 医療機関.get会員区分().value();
     }
 
     public boolean is指定自立支援医療機関() {
