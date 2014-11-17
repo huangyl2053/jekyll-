@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoK
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
+ * 共有子Div「証回収記録管理」のイベントを定義した共有子Divです。
  *
  * @author n8178 城間篤人
  */
