@@ -515,7 +515,7 @@
            "fieldName": "lblJikkoTaniTitle",
            "items": [],
            "controlType": "Label",
-           "width": "80px",
+           "width": "815px",
            "visible": true,
            "displayNone": false,
            "disabled": false,
