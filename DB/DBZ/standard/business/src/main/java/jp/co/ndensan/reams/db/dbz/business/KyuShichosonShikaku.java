@@ -95,12 +95,14 @@ public class KyuShichosonShikaku {
         Map<FlexibleYearMonth, IHihokenshaDaicho> map = new TreeMap<>();
         for (IHihokenshaDaicho 履歴 : 被保険者台帳List) {
             FlexibleDate 取得日 = 履歴.get資格取得日();
-            if (対象期間.between(取得日) && 取得日.getDayValue() <= 基準日) {
-                IHihokenshaDaicho old履歴 = map.get(取得日.getYearMonth());
-                if (old履歴 == null || is新履歴(履歴, old履歴)) {
-                    map.put(取得日.getYearMonth(), 履歴);
-                }
+            if (!対象期間.between(取得日) || 基準日 < 取得日.getDayValue()) {
+                continue;
             }
+            IHihokenshaDaicho old履歴 = map.get(取得日.getYearMonth());
+            if (old履歴 != null && !is新履歴(履歴, old履歴)) {
+                continue;
+            }
+            map.put(取得日.getYearMonth(), 履歴);
         }
 
         return ItemList.of((List) Arrays.asList(map.values().toArray()));
@@ -197,11 +199,13 @@ public class KyuShichosonShikaku {
     private IHihokenshaDaicho get最新履歴(FlexibleDate 基準年月日) {
         IHihokenshaDaicho 対象履歴 = null;
         for (IHihokenshaDaicho 履歴 : 被保険者台帳List) {
-            if (基準年月日 == null || 履歴.get資格取得日().isBeforeOrEquals(基準年月日)) {
-                if (対象履歴 == null || is新履歴(履歴, 対象履歴)) {
-                    対象履歴 = 履歴;
-                }
+            if (基準年月日 != null && !履歴.get資格取得日().isBeforeOrEquals(基準年月日)) {
+                continue;
             }
+            if (対象履歴 != null && !is新履歴(履歴, 対象履歴)) {
+                continue;
+            }
+            対象履歴 = 履歴;
         }
         return 対象履歴;
     }
@@ -209,13 +213,15 @@ public class KyuShichosonShikaku {
     private IHihokenshaDaicho get最古履歴(FlexibleYearMonth 基準年月) {
         IHihokenshaDaicho 対象履歴 = null;
         for (IHihokenshaDaicho 履歴 : 被保険者台帳List) {
-            if (基準年月 == null
-                    || (履歴.get資格取得日() != null && 履歴.get資格取得日().isValid() && 基準年月.equals(履歴.get資格取得日().getYearMonth()))
-                    || (履歴.get資格喪失日() != null && 履歴.get資格喪失日().isValid() && 基準年月.equals(履歴.get資格喪失日().getYearMonth()))) {
-                if (対象履歴 == null || is古履歴(履歴, 対象履歴)) {
-                    対象履歴 = 履歴;
-                }
+            if (基準年月 != null
+                    && !(履歴.get資格取得日() != null && 履歴.get資格取得日().isValid() && 基準年月.equals(履歴.get資格取得日().getYearMonth()))
+                    && !(履歴.get資格喪失日() != null && 履歴.get資格喪失日().isValid() && 基準年月.equals(履歴.get資格喪失日().getYearMonth()))) {
+                continue;
             }
+            if (対象履歴 != null && !is古履歴(履歴, 対象履歴)) {
+                continue;
+            }
+            対象履歴 = 履歴;
         }
         return 対象履歴;
     }

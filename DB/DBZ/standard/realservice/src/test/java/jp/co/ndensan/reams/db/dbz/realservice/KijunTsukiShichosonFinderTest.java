@@ -104,7 +104,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(被保険者台帳List, get基準年月("200410"), 月初).get();
 
             assertThat(result.get合併情報().get(), is(get合併情報(1)));
-            assertThat(result.get合併市町村().asList().get(0), is(get合併市町村(1)));
+            assertThat(result.get単一市町村情報().asList().get(0), is(get合併市町村(1)));
         }
 
         @Test
@@ -123,7 +123,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(被保険者台帳List, get基準年月("200411"), 月初).get();
 
             assertThat(result.get合併情報().get(), is(get合併情報(2)));
-            assertThat(result.get合併市町村().asList().get(0), is(get合併市町村(3)));
+            assertThat(result.get単一市町村情報().asList().get(0), is(get合併市町村(3)));
         }
 
         @Test
@@ -142,7 +142,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(被保険者台帳List, get基準年月("200509"), 月初).get();
 
             assertThat(result.get合併情報().get(), is(get合併情報(2)));
-            assertThat(result.get合併市町村().asList().get(0), is(get合併市町村(3)));
+            assertThat(result.get単一市町村情報().asList().get(0), is(get合併市町村(3)));
         }
 
         @Test
@@ -161,7 +161,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(被保険者台帳List, get基準年月("200510"), 月初).get();
 
             assertThat(result.get合併情報().get(), is(get合併情報(3)));
-            assertThat(result.get合併市町村().asList().get(0), is(get合併市町村(5)));
+            assertThat(result.get単一市町村情報().asList().get(0), is(get合併市町村(5)));
         }
 
         @Test
@@ -180,7 +180,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(被保険者台帳List, get基準年月("200605"), 月初).get();
 
             assertThat(result.get合併情報().get(), is(get合併情報(3)));
-            assertThat(result.get合併市町村().asList().get(0), is(get合併市町村(5)));
+            assertThat(result.get単一市町村情報().asList().get(0), is(get合併市町村(5)));
         }
 
         @Test
@@ -197,7 +197,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(被保険者台帳List, get基準年月("200606"), 月初).get();
 
             assertThat(result.get合併情報().get(), is(get合併情報(3)));
-            assertThat(result.get合併市町村().asList().get(0), is(get合併市町村(5)));
+            assertThat(result.get単一市町村情報().asList().get(0), is(get合併市町村(5)));
         }
 
         @Test
@@ -214,7 +214,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(被保険者台帳List, get基準年月("200607"), 月初).get();
 
             assertThat(result.get合併情報().get(), is(get合併情報(3)));
-            assertThat(result.get合併市町村().asList().get(0), is(get合併市町村(5)));
+            assertThat(result.get単一市町村情報().asList().get(0), is(get合併市町村(5)));
         }
 
         @Test
@@ -228,7 +228,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(被保険者台帳List, get基準年月("200607"), 月初).get();
 
             assertThat(result.get合併情報().isPresent(), is(false));
-            assertThat(result.get合併市町村().asList().get(0), is(get合併市町村(5)));
+            assertThat(result.get単一市町村情報().asList().get(0), is(get合併市町村(5)));
         }
 
         @Test
@@ -297,7 +297,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(被保険者台帳List, get基準年月("200501"), 月初).get();
 
             assertThat(result.get合併情報().get(), is(get合併情報(2)));
-            assertThat(result.get構成市町村().asList().get(0), is(get構成市町村(11)));
+            assertThat(result.get広域市町村情報().asList().get(0), is(get構成市町村(11)));
             assertThat(result.get新旧保険者番号変換区分(), is(ShinKyuHokenshaNoHenkanKubun.変換不要));
         }
 
@@ -310,7 +310,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(被保険者台帳List, get基準年月("200611"), 月初).get();
 
             assertThat(result.get合併情報().get(), is(get合併情報(1)));
-            assertThat(result.get構成市町村().asList().get(0), is(get構成市町村(15)));
+            assertThat(result.get広域市町村情報().asList().get(0), is(get構成市町村(15)));
             assertThat(result.get新旧保険者番号変換区分(), is(ShinKyuHokenshaNoHenkanKubun.変換不要));
         }
 
@@ -324,7 +324,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(被保険者台帳List, get基準年月("200303"), 月初).get();
 
             assertThat(result.get合併情報().get(), is(get合併情報(2)));
-            assertThat(result.get構成市町村().asList().get(0), is(get構成市町村(11)));
+            assertThat(result.get広域市町村情報().asList().get(0), is(get構成市町村(11)));
             assertThat(result.get新旧保険者番号変換区分(), is(ShinKyuHokenshaNoHenkanKubun.変換必要));
         }
 
@@ -337,7 +337,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(被保険者台帳List, get基準年月("200501"), 月初).get();
 
             assertThat(result.get合併情報().isPresent(), is(false));
-            assertThat(result.get構成市町村().asList().get(0), is(get構成市町村(24)));
+            assertThat(result.get広域市町村情報().asList().get(0), is(get構成市町村(24)));
             assertThat(result.get新旧保険者番号変換区分(), is(ShinKyuHokenshaNoHenkanKubun.変換不要));
         }
 
@@ -350,7 +350,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(被保険者台帳List, get基準年月("200607"), 月初).get();
 
             assertThat(result.get合併情報().isPresent(), is(false));
-            assertThat(result.get構成市町村().asList().get(0), is(get構成市町村(21)));
+            assertThat(result.get広域市町村情報().asList().get(0), is(get構成市町村(21)));
             assertThat(result.get新旧保険者番号変換区分(), is(ShinKyuHokenshaNoHenkanKubun.変換不要));
         }
 
@@ -395,7 +395,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(get基準年月("200410"), get保険者番号("100100")).get();
 
             assertThat(result.get合併情報().get(), is(get合併情報(3)));
-            assertThat(result.get合併市町村().asList().get(0), is(get合併市町村(5)));
+            assertThat(result.get単一市町村情報().asList().get(0), is(get合併市町村(5)));
         }
 
         @Test
@@ -407,7 +407,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(get基準年月("200411"), get保険者番号("100100")).get();
 
             assertThat(result.get合併情報().get(), is(get合併情報(2)));
-            assertThat(result.get合併市町村().asList().get(0), is(get合併市町村(3)));
+            assertThat(result.get単一市町村情報().asList().get(0), is(get合併市町村(3)));
         }
 
         @Test(expected = IllegalArgumentException.class)
@@ -427,7 +427,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(get基準年月("200411"), get保険者番号("100100")).get();
 
             assertThat(result.get合併情報().isPresent(), is(false));
-            assertThat(result.get合併市町村().asList().get(0), is(get合併市町村(5)));
+            assertThat(result.get単一市町村情報().asList().get(0), is(get合併市町村(5)));
         }
 
         @Test
@@ -438,7 +438,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(get基準年月("200411"), get保険者番号("100100")).get();
 
             assertThat(result.get合併情報().isPresent(), is(false));
-            assertThat(result.get合併市町村().asList().get(0), is(get合併市町村(5)));
+            assertThat(result.get単一市町村情報().asList().get(0), is(get合併市町村(5)));
         }
     }
 
@@ -496,7 +496,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(get基準年月("200411"), get保険者番号("100046")).get();
 
             assertThat(result.get合併情報().get(), is(get合併情報(2)));
-            assertThat(result.get構成市町村().asList().get(0), is(get構成市町村(11)));
+            assertThat(result.get広域市町村情報().asList().get(0), is(get構成市町村(11)));
             assertThat(result.get新旧保険者番号変換区分(), is(ShinKyuHokenshaNoHenkanKubun.変換不要));
         }
 
@@ -509,7 +509,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(get基準年月("200411"), get保険者番号("100048")).get();
 
             assertThat(result.get合併情報().isPresent(), is(false));
-            assertThat(result.get構成市町村().asList().get(0), is(get構成市町村(13)));
+            assertThat(result.get広域市町村情報().asList().get(0), is(get構成市町村(13)));
             assertThat(result.get新旧保険者番号変換区分(), is(ShinKyuHokenshaNoHenkanKubun.変換不要));
         }
 
@@ -523,7 +523,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(get基準年月("200411"), get保険者番号("100100")).get();
 
             assertThat(result.get合併情報().get(), is(get合併情報(1)));
-            assertThat(result.get構成市町村().asList().get(0), is(get構成市町村(15)));
+            assertThat(result.get広域市町村情報().asList().get(0), is(get構成市町村(15)));
             assertThat(result.get新旧保険者番号変換区分(), is(ShinKyuHokenshaNoHenkanKubun.変換必要));
         }
 
@@ -536,7 +536,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             GappeiShichosonJoho result = sut.get基準月市町村情報(get基準年月("200410"), get保険者番号("100046")).get();
 
             assertThat(result.get合併情報().isPresent(), is(false));
-            assertThat(result.get構成市町村().asList().get(0), is(get構成市町村(24)));
+            assertThat(result.get広域市町村情報().asList().get(0), is(get構成市町村(24)));
             assertThat(result.get新旧保険者番号変換区分(), is(ShinKyuHokenshaNoHenkanKubun.変換不要));
         }
     }
@@ -600,8 +600,8 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
         GappeiShichosonJoho mock = mock(GappeiShichosonJoho.class);
         when(mock.get合併情報()).thenReturn(DbOptional.ofNullable(合併情報));
         when(mock.get保険者構成区分()).thenReturn(保険者構成区分);
-        when(mock.get合併市町村()).thenReturn(ItemList.of(合併市町村List));
-        when(mock.get構成市町村()).thenReturn(ItemList.of(構成市町村List));
+        when(mock.get単一市町村情報()).thenReturn(ItemList.of(合併市町村List));
+        when(mock.get広域市町村情報()).thenReturn(ItemList.of(構成市町村List));
         when(mock.get新旧保険者番号変換区分()).thenReturn(ShinKyuHokenshaNoHenkanKubun.UNKNOWN);
         return mock;
     }

@@ -16,6 +16,9 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7057KoikiShichosonSecur
  */
 public enum KoikiShichosonSecuritySearchItem implements ISearchItem {
 
+    /**
+     * 検索項目が「グループID」であることを表します。
+     */
     グループID(groupID);
 
     private final IColumnDefinition columnDefinition;
