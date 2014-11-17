@@ -3078,10 +3078,10 @@ var DBZ;
                             "selectControlID": "btnAdd",
                             "helpMessageID": "",
                             "jpControlName": "",
-                            "text": "追加する",
                             "onBeforeClick": "",
                             "onAfterClick": "",
                             "onClick": "onClick_btnAdd",
+                            "text": "追加する",
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
@@ -3111,7 +3111,6 @@ var DBZ;
                             "jpControlName": "",
                             "readOnly": false,
                             "height": "217px",
-                            "dataSource": [],
                             "gridSetting": {
                                 "rowHeight": 25,
                                 "isMultiSelectable": false,
@@ -3386,6 +3385,7 @@ var DBZ;
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
+                            "dataSource": [],
                             "sortOrder": "tekiyoDate",
                             "isAscending": true,
                             "filterList": [],
@@ -3419,6 +3419,7 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": false,
+                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -3427,17 +3428,16 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
-                                            "text": "",
-                                            "value": "",
                                             "labelLText": "適用日",
                                             "labelRText": "",
                                             "labelLWidth": "50px",
                                             "labelRWidth": "S",
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
-                                            "decorationClass": "",
                                             "ymdKubun": 2,
-                                            "displayFormat": 0
+                                            "displayFormat": 0,
+                                            "value": "",
+                                            "decorationClass": ""
                                         },
                                         {
                                             "fieldName": "txtTekiyoTodokedeDate",
@@ -3460,6 +3460,7 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": false,
+                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -3468,17 +3469,16 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
-                                            "text": "",
-                                            "value": "",
                                             "labelLText": "届出日",
                                             "labelRText": "",
                                             "labelLWidth": "50px",
                                             "labelRWidth": "",
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
-                                            "decorationClass": "",
                                             "ymdKubun": 2,
-                                            "displayFormat": 0
+                                            "displayFormat": 0,
+                                            "value": "",
+                                            "decorationClass": ""
                                         },
                                         {
                                             "fieldName": "ddlTekiyoJiyu",
@@ -3501,16 +3501,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": false,
-                                            "onFocus": "",
-                                            "onBlur": "",
-                                            "onChange": "",
-                                            "labelLText": "適用事由",
-                                            "labelRText": "",
-                                            "labelLWidth": "65px",
-                                            "labelRWidth": "S",
-                                            "labelLAlign": 2,
-                                            "labelRAlign": 0,
-                                            "selectedItem": "",
                                             "dataSource": [
                                                 {
                                                     "key": "key0",
@@ -3521,6 +3511,16 @@ var DBZ;
                                                     "value": "value1"
                                                 }
                                             ],
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "labelLText": "適用事由",
+                                            "labelRText": "",
+                                            "labelLWidth": "65px",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "selectedItem": "",
                                             "isBlankLine": true
                                         },
                                         {
@@ -3547,16 +3547,6 @@ var DBZ;
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
                                                     "readOnly": false,
-                                                    "onFocus": "",
-                                                    "onBlur": "",
-                                                    "onChange": "",
-                                                    "labelLText": "所在保険者",
-                                                    "labelRText": "",
-                                                    "labelLWidth": "80px",
-                                                    "labelRWidth": "S",
-                                                    "labelLAlign": 2,
-                                                    "labelRAlign": 0,
-                                                    "selectedItem": "",
                                                     "dataSource": [
                                                         {
                                                             "key": "key0",
@@ -3567,6 +3557,16 @@ var DBZ;
                                                             "value": ""
                                                         }
                                                     ],
+                                                    "onFocus": "",
+                                                    "onBlur": "",
+                                                    "onChange": "",
+                                                    "labelLText": "所在保険者",
+                                                    "labelRText": "",
+                                                    "labelLWidth": "80px",
+                                                    "labelRWidth": "S",
+                                                    "labelLAlign": 2,
+                                                    "labelRAlign": 0,
+                                                    "selectedItem": "",
                                                     "isBlankLine": true
                                                 },
                                                 {
@@ -3590,16 +3590,6 @@ var DBZ;
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
                                                     "readOnly": false,
-                                                    "onFocus": "",
-                                                    "onBlur": "",
-                                                    "onChange": "",
-                                                    "labelLText": "措置元保険者",
-                                                    "labelRText": "",
-                                                    "labelLWidth": "100px",
-                                                    "labelRWidth": "S",
-                                                    "labelLAlign": 2,
-                                                    "labelRAlign": 0,
-                                                    "selectedItem": "",
                                                     "dataSource": [
                                                         {
                                                             "key": "key0",
@@ -3610,6 +3600,16 @@ var DBZ;
                                                             "value": ""
                                                         }
                                                     ],
+                                                    "onFocus": "",
+                                                    "onBlur": "",
+                                                    "onChange": "",
+                                                    "labelLText": "措置元保険者",
+                                                    "labelRText": "",
+                                                    "labelLWidth": "100px",
+                                                    "labelRWidth": "S",
+                                                    "labelLAlign": 2,
+                                                    "labelRAlign": 0,
+                                                    "selectedItem": "",
                                                     "isBlankLine": true
                                                 },
                                                 {
@@ -3633,16 +3633,6 @@ var DBZ;
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
                                                     "readOnly": false,
-                                                    "onFocus": "",
-                                                    "onBlur": "",
-                                                    "onChange": "",
-                                                    "labelLText": "旧保険者",
-                                                    "labelRText": "",
-                                                    "labelLWidth": "70px",
-                                                    "labelRWidth": "S",
-                                                    "labelLAlign": 2,
-                                                    "labelRAlign": 0,
-                                                    "selectedItem": "",
                                                     "dataSource": [
                                                         {
                                                             "key": "key0",
@@ -3653,6 +3643,16 @@ var DBZ;
                                                             "value": ""
                                                         }
                                                     ],
+                                                    "onFocus": "",
+                                                    "onBlur": "",
+                                                    "onChange": "",
+                                                    "labelLText": "旧保険者",
+                                                    "labelRText": "",
+                                                    "labelLWidth": "70px",
+                                                    "labelRWidth": "S",
+                                                    "labelLAlign": 2,
+                                                    "labelRAlign": 0,
+                                                    "selectedItem": "",
                                                     "isBlankLine": true
                                                 },
                                                 {
@@ -3676,16 +3676,6 @@ var DBZ;
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
                                                     "readOnly": false,
-                                                    "onFocus": "",
-                                                    "onBlur": "",
-                                                    "onChange": "",
-                                                    "labelLText": "住民情報",
-                                                    "labelRText": "",
-                                                    "labelLWidth": "80px",
-                                                    "labelRWidth": "S",
-                                                    "labelLAlign": 2,
-                                                    "labelRAlign": 0,
-                                                    "selectedItem": "",
                                                     "dataSource": [
                                                         {
                                                             "key": "key0",
@@ -3696,6 +3686,16 @@ var DBZ;
                                                             "value": ""
                                                         }
                                                     ],
+                                                    "onFocus": "",
+                                                    "onBlur": "",
+                                                    "onChange": "",
+                                                    "labelLText": "住民情報",
+                                                    "labelRText": "",
+                                                    "labelLWidth": "80px",
+                                                    "labelRWidth": "S",
+                                                    "labelLAlign": 2,
+                                                    "labelRAlign": 0,
+                                                    "selectedItem": "",
                                                     "isBlankLine": true
                                                 }
                                             ],
@@ -3802,6 +3802,7 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": false,
+                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -3810,17 +3811,16 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
-                                            "text": "",
-                                            "value": "",
                                             "labelLText": "解除日",
                                             "labelRText": "",
                                             "labelLWidth": "50px",
                                             "labelRWidth": "S",
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
-                                            "decorationClass": "",
                                             "ymdKubun": 2,
-                                            "displayFormat": 0
+                                            "displayFormat": 0,
+                                            "value": "",
+                                            "decorationClass": ""
                                         },
                                         {
                                             "fieldName": "txtKaijoTodokedeDate",
@@ -3843,6 +3843,7 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": false,
+                                            "text": "",
                                             "required": false,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
@@ -3851,17 +3852,16 @@ var DBZ;
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
-                                            "text": "",
-                                            "value": "",
                                             "labelLText": "届出日",
                                             "labelRText": "",
                                             "labelLWidth": "50px",
                                             "labelRWidth": "S",
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
-                                            "decorationClass": "",
                                             "ymdKubun": 2,
-                                            "displayFormat": 0
+                                            "displayFormat": 0,
+                                            "value": "",
+                                            "decorationClass": ""
                                         },
                                         {
                                             "fieldName": "ddlKaijoJiyu",
@@ -3884,16 +3884,6 @@ var DBZ;
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": false,
-                                            "onFocus": "",
-                                            "onBlur": "",
-                                            "onChange": "",
-                                            "labelLText": "解除事由",
-                                            "labelRText": "",
-                                            "labelLWidth": "65px",
-                                            "labelRWidth": "S",
-                                            "labelLAlign": 2,
-                                            "labelRAlign": 0,
-                                            "selectedItem": "",
                                             "dataSource": [
                                                 {
                                                     "key": "key0",
@@ -3904,6 +3894,16 @@ var DBZ;
                                                     "value": ""
                                                 }
                                             ],
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "labelLText": "解除事由",
+                                            "labelRText": "",
+                                            "labelLWidth": "65px",
+                                            "labelRWidth": "S",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "selectedItem": "",
                                             "isBlankLine": true
                                         },
                                         {
@@ -3930,16 +3930,6 @@ var DBZ;
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
                                                     "readOnly": false,
-                                                    "onFocus": "",
-                                                    "onBlur": "",
-                                                    "onChange": "",
-                                                    "labelLText": "所在保険者",
-                                                    "labelRText": "",
-                                                    "labelLWidth": "80px",
-                                                    "labelRWidth": "S",
-                                                    "labelLAlign": 2,
-                                                    "labelRAlign": 0,
-                                                    "selectedItem": "",
                                                     "dataSource": [
                                                         {
                                                             "key": "key0",
@@ -3950,6 +3940,16 @@ var DBZ;
                                                             "value": ""
                                                         }
                                                     ],
+                                                    "onFocus": "",
+                                                    "onBlur": "",
+                                                    "onChange": "",
+                                                    "labelLText": "所在保険者",
+                                                    "labelRText": "",
+                                                    "labelLWidth": "80px",
+                                                    "labelRWidth": "S",
+                                                    "labelLAlign": 2,
+                                                    "labelRAlign": 0,
+                                                    "selectedItem": "",
                                                     "isBlankLine": true
                                                 },
                                                 {
@@ -3973,16 +3973,6 @@ var DBZ;
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
                                                     "readOnly": false,
-                                                    "onFocus": "",
-                                                    "onBlur": "",
-                                                    "onChange": "",
-                                                    "labelLText": "措置元保険者",
-                                                    "labelRText": "",
-                                                    "labelLWidth": "100px",
-                                                    "labelRWidth": "S",
-                                                    "labelLAlign": 2,
-                                                    "labelRAlign": 0,
-                                                    "selectedItem": "",
                                                     "dataSource": [
                                                         {
                                                             "key": "key0",
@@ -3993,6 +3983,16 @@ var DBZ;
                                                             "value": "value1"
                                                         }
                                                     ],
+                                                    "onFocus": "",
+                                                    "onBlur": "",
+                                                    "onChange": "",
+                                                    "labelLText": "措置元保険者",
+                                                    "labelRText": "",
+                                                    "labelLWidth": "100px",
+                                                    "labelRWidth": "S",
+                                                    "labelLAlign": 2,
+                                                    "labelRAlign": 0,
+                                                    "selectedItem": "",
                                                     "isBlankLine": true
                                                 },
                                                 {
@@ -4016,16 +4016,6 @@ var DBZ;
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
                                                     "readOnly": false,
-                                                    "onFocus": "",
-                                                    "onBlur": "",
-                                                    "onChange": "",
-                                                    "labelLText": "旧保険者",
-                                                    "labelRText": "",
-                                                    "labelLWidth": "70px",
-                                                    "labelRWidth": "S",
-                                                    "labelLAlign": 2,
-                                                    "labelRAlign": 0,
-                                                    "selectedItem": "",
                                                     "dataSource": [
                                                         {
                                                             "key": "key0",
@@ -4036,6 +4026,16 @@ var DBZ;
                                                             "value": ""
                                                         }
                                                     ],
+                                                    "onFocus": "",
+                                                    "onBlur": "",
+                                                    "onChange": "",
+                                                    "labelLText": "旧保険者",
+                                                    "labelRText": "",
+                                                    "labelLWidth": "70px",
+                                                    "labelRWidth": "S",
+                                                    "labelLAlign": 2,
+                                                    "labelRAlign": 0,
+                                                    "selectedItem": "",
                                                     "isBlankLine": true
                                                 },
                                                 {
@@ -4059,16 +4059,6 @@ var DBZ;
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
                                                     "readOnly": false,
-                                                    "onFocus": "",
-                                                    "onBlur": "",
-                                                    "onChange": "",
-                                                    "labelLText": "住民情報",
-                                                    "labelRText": "",
-                                                    "labelLWidth": "80px",
-                                                    "labelRWidth": "S",
-                                                    "labelLAlign": 2,
-                                                    "labelRAlign": 0,
-                                                    "selectedItem": "",
                                                     "dataSource": [
                                                         {
                                                             "key": "key0",
@@ -4079,6 +4069,16 @@ var DBZ;
                                                             "value": "value1"
                                                         }
                                                     ],
+                                                    "onFocus": "",
+                                                    "onBlur": "",
+                                                    "onChange": "",
+                                                    "labelLText": "住民情報",
+                                                    "labelRText": "",
+                                                    "labelLWidth": "80px",
+                                                    "labelRWidth": "S",
+                                                    "labelLAlign": 2,
+                                                    "labelRAlign": 0,
+                                                    "selectedItem": "",
                                                     "isBlankLine": true
                                                 }
                                             ],
@@ -4181,10 +4181,10 @@ var DBZ;
                                     "selectControlID": "btnJutokuKakutei",
                                     "helpMessageID": "",
                                     "jpControlName": "",
-                                    "text": "確定する",
                                     "onBeforeClick": "",
                                     "onAfterClick": "",
                                     "onClick": "onClick_btnJutokuKakutei",
+                                    "text": "確定する",
                                     "appearance": 0,
                                     "imageFileUrl": "",
                                     "imageWidth": "",
@@ -4212,10 +4212,10 @@ var DBZ;
                                     "selectControlID": "btnJutokuTorikeshi",
                                     "helpMessageID": "",
                                     "jpControlName": "",
-                                    "text": "取消する",
                                     "onBeforeClick": "",
                                     "onAfterClick": "",
                                     "onClick": "onClick_btnJutokuTorikeshi",
+                                    "text": "取消する",
                                     "appearance": 0,
                                     "imageFileUrl": "",
                                     "imageWidth": "",
@@ -4891,10 +4891,12 @@ var DBZ;
                 }
                 BtnDisplayMode.prototype.SetDisplay = function () {
                     this.controls.btnAdd().displayNone = false;
+                    this.controls.btnAdd().disabled = false;
                 };
 
                 BtnDisplayMode.prototype.SetDisplayNone = function () {
                     this.controls.btnAdd().displayNone = true;
+                    this.controls.btnAdd().disabled = true;
                 };
                 return BtnDisplayMode;
             })();

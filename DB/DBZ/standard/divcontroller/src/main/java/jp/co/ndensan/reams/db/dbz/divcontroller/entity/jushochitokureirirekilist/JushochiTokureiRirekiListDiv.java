@@ -3,7 +3,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilis
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.IJushochiTokureiRirekiListDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuInputDiv;
@@ -606,7 +605,23 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
 
     @Override
     public void initialize(LasdecCode 市町村コード) {
-        //TODO n8178 城間篤人 詳細画面の記述から、必要な処理TODOを後で持ってくる。
+        //TODO
+        //1)、引数から受け取った市町村コードを元に、保険者情報を取得する。
+        //2)、取得した保険者情報を元に、以下のように処理を分岐する。
+        //2-1)、保険者が「単一保険者」で「合併なし」の保険者である場合
+        //      HikenshaJohoDisplayModeに、TanitsuGappeiNashiを設定する。
+        //2-2)、保険者が「単一保険者」で「合併あり」の保険者である場合
+        //      HikenshaJohoDisplayModeに、TanitshGappeiAriを設定する。
+        //      保険者情報を元に、旧保険者DDLの選択項目を設定する。
+        //2-3)、保険者が「広域保険者」で「合併なし」の保険者である場合
+        //      HikenshaJohoDisplayModeに、KoikiGappeiNashiを設定する。
+        //      保険者情報を元に、所在保険者DDL・措置元保険者DDLを選択項目を設定する。
+        //2-4)、保険者が「広域保険者」で「合併あり」の保険者である場合
+        //      HikenshaJohoDisplayModeに、KoikiGappeiAriを設定する。
+        //      保険者情報を元に、所在保険者DDL・措置元保険者DDL・旧保険者DDLの選択項目を設定する。
+        //
+        //3)、コードマスタから住特適用（コードマスタ:0127）、住適解除（コードマスタ:0128）の情報を取得する。
+        //4)、コードマスタから取得した情報を、適用事由DDL、解除事由DDLに設定する。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

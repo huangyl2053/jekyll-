@@ -404,11 +404,12 @@ module DBZ
 
                 public SetDisplay(): void {
                     this.controls.btnAdd().displayNone = false;
-
+                    this.controls.btnAdd().disabled = false;
                 }
 
                 public SetDisplayNone(): void {
                     this.controls.btnAdd().displayNone = true;
+                    this.controls.btnAdd().disabled = true;
                 }
             }
 

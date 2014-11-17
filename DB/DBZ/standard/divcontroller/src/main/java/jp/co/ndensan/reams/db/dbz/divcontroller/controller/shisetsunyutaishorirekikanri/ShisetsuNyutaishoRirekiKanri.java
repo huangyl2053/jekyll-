@@ -29,12 +29,13 @@ public class ShisetsuNyutaishoRirekiKanri {
         //１）「追加する」ボタンを押下不可にする。
         //２）「施設入退所履歴一覧」をreadOnlyにする。
         //３）明細エリアの項目を空白で表示する。【入力可】
+        //３－１）明細表示モードに、追加・修正を設定する。
 
         return createSettingData(shisetsuNyutaishoDiv);
     }
 
     /**
-     * 施設入退所履歴上の一行が押下された際に実行します。<br/>
+     * 施設入退所履歴上の1行が選択された際に実行します。<br/>
      * 選択行の状態に応じて、修正・照会などの処理のための前準備を行います。
      *
      * @param shisetsuNyutaishoDiv
@@ -47,10 +48,15 @@ public class ShisetsuNyutaishoRirekiKanri {
         //１）「追加する」ボタンを押下不可にする。
         //２）「施設入退所履歴一覧」をreadOnlyにする。
         //３）明細エリアに選択行の内容を表示する。
-        //４）状態が「追加」の場合、明細エリアの項目を入力可にする。
-        //５）状態が「修正」の場合、明細エリアの項目を入力可にする。
-        //６）状態が「削除」の場合、明細エリアの項目を入力不可にする。
-        //７）状態が「空白」の場合、明細エリアの項目を入力不可にして「確定する」ボタンを押下不可にする。
+        //４）選択行の状態によって、以下のように処理する。
+        //４－１）状態が「追加」の場合、明細エリアの項目を入力可にする。
+        //４－１－１）明細表示モードに、追加・修正を設定する。
+        //４－２）状態が「修正」の場合、明細エリアの項目を入力可にする。
+        //４－２－１）明細表示モードに、追加・修正を設定する。
+        //４ー３）状態が「削除」の場合、明細エリアの項目を入力不可にする。
+        //４－３－１）明細表示モードに、削除を設定する。
+        //４－４）状態が「空白」の場合、明細エリアの項目を入力不可にして「確定する」ボタンを押下不可にする。
+        //４－４－１）明細表示モードに、選択不可を設定する。
 
         return createSettingData(shisetsuNyutaishoDiv);
     }
@@ -69,6 +75,7 @@ public class ShisetsuNyutaishoRirekiKanri {
         //１）「追加する」ボタンを押下不可にする。
         //２）「施設入退所履歴一覧」をreadOnlyにする。
         //３）明細エリアに選択行の内容を表示する。
+        //３－１）明細表示モードに、追加・修正を設定する。
 
         return createSettingData(shisetsuNyutaishoDiv);
     }
@@ -88,6 +95,7 @@ public class ShisetsuNyutaishoRirekiKanri {
         //２）「施設入退所履歴一覧」をreadOnlyにする。
         //３）明細エリアに選択行の内容を表示する。
         //４）明細エリア上の、確定ボタンと取消ボタン以外の項目を全て非活性にする
+        //４－１）明細表示モードに、削除を設定する。
 
         return createSettingData(shisetsuNyutaishoDiv);
     }
@@ -107,11 +115,10 @@ public class ShisetsuNyutaishoRirekiKanri {
         //       メッセージID：URZE00027（期間が不正です。%1－%2）
         //　　　　%1：入所日
         //　　　　%2：退所日
-
         //２）修正時のみ
         //：退所日 ≧ 次の履歴データの入所日 のとき、エラーメッセージを表示する。
         //       メッセージID：URZE00025（期間が重複しています。）
-        //３）追加時のみ
+        //３）追加時・修正時のみ
         //：入所日 ≦ 前の履歴データの退所日 のとき、エラーメッセージを表示する。
         //       メッセージID：URZE00025（期間が重複しています。）
         return createSettingData(shisetsuNyutaishoDiv);
@@ -139,7 +146,8 @@ public class ShisetsuNyutaishoRirekiKanri {
         //　→選択している行の状態列を"削除"に変更する。
         //新規に追加した行に対して削除する場合は、追加行をグリッドから取り除く。
         //４）「施設入退所履歴一覧」のReadOnlyを外す。
-        //５）「追加する」ボタンを押下可能にする。
+        //５）明細表示モードに選択不可を設定する。
+        //６）「追加する」ボタンを押下可能にする。
 
         return createSettingData(shisetsuNyutaishoDiv);
     }
@@ -179,6 +187,7 @@ public class ShisetsuNyutaishoRirekiKanri {
         //TODO
         //１）明細エリアの各項目の値をクリアする。
         //２）「施設入退所履歴一覧」のReadOnlyを外す。
+        //３）明細表示モードに選択不可を設定する。
 
         return createSettingData(shisetsuNyutaishoDiv);
     }

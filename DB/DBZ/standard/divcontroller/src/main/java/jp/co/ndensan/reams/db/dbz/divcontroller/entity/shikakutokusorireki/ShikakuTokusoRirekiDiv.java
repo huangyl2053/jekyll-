@@ -301,7 +301,26 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
 
     @Override
     public void set資格得喪履歴(IItemList<HihokenshaDaichoModel> 被保険者台帳List) {
-        //1)、引数から渡された情報小w、PanelSessionAccessorに登録する。
+        //1)、引数から渡された情報を、PanelSessionAccessorに登録する。
         //2)、登録した情報を、グリッドにマッピングする。
+    }
+
+    @Override
+    public void initialize(LasdecCode 市町村コード) {
+        //TODO
+        //1)、引数から受け取った市町村コードを元に、保険者情報を取得する。
+        //2)、取得した保険者情報を元に、以下のように処理を分岐する。
+        //2-1)、保険者が「単一保険者」で「合併なし」の保険者である場合
+        //      HikenshaJohoDisplayModeに、TanitsuGappeiNashiを設定する。
+        //2-2)、保険者が「単一保険者」で「合併あり」の保険者である場合
+        //      HikenshaJohoDisplayModeに、TanitshGappeiAriを設定する。
+        //      保険者情報を元に、旧保険者DDLの選択項目を設定する。
+        //2-3)、保険者が「広域保険者」で「合併なし」の保険者である場合
+        //      HikenshaJohoDisplayModeに、KoikiGappeiNashiを設定する。
+        //      保険者情報を元に、所在保険者DDL・措置元保険者DDLを選択項目を設定する。
+        //2-4)、保険者が「広域保険者」で「合併あり」の保険者である場合
+        //      HikenshaJohoDisplayModeに、KoikiGappeiAriを設定する。
+        //      保険者情報を元に、所在保険者DDL・措置元保険者DDL・旧保険者DDLの選択項目を設定する。
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

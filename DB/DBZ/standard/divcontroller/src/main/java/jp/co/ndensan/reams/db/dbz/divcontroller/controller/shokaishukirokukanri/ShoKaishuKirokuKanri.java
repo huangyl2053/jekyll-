@@ -25,6 +25,7 @@ public class ShoKaishuKirokuKanri {
     public ResponseData<ShoKaishuKirokuKanriDiv> onSelect_dgShoKaishuJokyo(ShoKaishuKirokuKanriDiv shoKaishuDiv) {
         //TODO
         //１）明細エリアに選択行の内容を表示する。(照会のためreadOnly)
+        //１－１）表示方法モードに、照会を設定する。
 
         return createSettingData(shoKaishuDiv);
     }
@@ -39,10 +40,7 @@ public class ShoKaishuKirokuKanri {
     public ResponseData<ShoKaishuKirokuKanriDiv> onSelectBySelectButton_dgShoKaishuJokyo(ShoKaishuKirokuKanriDiv shoKaishuDiv) {
         //TODO
         //１）明細エリアに選択行の内容を表示する。
-        //２）明細エリアの証回収に関する項目の（回収日、回収事由、回収理由）を活性化する。
-        //３）明細エリアの、証回収に関する項目（回収日、回収事由、回収理由）以外の項目を非活性にする。
-        //４）確定する ボタン、取り消し ボタンを活性化する。
-
+        //２）表示方法モードに、入力を設定する。
         return createSettingData(shoKaishuDiv);
     }
 
@@ -79,8 +77,7 @@ public class ShoKaishuKirokuKanri {
         //１）明細エリアの入力内容を証回収記録一覧に反映させる。
         //２）修正した行の状態カラムを「修正」に変更する。
         //３）「証回収記録一覧」のReadOnlyを外す。
-        //４）明細エリアをReadOnlyにする。
-        //５）確定する ボタン、取り消し ボタンを非活性にする。
+        //４）表示方法モードに、照会を設定する。
 
         return createSettingData(shoKaishuDiv);
     }
@@ -95,11 +92,11 @@ public class ShoKaishuKirokuKanri {
     public ResponseData<ShoKaishuKirokuKanriDiv> onClick_btnShoKaishuTorikeshi(ShoKaishuKirokuKanriDiv shoKaishuDiv) {
         //TODO
         //１）明細エリアの情報が変更されているかを確認する。
-        //１－１）変更がない場合は、onClick_btnIryoHokenTorikeshi_onYesの処理を実行する。
+        //１－１）変更がない場合は、onClick_btnShoKaishuTorikeshi_onYesの処理を実行する。
         //１－２）変更が存在する場合は、２）の処理を実行する。
         //２）以下のメッセージを表示し、入力した値の破棄を行ってもよいかの確認をする。
         //メッセージID：URZQ00007（入力された値を破棄します。よろしいですか？）
-        //      Yes：onClick_btnIryoHokenTorikeshi_onYesの処理を実行する。
+        //      Yes：onClick_btnShoKaishuTorikeshi_onYesの処理を実行する。
         //      No:ダイアログを閉じる
 
         return createSettingData(shoKaishuDiv);
@@ -116,8 +113,7 @@ public class ShoKaishuKirokuKanri {
         //TODO
         //１）明細エリアの各項目をクリアする。
         //２）「証回収記録一覧」のReadOnlyを外す。
-        //３）明細エリアをReadOnlyにする。
-        //４）確定する ボタン、取り消し ボタンを非活性にする。
+        //３）表示方法モードに、照会を設定する。
 
         return createSettingData(shoKaishuDiv);
     }

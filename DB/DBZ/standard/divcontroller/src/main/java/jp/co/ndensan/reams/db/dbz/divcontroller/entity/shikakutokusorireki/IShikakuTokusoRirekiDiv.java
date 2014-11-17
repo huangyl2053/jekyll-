@@ -40,4 +40,15 @@ public interface IShikakuTokusoRirekiDiv {
      * @param 被保険者台帳List 被保険者台帳List
      */
     void set資格得喪履歴(IItemList<HihokenshaDaichoModel> 被保険者台帳List);
+
+    /**
+     * 資格得喪履歴ListDivについて、グリッド表示項目などの項目について初期化処理を行います。<br/>
+     * 初期設定を行う項目は以下のとおりです。
+     * <ul>
+     * <li>保険者情報表示モードの設定（所在保険者・措置元保険者・旧保険者項目の表示非表示）</li>
+     * </ul>
+     *
+     * @param 市町村コード 市町村コード
+     */
+    void initialize(LasdecCode 市町村コード);
 }

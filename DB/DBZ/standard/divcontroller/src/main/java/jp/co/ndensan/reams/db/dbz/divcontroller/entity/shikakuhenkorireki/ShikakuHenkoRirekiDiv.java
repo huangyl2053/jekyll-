@@ -476,10 +476,24 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @Override
-    public void initialize() {
+    public void initialize(LasdecCode 市町村コード) {
         //TODO
-        //１）変更事由ドロップダウンリストに名称をセットする
-        //２）明細エリアの各項目の値をクリアする。
+        //1)、引数から受け取った市町村コードを元に、保険者情報を取得する。
+        //2)、取得した保険者情報を元に、以下のように処理を分岐する。
+        //2-1)、保険者が「単一保険者」で「合併なし」の保険者である場合
+        //      HikenshaJohoDisplayModeに、TanitsuGappeiNashiを設定する。
+        //2-2)、保険者が「単一保険者」で「合併あり」の保険者である場合
+        //      HikenshaJohoDisplayModeに、TanitshGappeiAriを設定する。
+        //      保険者情報を元に、旧保険者DDLの選択項目を設定する。
+        //2-3)、保険者が「広域保険者」で「合併なし」の保険者である場合
+        //      HikenshaJohoDisplayModeに、KoikiGappeiNashiを設定する。
+        //      保険者情報を元に、所在保険者DDL・措置元保険者DDLを選択項目を設定する。
+        //2-4)、保険者が「広域保険者」で「合併あり」の保険者である場合
+        //      HikenshaJohoDisplayModeに、KoikiGappeiAriを設定する。
+        //      保険者情報を元に、所在保険者DDL・措置元保険者DDL・旧保険者DDLの選択項目を設定する。
+        //
+        //3)、コードマスタから変更事由(被保険者)（コードマスタ:0126）の情報を取得する。
+        //4)、コードマスタから取得した情報を、変更事由DDLに設定する。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -64,7 +64,7 @@ module DBZ
                         gridSetting.isShowModifyButtonColumn = false;
                         gridSetting.isShowDeleteButtonColumn = false;
 
-                        //TODO •‚Ìİ’è
+                        //TODO å¹…ã®è¨­å®š
                         this.controls.dgShikakuShutokuRireki().width;
                         
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
@@ -80,7 +80,7 @@ module DBZ
                         gridSetting.columns[0].visible = true;
                         gridSetting.isShowModifyButtonColumn = false;
                         gridSetting.isShowDeleteButtonColumn = false;
-                        //TODO •‚Ìİ’è‚ğ‚Ç‚Ì‚æ‚¤‚É‚·‚é‚©
+                        //TODO å¹…ã®è¨­å®šã‚’ã©ã®ã‚ˆã†ã«ã™ã‚‹ã‹
                         this.controls.dgShikakuShutokuRireki().width;
 
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
@@ -96,7 +96,7 @@ module DBZ
                         gridSetting.columns[0].visible = true;
                         gridSetting.isShowModifyButtonColumn = true;
                         gridSetting.isShowDeleteButtonColumn = true;
-                        //TODO •‚Ìİ’è
+                        //TODO å¹…ã®è¨­å®š
                         this.controls.dgShikakuShutokuRireki().width;
 
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;

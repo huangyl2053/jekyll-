@@ -27,6 +27,7 @@ public class ShikakuHenkoRireki {
         //１）「追加する」ボタンを押下不可にする。
         //２）「資格変更履歴一覧」をreadOnlyにする。
         //３）資格変更入力明細エリアの項目をクリアし、入力可にする。
+        //３－１）MeisaiModeに、torokuを設定する。
 
         return createSettingData(henkoRirekiDiv);
     }
@@ -43,8 +44,11 @@ public class ShikakuHenkoRireki {
         //１）「追加する」ボタンを押下不可にする。
         //２）「資格変更履歴一覧」をreadOnlyにする。
         //３）資格変更入力明細エリアに選択行の内容を表示する。
-        //４）「追加」「修正」行を選択している場合、明細エリアの項目を入力可にする。
-        //状態が空白の行を選択した場合、明細エリアの項目を入力不可にして「確定する」ボタンを押下不可にする。
+        //４）行の状態によって、以下の処理を行う。
+        //４－１）「追加」「修正」行を選択している場合、明細エリアの項目を入力可にする。
+        //４－１－１）MeisaiModeに、torokuを設定する。
+        //４－２）状態が空白の行を選択した場合、明細エリアの項目を入力不可にして「確定する」ボタンを押下不可にする。
+        //４－２－１）MeisaiModeに、shokaiを設定する。
 
         return createSettingData(henkoRirekiDiv);
     }
@@ -61,6 +65,7 @@ public class ShikakuHenkoRireki {
         //１）「追加する」ボタンを押下不可にする。
         //２）「資格変更履歴一覧」をreadOnlyにする。
         //３）明細エリアに選択行の内容を表示し、入力可とする。
+        //３－１）MeisaiModeに、torokuを設定する。
 
         return createSettingData(henkoRirekiDiv);
     }
@@ -77,6 +82,7 @@ public class ShikakuHenkoRireki {
         //１）「追加する」ボタンを押下不可にする。
         //２）「資格変更履歴一覧」をreadOnlyにする。
         //３）明細エリアに選択行の内容を表示し、入力不可とする。
+        //３－１）MeisaiModeに、sakujoを設定する。
         return createSettingData(henkoRirekiDiv);
     }
 
