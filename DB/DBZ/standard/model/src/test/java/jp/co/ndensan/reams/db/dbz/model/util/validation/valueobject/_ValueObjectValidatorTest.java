@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject;
+package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject;
 
-import com.lowagie.text.pdf.PdfFormField;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject._ValueObjectValidator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;

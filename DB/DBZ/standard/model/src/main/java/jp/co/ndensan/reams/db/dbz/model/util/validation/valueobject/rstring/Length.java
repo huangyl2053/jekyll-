@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring;
+package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.rstring;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectCheckable;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValidationMessages;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;

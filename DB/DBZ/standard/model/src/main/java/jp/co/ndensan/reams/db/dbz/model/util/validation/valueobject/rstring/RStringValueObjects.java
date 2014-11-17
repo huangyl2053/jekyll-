@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring;
+package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.rstring;
 
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common.NotEmptyChecker;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectCheckable;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common.NotNullChecker;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common.NotEmptyChecker;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common.NotNullChecker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

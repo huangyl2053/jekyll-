@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject;
+package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject;
 
 import java.util.Iterator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -42,7 +42,7 @@ public class ValueObjectCheckListTest extends DbzTestBase {
 
         @Test(expected = NullPointerException.class)
         public void checksは_引数がnullの時_NullPointerExceptionをスローする() {
-            sut.checks(null);
+            sut.checks((IValueObjectCheckable<Object>[]) null);
         }
 
         @Test

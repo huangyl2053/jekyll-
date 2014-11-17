@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject;
+package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectInfo.IValueObjectInfoBuilder;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValueObjectInfo.IValueObjectInfoBuilder;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 
 /**

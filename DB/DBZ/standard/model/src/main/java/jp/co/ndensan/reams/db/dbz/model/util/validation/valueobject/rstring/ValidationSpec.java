@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring;
+package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.rstring;
 
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectValidationSpec;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.Unit;
-import static jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.Unit.桁;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectCheckList;
-import static jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectCheckList.checks;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectInfo;
-import static jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectInfo.displayName;
-import static jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring.RStringValueObjects.notNull;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectValidationSpec;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.Unit;
+import static jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.Unit.桁;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValueObjectCheckList;
+import static jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValueObjectCheckList.checks;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValueObjectInfo;
+import static jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValueObjectInfo.displayName;
+import static jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.rstring.RStringValueObjects.notNull;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
