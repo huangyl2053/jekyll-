@@ -74,7 +74,7 @@ public class ShikakuTokusoRirekiHandler {
             row.setSoshitsuJiyu(shikaku.get資格喪失().getReason().getName());
             row.setJutokuKubun(shikaku.get住所地特例者区分().get名称());
             row.setShozaiHokensha(shikaku.get市町村コード().value());
-            row.setSochimotoHokensha(shikaku.get広域内住所地特例措置元市町村コード().value());
+            row.setSochimotoHokensha(shikaku.get広域内住所地特例措置元保険者番号().value());
             row.setKyuHokensha(shikaku.get旧市町村コード().value());
             row.setShikibetsuCode(shikaku.get識別コード().value());
             rowList.add(row);

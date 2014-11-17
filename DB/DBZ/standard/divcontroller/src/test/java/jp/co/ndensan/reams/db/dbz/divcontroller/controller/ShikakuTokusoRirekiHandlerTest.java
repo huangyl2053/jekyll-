@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuSoshitsu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
@@ -55,7 +56,7 @@ public class ShikakuTokusoRirekiHandlerTest extends DbzTestBase {
     private static final FlexibleDate 資格喪失届出日 = new FlexibleDate("20140303");
     private static final FlexibleDate 資格喪失日 = new FlexibleDate("20140404");
     private static final JushochiTokureishaKubun 住所地特例者区分 = JushochiTokureishaKubun.通常資格者;
-    private static final LasdecCode 広域内住所地特例措置元市町村コード = new LasdecCode("000004");
+    private static final ShoKisaiHokenshaNo 広域内住所地特例措置元保険者番号 = new ShoKisaiHokenshaNo("000004");
     private static final LasdecCode 旧市町村コード = new LasdecCode("000005");
 
     public static class load {
@@ -115,7 +116,7 @@ public class ShikakuTokusoRirekiHandlerTest extends DbzTestBase {
 
         @Test
         public void 広域内住所地特例措置元市町村コードのデータがある時_loadは_データをDivに設定する() {
-            assertThat(result.getDgShikakuShutokuRireki().getDataSource().get(0).getSochimotoHokensha(), is(広域内住所地特例措置元市町村コード.value()));
+            assertThat(result.getDgShikakuShutokuRireki().getDataSource().get(0).getSochimotoHokensha(), is(広域内住所地特例措置元保険者番号.value()));
         }
 
         @Test
@@ -162,7 +163,7 @@ public class ShikakuTokusoRirekiHandlerTest extends DbzTestBase {
         when(mock.get資格喪失()).thenReturn(new ShikakuSoshitsu(資格喪失事由, 資格喪失届出日, 資格喪失日));
         when(mock.get住所地特例者区分()).thenReturn(住所地特例者区分);
         when(mock.get市町村コード()).thenReturn(市町村コード);
-        when(mock.get広域内住所地特例措置元市町村コード()).thenReturn(広域内住所地特例措置元市町村コード);
+        when(mock.get広域内住所地特例措置元保険者番号()).thenReturn(広域内住所地特例措置元保険者番号);
         when(mock.get旧市町村コード()).thenReturn(旧市町村コード);
         when(mock.get識別コード()).thenReturn(識別コード);
         return mock;
