@@ -5,19 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
 
-import jp.co.ndensan.reams.db.dbz.business.KaigoShikakuKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.business.KaigoFukaKihonSearchKey;
 
 /**
- * 介護資格基本情報Divのインターフェースです。
+ * 介護賦課基本情報Divのインターフェースです。
  *
  * @author N8156 宮本 康
  */
-public interface IKaigoShikakuKihonDiv {
+public interface IKaigoFukaKihonDiv {
 
     /**
      * 検索キーを元にデータを取得し、Divに設定します。
      *
-     * @param 検索キー 介護資格基本情報の検索キー
+     * @param 検索キー 介護賦課基本情報の検索キー
      */
-    void load(KaigoShikakuKihonSearchKey 検索キー);
+    void load(KaigoFukaKihonSearchKey 検索キー);
 }

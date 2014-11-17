@@ -3,15 +3,16 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbz.business.KaigoShikakuKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShikakuTokusoRirekiHandler;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
-
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 
 /**
  * ShikakuTokusoRireki のクラスファイル
@@ -244,4 +245,13 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     }
 
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void load(KaigoShikakuKihonSearchKey 検索キー) {
+        getHandler().load(検索キー);
+    }
+
+    @JsonIgnore
+    public ShikakuTokusoRirekiHandler getHandler() {
+        return new ShikakuTokusoRirekiHandler(this);
+    }
 }

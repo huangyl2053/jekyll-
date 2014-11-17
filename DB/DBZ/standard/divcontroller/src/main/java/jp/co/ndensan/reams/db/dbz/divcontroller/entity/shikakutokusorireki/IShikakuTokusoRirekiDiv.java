@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki;
 
+import jp.co.ndensan.reams.db.dbz.business.KaigoShikakuKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv.DataGridWidth;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv.BtnDisplayMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv.DisplayType;
@@ -41,4 +42,10 @@ public interface IShikakuTokusoRirekiDiv {
 
     public void setMode_BtnDisplayMode(BtnDisplayMode value);
 
+    /**
+     * 検索キーを元にデータを取得し、Divに設定します。
+     *
+     * @param 検索キー 介護資格基本情報の検索キー
+     */
+    void load(KaigoShikakuKihonSearchKey 検索キー);
 }
