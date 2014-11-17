@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common;
+package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common;
 
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common.NotNullChecker;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectCheckable;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValidationMessages;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.Unit;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValueObjectInfo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,7 +34,7 @@ public class NotNullCheckerTest extends DbzTestBase {
     @Before
     public void setUp() {
         sut = NotNullChecker.getInstance(RString.class);
-        info = new ValueObjectInfo.Builder("test").build();
+        info = ValueObjectInfo.of("test", Unit.桁);
     }
 
     @Test

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.common;
+package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common;
 
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectCheckable;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValidationMessages;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
@@ -52,7 +52,7 @@ public final class NotNullChecker<T> implements IValueObjectCheckable<T> {
     public IValidationMessages check(IValueObject<T> v, IValueObjectInfo objInfo) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         if (!isValid(v)) {
-            messages.add(ValidationMessages.必須入力項目, objInfo.getName().toString());
+            messages.add(ValidationMessages.必須入力項目, objInfo.getDisplayName().toString());
         }
         return messages;
     }

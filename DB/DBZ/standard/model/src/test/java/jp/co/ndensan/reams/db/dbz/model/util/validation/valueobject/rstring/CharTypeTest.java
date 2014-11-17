@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring;
+package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.rstring;
 
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectCheckable;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValidationMessages;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValueObjectInfo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class CharTypeTest {
+public class CharTypeTest extends DbzTestBase {
 
     public CharTypeTest() {
     }
@@ -41,7 +41,7 @@ public class CharTypeTest {
         @Before
         public void setUp() {
             sut = CharType.半角数のみ;
-            info = new ValueObjectInfo.Builder("テスト").build();
+            info = ValueObjectInfo.displayName("テスト").build();
         }
 
         @Test
@@ -106,7 +106,7 @@ public class CharTypeTest {
         @Before
         public void setUp() {
             sut = CharType.半角英数のみ;
-            info = new ValueObjectInfo.Builder("テスト").build();
+            info = ValueObjectInfo.displayName("テスト").build();
         }
 
         @Test

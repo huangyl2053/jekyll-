@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.rstring;
+package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.rstring;
 
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectCheckable;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.IValueObjectInfo;
-import jp.co.ndensan.reams.db.dbz.model.util.validations.valueobject.ValidationMessages;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
+import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-enum CharType implements IValueObjectCheckable<RString> {
+public enum CharType implements IValueObjectCheckable<RString> {
 
     /**
      * 文字列が「半角数のみ」かをチェックします。
@@ -36,7 +36,7 @@ enum CharType implements IValueObjectCheckable<RString> {
                 public IValidationMessages check(IValueObject<RString> value, IValueObjectInfo objInfo) {
                     IValidationMessages messages = ValidationMessagesFactory.createInstance();
                     if (!isValid(value)) {
-                        messages.add(getMessage(), objInfo.getName().toString(), "半角数字のみ");
+                        messages.add(getMessage(), objInfo.getDisplayName().toString(), "半角数字のみ");
                     }
                     return messages;
                 }
@@ -55,7 +55,7 @@ enum CharType implements IValueObjectCheckable<RString> {
                 public IValidationMessages check(IValueObject<RString> value, IValueObjectInfo objInfo) {
                     IValidationMessages messages = ValidationMessagesFactory.createInstance();
                     if (!isValid(value)) {
-                        messages.add(getMessage(), objInfo.getName().toString(), "半角英数のみ");
+                        messages.add(getMessage(), objInfo.getDisplayName().toString(), "半角英数のみ");
                     }
                     return messages;
                 }

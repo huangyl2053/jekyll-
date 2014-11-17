@@ -121,7 +121,7 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
     public <R> IItemList<R> map(IFunction<? super E, ? extends R> mapper) {
         List<R> list = new ArrayList<>();
         for (E item : this.elements) {
-            list.add(mapper.apply(item));
+            list.add(Objects.requireNonNull(mapper.apply(item)));
         }
         return new ItemList<>(list);
     }
