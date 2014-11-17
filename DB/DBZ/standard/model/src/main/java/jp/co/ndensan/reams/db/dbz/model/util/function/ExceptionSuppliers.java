@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.function.supplier;
-
-import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
+package jp.co.ndensan.reams.db.dbz.model.util.function;
 
 /**
  * {@link Throwable Throwable}なオブジェクトを生成するsupplierを提供します。<br/>

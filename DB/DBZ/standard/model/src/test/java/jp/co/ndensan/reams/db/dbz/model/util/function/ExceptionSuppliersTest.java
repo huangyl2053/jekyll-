@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.function.supplier;
+package jp.co.ndensan.reams.db.dbz.model.util.function;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.is;
@@ -34,7 +34,7 @@ public class ExceptionSuppliersTest extends DbzTestBase {
         }
 
         @Test
-        public void ullPointerException$withMessage_で生成したsupplierは_withMessageの引数を持った_NullPointerExceptionを生成する() {
+        public void nullPointerException$withMessage_で生成したsupplierは_withMessageの引数を持った_NullPointerExceptionを生成する() {
             String message = "message";
             NullPointerException created = sut.nullPointerException().withMessage(message).get();
             assertThat(created.getMessage(), is(message));

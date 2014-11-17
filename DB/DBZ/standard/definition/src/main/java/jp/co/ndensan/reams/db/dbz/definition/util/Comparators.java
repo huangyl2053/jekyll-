@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.util;
+package jp.co.ndensan.reams.db.dbz.definition.util;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
@@ -16,55 +17,46 @@ import java.util.Objects;
  */
 public final class Comparators {
 
-    private static final Comparator<? extends Comparable> NATURAL_ORDER;
-
-    static {
-        NATURAL_ORDER = new _NaturalOrderComparator<>();
-    }
-
     private Comparators() {
     }
 
     /**
      * Comparableなオブジェクト同士を比較するComparatorを生成します。
      */
-    public enum NaturalOrderComparator {
+    private enum NaturalOrderComparator implements Comparator<Comparable<Object>> {
 
-        /**
-         * 昇順です。
-         */
-        ASC(true),
-        /**
-         * 降順です。
-         */
-        DESC(false);
-        private final boolean naturalOrder;
+        INSTANCE {
 
-        private NaturalOrderComparator(boolean naturalOrder) {
-            this.naturalOrder = naturalOrder;
-        }
+                    @Override
+                    public int compare(Comparable<Object> o1, Comparable<Object> o2) {
+                        return o1.compareTo(o2);
+                    }
 
-        /**
-         * インスタンスを返します。
-         *
-         * @param <T> 比較するオブジェクトの型
-         * @return Comparatorのインスタンス
-         */
-        public <T extends Comparable> Comparator<T> getInstance() {
-            return naturalOrder
-                    ? (Comparator<T>) NATURAL_ORDER
-                    : Collections.reverseOrder((Comparator<T>) NATURAL_ORDER);
+                };
+
+        public Comparator<Comparable<Object>> reversed() {
+            return Collections.reverseOrder(this);
         }
     }
 
-    private static final class _NaturalOrderComparator<T extends Comparable> implements Comparator<T> {
+    /**
+     * 自然順序に並び替える{@link Comparator Comparator}を返します。
+     *
+     * @param <T> {@link Comparable Comparable}なオブジェクト
+     * @return 自然順序に並び替えるComparator
+     */
+    public static <T extends Comparable> Comparator<T> naturalOrder() {
+        return (Comparator<T>) NaturalOrderComparator.INSTANCE;
+    }
 
-        @Override
-        public int compare(T o1, T o2) {
-            Objects.requireNonNull(o1);
-            Objects.requireNonNull(o2);
-            return o1.compareTo(o2);
-        }
+    /**
+     * 自然順序の逆順に並び替える{@link Comparator Comparator}を返します。
+     *
+     * @param <T> {@link Comparable Comparable}なオブジェクト
+     * @return 自然順序の逆順に並び替えるComparator
+     */
+    public static <T extends Comparable> Comparator<T> reverseOrder() {
+        return (Comparator<T>) NaturalOrderComparator.INSTANCE.reversed();
     }
 
     /**
@@ -101,7 +93,7 @@ public final class Comparators {
         }
     }
 
-    private static final class _NullComparator<T> implements Comparator<T> {
+    private static final class _NullComparator<T> implements Comparator<T>, Serializable {
 
         private final boolean nullsFirst;
         private final Comparator<? super T> comparator;

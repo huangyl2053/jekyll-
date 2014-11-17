@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NaturalOrderComparator;
+import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -59,7 +59,7 @@ public final class HihokenshaNo implements IValueObject<RString>, Comparable<Hih
 
     @Override
     public int compareTo(HihokenshaNo o) {
-        return Objects.compare(this.theValue, o.theValue, NaturalOrderComparator.ASC.getInstance());
+        return Objects.compare(this.theValue, o.theValue, Comparators.naturalOrder());
     }
 
     /**

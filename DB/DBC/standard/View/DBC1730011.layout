@@ -24,10 +24,10 @@
      "selectControlID": "btnTsuika",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "追加する",
      "onBeforeClick": "",
      "onAfterClick": "",
      "onClick": "",
+     "text": "追加する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -39,7 +39,7 @@
      "fieldName": "dgShikyuGendogaku",
      "items": [],
      "controlType": "DataGrid",
-     "width": "600px",
+     "width": "640px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -78,17 +78,36 @@
       },
       "columns": [
        {
+        "columnName": "状態",
+        "dataName": "jotai",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 40,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
         "columnName": "適用開始",
         "dataName": "tekiyoKaishi",
         "toolTip": "",
         "bgColor": 0,
         "width": 100,
         "visible": true,
-        "cellType": 0,
+        "cellType": 6,
         "cellDetails": {
-         "cellType": 0
+         "cellType": 6,
+         "ymdKubun": 1,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": ""
@@ -100,11 +119,16 @@
         "bgColor": 0,
         "width": 100,
         "visible": true,
-        "cellType": 0,
+        "cellType": 6,
         "cellDetails": {
-         "cellType": 0
+         "cellType": 6,
+         "ymdKubun": 1,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": ""
@@ -130,7 +154,7 @@
          "isSetValueToToolTip": false,
          "readOnly": true
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": ""
@@ -156,7 +180,7 @@
          "isSetValueToToolTip": false,
          "readOnly": true
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": ""
@@ -182,7 +206,7 @@
          "isSetValueToToolTip": false,
          "readOnly": true
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": ""
@@ -216,7 +240,7 @@
       {
        "fieldName": "txtTekiyoKaishiYM",
        "items": [],
-       "controlType": "TextBoxDate",
+       "controlType": "TextBoxYearMonth",
        "width": "60px",
        "visible": true,
        "displayNone": false,
@@ -234,11 +258,10 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
-       "required": true,
        "text": "",
-       "isPrivateInfo": false,
-       "decorationClass": "",
+       "required": true,
        "placeHolder": "平12.04",
+       "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
@@ -250,15 +273,16 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "ymdKubun": 2,
+       "ymdKubun": 1,
        "displayFormat": 0,
        "value": "",
+       "decorationClass": "",
        "permitCharactor": "./_-"
       },
       {
        "fieldName": "txtTekiyoShuryoYM",
        "items": [],
-       "controlType": "TextBoxDate",
+       "controlType": "TextBoxYearMonth",
        "width": "60px",
        "visible": true,
        "displayNone": false,
@@ -276,11 +300,10 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": true,
-       "required": false,
        "text": "",
-       "isPrivateInfo": false,
-       "decorationClass": "",
+       "required": false,
        "placeHolder": "",
+       "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
@@ -292,9 +315,10 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "ymdKubun": 2,
+       "ymdKubun": 1,
        "displayFormat": 0,
        "value": "",
+       "decorationClass": "",
        "permitCharactor": "./_-"
       },
       {
@@ -337,11 +361,11 @@
        "selectControlID": "lblMessage2",
        "helpMessageID": "",
        "jpControlName": "",
-       "required": false,
-       "align": 0,
        "text": "１ヶ月あたりの限度額　[単位]",
+       "required": false,
        "isPrivateInfo": false,
-       "decorationClass": ""
+       "decorationClass": "",
+       "align": 0
       },
       {
        "fieldName": "tblGendogaku",
@@ -369,11 +393,11 @@
            "selectControlID": "lblMessage3",
            "helpMessageID": "",
            "jpControlName": "",
-           "required": false,
-           "align": 1,
            "text": "",
+           "required": false,
            "isPrivateInfo": false,
-           "decorationClass": ""
+           "decorationClass": "",
+           "align": 1
           },
           {
            "fieldName": "lblMidashi1",
@@ -395,11 +419,11 @@
            "selectControlID": "lblMidashi1",
            "helpMessageID": "",
            "jpControlName": "",
-           "required": true,
-           "align": 1,
            "text": "標準",
+           "required": true,
            "isPrivateInfo": false,
-           "decorationClass": ""
+           "decorationClass": "",
+           "align": 1
           }
          ],
          "controlType": "TableCell",
@@ -444,11 +468,11 @@
            "selectControlID": "lblMidashi9",
            "helpMessageID": "",
            "jpControlName": "",
-           "required": false,
-           "align": 1,
            "text": "要支援１",
+           "required": false,
            "isPrivateInfo": false,
-           "decorationClass": ""
+           "decorationClass": "",
+           "align": 1
           },
           {
            "fieldName": "txtYoShien1",
@@ -471,11 +495,10 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "required": true,
            "text": "",
-           "isPrivateInfo": false,
-           "decorationClass": "",
+           "required": true,
            "placeHolder": "16,580",
+           "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
@@ -488,6 +511,7 @@
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
+           "decorationClass": "",
            "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
@@ -544,11 +568,11 @@
            "selectControlID": "lblMidashi10",
            "helpMessageID": "",
            "jpControlName": "",
-           "required": false,
-           "align": 1,
            "text": "要支援２",
+           "required": false,
            "isPrivateInfo": false,
-           "decorationClass": ""
+           "decorationClass": "",
+           "align": 1
           },
           {
            "fieldName": "txtYoShien2",
@@ -571,11 +595,10 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "required": true,
            "text": "",
-           "isPrivateInfo": false,
-           "decorationClass": "",
+           "required": true,
            "placeHolder": "16,580",
+           "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
@@ -588,6 +611,7 @@
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
+           "decorationClass": "",
            "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
@@ -644,11 +668,11 @@
            "selectControlID": "lblMidashi5",
            "helpMessageID": "",
            "jpControlName": "",
-           "required": false,
-           "align": 1,
            "text": "二次予防",
+           "required": false,
            "isPrivateInfo": false,
-           "decorationClass": ""
+           "decorationClass": "",
+           "align": 1
           },
           {
            "fieldName": "txtNijiYobo",
@@ -671,11 +695,10 @@
            "helpMessageID": "",
            "jpControlName": "",
            "readOnly": false,
-           "required": true,
            "text": "",
-           "isPrivateInfo": false,
-           "decorationClass": "",
+           "required": true,
            "placeHolder": "16,580",
+           "isPrivateInfo": false,
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
@@ -688,6 +711,7 @@
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
+           "decorationClass": "",
            "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
@@ -743,7 +767,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "600px",
+     "width": "1100px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -780,6 +804,68 @@
      "height": "Auto",
      "focusPositionID": "Page",
      "canPost": false
+    },
+    {
+     "fieldName": "btnKakutei",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": true,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnKakutei",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "onClick": "",
+     "text": "確定する",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
+    },
+    {
+     "fieldName": "btnCancel",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": true,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnCancel",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "onClick": "",
+     "text": "取消する",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -820,6 +906,87 @@
    "height": "Auto",
    "focusPositionID": "restoreLayoutButton",
    "canPost": false
+  },
+  {
+   "fieldName": "KaigoKanryoMessage",
+   "items": [
+    {
+     "fieldName": "ccdKaigoKanryoMessage",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0px",
+     "marginRight": "0px",
+     "selectControlID": "ccdKaigoKanryoMessage",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "packageName": "",
+     "marginTop": "0px",
+     "marginBottom": "0px",
+     "businessId": "DBZ",
+     "controlName": "KaigoKanryoMessage",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "modes": [],
+     "publicEvents": [],
+     "publicEventsAlias": [],
+     "KanryoMessage_width": "G12"
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "Default",
+   "marginRight": "Default",
+   "selectControlID": "KaigoKanryoMessage",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": true,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "focusPositionID": "Page",
+   "canPost": false
   }
  ],
  "controlType": null,
@@ -846,7 +1013,7 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "登録画面",
+   "stateName": "登録",
    "wizardName": "",
    "showWizard": false,
    "visibleDivs": [
@@ -859,15 +1026,64 @@
      "visibleDiv": "KubunShikyuGendogakuShosai",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KaigoKanryoMessage",
+     "panelState": "visible",
+     "fixedDiv": "false"
     }
    ],
    "supplementInfo": "",
    "supplementInfoPostParamData": "[]",
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "btnUpdate",
+     "event": "onClick",
+     "transition": "更新完了"
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "更新完了",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KaigoKanryoMessage",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoKanryoMessage",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": "終了"
+    }
+   ]
   }
  ],
- "currentState": "登録画面",
+ "currentState": "登録",
  "id": "DBC1730011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -877,7 +1093,7 @@
  "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "TorokuGamen",
+   "commonButtonAreaId": "Toroku",
    "buttonSetting": [
     {
      "buttonKind": "CommonButtonUpdate",
@@ -888,7 +1104,7 @@
       "width": "S",
       "visible": true,
       "displayNone": false,
-      "disabled": false,
+      "disabled": true,
       "accessKey": "",
       "nextFocusFieldName": "",
       "wrap": false,
@@ -913,13 +1129,26 @@
       "heightTextBoxMatches": false,
       "additionalText": ""
      }
-    },
+    }
+   ],
+   "states": [
     {
-     "buttonKind": "CommonButtonFree",
+     "state": "登録"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  },
+  {
+   "commonButtonAreaId": "KoshinKanryo",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
      "buttonProperty": {
-      "fieldName": "btnSaikujoCancel",
+      "fieldName": "btnComplete",
       "items": [],
-      "controlType": "CommonButtonFree",
+      "controlType": "CommonButtonComplete",
       "width": "S",
       "visible": true,
       "displayNone": false,
@@ -933,99 +1162,26 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "btnSaikujoCancel",
+      "selectControlID": "btnComplete",
       "helpMessageID": "",
       "jpControlName": "",
       "onBeforeClick": "",
       "onAfterClick": "",
       "onClick": "",
-      "text": "削除",
+      "text": "完了",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
       "icon": 0,
       "heightTextBoxMatches": false,
-      "prefixText": "",
-      "suffixText": "をやめる"
-     }
-    },
-    {
-     "buttonKind": "CommonButtonFree",
-     "buttonProperty": {
-      "fieldName": "btnShuseiCancel",
-      "items": [],
-      "controlType": "CommonButtonFree",
-      "width": "S",
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnShuseiCancel",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "onBeforeClick": "",
-      "onAfterClick": "",
-      "onClick": "",
-      "text": "修正",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "prefixText": "",
-      "suffixText": "をやめる"
-     }
-    },
-    {
-     "buttonKind": "CommonButtonFree",
-     "buttonProperty": {
-      "fieldName": "btnTsuikaCancel",
-      "items": [],
-      "controlType": "CommonButtonFree",
-      "width": "S",
-      "visible": true,
-      "displayNone": false,
-      "disabled": false,
-      "accessKey": "",
-      "nextFocusFieldName": "",
-      "wrap": false,
-      "dependencies": [],
-      "float": 0,
-      "toolTip": "",
-      "authorityMode": 0,
-      "marginLeft": "XS",
-      "marginRight": "XS",
-      "selectControlID": "btnTsuikaCancel",
-      "helpMessageID": "",
-      "jpControlName": "",
-      "onBeforeClick": "",
-      "onAfterClick": "",
-      "onClick": "",
-      "text": "追加",
-      "appearance": 0,
-      "imageFileUrl": "",
-      "imageWidth": "",
-      "imageHeight": "",
-      "icon": 0,
-      "heightTextBoxMatches": false,
-      "prefixText": "",
-      "suffixText": "をやめる"
+      "additionalText": ""
      }
     }
    ],
    "states": [
     {
-     "state": "登録画面"
+     "state": "更新完了"
     }
    ],
    "isFinishButtonOnTheRight": false,
