@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.KaigoShikakuKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
-import jp.co.ndensan.reams.db.dbz.realservice.search.HihokenshaDaichoSearchItem;
+import jp.co.ndensan.reams.db.dbz.realservice.search.HihokenshaSearchItem;
 import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
 import jp.co.ndensan.reams.ur.urz.realservice.search.SearchConditionFactory;
 import jp.co.ndensan.reams.ur.urz.realservice.search.StringOperator;
@@ -57,9 +57,9 @@ public class ShikakuTokusoRirekiHandler {
     public void load(KaigoShikakuKihonSearchKey 検索キー) {
 
         INewSearchCondition 市町村コード検索条件 = SearchConditionFactory.condition(
-                HihokenshaDaichoSearchItem.市町村コード, StringOperator.完全一致, 検索キー.get市町村コード().value());
+                HihokenshaSearchItem.市町村コード, StringOperator.完全一致, 検索キー.get市町村コード().value());
         INewSearchCondition 識別コード検索条件 = SearchConditionFactory.condition(
-                HihokenshaDaichoSearchItem.識別コード, StringOperator.完全一致, 検索キー.get識別コード().value());
+                HihokenshaSearchItem.識別コード, StringOperator.完全一致, 検索キー.get識別コード().value());
 
         HihokenshaList hihokenshaList = hihokenshaFinder.get被保険者List(市町村コード検索条件.and(識別コード検索条件));
 
