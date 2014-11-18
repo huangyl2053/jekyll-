@@ -7,8 +7,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
-import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
+import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dbz.business.KaigoShikakuKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuSoshitsu;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
+import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
@@ -66,7 +67,7 @@ public class ShikakuTokusoRirekiHandlerTest extends DbzTestBase {
         @Before
         public void setup() {
             result = createNewDiv();
-            new ShikakuTokusoRirekiHandler(result, createHihokenshaDaichoManager()).load(createSearchKey());
+            new ShikakuTokusoRirekiHandler(result, createHihokenshaFinder()).load(createSearchKey());
         }
 
         @Test
@@ -130,10 +131,10 @@ public class ShikakuTokusoRirekiHandlerTest extends DbzTestBase {
         }
     }
 
-    private static HihokenshaDaichoManager createHihokenshaDaichoManager() {
-        HihokenshaDaichoManager mock = mock(HihokenshaDaichoManager.class);
-        List<IHihokenshaShikaku> shikakuList = createHihokenshaDaichoList();
-        when(mock.get被保険者資格ListOf(any(ISearchCondition.class))).thenReturn(shikakuList);
+    private static HihokenshaFinder createHihokenshaFinder() {
+        HihokenshaFinder mock = mock(HihokenshaFinder.class);
+        HihokenshaList hihokenshaList = createHihokenshaList();
+        when(mock.get被保険者List(any(ISearchCondition.class))).thenReturn(hihokenshaList);
         return mock;
     }
 
@@ -150,14 +151,14 @@ public class ShikakuTokusoRirekiHandlerTest extends DbzTestBase {
         return mock;
     }
 
-    private static List<IHihokenshaShikaku> createHihokenshaDaichoList() {
-        List<IHihokenshaShikaku> list = new ArrayList<>();
-        list.add(createHihokenshaDaicho());
-        return list;
+    private static HihokenshaList createHihokenshaList() {
+        List<Hihokensha> list = new ArrayList<>();
+        list.add(createHihokensha());
+        return new HihokenshaList(list);
     }
 
-    private static IHihokenshaShikaku createHihokenshaDaicho() {
-        IHihokenshaShikaku mock = mock(IHihokenshaShikaku.class);
+    private static Hihokensha createHihokensha() {
+        Hihokensha mock = mock(Hihokensha.class);
         when(mock.get資格取得()).thenReturn(new ShikakuShutoku(資格取得事由, 資格取得届出日, 資格取得日));
         when(mock.get被保険者区分()).thenReturn(new HihokenshaKubun(被保険者区分コード, 被保険者区分名称));
         when(mock.get資格喪失()).thenReturn(new ShikakuSoshitsu(資格喪失事由, 資格喪失届出日, 資格喪失日));

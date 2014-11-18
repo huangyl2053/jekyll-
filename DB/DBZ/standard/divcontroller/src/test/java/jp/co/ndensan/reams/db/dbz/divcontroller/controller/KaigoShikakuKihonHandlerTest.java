@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
+import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
 import jp.co.ndensan.reams.db.dbz.business.KaigoShikakuKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuSoshitsu;
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
+import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKobetsuJikoKaigoJukyu;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.realservice.IJukyuDaichoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -52,6 +53,7 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
     private static final RDate 資格喪失届出日 = new RDate("20140303");
     private static final RDate 資格喪失日 = new RDate("20140404");
     private static final JushochiTokureishaKubun 住所地特例者区分 = JushochiTokureishaKubun.通常資格者;
+    private static final YMDHMS 処理日時 = new YMDHMS("20140102030405");
     private static final YoKaigoJotaiKubun 要介護状態区分 = YoKaigoJotaiKubun.要介護1;
     private static final RDate 認定有効開始日 = new RDate("20140505");
     private static final RDate 認定有効終了日 = new RDate("20140606");
@@ -63,7 +65,7 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
         @Before
         public void setup() {
             result = createNewDiv();
-            new KaigoShikakuKihonHandler(result, createHihokenshaDaichoManager(), createJukyuDaichoFinder()).load(createSearchKey());
+            new KaigoShikakuKihonHandler(result, createHihokenshaFinder(), createJukyuDaichoFinder()).load(createSearchKey());
         }
 
         @Test
@@ -112,10 +114,10 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
         }
     }
 
-    private static HihokenshaDaichoManager createHihokenshaDaichoManager() {
-        HihokenshaDaichoManager mock = mock(HihokenshaDaichoManager.class);
-        IHihokenshaShikaku shikaku = createHihokenshaDaicho();
-        when(mock.get直近被保険者資格(any(LasdecCode.class), any(ShikibetsuCode.class))).thenReturn(shikaku);
+    private static HihokenshaFinder createHihokenshaFinder() {
+        HihokenshaFinder mock = mock(HihokenshaFinder.class);
+        Hihokensha hihokensha = createHihokensha();
+        when(mock.get被保険者(any(LasdecCode.class), any(ShikibetsuCode.class))).thenReturn(hihokensha);
         return mock;
     }
 
@@ -147,12 +149,13 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
         return mock;
     }
 
-    private static IHihokenshaShikaku createHihokenshaDaicho() {
-        IHihokenshaShikaku mock = mock(IHihokenshaShikaku.class);
+    private static Hihokensha createHihokensha() {
+        Hihokensha mock = mock(Hihokensha.class);
         when(mock.get被保険者番号()).thenReturn(new HihokenshaNo(被保険者番号));
         when(mock.get資格取得()).thenReturn(new ShikakuShutoku(資格取得事由, new FlexibleDate(資格取得届出日.toString()), new FlexibleDate(資格取得日.toString())));
         when(mock.get資格喪失()).thenReturn(new ShikakuSoshitsu(資格喪失事由, new FlexibleDate(資格喪失届出日.toString()), new FlexibleDate(資格喪失日.toString())));
         when(mock.get住所地特例者区分()).thenReturn(住所地特例者区分);
+        when(mock.get処理日時()).thenReturn(処理日時);
         return mock;
     }
 

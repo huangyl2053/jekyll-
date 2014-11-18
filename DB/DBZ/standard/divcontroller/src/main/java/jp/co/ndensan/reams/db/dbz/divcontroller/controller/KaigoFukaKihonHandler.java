@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
+import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
 import jp.co.ndensan.reams.db.dbz.business.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoFukaKihonDiv;
-import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
+import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 public class KaigoFukaKihonHandler {
 
     private final KaigoFukaKihonDiv div;
-    private final HihokenshaDaichoManager hihokenshaDaichoManager;
+    private final HihokenshaFinder hihokenshaFinder;
 
     /**
      * コンストラクタです。
@@ -28,18 +28,18 @@ public class KaigoFukaKihonHandler {
      */
     public KaigoFukaKihonHandler(KaigoFukaKihonDiv div) {
         this.div = div;
-        hihokenshaDaichoManager = new HihokenshaDaichoManager();
+        hihokenshaFinder = new HihokenshaFinder();
     }
 
     /**
      * モックを使用するテスト用コンストラクタです。
      *
      * @param div 介護賦課基本情報Div
-     * @param hihokenshaDaichoManager 被保険者台帳Manager
+     * @param hihokenshaFinder 被保険者Finder
      */
-    KaigoFukaKihonHandler(KaigoFukaKihonDiv div, HihokenshaDaichoManager hihokenshaDaichoManager) {
+    KaigoFukaKihonHandler(KaigoFukaKihonDiv div, HihokenshaFinder hihokenshaFinder) {
         this.div = div;
-        this.hihokenshaDaichoManager = hihokenshaDaichoManager;
+        this.hihokenshaFinder = hihokenshaFinder;
     }
 
     /**
@@ -50,13 +50,13 @@ public class KaigoFukaKihonHandler {
     public void load(KaigoFukaKihonSearchKey 検索キー) {
         // TODO N8156 宮本 康 賦課情報の取得処理が実装され次第対応する。（オフショアで対応中）
 
-        IHihokenshaShikaku shikaku = hihokenshaDaichoManager.get直近被保険者資格(検索キー.get市町村コード(), 検索キー.get識別コード());
+        Hihokensha hihokensha = hihokenshaFinder.get被保険者(検索キー.get市町村コード(), 検索キー.get識別コード());
 
-        if (shikaku != null) {
-            div.getTxtShutokuYmd().setValue(new RDate(shikaku.get資格取得().getActionDate().toString()));
-            div.getTxtShutokuJiyu().setValue(shikaku.get資格取得().getReason().getName());
-            div.getTxtSoshitsuYmd().setValue(new RDate(shikaku.get資格喪失().getActionDate().toString()));
-            div.getTxtSoshitsuJiyu().setValue(shikaku.get資格喪失().getReason().getName());
+        if (hihokensha != null) {
+            div.getTxtShutokuYmd().setValue(new RDate(hihokensha.get資格取得().getActionDate().toString()));
+            div.getTxtShutokuJiyu().setValue(hihokensha.get資格取得().getReason().getName());
+            div.getTxtSoshitsuYmd().setValue(new RDate(hihokensha.get資格喪失().getActionDate().toString()));
+            div.getTxtSoshitsuJiyu().setValue(hihokensha.get資格喪失().getReason().getName());
         }
     }
 }
