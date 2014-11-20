@@ -11,88 +11,12 @@ var DBZ;
         function HihokenshaShikakuHakko_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, HihokenshaShikakuHakko_Design.myLayout, fieldName);
         }
-        Object.defineProperty(HihokenshaShikakuHakko_Design.prototype, "txtYukoKigen_displayNone", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"] = value;
-                } else {
-                    this.layout.items[0].items[3]["displayNone"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(HihokenshaShikakuHakko_Design.prototype, "radInjiIchi_displayNone", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["displayNone"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["displayNone"] = value;
-                } else {
-                    this.layout.items[0].items[0]["displayNone"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(HihokenshaShikakuHakko_Design.prototype, "onBlur_txtKofuDate", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur"] = value;
-                } else {
-                    this.layout.items[0].items[1]["onBlur"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(HihokenshaShikakuHakko_Design.prototype, "onChange_ddlKofuJiyu", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["onChange"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["onChange"] = value;
-                } else {
-                    this.layout.items[0].items[2]["onChange"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
         HihokenshaShikakuHakko_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
-            Uz.JSControlUtil.registProperty("txtYukoKigen_displayNone");
-            Uz.JSControlUtil.registProperty("radInjiIchi_displayNone");
-            Uz.JSControlUtil.registProperty("onBlur_txtKofuDate");
-            Uz.JSControlUtil.registProperty("onChange_ddlKofuJiyu");
         };
 
         HihokenshaShikakuHakko_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
-            editablePropertyInfo["txtYukoKigen_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["radInjiIchi_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["onBlur_txtKofuDate"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onBlur"];
-            editablePropertyInfo["onChange_ddlKofuJiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["onChange"];
 
             return editablePropertyInfo;
         };
@@ -103,95 +27,227 @@ var DBZ;
                     "fieldName": "HihokenshaShikakuHakko",
                     "items": [
                         {
-                            "fieldName": "radInjiIchi",
-                            "items": [],
-                            "controlType": "RadioButton",
-                            "width": "120",
-                            "visible": true,
-                            "displayNone": false,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": false,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
-                            "selectControlID": "radInjiIchi_core",
-                            "helpMessageID": "",
-                            "jpControlName": "",
-                            "readOnly": false,
-                            "required": false,
-                            "onChange": "",
-                            "labelLText": "印字位置:",
-                            "labelLWidth": "80",
-                            "labelLAlign": 2,
-                            "dataSource": [
+                            "fieldName": "YukoKiGenInfo",
+                            "items": [
                                 {
-                                    "key": "upside",
-                                    "value": "上段"
+                                    "fieldName": "txtYokuKiGen",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtYokuKiGen_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "text": "",
+                                    "onChange": "",
+                                    "required": false,
+                                    "labelLText": "有効期限",
+                                    "labelLWidth": "85px",
+                                    "labelLAlign": 2,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onKeyPress": "",
+                                    "labelRText": "",
+                                    "labelRWidth": "S",
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "permitCharactor": "./_-"
                                 },
                                 {
-                                    "key": "downside",
-                                    "value": "下段"
+                                    "fieldName": "txtKofuDate",
+                                    "items": [],
+                                    "controlType": "TextBoxFlexibleDate",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtKofuDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "text": "",
+                                    "onChange": "",
+                                    "required": false,
+                                    "labelLText": "交付日",
+                                    "labelLWidth": "XS",
+                                    "labelLAlign": 2,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onKeyPress": "",
+                                    "labelRText": "",
+                                    "labelRWidth": "S",
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "textKind": 0,
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtHokensha",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "210px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0px",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtHokensha_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "text": "",
+                                    "onChange": "",
+                                    "required": false,
+                                    "labelLText": "保険者",
+                                    "labelLWidth": "65px",
+                                    "labelLAlign": 2,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onKeyPress": "",
+                                    "labelRText": "",
+                                    "labelRWidth": "S",
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "ddlKofuJiyu",
+                                    "items": [],
+                                    "controlType": "DropDownList",
+                                    "width": "132px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "ddlKofuJiyu_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "onChange": "",
+                                    "selectedItem": "notSelected",
+                                    "dataSource": [
+                                        {
+                                            "key": "notSelected",
+                                            "value": ""
+                                        },
+                                        {
+                                            "key": "shikakuShutoku",
+                                            "value": "資格取得"
+                                        },
+                                        {
+                                            "key": "yokaigoNintei",
+                                            "value": "要介護認定"
+                                        },
+                                        {
+                                            "key": "kyojuKeikaku",
+                                            "value": "居住計画"
+                                        },
+                                        {
+                                            "key": "kyufuSeigen",
+                                            "value": "給付制限"
+                                        },
+                                        {
+                                            "key": "jutokuTekiyo",
+                                            "value": "住所地特例適用"
+                                        },
+                                        {
+                                            "key": "jutokuKaijo",
+                                            "value": "住所地特例解除"
+                                        },
+                                        {
+                                            "key": "koikiTenkyo",
+                                            "value": "広域転居"
+                                        },
+                                        {
+                                            "key": "kigenGire",
+                                            "value": "期限切れ"
+                                        },
+                                        {
+                                            "key": "yoshikiHenko",
+                                            "value": "様式変更"
+                                        },
+                                        {
+                                            "key": "kisaiHenko",
+                                            "value": "記載変更"
+                                        },
+                                        {
+                                            "key": "saikofu",
+                                            "value": "再交付"
+                                        }
+                                    ],
+                                    "required": false,
+                                    "labelLText": "交付事由",
+                                    "labelLWidth": "65px",
+                                    "labelLAlign": 2,
+                                    "disabledItem": [],
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "labelRText": "",
+                                    "labelRWidth": "S",
+                                    "labelRAlign": 0,
+                                    "isBlankLine": false
                                 }
                             ],
-                            "onClick": "",
-                            "icon": [],
-                            "selectedItem": null,
-                            "newLineItemNumber": 2,
-                            "spaceSize": "M",
-                            "disabledItem": []
-                        },
-                        {
-                            "fieldName": "txtKofuDate",
-                            "items": [],
-                            "controlType": "TextBoxFlexibleDate",
-                            "width": "80",
-                            "visible": true,
-                            "displayNone": false,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": true,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
-                            "selectControlID": "txtKofuDate_core",
-                            "helpMessageID": "",
-                            "jpControlName": "",
-                            "readOnly": false,
-                            "required": false,
-                            "placeHolder": "",
-                            "isPrivateInfo": false,
-                            "isPassword": false,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "onChange": "",
-                            "onKeyPress": "",
-                            "text": "",
-                            "labelLText": "交付日",
-                            "labelRText": "",
-                            "labelLWidth": "60",
-                            "labelRWidth": "S",
-                            "labelLAlign": 2,
-                            "labelRAlign": 0,
-                            "ymdKubun": 2,
-                            "displayFormat": 0,
-                            "value": "",
-                            "textKind": 0,
-                            "permitCharactor": "./_-"
-                        },
-                        {
-                            "fieldName": "ddlKofuJiyu",
-                            "items": [],
-                            "controlType": "DropDownList",
-                            "width": "132",
+                            "controlType": "Panel",
+                            "width": "950px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -202,80 +258,280 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
-                            "selectControlID": "ddlKofuJiyu_core",
+                            "marginLeft": "0px",
+                            "marginRight": "0px",
+                            "selectControlID": "YukoKiGenInfo",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "0px",
+                            "marginBottom": "0px",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": true,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
                             "readOnly": false,
-                            "required": false,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "onChange": "",
-                            "labelLText": "交付事由",
-                            "labelRText": "",
-                            "labelLWidth": "70",
-                            "labelRWidth": "S",
-                            "labelLAlign": 2,
-                            "labelRAlign": 0,
-                            "dataSource": [
+                            "height": "Auto",
+                            "focusPositionID": "ControlList",
+                            "canPost": false
+                        },
+                        {
+                            "fieldName": "NinteiInfo",
+                            "items": [
                                 {
-                                    "key": "notSelected",
-                                    "value": ""
+                                    "fieldName": "txtYokaigodo",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "50px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtYokaigodo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "text": "",
+                                    "onChange": "",
+                                    "required": false,
+                                    "labelLText": "要介護状態",
+                                    "labelLWidth": "85px",
+                                    "labelLAlign": 2,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onKeyPress": "",
+                                    "labelRText": "",
+                                    "labelRWidth": "S",
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
                                 },
                                 {
-                                    "key": "shikakuShutoku",
-                                    "value": "資格取得"
+                                    "fieldName": "txtNinteiYMD",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtNinteiYMD_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "text": "",
+                                    "onChange": "",
+                                    "required": false,
+                                    "labelLText": "認定日",
+                                    "labelLWidth": "80px",
+                                    "labelLAlign": 2,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onKeyPress": "",
+                                    "labelRText": "",
+                                    "labelRWidth": "S",
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "permitCharactor": "./_-"
                                 },
                                 {
-                                    "key": "yokaigoNintei",
-                                    "value": "要介護認定"
+                                    "fieldName": "txtNinteiYukoFromYMD",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "85px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0px",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtNinteiYukoFromYMD_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "text": "",
+                                    "onChange": "",
+                                    "required": false,
+                                    "labelLText": "有効期間",
+                                    "labelLWidth": "65px",
+                                    "labelLAlign": 2,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onKeyPress": "",
+                                    "labelRText": "",
+                                    "labelRWidth": "S",
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "permitCharactor": "./_-"
                                 },
                                 {
-                                    "key": "kyojuKeikaku",
-                                    "value": "居住計画"
+                                    "fieldName": "lblKara1",
+                                    "items": [],
+                                    "controlType": "Label",
+                                    "width": "20px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0px",
+                                    "marginRight": "0px",
+                                    "selectControlID": "lblKara1",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "text": "～",
+                                    "required": false,
+                                    "isPrivateInfo": false,
+                                    "decorationClass": "",
+                                    "align": 2
                                 },
                                 {
-                                    "key": "kyufuSeigen",
-                                    "value": "給付制限"
+                                    "fieldName": "txtNinteiYukoToYMD",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "85px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtNinteiYukoToYMD_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "text": "",
+                                    "onChange": "",
+                                    "required": false,
+                                    "labelLText": "",
+                                    "labelLWidth": "S",
+                                    "labelLAlign": 2,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onKeyPress": "",
+                                    "labelRText": "",
+                                    "labelRWidth": "S",
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "permitCharactor": "./_-"
                                 },
                                 {
-                                    "key": "jutokuTekiyo",
-                                    "value": "住所地特例適用"
-                                },
-                                {
-                                    "key": "jutokuKaijo",
-                                    "value": "住所地特例解除"
-                                },
-                                {
-                                    "key": "koikiTenkyo",
-                                    "value": "広域転居"
-                                },
-                                {
-                                    "key": "kigenGire",
-                                    "value": "期限切れ"
-                                },
-                                {
-                                    "key": "yoshikiHenko",
-                                    "value": "様式変更"
-                                },
-                                {
-                                    "key": "kisaiHenko",
-                                    "value": "記載変更"
-                                },
-                                {
-                                    "key": "saikofu",
-                                    "value": "再交付"
+                                    "fieldName": "txtShinseiDate",
+                                    "items": [],
+                                    "controlType": "TextBoxFlexibleDate",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShinseiDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "text": "",
+                                    "onChange": "",
+                                    "required": false,
+                                    "labelLText": "申請日",
+                                    "labelLWidth": "68px",
+                                    "labelLAlign": 2,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onKeyPress": "",
+                                    "labelRText": "",
+                                    "labelRWidth": "S",
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "textKind": 0,
+                                    "permitCharactor": "./_-"
                                 }
                             ],
-                            "selectedItem": "notSelected",
-                            "disabledItem": []
-                        },
-                        {
-                            "fieldName": "txtYukoKigen",
-                            "items": [],
-                            "controlType": "TextBoxFlexibleDate",
-                            "width": "80",
+                            "controlType": "Panel",
+                            "width": "950px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -286,213 +542,32 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
-                            "selectControlID": "txtYukoKigen_core",
+                            "marginLeft": "0px",
+                            "marginRight": "0px",
+                            "selectControlID": "NinteiInfo",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "0px",
+                            "marginBottom": "0px",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": true,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
                             "readOnly": false,
-                            "required": false,
-                            "placeHolder": "",
-                            "isPrivateInfo": false,
-                            "isPassword": false,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "onChange": "",
-                            "onKeyPress": "",
-                            "text": "",
-                            "labelLText": "有効期限",
-                            "labelRText": "",
-                            "labelLWidth": "155",
-                            "labelRWidth": "S",
-                            "labelLAlign": 2,
-                            "labelRAlign": 0,
-                            "ymdKubun": 2,
-                            "displayFormat": 0,
-                            "value": "",
-                            "textKind": 0,
-                            "permitCharactor": "./_-"
-                        },
-                        {
-                            "fieldName": "txtHokensha",
-                            "items": [],
-                            "controlType": "TextBox",
-                            "width": "200",
-                            "visible": true,
-                            "displayNone": false,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": true,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
-                            "selectControlID": "txtHokensha_core",
-                            "helpMessageID": "",
-                            "jpControlName": "",
-                            "readOnly": true,
-                            "required": false,
-                            "placeHolder": "",
-                            "isPrivateInfo": false,
-                            "isPassword": false,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "onChange": "",
-                            "onKeyPress": "",
-                            "text": "",
-                            "labelLText": "保険者",
-                            "labelRText": "",
-                            "labelLWidth": "60",
-                            "labelRWidth": "S",
-                            "labelLAlign": 2,
-                            "labelRAlign": 0,
-                            "value": "",
-                            "maxLength": 100000000,
-                            "minLength": 0,
-                            "textAlign": 0,
-                            "textKind": 0,
-                            "isComboBox": false,
-                            "suggest": [],
-                            "decorationClass": "",
-                            "permitCharactor": ""
-                        },
-                        {
-                            "fieldName": "txtYokaigodo",
-                            "items": [],
-                            "controlType": "TextBox",
-                            "width": "50",
-                            "visible": true,
-                            "displayNone": false,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": false,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
-                            "selectControlID": "txtYokaigodo_core",
-                            "helpMessageID": "",
-                            "jpControlName": "",
-                            "readOnly": true,
-                            "required": false,
-                            "placeHolder": "",
-                            "isPrivateInfo": false,
-                            "isPassword": false,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "onChange": "",
-                            "onKeyPress": "",
-                            "text": "",
-                            "labelLText": "要介護状態",
-                            "labelRText": "",
-                            "labelLWidth": "85",
-                            "labelRWidth": "S",
-                            "labelLAlign": 2,
-                            "labelRAlign": 0,
-                            "value": "",
-                            "maxLength": 100000000,
-                            "minLength": 0,
-                            "textAlign": 0,
-                            "textKind": 0,
-                            "isComboBox": false,
-                            "suggest": [],
-                            "decorationClass": "",
-                            "permitCharactor": ""
-                        },
-                        {
-                            "fieldName": "txtNinteiYukoKikan",
-                            "items": [],
-                            "controlType": "TextBoxDateRange",
-                            "width": "80",
-                            "visible": true,
-                            "displayNone": false,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": false,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
-                            "selectControlID": "txtNinteiYukoKikan_core",
-                            "helpMessageID": "",
-                            "jpControlName": "",
-                            "readOnly": true,
-                            "isPrivateInfo": false,
-                            "isPassword": false,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "onChange": "",
-                            "onKeyPress": "",
-                            "labelLText": "認定有効期間",
-                            "labelRText": "",
-                            "labelLWidth": "100",
-                            "labelRWidth": "S",
-                            "labelLAlign": 2,
-                            "labelRAlign": 0,
-                            "ymdKubun": 2,
-                            "displayFormat": 0,
-                            "permitCharactor": "",
-                            "fromPlaceHolder": "",
-                            "toPlaceHolder": "",
-                            "minDate": "",
-                            "maxDate": "",
-                            "fromText": "",
-                            "toText": "",
-                            "fromValue": "",
-                            "toValue": "",
-                            "fromSelectControlID": "txtNinteiYukoKikanFrom",
-                            "toSelectControlID": "txtNinteiYukoKikanTo"
-                        },
-                        {
-                            "fieldName": "txtShinseiDate",
-                            "items": [],
-                            "controlType": "TextBoxFlexibleDate",
-                            "width": "80",
-                            "visible": true,
-                            "displayNone": false,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": false,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
-                            "selectControlID": "txtShinseiDate_core",
-                            "helpMessageID": "",
-                            "jpControlName": "",
-                            "readOnly": true,
-                            "required": false,
-                            "placeHolder": "",
-                            "isPrivateInfo": false,
-                            "isPassword": false,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "onChange": "",
-                            "onKeyPress": "",
-                            "text": "",
-                            "labelLText": "申請日",
-                            "labelRText": "",
-                            "labelLWidth": "55",
-                            "labelRWidth": "S",
-                            "labelLAlign": 2,
-                            "labelRAlign": 0,
-                            "ymdKubun": 2,
-                            "displayFormat": 0,
-                            "value": "",
-                            "textKind": 0,
-                            "permitCharactor": "./_-"
+                            "height": "Auto",
+                            "focusPositionID": "ControlList",
+                            "canPost": false
                         },
                         {
                             "fieldName": "tabHihokenshaShikakuShosai",
@@ -501,262 +576,417 @@ var DBZ;
                                     "fieldName": "tplGendoGaku",
                                     "items": [
                                         {
-                                            "fieldName": "lblKubunShikyuGendoGaku",
-                                            "items": [],
-                                            "controlType": "Label",
-                                            "width": "115",
-                                            "visible": true,
-                                            "displayNone": false,
-                                            "disabled": false,
-                                            "accessKey": "",
-                                            "nextFocusFieldName": "",
-                                            "wrap": false,
-                                            "dependencies": [],
-                                            "float": 0,
-                                            "toolTip": "",
-                                            "authorityMode": 0,
-                                            "marginLeft": "XS",
-                                            "marginRight": "XS",
-                                            "selectControlID": "lblKubunShikyuGendoGaku",
-                                            "helpMessageID": "",
-                                            "jpControlName": "",
-                                            "required": false,
-                                            "isPrivateInfo": false,
-                                            "text": "区分支給限度額",
-                                            "decorationClass": "",
-                                            "align": 2
-                                        },
-                                        {
-                                            "fieldName": "txtKubunShikyuGendoKijunGaku",
-                                            "items": [],
-                                            "controlType": "TextBoxNum",
-                                            "width": "50",
-                                            "visible": true,
-                                            "displayNone": false,
-                                            "disabled": false,
-                                            "accessKey": "",
-                                            "nextFocusFieldName": "",
-                                            "wrap": true,
-                                            "dependencies": [],
-                                            "float": 0,
-                                            "toolTip": "",
-                                            "authorityMode": 0,
-                                            "marginLeft": "XS",
-                                            "marginRight": "XS",
-                                            "selectControlID": "txtKubunShikyuGendoKijunGaku_core",
-                                            "helpMessageID": "",
-                                            "jpControlName": "",
-                                            "readOnly": true,
-                                            "required": false,
-                                            "placeHolder": "",
-                                            "isPrivateInfo": false,
-                                            "isPassword": false,
-                                            "onFocus": "",
-                                            "onBlur": "",
-                                            "onChange": "",
-                                            "onKeyPress": "",
-                                            "text": "",
-                                            "labelLText": "基準額",
-                                            "labelRText": "",
-                                            "labelLWidth": "55",
-                                            "labelRWidth": "S",
-                                            "labelLAlign": 2,
-                                            "labelRAlign": 0,
-                                            "value": "",
-                                            "maxLength": 100000000,
-                                            "minLength": 0,
-                                            "textAlign": 2,
-                                            "textKind": 2,
-                                            "isComboBox": false,
-                                            "suggest": [],
-                                            "decorationClass": "",
-                                            "permitCharactor": "+-,.\\",
-                                            "maxValue": 1.7976931348623157e+308,
-                                            "minValue": 0,
-                                            "isCurrency": false,
-                                            "isComma": true,
-                                            "decimalPointLength": 0
-                                        },
-                                        {
-                                            "fieldName": "txtKyuhuYukoKikan",
-                                            "items": [],
-                                            "controlType": "TextBoxDateRange",
-                                            "width": "80",
-                                            "visible": true,
-                                            "displayNone": false,
-                                            "disabled": false,
-                                            "accessKey": "",
-                                            "nextFocusFieldName": "",
-                                            "wrap": false,
-                                            "dependencies": [],
-                                            "float": 0,
-                                            "toolTip": "",
-                                            "authorityMode": 0,
-                                            "marginLeft": "XS",
-                                            "marginRight": "XS",
-                                            "selectControlID": "txtKyuhuYukoKikan_core",
-                                            "helpMessageID": "",
-                                            "jpControlName": "",
-                                            "readOnly": true,
-                                            "isPrivateInfo": false,
-                                            "isPassword": false,
-                                            "onFocus": "",
-                                            "onBlur": "",
-                                            "onChange": "",
-                                            "onKeyPress": "",
-                                            "labelLText": "有効期間",
-                                            "labelRText": "",
-                                            "labelLWidth": "70",
-                                            "labelRWidth": "S",
-                                            "labelLAlign": 2,
-                                            "labelRAlign": 0,
-                                            "ymdKubun": 2,
-                                            "displayFormat": 0,
-                                            "permitCharactor": "",
-                                            "fromPlaceHolder": "",
-                                            "toPlaceHolder": "",
-                                            "minDate": "",
-                                            "maxDate": "",
-                                            "fromText": "",
-                                            "toText": "",
-                                            "fromValue": "",
-                                            "toValue": "",
-                                            "fromSelectControlID": "txtKyuhuYukoKikanFrom",
-                                            "toSelectControlID": "txtKyuhuYukoKikanTo"
-                                        },
-                                        {
-                                            "fieldName": "ShuruiShikyuGendoKijungaku",
+                                            "fieldName": "tblGendoGaku",
                                             "items": [
                                                 {
-                                                    "fieldName": "dgShuruiShikyuGendoKijunGaku",
-                                                    "items": [],
-                                                    "controlType": "DataGrid",
-                                                    "width": "390",
+                                                    "fieldName": "celKubunGendoGaku",
+                                                    "items": [
+                                                        {
+                                                            "fieldName": "KubunGendoGaku",
+                                                            "items": [
+                                                                {
+                                                                    "fieldName": "txtKubunShikyuGendoKijunGaku",
+                                                                    "items": [],
+                                                                    "controlType": "TextBoxNum",
+                                                                    "width": "50px",
+                                                                    "visible": true,
+                                                                    "displayNone": false,
+                                                                    "disabled": false,
+                                                                    "accessKey": "",
+                                                                    "nextFocusFieldName": "",
+                                                                    "wrap": true,
+                                                                    "dependencies": [],
+                                                                    "float": 0,
+                                                                    "toolTip": "",
+                                                                    "authorityMode": 0,
+                                                                    "marginLeft": "XS",
+                                                                    "marginRight": "XS",
+                                                                    "selectControlID": "txtKubunShikyuGendoKijunGaku_core",
+                                                                    "helpMessageID": "",
+                                                                    "jpControlName": "",
+                                                                    "readOnly": true,
+                                                                    "text": "",
+                                                                    "onChange": "",
+                                                                    "required": false,
+                                                                    "labelLText": "基準額",
+                                                                    "labelLWidth": "55px",
+                                                                    "labelLAlign": 2,
+                                                                    "placeHolder": "",
+                                                                    "isPrivateInfo": false,
+                                                                    "isPassword": false,
+                                                                    "onFocus": "",
+                                                                    "onBlur": "",
+                                                                    "onKeyPress": "",
+                                                                    "labelRText": "",
+                                                                    "labelRWidth": "S",
+                                                                    "labelRAlign": 0,
+                                                                    "value": "",
+                                                                    "decorationClass": "",
+                                                                    "maxLength": 100000000,
+                                                                    "minLength": 0,
+                                                                    "textAlign": 2,
+                                                                    "textKind": 2,
+                                                                    "isComboBox": false,
+                                                                    "suggest": [],
+                                                                    "maxValue": 1.7976931348623157e+308,
+                                                                    "minValue": 0,
+                                                                    "isCurrency": false,
+                                                                    "isComma": true,
+                                                                    "decimalPointLength": 0,
+                                                                    "permitCharactor": "+-,.\\"
+                                                                },
+                                                                {
+                                                                    "fieldName": "txtYukoFromYMD",
+                                                                    "items": [],
+                                                                    "controlType": "TextBoxDate",
+                                                                    "width": "85px",
+                                                                    "visible": true,
+                                                                    "displayNone": false,
+                                                                    "disabled": false,
+                                                                    "accessKey": "",
+                                                                    "nextFocusFieldName": "",
+                                                                    "wrap": false,
+                                                                    "dependencies": [],
+                                                                    "float": 0,
+                                                                    "toolTip": "",
+                                                                    "authorityMode": 0,
+                                                                    "marginLeft": "0px",
+                                                                    "marginRight": "XS",
+                                                                    "selectControlID": "txtYukoFromYMD_core",
+                                                                    "helpMessageID": "",
+                                                                    "jpControlName": "",
+                                                                    "readOnly": true,
+                                                                    "text": "",
+                                                                    "onChange": "",
+                                                                    "required": false,
+                                                                    "labelLText": "有効期間",
+                                                                    "labelLWidth": "80px",
+                                                                    "labelLAlign": 2,
+                                                                    "placeHolder": "",
+                                                                    "isPrivateInfo": false,
+                                                                    "isPassword": false,
+                                                                    "onFocus": "",
+                                                                    "onBlur": "",
+                                                                    "onKeyPress": "",
+                                                                    "labelRText": "",
+                                                                    "labelRWidth": "S",
+                                                                    "labelRAlign": 0,
+                                                                    "ymdKubun": 2,
+                                                                    "displayFormat": 0,
+                                                                    "value": "",
+                                                                    "decorationClass": "",
+                                                                    "permitCharactor": "./_-"
+                                                                },
+                                                                {
+                                                                    "fieldName": "lblKara",
+                                                                    "items": [],
+                                                                    "controlType": "Label",
+                                                                    "width": "20px",
+                                                                    "visible": true,
+                                                                    "displayNone": false,
+                                                                    "disabled": false,
+                                                                    "accessKey": "",
+                                                                    "nextFocusFieldName": "",
+                                                                    "wrap": false,
+                                                                    "dependencies": [],
+                                                                    "float": 0,
+                                                                    "toolTip": "",
+                                                                    "authorityMode": 0,
+                                                                    "marginLeft": "0px",
+                                                                    "marginRight": "0px",
+                                                                    "selectControlID": "lblKara",
+                                                                    "helpMessageID": "",
+                                                                    "jpControlName": "",
+                                                                    "text": "～",
+                                                                    "required": false,
+                                                                    "isPrivateInfo": false,
+                                                                    "decorationClass": "",
+                                                                    "align": 2
+                                                                },
+                                                                {
+                                                                    "fieldName": "txtYukoToYMD",
+                                                                    "items": [],
+                                                                    "controlType": "TextBoxDate",
+                                                                    "width": "85px",
+                                                                    "visible": true,
+                                                                    "displayNone": false,
+                                                                    "disabled": false,
+                                                                    "accessKey": "",
+                                                                    "nextFocusFieldName": "",
+                                                                    "wrap": false,
+                                                                    "dependencies": [],
+                                                                    "float": 0,
+                                                                    "toolTip": "",
+                                                                    "authorityMode": 0,
+                                                                    "marginLeft": "XS",
+                                                                    "marginRight": "XS",
+                                                                    "selectControlID": "txtYukoToYMD_core",
+                                                                    "helpMessageID": "",
+                                                                    "jpControlName": "",
+                                                                    "readOnly": true,
+                                                                    "text": "",
+                                                                    "onChange": "",
+                                                                    "required": false,
+                                                                    "labelLText": "",
+                                                                    "labelLWidth": "S",
+                                                                    "labelLAlign": 2,
+                                                                    "placeHolder": "",
+                                                                    "isPrivateInfo": false,
+                                                                    "isPassword": false,
+                                                                    "onFocus": "",
+                                                                    "onBlur": "",
+                                                                    "onKeyPress": "",
+                                                                    "labelRText": "",
+                                                                    "labelRWidth": "S",
+                                                                    "labelRAlign": 0,
+                                                                    "ymdKubun": 2,
+                                                                    "displayFormat": 0,
+                                                                    "value": "",
+                                                                    "decorationClass": "",
+                                                                    "permitCharactor": "./_-"
+                                                                }
+                                                            ],
+                                                            "controlType": "Panel",
+                                                            "width": "G2",
+                                                            "visible": true,
+                                                            "displayNone": false,
+                                                            "disabled": false,
+                                                            "accessKey": "",
+                                                            "nextFocusFieldName": "",
+                                                            "wrap": false,
+                                                            "dependencies": [],
+                                                            "float": 0,
+                                                            "toolTip": "",
+                                                            "authorityMode": 0,
+                                                            "marginLeft": "XS",
+                                                            "marginRight": "XS",
+                                                            "selectControlID": "KubunGendoGaku",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
+                                                            "onLoad": "",
+                                                            "title": "区分支給限度額",
+                                                            "marginTop": "Default",
+                                                            "marginBottom": "Default",
+                                                            "isOpen": true,
+                                                            "canOpenAndClose": false,
+                                                            "postParameterPanelNames": [],
+                                                            "requestSettings": [],
+                                                            "hiddenInput": [],
+                                                            "onOpen": "",
+                                                            "onClose": "",
+                                                            "session": {},
+                                                            "eraseBorder": true,
+                                                            "backgroundColor": 0,
+                                                            "widthAuto": true,
+                                                            "panelDisplay": 1,
+                                                            "isGroupBox": false,
+                                                            "readOnly": false,
+                                                            "height": "Auto",
+                                                            "focusPositionID": "BasicControlArea",
+                                                            "canPost": false
+                                                        }
+                                                    ],
+                                                    "controlType": "TableCell",
+                                                    "width": "XS",
                                                     "visible": true,
                                                     "displayNone": false,
                                                     "disabled": false,
                                                     "accessKey": "",
                                                     "nextFocusFieldName": "",
-                                                    "wrap": true,
+                                                    "wrap": false,
                                                     "dependencies": [],
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "XS",
-                                                    "selectControlID": "dgShuruiShikyuGendoKijunGaku",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
+                                                    "selectControlID": "celKubunGendoGaku",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
-                                                    "readOnly": false,
-                                                    "height": "125",
-                                                    "gridSetting": {
-                                                        "rowHeight": 25,
-                                                        "isMultiSelectable": false,
-                                                        "isShowFooter": true,
-                                                        "isShowFilter": false,
-                                                        "isShowFilterButton": false,
-                                                        "isShowRowState": false,
-                                                        "header": {
-                                                            "combineColumns": [],
-                                                            "frozenColumn": "",
-                                                            "headerHeight": 0
-                                                        },
-                                                        "columns": [
-                                                            {
-                                                                "columnName": "サービス種類",
-                                                                "dataName": "serviceShurui",
-                                                                "toolTip": "",
-                                                                "bgColor": 0,
-                                                                "width": 270,
-                                                                "visible": true,
-                                                                "cellType": 0,
-                                                                "cellDetails": {
-                                                                    "cellType": 0
-                                                                },
-                                                                "align": 0,
-                                                                "resize": true,
-                                                                "isPrivateInfo": false,
-                                                                "sortKey": ""
-                                                            },
-                                                            {
-                                                                "columnName": "限度額",
-                                                                "dataName": "gendoGaku",
-                                                                "toolTip": "",
-                                                                "bgColor": 0,
-                                                                "width": 100,
-                                                                "visible": true,
-                                                                "cellType": 0,
-                                                                "cellDetails": {
-                                                                    "cellType": 0
-                                                                },
-                                                                "align": 2,
-                                                                "resize": true,
-                                                                "isPrivateInfo": false,
-                                                                "sortKey": ""
-                                                            }
-                                                        ]
-                                                    },
-                                                    "onSort": "",
-                                                    "onSelect": "",
-                                                    "onSelectByDblClick": "",
-                                                    "onSelectBySelectButton": "",
-                                                    "onSelectByModifyButton": "",
-                                                    "onSelectByDeleteButton": "",
-                                                    "onAfterRequest": "",
-                                                    "onAfterRequestByDblClick": "",
-                                                    "onAfterRequestBySelectButton": "",
-                                                    "onAfterRequestByModifyButton": "",
-                                                    "onAfterRequestByDeleteButton": "",
-                                                    "onOnlyRow": "",
-                                                    "onNoRow": "",
-                                                    "onMultiRows": "",
-                                                    "dataSource": [],
-                                                    "sortOrder": "serviceShurui",
-                                                    "isAscending": true,
-                                                    "filterList": [],
-                                                    "activeRowId": -1
+                                                    "connectTd": "R1C1"
+                                                },
+                                                {
+                                                    "fieldName": "celShuruiGendoKijungaku",
+                                                    "items": [
+                                                        {
+                                                            "fieldName": "ShuruiShikyuGendoKijungaku",
+                                                            "items": [
+                                                                {
+                                                                    "fieldName": "dgShuruiShikyuGendoKijunGaku",
+                                                                    "items": [],
+                                                                    "controlType": "DataGrid",
+                                                                    "width": "390px",
+                                                                    "visible": true,
+                                                                    "displayNone": false,
+                                                                    "disabled": false,
+                                                                    "accessKey": "",
+                                                                    "nextFocusFieldName": "",
+                                                                    "wrap": true,
+                                                                    "dependencies": [],
+                                                                    "float": 0,
+                                                                    "toolTip": "",
+                                                                    "authorityMode": 0,
+                                                                    "marginLeft": "0em",
+                                                                    "marginRight": "XS",
+                                                                    "selectControlID": "dgShuruiShikyuGendoKijunGaku",
+                                                                    "helpMessageID": "",
+                                                                    "jpControlName": "",
+                                                                    "readOnly": false,
+                                                                    "height": "200px",
+                                                                    "dataSource": [],
+                                                                    "gridSetting": {
+                                                                        "rowHeight": 25,
+                                                                        "isMultiSelectable": false,
+                                                                        "isShowHeader": true,
+                                                                        "isShowFooter": true,
+                                                                        "isShowFilter": false,
+                                                                        "isShowFilterButton": false,
+                                                                        "isShowRowState": false,
+                                                                        "isShowSelectButtonColumn": false,
+                                                                        "isShowModifyButtonColumn": false,
+                                                                        "isShowDeleteButtonColumn": false,
+                                                                        "limitRowCount": 0,
+                                                                        "selectedRowCount": 0,
+                                                                        "selectLimitRowCount": 0,
+                                                                        "header": {
+                                                                            "combineColumns": [],
+                                                                            "frozenColumn": "",
+                                                                            "headerHeight": 0
+                                                                        },
+                                                                        "columns": [
+                                                                            {
+                                                                                "columnName": "サービス種類",
+                                                                                "dataName": "serviceShurui",
+                                                                                "toolTip": "",
+                                                                                "bgColor": 0,
+                                                                                "width": 270,
+                                                                                "visible": true,
+                                                                                "cellType": 0,
+                                                                                "cellDetails": {
+                                                                                    "cellType": 0
+                                                                                },
+                                                                                "align": 0,
+                                                                                "resize": true,
+                                                                                "isPrivateInfo": false,
+                                                                                "sortKey": ""
+                                                                            },
+                                                                            {
+                                                                                "columnName": "限度額",
+                                                                                "dataName": "gendoGaku",
+                                                                                "toolTip": "",
+                                                                                "bgColor": 0,
+                                                                                "width": 100,
+                                                                                "visible": true,
+                                                                                "cellType": 0,
+                                                                                "cellDetails": {
+                                                                                    "cellType": 0
+                                                                                },
+                                                                                "align": 2,
+                                                                                "resize": true,
+                                                                                "isPrivateInfo": false,
+                                                                                "sortKey": ""
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    "onSort": "",
+                                                                    "onSelect": "",
+                                                                    "onSelectByDblClick": "",
+                                                                    "onSelectBySelectButton": "",
+                                                                    "onSelectByModifyButton": "",
+                                                                    "onSelectByDeleteButton": "",
+                                                                    "onAfterRequest": "",
+                                                                    "onAfterRequestByDblClick": "",
+                                                                    "onAfterRequestBySelectButton": "",
+                                                                    "onAfterRequestByModifyButton": "",
+                                                                    "onAfterRequestByDeleteButton": "",
+                                                                    "onOnlyRow": "",
+                                                                    "onNoRow": "",
+                                                                    "onMultiRows": "",
+                                                                    "sortOrder": "serviceShurui",
+                                                                    "isAscending": true,
+                                                                    "filterList": [],
+                                                                    "activeRowId": -1,
+                                                                    "gridAction": []
+                                                                }
+                                                            ],
+                                                            "controlType": "Panel",
+                                                            "width": "G2",
+                                                            "visible": true,
+                                                            "displayNone": false,
+                                                            "disabled": false,
+                                                            "accessKey": "",
+                                                            "nextFocusFieldName": "",
+                                                            "wrap": true,
+                                                            "dependencies": [],
+                                                            "float": 0,
+                                                            "toolTip": "",
+                                                            "authorityMode": 0,
+                                                            "marginLeft": "XS",
+                                                            "marginRight": "XS",
+                                                            "selectControlID": "ShuruiShikyuGendoKijungaku",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
+                                                            "onLoad": "",
+                                                            "title": "うち種類支給限度基準額",
+                                                            "marginTop": "Default",
+                                                            "marginBottom": "Default",
+                                                            "isOpen": true,
+                                                            "canOpenAndClose": false,
+                                                            "postParameterPanelNames": [],
+                                                            "requestSettings": [],
+                                                            "hiddenInput": [],
+                                                            "onOpen": "",
+                                                            "onClose": "",
+                                                            "session": {},
+                                                            "eraseBorder": true,
+                                                            "backgroundColor": 0,
+                                                            "widthAuto": true,
+                                                            "panelDisplay": 1,
+                                                            "isGroupBox": false,
+                                                            "readOnly": false,
+                                                            "height": "Auto",
+                                                            "focusPositionID": "restoreLayoutButton",
+                                                            "canPost": true
+                                                        }
+                                                    ],
+                                                    "controlType": "TableCell",
+                                                    "width": "XS",
+                                                    "visible": true,
+                                                    "displayNone": false,
+                                                    "disabled": false,
+                                                    "accessKey": "",
+                                                    "nextFocusFieldName": "",
+                                                    "wrap": false,
+                                                    "dependencies": [],
+                                                    "float": 0,
+                                                    "toolTip": "",
+                                                    "authorityMode": 0,
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
+                                                    "selectControlID": "celShuruiGendoKijungaku",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
+                                                    "connectTd": "R1C2"
                                                 }
                                             ],
-                                            "controlType": "Panel",
-                                            "width": "G2",
+                                            "controlType": "TablePanel",
+                                            "width": "XS",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
                                             "accessKey": "",
                                             "nextFocusFieldName": "",
-                                            "wrap": true,
+                                            "wrap": false,
                                             "dependencies": [],
                                             "float": 0,
                                             "toolTip": "",
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "selectControlID": "ShuruiShikyuGendoKijungaku",
+                                            "selectControlID": "tblGendoGaku",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "onLoad": "",
-                                            "title": "うち種類支給限度基準額",
-                                            "marginTop": "Default",
-                                            "marginBottom": "Default",
-                                            "isOpen": true,
-                                            "canOpenAndClose": false,
-                                            "postParameterPanelNames": [
-                                                {
-                                                    "postParameterPanelNames": "ShuruiShikyuGendoKijungaku"
-                                                }
-                                            ],
-                                            "requestSettings": [],
-                                            "hiddenInput": [],
-                                            "onOpen": "",
-                                            "onClose": "",
-                                            "session": {},
-                                            "eraseBorder": false,
-                                            "backgroundColor": 0,
-                                            "widthAuto": true,
-                                            "panelDisplay": 1,
-                                            "isGroupBox": false,
-                                            "readOnly": false,
-                                            "height": "Auto"
+                                            "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td></tr>\n  </tbody>\n</table>\n"
                                         }
                                     ],
                                     "controlType": "TabPanel",
@@ -778,7 +1008,8 @@ var DBZ;
                                     "jpControlName": "",
                                     "title": "限度額",
                                     "onActive": "",
-                                    "onFirstActive": ""
+                                    "onFirstActive": "",
+                                    "lazyLoadingControls": {}
                                 },
                                 {
                                     "fieldName": "tplShinsakaiIken",
@@ -787,7 +1018,7 @@ var DBZ;
                                             "fieldName": "lblShinsakaiIken",
                                             "items": [],
                                             "controlType": "Label",
-                                            "width": "290",
+                                            "width": "290px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -803,9 +1034,9 @@ var DBZ;
                                             "selectControlID": "lblShinsakaiIken",
                                             "helpMessageID": "",
                                             "jpControlName": "",
+                                            "text": "認定審査会意見及びサービス種類の指定",
                                             "required": false,
                                             "isPrivateInfo": false,
-                                            "text": "認定審査会意見及びサービス種類の指定",
                                             "decorationClass": "",
                                             "align": 2
                                         },
@@ -813,7 +1044,7 @@ var DBZ;
                                             "fieldName": "txtShinsakaiIken",
                                             "items": [],
                                             "controlType": "TextBoxMultiLine",
-                                            "width": "800",
+                                            "width": "800px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -829,24 +1060,25 @@ var DBZ;
                                             "selectControlID": "txtShinsakaiIken_text_area",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "readOnly": true,
-                                            "height": "100",
+                                            "readOnly": false,
+                                            "height": "100px",
+                                            "text": "",
+                                            "onChange": "",
                                             "required": false,
+                                            "labelLText": "",
+                                            "labelLWidth": "XS",
+                                            "labelLAlign": 2,
                                             "placeHolder": "",
                                             "isPrivateInfo": false,
                                             "onFocus": "",
                                             "onBlur": "",
-                                            "onChange": "",
                                             "onKeyPress": "",
-                                            "text": "",
-                                            "labelLText": "",
                                             "labelRText": "",
-                                            "labelLWidth": "XS",
                                             "labelRWidth": "S",
-                                            "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 100000000,
+                                            "decorationClass": "",
+                                            "maxLength": "198",
                                             "minLength": 0,
                                             "textKind": 0,
                                             "limitLength": "198",
@@ -872,7 +1104,8 @@ var DBZ;
                                     "jpControlName": "",
                                     "title": "審査会意見",
                                     "onActive": "",
-                                    "onFirstActive": ""
+                                    "onFirstActive": "",
+                                    "lazyLoadingControls": {}
                                 },
                                 {
                                     "fieldName": "tplKyufuSeigen",
@@ -881,7 +1114,7 @@ var DBZ;
                                             "fieldName": "lblKyufuSeigen",
                                             "items": [],
                                             "controlType": "Label",
-                                            "width": "70",
+                                            "width": "70px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -897,9 +1130,9 @@ var DBZ;
                                             "selectControlID": "lblKyufuSeigen",
                                             "helpMessageID": "",
                                             "jpControlName": "",
+                                            "text": "給付制限",
                                             "required": false,
                                             "isPrivateInfo": false,
-                                            "text": "給付制限",
                                             "decorationClass": "",
                                             "align": 2
                                         },
@@ -913,7 +1146,7 @@ var DBZ;
                                                             "fieldName": "lblKyufuSeigenNaiyo",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "70",
+                                                            "width": "70px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -929,9 +1162,9 @@ var DBZ;
                                                             "selectControlID": "lblKyufuSeigenNaiyo",
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
+                                                            "text": "制限内容",
                                                             "required": false,
                                                             "isPrivateInfo": false,
-                                                            "text": "制限内容",
                                                             "decorationClass": "",
                                                             "align": 2
                                                         }
@@ -948,8 +1181,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celKyufuSeigenNaiyoTitle",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -962,7 +1195,7 @@ var DBZ;
                                                             "fieldName": "lblKyufuSeigenKikan",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "235",
+                                                            "width": "235px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -978,9 +1211,9 @@ var DBZ;
                                                             "selectControlID": "lblKyufuSeigenKikan",
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
+                                                            "text": "制限期間",
                                                             "required": false,
                                                             "isPrivateInfo": false,
-                                                            "text": "制限期間",
                                                             "decorationClass": "",
                                                             "align": 1
                                                         }
@@ -997,8 +1230,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celKyufuSeigenKikanTitle",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1011,7 +1244,7 @@ var DBZ;
                                                             "fieldName": "txtKyufuSeigenNaiyo1",
                                                             "items": [],
                                                             "controlType": "TextBox",
-                                                            "width": "200",
+                                                            "width": "200px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1028,29 +1261,29 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "maxLength": 100000000,
                                                             "minLength": 0,
                                                             "textAlign": 0,
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
-                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -1066,8 +1299,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celKyufuSeigenNaiyo1",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1080,7 +1313,7 @@ var DBZ;
                                                             "fieldName": "txtKyufuSeigenKikan1",
                                                             "items": [],
                                                             "controlType": "TextBoxDateRange",
-                                                            "width": "80",
+                                                            "width": "80px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1097,17 +1330,17 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "onChange": "",
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "ymdKubun": 2,
                                                             "displayFormat": 0,
@@ -1121,7 +1354,8 @@ var DBZ;
                                                             "fromValue": "",
                                                             "toValue": "",
                                                             "fromSelectControlID": "txtKyufuSeigenKikan1From",
-                                                            "toSelectControlID": "txtKyufuSeigenKikan1To"
+                                                            "toSelectControlID": "txtKyufuSeigenKikan1To",
+                                                            "autoRangeTo": true
                                                         }
                                                     ],
                                                     "controlType": "TableCell",
@@ -1136,8 +1370,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celKyufuSeigenKikan1",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1150,7 +1384,7 @@ var DBZ;
                                                             "fieldName": "txtKyufuSeigenNaiyo2",
                                                             "items": [],
                                                             "controlType": "TextBox",
-                                                            "width": "200",
+                                                            "width": "200px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1167,29 +1401,29 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "maxLength": 100000000,
                                                             "minLength": 0,
                                                             "textAlign": 0,
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
-                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -1205,8 +1439,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celKyufuSeigenNaiyo2",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1219,7 +1453,7 @@ var DBZ;
                                                             "fieldName": "txtKyufuSeigenKikan2",
                                                             "items": [],
                                                             "controlType": "TextBoxDateRange",
-                                                            "width": "80",
+                                                            "width": "80px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1236,17 +1470,17 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "onChange": "",
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "ymdKubun": 2,
                                                             "displayFormat": 0,
@@ -1260,7 +1494,8 @@ var DBZ;
                                                             "fromValue": "",
                                                             "toValue": "",
                                                             "fromSelectControlID": "txtKyufuSeigenKikan2From",
-                                                            "toSelectControlID": "txtKyufuSeigenKikan2To"
+                                                            "toSelectControlID": "txtKyufuSeigenKikan2To",
+                                                            "autoRangeTo": true
                                                         }
                                                     ],
                                                     "controlType": "TableCell",
@@ -1275,8 +1510,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celKyufuSeigenKikan2",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1289,7 +1524,7 @@ var DBZ;
                                                             "fieldName": "txtKyufuSeigenNaiyo3",
                                                             "items": [],
                                                             "controlType": "TextBox",
-                                                            "width": "200",
+                                                            "width": "200px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1306,29 +1541,29 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "maxLength": 100000000,
                                                             "minLength": 0,
                                                             "textAlign": 0,
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
-                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -1344,8 +1579,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celKyufuSeigenNaiyo3",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1358,7 +1593,7 @@ var DBZ;
                                                             "fieldName": "txtKyufuSeigenKikan3",
                                                             "items": [],
                                                             "controlType": "TextBoxDateRange",
-                                                            "width": "80",
+                                                            "width": "80px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1375,17 +1610,17 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "onChange": "",
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "ymdKubun": 2,
                                                             "displayFormat": 0,
@@ -1399,7 +1634,8 @@ var DBZ;
                                                             "fromValue": "",
                                                             "toValue": "",
                                                             "fromSelectControlID": "txtKyufuSeigenKikan3From",
-                                                            "toSelectControlID": "txtKyufuSeigenKikan3To"
+                                                            "toSelectControlID": "txtKyufuSeigenKikan3To",
+                                                            "autoRangeTo": true
                                                         }
                                                     ],
                                                     "controlType": "TableCell",
@@ -1414,8 +1650,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celKyufuSeigenKikan3",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1461,7 +1697,8 @@ var DBZ;
                                     "jpControlName": "",
                                     "title": "給付制限",
                                     "onActive": "",
-                                    "onFirstActive": ""
+                                    "onFirstActive": "",
+                                    "lazyLoadingControls": {}
                                 },
                                 {
                                     "fieldName": "tplShienJigyosha",
@@ -1470,7 +1707,7 @@ var DBZ;
                                             "fieldName": "lblShienJigyosha",
                                             "items": [],
                                             "controlType": "Label",
-                                            "width": "275",
+                                            "width": "275px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -1486,9 +1723,9 @@ var DBZ;
                                             "selectControlID": "lblShienJigyosha",
                                             "helpMessageID": "",
                                             "jpControlName": "",
+                                            "text": "居住介護支援事業者及び事業者の名称",
                                             "required": false,
                                             "isPrivateInfo": false,
-                                            "text": "居住介護支援事業者及び事業者の名称",
                                             "decorationClass": "",
                                             "align": 2
                                         },
@@ -1502,7 +1739,7 @@ var DBZ;
                                                             "fieldName": "lblJigyosha",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "55",
+                                                            "width": "55px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1518,9 +1755,9 @@ var DBZ;
                                                             "selectControlID": "lblJigyosha",
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
+                                                            "text": "事業者",
                                                             "required": false,
                                                             "isPrivateInfo": false,
-                                                            "text": "事業者",
                                                             "decorationClass": "",
                                                             "align": 2
                                                         }
@@ -1537,8 +1774,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celJigyoshaTitle",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1551,7 +1788,7 @@ var DBZ;
                                                             "fieldName": "lblTodokedeDate",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "96",
+                                                            "width": "96px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1567,9 +1804,9 @@ var DBZ;
                                                             "selectControlID": "lblTodokedeDate",
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
+                                                            "text": "届出日",
                                                             "required": false,
                                                             "isPrivateInfo": false,
-                                                            "text": "届出日",
                                                             "decorationClass": "",
                                                             "align": 1
                                                         }
@@ -1586,8 +1823,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celTodokedeDateTitle",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1600,7 +1837,7 @@ var DBZ;
                                                             "fieldName": "txtJigyosha1",
                                                             "items": [],
                                                             "controlType": "TextBox",
-                                                            "width": "500",
+                                                            "width": "500px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1617,29 +1854,29 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "maxLength": 100000000,
                                                             "minLength": 0,
                                                             "textAlign": 0,
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
-                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -1655,8 +1892,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celJigyosha1",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1669,7 +1906,7 @@ var DBZ;
                                                             "fieldName": "txtTodokedeDate1",
                                                             "items": [],
                                                             "controlType": "TextBoxFlexibleDate",
-                                                            "width": "80",
+                                                            "width": "80px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1686,24 +1923,25 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "ymdKubun": 2,
                                                             "displayFormat": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "textKind": 0,
                                                             "permitCharactor": "./_-"
                                                         }
@@ -1720,8 +1958,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celTodokedeDate1",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1734,7 +1972,7 @@ var DBZ;
                                                             "fieldName": "txtJigyosha2",
                                                             "items": [],
                                                             "controlType": "TextBox",
-                                                            "width": "500",
+                                                            "width": "500px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1751,29 +1989,29 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "maxLength": 100000000,
                                                             "minLength": 0,
                                                             "textAlign": 0,
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
-                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -1789,8 +2027,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celJigyosha2",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1803,7 +2041,7 @@ var DBZ;
                                                             "fieldName": "txtTodokedeDate2",
                                                             "items": [],
                                                             "controlType": "TextBoxFlexibleDate",
-                                                            "width": "80",
+                                                            "width": "80px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1820,24 +2058,25 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "ymdKubun": 2,
                                                             "displayFormat": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "textKind": 0,
                                                             "permitCharactor": "./_-"
                                                         }
@@ -1854,8 +2093,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celTodokedeDate2",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1868,7 +2107,7 @@ var DBZ;
                                                             "fieldName": "txtJigyosha3",
                                                             "items": [],
                                                             "controlType": "TextBox",
-                                                            "width": "500",
+                                                            "width": "500px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1885,29 +2124,29 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "maxLength": 100000000,
                                                             "minLength": 0,
                                                             "textAlign": 0,
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
-                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -1923,8 +2162,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celJigyosha3",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1937,7 +2176,7 @@ var DBZ;
                                                             "fieldName": "txtTodokedeDate3",
                                                             "items": [],
                                                             "controlType": "TextBoxFlexibleDate",
-                                                            "width": "80",
+                                                            "width": "80px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1954,24 +2193,25 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "ymdKubun": 2,
                                                             "displayFormat": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "textKind": 0,
                                                             "permitCharactor": "./_-"
                                                         }
@@ -1988,8 +2228,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celTodokedeDate3",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2035,7 +2275,8 @@ var DBZ;
                                     "jpControlName": "",
                                     "title": "支援事業者",
                                     "onActive": "",
-                                    "onFirstActive": ""
+                                    "onFirstActive": "",
+                                    "lazyLoadingControls": {}
                                 },
                                 {
                                     "fieldName": "tplShisetsuNyutaisho",
@@ -2044,7 +2285,7 @@ var DBZ;
                                             "fieldName": "lblKaigoHokensha",
                                             "items": [],
                                             "controlType": "Label",
-                                            "width": "115",
+                                            "width": "115px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -2060,9 +2301,9 @@ var DBZ;
                                             "selectControlID": "lblKaigoHokensha",
                                             "helpMessageID": "",
                                             "jpControlName": "",
+                                            "text": "介護保険施設等",
                                             "required": false,
                                             "isPrivateInfo": false,
-                                            "text": "介護保険施設等",
                                             "decorationClass": "",
                                             "align": 2
                                         },
@@ -2076,7 +2317,7 @@ var DBZ;
                                                             "fieldName": "lblShisetsuNyushoDate",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "96",
+                                                            "width": "96px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2092,9 +2333,9 @@ var DBZ;
                                                             "selectControlID": "lblShisetsuNyushoDate",
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
+                                                            "text": "入所日",
                                                             "required": false,
                                                             "isPrivateInfo": false,
-                                                            "text": "入所日",
                                                             "decorationClass": "",
                                                             "align": 1
                                                         }
@@ -2111,8 +2352,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celShisetsuNyushoDateTitle",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2125,7 +2366,7 @@ var DBZ;
                                                             "fieldName": "lblShisetsuTaishoDate",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "96",
+                                                            "width": "96px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2141,9 +2382,9 @@ var DBZ;
                                                             "selectControlID": "lblShisetsuTaishoDate",
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
+                                                            "text": "退所日",
                                                             "required": false,
                                                             "isPrivateInfo": false,
-                                                            "text": "退所日",
                                                             "decorationClass": "",
                                                             "align": 1
                                                         }
@@ -2160,8 +2401,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celShisetsuTaishoDateTitle",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2174,7 +2415,7 @@ var DBZ;
                                                             "fieldName": "lblNyushoShisetsu",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "70",
+                                                            "width": "70px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2190,9 +2431,9 @@ var DBZ;
                                                             "selectControlID": "lblNyushoShisetsu",
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
+                                                            "text": "入所施設",
                                                             "required": false,
                                                             "isPrivateInfo": false,
-                                                            "text": "入所施設",
                                                             "decorationClass": "",
                                                             "align": 2
                                                         }
@@ -2209,8 +2450,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celNyushoShisetsuTitle",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2223,7 +2464,7 @@ var DBZ;
                                                             "fieldName": "txtShisetsuNyushoDate1",
                                                             "items": [],
                                                             "controlType": "TextBoxFlexibleDate",
-                                                            "width": "80",
+                                                            "width": "80px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2240,24 +2481,25 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "ymdKubun": 2,
                                                             "displayFormat": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "textKind": 0,
                                                             "permitCharactor": "./_-"
                                                         }
@@ -2274,8 +2516,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celShisetsuNyushoDate1",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2288,7 +2530,7 @@ var DBZ;
                                                             "fieldName": "txtShisetsuTaishoDate1",
                                                             "items": [],
                                                             "controlType": "TextBoxFlexibleDate",
-                                                            "width": "80",
+                                                            "width": "80px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2305,24 +2547,25 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "ymdKubun": 2,
                                                             "displayFormat": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "textKind": 0,
                                                             "permitCharactor": "./_-"
                                                         }
@@ -2339,8 +2582,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celShisetsuTaishoDate1",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2353,7 +2596,7 @@ var DBZ;
                                                             "fieldName": "txtNyushoShisetsu1",
                                                             "items": [],
                                                             "controlType": "TextBox",
-                                                            "width": "350",
+                                                            "width": "350px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2370,29 +2613,29 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "maxLength": 100000000,
                                                             "minLength": 0,
                                                             "textAlign": 0,
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
-                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -2408,8 +2651,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celNyushoShisetsu1",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2422,7 +2665,7 @@ var DBZ;
                                                             "fieldName": "txtShisetsuNyushoDate2",
                                                             "items": [],
                                                             "controlType": "TextBoxFlexibleDate",
-                                                            "width": "80",
+                                                            "width": "80px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2439,24 +2682,25 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "ymdKubun": 2,
                                                             "displayFormat": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "textKind": 0,
                                                             "permitCharactor": "./_-"
                                                         }
@@ -2473,8 +2717,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celShisetsuNyushoDate2",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2487,7 +2731,7 @@ var DBZ;
                                                             "fieldName": "txtShisetsuTaishoDate2",
                                                             "items": [],
                                                             "controlType": "TextBoxFlexibleDate",
-                                                            "width": "80",
+                                                            "width": "80px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2504,24 +2748,25 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "ymdKubun": 2,
                                                             "displayFormat": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "textKind": 0,
                                                             "permitCharactor": "./_-"
                                                         }
@@ -2538,8 +2783,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celShisetsuTaishoDate2",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2552,7 +2797,7 @@ var DBZ;
                                                             "fieldName": "txtNyushoShisetsu2",
                                                             "items": [],
                                                             "controlType": "TextBox",
-                                                            "width": "350",
+                                                            "width": "350px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2569,29 +2814,29 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "maxLength": 100000000,
                                                             "minLength": 0,
                                                             "textAlign": 0,
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
-                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -2607,8 +2852,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celNyushoShisetsu2",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2621,7 +2866,7 @@ var DBZ;
                                                             "fieldName": "lblShisetsuShurui",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "70",
+                                                            "width": "70px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2637,9 +2882,9 @@ var DBZ;
                                                             "selectControlID": "lblShisetsuShurui",
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
+                                                            "text": "施設種類",
                                                             "required": false,
                                                             "isPrivateInfo": false,
-                                                            "text": "施設種類",
                                                             "decorationClass": "",
                                                             "align": 2
                                                         }
@@ -2656,8 +2901,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celShisetsuShuruiTitle",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2670,7 +2915,7 @@ var DBZ;
                                                             "fieldName": "txtShisetsuShurui1",
                                                             "items": [],
                                                             "controlType": "TextBox",
-                                                            "width": "150",
+                                                            "width": "150px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2687,29 +2932,29 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "maxLength": 100000000,
                                                             "minLength": 0,
                                                             "textAlign": 0,
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
-                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -2725,8 +2970,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celShisetsuShurui1",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2739,7 +2984,7 @@ var DBZ;
                                                             "fieldName": "txtShisetsuShurui2",
                                                             "items": [],
                                                             "controlType": "TextBox",
-                                                            "width": "150",
+                                                            "width": "150px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2756,29 +3001,29 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "maxLength": 100000000,
                                                             "minLength": 0,
                                                             "textAlign": 0,
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
-                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -2794,8 +3039,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celShisetsuShurui2",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2808,7 +3053,7 @@ var DBZ;
                                                             "fieldName": "txtShisetsuNyushoDate3",
                                                             "items": [],
                                                             "controlType": "TextBoxFlexibleDate",
-                                                            "width": "80",
+                                                            "width": "80px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2825,24 +3070,25 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "ymdKubun": 2,
                                                             "displayFormat": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "textKind": 0,
                                                             "permitCharactor": "./_-"
                                                         }
@@ -2859,8 +3105,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celShisetsuNyushoDate3",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2873,7 +3119,7 @@ var DBZ;
                                                             "fieldName": "txtShisetsuTaishoDate3",
                                                             "items": [],
                                                             "controlType": "TextBoxFlexibleDate",
-                                                            "width": "80",
+                                                            "width": "80px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2890,24 +3136,25 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "ymdKubun": 2,
                                                             "displayFormat": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "textKind": 0,
                                                             "permitCharactor": "./_-"
                                                         }
@@ -2924,8 +3171,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celShisetsuTaishoDate3",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -2938,7 +3185,7 @@ var DBZ;
                                                             "fieldName": "txtNyushoShisetsu3",
                                                             "items": [],
                                                             "controlType": "TextBox",
-                                                            "width": "350",
+                                                            "width": "350px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -2955,29 +3202,29 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "maxLength": 100000000,
                                                             "minLength": 0,
                                                             "textAlign": 0,
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
-                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -2993,8 +3240,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celNyushoShisetsu3",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -3007,7 +3254,7 @@ var DBZ;
                                                             "fieldName": "txtShisetsuShurui3",
                                                             "items": [],
                                                             "controlType": "TextBox",
-                                                            "width": "150",
+                                                            "width": "150px",
                                                             "visible": true,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -3024,29 +3271,29 @@ var DBZ;
                                                             "helpMessageID": "",
                                                             "jpControlName": "",
                                                             "readOnly": true,
+                                                            "text": "",
+                                                            "onChange": "",
                                                             "required": false,
+                                                            "labelLText": "",
+                                                            "labelLWidth": "S",
+                                                            "labelLAlign": 2,
                                                             "placeHolder": "",
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
                                                             "onFocus": "",
                                                             "onBlur": "",
-                                                            "onChange": "",
                                                             "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelLText": "",
                                                             "labelRText": "",
-                                                            "labelLWidth": "S",
                                                             "labelRWidth": "S",
-                                                            "labelLAlign": 2,
                                                             "labelRAlign": 0,
                                                             "value": "",
+                                                            "decorationClass": "",
                                                             "maxLength": 100000000,
                                                             "minLength": 0,
                                                             "textAlign": 0,
                                                             "textKind": 0,
                                                             "isComboBox": false,
                                                             "suggest": [],
-                                                            "decorationClass": "",
                                                             "permitCharactor": ""
                                                         }
                                                     ],
@@ -3062,8 +3309,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "celShisetsuShurui3",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -3109,11 +3356,12 @@ var DBZ;
                                     "jpControlName": "",
                                     "title": "施設入退所",
                                     "onActive": "",
-                                    "onFirstActive": ""
+                                    "onFirstActive": "",
+                                    "lazyLoadingControls": {}
                                 }
                             ],
                             "controlType": "TabContainer",
-                            "width": "950",
+                            "width": "950px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -3124,8 +3372,8 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
+                            "marginLeft": "0px",
+                            "marginRight": "0px",
                             "selectControlID": "tabHihokenshaShikakuShosai",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -3145,7 +3393,7 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "1000",
+                    "width": "1000px",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -3156,8 +3404,8 @@ var DBZ;
                     "float": 0,
                     "toolTip": "",
                     "authorityMode": 0,
-                    "marginLeft": "XS",
-                    "marginRight": "XS",
+                    "marginLeft": "0px",
+                    "marginRight": "0px",
                     "selectControlID": "HihokenshaShikakuHakko",
                     "helpMessageID": "",
                     "jpControlName": "",
@@ -3183,7 +3431,9 @@ var DBZ;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "Auto",
+                    "focusPositionID": "restoreLayoutButton",
+                    "canPost": true
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -3198,45 +3448,463 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": "0",
-            "marginRight": "0",
+            "marginLeft": "0em",
+            "marginRight": "0em",
             "selectControlID": "defaultLayout",
             "helpMessageID": "",
             "jpControlName": "",
             "relation": [],
+            "packageName": "",
             "businessId": "DBZ",
             "controlName": "HihokenshaShikakuHakko",
-            "marginTop": 0,
-            "marginBottom": 0,
-            "originalProperty": [
-                {
-                    "publicChildFieldName": "txtYukoKigen",
-                    "publicChildProperty": "displayNone",
-                    "newPropertyName": "txtYukoKigen_displayNone"
-                },
-                {
-                    "publicChildFieldName": "radInjiIchi",
-                    "publicChildProperty": "displayNone",
-                    "newPropertyName": "radInjiIchi_displayNone"
-                },
-                {
-                    "publicChildFieldName": "txtKofuDate",
-                    "publicChildProperty": "onBlur",
-                    "newPropertyName": "onBlur_txtKofuDate"
-                },
-                {
-                    "publicChildFieldName": "ddlKofuJiyu",
-                    "publicChildProperty": "onChange",
-                    "newPropertyName": "onChange_ddlKofuJiyu"
-                }
-            ],
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "M"
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
         };
         return HihokenshaShikakuHakko_Design;
     })(Uz.CommonChildDiv);
     DBZ.HihokenshaShikakuHakko_Design = HihokenshaShikakuHakko_Design;
+
+    (function (HihokenshaShikakuHakko) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        HihokenshaShikakuHakko.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "HihokenshaShikakuHakko";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.HihokenshaShikakuHakko.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.HihokenshaShikakuHakko.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.HihokenshaShikakuHakko = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.YukoKiGenInfo = function () {
+                return new UZA.Panel(this.convFiledName("YukoKiGenInfo"));
+            };
+
+            Controls.prototype.txtYokuKiGen = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtYokuKiGen"));
+            };
+
+            Controls.prototype.txtKofuDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKofuDate"));
+            };
+
+            Controls.prototype.txtHokensha = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokensha"));
+            };
+
+            Controls.prototype.ddlKofuJiyu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlKofuJiyu"));
+            };
+
+            Controls.prototype.NinteiInfo = function () {
+                return new UZA.Panel(this.convFiledName("NinteiInfo"));
+            };
+
+            Controls.prototype.txtYokaigodo = function () {
+                return new UZA.TextBox(this.convFiledName("txtYokaigodo"));
+            };
+
+            Controls.prototype.txtNinteiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYMD"));
+            };
+
+            Controls.prototype.txtNinteiYukoFromYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYukoFromYMD"));
+            };
+
+            Controls.prototype.lblKara1 = function () {
+                return new UZA.Label(this.convFiledName("lblKara1"));
+            };
+
+            Controls.prototype.txtNinteiYukoToYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYukoToYMD"));
+            };
+
+            Controls.prototype.txtShinseiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiDate"));
+            };
+
+            Controls.prototype.tabHihokenshaShikakuShosai = function () {
+                return new UZA.TabContainer(this.convFiledName("tabHihokenshaShikakuShosai"));
+            };
+
+            Controls.prototype.tplGendoGaku = function () {
+                return new UZA.TabPanel(this.convFiledName("tplGendoGaku"));
+            };
+
+            Controls.prototype.tblGendoGaku = function () {
+                return new UZA.TablePanel(this.convFiledName("tblGendoGaku"));
+            };
+
+            Controls.prototype.celKubunGendoGaku = function () {
+                return new UZA.TableCell(this.convFiledName("celKubunGendoGaku"));
+            };
+
+            Controls.prototype.KubunGendoGaku = function () {
+                return new UZA.Panel(this.convFiledName("KubunGendoGaku"));
+            };
+
+            Controls.prototype.txtKubunShikyuGendoKijunGaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtKubunShikyuGendoKijunGaku"));
+            };
+
+            Controls.prototype.txtYukoFromYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtYukoFromYMD"));
+            };
+
+            Controls.prototype.lblKara = function () {
+                return new UZA.Label(this.convFiledName("lblKara"));
+            };
+
+            Controls.prototype.txtYukoToYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtYukoToYMD"));
+            };
+
+            Controls.prototype.celShuruiGendoKijungaku = function () {
+                return new UZA.TableCell(this.convFiledName("celShuruiGendoKijungaku"));
+            };
+
+            Controls.prototype.ShuruiShikyuGendoKijungaku = function () {
+                return new UZA.Panel(this.convFiledName("ShuruiShikyuGendoKijungaku"));
+            };
+
+            Controls.prototype.dgShuruiShikyuGendoKijunGaku = function () {
+                return new UZA.DataGrid(this.convFiledName("dgShuruiShikyuGendoKijunGaku"));
+            };
+
+            Controls.prototype.tplShinsakaiIken = function () {
+                return new UZA.TabPanel(this.convFiledName("tplShinsakaiIken"));
+            };
+
+            Controls.prototype.lblShinsakaiIken = function () {
+                return new UZA.Label(this.convFiledName("lblShinsakaiIken"));
+            };
+
+            Controls.prototype.txtShinsakaiIken = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtShinsakaiIken"));
+            };
+
+            Controls.prototype.tplKyufuSeigen = function () {
+                return new UZA.TabPanel(this.convFiledName("tplKyufuSeigen"));
+            };
+
+            Controls.prototype.lblKyufuSeigen = function () {
+                return new UZA.Label(this.convFiledName("lblKyufuSeigen"));
+            };
+
+            Controls.prototype.tblKyuhuSeigen = function () {
+                return new UZA.TablePanel(this.convFiledName("tblKyuhuSeigen"));
+            };
+
+            Controls.prototype.celKyufuSeigenNaiyoTitle = function () {
+                return new UZA.TableCell(this.convFiledName("celKyufuSeigenNaiyoTitle"));
+            };
+
+            Controls.prototype.lblKyufuSeigenNaiyo = function () {
+                return new UZA.Label(this.convFiledName("lblKyufuSeigenNaiyo"));
+            };
+
+            Controls.prototype.celKyufuSeigenKikanTitle = function () {
+                return new UZA.TableCell(this.convFiledName("celKyufuSeigenKikanTitle"));
+            };
+
+            Controls.prototype.lblKyufuSeigenKikan = function () {
+                return new UZA.Label(this.convFiledName("lblKyufuSeigenKikan"));
+            };
+
+            Controls.prototype.celKyufuSeigenNaiyo1 = function () {
+                return new UZA.TableCell(this.convFiledName("celKyufuSeigenNaiyo1"));
+            };
+
+            Controls.prototype.txtKyufuSeigenNaiyo1 = function () {
+                return new UZA.TextBox(this.convFiledName("txtKyufuSeigenNaiyo1"));
+            };
+
+            Controls.prototype.celKyufuSeigenKikan1 = function () {
+                return new UZA.TableCell(this.convFiledName("celKyufuSeigenKikan1"));
+            };
+
+            Controls.prototype.txtKyufuSeigenKikan1 = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtKyufuSeigenKikan1"));
+            };
+
+            Controls.prototype.celKyufuSeigenNaiyo2 = function () {
+                return new UZA.TableCell(this.convFiledName("celKyufuSeigenNaiyo2"));
+            };
+
+            Controls.prototype.txtKyufuSeigenNaiyo2 = function () {
+                return new UZA.TextBox(this.convFiledName("txtKyufuSeigenNaiyo2"));
+            };
+
+            Controls.prototype.celKyufuSeigenKikan2 = function () {
+                return new UZA.TableCell(this.convFiledName("celKyufuSeigenKikan2"));
+            };
+
+            Controls.prototype.txtKyufuSeigenKikan2 = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtKyufuSeigenKikan2"));
+            };
+
+            Controls.prototype.celKyufuSeigenNaiyo3 = function () {
+                return new UZA.TableCell(this.convFiledName("celKyufuSeigenNaiyo3"));
+            };
+
+            Controls.prototype.txtKyufuSeigenNaiyo3 = function () {
+                return new UZA.TextBox(this.convFiledName("txtKyufuSeigenNaiyo3"));
+            };
+
+            Controls.prototype.celKyufuSeigenKikan3 = function () {
+                return new UZA.TableCell(this.convFiledName("celKyufuSeigenKikan3"));
+            };
+
+            Controls.prototype.txtKyufuSeigenKikan3 = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtKyufuSeigenKikan3"));
+            };
+
+            Controls.prototype.tplShienJigyosha = function () {
+                return new UZA.TabPanel(this.convFiledName("tplShienJigyosha"));
+            };
+
+            Controls.prototype.lblShienJigyosha = function () {
+                return new UZA.Label(this.convFiledName("lblShienJigyosha"));
+            };
+
+            Controls.prototype.tblJigyosha = function () {
+                return new UZA.TablePanel(this.convFiledName("tblJigyosha"));
+            };
+
+            Controls.prototype.celJigyoshaTitle = function () {
+                return new UZA.TableCell(this.convFiledName("celJigyoshaTitle"));
+            };
+
+            Controls.prototype.lblJigyosha = function () {
+                return new UZA.Label(this.convFiledName("lblJigyosha"));
+            };
+
+            Controls.prototype.celTodokedeDateTitle = function () {
+                return new UZA.TableCell(this.convFiledName("celTodokedeDateTitle"));
+            };
+
+            Controls.prototype.lblTodokedeDate = function () {
+                return new UZA.Label(this.convFiledName("lblTodokedeDate"));
+            };
+
+            Controls.prototype.celJigyosha1 = function () {
+                return new UZA.TableCell(this.convFiledName("celJigyosha1"));
+            };
+
+            Controls.prototype.txtJigyosha1 = function () {
+                return new UZA.TextBox(this.convFiledName("txtJigyosha1"));
+            };
+
+            Controls.prototype.celTodokedeDate1 = function () {
+                return new UZA.TableCell(this.convFiledName("celTodokedeDate1"));
+            };
+
+            Controls.prototype.txtTodokedeDate1 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeDate1"));
+            };
+
+            Controls.prototype.celJigyosha2 = function () {
+                return new UZA.TableCell(this.convFiledName("celJigyosha2"));
+            };
+
+            Controls.prototype.txtJigyosha2 = function () {
+                return new UZA.TextBox(this.convFiledName("txtJigyosha2"));
+            };
+
+            Controls.prototype.celTodokedeDate2 = function () {
+                return new UZA.TableCell(this.convFiledName("celTodokedeDate2"));
+            };
+
+            Controls.prototype.txtTodokedeDate2 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeDate2"));
+            };
+
+            Controls.prototype.celJigyosha3 = function () {
+                return new UZA.TableCell(this.convFiledName("celJigyosha3"));
+            };
+
+            Controls.prototype.txtJigyosha3 = function () {
+                return new UZA.TextBox(this.convFiledName("txtJigyosha3"));
+            };
+
+            Controls.prototype.celTodokedeDate3 = function () {
+                return new UZA.TableCell(this.convFiledName("celTodokedeDate3"));
+            };
+
+            Controls.prototype.txtTodokedeDate3 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeDate3"));
+            };
+
+            Controls.prototype.tplShisetsuNyutaisho = function () {
+                return new UZA.TabPanel(this.convFiledName("tplShisetsuNyutaisho"));
+            };
+
+            Controls.prototype.lblKaigoHokensha = function () {
+                return new UZA.Label(this.convFiledName("lblKaigoHokensha"));
+            };
+
+            Controls.prototype.tblShisetsuNyutaisho = function () {
+                return new UZA.TablePanel(this.convFiledName("tblShisetsuNyutaisho"));
+            };
+
+            Controls.prototype.celShisetsuNyushoDateTitle = function () {
+                return new UZA.TableCell(this.convFiledName("celShisetsuNyushoDateTitle"));
+            };
+
+            Controls.prototype.lblShisetsuNyushoDate = function () {
+                return new UZA.Label(this.convFiledName("lblShisetsuNyushoDate"));
+            };
+
+            Controls.prototype.celShisetsuTaishoDateTitle = function () {
+                return new UZA.TableCell(this.convFiledName("celShisetsuTaishoDateTitle"));
+            };
+
+            Controls.prototype.lblShisetsuTaishoDate = function () {
+                return new UZA.Label(this.convFiledName("lblShisetsuTaishoDate"));
+            };
+
+            Controls.prototype.celNyushoShisetsuTitle = function () {
+                return new UZA.TableCell(this.convFiledName("celNyushoShisetsuTitle"));
+            };
+
+            Controls.prototype.lblNyushoShisetsu = function () {
+                return new UZA.Label(this.convFiledName("lblNyushoShisetsu"));
+            };
+
+            Controls.prototype.celShisetsuNyushoDate1 = function () {
+                return new UZA.TableCell(this.convFiledName("celShisetsuNyushoDate1"));
+            };
+
+            Controls.prototype.txtShisetsuNyushoDate1 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShisetsuNyushoDate1"));
+            };
+
+            Controls.prototype.celShisetsuTaishoDate1 = function () {
+                return new UZA.TableCell(this.convFiledName("celShisetsuTaishoDate1"));
+            };
+
+            Controls.prototype.txtShisetsuTaishoDate1 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShisetsuTaishoDate1"));
+            };
+
+            Controls.prototype.celNyushoShisetsu1 = function () {
+                return new UZA.TableCell(this.convFiledName("celNyushoShisetsu1"));
+            };
+
+            Controls.prototype.txtNyushoShisetsu1 = function () {
+                return new UZA.TextBox(this.convFiledName("txtNyushoShisetsu1"));
+            };
+
+            Controls.prototype.celShisetsuNyushoDate2 = function () {
+                return new UZA.TableCell(this.convFiledName("celShisetsuNyushoDate2"));
+            };
+
+            Controls.prototype.txtShisetsuNyushoDate2 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShisetsuNyushoDate2"));
+            };
+
+            Controls.prototype.celShisetsuTaishoDate2 = function () {
+                return new UZA.TableCell(this.convFiledName("celShisetsuTaishoDate2"));
+            };
+
+            Controls.prototype.txtShisetsuTaishoDate2 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShisetsuTaishoDate2"));
+            };
+
+            Controls.prototype.celNyushoShisetsu2 = function () {
+                return new UZA.TableCell(this.convFiledName("celNyushoShisetsu2"));
+            };
+
+            Controls.prototype.txtNyushoShisetsu2 = function () {
+                return new UZA.TextBox(this.convFiledName("txtNyushoShisetsu2"));
+            };
+
+            Controls.prototype.celShisetsuShuruiTitle = function () {
+                return new UZA.TableCell(this.convFiledName("celShisetsuShuruiTitle"));
+            };
+
+            Controls.prototype.lblShisetsuShurui = function () {
+                return new UZA.Label(this.convFiledName("lblShisetsuShurui"));
+            };
+
+            Controls.prototype.celShisetsuShurui1 = function () {
+                return new UZA.TableCell(this.convFiledName("celShisetsuShurui1"));
+            };
+
+            Controls.prototype.txtShisetsuShurui1 = function () {
+                return new UZA.TextBox(this.convFiledName("txtShisetsuShurui1"));
+            };
+
+            Controls.prototype.celShisetsuShurui2 = function () {
+                return new UZA.TableCell(this.convFiledName("celShisetsuShurui2"));
+            };
+
+            Controls.prototype.txtShisetsuShurui2 = function () {
+                return new UZA.TextBox(this.convFiledName("txtShisetsuShurui2"));
+            };
+
+            Controls.prototype.celShisetsuNyushoDate3 = function () {
+                return new UZA.TableCell(this.convFiledName("celShisetsuNyushoDate3"));
+            };
+
+            Controls.prototype.txtShisetsuNyushoDate3 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShisetsuNyushoDate3"));
+            };
+
+            Controls.prototype.celShisetsuTaishoDate3 = function () {
+                return new UZA.TableCell(this.convFiledName("celShisetsuTaishoDate3"));
+            };
+
+            Controls.prototype.txtShisetsuTaishoDate3 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShisetsuTaishoDate3"));
+            };
+
+            Controls.prototype.celNyushoShisetsu3 = function () {
+                return new UZA.TableCell(this.convFiledName("celNyushoShisetsu3"));
+            };
+
+            Controls.prototype.txtNyushoShisetsu3 = function () {
+                return new UZA.TextBox(this.convFiledName("txtNyushoShisetsu3"));
+            };
+
+            Controls.prototype.celShisetsuShurui3 = function () {
+                return new UZA.TableCell(this.convFiledName("celShisetsuShurui3"));
+            };
+
+            Controls.prototype.txtShisetsuShurui3 = function () {
+                return new UZA.TextBox(this.convFiledName("txtShisetsuShurui3"));
+            };
+            return Controls;
+        })();
+        HihokenshaShikakuHakko.Controls = Controls;
+    })(DBZ.HihokenshaShikakuHakko || (DBZ.HihokenshaShikakuHakko = {}));
+    var HihokenshaShikakuHakko = DBZ.HihokenshaShikakuHakko;
 })(DBZ || (DBZ = {}));
