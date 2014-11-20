@@ -6,7 +6,9 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
- * このコードはツールによって生成されました。
+ * 共有子Div「医療保険履歴Div」において、外部に公開する処理を定義したインターフェースです。
+ *
+ * @author n8178 城間篤人
  */
 public interface IIryoHokenRirekiDiv {
 
