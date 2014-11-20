@@ -46,7 +46,6 @@ public class Dba3030011IryoHokenRirekiHandler {
      */
     private void applyVisibility() {
         div.setMode_DisplayMode(DisplayMode.Shokai);
-        //div.setMode_DisplayMode(DisplayMode.Toroku);
     }
 
     void setModeDisplayMode(DisplayMode DisplayMode) {
