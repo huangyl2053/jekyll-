@@ -62,6 +62,7 @@
     <TypeScriptCompile Include="..\CommonChildDiv\ShisetsuJoho.ts" />
     <TypeScriptCompile Include="..\CommonChildDiv\ShikakuHenkoRireki.ts" />
     <TypeScriptCompile Include="..\CommonChildDiv\IryoHokenRireki.ts" />
+    <TypeScriptCompile Include="..\CommonChildDiv\JushochiTokureiRireki.ts" />
     <TypeScriptCompile Include="..\CommonChildDiv\JushochiTokureiRirekiList.ts" />
     <TypeScriptCompile Include="..\CommonChildDiv\ShikakuTokusoRireki.ts" />
     <TypeScriptCompile Include="..\CommonChildDiv\ShisetsuNyutaishoRirekiKanri.ts" />

@@ -534,7 +534,7 @@ module DBZ {
             }
 
             public JushochiTokureiRireki(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JushochiTokureiRireki"));
+                return new UZA.Panel(this.convFiledNameSelf());
             }
 
             public btnAdd(): UZA.Button {
