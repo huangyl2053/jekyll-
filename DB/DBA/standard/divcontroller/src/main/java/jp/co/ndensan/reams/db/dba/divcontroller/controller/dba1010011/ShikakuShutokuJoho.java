@@ -132,15 +132,13 @@ public class ShikakuShutokuJoho {
      * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<IValidationMessages> onBeforeClick_btnDecideShikakuShutokuInput(ShikakuShutokuJohoDiv shikakuShutokuDiv,
+    public ResponseData<ShikakuShutokuJohoDiv> onBeforeClick_btnDecideShikakuShutokuInput(ShikakuShutokuJohoDiv shikakuShutokuDiv,
             KihonJohoDiv kihonDiv) {
+        ResponseData<ShikakuShutokuJohoDiv> response = new ResponseData<>();
         //TODO #52997
-        //バリデーションチェックを実装します。
-        //以下のサンプルを参考に実装を行ってください。
-        ResponseData<IValidationMessages> response = new ResponseData<>();
-        //IValidationMessages validationMessages = validate(div);
-        //ValidationHelper.appendMessages(response, validationMessages, ShikakuShutokuValidationMessageMapping.class);
-        //response.data = div;
+        //１）下記のprivateメソッドを使用して、バリデーションメッセージを取得する。
+        //２）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+        response.data = shikakuShutokuDiv;
         return response;
     }
 
@@ -280,6 +278,7 @@ public class ShikakuShutokuJoho {
      */
     public ResponseData<ShikakuShutokuJohoDiv> onBeforeClick_btnDecideIryoHokenInput(ShikakuShutokuJohoDiv shikakuShutokuDiv,
             KihonJohoDiv kihonDiv) {
+        ResponseData<ShikakuShutokuJohoDiv> response = new ResponseData<>();
         //TODO #52997
         //1, 加入日 ＞ 脱退日 のとき、エラーメッセージを表示する。
         // メッセージID：URZE00027（期間が不正です。%1－%2） %1:加入日, %2:脱退日
@@ -287,7 +286,9 @@ public class ShikakuShutokuJoho {
         // メッセージID：URZE00025（期間が重複しています。）
         //3, 追加時のみ 加入日 ≦ 前の履歴データの脱退日 のとき、エラーメッセージを表示する。
         // メッセージID：URZE00025（期間が重複しています。）
-        return ResponseDatas.createSettingDataTo(shikakuShutokuDiv);
+        //4, ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+        response.data = shikakuShutokuDiv;
+        return response;
     }
 
     /**
@@ -420,8 +421,9 @@ public class ShikakuShutokuJoho {
      * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<IValidationMessages> onBeforeClick_btnDecideShisetsuNyutaishoInput(ShikakuShutokuJohoDiv shikakuShutokuDiv,
+    public ResponseData<ShikakuShutokuJohoDiv> onBeforeClick_btnDecideShisetsuNyutaishoInput(ShikakuShutokuJohoDiv shikakuShutokuDiv,
             KihonJohoDiv kihonDiv) {
+        ResponseData<ShikakuShutokuJohoDiv> response = new ResponseData<>();
         //TODO #52997
         //1, 入所日 ＞ 退所日 のとき、エラーメッセージを表示する。
         // メッセージID：URZE00027（期間が不正です。%1－%2） %1:入所日, %2:退所日
@@ -429,7 +431,9 @@ public class ShikakuShutokuJoho {
         // メッセージID：URZE00025（期間が重複しています。）
         //3, 追加時のみ 入所日 ≦ 前の履歴データの退所日 のとき、エラーメッセージを表示する。
         // メッセージID：URZE00025（期間が重複しています。）
-        return null;
+        //4, ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+        response.data = shikakuShutokuDiv;
+        return response;
     }
 
     /**
