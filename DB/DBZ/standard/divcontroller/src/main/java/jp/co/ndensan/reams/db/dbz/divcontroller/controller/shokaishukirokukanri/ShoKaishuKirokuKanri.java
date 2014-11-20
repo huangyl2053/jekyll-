@@ -20,7 +20,7 @@ public class ShoKaishuKirokuKanri {
      * 証回収状況Listの1行を選択した際に実行されます。<br/>
      * 選択行の情報を明細エリアに表示します。
      *
-     * @param shoKaishuDiv {@link ShoKaishuKirokuKanriDiv 施設入退所履歴Div}
+     * @param shoKaishuDiv {@link ShoKaishuKirokuKanriDiv 証回収記録管理Div}
      * @return 証回収記録管理Divを持つResponseData
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onSelect_dgShoKaishuJokyo(ShoKaishuKirokuKanriDiv shoKaishuDiv) {
@@ -35,7 +35,7 @@ public class ShoKaishuKirokuKanri {
      * 証回収状況Listの選択ボタンを押下した際に実行されます。<br/>
      * 選択行の情報を、回収情報について追記可能な状態で明細エリアに表示します。
      *
-     * @param shoKaishuDiv {@link ShoKaishuKirokuKanriDiv 施設入退所履歴Div}
+     * @param shoKaishuDiv {@link ShoKaishuKirokuKanriDiv 証回収記録管理Div}
      * @return 証回収記録管理Divを持つResponseData
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onSelectBySelectButton_dgShoKaishuJokyo(ShoKaishuKirokuKanriDiv shoKaishuDiv) {
@@ -49,7 +49,7 @@ public class ShoKaishuKirokuKanri {
      * 確定ボタンを押下した際に、onClick処理の前に実行されます。<br/>
      * 入力した情報について、バリデーションチェックを行います。
      *
-     * @param shoKaishuDiv {@link ShoKaishuKirokuKanriDiv 施設入退所履歴Div}
+     * @param shoKaishuDiv {@link ShoKaishuKirokuKanriDiv 証回収記録管理Div}
      * @return 証回収記録管理Divを持つResponseData
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onBeforeClick_btnShoKaishuKakutei(ShoKaishuKirokuKanriDiv shoKaishuDiv) {
@@ -70,7 +70,7 @@ public class ShoKaishuKirokuKanri {
      * 確定ボタンを押下した時に実行されます。<br/>
      * 明細エリアの入力内容を証回収状況履歴一覧に反映します。
      *
-     * @param shoKaishuDiv {@link ShoKaishuKirokuKanriDiv 施設入退所履歴Div}
+     * @param shoKaishuDiv {@link ShoKaishuKirokuKanriDiv 証回収記録管理Div}
      * @return 証回収記録管理Divを持つResponseData
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onClick_btnShoKaishuKakutei(ShoKaishuKirokuKanriDiv shoKaishuDiv) {
@@ -87,7 +87,7 @@ public class ShoKaishuKirokuKanri {
      * 明細エリアの取消ボタンが押下された際に実行します。<br/>
      * 入力した情報を破棄してもよいかの確認メッセージを表示します。
      *
-     * @param shoKaishuDiv {@link ShoKaishuKirokuKanriDiv 施設入退所履歴Div}
+     * @param shoKaishuDiv {@link ShoKaishuKirokuKanriDiv 証回収記録管理Div}
      * @return 証回収記録管理Divを持つResponseData
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onClick_btnShoKaishuTorikeshi(ShoKaishuKirokuKanriDiv shoKaishuDiv) {
@@ -107,7 +107,7 @@ public class ShoKaishuKirokuKanri {
      * 取消ボタンを押下した際に表示されるダイアログで、はいを選択した際に実行されます。<br/>
      * 明細エリアに入力した情報を破棄し、別処理が可能となる状態に戻します。
      *
-     * @param shoKaishuDiv {@link ShoKaishuKirokuKanriDiv 施設入退所履歴Div}
+     * @param shoKaishuDiv {@link ShoKaishuKirokuKanriDiv 証回収記録管理Div}
      * @return 証回収記録管理Divを持つResponseData
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onClick_btnShoKaishuTorikeshi_onYes(ShoKaishuKirokuKanriDiv shoKaishuDiv) {
