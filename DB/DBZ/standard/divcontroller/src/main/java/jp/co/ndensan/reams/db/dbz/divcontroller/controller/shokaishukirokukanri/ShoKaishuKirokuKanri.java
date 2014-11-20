@@ -53,6 +53,7 @@ public class ShoKaishuKirokuKanri {
      * @return 証回収記録管理Divを持つResponseData
      */
     public ResponseData<ShoKaishuKirokuKanriDiv> onBeforeClick_btnShoKaishuKakutei(ShoKaishuKirokuKanriDiv shoKaishuDiv) {
+        ResponseData<ShoKaishuKirokuKanriDiv> response = new ResponseData<>();
         //TODO
         //１）交付日 ＞ 回収日 のとき、エラーメッセージを表示する。
         //メッセージID：URZE00027（期間が不正です。%1－%2）
@@ -63,7 +64,9 @@ public class ShoKaishuKirokuKanri {
         //　メッセージID：URZE00025（期間が重複しています。）
         //３）回収日 ≦ 前の履歴データの回収日 のとき、エラーメッセージを表示する。
         //　メッセージID：URZE00025（期間が重複しています。）
-        return createSettingData(shoKaishuDiv);
+        //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+        response.data = shoKaishuDiv;
+        return response;
     }
 
     /**

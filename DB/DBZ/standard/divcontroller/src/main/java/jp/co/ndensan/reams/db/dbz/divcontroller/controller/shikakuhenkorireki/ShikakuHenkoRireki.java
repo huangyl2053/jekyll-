@@ -129,6 +129,7 @@ public class ShikakuHenkoRireki {
      * @return 資格変更履歴Divを持つResponseData
      */
     public ResponseData<ShikakuHenkoRirekiDiv> onBeforeClick_btnHenkoKakutei(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
+        ResponseData<ShikakuHenkoRirekiDiv> response = new ResponseData<>();
         //TODO
         //１）変更日 < 資格得喪情報の取得日のとき、エラーメッセージを表示する。
         //メッセージID：URZE00028（大小関係が不正です。(%1)）
@@ -157,7 +158,9 @@ public class ShikakuHenkoRireki {
         //メッセージID：DBZE00001（%1のため確定できません。）
         //７－１の場合　　%1：変更日時点での年齢が65歳未満
         //７－２の場合　　%1：変更日時点での年齢が40歳未満
-        return createSettingData(henkoRirekiDiv);
+        //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+        response.data = henkoRirekiDiv;
+        return response;
     }
 
     /**

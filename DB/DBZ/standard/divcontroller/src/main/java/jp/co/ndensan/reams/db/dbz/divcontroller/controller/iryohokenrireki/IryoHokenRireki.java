@@ -94,6 +94,7 @@ public class IryoHokenRireki {
      * @return 医療保険履歴Divを持つResponseData
      */
     public ResponseData<IryoHokenRirekiDiv> onBeforeClick_btnIryoHokenKakutei(IryoHokenRirekiDiv iryoHokenDiv) {
+        ResponseData<IryoHokenRirekiDiv> response = new ResponseData<>();
         //TODO
         //１）加入日 ＞ 脱退日 のとき、エラーメッセージを表示する。
         //　メッセージID：URZE00027（期間が不正です。%1－%2）
@@ -107,7 +108,9 @@ public class IryoHokenRireki {
         //３）追加処理・修正処理の場合に、以下のチェックを行う。
         //：加入日 ≦ 前の履歴データの脱退日 のとき、エラーメッセージを表示
         //　メッセージID：URZE00025（期間が重複しています。）
-        return createSettingData(iryoHokenDiv);
+        //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+        response.data = iryoHokenDiv;
+        return response;
     }
 
     /**

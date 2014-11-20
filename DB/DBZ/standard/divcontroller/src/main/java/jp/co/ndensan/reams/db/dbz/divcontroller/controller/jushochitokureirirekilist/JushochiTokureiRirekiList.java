@@ -105,6 +105,7 @@ public class JushochiTokureiRirekiList {
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onBeforeClick_btnJutokuKakutei(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
+        ResponseData<JushochiTokureiRirekiListDiv> response = new ResponseData<>();
         //TODO
         //１）適用処理を行う場合、以下のバリデーションチェックを行う。
         //適用日 ＜ 最新履歴データの資格取得日
@@ -119,7 +120,9 @@ public class JushochiTokureiRirekiList {
         //解除日 ＜ 最新履歴データの住所地特例適用日
         //２－１）チェックに当てはまった場合、以下のメッセージを表示する。
         //メッセージID：URZE00025（期間が重複しています。）
-        return createSettingData(jutokuRirekiDiv);
+        //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+        response.data = jutokuRirekiDiv;
+        return response;
     }
 
     /**

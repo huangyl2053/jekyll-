@@ -110,6 +110,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onBeforeClick_btnShisetsuNyutaishoKakutei(
             ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoDiv) {
+        ResponseData<ShisetsuNyutaishoRirekiKanriDiv> response = new ResponseData<>();
         //TODO
         //１）入所日 ＞ 退所日 のとき、エラーメッセージを表示する。
         //       メッセージID：URZE00027（期間が不正です。%1－%2）
@@ -121,7 +122,9 @@ public class ShisetsuNyutaishoRirekiKanri {
         //３）追加時・修正時のみ
         //：入所日 ≦ 前の履歴データの退所日 のとき、エラーメッセージを表示する。
         //       メッセージID：URZE00025（期間が重複しています。）
-        return createSettingData(shisetsuNyutaishoDiv);
+        //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+        response.data = shisetsuNyutaishoDiv;
+        return response;
     }
 
     /**
