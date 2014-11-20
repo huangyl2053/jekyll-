@@ -17,7 +17,7 @@ public class ShisetsuNyutaishoRirekiKanri {
 
     /**
      * 追加ボタンが押下された際に実行します。<br/>
-     * 追加処理をための前準備を行います。
+     * 追加処理のための前準備を行います。
      *
      * @param shisetsuNyutaishoDiv
      * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}

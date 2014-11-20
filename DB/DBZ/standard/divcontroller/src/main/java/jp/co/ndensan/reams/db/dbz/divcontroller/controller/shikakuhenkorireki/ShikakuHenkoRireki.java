@@ -17,7 +17,7 @@ public class ShikakuHenkoRireki {
 
     /**
      * 追加ボタンを押下した際に実行します。<br/>
-     * 追加処理をための前準備を行います。
+     * 追加処理のための前準備を行います。
      *
      * @param henkoRirekiDiv {@link ShikakuHenkoRirekiDiv 資格変更履歴Div}
      * @return 資格変更履歴Divを持つResponseData

@@ -17,7 +17,7 @@ public class IryoHokenRireki {
 
     /**
      * 追加ボタンが押下された際に実行します。<br/>
-     * 追加処理をための前準備を行います。
+     * 追加処理のための前準備を行います。
      *
      * @param iryoHokenDiv {@link IryoHokenRirekiDiv 医療保険履歴Div}
      * @return 医療保険履歴Divを持つResponseData
