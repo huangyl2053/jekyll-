@@ -1,11 +1,84 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBE {
     /**
      * 自動生成コードです。修正しないでください。
-     * KanryoDialogクラスのみで継承して使えます。
      */
+
+    export module KanryoDialog {
+
+        export class Events {
+
+            public static get CloseOK(): string {
+                return "CloseOK";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "KanryoDialog";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public KanryoDialog() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public SuccessInfo() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("SuccessInfo"));
+
+            }
+
+            public imgSuccess() : UZA.StaticImage {
+
+                return new UZA.StaticImage(this.convFiledName("imgSuccess"));
+
+            }
+
+            public WrapMessageMain() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("WrapMessageMain"));
+
+            }
+
+            public lblMessageMain() : UZA.Label {
+
+                return new UZA.Label(this.convFiledName("lblMessageMain"));
+
+            }
+
+            public btnClose() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnClose"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class KanryoDialog_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

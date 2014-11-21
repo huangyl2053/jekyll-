@@ -13,7 +13,7 @@
         {
          "fieldName": "comMiwarituskeList",
          "items": [],
-         "controlType": "CompositeControl",
+         "controlType": "CommonChildDiv",
          "width": "XS",
          "visible": true,
          "displayNone": false,
@@ -682,7 +682,7 @@
             {
              "fieldName": "comChosainList",
              "items": [],
-             "controlType": "CompositeControl",
+             "controlType": "CommonChildDiv",
              "width": "XS",
              "visible": true,
              "displayNone": false,
@@ -713,7 +713,7 @@
             {
              "fieldName": "comChosainListAll",
              "items": [],
-             "controlType": "CompositeControl",
+             "controlType": "CommonChildDiv",
              "width": "XS",
              "visible": true,
              "displayNone": true,
@@ -1223,7 +1223,7 @@
         {
          "fieldName": "comWaritukezumiList",
          "items": [],
-         "controlType": "CompositeControl",
+         "controlType": "CommonChildDiv",
          "width": "XS",
          "visible": true,
          "displayNone": false,
@@ -1995,7 +1995,7 @@
     {
      "fieldName": "comNinteichosaIraiListGod",
      "items": [],
-     "controlType": "CompositeControl",
+     "controlType": "CommonChildDiv",
      "width": "XS",
      "visible": true,
      "displayNone": true,

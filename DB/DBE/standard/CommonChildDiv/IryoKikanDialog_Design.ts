@@ -1,11 +1,93 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBE {
     /**
      * 自動生成コードです。修正しないでください。
-     * IryoKikanDialogクラスのみで継承して使えます。
      */
+
+    export module IryoKikanDialog {
+
+        export class Events {
+
+            public static get onSelect_dgKikanIchiran(): string {
+                return "onSelect_dgKikanIchiran";
+            }
+            public static get CloseOK(): string {
+                return "CloseOK";
+            }
+            public static get CloseCancel(): string {
+                return "CloseCancel";
+            }
+            public static get onSelect_dgShujiiIchiran(): string {
+                return "onSelect_dgShujiiIchiran";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "IryoKikanDialog";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public IryoKikanDialog() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public btnToMentenanceChosaKikan() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnToMentenanceChosaKikan"));
+
+            }
+
+            public dgKikanIchiran() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgKikanIchiran"));
+
+            }
+
+            public dgShujiiIchiran() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgShujiiIchiran"));
+
+            }
+
+            public btnSelectKikan() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnSelectKikan"));
+
+            }
+
+            public btnNonSelectReturn() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnNonSelectReturn"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class IryoKikanDialog_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

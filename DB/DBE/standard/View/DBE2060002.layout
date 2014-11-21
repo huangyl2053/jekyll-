@@ -1486,7 +1486,7 @@
               {
                "fieldName": "comKihonchosaResult101a",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -1524,7 +1524,7 @@
               {
                "fieldName": "comKihonchosaResult101b",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -1562,7 +1562,7 @@
               {
                "fieldName": "comKihonchosaResult101c",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -1600,7 +1600,7 @@
               {
                "fieldName": "comKihonchosaResult101d",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -1638,7 +1638,7 @@
               {
                "fieldName": "comKihonchosaResult101e",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -1676,7 +1676,7 @@
               {
                "fieldName": "comKihonchosaResult102a",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -1714,7 +1714,7 @@
               {
                "fieldName": "comKihonchosaResult102b",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -1752,7 +1752,7 @@
               {
                "fieldName": "comKihonchosaResult102c",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -1790,7 +1790,7 @@
               {
                "fieldName": "comKihonchosaResult102d",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -1828,7 +1828,7 @@
               {
                "fieldName": "comKihonchosaResult103",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -1870,7 +1870,7 @@
               {
                "fieldName": "comKihonchosaResult104",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -1912,7 +1912,7 @@
               {
                "fieldName": "comKihonchosaResult105",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -1958,7 +1958,7 @@
               {
                "fieldName": "comKihonchosaResult106",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2000,7 +2000,7 @@
               {
                "fieldName": "comKihonchosaResult107",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2042,7 +2042,7 @@
               {
                "fieldName": "comKihonchosaResult108",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2084,7 +2084,7 @@
               {
                "fieldName": "comKihonchosaResult109",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2216,7 +2216,7 @@
               {
                "fieldName": "comKihonchosaResult110",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2262,7 +2262,7 @@
               {
                "fieldName": "comKihonchosaResult111",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2304,7 +2304,7 @@
               {
                "fieldName": "comKihonchosaResult112",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2354,7 +2354,7 @@
               {
                "fieldName": "comKihonchosaResult113",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2449,7 +2449,7 @@
               {
                "fieldName": "comKihonchosaResult201",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2495,7 +2495,7 @@
               {
                "fieldName": "comKihonchosaResult202",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2541,7 +2541,7 @@
               {
                "fieldName": "comKihonchosaResult203",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2583,7 +2583,7 @@
               {
                "fieldName": "comKihonchosaResult204",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2629,7 +2629,7 @@
               {
                "fieldName": "comKihonchosaResult205",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2675,7 +2675,7 @@
               {
                "fieldName": "comKihonchosaResult206",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2721,7 +2721,7 @@
               {
                "fieldName": "comKihonchosaResult207",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2763,7 +2763,7 @@
               {
                "fieldName": "comKihonchosaResult208",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2805,7 +2805,7 @@
               {
                "fieldName": "comKihonchosaResult209",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2847,7 +2847,7 @@
               {
                "fieldName": "comKihonchosaResult210",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2893,7 +2893,7 @@
               {
                "fieldName": "comKihonchosaResult211",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -2939,7 +2939,7 @@
               {
                "fieldName": "comKihonchosaResult212",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3071,7 +3071,7 @@
               {
                "fieldName": "comKihonchosaResult301",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3117,7 +3117,7 @@
               {
                "fieldName": "comKihonchosaResult302",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3155,7 +3155,7 @@
               {
                "fieldName": "comKihonchosaResult303",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3193,7 +3193,7 @@
               {
                "fieldName": "comKihonchosaResult304",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3231,7 +3231,7 @@
               {
                "fieldName": "comKihonchosaResult305",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3269,7 +3269,7 @@
               {
                "fieldName": "comKihonchosaResult306",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3307,7 +3307,7 @@
               {
                "fieldName": "comKihonchosaResult307",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3345,7 +3345,7 @@
               {
                "fieldName": "comKihonchosaResult308",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3387,7 +3387,7 @@
               {
                "fieldName": "comKihonchosaResult309",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3474,7 +3474,7 @@
               {
                "fieldName": "comKihonchosaResult401",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3516,7 +3516,7 @@
               {
                "fieldName": "comKihonchosaResult402",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3558,7 +3558,7 @@
               {
                "fieldName": "comKihonchosaResult403",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3600,7 +3600,7 @@
               {
                "fieldName": "comKihonchosaResult404",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3642,7 +3642,7 @@
               {
                "fieldName": "comKihonchosaResult405",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3684,7 +3684,7 @@
               {
                "fieldName": "comKihonchosaResult406",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3816,7 +3816,7 @@
               {
                "fieldName": "comKihonchosaResult407",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3858,7 +3858,7 @@
               {
                "fieldName": "comKihonchosaResult408",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3900,7 +3900,7 @@
               {
                "fieldName": "comKihonchosaResult409",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3942,7 +3942,7 @@
               {
                "fieldName": "comKihonchosaResult410",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -3984,7 +3984,7 @@
               {
                "fieldName": "comKihonchosaResult411",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4026,7 +4026,7 @@
               {
                "fieldName": "comKihonchosaResult412",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4068,7 +4068,7 @@
               {
                "fieldName": "comKihonchosaResult413",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4110,7 +4110,7 @@
               {
                "fieldName": "comKihonchosaResult414",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4152,7 +4152,7 @@
               {
                "fieldName": "comKihonchosaResult415",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4239,7 +4239,7 @@
               {
                "fieldName": "comKihonchosaResult501",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4281,7 +4281,7 @@
               {
                "fieldName": "comKihonchosaResult502",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4323,7 +4323,7 @@
               {
                "fieldName": "comKihonchosaResult503",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4369,7 +4369,7 @@
               {
                "fieldName": "comKihonchosaResult504",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4411,7 +4411,7 @@
               {
                "fieldName": "comKihonchosaResult505",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4457,7 +4457,7 @@
               {
                "fieldName": "comKihonchosaResult506",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4593,7 +4593,7 @@
               {
                "fieldName": "comKihonchosaResult601",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4631,7 +4631,7 @@
               {
                "fieldName": "comKihonchosaResult602",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4669,7 +4669,7 @@
               {
                "fieldName": "comKihonchosaResult603",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4707,7 +4707,7 @@
               {
                "fieldName": "comKihonchosaResult604",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4745,7 +4745,7 @@
               {
                "fieldName": "comKihonchosaResult605",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4783,7 +4783,7 @@
               {
                "fieldName": "comKihonchosaResult606",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4821,7 +4821,7 @@
               {
                "fieldName": "comKihonchosaResult607",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4859,7 +4859,7 @@
               {
                "fieldName": "comKihonchosaResult608",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4897,7 +4897,7 @@
               {
                "fieldName": "comKihonchosaResult610",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4935,7 +4935,7 @@
               {
                "fieldName": "comKihonchosaResult609",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -4973,7 +4973,7 @@
               {
                "fieldName": "comKihonchosaResult611",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -5011,7 +5011,7 @@
               {
                "fieldName": "comKihonchosaResult612",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -5094,7 +5094,7 @@
               {
                "fieldName": "comKihonchosaResult702",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -5160,7 +5160,7 @@
               {
                "fieldName": "comKihonchosaResult701",
                "items": [],
-               "controlType": "CompositeControl",
+               "controlType": "CommonChildDiv",
                "width": "XS",
                "visible": true,
                "displayNone": false,
@@ -5482,7 +5482,7 @@
           {
            "fieldName": "comCountTankiSeikatsuKaigo",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5510,7 +5510,7 @@
           {
            "fieldName": "comCountHomeHelp",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5538,7 +5538,7 @@
           {
            "fieldName": "comCountTankiRyoyoKaigo",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5566,7 +5566,7 @@
           {
            "fieldName": "comCountHomonKango",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5594,7 +5594,7 @@
           {
            "fieldName": "comCountTokuteiSeikatsuKaigo",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5622,7 +5622,7 @@
           {
            "fieldName": "comCountHomonRehabilitation",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5650,7 +5650,7 @@
           {
            "fieldName": "comCountNinchishoTsushoKaigo",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5678,7 +5678,7 @@
           {
            "fieldName": "comCountHomonBathing",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5706,7 +5706,7 @@
           {
            "fieldName": "comCountNinchishoKyodoKaigo",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5734,7 +5734,7 @@
           {
            "fieldName": "comCountDayService",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5762,7 +5762,7 @@
           {
            "fieldName": "comCountSmallTakinoKaigo",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5790,7 +5790,7 @@
           {
            "fieldName": "comCountTsushoRehabilitation",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5818,7 +5818,7 @@
           {
            "fieldName": "comCountTeikiJunkaiHomonKaigo",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": false,
            "displayNone": false,
@@ -5846,7 +5846,7 @@
           {
            "fieldName": "comCountRyoyoKanriShido",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5874,7 +5874,7 @@
           {
            "fieldName": "comCountYakanHomonKaigo",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5902,7 +5902,7 @@
           {
            "fieldName": "comCountFukushiyoguHanbai",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5930,7 +5930,7 @@
           {
            "fieldName": "comCountChiikiTokuteiShisetsuKaigo",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5958,7 +5958,7 @@
           {
            "fieldName": "comCountFukushiyoguTaiyo",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -5986,7 +5986,7 @@
           {
            "fieldName": "comCountChiikiRojinFukushiShisetsuKaigo",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -6702,7 +6702,7 @@
           {
            "fieldName": "comTokkijiko1",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,
@@ -6745,7 +6745,7 @@
           {
            "fieldName": "comTokkijiko1",
            "items": [],
-           "controlType": "CompositeControl",
+           "controlType": "CommonChildDiv",
            "width": "XS",
            "visible": true,
            "displayNone": false,

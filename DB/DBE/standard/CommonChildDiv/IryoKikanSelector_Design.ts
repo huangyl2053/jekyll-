@@ -1,11 +1,162 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBE {
     /**
      * 自動生成コードです。修正しないでください。
-     * IryoKikanSelectorクラスのみで継承して使えます。
      */
+
+    export module IryoKikanSelector {
+
+        export class Events {
+
+            public static get onSelectByDC_IryoKikan(): string {
+                return "onSelectByDC_IryoKikan";
+            }
+            public static get onSelect_dgIryoKikanList(): string {
+                return "onSelect_dgIryoKikanList";
+            }
+            public static get onSelectByDC_Ishi(): string {
+                return "onSelectByDC_Ishi";
+            }
+            public static get onSelectBySB_IryoKikan(): string {
+                return "onSelectBySB_IryoKikan";
+            }
+            public static get onClick_btnNonSelectReturn(): string {
+                return "onClick_btnNonSelectReturn";
+            }
+            public static get onClick_btnSelectAndClose(): string {
+                return "onClick_btnSelectAndClose";
+            }
+            public static get onSelectBySB_Ishi(): string {
+                return "onSelectBySB_Ishi";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "IryoKikanSelector";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public IryoKikanSelector() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public IryoKikan() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("IryoKikan"));
+
+            }
+
+            public IryoKikanList() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("IryoKikanList"));
+
+            }
+
+            public btnToMentenanceIryoKikan() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnToMentenanceIryoKikan"));
+
+            }
+
+            public dgIryoKikanList() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgIryoKikanList"));
+
+            }
+
+            public Ishi() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("Ishi"));
+
+            }
+
+            public spaIshi() : UZA.Space {
+
+                return new UZA.Space(this.convFiledName("spaIshi"));
+
+            }
+
+            public IshiList() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("IshiList"));
+
+            }
+
+            public dgIshiList() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgIshiList"));
+
+            }
+
+            public SelectedContents() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("SelectedContents"));
+
+            }
+
+            public txtiryoKikanCode() : UZA.TextBoxCode {
+
+                return new UZA.TextBoxCode(this.convFiledName("txtiryoKikanCode"));
+
+            }
+
+            public txtiryoKikanName() : UZA.TextBox {
+
+                return new UZA.TextBox(this.convFiledName("txtiryoKikanName"));
+
+            }
+
+            public txtishiCode() : UZA.TextBoxCode {
+
+                return new UZA.TextBoxCode(this.convFiledName("txtishiCode"));
+
+            }
+
+            public txtishiName() : UZA.TextBox {
+
+                return new UZA.TextBox(this.convFiledName("txtishiName"));
+
+            }
+
+            public btnSelectAndClose() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnSelectAndClose"));
+
+            }
+
+            public btnNonSelectReturn() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnNonSelectReturn"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class IryoKikanSelector_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

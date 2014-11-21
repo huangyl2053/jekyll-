@@ -1,11 +1,72 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBE {
     /**
      * 自動生成コードです。修正しないでください。
-     * DataOutputInfomationクラスのみで継承して使えます。
      */
+
+    export module DataOutputInfomation {
+
+        export class Events {
+
+            public static get CloseOK(): string {
+                return "CloseOK";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "DataOutputInfomation";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public DataOutputInfomation() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public icnKanryo() : UZA.Icon {
+
+                return new UZA.Icon(this.convFiledName("icnKanryo"));
+
+            }
+
+            public lblMessage() : UZA.Label {
+
+                return new UZA.Label(this.convFiledName("lblMessage"));
+
+            }
+
+            public btnKakunin() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnKakunin"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class DataOutputInfomation_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

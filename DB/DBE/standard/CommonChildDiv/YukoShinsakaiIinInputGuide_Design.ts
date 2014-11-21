@@ -1,11 +1,69 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBE {
     /**
      * 自動生成コードです。修正しないでください。
-     * YukoShinsakaiIinInputGuideクラスのみで継承して使えます。
      */
+
+    export module YukoShinsakaiIinInputGuide {
+
+        export class Events {
+
+            public static get onClick_btnClose(): string {
+                return "onClick_btnClose";
+            }
+            public static get onSelectBySelectButton_dgYukoShinsakaiIin(): string {
+                return "onSelectBySelectButton_dgYukoShinsakaiIin";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "YukoShinsakaiIinInputGuide";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public YukoShinsakaiIinInputGuide() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public dgYukoShinsakaiIin() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgYukoShinsakaiIin"));
+
+            }
+
+            public btnClose() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnClose"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class YukoShinsakaiIinInputGuide_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
