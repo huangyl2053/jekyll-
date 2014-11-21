@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public final class DbT7112ShokanShuruiShikyuGendoGakuEntityGenerator {
 
     public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode(new RString("2"));
-    public static final RString DEFAULT_要介護状態区分 = new RString("1");
     public static final FlexibleYearMonth DEFAULT_適用開始年月 = new FlexibleYearMonth(new RString("201406"));
     public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
     public static final FlexibleYearMonth DEFAULT_適用終了年月 = new FlexibleYearMonth(new RString("201406"));
@@ -34,7 +33,6 @@ public final class DbT7112ShokanShuruiShikyuGendoGakuEntityGenerator {
     public static DbT7112ShokanShuruiShikyuGendoGakuEntity createDbT7112ShokanShuruiShikyuGendoGakuEntity() {
         DbT7112ShokanShuruiShikyuGendoGakuEntity entity = new DbT7112ShokanShuruiShikyuGendoGakuEntity();
         entity.setServiceShuruiCode(DEFAULT_サービス種類コード);
-        entity.setYoKaigoJotaiKubun(DEFAULT_要介護状態区分);
         entity.setTekiyoKaishiYM(DEFAULT_適用開始年月);
         entity.setShoriTimestamp(DEFAULT_処理日時);
         entity.setTekiyoShuryoYM(DEFAULT_適用終了年月);

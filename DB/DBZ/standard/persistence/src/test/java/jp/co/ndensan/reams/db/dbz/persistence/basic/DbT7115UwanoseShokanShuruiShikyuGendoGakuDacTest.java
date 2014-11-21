@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7115UwanoseShokanShuruiShikyuG
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.DEFAULT_サービス種類コード;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.DEFAULT_処理日時;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -53,12 +52,10 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDacTest extends DbzTestDac
         public void setUp() {
             TestSupport.insert(
                     サービス種類コード,
-                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
                     DEFAULT_処理日時);
             TestSupport.insert(
                     DEFAULT_サービス種類コード,
-                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
                     DEFAULT_処理日時);
         }
@@ -66,16 +63,6 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDacTest extends DbzTestDac
         @Test(expected = NullPointerException.class)
         public void サービス種類コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
-                    DEFAULT_要介護状態区分,
-                    DEFAULT_適用開始年月,
-                    DEFAULT_処理日時);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 要介護状態区分がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
-            sut.selectByKey(
-                    DEFAULT_サービス種類コード,
                     null,
                     DEFAULT_適用開始年月,
                     DEFAULT_処理日時);
@@ -85,7 +72,6 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDacTest extends DbzTestDac
         public void 適用開始年月がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_サービス種類コード,
-                    DEFAULT_要介護状態区分,
                     null,
                     DEFAULT_処理日時);
         }
@@ -94,7 +80,6 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDacTest extends DbzTestDac
         public void 処理日時がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_サービス種類コード,
-                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
                     null);
         }
@@ -103,7 +88,6 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDacTest extends DbzTestDac
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity insertedRecord = sut.selectByKey(
                     DEFAULT_サービス種類コード,
-                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
                     DEFAULT_処理日時);
             assertThat(insertedRecord, is(notNullValue()));
@@ -113,7 +97,6 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDacTest extends DbzTestDac
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity insertedRecord = sut.selectByKey(
                     サービス種類コード3,
-                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
                     DEFAULT_処理日時);
             assertThat(insertedRecord, is(nullValue()));
@@ -126,12 +109,10 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDacTest extends DbzTestDac
         public void 上乗せ償還払い給付種類支給限度額が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
                     DEFAULT_サービス種類コード,
-                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
                     DEFAULT_処理日時);
             TestSupport.insert(
                     サービス種類コード,
-                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
                     DEFAULT_処理日時);
             assertThat(sut.selectAll().size(), is(2));
@@ -149,13 +130,11 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDacTest extends DbzTestDac
         public void 上乗せ償還払い給付種類支給限度額エンティティを渡すと_insertは_上乗せ償還払い給付種類支給限度額を追加する() {
             TestSupport.insert(
                     DEFAULT_サービス種類コード,
-                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
                     DEFAULT_処理日時);
 
             assertThat(sut.selectByKey(
                     DEFAULT_サービス種類コード,
-                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
                     DEFAULT_処理日時), is(notNullValue()));
         }
@@ -167,7 +146,6 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDacTest extends DbzTestDac
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_サービス種類コード,
-                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
                     DEFAULT_処理日時);
         }
@@ -182,7 +160,6 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDacTest extends DbzTestDac
 
             DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity updatedRecord = sut.selectByKey(
                     DEFAULT_サービス種類コード,
-                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
                     DEFAULT_処理日時);
 
@@ -196,7 +173,6 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDacTest extends DbzTestDac
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_サービス種類コード,
-                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
                     DEFAULT_処理日時);
         }
@@ -205,12 +181,10 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDacTest extends DbzTestDac
         public void 上乗せ償還払い給付種類支給限度額エンティティを渡すと_deleteは_上乗せ償還払い給付種類支給限度額を削除する() {
             sut.delete(sut.selectByKey(
                     DEFAULT_サービス種類コード,
-                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
                     DEFAULT_処理日時));
             assertThat(sut.selectByKey(
                     DEFAULT_サービス種類コード,
-                    DEFAULT_要介護状態区分,
                     DEFAULT_適用開始年月,
                     DEFAULT_処理日時), is(nullValue()));
         }
@@ -220,12 +194,10 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDacTest extends DbzTestDac
 
         public static void insert(
                 ServiceShuruiCode サービス種類コード,
-                RString 要介護状態区分,
                 FlexibleYearMonth 適用開始年月,
                 YMDHMS 処理日時) {
             DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity entity = DbT7115UwanoseShokanShuruiShikyuGendoGakuEntityGenerator.createDbT7115UwanoseShokanShuruiShikyuGendoGakuEntity();
             entity.setServiceShuruiCode(サービス種類コード);
-            entity.setYoKaigoJotaiKubun(要介護状態区分);
             entity.setTekiyoKaishiYM(適用開始年月);
             entity.setShoriTimestamp(処理日時);
             sut.insert(entity);

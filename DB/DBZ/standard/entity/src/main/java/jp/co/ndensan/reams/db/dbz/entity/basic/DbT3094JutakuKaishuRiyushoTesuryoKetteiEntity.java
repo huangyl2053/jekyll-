@@ -2,7 +2,7 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -31,7 +31,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private HihokenshaNo riyushoSakuseiJigyoshaNo;
+    private JigyoshaNo riyushoSakuseiJigyoshaNo;
     @PrimaryKey
     private FlexibleDate ketteiYMD;
     @PrimaryKey
@@ -91,7 +91,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
      *
      * @return riyushoSakuseiJigyoshaNo
      */
-    public HihokenshaNo getRiyushoSakuseiJigyoshaNo() {
+    public JigyoshaNo getRiyushoSakuseiJigyoshaNo() {
         return riyushoSakuseiJigyoshaNo;
     }
 
@@ -100,7 +100,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
      *
      * @param riyushoSakuseiJigyoshaNo riyushoSakuseiJigyoshaNo
      */
-    public void setRiyushoSakuseiJigyoshaNo(HihokenshaNo riyushoSakuseiJigyoshaNo) {
+    public void setRiyushoSakuseiJigyoshaNo(JigyoshaNo riyushoSakuseiJigyoshaNo) {
         this.riyushoSakuseiJigyoshaNo = riyushoSakuseiJigyoshaNo;
     }
 
@@ -216,8 +216,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
      * このエンティティの主キーが他の{@literal DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity other) {

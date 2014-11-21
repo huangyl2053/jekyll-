@@ -38,12 +38,6 @@ public class ShokanShuruiShikyuGendoGakuModelTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の要介護状態区分は_設定した値と同じ要介護状態区分を返す() {
-            sut.set要介護状態区分(DbT7112ShokanShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分);
-            assertThat(sut.get要介護状態区分(), is(DbT7112ShokanShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分));
-        }
-
-        @Test
         public void 戻り値の適用開始年月は_設定した値と同じ適用開始年月を返す() {
             sut.set適用開始年月(DbT7112ShokanShuruiShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月);
             assertThat(sut.get適用開始年月(), is(DbT7112ShokanShuruiShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月));
@@ -77,7 +71,7 @@ public class ShokanShuruiShikyuGendoGakuModelTest extends DbzTestBase {
             assertThat(sut.getState(), is(EntityDataState.Added));
         }
 
-       // @Test
+        // @Test
         // public void 状態Modifinedの取得確認() {
         // ShokanShuruiShikyuGendoGakuModel sut = new ShokanShuruiShikyuGendoGakuModel();
         //sut.setEntity(DbT7112ShokanShuruiShikyuGendoGakuEntityGenerator.createDbT7112ShokanShuruiShikyuGendoGakuEntity());

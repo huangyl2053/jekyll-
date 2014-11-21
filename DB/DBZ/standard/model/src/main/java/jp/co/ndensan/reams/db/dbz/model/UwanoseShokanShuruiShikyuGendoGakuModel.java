@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7115UwanoseShokanShuruiShikyuG
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -69,15 +68,6 @@ public class UwanoseShokanShuruiShikyuGendoGakuModel implements Serializable {
     }
 
     /**
-     * 要介護状態区分を返します。
-     *
-     * @return 要介護状態区分
-     */
-    public RString get要介護状態区分() {
-        return entity.getYoKaigoJotaiKubun();
-    }
-
-    /**
      * 適用開始年月を返します。
      *
      * @return 適用開始年月
@@ -121,16 +111,6 @@ public class UwanoseShokanShuruiShikyuGendoGakuModel implements Serializable {
     public void setサービス種類コード(ServiceShuruiCode サービス種類コード) {
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         entity.setServiceShuruiCode(サービス種類コード);
-    }
-
-    /**
-     * 要介護状態区分を設定します。
-     *
-     * @param 要介護状態区分 要介護状態区分
-     */
-    public void set要介護状態区分(RString 要介護状態区分) {
-        requireNonNull(要介護状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護状態区分"));
-        entity.setYoKaigoJotaiKubun(要介護状態区分);
     }
 
     /**

@@ -1,5 +1,4 @@
-﻿serviceShuruiCode,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,A
-yoKaigoJotaiKubun,varchar,RString,,,,,A
+﻿serviceShuruiCode,DbUDD005ServiceShuruiCode,ServiceShuruiCode,,,,,A
 tekiyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,A
 shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
 tekiyoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,A

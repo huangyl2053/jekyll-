@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.DEFAULT_介護住宅改修理由書作成事業者番号;
@@ -49,7 +49,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiDacTest extends DbzTestDacBa
         @Before
         public void setUp() {
             TestSupport.insert(
-                    new HihokenshaNo(キー_01),
+                    new JigyoshaNo(キー_01),
                     DEFAULT_決定年月日,
                     DEFAULT_処理日時);
             TestSupport.insert(
@@ -94,7 +94,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiDacTest extends DbzTestDacBa
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity insertedRecord = sut.selectByKey(
-                    new HihokenshaNo(キー_03),
+                    new JigyoshaNo(キー_03),
                     DEFAULT_決定年月日,
                     DEFAULT_処理日時);
             assertThat(insertedRecord, is(nullValue()));
@@ -106,7 +106,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiDacTest extends DbzTestDacBa
         @Test
         public void 住宅改修理由書作成手数料請求決定が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    new HihokenshaNo(キー_01),
+                    new JigyoshaNo(キー_01),
                     DEFAULT_決定年月日,
                     DEFAULT_処理日時);
             TestSupport.insert(
@@ -192,7 +192,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiDacTest extends DbzTestDacBa
     private static class TestSupport {
 
         public static void insert(
-                HihokenshaNo 介護住宅改修理由書作成事業者番号,
+                JigyoshaNo 介護住宅改修理由書作成事業者番号,
                 FlexibleDate 決定年月日,
                 YMDHMS 処理日時) {
             DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity entity = DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator.createDbT3094JutakuKaishuRiyushoTesuryoKetteiEntity();

@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3094JutakuKaishuRiyushoTesuryoKettei;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT3094JutakuKaishuRiyushoTesuryoKettei.ketteiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT3094JutakuKaishuRiyushoTesuryoKettei.riyushoSakuseiJigyoshaNo;
@@ -44,7 +44,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiDac implements IModifiable<D
      */
     @Transaction
     public DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity selectByKey(
-            HihokenshaNo 介護住宅改修理由書作成事業者番号,
+            JigyoshaNo 介護住宅改修理由書作成事業者番号,
             FlexibleDate 決定年月日,
             YMDHMS 処理日時) throws NullPointerException {
         requireNonNull(介護住宅改修理由書作成事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護住宅改修理由書作成事業者番号"));

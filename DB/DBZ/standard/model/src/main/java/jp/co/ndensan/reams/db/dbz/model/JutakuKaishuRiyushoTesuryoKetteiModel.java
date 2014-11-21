@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.model;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -63,7 +63,7 @@ public class JutakuKaishuRiyushoTesuryoKetteiModel implements Serializable {
      *
      * @return 介護住宅改修理由書作成事業者番号
      */
-    public HihokenshaNo get介護住宅改修理由書作成事業者番号() {
+    public JigyoshaNo get介護住宅改修理由書作成事業者番号() {
         return entity.getRiyushoSakuseiJigyoshaNo();
     }
 
@@ -126,7 +126,7 @@ public class JutakuKaishuRiyushoTesuryoKetteiModel implements Serializable {
      *
      * @param 介護住宅改修理由書作成事業者番号 介護住宅改修理由書作成事業者番号
      */
-    public void set介護住宅改修理由書作成事業者番号(HihokenshaNo 介護住宅改修理由書作成事業者番号) {
+    public void set介護住宅改修理由書作成事業者番号(JigyoshaNo 介護住宅改修理由書作成事業者番号) {
         requireNonNull(介護住宅改修理由書作成事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護住宅改修理由書作成事業者番号"));
         entity.setRiyushoSakuseiJigyoshaNo(介護住宅改修理由書作成事業者番号);
     }

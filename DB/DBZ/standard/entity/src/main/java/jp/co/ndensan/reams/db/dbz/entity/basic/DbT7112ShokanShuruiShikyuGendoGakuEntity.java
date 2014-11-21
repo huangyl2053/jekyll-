@@ -34,8 +34,6 @@ public class DbT7112ShokanShuruiShikyuGendoGakuEntity extends DbTableEntityBase<
     @PrimaryKey
     private ServiceShuruiCode serviceShuruiCode;
     @PrimaryKey
-    private RString yoKaigoJotaiKubun;
-    @PrimaryKey
     private FlexibleYearMonth tekiyoKaishiYM;
     @PrimaryKey
     private YMDHMS shoriTimestamp;
@@ -103,24 +101,6 @@ public class DbT7112ShokanShuruiShikyuGendoGakuEntity extends DbTableEntityBase<
      */
     public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
         this.serviceShuruiCode = serviceShuruiCode;
-    }
-
-    /**
-     * getYoKaigoJotaiKubun
-     *
-     * @return yoKaigoJotaiKubun
-     */
-    public RString getYoKaigoJotaiKubun() {
-        return yoKaigoJotaiKubun;
-    }
-
-    /**
-     * setYoKaigoJotaiKubun
-     *
-     * @param yoKaigoJotaiKubun yoKaigoJotaiKubun
-     */
-    public void setYoKaigoJotaiKubun(RString yoKaigoJotaiKubun) {
-        this.yoKaigoJotaiKubun = yoKaigoJotaiKubun;
     }
 
     /**
@@ -210,9 +190,6 @@ public class DbT7112ShokanShuruiShikyuGendoGakuEntity extends DbTableEntityBase<
         if (!Objects.equals(this.serviceShuruiCode, other.serviceShuruiCode)) {
             return false;
         }
-        if (!Objects.equals(this.yoKaigoJotaiKubun, other.yoKaigoJotaiKubun)) {
-            return false;
-        }
         if (!Objects.equals(this.tekiyoKaishiYM, other.tekiyoKaishiYM)) {
             return false;
         }
@@ -228,7 +205,6 @@ public class DbT7112ShokanShuruiShikyuGendoGakuEntity extends DbTableEntityBase<
     @Override
     public void shallowCopy(DbT7112ShokanShuruiShikyuGendoGakuEntity entity) {
         this.serviceShuruiCode = entity.serviceShuruiCode;
-        this.yoKaigoJotaiKubun = entity.yoKaigoJotaiKubun;
         this.tekiyoKaishiYM = entity.tekiyoKaishiYM;
         this.shoriTimestamp = entity.shoriTimestamp;
         this.tekiyoShuryoYM = entity.tekiyoShuryoYM;
@@ -242,7 +218,7 @@ public class DbT7112ShokanShuruiShikyuGendoGakuEntity extends DbTableEntityBase<
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(serviceShuruiCode, yoKaigoJotaiKubun, tekiyoKaishiYM, shoriTimestamp, tekiyoShuryoYM, shikyuGendoTaniSu);
+        return super.toMd5(serviceShuruiCode, tekiyoKaishiYM, shoriTimestamp, tekiyoShuryoYM, shikyuGendoTaniSu);
     }
 
 // </editor-fold>

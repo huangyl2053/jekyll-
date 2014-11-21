@@ -17,7 +17,6 @@ public enum DbT7112ShokanShuruiShikyuGendoGaku implements IColumnDefinition {
     lastUpdateTimestamp(29, 0),
     lastUpdateReamsLoginId(2147483647, 0),
     serviceShuruiCode(2147483647, 0),
-    yoKaigoJotaiKubun(2, 0),
     tekiyoKaishiYM(2147483647, 0),
     shoriTimestamp(2147483647, 0),
     tekiyoShuryoYM(2147483647, 0),

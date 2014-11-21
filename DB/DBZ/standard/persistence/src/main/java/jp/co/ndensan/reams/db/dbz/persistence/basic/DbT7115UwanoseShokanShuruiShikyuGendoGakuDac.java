@@ -11,14 +11,12 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7115UwanoseShokanShuruiShikyuG
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7115UwanoseShokanShuruiShikyuGendoGaku.serviceShuruiCode;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7115UwanoseShokanShuruiShikyuGendoGaku.shoriTimestamp;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7115UwanoseShokanShuruiShikyuGendoGaku.tekiyoKaishiYM;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7115UwanoseShokanShuruiShikyuGendoGaku.yoKaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -39,7 +37,6 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements IModifiable
      * 主キーで上乗せ償還払い給付種類支給限度額を取得します。
      *
      * @param サービス種類コード ServiceShuruiCode
-     * @param 要介護状態区分 YoKaigoJotaiKubun
      * @param 適用開始年月 TekiyoKaishiYM
      * @param 処理日時 ShoriTimestamp
      * @return DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity
@@ -48,11 +45,9 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements IModifiable
     @Transaction
     public DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity selectByKey(
             ServiceShuruiCode サービス種類コード,
-            RString 要介護状態区分,
             FlexibleYearMonth 適用開始年月,
             YMDHMS 処理日時) throws NullPointerException {
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
-        requireNonNull(要介護状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護状態区分"));
         requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
@@ -62,7 +57,6 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements IModifiable
                 table(DbT7115UwanoseShokanShuruiShikyuGendoGaku.class).
                 where(and(
                                 eq(serviceShuruiCode, サービス種類コード),
-                                eq(yoKaigoJotaiKubun, 要介護状態区分),
                                 eq(tekiyoKaishiYM, 適用開始年月),
                                 eq(shoriTimestamp, 処理日時))).
                 toObject(DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity.class);
