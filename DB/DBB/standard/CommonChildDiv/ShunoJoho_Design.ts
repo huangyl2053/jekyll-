@@ -1,5 +1,6 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBB {
     /**
@@ -40,7 +41,7 @@ module DBB {
      "fieldName": "txtChoteiNendo",
      "items": [],
      "controlType": "TextBox",
-     "width": "40",
+     "width": "40px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -75,7 +76,7 @@ module DBB {
      "value": "",
      "labelLText": "調定年度",
      "labelRText": "",
-     "labelLWidth": "70",
+     "labelLWidth": "70px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -86,7 +87,7 @@ module DBB {
      "fieldName": "txtFukaNendo",
      "items": [],
      "controlType": "TextBox",
-     "width": "40",
+     "width": "40px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -121,7 +122,7 @@ module DBB {
      "value": "",
      "labelLText": "賦課年度",
      "labelRText": "",
-     "labelLWidth": "88",
+     "labelLWidth": "88px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -132,7 +133,7 @@ module DBB {
      "fieldName": "txtTsuchiNo",
      "items": [],
      "controlType": "TextBoxCode",
-     "width": "130",
+     "width": "130px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -167,7 +168,7 @@ module DBB {
      "value": "",
      "labelLText": "通知書番号",
      "labelRText": "",
-     "labelLWidth": "100",
+     "labelLWidth": "100px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -179,7 +180,7 @@ module DBB {
      "fieldName": "ddlChoteiNendo",
      "items": [],
      "controlType": "DropDownList",
-     "width": "60",
+     "width": "60px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -201,7 +202,7 @@ module DBB {
      "onChange": "",
      "labelLText": "調定年度",
      "labelRText": "",
-     "labelLWidth": "70",
+     "labelLWidth": "70px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -219,13 +220,14 @@ module DBB {
        "key": "key2",
        "value": "平24"
       }
-     ]
+     ],
+     "isBlankLine": false
     },
     {
      "fieldName": "ddlFukaNendo",
      "items": [],
      "controlType": "DropDownList",
-     "width": "60",
+     "width": "60px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -247,7 +249,7 @@ module DBB {
      "onChange": "",
      "labelLText": "賦課年度",
      "labelRText": "",
-     "labelLWidth": "70",
+     "labelLWidth": "70px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -265,7 +267,8 @@ module DBB {
        "key": "key2",
        "value": "平24"
       }
-     ]
+     ],
+     "isBlankLine": false
     },
     {
      "fieldName": "btnNendoChange",
@@ -288,6 +291,8 @@ module DBB {
      "helpMessageID": "",
      "jpControlName": "",
      "text": "年度を変更する",
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
@@ -303,7 +308,7 @@ module DBB {
        "fieldName": "dgTokucho",
        "items": [],
        "controlType": "DataGrid",
-       "width": "850",
+       "width": "850px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -496,13 +501,14 @@ module DBB {
        "sortOrder": "txtNokigen",
        "isAscending": true,
        "filterList": [],
-       "activeRowId": -1
+       "activeRowId": -1,
+       "gridAction": []
       },
       {
        "fieldName": "txtTokuChoteiGeoukei",
        "items": [],
        "controlType": "TextBoxNum",
-       "width": "90",
+       "width": "90px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -514,7 +520,7 @@ module DBB {
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "XS",
-       "marginRight": "0",
+       "marginRight": "0em",
        "selectControlID": "txtTokuChoteiGeoukei_core",
        "helpMessageID": "",
        "jpControlName": "",
@@ -537,7 +543,7 @@ module DBB {
        "value": "",
        "labelLText": "合計",
        "labelRText": "",
-       "labelLWidth": "50",
+       "labelLWidth": "50px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -553,7 +559,7 @@ module DBB {
        "fieldName": "txtTokuShunyuGeoukei",
        "items": [],
        "controlType": "TextBoxNum",
-       "width": "90",
+       "width": "90px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -588,7 +594,7 @@ module DBB {
        "value": "",
        "labelLText": "",
        "labelRText": "",
-       "labelLWidth": "50",
+       "labelLWidth": "50px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -641,7 +647,8 @@ module DBB {
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "ShunoJoho_panel_body_area"
+     "focusPositionID": "ShunoJoho_panel_body_area",
+     "canPost": true
     },
     {
      "fieldName": "ShunoJohoFucho",
@@ -650,7 +657,7 @@ module DBB {
        "fieldName": "dgFucho",
        "items": [],
        "controlType": "DataGrid",
-       "width": "850",
+       "width": "850px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -843,13 +850,14 @@ module DBB {
        "sortOrder": "defaultDataName3",
        "isAscending": true,
        "filterList": [],
-       "activeRowId": -1
+       "activeRowId": -1,
+       "gridAction": []
       },
       {
        "fieldName": "txtFuChoteiGeoukei",
        "items": [],
        "controlType": "TextBoxNum",
-       "width": "90",
+       "width": "90px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -861,7 +869,7 @@ module DBB {
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "XS",
-       "marginRight": "0",
+       "marginRight": "0em",
        "selectControlID": "txtFuChoteiGeoukei_core",
        "helpMessageID": "",
        "jpControlName": "",
@@ -884,7 +892,7 @@ module DBB {
        "value": "",
        "labelLText": "合計",
        "labelRText": "",
-       "labelLWidth": "50",
+       "labelLWidth": "50px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -900,7 +908,7 @@ module DBB {
        "fieldName": "txtFuShunyuGeoukei",
        "items": [],
        "controlType": "TextBoxNum",
-       "width": "90",
+       "width": "90px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -935,7 +943,7 @@ module DBB {
        "value": "",
        "labelLText": "",
        "labelRText": "",
-       "labelLWidth": "50",
+       "labelLWidth": "50px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -988,11 +996,12 @@ module DBB {
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto",
-     "focusPositionID": "ShunoJoho_panel_body_area"
+     "focusPositionID": "ShunoJoho_panel_body_area",
+     "canPost": true
     }
    ],
    "controlType": "Panel",
-   "width": "950",
+   "width": "950px",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1036,7 +1045,8 @@ module DBB {
    "isGroupBox": false,
    "readOnly": false,
    "height": "Auto",
-   "focusPositionID": "createFile"
+   "focusPositionID": "createFile",
+   "canPost": true
   }
  ],
  "controlType": "CommonChildDiv",
@@ -1051,23 +1061,119 @@ module DBB {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": "0",
- "marginRight": "0",
+ "marginLeft": "0em",
+ "marginRight": "0em",
  "selectControlID": "defaultLayout",
  "helpMessageID": "",
  "jpControlName": "",
  "relation": [],
+ "packageName": "",
  "businessId": "DBB",
  "controlName": "ShunoJoho",
- "marginTop": 0,
- "marginBottom": 0,
+ "marginTop": "0em",
+ "marginBottom": "0em",
  "originalProperty": [],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": "",
  "canTransferEvent": true,
- "heightForDialog": "M"
+ "heightForDialog": "M",
+ "firstFocusFieldName": "",
+ "lastFocusFieldName": "",
+ "modes": [],
+ "publicEvents": [],
+ "publicEventsAlias": []
 }        
     }
+
+     export module ShunoJoho {
+
+        export class Events {
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static myType(): string {
+                return "ShunoJoho";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + DBB.ShunoJoho.Controls.myType();
+            }
+
+            public convFiledName(fieldName: string): string {
+                return this._myName + "_" + DBB.ShunoJoho.Controls.myType() + "_" + fieldName;
+            }
+
+            public ShunoJoho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledNameSelf());
+            }
+
+            public txtChoteiNendo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtChoteiNendo"));
+            }
+
+            public txtFukaNendo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtFukaNendo"));
+            }
+
+            public txtTsuchiNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtTsuchiNo"));
+            }
+
+            public ddlChoteiNendo(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlChoteiNendo"));
+            }
+
+            public ddlFukaNendo(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlFukaNendo"));
+            }
+
+            public btnNendoChange(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnNendoChange"));
+            }
+
+            public ShunoJohoTokucho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShunoJohoTokucho"));
+            }
+
+            public dgTokucho(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgTokucho"));
+            }
+
+            public txtTokuChoteiGeoukei(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtTokuChoteiGeoukei"));
+            }
+
+            public txtTokuShunyuGeoukei(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtTokuShunyuGeoukei"));
+            }
+
+            public ShunoJohoFucho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShunoJohoFucho"));
+            }
+
+            public dgFucho(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgFucho"));
+            }
+
+            public txtFuChoteiGeoukei(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtFuChoteiGeoukei"));
+            }
+
+            public txtFuShunyuGeoukei(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtFuShunyuGeoukei"));
+            }
+
+        }
+
+     }
+
 }
 

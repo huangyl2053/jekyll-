@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.ShunoJoho;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.ShunoJoho.IShunoJohoDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.ShunoJoho.ShunoJohoFuchoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.ShunoJoho.ShunoJohoTokuchoDiv;
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * 
  * @author 自動生成
  */
-public class ShunoJohoDiv extends Panel {
+public class ShunoJohoDiv extends Panel implements IShunoJohoDiv {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -125,5 +126,7 @@ public class ShunoJohoDiv extends Panel {
     public void setShunoJohoFucho(ShunoJohoFuchoDiv ShunoJohoFucho) {
         this.ShunoJohoFucho=ShunoJohoFucho;
     }
+
+    //--------------- この行より下にコードを追加してください -------------------
 
 }

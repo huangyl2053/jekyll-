@@ -30,7 +30,7 @@ var DBB;
                             "fieldName": "txtShikibetsuCode",
                             "items": [],
                             "controlType": "TextBoxCode",
-                            "width": "120",
+                            "width": "120px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -42,7 +42,7 @@ var DBB;
                             "toolTip": "",
                             "authorityMode": 0,
                             "marginLeft": "XS",
-                            "marginRight": "0",
+                            "marginRight": "0em",
                             "selectControlID": "txtShikibetsuCode_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -65,7 +65,7 @@ var DBB;
                             "value": "",
                             "labelLText": "氏名",
                             "labelRText": "",
-                            "labelLWidth": "60",
+                            "labelLWidth": "60px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -77,7 +77,7 @@ var DBB;
                             "fieldName": "txtShimei",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "240",
+                            "width": "240px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -88,7 +88,7 @@ var DBB;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0.1",
+                            "marginLeft": "0.1em",
                             "marginRight": "XS",
                             "selectControlID": "txtShimei_core",
                             "helpMessageID": "",
@@ -123,7 +123,7 @@ var DBB;
                             "fieldName": "txtKaishiYMD",
                             "items": [],
                             "controlType": "TextBoxDate",
-                            "width": "80",
+                            "width": "80px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -153,10 +153,11 @@ var DBB;
                             "value": "",
                             "labelLText": "開始日",
                             "labelRText": "",
-                            "labelLWidth": "60",
+                            "labelLWidth": "60px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "decorationClass": "",
                             "permitCharactor": "./_-",
                             "ymdKubun": 2,
                             "displayFormat": 1
@@ -165,7 +166,7 @@ var DBB;
                             "fieldName": "txtSyuryoYMD",
                             "items": [],
                             "controlType": "TextBoxDate",
-                            "width": "80",
+                            "width": "80px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -195,10 +196,11 @@ var DBB;
                             "value": "",
                             "labelLText": "終了日",
                             "labelRText": "",
-                            "labelLWidth": "80",
+                            "labelLWidth": "80px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "decorationClass": "",
                             "permitCharactor": "./_-",
                             "ymdKubun": 2,
                             "displayFormat": 1
@@ -243,7 +245,8 @@ var DBB;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "Auto",
+                    "canPost": true
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -258,16 +261,17 @@ var DBB;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": "0",
-            "marginRight": "0",
+            "marginLeft": "0em",
+            "marginRight": "0em",
             "selectControlID": "defaultLayout",
             "helpMessageID": "",
             "jpControlName": "",
             "relation": [],
+            "packageName": "",
             "businessId": "DBB",
             "controlName": "RentaiNofuGimusha",
-            "marginTop": 0,
-            "marginBottom": 0,
+            "marginTop": "0em",
+            "marginBottom": "0em",
             "originalProperty": [],
             "dataPassingForDialog": [
                 {
@@ -282,9 +286,63 @@ var DBB;
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "M"
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
         };
         return RentaiNofuGimusha_Design;
     })(Uz.CommonChildDiv);
     DBB.RentaiNofuGimusha_Design = RentaiNofuGimusha_Design;
+
+    (function (RentaiNofuGimusha) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        RentaiNofuGimusha.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "RentaiNofuGimusha";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBB.RentaiNofuGimusha.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBB.RentaiNofuGimusha.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.RentaiNofuGimusha = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtShikibetsuCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtShikibetsuCode"));
+            };
+
+            Controls.prototype.txtShimei = function () {
+                return new UZA.TextBox(this.convFiledName("txtShimei"));
+            };
+
+            Controls.prototype.txtKaishiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaishiYMD"));
+            };
+
+            Controls.prototype.txtSyuryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSyuryoYMD"));
+            };
+            return Controls;
+        })();
+        RentaiNofuGimusha.Controls = Controls;
+    })(DBB.RentaiNofuGimusha || (DBB.RentaiNofuGimusha = {}));
+    var RentaiNofuGimusha = DBB.RentaiNofuGimusha;
 })(DBB || (DBB = {}));

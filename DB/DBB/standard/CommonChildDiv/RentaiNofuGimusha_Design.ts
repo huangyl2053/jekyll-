@@ -1,5 +1,6 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBB {
     /**
@@ -40,7 +41,7 @@ module DBB {
      "fieldName": "txtShikibetsuCode",
      "items": [],
      "controlType": "TextBoxCode",
-     "width": "120",
+     "width": "120px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -52,7 +53,7 @@ module DBB {
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
-     "marginRight": "0",
+     "marginRight": "0em",
      "selectControlID": "txtShikibetsuCode_core",
      "helpMessageID": "",
      "jpControlName": "",
@@ -75,7 +76,7 @@ module DBB {
      "value": "",
      "labelLText": "氏名",
      "labelRText": "",
-     "labelLWidth": "60",
+     "labelLWidth": "60px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -87,7 +88,7 @@ module DBB {
      "fieldName": "txtShimei",
      "items": [],
      "controlType": "TextBox",
-     "width": "240",
+     "width": "240px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -98,7 +99,7 @@ module DBB {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0.1",
+     "marginLeft": "0.1em",
      "marginRight": "XS",
      "selectControlID": "txtShimei_core",
      "helpMessageID": "",
@@ -133,7 +134,7 @@ module DBB {
      "fieldName": "txtKaishiYMD",
      "items": [],
      "controlType": "TextBoxDate",
-     "width": "80",
+     "width": "80px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -163,10 +164,11 @@ module DBB {
      "value": "",
      "labelLText": "開始日",
      "labelRText": "",
-     "labelLWidth": "60",
+     "labelLWidth": "60px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": "./_-",
      "ymdKubun": 2,
      "displayFormat": 1
@@ -175,7 +177,7 @@ module DBB {
      "fieldName": "txtSyuryoYMD",
      "items": [],
      "controlType": "TextBoxDate",
-     "width": "80",
+     "width": "80px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -205,10 +207,11 @@ module DBB {
      "value": "",
      "labelLText": "終了日",
      "labelRText": "",
-     "labelLWidth": "80",
+     "labelLWidth": "80px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": "./_-",
      "ymdKubun": 2,
      "displayFormat": 1
@@ -253,7 +256,8 @@ module DBB {
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": "CommonChildDiv",
@@ -268,16 +272,17 @@ module DBB {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": "0",
- "marginRight": "0",
+ "marginLeft": "0em",
+ "marginRight": "0em",
  "selectControlID": "defaultLayout",
  "helpMessageID": "",
  "jpControlName": "",
  "relation": [],
+ "packageName": "",
  "businessId": "DBB",
  "controlName": "RentaiNofuGimusha",
- "marginTop": 0,
- "marginBottom": 0,
+ "marginTop": "0em",
+ "marginBottom": "0em",
  "originalProperty": [],
  "dataPassingForDialog": [
   {
@@ -292,8 +297,63 @@ module DBB {
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": "",
  "canTransferEvent": true,
- "heightForDialog": "M"
+ "heightForDialog": "M",
+ "firstFocusFieldName": "",
+ "lastFocusFieldName": "",
+ "modes": [],
+ "publicEvents": [],
+ "publicEventsAlias": []
 }        
     }
+
+     export module RentaiNofuGimusha {
+
+        export class Events {
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static myType(): string {
+                return "RentaiNofuGimusha";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + DBB.RentaiNofuGimusha.Controls.myType();
+            }
+
+            public convFiledName(fieldName: string): string {
+                return this._myName + "_" + DBB.RentaiNofuGimusha.Controls.myType() + "_" + fieldName;
+            }
+
+            public RentaiNofuGimusha(): UZA.Panel {
+                return new UZA.Panel(this.convFiledNameSelf());
+            }
+
+            public txtShikibetsuCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtShikibetsuCode"));
+            }
+
+            public txtShimei(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtShimei"));
+            }
+
+            public txtKaishiYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaishiYMD"));
+            }
+
+            public txtSyuryoYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtSyuryoYMD"));
+            }
+
+        }
+
+     }
+
 }
 

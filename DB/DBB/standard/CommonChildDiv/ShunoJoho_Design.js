@@ -30,7 +30,7 @@ var DBB;
                             "fieldName": "txtChoteiNendo",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "40",
+                            "width": "40px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -65,7 +65,7 @@ var DBB;
                             "value": "",
                             "labelLText": "調定年度",
                             "labelRText": "",
-                            "labelLWidth": "70",
+                            "labelLWidth": "70px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -76,7 +76,7 @@ var DBB;
                             "fieldName": "txtFukaNendo",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "40",
+                            "width": "40px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -111,7 +111,7 @@ var DBB;
                             "value": "",
                             "labelLText": "賦課年度",
                             "labelRText": "",
-                            "labelLWidth": "88",
+                            "labelLWidth": "88px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -122,7 +122,7 @@ var DBB;
                             "fieldName": "txtTsuchiNo",
                             "items": [],
                             "controlType": "TextBoxCode",
-                            "width": "130",
+                            "width": "130px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -157,7 +157,7 @@ var DBB;
                             "value": "",
                             "labelLText": "通知書番号",
                             "labelRText": "",
-                            "labelLWidth": "100",
+                            "labelLWidth": "100px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -169,7 +169,7 @@ var DBB;
                             "fieldName": "ddlChoteiNendo",
                             "items": [],
                             "controlType": "DropDownList",
-                            "width": "60",
+                            "width": "60px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -191,7 +191,7 @@ var DBB;
                             "onChange": "",
                             "labelLText": "調定年度",
                             "labelRText": "",
-                            "labelLWidth": "70",
+                            "labelLWidth": "70px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -209,13 +209,14 @@ var DBB;
                                     "key": "key2",
                                     "value": "平24"
                                 }
-                            ]
+                            ],
+                            "isBlankLine": false
                         },
                         {
                             "fieldName": "ddlFukaNendo",
                             "items": [],
                             "controlType": "DropDownList",
-                            "width": "60",
+                            "width": "60px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -237,7 +238,7 @@ var DBB;
                             "onChange": "",
                             "labelLText": "賦課年度",
                             "labelRText": "",
-                            "labelLWidth": "70",
+                            "labelLWidth": "70px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -255,7 +256,8 @@ var DBB;
                                     "key": "key2",
                                     "value": "平24"
                                 }
-                            ]
+                            ],
+                            "isBlankLine": false
                         },
                         {
                             "fieldName": "btnNendoChange",
@@ -278,6 +280,8 @@ var DBB;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "text": "年度を変更する",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
                             "onClick": "",
                             "appearance": 0,
                             "imageFileUrl": "",
@@ -293,7 +297,7 @@ var DBB;
                                     "fieldName": "dgTokucho",
                                     "items": [],
                                     "controlType": "DataGrid",
-                                    "width": "850",
+                                    "width": "850px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -486,13 +490,14 @@ var DBB;
                                     "sortOrder": "txtNokigen",
                                     "isAscending": true,
                                     "filterList": [],
-                                    "activeRowId": -1
+                                    "activeRowId": -1,
+                                    "gridAction": []
                                 },
                                 {
                                     "fieldName": "txtTokuChoteiGeoukei",
                                     "items": [],
                                     "controlType": "TextBoxNum",
-                                    "width": "90",
+                                    "width": "90px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -504,7 +509,7 @@ var DBB;
                                     "toolTip": "",
                                     "authorityMode": 0,
                                     "marginLeft": "XS",
-                                    "marginRight": "0",
+                                    "marginRight": "0em",
                                     "selectControlID": "txtTokuChoteiGeoukei_core",
                                     "helpMessageID": "",
                                     "jpControlName": "",
@@ -527,7 +532,7 @@ var DBB;
                                     "value": "",
                                     "labelLText": "合計",
                                     "labelRText": "",
-                                    "labelLWidth": "50",
+                                    "labelLWidth": "50px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
@@ -543,7 +548,7 @@ var DBB;
                                     "fieldName": "txtTokuShunyuGeoukei",
                                     "items": [],
                                     "controlType": "TextBoxNum",
-                                    "width": "90",
+                                    "width": "90px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -578,7 +583,7 @@ var DBB;
                                     "value": "",
                                     "labelLText": "",
                                     "labelRText": "",
-                                    "labelLWidth": "50",
+                                    "labelLWidth": "50px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
@@ -631,7 +636,8 @@ var DBB;
                             "isGroupBox": false,
                             "readOnly": false,
                             "height": "Auto",
-                            "focusPositionID": "ShunoJoho_panel_body_area"
+                            "focusPositionID": "ShunoJoho_panel_body_area",
+                            "canPost": true
                         },
                         {
                             "fieldName": "ShunoJohoFucho",
@@ -640,7 +646,7 @@ var DBB;
                                     "fieldName": "dgFucho",
                                     "items": [],
                                     "controlType": "DataGrid",
-                                    "width": "850",
+                                    "width": "850px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -833,13 +839,14 @@ var DBB;
                                     "sortOrder": "defaultDataName3",
                                     "isAscending": true,
                                     "filterList": [],
-                                    "activeRowId": -1
+                                    "activeRowId": -1,
+                                    "gridAction": []
                                 },
                                 {
                                     "fieldName": "txtFuChoteiGeoukei",
                                     "items": [],
                                     "controlType": "TextBoxNum",
-                                    "width": "90",
+                                    "width": "90px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -851,7 +858,7 @@ var DBB;
                                     "toolTip": "",
                                     "authorityMode": 0,
                                     "marginLeft": "XS",
-                                    "marginRight": "0",
+                                    "marginRight": "0em",
                                     "selectControlID": "txtFuChoteiGeoukei_core",
                                     "helpMessageID": "",
                                     "jpControlName": "",
@@ -874,7 +881,7 @@ var DBB;
                                     "value": "",
                                     "labelLText": "合計",
                                     "labelRText": "",
-                                    "labelLWidth": "50",
+                                    "labelLWidth": "50px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
@@ -890,7 +897,7 @@ var DBB;
                                     "fieldName": "txtFuShunyuGeoukei",
                                     "items": [],
                                     "controlType": "TextBoxNum",
-                                    "width": "90",
+                                    "width": "90px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -925,7 +932,7 @@ var DBB;
                                     "value": "",
                                     "labelLText": "",
                                     "labelRText": "",
-                                    "labelLWidth": "50",
+                                    "labelLWidth": "50px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
@@ -978,11 +985,12 @@ var DBB;
                             "isGroupBox": false,
                             "readOnly": false,
                             "height": "Auto",
-                            "focusPositionID": "ShunoJoho_panel_body_area"
+                            "focusPositionID": "ShunoJoho_panel_body_area",
+                            "canPost": true
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "950",
+                    "width": "950px",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -1026,7 +1034,8 @@ var DBB;
                     "isGroupBox": false,
                     "readOnly": false,
                     "height": "Auto",
-                    "focusPositionID": "createFile"
+                    "focusPositionID": "createFile",
+                    "canPost": true
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -1041,24 +1050,119 @@ var DBB;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": "0",
-            "marginRight": "0",
+            "marginLeft": "0em",
+            "marginRight": "0em",
             "selectControlID": "defaultLayout",
             "helpMessageID": "",
             "jpControlName": "",
             "relation": [],
+            "packageName": "",
             "businessId": "DBB",
             "controlName": "ShunoJoho",
-            "marginTop": 0,
-            "marginBottom": 0,
+            "marginTop": "0em",
+            "marginBottom": "0em",
             "originalProperty": [],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "M"
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
         };
         return ShunoJoho_Design;
     })(Uz.CommonChildDiv);
     DBB.ShunoJoho_Design = ShunoJoho_Design;
+
+    (function (ShunoJoho) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ShunoJoho.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ShunoJoho";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBB.ShunoJoho.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBB.ShunoJoho.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ShunoJoho = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtChoteiNendo = function () {
+                return new UZA.TextBox(this.convFiledName("txtChoteiNendo"));
+            };
+
+            Controls.prototype.txtFukaNendo = function () {
+                return new UZA.TextBox(this.convFiledName("txtFukaNendo"));
+            };
+
+            Controls.prototype.txtTsuchiNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtTsuchiNo"));
+            };
+
+            Controls.prototype.ddlChoteiNendo = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlChoteiNendo"));
+            };
+
+            Controls.prototype.ddlFukaNendo = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlFukaNendo"));
+            };
+
+            Controls.prototype.btnNendoChange = function () {
+                return new UZA.Button(this.convFiledName("btnNendoChange"));
+            };
+
+            Controls.prototype.ShunoJohoTokucho = function () {
+                return new UZA.Panel(this.convFiledName("ShunoJohoTokucho"));
+            };
+
+            Controls.prototype.dgTokucho = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTokucho"));
+            };
+
+            Controls.prototype.txtTokuChoteiGeoukei = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtTokuChoteiGeoukei"));
+            };
+
+            Controls.prototype.txtTokuShunyuGeoukei = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtTokuShunyuGeoukei"));
+            };
+
+            Controls.prototype.ShunoJohoFucho = function () {
+                return new UZA.Panel(this.convFiledName("ShunoJohoFucho"));
+            };
+
+            Controls.prototype.dgFucho = function () {
+                return new UZA.DataGrid(this.convFiledName("dgFucho"));
+            };
+
+            Controls.prototype.txtFuChoteiGeoukei = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtFuChoteiGeoukei"));
+            };
+
+            Controls.prototype.txtFuShunyuGeoukei = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtFuShunyuGeoukei"));
+            };
+            return Controls;
+        })();
+        ShunoJoho.Controls = Controls;
+    })(DBB.ShunoJoho || (DBB.ShunoJoho = {}));
+    var ShunoJoho = DBB.ShunoJoho;
 })(DBB || (DBB = {}));
