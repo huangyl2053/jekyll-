@@ -1,17 +1,40 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 var DBD;
 (function (DBD) {
-    var RiyoshaFutangakuGemmen = (function (_super) {
-        __extends(RiyoshaFutangakuGemmen, _super);
-        function RiyoshaFutangakuGemmen() {
-            _super.apply(this, arguments);
-        }
-        return RiyoshaFutangakuGemmen;
-    })(DBD.RiyoshaFutangakuGemmen_Design);
-    DBD.RiyoshaFutangakuGemmen = RiyoshaFutangakuGemmen;
+    (function (RiyoshaFutangakuGemmen) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new RiyoshaFutangakuGemmen.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        RiyoshaFutangakuGemmen.ModeController = ModeController;
+    })(DBD.RiyoshaFutangakuGemmen || (DBD.RiyoshaFutangakuGemmen = {}));
+    var RiyoshaFutangakuGemmen = DBD.RiyoshaFutangakuGemmen;
+})(DBD || (DBD = {}));
+
+var DBD;
+(function (DBD) {
+    (function (RiyoshaFutangakuGemmen) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new RiyoshaFutangakuGemmen.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        RiyoshaFutangakuGemmen.PublicProperties = PublicProperties;
+    })(DBD.RiyoshaFutangakuGemmen || (DBD.RiyoshaFutangakuGemmen = {}));
+    var RiyoshaFutangakuGemmen = DBD.RiyoshaFutangakuGemmen;
 })(DBD || (DBD = {}));

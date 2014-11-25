@@ -1,5 +1,6 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBD {
     /**
@@ -8,6 +9,20 @@ module DBD {
      */
     export class FutanGendogakuNintei_Design extends Uz.CommonChildDiv {
     
+        public get visible_Kyusochisha() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"])["visible"];
+        }
+        
+        public set visible_Kyusochisha(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"])["visible"] = value;
+            } else {
+                this.layout.items[0].items[2].items[2].items[4]["visible"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, FutanGendogakuNintei_Design.myLayout, fieldName);
         }
@@ -18,7 +33,7 @@ module DBD {
          */
         public registProperty() {
             super.registProperty();
-            Uz.JSControlUtil.registProperty("visible_KyusochishaKubun");
+            Uz.JSControlUtil.registProperty("visible_Kyusochisha");
         }
         
         /**
@@ -28,6 +43,7 @@ module DBD {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
+            editablePropertyInfo["visible_Kyusochisha"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"]).getEditablePropertyInfo()["visible"];
             
             return editablePropertyInfo;
         }
@@ -87,7 +103,7 @@ module DBD {
      "fieldName": "dgFutanGendogakuNinteiList",
      "items": [],
      "controlType": "DataGrid",
-     "width": "910",
+     "width": "910px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -104,7 +120,7 @@ module DBD {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "height": "185",
+     "height": "185px",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -486,6 +502,11 @@ module DBD {
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
+     "onAfterRequest": "",
+     "onAfterRequestByDblClick": "",
+     "onAfterRequestBySelectButton": "",
+     "onAfterRequestByModifyButton": "",
+     "onAfterRequestByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -493,7 +514,8 @@ module DBD {
      "sortOrder": "riyoshaFutangaku",
      "isAscending": true,
      "filterList": [],
-     "activeRowId": -1
+     "activeRowId": -1,
+     "gridAction": []
     },
     {
      "fieldName": "FutanGendogakuNinteiDetail",
@@ -502,7 +524,7 @@ module DBD {
        "fieldName": "txtShinseiDate",
        "items": [],
        "controlType": "TextBoxFlexibleDate",
-       "width": "80",
+       "width": "80px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -535,6 +557,7 @@ module DBD {
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "decorationClass": "",
        "ymdKubun": 2,
        "displayFormat": 0,
        "permitCharactor": "./_-"
@@ -592,7 +615,7 @@ module DBD {
          "fieldName": "txtKetteiDate",
          "items": [],
          "controlType": "TextBoxFlexibleDate",
-         "width": "80",
+         "width": "80px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -625,6 +648,7 @@ module DBD {
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "decorationClass": "",
          "ymdKubun": 2,
          "displayFormat": 0,
          "permitCharactor": "./_-"
@@ -633,7 +657,7 @@ module DBD {
          "fieldName": "txtKetteiKubun",
          "items": [],
          "controlType": "TextBox",
-         "width": "80",
+         "width": "80px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -679,7 +703,7 @@ module DBD {
          "fieldName": "txtTekiyoDate",
          "items": [],
          "controlType": "TextBoxFlexibleDate",
-         "width": "80",
+         "width": "80px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -712,6 +736,7 @@ module DBD {
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "decorationClass": "",
          "ymdKubun": 2,
          "displayFormat": 0,
          "permitCharactor": "./_-"
@@ -720,7 +745,7 @@ module DBD {
          "fieldName": "txtYukokigenDate",
          "items": [],
          "controlType": "TextBoxFlexibleDate",
-         "width": "80",
+         "width": "80px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -753,6 +778,7 @@ module DBD {
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "decorationClass": "",
          "ymdKubun": 2,
          "displayFormat": 0,
          "permitCharactor": "./_-"
@@ -761,7 +787,7 @@ module DBD {
          "fieldName": "txtKyushochisha",
          "items": [],
          "controlType": "TextBox",
-         "width": "80",
+         "width": "80px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -807,7 +833,7 @@ module DBD {
          "fieldName": "txtFutanDankai",
          "items": [],
          "controlType": "TextBox",
-         "width": "80",
+         "width": "80px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -853,7 +879,7 @@ module DBD {
          "fieldName": "txtKyoshitsuType",
          "items": [],
          "controlType": "TextBox",
-         "width": "80",
+         "width": "80px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -899,7 +925,7 @@ module DBD {
          "fieldName": "txtKyokaiso",
          "items": [],
          "controlType": "TextBox",
-         "width": "80",
+         "width": "80px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -945,7 +971,7 @@ module DBD {
          "fieldName": "txtGekihenKanwa",
          "items": [],
          "controlType": "TextBox",
-         "width": "80",
+         "width": "80px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -994,7 +1020,7 @@ module DBD {
            "fieldName": "txtShokuhi",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "60",
+           "width": "60px",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1030,7 +1056,7 @@ module DBD {
            "labelLText": "食費",
            "labelRText": "円",
            "labelLWidth": "S",
-           "labelRWidth": "16",
+           "labelRWidth": "16px",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "decorationClass": "",
@@ -1045,7 +1071,7 @@ module DBD {
            "fieldName": "txtUnitKoshitsu",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "60",
+           "width": "60px",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1080,8 +1106,8 @@ module DBD {
            "value": "",
            "labelLText": "ユニット型個室",
            "labelRText": "円",
-           "labelLWidth": "160",
-           "labelRWidth": "16",
+           "labelLWidth": "160px",
+           "labelRWidth": "16px",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "decorationClass": "",
@@ -1096,7 +1122,7 @@ module DBD {
            "fieldName": "txtUnitJunKoshitsu",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "60",
+           "width": "60px",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1131,8 +1157,8 @@ module DBD {
            "value": "",
            "labelLText": "ユニット型準個室",
            "labelRText": "円",
-           "labelLWidth": "160",
-           "labelRWidth": "16",
+           "labelLWidth": "160px",
+           "labelRWidth": "16px",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "decorationClass": "",
@@ -1147,7 +1173,7 @@ module DBD {
            "fieldName": "txtTashoshitsu",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "60",
+           "width": "60px",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1183,7 +1209,7 @@ module DBD {
            "labelLText": "多床室",
            "labelRText": "円",
            "labelLWidth": "S",
-           "labelRWidth": "16",
+           "labelRWidth": "16px",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "decorationClass": "",
@@ -1198,7 +1224,7 @@ module DBD {
            "fieldName": "txtJuraigataKoshitsuTokuyo",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "60",
+           "width": "60px",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1233,8 +1259,8 @@ module DBD {
            "value": "",
            "labelLText": "従来型個室(特養等)",
            "labelRText": "円",
-           "labelLWidth": "160",
-           "labelRWidth": "16",
+           "labelLWidth": "160px",
+           "labelRWidth": "16px",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "decorationClass": "",
@@ -1249,7 +1275,7 @@ module DBD {
            "fieldName": "txtJuraigataKoshitsuRoken",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "60",
+           "width": "60px",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1284,8 +1310,8 @@ module DBD {
            "value": "",
            "labelLText": "従来型個室(老健)",
            "labelRText": "円",
-           "labelLWidth": "160",
-           "labelRWidth": "16",
+           "labelLWidth": "160px",
+           "labelRWidth": "16px",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "decorationClass": "",
@@ -1298,7 +1324,7 @@ module DBD {
           }
          ],
          "controlType": "Panel",
-         "width": "875",
+         "width": "875px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1336,13 +1362,14 @@ module DBD {
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "canPost": true
         },
         {
          "fieldName": "txtFushoninRiyu",
          "items": [],
          "controlType": "TextBoxMultiLine",
-         "width": "750",
+         "width": "750px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1378,12 +1405,13 @@ module DBD {
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
+         "decorationClass": "",
          "limitLength": "200",
          "countDisp": false
         }
        ],
        "controlType": "Panel",
-       "width": "892",
+       "width": "892px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1421,11 +1449,12 @@ module DBD {
        "panelDisplay": 1,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "canPost": true
       }
      ],
      "controlType": "Panel",
-     "width": "910",
+     "width": "910px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1463,7 +1492,8 @@ module DBD {
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     },
     {
      "fieldName": "btnClose",
@@ -1486,6 +1516,8 @@ module DBD {
      "helpMessageID": "",
      "jpControlName": "",
      "text": "閉じる",
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "onClick": "CloseOK",
      "appearance": 0,
      "imageFileUrl": "",
@@ -1507,7 +1539,7 @@ module DBD {
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
+   "marginLeft": "0em",
    "marginRight": "XS",
    "selectControlID": "FutanGendogakuNintei",
    "helpMessageID": "",
@@ -1543,7 +1575,8 @@ module DBD {
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "560"
+   "height": "560px",
+   "canPost": true
   }
  ],
  "controlType": "CommonChildDiv",
@@ -1558,21 +1591,22 @@ module DBD {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": "0",
- "marginRight": "0",
+ "marginLeft": "0em",
+ "marginRight": "0em",
  "selectControlID": "defaultLayout",
  "helpMessageID": "",
  "jpControlName": "",
  "relation": [],
+ "packageName": "",
  "businessId": "DBD",
  "controlName": "FutanGendogakuNintei",
- "marginTop": 0,
- "marginBottom": 0,
+ "marginTop": "0em",
+ "marginBottom": "0em",
  "originalProperty": [
   {
-   "publicChildFieldName": "FutangendogakuNinteiKyusochishaKubun",
+   "publicChildFieldName": "txtKyushochisha",
    "publicChildProperty": "visible",
-   "newPropertyName": "visible_KyusochishaKubun"
+   "newPropertyName": "visible_Kyusochisha"
   }
  ],
  "dataPassingForDialog": [
@@ -1584,8 +1618,151 @@ module DBD {
  "dialogOkEventNameForDialog": "CloseOK",
  "dialogCancelEventNameForDialog": "",
  "canTransferEvent": true,
- "heightForDialog": "600"
+ "heightForDialog": "600px",
+ "firstFocusFieldName": "",
+ "lastFocusFieldName": "",
+ "modes": [],
+ "publicEvents": [],
+ "publicEventsAlias": []
 }        
     }
+
+     export module FutanGendogakuNintei {
+
+        export class Events {
+
+            public static onSelect_dgFutanGendogakuNinteiList(): string {
+                return "onSelect_dgFutanGendogakuNinteiList";
+            }
+
+            public static CloseOK(): string {
+                return "CloseOK";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static myType(): string {
+                return "FutanGendogakuNintei";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + DBD.FutanGendogakuNintei.Controls.myType();
+            }
+
+            public convFiledName(fieldName: string): string {
+                return this._myName + "_" + DBD.FutanGendogakuNintei.Controls.myType() + "_" + fieldName;
+            }
+
+            public FutanGendogakuNintei(): UZA.Panel {
+                return new UZA.Panel(this.convFiledNameSelf());
+            }
+
+            public txtHiddenHihokenshaNo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHiddenHihokenshaNo"));
+            }
+
+            public dgFutanGendogakuNinteiList(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgFutanGendogakuNinteiList"));
+            }
+
+            public FutanGendogakuNinteiDetail(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("FutanGendogakuNinteiDetail"));
+            }
+
+            public txtShinseiDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiDate"));
+            }
+
+            public txtShinseiRiyu(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtShinseiRiyu"));
+            }
+
+            public FutanGendogakuNinteiRiyoshaFutan(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("FutanGendogakuNinteiDetail_FutanGendogakuNinteiRiyoshaFutan"));
+            }
+
+            public txtKetteiDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKetteiDate"));
+            }
+
+            public txtKetteiKubun(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtKetteiKubun"));
+            }
+
+            public txtTekiyoDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoDate"));
+            }
+
+            public txtYukokigenDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukokigenDate"));
+            }
+
+            public txtKyushochisha(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtKyushochisha"));
+            }
+
+            public txtFutanDankai(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtFutanDankai"));
+            }
+
+            public txtKyoshitsuType(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtKyoshitsuType"));
+            }
+
+            public txtKyokaiso(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtKyokaiso"));
+            }
+
+            public txtGekihenKanwa(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtGekihenKanwa"));
+            }
+
+            public FutanGendogaku(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("FutanGendogakuNinteiDetail_FutanGendogakuNinteiRiyoshaFutan_FutanGendogaku"));
+            }
+
+            public txtShokuhi(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtShokuhi"));
+            }
+
+            public txtUnitKoshitsu(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtUnitKoshitsu"));
+            }
+
+            public txtUnitJunKoshitsu(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtUnitJunKoshitsu"));
+            }
+
+            public txtTashoshitsu(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtTashoshitsu"));
+            }
+
+            public txtJuraigataKoshitsuTokuyo(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtJuraigataKoshitsuTokuyo"));
+            }
+
+            public txtJuraigataKoshitsuRoken(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtJuraigataKoshitsuRoken"));
+            }
+
+            public txtFushoninRiyu(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtFushoninRiyu"));
+            }
+
+            public btnClose(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            }
+
+        }
+
+     }
+
 }
 

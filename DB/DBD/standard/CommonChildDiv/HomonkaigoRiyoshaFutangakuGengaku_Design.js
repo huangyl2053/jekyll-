@@ -6,6 +6,141 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBD;
 (function (DBD) {
+    (function (HomonkaigoRiyoshaFutangakuGengaku) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onSelect_dgHomonkaigoRiyoshaFutangakuGengakuList", {
+                get: function () {
+                    return "onSelect_dgHomonkaigoRiyoshaFutangakuGengakuList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "CloseOK", {
+                get: function () {
+                    return "CloseOK";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        HomonkaigoRiyoshaFutangakuGengaku.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "HomonkaigoRiyoshaFutangakuGengaku";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.HomonkaigoRiyoshaFutangakuGengaku = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHiddenHihokenshaNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtHiddenHihokenshaNo"));
+            };
+
+            Controls.prototype.dgHomonkaigoRiyoshaFutangakuGengakuList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgHomonkaigoRiyoshaFutangakuGengakuList"));
+            };
+
+            Controls.prototype.HomonkaigoRiyoshaFutangakuGengakuDetail = function () {
+                return new UZA.Panel(this.convFiledName("HomonkaigoRiyoshaFutangakuGengakuDetail"));
+            };
+
+            Controls.prototype.HomonkaigoRiyoshaFutangakuGengakuShinsei = function () {
+                return new UZA.Panel(this.convFiledName("HomonkaigoRiyoshaFutangakuGengakuShinsei"));
+            };
+
+            Controls.prototype.txtShinseiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiDate"));
+            };
+
+            Controls.prototype.txtHobetsuKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtHobetsuKubun"));
+            };
+
+            Controls.prototype.txtShinseiRiyu = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtShinseiRiyu"));
+            };
+
+            Controls.prototype.ShogaishaTecho = function () {
+                return new UZA.Panel(this.convFiledName("ShogaishaTecho"));
+            };
+
+            Controls.prototype.txtHasShogaishaTecho = function () {
+                return new UZA.TextBox(this.convFiledName("txtHasShogaishaTecho"));
+            };
+
+            Controls.prototype.txtShogaishaTechoTokyu = function () {
+                return new UZA.TextBox(this.convFiledName("txtShogaishaTechoTokyu"));
+            };
+
+            Controls.prototype.txtShogaishaTechoNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtShogaishaTechoNo"));
+            };
+
+            Controls.prototype.HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan = function () {
+                return new UZA.Panel(this.convFiledName("HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan"));
+            };
+
+            Controls.prototype.txtKetteiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKetteiDate"));
+            };
+
+            Controls.prototype.txtKetteiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtKetteiKubun"));
+            };
+
+            Controls.prototype.txtTekiyoDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoDate"));
+            };
+
+            Controls.prototype.txtYukokigenDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukokigenDate"));
+            };
+
+            Controls.prototype.txtKyufuRitsu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtKyufuRitsu"));
+            };
+
+            Controls.prototype.txtFushoninRiyu = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtFushoninRiyu"));
+            };
+
+            Controls.prototype.txtKohiFutanshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtKohiFutanshaNo"));
+            };
+
+            Controls.prototype.txtKohiJukyushaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtKohiJukyushaNo"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        HomonkaigoRiyoshaFutangakuGengaku.Controls = Controls;
+    })(DBD.HomonkaigoRiyoshaFutangakuGengaku || (DBD.HomonkaigoRiyoshaFutangakuGengaku = {}));
+    var HomonkaigoRiyoshaFutangakuGengaku = DBD.HomonkaigoRiyoshaFutangakuGengaku;
+
     var HomonkaigoRiyoshaFutangakuGengaku_Design = (function (_super) {
         __extends(HomonkaigoRiyoshaFutangakuGengaku_Design, _super);
         function HomonkaigoRiyoshaFutangakuGengaku_Design($parentElement, isDesignMode, fieldName) {

@@ -11,13 +11,31 @@ var DBD;
         function FutanGendogakuNintei_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, FutanGendogakuNintei_Design.myLayout, fieldName);
         }
+        Object.defineProperty(FutanGendogakuNintei_Design.prototype, "visible_Kyusochisha", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"])["visible"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"])["visible"] = value;
+                } else {
+                    this.layout.items[0].items[2].items[2].items[4]["visible"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         FutanGendogakuNintei_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
-            Uz.JSControlUtil.registProperty("visible_KyusochishaKubun");
+            Uz.JSControlUtil.registProperty("visible_Kyusochisha");
         };
 
         FutanGendogakuNintei_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["visible_Kyusochisha"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[2].items[4]["fieldName"]).getEditablePropertyInfo()["visible"];
 
             return editablePropertyInfo;
         };
@@ -77,7 +95,7 @@ var DBD;
                             "fieldName": "dgFutanGendogakuNinteiList",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "910",
+                            "width": "910px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -94,7 +112,7 @@ var DBD;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
-                            "height": "185",
+                            "height": "185px",
                             "gridSetting": {
                                 "rowHeight": 25,
                                 "isMultiSelectable": false,
@@ -476,6 +494,11 @@ var DBD;
                             "onSelectBySelectButton": "",
                             "onSelectByModifyButton": "",
                             "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
@@ -483,7 +506,8 @@ var DBD;
                             "sortOrder": "riyoshaFutangaku",
                             "isAscending": true,
                             "filterList": [],
-                            "activeRowId": -1
+                            "activeRowId": -1,
+                            "gridAction": []
                         },
                         {
                             "fieldName": "FutanGendogakuNinteiDetail",
@@ -492,7 +516,7 @@ var DBD;
                                     "fieldName": "txtShinseiDate",
                                     "items": [],
                                     "controlType": "TextBoxFlexibleDate",
-                                    "width": "80",
+                                    "width": "80px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -525,6 +549,7 @@ var DBD;
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
+                                    "decorationClass": "",
                                     "ymdKubun": 2,
                                     "displayFormat": 0,
                                     "permitCharactor": "./_-"
@@ -582,7 +607,7 @@ var DBD;
                                             "fieldName": "txtKetteiDate",
                                             "items": [],
                                             "controlType": "TextBoxFlexibleDate",
-                                            "width": "80",
+                                            "width": "80px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -615,6 +640,7 @@ var DBD;
                                             "labelRWidth": "S",
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
+                                            "decorationClass": "",
                                             "ymdKubun": 2,
                                             "displayFormat": 0,
                                             "permitCharactor": "./_-"
@@ -623,7 +649,7 @@ var DBD;
                                             "fieldName": "txtKetteiKubun",
                                             "items": [],
                                             "controlType": "TextBox",
-                                            "width": "80",
+                                            "width": "80px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -669,7 +695,7 @@ var DBD;
                                             "fieldName": "txtTekiyoDate",
                                             "items": [],
                                             "controlType": "TextBoxFlexibleDate",
-                                            "width": "80",
+                                            "width": "80px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -702,6 +728,7 @@ var DBD;
                                             "labelRWidth": "S",
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
+                                            "decorationClass": "",
                                             "ymdKubun": 2,
                                             "displayFormat": 0,
                                             "permitCharactor": "./_-"
@@ -710,7 +737,7 @@ var DBD;
                                             "fieldName": "txtYukokigenDate",
                                             "items": [],
                                             "controlType": "TextBoxFlexibleDate",
-                                            "width": "80",
+                                            "width": "80px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -743,6 +770,7 @@ var DBD;
                                             "labelRWidth": "S",
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
+                                            "decorationClass": "",
                                             "ymdKubun": 2,
                                             "displayFormat": 0,
                                             "permitCharactor": "./_-"
@@ -751,7 +779,7 @@ var DBD;
                                             "fieldName": "txtKyushochisha",
                                             "items": [],
                                             "controlType": "TextBox",
-                                            "width": "80",
+                                            "width": "80px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -797,7 +825,7 @@ var DBD;
                                             "fieldName": "txtFutanDankai",
                                             "items": [],
                                             "controlType": "TextBox",
-                                            "width": "80",
+                                            "width": "80px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -843,7 +871,7 @@ var DBD;
                                             "fieldName": "txtKyoshitsuType",
                                             "items": [],
                                             "controlType": "TextBox",
-                                            "width": "80",
+                                            "width": "80px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -889,7 +917,7 @@ var DBD;
                                             "fieldName": "txtKyokaiso",
                                             "items": [],
                                             "controlType": "TextBox",
-                                            "width": "80",
+                                            "width": "80px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -935,7 +963,7 @@ var DBD;
                                             "fieldName": "txtGekihenKanwa",
                                             "items": [],
                                             "controlType": "TextBox",
-                                            "width": "80",
+                                            "width": "80px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -984,7 +1012,7 @@ var DBD;
                                                     "fieldName": "txtShokuhi",
                                                     "items": [],
                                                     "controlType": "TextBoxNum",
-                                                    "width": "60",
+                                                    "width": "60px",
                                                     "visible": true,
                                                     "displayNone": false,
                                                     "disabled": false,
@@ -1020,7 +1048,7 @@ var DBD;
                                                     "labelLText": "食費",
                                                     "labelRText": "円",
                                                     "labelLWidth": "S",
-                                                    "labelRWidth": "16",
+                                                    "labelRWidth": "16px",
                                                     "labelLAlign": 2,
                                                     "labelRAlign": 0,
                                                     "decorationClass": "",
@@ -1035,7 +1063,7 @@ var DBD;
                                                     "fieldName": "txtUnitKoshitsu",
                                                     "items": [],
                                                     "controlType": "TextBoxNum",
-                                                    "width": "60",
+                                                    "width": "60px",
                                                     "visible": true,
                                                     "displayNone": false,
                                                     "disabled": false,
@@ -1070,8 +1098,8 @@ var DBD;
                                                     "value": "",
                                                     "labelLText": "ユニット型個室",
                                                     "labelRText": "円",
-                                                    "labelLWidth": "160",
-                                                    "labelRWidth": "16",
+                                                    "labelLWidth": "160px",
+                                                    "labelRWidth": "16px",
                                                     "labelLAlign": 2,
                                                     "labelRAlign": 0,
                                                     "decorationClass": "",
@@ -1086,7 +1114,7 @@ var DBD;
                                                     "fieldName": "txtUnitJunKoshitsu",
                                                     "items": [],
                                                     "controlType": "TextBoxNum",
-                                                    "width": "60",
+                                                    "width": "60px",
                                                     "visible": true,
                                                     "displayNone": false,
                                                     "disabled": false,
@@ -1121,8 +1149,8 @@ var DBD;
                                                     "value": "",
                                                     "labelLText": "ユニット型準個室",
                                                     "labelRText": "円",
-                                                    "labelLWidth": "160",
-                                                    "labelRWidth": "16",
+                                                    "labelLWidth": "160px",
+                                                    "labelRWidth": "16px",
                                                     "labelLAlign": 2,
                                                     "labelRAlign": 0,
                                                     "decorationClass": "",
@@ -1137,7 +1165,7 @@ var DBD;
                                                     "fieldName": "txtTashoshitsu",
                                                     "items": [],
                                                     "controlType": "TextBoxNum",
-                                                    "width": "60",
+                                                    "width": "60px",
                                                     "visible": true,
                                                     "displayNone": false,
                                                     "disabled": false,
@@ -1173,7 +1201,7 @@ var DBD;
                                                     "labelLText": "多床室",
                                                     "labelRText": "円",
                                                     "labelLWidth": "S",
-                                                    "labelRWidth": "16",
+                                                    "labelRWidth": "16px",
                                                     "labelLAlign": 2,
                                                     "labelRAlign": 0,
                                                     "decorationClass": "",
@@ -1188,7 +1216,7 @@ var DBD;
                                                     "fieldName": "txtJuraigataKoshitsuTokuyo",
                                                     "items": [],
                                                     "controlType": "TextBoxNum",
-                                                    "width": "60",
+                                                    "width": "60px",
                                                     "visible": true,
                                                     "displayNone": false,
                                                     "disabled": false,
@@ -1223,8 +1251,8 @@ var DBD;
                                                     "value": "",
                                                     "labelLText": "従来型個室(特養等)",
                                                     "labelRText": "円",
-                                                    "labelLWidth": "160",
-                                                    "labelRWidth": "16",
+                                                    "labelLWidth": "160px",
+                                                    "labelRWidth": "16px",
                                                     "labelLAlign": 2,
                                                     "labelRAlign": 0,
                                                     "decorationClass": "",
@@ -1239,7 +1267,7 @@ var DBD;
                                                     "fieldName": "txtJuraigataKoshitsuRoken",
                                                     "items": [],
                                                     "controlType": "TextBoxNum",
-                                                    "width": "60",
+                                                    "width": "60px",
                                                     "visible": true,
                                                     "displayNone": false,
                                                     "disabled": false,
@@ -1274,8 +1302,8 @@ var DBD;
                                                     "value": "",
                                                     "labelLText": "従来型個室(老健)",
                                                     "labelRText": "円",
-                                                    "labelLWidth": "160",
-                                                    "labelRWidth": "16",
+                                                    "labelLWidth": "160px",
+                                                    "labelRWidth": "16px",
                                                     "labelLAlign": 2,
                                                     "labelRAlign": 0,
                                                     "decorationClass": "",
@@ -1288,7 +1316,7 @@ var DBD;
                                                 }
                                             ],
                                             "controlType": "Panel",
-                                            "width": "875",
+                                            "width": "875px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -1326,13 +1354,14 @@ var DBD;
                                             "panelDisplay": 1,
                                             "isGroupBox": false,
                                             "readOnly": false,
-                                            "height": "Auto"
+                                            "height": "Auto",
+                                            "canPost": true
                                         },
                                         {
                                             "fieldName": "txtFushoninRiyu",
                                             "items": [],
                                             "controlType": "TextBoxMultiLine",
-                                            "width": "750",
+                                            "width": "750px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -1368,12 +1397,13 @@ var DBD;
                                             "labelRWidth": "S",
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
+                                            "decorationClass": "",
                                             "limitLength": "200",
                                             "countDisp": false
                                         }
                                     ],
                                     "controlType": "Panel",
-                                    "width": "892",
+                                    "width": "892px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -1411,11 +1441,12 @@ var DBD;
                                     "panelDisplay": 1,
                                     "isGroupBox": false,
                                     "readOnly": false,
-                                    "height": "Auto"
+                                    "height": "Auto",
+                                    "canPost": true
                                 }
                             ],
                             "controlType": "Panel",
-                            "width": "910",
+                            "width": "910px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -1453,7 +1484,8 @@ var DBD;
                             "panelDisplay": 0,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "canPost": true
                         },
                         {
                             "fieldName": "btnClose",
@@ -1476,6 +1508,8 @@ var DBD;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "text": "閉じる",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
                             "onClick": "CloseOK",
                             "appearance": 0,
                             "imageFileUrl": "",
@@ -1497,7 +1531,7 @@ var DBD;
                     "float": 0,
                     "toolTip": "",
                     "authorityMode": 0,
-                    "marginLeft": "0",
+                    "marginLeft": "0em",
                     "marginRight": "XS",
                     "selectControlID": "FutanGendogakuNintei",
                     "helpMessageID": "",
@@ -1533,7 +1567,8 @@ var DBD;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "560"
+                    "height": "560px",
+                    "canPost": true
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -1548,21 +1583,22 @@ var DBD;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": "0",
-            "marginRight": "0",
+            "marginLeft": "0em",
+            "marginRight": "0em",
             "selectControlID": "defaultLayout",
             "helpMessageID": "",
             "jpControlName": "",
             "relation": [],
+            "packageName": "",
             "businessId": "DBD",
             "controlName": "FutanGendogakuNintei",
-            "marginTop": 0,
-            "marginBottom": 0,
+            "marginTop": "0em",
+            "marginBottom": "0em",
             "originalProperty": [
                 {
-                    "publicChildFieldName": "FutangendogakuNinteiKyusochishaKubun",
+                    "publicChildFieldName": "txtKyushochisha",
                     "publicChildProperty": "visible",
-                    "newPropertyName": "visible_KyusochishaKubun"
+                    "newPropertyName": "visible_Kyusochisha"
                 }
             ],
             "dataPassingForDialog": [
@@ -1574,9 +1610,150 @@ var DBD;
             "dialogOkEventNameForDialog": "CloseOK",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "600"
+            "heightForDialog": "600px",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
         };
         return FutanGendogakuNintei_Design;
     })(Uz.CommonChildDiv);
     DBD.FutanGendogakuNintei_Design = FutanGendogakuNintei_Design;
+
+    (function (FutanGendogakuNintei) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onSelect_dgFutanGendogakuNinteiList = function () {
+                return "onSelect_dgFutanGendogakuNinteiList";
+            };
+
+            Events.CloseOK = function () {
+                return "CloseOK";
+            };
+            return Events;
+        })();
+        FutanGendogakuNintei.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "FutanGendogakuNintei";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBD.FutanGendogakuNintei.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBD.FutanGendogakuNintei.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.FutanGendogakuNintei = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHiddenHihokenshaNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtHiddenHihokenshaNo"));
+            };
+
+            Controls.prototype.dgFutanGendogakuNinteiList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgFutanGendogakuNinteiList"));
+            };
+
+            Controls.prototype.FutanGendogakuNinteiDetail = function () {
+                return new UZA.Panel(this.convFiledName("FutanGendogakuNinteiDetail"));
+            };
+
+            Controls.prototype.txtShinseiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiDate"));
+            };
+
+            Controls.prototype.txtShinseiRiyu = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinseiRiyu"));
+            };
+
+            Controls.prototype.FutanGendogakuNinteiRiyoshaFutan = function () {
+                return new UZA.Panel(this.convFiledName("FutanGendogakuNinteiDetail_FutanGendogakuNinteiRiyoshaFutan"));
+            };
+
+            Controls.prototype.txtKetteiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKetteiDate"));
+            };
+
+            Controls.prototype.txtKetteiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtKetteiKubun"));
+            };
+
+            Controls.prototype.txtTekiyoDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoDate"));
+            };
+
+            Controls.prototype.txtYukokigenDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukokigenDate"));
+            };
+
+            Controls.prototype.txtKyushochisha = function () {
+                return new UZA.TextBox(this.convFiledName("txtKyushochisha"));
+            };
+
+            Controls.prototype.txtFutanDankai = function () {
+                return new UZA.TextBox(this.convFiledName("txtFutanDankai"));
+            };
+
+            Controls.prototype.txtKyoshitsuType = function () {
+                return new UZA.TextBox(this.convFiledName("txtKyoshitsuType"));
+            };
+
+            Controls.prototype.txtKyokaiso = function () {
+                return new UZA.TextBox(this.convFiledName("txtKyokaiso"));
+            };
+
+            Controls.prototype.txtGekihenKanwa = function () {
+                return new UZA.TextBox(this.convFiledName("txtGekihenKanwa"));
+            };
+
+            Controls.prototype.FutanGendogaku = function () {
+                return new UZA.Panel(this.convFiledName("FutanGendogakuNinteiDetail_FutanGendogakuNinteiRiyoshaFutan_FutanGendogaku"));
+            };
+
+            Controls.prototype.txtShokuhi = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtShokuhi"));
+            };
+
+            Controls.prototype.txtUnitKoshitsu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtUnitKoshitsu"));
+            };
+
+            Controls.prototype.txtUnitJunKoshitsu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtUnitJunKoshitsu"));
+            };
+
+            Controls.prototype.txtTashoshitsu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtTashoshitsu"));
+            };
+
+            Controls.prototype.txtJuraigataKoshitsuTokuyo = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtJuraigataKoshitsuTokuyo"));
+            };
+
+            Controls.prototype.txtJuraigataKoshitsuRoken = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtJuraigataKoshitsuRoken"));
+            };
+
+            Controls.prototype.txtFushoninRiyu = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtFushoninRiyu"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+            return Controls;
+        })();
+        FutanGendogakuNintei.Controls = Controls;
+    })(DBD.FutanGendogakuNintei || (DBD.FutanGendogakuNintei = {}));
+    var FutanGendogakuNintei = DBD.FutanGendogakuNintei;
 })(DBD || (DBD = {}));

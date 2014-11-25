@@ -1,11 +1,135 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBD {
     /**
      * 自動生成コードです。修正しないでください。
-     * TokubetsuChiikiKasanGemmenクラスのみで継承して使えます。
      */
+
+    export module TokubetsuChiikiKasanGemmen {
+
+        export class Events {
+
+            public static get CloseOK(): string {
+                return "CloseOK";
+            }
+            public static get onSelect_dgTokubetsuChiikiKasanGemmenList(): string {
+                return "onSelect_dgTokubetsuChiikiKasanGemmenList";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "TokubetsuChiikiKasanGemmen";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public TokubetsuChiikiKasanGemmen() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public txtHiddenHihokenshaNo() : UZA.TextBox {
+
+                return new UZA.TextBox(this.convFiledName("txtHiddenHihokenshaNo"));
+
+            }
+
+            public dgTokubetsuChiikiKasanGemmenList() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgTokubetsuChiikiKasanGemmenList"));
+
+            }
+
+            public TokubetsuChiikiKasanGemmenDetail() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("TokubetsuChiikiKasanGemmenDetail"));
+
+            }
+
+            public txtShinseiDate() : UZA.TextBoxFlexibleDate {
+
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiDate"));
+
+            }
+
+            public TokubetsuChiikiKasanGemmenRiyoshaFutan() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("TokubetsuChiikiKasanGemmenRiyoshaFutan"));
+
+            }
+
+            public txtKetteiDate() : UZA.TextBoxFlexibleDate {
+
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKetteiDate"));
+
+            }
+
+            public txtKetteiKubun() : UZA.TextBox {
+
+                return new UZA.TextBox(this.convFiledName("txtKetteiKubun"));
+
+            }
+
+            public txtTekiyoDate() : UZA.TextBoxFlexibleDate {
+
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoDate"));
+
+            }
+
+            public txtYukokigenDate() : UZA.TextBoxFlexibleDate {
+
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukokigenDate"));
+
+            }
+
+            public txtGengakuRitsu() : UZA.TextBoxNum {
+
+                return new UZA.TextBoxNum(this.convFiledName("txtGengakuRitsu"));
+
+            }
+
+            public txtKakuninNo() : UZA.TextBoxCode {
+
+                return new UZA.TextBoxCode(this.convFiledName("txtKakuninNo"));
+
+            }
+
+            public txtFushoninRiyu() : UZA.TextBoxMultiLine {
+
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtFushoninRiyu"));
+
+            }
+
+            public btnClose() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnClose"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class TokubetsuChiikiKasanGemmen_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

@@ -6,6 +6,109 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBD;
 (function (DBD) {
+    (function (TokubetsuChiikiKasanGemmen) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "CloseOK", {
+                get: function () {
+                    return "CloseOK";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelect_dgTokubetsuChiikiKasanGemmenList", {
+                get: function () {
+                    return "onSelect_dgTokubetsuChiikiKasanGemmenList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        TokubetsuChiikiKasanGemmen.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "TokubetsuChiikiKasanGemmen";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.TokubetsuChiikiKasanGemmen = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHiddenHihokenshaNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtHiddenHihokenshaNo"));
+            };
+
+            Controls.prototype.dgTokubetsuChiikiKasanGemmenList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTokubetsuChiikiKasanGemmenList"));
+            };
+
+            Controls.prototype.TokubetsuChiikiKasanGemmenDetail = function () {
+                return new UZA.Panel(this.convFiledName("TokubetsuChiikiKasanGemmenDetail"));
+            };
+
+            Controls.prototype.txtShinseiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiDate"));
+            };
+
+            Controls.prototype.TokubetsuChiikiKasanGemmenRiyoshaFutan = function () {
+                return new UZA.Panel(this.convFiledName("TokubetsuChiikiKasanGemmenRiyoshaFutan"));
+            };
+
+            Controls.prototype.txtKetteiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKetteiDate"));
+            };
+
+            Controls.prototype.txtKetteiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtKetteiKubun"));
+            };
+
+            Controls.prototype.txtTekiyoDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoDate"));
+            };
+
+            Controls.prototype.txtYukokigenDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukokigenDate"));
+            };
+
+            Controls.prototype.txtGengakuRitsu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtGengakuRitsu"));
+            };
+
+            Controls.prototype.txtKakuninNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtKakuninNo"));
+            };
+
+            Controls.prototype.txtFushoninRiyu = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtFushoninRiyu"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        TokubetsuChiikiKasanGemmen.Controls = Controls;
+    })(DBD.TokubetsuChiikiKasanGemmen || (DBD.TokubetsuChiikiKasanGemmen = {}));
+    var TokubetsuChiikiKasanGemmen = DBD.TokubetsuChiikiKasanGemmen;
+
     var TokubetsuChiikiKasanGemmen_Design = (function (_super) {
         __extends(TokubetsuChiikiKasanGemmen_Design, _super);
         function TokubetsuChiikiKasanGemmen_Design($parentElement, isDesignMode, fieldName) {

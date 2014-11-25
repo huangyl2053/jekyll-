@@ -6,6 +6,109 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBD;
 (function (DBD) {
+    (function (HyojunFutangakuGengaku) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "CloseOK", {
+                get: function () {
+                    return "CloseOK";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelect_dgHyojunFutangakuGengakuList", {
+                get: function () {
+                    return "onSelect_dgHyojunFutangakuGengakuList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        HyojunFutangakuGengaku.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "HyojunFutangakuGengaku";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.HyojunFutangakuGengaku = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHiddenHihokenshaNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtHiddenHihokenshaNo"));
+            };
+
+            Controls.prototype.dgHyojunFutangakuGengakuList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgHyojunFutangakuGengakuList"));
+            };
+
+            Controls.prototype.HyojunFutangakuGemmenDetail = function () {
+                return new UZA.Panel(this.convFiledName("HyojunFutangakuGemmenDetail"));
+            };
+
+            Controls.prototype.txtShinseiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiDate"));
+            };
+
+            Controls.prototype.HyojunFutangakuGemmenRiyoshaFutan = function () {
+                return new UZA.Panel(this.convFiledName("HyojunFutangakuGemmenRiyoshaFutan"));
+            };
+
+            Controls.prototype.txtKetteiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKetteiDate"));
+            };
+
+            Controls.prototype.txtKetteiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtKetteiKubun"));
+            };
+
+            Controls.prototype.txtTekiyoDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoDate"));
+            };
+
+            Controls.prototype.txtYukokigenDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukokigenDate"));
+            };
+
+            Controls.prototype.txtGengakuKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtGengakuKubun"));
+            };
+
+            Controls.prototype.txtFutangaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtFutangaku"));
+            };
+
+            Controls.prototype.txtFushoninRiyu = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtFushoninRiyu"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        HyojunFutangakuGengaku.Controls = Controls;
+    })(DBD.HyojunFutangakuGengaku || (DBD.HyojunFutangakuGengaku = {}));
+    var HyojunFutangakuGengaku = DBD.HyojunFutangakuGengaku;
+
     var HyojunFutangakuGengaku_Design = (function (_super) {
         __extends(HyojunFutangakuGengaku_Design, _super);
         function HyojunFutangakuGengaku_Design($parentElement, isDesignMode, fieldName) {
