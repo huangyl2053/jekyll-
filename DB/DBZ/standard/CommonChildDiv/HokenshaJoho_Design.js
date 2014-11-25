@@ -6,6 +6,62 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (HokenshaJoho) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onBlur_txtHokenshaNo", {
+                get: function () {
+                    return "onBlur_txtHokenshaNo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        HokenshaJoho.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "HokenshaJoho";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.HokenshaJoho = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHokenshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtHokenshaNo"));
+            };
+
+            Controls.prototype.btnHokenshaSelect = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnHokenshaSelect"));
+            };
+
+            Controls.prototype.txtHokenshaMeisho = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenshaMeisho"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        HokenshaJoho.Controls = Controls;
+    })(DBZ.HokenshaJoho || (DBZ.HokenshaJoho = {}));
+    var HokenshaJoho = DBZ.HokenshaJoho;
+
     var HokenshaJoho_Design = (function (_super) {
         __extends(HokenshaJoho_Design, _super);
         function HokenshaJoho_Design($parentElement, isDesignMode, fieldName) {

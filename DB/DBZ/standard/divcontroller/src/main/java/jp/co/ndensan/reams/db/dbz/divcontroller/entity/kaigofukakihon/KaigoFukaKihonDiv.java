@@ -1,9 +1,10 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigofukakihon;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigofukakihon.IKaigoFukaKihonDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * 
  * @author 自動生成
  */
-public class KaigoFukaKihonDiv extends Panel {
+public class KaigoFukaKihonDiv extends Panel implements IKaigoFukaKihonDiv {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -123,5 +124,7 @@ public class KaigoFukaKihonDiv extends Panel {
     public void setBtnHihoRireki(ButtonDialog btnHihoRireki) {
         this.btnHihoRireki=btnHihoRireki;
     }
+
+    //--------------- この行より下にコードを追加してください -------------------
 
 }

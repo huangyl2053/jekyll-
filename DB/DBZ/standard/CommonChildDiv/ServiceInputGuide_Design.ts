@@ -1,11 +1,102 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * ServiceInputGuideクラスのみで継承して使えます。
      */
+
+    export module ServiceInputGuide {
+
+        export class Events {
+
+            public static get onClick_btnSearchJigyosha(): string {
+                return "onClick_btnSearchJigyosha";
+            }
+            public static get onClick_btnServiceInputGuideReturn(): string {
+                return "onClick_btnServiceInputGuideReturn";
+            }
+            public static get onSelectBySelectButton_SearchResultService(): string {
+                return "onSelectBySelectButton_SearchResultService";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "ServiceInputGuide";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public ServiceInputGuide() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public txtServiceShuruiCode() : UZA.TextBoxCode {
+
+                return new UZA.TextBoxCode(this.convFiledName("txtServiceShuruiCode"));
+
+            }
+
+            public txtServiceCode() : UZA.TextBoxCode {
+
+                return new UZA.TextBoxCode(this.convFiledName("txtServiceCode"));
+
+            }
+
+            public txtKijyunYM() : UZA.TextBoxDate {
+
+                return new UZA.TextBoxDate(this.convFiledName("txtKijyunYM"));
+
+            }
+
+            public btnSearchJService() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnSearchJService"));
+
+            }
+
+            public SearchResultService() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("SearchResultService"));
+
+            }
+
+            public dgSearchResultService() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgSearchResultService"));
+
+            }
+
+            public btnServiceInputGuideReturn() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnServiceInputGuideReturn"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class ServiceInputGuide_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

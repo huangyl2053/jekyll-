@@ -6,6 +6,84 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (HokenshaInputGuide) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnSearchGaitoHokensha", {
+                get: function () {
+                    return "onClick_btnSearchGaitoHokensha";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySelectButton_dgSearchResultHokensha", {
+                get: function () {
+                    return "onSelectBySelectButton_dgSearchResultHokensha";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnHokenshaReturn", {
+                get: function () {
+                    return "onClick_btnHokenshaReturn";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        HokenshaInputGuide.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "HokenshaInputGuide";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.HokenshaInputGuide = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ddlHokenshaKenCode = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHokenshaKenCode"));
+            };
+
+            Controls.prototype.btnSearchGaitoHokensha = function () {
+                return new UZA.Button(this.convFiledName("btnSearchGaitoHokensha"));
+            };
+
+            Controls.prototype.SearchResultHokensha = function () {
+                return new UZA.Panel(this.convFiledName("SearchResultHokensha"));
+            };
+
+            Controls.prototype.dgSearchResultHokensha = function () {
+                return new UZA.DataGrid(this.convFiledName("dgSearchResultHokensha"));
+            };
+
+            Controls.prototype.btnHokenshaReturn = function () {
+                return new UZA.Button(this.convFiledName("btnHokenshaReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        HokenshaInputGuide.Controls = Controls;
+    })(DBZ.HokenshaInputGuide || (DBZ.HokenshaInputGuide = {}));
+    var HokenshaInputGuide = DBZ.HokenshaInputGuide;
+
     var HokenshaInputGuide_Design = (function (_super) {
         __extends(HokenshaInputGuide_Design, _super);
         function HokenshaInputGuide_Design($parentElement, isDesignMode, fieldName) {

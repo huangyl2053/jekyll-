@@ -6,6 +6,83 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (JukyuShikakuShomeishoHakko) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        JukyuShikakuShomeishoHakko.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "JukyuShikakuShomeishoHakko";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.JukyuShikakuShomeishoHakko = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtKofuDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKofuDate"));
+            };
+
+            Controls.prototype.txtIdoYoteiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIdoYoteiDate"));
+            };
+
+            Controls.prototype.txtYokaigoJotai = function () {
+                return new UZA.TextBox(this.convFiledName("txtYokaigoJotai"));
+            };
+
+            Controls.prototype.txtNinteiYukoKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtNinteiYukoKikan"));
+            };
+
+            Controls.prototype.txtShinseiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiDate"));
+            };
+
+            Controls.prototype.lblNinteiShinsakaiIken = function () {
+                return new UZA.Label(this.convFiledName("lblNinteiShinsakaiIken"));
+            };
+
+            Controls.prototype.txtNinteiShinsakaiIken = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtNinteiShinsakaiIken"));
+            };
+
+            Controls.prototype.lblBiko = function () {
+                return new UZA.Label(this.convFiledName("lblBiko"));
+            };
+
+            Controls.prototype.txtBiko = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtBiko"));
+            };
+
+            Controls.prototype.chkJushoHihyoji = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkJushoHihyoji"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        JukyuShikakuShomeishoHakko.Controls = Controls;
+    })(DBZ.JukyuShikakuShomeishoHakko || (DBZ.JukyuShikakuShomeishoHakko = {}));
+    var JukyuShikakuShomeishoHakko = DBZ.JukyuShikakuShomeishoHakko;
+
     var JukyuShikakuShomeishoHakko_Design = (function (_super) {
         __extends(JukyuShikakuShomeishoHakko_Design, _super);
         function JukyuShikakuShomeishoHakko_Design($parentElement, isDesignMode, fieldName) {

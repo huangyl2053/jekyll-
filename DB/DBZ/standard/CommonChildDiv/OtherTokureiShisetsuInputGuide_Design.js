@@ -6,6 +6,88 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (OtherTokureiShisetsuInputGuide) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnOtherShisetsuReturn", {
+                get: function () {
+                    return "onClick_btnOtherShisetsuReturn";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySelectButton_dgSearchResultOtherTokureiShisetsu", {
+                get: function () {
+                    return "onSelectBySelectButton_dgSearchResultOtherTokureiShisetsu";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnSearchOtherShisetsu", {
+                get: function () {
+                    return "onClick_btnSearchOtherShisetsu";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        OtherTokureiShisetsuInputGuide.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "OtherTokureiShisetsuInputGuide";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.OtherTokureiShisetsuInputGuide = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.radKannaiKubun = function () {
+                return new UZA.RadioButton(this.convFiledName("radKannaiKubun"));
+            };
+
+            Controls.prototype.btnSearchOtherShisetsu = function () {
+                return new UZA.Button(this.convFiledName("btnSearchOtherShisetsu"));
+            };
+
+            Controls.prototype.lblOtherShisetsuShurui = function () {
+                return new UZA.Label(this.convFiledName("lblOtherShisetsuShurui"));
+            };
+
+            Controls.prototype.SearchResultOtherShisetsu = function () {
+                return new UZA.Panel(this.convFiledName("SearchResultOtherShisetsu"));
+            };
+
+            Controls.prototype.dgSearchResultOtherTokureiShisetsu = function () {
+                return new UZA.DataGrid(this.convFiledName("dgSearchResultOtherTokureiShisetsu"));
+            };
+
+            Controls.prototype.btnOtherShisetsuReturn = function () {
+                return new UZA.Button(this.convFiledName("btnOtherShisetsuReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        OtherTokureiShisetsuInputGuide.Controls = Controls;
+    })(DBZ.OtherTokureiShisetsuInputGuide || (DBZ.OtherTokureiShisetsuInputGuide = {}));
+    var OtherTokureiShisetsuInputGuide = DBZ.OtherTokureiShisetsuInputGuide;
+
     var OtherTokureiShisetsuInputGuide_Design = (function (_super) {
         __extends(OtherTokureiShisetsuInputGuide_Design, _super);
         function OtherTokureiShisetsuInputGuide_Design($parentElement, isDesignMode, fieldName) {

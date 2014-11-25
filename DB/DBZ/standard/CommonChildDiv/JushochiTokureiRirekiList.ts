@@ -347,3 +347,29 @@ module DBZ
     }
 }
 
+
+
+module DBZ {
+
+    export module JushochiTokureiRirekiList {
+
+        export class PublicProperties {
+            private controls: Controls;
+
+            constructor(fieldName: string) {
+                this.controls = new Controls(fieldName);
+            }
+
+            public getEditTypes(): UZA.EditTypeForPublicProperty {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            }
+
+        }
+    }
+}
+
+
+
+

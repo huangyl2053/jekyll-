@@ -6,6 +6,76 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (KaigoTeikeibun) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onChange_ddlTeikenbunShubetsu", {
+                get: function () {
+                    return "onChange_ddlTeikenbunShubetsu";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySB_Teikeibun", {
+                get: function () {
+                    return "onSelectBySB_Teikeibun";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnClose", {
+                get: function () {
+                    return "onClick_btnClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        KaigoTeikeibun.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "KaigoTeikeibun";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.KaigoTeikeibun = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ddlTeikenbunShubetsu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlTeikenbunShubetsu"));
+            };
+
+            Controls.prototype.dgTeikeibun = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTeikeibun"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        KaigoTeikeibun.Controls = Controls;
+    })(DBZ.KaigoTeikeibun || (DBZ.KaigoTeikeibun = {}));
+    var KaigoTeikeibun = DBZ.KaigoTeikeibun;
+
     var KaigoTeikeibun_Design = (function (_super) {
         __extends(KaigoTeikeibun_Design, _super);
         function KaigoTeikeibun_Design($parentElement, isDesignMode, fieldName) {

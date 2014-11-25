@@ -1,11 +1,111 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * JukyuShikakuShomeishoHakkoクラスのみで継承して使えます。
      */
+
+    export module JukyuShikakuShomeishoHakko {
+
+        export class Events {
+
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "JukyuShikakuShomeishoHakko";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public JukyuShikakuShomeishoHakko() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public txtKofuDate() : UZA.TextBoxFlexibleDate {
+
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKofuDate"));
+
+            }
+
+            public txtIdoYoteiDate() : UZA.TextBoxFlexibleDate {
+
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIdoYoteiDate"));
+
+            }
+
+            public txtYokaigoJotai() : UZA.TextBox {
+
+                return new UZA.TextBox(this.convFiledName("txtYokaigoJotai"));
+
+            }
+
+            public txtNinteiYukoKikan() : UZA.TextBoxDateRange {
+
+                return new UZA.TextBoxDateRange(this.convFiledName("txtNinteiYukoKikan"));
+
+            }
+
+            public txtShinseiDate() : UZA.TextBoxFlexibleDate {
+
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiDate"));
+
+            }
+
+            public lblNinteiShinsakaiIken() : UZA.Label {
+
+                return new UZA.Label(this.convFiledName("lblNinteiShinsakaiIken"));
+
+            }
+
+            public txtNinteiShinsakaiIken() : UZA.TextBoxMultiLine {
+
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtNinteiShinsakaiIken"));
+
+            }
+
+            public lblBiko() : UZA.Label {
+
+                return new UZA.Label(this.convFiledName("lblBiko"));
+
+            }
+
+            public txtBiko() : UZA.TextBoxMultiLine {
+
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtBiko"));
+
+            }
+
+            public chkJushoHihyoji() : UZA.CheckBoxList {
+
+                return new UZA.CheckBoxList(this.convFiledName("chkJushoHihyoji"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class JukyuShikakuShomeishoHakko_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

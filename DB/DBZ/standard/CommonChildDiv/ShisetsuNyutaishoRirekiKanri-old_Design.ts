@@ -1,11 +1,116 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+/// <reference path="ShisetsuJoho.ts" />
+
 
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * ShisetsuNyutaishoRirekiKanriクラスのみで継承して使えます。
      */
+
+    export module ShisetsuNyutaishoRirekiKanri {
+
+        export class Events {
+
+            public static get onSelectByModifyButton_dgShisetsuNyutaishoRireki(): string {
+                return "onSelectByModifyButton_dgShisetsuNyutaishoRireki";
+            }
+            public static get onClick_btnAddShisetsuNyutaisho(): string {
+                return "onClick_btnAddShisetsuNyutaisho";
+            }
+            public static get onSelectByDeleteButton_dgShisetsuNyutaishoRireki(): string {
+                return "onSelectByDeleteButton_dgShisetsuNyutaishoRireki";
+            }
+            public static get onChange_ddlTaishoJoho(): string {
+                return "onChange_ddlTaishoJoho";
+            }
+            public static get onNoRow_dgShisetsuNyutaishoRireki(): string {
+                return "onNoRow_dgShisetsuNyutaishoRireki";
+            }
+            public static get onClick_btnUpdateShisetsuNyutaisho(): string {
+                return "onClick_btnUpdateShisetsuNyutaisho";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "ShisetsuNyutaishoRirekiKanri";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public ShisetsuJoho() : DBZ.ShisetsuJoho.ModeController {
+                return new DBZ.ShisetsuJoho.ModeController("ShisetsuJoho");
+            }
+
+
+            public ShisetsuNyutaishoRirekiKanri() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public btnAddShisetsuNyutaisho() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnAddShisetsuNyutaisho"));
+
+            }
+
+            public dgShisetsuNyutaishoRireki() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgShisetsuNyutaishoRireki"));
+
+            }
+
+            public ShisetsuNyutaishoInput() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("ShisetsuNyutaishoInput"));
+
+            }
+
+            public ddlTaishoJoho() : UZA.DropDownList {
+
+                return new UZA.DropDownList(this.convFiledName("ddlTaishoJoho"));
+
+            }
+
+            public txtNyushoDate() : UZA.TextBoxFlexibleDate {
+
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNyushoDate"));
+
+            }
+
+            public txtTaishoDate() : UZA.TextBoxFlexibleDate {
+
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTaishoDate"));
+
+            }
+
+            public btnUpdateShisetsuNyutaisho() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnUpdateShisetsuNyutaisho"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class ShisetsuNyutaishoRirekiKanri_Design extends Uz.CommonChildDiv {
     
         public get InputPanelDisplayNone() {

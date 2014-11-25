@@ -6,6 +6,58 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (SogoShokaiIryoHokenKanyuInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnClose", {
+                get: function () {
+                    return "onClick_btnClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        SogoShokaiIryoHokenKanyuInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "SogoShokaiIryoHokenKanyuInfo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.SogoShokaiIryoHokenKanyuInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgSogoShokaiHokenKanyuList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgSogoShokaiHokenKanyuList"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        SogoShokaiIryoHokenKanyuInfo.Controls = Controls;
+    })(DBZ.SogoShokaiIryoHokenKanyuInfo || (DBZ.SogoShokaiIryoHokenKanyuInfo = {}));
+    var SogoShokaiIryoHokenKanyuInfo = DBZ.SogoShokaiIryoHokenKanyuInfo;
+
     var SogoShokaiIryoHokenKanyuInfo_Design = (function (_super) {
         __extends(SogoShokaiIryoHokenKanyuInfo_Design, _super);
         function SogoShokaiIryoHokenKanyuInfo_Design($parentElement, isDesignMode, fieldName) {

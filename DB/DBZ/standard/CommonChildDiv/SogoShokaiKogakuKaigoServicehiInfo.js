@@ -1,17 +1,40 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 var DBZ;
 (function (DBZ) {
-    var SogoShokaiKogakuKaigoServicehiInfo = (function (_super) {
-        __extends(SogoShokaiKogakuKaigoServicehiInfo, _super);
-        function SogoShokaiKogakuKaigoServicehiInfo() {
-            _super.apply(this, arguments);
-        }
-        return SogoShokaiKogakuKaigoServicehiInfo;
-    })(DBZ.SogoShokaiKogakuKaigoServicehiInfo_Design);
-    DBZ.SogoShokaiKogakuKaigoServicehiInfo = SogoShokaiKogakuKaigoServicehiInfo;
+    (function (SogoShokaiKogakuKaigoServicehiInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new SogoShokaiKogakuKaigoServicehiInfo.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        SogoShokaiKogakuKaigoServicehiInfo.ModeController = ModeController;
+    })(DBZ.SogoShokaiKogakuKaigoServicehiInfo || (DBZ.SogoShokaiKogakuKaigoServicehiInfo = {}));
+    var SogoShokaiKogakuKaigoServicehiInfo = DBZ.SogoShokaiKogakuKaigoServicehiInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiKogakuKaigoServicehiInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new SogoShokaiKogakuKaigoServicehiInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        SogoShokaiKogakuKaigoServicehiInfo.PublicProperties = PublicProperties;
+    })(DBZ.SogoShokaiKogakuKaigoServicehiInfo || (DBZ.SogoShokaiKogakuKaigoServicehiInfo = {}));
+    var SogoShokaiKogakuKaigoServicehiInfo = DBZ.SogoShokaiKogakuKaigoServicehiInfo;
 })(DBZ || (DBZ = {}));

@@ -32,3 +32,22 @@ var DBZ;
     })(DBZ.NenReiTotatsuSrchConInfo || (DBZ.NenReiTotatsuSrchConInfo = {}));
     var NenReiTotatsuSrchConInfo = DBZ.NenReiTotatsuSrchConInfo;
 })(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (NenReiTotatsuSrchConInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new NenReiTotatsuSrchConInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        NenReiTotatsuSrchConInfo.PublicProperties = PublicProperties;
+    })(DBZ.NenReiTotatsuSrchConInfo || (DBZ.NenReiTotatsuSrchConInfo = {}));
+    var NenReiTotatsuSrchConInfo = DBZ.NenReiTotatsuSrchConInfo;
+})(DBZ || (DBZ = {}));

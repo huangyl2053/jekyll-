@@ -6,6 +6,69 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (ShichosonSelector) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnReturn", {
+                get: function () {
+                    return "onClick_btnReturn";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnDecision", {
+                get: function () {
+                    return "onClick_btnDecision";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        ShichosonSelector.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ShichosonSelector";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ShichosonSelector = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgShichoson = function () {
+                return new UZA.DataGrid(this.convFiledName("dgShichoson"));
+            };
+
+            Controls.prototype.btnReturn = function () {
+                return new UZA.Button(this.convFiledName("btnReturn"));
+            };
+
+            Controls.prototype.btnDecision = function () {
+                return new UZA.Button(this.convFiledName("btnDecision"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ShichosonSelector.Controls = Controls;
+    })(DBZ.ShichosonSelector || (DBZ.ShichosonSelector = {}));
+    var ShichosonSelector = DBZ.ShichosonSelector;
+
     var ShichosonSelector_Design = (function (_super) {
         __extends(ShichosonSelector_Design, _super);
         function ShichosonSelector_Design($parentElement, isDesignMode, fieldName) {

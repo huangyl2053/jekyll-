@@ -6,6 +6,100 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (SetaiShotokuIchiran) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_Saihyoji", {
+                get: function () {
+                    return "onClick_Saihyoji";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_SetaiKakunin", {
+                get: function () {
+                    return "onClick_SetaiKakunin";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_Hikaku", {
+                get: function () {
+                    return "onClick_Hikaku";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        SetaiShotokuIchiran.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "SetaiShotokuIchiran";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.SetaiShotokuIchiran = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtSetaiIchiranKijunYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSetaiIchiranKijunYMD"));
+            };
+
+            Controls.prototype.txtSetaiIchiranKazeiNendo = function () {
+                return new UZA.TextBox(this.convFiledName("txtSetaiIchiranKazeiNendo"));
+            };
+
+            Controls.prototype.ddlSetaiIchiranKazeiNendo = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlSetaiIchiranKazeiNendo"));
+            };
+
+            Controls.prototype.btnSaiHyoji = function () {
+                return new UZA.Button(this.convFiledName("btnSaiHyoji"));
+            };
+
+            Controls.prototype.txtSetaiIchiranSetaiCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtSetaiIchiranSetaiCode"));
+            };
+
+            Controls.prototype.chkSetaiIchiranAll = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkSetaiIchiranAll"));
+            };
+
+            Controls.prototype.lblSetaiIchiranMsg = function () {
+                return new UZA.Label(this.convFiledName("lblSetaiIchiranMsg"));
+            };
+
+            Controls.prototype.btnNarabeteHyoji = function () {
+                return new UZA.Button(this.convFiledName("btnNarabeteHyoji"));
+            };
+
+            Controls.prototype.dgSetaiShotoku = function () {
+                return new UZA.DataGrid(this.convFiledName("dgSetaiShotoku"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        SetaiShotokuIchiran.Controls = Controls;
+    })(DBZ.SetaiShotokuIchiran || (DBZ.SetaiShotokuIchiran = {}));
+    var SetaiShotokuIchiran = DBZ.SetaiShotokuIchiran;
+
     var SetaiShotokuIchiran_Design = (function (_super) {
         __extends(SetaiShotokuIchiran_Design, _super);
         function SetaiShotokuIchiran_Design($parentElement, isDesignMode, fieldName) {

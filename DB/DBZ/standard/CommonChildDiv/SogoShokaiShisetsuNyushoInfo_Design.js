@@ -6,6 +6,82 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (SogoShokaiShisetsuNyushoInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnClose", {
+                get: function () {
+                    return "onClick_btnClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        SogoShokaiShisetsuNyushoInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "SogoShokaiShisetsuNyushoInfo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.SogoShokaiShisetsuNyushoInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtShisetsuBunrui = function () {
+                return new UZA.TextBox(this.convFiledName("txtShisetsuBunrui"));
+            };
+
+            Controls.prototype.txtShisetsuNyushoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShisetsuNyushoYMD"));
+            };
+
+            Controls.prototype.txtShisetsuTaishoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShisetsuTaishoYMD"));
+            };
+
+            Controls.prototype.txtShisetsuName = function () {
+                return new UZA.TextBox(this.convFiledName("txtShisetsuName"));
+            };
+
+            Controls.prototype.txtShisetsuJigyoshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtShisetsuJigyoshaNo"));
+            };
+
+            Controls.prototype.txtShisetsuJigyoshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtShisetsuJigyoshaName"));
+            };
+
+            Controls.prototype.txtShisetsuJigyoshaJusho = function () {
+                return new UZA.TextBox(this.convFiledName("txtShisetsuJigyoshaJusho"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        SogoShokaiShisetsuNyushoInfo.Controls = Controls;
+    })(DBZ.SogoShokaiShisetsuNyushoInfo || (DBZ.SogoShokaiShisetsuNyushoInfo = {}));
+    var SogoShokaiShisetsuNyushoInfo = DBZ.SogoShokaiShisetsuNyushoInfo;
+
     var SogoShokaiShisetsuNyushoInfo_Design = (function (_super) {
         __extends(SogoShokaiShisetsuNyushoInfo_Design, _super);
         function SogoShokaiShisetsuNyushoInfo_Design($parentElement, isDesignMode, fieldName) {

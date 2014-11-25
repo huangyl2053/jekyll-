@@ -1,11 +1,63 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * CompleteProcessクラスのみで継承して使えます。
      */
+
+    export module CompleteProcess {
+
+        export class Events {
+
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "CompleteProcess";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public CompleteProcess() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public CompleteProssessPadding() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("CompleteProssessPadding"));
+
+            }
+
+            public lblCompleteMessage() : UZA.Label {
+
+                return new UZA.Label(this.convFiledName("lblCompleteMessage"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class CompleteProcess_Design extends Uz.CommonChildDiv {
     
         public get lblCompleteMessage_text() {

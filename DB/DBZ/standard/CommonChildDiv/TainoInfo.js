@@ -1,17 +1,40 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 var DBZ;
 (function (DBZ) {
-    var TainoInfo = (function (_super) {
-        __extends(TainoInfo, _super);
-        function TainoInfo() {
-            _super.apply(this, arguments);
-        }
-        return TainoInfo;
-    })(DBZ.TainoInfo_Design);
-    DBZ.TainoInfo = TainoInfo;
+    (function (TainoInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new TainoInfo.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        TainoInfo.ModeController = ModeController;
+    })(DBZ.TainoInfo || (DBZ.TainoInfo = {}));
+    var TainoInfo = DBZ.TainoInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (TainoInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new TainoInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        TainoInfo.PublicProperties = PublicProperties;
+    })(DBZ.TainoInfo || (DBZ.TainoInfo = {}));
+    var TainoInfo = DBZ.TainoInfo;
 })(DBZ || (DBZ = {}));

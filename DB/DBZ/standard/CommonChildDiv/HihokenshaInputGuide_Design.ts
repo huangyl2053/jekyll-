@@ -1,11 +1,80 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+/// <reference path="HihokenshaFinder.ts" />
+
 
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * HihokenshaInputGuideクラスのみで継承して使えます。
      */
+
+    export module HihokenshaInputGuide {
+
+        export class Events {
+
+            public static get onClick_btnReturn(): string {
+                return "onClick_btnReturn";
+            }
+            public static get onClickBtnToSearch_HihokenshaFinder(): string {
+                return "onClickBtnToSearch_HihokenshaFinder";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "HihokenshaInputGuide";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public HihokenshaFinder() : DBZ.HihokenshaFinder.ModeController {
+                return new DBZ.HihokenshaFinder.ModeController("HihokenshaFinder");
+            }
+
+
+            public HihokenshaInputGuide() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public lblSearchResultOfHihokensha() : UZA.Label {
+
+                return new UZA.Label(this.convFiledName("lblSearchResultOfHihokensha"));
+
+            }
+
+            public dgSearchResultOfHihokensha() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgSearchResultOfHihokensha"));
+
+            }
+
+            public btnReturn() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnReturn"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class HihokenshaInputGuide_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

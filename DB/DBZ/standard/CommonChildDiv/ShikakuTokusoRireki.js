@@ -248,3 +248,22 @@ var DBZ;
     })(DBZ.ShikakuTokusoRireki || (DBZ.ShikakuTokusoRireki = {}));
     var ShikakuTokusoRireki = DBZ.ShikakuTokusoRireki;
 })(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (ShikakuTokusoRireki) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ShikakuTokusoRireki.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ShikakuTokusoRireki.PublicProperties = PublicProperties;
+    })(DBZ.ShikakuTokusoRireki || (DBZ.ShikakuTokusoRireki = {}));
+    var ShikakuTokusoRireki = DBZ.ShikakuTokusoRireki;
+})(DBZ || (DBZ = {}));

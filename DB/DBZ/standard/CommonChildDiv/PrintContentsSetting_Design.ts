@@ -1,5 +1,6 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBZ {
     /**
@@ -36,58 +37,16 @@ module DBZ {
             }
         }
         
-        public get PrintContentsSetting_eraseBorderTop() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"];
+        public get PrintContentsSetting_eraseBorder() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
         }
         
-        public set PrintContentsSetting_eraseBorderTop(value) {
+        public set PrintContentsSetting_eraseBorder(value) {
             if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
                  Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"] = value;
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
             } else {
-                this.layout.items[0]["eraseBorderTop"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get PrintContentsSetting_eraseBorderBottom() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"];
-        }
-        
-        public set PrintContentsSetting_eraseBorderBottom(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderBottom"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get PrintContentsSetting_eraseBorderRight() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"];
-        }
-        
-        public set PrintContentsSetting_eraseBorderRight(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderRight"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get PrintContentsSetting_eraseBorderLeft() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"];
-        }
-        
-        public set PrintContentsSetting_eraseBorderLeft(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderLeft"] = value;
+                this.layout.items[0]["eraseBorder"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -104,10 +63,7 @@ module DBZ {
             super.registProperty();
             Uz.JSControlUtil.registProperty("txtSendData_displayNone");
             Uz.JSControlUtil.registProperty("PrintContentsSetting_title");
-            Uz.JSControlUtil.registProperty("PrintContentsSetting_eraseBorderTop");
-            Uz.JSControlUtil.registProperty("PrintContentsSetting_eraseBorderBottom");
-            Uz.JSControlUtil.registProperty("PrintContentsSetting_eraseBorderRight");
-            Uz.JSControlUtil.registProperty("PrintContentsSetting_eraseBorderLeft");
+            Uz.JSControlUtil.registProperty("PrintContentsSetting_eraseBorder");
         }
         
         /**
@@ -119,10 +75,7 @@ module DBZ {
             var editablePropertyInfo = super.getEditablePropertyInfo();
             editablePropertyInfo["txtSendData_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["PrintContentsSetting_title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
-            editablePropertyInfo["PrintContentsSetting_eraseBorderTop"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderTop"];
-            editablePropertyInfo["PrintContentsSetting_eraseBorderBottom"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderBottom"];
-            editablePropertyInfo["PrintContentsSetting_eraseBorderRight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderRight"];
-            editablePropertyInfo["PrintContentsSetting_eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
+            editablePropertyInfo["PrintContentsSetting_eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
             
             return editablePropertyInfo;
         }
@@ -136,7 +89,7 @@ module DBZ {
      "fieldName": "txtIssueDate",
      "items": [],
      "controlType": "TextBoxDate",
-     "width": "85",
+     "width": "85px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -162,21 +115,23 @@ module DBZ {
      "onChange": "",
      "onKeyPress": "",
      "text": "",
+     "value": "",
      "labelLText": "発行日",
      "labelRText": "",
-     "labelLWidth": "55",
+     "labelLWidth": "55px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "ymdKubun": 2,
      "displayFormat": 0,
-     "value": ""
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtSendDate",
      "items": [],
      "controlType": "TextBoxDate",
-     "width": "85",
+     "width": "85px",
      "visible": true,
      "displayNone": true,
      "disabled": false,
@@ -202,15 +157,17 @@ module DBZ {
      "onChange": "",
      "onKeyPress": "",
      "text": "",
+     "value": "",
      "labelLText": "送付日",
      "labelRText": "",
-     "labelLWidth": "55",
+     "labelLWidth": "55px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "ymdKubun": 2,
      "displayFormat": 0,
-     "value": ""
+     "permitCharactor": "./_-"
     }
    ],
    "controlType": "Panel",
@@ -236,11 +193,7 @@ module DBZ {
    "marginBottom": "Default",
    "isOpen": true,
    "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "PrintingContentsSetting"
-    }
-   ],
+   "postParameterPanelNames": [],
    "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
@@ -252,7 +205,8 @@ module DBZ {
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": "CommonChildDiv",
@@ -267,16 +221,17 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": "0",
- "marginRight": "0",
+ "marginLeft": "0em",
+ "marginRight": "0em",
  "selectControlID": "defaultLayout",
  "helpMessageID": "",
  "jpControlName": "",
  "relation": [],
+ "packageName": "",
  "businessId": "DBZ",
  "controlName": "PrintContentsSetting",
- "marginTop": 0,
- "marginBottom": 0,
+ "marginTop": "0em",
+ "marginBottom": "0em",
  "originalProperty": [
   {
    "publicChildFieldName": "txtSendDate",
@@ -290,23 +245,8 @@ module DBZ {
   },
   {
    "publicChildFieldName": "PrintContentsSetting",
-   "publicChildProperty": "eraseBorderTop",
-   "newPropertyName": "PrintContentsSetting_eraseBorderTop"
-  },
-  {
-   "publicChildFieldName": "PrintContentsSetting",
-   "publicChildProperty": "eraseBorderBottom",
-   "newPropertyName": "PrintContentsSetting_eraseBorderBottom"
-  },
-  {
-   "publicChildFieldName": "PrintContentsSetting",
-   "publicChildProperty": "eraseBorderRight",
-   "newPropertyName": "PrintContentsSetting_eraseBorderRight"
-  },
-  {
-   "publicChildFieldName": "PrintContentsSetting",
-   "publicChildProperty": "eraseBorderLeft",
-   "newPropertyName": "PrintContentsSetting_eraseBorderLeft"
+   "publicChildProperty": "eraseBorder",
+   "newPropertyName": "PrintContentsSetting_eraseBorder"
   }
  ],
  "dataPassingForDialog": [
@@ -318,8 +258,55 @@ module DBZ {
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": "",
  "canTransferEvent": true,
- "heightForDialog": "M"
+ "heightForDialog": "M",
+ "firstFocusFieldName": "",
+ "lastFocusFieldName": "",
+ "modes": [],
+ "publicEvents": [],
+ "publicEventsAlias": []
 }        
     }
+
+     export module PrintContentsSetting {
+
+        export class Events {
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static myType(): string {
+                return "PrintContentsSetting";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + DBZ.PrintContentsSetting.Controls.myType();
+            }
+
+            public convFiledName(fieldName: string): string {
+                return this._myName + "_" + DBZ.PrintContentsSetting.Controls.myType() + "_" + fieldName;
+            }
+
+            public PrintContentsSetting(): UZA.Panel {
+                return new UZA.Panel(this.convFiledNameSelf());
+            }
+
+            public txtIssueDate(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtIssueDate"));
+            }
+
+            public txtSendDate(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtSendDate"));
+            }
+
+        }
+
+     }
+
 }
 

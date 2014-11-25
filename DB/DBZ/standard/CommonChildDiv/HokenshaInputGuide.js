@@ -1,17 +1,40 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 var DBZ;
 (function (DBZ) {
-    var HokenshaInputGuide = (function (_super) {
-        __extends(HokenshaInputGuide, _super);
-        function HokenshaInputGuide() {
-            _super.apply(this, arguments);
-        }
-        return HokenshaInputGuide;
-    })(DBZ.HokenshaInputGuide_Design);
-    DBZ.HokenshaInputGuide = HokenshaInputGuide;
+    (function (HokenshaInputGuide) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HokenshaInputGuide.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        HokenshaInputGuide.ModeController = ModeController;
+    })(DBZ.HokenshaInputGuide || (DBZ.HokenshaInputGuide = {}));
+    var HokenshaInputGuide = DBZ.HokenshaInputGuide;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (HokenshaInputGuide) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new HokenshaInputGuide.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        HokenshaInputGuide.PublicProperties = PublicProperties;
+    })(DBZ.HokenshaInputGuide || (DBZ.HokenshaInputGuide = {}));
+    var HokenshaInputGuide = DBZ.HokenshaInputGuide;
 })(DBZ || (DBZ = {}));

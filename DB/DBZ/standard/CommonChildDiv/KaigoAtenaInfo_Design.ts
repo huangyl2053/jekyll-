@@ -1,11 +1,56 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+/// <reference path="../d.ts/URACommonChildDiv.d.ts" />
+
 
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * KaigoAtenaInfoクラスのみで継承して使えます。
      */
+
+    export module KaigoAtenaInfo {
+
+        export class Events {
+
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "KaigoAtenaInfo";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public atenaInfo() : URA.AtenaShokaiSimple.ModeController {
+                return new URA.AtenaShokaiSimple.ModeController("atenaInfo");
+            }
+
+
+            public KaigoAtenaInfo() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class KaigoAtenaInfo_Design extends Uz.CommonChildDiv {
     
         public get atenaInfo_title() {

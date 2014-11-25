@@ -6,6 +6,76 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (ShoKaishuKirokuKanri) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onSelectByDblClick_dgShoKaishuJokyo", {
+                get: function () {
+                    return "onSelectByDblClick_dgShoKaishuJokyo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnUpdateShoKaishuJokyo", {
+                get: function () {
+                    return "onClick_btnUpdateShoKaishuJokyo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySelectButton_dgShoKaishuJokyo", {
+                get: function () {
+                    return "onSelectBySelectButton_dgShoKaishuJokyo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        ShoKaishuKirokuKanri.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ShoKaishuKirokuKanri";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ShoKaishuJokyoList = function () {
+                return new DBZ.ShoKaishuJokyoList.ModeController("ShoKaishuJokyoList");
+            };
+
+            Controls.prototype.ShoKaishuJokyoShosai = function () {
+                return new DBZ.ShoKaishuJokyoShosai.ModeController("ShoKaishuJokyoShosai");
+            };
+
+            Controls.prototype.ShoKaishuKirokuKanri = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnUpdateShoKaishuJokyo = function () {
+                return new UZA.Button(this.convFiledName("btnUpdateShoKaishuJokyo"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ShoKaishuKirokuKanri.Controls = Controls;
+    })(DBZ.ShoKaishuKirokuKanri || (DBZ.ShoKaishuKirokuKanri = {}));
+    var ShoKaishuKirokuKanri = DBZ.ShoKaishuKirokuKanri;
+
     var ShoKaishuKirokuKanri_Design = (function (_super) {
         __extends(ShoKaishuKirokuKanri_Design, _super);
         function ShoKaishuKirokuKanri_Design($parentElement, isDesignMode, fieldName) {

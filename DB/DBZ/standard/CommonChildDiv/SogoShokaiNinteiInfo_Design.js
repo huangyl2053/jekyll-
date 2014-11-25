@@ -6,6 +6,154 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (SogoShokaiNinteiInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnClose", {
+                get: function () {
+                    return "onClick_btnClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        SogoShokaiNinteiInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "SogoShokaiNinteiInfo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.SogoShokaiNinteiInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtNinteiShinseiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiShinseiYMD"));
+            };
+
+            Controls.prototype.txtNinteiShinseiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiShinseiKubun"));
+            };
+
+            Controls.prototype.txtNinteiYukoKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiYukoKubun"));
+            };
+
+            Controls.prototype.txtNinteiChosaJissiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaJissiYMD"));
+            };
+
+            Controls.prototype.txtNinteiChosaJuryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaJuryoYMD"));
+            };
+
+            Controls.prototype.txtNinteiChosaKanryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaKanryoYMD"));
+            };
+
+            Controls.prototype.txtNinteiChosaItakusaki = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiChosaItakusaki"));
+            };
+
+            Controls.prototype.txtNinteiChosain = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiChosain"));
+            };
+
+            Controls.prototype.txtNinteiShujiiIryoKikan = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiShujiiIryoKikan"));
+            };
+
+            Controls.prototype.txtNinteiShujii = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiShujii"));
+            };
+
+            Controls.prototype.txtNinteiIkenshoJuryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiIkenshoJuryoYMD"));
+            };
+
+            Controls.prototype.txtNinteiIkenshoKanryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiIkenshoKanryoYMD"));
+            };
+
+            Controls.prototype.txtNinteiIchijiHantei = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiIchijiHantei"));
+            };
+
+            Controls.prototype.txtNinteiIchijiHanteiNinchi = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiIchijiHanteiNinchi"));
+            };
+
+            Controls.prototype.txtNinteiIchijiHanteiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiIchijiHanteiYMD"));
+            };
+
+            Controls.prototype.txtNinteiIchijiKanryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiIchijiKanryoYMD"));
+            };
+
+            Controls.prototype.txtNinteiNinteiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiNinteiYMD"));
+            };
+
+            Controls.prototype.txtNinteiJotaiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiJotaiKubun"));
+            };
+
+            Controls.prototype.txtNinteiYukoKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtNinteiYukoKikan"));
+            };
+
+            Controls.prototype.txtNinteiIdoJiyu = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiIdoJiyu"));
+            };
+
+            Controls.prototype.txtNinteiIdoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiIdoYMD"));
+            };
+
+            Controls.prototype.txtNinteiSoshitsuYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiSoshitsuYMD"));
+            };
+
+            Controls.prototype.txtNinteiTorikeshiRiyu = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiTorikeshiRiyu"));
+            };
+
+            Controls.prototype.txtNinteiTorikeshiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiTorikeshiYMD"));
+            };
+
+            Controls.prototype.txtNinteiTokuteiShippei = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiTokuteiShippei"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        SogoShokaiNinteiInfo.Controls = Controls;
+    })(DBZ.SogoShokaiNinteiInfo || (DBZ.SogoShokaiNinteiInfo = {}));
+    var SogoShokaiNinteiInfo = DBZ.SogoShokaiNinteiInfo;
+
     var SogoShokaiNinteiInfo_Design = (function (_super) {
         __extends(SogoShokaiNinteiInfo_Design, _super);
         function SogoShokaiNinteiInfo_Design($parentElement, isDesignMode, fieldName) {

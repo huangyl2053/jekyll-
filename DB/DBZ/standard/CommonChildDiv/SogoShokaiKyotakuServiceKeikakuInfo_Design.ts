@@ -1,11 +1,114 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * SogoShokaiKyotakuServiceKeikakuInfoクラスのみで継承して使えます。
      */
+
+    export module SogoShokaiKyotakuServiceKeikakuInfo {
+
+        export class Events {
+
+            public static get onClick_btnClose(): string {
+                return "onClick_btnClose";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "SogoShokaiKyotakuServiceKeikakuInfo";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public SogoShokaiKyotakuServiceKeikakuInfo() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public txtKeikakuTodokedeYMD() : UZA.TextBoxDate {
+
+                return new UZA.TextBoxDate(this.convFiledName("txtKeikakuTodokedeYMD"));
+
+            }
+
+            public txtKeikakuHenkoYMD() : UZA.TextBoxDate {
+
+                return new UZA.TextBoxDate(this.convFiledName("txtKeikakuHenkoYMD"));
+
+            }
+
+            public txtKeikakuJigyoshaShurui() : UZA.TextBox {
+
+                return new UZA.TextBox(this.convFiledName("txtKeikakuJigyoshaShurui"));
+
+            }
+
+            public txtKeikakuJigyoshaNo() : UZA.TextBoxCode {
+
+                return new UZA.TextBoxCode(this.convFiledName("txtKeikakuJigyoshaNo"));
+
+            }
+
+            public txtKeikakuJigyoshaName() : UZA.TextBox {
+
+                return new UZA.TextBox(this.convFiledName("txtKeikakuJigyoshaName"));
+
+            }
+
+            public txtKeikakuServiceShurui() : UZA.TextBox {
+
+                return new UZA.TextBox(this.convFiledName("txtKeikakuServiceShurui"));
+
+            }
+
+            public txtKeikakuSakuseiKubun() : UZA.TextBox {
+
+                return new UZA.TextBox(this.convFiledName("txtKeikakuSakuseiKubun"));
+
+            }
+
+            public txtKeikakuYM() : UZA.TextBoxDate {
+
+                return new UZA.TextBoxDate(this.convFiledName("txtKeikakuYM"));
+
+            }
+
+            public txtKeikakuKikan() : UZA.TextBoxDateRange {
+
+                return new UZA.TextBoxDateRange(this.convFiledName("txtKeikakuKikan"));
+
+            }
+
+            public btnClose() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnClose"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class SogoShokaiKyotakuServiceKeikakuInfo_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

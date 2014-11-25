@@ -1,5 +1,6 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBZ {
     /**
@@ -22,58 +23,16 @@ module DBZ {
             }
         }
         
-        public get eraseBorderTop() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"];
+        public get eraseBorder() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
         }
         
-        public set eraseBorderTop(value) {
+        public set eraseBorder(value) {
             if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
                  Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"] = value;
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
             } else {
-                this.layout.items[0]["eraseBorderTop"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderBottom() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"];
-        }
-        
-        public set eraseBorderBottom(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderBottom"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderRight() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"];
-        }
-        
-        public set eraseBorderRight(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderRight"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderLeft() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"];
-        }
-        
-        public set eraseBorderLeft(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderLeft"] = value;
+                this.layout.items[0]["eraseBorder"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -103,10 +62,7 @@ module DBZ {
         public registProperty() {
             super.registProperty();
             Uz.JSControlUtil.registProperty("title");
-            Uz.JSControlUtil.registProperty("eraseBorderTop");
-            Uz.JSControlUtil.registProperty("eraseBorderBottom");
-            Uz.JSControlUtil.registProperty("eraseBorderRight");
-            Uz.JSControlUtil.registProperty("eraseBorderLeft");
+            Uz.JSControlUtil.registProperty("eraseBorder");
             Uz.JSControlUtil.registProperty("panelDisplay");
         }
         
@@ -118,10 +74,7 @@ module DBZ {
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
             editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
-            editablePropertyInfo["eraseBorderTop"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderTop"];
-            editablePropertyInfo["eraseBorderBottom"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderBottom"];
-            editablePropertyInfo["eraseBorderRight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderRight"];
-            editablePropertyInfo["eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
+            editablePropertyInfo["eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
             editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
             
             return editablePropertyInfo;
@@ -136,7 +89,7 @@ module DBZ {
      "fieldName": "txtKinyuKikanCode",
      "items": [],
      "controlType": "TextBoxCode",
-     "width": "32",
+     "width": "32px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -153,11 +106,7 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
      "required": false,
-     "labelLText": "金融機関",
-     "labelLWidth": "70",
-     "labelLAlign": 2,
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -168,12 +117,16 @@ module DBZ {
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
+     "onChange": "",
      "onKeyPress": "",
      "text": "",
      "suggest": [],
      "value": "",
+     "labelLText": "金融機関",
      "labelRText": "",
+     "labelLWidth": "70px",
      "labelRWidth": "S",
+     "labelLAlign": 2,
      "labelRAlign": 0,
      "decorationClass": "",
      "permitCharactor": "",
@@ -183,7 +136,7 @@ module DBZ {
      "fieldName": "txtKinyuKikanName",
      "items": [],
      "controlType": "TextBox",
-     "width": "220",
+     "width": "220px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -194,17 +147,13 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "-0.2",
+     "marginLeft": "-0.2em",
      "marginRight": "XS",
      "selectControlID": "txtKinyuKikanName_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
      "required": false,
-     "labelLText": "",
-     "labelLWidth": "S",
-     "labelLAlign": 2,
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -215,12 +164,16 @@ module DBZ {
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
+     "onChange": "",
      "onKeyPress": "",
      "text": "",
      "suggest": [],
      "value": "",
+     "labelLText": "",
      "labelRText": "",
+     "labelLWidth": "S",
      "labelRWidth": "S",
+     "labelLAlign": 2,
      "labelRAlign": 0,
      "decorationClass": "",
      "permitCharactor": ""
@@ -229,7 +182,7 @@ module DBZ {
      "fieldName": "radKozaShubetsu",
      "items": [],
      "controlType": "RadioButton",
-     "width": "210",
+     "width": "210px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -245,8 +198,14 @@ module DBZ {
      "selectControlID": "radKozaShubetsu_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
+     "required": false,
      "onChange": "",
-     "selectedItem": null,
+     "labelLText": "口座種別",
+     "labelLWidth": "70px",
+     "labelLAlign": 2,
+     "onClick": "",
+     "icon": [],
      "dataSource": [
       {
        "key": "futsu",
@@ -261,21 +220,16 @@ module DBZ {
        "value": "その他"
       }
      ],
-     "required": false,
-     "onClick": "",
+     "selectedItem": null,
      "newLineItemNumber": 3,
      "spaceSize": "S",
-     "labelLText": "口座種別",
-     "labelLWidth": "70",
-     "labelLAlign": 2,
-     "disabledItem": [],
-     "icon": []
+     "disabledItem": []
     },
     {
      "fieldName": "txtKozaMeigininKana",
      "items": [],
      "controlType": "TextBox",
-     "width": "250",
+     "width": "250px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -286,17 +240,13 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
+     "marginLeft": "0em",
      "marginRight": "XS",
      "selectControlID": "txtKozaMeigininKana_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
      "required": false,
-     "labelLText": "口座名義人",
-     "labelLWidth": "90",
-     "labelLAlign": 2,
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -307,12 +257,16 @@ module DBZ {
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
+     "onChange": "",
      "onKeyPress": "",
      "text": "",
      "suggest": [],
      "value": "",
+     "labelLText": "口座名義人",
      "labelRText": "",
+     "labelLWidth": "90px",
      "labelRWidth": "S",
+     "labelLAlign": 2,
      "labelRAlign": 0,
      "decorationClass": "",
      "permitCharactor": ""
@@ -321,7 +275,7 @@ module DBZ {
      "fieldName": "txtKinyuKikanBrunchCode",
      "items": [],
      "controlType": "TextBoxCode",
-     "width": "32",
+     "width": "32px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -338,11 +292,7 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
      "required": false,
-     "labelLText": "支店",
-     "labelLWidth": "70",
-     "labelLAlign": 2,
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -353,12 +303,16 @@ module DBZ {
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
+     "onChange": "",
      "onKeyPress": "",
      "text": "",
      "suggest": [],
      "value": "",
+     "labelLText": "支店",
      "labelRText": "",
+     "labelLWidth": "70px",
      "labelRWidth": "S",
+     "labelLAlign": 2,
      "labelRAlign": 0,
      "decorationClass": "",
      "permitCharactor": "",
@@ -368,7 +322,7 @@ module DBZ {
      "fieldName": "txtKinyuKikanBrunchName",
      "items": [],
      "controlType": "TextBox",
-     "width": "220",
+     "width": "220px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -379,17 +333,13 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "-0.2",
+     "marginLeft": "-0.2em",
      "marginRight": "XS",
      "selectControlID": "txtKinyuKikanBrunchName_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
      "required": false,
-     "labelLText": "",
-     "labelLWidth": "S",
-     "labelLAlign": 2,
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -400,12 +350,16 @@ module DBZ {
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
+     "onChange": "",
      "onKeyPress": "",
      "text": "",
      "suggest": [],
      "value": "",
+     "labelLText": "",
      "labelRText": "",
+     "labelLWidth": "S",
      "labelRWidth": "S",
+     "labelLAlign": 2,
      "labelRAlign": 0,
      "decorationClass": "",
      "permitCharactor": ""
@@ -414,7 +368,7 @@ module DBZ {
      "fieldName": "txtKozaNo",
      "items": [],
      "controlType": "TextBoxCode",
-     "width": "60",
+     "width": "60px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -431,11 +385,7 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
      "required": false,
-     "labelLText": "口座番号",
-     "labelLWidth": "70",
-     "labelLAlign": 2,
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -446,12 +396,16 @@ module DBZ {
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
+     "onChange": "",
      "onKeyPress": "",
      "text": "",
      "suggest": [],
      "value": "",
+     "labelLText": "口座番号",
      "labelRText": "",
+     "labelLWidth": "70px",
      "labelRWidth": "S",
+     "labelLAlign": 2,
      "labelRAlign": 0,
      "decorationClass": "",
      "permitCharactor": "",
@@ -461,7 +415,7 @@ module DBZ {
      "fieldName": "txtKozaMeiginin",
      "items": [],
      "controlType": "TextBox",
-     "width": "250",
+     "width": "250px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -472,17 +426,13 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "14.8",
+     "marginLeft": "14.8em",
      "marginRight": "XS",
      "selectControlID": "txtKozaMeiginin_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
      "required": false,
-     "labelLText": "",
-     "labelLWidth": "80",
-     "labelLAlign": 2,
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -493,19 +443,23 @@ module DBZ {
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
+     "onChange": "",
      "onKeyPress": "",
      "text": "",
      "suggest": [],
      "value": "",
+     "labelLText": "",
      "labelRText": "",
+     "labelLWidth": "80px",
      "labelRWidth": "S",
+     "labelLAlign": 2,
      "labelRAlign": 0,
      "decorationClass": "",
      "permitCharactor": ""
     }
    ],
    "controlType": "Panel",
-   "width": "1013",
+   "width": "1013px",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -516,8 +470,8 @@ module DBZ {
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
+   "marginLeft": "0em",
+   "marginRight": "0em",
    "selectControlID": "KozaPayment",
    "helpMessageID": "",
    "jpControlName": "",
@@ -527,26 +481,20 @@ module DBZ {
    "marginBottom": "Default",
    "isOpen": true,
    "canOpenAndClose": false,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "YoguKonyuhiShikyuShinseiPaymentMethod"
-    }
-   ],
+   "postParameterPanelNames": [],
    "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": "CommonChildDiv",
@@ -561,16 +509,17 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": "0",
- "marginRight": "0",
+ "marginLeft": "0em",
+ "marginRight": "0em",
  "selectControlID": "defaultLayout",
  "helpMessageID": "",
  "jpControlName": "",
  "relation": [],
+ "packageName": "",
  "businessId": "DBZ",
  "controlName": "KozaPayment",
- "marginTop": 0,
- "marginBottom": 0,
+ "marginTop": "0em",
+ "marginBottom": "0em",
  "originalProperty": [
   {
    "publicChildFieldName": "KozaPayment",
@@ -579,23 +528,8 @@ module DBZ {
   },
   {
    "publicChildFieldName": "KozaPayment",
-   "publicChildProperty": "eraseBorderTop",
-   "newPropertyName": "eraseBorderTop"
-  },
-  {
-   "publicChildFieldName": "KozaPayment",
-   "publicChildProperty": "eraseBorderBottom",
-   "newPropertyName": "eraseBorderBottom"
-  },
-  {
-   "publicChildFieldName": "KozaPayment",
-   "publicChildProperty": "eraseBorderRight",
-   "newPropertyName": "eraseBorderRight"
-  },
-  {
-   "publicChildFieldName": "KozaPayment",
-   "publicChildProperty": "eraseBorderLeft",
-   "newPropertyName": "eraseBorderLeft"
+   "publicChildProperty": "eraseBorder",
+   "newPropertyName": "eraseBorder"
   },
   {
    "publicChildFieldName": "KozaPayment",
@@ -605,8 +539,81 @@ module DBZ {
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "",
+ "canTransferEvent": true,
+ "heightForDialog": "M",
+ "firstFocusFieldName": "",
+ "lastFocusFieldName": "",
+ "modes": [],
+ "publicEvents": [],
+ "publicEventsAlias": []
 }        
     }
+
+     export module KozaPayment {
+
+        export class Events {
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static myType(): string {
+                return "KozaPayment";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + DBZ.KozaPayment.Controls.myType();
+            }
+
+            public convFiledName(fieldName: string): string {
+                return this._myName + "_" + DBZ.KozaPayment.Controls.myType() + "_" + fieldName;
+            }
+
+            public KozaPayment(): UZA.Panel {
+                return new UZA.Panel(this.convFiledNameSelf());
+            }
+
+            public txtKinyuKikanCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtKinyuKikanCode"));
+            }
+
+            public txtKinyuKikanName(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtKinyuKikanName"));
+            }
+
+            public radKozaShubetsu(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKozaShubetsu"));
+            }
+
+            public txtKozaMeigininKana(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtKozaMeigininKana"));
+            }
+
+            public txtKinyuKikanBrunchCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtKinyuKikanBrunchCode"));
+            }
+
+            public txtKinyuKikanBrunchName(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtKinyuKikanBrunchName"));
+            }
+
+            public txtKozaNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtKozaNo"));
+            }
+
+            public txtKozaMeiginin(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtKozaMeiginin"));
+            }
+
+        }
+
+     }
+
 }
 

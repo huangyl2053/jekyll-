@@ -1,11 +1,75 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * KoshinKakuninDialogクラスのみで継承して使えます。
      */
+
+    export module KoshinKakuninDialog {
+
+        export class Events {
+
+            public static get CloseOK(): string {
+                return "CloseOK";
+            }
+            public static get CloseCancel(): string {
+                return "CloseCancel";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "KoshinKakuninDialog";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public KoshinKakuninDialog() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public lblKoshinMassage() : UZA.Label {
+
+                return new UZA.Label(this.convFiledName("lblKoshinMassage"));
+
+            }
+
+            public btnYes() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnYes"));
+
+            }
+
+            public btnNo() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnNo"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class KoshinKakuninDialog_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

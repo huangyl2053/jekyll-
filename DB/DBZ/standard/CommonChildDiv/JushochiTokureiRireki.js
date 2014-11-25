@@ -124,7 +124,7 @@ var DBZ;
 
                     columns[10].visible = false;
 
-                    columns[11].width = "560";
+                    columns[11].width = 560;
 
                     gridSetting.columns = columns;
 
@@ -151,7 +151,7 @@ var DBZ;
 
                     columns[10].visible = false;
 
-                    columns[11].width = "560";
+                    columns[11].width = 560;
 
                     gridSetting.columns = columns;
 
@@ -186,7 +186,7 @@ var DBZ;
 
                     columns[10].visible = false;
 
-                    columns[11].width = "560";
+                    columns[11].width = 560;
 
                     gridSetting.columns = columns;
 
@@ -214,7 +214,7 @@ var DBZ;
 
                     columns[10].visible = false;
 
-                    columns[11].width = "560";
+                    columns[11].width = 560;
 
                     gridSetting.columns = columns;
 
@@ -242,7 +242,7 @@ var DBZ;
 
                     columns[10].visible = false;
 
-                    columns[11].width = "560";
+                    columns[11].width = 560;
 
                     gridSetting.columns = columns;
 
@@ -255,6 +255,25 @@ var DBZ;
             Modes.TekiyoJogaiTeiseiDisplayMode = TekiyoJogaiTeiseiDisplayMode;
         })(JushochiTokureiRireki.Modes || (JushochiTokureiRireki.Modes = {}));
         var Modes = JushochiTokureiRireki.Modes;
+    })(DBZ.JushochiTokureiRireki || (DBZ.JushochiTokureiRireki = {}));
+    var JushochiTokureiRireki = DBZ.JushochiTokureiRireki;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (JushochiTokureiRireki) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new JushochiTokureiRireki.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        JushochiTokureiRireki.PublicProperties = PublicProperties;
     })(DBZ.JushochiTokureiRireki || (DBZ.JushochiTokureiRireki = {}));
     var JushochiTokureiRireki = DBZ.JushochiTokureiRireki;
 })(DBZ || (DBZ = {}));

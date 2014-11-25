@@ -1,11 +1,76 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+/// <reference path="ShoKaishuJokyoList.ts" />
+/// <reference path="ShoKaishuJokyoShosai.ts" />
+
 
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * ShoKaishuKirokuKanriクラスのみで継承して使えます。
      */
+
+    export module ShoKaishuKirokuKanri {
+
+        export class Events {
+
+            public static get onSelectByDblClick_dgShoKaishuJokyo(): string {
+                return "onSelectByDblClick_dgShoKaishuJokyo";
+            }
+            public static get onClick_btnUpdateShoKaishuJokyo(): string {
+                return "onClick_btnUpdateShoKaishuJokyo";
+            }
+            public static get onSelectBySelectButton_dgShoKaishuJokyo(): string {
+                return "onSelectBySelectButton_dgShoKaishuJokyo";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "ShoKaishuKirokuKanri";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public ShoKaishuJokyoList() : DBZ.ShoKaishuJokyoList.ModeController {
+                return new DBZ.ShoKaishuJokyoList.ModeController("ShoKaishuJokyoList");
+            }
+
+            public ShoKaishuJokyoShosai() : DBZ.ShoKaishuJokyoShosai.ModeController {
+                return new DBZ.ShoKaishuJokyoShosai.ModeController("ShoKaishuJokyoShosai");
+            }
+
+
+            public ShoKaishuKirokuKanri() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public btnUpdateShoKaishuJokyo() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnUpdateShoKaishuJokyo"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class ShoKaishuKirokuKanri_Design extends Uz.CommonChildDiv {
     
         public get onBlur_txtKaishuDate() {

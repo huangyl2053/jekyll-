@@ -1,5 +1,6 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBZ {
     /**
@@ -22,58 +23,16 @@ module DBZ {
             }
         }
         
-        public get eraseBorderTop() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"];
+        public get eraseBorder() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
         }
         
-        public set eraseBorderTop(value) {
+        public set eraseBorder(value) {
             if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
                  Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"] = value;
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
             } else {
-                this.layout.items[0]["eraseBorderTop"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderBottom() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"];
-        }
-        
-        public set eraseBorderBottom(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderBottom"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderRight() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"];
-        }
-        
-        public set eraseBorderRight(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderRight"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderLeft() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"];
-        }
-        
-        public set eraseBorderLeft(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderLeft"] = value;
+                this.layout.items[0]["eraseBorder"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -103,10 +62,7 @@ module DBZ {
         public registProperty() {
             super.registProperty();
             Uz.JSControlUtil.registProperty("title");
-            Uz.JSControlUtil.registProperty("eraseBorderTop");
-            Uz.JSControlUtil.registProperty("eraseBorderBottom");
-            Uz.JSControlUtil.registProperty("eraseBorderRight");
-            Uz.JSControlUtil.registProperty("eraseBorderLeft");
+            Uz.JSControlUtil.registProperty("eraseBorder");
             Uz.JSControlUtil.registProperty("panelDisplay");
         }
         
@@ -118,10 +74,7 @@ module DBZ {
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
             editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
-            editablePropertyInfo["eraseBorderTop"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderTop"];
-            editablePropertyInfo["eraseBorderBottom"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderBottom"];
-            editablePropertyInfo["eraseBorderRight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderRight"];
-            editablePropertyInfo["eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
+            editablePropertyInfo["eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
             editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
             
             return editablePropertyInfo;
@@ -136,7 +89,7 @@ module DBZ {
      "fieldName": "dgJudgementResult",
      "items": [],
      "controlType": "DataGrid",
-     "width": "980",
+     "width": "980px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -343,7 +296,8 @@ module DBZ {
      "sortOrder": "txtKogakuShikyuAmount",
      "isAscending": true,
      "filterList": [],
-     "activeRowId": -1
+     "activeRowId": -1,
+     "gridAction": []
     },
     {
      "fieldName": "KogakuServicehiJudgementResultDetail1",
@@ -352,7 +306,7 @@ module DBZ {
        "fieldName": "txtUketsukeDate",
        "items": [],
        "controlType": "TextBoxDate",
-       "width": "90",
+       "width": "90px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -378,15 +332,16 @@ module DBZ {
        "onChange": "",
        "onKeyPress": "",
        "text": "",
+       "value": "",
        "labelLText": "受付日",
        "labelRText": "",
-       "labelLWidth": "96",
+       "labelLWidth": "96px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "decorationClass": "",
        "ymdKubun": 2,
        "displayFormat": 0,
-       "value": "",
        "permitCharactor": "./_-"
       },
       {
@@ -411,40 +366,40 @@ module DBZ {
        "jpControlName": "",
        "readOnly": false,
        "required": false,
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 2,
        "placeHolder": "",
+       "textKind": 2,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
        "text": "",
+       "suggest": [],
+       "value": "",
        "labelLText": "本人支払額",
        "labelRText": "",
-       "labelLWidth": "80",
+       "labelLWidth": "80px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "value": "",
-       "maxLength": 100000000,
-       "minLength": 0,
-       "textAlign": 2,
-       "textKind": 2,
-       "isComboBox": false,
-       "suggest": [],
        "decorationClass": "",
+       "permitCharactor": "+-,.\\",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
        "isComma": true,
-       "decimalPointLength": 0,
-       "permitCharactor": "+-,.\\"
+       "decimalPointLength": 0
       },
       {
        "fieldName": "txtKetteiDate",
        "items": [],
        "controlType": "TextBoxDate",
-       "width": "90",
+       "width": "90px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -470,22 +425,23 @@ module DBZ {
        "onChange": "",
        "onKeyPress": "",
        "text": "",
+       "value": "",
        "labelLText": "決定日",
        "labelRText": "",
-       "labelLWidth": "96",
+       "labelLWidth": "96px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "decorationClass": "",
        "ymdKubun": 2,
        "displayFormat": 0,
-       "value": "",
        "permitCharactor": "./_-"
       },
       {
        "fieldName": "radShikyuKubun",
        "items": [],
        "controlType": "RadioButton",
-       "width": "150",
+       "width": "150px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -502,6 +458,12 @@ module DBZ {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "",
+       "labelLText": "支給区分",
+       "labelLWidth": "80px",
+       "labelLAlign": 2,
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "shikyu",
@@ -512,22 +474,16 @@ module DBZ {
          "value": "不支給"
         }
        ],
-       "onChange": "",
-       "labelLText": "支給区分",
-       "labelLWidth": "80",
-       "labelLAlign": 2,
        "selectedItem": "shikyu",
-       "onClick": "",
        "newLineItemNumber": 2,
        "spaceSize": "S",
-       "disabledItem": [],
-       "icon": []
+       "disabledItem": []
       },
       {
        "fieldName": "txtsetaiShuyakuNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "80",
+       "width": "80px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -545,27 +501,27 @@ module DBZ {
        "jpControlName": "",
        "readOnly": false,
        "required": false,
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 0,
        "placeHolder": "",
+       "textKind": 2,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
        "text": "",
+       "suggest": [],
+       "value": "",
        "labelLText": "世帯集約番号",
        "labelRText": "",
-       "labelLWidth": "96",
+       "labelLWidth": "96px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "value": "",
-       "maxLength": 100000000,
-       "minLength": 0,
-       "textAlign": 0,
-       "textKind": 2,
-       "isComboBox": false,
-       "suggest": [],
        "decorationClass": "",
        "permitCharactor": "",
        "formatLength": "10"
@@ -592,34 +548,34 @@ module DBZ {
        "jpControlName": "",
        "readOnly": false,
        "required": false,
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 2,
        "placeHolder": "",
+       "textKind": 2,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
        "text": "",
+       "suggest": [],
+       "value": "",
        "labelLText": "支給金額",
        "labelRText": "",
-       "labelLWidth": "80",
+       "labelLWidth": "80px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "value": "",
-       "maxLength": 100000000,
-       "minLength": 0,
-       "textAlign": 2,
-       "textKind": 2,
-       "isComboBox": false,
-       "suggest": [],
        "decorationClass": "",
+       "permitCharactor": "+-,.\\",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
        "isComma": true,
-       "decimalPointLength": 0,
-       "permitCharactor": "+-,.\\"
+       "decimalPointLength": 0
       },
       {
        "fieldName": "radIsKogakuAutoShokan",
@@ -642,6 +598,12 @@ module DBZ {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "",
+       "labelLText": "高額自動償還",
+       "labelLWidth": "96px",
+       "labelLAlign": 2,
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "ari",
@@ -652,20 +614,14 @@ module DBZ {
          "value": "なし"
         }
        ],
-       "onChange": "",
-       "labelLText": "高額自動償還",
-       "labelLWidth": "96",
-       "labelLAlign": 2,
        "selectedItem": "ari",
-       "onClick": "",
        "newLineItemNumber": 2,
        "spaceSize": "M",
-       "disabledItem": [],
-       "icon": []
+       "disabledItem": []
       }
      ],
      "controlType": "Panel",
-     "width": "485",
+     "width": "485px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -703,7 +659,8 @@ module DBZ {
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     },
     {
      "fieldName": "KogakuServicehiJudgementResultDetail2",
@@ -712,7 +669,7 @@ module DBZ {
        "fieldName": "txtBiko",
        "items": [],
        "controlType": "TextBox",
-       "width": "380",
+       "width": "380px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -730,27 +687,27 @@ module DBZ {
        "jpControlName": "",
        "readOnly": false,
        "required": false,
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 0,
        "placeHolder": "",
+       "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
        "text": "",
+       "suggest": [],
+       "value": "",
        "labelLText": "備考",
        "labelRText": "",
-       "labelLWidth": "80",
+       "labelLWidth": "80px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "value": "",
-       "maxLength": 100000000,
-       "minLength": 0,
-       "textAlign": 0,
-       "textKind": 0,
-       "isComboBox": false,
-       "suggest": [],
        "decorationClass": "",
        "permitCharactor": ""
       },
@@ -758,7 +715,7 @@ module DBZ {
        "fieldName": "radJudgementMethod",
        "items": [],
        "controlType": "RadioButton",
-       "width": "180",
+       "width": "180px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -775,6 +732,12 @@ module DBZ {
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "",
+       "labelLText": "審査方法",
+       "labelLWidth": "80px",
+       "labelLAlign": 2,
+       "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "mishinsa",
@@ -785,22 +748,16 @@ module DBZ {
          "value": "審査済み"
         }
        ],
-       "onChange": "",
-       "labelLText": "審査方法",
-       "labelLWidth": "80",
-       "labelLAlign": 2,
        "selectedItem": "shinsaZumi",
-       "onClick": "",
        "newLineItemNumber": 2,
        "spaceSize": "S",
-       "disabledItem": [],
-       "icon": []
+       "disabledItem": []
       },
       {
        "fieldName": "txtFushikyuRiyu",
        "items": [],
        "controlType": "TextBoxMultiLine",
-       "width": "380",
+       "width": "380px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -819,29 +776,30 @@ module DBZ {
        "readOnly": false,
        "height": "XS",
        "required": false,
+       "maxLength": "10000000000",
+       "minLength": 0,
        "placeHolder": "",
+       "textKind": 0,
        "isPrivateInfo": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
        "text": "",
+       "value": "",
        "labelLText": "不支給理由",
        "labelRText": "",
-       "labelLWidth": "80",
+       "labelLWidth": "80px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "value": "",
-       "maxLength": "10000000000",
-       "minLength": 0,
-       "textKind": 0,
+       "decorationClass": "",
        "limitLength": "100",
        "countDisp": false
       }
      ],
      "controlType": "Panel",
-     "width": "490",
+     "width": "490px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -852,7 +810,7 @@ module DBZ {
      "float": 2,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "-1.6",
+     "marginLeft": "-1.6em",
      "marginRight": "XS",
      "selectControlID": "KogakuServicehiJudgementResultDetail2",
      "helpMessageID": "",
@@ -879,11 +837,12 @@ module DBZ {
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     }
    ],
    "controlType": "Panel",
-   "width": "993",
+   "width": "993px",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -894,7 +853,7 @@ module DBZ {
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
+   "marginLeft": "0em",
    "marginRight": "XS",
    "selectControlID": "KogakuServicehiJudgementResult",
    "helpMessageID": "",
@@ -921,7 +880,8 @@ module DBZ {
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": "CommonChildDiv",
@@ -936,16 +896,17 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": "0",
- "marginRight": "0",
+ "marginLeft": "0em",
+ "marginRight": "0em",
  "selectControlID": "defaultLayout",
  "helpMessageID": "",
  "jpControlName": "",
  "relation": [],
+ "packageName": "",
  "businessId": "DBZ",
  "controlName": "KogakuServicehiJudgementResult",
- "marginTop": 0,
- "marginBottom": 0,
+ "marginTop": "0em",
+ "marginBottom": "0em",
  "originalProperty": [
   {
    "publicChildFieldName": "KogakuServicehiJudgementResult",
@@ -954,23 +915,8 @@ module DBZ {
   },
   {
    "publicChildFieldName": "KogakuServicehiJudgementResult",
-   "publicChildProperty": "eraseBorderTop",
-   "newPropertyName": "eraseBorderTop"
-  },
-  {
-   "publicChildFieldName": "KogakuServicehiJudgementResult",
-   "publicChildProperty": "eraseBorderBottom",
-   "newPropertyName": "eraseBorderBottom"
-  },
-  {
-   "publicChildFieldName": "KogakuServicehiJudgementResult",
-   "publicChildProperty": "eraseBorderRight",
-   "newPropertyName": "eraseBorderRight"
-  },
-  {
-   "publicChildFieldName": "KogakuServicehiJudgementResult",
-   "publicChildProperty": "eraseBorderLeft",
-   "newPropertyName": "eraseBorderLeft"
+   "publicChildProperty": "eraseBorder",
+   "newPropertyName": "eraseBorder"
   },
   {
    "publicChildFieldName": "KogakuServicehiJudgementResult",
@@ -982,8 +928,99 @@ module DBZ {
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": "",
  "canTransferEvent": true,
- "heightForDialog": "M"
+ "heightForDialog": "M",
+ "firstFocusFieldName": "",
+ "lastFocusFieldName": "",
+ "modes": [],
+ "publicEvents": [],
+ "publicEventsAlias": []
 }        
     }
+
+     export module KogakuServicehiJudgementResult {
+
+        export class Events {
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static myType(): string {
+                return "KogakuServicehiJudgementResult";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + DBZ.KogakuServicehiJudgementResult.Controls.myType();
+            }
+
+            public convFiledName(fieldName: string): string {
+                return this._myName + "_" + DBZ.KogakuServicehiJudgementResult.Controls.myType() + "_" + fieldName;
+            }
+
+            public KogakuServicehiJudgementResult(): UZA.Panel {
+                return new UZA.Panel(this.convFiledNameSelf());
+            }
+
+            public dgJudgementResult(): UZA.DataGrid {
+                return new UZA.DataGrid(this.convFiledName("dgJudgementResult"));
+            }
+
+            public KogakuServicehiJudgementResultDetail1(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KogakuServicehiJudgementResultDetail1"));
+            }
+
+            public txtUketsukeDate(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtUketsukeDate"));
+            }
+
+            public txtHonninPaymentAmount(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtHonninPaymentAmount"));
+            }
+
+            public txtKetteiDate(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtKetteiDate"));
+            }
+
+            public radShikyuKubun(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radShikyuKubun"));
+            }
+
+            public txtsetaiShuyakuNo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtsetaiShuyakuNo"));
+            }
+
+            public txtShikyuAmount(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtShikyuAmount"));
+            }
+
+            public radIsKogakuAutoShokan(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radIsKogakuAutoShokan"));
+            }
+
+            public KogakuServicehiJudgementResultDetail2(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KogakuServicehiJudgementResultDetail2"));
+            }
+
+            public txtBiko(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtBiko"));
+            }
+
+            public radJudgementMethod(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radJudgementMethod"));
+            }
+
+            public txtFushikyuRiyu(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtFushikyuRiyu"));
+            }
+
+        }
+
+     }
+
 }
 

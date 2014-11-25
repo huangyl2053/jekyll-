@@ -93,3 +93,22 @@ var DBZ;
     })(DBZ.IryoHokenRireki || (DBZ.IryoHokenRireki = {}));
     var IryoHokenRireki = DBZ.IryoHokenRireki;
 })(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (IryoHokenRireki) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new IryoHokenRireki.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        IryoHokenRireki.PublicProperties = PublicProperties;
+    })(DBZ.IryoHokenRireki || (DBZ.IryoHokenRireki = {}));
+    var IryoHokenRireki = DBZ.IryoHokenRireki;
+})(DBZ || (DBZ = {}));

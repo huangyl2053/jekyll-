@@ -6,6 +6,87 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (KagoMoshitate) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KagoMoshitate.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "KagoMoshitate";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.KagoMoshitate = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtJigyoshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtJigyoshaNo"));
+            };
+
+            Controls.prototype.txtJigyoshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtJigyoshaName"));
+            };
+
+            Controls.prototype.txtSendYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSendYM"));
+            };
+
+            Controls.prototype.txtMoshitateshaKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtMoshitateshaKubun"));
+            };
+
+            Controls.prototype.txtShokisaiHokenshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtShokisaiHokenshaNo"));
+            };
+
+            Controls.prototype.txtShokisaiHokenshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtShokisaiHokenshaName"));
+            };
+
+            Controls.prototype.txtTeikyoYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtTeikyoYM"));
+            };
+
+            Controls.prototype.txtKagoForm = function () {
+                return new UZA.TextBox(this.convFiledName("txtKagoForm"));
+            };
+
+            Controls.prototype.txtMoshitateDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtMoshitateDate"));
+            };
+
+            Controls.prototype.ddlKagoMoshitateRiyu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlKagoMoshitateRiyu"));
+            };
+
+            Controls.prototype.chkForDogetsuShinsa = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkForDogetsuShinsa"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        KagoMoshitate.Controls = Controls;
+    })(DBZ.KagoMoshitate || (DBZ.KagoMoshitate = {}));
+    var KagoMoshitate = DBZ.KagoMoshitate;
+
     var KagoMoshitate_Design = (function (_super) {
         __extends(KagoMoshitate_Design, _super);
         function KagoMoshitate_Design($parentElement, isDesignMode, fieldName) {

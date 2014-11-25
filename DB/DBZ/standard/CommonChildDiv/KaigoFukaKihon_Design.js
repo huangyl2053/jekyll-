@@ -45,66 +45,15 @@ var DBZ;
         });
 
 
-        Object.defineProperty(KaigoFukaKihon_Design.prototype, "eraseBorderTop", {
+        Object.defineProperty(KaigoFukaKihon_Design.prototype, "eraseBorder", {
             get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"];
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
             },
             set: function (value) {
                 if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"] = value;
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
                 } else {
-                    this.layout.items[0]["eraseBorderTop"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(KaigoFukaKihon_Design.prototype, "eraseBorderBottom", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"] = value;
-                } else {
-                    this.layout.items[0]["eraseBorderBottom"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(KaigoFukaKihon_Design.prototype, "eraseBorderRight", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"] = value;
-                } else {
-                    this.layout.items[0]["eraseBorderRight"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(KaigoFukaKihon_Design.prototype, "eraseBorderLeft", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"] = value;
-                } else {
-                    this.layout.items[0]["eraseBorderLeft"] = value;
+                    this.layout.items[0]["eraseBorder"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -151,10 +100,7 @@ var DBZ;
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("title");
             Uz.JSControlUtil.registProperty("canOpenAndClose");
-            Uz.JSControlUtil.registProperty("eraseBorderTop");
-            Uz.JSControlUtil.registProperty("eraseBorderBottom");
-            Uz.JSControlUtil.registProperty("eraseBorderRight");
-            Uz.JSControlUtil.registProperty("eraseBorderLeft");
+            Uz.JSControlUtil.registProperty("eraseBorder");
             Uz.JSControlUtil.registProperty("backGroundColor");
             Uz.JSControlUtil.registProperty("btnHihoRireki_visible");
         };
@@ -163,10 +109,7 @@ var DBZ;
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
             editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
             editablePropertyInfo["canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
-            editablePropertyInfo["eraseBorderTop"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderTop"];
-            editablePropertyInfo["eraseBorderBottom"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderBottom"];
-            editablePropertyInfo["eraseBorderRight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderRight"];
-            editablePropertyInfo["eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
+            editablePropertyInfo["eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
             editablePropertyInfo["backGroundColor"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["backgroundColor"];
             editablePropertyInfo["btnHihoRireki_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["visible"];
 
@@ -182,7 +125,7 @@ var DBZ;
                             "fieldName": "txtTsuchishoNo",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "130",
+                            "width": "130px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -193,8 +136,8 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
                             "selectControlID": "txtTsuchishoNo_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -217,17 +160,18 @@ var DBZ;
                             "value": "",
                             "labelLText": "通知書番号",
                             "labelRText": "",
-                            "labelLWidth": "85",
-                            "labelRWidth": "0",
+                            "labelLWidth": "85px",
+                            "labelRWidth": "0px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtHihokenshaNo",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "80",
+                            "width": "80px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -238,8 +182,8 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
                             "selectControlID": "txtHihokenshaNo_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -262,17 +206,18 @@ var DBZ;
                             "value": "",
                             "labelLText": "被保番号",
                             "labelRText": "",
-                            "labelLWidth": "70",
-                            "labelRWidth": "0",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "0px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtHokenryoDankai",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "50",
+                            "width": "50px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -283,8 +228,8 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
                             "selectControlID": "txtHokenryoDankai_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -307,17 +252,18 @@ var DBZ;
                             "value": "",
                             "labelLText": "保険料段階",
                             "labelRText": "",
-                            "labelLWidth": "85",
-                            "labelRWidth": "0",
+                            "labelLWidth": "85px",
+                            "labelRWidth": "0px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtShutokuYmd",
                             "items": [],
                             "controlType": "TextBoxDate",
-                            "width": "80",
+                            "width": "80px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -328,8 +274,8 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
                             "selectControlID": "txtShutokuYmd_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -346,18 +292,20 @@ var DBZ;
                             "value": "",
                             "labelLText": "資格取得",
                             "labelRText": "",
-                            "labelLWidth": "70",
-                            "labelRWidth": "0",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "0px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "decorationClass": "",
                             "ymdKubun": 2,
-                            "displayFormat": 0
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
                         },
                         {
                             "fieldName": "txtShutokuJiyu",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "85",
+                            "width": "85px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -368,8 +316,8 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0.1",
-                            "marginRight": "0",
+                            "marginLeft": "0.1em",
+                            "marginRight": "0em",
                             "selectControlID": "txtShutokuJiyu_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -392,17 +340,18 @@ var DBZ;
                             "value": "",
                             "labelLText": "",
                             "labelRText": "",
-                            "labelLWidth": "74",
-                            "labelRWidth": "0",
+                            "labelLWidth": "74px",
+                            "labelRWidth": "0px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtSoshitsuYmd",
                             "items": [],
                             "controlType": "TextBoxDate",
-                            "width": "80",
+                            "width": "80px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -413,8 +362,8 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
                             "selectControlID": "txtSoshitsuYmd_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -431,18 +380,20 @@ var DBZ;
                             "value": "",
                             "labelLText": "資格喪失",
                             "labelRText": "",
-                            "labelLWidth": "70",
-                            "labelRWidth": "0",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "0px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "decorationClass": "",
                             "ymdKubun": 2,
-                            "displayFormat": 0
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
                         },
                         {
                             "fieldName": "txtSoshitsuJiyu",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "85",
+                            "width": "85px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -453,8 +404,8 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0.1",
-                            "marginRight": "0",
+                            "marginLeft": "0.1em",
+                            "marginRight": "0em",
                             "selectControlID": "txtSoshitsuJiyu_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -477,17 +428,18 @@ var DBZ;
                             "value": "",
                             "labelLText": "",
                             "labelRText": "",
-                            "labelLWidth": "74",
-                            "labelRWidth": "0",
+                            "labelLWidth": "74px",
+                            "labelRWidth": "0px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": ""
+                            "decorationClass": "",
+                            "permitCharactor": ""
                         },
                         {
                             "fieldName": "btnHihoRireki",
                             "items": [],
                             "controlType": "ButtonDialog",
-                            "width": "70",
+                            "width": "70px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -498,17 +450,19 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0.7",
-                            "marginRight": "0",
+                            "marginLeft": "0.7em",
+                            "marginRight": "0em",
                             "selectControlID": "btnHihoRireki",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "text": "被保履歴",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
                             "onClick": "",
                             "appearance": 0,
                             "imageFileUrl": "",
-                            "imageWidth": "",
-                            "imageHeight": "",
                             "icon": 0,
                             "heightTextBoxMatches": true,
                             "displayChildDivName": "",
@@ -519,7 +473,7 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "1105",
+                    "width": "1105px",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -530,15 +484,15 @@ var DBZ;
                     "float": 0,
                     "toolTip": "",
                     "authorityMode": 0,
-                    "marginLeft": "0",
-                    "marginRight": "0",
+                    "marginLeft": "0em",
+                    "marginRight": "0em",
                     "selectControlID": "KaigoFukaKihon",
                     "helpMessageID": "",
                     "jpControlName": "",
                     "onLoad": "",
                     "title": "",
-                    "marginTop": "0",
-                    "marginBottom": "0",
+                    "marginTop": "0em",
+                    "marginBottom": "0em",
                     "isOpen": true,
                     "canOpenAndClose": true,
                     "postParameterPanelNames": [
@@ -557,7 +511,8 @@ var DBZ;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "Auto",
+                    "canPost": true
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -572,16 +527,17 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": "0",
-            "marginRight": "0",
+            "marginLeft": "0em",
+            "marginRight": "0em",
             "selectControlID": "defaultLayout",
             "helpMessageID": "",
             "jpControlName": "",
             "relation": [],
+            "packageName": "",
             "businessId": "DBZ",
             "controlName": "KaigoFukaKihon",
-            "marginTop": 0,
-            "marginBottom": 0,
+            "marginTop": "0em",
+            "marginBottom": "0em",
             "originalProperty": [
                 {
                     "publicChildFieldName": "KaigoFukaKihon",
@@ -595,23 +551,8 @@ var DBZ;
                 },
                 {
                     "publicChildFieldName": "KaigoFukaKihon",
-                    "publicChildProperty": "eraseBorderTop",
-                    "newPropertyName": "eraseBorderTop"
-                },
-                {
-                    "publicChildFieldName": "KaigoFukaKihon",
-                    "publicChildProperty": "eraseBorderBottom",
-                    "newPropertyName": "eraseBorderBottom"
-                },
-                {
-                    "publicChildFieldName": "KaigoFukaKihon",
-                    "publicChildProperty": "eraseBorderRight",
-                    "newPropertyName": "eraseBorderRight"
-                },
-                {
-                    "publicChildFieldName": "KaigoFukaKihon",
-                    "publicChildProperty": "eraseBorderLeft",
-                    "newPropertyName": "eraseBorderLeft"
+                    "publicChildProperty": "eraseBorder",
+                    "newPropertyName": "eraseBorder"
                 },
                 {
                     "publicChildFieldName": "KaigoFukaKihon",
@@ -628,9 +569,79 @@ var DBZ;
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "M"
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
         };
         return KaigoFukaKihon_Design;
     })(Uz.CommonChildDiv);
     DBZ.KaigoFukaKihon_Design = KaigoFukaKihon_Design;
+
+    (function (KaigoFukaKihon) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoFukaKihon.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KaigoFukaKihon";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KaigoFukaKihon.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KaigoFukaKihon.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KaigoFukaKihon = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtTsuchishoNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtTsuchishoNo"));
+            };
+
+            Controls.prototype.txtHihokenshaNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtHihokenshaNo"));
+            };
+
+            Controls.prototype.txtHokenryoDankai = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenryoDankai"));
+            };
+
+            Controls.prototype.txtShutokuYmd = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShutokuYmd"));
+            };
+
+            Controls.prototype.txtShutokuJiyu = function () {
+                return new UZA.TextBox(this.convFiledName("txtShutokuJiyu"));
+            };
+
+            Controls.prototype.txtSoshitsuYmd = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSoshitsuYmd"));
+            };
+
+            Controls.prototype.txtSoshitsuJiyu = function () {
+                return new UZA.TextBox(this.convFiledName("txtSoshitsuJiyu"));
+            };
+
+            Controls.prototype.btnHihoRireki = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnHihoRireki"));
+            };
+            return Controls;
+        })();
+        KaigoFukaKihon.Controls = Controls;
+    })(DBZ.KaigoFukaKihon || (DBZ.KaigoFukaKihon = {}));
+    var KaigoFukaKihon = DBZ.KaigoFukaKihon;
 })(DBZ || (DBZ = {}));

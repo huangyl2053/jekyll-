@@ -6,6 +6,88 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (JigyoshaInputGuide) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnSearchJigyosha", {
+                get: function () {
+                    return "onClick_btnSearchJigyosha";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySelectButton_dgSearchResultJigyosha", {
+                get: function () {
+                    return "onSelectBySelectButton_dgSearchResultJigyosha";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnKaigoHokenShisetsuReturn", {
+                get: function () {
+                    return "onClick_btnKaigoHokenShisetsuReturn";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        JigyoshaInputGuide.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "JigyoshaInputGuide";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.JigyoshaInputGuide = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.radJigyoshaSearchType = function () {
+                return new UZA.RadioButton(this.convFiledName("radJigyoshaSearchType"));
+            };
+
+            Controls.prototype.txtJigyoshaCode = function () {
+                return new UZA.TextBox(this.convFiledName("txtJigyoshaCode"));
+            };
+
+            Controls.prototype.btnSearchJigyosha = function () {
+                return new UZA.Button(this.convFiledName("btnSearchJigyosha"));
+            };
+
+            Controls.prototype.SearchResultJigyosha = function () {
+                return new UZA.Panel(this.convFiledName("SearchResultJigyosha"));
+            };
+
+            Controls.prototype.dgSearchResultJigyosha = function () {
+                return new UZA.DataGrid(this.convFiledName("dgSearchResultJigyosha"));
+            };
+
+            Controls.prototype.btnKaigoHokenShisetsuReturn = function () {
+                return new UZA.Button(this.convFiledName("btnKaigoHokenShisetsuReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        JigyoshaInputGuide.Controls = Controls;
+    })(DBZ.JigyoshaInputGuide || (DBZ.JigyoshaInputGuide = {}));
+    var JigyoshaInputGuide = DBZ.JigyoshaInputGuide;
+
     var JigyoshaInputGuide_Design = (function (_super) {
         __extends(JigyoshaInputGuide_Design, _super);
         function JigyoshaInputGuide_Design($parentElement, isDesignMode, fieldName) {

@@ -6,6 +6,152 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (KaigoRenrakusakiInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnKoshin", {
+                get: function () {
+                    return "onClick_btnKoshin";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnDelete", {
+                get: function () {
+                    return "onClick_btnDelete";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnCancel", {
+                get: function () {
+                    return "onClick_btnCancel";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySB_Renrakusaki", {
+                get: function () {
+                    return "onSelectBySB_Renrakusaki";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectByDC_Renrakusaki", {
+                get: function () {
+                    return "onSelectByDC_Renrakusaki";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnClose", {
+                get: function () {
+                    return "onClick_btnClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnAdd", {
+                get: function () {
+                    return "onClick_btnAdd";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        KaigoRenrakusakiInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "KaigoRenrakusakiInfo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.KaigoRenrakusakiInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.btnDelete = function () {
+                return new UZA.Button(this.convFiledName("btnDelete"));
+            };
+
+            Controls.prototype.dgRenrakusaki = function () {
+                return new UZA.DataGrid(this.convFiledName("dgRenrakusaki"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.SelectedContents = function () {
+                return new UZA.Panel(this.convFiledName("SelectedContents"));
+            };
+
+            Controls.prototype.txtRenrakusakiKbnNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtRenrakusakiKbnNo"));
+            };
+
+            Controls.prototype.txtShimei = function () {
+                return new UZA.TextBox(this.convFiledName("txtShimei"));
+            };
+
+            Controls.prototype.txtShimeiKana = function () {
+                return new UZA.TextBox(this.convFiledName("txtShimeiKana"));
+            };
+
+            Controls.prototype.txtTsuzukigara = function () {
+                return new UZA.TextBox(this.convFiledName("txtTsuzukigara"));
+            };
+
+            Controls.prototype.txtTel = function () {
+                return new UZA.TextBox(this.convFiledName("txtTel"));
+            };
+
+            Controls.prototype.txtKeitaiNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeitaiNo"));
+            };
+
+            Controls.prototype.txtYubinNo = function () {
+                return new UZA.TextBoxYubinNo(this.convFiledName("txtYubinNo"));
+            };
+
+            Controls.prototype.txtJusho = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtJusho"));
+            };
+
+            Controls.prototype.btnUpdate = function () {
+                return new UZA.Button(this.convFiledName("btnUpdate"));
+            };
+
+            Controls.prototype.btnReturn = function () {
+                return new UZA.Button(this.convFiledName("btnReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        KaigoRenrakusakiInfo.Controls = Controls;
+    })(DBZ.KaigoRenrakusakiInfo || (DBZ.KaigoRenrakusakiInfo = {}));
+    var KaigoRenrakusakiInfo = DBZ.KaigoRenrakusakiInfo;
+
     var KaigoRenrakusakiInfo_Design = (function (_super) {
         __extends(KaigoRenrakusakiInfo_Design, _super);
         function KaigoRenrakusakiInfo_Design($parentElement, isDesignMode, fieldName) {

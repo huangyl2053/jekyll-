@@ -6,6 +6,47 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (KaigoChohyoShutsuryokujun) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoChohyoShutsuryokujun.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "KaigoChohyoShutsuryokujun";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.kaigoChohyoShutsuryokujun = function () {
+                return new URZ.ChohyoShutsuryokujun.ModeController("kaigoChohyoShutsuryokujun");
+            };
+
+            Controls.prototype.KaigoChohyoShutsuryokujun = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        KaigoChohyoShutsuryokujun.Controls = Controls;
+    })(DBZ.KaigoChohyoShutsuryokujun || (DBZ.KaigoChohyoShutsuryokujun = {}));
+    var KaigoChohyoShutsuryokujun = DBZ.KaigoChohyoShutsuryokujun;
+
     var KaigoChohyoShutsuryokujun_Design = (function (_super) {
         __extends(KaigoChohyoShutsuryokujun_Design, _super);
         function KaigoChohyoShutsuryokujun_Design($parentElement, isDesignMode, fieldName) {

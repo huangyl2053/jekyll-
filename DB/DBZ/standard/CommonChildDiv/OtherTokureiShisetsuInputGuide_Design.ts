@@ -1,11 +1,96 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * OtherTokureiShisetsuInputGuideクラスのみで継承して使えます。
      */
+
+    export module OtherTokureiShisetsuInputGuide {
+
+        export class Events {
+
+            public static get onClick_btnOtherShisetsuReturn(): string {
+                return "onClick_btnOtherShisetsuReturn";
+            }
+            public static get onSelectBySelectButton_dgSearchResultOtherTokureiShisetsu(): string {
+                return "onSelectBySelectButton_dgSearchResultOtherTokureiShisetsu";
+            }
+            public static get onClick_btnSearchOtherShisetsu(): string {
+                return "onClick_btnSearchOtherShisetsu";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "OtherTokureiShisetsuInputGuide";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public OtherTokureiShisetsuInputGuide() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public radKannaiKubun() : UZA.RadioButton {
+
+                return new UZA.RadioButton(this.convFiledName("radKannaiKubun"));
+
+            }
+
+            public btnSearchOtherShisetsu() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnSearchOtherShisetsu"));
+
+            }
+
+            public lblOtherShisetsuShurui() : UZA.Label {
+
+                return new UZA.Label(this.convFiledName("lblOtherShisetsuShurui"));
+
+            }
+
+            public SearchResultOtherShisetsu() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("SearchResultOtherShisetsu"));
+
+            }
+
+            public dgSearchResultOtherTokureiShisetsu() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgSearchResultOtherTokureiShisetsu"));
+
+            }
+
+            public btnOtherShisetsuReturn() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnOtherShisetsuReturn"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class OtherTokureiShisetsuInputGuide_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

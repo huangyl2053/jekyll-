@@ -66,7 +66,7 @@ module DBZ {
                             columns[i].visible = false;
                         }
                     }
-                    gridSetting.colums = columns;
+                    gridSetting.columns = columns;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
@@ -86,7 +86,7 @@ module DBZ {
                             columns[i].visible = false;
                         }
                     }
-                    gridSetting.colums = columns;
+                    gridSetting.columns = columns;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
@@ -105,7 +105,7 @@ module DBZ {
                             columns[i].visible = true;
                         }
                     }
-                    gridSetting.colums = columns;
+                    gridSetting.columns = columns;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
@@ -215,4 +215,30 @@ module DBZ {
         }
     }
 }
+
+
+
+module DBZ {
+
+    export module ShisetsuNyutaishoRirekiKanri {
+
+        export class PublicProperties {
+            private controls: Controls;
+
+            constructor(fieldName: string) {
+                this.controls = new Controls(fieldName);
+            }
+
+            public getEditTypes(): UZA.EditTypeForPublicProperty {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            }
+
+        }
+    }
+}
+
+
+
 

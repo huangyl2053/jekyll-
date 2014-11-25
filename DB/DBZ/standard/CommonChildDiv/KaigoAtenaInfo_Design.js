@@ -6,6 +6,47 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (KaigoAtenaInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoAtenaInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "KaigoAtenaInfo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.atenaInfo = function () {
+                return new URA.AtenaShokaiSimple.ModeController("atenaInfo");
+            };
+
+            Controls.prototype.KaigoAtenaInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        KaigoAtenaInfo.Controls = Controls;
+    })(DBZ.KaigoAtenaInfo || (DBZ.KaigoAtenaInfo = {}));
+    var KaigoAtenaInfo = DBZ.KaigoAtenaInfo;
+
     var KaigoAtenaInfo_Design = (function (_super) {
         __extends(KaigoAtenaInfo_Design, _super);
         function KaigoAtenaInfo_Design($parentElement, isDesignMode, fieldName) {

@@ -6,6 +6,65 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (TekiyoJogaiShisetsuInputGuide) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onSelectBySelectButton_dgTekiyoJogaiShisetsu", {
+                get: function () {
+                    return "onSelectBySelectButton_dgTekiyoJogaiShisetsu";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnReturn", {
+                get: function () {
+                    return "onClick_btnReturn";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        TekiyoJogaiShisetsuInputGuide.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "TekiyoJogaiShisetsuInputGuide";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.TekiyoJogaiShisetsuInputGuide = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgTekiyoJogaiShisetsu = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTekiyoJogaiShisetsu"));
+            };
+
+            Controls.prototype.btnReturn = function () {
+                return new UZA.Button(this.convFiledName("btnReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        TekiyoJogaiShisetsuInputGuide.Controls = Controls;
+    })(DBZ.TekiyoJogaiShisetsuInputGuide || (DBZ.TekiyoJogaiShisetsuInputGuide = {}));
+    var TekiyoJogaiShisetsuInputGuide = DBZ.TekiyoJogaiShisetsuInputGuide;
+
     var TekiyoJogaiShisetsuInputGuide_Design = (function (_super) {
         __extends(TekiyoJogaiShisetsuInputGuide_Design, _super);
         function TekiyoJogaiShisetsuInputGuide_Design($parentElement, isDesignMode, fieldName) {

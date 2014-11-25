@@ -6,6 +6,90 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (SogoShokaiKyotakuServiceKeikakuInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnClose", {
+                get: function () {
+                    return "onClick_btnClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        SogoShokaiKyotakuServiceKeikakuInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "SogoShokaiKyotakuServiceKeikakuInfo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.SogoShokaiKyotakuServiceKeikakuInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtKeikakuTodokedeYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKeikakuTodokedeYMD"));
+            };
+
+            Controls.prototype.txtKeikakuHenkoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKeikakuHenkoYMD"));
+            };
+
+            Controls.prototype.txtKeikakuJigyoshaShurui = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikakuJigyoshaShurui"));
+            };
+
+            Controls.prototype.txtKeikakuJigyoshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtKeikakuJigyoshaNo"));
+            };
+
+            Controls.prototype.txtKeikakuJigyoshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikakuJigyoshaName"));
+            };
+
+            Controls.prototype.txtKeikakuServiceShurui = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikakuServiceShurui"));
+            };
+
+            Controls.prototype.txtKeikakuSakuseiKubun = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikakuSakuseiKubun"));
+            };
+
+            Controls.prototype.txtKeikakuYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKeikakuYM"));
+            };
+
+            Controls.prototype.txtKeikakuKikan = function () {
+                return new UZA.TextBoxDateRange(this.convFiledName("txtKeikakuKikan"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        SogoShokaiKyotakuServiceKeikakuInfo.Controls = Controls;
+    })(DBZ.SogoShokaiKyotakuServiceKeikakuInfo || (DBZ.SogoShokaiKyotakuServiceKeikakuInfo = {}));
+    var SogoShokaiKyotakuServiceKeikakuInfo = DBZ.SogoShokaiKyotakuServiceKeikakuInfo;
+
     var SogoShokaiKyotakuServiceKeikakuInfo_Design = (function (_super) {
         __extends(SogoShokaiKyotakuServiceKeikakuInfo_Design, _super);
         function SogoShokaiKyotakuServiceKeikakuInfo_Design($parentElement, isDesignMode, fieldName) {

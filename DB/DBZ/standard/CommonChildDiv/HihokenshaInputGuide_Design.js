@@ -6,6 +6,73 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (HihokenshaInputGuide) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnReturn", {
+                get: function () {
+                    return "onClick_btnReturn";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClickBtnToSearch_HihokenshaFinder", {
+                get: function () {
+                    return "onClickBtnToSearch_HihokenshaFinder";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        HihokenshaInputGuide.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "HihokenshaInputGuide";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.HihokenshaFinder = function () {
+                return new DBZ.HihokenshaFinder.ModeController("HihokenshaFinder");
+            };
+
+            Controls.prototype.HihokenshaInputGuide = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.lblSearchResultOfHihokensha = function () {
+                return new UZA.Label(this.convFiledName("lblSearchResultOfHihokensha"));
+            };
+
+            Controls.prototype.dgSearchResultOfHihokensha = function () {
+                return new UZA.DataGrid(this.convFiledName("dgSearchResultOfHihokensha"));
+            };
+
+            Controls.prototype.btnReturn = function () {
+                return new UZA.Button(this.convFiledName("btnReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        HihokenshaInputGuide.Controls = Controls;
+    })(DBZ.HihokenshaInputGuide || (DBZ.HihokenshaInputGuide = {}));
+    var HihokenshaInputGuide = DBZ.HihokenshaInputGuide;
+
     var HihokenshaInputGuide_Design = (function (_super) {
         __extends(HihokenshaInputGuide_Design, _super);
         function HihokenshaInputGuide_Design($parentElement, isDesignMode, fieldName) {

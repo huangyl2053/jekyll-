@@ -1,11 +1,56 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+/// <reference path="../d.ts/URZCommonChildDiv.d.ts" />
+
 
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * KaigoChohyoShutsuryokujunクラスのみで継承して使えます。
      */
+
+    export module KaigoChohyoShutsuryokujun {
+
+        export class Events {
+
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "KaigoChohyoShutsuryokujun";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public kaigoChohyoShutsuryokujun() : URZ.ChohyoShutsuryokujun.ModeController {
+                return new URZ.ChohyoShutsuryokujun.ModeController("kaigoChohyoShutsuryokujun");
+            }
+
+
+            public KaigoChohyoShutsuryokujun() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class KaigoChohyoShutsuryokujun_Design extends Uz.CommonChildDiv {
     
         public get ChohyoShutsuryokujun_width() {

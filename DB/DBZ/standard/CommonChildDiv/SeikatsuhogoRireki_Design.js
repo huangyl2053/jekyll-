@@ -6,6 +6,51 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (SeikatsuhogoRireki) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        SeikatsuhogoRireki.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "SeikatsuhogoRireki";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.SeikatsuhogoRireki = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAddRow = function () {
+                return new UZA.Button(this.convFiledName("btnAddRow"));
+            };
+
+            Controls.prototype.dgSeikatsuhogoRireki = function () {
+                return new UZA.DataGrid(this.convFiledName("dgSeikatsuhogoRireki"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        SeikatsuhogoRireki.Controls = Controls;
+    })(DBZ.SeikatsuhogoRireki || (DBZ.SeikatsuhogoRireki = {}));
+    var SeikatsuhogoRireki = DBZ.SeikatsuhogoRireki;
+
     var SeikatsuhogoRireki_Design = (function (_super) {
         __extends(SeikatsuhogoRireki_Design, _super);
         function SeikatsuhogoRireki_Design($parentElement, isDesignMode, fieldName) {

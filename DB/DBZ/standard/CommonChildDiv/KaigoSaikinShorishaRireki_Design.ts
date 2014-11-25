@@ -1,11 +1,59 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+/// <reference path="../d.ts/URZCommonChildDiv.d.ts" />
+
 
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * KaigoSaikinShorishaRirekiクラスのみで継承して使えます。
      */
+
+    export module KaigoSaikinShorishaRireki {
+
+        export class Events {
+
+            public static get onClick_btnSaikinShorishaHyoji(): string {
+                return "onClick_btnSaikinShorishaHyoji";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "KaigoSaikinShorishaRireki";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public wrappedSaikinShorishaRireki() : URZ.SaikinShorishaRireki.ModeController {
+                return new URZ.SaikinShorishaRireki.ModeController("wrappedSaikinShorishaRireki");
+            }
+
+
+            public KaigoSaikinShorishaRireki() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class KaigoSaikinShorishaRireki_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

@@ -6,6 +6,54 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (KaigoSaikinShorishaRireki) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnSaikinShorishaHyoji", {
+                get: function () {
+                    return "onClick_btnSaikinShorishaHyoji";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        KaigoSaikinShorishaRireki.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "KaigoSaikinShorishaRireki";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.wrappedSaikinShorishaRireki = function () {
+                return new URZ.SaikinShorishaRireki.ModeController("wrappedSaikinShorishaRireki");
+            };
+
+            Controls.prototype.KaigoSaikinShorishaRireki = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        KaigoSaikinShorishaRireki.Controls = Controls;
+    })(DBZ.KaigoSaikinShorishaRireki || (DBZ.KaigoSaikinShorishaRireki = {}));
+    var KaigoSaikinShorishaRireki = DBZ.KaigoSaikinShorishaRireki;
+
     var KaigoSaikinShorishaRireki_Design = (function (_super) {
         __extends(KaigoSaikinShorishaRireki_Design, _super);
         function KaigoSaikinShorishaRireki_Design($parentElement, isDesignMode, fieldName) {

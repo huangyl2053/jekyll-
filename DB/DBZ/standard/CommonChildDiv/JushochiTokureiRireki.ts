@@ -137,18 +137,18 @@ module DBZ {
                     this.controls.dgJushochiTokureiRireki().gridSetting.isShowDeleteButtonColumn = false;
                     
 
-                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
+                    //ï¿½[ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
                     var columns = gridSetting.columns;
 
-                    //•ÛŒ¯Ò sochiHokenshaMeisho
+                    //ï¿½ÛŒï¿½ï¿½ï¿½ sochiHokenshaMeisho
                     columns[6].visible = false;
-                    //”í•Û”Ô† sochiHihokenshaNo
+                    //ï¿½ï¿½Û”Ôï¿½ sochiHihokenshaNo
                     columns[7].visible = false;
-                    //{İí—Ş shisetsuShurui
+                    //ï¿½{ï¿½İï¿½ï¿½ shisetsuShurui
                     columns[10].visible = false;
-                    //“üŠ{İ •\¦ Äİ’è560 nyushoShisetsu
-                    columns[11].width = "560";
+                    //ï¿½ï¿½{ï¿½ï¿½ ï¿½\ï¿½ï¿½ ï¿½Äİ’ï¿½560 nyushoShisetsu
+                    columns[11].width = 560;
 
 
                     gridSetting.columns = columns;
@@ -169,18 +169,18 @@ module DBZ {
                     this.controls.dgJushochiTokureiRireki().gridSetting.isShowModifyButtonColumn = false;
                     this.controls.dgJushochiTokureiRireki().gridSetting.isShowDeleteButtonColumn = false;
 
-                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
+                    //ï¿½[ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
                     var columns = gridSetting.columns
 
-                    //•ÛŒ¯Ò
+                    //ï¿½ÛŒï¿½ï¿½ï¿½
                     columns[6].visible = false;
-                    //”í•Û”Ô†
+                    //ï¿½ï¿½Û”Ôï¿½
                     columns[7].visible = false;
-                    //{İí—Ş
+                    //ï¿½{ï¿½İï¿½ï¿½
                     columns[10].visible = false;
-                    //“üŠ{İ •\¦ Äİ’è560
-                    columns[11].width = "560";
+                    //ï¿½ï¿½{ï¿½ï¿½ ï¿½\ï¿½ï¿½ ï¿½Äİ’ï¿½560
+                    columns[11].width = 560;
 
 
                     gridSetting.columns = columns;
@@ -204,7 +204,7 @@ module DBZ {
 
                     this.controls.dgJushochiTokureiRireki().readOnly = true;
 
-                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
+                    //ï¿½[ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
 
                     gridSetting.isShowSelectButtonColumn = false
@@ -213,14 +213,14 @@ module DBZ {
 
                     var columns = gridSetting.columns;
 
-                    //•ÛŒ¯Ò sochiHokenshaMeisho
+                    //ï¿½ÛŒï¿½ï¿½ï¿½ sochiHokenshaMeisho
                     columns[6].visible = false;
-                    //”í•Û”Ô† sochiHihokenshaNo
+                    //ï¿½ï¿½Û”Ôï¿½ sochiHihokenshaNo
                     columns[7].visible = false;
-                    //{İí—Ş shisetsuShurui
+                    //ï¿½{ï¿½İï¿½ï¿½ shisetsuShurui
                     columns[10].visible = false;
-                    //“üŠ{İ •\¦ Äİ’è560 nyushoShisetsu
-                    columns[11].width = "560";
+                    //ï¿½ï¿½{ï¿½ï¿½ ï¿½\ï¿½ï¿½ ï¿½Äİ’ï¿½560 nyushoShisetsu
+                    columns[11].width = 560;
 
 
                     gridSetting.columns = columns;
@@ -238,7 +238,7 @@ module DBZ {
 
                     this.controls.dgJushochiTokureiRireki().readOnly = false;
 
-                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
+                    //ï¿½[ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
 
                     gridSetting.isShowSelectButtonColumn = false;
@@ -247,14 +247,14 @@ module DBZ {
 
                     var columns = gridSetting.columns
 
-                    //•ÛŒ¯Ò
+                    //ï¿½ÛŒï¿½ï¿½ï¿½
                     columns[6].visible = false;
-                    //”í•Û”Ô†
+                    //ï¿½ï¿½Û”Ôï¿½
                     columns[7].visible = false;
-                    //{İí—Ş
+                    //ï¿½{ï¿½İï¿½ï¿½
                     columns[10].visible = false;
-                    //“üŠ{İ •\¦ Äİ’è560
-                    columns[11].width = "560";
+                    //ï¿½ï¿½{ï¿½ï¿½ ï¿½\ï¿½ï¿½ ï¿½Äİ’ï¿½560
+                    columns[11].width = 560;
 
                     gridSetting.columns = columns;
 
@@ -270,7 +270,7 @@ module DBZ {
 
                     this.controls.dgJushochiTokureiRireki().readOnly = false;
 
-                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
+                    //ï¿½[ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
 
                     gridSetting.isShowSelectButtonColumn = true;
@@ -279,14 +279,14 @@ module DBZ {
 
                     var columns = gridSetting.columns
 
-                    //•ÛŒ¯Ò
+                    //ï¿½ÛŒï¿½ï¿½ï¿½
                     columns[6].visible = false;
-                    //”í•Û”Ô†
+                    //ï¿½ï¿½Û”Ôï¿½
                     columns[7].visible = false;
-                    //{İí—Ş
+                    //ï¿½{ï¿½İï¿½ï¿½
                     columns[10].visible = false;
-                    //“üŠ{İ •\¦ Äİ’è560
-                    columns[11].width = "560";
+                    //ï¿½ï¿½{ï¿½ï¿½ ï¿½\ï¿½ï¿½ ï¿½Äİ’ï¿½560
+                    columns[11].width = 560;
 
                     gridSetting.columns = columns;
 
@@ -300,4 +300,30 @@ module DBZ {
         }
     }
 }
+
+
+
+module DBZ {
+
+    export module JushochiTokureiRireki {
+
+        export class PublicProperties {
+            private controls: Controls;
+
+            constructor(fieldName: string) {
+                this.controls = new Controls(fieldName);
+            }
+
+            public getEditTypes(): UZA.EditTypeForPublicProperty {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            }
+
+        }
+    }
+}
+
+
+
 

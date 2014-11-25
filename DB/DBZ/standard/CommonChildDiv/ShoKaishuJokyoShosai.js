@@ -43,3 +43,22 @@
     })(DBZ.ShoKaishuJokyoShosai || (DBZ.ShoKaishuJokyoShosai = {}));
     var ShoKaishuJokyoShosai = DBZ.ShoKaishuJokyoShosai;
 })(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (ShoKaishuJokyoShosai) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ShoKaishuJokyoShosai.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ShoKaishuJokyoShosai.PublicProperties = PublicProperties;
+    })(DBZ.ShoKaishuJokyoShosai || (DBZ.ShoKaishuJokyoShosai = {}));
+    var ShoKaishuJokyoShosai = DBZ.ShoKaishuJokyoShosai;
+})(DBZ || (DBZ = {}));

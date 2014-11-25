@@ -1,17 +1,40 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 var DBZ;
 (function (DBZ) {
-    var TekiyoJogaiShisetsuInputGuide = (function (_super) {
-        __extends(TekiyoJogaiShisetsuInputGuide, _super);
-        function TekiyoJogaiShisetsuInputGuide() {
-            _super.apply(this, arguments);
-        }
-        return TekiyoJogaiShisetsuInputGuide;
-    })(DBZ.TekiyoJogaiShisetsuInputGuide_Design);
-    DBZ.TekiyoJogaiShisetsuInputGuide = TekiyoJogaiShisetsuInputGuide;
+    (function (TekiyoJogaiShisetsuInputGuide) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new TekiyoJogaiShisetsuInputGuide.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        TekiyoJogaiShisetsuInputGuide.ModeController = ModeController;
+    })(DBZ.TekiyoJogaiShisetsuInputGuide || (DBZ.TekiyoJogaiShisetsuInputGuide = {}));
+    var TekiyoJogaiShisetsuInputGuide = DBZ.TekiyoJogaiShisetsuInputGuide;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (TekiyoJogaiShisetsuInputGuide) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new TekiyoJogaiShisetsuInputGuide.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        TekiyoJogaiShisetsuInputGuide.PublicProperties = PublicProperties;
+    })(DBZ.TekiyoJogaiShisetsuInputGuide || (DBZ.TekiyoJogaiShisetsuInputGuide = {}));
+    var TekiyoJogaiShisetsuInputGuide = DBZ.TekiyoJogaiShisetsuInputGuide;
 })(DBZ || (DBZ = {}));

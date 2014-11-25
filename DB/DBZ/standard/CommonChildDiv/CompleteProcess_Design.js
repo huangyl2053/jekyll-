@@ -6,6 +6,51 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (CompleteProcess) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        CompleteProcess.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "CompleteProcess";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.CompleteProcess = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.CompleteProssessPadding = function () {
+                return new UZA.Panel(this.convFiledName("CompleteProssessPadding"));
+            };
+
+            Controls.prototype.lblCompleteMessage = function () {
+                return new UZA.Label(this.convFiledName("lblCompleteMessage"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        CompleteProcess.Controls = Controls;
+    })(DBZ.CompleteProcess || (DBZ.CompleteProcess = {}));
+    var CompleteProcess = DBZ.CompleteProcess;
+
     var CompleteProcess_Design = (function (_super) {
         __extends(CompleteProcess_Design, _super);
         function CompleteProcess_Design($parentElement, isDesignMode, fieldName) {

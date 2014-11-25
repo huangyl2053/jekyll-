@@ -6,6 +6,47 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (KaigoKanryoMessage) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoKanryoMessage.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "KaigoKanryoMessage";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.KanryoMessage = function () {
+                return new URZ.KanryoMessage.ModeController("KanryoMessage");
+            };
+
+            Controls.prototype.KaigoKanryoMessage = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        KaigoKanryoMessage.Controls = Controls;
+    })(DBZ.KaigoKanryoMessage || (DBZ.KaigoKanryoMessage = {}));
+    var KaigoKanryoMessage = DBZ.KaigoKanryoMessage;
+
     var KaigoKanryoMessage_Design = (function (_super) {
         __extends(KaigoKanryoMessage_Design, _super);
         function KaigoKanryoMessage_Design($parentElement, isDesignMode, fieldName) {

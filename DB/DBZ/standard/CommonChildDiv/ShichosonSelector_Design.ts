@@ -1,11 +1,75 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * ShichosonSelectorクラスのみで継承して使えます。
      */
+
+    export module ShichosonSelector {
+
+        export class Events {
+
+            public static get onClick_btnReturn(): string {
+                return "onClick_btnReturn";
+            }
+            public static get onClick_btnDecision(): string {
+                return "onClick_btnDecision";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "ShichosonSelector";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public ShichosonSelector() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public dgShichoson() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgShichoson"));
+
+            }
+
+            public btnReturn() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnReturn"));
+
+            }
+
+            public btnDecision() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnDecision"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class ShichosonSelector_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

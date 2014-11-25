@@ -93,3 +93,22 @@
     })(DBZ.ShisetsuJoho || (DBZ.ShisetsuJoho = {}));
     var ShisetsuJoho = DBZ.ShisetsuJoho;
 })(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (ShisetsuJoho) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ShisetsuJoho.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ShisetsuJoho.PublicProperties = PublicProperties;
+    })(DBZ.ShisetsuJoho || (DBZ.ShisetsuJoho = {}));
+    var ShisetsuJoho = DBZ.ShisetsuJoho;
+})(DBZ || (DBZ = {}));

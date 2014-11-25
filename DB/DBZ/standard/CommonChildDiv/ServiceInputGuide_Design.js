@@ -6,6 +6,92 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
+    (function (ServiceInputGuide) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnSearchJigyosha", {
+                get: function () {
+                    return "onClick_btnSearchJigyosha";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnServiceInputGuideReturn", {
+                get: function () {
+                    return "onClick_btnServiceInputGuideReturn";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySelectButton_SearchResultService", {
+                get: function () {
+                    return "onSelectBySelectButton_SearchResultService";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        ServiceInputGuide.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ServiceInputGuide";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ServiceInputGuide = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtServiceShuruiCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtServiceShuruiCode"));
+            };
+
+            Controls.prototype.txtServiceCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtServiceCode"));
+            };
+
+            Controls.prototype.txtKijyunYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKijyunYM"));
+            };
+
+            Controls.prototype.btnSearchJService = function () {
+                return new UZA.Button(this.convFiledName("btnSearchJService"));
+            };
+
+            Controls.prototype.SearchResultService = function () {
+                return new UZA.Panel(this.convFiledName("SearchResultService"));
+            };
+
+            Controls.prototype.dgSearchResultService = function () {
+                return new UZA.DataGrid(this.convFiledName("dgSearchResultService"));
+            };
+
+            Controls.prototype.btnServiceInputGuideReturn = function () {
+                return new UZA.Button(this.convFiledName("btnServiceInputGuideReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ServiceInputGuide.Controls = Controls;
+    })(DBZ.ServiceInputGuide || (DBZ.ServiceInputGuide = {}));
+    var ServiceInputGuide = DBZ.ServiceInputGuide;
+
     var ServiceInputGuide_Design = (function (_super) {
         __extends(ServiceInputGuide_Design, _super);
         function ServiceInputGuide_Design($parentElement, isDesignMode, fieldName) {

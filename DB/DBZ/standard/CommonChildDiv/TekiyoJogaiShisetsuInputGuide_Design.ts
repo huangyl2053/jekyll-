@@ -1,11 +1,69 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * TekiyoJogaiShisetsuInputGuideクラスのみで継承して使えます。
      */
+
+    export module TekiyoJogaiShisetsuInputGuide {
+
+        export class Events {
+
+            public static get onSelectBySelectButton_dgTekiyoJogaiShisetsu(): string {
+                return "onSelectBySelectButton_dgTekiyoJogaiShisetsu";
+            }
+            public static get onClick_btnReturn(): string {
+                return "onClick_btnReturn";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "TekiyoJogaiShisetsuInputGuide";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public TekiyoJogaiShisetsuInputGuide() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public dgTekiyoJogaiShisetsu() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgTekiyoJogaiShisetsu"));
+
+            }
+
+            public btnReturn() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnReturn"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class TekiyoJogaiShisetsuInputGuide_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

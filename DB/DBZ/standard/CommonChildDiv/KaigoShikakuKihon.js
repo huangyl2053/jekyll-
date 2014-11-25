@@ -58,3 +58,22 @@
     })(DBZ.KaigoShikakuKihon || (DBZ.KaigoShikakuKihon = {}));
     var KaigoShikakuKihon = DBZ.KaigoShikakuKihon;
 })(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KaigoShikakuKihon) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new KaigoShikakuKihon.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        KaigoShikakuKihon.PublicProperties = PublicProperties;
+    })(DBZ.KaigoShikakuKihon || (DBZ.KaigoShikakuKihon = {}));
+    var KaigoShikakuKihon = DBZ.KaigoShikakuKihon;
+})(DBZ || (DBZ = {}));
