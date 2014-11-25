@@ -6,6 +6,152 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBE;
 (function (DBE) {
+    (function (ChosaItakusakiSelector) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onSelect_dgChosaItakusakiList", {
+                get: function () {
+                    return "onSelect_dgChosaItakusakiList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySB_Chosain", {
+                get: function () {
+                    return "onSelectBySB_Chosain";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectByDC_ChosaItakusaki", {
+                get: function () {
+                    return "onSelectByDC_ChosaItakusaki";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectByDC_Chosain", {
+                get: function () {
+                    return "onSelectByDC_Chosain";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySB_ChosaItakusaki", {
+                get: function () {
+                    return "onSelectBySB_ChosaItakusaki";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnNonSelectReturn", {
+                get: function () {
+                    return "onClick_btnNonSelectReturn";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnSelectAndClose", {
+                get: function () {
+                    return "onClick_btnSelectAndClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        ChosaItakusakiSelector.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ChosaItakusakiSelector";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ChosaItakusakiSelector = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ChosaItakusaki = function () {
+                return new UZA.Panel(this.convFiledName("ChosaItakusaki"));
+            };
+
+            Controls.prototype.ChosaItakusakiList = function () {
+                return new UZA.Panel(this.convFiledName("ChosaItakusakiList"));
+            };
+
+            Controls.prototype.btnToMentenanceChosaKikan = function () {
+                return new UZA.Button(this.convFiledName("btnToMentenanceChosaKikan"));
+            };
+
+            Controls.prototype.dgChosaItakusakiList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgChosaItakusakiList"));
+            };
+
+            Controls.prototype.Chosain = function () {
+                return new UZA.Panel(this.convFiledName("Chosain"));
+            };
+
+            Controls.prototype.spaChosain = function () {
+                return new UZA.Space(this.convFiledName("spaChosain"));
+            };
+
+            Controls.prototype.ChosainList = function () {
+                return new UZA.Panel(this.convFiledName("ChosainList"));
+            };
+
+            Controls.prototype.dgChosainList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgChosainList"));
+            };
+
+            Controls.prototype.SelectedContents = function () {
+                return new UZA.Panel(this.convFiledName("SelectedContents"));
+            };
+
+            Controls.prototype.txtChosaItakusakiCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtChosaItakusakiCode"));
+            };
+
+            Controls.prototype.txtChosaItakusakiName = function () {
+                return new UZA.TextBox(this.convFiledName("txtChosaItakusakiName"));
+            };
+
+            Controls.prototype.txtChosainCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtChosainCode"));
+            };
+
+            Controls.prototype.txtChosainName = function () {
+                return new UZA.TextBox(this.convFiledName("txtChosainName"));
+            };
+
+            Controls.prototype.btnSelectAndClose = function () {
+                return new UZA.Button(this.convFiledName("btnSelectAndClose"));
+            };
+
+            Controls.prototype.btnNonSelectReturn = function () {
+                return new UZA.Button(this.convFiledName("btnNonSelectReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ChosaItakusakiSelector.Controls = Controls;
+    })(DBE.ChosaItakusakiSelector || (DBE.ChosaItakusakiSelector = {}));
+    var ChosaItakusakiSelector = DBE.ChosaItakusakiSelector;
+
     var ChosaItakusakiSelector_Design = (function (_super) {
         __extends(ChosaItakusakiSelector_Design, _super);
         function ChosaItakusakiSelector_Design($parentElement, isDesignMode, fieldName) {

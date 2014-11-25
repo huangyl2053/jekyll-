@@ -1,8 +1,55 @@
-/// <reference path='ChosaKikanDialog_Design.ts' />
+/// <reference path="ChosaKikanDialog_Design.ts" />
+
+// 共有子Divモード記述TypeScriptソースです。
+
 module DBE
 {
-    export class ChosaKikanDialog extends ChosaKikanDialog_Design
-    {
+    export module ChosaKikanDialog {
+
+        export class ModeController{
+            private controls: Controls;
+            private fieldName: string;
+
+            constructor(fieldName: string) {
+                this.fieldName = fieldName;
+                this.controls = new Controls(fieldName);
+            }
+ 
+            public priorities(): Array<string> {
+                return [];
+            }
+
+            public Properties() {
+                return new UZA.CommonChildDiv(this.fieldName);
+            }
+        }
+
     }
 }
+
+
+
+module DBE {
+
+    export module ChosaKikanDialog {
+
+        export class PublicProperties {
+            private controls: Controls;
+
+            constructor(fieldName: string) {
+                this.controls = new Controls(fieldName);
+            }
+
+            public getEditTypes(): UZA.EditTypeForPublicProperty {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            }
+
+        }
+    }
+}
+
+
+
 

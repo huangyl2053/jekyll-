@@ -6,6 +6,65 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBE;
 (function (DBE) {
+    (function (YukoShinsakaiIinInputGuide) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnClose", {
+                get: function () {
+                    return "onClick_btnClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySelectButton_dgYukoShinsakaiIin", {
+                get: function () {
+                    return "onSelectBySelectButton_dgYukoShinsakaiIin";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        YukoShinsakaiIinInputGuide.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "YukoShinsakaiIinInputGuide";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.YukoShinsakaiIinInputGuide = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgYukoShinsakaiIin = function () {
+                return new UZA.DataGrid(this.convFiledName("dgYukoShinsakaiIin"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        YukoShinsakaiIinInputGuide.Controls = Controls;
+    })(DBE.YukoShinsakaiIinInputGuide || (DBE.YukoShinsakaiIinInputGuide = {}));
+    var YukoShinsakaiIinInputGuide = DBE.YukoShinsakaiIinInputGuide;
+
     var YukoShinsakaiIinInputGuide_Design = (function (_super) {
         __extends(YukoShinsakaiIinInputGuide_Design, _super);
         function YukoShinsakaiIinInputGuide_Design($parentElement, isDesignMode, fieldName) {

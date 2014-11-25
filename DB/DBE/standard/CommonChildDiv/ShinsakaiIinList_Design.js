@@ -6,6 +6,58 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBE;
 (function (DBE) {
+    (function (ShinsakaiIinList) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "CloseCancel", {
+                get: function () {
+                    return "CloseCancel";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        ShinsakaiIinList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ShinsakaiIinList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ShinsakaiIinList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgShinsakaiIinChildList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgShinsakaiIinChildList"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ShinsakaiIinList.Controls = Controls;
+    })(DBE.ShinsakaiIinList || (DBE.ShinsakaiIinList = {}));
+    var ShinsakaiIinList = DBE.ShinsakaiIinList;
+
     var ShinsakaiIinList_Design = (function (_super) {
         __extends(ShinsakaiIinList_Design, _super);
         function ShinsakaiIinList_Design($parentElement, isDesignMode, fieldName) {

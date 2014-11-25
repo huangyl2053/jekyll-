@@ -15,3 +15,22 @@ var DBE;
     })(DBE.TokkijikoCom || (DBE.TokkijikoCom = {}));
     var TokkijikoCom = DBE.TokkijikoCom;
 })(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (TokkijikoCom) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new TokkijikoCom.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        TokkijikoCom.PublicProperties = PublicProperties;
+    })(DBE.TokkijikoCom || (DBE.TokkijikoCom = {}));
+    var TokkijikoCom = DBE.TokkijikoCom;
+})(DBE || (DBE = {}));

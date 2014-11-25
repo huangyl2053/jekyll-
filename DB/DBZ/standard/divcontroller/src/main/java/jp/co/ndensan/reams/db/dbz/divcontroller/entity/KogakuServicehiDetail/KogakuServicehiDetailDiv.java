@@ -1,8 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail.IKogakuServicehiDetailDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,18 +12,16 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PaymentMethod.PaymentMeth
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail.tabKogakuServicehiDetailDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.tplJudgementResultDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tplKetteiJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail.tplKozaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail.tplShinseishaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.tplJudgementResultDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tplKetteiJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KogakuServicehiDetail のクラスファイル 
- * 
+ * KogakuServicehiDetail のクラスファイル
+ *
  * @author 自動生成
  */
 public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiDetailDiv {
@@ -34,6 +31,7 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtTeikyoYM")
     private TextBoxDate txtTeikyoYM;
     @JsonProperty("tabKogakuServicehiDetail")
@@ -52,7 +50,7 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
 
     @JsonProperty("txtTeikyoYM")
     public void setTxtTeikyoYM(TextBoxDate txtTeikyoYM) {
-        this.txtTeikyoYM=txtTeikyoYM;
+        this.txtTeikyoYM = txtTeikyoYM;
     }
 
     @JsonProperty("tabKogakuServicehiDetail")
@@ -62,7 +60,7 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
 
     @JsonProperty("tabKogakuServicehiDetail")
     public void setTabKogakuServicehiDetail(tabKogakuServicehiDetailDiv tabKogakuServicehiDetail) {
-        this.tabKogakuServicehiDetail=tabKogakuServicehiDetail;
+        this.tabKogakuServicehiDetail = tabKogakuServicehiDetail;
     }
 
     /*
@@ -74,12 +72,12 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
     }
 
     @JsonIgnore
-    public void  setTplShinseisha(tplShinseishaDiv tplShinseisha) {
+    public void setTplShinseisha(tplShinseishaDiv tplShinseisha) {
         this.getTabKogakuServicehiDetail().setTplShinseisha(tplShinseisha);
     }
 
     @JsonIgnore
-    public IShinseishaInfoDiv getShinseisha() {
+    public ShinseishaInfoDiv getShinseisha() {
         return this.getTabKogakuServicehiDetail().getTplShinseisha().getShinseisha();
     }
 
@@ -89,7 +87,7 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
     }
 
     @JsonIgnore
-    public void  setTxtShiharaiTotalAmount(TextBoxNum txtShiharaiTotalAmount) {
+    public void setTxtShiharaiTotalAmount(TextBoxNum txtShiharaiTotalAmount) {
         this.getTabKogakuServicehiDetail().getTplShinseisha().setTxtShiharaiTotalAmount(txtShiharaiTotalAmount);
     }
 
@@ -99,7 +97,7 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
     }
 
     @JsonIgnore
-    public void  setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
+    public void setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
         this.getTabKogakuServicehiDetail().getTplShinseisha().setTxtShinseiRiyu(txtShinseiRiyu);
     }
 
@@ -109,12 +107,12 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
     }
 
     @JsonIgnore
-    public void  setTplKoza(tplKozaDiv tplKoza) {
+    public void setTplKoza(tplKozaDiv tplKoza) {
         this.getTabKogakuServicehiDetail().setTplKoza(tplKoza);
     }
 
     @JsonIgnore
-    public IPaymentMethodDiv getPaymentMethod() {
+    public PaymentMethodDiv getPaymentMethod() {
         return this.getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod();
     }
 
@@ -124,7 +122,7 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
     }
 
     @JsonIgnore
-    public void  setTplJudgementResult(tplJudgementResultDiv tplJudgementResult) {
+    public void setTplJudgementResult(tplJudgementResultDiv tplJudgementResult) {
         this.getTabKogakuServicehiDetail().setTplJudgementResult(tplJudgementResult);
     }
 
@@ -139,10 +137,9 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
     }
 
     @JsonIgnore
-    public void  setTplKetteiJoho(tplKetteiJohoDiv tplKetteiJoho) {
+    public void setTplKetteiJoho(tplKetteiJohoDiv tplKetteiJoho) {
         this.getTabKogakuServicehiDetail().setTplKetteiJoho(tplKetteiJoho);
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

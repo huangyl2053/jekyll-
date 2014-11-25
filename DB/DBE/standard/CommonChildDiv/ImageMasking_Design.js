@@ -4,32 +4,54 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
 var DBE;
 (function (DBE) {
-    /**
-    * 自動生成コードです。修正しないでください。
-    * ImageMaskingクラスのみで継承して使えます。
-    */
+    (function (ImageMasking) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ImageMasking.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ImageMasking";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ImageMasking = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ImageMasking.Controls = Controls;
+    })(DBE.ImageMasking || (DBE.ImageMasking = {}));
+    var ImageMasking = DBE.ImageMasking;
+
     var ImageMasking_Design = (function (_super) {
         __extends(ImageMasking_Design, _super);
         function ImageMasking_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, ImageMasking_Design.myLayout, fieldName);
         }
-        /**
-        * レイアウト情報のプロパティを登録します
-        * @method registProperty
-        */
         ImageMasking_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
         };
 
-        /**
-        * コントロール内で編集させたいプロパティをまとめたEditablePropertyInfoオブジェクトを返却します。
-        * @method getEditableProperty
-        * @return EditablePropertyInfoオブジェクト
-        */
         ImageMasking_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
 
@@ -116,4 +138,3 @@ var DBE;
     })(Uz.CommonChildDiv);
     DBE.ImageMasking_Design = ImageMasking_Design;
 })(DBE || (DBE = {}));
-//@ sourceMappingURL=ImageMasking_Design.js.map

@@ -6,6 +6,91 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBE;
 (function (DBE) {
+    (function (ChosaKikanDialog) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onSelect_dgKikanIchiran", {
+                get: function () {
+                    return "onSelect_dgKikanIchiran";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "CloseOK", {
+                get: function () {
+                    return "CloseOK";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelect_dgChosainIchiran", {
+                get: function () {
+                    return "onSelect_dgChosainIchiran";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "CloseCancel", {
+                get: function () {
+                    return "CloseCancel";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        ChosaKikanDialog.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ChosaKikanDialog";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ChosaKikanDialog = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnToMentenanceChosaKikan = function () {
+                return new UZA.Button(this.convFiledName("btnToMentenanceChosaKikan"));
+            };
+
+            Controls.prototype.dgKikanIchiran = function () {
+                return new UZA.DataGrid(this.convFiledName("dgKikanIchiran"));
+            };
+
+            Controls.prototype.dgChosainIchiran = function () {
+                return new UZA.DataGrid(this.convFiledName("dgChosainIchiran"));
+            };
+
+            Controls.prototype.btnSelectKikan = function () {
+                return new UZA.Button(this.convFiledName("btnSelectKikan"));
+            };
+
+            Controls.prototype.btnNonSelectReturn = function () {
+                return new UZA.Button(this.convFiledName("btnNonSelectReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ChosaKikanDialog.Controls = Controls;
+    })(DBE.ChosaKikanDialog || (DBE.ChosaKikanDialog = {}));
+    var ChosaKikanDialog = DBE.ChosaKikanDialog;
+
     var ChosaKikanDialog_Design = (function (_super) {
         __extends(ChosaKikanDialog_Design, _super);
         function ChosaKikanDialog_Design($parentElement, isDesignMode, fieldName) {

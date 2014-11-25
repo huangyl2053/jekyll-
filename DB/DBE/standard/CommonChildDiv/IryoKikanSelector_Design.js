@@ -6,6 +6,152 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBE;
 (function (DBE) {
+    (function (IryoKikanSelector) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onSelectByDC_IryoKikan", {
+                get: function () {
+                    return "onSelectByDC_IryoKikan";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelect_dgIryoKikanList", {
+                get: function () {
+                    return "onSelect_dgIryoKikanList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectByDC_Ishi", {
+                get: function () {
+                    return "onSelectByDC_Ishi";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySB_IryoKikan", {
+                get: function () {
+                    return "onSelectBySB_IryoKikan";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnNonSelectReturn", {
+                get: function () {
+                    return "onClick_btnNonSelectReturn";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnSelectAndClose", {
+                get: function () {
+                    return "onClick_btnSelectAndClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySB_Ishi", {
+                get: function () {
+                    return "onSelectBySB_Ishi";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        IryoKikanSelector.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "IryoKikanSelector";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.IryoKikanSelector = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.IryoKikan = function () {
+                return new UZA.Panel(this.convFiledName("IryoKikan"));
+            };
+
+            Controls.prototype.IryoKikanList = function () {
+                return new UZA.Panel(this.convFiledName("IryoKikanList"));
+            };
+
+            Controls.prototype.btnToMentenanceIryoKikan = function () {
+                return new UZA.Button(this.convFiledName("btnToMentenanceIryoKikan"));
+            };
+
+            Controls.prototype.dgIryoKikanList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgIryoKikanList"));
+            };
+
+            Controls.prototype.Ishi = function () {
+                return new UZA.Panel(this.convFiledName("Ishi"));
+            };
+
+            Controls.prototype.spaIshi = function () {
+                return new UZA.Space(this.convFiledName("spaIshi"));
+            };
+
+            Controls.prototype.IshiList = function () {
+                return new UZA.Panel(this.convFiledName("IshiList"));
+            };
+
+            Controls.prototype.dgIshiList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgIshiList"));
+            };
+
+            Controls.prototype.SelectedContents = function () {
+                return new UZA.Panel(this.convFiledName("SelectedContents"));
+            };
+
+            Controls.prototype.txtiryoKikanCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtiryoKikanCode"));
+            };
+
+            Controls.prototype.txtiryoKikanName = function () {
+                return new UZA.TextBox(this.convFiledName("txtiryoKikanName"));
+            };
+
+            Controls.prototype.txtishiCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtishiCode"));
+            };
+
+            Controls.prototype.txtishiName = function () {
+                return new UZA.TextBox(this.convFiledName("txtishiName"));
+            };
+
+            Controls.prototype.btnSelectAndClose = function () {
+                return new UZA.Button(this.convFiledName("btnSelectAndClose"));
+            };
+
+            Controls.prototype.btnNonSelectReturn = function () {
+                return new UZA.Button(this.convFiledName("btnNonSelectReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        IryoKikanSelector.Controls = Controls;
+    })(DBE.IryoKikanSelector || (DBE.IryoKikanSelector = {}));
+    var IryoKikanSelector = DBE.IryoKikanSelector;
+
     var IryoKikanSelector_Design = (function (_super) {
         __extends(IryoKikanSelector_Design, _super);
         function IryoKikanSelector_Design($parentElement, isDesignMode, fieldName) {

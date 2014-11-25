@@ -1,17 +1,40 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 var DBE;
 (function (DBE) {
-    var YukoShinsakaiIinInputGuide = (function (_super) {
-        __extends(YukoShinsakaiIinInputGuide, _super);
-        function YukoShinsakaiIinInputGuide() {
-            _super.apply(this, arguments);
-        }
-        return YukoShinsakaiIinInputGuide;
-    })(DBE.YukoShinsakaiIinInputGuide_Design);
-    DBE.YukoShinsakaiIinInputGuide = YukoShinsakaiIinInputGuide;
+    (function (YukoShinsakaiIinInputGuide) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new YukoShinsakaiIinInputGuide.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        YukoShinsakaiIinInputGuide.ModeController = ModeController;
+    })(DBE.YukoShinsakaiIinInputGuide || (DBE.YukoShinsakaiIinInputGuide = {}));
+    var YukoShinsakaiIinInputGuide = DBE.YukoShinsakaiIinInputGuide;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (YukoShinsakaiIinInputGuide) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new YukoShinsakaiIinInputGuide.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        YukoShinsakaiIinInputGuide.PublicProperties = PublicProperties;
+    })(DBE.YukoShinsakaiIinInputGuide || (DBE.YukoShinsakaiIinInputGuide = {}));
+    var YukoShinsakaiIinInputGuide = DBE.YukoShinsakaiIinInputGuide;
 })(DBE || (DBE = {}));

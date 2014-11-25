@@ -2,85 +2,27 @@
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
 
-
-
-
 module DBE {
     /**
      * 自動生成コードです。修正しないでください。
+     * KanryoDialogクラスのみで継承して使えます。
      */
-
-    export module KanryoDialog {
-
-        export class Events {
-
-            public static get CloseOK(): string {
-                return "CloseOK";
-            }
-
-        }
-
-        export class Controls {
-            private _myName: string;
-
-            public static get MyType(): string {
-                return "KanryoDialog";
-            }
-
-            constructor(fieldName: string) {
-                this._myName = fieldName;
-            }
-
-
-            public KanryoDialog() : UZA.Panel {
-
-                return new UZA.Panel(this.convFiledNameSelf());
-
-            }
-
-            public SuccessInfo() : UZA.Panel {
-
-                return new UZA.Panel(this.convFiledName("SuccessInfo"));
-
-            }
-
-            public imgSuccess() : UZA.StaticImage {
-
-                return new UZA.StaticImage(this.convFiledName("imgSuccess"));
-
-            }
-
-            public WrapMessageMain() : UZA.Panel {
-
-                return new UZA.Panel(this.convFiledName("WrapMessageMain"));
-
-            }
-
-            public lblMessageMain() : UZA.Label {
-
-                return new UZA.Label(this.convFiledName("lblMessageMain"));
-
-            }
-
-            public btnClose() : UZA.Button {
-
-                return new UZA.Button(this.convFiledName("btnClose"));
-
-            }
-
-
-            public convFiledNameSelf(): string {
-                return this._myName + "_" + Controls.MyType;
-            }
-
-            private convFiledName(fieldName: string): string {
-                return this._myName + "_" + Controls.MyType + "_" + fieldName;
-            }
-        }
-    }
-
     export class KanryoDialog_Design extends Uz.CommonChildDiv {
     
+        public get KanryoDialog_width() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["width"];
+        }
+        
+        public set KanryoDialog_width(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["width"] = value;
+            } else {
+                this.layout.items[0]["width"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, KanryoDialog_Design.myLayout, fieldName);
         }
@@ -91,7 +33,7 @@ module DBE {
          */
         public registProperty() {
             super.registProperty();
-            Uz.JSControlUtil.registProperty("KanryoMessage_width");
+            Uz.JSControlUtil.registProperty("KanryoDialog_width");
         }
         
         /**
@@ -101,6 +43,7 @@ module DBE {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
+            editablePropertyInfo["KanryoDialog_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["width"];
             
             return editablePropertyInfo;
         }
@@ -117,6 +60,7 @@ module DBE {
        "fieldName": "imgSuccess",
        "items": [],
        "controlType": "StaticImage",
+       "width": "0px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -133,8 +77,11 @@ module DBE {
        "helpMessageID": "",
        "jpControlName": "",
        "src": "/ur/urz/img/KanryoMessage.png",
-       "imageWidth": "35",
-       "imageHeight": "30"
+       "imageWidth": "35px",
+       "imageHeight": "30px",
+       "labelRText": "",
+       "labelRWidth": "S",
+       "labelRAlign": 0
       },
       {
        "fieldName": "WrapMessageMain",
@@ -205,11 +152,12 @@ module DBE {
        "panelDisplay": 0,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "canPost": true
       }
      ],
      "controlType": "Panel",
-     "width": "346",
+     "width": "346px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -247,7 +195,8 @@ module DBE {
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "canPost": true
     },
     {
      "fieldName": "btnClose",
@@ -272,6 +221,8 @@ module DBE {
      "imageWidth": "",
      "imageHeight": "",
      "text": "閉じる",
+     "onBeforeClick": "",
+     "onAfterClick": "",
      "onClick": "CloseOK",
      "appearance": 0,
      "imageFileUrl": "",
@@ -327,7 +278,8 @@ module DBE {
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": "CommonChildDiv",
@@ -342,29 +294,93 @@ module DBE {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": "0",
- "marginRight": "0",
+ "marginLeft": "0em",
+ "marginRight": "0em",
  "selectControlID": "defaultLayout",
  "helpMessageID": "",
  "jpControlName": "",
  "relation": [],
+ "packageName": "",
  "businessId": "DBE",
  "controlName": "KanryoDialog",
- "marginTop": 0,
- "marginBottom": 0,
+ "marginTop": "0em",
+ "marginBottom": "0em",
  "originalProperty": [
   {
-   "publicChildFieldName": "KanryoMessage",
-   "publicChildProperty": "KanryoMessage_width",
-   "newPropertyName": "KanryoMessage_width"
+   "publicChildFieldName": "KanryoDialog",
+   "publicChildProperty": "width",
+   "newPropertyName": "KanryoDialog_width"
   }
  ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": "onClick_btnClose",
  "canTransferEvent": true,
- "heightForDialog": "M"
+ "heightForDialog": "M",
+ "firstFocusFieldName": "",
+ "lastFocusFieldName": "",
+ "modes": [],
+ "publicEvents": [],
+ "publicEventsAlias": []
 }        
     }
+
+     export module KanryoDialog {
+
+        export class Events {
+
+            public static CloseOK(): string {
+                return "CloseOK";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static myType(): string {
+                return "KanryoDialog";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + DBE.KanryoDialog.Controls.myType();
+            }
+
+            public convFiledName(fieldName: string): string {
+                return this._myName + "_" + DBE.KanryoDialog.Controls.myType() + "_" + fieldName;
+            }
+
+            public KanryoDialog(): UZA.Panel {
+                return new UZA.Panel(this.convFiledNameSelf());
+            }
+
+            public SuccessInfo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("SuccessInfo"));
+            }
+
+            public imgSuccess(): UZA.StaticImage {
+                return new UZA.StaticImage(this.convFiledName("imgSuccess"));
+            }
+
+            public WrapMessageMain(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("SuccessInfo_WrapMessageMain"));
+            }
+
+            public lblMessageMain(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblMessageMain"));
+            }
+
+            public btnClose(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            }
+
+        }
+
+     }
+
 }
 
