@@ -632,12 +632,12 @@
      "lastFocusFieldName": "",
      "modes": [
       {
-       "modeKey": "DataGridのisShowSelectButtonColumn",
-       "modeValue": "表示する"
+       "modeKey": "一覧パネル高さ",
+       "modeValue": "サイズ350"
       },
       {
-       "modeKey": "DataGridのheight",
-       "modeValue": "サイズ350"
+       "modeKey": "グリッド表示モード",
+       "modeValue": "shokai"
       }
      ],
      "publicEvents": [
