@@ -54,9 +54,9 @@ public class KaigoRenrakusakiTest extends DbzTestBase {
         郵便番号 = mock(YubinNo.class);
         住所 = mock(AtenaJusho.class);
         続柄 = new RString("父");
-        連絡先区分番号 = mock(RenrakusakiKubunNo.class);
-        保険者番号 = mock(ShoKisaiHokenshaNo.class);
-        被保険者番号 = mock(HihokenshaNo.class);
+        連絡先区分番号 = new RenrakusakiKubunNo("1");
+        保険者番号 = new ShoKisaiHokenshaNo("123456");
+        被保険者番号 = new HihokenshaNo("1234567890");
         支所コード = new RString("01");
     }
 

@@ -9,13 +9,15 @@
     <artifactId>DbzPersistence</artifactId>
     <packaging>jar</packaging>
     <name>DbzPersistence</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzTestHelper</artifactId>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzDefinition</artifactId>

@@ -7,8 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
-import static jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo.EMPTY;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NaturalOrderComparator;
+import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -62,7 +61,7 @@ public final class NyuryokuShikibetsuNo implements IValueObject<RString>, Compar
 
     @Override
     public int compareTo(NyuryokuShikibetsuNo 比較対象) {
-        return Objects.compare(this.入力識別番号, 比較対象.入力識別番号, NaturalOrderComparator.ASC.getInstance());
+        return Objects.compare(this.入力識別番号, 比較対象.入力識別番号, Comparators.naturalOrder());
     }
 
     /**

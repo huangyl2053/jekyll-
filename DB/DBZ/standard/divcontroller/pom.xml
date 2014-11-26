@@ -9,12 +9,10 @@
     <artifactId>DbzDivController</artifactId>
     <packaging>war</packaging>
     <name>DbzDivController</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
@@ -55,6 +53,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzModel</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzTestHelper</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

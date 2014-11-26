@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReport;
 import jp.co.ndensan.reams.db.dbb.business.FukaErrorInternalReportItem;
-import jp.co.ndensan.reams.db.dbb.business.report.FukaErrorListBuilder;
-import jp.co.ndensan.reams.db.dbb.business.report.parts.IFukaErrorListEditor;
-import jp.co.ndensan.reams.db.dbb.business.report.parts.FukaErrorListSource;
-import jp.co.ndensan.reams.db.dbb.business.report.parts.FukaErrorListEditorFactory;
-import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCommon;
+import jp.co.ndensan.reams.db.dbb.business.report.fukaerrorlist.FukaErrorListBuilder;
+import jp.co.ndensan.reams.db.dbb.business.report.fukaerrorlist.IFukaErrorListSourceBuilder;
+import jp.co.ndensan.reams.db.dbb.business.report.fukaerrorlist.FukaErrorListSource;
+import jp.co.ndensan.reams.db.dbb.business.report.fukaerrorlist.FukaErrorListSourceBuilderFactory;
+import jp.co.ndensan.reams.ur.urz.realservice.report.core.IReportManager;
+import jp.co.ndensan.reams.ur.urz.realservice.report.core.IReportWriter;
+import jp.co.ndensan.reams.ur.urz.realservice.report.core.ReportManagerFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
@@ -39,18 +39,18 @@ public class FukaErrorListPrinter {
      * @return 帳票ソースデータ
      */
     public SourceDataCollection print(FukaErrorInternalReport report) {
-        try (ReportManager manager = new ReportManager()) {
-            try (ReportAssembler<FukaErrorListSource> assembler = manager
-                    .reportAssembler(REPORT_ID)
+        try (IReportManager manager = ReportManagerFactory.createInstance()) {
+            try (IReportWriter<FukaErrorListSource> writer = manager
+                    .reportWriter(FukaErrorListSource.class)
+                    .reportId(REPORT_ID)
                     .create()) {
 
-                List<FukaErrorListSource> editorList = new ArrayList<>();
+                List<FukaErrorListBuilder> builders = new ArrayList<>();
                 for (FukaErrorInternalReportItem item : report.getInternalReportItemList()) {
-                    IFukaErrorListEditor editor = FukaErrorListEditorFactory.createInstance(report, item);
-                    FukaErrorListBuilder builder = new FukaErrorListBuilder(editor);
-                    editorList.add(builder.buildSource());
+                    IFukaErrorListSourceBuilder editor = FukaErrorListSourceBuilderFactory.createInstance(report, item);
+                    builders.add(new FukaErrorListBuilder(editor));
                 }
-                assembler.writeMultiLine(editorList);
+                writer.writeMultiLine(builders);
             }
             return manager.publish();
         }

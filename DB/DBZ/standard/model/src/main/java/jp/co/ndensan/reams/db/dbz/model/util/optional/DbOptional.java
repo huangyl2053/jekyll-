@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.model.util.optional;
 
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
 
@@ -100,13 +101,13 @@ public final class DbOptional<T> implements IOptional<T> {
     @Override
     public String toString() {
         return this.value != null
-                ? String.format("IOptional[%s]", value)
+                ? String.format("IOptional[%s]", this.value)
                 : "empty";
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(value);
+        return Objects.hashCode(this.value);
     }
 
     @Override
@@ -118,7 +119,7 @@ public final class DbOptional<T> implements IOptional<T> {
             return false;
         }
         DbOptional<?> other = (DbOptional<?>) obj;
-        return Objects.equals(value, other.value);
+        return Objects.equals(this.value, other.value);
     }
 
     @Override
@@ -127,7 +128,29 @@ public final class DbOptional<T> implements IOptional<T> {
         if (!isPresent()) {
             return empty();
         } else {
-            return DbOptional.ofNullable(mapper.apply(value));
+            return DbOptional.ofNullable(mapper.apply(this.value));
         }
+    }
+
+    @Override
+    public <R> IOptional<R> flatMap(IFunction<? super T, IOptional<R>> mapper) {
+        Objects.requireNonNull(mapper);
+        if (!isPresent()) {
+            return empty();
+        } else {
+            return Objects.requireNonNull(mapper.apply(this.value));
+        }
+    }
+
+    @Override
+    public IOptional<T> filter(ICondition<? super T> condtion) {
+        Objects.requireNonNull(condtion);
+        if (!isPresent()) {
+            return this;
+        }
+        if (condtion.check(this.value)) {
+            return this;
+        }
+        return empty();
     }
 }

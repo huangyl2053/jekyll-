@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.util.optional;
 
+import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
 
@@ -51,7 +52,7 @@ public interface IOptional<T> {
     <X extends Throwable> T orElseThrow(ISupplier<X> exceptionSupplier) throws X;
 
     /**
-     * 保持する値を引数の{@link IFunction mapper}により変換し、その結果を持った新しい{@link IOptional IOptional}として返します。
+     * 保持する値を指定の{@link IFunction mapper}により変換し、その結果を持った新しい{@link IOptional IOptional}として返します。
      * emptyの場合は、戻り値の{@link IOptional IOptional}もemptyになります。
      *
      * @param <R> 変換後の{@link IOptional IOptional}が保持する型
@@ -60,6 +61,26 @@ public interface IOptional<T> {
      * emptyの場合はemptyな{@link IOptional IOptional}
      */
     <R> IOptional<R> map(IFunction<? super T, ? extends R> mapper);
+
+    /**
+     * 保持する値を指定の{@link IFunction mapper}により、別の{@link IOptional IOptional}として返します。
+     * emptyの場合は、戻り値の{@link IOptional IOptional}もemptyになります。
+     *
+     * @param <R> 変換後の{@link IOptional IOptional}が保持する型
+     * @param mapper 変換に用いる{@link IFunction mapper}
+     * @return 保持する値を変換した結果を持った{@link IOptional IOptional},
+     * emptyの場合はemptyな{@link IOptional IOptional}
+     */
+    <R> IOptional<R> flatMap(IFunction<? super T, IOptional<R>> mapper);
+
+    /**
+     * 保持する値が指定の{@link ICondition IConditon}に当てはまるときは自身を、
+     * 当てはまらない時はemptyな{@link IOptional IOptional}を返します。
+     *
+     * @param condtion {@link ICondition IConditon}に定義される条件
+     * @return 指定の条件にあてはまる時は自身をそのまま、あてはまらない時はemptyな{@link IOptional IOptional}
+     */
+    IOptional<T> filter(ICondition<? super T> condtion);
 
     /**
      * デバッグ用の文字列を返します。

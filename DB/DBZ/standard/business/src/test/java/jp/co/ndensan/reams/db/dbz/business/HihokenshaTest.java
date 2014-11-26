@@ -425,7 +425,7 @@ public class HihokenshaTest extends DbzTestBase {
 
         @Test
         public void get個人番号は_コンストラクタ引数のIkojinのget個人番号と_同じ値を返す() {
-            RString kojinNo = new RString("0123456789");
+            RString kojinNo = new RString("012345678901");
             when(this.profile.get個人番号()).thenReturn(new KojinNo(kojinNo));
             assertThat(sut.get個人番号(), is(kojinNo));
         }
