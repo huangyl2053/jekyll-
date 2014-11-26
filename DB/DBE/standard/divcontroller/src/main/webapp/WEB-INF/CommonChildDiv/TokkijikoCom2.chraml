@@ -1,0 +1,320 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft marginLeft-XS marginRight-XS" id="defaultLayout" style="margin-top: 0em; margin-bottom: 0em;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;TokkijikoCom2&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;originalProperty&quot;:[],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}"><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable marginLeft-XS marginRight-XS marginTop-XS marginBottom-XS UzCommonChildDivPanel Width-G2" id="TokkijikoCom2" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;TokkijikoCom2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;TokkijikoCom2&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;XS&quot;,&quot;marginBottom&quot;:&quot;XS&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;}],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:true,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="TokkijikoCom2_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="TokkijikoCom2_panel_body_area"><div title="" class="UzDropDownList WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="ddlChosaItem" style="width: 248px; height: 21px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlChosaItem&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;175px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;ddlChosaItem_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;selectedItem&quot;:&quot;0&quot;,&quot;dataSource&quot;:[{&quot;value&quot;:&quot;&quot;,&quot;key&quot;:&quot;0&quot;},{&quot;value&quot;:&quot;1-1：麻痺&quot;,&quot;key&quot;:&quot;1-1&quot;},{&quot;value&quot;:&quot;1-2：拘縮&quot;,&quot;key&quot;:&quot;1-2&quot;},{&quot;value&quot;:&quot;1-3：&quot;,&quot;key&quot;:&quot;1-3&quot;}],&quot;required&quot;:false,&quot;labelLText&quot;:&quot;対象項目&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;isBlankLine&quot;:false}"><span class="word-wrap-break-word Label-L text-align-right" id="ddlChosaItem_labelL" style="width: 70px;"><span>対象項目</span></span><select class="CoreElement" id="ddlChosaItem_core" style="width: 175px;"><option value="0"></option><option value="1-1">1-1：麻痺</option><option value="1-2">1-2：拘縮</option><option value="1-3">1-3：</option></select></div><div title="" class="UzTextBoxMultiLine TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="txtTokkijikoContent" style="width: 486px; height: 141px;" data-control-type="TextBoxMultiLine" data-obj="{&quot;fieldName&quot;:&quot;txtTokkijikoContent&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxMultiLine&quot;,&quot;width&quot;:&quot;481px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtTokkijikoContent_text_area&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;120px&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;labelLText&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;S&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;maxLength&quot;:&quot;200&quot;,&quot;minLength&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;isPrivateInfo&quot;:false,&quot;limitLength&quot;:&quot;200&quot;,&quot;countDisp&quot;:true,&quot;onKeyPress&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;}"><span class="CoreElement UzTextBox" id="txtTokkijikoContent_core" style="width: 481px;"><textarea class="UzTextBox UzTextBoxMultiLine DispJcountLine" id="txtTokkijikoContent_text_area" style="width: 485px; height: 124px;" placeholder="" type="text" data-control-type="TextBoxMultiLine"></textarea></span><div id="txtTokkijikoContent_text_countDiv"><span class="UzTextBoxMultiLine" id="txtTokkijikoContent_text_count">残り200文字</span></div></div><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M Width-S ClearFloat marginLeft-XS marginRight-XS text-align-right" id="lblSpace" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSpace&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;S&quot;,&quot;visible&quot;:false,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;lblSpace&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;decorationClass&quot;:&quot;&quot;,&quot;align&quot;:2,&quot;text&quot;:&quot;&quot;}"></span></div></div> <script type='text/javascript' class='RamlConvert'>var DBZ= DBZ? DBZ: {};DBZ['DEFAULT'] = {};</script>
+<script type='text/javascript'>var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBE;
+(function (DBE) {
+    var TokkijikoCom2_Design = (function (_super) {
+        __extends(TokkijikoCom2_Design, _super);
+        function TokkijikoCom2_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, TokkijikoCom2_Design.myLayout, fieldName);
+        }
+        TokkijikoCom2_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        TokkijikoCom2_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        TokkijikoCom2_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "TokkijikoCom2",
+                    "items": [
+                        {
+                            "fieldName": "ddlChosaItem",
+                            "items": [],
+                            "controlType": "DropDownList",
+                            "width": "175px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "ddlChosaItem_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "labelLText": "対象項目",
+                            "labelRText": "",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "selectedItem": "0",
+                            "dataSource": [
+                                {
+                                    "value": "",
+                                    "key": "0"
+                                },
+                                {
+                                    "value": "1-1：麻痺",
+                                    "key": "1-1"
+                                },
+                                {
+                                    "value": "1-2：拘縮",
+                                    "key": "1-2"
+                                },
+                                {
+                                    "value": "1-3：",
+                                    "key": "1-3"
+                                }
+                            ],
+                            "disabledItem": [],
+                            "isBlankLine": false
+                        },
+                        {
+                            "fieldName": "txtTokkijikoContent",
+                            "items": [],
+                            "controlType": "TextBoxMultiLine",
+                            "width": "481px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtTokkijikoContent_text_area",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "120px",
+                            "required": false,
+                            "text": "",
+                            "isPrivateInfo": false,
+                            "decorationClass": "",
+                            "maxLength": "200",
+                            "minLength": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "value": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "limitLength": "200",
+                            "countDisp": true
+                        },
+                        {
+                            "fieldName": "lblSpace",
+                            "items": [],
+                            "controlType": "Label",
+                            "width": "S",
+                            "visible": false,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "lblSpace",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "required": false,
+                            "align": 2,
+                            "text": "",
+                            "isPrivateInfo": false,
+                            "decorationClass": ""
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G2",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "XS",
+                    "marginRight": "XS",
+                    "selectControlID": "TokkijikoCom2",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "",
+                    "marginTop": "XS",
+                    "marginBottom": "XS",
+                    "isOpen": true,
+                    "canOpenAndClose": false,
+                    "postParameterPanelNames": [],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": ""
+                        }
+                    ],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": true,
+                    "backgroundColor": 0,
+                    "widthAuto": true,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": false
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "XS",
+            "marginRight": "XS",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBE",
+            "controlName": "TokkijikoCom2",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
+        };
+        return TokkijikoCom2_Design;
+    })(Uz.CommonChildDiv);
+    DBE.TokkijikoCom2_Design = TokkijikoCom2_Design;
+
+    (function (TokkijikoCom2) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        TokkijikoCom2.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "TokkijikoCom2";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBE.TokkijikoCom2.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBE.TokkijikoCom2.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.TokkijikoCom2 = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ddlChosaItem = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlChosaItem"));
+            };
+
+            Controls.prototype.txtTokkijikoContent = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkijikoContent"));
+            };
+
+            Controls.prototype.lblSpace = function () {
+                return new UZA.Label(this.convFiledName("lblSpace"));
+            };
+            return Controls;
+        })();
+        TokkijikoCom2.Controls = Controls;
+    })(DBE.TokkijikoCom2 || (DBE.TokkijikoCom2 = {}));
+    var TokkijikoCom2 = DBE.TokkijikoCom2;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (TokkijikoCom2) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new TokkijikoCom2.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        TokkijikoCom2.ModeController = ModeController;
+    })(DBE.TokkijikoCom2 || (DBE.TokkijikoCom2 = {}));
+    var TokkijikoCom2 = DBE.TokkijikoCom2;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (TokkijikoCom2) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new TokkijikoCom2.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        TokkijikoCom2.PublicProperties = PublicProperties;
+    })(DBE.TokkijikoCom2 || (DBE.TokkijikoCom2 = {}));
+    var TokkijikoCom2 = DBE.TokkijikoCom2;
+})(DBE || (DBE = {}));
+</script>
+</div>

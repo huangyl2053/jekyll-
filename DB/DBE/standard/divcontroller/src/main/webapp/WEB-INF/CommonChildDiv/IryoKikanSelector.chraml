@@ -1,0 +1,1077 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;IryoKikanSelector&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;originalProperty&quot;:[],&quot;dataPassingForDialog&quot;:[{&quot;key&quot;:&quot;iryoKikanCode&quot;,&quot;controlName&quot;:&quot;IryoKikanSelector.iryoKikanCode&quot;},{&quot;key&quot;:&quot;iryoKikanName&quot;,&quot;controlName&quot;:&quot;IryoKikanSelector.iryoKikanName&quot;},{&quot;key&quot;:&quot;ishiCode&quot;,&quot;controlName&quot;:&quot;IryoKikanSelector.ishiCode&quot;},{&quot;key&quot;:&quot;ishiName&quot;,&quot;controlName&quot;:&quot;IryoKikanSelector.ishiName&quot;}],&quot;dialogOkEventNameForDialog&quot;:&quot;onClick_btnSelectAndClose&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;onClick_btnNonSelectReturn&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;450px&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G8" id="IryoKikanSelector" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;IryoKikanSelector&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G8&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;IryoKikanSelector&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;医療機関選択&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:true,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;IryoKikanSelector&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/IryoKikanSelector/onLoad&quot;},{&quot;eventName&quot;:&quot;onSelectByDC_IryoKikan&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/IryoKikanSelector/onSelectByDC_IryoKikan&quot;},{&quot;eventName&quot;:&quot;onSelectBySB_IryoKikan&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/IryoKikanSelector/onSelectBySB_IryoKikan&quot;},{&quot;eventName&quot;:&quot;onSelectByDC_Ishi&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/IryoKikanSelector/onSelectByDC_Ishi&quot;},{&quot;eventName&quot;:&quot;onSelectBySB_Ishi&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/IryoKikanSelector/onSelectBySB_Ishi&quot;},{&quot;eventName&quot;:&quot;onClick_btnSelectAndClose&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/IryoKikanSelector/onClick_btnSelectAndClose&quot;},{&quot;eventName&quot;:&quot;onClick_btnNonSelectReturn&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/IryoKikanSelector/onClick_btnNonSelectReturn&quot;}],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;iryoKikanCode&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;iryoKikanName&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;ishiCode&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;ishiName&quot;,&quot;value&quot;:&quot;&quot;}],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:false,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;410px&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="IryoKikanSelector_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">医療機関選択</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="IryoKikanSelector_panel_body_area" style="height: 410px;"><div title="" class="UzPanel FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default" id="IryoKikan" style="width: 720px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;IryoKikan&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;720px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;IryoKikan&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;医療機関&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;IryoKikan&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:false,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:1,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader clearBackground" id="IryoKikan_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">医療機関</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M Panel-GroupBox ui-droppable ui-sortable" id="IryoKikan_panel_body_area"><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable Width-G2" id="IryoKikanList" style="margin: 0em; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;IryoKikanList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;IryoKikanList&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;IryoKikanList&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:true,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="IryoKikanList_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="IryoKikanList_panel_body_area"><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="btnToMentenanceIryoKikan" style="width: 200px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnToMentenanceIryoKikan&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;200px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;btnToMentenanceIryoKikan&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onBeforeClick&quot;:&quot;&quot;,&quot;onAfterClick&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;text&quot;:&quot;医療機関情報を修正する&quot;,&quot;appearance&quot;:0,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;,&quot;icon&quot;:0,&quot;heightTextBoxMatches&quot;:false}"><span>医療機関情報を修正する</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="dgIryoKikanList" style="width: 370px; height: 220px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgIryoKikanList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;370px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;dgIryoKikanList&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;220px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:true,&quot;isShowFilterButton&quot;:true,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;番号&quot;,&quot;dataName&quot;:&quot;iryoKikanNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:82,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;iryoKikanNo&quot;},{&quot;columnName&quot;:&quot;名称&quot;,&quot;dataName&quot;:&quot;iryoKikanName&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:230,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;iryoKikanName&quot;}]},&quot;onSort&quot;:&quot;&quot;,&quot;onSelect&quot;:&quot;onSelect_dgIryoKikanList&quot;,&quot;onSelectByDblClick&quot;:&quot;onSelectByDC_IryoKikan&quot;,&quot;onSelectBySelectButton&quot;:&quot;onSelectBySB_IryoKikan&quot;,&quot;onSelectByModifyButton&quot;:&quot;&quot;,&quot;onSelectByDeleteButton&quot;:&quot;&quot;,&quot;onAfterRequest&quot;:&quot;&quot;,&quot;onAfterRequestByDblClick&quot;:&quot;&quot;,&quot;onAfterRequestBySelectButton&quot;:&quot;&quot;,&quot;onAfterRequestByModifyButton&quot;:&quot;&quot;,&quot;onAfterRequestByDeleteButton&quot;:&quot;&quot;,&quot;onOnlyRow&quot;:&quot;&quot;,&quot;onNoRow&quot;:&quot;&quot;,&quot;onMultiRows&quot;:&quot;&quot;,&quot;dataSource&quot;:[],&quot;sortOrder&quot;:&quot;iryoKikanName&quot;,&quot;isAscending&quot;:true,&quot;filterList&quot;:[],&quot;activeRowId&quot;:-1,&quot;gridAction&quot;:[]}"><div id="dgIryoKikanList_grid_table" role="" style="width: 370px; height: 195px; position: relative;"></div><div id="dgIryoKikanList_footer" style="width: 370px; height: 25px;"></div></div></div></div><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable marginLeft-XS Width-G2" id="Ishi" style="width: auto; margin-top: 0em; margin-right: 0em; margin-bottom: 0em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;Ishi&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;Ishi&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:true,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;Ishi&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:true,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="Ishi_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="Ishi_panel_body_area"><div title="" class="UzSpace JSControl controlMargin-M ClearFloat Width-Default marginLeft-XS marginRight-XS" id="spaIshi" style="height: 17px;" data-control-type="Space" data-obj="{&quot;fieldName&quot;:&quot;spaIshi&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Space&quot;,&quot;width&quot;:&quot;Default&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;spaIshi&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;height&quot;:&quot;17px&quot;}"></div><div title="" class="UzPanel FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default Width-G2" id="IshiList" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;IshiList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;IshiList&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;所属医師&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;IshiList&quot;},{&quot;postParameterPanelNames&quot;:&quot;IryoKikanList&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onSelect_dgIryoKikanList&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/IryoKikanSelector/onSelect_dgIryoKikanList&quot;}],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:false,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:true,&quot;panelDisplay&quot;:1,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader clearBackground" id="IshiList_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">所属医師</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M Panel-GroupBox ui-droppable ui-sortable" id="IshiList_panel_body_area"><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="dgIshiList" style="width: 290px; height: 190px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgIshiList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;290px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;dgIshiList&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;190px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:true,&quot;isShowFilterButton&quot;:true,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;番号&quot;,&quot;dataName&quot;:&quot;ishiNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:82,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ishiNo&quot;},{&quot;columnName&quot;:&quot;氏名&quot;,&quot;dataName&quot;:&quot;ishiName&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ishiName&quot;}]},&quot;onSort&quot;:&quot;&quot;,&quot;onSelect&quot;:&quot;&quot;,&quot;onSelectByDblClick&quot;:&quot;onSelectByDC_Ishi&quot;,&quot;onSelectBySelectButton&quot;:&quot;onSelectBySB_Ishi&quot;,&quot;onSelectByModifyButton&quot;:&quot;&quot;,&quot;onSelectByDeleteButton&quot;:&quot;&quot;,&quot;onAfterRequest&quot;:&quot;&quot;,&quot;onAfterRequestByDblClick&quot;:&quot;&quot;,&quot;onAfterRequestBySelectButton&quot;:&quot;&quot;,&quot;onAfterRequestByModifyButton&quot;:&quot;&quot;,&quot;onAfterRequestByDeleteButton&quot;:&quot;&quot;,&quot;onOnlyRow&quot;:&quot;&quot;,&quot;onNoRow&quot;:&quot;&quot;,&quot;onMultiRows&quot;:&quot;&quot;,&quot;dataSource&quot;:[],&quot;sortOrder&quot;:&quot;IshiMeisho&quot;,&quot;isAscending&quot;:true,&quot;filterList&quot;:[],&quot;activeRowId&quot;:-1,&quot;gridAction&quot;:[]}"><div id="dgIshiList_grid_table" role="" style="width: 290px; height: 165px; position: relative;"></div><div id="dgIshiList_footer" style="width: 290px; height: 25px;"></div></div></div></div></div></div></div></div><div title="" class="UzPanel FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default" id="SelectedContents" style="width: 720px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SelectedContents&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;720px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;SelectedContents&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;選択内容&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;SelectedContents&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:false,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:1,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader clearBackground" id="SelectedContents_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">選択内容</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M Panel-GroupBox ui-droppable ui-sortable" id="SelectedContents_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="txtiryoKikanCode" style="width: 206px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtiryoKikanCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;82px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtiryoKikanCode_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:true,&quot;text&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;maxLength&quot;:&quot;10&quot;,&quot;minLength&quot;:&quot;10&quot;,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:2,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;医療機関&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;S&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;,&quot;formatLength&quot;:&quot;10&quot;}"><span class="word-wrap-break-word Label-L Width-S text-align-right" id="txtiryoKikanCode_labelL"><span>医療機関</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor text-align-left ime-mode-Off ui-autocomplete-input" id="txtiryoKikanCode_core" style="width: 82px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginRight-XS" id="txtiryoKikanName" style="width: 255px; height: 21px; margin-left: 0em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtiryoKikanName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;250px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtiryoKikanName_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:true,&quot;text&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;S&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;}"><input tabindex="-1" class="UzTextBox CoreElement readonlyColor text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtiryoKikanName_core" style="width: 250px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="txtishiCode" style="width: 189px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtishiCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;65px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtishiCode_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:true,&quot;text&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;maxLength&quot;:&quot;8&quot;,&quot;minLength&quot;:&quot;8&quot;,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:2,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;医師&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;S&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;,&quot;formatLength&quot;:&quot;8&quot;}"><span class="word-wrap-break-word Label-L Width-S text-align-right" id="txtishiCode_labelL"><span>医師</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor text-align-left ime-mode-Off ui-autocomplete-input" id="txtishiCode_core" style="width: 65px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginRight-XS" id="txtishiName" style="width: 155px; height: 21px; margin-left: 0em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtishiName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtishiName_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:true,&quot;text&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;S&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;}"><input tabindex="-1" class="UzTextBox CoreElement readonlyColor text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtishiName_core" style="width: 150px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></div><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-S Width-S" id="btnSelectAndClose" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnSelectAndClose&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:2,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;btnSelectAndClose&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onBeforeClick&quot;:&quot;&quot;,&quot;onAfterClick&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;onClick_btnSelectAndClose&quot;,&quot;text&quot;:&quot;確定&quot;,&quot;appearance&quot;:0,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;,&quot;icon&quot;:0,&quot;heightTextBoxMatches&quot;:false}"><span>確定</span></button><button title="" class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS marginRight-XS Width-S" id="btnNonSelectReturn" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnNonSelectReturn&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:2,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;btnNonSelectReturn&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onBeforeClick&quot;:&quot;&quot;,&quot;onAfterClick&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;onClick_btnNonSelectReturn&quot;,&quot;text&quot;:&quot;取消&quot;,&quot;appearance&quot;:0,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;,&quot;icon&quot;:0,&quot;heightTextBoxMatches&quot;:false}"><span>取消</span></button></div></div> <script type='text/javascript' class='RamlConvert'>var DBZ= DBZ? DBZ: {};DBZ['DEFAULT'] = {};DBZ['DEFAULT'].IryoKikanSelectorRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_IryoKikanSelector').getProperty();parameter0.IryoKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_IryoKikan').getProperty();parameter0.IryoKikan.IryoKikanList = Uz.JSControlUtil.getJSControl(parentFieldName + '_IryoKikanList').getProperty();parameter0.IryoKikan.IryoKikanList.btnToMentenanceIryoKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToMentenanceIryoKikan').getProperty();parameter0.IryoKikan.IryoKikanList.dgIryoKikanList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgIryoKikanList').getProperty();parameter0.IryoKikan.Ishi = Uz.JSControlUtil.getJSControl(parentFieldName + '_Ishi').getProperty();parameter0.IryoKikan.Ishi.spaIshi = Uz.JSControlUtil.getJSControl(parentFieldName + '_spaIshi').getProperty();parameter0.IryoKikan.Ishi.IshiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_IshiList').getProperty();parameter0.IryoKikan.Ishi.IshiList.dgIshiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgIshiList').getProperty();parameter0.SelectedContents = Uz.JSControlUtil.getJSControl(parentFieldName + '_SelectedContents').getProperty();parameter0.SelectedContents.txtiryoKikanCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtiryoKikanCode').getProperty();parameter0.SelectedContents.txtiryoKikanName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtiryoKikanName').getProperty();parameter0.SelectedContents.txtishiCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtishiCode').getProperty();parameter0.SelectedContents.txtishiName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtishiName').getProperty();parameter0.btnSelectAndClose = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnSelectAndClose').getProperty();parameter0.btnNonSelectReturn = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnNonSelectReturn').getProperty();paramArray.push(parameter0);return paramArray; };DBZ['DEFAULT'].IryoKikanRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_IryoKikan').getProperty();parameter0.IryoKikanList = Uz.JSControlUtil.getJSControl(parentFieldName + '_IryoKikanList').getProperty();parameter0.IryoKikanList.btnToMentenanceIryoKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToMentenanceIryoKikan').getProperty();parameter0.IryoKikanList.dgIryoKikanList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgIryoKikanList').getProperty();parameter0.Ishi = Uz.JSControlUtil.getJSControl(parentFieldName + '_Ishi').getProperty();parameter0.Ishi.spaIshi = Uz.JSControlUtil.getJSControl(parentFieldName + '_spaIshi').getProperty();parameter0.Ishi.IshiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_IshiList').getProperty();parameter0.Ishi.IshiList.dgIshiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgIshiList').getProperty();paramArray.push(parameter0);return paramArray; };DBZ['DEFAULT'].IryoKikanListRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_IryoKikanList').getProperty();parameter0.btnToMentenanceIryoKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToMentenanceIryoKikan').getProperty();parameter0.dgIryoKikanList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgIryoKikanList').getProperty();paramArray.push(parameter0);return paramArray; };DBZ['DEFAULT'].IshiRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_Ishi').getProperty();parameter0.spaIshi = Uz.JSControlUtil.getJSControl(parentFieldName + '_spaIshi').getProperty();parameter0.IshiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_IshiList').getProperty();parameter0.IshiList.dgIshiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgIshiList').getProperty();paramArray.push(parameter0);return paramArray; };DBZ['DEFAULT'].IshiListRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_IshiList').getProperty();parameter0.dgIshiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgIshiList').getProperty();paramArray.push(parameter0);var parameter1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_IryoKikanList').getProperty();parameter1.btnToMentenanceIryoKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToMentenanceIryoKikan').getProperty();parameter1.dgIryoKikanList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgIryoKikanList').getProperty();paramArray.push(parameter1);return paramArray; };DBZ['DEFAULT'].SelectedContentsRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_SelectedContents').getProperty();parameter0.txtiryoKikanCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtiryoKikanCode').getProperty();parameter0.txtiryoKikanName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtiryoKikanName').getProperty();parameter0.txtishiCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtishiCode').getProperty();parameter0.txtishiName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtishiName').getProperty();paramArray.push(parameter0);return paramArray; };</script>
+<script type='text/javascript'>var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBE;
+(function (DBE) {
+    (function (IryoKikanSelector) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onSelectByDC_IryoKikan", {
+                get: function () {
+                    return "onSelectByDC_IryoKikan";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelect_dgIryoKikanList", {
+                get: function () {
+                    return "onSelect_dgIryoKikanList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectByDC_Ishi", {
+                get: function () {
+                    return "onSelectByDC_Ishi";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySB_IryoKikan", {
+                get: function () {
+                    return "onSelectBySB_IryoKikan";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnNonSelectReturn", {
+                get: function () {
+                    return "onClick_btnNonSelectReturn";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnSelectAndClose", {
+                get: function () {
+                    return "onClick_btnSelectAndClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySB_Ishi", {
+                get: function () {
+                    return "onSelectBySB_Ishi";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        IryoKikanSelector.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "IryoKikanSelector";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.IryoKikanSelector = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.IryoKikan = function () {
+                return new UZA.Panel(this.convFiledName("IryoKikan"));
+            };
+
+            Controls.prototype.IryoKikanList = function () {
+                return new UZA.Panel(this.convFiledName("IryoKikanList"));
+            };
+
+            Controls.prototype.btnToMentenanceIryoKikan = function () {
+                return new UZA.Button(this.convFiledName("btnToMentenanceIryoKikan"));
+            };
+
+            Controls.prototype.dgIryoKikanList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgIryoKikanList"));
+            };
+
+            Controls.prototype.Ishi = function () {
+                return new UZA.Panel(this.convFiledName("Ishi"));
+            };
+
+            Controls.prototype.spaIshi = function () {
+                return new UZA.Space(this.convFiledName("spaIshi"));
+            };
+
+            Controls.prototype.IshiList = function () {
+                return new UZA.Panel(this.convFiledName("IshiList"));
+            };
+
+            Controls.prototype.dgIshiList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgIshiList"));
+            };
+
+            Controls.prototype.SelectedContents = function () {
+                return new UZA.Panel(this.convFiledName("SelectedContents"));
+            };
+
+            Controls.prototype.txtiryoKikanCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtiryoKikanCode"));
+            };
+
+            Controls.prototype.txtiryoKikanName = function () {
+                return new UZA.TextBox(this.convFiledName("txtiryoKikanName"));
+            };
+
+            Controls.prototype.txtishiCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtishiCode"));
+            };
+
+            Controls.prototype.txtishiName = function () {
+                return new UZA.TextBox(this.convFiledName("txtishiName"));
+            };
+
+            Controls.prototype.btnSelectAndClose = function () {
+                return new UZA.Button(this.convFiledName("btnSelectAndClose"));
+            };
+
+            Controls.prototype.btnNonSelectReturn = function () {
+                return new UZA.Button(this.convFiledName("btnNonSelectReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        IryoKikanSelector.Controls = Controls;
+    })(DBE.IryoKikanSelector || (DBE.IryoKikanSelector = {}));
+    var IryoKikanSelector = DBE.IryoKikanSelector;
+
+    var IryoKikanSelector_Design = (function (_super) {
+        __extends(IryoKikanSelector_Design, _super);
+        function IryoKikanSelector_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, IryoKikanSelector_Design.myLayout, fieldName);
+        }
+        IryoKikanSelector_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        IryoKikanSelector_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        IryoKikanSelector_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "IryoKikanSelector",
+                    "items": [
+                        {
+                            "fieldName": "IryoKikan",
+                            "items": [
+                                {
+                                    "fieldName": "IryoKikanList",
+                                    "items": [
+                                        {
+                                            "fieldName": "btnToMentenanceIryoKikan",
+                                            "items": [],
+                                            "controlType": "Button",
+                                            "width": "200",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "btnToMentenanceIryoKikan",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "onClick": "",
+                                            "text": "医療機関情報を修正する",
+                                            "appearance": 0,
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": "",
+                                            "icon": 0,
+                                            "heightTextBoxMatches": false
+                                        },
+                                        {
+                                            "fieldName": "dgIryoKikanList",
+                                            "items": [],
+                                            "controlType": "DataGrid",
+                                            "width": "370",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "dgIryoKikanList",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "height": "220",
+                                            "gridSetting": {
+                                                "rowHeight": 25,
+                                                "isMultiSelectable": false,
+                                                "isShowHeader": true,
+                                                "isShowFooter": true,
+                                                "isShowFilter": true,
+                                                "isShowFilterButton": true,
+                                                "isShowRowState": false,
+                                                "isShowSelectButtonColumn": true,
+                                                "isShowModifyButtonColumn": false,
+                                                "isShowDeleteButtonColumn": false,
+                                                "limitRowCount": 0,
+                                                "selectedRowCount": 0,
+                                                "header": {
+                                                    "combineColumns": [],
+                                                    "frozenColumn": "",
+                                                    "headerHeight": 0
+                                                },
+                                                "columns": [
+                                                    {
+                                                        "columnName": "番号",
+                                                        "dataName": "iryoKikanNo",
+                                                        "toolTip": "",
+                                                        "bgColor": 0,
+                                                        "width": 82,
+                                                        "visible": true,
+                                                        "cellType": 0,
+                                                        "cellDetails": {
+                                                            "cellType": 0
+                                                        },
+                                                        "align": 1,
+                                                        "resize": true,
+                                                        "isPrivateInfo": false,
+                                                        "sortKey": "iryoKikanNo"
+                                                    },
+                                                    {
+                                                        "columnName": "名称",
+                                                        "dataName": "iryoKikanName",
+                                                        "toolTip": "",
+                                                        "bgColor": 0,
+                                                        "width": 230,
+                                                        "visible": true,
+                                                        "cellType": 0,
+                                                        "cellDetails": {
+                                                            "cellType": 0
+                                                        },
+                                                        "align": 0,
+                                                        "resize": true,
+                                                        "isPrivateInfo": false,
+                                                        "sortKey": "iryoKikanName"
+                                                    }
+                                                ]
+                                            },
+                                            "onSort": "",
+                                            "onSelect": "onSelect_dgIryoKikanList",
+                                            "onSelectByDblClick": "onSelectByDC_IryoKikan",
+                                            "onSelectBySelectButton": "onSelectBySB_IryoKikan",
+                                            "onSelectByModifyButton": "",
+                                            "onSelectByDeleteButton": "",
+                                            "onAfterRequest": "",
+                                            "onAfterRequestByDblClick": "",
+                                            "onAfterRequestBySelectButton": "",
+                                            "onAfterRequestByModifyButton": "",
+                                            "onAfterRequestByDeleteButton": "",
+                                            "onOnlyRow": "",
+                                            "onNoRow": "",
+                                            "onMultiRows": "",
+                                            "dataSource": [],
+                                            "sortOrder": "iryoKikanName",
+                                            "isAscending": true,
+                                            "filterList": [],
+                                            "activeRowId": -1
+                                        }
+                                    ],
+                                    "controlType": "Panel",
+                                    "width": "G2",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "IryoKikanList",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "onLoad": "",
+                                    "title": "",
+                                    "marginTop": "0",
+                                    "marginBottom": "0",
+                                    "isOpen": true,
+                                    "canOpenAndClose": false,
+                                    "postParameterPanelNames": [
+                                        {
+                                            "postParameterPanelNames": "IryoKikanList"
+                                        }
+                                    ],
+                                    "requestSettings": [],
+                                    "hiddenInput": [],
+                                    "onOpen": "",
+                                    "onClose": "",
+                                    "session": {},
+                                    "eraseBorder": true,
+                                    "backgroundColor": 0,
+                                    "widthAuto": true,
+                                    "panelDisplay": 0,
+                                    "isGroupBox": false,
+                                    "readOnly": false,
+                                    "height": "Auto"
+                                },
+                                {
+                                    "fieldName": "Ishi",
+                                    "items": [
+                                        {
+                                            "fieldName": "spaIshi",
+                                            "items": [],
+                                            "controlType": "Space",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "spaIshi",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "spaceCount": 1
+                                        },
+                                        {
+                                            "fieldName": "IshiList",
+                                            "items": [
+                                                {
+                                                    "fieldName": "dgIshiList",
+                                                    "items": [],
+                                                    "controlType": "DataGrid",
+                                                    "width": "290",
+                                                    "visible": true,
+                                                    "displayNone": false,
+                                                    "disabled": false,
+                                                    "accessKey": "",
+                                                    "nextFocusFieldName": "",
+                                                    "wrap": false,
+                                                    "dependencies": [],
+                                                    "float": 0,
+                                                    "toolTip": "",
+                                                    "authorityMode": 0,
+                                                    "marginLeft": "XS",
+                                                    "marginRight": "XS",
+                                                    "selectControlID": "dgIshiList",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
+                                                    "readOnly": false,
+                                                    "height": "190",
+                                                    "gridSetting": {
+                                                        "rowHeight": 25,
+                                                        "isMultiSelectable": false,
+                                                        "isShowHeader": true,
+                                                        "isShowFooter": true,
+                                                        "isShowFilter": true,
+                                                        "isShowFilterButton": true,
+                                                        "isShowRowState": false,
+                                                        "isShowSelectButtonColumn": true,
+                                                        "isShowModifyButtonColumn": false,
+                                                        "isShowDeleteButtonColumn": false,
+                                                        "limitRowCount": 0,
+                                                        "selectedRowCount": 0,
+                                                        "header": {
+                                                            "combineColumns": [],
+                                                            "frozenColumn": "",
+                                                            "headerHeight": 0
+                                                        },
+                                                        "columns": [
+                                                            {
+                                                                "columnName": "番号",
+                                                                "dataName": "ishiNo",
+                                                                "toolTip": "",
+                                                                "bgColor": 0,
+                                                                "width": 82,
+                                                                "visible": true,
+                                                                "cellType": 0,
+                                                                "cellDetails": {
+                                                                    "cellType": 0
+                                                                },
+                                                                "align": 1,
+                                                                "resize": true,
+                                                                "isPrivateInfo": false,
+                                                                "sortKey": "ishiNo"
+                                                            },
+                                                            {
+                                                                "columnName": "氏名",
+                                                                "dataName": "ishiName",
+                                                                "toolTip": "",
+                                                                "bgColor": 0,
+                                                                "width": 150,
+                                                                "visible": true,
+                                                                "cellType": 0,
+                                                                "cellDetails": {
+                                                                    "cellType": 0
+                                                                },
+                                                                "align": 0,
+                                                                "resize": true,
+                                                                "isPrivateInfo": false,
+                                                                "sortKey": "ishiName"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "onSort": "",
+                                                    "onSelect": "",
+                                                    "onSelectByDblClick": "onSelectByDC_Ishi",
+                                                    "onSelectBySelectButton": "onSelectBySB_Ishi",
+                                                    "onSelectByModifyButton": "",
+                                                    "onSelectByDeleteButton": "",
+                                                    "onAfterRequest": "",
+                                                    "onAfterRequestByDblClick": "",
+                                                    "onAfterRequestBySelectButton": "",
+                                                    "onAfterRequestByModifyButton": "",
+                                                    "onAfterRequestByDeleteButton": "",
+                                                    "onOnlyRow": "",
+                                                    "onNoRow": "",
+                                                    "onMultiRows": "",
+                                                    "dataSource": [],
+                                                    "sortOrder": "IshiMeisho",
+                                                    "isAscending": true,
+                                                    "filterList": [],
+                                                    "activeRowId": -1
+                                                }
+                                            ],
+                                            "controlType": "Panel",
+                                            "width": "G2",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "IshiList",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "onLoad": "",
+                                            "title": "所属医師",
+                                            "marginTop": "Default",
+                                            "marginBottom": "Default",
+                                            "isOpen": true,
+                                            "canOpenAndClose": false,
+                                            "postParameterPanelNames": [
+                                                {
+                                                    "postParameterPanelNames": "IshiList"
+                                                },
+                                                {
+                                                    "postParameterPanelNames": "IryoKikanList"
+                                                }
+                                            ],
+                                            "requestSettings": [
+                                                {
+                                                    "eventName": "onLoad",
+                                                    "requestUrl": ""
+                                                },
+                                                {
+                                                    "eventName": "onSelect_dgIryoKikanList",
+                                                    "requestUrl": "dbe/db/dbe/IryoKikanSelector/onSelect_dgIryoKikanList"
+                                                }
+                                            ],
+                                            "hiddenInput": [],
+                                            "onOpen": "",
+                                            "onClose": "",
+                                            "session": {},
+                                            "eraseBorder": false,
+                                            "backgroundColor": 0,
+                                            "widthAuto": true,
+                                            "panelDisplay": 1,
+                                            "isGroupBox": false,
+                                            "readOnly": false,
+                                            "height": "Auto"
+                                        }
+                                    ],
+                                    "controlType": "Panel",
+                                    "width": "G2",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "0",
+                                    "selectControlID": "Ishi",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "onLoad": "",
+                                    "title": "",
+                                    "marginTop": "0",
+                                    "marginBottom": "0",
+                                    "isOpen": true,
+                                    "canOpenAndClose": true,
+                                    "postParameterPanelNames": [
+                                        {
+                                            "postParameterPanelNames": "Ishi"
+                                        }
+                                    ],
+                                    "requestSettings": [],
+                                    "hiddenInput": [],
+                                    "onOpen": "",
+                                    "onClose": "",
+                                    "session": {},
+                                    "eraseBorder": true,
+                                    "backgroundColor": 0,
+                                    "widthAuto": true,
+                                    "panelDisplay": 0,
+                                    "isGroupBox": false,
+                                    "readOnly": false,
+                                    "height": "Auto"
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "720",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "IryoKikan",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "医療機関",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "IryoKikan"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 1,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto"
+                        },
+                        {
+                            "fieldName": "SelectedContents",
+                            "items": [
+                                {
+                                    "fieldName": "txtiryoKikanCode",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "82",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtiryoKikanCode_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "text": "",
+                                    "required": false,
+                                    "maxLength": "10",
+                                    "minLength": "10",
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 2,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "医療機関",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": "",
+                                    "formatLength": "10"
+                                },
+                                {
+                                    "fieldName": "txtiryoKikanName",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "250",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtiryoKikanName_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "text": "",
+                                    "required": false,
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 0,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtishiCode",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "65",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtishiCode_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "text": "",
+                                    "required": false,
+                                    "maxLength": "8",
+                                    "minLength": "8",
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 2,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "医師",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": "",
+                                    "formatLength": "8"
+                                },
+                                {
+                                    "fieldName": "txtishiName",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "150",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtishiName_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "text": "",
+                                    "required": false,
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 0,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": ""
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "720",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "SelectedContents",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "選択内容",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "SelectedContents"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 1,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto"
+                        },
+                        {
+                            "fieldName": "btnSelectAndClose",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "S",
+                            "selectControlID": "btnSelectAndClose",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onClick": "onClick_btnSelectAndClose",
+                            "text": "確定",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        },
+                        {
+                            "fieldName": "btnNonSelectReturn",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnNonSelectReturn",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onClick": "onClick_btnNonSelectReturn",
+                            "text": "取消",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G8",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "Default",
+                    "marginRight": "Default",
+                    "selectControlID": "IryoKikanSelector",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "医療機関選択",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "IryoKikanSelector"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbe/db/dbe/IryoKikanSelector/onLoad"
+                        },
+                        {
+                            "eventName": "onSelectByDC_IryoKikan",
+                            "requestUrl": "dbe/db/dbe/IryoKikanSelector/onSelectByDC_IryoKikan"
+                        },
+                        {
+                            "eventName": "onSelectBySB_IryoKikan",
+                            "requestUrl": "dbe/db/dbe/IryoKikanSelector/onSelectBySB_IryoKikan"
+                        },
+                        {
+                            "eventName": "onSelectByDC_Ishi",
+                            "requestUrl": "dbe/db/dbe/IryoKikanSelector/onSelectByDC_Ishi"
+                        },
+                        {
+                            "eventName": "onSelectBySB_Ishi",
+                            "requestUrl": "dbe/db/dbe/IryoKikanSelector/onSelectBySB_Ishi"
+                        },
+                        {
+                            "eventName": "onClick_btnSelectAndClose",
+                            "requestUrl": "dbe/db/dbe/IryoKikanSelector/onClick_btnSelectAndClose"
+                        },
+                        {
+                            "eventName": "onClick_btnNonSelectReturn",
+                            "requestUrl": "dbe/db/dbe/IryoKikanSelector/onClick_btnNonSelectReturn"
+                        }
+                    ],
+                    "hiddenInput": [
+                        {
+                            "propertyName": "iryoKikanCode",
+                            "value": ""
+                        },
+                        {
+                            "propertyName": "iryoKikanName",
+                            "value": ""
+                        },
+                        {
+                            "propertyName": "ishiCode",
+                            "value": ""
+                        },
+                        {
+                            "propertyName": "ishiName",
+                            "value": ""
+                        }
+                    ],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "410"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBE",
+            "controlName": "IryoKikanSelector",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [],
+            "dataPassingForDialog": [
+                {
+                    "key": "iryoKikanCode",
+                    "controlName": "IryoKikanSelector.iryoKikanCode"
+                },
+                {
+                    "key": "iryoKikanName",
+                    "controlName": "IryoKikanSelector.iryoKikanName"
+                },
+                {
+                    "key": "ishiCode",
+                    "controlName": "IryoKikanSelector.ishiCode"
+                },
+                {
+                    "key": "ishiName",
+                    "controlName": "IryoKikanSelector.ishiName"
+                }
+            ],
+            "dialogOkEventNameForDialog": "onClick_btnSelectAndClose",
+            "dialogCancelEventNameForDialog": "onClick_btnNonSelectReturn",
+            "canTransferEvent": true,
+            "heightForDialog": "450"
+        };
+        return IryoKikanSelector_Design;
+    })(Uz.CommonChildDiv);
+    DBE.IryoKikanSelector_Design = IryoKikanSelector_Design;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (IryoKikanSelector) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new IryoKikanSelector.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        IryoKikanSelector.ModeController = ModeController;
+    })(DBE.IryoKikanSelector || (DBE.IryoKikanSelector = {}));
+    var IryoKikanSelector = DBE.IryoKikanSelector;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (IryoKikanSelector) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new IryoKikanSelector.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        IryoKikanSelector.PublicProperties = PublicProperties;
+    })(DBE.IryoKikanSelector || (DBE.IryoKikanSelector = {}));
+    var IryoKikanSelector = DBE.IryoKikanSelector;
+})(DBE || (DBE = {}));
+</script>
+</div>

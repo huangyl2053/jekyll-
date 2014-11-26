@@ -38,9 +38,6 @@ module DBE {
                 editTypes.addEditType("text_ItemNo", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("text_ItemName", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("visible_ItemNo", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                /*
-                editTypes.addEditType("dataSource_Choices", UZA.EditTypeEnumForPublicProperty.StringType);
-                */
                 editTypes.addEditType("onFocus_Answer", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
             }
