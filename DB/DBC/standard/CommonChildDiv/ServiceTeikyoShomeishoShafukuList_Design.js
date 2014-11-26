@@ -6,6 +6,51 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (ServiceTeikyoShomeishoShafukuList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceTeikyoShomeishoShafukuList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ServiceTeikyoShomeishoShafukuList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ServiceTeikyoShomeishoShafukuList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgServiceTeikyoShomeishoShafukuList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceTeikyoShomeishoShafukuList"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ServiceTeikyoShomeishoShafukuList.Controls = Controls;
+    })(DBC.ServiceTeikyoShomeishoShafukuList || (DBC.ServiceTeikyoShomeishoShafukuList = {}));
+    var ServiceTeikyoShomeishoShafukuList = DBC.ServiceTeikyoShomeishoShafukuList;
+
     var ServiceTeikyoShomeishoShafukuList_Design = (function (_super) {
         __extends(ServiceTeikyoShomeishoShafukuList_Design, _super);
         function ServiceTeikyoShomeishoShafukuList_Design($parentElement, isDesignMode, fieldName) {

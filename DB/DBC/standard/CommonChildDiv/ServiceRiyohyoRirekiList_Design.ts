@@ -1,11 +1,57 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBC {
     /**
      * 自動生成コードです。修正しないでください。
-     * ServiceRiyohyoRirekiListクラスのみで継承して使えます。
      */
+
+    export module ServiceRiyohyoRirekiList {
+
+        export class Events {
+
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "ServiceRiyohyoRirekiList";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public ServiceRiyohyoRirekiList() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public dgServiceRiyohyoRirekiList() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgServiceRiyohyoRirekiList"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class ServiceRiyohyoRirekiList_Design extends Uz.CommonChildDiv {
     
         public get RirekiListGridSetting() {

@@ -1,27 +1,27 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.kogakuservicehidetail;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfo.ShinseishaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tplShinseisha のクラスファイル 
- * 
+ * tplShinseisha のクラスファイル
+ *
  * @author 自動生成
  */
-public class tplShinseishaDiv extends TabPanel {
+public class tplKetteiJohoDiv extends TabPanel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("Shinseisha")
     private ShinseishaInfoDiv Shinseisha;
     @JsonProperty("txtShiharaiTotalAmount")
@@ -40,11 +40,6 @@ public class tplShinseishaDiv extends TabPanel {
         return Shinseisha;
     }
 
-    @JsonProperty("Shinseisha")
-    public void setShinseisha(ShinseishaInfoDiv Shinseisha) {
-        this.Shinseisha=Shinseisha;
-    }
-
     @JsonProperty("txtShiharaiTotalAmount")
     public TextBoxNum getTxtShiharaiTotalAmount() {
         return txtShiharaiTotalAmount;
@@ -52,7 +47,7 @@ public class tplShinseishaDiv extends TabPanel {
 
     @JsonProperty("txtShiharaiTotalAmount")
     public void setTxtShiharaiTotalAmount(TextBoxNum txtShiharaiTotalAmount) {
-        this.txtShiharaiTotalAmount=txtShiharaiTotalAmount;
+        this.txtShiharaiTotalAmount = txtShiharaiTotalAmount;
     }
 
     @JsonProperty("txtShinseiRiyu")
@@ -62,7 +57,7 @@ public class tplShinseishaDiv extends TabPanel {
 
     @JsonProperty("txtShinseiRiyu")
     public void setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
-        this.txtShinseiRiyu=txtShinseiRiyu;
+        this.txtShinseiRiyu = txtShinseiRiyu;
     }
 
 }

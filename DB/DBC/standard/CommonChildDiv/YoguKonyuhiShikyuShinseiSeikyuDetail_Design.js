@@ -6,6 +6,130 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (YoguKonyuhiShikyuShinseiSeikyuDetail) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onSelectByModifyButton", {
+                get: function () {
+                    return "onSelectByModifyButton";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnModifyDetail", {
+                get: function () {
+                    return "onClick_btnModifyDetail";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnClear", {
+                get: function () {
+                    return "onClick_btnClear";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectByDeleteButton", {
+                get: function () {
+                    return "onSelectByDeleteButton";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySelectButton", {
+                get: function () {
+                    return "onSelectBySelectButton";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        YoguKonyuhiShikyuShinseiSeikyuDetail.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "YoguKonyuhiShikyuShinseiSeikyuDetail";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.YoguKonyuhiShikyuShinseiSeikyuDetail = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgSeikyuDetail = function () {
+                return new UZA.DataGrid(this.convFiledName("dgSeikyuDetail"));
+            };
+
+            Controls.prototype.YoguKonyuhiShikyuShinseiSeikyuDetailInput = function () {
+                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseiSeikyuDetailInput"));
+            };
+
+            Controls.prototype.txtBuyYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtBuyYMD"));
+            };
+
+            Controls.prototype.ddlShumoku = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlShumoku"));
+            };
+
+            Controls.prototype.txtShohinName = function () {
+                return new UZA.TextBox(this.convFiledName("txtShohinName"));
+            };
+
+            Controls.prototype.btnShohinmeiSearch = function () {
+                return new UZA.Button(this.convFiledName("btnShohinmeiSearch"));
+            };
+
+            Controls.prototype.txtSeizoJigyosha = function () {
+                return new UZA.TextBox(this.convFiledName("txtSeizoJigyosha"));
+            };
+
+            Controls.prototype.txtHanbaiJigyosha = function () {
+                return new UZA.TextBox(this.convFiledName("txtHanbaiJigyosha"));
+            };
+
+            Controls.prototype.txtBuyAmount = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtBuyAmount"));
+            };
+
+            Controls.prototype.txtHinmokuCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtHinmokuCode"));
+            };
+
+            Controls.prototype.radShinsaMethod = function () {
+                return new UZA.RadioButton(this.convFiledName("radShinsaMethod"));
+            };
+
+            Controls.prototype.btnClear = function () {
+                return new UZA.Button(this.convFiledName("btnClear"));
+            };
+
+            Controls.prototype.btnModifyDetail = function () {
+                return new UZA.Button(this.convFiledName("btnModifyDetail"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        YoguKonyuhiShikyuShinseiSeikyuDetail.Controls = Controls;
+    })(DBC.YoguKonyuhiShikyuShinseiSeikyuDetail || (DBC.YoguKonyuhiShikyuShinseiSeikyuDetail = {}));
+    var YoguKonyuhiShikyuShinseiSeikyuDetail = DBC.YoguKonyuhiShikyuShinseiSeikyuDetail;
+
     var YoguKonyuhiShikyuShinseiSeikyuDetail_Design = (function (_super) {
         __extends(YoguKonyuhiShikyuShinseiSeikyuDetail_Design, _super);
         function YoguKonyuhiShikyuShinseiSeikyuDetail_Design($parentElement, isDesignMode, fieldName) {

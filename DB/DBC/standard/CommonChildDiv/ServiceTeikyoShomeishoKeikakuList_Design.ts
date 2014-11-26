@@ -1,11 +1,63 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBC {
     /**
      * 自動生成コードです。修正しないでください。
-     * ServiceTeikyoShomeishoKeikakuListクラスのみで継承して使えます。
      */
+
+    export module ServiceTeikyoShomeishoKeikakuList {
+
+        export class Events {
+
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "ServiceTeikyoShomeishoKeikakuList";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public ServiceTeikyoShomeishoKeikakuList() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public btnAdd() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnAdd"));
+
+            }
+
+            public dgShokanShikyuTorokuShomeishoKeikakuList() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgShokanShikyuTorokuShomeishoKeikakuList"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class ServiceTeikyoShomeishoKeikakuList_Design extends Uz.CommonChildDiv {
     
         public get AddButtonVisible() {

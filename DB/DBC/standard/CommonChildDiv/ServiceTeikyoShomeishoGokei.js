@@ -1,17 +1,40 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 var DBC;
 (function (DBC) {
-    var ServiceTeikyoShomeishoGokei = (function (_super) {
-        __extends(ServiceTeikyoShomeishoGokei, _super);
-        function ServiceTeikyoShomeishoGokei() {
-            _super.apply(this, arguments);
-        }
-        return ServiceTeikyoShomeishoGokei;
-    })(DBC.ServiceTeikyoShomeishoGokei_Design);
-    DBC.ServiceTeikyoShomeishoGokei = ServiceTeikyoShomeishoGokei;
+    (function (ServiceTeikyoShomeishoGokei) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ServiceTeikyoShomeishoGokei.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ServiceTeikyoShomeishoGokei.ModeController = ModeController;
+    })(DBC.ServiceTeikyoShomeishoGokei || (DBC.ServiceTeikyoShomeishoGokei = {}));
+    var ServiceTeikyoShomeishoGokei = DBC.ServiceTeikyoShomeishoGokei;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoGokei) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ServiceTeikyoShomeishoGokei.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ServiceTeikyoShomeishoGokei.PublicProperties = PublicProperties;
+    })(DBC.ServiceTeikyoShomeishoGokei || (DBC.ServiceTeikyoShomeishoGokei = {}));
+    var ServiceTeikyoShomeishoGokei = DBC.ServiceTeikyoShomeishoGokei;
 })(DBC || (DBC = {}));

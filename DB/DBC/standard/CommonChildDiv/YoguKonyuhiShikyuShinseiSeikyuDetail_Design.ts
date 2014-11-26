@@ -1,11 +1,144 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBC {
     /**
      * 自動生成コードです。修正しないでください。
-     * YoguKonyuhiShikyuShinseiSeikyuDetailクラスのみで継承して使えます。
      */
+
+    export module YoguKonyuhiShikyuShinseiSeikyuDetail {
+
+        export class Events {
+
+            public static get onSelectByModifyButton(): string {
+                return "onSelectByModifyButton";
+            }
+            public static get onClick_btnModifyDetail(): string {
+                return "onClick_btnModifyDetail";
+            }
+            public static get onClick_btnClear(): string {
+                return "onClick_btnClear";
+            }
+            public static get onSelectByDeleteButton(): string {
+                return "onSelectByDeleteButton";
+            }
+            public static get onSelectBySelectButton(): string {
+                return "onSelectBySelectButton";
+            }
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "YoguKonyuhiShikyuShinseiSeikyuDetail";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public YoguKonyuhiShikyuShinseiSeikyuDetail() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public dgSeikyuDetail() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgSeikyuDetail"));
+
+            }
+
+            public YoguKonyuhiShikyuShinseiSeikyuDetailInput() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseiSeikyuDetailInput"));
+
+            }
+
+            public txtBuyYMD() : UZA.TextBoxDate {
+
+                return new UZA.TextBoxDate(this.convFiledName("txtBuyYMD"));
+
+            }
+
+            public ddlShumoku() : UZA.DropDownList {
+
+                return new UZA.DropDownList(this.convFiledName("ddlShumoku"));
+
+            }
+
+            public txtShohinName() : UZA.TextBox {
+
+                return new UZA.TextBox(this.convFiledName("txtShohinName"));
+
+            }
+
+            public btnShohinmeiSearch() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnShohinmeiSearch"));
+
+            }
+
+            public txtSeizoJigyosha() : UZA.TextBox {
+
+                return new UZA.TextBox(this.convFiledName("txtSeizoJigyosha"));
+
+            }
+
+            public txtHanbaiJigyosha() : UZA.TextBox {
+
+                return new UZA.TextBox(this.convFiledName("txtHanbaiJigyosha"));
+
+            }
+
+            public txtBuyAmount() : UZA.TextBoxNum {
+
+                return new UZA.TextBoxNum(this.convFiledName("txtBuyAmount"));
+
+            }
+
+            public txtHinmokuCode() : UZA.TextBoxCode {
+
+                return new UZA.TextBoxCode(this.convFiledName("txtHinmokuCode"));
+
+            }
+
+            public radShinsaMethod() : UZA.RadioButton {
+
+                return new UZA.RadioButton(this.convFiledName("radShinsaMethod"));
+
+            }
+
+            public btnClear() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnClear"));
+
+            }
+
+            public btnModifyDetail() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnModifyDetail"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class YoguKonyuhiShikyuShinseiSeikyuDetail_Design extends Uz.CommonChildDiv {
     
         public get btnModifyDetail_onClick() {

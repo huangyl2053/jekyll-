@@ -1,11 +1,81 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBC {
     /**
      * 自動生成コードです。修正しないでください。
-     * JukyushaIdoRenrakuhyoSakuseiErrorListクラスのみで継承して使えます。
      */
+
+    export module JukyushaIdoRenrakuhyoSakuseiErrorList {
+
+        export class Events {
+
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "JukyushaIdoRenrakuhyoSakuseiErrorList";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public JukyushaIdoRenrakuhyoSakuseiErrorList() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public lblErrorList() : UZA.Label {
+
+                return new UZA.Label(this.convFiledName("lblErrorList"));
+
+            }
+
+            public dgErrorList() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgErrorList"));
+
+            }
+
+            public lblTeiseiList() : UZA.Label {
+
+                return new UZA.Label(this.convFiledName("lblTeiseiList"));
+
+            }
+
+            public dgTeiseiList() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgTeiseiList"));
+
+            }
+
+            public btnClose() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnClose"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class JukyushaIdoRenrakuhyoSakuseiErrorList_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

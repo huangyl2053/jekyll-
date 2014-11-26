@@ -6,6 +6,58 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (JutakuKaishuhiRireki) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnClose", {
+                get: function () {
+                    return "onClick_btnClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        JutakuKaishuhiRireki.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "JutakuKaishuhiRireki";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.JutakuKaishuhiRireki = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgJutakuKaishuRireki = function () {
+                return new UZA.DataGrid(this.convFiledName("dgJutakuKaishuRireki"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        JutakuKaishuhiRireki.Controls = Controls;
+    })(DBC.JutakuKaishuhiRireki || (DBC.JutakuKaishuhiRireki = {}));
+    var JutakuKaishuhiRireki = DBC.JutakuKaishuhiRireki;
+
     var JutakuKaishuhiRireki_Design = (function (_super) {
         __extends(JutakuKaishuhiRireki_Design, _super);
         function JutakuKaishuhiRireki_Design($parentElement, isDesignMode, fieldName) {

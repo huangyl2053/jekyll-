@@ -6,6 +6,78 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (ServiceTeikyoShomeishoGokei) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnServiceTeikyoShomeishoGokeiReturn", {
+                get: function () {
+                    return "onClick_btnServiceTeikyoShomeishoGokeiReturn";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        ServiceTeikyoShomeishoGokei.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ServiceTeikyoShomeishoGokei";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ServiceTeikyoShomeishoGokei = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtServiceTani = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtServiceTani"));
+            };
+
+            Controls.prototype.txtHokengaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHokengaku"));
+            };
+
+            Controls.prototype.txtFutangaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtFutangaku"));
+            };
+
+            Controls.prototype.txtRyoyohi = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtRyoyohi"));
+            };
+
+            Controls.prototype.txtShinryohi = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtShinryohi"));
+            };
+
+            Controls.prototype.txtShokujihi = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtShokujihi"));
+            };
+
+            Controls.prototype.btnServiceTeikyoShomeishoGokeiReturn = function () {
+                return new UZA.Button(this.convFiledName("btnServiceTeikyoShomeishoGokeiReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ServiceTeikyoShomeishoGokei.Controls = Controls;
+    })(DBC.ServiceTeikyoShomeishoGokei || (DBC.ServiceTeikyoShomeishoGokei = {}));
+    var ServiceTeikyoShomeishoGokei = DBC.ServiceTeikyoShomeishoGokei;
+
     var ServiceTeikyoShomeishoGokei_Design = (function (_super) {
         __extends(ServiceTeikyoShomeishoGokei_Design, _super);
         function ServiceTeikyoShomeishoGokei_Design($parentElement, isDesignMode, fieldName) {

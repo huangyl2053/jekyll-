@@ -1,11 +1,63 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBC {
     /**
      * 自動生成コードです。修正しないでください。
-     * ServiceTeikyoShomeishoShinryoListH1503クラスのみで継承して使えます。
      */
+
+    export module ServiceTeikyoShomeishoShinryoListH1503 {
+
+        export class Events {
+
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "ServiceTeikyoShomeishoShinryoListH1503";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public ServiceTeikyoShomeishoShinryoListH1503() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public btnAdd() : UZA.Button {
+
+                return new UZA.Button(this.convFiledName("btnAdd"));
+
+            }
+
+            public dgServiceTeikyoShomeishoShinryoListH1503() : UZA.DataGrid {
+
+                return new UZA.DataGrid(this.convFiledName("dgServiceTeikyoShomeishoShinryoListH1503"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class ServiceTeikyoShomeishoShinryoListH1503_Design extends Uz.CommonChildDiv {
     
         public get AddButtonVisible() {

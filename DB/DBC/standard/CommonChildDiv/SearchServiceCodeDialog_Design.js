@@ -6,6 +6,74 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (SearchServiceCodeDialog) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnCloseDialog", {
+                get: function () {
+                    return "onClick_btnCloseDialog";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        SearchServiceCodeDialog.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "SearchServiceCodeDialog";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.SearchServiceCodeDialog = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtServiceShuruiCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtServiceShuruiCode"));
+            };
+
+            Controls.prototype.txtServiceItemCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtServiceItemCode"));
+            };
+
+            Controls.prototype.txtKijunYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKijunYM"));
+            };
+
+            Controls.prototype.btnSearchServiceCode = function () {
+                return new UZA.Button(this.convFiledName("btnSearchServiceCode"));
+            };
+
+            Controls.prototype.dgServiceCode = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceCode"));
+            };
+
+            Controls.prototype.btnCancel = function () {
+                return new UZA.Button(this.convFiledName("btnCancel"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        SearchServiceCodeDialog.Controls = Controls;
+    })(DBC.SearchServiceCodeDialog || (DBC.SearchServiceCodeDialog = {}));
+    var SearchServiceCodeDialog = DBC.SearchServiceCodeDialog;
+
     var SearchServiceCodeDialog_Design = (function (_super) {
         __extends(SearchServiceCodeDialog_Design, _super);
         function SearchServiceCodeDialog_Design($parentElement, isDesignMode, fieldName) {

@@ -6,6 +6,51 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (ShokanShikyuShinseishoList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ShokanShikyuShinseishoList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ShokanShikyuShinseishoList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ShokanShikyuShinseishoList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgShokanShikyuShinseishoList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgShokanShikyuShinseishoList"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ShokanShikyuShinseishoList.Controls = Controls;
+    })(DBC.ShokanShikyuShinseishoList || (DBC.ShokanShikyuShinseishoList = {}));
+    var ShokanShikyuShinseishoList = DBC.ShokanShikyuShinseishoList;
+
     var ShokanShikyuShinseishoList_Design = (function (_super) {
         __extends(ShokanShikyuShinseishoList_Design, _super);
         function ShokanShikyuShinseishoList_Design($parentElement, isDesignMode, fieldName) {

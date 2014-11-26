@@ -6,6 +6,51 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (ServiceTeikyoShomeishoList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceTeikyoShomeishoList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ServiceTeikyoShomeishoList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ServiceTeikyoShomeishoList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgServiceTeikyoShomeishoList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceTeikyoShomeishoList"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ServiceTeikyoShomeishoList.Controls = Controls;
+    })(DBC.ServiceTeikyoShomeishoList || (DBC.ServiceTeikyoShomeishoList = {}));
+    var ServiceTeikyoShomeishoList = DBC.ServiceTeikyoShomeishoList;
+
     var ServiceTeikyoShomeishoList_Design = (function (_super) {
         __extends(ServiceTeikyoShomeishoList_Design, _super);
         function ServiceTeikyoShomeishoList_Design($parentElement, isDesignMode, fieldName) {

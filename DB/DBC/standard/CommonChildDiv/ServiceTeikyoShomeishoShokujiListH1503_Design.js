@@ -6,6 +6,51 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (ServiceTeikyoShomeishoShokujiListH1503) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceTeikyoShomeishoShokujiListH1503.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ServiceTeikyoShomeishoShokujiListH1503";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ServiceTeikyoShomeishoShokujiListH1503 = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgServiceTeikyoShomeishoShokujiListH1503 = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceTeikyoShomeishoShokujiListH1503"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ServiceTeikyoShomeishoShokujiListH1503.Controls = Controls;
+    })(DBC.ServiceTeikyoShomeishoShokujiListH1503 || (DBC.ServiceTeikyoShomeishoShokujiListH1503 = {}));
+    var ServiceTeikyoShomeishoShokujiListH1503 = DBC.ServiceTeikyoShomeishoShokujiListH1503;
+
     var ServiceTeikyoShomeishoShokujiListH1503_Design = (function (_super) {
         __extends(ServiceTeikyoShomeishoShokujiListH1503_Design, _super);
         function ServiceTeikyoShomeishoShokujiListH1503_Design($parentElement, isDesignMode, fieldName) {

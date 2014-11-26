@@ -6,6 +6,51 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (ServiceTeikyoShomeishoRyoyoList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceTeikyoShomeishoRyoyoList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ServiceTeikyoShomeishoRyoyoList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ServiceTeikyoShomeishoRyoyoList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgServiceTeikyoShomeishoRyoyoList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceTeikyoShomeishoRyoyoList"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ServiceTeikyoShomeishoRyoyoList.Controls = Controls;
+    })(DBC.ServiceTeikyoShomeishoRyoyoList || (DBC.ServiceTeikyoShomeishoRyoyoList = {}));
+    var ServiceTeikyoShomeishoRyoyoList = DBC.ServiceTeikyoShomeishoRyoyoList;
+
     var ServiceTeikyoShomeishoRyoyoList_Design = (function (_super) {
         __extends(ServiceTeikyoShomeishoRyoyoList_Design, _super);
         function ServiceTeikyoShomeishoRyoyoList_Design($parentElement, isDesignMode, fieldName) {

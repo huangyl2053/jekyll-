@@ -6,6 +6,47 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (ServiceRiyohyoRirekiList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceRiyohyoRirekiList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ServiceRiyohyoRirekiList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ServiceRiyohyoRirekiList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgServiceRiyohyoRirekiList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceRiyohyoRirekiList"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ServiceRiyohyoRirekiList.Controls = Controls;
+    })(DBC.ServiceRiyohyoRirekiList || (DBC.ServiceRiyohyoRirekiList = {}));
+    var ServiceRiyohyoRirekiList = DBC.ServiceRiyohyoRirekiList;
+
     var ServiceRiyohyoRirekiList_Design = (function (_super) {
         __extends(ServiceRiyohyoRirekiList_Design, _super);
         function ServiceRiyohyoRirekiList_Design($parentElement, isDesignMode, fieldName) {

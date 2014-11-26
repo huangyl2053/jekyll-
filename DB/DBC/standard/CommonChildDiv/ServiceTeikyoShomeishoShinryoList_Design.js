@@ -6,6 +6,51 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (ServiceTeikyoShomeishoShinryoList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceTeikyoShomeishoShinryoList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ServiceTeikyoShomeishoShinryoList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ServiceTeikyoShomeishoShinryoList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgServiceTeikyoShomeishoShinryoList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceTeikyoShomeishoShinryoList"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ServiceTeikyoShomeishoShinryoList.Controls = Controls;
+    })(DBC.ServiceTeikyoShomeishoShinryoList || (DBC.ServiceTeikyoShomeishoShinryoList = {}));
+    var ServiceTeikyoShomeishoShinryoList = DBC.ServiceTeikyoShomeishoShinryoList;
+
     var ServiceTeikyoShomeishoShinryoList_Design = (function (_super) {
         __extends(ServiceTeikyoShomeishoShinryoList_Design, _super);
         function ServiceTeikyoShomeishoShinryoList_Design($parentElement, isDesignMode, fieldName) {

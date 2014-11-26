@@ -6,6 +6,51 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (ServiceTeikyoShomeishoMeisaiList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceTeikyoShomeishoMeisaiList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ServiceTeikyoShomeishoMeisaiList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ServiceTeikyoShomeishoMeisaiList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgServiceTeikyoShomeishoMeisaiList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceTeikyoShomeishoMeisaiList"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ServiceTeikyoShomeishoMeisaiList.Controls = Controls;
+    })(DBC.ServiceTeikyoShomeishoMeisaiList || (DBC.ServiceTeikyoShomeishoMeisaiList = {}));
+    var ServiceTeikyoShomeishoMeisaiList = DBC.ServiceTeikyoShomeishoMeisaiList;
+
     var ServiceTeikyoShomeishoMeisaiList_Design = (function (_super) {
         __extends(ServiceTeikyoShomeishoMeisaiList_Design, _super);
         function ServiceTeikyoShomeishoMeisaiList_Design($parentElement, isDesignMode, fieldName) {

@@ -1,11 +1,81 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+
+
 
 module DBC {
     /**
      * 自動生成コードです。修正しないでください。
-     * PaymentMethodクラスのみで継承して使えます。
      */
+
+    export module PaymentMethod {
+
+        export class Events {
+
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static get MyType(): string {
+                return "PaymentMethod";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+
+            public PaymentMethod() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledNameSelf());
+
+            }
+
+            public radPayMethod() : UZA.RadioButton {
+
+                return new UZA.RadioButton(this.convFiledName("radPayMethod"));
+
+            }
+
+            public URKoza() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("URKoza"));
+
+            }
+
+            public txtKari1() : UZA.TextBox {
+
+                return new UZA.TextBox(this.convFiledName("txtKari1"));
+
+            }
+
+            public DBZJuryoinin() : UZA.Panel {
+
+                return new UZA.Panel(this.convFiledName("DBZJuryoinin"));
+
+            }
+
+            public txtKari2() : UZA.TextBox {
+
+                return new UZA.TextBox(this.convFiledName("txtKari2"));
+
+            }
+
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + Controls.MyType;
+            }
+
+            private convFiledName(fieldName: string): string {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            }
+        }
+    }
+
     export class PaymentMethod_Design extends Uz.CommonChildDiv {
     
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {

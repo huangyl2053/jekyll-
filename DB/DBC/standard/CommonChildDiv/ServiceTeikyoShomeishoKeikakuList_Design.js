@@ -6,6 +6,51 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (ServiceTeikyoShomeishoKeikakuList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceTeikyoShomeishoKeikakuList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ServiceTeikyoShomeishoKeikakuList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ServiceTeikyoShomeishoKeikakuList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgShokanShikyuTorokuShomeishoKeikakuList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgShokanShikyuTorokuShomeishoKeikakuList"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ServiceTeikyoShomeishoKeikakuList.Controls = Controls;
+    })(DBC.ServiceTeikyoShomeishoKeikakuList || (DBC.ServiceTeikyoShomeishoKeikakuList = {}));
+    var ServiceTeikyoShomeishoKeikakuList = DBC.ServiceTeikyoShomeishoKeikakuList;
+
     var ServiceTeikyoShomeishoKeikakuList_Design = (function (_super) {
         __extends(ServiceTeikyoShomeishoKeikakuList_Design, _super);
         function ServiceTeikyoShomeishoKeikakuList_Design($parentElement, isDesignMode, fieldName) {

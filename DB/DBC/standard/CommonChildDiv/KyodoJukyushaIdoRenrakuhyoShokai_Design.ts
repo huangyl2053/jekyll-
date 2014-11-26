@@ -1,5 +1,6 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 module DBC {
     /**
@@ -42,7 +43,7 @@ module DBC {
      "fieldName": "TextBox1",
      "items": [],
      "controlType": "TextBox",
-     "width": "80",
+     "width": "80px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -77,7 +78,7 @@ module DBC {
      "value": "",
      "labelLText": "被保番号",
      "labelRText": "",
-     "labelLWidth": "70",
+     "labelLWidth": "70px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -88,7 +89,7 @@ module DBC {
      "fieldName": "TextBoxDate1",
      "items": [],
      "controlType": "TextBoxDate",
-     "width": "60",
+     "width": "60px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -117,19 +118,20 @@ module DBC {
      "value": "",
      "labelLText": "対象年月",
      "labelRText": "",
-     "labelLWidth": "70",
+     "labelLWidth": "70px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
+     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "TextBoxDate2",
      "items": [],
      "controlType": "TextBoxDate",
-     "width": "80",
+     "width": "80px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -158,13 +160,14 @@ module DBC {
      "value": "",
      "labelLText": "異動日",
      "labelRText": "",
-     "labelLWidth": "60",
+     "labelLWidth": "60px",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
+     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "KyodoJukyushaIdoRenrakuhyoKihon",
@@ -173,7 +176,7 @@ module DBC {
        "fieldName": "TextBoxNum1",
        "items": [],
        "controlType": "TextBoxNum",
-       "width": "60",
+       "width": "60px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -208,23 +211,23 @@ module DBC {
        "value": "",
        "labelLText": "履歴番号",
        "labelRText": "",
-       "labelLWidth": "100",
+       "labelLWidth": "100px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "decorationClass": "",
+       "permitCharactor": "+-,.\\",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
        "isComma": false,
-       "decimalPointLength": 0,
-       "permitCharactor": "+-,.\\"
+       "decimalPointLength": 0
       },
       {
        "fieldName": "TextBox16",
        "items": [],
        "controlType": "TextBox",
-       "width": "50",
+       "width": "50px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -259,7 +262,7 @@ module DBC {
        "value": "",
        "labelLText": "異動区分",
        "labelRText": "",
-       "labelLWidth": "70",
+       "labelLWidth": "70px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -270,7 +273,7 @@ module DBC {
        "fieldName": "TextBox17",
        "items": [],
        "controlType": "TextBox",
-       "width": "140",
+       "width": "140px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -305,7 +308,7 @@ module DBC {
        "value": "",
        "labelLText": "異動事由",
        "labelRText": "",
-       "labelLWidth": "70",
+       "labelLWidth": "70px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -316,7 +319,7 @@ module DBC {
        "fieldName": "TextBox18",
        "items": [],
        "controlType": "TextBox",
-       "width": "80",
+       "width": "80px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -351,7 +354,7 @@ module DBC {
        "value": "",
        "labelLText": "証記載保険者番号",
        "labelRText": "",
-       "labelLWidth": "135",
+       "labelLWidth": "135px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -362,7 +365,7 @@ module DBC {
        "fieldName": "TextBox3",
        "items": [],
        "controlType": "TextBox",
-       "width": "350",
+       "width": "350px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -397,7 +400,7 @@ module DBC {
        "value": "",
        "labelLText": "被保険者氏名",
        "labelRText": "",
-       "labelLWidth": "100",
+       "labelLWidth": "100px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -408,7 +411,7 @@ module DBC {
        "fieldName": "TextBox4",
        "items": [],
        "controlType": "TextBox",
-       "width": "120",
+       "width": "120px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -443,7 +446,7 @@ module DBC {
        "value": "",
        "labelLText": "電話番号",
        "labelRText": "",
-       "labelLWidth": "70",
+       "labelLWidth": "70px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -454,7 +457,7 @@ module DBC {
        "fieldName": "TextBox5",
        "items": [],
        "controlType": "TextBox",
-       "width": "50",
+       "width": "50px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -489,7 +492,7 @@ module DBC {
        "value": "",
        "labelLText": "帳票出力順序コード",
        "labelRText": "",
-       "labelLWidth": "159",
+       "labelLWidth": "159px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -500,7 +503,7 @@ module DBC {
        "fieldName": "TextBoxYubinNo1",
        "items": [],
        "controlType": "TextBoxYubinNo",
-       "width": "90",
+       "width": "90px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -535,7 +538,7 @@ module DBC {
        "value": "",
        "labelLText": "郵便番号",
        "labelRText": "",
-       "labelLWidth": "100",
+       "labelLWidth": "100px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -546,7 +549,7 @@ module DBC {
        "fieldName": "TextBox7",
        "items": [],
        "controlType": "TextBox",
-       "width": "370",
+       "width": "370px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -581,7 +584,7 @@ module DBC {
        "value": "",
        "labelLText": "住所",
        "labelRText": "",
-       "labelLWidth": "40",
+       "labelLWidth": "40px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -592,7 +595,7 @@ module DBC {
        "fieldName": "TextBoxKana1",
        "items": [],
        "controlType": "TextBoxKana",
-       "width": "370",
+       "width": "370px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -627,7 +630,7 @@ module DBC {
        "value": "",
        "labelLText": "カナ",
        "labelRText": "",
-       "labelLWidth": "45",
+       "labelLWidth": "45px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -638,7 +641,7 @@ module DBC {
       }
      ],
      "controlType": "Panel",
-     "width": "1098",
+     "width": "1098px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -650,7 +653,7 @@ module DBC {
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
-     "marginRight": "0",
+     "marginRight": "0em",
      "selectControlID": "KyodoJukyushaIdoRenrakuhyoKihon",
      "helpMessageID": "",
      "jpControlName": "",
@@ -687,7 +690,7 @@ module DBC {
        "fieldName": "TextBoxNum4",
        "items": [],
        "controlType": "TextBoxNum",
-       "width": "60",
+       "width": "60px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -722,23 +725,23 @@ module DBC {
        "value": "",
        "labelLText": "履歴番号",
        "labelRText": "",
-       "labelLWidth": "90",
+       "labelLWidth": "90px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "decorationClass": "",
+       "permitCharactor": "+-,.\\",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
        "isComma": false,
-       "decimalPointLength": 0,
-       "permitCharactor": "+-,.\\"
+       "decimalPointLength": 0
       },
       {
        "fieldName": "TextBox19",
        "items": [],
        "controlType": "TextBox",
-       "width": "50",
+       "width": "50px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -773,7 +776,7 @@ module DBC {
        "value": "",
        "labelLText": "異動区分",
        "labelRText": "",
-       "labelLWidth": "70",
+       "labelLWidth": "70px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -784,7 +787,7 @@ module DBC {
        "fieldName": "TextBox20",
        "items": [],
        "controlType": "TextBox",
-       "width": "140",
+       "width": "140px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -819,7 +822,7 @@ module DBC {
        "value": "",
        "labelLText": "異動事由",
        "labelRText": "",
-       "labelLWidth": "70",
+       "labelLWidth": "70px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -830,7 +833,7 @@ module DBC {
        "fieldName": "TextBox21",
        "items": [],
        "controlType": "TextBox",
-       "width": "80",
+       "width": "80px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -865,7 +868,7 @@ module DBC {
        "value": "",
        "labelLText": "証記載保険者番号",
        "labelRText": "",
-       "labelLWidth": "135",
+       "labelLWidth": "135px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -876,7 +879,7 @@ module DBC {
        "fieldName": "TextBoxDateRange1",
        "items": [],
        "controlType": "TextBoxDateRange",
-       "width": "80",
+       "width": "80px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -901,13 +904,13 @@ module DBC {
        "onKeyPress": "",
        "labelLText": "一時差止日",
        "labelRText": "",
-       "labelLWidth": "90",
+       "labelLWidth": "90px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "permitCharactor": "",
        "ymdKubun": 2,
        "displayFormat": 0,
-       "permitCharactor": "",
        "fromPlaceHolder": "",
        "toPlaceHolder": "",
        "minDate": "",
@@ -917,13 +920,14 @@ module DBC {
        "fromValue": "",
        "toValue": "",
        "fromSelectControlID": "TextBoxDateRange1From",
-       "toSelectControlID": "TextBoxDateRange1To"
+       "toSelectControlID": "TextBoxDateRange1To",
+       "autoRangeTo": true
       },
       {
        "fieldName": "TextBox22",
        "items": [],
        "controlType": "TextBox",
-       "width": "100",
+       "width": "100px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -958,7 +962,7 @@ module DBC {
        "value": "",
        "labelLText": "一時差止区分",
        "labelRText": "",
-       "labelLWidth": "105",
+       "labelLWidth": "105px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -969,7 +973,7 @@ module DBC {
        "fieldName": "TextBoxNum2",
        "items": [],
        "controlType": "TextBoxNum",
-       "width": "100",
+       "width": "100px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1004,21 +1008,21 @@ module DBC {
        "value": "",
        "labelLText": "一時差止金額",
        "labelRText": "",
-       "labelLWidth": "110",
+       "labelLWidth": "110px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "decorationClass": "",
+       "permitCharactor": "+-,.\\",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
        "isComma": false,
-       "decimalPointLength": 0,
-       "permitCharactor": "+-,.\\"
+       "decimalPointLength": 0
       }
      ],
      "controlType": "Panel",
-     "width": "1098",
+     "width": "1098px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1030,7 +1034,7 @@ module DBC {
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
-     "marginRight": "0",
+     "marginRight": "0em",
      "selectControlID": "KyodoJukyushaIdoRenrakuhyoShokan",
      "helpMessageID": "",
      "jpControlName": "",
@@ -1067,7 +1071,7 @@ module DBC {
        "fieldName": "TextBoxNum3",
        "items": [],
        "controlType": "TextBoxNum",
-       "width": "60",
+       "width": "60px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1102,23 +1106,23 @@ module DBC {
        "value": "",
        "labelLText": "履歴番号",
        "labelRText": "",
-       "labelLWidth": "100",
+       "labelLWidth": "100px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "decorationClass": "",
+       "permitCharactor": "+-,.\\",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
        "isComma": false,
-       "decimalPointLength": 0,
-       "permitCharactor": "+-,.\\"
+       "decimalPointLength": 0
       },
       {
        "fieldName": "TextBox8",
        "items": [],
        "controlType": "TextBox",
-       "width": "50",
+       "width": "50px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1153,7 +1157,7 @@ module DBC {
        "value": "",
        "labelLText": "異動区分",
        "labelRText": "",
-       "labelLWidth": "70",
+       "labelLWidth": "70px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -1164,7 +1168,7 @@ module DBC {
        "fieldName": "TextBox9",
        "items": [],
        "controlType": "TextBox",
-       "width": "140",
+       "width": "140px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1199,7 +1203,7 @@ module DBC {
        "value": "",
        "labelLText": "異動事由",
        "labelRText": "",
-       "labelLWidth": "70",
+       "labelLWidth": "70px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -1210,7 +1214,7 @@ module DBC {
        "fieldName": "TextBox10",
        "items": [],
        "controlType": "TextBox",
-       "width": "80",
+       "width": "80px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1245,7 +1249,7 @@ module DBC {
        "value": "",
        "labelLText": "証記載保険者番号",
        "labelRText": "",
-       "labelLWidth": "135",
+       "labelLWidth": "135px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -1256,7 +1260,7 @@ module DBC {
        "fieldName": "TextBox6",
        "items": [],
        "controlType": "TextBox",
-       "width": "80",
+       "width": "80px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1291,7 +1295,7 @@ module DBC {
        "value": "",
        "labelLText": "世帯集約番号",
        "labelRText": "",
-       "labelLWidth": "100",
+       "labelLWidth": "100px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -1302,7 +1306,7 @@ module DBC {
        "fieldName": "TextBox11",
        "items": [],
        "controlType": "TextBox",
-       "width": "180",
+       "width": "180px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1337,7 +1341,7 @@ module DBC {
        "value": "",
        "labelLText": "世帯所得区分",
        "labelRText": "",
-       "labelLWidth": "100",
+       "labelLWidth": "100px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -1348,7 +1352,7 @@ module DBC {
        "fieldName": "TextBox12",
        "items": [],
        "controlType": "TextBox",
-       "width": "160",
+       "width": "160px",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1383,7 +1387,7 @@ module DBC {
        "value": "",
        "labelLText": "所得区分",
        "labelRText": "",
-       "labelLWidth": "70",
+       "labelLWidth": "70px",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -1397,7 +1401,7 @@ module DBC {
          "fieldName": "TextBox13",
          "items": [],
          "controlType": "TextBox",
-         "width": "80",
+         "width": "80px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1432,7 +1436,7 @@ module DBC {
          "value": "",
          "labelLText": "老齢福祉年金",
          "labelRText": "",
-         "labelLWidth": "100",
+         "labelLWidth": "100px",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
@@ -1443,7 +1447,7 @@ module DBC {
          "fieldName": "TextBox14",
          "items": [],
          "controlType": "TextBox",
-         "width": "80",
+         "width": "80px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1478,7 +1482,7 @@ module DBC {
          "value": "",
          "labelLText": "利用者負担第２段階",
          "labelRText": "",
-         "labelLWidth": "150",
+         "labelLWidth": "150px",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
@@ -1489,7 +1493,7 @@ module DBC {
          "fieldName": "TextBox15",
          "items": [],
          "controlType": "TextBox",
-         "width": "50",
+         "width": "50px",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1524,7 +1528,7 @@ module DBC {
          "value": "",
          "labelLText": "支給申請書出力",
          "labelRText": "",
-         "labelLWidth": "120",
+         "labelLWidth": "120px",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
@@ -1544,15 +1548,15 @@ module DBC {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": "0em",
+       "marginRight": "0em",
        "selectControlID": "Panel1",
        "helpMessageID": "",
        "jpControlName": "",
        "onLoad": "",
        "title": "",
-       "marginTop": "0",
-       "marginBottom": "0",
+       "marginTop": "0em",
+       "marginBottom": "0em",
        "isOpen": true,
        "canOpenAndClose": true,
        "postParameterPanelNames": [],
@@ -1572,7 +1576,7 @@ module DBC {
       }
      ],
      "controlType": "Panel",
-     "width": "1098",
+     "width": "1098px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1584,7 +1588,7 @@ module DBC {
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
-     "marginRight": "0",
+     "marginRight": "0em",
      "selectControlID": "KyodoJukyushaIdoRenrakuhyoKogaku",
      "helpMessageID": "",
      "jpControlName": "",
@@ -1616,7 +1620,7 @@ module DBC {
     }
    ],
    "controlType": "Panel",
-   "width": "1110",
+   "width": "1110px",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1627,15 +1631,15 @@ module DBC {
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
+   "marginLeft": "0em",
+   "marginRight": "0em",
    "selectControlID": "KyodoJukyushaIdoRenrakuhyoShokai",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
    "title": "",
-   "marginTop": "0",
-   "marginBottom": "0",
+   "marginTop": "0em",
+   "marginBottom": "0em",
    "isOpen": true,
    "canOpenAndClose": false,
    "postParameterPanelNames": [
@@ -1671,16 +1675,17 @@ module DBC {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": "0",
- "marginRight": "0",
+ "marginLeft": "0em",
+ "marginRight": "0em",
  "selectControlID": "defaultLayout",
  "helpMessageID": "",
  "jpControlName": "",
  "relation": [],
+ "packageName": "",
  "businessId": "DBC",
  "controlName": "KyodoJukyushaIdoRenrakuhyoShokai",
- "marginTop": 0,
- "marginBottom": 0,
+ "marginTop": "0em",
+ "marginBottom": "0em",
  "originalProperty": [
   {
    "publicChildFieldName": "KyodoJukyushaIdoRenrakuhyoTeisei",
@@ -1699,8 +1704,181 @@ module DBC {
  "canTransferEvent": true,
  "heightForDialog": "M",
  "firstFocusFieldName": "",
- "lastFocusFieldName": ""
+ "lastFocusFieldName": "",
+ "modes": [],
+ "publicEvents": [],
+ "publicEventsAlias": []
 }        
     }
+
+     export module KyodoJukyushaIdoRenrakuhyoShokai {
+
+        export class Events {
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static myType(): string {
+                return "KyodoJukyushaIdoRenrakuhyoShokai";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + DBC.KyodoJukyushaIdoRenrakuhyoShokai.Controls.myType();
+            }
+
+            public convFiledName(fieldName: string): string {
+                return this._myName + "_" + DBC.KyodoJukyushaIdoRenrakuhyoShokai.Controls.myType() + "_" + fieldName;
+            }
+
+            public KyodoJukyushaIdoRenrakuhyoShokai(): UZA.Panel {
+                return new UZA.Panel(this.convFiledNameSelf());
+            }
+
+            public TextBox1(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox1"));
+            }
+
+            public TextBoxDate1(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("TextBoxDate1"));
+            }
+
+            public TextBoxDate2(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("TextBoxDate2"));
+            }
+
+            public KyodoJukyushaIdoRenrakuhyoKihon(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KyodoJukyushaIdoRenrakuhyoKihon"));
+            }
+
+            public TextBoxNum1(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("TextBoxNum1"));
+            }
+
+            public TextBox16(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox16"));
+            }
+
+            public TextBox17(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox17"));
+            }
+
+            public TextBox18(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox18"));
+            }
+
+            public TextBox3(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox3"));
+            }
+
+            public TextBox4(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox4"));
+            }
+
+            public TextBox5(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox5"));
+            }
+
+            public TextBoxYubinNo1(): UZA.TextBoxYubinNo {
+                return new UZA.TextBoxYubinNo(this.convFiledName("TextBoxYubinNo1"));
+            }
+
+            public TextBox7(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox7"));
+            }
+
+            public TextBoxKana1(): UZA.TextBoxKana {
+                return new UZA.TextBoxKana(this.convFiledName("TextBoxKana1"));
+            }
+
+            public KyodoJukyushaIdoRenrakuhyoShokan(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KyodoJukyushaIdoRenrakuhyoShokan"));
+            }
+
+            public TextBoxNum4(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("TextBoxNum4"));
+            }
+
+            public TextBox19(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox19"));
+            }
+
+            public TextBox20(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox20"));
+            }
+
+            public TextBox21(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox21"));
+            }
+
+            public TextBoxDateRange1(): UZA.TextBoxDateRange {
+                return new UZA.TextBoxDateRange(this.convFiledName("TextBoxDateRange1"));
+            }
+
+            public TextBox22(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox22"));
+            }
+
+            public TextBoxNum2(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("TextBoxNum2"));
+            }
+
+            public KyodoJukyushaIdoRenrakuhyoKogaku(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KyodoJukyushaIdoRenrakuhyoKogaku"));
+            }
+
+            public TextBoxNum3(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("TextBoxNum3"));
+            }
+
+            public TextBox8(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox8"));
+            }
+
+            public TextBox9(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox9"));
+            }
+
+            public TextBox10(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox10"));
+            }
+
+            public TextBox6(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox6"));
+            }
+
+            public TextBox11(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox11"));
+            }
+
+            public TextBox12(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox12"));
+            }
+
+            public Panel1(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KyodoJukyushaIdoRenrakuhyoKogaku_Panel1"));
+            }
+
+            public TextBox13(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox13"));
+            }
+
+            public TextBox14(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox14"));
+            }
+
+            public TextBox15(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("TextBox15"));
+            }
+
+        }
+
+     }
+
 }
 

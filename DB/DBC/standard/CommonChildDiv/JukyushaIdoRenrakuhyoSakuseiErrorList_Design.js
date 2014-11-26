@@ -6,6 +6,63 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (JukyushaIdoRenrakuhyoSakuseiErrorList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        JukyushaIdoRenrakuhyoSakuseiErrorList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "JukyushaIdoRenrakuhyoSakuseiErrorList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.JukyushaIdoRenrakuhyoSakuseiErrorList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.lblErrorList = function () {
+                return new UZA.Label(this.convFiledName("lblErrorList"));
+            };
+
+            Controls.prototype.dgErrorList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgErrorList"));
+            };
+
+            Controls.prototype.lblTeiseiList = function () {
+                return new UZA.Label(this.convFiledName("lblTeiseiList"));
+            };
+
+            Controls.prototype.dgTeiseiList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTeiseiList"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        JukyushaIdoRenrakuhyoSakuseiErrorList.Controls = Controls;
+    })(DBC.JukyushaIdoRenrakuhyoSakuseiErrorList || (DBC.JukyushaIdoRenrakuhyoSakuseiErrorList = {}));
+    var JukyushaIdoRenrakuhyoSakuseiErrorList = DBC.JukyushaIdoRenrakuhyoSakuseiErrorList;
+
     var JukyushaIdoRenrakuhyoSakuseiErrorList_Design = (function (_super) {
         __extends(JukyushaIdoRenrakuhyoSakuseiErrorList_Design, _super);
         function JukyushaIdoRenrakuhyoSakuseiErrorList_Design($parentElement, isDesignMode, fieldName) {

@@ -1,17 +1,40 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 var DBC;
 (function (DBC) {
-    var JukyushaIdoRenrakuhyoSakuseiErrorList = (function (_super) {
-        __extends(JukyushaIdoRenrakuhyoSakuseiErrorList, _super);
-        function JukyushaIdoRenrakuhyoSakuseiErrorList() {
-            _super.apply(this, arguments);
-        }
-        return JukyushaIdoRenrakuhyoSakuseiErrorList;
-    })(DBC.JukyushaIdoRenrakuhyoSakuseiErrorList_Design);
-    DBC.JukyushaIdoRenrakuhyoSakuseiErrorList = JukyushaIdoRenrakuhyoSakuseiErrorList;
+    (function (JukyushaIdoRenrakuhyoSakuseiErrorList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new JukyushaIdoRenrakuhyoSakuseiErrorList.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        JukyushaIdoRenrakuhyoSakuseiErrorList.ModeController = ModeController;
+    })(DBC.JukyushaIdoRenrakuhyoSakuseiErrorList || (DBC.JukyushaIdoRenrakuhyoSakuseiErrorList = {}));
+    var JukyushaIdoRenrakuhyoSakuseiErrorList = DBC.JukyushaIdoRenrakuhyoSakuseiErrorList;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (JukyushaIdoRenrakuhyoSakuseiErrorList) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new JukyushaIdoRenrakuhyoSakuseiErrorList.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        JukyushaIdoRenrakuhyoSakuseiErrorList.PublicProperties = PublicProperties;
+    })(DBC.JukyushaIdoRenrakuhyoSakuseiErrorList || (DBC.JukyushaIdoRenrakuhyoSakuseiErrorList = {}));
+    var JukyushaIdoRenrakuhyoSakuseiErrorList = DBC.JukyushaIdoRenrakuhyoSakuseiErrorList;
 })(DBC || (DBC = {}));

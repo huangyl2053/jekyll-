@@ -6,6 +6,126 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (JutakuKaishuShinseiDetailInput) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onSelectByModifyButton", {
+                get: function () {
+                    return "onSelectByModifyButton";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnModifyDetail", {
+                get: function () {
+                    return "onClick_btnModifyDetail";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectByDeleteButton", {
+                get: function () {
+                    return "onSelectByDeleteButton";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnCopyAddress", {
+                get: function () {
+                    return "onClick_btnCopyAddress";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnClearDetail", {
+                get: function () {
+                    return "onClick_btnClearDetail";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        JutakuKaishuShinseiDetailInput.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "JutakuKaishuShinseiDetailInput";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.JutakuKaishuShinseiDetailInput = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgJutakuKaishuDetail = function () {
+                return new UZA.DataGrid(this.convFiledName("dgJutakuKaishuDetail"));
+            };
+
+            Controls.prototype.JutakuKaishuDetailInput = function () {
+                return new UZA.Panel(this.convFiledName("JutakuKaishuDetailInput"));
+            };
+
+            Controls.prototype.txtKaishuContents = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtKaishuContents"));
+            };
+
+            Controls.prototype.txtKaishuJigyoshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtKaishuJigyoshaName"));
+            };
+
+            Controls.prototype.lblKaishuTaishoAddress = function () {
+                return new UZA.Label(this.convFiledName("lblKaishuTaishoAddress"));
+            };
+
+            Controls.prototype.btnCopyAddress = function () {
+                return new UZA.Button(this.convFiledName("btnCopyAddress"));
+            };
+
+            Controls.prototype.txtKaishuTaishoAddress = function () {
+                return new UZA.TextBox(this.convFiledName("txtKaishuTaishoAddress"));
+            };
+
+            Controls.prototype.txtChakkoDueDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtChakkoDueDate"));
+            };
+
+            Controls.prototype.txtKanseiDueDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKanseiDueDate"));
+            };
+
+            Controls.prototype.txtEstimatedAmount = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtEstimatedAmount"));
+            };
+
+            Controls.prototype.btnClearDetail = function () {
+                return new UZA.Button(this.convFiledName("btnClearDetail"));
+            };
+
+            Controls.prototype.btnModifyDetail = function () {
+                return new UZA.Button(this.convFiledName("btnModifyDetail"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        JutakuKaishuShinseiDetailInput.Controls = Controls;
+    })(DBC.JutakuKaishuShinseiDetailInput || (DBC.JutakuKaishuShinseiDetailInput = {}));
+    var JutakuKaishuShinseiDetailInput = DBC.JutakuKaishuShinseiDetailInput;
+
     var JutakuKaishuShinseiDetailInput_Design = (function (_super) {
         __extends(JutakuKaishuShinseiDetailInput_Design, _super);
         function JutakuKaishuShinseiDetailInput_Design($parentElement, isDesignMode, fieldName) {

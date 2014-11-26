@@ -1,17 +1,58 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 var DBC;
 (function (DBC) {
-    var YoguKonyuhiShikyuShinseiSeikyuDetail = (function (_super) {
-        __extends(YoguKonyuhiShikyuShinseiSeikyuDetail, _super);
-        function YoguKonyuhiShikyuShinseiSeikyuDetail() {
-            _super.apply(this, arguments);
-        }
-        return YoguKonyuhiShikyuShinseiSeikyuDetail;
-    })(DBC.YoguKonyuhiShikyuShinseiSeikyuDetail_Design);
-    DBC.YoguKonyuhiShikyuShinseiSeikyuDetail = YoguKonyuhiShikyuShinseiSeikyuDetail;
+    (function (YoguKonyuhiShikyuShinseiSeikyuDetail) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new YoguKonyuhiShikyuShinseiSeikyuDetail.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        YoguKonyuhiShikyuShinseiSeikyuDetail.ModeController = ModeController;
+    })(DBC.YoguKonyuhiShikyuShinseiSeikyuDetail || (DBC.YoguKonyuhiShikyuShinseiSeikyuDetail = {}));
+    var YoguKonyuhiShikyuShinseiSeikyuDetail = DBC.YoguKonyuhiShikyuShinseiSeikyuDetail;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (YoguKonyuhiShikyuShinseiSeikyuDetail) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new YoguKonyuhiShikyuShinseiSeikyuDetail.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("btnModifyDetail_onClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("btnModifyDetail_text", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getbtnModifyDetail_onClick = function () {
+                return this.controls.btnModifyDetail().onClick;
+            };
+
+            PublicProperties.prototype.setbtnModifyDetail_onClick = function (value) {
+                this.controls.btnModifyDetail().onClick = value;
+            };
+
+            PublicProperties.prototype.getbtnModifyDetail_text = function () {
+                return this.controls.btnModifyDetail().text;
+            };
+
+            PublicProperties.prototype.setbtnModifyDetail_text = function (value) {
+                this.controls.btnModifyDetail().text = value;
+            };
+            return PublicProperties;
+        })();
+        YoguKonyuhiShikyuShinseiSeikyuDetail.PublicProperties = PublicProperties;
+    })(DBC.YoguKonyuhiShikyuShinseiSeikyuDetail || (DBC.YoguKonyuhiShikyuShinseiSeikyuDetail = {}));
+    var YoguKonyuhiShikyuShinseiSeikyuDetail = DBC.YoguKonyuhiShikyuShinseiSeikyuDetail;
 })(DBC || (DBC = {}));

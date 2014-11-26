@@ -6,6 +6,63 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBC;
 (function (DBC) {
+    (function (PaymentMethod) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        PaymentMethod.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "PaymentMethod";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.PaymentMethod = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.radPayMethod = function () {
+                return new UZA.RadioButton(this.convFiledName("radPayMethod"));
+            };
+
+            Controls.prototype.URKoza = function () {
+                return new UZA.Panel(this.convFiledName("URKoza"));
+            };
+
+            Controls.prototype.txtKari1 = function () {
+                return new UZA.TextBox(this.convFiledName("txtKari1"));
+            };
+
+            Controls.prototype.DBZJuryoinin = function () {
+                return new UZA.Panel(this.convFiledName("DBZJuryoinin"));
+            };
+
+            Controls.prototype.txtKari2 = function () {
+                return new UZA.TextBox(this.convFiledName("txtKari2"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        PaymentMethod.Controls = Controls;
+    })(DBC.PaymentMethod || (DBC.PaymentMethod = {}));
+    var PaymentMethod = DBC.PaymentMethod;
+
     var PaymentMethod_Design = (function (_super) {
         __extends(PaymentMethod_Design, _super);
         function PaymentMethod_Design($parentElement, isDesignMode, fieldName) {
