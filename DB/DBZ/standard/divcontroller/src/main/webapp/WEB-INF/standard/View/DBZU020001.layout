@@ -449,10 +449,6 @@
      "lastFocusFieldName": "",
      "modes": [
       {
-       "modeKey": "HojinKeitaiHyoji",
-       "modeValue": "表示しない"
-      },
-      {
        "modeKey": "HojinNoHyoji",
        "modeValue": "表示しない"
       }
