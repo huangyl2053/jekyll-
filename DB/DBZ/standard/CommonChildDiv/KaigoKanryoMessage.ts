@@ -47,10 +47,9 @@ module DBZ {
                 editTypes.addEditType("KanryoMessage_width", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
             }
-
             /*
             //TODO n8178 城間篤人 PublicPropertyへの参照が見えない。確認が必要。
-                        public getKanryoMessage_width() {
+            public getKanryoMessage_width() {
                 return this.controls.KanryoMessage().PublicProperties().KanryoMessage_width;
             }
 

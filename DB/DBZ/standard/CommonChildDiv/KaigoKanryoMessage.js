@@ -25,6 +25,7 @@ var DBZ;
     (function (KaigoKanryoMessage) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
                 this.controls = new KaigoKanryoMessage.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {
@@ -32,6 +33,14 @@ var DBZ;
 
                 editTypes.addEditType("KanryoMessage_width", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
+            };
+
+            PublicProperties.prototype.getKanryoMessage_width = function () {
+                return this.controls.KanryoMessage().PublicProperties().KanryoMessage_width;
+            };
+
+            PublicProperties.prototype.setKanryoMessage_width = function (value) {
+                this.controls.KanryoMessage().PublicProperties().KanryoMessage_width = value;
             };
             return PublicProperties;
         })();
